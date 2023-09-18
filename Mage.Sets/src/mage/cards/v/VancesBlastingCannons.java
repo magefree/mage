@@ -36,8 +36,7 @@ public final class VancesBlastingCannons extends CardImpl {
     public VancesBlastingCannons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
+        this.supertype.add(SuperType.LEGENDARY);
         this.secondSideCardClazz = mage.cards.s.SpitfireBastion.class;
 
         // At the beginning of your upkeep, exile the top card of your library.  If it's a nonland card, you may cast that card this turn.
@@ -65,7 +64,7 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
         this.staticText = "exile the top card of your library. If it's a nonland card, you may cast that card this turn";
     }
 
-    public VancesBlastingCannonsExileEffect(final VancesBlastingCannonsExileEffect effect) {
+    private VancesBlastingCannonsExileEffect(final VancesBlastingCannonsExileEffect effect) {
         super(effect);
     }
 
@@ -102,7 +101,7 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
         staticText = "If it's a nonland card, you may cast that card this turn";
     }
 
-    public CastFromNonHandZoneTargetEffect(final CastFromNonHandZoneTargetEffect effect) {
+    private CastFromNonHandZoneTargetEffect(final CastFromNonHandZoneTargetEffect effect) {
         super(effect);
     }
 
@@ -132,10 +131,10 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
 
     public VancesBlastingCannonsFlipTrigger() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), true);
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(), true);
     }
 
-    public VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {
+    private VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {
         super(ability);
     }
 

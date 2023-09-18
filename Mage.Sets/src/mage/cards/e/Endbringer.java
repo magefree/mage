@@ -42,13 +42,13 @@ public final class Endbringer extends CardImpl {
         this.addAbility(ability);
         
         // {C}, {T}: Target creature can't attack or block this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{C}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{C}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // {C}{C}, {T}: Draw a card.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{C}{C}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{C}{C}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

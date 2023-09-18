@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -18,22 +16,18 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class DarigaazReincarnated extends CardImpl {
@@ -41,7 +35,7 @@ public final class DarigaazReincarnated extends CardImpl {
     public DarigaazReincarnated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -79,7 +73,7 @@ class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, instead exile it with three egg counters on it";
     }
 
-    public DarigaazReincarnatedDiesEffect(final DarigaazReincarnatedDiesEffect effect) {
+    private DarigaazReincarnatedDiesEffect(final DarigaazReincarnatedDiesEffect effect) {
         super(effect);
     }
 
@@ -92,15 +86,11 @@ class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent != null) {
-            Card permCard = game.getCard(permanent.getId());
-            if (permCard == null) {
-                return false;
-            }
-            return controller.moveCardToExileWithInfo(permanent, null, null, source, game, Zone.BATTLEFIELD, true)
-                    && permCard.addCounters(CounterType.EGG.createInstance(3), source.getControllerId(), source, game);
+        if (permanent == null || controller == null) {
+            return false;
         }
-        return false;
+
+        return CardUtil.moveCardWithCounter(game, source, controller, permanent, Zone.EXILED, CounterType.EGG.createInstance(3));
     }
 
     @Override
@@ -125,10 +115,10 @@ class DarigaazReincarnatedInterveningIfTriggeredAbility extends ConditionalInter
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new DarigaazReincarnatedReturnEffect(), TargetController.YOU, false),
                 DarigaazReincarnatedCondition.instance,
                 "At the beginning of your upkeep, if {this} is exiled with an egg counter on it, "
-                + "remove an egg counter from it. Then if {this} has no egg counters on it, return it to the battlefield");
+                        + "remove an egg counter from it. Then if {this} has no egg counters on it, return it to the battlefield");
     }
 
-    public DarigaazReincarnatedInterveningIfTriggeredAbility(final DarigaazReincarnatedInterveningIfTriggeredAbility effect) {
+    private DarigaazReincarnatedInterveningIfTriggeredAbility(final DarigaazReincarnatedInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
@@ -145,7 +135,7 @@ class DarigaazReincarnatedReturnEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    DarigaazReincarnatedReturnEffect(final DarigaazReincarnatedReturnEffect effect) {
+    private DarigaazReincarnatedReturnEffect(final DarigaazReincarnatedReturnEffect effect) {
         super(effect);
     }
 
@@ -181,10 +171,8 @@ enum DarigaazReincarnatedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            if (game.getState().getZone(card.getId()) == Zone.EXILED
-                    && card.getCounters(game).getCount(CounterType.EGG) > 0) {
-                return true;
-            }
+            return game.getState().getZone(card.getId()) == Zone.EXILED
+                    && card.getCounters(game).getCount(CounterType.EGG) > 0;
         }
         return false;
     }

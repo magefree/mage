@@ -38,7 +38,7 @@ public final class VexingShusher extends CardImpl {
         // Vexing Shusher can't be countered.
         this.addAbility(new CantBeCounteredSourceAbility());
         // {R/G}: Target spell can't be countered.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VexingShusherCantCounterTargetEffect(), new ManaCostsImpl("{R/G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VexingShusherCantCounterTargetEffect(), new ManaCostsImpl<>("{R/G}"));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
@@ -60,7 +60,7 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffect
         staticText = "Target spell can't be countered";
     }
 
-    public VexingShusherCantCounterTargetEffect(final VexingShusherCantCounterTargetEffect effect) {
+    private VexingShusherCantCounterTargetEffect(final VexingShusherCantCounterTargetEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             return "This spell can't be countered (" + sourceObject.getName() + ").";
         }

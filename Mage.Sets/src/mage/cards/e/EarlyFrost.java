@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -6,7 +5,6 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -21,7 +19,7 @@ public final class EarlyFrost extends CardImpl {
 
         // Tap up to three target lands.
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetLandPermanent(0, 3, new FilterLandPermanent(), false));
+        this.getSpellAbility().addTarget(new TargetLandPermanent(0, 3));
     }
 
     private EarlyFrost(final EarlyFrost card) {

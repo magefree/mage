@@ -18,6 +18,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -72,7 +73,6 @@ public class ForetellAbility extends SpecialAction {
         // activate only during the controller's turn
         if (game.getState().getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.ALLOW_FORETELL_ANYTIME, game).isEmpty()
                 && !game.isActivePlayer(this.getControllerId())) {
-            // TODO: must be fixed to call super.canActivate here for additional checks someday
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
@@ -103,7 +103,7 @@ public class ForetellAbility extends SpecialAction {
             this.foretellSplitCost = foretellSplitCost;
         }
 
-        public ForetellExileEffect(final ForetellExileEffect effect) {
+        protected ForetellExileEffect(final ForetellExileEffect effect) {
             super(effect);
             this.card = effect.card;
             this.foretellCost = effect.foretellCost;
@@ -120,7 +120,10 @@ public class ForetellAbility extends SpecialAction {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null
                     && card != null) {
+
+                // get main card id
                 UUID mainCardId = card.getMainCard().getId();
+
                 // retrieve the exileId of the foretold card
                 UUID exileId = CardUtil.getExileZoneId(mainCardId.toString() + "foretellAbility", game);
 
@@ -136,10 +139,11 @@ public class ForetellAbility extends SpecialAction {
 
                 // exile the card face-down
                 effect.setWithName(false);
-                effect.setTargetPointer(new FixedTarget(card.getId()));
+                effect.setTargetPointer(new FixedTarget(card.getId(), game));
                 effect.apply(game, source);
                 card.setFaceDown(true, game);
                 game.addEffect(new ForetellAddCostEffect(new MageObjectReference(card, game)), source);
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FORETELL, card.getId(), null, source.getControllerId()));
                 return true;
             }
             return false;
@@ -152,7 +156,7 @@ public class ForetellAbility extends SpecialAction {
             super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.AIDontUseIt);
         }
 
-        public ForetellLookAtCardEffect(final ForetellLookAtCardEffect effect) {
+        protected ForetellLookAtCardEffect(final ForetellLookAtCardEffect effect) {
             super(effect);
         }
 
@@ -171,7 +175,7 @@ public class ForetellAbility extends SpecialAction {
             if (affectedControllerId.equals(source.getControllerId())) {
                 Card card = game.getCard(objectId);
                 if (card != null) {
-                    MageObject sourceObject = game.getObject(source.getSourceId());
+                    MageObject sourceObject = game.getObject(source);
                     if (sourceObject == null) {
                         return false;
                     }
@@ -196,7 +200,7 @@ public class ForetellAbility extends SpecialAction {
             staticText = "Foretold card";
         }
 
-        public ForetellAddCostEffect(final ForetellAddCostEffect effect) {
+        protected ForetellAddCostEffect(final ForetellAddCostEffect effect) {
             super(effect);
             this.mor = effect.mor;
         }
@@ -228,24 +232,30 @@ public class ForetellAbility extends SpecialAction {
                             ability.setAbilityName(rightHalfCard.getName());
                             game.getState().addOtherAbility(rightHalfCard, ability);
                         }
-                    } else if (card instanceof ModalDoubleFacesCard) {
+                    } else if (card instanceof ModalDoubleFacedCard) {
                         if (foretellCost != null) {
-                            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                            ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
-                            ability.setSourceId(leftHalfCard.getId());
-                            ability.setControllerId(source.getControllerId());
-                            ability.setSpellAbilityType(leftHalfCard.getSpellAbility().getSpellAbilityType());
-                            ability.setAbilityName(leftHalfCard.getName());
-                            game.getState().addOtherAbility(leftHalfCard, ability);
+                            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                            // some MDFC's are land IE: sea gate restoration
+                            if (!leftHalfCard.isLand(game)) {
+                                ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
+                                ability.setSourceId(leftHalfCard.getId());
+                                ability.setControllerId(source.getControllerId());
+                                ability.setSpellAbilityType(leftHalfCard.getSpellAbility().getSpellAbilityType());
+                                ability.setAbilityName(leftHalfCard.getName());
+                                game.getState().addOtherAbility(leftHalfCard, ability);
+                            }
                         }
                         if (foretellSplitCost != null) {
-                            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
-                            ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
-                            ability.setSourceId(rightHalfCard.getId());
-                            ability.setControllerId(source.getControllerId());
-                            ability.setSpellAbilityType(rightHalfCard.getSpellAbility().getSpellAbilityType());
-                            ability.setAbilityName(rightHalfCard.getName());
-                            game.getState().addOtherAbility(rightHalfCard, ability);
+                            ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+                            // some MDFC's are land IE: sea gate restoration
+                            if (!rightHalfCard.isLand(game)) {
+                                ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
+                                ability.setSourceId(rightHalfCard.getId());
+                                ability.setControllerId(source.getControllerId());
+                                ability.setSpellAbilityType(rightHalfCard.getSpellAbility().getSpellAbilityType());
+                                ability.setAbilityName(rightHalfCard.getName());
+                                game.getState().addOtherAbility(rightHalfCard, ability);
+                            }
                         }
                     } else if (card instanceof AdventureCard) {
                         if (foretellCost != null) {
@@ -302,10 +312,10 @@ public class ForetellAbility extends SpecialAction {
             }
             this.setAdditionalCostsRuleVisible(false);
             this.name = "Foretell " + foretellCost;
-            this.addCost(new ManaCostsImpl(foretellCost));
+            this.addCost(new ManaCostsImpl<>(foretellCost));
         }
 
-        public ForetellCostAbility(final ForetellCostAbility ability) {
+        protected ForetellCostAbility(final ForetellCostAbility ability) {
             super(ability);
             this.spellAbilityType = ability.spellAbilityType;
             this.abilityName = ability.abilityName;
@@ -344,11 +354,11 @@ public class ForetellAbility extends SpecialAction {
                         } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
                             return ((SplitCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                         }
-                    } else if (card instanceof ModalDoubleFacesCard) {
-                        if (((ModalDoubleFacesCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                            return ((ModalDoubleFacesCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-                        } else if (((ModalDoubleFacesCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                            return ((ModalDoubleFacesCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
+                    } else if (card instanceof ModalDoubleFacedCard) {
+                        if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
+                            return ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
+                        } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
+                            return ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                         }
                     } else if (card instanceof AdventureCard) {
                         if (card.getMainCard().getName().equals(abilityName)) {
@@ -375,11 +385,11 @@ public class ForetellAbility extends SpecialAction {
                         } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
                             spellAbilityCopy = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
                         }
-                    } else if (card instanceof ModalDoubleFacesCard) {
-                        if (((ModalDoubleFacesCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                            spellAbilityCopy = ((ModalDoubleFacesCard) card).getLeftHalfCard().getSpellAbility().copy();
-                        } else if (((ModalDoubleFacesCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                            spellAbilityCopy = ((ModalDoubleFacesCard) card).getRightHalfCard().getSpellAbility().copy();
+                    } else if (card instanceof ModalDoubleFacedCard) {
+                        if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
+                            spellAbilityCopy = ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().copy();
+                        } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
+                            spellAbilityCopy = ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().copy();
                         }
                     } else if (card instanceof AdventureCard) {
                         if (card.getMainCard().getName().equals(abilityName)) {
@@ -394,9 +404,9 @@ public class ForetellAbility extends SpecialAction {
                         return null;
                     }
                     spellAbilityCopy.setId(this.getId());
-                    spellAbilityCopy.getManaCosts().clear();
-                    spellAbilityCopy.getManaCostsToPay().clear();
-                    spellAbilityCopy.getCosts().addAll(this.getCosts().copy());
+                    spellAbilityCopy.clearManaCosts();
+                    spellAbilityCopy.clearManaCostsToPay();
+                    spellAbilityCopy.addCost(this.getCosts().copy());
                     spellAbilityCopy.addCost(this.getManaCosts().copy());
                     spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
                     spellAbilityToResolve = spellAbilityCopy;
@@ -421,19 +431,19 @@ public class ForetellAbility extends SpecialAction {
         @Override
         public String getRule(boolean all) {
             StringBuilder sbRule = new StringBuilder("Foretell");
-            if (!costs.isEmpty()) {
+            if (!getCosts().isEmpty()) {
                 sbRule.append("&mdash;");
             } else {
                 sbRule.append(' ');
             }
-            if (!manaCosts.isEmpty()) {
-                sbRule.append(manaCosts.getText());
+            if (!getManaCosts().isEmpty()) {
+                sbRule.append(getManaCosts().getText());
             }
-            if (!costs.isEmpty()) {
-                if (!manaCosts.isEmpty()) {
+            if (!getCosts().isEmpty()) {
+                if (!getManaCosts().isEmpty()) {
                     sbRule.append(", ");
                 }
-                sbRule.append(costs.getText());
+                sbRule.append(getCosts().getText());
                 sbRule.append('.');
             }
             if (abilityName != null) {

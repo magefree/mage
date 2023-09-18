@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -18,19 +19,13 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class DictateOfErebos extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public DictateOfErebos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Whenever a creature you control dies, each opponent sacrifices a creature.
-        this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("creature")), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("creature")), false, StaticFilters.FILTER_CONTROLLED_A_CREATURE));
     }
 
     private DictateOfErebos(final DictateOfErebos card) {

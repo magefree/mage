@@ -30,7 +30,7 @@ public final class DromarTheBanisher extends CardImpl {
 
     public DromarTheBanisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(6);
@@ -40,7 +40,7 @@ public final class DromarTheBanisher extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Dromar, the Banisher deals combat damage to a player, you may pay {2}{U}. If you do, choose a color, then return all creatures of that color to their owners' hands.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new DromarTheBanisherEffect(), new ManaCostsImpl("{2}{U}")), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new DromarTheBanisherEffect(), new ManaCostsImpl<>("{2}{U}")), false));
     }
 
     private DromarTheBanisher(final DromarTheBanisher card) {
@@ -60,7 +60,7 @@ class DromarTheBanisherEffect extends OneShotEffect {
         this.staticText = "choose a color, then return all creatures of that color to their owners' hands.";
     }
 
-    DromarTheBanisherEffect(final DromarTheBanisherEffect effect) {
+    private DromarTheBanisherEffect(final DromarTheBanisherEffect effect) {
         super(effect);
     }
 

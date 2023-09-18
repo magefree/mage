@@ -30,13 +30,15 @@ public final class LavabellySliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control have "When this creature enters the battlefield, it deals 1 damage to target player or planeswalker and you gain 1 life."
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "When this creature enters the battlefield, it"),false,true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DamageTargetEffect(1, "it"),
+                false, true
+        ).setTriggerPhrase("When this creature enters the battlefield, ");
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)
-                .withForceQuotes()
-        ));
+                ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_SLIVERS
+        ).withForceQuotes()));
     }
 
     private LavabellySliver(final LavabellySliver card) {

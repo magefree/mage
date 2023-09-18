@@ -2,7 +2,6 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -41,10 +40,10 @@ public final class GarrukApexPredator extends CardImpl {
 
     public GarrukApexPredator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{B}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Destroy another target planeswalker.
         LoyaltyAbility ability = new LoyaltyAbility(new DestroyTargetEffect(), 1);
@@ -85,7 +84,7 @@ class GarrukApexPredatorEffect3 extends OneShotEffect {
         this.staticText = "You gain life equal to its toughness";
     }
 
-    public GarrukApexPredatorEffect3(final GarrukApexPredatorEffect3 effect) {
+    private GarrukApexPredatorEffect3(final GarrukApexPredatorEffect3 effect) {
         super(effect);
     }
 

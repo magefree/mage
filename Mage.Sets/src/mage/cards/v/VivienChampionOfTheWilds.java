@@ -2,7 +2,6 @@ package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -38,9 +37,9 @@ public final class VivienChampionOfTheWilds extends CardImpl {
     public VivienChampionOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // You may cast creature spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(
@@ -102,7 +101,7 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         Cards cardsToLook = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         FilterCard filter = new FilterCard("card to exile face down");
         TargetCard target = new TargetCardInLibrary(filter);
-        if (!player.choose(outcome, cardsToLook, target, game)) {
+        if (!player.choose(outcome, cardsToLook, target, source, game)) {
             return false;
         }
 

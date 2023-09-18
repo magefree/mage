@@ -61,9 +61,10 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     NecropotenceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever you discard a card, ");
     }
 
-    NecropotenceTriggeredAbility(final NecropotenceTriggeredAbility ability) {
+    private NecropotenceTriggeredAbility(final NecropotenceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -85,11 +86,6 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a card, " ;
-    }
 }
 
 class NecropotenceEffect extends OneShotEffect {
@@ -99,7 +95,7 @@ class NecropotenceEffect extends OneShotEffect {
         this.staticText = "Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step";
     }
 
-    public NecropotenceEffect(final NecropotenceEffect effect) {
+    private NecropotenceEffect(final NecropotenceEffect effect) {
         super(effect);
     }
 

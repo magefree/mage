@@ -51,7 +51,7 @@ class SongOfSerenityRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures that are enchanted can't attack or block";
     }
 
-    public SongOfSerenityRestrictionEffect(final SongOfSerenityRestrictionEffect effect) {
+    private SongOfSerenityRestrictionEffect(final SongOfSerenityRestrictionEffect effect) {
         super(effect);
     }
 
@@ -72,6 +72,6 @@ class SongOfSerenityRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 }

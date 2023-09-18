@@ -39,7 +39,7 @@ public class EndrekSahrMasterBreederTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Counterspell", 1);
         
-        assertPermanentCount(playerA, "Thrull", 2);        
+        assertPermanentCount(playerA, "Thrull Token", 2);
 
     }
 

@@ -42,7 +42,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Chromatic Lantern", 1);
 
@@ -69,7 +68,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Chromatic Lantern", 1);
         assertPermanentCount(playerA, "Magus of the Moon", 1);
@@ -103,7 +101,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Aquitect's Will", 1);
 
@@ -136,7 +133,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, bloodmoon, 1);
         assertPermanentCount(playerA, urborgtoy, 1);
@@ -167,7 +163,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, bloodmoon, 1);
         assertPermanentCount(playerA, urborgtoy, 1);
@@ -213,7 +208,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, urborgtoy, 1);
         assertPermanentCount(playerA, "Kormus Bell", 1);
@@ -257,7 +251,6 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         Permanent darksteel = getPermanent("Darksteel Citadel", playerA.getId());
         Assert.assertNotNull(darksteel);

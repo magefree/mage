@@ -47,14 +47,16 @@ public final class FrillscareMentor extends CardImpl {
 
         // When Frillscare Mentor enters the battlefield, put a menace counter on target non-Human creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.MENACE.createInstance())
+                new AddCountersTargetEffect(CounterType.MENACE.createInstance()
+                ).setText("put a menace counter on target non-Human creature you control. " +
+                        "<i>(It can't be blocked except by two or more creatures.)</i>")
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {2}{R}, {T}: Put a +1/+1 counter on each creature you control with menace.
         ability = new SimpleActivatedAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl("{2}{R}")
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

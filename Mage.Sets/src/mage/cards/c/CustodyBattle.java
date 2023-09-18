@@ -2,6 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -53,7 +54,7 @@ public final class CustodyBattle extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature has "At the beginning of your upkeep, target opponent gains control of this creature unless you sacrifice a land."
@@ -80,7 +81,7 @@ class GiveControlEffect extends ContinuousEffectImpl {
         staticText = "Target opponent gains control of {this}";
     }
 
-    public GiveControlEffect(final GiveControlEffect effect) {
+    private GiveControlEffect(final GiveControlEffect effect) {
         super(effect);
     }
 
@@ -91,9 +92,10 @@ class GiveControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
-        if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game, source);
+        MageObject mageObject = source.getSourceObjectIfItStillExists(game);
+        if (mageObject != null
+                && mageObject instanceof Permanent) {
+            return ((Permanent) mageObject).changeControllerId(source.getFirstTarget(), game, source);
         } else {
             discard();
         }
@@ -112,7 +114,7 @@ class CustodyBattleUnlessPaysEffect extends OneShotEffect {
         this.cost = cost;
     }
 
-    public CustodyBattleUnlessPaysEffect(final CustodyBattleUnlessPaysEffect effect) {
+    private CustodyBattleUnlessPaysEffect(final CustodyBattleUnlessPaysEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }
@@ -135,7 +137,7 @@ class CustodyBattleUnlessPaysEffect extends OneShotEffect {
             if (source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId())
                     && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
                 ContinuousEffect effect = new GiveControlEffect();
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+                effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                 game.addEffect(effect, source);
                 game.informPlayers(game.getPlayer(source.getFirstTarget()).getLogName() + " gains control of " + sourcePermanent.getIdName());
             }

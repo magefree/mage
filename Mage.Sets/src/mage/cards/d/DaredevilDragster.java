@@ -62,7 +62,7 @@ class DaredevilDragsterEffect extends OneShotEffect {
         this.staticText = "put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards";
     }
 
-    public DaredevilDragsterEffect(final DaredevilDragsterEffect effect) {
+    private DaredevilDragsterEffect(final DaredevilDragsterEffect effect) {
         super(effect);
     }
 

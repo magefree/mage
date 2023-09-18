@@ -47,7 +47,7 @@ class CamaraderieEffect extends OneShotEffect {
                 + "Creatures you control get +1/+1 until end of turn.";
     }
 
-    public CamaraderieEffect(final CamaraderieEffect effect) {
+    private CamaraderieEffect(final CamaraderieEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class CamaraderieEffect extends OneShotEffect {
         }
         int xValue = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         player.gainLife(xValue, game, source);
         player.drawCards(xValue, source, game);

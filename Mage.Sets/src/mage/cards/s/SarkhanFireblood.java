@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -33,9 +32,9 @@ public final class SarkhanFireblood extends CardImpl {
     public SarkhanFireblood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: You may discard a card. If you do, draw a card.
         this.addAbility(new LoyaltyAbility(new DoIfCostPaid(

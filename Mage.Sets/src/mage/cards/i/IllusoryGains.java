@@ -45,7 +45,7 @@ public final class IllusoryGains extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // You control enchanted creature.
@@ -72,7 +72,7 @@ class IllusoryGainsEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public IllusoryGainsEffect(final IllusoryGainsEffect effect) {
+    private IllusoryGainsEffect(final IllusoryGainsEffect effect) {
         super(effect);
     }
 

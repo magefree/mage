@@ -51,7 +51,7 @@ public final class LeafkinAvenger extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(xValue2)
                         .setText("{this} deals damage equal to its power to target player or planeswalker"),
-                new ManaCostsImpl("{7}{R}")
+                new ManaCostsImpl<>("{7}{R}")
         );
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

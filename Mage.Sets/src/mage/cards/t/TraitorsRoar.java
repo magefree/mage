@@ -35,7 +35,7 @@ public final class TraitorsRoar extends CardImpl {
         this.getSpellAbility().addEffect(new TraitorsRoarEffect());
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));
 
     }
 
@@ -56,7 +56,7 @@ class TraitorsRoarEffect extends OneShotEffect {
         this.staticText = "Tap target untapped creature. It deals damage equal to its power to its controller";
     }
 
-    public TraitorsRoarEffect(final TraitorsRoarEffect effect) {
+    private TraitorsRoarEffect(final TraitorsRoarEffect effect) {
         super(effect);
     }
 

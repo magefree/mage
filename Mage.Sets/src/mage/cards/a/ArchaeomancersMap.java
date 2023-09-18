@@ -41,7 +41,7 @@ public final class ArchaeomancersMap extends CardImpl {
 
         // When Archaeomancer's Map enters the battlefield, search your library for up to two basic Plains cards, reveal them, put them into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(2, filter), true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, filter), true)
         ));
 
         // Whenever a land enters the battlefield under an opponent's control, if that player controls more lands than you, you may put a land card from your hand onto the battlefield.
@@ -72,10 +72,10 @@ enum ArchaeomancersMapCondition implements Condition {
         UUID playerId = (UUID) source.getEffects().get(0).getValue("permanentEnteringControllerId");
         return playerId != null && game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), playerId, game
+                playerId, source, game
         ) > game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
     }
 }

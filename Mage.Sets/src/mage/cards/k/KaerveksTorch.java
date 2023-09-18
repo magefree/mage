@@ -55,7 +55,7 @@ class KaerveksTorchCostIncreaseEffect extends CostModificationEffectImpl {
         staticText = "Spells that target {this} cost {2} more to cast";
     }
 
-    KaerveksTorchCostIncreaseEffect(KaerveksTorchCostIncreaseEffect effect) {
+    private KaerveksTorchCostIncreaseEffect(final KaerveksTorchCostIncreaseEffect effect) {
         super(effect);
     }
 

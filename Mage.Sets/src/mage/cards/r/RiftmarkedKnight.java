@@ -40,7 +40,7 @@ public final class RiftmarkedKnight extends CardImpl {
         this.addAbility(new FlankingAbility());
 
         // Suspend 3-{1}{W}{W}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{W}{W}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{W}{W}"), this));
 
         // When the last time counter is removed from Riftmarked Knight while it's exiled, put a 2/2 black Knight creature token with flanking, protection from white, and haste onto the battlefield.
         this.addAbility(new RiftmarkedKnightTriggeredAbility());
@@ -60,9 +60,10 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
 
     public RiftmarkedKnightTriggeredAbility() {
         super(Zone.EXILED, new CreateTokenEffect(new RiftmarkedKnightToken()), false);
+        setTriggerPhrase("When the last time counter is removed from {this} while it's exiled, ");
     }
 
-    public RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) {
+    private RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) {
         super(ability);
     }
 
@@ -74,11 +75,6 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return (event.getTargetId().equals(this.getSourceId()) && game.getCard(event.getTargetId()).getCounters(game).getCount(CounterType.TIME) == 0);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When the last time counter is removed from {this} while it's exiled, " ;
     }
 
     @Override

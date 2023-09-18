@@ -14,6 +14,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -24,7 +25,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.filter.FilterPermanent;
 
 /**
  * @author BetaSteward_at_googlemail.com, nantuko
@@ -51,7 +51,7 @@ public final class GrandArchitect extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, true)));
 
         // {U}: Target artifact creature becomes blue until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetPermanent(targetFilter));
         this.addAbility(ability);
 
@@ -80,7 +80,7 @@ class GrandArchitectEffect extends ContinuousEffectImpl {
         staticText = "Target artifact creature becomes blue until end of turn";
     }
 
-    public GrandArchitectEffect(final GrandArchitectEffect effect) {
+    private GrandArchitectEffect(final GrandArchitectEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
         this.filter = filter;
     }
 
-    GrandArchitectManaAbility(GrandArchitectManaAbility ability) {
+    private GrandArchitectManaAbility(final GrandArchitectManaAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
     }
@@ -134,13 +134,22 @@ class GrandArchitectConditionalMana extends ConditionalMana {
         staticText = "Spend this mana only to cast artifact spells or activate abilities of artifacts";
         addCondition(new GrandArchitectManaCondition());
     }
+
+    private GrandArchitectConditionalMana(final GrandArchitectConditionalMana conditionalMana) {
+        super(conditionalMana);
+    }
+
+    @Override
+    public GrandArchitectConditionalMana copy() {
+        return new GrandArchitectConditionalMana(this);
+    }
 }
 
 class GrandArchitectManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         return object != null && object.isArtifact(game);
     }
 }

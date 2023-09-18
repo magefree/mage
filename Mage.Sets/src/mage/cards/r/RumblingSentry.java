@@ -23,7 +23,7 @@ public final class RumblingSentry extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Rumbling Sentry enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
     }
 
     private RumblingSentry(final RumblingSentry card) {

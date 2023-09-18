@@ -30,7 +30,7 @@ public final class TangleAngler extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(InfectAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

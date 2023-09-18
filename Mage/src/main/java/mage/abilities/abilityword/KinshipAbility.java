@@ -27,9 +27,10 @@ public class KinshipAbility extends TriggeredAbilityImpl {
     public KinshipAbility(Effect kinshipEffect) {
         super(Zone.BATTLEFIELD, new KinshipBaseEffect(kinshipEffect), true);
         this.setAbilityWord(AbilityWord.KINSHIP);
+        setTriggerPhrase("At the beginning of your upkeep, ");
     }
 
-    public KinshipAbility(final KinshipAbility ability) {
+    protected KinshipAbility(final KinshipAbility ability) {
         super(ability);
     }
 
@@ -56,12 +57,6 @@ public class KinshipAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.controllerId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of your upkeep, ";
-    }
-
 }
 
 class KinshipBaseEffect extends OneShotEffect {
@@ -74,7 +69,7 @@ class KinshipBaseEffect extends OneShotEffect {
         this.staticText = "you may look at the top card of your library. If it shares a creature type with {this}, you may reveal it. If you do, ";
     }
 
-    public KinshipBaseEffect(final KinshipBaseEffect effect) {
+    protected KinshipBaseEffect(final KinshipBaseEffect effect) {
         super(effect);
         this.kinshipEffects.addAll(effect.kinshipEffects.copy());
     }
@@ -102,7 +97,7 @@ class KinshipBaseEffect extends OneShotEffect {
                         if (controller.chooseUse(outcome, new StringBuilder("Kinship - Reveal ").append(card.getLogName()).append('?').toString(), source, game)) {
                             controller.revealCards(sourcePermanent.getName(), cards, game);
                             for (Effect effect : kinshipEffects) {
-                                effect.setTargetPointer(new FixedTarget(card.getId()));
+                                effect.setTargetPointer(new FixedTarget(card.getId(), game));
                                 if (effect.getEffectType() == EffectType.ONESHOT) {
                                     effect.apply(game, source);
                                 } else {

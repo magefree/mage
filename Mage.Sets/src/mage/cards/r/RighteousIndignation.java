@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -45,7 +44,7 @@ class RighteousIndignationTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn));
     }
 
-    public RighteousIndignationTriggeredAbility(final RighteousIndignationTriggeredAbility ability) {
+    private RighteousIndignationTriggeredAbility(final RighteousIndignationTriggeredAbility ability) {
         super(ability);
     }
 
@@ -67,7 +66,7 @@ class RighteousIndignationTriggeredAbility extends TriggeredAbilityImpl {
             if (blocked != null) {
                 if (blocked.getColor(game).contains(ObjectColor.BLACK)
                         || blocked.getColor(game).contains(ObjectColor.RED)) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
+                    getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId(), game));
                     return true;
                 }
             }

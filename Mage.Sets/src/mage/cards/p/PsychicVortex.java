@@ -1,43 +1,38 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class PsychicVortex extends CardImpl {
 
     public PsychicVortex(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
         // Cumulative upkeep-Draw a card.
         this.addAbility(new CumulativeUpkeepAbility(new PsychicVortexCost()));
-        
+
         // At the beginning of your end step, sacrifice a land and discard your hand.
-        Effect effect = new SacrificeTargetEffect();
-        effect.setText("sacrifice a land");
-        Ability ability = new BeginningOfEndStepTriggeredAbility(effect, TargetController.YOU, false);
-        effect = new DiscardHandControllerEffect();
-        effect.setText("and discard your hand");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new SacrificeControllerEffect(
+                StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, 1, null
+        ), TargetController.YOU, false);
+        ability.addEffect(new DiscardHandControllerEffect().concatBy("and"));
         this.addAbility(ability);
     }
 
@@ -52,7 +47,7 @@ public final class PsychicVortex extends CardImpl {
 }
 
 class PsychicVortexCost extends CostImpl {
-    
+
     PsychicVortexCost() {
         this.text = "Draw a card";
     }
@@ -68,16 +63,16 @@ class PsychicVortexCost extends CostImpl {
             controller.drawCards(1, source, game);
             this.paid = true;
             return true;
-            }
+        }
         return false;
     }
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        return controller != null && controller.getLibrary().hasCards();
+        return controller != null;
     }
-    
+
     @Override
     public PsychicVortexCost copy() {
         return new PsychicVortexCost(this);

@@ -23,7 +23,7 @@ public final class BurnTrail extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));
     }
 
     private BurnTrail(final BurnTrail card) {

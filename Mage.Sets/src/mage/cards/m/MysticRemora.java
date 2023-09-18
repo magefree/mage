@@ -32,7 +32,7 @@ public final class MysticRemora extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
         // Whenever an opponent casts a noncreature spell, you may draw a card unless that player pays {4}.
         this.addAbility(new MysticRemoraTriggeredAbility());
 
@@ -56,7 +56,7 @@ class MysticRemoraTriggeredAbility extends TriggeredAbilityImpl {
 
     }
 
-    public MysticRemoraTriggeredAbility(final MysticRemoraTriggeredAbility ability) {
+    private MysticRemoraTriggeredAbility(final MysticRemoraTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,7 +101,7 @@ class MysticRemoraEffect extends OneShotEffect {
         this.staticText = "you may draw a card unless that player pays {4}";
     }
 
-    public MysticRemoraEffect(final MysticRemoraEffect effect) {
+    private MysticRemoraEffect(final MysticRemoraEffect effect) {
         super(effect);
     }
 

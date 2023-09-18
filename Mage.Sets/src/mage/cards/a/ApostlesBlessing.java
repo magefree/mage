@@ -61,7 +61,7 @@ class ApostlesBlessingEffect extends OneShotEffect {
         this.staticText = "Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn";
     }
 
-    public ApostlesBlessingEffect(final ApostlesBlessingEffect effect) {
+    private ApostlesBlessingEffect(final ApostlesBlessingEffect effect) {
         super(effect);
     }
 

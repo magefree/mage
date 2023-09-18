@@ -91,7 +91,7 @@ class OffspringsRevengeEffect extends OneShotEffect {
         effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
         player.moveCards(card, Zone.EXILED, source, game);
         effect.apply(game, source);
-        effect.getAddedPermanent().stream().forEach(permanent -> {
+        effect.getAddedPermanents().stream().forEach(permanent -> {
             ContinuousEffect continuousEffect = new GainAbilityTargetEffect(
                     HasteAbility.getInstance(), Duration.UntilYourNextTurn
             );

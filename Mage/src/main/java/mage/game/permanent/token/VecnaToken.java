@@ -20,7 +20,9 @@ public final class VecnaToken extends TokenImpl {
         subtype.add(SubType.GOD);
         power = new MageInt(8);
         toughness = new MageInt(8);
-        addAbility(IndestructibleAbility.getInstance());
+
+        // Indestructible
+        this.addAbility(IndestructibleAbility.getInstance());
     }
 
     private VecnaToken(final VecnaToken token) {

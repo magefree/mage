@@ -29,7 +29,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class IbHalfheartGoblinTactician extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains");
     private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent("another Goblin you control");
 
     static {
@@ -41,7 +41,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
 
     public IbHalfheartGoblinTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ADVISOR);
 
@@ -76,7 +76,7 @@ class IbHalfheartGoblinTacticianEffect extends OneShotEffect {
         this.staticText = "sacrifice it. If you do, it deals 4 damage to each creature blocking it";
     }
 
-    public IbHalfheartGoblinTacticianEffect(final IbHalfheartGoblinTacticianEffect effect) {
+    private IbHalfheartGoblinTacticianEffect(final IbHalfheartGoblinTacticianEffect effect) {
         super(effect);
     }
 

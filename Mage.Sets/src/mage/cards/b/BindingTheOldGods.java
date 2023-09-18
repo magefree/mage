@@ -37,7 +37,7 @@ public final class BindingTheOldGods extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
         // I — Destroy target nonland permanent an opponent controls.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,

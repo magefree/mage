@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -71,7 +71,7 @@ class RisenExecutionerCastEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard";
     }
 
-    RisenExecutionerCastEffect(final RisenExecutionerCastEffect effect) {
+    private RisenExecutionerCastEffect(final RisenExecutionerCastEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class RisenExecutionerCostIncreasingEffect extends CostModificationEffectImpl {
     protected static final FilterCreatureCard filter = new FilterCreatureCard();
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     RisenExecutionerCostIncreasingEffect() {
@@ -112,7 +112,7 @@ class RisenExecutionerCostIncreasingEffect extends CostModificationEffectImpl {
         staticText = "";
     }
 
-    RisenExecutionerCostIncreasingEffect(final RisenExecutionerCostIncreasingEffect effect) {
+    private RisenExecutionerCostIncreasingEffect(final RisenExecutionerCostIncreasingEffect effect) {
         super(effect);
     }
 
@@ -120,7 +120,7 @@ class RisenExecutionerCostIncreasingEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CardUtil.increaseCost(abilityToModify, controller.getGraveyard().count(filter, source.getSourceId(), source.getControllerId(), game));
+            CardUtil.increaseCost(abilityToModify, controller.getGraveyard().count(filter, source.getControllerId(), source, game));
         }
         return true;
     }

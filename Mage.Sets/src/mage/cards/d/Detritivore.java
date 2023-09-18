@@ -10,13 +10,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -24,7 +23,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -42,10 +40,10 @@ public final class Detritivore extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Detritivore's power and toughness are each equal to the number of nonbasic land cards in your opponents' graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new NonBasicLandsInOpponentsGraveyards(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new NonBasicLandsInOpponentsGraveyards())));
 
         // Suspend X-{X}{3}{R}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{3}{R}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{3}{R}"), this, true));
 
         // Whenever a time counter is removed from Detritivore while it's exiled, destroy target nonbasic land.
         this.addAbility(new DetritivoreTriggeredAbility());
@@ -67,9 +65,10 @@ class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
     public DetritivoreTriggeredAbility() {
         super(Zone.EXILED, new DestroyTargetEffect(), false);
         this.addTarget(new TargetNonBasicLandPermanent());
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
-    public DetritivoreTriggeredAbility(final DetritivoreTriggeredAbility ability) {
+    private DetritivoreTriggeredAbility(final DetritivoreTriggeredAbility ability) {
         super(ability);
     }
 
@@ -87,12 +86,6 @@ class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }
 
 class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
@@ -113,7 +106,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
                 if (controller.hasOpponent(playerUUID, game)) {
                     Player player = game.getPlayer(playerUUID);
                     if (player != null) {
-                        amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+                        amount += player.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
                     }
                 }
             }

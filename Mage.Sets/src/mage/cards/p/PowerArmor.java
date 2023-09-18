@@ -28,8 +28,8 @@ public final class PowerArmor extends CardImpl {
 
         // Domain - {3}, {tap}: Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(
-                new DomainValue(), new DomainValue(), Duration.EndOfTurn), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{3}"));
+                DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn), new TapSourceCost());
+        ability.addCost(new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability.addHint(DomainHint.instance));

@@ -65,7 +65,8 @@ public class GameEvent implements Serializable {
         //player events
         /* ZONE_CHANGE
          targetId    id of the zone changing object
-         sourceId    sourceId of the ability with the object moving effect (WARNING, can be null if it move of fizzled spells)
+         sourceId    sourceId of the ability with the object moving effect
+                     WARNING: can be null if moved by game rules (e.g. draw in draw step, discard in cleanup step, fizzled spell)
          playerId    controller of the moved object
          amount      not used for this event
          flag        not used for this event
@@ -98,23 +99,40 @@ public class GameEvent implements Serializable {
         DISCARDED_CARD,
         DISCARDED_CARDS,
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
+        /* CLASHED (one event fired for each player involved)
+         playerId    the id of the clashing player
+         flag        true = playerId won the clash
+         targetId    the id of the other player in the clash
+         */
         CLASH, CLASHED,
         DAMAGE_PLAYER,
         MILL_CARDS,
         MILLED_CARD,
+        MILLED_CARDS,
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
-         flag        true = comabat damage - other damage = false
+         flag        true = combat damage - other damage = false
          */
         DAMAGED_PLAYER,
-        DAMAGED_PLAYER_BATCH,
+
+        /* DAMAGED_BATCH_FOR_PLAYERS,
+         combines all player damage events to a single batch (event)
+         */
+        DAMAGED_BATCH_FOR_PLAYERS,
+
+        /* DAMAGED_BATCH_FOR_ONE_PLAYER
+         combines all player damage events to a single batch (event) and split it per damaged player
+         playerId    the id of the damaged player
+         */
+        DAMAGED_BATCH_FOR_ONE_PLAYER,
+
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
          flag        is it combat damage
          */
@@ -127,7 +145,7 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the ability which caused the lose
          playerId    the id of the player loosing life
          amount      amount of life loss
-         flag        true = from comabat damage - other from non combat damage
+         flag        true = from combat damage - other from non combat damage
          */
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
@@ -148,6 +166,12 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
+        VEHICLE_CREWED,
+        /* VEHICLE_CREWED
+         targetId    the id of the vehicle
+         sourceId    sourceId of the vehicle
+         playerId    the id of the controlling player
+         */
         X_MANA_ANNOUNCE,
         /* X_MANA_ANNOUNCE
          mana x-costs announced by players (X value can be changed by replace events like Unbound Flourishing)
@@ -156,10 +180,16 @@ public class GameEvent implements Serializable {
          amount      X multiplier to change X value, default 1
          */
         CAST_SPELL,
-        /* SPELL_CAST
-         x-Costs are already defined
-         */
         CAST_SPELL_LATE,
+        /* SPELL_CAST, CAST_SPELL_LATE
+         targetId    id of the spell that's try to cast
+         sourceId    sourceId of the spell that's try to cast
+         playerId    player that try to cast the spell
+         amount      not used for this event
+         flag        not used for this event
+         zone        zone the spell is cast from (main card)
+         */
+        SPELL_CAST,
         /* SPELL_CAST
          targetId    id of the spell that's cast
          sourceId    sourceId of the spell that's cast
@@ -168,7 +198,6 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          zone        zone the spell is cast from
          */
-        SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
          targetId    id of the ability to activate / use
@@ -188,7 +217,6 @@ public class GameEvent implements Serializable {
          playerId    player that tries to use this ability
          */
         TRIGGERED_ABILITY,
-        ABILITY_TRIGGERED,
         RESOLVING_ABILITY,
         /* COPY_STACKOBJECT
          targetId    id of the spell/ability to copy
@@ -286,22 +314,25 @@ public class GameEvent implements Serializable {
          */
         BLOCKER_DECLARED,
         CREATURE_BLOCKED,
+        CREATURE_BLOCKS,
         BATCH_BLOCK_NONCOMBAT,
         UNBLOCKED_ATTACKER,
         SEARCH_LIBRARY, LIBRARY_SEARCHED,
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
-        SCRY, SCRIED,
+        SCRY, SCRIED, SCRY_TO_BOTTOM,
         SURVEIL, SURVEILED,
+        PROLIFERATE, PROLIFERATED,
         FATESEALED,
         FLIP_COIN, COIN_FLIPPED,
+        REPLACE_ROLLED_DIE, // for Clam-I-Am workaround only
+        ROLL_DIE, DIE_ROLLED,
         ROLL_DICE, DICE_ROLLED,
-        ROLL_PLANAR_DIE, PLANAR_DIE_ROLLED,
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
-        LIFE_PAID,
+        PAY_LIFE, LIFE_PAID,
         CASCADE_LAND,
         LEARN,
         //permanent events
@@ -313,8 +344,8 @@ public class GameEvent implements Serializable {
         TAP,
         /* TAPPED,
          targetId    tapped permanent
-         sourceId    id of the abilitity's source (can be null for standard tap actions like combat)
-         playerId    controller of the tapped permanent
+         sourceId    id of the ability's source (can be null for standard tap actions like combat)
+         playerId    source's controller, null if no source
          amount      not used for this event
          flag        is it tapped for combat
          */
@@ -327,8 +358,7 @@ public class GameEvent implements Serializable {
          */
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
-        UNFLIP, UNFLIPPED,
-        TRANSFORM, TRANSFORMED,
+        TRANSFORMING, TRANSFORMED,
         ADAPT,
         BECOMES_MONSTROUS,
         /* BECOMES_EXERTED
@@ -341,6 +371,14 @@ public class GameEvent implements Serializable {
         BECOMES_EXERTED,
         BECOMES_RENOWNED,
         GAINS_CLASS_LEVEL,
+        /* CREATURE_ENLISTED
+         targetId    id of the enlisted creature
+         sourceId    id of the creature that enlisted
+         playerId    player who controls the creatures
+         amount      not used for this event
+         flag        not used for this event
+         */
+        CREATURE_ENLISTED,
         /* BECOMES_MONARCH
          targetId    playerId of the player that becomes the monarch
          sourceId    id of the source object that created that effect, if no effect exist it's null
@@ -350,6 +388,8 @@ public class GameEvent implements Serializable {
          */
         BECOME_MONARCH,
         BECOMES_MONARCH,
+        TOOK_INITIATIVE,
+        BECOMES_DAY_NIGHT,
         MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
@@ -363,9 +403,15 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
+
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
-        DAMAGED_PERMANENT_BATCH,
+
+        /*  DAMAGED_BATCH_FOR_PERMANENTS
+         combine all permanent damage events to a single batch (event)
+         */
+        DAMAGED_BATCH_FOR_PERMANENTS,
+
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy
@@ -387,6 +433,7 @@ public class GameEvent implements Serializable {
         EVOLVED_CREATURE,
         EMBALMED_CREATURE,
         ETERNALIZED_CREATURE,
+        TRAINED_CREATURE,
         ATTACH, ATTACHED,
         UNATTACH, UNATTACHED,
         /* ATTACH, ATTACHED,
@@ -405,7 +452,7 @@ public class GameEvent implements Serializable {
         /* LOST_CONTROL
          targetId    id of the creature that lost control
          sourceId    null
-         playerId    player that controlles the creature before
+         playerId    player that controls the creature before
          amount      not used for this event
          flag        not used for this event
          */
@@ -426,7 +473,7 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         GAINED_CONTROL,
-        CREATE_TOKEN, CREATED_TOKEN,
+        CREATE_TOKEN, CREATED_TOKEN, CREATED_TOKENS,
         /* REGENERATE
          targetId    id of the creature to regenerate
          sourceId    sourceId of the effect doing the regeneration
@@ -457,6 +504,10 @@ public class GameEvent implements Serializable {
         ROOM_ENTERED,
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
+        TEMPTED_BY_RING, RING_BEARER_CHOSEN,
+        REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
+        FORETOLD, // targetId   id of card foretold
+        FORETELL, // targetId   id of card foretell  playerId   id of the controller
         //custom events
         CUSTOM_EVENT
     }
@@ -542,6 +593,11 @@ public class GameEvent implements Serializable {
         return id;
     }
 
+    /**
+     * Some batch events can contain multiple events list, see BatchGameEvent for usage
+     *
+     * @return
+     */
     public UUID getTargetId() {
         return targetId;
     }
@@ -620,7 +676,7 @@ public class GameEvent implements Serializable {
 
     /**
      * used to store which replacement effects were already applied to an event
-     * or or any modified events that may replace it
+     * or any modified events that may replace it
      * <p>
      * 614.5. A replacement effect doesn't invoke itself repeatedly; it gets
      * only one opportunity to affect an event or any modified events that may

@@ -53,7 +53,7 @@ public enum ManaType {
         if (types.contains(ManaType.WHITE)) {
             choice.getChoices().add("White");
         }
-        if (types.contains(ManaType.COLORLESS)) {
+        if (types.contains(ManaType.COLORLESS) && !onlyColors) {
             choice.getChoices().add("Colorless");
         }
         return choice;
@@ -95,26 +95,55 @@ public enum ManaType {
             manaTypes.add(ManaType.GREEN);
             manaTypes.add(ManaType.WHITE);
             manaTypes.add(ManaType.RED);
-        }
-        if (mana.getBlack() > 0) {
-            manaTypes.add(ManaType.BLACK);
-        }
-        if (mana.getBlue() > 0) {
-            manaTypes.add(ManaType.BLUE);
-        }
-        if (mana.getGreen() > 0) {
-            manaTypes.add(ManaType.GREEN);
-        }
-        if (mana.getWhite() > 0) {
-            manaTypes.add(ManaType.WHITE);
-        }
-        if (mana.getRed() > 0) {
-            manaTypes.add(ManaType.RED);
+        } else {
+            if (mana.getBlack() > 0) {
+                manaTypes.add(ManaType.BLACK);
+            }
+            if (mana.getBlue() > 0) {
+                manaTypes.add(ManaType.BLUE);
+            }
+            if (mana.getGreen() > 0) {
+                manaTypes.add(ManaType.GREEN);
+            }
+            if (mana.getWhite() > 0) {
+                manaTypes.add(ManaType.WHITE);
+            }
+            if (mana.getRed() > 0) {
+                manaTypes.add(ManaType.RED);
+            }
         }
         if (mana.getColorless() > 0) {
             manaTypes.add(ManaType.COLORLESS);
         }
         return manaTypes;
+    }
+
+    /**
+     * Utility function to find the ManaType associated with a name without needing to have the if-statements
+     * cluttering up the code.
+     * <p>
+     * Used for things like mapping back to a ManaType after the user chose from several of them.
+     *
+     * @param name  The name of the mana to find
+     * @return      The ManaType representing that mana (or null)
+     */
+    public static ManaType findByName(String name) {
+        switch (name) {
+            case "Black":
+                return ManaType.BLACK;
+            case "Blue":
+                return ManaType.BLUE;
+            case "Red":
+                return ManaType.RED;
+            case "Green":
+                return ManaType.GREEN;
+            case "White":
+                return ManaType.WHITE;
+            case "Colorless":
+                return ManaType.COLORLESS;
+            default:
+                return null;
+        }
     }
 
     public static Set<ManaType> getManaTypesFromManaList(List<Mana> manaList) {

@@ -32,7 +32,7 @@ public final class SavraQueenOfTheGolgari extends CardImpl {
 
     public SavraQueenOfTheGolgari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -60,9 +60,10 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     public SavraSacrificeBlackCreatureAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SavraSacrificeEffect(), new PayLifeCost(2)));
         this.setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a black creature, ");
     }
 
-    public SavraSacrificeBlackCreatureAbility(final SavraSacrificeBlackCreatureAbility ability) {
+    private SavraSacrificeBlackCreatureAbility(final SavraSacrificeBlackCreatureAbility ability) {
         super(ability);
     }
 
@@ -82,11 +83,6 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isBlack();
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a black creature, " ;
-    }
 }
 
 class SavraSacrificeEffect extends OneShotEffect {
@@ -96,7 +92,7 @@ class SavraSacrificeEffect extends OneShotEffect {
         this.staticText = "each other player sacrifices a creature";
     }
 
-    public SavraSacrificeEffect(final SavraSacrificeEffect effect) {
+    private SavraSacrificeEffect(final SavraSacrificeEffect effect) {
         super(effect);
     }
 
@@ -114,8 +110,8 @@ class SavraSacrificeEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    target.withNotTarget(true);
+                    if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
@@ -136,10 +132,11 @@ class SavraSacrificeEffect extends OneShotEffect {
 class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
 
     public SavraSacrificeGreenCreatureAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(2));
+        super(Zone.BATTLEFIELD, new GainLifeEffect(2), true);
+        setTriggerPhrase("Whenever you sacrifice a green creature, ");
     }
 
-    public SavraSacrificeGreenCreatureAbility(final SavraSacrificeGreenCreatureAbility ability) {
+    private SavraSacrificeGreenCreatureAbility(final SavraSacrificeGreenCreatureAbility ability) {
         super(ability);
     }
 
@@ -158,10 +155,5 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isGreen();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a green creature, " ;
     }
 }

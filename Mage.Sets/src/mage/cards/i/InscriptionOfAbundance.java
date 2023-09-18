@@ -36,9 +36,10 @@ public final class InscriptionOfAbundance extends CardImpl {
 
         // Choose one. If this spell was kicked, choose any number instead.
         // • Put two +1/+1 counters on target creature.
-        this.getSpellAbility().getModes().setChooseText("choose one. If this spell was kicked, choose any number instead.");
+        this.getSpellAbility().getModes().setChooseText("choose one. " +
+                "If this spell was kicked, choose any number instead.");
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("two +1/+1 counters"));
 
         // • Target player gains X life, where X is the greatest power among creatures they control.
         Mode mode = new Mode(new InscriptionOfAbundanceEffect());
@@ -46,9 +47,9 @@ public final class InscriptionOfAbundance extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // • Target creature you control fights target creature you don't control.
-        mode = new Mode(new FightTargetsEffect());
-        mode.addTarget(new TargetControlledCreaturePermanent());
-        mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        mode = new Mode(new FightTargetsEffect(false));
+        mode.addTarget(new TargetControlledCreaturePermanent().withChooseHint("fights"));
+        mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL).withChooseHint("fights"));
         this.getSpellAbility().addMode(mode);
     }
 
@@ -88,7 +89,7 @@ class InscriptionOfAbundanceEffect extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        source.getFirstTarget(), source.getSourceId(), game
+                        source.getFirstTarget(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getPower)

@@ -39,8 +39,8 @@ public class DearlyDepartedTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Thraben Doomsayer", 3, 3);
 
-        assertPermanentCount(playerA, "Human", 1);
+        assertPermanentCount(playerA, "Human Token", 1);
         // check that the +1/+1 counter was added to the token
-        assertPowerToughness(playerA, "Human", 2, 2);
+        assertPowerToughness(playerA, "Human Token", 2, 2);
     }
 }

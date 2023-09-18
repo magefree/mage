@@ -21,7 +21,7 @@ public final class AbzanAdvantage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Target player sacrifices an enchantment. Bolster 1.
-        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, 1, "Target player"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, 1, "Target player"));
         this.getSpellAbility().addEffect(new BolsterEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -25,10 +24,10 @@ public final class SorinGrimNemesis extends CardImpl {
     
     public SorinGrimNemesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
         
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
+        this.setStartingLoyalty(6);
 
         // +1: Reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its converted mana cost.
         this.addAbility(new LoyaltyAbility(new SorinGrimNemesisRevealEffect(), 1));
@@ -60,7 +59,7 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its mana value";
     }
     
-    public SorinGrimNemesisRevealEffect(final SorinGrimNemesisRevealEffect effect) {
+    private SorinGrimNemesisRevealEffect(final SorinGrimNemesisRevealEffect effect) {
         super(effect);
     }
     

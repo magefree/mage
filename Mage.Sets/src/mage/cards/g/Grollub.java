@@ -27,7 +27,7 @@ public final class Grollub extends CardImpl {
 
         // Whenever Grollub is dealt damage, each opponent gains that much life.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
-                new EachOpponentGainsLifeEffect(), false, false, true));
+                new EachOpponentGainsLifeEffect(), false, false));
 
     }
 
@@ -48,7 +48,7 @@ class EachOpponentGainsLifeEffect extends OneShotEffect {
         this.staticText = "each opponent gains that much life";
     }
 
-    public EachOpponentGainsLifeEffect(final EachOpponentGainsLifeEffect effect) {
+    private EachOpponentGainsLifeEffect(final EachOpponentGainsLifeEffect effect) {
         super(effect);
     }
 

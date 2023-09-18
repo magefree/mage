@@ -44,7 +44,7 @@ public final class CoralNet extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         
         // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you discard a card."
         Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(

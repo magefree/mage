@@ -52,13 +52,13 @@ public final class CullingScales extends CardImpl {
 
 }
 
-class HasLowestCMCAmongstNonlandPermanentsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class HasLowestCMCAmongstNonlandPermanentsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         FilterPermanent filter = new FilterNonlandPermanent();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, input.getObject().getManaValue()));
-        return !game.getBattlefield().contains(filter, input.getSourceId(), input.getPlayerId(), game, 1);
+        return !game.getBattlefield().contains(filter, input.getPlayerId(), input.getSource(), game, 1);
     }
 
 }

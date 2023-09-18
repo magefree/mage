@@ -37,7 +37,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
         this.filter = filter;
     }
 
-    public BecomesSubtypeAllEffect(final BecomesSubtypeAllEffect effect) {
+    protected BecomesSubtypeAllEffect(final BecomesSubtypeAllEffect effect) {
         super(effect);
         this.subtypes.addAll(effect.subtypes);
         this.loseOther = effect.loseOther;
@@ -52,7 +52,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean flag = false;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (permanent == null) {
                 continue;
             }

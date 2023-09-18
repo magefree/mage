@@ -1,32 +1,39 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class FrozenAether extends CardImpl {
 
+    private static final FilterPermanent filter
+            = new FilterPermanent("artifacts, creatures, and lands your opponents control");
+
+    static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
+    }
+
     public FrozenAether(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FrozenAetherTapEffect()));
+        this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(filter)));
     }
 
     private FrozenAether(final FrozenAether card) {
@@ -36,50 +43,5 @@ public final class FrozenAether extends CardImpl {
     @Override
     public FrozenAether copy() {
         return new FrozenAether(this);
-    }
-}
-
-class FrozenAetherTapEffect extends ReplacementEffectImpl {
-
-    FrozenAetherTapEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "Artifacts, creatures, and lands your opponents control enter the battlefield tapped";
-    }
-
-    FrozenAetherTapEffect(final FrozenAetherTapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.setTapped(true);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null
-                    && (permanent.isCreature(game)
-                    || permanent.isLand(game)
-                    || permanent.isArtifact(game))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public FrozenAetherTapEffect copy() {
-        return new FrozenAetherTapEffect(this);
     }
 }

@@ -29,7 +29,7 @@ public final class NumaJoragaChieftain extends CardImpl {
     public NumaJoragaChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -78,7 +78,7 @@ class NumaJoragaChieftainEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        ManaCosts cost = new ManaCostsImpl("{X}{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}{X}");
         if (!player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
             return false;
         }

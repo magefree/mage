@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.permanent;
 
 import mage.filter.predicate.Predicate;
@@ -10,11 +9,17 @@ import mage.game.permanent.PermanentToken;
  * @author North
  */
 public enum TokenPredicate implements Predicate<Permanent> {
-    instance;
+    TRUE(true),
+    FALSE(false);
+    private final boolean value;
+
+    TokenPredicate(boolean value) {
+        this.value = value;
+    }
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input instanceof PermanentToken;
+        return value == input instanceof PermanentToken;
     }
 
     @Override

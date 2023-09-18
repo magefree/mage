@@ -62,11 +62,11 @@ class GruesomeMenagerieEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "Choose a creature card with mana value 1 "
                 + "in your graveyard, then do the same for creature cards "
-                + "with mana values 2 and 3. "
+                + "with mana value 2 and 3. "
                 + "Return those cards to the battlefield.";
     }
 
-    public GruesomeMenagerieEffect(final GruesomeMenagerieEffect effect) {
+    private GruesomeMenagerieEffect(final GruesomeMenagerieEffect effect) {
         super(effect);
     }
 
@@ -84,24 +84,24 @@ class GruesomeMenagerieEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         Target target;
         target = new TargetCardInYourGraveyard(filter1);
-        target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (player.choose(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 cards.add(card);
             }
         }
         target = new TargetCardInYourGraveyard(filter2);
-        target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (player.choose(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 cards.add(card);
             }
         }
         target = new TargetCardInYourGraveyard(filter3);
-        target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (player.choose(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 cards.add(card);

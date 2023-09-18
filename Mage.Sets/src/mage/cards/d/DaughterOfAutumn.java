@@ -38,13 +38,13 @@ public final class DaughterOfAutumn extends CardImpl {
     public DaughterOfAutumn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         // {W}: The next 1 damage that would be dealt to target white creature this turn is dealt to Daughter of Autumn instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DaughterOfAutumnPreventDamageTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DaughterOfAutumnPreventDamageTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -68,7 +68,7 @@ class DaughterOfAutumnPreventDamageTargetEffect extends RedirectionEffect {
         staticText = "The next " + amount + " damage that would be dealt to target white creature this turn is dealt to {this} instead";
     }
 
-    public DaughterOfAutumnPreventDamageTargetEffect(final DaughterOfAutumnPreventDamageTargetEffect effect) {
+    private DaughterOfAutumnPreventDamageTargetEffect(final DaughterOfAutumnPreventDamageTargetEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class DaughterOfAutumnPreventDamageTargetEffect extends RedirectionEffect {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+            if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                     if (event.getTargetId() != null) {
                         TargetPermanent target = new TargetPermanent();

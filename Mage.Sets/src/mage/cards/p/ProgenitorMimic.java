@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.util.functions.AbilityCopyApplier;
 
@@ -29,7 +28,7 @@ public final class ProgenitorMimic extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("no Token");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public ProgenitorMimic(UUID ownerId, CardSetInfo setInfo) {

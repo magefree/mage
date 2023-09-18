@@ -28,6 +28,7 @@ public final class EvangelOfHeliod extends CardImpl {
         // When Evangel of Heliod enters the battlefield, create a number of 1/1 white Soldier creature tokens equal to your devotion to white.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new SoldierToken(), DevotionCount.W)
+                        .setText("create a number of 1/1 white Soldier creature tokens equal to your devotion to white")
         ).addHint(DevotionCount.W.getHint()));
     }
 

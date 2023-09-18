@@ -33,7 +33,7 @@ public class RefractionTrapTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Refraction Trap", "Silvercoat Lion", "Lightning Bolt");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         setChoice(playerB, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

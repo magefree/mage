@@ -25,7 +25,7 @@ public final class KetriaCrystal extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private KetriaCrystal(final KetriaCrystal card) {

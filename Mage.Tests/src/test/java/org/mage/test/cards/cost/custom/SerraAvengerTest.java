@@ -12,23 +12,26 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SerraAvengerTest extends CardTestPlayerBase {
 
     /**
-     * Try to cast Serra Avenger on 1st, 2nd, 3rd and 4th turns.
-     * It should success only on 4th one.
+     * Serra Avenger can't be cast on your 1st, 2nd, and 3rd turns.
+     * It can only be cast on the 4th turn.
      */
     @Test
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.HAND, playerA, "Serra Avenger", 4);
+        addCard(Zone.HAND, playerA, "Serra Avenger", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
-        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
+        // Can't cost on the 1st, 2nd, and 3rd turns
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger", false);
+        checkPlayableAbility("before", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger", false);
+        checkPlayableAbility("before", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger", false);
+
+        // Can only cast on the 4th turn.
         castSpell(7, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
 
         setStopAt(7, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Serra Avenger", 1); // only the one that was cast on 4th turn
+        assertPermanentCount(playerA, "Serra Avenger", 1);
     }
 
     /**

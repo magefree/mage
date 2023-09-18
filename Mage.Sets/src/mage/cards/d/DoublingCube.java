@@ -27,7 +27,7 @@ public final class DoublingCube extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {T}: Double the amount of each type of mana in your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new DoublingCubeEffect(), new ManaCostsImpl("{3}"))
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new DoublingCubeEffect(), new ManaCostsImpl<>("{3}"))
                 .setPoolDependant(true);        
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -51,7 +51,7 @@ class DoublingCubeEffect extends ManaEffect {
         staticText = "Double the amount of each type of unspent mana you have";
     }
 
-    DoublingCubeEffect(final DoublingCubeEffect effect) {
+    private DoublingCubeEffect(final DoublingCubeEffect effect) {
         super(effect);
     }
 

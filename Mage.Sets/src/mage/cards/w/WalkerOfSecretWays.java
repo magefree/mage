@@ -43,13 +43,13 @@ public final class WalkerOfSecretWays extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new NinjutsuAbility("{1}{U}"));
 
         // Whenever Walker of Secret Ways deals combat damage to a player, look at that player's hand.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WalkerOfSecretWaysEffect(), false, true));
 
         // {1}{U}: Return target Ninja you control to its owner's hand. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"), MyTurnCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filterCreature, false));
         ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
@@ -73,7 +73,7 @@ class WalkerOfSecretWaysEffect extends OneShotEffect {
         staticText = "look at that player's hand";
     }
 
-    WalkerOfSecretWaysEffect(final WalkerOfSecretWaysEffect effect) {
+    private WalkerOfSecretWaysEffect(final WalkerOfSecretWaysEffect effect) {
         super(effect);
     }
 

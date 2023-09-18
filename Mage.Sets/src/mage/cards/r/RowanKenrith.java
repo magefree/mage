@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
@@ -31,9 +30,9 @@ public final class RowanKenrith extends CardImpl {
     public RowanKenrith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROWAN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: During target player's next turn, each creature that player controls attacks if able.
         LoyaltyAbility ability = new LoyaltyAbility(new RowanKenrithAttackEffect(), 2);
@@ -73,10 +72,10 @@ class RowanKenrithAttackEffect extends RequirementEffect {
 
     public RowanKenrithAttackEffect() {
         super(Duration.Custom);
-        staticText = "During target player's next turn, creatures that player controls attack if able";
+        staticText = "During target player's next turn, each creature that player controls attacks if able";
     }
 
-    public RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
+    private RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
         super(effect);
     }
 
@@ -93,7 +92,7 @@ class RowanKenrithAttackEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return (game.getPhase().getType() == TurnPhase.END
+        return (game.getTurnPhaseType() == TurnPhase.END
                 && this.isYourNextTurn(game));
     }
 
@@ -115,7 +114,7 @@ class RowanKenrithDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals 3 damage to each tapped creature target player controls";
     }
 
-    RowanKenrithDamageEffect(final RowanKenrithDamageEffect effect) {
+    private RowanKenrithDamageEffect(final RowanKenrithDamageEffect effect) {
         super(effect);
     }
 

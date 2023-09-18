@@ -25,7 +25,6 @@ public final class CommandersInsight extends CardImpl {
         // Target player draws X cards plus an additional card for each time they've cast a commander from the command zone this game.
         this.getSpellAbility().addEffect(new CommandersInsightEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addWatcher(new CommanderPlaysCountWatcher());
     }
 
     private CommandersInsight(final CommandersInsight card) {

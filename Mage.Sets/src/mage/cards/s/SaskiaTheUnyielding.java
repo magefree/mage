@@ -11,6 +11,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -25,7 +26,7 @@ public final class SaskiaTheUnyielding extends CardImpl {
     public SaskiaTheUnyielding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -40,7 +41,7 @@ public final class SaskiaTheUnyielding extends CardImpl {
         // Whenever a creature you control deals combat damage to a player, it deals that much damage to the chosen player.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new SaskiaTheUnyieldingEffect(),
-                new FilterControlledCreaturePermanent("a creature you control"), false, SetTargetPointer.NONE, true
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.NONE, true
         ));
     }
 
@@ -61,7 +62,7 @@ class SaskiaTheUnyieldingEffect extends OneShotEffect {
         this.staticText = "it deals that much damage to the chosen player";
     }
 
-    public SaskiaTheUnyieldingEffect(final SaskiaTheUnyieldingEffect effect) {
+    private SaskiaTheUnyieldingEffect(final SaskiaTheUnyieldingEffect effect) {
         super(effect);
     }
 

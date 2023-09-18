@@ -44,7 +44,7 @@ public final class HeronsGraceChampion extends CardImpl {
 
         // When Heron's Grace Champion enters the battlefield, other Humans you control get +1/+1 and gain lifelink until end of turn.
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, true);
-        effect.setText("other Humans you control gets +1/+1");
+        effect.setText("other Humans you control get +1/+1");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, filter, true);
         effect.setText("and gain lifelink until end of turn");

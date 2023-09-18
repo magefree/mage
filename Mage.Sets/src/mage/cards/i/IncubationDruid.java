@@ -195,7 +195,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             return types;
         }
         inManaTypeCalculation = true;
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> lands = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), source, game);
         for (Permanent land : lands) {
             Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
             for (ActivatedManaAbilityImpl ability : mana) {

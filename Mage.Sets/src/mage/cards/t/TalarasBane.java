@@ -60,7 +60,7 @@ class TalarasBaneEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. You choose a green or white creature card from it. You gain life equal to that creature card's toughness, then that player discards that card";
     }
 
-    public TalarasBaneEffect(final TalarasBaneEffect effect) {
+    private TalarasBaneEffect(final TalarasBaneEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class TalarasBaneEffect extends OneShotEffect {
         if (targetPlayer != null && you != null) {
             targetPlayer.revealCards("Talaras Bane", targetPlayer.getHand(), game);
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 card = targetPlayer.getHand().get(target.getFirstTarget(), game);
             }
             if (card != null) {

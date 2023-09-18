@@ -11,7 +11,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -26,10 +25,10 @@ import java.util.UUID;
  * @author ciaccona007
  */
 public final class Bifurcate extends CardImpl {
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public Bifurcate(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +56,7 @@ class BifurcateEffect extends OneShotEffect {
         this.staticText = "search your library for a permanent card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle";
     }
 
-    public BifurcateEffect(final BifurcateEffect effect) {
+    private BifurcateEffect(final BifurcateEffect effect) {
         super(effect);
     }
 

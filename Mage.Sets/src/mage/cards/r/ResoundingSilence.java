@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,29 +8,28 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class ResoundingSilence extends CardImpl {
 
     public ResoundingSilence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Exile target attacking creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
         // Cycling {5}{G}{W}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{G}{W}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{5}{G}{W}{U}")));
         // When you cycle Resounding Silence, exile up to two target attacking creatures.
         Ability ability = new CycleTriggeredAbility(new ExileTargetEffect());
-        TargetPermanent target = new TargetAttackingCreature(0, 2, new FilterAttackingCreature("up to two target attacking creatures"), false);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_ATTACKING_CREATURES));
         this.addAbility(ability);
     }
 

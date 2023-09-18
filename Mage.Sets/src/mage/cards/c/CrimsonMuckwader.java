@@ -37,7 +37,7 @@ public final class CrimsonMuckwader extends CardImpl {
         // Crimson Muckwader gets +1/+1 as long as you control a Swamp.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
         // {2}{B}: Regenerate Crimson Muckwader.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private CrimsonMuckwader(final CrimsonMuckwader card) {

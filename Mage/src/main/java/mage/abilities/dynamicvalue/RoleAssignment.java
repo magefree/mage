@@ -4,6 +4,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.game.Game;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
  *
  * @author TheElk801
  */
-public abstract class RoleAssignment<T> {
+public abstract class RoleAssignment<T> implements Serializable {
 
     protected final List<T> attributes = new ArrayList<>();
 

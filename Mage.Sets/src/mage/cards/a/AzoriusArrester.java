@@ -10,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -19,12 +18,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class AzoriusArrester extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
- 
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
     
     public AzoriusArrester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -36,7 +29,7 @@ public final class AzoriusArrester extends CardImpl {
 
         // When Azorius Arrester enters the battlefield, detain target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DetainTargetEffect(), false);
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+        TargetCreaturePermanent target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);
     }

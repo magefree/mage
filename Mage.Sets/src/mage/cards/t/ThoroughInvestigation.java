@@ -23,7 +23,7 @@ public final class ThoroughInvestigation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Whenever you attack, investigate.
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new InvestigateEffect(), 0));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new InvestigateEffect(), 1));
 
         // Whenever you sacrifice a Clue, venture into the dungeon.
         this.addAbility(new SacrificePermanentTriggeredAbility(new VentureIntoTheDungeonEffect(), filter));

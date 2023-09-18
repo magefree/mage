@@ -23,7 +23,7 @@ public final class TempleOfMalice extends CardImpl {
         // Temple of Malice enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Malice enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
         // {T}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());

@@ -42,7 +42,7 @@ public final class DragonScales extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
                 
         // Enchanted creature gets +1/+2 and has vigilance.        
@@ -70,7 +70,7 @@ class DragonScalesEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonScalesEffect(final DragonScalesEffect effect) {
+    private DragonScalesEffect(final DragonScalesEffect effect) {
         super(effect);
     }
     

@@ -16,16 +16,21 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     private final Condition interveningIfClauseCondition;
 
     public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
-        this(Zone.BATTLEFIELD, effect, targetController, null, isOptional);
+        this(effect, targetController, null, isOptional);
+    }
+
+    public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean isOptional) {
+        this(Zone.BATTLEFIELD, effect, targetController, interveningIfClauseCondition, isOptional);
     }
 
     public BeginningOfEndStepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean isOptional) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.interveningIfClauseCondition = interveningIfClauseCondition;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfEndStepTriggeredAbility(final BeginningOfEndStepTriggeredAbility ability) {
+    protected BeginningOfEndStepTriggeredAbility(final BeginningOfEndStepTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.interveningIfClauseCondition = ability.interveningIfClauseCondition;
@@ -46,20 +51,14 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         switch (targetController) {
             case YOU:
                 boolean yours = event.getPlayerId().equals(this.controllerId);
-                if (yours) {
-                    if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                    }
+                if (yours && getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return yours;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                     if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                        this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                     return true;
                 }
@@ -68,24 +67,39 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
             case EACH_PLAYER:
             case NEXT:
                 if (getTargets().isEmpty()) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;
             case CONTROLLER_ATTACHED_TO:
                 Permanent attachment = game.getPermanent(sourceId);
-                if (attachment != null && attachment.getAttachedTo() != null) {
-                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                    if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
-                        if (getTargets().isEmpty()) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
-                        }
-                        return true;
-                    }
+                if (attachment == null || attachment.getAttachedTo() == null) {
+                    break;
                 }
+                Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                if (attachedTo == null || !attachedTo.isControlledBy(event.getPlayerId())) {
+                    break;
+                }
+                if (getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
+            case ENCHANTED:
+                Permanent permanent = getSourcePermanentIfItStillExists(game);
+                if (permanent == null || !game.isActivePlayer(permanent.getAttachedTo())) {
+                    break;
+                }
+                if (getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
+            case MONARCH:
+                if (!event.getPlayerId().equals(game.getMonarchId())) {
+                    break;
+                }
+                if (getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
         }
         return false;
     }
@@ -98,8 +112,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your end step, " + generateConditionString();
@@ -113,21 +126,24 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                 return "At the beginning of each player's end step, " + generateConditionString();
             case CONTROLLER_ATTACHED_TO:
                 return "At the beginning of the end step of enchanted permanent's controller, " + generateConditionString();
+            case ENCHANTED:
+                return "At the beginning of enchanted player's end step, " + generateConditionString();
+            case MONARCH:
+                return "At the beginning of the monarch's end step, " + generateConditionString();
         }
         return "";
     }
 
     private String generateConditionString() {
         if (interveningIfClauseCondition == null) {
-            switch (getZone()) {
-                case GRAVEYARD:
-                    return "if {this} is in your graveyard, ";
+            if (getZone() == Zone.GRAVEYARD) {
+                return "if {this} is in your graveyard, ";
             }
             return "";
         }
         String clauseText = interveningIfClauseCondition.toString();
         if (clauseText.startsWith("if")) {
-            //Fixes punctuation on multiple sentence if-then construction
+            // Fixes punctuation on multiple sentence if-then construction
             // see -- Colfenor's Urn
             if (clauseText.endsWith(".")) {
                 return clauseText + " ";

@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.common.OpponentControlsMoreCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -34,9 +33,9 @@ public final class GarrukUnleashed extends CardImpl {
     public GarrukUnleashed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Up to one target creature gets +3/+3 and gains trample until end of turn.
         Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn)

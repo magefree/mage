@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -7,7 +6,6 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -19,10 +17,6 @@ import java.util.UUID;
 public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffectImpl {
 
     private final FilterPermanent filter;
-
-    public CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration duration) {
-        this(duration, StaticFilters.FILTER_PERMANENT_CREATURE);
-    }
 
     public CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration duration, FilterPermanent filter) {
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
@@ -48,7 +42,7 @@ public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffec
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Permanent permanent = game.getPermanent(objectId);
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 
     private String getText() {

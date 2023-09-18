@@ -47,7 +47,7 @@ public final class Oubliette extends CardImpl {
 class OubliettePhaseOutEffect extends OneShotEffect {
 
     OubliettePhaseOutEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         staticText = "target creature phases out until {this} leaves the battlefield. " +
                 "Tap that creature as it phases in this way.";
     }
@@ -68,11 +68,12 @@ class OubliettePhaseOutEffect extends OneShotEffect {
         if (sourcePermanent == null || permanent == null) {
             return false;
         }
+
         MageObjectReference mor = new MageObjectReference(permanent, game);
-        permanent.tap(source, game);
         permanent.phaseOut(game);
         game.addEffect(new OubliettePhasePreventEffect(mor), source);
         game.addDelayedTriggeredAbility(new OublietteDelayedTriggeredAbility(mor), source);
+
         return true;
     }
 }
@@ -136,13 +137,11 @@ class OublietteDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
+        if (!event.getTargetId().equals(this.getSourceId())) {
+            return false;
         }
-        return false;
+
+        return ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD;
     }
 }
 
@@ -168,6 +167,12 @@ class OubliettePhaseInEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = mor.getPermanent(game);
-        return permanent != null && permanent.phaseIn(game);
+        if (permanent == null) {
+            return false;
+        }
+
+        permanent.setTapped(true); // Used instead of .tap so that tapped triggered abilities don't trigger
+
+        return permanent.phaseIn(game);
     }
 }

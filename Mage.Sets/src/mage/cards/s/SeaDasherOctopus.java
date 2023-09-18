@@ -33,7 +33,7 @@ public final class SeaDasherOctopus extends CardImpl {
         // Whenever this creature deals combat damage to a player, draw a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false
-        ));
+        ).setTriggerPhrase("Whenever this creature deals combat damage to a player, "));
     }
 
     private SeaDasherOctopus(final SeaDasherOctopus card) {

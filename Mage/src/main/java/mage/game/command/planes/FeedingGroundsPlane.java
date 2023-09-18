@@ -1,7 +1,5 @@
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -20,7 +18,7 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -31,17 +29,18 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author spjspj
  */
 public class FeedingGroundsPlane extends Plane {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
     private static final String rule = "put X +1/+1 counters on target creature, where X is that creature's mana value";
 
     public FeedingGroundsPlane() {
         this.setPlaneType(Planes.PLANE_FEEDING_GROUNDS);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Red spells cost {1} less to cast.  Green spells cost {1} less to cast
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new FeedingGroundsEffect());
@@ -49,7 +48,7 @@ public class FeedingGroundsPlane extends Plane {
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target red or green creature gets X +1/+1 counters
         Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetManaValue.instance);
-        Target chaosTarget = new TargetCreaturePermanent(1, 1, filter, false);
+        Target chaosTarget = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_PERMANENT_A_CREATURE, false);
 
         List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);
@@ -61,6 +60,15 @@ public class FeedingGroundsPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private FeedingGroundsPlane(final FeedingGroundsPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public FeedingGroundsPlane copy() {
+        return new FeedingGroundsPlane(this);
     }
 }
 

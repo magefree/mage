@@ -60,7 +60,7 @@ class TangleEffect extends OneShotEffect {
         this.staticText = "Each attacking creature doesn't untap during its controller's next untap step";
     }
 
-    public TangleEffect(final TangleEffect effect) {
+    private TangleEffect(final TangleEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class TangleEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 doNotUntapNextUntapStep.add(permanent);
             }
             if (!doNotUntapNextUntapStep.isEmpty()) {

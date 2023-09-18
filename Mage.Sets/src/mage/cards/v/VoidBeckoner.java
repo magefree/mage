@@ -33,7 +33,7 @@ public final class VoidBeckoner extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Cycling {2}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{B}")));
 
         // When you cycle Void Beckoner, put a deathtouch counter on target creature you control.
         Ability ability = new CycleTriggeredAbility(

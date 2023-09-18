@@ -26,7 +26,7 @@ public final class ShamblingStrider extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {R}{G}: Shambling Strider gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}{G}")));
     }
 
     private ShamblingStrider(final ShamblingStrider card) {

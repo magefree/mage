@@ -58,11 +58,11 @@ public final class MistformWarchief extends CardImpl {
     }
 }
 
-class MistformWarchiefPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+class MistformWarchiefPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        MageObject sourceObject = game.getObject(input.getSourceId());
+        MageObject sourceObject = input.getSource().getSourceObject(game);
         return sourceObject != null && sourceObject.shareCreatureTypes(game, input.getObject());
     }
 

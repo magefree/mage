@@ -33,7 +33,7 @@ public class RippleTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Surging Dementia", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(2, PhaseStep.END_TURN);
 
@@ -62,7 +62,7 @@ public class RippleTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Surging Dementia", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, playerB);
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -97,7 +97,7 @@ public class RippleTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Surging Dementia", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, playerB);
 
         setStopAt(2, PhaseStep.END_TURN);

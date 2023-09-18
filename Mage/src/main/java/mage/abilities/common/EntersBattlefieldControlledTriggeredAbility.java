@@ -45,17 +45,17 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
         super(zone, effect, filter, optional, setTargetPointer, rule, true);
     }
 
-    public EntersBattlefieldControlledTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
+    protected EntersBattlefieldControlledTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            return permanent != null && permanent.isControlledBy(this.getControllerId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null || !permanent.isControlledBy(getControllerId())) {
+            return false;
         }
-        return false;
+        return super.checkTrigger(event, game);
     }
 
     @Override

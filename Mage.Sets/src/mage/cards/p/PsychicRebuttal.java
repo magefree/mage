@@ -10,8 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -61,7 +61,7 @@ class PsychicRebuttalEffect extends OneShotEffect {
                 + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy";
     }
 
-    public PsychicRebuttalEffect(final PsychicRebuttalEffect effect) {
+    private PsychicRebuttalEffect(final PsychicRebuttalEffect effect) {
         super(effect);
     }
 
@@ -91,10 +91,10 @@ class PsychicRebuttalEffect extends OneShotEffect {
     }
 }
 
-class PsychicRebuttalPredicate implements ObjectPlayerPredicate<ObjectPlayer<StackObject>> {
+class PsychicRebuttalPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
-    public boolean apply(ObjectPlayer<StackObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         UUID controllerId = input.getPlayerId();
         if (controllerId == null) {
             return false;

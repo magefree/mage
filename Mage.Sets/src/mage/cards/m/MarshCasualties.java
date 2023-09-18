@@ -38,7 +38,7 @@ public final class MarshCasualties extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new MarshCasualtiesEffect(-2, -2),
                 new MarshCasualtiesEffect(-1, -1),
-                new LockedInCondition(KickedCondition.instance),
+                new LockedInCondition(KickedCondition.ONCE),
                 ruleText));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -64,7 +64,7 @@ class MarshCasualtiesEffect extends ContinuousEffectImpl {
         this.toughness = toughness;
     }
 
-    public MarshCasualtiesEffect(final MarshCasualtiesEffect effect) {
+    private MarshCasualtiesEffect(final MarshCasualtiesEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

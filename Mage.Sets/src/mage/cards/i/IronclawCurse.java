@@ -29,7 +29,7 @@ public final class IronclawCurse extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets 0/-1.
@@ -56,7 +56,7 @@ class IronclawCurseEffect extends CantBlockAttachedEffect {
         this.staticText = "Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness";
     }
 
-    public IronclawCurseEffect(final IronclawCurseEffect effect) {
+    private IronclawCurseEffect(final IronclawCurseEffect effect) {
         super(effect);
     }
 

@@ -44,13 +44,13 @@ class AcidicSoilEffect extends OneShotEffect {
         staticText = "{this} deals damage to each player equal to the number of lands they control";
     }
 
-    AcidicSoilEffect(final AcidicSoilEffect effect) {
+    private AcidicSoilEffect(final AcidicSoilEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game);
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

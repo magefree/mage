@@ -1,4 +1,3 @@
-
 package mage.cards.q;
 
 import java.util.UUID;
@@ -12,10 +11,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -23,14 +19,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class QuietContemplation extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
-
-    static {
-        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
        
     public QuietContemplation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
@@ -41,8 +29,8 @@ public final class QuietContemplation extends CardImpl {
         Effect effect = new DontUntapInControllersNextUntapStepTargetEffect();
         effect.setText("and it doesn't untap during its controller's next untap step");
         doIfCostPaid.addEffect(effect);
-        Ability ability = new SpellCastControllerTriggeredAbility(doIfCostPaid, filterNonCreature, false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        Ability ability = new SpellCastControllerTriggeredAbility(doIfCostPaid, StaticFilters.FILTER_SPELL_A_NON_CREATURE, false);
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);        
     }
 

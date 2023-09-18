@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -28,7 +29,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
     private boolean withSecondTarget;
     private boolean destroyAttachedAuras;
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
-    private Map<UUID, UUID> lockedControllers = new HashMap<>();
+    private Map<UUID, UUID> lockedControllers = new HashMap<>();  // Controllers for each permanent that is enforced by this effect
 
     public ExchangeControlTargetEffect(Duration duration, String rule) {
         this(duration, rule, false);
@@ -50,7 +51,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         this.rule = rule;
     }
 
-    public ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
+    protected ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
         super(effect);
         this.rule = effect.rule;
         this.withSource = effect.withSource;
@@ -89,8 +90,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
             if (withSecondTarget) {
                 UUID uuid = source.getTargets().get(1).getFirstTarget();
                 permanent2 = game.getPermanent(uuid);
-            }
-            else if (permanent2 == null) {
+            } else if (permanent2 == null) {
                 UUID uuid = source.getTargets().get(0).getFirstTarget();
                 permanent2 = game.getPermanent(uuid);
             }
@@ -102,9 +102,11 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
                 discard();
                 return;
             }
+            // Meant to be swapped since this enforced the
             this.lockedControllers.put(permanent1.getId(), permanent2.getControllerId());
-            this.zoneChangeCounter.put(permanent1.getId(), permanent1.getZoneChangeCounter(game));
             this.lockedControllers.put(permanent2.getId(), permanent1.getControllerId());
+
+            this.zoneChangeCounter.put(permanent1.getId(), permanent1.getZoneChangeCounter(game));
             this.zoneChangeCounter.put(permanent2.getId(), permanent2.getZoneChangeCounter(game));
         } else {
             // discard if there are less than 2 permanents
@@ -118,7 +120,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         for (Map.Entry<UUID, Integer> entry : zoneChangeCounter.entrySet()) {
             Permanent permanent = game.getPermanent(entry.getKey());
             if (permanent == null || permanent.getZoneChangeCounter(game) != entry.getValue()) {
-                // controll effect cease if the same permanent is no longer on the battlefield
+                // Control effect cease if the same permanent is no longer on the battlefield
                 toDelete.add(entry.getKey());
                 continue;
             }
@@ -138,6 +140,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         if (!toDelete.isEmpty()) {
             for (UUID uuid : toDelete) {
                 zoneChangeCounter.remove(uuid);
+                lockedControllers.remove(uuid);
             }
             if (zoneChangeCounter.isEmpty()) {
                 discard();

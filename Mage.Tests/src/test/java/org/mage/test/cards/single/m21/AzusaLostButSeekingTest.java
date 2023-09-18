@@ -17,11 +17,9 @@ public class AzusaLostButSeekingTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
-        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        checkPlayableAbility("4th land not possible", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Forest", false);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-
-        assertPermanentCount(playerA, "Forest", 3);
     }
 }

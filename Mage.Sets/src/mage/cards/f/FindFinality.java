@@ -14,8 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -29,9 +28,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class FindFinality extends SplitCard {
 
-    private static final FilterCard filter
-            = new FilterCreatureCard("creature cards from your graveyard");
-
     public FindFinality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B/G}{B/G}", "{4}{B}{G}", SpellAbilityType.SPLIT);
 
@@ -41,7 +37,7 @@ public final class FindFinality extends SplitCard {
                 new ReturnFromGraveyardToHandTargetEffect()
         );
         this.getLeftHalfCard().getSpellAbility().addTarget(
-                new TargetCardInYourGraveyard(0, 2, filter)
+                new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD)
         );
 
         // Finality
@@ -70,7 +66,7 @@ class FinalityEffect extends OneShotEffect {
                 + "Then all creatures get -4/-4 until end of turn.";
     }
 
-    public FinalityEffect(final FinalityEffect effect) {
+    private FinalityEffect(final FinalityEffect effect) {
         super(effect);
     }
 
@@ -86,8 +82,9 @@ class FinalityEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledCreaturePermanent(0, 1);
+        target.withNotTarget(true);
         if (player.choose(
-                Outcome.BoostCreature, target, source.getSourceId(), game
+                Outcome.BoostCreature, target, source, game
         )) {
             Effect effect = new AddCountersTargetEffect(
                     CounterType.P1P1.createInstance(2)

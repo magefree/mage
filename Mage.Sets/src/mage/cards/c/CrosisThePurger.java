@@ -29,7 +29,7 @@ public final class CrosisThePurger extends CardImpl {
 
     public CrosisThePurger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -38,7 +38,7 @@ public final class CrosisThePurger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Crosis, the Purger deals combat damage to a player, you may pay {2}{B}. If you do, choose a color, then that player reveals their hand and discards all cards of that color.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new CrosisThePurgerEffect(),
-                new ManaCostsImpl("{2}{B}")), false, true));
+                new ManaCostsImpl<>("{2}{B}")), false, true));
     }
 
     private CrosisThePurger(final CrosisThePurger card) {

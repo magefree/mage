@@ -28,7 +28,7 @@ public final class ChainersTorment extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I, II — Chainer's Torment deals 2 damage to each opponent and you gain 2 life.
         Effects effects = new Effects();
@@ -58,7 +58,7 @@ class ChainersTormentEffect extends OneShotEffect {
         this.staticText = "Create an X/X black Nightmare Horror creature token, where X is half your life total, rounded up. It deals X damage to you";
     }
 
-    ChainersTormentEffect(final ChainersTormentEffect effect) {
+    private ChainersTormentEffect(final ChainersTormentEffect effect) {
         super(effect);
     }
 

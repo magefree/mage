@@ -1,26 +1,27 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DestroyMultiTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
+import mage.target.targetpointer.EachTargetPointer;
+
 /**
  *
- * @author vereena42
+ * @author awjackson
  */
 public final class StompAndHowl extends CardImpl {
 
     public StompAndHowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        
+
         // Destroy target artifact and target enchantment.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer()));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
-        this.getSpellAbility().addEffect(new DestroyMultiTargetEffect());
     }
 
     private StompAndHowl(final StompAndHowl card) {

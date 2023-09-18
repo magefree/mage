@@ -25,7 +25,7 @@ public final class BarrierBreach extends CardImpl {
                 new FilterEnchantmentPermanent("enchantments"), false));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private BarrierBreach(final BarrierBreach card) {

@@ -30,9 +30,10 @@ public final class EnthrallingHold extends CardImpl {
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetTappedPermanentAsYouCast(StaticFilters.FILTER_PERMANENT_CREATURE);
+        auraTarget.withChooseHint("must be tapped");
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // You can't choose an untapped creature as this spell's target as you cast it.

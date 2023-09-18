@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -12,12 +11,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
 public final class RenegadeWarlord extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterAttackingCreature("each other attacking creature");
 
     public RenegadeWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
@@ -27,7 +29,7 @@ public final class RenegadeWarlord extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature(), true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, true), false));
     }
 
     private RenegadeWarlord(final RenegadeWarlord card) {

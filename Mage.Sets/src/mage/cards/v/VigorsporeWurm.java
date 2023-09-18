@@ -11,12 +11,9 @@ import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffe
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,6 +23,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class VigorsporeWurm extends CardImpl {
 
+    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES, null);
+
     public VigorsporeWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
 
@@ -34,9 +33,7 @@ public final class VigorsporeWurm extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Undergrowth — When Vigorspore Wurm enters the battlefield, target creature gains vigilance and gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
-        DynamicValue xValue = new CardsInControllerGraveyardCount(
-                StaticFilters.FILTER_CARD_CREATURE
-        );
+        
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new GainAbilityTargetEffect(
                         VigilanceAbility.getInstance(),
@@ -44,11 +41,11 @@ public final class VigorsporeWurm extends CardImpl {
                 ).setText("target creature gains vigilance"),
                 false);
         ability.addEffect(new BoostTargetEffect(
-                xValue, xValue, Duration.EndOfTurn, true
+                xValue, xValue, Duration.EndOfTurn
         ).setText("and gets +X/+X until end of turn, "
                 + "where X is the number of creature cards in your graveyard."));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.withFlavorWord("Undergrowth");
+        ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);
 
         // Vigorspore Wurm can't be blocked by more than one creature.

@@ -11,21 +11,13 @@ import mage.abilities.keyword.OutlastAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author emerald000
  */
 public final class AbzanFalconer extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent();
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public AbzanFalconer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -39,7 +31,11 @@ public final class AbzanFalconer extends CardImpl {
         this.addAbility(new OutlastAbility(new ColoredManaCost(ColoredManaSymbol.W)));
         
         // Each creature you control with a +1/+1 counter on it has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, "Each creature you control with a +1/+1 counter on it has flying")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+                FlyingAbility.getInstance(),
+                Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)
+        ));
     }
 
     private AbzanFalconer(final AbzanFalconer card) {

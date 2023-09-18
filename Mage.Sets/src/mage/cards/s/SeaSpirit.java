@@ -28,7 +28,7 @@ public final class SeaSpirit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}: Sea Spirit gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1, +0, Duration.EndOfTurn), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1, +0, Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         this.addAbility(ability);
     }
 

@@ -27,7 +27,7 @@ import mage.target.targetadjustment.TargetAdjuster;
  */
 public final class LeagueGuildmage extends CardImpl {
 
-    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("instant or sorcery you control with mana value X");
+    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("instant or sorcery spell you control with mana value X");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -44,7 +44,7 @@ public final class LeagueGuildmage extends CardImpl {
         // {3}{U}, {T}: Draw a card.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl("{3}{U}")
+                new ManaCostsImpl<>("{3}{U}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -52,7 +52,7 @@ public final class LeagueGuildmage extends CardImpl {
         // {X}{R}, {T}: Copy target instant or sorcery spell you control with converted mana cost X. You may choose new targets for the copy.
         ability = new SimpleActivatedAbility(
                 new CopyTargetSpellEffect(),
-                new ManaCostsImpl("{X}{R}")
+                new ManaCostsImpl<>("{X}{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));

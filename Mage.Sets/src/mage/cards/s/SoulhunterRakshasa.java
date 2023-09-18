@@ -64,7 +64,7 @@ class SoulhunterRakshasaEffect extends OneShotEffect {
         this.staticText = "{this} deals 1 damage to target opponent for each Swamp you control.";
     }
 
-    public SoulhunterRakshasaEffect(final SoulhunterRakshasaEffect effect) {
+    private SoulhunterRakshasaEffect(final SoulhunterRakshasaEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class SoulhunterRakshasaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int amount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (amount > 0) {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {

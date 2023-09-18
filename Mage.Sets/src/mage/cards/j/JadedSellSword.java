@@ -40,7 +40,7 @@ public final class JadedSellSword extends CardImpl {
         ability.addEffect(new GainAbilitySourceEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ));
-        this.addAbility(ability, new ManaPaidSourceWatcher());
+        this.addAbility(ability);
     }
 
     private JadedSellSword(final JadedSellSword card) {

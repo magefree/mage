@@ -30,7 +30,7 @@ public final class KeeperOfKookus extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}: Keeper of Kookus gains protection from red until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         this.addAbility(ability);
     }
 

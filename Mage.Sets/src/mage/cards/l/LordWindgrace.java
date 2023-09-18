@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -40,9 +39,9 @@ public final class LordWindgrace extends CardImpl {
     public LordWindgrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WINDGRACE);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +2: Discard a card, then draw a card. If a land card is discarded this way, draw an additional card.
         this.addAbility(new LoyaltyAbility(new LordWindgraceEffect(), 2));
@@ -86,7 +85,7 @@ class LordWindgraceEffect extends OneShotEffect {
                 + "If a land card is discarded this way, draw an additional card";
     }
 
-    public LordWindgraceEffect(final LordWindgraceEffect effect) {
+    private LordWindgraceEffect(final LordWindgraceEffect effect) {
         super(effect);
     }
 

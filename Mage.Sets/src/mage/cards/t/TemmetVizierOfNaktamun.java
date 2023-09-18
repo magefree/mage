@@ -30,13 +30,13 @@ public final class TemmetVizierOfNaktamun extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature token you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public TemmetVizierOfNaktamun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -51,7 +51,7 @@ public final class TemmetVizierOfNaktamun extends CardImpl {
         this.addAbility(ability);
 
         // Embalm {3}{W}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{W}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{W}{U}"), this));
     }
 
     private TemmetVizierOfNaktamun(final TemmetVizierOfNaktamun card) {

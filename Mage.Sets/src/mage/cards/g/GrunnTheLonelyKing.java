@@ -3,7 +3,7 @@ package mage.cards.g;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -25,7 +25,7 @@ public final class GrunnTheLonelyKing extends CardImpl {
 
     public GrunnTheLonelyKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.APE, SubType.WARRIOR);
 
         this.power = new MageInt(5);
@@ -36,13 +36,13 @@ public final class GrunnTheLonelyKing extends CardImpl {
 
         //If Grunn, the Lonely King was kicked, it enters the battlefield with five +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-                                                     KickedCondition.instance, "If {this} was kicked, it enters the battlefield with five +1/+1 counters on it", ""));
+                                                     KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with five +1/+1 counters on it.", ""));
 
         //Whenever Grunn attacks alone, double its power and toughness until end of turn.
         SourcePermanentPowerCount power = new SourcePermanentPowerCount();
         Effect effect = new BoostSourceEffect(power, SourcePermanentToughnessValue.getInstance(), Duration.EndOfTurn, true);
         effect.setText("double its power and toughness until end of turn");
-        this.addAbility(new AttacksAloneTriggeredAbility(effect));
+        this.addAbility(new AttacksAloneSourceTriggeredAbility(effect));
     }
 
     private GrunnTheLonelyKing(final GrunnTheLonelyKing card) {

@@ -50,7 +50,7 @@ class HealingGraceEffect extends PreventionEffectImpl {
         this.staticText = "Prevent the next 3 damage that would be dealt to any target this turn by a source of your choice";
     }
 
-    public HealingGraceEffect(final HealingGraceEffect effect) {
+    private HealingGraceEffect(final HealingGraceEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
@@ -62,7 +62,7 @@ class HealingGraceEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

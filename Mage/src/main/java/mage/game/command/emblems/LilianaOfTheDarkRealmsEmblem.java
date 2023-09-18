@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.Mana;
@@ -14,7 +13,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author spjspj
  */
 public final class LilianaOfTheDarkRealmsEmblem extends Emblem {
@@ -26,9 +24,18 @@ public final class LilianaOfTheDarkRealmsEmblem extends Emblem {
     }
 
     public LilianaOfTheDarkRealmsEmblem() {
-        this.setName("Emblem Liliana");
+        super("Emblem Liliana");
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(4), new TapSourceCost());
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, filter));
         this.getAbilities().add(ability);
+    }
+
+    private LilianaOfTheDarkRealmsEmblem(final LilianaOfTheDarkRealmsEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public LilianaOfTheDarkRealmsEmblem copy() {
+        return new LilianaOfTheDarkRealmsEmblem(this);
     }
 }

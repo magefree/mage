@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -47,7 +48,7 @@ public final class EverythingamajigC extends CardImpl {
 
         // Chimeric Staff
         // X: Everythingamajig becomes an X/X Construct artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericStaffEffect(), new VariableManaCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericStaffEffect(), new VariableManaCost(VariableCostType.NORMAL)));
     }
 
     private EverythingamajigC(final EverythingamajigC card) {
@@ -66,7 +67,7 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
         super(Zone.BATTLEFIELD, new ManaScrewEffect(), new GenericManaCost(1));
     }
 
-    public ManaScrewAbility(final ManaScrewAbility ability) {
+    private ManaScrewAbility(final ManaScrewAbility ability) {
         super(ability);
     }
 
@@ -97,7 +98,7 @@ class ManaScrewEffect extends ManaEffect {
         this.staticText = "Flip a coin. If you win the flip, add {C}{C}";
     }
 
-    public ManaScrewEffect(final ManaScrewEffect effect) {
+    private ManaScrewEffect(final ManaScrewEffect effect) {
         super(effect);
     }
 
@@ -130,7 +131,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
         staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
     }
 
-    public ChimericStaffEffect(final ChimericStaffEffect effect) {
+    private ChimericStaffEffect(final ChimericStaffEffect effect) {
         super(effect);
     }
 
@@ -159,8 +160,8 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int xValue = source.getManaCostsToPay().getX();
-                    permanent.getPower().setValue(xValue);
-                    permanent.getToughness().setValue(xValue);
+                    permanent.getPower().setModifiedBaseValue(xValue);
+                    permanent.getToughness().setModifiedBaseValue(xValue);
                 }
         }
         return true;

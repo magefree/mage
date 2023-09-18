@@ -64,7 +64,7 @@ public final class CountryUtil {
 
     public static String getCountryName(String countryCode) {
         if (COUNTRY_MAP.isEmpty()) {
-            for (int i = 0; i <= CountryComboBox.countryList.length - 1; i++) {
+            for (int i = 0; i < CountryComboBox.countryList.length; i++) {
                 COUNTRY_MAP.put(CountryComboBox.countryList[i][1], CountryComboBox.countryList[i][0]);
             }
         }

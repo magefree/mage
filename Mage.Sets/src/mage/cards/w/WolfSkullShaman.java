@@ -26,7 +26,7 @@ public final class WolfSkullShaman extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Wolf-Skull Shaman, you may reveal it. If you do, create a 2/2 green Wolf creature token.
-        this.addAbility(new KinshipAbility(new CreateTokenEffect(new WolfToken("LRW"))));
+        this.addAbility(new KinshipAbility(new CreateTokenEffect(new WolfToken())));
     }
 
     private WolfSkullShaman(final WolfSkullShaman card) {

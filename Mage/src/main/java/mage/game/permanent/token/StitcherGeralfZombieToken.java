@@ -1,12 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class StitcherGeralfZombieToken extends TokenImpl {
@@ -14,10 +12,9 @@ public final class StitcherGeralfZombieToken extends TokenImpl {
     public StitcherGeralfZombieToken() {
         this(1);
     }
+
     public StitcherGeralfZombieToken(int xValue) {
-        super("Zombie", "X/X blue Zombie creature token");
-        setOriginalExpansionSetCode("C14");
-        setTokenType(1);
+        super("Zombie Token", "X/X blue Zombie creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ZOMBIE);
@@ -25,7 +22,7 @@ public final class StitcherGeralfZombieToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public StitcherGeralfZombieToken(final StitcherGeralfZombieToken token) {
+    protected StitcherGeralfZombieToken(final StitcherGeralfZombieToken token) {
         super(token);
     }
 

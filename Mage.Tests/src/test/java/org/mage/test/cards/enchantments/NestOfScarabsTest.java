@@ -43,13 +43,12 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, nestScarabs, 1);
         assertPermanentCount(playerA, stinger, 1);
         assertCounterCount(playerA, stinger, CounterType.M1M1, 2);
         assertPowerToughness(playerA, stinger, 2, 3); // 4/5 with two -1/-1 counters
-        assertPermanentCount(playerA, "Insect", 2); // two counters = two insects
+        assertPermanentCount(playerA, "Insect Token", 2); // two counters = two insects
     }
 
     /*
@@ -98,7 +97,7 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertCounterCount(playerB, hillGiant, CounterType.M1M1, 1);
         assertPowerToughness(playerB, grizzly, 1, 1); // 2/2 with -1/-1 counter
         assertPowerToughness(playerB, hillGiant, 2, 2); // 3/3 with -1/-1 counter
-        assertPermanentCount(playerA, "Insect", 4); // 4 counters = 4 insects
+        assertPermanentCount(playerA, "Insect Token", 4); // 4 counters = 4 insects
     }
 
     /*
@@ -150,8 +149,8 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertCounterCount(playerB, hillGiant, CounterType.M1M1, 1);
         assertPowerToughness(playerB, grizzly, 1, 1); // 2/2 with -1/-1 counter
         assertPowerToughness(playerB, hillGiant, 2, 2); // 3/3 with -1/-1 counter
-        assertPermanentCount(playerB, "Insect", 0); // playerB did not place the -1/-1 counters, should not trigger
-        assertPermanentCount(playerA, "Insect", 4); // 4 counters = 4 insects        
+        assertPermanentCount(playerB, "Insect Token", 0); // playerB did not place the -1/-1 counters, should not trigger
+        assertPermanentCount(playerA, "Insect Token", 4); // 4 counters = 4 insects        
     }
 
     /*
@@ -177,11 +176,10 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertCounterCount(playerB, CounterType.POISON, 0);
         assertPowerToughness(playerB, wOmens, -1, 3); // 0/4 with -1/-1 counter
         assertCounterCount(playerB, wOmens, CounterType.M1M1, 1);
-        assertPermanentCount(playerA, "Insect", 1);
+        assertPermanentCount(playerA, "Insect Token", 1);
     }
 
     /*
-    
     Reported bug: Nest of Scarabs not triggering off wither damage dealt by creatures such as Sickle Ripper
      */
     @Test
@@ -203,6 +201,50 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertPowerToughness(playerB, wOmens, -2, 2); // 0/4 with two -1/-1 counters
         assertCounterCount(playerB, wOmens, CounterType.M1M1, 2);
-        assertPermanentCount(playerA, "Insect", 2);
+        assertPermanentCount(playerA, "Insect Token", 2);
+    }
+
+    /*
+    https://github.com/magefree/mage/issues/9649
+     */
+    @Test
+    public void scarabs_ETBWithCountersTriggers() {
+
+        String hatchling = "Noxious Hatchling"; // ETB with four -1/-1 counters
+
+        addCard(Zone.BATTLEFIELD, playerA, nestScarabs);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, hatchling);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hatchling);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, nestScarabs, 1);
+        assertPermanentCount(playerA, hatchling, 1);
+        assertPermanentCount(playerA, "Insect Token", 4);
+    }
+
+    @Test
+    public void scarabs_OpponentETBWithCountersNoTriggers() {
+
+        String hatchling = "Noxious Hatchling"; // ETB with four -1/-1 counters
+
+        addCard(Zone.BATTLEFIELD, playerB, nestScarabs);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, hatchling);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hatchling);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, nestScarabs, 1);
+        assertPermanentCount(playerA, hatchling, 1);
+        assertPermanentCount(playerA, "Insect Token", 0);
+        assertPermanentCount(playerB, "Insect Token", 0);
     }
 }

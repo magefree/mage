@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class PolukranosUnchained extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -41,7 +41,7 @@ public final class PolukranosUnchained extends CardImpl {
     public PolukranosUnchained(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(0);
@@ -51,10 +51,10 @@ public final class PolukranosUnchained extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new PolukranosUnchainedEffect()));
 
         // If damage would be dealt to Polukranos while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it.
-        this.addAbility(new SimpleStaticAbility(new PreventDamageAndRemoveCountersEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageAndRemoveCountersEffect(true, true, true)));
 
         // {1}{B}{G}: Polukranos fights another target creature.
-        Ability ability = new SimpleActivatedAbility(new FightTargetSourceEffect(), new ManaCostsImpl("{1}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(new FightTargetSourceEffect(), new ManaCostsImpl<>("{1}{B}{G}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
@@ -96,8 +96,7 @@ class PolukranosUnchainedEffect extends OneShotEffect {
         int counters = 12;
         if (!(spellAbility instanceof EscapeAbility)
                 || !spellAbility.getSourceId().equals(source.getSourceId())
-                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()
-                || !spellAbility.getSourceId().equals(source.getSourceId())) {
+                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()) {
             counters = 6;
         }
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");

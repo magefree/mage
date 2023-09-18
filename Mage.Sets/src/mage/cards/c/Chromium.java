@@ -23,7 +23,7 @@ public final class Chromium extends CardImpl {
 
     public Chromium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{U}{U}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
@@ -35,7 +35,7 @@ public final class Chromium extends CardImpl {
         this.addAbility(new RampageAbility(2));
         // At the beginning of your upkeep, sacrifice Chromium unless you pay {W}{U}{B}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
-            new ManaCostsImpl("{W}{U}{B}")), TargetController.YOU, false));
+            new ManaCostsImpl<>("{W}{U}{B}")), TargetController.YOU, false));
     }
 
     private Chromium(final Chromium card) {

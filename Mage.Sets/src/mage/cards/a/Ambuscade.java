@@ -7,9 +7,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public final class Ambuscade extends CardImpl {
 
         // It deals damage equal to its power to target creature you don't control.
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("It"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL)); // second target for effect
+        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent()); // second target for effect
     }
 
     private Ambuscade(final Ambuscade card) {

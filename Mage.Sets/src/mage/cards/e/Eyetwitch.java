@@ -3,6 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.LearnEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +29,8 @@ public final class Eyetwitch extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Eyetwitch dies, learn.
-        this.addAbility(new DiesSourceTriggeredAbility(new LearnEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new LearnEffect())
+                .addHint(OpenSideboardHint.instance));
     }
 
     private Eyetwitch(final Eyetwitch card) {

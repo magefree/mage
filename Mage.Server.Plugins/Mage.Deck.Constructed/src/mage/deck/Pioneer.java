@@ -34,6 +34,7 @@ public class Pioneer extends Constructed {
         banned.add("Inverter of Truth");
         banned.add("Kethis, the Hidden Hand");
         banned.add("Leyline of Abundance");
+        banned.add("Lurrus of the Dream-Den");
         banned.add("Nexus of Fate");
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");

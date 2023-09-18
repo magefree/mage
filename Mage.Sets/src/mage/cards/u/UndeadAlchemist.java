@@ -59,7 +59,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 
-    public UndeadAlchemistTriggeredAbility(final UndeadAlchemistTriggeredAbility ability) {
+    private UndeadAlchemistTriggeredAbility(final UndeadAlchemistTriggeredAbility ability) {
         super(ability);
     }
 

@@ -54,9 +54,9 @@ public class EmblemsTest extends CardTestPlayerBase {
         addCounters(1, PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 1);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Inquisitor");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Elite Inquisitor");
 
-        setStopAt(3, PhaseStep.END_COMBAT);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerA, "Sorin, Lord of Innistrad", 1);

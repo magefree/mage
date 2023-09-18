@@ -20,7 +20,7 @@ public class CantBlockUnlessYouControlSourceEffect extends RestrictionEffect {
         staticText = "{this} can't block unless you control " + filter.getMessage();
     }
 
-    public CantBlockUnlessYouControlSourceEffect(final CantBlockUnlessYouControlSourceEffect effect) {
+    protected CantBlockUnlessYouControlSourceEffect(final CantBlockUnlessYouControlSourceEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -38,6 +38,6 @@ public class CantBlockUnlessYouControlSourceEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return permanent.getId().equals(source.getSourceId())
-                && game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0;
+                && game.getBattlefield().count(filter, source.getControllerId(), source, game) == 0;
     }
 }

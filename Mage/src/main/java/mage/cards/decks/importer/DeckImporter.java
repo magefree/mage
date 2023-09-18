@@ -86,10 +86,10 @@ public abstract class DeckImporter {
         }
     }
 
-    public abstract DeckCardLists importDeck(String file, StringBuilder errorMessages, boolean saveAutoFixedFile);
+    public abstract DeckCardLists importDeck(String fileName, StringBuilder errorMessages, boolean saveAutoFixedFile);
 
-    public DeckCardLists importDeck(String file, boolean saveAutoFixedFile) {
-        return importDeck(file, new StringBuilder(), saveAutoFixedFile);
+    public DeckCardLists importDeck(String fileName, boolean saveAutoFixedFile) {
+        return importDeck(fileName, new StringBuilder(), saveAutoFixedFile);
     }
 
     public CardLookup getCardLookup() {

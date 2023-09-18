@@ -34,7 +34,7 @@ public final class ScavengingOoze extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on Scavenging Ooze and you gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScavengingOozeEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScavengingOozeEffect(), new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }
@@ -56,7 +56,7 @@ class ScavengingOozeEffect extends OneShotEffect {
         this.staticText = "Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on {this} and you gain 1 life";
     }
 
-    public ScavengingOozeEffect(final ScavengingOozeEffect effect) {
+    private ScavengingOozeEffect(final ScavengingOozeEffect effect) {
         super(effect);
     }
 

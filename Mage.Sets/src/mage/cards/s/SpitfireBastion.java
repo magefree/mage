@@ -24,7 +24,7 @@ public final class SpitfireBastion extends CardImpl {
     public SpitfireBastion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.nightCard = true;
 
         // {T}: Add {R}.
@@ -32,7 +32,7 @@ public final class SpitfireBastion extends CardImpl {
 
         // {2}{R}, {T}: Spitfire Bastion deals 3 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{2}{R}"));
+        ability.addCost(new ManaCostsImpl<>("{2}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class VedalkenAnatomist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl<>("{2}{U}"));
         ability.addEffect(new MayTapOrUntapTargetEffect());
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

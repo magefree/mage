@@ -11,12 +11,13 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
@@ -28,31 +29,30 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
-public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
+public final class ShaileDeanOfRadiance extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     private static final FilterPermanent shaileFilter = new FilterControlledCreaturePermanent("creature that entered the battlefield under your control this turn");
-    private static final FilterPermanent embroseFilter = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
 
     static {
         filter.add(AnotherPredicate.instance);
         shaileFilter.add(EnteredThisTurnPredicate.instance);
         shaileFilter.add((Predicate<Permanent>) (input, game) -> !input.checkControlChanged(game));
-        embroseFilter.add(CounterType.P1P1.getPredicate());
     }
 
     public ShaileDeanOfRadiance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.CLERIC}, "{1}{W}",
-                "Embrose, Dean of Shadow", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{2}{B}{B}");
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.CLERIC}, "{1}{W}",
+                "Embrose, Dean of Shadow",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{2}{B}{B}"
+        );
 
         // 1.
         // Shaile, Dean of Radiance
         // Legendary Creature - Bird Cleric
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(1, 1);
 
         // Flying
@@ -67,7 +67,6 @@ public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
         // 2.
         // Embrose, Dean of Shadow
         // Legendary Creature - Human Warlock
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(4, 4);
 
         // {T}: Put a +1/+1 counter on another target creature, then Embrose, Dean of Shadow deals 2 damage to that creature.
@@ -77,7 +76,7 @@ public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
         this.getRightHalfCard().addAbility(ability);
 
         // Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
-        this.getRightHalfCard().addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, embroseFilter));
+        this.getRightHalfCard().addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, StaticFilters.FILTER_A_CONTROLLED_CREATURE_P1P1));
     }
 
     private ShaileDeanOfRadiance(final ShaileDeanOfRadiance card) {

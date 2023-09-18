@@ -26,7 +26,6 @@ import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.mage.test.player.RandomPlayer;
 import org.mage.test.player.TestPlayer;
 
 import java.io.File;
@@ -102,21 +101,25 @@ public abstract class MageTestBase {
     @BeforeClass
     public static void init() {
         Logger.getRootLogger().setLevel(Level.DEBUG);
-        deleteSavedGames();
-        ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
-        config.getGameTypes().forEach((gameType) -> {
-            GameFactory.instance.addGameType(gameType.getName(), loadGameType(gameType), loadPlugin(gameType));
-        });
-        config.getTournamentTypes().forEach((tournamentType) -> {
-            TournamentFactory.instance.addTournamentType(tournamentType.getName(), loadTournamentType(tournamentType), loadPlugin(tournamentType));
-        });
-        config.getPlayerTypes().forEach((playerType) -> {
-            PlayerFactory.instance.addPlayerType(playerType.getName(), loadPlugin(playerType));
-        });
+
+        // one time init for all tests
+        if (GameFactory.instance.getGameTypes().isEmpty()) {
+            deleteSavedGames();
+            ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
+            config.getGameTypes().forEach((gameType) -> {
+                GameFactory.instance.addGameType(gameType.getName(), loadGameType(gameType), loadPlugin(gameType));
+            });
+            config.getTournamentTypes().forEach((tournamentType) -> {
+                TournamentFactory.instance.addTournamentType(tournamentType.getName(), loadTournamentType(tournamentType), loadPlugin(tournamentType));
+            });
+            config.getPlayerTypes().forEach((playerType) -> {
+                PlayerFactory.instance.addPlayerType(playerType.getName(), loadPlugin(playerType));
+            });
 //        for (Plugin plugin : config.getDeckTypes()) {
 //            DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
 //        }
-        Copier.setLoader(classLoader);
+            Copier.setLoader(classLoader);
+        }
     }
 
     @SuppressWarnings("UseSpecificCatch")
@@ -251,7 +254,7 @@ public abstract class MageTestBase {
                         Card newCard = cardInfo != null ? cardInfo.getCard() : null;
                         if (newCard != null) {
                             if (gameZone == Zone.BATTLEFIELD) {
-                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
                                 PermanentCard p = new PermanentCard(permCard, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);
@@ -295,9 +298,5 @@ public abstract class MageTestBase {
     protected Player createPlayer(String name, PlayerType playerType) {
         Optional<Player> playerOptional = PlayerFactory.instance.createPlayer(playerType, name, RangeOfInfluence.ALL, 5);
         return playerOptional.orElseThrow(() -> new NullPointerException("PlayerFactory error - player is not created"));
-    }
-
-    protected Player createRandomPlayer(String name) {
-        return new RandomPlayer(name);
     }
 }

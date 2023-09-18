@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.EnumSet;
+import java.util.Set;
 
 /**
  *
@@ -18,13 +19,13 @@ import java.util.EnumSet;
 public class EquippedHasSupertypeCondition implements Condition {
 
     private SuperType superType;
-    private EnumSet<SuperType> superTypes = EnumSet.noneOf(SuperType.class); // scope = Any
+    private Set<SuperType> superTypes = EnumSet.noneOf(SuperType.class); // scope = Any
 
     public EquippedHasSupertypeCondition(SuperType supertype) {
         this.superType = supertype;
     }
 
-    public EquippedHasSupertypeCondition(EnumSet<SuperType> superTypes) {
+    public EquippedHasSupertypeCondition(Set<SuperType> superTypes) {
         this.superTypes = superTypes;
     }
 
@@ -38,12 +39,12 @@ public class EquippedHasSupertypeCondition implements Condition {
             }
             if (attachedTo != null) {
                 if (superType != null) {
-                    if (attachedTo.getSuperType().contains(this.superType)) {
+                    if (attachedTo.getSuperType(game).contains(this.superType)) {
                         return true;
                     }
                 } else {
                     for (SuperType s : superTypes) {
-                        if (attachedTo.getSuperType().contains(s)) {
+                        if (attachedTo.getSuperType(game).contains(s)) {
                             return true;
                         }
                     }

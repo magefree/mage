@@ -40,8 +40,7 @@ public final class ForceStasis extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         //   Return target instant or sorcery spell you don't control to its owner's hand.
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetSpell(filter));
         this.getSpellAbility().addMode(mode);
     }

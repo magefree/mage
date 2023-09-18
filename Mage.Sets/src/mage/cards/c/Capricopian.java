@@ -117,7 +117,7 @@ class CapricopianEffect extends OneShotEffect {
         filterPlayer.add(Predicates.not(new PlayerIdPredicate(permanent.getControllerId())));
         filterPlayer.add(Predicates.not(new PlayerIdPredicate(game.getCombat().getDefenderId(permanent.getId()))));
         TargetPlayer targetPlayer = new TargetPlayer(0, 1, true, filterPlayer);
-        player.choose(outcome, targetPlayer, source.getSourceId(), game);
+        player.choose(outcome, targetPlayer, source, game);
         Player newPlayer = game.getPlayer(targetPlayer.getFirstTarget());
         if (newPlayer == null) {
             return false;

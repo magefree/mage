@@ -50,7 +50,7 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EyeOfTheStormEffect1(), false);
     }
 
-    public EyeOfTheStormAbility(final EyeOfTheStormAbility ability) {
+    private EyeOfTheStormAbility(final EyeOfTheStormAbility ability) {
         super(ability);
     }
 
@@ -91,7 +91,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                 + "For each copy, the player may cast the copy without paying its mana cost";
     }
 
-    public EyeOfTheStormEffect1(final EyeOfTheStormEffect1 effect) {
+    private EyeOfTheStormEffect1(final EyeOfTheStormEffect1 effect) {
         super(effect);
     }
 
@@ -129,9 +129,9 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                         if (card instanceof SplitCard) {
                             copiedCards.add(((SplitCard) card).getLeftHalfCard());
                             copiedCards.add(((SplitCard) card).getRightHalfCard());
-                        } else if (card instanceof ModalDoubleFacesCard) {
-                            copiedCards.add(((ModalDoubleFacesCard) card).getLeftHalfCard());
-                            copiedCards.add(((ModalDoubleFacesCard) card).getRightHalfCard());
+                        } else if (card instanceof ModalDoubleFacedCard) {
+                            copiedCards.add(((ModalDoubleFacedCard) card).getLeftHalfCard());
+                            copiedCards.add(((ModalDoubleFacedCard) card).getRightHalfCard());
                         } else {
                             copiedCards.add(card);
                         }
@@ -147,14 +147,16 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                         cardToCopy = copiedCards.getCards(game).iterator().next();
                     } else {
                         TargetCard target = new TargetCard(1, Zone.EXILED, new FilterCard("card to copy"));
-                        spellController.choose(Outcome.Copy, copiedCards, target, game);
+                        spellController.choose(Outcome.Copy, copiedCards, target, source, game);
                         cardToCopy = copiedCards.get(target.getFirstTarget(), game);
                         copiedCards.remove(cardToCopy);
                     }
                     if (cardToCopy != null) {
                         Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
                         if (spellController.chooseUse(outcome, "Cast " + copy.getIdName() + " without paying mana cost?", source, game)) {
-                            spellController.cast(copy.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), Boolean.TRUE);
+                            spellController.cast(spellController.chooseAbilityForCast(copy, game, true), game, true, new ApprovingObject(source, game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), null);
                         }
                     }
                 }

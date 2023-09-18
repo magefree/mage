@@ -29,7 +29,7 @@ public final class DesertOfTheFervent extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // Cycling {1}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
 
     }
 

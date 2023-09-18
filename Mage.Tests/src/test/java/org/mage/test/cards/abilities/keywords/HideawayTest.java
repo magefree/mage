@@ -45,7 +45,6 @@ public class HideawayTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Shelldock Isle", 1);
         assertExileCount(playerA, "Silvercoat Lion", 1);
@@ -79,7 +78,7 @@ public class HideawayTest extends CardTestPlayerBase {
         setChoice(playerA, "Ulamog, the Ceaseless Hunger");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
-        setChoice(playerA, "Yes"); // play Ghost Quarter
+        setChoice(playerA, true); // play Ghost Quarter
 
         addTarget(playerA, "Dross Crocodile^Dross Crocodile");
 
@@ -87,7 +86,6 @@ public class HideawayTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount("Dross Crocodile", 2);
         assertPermanentCount(playerA, "Mosswort Bridge", 1);
@@ -126,13 +124,12 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, "Yes"); // play Ghost Quarter
+        setChoice(playerA, true); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ghost Quarter", 0);
         assertTapped("Windbrisk Heights", true);
@@ -140,7 +137,9 @@ public class HideawayTest extends CardTestPlayerBase {
 
     @Test
     public void testCannotPlayLandIfNotOwnTurn() {
-        // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
+        // Hideaway (This land enters the battlefield tapped.
+        //           When it does, look at the top four cards of your library, exile one face down,
+        //           then put the rest on the bottom of your library.)
         // {T}: Add {G}.
         // {G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.        
         addCard(Zone.HAND, playerA, "Mosswort Bridge");
@@ -150,17 +149,20 @@ public class HideawayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Dross Crocodile", 2);// 5/1
 
+        setStrictChooseMode(true);
+
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mosswort Bridge");
         setChoice(playerA, "Ghost Quarter");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
+        activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
+        setChoice(playerA, true);
 
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(4, PhaseStep.BEGIN_COMBAT);
 
         execute();
 
-        assertPermanentCount(playerA, "Ghost Quarter", 0);
-        assertTapped("Mosswort Bridge", true);
+        assertTapped("Mosswort Bridge", true); // Tapped from activating the ability
+        assertPermanentCount(playerA, "Ghost Quarter", 0); // Land couldn't be played since not playerA's turn
     }
 
     @Test
@@ -180,13 +182,12 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, "Yes"); // play Ghost Quarter
+        setChoice(playerA, true); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ghost Quarter", 1);
         assertTapped("Windbrisk Heights", true);
@@ -214,13 +215,12 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, "Yes"); // play Ghost Quarter
+        setChoice(playerA, true); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ghost Quarter", 1);
         assertTapped("Windbrisk Heights", true);
@@ -254,13 +254,12 @@ public class HideawayTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, sIsle);
         setChoice(playerA, ulamog);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}");
-        setChoice(playerA, "Yes"); // play Ulamog's Crusher
+        setChoice(playerA, true); // play Ulamog's Crusher
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Island", true, 1);
         assertPermanentCount(playerA, sIsle, 1);
@@ -299,7 +298,7 @@ public class HideawayTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, sIsle);
         setChoice(playerA, ulamog);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}");
-        setChoice(playerA, "Yes"); // play Ulamog's Crusher        
+        setChoice(playerA, true); // play Ulamog's Crusher        
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();

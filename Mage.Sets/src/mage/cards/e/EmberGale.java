@@ -55,7 +55,7 @@ class EmberGaleEffect extends OneShotEffect {
         staticText = "Creatures target player controls can't block this turn. {this} deals 1 damage to each white and/or blue creature that player controls";
     }
 
-    public EmberGaleEffect(final EmberGaleEffect effect) {
+    private EmberGaleEffect(final EmberGaleEffect effect) {
         super(effect);
     }
 

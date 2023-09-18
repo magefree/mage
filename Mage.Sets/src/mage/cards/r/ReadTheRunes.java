@@ -46,7 +46,7 @@ class ReadTheRunesEffect extends OneShotEffect {
         this.staticText = "Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.";
     }
     
-    ReadTheRunesEffect(final ReadTheRunesEffect effect) {
+    private ReadTheRunesEffect(final ReadTheRunesEffect effect) {
         super(effect);
     }
     

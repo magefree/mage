@@ -49,6 +49,7 @@ class VengefulWarchiefTriggeredAbility extends TriggeredAbilityImpl {
 
     VengefulWarchiefTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
+        setTriggerPhrase("Whenever you lose life for the first time each turn, ");
     }
 
     private VengefulWarchiefTriggeredAbility(final VengefulWarchiefTriggeredAbility ability) {
@@ -72,11 +73,6 @@ class VengefulWarchiefTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public VengefulWarchiefTriggeredAbility copy() {
         return new VengefulWarchiefTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you lose life for the first time each turn, " ;
     }
 }
 

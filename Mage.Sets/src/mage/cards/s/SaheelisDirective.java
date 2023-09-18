@@ -56,7 +56,7 @@ class SaheelisDirectiveEffect extends OneShotEffect {
                 + "put onto the battlefield into your graveyard.";
     }
 
-    public SaheelisDirectiveEffect(final SaheelisDirectiveEffect effect) {
+    private SaheelisDirectiveEffect(final SaheelisDirectiveEffect effect) {
         super(effect);
     }
 
@@ -73,8 +73,8 @@ class SaheelisDirectiveEffect extends OneShotEffect {
             FilterCard filter = new FilterArtifactCard("artifact cards with mana value " + xValue + " or less to put onto the battlefield");
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setNotTarget(true);
-            controller.choose(Outcome.PutCardInPlay, cards, target1, game);
+            target1.withNotTarget(true);
+            controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);

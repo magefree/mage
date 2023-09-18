@@ -21,11 +21,11 @@ public final class VeteransReflexes extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("untap that creature"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public VeteransReflexes (final VeteransReflexes card) {
+    private VeteransReflexes(final VeteransReflexes card) {
         super(card);
     }
 

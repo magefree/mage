@@ -39,7 +39,7 @@ public final class Batterskull extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(3)));
 
         // Equip {5}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5), false));
     }
 
     private Batterskull(final Batterskull card) {

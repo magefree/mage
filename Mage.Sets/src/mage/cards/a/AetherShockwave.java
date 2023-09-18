@@ -31,8 +31,7 @@ public final class AetherShockwave extends CardImpl {
         // Choose one - Tap all Spirits; or tap all non-Spirit creatures.
         this.getSpellAbility().addEffect(new TapAllEffect(filterSpirit));
         
-        Mode mode = new Mode();
-        mode.addEffect(new TapAllEffect(filterNonSpirit));
+        Mode mode = new Mode(new TapAllEffect(filterNonSpirit));
         this.getSpellAbility().addMode(mode);
     }
 

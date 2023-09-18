@@ -33,7 +33,7 @@ public final class AdmiralAckbar extends CardImpl {
 
     public AdmiralAckbar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CALAMARI);
         this.subtype.add(SubType.REBEL);
         this.power = new MageInt(2);
@@ -42,7 +42,7 @@ public final class AdmiralAckbar extends CardImpl {
         // When you cast Admiral Ackbar, create two 2/3 blue Rebel Starship artifact creature tokens with spaceflight name B-Wing.
         this.addAbility(new CastSourceTriggeredAbility(new CreateTokenEffect(new RebelStarshipToken(), 2), false));
 
-        // At the beggining of each upkeep, untap all starships you control.
+        // At the beginning of each upkeep, untap all starships you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntapAllControllerEffect(filter), TargetController.ANY, false));
 
         // Whenever two or more Starship creatures you control attack, draw a card.
@@ -65,7 +65,7 @@ class AdmiralAckbarTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public AdmiralAckbarTriggeredAbility(final AdmiralAckbarTriggeredAbility ability) {
+    private AdmiralAckbarTriggeredAbility(final AdmiralAckbarTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -12,10 +11,9 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.SekKuarDeathkeeperGravebornToken;
+import mage.game.permanent.token.GravebornToken;
 
 /**
  *
@@ -28,12 +26,12 @@ public final class SekKuarDeathkeeper extends CardImpl {
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public SekKuarDeathkeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.SHAMAN);
 
@@ -41,7 +39,7 @@ public final class SekKuarDeathkeeper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another nontoken creature you control dies, create a 3/1 black and red Graveborn creature token with haste.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SekKuarDeathkeeperGravebornToken()), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new GravebornToken()), false, filter));
     }
 
     private SekKuarDeathkeeper(final SekKuarDeathkeeper card) {

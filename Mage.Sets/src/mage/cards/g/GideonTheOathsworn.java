@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -33,16 +32,16 @@ public final class GideonTheOathsworn extends CardImpl {
     public GideonTheOathsworn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Whenever you attack with two or more non-Gideon creatures, put a +1/+1 counter on each of those creatures.
         this.addAbility(new GideonTheOathswornTriggeredAbility());
 
         // +2: Until end of turn, Gideon, the Oathsworn becomes a 5/5 white Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         Ability ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(
-                new GideonTheOathswornToken(), "planeswalker", Duration.EndOfTurn
+                new GideonTheOathswornToken(), CardType.PLANESWALKER, Duration.EndOfTurn
         ), 2);
         ability.addEffect(new PreventAllDamageToSourceEffect(
                 Duration.EndOfTurn

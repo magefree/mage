@@ -30,7 +30,7 @@ public final class SetessanGriffin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}{G}{G}: Setessan Griffin gets +2/+2 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}{G}")));
     }
 
     private SetessanGriffin(final SetessanGriffin card) {

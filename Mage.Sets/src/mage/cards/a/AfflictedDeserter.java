@@ -20,7 +20,6 @@ public final class AfflictedDeserter extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.w.WerewolfRansacker.class;
 
         this.power = new MageInt(3);

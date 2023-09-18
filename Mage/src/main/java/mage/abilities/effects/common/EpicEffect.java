@@ -49,7 +49,7 @@ public class EpicEffect extends OneShotEffect {
         if (spell == null) {
             return false;
         }
-        spell = spell.copy();
+        spell = spell.copy(); // it's a fake spell (template), real copy with events in EpicPushEffect
         spell.getSpellAbility().getEffects().removeIf(EpicEffect.class::isInstance);
         game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(
                 new EpicPushEffect(spell, rule), Duration.EndOfGame, false
@@ -87,7 +87,7 @@ class EpicReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "For the rest of the game, you can't cast spells (Epic - " + mageObject.getName() + ')';
         }

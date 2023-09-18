@@ -27,7 +27,7 @@ public final class GuardianOfSolitude extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

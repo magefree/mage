@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.Set;
@@ -60,7 +59,9 @@ enum PoisonedCondition implements Condition {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (UUID opponentUuid : opponents) {
             Player opponent = game.getPlayer(opponentUuid);
-            if (opponent != null && opponent.getCounters().getCount(CounterType.POISON) > 0) {
+            if (opponent != null
+                    && opponent.isInGame()
+                    && opponent.getCounters().getCount(CounterType.POISON) > 0) {
                 return true;
             }
         }

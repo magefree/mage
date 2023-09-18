@@ -39,7 +39,7 @@ public final class UrzaLordHighArtificer extends CardImpl {
     public UrzaLordHighArtificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
@@ -99,7 +99,7 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
         controller.shuffleLibrary(source, game);
         Card card = controller.getLibrary().getFromTop(game);
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card,
-                TargetController.YOU, Duration.EndOfTurn, true, false);
+                TargetController.YOU, Duration.EndOfTurn, true, false, false);
     }
 }
 
@@ -112,7 +112,7 @@ class UrzaLordHighArtificerManaEffect extends BasicManaEffect {
         this.filter = filter;
     }
 
-    public UrzaLordHighArtificerManaEffect(final UrzaLordHighArtificerManaEffect effect) {
+    private UrzaLordHighArtificerManaEffect(final UrzaLordHighArtificerManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -125,7 +125,7 @@ class UrzaLordHighArtificerManaEffect extends BasicManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         if (game != null && game.inCheckPlayableState()) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             List<Mana> netMana = new ArrayList<>();
             if (count > 0) {
                 netMana.add(Mana.BlueMana(count));

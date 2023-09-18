@@ -40,11 +40,11 @@ public final class PuppetConjurer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {tap}: Create a 0/1 blue Homunculus artifact creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HomunculusToken()), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HomunculusToken()), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // At the beginning of your upkeep, sacrifice a Homunculus.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), TargetController.YOU, false));
     }
 
     private PuppetConjurer(final PuppetConjurer card) {

@@ -26,7 +26,7 @@ public final class DurableCoilbug extends CardImpl {
 
         // {4}{B}: Return Durable Coilbug from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{4}{B}")
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{4}{B}")
         ));
     }
 

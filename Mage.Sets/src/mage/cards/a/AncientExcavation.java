@@ -28,7 +28,7 @@ public final class AncientExcavation extends CardImpl {
         this.getSpellAbility().addEffect(new AncientExcavationEffect());
 
         // Basic landcycling {2}
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private AncientExcavation(final AncientExcavation card) {
@@ -48,7 +48,7 @@ class AncientExcavationEffect extends OneShotEffect {
         staticText = "Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way";
     }
 
-    public AncientExcavationEffect(final AncientExcavationEffect effect) {
+    private AncientExcavationEffect(final AncientExcavationEffect effect) {
         super(effect);
     }
 

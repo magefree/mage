@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SoldierToken;
 
@@ -41,7 +41,7 @@ public final class StormfrontRiders extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Stormfront Riders enters the battlefield, return two creatures you control to their owner's hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent("creatures you control"), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, 2)));
         // Whenever Stormfront Riders or another creature is returned to your hand from the battlefield, create a 1/1 white Soldier creature token.
         this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND, new CreateTokenEffect(new SoldierToken()),
                 filter, "Whenever {this} or another creature is returned to your hand from the battlefield, ", false));

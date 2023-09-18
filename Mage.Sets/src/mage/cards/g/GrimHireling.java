@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
@@ -39,7 +39,7 @@ public final class GrimHireling extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever one or more creatures you control deal combat damage to a player, create two Treasure tokens.
-        this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken(), 2)
         ));
 

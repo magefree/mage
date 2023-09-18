@@ -68,7 +68,7 @@ class ChromeMoxEffect extends OneShotEffect {
         staticText = "exile a nonartifact, nonland card from your hand";
     }
 
-    public ChromeMoxEffect(ChromeMoxEffect effect) {
+    private ChromeMoxEffect(final ChromeMoxEffect effect) {
         super(effect);
     }
 
@@ -78,10 +78,10 @@ class ChromeMoxEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Card cardToImprint = null;
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (!controller.getHand().isEmpty() && controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            if (!controller.getHand().isEmpty() && controller.choose(Outcome.Benefit, target, source, game)) {
                 cardToImprint = controller.getHand().get(target.getFirstTarget(), game);
             }
             if (sourcePermanent != null) {
@@ -113,7 +113,7 @@ class ChromeMoxManaEffect extends ManaEffect {
         staticText = "Add one mana of any of the exiled card's colors";
     }
 
-    ChromeMoxManaEffect(ChromeMoxManaEffect effect) {
+    private ChromeMoxManaEffect(final ChromeMoxManaEffect effect) {
         super(effect);
     }
 

@@ -28,7 +28,7 @@ public final class DecreeOfSavagery extends CardImpl {
         // Put four +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(4), new FilterControlledCreaturePermanent()));
         // Cycling {4}{G}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{4}{G}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{4}{G}{G}")));
         // When you cycle Decree of Savagery, you may put four +1/+1 counters on target creature.
         Ability ability = new CycleTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)), true);
         ability.addTarget(new TargetCreaturePermanent());

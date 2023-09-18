@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -14,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author spjspj
  */
 public final class KioraMasterOfTheDepthsEmblem extends Emblem {
@@ -22,14 +20,22 @@ public final class KioraMasterOfTheDepthsEmblem extends Emblem {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
     public KioraMasterOfTheDepthsEmblem() {
-        this.setName("Emblem Kiora");
+        super("Emblem Kiora");
 
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.COMMAND,
                 new KioraFightEffect(), filter, true, SetTargetPointer.PERMANENT,
                 "Whenever a creature enters the battlefield under your control, you may have it fight target creature.");
         ability.addTarget(new TargetCreaturePermanent());
         this.getAbilities().add(ability);
-        this.setExpansionSetCodeForImage("BFZ");
+    }
+
+    private KioraMasterOfTheDepthsEmblem(final KioraMasterOfTheDepthsEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public KioraMasterOfTheDepthsEmblem copy() {
+        return new KioraMasterOfTheDepthsEmblem(this);
     }
 }
 

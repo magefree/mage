@@ -37,7 +37,7 @@ public final class LabyrinthGuardian extends CardImpl {
         this.addAbility(new LabyrinthGuardianTriggeredAbility());
 
         // Embalm {3}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{U}"), this));
 
     }
 
@@ -57,7 +57,7 @@ class LabyrinthGuardianTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
     }
 
-    public LabyrinthGuardianTriggeredAbility(final LabyrinthGuardianTriggeredAbility ability) {
+    private LabyrinthGuardianTriggeredAbility(final LabyrinthGuardianTriggeredAbility ability) {
         super(ability);
     }
 

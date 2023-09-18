@@ -1,11 +1,25 @@
 package mage.constants;
 
 public enum SubTypeSet {
+    BattleType,
     CreatureType,
     SpellType,
-    BasicLandType,
-    NonBasicLandType,
+    BasicLandType(true),
+    NonBasicLandType(true),
     EnchantmentType,
     ArtifactType,
-    PlaneswalkerType
+    PlaneswalkerType;
+    private final boolean isLand;
+
+    SubTypeSet() {
+        this(false);
+    }
+
+    SubTypeSet(boolean isLand) {
+        this.isLand = isLand;
+    }
+
+    public boolean isLand() {
+        return isLand;
+    }
 }

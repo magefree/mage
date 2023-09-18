@@ -56,9 +56,10 @@ class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
     
     HotSoupTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
+        setTriggerPhrase("Whenever equipped creature is dealt damage, ");
     }
     
-    HotSoupTriggeredAbility(final HotSoupTriggeredAbility ability) {
+    private HotSoupTriggeredAbility(final HotSoupTriggeredAbility ability) {
         super(ability);
     }
     
@@ -82,10 +83,5 @@ class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-    
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature is dealt damage, " ;
     }
 }

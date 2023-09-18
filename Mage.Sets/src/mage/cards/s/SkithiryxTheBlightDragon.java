@@ -27,7 +27,7 @@ public final class SkithiryxTheBlightDragon extends CardImpl {
 
     public SkithiryxTheBlightDragon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SKELETON);
@@ -36,11 +36,11 @@ public final class SkithiryxTheBlightDragon extends CardImpl {
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}{B}")));
     }
 
-    public SkithiryxTheBlightDragon (final SkithiryxTheBlightDragon card) {
+    private SkithiryxTheBlightDragon(final SkithiryxTheBlightDragon card) {
         super(card);
     }
 

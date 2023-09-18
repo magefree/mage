@@ -20,7 +20,7 @@ public final class CrashingFootfalls extends CardImpl {
         this.color.setGreen(true);
 
         // Suspend 4—{G}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{G}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{G}"), this));
 
         // Create two 4/4 green Rhino creature tokens with trample.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RhinoToken(), 2));

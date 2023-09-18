@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.constants.AbilityType;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -14,6 +15,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -23,14 +25,17 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     protected boolean optional;
     protected boolean leavesTheBattlefieldTrigger;
-    private boolean triggersOnce = false;
+    private boolean triggersOnceEachTurn = false;
+    private boolean doOnlyOnceEachTurn = false;
+    protected boolean replaceRuleText = true;
     private GameEvent triggerEvent = null;
+    private String triggerPhrase = null;
 
-    public TriggeredAbilityImpl(Zone zone, Effect effect) {
+    protected TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
     }
 
-    public TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
+    protected TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
         super(AbilityType.TRIGGERED, zone);
         setLeavesTheBattlefieldTrigger(false);
         if (effect != null) {
@@ -39,18 +44,21 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.optional = optional;
 
         // verify check: DoIfCostPaid effect already asks about action (optional), so no needs to ask it again in triggered ability
-        if (effect instanceof DoIfCostPaid) {
-            if (this.optional && ((DoIfCostPaid) effect).isOptional()) {
-                throw new IllegalArgumentException("DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): " + this.getClass().getSimpleName());
-            }
+        if (effect instanceof DoIfCostPaid && (this.optional && ((DoIfCostPaid) effect).isOptional())) {
+            throw new IllegalArgumentException("DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): " + this.getClass().getSimpleName());
+
         }
     }
 
-    public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
+    protected TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
         super(ability);
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
-        this.triggersOnce = ability.triggersOnce;
+        this.triggersOnceEachTurn = ability.triggersOnceEachTurn;
+        this.doOnlyOnceEachTurn = ability.doOnlyOnceEachTurn;
+        this.replaceRuleText = ability.replaceRuleText;
+        this.triggerEvent = ability.triggerEvent;
+        this.triggerPhrase = ability.triggerPhrase;
     }
 
     @Override
@@ -62,13 +70,19 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
     }
 
-    private final void setLastTrigger(Game game) {
-        if (!triggersOnce) {
+    private void setLastTrigger(Game game) {
+        if (!triggersOnceEachTurn) {
             return;
         }
         game.getState().setValue(CardUtil.getCardZoneString(
                 "lastTurnTriggered" + originalId, sourceId, game
         ), game.getTurnNum());
+    }
+
+    @Override
+    public TriggeredAbilityImpl setTriggerPhrase(String triggerPhrase) {
+        this.triggerPhrase = triggerPhrase;
+        return this;
     }
 
     @Override
@@ -83,7 +97,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean checkTriggeredAlready(Game game) {
-        if (!triggersOnce) {
+        if (!triggersOnceEachTurn) {
             return true;
         }
         Integer lastTurnTriggered = (Integer) game.getState().getValue(
@@ -92,8 +106,33 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
     }
 
-    public TriggeredAbility setTriggersOnce(boolean triggersOnce) {
-        this.triggersOnce = triggersOnce;
+    @Override
+    public boolean checkUsedAlready(Game game) {
+        if (!doOnlyOnceEachTurn) {
+            return false;
+        }
+        Integer lastTurnUsed = (Integer) game.getState().getValue(
+                CardUtil.getCardZoneString("lastTurnUsed" + originalId, sourceId, game)
+        );
+        return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
+    }
+
+    @Override
+    public TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce) {
+        this.triggersOnceEachTurn = triggersOnce;
+        return this;
+    }
+
+    @Override
+    public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
+        this.optional = true;
+        this.doOnlyOnceEachTurn = doOnlyOnce;
+        return this;
+    }
+
+    @Override
+    public TriggeredAbility setReplaceRuleText(boolean replaceRuleText) {
+        this.replaceRuleText = replaceRuleText;
         return this;
     }
 
@@ -104,22 +143,31 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean resolve(Game game) {
+        if (!checkInterveningIfClause(game)) {
+            return false;
+        }
         if (isOptional()) {
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
-            if (player != null && object != null) {
-                if (!player.chooseUse(getEffects().getOutcome(this), this.getRule(object.getLogName()), this, game)) {
-                    return false;
-                }
-            } else {
+            if (player == null || object == null
+                    || (doOnlyOnceEachTurn && checkUsedAlready(game))
+                    || !player.chooseUse(
+                    getEffects().getOutcome(this),
+                    this.getRule(object.getLogName()), this, game
+            )) {
                 return false;
             }
         }
-        //20091005 - 603.4
-        if (checkInterveningIfClause(game)) {
-            return super.resolve(game);
+        if (doOnlyOnceEachTurn) {
+            game.getState().setValue(CardUtil.getCardZoneString(
+                    "lastTurnUsed" + originalId, sourceId, game
+            ), game.getTurnNum());
         }
-        return false;
+        //20091005 - 603.4
+        if (!super.resolve(game)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -140,8 +188,20 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public String getRule() {
-        String superRule = super.getRule(true);
         StringBuilder sb = new StringBuilder();
+        String prefix;
+        if (abilityWord != null) {
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
+        } else {
+            prefix = "";
+        }
+        sb.append(prefix);
+
+        sb.append(triggerPhrase == null ? "" : triggerPhrase);
+
+        String superRule = super.getRule(true);
         if (!superRule.isEmpty()) {
             String ruleLow = superRule.toLowerCase(Locale.ENGLISH);
             if (isOptional()) {
@@ -151,43 +211,60 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         newRule.insert(4, "may ");
                         superRule = newRule.toString();
                     }
-                } else if (this.getTargets().isEmpty()
-                        || ruleLow.startsWith("exile")
-                        || ruleLow.startsWith("destroy")
-                        || ruleLow.startsWith("return")
-                        || ruleLow.startsWith("tap")
-                        || ruleLow.startsWith("untap")
-                        || ruleLow.startsWith("put")
-                        || ruleLow.startsWith("remove")
-                        || ruleLow.startsWith("counter")
-                        || ruleLow.startsWith("exchange")
-                        || ruleLow.startsWith("goad")) {
+                } else if (!ruleLow.startsWith("{this}")
+                        && (this.getTargets().isEmpty()
+                        || startsWithVerb(ruleLow))) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
+                    superRule = superRule.replaceFirst(" (become|block|deal|discard|gain|get|lose|mill|sacrifice)s? ", " $1 ");
                 }
-
+            }
+            if (replaceRuleText
+                    && triggerPhrase != null
+                    && triggerPhrase.contains("{this}")
+                    && !triggerPhrase.contains("other")
+                    && !triggerPhrase.contains(" of a ")
+                    && !triggerPhrase.contains(" by a ")
+                    && !triggerPhrase.contains(" to a ")
+                    && !triggerPhrase.contains(" blocks a ")
+                    && (superRule.startsWith("{this}")
+                    || superRule.startsWith("sacrifice {this}")
+            )) {
+                superRule = superRule.replace("{this} ", "it ");
             }
             sb.append(superRule);
-            if (triggersOnce) {
+            if (triggersOnceEachTurn) {
                 sb.append(" This ability triggers only once each turn.");
             }
+            if (doOnlyOnceEachTurn) {
+                sb.append(" Do this only once each turn.");
+            }
         }
-        String prefix;
-        if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = "";
-        }
-
-        return prefix + getTriggerPhrase() + sb;
+        return sb.toString();
     }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "";
+    private static boolean startsWithVerb(String ruleLow) {
+        return ruleLow.startsWith("attach")
+                || ruleLow.startsWith("change")
+                || ruleLow.startsWith("counter")
+                || ruleLow.startsWith("destroy")
+                || ruleLow.startsWith("distribute")
+                || ruleLow.startsWith("sacrifice")
+                || ruleLow.startsWith("exchange")
+                || ruleLow.startsWith("exile")
+                || ruleLow.startsWith("gain")
+                || ruleLow.startsWith("goad")
+                || ruleLow.startsWith("have")
+                || ruleLow.startsWith("move")
+                || ruleLow.startsWith("prevent")
+                || ruleLow.startsWith("put")
+                || ruleLow.startsWith("remove")
+                || ruleLow.startsWith("return")
+                || ruleLow.startsWith("shuffle")
+                || ruleLow.startsWith("turn")
+                || ruleLow.startsWith("tap")
+                || ruleLow.startsWith("untap");
     }
 
     @Override
@@ -220,13 +297,16 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
          * latter triggers trigger from the game state after the move where the
          * Kozilek card is itself and has the ability.
          */
-        if (event == null || event.getTargetId() == null || !event.getTargetId().equals(getSourceId())) {
+
+        Set<UUID> eventTargets = CardUtil.getEventTargets(event);
+        if (!eventTargets.contains(getSourceId())) {
             return super.isInUseableZone(game, source, event);
         }
+
         switch (event.getType()) {
             case ZONE_CHANGE:
                 ZoneChangeEvent zce = (ZoneChangeEvent) event;
-                if (event.getTargetId().equals(getSourceId()) && !zce.getToZone().isPublicZone()) {
+                if (eventTargets.contains(getSourceId()) && !zce.getToZone().isPublicZone()) {
                     // If an ability triggers when the object that has it is put into a hidden zone from a graveyard,
                     // that ability triggers from the graveyard, (such as Golgari Brownscale),
                     // Yixlid Jailer will prevent that ability from triggering.
@@ -282,18 +362,52 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return optional;
     }
 
+    @Override
+    public TriggeredAbilityImpl setAbilityWord(AbilityWord abilityWord) {
+        super.setAbilityWord(abilityWord);
+        return this;
+    }
+
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
         // Get the source permanent of the ability 
         MageObject sourceObject = null;
         if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
             sourceObject = game.getPermanent(source.getSourceId());
         } else {
+            // TODO: multiple calls of ApplyEffects all around the code are breaking a short living lki idea
+            //  (PlayerImpl's call to move to battlefield do the worse thing)
+            //  -
+            //  Original idea: short living LKI must help to find a moment in the inner of resolve
+            //  -
+            //  Example:
+            //   --!---------------!-------------!-----!-----------!
+            //   - !     steps     !  perm zone  ! LKI ! short LKI !
+            //   --!---------------!-------------!-----!-----------!
+            //   - ! resolve start ! battlefield ! no  !   no      !
+            //   - ! step 1        ! battlefield ! no  !   no      ! permanent moving to graveyard by step's command
+            //   - ! step 2        !  graveyard  ! yes !   yes     ! other commands
+            //   - ! step 3        !  graveyard  ! yes !   yes     ! other commands
+            //   - ! raise triggers!  graveyard  ! yes !   yes     ! handle and put triggers that was raised in resolve steps
+            //   - ! resolve end   !  graveyard  ! yes !   no      !
+            //   - ! resolve next  !  graveyard  ! yes !   no      ! resolve next spell
+            //   - ! empty stack   !  graveyard  ! no  !   no      ! no more to resolve
+            //   --!---------------!-------------!-----!-----------!
+            //  -
+            //  - Problem 1: move code (well, not only move) calls ApplyEffects in the middle of the resolve
+            //  - and reset short LKI (after short LKI reset dies trigger will not work)
+            //  - Example: Goblin Welder calls sacrifice and card move in the same effect - but move call do
+            //  - a reset and dies trigger ignored (trigger thinks that permanent already dies)
+            //  -
+            //  - Possible fix:
+            //  - replace ApplyEffects in the move code by game.getState().processAction(game);
+            //  - check and fix many broken (is it was a false positive test or something broken)
+            //sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (game.getShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
                 sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }
         }
         if (sourceObject == null) { // source is no permanent
-            sourceObject = game.getObject(source.getSourceId());
+            sourceObject = game.getObject(source);
             if (sourceObject == null || sourceObject.isPermanent(game)) {
                 return false; // No source object found => ability is not valid
             }

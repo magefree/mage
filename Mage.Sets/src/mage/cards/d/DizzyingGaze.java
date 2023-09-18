@@ -45,11 +45,11 @@ public final class DizzyingGaze extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {R}: Enchanted creature deals 1 damage to target creature with flying.
-        Ability ability2 = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl("{R}"));
+        Ability ability2 = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
         ability2.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,

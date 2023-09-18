@@ -31,7 +31,7 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
         this.otherwiseEffect = otherwiseEffect;
     }
 
-    public ConditionalAsThoughEffect(final ConditionalAsThoughEffect effect) {
+    protected ConditionalAsThoughEffect(final ConditionalAsThoughEffect effect) {
         super(effect);
         this.effect = effect.effect.copy();
         if (effect.otherwiseEffect != null) {
@@ -66,6 +66,19 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
     }
 
     @Override
+    public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        conditionState = condition.apply(game, source);
+        if (conditionState) {
+            effect.setTargetPointer(this.targetPointer);
+            return effect.applies(sourceId, affectedAbility, source, game, playerId);
+        } else if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
+            return otherwiseEffect.applies(sourceId, affectedAbility, source, game, playerId);
+        }
+        return false;
+    }
+
+    @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         conditionState = condition.apply(game, source);
         if (conditionState) {
@@ -81,5 +94,10 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
     @Override
     public ConditionalAsThoughEffect copy() {
         return new ConditionalAsThoughEffect(this);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

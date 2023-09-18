@@ -31,7 +31,7 @@ public final class LagonnaBandElder extends CardImpl {
         // When Lagonna-Band Elder enters the battlefield, if you control an enchantment, you gain 3 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), false),
-                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
+                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When Lagonna-Band Elder enters the battlefield, if you control an enchantment, you gain 3 life");
         this.addAbility(ability);
     }

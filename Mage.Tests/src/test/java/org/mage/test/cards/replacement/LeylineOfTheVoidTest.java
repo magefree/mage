@@ -86,14 +86,15 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
          // Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card.
         addCard(Zone.BATTLEFIELD, playerB, "Deathreap Ritual");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite");
-                
+
+        setStrictChooseMode(true);
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Murder");
-        setChoice(playerA, "Memnite");
-        setChoice(playerB, "Yes");
-        
+        addTarget(playerA, "Memnite");
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        
+
         assertHandCount(playerB, 1); // card drawn for turn
         assertExileCount(playerB, 1);
         
@@ -116,14 +117,14 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         // Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card.
         addCard(Zone.BATTLEFIELD, playerB, "Deathreap Ritual");
         
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         
-        assertPermanentCount(playerA, "Eldrazi Spawn", 0);        
+        assertPermanentCount(playerA, "Eldrazi Spawn Token", 0);        
         assertExileCount(playerB, 0);
         assertHandCount(playerB, 1); 
     }

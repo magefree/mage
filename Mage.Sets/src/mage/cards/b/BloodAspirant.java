@@ -53,7 +53,7 @@ public final class BloodAspirant extends CardImpl {
 
         // {1}{R}, {T}, Sacrifice a creature or enchantment: Blood Aspirant deals 1 damage to target creature. That creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}")
+                new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

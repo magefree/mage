@@ -1,5 +1,3 @@
-
-
 package org.mage.test.cards.single.m20;
 
 import mage.constants.PhaseStep;
@@ -8,10 +6,8 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author jgray1206
  */
-
 public class AetherGustTest extends CardTestPlayerBase {
 
     /* Aether Gust - Instant {1}{U}
@@ -35,7 +31,7 @@ public class AetherGustTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, barkhide);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aetherGust, barkhide);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -44,7 +40,6 @@ public class AetherGustTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, aetherGust, 1);
         assertPermanentCount(playerA, barkhide, 0);
         assertLibraryCount(playerA, 1);
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -59,7 +54,7 @@ public class AetherGustTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, barkhide);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, aetherGust, barkhide);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -68,7 +63,5 @@ public class AetherGustTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, aetherGust, 1);
         assertPermanentCount(playerA, barkhide, 0);
         assertLibraryCount(playerA, 1);
-        assertAllCommandsUsed();
     }
-
 }

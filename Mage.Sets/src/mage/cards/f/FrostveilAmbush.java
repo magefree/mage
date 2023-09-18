@@ -25,7 +25,7 @@ public final class FrostveilAmbush extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Cycling {1}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private FrostveilAmbush(final FrostveilAmbush card) {

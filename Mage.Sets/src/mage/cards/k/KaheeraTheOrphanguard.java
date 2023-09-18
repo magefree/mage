@@ -43,7 +43,7 @@ public final class KaheeraTheOrphanguard extends CardImpl {
     public KaheeraTheOrphanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/W}{G/W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
@@ -80,7 +80,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
 
     @Override
     public String getRule() {
-        return "Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur or Beast card.";
+        return "Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur, or Beast card.";
     }
 
     private static final List<SubType> subtypes = Arrays.asList(
@@ -96,7 +96,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck.stream()
                 .filter(card -> card.hasCardTypeForDeckbuilding(CardType.CREATURE))
                 .allMatch(KaheeraTheOrphanguardCompanionCondition::isCardLegal);

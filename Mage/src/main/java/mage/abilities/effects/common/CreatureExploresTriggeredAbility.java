@@ -11,9 +11,10 @@ public class CreatureExploresTriggeredAbility extends TriggeredAbilityImpl {
 
     public CreatureExploresTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a creature you control explores, ");
     }
 
-    public CreatureExploresTriggeredAbility(final CreatureExploresTriggeredAbility effect) {
+    protected CreatureExploresTriggeredAbility(final CreatureExploresTriggeredAbility effect) {
         super(effect);
     }
 
@@ -34,10 +35,5 @@ public class CreatureExploresTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CreatureExploresTriggeredAbility copy() {
         return new CreatureExploresTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control explores, " ;
     }
 }

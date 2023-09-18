@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.Ability;
@@ -37,7 +36,7 @@ public final class TrespassersCurse extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever a creature enters the battlefield under enchanted player's control, that player loses 1 life and you gain 1 life.
@@ -58,9 +57,10 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
     public TrespassersCurseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrespassersCurseEffect(), false); // false because handled in effect
+        setTriggerPhrase("Whenever a creature enters the battlefield under enchanted player's control, ");
     }
 
-    public TrespassersCurseTriggeredAbility(final TrespassersCurseTriggeredAbility ability) {
+    private TrespassersCurseTriggeredAbility(final TrespassersCurseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,7 +77,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
                 && game.getControllerId(event.getTargetId()).equals(enchantment.getAttachedTo())
                 && game.getPermanent(event.getTargetId()).isCreature(game)) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
             }
             return true;
         }
@@ -85,15 +85,9 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature enters the battlefield under enchanted player's control, " ;
-    }
-
-    @Override
     public TrespassersCurseTriggeredAbility copy() {
         return new TrespassersCurseTriggeredAbility(this);
     }
-
 }
 
 class TrespassersCurseEffect extends OneShotEffect {
@@ -103,7 +97,7 @@ class TrespassersCurseEffect extends OneShotEffect {
         this.staticText = "that player loses 1 life and you gain 1 life.";
     }
 
-    public TrespassersCurseEffect(final TrespassersCurseEffect effect) {
+    private TrespassersCurseEffect(final TrespassersCurseEffect effect) {
         super(effect);
     }
 

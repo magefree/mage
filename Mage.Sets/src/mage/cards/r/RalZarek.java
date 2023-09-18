@@ -4,7 +4,6 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -39,10 +38,10 @@ public final class RalZarek extends CardImpl {
 
     public RalZarek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Tap target permanent, then untap another target permanent.
         LoyaltyAbility ability1 = new LoyaltyAbility(new TapTargetEffect(), 1);
@@ -85,7 +84,7 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
         this.staticText = "Flip five coins. Take an extra turn after this one for each coin that comes up heads";
     }
 
-    public RalZarekExtraTurnsEffect(final RalZarekExtraTurnsEffect effect) {
+    private RalZarekExtraTurnsEffect(final RalZarekExtraTurnsEffect effect) {
         super(effect);
     }
 
@@ -100,7 +99,7 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
         if (controller != null) {
             for (int i = 0; i < 5; i++) {
                 if (controller.flipCoin(source, game, false)) {
-                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
                 }
             }
             return true;

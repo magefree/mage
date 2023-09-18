@@ -28,7 +28,7 @@ public final class WallOfBone extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private WallOfBone(final WallOfBone card) {

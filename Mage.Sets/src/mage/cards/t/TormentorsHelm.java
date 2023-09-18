@@ -68,7 +68,7 @@ class TormentorsHelmTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
     }
 
     @Override
@@ -79,7 +79,7 @@ class TormentorsHelmTriggeredAbility extends TriggeredAbilityImpl {
             if (creature != null && creature.getId().equals(event.getTargetId())) {
                 this.getEffects().clear();
                 TormentorsHelmEffect effect = new TormentorsHelmEffect(creature.getId());
-                effect.setTargetPointer(new FixedTarget(event.getPlayerId(), game));
+                effect.setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(creature.getId(), game)));
                 this.addEffect(effect);
                 return true;
             }

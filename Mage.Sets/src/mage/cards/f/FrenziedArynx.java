@@ -36,7 +36,7 @@ public final class FrenziedArynx extends CardImpl {
         // {4}{R}{G}: Frenzied Arynx gets +3/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(3, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{4}{R}{G}")
+                new ManaCostsImpl<>("{4}{R}{G}")
         ));
     }
 

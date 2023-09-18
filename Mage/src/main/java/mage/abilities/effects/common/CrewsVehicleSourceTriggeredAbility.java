@@ -2,7 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.icon.abilities.CrewAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -12,10 +12,11 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public CrewsVehicleSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        this.addIcon(CrewAbilityIcon.instance);
+        this.addIcon(CardIconImpl.ABILITY_CREW);
+        setTriggerPhrase("Whenever {this} crews a Vehicle, ");
     }
 
-    public CrewsVehicleSourceTriggeredAbility(final CrewsVehicleSourceTriggeredAbility ability) {
+    protected CrewsVehicleSourceTriggeredAbility(final CrewsVehicleSourceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -34,15 +35,10 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(getSourceId())) {
             for (Effect effect : getEffects()) {
                 // set the vehicle id as target
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
             }
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} crews a Vehicle, " ;
     }
 }

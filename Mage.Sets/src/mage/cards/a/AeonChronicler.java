@@ -9,18 +9,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -36,10 +34,10 @@ public final class AeonChronicler extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Aeon Chronicler's power and toughness are each equal to the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.instance)));
         
         // Suspend X-{X}{3}{U}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{3}{U}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{3}{U}"), this, true));
         
         // Whenever a time counter is removed from Aeon Chronicler while it's exiled, draw a card.
         this.addAbility(new AeonChroniclerTriggeredAbility());
@@ -59,9 +57,10 @@ class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
     public AeonChroniclerTriggeredAbility() {
         super(Zone.EXILED, new DrawCardSourceControllerEffect(1), false);
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, " );
     }
 
-    public AeonChroniclerTriggeredAbility(final AeonChroniclerTriggeredAbility ability) {
+    private AeonChroniclerTriggeredAbility(final AeonChroniclerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -79,10 +78,4 @@ class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return Objects.equals(event.getData(), CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }

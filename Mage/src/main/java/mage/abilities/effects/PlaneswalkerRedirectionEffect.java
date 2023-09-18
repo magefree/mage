@@ -3,6 +3,7 @@ package mage.abilities.effects;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -10,7 +11,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -29,7 +29,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
         super(Duration.EndOfGame);
     }
 
-    public PlaneswalkerRedirectionEffect(final PlaneswalkerRedirectionEffect effect) {
+    protected PlaneswalkerRedirectionEffect(final PlaneswalkerRedirectionEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
                             redirectTarget.add(planeswalker.get(0).getId(), game);
                         }
                     } else {
-                        player.choose(Outcome.Damage, redirectTarget, null, game);
+                        player.choose(Outcome.Damage, redirectTarget, source, game);
                     }
                     if (!game.isSimulation()) {
                         Permanent redirectTo = game.getPermanent(redirectTarget.getFirstTarget());

@@ -18,10 +18,9 @@ public class EnterAttributeAddChosenSubtypeEffect extends OneShotEffect {
 
     public EnterAttributeAddChosenSubtypeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} is the chosen type in addition to its other types";
     }
 
-    public EnterAttributeAddChosenSubtypeEffect(final EnterAttributeAddChosenSubtypeEffect effect) {
+    protected EnterAttributeAddChosenSubtypeEffect(final EnterAttributeAddChosenSubtypeEffect effect) {
         super(effect);
     }
 

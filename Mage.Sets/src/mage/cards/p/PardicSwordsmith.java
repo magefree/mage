@@ -29,7 +29,7 @@ public final class PardicSwordsmith extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Discard a card at random: Pardic Swordsmith gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addCost(new DiscardCardCost(true));
         this.addAbility(ability);
     }

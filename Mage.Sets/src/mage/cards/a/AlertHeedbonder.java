@@ -44,7 +44,9 @@ public final class AlertHeedbonder extends CardImpl {
 
         // At the beginning of your end step, you gain 1 life for each creature you control with vigilance.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GainLifeEffect(xValue), TargetController.YOU, false
+                new GainLifeEffect(xValue)
+                        .setText("you gain 1 life for each creature you control with vigilance"),
+                TargetController.YOU, false
         ));
     }
 

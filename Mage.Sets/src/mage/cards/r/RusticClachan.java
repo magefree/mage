@@ -36,7 +36,7 @@ public final class RusticClachan extends CardImpl {
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         // Reinforce 1-{1}{W}
-        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl<>("{1}{W}")));
     }
 
     private RusticClachan(final RusticClachan card) {

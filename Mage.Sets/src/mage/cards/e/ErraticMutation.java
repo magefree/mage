@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -51,7 +50,7 @@ class ErraticMutationEffect extends OneShotEffect {
         this.staticText = "Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's mana value. Put all cards revealed this way on the bottom of your library in any order";
     }
 
-    public ErraticMutationEffect(final ErraticMutationEffect effect) {
+    private ErraticMutationEffect(final ErraticMutationEffect effect) {
         super(effect);
     }
 
@@ -63,7 +62,7 @@ class ErraticMutationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             CardsImpl toReveal = new CardsImpl();
             Card nonLandCard = null;
@@ -82,7 +81,7 @@ class ErraticMutationEffect extends OneShotEffect {
                 int boostValue = nonLandCard.getManaValue();
                 // unboost target
                 ContinuousEffect effect = new BoostTargetEffect(boostValue, -boostValue, Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
+                effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source), game));
                 game.addEffect(effect, source);
             }
             // put the cards on the bottom of the library in any order

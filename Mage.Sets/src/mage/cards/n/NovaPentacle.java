@@ -57,7 +57,7 @@ class NovaPentacleEffect extends RedirectionEffect {
         this.damageSource = new TargetSource();
     }
 
-    public NovaPentacleEffect(final NovaPentacleEffect effect) {
+    private NovaPentacleEffect(final NovaPentacleEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }
@@ -69,7 +69,7 @@ class NovaPentacleEffect extends RedirectionEffect {
 
     @Override
     public void init(Ability source, Game game) {
-        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }
 

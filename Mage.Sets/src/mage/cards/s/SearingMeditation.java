@@ -21,9 +21,8 @@ public final class SearingMeditation extends CardImpl {
     public SearingMeditation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{W}");
 
-
         // Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to any target.
-        Ability ability = new GainLifeControllerTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), false, true);
+        Ability ability = new GainLifeControllerTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), false, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

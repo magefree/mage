@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -25,7 +26,7 @@ import java.util.UUID;
  */
 public final class PrecognitionField extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("cast instant or sorcery spells");
+    private static final FilterCard filter = new FilterCard("cast instant and sorcery spells");
 
     static {
         filter.add(Predicates.or(
@@ -41,7 +42,7 @@ public final class PrecognitionField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast instant and sorcery spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
 
         // {3}: Exile the top card of your library.
         this.addAbility(new SimpleActivatedAbility(new PrecognitionFieldExileEffect(), new GenericManaCost(3)));
@@ -64,7 +65,7 @@ class PrecognitionFieldExileEffect extends OneShotEffect {
         staticText = "exile the top card of your library";
     }
 
-    public PrecognitionFieldExileEffect(final PrecognitionFieldExileEffect effect) {
+    private PrecognitionFieldExileEffect(final PrecognitionFieldExileEffect effect) {
         super(effect);
     }
 

@@ -27,7 +27,7 @@ public class HellkiteCourserTest extends CardTestCommanderDuelBase {
 
         // cast card and move commander to battle
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hellkite Courser");
-        setChoice(playerA, "Yes"); // put commander to battlefield
+        setChoice(playerA, true); // put commander to battlefield
         setChoice(playerA, "Balduvian Bears");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after etb", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
@@ -45,6 +45,5 @@ public class HellkiteCourserTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

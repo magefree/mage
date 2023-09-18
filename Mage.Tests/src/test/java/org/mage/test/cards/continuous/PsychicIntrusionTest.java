@@ -36,7 +36,6 @@ public class PsychicIntrusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Psychic Intrusion", 1);
         assertHandCount(playerB, "Elspeth, Sun's Champion", 0);

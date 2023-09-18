@@ -1,25 +1,20 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -29,8 +24,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MerchantsDockhand extends CardImpl {
@@ -66,7 +62,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
         this.staticText = "Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
     }
 
-    public MerchantsDockhandEffect(final MerchantsDockhandEffect effect) {
+    private MerchantsDockhandEffect(final MerchantsDockhandEffect effect) {
         super(effect);
     }
 
@@ -78,7 +74,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
@@ -96,7 +92,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
 
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
@@ -118,11 +114,11 @@ class TapXTargetCost extends VariableCostImpl {
     }
 
     public TapXTargetCost() {
-        super("controlled untapped artifacts you would like to tap");
+        super(VariableCostType.NORMAL, "controlled untapped artifacts you would like to tap");
         this.text = "Tap X untapped artifacts you control";
     }
 
-    public TapXTargetCost(final TapXTargetCost cost) {
+    private TapXTargetCost(final TapXTargetCost cost) {
         super(cost);
     }
 
@@ -133,7 +129,7 @@ class TapXTargetCost extends VariableCostImpl {
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        return game.getBattlefield().count(filter, source.getControllerId(), source, game);
     }
 
     @Override

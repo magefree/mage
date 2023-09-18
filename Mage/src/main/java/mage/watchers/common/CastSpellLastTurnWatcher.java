@@ -16,6 +16,8 @@ public class CastSpellLastTurnWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<>();
     private final Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<>();
     private final List<MageObjectReference> spellsCastThisTurnInOrder = new ArrayList<>();
+    private int activePlayerPrevTurnCount = 0;
+    private int activePlayerThisTurnCount = 0;
 
     public CastSpellLastTurnWatcher() {
         super(WatcherScope.GAME);
@@ -29,7 +31,9 @@ public class CastSpellLastTurnWatcher extends Watcher {
             if (playerId != null) {
                 amountOfSpellsCastOnCurrentTurn.putIfAbsent(playerId, 0);
                 amountOfSpellsCastOnCurrentTurn.compute(playerId, (k, a) -> a + 1);
-
+            }
+            if (game.isActivePlayer(playerId)) {
+                activePlayerThisTurnCount++;
             }
         }
     }
@@ -41,6 +45,8 @@ public class CastSpellLastTurnWatcher extends Watcher {
         amountOfSpellsCastOnPrevTurn.putAll(amountOfSpellsCastOnCurrentTurn);
         amountOfSpellsCastOnCurrentTurn.clear();
         spellsCastThisTurnInOrder.clear();
+        activePlayerPrevTurnCount = activePlayerThisTurnCount;
+        activePlayerThisTurnCount = 0;
     }
 
     public Map<UUID, Integer> getAmountOfSpellsCastOnPrevTurn() {
@@ -68,5 +74,13 @@ public class CastSpellLastTurnWatcher extends Watcher {
             }
         }
         return 0;
+    }
+
+    public int getActivePlayerPrevTurnCount() {
+        return activePlayerPrevTurnCount;
+    }
+
+    public int getActivePlayerThisTurnCount() {
+        return activePlayerThisTurnCount;
     }
 }

@@ -39,7 +39,7 @@ public final class HeartPiercerManticore extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HeartPiercerManticoreSacrificeEffect(), true));
 
         // Embalm {5}{R}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{R}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{5}{R}"), this));
     }
 
     private HeartPiercerManticore(final HeartPiercerManticore card) {
@@ -78,7 +78,7 @@ class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
         Target target = new TargetControlledCreaturePermanent(
                 1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
         );
-        if (!controller.choose(outcome, target, source.getSourceId(), game)) {
+        if (!controller.choose(outcome, target, source, game)) {
             return false;
         }
         Permanent toSacrifice = game.getPermanent(target.getFirstTarget());

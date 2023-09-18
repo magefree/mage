@@ -42,7 +42,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
 
     public KozilekTheGreatDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{C}{C}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
@@ -53,7 +53,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
                 new CardsInHandCondition(ComparisonType.FEWER_THAN, 7),
                 "When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference."));
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Discard a card with converted mana cost X: Counter target spell with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new KozilekDiscardCost());
@@ -78,7 +78,7 @@ class KozilekDrawEffect extends OneShotEffect {
         this.staticText = "if you have fewer than seven cards in hand, draw cards equal to the difference";
     }
 
-    public KozilekDrawEffect(final KozilekDrawEffect effect) {
+    private KozilekDrawEffect(final KozilekDrawEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class KozilekDiscardCost extends CostImpl {
         this.text = "discard a card with mana value X";
     }
 
-    public KozilekDiscardCost(final KozilekDiscardCost cost) {
+    private KozilekDiscardCost(final KozilekDiscardCost cost) {
         super(cost);
     }
 
@@ -123,7 +123,7 @@ class KozilekDiscardCost extends CostImpl {
         TargetCardInHand target = new TargetCardInHand(filter);
         this.getTargets().clear();
         this.getTargets().add(target);
-        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null) {
@@ -134,12 +134,6 @@ class KozilekDiscardCost extends CostImpl {
             }
         }
         return paid;
-    }
-
-    @Override
-    public void clearPaid() {
-        super.clearPaid();
-        this.targets.clearChosen();
     }
 
     @Override

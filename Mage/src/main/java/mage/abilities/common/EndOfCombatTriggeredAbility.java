@@ -20,9 +20,10 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     public EndOfCombatTriggeredAbility(Effect effect, boolean optional, String rule) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.rule = rule;
+        setTriggerPhrase("At end of combat, ");
     }
 
-    public EndOfCombatTriggeredAbility(final EndOfCombatTriggeredAbility ability) {
+    protected EndOfCombatTriggeredAbility(final EndOfCombatTriggeredAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }
@@ -40,11 +41,6 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At end of combat, ";
     }
 
     @Override

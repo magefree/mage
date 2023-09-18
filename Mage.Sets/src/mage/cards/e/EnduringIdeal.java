@@ -50,7 +50,7 @@ class EnduringIdealEffect extends OneShotEffect {
         staticText = "Search your library for an enchantment card, put it onto the battlefield, then shuffle";
     }
 
-    public EnduringIdealEffect(final EnduringIdealEffect effect) {
+    private EnduringIdealEffect(final EnduringIdealEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class EnduringIdealEffect extends OneShotEffect {
         boolean applied = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_ENTCHANTMENT);
+            TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_ENCHANTMENT);
             controller.searchLibrary(target, source, game);
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard == null) {

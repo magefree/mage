@@ -30,7 +30,7 @@ public final class IkiralOutrider extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{4}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{4}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(VigilanceAbility.getInstance());
@@ -45,7 +45,7 @@ public final class IkiralOutrider extends LevelerCard {
         setMaxLevelCounters(4);
     }
 
-    public IkiralOutrider (final IkiralOutrider card) {
+    private IkiralOutrider(final IkiralOutrider card) {
         super(card);
     }
 

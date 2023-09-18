@@ -20,7 +20,7 @@ public final class CopyEnchantment extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // You may have Copy Enchantment enter the battlefield as a copy of any enchantment on the battlefield.
-        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT), true));
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_ENCHANTMENT), true));
     }
 
     private CopyEnchantment(final CopyEnchantment card) {

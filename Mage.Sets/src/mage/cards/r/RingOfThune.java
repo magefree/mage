@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -8,7 +7,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -21,12 +21,12 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author awjackson
  */
 public final class RingOfThune extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
@@ -36,13 +36,16 @@ public final class RingOfThune extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
+
         // At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white.
-        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), TargetController.YOU, false);
-        ConditionalInterveningIfTriggeredAbility ability = new ConditionalInterveningIfTriggeredAbility(triggeredAbility, new AttachedToMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white.");
-        this.addAbility(ability);
-        
+        Effect effect = new ConditionalOneShotEffect(
+                new AddPlusOneCountersAttachedEffect(1),
+                new AttachedToMatchesFilterCondition(filter),
+                "put a +1/+1 counter on equipped creature if it's white"
+        );
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
+
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }

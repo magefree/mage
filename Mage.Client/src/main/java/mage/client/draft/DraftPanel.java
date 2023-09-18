@@ -62,10 +62,13 @@
      private List<String> setCodes;
 
      // Number of the current booster (for draft log writing).
-     private int packNo;
+     private int packNo = 1;
 
      // Number of the current card pick (for draft log writing).
-     private int pickNo;
+     private int pickNo = 1;
+     
+     // Number of the latest card pick for which the timeout has been set.
+     private int timeoutPickNo = 0;
 
      // Cached booster data to be written into the log (see logLastPick).
      private String[] currentBooster;
@@ -146,7 +149,7 @@
 
      public void updateDraft(DraftView draftView) {
          if (draftView.getSets().size() != 3) {
-             // Random draft
+             // Random draft - TODO: can we access the type of draft here?
              this.txtPack1.setText("Random Boosters");
              this.txtPack2.setText("Random Boosters");
              this.txtPack3.setText("Random Boosters");
@@ -155,9 +158,9 @@
              this.txtPack2.setText(draftView.getSets().get(1));
              this.txtPack3.setText(draftView.getSets().get(2));
          }
-         this.chkPack1.setSelected(draftView.getBoosterNum() > 0);
-         this.chkPack2.setSelected(draftView.getBoosterNum() > 1);
-         this.chkPack3.setSelected(draftView.getBoosterNum() > 2);
+         this.chkPack1.setSelected(draftView.getBoosterNum() > 1);
+         this.chkPack2.setSelected(draftView.getBoosterNum() > 2);
+         this.chkPack3.setSelected(draftView.getBoosterNum() > 3);
          this.txtCardNo.setText(Integer.toString(draftView.getCardNum()));
 
          packNo = draftView.getBoosterNum();
@@ -169,7 +172,8 @@
          int left = draftView.getPlayers().size() - right;
          int height = left * 18;
          lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
-         Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() == 2 ? "/draft/table_left.png" : "/draft/table_right.png");
+         // TODO: Can we fix this for Rich Draft where there is no direction?
+         Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() % 2 == 1 ? "/draft/table_left.png" : "/draft/table_right.png");
          BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth(), lblTableImage.getHeight());
          lblTableImage.setIcon(new ImageIcon(resizedTable));
 
@@ -294,12 +298,20 @@
              MageTray.instance.displayMessage("Pick the next card.");
              MageTray.instance.blink();
          }
-
-         countdown.stop();
-         this.timeout = draftPickView.getTimeout();
-         setTimeout(timeout);
-         if (timeout != 0) {
-             countdown.start();
+         
+         int newTimeout = draftPickView.getTimeout();
+         if (pickNo != timeoutPickNo || newTimeout < timeout) { // if the timeout would increase the current pick's timer, don't set it (might happen if the client or server is lagging)
+             timeoutPickNo = pickNo;
+             countdown.stop();
+             timeout = newTimeout;
+             setTimeout(timeout);
+             if (timeout != 0) {
+                 countdown.start();
+             }
+         }
+         
+         if (!draftBooster.isEmptyGrid()) {
+            SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
          }
      }
 
@@ -414,7 +426,7 @@
          if (currentBooster != null) {
              String lastPick = getCardName(getLastPick(pickView.getPicks().values()));
              if (lastPick != null && currentBooster.length > 1) {
-                 draftLogger.logPick(getCurrentSetCode(), packNo, pickNo - 1, lastPick, currentBooster);
+                 draftLogger.logPick(getCurrentSetCode(), packNo, pickNo - 1, lastPick, currentBooster); // wtf pickno need -1?
              }
              currentBooster = null;
          }
@@ -425,10 +437,11 @@
      }
 
      private String getCurrentSetCode() {
-         if (!setCodes.isEmpty()) {
+         // TODO: Record set codes for random drafts correctly
+         if (setCodes.size() >= packNo) {
              return setCodes.get(packNo - 1);
          } else {
-             return "";
+             return "   ";
          }
      }
 
@@ -520,6 +533,7 @@
          draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
          btnQuitTournament.setText("Quit Tournament");
+         btnQuitTournament.setFocusable(false);
          btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
          lblPack1.setText("Pack 1:");

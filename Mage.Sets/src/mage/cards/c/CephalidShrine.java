@@ -50,7 +50,7 @@ class CephalidShrineTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CephalidShrineEffect(), false);
     }
 
-    public CephalidShrineTriggeredAbility(final CephalidShrineTriggeredAbility ability) {
+    private CephalidShrineTriggeredAbility(final CephalidShrineTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,14 +88,14 @@ class CephalidShrineEffect extends OneShotEffect {
                 + "as the spell";
     }
 
-    public CephalidShrineEffect(final CephalidShrineEffect effect) {
+    private CephalidShrineEffect(final CephalidShrineEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         int count = 0;
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             Spell spell = (Spell) game.getState().getValue("cephalidShrine" + mageObject);
             if (spell != null) {

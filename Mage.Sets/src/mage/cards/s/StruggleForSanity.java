@@ -50,7 +50,7 @@ class StruggleForSanityEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards they exiled this way to their hand and puts the rest into their graveyard";
     }
 
-    public StruggleForSanityEffect(final StruggleForSanityEffect effect) {
+    private StruggleForSanityEffect(final StruggleForSanityEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class StruggleForSanityEffect extends OneShotEffect {
         TargetCard target = new TargetCard(Zone.HAND, new FilterCard("a card to exile"));
         while (!cardsLeft.isEmpty()) {
             if (opponentsChoice) {
-                targetPlayer.choose(Outcome.ReturnToHand, cardsLeft, target, game);
+                targetPlayer.choose(Outcome.ReturnToHand, cardsLeft, target, source, game);
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     exiledByOpponent.add(card);
@@ -86,7 +86,7 @@ class StruggleForSanityEffect extends OneShotEffect {
                     targetPlayer.moveCardsToExile(card, source, game, true, exileZoneOpponent, sourceObject.getIdName() + " exiled by " + targetPlayer.getName());
                 }
             } else {
-                controller.choose(Outcome.Discard, cardsLeft, target, game);
+                controller.choose(Outcome.Discard, cardsLeft, target, source, game);
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     exiledByController.add(card);

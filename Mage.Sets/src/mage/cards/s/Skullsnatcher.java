@@ -43,7 +43,7 @@ public final class Skullsnatcher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Ninjutsu {B} ({B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{B")));
+        this.addAbility(new NinjutsuAbility("{B}"));
         
         // Whenever Skullsnatcher deals combat damage to a player, exile up to two target cards from that player's graveyard.
         Effect effect = new ExileTargetEffect(null, "", Zone.GRAVEYARD);
@@ -65,9 +65,10 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
 
     SkullsnatcherTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
     }
 
-    SkullsnatcherTriggeredAbility(final SkullsnatcherTriggeredAbility ability) {
+    private SkullsnatcherTriggeredAbility(final SkullsnatcherTriggeredAbility ability) {
         super(ability);
     }
 
@@ -95,9 +96,4 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage to a player, " ;
-   }
 }

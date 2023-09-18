@@ -55,7 +55,7 @@ class BoostEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    BoostEffect(final BoostEffect effect) {
+    private BoostEffect(final BoostEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -68,7 +68,7 @@ class BoostEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ContinuousEffect effect = new BoostTargetEffect(amount, amount, Duration.EndOfTurn);
-        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+        effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         game.addEffect(effect, source);
         return true;
     }

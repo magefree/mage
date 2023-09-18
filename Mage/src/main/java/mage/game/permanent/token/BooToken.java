@@ -20,6 +20,7 @@ public final class BooToken extends TokenImpl {
         subtype.add(SubType.HAMSTER);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
     }

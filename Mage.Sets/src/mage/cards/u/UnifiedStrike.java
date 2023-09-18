@@ -53,7 +53,7 @@ class UnifiedStrikeEffect extends OneShotEffect {
         this.staticText = "Exile target attacking creature if its power is less than or equal to the number of Soldiers on the battlefield";
     }
 
-    UnifiedStrikeEffect(final UnifiedStrikeEffect effect) {
+    private UnifiedStrikeEffect(final UnifiedStrikeEffect effect) {
         super(effect);
     }
 
@@ -73,8 +73,7 @@ class UnifiedStrikeEffect extends OneShotEffect {
                 .getActivePermanents(
                         filter,
                         source.getControllerId(),
-                        source.getSourceId(),
-                        game
+                        source, game
                 ).size();
         boolean successful = creature.getPower().getValue() <= soldierCount;
         if (successful) {

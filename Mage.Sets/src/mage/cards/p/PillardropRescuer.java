@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -21,8 +21,8 @@ import java.util.UUID;
  */
 public final class PillardropRescuer extends CardImpl {
 
-    private static final FilterCard filter
-            = new FilterCard("creature card with mana value 3 or less from your graveyard");
+    private static final FilterCreatureCard filter
+            = new FilterCreatureCard("creature card with mana value 3 or less from your graveyard");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));

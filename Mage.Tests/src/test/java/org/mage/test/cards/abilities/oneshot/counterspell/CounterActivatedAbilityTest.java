@@ -38,7 +38,7 @@ public class CounterActivatedAbilityTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerB, "Squelch", 1);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
 
     }
 

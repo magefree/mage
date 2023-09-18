@@ -28,7 +28,7 @@ public final class FrozenShade extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Frozen Shade gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private FrozenShade(final FrozenShade card) {

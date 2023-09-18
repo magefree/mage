@@ -24,7 +24,7 @@ public class ChooseLandTypeEffect extends OneShotEffect {
         staticText = "choose a land type";
     }
 
-    public ChooseLandTypeEffect(final ChooseLandTypeEffect effect) {
+    protected ChooseLandTypeEffect(final ChooseLandTypeEffect effect) {
         super(effect);
     }
 
@@ -33,7 +33,7 @@ public class ChooseLandTypeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         if (controller != null && mageObject != null) {
             Choice typeChoice = new ChoiceImpl(true);

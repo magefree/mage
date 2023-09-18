@@ -29,7 +29,7 @@ public final class GolgothianSylex extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {1}, {tap}: Each nontoken permanent from the Antiquities expansion is sacrificed by its controller.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GolgothianSylexEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GolgothianSylexEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());  
         this.addAbility(ability);
     }
@@ -51,7 +51,7 @@ class GolgothianSylexEffect extends OneShotEffect {
     static {
         filter.add(Predicates.and(
                 new ExpansionSetPredicate("ATQ"),
-                Predicates.not(TokenPredicate.instance)
+                TokenPredicate.FALSE
         ));
     }
 
@@ -60,7 +60,7 @@ class GolgothianSylexEffect extends OneShotEffect {
         this.staticText = "Each nontoken permanent from the Antiquities expansion is sacrificed by its controller.";
     }
 
-    public GolgothianSylexEffect(final GolgothianSylexEffect effect) {
+    private GolgothianSylexEffect(final GolgothianSylexEffect effect) {
         super(effect);
     }
 

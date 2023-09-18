@@ -64,14 +64,14 @@ class ButcherOfTheHordeEffect extends OneShotEffect {
         staticText = "{this} gains your choice of vigilance, lifelink, or haste until end of turn";
     }
 
-    ButcherOfTheHordeEffect(final ButcherOfTheHordeEffect effect) {
+    private ButcherOfTheHordeEffect(final ButcherOfTheHordeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Choice abilityChoice = new ChoiceImpl();
             abilityChoice.setMessage("Choose an ability to add");

@@ -11,7 +11,7 @@ import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -68,7 +67,7 @@ class NamelessRaceEffect extends OneShotEffect {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter2.add(new ColorPredicate(ObjectColor.WHITE));
         filter2.add(TargetController.OPPONENT.getOwnerPredicate());
@@ -108,8 +107,8 @@ class NamelessRaceEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         game.informPlayers((sourceCard != null ? sourceCard.getLogName() : "") + ": " + controller.getLogName() +
                 " pays " + payAmount + " life");
-        game.addEffect(new SetPowerToughnessSourceEffect(
-                payAmount, payAmount, Duration.Custom, SubLayer.CharacteristicDefining_7a
+        game.addEffect(new SetBasePowerToughnessSourceEffect(
+                payAmount, payAmount, Duration.Custom
         ), source);
         permanent.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
         return true;

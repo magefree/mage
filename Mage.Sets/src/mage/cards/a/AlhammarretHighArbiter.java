@@ -30,7 +30,7 @@ public final class AlhammarretHighArbiter extends CardImpl {
 
     public AlhammarretHighArbiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -60,7 +60,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
                 + "<br>Your opponents can't cast spells with the chosen name";
     }
 
-    public AlhammarretHighArbiterEffect(final AlhammarretHighArbiterEffect effect) {
+    private AlhammarretHighArbiterEffect(final AlhammarretHighArbiterEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
             controller.chooseTarget(Outcome.Benefit, revealedCards, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                game.informPlayers("The choosen card name is [" + GameLog.getColoredObjectName(card) + ']');
+                game.informPlayers("The chosen card name is [" + GameLog.getColoredObjectName(card) + ']');
                 Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
                 if (sourcePermanent == null) {
                     sourcePermanent = game.getPermanentEntering(source.getSourceId());
@@ -114,7 +114,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public AlhammarretHighArbiterCantCastEffect(final AlhammarretHighArbiterCantCastEffect effect) {
+    private AlhammarretHighArbiterCantCastEffect(final AlhammarretHighArbiterCantCastEffect effect) {
         super(effect);
         this.cardName = effect.cardName;
         this.zoneChangeCounter = effect.zoneChangeCounter;
@@ -138,7 +138,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You may not cast a card named " + cardName + " (" + mageObject.getIdName() + ").";
         }

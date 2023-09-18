@@ -17,8 +17,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.other.NumberOfTargetsPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -57,10 +57,10 @@ public final class Ricochet extends CardImpl {
     }
 }
 
-class SpellWithOnlyPlayerTargetsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Spell>> {
+class SpellWithOnlyPlayerTargetsPredicate implements ObjectSourcePlayerPredicate<Spell> {
 
     @Override
-    public boolean apply(ObjectPlayer<Spell> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
         Spell spell = input.getObject();
         if (spell == null) {
             return false;
@@ -84,7 +84,7 @@ class RicochetEffect extends OneShotEffect {
         staticText = "each player rolls a six-sided die. Change the target of that spell to the player with the lowest result. Reroll to break ties, if necessary";
     }
 
-    public RicochetEffect(final RicochetEffect effect) {
+    private RicochetEffect(final RicochetEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class RicochetEffect extends OneShotEffect {
             }
             do {
                 for (Player player : playerRolls.keySet()) {
-                    playerRolls.put(player, player.rollDice(source, game, 6));
+                    playerRolls.put(player, player.rollDice(Outcome.Detriment, source, game, 6)); // bad outcome - ai must choose lowest value
                 }
                 int minValueInMap = Collections.min(playerRolls.values());
                 for (Map.Entry<Player, Integer> mapEntry : new HashSet<>(playerRolls.entrySet())) {
@@ -142,7 +142,7 @@ class RicochetEffect extends OneShotEffect {
                     target.clearChosen();
                     target.addTarget(loserId, sourceAbility, game);
                 }
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 if (oldTargetName != null && sourceObject != null) {
                     game.informPlayers(sourceObject.getLogName() + ": Changed target of " + spell.getLogName() + " from " + oldTargetName + " to " + loser.getLogName());
                 }

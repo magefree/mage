@@ -41,7 +41,7 @@ public final class VolrathTheShapestealer extends CardImpl {
     public VolrathTheShapestealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(7);
@@ -122,8 +122,8 @@ class VolrathTheShapestealerCopyApplier extends CopyApplier {
         ability.addTarget(new TargetPermanent(VolrathTheShapestealer.filter));
         blueprint.getAbilities().add(ability);
         blueprint.removePTCDA();
-        blueprint.getPower().modifyBaseValue(7);
-        blueprint.getToughness().modifyBaseValue(5);
+        blueprint.getPower().setModifiedBaseValue(7);
+        blueprint.getToughness().setModifiedBaseValue(5);
         return true;
     }
 }

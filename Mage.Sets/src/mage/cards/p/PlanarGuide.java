@@ -39,7 +39,7 @@ public final class PlanarGuide extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{W}, Exile Planar Guide: Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlanarGuideExileEffect(), new ManaCostsImpl("{3}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlanarGuideExileEffect(), new ManaCostsImpl<>("{3}{W}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }
@@ -61,17 +61,17 @@ class PlanarGuideExileEffect extends OneShotEffect {
         staticText = "Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
 
-    public PlanarGuideExileEffect(final PlanarGuideExileEffect effect) {
+    private PlanarGuideExileEffect(final PlanarGuideExileEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
             Set<Card> toExile = new HashSet<>();
-            toExile.addAll(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
+            toExile.addAll(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game));
             controller.moveCardsToExile(toExile, source, game, true, source.getSourceId(), sourceObject.getIdName());
             ExileZone exile = game.getExile().getExileZone(source.getSourceId());
             if (exile != null && !exile.isEmpty()) {
@@ -98,7 +98,7 @@ class PlanarGuideReturnFromExileEffect extends OneShotEffect {
         staticText = "At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
 
-    public PlanarGuideReturnFromExileEffect(final PlanarGuideReturnFromExileEffect effect) {
+    private PlanarGuideReturnFromExileEffect(final PlanarGuideReturnFromExileEffect effect) {
         super(effect);
     }
 

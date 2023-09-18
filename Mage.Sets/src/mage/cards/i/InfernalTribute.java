@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -25,7 +24,7 @@ public final class InfernalTribute extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken permanent");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public InfernalTribute(UUID ownerId, CardSetInfo setInfo) {

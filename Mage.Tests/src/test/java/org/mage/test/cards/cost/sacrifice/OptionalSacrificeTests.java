@@ -26,7 +26,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Relic of Progenitus");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glint Hawk");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Relic of Progenitus");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -53,7 +53,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Relic of Progenitus");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glint Hawk");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -73,12 +73,12 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
      */
     @Test
     public void testGlintHawkNoArtifactControlled() {
-
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.HAND, playerA, "Glint Hawk");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glint Hawk");
-        setChoice(playerA, "No");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -102,7 +102,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Moat");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Moat");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -130,7 +130,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Propaganda");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Propaganda");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -151,12 +151,12 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
      */
     @Test
     public void testDrakeFamiliarNoEnchantmentControlled() {
-
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Drake Familiar");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, "No");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -180,7 +180,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Propaganda");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -189,5 +189,22 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Drake Familiar", 1);
         assertHandCount(playerB, "Propaganda", 0);
         assertPermanentCount(playerB, "Propaganda", 1);
+    }
+
+    /**
+     As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.
+
+     // Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
+     **/
+    @Test
+    public void testDevouringGreedWithoutSpirits(){
+        addCard(Zone.HAND, playerA, "Devouring Greed");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Devouring Greed", playerB);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertLife(playerB, 18);
+        assertLife(playerA, 22);
+        assertGraveyardCount(playerA, "Devouring Greed", 1);
     }
 }

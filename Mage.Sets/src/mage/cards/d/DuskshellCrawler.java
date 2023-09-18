@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.Duration;
@@ -14,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,12 +22,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author weirddan455
  */
 public final class DuskshellCrawler extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public DuskshellCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -43,9 +37,12 @@ public final class DuskshellCrawler extends CardImpl {
 
         // Each creature you control with a +1/+1 counter on it has trample.
         this.addAbility(new SimpleStaticAbility(
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)
-                .setText("Each creature you control with a +1/+1 counter on it has trample")
-        ));
+                new GainAbilityAllEffect(
+                        TrampleAbility.getInstance(),
+                        Duration.WhileOnBattlefield,
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)
+                )
+        );
     }
 
     private DuskshellCrawler(final DuskshellCrawler card) {

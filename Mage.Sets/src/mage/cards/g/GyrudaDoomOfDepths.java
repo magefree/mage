@@ -15,7 +15,6 @@ import mage.filter.predicate.mageobject.ManaValueParityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInGraveyard;
 
 import java.util.Set;
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class GyrudaDoomOfDepths extends CardImpl {
     public GyrudaDoomOfDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U/B}{U/B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.KRAKEN);
         this.power = new MageInt(6);
@@ -60,7 +59,7 @@ enum GyrudaDoomOfDepthsCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck
                 .stream()
                 .mapToInt(MageObject::getManaValue)
@@ -80,8 +79,8 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
 
     GyrudaDoomOfDepthsEffect() {
         super(Outcome.Benefit);
-        staticText = "each player mills four cards. Put a creature card with an even mana value " +
-                "from among the milled cards onto the battlefield under your control";
+        staticText = "each player mills four cards. Put a creature card with an even mana value "
+                + "from among the milled cards onto the battlefield under your control";
     }
 
     private GyrudaDoomOfDepthsEffect(final GyrudaDoomOfDepthsEffect effect) {
@@ -107,15 +106,20 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
             }
             cards.addAll(player.millCards(4, source, game));
         }
-        cards.removeIf(cardId -> game.getState().getZone(cardId) != Zone.GRAVEYARD
-                && game.getState().getZone(cardId) != Zone.EXILED);
+        /*
+        If a replacement effect causes a player to exile the top four cards of their library 
+        instead of putting them into their graveyard as Gyruda’s triggered ability resolves, 
+        the creature card you choose may be one of those cards in exile. (2020-04-17)
+         */
         if (cards.isEmpty()) {
             return true;
         }
-        TargetCard targetCard = new TargetCardInGraveyard(0, 1, filter);
-        targetCard.setNotTarget(true);
-        controller.choose(outcome, cards, targetCard, game);
+        // the creature card chosen can be in any zone, not just the graveyard
+        TargetCard targetCard = new TargetCard(0, 1, Zone.ALL, filter);
+        targetCard.withNotTarget(true);
+        controller.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
-        return card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        return card != null
+                && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

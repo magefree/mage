@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -16,14 +15,10 @@ import mage.target.common.TargetCreaturePermanentAmount;
  * @author tcontis
  */
 public final class VolcanicWind extends CardImpl {
-    
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 
-    static final private String rule = "{this} deals X damage divided as you choose among any number of target creatures, where X is the number of creatures on the battlefield as you cast {this}";
+    private static final String rule = "{this} deals X damage divided as you choose among any number of target creatures, where X is the number of creatures on the battlefield as you cast this spell";
 
     public VolcanicWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
@@ -34,7 +29,6 @@ public final class VolcanicWind extends CardImpl {
         effect.setText(rule);
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(creatures));
-
     }
 
     private VolcanicWind(final VolcanicWind card) {

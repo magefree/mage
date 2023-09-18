@@ -27,7 +27,7 @@ public final class RavenousTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent had three or more cards put into their graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), RavenousTrapCondition.instance), new CardsPutIntoGraveyardWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{0}"), RavenousTrapCondition.instance), new CardsPutIntoGraveyardWatcher());
 
         // Exile all cards from target player's graveyard.
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());

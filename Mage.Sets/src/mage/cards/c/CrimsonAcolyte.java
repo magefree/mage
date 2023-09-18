@@ -36,7 +36,7 @@ public final class CrimsonAcolyte extends CardImpl {
         // {W}: Target creature gains protection from red until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn),
-                new ManaCostsImpl("{W}"));
+                new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

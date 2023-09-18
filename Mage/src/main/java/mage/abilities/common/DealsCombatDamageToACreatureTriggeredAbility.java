@@ -25,9 +25,10 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
     public DealsCombatDamageToACreatureTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} deals combat damage to a creature, ");
     }
 
-    public DealsCombatDamageToACreatureTriggeredAbility(final DealsCombatDamageToACreatureTriggeredAbility ability) {
+    protected DealsCombatDamageToACreatureTriggeredAbility(final DealsCombatDamageToACreatureTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }
@@ -59,10 +60,4 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
         }
         return true;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage to a creature, " ;
-    }
-
 }

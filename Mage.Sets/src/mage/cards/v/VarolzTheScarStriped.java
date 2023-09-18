@@ -28,7 +28,7 @@ public final class VarolzTheScarStriped extends CardImpl {
 
     public VarolzTheScarStriped(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.WARRIOR);
 
@@ -60,7 +60,7 @@ class VarolzTheScarStripedEffect extends ContinuousEffectImpl {
         staticText = "Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost";
     }
 
-    VarolzTheScarStripedEffect(final VarolzTheScarStripedEffect effect) {
+    private VarolzTheScarStripedEffect(final VarolzTheScarStripedEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class VarolzTheScarStripedEffect extends ContinuousEffectImpl {
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card != null && card.isCreature(game)) {
-                    ScavengeAbility ability = new ScavengeAbility(new ManaCostsImpl(card.getManaCost().getText()));
+                    ScavengeAbility ability = new ScavengeAbility(new ManaCostsImpl<>(card.getManaCost().getText()));
                     ability.setSourceId(cardId);
                     ability.setControllerId(card.getOwnerId());
                     game.getState().addOtherAbility(card, ability);

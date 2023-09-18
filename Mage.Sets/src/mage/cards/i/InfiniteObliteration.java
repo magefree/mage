@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ChooseACardNameEffect;
@@ -12,6 +10,7 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -23,8 +22,8 @@ public final class InfiniteObliteration extends CardImpl {
     public InfiniteObliteration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
-        // Name a creature card.  Search target opponent's graveyard, hand, and library
-        // for any number of cards with that name and exile them.  Then that player shuffles their library.
+        // Choose a creature card. Search target opponent's graveyard, hand, and library
+        // for any number of cards with that name and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new InfiniteObliterationEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -43,9 +42,10 @@ class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCard
 
     public InfiniteObliterationEffect() {
         super(true, "target opponent's", "any number of cards with that name");
+        this.staticText = "Choose a creature card name. " + CardUtil.getTextWithFirstCharUpperCase(this.staticText);
     }
 
-    public InfiniteObliterationEffect(final InfiniteObliterationEffect effect) {
+    private InfiniteObliterationEffect(final InfiniteObliterationEffect effect) {
         super(effect);
     }
 
@@ -56,7 +56,7 @@ class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCard
         if (player == null || controller == null) {
             return true;
         }
-        String cardName = ChooseACardNameEffect.TypeOfName.CREATURE_NAME.getChoice(player, game, source, false);
+        String cardName = ChooseACardNameEffect.TypeOfName.CREATURE_NAME.getChoice(controller, game, source, false);
         super.applySearchAndExile(game, source, cardName, player.getId());
         return true;
     }
@@ -64,10 +64,5 @@ class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCard
     @Override
     public InfiniteObliterationEffect copy() {
         return new InfiniteObliterationEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Choose a creature card name. " + super.getText(mode);
     }
 }

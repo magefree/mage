@@ -30,14 +30,14 @@ public final class KelsFightFixer extends CardImpl {
     public KelsFightFixer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AZRA);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you sacrifice a creature, you may pay {U/B}. If you do, draw a card.
         this.addAbility(new KelsFightFixerTriggeredAbility());
@@ -65,6 +65,7 @@ class KelsFightFixerTriggeredAbility extends TriggeredAbilityImpl {
     KelsFightFixerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{U/B}")), false);
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a creature, ");
     }
 
     private KelsFightFixerTriggeredAbility(final KelsFightFixerTriggeredAbility ability) {
@@ -85,10 +86,5 @@ class KelsFightFixerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a creature, " ;
     }
 }

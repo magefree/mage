@@ -38,7 +38,7 @@ public final class VinesOfVastwood extends CardImpl {
 
         // If Vines of Vastwood was kicked, that creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
-                new LockedInCondition(KickedCondition.instance), staticText));
+                new LockedInCondition(KickedCondition.ONCE), staticText));
     }
 
     private VinesOfVastwood(final VinesOfVastwood card) {

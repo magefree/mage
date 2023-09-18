@@ -12,9 +12,9 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
@@ -24,7 +24,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TurntimberSymbiosis extends ModalDoubleFacesCard {
+public final class TurntimberSymbiosis extends ModalDoubleFacedCard {
 
     public TurntimberSymbiosis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -95,20 +95,19 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
         TargetCard target = new TargetCardInLibrary(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
-            player.putCardsOnBottomOfLibrary(cards, game, source, false);
-            return true;
+        if (card != null) {
+            cards.remove(card);
+            if (card.getManaValue() <= 3) {
+                Counters countersToAdd = new Counters();
+                countersToAdd.addCounter(CounterType.P1P1.createInstance(3));
+                game.setEnterWithCounters(card.getId(), countersToAdd);
+            }
+            player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
 
-        boolean small = card.getManaValue() <= 3;
-        player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
-        if (permanent == null || !small) {
-            return true;
-        }
-        permanent.addCounters(CounterType.P1P1.createInstance(3), source.getControllerId(), source, game);
         return true;
     }
 }

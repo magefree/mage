@@ -6,23 +6,19 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.Gender;
+import mage.abilities.Pronoun;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
+import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
@@ -34,19 +30,18 @@ public final class KytheonHeroOfAkros extends CardImpl {
 
     public KytheonHeroOfAkros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.g.GideonBattleForged.class;
 
         // At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon,
         // then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EndOfCombatTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.MALE), false),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EndOfCombatTriggeredAbility(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.HE), false),
                 new KytheonHeroOfAkrosCondition(), "At end of combat, if {this} and at least two other creatures attacked this combat, exile {this}, "
                 + "then return him to the battlefield transformed under his owner's control."), new AttackedOrBlockedThisCombatWatcher());
 

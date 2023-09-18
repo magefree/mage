@@ -22,7 +22,6 @@ public class BurnBrightTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Raging Goblin", 3, 1);
         assertPowerToughness(playerA, "Scryb Sprites", 3, 1);

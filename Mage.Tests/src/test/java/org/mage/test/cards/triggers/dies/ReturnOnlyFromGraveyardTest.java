@@ -36,7 +36,7 @@ public class ReturnOnlyFromGraveyardTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Academy Rector");
 
         setChoice(playerA, "When enchanted creature dies"); // Select triggered ability to execute last
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Primal Rage");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -70,7 +70,7 @@ public class ReturnOnlyFromGraveyardTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt", "Academy Rector");
 
         setChoice(playerA, "When enchanted creature dies"); // Select triggered ability to execute last
-        setChoice(playerA, "Yes"); // May exile it
+        setChoice(playerA, true); // May exile it
         addTarget(playerA, "Primal Rage");
 
         setStopAt(1, PhaseStep.END_COMBAT);

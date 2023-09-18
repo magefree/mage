@@ -28,7 +28,7 @@ public final class SedgemoorWitch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Ward—Pay 3 life.
         this.addAbility(new WardAbility(new PayLifeCost(3)));

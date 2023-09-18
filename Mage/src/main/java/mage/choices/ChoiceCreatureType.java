@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class ChoiceCreatureType extends ChoiceImpl {
 
-    private static String DEFAULT_MESSAGE = "Choose a creature type";
+    private static final String DEFAULT_MESSAGE = "Choose a creature type";
 
     public ChoiceCreatureType() {
         this(true, DEFAULT_MESSAGE, null);
@@ -32,7 +32,7 @@ public class ChoiceCreatureType extends ChoiceImpl {
         this.setSearchEnabled(true);
     }
 
-    public ChoiceCreatureType(final ChoiceCreatureType choice) {
+    protected ChoiceCreatureType(final ChoiceCreatureType choice) {
         super(choice);
     }
 

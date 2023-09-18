@@ -39,7 +39,6 @@ public class CastSplitCardsWithSpliceTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Wear // Tear", 1);
         assertGraveyardCount(playerB, "Bident of Thassa", 1);
@@ -73,7 +72,7 @@ public class CastSplitCardsWithSpliceTest extends CardTestPlayerBase {
 
         // cast fused with splice
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Wear // Tear");
-        setChoice(playerA, "Yes"); // use splice
+        setChoice(playerA, true); // use splice
         addTarget(playerA, "Everdream"); // card to splice
         addTarget(playerA, "Bident of Thassa"); // target left
         addTarget(playerA, "Bow of Nylea"); // target right
@@ -82,7 +81,6 @@ public class CastSplitCardsWithSpliceTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Wear // Tear", 1);
         assertGraveyardCount(playerB, "Bident of Thassa", 1);

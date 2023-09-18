@@ -4,7 +4,6 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -31,10 +30,10 @@ public final class AjaniCallerOfThePride extends CardImpl {
 
     public AjaniCallerOfThePride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
         // +1: Put a +1/+1 counter on up to one target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on up to one target creature");
@@ -43,8 +42,8 @@ public final class AjaniCallerOfThePride extends CardImpl {
         this.addAbility(ability);
         // -3: Target creature gains flying and double strike until end of turn.
         Effects effects = new Effects();
-        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
+        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("target creature gains flying"));
+        effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and double strike until end of turn"));
         ability = new LoyaltyAbility(effects, -3);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

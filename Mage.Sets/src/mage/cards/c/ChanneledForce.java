@@ -25,7 +25,7 @@ public final class ChanneledForce extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
 
         // As an additional cost to cast this spell, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, false));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS));
 
         // Target player draws X cards. Channeled Force deals X damage to up to one target creature or planeswalker.
         this.getSpellAbility().addEffect(new ChanneledForceEffect());
@@ -69,7 +69,7 @@ class ChanneledForceEffect extends OneShotEffect {
         if (player != null) {
             player.drawCards(xValue, source, game);
         }
-        game.damagePlayerOrPlaneswalker(
+        game.damagePlayerOrPermanent(
                 source.getTargets().get(1).getFirstTarget(), xValue,
                 source.getSourceId(), source, game, false, true
         );

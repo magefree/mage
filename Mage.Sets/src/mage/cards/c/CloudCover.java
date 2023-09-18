@@ -44,7 +44,7 @@ class CloudCoverAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
     }
 
-    public CloudCoverAbility(final CloudCoverAbility ability) {
+    private CloudCoverAbility(final CloudCoverAbility ability) {
         super(ability);
     }
 

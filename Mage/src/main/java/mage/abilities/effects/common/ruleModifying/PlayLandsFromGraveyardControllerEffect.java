@@ -30,7 +30,7 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         this.staticText = "You may play " + filter.getMessage() + " from your graveyard";
     }
 
-    public PlayLandsFromGraveyardControllerEffect(final PlayLandsFromGraveyardControllerEffect effect) {
+    protected PlayLandsFromGraveyardControllerEffect(final PlayLandsFromGraveyardControllerEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -77,6 +77,6 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         }
 
         // must be correct card
-        return filter.match(cardToCheck, source.getSourceId(), affectedControllerId, game);
+        return filter.match(cardToCheck, affectedControllerId, source, game);
     }
 }

@@ -1,12 +1,13 @@
 package org.mage.test.serverside.base;
 
-import java.util.List;
 import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.players.Player;
 import org.mage.test.player.TestPlayer;
+
+import java.util.List;
 
 /**
  * Interface for all test initialization and assertion operations.
@@ -22,13 +23,6 @@ public interface CardTestAPI {
         LOST,
         DRAW
     }
-
-    //******* INITIALIZATION METHODS *******/
-    /**
-     * Default game initialization params for red player (that plays with
-     * Mountains)
-     */
-    void useRedDefault();
 
     /**
      * Removes all cards from player's library from the game. Usually this
@@ -123,24 +117,28 @@ public interface CardTestAPI {
     void assertLife(Player player, int life) throws AssertionError;
 
     /**
+     *
      * Assert creature's power and toughness by card name.
      * <p/>
-     * Throws {@link AssertionError} in the following cases: 1. no such player
-     * 2. no such creature under player's control 3. depending on comparison
-     * scope: 3a. any: no creature under player's control with the specified p\t
-     * params 3b. all: there is at least one creature with the cardName with the
-     * different p\t params
+     * Throws {@link AssertionError} in the following cases:
+     * 1. no such player
+     * 2. no such creature under player's control
+     * 3. depending on comparison scope:
+     *      3a. any: no creature under player's control with the specified p\t params
+     *      3b. all: there is at least one creature with the cardName with the different p\t params
      *
-     * @param player {@link Player} to get creatures for comparison.
-     * @param cardName Card name to compare with.
-     * @param power Expected power to compare with.
+     * @param player    {@link Player} to get creatures for comparison.
+     * @param cardName  Card name to compare with.
+     * @param power     Expected power to compare with.
      * @param toughness Expected toughness to compare with.
-     * @param scope {@link Filter.ComparisonScope} Use ANY, if you want "at
-     * least one creature with given name should have specified p\t" Use ALL, if
-     * you want "all creature with gived name should have specified p\t"
+     * @param scope     {@link mage.filter.Filter.ComparisonScope} Use ANY, if
+     *                  you want "at least one creature with given name should
+     *                  have specified p\t" Use ALL, if you want "all creature
+     *                  with given name should have specified p\t"
+     * @param base      If true, the comparison looks that base power and toughness of the creature.
+     *                  If false, the comparison looks at the final values.
      */
-    void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
-            throws AssertionError;
+    public void assertPowerToughness(Player player, String cardName, int powerNeeded, int toughnessNeeded, Filter.ComparisonScope scope, boolean checkBaseValues) throws AssertionError;
 
     /**
      * Assert creature's abilities.
@@ -172,6 +170,15 @@ public interface CardTestAPI {
      * @param count Expected count.
      */
     void assertPermanentCount(Player player, String cardName, int count) throws AssertionError;
+
+    /**
+     * Assert token count under player's control.
+     *
+     * @param player {@link Player} which permanents should be counted.
+     * @param tokenName Name of the tokens that should be counted.
+     * @param count Expected count.
+     */
+    void assertTokenCount(Player player, String tokenName, int count) throws AssertionError;
 
     /**
      * Assert command zone object count in player's command zone

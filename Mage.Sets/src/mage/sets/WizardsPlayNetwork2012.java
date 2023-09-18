@@ -16,7 +16,7 @@ public class WizardsPlayNetwork2012 extends ExpansionSet {
     }
 
     private WizardsPlayNetwork2012() {
-        super("Wizards Play Network 2012", "PWP12", ExpansionSet.buildDate(2012, 1, 1), SetType.PROMOTIONAL);
+        super("Wizards Play Network 2012", "PW12", ExpansionSet.buildDate(2012, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

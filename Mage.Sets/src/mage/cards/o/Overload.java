@@ -49,7 +49,7 @@ class OverloadEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact if its mana value is 2 or less. If this spell was kicked, destroy that artifact if its mana value is 5 or less instead.";
     }
 
-    OverloadEffect(final OverloadEffect effect) {
+    private OverloadEffect(final OverloadEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class OverloadEffect extends OneShotEffect {
             Permanent targetArtifact = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (targetArtifact != null) {
                 int cmc = targetArtifact.getManaValue();
-                if (cmc <= 2 || (KickedCondition.instance.apply(game, source) && cmc <= 5)) {
+                if (cmc <= 2 || (KickedCondition.ONCE.apply(game, source) && cmc <= 5)) {
                     targetArtifact.destroy(source, game, false);
                 }
             }

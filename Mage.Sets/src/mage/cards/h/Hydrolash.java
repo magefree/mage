@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -20,9 +20,9 @@ public final class Hydrolash extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Attacking creatures get -2/-0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-2, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Hydrolash(final Hydrolash card) {

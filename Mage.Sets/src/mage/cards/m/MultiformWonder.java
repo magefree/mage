@@ -2,6 +2,7 @@
 package mage.cards.m;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -60,7 +61,7 @@ public final class MultiformWonder extends CardImpl {
 
 class MultiformWonderEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Flying");
@@ -73,7 +74,7 @@ class MultiformWonderEffect extends OneShotEffect {
         staticText = "{this} gains your choice of flying, vigilance, or lifelink until end of turn";
     }
 
-    public MultiformWonderEffect(final MultiformWonderEffect effect) {
+    private MultiformWonderEffect(final MultiformWonderEffect effect) {
         super(effect);
     }
 
@@ -126,7 +127,7 @@ class MultiformWonder2Effect extends ContinuousEffectImpl {
         this.staticText = "{this} gets +2/-2 or -2/+2 until end of turn";
     }
 
-    public MultiformWonder2Effect(final MultiformWonder2Effect effect) {
+    private MultiformWonder2Effect(final MultiformWonder2Effect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

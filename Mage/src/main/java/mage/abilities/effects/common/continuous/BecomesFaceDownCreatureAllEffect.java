@@ -18,7 +18,7 @@ import java.util.*;
  * @author LevelX2
  */
 
-public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
 
     protected Map<UUID, Ability> turnFaceUpAbilityMap = new HashMap<>();
     protected FilterPermanent filter;
@@ -29,7 +29,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
         staticText = "turn all " + filter.getMessage() + " face down. (They're 2/2 creatures.)";
     }
 
-    public BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
+    protected BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
         super(effect);
         for (Map.Entry<UUID, Ability> entry : effect.turnFaceUpAbilityMap.entrySet()) {
             this.turnFaceUpAbilityMap.put(entry.getKey(), entry.getValue());
@@ -45,7 +45,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (!perm.isFaceDown(game) && !perm.isTransformable()) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
                 perm.setFaceDown(true, game);
@@ -72,7 +72,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                 switch (layer) {
                     case TypeChangingEffects_4:
                         permanent.setName("");
-                        permanent.getSuperType().clear();
+                        permanent.removeAllSuperTypes(game);
                         permanent.removeAllCardTypes(game);
                         permanent.addCardType(game, CardType.CREATURE);
                         permanent.removeAllSubTypes(game);
@@ -116,8 +116,8 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getPower().setValue(2);
-                            permanent.getToughness().setValue(2);
+                            permanent.getPower().setModifiedBaseValue(2);
+                            permanent.getToughness().setModifiedBaseValue(2);
                         }
 
                 }

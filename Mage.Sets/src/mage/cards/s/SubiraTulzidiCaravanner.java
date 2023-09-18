@@ -42,7 +42,7 @@ public final class SubiraTulzidiCaravanner extends CardImpl {
     public SubiraTulzidiCaravanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -63,7 +63,7 @@ public final class SubiraTulzidiCaravanner extends CardImpl {
         // {1}{R}, {T}, Discard your hand: Until end of turn, whenever a creature you control with power 2 or less deals combat damage to a player, draw a card.
         ability = new SimpleActivatedAbility(new CreateDelayedTriggeredAbilityEffect(
                 new SubiraTulzidiCaravannerAbility()
-        ), new ManaCostsImpl("{1}{R}"));
+        ), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardHandCost());
         this.addAbility(ability);

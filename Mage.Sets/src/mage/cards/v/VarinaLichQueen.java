@@ -17,7 +17,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,7 +33,7 @@ public final class VarinaLichQueen extends CardImpl {
     public VarinaLichQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -51,7 +51,7 @@ public final class VarinaLichQueen extends CardImpl {
                 ), new GenericManaCost(2)
         );
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                2, new FilterCard("cards from your graveyard")
+                2, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD
         )));
         this.addAbility(ability);
     }
@@ -72,7 +72,7 @@ class VarinaLichQueenTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public VarinaLichQueenTriggeredAbility(final VarinaLichQueenTriggeredAbility ability) {
+    private VarinaLichQueenTriggeredAbility(final VarinaLichQueenTriggeredAbility ability) {
         super(ability);
     }
 

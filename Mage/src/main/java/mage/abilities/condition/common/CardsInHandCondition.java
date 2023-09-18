@@ -1,15 +1,14 @@
-
 package mage.abilities.condition.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * Cards in controller hand condition. This condition can decorate other
@@ -19,10 +18,10 @@ import mage.util.CardUtil;
  */
 public class CardsInHandCondition implements Condition {
 
-    private Condition condition;
-    private ComparisonType type;
-    private int count;
-    private TargetController targetController;
+    private final Condition condition;
+    private final ComparisonType type;
+    private final int count;
+    private final TargetController targetController;
 
     public CardsInHandCondition() {
         this(ComparisonType.EQUAL_TO, 0);
@@ -86,35 +85,35 @@ public class CardsInHandCondition implements Condition {
 
     @Override
     public String toString() {
-        int workCount = count;
         StringBuilder sb = new StringBuilder("if");
         switch (targetController) {
             case YOU:
-                sb.append(" you have");
+                sb.append(" you have ");
                 break;
             case ANY:
-                sb.append(" each player has");
+                sb.append(" each player has ");
                 break;
         }
         switch (this.type) {
             case FEWER_THAN:
-                sb.append(" less or equal than ");
-                workCount++;
+                sb.append(CardUtil.numberToText(count - 1));
+                sb.append(" or fewer ");
                 break;
             case MORE_THAN:
-                sb.append(" more than ");
+                sb.append(CardUtil.numberToText(count + 1));
+                sb.append(" or more ");
                 break;
             case EQUAL_TO:
-                sb.append(" exactly ");
+                if (count > 0) {
+                    sb.append("exactly ");
+                    sb.append(CardUtil.numberToText(count));
+                    sb.append(" ");
+                } else {
+                    sb.append("no ");
+                }
                 break;
         }
-        if (count == 0) {
-            sb.append("no");
-        } else {
-            sb.append(CardUtil.numberToText(workCount));
-        }
-        sb.append(" cards in hand");
+        sb.append("cards in hand");
         return sb.toString();
     }
-
 }

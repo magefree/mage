@@ -115,7 +115,7 @@ class RadiantPerformerEffect extends CopySpellForEachItCouldTargetEffect {
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         List<MageObjectReferencePredicate> predicates = new ArrayList<>();
         Ability ability = stackObject instanceof Spell ? ((Spell) stackObject).getSpellAbility() : (StackAbility) stackObject;
         UUID targeted = ability == null ? null : ability
@@ -131,7 +131,7 @@ class RadiantPerformerEffect extends CopySpellForEachItCouldTargetEffect {
                 .orElse(null);
         game.getBattlefield()
                 .getActivePermanents(
-                        StaticFilters.FILTER_PERMANENT, player.getId(), source.getSourceId(), game
+                        StaticFilters.FILTER_PERMANENT, player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(game.getPermanent(targeted)))

@@ -47,7 +47,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
         staticText = "If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20";
     }
 
-    public LichsMirrorEffect(final LichsMirrorEffect effect) {
+    private LichsMirrorEffect(final LichsMirrorEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
             filter.add(new OwnerIdPredicate(player.getId()));
             toLib.addAll(player.getHand());
             toLib.addAll(player.getGraveyard());
-            for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)){
+            for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)){
                 toLib.add(permanent);
             }            
             player.shuffleCardsToLibrary(toLib, game, source);

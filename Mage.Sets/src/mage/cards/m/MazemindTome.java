@@ -31,7 +31,7 @@ public final class MazemindTome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {T}, Put a page counter on Mazemind Tome: Scry 1.
-        Ability ability = new SimpleActivatedAbility(new ScryEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1, false), new TapSourceCost());
         ability.addCost(new PutCountersSourceCost(CounterType.PAGE.createInstance()));
         this.addAbility(ability);
 

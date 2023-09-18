@@ -9,7 +9,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
-import org.junit.Assert;
 
 import java.util.*;
 
@@ -48,17 +47,17 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         // checks for compatibility
         EffectType needType = EffectType.CONTINUOUS;
         if (effect.getEffectType() != needType) {
-            Assert.fail("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
+            throw new IllegalArgumentException("ConditionalContinuousEffect supports only " + needType + " but found " + effect.getEffectType().toString());
         }
         if (otherwiseEffect != null && otherwiseEffect.getEffectType() != needType) {
-            Assert.fail("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
+            throw new IllegalArgumentException("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
         }
         if (otherwiseEffect != null && effect.getEffectType() != otherwiseEffect.getEffectType()) {
-            Assert.fail("ConditionalContinuousEffect must be same but found " + effect.getEffectType().toString() + " and " + otherwiseEffect.getEffectType().toString());
+            throw new IllegalArgumentException("ConditionalContinuousEffect must be same but found " + effect.getEffectType().toString() + " and " + otherwiseEffect.getEffectType().toString());
         }
     }
 
-    public ConditionalContinuousEffect(final ConditionalContinuousEffect effect) {
+    protected ConditionalContinuousEffect(final ConditionalContinuousEffect effect) {
         super(effect);
         this.effect = effect.effect.copy();
         if (effect.otherwiseEffect != null) {
@@ -105,8 +104,13 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         if (!conditionState && effect.getDuration() == Duration.OneUse) {
             used = true;
         }
-        if (!conditionState && effect.getDuration() == Duration.Custom) {
-            this.discard();
+        switch (effect.getDuration()) {
+            case OneUse:
+                used = true;
+                break;
+            case Custom:
+            case WhileControlled:
+                this.discard();
         }
         return false;
     }
@@ -124,11 +128,13 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(game, source);
         }
-        if (effect.getDuration() == Duration.OneUse) {
-            used = true;
-        }
-        if (effect.getDuration() == Duration.Custom) {
-            this.discard();
+        switch (effect.getDuration()) {
+            case OneUse:
+                used = true;
+                break;
+            case Custom:
+            case WhileControlled:
+                this.discard();
         }
         return false;
     }
@@ -177,12 +183,18 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
     /**
      * Return all effects list, for tests only
-     * @return 
+     *
+     * @return
      */
     public List<ContinuousEffect> getAllEffects() {
         List<ContinuousEffect> res = new ArrayList<>();
         if (this.effect != null) res.add(this.effect);
         if (this.otherwiseEffect != null) res.add(this.otherwiseEffect);
         return res;
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition == null ? baseCondition : condition;
     }
 }

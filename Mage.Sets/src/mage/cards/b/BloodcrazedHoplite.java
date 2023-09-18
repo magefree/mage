@@ -12,13 +12,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,12 +24,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class BloodcrazedHoplite extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public BloodcrazedHoplite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -44,7 +36,7 @@ public final class BloodcrazedHoplite extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)));
         // Whenever a +1/+1 counter is put on Bloodcrazed Hoplite, remove a +1/+1 counter from target creature an opponent controls.
         Ability ability = new BloodcrazedHopliteTriggeredAbility();
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 
@@ -62,9 +54,10 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
 
     public BloodcrazedHopliteTriggeredAbility() {
         super(Zone.ALL, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), false);
+        setTriggerPhrase("Whenever a +1/+1 counter is put on {this}, ");
     }
 
-    public BloodcrazedHopliteTriggeredAbility(BloodcrazedHopliteTriggeredAbility ability) {
+    private BloodcrazedHopliteTriggeredAbility(final BloodcrazedHopliteTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,10 +74,5 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BloodcrazedHopliteTriggeredAbility copy() {
         return new BloodcrazedHopliteTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a +1/+1 counter is put on {this}, " ;
     }
 }

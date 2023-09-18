@@ -18,7 +18,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -27,6 +27,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -38,13 +39,12 @@ import java.util.UUID;
  */
 public final class GyomeMasterChef extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.FOOD, "a Food");
     private static final Hint hint = new ValueHint("Nontoken creatures entered this turn", GyomeMasterChefValue.instance);
 
     public GyomeMasterChef(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(5);
@@ -66,7 +66,7 @@ public final class GyomeMasterChef extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));
         ability.addEffect(new TapTargetEffect("tap it"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -118,7 +118,7 @@ class GyomeMasterChefWatcher extends Watcher {
         if (permanent == null || permanent instanceof PermanentToken || !permanent.isCreature(game)) {
             return;
         }
-        playerMap.compute(event.getPlayerId(), (u, i) -> i != null ? Integer.sum(i, 1) : 1);
+        playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
     }
 
     @Override

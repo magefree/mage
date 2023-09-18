@@ -17,10 +17,9 @@ public final class WanderersStrike extends CardImpl {
     public WanderersStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
 
-
         // Exile target creature, then proliferate.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new ProliferateEffect().concatBy("then"));
+        this.getSpellAbility().addEffect(new ProliferateEffect(true).concatBy(", then"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

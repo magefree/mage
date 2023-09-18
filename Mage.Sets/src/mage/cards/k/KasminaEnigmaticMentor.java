@@ -3,7 +3,6 @@ package mage.cards.k;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -29,9 +28,9 @@ public final class KasminaEnigmaticMentor extends CardImpl {
     public KasminaEnigmaticMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KASMINA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(new KasminaEnigmaticMentorCostModificationEffect()));

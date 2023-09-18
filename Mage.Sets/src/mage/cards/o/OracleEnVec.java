@@ -66,12 +66,12 @@ class OracleEnVecEffect extends OneShotEffect {
 
     OracleEnVecEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent chooses any number of creatures they control. During that player's next turn, " +
-                "the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, " +
-                "destroy each of the chosen creatures that didn't attack this turn";
+        this.staticText = "Target opponent chooses any number of creatures they control. During that player's next turn, "
+                + "the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, "
+                + "destroy each of the chosen creatures that didn't attack this turn";
     }
 
-    OracleEnVecEffect(final OracleEnVecEffect effect) {
+    private OracleEnVecEffect(final OracleEnVecEffect effect) {
         super(effect);
     }
 
@@ -85,8 +85,8 @@ class OracleEnVecEffect extends OneShotEffect {
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (opponent != null) {
             Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), true);
-            if (target.choose(Outcome.Neutral, opponent.getId(), source.getSourceId(), game)) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source.getSourceId(), game)) {
+            if (target.choose(Outcome.Neutral, opponent.getId(), source.getSourceId(), source, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
                     if (target.getTargets().contains(permanent.getId())) {
                         RequirementEffect effect = new OracleEnVecMustAttackRequirementEffect();
                         effect.setTargetPointer(new FixedTarget(permanent, game));
@@ -111,7 +111,7 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
         super(Duration.UntilEndOfYourNextTurn);
     }
 
-    OracleEnVecMustAttackRequirementEffect(final OracleEnVecMustAttackRequirementEffect effect) {
+    private OracleEnVecMustAttackRequirementEffect(final OracleEnVecMustAttackRequirementEffect effect) {
         super(effect);
     }
 
@@ -150,7 +150,7 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override
@@ -163,9 +163,10 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
 
     OracleEnVecCantAttackRestrictionEffect() {
         super(Duration.Custom);
+        this.staticText = "{this} can't attack.";
     }
 
-    OracleEnVecCantAttackRestrictionEffect(final OracleEnVecCantAttackRestrictionEffect effect) {
+    private OracleEnVecCantAttackRestrictionEffect(final OracleEnVecCantAttackRestrictionEffect effect) {
         super(effect);
     }
 
@@ -198,12 +199,7 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} can't attack.";
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 }
 
@@ -214,9 +210,10 @@ class OracleEnVecDelayedTriggeredAbility extends DelayedTriggeredAbility {
     OracleEnVecDelayedTriggeredAbility(int startingTurn, List<UUID> chosenCreatures) {
         super(new OracleEnVecDestroyEffect(chosenCreatures), Duration.EndOfGame, true);
         this.startingTurn = startingTurn;
+        setTriggerPhrase("At the beginning of that turn's end step, ");
     }
 
-    OracleEnVecDelayedTriggeredAbility(final OracleEnVecDelayedTriggeredAbility ability) {
+    private OracleEnVecDelayedTriggeredAbility(final OracleEnVecDelayedTriggeredAbility ability) {
         super(ability);
         this.startingTurn = ability.startingTurn;
     }
@@ -235,11 +232,6 @@ class OracleEnVecDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public OracleEnVecDelayedTriggeredAbility copy() {
         return new OracleEnVecDelayedTriggeredAbility(this);
     }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of that turn's end step, destroy each of the chosen creatures that didn't attack.";
-    }
 }
 
 class OracleEnVecDestroyEffect extends OneShotEffect {
@@ -252,7 +244,7 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
         this.staticText = "destroy each of the chosen creatures that didn't attack";
     }
 
-    OracleEnVecDestroyEffect(final OracleEnVecDestroyEffect effect) {
+    private OracleEnVecDestroyEffect(final OracleEnVecDestroyEffect effect) {
         super(effect);
         this.chosenCreatures = effect.chosenCreatures;
     }
@@ -270,7 +262,7 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     Effect effect = new DestroyTargetEffect();
-                    effect.setTargetPointer(new FixedTarget(targetId));
+                    effect.setTargetPointer(new FixedTarget(targetId, game));
                     effect.apply(game, source);
                 }
             }

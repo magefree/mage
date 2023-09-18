@@ -38,7 +38,7 @@ public final class BurningPalmEfreet extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{R}{R}: Burning Palm Efreet deals 2 damage to target creature with flying and that creature loses flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addEffect(new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and that creature loses flying until end of turn")
         );

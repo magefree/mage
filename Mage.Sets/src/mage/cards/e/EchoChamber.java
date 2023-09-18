@@ -56,7 +56,7 @@ class EchoChamberCreateTokenEffect extends OneShotEffect {
         this.staticText = "An opponent chooses target creature they control. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step";
     }
 
-    EchoChamberCreateTokenEffect(final EchoChamberCreateTokenEffect effect) {
+    private EchoChamberCreateTokenEffect(final EchoChamberCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class EchoChamberCreateTokenEffect extends OneShotEffect {
         if (copiedPermanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.CREATURE, true);
             if (effect.apply(game, source)) {
-                for (Permanent copyPermanent : effect.getAddedPermanent()) {
+                for (Permanent copyPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
                     exileEffect.setTargetPointer(new FixedTarget(copyPermanent, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

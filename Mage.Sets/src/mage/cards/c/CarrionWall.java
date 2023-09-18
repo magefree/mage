@@ -29,7 +29,7 @@ public final class CarrionWall extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {1}{B}: Regenerate Carrion Wall.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private CarrionWall(final CarrionWall card) {

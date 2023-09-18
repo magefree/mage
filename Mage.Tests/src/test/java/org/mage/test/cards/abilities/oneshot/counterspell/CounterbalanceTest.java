@@ -69,7 +69,7 @@ public class CounterbalanceTest extends CardTestPlayerBase {
         skipInitShuffling(); // so the set to top card stays at top
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nessian Courser");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

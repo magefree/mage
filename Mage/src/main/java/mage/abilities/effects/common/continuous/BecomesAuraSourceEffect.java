@@ -13,7 +13,7 @@ import mage.target.Target;
 /**
  * @author LevelX2
  */
-public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesAuraSourceEffect extends ContinuousEffectImpl {
 
     private final Ability newAbility;
     private final Target target;
@@ -21,14 +21,14 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements Sou
     public BecomesAuraSourceEffect(Target target) {
         super(Duration.Custom, Outcome.AddAbility);
         this.target = target;
-        newAbility = new EnchantAbility(target.getTargetName());
+        newAbility = new EnchantAbility(target);
         newAbility.setRuleAtTheTop(true);
         staticText = "it becomes an Aura with enchant " + target.getTargetName();
         dependencyTypes.add(DependencyType.AuraAddingRemoving);
 
     }
 
-    public BecomesAuraSourceEffect(final BecomesAuraSourceEffect effect) {
+    protected BecomesAuraSourceEffect(final BecomesAuraSourceEffect effect) {
         super(effect);
         this.target = effect.target;
         this.newAbility = effect.newAbility;

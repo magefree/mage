@@ -21,6 +21,7 @@ public final class ShorelineRanger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.RANGER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -28,7 +29,7 @@ public final class ShorelineRanger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Islandcycling {2}
-        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ShorelineRanger(final ShorelineRanger card) {

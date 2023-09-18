@@ -23,11 +23,12 @@ public final class AlaraReborn extends ExpansionSet {
         this.parentSet = ShardsOfAlara.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.numBoosterLands = 0;
-        this.numBoosterCommon = 11;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.hasOnlyMulticolorCards = true;
         cards.add(new SetCardInfo("Anathemancer", 33, Rarity.UNCOMMON, mage.cards.a.Anathemancer.class));
         cards.add(new SetCardInfo("Architects of Will", 17, Rarity.COMMON, mage.cards.a.ArchitectsOfWill.class));
         cards.add(new SetCardInfo("Ardent Plea", 1, Rarity.UNCOMMON, mage.cards.a.ArdentPlea.class));

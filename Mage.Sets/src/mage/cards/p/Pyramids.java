@@ -16,8 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
@@ -41,10 +41,9 @@ public final class Pyramids extends CardImpl {
         // {2}: Choose one - Destroy target Aura attached to a land; 
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target Aura attached to a land");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
         //or the next time target land would be destroyed this turn, remove all damage marked on it instead.
-        Mode mode = new Mode(); //back in the day this was not technically "damage", hopefully this modern description will work nowadays
-        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn));
+        Mode mode = new Mode(new PreventDamageToTargetEffect(Duration.EndOfTurn)); //back in the day this was not technically "damage", hopefully this modern description will work nowadays
         mode.addTarget(new TargetLandPermanent());
         ability.addMode(mode);
         
@@ -60,9 +59,9 @@ public final class Pyramids extends CardImpl {
         return new Pyramids(this);
     }
 }
-class PyramidsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class PyramidsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attachment = input.getObject();
         if (attachment != null) {
             Permanent permanent = game.getPermanent(attachment.getAttachedTo());

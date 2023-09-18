@@ -3,17 +3,17 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -29,7 +29,9 @@ public final class LupinePrototype extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Lupine Prototype can't attack or block unless a player has no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LupinePrototypeEffect()));
+        this.addAbility(new SimpleStaticAbility(
+                new CantAttackBlockUnlessConditionSourceEffect(LupinePrototypeCondition.instance)
+        ));
     }
 
     private LupinePrototype(final LupinePrototype card) {
@@ -42,43 +44,23 @@ public final class LupinePrototype extends CardImpl {
     }
 }
 
-class LupinePrototypeEffect extends RestrictionEffect {
+enum LupinePrototypeCondition implements Condition {
+    instance;
 
-    public LupinePrototypeEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't attack or block unless a player has no cards in hand";
-    }
-
-    public LupinePrototypeEffect(final LupinePrototypeEffect effect) {
-        super(effect);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game
+                .getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getHand)
+                .anyMatch(Set::isEmpty);
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            for (Player player : game.getPlayers().values()) {
-                if (player != null && player.getHand().isEmpty()) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        // don't apply for all other creatures!
-        return false;
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return false;
-    }
-
-    @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
-        return false;
-    }
-
-    @Override
-    public LupinePrototypeEffect copy() {
-        return new LupinePrototypeEffect(this);
+    public String toString() {
+        return "a player has no cards in hand";
     }
 }

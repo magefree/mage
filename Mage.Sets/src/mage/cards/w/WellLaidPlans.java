@@ -44,7 +44,7 @@ class WellLaidPlansPreventionEffect extends PreventionEffectImpl {
         this.staticText = "Prevent all damage that would be dealt to a creature by another creature if they share a color";
     }
 
-    public WellLaidPlansPreventionEffect(final WellLaidPlansPreventionEffect effect) {
+    private WellLaidPlansPreventionEffect(final WellLaidPlansPreventionEffect effect) {
         super(effect);
     }
 

@@ -41,7 +41,7 @@ public final class KeeperOfTheFlame extends CardImpl {
         // {R}, {tap}: Choose target opponent who had more life than you did as you activated this ability. Keeper of the Flame deals 2 damage to that player.
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(2).setText("Choose target opponent who had more life than you did as you activated this ability. {this} deals 2 damage to that player"),
-                new ManaCostsImpl("{R}"));
+                new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
@@ -58,7 +58,7 @@ public final class KeeperOfTheFlame extends CardImpl {
     }
 }
 
-class KeeperOfTheFlamePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class KeeperOfTheFlamePredicate implements ObjectSourcePlayerPredicate<Player> {
     
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

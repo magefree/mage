@@ -32,7 +32,7 @@ public final class MatsuTribeDecoy extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{G}: Target creature blocks Matsu-Tribe Decoy this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Whenever Kashi-Tribe Reaver deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.

@@ -33,7 +33,7 @@ public final class SerpentSkin extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
 
@@ -41,7 +41,7 @@ public final class SerpentSkin extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public SerpentSkin (final SerpentSkin card) {
+    private SerpentSkin(final SerpentSkin card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ class MindsDesireEffect extends OneShotEffect {
         this.staticText = "Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost";
     }
 
-    MindsDesireEffect(final MindsDesireEffect effect) {
+    private MindsDesireEffect(final MindsDesireEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class MindsDesireEffect extends OneShotEffect {
         if (controller != null) {
             controller.shuffleLibrary(source, game);
             return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, true, false);
+                    TargetController.YOU, Duration.EndOfTurn, true, false, false);
         }
         return false;
     }

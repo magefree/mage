@@ -30,7 +30,7 @@ public final class ArmorSliver extends CardImpl {
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn).setText("this creature gets +0/+1 until end of turn"),
-                        new GenericManaCost(2)), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
+                        new GenericManaCost(2)), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS, false)));
     }
 
     private ArmorSliver(final ArmorSliver card) {

@@ -10,7 +10,6 @@ import mage.constants.Zone;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
@@ -25,7 +24,7 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
         CardUtil.increaseCost(this, costsToAdd);
     }
 
-    public PayMoreToCastAsThoughtItHadFlashAbility(final PayMoreToCastAsThoughtItHadFlashAbility ability) {
+    protected PayMoreToCastAsThoughtItHadFlashAbility(final PayMoreToCastAsThoughtItHadFlashAbility ability) {
         super(ability);
         this.costsToAdd = ability.costsToAdd;
     }

@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -15,11 +14,12 @@ public enum GetXValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        for (VariableCost cost : sourceAbility.getCosts().getVariableCosts()) {
-            amount += cost.getAmount();
-        }
-        return amount;
+        return sourceAbility
+                .getCosts()
+                .getVariableCosts()
+                .stream()
+                .mapToInt(VariableCost::getAmount)
+                .sum();
     }
 
     @Override

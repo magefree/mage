@@ -1,9 +1,9 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -29,6 +29,8 @@ public final class BullAurochs extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+
     public BullAurochs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add(SubType.AUROCHS);
@@ -37,9 +39,9 @@ public final class BullAurochs extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Whenever Bull Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, 1);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
     }
 
     private BullAurochs(final BullAurochs card) {

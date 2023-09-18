@@ -24,7 +24,7 @@ import mage.players.Player;
  */
 public final class BarbedWire extends CardImpl {
 
-    private final String rule = "At the beginning of each player's upkeep, "
+    private static final String rule = "At the beginning of each player's upkeep, "
             + "Barbed Wire deals 1 damage to that player.";
 
     public BarbedWire(UUID ownerId, CardSetInfo setInfo) {
@@ -39,7 +39,7 @@ public final class BarbedWire extends CardImpl {
 
         // {2}: Prevent the next 1 damage that would be dealt by Barbed Wire this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BarbedWirePreventionEffect(), new ManaCostsImpl("{2}")));
+                new BarbedWirePreventionEffect(), new ManaCostsImpl<>("{2}")));
 
     }
 
@@ -60,7 +60,7 @@ class BarbwireDamageEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public BarbwireDamageEffect(final BarbwireDamageEffect effect) {
+    private BarbwireDamageEffect(final BarbwireDamageEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class BarbedWirePreventionEffect extends PreventionEffectImpl {
         staticText = "Prevent the next 1 damage that would be dealt by {this} this turn";
     }
 
-    public BarbedWirePreventionEffect(final BarbedWirePreventionEffect effect) {
+    private BarbedWirePreventionEffect(final BarbedWirePreventionEffect effect) {
         super(effect);
     }
 

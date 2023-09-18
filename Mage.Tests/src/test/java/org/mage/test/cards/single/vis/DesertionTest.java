@@ -30,7 +30,6 @@ public class DesertionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertGraveyardCount(playerA, "Desertion", 2);

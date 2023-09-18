@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.cards.*;
@@ -33,9 +32,9 @@ public final class KarnLiberated extends CardImpl {
 
     public KarnLiberated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{7}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KARN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
+        this.setStartingLoyalty(6);
 
         // +4: Target player exiles a card from their hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new KarnPlayerExileEffect(), 4);
@@ -70,7 +69,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         this.staticText = "Restart the game, leaving in exile all non-Aura permanent cards exiled with {this}. Then put those cards onto the battlefield under your control";
     }
 
-    public KarnLiberatedEffect(final KarnLiberatedEffect effect) {
+    private KarnLiberatedEffect(final KarnLiberatedEffect effect) {
         super(effect);
     }
 
@@ -148,7 +147,7 @@ class KarnLiberatedDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new KarnLiberatedDelayedEffect(exileId));
     }
 
-    public KarnLiberatedDelayedTriggeredAbility(final KarnLiberatedDelayedTriggeredAbility ability) {
+    private KarnLiberatedDelayedTriggeredAbility(final KarnLiberatedDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -179,7 +178,7 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
         this.staticText = "Put those cards onto the battlefield under your control";
     }
 
-    public KarnLiberatedDelayedEffect(final KarnLiberatedDelayedEffect effect) {
+    private KarnLiberatedDelayedEffect(final KarnLiberatedDelayedEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
     }
@@ -187,27 +186,29 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null) {
-                // Creatures put onto the battlefield due to Karn's ability will have been under their controller's control continuously
-                // since the beginning of the first turn. They can attack and their activated abilities with {T} in the cost can be activated.
-                Cards cards = new CardsImpl(exile); // needed because putOntoTheBattlefield removes from exile
-                if (!cards.isEmpty()) {
-                    controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
-                    for (Card card : cards.getCards(game)) {
-                        if (card != null) {
-                            Permanent permanent = game.getPermanent(card.getId());
-                            if (permanent != null) {
-                                ((PermanentImpl) permanent).removeSummoningSickness();
-                            }
-                        }
-                    }
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        if (controller == null || exileZone == null) {
+            return false;
+        }
+
+        // Creatures put onto the battlefield due to Karn's ability will have been under their controller's control continuously
+        // since the beginning of the first turn. They can attack and their activated abilities with {T} in the cost can be activated.
+        Cards cards = new CardsImpl(exileZone); // needed because putOntoTheBattlefield removes from exile
+        if (cards.isEmpty()) {
+            return false;
+        }
+
+        controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
+        for (Card card : cards.getCards(game)) {
+            if (card != null) {
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
+                    ((PermanentImpl) permanent).removeSummoningSickness();
                 }
             }
-            return true;
         }
-        return false;
+
+        return true;
     }
 
     @Override
@@ -224,7 +225,7 @@ class KarnPlayerExileEffect extends OneShotEffect {
         staticText = "target player exiles a card from their hand.";
     }
 
-    public KarnPlayerExileEffect(final KarnPlayerExileEffect effect) {
+    private KarnPlayerExileEffect(final KarnPlayerExileEffect effect) {
         super(effect);
     }
 
@@ -239,7 +240,7 @@ class KarnPlayerExileEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)
+        if (target.canChoose(player.getId(), source, game)
                 && target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             return player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, sourceObject.getIdName());

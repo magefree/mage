@@ -56,7 +56,7 @@ class PoultrygeistEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. If you roll a 1, sacrifice {this}. Otherwise, put a +1/+1 counter on {this}";
     }
 
-    PoultrygeistEffect(final PoultrygeistEffect ability) {
+    private PoultrygeistEffect(final PoultrygeistEffect ability) {
         super(ability);
     }
 
@@ -64,7 +64,7 @@ class PoultrygeistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int result = controller.rollDice(source, game, 6);
+            int result = controller.rollDice(outcome, source, game, 6);
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 if (result == 1) {

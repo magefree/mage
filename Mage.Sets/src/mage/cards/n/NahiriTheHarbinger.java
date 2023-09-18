@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.ContinuousEffect;
@@ -54,10 +53,10 @@ public final class NahiriTheHarbinger extends CardImpl {
 
     public NahiriTheHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: You may discard a card. If you do, draw a card.
         this.addAbility(new LoyaltyAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), 2));
@@ -96,7 +95,7 @@ class NahiriTheHarbingerEffect extends SearchEffect {
         this.staticText = "Search your library for an artifact or creature card, put it onto the battlefield, then shuffle. It gains haste. Return it to your hand at the beginning of the next end step";
     }
 
-    NahiriTheHarbingerEffect(final NahiriTheHarbingerEffect effect) {
+    private NahiriTheHarbingerEffect(final NahiriTheHarbingerEffect effect) {
         super(effect);
     }
 

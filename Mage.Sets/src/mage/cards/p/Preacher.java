@@ -60,7 +60,7 @@ class PreacherEffect extends OneShotEffect {
         this.staticText = "Gain control of target creature of an opponent's choice that they control for as long as {this} remains tapped";
     }
 
-    public PreacherEffect(final PreacherEffect effect) {
+    private PreacherEffect(final PreacherEffect effect) {
         super(effect);
     }
 
@@ -75,12 +75,12 @@ class PreacherEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && sourcePermanent != null && targetPermanent != null) {
-            SourceTappedCondition sourceTappedCondition = SourceTappedCondition.instance;
+            SourceTappedCondition sourceTappedCondition = SourceTappedCondition.TAPPED;
             ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                     new GainControlTargetEffect(Duration.Custom),
                     sourceTappedCondition,
                     "Gain control of target creature of an opponent's choice that they control for as long as {this} remains tapped");
-            effect.setTargetPointer(new FixedTarget(targetPermanent.getId()));
+            effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
             game.addEffect(effect, source);
             return true;
         }

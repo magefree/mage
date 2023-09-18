@@ -17,7 +17,6 @@ public class BurlfistOakTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Burlfist Oak", 4, 5);
     }

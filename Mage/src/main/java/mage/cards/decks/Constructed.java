@@ -14,32 +14,185 @@ import java.util.Map.Entry;
  */
 public class Constructed extends DeckValidator {
 
-    private static final Logger logger = Logger.getLogger(DeckValidator.class);
+    private static final Logger logger = Logger.getLogger(Constructed.class);
 
-    private static final List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList(
-            "Relentless Rats", "Shadowborn Apostle", "Rat Colony",
-            "Persistent Petitioners", "Seven Dwarves", "Dragon's Approach"
-    ));
-    protected static final List<String> basicLandNames = new ArrayList<>(Arrays.asList(
-            "Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes", "Snow-Covered Forest",
-            "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"
-    ));
     protected List<String> banned = new ArrayList<>();
     protected List<String> restricted = new ArrayList<>();
     protected List<String> setCodes = new ArrayList<>();
     protected List<Rarity> rarities = new ArrayList<>();
     protected Set<String> singleCards = new HashSet<>();
 
-    public Constructed() {
-        super("Constructed");
-    }
-
     protected Constructed(String name) {
-        super(name);
+        this(name, null);
     }
 
     protected Constructed(String name, String shortName) {
         super(name, shortName);
+        // Conspiracy cards are banned
+        banned.add("Adriana's Valor");
+        banned.add("Advantageous Proclamation");
+        banned.add("Assemble the Rank and Vile");
+        banned.add("Backup Plan");
+        banned.add("Brago's Favor");
+        banned.add("Double Stroke");
+        banned.add("Echoing Boon");
+        banned.add("Emissary's Ploy");
+        banned.add("Hired Heist");
+        banned.add("Hold the Perimeter");
+        banned.add("Hymn of the Wilds");
+        banned.add("Immediate Action");
+        banned.add("Incendiary Dissent");
+        banned.add("Iterative Analysis");
+        banned.add("Muzzio's Preparations");
+        banned.add("Natural Unity");
+        banned.add("Power Play");
+        banned.add("Secrets of Paradise");
+        banned.add("Secret Summoning");
+        banned.add("Sentinel Dispatch");
+        banned.add("Sovereign's Realm");
+        banned.add("Summoner's Bond");
+        banned.add("Unexpected Potential");
+        banned.add("Weight Advantage");
+        banned.add("Worldknit");
+
+        // Dexterity cards are banned
+        banned.add("Chaos Orb");
+        banned.add("Falling Star");
+
+        // Sub-game cards are banned
+        banned.add("Shahrazad");
+
+        // Ante cards are banned
+        banned.add("Amulet of Quoz");
+        banned.add("Bronze Tablet");
+        banned.add("Contract from Below");
+        banned.add("Darkpact");
+        banned.add("Demonic Attorney");
+        banned.add("Jeweled Bird");
+        banned.add("Rebirth");
+        banned.add("Tempest Efreet");
+        banned.add("Timmerian Fiends");
+
+        // Potentially offensive cards are banned
+        banned.add("Cleanse");
+        banned.add("Crusade");
+        banned.add("Imprison");
+        banned.add("Invoke Prejudice");
+        banned.add("Jihad");
+        banned.add("Pradesh Gypsies");
+        banned.add("Stone-Throwing Devils");
+
+        // Acorn stamp cards are banned
+        banned.add("\"Brims\" Barone, Midway Mobster");
+        banned.add("A Real Handful");
+        banned.add("Aardwolf's Advantage");
+        banned.add("Alpha Guard");
+        banned.add("Amped Up");
+        banned.add("An Incident Has Occurred");
+        banned.add("Angelic Harold");
+        banned.add("Animate Graveyard");
+        banned.add("Animate Object");
+        banned.add("Art Appreciation");
+        banned.add("Assembled Ensemble");
+        banned.add("Astroquarium");
+        banned.add("Autograph Book");
+        banned.add("Bag Check");
+        banned.add("Bar Entry");
+        banned.add("Blue Ribbon");
+        banned.add("Blufferfish");
+        banned.add("Busted!");
+        banned.add("Carnival Barker");
+        banned.add("Centrifuge");
+        banned.add("Claire D'Loon, Joy Sculptor");
+        banned.add("Cover the Spot");
+        banned.add("D00-DL, Caricaturist");
+        banned.add("Dart Throw");
+        banned.add("Decisions, Decisions");
+        banned.add("Devil K. Nevil");
+        banned.add("Disemvowel");
+        banned.add("Don't Try This at Home");
+        banned.add("Exit Through the Grift Shop");
+        banned.add("Far Out");
+        banned.add("Fluros of Myra's Marvels");
+        banned.add("Focused Funambulist");
+        banned.add("Form of the Approach of the Second Sun");
+        banned.add("Gallery of Legends");
+        banned.add("Get Your Head in the Game");
+        banned.add("Gift Shop");
+        banned.add("Goblin Blastronauts");
+        banned.add("Goblin Cruciverbalist");
+        banned.add("Goblin Girder Gang");
+        banned.add("Gobsmacked");
+        banned.add("Grand Marshal Macie");
+        banned.add("Gray Merchant of Alphabet");
+        banned.add("Greatest Show in the Multiverse");
+        banned.add("Guess Your Fate");
+        banned.add("Haberthrasher");
+        banned.add("Hardy of Myra's Marvels");
+        banned.add("Hat Trick");
+        banned.add("How Is This a Par Three?!");
+        banned.add("Icing Manipulator");
+        banned.add("Ignacio of Myra's Marvels");
+        banned.add("Impounding Lot-Bot");
+        banned.add("It Came from Planet Glurg");
+        banned.add("Jermane, Pride of the Circus");
+        banned.add("Jetpack Janitor");
+        banned.add("Juggletron");
+        banned.add("Katerina of Myra's Marvels");
+        banned.add("Killer Cosplay");
+        banned.add("Knife and Death");
+        banned.add("Knight in _____ Armor");
+        banned.add("Leading Performance");
+        banned.add("Lila, Hospitality Hostess");
+        banned.add("Log Flume");
+        banned.add("Main Event Horizon");
+        banned.add("Meet and Greet \"Sisay\"");
+        banned.add("Memory Test");
+        banned.add("Mistakes Were Made");
+        banned.add("Mobile Clone");
+        banned.add("Nearby Planet");
+        banned.add("Nocturno of Myra's Marvels");
+        banned.add("Now You See Me . . .");
+        banned.add("Octo Opus");
+        banned.add("Omniclown Colossus");
+        banned.add("Opening Ceremony");
+        banned.add("Park Map");
+        banned.add("Park Re-Entry");
+        banned.add("Phone a Friend");
+        banned.add("Photo Op");
+        banned.add("Pie-Eating Contest");
+        banned.add("Pietra, Crafter of Clowns");
+        banned.add("Plate Spinning");
+        banned.add("Plot Armor");
+        banned.add("Push Your Luck");
+        banned.add("Questionable Cuisine");
+        banned.add("Rat in the Hat");
+        banned.add("Rock Star");
+        banned.add("Scavenger Hunt");
+        banned.add("Scooch");
+        banned.add("Solaflora, Intergalactic Icon");
+        banned.add("Sole Performer");
+        banned.add("Souvenir T-Shirt");
+        banned.add("Spelling Bee");
+        banned.add("Squirrel Stack");
+        banned.add("Standard Procedure");
+        banned.add("Super-Duper Lost");
+        banned.add("Surprise Party");
+        banned.add("T.A.P.P.E.R.");
+        banned.add("Tchotchke Elemental");
+        banned.add("The Big Top");
+        banned.add("The Superlatorium");
+        banned.add("Ticking Mime Bomb");
+        banned.add("Trapeze Artist");
+        banned.add("Treacherous Trapezist");
+        banned.add("Trigger Happy");
+        banned.add("Trivia Contest");
+        banned.add("Truss, Chief Engineer");
+        banned.add("Tug of War");
+        banned.add("Urza's Fun House");
+        banned.add("Vorthos, Steward of Myth");
+        banned.add("Water Gun Balloon Game");
+        banned.add("Well Done");
     }
 
     public List<String> getSetCodes() {
@@ -61,8 +214,8 @@ public class Constructed extends DeckValidator {
         boolean valid = true;
         errorsList.clear();
         //20091005 - 100.2a
-        if (deck.getCards().size() < getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getCards().size() + " cards");
+        if (deck.getMaindeckCards().size() < getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getMaindeckCards().size() + " cards");
             valid = false;
         }
         //20130713 - 100.4a
@@ -190,13 +343,7 @@ public class Constructed extends DeckValidator {
     protected boolean checkCounts(int maxCopies, Map<String, Integer> counts) {
         boolean valid = true;
         for (Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > maxCopies
-                    && !basicLandNames.contains(entry.getKey())
-                    && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
-                valid = false;
-            }
-            if (entry.getValue() > 7 && entry.getKey().equals("Seven Dwarves")) {
+            if (entry.getValue() > getMaxCopies(entry.getKey(), maxCopies)) {
                 addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
                 valid = false;
             }

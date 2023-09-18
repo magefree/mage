@@ -10,7 +10,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -41,15 +41,15 @@ public final class WardenOfTheFirstTree extends CardImpl {
         // {1}{W/B}: Warden of the First Tree becomes a Human Warrior with base power and toughness 3/3.
         Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.HUMAN, SubType.WARRIOR
-        ).setText("{this} becomes a Human Warrior"), new ManaCostsImpl("{1}{W/B}"));
-        ability.addEffect(new SetPowerToughnessSourceEffect(
-                3, 3, Duration.Custom, SubLayer.SetPT_7b
+        ).setText("{this} becomes a Human Warrior"), new ManaCostsImpl<>("{1}{W/B}"));
+        ability.addEffect(new SetBasePowerToughnessSourceEffect(
+                3, 3, Duration.Custom
         ).setText("with base power and toughness 3/3"));
         this.addAbility(ability);
 
         // {2}{W/B}{W/B}: If Warden of the First Tree is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.
         this.addAbility(new SimpleActivatedAbility(
-                new WardenOfTheFirstTreeEffect(), new ManaCostsImpl("{2}{W/B}{W/B}")
+                new WardenOfTheFirstTreeEffect(), new ManaCostsImpl<>("{2}{W/B}{W/B}")
         ));
 
         // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
@@ -57,7 +57,7 @@ public final class WardenOfTheFirstTree extends CardImpl {
                 new ConditionalOneShotEffect(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
                         condition, "If {this} is a Spirit, put five +1/+1 counters on it"
-                ), new ManaCostsImpl("{3}{W/B}{W/B}{W/B}")
+                ), new ManaCostsImpl<>("{3}{W/B}{W/B}{W/B}")
         ));
     }
 

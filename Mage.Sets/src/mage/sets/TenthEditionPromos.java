@@ -20,6 +20,8 @@ public class TenthEditionPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Faerie Conclave", 1, Rarity.RARE, mage.cards.f.FaerieConclave.class));
+        cards.add(new SetCardInfo("Treetop Village", 2, Rarity.RARE, mage.cards.t.TreetopVillage.class));
         cards.add(new SetCardInfo("Reya Dawnbringer", 35, Rarity.RARE, mage.cards.r.ReyaDawnbringer.class));
      }
 }

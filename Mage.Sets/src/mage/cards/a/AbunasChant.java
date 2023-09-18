@@ -28,8 +28,7 @@ public final class AbunasChant extends CardImpl {
         //You gain 5 life; 
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
         //or prevent the next 5 damage that would be dealt to target creature this turn.
-        Mode mode = new Mode();
-        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 5));
+        Mode mode = new Mode(new PreventDamageToTargetEffect(Duration.EndOfTurn, 5));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // Entwine {2}

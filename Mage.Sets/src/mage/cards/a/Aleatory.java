@@ -58,7 +58,7 @@ class AleatoryEffect extends OneShotEffect {
         staticText = "Flip a coin. If you win the flip, target creature gets +1/+1 until end of turn";
     }
 
-    public AleatoryEffect(AleatoryEffect effect) {
+    private AleatoryEffect(final AleatoryEffect effect) {
         super(effect);
     }
 

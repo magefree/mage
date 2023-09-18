@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -30,16 +30,11 @@ import mage.target.targetpointer.FixedTargets;
  */
 public final class SporeCloud extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creatures");
-    static {
-        filter.add(BlockingPredicate.instance);
-    }
-
     public SporeCloud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");
 
         // Tap all blocking creatures.
-        this.getSpellAbility().addEffect(new TapAllEffect(filter));
+        this.getSpellAbility().addEffect(new TapAllEffect(StaticFilters.FILTER_BLOCKING_CREATURES));
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
         // Each attacking creature and each blocking creature doesn't untap during its controller's next untap step.
@@ -68,7 +63,7 @@ class SporeCloudEffect extends OneShotEffect {
         this.staticText = "Each attacking creature and each blocking creature doesn't untap during its controller's next untap step";
     }
 
-    public SporeCloudEffect(final SporeCloudEffect effect) {
+    private SporeCloudEffect(final SporeCloudEffect effect) {
         super(effect);
     }
 
@@ -82,7 +77,7 @@ class SporeCloudEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 doNotUntapNextUntapStep.add(permanent);
             }
             if (!doNotUntapNextUntapStep.isEmpty()) {

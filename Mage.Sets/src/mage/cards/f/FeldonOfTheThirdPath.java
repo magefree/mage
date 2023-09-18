@@ -34,7 +34,7 @@ public final class FeldonOfTheThirdPath extends CardImpl {
 
     public FeldonOfTheThirdPath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -42,7 +42,7 @@ public final class FeldonOfTheThirdPath extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FeldonOfTheThirdPathEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FeldonOfTheThirdPathEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(1, 1, new FilterCreatureCard("creature card in your graveyard")));
         this.addAbility(ability);
@@ -65,7 +65,7 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step";
     }
 
-    public FeldonOfTheThirdPathEffect(final FeldonOfTheThirdPathEffect effect) {
+    private FeldonOfTheThirdPathEffect(final FeldonOfTheThirdPathEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), CardType.ARTIFACT, true);
             effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
             effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
                 sacrificeEffect.setTargetPointer(new FixedTarget(addedToken, game));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);

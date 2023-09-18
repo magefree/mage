@@ -1,10 +1,8 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -17,10 +15,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.SpellsCastWatcher;
 
 /**
- * import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
  *
  * @author LevelX2
  */
@@ -28,13 +24,13 @@ public final class JaceUnravelerOfSecrets extends CardImpl {
 
     public JaceUnravelerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Scry 1, then draw a card.
-        Ability ability = new LoyaltyAbility(new ScryEffect(1), 1);
+        Ability ability = new LoyaltyAbility(new ScryEffect(1, false), 1);
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText(", then draw a card");
         ability.addEffect(effect);
@@ -47,7 +43,7 @@ public final class JaceUnravelerOfSecrets extends CardImpl {
 
         // -8: You get an emblem with "Whenever an opponent casts their first spell each turn, counter that spell."
         LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new JaceUnravelerOfSecretsEmblem()), -8);
-        this.addAbility(ability2, new SpellsCastWatcher());
+        this.addAbility(ability2);
 
     }
 

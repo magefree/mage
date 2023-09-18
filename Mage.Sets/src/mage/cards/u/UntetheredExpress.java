@@ -30,7 +30,7 @@ public final class UntetheredExpress extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Untethered Express attacks, put a +1/+1 counter on it.
-        this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"), false));
 
         // Crew 1
         this.addAbility(new CrewAbility(1));

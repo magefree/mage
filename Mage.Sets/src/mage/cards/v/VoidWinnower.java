@@ -52,7 +52,7 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Your opponents can't cast spells with even mana values. <i>(Zero is even.)</i>";
     }
 
-    public VoidWinnowerCantCastEffect(final VoidWinnowerCantCastEffect effect) {
+    private VoidWinnowerCantCastEffect(final VoidWinnowerCantCastEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast spells with even mana values (" + mageObject.getIdName() + ").";
         }
@@ -100,7 +100,7 @@ class VoidWinnowerCantBlockEffect extends RestrictionEffect {
         staticText = "Your opponents can't block with creatures with even mana values";
     }
 
-    public VoidWinnowerCantBlockEffect(final VoidWinnowerCantBlockEffect effect) {
+    private VoidWinnowerCantBlockEffect(final VoidWinnowerCantBlockEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class VoidWinnowerCantBlockEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
             // the low bit will always be set on an odd number.
-            return (permanent.getManaValue() & 1) == 0;
+            return (permanent.getManaValue() & 1) == 0 && permanent.isCreature(game);
         }
         return false;
     }

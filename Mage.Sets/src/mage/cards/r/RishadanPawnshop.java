@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,7 +30,7 @@ public final class RishadanPawnshop extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanent you control");
     
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
@@ -39,7 +38,7 @@ public final class RishadanPawnshop extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Shuffle target nontoken permanent you control into its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RishadanPawnshopShuffleIntoLibraryEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RishadanPawnshopShuffleIntoLibraryEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -63,7 +62,7 @@ class RishadanPawnshopShuffleIntoLibraryEffect extends OneShotEffect {
         this.staticText = "The owner of target nontoken permanent you control shuffles it into their library";
     }
 
-    public RishadanPawnshopShuffleIntoLibraryEffect(final RishadanPawnshopShuffleIntoLibraryEffect effect) {
+    private RishadanPawnshopShuffleIntoLibraryEffect(final RishadanPawnshopShuffleIntoLibraryEffect effect) {
         super(effect);
     }
 

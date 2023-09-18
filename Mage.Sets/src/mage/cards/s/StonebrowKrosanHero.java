@@ -23,14 +23,14 @@ import java.util.UUID;
  */
 public final class StonebrowKrosanHero extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" creature you control with trample");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with trample");
     static {
         filter.add(new AbilityPredicate(TrampleAbility.class));
     }
 
     public StonebrowKrosanHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.WARRIOR);
 

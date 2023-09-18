@@ -54,6 +54,7 @@ class CitadelOfPainEffect extends OneShotEffect {
 
     public CitadelOfPainEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals X damage to that player, where X is the number of untapped lands they control.";
     }
 
     private CitadelOfPainEffect(final CitadelOfPainEffect effect) {
@@ -74,10 +75,5 @@ class CitadelOfPainEffect extends OneShotEffect {
     @Override
     public CitadelOfPainEffect copy() {
         return new CitadelOfPainEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals X damage to that player, where X is the number of untapped lands they control.";
     }
 }

@@ -52,7 +52,7 @@ class LilianasDefeatEffect extends OneShotEffect {
         this.staticText = "Destroy target black creature or black planeswalker. If that permanent was a Liliana planeswalker, her controller loses 3 life";
     }
 
-    public LilianasDefeatEffect(final LilianasDefeatEffect effect) {
+    private LilianasDefeatEffect(final LilianasDefeatEffect effect) {
         super(effect);
     }
 

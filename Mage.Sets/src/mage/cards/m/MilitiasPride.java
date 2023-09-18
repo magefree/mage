@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,10 +45,10 @@ public final class MilitiasPride extends CardImpl {
 class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
 
     public MilitiasPrideTriggerAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new KithkinSoldierToken(), 1, true, true), new ManaCostsImpl("{W}")));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new KithkinSoldierToken(), 1, true, true), new ManaCostsImpl<>("{W}")));
     }
 
-    public MilitiasPrideTriggerAbility(final MilitiasPrideTriggerAbility ability) {
+    private MilitiasPrideTriggerAbility(final MilitiasPrideTriggerAbility ability) {
         super(ability);
     }
 
@@ -61,9 +60,9 @@ class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         Permanent permanent = game.getPermanent(event.getSourceId());
-        return permanent != null && filter.match(permanent, sourceId, controllerId, game);
+        return permanent != null && filter.match(permanent, controllerId, this, game);
     }
 
     @Override

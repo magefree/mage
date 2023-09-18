@@ -56,12 +56,12 @@ public final class JeweledTorque extends CardImpl {
     }
 }
 
-enum JeweledTorquePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum JeweledTorquePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        Permanent permanent = game.getPermanent(input.getSourceId());
+        Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

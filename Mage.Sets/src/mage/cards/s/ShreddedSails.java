@@ -42,7 +42,7 @@ public final class ShreddedSails extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ShreddedSails(final ShreddedSails card) {

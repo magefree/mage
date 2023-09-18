@@ -50,8 +50,7 @@ public final class DisplayOfDominance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // or Permanents you control can't be the targets of blue or black spells your opponents control this turn
-        Mode mode = new Mode();
-        mode.addEffect(new DisplayOfDominanceEffect());
+        Mode mode = new Mode(new DisplayOfDominanceEffect());
         this.getSpellAbility().getModes().addMode(mode);
     }
 
@@ -72,7 +71,7 @@ class DisplayOfDominanceEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "permanents you control can't be the targets of blue or black spells your opponents control this turn";
     }
 
-    public DisplayOfDominanceEffect(final DisplayOfDominanceEffect effect) {
+    private DisplayOfDominanceEffect(final DisplayOfDominanceEffect effect) {
         super(effect);
     }
 

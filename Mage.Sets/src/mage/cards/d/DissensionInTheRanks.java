@@ -27,7 +27,7 @@ public final class DissensionInTheRanks extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
 
         // Target blocking creature fights another target blocking creature.
-        this.getSpellAbility().addEffect(new FightTargetsEffect());
+        this.getSpellAbility().addEffect(new FightTargetsEffect(false));
         TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, false);
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);

@@ -11,7 +11,6 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -41,7 +40,7 @@ public final class TheBookOfVileDarkness extends CardImpl {
     public TheBookOfVileDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
@@ -96,7 +95,7 @@ class TheBookOfVileDarknessCost extends CostImpl {
         this.text = "exile {this} and artifacts you control named Eye of Vecna and Hand of Vecna";
     }
 
-    public TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
+    private TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
         super(cost);
     }
 
@@ -128,25 +127,25 @@ class TheBookOfVileDarknessCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return source.getSourcePermanentIfItStillExists(game) != null
-                && game.getBattlefield().count(filter1, source.getSourceId(), source.getControllerId(), game) > 0
-                && game.getBattlefield().count(filter2, source.getSourceId(), source.getControllerId(), game) > 0;
+                && game.getBattlefield().count(filter1, source.getControllerId(), source, game) > 0
+                && game.getBattlefield().count(filter2, source.getControllerId(), source, game) > 0;
     }
 
     private static Permanent getPermanent(FilterPermanent filter, Player controller, Ability source, Game game) {
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         switch (count) {
             case 0:
                 return null;
             case 1:
                 return game.getBattlefield().getActivePermanents(
-                        filter, source.getControllerId(), source.getSourceId(), game
+                        filter, source.getControllerId(), source, game
                 ).stream().findFirst().orElse(null);
             default:
                 break;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        controller.choose(Outcome.Sacrifice, target, source.getControllerId(), game);
+        target.withNotTarget(true);
+        controller.choose(Outcome.Sacrifice, target, source, game);
         return game.getPermanent(target.getFirstTarget());
     }
 
@@ -160,8 +159,8 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
 
     TheBookOfVileDarknessEffect() {
         super(Outcome.Benefit);
-        staticText = "create Vecna, a legendary 8/8 black Zombie God creature token " +
-                "with indestructible and all triggered abilities of the exiled cards";
+        staticText = "create Vecna, a legendary 8/8 black Zombie God creature token "
+                + "with indestructible and all triggered abilities of the exiled cards";
     }
 
     private TheBookOfVileDarknessEffect(final TheBookOfVileDarknessEffect effect) {
@@ -181,13 +180,17 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
         }
         Token token = new VecnaToken();
         for (MageObjectReference mor : morSet) {
-            Card card = mor.getCard(game);
+            // the card object in the mor doesn't work, so the permanent object is used
+            Permanent card = mor.getPermanentOrLKIBattlefield(game);
             if (card == null) {
                 continue;
             }
             for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof TriggeredAbility) {
-                    token.addAbility(ability.copy());
+                    Ability copyAbility = ability.copy();
+                    copyAbility.newId();
+                    copyAbility.setControllerId(source.getControllerId());
+                    token.addAbility(copyAbility);
                 }
             }
         }

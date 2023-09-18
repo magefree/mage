@@ -69,10 +69,10 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
 
     public FalkenrathGorgerEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "Each Vampire creature card you own that isn't on the battlefield has madness. Its madness cost is equal to its mana cost";
+        this.staticText = "Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost";
     }
 
-    public FalkenrathGorgerEffect(final FalkenrathGorgerEffect effect) {
+    private FalkenrathGorgerEffect(final FalkenrathGorgerEffect effect) {
         super(effect);
         this.madnessAbilities.putAll(effect.madnessAbilities);
     }
@@ -97,7 +97,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
             }
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
-                if (filter.match(card, source.getSourceId(), controller.getId(), game)) {
+                if (filter.match(card, controller.getId(), source, game)) {
                     if (card.isOwnedBy(controller.getId())) {
                         addMadnessToCard(game, card, usedMadnessAbilities);
                     }
@@ -114,7 +114,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
     private void addMadnessToCard(Game game, Card card, Map<UUID, MadnessAbility> usedMadnessAbilities) {
         MadnessAbility ability = madnessAbilities.get(card.getId());
         if (ability == null) {
-            ability = new MadnessAbility(card, card.getSpellAbility().getManaCosts());
+            ability = new MadnessAbility(card.getSpellAbility().getManaCosts());
         }
         game.getState().addOtherAbility(card, ability, false);
         usedMadnessAbilities.put(card.getId(), ability);

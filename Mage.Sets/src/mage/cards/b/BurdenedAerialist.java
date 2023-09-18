@@ -25,7 +25,7 @@ public final class BurdenedAerialist extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public BurdenedAerialist(UUID ownerId, CardSetInfo setInfo) {

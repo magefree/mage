@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -37,9 +36,9 @@ public final class BasriDevotedPaladin extends CardImpl {
     public BasriDevotedPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BASRI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(
@@ -80,7 +79,7 @@ class BasriDevotedPaladinTriggeredAbility extends DelayedTriggeredAbility {
         super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.EndOfTurn, false);
     }
 
-    public BasriDevotedPaladinTriggeredAbility(BasriDevotedPaladinTriggeredAbility ability) {
+    private BasriDevotedPaladinTriggeredAbility(final BasriDevotedPaladinTriggeredAbility ability) {
         super(ability);
     }
 

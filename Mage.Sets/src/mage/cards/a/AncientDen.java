@@ -19,7 +19,7 @@ public final class AncientDen extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public AncientDen (final AncientDen card) {
+    private AncientDen(final AncientDen card) {
         super(card);
     }
 

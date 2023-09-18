@@ -78,6 +78,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Chain of Vapor", 73, Rarity.UNCOMMON, mage.cards.c.ChainOfVapor.class));
         cards.add(new SetCardInfo("Charging Slateback", 194, Rarity.COMMON, mage.cards.c.ChargingSlateback.class));
         cards.add(new SetCardInfo("Choking Tethers", 74, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
+        cards.add(new SetCardInfo("Circle of Solace", 13, Rarity.RARE, mage.cards.c.CircleOfSolace.class));
         cards.add(new SetCardInfo("Clone", 75, Rarity.RARE, mage.cards.c.Clone.class));
         cards.add(new SetCardInfo("Commando Raid", 195, Rarity.UNCOMMON, mage.cards.c.CommandoRaid.class));
         cards.add(new SetCardInfo("Complicate", 76, Rarity.UNCOMMON, mage.cards.c.Complicate.class));
@@ -86,8 +87,11 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Cover of Darkness", 133, Rarity.RARE, mage.cards.c.CoverOfDarkness.class));
         cards.add(new SetCardInfo("Crafty Pathmage", 77, Rarity.COMMON, mage.cards.c.CraftyPathmage.class));
         cards.add(new SetCardInfo("Crowd Favorites", 15, Rarity.UNCOMMON, mage.cards.c.CrowdFavorites.class));
+        cards.add(new SetCardInfo("Crown of Ascension", 78, Rarity.COMMON, mage.cards.c.CrownOfAscension.class));
         cards.add(new SetCardInfo("Crown of Awe", 16, Rarity.COMMON, mage.cards.c.CrownOfAwe.class));
         cards.add(new SetCardInfo("Crown of Fury", 196, Rarity.COMMON, mage.cards.c.CrownOfFury.class));
+        cards.add(new SetCardInfo("Crown of Suspicion", 134, Rarity.COMMON, mage.cards.c.CrownOfSuspicion.class));
+        cards.add(new SetCardInfo("Crown of Vigor", 253, Rarity.COMMON, mage.cards.c.CrownOfVigor.class));
         cards.add(new SetCardInfo("Crude Rampart", 17, Rarity.UNCOMMON, mage.cards.c.CrudeRampart.class));
         cards.add(new SetCardInfo("Cruel Revival", 135, Rarity.COMMON, mage.cards.c.CruelRevival.class));
         cards.add(new SetCardInfo("Cryptic Gateway", 306, Rarity.RARE, mage.cards.c.CrypticGateway.class));
@@ -169,6 +173,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Gratuitous Violence", 212, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
         cards.add(new SetCardInfo("Gravel Slinger", 33, Rarity.COMMON, mage.cards.g.GravelSlinger.class));
         cards.add(new SetCardInfo("Gravespawn Sovereign", 152, Rarity.RARE, mage.cards.g.GravespawnSovereign.class));
+        cards.add(new SetCardInfo("Graxiplon", 86, Rarity.UNCOMMON, mage.cards.g.Graxiplon.class));
         cards.add(new SetCardInfo("Grinning Demon", 153, Rarity.RARE, mage.cards.g.GrinningDemon.class));
         cards.add(new SetCardInfo("Gustcloak Harrier", 34, Rarity.COMMON, mage.cards.g.GustcloakHarrier.class));
         cards.add(new SetCardInfo("Gustcloak Runner", 35, Rarity.COMMON, mage.cards.g.GustcloakRunner.class));
@@ -285,6 +290,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Silent Specter", 169, Rarity.RARE, mage.cards.s.SilentSpecter.class));
         cards.add(new SetCardInfo("Silklash Spider", 281, Rarity.RARE, mage.cards.s.SilklashSpider.class));
         cards.add(new SetCardInfo("Silvos, Rogue Elemental", 282, Rarity.RARE, mage.cards.s.SilvosRogueElemental.class));
+        cards.add(new SetCardInfo("Skirk Commando", 228, Rarity.COMMON, mage.cards.s.SkirkCommando.class));
         cards.add(new SetCardInfo("Skirk Fire Marshal", 229, Rarity.RARE, mage.cards.s.SkirkFireMarshal.class));
         cards.add(new SetCardInfo("Skirk Prospector", 230, Rarity.COMMON, mage.cards.s.SkirkProspector.class));
         cards.add(new SetCardInfo("Skittish Valesk", 231, Rarity.UNCOMMON, mage.cards.s.SkittishValesk.class));
@@ -323,6 +329,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Taunting Elf", 290, Rarity.COMMON, mage.cards.t.TauntingElf.class));
         cards.add(new SetCardInfo("Tempting Wurm", 291, Rarity.RARE, mage.cards.t.TemptingWurm.class));
         cards.add(new SetCardInfo("Tephraderm", 239, Rarity.RARE, mage.cards.t.Tephraderm.class));
+        cards.add(new SetCardInfo("Thoughtbound Primoc", 240, Rarity.UNCOMMON, mage.cards.t.ThoughtboundPrimoc.class));
         cards.add(new SetCardInfo("Thrashing Mudspawn", 177, Rarity.UNCOMMON, mage.cards.t.ThrashingMudspawn.class));
         cards.add(new SetCardInfo("Threaten", 241, Rarity.UNCOMMON, mage.cards.t.Threaten.class));
         cards.add(new SetCardInfo("Thunder of Hooves", 242, Rarity.UNCOMMON, mage.cards.t.ThunderOfHooves.class));

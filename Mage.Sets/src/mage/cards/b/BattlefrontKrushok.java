@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -20,12 +21,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class BattlefrontKrushok extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public BattlefrontKrushok(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
@@ -37,7 +32,9 @@ public final class BattlefrontKrushok extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
 
         // Each creature you control with a +1/+1 counter on it can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new CantBeBlockedByMoreThanOneAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1)));
     }
 
     private BattlefrontKrushok(final BattlefrontKrushok card) {

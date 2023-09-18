@@ -5,7 +5,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -19,7 +18,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
     public RemoveCounterSourceEffect(Counter counter) {
         super(Outcome.UnboostCreature);
         this.counter = counter;
-        setText();
+        staticText = "remove " + counter.getDescription() + " from {this}";
     }
 
     public RemoveCounterSourceEffect(RemoveCounterSourceEffect effect) {
@@ -61,15 +60,5 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
     @Override
     public RemoveCounterSourceEffect copy() {
         return new RemoveCounterSourceEffect(this);
-    }
-
-    private void setText() {
-        if (counter.getCount() > 1) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("remove ").append(Integer.toString(counter.getCount())).append(' ').append(counter.getName()).append(" counters from {this}");
-            staticText = sb.toString();
-        } else {
-            staticText = "remove " + CounterType.findArticle(counter.getName()) + " " + counter.getName() + " counter from {this}";
-        }
     }
 }

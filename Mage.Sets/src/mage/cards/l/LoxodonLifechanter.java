@@ -43,7 +43,7 @@ public final class LoxodonLifechanter extends CardImpl {
                 LoxodonLifechanterValue2.instance,
                 LoxodonLifechanterValue2.instance,
                 Duration.EndOfTurn, true
-        ), new ManaCostsImpl("{5}{W}")));
+        ), new ManaCostsImpl<>("{5}{W}")));
     }
 
     private LoxodonLifechanter(final LoxodonLifechanter card) {

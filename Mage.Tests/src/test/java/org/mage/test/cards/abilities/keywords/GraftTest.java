@@ -70,7 +70,7 @@ public class GraftTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cytoplast Root-Kin");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sporeback Troll");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -91,7 +91,7 @@ public class GraftTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cytoplast Root-Kin");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sporeback Troll");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();

@@ -1,16 +1,15 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
 
@@ -27,9 +26,11 @@ import java.util.UUID;
  */
 public final class DoranTheSiegeTower extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature");
+
     public DoranTheSiegeTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.SHAMAN);
 
@@ -37,12 +38,7 @@ public final class DoranTheSiegeTower extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Each creature assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new CombatDamageByToughnessEffect(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, false
-                )
-        ));
+        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessAllEffect(filter)));
     }
 
     private DoranTheSiegeTower(final DoranTheSiegeTower card) {

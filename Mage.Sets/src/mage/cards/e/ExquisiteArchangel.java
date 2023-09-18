@@ -58,7 +58,7 @@ class ExquisiteArchangelEffect extends ReplacementEffectImpl {
         staticText = "If you would lose the game, instead exile {this} and your life total becomes equal to your starting life total";
     }
 
-    public ExquisiteArchangelEffect(final ExquisiteArchangelEffect effect) {
+    private ExquisiteArchangelEffect(final ExquisiteArchangelEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class ExquisiteArchangelEffect extends ReplacementEffectImpl {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             new ExileSourceEffect().apply(game, source);
-            player.setLife(game.getLife(), game, source);
+            player.setLife(game.getStartingLife(), game, source);
             return true;
         }
         return false;

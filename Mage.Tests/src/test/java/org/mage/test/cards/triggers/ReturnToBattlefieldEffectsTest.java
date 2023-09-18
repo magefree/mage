@@ -111,7 +111,7 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pharika, God of Affliction", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        setChoice(playerA, true); // cast it face down as 2/2 creature
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "{B}{G}: Exile target creature card from a graveyard",
@@ -121,7 +121,7 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
 
         execute();
         assertPermanentCount(playerB, "Pharika, God of Affliction", 1);
-        assertPermanentCount(playerA, "Snake", 1);
+        assertPermanentCount(playerA, "Snake Token", 1);
         assertPermanentCount(playerA, "Pine Walker", 1);
 
         assertExileCount("Deathmist Raptor", 1);

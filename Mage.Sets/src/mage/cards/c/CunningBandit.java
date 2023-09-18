@@ -43,7 +43,7 @@ public final class CunningBandit extends CardImpl {
         this.flipCardName = "Azamuki, Treachery Incarnate";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Cunning Bandit.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Cunning Bandit, you may flip it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
@@ -66,7 +66,7 @@ class AzamukiTreacheryIncarnate extends TokenImpl {
 
     AzamukiTreacheryIncarnate() {
         super("Azamuki, Treachery Incarnate", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.SPIRIT);
@@ -81,7 +81,7 @@ class AzamukiTreacheryIncarnate extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
+    private AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
         super(token);
     }
 

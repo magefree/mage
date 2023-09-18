@@ -35,7 +35,7 @@ public final class HearthKami extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}, Sacrifice Hearth Kami: Destroy target artifact with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);

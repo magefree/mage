@@ -40,7 +40,7 @@ public final class BrutalDeceiver extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));
 
         // {2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BrutalDeceiverEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BrutalDeceiverEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private BrutalDeceiver(final BrutalDeceiver card) {
@@ -60,7 +60,7 @@ class BrutalDeceiverEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn";
     }
 
-    public BrutalDeceiverEffect(final BrutalDeceiverEffect effect) {
+    private BrutalDeceiverEffect(final BrutalDeceiverEffect effect) {
         super(effect);
     }
 

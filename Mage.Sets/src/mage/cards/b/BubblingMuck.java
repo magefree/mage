@@ -1,11 +1,8 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.Mana;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,21 +10,21 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class BubblingMuck extends CardImpl {
 
     public BubblingMuck(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Until end of turn, whenever a player taps a Swamp for mana, that player adds {B}.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BubblingMuckTriggeredAbility()));
@@ -45,18 +42,12 @@ public final class BubblingMuck extends CardImpl {
 
 class BubblingMuckTriggeredAbility extends DelayedTriggeredManaAbility {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
-
-    static {
-        filter.add(SubType.SWAMP.getPredicate());
-    }
-
-    public BubblingMuckTriggeredAbility() {
+    BubblingMuckTriggeredAbility() {
         super(new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.B), "their"), Duration.EndOfTurn, false);
         this.usesStack = false;
     }
 
-    public BubblingMuckTriggeredAbility(BubblingMuckTriggeredAbility ability) {
+    private BubblingMuckTriggeredAbility(BubblingMuckTriggeredAbility ability) {
         super(ability);
     }
 
@@ -67,14 +58,12 @@ class BubblingMuckTriggeredAbility extends DelayedTriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (filter.match(land, getSourceId(), getControllerId(), game)) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(land.getControllerId()));
-            }
-            return true;
+        Permanent land = ((TappedForManaEvent) event).getPermanent();
+        if (land == null || !land.hasSubtype(SubType.SWAMP, game)) {
+            return false;
         }
-        return false;
+        getEffects().setTargetPointer(new FixedTarget(land.getControllerId()));
+        return true;
     }
 
     @Override

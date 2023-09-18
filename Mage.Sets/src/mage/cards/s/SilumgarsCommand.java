@@ -12,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
@@ -23,12 +22,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public final class SilumgarsCommand extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("noncreature spell");
     private static final FilterPermanent filter2 = new FilterPermanent("planeswalker");
 
     static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter2.add(CardType.PLANESWALKER.getPredicate());
     }
 
@@ -41,23 +37,20 @@ public final class SilumgarsCommand extends CardImpl {
         
         // Counter target noncreature spell;
         this.getSpellAbility().getEffects().add(new CounterTargetEffect());
-        this.getSpellAbility().getTargets().add(new TargetSpell(filter));
+        this.getSpellAbility().getTargets().add(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         
         // or Return target permanent to its owner's hand; 
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetPermanent());
         this.getSpellAbility().getModes().addMode(mode);        
      
         // or Target creature gets -3/-3 until end of turn;
-        mode = new Mode();
-        mode.addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
+        mode = new Mode(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().getModes().addMode(mode);        
 
         // or Destroy target planeswalker.
-        mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetPermanent(filter2));
         this.getSpellAbility().getModes().addMode(mode);        
     }

@@ -55,9 +55,10 @@ class ThassasEmissaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public ThassasEmissaryTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever {this} or enchanted creature deals combat damage to a player, ");
     }
 
-    public ThassasEmissaryTriggeredAbility(final ThassasEmissaryTriggeredAbility ability) {
+    private ThassasEmissaryTriggeredAbility(final ThassasEmissaryTriggeredAbility ability) {
         super(ability);
     }
 
@@ -84,10 +85,4 @@ class ThassasEmissaryTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or enchanted creature deals combat damage to a player, " ;
-    }
-
 }

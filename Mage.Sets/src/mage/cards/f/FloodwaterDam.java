@@ -27,7 +27,7 @@ public final class FloodwaterDam extends CardImpl {
         // {X}{X}{1}, {tap}: Tap X target lands.
         Effect effect = new TapTargetEffect();
         effect.setText("tap X target lands");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}{X}{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}{X}{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
         this.addAbility(ability);

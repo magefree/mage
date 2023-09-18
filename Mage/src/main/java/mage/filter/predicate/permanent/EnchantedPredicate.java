@@ -1,6 +1,6 @@
-
 package mage.filter.predicate.permanent;
 
+import mage.constants.SubType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -19,7 +19,7 @@ public enum EnchantedPredicate implements Predicate<Permanent> {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(permanent -> permanent.isEnchantment(game));
+                .anyMatch(permanent -> permanent.hasSubtype(SubType.AURA, game));
     }
 
     @Override

@@ -2,6 +2,7 @@ package mage.collation;
 
 import mage.util.RandomUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -13,9 +14,8 @@ import java.util.List;
  */
 public class Rotater<T> {
 
-    protected final List<T> items;
-    private final boolean keepOrder;
-    private int position = 0;
+    private final List<T> items;
+    private int position;
 
     public Rotater(T item) {
         this(true, item);
@@ -26,8 +26,15 @@ public class Rotater<T> {
     }
 
     public Rotater(boolean keepOrder, T... items) {
-        this.items = Arrays.asList(items);
-        this.keepOrder = keepOrder;
+        if (keepOrder) {
+            this.items = Arrays.asList(items);
+            this.position = RandomUtil.nextInt(this.items.size());
+        } else {
+            this.items = new ArrayList<T>();
+            Collections.addAll(this.items, items);
+            Collections.shuffle(this.items, RandomUtil.getRandom());
+            this.position = 0;
+        }
     }
 
     public int iterate() {
@@ -39,12 +46,5 @@ public class Rotater<T> {
 
     public T getNext() {
         return items.get(iterate());
-    }
-
-    public void shuffle() {
-        position = RandomUtil.nextInt(items.size());
-        if (!keepOrder) {
-            Collections.shuffle(items, RandomUtil.getRandom());
-        }
     }
 }

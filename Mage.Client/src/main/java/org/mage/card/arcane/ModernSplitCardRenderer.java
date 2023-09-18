@@ -2,6 +2,7 @@ package org.mage.card.arcane;
 
 import mage.ObjectColor;
 import mage.cards.ArtRect;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.view.CardView;
 
@@ -16,6 +17,9 @@ import java.util.List;
  * @author StravantUser
  */
 public class ModernSplitCardRenderer extends ModernCardRenderer {
+
+    static String RULES_MARK_FUSE = "Fuse";
+    static String RULES_MARK_AFTERMATH = "Aftermath";
 
     private static class HalfCardProps {
 
@@ -49,8 +53,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.manaCostString = ManaSymbols.getClearManaCost(cardView.getRightSplitCostsStr());
         leftHalf.manaCostString = ManaSymbols.getClearManaCost(cardView.getLeftSplitCostsStr());
 
-        rightHalf.color = getColorFromManaCostHack(cardView.getRightSplitCostsStr());
-        leftHalf.color = getColorFromManaCostHack(cardView.getLeftSplitCostsStr());
+        rightHalf.color = new ObjectColor(cardView.getRightSplitCostsStr());
+        leftHalf.color = new ObjectColor(cardView.getLeftSplitCostsStr());
 
         parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
         parseRules(view.getLeftSplitRules(), leftHalf.keywords, leftHalf.rules);
@@ -61,8 +65,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.name = cardView.getRightSplitName();
         leftHalf.name = cardView.getLeftSplitName();
 
-        isFuse = view.getRules().stream().anyMatch(rule -> rule.contains("Fuse"));
-        isAftermath = view.getRightSplitRules().stream().anyMatch(rule -> rule.contains("Aftermath"));
+        isFuse = view.getRules().stream().anyMatch(rule -> rule.contains(RULES_MARK_FUSE));
+        isAftermath = view.getRightSplitRules().stream().anyMatch(rule -> rule.contains(RULES_MARK_AFTERMATH));
 
         // It's easier for rendering to swap the card halves here because for aftermath cards
         // they "rotate" in opposite directions making consquence and normal split cards
@@ -121,24 +125,6 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
             rightHalf.ch -= boxHeight;
             leftHalf.ch -= boxHeight;
         }
-    }
-
-    // Ugly hack used here because the card database doesn't actually store color
-    // for each half of split cards separately.
-    private ObjectColor getColorFromManaCostHack(String costs) {
-        ObjectColor c = new ObjectColor();
-        if (costs.contains("W")) {
-            c.setWhite(true);
-        } else if (costs.contains("U")) {
-            c.setBlue(true);
-        } else if (costs.contains("B")) {
-            c.setBlack(true);
-        } else if (costs.contains("R")) {
-            c.setRed(true);
-        } else if (costs.contains("G")) {
-            c.setGreen(true);
-        }
-        return c;
     }
 
     @Override
@@ -223,7 +209,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     protected void drawSplitHalfFrame(Graphics2D g, CardPanelAttributes attribs, HalfCardProps half, int typeLineY) {
         // Get the border paint
         Color boxColor = getBoxColor(half.color, cardView.getCardTypes(), attribs.isTransformed);
-        Paint textboxPaint = getTextboxPaint(half.color, cardView.getCardTypes(), cardWidth);
+        Paint textboxPaint = getTextboxPaint(half.color, cardView.getCardTypes(), cardWidth, false);
         Paint borderPaint = getBorderPaint(half.color, cardView.getCardTypes(), cardWidth);
 
         // Draw main frame
@@ -299,7 +285,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     }
 
     @Override
-    protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image) {
+    protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image, boolean lessOpaqueRulesTextBox) {
         if (isAftermath()) {
             drawSplitHalfFrame(getUnmodifiedHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
             drawSplitHalfFrame(getAftermathHalfContext(g), attribs, rightHalf, (rightHalf.ch - boxHeight) / 2);
@@ -309,14 +295,14 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
             if (isFuse()) {
                 Graphics2D g2 = getRightHalfContext(g);
                 int totalFuseBoxWidth = rightHalf.cw * 2 + 2 * borderWidth + dividerSize;
-                Paint boxColor = getTextboxPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth);
+                Paint boxColor = getTextboxPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth, false);
                 Paint borderPaint = getBorderPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth);
                 CardRendererUtils.drawRoundedBox(g2,
                         -borderWidth, rightHalf.ch,
                         totalFuseBoxWidth, boxHeight,
                         contentInset,
                         borderPaint, boxColor);
-                drawNameLine(g2, attribs, "Fuse (You may cast both halves from your hand)", "",
+                drawNameLine(g2, attribs, SplitCard.FUSE_RULE, "",
                         0, rightHalf.ch,
                         totalFuseBoxWidth - 2 * borderWidth, boxHeight);
             }

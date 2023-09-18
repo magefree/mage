@@ -54,7 +54,7 @@ class RoninCliffriderEffect extends OneShotEffect {
         this.staticText = "you may have it deal 1 damage to each creature defending player controls";
     }
 
-    public RoninCliffriderEffect(final RoninCliffriderEffect effect) {
+    private RoninCliffriderEffect(final RoninCliffriderEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class RoninCliffriderEffect extends OneShotEffect {
         if (defenderId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(defenderId));
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
             for (Permanent permanent : permanents) {
                 permanent.damage(1, source.getSourceId(), source, game, false, true);
             }

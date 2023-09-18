@@ -30,7 +30,7 @@ public final class FurySliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(),
                         Duration.WhileOnBattlefield,
-                        StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                        StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
                 )
         ));
     }

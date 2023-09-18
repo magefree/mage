@@ -56,7 +56,7 @@ class WormsOfTheEarthPlayEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "Players can't play lands";
     }
 
-    public WormsOfTheEarthPlayEffect(final WormsOfTheEarthPlayEffect effect) {
+    private WormsOfTheEarthPlayEffect(final WormsOfTheEarthPlayEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class WormsOfTheEarthEnterEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Lands can't enter the battlefield";
     }
 
-    public WormsOfTheEarthEnterEffect(final WormsOfTheEarthEnterEffect effect) {
+    private WormsOfTheEarthEnterEffect(final WormsOfTheEarthEnterEffect effect) {
         super(effect);
     }
 
@@ -120,7 +120,7 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
         this.staticText = "any player may sacrifice two lands or have {this} deal 5 damage to that player. If a player does either, destroy {this}";
     }
 
-    public WormsOfTheEarthDestroyEffect(final WormsOfTheEarthDestroyEffect effect) {
+    private WormsOfTheEarthDestroyEffect(final WormsOfTheEarthDestroyEffect effect) {
         super(effect);
     }
 
@@ -129,7 +129,7 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), false));
+            Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), false));
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

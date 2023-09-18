@@ -59,7 +59,7 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
         this.setColor = setColor;
     }
 
-    public BecomesColorSourceEffect(final BecomesColorSourceEffect effect) {
+    protected BecomesColorSourceEffect(final BecomesColorSourceEffect effect) {
         super(effect);
         this.setColor = effect.setColor;
     }
@@ -96,7 +96,7 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
             return false;
         }
         if (setColor != null) {
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (sourceObject != null) {
                 sourceObject.getColor(game).setColor(setColor);
             } else {
@@ -113,6 +113,6 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
             return staticText;
         }
         return "{this} becomes " + (setColor == null ? "the color of your choice" : setColor.getDescription())
-                + ' ' + duration.toString();
+                + (duration.toString().isEmpty() ? "" : " " + duration.toString());
     }
 }

@@ -49,7 +49,6 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
         assertLife(playerA, 40);
         assertLife(playerB, 40);
 
@@ -77,7 +76,7 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 8); // Cost reduction does not work for getPlayable so you need to have 8 mana available
        
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Patron of the Orochi");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Coiled Tinviper");
 
         setStrictChooseMode(true);
@@ -85,7 +84,6 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
         assertLife(playerA, 40);
         assertLife(playerB, 40);
        
@@ -108,17 +106,15 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         // Put target nonland permanent into its owner's library just beneath the top X cards of that library.
         addCard(Zone.HAND, playerA, "Unexpectedly Absent"); // Instant {X}{W}{W}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath"); // {3}{B}{B}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath", true); // {3}{B}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unexpectedly Absent", "Ob Nixilis of the Black Oath");
         setChoice(playerA, "X=0");
-        setChoice(playerA, "Yes"); // Move Commander to command zone instead library?
+        setChoice(playerA, true); // Move Commander to command zone instead library?
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Ob Nixilis of the Black Oath", 0);
         assertLibraryCount(playerA, "Ob Nixilis of the Black Oath", 0);
         assertCommandZoneCount(playerA, "Ob Nixilis of the Black Oath", 1);

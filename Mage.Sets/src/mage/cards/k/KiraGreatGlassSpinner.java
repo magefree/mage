@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -31,7 +30,7 @@ public final class KiraGreatGlassSpinner extends CardImpl {
     public KiraGreatGlassSpinner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.SPIRIT);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -44,7 +43,7 @@ public final class KiraGreatGlassSpinner extends CardImpl {
         effect.setText("counter that spell or ability");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new KiraGreatGlassSpinnerAbility(effect), Duration.WhileOnBattlefield,
-                        FILTER_PERMANENT_CREATURES)),
+                        StaticFilters.FILTER_PERMANENT_CREATURES)),
                 new NumberOfTimesPermanentTargetedATurnWatcher());
 
     }
@@ -65,7 +64,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
-    public KiraGreatGlassSpinnerAbility(final KiraGreatGlassSpinnerAbility ability) {
+    private KiraGreatGlassSpinnerAbility(final KiraGreatGlassSpinnerAbility ability) {
         super(ability);
     }
 
@@ -93,7 +92,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
                                 for (UUID targetId : target.getTargets()) {
                                     if (this.getSourceId().equals(targetId)) {
                                         for (Effect effect : getEffects()) {
-                                            effect.setTargetPointer(new FixedTarget(stackObject.getId()));
+                                            effect.setTargetPointer(new FixedTarget(stackObject.getId(), game));
                                         }
                                         return true;
                                     }

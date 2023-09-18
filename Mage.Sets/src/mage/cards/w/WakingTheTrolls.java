@@ -34,7 +34,7 @@ public final class WakingTheTrolls extends CardImpl {
 
         this.subtype.add(SubType.SAGA);
 
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_I);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Destroy target land.
         sagaAbility.addChapterEffect(
@@ -73,8 +73,8 @@ class WakingTheTrollsEffect extends OneShotEffect {
 
     WakingTheTrollsEffect() {
         super(Outcome.Benefit);
-        staticText = "choose target opponent. If they control fewer lands than you, " +
-                "create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference";
+        staticText = "choose target opponent. If they control fewer lands than you, "
+                + "create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference";
     }
 
     private WakingTheTrollsEffect(final WakingTheTrollsEffect effect) {
@@ -90,11 +90,11 @@ class WakingTheTrollsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int myLands = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         int theirLands = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), source.getFirstTarget(), game
+                source.getFirstTarget(), source, game
         );
         if (myLands <= theirLands) {
             return false;

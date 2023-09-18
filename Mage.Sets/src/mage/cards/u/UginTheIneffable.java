@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
@@ -37,8 +36,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -55,9 +52,9 @@ public final class UginTheIneffable extends CardImpl {
     public UginTheIneffable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{6}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.UGIN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Colorless spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(
@@ -86,7 +83,7 @@ public final class UginTheIneffable extends CardImpl {
 class UginTheIneffableEffect extends OneShotEffect {
 
     UginTheIneffableEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Exile the top card of your library face down and look at it. "
                 + "Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, "
                 + "put the exiled card into your hand.";
@@ -137,7 +134,7 @@ class UginTheIneffableEffect extends OneShotEffect {
 
             // look at face-down card in exile
             UginTheIneffableLookAtFaceDownEffect lookAtEffect = new UginTheIneffableLookAtFaceDownEffect();
-            lookAtEffect.setTargetPointer(new FixedTarget(card.getId()));
+            lookAtEffect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(lookAtEffect, source);
 
             tokenObjs.add(new MageObjectReference(addedTokenId, game));

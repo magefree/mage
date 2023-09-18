@@ -33,7 +33,7 @@ public class SurviveTheNightTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Survive the Night", 1);
         assertGraveyardCount(playerB, "Bloodbriar", 1);
-        assertPermanentCount(playerA, "Clue", 1);
+        assertPermanentCount(playerA, "Clue Token", 1);
         assertPermanentCount(playerA, "Hinterland Logger", 1);
         assertPowerToughness(playerA, "Hinterland Logger", 3, 1);
         assertAbility(playerA, "Hinterland Logger", IndestructibleAbility.getInstance(), true);

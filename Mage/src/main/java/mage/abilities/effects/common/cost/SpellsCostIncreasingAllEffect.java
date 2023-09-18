@@ -55,6 +55,9 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
             case OPPONENT:
                 sb.append(" your opponents cast");
                 break;
+            case ACTIVE:
+                sb.append(" the active player casts");
+                break;
             case ANY:
                 break;
             default:
@@ -110,6 +113,10 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
                         return false;
                     }
                     break;
+                case ACTIVE:
+                    if (!game.isActivePlayer(abilityController.getId())) {
+                        return false;
+                    }
                 case ANY:
                     break;
                 default:
@@ -119,12 +126,12 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
                 // real cast with put on stack
-                return this.filter.match(spell, game);
+                return this.filter.match(spell, sourceController.getId(), source, game);
             } else {
                 // get playable and other staff without put on stack
                 // used at least for flashback ability because Flashback ability doesn't use stack
-                Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return this.filter.match(sourceCard, game);
+                Card sourceCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+                return this.filter.match(sourceCard, sourceController.getId(), source, game);
             }
         }
         return false;

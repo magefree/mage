@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,27 +30,25 @@ import java.util.UUID;
  */
 public final class LimDulTheNecromancer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
     private static final FilterPermanent filter2 = new FilterPermanent("Zombie");
 
     static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter2.add(SubType.ZOMBIE.getPredicate());
     }
 
     public LimDulTheNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl("{1}{B}")), false, filter, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl<>("{1}{B}")), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, true));
 
         // {1}{B}: Regenerate target Zombie.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability2.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability2);
 
@@ -72,7 +71,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
         staticText = "return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types";
     }
 
-    public LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
+    private LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
         super(effect);
     }
 
@@ -91,7 +90,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
                         && card.isCreature(game)) {
                     Permanent creature = game.getPermanent(card.getId());
                     ContinuousEffect effect = new AddCardSubTypeTargetEffect(SubType.ZOMBIE, Duration.WhileOnBattlefield);
-                    effect.setTargetPointer(new FixedTarget(creature.getId()));
+                    effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                     game.addEffect(effect, source);
                 }
             }

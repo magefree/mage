@@ -22,14 +22,14 @@ public class TargetEnchantmentPermanent extends TargetPermanent {
     }
 
     public TargetEnchantmentPermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_ENCHANTMENT_PERMANENT, false);
+        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_PERMANENT_ENCHANTMENT, false);
     }
 
     public TargetEnchantmentPermanent(int minNumTargets, int maxNumTargets, FilterEnchantmentPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetEnchantmentPermanent(final TargetEnchantmentPermanent target) {
+    protected TargetEnchantmentPermanent(final TargetEnchantmentPermanent target) {
         super(target);
     }
 

@@ -34,7 +34,11 @@ public class ActionSimulator {
     }
 
     public int evaluateState() {
-        Player opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
+        Player opponent = game.getPlayer(game.getOpponents(player.getId()).stream().findFirst().orElse(null));
+        if (opponent == null) {
+            return Integer.MAX_VALUE;
+        }
+
         if (game.checkIfGameIsOver()) {
             if (player.hasLost() || opponent.hasWon()) {
                 return Integer.MIN_VALUE;

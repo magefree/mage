@@ -28,7 +28,7 @@ public final class BreakingWave extends CardImpl {
 
         Effect effect = new BreakingWaveEffect();
         // You may cast Breaking Wave as though it had flash if you pay {2} more to cast it.
-        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
+        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}"));
         ability.addEffect(effect);
         this.addAbility(ability);
         // Simultaneously untap all tapped creatures and tap all untapped creatures.
@@ -52,7 +52,7 @@ class BreakingWaveEffect extends OneShotEffect {
         staticText = "Simultaneously untap all tapped creatures and tap all untapped creatures.";
     }
 
-    public BreakingWaveEffect(BreakingWaveEffect copy) {
+    private BreakingWaveEffect(final BreakingWaveEffect copy) {
         super(copy);
     }
 
@@ -64,7 +64,7 @@ class BreakingWaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> creatures = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE,
-                source.getControllerId(), source.getSourceId(), game);
+                source.getControllerId(), source, game);
         for (Permanent creature : creatures) {
             if (creature.isTapped()) {
                 creature.untap(game);

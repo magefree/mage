@@ -25,7 +25,7 @@ public final class VengefulDreams extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{W}");
 
         // As an additional cost to cast Vengeful Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), false));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
 
         // Exile X target attacking creatures.
         Effect effect = new ExileTargetEffect();

@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -53,7 +52,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game";
     }
 
-    public ForbiddenCryptDrawCardReplacementEffect(final ForbiddenCryptDrawCardReplacementEffect effect) {
+    private ForbiddenCryptDrawCardReplacementEffect(final ForbiddenCryptDrawCardReplacementEffect effect) {
         super(effect);
     }
 
@@ -68,9 +67,9 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             boolean cardReturned = false;
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), game)) {
+            target.withNotTarget(true);
+            if (target.canChoose(controller.getId(), source, game)) {
+                if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);
@@ -106,7 +105,7 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
         this.staticText = "If a card would be put into your graveyard from anywhere, exile that card instead";
     }
 
-    public ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
+    private ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
         super(effect);
     }
 

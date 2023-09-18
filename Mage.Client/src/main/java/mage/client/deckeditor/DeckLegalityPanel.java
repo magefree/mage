@@ -1,9 +1,13 @@
 package mage.client.deckeditor;
 
+import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
+import mage.cards.mock.MockCard;
+import mage.cards.mock.MockSplitCard;
 import mage.client.components.LegalityLabel;
 import mage.deck.*;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -14,6 +18,9 @@ import java.util.stream.Stream;
  * @author Elandril
  */
 public class DeckLegalityPanel extends javax.swing.JPanel {
+
+    private static final Logger logger = Logger.getLogger(DeckLegalityPanel.class);
+
     /**
      * Creates new form DeckLegalityPanel
      */
@@ -112,11 +119,33 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
         add(button);
     }
 
+    private boolean isMockCard(Card card) {
+        return card instanceof MockCard || card instanceof MockSplitCard;
+    }
+
     public void validateDeck(Deck deck) {
+        // Non game GUI like Deck Editor works with Mock cards (fake cards with texts only), but validate must use
+        // real cards all the time. So convert it here before check.
+
+        final Deck deckToValidate;
+        if (deck.getCards().stream().noneMatch(this::isMockCard)
+                && deck.getSideboard().stream().noneMatch(this::isMockCard)) {
+            // contains real cards, e.g. it's a game
+            deckToValidate = deck;
+        } else {
+            // contains mock cards, e.g. it's a Deck Editor
+            try {
+                deckToValidate = Deck.load(deck.getDeckCardLists(), true, false);
+            } catch (Exception ex) {
+                logger.error("Can't load real deck cards for validate: " + ex.getMessage(), ex);
+                return;
+            }
+        }
+
         Arrays.stream(getComponents())
                 .filter(LegalityLabel.class::isInstance)
                 .map(LegalityLabel.class::cast)
-                .forEach(label -> label.validateDeck(deck));
+                .forEach(label -> label.validateDeck(deckToValidate));
     }
 
 }

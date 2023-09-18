@@ -22,7 +22,7 @@ public final class BurstOfStrength extends CardImpl {
 
         // Put a +1/+1 counter on target creature and untap it.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("and untap it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

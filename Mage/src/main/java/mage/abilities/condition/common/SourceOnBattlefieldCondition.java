@@ -1,10 +1,8 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
-
 
 /**
  * As long as the sourceId permanent is
@@ -13,18 +11,15 @@ import mage.game.Game;
  * @author LevelX2
  */
 public enum SourceOnBattlefieldCondition implements Condition {
-
     instance;
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        return (game.getPermanent(source.getSourceId()) != null);
+        return source.getSourcePermanentIfItStillExists(game) != null;
     }
 
     @Override
     public String toString() {
         return "if {this} is on the battlefield";
     }
-
-    
 }

@@ -16,7 +16,6 @@ public class ForgottenSentinelTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
         assertTapped("Forgotten Sentinel", true);
     }
 }

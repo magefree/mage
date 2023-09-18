@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,7 +11,10 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -23,8 +24,9 @@ import mage.game.permanent.token.SplinterToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class SplinteringWind extends CardImpl {
@@ -33,7 +35,7 @@ public final class SplinteringWind extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // {2}{G}: Splintering Wind deals 1 damage to target creature. Create a 1/1 green Splinter creature token. It has flying and “Cumulative upkeep {G}.” When it leaves the battlefield, it deals 1 damage to you and each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}{G}"));
         ability.addEffect(new SplinteringWindCreateTokenEffect());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -53,10 +55,10 @@ class SplinteringWindCreateTokenEffect extends OneShotEffect {
 
     public SplinteringWindCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "create a 1/1 green Splinter creature token. It has flying and “Cumulative upkeep {G}.” When it leaves the battlefield, it deals 1 damage to you and each creature you control";
+        staticText = "create a 1/1 green Splinter creature token. It has flying and \"Cumulative upkeep {G}.\" When it leaves the battlefield, it deals 1 damage to you and each creature you control";
     }
 
-    public SplinteringWindCreateTokenEffect(final SplinteringWindCreateTokenEffect effect) {
+    private SplinteringWindCreateTokenEffect(final SplinteringWindCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -83,7 +85,7 @@ class SplinteringWindCreateTokenEffect extends OneShotEffect {
 }
 
 class SplinteringWindDelayedTriggeredAbility extends DelayedTriggeredAbility {
-    
+
     private UUID tokenId;
 
     SplinteringWindDelayedTriggeredAbility(UUID tokenId) {
@@ -92,7 +94,7 @@ class SplinteringWindDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.tokenId = tokenId;
     }
 
-    SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
+    private SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
         super(ability);
         this.tokenId = ability.tokenId;
     }

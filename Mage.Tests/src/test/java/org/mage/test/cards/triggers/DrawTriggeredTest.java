@@ -80,12 +80,12 @@ public class DrawTriggeredTest extends CardTestPlayerBase {
         // Whenever an opponent draws a card, you may draw two cards.
         addCard(Zone.BATTLEFIELD, playerB, "Consecrated Sphinx", 1);
 
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, false);
+        setChoice(playerA, false);
 
-        setChoice(playerB, "Yes");
-        setChoice(playerB, "No");
+        setChoice(playerB, true);
+        setChoice(playerB, false);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 

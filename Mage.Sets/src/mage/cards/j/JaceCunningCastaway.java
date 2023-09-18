@@ -4,7 +4,6 @@ package mage.cards.j;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -31,10 +30,10 @@ public final class JaceCunningCastaway extends CardImpl {
     public JaceCunningCastaway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Whenever one or more creatures you control deal combat damage to a player this turn, draw a card, then discard a card.
         this.addAbility(new LoyaltyAbility(new JaceCunningCastawayEffect1(), 1));

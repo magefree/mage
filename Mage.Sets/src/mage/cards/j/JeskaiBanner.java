@@ -31,7 +31,7 @@ public final class JeskaiBanner extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {U}{R}{W}, {T}, Sacrifice Jeskai Banner: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{U}{R}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{U}{R}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

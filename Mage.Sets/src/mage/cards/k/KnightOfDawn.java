@@ -30,7 +30,7 @@ public final class KnightOfDawn extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // {W}{W}: Knight of Dawn gains protection from the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}{W}")));
     }
 
     private KnightOfDawn(final KnightOfDawn card) {

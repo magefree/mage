@@ -2,6 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,10 +29,11 @@ public final class FieldTrip extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, true));
 
         // Learn.
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private FieldTrip(final FieldTrip card) {

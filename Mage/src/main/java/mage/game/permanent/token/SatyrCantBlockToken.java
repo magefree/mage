@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class SatyrCantBlockToken extends TokenImpl {
 
     public SatyrCantBlockToken() {
-        super("Satyr", "1/1 red Satyr creature token with \"This creature can't block.\"");
+        super("Satyr Token", "1/1 red Satyr creature token with \"This creature can't block.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.SATYR);

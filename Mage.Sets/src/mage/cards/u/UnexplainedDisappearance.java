@@ -22,7 +22,7 @@ public final class UnexplainedDisappearance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Surveil 1.
-        this.getSpellAbility().addEffect(new SurveilEffect(1));
+        this.getSpellAbility().addEffect(new SurveilEffect(1).concatBy("<br>"));
     }
 
     private UnexplainedDisappearance(final UnexplainedDisappearance card) {

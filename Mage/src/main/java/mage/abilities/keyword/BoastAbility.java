@@ -60,7 +60,7 @@ public class BoastAbility extends ActivatedAbilityImpl {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                        getControllerId(), getSourceId(), game
+                        getControllerId(), this, game
                 ).stream()
                 .map(p -> p.getAbilities(game))
                 .flatMap(Collection::stream)

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -31,14 +30,14 @@ public final class YedoraGraveGardener extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another nontoken creature you control");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(AnotherPredicate.instance);
     }
 
     public YedoraGraveGardener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(5);
@@ -101,7 +100,7 @@ class YedoraGraveGardenerContinuousEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.Neutral);
     }
 
-    public YedoraGraveGardenerContinuousEffect(final YedoraGraveGardenerContinuousEffect effect) {
+    private YedoraGraveGardenerContinuousEffect(final YedoraGraveGardenerContinuousEffect effect) {
         super(effect);
     }
 
@@ -117,7 +116,7 @@ class YedoraGraveGardenerContinuousEffect extends ContinuousEffectImpl {
             discard();
             return false;
         }
-        target.getSuperType().clear();
+        target.removeAllSuperTypes(game);
         target.removeAllCardTypes(game);
         target.removeAllSubTypes(game);
         target.addCardType(game, CardType.LAND);

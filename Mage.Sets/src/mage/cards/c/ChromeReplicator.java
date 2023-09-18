@@ -17,6 +17,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Construct4Token;
+import mage.util.CardUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +61,7 @@ enum ChromeReplicatorCondition implements Condition {
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     @Override
@@ -69,12 +70,12 @@ enum ChromeReplicatorCondition implements Condition {
         return game
                 .getBattlefield()
                 .getActivePermanents(
-                        filter, source.getControllerId(), source.getSourceId(), game
+                        filter, source.getControllerId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getName)
                 .filter(Objects::nonNull)
                 .filter(s -> !s.isEmpty())
-                .anyMatch(s -> nameMap.compute(s, (x, i) -> i == null ? 1 : Integer.sum(i, 1)) >= 2);
+                .anyMatch(s -> nameMap.compute(s, CardUtil::setOrIncrementValue) >= 2);
     }
 }

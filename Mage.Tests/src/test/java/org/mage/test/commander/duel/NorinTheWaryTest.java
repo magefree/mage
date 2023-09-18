@@ -40,7 +40,7 @@ public class NorinTheWaryTest extends CardTestCommanderDuelBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
@@ -59,7 +59,7 @@ public class NorinTheWaryTest extends CardTestCommanderDuelBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
@@ -78,7 +78,7 @@ public class NorinTheWaryTest extends CardTestCommanderDuelBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
 

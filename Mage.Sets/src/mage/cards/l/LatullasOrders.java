@@ -41,7 +41,7 @@ public final class LatullasOrders extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Protect));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature deals combat damage to defending player, you may destroy target artifact that player controls.
         this.addAbility(new LatullasOrdersTriggeredAbility());
@@ -63,7 +63,7 @@ class LatullasOrdersTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    public LatullasOrdersTriggeredAbility(final LatullasOrdersTriggeredAbility ability) {
+    private LatullasOrdersTriggeredAbility(final LatullasOrdersTriggeredAbility ability) {
         super(ability);
     }
 

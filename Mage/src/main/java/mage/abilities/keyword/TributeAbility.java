@@ -1,11 +1,9 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -15,8 +13,9 @@ import mage.target.Target;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class TributeAbility extends EntersBattlefieldAbility {
@@ -28,13 +27,13 @@ public class TributeAbility extends EntersBattlefieldAbility {
         this.tributeValue = tributeValue;
     }
 
-    public TributeAbility(final TributeAbility ability) {
+    protected TributeAbility(final TributeAbility ability) {
         super(ability);
         this.tributeValue = ability.tributeValue;
     }
 
     @Override
-    public EntersBattlefieldAbility copy() {
+    public TributeAbility copy() {
         return new TributeAbility(this);
     }
 
@@ -54,7 +53,7 @@ class TributeEffect extends OneShotEffect {
         this.tributeValue = tributeValue;
     }
 
-    public TributeEffect(final TributeEffect effect) {
+    protected TributeEffect(final TributeEffect effect) {
         super(effect);
         this.tributeValue = effect.tributeValue;
     }
@@ -74,7 +73,7 @@ class TributeEffect extends OneShotEffect {
                 opponentId = game.getOpponents(controller.getId()).iterator().next();
             } else {
                 Target target = new TargetOpponent();
-                controller.choose(outcome, target, source.getSourceId(), game);
+                controller.choose(outcome, target, source, game);
                 opponentId = target.getFirstTarget();
             }
             if (opponentId != null) {
@@ -89,7 +88,7 @@ class TributeEffect extends OneShotEffect {
                             game.informPlayers(opponent.getLogName() + " pays tribute to " + sourcePermanent.getLogName());
                         }
                         game.getState().setValue("tributeValue" + source.getSourceId(), "yes");
-                        return sourcePermanent.addCounters(CounterType.P1P1.createInstance(tributeValue),opponent.getId(),source,game);
+                        return sourcePermanent.addCounters(CounterType.P1P1.createInstance(tributeValue), opponent.getId(), source, game);
                     } else {
                         if (!game.isSimulation()) {
                             game.informPlayers(opponent.getLogName() + " does not pay tribute to " + sourcePermanent.getLogName());

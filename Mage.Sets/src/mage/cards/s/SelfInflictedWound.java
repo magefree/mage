@@ -51,7 +51,7 @@ class SelfInflictedWoundEffect extends OneShotEffect {
         staticText = "Target opponent sacrifices a green or white creature. If that player does, they lose 2 life";
     }
 
-    SelfInflictedWoundEffect(SelfInflictedWoundEffect effect) {
+    private SelfInflictedWoundEffect(final SelfInflictedWoundEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class SelfInflictedWoundEffect extends OneShotEffect {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
-        if (target.canChoose(source.getSourceId(), targetOpponent.getId(), game)) {
+        if (target.canChoose(targetOpponent.getId(), source, game)) {
             targetOpponent.chooseTarget(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

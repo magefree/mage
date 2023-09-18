@@ -22,6 +22,8 @@ public class DemonicPactTest extends CardTestPlayerBase {
         // (4) - You lose the game.
         addCard(Zone.HAND, playerA, "Demonic Pact"); // Enchantment {2}{B}{B}
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Demonic Pact");
 
         setModeChoice(playerA, "3");
@@ -102,16 +104,14 @@ public class DemonicPactTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Pact of Negation", "Silvercoat Lion", "Silvercoat Lion");
 
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         rollbackTurns(2, PhaseStep.PRECOMBAT_MAIN, playerB, 0);
 
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Pact of Negation", 1);

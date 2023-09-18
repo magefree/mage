@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -8,9 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -18,18 +15,11 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class DampeningPulse extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public DampeningPulse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
 
         // Creatures your opponents control get -1/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -0, Duration.WhileOnBattlefield, filter, false)));
-
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-1, -0, Duration.WhileOnBattlefield, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false)));
     }
 
     private DampeningPulse(final DampeningPulse card) {

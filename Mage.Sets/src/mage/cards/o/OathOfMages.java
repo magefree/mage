@@ -66,7 +66,7 @@ enum OathOfMagesAdjuster implements TargetAdjuster {
     }
 }
 
-enum OathOfMagesPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+enum OathOfMagesPredicate implements ObjectSourcePlayerPredicate<Player> {
     instance;
 
     @Override
@@ -104,7 +104,7 @@ class OathOfMagesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player firstPlayer = game.getPlayer(game.getActivePlayerId());
         Player secondPlayer = game.getPlayer(source.getFirstTarget());
         if (sourceObject == null || firstPlayer == null) {

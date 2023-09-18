@@ -69,12 +69,12 @@
          cardArea.clearCardEventListeners();
          cardArea.loadCards(showCards, bigCard, gameId);
          if (options != null) {
-             if (options.containsKey("chosen")) {
-                 java.util.List<UUID> chosenCards = (java.util.List<UUID>) options.get("chosen");
+             if (options.containsKey("chosenTargets")) {
+                 java.util.List<UUID> chosenCards = (java.util.List<UUID>) options.get("chosenTargets");
                  cardArea.selectCards(chosenCards);
              }
-             if (options.containsKey("choosable")) {
-                 java.util.List<UUID> choosableCards = (java.util.List<UUID>) options.get("choosable");
+             if (options.containsKey("possibleTargets")) {
+                 java.util.List<UUID> choosableCards = (java.util.List<UUID>) options.get("possibleTargets");
                  cardArea.markCards(choosableCards);
              }
              if (options.containsKey("queryType") && options.get("queryType") == QueryType.PICK_ABILITY) {

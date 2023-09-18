@@ -53,7 +53,7 @@ class CallTheCoppercoatsEffect extends OneShotEffect {
 
     CallTheCoppercoatsEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose any number of target opponents. Create X 1/1 white Human soldier creature tokens, " +
+        staticText = "Choose any number of target opponents. Create X 1/1 white Human Soldier creature tokens, " +
                 "where X is the number of creatures those opponents control.";
     }
 

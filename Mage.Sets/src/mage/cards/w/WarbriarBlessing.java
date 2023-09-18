@@ -33,7 +33,7 @@ public final class WarbriarBlessing extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Warbriar Blessing enters the battlefield, enchanted creature fights up to one target creature you don't control.
@@ -59,7 +59,8 @@ class WarbriarBlessingEffect extends OneShotEffect {
 
     WarbriarBlessingEffect() {
         super(Outcome.Benefit);
-        staticText = "enchanted creature fights up to one target creature you don't control";
+        staticText = "enchanted creature fights up to one target creature you don't control. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
     private WarbriarBlessingEffect(final WarbriarBlessingEffect effect) {

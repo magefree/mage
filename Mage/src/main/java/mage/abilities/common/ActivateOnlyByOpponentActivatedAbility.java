@@ -8,7 +8,6 @@ import mage.constants.Zone;
 import mage.constants.TargetController;
 
 /**
- *
  * @author jeffwadsworth
  */
 
@@ -18,7 +17,7 @@ public class ActivateOnlyByOpponentActivatedAbility extends ActivatedAbilityImpl
         mayActivate = TargetController.OPPONENT;
     }
 
-    public ActivateOnlyByOpponentActivatedAbility(final ActivateOnlyByOpponentActivatedAbility ability) {
+    protected ActivateOnlyByOpponentActivatedAbility(final ActivateOnlyByOpponentActivatedAbility ability) {
         super(ability);
     }
 
@@ -29,6 +28,6 @@ public class ActivateOnlyByOpponentActivatedAbility extends ActivatedAbilityImpl
 
     @Override
     public String getRule() {
-        return super.getRule() + " Only any opponent may activate this ability.";
+        return super.getRule() + " Only your opponents may activate this ability.";
     }
 }

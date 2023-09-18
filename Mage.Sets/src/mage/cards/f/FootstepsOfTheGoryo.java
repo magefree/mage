@@ -53,7 +53,7 @@ class FootstepsOfTheGoryoEffect extends OneShotEffect {
         this.staticText = "Return target creature card from your graveyard to the battlefield. Sacrifice that creature at the beginning of the next end step";
     }
 
-    public FootstepsOfTheGoryoEffect(final FootstepsOfTheGoryoEffect effect) {
+    private FootstepsOfTheGoryoEffect(final FootstepsOfTheGoryoEffect effect) {
         super(effect);
     }
 

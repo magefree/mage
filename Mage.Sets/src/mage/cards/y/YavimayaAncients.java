@@ -26,7 +26,7 @@ public final class YavimayaAncients extends CardImpl {
         this.toughness = new MageInt(7);
 
         // {G}: Yavimaya Ancients gets +1/-2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -2, Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -2, Duration.EndOfTurn), new ManaCostsImpl<>("{G}")));
     }
 
     private YavimayaAncients(final YavimayaAncients card) {

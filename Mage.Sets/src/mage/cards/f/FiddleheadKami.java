@@ -25,7 +25,7 @@ public final class FiddleheadKami extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, regenerate Fiddlehead Kami.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new RegenerateSourceEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new RegenerateSourceEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false));
     }
 
     private FiddleheadKami(final FiddleheadKami card) {

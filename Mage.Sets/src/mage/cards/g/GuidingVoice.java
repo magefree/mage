@@ -2,6 +2,7 @@ package mage.cards.g;
 
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,8 +23,9 @@ public final class GuidingVoice extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        // Learn (You may reveal a Lesson card you own from outside the game and p
+        // Learn (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private GuidingVoice(final GuidingVoice card) {

@@ -28,7 +28,7 @@ public final class ForsakenWastes extends CardImpl {
 
     public ForsakenWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // Players can't gain life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
@@ -56,7 +56,7 @@ class ForsakenWastesTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(5), false);
     }
 
-    public ForsakenWastesTriggeredAbility(final ForsakenWastesTriggeredAbility ability) {
+    private ForsakenWastesTriggeredAbility(final ForsakenWastesTriggeredAbility ability) {
         super(ability);
     }
 

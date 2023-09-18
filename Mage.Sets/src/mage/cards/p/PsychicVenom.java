@@ -32,7 +32,7 @@ public final class PsychicVenom extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller.
         Effect effect = new DamageAttachedControllerEffect(2);

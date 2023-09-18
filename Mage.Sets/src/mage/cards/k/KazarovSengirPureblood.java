@@ -31,7 +31,7 @@ public final class KazarovSengirPureblood extends CardImpl {
     public KazarovSengirPureblood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -43,7 +43,7 @@ public final class KazarovSengirPureblood extends CardImpl {
         this.addAbility(new KazarovSengirPurebloodTriggeredAbility());
 
         // {3}{R}: Kazarov deals 2 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{3}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -64,7 +64,7 @@ class KazarovSengirPurebloodTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
 
-    public KazarovSengirPurebloodTriggeredAbility(final KazarovSengirPurebloodTriggeredAbility effect) {
+    private KazarovSengirPurebloodTriggeredAbility(final KazarovSengirPurebloodTriggeredAbility effect) {
         super(effect);
     }
 

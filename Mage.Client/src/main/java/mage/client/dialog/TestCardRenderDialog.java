@@ -2,10 +2,8 @@ package mage.client.dialog;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.icon.CardIconImpl;
-import mage.abilities.icon.CardIconOrder;
-import mage.abilities.icon.CardIconPosition;
-import mage.abilities.icon.CardIconType;
+import mage.abilities.icon.*;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
@@ -30,8 +28,13 @@ import mage.game.command.Plane;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.IncubatorToken;
+import mage.game.permanent.token.Phyrexian00Token;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.players.StubPlayer;
 import mage.util.CardUtil;
@@ -73,6 +76,10 @@ public class TestCardRenderDialog extends MageDialog {
         this.comboTheme.setModel(new DefaultComboBoxModel(ThemeType.values()));
         this.comboTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
 
+        // init card icon colors list
+        this.comboCardColor.setModel(new DefaultComboBoxModel(CardIconColor.values()));
+        this.comboCardColor.setSelectedItem(CardIconColor.DEFAULT);
+
         // debug logs to show current component
         /*
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
@@ -104,8 +111,8 @@ public class TestCardRenderDialog extends MageDialog {
         this.removeDialog();
     }
 
-    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage, boolean tapped, List<Ability> extraAbilities) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
+    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int powerBoosted, int toughnessBoosted, int damage, boolean tapped, boolean transform, List<Ability> extraAbilities) {
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
@@ -115,28 +122,36 @@ public class TestCardRenderDialog extends MageDialog {
         cardsList.add(newCard);
         game.loadCards(cardsList, controllerId);
 
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
-
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(game, newCard);
         if (extraAbilities != null) {
             extraAbilities.forEach(ability -> permCard.addAbility(ability));
         }
 
-        PermanentCard perm = new PermanentCard(permCard, controllerId, game);
-        if (damage > 0) perm.damage(damage, controllerId, null, game);
-        if (power > 0) perm.getPower().setValue(power);
-        if (toughness > 0) perm.getToughness().setValue(toughness);
-        perm.removeSummoningSickness();
-        perm.setTapped(tapped);
-        if (perm.isTransformable()) {
-            perm.setTransformed(true);
+        // meld card must be a special class, see CardUtils.putCardOntoBattlefieldWithEffects
+        PermanentCard permanent;
+        if (permCard instanceof MeldCard) {
+            permanent = new PermanentMeld(permCard, controllerId, game);
+        } else {
+            permanent = new PermanentCard(permCard, controllerId, game);
         }
-        PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);
+
+        if (transform) {
+            // need direct transform call to keep other side info (original)
+            TransformAbility.transformPermanent(permanent, permCard.getSecondCardFace(), game, null);
+        }
+
+        if (damage > 0) permanent.damage(damage, controllerId, null, game);
+        if (powerBoosted > 0) permanent.getPower().setBoostedValue(powerBoosted);
+        if (toughnessBoosted > 0) permanent.getToughness().setBoostedValue(toughnessBoosted);
+        permanent.removeSummoningSickness();
+        permanent.setTapped(tapped);
+        PermanentView cardView = new PermanentView(permanent, permCard, controllerId, game);
 
         return cardView;
     }
 
     private CardView createFaceDownCard(Game game, UUID controllerId, String code, String cardNumber, boolean isMorphed, boolean isManifested, boolean tapped) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
@@ -146,7 +161,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardsList.add(newCard);
         game.loadCards(cardsList, controllerId);
 
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(game, newCard);
 
         PermanentCard perm = new PermanentCard(permCard, controllerId, game);
         perm.setFaceDown(true, game);
@@ -163,7 +178,7 @@ public class TestCardRenderDialog extends MageDialog {
     }
 
     private CardView createHandCard(Game game, UUID controllerId, String code, String cardNumber) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
@@ -195,6 +210,26 @@ public class TestCardRenderDialog extends MageDialog {
         return planeView;
     }
 
+    private CardView createToken(Game game, UUID controllerId, Token token, String code, int damage, boolean tapped, boolean transformed) {
+        Token sourceToken = token.copy();
+        sourceToken.setExpansionSetCode(code);
+
+        PermanentToken perm = new PermanentToken(sourceToken, controllerId, game);
+        Set<Card> cardsList = new HashSet<>();
+        cardsList.add(perm);
+        game.loadCards(cardsList, controllerId);
+
+        if (damage > 0) perm.damage(damage, controllerId, null, game);
+        perm.removeSummoningSickness();
+        perm.setTapped(tapped);
+        if (perm.isTransformable() && transformed) {
+            perm.setTransformed(true);
+        }
+        PermanentView cardView = new PermanentView(perm, game.getCard(perm.getId()), controllerId, game);
+        //cardView.setInViewerOnly(true); // ???
+        return cardView;
+    }
+
     private void reloadCards() {
         // apply selected theme (warning, it will be applied for all app, so can be bugged in other dialogs - but it's ok for debug)
         PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
@@ -206,6 +241,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardsPanel.setCustomXOffsetBetweenCardsOrColumns(10);
         cardsPanel.setCustomCardIconsPanelPosition(CardIconPosition.fromString((String) comboCardIconsPosition.getSelectedItem()));
         cardsPanel.setCustomCardIconsPanelOrder(CardIconOrder.fromString((String) comboCardIconsOrder.getSelectedItem()));
+        cardsPanel.setCustomCardIconsPanelColor((CardIconColor) comboCardColor.getSelectedItem());
         cardsPanel.setCustomCardIconsMaxVisibleCount((Integer) spinnerCardIconsMaxVisible.getValue());
         int needAdditionalIcons = Math.min(99, Math.max(0, (Integer) spinnerCardIconsAdditionalAmount.getValue()));
 
@@ -273,7 +309,8 @@ public class TestCardRenderDialog extends MageDialog {
         }
 
         List<CardView> cardViews = new ArrayList<>();
-        /* // test morphed
+
+        /* test morphed
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, null)); // mountain
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
@@ -283,31 +320,59 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, true, false)); // manifested
         //*/
 
-        /* //test emblems
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false, null)); // Noxious Groodion
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false, null)); // Knight of Sorrows
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false, null)); // Huntmaster of the Fells, transforms
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false, null)); // Bedeck // Bedazzle
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false, null)); // Conqueror's Galleon
+        /* test emblems
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false, false, null)); // Noxious Groodion
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false, false, null)); // Knight of Sorrows
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false, false, null)); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false, false, null)); // Bedeck // Bedazzle
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false, false, null)); // Conqueror's Galleon
         cardViews.add(createEmblem(new AjaniAdversaryOfTyrantsEmblem())); // Emblem Ajani
         cardViews.add(createPlane(new AkoumPlane())); // Plane - Akoum
         //*/
 
-        /* //test split, transform and mdf in hands
+        /* test split, transform and mdf in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
         cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
         cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
         //*/
 
-        //* //test card icons
+        /* test meld cards in hands and battlefield
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "204")); // Hanweir Battlements
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130a")); // Hanweir Garrison
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130b")); // Hanweir, the Writhing Township
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "204", 1, 1, 0, false, false, null)); // Hanweir Battlements
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130a", 1, 1, 0, false, false, null)); // Hanweir Garrison
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130b", 1, 1, 0, false, false, null)); // Hanweir, the Writhing Township
+        //*/
+
+        /* test variant double faced cards (main and second sides must be same pair)
+        // Jacob Hauken, Inspector -> Hauken's Insight
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "65"));
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320"));
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "332"));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "65", 1, 1, 0, false, false, null));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "320", 1, 1, 0, false, false, null));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "332", 1, 1, 0, false, false, null));
+        //*/
+
+        /* test card icons
         cardViews.add(createHandCard(game, playerYou.getId(), "POR", "169")); // Grizzly Bears
         cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, additionalIcons)); // Hinterland Drake
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, additionalIcons)); // Kathari Remnant
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, additionalIcons)); // Cosima, God of the Voyage
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 3, 3, 1, false, true, additionalIcons)); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, false, additionalIcons)); // Hinterland Drake
+        //cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, false, additionalIcons)); // Kathari Remnant
+        //cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, false, additionalIcons)); // Cosima, God of the Voyage
+        //*/
 
-
+        //* test tokens
+        // normal
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "10E", 0, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "XXX", 1, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), null, 0, false, false));
+        // double faced
+        cardViews.add(createToken(game, playerYou.getId(), new IncubatorToken(), "MOM", 0, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new Phyrexian00Token(), "MOM", 1, false, true));
         //*/
 
         // duplicate cards
@@ -337,8 +402,8 @@ public class TestCardRenderDialog extends MageDialog {
                     // new settings must be as a new copy -- it would activate the animations
                     PermanentView oldPermanent = (PermanentView) main.getGameCard();
                     PermanentView newPermament = new PermanentView(
-                            (Permanent) oldPermanent.getOriginalCard(),
-                            game.getCard(oldPermanent.getOriginalCard().getId()),
+                            oldPermanent,
+                            game.getCard(oldPermanent.getOriginalId()),
                             UUID.randomUUID(),
                             game
                     );
@@ -400,6 +465,8 @@ public class TestCardRenderDialog extends MageDialog {
         comboCardIconsOrder = new javax.swing.JComboBox<>();
         labelTheme = new javax.swing.JLabel();
         comboTheme = new javax.swing.JComboBox<>();
+        labelCardColor = new javax.swing.JLabel();
+        comboCardColor = new javax.swing.JComboBox<>();
 
         buttonCancel.setText("Close");
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -497,7 +564,7 @@ public class TestCardRenderDialog extends MageDialog {
                                 .addComponent(labelCardIconsAdditionalAmount)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(spinnerCardIconsAdditionalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(188, Short.MAX_VALUE))
+                                .addContainerGap(305, Short.MAX_VALUE))
         );
         panelCardIconsLayout.setVerticalGroup(
                 panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -519,6 +586,16 @@ public class TestCardRenderDialog extends MageDialog {
         comboTheme.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboThemeItemStateChanged(evt);
+            }
+        });
+
+        labelCardColor.setText("Card color:");
+
+        comboCardColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"loading..."}));
+        comboCardColor.setToolTipText("");
+        comboCardColor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboCardColorItemStateChanged(evt);
             }
         });
 
@@ -545,6 +622,10 @@ public class TestCardRenderDialog extends MageDialog {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(labelCardColor)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(comboCardColor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(labelSize)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -564,13 +645,16 @@ public class TestCardRenderDialog extends MageDialog {
                                                 .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(labelSize)
                                                 .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(labelTheme))
+                                                .addComponent(labelTheme)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(comboCardColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(labelCardColor)))
                                         .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(checkBoxGenerateManyCards))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panelCardIcons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
@@ -630,15 +714,24 @@ public class TestCardRenderDialog extends MageDialog {
         }
     }//GEN-LAST:event_comboThemeItemStateChanged
 
+    private void comboCardColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardColorItemStateChanged
+        // card icon colors list are loading on show dialog, so must ignore change event on startup
+        if (this.isVisible()) {
+            reloadCards();
+        }
+    }//GEN-LAST:event_comboCardColorItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonReloadCards;
     private mage.client.cards.CardArea cardsPanel;
     private javax.swing.JCheckBox checkBoxGenerateManyCards;
+    private javax.swing.JComboBox<String> comboCardColor;
     private javax.swing.JComboBox<String> comboCardIconsOrder;
     private javax.swing.JComboBox<String> comboCardIconsPosition;
     private javax.swing.JComboBox<String> comboRenderMode;
     private javax.swing.JComboBox<String> comboTheme;
+    private javax.swing.JLabel labelCardColor;
     private javax.swing.JLabel labelCardIconsAdditionalAmount;
     private javax.swing.JLabel labelCardIconsMaxVisible;
     private javax.swing.JLabel labelCardIconsOrder;
@@ -658,7 +751,7 @@ class TestGame extends GameImpl {
     private int numPlayers;
 
     public TestGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+        super(attackOption, range, mulligan, startLife, 60, 7);
     }
 
     public TestGame(final TestGame game) {

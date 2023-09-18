@@ -35,6 +35,7 @@ public final class ScrybRanger extends CardImpl {
     public ScrybRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.FAERIE);
+        this.subtype.add(SubType.RANGER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -34,7 +34,7 @@ public final class ThunderWall extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {U}: Thunder Wall gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private ThunderWall(final ThunderWall card) {

@@ -80,11 +80,11 @@ class DeadlyBrewEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
-            if (!target.canChoose(source.getSourceId(), playerId, game)) {
+            target.withNotTarget(true);
+            if (!target.canChoose(playerId, source, game)) {
                 continue;
             }
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
                 continue;
@@ -109,7 +109,7 @@ class DeadlyBrewEffect extends OneShotEffect {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_PERMANENT, true
         );
-        controller.choose(outcome, yourGrave, target, game);
+        controller.choose(outcome, yourGrave, target, source, game);
         Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
         if (card != null) {
             controller.moveCards(card, Zone.HAND, source, game);

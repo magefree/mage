@@ -31,15 +31,13 @@ public final class EbonyCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // or exile up to three target cards from a single graveyard; 
-        Mode mode = new Mode();
-        mode.addEffect(new ExileTargetEffect());
+        Mode mode = new Mode(new ExileTargetEffect());
         mode.addTarget((new TargetCardInASingleGraveyard(0, 3, StaticFilters.FILTER_CARD_CARDS)));
         this.getSpellAbility().addMode(mode);
 
         // or target creature gains fear until end of turn.
-        mode = new Mode();
+        mode = new Mode(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
-        mode.addEffect(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
     }
 

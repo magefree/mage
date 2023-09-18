@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.CompoundAbility;
@@ -15,14 +14,13 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author spjspj
  */
 public final class DomriRadeEmblem extends Emblem {
     // "Creatures you control have double strike, trample, hexproof and haste."
 
     public DomriRadeEmblem() {
-        this.setName("Emblem Domri Rade");
+        super("Emblem Domri");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
 
         CompoundAbility compoundAbilities = new CompoundAbility(
@@ -32,5 +30,14 @@ public final class DomriRadeEmblem extends Emblem {
                 HasteAbility.getInstance()
         );
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(compoundAbilities, Duration.EndOfGame, filter)));
+    }
+
+    private DomriRadeEmblem(final DomriRadeEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public DomriRadeEmblem copy() {
+        return new DomriRadeEmblem(this);
     }
 }

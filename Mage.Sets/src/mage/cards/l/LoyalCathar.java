@@ -32,7 +32,6 @@ public final class LoyalCathar extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.u.UnhallowedCathar.class;
 
         this.power = new MageInt(2);
@@ -64,7 +63,7 @@ class LoyalCatharEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    LoyalCatharEffect(LoyalCatharEffect effect) {
+    private LoyalCatharEffect(final LoyalCatharEffect effect) {
         super(effect);
     }
 
@@ -93,7 +92,7 @@ class ReturnLoyalCatharEffect extends OneShotEffect {
         this.staticText = "return it to the battlefield transformed under your control";
     }
 
-    public ReturnLoyalCatharEffect(final ReturnLoyalCatharEffect effect) {
+    private ReturnLoyalCatharEffect(final ReturnLoyalCatharEffect effect) {
         super(effect);
     }
 

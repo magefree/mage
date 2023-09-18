@@ -45,7 +45,7 @@ class WretchedBanquetEffect extends OneShotEffect {
         this.staticText = "Destroy target creature if it has the least power or is tied for least power among creatures on the battlefield";
     }
 
-    public WretchedBanquetEffect(final WretchedBanquetEffect effect) {
+    private WretchedBanquetEffect(final WretchedBanquetEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class WretchedBanquetEffect extends OneShotEffect {
         if (targetCreature == null) {
             return false;
         }
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game);
 
         int minPower = targetCreature.getPower().getValue() + 1;
         for (Permanent creature : creatures) {

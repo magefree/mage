@@ -80,7 +80,7 @@ enum ToweringTitanCount implements DynamicValue {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                        sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
+                        sourceAbility.getControllerId(), sourceAbility, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getToughness)

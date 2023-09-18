@@ -48,6 +48,7 @@ public final class Planechase extends ExpansionSet {
         cards.add(new SetCardInfo("Bull Cerodon", 84, Rarity.UNCOMMON, mage.cards.b.BullCerodon.class));
         cards.add(new SetCardInfo("Cabal Coffers", 132, Rarity.UNCOMMON, mage.cards.c.CabalCoffers.class));
         cards.add(new SetCardInfo("Cadaverous Knight", 20, Rarity.COMMON, mage.cards.c.CadaverousKnight.class));
+        cards.add(new SetCardInfo("Captain's Maneuver", 85, Rarity.UNCOMMON, mage.cards.c.CaptainsManeuver.class));
         cards.add(new SetCardInfo("Cerodon Yearling", 86, Rarity.COMMON, mage.cards.c.CerodonYearling.class));
         cards.add(new SetCardInfo("Cinder Elemental", 51, Rarity.UNCOMMON, mage.cards.c.CinderElemental.class));
         cards.add(new SetCardInfo("Cone of Flame", 52, Rarity.UNCOMMON, mage.cards.c.ConeOfFlame.class));

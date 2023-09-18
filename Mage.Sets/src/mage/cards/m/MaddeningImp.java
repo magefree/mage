@@ -98,7 +98,7 @@ class MaddeningImpCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.staticText = "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn";
     }
 
-    public MaddeningImpCreateDelayedTriggeredAbilityEffect(final MaddeningImpCreateDelayedTriggeredAbilityEffect effect) {
+    private MaddeningImpCreateDelayedTriggeredAbilityEffect(final MaddeningImpCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -118,8 +118,7 @@ class MaddeningImpCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
                 }
             }
             AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility
-                    = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.ALL, new MaddeningImpDelayedDestroyEffect(activeCreatures), TargetController.ANY, new InvertCondition(TargetAttackedThisTurnCondition.instance));
-            delayedAbility.getDuration();
+                    = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new MaddeningImpDelayedDestroyEffect(activeCreatures), TargetController.ANY, new InvertCondition(TargetAttackedThisTurnCondition.instance));
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
@@ -137,7 +136,7 @@ class MaddeningImpDelayedDestroyEffect extends OneShotEffect {
         this.staticText = "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn";
     }
 
-    MaddeningImpDelayedDestroyEffect(final MaddeningImpDelayedDestroyEffect effect) {
+    private MaddeningImpDelayedDestroyEffect(final MaddeningImpDelayedDestroyEffect effect) {
         super(effect);
         this.activeCreatures = effect.activeCreatures;
     }

@@ -53,7 +53,7 @@ class SilenceTheBelieversExileEffect extends OneShotEffect {
         this.staticText = "Exile any number of target creatures and all Auras attached to them";
     }
 
-    public SilenceTheBelieversExileEffect(final SilenceTheBelieversExileEffect effect) {
+    private SilenceTheBelieversExileEffect(final SilenceTheBelieversExileEffect effect) {
         super(effect);
     }
 

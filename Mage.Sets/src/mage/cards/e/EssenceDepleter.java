@@ -32,7 +32,7 @@ public final class EssenceDepleter extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {1}{C}: Target opponent loses 1 life and you gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}{C}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{1}{C}"));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

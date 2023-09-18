@@ -13,9 +13,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.Pest11GainLifeToken;
@@ -29,12 +29,9 @@ public final class BlightMound extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.PEST, "attacking Pests");
-    private static final FilterPermanent filter2
-            = new FilterControlledCreaturePermanent("a nontoken creature you control");
 
     static {
         filter.add(AttackingPredicate.instance);
-        filter2.add(Predicates.not(TokenPredicate.instance));
     }
 
     public BlightMound(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +48,7 @@ public final class BlightMound extends CardImpl {
 
         // Whenever a nontoken creature you control dies, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new CreateTokenEffect(new Pest11GainLifeToken()), false, filter2
+                new CreateTokenEffect(new Pest11GainLifeToken()), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN
         ));
     }
 

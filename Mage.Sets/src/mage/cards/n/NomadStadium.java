@@ -34,7 +34,7 @@ public final class NomadStadium extends CardImpl {
         // Threshold - {W}, {tap}, Sacrifice Nomad Stadium: You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new GainLifeEffect(4),
-            new ManaCostsImpl("{W}"),
+            new ManaCostsImpl<>("{W}"),
             new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());

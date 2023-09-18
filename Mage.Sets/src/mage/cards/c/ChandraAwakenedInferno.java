@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CantBeCounteredSourceAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -38,9 +37,9 @@ public final class ChandraAwakenedInferno extends CardImpl {
     public ChandraAwakenedInferno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
+        this.setStartingLoyalty(6);
 
         // This spell can't be countered.
         this.addAbility(new CantBeCounteredSourceAbility());

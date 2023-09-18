@@ -33,7 +33,7 @@ public class AddConditionalManaEffect extends ManaEffect {
 
     }
 
-    public AddConditionalManaEffect(final AddConditionalManaEffect effect) {
+    protected AddConditionalManaEffect(final AddConditionalManaEffect effect) {
         super(effect);
         this.mana = effect.mana.copy();
         this.manaBuilder = effect.manaBuilder;
@@ -59,7 +59,7 @@ public class AddConditionalManaEffect extends ManaEffect {
             }
             return maxAvailableMana;
         }
-        return super.getNetMana(game, source); //To change body of generated methods, choose Tools | Templates.
+        return super.getNetMana(game, source);
     }
 
     @Override

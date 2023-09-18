@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.ArrayList;
@@ -33,8 +32,8 @@ import mage.watchers.Watcher;
 public final class HallOfTheBanditLord extends CardImpl {
 
     public HallOfTheBanditLord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.LEGENDARY);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Hall of the Bandit Lord enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -99,7 +98,7 @@ class HallOfTheBanditLordWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             if (creatures.contains(event.getSourceId())) {
                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                 game.addEffect(effect, source);
                 creatures.remove(event.getSourceId());
             }

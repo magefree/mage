@@ -51,9 +51,10 @@ class FathomMageTriggeredAbility extends TriggeredAbilityImpl {
 
     public FathomMageTriggeredAbility() {
         super(Zone.ALL, new DrawCardSourceControllerEffect(1), true);
+        setTriggerPhrase("Whenever a +1/+1 counter is put on {this}, ");
     }
 
-    public FathomMageTriggeredAbility(FathomMageTriggeredAbility ability) {
+    private FathomMageTriggeredAbility(final FathomMageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -70,10 +71,5 @@ class FathomMageTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public FathomMageTriggeredAbility copy() {
         return new FathomMageTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a +1/+1 counter is put on {this}, " ;
     }
 }

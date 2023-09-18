@@ -60,13 +60,13 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetAnyTarget());
     }
 
-    ValakutTheMoltenPinnacleTriggeredAbility(ValakutTheMoltenPinnacleTriggeredAbility ability) {
+    private ValakutTheMoltenPinnacleTriggeredAbility(final ValakutTheMoltenPinnacleTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, getSourceId(), getControllerId(), game) > 5;
+        return game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, getControllerId(), this, game) > 5;
     }
 
     @Override

@@ -30,7 +30,7 @@ public final class SlimefootTheStowaway extends CardImpl {
     public SlimefootTheStowaway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FUNGUS);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -43,7 +43,7 @@ public final class SlimefootTheStowaway extends CardImpl {
         this.addAbility(ability);
 
         // {4}: Create a 1/1 green Saproling creature token.
-        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{4}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl<>("{4}")));
     }
 
     private SlimefootTheStowaway(final SlimefootTheStowaway card) {

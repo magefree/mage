@@ -3,11 +3,10 @@ package mage.cards.a;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -27,15 +26,15 @@ public final class AshiokDreamRender extends CardImpl {
     public AshiokDreamRender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U/B}{U/B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASHIOK);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Spells and abilities your opponents control can't cause their controller to search their library.
         this.addAbility(new SimpleStaticAbility(new AshiokDreamRenderEffect()));
 
         // -1: Target player puts the top four cards of their library into their graveyard. Then exile each opponent's graveyard.
-        Ability ability = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(4), -1);
+        Ability ability = new LoyaltyAbility(new MillCardsTargetEffect(4), -1);
         ability.addEffect(new ExileGraveyardAllPlayersEffect(StaticFilters.FILTER_CARD, TargetController.OPPONENT).setText("Then exile each opponent's graveyard."));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -74,7 +73,7 @@ class AshiokDreamRenderEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't search libraries (" + mageObject.getLogName() + " in play).";
         }

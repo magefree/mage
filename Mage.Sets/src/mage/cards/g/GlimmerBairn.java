@@ -23,7 +23,7 @@ public final class GlimmerBairn extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public GlimmerBairn(UUID ownerId, CardSetInfo setInfo) {

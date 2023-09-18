@@ -1,10 +1,9 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,20 +19,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class FeedingFrenzy extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(SubType.ZOMBIE.getPredicate());
-    }
+    private static final DynamicValue xValue = new SignInversionDynamicValue(
+            new PermanentsOnBattlefieldCount(new FilterPermanent(SubType.ZOMBIE, "Zombies on the battlefield"), null)
+    );
 
     public FeedingFrenzy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
-        DynamicValue x = new PermanentsOnBattlefieldCount(filter, -1);
-        Effect effect = new BoostTargetEffect(x, x, Duration.EndOfTurn, true);
-        effect.setText("Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

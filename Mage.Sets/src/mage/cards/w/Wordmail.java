@@ -36,7 +36,7 @@ public final class Wordmail extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         
         // Enchanted creature gets +1/+1 for each word in its name.
         WordmailCount count = new WordmailCount();
@@ -58,7 +58,7 @@ class WordmailCount implements DynamicValue {
     public WordmailCount() {
     }
 
-    public WordmailCount(final WordmailCount dynamicValue) {
+    private WordmailCount(final WordmailCount dynamicValue) {
     }
 
     @Override

@@ -22,7 +22,7 @@ public final class PeaceAndQuiet extends CardImpl {
 
         // Destroy two target enchantments.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
     }
 
     private PeaceAndQuiet(final PeaceAndQuiet card) {

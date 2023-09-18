@@ -54,7 +54,7 @@ class ApexOfPowerSpellEffect extends OneShotEffect {
                 "Until end of turn, you may cast spells from among them";
     }
 
-    public ApexOfPowerSpellEffect(final ApexOfPowerSpellEffect effect) {
+    private ApexOfPowerSpellEffect(final ApexOfPowerSpellEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class ApexOfPowerManaEffect extends OneShotEffect {
         this.staticText = "If this spell was cast from your hand, add ten mana of any one color.";
     }
 
-    public ApexOfPowerManaEffect(final ApexOfPowerManaEffect effect) {
+    private ApexOfPowerManaEffect(final ApexOfPowerManaEffect effect) {
         super(effect);
     }
 

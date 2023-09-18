@@ -2,7 +2,6 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.*;
@@ -35,9 +34,9 @@ public final class KayaOrzhovUsurper extends CardImpl {
     public KayaOrzhovUsurper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Exile up to two target cards from a single graveyard. You gain 2 life if at least one creature card was exiled this way.
         Ability ability = new LoyaltyAbility(new KayaOrzhovUsurperExileEffect(), 1);

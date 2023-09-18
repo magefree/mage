@@ -23,7 +23,7 @@ public final class SigardaHostOfHerons extends CardImpl {
 
     public SigardaHostOfHerons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
@@ -53,7 +53,7 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Spells and abilities your opponents control can't cause you to sacrifice permanents";
     }
 
-    public SigardaHostOfHeronsEffect(final SigardaHostOfHeronsEffect effect) {
+    private SigardaHostOfHeronsEffect(final SigardaHostOfHeronsEffect effect) {
         super(effect);
     }
 

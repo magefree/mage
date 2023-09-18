@@ -31,7 +31,7 @@ public final class AnointedChorister extends CardImpl {
 
         // {4}{W}: Anointed Chorister gets +3/+3 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{4}{W}")
+                new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")
         ));
     }
 

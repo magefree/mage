@@ -46,7 +46,7 @@ public final class RohgahhOfKherKeep extends CardImpl {
     public RohgahhOfKherKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOBOLD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -81,7 +81,7 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
         this.staticText = "you may pay {R}{R}{R}. If you don't, tap {this} and all creatures named Kobolds of Kher Keep, then an opponent gains control of them.";
     }
 
-    RohgahhOfKherKeepEffect(final RohgahhOfKherKeepEffect effect) {
+    private RohgahhOfKherKeepEffect(final RohgahhOfKherKeepEffect effect) {
         super(effect);
     }
 
@@ -97,13 +97,13 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cost cost = new ManaCostsImpl("{R}{R}{R}");
+        Cost cost = new ManaCostsImpl<>("{R}{R}{R}");
         if (!cost.canPay(source, source, player.getId(), game)
                 || !player.chooseUse(Outcome.Benefit, "Pay {R}{R}{R}?", source, game)
                 || !cost.pay(source, game, source, player.getId(), false)) {
             TargetOpponent target = new TargetOpponent();
             Player opponent = null;
-            if (target.choose(Outcome.Detriment, player.getId(), source.getSourceId(), game)) {
+            if (target.choose(Outcome.Detriment, player.getId(), source.getSourceId(), source, game)) {
                 opponent = game.getPlayer(target.getFirstTarget());
             }
             new TapAllEffect(filter).apply(game, source);

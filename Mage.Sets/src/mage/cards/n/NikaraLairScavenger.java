@@ -35,7 +35,7 @@ public final class NikaraLairScavenger extends CardImpl {
     public NikaraLairScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -45,7 +45,7 @@ public final class NikaraLairScavenger extends CardImpl {
         this.addAbility(new PartnerWithAbility("Yannik, Scavenging Sentinel"));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another creature you control leaves the battlefield, if it had one or more counters on it, you draw a card and lose 1 life.
         Ability ability = new LeavesBattlefieldAllTriggeredAbility(new DrawCardSourceControllerEffect(1)

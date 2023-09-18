@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -53,7 +52,7 @@ class DoomForetoldEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterNonlandPermanent("nonland, nontoken permanent");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     private static final Effect effect1 = new CreateTokenEffect(new KnightToken());
@@ -86,8 +85,8 @@ class DoomForetoldEffect extends OneShotEffect {
         filter2.add(new ControllerIdPredicate(player.getId()));
         if (game.getBattlefield().contains(filter2, source, game, 1)) {
             TargetPermanent target = new TargetPermanent(filter2);
-            target.setNotTarget(true);
-            if (player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            target.withNotTarget(true);
+            if (player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null && permanent.sacrifice(source, game)) {
                     return true;

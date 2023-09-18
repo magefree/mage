@@ -37,12 +37,11 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
 
-        assertPermanentCount(playerA, "Angel", 0);
+        assertPermanentCount(playerA, "Angel Token", 0);
 
     }
 
@@ -70,12 +69,11 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
 
-        assertPermanentCount(playerA, "Angel", 1);
+        assertPermanentCount(playerA, "Angel Token", 1);
 
     }
 
@@ -105,19 +103,19 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spirit Mantle", "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Descend upon the Sinful");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Spirit Mantle", 1);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
 
-        assertPermanentCount(playerA, "Angel", 0);
+        assertPermanentCount(playerA, "Angel Token", 0);
 
     }
 
@@ -145,13 +143,12 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
 
-        assertPermanentCount(playerA, "Angel", 0);
+        assertPermanentCount(playerA, "Angel Token", 0);
 
     }
 

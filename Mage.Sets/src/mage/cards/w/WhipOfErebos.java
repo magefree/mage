@@ -37,7 +37,7 @@ public final class WhipOfErebos extends CardImpl {
 
     public WhipOfErebos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Creatures you control have lifelink.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
@@ -50,7 +50,7 @@ public final class WhipOfErebos extends CardImpl {
         // If it would leave the battlefield, exile it instead of putting it anywhere else.
         // Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD, new WhipOfErebosEffect(), new ManaCostsImpl("{2}{B}{B}")
+                Zone.BATTLEFIELD, new WhipOfErebosEffect(), new ManaCostsImpl<>("{2}{B}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

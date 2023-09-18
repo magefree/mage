@@ -7,8 +7,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,7 +19,6 @@ import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.cards.Card;
 
 /**
  * @author LevelX2
@@ -26,14 +27,14 @@ public final class RakdosLordOfRiots extends CardImpl {
 
     public RakdosLordOfRiots(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
         // You can't cast Rakdos, Lord of Riots unless an opponent lost life this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RakdosLordOfRiotsCantCastEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RakdosLordOfRiotsCantCastEffect()).addHint(OpponentsLostLifeHint.instance));
 
         // Flying, trample
         this.addAbility(FlyingAbility.getInstance());
@@ -60,7 +61,7 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "You can't cast this spell unless an opponent lost life this turn";
     }
 
-    public RakdosLordOfRiotsCantCastEffect(final RakdosLordOfRiotsCantCastEffect effect) {
+    private RakdosLordOfRiotsCantCastEffect(final RakdosLordOfRiotsCantCastEffect effect) {
         super(effect);
     }
 
@@ -95,7 +96,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn";
     }
 
-    RakdosLordOfRiotsCostReductionEffect(RakdosLordOfRiotsCostReductionEffect effect) {
+    private RakdosLordOfRiotsCostReductionEffect(final RakdosLordOfRiotsCostReductionEffect effect) {
         super(effect);
     }
 

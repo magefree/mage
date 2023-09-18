@@ -54,14 +54,14 @@ public class CryptoplasmTest extends CardTestPlayerBase {
 
         // turn 2 - prepare (crypto to paladin, footsteps to crypto)
         // crypto:  copy as paladin on upkeep
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         addTarget(playerB, "Sigiled Paladin");
         // footsteps: enchant copy of paladin (crypto)
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Followed Footsteps");
         addTarget(playerB, "Sigiled Paladin[only copy]");
 
         // turn 4 - ignore crypto ask for new copy
-        setChoice(playerB, "No");
+        setChoice(playerB, false);
 
         setStopAt(4, PhaseStep.END_TURN);
         execute();
@@ -131,7 +131,6 @@ public class CryptoplasmTest extends CardTestPlayerBase {
         assertLife(playerA, 25);
     }
 
-
     @Test
     public void testTransformMultipleTime() {
         // At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
@@ -141,10 +140,17 @@ public class CryptoplasmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // 6/4
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm", 1); // 6/4
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptoplasm");
+        setStrictChooseMode(true);
+
+        // Turn 1
+        setChoice(playerA, "Yes");
         addTarget(playerA, "Silvercoat Lion");
+
+        // Turn 3
+        setChoice(playerA, "Yes");
         addTarget(playerA, "Craw Wurm");
-        setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertLife(playerA, 20);

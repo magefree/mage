@@ -1,11 +1,9 @@
-
-
 package mage.filter.common;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterControlledLandPermanent extends FilterControlledPermanent {
@@ -19,7 +17,13 @@ public class FilterControlledLandPermanent extends FilterControlledPermanent {
         this.add(CardType.LAND.getPredicate());
     }
 
-    public FilterControlledLandPermanent(final FilterControlledLandPermanent filter) {
+    public FilterControlledLandPermanent(SubType subtype, String name) {
+        super(name);
+        this.add(CardType.LAND.getPredicate());
+        this.add(subtype.getPredicate());
+    }
+
+    protected FilterControlledLandPermanent(final FilterControlledLandPermanent filter) {
         super(filter);
     }
 
@@ -27,5 +31,4 @@ public class FilterControlledLandPermanent extends FilterControlledPermanent {
     public FilterControlledLandPermanent copy() {
         return new FilterControlledLandPermanent(this);
     }
-
 }

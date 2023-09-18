@@ -16,10 +16,7 @@ import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
@@ -36,7 +33,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
     public RadhaHeartOfKeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -51,7 +48,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
         // You may look at the top card of your library any time, and you may play lands from the top of your library.
         LookAtTopCardOfLibraryAnyTimeEffect lookEffect = new LookAtTopCardOfLibraryAnyTimeEffect();
         lookEffect.setText("You may look at the top card of your library any time");
-        PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(filter, false);
+        PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(TargetController.YOU, filter, false);
         playEffect.setText(", and you may play lands from the top of your library");
 
         SimpleStaticAbility lookAndPlayAbility = new SimpleStaticAbility(lookEffect);
@@ -62,7 +59,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
         BoostSourceEffect bse = new BoostSourceEffect(controlledLands, controlledLands, Duration.EndOfTurn, true);
         bse.setText("Radha gets +X/+X until end of turn, where X is the number of lands you control");
-        this.addAbility(new SimpleActivatedAbility(bse, new ManaCostsImpl("{4}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(bse, new ManaCostsImpl<>("{4}{R}{G}")));
     }
 
     private RadhaHeartOfKeld(final RadhaHeartOfKeld card) {

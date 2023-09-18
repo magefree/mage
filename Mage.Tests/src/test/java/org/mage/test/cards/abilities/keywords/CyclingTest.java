@@ -62,21 +62,22 @@ public class CyclingTest extends CardTestPlayerBase {
     }
 
     /**
-     * Cycle from graveyard or battlefield may not work
+     * Cycle from graveyard or battlefield should not work.
      */
     @Test
     public void cycleFromGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+
         // Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
         // Cycling {3}{B}{B}
         // When you cycle Decree of Pain, all creatures get -2/-2 until end of turn.
         addCard(Zone.GRAVEYARD, playerA, "Decree of Pain");
+
         // Protection from black
         // Cycling {2} ({2}, Discard this card: Draw a card.)
         addCard(Zone.BATTLEFIELD, playerB, "Disciple of Grace");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling {3}{B}{B}");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cycling {2}");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -130,7 +131,7 @@ public class CyclingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "New Perspectives");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cycling");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

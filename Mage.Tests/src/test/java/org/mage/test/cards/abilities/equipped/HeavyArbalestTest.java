@@ -24,6 +24,7 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals 2 damage", playerB);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -48,7 +49,9 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals 2 damage", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Llanowar Elves");
 
         setStopAt(5, PhaseStep.BEGIN_COMBAT);

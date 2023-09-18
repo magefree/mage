@@ -54,7 +54,7 @@ class CephalidConstableTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), false);
     }
 
-    CephalidConstableTriggeredAbility(final CephalidConstableTriggeredAbility ability) {
+    private CephalidConstableTriggeredAbility(final CephalidConstableTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,7 +83,7 @@ class CephalidConstableTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, return up to that many target permanents that player controls to their owners' hands";
+        return "Whenever {this} deals combat damage to a player, return up to that many target permanents that player controls to their owner's hand.";
     }
 
 }

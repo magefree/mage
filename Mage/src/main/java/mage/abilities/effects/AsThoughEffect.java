@@ -15,6 +15,7 @@ public interface AsThoughEffect extends ContinuousEffect {
      * Apply to ONE affected ability from the object (sourceId)
      * <p>
      * Warning, if you don't need ability to check then ignore it (by default it calls full object check)
+     * Warning, if you use conditional effect then you must override both applies methods to support different types
      *
      * @param sourceId
      * @param affectedAbility ability to check (example: check if spell ability can be cast from non hand)

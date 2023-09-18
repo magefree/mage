@@ -40,7 +40,7 @@ public final class KjeldoranOutpost extends CardImpl {
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         // {1}{W}, {tap}: Create a 1/1 white Soldier creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

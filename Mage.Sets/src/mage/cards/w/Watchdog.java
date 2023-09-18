@@ -3,8 +3,8 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleSourceEffect;
@@ -36,7 +36,7 @@ public final class Watchdog extends CardImpl {
         addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
         // As long as Watchdog is untapped, all creatures attacking you get -1/-0.
         addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, new WatchdogFilter(), false), new InvertCondition(SourceTappedCondition.instance), "As long as {this} is untapped, all creatures attacking you get -1/-0")));
+                new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, new WatchdogFilter(), false), SourceTappedCondition.UNTAPPED, "As long as {this} is untapped, all creatures attacking you get -1/-0")));
     }
 
     private Watchdog(final Watchdog card) {
@@ -55,7 +55,7 @@ class WatchdogFilter extends FilterAttackingCreature {
         super("creatures attacking you");
     }
 
-    public WatchdogFilter(final WatchdogFilter filter) {
+    private WatchdogFilter(final WatchdogFilter filter) {
         super(filter);
     }
 
@@ -65,8 +65,8 @@ class WatchdogFilter extends FilterAttackingCreature {
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (!super.match(permanent, sourceId, playerId, game)) {
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        if (!super.match(permanent, playerId, source, game)) {
             return false;
         }
 

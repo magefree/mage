@@ -23,7 +23,7 @@ public final class SliceAndDice extends CardImpl {
         // Slice and Dice deals 4 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));
         // Cycling {2}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{R}")));
         // When you cycle Slice and Dice, you may have it deal 1 damage to each creature.
         this.addAbility(new CycleTriggeredAbility(new DamageAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE).setText("have it deal 1 damage to each creature"), true));
     }

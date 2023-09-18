@@ -30,7 +30,7 @@ public final class CinderCrawler extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{R}"),
+                new ManaCostsImpl<>("{R}"),
                 SourceBlockedCondition.instance
         ));
     }

@@ -27,7 +27,7 @@ public final class IgneousGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}: Igneous Golem gains trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
     }
 
     private IgneousGolem(final IgneousGolem card) {

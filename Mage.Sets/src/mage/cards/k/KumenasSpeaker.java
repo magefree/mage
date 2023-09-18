@@ -48,7 +48,7 @@ public final class KumenasSpeaker extends CardImpl {
     }
 }
 
-enum KumenasSpeakerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum KumenasSpeakerPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

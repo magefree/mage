@@ -28,7 +28,7 @@ public final class ApprenticeWizard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {tap}: Add {C}{C}{C}.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

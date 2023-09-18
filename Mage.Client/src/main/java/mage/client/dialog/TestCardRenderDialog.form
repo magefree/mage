@@ -39,6 +39,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboTheme" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labelCardColor" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="comboCardColor" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="labelSize" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="sliderSize" min="-2" pref="100" max="-2" attributes="0"/>
@@ -63,6 +67,10 @@
                       <Component id="labelSize" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="comboTheme" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelTheme" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Component id="comboCardColor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelCardColor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Component id="sliderSize" min="-2" max="-2" attributes="0"/>
                   <Component id="checkBoxGenerateManyCards" min="-2" max="-2" attributes="0"/>
@@ -70,7 +78,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panelCardIcons" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="cardsPanel" pref="401" max="32767" attributes="0"/>
+              <Component id="cardsPanel" pref="405" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="buttonCancel" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -157,7 +165,7 @@
                   <Component id="labelCardIconsAdditionalAmount" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="spinnerCardIconsAdditionalAmount" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace pref="188" max="32767" attributes="0"/>
+                  <EmptySpace pref="305" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -272,6 +280,27 @@
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboThemeItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelCardColor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Card color:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboCardColor">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="loading..."/>
+          </StringArray>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboCardColorItemStateChanged"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

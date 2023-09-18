@@ -3,7 +3,6 @@ package mage.cards.x;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
@@ -29,10 +28,10 @@ public final class XenagosTheReveler extends CardImpl {
 
     public XenagosTheReveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.XENAGOS);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control.
         this.addAbility(new LoyaltyAbility(new XenagosManaEffect(), +1)
@@ -63,7 +62,7 @@ class XenagosManaEffect extends OneShotEffect {
         this.staticText = "Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control";
     }
 
-    public XenagosManaEffect(final XenagosManaEffect effect) {
+    private XenagosManaEffect(final XenagosManaEffect effect) {
         super(effect);
     }
 
@@ -76,7 +75,7 @@ class XenagosManaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
+            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game);
             if (x == 0) {
                 return false;
             }
@@ -102,7 +101,7 @@ class XenagosExileEffect extends OneShotEffect {
         this.staticText = "Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield";
     }
 
-    public XenagosExileEffect(final XenagosExileEffect effect) {
+    private XenagosExileEffect(final XenagosExileEffect effect) {
         super(effect);
     }
 
@@ -116,16 +115,16 @@ class XenagosExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards exiledCards = new CardsImpl();
-            exiledCards.addAll(controller.getLibrary().getTopCards(game, 7));
+            exiledCards.addAllCards(controller.getLibrary().getTopCards(game, 7));
             controller.moveCards(exiledCards, Zone.EXILED, source, game);
             FilterCard filter = new FilterCard("creature and/or land cards to put onto the battlefield");
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
                     CardType.LAND.getPredicate()));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.EXILED, filter);
-            target1.setNotTarget(true);
+            target1.withNotTarget(true);
             if (!exiledCards.isEmpty()
-                    && target1.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, game)) {
+                    && target1.canChoose(source.getControllerId(), source, game)
+                    && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, source, game)) {
                 controller.moveCards(new CardsImpl(target1.getTargets()), Zone.BATTLEFIELD, source, game);
             }
             return true;

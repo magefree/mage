@@ -35,7 +35,7 @@ public final class GladeWatcher extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{G}"),
+                new ManaCostsImpl<>("{G}"),
                 FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);

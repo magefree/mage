@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.replacement;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -14,9 +15,11 @@ import mage.game.events.GameEvent;
 public class CreateTwiceThatManyTokensEffect extends ReplacementEffectImpl {
 
     public CreateTwiceThatManyTokensEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "if one or more tokens would be created under your control, " +
-                "twice that many of those tokens are created instead";
+        this(Duration.WhileOnBattlefield);
+    }
+
+    public CreateTwiceThatManyTokensEffect(Duration duration) {
+        super(duration, Outcome.Copy);
     }
 
     private CreateTwiceThatManyTokensEffect(final CreateTwiceThatManyTokensEffect effect) {
@@ -46,4 +49,13 @@ public class CreateTwiceThatManyTokensEffect extends ReplacementEffectImpl {
         return false;
     }
 
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return (duration.toString().isEmpty() ? "" : duration + ", ")
+                + "if one or more tokens would be created under your control, " +
+                "twice that many of those tokens are created instead";
+    }
 }

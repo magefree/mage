@@ -104,7 +104,7 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
 
         setChoice(playerA, "Worldgorger Dragon");
         setChoice(playerA, "When {this} enters the battlefield, if it's");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
@@ -138,7 +138,6 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
         assertLife(playerA, 44);
         assertLife(playerB, 0);
 
@@ -211,8 +210,6 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Volcanic Geyser", 1);
         assertGraveyardCount(playerA, "Worldgorger Dragon", 1);

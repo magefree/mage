@@ -1,7 +1,7 @@
-
 package mage.abilities.effects.common;
 
 import java.util.Set;
+
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -30,7 +30,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
         this.filterCard = filter;
     }
 
-    public CastCardFromOutsideTheGameEffect(final CastCardFromOutsideTheGameEffect effect) {
+    protected CastCardFromOutsideTheGameEffect(final CastCardFromOutsideTheGameEffect effect) {
         super(effect);
         filterCard = effect.filterCard;
     }
@@ -56,7 +56,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
                 return false;
             }
 
-            Set<Card> filtered = cards.getCards(filterCard, source.getSourceId(), source.getControllerId(), game);
+            Set<Card> filtered = cards.getCards(filterCard, source.getControllerId(), source, game);
             if (filtered.isEmpty()) {
                 if (!game.isSimulation()) {
                     game.informPlayer(player, "You have no " + filterCard.getMessage() + " outside the game.");
@@ -70,10 +70,12 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
             }
 
             TargetCard target = new TargetCard(Zone.OUTSIDE, filterCard);
-            if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
+            if (player.choose(Outcome.Benefit, filteredCards, target, source, game)) {
                 Card card = player.getSideboard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 }
             }
         }

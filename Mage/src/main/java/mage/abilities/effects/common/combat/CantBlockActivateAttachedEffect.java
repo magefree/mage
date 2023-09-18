@@ -16,17 +16,13 @@ public class CantBlockActivateAttachedEffect extends RestrictionEffect {
         staticText = "Enchanted creature can't block, and its activated abilities can't be activated";
     }
 
-    public CantBlockActivateAttachedEffect(final CantBlockActivateAttachedEffect effect) {
+    protected CantBlockActivateAttachedEffect(final CantBlockActivateAttachedEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            return permanent.getId().equals(enchantment.getAttachedTo());
-        }
-        return false;
+        return permanent.getAttachments().contains(source.getSourceId());
     }
 
     @Override
@@ -43,5 +39,4 @@ public class CantBlockActivateAttachedEffect extends RestrictionEffect {
     public CantBlockActivateAttachedEffect copy() {
         return new CantBlockActivateAttachedEffect(this);
     }
-
 }

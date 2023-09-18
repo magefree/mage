@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -12,9 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
-import mage.target.common.TargetAttackingOrBlockingCreature;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -38,8 +36,8 @@ public final class TakenosCavalry extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(new BushidoAbility(1));
         // {tap}: Takeno's Cavalry deals 1 damage to target attacking or blocking Spirit.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetAttackingOrBlockingCreature(1, 1, filter, false));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

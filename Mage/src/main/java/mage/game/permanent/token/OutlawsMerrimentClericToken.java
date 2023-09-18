@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class OutlawsMerrimentClericToken extends TokenImpl {
 
     public OutlawsMerrimentClericToken() {
-        super("Human Cleric", "2/1 Human Cleric with lifelink and haste");
+        super("Human Cleric Token", "2/1 Human Cleric with lifelink and haste");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.HUMAN);
         subtype.add(SubType.CLERIC);

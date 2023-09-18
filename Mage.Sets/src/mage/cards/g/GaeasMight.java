@@ -22,7 +22,7 @@ public final class GaeasMight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new DomainValue(), new DomainValue(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
         this.getSpellAbility().addHint(DomainHint.instance);

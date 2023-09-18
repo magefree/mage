@@ -13,7 +13,6 @@ import mage.players.Player;
 import mage.target.Target;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class RedirectionEffect extends ReplacementEffectImpl {
@@ -41,7 +40,7 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
         this.usageType = usageType;
     }
 
-    public RedirectionEffect(final RedirectionEffect effect) {
+    protected RedirectionEffect(final RedirectionEffect effect) {
         super(effect);
         this.redirectTarget = effect.redirectTarget;
         this.amountToRedirect = effect.amountToRedirect;
@@ -65,7 +64,7 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
         if (damageToRedirect < 1) { // if multiple replacement effect apply, the rest damage can be 0, so the effect is not applied/replaced
             return false;
         }
-        String sourceLogName = source != null ? game.getObject(source.getSourceId()).getLogName() + ": " : "";
+        String sourceLogName = source != null ? game.getObject(source).getLogName() + ": " : "";
         DamageEvent damageEvent = (DamageEvent) event;
         int restDamage = 0;
         if (damageEvent.getAmount() > amountToRedirect) {
@@ -83,6 +82,12 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
                 }
             } else {
                 applyEffectsCounter = game.getState().getApplyEffectsCounter();
+            }
+        }
+        if (usageType == UsageType.ACCORDING_DURATION) {
+            amountToRedirect -= damageEvent.getAmount();
+            if (amountToRedirect <= 0) {
+                this.discard();
             }
         }
         Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());

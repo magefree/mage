@@ -10,11 +10,11 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class AnotherEnchantedPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public class AnotherEnchantedPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent enchantment = input.getSource().getSourcePermanentIfItStillExists(game);
         return enchantment != null && !input.getObject().getId().equals(enchantment.getAttachedTo());
     }
 

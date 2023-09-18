@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -51,8 +52,9 @@ class CantonicaCasinoEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             // Roll two six-sided dice
-            int dice1 = you.rollDice(source, game, 6);
-            int dice2 = you.rollDice(source, game, 6);
+            List<Integer> results = you.rollDice(outcome, source, game, 6, 2, 0);
+            int dice1 = results.get(0);
+            int dice2 = results.get(1);
 
             if (dice1 == dice2) {
                 // If you roll doubles, gain 10 life

@@ -2,6 +2,7 @@ package mage.abilities;
 
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -14,6 +15,7 @@ import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -42,7 +44,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private boolean mayChooseNone = false;
 
     public Modes() {
-        this.currentMode = new Mode();
+        this.currentMode = new Mode((Effect) null);
         this.put(currentMode.getId(), currentMode);
         this.minModes = 1;
         this.maxModes = 1;
@@ -52,7 +54,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.eachModeMoreThanOnce = false;
     }
 
-    public Modes(final Modes modes) {
+    protected Modes(final Modes modes) {
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
@@ -95,6 +97,15 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         return modeToGet;
     }
 
+    public Stream<Mode> stream() {
+        return super.values().stream();
+    }
+
+    public Stream<Mode> streamAlreadySelected(Ability source, Game game) {
+        Set<UUID> selected = getAlreadySelectedModes(source, game);
+        return stream().filter(m -> selected.contains(m.getId()));
+    }
+
     public Mode getMode() {
         return currentMode;
     }
@@ -127,8 +138,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public List<UUID> getSelectedModes() {
-        // sorted as original modes
-        List<UUID> res = new ArrayList<>();
+        // modes can be selected in any order by user, but execution must be in rule's order
+        List<UUID> res = new ArrayList<>(this.size());
         for (Mode mode : this.values()) {
             for (UUID selectedId : this.selectedModes) {
                 // selectedModes contains original mode and 2+ selected as duplicates (new modes)
@@ -207,9 +218,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             return realMaxModes;
         }
 
-        // use case: make all modes chooseable
+        // use case: make two modes chooseable (all cards that use this currently go from one to two)
         if (moreCondition != null && moreCondition.apply(game, source)) {
-            realMaxModes = Integer.MAX_VALUE;
+            realMaxModes = 2;
         }
 
         // use case: limit max modes by opponents (wtf?!)
@@ -218,7 +229,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 realMaxModes = 0;
                 for (UUID targetPlayerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player targetPlayer = game.getPlayer(targetPlayerId);
-                    if (((FilterPlayer) this.maxModesFilter).match(targetPlayer, source.getSourceId(), source.getControllerId(), game)) {
+                    if (((FilterPlayer) this.maxModesFilter).match(targetPlayer, source.getControllerId(), source, game)) {
                         realMaxModes++;
                     }
                 }
@@ -291,7 +302,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 }
                 for (Mode mode : this.values()) {
                     if ((!isEachModeOnlyOnce() || onceSelectedModes == null || !onceSelectedModes.contains(mode.getId()))
-                            && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                            && mode.getTargets().canChoose(source.getControllerId(), source, game)) {
                         this.addSelectedMode(mode.getId());
                     }
                 }
@@ -305,19 +316,18 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             // Some spells and abilities specify that a player other than their controller chooses a mode for it.
             // In that case, the other player does so when the spell or ability's controller normally would do so.
             // If there is more than one other player who could make such a choice, the spell or ability's controller decides which of those players will make the choice.
-            UUID playerId = null;
+            UUID playerId;
             if (modeChooser == TargetController.OPPONENT) {
                 TargetOpponent targetOpponent = new TargetOpponent();
-                if (targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
-                    playerId = targetOpponent.getFirstTarget();
-                }
+                targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game);
+                playerId = targetOpponent.getFirstTarget();
             } else {
                 playerId = source.getControllerId();
             }
-            if (playerId == null) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
                 return false;
             }
-            Player player = game.getPlayer(playerId);
 
             // player chooses modes manually
             this.currentMode = null;
@@ -340,7 +350,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             if (isEachModeOnlyOnce()) {
                 setAlreadySelectedModes(source, game);
             }
-            return true;
+            if (modeChooser == TargetController.OPPONENT) {
+                selectedModes
+                        .stream()
+                        .map(this::get)
+                        .map(Mode::getEffects)
+                        .forEach(effects -> effects.setValue("choosingPlayer", playerId));
+            }
         } else {
             // only one mode available
             if (currentMode == null) {
@@ -349,8 +365,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 this.addSelectedMode(mode.getId());
                 this.setActiveMode(mode);
             }
-            return true;
         }
+        return true;
     }
 
     /**
@@ -467,23 +483,31 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (mayChooseNone) {
             sb.append("you may ");
         }
-        if (this.chooseText != null) {
-            sb.append(chooseText);
-        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
-            sb.append("choose up to one");
-        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
-            sb.append("choose any number");
-        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
-            sb.append("choose one or both");
-        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
-            sb.append("choose one or more");
-        } else if (this.getMinModes() == this.getMaxModes(null, null)) {
-            sb.append("choose " + CardUtil.numberToText(this.getMinModes()));
+        if (this.chooseText == null) {
+            if (modeChooser == TargetController.OPPONENT) {
+                sb.append("an opponent chooses ");
+            } else {
+                sb.append("choose ");
+            }
+            if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
+                sb.append("up to one");
+            } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
+                sb.append("any number");
+            } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
+                sb.append("one or both");
+            } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
+                sb.append("one or more");
+            } else if (this.getMinModes() == this.getMaxModes(null, null)) {
+                sb.append(CardUtil.numberToText(this.getMinModes()));
+            } else {
+                throw new UnsupportedOperationException(String.format("no text available for this selection of min and max modes (%d and %d)",
+                        this.getMinModes(), this.getMaxModes(null, null)));
+            }
         } else {
-            throw new UnsupportedOperationException("no text available for this selection of min and max modes");
+            sb.append(chooseText);
         }
 
-        if (isEachModeOnlyOnce()) {
+        if (isEachModeOnlyOnce() && this.getMaxModesFilter() == null) {
             sb.append(" that hasn't been chosen");
         }
         if (isResetEachTurn()) {

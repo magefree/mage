@@ -1,5 +1,6 @@
 package org.mage.plugins.card.utils.impl;
 
+import mage.abilities.icon.CardIconColor;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.BufferedImageBuilder;
 import org.apache.log4j.Logger;
@@ -363,14 +364,14 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     @Override
-    public BufferedImage getCardIcon(String resourceName, int size) {
+    public BufferedImage getCardIcon(String resourceName, int size, CardIconColor cardIconColor) {
         // icon must be same, but color can be changed by themes
         InputStream data = ImageManager.class.getResourceAsStream(PreferencesDialog.getCurrentTheme().getCardIconsResourcePath(resourceName));
         try {
             // no need to resize svg (lib already do it on load)
-            return SvgUtils.loadSVG(data, "card icon = " + resourceName,
-                    PreferencesDialog.getCurrentTheme().getCardIconsCssFile(),
-                    PreferencesDialog.getCurrentTheme().getCardIconsCssSettings(),
+            return SvgUtils.loadSVG(data, "card icon = " + resourceName + "; " + cardIconColor.toString(),
+                    PreferencesDialog.getCurrentTheme().getCardIconsCssFile(cardIconColor),
+                    PreferencesDialog.getCurrentTheme().getCardIconsCssSettings(cardIconColor),
                     size, size, false);
         } catch (Exception e) {
             logger.error("Can't load card icon: " + resourceName + " , reason: " + e.getMessage(), e);

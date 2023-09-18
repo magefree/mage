@@ -46,7 +46,7 @@ public class CantDrawTest extends CardTestPlayerBase {
         // If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Library", 1);
 
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();

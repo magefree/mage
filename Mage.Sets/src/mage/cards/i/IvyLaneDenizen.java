@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -26,8 +25,8 @@ public final class IvyLaneDenizen extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another green creature");
     static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(AnotherPredicate.instance);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public IvyLaneDenizen(UUID ownerId, CardSetInfo setInfo) {

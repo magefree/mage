@@ -8,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ShuffleIntoLibraryTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,10 +36,7 @@ public final class WandOfVertebrae extends CardImpl {
         ));
 
         // {2}, {T}, Exile Wand of Vertebrae: Shuffle up to five target cards from your graveyard into your library.
-        Ability ability = new SimpleActivatedAbility(
-                new WandOfVertebraeEffect(),
-                new GenericManaCost(2)
-        );
+        Ability ability = new SimpleActivatedAbility(new ShuffleIntoLibraryTargetEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(0, 5));
@@ -52,41 +50,5 @@ public final class WandOfVertebrae extends CardImpl {
     @Override
     public WandOfVertebrae copy() {
         return new WandOfVertebrae(this);
-    }
-}
-
-class WandOfVertebraeEffect extends OneShotEffect {
-
-    public WandOfVertebraeEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Shuffle up to five target cards "
-                + "from your graveyard into your library.";
-    }
-
-    public WandOfVertebraeEffect(final WandOfVertebraeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WandOfVertebraeEffect copy() {
-        return new WandOfVertebraeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl();
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.getLibrary().addAll(cards.getCards(game), game);
-        player.shuffleLibrary(source, game);
-        return true;
     }
 }

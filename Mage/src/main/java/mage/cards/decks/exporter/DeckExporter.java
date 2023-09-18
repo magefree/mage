@@ -15,6 +15,14 @@ public abstract class DeckExporter {
         DeckFormats.writeDeck(file, deck, this);
     }
 
+    public void writeDeck(File directory, String filename, DeckCardLists deck) throws IOException {
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        String path = new File(directory, filename).getPath();
+        DeckFormats.writeDeck(path, deck, this);
+    }
+
     public void writeDeck(File file, DeckCardLists deck) throws IOException {
         DeckFormats.writeDeck(file, deck, this);
     }

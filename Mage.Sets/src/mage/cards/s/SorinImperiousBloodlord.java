@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -15,10 +14,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -30,8 +26,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -50,9 +44,9 @@ public final class SorinImperiousBloodlord extends CardImpl {
     public SorinImperiousBloodlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Target creature you control gains deathtouch and lifelink until end of turn. If it's a Vampire, put a +1/+1 counter on it.
         Ability ability = new LoyaltyAbility(new SorinImperiousBloodlordEffect(), 1);
@@ -89,7 +83,7 @@ public final class SorinImperiousBloodlord extends CardImpl {
 class SorinImperiousBloodlordEffect extends OneShotEffect {
 
     SorinImperiousBloodlordEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Target creature you control gains deathtouch and lifelink until end of turn. " +
                 "If it's a Vampire, put a +1/+1 counter on it.";
     }

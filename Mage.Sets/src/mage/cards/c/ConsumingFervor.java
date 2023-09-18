@@ -39,14 +39,14 @@ public final class ConsumingFervor extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3 and has "At the beginning of your upkeep, put a -1/-1 counter on this creature."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield));
         Ability grantedAbility = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(1)), TargetController.YOU, false);
         Effect effect = new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA);
-        effect.setText("and has \"At the beginning of each upkeep, put a -1/-1 counter on this creature.\"");
+        effect.setText("and has \"At the beginning of your upkeep, put a -1/-1 counter on this creature.\"");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

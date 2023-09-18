@@ -30,7 +30,7 @@ public final class VeinwitchCoven extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you gain life, you pay {B}. If you do, return target creature card from your graveyard to your hand.
         Ability ability = new GainLifeControllerTriggeredAbility(new DoIfCostPaid(

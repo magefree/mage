@@ -2,7 +2,6 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -31,9 +30,9 @@ public final class MuYanlingCelestialWind extends CardImpl {
     public MuYanlingCelestialWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.YANLING);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Until your next turn, up to one target creature gets -5/-0.
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(
@@ -43,7 +42,7 @@ public final class MuYanlingCelestialWind extends CardImpl {
         this.addAbility(ability);
 
         // −3: Return up to two target creatures to their owners' hands.
-        ability = new LoyaltyAbility(new ReturnToHandTargetEffect(true), -3);
+        ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 

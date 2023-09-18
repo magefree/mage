@@ -46,10 +46,10 @@ class BenefactionOfRhonasEffect extends OneShotEffect {
 
     public BenefactionOfRhonasEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Reveal the top five cards of your library. You may put a creature card and/or enchantment card from among them into your hand. Put the rest into your graveyard";
+        this.staticText = "Reveal the top five cards of your library. You may put a creature card and/or an enchantment card from among them into your hand. Put the rest into your graveyard";
     }
 
-    public BenefactionOfRhonasEffect(final BenefactionOfRhonasEffect effect) {
+    private BenefactionOfRhonasEffect(final BenefactionOfRhonasEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class BenefactionOfRhonasEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
             boolean creatureCardFound = false;

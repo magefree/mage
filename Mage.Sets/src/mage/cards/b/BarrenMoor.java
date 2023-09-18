@@ -24,7 +24,7 @@ public final class BarrenMoor extends CardImpl {
         // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
         // Cycling {B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private BarrenMoor(final BarrenMoor card) {

@@ -1,7 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -14,7 +12,6 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -23,18 +20,20 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
-import mage.cards.ModalDoubleFacesCard;
-import mage.constants.*;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
-public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
+public final class KolvoriGodOfKinship extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreatureCard filter2 = new FilterCreatureCard("a legendary creature card");
@@ -48,15 +47,16 @@ public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2, true);
 
     public KolvoriGodOfKinship(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{G}{G}",
-                "The Ringhart Crest", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{1}{G}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{G}{G}",
+                "The Ringhart Crest",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{1}{G}"
         );
 
         // 1.
         // Kolvori, God of Kinship
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(4));
 
         // As long as you control three or more legendary creatures, Kolvori, God of Kinship gets +4/+2 and has vigilance.
@@ -73,19 +73,15 @@ public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
         // {1}{G}, {T}: Look at the top six cards of your library.
         // You may reveal a legendary creature card from among them and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
-        ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(6), false, StaticValue.get(1), filter2,
-                Zone.LIBRARY, false, true, false, Zone.HAND,
-                true, false, false).setBackInRandomOrder(true), new ManaCostsImpl("{1}{G}")
-        );
+        ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(6, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.getLeftHalfCard().addAbility(ability);
 
         // 2.
         // The Ringhart Crest
         // Legendary Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // As The Ringhart Crest enters the battlefield, choose a creature type.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Benefit)));
 
@@ -119,13 +115,27 @@ class TheRinghartCrestManaBuilder extends ConditionalManaBuilder {
     }
 
     @Override
-    public ConditionalMana build (Object... options) {
+    public ConditionalMana build(Object... options) {
         return new TheRinghartCrestConditionalMana(this.mana, creatureType);
     }
 
     @Override
     public String getRule() {
         return "Spend this mana only to cast a creature spell of the chosen type or a legendary creature spell";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.creatureType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        return this.creatureType == ((TheRinghartCrestManaBuilder) obj).creatureType;
     }
 }
 
@@ -148,9 +158,9 @@ class TheRinghartCrestManaCondition extends CreatureCastManaCondition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (super.apply(game, source)) {
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             if (object != null) {
-                if (object.isLegendary()) {
+                if (object.isLegendary(game)) {
                     return true;
                 }
                 return creatureType != null && object.hasSubtype(creatureType, game);

@@ -13,7 +13,7 @@ import mage.game.permanent.Permanent;
  */
 public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean onlyToControllerGraveyard;
+    private final boolean onlyToControllerGraveyard;
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect) {
         this(effect, false, false);
@@ -23,9 +23,10 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
         super(Zone.ALL, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
+        setTriggerPhrase("When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ");
     }
 
-    public PutIntoGraveFromBattlefieldSourceTriggeredAbility(final PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
+    protected PutIntoGraveFromBattlefieldSourceTriggeredAbility(final PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
         super(ability);
         this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;
     }
@@ -42,19 +43,16 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent permanent = zEvent.getTarget();
-            if (permanent != null
-                    && zEvent.isDiesEvent()) {
-                return !onlyToControllerGraveyard || this.isControlledBy(game.getOwnerId(zEvent.getTargetId()));
-            }
+        if (!event.getTargetId().equals(getSourceId())) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, " ;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent permanent = zEvent.getTarget();
+        if (permanent == null || !zEvent.isDiesEvent()
+                || (onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId())))) {
+            return false;
+        }
+        this.getEffects().setValue("permanentWasCreature", permanent.isCreature(game));
+        return true;
     }
 }

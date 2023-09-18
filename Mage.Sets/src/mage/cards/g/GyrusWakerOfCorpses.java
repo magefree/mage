@@ -42,7 +42,7 @@ public final class GyrusWakerOfCorpses extends CardImpl {
     public GyrusWakerOfCorpses(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -75,7 +75,7 @@ class GyrusWakerOfCorpsesEffect extends OneShotEffect {
         this.staticText = "exile target creature card with lesser power from your graveyard. If you do, create a token that's a copy of that card and that's tapped and attacking. Exile the token at the end of combat.";
     }
 
-    public GyrusWakerOfCorpsesEffect(final GyrusWakerOfCorpsesEffect effect) {
+    private GyrusWakerOfCorpsesEffect(final GyrusWakerOfCorpsesEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class GyrusWakerOfCorpsesEffect extends OneShotEffect {
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true, 1, true, true);
         effect.setTargetPointer(new FixedTarget(card, game));
         effect.apply(game, source);
-        for (Permanent addedToken : effect.getAddedPermanent()) {
+        for (Permanent addedToken : effect.getAddedPermanents()) {
             Effect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
             new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), false).apply(game, source);
@@ -105,11 +105,11 @@ class GyrusWakerOfCorpsesEffect extends OneShotEffect {
     }
 }
 
-class GyrusWakerOfCorpsesPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+class GyrusWakerOfCorpsesPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
         return sourcePermanent != null && input.getObject().getPower().getValue() < sourcePermanent.getPower().getValue();
     }
 

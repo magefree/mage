@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -55,7 +55,7 @@ class ExuberantWolfbearEffect extends OneShotEffect {
 
     ExuberantWolfbearEffect() {
         super(Outcome.Benefit);
-        staticText = "change the base power and toughness of target Human you control " +
+        staticText = "you may change the base power and toughness of target Human you control " +
                 "to {this}'s power and toughness until end of turn";
     }
 
@@ -74,7 +74,7 @@ class ExuberantWolfbearEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.addEffect(new SetPowerToughnessTargetEffect(
+        game.addEffect(new SetBasePowerToughnessTargetEffect(
                 permanent.getPower().getValue(),
                 permanent.getToughness().getValue(),
                 Duration.EndOfTurn

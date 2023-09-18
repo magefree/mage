@@ -38,7 +38,6 @@ public class AkromasWillTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -76,6 +75,5 @@ public class AkromasWillTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

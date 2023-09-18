@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public final class MetamorphicAlteration extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As Metamorphic Alteration enters the battlefield, choose a creature.
@@ -63,7 +64,7 @@ class ChooseACreature extends OneShotEffect {
         staticText = "choose a creature";
     }
 
-    public ChooseACreature(final ChooseACreature effect) {
+    private ChooseACreature(final ChooseACreature effect) {
         super(effect);
     }
 
@@ -72,18 +73,18 @@ class ChooseACreature extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
         if (sourceObject == null) {
-            sourceObject = game.getObject(source.getSourceId());
+            sourceObject = game.getObject(source);
         }
         if (controller == null
                 || sourceObject == null) {
             return false;
         }
         Target target = new TargetCreaturePermanent();
-        target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), controller.getId(), game)) {
+        target.withNotTarget(true);
+        if (!target.canChoose(controller.getId(), source, game)) {
             return true;
         }
-        controller.choose(Outcome.Copy, target, source.getSourceId(), game);
+        controller.choose(Outcome.Copy, target, source, game);
         Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
         if (chosenPermanent != null) {
             game.getState().setValue(source.getSourceId().toString() + INFO_KEY, chosenPermanent.copy());
@@ -104,7 +105,7 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         this.staticText = "Enchanted creature is a copy of the chosen creature.";
     }
 
-    public MetamorphicAlterationEffect(MetamorphicAlterationEffect effect) {
+    private MetamorphicAlterationEffect(final MetamorphicAlterationEffect effect) {
         super(effect);
     }
 
@@ -123,10 +124,12 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         permanent.setName(copied.getName());
         permanent.getManaCost().clear();
         permanent.getManaCost().addAll(copied.getManaCost());
-        permanent.setExpansionSetCode(copied.getExpansionSetCode());
-        permanent.getSuperType().clear();
-        for (SuperType t : copied.getSuperType()) {
-            permanent.addSuperType(t);
+
+        CardUtil.copySetAndCardNumber(permanent, copied);
+
+        permanent.removeAllCardTypes(game);
+        for (SuperType t : copied.getSuperType(game)) {
+            permanent.addSuperType(game, t);
         }
         permanent.removeAllCardTypes(game);
         for (CardType cardType : copied.getCardType(game)) {
@@ -139,8 +142,8 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         for (Ability ability : copied.getAbilities()) {
             permanent.addAbility(ability, source.getSourceId(), game);
         }
-        permanent.getPower().setValue(copied.getPower().getBaseValue());
-        permanent.getToughness().setValue(copied.getToughness().getBaseValue());
+        permanent.getPower().setModifiedBaseValue(copied.getPower().getBaseValue());
+        permanent.getToughness().setModifiedBaseValue(copied.getToughness().getBaseValue());
         return true;
     }
 

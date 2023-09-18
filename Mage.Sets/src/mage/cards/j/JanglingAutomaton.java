@@ -47,7 +47,7 @@ class JanglingAutomatonEffect extends OneShotEffect {
         this.staticText = "untap all creatures defending player controls";
     }
 
-    public JanglingAutomatonEffect(final JanglingAutomatonEffect effect) {
+    private JanglingAutomatonEffect(final JanglingAutomatonEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class JanglingAutomatonEffect extends OneShotEffect {
         if (defenderId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(defenderId));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 permanent.untap(game);
             }
             return true;

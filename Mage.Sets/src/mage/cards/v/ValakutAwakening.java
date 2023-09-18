@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ValakutAwakening extends ModalDoubleFacesCard {
+public final class ValakutAwakening extends ModalDoubleFacedCard {
 
     public ValakutAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -81,7 +81,7 @@ class ValakutAwakeningEffect extends OneShotEffect {
         TargetCard targetCard = new TargetCardInHand(
                 0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CARDS
         );
-        player.choose(outcome, player.getHand(), targetCard, game);
+        player.choose(outcome, player.getHand(), targetCard, source, game);
         Cards cards = new CardsImpl(targetCard.getTargets());
         player.putCardsOnBottomOfLibrary(cards, game, source, true);
         player.drawCards(cards.size() + 1, source, game);

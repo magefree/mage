@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -24,7 +25,7 @@ public final class SyrKonradTheGrim extends CardImpl {
     public SyrKonradTheGrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(5);
@@ -36,7 +37,7 @@ public final class SyrKonradTheGrim extends CardImpl {
         // {1}{B}: Each player puts the top card of their library into their graveyard.
         this.addAbility(new SimpleActivatedAbility(new MillCardsEachPlayerEffect(
                 1, TargetController.ANY
-        ), new ManaCostsImpl("{1}{B}")));
+        ), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private SyrKonradTheGrim(final SyrKonradTheGrim card) {
@@ -90,7 +91,12 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
         }
         // Or a creature card leaves your graveyard
         return zEvent.getFromZone() == Zone.GRAVEYARD
-                && zEvent.getPlayerId() == this.getControllerId();
+                && card.isOwnedBy(this.getControllerId());
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 
     @Override

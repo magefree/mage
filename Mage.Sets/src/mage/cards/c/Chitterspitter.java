@@ -37,7 +37,7 @@ public final class Chitterspitter extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.SQUIRREL, "Squirrels");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public Chitterspitter(UUID ownerId, CardSetInfo setInfo) {

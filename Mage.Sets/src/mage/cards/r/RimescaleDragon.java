@@ -35,7 +35,7 @@ public final class RimescaleDragon extends CardImpl {
     public RimescaleDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -46,7 +46,7 @@ public final class RimescaleDragon extends CardImpl {
         // {2}{snow}: Tap target creature and put an ice counter on it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TapTargetEffect("tap target creature"),
-                new ManaCostsImpl("{2}{S}")
+                new ManaCostsImpl<>("{2}{S}")
         );
         Effect effect = new AddCountersTargetEffect(CounterType.ICE.createInstance());
         effect.setText("and put an ice counter on it");

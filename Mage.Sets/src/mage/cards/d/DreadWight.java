@@ -29,7 +29,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -71,7 +70,7 @@ class DreadWightTriggeredAbility extends TriggeredAbilityImpl {
         this.usesStack = false;
     }
 
-    DreadWightTriggeredAbility(final DreadWightTriggeredAbility ability) {
+    private DreadWightTriggeredAbility(final DreadWightTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,11 +87,11 @@ class DreadWightTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(getSourceId())) { // Dread Wight is the blocker
-            getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+            getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         if (event.getTargetId().equals(getSourceId())) { // Dread Wight is the attacker
-            getAllEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
+            getAllEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
             return true;
         }
         return false;
@@ -111,7 +110,7 @@ class DreadWightEffect extends OneShotEffect {
                 + "Each of those creatures gains \"{4}: Remove a paralyzation counter from this creature.\"";
     }
 
-    public DreadWightEffect(final DreadWightEffect effect) {
+    private DreadWightEffect(final DreadWightEffect effect) {
         super(effect);
     }
 
@@ -152,7 +151,7 @@ class DreadWightEffect extends OneShotEffect {
             Ability activatedAbility = new SimpleActivatedAbility(
                     Zone.BATTLEFIELD,
                     new RemoveCounterSourceEffect(CounterType.PARALYZATION.createInstance()),
-                    new ManaCostsImpl("{4}"));
+                    new ManaCostsImpl<>("{4}"));
             ContinuousEffect effect4 = new GainAbilityTargetEffect(
                     activatedAbility,
                     Duration.WhileOnBattlefield);
@@ -173,7 +172,7 @@ class DreadWightDoNotUntapEffect extends ContinuousRuleModifyingEffectImpl {
         this.permanentId = permanentId;
     }
 
-    public DreadWightDoNotUntapEffect(final DreadWightDoNotUntapEffect effect) {
+    private DreadWightDoNotUntapEffect(final DreadWightDoNotUntapEffect effect) {
         super(effect);
         this.permanentId = effect.permanentId;
     }

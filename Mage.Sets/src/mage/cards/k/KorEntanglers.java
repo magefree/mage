@@ -10,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -19,12 +18,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class KorEntanglers extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public KorEntanglers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
@@ -36,7 +29,7 @@ public final class KorEntanglers extends CardImpl {
 
         // <i>Rally</i> &mdash; Whenever Kor Entanglers or another Ally enters the battlefield under your control, tap target creature an opponent controls.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
     }

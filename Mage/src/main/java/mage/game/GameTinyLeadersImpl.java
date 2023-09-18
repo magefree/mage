@@ -15,8 +15,8 @@ import mage.constants.*;
 import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.CommanderInfoWatcher;
-import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,13 +29,16 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 
     protected boolean alsoHand; // replace also commander going to library
     protected boolean alsoLibrary; // replace also commander going to library
+
+    // 103.7a  In a two-player game, the player who plays first skips the draw step
+    // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 50);
+        super(attackOption, range, mulligan, startLife, 50, 7);
     }
 
-    public GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
+    protected GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
@@ -43,39 +46,56 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
-        // plays watcher
-        state.addWatcher(new CommanderPlaysCountWatcher());
+        // add game mode specific watchers here
+        //state.addWatcher(new CommanderPlaysCountWatcher());
 
         // move tiny leader to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                Card commander = getCommanderCard(player.getMatchPlayer().getDeck().getName(), player.getId());
+                String commanderName = player.getMatchPlayer().getDeck().getName();
+                Card commander = findCommander(this, player, commanderName);
                 if (commander != null) {
-                    Set<Card> cards = new HashSet<>();
-                    cards.add(commander);
-                    this.loadCards(cards, playerId);
-                    player.addCommanderId(commander.getId());
+                    // already exists - just move to zone (example: game restart by Karn Liberated)
                     commander.moveToZone(Zone.COMMAND, null, this, true);
-                    Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
-                    ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
-                    ability.addEffect(new CommanderCostModification(commander));
-                    // Commander rule #4 was removed Jan. 18, 2016
-                    // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
-                    CommanderInfoWatcher watcher = new CommanderInfoWatcher("Commander", commander.getId(), false);
-                    getState().addWatcher(watcher);
-                    watcher.addCardInfoToCommander(this);
-                    this.getState().addAbility(ability, null);
                 } else {
-                    throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
+                    // create new commander
+                    commander = getCommanderCard(commanderName, player.getId());
+                    if (commander != null) {
+                        Set<Card> cards = new HashSet<>();
+                        cards.add(commander);
+                        this.loadCards(cards, playerId);
+                        player.addCommanderId(commander.getId());
+                        commander.moveToZone(Zone.COMMAND, null, this, true);
+                        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
+                        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
+                        ability.addEffect(new CommanderCostModification(commander));
+                        // Commander rule #4 was removed Jan. 18, 2016
+                        // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
+                        CommanderInfoWatcher watcher = new CommanderInfoWatcher("Commander", commander.getId(), false);
+                        getState().addWatcher(watcher);
+                        watcher.addCardInfoToCommander(this);
+                        this.getState().addAbility(ability, null);
+                    } else {
+                        // GameWorker.call processing errors and write it in magediag.log by defalt
+                        // Test use case: create tiny game with random generated deck - game freezes with empty battlefield
+                        throw new IllegalStateException("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
+                    }
                 }
             }
-
         }
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
-            state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+            state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
         }
+    }
+
+    private Card findCommander(Game game, Player player, String commanderName) {
+        return game.getCommanderCardsFromAnyZones(player, CommanderCardType.ANY, Zone.ALL)
+                .stream()
+                .filter(c -> CardUtil.haveSameNames(c, commanderName, game))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -122,7 +142,7 @@ class DefaultCommander extends CardImpl {
 
     public DefaultCommander(UUID ownerId, String commanderName, String manaString) {
         super(ownerId, new CardSetInfo(commanderName, "", "999", Rarity.RARE), new CardType[]{CardType.CREATURE}, manaString);
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         if (manaString.contains("{G}")) {
             this.color.setGreen(true);
@@ -144,7 +164,7 @@ class DefaultCommander extends CardImpl {
 
     }
 
-    public DefaultCommander(final DefaultCommander card) {
+    protected DefaultCommander(final DefaultCommander card) {
         super(card);
     }
 

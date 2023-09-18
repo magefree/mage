@@ -34,7 +34,7 @@ public final class ScoutsWarning extends CardImpl {
         this.getSpellAbility().addWatcher(new ScoutsWarningWatcher());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ScoutsWarning(final ScoutsWarning card) {
@@ -57,7 +57,7 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
         staticText = "The next creature card you play this turn can be played as though it had flash";
     }
 
-    public ScoutsWarningAsThoughEffect(final ScoutsWarningAsThoughEffect effect) {
+    private ScoutsWarningAsThoughEffect(final ScoutsWarningAsThoughEffect effect) {
         super(effect);
         this.watcher = effect.watcher;
         this.zoneChangeCounter = effect.zoneChangeCounter;

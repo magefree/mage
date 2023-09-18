@@ -38,7 +38,7 @@ public final class SmolderInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts a black spell, you may pay {1}. If you do, target player loses 1 life.
-        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}")), filter, false);
+        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{1}")), filter, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         

@@ -15,6 +15,8 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -33,12 +35,13 @@ public final class LeatherArmor extends CardImpl {
                 new WardAbility(new GenericManaCost(1)),
                 AttachmentType.EQUIPMENT,
                 Duration.WhileOnBattlefield,
-                "and has ward {1}"
+                "and has ward {1}. <i>(Whenever equipped creature becomes the target of a spell or ability an opponent controls, " +
+                        "counter it unless that player pays {1}.)</i>"
         ));
         this.addAbility(ability);
 
         // Equip {0}. Activate only once each turn.
-        EquipAbility equipAbility = new EquipAbility(0);
+        EquipAbility equipAbility = new EquipAbility(Outcome.BoostCreature, new GenericManaCost(0), new TargetControlledCreaturePermanent(), false);
         equipAbility.setMaxActivationsPerTurn(1);
         this.addAbility(equipAbility);
     }

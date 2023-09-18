@@ -133,12 +133,12 @@ class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect {
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_PERMANENT_CREATURE,
-                        player.getId(), source.getSourceId(), game
+                        player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(permanent))

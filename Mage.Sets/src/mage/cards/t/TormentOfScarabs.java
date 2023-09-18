@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,11 +35,13 @@ public final class TormentOfScarabs extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseLife));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent or discards a card.
-        this.addAbility(new BeginningOfUpkeepAttachedTriggeredAbility(new TormentOfScarabsEffect()));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new TormentOfScarabsEffect(), TargetController.ENCHANTED, false
+        ));
     }
 
     private TormentOfScarabs(final TormentOfScarabs card) {
@@ -77,7 +80,7 @@ class TormentOfScarabsEffect extends OneShotEffect {
         if (permanents > 0 && enchantedPlayer.chooseUse(outcome, "Sacrifice a nonland permanent?",
                 "Otherwise you have to discard a card or lose 3 life.", "Sacrifice", "Discard or life loss", source, game)) {
             Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-            if (enchantedPlayer.choose(outcome, target, source.getSourceId(), game)) {
+            if (enchantedPlayer.choose(outcome, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.sacrifice(source, game);

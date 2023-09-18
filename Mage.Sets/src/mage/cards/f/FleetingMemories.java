@@ -57,9 +57,10 @@ class FleetingMemoriesTriggeredAbility extends TriggeredAbilityImpl {
     public FleetingMemoriesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MillCardsTargetEffect(3));
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }
 
-    public FleetingMemoriesTriggeredAbility(final FleetingMemoriesTriggeredAbility ability) {
+    private FleetingMemoriesTriggeredAbility(final FleetingMemoriesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,10 +78,5 @@ class FleetingMemoriesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Clue, " ;
     }
 }

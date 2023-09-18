@@ -27,7 +27,7 @@ public final class LeoninBola extends CardImpl {
 
         // Equipped creature has "{tap}, Unattach Leonin Bola: Tap target creature."
         this.addAbility(new SimpleStaticAbility(new GainAbilityWithAttachmentEffect(
-                "equipped creature has \"{tap}, Unattach {this}: Tap target creature.\"",
+                "equipped creature has \"{T}, Unattach {this}: Tap target creature.\"",
                 new TapTargetEffect(), new TargetCreaturePermanent(), new UnattachCost(), new TapSourceCost()
         )));
 

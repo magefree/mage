@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
@@ -44,14 +44,16 @@ public final class AnimatingFaerie extends AdventureCard {
         // Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on it.
         this.getSpellCard().getSpellAbility().addEffect(new AddCardTypeTargetEffect(
                 Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE
-        ).setText("Target noncreature artifact you control becomes"));
-        this.getSpellCard().getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(
+        ).setText("Target noncreature artifact you control becomes a 0/0 artifact creature"));
+        this.getSpellCard().getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
-        ).setText("a 0/0 artifact creature"));
+        ).setText("Put four +1/+1 counters on it."));
         this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(4)
-        ).setText("Put four +1/+1 counters on it."));
+        ).setText(" "));
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+
+        this.finalizeAdventure();
     }
 
     private AnimatingFaerie(final AnimatingFaerie card) {

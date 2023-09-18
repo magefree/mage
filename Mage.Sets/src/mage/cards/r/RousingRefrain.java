@@ -76,7 +76,7 @@ class RousingRefrainEffect extends OneShotEffect {
         }
         controller.getManaPool().addMana(
                 new Mana(ManaType.RED, player.getHand().size()),
-                game, source, false
+                game, source, true
         );
         return true;
     }

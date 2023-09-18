@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -21,7 +21,7 @@ public final class PhyrexianSoulgorger extends CardImpl {
 
     public PhyrexianSoulgorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(8);
@@ -29,7 +29,7 @@ public final class PhyrexianSoulgorger extends CardImpl {
 
         // Cumulative upkeep-Sacrifice a creature.
         this.addAbility(new CumulativeUpkeepAbility(
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
     }
 
     private PhyrexianSoulgorger(final PhyrexianSoulgorger card) {

@@ -33,7 +33,7 @@ public final class AlphaAuthority extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature has hexproof and can't be blocked by more than one creature.
@@ -70,7 +70,7 @@ class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl {
         staticText = attachmentType.verb() + " creature can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount == 1 ? "" : "s");
     }
 
-    public CantBeBlockedByMoreThanOneAttachedEffect(final CantBeBlockedByMoreThanOneAttachedEffect effect) {
+    private CantBeBlockedByMoreThanOneAttachedEffect(final CantBeBlockedByMoreThanOneAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.attachmentType = effect.attachmentType;

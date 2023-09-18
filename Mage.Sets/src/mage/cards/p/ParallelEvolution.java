@@ -31,7 +31,7 @@ public final class ParallelEvolution extends CardImpl {
         this.getSpellAbility().addEffect(new ParallelEvolutionEffect());
 
         // Flashback {4}{G}{G}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{G}{G}{G}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{G}{G}{G}")));
     }
 
     private ParallelEvolution(final ParallelEvolution card) {
@@ -50,7 +50,7 @@ class ParallelEvolutionEffect extends OneShotEffect {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public ParallelEvolutionEffect() {
@@ -58,7 +58,7 @@ class ParallelEvolutionEffect extends OneShotEffect {
         this.staticText = "For each creature token on the battlefield, its controller creates a token that's a copy of that creature";
     }
 
-    public ParallelEvolutionEffect(final ParallelEvolutionEffect effect) {
+    private ParallelEvolutionEffect(final ParallelEvolutionEffect effect) {
         super(effect);
     }
 

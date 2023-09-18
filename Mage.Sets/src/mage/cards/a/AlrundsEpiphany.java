@@ -7,7 +7,7 @@ import mage.abilities.keyword.ForetellAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.OwlToken;
+import mage.game.permanent.token.BlueBirdToken;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public final class AlrundsEpiphany extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");
 
         // Create two 1/1 blue Bird creature tokens with flying. Take an extra turn after this one. Exile Alrund's Epiphany.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new OwlToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BlueBirdToken(), 2));
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
         this.getSpellAbility().addEffect(new ExileSpellEffect());
 

@@ -3,7 +3,6 @@ package mage.cards.f;
 import mage.ObjectColor;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -35,10 +34,10 @@ public final class FreyaliseLlanowarsFury extends CardImpl {
 
     public FreyaliseLlanowarsFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FREYALISE);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: Create a 1/1 green Elf Druid creature token with "{T}: Add {G}."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new ElfDruidToken()), 2));

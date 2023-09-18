@@ -29,8 +29,8 @@ public final class InspireAwe extends CardImpl {
         // Prevent all combat damage that would be dealt this turn except by enchanted creatures and enchantment creatures. Scry 2.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(
                 filter, Duration.EndOfTurn, true
-        ).setText("Prevent all combat damage that would be dealt this turn " +
-                "except by enchanted creatures and enchantment creatures."));
+        ).setText("prevent all combat damage that would be dealt this turn except combat damage " +
+                "that would be dealt by enchanted creatures and enchantment creatures"));
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 

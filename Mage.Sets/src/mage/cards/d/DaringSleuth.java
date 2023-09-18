@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 import java.util.UUID;
 
@@ -28,7 +27,6 @@ public final class DaringSleuth extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.b.BearerOfOverwhelmingTruths.class;
 
         // When you sacrifice a Clue, transform Daring Sleuth.
@@ -49,10 +47,11 @@ public final class DaringSleuth extends CardImpl {
 class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
 
     public DaringSleuthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
+        setTriggerPhrase("When you sacrifice a Clue, ");
     }
 
-    public DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {
+    private DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {
         super(ability);
     }
 
@@ -70,10 +69,5 @@ class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you sacrifice a Clue, " ;
     }
 }

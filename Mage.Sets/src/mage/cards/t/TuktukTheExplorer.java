@@ -21,13 +21,13 @@ public final class TuktukTheExplorer extends CardImpl {
 
     public TuktukTheExplorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken(expansionSetCode))));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken())));
     }
 
     private TuktukTheExplorer(final TuktukTheExplorer card) {

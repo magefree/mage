@@ -13,7 +13,7 @@ import mage.util.RandomUtil;
 public final class RedElementalWithTrampleAndHaste extends TokenImpl {
 
     public RedElementalWithTrampleAndHaste() {
-        super("Elemental", "7/1 red Elemental creature token with trample and haste");
+        super("Elemental Token", "7/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
@@ -23,16 +23,7 @@ public final class RedElementalWithTrampleAndHaste extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ZEN")) {
-            setTokenType(RandomUtil.nextInt(2) + 1);
-        }
-    }
-
-    public RedElementalWithTrampleAndHaste(final RedElementalWithTrampleAndHaste token) {
+    protected RedElementalWithTrampleAndHaste(final RedElementalWithTrampleAndHaste token) {
         super(token);
     }
 

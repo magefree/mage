@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -19,13 +18,12 @@ public final class ViolentEruption extends CardImpl {
     public ViolentEruption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}{R}");
 
-
-        // Violent Eruption deals 4 damage divided as you choose among any number of target creatures and/or players.
+        // Violent Eruption deals 4 damage divided as you choose among any number of targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
 
         // Madness {1}{R}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}{R}")));
     }
 
     private ViolentEruption(final ViolentEruption card) {

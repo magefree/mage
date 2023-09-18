@@ -1,29 +1,24 @@
-
 package mage.cards.y;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.Targets;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -33,7 +28,7 @@ public final class YoseiTheMorningStar extends CardImpl {
 
     public YoseiTheMorningStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
 
@@ -44,10 +39,10 @@ public final class YoseiTheMorningStar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Yosei, the Morning Star dies, target player skips their next untap step. Tap up to five target permanents that player controls.
-        Ability ability = new DiesSourceTriggeredAbility(new SkipNextPlayerUntapStepEffect("target"));
+        Ability ability = new DiesSourceTriggeredAbility(new SkipNextPlayerUntapStepEffect("target player"));
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new YoseiTheMorningStarTarget());
-        ability.addEffect(new YoseiTheMorningStarTapEffect());
+        ability.addEffect(new TapTargetEffect().setTargetPointer(new SecondTargetPointer()));
         this.addAbility(ability);
     }
 
@@ -63,13 +58,13 @@ public final class YoseiTheMorningStar extends CardImpl {
 
 class YoseiTheMorningStarTarget extends TargetPermanent {
 
-    private static final FilterPermanent filterTemplate = new FilterPermanent("up to five target permanents that player controls that will be tapped");
+    private static final FilterPermanent filterTemplate = new FilterPermanent("permanents that player controls");
 
     public YoseiTheMorningStarTarget() {
         super(0, 5, filterTemplate, false);
     }
 
-    public YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
+    private YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
         super(target);
     }
 
@@ -88,43 +83,4 @@ class YoseiTheMorningStarTarget extends TargetPermanent {
     public YoseiTheMorningStarTarget copy() {
         return new YoseiTheMorningStarTarget(this);
     }
-
-}
-
-class YoseiTheMorningStarTapEffect extends OneShotEffect {
-
-    public YoseiTheMorningStarTapEffect() {
-        super(Outcome.Tap);
-        staticText = "Tap up to five target permanents that player controls";
-    }
-
-    public YoseiTheMorningStarTapEffect(final YoseiTheMorningStarTapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public YoseiTheMorningStarTapEffect copy() {
-        return new YoseiTheMorningStarTapEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Targets targets = source.getTargets();
-        Target target1 = targets.get(1);
-        for (UUID target : target1.getTargets()) {
-            Permanent permanent = game.getPermanent(target);
-            if (permanent != null) {
-                permanent.tap(source, game);
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return staticText;
-    }
-
 }

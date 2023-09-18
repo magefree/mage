@@ -62,7 +62,7 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
         staticText = "exile the top seven cards of your library face down";
     }
 
-    public ColfenorsPlansExileEffect(final ColfenorsPlansExileEffect effect) {
+    private ColfenorsPlansExileEffect(final ColfenorsPlansExileEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
         staticText = "You may play cards exiled with {this}";
     }
 
-    public ColfenorsPlansPlayCardEffect(final ColfenorsPlansPlayCardEffect effect) {
+    private ColfenorsPlansPlayCardEffect(final ColfenorsPlansPlayCardEffect effect) {
         super(effect);
     }
 
@@ -117,8 +117,8 @@ class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
-            ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            return zone != null && zone.contains(objectId);
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            return exileZone != null && exileZone.contains(objectId);
         }
         return false;
     }
@@ -131,7 +131,7 @@ class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public ColfenorsPlansLookAtCardEffect(final ColfenorsPlansLookAtCardEffect effect) {
+    private ColfenorsPlansLookAtCardEffect(final ColfenorsPlansLookAtCardEffect effect) {
         super(effect);
     }
 
@@ -150,7 +150,7 @@ class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             if (card != null) {
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 if (sourceObject == null) {
                     return false;
                 }

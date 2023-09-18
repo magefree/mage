@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -38,7 +38,7 @@ public final class KeeperOfKeys extends CardImpl {
 
         // At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new CantBeBlockedAllEffect(new FilterControlledCreaturePermanent("creatures you control"), Duration.EndOfTurn),
+                new CantBeBlockedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, Duration.EndOfTurn),
                 TargetController.YOU, false), MonarchIsSourceControllerCondition.instance,
                 "At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn."));
     }

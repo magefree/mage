@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -29,12 +28,11 @@ public final class HermitOfTheNatterknolls extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LoneWolfOfTheNatterknolls.class;
 
         // Whenever an opponent casts a spell during your turn, draw a card.
         this.addAbility(new ConditionalTriggeredAbility(
-                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A, true),
+                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A, false),
                 MyTurnCondition.instance,
                 "Whenever an opponent casts a spell during your turn, draw a card."
         ).addHint(MyTurnHint.instance));

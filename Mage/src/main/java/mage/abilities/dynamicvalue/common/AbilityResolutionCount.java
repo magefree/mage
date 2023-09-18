@@ -15,11 +15,7 @@ public enum AbilityResolutionCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        AbilityResolvedWatcher watcher = game.getState().getWatcher(AbilityResolvedWatcher.class);
-        if (watcher != null) {
-            return watcher.getResolutionCount(game, sourceAbility);
-        }
-        return 0;
+        return AbilityResolvedWatcher.getResolutionCount(game, sourceAbility);
     }
 
     @Override

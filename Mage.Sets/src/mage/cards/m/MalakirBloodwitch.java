@@ -55,7 +55,7 @@ class MalakirBloodwitchEffect extends OneShotEffect {
         this.staticText = "each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way";
     }
 
-    public MalakirBloodwitchEffect(final MalakirBloodwitchEffect effect) {
+    private MalakirBloodwitchEffect(final MalakirBloodwitchEffect effect) {
         super(effect);
     }
 

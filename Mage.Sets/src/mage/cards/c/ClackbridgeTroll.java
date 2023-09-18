@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,6 +66,8 @@ public final class ClackbridgeTroll extends CardImpl {
 
 class ClackbridgeTrollEffect extends OneShotEffect {
 
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("creature to sacrifice");
+
     ClackbridgeTrollEffect() {
         super(Outcome.Benefit);
         staticText = "any opponent may sacrifice a creature. If a player does, " +
@@ -83,24 +86,17 @@ class ClackbridgeTrollEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePerm = game.getPermanent(source.getSourceId());
-        if (controller == null) {
-            return false;
-        }
         boolean flag = false;
         for (UUID opponentId : game.getOpponents(controller.getId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null) {
                 continue;
             }
-            FilterControlledPermanent filter = new FilterControlledPermanent("creature to sacrifice");
-            filter.add(CardType.CREATURE.getPredicate());
-            filter.add(TargetController.YOU.getControllerPredicate());
             TargetControlledPermanent target = new TargetControlledPermanent(filter);
-            target.setNotTarget(true);
-            if (!target.canChoose(source.getSourceId(), opponent.getId(), game)
+            target.withNotTarget(true);
+            if (!target.canChoose(opponent.getId(), source, game)
                     || !opponent.chooseUse(Outcome.AIDontUseIt, "Sacrifice a creature?", source, game)
-                    || !opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+                    || !opponent.choose(Outcome.Sacrifice, target, source, game)) {
                 continue;
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());
@@ -110,6 +106,7 @@ class ClackbridgeTrollEffect extends OneShotEffect {
             flag = true;
         }
         if (flag) {
+            Permanent sourcePerm = source.getSourcePermanentIfItStillExists(game);
             if (sourcePerm != null) {
                 sourcePerm.tap(source, game);
             }

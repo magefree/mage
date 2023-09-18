@@ -36,7 +36,7 @@ public final class ValorOfTheWorthy extends CardImpl {
         TargetCreaturePermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
@@ -63,7 +63,7 @@ class LeavesTheBattlefieldAttachedTriggeredAbility extends ZoneChangeTriggeredAb
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), "When enchanted creature leaves the battlefield, ", Boolean.FALSE);
     }
 
-    public LeavesTheBattlefieldAttachedTriggeredAbility(final LeavesTheBattlefieldAttachedTriggeredAbility ability) {
+    private LeavesTheBattlefieldAttachedTriggeredAbility(final LeavesTheBattlefieldAttachedTriggeredAbility ability) {
         super(ability);
     }
 

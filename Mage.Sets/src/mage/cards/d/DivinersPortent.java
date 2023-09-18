@@ -26,7 +26,7 @@ public final class DivinersPortent extends CardImpl {
         // Roll a d20 and add the number of cards in your hand.
         RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect(
                 20, "roll a d20 and add the number " +
-                "of cards in your hand", CardsInControllerHandCount.instance
+                "of cards in your hand", CardsInControllerHandCount.instance, 0
         );
         this.getSpellAbility().addEffect(effect);
 

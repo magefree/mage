@@ -27,7 +27,7 @@ public final class SomberwaldStag extends CardImpl {
 
         // When Somberwald Stag enters the battlefield, you may have it fight target creature you don't control.
         Effect effect = new FightTargetSourceEffect();
-        effect.setText("have it fight target creature you don't control");
+        effect.setText("you may have it fight target creature you don't control");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);

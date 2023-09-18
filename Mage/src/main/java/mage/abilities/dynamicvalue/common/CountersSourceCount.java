@@ -3,33 +3,38 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 public class CountersSourceCount implements DynamicValue {
 
-    private final String counterName;
+    private final CounterType counterType;
 
-    public CountersSourceCount(CounterType counter) {
-        this.counterName = counter.getName();
+    public CountersSourceCount(CounterType counterType) {
+        this.counterType = counterType;
     }
 
-    public CountersSourceCount(String counterName) {
-        this.counterName = counterName;
-    }
-
-    public CountersSourceCount(final CountersSourceCount countersCount) {
-        this.counterName = countersCount.counterName;
+    protected CountersSourceCount(final CountersSourceCount countersCount) {
+        this.counterType = countersCount.counterType;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
-        if (permanent != null) {
-            return permanent.getCounters(game).getCount(counterName);
+        Permanent permanent = sourceAbility.getSourcePermanentOrLKI(game);
+        if (permanent == null) {
+            return 0;
         }
-        return 0;
+        return counterType != null
+                ? permanent
+                .getCounters(game)
+                .getCount(counterType)
+                : permanent
+                .getCounters(game)
+                .values()
+                .stream()
+                .mapToInt(Counter::getCount).sum();
     }
 
     @Override
@@ -44,6 +49,6 @@ public class CountersSourceCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return counterName + " counter on {this}";
+        return (counterType != null ? counterType.toString() + ' ' : "") + "counter on {this}";
     }
 }

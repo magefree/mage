@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.MageObjectReference;
@@ -43,7 +42,7 @@ public final class Berserk extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains trample");
         this.getSpellAbility().addEffect(effect);
-        effect = new BoostTargetEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn, true);
+        effect = new BoostTargetEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn);
         effect.setText("and gets +X/+0 until end of turn, where X is its power");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new BerserkDestroyEffect());
@@ -69,7 +68,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Cast this spell only before the combat damage step";
     }
 
-    BerserkReplacementEffect(final BerserkReplacementEffect effect) {
+    private BerserkReplacementEffect(final BerserkReplacementEffect effect) {
         super(effect);
     }
 
@@ -116,7 +115,7 @@ class BerserkDestroyEffect extends OneShotEffect {
         this.staticText = "At the beginning of the next end step, destroy that creature if it attacked this turn";
     }
 
-    public BerserkDestroyEffect(final BerserkDestroyEffect effect) {
+    private BerserkDestroyEffect(final BerserkDestroyEffect effect) {
         super(effect);
     }
 
@@ -128,15 +127,15 @@ class BerserkDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            //create delayed triggered ability
-            Effect effect = new BerserkDelayedDestroyEffect();
-            effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
-            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
-        }
-        return false;
+        if (controller == null) { return false; }
+
+        //create delayed triggered ability
+        Effect effect = new BerserkDelayedDestroyEffect();
+        effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source), game));
+        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+
+        return true;
     }
 }
 
@@ -147,7 +146,7 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
         this.staticText = "destroy that creature if it attacked this turn";
     }
 
-    public BerserkDelayedDestroyEffect(final BerserkDelayedDestroyEffect effect) {
+    private BerserkDelayedDestroyEffect(final BerserkDelayedDestroyEffect effect) {
         super(effect);
     }
 
@@ -159,15 +158,15 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
-                if (watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
-                    return permanent.destroy(source, game, false);
-                }
-            }
-        }
-        return false;
+        if (controller == null) { return false; }
+
+        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (permanent == null) { return false; }
+
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        if (watcher == null) { return false; }
+
+        return watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))
+                && permanent.destroy(source, game, false);
     }
 }

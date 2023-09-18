@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.*;
@@ -22,7 +21,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -38,7 +36,7 @@ public final class Godsend extends CardImpl {
 
     public Godsend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+3.
@@ -48,7 +46,7 @@ public final class Godsend extends CardImpl {
         // Opponents can't cast cards with the same name as cards exiled with Godsend.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GodsendRuleModifyingEffect()));
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private Godsend(final Godsend card) {
@@ -69,7 +67,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GodsendExileEffect(), true);
     }
 
-    GodsendTriggeredAbility(final GodsendTriggeredAbility ability) {
+    private GodsendTriggeredAbility(final GodsendTriggeredAbility ability) {
         super(ability);
     }
 
@@ -109,7 +107,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
                 if (!possibleTargets.isEmpty()) {
                     this.getTargets().clear();
                     if (possibleTargets.size() == 1) {
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
+                        this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next(), game));
                     } else {
                         this.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
                         targetName = targetName + " equipped by " + equipment.getName();
@@ -141,7 +139,7 @@ class GodsendExileEffect extends OneShotEffect {
         this.staticText = "you may exile one of those creatures";
     }
 
-    public GodsendExileEffect(final GodsendExileEffect effect) {
+    private GodsendExileEffect(final GodsendExileEffect effect) {
         super(effect);
     }
 
@@ -172,7 +170,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Your opponents can't cast cards with the same name as cards exiled with {this}";
     }
 
-    public GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {
+    private GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {
         super(effect);
     }
 
@@ -183,7 +181,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast this spell because a card with the same name is exiled by " + mageObject.getLogName() + '.';
         }

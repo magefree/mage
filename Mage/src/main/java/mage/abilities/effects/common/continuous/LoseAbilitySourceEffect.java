@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -14,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Noahsark
  */
 public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
@@ -28,10 +23,10 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
     public LoseAbilitySourceEffect(Ability ability, Duration duration) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         this.ability = ability;
-        staticText = "{this} loses " + ability.getRule() + ' ' + duration.toString();
+        staticText = ("{this} loses " + ability.getRule() + ' ' + duration.toString()).trim();
     }
 
-    public LoseAbilitySourceEffect(final LoseAbilitySourceEffect effect) {
+    protected LoseAbilitySourceEffect(final LoseAbilitySourceEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }
@@ -43,7 +38,7 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {

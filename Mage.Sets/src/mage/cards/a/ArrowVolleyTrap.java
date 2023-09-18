@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -25,12 +24,11 @@ public final class ArrowVolleyTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{W}"), ArrowVolleyTrapCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{1}{W}"), ArrowVolleyTrapCondition.instance));
 
         // Arrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, new FilterAttackingCreature("attacking creatures")));
-
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, StaticFilters.FILTER_ATTACKING_CREATURES));
     }
 
     private ArrowVolleyTrap(final ArrowVolleyTrap card) {

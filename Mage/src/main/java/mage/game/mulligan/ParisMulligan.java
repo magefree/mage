@@ -57,7 +57,7 @@ public class ParisMulligan extends Mulligan {
                 .append(deduction == 0 ? " for free and draws " : " down to ")
                 .append((numCards - deduction))
                 .append(numCards - deduction == 1 ? " card" : " cards").toString());
-        player.drawCards(numCards - deduction, null, game);
+        drawHand(numCards - deduction, player, game);
     }
 
     @Override

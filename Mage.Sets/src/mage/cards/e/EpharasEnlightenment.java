@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -39,7 +39,7 @@ public final class EpharasEnlightenment extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When Ephara's Enlightenment enters the battlefield, put a +1/+1 counter on enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), "enchanted creature"), false));
@@ -47,8 +47,8 @@ public final class EpharasEnlightenment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
         // Whenever a creature enters the battlefield under your control, you may return Ephara's Enlightenment to its owner's hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, 
-                new ReturnToHandSourceEffect(true), 
-                new FilterCreaturePermanent("a creature"),
+                new ReturnToHandSourceEffect(true),
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 true));
         
     }

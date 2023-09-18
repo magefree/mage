@@ -32,7 +32,7 @@ public final class LoreWeaver extends CardImpl {
         this.addAbility(new PartnerWithAbility("Ley Weaver"));
 
         // {5}{U}{U}: Target player draws two cards.
-        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(2), new ManaCostsImpl("{5}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(2), new ManaCostsImpl<>("{5}{U}{U}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

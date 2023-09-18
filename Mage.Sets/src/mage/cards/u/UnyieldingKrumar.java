@@ -29,7 +29,7 @@ public final class UnyieldingKrumar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{W}: Unyielding Krumar gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
 
     }
 

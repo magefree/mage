@@ -25,7 +25,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class VoldarenPariah extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("three other creatures");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -38,7 +38,6 @@ public final class VoldarenPariah extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AbolisherOfBloodlines.class;
 
         // Flying
@@ -46,11 +45,11 @@ public final class VoldarenPariah extends CardImpl {
 
         // Sacrifice three other creatures: Transform Voldaren Pariah.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true),
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(),
                 new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false))));
 
         // Madness {B}{B}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}{B}{B}")));
     }
 
     private VoldarenPariah(final VoldarenPariah card) {

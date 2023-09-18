@@ -24,7 +24,7 @@ public final class WitchsCauldron extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}");
 
         // {1}{B}, {T}, Sacrifice a creature: You gain 1 life and draw a card.
-        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));

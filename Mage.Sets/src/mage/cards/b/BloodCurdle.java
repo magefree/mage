@@ -45,7 +45,8 @@ class BloodCurdleEffect extends OneShotEffect {
 
     BloodCurdleEffect() {
         super(Outcome.Benefit);
-        staticText = "Put a menace counter on a creature you control";
+        staticText = "Put a menace counter on a creature you control. " +
+                "<i>(It can't be blocked except by two or more creatures.)</i>";
     }
 
     private BloodCurdleEffect(final BloodCurdleEffect effect) {
@@ -64,8 +65,8 @@ class BloodCurdleEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (!player.choose(outcome, target, source, game)) {
             return false;
         }
         Permanent permanent = game.getPermanent(target.getFirstTarget());

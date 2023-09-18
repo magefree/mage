@@ -28,7 +28,7 @@ import mage.target.common.TargetCardInHand;
  */
 public final class PrimalBeyond extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a Elemental card from your hand");
+    private static final FilterCard filter = new FilterCard("an Elemental card from your hand");
 
     static {
         filter.add(SubType.ELEMENTAL.getPredicate());
@@ -38,7 +38,7 @@ public final class PrimalBeyond extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Primal Beyond enters the battlefield, you may reveal an Elemental card from your hand. If you don't, Primal Beyond enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Elemental card from your hand. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal an Elemental card from your hand. If you don't, {this} enters the battlefield tapped"));
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add one mana of any color. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.
@@ -65,7 +65,7 @@ class PrimalBeyondManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast Elemental spells or activate abilities of Elementals";
+        return "Spend this mana only to cast an Elemental spell or activate an ability of an Elemental";
     }
 }
 
@@ -73,7 +73,7 @@ class PrimalBeyondConditionalMana extends ConditionalMana {
 
     public PrimalBeyondConditionalMana(Mana mana) {
         super(mana);
-        this.staticText = "Spend this mana only to cast Elemental spells or activate abilities of Elementals";
+        this.staticText = "Spend this mana only to cast an Elemental spell or activate an ability of an Elemental";
         addCondition(new PrimalBeyondManaCondition());
     }
 }
@@ -82,7 +82,7 @@ class PrimalBeyondManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         return object != null && object.hasSubtype(SubType.ELEMENTAL, game);
     }
 }

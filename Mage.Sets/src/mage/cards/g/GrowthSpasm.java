@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -21,8 +20,10 @@ public final class GrowthSpasm extends CardImpl {
     public GrowthSpasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
-
+        // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
+
+        // Create a 0/1 colorless Eldrazi Spawn creature token. It has “Sacrifice this creature: Add {C}.”
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()));
     }
 

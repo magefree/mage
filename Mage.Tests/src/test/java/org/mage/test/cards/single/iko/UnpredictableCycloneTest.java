@@ -22,12 +22,11 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Desert Cerodon");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Piker", 1);
     }
@@ -47,7 +46,6 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Swamp", 1);
     }
@@ -67,12 +65,11 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         showAvailableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
         setChoice(playerA, "Thought Reflection"); // apply doubling first
-        setChoice(playerA, "Yes", 2); // cast found library cards
+        setChoice(playerA, true, 2); // cast found library cards
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Piker", 2);
     }
@@ -92,15 +89,14 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
         // from first cycle call
         setChoice(playerA, "Thought Reflection", 2); // 3 triggers: 2x doubling + 1x cycle
-        setChoice(playerA, "Yes", 2); // cast found library cards for 2x doubling triggers
+        setChoice(playerA, true, 2); // cast found library cards for 2x doubling triggers
         // from triggered cycle
         setChoice(playerA, "Thought Reflection", 1); // 2 triggers: 1x doubling + 1x cycle
-        setChoice(playerA, "Yes", 2); // cast found library cards for 2x doubling triggers
+        setChoice(playerA, true, 2); // cast found library cards for 2x doubling triggers
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Piker", 4);
     }
@@ -120,12 +116,11 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plagiarize", playerB);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cycling");
-        setChoice(playerA, "Yes"); // cast found library card
+        setChoice(playerA, true); // cast found library card
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Piker", 1);
     }

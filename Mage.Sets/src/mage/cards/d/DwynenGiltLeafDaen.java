@@ -29,7 +29,7 @@ public final class DwynenGiltLeafDaen extends CardImpl {
 
     public DwynenGiltLeafDaen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -42,7 +42,7 @@ public final class DwynenGiltLeafDaen extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.ELF, "Elf creatures"), true)));
 
         // Whenever Dwynen, Gilt-Leaf Daen attacks, you gain 1 life for each attacking Elf you control.
-        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)).setText("you gain 1 life for each attacking Elf you control"), false));
     }
 
     private DwynenGiltLeafDaen(final DwynenGiltLeafDaen card) {

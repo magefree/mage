@@ -17,6 +17,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.util.CardUtil;
 
 /**
  *
@@ -56,7 +57,7 @@ class RhoxFaithmenderEffect extends ReplacementEffectImpl {
         staticText = "If you would gain life, you gain twice that much life instead";
     }
 
-    public RhoxFaithmenderEffect(final RhoxFaithmenderEffect effect) {
+    private RhoxFaithmenderEffect(final RhoxFaithmenderEffect effect) {
         super(effect);
     }
 
@@ -72,7 +73,7 @@ class RhoxFaithmenderEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
         return false;
     }
 

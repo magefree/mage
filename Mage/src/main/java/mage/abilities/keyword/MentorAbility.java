@@ -29,7 +29,7 @@ public class MentorAbility extends AttacksTriggeredAbility {
         this.addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public MentorAbility(final MentorAbility ability) {
+    protected MentorAbility(final MentorAbility ability) {
         super(ability);
     }
 
@@ -45,12 +45,12 @@ public class MentorAbility extends AttacksTriggeredAbility {
 
 }
 
-enum MentorAbilityPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum MentorAbilityPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
         return sourcePermanent != null && input.getObject().getPower().getValue() < sourcePermanent.getPower().getValue();
     }
 }

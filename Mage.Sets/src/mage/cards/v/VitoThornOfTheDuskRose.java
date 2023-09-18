@@ -27,7 +27,7 @@ public final class VitoThornOfTheDuskRose extends CardImpl {
     public VitoThornOfTheDuskRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
@@ -39,7 +39,7 @@ public final class VitoThornOfTheDuskRose extends CardImpl {
         // {3}{B}{B}: Creatures you control gain lifelink until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilityControlledEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
-        ), new ManaCostsImpl("{3}{B}{B}")));
+        ), new ManaCostsImpl<>("{3}{B}{B}")));
     }
 
     private VitoThornOfTheDuskRose(final VitoThornOfTheDuskRose card) {

@@ -103,7 +103,7 @@ class AttackIfAbleTargetRandoOpponentSourceEffect extends OneShotEffect {
         this.staticText = "choose an opponent at random that {this} didn't attack during your last combat. {this} attacks that player this combat if able. If you can't choose an opponent this way, tap {this}";
     }
 
-    public AttackIfAbleTargetRandoOpponentSourceEffect(final AttackIfAbleTargetRandoOpponentSourceEffect effect) {
+    private AttackIfAbleTargetRandoOpponentSourceEffect(final AttackIfAbleTargetRandoOpponentSourceEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ public final class CryptChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CryptChampionEffect()));
 
         // When Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.R)), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(ManaWasSpentCondition.RED), false));
     }
 
     private CryptChampion(final CryptChampion card) {
@@ -68,7 +68,7 @@ class CryptChampionEffect extends OneShotEffect {
         this.staticText = "each player puts a creature card with mana value 3 or less from their graveyard onto the battlefield";
     }
 
-    CryptChampionEffect(final CryptChampionEffect effect) {
+    private CryptChampionEffect(final CryptChampionEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class CryptChampionEffect extends OneShotEffect {
                     filter.add(new OwnerIdPredicate(playerId));
                     filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
                     Target target = new TargetCardInGraveyard(filter);
-                    if (target.canChoose(source.getSourceId(), playerId, game)
+                    if (target.canChoose(playerId, source, game)
                             && player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {

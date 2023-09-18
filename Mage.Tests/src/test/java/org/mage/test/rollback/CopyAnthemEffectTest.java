@@ -23,14 +23,13 @@ public class CopyAnthemEffectTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Copy Enchantment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Copy Enchantment");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Glorious Anthem");
 
         rollbackTurns(3, PhaseStep.UPKEEP, playerA, 0);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Runeclaw Bear", 4, 4);
     }

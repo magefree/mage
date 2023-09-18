@@ -4,7 +4,6 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -27,6 +26,7 @@ import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,9 +40,9 @@ public final class ChandraHeartOfFire extends CardImpl {
     public ChandraHeartOfFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Discard your hand, then exile the top three cards of your library. Until end of turn, you may play cards exiled this way.
         Ability ability = new LoyaltyAbility(new DiscardHandControllerEffect(), 1);
@@ -101,21 +101,22 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
 
             // from graveyard
             Target target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter, true).withChooseHint("from graveyard");
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)
+                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), source, game)) {
                 Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
-                controller.moveCards(cards, Zone.EXILED, source, game);
                 exiledCards.addAll(cards);
             }
 
             // from library
             target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter).withChooseHint("from library");
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)
+                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), source, game)) {
                 Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
-                controller.moveCards(cards, Zone.EXILED, source, game);
                 exiledCards.addAll(cards);
             }
+
+            // exile cards all at once and set the exile name to the source card
+            controller.moveCardsToExile(exiledCards, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
             controller.shuffleLibrary(source, game);
 
             exiledCards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));

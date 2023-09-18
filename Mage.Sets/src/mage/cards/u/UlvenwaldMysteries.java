@@ -12,13 +12,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.HumanSoldierToken;
 
 /**
@@ -27,12 +26,9 @@ import mage.game.permanent.token.HumanSoldierToken;
  */
 public final class UlvenwaldMysteries extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
     private static final FilterControlledPermanent filterClue = new FilterControlledPermanent("a Clue");
 
     static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
         filterClue.add(SubType.CLUE.getPredicate());
     }
 
@@ -40,7 +36,7 @@ public final class UlvenwaldMysteries extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Whenever a nontoken creature you control dies, investigate. <i>(Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")</i>
-        this.addAbility(new DiesCreatureTriggeredAbility(new InvestigateEffect(), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new InvestigateEffect(), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
 
         // Whenever you sacrifice a Clue, create a 1/1 white Human Soldier creature token.
         this.addAbility(new UlvenwaldMysteriesTriggeredAbility());
@@ -61,9 +57,10 @@ class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
     public UlvenwaldMysteriesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanSoldierToken()));
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }
 
-    public UlvenwaldMysteriesTriggeredAbility(final UlvenwaldMysteriesTriggeredAbility ability) {
+    private UlvenwaldMysteriesTriggeredAbility(final UlvenwaldMysteriesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,10 +78,5 @@ class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Clue, " ;
     }
 }

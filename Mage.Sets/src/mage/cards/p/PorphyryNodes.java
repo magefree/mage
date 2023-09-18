@@ -60,7 +60,7 @@ class PorphyryNodesEffect extends OneShotEffect {
         this.staticText = "destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them";
     }
     
-    public PorphyryNodesEffect(final PorphyryNodesEffect effect) {
+    private PorphyryNodesEffect(final PorphyryNodesEffect effect) {
         super(effect);
     }
     
@@ -92,9 +92,9 @@ class PorphyryNodesEffect extends OneShotEffect {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("one of the creatures with the least power");
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, leastPower));
                 Target target = new TargetPermanent(filter);
-                target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                    if (controller.choose(outcome, target, source.getSourceId(), game)) {
+                target.withNotTarget(true);
+                if (target.canChoose(source.getControllerId(), source, game)) {
+                    if (controller.choose(outcome, target, source, game)) {
                         permanentToDestroy = game.getPermanent(target.getFirstTarget());
                     }
                 }
@@ -114,9 +114,10 @@ class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
 
     public PorphyryNodesStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When there are no creatures on the battlefield, " );
     }
 
-    public PorphyryNodesStateTriggeredAbility(final PorphyryNodesStateTriggeredAbility ability) {
+    private PorphyryNodesStateTriggeredAbility(final PorphyryNodesStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -127,12 +128,6 @@ class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(PorphyryNodes.filter, this.getSourceId(), this.getControllerId(), game) == 0;
+        return game.getBattlefield().count(PorphyryNodes.filter, this.getControllerId(), this, game) == 0;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When there are no creatures on the battlefield, " ;
-    }
-
 }

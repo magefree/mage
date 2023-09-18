@@ -16,6 +16,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -51,7 +52,7 @@ class ClarionUltimatumEffect extends OneShotEffect {
                 "Put those cards onto the battlefield tapped, then shuffle";
     }
 
-    public ClarionUltimatumEffect(final ClarionUltimatumEffect effect) {
+    private ClarionUltimatumEffect(final ClarionUltimatumEffect effect) {
         super(effect);
     }
 
@@ -68,11 +69,11 @@ class ClarionUltimatumEffect extends OneShotEffect {
         }
         int permCount = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         TargetPermanent targetPermanent = new TargetControlledPermanent(Math.max(permCount, 5));
-        targetPermanent.setNotTarget(true);
-        player.choose(outcome, targetPermanent, source.getSourceId(), game);
+        targetPermanent.withNotTarget(true);
+        player.choose(outcome, targetPermanent, source, game);
         Set<String> names = targetPermanent
                 .getTargets()
                 .stream()
@@ -115,7 +116,7 @@ class ClarionUltimatumTarget extends TargetCardInLibrary {
     }
 
     private void populateNameMap(Set<String> names) {
-        names.stream().forEach(name -> this.nameMap.compute(name, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+        names.stream().forEach(name -> this.nameMap.compute(name, CardUtil::setOrIncrementValue));
     }
 
     @Override
@@ -133,7 +134,7 @@ class ClarionUltimatumTarget extends TargetCardInLibrary {
                 .map(game::getCard)
                 .filter(Objects::nonNull)
                 .map(MageObject::getName)
-                .forEach(name -> alreadyChosen.compute(name, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+                .forEach(name -> alreadyChosen.compute(name, CardUtil::setOrIncrementValue));
         return nameMap.getOrDefault(card.getName(), 0)
                 > alreadyChosen.getOrDefault(card.getName(), 0);
     }

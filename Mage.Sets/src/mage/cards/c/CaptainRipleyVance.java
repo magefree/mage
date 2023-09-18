@@ -27,14 +27,14 @@ public final class CaptainRipleyVance extends CardImpl {
     public CaptainRipleyVance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // Whenever you cast your third spell each turn, put a +1/+1 counter on Captain Ripley Vance, then it deals damage equal to its power to any target.
-        this.addAbility(new CaptainRipleyVanceTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new CaptainRipleyVanceTriggeredAbility());
     }
 
     private CaptainRipleyVance(final CaptainRipleyVance card) {
@@ -53,6 +53,7 @@ class CaptainRipleyVanceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         addEffect(new DamageTargetEffect(new SourcePermanentPowerCount()).setText("it deals damage equal to its power to any target").concatBy(", then"));
         addTarget(new TargetAnyTarget());
+        setTriggerPhrase("Whenever you cast your third spell each turn, ");
     }
 
     private CaptainRipleyVanceTriggeredAbility(final CaptainRipleyVanceTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class CaptainRipleyVanceTriggeredAbility extends TriggeredAbilityImpl {
             return watcher != null && watcher.getSpellsCastThisTurn(this.getControllerId()).size() == 3;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast your third spell each turn, " ;
     }
 }

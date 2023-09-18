@@ -67,7 +67,7 @@ class ScourgeOfSkolaValeEffect extends OneShotEffect {
         this.staticText = "Put a number of +1/+1 counters on {this} equal to the sacrificed creature's toughness";
     }
 
-    public ScourgeOfSkolaValeEffect(final ScourgeOfSkolaValeEffect effect) {
+    private ScourgeOfSkolaValeEffect(final ScourgeOfSkolaValeEffect effect) {
         super(effect);
     }
 

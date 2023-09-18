@@ -9,17 +9,15 @@ import mage.game.permanent.Permanent;
 /**
  * @author jeffwadsworth
  */
-public enum GreatestPowerControlledPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public enum GreatestPowerControlledPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent creatureWithGreatestPower = input.getObject();
-        for (Permanent p : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, input.getObject().getControllerId(), game)) {
-            if (p.getPower().getValue() >= creatureWithGreatestPower.getPower().getValue()) {
-                creatureWithGreatestPower = p;
-            }
+        int greatestPower = Integer.MIN_VALUE;
+        for (Permanent p : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, input.getPlayerId(), input.getSource(), game)) {
+            greatestPower = Math.max(greatestPower, p.getPower().getValue());
         }
-        return (creatureWithGreatestPower == input.getObject());
+        return input.getObject().getPower().getValue() == greatestPower;
     }
 }

@@ -44,7 +44,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "During combat, players can't cast instant spells or activate abilities that aren't mana abilities";
     }
 
-    public HandToHandEffect(final HandToHandEffect effect) {
+    private HandToHandEffect(final HandToHandEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "During combat, players can't cast instant spells or activate abilities that aren't mana abilities (" + mageObject.getIdName() + ").";
         }
@@ -69,7 +69,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getPhase().getType() == TurnPhase.COMBAT) {
+        if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
             MageObject object = game.getObject(event.getSourceId());
             if (event.getType() == GameEvent.EventType.CAST_SPELL) {
                 if (object != null && object.isInstant(game)) {

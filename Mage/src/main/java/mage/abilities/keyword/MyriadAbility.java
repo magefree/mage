@@ -4,6 +4,7 @@ package mage.abilities.keyword;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
@@ -23,14 +24,14 @@ public class MyriadAbility extends AttacksTriggeredAbility {
 
     public MyriadAbility() {
         super(new MyriadEffect(), false,
-                "Myriad <i>(Whenever this creature attacks, for each opponent other than the defending player, "
-                + "put a token that's a copy of this creature onto the battlefield tapped and attacking "
-                + "that player or a planeswalker they control. Exile those tokens at the end of combat.)</i>",
+                "myriad <i>(Whenever this creature attacks, for each opponent other than the defending player, "
+                        + "put a token that's a copy of this creature onto the battlefield tapped and attacking "
+                        + "that player or a planeswalker they control. Exile those tokens at the end of combat.)</i>",
                 SetTargetPointer.PLAYER
         );
     }
 
-    public MyriadAbility(final MyriadAbility ability) {
+    protected MyriadAbility(final MyriadAbility ability) {
         super(ability);
     }
 
@@ -51,7 +52,7 @@ class MyriadEffect extends OneShotEffect {
                 + "Exile the tokens at the end of combat";
     }
 
-    public MyriadEffect(final MyriadEffect effect) {
+    protected MyriadEffect(final MyriadEffect effect) {
         super(effect);
     }
 
@@ -79,7 +80,7 @@ class MyriadEffect extends OneShotEffect {
                         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, 1, true, true, playerId);
                         effect.setTargetPointer(new FixedTarget(sourceObject, game));
                         effect.apply(game, source);
-                        tokens.addAll(effect.getAddedPermanent());
+                        tokens.addAll(effect.getAddedPermanents());
                     }
                 }
             }

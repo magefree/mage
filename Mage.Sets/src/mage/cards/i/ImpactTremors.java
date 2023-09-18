@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class ImpactTremors extends CardImpl {
         // Whenever a creature enters the battlefield under your control, Impact Tremors deals 1 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new DamagePlayersEffect(Outcome.Damage, StaticValue.get(1), TargetController.OPPONENT),
-                new FilterCreaturePermanent("a creature"),
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 false));
     }
 

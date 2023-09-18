@@ -33,14 +33,14 @@ public final class CrashingTide extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlashAbility.getInstance(), Duration.WhileOnBattlefield, true),
                         new PermanentsOnTheBattlefieldCondition(filter),
-                        "{this} has flash as long as you control a Merfolk")).setRuleAtTheTop(true));
+                        "this spell has flash as long as you control a Merfolk")).setRuleAtTheTop(true));
 
         // Return target creature to it's owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<BR>Draw a card"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private CrashingTide(final CrashingTide card) {

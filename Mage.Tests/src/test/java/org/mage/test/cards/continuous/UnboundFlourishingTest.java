@@ -1,5 +1,6 @@
 package org.mage.test.cards.continuous;
 
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -36,7 +37,6 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -56,7 +56,6 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -71,7 +70,7 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         checkLife("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banefire", playerA);
         setChoice(playerA, "X=3");
-        setChoice(playerA, "Yes"); // change target
+        setChoice(playerA, true); // change target
         addTarget(playerA, playerB); // change to B
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 - 3); // original damage
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerB, 20 - 3); // copy damage
@@ -79,7 +78,6 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -100,7 +98,6 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -121,7 +118,6 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -143,7 +139,6 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -158,7 +153,7 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         checkLife("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{R}", playerA);
         setChoice(playerA, "X=3");
-        setChoice(playerA, "Yes"); // change target
+        setChoice(playerA, true); // change target
         addTarget(playerA, playerB); // change to B
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 - 3); // original damage
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerB, 20 - 3); // copy damage
@@ -166,7 +161,6 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -182,7 +176,7 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         int xInstancesCount = 2;
         int xAnnouncedValue = 3;
         int xMultiplier = 2;
-        VariableManaCost cost = new VariableManaCost(xInstancesCount);
+        VariableManaCost cost = new VariableManaCost(VariableCostType.NORMAL, xInstancesCount);
         cost.setAmount(xAnnouncedValue * xMultiplier, xAnnouncedValue * xInstancesCount, false);
 
         Assert.assertEquals("instances count", xInstancesCount, cost.getXInstancesCount());
@@ -204,7 +198,6 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
 }

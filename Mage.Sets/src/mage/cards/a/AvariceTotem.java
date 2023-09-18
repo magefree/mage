@@ -24,7 +24,7 @@ public final class AvariceTotem extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {5}: Exchange control of Avarice Totem and target nonland permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame, rule, true), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame, rule, true), new ManaCostsImpl<>("{5}"));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

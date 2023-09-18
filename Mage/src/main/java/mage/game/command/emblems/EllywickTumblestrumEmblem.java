@@ -24,8 +24,7 @@ public final class EllywickTumblestrumEmblem extends Emblem {
 
     // −7: You get an emblem with "Creatures you control have trample and haste and get +2/+2 for each differently named dungeon you've completed."
     public EllywickTumblestrumEmblem() {
-        this.setName("Emblem Ellywick");
-        this.setExpansionSetCodeForImage("AFR");
+        super("Emblem Ellywick");
         Ability ability = new SimpleStaticAbility(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfGame,
                 StaticFilters.FILTER_PERMANENT_CREATURES
@@ -40,6 +39,15 @@ public final class EllywickTumblestrumEmblem extends Emblem {
                 Duration.EndOfGame
         ).setText("and get +2/+2 for each differently named dungeon you've completed"));
         this.getAbilities().add(ability.addHint(EllywickTumblestrumEmblemHint.instance));
+    }
+
+    private EllywickTumblestrumEmblem(final EllywickTumblestrumEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public EllywickTumblestrumEmblem copy() {
+        return new EllywickTumblestrumEmblem(this);
     }
 }
 

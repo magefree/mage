@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class OutlawsMerrimentWarriorToken extends TokenImpl {
 
     public OutlawsMerrimentWarriorToken() {
-        super("Human Warrior", "3/1 Human Warrior with trample and haste");
+        super("Human Warrior Token", "3/1 Human Warrior with trample and haste");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.HUMAN);
         subtype.add(SubType.WARRIOR);

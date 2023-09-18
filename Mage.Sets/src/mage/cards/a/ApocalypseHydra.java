@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -16,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,7 +38,9 @@ public final class ApocalypseHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new ApocalypseHydraEffect()));
 
         // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(1, "it"), new ManaCostsImpl<>("{1}{R}")
+        );
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

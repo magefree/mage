@@ -21,14 +21,13 @@ public class TargetControllerChangeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Evangelize"); // do not call direct target setup
         addTarget(playerA, playerB); // choose target opponent
-        setChoice(playerA, "No"); // no buyback
+        setChoice(playerA, false); // no buyback
         //
         addTarget(playerB, "Balduvian Bears"); // give small bear to A
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Evangelize", 1);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
@@ -45,14 +44,13 @@ public class TargetControllerChangeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Evangelize"); // do not call direct target setup
         //addTarget(playerA, playerB); // choose target opponent - AI must choose itself
-        //setChoice(playerA, "No"); // no buyback - AI must choose itself
+        //setChoice(playerA, false); // no buyback - AI must choose itself
         //
         //addTarget(playerB, "Balduvian Bears"); // give small bear to A - AI must choose itself
 
         //setStrictChooseMode(true); // AI must choose
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Evangelize", 1);
         assertPermanentCount(playerA, "Balduvian Bears", 1); // AI give smallest permanent to A as bad effect for target (target control change)

@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsDrawnThisTurnDynamicValue;
@@ -29,7 +28,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.ShardToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -50,9 +48,9 @@ public final class NikoAris extends CardImpl {
     public NikoAris(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{X}{W}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIKO);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // When Niko Aris enters the battlefield, create X Shard tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
@@ -70,7 +68,7 @@ public final class NikoAris extends CardImpl {
                 "{this} deals 2 damage to target tapped creature for each card you've drawn this turn"
         ), -1);
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability, new CardsDrawnThisTurnWatcher());
+        this.addAbility(ability.addHint(CardsDrawnThisTurnDynamicValue.getHint()));
 
         // −1: Create a Shard token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new ShardToken()), -1));

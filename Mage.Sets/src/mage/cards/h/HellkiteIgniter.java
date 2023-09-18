@@ -48,7 +48,7 @@ public final class HellkiteIgniter extends CardImpl {
                         StaticValue.get(0),
                         Duration.EndOfTurn,
                         true),
-                new ManaCostsImpl("{1}{R}")));
+                new ManaCostsImpl<>("{1}{R}")));
     }
 
     private HellkiteIgniter(final HellkiteIgniter card) {

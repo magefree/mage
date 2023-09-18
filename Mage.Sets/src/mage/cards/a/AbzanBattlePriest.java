@@ -10,8 +10,7 @@ import mage.abilities.keyword.OutlastAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,14 +18,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class AbzanBattlePriest extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public AbzanBattlePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -44,7 +35,8 @@ public final class AbzanBattlePriest extends CardImpl {
                 Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(
                         LifelinkAbility.getInstance(), Duration.WhileOnBattlefield,
-                        filter, "Each creature you control with a +1/+1 counter on it has lifelink"
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1,
+                        "Each creature you control with a +1/+1 counter on it has lifelink"
                 )
         ));
     }

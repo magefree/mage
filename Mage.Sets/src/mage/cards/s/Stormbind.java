@@ -24,7 +24,7 @@ public final class Stormbind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{G}");
 
         // {2}, Discard a card at random: Stormbind deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{2}"));
         ability.addCost(new DiscardCardCost(true));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

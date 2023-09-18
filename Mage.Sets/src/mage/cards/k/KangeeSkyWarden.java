@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -42,7 +42,7 @@ public final class KangeeSkyWarden extends CardImpl {
     public KangeeSkyWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -60,7 +60,7 @@ public final class KangeeSkyWarden extends CardImpl {
         ), false));
 
         // Whenever Kangee blocks, blocking creatures with flying get +0/+2 until end of turn.
-        this.addAbility(new BlocksTriggeredAbility(new BoostAllEffect(
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostAllEffect(
                 0, 2, Duration.EndOfTurn, filter2, false
         ), false));
     }

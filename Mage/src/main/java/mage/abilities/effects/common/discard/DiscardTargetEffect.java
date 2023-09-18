@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.discard;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -13,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DiscardTargetEffect extends OneShotEffect {
@@ -36,10 +36,8 @@ public class DiscardTargetEffect extends OneShotEffect {
     }
 
     /**
-     *
-     * @param amount amount of cards to discard
+     * @param amount        amount of cards to discard
      * @param randomDiscard discard the cards by random
-     *
      */
     public DiscardTargetEffect(int amount, boolean randomDiscard) {
         super(Outcome.Discard);
@@ -47,7 +45,7 @@ public class DiscardTargetEffect extends OneShotEffect {
         this.amount = StaticValue.get(amount);
     }
 
-    public DiscardTargetEffect(final DiscardTargetEffect effect) {
+    protected DiscardTargetEffect(final DiscardTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.randomDiscard = effect.randomDiscard;
@@ -74,26 +72,19 @@ public class DiscardTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().isEmpty()) {
-            sb.append("that player");
-        } else {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" discards ");
-        if (amount.toString().equals("1")) {
-            sb.append("a card");
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
-        }
+        String value = amount.toString();
+        sb.append(CardUtil.numberToText(value, "a"));
+        sb.append(value.equals("1") ? " card" : " cards");
         if (randomDiscard) {
             sb.append(" at random");
         }
         String message = amount.getMessage();
         if (!message.isEmpty()) {
-            sb.append(" for each ");
+            sb.append(value.equals("X") ? ", where X is " : " for each ");
+            sb.append(message);
         }
-        sb.append(message);
         return sb.toString();
     }
 }

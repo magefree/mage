@@ -26,7 +26,8 @@ public final class EpicConfrontation extends CardImpl {
         Effect effect = new BoostTargetEffect(1, 2, Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
-        effect.setText("It fights target creature you don't control");
+        effect.setText("It fights target creature you don't control. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);

@@ -23,7 +23,7 @@ public class Library implements Serializable {
         this.playerId = playerId;
     }
 
-    public Library(final Library lib) {
+    protected Library(final Library lib) {
         this.emptyDraw = lib.emptyDraw;
         this.playerId = lib.playerId;
         for (UUID id : lib.library) {
@@ -103,6 +103,7 @@ public class Library implements Serializable {
     public void putOnTop(Card card, Game game) {
         if (card.isOwnedBy(playerId)) {
             card.setZone(Zone.LIBRARY, game);
+            library.remove(card.getId());
             library.addFirst(card.getId());
         } else {
             game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
@@ -146,13 +147,6 @@ public class Library implements Serializable {
         return library.size();
     }
 
-    public void set(Library newLibrary) {
-        library.clear();
-        for (UUID card : newLibrary.getCardList()) {
-            library.add(card);
-        }
-    }
-
     public List<UUID> getCardList() {
         return new ArrayList<>(library);
     }
@@ -168,7 +162,7 @@ public class Library implements Serializable {
     }
 
     public Set<Card> getTopCards(Game game, int amount) {
-        Set<Card> cards = new HashSet<>();
+        Set<Card> cards = new LinkedHashSet<>();
         Iterator<UUID> it = library.iterator();
         int count = 0;
         while (it.hasNext() && count < amount) {
@@ -202,8 +196,10 @@ public class Library implements Serializable {
     }
 
     public void addAll(Set<Card> cards, Game game) {
+        // put on bottom
         for (Card card : cards) {
             card.setZone(Zone.LIBRARY, game);
+            library.remove(card.getId());
             library.add(card.getId());
         }
     }
@@ -239,8 +235,9 @@ public class Library implements Serializable {
 
     /**
      * Tests only -- find card position in library
+     *
      * @param cardId
-     * @return 
+     * @return
      */
     public int getCardPosition(UUID cardId) {
         UUID[] list = library.toArray(new UUID[0]);

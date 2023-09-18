@@ -32,8 +32,8 @@ public class MasterOfCrueltiesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
         attack(2, playerB, "Alesha, Who Smiles at Death");
-        setChoice(playerB, "Yes");
-        addTarget(playerB, "Master of Cruelties");
+        setChoice(playerB, true);
+        // Master of Cruelties is autochosen since only target
 
         block(2, playerA, "Silvercoat Lion", "Master of Cruelties");
 
@@ -48,7 +48,5 @@ public class MasterOfCrueltiesTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
-
     }
-
 }

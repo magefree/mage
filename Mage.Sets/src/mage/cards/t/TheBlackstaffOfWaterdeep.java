@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -30,13 +29,13 @@ public final class TheBlackstaffOfWaterdeep extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public TheBlackstaffOfWaterdeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // You many choose not to untap The Blackstaff of Waterdeep during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
@@ -92,8 +91,8 @@ class TheBlackstaffOfWaterdeepEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    artifact.getPower().setValue(4);
-                    artifact.getToughness().setValue(4);
+                    artifact.getPower().setModifiedBaseValue(4);
+                    artifact.getToughness().setModifiedBaseValue(4);
                     return true;
                 }
         }

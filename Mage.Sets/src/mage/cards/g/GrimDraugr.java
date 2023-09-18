@@ -24,7 +24,7 @@ public final class GrimDraugr extends CardImpl {
     public GrimDraugr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(3);
@@ -32,10 +32,13 @@ public final class GrimDraugr extends CardImpl {
 
         // {1}{S}: Grim Draugr gets +1/+0 and gains menace until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+0"), new ManaCostsImpl("{1}{S}")
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+0"),
+                new ManaCostsImpl<>("{1}{S}")
         );
         ability.addEffect(new GainAbilitySourceEffect(
-                new MenaceAbility(), Duration.EndOfTurn).setText("and gains menace until end of turn")
+                new MenaceAbility(), Duration.EndOfTurn).setText("and gains menace until end of turn. " +
+                "<i>(It can't be blocked except by two or more creatures. " +
+                "{S} can be paid with one mana from a snow source.)</i>")
         );
         this.addAbility(ability);
     }

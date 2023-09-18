@@ -18,6 +18,7 @@ import java.util.stream.Stream;
  * @author JayDi85
  */
 public enum CardTypesInGraveyardHint implements Hint {
+
     YOU("your graveyard"),
     ALL("all graveyards"),
     OPPONENTS("your opponents' graveyards");
@@ -40,16 +41,13 @@ public enum CardTypesInGraveyardHint implements Hint {
                 .map(CardType::toString)
                 .sorted()
                 .collect(Collectors.toList());
-        String message = "" + types.size();
-        if (types.size() > 0) {
-            message += " (" + String.join(" , ", types) + ')';
-        }
-        return "Card types in " + message + ": " + message;
+        return "Card types in " + this.message + ": " + types.size()
+                + (types.size() > 0 ? " (" + String.join(", ", types) + ')' : "");
     }
 
     @Override
     public Hint copy() {
-        return YOU;
+        return this;
     }
 
     private final Stream<Card> getStream(Game game, Ability ability) {

@@ -3,6 +3,7 @@ package mage.cards.e;
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,6 +32,7 @@ public final class EnthusiasticStudy extends CardImpl {
 
         // Learn.
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private EnthusiasticStudy(final EnthusiasticStudy card) {

@@ -37,7 +37,7 @@ public class BatterskullTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Batterskull", 1);
-        assertPermanentCount(playerA, "Phyrexian Germ", 1);
-        assertPowerToughness(playerA, "Phyrexian Germ", 4, 4);
+        assertPermanentCount(playerA, "Phyrexian Germ Token", 1);
+        assertPowerToughness(playerA, "Phyrexian Germ Token", 4, 4);
     }
 }

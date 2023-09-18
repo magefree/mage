@@ -50,7 +50,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
         this.staticText = "Starting with you, each player separates all permanents they control into three piles. Then each player chooses one of their piles at random and sacrifices those permanents.";
     }
 
-    public WhimsOfTheFateEffect(final WhimsOfTheFateEffect effect) {
+    private WhimsOfTheFateEffect(final WhimsOfTheFateEffect effect) {
         super(effect);
     }
 
@@ -177,11 +177,11 @@ class TargetSecondPilePermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Game game, boolean flag) {
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game, boolean flag) {
         if (firstPile.contains(id)) {
             return false;
         }
-        return super.canTarget(controllerId, id, sourceId, game, flag);
+        return super.canTarget(controllerId, id, source, game, flag);
     }
 
     @Override

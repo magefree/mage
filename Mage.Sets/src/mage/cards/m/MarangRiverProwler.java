@@ -70,7 +70,7 @@ class MarangRiverProwlerCastEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard as long as you control a black or green permanent";
     }
 
-    MarangRiverProwlerCastEffect(final MarangRiverProwlerCastEffect effect) {
+    private MarangRiverProwlerCastEffect(final MarangRiverProwlerCastEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class MarangRiverProwlerCastEffect extends AsThoughEffectImpl {
             if (card != null 
                     && card.isOwnedBy(affectedControllerId)
                     && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
-                    && game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
+                    && game.getBattlefield().count(filter, source.getControllerId(), source, game) > 0) {
                 return true;
             }
         }

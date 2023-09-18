@@ -31,7 +31,7 @@ public final class SpiritEnDal extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
         
         // Forecast - {1}{W}, Reveal Spirit en-Dal from your hand: Target creature gains shadow until end of turn.
-        Ability ability = new ForecastAbility(new GainAbilityTargetEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new ForecastAbility(new GainAbilityTargetEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

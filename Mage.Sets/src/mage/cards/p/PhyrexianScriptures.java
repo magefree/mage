@@ -42,7 +42,7 @@ public final class PhyrexianScriptures extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Put a +1/+1 counter on up to one target creature. That creature becomes an artifact in addition to its other types.
         Effects effects = new Effects();

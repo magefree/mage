@@ -11,7 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,7 +52,7 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
         this.staticText = "return that card to your hand unless target opponent has {this} deal 3 damage to them";
     }
 
-    public PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {
+    private PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {
         super(effect);
     }
 
@@ -91,15 +90,16 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public PiasRevolutionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiasRevolutionReturnEffect(), false);
+        setTriggerPhrase("Whenever a nontoken artifact is put into your graveyard from the battlefield, ");
     }
 
-    public PiasRevolutionTriggeredAbility(PiasRevolutionTriggeredAbility ability) {
+    private PiasRevolutionTriggeredAbility(final PiasRevolutionTriggeredAbility ability) {
         super(ability);
     }
 
@@ -118,7 +118,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+            if (permanent != null && filter.match(permanent, controllerId, this, game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setValue("permanentId", event.getTargetId());
                 }
@@ -126,10 +126,5 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a nontoken artifact is put into your graveyard from the battlefield, " ;
     }
 }

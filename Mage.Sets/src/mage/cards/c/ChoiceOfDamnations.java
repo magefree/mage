@@ -49,7 +49,7 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
         this.staticText = "Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents";
     }
 
-    public ChoiceOfDamnationsEffect(final ChoiceOfDamnationsEffect effect) {
+    private ChoiceOfDamnationsEffect(final ChoiceOfDamnationsEffect effect) {
         super(effect);
     }
 

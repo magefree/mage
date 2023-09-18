@@ -51,12 +51,12 @@ class BackFromTheBrinkCost extends CostImpl {
 
     public BackFromTheBrinkCost() {
         Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = "Exile a creature card from your graveyard and pay its mana cost";
     }
 
-    public BackFromTheBrinkCost(final BackFromTheBrinkCost cost) {
+    private BackFromTheBrinkCost(final BackFromTheBrinkCost cost) {
         super(cost);
     }
 
@@ -67,12 +67,12 @@ class BackFromTheBrinkCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             Player controller = game.getPlayer(controllerId);
             if (controller != null) {
                 Card card = controller.getGraveyard().get(targets.getFirstTarget(), game);

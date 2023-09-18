@@ -3,6 +3,8 @@ package mage.cards.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import org.junit.Test;
 
+import java.nio.file.Paths;
+
 import static org.junit.Assert.assertEquals;
 
 public class CodDeckImportTest {
@@ -23,7 +25,10 @@ public class CodDeckImportTest {
         };
         StringBuilder errors = new StringBuilder();
         DeckCardLists deck = importer.importDeck(
-                "src/test/java/mage/cards/decks/importer/samples/testdeck.cod", errors, false);
+                Paths.get("src", "test", "data", "importer", "testdeck.cod").toString(),
+                errors,
+                false
+        );
         assertEquals("Deck Name", deck.getName());
 
         TestDeckChecker.checker()

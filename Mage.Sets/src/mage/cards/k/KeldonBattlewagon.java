@@ -80,14 +80,14 @@ class KeldonBattlewagonCost extends CostImpl {
         this.text = "Tap an untapped creature you control";
     }
 
-    public KeldonBattlewagonCost(final KeldonBattlewagonCost cost) {
+    private KeldonBattlewagonCost(final KeldonBattlewagonCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), game)) {
+        if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -104,7 +104,7 @@ class KeldonBattlewagonCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(source.getSourceId(), controllerId, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     @Override
@@ -120,7 +120,7 @@ class KeldonBattlewagonBoostEffect extends OneShotEffect {
         staticText = "{this} gets +X/+0 until end of turn, where X is the power of the creature tapped this way";
     }
 
-    public KeldonBattlewagonBoostEffect(KeldonBattlewagonBoostEffect effect) {
+    private KeldonBattlewagonBoostEffect(final KeldonBattlewagonBoostEffect effect) {
         super(effect);
     }
 

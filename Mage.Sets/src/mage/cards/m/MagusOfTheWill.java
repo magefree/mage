@@ -43,7 +43,7 @@ public final class MagusOfTheWill extends CardImpl {
 
         // {2}{B}, {T}, Exile Magus of the Will: Until end of turn, you may play cards from your graveyard.
         // If a card would be put into your graveyard from anywhere else this turn, exile that card instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanPlayCardsFromGraveyardEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanPlayCardsFromGraveyardEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addEffect(new MagusOfTheWillReplacementEffect());
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
@@ -71,7 +71,7 @@ class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
         staticText = "Until end of turn, you may play cards from your graveyard";
     }
 
-    public CanPlayCardsFromGraveyardEffect(final CanPlayCardsFromGraveyardEffect effect) {
+    private CanPlayCardsFromGraveyardEffect(final CanPlayCardsFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class MagusOfTheWillReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a card would be put into your graveyard from anywhere else this turn, exile that card instead";
     }
 
-    public MagusOfTheWillReplacementEffect(final MagusOfTheWillReplacementEffect effect) {
+    private MagusOfTheWillReplacementEffect(final MagusOfTheWillReplacementEffect effect) {
         super(effect);
     }
 

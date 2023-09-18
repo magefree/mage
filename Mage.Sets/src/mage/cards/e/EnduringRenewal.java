@@ -8,8 +8,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
 import mage.cards.*;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -20,8 +19,6 @@ import java.util.UUID;
  * @author anonymous
  */
 public final class EnduringRenewal extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
 
     public EnduringRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
@@ -35,7 +32,7 @@ public final class EnduringRenewal extends CardImpl {
         // Whenever a creature is put into your graveyard from the battlefield, return it to your hand.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new ReturnFromGraveyardToHandTargetEffect().setText("return it to your hand"),
-                false, filter, true, true
+                false, StaticFilters.FILTER_PERMANENT_A_CREATURE, true, true
         ));
     }
 

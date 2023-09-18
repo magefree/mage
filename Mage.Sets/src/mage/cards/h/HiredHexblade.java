@@ -35,7 +35,7 @@ public final class HiredHexblade extends CardImpl {
                 "if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life."
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1));
-        this.addAbility(ability, new ManaPaidSourceWatcher());
+        this.addAbility(ability);
     }
 
     private HiredHexblade(final HiredHexblade card) {

@@ -47,14 +47,13 @@ public class ZulaportCutthroatTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Gluttonous Slime");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gluttonous Slime");
-        setChoice(playerA, "Yes"); // Devour
+        setChoice(playerA, true); // Devour
         addTarget(playerA, "Zulaport Cutthroat^Grizzly Bears");
         setChoice(playerA, "Whenever {this}"); // Two triggers
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 22);
         assertLife(playerB, 18);

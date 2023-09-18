@@ -18,13 +18,13 @@ public final class BorealCentaur extends CardImpl {
 
     public BorealCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.CENTAUR, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // {S}: Boreal Centaur gets +1/+1 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{S}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
     }
 
     private BorealCentaur(final BorealCentaur card) {

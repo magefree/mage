@@ -35,6 +35,7 @@ public final class KelsinkoRanger extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
         this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -42,7 +43,7 @@ public final class KelsinkoRanger extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{W}")
+                new ManaCostsImpl<>("{1}{W}")
         );
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

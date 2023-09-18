@@ -10,7 +10,7 @@ import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -26,7 +26,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class HagraMauling extends ModalDoubleFacesCard {
+public final class HagraMauling extends ModalDoubleFacedCard {
 
     private static final Hint hint = new ConditionHint(
             HagraMaulingCondition.instance, "An opponent controls no basic lands"
@@ -86,7 +86,7 @@ enum HagraMaulingCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
-            if (player != null && game.getBattlefield().count(filter, source.getSourceId(), playerId, game) == 0) {
+            if (player != null && game.getBattlefield().count(filter, playerId, source, game) == 0) {
                 return true;
             }
         }

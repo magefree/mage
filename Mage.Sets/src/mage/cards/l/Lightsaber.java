@@ -1,11 +1,8 @@
 
 package mage.cards.l;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -14,12 +11,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -27,23 +25,27 @@ import java.util.UUID;
  */
 public final class Lightsaber extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterControlledPermanent("Jedi or Sith");
+
+    static {
+        filter.add(Predicates.or(SubType.JEDI.getPredicate(), SubType.SITH.getPredicate()));
+    }
+
     public Lightsaber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equiped creature gets +1/+0 and has firsttrike
+        // Equipped creature gets +1/+0 and has first strike.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has first strike")));
 
-        // Equip 3
-        Ability ability = new EquipAbility(3);
-        ability.setCostAdjuster(LightsaberAdjuster.instance);
-        this.addAbility(ability);
+        // Equip {3}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
 
-        // Lightsaber's equip ability costs {1} if it targets a Jedi or Sith.
-        this.addAbility(new SimpleStaticAbility(new InfoEffect("{this}'s equip ability costs {1} if it targets a Jedi or Sith")));
+        // Equip Jedi or Sith {1}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter), false));
     }
 
     private Lightsaber(final Lightsaber card) {
@@ -53,32 +55,5 @@ public final class Lightsaber extends CardImpl {
     @Override
     public Lightsaber copy() {
         return new Lightsaber(this);
-    }
-}
-
-enum LightsaberAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (game.inCheckPlayableState()) {
-            if (CardUtil
-                    .getAllPossibleTargets(ability, game)
-                    .stream()
-                    .map(game::getPermanent)
-                    .filter(Objects::nonNull)
-                    .noneMatch(permanent -> permanent.hasSubtype(SubType.SITH, game)
-                            || permanent.hasSubtype(SubType.JEDI, game))) {
-                return;
-            }
-        } else {
-            Permanent permanent = game.getPermanent(ability.getFirstTarget());
-            if (permanent == null || !(permanent.hasSubtype(SubType.SITH, game)
-                    || permanent.hasSubtype(SubType.JEDI, game))) {
-                return;
-            }
-        }
-        ability.getCosts().clear();
-        ability.addCost(new GenericManaCost(1));
     }
 }

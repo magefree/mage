@@ -12,6 +12,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.ValueHint;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -48,10 +49,11 @@ public final class HobgoblinBanditLord extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(GoblinsEnteredThisTurnDynamicValue.instance)
                     .setText("{this} deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target"),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
+        ability.addHint(new ValueHint("Goblins that entered the battlefield under your control this turn", GoblinsEnteredThisTurnDynamicValue.instance));
         this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
     }
 

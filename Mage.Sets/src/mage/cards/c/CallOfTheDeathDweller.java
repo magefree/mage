@@ -96,7 +96,7 @@ class CallOfTheDeathDwellerEffect extends OneShotEffect {
         FilterPermanent filter = new FilterPermanent("creature to put a deathtouch counter on");
         filter.add(Predicates.or(predicates));
         Target target = new TargetPermanent(0, 1, filter, true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        if (player.choose(outcome, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.addCounters(CounterType.DEATHTOUCH.createInstance(), source.getControllerId(), source, game);
@@ -104,7 +104,7 @@ class CallOfTheDeathDwellerEffect extends OneShotEffect {
         }
         filter.setMessage("creature to put a menace counter on");
         target = new TargetPermanent(0, 1, filter, true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        if (player.choose(outcome, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.addCounters(CounterType.MENACE.createInstance(), source.getControllerId(), source, game);

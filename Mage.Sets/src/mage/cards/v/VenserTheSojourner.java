@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -38,10 +37,10 @@ public final class VenserTheSojourner extends CardImpl {
 
     public VenserTheSojourner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VENSER);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);
@@ -77,14 +76,14 @@ class VenserTheSojournerEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    VenserTheSojournerEffect(VenserTheSojournerEffect effect) {
+    private VenserTheSojournerEffect(final VenserTheSojournerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             if (getTargetPointer().getFirst(game, source) != null) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));

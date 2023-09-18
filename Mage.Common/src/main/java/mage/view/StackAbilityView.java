@@ -7,13 +7,15 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.icon.other.VariableCostCardIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
+import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
@@ -41,16 +43,17 @@ public class StackAbilityView extends CardView {
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
         this.loyalty = "";
+        this.defense = "";
 
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
-        this.superTypes = ability.getSuperType();
+        this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
-        this.manaCostLeftStr = String.join("", ability.getManaCostSymbols());
-        this.manaCostRightStr = "";
+        this.manaCostLeftStr = ability.getManaCostSymbols();
+        this.manaCostRightStr = new ArrayList<>();
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
-        this.superTypes = ability.getSuperType();
+        this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
         this.power = ability.getPower().toString();
         this.toughness = ability.getToughness().toString();
@@ -62,8 +65,8 @@ public class StackAbilityView extends CardView {
             tmpSourceCard.subTypes.clear();
             tmpSourceCard.cardTypes.clear();
             tmpSourceCard.cardTypes.add(CardType.CREATURE);
-            tmpSourceCard.manaCostLeftStr = "";
-            tmpSourceCard.manaCostRightStr = "";
+            tmpSourceCard.manaCostLeftStr = new ArrayList<>();
+            tmpSourceCard.manaCostRightStr = new ArrayList<>();
             tmpSourceCard.power = "2";
             tmpSourceCard.toughness = "2";
             nameToShow = "creature without name";
@@ -79,8 +82,8 @@ public class StackAbilityView extends CardView {
         // card icons (warning, it must be synced in gui dialogs with replaced card, see comments at the start of the file)
         // cost x
         if (ability.getManaCostsToPay().containsX()) {
-            int costX = ManacostVariableValue.REGULAR.calculate(game, ability, null);
-            this.cardIcons.add(new VariableCostCardIcon(costX));
+            int costX = ManacostVariableValue.END_GAME.calculate(game, ability, null);
+            this.cardIcons.add(CardIconImpl.variableCost(costX));
         }
     }
 
@@ -120,7 +123,7 @@ public class StackAbilityView extends CardView {
             getRules().add("<i>Related objects: " + names + "</i>");
         }
 
-        // show for modal ability, which mode was choosen
+        // show for modal ability, which mode was chosen
         if (ability.isModal()) {
             Modes modes = ability.getModes();
             for (UUID modeId : modes.getSelectedModes()) {
@@ -138,6 +141,23 @@ public class StackAbilityView extends CardView {
             if (!abilityHints.isEmpty()) {
                 rules.add(HintUtils.HINT_START_MARK);
                 HintUtils.appendHints(rules, abilityHints);
+            }
+        }
+
+        // show target of an ability on the stack if "related objects" is empty
+        if (!ability.getTargets().isEmpty()
+                && names.isEmpty()) {
+            StackObject stackObjectTarget = null;
+            for (Target target : ability.getTargets()) {
+                for (UUID targetId : target.getTargets()) {
+                    MageObject mo = game.getObject(targetId);
+                    if (mo instanceof StackObject) {
+                        stackObjectTarget = (StackObject) mo;
+                    }
+                    if (stackObjectTarget != null) {
+                        this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName());
+                    }
+                }
             }
         }
     }

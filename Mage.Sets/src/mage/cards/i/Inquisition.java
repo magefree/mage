@@ -53,14 +53,14 @@ class InquisitionEffect extends OneShotEffect {
         staticText = "Target player reveals their hand. Inquisition deals damage to that player equal to the number of white cards in their hand";
     }
 
-    public InquisitionEffect(final InquisitionEffect effect) {
+    private InquisitionEffect(final InquisitionEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Player targetPlayer = game.getPlayer(source.getFirstTarget());
             if (targetPlayer != null) {

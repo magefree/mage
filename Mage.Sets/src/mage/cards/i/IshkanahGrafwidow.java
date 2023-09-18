@@ -38,7 +38,7 @@ public final class IshkanahGrafwidow extends CardImpl {
 
     public IshkanahGrafwidow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIDER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -58,7 +58,7 @@ public final class IshkanahGrafwidow extends CardImpl {
 
         // {5}{B}: Target opponent loses 1 life for each Spider you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(count), new ManaCostsImpl("{6}{B}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(count), new ManaCostsImpl<>("{6}{B}"));
         ability.addTarget(new TargetOpponent());
         ability.addHint(new ValueHint("Spiders you control", count));
         this.addAbility(ability);

@@ -31,7 +31,7 @@ public final class Aethertow extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));
     }
 
     private Aethertow(final Aethertow card) {
@@ -51,7 +51,7 @@ class AethertowEffect extends OneShotEffect {
         staticText = "Put target attacking or blocking creature on top of its owner's library";
     }
 
-    AethertowEffect(final AethertowEffect effect) {
+    private AethertowEffect(final AethertowEffect effect) {
         super(effect);
     }
 

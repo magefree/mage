@@ -30,7 +30,7 @@ public final class SakashimasStudent extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Ninjutsu {1}{U}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new NinjutsuAbility("{1}{U}"));
 
         // You may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new AddSubtypeCopyApplier(SubType.NINJA));

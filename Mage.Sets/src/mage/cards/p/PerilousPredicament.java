@@ -49,7 +49,7 @@ class PerilousPredicamentSacrificeOpponentsEffect extends OneShotEffect {
         staticText = "Each opponent sacrifices an artifact creature and a nonartifact creature";
     }
 
-    public PerilousPredicamentSacrificeOpponentsEffect(final PerilousPredicamentSacrificeOpponentsEffect effect) {
+    private PerilousPredicamentSacrificeOpponentsEffect(final PerilousPredicamentSacrificeOpponentsEffect effect) {
         super(effect);
     }
 
@@ -71,14 +71,14 @@ class PerilousPredicamentSacrificeOpponentsEffect extends OneShotEffect {
                 filterNonArtifact.add(new ControllerIdPredicate(player.getId()));
                 if (game.getBattlefield().countAll(filterArtifact, player.getId(), game) > 0) {
                     TargetPermanent target = new TargetPermanent(1, 1, filterArtifact, true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
                 }
                 if (game.getBattlefield().countAll(filterNonArtifact, player.getId(), game) > 0) {
                     TargetPermanent target = new TargetPermanent(1, 1, filterNonArtifact, true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }

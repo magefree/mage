@@ -56,7 +56,7 @@ class SphereOfAnnihilationEffect extends OneShotEffect {
     SphereOfAnnihilationEffect() {
         super(Outcome.Benefit);
         staticText = "exile {this}, all creatures and planeswalkers with mana value less than or equal to " +
-                "the number of void counters on it, and all creature and planeswalker cards in all graveyards " +
+                "the number of void counters on it, and all creature and planeswalker cards in graveyards " +
                 "with mana value less than or equal to the number of void counters on it";
     }
 
@@ -80,7 +80,7 @@ class SphereOfAnnihilationEffect extends OneShotEffect {
         int counters = permanent.getCounters(game).getCount(CounterType.VOID);
         FilterPermanent filter = StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER.copy();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, counters + 1));
-        cards.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game));
+        cards.addAllCards(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game));
         game.getState()
                 .getPlayersInRange(source.getControllerId(), game)
                 .stream()

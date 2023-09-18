@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LoneFox
  */
 public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
@@ -27,7 +26,7 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
         choice = new ChoiceColor(true);
     }
 
-    public GainProtectionFromColorAllEffect(final GainProtectionFromColorAllEffect effect) {
+    protected GainProtectionFromColorAllEffect(final GainProtectionFromColorAllEffect effect) {
         super(effect);
         this.choice = effect.choice.copy();
     }
@@ -49,7 +48,7 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
             if (!controller.choose(Outcome.Protect, choice, game)) {
@@ -66,8 +65,6 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
             return staticText;
         }
 
-        String text = "Choose a color. " + filter.getMessage() + " gain protection from the chosen color " + duration.toString();
-
-        return text;
+        return "Choose a color. " + filter.getMessage() + " gain protection from the chosen color " + duration.toString();
     }
 }

@@ -8,7 +8,6 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author North
  */
 public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -16,15 +15,16 @@ public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
     boolean setTargetPointer;
 
     public BecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, optional, false);
+        this(effect, optional, false);
     }
 
-    public BecomesBlockedSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean setTargetPointer) {
-        super(zone, effect, optional);
+    public BecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} becomes blocked, ");
     }
 
-    public BecomesBlockedSourceTriggeredAbility(final BecomesBlockedSourceTriggeredAbility ability) {
+    protected BecomesBlockedSourceTriggeredAbility(final BecomesBlockedSourceTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }
@@ -42,11 +42,6 @@ public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
                     new FixedTarget(game.getCombat().getDefendingPlayerId(getSourceId(), game)));
         }
         return event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} becomes blocked, " ;
     }
 
     @Override

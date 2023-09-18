@@ -21,7 +21,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -37,13 +37,13 @@ public final class KoglaTheTitanApe extends CardImpl {
             = new FilterControlledPermanent(SubType.HUMAN);
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public KoglaTheTitanApe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.APE);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
@@ -60,7 +60,7 @@ public final class KoglaTheTitanApe extends CardImpl {
         this.addAbility(ability);
 
         // {1}{G}: Return target Human you control to its owner's hand. Kogla gains indestructible until end of turn.
-        ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);

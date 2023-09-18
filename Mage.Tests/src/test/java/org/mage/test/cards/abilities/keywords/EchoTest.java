@@ -47,7 +47,7 @@ public class EchoTest extends CardTestPlayerBase {
         activateManaAbility(3, PhaseStep.UPKEEP, playerA, "{T}: Add {W}");
         castSpell(3, PhaseStep.UPKEEP, playerA, "Restoration Angel");
         addTarget(playerA, "Avalanche Riders");
-        setChoice(playerA, "Yes"); // raider do restore
+        setChoice(playerA, true); // raider do restore
 
         // Avalanche Riders triggered again
         addTarget(playerA, "Forest");
@@ -57,7 +57,6 @@ public class EchoTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

@@ -47,7 +47,7 @@ public final class SilversmoteGhoul extends CardImpl {
 
         // {1}{B}, Sacrifice Silversmote Ghoul: Draw a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}")
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

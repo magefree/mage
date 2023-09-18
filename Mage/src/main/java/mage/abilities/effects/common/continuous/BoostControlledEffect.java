@@ -13,8 +13,10 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.Iterator;
+import java.util.Locale;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -71,7 +73,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public BoostControlledEffect(final BoostControlledEffect effect) {
+    protected BoostControlledEffect(final BoostControlledEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
@@ -89,8 +91,9 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (perm.isControlledBy(source.getControllerId())
+                        && !(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
@@ -114,8 +117,9 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (perm.isControlledBy(source.getControllerId())
+                        && (!(excludeSource && perm.getId().equals(source.getSourceId())))) {
                     perm.addPower(power.calculate(game, source, this));
                     perm.addToughness(toughness.calculate(game, source, this));
                 }
@@ -126,50 +130,14 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (excludeSource) {
+        String message = filter.getMessage().toLowerCase(Locale.ENGLISH);
+        boolean each = message.startsWith("each");
+        if (excludeSource && !each && !message.startsWith("all")) {
             sb.append("other ");
         }
-        sb.append(filter.getMessage());
-        sb.append(" you control get ");
-
-        String p = power.toString();
-        if (!p.startsWith("-")) {
-            sb.append('+');
-        }
-        sb.append(p).append('/');
-        String t = toughness.toString();
-        if (!t.startsWith("-")) {
-            if (p.startsWith("-")) {
-                sb.append('-');
-            } else {
-                sb.append('+');
-            }
-        }
-        sb.append(t);
-
-        sb.append((duration == Duration.EndOfTurn ? " until end of turn" : ""));
-
-        // where X
-        String message = null;
-        if (t.equals("X")) {
-            message = toughness.getMessage();
-        } else if (p.equals("X")) {
-            message = power.getMessage();
-        }
-        if (message != null && !message.isEmpty()) {
-            sb.append(", where X is ").append(message);
-        }
-
-        // for each
-        if (message == null) {
-            message = toughness.getMessage();
-            if (message.isEmpty()) {
-                message = power.getMessage();
-            }
-            if (!message.isEmpty()) {
-                sb.append(" for each " + message);
-            }
-        }
+        sb.append(filter.getMessage()).append(" you control ");
+        sb.append(each ? "gets " : "get ");
+        sb.append(CardUtil.getBoostText(power, toughness, duration));
         staticText = sb.toString();
     }
 

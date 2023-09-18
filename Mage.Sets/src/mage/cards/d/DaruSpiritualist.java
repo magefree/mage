@@ -50,7 +50,7 @@ class DaruSpiritualistTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public DaruSpiritualistTriggeredAbility(final DaruSpiritualistTriggeredAbility ability) {
+    private DaruSpiritualistTriggeredAbility(final DaruSpiritualistTriggeredAbility ability) {
         super(ability);
     }
 

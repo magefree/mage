@@ -46,7 +46,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
         this.staticText = "Exile the top X cards of your library. Until the end of your next turn, you may play those cards";
     }
 
-    public CommuneWithLavaEffect(final CommuneWithLavaEffect effect) {
+    private CommuneWithLavaEffect(final CommuneWithLavaEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
 
             for (Card card : cards) {
                 ContinuousEffect effect = new CommuneWithLavaMayPlayEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
+                effect.setTargetPointer(new FixedTarget(card.getId(), game));
                 game.addEffect(effect, source);
             }
 
@@ -85,7 +85,7 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
         this.staticText = "Until the end of your next turn, you may play that card.";
     }
 
-    public CommuneWithLavaMayPlayEffect(final CommuneWithLavaMayPlayEffect effect) {
+    private CommuneWithLavaMayPlayEffect(final CommuneWithLavaMayPlayEffect effect) {
         super(effect);
         castOnTurn = effect.castOnTurn;
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ public final class LingeringDeath extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.DestroyPermanent));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of the end step of enchanted creature's controller, that player sacrifices that creature.
@@ -52,14 +51,14 @@ public final class LingeringDeath extends CardImpl {
 }
 
 class LingeringDeathAbility extends TriggeredAbilityImpl {
+
     public LingeringDeathAbility() {
         super(Zone.BATTLEFIELD, new SacrificeTargetEffect());
     }
 
-    public LingeringDeathAbility(final LingeringDeathAbility ability) {
+    private LingeringDeathAbility(final LingeringDeathAbility ability) {
         super(ability);
     }
-
 
     @Override
     public LingeringDeathAbility copy() {
@@ -78,7 +77,7 @@ class LingeringDeathAbility extends TriggeredAbilityImpl {
             Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
                 if (event.getPlayerId().equals(enchantedCreature.getControllerId())) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                    getEffects().get(0).setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
                     return true;
                 }
             }

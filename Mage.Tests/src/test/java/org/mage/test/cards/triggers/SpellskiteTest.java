@@ -28,7 +28,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Spellskite", 1);
@@ -74,12 +73,12 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frost Titan");
         addTarget(playerB, "Silvercoat Lion");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, 1);
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{U/P}: Change a target", "stack ability (Whenever {this} enters ");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spellskite", 1);
         assertPermanentCount(playerB, "Frost Titan", 1);
@@ -119,7 +118,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
 
@@ -157,11 +155,10 @@ public class SpellskiteTest extends CardTestPlayerBase {
         setModeChoice(playerA, "2"); // return target permanent to its owner's hand
         setModeChoice(playerA, "3"); // tap all creatures your opponents control
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target spell or ability to {this}.", "Cryptic Command");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target", "Cryptic Command", "Cryptic Command");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Cryptic Command", 1);
 
@@ -194,7 +191,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
 
@@ -221,7 +217,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Flame Slash", 1);
         assertPowerToughness(playerB, "Spellskite", 3, 7);
@@ -257,12 +252,11 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         // B activate Spellskite, but can't change any targets cause it's already targeted
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
-        setChoice(playerB, "Yes"); // pay 2 life
+        setChoice(playerB, true); // pay 2 life
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 + 5 - 2);
         assertGraveyardCount(playerB, 2);
@@ -293,12 +287,11 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addTargetAmount(playerA, "Scute Mob", 5);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
-        setChoice(playerB, "Yes"); // pay 2 life
-        setChoice(playerB, "Yes"); // retarget
+        setChoice(playerB, true); // pay 2 life
+        setChoice(playerB, true); // retarget
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 + 5 - 2);
         assertGraveyardCount(playerB, 1);
@@ -326,14 +319,13 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addTargetAmount(playerA, "Pearled Unicorn", 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
-        setChoice(playerB, "Yes"); // pay 2 life
-        setChoice(playerB, "No"); // skip royal
-        setChoice(playerB, "No"); // skip blink
-        setChoice(playerB, "Yes"); // change pearl
+        setChoice(playerB, true); // pay 2 life
+        setChoice(playerB, false); // skip royal
+        setChoice(playerB, false); // skip blink
+        setChoice(playerB, true); // change pearl
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 + 5 - 2);
         assertGraveyardCount(playerB, "Memnite", 0);

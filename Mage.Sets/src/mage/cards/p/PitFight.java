@@ -1,24 +1,22 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PitFight extends CardImpl {
 
     public PitFight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R/G}");
 
         // Target creature you control fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
@@ -26,9 +24,7 @@ public final class PitFight extends CardImpl {
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to fight");
-        filter.add(new AnotherTargetPredicate(2));
-        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2);
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);
     }

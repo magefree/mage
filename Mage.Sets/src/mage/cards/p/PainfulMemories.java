@@ -48,7 +48,7 @@ class PainfulMemoriesEffect extends OneShotEffect {
         this.staticText = "Look at target opponent's hand and choose a card from it. Put that card on top of that player's library.";
     }
     
-    public PainfulMemoriesEffect(final PainfulMemoriesEffect effect) {
+    private PainfulMemoriesEffect(final PainfulMemoriesEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class PainfulMemoriesEffect extends OneShotEffect {
             
             if (!targetPlayer.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
-                if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+                if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                     Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         return targetPlayer.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, true);

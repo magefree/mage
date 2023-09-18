@@ -1,6 +1,7 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.abilities.condition.Condition;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.TargetController;
 import mage.constants.TimingRule;
@@ -44,8 +45,20 @@ public interface ActivatedAbility extends Ability {
         }
     }
 
+    /**
+     * WARNING, don't forget to call super.canActivate on override in card's code
+     *
+     * @param playerId
+     * @param game
+     * @return
+     */
     ActivationStatus canActivate(UUID playerId, Game game); // has to return a reference to the permitting ability/source
 
+    /**
+     * Who can activate an ability. By default, only you (the controller/owner).
+     *
+     * @param mayActivate
+     */
     void setMayActivate(TargetController mayActivate);
 
     /**
@@ -70,5 +83,7 @@ public interface ActivatedAbility extends Ability {
 
     int getMaxActivationsPerTurn(Game game);
 
-    public void setTiming(TimingRule timing);
+    ActivatedAbility setTiming(TimingRule timing);
+
+    ActivatedAbility setCondition(Condition condition);
 }

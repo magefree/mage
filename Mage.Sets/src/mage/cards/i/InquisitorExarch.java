@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -29,9 +28,8 @@ public final class InquisitorExarch extends CardImpl {
         this.toughness = new MageInt(2);
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2));
-        Mode mode = new Mode();
-        mode.addEffect(new LoseLifeTargetEffect(2));
-        mode.addTarget(new TargetPlayer());
+        Mode mode = new Mode(new LoseLifeTargetEffect(2));
+        mode.addTarget(new TargetOpponent());
         ability.addMode(mode);
         this.addAbility(ability);
     }

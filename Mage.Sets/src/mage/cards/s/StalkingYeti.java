@@ -31,7 +31,7 @@ public final class StalkingYeti extends CardImpl {
     public StalkingYeti(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.YETI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -48,7 +48,7 @@ public final class StalkingYeti extends CardImpl {
         this.addAbility(ability);
 
         // {2}{snow}: Return Stalking Yeti to its owner's hand. Activate this ability only any time you could cast a sorcery.
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{S}")));
+        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{2}{S}")));
     }
 
     private StalkingYeti(final StalkingYeti card) {
@@ -69,7 +69,7 @@ class StalkingYetiEffect extends OneShotEffect {
                 + "and that creature deals damage equal to its power to {this}";
     }
 
-    StalkingYetiEffect(final StalkingYetiEffect effect) {
+    private StalkingYetiEffect(final StalkingYetiEffect effect) {
         super(effect);
     }
 

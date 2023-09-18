@@ -63,8 +63,8 @@ class ExtractFromDarknessEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+            target.withNotTarget(true);
+            if (target.canChoose(source.getControllerId(), source, game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 return controller.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);
             }

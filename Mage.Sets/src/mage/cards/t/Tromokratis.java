@@ -31,7 +31,7 @@ public final class Tromokratis extends CardImpl {
 
     public Tromokratis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KRAKEN);
 
         this.power = new MageInt(8);
@@ -67,7 +67,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
         staticText = "{this} can't be blocked unless all creatures defending player controls block it";
     }
 
-    public CantBeBlockedUnlessAllEffect(final CantBeBlockedUnlessAllEffect effect) {
+    private CantBeBlockedUnlessAllEffect(final CantBeBlockedUnlessAllEffect effect) {
         super(effect);
     }
 

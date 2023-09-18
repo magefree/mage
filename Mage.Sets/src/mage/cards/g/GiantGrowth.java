@@ -3,11 +3,13 @@
 package mage.cards.g;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,7 +22,10 @@ public final class GiantGrowth extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
+        effect.setOutcome(Outcome.Benefit);
+        this.getSpellAbility().addEffect(effect);
+        
     }
 
     private GiantGrowth(final GiantGrowth card) {

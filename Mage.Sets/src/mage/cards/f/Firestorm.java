@@ -27,7 +27,7 @@ public final class Firestorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // As an additional cost to cast Firestorm, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), false));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
 
         // Firestorm deals X damage to each of X target creatures and/or players.
         this.getSpellAbility().addEffect(new FirestormEffect());
@@ -61,10 +61,10 @@ class FirestormEffect extends OneShotEffect {
 
     public FirestormEffect() {
         super(Outcome.Benefit);
-        staticText = "{this} deals X damage to each of X target creatures and/or players";
+        staticText = "{this} deals X damage to each of X targets";
     }
 
-    public FirestormEffect(final FirestormEffect effect) {
+    private FirestormEffect(final FirestormEffect effect) {
         super(effect);
     }
 

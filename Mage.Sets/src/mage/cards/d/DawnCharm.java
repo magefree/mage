@@ -11,8 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.Target;
@@ -38,13 +38,11 @@ public final class DawnCharm extends CardImpl {
         // Choose one - Prevent all combat damage that would be dealt this turn
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
         // or regenerate target creature;
-        Mode mode = new Mode();
-        mode.addEffect(new RegenerateTargetEffect());
+        Mode mode = new Mode(new RegenerateTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or counter target spell that targets you.
-        mode = new Mode();
-        mode.addEffect(new CounterTargetEffect());
+        mode = new Mode(new CounterTargetEffect());
         mode.addTarget(new TargetSpell(filter));
         this.getSpellAbility().addMode(mode);
     }
@@ -59,10 +57,10 @@ public final class DawnCharm extends CardImpl {
     }
 }
 
-class DawnCharmPredicate implements ObjectPlayerPredicate<ObjectPlayer<StackObject>> {
+class DawnCharmPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
-    public boolean apply(ObjectPlayer<StackObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         UUID controllerId = input.getPlayerId();
         if (controllerId == null) {
             return false;

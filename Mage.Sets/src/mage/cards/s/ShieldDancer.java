@@ -35,7 +35,7 @@ public final class ShieldDancer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{W}: The next time target attacking creature would deal combat damage to Shield Dancer this turn, that creature deals that damage to itself instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShieldDancerRedirectionEffect(), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShieldDancerRedirectionEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
@@ -57,7 +57,7 @@ class ShieldDancerRedirectionEffect extends RedirectionEffect {
         staticText = "The next time target attacking creature would deal combat damage to {this} this turn, that creature deals that damage to itself instead";
     }
 
-    public ShieldDancerRedirectionEffect(final ShieldDancerRedirectionEffect effect) {
+    private ShieldDancerRedirectionEffect(final ShieldDancerRedirectionEffect effect) {
         super(effect);
     }
 

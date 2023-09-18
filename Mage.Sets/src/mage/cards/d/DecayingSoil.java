@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class DecayingSoil extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     private static final Condition condition = new CardsInControllerGraveyardCondition(7);
@@ -70,7 +69,7 @@ class DecayingSoilTriggeredAbility extends DiesCreatureTriggeredAbility {
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     DecayingSoilTriggeredAbility() {

@@ -27,6 +27,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -73,7 +74,7 @@ public final class SorcererClass extends CardImpl {
                 new SpellCastControllerTriggeredAbility(
                         new SorcererClassEffect(),
                         StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
-                        false, true
+                        false, SetTargetPointer.SPELL
                 ), 3
         )), new SorcererClassWatcher());
     }
@@ -115,7 +116,7 @@ class SorcererClassManaCondition extends ManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             return object != null && object.isInstantOrSorcery(game);
         }
         return source instanceof ClassLevelAbility;
@@ -132,7 +133,7 @@ class SorcererClassEffect extends OneShotEffect {
     SorcererClassEffect() {
         super(Outcome.Benefit);
         staticText = "that spell deals damage to each opponent equal " +
-                "to the number of instant or sorcery spells you've cast this turn";
+                "to the number of instant and sorcery spells you've cast this turn";
     }
 
     private SorcererClassEffect(final SorcererClassEffect effect) {
@@ -182,7 +183,7 @@ class SorcererClassWatcher extends Watcher {
         if (spell == null || !spell.isInstantOrSorcery(game)) {
             return;
         }
-        spellMap.compute(spell.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+        spellMap.compute(spell.getControllerId(), CardUtil::setOrIncrementValue);
     }
 
     @Override

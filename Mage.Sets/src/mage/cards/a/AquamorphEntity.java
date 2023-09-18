@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -39,7 +38,7 @@ public final class AquamorphEntity extends CardImpl {
         this.addAbility(ability);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private AquamorphEntity(final AquamorphEntity card) {
@@ -88,9 +87,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
             }
         }
         if (event.getType() == GameEvent.EventType.TURNFACEUP) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
+            return event.getTargetId().equals(source.getSourceId());
         }
         return false;
     }
@@ -127,8 +124,8 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 toughness = 5;
                 break;
         }
-        game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
-        return true;
+        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield), source);
+        return false;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package mage.cards.w;
 
 import java.util.UUID;
-
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -18,15 +17,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class WirewoodPride extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "Elves");
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
+            new FilterPermanent(SubType.ELF, "Elves on the battlefield"), null
+    );
 
     public WirewoodPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true)
-                .setText("Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield"));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

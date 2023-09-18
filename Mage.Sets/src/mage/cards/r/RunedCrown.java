@@ -22,6 +22,8 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -40,7 +42,7 @@ public final class RunedCrown extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private RunedCrown(final RunedCrown card) {
@@ -86,8 +88,8 @@ class RunedCrownEffect extends OneShotEffect {
         Zone zone = null;
         if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for a Rune card?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-            target.setNotTarget(true);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
+            target.withNotTarget(true);
+            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     zone = Zone.GRAVEYARD;
@@ -96,7 +98,7 @@ class RunedCrownEffect extends OneShotEffect {
         }
         if (card == null && controller.chooseUse(Outcome.Neutral, "Search your hand for a Rune card?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     zone = Zone.HAND;

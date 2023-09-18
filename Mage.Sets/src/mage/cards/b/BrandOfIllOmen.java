@@ -34,11 +34,11 @@ public final class BrandOfIllOmen extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Cumulative upkeep {R}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{R}")));
 
         // Enchanted creature's controller can't cast creature spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BrandOfIllOmenEffect()));
@@ -62,7 +62,7 @@ class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Enchanted creature's controller can't cast creature spells";
     }
 
-    public BrandOfIllOmenEffect(final BrandOfIllOmenEffect effect) {
+    private BrandOfIllOmenEffect(final BrandOfIllOmenEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast creature spells (" + mageObject.getLogName() + " on the battlefield).";
         }

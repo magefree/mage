@@ -76,7 +76,6 @@ public class EndOfTurnOneOpponentTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -98,7 +97,6 @@ public class EndOfTurnOneOpponentTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -120,6 +118,5 @@ public class EndOfTurnOneOpponentTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 }

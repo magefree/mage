@@ -30,9 +30,9 @@ public final class JhessianZombies extends CardImpl {
         // Fear
         this.addAbility(FearAbility.getInstance());
         // Islandcycling {2}
-        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl<>("{2}")));
         // Swampcycling {2}
-        this.addAbility(new SwampcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new SwampcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private JhessianZombies(final JhessianZombies card) {

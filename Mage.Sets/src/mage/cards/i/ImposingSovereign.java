@@ -1,16 +1,13 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -27,8 +24,9 @@ public final class ImposingSovereign extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Creatures your opponents control enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ImposingSovereignEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(
+                StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
+        ).setText("creatures your opponents control enter the battlefield tapped")));
     }
 
     private ImposingSovereign(final ImposingSovereign card) {
@@ -38,45 +36,5 @@ public final class ImposingSovereign extends CardImpl {
     @Override
     public ImposingSovereign copy() {
         return new ImposingSovereign(this);
-    }
-}
-
-class ImposingSovereignEffect extends ReplacementEffectImpl {
-
-    ImposingSovereignEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "Creatures your opponents control enter the battlefield tapped";
-    }
-
-    private ImposingSovereignEffect(final ImposingSovereignEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.tap(source, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            return false;
-        }
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.isCreature(game);
-    }
-
-    @Override
-    public ImposingSovereignEffect copy() {
-        return new ImposingSovereignEffect(this);
     }
 }

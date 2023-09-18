@@ -29,7 +29,6 @@ public class EligethCrossroadsAugurTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Faerie Seer", 1);
         assertHandCount(playerA, "Balduvian Bears", 2);

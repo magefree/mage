@@ -23,7 +23,7 @@ public final class CapturedSunlight extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public CapturedSunlight (final CapturedSunlight card) {
+    private CapturedSunlight(final CapturedSunlight card) {
         super(card);
     }
 

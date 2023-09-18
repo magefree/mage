@@ -30,10 +30,15 @@ public final class Lashwrithe extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
+        // Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)
         this.addAbility(new LivingWeaponAbility());
+
+        // Equipped creature gets +1/+1 for each Swamp you control.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{B/P}{B/P}")));
+
+        // Equip {B/P}{B/P} (Phyrexian Black can be paid with either Black or 2 life.)
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{B/P}{B/P}"), false));
     }
 
     private Lashwrithe(final Lashwrithe card) {

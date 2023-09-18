@@ -28,7 +28,7 @@ public final class ZombieMusher extends CardImpl {
     public ZombieMusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -37,7 +37,7 @@ public final class ZombieMusher extends CardImpl {
         this.addAbility(new LandwalkAbility(filter));
 
         // {snow}: Regenerate Zombie Musher.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{S}")));
     }
 
     private ZombieMusher(final ZombieMusher card) {

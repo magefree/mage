@@ -1,18 +1,18 @@
 package mage.cards.decks.importer;
 
-import java.util.List;
-import java.util.Optional;
-
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 public class CardLookup {
 
     public static final CardLookup instance = new CardLookup();
 
     public Optional<CardInfo> lookupCardInfo(String name) {
-        return Optional.ofNullable(CardRepository.instance.findPreferedCoreExpansionCard(name, true));
+        return Optional.ofNullable(CardRepository.instance.findPreferredCoreExpansionCard(name));
     }
 
     public List<CardInfo> lookupCardInfo(CardCriteria criteria) {

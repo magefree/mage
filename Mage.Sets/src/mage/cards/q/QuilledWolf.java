@@ -26,7 +26,7 @@ public final class QuilledWolf extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {5}{G}: Quilled Wolf gets +4/+4 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new ManaCostsImpl<>("{5}{G}")));
     }
 
     private QuilledWolf(final QuilledWolf card) {

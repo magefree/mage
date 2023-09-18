@@ -20,7 +20,7 @@ public class LivingDeathEffect extends OneShotEffect {
         this.staticText = "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield";
     }
 
-    public LivingDeathEffect(final LivingDeathEffect effect) {
+    protected LivingDeathEffect(final LivingDeathEffect effect) {
         super(effect);
     }
 
@@ -32,7 +32,7 @@ public class LivingDeathEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Map<UUID, Set<Card>> exiledCards = new HashMap<>();
 

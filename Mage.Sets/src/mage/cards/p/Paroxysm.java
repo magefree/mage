@@ -41,7 +41,7 @@ public final class Paroxysm extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of their library.
@@ -72,7 +72,7 @@ class ParoxysmEffect extends OneShotEffect {
                 + "Otherwise, it gets +3/+3 until end of turn.";
     }
 
-    ParoxysmEffect(final ParoxysmEffect effect) {
+    private ParoxysmEffect(final ParoxysmEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class ParoxysmEffect extends OneShotEffect {
                             creatureAttachedTo.destroy(source, game, false);
                         } else {
                             ContinuousEffect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-                            effect.setTargetPointer(new FixedTarget(creatureAttachedTo.getId()));
+                            effect.setTargetPointer(new FixedTarget(creatureAttachedTo.getId(), game));
                             game.addEffect(effect, source);
                         }
                         return true;

@@ -50,7 +50,7 @@ class ElectryteTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbili
         super(new ElectryteEffect(), false);
     }
 
-    ElectryteTriggeredAbility(final ElectryteTriggeredAbility effect) {
+    private ElectryteTriggeredAbility(final ElectryteTriggeredAbility effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class ElectryteEffect extends OneShotEffect {
         staticText = "it deals damage equal to its power to each blocking creature";
     }
 
-    public ElectryteEffect(final ElectryteEffect effect) {
+    private ElectryteEffect(final ElectryteEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class ElectryteEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent thisCreature = game.getPermanent(source.getSourceId());
         int amount = thisCreature.getPower().getValue();
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
         for (Permanent permanent : permanents) {
             permanent.damage(amount, source.getSourceId(), source, game, false, true);
         }

@@ -40,7 +40,7 @@ public final class GiantKiller extends AdventureCard {
         this.toughness = new MageInt(2);
 
         // {1}{W}, {T}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -49,6 +49,8 @@ public final class GiantKiller extends AdventureCard {
         // Destroy target creature with power 4 or greater.
         this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+
+        this.finalizeAdventure();
     }
 
     private GiantKiller(final GiantKiller card) {

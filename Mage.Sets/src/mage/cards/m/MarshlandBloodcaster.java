@@ -41,7 +41,7 @@ public final class MarshlandBloodcaster extends CardImpl {
         // {1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.
         Ability ability = new SimpleActivatedAbility(new MarshlandBloodcasterEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability, new SpellsCastWatcher());
+        this.addAbility(ability);
     }
 
     private MarshlandBloodcaster(final MarshlandBloodcaster card) {
@@ -68,8 +68,9 @@ class MarshlandBloodcasterEffect extends ContinuousEffectImpl {
                 "you may pay life equal to that spell's mana value";
     }
 
-    public MarshlandBloodcasterEffect(final MarshlandBloodcasterEffect effect) {
+    private MarshlandBloodcasterEffect(final MarshlandBloodcasterEffect effect) {
         super(effect);
+        this.spellsCast = effect.spellsCast;
     }
 
     @Override
@@ -99,7 +100,7 @@ class MarshlandBloodcasterEffect extends ContinuousEffectImpl {
 
     private static int getSpellsCast(UUID playerId, Game game) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        return watcher != null ? watcher.getSpellsCastThisTurn(playerId).size() : 0;
+        return watcher != null ? watcher.getCount(playerId) : 0;
     }
 }
 

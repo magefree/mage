@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PartyCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -67,8 +68,8 @@ class ThwartTheGraveTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         if (!this.getTargets().isEmpty()) {
             possibleTargets.removeIf(uuid -> {
                 Card card = game.getCard(uuid);

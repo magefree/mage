@@ -30,7 +30,7 @@ public class ChooseColorEffect extends OneShotEffect {
         staticText = "choose a color" + (exceptColor != null ? " other than " + exceptColor.toLowerCase(Locale.ENGLISH) : "");
     }
 
-    public ChooseColorEffect(final ChooseColorEffect effect) {
+    protected ChooseColorEffect(final ChooseColorEffect effect) {
         super(effect);
         this.exceptColor = effect.exceptColor;
     }
@@ -40,7 +40,7 @@ public class ChooseColorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         ChoiceColor choice = new ChoiceColor();
         if (exceptColor != null) {

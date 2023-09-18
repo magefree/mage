@@ -1,7 +1,6 @@
 package mage.cards.h;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -28,9 +27,9 @@ public final class HuatliRadiantChampion extends CardImpl {
     public HuatliRadiantChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Put a loyalty counter on Huatli, Radiant Champion for each creature you control.
         this.addAbility(new LoyaltyAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0),
@@ -38,7 +37,7 @@ public final class HuatliRadiantChampion extends CardImpl {
 
         // -1: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED);
-        LoyaltyAbility ability2 = new LoyaltyAbility(new BoostTargetEffect(amount, amount, Duration.EndOfTurn, true)
+        LoyaltyAbility ability2 = new LoyaltyAbility(new BoostTargetEffect(amount, amount, Duration.EndOfTurn)
                 .setText("Target creature gets +X/+X until end of turn, where X is the number of creatures you control"), -1);
         ability2.addTarget(new TargetCreaturePermanent());
         ability2.addHint(CreaturesYouControlHint.instance);

@@ -1,6 +1,7 @@
 package mage.target;
 
 import mage.abilities.Ability;
+import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -8,6 +9,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -19,24 +21,37 @@ public interface Target extends Serializable {
 
     boolean isChosen();
 
-    boolean doneChosing();
+    boolean doneChoosing();
 
     void clearChosen();
 
     boolean isNotTarget();
 
     /**
-     * controls if it will be checked, if the target can be targeted from source
+     * Mark it as non target (e.g. card's rules do not contain a "target" word)
+     * <p>
+     * Non targeted abilities are unaffected by protection/hexproof and other target related effects
+     * Non targeted spells can't be fizzled on resolve with invalid targets
+     * Non targeted spells chooses targets on resolve, targeted spells chooses targets on activate
+     * All costs must be non targeted
      *
-     * @param notTarget true = do not check for protection, false = check for
-     *                  protection
+     * @param notTarget
+     * @return
      */
-    void setNotTarget(boolean notTarget);
+    Target withNotTarget(boolean notTarget);
 
     // methods for targets
-    boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game);
+    boolean canChoose(UUID sourceControllerId, Ability source, Game game);
 
-    Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game);
+    /**
+     * Returns a set of all possible targets that match the criteria of the implemented Target class.
+     *
+     * @param sourceControllerId UUID of the ability's controller
+     * @param source             Ability which requires the targets
+     * @param game               Current game
+     * @return Set of the UUIDs of possible targets
+     */
+    Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
 
     boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
 
@@ -70,7 +85,7 @@ public interface Target extends Serializable {
 
     Set<UUID> possibleTargets(UUID sourceControllerId, Game game);
 
-    boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game);
+    boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game);
 
     void add(UUID id, Game game);
 
@@ -78,8 +93,16 @@ public interface Target extends Serializable {
 
     void updateTarget(UUID targetId, Game game);
 
+    /**
+     * @return full description with target name, amount, etc (uses in abilities/rules/cost)
+     */
+    String getDescription();
+
     String getMessage();
 
+    /**
+     * @return single target name
+     */
     String getTargetName();
 
     void setTargetName(String name);
@@ -122,7 +145,7 @@ public interface Target extends Serializable {
 
     Target copy();
 
-    // some targets are choosen from players that are not the controller of the ability (e.g. Pandemonium)
+    // some targets are chosen from players that are not the controller of the ability (e.g. Pandemonium)
     void setTargetController(UUID playerId);
 
     UUID getTargetController();
@@ -135,7 +158,7 @@ public interface Target extends Serializable {
 
     int getTargetTag();
 
-    void setTargetTag(int tag);
+    Target setTargetTag(int tag);
 
     Target getOriginalTarget();
 
@@ -151,4 +174,34 @@ public interface Target extends Serializable {
     int getSize();
 
     boolean contains(UUID targetId);
+
+    /**
+     * This function tries to auto-choose the next target.
+     * <p>
+     * It will NOT add it to the list of targets, it will ony choose the next target
+     * <p>
+     * Use this version when the targets is selected from targets.getTargets.
+     * <p>
+     * It will auto-choosen if all of the following criteria are met:
+     * - The minimum and maximum number of targets is the same (i.e. effect does not have "up to" in its name)
+     * - The number of valid targets is equal to the number of targets still left to be specified
+     *
+     * @param abilityControllerId
+     * @param source
+     * @param game
+     * @return The UUID of the chosen option, or null if one could not be chosen
+     */
+    UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game);
+
+    /**
+     * Use this version when the target is chosen from a specified collection.
+     * E.g. {@link Player#chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)}
+     *
+     * @param abilityControllerId
+     * @param source
+     * @param game
+     * @param possibleTargets
+     * @return
+     */
+    UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game, Collection<UUID> possibleTargets);
 }

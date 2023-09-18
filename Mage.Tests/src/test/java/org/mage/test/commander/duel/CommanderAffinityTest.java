@@ -36,7 +36,6 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -49,18 +48,17 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
 
         // first cast for 12UU (-12 by abzan, -UU by islands)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blinkmoth Infusion");
-        setChoice(playerA, "Yes"); // keep commander
+        setChoice(playerA, true); // keep commander
         checkCommandCardCount("after 1", 1, PhaseStep.BEGIN_COMBAT, playerA, "Blinkmoth Infusion", 1);
 
         // second cast for 12UU + 2 (-12 by abzan, -UU by islands, -2 by islands)
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Blinkmoth Infusion");
-        setChoice(playerA, "No"); // remove commander to grave
+        setChoice(playerA, false); // remove commander to grave
         checkCommandCardCount("after 2", 1, PhaseStep.END_TURN, playerA, "Blinkmoth Infusion", 0);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -73,25 +71,24 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
 
         // first cast for 12UU (-12 by abzan, -UU by islands)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blinkmoth Infusion");
-        setChoice(playerA, "Yes"); // keep commander
+        setChoice(playerA, true); // keep commander
         checkCommandCardCount("after 1", 1, PhaseStep.BEGIN_COMBAT, playerA, "Blinkmoth Infusion", 1);
 
         // second cast for 12UU + 2 (-12 by abzan, -UU by islands, -2 by abzan)
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Blinkmoth Infusion");
-        setChoice(playerA, "No"); // remove commander to grave
+        setChoice(playerA, false); // remove commander to grave
         checkCommandCardCount("after 2", 1, PhaseStep.END_TURN, playerA, "Blinkmoth Infusion", 0);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
     public void test_Gained_Affinity() {
         // bug: Mycosynth Golem did not allow my commander, Karn, Silver Golem, to cost 0 even though I had 7+ artifacts on the board.
 
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new CreateTokenEffect(new ArtifactWallToken(), 7), new ManaCostsImpl("R"));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new CreateTokenEffect(new ArtifactWallToken(), 7), new ManaCostsImpl<>("{R}"));
         addCustomCardWithAbility("generate tokens", playerA, ability);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         //
@@ -120,7 +117,7 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkCommandCardCount("after destroy ", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn, Silver Golem", 1);
         checkPlayableAbility("after destroy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Karn, Silver Golem", false);
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // can't do the second cast with additional cost (must pay 2 + 5, but have only R)
@@ -129,13 +126,12 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         // generate artifact tokens
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Create");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall", 7);
+        checkPermanentCount("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall Token", 7);
         checkPlayableAbility("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Karn, Silver Golem", true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -160,7 +156,6 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Karn, Silver Golem", 1);
     }

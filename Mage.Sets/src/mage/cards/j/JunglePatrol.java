@@ -34,7 +34,7 @@ public final class JunglePatrol extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Wood"));
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public JunglePatrol(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +45,7 @@ public final class JunglePatrol extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}, {T}: Create a 0/1 green Wall creature token with defender named Wood.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WoodToken()), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WoodToken()), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

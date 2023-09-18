@@ -44,8 +44,7 @@ public final class PistonFistCyclops extends CardImpl {
                         ), PistonFistCyclopsCondition.instance)
                         .setText("As long as you've cast an instant or sorcery spell this turn, "
                                 + "{this} can attack as though it didn't have defender")
-        ),
-                 new SpellsCastWatcher());
+        ));
     }
 
     private PistonFistCyclops(final PistonFistCyclops card) {

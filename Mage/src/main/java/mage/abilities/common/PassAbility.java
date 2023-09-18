@@ -8,6 +8,8 @@ import mage.game.Game;
 import java.util.UUID;
 
 /**
+ * AI only: fake ability for game simulations
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class PassAbility extends ActivatedAbilityImpl {
@@ -17,7 +19,7 @@ public class PassAbility extends ActivatedAbilityImpl {
         this.usesStack = false;
     }
 
-    public PassAbility(final PassAbility ability) {
+    protected PassAbility(final PassAbility ability) {
         super(ability);
     }
 

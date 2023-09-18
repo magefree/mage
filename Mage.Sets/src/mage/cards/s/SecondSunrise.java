@@ -72,7 +72,7 @@ class SecondSunriseEffect extends OneShotEffect {
                 continue;
             }
             result |= player.moveCards(player.getGraveyard().getCards(
-                    filter, source.getSourceId(), source.getControllerId(), game
+                    filter, source.getControllerId(), source, game
             ), Zone.BATTLEFIELD, source, game);
         }
         return result;

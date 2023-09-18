@@ -1,6 +1,7 @@
 
 package mage.cards.u;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
@@ -62,7 +63,7 @@ class UnclaimedTerritoryManaBuilder extends ConditionalManaBuilder {
             creatureType = subType;
         }
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && mana.getAny() == 0) {
             game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
                     + " (can only be spent to cast creatures of type " + creatureType + ")");
@@ -78,6 +79,20 @@ class UnclaimedTerritoryManaBuilder extends ConditionalManaBuilder {
     @Override
     public String getRule() {
         return "Spend this mana only to cast a creature spell of the chosen type";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.creatureType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        return this.creatureType == ((UnclaimedTerritoryManaBuilder) obj).creatureType;
     }
 }
 
@@ -103,7 +118,7 @@ class UnclaimedTerritoryManaCondition extends CreatureCastManaCondition {
         // check: ... to cast a creature spell
         if (super.apply(game, source)) {
             // check: ... of the chosen type
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             if (creatureType != null && object != null && object.hasSubtype(creatureType, game)) {
                 return true;
             }

@@ -22,7 +22,7 @@ public final class SunsBounty extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
 
         // Recover {1}{W}
-        this.addAbility(new RecoverAbility(new ManaCostsImpl("{1}{W}"), this));
+        this.addAbility(new RecoverAbility(new ManaCostsImpl<>("{1}{W}"), this));
     }
 
     private SunsBounty(final SunsBounty card) {

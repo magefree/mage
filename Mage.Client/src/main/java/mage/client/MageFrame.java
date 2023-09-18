@@ -37,7 +37,7 @@ import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.PlayerAction;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
@@ -67,9 +67,12 @@ import javax.swing.event.PopupMenuListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -94,14 +97,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String PASSWORD_ARG = "-pw";
     private static final String SERVER_ARG = "-server";
     private static final String PORT_ARG = "-port";
-    private static final String DEBUG_ARG = "-debug";
+    private static final String DEBUG_ARG = "-debug"; // enable debug button in main menu
 
     private static final String NOT_CONNECTED_TEXT = "<not connected>";
     private static final String NOT_CONNECTED_BUTTON = "CONNECT TO SERVER";
     private static MageFrame instance;
 
     private final ConnectDialog connectDialog;
-    private WhatsNewDialog whatsNewDialog; // can be null
     private final ErrorDialog errorDialog;
     private static CallbackClient callbackClient;
     private static final Preferences PREFS = Preferences.userNodeForPackage(MageFrame.class);
@@ -190,6 +192,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * Creates new form MageFrame
      */
     public MageFrame() throws MageException {
+        File cacertsFile = new File(System.getProperty("user.dir") + "/release/cacerts").getAbsoluteFile();
+        if (!cacertsFile.exists()) { // When running from the jar file the contents of the /release folder will have been expanded into the home folder as part of packaging
+            cacertsFile = new File(System.getProperty("user.dir") + "/cacerts").getAbsoluteFile();
+        }
+        if (cacertsFile.exists()) {
+            LOGGER.info("Custom (or bundled) Java certificate file (cacerts) file found");
+            String cacertsPath = cacertsFile.getPath();
+            System.setProperty("javax.net.ssl.trustStore", cacertsPath);
+            System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+        } else {
+            LOGGER.info("custom Java certificate file not found at: " + cacertsFile.getAbsolutePath());
+        }
+
         setWindowTitle();
 
         EDTExceptionHandler.registerExceptionHandler();
@@ -270,14 +285,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SessionHandler.startSession(this);
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
-        try {
-            whatsNewDialog = new WhatsNewDialog();
-        } catch (NoClassDefFoundError e) {
-            // JavaFX is not supported on old MacOS with OpenJDK
-            // https://bugs.openjdk.java.net/browse/JDK-8202132
-            LOGGER.error("JavaFX is not supported by your system. What's new page will be disabled.", e);
-            whatsNewDialog = null;
-        }
         desktopPane.add(connectDialog, JLayeredPane.MODAL_LAYER);
         errorDialog = new ErrorDialog();
         errorDialog.setLocation(100, 100);
@@ -353,17 +360,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             setWindowTitle();
         });
 
-        if (SystemUtil.isMacOSX()) {
-            SystemUtil.enableMacOSFullScreenMode(this);
+        if (MacFullscreenUtil.isMacOSX()) {
+            MacFullscreenUtil.enableMacOSFullScreenMode(this);
             if (fullscreenMode) {
-                SystemUtil.toggleMacOSFullScreenMode(this);
+                MacFullscreenUtil.toggleMacOSFullScreenMode(this);
             }
         }
-
-        // run what's new checks (loading in background)
-        SwingUtilities.invokeLater(() -> {
-            showWhatsNewDialog(false);
-        });
     }
 
     private void setWindowTitle() {
@@ -489,7 +491,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public static boolean isChrismasTime(Date currentTime) {
+    public static boolean isChristmasTime(Date currentTime) {
         // from december 15 to january 15
         Calendar cal = new GregorianCalendar();
         cal.setTime(currentTime);
@@ -513,9 +515,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         String filename;
         float ratio;
-        if (isChrismasTime(Calendar.getInstance().getTime())) {
-            // chrismass logo
-            LOGGER.info("Yo Ho Ho, Merry Christmas and a Happy New Year");
+        if (isChristmasTime(Calendar.getInstance().getTime())) {
+            // Christmas logo
+            LOGGER.info("Ho Ho Ho, Merry Christmas and a Happy New Year");
             filename = "/label-xmage-christmas.png";
             ratio = 539.0f / 318.0f;
         } else {
@@ -1195,6 +1197,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 DeckEditorPane deckEditorPane = (DeckEditorPane) window;
                 if (deckEditorPane.getDeckEditorMode() == DeckEditorMode.LIMITED_BUILDING
                         || deckEditorPane.getDeckEditorMode() == DeckEditorMode.SIDEBOARDING
+                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING
                         || deckEditorPane.getDeckEditorMode() == DeckEditorMode.VIEW_LIMITED_DECK) {
                     deckEditorPane.removeFrame();
                 }
@@ -1205,7 +1208,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
         String name;
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
+        if (mode == DeckEditorMode.SIDEBOARDING
+                || mode == DeckEditorMode.LIMITED_BUILDING
+                || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING
+                || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
             name = "Deck Editor - " + tableId.toString();
         } else {
             if (deck != null) {
@@ -1317,13 +1323,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     i++;
                 }
                 if (arg.startsWith(PORT_ARG)) {
-                    startPort = Integer.valueOf(args[i + 1]);
+                    startPort = Integer.parseInt(args[i + 1]);
                     i++;
                 }
                 if (arg.startsWith(DEBUG_ARG)) {
                     debugMode = true;
                 }
             }
+
+            // enable debug menu by default for developer build (if you run it from source code)
+            debugMode |= VERSION.isDeveloperBuild();
+
             if (!liteMode) {
                 final SplashScreen splash = SplashScreen.getSplashScreen();
                 if (splash != null) {
@@ -1655,9 +1665,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         updateTooltipContainerSizes();
     }
 
-    public void showWhatsNewDialog(boolean forceToShowPage) {
-        if (whatsNewDialog != null) {
-            whatsNewDialog.checkUpdatesAndShow(forceToShowPage);
+    public static void showWhatsNewDialog() {
+        try {
+            URI newsURI = new URI("https://jaydi85.github.io/xmage-web-news/news.html");
+            Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+            if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                desktop.browse(newsURI);
+            }
+        } catch (URISyntaxException e) {
+            LOGGER.error("URI Syntax error when creating news link", e);
+        } catch (IOException e) {
+            LOGGER.error("IOException while loading news page", e);
         }
     }
 

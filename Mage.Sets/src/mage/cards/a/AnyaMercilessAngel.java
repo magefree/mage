@@ -29,7 +29,7 @@ public final class AnyaMercilessAngel extends CardImpl {
 
     public AnyaMercilessAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -73,10 +73,12 @@ enum AnyaMercilessAngelDynamicValue implements DynamicValue {
         if (controller == null) {
             return 3 * opponentCount;
         }
-        int startingLifeTotal = game.getLife();
+        int startingLifeTotal = game.getStartingLife();
         for (UUID opponentId : game.getOpponents(controller.getId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent != null && opponent.getLife() < startingLifeTotal / 2) {
+            if (opponent != null 
+                    && opponent.isInGame()
+                    && opponent.getLife() < startingLifeTotal / 2) {
                 opponentCount++;
             }
         }

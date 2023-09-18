@@ -9,13 +9,12 @@ import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -27,17 +26,10 @@ import java.util.UUID;
  */
 public final class RionyaFireDancer extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public RionyaFireDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -47,7 +39,7 @@ public final class RionyaFireDancer extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new RionyaFireDancerEffect(), TargetController.YOU, false
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
         this.addAbility(ability.addHint(RionyaFireDancerHint.instance), new RionyaFireDancerWatcher());
     }
 
@@ -121,7 +113,7 @@ class RionyaFireDancerWatcher extends Watcher {
         }
         Spell spell = game.getSpell(event.getTargetId());
         if (spell != null && spell.isInstantOrSorcery(game)) {
-            playerMap.compute(spell.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(spell.getControllerId(), CardUtil::setOrIncrementValue);
         }
     }
 

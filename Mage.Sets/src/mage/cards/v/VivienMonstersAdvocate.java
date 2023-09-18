@@ -3,7 +3,6 @@ package mage.cards.v;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -28,11 +27,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -44,15 +39,15 @@ public final class VivienMonstersAdvocate extends CardImpl {
     public VivienMonstersAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // You may look at the top card of your library any time.
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast creature spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
 
         // +1: Create a 3/3 green Beast creature token. Put your choice of a vigilance 
         // counter, a reach counter, or a trample counter on it.
@@ -78,8 +73,9 @@ public final class VivienMonstersAdvocate extends CardImpl {
 class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
 
     private static final Token token = new BeastToken();
-    private static final Set<String> choices
-            = Arrays.asList("Vigilance", "Reach", "Trample").stream().collect(Collectors.toSet());
+    private static final Set<String> choices = new LinkedHashSet<>(Arrays.asList(
+            "Vigilance", "Reach", "Trample"
+    ));
 
     VivienMonstersAdvocateTokenEffect() {
         super(Outcome.Benefit);
@@ -153,7 +149,7 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public DelayedTriggeredAbility copy() {
+    public VivienMonstersAdvocateTriggeredAbility copy() {
         return new VivienMonstersAdvocateTriggeredAbility(this);
     }
 

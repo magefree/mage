@@ -26,12 +26,13 @@ public final class MaceWindu extends CardImpl {
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature you don't control");
 
     static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
+        filter.getPermanentFilter().add(TargetController.NOT_YOU.getControllerPredicate());
+        filter.getSpellFilter().add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public MaceWindu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.JEDI);
         this.power = new MageInt(2);
@@ -46,7 +47,7 @@ public final class MaceWindu extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{U}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private MaceWindu(final MaceWindu card) {

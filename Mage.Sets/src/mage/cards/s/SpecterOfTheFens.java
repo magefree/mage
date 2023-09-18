@@ -31,7 +31,7 @@ public final class SpecterOfTheFens extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {5}{B}: Target opponent loses 2 life and you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(2), new ManaCostsImpl("{5}{B}"));
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{5}{B}"));
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

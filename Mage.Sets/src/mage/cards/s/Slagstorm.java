@@ -21,12 +21,11 @@ public final class Slagstorm extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
-        Mode mode = new Mode();
-        mode.addEffect(new DamagePlayersEffect(3));
+        Mode mode = new Mode(new DamagePlayersEffect(3));
         this.getSpellAbility().addMode(mode);
     }
 
-    public Slagstorm (final Slagstorm card) {
+    private Slagstorm(final Slagstorm card) {
         super(card);
     }
 

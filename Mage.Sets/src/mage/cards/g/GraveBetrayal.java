@@ -10,7 +10,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,7 +55,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {
+    private GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,7 +101,7 @@ class GraveBetrayalEffect extends OneShotEffect {
         staticText = " return the creature to the battlefield under your control with an additional +1/+1 counter. That creature is a black Zombie in addition to its other colors and types";
     }
 
-    public GraveBetrayalEffect(final GraveBetrayalEffect effect) {
+    private GraveBetrayalEffect(final GraveBetrayalEffect effect) {
         super(effect);
     }
 
@@ -134,7 +134,7 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    GraveBetrayalReplacementEffect(GraveBetrayalReplacementEffect effect) {
+    private GraveBetrayalReplacementEffect(final GraveBetrayalReplacementEffect effect) {
         super(effect);
     }
 
@@ -158,7 +158,7 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-            ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
+            ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
             effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1));
             game.addEffect(effect, source);
             //discard(); why?

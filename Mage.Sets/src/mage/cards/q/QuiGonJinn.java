@@ -4,7 +4,7 @@ package mage.cards.q;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -30,7 +30,7 @@ public final class QuiGonJinn extends CardImpl {
 
     public QuiGonJinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.JEDI);
         this.power = new MageInt(4);
@@ -42,7 +42,7 @@ public final class QuiGonJinn extends CardImpl {
         // When Qui-Gon Jinn attacks alone, it gets +2/+2 and lifelink until end of turn.
         Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
         effect.setText("it gets +2/+2");
-        Ability abitity = new AttacksAloneTriggeredAbility(effect);
+        Ability abitity = new AttacksAloneSourceTriggeredAbility(effect);
         effect = new GainAbilitySourceEffect(LifelinkAbility.getInstance());
         effect.setText("and lifelink until end of turn");
         abitity.addEffect(effect);
@@ -54,7 +54,7 @@ public final class QuiGonJinn extends CardImpl {
         this.addAbility(abitity);
 
         // Meditate {1}{W}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private QuiGonJinn(final QuiGonJinn card) {

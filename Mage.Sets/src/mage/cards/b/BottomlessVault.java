@@ -39,7 +39,7 @@ public final class BottomlessVault extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // At the beginning of your upkeep, if Bottomless Vault is tapped, put a storage counter on it.
         OneShotEffect addStorageCounter = new AddCountersSourceEffect(CounterType.STORAGE.createInstance());
-        Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.instance, "if {this} is tapped, put a storage counter on it");
+        Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.TAPPED, "if {this} is tapped, put a storage counter on it");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
         // {tap}, Remove any number of storage counters from Bottomless Vault: Add {B} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
@@ -48,7 +48,7 @@ public final class BottomlessVault extends CardImpl {
                 new TapSourceCost(),
                 "Add {B} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE,
                 "Remove any number of storage counters from {this}"));
         this.addAbility(ability);
     }

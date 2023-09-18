@@ -17,7 +17,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 /**
- *
  * @author Mael
  */
 public class AuraSwapAbility extends ActivatedAbilityImpl {
@@ -26,7 +25,7 @@ public class AuraSwapAbility extends ActivatedAbilityImpl {
         super(Zone.BATTLEFIELD, new AuraSwapEffect(), manaCost);
     }
 
-    public AuraSwapAbility(final AuraSwapAbility ability) {
+    protected AuraSwapAbility(final AuraSwapAbility ability) {
         super(ability);
     }
 
@@ -72,7 +71,7 @@ class AuraSwapEffect extends OneShotEffect {
                 Permanent enchantedPermanent = game.getPermanent(auraSourcePermanent.getAttachedTo());
                 filterCardToCheck.add(new AuraCardCanAttachToPermanentId(enchantedPermanent.getId()));
                 TargetCardInHand target = new TargetCardInHand(filterCardToCheck);
-                if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                     Card auraInHand = game.getCard(target.getFirstTarget());
                     if (auraInHand != null) {
                         game.getState().setValue("attachTo:" + auraInHand.getId(), enchantedPermanent);

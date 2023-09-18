@@ -5,7 +5,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -39,10 +38,10 @@ public final class NarsetTranscendent extends CardImpl {
 
     public NarsetTranscendent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NARSET);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
+        this.setStartingLoyalty(6);
 
         // +1: Look at the top card of your library. If it's a noncreature, nonland card, you may reveal it and put it into your hand.
         this.addAbility(new LoyaltyAbility(new NarsetTranscendentEffect1(), 1));
@@ -71,7 +70,7 @@ class NarsetTranscendentEffect1 extends OneShotEffect {
         this.staticText = "Look at the top card of your library. If it's a noncreature, nonland card, you may reveal it and put it into your hand";
     }
 
-    public NarsetTranscendentEffect1(final NarsetTranscendentEffect1 effect) {
+    private NarsetTranscendentEffect1(final NarsetTranscendentEffect1 effect) {
         super(effect);
     }
 
@@ -107,6 +106,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
 
     public NarsetTranscendentTriggeredAbility() {
         super(new NarsetTranscendentGainReboundEffect(), Duration.EndOfTurn, true);
+        setTriggerPhrase("When you cast your next instant or sorcery spell from your hand this turn, ");
     }
 
     private NarsetTranscendentTriggeredAbility(final NarsetTranscendentTriggeredAbility ability) {
@@ -139,11 +139,6 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you cast your next instant or sorcery spell from your hand this turn, " ;
-    }
 }
 
 class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
@@ -153,7 +148,7 @@ class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
         staticText = "it gains rebound";
     }
 
-    public NarsetTranscendentGainReboundEffect(final NarsetTranscendentGainReboundEffect effect) {
+    private NarsetTranscendentGainReboundEffect(final NarsetTranscendentGainReboundEffect effect) {
         super(effect);
     }
 

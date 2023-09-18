@@ -41,8 +41,8 @@ public final class FirecatBlitz extends CardImpl {
         this.getSpellAbility().addEffect(new FirecatBlitzEffect());
 
         // Flashback-{R}{R}, Sacrifice X Mountains.
-        Ability ability = new FlashbackAbility(new SacrificeXTargetCost(filter), TimingRule.SORCERY);
-        ability.addManaCost(new ManaCostsImpl("{R}{R}"));
+        Ability ability = new FlashbackAbility(this, new SacrificeXTargetCost(filter));
+        ability.addManaCost(new ManaCostsImpl<>("{R}{R}"));
         this.addAbility(ability);
     }
 
@@ -63,7 +63,7 @@ class FirecatBlitzEffect extends OneShotEffect {
         this.staticText = "Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step";
     }
 
-    public FirecatBlitzEffect(final FirecatBlitzEffect effect) {
+    private FirecatBlitzEffect(final FirecatBlitzEffect effect) {
         super(effect);
     }
 

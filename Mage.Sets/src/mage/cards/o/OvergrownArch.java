@@ -8,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LearnEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,6 +39,7 @@ public final class OvergrownArch extends CardImpl {
         // {2}, Sacrifice Overgrown Arch: Learn.
         Ability ability = new SimpleActivatedAbility(new LearnEffect(), new GenericManaCost(2));
         ability.addCost(new SacrificeSourceCost());
+        ability.addHint(OpenSideboardHint.instance);
         this.addAbility(ability);
     }
 

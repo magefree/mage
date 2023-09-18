@@ -27,14 +27,14 @@ public final class IkraShidiqiTheUsurper extends CardImpl {
     public IkraShidiqiTheUsurper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAGA);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever a creature you control deals combat damage to a player, you gain life equal to that creature's toughness.
         this.addAbility(new IkraShidiqiTheUsurperTriggeredAbility());
@@ -59,7 +59,7 @@ class IkraShidiqiTheUsurperTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public IkraShidiqiTheUsurperTriggeredAbility(final IkraShidiqiTheUsurperTriggeredAbility ability) {
+    private IkraShidiqiTheUsurperTriggeredAbility(final IkraShidiqiTheUsurperTriggeredAbility ability) {
         super(ability);
     }
 

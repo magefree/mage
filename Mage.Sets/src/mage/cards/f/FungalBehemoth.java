@@ -9,20 +9,18 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -40,10 +38,10 @@ public final class FungalBehemoth extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Fungal Behemoth's power and toughness are each equal to the number of +1/+1 counters on creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new P1P1CountersOnControlledCreaturesCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new P1P1CountersOnControlledCreaturesCount())));
 
         // Suspend X-{X}{G}{G}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{G}{G}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{G}{G}"), this, true));
 
         // Whenever a time counter is removed from Fungal Behemoth while it's exiled, you may put a +1/+1 counter on target creature.
         this.addAbility(new FungalBehemothTriggeredAbility());
@@ -64,9 +62,10 @@ class FungalBehemothTriggeredAbility extends TriggeredAbilityImpl {
     public FungalBehemothTriggeredAbility() {
         super(Zone.EXILED, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), true);
         addTarget(new TargetCreaturePermanent());
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
-    public FungalBehemothTriggeredAbility(final FungalBehemothTriggeredAbility ability) {
+    private FungalBehemothTriggeredAbility(final FungalBehemothTriggeredAbility ability) {
         super(ability);
     }
 
@@ -84,12 +83,6 @@ class FungalBehemothTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }
 
 class P1P1CountersOnControlledCreaturesCount implements DynamicValue {
@@ -115,6 +108,6 @@ class P1P1CountersOnControlledCreaturesCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the number of +1/+1 counters on creatures you control";
+        return "+1/+1 counters on creatures you control";
     }
 }

@@ -1,22 +1,17 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.command.emblems.NissaVitalForceEmblem;
@@ -24,13 +19,15 @@ import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class NissaVitalForce extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
+    private static final FilterCard filter2 = new FilterPermanentCard("permanent card from your graveyard");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -38,20 +35,22 @@ public final class NissaVitalForce extends CardImpl {
 
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Untap target land you control. Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land.
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
-        ability.addEffect(new BecomesCreatureTargetEffect(new NissaVitalForceToken(), false, true, Duration.UntilYourNextTurn));
+        ability.addEffect(new BecomesCreatureTargetEffect(
+                new NissaVitalForceToken(), false, true, Duration.UntilYourNextTurn
+        ).withDurationRuleAtStart(true).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
 
         // -3: Return target permanent card from your graveyard to your hand.
-        ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterPermanentCard("permanent card from your graveyard")));
+        ability = new LoyaltyAbility(new ReturnFromGraveyardToHandTargetEffect(), -3);
+        ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
 
         // -6: You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
@@ -79,7 +78,8 @@ class NissaVitalForceToken extends TokenImpl {
         this.toughness = new MageInt(5);
         this.addAbility(HasteAbility.getInstance());
     }
-    public NissaVitalForceToken(final NissaVitalForceToken token) {
+
+    private NissaVitalForceToken(final NissaVitalForceToken token) {
         super(token);
     }
 

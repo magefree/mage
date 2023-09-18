@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.util.functions.CopyApplier;
 
@@ -24,13 +25,13 @@ import java.util.UUID;
  */
 public final class MoritteOfTheFrost extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a permanent you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("a permanent you control");
 
     public MoritteOfTheFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

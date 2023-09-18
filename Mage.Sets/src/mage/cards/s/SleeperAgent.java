@@ -59,7 +59,7 @@ class SleeperAgentChangeControlEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    public SleeperAgentChangeControlEffect(final SleeperAgentChangeControlEffect effect) {
+    private SleeperAgentChangeControlEffect(final SleeperAgentChangeControlEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class SleeperAgentChangeControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             return permanent.changeControllerId(source.getFirstTarget(), game, source);
         } else {

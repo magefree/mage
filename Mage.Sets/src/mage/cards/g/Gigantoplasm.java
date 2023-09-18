@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -8,17 +7,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -38,7 +35,7 @@ public final class Gigantoplasm extends CardImpl {
 
         // You may have Gigantoplasm enter the battlefield as a copy of any creature on the battlefield, except it has "{X}: This creature has base power and toughness X/X."
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new GigantoplasmCopyApplier());
-        effect.setText("a copy of any creature on the battlefield, except it has \"{X}: This creature has base power and toughness X/X.\"");
+        effect.setText("as a copy of any creature on the battlefield, except it has \"{X}: This creature has base power and toughness X/X.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
@@ -56,10 +53,9 @@ class GigantoplasmCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        DynamicValue variableMana = ManacostVariableValue.REGULAR;
-        Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
+        Effect effect = new SetBasePowerToughnessSourceEffect(ManacostVariableValue.REGULAR, Duration.Custom);
         effect.setText("This creature has base power and toughness X/X");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         blueprint.getAbilities().add(ability);
         return true;
     }

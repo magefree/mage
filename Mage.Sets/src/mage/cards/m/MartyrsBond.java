@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -51,7 +51,7 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MartyrsBondEffect());
     }
 
-    public MartyrsBondTriggeredAbility(final MartyrsBondTriggeredAbility ability) {
+    private MartyrsBondTriggeredAbility(final MartyrsBondTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,7 +96,7 @@ class MartyrsBondEffect extends OneShotEffect {
         this.staticText = "each opponent sacrifices a permanent that shares a card type with it";
     }
 
-    public MartyrsBondEffect(final MartyrsBondEffect effect) {
+    private MartyrsBondEffect(final MartyrsBondEffect effect) {
         super(effect);
     }
 
@@ -112,30 +112,15 @@ class MartyrsBondEffect extends OneShotEffect {
             Permanent saccedPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && saccedPermanent != null) {
-                FilterControlledPermanent filter = new FilterControlledPermanent();
-                String message = "permanent with type (";
-                boolean firstType = true;
-
-                List<CardType.CardTypePredicate> cardTypes = new ArrayList<>();
-
-                for (CardType type : saccedPermanent.getCardType(game)) {
-                    cardTypes.add(type.getPredicate());
-                    if (firstType) {
-                        message += type;
-                        firstType = false;
-                    } else {
-                        message += " or " + type;
-                    }
-                }
-                message += ") to sacrifice";
-                filter.add(Predicates.or(cardTypes));
-                filter.setMessage(message);
+                SharesCardTypePredicate predicate = new SharesCardTypePredicate(saccedPermanent.getCardType(game));
+                FilterControlledPermanent filter = new FilterControlledPermanent(predicate.toString());
+                filter.add(predicate);
 
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null && !playerId.equals(controller.getId())) {
                         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-                        if (target.canChoose(source.getSourceId(), playerId, game)) {
+                        if (target.canChoose(playerId, source, game)) {
                             player.chooseTarget(Outcome.Sacrifice, target, source, game);
                             perms.add(target.getFirstTarget());
                         }

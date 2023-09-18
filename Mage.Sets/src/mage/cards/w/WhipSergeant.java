@@ -31,7 +31,7 @@ public final class WhipSergeant extends CardImpl {
 
         // {R}: Target creature gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+            new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -57,10 +57,10 @@ class RustElementalEffect extends OneShotEffect {
 
     public RustElementalEffect() {
         super(Outcome.Damage);
-        this.staticText = "Sacrifice an artifact other than {this}. If you can't, tap {this} and you lose 4 life.";
+        this.staticText = "sacrifice an artifact other than {this}. If you can't, tap {this} and you lose 4 life.";
     }
 
-    public RustElementalEffect(final RustElementalEffect effect) {
+    private RustElementalEffect(final RustElementalEffect effect) {
         super(effect);
     }
 
@@ -78,8 +78,8 @@ class RustElementalEffect extends OneShotEffect {
             if (controller != null) {
                 TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
                 // if they can pay the cost, then they must pay
-                if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                    controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                if (target.canChoose(controller.getId(), source, game)) {
+                    controller.choose(Outcome.Sacrifice, target, source, game);
                     Permanent artifactSacrifice = game.getPermanent(target.getFirstTarget());
                     if (artifactSacrifice != null) {
                         // sacrifice the chosen artifact

@@ -26,7 +26,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class GoblinTrashmaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent(SubType.GOBLIN, "Goblins you control");
+            = new FilterCreaturePermanent(SubType.GOBLIN, "Goblins");
     private static final FilterControlledCreaturePermanent filter2
             = new FilterControlledCreaturePermanent(SubType.GOBLIN, "a Goblin");
 

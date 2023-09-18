@@ -34,7 +34,7 @@ public final class ArcadesSabboth extends CardImpl {
 
     public ArcadesSabboth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}{W}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
@@ -45,13 +45,13 @@ public final class ArcadesSabboth extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Arcades Sabboth unless you pay {G}{W}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}{W}{U}")), TargetController.YOU, false));
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}{W}{U}")), TargetController.YOU, false));
 
         // Each untapped creature you control gets +0/+2 as long as it's not attacking.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false)));
 
         // {W}: Arcades Sabboth gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private ArcadesSabboth(final ArcadesSabboth card) {

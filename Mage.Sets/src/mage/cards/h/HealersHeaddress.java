@@ -46,7 +46,7 @@ public final class HealersHeaddress extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // {W}{W}: Attach Healer's Headdress to target creature you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl("{W}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{W}{W}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         // Equip {1}

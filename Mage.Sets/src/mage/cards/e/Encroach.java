@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetOpponent;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class Encroach extends CardImpl {
 
         // Target player reveals their hand. You choose a nonbasic land card from it. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetPlayer());
    }
 
     private Encroach(final Encroach card) {

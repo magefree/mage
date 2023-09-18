@@ -17,7 +17,6 @@ public class EliminateTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertGraveyardCount(playerB, "Ancient Crab", 1);
     }
 
@@ -31,7 +30,6 @@ public class EliminateTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertGraveyardCount(playerB, "Basri Ket", 1);
     }
 }

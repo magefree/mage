@@ -28,9 +28,8 @@ public final class DevourIntellect extends CardImpl {
                 new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND),
                 new DiscardTargetEffect(1),
                 TreasureSpentToCastCondition.instance,
-                "Target opponent discards a card. If mana from a Treasure was spent to cast this spell, instead that player reveals their hand, you choose a nonland card from it, then that player discards a card"
+                "Target opponent discards a card. If mana from a Treasure was spent to cast this spell, instead that player reveals their hand, you choose a nonland card from it, then that player discards that card"
         ));
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private DevourIntellect(final DevourIntellect card) {

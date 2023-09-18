@@ -2,11 +2,10 @@
 
 package mage.cards.basiclands;
 
-import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.mana.RedManaAbility;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
+
+import java.util.UUID;
 
 /**
  *
@@ -15,15 +14,15 @@ import mage.cards.CardSetInfo;
 public class Mountain extends BasicLand {
     public Mountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new RedManaAbility());
-        this.frameColor = ObjectColor.RED;
+        this.frameColor.setRed(true);
     }
 
-    public Mountain(Mountain land) {
+    private Mountain(final Mountain land) {
         super(land);
     }
 
     @Override
-    public Card copy() {
+    public Mountain copy() {
         return new Mountain(this);
     }
 }

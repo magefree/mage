@@ -29,7 +29,7 @@ public final class MascotInterception extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     private static final Condition condition = new SourceTargetsPermanentCondition(filter);

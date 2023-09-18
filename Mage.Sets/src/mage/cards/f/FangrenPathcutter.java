@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class FangrenPathcutter extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Fangren Pathcutter attacks, attacking creatures gain trample until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES), false));
     }
 
     private FangrenPathcutter(final FangrenPathcutter card) {

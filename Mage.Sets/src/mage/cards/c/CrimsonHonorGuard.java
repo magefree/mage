@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -14,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -37,7 +37,7 @@ public final class CrimsonHonorGuard extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of each player's end step, Crimson Honor Guard deals 4 damage to that player unless they control a commander.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CrimsonHonorGuardEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CrimsonHonorGuardEffect(), TargetController.EACH_PLAYER, false));
     }
 
     private CrimsonHonorGuard(final CrimsonHonorGuard card) {
@@ -60,6 +60,7 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
 
     public CrimsonHonorGuardEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals 4 damage to that player unless they control a commander";
     }
 
     private CrimsonHonorGuardEffect(final CrimsonHonorGuardEffect effect) {
@@ -77,11 +78,6 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals 4 damage to that player unless they control a commander";
     }
 
     @Override

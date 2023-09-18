@@ -1,15 +1,14 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.cards.s.SpringOfEternalPeace;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class TransformTest extends CardTestPlayerBase {
@@ -30,10 +29,11 @@ public class TransformTest extends CardTestPlayerBase {
         // {G}{G}, Sacrifice Rootrunner: Put target land on top of its owner's library.
         addCard(Zone.BATTLEFIELD, playerB, "Rootrunner"); // {2}{G}{G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer", true);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{G}{G}", "Swamp");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+1: Reveal");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -47,7 +47,6 @@ public class TransformTest extends CardTestPlayerBase {
         assertCounterCount("Nissa, Sage Animist", CounterType.LOYALTY, 4);
         assertPermanentCount(playerA, "Forest", 6);
         assertPermanentCount(playerA, "Swamp", 1);
-
     }
 
     @Test
@@ -75,8 +74,7 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
         assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);
 
-        assertPermanentCount(playerA, "Zombie", 1);
-
+        assertPermanentCount(playerA, "Zombie Token", 1);
     }
 
     /**
@@ -104,11 +102,10 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Languish", 1);
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 0);
-        assertPermanentCount(playerA, "Zombie", 0);
+        assertPermanentCount(playerA, "Zombie Token", 0);
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Liliana, Heretical Healer", 1);
-
     }
 
     @Test
@@ -133,7 +130,7 @@ public class TransformTest extends CardTestPlayerBase {
      * 4G Creature - Human Shaman Whenever a permanent you control transforms
      * into a non-Human creature, put a 2/2 green Wolf creature token onto the
      * battlefield.
-     *
+     * <p>
      * Reported bug: "It appears to trigger either when a non-human creature
      * transforms OR when a creature transforms from a non-human into a human
      * (as in when a werewolf flips back to the sun side), rather than when a
@@ -154,7 +151,7 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Cult of the Waxing Moon", 1);
         assertPermanentCount(playerA, "Timber Shredder", 1); // Night-side card of Hinterland Logger, Werewolf (non-human)
-        assertPermanentCount(playerA, "Wolf", 1); // wolf token created
+        assertPermanentCount(playerA, "Wolf Token", 1); // wolf token created
     }
 
     /**
@@ -171,24 +168,51 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Startled Awake"); // SORCERY {2}{U}{U}"
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerB, 13);
         assertGraveyardCount(playerA, "Startled Awake", 0);
         assertPermanentCount(playerA, "Persistent Nightmare", 1); // Night-side card of Startled Awake
-        Permanent nightmare = getPermanent("Persistent Nightmare", playerA);
-        Assert.assertTrue("Has to have creature card type", nightmare.isCreature(currentGame));
-        Assert.assertFalse("Has not to have sorcery card type", nightmare.isSorcery(currentGame));
+        assertType("Persistent Nightmare", CardType.CREATURE, true);
+        assertType("Persistent Nightmare", CardType.SORCERY, false);
+    }
+
+    @Test
+    public void testStartledAwakeMoonmist() {
+        addCard(Zone.HAND, playerA, "Startled Awake");
+        addCard(Zone.HAND, playerA, "Moonmist");
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 11);
+        addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Moonmist");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, 13);
+        assertGraveyardCount(playerA, "Startled Awake", 0);
+        assertPermanentCount(playerA, "Persistent Nightmare", 1); // Night-side card of Startled Awake
+        assertType("Persistent Nightmare", CardType.CREATURE, true);
+        assertType("Persistent Nightmare", CardType.SORCERY, false);
     }
 
     /**
      * When copy token of Lambholt Pacifist transforms with "its transform
      * ability", I see below error. Then rollback.
-     *
+     * <p>
      * 701.25a Only permanents represented by double-faced cards can transform.
      * (See rule 711, “Double-Faced Cards.”) If a spell or ability instructs a
      * player to transform any permanent that isn‘t represented by a
@@ -221,7 +245,7 @@ public class TransformTest extends CardTestPlayerBase {
     /**
      * Mirror Mockery copies the front face of a Transformed card rather than
      * the current face.
-     *
+     * <p>
      * It's worth pointing out that my opponent cast Mirror Mockery the previous
      * turn - after it had transformed. I should have included the part of the
      * log that showed that Mirror Mockery was applied to the Unimpeded
@@ -280,8 +304,9 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 3);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{C}", "Archangel Avacyn", "Whenever a non-Angel creature you control dies");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{C}", "Archangel Avacyn");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -317,9 +342,9 @@ public class TransformTest extends CardTestPlayerBase {
      * was on stack, my opponent used Displacer's ability targeting Huntmaster.
      * That ability resolved and Huntmaster still transformed like it never left
      * the battlefield.
-     *
+     * <p>
      * http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=20014&p=210533#p210513
-     *
+     * <p>
      * The transform effect on the stack should fizzle. The card brought back
      * from Exile should be a new object unless I am interpreting the rules
      * incorrectly. The returned permanent uses the same GUID.
@@ -350,18 +375,19 @@ public class TransformTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 24);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
 
         assertPermanentCount(playerB, "Eldrazi Displacer", 1);
 
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
-        assertPowerToughness(playerA,  "Huntmaster of the Fells", 2, 2);
+        assertPowerToughness(playerA, "Huntmaster of the Fells", 2, 2);
         assertTappedCount("Plains", true, 2);
         assertTappedCount("Wastes", true, 1);
 
     }
-   @Test
+
+    @Test
     public void testHuntmasterTransformed() {
         // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, create a 2/2 green Wolf creature token and you gain 2 life.
         // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
@@ -374,28 +400,29 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells", true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertLife(playerA, 24);
         assertLife(playerB, 18);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
         assertPowerToughness(playerA, "Huntmaster of the Fells", 2, 2);
-        
+
 
     }
+
     /**
      * Having cast Phantasmal Image copying my opponent's flipped Thing in the
      * Ice, I was left with a 0/4 Awoken Horror.
-     *
+     * <p>
      * https://github.com/magefree/mage/issues/5893
-     *
+     * <p>
      * The transform effect on the stack should fizzle. The card brought back
      * from Exile should be a new object unless I am interpreting the rules
      * incorrectly. The returned permanent uses the same GUID.
@@ -404,7 +431,8 @@ public class TransformTest extends CardTestPlayerBase {
     public void testCopyTransformedThingInTheIce() {
         // Defender
         // Thing in the Ice enters the battlefield with four ice counters on it.
-        // Whenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice. Then if it has no ice counters on it, transform it.
+        // Whenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice.
+        // Then if it has no ice counters on it, transform it.
         addCard(Zone.HAND, playerA, "Thing in the Ice"); // Creature {1}{U}
         // Creatures you control get +1/+0 until end of turn.
         addCard(Zone.HAND, playerA, "Banners Raised", 4); // Creature {R}
@@ -424,7 +452,6 @@ public class TransformTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banners Raised");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
-        addTarget(playerB, "Awoken Horror");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -440,4 +467,31 @@ public class TransformTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testMoonmistDelver() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Delver of Secrets");
+        addCard(Zone.HAND, playerA, "Moonmist", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Delver of Secrets");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Delver of Secrets", 0);
+        assertPermanentCount(playerA, "Insectile Aberration", 1);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Moonmist");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Delver of Secrets", 1);
+        assertPermanentCount(playerA, "Insectile Aberration", 0);
+    }
 }

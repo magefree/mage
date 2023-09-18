@@ -21,8 +21,7 @@ public final class Fortify extends CardImpl {
 
         // Choose one - Creatures you control get +2/+0 until end of turn; or creatures you control get +0/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
-        Mode mode = new Mode();
-        mode.addEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostControlledEffect(0, 2, Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
     }
 

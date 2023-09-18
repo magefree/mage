@@ -35,10 +35,10 @@ public final class CurseOfStalkedPrey extends CardImpl {
 
 
         // Enchant player
-        TargetPlayer target = new TargetPlayer();
-        this.getSpellAbility().addTarget(target);
+        TargetPlayer auraTarget = new TargetPlayer();
+        this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(target.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature.
@@ -62,7 +62,7 @@ class CurseOfStalkedPreyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
     }
 
-    public CurseOfStalkedPreyTriggeredAbility(final CurseOfStalkedPreyTriggeredAbility ability) {
+    private CurseOfStalkedPreyTriggeredAbility(final CurseOfStalkedPreyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,7 +83,7 @@ class CurseOfStalkedPreyTriggeredAbility extends TriggeredAbilityImpl {
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && event.getTargetId().equals(player.getId())) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
+                    getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId(), game));
                        return true;
                 }
             }

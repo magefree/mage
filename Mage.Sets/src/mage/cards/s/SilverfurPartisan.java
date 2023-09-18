@@ -55,7 +55,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public CreaturesYouControlBecomesTargetTriggeredAbility(final CreaturesYouControlBecomesTargetTriggeredAbility ability) {
+    private CreaturesYouControlBecomesTargetTriggeredAbility(final CreaturesYouControlBecomesTargetTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,7 +83,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
                         || object.isSorcery(game)) {
                     if (getTargets().isEmpty()) {
                         for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                         }
                     }
                     return true;

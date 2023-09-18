@@ -29,7 +29,7 @@ public class DemonicCollusionTest extends CardTestPlayerBase {
 
         // cast with buyback
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Demonic Collusion");
-        setChoice(playerA, "Yes"); // use buyback
+        setChoice(playerA, true); // use buyback
         setChoice(playerA, "Forest"); // pay
         setChoice(playerA, "Forest"); // pay
         addTarget(playerA, "Mountain"); // return from lib
@@ -40,7 +40,6 @@ public class DemonicCollusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -62,7 +61,7 @@ public class DemonicCollusionTest extends CardTestPlayerBase {
 
         // cast with buyback
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Demonic Collusion");
-        setChoice(playerA, "Yes"); // use buyback
+        setChoice(playerA, true); // use buyback
         setChoice(playerA, "Forest"); // pay
         setChoice(playerA, "Forest"); // pay
         addTarget(playerA, "Mountain"); // return from lib
@@ -73,6 +72,5 @@ public class DemonicCollusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

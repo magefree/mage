@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -20,23 +21,19 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class WildInstincts extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public WildInstincts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Target creature you control gets +2/+2 until end of turn. It fights target creature an opponent controls.
-        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
-        getSpellAbility().addEffect(effect);
+        Effect boostTargetEffect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+        getSpellAbility().addEffect(boostTargetEffect);
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        effect = new FightTargetsEffect();
-        effect.setText("It fights target creature an opponent controls <i>(Each deals damage equal to its power to each other)</i>");
-        getSpellAbility().addEffect(effect);
-        getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        Effect fightTargetsEffect = new FightTargetsEffect();
+        fightTargetsEffect.setText("It fights target creature an opponent controls. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>");
+        getSpellAbility().addEffect(fightTargetsEffect);
+
+        getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 
     private WildInstincts(final WildInstincts card) {

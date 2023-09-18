@@ -51,7 +51,7 @@ class ExertInfluenceEffect extends OneShotEffect {
         this.staticText = "Gain control of target creature if its power is less than or equal to the number of colors of mana spent to cast this spell";
     }
 
-    public ExertInfluenceEffect(final ExertInfluenceEffect effect) {
+    private ExertInfluenceEffect(final ExertInfluenceEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class ExertInfluenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && sourceObject != null) {

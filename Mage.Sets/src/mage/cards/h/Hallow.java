@@ -49,7 +49,7 @@ class HallowPreventDamageByTargetEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way";
     }
 
-    public HallowPreventDamageByTargetEffect(final HallowPreventDamageByTargetEffect effect) {
+    private HallowPreventDamageByTargetEffect(final HallowPreventDamageByTargetEffect effect) {
         super(effect);
     }
 

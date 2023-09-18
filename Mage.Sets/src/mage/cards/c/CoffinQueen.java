@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -44,7 +43,7 @@ public final class CoffinQueen extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {2}{B}, {tap}: Put target creature card from a graveyard onto the battlefield under your control. When Coffin Queen becomes untapped or you lose control of Coffin Queen, exile that creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         ability.addEffect(new CoffinQueenCreateDelayedTriggerEffect());
@@ -69,7 +68,7 @@ class CoffinQueenCreateDelayedTriggerEffect extends OneShotEffect {
         this.staticText = "When {this} becomes untapped or you lose control of {this}, exile that creature.";
     }
 
-    public CoffinQueenCreateDelayedTriggerEffect(final CoffinQueenCreateDelayedTriggerEffect effect) {
+    private CoffinQueenCreateDelayedTriggerEffect(final CoffinQueenCreateDelayedTriggerEffect effect) {
         super(effect);
     }
 
@@ -97,14 +96,15 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new ExileTargetEffect(), Duration.EndOfGame, true);
     }
 
-    CoffinQueenDelayedTriggeredAbility(CoffinQueenDelayedTriggeredAbility ability) {
+    private CoffinQueenDelayedTriggeredAbility(final CoffinQueenDelayedTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.LOST_CONTROL
-                || event.getType() == GameEvent.EventType.UNTAPPED;
+                || event.getType() == GameEvent.EventType.UNTAPPED
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -113,8 +113,16 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
                 && event.getTargetId().equals(this.getSourceId())) {
             return true;
         }
-        return EventType.UNTAPPED == event.getType()
-                && event.getTargetId() != null && event.getTargetId().equals(getSourceId());
+        if (EventType.UNTAPPED == event.getType()
+                && event.getTargetId() != null
+                && event.getTargetId().equals(getSourceId())) {
+            return true;
+        }
+        if (EventType.ZONE_CHANGE == event.getType()
+                && event.getTargetId().equals(this.getSourceId())) {
+            return true;
+        }
+        return false;
     }
 
     @Override

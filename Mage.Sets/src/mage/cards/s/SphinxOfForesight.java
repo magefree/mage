@@ -43,7 +43,7 @@ public final class SphinxOfForesight extends CardImpl {
 
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new ScryEffect(1),
+                Zone.BATTLEFIELD, new ScryEffect(1, false),
                 TargetController.YOU, false
         ));
     }

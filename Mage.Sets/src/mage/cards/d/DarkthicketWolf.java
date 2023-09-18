@@ -27,7 +27,7 @@ public final class DarkthicketWolf extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{G}: Darkthicket Wolf gets +2/+2 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private DarkthicketWolf(final DarkthicketWolf card) {

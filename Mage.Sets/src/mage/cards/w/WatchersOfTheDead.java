@@ -54,7 +54,7 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
         this.staticText = "Each opponent chooses 2 cards in their graveyard and exiles the rest";
     }
 
-    public WatchersOfTheDeadEffect(final WatchersOfTheDeadEffect effect) {
+    private WatchersOfTheDeadEffect(final WatchersOfTheDeadEffect effect) {
         super(effect);
     }
 
@@ -73,10 +73,10 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
                 if (opponent != null
                         && !opponent.equals(controller)) {
                     TargetCard target = new TargetCardInYourGraveyard(2, 2, new FilterCard());
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     Cards cardsInGraveyard = opponent.getGraveyard();
                     if (cardsInGraveyard.size() > 1) {
-                        opponent.choose(outcome, cardsInGraveyard, target, game);
+                        opponent.choose(outcome, cardsInGraveyard, target, source, game);
                         for (Card cardInGraveyard : cardsInGraveyard.getCards(game)) {
                             if (!target.getTargets().contains(cardInGraveyard.getId())) {
                                 opponent.moveCardToExileWithInfo(cardInGraveyard, CardUtil.getCardExileZoneId(game, source.getId()),

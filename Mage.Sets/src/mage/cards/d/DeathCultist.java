@@ -31,7 +31,7 @@ public final class DeathCultist extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new LoseLifeTargetEffect(1),
                 new SacrificeSourceCost());
-        ability.addEffect(new GainLifeEffect(1));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

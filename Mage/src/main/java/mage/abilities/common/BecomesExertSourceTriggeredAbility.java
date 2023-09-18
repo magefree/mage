@@ -8,16 +8,16 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesExertSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesExertSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("When {this} becomes exerted, ");
     }
 
-    public BecomesExertSourceTriggeredAbility(final BecomesExertSourceTriggeredAbility ability) {
+    protected BecomesExertSourceTriggeredAbility(final BecomesExertSourceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -34,10 +34,5 @@ public class BecomesExertSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} becomes exerted, " ;
     }
 }

@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -73,7 +72,7 @@ class VoidMirrorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) getValue("spellCast");
         if (spell != null) {
-            spell.counter(source, game);
+            game.getStack().counter(spell.getId(), source, game);
             return true;
         }
         return false;

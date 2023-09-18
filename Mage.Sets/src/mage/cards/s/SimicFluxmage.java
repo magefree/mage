@@ -38,7 +38,7 @@ public final class SimicFluxmage extends CardImpl {
         this.addAbility(new EvolveAbility());
 
         // 1{U}, {T}: Move a +1/+1 counter from Simic Fluxmage onto target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveCounterFromSourceToTargetEffect(),new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveCounterFromSourceToTargetEffect(),new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -62,7 +62,7 @@ class MoveCounterFromSourceToTargetEffect extends OneShotEffect {
         this.staticText = "Move a +1/+1 counter from {this} onto target creature";
     }
 
-    public MoveCounterFromSourceToTargetEffect(final MoveCounterFromSourceToTargetEffect effect) {
+    private MoveCounterFromSourceToTargetEffect(final MoveCounterFromSourceToTargetEffect effect) {
         super(effect);
     }
 

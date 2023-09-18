@@ -1,8 +1,6 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -28,11 +26,8 @@ public final class AerialVolley extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Aerial Volley deals 3 damage divided as you choose among one, two, or three target creatures with flying.
-        Effect effect = new DamageMultiEffect(3);
-        effect.setText("{this} deals 3 damage divided as you choose among one, two, or three target creatures with flying");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DamageMultiEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, filter));
-
     }
 
     private AerialVolley(final AerialVolley card) {

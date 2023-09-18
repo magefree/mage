@@ -48,7 +48,7 @@ public final class ImpendingDisaster extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            return game.getBattlefield().count(new FilterLandPermanent(), source.getSourceId(), source.getControllerId(), game) >= 7;
+            return game.getBattlefield().count(new FilterLandPermanent(), source.getControllerId(), source, game) >= 7;
         }
     }
 }

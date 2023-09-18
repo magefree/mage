@@ -9,13 +9,18 @@ public enum AbilityWord {
 
     ADDENDUM("Addendum"),
     ADAMANT("Adamant"),
+    ALLIANCE("Alliance"),
     BATTALION("Battalion"),
     BLOODRUSH("Bloodrush"),
+    CELEBRATION("Celebration"),
     CHANNEL("Channel"),
     CHROMA("Chroma"),
     COHORT("Cohort"),
     CONSTELLATION("Constellation"),
     CONVERGE("Converge"),
+    CORRUPTED("Corrupted"),
+    COUNCILS_DILEMMA("Council's dilemma"),
+    COVEN("Coven"),
     DELIRIUM("Delirium"),
     DOMAIN("Domain"),
     EMINENCE("Eminence"),
@@ -42,13 +47,15 @@ public enum AbilityWord {
     RAID("Raid"),
     RALLY("Rally"),
     REVOLT("Revolt"),
+    SECRET_COUNCIL("Secret council"),
     SPELL_MASTERY("Spell mastery"),
     STRIVE("Strive"),
     SWEEP("Sweep"),
     TEMPTING_OFFER("Tempting offer"),
     THRESHOLD("Threshold"),
     UNDERGROWTH("Undergrowth"),
-    WILL_OF_THE_COUNCIL("Will of the council");
+    WILL_OF_THE_COUNCIL("Will of the council"),
+    WILL_OF_THE_PLANESWALKERS("Will of the planeswalkers");
 
     private final String text;
 

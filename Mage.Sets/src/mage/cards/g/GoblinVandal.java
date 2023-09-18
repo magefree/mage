@@ -21,7 +21,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -43,7 +42,7 @@ public final class GoblinVandal extends CardImpl {
         // Whenever Goblin Vandal attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and Goblin Vandal assigns no combat damage this turn.
         Effect effect = new DestroyTargetEffect();
         effect.setText("destroy target artifact defending player controls");
-        DoIfCostPaid effect2 = new DoIfCostPaid(effect, new ManaCostsImpl("{R}"), "Pay {R} to destroy artifact of defending player?");
+        DoIfCostPaid effect2 = new DoIfCostPaid(effect, new ManaCostsImpl<>("{R}"), "Pay {R} to destroy artifact of defending player?");
         effect = new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn);
         effect.setText("and {this} assigns no combat damage this turn");
         effect2.addEffect(effect);
@@ -67,7 +66,7 @@ class GoblinVandalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, false );
     }
 
-    public GoblinVandalTriggeredAbility(final GoblinVandalTriggeredAbility ability) {
+    private GoblinVandalTriggeredAbility(final GoblinVandalTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,6 +100,6 @@ class GoblinVandalTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and {this} assigns no combat damage this turn";
+        return "Whenever {this} attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and {this} assigns no combat damage this turn.";
     }
 }

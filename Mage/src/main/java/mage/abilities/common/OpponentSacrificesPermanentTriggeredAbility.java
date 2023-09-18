@@ -14,9 +14,10 @@ public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilit
 
     public OpponentSacrificesPermanentTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever an opponent sacrifices a nontoken permanent, ");
     }
 
-    public OpponentSacrificesPermanentTriggeredAbility(final OpponentSacrificesPermanentTriggeredAbility ability) {
+    protected OpponentSacrificesPermanentTriggeredAbility(final OpponentSacrificesPermanentTriggeredAbility ability) {
         super(ability);
     }
 
@@ -27,21 +28,16 @@ public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilit
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-    if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
+        if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             MageObject object = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (object instanceof Permanent) {
                 for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 }
                 return true;
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent sacrifices a nontoken permanent, " ;
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -6,14 +5,13 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPlayer;
@@ -24,12 +22,11 @@ import mage.target.TargetPlayer;
  */
 public final class SagesRowDenizen extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another blue creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another blue creature");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public SagesRowDenizen(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +38,7 @@ public final class SagesRowDenizen extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another blue creature enters the battlefield under your control, target player puts the top two cards of their library into their graveyard.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), filter, false, null, true);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter, false, null, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

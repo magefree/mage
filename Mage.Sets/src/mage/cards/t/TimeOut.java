@@ -53,7 +53,7 @@ class TimeOutEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. Put target nonland permanent into its owner's library just beneath the top X cards of that library, where X is the result";
     }
 
-    public TimeOutEffect(final TimeOutEffect effect) {
+    private TimeOutEffect(final TimeOutEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class TimeOutEffect extends OneShotEffect {
                 if (owner == null) {
                     return false;
                 }
-                int amount = controller.rollDice(source, game, 6);
+                int amount = controller.rollDice(outcome, source, game, 6);
                 controller.putCardOnTopXOfLibrary(permanent, game, source, amount, true);
                 return true;
             }

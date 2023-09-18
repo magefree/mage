@@ -3,6 +3,7 @@ package mage.abilities.costs.common;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -19,13 +20,14 @@ public class DiscardXTargetCost extends VariableCostImpl {
         this(filter, false);
     }
 
-    public DiscardXTargetCost(FilterCard filter, boolean additionalCostText) {
-        super(filter.getMessage() + " to discard");
-        this.text = (additionalCostText ? "as an additional cost to cast this spell, discard " : "Discard ") + xText + ' ' + filter.getMessage();
+    public DiscardXTargetCost(FilterCard filter, boolean useAsAdditionalCost) {
+        super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
+                filter.getMessage() + " to discard");
+        this.text = (useAsAdditionalCost ? "discard " : "Discard ") + xText + ' ' + filter.getMessage();
         this.filter = filter;
     }
 
-    public DiscardXTargetCost(final DiscardXTargetCost cost) {
+    protected DiscardXTargetCost(final DiscardXTargetCost cost) {
         super(cost);
         this.filter = cost.filter;
     }

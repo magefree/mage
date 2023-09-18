@@ -33,7 +33,6 @@ public class BaneAlleyBrokerTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 2);
         assertHandCount(playerA, "Sejiri Merfolk", 1);
@@ -65,7 +64,6 @@ public class BaneAlleyBrokerTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 4);
         assertHandCount(playerA, "Sejiri Merfolk", 1);

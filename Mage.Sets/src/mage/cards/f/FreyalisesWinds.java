@@ -52,7 +52,7 @@ class FreyalisesWindsReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a permanent with a wind counter on it would untap during its controller's untap step, remove all wind counters from it instead";
     }
 
-    FreyalisesWindsReplacementEffect(final FreyalisesWindsReplacementEffect effect) {
+    private FreyalisesWindsReplacementEffect(final FreyalisesWindsReplacementEffect effect) {
         super(effect);
     }
 

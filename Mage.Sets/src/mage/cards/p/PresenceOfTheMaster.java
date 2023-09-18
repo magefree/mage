@@ -47,7 +47,7 @@ class PresenceOfTheMasterTriggeredAbility extends TriggeredAbilityImpl {
     }
 
 
-    public PresenceOfTheMasterTriggeredAbility(final PresenceOfTheMasterTriggeredAbility abiltity) {
+    private PresenceOfTheMasterTriggeredAbility(final PresenceOfTheMasterTriggeredAbility abiltity) {
         super(abiltity);
     }
 
@@ -75,7 +75,7 @@ class PresenceOfTheMasterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts an enchantment spell, counter it";
+        return "Whenever a player casts an enchantment spell, counter it.";
     }
 }
 
@@ -86,7 +86,7 @@ class CounterEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public CounterEffect(final CounterEffect effect) {
+    private CounterEffect(final CounterEffect effect) {
         super(effect);
     }
 

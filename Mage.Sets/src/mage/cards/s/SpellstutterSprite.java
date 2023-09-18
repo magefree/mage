@@ -62,7 +62,7 @@ public final class SpellstutterSprite extends CardImpl {
     }
 }
 
-enum SpellstutterSpritePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum SpellstutterSpritePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
     private static final FilterPermanent filter = new FilterPermanent();
 

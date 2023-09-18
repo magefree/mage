@@ -23,7 +23,7 @@ public class CantBeBlockedByAllSourceEffect extends RestrictionEffect {
                 + filterBlockedBy.getMessage();
     }
 
-    public CantBeBlockedByAllSourceEffect(final CantBeBlockedByAllSourceEffect effect) {
+    protected CantBeBlockedByAllSourceEffect(final CantBeBlockedByAllSourceEffect effect) {
         super(effect);
         this.filterBlockedBy = effect.filterBlockedBy;
     }
@@ -35,7 +35,7 @@ public class CantBeBlockedByAllSourceEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filterBlockedBy.match(blocker, source.getSourceId(), source.getControllerId(), game);
+        return !filterBlockedBy.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

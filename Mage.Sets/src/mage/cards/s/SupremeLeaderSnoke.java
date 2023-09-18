@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
@@ -40,9 +39,9 @@ public final class SupremeLeaderSnoke extends CardImpl {
     public SupremeLeaderSnoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNOKE);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Put a loyalty counter on Supreme Leader Snoke for each life lost by all opponents from noncombat sources this turn.
         Ability ability1 = new LoyaltyAbility(new SupremeLeaderSnokeCounterEffect(CounterType.LOYALTY.createInstance()), 1);
@@ -124,7 +123,7 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
         staticText = "Put a loyalty counter on {this} for each life lost by all opponents from noncombat sources this turn";
     }
 
-    public SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
+    private SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
     }

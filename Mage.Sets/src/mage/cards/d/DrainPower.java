@@ -59,7 +59,7 @@ class DrainPowerEffect extends OneShotEffect {
         this.staticText = "Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way";
     }
 
-    public DrainPowerEffect(final DrainPowerEffect effect) {
+    private DrainPowerEffect(final DrainPowerEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class DrainPowerEffect extends OneShotEffect {
                     FilterLandPermanent filter2 = new FilterLandPermanent("land you control to tap for mana (remaining: " + permList.size() + ')');
                     filter2.add(new PermanentInListPredicate(permList));
                     target = new TargetPermanent(1, 1, filter2, true);
-                    while (!target.isChosen() && target.canChoose(source.getSourceId(), targetPlayer.getId(), game) && targetPlayer.canRespond()) {
+                    while (!target.isChosen() && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
                         targetPlayer.chooseTarget(Outcome.Neutral, target, source, game);
                     }
                     permanent = game.getPermanent(target.getFirstTarget());

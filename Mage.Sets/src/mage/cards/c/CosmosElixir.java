@@ -47,6 +47,6 @@ enum CosmosElixirCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getLife() > game.getLife();
+        return player != null && player.getLife() > game.getStartingLife();
     }
 }

@@ -58,14 +58,14 @@ class DesperateGambitEffect extends PreventionEffectImpl {
         this.target = new TargetControlledSource();
     }
 
-    public DesperateGambitEffect(final DesperateGambitEffect effect) {
+    private DesperateGambitEffect(final DesperateGambitEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
 
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game);
         Player you = game.getPlayer(source.getControllerId());
         if(you != null) {
             wonFlip = you.flipCoin(source, game, true);
@@ -124,7 +124,7 @@ class TargetControlledSource extends TargetSource {
         super(1, 1, new FilterObject("source you control"));
     }
 
-    public TargetControlledSource(final TargetControlledSource target) {
+    private TargetControlledSource(final TargetControlledSource target) {
         super(target);
     }
 

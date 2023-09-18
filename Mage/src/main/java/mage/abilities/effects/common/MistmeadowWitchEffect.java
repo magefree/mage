@@ -1,14 +1,14 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -29,12 +29,14 @@ public class MistmeadowWitchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player == null || permanent == null || sourceObject == null) {
+        if (player == null || permanent == null) {
             return false;
         }
-        player.moveCardsToExile(permanent, source, game, true, CardUtil.getExileZoneId(game, source), sourceObject.getName());
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(Zone.BATTLEFIELD, "return the exiled card to the battlefield under its owner's control")), source);
+        player.moveCardsToExile(permanent, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
+        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
+        effect.setText("Return the exiled card to the battlefield under its owner's control");
+        effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         return true;
     }
 

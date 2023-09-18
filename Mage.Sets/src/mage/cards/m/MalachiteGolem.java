@@ -25,7 +25,7 @@ public final class MalachiteGolem extends CardImpl {
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private MalachiteGolem(final MalachiteGolem card) {

@@ -2,6 +2,7 @@
 package mage.cards.l;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -58,7 +59,7 @@ public final class LunarAvenger extends CardImpl {
 
 class LunarAvengerEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Flying");
@@ -71,7 +72,7 @@ class LunarAvengerEffect extends OneShotEffect {
         staticText = "{this} gains your choice of flying, first strike, or haste until end of turn";
     }
 
-    public LunarAvengerEffect(final LunarAvengerEffect effect) {
+    private LunarAvengerEffect(final LunarAvengerEffect effect) {
         super(effect);
     }
 

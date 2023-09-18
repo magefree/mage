@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ public final class PerplexingTest extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public PerplexingTest(UUID ownerId, CardSetInfo setInfo) {

@@ -39,7 +39,7 @@ public final class UtopiaSprawl extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As Utopia Sprawl enters the battlefield, choose a color.
@@ -62,7 +62,7 @@ class UtopiaSprawlEffect extends ManaEffect {
 
      UtopiaSprawlEffect() {
         super();
-        staticText = "its controller adds one mana of the chosen color";
+        staticText = "its controller adds an additional one mana of the chosen color";
     }
 
     private UtopiaSprawlEffect(final UtopiaSprawlEffect effect) {

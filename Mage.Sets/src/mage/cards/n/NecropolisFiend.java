@@ -24,7 +24,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -58,12 +58,12 @@ public final class NecropolisFiend extends CardImpl {
         effect.setText("Target creature gets -X/-X until end of turn");
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, effect,
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                1, 1, new FilterCard("cards from your graveyard")
+                1, 1, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD
         ), "Exile X cards from your graveyard"));
         ability.setTargetAdjuster(NecropolisFiendTargetAdjuster.instance);
         ability.setCostAdjuster(NecropolisFiendCostAdjuster.instance);

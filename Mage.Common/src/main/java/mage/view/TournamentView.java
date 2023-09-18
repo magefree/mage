@@ -53,7 +53,7 @@ public class TournamentView implements Serializable {
         tournamentState = tournament.getTournamentState();
 
         if (tournament.getTournamentState().equals("Drafting") && tournament.getDraft() != null) {
-            runningInfo = "booster/card: " + tournament.getDraft().getBoosterNum() + '/' + (tournament.getDraft().getCardNum() -1);
+            runningInfo = "booster/card: " + tournament.getDraft().getBoosterNum() + '/' + (tournament.getDraft().getCardNum());
         } else {
             runningInfo = "";
         }

@@ -214,14 +214,13 @@ public class CloneTest extends CardTestPlayerBase {
         setChoice(playerA, "Elf");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         setChoice(playerB, "Adaptive Automaton");
         setChoice(playerB, "Goblin");
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Adaptive Automaton", 1);
         Permanent original = getPermanent("Adaptive Automaton", playerA);
@@ -271,15 +270,14 @@ public class CloneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ixidron");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
-        
+
         assertPermanentCount(playerA, "Terastodon", 0);
         
         assertPermanentCount(playerA, "Ixidron", 1);

@@ -1,7 +1,5 @@
-    
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,12 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -28,31 +21,36 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class StormElemental extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public StormElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
         // {U}, Exile the top card of your library: Tap target creature with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new ExileTopCardLibraryCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // {U}, Exile the top card of your library: If the exiled card is a snow land, Storm Elemental gets +1/+1 until end of turn.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StormElementalEffect(), new ManaCostsImpl("{U}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StormElementalEffect(), new ManaCostsImpl<>("{U}"));
         ability2.addCost(new ExileTopCardLibraryCost());
         this.addAbility(ability2);
     }
@@ -70,6 +68,7 @@ public final class StormElemental extends CardImpl {
 class StormElementalEffect extends OneShotEffect {
 
     private static final FilterLandCard filter = new FilterLandCard("snow land");
+
     static {
         filter.add(SuperType.SNOW.getPredicate());
     }
@@ -79,7 +78,7 @@ class StormElementalEffect extends OneShotEffect {
         this.staticText = "If the exiled card is a snow land, {this} gets +1/+1 until end of turn";
     }
 
-    public StormElementalEffect(final StormElementalEffect effect) {
+    private StormElementalEffect(final StormElementalEffect effect) {
         super(effect);
     }
 
@@ -117,7 +116,7 @@ class ExileTopCardLibraryCost extends CostImpl {
         this.text = "Exile the top card of your library";
     }
 
-    public ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
+    private ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
         super(cost);
         this.card = cost.getCard();
     }

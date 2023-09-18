@@ -24,7 +24,7 @@ public final class DrudgeBeetle extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Scavenge {5}{G} ({5}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{5}{G}")));
     }
 
     private DrudgeBeetle(final DrudgeBeetle card) {

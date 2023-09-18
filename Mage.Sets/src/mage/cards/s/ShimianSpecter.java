@@ -73,7 +73,7 @@ class ShimianSpecterEffect extends OneShotEffect {
                 + "player shuffles";
     }
 
-    public ShimianSpecterEffect(final ShimianSpecterEffect effect) {
+    private ShimianSpecterEffect(final ShimianSpecterEffect effect) {
         super(effect);
     }
 
@@ -91,9 +91,9 @@ class ShimianSpecterEffect extends OneShotEffect {
 
             // You choose a nonland card from it
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard());
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Card chosenCard = null;
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+            if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());
             }

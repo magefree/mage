@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -29,8 +28,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -39,9 +36,9 @@ public final class TeveshSzatDoomOfFools extends CardImpl {
     public TeveshSzatDoomOfFools(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SZAT);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: Create two 0/1 black Thrull creature tokens.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new BreedingPitThrullToken(), 2), 2));
@@ -80,7 +77,7 @@ class TeveshSzatDoomOfFoolsSacrificeEffect extends OneShotEffect {
     }
 
     TeveshSzatDoomOfFoolsSacrificeEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "you may sacrifice another creature or planeswalker. If you do, draw two cards, " +
                 "then draw another card if the sacrificed permanent was a commander";
     }
@@ -101,11 +98,11 @@ class TeveshSzatDoomOfFoolsSacrificeEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+        target.withNotTarget(true);
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
-        target.choose(outcome, source.getControllerId(), source.getSourceId(), game);
+        target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -159,7 +156,7 @@ class TeveshSzatDoomOfFoolsCommanderEffect extends OneShotEffect {
 
         // gain control of all commanders
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             game.addEffect(new GainControlTargetEffect(
                     Duration.Custom, true

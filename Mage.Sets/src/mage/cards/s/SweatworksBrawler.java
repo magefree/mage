@@ -28,7 +28,7 @@ public final class SweatworksBrawler extends CardImpl {
         addAbility(new ImproviseAbility());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
     }
 
     private SweatworksBrawler(final SweatworksBrawler card) {

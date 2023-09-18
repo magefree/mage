@@ -34,17 +34,17 @@ public enum UrzaTerrainValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (subType != SubType.MINE && game.getBattlefield().count(
-                mineFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+                mineFilter, sourceAbility.getControllerId(), sourceAbility, game
         ) < 1) {
             return 1;
         }
         if (subType != SubType.TOWER && game.getBattlefield().count(
-                towerFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+                towerFilter, sourceAbility.getControllerId(), sourceAbility, game
         ) < 1) {
             return 1;
         }
         if (subType != SubType.POWER_PLANT && game.getBattlefield().count(
-                powerPlantFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+                powerPlantFilter, sourceAbility.getControllerId(), sourceAbility, game
         ) < 1) {
             return 1;
         }

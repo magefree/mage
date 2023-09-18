@@ -30,7 +30,7 @@ public final class PardicCollaborator extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // {B}: Pardic Collaborator gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private PardicCollaborator(final PardicCollaborator card) {

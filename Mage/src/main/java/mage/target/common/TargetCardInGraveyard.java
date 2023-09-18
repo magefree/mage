@@ -25,18 +25,23 @@ public class TargetCardInGraveyard extends TargetCard {
     }
 
     public TargetCardInGraveyard(int numTargets, FilterCard filter) {
-        this(numTargets, numTargets, filter);
+        this(numTargets, numTargets, filter, false);
     }
 
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, defaultFilter);
+        this(minNumTargets, maxNumTargets, defaultFilter, false);
     }
 
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
+        this(minNumTargets, maxNumTargets, filter, false);
     }
 
-    public TargetCardInGraveyard(final TargetCardInGraveyard target) {
+    public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
+        this.withNotTarget(notTarget);
+    }
+
+    protected TargetCardInGraveyard(final TargetCardInGraveyard target) {
         super(target);
     }
 

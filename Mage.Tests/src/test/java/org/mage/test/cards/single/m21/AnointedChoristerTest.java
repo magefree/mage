@@ -24,7 +24,6 @@ public class AnointedChoristerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 24);
         assertLife(playerB, 16);

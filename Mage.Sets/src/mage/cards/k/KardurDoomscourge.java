@@ -10,17 +10,12 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
+import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
+import mage.watchers.common.AttackedThisTurnWatcher;
 import java.util.UUID;
 
 /**
@@ -28,16 +23,12 @@ import java.util.UUID;
  */
 public final class KardurDoomscourge extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("an attacking creature");
-
-    static {
-        filter.add(AttackingPredicate.instance);
-    }
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("an attacking creature");
 
     public KardurDoomscourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(4);
@@ -48,6 +39,7 @@ public final class KardurDoomscourge extends CardImpl {
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, Duration.UntilYourNextTurn
         ).setText("until your next turn, creatures your opponents control attack each combat if able"));
         ability.addEffect(new KardurDoomscourgeEffect());
+        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
 
         // Whenever an attacking creature dies, each opponent loses 1 life and you gain 1 life.

@@ -2,6 +2,7 @@
 package mage.cards.a;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -63,7 +64,7 @@ class AnimationModuleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new ServoToken()), new GenericManaCost(1)), false);
     }
 
-    AnimationModuleTriggeredAbility(final AnimationModuleTriggeredAbility ability) {
+    private AnimationModuleTriggeredAbility(final AnimationModuleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -102,7 +103,7 @@ class AnimationModuleEffect extends OneShotEffect {
         this.staticText = "Choose a counter on target permanent or player. Give that permanent or player another counter of that kind";
     }
 
-    AnimationModuleEffect(final AnimationModuleEffect effect) {
+    private AnimationModuleEffect(final AnimationModuleEffect effect) {
         super(effect);
     }
 
@@ -125,7 +126,7 @@ class AnimationModuleEffect extends OneShotEffect {
                         }
                     } else {
                         Choice choice = new ChoiceImpl(true);
-                        Set<String> choices = new HashSet<>(permanent.getCounters(game).size());
+                        Set<String> choices = new LinkedHashSet<>();
                         for (Counter counter : permanent.getCounters(game).values()) {
                             choices.add(counter.getName());
                         }
@@ -155,7 +156,7 @@ class AnimationModuleEffect extends OneShotEffect {
                             }
                         } else {
                             Choice choice = new ChoiceImpl(true);
-                            Set<String> choices = new HashSet<>(player.getCounters().size());
+                            Set<String> choices = new LinkedHashSet<>();
                             for (Counter counter : player.getCounters().values()) {
                                 choices.add(counter.getName());
                             }

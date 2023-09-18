@@ -29,7 +29,7 @@ public final class UnbreakableFormation extends CardImpl {
         // Creatures you control gain indestructible until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURE
+                StaticFilters.FILTER_PERMANENT_CREATURES
         ));
 
         // Addendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures, and they also gain vigilance until end of turn.

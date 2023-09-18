@@ -64,7 +64,7 @@ class DevouringRageEffect extends OneShotEffect {
         this.staticText = "Target creature gets +3/+0 until end of turn. For each Spirit sacrificed this way, that creature gets an additional +3/+0 until end of turn";
     }
 
-    public DevouringRageEffect(final DevouringRageEffect effect) {
+    private DevouringRageEffect(final DevouringRageEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class DevouringRageEffect extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             ContinuousEffect effect = new BoostTargetEffect(amount, 0, Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(targetCreature.getId()));
+            effect.setTargetPointer(new FixedTarget(targetCreature.getId(), game));
             game.addEffect(effect, source);
             return true;
         }

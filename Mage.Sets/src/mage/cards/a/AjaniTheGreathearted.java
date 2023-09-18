@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -36,9 +35,9 @@ public final class AjaniTheGreathearted extends CardImpl {
     public AjaniTheGreathearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
@@ -52,7 +51,7 @@ public final class AjaniTheGreathearted extends CardImpl {
 
         // -2: Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.
         Ability ability = new LoyaltyAbility(new AddCountersAllEffect(
-                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURES
+                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
         ), -2);
         ability.addEffect(new AddCountersAllEffect(
                 CounterType.LOYALTY.createInstance(), filter

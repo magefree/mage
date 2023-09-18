@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class FickleEfreet extends CardImpl {
 
     public FickleEfreet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.EFREET);
 
         this.power = new MageInt(5);
@@ -49,7 +48,6 @@ public final class FickleEfreet extends CardImpl {
     }
 }
 
-
 class FickleEfreetChangeControlEffect extends OneShotEffect {
 
     public FickleEfreetChangeControlEffect() {
@@ -57,7 +55,7 @@ class FickleEfreetChangeControlEffect extends OneShotEffect {
         this.staticText = "flip a coin at end of combat. If you lose the flip, choose one of your opponents. That player gains control of {this}";
     }
 
-    public FickleEfreetChangeControlEffect(final FickleEfreetChangeControlEffect effect) {
+    private FickleEfreetChangeControlEffect(final FickleEfreetChangeControlEffect effect) {
         super(effect);
     }
 
@@ -74,15 +72,15 @@ class FickleEfreetChangeControlEffect extends OneShotEffect {
             if (!controller.flipCoin(source, game, true)) {
                 if (sourcePermanent != null) {
                     Target target = new TargetOpponent(true);
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                    if (target.canChoose(controller.getId(), source, game)) {
+                        while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                             controller.chooseTarget(outcome, target, source, game);
                         }
                     }
                     Player chosenOpponent = game.getPlayer(target.getFirstTarget());
                     if (chosenOpponent != null) {
                         ContinuousEffect effect = new FickleEfreetGainControlEffect(Duration.Custom, target.getFirstTarget());
-                        effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
                         game.addEffect(effect, source);
                         game.informPlayers(chosenOpponent.getLogName() + " has gained control of " + sourcePermanent.getLogName());
                         return true;
@@ -101,9 +99,10 @@ class FickleEfreetGainControlEffect extends ContinuousEffectImpl {
     public FickleEfreetGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "That player gains control of {this}";
     }
 
-    public FickleEfreetGainControlEffect(final FickleEfreetGainControlEffect effect) {
+    private FickleEfreetGainControlEffect(final FickleEfreetGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }
@@ -123,10 +122,5 @@ class FickleEfreetGainControlEffect extends ContinuousEffectImpl {
             return permanent.changeControllerId(controller, game, source);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "That player gains control of {this}";
     }
 }

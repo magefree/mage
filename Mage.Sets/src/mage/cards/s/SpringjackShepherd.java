@@ -9,6 +9,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.ManaType;
 import mage.constants.SubType;
@@ -35,7 +36,7 @@ public final class SpringjackShepherd extends CardImpl {
         effect.setText("create a 0/1 white Goat creature token for each white mana symbol in the mana costs of permanents you control.");
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 effect, false)
-                .withFlavorWord("Chroma")
+                .setAbilityWord(AbilityWord.CHROMA)
                 .addHint(new ValueHint("White mana symbols in your permanents", xValue))
         );
     }

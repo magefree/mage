@@ -26,7 +26,7 @@ public final class PhyrexianMonitor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}: Regenerate Phyrexian Monitor.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private PhyrexianMonitor(final PhyrexianMonitor card) {

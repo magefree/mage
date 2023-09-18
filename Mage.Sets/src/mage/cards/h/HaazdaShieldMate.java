@@ -30,10 +30,10 @@ public final class HaazdaShieldMate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, sacrifice Haazda Shield Mate unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), TargetController.YOU, false));
         
         // {W}: The next time a source of your choice would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private HaazdaShieldMate(final HaazdaShieldMate card) {

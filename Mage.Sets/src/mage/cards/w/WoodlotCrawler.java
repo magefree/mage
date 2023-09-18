@@ -32,7 +32,7 @@ public final class WoodlotCrawler extends CardImpl {
 
     }
 
-    public WoodlotCrawler (final WoodlotCrawler card) {
+    private WoodlotCrawler(final WoodlotCrawler card) {
         super(card);
     }
 

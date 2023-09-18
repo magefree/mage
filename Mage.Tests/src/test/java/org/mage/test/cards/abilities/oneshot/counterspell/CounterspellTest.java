@@ -78,17 +78,15 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Memory Lapse", "Lightning Bolt");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Memory Lapse");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Memory Lapse", "Memory Lapse");
 
-        setChoice(playerA, "Yes"); // change the target
+        setChoice(playerA, true); // change the target
         addTarget(playerA, "Memory Lapse");
 
         setStrictChooseMode(true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Twincast", 1);
@@ -114,17 +112,15 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Lightning Bolt");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Counterspell");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Counterspell", "Counterspell");
 
-        setChoice(playerA, "Yes"); // change the target
+        setChoice(playerA, true); // change the target
         addTarget(playerA, "Counterspell");
 
         setStrictChooseMode(true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Twincast", 1);
@@ -150,17 +146,15 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Dissipate", "Lightning Bolt");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Dissipate");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Dissipate", "Dissipate");
 
-        setChoice(playerA, "Yes"); // change the target
+        setChoice(playerA, true); // change the target
         addTarget(playerA, "Dissipate");
 
         setStrictChooseMode(true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Twincast", 1);

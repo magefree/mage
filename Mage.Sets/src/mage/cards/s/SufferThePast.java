@@ -48,7 +48,7 @@ class SufferThePastEffect extends OneShotEffect {
         this.staticText = "Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life";
     }
 
-    public SufferThePastEffect(final SufferThePastEffect effect) {
+    private SufferThePastEffect(final SufferThePastEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class SufferThePastEffect extends OneShotEffect {
             int numberToTarget = Math.min(targetPlayer.getGraveyard().size(), source.getManaCostsToPay().getX());
             TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(numberToTarget, numberToTarget, filter);
             if (you != null) {
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
+                if (target.canChoose(source.getControllerId(), source, game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {

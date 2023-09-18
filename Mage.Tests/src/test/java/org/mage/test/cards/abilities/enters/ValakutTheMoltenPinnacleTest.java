@@ -114,9 +114,9 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scapeshift");
         addTarget(playerA, "Forest^Forest^Forest^Forest^Forest^Forest^Forest");
-        setChoice(playerA, "No"); // Stomping Ground can be tapped
-        setChoice(playerA, "No"); // Stomping Ground can be tapped
-        setChoice(playerA, "No"); // Stomping Ground can be tapped
+        setChoice(playerA, false); // Stomping Ground can be tapped
+        setChoice(playerA, false); // Stomping Ground can be tapped
+        setChoice(playerA, false); // Stomping Ground can be tapped
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 

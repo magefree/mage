@@ -2,9 +2,9 @@ package mage.cards.s;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -60,7 +60,7 @@ class StabilizerEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject == null) {
             return null;
         }
@@ -73,6 +73,6 @@ class StabilizerEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
         Ability ability = game.getAbility(event.getTargetId(), event.getSourceId()).orElse(null);
-        return ability instanceof LoyaltyAbility;
+        return ability instanceof CyclingAbility;
     }
 }

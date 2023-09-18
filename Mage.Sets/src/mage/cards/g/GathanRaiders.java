@@ -35,7 +35,7 @@ public final class GathanRaiders extends CardImpl {
                 new BoostSourceEffect(2,2,Duration.WhileOnBattlefield), HellbentCondition.instance,
                 "<i>Hellbent</i> &mdash; {this} gets +2/+2 as long as you have no cards in hand")));
         // Morph-Discard a card.
-        this.addAbility(new MorphAbility(this, new DiscardCardCost()));
+        this.addAbility(new MorphAbility(new DiscardCardCost()));
     }
 
     private GathanRaiders(final GathanRaiders card) {

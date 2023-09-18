@@ -50,7 +50,7 @@ class BloodcrazedGoblinEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless an opponent has been dealt damage this turn";
     }
 
-    public BloodcrazedGoblinEffect(final BloodcrazedGoblinEffect effect) {
+    private BloodcrazedGoblinEffect(final BloodcrazedGoblinEffect effect) {
         super(effect);
     }
 

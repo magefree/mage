@@ -20,14 +20,14 @@ public class CantBlockAllEffect extends RestrictionEffect {
         this.filter = filter;
     }
 
-    public CantBlockAllEffect(final CantBlockAllEffect effect) {
+    protected CantBlockAllEffect(final CantBlockAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override
@@ -42,6 +42,9 @@ public class CantBlockAllEffect extends RestrictionEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage()).append(" can't block");
         if (this.duration == Duration.EndOfTurn) {

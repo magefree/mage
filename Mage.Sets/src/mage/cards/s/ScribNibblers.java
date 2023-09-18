@@ -59,7 +59,7 @@ class ScribNibblersEffect extends OneShotEffect {
         this.staticText = "Exile the top card of target player's library. If it's a land card, you gain 1 life";
     }
 
-    public ScribNibblersEffect(final ScribNibblersEffect effect) {
+    private ScribNibblersEffect(final ScribNibblersEffect effect) {
         super(effect);
     }
 

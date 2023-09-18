@@ -46,9 +46,10 @@ class GrafMoleTriggeredAbility extends TriggeredAbilityImpl {
     public GrafMoleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3));
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }
 
-    public GrafMoleTriggeredAbility(final GrafMoleTriggeredAbility ability) {
+    private GrafMoleTriggeredAbility(final GrafMoleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -66,10 +67,5 @@ class GrafMoleTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Clue, " ;
     }
 }

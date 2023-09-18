@@ -34,7 +34,7 @@ public final class ServantOfTymaret extends CardImpl {
         this.addAbility(new InspiredAbility(new ServantOfTymaretEffect()));
 
         // {2}{B}: Regenerate Servant of Tymaret.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private ServantOfTymaret(final ServantOfTymaret card) {
@@ -54,7 +54,7 @@ class ServantOfTymaretEffect extends OneShotEffect {
         staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
-    public ServantOfTymaretEffect(final ServantOfTymaretEffect effect) {
+    private ServantOfTymaretEffect(final ServantOfTymaretEffect effect) {
         super(effect);
     }
 

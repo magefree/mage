@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -22,8 +21,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class PrimalAmulet extends CardImpl {
@@ -39,8 +39,7 @@ public final class PrimalAmulet extends CardImpl {
 
     public PrimalAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.transformable = true;
-        this.secondSideCardClazz = PrimalWellspring.class;
+        this.secondSideCardClazz = mage.cards.p.PrimalWellspring.class;
 
         // Instant and sorcery spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
@@ -69,7 +68,7 @@ class PrimalAmuletEffect extends OneShotEffect {
                 + "you may remove those counters and transform it";
     }
 
-    PrimalAmuletEffect(final PrimalAmuletEffect effect) {
+    private PrimalAmuletEffect(final PrimalAmuletEffect effect) {
         super(effect);
     }
 
@@ -86,8 +85,8 @@ class PrimalAmuletEffect extends OneShotEffect {
             permanent.addCounters(CounterType.CHARGE.createInstance(), source.getControllerId(), source, game);
             int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (counters > 3 && player.chooseUse(Outcome.Benefit, "Transform this?", source, game)) {
-                permanent.removeCounters("charge", counters, source, game);
-                new TransformSourceEffect(true).apply(game, source);
+                permanent.removeCounters(CounterType.CHARGE.getName(), counters, source, game);
+                new TransformSourceEffect().apply(game, source);
             }
             return true;
         }

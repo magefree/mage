@@ -39,7 +39,7 @@ public final class MistDragon extends CardImpl {
         
         // {3}{U}{U}: Mist Dragon phases out.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new PhaseOutSourceEffect(), new ManaCostsImpl("{3}{U}{U}")));
+                new PhaseOutSourceEffect(), new ManaCostsImpl<>("{3}{U}{U}")));
     }
 
     private MistDragon(final MistDragon card) {

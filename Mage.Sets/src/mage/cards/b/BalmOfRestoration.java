@@ -32,8 +32,7 @@ public final class BalmOfRestoration extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         
         // or prevent the next 2 damage that would be dealt to any target this turn.
-        Mode mode = new Mode();
-        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 2));
+        Mode mode = new Mode(new PreventDamageToTargetEffect(Duration.EndOfTurn, 2));
         mode.addTarget(new TargetAnyTarget());
         ability.addMode(mode);
         

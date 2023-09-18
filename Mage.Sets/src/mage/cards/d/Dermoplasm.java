@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -40,7 +39,7 @@ public final class Dermoplasm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Morph {2}{U}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}{U}")));
 
         // When Dermoplasm is turned face up, you may put a creature card with a morph ability from your hand onto the battlefield face up. If you do, return Dermoplasm to its owner's hand.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new DermoplasmEffect()));
@@ -63,7 +62,7 @@ class DermoplasmEffect extends OneShotEffect {
         staticText = "you may put a creature card with a morph ability from your hand onto the battlefield face up. If you do, return {this} to its owner's hand";
     }
 
-    public DermoplasmEffect(final DermoplasmEffect effect) {
+    private DermoplasmEffect(final DermoplasmEffect effect) {
         super(effect);
     }
 
@@ -81,7 +80,7 @@ class DermoplasmEffect extends OneShotEffect {
         if (effect.apply(game, source)) {
             if (thisCreature != null) {
                 effect = new ReturnToHandTargetEffect();
-                effect.setTargetPointer(new FixedTarget(thisCreature.getId()));
+                effect.setTargetPointer(new FixedTarget(thisCreature.getId(), game));
                 effect.apply(game, source);
                 return true;
             }

@@ -12,11 +12,10 @@ import mage.watchers.Watcher;
 import java.util.*;
 
 /**
+ * Default game watcher, no need to add it with abilities
+ * <p>
  * Calcs commanders play count only from command zone (spell or land)
  * Cards like Remand can put command to hand and cast it without commander tax increase
- * <p>
- * Warning, if your code can be called in non commander games then you must watcher in your ability
- * (example: you are using watcher in trigger, hint or effect, but do not checking another things like commander source or cost)
  *
  * @author JayDi85
  */

@@ -39,8 +39,7 @@ public final class OrzhovPontiff extends CardImpl {
         // Haunt
         // When Orzhov Pontiff enters the battlefield or the creature it haunts dies, choose one - Creatures you control get +1/+1 until end of turn; or creatures you don't control get -1/-1 until end of turn.
         Ability ability = new HauntAbility(this, new BoostAllEffect(1,1, Duration.EndOfTurn, filterControlled, false));
-        Mode mode = new Mode();
-        mode.addEffect(new BoostAllEffect(-1,-1, Duration.EndOfTurn, filterNotControlled, false));
+        Mode mode = new Mode(new BoostAllEffect(-1,-1, Duration.EndOfTurn, filterNotControlled, false));
         ability.addMode(mode);
         this.addAbility(ability);
 

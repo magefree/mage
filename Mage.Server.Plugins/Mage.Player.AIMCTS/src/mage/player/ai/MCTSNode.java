@@ -89,7 +89,7 @@ public class MCTSNode {
         if (game.getStep().getStepPart() == StepPart.PRIORITY) {
             playerId = game.getPriorityPlayerId();
         } else {
-            if (game.getStep().getType() == PhaseStep.DECLARE_BLOCKERS) {
+            if (game.getTurnStepType() == PhaseStep.DECLARE_BLOCKERS) {
                 playerId = game.getCombat().getDefenders().iterator().next();
             } else {
                 playerId = game.getActivePlayerId();
@@ -129,7 +129,7 @@ public class MCTSNode {
         }
         switch (player.getNextAction()) {
             case PRIORITY:
-//                logger.info("Priority for player:" + player.getName() + " turn: " + game.getTurnNum() + " phase: " + game.getPhase().getType() + " step: " + game.getStep().getType());
+//                logger.info("Priority for player:" + player.getName() + " turn: " + game.getTurnNum() + " phase: " + game.getTurnPhaseType() + " step: " + game.getTurnStepType());
                 List<Ability> abilities;
                 if (!USE_ACTION_CACHE)
                     abilities = player.getPlayableOptions(game);
@@ -304,11 +304,11 @@ public class MCTSNode {
     protected Game createSimulation(Game game, UUID playerId) {
         Game sim = game.copy();
 
-        for (Player copyPlayer: sim.getState().getPlayers().values()) {
-            Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
-            SimulatedPlayerMCTS newPlayer = new SimulatedPlayerMCTS(copyPlayer.getId(), true);
+        for (Player oldPlayer: sim.getState().getPlayers().values()) {
+            Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
+            SimulatedPlayerMCTS newPlayer = new SimulatedPlayerMCTS(oldPlayer, true);
             newPlayer.restore(origPlayer);
-            sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
+            sim.getState().getPlayers().put(oldPlayer.getId(), newPlayer);
         }
         randomizePlayers(sim, playerId);
         sim.setSimulation(true);
@@ -508,7 +508,7 @@ public class MCTSNode {
         int count = 0;
         while(playablesIterator.hasNext()) {
             String next = playablesIterator.next();
-            int cacheTurn = Integer.valueOf(next.split(":", 2)[0].substring(1));
+            int cacheTurn = Integer.parseInt(next.split(":", 2)[0].substring(1));
             if (cacheTurn < turnNum) {
                 playablesIterator.remove();
                 count++;
@@ -518,7 +518,7 @@ public class MCTSNode {
         Set<String> attacksKeys = attacksCache.keySet();
         Iterator<String> attacksIterator = attacksKeys.iterator();
         while(attacksIterator.hasNext()) {
-            int cacheTurn = Integer.valueOf(attacksIterator.next().split(":", 2)[0].substring(1));
+            int cacheTurn = Integer.parseInt(attacksIterator.next().split(":", 2)[0].substring(1));
             if (cacheTurn < turnNum) {
                 attacksIterator.remove();
                 count++;
@@ -528,7 +528,7 @@ public class MCTSNode {
         Set<String> blocksKeys = blocksCache.keySet();
         Iterator<String> blocksIterator = blocksKeys.iterator();
         while(blocksIterator.hasNext()) {
-            int cacheTurn = Integer.valueOf(blocksIterator.next().split(":", 2)[0].substring(1));
+            int cacheTurn = Integer.parseInt(blocksIterator.next().split(":", 2)[0].substring(1));
             if (cacheTurn < turnNum) {
                 blocksIterator.remove();
                 count++;

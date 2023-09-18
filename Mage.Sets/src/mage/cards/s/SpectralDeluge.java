@@ -50,7 +50,7 @@ public final class SpectralDeluge extends CardImpl {
     }
 }
 
-enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ISLAND);
 
@@ -62,6 +62,6 @@ enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<ObjectSource
                 .getValue()
                 <= game
                 .getBattlefield()
-                .count(filter, input.getSourceId(), input.getPlayerId(), game);
+                .count(filter, input.getPlayerId(), input.getSource(), game);
     }
 }

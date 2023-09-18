@@ -14,7 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -37,7 +37,7 @@ public final class SpellbaneCentaur extends CardImpl {
 
         // Creatures you control can't be the targets of blue spells or abilities from blue sources.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new CantBeTargetedAllEffect(new FilterControlledCreaturePermanent("Creatures you control"),
+                new CantBeTargetedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES,
                         filter, Duration.WhileOnBattlefield)));
     }
 

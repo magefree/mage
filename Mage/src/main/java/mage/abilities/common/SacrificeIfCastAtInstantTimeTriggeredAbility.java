@@ -13,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 
 /**
- *
  * @author Lonefox
  */
 public class SacrificeIfCastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
@@ -22,7 +21,7 @@ public class SacrificeIfCastAtInstantTimeTriggeredAbility extends TriggeredAbili
         super(Zone.STACK, new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new SacrificeSourceEffect())));
     }
 
-    public SacrificeIfCastAtInstantTimeTriggeredAbility(final SacrificeIfCastAtInstantTimeTriggeredAbility ability) {
+    protected SacrificeIfCastAtInstantTimeTriggeredAbility(final SacrificeIfCastAtInstantTimeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -38,14 +37,18 @@ public class SacrificeIfCastAtInstantTimeTriggeredAbility extends TriggeredAbili
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // The sacrifice occurs only if you cast it using its own ability. If you cast it using some other
-        // effect (for instance, if it gained flash from Vedalken Orrery), then it won't be sacrificed.
-        // CHECK
+        // TODO: The sacrifice should occur only if you cast it using its own ability. If you cast it using some
+        // other effect (for instance, if it gained flash from Vedalken Orrery), then it shouldn't be sacrificed.
+        // see https://github.com/magefree/mage/issues/9512
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.getSourceId().equals(getSourceId())) {
-            return !(game.isMainPhase() && game.isActivePlayer(event.getPlayerId()) && game.getStack().size() == 1);
+        if (spell == null || !spell.getSourceId().equals(getSourceId())) {
+            return false;
         }
-        return false;
+        // TODO: this is a hack and doesn't handle all other ways a spell could be cast as though it had flash
+        if (Boolean.TRUE.equals(game.getState().getValue("PlayFromNotOwnHandZone" + getSourceId()))) {
+            return false;
+        }
+        return !(game.isMainPhase() && game.isActivePlayer(event.getPlayerId()) && game.getStack().size() == 1);
     }
 
     @Override

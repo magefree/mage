@@ -28,9 +28,9 @@ public final class BayouGroff extends CardImpl {
 
         // As an additional cost to cast this spell, sacrifice a creature or pay {3}.
         this.getSpellAbility().addCost(new OrCost(
-                new SacrificeTargetCost(new TargetControlledPermanent(
+                "sacrifice a creature or pay {3}", new SacrificeTargetCost(new TargetControlledPermanent(
                         StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                )), new GenericManaCost(3), "sacrifice a creature or pay {3}"
+                )), new GenericManaCost(3)
         ));
     }
 

@@ -45,7 +45,7 @@ class RighteousFuryEffect extends OneShotEffect {
         this.staticText = "Destroy all tapped creatures. You gain 2 life for each creature destroyed this way";
     }
 
-    public RighteousFuryEffect(final RighteousFuryEffect effect) {
+    private RighteousFuryEffect(final RighteousFuryEffect effect) {
         super(effect);
     }
 
@@ -67,6 +67,7 @@ class RighteousFuryEffect extends OneShotEffect {
                 }
             }
             if (destroyedCreature > 0) {
+                game.getState().processAction(game);
                 new GainLifeEffect(destroyedCreature * 2).apply(game, source);
             }
             return true;

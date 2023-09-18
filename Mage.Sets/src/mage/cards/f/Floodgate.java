@@ -93,7 +93,7 @@ class FloodgateHasFlyingStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public FloodgateHasFlyingStateTriggeredAbility(final FloodgateHasFlyingStateTriggeredAbility ability) {
+    private FloodgateHasFlyingStateTriggeredAbility(final FloodgateHasFlyingStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -135,7 +135,7 @@ class FloodgateDamageEffect extends OneShotEffect {
                 + "rounded down, to each nonblue creature without flying";
     }
 
-    public FloodgateDamageEffect(final FloodgateDamageEffect effect) {
+    private FloodgateDamageEffect(final FloodgateDamageEffect effect) {
         super(effect);
     }
 

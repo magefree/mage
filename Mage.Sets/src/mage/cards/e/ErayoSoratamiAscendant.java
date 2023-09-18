@@ -29,7 +29,7 @@ public final class ErayoSoratamiAscendant extends CardImpl {
 
     public ErayoSoratamiAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(1);
@@ -59,6 +59,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
 
     public ErayoSoratamiAscendantTriggeredAbility() {
         super(Zone.BATTLEFIELD, getFlipEffect(), false);
+        setTriggerPhrase("Whenever the fourth spell of a turn is cast, ");
     }
 
     private static Effect getFlipEffect() {
@@ -67,7 +68,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
         return effect;
     }
 
-    public ErayoSoratamiAscendantTriggeredAbility(final ErayoSoratamiAscendantTriggeredAbility ability) {
+    private ErayoSoratamiAscendantTriggeredAbility(final ErayoSoratamiAscendantTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,11 +84,6 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever the fourth spell of a turn is cast, " ;
-    }
-
-    @Override
     public ErayoSoratamiAscendantTriggeredAbility copy() {
         return new ErayoSoratamiAscendantTriggeredAbility(this);
     }
@@ -97,7 +93,7 @@ class ErayosEssenceToken extends TokenImpl {
 
     ErayosEssenceToken() {
         super("Erayo's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setBlue(true);
@@ -107,7 +103,7 @@ class ErayosEssenceToken extends TokenImpl {
         effect.setText("counter that spell");
         this.addAbility(new ErayosEssenceTriggeredAbility(effect));
     }
-    public ErayosEssenceToken(final ErayosEssenceToken token) {
+    private ErayosEssenceToken(final ErayosEssenceToken token) {
         super(token);
     }
 
@@ -120,9 +116,10 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public ErayosEssenceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever an opponent casts a spell for the first time each turn, ");
     }
 
-    public ErayosEssenceTriggeredAbility(final ErayosEssenceTriggeredAbility ability) {
+    private ErayosEssenceTriggeredAbility(final ErayosEssenceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -143,11 +140,6 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a spell for the first time each turn, " ;
     }
 
     @Override

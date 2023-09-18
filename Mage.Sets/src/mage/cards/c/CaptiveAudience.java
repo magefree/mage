@@ -4,24 +4,18 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenTargetEffect;
+import mage.abilities.effects.common.CreateTokenAllEffect;
+import mage.abilities.effects.common.EntersBattlefieldUnderControlOfOpponentOfChoiceEffect;
 import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
+import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.abilities.effects.common.EntersBattlefieldUnderControlOfOpponentOfChoiceEffect;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -39,13 +33,22 @@ public final class CaptiveAudience extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new SetPlayerLifeSourceEffect(4), TargetController.YOU, false
         );
+        ability.setModeTag("life total becomes 4");
         ability.getModes().setEachModeOnlyOnce(true);
 
         // • Discard your hand.
-        ability.addMode(new Mode(new DiscardHandControllerEffect()));
+        ability.addMode(
+                new Mode(new DiscardHandControllerEffect())
+                        .setModeTag("discard hand")
+        );
 
         // • Each opponent creates five 2/2 black Zombie creature tokens.
-        ability.addMode(new Mode(new CaptiveAudienceCreateTokensEffect()));
+        ability.addMode(
+                new Mode(new CreateTokenAllEffect(new ZombieToken(), 5, TargetController.OPPONENT))
+                        .setModeTag("opponents create Zombies")
+        );
+
+        ability.addHint(ModesAlreadyUsedHint.instance);
         this.addAbility(ability);
     }
 
@@ -56,38 +59,5 @@ public final class CaptiveAudience extends CardImpl {
     @Override
     public CaptiveAudience copy() {
         return new CaptiveAudience(this);
-    }
-}
-
-class CaptiveAudienceCreateTokensEffect extends OneShotEffect {
-
-    CaptiveAudienceCreateTokensEffect() {
-        super(Benefit);
-        staticText = "Each opponent creates five 2/2 black Zombie creature tokens.";
-    }
-
-    private CaptiveAudienceCreateTokensEffect(final CaptiveAudienceCreateTokensEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CaptiveAudienceCreateTokensEffect copy() {
-        return new CaptiveAudienceCreateTokensEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        for (Player player : game.getPlayers().values()) {
-            if (player != null && controller.hasOpponent(player.getId(), game)) {
-                Effect effect = new CreateTokenTargetEffect(new ZombieToken(), 5);
-                effect.setTargetPointer(new FixedTarget(player.getId(), game));
-                effect.apply(game, source);
-            }
-        }
-        return true;
     }
 }

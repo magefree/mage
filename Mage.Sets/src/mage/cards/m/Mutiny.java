@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -24,18 +24,12 @@ import java.util.UUID;
  */
 public final class Mutiny extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public Mutiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Target creature an opponent controls deals damage equal to its power to another target creature that player controls.
         this.getSpellAbility().addEffect(new MutinyEffect());
-        this.getSpellAbility().addTarget(new MutinyFirstTarget(filter));
+        this.getSpellAbility().addTarget(new MutinyFirstTarget(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("another target creature that player controls")));
 
     }
@@ -57,7 +51,7 @@ class MutinyEffect extends OneShotEffect {
         this.staticText = "Target creature an opponent controls deals damage equal to its power to another target creature that player controls";
     }
 
-    public MutinyEffect(final MutinyEffect effect) {
+    private MutinyEffect(final MutinyEffect effect) {
         super(effect);
     }
 
@@ -87,7 +81,7 @@ class MutinyFirstTarget extends TargetCreaturePermanent {
         super(1, 1, filter, false);
     }
 
-    public MutinyFirstTarget(final MutinyFirstTarget target) {
+    private MutinyFirstTarget(final MutinyFirstTarget target) {
         super(target);
     }
 
@@ -125,12 +119,12 @@ class MutinyFirstTarget extends TargetCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        if (super.canChoose(sourceId, sourceControllerId, game)) {
-            UUID controllingPlayerId = game.getControllerId(sourceId);
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        if (super.canChoose(sourceControllerId, source, game)) {
+            UUID controllingPlayerId = game.getControllerId(source.getSourceId());
             for (UUID playerId : game.getOpponents(controllingPlayerId)) {
                 int possibleTargets = 0;
-                MageObject sourceObject = game.getObject(sourceId);
+                MageObject sourceObject = game.getObject(source);
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
                     if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, game)) {
                         possibleTargets++;

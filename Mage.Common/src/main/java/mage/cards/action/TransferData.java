@@ -9,16 +9,18 @@ import java.util.UUID;
 
 /**
  * Data for main card panel events like mouse moves or clicks
+ *
  */
 public class TransferData {
 
     private MageCard component; // real card panel (it may lie under multiple layer panels, so use getTopPanelRef for top)
     private TextPopup popupText;
-    private Point locationOnScreen; // must contains REAL card location (e.g. without outer/draw spaces), so use getCardLocationOnScreen to update it
+    private Point locationOnScreen; // must contain REAL card location (e.g. without outer/draw spaces), so use getCardLocationOnScreen to update it
     private int popupOffsetX;
     private int popupOffsetY;
     private UUID gameId;
     private CardView card;
+    private int tooltipDelay; // custom delay, set non-zero to overwrite preferences settings
 
     /**
      * If you use it with cards then call top layer panel like data.getComponent().getTopPanelRef()
@@ -79,5 +81,13 @@ public class TransferData {
 
     public void setCard(CardView card) {
         this.card = card;
+    }
+
+    public int getTooltipDelay() {
+        return tooltipDelay;
+    }
+
+    public void setTooltipDelay(int tooltipDelay) {
+        this.tooltipDelay = tooltipDelay;
     }
 }

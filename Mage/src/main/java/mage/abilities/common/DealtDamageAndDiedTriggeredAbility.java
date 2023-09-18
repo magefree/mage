@@ -33,9 +33,10 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.ALL, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, ");
     }
 
-    public DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
+    protected DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
@@ -58,15 +59,16 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
             if (filter.match(zEvent.getTarget(), game)) {
                 boolean damageDealt = false;
                 for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
-                    if (mor.refersTo(getSourceObject(game), game)) {
+                    if (mor.refersTo(game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD), game)
+                            || (mor.refersTo(getSourceObject(game), game))) {
                         damageDealt = true;
                         break;
                     }
                 }
                 if (damageDealt) {
-                    if(this.setTargetPointer == SetTargetPointer.PERMANENT) {
+                    if (this.setTargetPointer == SetTargetPointer.PERMANENT) {
                         for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                         }
                     }
                     return true;
@@ -74,10 +76,5 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, " ;
     }
 }

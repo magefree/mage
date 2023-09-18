@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterBlockingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -19,8 +18,7 @@ public final class Rally extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");
 
         // Blocking creatures get +1/+1 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn,
-            new FilterBlockingCreature("blocking creatures"), false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_BLOCKING_CREATURES, false));
     }
 
     private Rally(final Rally card) {

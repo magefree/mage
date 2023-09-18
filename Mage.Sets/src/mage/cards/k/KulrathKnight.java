@@ -63,7 +63,7 @@ class KulrathKnightRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures your opponents control with counters on them can't attack or block.";
     }
 
-    public KulrathKnightRestrictionEffect(final KulrathKnightRestrictionEffect effect) {
+    private KulrathKnightRestrictionEffect(final KulrathKnightRestrictionEffect effect) {
         super(effect);
     }
 
@@ -84,6 +84,6 @@ class KulrathKnightRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 }

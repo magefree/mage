@@ -54,7 +54,7 @@ class LaboratoryManiacEffect extends ReplacementEffectImpl {
         staticText = "If you would draw a card while your library has no cards in it, you win the game instead";
     }
 
-    public LaboratoryManiacEffect(final LaboratoryManiacEffect effect) {
+    private LaboratoryManiacEffect(final LaboratoryManiacEffect effect) {
         super(effect);
     }
 

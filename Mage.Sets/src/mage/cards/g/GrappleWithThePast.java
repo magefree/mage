@@ -55,7 +55,7 @@ class GrappleWithThePastEffect extends OneShotEffect {
         this.staticText = ", then you may return a creature or land card from your graveyard to your hand";
     }
 
-    public GrappleWithThePastEffect(final GrappleWithThePastEffect effect) {
+    private GrappleWithThePastEffect(final GrappleWithThePastEffect effect) {
         super(effect);
     }
 
@@ -71,10 +71,10 @@ class GrappleWithThePastEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        target.withNotTarget(true);
+        if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Return a creature or land card from your graveyard to hand?", source, game)
-                && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+                && controller.choose(Outcome.ReturnToHand, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.HAND, source, game);

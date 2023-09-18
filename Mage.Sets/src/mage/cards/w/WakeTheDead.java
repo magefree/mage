@@ -17,8 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,12 +57,11 @@ public final class WakeTheDead extends CardImpl {
 
 enum WakeTheDeadAdjuster implements TargetAdjuster {
     instance;
-    private static final FilterCard filter = new FilterCreatureCard("creature cards from your graveyard");
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), filter));
+        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
     }
 }
 
@@ -74,7 +72,7 @@ class WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEff
         this.staticText = "Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step";
     }
 
-    public WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect(final WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect effect) {
+    private WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect(final WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect effect) {
         super(effect);
     }
 

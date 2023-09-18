@@ -2,8 +2,6 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
@@ -25,17 +23,17 @@ public final class KopalaWardenOfWaves extends CardImpl {
     public KopalaWardenOfWaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Spells your opponents cast that target a Merfolk you control cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KopalaWardenOfWavesCostModificationEffect1()));
+        this.addAbility(new SimpleStaticAbility(new KopalaWardenOfWavesCostModificationEffect1()));
 
         // Abilities your opponents activate that target a Merfolk you control cost {2} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KopalaWardenOfWavesCostModificationEffect2()));
+        this.addAbility(new SimpleStaticAbility(new KopalaWardenOfWavesCostModificationEffect2()));
     }
 
     private KopalaWardenOfWaves(final KopalaWardenOfWaves card) {
@@ -90,7 +88,7 @@ class KopalaWardenOfWavesCostModificationEffect1 extends CostModificationEffectI
         this.staticText = "Spells your opponents cast that target a Merfolk you control cost {2} more to cast";
     }
 
-    KopalaWardenOfWavesCostModificationEffect1(KopalaWardenOfWavesCostModificationEffect1 effect) {
+    private KopalaWardenOfWavesCostModificationEffect1(final KopalaWardenOfWavesCostModificationEffect1 effect) {
         super(effect);
     }
 
@@ -102,11 +100,8 @@ class KopalaWardenOfWavesCostModificationEffect1 extends CostModificationEffectI
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility)) {
-            return false;
-        }
-
-        return KopalaWardenOfWaves.isAbilityCompatible(abilityToModify, source, game);
+        return abilityToModify.getAbilityType() == AbilityType.SPELL
+                && KopalaWardenOfWaves.isAbilityCompatible(abilityToModify, source, game);
     }
 
     @Override
@@ -123,7 +118,7 @@ class KopalaWardenOfWavesCostModificationEffect2 extends CostModificationEffectI
         this.staticText = "Abilities your opponents activate that target a Merfolk you control cost {2} more to activate";
     }
 
-    KopalaWardenOfWavesCostModificationEffect2(KopalaWardenOfWavesCostModificationEffect2 effect) {
+    private KopalaWardenOfWavesCostModificationEffect2(final KopalaWardenOfWavesCostModificationEffect2 effect) {
         super(effect);
     }
 
@@ -135,11 +130,8 @@ class KopalaWardenOfWavesCostModificationEffect2 extends CostModificationEffectI
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof ActivatedAbility)) {
-            return false;
-        }
-
-        return KopalaWardenOfWaves.isAbilityCompatible(abilityToModify, source, game);
+        return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
+                && KopalaWardenOfWaves.isAbilityCompatible(abilityToModify, source, game);
     }
 
     @Override

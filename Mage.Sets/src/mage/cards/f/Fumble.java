@@ -55,7 +55,7 @@ class FumbleEffect extends OneShotEffect {
                 + "then attach them to another creature";
     }
 
-    FumbleEffect(final FumbleEffect effect) {
+    private FumbleEffect(final FumbleEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class FumbleEffect extends OneShotEffect {
         if (!attachments.isEmpty()) {
             Target target = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, true);
             Permanent newCreature = null;
-            if (player.choose(Outcome.BoostCreature, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.BoostCreature, target, source, game)) {
                 newCreature = game.getPermanent(target.getFirstTarget());
             }
             for (Permanent attachment : attachments) {

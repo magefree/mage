@@ -20,7 +20,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -37,7 +36,7 @@ public final class DualNature extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public DualNature(UUID ownerId, CardSetInfo setInfo) {
@@ -75,7 +74,7 @@ class DualNatureCreateTokenEffect extends OneShotEffect {
         this.staticText = "its controller creates a token that's a copy of that creature";
     }
 
-    DualNatureCreateTokenEffect(final DualNatureCreateTokenEffect effect) {
+    private DualNatureCreateTokenEffect(final DualNatureCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -98,7 +97,7 @@ class DualNatureCreateTokenEffect extends OneShotEffect {
             } else {
                 tokensCreated = new HashSet<>();
             }
-            for (Permanent perm : effect.getAddedPermanent()) {
+            for (Permanent perm : effect.getAddedPermanents()) {
                 if (perm != null) {
                     tokensCreated.add(perm.getId());
                 }
@@ -116,7 +115,7 @@ class DualNatureCreatureLeavesEffect extends OneShotEffect {
         this.staticText = "exile all tokens with the same name as that creature";
     }
 
-    DualNatureCreatureLeavesEffect(final DualNatureCreatureLeavesEffect effect) {
+    private DualNatureCreatureLeavesEffect(final DualNatureCreatureLeavesEffect effect) {
         super(effect);
     }
 
@@ -130,7 +129,7 @@ class DualNatureCreatureLeavesEffect extends OneShotEffect {
         Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature != null) {
             FilterPermanent filter = new FilterPermanent();
-            filter.add(TokenPredicate.instance);
+            filter.add(TokenPredicate.TRUE);
             filter.add(new NamePredicate(creature.getName()));
             new ExileAllEffect(filter).apply(game, source);
             return true;
@@ -145,7 +144,7 @@ class DualNatureLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbi
         super(Zone.BATTLEFIELD, null, new DualNatureExileEffect(), "When {this} leaves the battlefield, ", false);
     }
 
-    DualNatureLeavesBattlefieldTriggeredAbility(DualNatureLeavesBattlefieldTriggeredAbility ability) {
+    private DualNatureLeavesBattlefieldTriggeredAbility(final DualNatureLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
@@ -177,7 +176,7 @@ class DualNatureExileEffect extends OneShotEffect {
         this.staticText = "exile all tokens created with {this}.";
     }
 
-    DualNatureExileEffect(final DualNatureExileEffect effect) {
+    private DualNatureExileEffect(final DualNatureExileEffect effect) {
         super(effect);
         this.cardZoneString = effect.cardZoneString;
     }

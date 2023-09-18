@@ -24,7 +24,6 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
 import mage.util.trace.TraceInfo;
 import org.apache.log4j.Logger;
 
@@ -66,7 +65,7 @@ public class ContinuousEffects implements Serializable {
         collectAllEffects();
     }
 
-    public ContinuousEffects(final ContinuousEffects effect) {
+    protected ContinuousEffects(final ContinuousEffects effect) {
         applyCounters = effect.applyCounters.copy();
         auraReplacementEffect = effect.auraReplacementEffect.copy();
         layeredEffects = effect.layeredEffects.copy();
@@ -177,6 +176,7 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect effect : layeredEffects) {
             switch (effect.getDuration()) {
                 case WhileOnBattlefield:
+                case WhileControlled:
                 case WhileOnStack:
                 case WhileInGraveyard:
                     Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
@@ -189,7 +189,7 @@ public class ContinuousEffects implements Serializable {
                             }
                         }
                     } else {
-                        logger.error("No abilities for continuous effect: " + effect.toString());
+                        logger.error("No abilities for continuous effect: " + effect);
                     }
                     break;
                 default:
@@ -200,7 +200,7 @@ public class ContinuousEffects implements Serializable {
         updateTimestamps(timestampGroupName, layerEffects);
         layerEffects.sort(Comparator.comparingLong(ContinuousEffect::getOrder));
         /* debug effects apply order:
-        if (game.getStep() != null) System.out.println("layr - " + game.getTurnNum() + "." + game.getStep().getType() + ": layers " + layerEffects.size()
+        if (game.getStep() != null) System.out.println("layr - " + game.getTurnNum() + "." + game.getTurnStepType() + ": layers " + layerEffects.size()
                 + " - " + layerEffects.stream().map(l -> l.getClass().getSimpleName()).collect(Collectors.joining(", "))
                 + " - " + callName);
         //*/
@@ -337,7 +337,7 @@ public class ContinuousEffects implements Serializable {
      * event
      */
     private Map<ReplacementEffect, Set<Ability>> getApplicableReplacementEffects(GameEvent event, Game game) {
-        Map<ReplacementEffect, Set<Ability>> replaceEffects = new HashMap<>();
+        Map<ReplacementEffect, Set<Ability>> replaceEffects = new LinkedHashMap<>();
         if (auraReplacementEffect.checksEventType(event, game) && auraReplacementEffect.applies(event, null, game)) {
             replaceEffects.put(auraReplacementEffect, null);
         }
@@ -540,7 +540,7 @@ public class ContinuousEffects implements Serializable {
             } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
                 // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
                 idToCheck = ((AdventureCardSpell) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacesCardHalf) {
+            } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacedCardHalf) {
                 // each mdf side uses own characteristics to check for playing, all other cases must use main card
                 // rules:
                 // "If an effect allows you to play a land or cast a spell from among a group of cards,
@@ -548,7 +548,7 @@ public class ContinuousEffects implements Serializable {
                 // of that effect. For example, if Sejiri Shelter / Sejiri Glacier is in your graveyard
                 // and an effect allows you to play lands from your graveyard, you could play Sejiri Glacier.
                 // That effect doesn't allow you to cast Sejiri Shelter."
-                idToCheck = ((ModalDoubleFacesCardHalf) objectToCheck).getMainCard().getId();
+                idToCheck = ((ModalDoubleFacedCardHalf) objectToCheck).getMainCard().getId();
             } else {
                 idToCheck = objectId;
             }
@@ -592,9 +592,14 @@ public class ContinuousEffects implements Serializable {
                 Map<String, String> keyChoices = new HashMap<>();
                 for (ApprovingObject approvingObject : possibleApprovingObjects) {
                     MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-                    keyChoices.put(approvingObject.getApprovingAbility().getId().toString(),
-                            (approvingObject.getApprovingAbility().getRule(mageObject == null ? "" : mageObject.getName()))
-                                    + (mageObject == null ? "" : " (" + mageObject.getIdName() + ")"));
+                    String choiceKey = approvingObject.getApprovingAbility().getId().toString();
+                    String choiceValue;
+                    if (mageObject == null) {
+                        choiceValue = approvingObject.getApprovingAbility().getRule();
+                    } else {
+                        choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
+                    }
+                    keyChoices.put(choiceKey, choiceValue);
                 }
                 Choice choicePermitting = new ChoiceImpl(true);
                 choicePermitting.setMessage("Choose the permitting object");
@@ -758,15 +763,6 @@ public class ContinuousEffects implements Serializable {
      */
     public void applySpliceEffects(Ability abilityToModify, Game game) {
         // add effects from splice card to spell ability on activate/cast
-
-        // splice spell - spell can't be spliced again
-        if (CardUtil.isSpliceAbility(abilityToModify, game)) {
-            return;
-        }
-        // fused spell - can be spliced only to main fused ability, not to parts
-        if (CardUtil.isFusedPartAbility(abilityToModify, game)) {
-            return;
-        }
 
         List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game, abilityToModify.getControllerId());
         // get the applyable splice abilities
@@ -1241,15 +1237,18 @@ public class ContinuousEffects implements Serializable {
     }
 
     private boolean isAbilityStillExists(final Game game, final Ability ability, ContinuousEffect effect) {
-        final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-        if (!(effect instanceof BecomesFaceDownCreatureEffect)
-                && (effect != null && !effect.getDuration().equals(Duration.Custom))) { // Custom effects do not depend on the creating permanent
-            if (card != null) {
-                return card.hasAbility(ability, game);
-            }
+        switch (effect.getDuration()) { // effects with fixed duration don't need an object with the source ability (e.g. a silence cast with isochronic Scepter has no more a card object
+            case EndOfCombat:
+            case EndOfGame:
+            case EndOfStep:
+            case EndOfTurn:
+            case OneUse:
+            case Custom:  // custom duration means the effect ends itself if needed
+                return true;
         }
-
-        return true;
+        final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
+        return effect instanceof BecomesFaceDownCreatureEffect
+                || effect == null || card == null || card.hasAbility(ability, game);
     }
 
     public Set<Ability> getLayeredEffectAbilities(ContinuousEffect effect) {
@@ -1273,62 +1272,56 @@ public class ContinuousEffects implements Serializable {
     }
 
     public synchronized void addEffect(ContinuousEffect effect, Ability source) {
-        if (effect == null) {
-            logger.error("Effect is null: " + source.toString());
-            return;
-        } else if (source == null) {
-            logger.warn("Adding effect without ability : " + effect.toString());
+        if (effect == null || source == null) {
+            // addEffect(effect, source) need a non-null source
+            throw new IllegalArgumentException("Wrong code usage. Effect and source can't be null here: "
+                    + source + "; " + effect);
         }
+
         switch (effect.getEffectType()) {
             case REPLACEMENT:
             case REDIRECTION:
-                ReplacementEffect newReplacementEffect = (ReplacementEffect) effect;
-                replacementEffects.addEffect(newReplacementEffect, source);
+                replacementEffects.addEffect((ReplacementEffect) effect, source);
                 break;
             case PREVENTION:
-                PreventionEffect newPreventionEffect = (PreventionEffect) effect;
-                preventionEffects.addEffect(newPreventionEffect, source);
+                preventionEffects.addEffect((PreventionEffect) effect, source);
                 break;
             case RESTRICTION:
-                RestrictionEffect newRestrictionEffect = (RestrictionEffect) effect;
-                restrictionEffects.addEffect(newRestrictionEffect, source);
+                restrictionEffects.addEffect((RestrictionEffect) effect, source);
                 break;
             case RESTRICTION_UNTAP_NOT_MORE_THAN:
-                RestrictionUntapNotMoreThanEffect newRestrictionUntapNotMoreThanEffect = (RestrictionUntapNotMoreThanEffect) effect;
-                restrictionUntapNotMoreThanEffects.addEffect(newRestrictionUntapNotMoreThanEffect, source);
+                restrictionUntapNotMoreThanEffects.addEffect((RestrictionUntapNotMoreThanEffect) effect, source);
                 break;
             case REQUIREMENT:
-                RequirementEffect newRequirementEffect = (RequirementEffect) effect;
-                requirementEffects.addEffect(newRequirementEffect, source);
+                requirementEffects.addEffect((RequirementEffect) effect, source);
                 break;
             case ASTHOUGH:
                 AsThoughEffect newAsThoughEffect = (AsThoughEffect) effect;
-                if (!asThoughEffectsMap.containsKey(newAsThoughEffect.getAsThoughEffectType())) {
+                asThoughEffectsMap.computeIfAbsent(newAsThoughEffect.getAsThoughEffectType(), x -> {
                     ContinuousEffectsList<AsThoughEffect> list = new ContinuousEffectsList<>();
                     allEffectsLists.add(list);
-                    asThoughEffectsMap.put(newAsThoughEffect.getAsThoughEffectType(), list);
-                }
-                asThoughEffectsMap.get(newAsThoughEffect.getAsThoughEffectType()).addEffect(newAsThoughEffect, source);
+                    return list;
+                }).addEffect(newAsThoughEffect, source);
                 break;
             case COSTMODIFICATION:
-                CostModificationEffect newCostModificationEffect = (CostModificationEffect) effect;
-                costModificationEffects.addEffect(newCostModificationEffect, source);
+                costModificationEffects.addEffect((CostModificationEffect) effect, source);
                 break;
             case SPLICE:
-                SpliceCardEffect newSpliceCardEffect = (SpliceCardEffect) effect;
-                spliceCardEffects.addEffect(newSpliceCardEffect, source);
+                spliceCardEffects.addEffect((SpliceCardEffect) effect, source);
                 break;
             case CONTINUOUS_RULE_MODIFICATION:
-                ContinuousRuleModifyingEffect newContinuousRuleModifiyingEffect = (ContinuousRuleModifyingEffect) effect;
-                continuousRuleModifyingEffects.addEffect(newContinuousRuleModifiyingEffect, source);
+                continuousRuleModifyingEffects.addEffect((ContinuousRuleModifyingEffect) effect, source);
                 break;
-            default:
+            case CONTINUOUS:
+            case ONESHOT:
                 layeredEffects.addEffect(effect, source);
                 break;
+            default:
+                throw new IllegalArgumentException("Unknown effect type: " + effect.getEffectType());
         }
     }
 
-    public void setController(UUID cardId, UUID controllerId) {
+    public synchronized void setController(UUID cardId, UUID controllerId) {
         for (ContinuousEffectsList effectsList : allEffectsLists) {
             setControllerForEffect(effectsList, cardId, controllerId);
         }
@@ -1364,6 +1357,8 @@ public class ContinuousEffects implements Serializable {
     }
 
     public Map<String, String> getReplacementEffectsTexts(Map<ReplacementEffect, Set<Ability>> rEffects, Game game) {
+        // warning, autoSelectReplacementEffects uses [object id] in texts as different settings,
+        // so if you change keys or texts logic then don't forget to change auto-choose too
         Map<String, String> texts = new LinkedHashMap<>();
         for (Map.Entry<ReplacementEffect, Set<Ability>> entry : rEffects.entrySet()) {
             if (entry.getValue() != null) {
@@ -1426,7 +1421,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     * Prints out a status of the currently existing continuous effects
+     * Debug only: prints out a status of the currently existing continuous effects
      *
      * @param game
      */

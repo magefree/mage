@@ -28,7 +28,7 @@ public final class QuestForTheGemblades extends CardImpl {
 
         // Whenever a creature you control deals combat damage to a creature, you may put a quest counter on Quest for the Gemblades.
         this.addAbility(new DealsDamageToACreatureAllTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.QUEST.createInstance()), false,
+                new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true,
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, SetTargetPointer.PERMANENT, true
         ));
 

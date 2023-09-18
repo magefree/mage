@@ -22,7 +22,6 @@ public class ConclaveMentorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Conclave Mentor", CounterType.P1P1, 2);
 
@@ -44,7 +43,6 @@ public class ConclaveMentorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 25);
 

@@ -45,7 +45,7 @@ public final class VonasHunger extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new VonasHungerEffect(),
                 CitysBlessingCondition.instance,
-                "If you have the city's blessing, instead each opponent sacrifices half the creatures they control rounded up"));
+                "If you have the city's blessing, instead each opponent sacrifices half the creatures they control, rounded up"));
     }
 
     private VonasHunger(final VonasHunger card) {
@@ -64,7 +64,7 @@ class VonasHungerEffect extends OneShotEffect {
         super(Outcome.Sacrifice);
     }
 
-    public VonasHungerEffect(final VonasHungerEffect effect) {
+    private VonasHungerEffect(final VonasHungerEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class VonasHungerEffect extends OneShotEffect {
                 int numTargets = (game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), game) + 1) / 2;
                 if (numTargets > 0) {
                     TargetPermanent target = new TargetPermanent(numTargets, numTargets, StaticFilters.FILTER_CONTROLLED_CREATURE, true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }

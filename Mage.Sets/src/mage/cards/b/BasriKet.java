@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -17,8 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.BasriKetEmblem;
@@ -38,9 +37,9 @@ public final class BasriKet extends CardImpl {
     public BasriKet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BASRI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Put a +1/+1 counter on up to one target creature. It gains indestructible until end of turn.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(
@@ -71,17 +70,11 @@ public final class BasriKet extends CardImpl {
 
 class BasriKetTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
-
-    static {
-        filter.add(Predicates.not(TokenPredicate.instance));
-    }
-
     public BasriKetTriggeredAbility() {
         super(null, Duration.EndOfTurn, false);
     }
 
-    public BasriKetTriggeredAbility(BasriKetTriggeredAbility ability) {
+    private BasriKetTriggeredAbility(final BasriKetTriggeredAbility ability) {
         super(ability);
     }
 
@@ -100,7 +93,7 @@ class BasriKetTriggeredAbility extends DelayedTriggeredAbility {
         int attackingNonTokens = 0;
         for (UUID attacker : game.getCombat().getAttackers()) {
             Permanent permanent = game.getPermanent(attacker);
-            if (filter.match(permanent, game)) {
+            if (StaticFilters.FILTER_CREATURE_NON_TOKEN.match(permanent, game)) {
                 attackingNonTokens++;
             }
         }

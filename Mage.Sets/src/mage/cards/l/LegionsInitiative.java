@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -65,7 +64,7 @@ public final class LegionsInitiative extends CardImpl {
         )));
 
         // {R}{W}, Exile Legion's Initiative: Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gain haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(new LegionsInitiativeExileEffect(), new ManaCostsImpl("{R}{W}"));
+        Ability ability = new SimpleActivatedAbility(new LegionsInitiativeExileEffect(), new ManaCostsImpl<>("{R}{W}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfCombatDelayedTriggeredAbility(new LegionsInitiativeReturnFromExileEffect())
         ));
@@ -97,18 +96,17 @@ class LegionsInitiativeExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player == null || sourceObject == null) {
+        if (player == null) {
             return false;
         }
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         ).stream().filter(Objects::nonNull).forEach(cards::add);
         return player.moveCardsToExile(
                 cards.getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
     }
 
@@ -138,11 +136,11 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        if (player == null || exile == null || exile.isEmpty()) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -1));
+        if (player == null || exileZone == null || exileZone.isEmpty()) {
             return false;
         }
-        Cards cards = new CardsImpl(exile);
+        Cards cards = new CardsImpl(exileZone);
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
         List<Permanent> permanents = cards.stream().map(game::getPermanent).filter(Objects::nonNull).collect(Collectors.toList());
         if (permanents.isEmpty()) {

@@ -2,7 +2,6 @@ package mage.cards.z;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -28,9 +27,9 @@ public final class ZarielArchdukeOfAvernus extends CardImpl {
     public ZarielArchdukeOfAvernus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZARIEL);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Creatures you control get +1/+0 and gain haste until end of turn.
         Ability ability = new LoyaltyAbility(new BoostControlledEffect(

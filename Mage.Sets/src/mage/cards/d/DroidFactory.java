@@ -47,7 +47,7 @@ public final class DroidFactory extends CardImpl {
 
     public final class DroidFactoryAbility extends ActivatedAbilityImpl {
 
-        public DroidFactoryAbility(DroidFactoryAbility ability) {
+        private DroidFactoryAbility(final DroidFactoryAbility ability) {
             super(ability);
         }
 
@@ -64,7 +64,7 @@ public final class DroidFactory extends CardImpl {
             filter.add(Predicates.or(subtypePredicates));
             filter.add(SuperType.BASIC.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
+            addEffect(new SearchLibraryPutInPlayEffect(target, true));
         }
 
         @Override

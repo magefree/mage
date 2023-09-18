@@ -6,7 +6,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -35,10 +34,10 @@ public final class ChandraTorchOfDefiance extends CardImpl {
 
     public ChandraTorchOfDefiance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Exile the top card of your library. You may cast that card. If you don't, Chandra, Torch of Defiance deals 2 damage to each opponent.
         LoyaltyAbility ability = new LoyaltyAbility(new ChandraTorchOfDefianceEffect(), 1);
@@ -73,7 +72,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
         this.staticText = "Exile the top card of your library. You may cast that card. If you don't, {this} deals 2 damage to each opponent";
     }
 
-    public ChandraTorchOfDefianceEffect(final ChandraTorchOfDefianceEffect effect) {
+    private ChandraTorchOfDefianceEffect(final ChandraTorchOfDefianceEffect effect) {
         super(effect);
     }
 

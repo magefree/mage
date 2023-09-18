@@ -3,7 +3,6 @@ package mage.cards.j;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -34,9 +33,9 @@ public final class JaceMirrorMage extends CardImpl {
     public JaceMirrorMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));
@@ -44,7 +43,7 @@ public final class JaceMirrorMage extends CardImpl {
         // When Jace, Mirror Mage enters the battlefield, if Jace was kicked, create a token that's a copy of Jace, Mirror Mage except it's not legendary and its starting loyalty is 1.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new JaceMirrorMageCopyEffect()),
-                KickedCondition.instance, "When {this} enters the battlefield, if {this} was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if {this} was kicked, " +
                 "create a token that's a copy of {this}, except it's not legendary and its starting loyalty is 1."
         ));
 

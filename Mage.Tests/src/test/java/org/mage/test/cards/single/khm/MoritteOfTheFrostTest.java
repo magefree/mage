@@ -30,12 +30,11 @@ public class MoritteOfTheFrostTest extends CardTestPlayerBase {
         // cast myr and remove to to graveyard due 0/0
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Moritte of the Frost", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moritte of the Frost");
-        setChoice(playerA, "No"); // no copy
+        setChoice(playerA, false); // no copy
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Moritte of the Frost", 1); // removed to graveyard due 0/0
     }
@@ -59,12 +58,11 @@ public class MoritteOfTheFrostTest extends CardTestPlayerBase {
         // cast myr and keep on battlefield due boost
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Moritte of the Frost", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moritte of the Frost");
-        setChoice(playerA, "No"); // no copy
+        setChoice(playerA, false); // no copy
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Moritte of the Frost", 1); // boosted +1/+1
     }
@@ -93,13 +91,12 @@ public class MoritteOfTheFrostTest extends CardTestPlayerBase {
         // cast myr and copy
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Moritte of the Frost", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moritte of the Frost");
-        setChoice(playerA, "Yes"); // use copy
+        setChoice(playerA, true); // use copy
         setChoice(playerA, "Grizzly Bears"); // copy target
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 2);
 

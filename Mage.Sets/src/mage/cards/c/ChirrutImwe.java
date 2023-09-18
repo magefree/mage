@@ -31,7 +31,7 @@ public final class ChirrutImwe extends CardImpl {
     public ChirrutImwe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(3);
@@ -43,7 +43,7 @@ public final class ChirrutImwe extends CardImpl {
         // {1}{W}: Prevent all combat damage that would be dealt to Chirrut Imwe until end of turn.
         Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all combat damage that would be dealt to {this} until end of turn");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}")));
     }
 
     private ChirrutImwe(final ChirrutImwe card) {
@@ -63,7 +63,7 @@ class ChirrutImweEffect extends ContinuousEffectImpl {
         staticText = "{this} can block up to two additional creatures";
     }
     
-    public ChirrutImweEffect(final ChirrutImweEffect effect) {
+    private ChirrutImweEffect(final ChirrutImweEffect effect) {
         super(effect);
     }
     

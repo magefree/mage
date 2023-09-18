@@ -35,8 +35,7 @@ public final class FlashFlood extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter1));
         // or return target Mountain to its owner's hand.
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetPermanent(filter2));
         this.getSpellAbility().addMode(mode);
     }

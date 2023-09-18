@@ -2,19 +2,18 @@ package mage.cards.m;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.mana.ManaEffect;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ManaChoice;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -26,7 +25,9 @@ public final class MadScienceFairProject extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color they choose.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MadScienceFairManaEffect(), new TapSourceCost()));
+        Ability ability = new SimpleActivatedAbility(new MadScienceFairProjectEffect(), new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     private MadScienceFairProject(final MadScienceFairProject card) {
@@ -39,40 +40,33 @@ public final class MadScienceFairProject extends CardImpl {
     }
 }
 
-class MadScienceFairManaEffect extends ManaEffect {
+class MadScienceFairProjectEffect extends OneShotEffect {
 
-    public MadScienceFairManaEffect() {
-        super();
-        this.staticText = "Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color they choose";
+    MadScienceFairProjectEffect() {
+        super(Outcome.Benefit);
+        staticText = "Roll a six-sided die. On a 3 or lower, target player adds {C}. " +
+                "Otherwise, that player adds one mana of any color they choose";
     }
 
-    public MadScienceFairManaEffect(final MadScienceFairManaEffect effect) {
+    private MadScienceFairProjectEffect(final MadScienceFairProjectEffect effect) {
         super(effect);
     }
 
     @Override
-    public MadScienceFairManaEffect copy() {
-        return new MadScienceFairManaEffect(this);
+    public MadScienceFairProjectEffect copy() {
+        return new MadScienceFairProjectEffect(this);
     }
 
     @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public Mana produceMana(Game game, Ability source) {
-        if (game != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                int amount = controller.rollDice(source, game, 6);
-                if (amount <= 3) {
-                    return Mana.ColorlessMana(1);
-                } else {
-                    return ManaChoice.chooseAnyColor(controller, game, 1);
-                }
-            }
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (controller == null || player == null) {
+            return false;
         }
-        return new Mana();
+        int amount = controller.rollDice(outcome, source, game, 6);
+        Mana mana = amount <= 3 ? Mana.ColorlessMana(1) : ManaChoice.chooseAnyColor(player, game, 1);
+        player.getManaPool().addMana(mana, game, source);
+        return true;
     }
 }

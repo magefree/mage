@@ -30,7 +30,7 @@ public final class SmokespewInvoker extends CardImpl {
 
         // {7}{B}: Target creature gets -3/-3 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-3, -3, Duration.EndOfTurn),
-            new ManaCostsImpl("{7}{B}"));
+            new ManaCostsImpl<>("{7}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

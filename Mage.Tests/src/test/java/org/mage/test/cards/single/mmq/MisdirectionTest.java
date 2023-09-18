@@ -31,9 +31,9 @@ public class MisdirectionTest extends CardTestPlayerBase {
         checkHandCardCount("B haven't lions", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silvercoat Lion", 0);
         checkHandCardCount("B have 5 bears", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ashcoat Bear", 5);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -55,7 +55,6 @@ public class MisdirectionTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Boomerang", 1);
         assertPermanentCount(playerA, "Ashcoat Bear", 0);
@@ -83,15 +82,16 @@ public class MisdirectionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rakshasa's Secret", playerB);
         // cast misdir, but it's not apply and taget will be same
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Misdirection", "Rakshasa's Secret", "Rakshasa's Secret");
+        addTarget(playerB, playerB); // new target for rakhas will be same B
         // B must select cards to discard (2 lions, not bears)
         setChoice(playerB, "Silvercoat Lion"); // select target 1
         setChoice(playerB, "Silvercoat Lion"); // select target 2
         checkHandCardCount("B haven't lions", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silvercoat Lion", 0);
         checkHandCardCount("B have 5 bears", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ashcoat Bear", 5);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Rakshasa's Secret", 1);
         assertGraveyardCount(playerB, "Misdirection", 1);
@@ -122,7 +122,6 @@ public class MisdirectionTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Public Execution", 1);
         assertGraveyardCount(playerB, "Misdirection", 1);

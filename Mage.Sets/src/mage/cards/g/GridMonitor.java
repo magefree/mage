@@ -50,7 +50,7 @@ class GridMonitorEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "You can't cast creature spells";
     }
 
-    public GridMonitorEffect(final GridMonitorEffect effect) {
+    private GridMonitorEffect(final GridMonitorEffect effect) {
         super(effect);
     }
 

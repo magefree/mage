@@ -53,7 +53,7 @@ class ForceChokeEffect extends OneShotEffect {
                 + "equal to that spell's mana value to return it to its owner's hand";
     }
 
-    public ForceChokeEffect(final ForceChokeEffect effect) {
+    private ForceChokeEffect(final ForceChokeEffect effect) {
         super(effect);
     }
 

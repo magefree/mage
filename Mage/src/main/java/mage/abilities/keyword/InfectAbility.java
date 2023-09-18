@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.icon.abilities.InfectAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
@@ -36,7 +36,7 @@ public class InfectAbility extends StaticAbility implements MageSingleton {
 
     static {
         instance = new InfectAbility();
-        instance.addIcon(InfectAbilityIcon.instance);
+        instance.addIcon(CardIconImpl.ABILITY_INFECT);
     }
 
     private Object readResolve() throws ObjectStreamException {
@@ -53,7 +53,7 @@ public class InfectAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Infect <i>(This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>";
+        return "infect <i>(This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>";
     }
 
     @Override

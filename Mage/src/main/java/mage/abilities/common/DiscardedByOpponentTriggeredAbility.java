@@ -9,7 +9,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author Styxo
  */
 public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
@@ -20,9 +19,10 @@ public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     public DiscardedByOpponentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.GRAVEYARD, effect, optional);
+        setTriggerPhrase("When a spell or ability an opponent controls causes you to discard this card, ");
     }
 
-    public DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
+    protected DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
         super(ability);
     }
 
@@ -45,10 +45,5 @@ public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When a spell or ability an opponent controls causes you to discard this card, " ;
     }
 }

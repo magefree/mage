@@ -31,7 +31,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class ParagonOfNewDawns extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Another white creature you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target white creature you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -52,7 +52,7 @@ public final class ParagonOfNewDawns extends CardImpl {
         // Other white creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filter, true)));
         // {W}, {T}: Another target white creature you control gains vigilance until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);

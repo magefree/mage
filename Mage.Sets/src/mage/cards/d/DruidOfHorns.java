@@ -50,9 +50,10 @@ class DruidOfHornsTriggeredAbility extends TriggeredAbilityImpl {
 
     public DruidOfHornsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), false);
+        setTriggerPhrase("Whenever you cast an Aura spell that targets {this}, ");
     }
 
-    public DruidOfHornsTriggeredAbility(final DruidOfHornsTriggeredAbility ability) {
+    private DruidOfHornsTriggeredAbility(final DruidOfHornsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -97,10 +98,5 @@ class DruidOfHornsTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast an Aura spell that targets {this}, " ;
     }
 }

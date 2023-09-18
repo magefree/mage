@@ -30,11 +30,10 @@ public final class BlessingOfFrost extends CardImpl {
     public BlessingOfFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Distribute X +1/+1 counters among any number of creatures you control, where X is the amount of {S} spent to cast this spell. Then draw a card for each creature you control with power 4 or greater.
         this.getSpellAbility().addEffect(new BlessingOfFrostEffect());
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private BlessingOfFrost(final BlessingOfFrost card) {
@@ -80,7 +79,7 @@ class BlessingOfFrostEffect extends OneShotEffect {
         int snow = ManaPaidSourceWatcher.getSnowPaid(source.getId(), game);
         if (snow > 0) {
             TargetAmount target = new TargetCreaturePermanentAmount(snow, StaticFilters.FILTER_CONTROLLED_CREATURE);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             target.chooseTarget(outcome, player.getId(), source, game);
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
@@ -90,9 +89,9 @@ class BlessingOfFrostEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.P1P1.createInstance(target.getTargetAmount(targetId)), source.getControllerId(), source, game);
             }
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         player.drawCards(game.getBattlefield().count(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ), source, game);
         return true;
     }

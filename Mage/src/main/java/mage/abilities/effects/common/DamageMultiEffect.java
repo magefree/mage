@@ -12,9 +12,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -39,7 +37,7 @@ public class DamageMultiEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public DamageMultiEffect(final DamageMultiEffect effect) {
+    protected DamageMultiEffect(final DamageMultiEffect effect) {
         super(effect);
         this.damagedSet.addAll(effect.damagedSet);
         this.amount = effect.amount;
@@ -79,10 +77,21 @@ public class DamageMultiEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (amount.toString().equals("3")) {
-            return this.sourceName + " deals 3 damage divided as you choose among one, two, or three targets";
+        StringBuilder sb = new StringBuilder(sourceName);
+        sb.append(" deals ");
+
+        String amountString = amount.toString();
+        sb.append(amountString);
+        sb.append(" damage divided as you choose among ");
+        sb.append(amountString.equals("2") ? "one or two " : amountString.equals("3") ? "one, two, or three " : "any number of ");
+
+        String targetName = mode.getTargets().get(0).getTargetName();
+        if (!targetName.contains("target")) {
+            sb.append("target ");
         }
-        return this.sourceName + " deals " + amount.toString() + " damage divided as you choose among any number of " + mode.getTargets().get(0).getTargetName();
+        sb.append(targetName);
+
+        return sb.toString();
     }
 
     public String getSourceName() {

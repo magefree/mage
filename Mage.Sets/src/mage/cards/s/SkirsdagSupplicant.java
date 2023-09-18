@@ -29,7 +29,7 @@ public final class SkirsdagSupplicant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {B}, {T}, Discard a card: Each player loses 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(2), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(2), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

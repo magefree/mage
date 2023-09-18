@@ -45,7 +45,7 @@ class SignalTheClansEffect extends SearchEffect {
         staticText = "Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library";
     }
 
-    public SignalTheClansEffect(final SignalTheClansEffect effect) {
+    private SignalTheClansEffect(final SignalTheClansEffect effect) {
         super(effect);
     }
 

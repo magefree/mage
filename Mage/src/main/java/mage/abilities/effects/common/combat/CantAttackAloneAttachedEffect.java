@@ -17,7 +17,7 @@ public class CantAttackAloneAttachedEffect extends RestrictionEffect {
         this.staticText = attachmentType.verb() + " creature can't attack alone";
     }
 
-    public CantAttackAloneAttachedEffect(final CantAttackAloneAttachedEffect effect) {
+    protected CantAttackAloneAttachedEffect(final CantAttackAloneAttachedEffect effect) {
         super(effect);
     }
 
@@ -33,8 +33,6 @@ public class CantAttackAloneAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        return attachment != null && attachment.getAttachedTo() != null
-                && permanent.getId().equals(attachment.getAttachedTo());
+        return permanent.getAttachments().contains(source.getSourceId());
     }
 }

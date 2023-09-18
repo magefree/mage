@@ -28,7 +28,7 @@ public final class KhenraScrapper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // You may exert Khenra Scrapper as it attacks. When you do, it gets +2/+0 until end of turn.
         this.addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn))));

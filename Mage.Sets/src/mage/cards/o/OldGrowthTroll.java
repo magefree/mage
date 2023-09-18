@@ -110,8 +110,8 @@ class OldGrowthTrollReturnEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        if (controller.choose(outcome, target, source.getSourceId(), game)
+        target.withNotTarget(true);
+        if (controller.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null) {
             game.getState().setValue("attachTo:" + source.getSourceId(), target.getFirstTarget());
         }
@@ -179,7 +179,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
                 TargetPermanent auraTarget = new TargetPermanent(filter);
                 troll.getSpellAbility().addTarget(auraTarget);
                 troll.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-                troll.addAbility(new EnchantAbility(auraTarget.getTargetName()), source.getSourceId(), game);
+                troll.addAbility(new EnchantAbility(auraTarget), source.getSourceId(), game);
 
                 // add the activated ability
                 troll.addAbility(makeAbility(), source.getSourceId(), game);

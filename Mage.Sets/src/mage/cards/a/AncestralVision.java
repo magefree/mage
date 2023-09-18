@@ -22,7 +22,7 @@ public final class AncestralVision extends CardImpl {
         this.color.setBlue(true);
         
         // Suspend 4-{U}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("U"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{U}"), this));
         // Target player draws three cards.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));

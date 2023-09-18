@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -21,6 +20,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -28,10 +28,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class ThornbiteStaff extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a Shaman creature");
-    static {
-        filter.add(SubType.SHAMAN.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.SHAMAN, "a Shaman creature");
 
     public ThornbiteStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
@@ -54,7 +51,7 @@ public final class ThornbiteStaff extends CardImpl {
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private ThornbiteStaff(final ThornbiteStaff card) {

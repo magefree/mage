@@ -36,7 +36,7 @@ public abstract class StaticAbility extends AbilityImpl {
         return super.isInUseableZone(game, source, event);
     }
 
-    public StaticAbility(StaticAbility ability) {
+    protected StaticAbility(final StaticAbility ability) {
         super(ability);
     }
 }

@@ -46,10 +46,10 @@ class BlinkmothUrnEffect extends OneShotEffect {
 
     public BlinkmothUrnEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "if Blinkmoth Urn is untapped, that player adds {1} for each artifact they control";
+        this.staticText = "if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control";
     }
 
-    public BlinkmothUrnEffect(final BlinkmothUrnEffect effect) {
+    private BlinkmothUrnEffect(final BlinkmothUrnEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class BlinkmothUrnEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null && !sourcePermanent.isTapped()) {
             player.getManaPool().addMana(Mana.ColorlessMana(
-                    game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).
+                    game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).
                     size()), game, source, false);
             return true;
         }

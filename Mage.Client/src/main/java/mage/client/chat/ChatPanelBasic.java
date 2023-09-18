@@ -2,6 +2,7 @@ package mage.client.chat;
 
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
+import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.view.ChatMessage.MessageColor;
@@ -102,10 +103,14 @@ public class ChatPanelBasic extends javax.swing.JPanel {
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPaneTxt.setViewportBorder(null);
         }
+
     }
 
     public void cleanUp() {
+    }
 
+    public void setGameData(UUID gameId, BigCard bigCard) {
+        txtConversation.setGameData(gameId, bigCard);
     }
 
     public void changeGUISize(Font font) {

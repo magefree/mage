@@ -1,24 +1,24 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BoneDragon extends CardImpl {
@@ -26,7 +26,7 @@ public final class BoneDragon extends CardImpl {
     private static final FilterCard filter = new FilterCard("other cards");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public BoneDragon(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +44,7 @@ public final class BoneDragon extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(true),
-                new ManaCostsImpl("{3}{B}{B}")
+                new ManaCostsImpl<>("{3}{B}{B}")
         );
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(7, filter)));
         this.addAbility(ability);

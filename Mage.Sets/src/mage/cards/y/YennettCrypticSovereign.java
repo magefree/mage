@@ -29,7 +29,7 @@ public final class YennettCrypticSovereign extends CardImpl {
     public YennettCrypticSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -41,7 +41,7 @@ public final class YennettCrypticSovereign extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Yennett, Cryptic Sovereign attacks, reveal the top card of your library. If that card's 
         // converted mana cost is odd, you may cast it without paying its mana cost. Otherwise, draw a card.
@@ -70,7 +70,7 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
                 "If you don't cast it, draw a card.";
     }
 
-    public YennettCrypticSovereignEffect(final YennettCrypticSovereignEffect effect) {
+    private YennettCrypticSovereignEffect(final YennettCrypticSovereignEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,9 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
         player.revealCards(source, new CardsImpl(card), game);
         if (card.getManaValue() % 2 == 1) {
             if (player.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
-                player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             } else {
                 /*
                 7/13/2018 | If the revealed card doesn’t have an odd converted mana cost or if that card does but you 

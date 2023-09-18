@@ -4,7 +4,6 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -29,14 +28,14 @@ public final class SorinMarkov extends CardImpl {
 
     public SorinMarkov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: Sorin Markov deals 2 damage to any target and you gain 2 life.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(2), 2);
-        ability1.addEffect(new GainLifeEffect(2));
+        ability1.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability1.addTarget(new TargetAnyTarget());
         this.addAbility(ability1);
 
@@ -68,7 +67,7 @@ class SorinMarkovEffect extends OneShotEffect {
         staticText = "Target opponent's life total becomes 10";
     }
 
-    public SorinMarkovEffect(SorinMarkovEffect effect) {
+    private SorinMarkovEffect(final SorinMarkovEffect effect) {
         super(effect);
     }
 

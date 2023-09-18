@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -6,8 +5,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterAttackingCreature;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetAttackingCreature;
 
 /**
  *
@@ -19,7 +17,7 @@ public final class ImmolatingGlare extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Destroy target attacking creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
+        this.getSpellAbility().addTarget(new TargetAttackingCreature());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

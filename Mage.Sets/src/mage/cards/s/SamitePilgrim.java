@@ -53,7 +53,7 @@ class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
         staticText = "Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.";
     }
 
-    public SamitePilgrimPreventDamageToTargetEffect(final SamitePilgrimPreventDamageToTargetEffect effect) {
+    private SamitePilgrimPreventDamageToTargetEffect(final SamitePilgrimPreventDamageToTargetEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        amountToPrevent = new DomainValue().calculate(game, source, this);
+        amountToPrevent = DomainValue.REGULAR.calculate(game, source, this);
     }
 
     @Override

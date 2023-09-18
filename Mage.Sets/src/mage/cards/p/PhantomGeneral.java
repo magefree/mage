@@ -23,7 +23,7 @@ public final class PhantomGeneral extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 

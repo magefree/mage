@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -39,9 +38,9 @@ public final class AngrathTheFlameChained extends CardImpl {
     public AngrathTheFlameChained(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGRATH);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Each opponent discards a card and loses 2 life.
         LoyaltyAbility ability = new LoyaltyAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), 1);
@@ -78,7 +77,7 @@ class AngrathTheFlameUltimateEffect extends OneShotEffect {
         this.staticText = "Each opponent loses life equal to the number of cards in their graveyard";
     }
 
-    public AngrathTheFlameUltimateEffect(final AngrathTheFlameUltimateEffect effect) {
+    private AngrathTheFlameUltimateEffect(final AngrathTheFlameUltimateEffect effect) {
         super(effect);
     }
 
@@ -106,7 +105,7 @@ class AngrathTheFlameCreateDelayedTriggerEffect extends OneShotEffect {
         staticText = "Sacrifice it at the beginning of the next end step if it has mana value 3 or less";
     }
 
-    public AngrathTheFlameCreateDelayedTriggerEffect(final AngrathTheFlameCreateDelayedTriggerEffect effect) {
+    private AngrathTheFlameCreateDelayedTriggerEffect(final AngrathTheFlameCreateDelayedTriggerEffect effect) {
         super(effect);
     }
 
@@ -135,7 +134,7 @@ class AngrathTheFlameChainedDelayedTriggeredAbility extends DelayedTriggeredAbil
         super(effect, Duration.Custom);
     }
 
-    public AngrathTheFlameChainedDelayedTriggeredAbility(final AngrathTheFlameChainedDelayedTriggeredAbility ability) {
+    private AngrathTheFlameChainedDelayedTriggeredAbility(final AngrathTheFlameChainedDelayedTriggeredAbility ability) {
         super(ability);
     }
 

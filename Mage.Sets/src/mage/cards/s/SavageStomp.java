@@ -43,7 +43,8 @@ public final class SavageStomp extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
-        effect.setText("Then that creature fights target creature you don't control");
+        effect.setText("Then that creature fights target creature you don't control. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));

@@ -34,7 +34,7 @@ public final class RiverSerpent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RiverSerpentEffect()));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private RiverSerpent(final RiverSerpent card) {
@@ -53,7 +53,7 @@ class RiverSerpentEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless there are five or more cards in your graveyard";
     }
 
-    public RiverSerpentEffect(final RiverSerpentEffect effect) {
+    private RiverSerpentEffect(final RiverSerpentEffect effect) {
         super(effect);
     }
 

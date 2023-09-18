@@ -4,15 +4,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
-import java.util.EnumSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
+import mage.cards.MageCard;
 import mage.client.cards.BigCard;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
@@ -36,7 +34,7 @@ public class CardInfoWindowDialog extends MageDialog {
     private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
     public enum ShowType {
-        REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, COMPANION, OTHER
+        REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, COMPANION, SIDEBOARD, OTHER
     }
 
     private final ShowType showType;
@@ -91,6 +89,17 @@ public class CardInfoWindowDialog extends MageDialog {
                     }
                 });
                 break;
+            case SIDEBOARD:
+                this.setFrameIcon(new ImageIcon(ImageHelper.getImageFromResources("/info/library.png")));
+                this.setClosable(true);
+                this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+                this.addInternalFrameListener(new InternalFrameAdapter() {
+                    @Override
+                    public void internalFrameClosing(InternalFrameEvent e) {
+                        CardInfoWindowDialog.this.hideDialog();
+                    }
+                });
+                break;
             case EXILE:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getExileImage()));
                 break;
@@ -98,6 +107,7 @@ public class CardInfoWindowDialog extends MageDialog {
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getTokenIconImage()));
                 this.setClosable(false);
                 break;
+            case OTHER:
             default:
             // no icon yet
         }
@@ -151,13 +161,33 @@ public class CardInfoWindowDialog extends MageDialog {
 
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
         cards.loadCards(showCards, bigCard, gameId, revertOrder);
+
+        // additional info for grave windows
         if (showType == ShowType.GRAVEYARD) {
             int qty = qtyCardTypes(showCards);
-            String titel = name + "'s Graveyard (" + showCards.size() + ")  -  " + qty + ((qty == 1) ? " Card Type" : " Card Types");
-            setTitle(titel);
-            this.setTitelBarToolTip(titel);
+            String newTitle = name + "'s graveyard (" + showCards.size() + ")  -  " + qty + ((qty == 1) ? " card type" : " card types");
+            setTitle(newTitle);
+            this.setTitelBarToolTip(newTitle);
         }
+
+        // additional info for sideboard window
+        if (showType == ShowType.SIDEBOARD) {
+            String newTitle = name + "'s sideboard";
+            setTitle(newTitle);
+            this.setTitelBarToolTip(newTitle);
+        }
+
         showAndPositionWindow();
+    }
+
+    /**
+     * For GUI: get mage card components for update (example: change playable status)
+     * Warning, do not change the list
+     *
+     * @return
+     */
+    public Map<UUID, MageCard> getMageCardsForUpdate() {
+        return this.cards.getMageCardsForUpdate();
     }
 
     @Override

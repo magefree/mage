@@ -66,7 +66,7 @@ class KrovikanVampireEffect extends OneShotEffect {
         staticText = "put that card onto the battlefield under your control. Sacrifice it when you lose control of {this}";
     }
 
-    KrovikanVampireEffect(KrovikanVampireEffect effect) {
+    private KrovikanVampireEffect(final KrovikanVampireEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class KrovikanVampireEffect extends OneShotEffect {
             }).map((creatureId) -> {
                 OneShotEffect effect = new SacrificeTargetEffect();
                 effect.setText("Sacrifice this if Krovikan Vampire leaves the battlefield or its current controller loses control of it.");
-                effect.setTargetPointer(new FixedTarget(creatureId));
+                effect.setTargetPointer(new FixedTarget(creatureId, game));
                 return effect;
             }).map((effect) -> new KrovikanVampireDelayedTriggeredAbility(effect, krovikanVampire.getId())).forEachOrdered((dTA) -> {
                 game.addDelayedTriggeredAbility(dTA, source);
@@ -202,7 +202,7 @@ class KrovikanVampireDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.krovikanVampire = krovikanVampire;
     }
 
-    KrovikanVampireDelayedTriggeredAbility(KrovikanVampireDelayedTriggeredAbility ability) {
+    private KrovikanVampireDelayedTriggeredAbility(final KrovikanVampireDelayedTriggeredAbility ability) {
         super(ability);
         this.krovikanVampire = ability.krovikanVampire;
     }

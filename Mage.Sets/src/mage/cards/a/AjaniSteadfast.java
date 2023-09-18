@@ -3,7 +3,6 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -41,10 +40,10 @@ public final class AjaniSteadfast extends CardImpl {
 
     public AjaniSteadfast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);

@@ -37,14 +37,14 @@ public final class CaughtInTheBrights extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
         // When a Vehicle you control attacks, exile enchanted creature.
-        this.addAbility(new AttacksAllTriggeredAbility(new ExileAttachedEffect(), false, filter, SetTargetPointer.NONE, false));
+        this.addAbility(new AttacksAllTriggeredAbility(new ExileAttachedEffect(), false, filter, SetTargetPointer.NONE, false).setTriggerPhrase("When a Vehicle you control attacks, "));
     }
 
     private CaughtInTheBrights(final CaughtInTheBrights card) {

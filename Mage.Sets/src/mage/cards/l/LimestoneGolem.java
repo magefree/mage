@@ -29,7 +29,7 @@ public final class LimestoneGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}, Sacrifice Limestone Golem: Target player draws a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

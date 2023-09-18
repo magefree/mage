@@ -35,7 +35,6 @@ public class ImproviseTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Bastion Inventor", 1);
     }
@@ -54,7 +53,6 @@ public class ImproviseTest extends CardTestPlayerBaseWithAIHelps {
         //setStrictChooseMode(true); AI must choose targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Bastion Inventor", 1);
     }
@@ -72,7 +70,6 @@ public class ImproviseTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Bastion Inventor", 1);
     }

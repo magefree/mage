@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class KondasBanner extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("legendary creatures");
+    private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("legendary creature");
 
     static {
         legendaryFilter.add(SuperType.LEGENDARY.getPredicate());
@@ -60,7 +60,7 @@ public final class KondasBanner extends CardImpl {
 
     public KondasBanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, legendaryFilter, false);
@@ -74,7 +74,7 @@ public final class KondasBanner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerTypeBoostEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target, false));
 
     }
 
@@ -97,7 +97,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
         staticText = effectText;
     }
 
-    KondasBannerTypeBoostEffect(KondasBannerTypeBoostEffect effect) {
+    private KondasBannerTypeBoostEffect(final KondasBannerTypeBoostEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             if (equipedCreature != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (perm.shareCreatureTypes(game, equipedCreature)) {
                         perm.addPower(power.calculate(game, source, this));
                         perm.addToughness(toughness.calculate(game, source, this));
@@ -137,7 +137,7 @@ class KondasBannerColorBoostEffect extends BoostAllEffect {
         staticText = effectText;
     }
 
-    KondasBannerColorBoostEffect(KondasBannerColorBoostEffect effect) {
+    private KondasBannerColorBoostEffect(final KondasBannerColorBoostEffect effect) {
         super(effect);
     }
 
@@ -148,7 +148,7 @@ class KondasBannerColorBoostEffect extends BoostAllEffect {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             if (equipedCreature != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (equipedCreature.getColor(game).shares(perm.getColor(game))) {
                         perm.addPower(power.calculate(game, source, this));
                         perm.addToughness(toughness.calculate(game, source, this));

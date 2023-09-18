@@ -48,7 +48,7 @@ class HasranOgressEffect extends OneShotEffect {
         this.staticText = "{this} deals 3 damage to you unless you pay {2}";
     }
 
-    public HasranOgressEffect(final HasranOgressEffect effect) {
+    private HasranOgressEffect(final HasranOgressEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class HasranOgressEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cost cost = new ManaCostsImpl("{2}");
+            Cost cost = new ManaCostsImpl<>("{2}");
             if (!(controller.chooseUse(Outcome.Benefit, "Pay {2}?", source, game)
                     && cost.pay(source, game, source, controller.getId(), false, null))) {
                 controller.damage(3, source.getSourceId(), source, game);

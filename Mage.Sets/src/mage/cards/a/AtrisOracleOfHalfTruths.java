@@ -27,14 +27,14 @@ public final class AtrisOracleOfHalfTruths extends CardImpl {
     public AtrisOracleOfHalfTruths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Atris, Oracle of Half-Truths enters the battlefield, target opponent looks at the top three cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AtrisOracleOfHalfTruthsEffect());
@@ -83,7 +83,7 @@ class AtrisOracleOfHalfTruthsEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
 
         TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-        targetOpponent.choose(outcome, cards, target, game);
+        targetOpponent.choose(outcome, cards, target, source, game);
         Cards faceDownPile = new CardsImpl(target.getTargets());
         cards.removeAll(target.getTargets());
         controller.revealCards(sourceObject.getIdName() + " - cards in face-up pile", cards, game);

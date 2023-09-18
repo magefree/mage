@@ -35,19 +35,20 @@ public final class SwarmGuildmage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn)
                         .setText("creatures you control get +1/+0"),
-                new ManaCostsImpl("{4}{B}")
+                new ManaCostsImpl<>("{4}{B}")
         );
         ability.addEffect(new GainAbilityControlledEffect(
                 new MenaceAbility(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES
-        ).setText("and gain menace until end of turn"));
+        ).setText("and gain menace until end of turn. " +
+                "<i>(They can't be blocked except by two or more creatures.)</i>"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {1}{G}, {T}: You gain 2 life.
         ability = new SimpleActivatedAbility(
                 new GainLifeEffect(2),
-                new ManaCostsImpl("{1}{G}")
+                new ManaCostsImpl<>("{1}{G}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

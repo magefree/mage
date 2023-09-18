@@ -24,7 +24,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2 - 2);
@@ -39,7 +38,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2 - 2);
@@ -54,7 +52,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2);
@@ -69,7 +66,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2 - 2);
@@ -82,7 +78,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 1);
@@ -96,7 +91,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20); // no attacks
@@ -110,7 +104,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20); // no attacks
@@ -126,7 +119,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - ((15 - 1) * 2)); // one will be blocked
@@ -143,7 +135,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - ((10 - 1) * 2)); // one will be blocked
@@ -159,7 +150,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Goblin Brigand", 1);
         assertLife(playerA, 20);
@@ -177,7 +167,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Goblin Brigand", 2);
         assertLife(playerA, 20);
@@ -198,7 +187,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Arbor Elf", 1);
         assertLife(playerA, 20);
@@ -214,7 +202,6 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2);

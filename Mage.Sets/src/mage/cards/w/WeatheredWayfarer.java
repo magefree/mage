@@ -36,8 +36,8 @@ public final class WeatheredWayfarer extends CardImpl {
         // {W}, {tap}: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library. Activate this ability only if an opponent controls more lands than you.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true, true),
-                new ManaCostsImpl("{W}"),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true),
+                new ManaCostsImpl<>("{W}"),
                 new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

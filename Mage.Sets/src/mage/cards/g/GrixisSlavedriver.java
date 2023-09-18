@@ -26,7 +26,7 @@ public final class GrixisSlavedriver extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false));
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{3}{B}")));
     }
 
     private GrixisSlavedriver(final GrixisSlavedriver card) {

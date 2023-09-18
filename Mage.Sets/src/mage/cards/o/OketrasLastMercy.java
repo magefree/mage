@@ -48,7 +48,7 @@ class OketrasLastMercyEffect extends OneShotEffect {
         staticText = "Your life total becomes your starting life total";
     }
 
-    public OketrasLastMercyEffect(final OketrasLastMercyEffect effect) {
+    private OketrasLastMercyEffect(final OketrasLastMercyEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class OketrasLastMercyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.setLife(game.getLife(), game, source);
+            controller.setLife(game.getStartingLife(), game, source);
             return true;
         }
         return false;

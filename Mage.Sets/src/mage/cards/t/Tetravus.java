@@ -86,7 +86,7 @@ class TetravusCreateTokensEffect extends OneShotEffect {
                 + "They each have flying and \"This creature can't be enchanted.\"";
     }
 
-    public TetravusCreateTokensEffect(final TetravusCreateTokensEffect effect) {
+    private TetravusCreateTokensEffect(final TetravusCreateTokensEffect effect) {
         super(effect);
     }
 
@@ -137,7 +137,7 @@ class TetravusAddCountersEffect extends OneShotEffect {
                 + "If you do, put that many +1/+1 counters on {this}";
     }
 
-    public TetravusAddCountersEffect(final TetravusAddCountersEffect effect) {
+    private TetravusAddCountersEffect(final TetravusAddCountersEffect effect) {
         super(effect);
     }
 
@@ -155,7 +155,7 @@ class TetravusAddCountersEffect extends OneShotEffect {
         }
         FilterControlledPermanent filter = new FilterControlledPermanent("tokens created with " + permanent.getName());
         filter.add(new TetravusPredicate(new MageObjectReference(permanent, game)));
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         ExileTargetCost cost = new ExileTargetCost(new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true));
         if (cost.pay(source, game, source, player.getId(), true)) {
             return new AddCountersSourceEffect(CounterType.P1P1.createInstance(cost.getPermanents().size())).apply(game, source);

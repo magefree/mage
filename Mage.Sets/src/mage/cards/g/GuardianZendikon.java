@@ -40,11 +40,11 @@ public final class GuardianZendikon extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
-                new GuardianZendikonWallToken(), "Enchanted land is a 2/6 white wall creature with defender. It's still a land", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
+                new GuardianZendikonWallToken(), "Enchanted land is a 2/6 white Wall creature with defender. It's still a land", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
         this.addAbility(ability2);
 
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false);
@@ -64,7 +64,7 @@ public final class GuardianZendikon extends CardImpl {
 class GuardianZendikonWallToken extends TokenImpl {
 
     GuardianZendikonWallToken() {
-        super("", "2/6 white wall creature with defender");
+        super("", "2/6 white Wall creature with defender");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.WALL);
@@ -72,7 +72,7 @@ class GuardianZendikonWallToken extends TokenImpl {
         toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
     }
-    public GuardianZendikonWallToken(final GuardianZendikonWallToken token) {
+    private GuardianZendikonWallToken(final GuardianZendikonWallToken token) {
         super(token);
     }
 

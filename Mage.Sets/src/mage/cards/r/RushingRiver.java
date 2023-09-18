@@ -35,7 +35,7 @@ public final class RushingRiver extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         Effect effect = new ConditionalOneShotEffect(
                 new ReturnToHandTargetEffect(),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "if this spell was kicked, return another target nonland permanent to its owner's hand");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
@@ -58,7 +58,7 @@ enum RushingRiverAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (KickedCondition.instance.apply(game, ability)) {
+        if (KickedCondition.ONCE.apply(game, ability)) {
             ability.getTargets().clear();
             ability.addTarget(new TargetNonlandPermanent(2));
         }

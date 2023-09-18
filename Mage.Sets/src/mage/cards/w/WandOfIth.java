@@ -52,7 +52,7 @@ class WandOfIthEffect extends OneShotEffect {
         staticText = "Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its mana value";
     }
 
-    public WandOfIthEffect(final WandOfIthEffect effect) {
+    private WandOfIthEffect(final WandOfIthEffect effect) {
         super(effect);
     }
 

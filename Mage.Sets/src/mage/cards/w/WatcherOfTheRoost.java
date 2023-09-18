@@ -41,7 +41,7 @@ public final class WatcherOfTheRoost extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Morph - Reveal a white card in your hand
-        this.addAbility(new MorphAbility(this, new RevealTargetFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new MorphAbility(new RevealTargetFromHandCost(new TargetCardInHand(filter))));
         
         // When Watcher of the Roost is turned face up, you gain 2 life.
         Effect effect = new GainLifeEffect(2);

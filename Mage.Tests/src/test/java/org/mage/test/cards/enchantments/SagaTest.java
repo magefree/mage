@@ -29,22 +29,21 @@ public class SagaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertCounterCount(rite, CounterType.LORE, 1);
-        assertPermanentCount(playerA, "Cleric", 2);
+        assertPermanentCount(playerA, "Cleric Token", 2);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertCounterCount(rite, CounterType.LORE, 2);
-        assertPermanentCount(playerA, "Cleric", 4);
+        assertPermanentCount(playerA, "Cleric Token", 4);
 
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, rite, 1);
         assertPermanentCount(playerA, rite, 0);
-        assertPermanentCount(playerA, "Cleric", 4);
-        assertPermanentCount(playerA, "Demon", 1);
+        assertPermanentCount(playerA, "Cleric Token", 4);
+        assertPermanentCount(playerA, "Demon Token", 1);
     }
 
     @Test
@@ -59,24 +58,23 @@ public class SagaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertCounterCount(rite, CounterType.LORE, 1);
-        assertPermanentCount(playerA, "Cleric", 2);
+        assertPermanentCount(playerA, "Cleric Token", 2);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertCounterCount(rite, CounterType.LORE, 2);
-        assertPermanentCount(playerA, "Cleric", 4);
+        assertPermanentCount(playerA, "Cleric Token", 4);
 
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, flicker, rite);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, rite, 0);
         assertPermanentCount(playerA, rite, 1);
         assertCounterCount(playerA, rite, CounterType.LORE, 1);
-        assertPermanentCount(playerA, "Cleric", 6);
-        assertPermanentCount(playerA, "Demon", 0);
+        assertPermanentCount(playerA, "Cleric Token", 6);
+        assertPermanentCount(playerA, "Demon Token", 0);
     }
 
     @Test
@@ -91,24 +89,23 @@ public class SagaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertCounterCount(rite, CounterType.LORE, 1);
-        assertPermanentCount(playerA, "Cleric", 2);
+        assertPermanentCount(playerA, "Cleric Token", 2);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertCounterCount(rite, CounterType.LORE, 2);
-        assertPermanentCount(playerA, "Cleric", 4);
+        assertPermanentCount(playerA, "Cleric Token", 4);
 
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, boomerang, rite);
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, rite, 1);
         assertPermanentCount(playerA, rite, 0);
         assertGraveyardCount(playerA, boomerang, 1);
-        assertPermanentCount(playerA, "Cleric", 4);
-        assertPermanentCount(playerA, "Demon", 1);
+        assertPermanentCount(playerA, "Cleric Token", 4);
+        assertPermanentCount(playerA, "Demon Token", 1);
     }
 
     @Test
@@ -122,16 +119,15 @@ public class SagaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertCounterCount(rite, CounterType.LORE, 2);
-        assertPermanentCount(playerA, "Cleric", 4);
+        assertPermanentCount(playerA, "Cleric Token", 4);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, rite, 1);
         assertPermanentCount(playerA, rite, 0);
-        assertPermanentCount(playerA, "Cleric", 4);
-        assertPermanentCount(playerA, "Demon", 1);
+        assertPermanentCount(playerA, "Cleric Token", 4);
+        assertPermanentCount(playerA, "Demon Token", 1);
     }
 
     @Test
@@ -151,7 +147,6 @@ public class SagaTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, saga, 0);
         assertGraveyardCount(playerA, saga, 1);
@@ -175,7 +170,6 @@ public class SagaTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, saga, 0);
         assertGraveyardCount(playerA, saga, 1);

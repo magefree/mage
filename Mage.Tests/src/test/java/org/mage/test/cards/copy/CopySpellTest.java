@@ -4,7 +4,7 @@ import mage.abilities.MageSingleton;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
@@ -12,6 +12,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.util.CardUtil;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -39,20 +40,19 @@ public class CopySpellTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chain of Vapor", "Pillarfield Ox");
         // chain 1 - B can return
         addTarget(playerB, "Island"); // select a land to sacrifice
-        setChoice(playerB, "Yes"); // want to copy spell
-        setChoice(playerB, "Yes"); // want to change target
+        setChoice(playerB, true); // want to copy spell
+        setChoice(playerB, true); // want to change target
         addTarget(playerB, "Silvercoat Lion"); // new target after copy
         // chain 2 - A can return
         addTarget(playerA, "Island"); // select a land to sacrifice
-        setChoice(playerA, "Yes"); // want to copy spell
-        setChoice(playerA, "Yes"); // want to change target
+        setChoice(playerA, true); // want to copy spell
+        setChoice(playerA, true); // want to change target
         addTarget(playerA, "Pillarfield Ox"); // new target after copy
         // stop the chain by B
         addTarget(playerB, TestPlayer.TARGET_SKIP);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Silvercoat Lion", 1);
         assertHandCount(playerB, "Pillarfield Ox", 2);
@@ -82,7 +82,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Angelic Blessing", 1);
         // original target
@@ -109,17 +108,16 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
 
         castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
-        setChoice(playerA, "Yes"); // use Conspire
+        setChoice(playerA, true); // use Conspire
         addTarget(playerA, "Bonecrusher Giant"); // target bone
         setChoice(playerA, "Grizzly Bears"); // pay for conspire
         setChoice(playerA, "Savannah Lions"); // pay for conspire
         setChoice(playerA, "When you pay"); // Put Conspire on the stack first.
-        setChoice(playerA, "No"); // both spells target bone
+        setChoice(playerA, false); // both spells target bone
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2 * 2, 3 + 2 * 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
@@ -140,18 +138,17 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
 
         castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
-        setChoice(playerA, "Yes"); // use Conspire
+        setChoice(playerA, true); // use Conspire
         addTarget(playerA, "Bonecrusher Giant"); // target bone
         setChoice(playerA, "Grizzly Bears"); // pay for conspire
         setChoice(playerA, "Savannah Lions"); // pay for conspire
         setChoice(playerA, "When you pay"); // Put Conspire on the stack first.
-        setChoice(playerA, "Yes"); // new target for copy: bear
+        setChoice(playerA, true); // new target for copy: bear
         addTarget(playerA, "Grizzly Bears");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2, 3 + 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2 + 2, 2 + 2);
@@ -172,18 +169,17 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
 
         castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
-        setChoice(playerA, "Yes"); // use Conspire
+        setChoice(playerA, true); // use Conspire
         addTarget(playerA, "Grizzly Bears"); // target bear
         setChoice(playerA, "Grizzly Bears"); // pay for conspire
         setChoice(playerA, "Savannah Lions"); // pay for conspire
-        setChoice(playerA, "Yes"); // new target for copy: bone
+        setChoice(playerA, true); // new target for copy: bone
         addTarget(playerA, "Bonecrusher Giant");
         // setChoice(playerA, "When {this} becomes the target of a spell"); // must be one trigger from bone, not two
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2, 3 + 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2 + 2, 2 + 2);
@@ -221,7 +217,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Giant Growth", 1);
         assertPowerToughness(playerA, "Silverfur Partisan", 5, 5);
         assertPowerToughness(playerA, "Zada, Hedron Grinder", 6, 6);
-        assertPermanentCount(playerA, "Wolf", 1); // created from Silverfur ability
+        assertPermanentCount(playerA, "Wolf Token", 1); // created from Silverfur ability
     }
     */
 
@@ -300,7 +296,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Into the Fray", "Zada, Hedron Grinder");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -331,7 +327,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         addTarget(playerA, playerB);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt");
         addTarget(playerB, playerA); // original target
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, playerB);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -358,7 +354,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         // Flying, vigilance, deathtouch, lifelink
         // At the beginning of your end step, proliferate.
-        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 1);
         // Walking Ballista enters the battlefield with X +1/+1 counters on it.
         // {4}: Put a +1/+1 counter on Walking Ballista.
         // Remove a +1/+1 counter from Walking Ballista: It deals 1 damage to any target.
@@ -372,6 +368,8 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Dualcaster Mage"); // Creature {1}{R}{R}
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
         setChoice(playerA, "X=1");
         setChoice(playerA, "Walking Ballista"); // for proliferate
@@ -379,7 +377,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Slash", "Atraxa, Praetors' Voice");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Dualcaster Mage");
         addTarget(playerB, "Flame Slash"); // original target
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         addTarget(playerB, "Walking Ballista");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove a", "Silvercoat Lion", "Flame Slash", StackClause.WHILE_COPY_ON_STACK);
@@ -411,14 +409,13 @@ public class CopySpellTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
         addTarget(playerA, "Mountain");
-        setChoice(playerA, "Yes"); // Copy
-        setChoice(playerA, "Yes"); // Choose new target
+        setChoice(playerA, true); // Copy
+        setChoice(playerA, true); // Choose new target
         addTarget(playerA, "Island");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mountain", 1);
         assertPermanentCount(playerA, "Island", 1);
@@ -459,7 +456,7 @@ public class CopySpellTest extends CardTestPlayerBase {
 
         // cast spark and make imoti's copy
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes"); // use copy
+        setChoice(playerA, true); // use copy
         setChoice(playerA, "Imoti, Celebrant of Bounty"); // copy of imoti
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Imoti, Celebrant of Bounty", 2);
@@ -469,15 +466,14 @@ public class CopySpellTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Tyrranax");
         checkStackSize("afer big spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 3);
         setChoice(playerA, "cascade"); // choice between 2x gained cascades
-        setChoice(playerA, "Yes"); // cast first bolt by first cascade
+        setChoice(playerA, true); // cast first bolt by first cascade
         addTarget(playerA, playerB); // target for first bolt
-        setChoice(playerA, "Yes"); // cast second bold by second cascade
+        setChoice(playerA, true); // cast second bold by second cascade
         addTarget(playerA, playerB); // target for second bolt
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3 * 2); // 2x bolts from 2x cascades
     }
@@ -520,7 +516,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -556,8 +551,8 @@ public class CopySpellTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banefire", playerB);
         setChoice(playerA, "X=2");
-        setChoice(playerA, "Yes"); // make copy
-        setChoice(playerA, "No"); // keep target same
+        setChoice(playerA, true); // make copy
+        setChoice(playerA, false); // keep target same
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkLife("after spell copy", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 2 * 2);
 
@@ -566,14 +561,13 @@ public class CopySpellTest extends CardTestPlayerBase {
         // token must have x=0 (dies)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian");
         setChoice(playerA, "X=1");
-        setChoice(playerA, "Yes"); // make copy
+        setChoice(playerA, true); // make copy
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after creature copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian", 1);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -638,7 +632,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // counters checks
         int originalCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
@@ -723,10 +716,10 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void test_SimpleCopy_MDFC() {
-        ModalDoubleFacesCard sourceCard = (ModalDoubleFacesCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
-        ModalDoubleFacesCard originalCard = (ModalDoubleFacesCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        ModalDoubleFacedCard sourceCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        ModalDoubleFacedCard originalCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
         prepareZoneAndZCC(originalCard);
-        ModalDoubleFacesCard copiedCard = (ModalDoubleFacesCard) currentGame.copyCard(originalCard, null, playerA.getId());
+        ModalDoubleFacedCard copiedCard = (ModalDoubleFacedCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
         Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
         Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
@@ -748,6 +741,39 @@ public class CopySpellTest extends CardTestPlayerBase {
         abilitySourceMustBeSame(originalCard.getRightHalfCard(), "right original");
         abilitySourceMustBeSame(copiedCard.getRightHalfCard(), "right copied");
         //cardsMustHaveSameZoneAndZCC(originalCard.getRightHalfCard(), copiedCard.getRightHalfCard(), "right");
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/7655
+     * Thieving Skydiver is kicked and then copied, but the copied version does not let you gain control of anything.
+     */
+    @Test
+    @Ignore
+    public void copySpellWithKicker() {
+        // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with mana value X or less.
+        // If that artifact is an Equipment, attach it to Thieving Skydiver.
+        addCard(Zone.HAND, playerA, "Thieving Skydiver");
+        // Copy target creature spell you control, except it isn’t legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3); // Original price, + 1 kicker, + 1 for Double Major
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Sol Ring", 2);
+        setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thieving Skydiver");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "X=1");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Thieving Skydiver", "Thieving Skydiver");
+        addTarget(playerA, "Sol Ring"); // Choice for copy
+        addTarget(playerA, "Sol Ring"); // Choice for original
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+
+        execute();
+
+        assertPermanentCount(playerA, "Sol Ring", 2); // 1 taken by original, one by copy
+        assertPermanentCount(playerB, "Sol Ring", 0);
     }
 
     private void abilitySourceMustBeSame(Card card, String infoPrefix) {

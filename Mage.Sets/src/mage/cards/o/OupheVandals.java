@@ -30,7 +30,7 @@ public final class OupheVandals extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("ability from an artifact source");
 
     static {
-        filter.add(new ArtifactSourcePredicate());
+        filter.add(ArtifactSourcePredicate.instance);
     }
 
     public OupheVandals(UUID ownerId, CardSetInfo setInfo) {
@@ -65,7 +65,7 @@ class OupheVandalsEffect extends OneShotEffect {
         this.staticText = "Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield.";
     }
 
-    public OupheVandalsEffect(final OupheVandalsEffect effect) {
+    private OupheVandalsEffect(final OupheVandalsEffect effect) {
         super(effect);
     }
 

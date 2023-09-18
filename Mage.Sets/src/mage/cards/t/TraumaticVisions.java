@@ -23,7 +23,7 @@ public final class TraumaticVisions extends CardImpl {
         // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private TraumaticVisions(final TraumaticVisions card) {

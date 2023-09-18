@@ -85,13 +85,13 @@ class AgitatorAntEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent targetPermanent = new TargetControlledCreaturePermanent(0, 1);
-            targetPermanent.setNotTarget(true);
-            player.choose(Outcome.BoostCreature, targetPermanent, source.getSourceId(), game);
+            targetPermanent.withNotTarget(true);
+            player.choose(Outcome.BoostCreature, targetPermanent, source, game);
             Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
             if (permanent == null || !permanent.addCounters(CounterType.P1P1.createInstance(2), player.getId(), source, game)) {
                 continue;
             }
-            new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);
+            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
         }
         return true;
     }

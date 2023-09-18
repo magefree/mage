@@ -53,7 +53,7 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
         staticText = "If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead";
     }
 
-    public DryadMilitantReplacementEffect(final DryadMilitantReplacementEffect effect) {
+    private DryadMilitantReplacementEffect(final DryadMilitantReplacementEffect effect) {
         super(effect);
     }
 

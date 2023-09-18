@@ -29,7 +29,7 @@ public final class DiscipleOfTheOldWays extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}: Disciple of the Old Ways gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private DiscipleOfTheOldWays(final DiscipleOfTheOldWays card) {

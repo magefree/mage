@@ -11,18 +11,16 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
@@ -40,12 +38,12 @@ public final class RoilingHorror extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Roiling Horror's power and toughness are each equal to your life total minus the life total of an opponent with the most life.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new RoilingHorrorDynamicValue(), Duration.EndOfGame)
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new RoilingHorrorDynamicValue())
                 .setText("{this}'s power and toughness are each equal to your life total minus the life total of an opponent with the most life.")
         ));
 
         // Suspend X-{X}{B}{B}{B}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{B}{B}{B}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{B}{B}{B}"), this, true));
 
         // Whenever a time counter is removed from Roiling Horror while it's exiled, target player loses 1 life and you gain 1 life.
         this.addAbility(new RoilingHorrorTriggeredAbility());
@@ -70,9 +68,10 @@ class RoilingHorrorTriggeredAbility extends TriggeredAbilityImpl {
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         this.addEffect(effect);
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
-    public RoilingHorrorTriggeredAbility(final RoilingHorrorTriggeredAbility ability) {
+    private RoilingHorrorTriggeredAbility(final RoilingHorrorTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,12 +89,6 @@ class RoilingHorrorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }
 
 class RoilingHorrorDynamicValue implements DynamicValue {

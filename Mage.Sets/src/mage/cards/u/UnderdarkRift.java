@@ -63,7 +63,7 @@ class UnderdarkRiftEffect extends OneShotEffect {
 
     UnderdarkRiftEffect() {
         super(Outcome.Benefit);
-        staticText = "roll a d10. Put a target artifact, creature, or planeswalker into its owner's library " +
+        staticText = "roll a d10. Put target artifact, creature, or planeswalker into its owner's library " +
                 "just beneath the top X cards of that library, where X is the result";
     }
 
@@ -83,7 +83,7 @@ class UnderdarkRiftEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        int result = player.rollDice(source, game, 10);
+        int result = player.rollDice(outcome, source, game, 10);
         player.putCardOnTopXOfLibrary(permanent, game, source, result + 1, true);
         return true;
     }

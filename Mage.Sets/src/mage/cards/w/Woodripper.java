@@ -32,7 +32,7 @@ public final class Woodripper extends CardImpl {
         // Fading 3
         this.addAbility(new FadingAbility(3, this));
         // {1}, Remove a fade counter from Woodripper: Destroy target artifact.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.FADE.createInstance()));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

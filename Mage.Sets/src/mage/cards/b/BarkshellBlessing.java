@@ -24,7 +24,7 @@ public final class BarkshellBlessing extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));
     }
 
     private BarkshellBlessing(final BarkshellBlessing card) {

@@ -25,6 +25,7 @@ public final class RangerEnVec extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.subtype.add(SubType.ARCHER);
+        this.subtype.add(SubType.RANGER);
 
 
         this.power = new MageInt(2);

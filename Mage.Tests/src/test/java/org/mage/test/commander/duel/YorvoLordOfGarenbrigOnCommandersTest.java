@@ -34,7 +34,6 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -67,8 +66,8 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
         setChoice(playerA, "Whenever another green creature enters the battlefield"); // get counters trigger
         //setChoice(playerA, "When {this} enters the battlefield, sacrifice it"); // sacrifice trigger must be on top
 
-        setChoice(playerA, "Yes"); // return commander to command zone
-        setChoice(playerA, "No"); // do not put land to battlefield
+        setChoice(playerA, true); // return commander to command zone
+        setChoice(playerA, false); // do not put land to battlefield
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCounters("must get +2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yorvo, Lord of Garenbrig", CounterType.P1P1, 4 + 2);
@@ -77,6 +76,5 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

@@ -73,10 +73,15 @@ class ReignOfTerrorEffect extends OneShotEffect {
                 "", "Green", "White", source, game
         ) ? greenFilter : whiteFilter;
         int died = game.getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
+                .getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
                 .mapToInt(permanent -> permanent.destroy(source, game, true) ? 1 : 0)
                 .sum();
-        return player.loseLife(2 * died, game, source, false) > 0;
+        if (died > 0) {
+            game.getState().processAction(game);
+            player.loseLife(2 * died, game, source, false);
+            return true;
+        }
+        return false;
     }
 }

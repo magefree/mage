@@ -4,13 +4,12 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -46,7 +45,7 @@ public final class RimefeatherOwl extends CardImpl {
     public RimefeatherOwl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -55,14 +54,14 @@ public final class RimefeatherOwl extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Rimefeather Owl's power and toughness are each equal to the number of snow permanents on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter2), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter2))));
 
         // {1}{snow}: Put an ice counter on target permanent.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.ICE.createInstance())
                         .setText("Put an ice counter on target permanent."),
-                new ManaCostsImpl("{1}{S}")
+                new ManaCostsImpl<>("{1}{S}")
         );
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
@@ -88,9 +87,10 @@ class RimefeatherOwlEffect extends ContinuousEffectImpl {
     public RimefeatherOwlEffect(Duration duration, FilterPermanent filter) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.filter = filter;
+        this.staticText = "Permanents with ice counters on them are snow.";
     }
 
-    public RimefeatherOwlEffect(final RimefeatherOwlEffect effect) {
+    private RimefeatherOwlEffect(final RimefeatherOwlEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -102,15 +102,10 @@ class RimefeatherOwlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.addSuperType(SuperType.SNOW);
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            permanent.addSuperType(game, SuperType.SNOW);
 
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Permanents with ice counters on them are snow.";
     }
 }

@@ -22,7 +22,7 @@ import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
  */
 public final class DragonlordAtarka extends CardImpl {
 
-    private static final FilterCreatureOrPlaneswalkerPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("target creatures and/or planeswalkers your opponents control");
+    private static final FilterCreatureOrPlaneswalkerPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creatures and/or planeswalkers your opponents control");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -30,7 +30,7 @@ public final class DragonlordAtarka extends CardImpl {
 
     public DragonlordAtarka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(8);

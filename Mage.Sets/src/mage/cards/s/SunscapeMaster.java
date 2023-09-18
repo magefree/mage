@@ -34,14 +34,14 @@ public final class SunscapeMaster extends CardImpl {
         // {G}{G}, {tap}: Creatures you control get +2/+2 until end of turn.
         Effect effect1 = new BoostControlledEffect(2, 2, Duration.EndOfTurn);
         effect1.setText("Creatures you control get +2/+2 until end of turn");
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect1, new ManaCostsImpl("{G}{G}"));
+        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect1, new ManaCostsImpl<>("{G}{G}"));
         ability1.addCost(new TapSourceCost());
         this.addAbility(ability1);
         
         // {U}{U}, {tap}: Return target creature to its owner's hand.
         Effect effect2 = new ReturnToHandTargetEffect();
         effect2.setText("Return target creature to its owner's hand.");
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new ManaCostsImpl("{U}{U}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new ManaCostsImpl<>("{U}{U}"));
         ability2.addTarget(new TargetCreaturePermanent());
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);

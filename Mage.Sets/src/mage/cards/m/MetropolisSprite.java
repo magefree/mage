@@ -31,7 +31,7 @@ public final class MetropolisSprite extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}: Metropolis Sprite gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private MetropolisSprite(final MetropolisSprite card) {

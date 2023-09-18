@@ -44,7 +44,7 @@ public final class KavuRunner extends CardImpl {
         // Kavu Runner has haste as long as no opponent controls a white or blue creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
             new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(),
-            Duration.WhileOnBattlefield), new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, false)),
+            Duration.WhileOnBattlefield), new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, false)),
             "{this} has haste as long as no opponent controls a white or blue creature")));
     }
 

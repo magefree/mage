@@ -3,12 +3,12 @@
 package mage.game.turn;
 
 import java.util.UUID;
+
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BeginningPhase extends Phase {
@@ -30,7 +30,7 @@ public class BeginningPhase extends Phase {
     }
 
 
-    public BeginningPhase(final BeginningPhase phase) {
+    protected BeginningPhase(final BeginningPhase phase) {
         super(phase);
     }
 

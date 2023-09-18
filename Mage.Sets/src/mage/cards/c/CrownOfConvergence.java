@@ -43,7 +43,7 @@ public final class CrownOfConvergence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {G}{W}: Put the top card of your library on the bottom of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfConvergenceEffect(), new ManaCostsImpl("{G}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfConvergenceEffect(), new ManaCostsImpl<>("{G}{W}")));
     }
 
     private CrownOfConvergence(final CrownOfConvergence card) {
@@ -75,7 +75,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
         if (you != null) {
             Card topCard = you.getLibrary().getFromTop(game);
             if (topCard != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game)) {
                     if (permanent.getColor(game).shares(topCard.getColor(game)) && !permanent.getColor(game).isColorless()) {
                         permanent.addPower(power.calculate(game, source, this));
                         permanent.addToughness(toughness.calculate(game, source, this));

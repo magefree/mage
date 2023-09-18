@@ -25,9 +25,10 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean ignoreRulesGeneration) {
         super(Zone.ALL, effect, optional); // Zone.All because a creature with trigger can be put into play and be sacrificed during the resolution of an effect (discard Obstinate Baloth with Smallpox)
         this.ignoreRulesGeneration = ignoreRulesGeneration;
+        setTriggerPhrase("When {this} enters the battlefield, ");
     }
 
-    public EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
+    protected EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
         super(ability);
         this.ignoreRulesGeneration = ability.ignoreRulesGeneration;
         this.etbFlavorWord = ability.etbFlavorWord;
@@ -45,16 +46,6 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return super.getRule();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} enters the battlefield, ";
     }
 
     @Override

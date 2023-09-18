@@ -45,7 +45,7 @@ class RallyTheHordeEffect extends OneShotEffect {
         this.staticText = "Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land card, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.";
     }
 
-    public RallyTheHordeEffect(final RallyTheHordeEffect effect) {
+    private RallyTheHordeEffect(final RallyTheHordeEffect effect) {
         super(effect);
     }
 

@@ -33,7 +33,7 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
         staticText = setText();
     }
 
-    public CastAsThoughItHadFlashAllEffect(final CastAsThoughItHadFlashAllEffect effect) {
+    protected CastAsThoughItHadFlashAllEffect(final CastAsThoughItHadFlashAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.anyPlayer = effect.anyPlayer;
@@ -56,34 +56,28 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
             if (card != null) {
                 //Allow lands with morph to be played at instant speed
                 if (card.isLand(game)) {
-                    boolean morphAbility = card.getAbilities().stream().anyMatch(ability -> ability instanceof MorphAbility);
+                    boolean morphAbility = card.getAbilities().stream().anyMatch(MorphAbility.class::isInstance);
                     if (morphAbility) {
                         Card cardCopy = card.copy();
                         cardCopy.removeAllCardTypes(game);
                         cardCopy.addCardType(game, CardType.CREATURE);
-                        return filter.match(cardCopy, source.getSourceId(), affectedControllerId, game);
+                        return filter.match(cardCopy, affectedControllerId, source, game);
                     }
                 }
-                return filter.match(card, source.getSourceId(), affectedControllerId, game);
+                return filter.match(card, affectedControllerId, source, game);
             }
         }
         return false;
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder();
-        if (anyPlayer) {
-            sb.append("Any player");
-        } else {
-            sb.append("You");
-        }
+        StringBuilder sb = new StringBuilder(anyPlayer ? "any player" : "you");
         sb.append(" may cast ");
         sb.append(filter.getMessage());
         if (!duration.toString().isEmpty()) {
             if (duration == Duration.EndOfTurn) {
                 sb.append(" this turn");
             } else {
-                sb.append(' ');
                 sb.append(' ');
                 sb.append(duration.toString());
             }

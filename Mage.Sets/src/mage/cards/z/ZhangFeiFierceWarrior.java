@@ -19,7 +19,7 @@ public final class ZhangFeiFierceWarrior extends CardImpl {
 
     public ZhangFeiFierceWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER, SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

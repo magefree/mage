@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,6 +26,7 @@ public final class AbandonReason extends CardImpl {
 
         // Up to two target creatures each get +1/+0 and gain first strike until end of turn.
         Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
+        effect.setOutcome(Outcome.Benefit);
         effect.setText("Up to two target creatures each get +1/+0");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, "and gain first strike until end of turn");
@@ -32,7 +34,7 @@ public final class AbandonReason extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Madness {1}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private AbandonReason(final AbandonReason card) {

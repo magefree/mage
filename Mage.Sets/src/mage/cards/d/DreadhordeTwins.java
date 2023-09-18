@@ -24,7 +24,7 @@ public final class DreadhordeTwins extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "Zombie tokens");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public DreadhordeTwins(UUID ownerId, CardSetInfo setInfo) {
@@ -37,7 +37,7 @@ public final class DreadhordeTwins extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Dreadhorde Twins enters the battlefield, amass 2.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(2, SubType.ZOMBIE)));
 
         // Zombie tokens you control have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

@@ -28,8 +28,7 @@ public final class RudeAwakening extends CardImpl {
         // Untap all lands you control;
         this.getSpellAbility().addEffect(new UntapAllLandsControllerEffect());
         // or until end of turn, lands you control become 2/2 creatures that are still lands.
-        Mode mode = new Mode();
-        mode.addEffect(new BecomesCreatureAllEffect(
+        Mode mode = new Mode(new BecomesCreatureAllEffect(
                 new CreatureToken(2, 2),
                 "lands", new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn, false));
         this.getSpellAbility().getModes().addMode(mode);

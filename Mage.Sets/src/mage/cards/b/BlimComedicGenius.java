@@ -32,7 +32,7 @@ public final class BlimComedicGenius extends CardImpl {
     public BlimComedicGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.IMP);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -86,20 +86,20 @@ class BlimComedicGeniusEffect extends OneShotEffect {
         game.addEffect(new GainControlTargetEffect(
                 Duration.Custom, true, targetPointer.getFirst(game, source)
         ).setTargetPointer(new FixedTarget(source.getFirstTarget(), game)), source);
-        game.applyEffects();
+        game.getState().processAction(game);
         Map<UUID, Cards> cardsMap = new HashMap<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
-            int count = game.getBattlefield().count(filter, source.getSourceId(), playerId, game);
+            int count = game.getBattlefield().count(filter, playerId, source, game);
             if (count < 1) {
                 continue;
             }
             player.loseLife(count, game, source, true);
             TargetDiscard target = new TargetDiscard(StaticFilters.FILTER_CARD, playerId);
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             cardsMap.put(playerId, new CardsImpl(target.getTargets()));
         }
         for (Map.Entry<UUID, Cards> entry : cardsMap.entrySet()) {

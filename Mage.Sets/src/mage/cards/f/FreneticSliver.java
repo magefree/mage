@@ -40,7 +40,7 @@ public final class FreneticSliver extends CardImpl {
                         new SimpleActivatedAbility(
                                 Zone.BATTLEFIELD,
                                 new FreneticSliverEffect(),
-                                new ManaCostsImpl("{0}")
+                                new ManaCostsImpl<>("{0}")
                         ), Duration.WhileOnBattlefield, filter, rule
                 )
         ));
@@ -65,7 +65,7 @@ class FreneticSliverEffect extends OneShotEffect {
                 + "at the beginning of the next end step. If you lose the flip, sacrifice it";
     }
 
-    public FreneticSliverEffect(final FreneticSliverEffect effect) {
+    private FreneticSliverEffect(final FreneticSliverEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class FreneticSliverEffect extends OneShotEffect {
             return false;
         }
         if (player.flipCoin(source, game, true)) {
-            return new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true).apply(game, source);
+            return new ExileReturnBattlefieldOwnerNextEndStepSourceEffect().apply(game, source);
         } else {
             return perm.sacrifice(source, game);
         }

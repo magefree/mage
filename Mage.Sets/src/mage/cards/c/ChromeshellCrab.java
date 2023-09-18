@@ -14,8 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,12 +25,6 @@ import mage.target.common.TargetCreaturePermanent;
 public final class ChromeshellCrab extends CardImpl {
     
     private static final String rule = "you may exchange control of target creature you control and target creature an opponent controls";
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public ChromeshellCrab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
@@ -41,14 +34,14 @@ public final class ChromeshellCrab extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph {4}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{U}")));
         
         // When Chromeshell Crab is turned face up, you may exchange control of target creature you control and target creature an opponent controls.
         Effect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true);
         effect.setText("exchange control of target creature you control and target creature an opponent controls");
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

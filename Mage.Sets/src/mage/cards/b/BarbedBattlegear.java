@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -23,11 +24,15 @@ public final class BarbedBattlegear extends CardImpl {
     public BarbedBattlegear (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add(SubType.EQUIPMENT);
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+
+        // Equipped creature gets +4/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, -1)));
+
+        // Equip {2}
+        this.addAbility(new EquipAbility(Outcome.Neutral, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
-    public BarbedBattlegear (final BarbedBattlegear card) {
+    private BarbedBattlegear(final BarbedBattlegear card) {
         super(card);
     }
 

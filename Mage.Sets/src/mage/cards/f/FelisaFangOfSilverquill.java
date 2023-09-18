@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -35,7 +34,7 @@ public final class FelisaFangOfSilverquill extends CardImpl {
             = new FilterControlledCreaturePermanent("a nontoken creature you control");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(CounterAnyPredicate.instance);
     }
 
@@ -46,7 +45,7 @@ public final class FelisaFangOfSilverquill extends CardImpl {
     public FelisaFangOfSilverquill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);

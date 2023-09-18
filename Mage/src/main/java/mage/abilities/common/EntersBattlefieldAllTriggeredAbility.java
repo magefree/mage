@@ -21,7 +21,6 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     protected String rule;
     protected boolean controlledText;
     protected SetTargetPointer setTargetPointer;
-    protected final boolean thisOrAnother;
 
     /**
      * zone = BATTLEFIELD optional = false
@@ -54,25 +53,20 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlledText) {
-        this(zone, effect, filter, optional, setTargetPointer, rule, controlledText, false);
-    }
-
-    protected EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlledText, boolean thisOrAnother) {
         super(zone, effect, optional);
         this.filter = filter;
         this.rule = rule;
         this.controlledText = controlledText;
         this.setTargetPointer = setTargetPointer;
-        this.thisOrAnother = thisOrAnother;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
+    protected EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;
         this.controlledText = ability.controlledText;
         this.setTargetPointer = ability.setTargetPointer;
-        this.thisOrAnother = ability.thisOrAnother;
     }
 
     @Override
@@ -84,21 +78,19 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (!filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (!filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
-        this.getEffects().setValue("permanentEnteringBattlefield", permanent);
-        this.getEffects().setValue("permanentEnteringControllerId", permanent.getControllerId());
-        if (setTargetPointer == SetTargetPointer.NONE) {
-            return true;
-        }
+        this.getAllEffects().setValue("permanentEnteringBattlefield", permanent);
+        this.getAllEffects().setValue("permanentEnteringControllerId", permanent.getControllerId());
         switch (setTargetPointer) {
             case PLAYER:
-                this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                this.getAllEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
                 break;
             case PERMANENT:
-                this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                this.getAllEffects().setTargetPointer(new FixedTarget(permanent, game));
                 break;
+            default:
         }
         return true;
     }
@@ -111,12 +103,8 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return super.getRule();
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    protected String generateTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
-        if (thisOrAnother) {
-            sb.append("{this} or another ");
-        }
         sb.append(filter.getMessage());
         if (filter.getMessage().startsWith("one or more")) {
             sb.append(" enter the battlefield");

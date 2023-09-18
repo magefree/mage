@@ -57,7 +57,7 @@ class MistmoonGriffinEffect extends OneShotEffect {
         this.staticText = ", then return the top creature card of your graveyard to the battlefield";
     }
 
-    public MistmoonGriffinEffect(final MistmoonGriffinEffect effect) {
+    private MistmoonGriffinEffect(final MistmoonGriffinEffect effect) {
         super(effect);
     }
 

@@ -22,7 +22,7 @@ public final class Skyscribing extends CardImpl {
         // Each player draws X cards.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(ManacostVariableValue.REGULAR));
         // Forecast - {2}{U}, Reveal Skyscribing from your hand: Each player draws a card.
-        this.addAbility(new ForecastAbility(new DrawCardAllEffect(1), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new ForecastAbility(new DrawCardAllEffect(1), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private Skyscribing(final Skyscribing card) {

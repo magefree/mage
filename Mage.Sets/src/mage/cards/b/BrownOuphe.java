@@ -26,7 +26,7 @@ public final class BrownOuphe extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("activated ability from an artifact source");
 
     static {
-        filter.add(new ArtifactSourcePredicate());
+        filter.add(ArtifactSourcePredicate.instance);
     }
 
     public BrownOuphe(UUID ownerId, CardSetInfo setInfo) {

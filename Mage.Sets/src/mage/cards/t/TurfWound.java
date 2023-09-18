@@ -29,7 +29,7 @@ public final class TurfWound extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private TurfWound(final TurfWound card) {
@@ -49,7 +49,7 @@ class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Target player can't play land cards this turn";
     }
 
-    public TurfWoundEffect(final TurfWoundEffect effect) {
+    private TurfWoundEffect(final TurfWoundEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't play lands this turn (" + mageObject.getIdName() + ").";
         }

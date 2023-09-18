@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  * @author LoneFox
  */
-public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<MageObject> {
 
     private final FilterPermanent targetFilter;
 
@@ -35,7 +35,7 @@ public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<Ob
                     }
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-                        if (targetFilter.match(permanent, input.getSourceId(), input.getPlayerId(), game)) {
+                        if (targetFilter.match(permanent, input.getPlayerId(), input.getSource(), game)) {
                             return true;
                         }
                     }

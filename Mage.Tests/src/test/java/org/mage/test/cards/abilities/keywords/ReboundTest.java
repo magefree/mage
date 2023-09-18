@@ -133,7 +133,6 @@ public class ReboundTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         //check exile and graveyard        
         assertGraveyardCount(playerB, "Lightning Bolt", 1);

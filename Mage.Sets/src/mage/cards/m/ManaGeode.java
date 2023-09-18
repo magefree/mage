@@ -18,7 +18,7 @@ public final class ManaGeode extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // When Mana Geode enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

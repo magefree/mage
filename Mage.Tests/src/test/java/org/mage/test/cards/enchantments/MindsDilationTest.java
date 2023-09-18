@@ -28,7 +28,7 @@ public class MindsDilationTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -55,7 +55,7 @@ public class MindsDilationTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Divination", 1); // draw 2 cards
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setChoice(playerB, "No"); // no, I don't want my free 2 cards
+        setChoice(playerB, false); // no, I don't want my free 2 cards
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

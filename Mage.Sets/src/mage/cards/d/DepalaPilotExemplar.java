@@ -31,7 +31,7 @@ public final class DepalaPilotExemplar extends CardImpl {
 
     public DepalaPilotExemplar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.PILOT);
         this.power = new MageInt(3);
@@ -72,7 +72,7 @@ class DepalaPilotExemplarEffect extends OneShotEffect {
         this.staticText = "pay {X}. If you do, reveal the top X cards of your library, put all Dwarf and Vehicle cards from among them into your hand, then put the rest on the bottom of your library in a random order";
     }
 
-    DepalaPilotExemplarEffect(final DepalaPilotExemplarEffect effect) {
+    private DepalaPilotExemplarEffect(final DepalaPilotExemplarEffect effect) {
         super(effect);
     }
 

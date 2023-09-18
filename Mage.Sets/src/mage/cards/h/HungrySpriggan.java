@@ -27,7 +27,7 @@ public final class HungrySpriggan extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn).setText("it gets +3/+3 until end of turn"), false));
     }
 
     private HungrySpriggan(final HungrySpriggan card) {

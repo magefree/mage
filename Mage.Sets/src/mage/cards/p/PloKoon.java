@@ -22,7 +22,7 @@ public final class PloKoon extends CardImpl {
 
     public PloKoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KELDOR);
         this.subtype.add(SubType.JEDI);
         this.power = new MageInt(4);
@@ -32,7 +32,7 @@ public final class PloKoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(MeditateAbility.class, "meditate abilities")));
 
         // Meditate {1}{W}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private PloKoon(final PloKoon card) {

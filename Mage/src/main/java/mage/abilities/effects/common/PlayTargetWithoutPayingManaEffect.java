@@ -12,7 +12,6 @@ import mage.players.Player;
 import mage.target.Target;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
@@ -21,7 +20,7 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
         super(Outcome.GainControl);
     }
 
-    public PlayTargetWithoutPayingManaEffect(final PlayTargetWithoutPayingManaEffect effect) {
+    protected PlayTargetWithoutPayingManaEffect(final PlayTargetWithoutPayingManaEffect effect) {
         super(effect);
     }
 
@@ -47,6 +46,9 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (!mode.getTargets().isEmpty()) {
             Target target = mode.getTargets().get(0);

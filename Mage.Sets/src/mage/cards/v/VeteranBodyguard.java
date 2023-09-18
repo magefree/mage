@@ -3,7 +3,6 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalPreventionEffect;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -38,7 +37,7 @@ public final class VeteranBodyguard extends CardImpl {
         // As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalPreventionEffect(
                 new VeteranBodyguardEffect(),
-                new InvertCondition(SourceTappedCondition.instance),
+                SourceTappedCondition.UNTAPPED,
                 "As long as {this} is untapped, all damage that would be dealt to you by unblocked creatures is dealt to {this} instead."
         )));
     }
@@ -66,7 +65,7 @@ class VeteranBodyguardEffect extends PreventionEffectImpl {
         staticText = "all combat damage that would be dealt to you by unblocked creatures is dealt to {this} instead";
     }
 
-    VeteranBodyguardEffect(final VeteranBodyguardEffect effect) {
+    private VeteranBodyguardEffect(final VeteranBodyguardEffect effect) {
         super(effect);
     }
 
@@ -92,7 +91,7 @@ class VeteranBodyguardEffect extends PreventionEffectImpl {
                 && ((DamageEvent) event).isCombatDamage()) {
             Permanent p = game.getPermanent(source.getSourceId());
             if (p != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (event.getSourceId().equals(permanent.getId())) {
                         return true;
                     }

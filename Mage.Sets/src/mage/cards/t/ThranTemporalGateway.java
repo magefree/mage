@@ -29,14 +29,14 @@ public final class ThranTemporalGateway extends CardImpl {
     public ThranTemporalGateway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {4}, {t}: You may put a historic permanent card from your hand onto the battlefield. (Artifacts, legendaries, and Sagas are historic.)
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(filter)
                         .setText("You may put a historic permanent card from your hand onto the battlefield. "
                                 + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new ManaCostsImpl("{4}"));
+                new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

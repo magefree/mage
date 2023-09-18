@@ -25,7 +25,7 @@ public final class Miscalculation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private Miscalculation(final Miscalculation card) {

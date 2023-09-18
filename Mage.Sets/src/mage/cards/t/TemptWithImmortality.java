@@ -50,7 +50,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
 
     }
 
-    public TemptWithImmortalityEffect(final TemptWithImmortalityEffect effect) {
+    private TemptWithImmortalityEffect(final TemptWithImmortalityEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
                     filter.add(new OwnerIdPredicate(opponent.getId()));
                     Target targetCardOpponent = new TargetCardInGraveyard(filter);
 
-                    if (targetCardOpponent.canChoose(source.getSourceId(), opponent.getId(), game)) {
+                    if (targetCardOpponent.canChoose(opponent.getId(), source, game)) {
                         if (opponent.chooseUse(outcome, "Return a creature card from your graveyard to the battlefield?", source, game)) {
                             if (opponent.chooseTarget(outcome, targetCardOpponent, source, game)) {
                                 Card card = game.getCard(targetCardOpponent.getFirstTarget());
@@ -99,8 +99,8 @@ class TemptWithImmortalityEffect extends OneShotEffect {
 
     private boolean returnCreatureFromGraveToBattlefield(Player player, Ability source, Game game) {
         Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(false);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+        target.withNotTarget(true);
+        if (target.canChoose(source.getControllerId(), source, game)) {
             if (player.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

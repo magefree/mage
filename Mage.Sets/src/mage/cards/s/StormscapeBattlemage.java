@@ -1,9 +1,7 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCostCondition;
@@ -15,9 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,11 +21,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class StormscapeBattlemage extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
 
     public StormscapeBattlemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -49,13 +40,13 @@ public final class StormscapeBattlemage extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3),false),
                 new KickedCostCondition("{W}"),
                 "When Stormscape Battlemage enters the battlefield, if it was kicked with its {W} kicker, you gain 3 life."));
-        
-        // When Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated.        
+
+        // When Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true),false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability, new KickedCostCondition("{2}{B}"),
-                "When Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated."));        
+                "When Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated."));
     }
 
     private StormscapeBattlemage(final StormscapeBattlemage card) {

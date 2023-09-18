@@ -24,7 +24,7 @@ import mage.game.permanent.token.MyrToken;
  */
 public final class MyrMatrix extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr creatures");
 
        static {
            filter.add(SubType.MYR.getPredicate());
@@ -38,7 +38,7 @@ public final class MyrMatrix extends CardImpl {
 
     }
 
-    public MyrMatrix (final MyrMatrix card) {
+    private MyrMatrix(final MyrMatrix card) {
         super(card);
     }
 

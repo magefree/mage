@@ -8,7 +8,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,7 +22,7 @@ public final class HarvestPyre extends CardImpl {
 
 
         // As an additional cost to cast Harvest Pyre, exile X cards from your graveyard.
-        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCard("cards from your graveyard")));
+        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD));
 
         // Harvest Pyre deals X damage to target creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

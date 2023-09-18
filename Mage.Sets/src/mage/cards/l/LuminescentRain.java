@@ -47,7 +47,7 @@ class LuminescentRainEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. You gain 2 life for each permanent you control of that type.";
     }
 
-    LuminescentRainEffect(final LuminescentRainEffect effect) {
+    private LuminescentRainEffect(final LuminescentRainEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class LuminescentRainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
         if (player != null && player.choose(Outcome.BoostCreature, typeChoice, game)) {
             FilterControlledPermanent filter = new FilterControlledPermanent();
             filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());

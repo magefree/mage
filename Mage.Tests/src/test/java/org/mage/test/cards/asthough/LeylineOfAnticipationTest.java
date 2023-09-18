@@ -18,7 +18,7 @@ public class LeylineOfAnticipationTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Leyline of Anticipation");
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(2, PhaseStep.DRAW, playerA, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.END_COMBAT);
@@ -41,7 +41,7 @@ public class LeylineOfAnticipationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Yawgmoth's Agenda",1);
 
         addCard(Zone.HAND, playerA, "Leyline of Anticipation");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
         

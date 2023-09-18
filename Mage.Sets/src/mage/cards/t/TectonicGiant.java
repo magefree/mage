@@ -12,7 +12,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.*;
 import mage.constants.*;
-import static mage.constants.Outcome.Benefit;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,6 +55,7 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
     TectonicGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(3, TargetController.OPPONENT), false);
         this.addMode(new Mode(new TectonicGiantEffect()));
+        setTriggerPhrase("Whenever {this} attacks or becomes the target of a spell an opponent controls, ");
     }
 
     private TectonicGiantTriggeredAbility(final TectonicGiantTriggeredAbility ability) {
@@ -87,11 +87,6 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks or becomes the target of a spell an opponent controls, " ;
-    }
-
-    @Override
     public TectonicGiantTriggeredAbility copy() {
         return new TectonicGiantTriggeredAbility(this);
     }
@@ -100,7 +95,7 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
 class TectonicGiantEffect extends OneShotEffect {
 
     TectonicGiantEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "exile the top two cards of your library. Choose one of them. "
                 + "Until the end of your next turn, you may play that card";
     }
@@ -123,7 +118,7 @@ class TectonicGiantEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 2));
         controller.moveCards(cards, Zone.EXILED, source, game);
         TargetCard targetCard = new TargetCardInExile(StaticFilters.FILTER_CARD);
-        controller.choose(outcome, cards, targetCard, game);
+        controller.choose(outcome, cards, targetCard, source, game);
 
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {

@@ -1,6 +1,5 @@
 package org.mage.test.serverside.tournament;
 
-
 import mage.game.tournament.Round;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 
 /**
  * @author Quercitron
@@ -258,7 +256,7 @@ public class SwissPairingMinimalWeightMatchingTest {
     @Test
     public void SimulateDifferentTournaments() {
         int playersCount = 12;
-        for (int i = 0; i <= playersCount; i++) {
+        for (int i = 0; i < playersCount; i++) {
             int roundsCount = ((i + 1) / 2) * 2 - 1;
             for (int j = 1; j <= roundsCount; j++) {
                 SimulateTournament(i, j);

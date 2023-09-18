@@ -49,7 +49,7 @@ class UnifyingTheoryEffect extends OneShotEffect {
         this.staticText = "that player may pay {2}. If the player does, they draw a card";
     }
 
-    public UnifyingTheoryEffect(final UnifyingTheoryEffect effect) {
+    private UnifyingTheoryEffect(final UnifyingTheoryEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class UnifyingTheoryEffect extends OneShotEffect {
         Player caster = game.getPlayer(targetPointer.getFirst(game, source));
         if (caster != null) {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {2} to draw a card?", source, game)) {
-                Cost cost = new ManaCostsImpl("{2}");
+                Cost cost = new ManaCostsImpl<>("{2}");
                 if (cost.pay(source, game, source, caster.getId(), false, null)) {
                     caster.drawCards(1, source, game);
                 }

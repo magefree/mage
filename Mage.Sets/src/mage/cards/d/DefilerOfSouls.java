@@ -61,7 +61,7 @@ class DefilerOfSoulsEffect extends OneShotEffect {
         staticText = "that player sacrifices a monocolored creature";
     }
 
-    DefilerOfSoulsEffect(final DefilerOfSoulsEffect effect) {
+    private DefilerOfSoulsEffect(final DefilerOfSoulsEffect effect) {
         super(effect);
     }
 
@@ -79,14 +79,14 @@ class DefilerOfSoulsEffect extends OneShotEffect {
         amount = Math.min(1, realCount);
         
         Target target = new TargetControlledPermanent(amount, amount, filter, false);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.
-        if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (amount > 0 && target.canChoose(player.getId(), source, game)) {
             boolean abilityApplied = false;
-            while (player.canRespond() && !target.isChosen() && target.canChoose(source.getSourceId(), player.getId(), game)) {
-                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), source, game)) {
+                player.choose(Outcome.Sacrifice, target, source, game);
             }
 
             for ( int idx = 0; idx < target.getTargets().size(); idx++) {

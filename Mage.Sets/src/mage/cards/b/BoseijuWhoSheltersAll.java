@@ -30,7 +30,7 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
 
     public BoseijuWhoSheltersAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Boseiju, Who Shelters All enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -96,7 +96,7 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
         staticText = null;
     }
 
-    public BoseijuWhoSheltersAllCantCounterEffect(final BoseijuWhoSheltersAllCantCounterEffect effect) {
+    private BoseijuWhoSheltersAllCantCounterEffect(final BoseijuWhoSheltersAllCantCounterEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             return "This spell can't be countered because mana from " + sourceObject.getName() + " was spent to cast it.";
         }

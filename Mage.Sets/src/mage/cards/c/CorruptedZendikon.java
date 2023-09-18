@@ -35,7 +35,7 @@ public final class CorruptedZendikon extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted land is a 3/3 black Ooze creature. It's still a land.
@@ -69,7 +69,7 @@ class CorruptedZendikonOozeToken extends TokenImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
-    public CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
+    private CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
         super(token);
     }
 

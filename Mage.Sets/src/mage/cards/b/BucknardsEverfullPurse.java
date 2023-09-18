@@ -67,7 +67,7 @@ class BucknardsEverfullPurseEffect extends OneShotEffect {
             return false;
         }
         new TreasureToken().putOntoBattlefield(
-                player.rollDice(source, game, 4),
+                player.rollDice(outcome, source, game, 4),
                 game, source, source.getControllerId()
         );
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);

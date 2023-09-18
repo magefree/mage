@@ -37,7 +37,7 @@ public final class OcularHalo extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         
         // Enchanted creature has "{tap}: Draw a card."
@@ -46,7 +46,7 @@ public final class OcularHalo extends CardImpl {
         
         // {W}: Enchanted creature gains vigilance until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(),
-            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private OcularHalo(final OcularHalo card) {

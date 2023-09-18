@@ -29,7 +29,6 @@ public final class TangleclawWerewolf extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.f.FibrousEntangler.class;
 
         // Tangleclaw Werewolf can block an additional creature each combat.
@@ -37,7 +36,7 @@ public final class TangleclawWerewolf extends CardImpl {
 
         // {6}{G}: Transform Tangleclaw Werewolf.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl<>("{6}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{6}{G}")));
     }
 
     private TangleclawWerewolf(final TangleclawWerewolf card) {

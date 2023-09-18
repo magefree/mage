@@ -55,7 +55,7 @@ class LandslideEffect extends OneShotEffect {
         staticText = "Sacrifice any number of Mountains. {this} deals that much damage to target player or planeswalker";
     }
 
-    public LandslideEffect(final LandslideEffect effect) {
+    private LandslideEffect(final LandslideEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class LandslideEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-            if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (!target.canChoose(source.getControllerId(), source, game)) {
                 return false;
             }
             you.chooseTarget(Outcome.Detriment, target, source, game);

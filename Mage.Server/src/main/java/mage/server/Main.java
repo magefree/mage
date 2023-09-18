@@ -6,7 +6,7 @@ import mage.cards.decks.DeckValidatorFactory;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.cards.repository.RepositoryUtil;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -50,14 +50,13 @@ public final class Main {
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(Main.class);
 
+    // arg settings can be setup by run script or IDE's program arguments like -xxx=yyy
+    // prop settings can be setup by -Dxxx=yyy in the launcher
+    // priority: default setting -> prop setting -> arg setting
     private static final String testModeArg = "-testMode=";
-    private static final String fastDBModeArg = "-fastDbMode=";
+    private static final String testModeProp = "xmage.testMode";
     private static final String adminPasswordArg = "-adminPassword=";
-    /**
-     * The property that holds the path to the configuration file. Defaults to "config/config.xml".
-     * <p>
-     * To set up a different one, start the application with the java option "-Dxmage.config.path=&lt;path&gt;"
-     */
+    private static final String adminPasswordProp = "xmage.adminPassword";
     private static final String configPathProp = "xmage.config.path";
 
     private static final File pluginFolder = new File("plugins");
@@ -66,31 +65,49 @@ public final class Main {
 
     public static final PluginClassLoader classLoader = new PluginClassLoader();
     private static TransporterServer server;
-    private static boolean testMode;
-    private static boolean fastDbMode;
 
-    /**
-     * @param args the command line arguments
-     */
+    // Special test mode:
+    // - fast game buttons;
+    // - cheat commands;
+    // - no deck validation;
+    // - load any deck in sideboarding;
+    // - simplified registration and login (no password check);
+    // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
+    private static boolean testMode;
+
     public static void main(String[] args) {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         logger.info("Starting MAGE server version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
+
+        // enable test mode by default for developer build (if you run it from source code)
+        testMode |= version.isDeveloperBuild();
+
+        // settings by properties (-Dxxx=yyy from a launcher)
+        if (System.getProperty(testModeProp) != null) {
+            testMode = Boolean.parseBoolean(System.getProperty(testModeProp));
+        }
+        if (System.getProperty(adminPasswordProp) != null) {
+            adminPassword = SystemUtil.sanitize(System.getProperty(adminPasswordProp));
+        }
+        final String configPath;
+        if (System.getProperty(configPathProp) != null) {
+            configPath = System.getProperty(configPathProp);
+        } else {
+            configPath = defaultConfigPath;
+        }
+
+        // settings by program arguments (-xxx=yyy from a command line)
         for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
-                testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
+                testMode = Boolean.parseBoolean(arg.replace(testModeArg, ""));
             } else if (arg.startsWith(adminPasswordArg)) {
                 adminPassword = arg.replace(adminPasswordArg, "");
                 adminPassword = SystemUtil.sanitize(adminPassword);
-            } else if (arg.startsWith(fastDBModeArg)) {
-                fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
             }
         }
-
-        final String configPath = Optional.ofNullable(System.getProperty(configPathProp))
-                .orElse(defaultConfigPath);
 
         logger.info(String.format("Reading configuration from path=%s", configPath));
         final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile(configPath));
@@ -98,7 +115,7 @@ public final class Main {
 
         if (config.isAuthenticationActivated()) {
             logger.info("Check authorized user DB version ...");
-            if (!AuthorizedUserRepository.instance.checkAlterAndMigrateAuthorizedUser()) {
+            if (!AuthorizedUserRepository.getInstance().checkAlterAndMigrateAuthorizedUser()) {
                 logger.fatal("Failed to start server.");
                 return;
             }
@@ -144,11 +161,7 @@ public final class Main {
         }
 
         logger.info("Loading cards...");
-        if (fastDbMode) {
-            CardScanner.scanned = true;
-        } else {
-            CardScanner.scan();
-        }
+        CardScanner.scan();
         logger.info("Done.");
 
         // cards preload with ratings
@@ -401,7 +414,9 @@ public final class Main {
 
         @Override
         public Object invoke(final InvocationRequest invocation) throws Throwable {
-            // Called for every client connecting to the server (after add Listener)
+            // called for every client connecting to the server (after add Listener)
+
+            // save client ip-address
             String sessionId = invocation.getSessionId();
             Map map = invocation.getRequestPayload();
             String host;

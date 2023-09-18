@@ -35,7 +35,7 @@ public final class LimitsOfSolidarity extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

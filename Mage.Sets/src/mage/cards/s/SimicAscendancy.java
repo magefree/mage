@@ -33,7 +33,7 @@ public final class SimicAscendancy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}");
 
         // {1}{G}{U}: Put a +1/+1 counter on target creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{G}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

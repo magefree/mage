@@ -31,17 +31,17 @@ public final class BlackbladeReforged extends CardImpl {
 
     public BlackbladeReforged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each land you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(count, count)));
 
         // Equip legendary creature (3)
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetControlledCreaturePermanent(filter)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetControlledCreaturePermanent(filter), false));
 
         // Equip {7}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(7)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(7), false));
     }
 
     private BlackbladeReforged(final BlackbladeReforged card) {

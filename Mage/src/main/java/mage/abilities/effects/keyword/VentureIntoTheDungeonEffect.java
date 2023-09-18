@@ -26,7 +26,7 @@ public class VentureIntoTheDungeonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.ventureIntoDungeon(source.getControllerId());
+        game.ventureIntoDungeon(source.getControllerId(), false);
         return true;
     }
 }

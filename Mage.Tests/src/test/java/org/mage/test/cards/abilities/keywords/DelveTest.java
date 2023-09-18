@@ -41,7 +41,6 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ethereal Forager", 1);
     }
@@ -60,7 +59,6 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
         //setStrictChooseMode(true); AI must choose targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ethereal Forager", 1);
     }
@@ -78,7 +76,6 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ethereal Forager", 1);
     }
@@ -114,7 +111,6 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1); // no resolve, so no draw cards (if rollback bug active then it shows 3 cards)
     }

@@ -22,7 +22,7 @@ public final class RubblebeltRunner extends CardImpl {
             = new FilterCreaturePermanent("creature tokens");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public RubblebeltRunner(UUID ownerId, CardSetInfo setInfo) {

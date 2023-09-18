@@ -13,7 +13,7 @@ import mage.game.Game;
  *
  * @author LoneFox
  */
-public enum ChosenSubtypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public enum ChosenSubtypePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     TRUE(true), FALSE(false);
 
     private final boolean value;

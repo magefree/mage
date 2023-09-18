@@ -34,7 +34,7 @@ public final class Twitch extends CardImpl {
         // Draw a card.
         this.getSpellAbility().addEffect(new MayTapOrUntapTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Twitch(final Twitch card) {

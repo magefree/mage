@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class Wellspring extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Wellspring enters the battlefield, gain control of enchanted land until end of turn.
@@ -44,7 +44,7 @@ public final class Wellspring extends CardImpl {
 
         // At the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.
         ability = new BeginningOfUpkeepTriggeredAbility(
-                new UntapEnchantedEffect().setText("untap enchanted land"), TargetController.YOU, false
+                new UntapAttachedEffect(AttachmentType.AURA, "land"), TargetController.YOU, false
         );
         ability.addEffect(new WellspringEffect("You gain control of that land until end of turn"));
         this.addAbility(ability);

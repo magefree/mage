@@ -44,7 +44,7 @@ public final class CastleArdenvale extends CardImpl {
 
         // {2}{W}{W}, {T}: Create a 1/1 white Human creature token.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new HumanToken()), new ManaCostsImpl("{2}{W}{W}")
+                new CreateTokenEffect(new HumanToken()), new ManaCostsImpl<>("{2}{W}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

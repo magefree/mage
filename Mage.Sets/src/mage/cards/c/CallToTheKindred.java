@@ -36,7 +36,7 @@ public final class CallToTheKindred extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of your upkeep, you may look at the top five cards of your library.
         // If you do, you may put a creature card that shares a creature type with enchanted creature from among them onto the battlefield,
@@ -92,7 +92,7 @@ class CallToTheKindredEffect extends OneShotEffect {
 
         if (cards.count(filter, game) > 0) {
             TargetCard target = new TargetCardInLibrary(0, 1, filter);
-            controller.choose(Outcome.PutCreatureInPlay, cards, target, game);
+            controller.choose(Outcome.PutCreatureInPlay, cards, target, source, game);
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);

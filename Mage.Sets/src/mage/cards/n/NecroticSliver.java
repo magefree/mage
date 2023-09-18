@@ -38,7 +38,7 @@ public final class NecroticSliver extends CardImpl {
         ability.addTarget(new TargetPermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
-                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS,
                         "All Slivers have \"{3}, Sacrifice this permanent: Destroy target permanent.\"")));
     }
 

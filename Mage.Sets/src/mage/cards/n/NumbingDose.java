@@ -46,7 +46,7 @@ public final class NumbingDose extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted permanent doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
@@ -71,7 +71,7 @@ class NumbingDoseTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
     }
 
-    public NumbingDoseTriggeredAbility(final NumbingDoseTriggeredAbility ability) {
+    private NumbingDoseTriggeredAbility(final NumbingDoseTriggeredAbility ability) {
         super(ability);
     }
 

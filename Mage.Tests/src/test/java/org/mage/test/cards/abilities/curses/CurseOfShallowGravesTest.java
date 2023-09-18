@@ -31,17 +31,16 @@ public class CurseOfShallowGravesTest extends CardTestPlayerBase {
 
         // turn 1 - attack without token
         attack(1, playerA, "Balduvian Bears", playerB);
-        setChoice(playerA, "No"); // don't create token
-        checkPermanentCount("zombie 0", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombie", 0);
+        setChoice(playerA, false); // don't create token
+        checkPermanentCount("zombie 0", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombie Token", 0);
 
         // turn 3 - attack with token
         attack(3, playerA, "Balduvian Bears", playerB);
-        setChoice(playerA, "Yes"); // create token
-        checkPermanentCount("zombie 1", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombie", 1);
+        setChoice(playerA, true); // create token
+        checkPermanentCount("zombie 1", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombie Token", 1);
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2 - 2);
@@ -60,17 +59,16 @@ public class CurseOfShallowGravesTest extends CardTestPlayerBase {
 
         // turn 1 - attack player without token
         attack(1, playerA, "Balduvian Bears", playerB);
-        setChoice(playerA, "No"); // don't create token
-        checkPermanentCount("zombie 0", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombie", 0);
+        setChoice(playerA, false); // don't create token
+        checkPermanentCount("zombie 0", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombie Token", 0);
 
         // turn 3 - attack planeswalker (no choices at all)
         attack(3, playerA, "Balduvian Bears", "Chandra Ablaze");
-        //setChoice(playerA, "Yes");
-        checkPermanentCount("zombie 0", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombie", 0);
+        //setChoice(playerA, true);
+        checkPermanentCount("zombie 0", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombie Token", 0);
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2);

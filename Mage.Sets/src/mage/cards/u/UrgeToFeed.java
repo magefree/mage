@@ -56,14 +56,14 @@ class UrgeToFeedEffect extends OneShotEffect {
         staticText = "You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires";
     }
 
-    public UrgeToFeedEffect(UrgeToFeedEffect effect) {
+    private UrgeToFeedEffect(final UrgeToFeedEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
+        if (target.canChoose(source.getControllerId(), source, game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), source, game)) {
             for (UUID vampireId : target.getTargets()) {
                 Permanent vampire = game.getPermanent(vampireId);
                 if (vampire != null) {

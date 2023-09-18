@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
@@ -34,7 +35,7 @@ public final class AAT1 extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a repair counter is removed from a creature card your graveyard, you may pay {W/B}. If you do, target player loses 1 life and you gain 1 life. 
-        DoIfCostPaid effect = new DoIfCostPaid(new LoseLifeTargetEffect(1), new ManaCostsImpl("{W/B}"));
+        DoIfCostPaid effect = new DoIfCostPaid(new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{W/B}"));
         Effect additionalEffect = new GainLifeEffect(1);
         additionalEffect.setText("and you gain 1 life");
         effect.addEffect(additionalEffect);
@@ -59,9 +60,10 @@ public final class AAT1 extends CardImpl {
 
         public AAT1TriggeredAbility(Effect effect) {
             super(Zone.BATTLEFIELD, effect);
+            setTriggerPhrase("Whenever a repair counter is removed from a creature card in your graveyard ");
         }
 
-        public AAT1TriggeredAbility(AAT1TriggeredAbility ability) {
+        private AAT1TriggeredAbility(final AAT1TriggeredAbility ability) {
             super(ability);
         }
 
@@ -77,15 +79,10 @@ public final class AAT1 extends CardImpl {
                     && event.getPlayerId().equals(game.getControllerId(sourceId))
                     && card.isCreature(game)
                     && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
-                    && event.getData().equals("repair")) {
+                    && event.getData().equals(CounterType.REPAIR.getName())) {
                 return true;
             }
             return false;
-        }
-
-        @Override
-        public String getTriggerPhrase() {
-            return "Whenever a repair counter is removed from a creature card in your graveyard " ;
         }
 
         @Override

@@ -35,7 +35,7 @@ public final class ThorncasterSliver extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability,
-                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS)
                         .setText("Sliver creatures you control have \"Whenever this creature attacks, it deals 1 damage to any target.\"")));
     }
 

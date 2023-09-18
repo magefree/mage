@@ -1,10 +1,11 @@
 package mage.abilities.costs;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
+
+import java.util.UUID;
 
 public abstract class CostImpl implements Cost {
 
@@ -19,7 +20,7 @@ public abstract class CostImpl implements Cost {
         targets = new Targets();
     }
 
-    public CostImpl(final CostImpl cost) {
+    protected CostImpl(final CostImpl cost) {
         this.id = cost.id;
         this.text = cost.text;
         this.paid = cost.paid;
@@ -37,8 +38,9 @@ public abstract class CostImpl implements Cost {
     }
 
     @Override
-    public void setText(String text) {
+    public Cost setText(String text) {
         this.text = text;
+        return this;
     }
 
     public void addTarget(Target target) {
@@ -60,6 +62,7 @@ public abstract class CostImpl implements Cost {
     @Override
     public void clearPaid() {
         paid = false;
+        targets.clearChosen();
     }
 
     @Override

@@ -10,6 +10,7 @@ public class CardIconRenderSettings {
     // custom settings for test render dialog
     CardIconPosition customPosition = null;
     CardIconOrder customOrder = null;
+    CardIconColor customColor = null;
     int customMaxVisibleCount = 0;
     int customIconSizePercent = 0;
     boolean debugMode = false;
@@ -24,6 +25,11 @@ public class CardIconRenderSettings {
 
     public CardIconRenderSettings withCustomOrder(CardIconOrder customOrder) {
         this.customOrder = customOrder;
+        return this;
+    }
+
+    public CardIconRenderSettings withCustomColor(CardIconColor customColor) {
+        this.customColor = customColor;
         return this;
     }
 
@@ -48,6 +54,10 @@ public class CardIconRenderSettings {
 
     public CardIconPosition getCustomPosition() {
         return customPosition;
+    }
+
+    public CardIconColor getCustomColor() {
+        return customColor;
     }
 
     public int getCustomIconSizePercent() {

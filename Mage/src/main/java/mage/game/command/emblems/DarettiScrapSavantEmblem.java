@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -18,17 +17,23 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author spjspj
  */
 public final class DarettiScrapSavantEmblem extends Emblem {
     // You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
 
     public DarettiScrapSavantEmblem() {
-        setName("Emblem Daretti");
-        this.setExpansionSetCodeForImage("C14");
-
+        super("Emblem Daretti");
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
+    }
+
+    private DarettiScrapSavantEmblem(final DarettiScrapSavantEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public DarettiScrapSavantEmblem copy() {
+        return new DarettiScrapSavantEmblem(this);
     }
 }
 
@@ -36,6 +41,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
 
     DarettiScrapSavantTriggeredAbility() {
         super(Zone.COMMAND, new DarettiScrapSavantEffect(), false);
+        setTriggerPhrase("Whenever an artifact is put into your graveyard from the battlefield, ");
     }
 
     DarettiScrapSavantTriggeredAbility(final DarettiScrapSavantTriggeredAbility ability) {
@@ -58,15 +64,10 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget().isArtifact(game)
                 && zEvent.getTarget().isOwnedBy(this.controllerId)) {
-            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
+            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId(), game));
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an artifact is put into your graveyard from the battlefield, " ;
     }
 }
 
@@ -93,7 +94,7 @@ class DarettiScrapSavantEffect extends OneShotEffect {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
             effect.setTargetPointer(new FixedTarget(card, game));
             effect.setText("return that card to the battlefield at the beginning of the next end step");
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.COMMAND, effect, TargetController.ANY), source);
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY), source);
             return true;
         }
         return false;

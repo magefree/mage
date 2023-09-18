@@ -3,11 +3,9 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -30,12 +28,11 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author Colin Redman
  */
 public class AminatouTheFateshifter extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("permanent you own");
+    private static final FilterPermanent filter = new FilterPermanent("another target permanent you own");
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());
@@ -44,18 +41,17 @@ public class AminatouTheFateshifter extends CardImpl {
 
     public AminatouTheFateshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AMINATOU);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Draw a card, then put a card from your hand on top of your library.
         Ability ability = new LoyaltyAbility(new AminatouPlusEffect(), +1);
         this.addAbility(ability);
 
-        // -1: Exile another target permanent you own, then return it to the battlefield under your control.
-        ability = new LoyaltyAbility(new ExileTargetForSourceEffect(), -1);
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
+        // −1: Exile another target permanent you own, then return it to the battlefield under your control.
+        ability = new LoyaltyAbility(new ExileThenReturnTargetEffect(true, false), -1);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
@@ -85,7 +81,7 @@ class AminatouPlusEffect extends OneShotEffect {
         staticText = "draw a card, then put a card from your hand on top of your library";
     }
 
-    public AminatouPlusEffect(final AminatouPlusEffect effect) {
+    private AminatouPlusEffect(final AminatouPlusEffect effect) {
         super(effect);
     }
 
@@ -107,7 +103,7 @@ class AminatouPlusEffect extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.canChoose(player.getId(), source, game)) {
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
@@ -126,7 +122,7 @@ class AminatouUltimateEffect extends OneShotEffect {
                 + " the Fateshifter controlled by the next player in the chosen direction.";
     }
 
-    public AminatouUltimateEffect(final AminatouUltimateEffect effect) {
+    private AminatouUltimateEffect(final AminatouUltimateEffect effect) {
         super(effect);
     }
 

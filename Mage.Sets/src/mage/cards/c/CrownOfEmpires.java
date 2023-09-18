@@ -51,7 +51,7 @@ class CrownOfEmpiresEffect extends OneShotEffect {
         staticText = "Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires";
     }
 
-    public CrownOfEmpiresEffect(CrownOfEmpiresEffect effect) {
+    private CrownOfEmpiresEffect(final CrownOfEmpiresEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class CrownOfEmpiresEffect extends OneShotEffect {
         }
         if (scepter && throne) {
             ContinuousEffect effect = new CrownOfEmpiresControlEffect();
-            effect.setTargetPointer(new FixedTarget(target.getId()));
+            effect.setTargetPointer(new FixedTarget(target.getId(), game));
             game.getState().setValue(source.getSourceId().toString(), source.getControllerId());
             game.addEffect(effect, source);
         } else {
@@ -89,9 +89,10 @@ class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
 
     public CrownOfEmpiresControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        this.staticText = "Gain control of {this}";
     }
 
-    public CrownOfEmpiresControlEffect(final CrownOfEmpiresControlEffect effect) {
+    private CrownOfEmpiresControlEffect(final CrownOfEmpiresControlEffect effect) {
         super(effect);
     }
 
@@ -108,10 +109,5 @@ class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
             return permanent.changeControllerId(controllerId, game, source);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of {this}";
     }
 }

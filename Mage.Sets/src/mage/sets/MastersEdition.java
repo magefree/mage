@@ -74,6 +74,7 @@ public final class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Soldier", 92, Rarity.COMMON, mage.cards.d.DwarvenSoldier.class));
         cards.add(new SetCardInfo("Eater of the Dead", 67, Rarity.UNCOMMON, mage.cards.e.EaterOfTheDead.class));
         cards.add(new SetCardInfo("Elder Land Wurm", 11, Rarity.UNCOMMON, mage.cards.e.ElderLandWurm.class));
+        cards.add(new SetCardInfo("Energy Arc", 144, Rarity.UNCOMMON, mage.cards.e.EnergyArc.class));
         cards.add(new SetCardInfo("Erg Raiders", 68, Rarity.COMMON, mage.cards.e.ErgRaiders.class));
         cards.add(new SetCardInfo("Eureka", 117, Rarity.RARE, mage.cards.e.Eureka.class));
         cards.add(new SetCardInfo("Exile", 12, Rarity.COMMON, mage.cards.e.Exile.class));
@@ -88,6 +89,7 @@ public final class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 195, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fyndhorn Elves", 118, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
         cards.add(new SetCardInfo("Ghazban Ogre", 120, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
+        cards.add(new SetCardInfo("Gargantuan Gorilla", 119, Rarity.RARE, mage.cards.g.GargantuanGorilla.class));
         cards.add(new SetCardInfo("Giant Tortoise", 34, Rarity.COMMON, mage.cards.g.GiantTortoise.class));
         cards.add(new SetCardInfo("Goblin Chirurgeon", 94, Rarity.COMMON, mage.cards.g.GoblinChirurgeon.class));
         cards.add(new SetCardInfo("Goblin Grenade", 95, Rarity.UNCOMMON, mage.cards.g.GoblinGrenade.class));

@@ -11,7 +11,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -20,15 +19,13 @@ import java.util.UUID;
 public final class FractalToken extends TokenImpl {
 
     public FractalToken() {
-        super("Fractal", "0/0 green and blue Fractal creature token");
+        super("Fractal Token", "0/0 green and blue Fractal creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.FRACTAL);
         color.setGreen(true);
         color.setBlue(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
-
-        availableImageSetCodes = Arrays.asList("STX");
     }
 
     private FractalToken(final FractalToken token) {

@@ -1,21 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
- *
- * @author Jeff
+ * @author jeffwadsworth
  */
 public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -23,7 +20,7 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
     protected boolean setTargetPointer;
 
     public BecomesTappedTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterPermanent("a permanent"));
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_A);
     }
 
     public BecomesTappedTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
@@ -31,12 +28,17 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public BecomesTappedTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.filter = filter;
-        this.setTargetPointer = setTargetPointer;
+        this(Zone.BATTLEFIELD, effect, optional, filter, setTargetPointer);
     }
 
-    public BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
+    public BecomesTappedTriggeredAbility(Zone zone, Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
+        super(zone, effect, optional);
+        this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " becomes tapped, ");
+    }
+
+    protected BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
         this.setTargetPointer = ability.setTargetPointer;
@@ -55,17 +57,12 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            if (setTargetPointer) {
-                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
-            }
-            return true;
+        if (!filter.match(permanent, getControllerId(), this, game)) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " becomes tapped, " ;
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        }
+        return true;
     }
 }

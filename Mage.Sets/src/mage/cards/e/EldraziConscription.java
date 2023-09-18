@@ -33,7 +33,7 @@ public final class EldraziConscription extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         
         // Enchanted creature gets +10/+10 and has trample and annihilator 2        
@@ -47,7 +47,7 @@ public final class EldraziConscription extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EldraziConscription (final EldraziConscription card) {
+    private EldraziConscription(final EldraziConscription card) {
         super(card);
     }
 

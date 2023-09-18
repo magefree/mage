@@ -10,8 +10,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -19,12 +18,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author TheElk801
  */
 public final class TerritorialHammerskull extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public TerritorialHammerskull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -35,7 +28,7 @@ public final class TerritorialHammerskull extends CardImpl {
 
         // Whenever Territorial Hammerskull attacks, tap target creature an opponent controls.
         Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

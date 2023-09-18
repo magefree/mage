@@ -19,6 +19,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -104,11 +105,11 @@ class ConfoundingConundrumEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
-        target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), player.getId(), game)) {
+        target.withNotTarget(true);
+        if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }
@@ -128,7 +129,7 @@ class ConfoundingConundrumWatcher extends Watcher {
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isLand(game)) {
-            playerMap.compute(permanent.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(permanent.getControllerId(), CardUtil::setOrIncrementValue);
         }
     }
 

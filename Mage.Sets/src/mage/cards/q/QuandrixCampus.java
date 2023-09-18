@@ -30,7 +30,7 @@ public final class QuandrixCampus extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {4}, {T}: Scry 1.
-        Ability ability = new SimpleActivatedAbility(new ScryEffect(1), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1, false), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

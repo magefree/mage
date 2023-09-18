@@ -41,20 +41,17 @@ public final class KolaghansCommand extends CardImpl {
         this.getSpellAbility().getTargets().add(new TargetCardInYourGraveyard(1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // or Target player discards a card;
-        Mode mode = new Mode();
-        mode.addEffect(new DiscardTargetEffect(1));
+        Mode mode = new Mode(new DiscardTargetEffect(1));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Destroy target artifact;
-        mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Kolaghan's Command deals 2 damage to any target.
-        mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(2));
+        mode = new Mode(new DamageTargetEffect(2));
         mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().getModes().addMode(mode);
     }

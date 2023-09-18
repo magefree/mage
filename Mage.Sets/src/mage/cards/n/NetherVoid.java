@@ -21,7 +21,7 @@ public final class NetherVoid extends CardImpl {
 
     public NetherVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // Whenever a player casts a spell, counter it unless that player pays {3}.
         this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));

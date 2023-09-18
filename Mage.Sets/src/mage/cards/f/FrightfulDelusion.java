@@ -46,7 +46,7 @@ class FrightfulDelusionEffect extends OneShotEffect {
         this.staticText = "Counter target spell unless its controller pays {1}. That player discards a card.";
     }
 
-    public FrightfulDelusionEffect(final FrightfulDelusionEffect effect) {
+    private FrightfulDelusionEffect(final FrightfulDelusionEffect effect) {
         super(effect);
     }
 

@@ -30,7 +30,7 @@ public final class DeekahFractalTheorist extends CardImpl {
     public DeekahFractalTheorist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -44,7 +44,7 @@ public final class DeekahFractalTheorist extends CardImpl {
 
         // {3}{U}: Target creature token can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")
+                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_TOKEN));
         this.addAbility(ability);

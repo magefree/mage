@@ -23,7 +23,7 @@ public final class TempleOfEpiphany extends CardImpl {
         // Temple of Epiphany enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Epiphany enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
         // {T}: Add {U} or {R}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());        

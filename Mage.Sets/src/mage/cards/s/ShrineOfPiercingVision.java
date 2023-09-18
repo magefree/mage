@@ -74,7 +74,7 @@ class ShrineOfPiercingVisionEffect extends OneShotEffect {
         this.staticText = "Look at the top X cards of your library, where X is the number of charge counters on {this}. Put one of those cards into your hand and the rest on the bottom of your library in any order";
     }
 
-    public ShrineOfPiercingVisionEffect(final ShrineOfPiercingVisionEffect effect) {
+    private ShrineOfPiercingVisionEffect(final ShrineOfPiercingVisionEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class ShrineOfPiercingVisionEffect extends OneShotEffect {
         if (!cards.isEmpty()) {
             player.lookAtCards(source, null, cards, game);
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-            if (player.choose(Outcome.DrawCard, cards, target, game)) {
+            if (player.choose(Outcome.DrawCard, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);

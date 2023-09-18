@@ -29,10 +29,10 @@ public final class SunhomeGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         //{1}{R}{W}: Creatures you control get +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}{W}")));
 
         //{2}{R}{W}: Create a 1/1 red and white Soldier creature token with haste.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierTokenWithHaste()), new ManaCostsImpl("{2}{R}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierTokenWithHaste()), new ManaCostsImpl<>("{2}{R}{W}")));
     }
 
     private SunhomeGuildmage(final SunhomeGuildmage card) {

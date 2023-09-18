@@ -1,10 +1,8 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -24,6 +22,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author North, noxx
@@ -32,20 +32,20 @@ public final class TamiyoTheMoonSage extends CardImpl {
 
     public TamiyoTheMoonSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Tap target permanent. It doesn't untap during its controller's next untap step.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);
-        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("it"));
         Target target = new TargetPermanent();
         ability.addTarget(target);
         this.addAbility(ability);
 
         // -2: Draw a card for each tapped creature target player controls.
-        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);
+        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(TappedCreaturesControlledByTargetCount.instance), -2);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
@@ -63,7 +63,8 @@ public final class TamiyoTheMoonSage extends CardImpl {
     }
 }
 
-class TappedCreaturesControlledByTargetCount implements DynamicValue {
+enum TappedCreaturesControlledByTargetCount implements DynamicValue {
+    instance;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -78,12 +79,12 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
 
     @Override
     public TappedCreaturesControlledByTargetCount copy() {
-        return new TappedCreaturesControlledByTargetCount();
+        return this;
     }
 
     @Override
     public String toString() {
-        return "a";
+        return "1";
     }
 
     @Override

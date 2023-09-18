@@ -71,7 +71,7 @@ class SawtoothLoonEffect extends OneShotEffect {
         this.staticText = "draw two cards, then put two cards from your hand on the bottom of your library";
     }
 
-    public SawtoothLoonEffect(final SawtoothLoonEffect effect) {
+    private SawtoothLoonEffect(final SawtoothLoonEffect effect) {
         super(effect);
     }
 

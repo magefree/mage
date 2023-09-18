@@ -15,6 +15,7 @@ import mage.constants.AbilityType;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -26,33 +27,37 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
+ * AI: mock player in simulated games (each player replaced by simulated)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
     private static final PassAbility pass = new PassAbility();
+
     private final boolean isSimulatedPlayer;
     private final List<String> suggested;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private boolean forced;
+    private final Player originalPlayer; // copy of the original player, source of choices/results in tests
 
     public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer, List<String> suggested) {
         super(originalPlayer.getId());
+        this.originalPlayer = originalPlayer.copy();
         pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
         this.userData = UserData.getDefaultUserDataView();
+        this.matchPlayer = new MatchPlayer(originalPlayer.getMatchPlayer(), this);
     }
 
     public SimulatedPlayer2(final SimulatedPlayer2 player) {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
-        this.suggested = new ArrayList<>();
-        for (String s : player.suggested) {
-            this.suggested.add(s);
-        }
-
+        this.suggested = new ArrayList<>(player.suggested);
+        // this.allActions = player.allActions; // dynamic, no need to copy
+        this.originalPlayer = player.originalPlayer.copy();
     }
 
     @Override
@@ -119,8 +124,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         // calculate the mana that can be used for the x part
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
 
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null && numAvailable > 0) {
+        if (numAvailable > 0) {
             // check if variable mana costs is included and get the multiplier
             VariableManaCost variableManaCost = null;
             for (ManaCost cost : ability.getManaCostsToPay()) {
@@ -149,12 +153,12 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                         if (newAbility instanceof AbilityImpl) {
                             xMultiplier = ((AbilityImpl) newAbility).handleManaXMultiplier(game, xMultiplier);
                         }
-                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
+                        newAbility.addManaCostsToPay(new ManaCostsImpl<>(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
                         newAbility.getManaCostsToPay().setX(xAnnounceValue * xMultiplier, xAnnounceValue * xInstancesCount);
                         if (varCost != null) {
                             varCost.setPaid();
                         }
-                        card.adjustTargets(newAbility, game);
+                        newAbility.adjustTargets(game);
                         // add the different possible target option for the specific X value
                         if (!newAbility.getTargets().getUnchosen().isEmpty()) {
                             addTargetOptions(options, newAbility, targetNum, game);
@@ -344,7 +348,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Collections.sort(list, new Comparator<Combat>() {
             @Override
             public int compare(Combat o1, Combat o2) {
-                return Integer.valueOf(o2.getGroups().size()).compareTo(Integer.valueOf(o1.getGroups().size()));
+                return Integer.valueOf(o2.getGroups().size()).compareTo(o1.getGroups().size());
             }
         });
         return list;
@@ -445,5 +449,17 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         }
         pass(game);
         return false;
+    }
+
+    @Override
+    public boolean flipCoinResult(Game game) {
+        // same random results set up support in AI tests, see TestComputerPlayer for docs
+        return originalPlayer.flipCoinResult(game);
+    }
+
+    @Override
+    public int rollDieResult(int sides, Game game) {
+        // same random results set up support in AI tests, see TestComputerPlayer for docs
+        return originalPlayer.rollDieResult(sides, game);
     }
 }

@@ -1,15 +1,12 @@
 package mage.cards;
 
 /**
- *
  * @author phulin
  */
-public interface AdventureCardSpell extends Card {
+public interface AdventureCardSpell extends SubCard<AdventureCard> {
 
     @Override
     AdventureCardSpell copy();
 
-    void setParentCard(AdventureCard card);
-
-    AdventureCard getParentCard();
+    void finalizeAdventure();
 }

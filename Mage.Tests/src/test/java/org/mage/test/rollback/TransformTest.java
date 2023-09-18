@@ -60,7 +60,9 @@ public class TransformTest extends CardTestPlayerBase {
 
         rollbackTurns(3, PhaseStep.END_TURN, playerA, 0);
 
+        rollbackAfterActionsStart();
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Venerable Monk");
+        rollbackAfterActionsEnd();
 
         attack(3, playerA, "Lone Rider");
 
@@ -72,7 +74,5 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Venerable Monk", 1);
         assertPermanentCount(playerA, "It That Rides as One", 1);
-
     }
-
 }

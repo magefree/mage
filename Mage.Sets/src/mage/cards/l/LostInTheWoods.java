@@ -44,14 +44,14 @@ class LostInTheWoodsEffect extends OneShotEffect {
         staticText = "reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library";
     }
 
-    public LostInTheWoodsEffect(final LostInTheWoodsEffect effect) {
+    private LostInTheWoodsEffect(final LostInTheWoodsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject == null || controller == null) {
             return false;
         }

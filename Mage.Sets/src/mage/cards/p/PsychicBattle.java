@@ -51,7 +51,7 @@ class PsychicBattleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PsychicBattleEffect(), false);
     }
 
-    public PsychicBattleTriggeredAbility(PsychicBattleTriggeredAbility ability) {
+    private PsychicBattleTriggeredAbility(final PsychicBattleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class PsychicBattleEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public PsychicBattleEffect(final PsychicBattleEffect effect) {
+    private PsychicBattleEffect(final PsychicBattleEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class PsychicBattleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             Map<Player, Integer> manacostMap = new HashMap<>();
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

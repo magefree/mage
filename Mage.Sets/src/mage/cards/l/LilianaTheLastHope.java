@@ -4,7 +4,6 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -34,10 +33,10 @@ public final class LilianaTheLastHope extends CardImpl {
 
     public LilianaTheLastHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Up to one target creature gets -2/-1 until your next turn.
         Effect effect = new BoostTargetEffect(-2, -1, Duration.UntilYourNextTurn);
@@ -73,7 +72,7 @@ class LilianaTheLastHopeEffect extends OneShotEffect {
         this.staticText = ", then you may return a creature card from your graveyard to your hand";
     }
 
-    public LilianaTheLastHopeEffect(final LilianaTheLastHopeEffect effect) {
+    private LilianaTheLastHopeEffect(final LilianaTheLastHopeEffect effect) {
         super(effect);
     }
 
@@ -89,10 +88,10 @@ class LilianaTheLastHopeEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        target.withNotTarget(true);
+        if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
-                && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+                && controller.choose(Outcome.ReturnToHand, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.HAND, source, game);

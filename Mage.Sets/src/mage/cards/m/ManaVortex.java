@@ -60,9 +60,10 @@ class CounterSourceEffect extends OneShotEffect {
 
     public CounterSourceEffect() {
         super(Outcome.Detriment);
+        this.staticText = "counter it unless you sacrifice a land";
     }
 
-    public CounterSourceEffect(final CounterSourceEffect effect) {
+    private CounterSourceEffect(final CounterSourceEffect effect) {
         super(effect);
     }
 
@@ -96,23 +97,16 @@ class CounterSourceEffect extends OneShotEffect {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "counter it unless you sacrifice a land";
-    }
 }
 
 class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
 
     public ManaVortexStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When there are no lands on the battlefield, ");
     }
 
-    public ManaVortexStateTriggeredAbility(final ManaVortexStateTriggeredAbility ability) {
+    private ManaVortexStateTriggeredAbility(final ManaVortexStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -123,12 +117,6 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(StaticFilters.FILTER_LANDS, this.getSourceId(), this.getControllerId(), game) == 0;
+        return game.getBattlefield().count(StaticFilters.FILTER_LANDS, this.getControllerId(), this, game) == 0;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When there are no lands on the battlefield, " ;
-    }
-
 }

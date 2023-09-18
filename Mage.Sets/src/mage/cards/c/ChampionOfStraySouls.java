@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -62,7 +61,7 @@ public final class ChampionOfStraySouls extends CardImpl {
         // {5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD,
                 new PutOnLibrarySourceEffect(true, "Put {this} on top of your library from your graveyard"),
-                new ManaCostsImpl("{5}{B}{B}")));
+                new ManaCostsImpl<>("{5}{B}{B}")));
     }
 
     private ChampionOfStraySouls(final ChampionOfStraySouls card) {
@@ -84,7 +83,7 @@ enum ChampionOfStraySoulsAdjuster implements TargetAdjuster {
             if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
                 int xValue = GetXValue.instance.calculate(game, ability, null);
                 ability.getTargets().clear();
-                ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, new FilterCreatureCard("creature cards from your graveyard")));
+                ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
             }
         }
     }

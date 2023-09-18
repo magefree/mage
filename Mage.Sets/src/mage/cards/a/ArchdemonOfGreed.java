@@ -39,7 +39,6 @@ public final class ArchdemonOfGreed extends CardImpl {
         this.color.setBlack(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
@@ -66,7 +65,7 @@ public final class ArchdemonOfGreed extends CardImpl {
             this.staticText = "Sacrifice a Human. If you can't, tap {this} and it deals 9 damage to you.";
         }
 
-        public ArchdemonOfGreedEffect(final ArchdemonOfGreedEffect effect) {
+        private ArchdemonOfGreedEffect(final ArchdemonOfGreedEffect effect) {
             super(effect);
         }
 
@@ -85,8 +84,8 @@ public final class ArchdemonOfGreed extends CardImpl {
                 if (player != null) {
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
                     // if they can pay the cost, then they must pay
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                    if (target.canChoose(player.getId(), source, game)) {
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         Permanent humanSacrifice = game.getPermanent(target.getFirstTarget());
                         if (humanSacrifice != null) {
                             // sacrifice the chosen card

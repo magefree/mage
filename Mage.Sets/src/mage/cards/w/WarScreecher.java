@@ -33,7 +33,7 @@ public final class WarScreecher extends CardImpl {
         // {5}{W}, {T}: Other creatures you control get +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostControlledEffect(
                 1, 1, Duration.EndOfTurn, true
-        ), new ManaCostsImpl("{5}{W}"));
+        ), new ManaCostsImpl<>("{5}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

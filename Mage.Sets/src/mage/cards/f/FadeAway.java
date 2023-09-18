@@ -1,11 +1,9 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,12 +42,12 @@ class FadeAwayEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent FILTER_CREATURE = new FilterCreaturePermanent();
 
-    public FadeAwayEffect() {
+    FadeAwayEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "For each creature, its controller sacrifices a permanent unless they pay {1}";
     }
 
-    public FadeAwayEffect(final FadeAwayEffect effect) {
+    private FadeAwayEffect(final FadeAwayEffect effect) {
         super(effect);
     }
 
@@ -63,9 +61,9 @@ class FadeAwayEffect extends OneShotEffect {
                     String message = "For how many creatures will you pay (up to " + creaturesNumber + ")?";
                     int payAmount = 0;
                     boolean paid = false;
-                    while (!paid) {
+                    while (player.canRespond() && !paid) {
                         payAmount = player.getAmount(0, creaturesNumber, message, game);
-                        ManaCostsImpl cost = new ManaCostsImpl();
+                        ManaCostsImpl cost = new ManaCostsImpl<>();
                         cost.add(new GenericManaCost(payAmount));
                         cost.clearPaid();
                         if (cost.payOrRollback(source, game, source, playerId)) {
@@ -98,7 +96,7 @@ class FadeAwayEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public FadeAwayEffect copy() {
         return new FadeAwayEffect(this);
     }
 }

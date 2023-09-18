@@ -28,7 +28,7 @@ public final class BuiltToLast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new LockedInCondition(new TargetHasCardTypeCondition(CardType.ARTIFACT)),
-                "If its an artifact creature, it gains indestructible until end of turn"));
+                "If it's an artifact creature, it gains indestructible until end of turn"));
 
     }
 

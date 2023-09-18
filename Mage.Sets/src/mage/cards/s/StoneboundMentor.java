@@ -24,7 +24,7 @@ public final class StoneboundMentor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever one or more cards leave your graveyard, scry 1.
-        this.addAbility(new CardsLeaveGraveyardTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new CardsLeaveGraveyardTriggeredAbility(new ScryEffect(1, false)));
     }
 
     private StoneboundMentor(final StoneboundMentor card) {

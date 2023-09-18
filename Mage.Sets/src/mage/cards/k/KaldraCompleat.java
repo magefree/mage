@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -13,6 +14,7 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -23,7 +25,7 @@ public final class KaldraCompleat extends CardImpl {
     public KaldraCompleat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Living weapon
@@ -60,11 +62,12 @@ public final class KaldraCompleat extends CardImpl {
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new DealsDamageToACreatureTriggeredAbility(
-                        new ExileTargetEffect("exile that creature"),
+                        // if a creature is dealt lethal damage, it is dies as a state-based action and can't be found to exile
+                        new ExileTargetEffect(null, "exile that creature", Zone.BATTLEFIELD).setToSourceExileZone(true),
                         true,
                         false,
                         true,
-                        StaticFilters.FILTER_PERMANENT_CREATURE_A
+                        StaticFilters.FILTER_PERMANENT_A_CREATURE
                 ),
                 AttachmentType.EQUIPMENT,
                 Duration.WhileOnBattlefield,
@@ -73,7 +76,7 @@ public final class KaldraCompleat extends CardImpl {
         this.addAbility(ability);
 
         // Equip {7}
-        this.addAbility(new EquipAbility(7));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(7), new TargetControlledCreaturePermanent(), false));
     }
 
     private KaldraCompleat(final KaldraCompleat card) {

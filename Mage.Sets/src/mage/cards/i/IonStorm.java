@@ -27,8 +27,8 @@ public final class IonStorm extends CardImpl {
 
 
         // {1}{R}, Remove a +1/+1 counter or a charge counter from a permanent you control: Ion Storm deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}"));
-        ability.addCost(new OrCost(new RemoveCounterCost(new TargetControlledPermanent(), CounterType.P1P1), new RemoveCounterCost(new TargetControlledPermanent(), CounterType.CHARGE), " Remove a +1/+1 counter or a charge counter from a permanent you control"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{1}{R}"));
+        ability.addCost(new OrCost("Remove a +1/+1 counter or a charge counter from a permanent you control", new RemoveCounterCost(new TargetControlledPermanent(), CounterType.P1P1), new RemoveCounterCost(new TargetControlledPermanent(), CounterType.CHARGE)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

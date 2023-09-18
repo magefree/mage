@@ -35,7 +35,7 @@ public final class HammerMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{R}, {tap}, Discard a card: Destroy all artifacts with converted mana cost X or less.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HammerMageEffect(), new ManaCostsImpl("{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HammerMageEffect(), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
@@ -58,7 +58,7 @@ class HammerMageEffect extends  OneShotEffect {
         staticText = "Destroy all artifacts with mana value X or less";
     }
 
-    public HammerMageEffect(final HammerMageEffect effect) {
+    private HammerMageEffect(final HammerMageEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class HammerMageEffect extends  OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterArtifactPermanent filter = new FilterArtifactPermanent();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
-        for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.destroy(source, game, false);
         }
         return true;

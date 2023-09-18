@@ -32,7 +32,7 @@ public final class FemerefKnight extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // {W}: Femeref Knight gains vigilance until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private FemerefKnight(final FemerefKnight card) {

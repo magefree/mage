@@ -27,7 +27,7 @@ public final class HornOfDeafening extends CardImpl {
         // {2}, {tap}: Prevent all combat damage that would be dealt by target creature this turn.
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt by target creature this turn.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

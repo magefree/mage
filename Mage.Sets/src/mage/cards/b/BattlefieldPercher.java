@@ -33,7 +33,7 @@ public final class BattlefieldPercher extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
         // {1}{B}: Battlefield Percher gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-            new ManaCostsImpl("{1}{B}")));
+            new ManaCostsImpl<>("{1}{B}")));
     }
 
     private BattlefieldPercher(final BattlefieldPercher card) {

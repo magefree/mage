@@ -33,7 +33,7 @@ public final class CryptOfTheEternals extends CardImpl {
 
 
         for (Mana m : list) {
-            SimpleManaAbility uAbility = new SimpleManaAbility(Zone.BATTLEFIELD, m, new ManaCostsImpl("{1}"));
+            SimpleManaAbility uAbility = new SimpleManaAbility(Zone.BATTLEFIELD, m, new ManaCostsImpl<>("{1}"));
             uAbility.addCost(new TapSourceCost());
             this.addAbility(uAbility);
         }

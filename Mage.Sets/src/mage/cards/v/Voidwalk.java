@@ -53,7 +53,7 @@ class VoidwalkEffect extends OneShotEffect {
         staticText = "Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public VoidwalkEffect(final VoidwalkEffect effect) {
+    private VoidwalkEffect(final VoidwalkEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class VoidwalkEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && permanent != null && sourceObject != null) {
             if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
                 //create delayed triggered ability

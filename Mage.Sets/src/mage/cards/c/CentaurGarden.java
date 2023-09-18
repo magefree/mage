@@ -36,7 +36,7 @@ public final class CentaurGarden extends CardImpl {
         // Threshold - {G}, {tap}, Sacrifice Centaur Garden: Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new BoostTargetEffect(+3,+3, Duration.EndOfTurn),
-            new ManaCostsImpl("{G}"),
+            new ManaCostsImpl<>("{G}"),
             new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());

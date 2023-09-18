@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -10,7 +9,6 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -27,9 +25,9 @@ public final class TezzeretArtificeMaster extends CardImpl {
     public TezzeretArtificeMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Create a colorless Thopter artifact creature token with flying.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new ThopterColorlessToken()), 1));
@@ -38,12 +36,9 @@ public final class TezzeretArtificeMaster extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(2),
                 new DrawCardSourceControllerEffect(1),
-                MetalcraftCondition.instance,
-                "Draw a card. If you control three or "
-                        + "more artifacts, draw two cards instead"
-        ), 0)
-                .setAbilityWord(AbilityWord.METALCRAFT)
-                .addHint(MetalcraftHint.instance));
+                MetalcraftCondition.instance, "Draw a card. " +
+                "If you control three or more artifacts, draw two cards instead"
+        ), 0).addHint(MetalcraftHint.instance));
 
         // −9: You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it into the battlefield, then shuffle your library."
         this.addAbility(new LoyaltyAbility(

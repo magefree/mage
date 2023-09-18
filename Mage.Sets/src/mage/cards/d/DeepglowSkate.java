@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class DeepglowSkate extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Deepglow Skate enters the battlefield, double the number of each kind of counter on any number of target permanents.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DeepglowSkateEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DeepglowSkateEffect(), false);
         ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, new FilterPermanent(), false));
         this.addAbility(ability);
     }
@@ -51,10 +50,10 @@ class DeepglowSkateEffect extends OneShotEffect {
 
     public DeepglowSkateEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} double the number of each kind of counter on any number of target permanents";
+        this.staticText = "double the number of each kind of counter on any number of target permanents";
     }
 
-    public DeepglowSkateEffect(final DeepglowSkateEffect effect) {
+    private DeepglowSkateEffect(final DeepglowSkateEffect effect) {
         super(effect);
     }
 

@@ -8,7 +8,6 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
@@ -53,7 +52,7 @@ class EndlessHorizonsEffect extends OneShotEffect {
 
     EndlessHorizonsEffect() {
         super(Outcome.Neutral);
-        this.staticText = "search your library for any number of Plains cards and exile them. Then shuffle";
+        this.staticText = "search your library for any number of Plains cards, exile them, then shuffle";
     }
 
     private EndlessHorizonsEffect(final EndlessHorizonsEffect effect) {
@@ -68,8 +67,7 @@ class EndlessHorizonsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
-        if (permanent == null || player == null) {
+        if (player == null) {
             return false;
         }
         TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
@@ -80,7 +78,7 @@ class EndlessHorizonsEffect extends OneShotEffect {
                 .map(uuid -> player.getLibrary().getCard(uuid, game))
                 .filter(Objects::nonNull)
                 .forEach(cards::add);
-        player.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), permanent.getIdName());
+        player.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         player.shuffleLibrary(source, game);
         return true;
     }
@@ -117,8 +115,8 @@ class EndlessHorizonsEffect2 extends OneShotEffect {
         TargetCard target = new TargetCardInExile(
                 0, 1, filter, CardUtil.getExileZoneId(game, source)
         );
-        target.setNotTarget(true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        controller.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         return card != null && controller.moveCards(card, Zone.HAND, source, game);
     }

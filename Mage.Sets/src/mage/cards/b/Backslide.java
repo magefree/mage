@@ -41,7 +41,7 @@ public final class Backslide extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
     }
 
@@ -62,7 +62,7 @@ class BackslideEffect extends OneShotEffect {
         this.staticText = "Turn target creature with a morph ability face down.";
     }
 
-    BackslideEffect(final BackslideEffect effect) {
+    private BackslideEffect(final BackslideEffect effect) {
         super(effect);
     }
 

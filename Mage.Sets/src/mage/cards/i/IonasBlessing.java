@@ -40,7 +40,7 @@ public final class IonasBlessing extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2, has vigilance, and can block an additional creature.
@@ -69,7 +69,7 @@ class IonasBlessingEffect extends ContinuousEffectImpl {
         staticText = ", and can block an additional creature each combat";
     }
 
-    public IonasBlessingEffect(final IonasBlessingEffect effect) {
+    private IonasBlessingEffect(final IonasBlessingEffect effect) {
         super(effect);
     }
 

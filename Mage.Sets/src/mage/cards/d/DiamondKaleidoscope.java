@@ -28,7 +28,7 @@ public final class DiamondKaleidoscope extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Prism token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter.add(SubType.PRISM.getPredicate());
     }
 

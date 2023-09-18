@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -10,68 +9,50 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
- * @author LevelX
+ * @author LevelX, awjackson
  */
 public class LookLibraryControllerEffect extends OneShotEffect {
 
     protected DynamicValue numberOfCards;
-    protected boolean mayShuffleAfter = false;
-    protected boolean putOnTop = true; // if false on put rest back on bottom of library
-    protected Zone targetZoneLookedCards; // GRAVEYARD, LIBRARY
-    protected boolean backInRandomOrder = false;
+    protected PutCards putLookedCards;
+    protected boolean revealCards;
 
     public LookLibraryControllerEffect() {
         this(1);
     }
 
     public LookLibraryControllerEffect(int numberOfCards) {
-        this(numberOfCards, false, true);
+        this(StaticValue.get(numberOfCards));
     }
 
     public LookLibraryControllerEffect(DynamicValue numberOfCards) {
-        this(numberOfCards, false, true);
+        this(Outcome.Benefit, numberOfCards, PutCards.TOP_ANY);
     }
 
-    public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter) {
-        this(numberOfCards, mayShuffleAfter, true);
-    }
-
-    public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
-        this(StaticValue.get(numberOfCards), mayShuffleAfter, putOnTop);
-    }
-
-    public LookLibraryControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
-        this(Outcome.Benefit, numberOfCards, mayShuffleAfter, Zone.LIBRARY, putOnTop);
-    }
-
-    public LookLibraryControllerEffect(Outcome outcome, DynamicValue numberOfCards, boolean mayShuffleAfter, Zone targetZoneLookedCards, boolean putOnTop) {
+    public LookLibraryControllerEffect(Outcome outcome, DynamicValue numberOfCards, PutCards putLookedCards) {
         super(outcome);
         this.numberOfCards = numberOfCards;
-        this.mayShuffleAfter = mayShuffleAfter;
-        this.targetZoneLookedCards = targetZoneLookedCards;
-        this.putOnTop = putOnTop;
+        this.putLookedCards = putLookedCards;
+        this.revealCards = false;
     }
 
-    public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
+    protected LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
         super(effect);
         this.numberOfCards = effect.numberOfCards.copy();
-        this.mayShuffleAfter = effect.mayShuffleAfter;
-        this.targetZoneLookedCards = effect.targetZoneLookedCards;
-        this.putOnTop = effect.putOnTop;
-        this.backInRandomOrder = effect.backInRandomOrder;
+        this.putLookedCards = effect.putLookedCards;
+        this.revealCards = effect.revealCards;
     }
 
     @Override
     public LookLibraryControllerEffect copy() {
         return new LookLibraryControllerEffect(this);
-
     }
 
     @Override
@@ -84,69 +65,23 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         // take cards from library and look at them
         boolean topCardRevealed = controller.isTopCardRevealed();
         controller.setTopCardRevealed(false);
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, this.numberOfCards.calculate(game, source, this)));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, numberOfCards.calculate(game, source, this)));
 
-        controller.lookAtCards(source, null, cards, game);
+        if (revealCards) {
+            controller.revealCards(source, cards, game);
+        } else {
+            controller.lookAtCards(source, null, cards, game);
+        }
 
-        this.actionWithSelectedCards(cards, game, source);
-
-        this.putCardsBack(source, controller, cards, game);
+        boolean result = actionWithLookedCards(game, source, controller, cards);
 
         controller.setTopCardRevealed(topCardRevealed);
 
-        this.mayShuffle(controller, source, game);
-
-        return true;
+        return result;
     }
 
-    public boolean isBackInRandomOrder() {
-        return backInRandomOrder;
-    }
-
-    public Effect setBackInRandomOrder(boolean backInRandomOrder) {
-        this.backInRandomOrder = backInRandomOrder;
-        return this;
-    }
-
-    protected void actionWithSelectedCards(Cards cards, Game game, Ability source) {
-    }
-
-    /**
-     * Put the rest of the cards back to defined zone
-     *
-     * @param source
-     * @param player
-     * @param cards
-     * @param game
-     */
-    protected void putCardsBack(Ability source, Player player, Cards cards, Game game) {
-        switch (targetZoneLookedCards) {
-            case LIBRARY:
-                if (putOnTop) {
-                    player.putCardsOnTopOfLibrary(cards, game, source, !backInRandomOrder);
-                } else {
-                    player.putCardsOnBottomOfLibrary(cards, game, source, !backInRandomOrder);
-                }
-                break;
-            case GRAVEYARD:
-                player.moveCards(cards, Zone.GRAVEYARD, source, game);
-                break;
-            default:
-            // not supported yet
-        }
-    }
-
-    /**
-     * Check to shuffle library if allowed
-     *
-     * @param player
-     * @param source
-     * @param game
-     */
-    protected void mayShuffle(Player player, Ability source, Game game) {
-        if (this.mayShuffleAfter && player.chooseUse(Outcome.Benefit, "Shuffle your library?", source, game)) {
-            player.shuffleLibrary(source, game);
-        }
+    protected boolean actionWithLookedCards(Game game, Ability source, Player player, Cards cards) {
+        return putLookedCards.moveCards(player, cards, source, game);
     }
 
     @Override
@@ -158,46 +93,29 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        int numberLook;
-        try {
-            numberLook = Integer.parseInt(numberOfCards.toString());
-        } catch (NumberFormatException e) {
-            numberLook = 0;
+        String numberString = numberOfCards.toString();
+        boolean dynamic = !numberOfCards.getMessage().isEmpty();
+        boolean oneCard = !dynamic && numberString.equals("1");
+        StringBuilder sb = new StringBuilder(revealCards ? "reveal " : "look at ");
+        if (oneCard) {
+            sb.append("the top card");
+        } else if (dynamic) {
+            sb.append("the top X cards");
+        } else if (numberString.equals("that many")) {
+            sb.append("that many cards from the top");
+        } else {
+            sb.append("the top ").append(CardUtil.numberToText(numberString)).append(" cards");
         }
-        StringBuilder sb = new StringBuilder("look at the top ");
-        switch (numberLook) {
-            case 0:
-                sb.append(" X ");
-                break;
-            case 1:
-                sb.append("card ");
-                break;
-            default:
-                sb.append(CardUtil.numberToText(numberLook));
-                break;
+        sb.append(" of your library");
+        if (dynamic) {
+            sb.append(", where X is ").append(numberOfCards.getMessage());
         }
-        if (numberLook != 1) {
-            sb.append(" cards ");
-        }
-
-        sb.append("of your library");
-        if (numberLook == 0) {
-            sb.append(", where {X} is the number of cards ").append(numberOfCards.getMessage());
-        }
-
         if (!middleText.isEmpty()) {
             sb.append(middleText);
-        } else if (numberLook > 1) {
-            if (backInRandomOrder) {
-                sb.append(". Put the rest on the bottom of your library in a random order");
-            } else {
-                sb.append(", then put them back in any order");
-            }
+        } else if (!oneCard) {
+            sb.append(", then put them ");
+            sb.append(putLookedCards == PutCards.TOP_ANY ? "back in any order" : putLookedCards.getMessage(false, true));
         }
-        if (this.mayShuffleAfter) {
-            sb.append(". You may shuffle");
-        }
-
         return sb.toString();
     }
 }

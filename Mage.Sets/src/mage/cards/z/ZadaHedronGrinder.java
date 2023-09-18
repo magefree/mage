@@ -34,7 +34,7 @@ public final class ZadaHedronGrinder extends CardImpl {
 
     public ZadaHedronGrinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN, SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -135,12 +135,12 @@ class ZadaHedronGrinderCopySpellEffect extends CopySpellForEachItCouldTargetEffe
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        player.getId(), source.getSourceId(), game
+                        player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(permanent))

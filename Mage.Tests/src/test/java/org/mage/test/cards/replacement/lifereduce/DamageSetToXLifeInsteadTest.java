@@ -2,6 +2,7 @@ package org.mage.test.cards.replacement.lifereduce;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -50,6 +51,7 @@ public class DamageSetToXLifeInsteadTest extends CardTestPlayerBase {
         setLife(playerB, 8);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bump in the Night", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Axe", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -82,28 +84,26 @@ public class DamageSetToXLifeInsteadTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests Worhsip when there is no creature:
+     * Tests Worship when there is no creature:
      *   If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead
      */
     @Test
     public void testWorshipWithoutCreature() {
-        addCard(Zone.HAND, playerA, "Volcanic Hammer", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, "Volcanic Hammer", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
         addCard(Zone.BATTLEFIELD, playerB, "Worship");
-        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         setLife(playerB, 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", "Elite Vanguard");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, -1);
+        Assert.assertFalse("PlayerB should be dead", playerB.isInGame());
     }
-
 }
 

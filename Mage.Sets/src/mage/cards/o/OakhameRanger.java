@@ -24,6 +24,7 @@ public final class OakhameRanger extends AdventureCard {
 
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.KNIGHT);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -35,6 +36,8 @@ public final class OakhameRanger extends AdventureCard {
         // Bring Back
         // Create two 1/1 white Human creature tokens.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new HumanToken(), 2));
+
+        this.finalizeAdventure();
     }
 
     private OakhameRanger(final OakhameRanger card) {

@@ -61,7 +61,7 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
         this.staticText = "the player with the lowest life total gains control of {this}. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of {this}";
     }
 
-    public LoxodonPeacekeeperEffect(final LoxodonPeacekeeperEffect effect) {
+    private LoxodonPeacekeeperEffect(final LoxodonPeacekeeperEffect effect) {
         super(effect);
     }
 
@@ -105,8 +105,8 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
                             }
                         }
                         TargetPlayer target = new TargetPlayer(1, 1, true, filter);
-                        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                            while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                        if (target.canChoose(controller.getId(), source, game)) {
+                            while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                                 controller.chooseTarget(outcome, target, source, game);
                             }
                         } else {

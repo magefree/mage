@@ -31,8 +31,8 @@ public final class Probe extends CardImpl {
         // If Probe was kicked, target player discards two cards.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardTargetEffect(2),
-                KickedCondition.instance,
-                "<br><br>If this spell was kicked, target player discards two cards"));
+                KickedCondition.ONCE,
+                "If this spell was kicked, target player discards two cards"));
         this.getSpellAbility().setTargetAdjuster(ProbeAdjuster.instance);
     }
 
@@ -52,7 +52,7 @@ enum ProbeAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        if (KickedCondition.instance.apply(game, ability)) {
+        if (KickedCondition.ONCE.apply(game, ability)) {
             ability.addTarget(new TargetPlayer());
         }
     }

@@ -46,7 +46,7 @@ class PsychicStrikeEffect extends OneShotEffect {
         staticText = "Counter target spell. Its controller puts the top two cards of their library into their graveyard";
     }
 
-    public PsychicStrikeEffect(final PsychicStrikeEffect effect) {
+    private PsychicStrikeEffect(final PsychicStrikeEffect effect) {
         super(effect);
     }
 

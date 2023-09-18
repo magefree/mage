@@ -19,7 +19,7 @@ public class OpponentsCantCastChosenUntilNextTurnEffect extends ContinuousRuleMo
         staticText = "Until your next turn, your opponents can't cast spells with the chosen name";
     }
 
-    public OpponentsCantCastChosenUntilNextTurnEffect(final OpponentsCantCastChosenUntilNextTurnEffect effect) {
+    protected OpponentsCantCastChosenUntilNextTurnEffect(final OpponentsCantCastChosenUntilNextTurnEffect effect) {
         super(effect);
     }
 
@@ -30,7 +30,7 @@ public class OpponentsCantCastChosenUntilNextTurnEffect extends ContinuousRuleMo
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (mageObject != null && cardName != null) {
             return "You can't cast a card named " + cardName + " (" + mageObject.getIdName() + ").";

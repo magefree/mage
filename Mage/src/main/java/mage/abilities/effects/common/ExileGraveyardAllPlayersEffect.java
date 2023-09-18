@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
@@ -14,8 +12,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Jgod
  */
 public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
@@ -35,12 +34,12 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
         super(Outcome.Exile);
         this.filter = filter;
         this.targetController = targetController;
-        staticText = "exile all " + filter.getMessage() + " from all "
+        staticText = "exile all " + (filter.getMessage().equals("cards") ? "" : filter.getMessage() + " from all ")
                 + (targetController.equals(TargetController.OPPONENT) ? "opponents' " : "")
                 + "graveyards";
     }
 
-    public ExileGraveyardAllPlayersEffect(final ExileGraveyardAllPlayersEffect effect) {
+    protected ExileGraveyardAllPlayersEffect(final ExileGraveyardAllPlayersEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.targetController = effect.targetController;
@@ -64,7 +63,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                toExile.addAll(player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
+                toExile.addAllCards(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
             }
         }
         controller.moveCards(toExile, Zone.EXILED, source, game);

@@ -63,7 +63,7 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
         staticText = "All combat damage that would be dealt to you by unblocked creatures this turn is dealt to {this} instead";
     }
 
-    KjeldoranRoyalGuardEffect(final KjeldoranRoyalGuardEffect effect) {
+    private KjeldoranRoyalGuardEffect(final KjeldoranRoyalGuardEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
                 && ((DamageEvent)event).isCombatDamage()) {
             Permanent p = game.getPermanent(source.getSourceId());
             if (p != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (event.getSourceId().equals(permanent.getId())) {
                         return true;
                     }

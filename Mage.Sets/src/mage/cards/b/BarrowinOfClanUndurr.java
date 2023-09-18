@@ -37,7 +37,7 @@ public final class BarrowinOfClanUndurr extends CardImpl {
     public BarrowinOfClanUndurr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);
@@ -52,7 +52,7 @@ public final class BarrowinOfClanUndurr extends CardImpl {
                 CompletedDungeonCondition.instance, "return up to one creature card " +
                 "with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon"
         ));
-        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter, true));
         this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 

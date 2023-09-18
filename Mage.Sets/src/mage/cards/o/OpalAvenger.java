@@ -40,10 +40,12 @@ public final class OpalAvenger extends CardImpl {
 class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
 
     public OpalAvengerStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OpalAvengerToken(), "", Duration.Custom, true, false));
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OpalAvengerToken(), null, Duration.Custom));
+        this.replaceRuleText = false;
+        setTriggerPhrase("When you have 10 or less life, if {this} is an enchantment, ");
     }
 
-    public OpalAvengerStateTriggeredAbility(final OpalAvengerStateTriggeredAbility ability) {
+    private OpalAvengerStateTriggeredAbility(final OpalAvengerStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,12 +95,6 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
     public void counter(Game game) {
         game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you have 10 or less life, if {this} is an enchantment, " ;
-    }
-
 }
 
 class OpalAvengerToken extends TokenImpl {
@@ -111,7 +107,7 @@ class OpalAvengerToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public OpalAvengerToken(final OpalAvengerToken token) {
+    private OpalAvengerToken(final OpalAvengerToken token) {
         super(token);
     }
 

@@ -1,9 +1,7 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -14,10 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -27,12 +22,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class StrongholdAssassin extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
-
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
 
     public StrongholdAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
@@ -45,8 +34,8 @@ public final class StrongholdAssassin extends CardImpl {
 
         // {tap}, Sacrifice a creature: Destroy target nonblack creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
-        Target target = new TargetCreaturePermanent(filter);
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
         ability.addTarget(target);
         this.addAbility(ability);
     }

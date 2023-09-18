@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.continuous;
 
 import mage.constants.Duration;
@@ -21,7 +19,7 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, Outcome.BoostCreature);
     }
 
-    public SwitchPowerToughnessTargetEffect(final SwitchPowerToughnessTargetEffect effect) {
+    protected SwitchPowerToughnessTargetEffect(final SwitchPowerToughnessTargetEffect effect) {
         super(effect);
     }
 
@@ -33,22 +31,20 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (target != null) {
-            int power = target.getPower().getValue();
-            target.getPower().setValue(target.getToughness().getValue());
-            target.getToughness().setValue(power);
-            return true;
+        if (target == null) {
+            return false;
         }
-        return false;
+
+        target.switchPowerToughness();
+        return true;
     }
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("switch target ").append(mode.getTargets().get(0).getTargetName()).append("'s power and toughness")
-                .append(' ').append(duration.toString());
-        return sb.toString();
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "switch " + getTargetPointer().describeTargets(mode.getTargets(), "that creature") + "'s power and toughness" +
+                ' ' + duration.toString();
     }
-
-
 }

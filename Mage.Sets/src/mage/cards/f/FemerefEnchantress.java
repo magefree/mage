@@ -29,7 +29,7 @@ public final class FemerefEnchantress extends CardImpl {
 
         // Whenever an enchantment is put into a graveyard from the battlefield, draw a card.
         this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
-                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_ENCHANTMENT_PERMANENT,
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_PERMANENT_ENCHANTMENT,
                 "Whenever an enchantment is put into a graveyard from the battlefield, ", false));
     }
 

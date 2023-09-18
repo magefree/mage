@@ -1,9 +1,15 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -271,5 +277,111 @@ public final class AvacynRestored extends ExpansionSet {
         cards.add(new SetCardInfo("Yew Spirit", 207, Rarity.UNCOMMON, mage.cards.y.YewSpirit.class));
         cards.add(new SetCardInfo("Zealous Conscripts", 166, Rarity.RARE, mage.cards.z.ZealousConscripts.class));
         cards.add(new SetCardInfo("Zealous Strike", 41, Rarity.COMMON, mage.cards.z.ZealousStrike.class));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new AvacynRestoredCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/avr.html
+// Using USA collation for common/uncommon, rare collation inferred from other sets
+class AvacynRestoredCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "159", "89", "11", "178", "147", "50", "110", "199", "27", "137", "87", "53", "163", "11", "179", "184", "67", "120", "127", "72", "39", "137", "199", "119", "188", "59", "131", "60", "120", "163", "184", "186", "91", "50", "131", "70", "110", "159", "204", "179", "89", "27", "128", "60", "4", "91", "178", "186", "59", "127", "30", "70", "39", "87", "204", "128", "185", "53", "30", "119", "147", "188", "72", "4", "185", "67");
+    private final CardRun commonB = new CardRun(true, "12", "218", "181", "143", "40", "220", "88", "43", "37", "152", "105", "57", "34", "181", "49", "88", "138", "55", "12", "103", "167", "152", "35", "105", "49", "43", "34", "220", "196", "152", "57", "117", "135", "40", "35", "167", "218", "55", "103", "143", "57", "37", "196", "135", "12", "117", "181", "220", "138", "34", "218", "105", "37", "55", "196", "88", "135", "43", "40", "49", "35", "143", "167", "117", "103", "138");
+    private final CardRun commonC1 = new CardRun(true, "221", "123", "28", "155", "202", "169", "100", "42", "29", "93", "3", "158", "174", "228", "123", "73", "213", "21", "202", "26", "156", "100", "99", "54", "197", "21", "187", "158", "28", "116", "83", "118", "169", "54", "156", "29", "187", "116", "213", "83", "93", "132", "26", "174", "223", "155", "42", "118", "99", "3", "228", "197", "132", "223", "73");
+    private final CardRun commonC2 = new CardRun(true, "221", "115", "192", "9", "140", "71", "75", "15", "193", "114", "150", "41", "146", "192", "46", "75", "9", "114", "124", "150", "71", "14", "149", "183", "56", "115", "41", "140", "192", "15", "149", "124", "75", "183", "9", "71", "193", "146", "114", "56", "41", "124", "140", "46", "193", "14", "150", "183", "115", "15", "56", "149", "46", "14", "146");
+    private final CardRun uncommonA = new CardRun(true, "207", "82", "224", "23", "212", "160", "51", "113", "180", "22", "136", "90", "19", "62", "145", "182", "86", "17", "157", "207", "101", "74", "90", "165", "205", "25", "157", "95", "201", "58", "66", "125", "175", "145", "17", "95", "212", "51", "109", "23", "201", "165", "82", "22", "224", "154", "180", "19", "109", "74", "58", "205", "125", "113", "182", "31", "160", "66", "25", "101", "175", "62", "86", "136", "31", "154");
+    private final CardRun uncommonB = new CardRun(true, "80", "170", "144", "16", "122", "63", "13", "190", "216", "69", "84", "5", "198", "142", "85", "77", "168", "16", "139", "216", "80", "122", "144", "52", "13", "177", "198", "222", "84", "112", "142", "69", "7", "134", "177", "8", "108", "211", "85", "63", "139", "77", "190", "7", "8", "112", "211", "170", "52", "168", "108", "5", "134", "222");
+    private final CardRun rare = new CardRun(false, "1", "2", "10", "18", "24", "32", "33", "36", "38", "44", "45", "47", "48", "61", "64", "65", "76", "78", "92", "94", "96", "98", "102", "104", "107", "111", "121", "126", "130", "133", "141", "151", "153", "162", "164", "166", "171", "173", "176", "191", "194", "195", "200", "203", "206", "214", "215", "217", "219", "225", "226", "227", "229", "1", "2", "10", "18", "24", "32", "33", "36", "38", "44", "45", "47", "48", "61", "64", "65", "76", "78", "92", "94", "96", "98", "102", "104", "107", "111", "121", "126", "130", "133", "141", "151", "153", "162", "164", "166", "171", "173", "176", "191", "194", "195", "200", "203", "206", "214", "215", "217", "219", "225", "226", "227", "229", "6", "20", "68", "79", "81", "97", "106", "129", "148", "161", "172", "189", "208", "209", "210");
+    private final CardRun land = new CardRun(false, "230", "231", "232", "233", "234", "235", "236", "237", "238", "239", "240", "241", "242", "243", "244");
+
+    private final BoosterStructure AAABC1C1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAABBC1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAABBBC2C2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAABBBBC2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB,
+            commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAAABBC2C2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAAABBBC2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB,
+            commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
+    private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure L1 = new BoosterStructure(land);
+
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.27 A commons (36 / 11)
+    // 2.18 B commons (24 / 11)
+    // 2.73 C1 commons (30 / 11, or 60 / 11 in each C1 booster)
+    // 1.82 C2 commons (20 / 11, or 40 / 11 in each C2 booster)
+    // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
+    // and with 10 common slots per booster
+    private final RarityConfiguration commonRuns = new RarityConfiguration(
+            AAABC1C1C1C1C1C1,
+            AAABC1C1C1C1C1C1,
+            AAABC1C1C1C1C1C1,
+            AAABC1C1C1C1C1C1,
+            AAABC1C1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+
+            AAABBBC2C2C2C2,
+            AAABBBC2C2C2C2,
+            AAABBBC2C2C2C2,
+            AAABBBBC2C2C2,
+            AAABBBBC2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBBC2C2C2,
+            AAAABBBC2C2C2
+    );
+    // In order for equal numbers of each uncommon to exist, the average booster must contain:
+    // 1.65 A uncommons (33 / 20)
+    // 1.35 B uncommons (27 / 20)
+    // These numbers are the same for all sets with 60 uncommons in asymmetrical A/B print runs
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB,
+            ABB, ABB, ABB, ABB, ABB, ABB, ABB
+    );
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+    private final RarityConfiguration landRuns = new RarityConfiguration(L1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(landRuns.getNext().makeRun());
+        return booster;
     }
 }

@@ -24,7 +24,7 @@ public final class SteadfastSentinel extends CardImpl {
         addAbility(VigilanceAbility.getInstance());
 
         //Eternalize {4}{W}{W}
-        addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{W}{W}"), this));
+        addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{W}{W}"), this));
     }
 
 

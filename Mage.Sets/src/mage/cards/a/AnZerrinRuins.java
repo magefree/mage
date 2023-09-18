@@ -46,9 +46,10 @@ class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEff
 
     public AnZerrinRuinsDontUntapEffect() {
         super(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent());
+        this.staticText = "Creatures of the chosen type don't untap during their controllers' untap steps";
     }
 
-    public AnZerrinRuinsDontUntapEffect(final AnZerrinRuinsDontUntapEffect effect) {
+    private AnZerrinRuinsDontUntapEffect(final AnZerrinRuinsDontUntapEffect effect) {
         super(effect);
     }
 
@@ -68,10 +69,5 @@ class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEff
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Creatures of the chosen type don't untap during their controllers' untap steps";
     }
 }

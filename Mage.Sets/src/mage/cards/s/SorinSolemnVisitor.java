@@ -3,7 +3,6 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -28,10 +27,10 @@ public final class SorinSolemnVisitor extends CardImpl {
 
     public SorinSolemnVisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Until your next turn, creatures you control get +1/+0 and gain lifelink.
         Effect effect = new BoostControlledEffect(1, 0, Duration.UntilYourNextTurn, StaticFilters.FILTER_PERMANENT_CREATURES);

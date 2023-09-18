@@ -28,7 +28,7 @@ public class EldraziObligatorTest extends CardTestPlayerBase {
         attack(1, playerA, "Bronze Sable"); // tap dat sable
         
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Eldrazi Obligator");
-        setChoice(playerB, "No");
+        setChoice(playerB, false);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
         

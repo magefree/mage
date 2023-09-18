@@ -23,7 +23,7 @@ public final class IntangibleVirtue extends CardImpl {
             = new FilterCreaturePermanent("creature tokens");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public IntangibleVirtue(UUID ownerId, CardSetInfo setInfo) {

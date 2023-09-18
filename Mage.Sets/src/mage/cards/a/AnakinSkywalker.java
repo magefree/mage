@@ -32,13 +32,12 @@ public final class AnakinSkywalker extends CardImpl {
 
     public AnakinSkywalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SITH);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DarthVader.class;
 
         // Whenever another creature dies, put a +1/+1 counter on Anakin Skywalker.
@@ -73,7 +72,7 @@ class AnakinSkywalkerEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, regenerate and transform him instead";
     }
 
-    AnakinSkywalkerEffect(final AnakinSkywalkerEffect effect) {
+    private AnakinSkywalkerEffect(final AnakinSkywalkerEffect effect) {
         super(effect);
     }
 
@@ -82,7 +81,7 @@ class AnakinSkywalkerEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
             permanent.regenerate(source, game);
-            return new TransformSourceEffect(true).apply(game, source);
+            return new TransformSourceEffect().apply(game, source);
         }
         return false;
     }

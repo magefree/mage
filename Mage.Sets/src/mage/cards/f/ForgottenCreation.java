@@ -52,7 +52,7 @@ class ForgottenCreationEffect extends OneShotEffect {
         this.staticText = "you may discard all the cards in your hand. If you do, draw that many cards";
     }
 
-    public ForgottenCreationEffect(final ForgottenCreationEffect effect) {
+    private ForgottenCreationEffect(final ForgottenCreationEffect effect) {
         super(effect);
     }
 
@@ -66,8 +66,10 @@ class ForgottenCreationEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int cardsInHand = controller.getHand().size();
-            controller.discard(cardsInHand, false, false, source, game);
-            controller.drawCards(cardsInHand, source, game);
+            if (cardsInHand > 0) {
+                controller.discard(cardsInHand, false, false, source, game);
+                controller.drawCards(cardsInHand, source, game);
+            }
             return true;
         }
         return false;

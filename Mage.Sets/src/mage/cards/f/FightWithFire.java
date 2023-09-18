@@ -32,7 +32,7 @@ public final class FightWithFire extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageMultiEffect(10),
                 new DamageTargetEffect(5),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "{this} deals 5 damage to target creature. If this spell was kicked, "
                 + "it deals 10 damage divided as you choose among any number of targets instead."
                 + "<i> (Those targets can include players and planeswalkers.)</i>"
@@ -57,7 +57,7 @@ enum FightWithFireAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        if (KickedCondition.instance.apply(game, ability)) {
+        if (KickedCondition.ONCE.apply(game, ability)) {
             ability.addTarget(new TargetAnyTargetAmount(10));
         } else {
             ability.addTarget(new TargetCreaturePermanent());

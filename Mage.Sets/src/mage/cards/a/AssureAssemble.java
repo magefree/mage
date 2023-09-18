@@ -32,7 +32,7 @@ public final class AssureAssemble extends SplitCard {
                 new GainAbilityTargetEffect(
                         IndestructibleAbility.getInstance(),
                         Duration.EndOfTurn
-                ).setText("It gains indestructible until end of turn.")
+                ).setText("That creature gains indestructible until end of turn.")
         );
         this.getLeftHalfCard().getSpellAbility().addTarget(
                 new TargetCreaturePermanent()

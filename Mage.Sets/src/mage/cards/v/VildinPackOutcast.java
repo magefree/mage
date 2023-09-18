@@ -29,18 +29,17 @@ public final class VildinPackOutcast extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DronepackKindred.class;
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
         // {R}: Vildin-Pack Outcast gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
         // {5}{R}{R}: Transform Vildin-Pack Outcast.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{5}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{5}{R}{R}")));
     }
 
     private VildinPackOutcast(final VildinPackOutcast card) {

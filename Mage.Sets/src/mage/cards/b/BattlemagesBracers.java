@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -38,7 +39,7 @@ public final class BattlemagesBracers extends CardImpl {
         this.addAbility(new BattlemagesBracersTriggeredAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private BattlemagesBracers(final BattlemagesBracers card) {
@@ -54,7 +55,7 @@ public final class BattlemagesBracers extends CardImpl {
 class BattlemagesBracersTriggeredAbility extends TriggeredAbilityImpl {
 
     BattlemagesBracersTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackAbilityEffect(), new GenericManaCost(1)));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(1)));
     }
 
     private BattlemagesBracersTriggeredAbility(final BattlemagesBracersTriggeredAbility ability) {
@@ -81,7 +82,7 @@ class BattlemagesBracersTriggeredAbility extends TriggeredAbilityImpl {
         if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
             return false;
         }
-        getEffects().setValue("stackAbility", stackAbility);
+        getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 

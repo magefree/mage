@@ -54,7 +54,7 @@ class GuildFeudEffect extends OneShotEffect {
         staticText = "target opponent reveals the top three cards of their library, may put a creature card from among them onto the battlefield, then puts the rest into their graveyard. You do the same with the top three cards of your library. If two creatures are put onto the battlefield this way, those creatures fight each other";
     }
 
-    public GuildFeudEffect(final GuildFeudEffect effect) {
+    private GuildFeudEffect(final GuildFeudEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class GuildFeudEffect extends OneShotEffect {
                         TargetCard target = new TargetCard(Zone.LIBRARY,
                                 new FilterCreatureCard(
                                         "creature card to put on the battlefield"));
-                        if (player.choose(Outcome.PutCreatureInPlay, topThreeCards, target, game)) {
+                        if (player.choose(Outcome.PutCreatureInPlay, topThreeCards, target, source, game)) {
                             creatureToBattlefield = topThreeCards.get(target.getFirstTarget(), game);
                             if (creatureToBattlefield != null) {
                                 topThreeCards.remove(creatureToBattlefield);

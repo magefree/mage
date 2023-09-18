@@ -52,10 +52,10 @@ class CracklingDoomEffect extends OneShotEffect {
 
     public CracklingDoomEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Each opponent sacrifices a creature with the greatest power among creatures they control";
+        this.staticText = "Each opponent sacrifices a creature with the greatest power among creatures that player controls";
     }
 
-    public CracklingDoomEffect(final CracklingDoomEffect effect) {
+    private CracklingDoomEffect(final CracklingDoomEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class CracklingDoomEffect extends OneShotEffect {
                             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature to sacrifice with power equal to " + greatestPower);
                             filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, greatestPower));
                             Target target = new TargetControlledCreaturePermanent(filter);
-                            if (opponent.choose(outcome, target, playerId, game)) {
+                            if (opponent.choose(outcome, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null) {
                                     toSacrifice.add(permanent);

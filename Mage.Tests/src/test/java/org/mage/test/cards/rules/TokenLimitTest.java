@@ -12,7 +12,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class TokenLimitTest extends CardTestPlayerBase {
     private static final String secure = "Secure the Wastes";
     private static final String procession = "Anointed Procession";
-    private static final String warrior = "Warrior";
+    private static final String warrior = "Warrior Token";
 
     @Test
     public void testOnePlayerHitsLimit() {
@@ -33,17 +33,18 @@ public class TokenLimitTest extends CardTestPlayerBase {
 
     @Test
     public void testOnePlayerHitsLimitWithOtherPlayer() {
-        addCard(Zone.BATTLEFIELD, playerA, procession, 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 33);
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
         addCard(Zone.HAND, playerA, secure);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 33);
+        addCard(Zone.BATTLEFIELD, playerA, procession, 4);
+
         addCard(Zone.HAND, playerB, secure);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, secure);
         setChoice(playerA, "X=32");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, secure);
-        setChoice(playerB, "X=3");
+        setChoice(playerB, "X=2");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

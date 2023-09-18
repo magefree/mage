@@ -16,7 +16,7 @@ public class BrainstormEffect extends OneShotEffect {
         staticText = "draw three cards, then put two cards from your hand on top of your library in any order";
     }
 
-    public BrainstormEffect(final BrainstormEffect effect) {
+    protected BrainstormEffect(final BrainstormEffect effect) {
         super(effect);
     }
 
@@ -39,7 +39,7 @@ public class BrainstormEffect extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.canChoose(player.getId(), source, game)) {
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

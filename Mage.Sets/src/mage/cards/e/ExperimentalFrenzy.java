@@ -37,7 +37,7 @@ public final class ExperimentalFrenzy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ExperimentalFrenzyRestrictionEffect()));
 
         // {3}{R}: Destroy Experimental Frenzy.
-        this.addAbility(new SimpleActivatedAbility(new DestroySourceEffect(), new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new DestroySourceEffect(), new ManaCostsImpl<>("{3}{R}")));
     }
 
     private ExperimentalFrenzy(final ExperimentalFrenzy card) {

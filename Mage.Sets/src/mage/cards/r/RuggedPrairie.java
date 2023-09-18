@@ -25,20 +25,20 @@ public final class RuggedPrairie extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {R/W}, {tap}: Add {R}{R}, {R}{W}, or {W}{W}.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl("{R/W}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl<>("{R/W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0, 0), new ManaCostsImpl("{R/W}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0, 0), new ManaCostsImpl<>("{R/W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl("{R/W}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl<>("{R/W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);          
     }
 
-    public RuggedPrairie (final RuggedPrairie card) {
+    private RuggedPrairie(final RuggedPrairie card) {
         super(card);
     }
 

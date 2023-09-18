@@ -32,7 +32,7 @@ public final class OrissSamiteGuardian extends CardImpl {
 
     public OrissSamiteGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -67,7 +67,7 @@ class OrissSamiteGuardianEffect extends OneShotEffect {
         this.staticText = "Target player can't cast spells this turn, and creatures that player controls can't attack this turn";
     }
 
-    public OrissSamiteGuardianEffect(final OrissSamiteGuardianEffect effect) {
+    private OrissSamiteGuardianEffect(final OrissSamiteGuardianEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class OrissSamiteGuardianCantCastEffect extends ContinuousRuleModifyingEffectImp
         staticText = "Target player can't cast spells this turn";
     }
 
-    OrissSamiteGuardianCantCastEffect(final OrissSamiteGuardianCantCastEffect effect) {
+    private OrissSamiteGuardianCantCastEffect(final OrissSamiteGuardianCantCastEffect effect) {
         super(effect);
     }
 

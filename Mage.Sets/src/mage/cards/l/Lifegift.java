@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -21,7 +21,7 @@ public final class Lifegift extends CardImpl {
 
 
         // Whenever a land enters the battlefield, you may gain 1 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new FilterLandPermanent("a land"), true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), StaticFilters.FILTER_LAND_A, true));
     }
 
     private Lifegift(final Lifegift card) {

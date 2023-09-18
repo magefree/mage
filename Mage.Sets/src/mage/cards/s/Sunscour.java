@@ -20,7 +20,7 @@ import mage.target.common.TargetCardInHand;
  */
 public final class Sunscour extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two white cards");
+    private static final FilterCard filter = new FilterCard("white cards");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

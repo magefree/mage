@@ -45,7 +45,7 @@ class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    public CircleOfFlameTriggeredAbility(final CircleOfFlameTriggeredAbility ability) {
+    private CircleOfFlameTriggeredAbility(final CircleOfFlameTriggeredAbility ability) {
         super(ability);
     }
 
@@ -80,7 +80,7 @@ class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (youOrYourPlaneswalker) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
             }
             return true;
         }

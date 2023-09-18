@@ -26,13 +26,11 @@ public final class RithsCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonBasicLandPermanent());
 
         // or create three 1/1 green Saproling creature tokens;
-        Mode mode = new Mode();
-        mode.addEffect(new CreateTokenEffect(new SaprolingToken(), 3));
+        Mode mode = new Mode(new CreateTokenEffect(new SaprolingToken(), 3));
         this.getSpellAbility().addMode(mode);
 
         // or prevent all damage a source of your choice would deal this turn.
-        mode = new Mode();
-        mode.addEffect(new PreventDamageBySourceEffect());
+        mode = new Mode(new PreventDamageBySourceEffect());
         this.getSpellAbility().addMode(mode);
     }
 

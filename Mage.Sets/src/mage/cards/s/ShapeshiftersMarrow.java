@@ -44,7 +44,7 @@ public final class ShapeshiftersMarrow extends CardImpl {
             this.staticText = "that player reveals the top card of their library. If it's a creature card, the player puts the card into their graveyard and {this} becomes a copy of that card. (If it does, it loses this ability.)";
         }
 
-        public ShapeshiftersMarrowEffect(final ShapeshiftersMarrowEffect effect) {
+        private ShapeshiftersMarrowEffect(final ShapeshiftersMarrowEffect effect) {
             super(effect);
         }
 
@@ -56,7 +56,7 @@ public final class ShapeshiftersMarrow extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Player activePlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (activePlayer != null && sourceObject != null) {
                 Card card = activePlayer.getLibrary().getFromTop(game);
                 if (card != null) {

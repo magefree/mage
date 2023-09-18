@@ -33,7 +33,7 @@ public final class ProtectiveSphere extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // {1}, Pay 1 life: Prevent all damage that would be dealt to you this turn by a source of your choice that shares a color with the mana spent on this activation cost.
-        Ability ability = new SimpleActivatedAbility(new ProtectiveSphereEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new ProtectiveSphereEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
 
@@ -63,7 +63,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public ProtectiveSphereEffect(final ProtectiveSphereEffect effect) {
+    private ProtectiveSphereEffect(final ProtectiveSphereEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -75,7 +75,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setRequired(false);
         Player controller = game.getPlayer(source.getControllerId());
         Permanent protectiveSphere = game.getPermanent(source.getSourceId());
@@ -88,7 +88,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
                     CardUtil.addToolTipMarkTags("Last mana used for protective ability: " 
                             + source.getManaCostsToPay().getUsedManaToPay()), game);
         }
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }
 

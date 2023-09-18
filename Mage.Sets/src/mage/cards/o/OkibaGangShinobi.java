@@ -27,7 +27,7 @@ public final class OkibaGangShinobi extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new NinjutsuAbility("{3}{B}"));
 
         // Whenever Okiba-Gang Shinobi deals combat damage to a player, that player discards two cards.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(2), false, true));

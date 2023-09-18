@@ -3,7 +3,6 @@ package mage.deck;
 import mage.cards.decks.Constructed;
 
 /**
- *
  * @author jmharmon
  */
 
@@ -43,7 +42,8 @@ public class Premodern extends Constructed {
         setCodes.add(mage.sets.Legions.getInstance().getCode());
         setCodes.add(mage.sets.Scourge.getInstance().getCode());
 
-        // Ban List
+        // Ban List see: https://scryfall.com/search?q=banned%3Apremodern&as=checklist
+        // Updated last time 02-08-2023 (https://premodernmagic.com/blog/ban-list-update-2023/)
         banned.add("Amulet of Quoz");
         banned.add("Balance");
         banned.add("Brainstorm");
@@ -57,14 +57,14 @@ public class Premodern extends Constructed {
         banned.add("Goblin Recruiter");
         banned.add("Grim Monolith");
         banned.add("Jeweled Bird");
+        banned.add("Land Tax");
         banned.add("Mana Vault");
         banned.add("Memory Jar");
-        banned.add("Mind Twist");
         banned.add("Mind's Desire");
+        banned.add("Mind Twist");
         banned.add("Mystical Tutor");
         banned.add("Necropotence");
         banned.add("Rebirth");
-        banned.add("Show and Tell");
         banned.add("Strip Mine");
         banned.add("Tempest Efreet");
         banned.add("Tendrils of Agony");
@@ -74,7 +74,7 @@ public class Premodern extends Constructed {
         banned.add("Vampiric Tutor");
         banned.add("Windfall");
         banned.add("Worldgorger Dragon");
-        banned.add("Yawgmoth's Will");
         banned.add("Yawgmoth's Bargain");
+        banned.add("Yawgmoth's Will");
     }
 }

@@ -24,6 +24,8 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -33,7 +35,7 @@ public final class HandOfVecna extends CardImpl {
     public HandOfVecna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // At the beginning of combat on your turn, equipped creature or a creature you control named Vecna gets +X/+X until end of turn, where X is the number of cards in your hand.
@@ -42,12 +44,15 @@ public final class HandOfVecna extends CardImpl {
         ));
 
         // Equip—Pay 1 life for each card in your hand.
-        this.addAbility(new EquipAbility(Outcome.Benefit, new PayLifeCost(
-                CardsInControllerHandCount.instance, "1 life for each card in your hand"
-        )));
+        this.addAbility(new EquipAbility(
+                Outcome.Benefit,
+                new PayLifeCost(
+                CardsInControllerHandCount.instance, "1 life for each card in your hand"),
+                false
+        ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private HandOfVecna(final HandOfVecna card) {
@@ -93,7 +98,7 @@ class HandOfVecnaEffect extends OneShotEffect {
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Permanent equipped = game.getPermanent(sourcePermanent != null ? sourcePermanent.getAttachedTo() : null);
         List<Permanent> chooseable = game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         );
         if (equipped != null) {
             chooseable.add(equipped);
@@ -114,8 +119,8 @@ class HandOfVecnaEffect extends OneShotEffect {
                                 .collect(Collectors.toList())
                 ));
                 TargetPermanent target = new TargetPermanent(filter);
-                target.setNotTarget(true);
-                player.choose(outcome, target, source.getSourceId(), game);
+                target.withNotTarget(true);
+                player.choose(outcome, target, source, game);
                 toBoost = game.getPermanent(target.getFirstTarget());
         }
         int xValue = player.getHand().size();

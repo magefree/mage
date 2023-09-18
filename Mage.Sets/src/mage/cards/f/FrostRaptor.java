@@ -24,7 +24,7 @@ public final class FrostRaptor extends CardImpl {
 
     public FrostRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -33,7 +33,7 @@ public final class FrostRaptor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {S}{S}: Frost Raptor gains shroud until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
-            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}{S}")));
+            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}{S}")));
     }
 
     private FrostRaptor(final FrostRaptor card) {

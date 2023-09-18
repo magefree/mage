@@ -36,7 +36,7 @@ public final class SedgeTroll extends CardImpl {
         // Sedge Troll gets +1/+1 as long as you control a Swamp.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
         // {B}: Regenerate Sedge Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private SedgeTroll(final SedgeTroll card) {

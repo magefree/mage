@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LoneFox
  */
 public class DestroyTargetAtBeginningOfNextEndStepEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class DestroyTargetAtBeginningOfNextEndStepEffect extends OneShotEffect {
         this.staticText = "Destroy that creature at the beginning of the next end step";
     }
 
-    public DestroyTargetAtBeginningOfNextEndStepEffect(final DestroyTargetAtBeginningOfNextEndStepEffect effect) {
+    protected DestroyTargetAtBeginningOfNextEndStepEffect(final DestroyTargetAtBeginningOfNextEndStepEffect effect) {
         super(effect);
     }
 
@@ -31,7 +30,7 @@ public class DestroyTargetAtBeginningOfNextEndStepEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DestroyTargetEffect effect = new DestroyTargetEffect();
-        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+        effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;

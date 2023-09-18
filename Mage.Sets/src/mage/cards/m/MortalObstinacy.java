@@ -42,7 +42,7 @@ public final class MortalObstinacy extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
@@ -67,9 +67,10 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
     public MortalObstinacyAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()));
         addTarget(new TargetEnchantmentPermanent());
+        setTriggerPhrase("Whenever enchanted creature deals combat damage to a player, ");
     }
 
-    public MortalObstinacyAbility(final MortalObstinacyAbility ability) {
+    private MortalObstinacyAbility(final MortalObstinacyAbility ability) {
         super(ability);
     }
 
@@ -88,11 +89,6 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         Permanent damageMakingCreature = game.getPermanent(event.getSourceId());
         return damageEvent.isCombatDamage() && damageMakingCreature != null && damageMakingCreature.getAttachments().contains(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature deals combat damage to a player, " ;
     }
 }
 

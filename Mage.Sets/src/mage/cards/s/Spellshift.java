@@ -51,10 +51,10 @@ class SpellshiftEffect extends OneShotEffect {
 
     public SpellshiftEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then they shuffle";
+        this.staticText = "Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles";
     }
 
-    public SpellshiftEffect(final SpellshiftEffect effect) {
+    private SpellshiftEffect(final SpellshiftEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,9 @@ class SpellshiftEffect extends OneShotEffect {
             }
             spellController.revealCards(source, cardsToReveal, game);
             if (toCast != null && spellController.chooseUse(outcome, "Cast " + toCast.getLogName() + " without paying its mana cost?", source, game)) {
-                spellController.cast(toCast.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), Boolean.TRUE);
+                spellController.cast(spellController.chooseAbilityForCast(toCast, game, true), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), null);
             }
             spellController.shuffleLibrary(source, game);
             return true;

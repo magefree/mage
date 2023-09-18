@@ -26,7 +26,7 @@ public final class EyesEverywhere extends CardImpl {
 
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new ScryEffect(1),
+                Zone.BATTLEFIELD, new ScryEffect(1, false),
                 TargetController.YOU, false
         ));
 
@@ -36,7 +36,7 @@ public final class EyesEverywhere extends CardImpl {
                 new ExchangeControlTargetEffect(
                         Duration.EndOfGame, "Exchange control of {this} " +
                         "and target nonland permanent", true
-                ), new ManaCostsImpl("{5}{U}")
+                ), new ManaCostsImpl<>("{5}{U}")
         );
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);

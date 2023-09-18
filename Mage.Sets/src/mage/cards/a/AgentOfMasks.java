@@ -46,7 +46,7 @@ class AgentOfMasksEffect extends OneShotEffect {
         staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
-    public AgentOfMasksEffect(final AgentOfMasksEffect effect) {
+    private AgentOfMasksEffect(final AgentOfMasksEffect effect) {
         super(effect);
     }
 

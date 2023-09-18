@@ -49,7 +49,7 @@ class FortunesFavorEffect extends OneShotEffect {
         this.staticText = "Target opponent looks at the top four cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard";
     }
 
-    public FortunesFavorEffect(final FortunesFavorEffect effect) {
+    private FortunesFavorEffect(final FortunesFavorEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class FortunesFavorEffect extends OneShotEffect {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
 
             TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, new FilterCard("cards for the face-down pile"));
-            targetOpponent.choose(outcome, cards, target, game);
+            targetOpponent.choose(outcome, cards, target, source, game);
             Cards faceDownPile = new CardsImpl(target.getTargets());
             cards.removeAll(target.getTargets());
             controller.revealCards(sourceObject.getIdName() + " - cards in face-up pile", cards, game);

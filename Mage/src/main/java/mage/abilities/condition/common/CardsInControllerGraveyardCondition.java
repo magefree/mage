@@ -30,7 +30,7 @@ public class CardsInControllerGraveyardCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (filter != null) {
-            return player != null && player.getGraveyard().count(filter, source.getSourceId(), source.getControllerId(), game) >= value;
+            return player != null && player.getGraveyard().count(filter, source.getControllerId(), source, game) >= value;
         }
         return player != null && player.getGraveyard().size() >= value;
     }

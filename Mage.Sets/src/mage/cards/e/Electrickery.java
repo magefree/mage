@@ -25,7 +25,7 @@ public final class Electrickery extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
 
         // Overload {1}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new DamageAllEffect(1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new OverloadAbility(this, new DamageAllEffect(1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private Electrickery(final Electrickery card) {

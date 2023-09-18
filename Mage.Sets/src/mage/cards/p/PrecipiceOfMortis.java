@@ -47,7 +47,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
         staticText = "If a Jedi entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers additional time";
     }
 
-    public PrecipiceOfMortisEffect(final PrecipiceOfMortisEffect effect) {
+    private PrecipiceOfMortisEffect(final PrecipiceOfMortisEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,9 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
             if (source.isControlledBy(event.getPlayerId())) {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // enters triggers
-                if (sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
+                if (sourceEvent != null
+                        && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                        && sourceEvent instanceof EntersTheBattlefieldEvent) {
                     EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for entering Jedis
                     if (entersTheBattlefieldEvent.getTarget().hasSubtype(SubType.JEDI, game)) {
@@ -79,8 +81,11 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
                         }
                     }
                 }
+
                 // leaves triggers
-                if (sourceEvent.getType() == GameEvent.EventType.ZONE_CHANGE && sourceEvent instanceof ZoneChangeEvent) {
+                if (sourceEvent != null
+                        && sourceEvent.getType() == GameEvent.EventType.ZONE_CHANGE
+                        && sourceEvent instanceof ZoneChangeEvent) {
                     ZoneChangeEvent leavesTheBattlefieldEvent = (ZoneChangeEvent) sourceEvent;
                     if (leavesTheBattlefieldEvent.getFromZone() == Zone.BATTLEFIELD) {
                         // Only for leaving Jedis

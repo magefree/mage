@@ -1,9 +1,8 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -23,10 +22,10 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.token.RiptideReplicatorToken;
-import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
- *
  * @author HanClinto
  */
 public final class RiptideReplicator extends CardImpl {
@@ -35,7 +34,7 @@ public final class RiptideReplicator extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}{4}");
 
         // As Riptide Replicator enters the battlefield, choose a color and a creature type.
-        Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
+        Ability ability = new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
         Effect effect = new ChooseCreatureTypeEffect(Outcome.Neutral);
         effect.setText("and a creature type");
         ability.addEffect(effect);
@@ -67,7 +66,7 @@ class RiptideReplicatorEffect extends OneShotEffect {
         this.staticText = "Create an X/X creature token of the chosen color and type, where X is the number of charge counters on {this}.";
     }
 
-    RiptideReplicatorEffect(final RiptideReplicatorEffect effect) {
+    private RiptideReplicatorEffect(final RiptideReplicatorEffect effect) {
         super(effect);
     }
 
@@ -80,11 +79,10 @@ class RiptideReplicatorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-        if (subType == null) {
+        if (subType == null || color == null) {
             return false;
         }
         int x = (new CountersSourceCount(CounterType.CHARGE)).calculate(game, source, this);
-        Token token = new RiptideReplicatorToken(color, subType, x);
-        return token.putOntoBattlefield(1, game, source, source.getControllerId());
+        return new RiptideReplicatorToken(color, subType, x).putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }

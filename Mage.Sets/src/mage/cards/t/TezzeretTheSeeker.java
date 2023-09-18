@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -32,10 +31,10 @@ public final class TezzeretTheSeeker extends CardImpl {
 
     public TezzeretTheSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Untap up to two target artifacts.
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
@@ -64,7 +63,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
         this.staticText = "Search your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
-    public TezzeretTheSeekerEffect2(final TezzeretTheSeekerEffect2 effect) {
+    private TezzeretTheSeekerEffect2(final TezzeretTheSeekerEffect2 effect) {
         super(effect);
     }
 
@@ -111,7 +110,7 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
         this.staticText = "Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn";
     }
 
-    public TezzeretTheSeekerEffect3(final TezzeretTheSeekerEffect3 effect) {
+    private TezzeretTheSeekerEffect3(final TezzeretTheSeekerEffect3 effect) {
         super(effect);
     }
 
@@ -138,8 +137,8 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getPower().setValue(5);
-                            permanent.getToughness().setValue(5);
+                            permanent.getPower().setModifiedBaseValue(5);
+                            permanent.getToughness().setModifiedBaseValue(5);
                         }
                 }
             }

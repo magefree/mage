@@ -1,4 +1,3 @@
-
 package org.mage.test.combat;
 
 import mage.constants.PhaseStep;
@@ -9,8 +8,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class RemoveFromCombatTest extends CardTestPlayerBase {
 
@@ -21,7 +19,7 @@ public class RemoveFromCombatTest extends CardTestPlayerBase {
      * continued attacking and dealt 3 damage to me.
      */
     @Test
-    public void testLeavesCombatIfNoLongerACreature() {
+    public void test_LeavesCombatIfNoLongerACreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.HAND, playerA, "Lightning Blast", 1);
 
@@ -51,7 +49,61 @@ public class RemoveFromCombatTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-
     }
 
+    @Test
+    public void test_Defender_AttackPlayer() {
+        // Enchant player
+        // Creatures attacking enchanted player have trample.
+        addCard(Zone.HAND, playerA, "Curse of Hospitality", 1); // {2}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Alpha Myr", 1); // 2/1
+
+        // prepare
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Hospitality");
+        addTarget(playerA, playerB);
+
+        // attack and get trumple
+        attack(1, playerA, "Grizzly Bears");
+        block(1, playerB, "Alpha Myr", "Grizzly Bears");
+        setChoiceAmount(playerA, 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 1); // must get 1 from trumple
+    }
+
+    @Test
+    public void test_Defender_AttackPlaneswalkerAndRemoveDefender() {
+        // possible bug: NPE error on defender remove from battle
+
+        // Enchant player
+        // Creatures attacking enchanted player have trample.
+        addCard(Zone.HAND, playerA, "Curse of Hospitality", 1); // {2}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1); // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Adaptive Snapjaw", 1); // 6/2
+        addCard(Zone.BATTLEFIELD, playerB, "Jace, Memory Adept", 1); // 4
+        addCard(Zone.BATTLEFIELD, playerB, "Alpha Myr", 1); // 2/1
+
+        // prepare
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Hospitality");
+        addTarget(playerA, playerB);
+
+        // attack planeswalker and remove it from battlefield due damage
+        attack(1, playerA, "Adaptive Snapjaw", "Jace, Memory Adept");
+        attack(1, playerA, "Grizzly Bears", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 2);
+        assertGraveyardCount(playerB, "Jace, Memory Adept", 1);
+    }
 }

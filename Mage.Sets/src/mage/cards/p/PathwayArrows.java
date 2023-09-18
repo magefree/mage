@@ -39,7 +39,7 @@ public final class PathwayArrows extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private PathwayArrows(final PathwayArrows card) {
@@ -59,7 +59,7 @@ class PathwayArrowsEffect extends OneShotEffect {
         this.staticText = "This creature deals 1 damage to target creature. If a colorless creature is dealt damage this way, tap it";
     }
 
-    public PathwayArrowsEffect(final PathwayArrowsEffect effect) {
+    private PathwayArrowsEffect(final PathwayArrowsEffect effect) {
         super(effect);
     }
 

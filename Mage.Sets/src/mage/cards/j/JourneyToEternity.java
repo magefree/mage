@@ -31,17 +31,16 @@ public final class JourneyToEternity extends CardImpl {
     public JourneyToEternity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AURA);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AtzalCaveOfEternity.class;
 
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, return it to the battlefield under your control, then return Journey to Eternity to the battlefield transformed under your control.
@@ -69,7 +68,7 @@ class JourneyToEternityReturnTransformedSourceEffect extends OneShotEffect {
         this.staticText = ", then return {this} to the battlefield transformed under your control.";
     }
 
-    public JourneyToEternityReturnTransformedSourceEffect(final JourneyToEternityReturnTransformedSourceEffect effect) {
+    private JourneyToEternityReturnTransformedSourceEffect(final JourneyToEternityReturnTransformedSourceEffect effect) {
         super(effect);
     }
 

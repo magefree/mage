@@ -44,7 +44,7 @@ class WurmcallingEffect extends OneShotEffect {
         staticText = "Create an X/X green Wurm creature token";
     }
 
-    public WurmcallingEffect(WurmcallingEffect ability) {
+    private WurmcallingEffect(final WurmcallingEffect ability) {
         super(ability);
     }
 
@@ -52,8 +52,8 @@ class WurmcallingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int count = source.getManaCostsToPay().getX();
         WurmCallingWurmToken token = new WurmCallingWurmToken();
-        token.getPower().modifyBaseValue(count);
-        token.getToughness().modifyBaseValue(count);
+        token.setPower(count);
+        token.setToughness(count);
         token.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }

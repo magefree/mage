@@ -41,7 +41,7 @@ public final class MuldrothaTheGravetide extends CardImpl {
     public MuldrothaTheGravetide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(6);
@@ -71,7 +71,7 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
                 + "<i>(If a card has multiple permanent types, choose one as you play it.)</i>";
     }
 
-    public MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
+    private MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
         super(effect);
     }
 

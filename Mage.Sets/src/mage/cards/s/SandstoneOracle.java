@@ -53,7 +53,7 @@ class SandstoneOracleEffect extends OneShotEffect {
         this.staticText = "choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference";
     }
 
-    SandstoneOracleEffect(final SandstoneOracleEffect effect) {
+    private SandstoneOracleEffect(final SandstoneOracleEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class SandstoneOracleEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetOpponent target = new TargetOpponent(true);
-            if (controller.choose(Outcome.DrawCard, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.DrawCard, target, source, game)) {
                 Player opponent = game.getPlayer(target.getFirstTarget());
                 if (opponent != null) {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());

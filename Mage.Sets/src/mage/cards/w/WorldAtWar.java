@@ -52,7 +52,7 @@ class WorldAtWarEffect extends OneShotEffect {
         staticText = "After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn";
     }
 
-    public WorldAtWarEffect(final WorldAtWarEffect effect) {
+    private WorldAtWarEffect(final WorldAtWarEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class WorldAtWarEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // we can't add two turn modes at once, will add additional post combat on delayed trigger resolution
-        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
+        TurnMod combat = new TurnMod(source.getControllerId()).withExtraPhase(TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN);
         game.getState().getTurnMods().add(combat);
         UntapDelayedTriggeredAbility delayedTriggeredAbility = new UntapDelayedTriggeredAbility();
         delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
@@ -83,7 +83,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new UntapAttackingThisTurnEffect());
     }
 
-    public UntapDelayedTriggeredAbility(UntapDelayedTriggeredAbility ability) {
+    private UntapDelayedTriggeredAbility(final UntapDelayedTriggeredAbility ability) {
         super(ability);
         this.connectedTurnMod = ability.connectedTurnMod;
         this.enabled = ability.enabled;
@@ -107,7 +107,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
         }
         if (event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE && enabled) {
             // add additional post combat phase after that
-            game.getState().getTurnMods().add(new TurnMod(getControllerId(), TurnPhase.POSTCOMBAT_MAIN, TurnPhase.COMBAT, false));
+            game.getState().getTurnMods().add(new TurnMod(getControllerId()).withExtraPhase(TurnPhase.POSTCOMBAT_MAIN, TurnPhase.COMBAT));
             enabled = false;
             return true;
         }
@@ -130,7 +130,7 @@ class UntapAttackingThisTurnEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public UntapAttackingThisTurnEffect(final UntapAttackingThisTurnEffect effect) {
+    private UntapAttackingThisTurnEffect(final UntapAttackingThisTurnEffect effect) {
         super(effect);
     }
 

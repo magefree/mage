@@ -38,7 +38,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
 
     public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
@@ -51,7 +51,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
         ManaEffect manaEffect = new AddManaInAnyCombinationEffect(
                 GreatestPowerAmongControlledCreaturesValue.instance, GreatestPowerAmongControlledCreaturesValue.instance,
                 ColoredManaSymbol.W, ColoredManaSymbol.U, ColoredManaSymbol.B, ColoredManaSymbol.R, ColoredManaSymbol.G);
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -80,7 +80,7 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
         this.staticText = "that creature's controller may draw a card";
     }
 
-    public SelvalaHeartOfTheWildsEffect(final SelvalaHeartOfTheWildsEffect effect) {
+    private SelvalaHeartOfTheWildsEffect(final SelvalaHeartOfTheWildsEffect effect) {
         super(effect);
     }
 

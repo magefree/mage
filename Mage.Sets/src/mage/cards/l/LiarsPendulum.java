@@ -51,7 +51,7 @@ class LiarsPendulumEffect extends OneShotEffect {
         this.staticText = "Choose a card name. Target opponent guesses whether a card with that name is in your hand. You may reveal your hand. If you do and your opponent guessed wrong, draw a card";
     }
 
-    public LiarsPendulumEffect(final LiarsPendulumEffect effect) {
+    private LiarsPendulumEffect(final LiarsPendulumEffect effect) {
         super(effect);
     }
 

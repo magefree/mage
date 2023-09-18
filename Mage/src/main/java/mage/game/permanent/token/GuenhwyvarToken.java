@@ -19,7 +19,9 @@ public final class GuenhwyvarToken extends TokenImpl {
         subtype.add(SubType.CAT);
         power = new MageInt(4);
         toughness = new MageInt(1);
-        addAbility(TrampleAbility.getInstance());
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
     }
 
     private GuenhwyvarToken(final GuenhwyvarToken token) {

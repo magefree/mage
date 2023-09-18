@@ -35,7 +35,6 @@ public class GhostfireBladeTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Alpha Myr", 2 + 2, 1 + 2);
     }

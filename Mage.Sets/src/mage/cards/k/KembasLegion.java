@@ -51,7 +51,7 @@ class KembasLegionEffect extends ContinuousEffectImpl {
         staticText = "{this} can block an additional creature for each Equipment attached to Kemba's Legion";
     }
 
-    public KembasLegionEffect(final KembasLegionEffect effect) {
+    private KembasLegionEffect(final KembasLegionEffect effect) {
         super(effect);
     }
 

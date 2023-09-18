@@ -49,7 +49,7 @@ class ReverseDamageEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public ReverseDamageEffect(final ReverseDamageEffect effect) {
+    private ReverseDamageEffect(final ReverseDamageEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -66,7 +66,7 @@ class ReverseDamageEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

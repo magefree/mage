@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -6,7 +5,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -20,7 +19,7 @@ public final class RoilsRetribution extends CardImpl {
 
         // Roil's Retribution deals 5 damage divided as you choose among any number of target attacking or blocking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, new FilterAttackingOrBlockingCreature("attacking or blocking creatures")));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES));
     }
 
     private RoilsRetribution(final RoilsRetribution card) {

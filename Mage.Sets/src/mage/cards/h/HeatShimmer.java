@@ -49,7 +49,7 @@ class HeatShimmerEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target creature, except it has haste and \"At the beginning of the end step, exile this permanent.\"";
     }
 
-    public HeatShimmerEffect(final HeatShimmerEffect effect) {
+    private HeatShimmerEffect(final HeatShimmerEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class HeatShimmerEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTarget(effect.getAddedPermanent().get(0), game));
+            exileEffect.setTargetPointer(new FixedTarget(effect.getAddedPermanents().get(0), game));
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;

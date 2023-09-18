@@ -11,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,13 +19,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class DeepwaterHypnotist extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-    
             
     public DeepwaterHypnotist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
@@ -38,7 +30,7 @@ public final class DeepwaterHypnotist extends CardImpl {
 
         // <i>Inspired</i> &mdash; Whenever Deepwater Hypnotist becomes untapped, target creature an opponent controls gets -3/-0 until end of turn.
         Ability ability = new InspiredAbility(new BoostTargetEffect(-3,0,Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(filter));        
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);        
     }
 

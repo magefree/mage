@@ -81,8 +81,8 @@ class SingleCombatEffect extends OneShotEffect {
                 continue;
             }
             Target target = new TargetPermanent(filter);
-            target.setNotTarget(true);
-            if (player.choose(outcome, target, source.getSourceId(), game)) {
+            target.withNotTarget(true);
+            if (player.choose(outcome, target, source, game)) {
                 filterSac.add(Predicates.not(new PermanentIdPredicate(target.getFirstTarget())));
             }
         }

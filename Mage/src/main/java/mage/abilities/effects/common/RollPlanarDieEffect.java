@@ -7,7 +7,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.PlanarDieRoll;
+import mage.constants.PlanarDieRollResult;
 import mage.constants.Planes;
 import mage.game.Game;
 import mage.game.command.CommandObject;
@@ -38,7 +38,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
         addChaosTargets(chaosTargets);
     }
 
-    public RollPlanarDieEffect(final RollPlanarDieEffect effect) {
+    protected RollPlanarDieEffect(final RollPlanarDieEffect effect) {
         super(effect);
         this.chaosEffects = effect.chaosEffects.stream().collect(Collectors.toList());
         this.chaosTargets = effect.chaosTargets.stream().collect(Collectors.toList());
@@ -59,10 +59,10 @@ public class RollPlanarDieEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && mageObject != null) {
-            PlanarDieRoll planarRoll = controller.rollPlanarDie(source, game);
-            if (planarRoll == PlanarDieRoll.CHAOS_ROLL && chaosEffects != null && chaosTargets != null) {
+            PlanarDieRollResult planarRoll = controller.rollPlanarDie(outcome, source, game);
+            if (planarRoll == PlanarDieRollResult.CHAOS_ROLL && chaosEffects != null && chaosTargets != null) {
                 for (int i = 0; i < chaosTargets.size(); i++) {
                     Target target = chaosTargets.get(i);
                     if (target != null) {
@@ -78,7 +78,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                     }
                     boolean done = false;
                     while (controller.canRespond() && effect != null && !done) {
-                        if (target != null && !target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                        if (target != null && !target.isChosen() && target.canChoose(controller.getId(), source, game)) {
                             controller.chooseTarget(Outcome.Benefit, target, source, game);
                             source.addTarget(target);
                         }
@@ -95,7 +95,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                         done = true;
                     }
                 }
-            } else if (planarRoll == PlanarDieRoll.PLANAR_ROLL) {
+            } else if (planarRoll == PlanarDieRollResult.PLANAR_ROLL) {
                 // Steps: 1) Remove the last plane and set its effects to discarded
                 for (CommandObject cobject : game.getState().getCommand()) {
                     if (cobject instanceof Plane) {
@@ -128,8 +128,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                     try {
                         if (plane != null && !planesVisited.contains(plane.getName())) {
                             foundNextPlane = true;
-                            plane.setControllerId(controller.getId());
-                            game.addPlane(plane, null, controller.getId());
+                            game.addPlane(plane, controller.getId());
                         }
                     } catch (Exception ex) {
                     }

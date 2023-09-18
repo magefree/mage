@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -26,9 +25,9 @@ public final class TeferiMasterOfTime extends CardImpl {
     public TeferiMasterOfTime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // You may activate loyalty abilities of Teferi, Master of Time on any player's turn any time you could cast an instant.
         this.addAbility(new SimpleStaticAbility(new TeferiMasterOfTimeActivationEffect()));
@@ -58,7 +57,7 @@ public final class TeferiMasterOfTime extends CardImpl {
 class TeferiMasterOfTimeActivationEffect extends AsThoughEffectImpl {
 
     TeferiMasterOfTimeActivationEffect() {
-        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may activate loyalty abilities of {this} " +
                 "on any player's turn any time you could cast an instant";
     }
@@ -108,8 +107,8 @@ class TeferiMasterOfTimeTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
         return true;
     }
 }

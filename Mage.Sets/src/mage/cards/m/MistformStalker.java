@@ -38,7 +38,7 @@ public final class MistformStalker extends CardImpl {
         // {2}{U}{U}: Mistform Stalker gets +2/+2 and gains flying until end of turn.
         Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+2");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{U}{U}"));
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);

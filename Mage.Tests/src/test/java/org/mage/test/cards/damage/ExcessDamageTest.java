@@ -31,7 +31,6 @@ public class ExcessDamageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, bear, 1);
         assertPermanentCount(playerA, bear, 0);
@@ -51,7 +50,6 @@ public class ExcessDamageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, bear, 1);
         assertPermanentCount(playerA, bear, 0);
@@ -70,7 +68,6 @@ public class ExcessDamageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, bear, 1);
         assertPermanentCount(playerA, bear, 0);
@@ -88,7 +85,6 @@ public class ExcessDamageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, myr, 0);
         assertPermanentCount(playerA, myr, 1);
@@ -104,14 +100,13 @@ public class ExcessDamageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, bolt);
 
         setStrictChooseMode(true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, gideon);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, gideon, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0:");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, spill, gideon);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, gideon, 1);
         assertPermanentCount(playerA, gideon, 0);
@@ -130,7 +125,6 @@ public class ExcessDamageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
         assertGraveyardCount(playerA, bolt, 1);

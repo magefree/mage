@@ -70,7 +70,7 @@ class HeroismEffect extends OneShotEffect {
         this.staticText = "For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays {2}{R}";
     }
 
-    public HeroismEffect(final HeroismEffect effect) {
+    private HeroismEffect(final HeroismEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class HeroismEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Player player = game.getPlayer(game.getActivePlayerId());
-            Cost cost = new ManaCostsImpl("{2}{R}");
+            Cost cost = new ManaCostsImpl<>("{2}{R}");
             List<Permanent> permanentsToPrevent = new ArrayList<>();
             for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game)) {
                 cost.clearPaid();

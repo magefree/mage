@@ -1,6 +1,5 @@
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.CompoundCondition;
@@ -13,27 +12,28 @@ import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffe
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.watchers.common.PlayerAttackedStepWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class QasaliAmbusher extends CardImpl {
 
-    private static final FilterControlledPermanent filterForest = new FilterControlledPermanent();
-    private static final FilterControlledPermanent filterPlains = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filterForest = new FilterControlledPermanent(SubType.FOREST);
+    private static final FilterControlledPermanent filterPlains = new FilterControlledPermanent(SubType.PLAINS);
 
-    static {
-        filterForest.add(SubType.FOREST.getPredicate());
-        filterPlains.add(SubType.PLAINS.getPredicate());
-    }
-
-    private static final Condition condition =
-            new CompoundCondition("If a creature is attacking you and you control a Forest and a Plains",
-              AttackedThisStepCondition.instance, new PermanentsOnTheBattlefieldCondition(filterForest), new PermanentsOnTheBattlefieldCondition(filterPlains));
+    private static final Condition condition = new CompoundCondition(
+            "If a creature is attacking you and you control a Forest and a Plains",
+            AttackedThisStepCondition.instance,
+            new PermanentsOnTheBattlefieldCondition(filterForest),
+            new PermanentsOnTheBattlefieldCondition(filterPlains)
+    );
 
     public QasaliAmbusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
@@ -48,11 +48,14 @@ public final class QasaliAmbusher extends CardImpl {
 
         // If a creature is attacking you and you control a Forest and a Plains,
         // you may cast Qasali Ambusher without paying its mana cost and as though it had flash.
-        Ability ability = new AlternativeCostSourceAbility(null, condition);
-        ability.addEffect(new ConditionalAsThoughEffect(new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame), condition)
-                .setText("you may cast {this} without paying its mana cost and as though it had flash"));
-        ability.addWatcher(new PlayerAttackedStepWatcher());
-        this.addAbility(ability);
+        Ability ability = new AlternativeCostSourceAbility(
+                null, condition, "if a creature is attacking you and you control a Forest and a Plains, " +
+                "you may cast {this} without paying its mana cost and as though it had flash."
+        );
+        ability.addEffect(new ConditionalAsThoughEffect(
+                new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame), condition
+        ));
+        this.addAbility(ability, new PlayerAttackedStepWatcher());
     }
 
     private QasaliAmbusher(final QasaliAmbusher card) {

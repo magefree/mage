@@ -44,7 +44,7 @@ public final class Mistfolk extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CounterTargetEffect()
                         .setText("counter target spell that targets {this}"),
-                new ManaCostsImpl("{U}")
+                new ManaCostsImpl<>("{U}")
         );
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
@@ -60,12 +60,12 @@ public final class Mistfolk extends CardImpl {
     }
 }
 
-enum MistfolkPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Spell>> {
+enum MistfolkPredicate implements ObjectSourcePlayerPredicate<Spell> {
     instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
-        Permanent sourceObject = game.getPermanent(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentIfItStillExists(game);
         if (sourceObject == null || input.getObject() == null) {
             return false;
         }

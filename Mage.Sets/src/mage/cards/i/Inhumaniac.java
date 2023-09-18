@@ -50,7 +50,7 @@ class InhumaniacEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. On a 3 or 4, put a +1/+1 counter on {this}. On a 5 or higher, put two +1/+1 counters on it. On a 1, remove all +1/+1 counters from {this}";
     }
 
-    public InhumaniacEffect(final InhumaniacEffect effect) {
+    private InhumaniacEffect(final InhumaniacEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class InhumaniacEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
             if (amount >= 3 && amount <= 4) {
                 permanent.addCounters(CounterType.P1P1.createInstance(1), source.getControllerId(), source, game);
             } else if (amount >= 5) {

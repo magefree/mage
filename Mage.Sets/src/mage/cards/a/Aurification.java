@@ -69,7 +69,7 @@ public final class Aurification extends CardImpl {
             super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GOLD.createInstance()));
         }
 
-        public AddGoldCountersAbility(final AddGoldCountersAbility ability) {
+        private AddGoldCountersAbility(final AddGoldCountersAbility ability) {
             super(ability);
         }
 
@@ -89,7 +89,7 @@ public final class Aurification extends CardImpl {
                 Permanent permanent = game.getPermanent(event.getSourceId());
                 if (permanent != null && permanent.isCreature(game)) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                     }
                     return true;
                 }
@@ -110,7 +110,7 @@ public final class Aurification extends CardImpl {
             this.staticText = "remove all gold counters from all creatures";
         }
 
-        public RemoveAllGoldCountersEffect(final RemoveAllGoldCountersEffect effect) {
+        private RemoveAllGoldCountersEffect(final RemoveAllGoldCountersEffect effect) {
             super(effect);
         }
 

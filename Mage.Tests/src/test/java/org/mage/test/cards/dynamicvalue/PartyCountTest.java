@@ -57,7 +57,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
     }
@@ -71,7 +70,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 21);
     }
@@ -85,7 +83,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 21);
     }
@@ -100,7 +97,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 22);
     }
@@ -115,7 +111,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 21);
     }
@@ -131,7 +126,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 23);
     }
@@ -147,7 +141,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 23);
     }
@@ -164,7 +157,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 24);
     }
@@ -180,7 +172,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 21);
@@ -196,7 +187,6 @@ public class PartyCountTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 23);
     }

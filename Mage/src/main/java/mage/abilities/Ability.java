@@ -61,7 +61,7 @@ public interface Ability extends Controllable, Serializable {
      * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
-    void newOriginalId();
+    void newOriginalId(); // TODO: delete newOriginalId???
 
     /**
      * Gets the {@link AbilityType} of this ability.
@@ -101,6 +101,18 @@ public interface Ability extends Controllable, Serializable {
      * @param sourceID {@link java.util.UUID} the source id to set.
      */
     void setSourceId(UUID sourceID);
+
+    default void clearCosts() {
+        getCosts().clear();
+    }
+
+    default void clearManaCosts() {
+        getManaCosts().clear();
+    }
+
+    default void clearManaCostsToPay() {
+        getManaCostsToPay().clear();
+    }
 
     /**
      * Gets all {@link Costs} associated with this ability.
@@ -150,6 +162,8 @@ public interface Ability extends Controllable, Serializable {
      * @param cost The {@link ManaCost} to add.
      */
     void addManaCost(ManaCost cost);
+
+    void addManaCostsToPay(ManaCost manaCost);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of
@@ -494,9 +508,7 @@ public interface Ability extends Controllable, Serializable {
     boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
 
     /**
-     * Returns the object that actually existed while a ability triggered or an
-     * ability was activated. If not set yet, the current object will be
-     * retrieved from the game.
+     * Return source object or LKI from battlefield
      *
      * @param game
      * @return
@@ -508,9 +520,9 @@ public interface Ability extends Controllable, Serializable {
     int getSourceObjectZoneChangeCounter();
 
     /**
-     * Returns the object that actually existed while a ability triggerd or an
-     * ability was activated only if it has not changed zone meanwhile. If not
-     * set yet, the current object will be retrieved from the game.
+     * Returns exists source object:
+     * - for not activated ability - returns exists object
+     * - for activated ability - returns exists object or LKI (if it triggers from non battlefield, e.g. sacrifice cost);
      *
      * @param game
      * @return
@@ -518,17 +530,24 @@ public interface Ability extends Controllable, Serializable {
     MageObject getSourceObjectIfItStillExists(Game game);
 
     /**
-     * Returns the permanent that actually existed while the ability triggerd or
-     * an ability was activated only if it has not changed zone meanwhile. If
-     * not set yet, the current permanent if one exists will be retrieved from
-     * the game and returned.
+     * See getSourceObjectIfItStillExists for details. Works with Permanent only.
      *
      * @param game
      * @return
      */
     Permanent getSourcePermanentIfItStillExists(Game game);
 
+    /**
+     * Returns source permanent info (actual or from LKI)
+     *
+     * @param game
+     * @return
+     */
     Permanent getSourcePermanentOrLKI(Game game);
+
+    void setSourcePermanentTransformCount(Game game);
+
+    boolean checkTransformCount(Permanent permanent, Game game);
 
     String getTargetDescription(Targets targets, Game game);
 
@@ -536,13 +555,13 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canFizzle();
 
-    void setTargetAdjuster(TargetAdjuster targetAdjuster);
+    Ability setTargetAdjuster(TargetAdjuster targetAdjuster);
 
     TargetAdjuster getTargetAdjuster();
 
     void adjustTargets(Game game);
 
-    void setCostAdjuster(CostAdjuster costAdjuster);
+    Ability setCostAdjuster(CostAdjuster costAdjuster);
 
     CostAdjuster getCostAdjuster();
 
@@ -551,6 +570,11 @@ public interface Ability extends Controllable, Serializable {
     List<Hint> getHints();
 
     Ability addHint(Hint hint);
+
+    /**
+     * Tag the current mode to be retrieved elsewhere thanks to the tag.
+     */
+    void setModeTag(String tag);
 
     /**
      * For abilities with static icons

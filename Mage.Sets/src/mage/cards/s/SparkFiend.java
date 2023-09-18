@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -18,14 +16,16 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class SparkFiend extends CardImpl {
 
     public SparkFiend(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
@@ -54,7 +54,7 @@ class SparkFiendEffect extends OneShotEffect {
         this.staticText = "roll two six-sided dice. If you rolled 2, 3, or 12, sacrifice Spark Fiend. If you rolled 7 or 11, don't roll dice for Spark Fiend during any of your following upkeeps. If you rolled any other total, note that total";
     }
 
-    public SparkFiendEffect(final SparkFiendEffect effect) {
+    private SparkFiendEffect(final SparkFiendEffect effect) {
         super(effect);
     }
 
@@ -67,8 +67,8 @@ class SparkFiendEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int roll = controller.rollDice(source, game, 6) + controller.rollDice(source, game, 6);
-            MageObject mageObject = game.getObject(source.getSourceId());
+            int roll = controller.rollDice(outcome, source, game, 6, 2, 0).stream().mapToInt(x -> x).sum();
+            MageObject mageObject = game.getObject(source);
             if (mageObject instanceof Permanent) {
                 Permanent sourcePermanent = (Permanent) mageObject;
                 if (roll == 2 || roll == 3 || roll == 12) {
@@ -97,7 +97,7 @@ class SparkFiendUpkeepEffect extends OneShotEffect {
         this.staticText = "roll two six-sided dice. If you rolled 7, sacrifice Spark Fiend. If you roll the noted total, don't roll dice for Spark Fiend during any of your following upkeeps. Otherwise, do nothing";
     }
 
-    public SparkFiendUpkeepEffect(final SparkFiendUpkeepEffect effect) {
+    private SparkFiendUpkeepEffect(final SparkFiendUpkeepEffect effect) {
         super(effect);
     }
 
@@ -112,8 +112,8 @@ class SparkFiendUpkeepEffect extends OneShotEffect {
         if (controller != null) {
             if (game.getState().getValue("SparkFiend" + source.getSourceId().toString()) != null
                     && (Integer) game.getState().getValue("SparkFiend" + source.getSourceId().toString()) != 0) {
-                int roll = controller.rollDice(source, game, 6) + controller.rollDice(source, game, 6);
-                MageObject mageObject = game.getObject(source.getSourceId());
+                int roll = controller.rollDice(outcome, source, game, 6, 2, 0).stream().mapToInt(x -> x).sum();
+                MageObject mageObject = game.getObject(source);
                 if (mageObject instanceof Permanent) {
                     Permanent sourcePermanent = (Permanent) mageObject;
                     if (roll == 7) {

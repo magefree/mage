@@ -32,7 +32,7 @@ public final class GoblinBalloonBrigade extends CardImpl {
         // {R}: Goblin Balloon Brigade gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), 
-                        Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+                        Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private GoblinBalloonBrigade(final GoblinBalloonBrigade card) {

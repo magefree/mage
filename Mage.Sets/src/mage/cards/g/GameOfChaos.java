@@ -46,7 +46,7 @@ class GameOfChaosEffect extends OneShotEffect {
         this.staticText = "Flip a coin. If you win the flip, you gain 1 life and target opponent loses 1 life, and you decide whether to flip again. If you lose the flip, you lose 1 life and that opponent gains 1 life, and that player decides whether to flip again. Double the life stakes with each flip.";
     }
 
-    public GameOfChaosEffect(final GameOfChaosEffect effect) {
+    private GameOfChaosEffect(final GameOfChaosEffect effect) {
         super(effect);
     }
 

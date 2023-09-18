@@ -2,6 +2,7 @@
 package mage.cards.j;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -38,7 +39,7 @@ public final class JodahsAvenger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {0}: Until end of turn, Jodah's Avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new ManaCostsImpl("{0}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new ManaCostsImpl<>("{0}")));
     }
 
     private JodahsAvenger(final JodahsAvenger card) {
@@ -53,7 +54,7 @@ public final class JodahsAvenger extends CardImpl {
 
 class JodahsAvengerEffect extends ContinuousEffectImpl {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
     private Ability gainedAbility;
 
     static {
@@ -68,7 +69,7 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
         this.staticText = "Until end of turn, {this} gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow";
     }
 
-    public JodahsAvengerEffect(final JodahsAvengerEffect effect) {
+    private JodahsAvengerEffect(final JodahsAvengerEffect effect) {
         super(effect);
     }
 

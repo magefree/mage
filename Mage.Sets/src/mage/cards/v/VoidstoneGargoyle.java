@@ -57,7 +57,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
         staticText = "Spells with the chosen name can't be cast";
     }
 
-    public VoidstoneGargoyleReplacementEffect1(final VoidstoneGargoyleReplacementEffect1 effect) {
+    private VoidstoneGargoyleReplacementEffect1(final VoidstoneGargoyleReplacementEffect1 effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast a spell with that name (" + mageObject.getName() + ").";
         }
@@ -99,7 +99,7 @@ class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffec
         staticText = "Activated abilities of sources with the chosen name can't be activated";
     }
 
-    public VoidstoneGargoyleRuleModifyingEffect2(final VoidstoneGargoyleRuleModifyingEffect2 effect) {
+    private VoidstoneGargoyleRuleModifyingEffect2(final VoidstoneGargoyleRuleModifyingEffect2 effect) {
         super(effect);
     }
 
@@ -115,7 +115,7 @@ class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffec
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't activate abilities of sources with that name (" + mageObject.getName() + " in play).";
         }

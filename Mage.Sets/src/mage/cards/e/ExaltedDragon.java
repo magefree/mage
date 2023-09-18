@@ -57,7 +57,7 @@ class ExaltedDragonCostToAttackBlockEffect extends PayCostToAttackBlockEffectImp
         staticText = "{this} can't attack unless you sacrifice a land. <i>(This cost is paid as attackers are declared.)</i>";
     }
 
-    ExaltedDragonCostToAttackBlockEffect(ExaltedDragonCostToAttackBlockEffect effect) {
+    private ExaltedDragonCostToAttackBlockEffect(final ExaltedDragonCostToAttackBlockEffect effect) {
         super(effect);
     }
 

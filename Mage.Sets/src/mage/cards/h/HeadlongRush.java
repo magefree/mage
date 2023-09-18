@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -20,7 +20,7 @@ public final class HeadlongRush extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Attacking creatures gain first strike until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES));
     }
 
     private HeadlongRush(final HeadlongRush card) {

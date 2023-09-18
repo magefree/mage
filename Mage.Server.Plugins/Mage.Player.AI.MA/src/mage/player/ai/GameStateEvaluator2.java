@@ -26,7 +26,11 @@ public final class GameStateEvaluator2 {
 
     public static PlayerEvaluateScore evaluate(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
-        Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next()); // TODO: add multi opponent support?
+        Player opponent = game.getPlayer(game.getOpponents(playerId).stream().findFirst().orElse(null)); // TODO: add multi opponent support?
+        if (opponent == null) {
+            return new PlayerEvaluateScore(WIN_GAME_SCORE);
+        }
+
         if (game.checkIfGameIsOver()) {
             if (player.hasLost()
                     || opponent.hasWon()) {

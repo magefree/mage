@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class RoonOfTheHiddenRealmTest extends CardTestPlayerBase {
 
     /**
-     * Roon of the Hidden Realm is returning cards to their controler's control
+     * Roon of the Hidden Realm is returning cards to their controller's control
      * instead of the owner's control at the end of the turn. I used his ability
      * on a Perplexing Chimera I gave my opponent and in the end of the turn it
      * returned to the battlefield in their control.
@@ -32,7 +32,7 @@ public class RoonOfTheHiddenRealmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}", "Perplexing Chimera");
 

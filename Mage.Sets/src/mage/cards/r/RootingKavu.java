@@ -52,7 +52,7 @@ class RootingKavuEffect extends OneShotEffect {
         this.staticText = "shuffle all creature cards from your graveyard into your library.";
     }
 
-    public RootingKavuEffect(final RootingKavuEffect effect) {
+    private RootingKavuEffect(final RootingKavuEffect effect) {
         super(effect);
     }
 

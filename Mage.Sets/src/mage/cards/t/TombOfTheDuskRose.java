@@ -34,7 +34,7 @@ public final class TombOfTheDuskRose extends CardImpl {
     public TombOfTheDuskRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.nightCard = true;
 
@@ -68,7 +68,7 @@ class TombOfTheDuskRoseEffect extends OneShotEffect {
         this.staticText = "Put a creature card exiled with this permanent onto the battlefield under your control";
     }
 
-    public TombOfTheDuskRoseEffect(final TombOfTheDuskRoseEffect effect) {
+    private TombOfTheDuskRoseEffect(final TombOfTheDuskRoseEffect effect) {
         super(effect);
     }
 

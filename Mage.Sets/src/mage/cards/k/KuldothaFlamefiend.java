@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTargetAmount;
 
@@ -28,9 +27,9 @@ public final class KuldothaFlamefiend extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Kuldotha Flamefiend enters the battlefield, you may sacrifice an artifact. If you do, Kuldotha Flamefiend deals 4 damage divided as you choose among any number of target creatures and/or players.
+        // When Kuldotha Flamefiend enters the battlefield, you may sacrifice an artifact. If you do, Kuldotha Flamefiend deals 4 damage divided as you choose among any number of targets.
         EntersBattlefieldTriggeredAbility ability = 
-                new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new DamageMultiEffect(4), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact")))), false);
+                new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new DamageMultiEffect(4), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN))), false);
         ability.addTarget(new TargetAnyTargetAmount(4));
         this.addAbility(ability);
     }

@@ -27,7 +27,7 @@ public final class EnshroudingMist extends CardImpl {
         // Target creature gets +1/+1 until end of turn. Prevent all damage that would dealt to it this turn. If it's renowned, untap it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE);
-        effect.setText("Prevent all damage that would dealt to it this turn");
+        effect.setText("Prevent all damage that would be dealt to it this turn");
         this.getSpellAbility().addEffect(effect);
         OneShotEffect effect2 = new UntapTargetEffect();
         effect2.setText("untap it");

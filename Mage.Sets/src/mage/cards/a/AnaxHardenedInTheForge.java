@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,7 +17,6 @@ import java.util.UUID;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -29,13 +28,13 @@ public final class AnaxHardenedInTheForge extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public AnaxHardenedInTheForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
@@ -43,7 +42,7 @@ public final class AnaxHardenedInTheForge extends CardImpl {
         // Anax's power is equal to your devotion to red.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerSourceEffect(DevotionCount.R, Duration.EndOfGame)
+                new SetBasePowerSourceEffect(DevotionCount.R)
                         .setText("{this}'s power is equal to your devotion to red")
         ).addHint(DevotionCount.R.getHint()));
 

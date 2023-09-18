@@ -33,7 +33,7 @@ public final class LeylineOfVitality extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new GainLifeEffect(1),
-                StaticFilters.FILTER_PERMANENT_CREATURE_A,
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 true)
         );
     }

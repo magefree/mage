@@ -21,8 +21,7 @@ public class ElderGargarothTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
-        assertPermanentCount(playerA, "Beast", 1);
+        assertPermanentCount(playerA, "Beast Token", 1);
     }
 
     @Test
@@ -37,7 +36,6 @@ public class ElderGargarothTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerA, 23);
     }
 
@@ -54,7 +52,6 @@ public class ElderGargarothTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 2);
     }

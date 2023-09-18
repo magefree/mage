@@ -7,6 +7,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.keyword.FlashAbility;
+import mage.cards.AdventureCardSpell;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.*;
@@ -47,11 +48,29 @@ public class SpellAbility extends ActivatedAbilityImpl {
         setSpellName();
     }
 
-    public SpellAbility(final SpellAbility ability) {
+    protected SpellAbility(final SpellAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.spellAbilityCastMode = ability.spellAbilityCastMode;
         this.cardName = ability.cardName;
+    }
+
+    @Override
+    public boolean canChooseTarget(Game game, UUID playerId) {
+        if (SpellAbilityType.SPLIT_FUSED.equals(getSpellAbilityType())) {
+            Card card = game.getCard(getSourceId());
+            if (card == null) {
+                return false;
+            }
+            SpellAbility left = ((SplitCard) card).getLeftHalfCard().getSpellAbility();
+            SpellAbility right = ((SplitCard) card).getRightHalfCard().getSpellAbility();
+            return canChooseTargetAbility(left, left.getModes(), game, playerId) && canChooseTargetAbility(right, right.getModes(), game, playerId);
+        }
+        return super.canChooseTarget(game, playerId);
+    }
+
+    public boolean canSpliceOnto(Ability abilityToModify, Game game) {
+        return canChooseTargetAbility(abilityToModify, getModes(), game, abilityToModify.getControllerId());
     }
 
     /*
@@ -69,7 +88,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         // forced to cast (can be part id or main id)
         Set<UUID> idsToCheck = new HashSet<>();
         idsToCheck.add(object.getId());
-        if (object instanceof Card) {
+        if (object instanceof Card && !(object instanceof AdventureCardSpell)) {
             idsToCheck.add(((Card) object).getMainCard().getId());
         }
         for (UUID idToCheck : idsToCheck) {
@@ -80,12 +99,16 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT
+                || object.isInstant(game)
                 || object.hasAbility(FlashAbility.getInstance(), game)
                 || game.canPlaySorcery(playerId);
     }
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
+        // spells can be cast from non hand zones, so must use custom check
+        // no super.canActivate() call
+
         if (this.spellCanBeActivatedRegularlyNow(playerId, game)) {
             if (spellAbilityType == SpellAbilityType.SPLIT
                     || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
@@ -94,6 +117,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
             // play from not own hand
             ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+            if (approvingObject == null && getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
+                // allowed to cast adventures from non-hand?
+                approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+            }
+
             if (approvingObject == null) {
                 Card card = game.getCard(sourceId);
                 if (!(card != null && card.isOwnedBy(playerId))) {
@@ -104,8 +132,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
             // play restrict
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (game.inCheckPlayableState()) {
+                Card card = game.getCard(sourceId);
+                GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this, playerId);
+                castEvent.setZone(card == null ? null : game.getState().getZone(card.getMainCard().getId()));
                 if (game.getContinuousEffects().preventedByRuleModification(
-                        GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this, playerId), this, game, true)) {
+                        castEvent, this, game, true)) {
                     return ActivationStatus.getFalse();
                 }
             }
@@ -120,8 +151,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
 
-            // can pay all costs
-            if (costs.canPay(this, this, playerId, game)) {
+            // can pay all costs and choose targets
+            if (getCosts().canPay(this, this, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
@@ -152,12 +183,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
             return new StringBuilder(super.getRule(all)).append(name).toString();
         }
         return super.getRule(false);
-    }
-
-    public void clear() {
-        getTargets().clearChosen();
-        this.manaCosts.clearPaid();
-        this.costs.clearPaid();
     }
 
     public String getName() {
@@ -260,7 +285,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     /**
-     * Returns a card object with the spell characteristics like calor, types,
+     * Returns a card object with the spell characteristics like color, types,
      * subtypes etc. E.g. if you cast a Bestow card as enchantment, the
      * characteristics don't include the creature type.
      *

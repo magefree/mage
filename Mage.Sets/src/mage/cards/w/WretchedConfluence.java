@@ -39,14 +39,12 @@ public final class WretchedConfluence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Target creature gets -2/-2 until end of turn;
-        Mode mode = new Mode();
-        mode.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Return target creature card from your graveyard to your hand.
-        mode = new Mode();
-        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().getModes().addMode(mode);
     }

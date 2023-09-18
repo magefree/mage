@@ -3,6 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -13,7 +14,9 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -56,20 +59,14 @@ public final class WardSliver extends CardImpl {
 
 class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Slivers");
-
-    static {
-        filter.add(SubType.SLIVER.getPredicate());
-    }
-
-    protected FilterPermanent protectionFilter;
+    protected FilterObject<MageObject> protectionFilter;
 
     public WardSliverGainAbilityControlledEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "Slivers have protection from the chosen color";
+        staticText = "all Slivers have protection from the chosen color";
     }
 
-    public WardSliverGainAbilityControlledEffect(final WardSliverGainAbilityControlledEffect effect) {
+    private WardSliverGainAbilityControlledEffect(final WardSliverGainAbilityControlledEffect effect) {
         super(effect);
         protectionFilter = effect.protectionFilter;
     }
@@ -86,13 +83,13 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
                 if (color != null) {
-                    protectionFilter = new FilterPermanent(color.getDescription());
+                    protectionFilter = new FilterObject<>(color.getDescription());
                     protectionFilter.add(new ColorPredicate(color));
                 }
             }
         }
         if (protectionFilter != null) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, game)) {
+            for (Permanent perm: game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_ALL_SLIVERS, game)) {
                 perm.addAbility(new ProtectionAbility(protectionFilter), source.getSourceId(), game);
             }
             return true;

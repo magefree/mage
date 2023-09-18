@@ -58,7 +58,7 @@ class AgadeemOccultistEffect extends OneShotEffect {
         this.staticText = "Put target creature card from an opponent's graveyard onto the battlefield under your control if its mana value is less than or equal to the number of Allies you control";
     }
 
-    public AgadeemOccultistEffect(final AgadeemOccultistEffect effect) {
+    private AgadeemOccultistEffect(final AgadeemOccultistEffect effect) {
         super(effect);
     }
 
@@ -81,8 +81,8 @@ class AgadeemOccultistEffect extends OneShotEffect {
         TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(1, 1, filter);
 
         if (controller != null) {
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
+            if (target.canChoose(source.getControllerId(), source, game)
+                    && controller.choose(Outcome.GainControl, target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

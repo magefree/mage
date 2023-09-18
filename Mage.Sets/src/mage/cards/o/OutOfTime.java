@@ -5,8 +5,8 @@ import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.VanishingSacrificeAbility;
@@ -23,7 +23,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -56,8 +55,8 @@ public final class OutOfTime extends CardImpl {
 class OutOfTimePhaseOutEffect extends OneShotEffect {
 
     public OutOfTimePhaseOutEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "untap all creatures, then phase them out until {this} leaves the battlefield. "
+        super(Outcome.AIDontUseIt);
+        this.staticText = "untap all creatures, then those creatures phase out until {this} leaves the battlefield. "
                 + "Put a time counter on {this} for each creature phased out this way";
     }
 
@@ -73,7 +72,7 @@ class OutOfTimePhaseOutEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> creatures = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game);
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game);
         int numCreatures = creatures.size();
         if (numCreatures > 0) {
             Set<UUID> creatureIds = new HashSet<>(numCreatures);
@@ -83,13 +82,16 @@ class OutOfTimePhaseOutEffect extends OneShotEffect {
             }
             // https://magic.wizards.com/en/articles/archive/feature/modern-horizons-2-release-notes-2021-06-04
             // If Out of Time leaves the battlefield before its enter the battlefield trigger resolves, creatures will untap, but they won't phase out.
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
+            Permanent outOfTime = game.getPermanent(source.getSourceId());
+            if (outOfTime != null) {
                 new PhaseOutAllEffect(new ArrayList<>(creatureIds)).apply(game, source);
+                game.getState().processAction(game);
                 new AddCountersSourceEffect(CounterType.TIME.createInstance(numCreatures)).apply(game, source);
-                game.getState().setValue(CardUtil.getCardZoneString("phasedOutCreatures", source.getSourceId(), game), creatureIds);
+                game.getState().setValue("phasedOutCreatures"
+                        + source.getId().toString(), creatureIds);
+                game.getState().setValue("phasedOutBySourceId" + source.getSourceId(), source.getId());
                 game.addDelayedTriggeredAbility(new OutOfTimeDelayedTriggeredAbility(), source);
-                game.addEffect(new OutOfTimeReplcementEffect(), source);
+                game.addEffect(new OutOfTimeReplacementEffect(), source);
             }
         }
         return true;
@@ -130,7 +132,7 @@ class OutOfTimeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
 
     public OutOfTimeLeavesBattlefieldEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Neutral);
     }
 
     private OutOfTimeLeavesBattlefieldEffect(final OutOfTimeLeavesBattlefieldEffect effect) {
@@ -144,12 +146,14 @@ class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<UUID> creatureIds = (Set<UUID>) game.getState().getValue(CardUtil.getCardZoneString(
-                "phasedOutCreatures", source.getSourceId(), game, true));
+        UUID sourceId = (UUID) game.getState().getValue("phasedOutBySourceId" + source.getSourceId());
+        Set<UUID> creatureIds = (Set<UUID>) game.getState().getValue("phasedOutCreatures"
+                + sourceId.toString());
         if (creatureIds != null) {
             for (UUID creatureId : creatureIds) {
                 Permanent creature = game.getPermanent(creatureId);
-                if (creature != null && !creature.isPhasedIn()) {
+                if (creature != null
+                        && !creature.isPhasedIn()) {
                     creature.phaseIn(game);
                 }
             }
@@ -160,19 +164,19 @@ class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
 }
 
 // Stops creatures from phasing back in on their controller's next turn
-class OutOfTimeReplcementEffect extends ReplacementEffectImpl {
+class OutOfTimeReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OutOfTimeReplcementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+    public OutOfTimeReplacementEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
     }
 
-    private OutOfTimeReplcementEffect(final OutOfTimeReplcementEffect effect) {
+    private OutOfTimeReplacementEffect(final OutOfTimeReplacementEffect effect) {
         super(effect);
     }
 
     @Override
-    public OutOfTimeReplcementEffect copy() {
-        return new OutOfTimeReplcementEffect(this);
+    public OutOfTimeReplacementEffect copy() {
+        return new OutOfTimeReplacementEffect(this);
     }
 
     @Override
@@ -181,14 +185,16 @@ class OutOfTimeReplcementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Set<UUID> creatureIds = (Set<UUID>) game.getState().getValue(CardUtil.getCardZoneString(
-                "phasedOutCreatures", source.getSourceId(), game));
-        return creatureIds != null && creatureIds.contains(event.getTargetId());
+    public boolean apply(Game game, Ability source) {
+        return true;
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Set<UUID> creatureIds = (Set<UUID>) game.getState().getValue("phasedOutCreatures"
+                + source.getId().toString());
+        return source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId()) // blinked
+                && creatureIds != null
+                && creatureIds.contains(event.getTargetId());
     }
 }

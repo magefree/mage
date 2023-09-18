@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -30,7 +29,7 @@ public final class BeastsOfBogardan extends CardImpl {
 
     static {
         controlFilter.add(new ColorPredicate(ObjectColor.WHITE));
-        controlFilter.add(Predicates.not(TokenPredicate.instance));
+        controlFilter.add(TokenPredicate.FALSE);
     }
 
     public BeastsOfBogardan(UUID ownerId, CardSetInfo setInfo) {

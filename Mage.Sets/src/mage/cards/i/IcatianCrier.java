@@ -30,7 +30,7 @@ public final class IcatianCrier extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {tap}, Discard a card: Create two 1/1 white Citizen creature tokens.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CitizenToken(), 2), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CitizenToken(), 2), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

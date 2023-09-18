@@ -12,7 +12,7 @@ import mage.game.Game;
 public enum MyTurnHint implements Hint {
 
     instance;
-    private static final ConditionHint hint = new ConditionHint(MyTurnCondition.instance, "It's my turn");
+    private static final ConditionHint hint = new ConditionHint(MyTurnCondition.instance, "It's your turn");
 
     @Override
     public String getText(Game game, Ability ability) {

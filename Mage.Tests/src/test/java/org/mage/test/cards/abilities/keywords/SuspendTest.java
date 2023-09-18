@@ -17,7 +17,7 @@ public class SuspendTest extends CardTestPlayerBase {
      * dies, exile it with three time counters on it and it gains suspend.
      */
     @Test
-    public void testEpochrasite() {
+    public void test_Single_Epochrasite() {
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         // Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.
@@ -45,7 +45,7 @@ public class SuspendTest extends CardTestPlayerBase {
      * card. If it doesn't have suspend, it gains suspend.
      */
     @Test
-    public void testJhoiraOfTheGhitu() {
+    public void test_Single_JhoiraOfTheGhitu() {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
 
@@ -69,31 +69,33 @@ public class SuspendTest extends CardTestPlayerBase {
      * counters and can be cast after the 3 counters are removed
      */
     @Test
-    public void testDelay() {
+    public void test_Single_Delay() {
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         // Instant {1}{U}
-        // Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend. (At the beginning of its owner's upkeep, remove a counter from that card. When the last is removed, the player plays it without paying its mana cost. If it's a creature, it has haste.)
+        // Counter target spell.
+        // If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard.
+        // If it doesn't have suspend, it gains suspend.
+        // (At the beginning of its owner's upkeep, remove a counter from that card.
+        // When the last is removed, the player plays it without paying its mana cost. If it's a creature, it has haste.)
         addCard(Zone.HAND, playerB, "Delay", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Delay", "Silvercoat Lion");
-        setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(7, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerB, "Delay", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
-
     }
 
     @Test
-    public void testDeepSeaKraken() {
+    public void test_Single_DeepSeaKraken() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         // Suspend 9-{2}{U}
         // Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.
@@ -118,12 +120,13 @@ public class SuspendTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testAncestralVisionCantBeCastDirectly() {
+    public void test_Single_AncestralVisionCantBeCastDirectly() {
         // Suspend 4-{U}
         // Target player draws three cards.
         addCard(Zone.HAND, playerA, "Ancestral Vision", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision", playerA);
+        checkPlayableAbility("Can't cast directly", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ancestral", false);
+//        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision", playerA);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -138,7 +141,7 @@ public class SuspendTest extends CardTestPlayerBase {
      * It made my Rift Bolt cost 2R to suspend instead of R
      */
     @Test
-    public void testCostManipulation() {
+    public void test_CostManipulation() {
         // Rift Bolt deals 3 damage to any target.
         // Suspend 1-{R}
         addCard(Zone.HAND, playerA, "Rift Bolt", 1);
@@ -162,7 +165,7 @@ public class SuspendTest extends CardTestPlayerBase {
      * Example: cards coming off suspend shouldn't trigger Knowledge Pool.
      */
     @Test
-    public void testThatNotCastFromHand() {
+    public void test_ThatNotCastFromHand() {
 
         // Rift Bolt deals 3 damage to any target.
         // Suspend 1-{R}
@@ -230,7 +233,6 @@ public class SuspendTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -265,7 +267,6 @@ public class SuspendTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -308,6 +309,40 @@ public class SuspendTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_OnlyOwnerCanActivateSuspend() {
+        // bug: you or AI can activate suspend from opponent's hand
+
+        // Suspend 5-{G}
+        String suspendA = "Suspend 5"; // owner is player A
+        addCard(Zone.HAND, playerA, "Durkwood Baloth", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
+        //
+        // Suspend 3—{0}
+        String suspendB = "Suspend 3"; // owner is player B
+        addCard(Zone.HAND, playerB, "Mox Tantalite", 1);
+
+        // turn 1 - A can own, B can't
+        checkPlayableAbility("T1 - Player A can own", 1, PhaseStep.PRECOMBAT_MAIN, playerA, suspendA, true);
+        checkPlayableAbility("T1 - Player A can't opponent", 1, PhaseStep.PRECOMBAT_MAIN, playerA, suspendB, false);
+        checkPlayableAbility("T1 - Player B can't own", 1, PhaseStep.PRECOMBAT_MAIN, playerB, suspendB, false);
+        checkPlayableAbility("T1 - Player B can't opponent", 1, PhaseStep.PRECOMBAT_MAIN, playerB, suspendA, false);
+
+        // turn 2 - A can't, B can own
+        checkPlayableAbility("T2 - Player A can't own", 2, PhaseStep.PRECOMBAT_MAIN, playerA, suspendA, false);
+        checkPlayableAbility("T2 - Player A can't opponent", 2, PhaseStep.PRECOMBAT_MAIN, playerA, suspendB, false);
+        checkPlayableAbility("T2 - Player B can own", 2, PhaseStep.PRECOMBAT_MAIN, playerB, suspendB, true);
+        checkPlayableAbility("T2 - Player B can't opponent", 2, PhaseStep.PRECOMBAT_MAIN, playerB, suspendA, false);
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, suspendB);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerB, "Mox Tantalite", 1); // suspended
     }
 }

@@ -49,7 +49,7 @@ class RiteOfTheSerpentEffect extends OneShotEffect {
         this.staticText = "If that creature had a +1/+1 counter on it, create a 1/1 green Snake creature token";
     }
 
-    public RiteOfTheSerpentEffect(final RiteOfTheSerpentEffect effect) {
+    private RiteOfTheSerpentEffect(final RiteOfTheSerpentEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class RiteOfTheSerpentEffect extends OneShotEffect {
         Permanent targetCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (targetCreature != null) {
             if (targetCreature.getCounters(game).containsKey(CounterType.P1P1)) {
-                new CreateTokenEffect(new SnakeToken("KTK")).apply(game, source);
+                new CreateTokenEffect(new SnakeToken()).apply(game, source);
             }
             return true;
         }

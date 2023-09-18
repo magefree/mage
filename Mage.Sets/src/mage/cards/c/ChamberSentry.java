@@ -1,12 +1,12 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -26,8 +26,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jmharmon
  */
 public final class ChamberSentry extends CardImpl {
@@ -46,14 +47,14 @@ public final class ChamberSentry extends CardImpl {
         // {X}, {T}, Remove X +1/+1 counters from Chamber Sentry: It deals X damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR)
                 .setText("It deals X damage to any target"),
-                new ManaCostsImpl("{X}"));
+                new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ChamberSentryRemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // {W}{U}{B}{R}{G}: Return Chamber Sentry from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
     }
 
     private ChamberSentry(final ChamberSentry card) {
@@ -69,7 +70,7 @@ public final class ChamberSentry extends CardImpl {
 class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
 
     protected int minimalCountersToPay = 0;
-    private String counterName;
+    private final String counterName;
 
     public ChamberSentryRemoveVariableCountersSourceCost(Counter counter) {
         this(counter, 0);
@@ -84,7 +85,7 @@ class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
     }
 
     public ChamberSentryRemoveVariableCountersSourceCost(Counter counter, int minimalCountersToPay, String text) {
-        super(counter.getName() + " counters to remove");
+        super(VariableCostType.NORMAL, counter.getName() + " counters to remove");
         this.minimalCountersToPay = minimalCountersToPay;
         this.counterName = counter.getName();
         if (text == null || text.isEmpty()) {
@@ -94,7 +95,7 @@ class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
         }
     }
 
-    public ChamberSentryRemoveVariableCountersSourceCost(final ChamberSentryRemoveVariableCountersSourceCost cost) {
+    private ChamberSentryRemoveVariableCountersSourceCost(final ChamberSentryRemoveVariableCountersSourceCost cost) {
         super(cost);
         this.minimalCountersToPay = cost.minimalCountersToPay;
         this.counterName = cost.counterName;

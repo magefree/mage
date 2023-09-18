@@ -21,7 +21,7 @@ public class AjaniTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Ajani Goldmane"); // {2}{W}{W} starts with 4 Loyality counters
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ajani Goldmane");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ajani Goldmane", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: You gain 2 life");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -45,14 +45,14 @@ public class AjaniTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Oath of Gideon"); // {2}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oath of Gideon");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ajani Goldmane");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oath of Gideon", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ajani Goldmane", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: You gain 2 life");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Kor Ally", 2);
+        assertPermanentCount(playerA, "Kor Ally Token", 2);
         assertPermanentCount(playerA, "Oath of Gideon", 1);
         assertPermanentCount(playerA, "Ajani Goldmane", 1);
         assertCounterCount("Ajani Goldmane", CounterType.LOYALTY, 6);  // 4 + 1 + 1 = 6

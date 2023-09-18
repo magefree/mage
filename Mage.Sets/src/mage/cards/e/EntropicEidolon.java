@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,13 +14,15 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class EntropicEidolon extends CardImpl {
@@ -33,7 +34,7 @@ public final class EntropicEidolon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}, Sacrifice Entropic Eidolon: Target player loses 1 life and you gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{B}"));
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         ability.addEffect(effect);
@@ -41,8 +42,11 @@ public final class EntropicEidolon extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Whenever you cast a multicolored spell, you may return Entropic Eidolon from your graveyard to your hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToHandEffect(),
+                StaticFilters.FILTER_SPELL_A_MULTICOLORED,
+                true, SetTargetPointer.NONE));
     }
 
     private EntropicEidolon(final EntropicEidolon card) {

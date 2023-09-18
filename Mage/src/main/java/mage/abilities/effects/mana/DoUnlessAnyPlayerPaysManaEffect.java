@@ -28,7 +28,7 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
         this.chooseUseText = chooseUseText;
     }
 
-    public DoUnlessAnyPlayerPaysManaEffect(final DoUnlessAnyPlayerPaysManaEffect effect) {
+    protected DoUnlessAnyPlayerPaysManaEffect(final DoUnlessAnyPlayerPaysManaEffect effect) {
         super(effect);
         this.manaEffect = (ManaEffect) effect.manaEffect.copy();
         this.cost = effect.cost.copy();
@@ -45,7 +45,7 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
         Mana mana = new Mana();
         if (game != null) {
             Player controller = getPlayer(game, source);
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             String message = CardUtil.replaceSourceName(chooseUseText, sourceObject.getName());
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
@@ -74,7 +74,7 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
     }
 
     @Override
-    public ManaEffect copy() {
+    public DoUnlessAnyPlayerPaysManaEffect copy() {
         return new DoUnlessAnyPlayerPaysManaEffect(this);
     }
 

@@ -29,7 +29,7 @@ public final class MotherBear extends CardImpl {
 
         // {3}{G}{G}, Exile Mother Bear from your graveyard: Create two 2/2 green Bear creature tokens. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.GRAVEYARD, new CreateTokenEffect(new BearToken(), 2), new ManaCostsImpl("{3}{G}{G}")
+                Zone.GRAVEYARD, new CreateTokenEffect(new BearToken(), 2), new ManaCostsImpl<>("{3}{G}{G}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);

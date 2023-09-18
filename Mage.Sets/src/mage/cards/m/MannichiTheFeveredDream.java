@@ -22,14 +22,14 @@ public final class MannichiTheFeveredDream extends CardImpl {
 
     public MannichiTheFeveredDream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // {1}{R}: Switch each creature's power and toughness until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessAllEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessAllEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private MannichiTheFeveredDream(final MannichiTheFeveredDream card) {

@@ -30,7 +30,7 @@ public final class TranquilGrove extends CardImpl {
 
 
         // {1}{G}{G}: Destroy all other enchantments.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new ManaCostsImpl("{1}{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new ManaCostsImpl<>("{1}{G}{G}")));
     }
 
     private TranquilGrove(final TranquilGrove card) {

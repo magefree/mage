@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.mana.DoUnlessAnyPlayerPaysManaEffect;
@@ -57,7 +56,7 @@ class RhysticCaveManaAbility extends ActivatedManaAbilityImpl {
 
     }
 
-    public RhysticCaveManaAbility(final RhysticCaveManaAbility ability) {
+    private RhysticCaveManaAbility(final RhysticCaveManaAbility ability) {
         super(ability);
     }
 
@@ -83,19 +82,23 @@ class RhysticCaveManaAbility extends ActivatedManaAbilityImpl {
 
 class RhysticCaveManaEffect extends ManaEffect {
 
-    public RhysticCaveManaEffect() {
+    RhysticCaveManaEffect() {
         super();
         this.staticText = "Choose a color. Add one mana of that color";
     }
 
-    public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {
+    private RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {
         super(effect);
     }
 
+    // "The card’s ability has errata so you can’t activate the ability during casting of a spell or activating of an ability."
+    // (2004-10-04)
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        netMana.add(Mana.AnyMana(1));
+        // Returning no mana instead of 1 mana of any color so that it won't highlight spells that need it as castable.
+        // This land must be tapped for mana as an instant and the mana must be floated.
+        netMana.add(new Mana());
         return netMana;
     }
 
@@ -109,7 +112,7 @@ class RhysticCaveManaEffect extends ManaEffect {
     }
 
     @Override
-    public Effect copy() {
+    public RhysticCaveManaEffect copy() {
         return new RhysticCaveManaEffect(this);
     }
 }

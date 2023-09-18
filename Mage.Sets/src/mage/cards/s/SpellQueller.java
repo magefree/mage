@@ -80,7 +80,7 @@ class SpellQuellerEntersEffect extends OneShotEffect {
         this.staticText = "exile target spell with mana value 4 or less";
     }
 
-    public SpellQuellerEntersEffect(final SpellQuellerEntersEffect effect) {
+    private SpellQuellerEntersEffect(final SpellQuellerEntersEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class SpellQuellerLeavesEffect extends OneShotEffect {
         this.staticText = "the exiled card's owner may cast that card without paying its mana cost";
     }
 
-    public SpellQuellerLeavesEffect(final SpellQuellerLeavesEffect effect) {
+    private SpellQuellerLeavesEffect(final SpellQuellerLeavesEffect effect) {
         super(effect);
     }
 
@@ -141,7 +141,9 @@ class SpellQuellerLeavesEffect extends OneShotEffect {
                         Player cardOwner = game.getPlayer(card.getOwnerId());
                         if (cardOwner != null) {
                             if (cardOwner.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
-                                cardOwner.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                                cardOwner.cast(cardOwner.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                             }
                         }
                     }

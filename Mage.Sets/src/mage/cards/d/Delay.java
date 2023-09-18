@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -51,7 +52,7 @@ class DelayEffect extends OneShotEffect {
         this.staticText = "Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend";
     }
 
-    public DelayEffect(final DelayEffect effect) {
+    private DelayEffect(final DelayEffect effect) {
         super(effect);
     }
 
@@ -65,7 +66,7 @@ class DelayEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (controller != null && spell != null) {
-            Effect effect = new CounterTargetWithReplacementEffect(Zone.EXILED);
+            Effect effect = new CounterTargetWithReplacementEffect(PutCards.EXILED);
             effect.setTargetPointer(targetPointer);
             Card card = game.getCard(spell.getSourceId());
             if (card != null && effect.apply(game, source) && game.getState().getZone(card.getId()) == Zone.EXILED) {

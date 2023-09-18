@@ -32,7 +32,7 @@ public final class JediInquirer extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{W}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private JediInquirer(final JediInquirer card) {

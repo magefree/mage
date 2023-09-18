@@ -19,7 +19,7 @@ public final class TrainOfThought extends CardImpl {
 
 
         // Replicate {1}{U}
-        this.addAbility(new ReplicateAbility(this, "{1}{U}"));
+        this.addAbility(new ReplicateAbility("{1}{U}"));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

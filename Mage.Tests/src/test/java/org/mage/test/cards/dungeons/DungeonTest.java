@@ -86,10 +86,9 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 0);
+        assertPermanentCount(playerA, "Goblin Token", 0);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Cave Entrance");
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -105,14 +104,13 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Goblin Lair");
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -128,17 +126,16 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);
@@ -154,19 +151,18 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(null, null);
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);
@@ -180,16 +176,15 @@ public class DungeonTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(null, null);
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);
@@ -203,17 +198,16 @@ public class DungeonTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
 
         rollbackTurns(2, PhaseStep.END_TURN, playerA, 0);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Goblin Lair");
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -228,26 +222,25 @@ public class DungeonTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
 
         rollbackTurns(2, PhaseStep.END_TURN, playerA, 0);
 
         rollbackAfterActionsStart();
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Storeroom
+        setChoice(playerA, true); // Storeroom
         addTarget(playerA, SILVERCOAT_LION);
         rollbackAfterActionsEnd();
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, SILVERCOAT_LION, 3, 3);
         assertCounterCount(playerA, SILVERCOAT_LION, CounterType.P1P1, 1);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Storeroom");
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -265,10 +258,10 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
         setChoice(playerB, DUNGEON_OF_THE_MAD_MAGE);
@@ -276,18 +269,17 @@ public class DungeonTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
-        setChoice(playerB, "Yes"); // Goblin Bazaar
+        setChoice(playerB, true); // Goblin Bazaar
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPowerToughness(playerB, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
-        assertPermanentCount(playerB, "Treasure", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
+        assertPermanentCount(playerB, "Treasure Token", 1);
         assertDungeonRoom(playerA, LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertDungeonRoom(playerB, DUNGEON_OF_THE_MAD_MAGE, "Lost Level");
         assertLife(playerA, 20 + 1);
@@ -305,16 +297,15 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), true);
         assertDungeonRoom(null, null);
@@ -326,7 +317,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), false);
         assertDungeonRoom(null, null);
@@ -346,16 +336,15 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), true);
         assertDungeonRoom(null, null);
@@ -370,17 +359,16 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // return Dungeon Crawler
+        setChoice(playerA, true); // return Dungeon Crawler
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, DUNGEON_CRAWLER, 1);
         assertDungeonRoom(null, null);
@@ -396,17 +384,16 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 2);
+        assertPermanentCount(playerA, "Goblin Token", 2);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertLife(playerA, 20 + 1 + 1);
         assertLife(playerB, 20 - 1 - 1);
@@ -423,17 +410,16 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);

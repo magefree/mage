@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,12 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.DarettiConstructToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInGraveyardOrBattlefield;
+import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -28,22 +25,12 @@ import java.util.UUID;
  */
 public final class DarettiIngeniousIconoclast extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterPermanent("artifact or creature (to destroy)");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()
-        ));
-    }
-
     public DarettiIngeniousIconoclast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DARETTI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Create a 1/1 colorless Construct artifact creature token with defender.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DarettiConstructToken()), 1));
@@ -51,13 +38,13 @@ public final class DarettiIngeniousIconoclast extends CardImpl {
         // -1: You may sacrifice an artifact. If you do, destroy target artifact or creature.
         Ability ability = new LoyaltyAbility(
                 new DoIfCostPaid(
-                        new DestroyTargetEffect("destroy target artifact or creature"),
+                        new DestroyTargetEffect(),
                         new SacrificeTargetCost(new TargetControlledPermanent(
                                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
                         ))
                 ), -1
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE).withChooseHint("to destroy"));
         this.addAbility(ability);
 
         // -6: Choose target artifact card in a graveyard or artifact on the battlefield. Create three tokens that are copies of it.
@@ -66,7 +53,7 @@ public final class DarettiIngeniousIconoclast extends CardImpl {
                         .setText("Choose target artifact card in a graveyard or artifact on the battlefield. " +
                                 "Create three tokens that are copies of it"), -6
         );
-        ability.addTarget(new TargetCardInGraveyardOrBattlefield(1, 1,
+        ability.addTarget(new TargetCardInGraveyardBattlefieldOrStack(1, 1,
                 StaticFilters.FILTER_CARD_ARTIFACT, StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.addAbility(ability);
     }

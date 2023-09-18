@@ -68,20 +68,20 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
         setTargetName("target creature that target Wall blocked this turn");
     }
 
-    public GlyphOfDelusionSecondTarget(final GlyphOfDelusionSecondTarget target) {
+    private GlyphOfDelusionSecondTarget(final GlyphOfDelusionSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         if (firstTarget != null) {
             BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
             if (watcher != null) {
-                MageObject targetSource = game.getObject(sourceId);
+                MageObject targetSource = game.getObject(source);
                 if (targetSource != null) {
-                    for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, sourceId, game)) {
+                    for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, source, game)) {
                         if (!targets.containsKey(creature.getId()) && creature.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                             if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(firstTarget, game), game)) {
                                 possibleTargets.add(creature.getId());
@@ -113,7 +113,7 @@ class GlyphOfDelusionEffect extends OneShotEffect {
         this.staticText = "Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains \"This creature doesn't untap during your untap step if it has a glyph counter on it\" and \"At the beginning of your upkeep, remove a glyph counter from this creature.\"";
     }
 
-    public GlyphOfDelusionEffect(final GlyphOfDelusionEffect effect) {
+    private GlyphOfDelusionEffect(final GlyphOfDelusionEffect effect) {
         super(effect);
     }
 
@@ -132,13 +132,13 @@ class GlyphOfDelusionEffect extends OneShotEffect {
                 SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(),
                         new SourceHasCounterCondition(CounterType.GLYPH)).setText("This creature doesn't untap during your untap step if it has a glyph counter on it"));
                 GainAbilityTargetEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
-                effect.setTargetPointer(new FixedTarget(targetPermanent.getId()));
+                effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect, source);
 
                 BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance()),
                         TargetController.YOU, false);
                 GainAbilityTargetEffect effect2 = new GainAbilityTargetEffect(ability2, Duration.Custom);
-                effect2.setTargetPointer(new FixedTarget(targetPermanent.getId()));
+                effect2.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect2, source);
             }
         }

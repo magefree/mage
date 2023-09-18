@@ -1,29 +1,24 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801 & L_J
  */
 public final class ThermalFlux extends CardImpl {
@@ -48,11 +43,10 @@ public final class ThermalFlux extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
         // Target snow permanent isn't snow until end of turn.
         // Draw a card at the beginning of the next turn's upkeep.
-        Mode mode = new Mode();
-        mode.addTarget(new TargetPermanent(filterSnow));
-        mode.addEffect(new ThermalFluxEffect(false));
+        Mode mode = new Mode(new ThermalFluxEffect(false));
         mode.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        mode.addTarget(new TargetPermanent(filterSnow));
         this.getSpellAbility().addMode(mode);
 
     }
@@ -77,7 +71,7 @@ class ThermalFluxEffect extends ContinuousEffectImpl {
         this.staticText = "Target " + (addSnow ? "non" : "") + "snow permanent " + (addSnow ? "becomes" : "isn't") + " snow until end of turn";
     }
 
-    public ThermalFluxEffect(final ThermalFluxEffect effect) {
+    private ThermalFluxEffect(final ThermalFluxEffect effect) {
         super(effect);
         this.addSnow = effect.addSnow;
     }
@@ -92,9 +86,9 @@ class ThermalFluxEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
             if (addSnow) {
-                permanent.addSuperType(SuperType.SNOW);
+                permanent.addSuperType(game, SuperType.SNOW);
             } else {
-                permanent.getSuperType().remove(SuperType.SNOW);
+                permanent.removeSuperType(game, SuperType.SNOW);
             }
         }
         return true;

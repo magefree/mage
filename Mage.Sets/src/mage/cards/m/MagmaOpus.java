@@ -35,11 +35,11 @@ public final class MagmaOpus extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect("tap two target permanents").setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENTS).withChooseHint("tap"));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new Elemental44Token()));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("Draw two cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
 
         // {U/R}{U/R}, Discard Magma Opus: Create a Treasure token.
         Ability ability = new SimpleActivatedAbility(
-                Zone.HAND, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl("{U/R}{U/R}")
+                Zone.HAND, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl<>("{U/R}{U/R}")
         );
         ability.addCost(new DiscardSourceCost());
         this.addAbility(ability);

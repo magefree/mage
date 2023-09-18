@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -85,7 +86,7 @@ public class DamageTargetEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public DamageTargetEffect(final DamageTargetEffect effect) {
+    protected DamageTargetEffect(final DamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.preventable = effect.preventable;
@@ -152,18 +153,35 @@ public class DamageTargetEffect extends OneShotEffect {
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
         if (message.isEmpty() || !message.equals("1")) {
-            sb.append(amount).append(' ');
+            sb.append(amount);
+        }
+        if (!sb.toString().endsWith(" ")) {
+            sb.append(' ');
         }
         sb.append("damage to ");
         if (!targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {
             if (!mode.getTargets().isEmpty()) {
-                String targetName = mode.getTargets().get(0).getTargetName();
+                Target firstTarget = mode.getTargets().get(0);
+                String targetName = firstTarget.getTargetName();
                 if (targetName.contains("any")) {
                     sb.append(targetName);
                 } else {
-                    sb.append("target ").append(targetName);
+                    if (firstTarget.getMinNumberOfTargets() == 0) {
+                        int maxTargets = firstTarget.getMaxNumberOfTargets();
+                        if (maxTargets == Integer.MAX_VALUE) {
+                            sb.append("any number of ");
+                        } else {
+                            sb.append("up to ");
+                            sb.append(CardUtil.numberToText(maxTargets));
+                            sb.append(' ');
+                        }
+                    }
+                    if (!targetName.contains("target ")) {
+                        sb.append("target ");
+                    }
+                    sb.append(targetName);
                 }
             } else {
                 sb.append("that target");
@@ -173,7 +191,7 @@ public class DamageTargetEffect extends OneShotEffect {
             if (message.equals("1")) {
                 sb.append(" equal to the number of ");
             } else {
-                if (message.startsWith("the") || message.startsWith("twice")) {
+                if (message.startsWith("the") || message.startsWith("that") || message.startsWith("twice")) {
                     sb.append(" equal to ");
                 } else {
                     sb.append(" for each ");

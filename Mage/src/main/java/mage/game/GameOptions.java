@@ -1,6 +1,7 @@
 package mage.game;
 
 import mage.constants.PhaseStep;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -12,7 +13,7 @@ import java.util.Set;
  *
  * @author ayratn
  */
-public class GameOptions implements Serializable {
+public class GameOptions implements Serializable, Copyable<GameOptions> {
 
     private static final GameOptions deinstance = new GameOptions();
 
@@ -50,10 +51,32 @@ public class GameOptions implements Serializable {
      * Names of users banned from participating in the game
      */
     public Set<String> bannedUsers = Collections.emptySet();
-    
-    /**
-     * Use planechase variant
-     */
-    public boolean planeChase = false;
 
+
+    // PLANECHASE game mode
+    public boolean planeChase = false;
+    // xmage uses increased by 1/3 chances (2/2/9) for chaos/planar result, see 1a9f12f5767ce0beeed26a8ff5c8a8f9490c9c47
+    // if you need combo support with 6-sides rolls then it can be reset to original values
+    public static final int PLANECHASE_PLANAR_DIE_CHAOS_SIDES = 2; // original: 1
+    public static final int PLANECHASE_PLANAR_DIE_PLANAR_SIDES = 2; // original: 1
+    public static final int PLANECHASE_PLANAR_DIE_TOTAL_SIDES = 9; // original: 6
+
+    public GameOptions() {
+        super();
+    }
+
+    private GameOptions(final GameOptions options) {
+        this.testMode = options.testMode;
+        this.stopOnTurn = options.stopOnTurn;
+        this.stopAtStep = options.stopAtStep;
+        this.skipInitShuffling = options.skipInitShuffling;
+        this.rollbackTurnsAllowed = options.rollbackTurnsAllowed;
+        this.bannedUsers.addAll(options.bannedUsers);
+        this.planeChase = options.planeChase;
+    }
+
+    @Override
+    public GameOptions copy() {
+        return new GameOptions(this);
+    }
 }

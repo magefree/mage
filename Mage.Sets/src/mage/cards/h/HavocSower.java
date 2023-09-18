@@ -30,7 +30,7 @@ public final class HavocSower extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // {1}{C}: Havoc Sower gets +2/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{C}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{C}")));
     }
 
     private HavocSower(final HavocSower card) {

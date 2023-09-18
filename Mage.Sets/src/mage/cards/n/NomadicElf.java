@@ -25,7 +25,7 @@ public final class NomadicElf extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}: Add one mana of any color.
-        this.addAbility(new AnyColorManaAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new AnyColorManaAbility(new ManaCostsImpl<>("{1}{G}")));
     }
 
     private NomadicElf(final NomadicElf card) {

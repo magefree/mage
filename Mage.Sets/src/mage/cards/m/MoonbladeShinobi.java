@@ -27,7 +27,7 @@ public final class MoonbladeShinobi extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ninjutsu {2}{U}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new NinjutsuAbility("{2}{U}"));
 
         // Whenever Moonblade Shinobi deals combat damage to a player, create a 1/1 blue Illusion creature token with flying.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

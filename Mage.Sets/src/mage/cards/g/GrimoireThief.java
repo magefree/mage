@@ -52,7 +52,7 @@ public final class GrimoireThief extends CardImpl {
         // {U}, Sacrifice Grimoire Thief: Turn all cards exiled with 
         //Grimoire Thief face up. Counter all spells with those names.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GrimoireThiefCounterspellEffect(), new ManaCostsImpl("{U}"));
+                new GrimoireThiefCounterspellEffect(), new ManaCostsImpl<>("{U}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
 
@@ -75,7 +75,7 @@ class GrimoireThiefExileEffect extends OneShotEffect {
         staticText = "exile the top three cards of target opponent's library face down";
     }
 
-    public GrimoireThiefExileEffect(final GrimoireThiefExileEffect effect) {
+    private GrimoireThiefExileEffect(final GrimoireThiefExileEffect effect) {
         super(effect);
     }
 
@@ -120,10 +120,10 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
     public GrimoireThiefLookEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at the cards exiled with {this}";
+        staticText = "You may look at cards exiled with {this}";
     }
 
-    public GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {
+    private GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {
         super(effect);
     }
 
@@ -175,20 +175,20 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
                 + "Counter all spells with those names";
     }
 
-    public GrimoireThiefCounterspellEffect(final GrimoireThiefCounterspellEffect effect) {
+    private GrimoireThiefCounterspellEffect(final GrimoireThiefCounterspellEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Cards cards = new CardsImpl();
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(
                 GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
         if (exileZones != null && sourceObject != null) {
             for (ExileZone exileZone : game.getExile().getExileZones()) {
                 if (!exileZone.isEmpty()) {
-                    cards.addAll(exileZone.getCards(game));
+                    cards.addAllCards(exileZone.getCards(game));
                 }
             }
             // set face up first

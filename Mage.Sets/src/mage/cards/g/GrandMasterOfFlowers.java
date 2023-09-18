@@ -2,7 +2,6 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.combat.CantAttackTargetEffect;
@@ -45,9 +44,9 @@ public final class GrandMasterOfFlowers extends CardImpl {
     public GrandMasterOfFlowers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BAHAMUT);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // As long as Grand Master of Flowers has seven or more loyalty counters on him, he's a 7/7 Dragon God creature with flying and indestructible.
         this.addAbility(new SimpleStaticAbility(new GrandMasterOfFlowersEffect()));
@@ -113,8 +112,8 @@ class GrandMasterOfFlowersEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(7);
-                    permanent.getToughness().setValue(7);
+                    permanent.getPower().setModifiedBaseValue(7);
+                    permanent.getToughness().setModifiedBaseValue(7);
                     return true;
                 }
         }

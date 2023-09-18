@@ -24,7 +24,7 @@ public final class NinjaOfTheNewMoon extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ninjutsu {3}{B}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new NinjutsuAbility("{3}{B}"));
     }
 
     private NinjaOfTheNewMoon(final NinjaOfTheNewMoon card) {

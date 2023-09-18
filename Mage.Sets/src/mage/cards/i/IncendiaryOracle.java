@@ -31,7 +31,7 @@ public final class IncendiaryOracle extends CardImpl {
 
         // {1}{R}: Incendiary Oracle gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
 
         // If a creature dealt damage by Incendiary Oracle this turn would die, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

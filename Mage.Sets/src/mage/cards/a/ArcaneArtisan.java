@@ -48,7 +48,7 @@ public final class ArcaneArtisan extends CardImpl {
         // {2}{U}, {T}: Target player draws a card, then exiles a card from their hand. If a creature card is exiled this way, that player creates a token that's a copy of that card.
         Ability ability = new SimpleActivatedAbility(
                 new ArcaneArtisanCreateTokenEffect(),
-                new ManaCostsImpl("{2}{U}")
+                new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -76,7 +76,7 @@ class ArcaneArtisanCreateTokenEffect extends OneShotEffect {
                 + "If a creature card is exiled this way, that player creates a token that's a copy of that card.";
     }
 
-    public ArcaneArtisanCreateTokenEffect(final ArcaneArtisanCreateTokenEffect effect) {
+    private ArcaneArtisanCreateTokenEffect(final ArcaneArtisanCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class ArcaneArtisanCreateTokenEffect extends OneShotEffect {
             } else {
                 tokensCreated = new HashSet<>();
             }
-            for (Permanent perm : effect.getAddedPermanent()) {
+            for (Permanent perm : effect.getAddedPermanents()) {
                 if (perm != null) {
                     tokensCreated.add(perm.getId());
                 }
@@ -133,7 +133,7 @@ class ArcaneArtisanLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggered
         );
     }
 
-    public ArcaneArtisanLeavesBattlefieldTriggeredAbility(ArcaneArtisanLeavesBattlefieldTriggeredAbility ability) {
+    private ArcaneArtisanLeavesBattlefieldTriggeredAbility(final ArcaneArtisanLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
@@ -155,7 +155,7 @@ class ArcaneArtisanExileEffect extends OneShotEffect {
         this.staticText = "exile all tokens created with {this}.";
     }
 
-    public ArcaneArtisanExileEffect(final ArcaneArtisanExileEffect effect) {
+    private ArcaneArtisanExileEffect(final ArcaneArtisanExileEffect effect) {
         super(effect);
     }
 

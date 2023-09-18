@@ -55,12 +55,11 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        setChoice(playerA, "Yes"); // with Kicker
+        setChoice(playerA, true); // with Kicker
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 2);
@@ -75,12 +74,11 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        //setChoice(playerA, "Yes"); // with Kicker - AI must choose
+        //setChoice(playerA, true); // with Kicker - AI must choose
 
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 2);
@@ -93,12 +91,11 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 0);
@@ -113,12 +110,11 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        //setChoice(playerA, "No"); - AI must choose
+        //setChoice(playerA, false); - AI must choose
 
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 0);
@@ -137,13 +133,12 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apex Hawks");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apex Hawks");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Apex Hawks", 1);
         assertCounterCount("Apex Hawks", CounterType.P1P1, 1);
@@ -157,14 +152,13 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apex Hawks");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apex Hawks");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Apex Hawks", 1);
         assertCounterCount("Apex Hawks", CounterType.P1P1, 2);
@@ -177,12 +171,11 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apex Hawks");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apex Hawks");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Apex Hawks", 1);
         assertCounterCount("Apex Hawks", CounterType.P1P1, 0);
@@ -200,13 +193,12 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
-        setChoice(playerA, "No");  // not use kicker {1}{G}
-        setChoice(playerA, "Yes"); // use kicker {2}{U}
+        setChoice(playerA, false);  // not use kicker {1}{G}
+        setChoice(playerA, true); // use kicker {2}{U}
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Sunscape Battlemage", 1);
         assertHandCount(playerA, 2);
@@ -226,15 +218,14 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
-        setChoice(playerA, "Yes"); // use kicker {1}{G}
-        setChoice(playerA, "Yes"); // use kicker {2}{U}
+        setChoice(playerA, true); // use kicker {1}{G}
+        setChoice(playerA, true); // use kicker {2}{U}
         setChoice(playerA, "When "); // two triggers from two kicker options
         addTarget(playerA, "Birds of Paradise");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Birds of Paradise", 1);
         assertPermanentCount(playerA, "Sunscape Battlemage", 1);
@@ -259,8 +250,8 @@ public class KickerTest extends CardTestPlayerBase {
 
         // cast with kicker
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
-        setChoice(playerA, "Yes");  // use kicker {1}{G} - destroy target creature with flying
-        setChoice(playerA, "Yes"); // use kicker {2}{U} - draw two cards
+        setChoice(playerA, true);  // use kicker {1}{G} - destroy target creature with flying
+        setChoice(playerA, true); // use kicker {2}{U} - draw two cards
         // spell must be countered, so no chooses
         //setChoice(playerA, "When "); // two triggers rised: When {this} enters the battlefield, if it was kicked...
         //addTarget(playerA, "Birds of Paradise"); // target for {1}{G} trigger
@@ -271,19 +262,19 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Birds of Paradise", 1);
         assertGraveyardCount(playerB, "Ertai's Trickery", 1);
         assertGraveyardCount(playerA, "Sunscape Battlemage", 1);
     }
 
+    /**
+     * Reported Bug:
+     *      Hallar Not Procing Right: When I kick Thornscape Battlemage it doesn't proc Hallar effect for some reason.
+     *      I tried this 3 times and it never triggered properly.
+     */
     @Test
     public void test_Conditional_TriggeredAbilityMustSeeMultikickedStatus() {
-        // bug:
-        // Hallar Not Procing Right: When I kick Thornscape Battlemage it doesn't proc Hallar effect for some reason.
-        // I tried this 3 times and it never triggered properly.
-
         // Kicker {R} and/or {W} (You may pay an additional {R} and/or {W} as you cast this spell.)
         // When Thornscape Battlemage enters the battlefield, if it was kicked with its {R} kicker, it deals 2 damage to any target.
         // When Thornscape Battlemage enters the battlefield, if it was kicked with its {W} kicker, destroy target artifact.
@@ -297,28 +288,27 @@ public class KickerTest extends CardTestPlayerBase {
 
         // cast kicked spell
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thornscape Battlemage");
-        setChoice(playerA, "Yes");  // use kicker {R} - 2 damage to any target
-        setChoice(playerA, "No"); // not use kicker {W} - destroy target
+        setChoice(playerA, true);  // use kicker {R} - 2 damage to any target
+        setChoice(playerA, false); // not use kicker {W} - destroy target
         addTarget(playerA, playerB); // target for 2 damage
-        setChoice(playerA, "Yes"); // put counter on hallar
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Hallar, the Firefletcher", CounterType.P1P1, 1);
         assertLife(playerB, 20 - 2 - 1); // 2 damage from kicked spell, 1 damage from hallar's trigger
     }
 
+    /**
+     * Reported Bug:
+     *      If a creature is cast with kicker, dies, and is then returned to play
+     *      from graveyard, it still behaves like it were kicked.
+     *      I noticed this while testing some newly implemented cards, but it can be reproduced for
+     *      example by Zombifying a Gatekeeper of Malakir.
+     */
     @Test
     public void test_ZCC_ReturnedPermanentMustNotBeKicked() {
-        // bug:
-        // If a creature is cast with kicker, dies, and is then returned to play
-        // from graveyard, it still behaves like it were kicked. I noticed this
-        // while testing some newly implemented cards, but it can be reproduced for
-        // example by Zombifying a Gatekeeper of Malakir.
-
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 
         // Kicker {B} (You may pay an additional {B} as you cast this spell.)
@@ -332,7 +322,7 @@ public class KickerTest extends CardTestPlayerBase {
 
         // first cast with kicker
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
-        setChoice(playerA, "Yes");  // use kicker
+        setChoice(playerA, true);  // use kicker
         addTarget(playerA, playerB); // trigger's target
         addTarget(playerB, "Birds of Paradise"); // sacrifice
 
@@ -341,12 +331,11 @@ public class KickerTest extends CardTestPlayerBase {
 
         // second cast without kicker
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
-        setChoice(playerA, "No");  // no kicker
+        setChoice(playerA, false);  // no kicker
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Boomerang", 1);
         assertGraveyardCount(playerB, "Birds of Paradise", 1);
@@ -354,14 +343,15 @@ public class KickerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Gatekeeper of Malakir", 1);
     }
 
+    /**
+     * Reported Bug: https://github.com/magefree/mage/issues/7192
+     *      Krark, the thumbless and a copy of him are on the field, and I cast Rite of replication kicked.
+     *      The first coinflip fails and returns it to my hand, and the second coinflip wins and copies it,
+     *      but does not copy the kicked part.
+     *      I believe I did this before in another game and the first flip won then it would be a kicked copy.
+     */
     @Test
     public void test_ZCC_CopiedSpellMustKeepKickerStatus() {
-        // https://github.com/magefree/mage/issues/7192
-        // bug: Krark, the thumbless and a copy of him are on the field, and I cast Rite of replication kicked.
-        // The first coinflip fails and returns it to my hand, and the second coinflip wins and copies it,
-        // but does not copy the kicked part. I believe I did this before in another game and the first flip
-        // won then it would be a kicked copy.
-
         // Whenever you cast an instant or sorcery spell, you may copy that spell. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Swarm Intelligence", 1);
         //
@@ -377,14 +367,14 @@ public class KickerTest extends CardTestPlayerBase {
         // cast spell with kicker and copy it (kicker status must be saved)
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Agonizing Demise", "@bear1");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         checkStackSize("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + trigger
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 1);
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast", 1);
         //
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        setChoice(playerA, "Yes"); // copy spell
-        setChoice(playerA, "Yes"); // new target
+        setChoice(playerA, true); // copy spell
+        setChoice(playerA, true); // new target
         addTarget(playerA, "@bear2");
         checkStackSize("after copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + copy
         checkStackObject("after copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 2);
@@ -393,15 +383,15 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 2 * 2);
     }
 
+    /**
+     * Copied spell must have access to kicker status.
+     */
     @Test
     public void test_ZCC_CopiedSpellMustHaveIndependentZCC_InSpell() {
-        // reason: copied spell must have access to kicker status
-
         // Whenever you cast an instant or sorcery spell, you may copy that spell. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Swarm Intelligence", 1);
         //
@@ -422,14 +412,14 @@ public class KickerTest extends CardTestPlayerBase {
         // cast spell with kicker and copy it (kicker status must be saved)
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Agonizing Demise", "@bear1");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         checkStackSize("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + trigger
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 1);
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast", 1);
         //
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        setChoice(playerA, "Yes"); // copy spell
-        setChoice(playerA, "Yes"); // new target
+        setChoice(playerA, true); // copy spell
+        setChoice(playerA, true); // new target
         addTarget(playerA, "@bear2");
         checkStackSize("after copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + copy
         checkStackObject("after copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 2);
@@ -443,7 +433,7 @@ public class KickerTest extends CardTestPlayerBase {
         checkStackObject("before counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Absorb", 1);
         //
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true); // trigger
-        setChoice(playerA, "No"); // do not copy counter spell
+        setChoice(playerA, false); // do not copy counter spell
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true); // counter
         checkStackSize("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1); // copy
         checkStackObject("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 1);
@@ -451,7 +441,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // cast spell - countered
         // copied spell - resolved (2 damage)
@@ -460,10 +449,11 @@ public class KickerTest extends CardTestPlayerBase {
         assertLife(playerA, 20 - 2 + 3);
     }
 
+    /**
+     * Static ability from copied spell's permanent must have access to kicker status
+     */
     @Test
     public void test_ZCC_CopiedSpellMustHaveIndependentZCC_InStaticAbility() {
-        // reason: static ability from copied spell's permanent must have access to kicker status
-
         // {4}, {T}: Copy target permanent spell you control.
         addCard(Zone.BATTLEFIELD, playerA, "Lithoform Engine", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
@@ -481,7 +471,7 @@ public class KickerTest extends CardTestPlayerBase {
         // cast spell with kicker
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Academy Drake");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
 
         // copy spell
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 4);
@@ -497,7 +487,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
 
         // cast spell - countered
@@ -536,10 +525,10 @@ public class KickerTest extends CardTestPlayerBase {
 
         // cast 2x kicked spell for 4x damage
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deathforge Shaman");
-        setChoice(playerA, "Yes"); // 1x kick
-        setChoice(playerA, "Yes"); // 2x kick
-        setChoice(playerA, "No"); // stop multikicker
-        setChoice(playerA, "Yes"); // remove counters and activate verazol's copy
+        setChoice(playerA, true); // 1x kick
+        setChoice(playerA, true); // 2x kick
+        setChoice(playerA, false); // stop multikicker
+        setChoice(playerA, true); // remove counters and activate verazol's copy
         addTarget(playerA, playerA); // on resolve: target for copied spell
         addTarget(playerA, playerB); // on resolve: target for original spell
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -550,16 +539,15 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
+    /**
+     * Bug: When I cast Orim's Chant with Kicker cost, the player can play spells
+     *      anyway during the turn.
+     *      It seems like the kicker cost trigger an "instead" creatures can't attack.
+     */
     @Test
     public void test_Single_OrimsChants() {
-        // bug:
-        // When I cast Orim's Chant with Kicker cost, the player can play spells
-        // anyway during the turn. It seems like the kicker cost trigger an
-        // "instead" creatures can't attack.
-
         addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin", 1); // Haste   1/1
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
@@ -571,17 +559,36 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Orim's Chant", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         attack(1, playerA, "Raging Goblin");
 
+        setStopAt(1, PhaseStep.END_COMBAT);
+
+        try {
+            execute();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack with Raging Golin, but got:\n" + e.getMessage());
+            }
+        }
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
 
-        // attack must be restricted, so no attack commands available
-        //setStrictChooseMode(true);
+        // Attack must be restricted, so no attack commands available
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
-        //assertAllCommandsUsed();
+
+        try {
+            execute();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Cast Lightning Bolt$targetPlayer=PlayerA")) {
+                Assert.fail("Should have thrown error about not being able to attack with Raging Golin, but got:\n" + e.getMessage());
+            }
+        }
 
         assertGraveyardCount(playerA, "Orim's Chant", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 0);
@@ -590,12 +597,13 @@ public class KickerTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
     }
 
+    /**
+     * Reported Bug:
+     *      Bloodhusk Ritualist's discard trigger does nothing if the Ritualist
+     *      leaves the battlefield before the trigger resolves.
+     */
     @Test
     public void test_Single_BloodhuskRitualist() {
-        // bug:
-        // Bloodhusk Ritualist's discard trigger does nothing if the Ritualist
-        // leaves the battlefield before the trigger resolves.
-
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt");
         addCard(Zone.HAND, playerB, "Fireball", 2);
@@ -606,15 +614,15 @@ public class KickerTest extends CardTestPlayerBase {
         // Multikicker (You may pay an additional {B} any number of times as you cast this spell.)
         // When Bloodhusk Ritualist enters the battlefield, target opponent discards a card for each time it was kicked.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodhusk Ritualist");
-        setChoice(playerA, "Yes", 2); // 2 x Multikicker
-        setChoice(playerA, "No"); // stop the kicking
+        setChoice(playerA, true, 2); // 2 x Multikicker
+        setChoice(playerA, false); // stop the kicking
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Bloodhusk Ritualist");
         addTarget(playerA, playerB); // target for kicker's trigger (discard cards)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         Assert.assertEquals("All mana has to be used", "[]", playerA.getManaAvailable(currentGame).toString());
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
@@ -624,13 +632,15 @@ public class KickerTest extends CardTestPlayerBase {
         assertHandCount(playerB, 0);
     }
 
+    /**
+     * Reported Bug:
+     *     Paying the Kicker on "Marsh Casualties" has no effect.
+     *     Target player's creatures still only get -1/-1 instead of -2/-2.
+     *     Was playing against AI.
+     *     It was me who cast the spell.
+     */
     @Test
     public void test_Single_MarshCasualties() {
-        // bug:
-        // Paying the Kicker on "Marsh Casualties" has no effect. Target player's
-        // creatures still only get -1/-1 instead of -2/-2. Was playing against AI.
-        // It was me who cast the spell.
-
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 
         // Kicker {3}
@@ -640,15 +650,76 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser", 1); // 3/3
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marsh Casualties", playerB);
-        setChoice(playerA, "Yes");  // Pay Kicker
+        setChoice(playerA, true);  // Pay Kicker
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Swamp", true, 5);
         assertGraveyardCount(playerA, "Marsh Casualties", 1);
         assertPowerToughness(playerB, "Centaur Courser", 1, 1);
+    }
+
+    @Test
+    public void test_FreeCast_Normal() {
+        skipInitShuffling();
+
+        // Kicker {2}
+        // If Ardent Soldier was kicked, it enters the battlefield with a +1/+1 counter on it.
+        addCard(Zone.LIBRARY, playerA, "Ardent Soldier", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // for kicker cost
+        //
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ardent Soldier", false);
+
+        // attack and prepare free cast, use kicker
+        attack(1, playerA, "Etali, Primal Storm", playerB);
+        setChoice(playerA, true); // cast for free
+        setChoice(playerA, true); // use kicker
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertCounterCount(playerA, "Ardent Soldier", CounterType.P1P1, 1); // from kicker
+    }
+
+    /**
+     * Reported Bug:
+     *      Can cast Thieving Skydiver with kicker's X = 0 on Etali, Primal Storm
+     */
+    @Test
+    public void test_FreeCast_MinXValueMustWork() {
+        skipInitShuffling();
+
+        // Kicker {X}. X can't be 0.
+        // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with
+        // converted mana cost X or less. If that artifact is an Equipment, attach it to Thieving Skydiver.
+        addCard(Zone.LIBRARY, playerA, "Thieving Skydiver", 1); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerB, "Brain in a Jar", 1); // {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // for kicker cost
+        //
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Thieving Skydiver", false);
+
+        // attack and prepare free cast
+        attack(1, playerA, "Etali, Primal Storm", playerB);
+        setChoice(playerA, true); // cast for free
+        setChoice(playerA, true); // use kicker
+        setChoiceAmount(playerA, 2); // X=2 for Kicker X
+        addTarget(playerA, "Brain in a Jar"); // kicker's target (take control of artifact)
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Brain in a Jar", 1);
     }
 }

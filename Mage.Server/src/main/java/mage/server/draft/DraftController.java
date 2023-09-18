@@ -33,7 +33,7 @@ public class DraftController {
     private final Draft draft;
     private final UUID tableId;
 
-    public DraftController(ManagerFactory managerFactory, Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+    public DraftController(ManagerFactory managerFactory, Draft draft, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.managerFactory = managerFactory;
         draftSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
@@ -198,6 +198,10 @@ public class DraftController {
 
     public void sendCardMark(UUID userId, UUID cardId) {
         draftSessions.get(userPlayerMap.get(userId)).setMarkedCard(cardId);
+    }
+    
+    public void setBoosterLoaded(UUID userId) {
+        draftSessions.get(userPlayerMap.get(userId)).setBoosterLoaded();
     }
 
     private synchronized void updateDraft() throws MageException {

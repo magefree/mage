@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.Objects;
@@ -19,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,14 +29,14 @@ import mage.target.targetpointer.FixedTarget;
 public final class Venom extends CardImpl {
 
     public Venom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
@@ -64,7 +62,7 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    VenomTriggeredAbility(final VenomTriggeredAbility ability) {
+    private VenomTriggeredAbility(final VenomTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,15 +84,17 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
-                if (blocker != null && !Objects.equals(blocker, enchantedCreature)
+                if (blocker != null
+                        && !Objects.equals(blocker, enchantedCreature)
                         && !blocker.hasSubtype(SubType.WALL, game)
                         && Objects.equals(blocked, enchantedCreature)) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId(), game));
                     return true;
                 }
-                if (blocker != null && Objects.equals(blocker, enchantedCreature)
+                if (blocker != null
+                        && Objects.equals(blocker, enchantedCreature)
                         && !blocked.hasSubtype(SubType.WALL, game)) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId(), game));
                     return true;
                 }
             }

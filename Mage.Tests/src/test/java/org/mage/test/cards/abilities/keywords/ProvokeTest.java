@@ -24,7 +24,7 @@ public class ProvokeTest extends CardTestPlayerBase{
         attack(2, playerB, "Silvercoat Lion"); // So it's tapped
         
         attack(3, playerA, "Brontotherium"); 
-        addTarget(playerA, "Silvercoat Lion");
+        // Silvercoat Lion is auto-chosen since only target
         
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -48,11 +48,11 @@ public class ProvokeTest extends CardTestPlayerBase{
         // Threshold - As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block.
         addCard(Zone.BATTLEFIELD, playerB, "Putrid Imp", 1);
         addCard(Zone.GRAVEYARD, playerB, "Swamp", 7);
-        
+
         attack(2, playerB, "Putrid Imp"); // So it's tapped
         
         attack(3, playerA, "Brontotherium"); 
-        addTarget(playerA, "Putrid Imp");
+        // Putrid Imp is auto-chosen sicne only target
         
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -62,6 +62,5 @@ public class ProvokeTest extends CardTestPlayerBase{
 
         assertLife(playerA, 18); // one attack from Imp
         assertLife(playerB, 15); // Not blocked
-        
     }       
 }

@@ -33,7 +33,7 @@ public final class WallOfJunk extends CardImpl {
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)));
         effect.setText("return it to its owner's hand at end of combat");
-        this.addAbility(new BlocksSourceTriggeredAbility(effect, false, false, true));
+        this.addAbility(new BlocksSourceTriggeredAbility(effect).setTriggerPhrase("When {this} blocks, "));
     }
 
     private WallOfJunk(final WallOfJunk card) {

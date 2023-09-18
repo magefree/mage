@@ -36,7 +36,7 @@ public final class RiftwingCloudskate extends CardImpl {
         this.addAbility(ability);
 
         // Suspend 3-{1}{U}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{U}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{U}"), this));
     }
 
     private RiftwingCloudskate(final RiftwingCloudskate card) {

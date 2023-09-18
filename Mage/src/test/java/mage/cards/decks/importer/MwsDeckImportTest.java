@@ -3,6 +3,8 @@ package mage.cards.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import org.junit.Test;
 
+import java.nio.file.Paths;
+
 import static org.junit.Assert.assertEquals;
 
 public class MwsDeckImportTest {
@@ -19,7 +21,10 @@ public class MwsDeckImportTest {
         };
         StringBuilder errors = new StringBuilder();
         DeckCardLists deck = importer.importDeck(
-                "src/test/java/mage/cards/decks/importer/samples/testdeck.mwDeck", errors, false);
+                Paths.get("src", "test", "data", "importer", "testdeck.mwDeck").toString(),
+                errors,
+                false
+        );
 
         TestDeckChecker.checker()
                 .addMain("Mutavault", 4)

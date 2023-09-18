@@ -35,7 +35,7 @@ public final class ScorchRider extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(
                         HasteAbility.getInstance(), Duration.EndOfTurn
-                )), KickedCondition.instance, "When {this} enters the battlefield, " +
+                )), KickedCondition.ONCE, "When {this} enters the battlefield, " +
                 "if it was kicked, it gains haste until end of turn."
         ));
     }

@@ -1,15 +1,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * https://scryfall.com/sets/akr
@@ -22,8 +15,6 @@ public class AmonkhetRemastered extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private AmonkhetRemastered() {
         super("Amonkhet Remastered", "AKR", ExpansionSet.buildDate(2020, 8, 13), SetType.MAGIC_ARENA);
         this.hasBoosters = true;
@@ -34,7 +25,6 @@ public class AmonkhetRemastered extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.ratioBoosterSpecialLand = 1; // replace all basic lands
 
         cards.add(new SetCardInfo("Abandoned Sarcophagus", 268, Rarity.RARE, mage.cards.a.AbandonedSarcophagus.class));
         cards.add(new SetCardInfo("Abrade", 136, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
@@ -376,19 +366,4 @@ public class AmonkhetRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Wrath of God", 46, Rarity.RARE, mage.cards.w.WrathOfGod.class));
         cards.add(new SetCardInfo("Zealot of the God-Pharaoh", 181, Rarity.COMMON, mage.cards.z.ZealotOfTheGodPharaoh.class));
     }
-
-    @Override
-    // the common taplands replacing the basic land
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(this.code);
-            criteria.rarities(Rarity.COMMON);
-            criteria.types(CardType.LAND);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
-        }
-
-        return new ArrayList<>(savedSpecialLand);
-    }
-
 }

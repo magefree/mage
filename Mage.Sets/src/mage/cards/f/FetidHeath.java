@@ -26,20 +26,20 @@ public final class FetidHeath extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl("{W/B}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl<>("{W/B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0, 0), new ManaCostsImpl("{W/B}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0, 0), new ManaCostsImpl<>("{W/B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl("{W/B}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl<>("{W/B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);          
     }
 
-    public FetidHeath (final FetidHeath card) {
+    private FetidHeath(final FetidHeath card) {
         super(card);
     }
 

@@ -11,7 +11,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
 
@@ -22,13 +21,6 @@ import java.util.UUID;
  */
 public final class AbzanAscendancy extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
-    }
-
     public AbzanAscendancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}{G}");
 
@@ -36,7 +28,7 @@ public final class AbzanAscendancy extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE), false));
 
         // Whenever a nontoken creature you control dies, create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
 
     }
 

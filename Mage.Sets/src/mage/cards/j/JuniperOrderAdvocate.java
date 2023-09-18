@@ -42,7 +42,7 @@ public final class JuniperOrderAdvocate extends CardImpl {
         // As long as Juniper Order Advocate is untapped, green creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false),
-            new InvertCondition(SourceTappedCondition.instance),
+            SourceTappedCondition.UNTAPPED,
             "As long as {this} is untapped, green creatures you control get +1/+1.")));
     }
 

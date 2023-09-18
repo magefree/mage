@@ -42,7 +42,7 @@ public final class MarathWillOfTheWild extends CardImpl {
 
     public MarathWillOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.BEAST);
 
@@ -57,19 +57,17 @@ public final class MarathWillOfTheWild extends CardImpl {
         // {X}, Remove X +1/+1 counters from Marath: Choose one - Put X +1/+1 counters on target creature;
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), ManacostVariableValue.REGULAR);
         effect.setText("Put X +1/+1 counters on target creature");
-        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{X}"));
         ability.addCost(new MarathWillOfTheWildRemoveCountersCost());
         ability.addTarget(new TargetCreaturePermanent());
 
         // or Marath deals X damage to any target;
-        Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        Mode mode = new Mode(new DamageTargetEffect(ManacostVariableValue.REGULAR));
         mode.addTarget(new TargetAnyTarget());
         ability.addMode(mode);
 
         // or create an X/X green Elemental creature token.
-        mode = new Mode();
-        mode.addEffect(new MarathWillOfTheWildCreateTokenEffect());
+        mode = new Mode(new MarathWillOfTheWildCreateTokenEffect());
         ability.addMode(mode);
 
         // X can't be 0.
@@ -114,8 +112,8 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
         if (player != null) {
             int amount = ManacostVariableValue.REGULAR.calculate(game, source, this);
             Token token = new MarathWillOfTheWildElementalToken();
-            token.getPower().modifyBaseValue(amount);
-            token.getToughness().modifyBaseValue(amount);
+            token.setPower(amount);
+            token.setToughness(amount);
             token.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }

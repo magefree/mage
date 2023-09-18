@@ -62,7 +62,7 @@ class JacesDefeatEffect extends OneShotEffect {
         this.staticText = "Counter target blue spell. If it was a Jace planeswalker spell, scry 2.";
     }
 
-    public JacesDefeatEffect(final JacesDefeatEffect effect) {
+    private JacesDefeatEffect(final JacesDefeatEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class JacesDefeatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             for (UUID targetId : getTargetPointer().getTargets(game, source) ) {
                 Spell spell = game.getStack().getSpell(targetId);

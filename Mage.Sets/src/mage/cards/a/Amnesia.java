@@ -42,7 +42,7 @@ class AmnesiaEffect extends OneShotEffect {
         this.staticText = "Target player reveals their hand and discards all nonland cards";
     }
 
-    public AmnesiaEffect(final AmnesiaEffect effect) {
+    private AmnesiaEffect(final AmnesiaEffect effect) {
         super(effect);
     }
 

@@ -36,16 +36,16 @@ public final class KollTheForgemaster extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(Predicates.or(KollTheForgemasterEnchantedPredicate.instance, KollTheForgemasterEquippedPredicate.instance));
-        filter2.add(TokenPredicate.instance);
+        filter2.add(TokenPredicate.TRUE);
         filter2.add(Predicates.or(EnchantedPredicate.instance, EquippedPredicate.instance));
     }
 
     public KollTheForgemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);

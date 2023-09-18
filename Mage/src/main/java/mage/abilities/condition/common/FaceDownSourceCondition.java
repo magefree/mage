@@ -19,7 +19,7 @@ public enum FaceDownSourceCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             if (mageObject instanceof Permanent) {
                 return ((Permanent)mageObject).isFaceDown(game);

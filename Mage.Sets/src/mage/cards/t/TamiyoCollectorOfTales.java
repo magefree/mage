@@ -2,12 +2,11 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
@@ -19,8 +18,6 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -29,9 +26,9 @@ public final class TamiyoCollectorOfTales extends CardImpl {
     public TamiyoCollectorOfTales(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Spells and abilities your opponents control can't cause you to discard cards or sacrifice permanents.
         this.addAbility(new SimpleStaticAbility(new TamiyoCollectorOfTalesRuleEffect()));
@@ -40,7 +37,7 @@ public final class TamiyoCollectorOfTales extends CardImpl {
         this.addAbility(new LoyaltyAbility(new TamiyoCollectorOfTalesEffect(), 1));
 
         // -3: Return target card from your graveyard to your hand.
-        Ability ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);
+        Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToHandTargetEffect(), -3);
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);
     }
@@ -58,7 +55,7 @@ public final class TamiyoCollectorOfTales extends CardImpl {
 class TamiyoCollectorOfTalesRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
     TamiyoCollectorOfTalesRuleEffect() {
-        super(Duration.WhileOnBattlefield, Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Spells and abilities your opponents control can't "
                 + "cause you to discard cards or sacrifice permanents";
     }

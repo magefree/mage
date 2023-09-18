@@ -29,7 +29,7 @@ public final class GraniteGargoyle extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {R}: Granite Gargoyle gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private GraniteGargoyle(final GraniteGargoyle card) {

@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class SkeletonToken extends TokenImpl {
 
     public SkeletonToken() {
-        super("Skeleton", "1/1 black Skeleton creature token");
+        super("Skeleton Token", "1/1 black Skeleton creature token");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SKELETON);
         color.setBlack(true);
@@ -18,7 +18,7 @@ public final class SkeletonToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SkeletonToken(final SkeletonToken token) {
+    protected SkeletonToken(final SkeletonToken token) {
         super(token);
     }
 

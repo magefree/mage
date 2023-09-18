@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -18,7 +18,6 @@ import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
@@ -46,28 +45,22 @@ import java.util.UUID;
 public class NinjutsuAbility extends ActivatedAbilityImpl {
 
     private final boolean commander;
-    private static final FilterControlledCreaturePermanent filter =
-            new FilterControlledCreaturePermanent("unblocked attacker you control");
-
-    static {
-        filter.add(UnblockedPredicate.instance);
-    }
 
     /**
-     * @param manaCost ninjutsu mana cost
+     * @param manaString ninjutsu mana cost
      */
-    public NinjutsuAbility(ManaCost manaCost) {
-        this(manaCost, false);
+    public NinjutsuAbility(String manaString) {
+        this(new ManaCostsImpl<>(manaString), false);
     }
 
-    public NinjutsuAbility(ManaCost manaCost, boolean commander) {
-        super(commander ? Zone.ALL : Zone.HAND, new NinjutsuEffect(), manaCost);
+    public NinjutsuAbility(Cost cost, boolean commander) {
+        super(commander ? Zone.ALL : Zone.HAND, new NinjutsuEffect(), cost);
         this.addCost(new RevealNinjutsuCardCost(commander));
-        this.addCost(new ReturnAttackerToHandTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        this.addCost(new ReturnAttackerToHandTargetCost());
         this.commander = commander;
     }
 
-    public NinjutsuAbility(NinjutsuAbility ability) {
+    private NinjutsuAbility(final NinjutsuAbility ability) {
         super(ability);
         this.commander = ability.commander;
     }
@@ -97,7 +90,7 @@ class NinjutsuEffect extends OneShotEffect {
                 + "from your hand tapped and attacking";
     }
 
-    public NinjutsuEffect(final NinjutsuEffect effect) {
+    protected NinjutsuEffect(final NinjutsuEffect effect) {
         super(effect);
     }
 
@@ -135,11 +128,17 @@ class NinjutsuEffect extends OneShotEffect {
 
 class ReturnAttackerToHandTargetCost extends CostImpl {
 
-    private UUID defendingPlayerId;
+    private static final FilterControlledCreaturePermanent filter =
+            new FilterControlledCreaturePermanent("unblocked attacker you control");
 
-    public ReturnAttackerToHandTargetCost(TargetControlledPermanent target) {
-        this.addTarget(target);
-        this.defendingPlayerId = null;
+    static {
+        filter.add(UnblockedPredicate.instance);
+    }
+
+    private UUID defendingPlayerId = null;
+
+    public ReturnAttackerToHandTargetCost() {
+        this.addTarget(new TargetControlledPermanent(1, 1, filter, true));
         this.text = "Return an unblocked attacker you control to hand";
     }
 
@@ -149,7 +148,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 Player controller = game.getPlayer(controllerId);
@@ -166,7 +165,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

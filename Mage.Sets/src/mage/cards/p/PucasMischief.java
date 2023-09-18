@@ -58,16 +58,16 @@ class TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent extends
         setTargetName("nonland permanent you control");
     }
 
-    public TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(final TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent target) {
+    private TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(final TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent target) {
         super(target);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         if(targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     possibleTargets.add(permanent.getId());
                 }
@@ -94,7 +94,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
         setTargetName("permanent an opponent controls with an equal or lesser mana value");
     }
 
-    public PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {
+    private PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }
@@ -112,12 +112,12 @@ class PucasMischiefSecondTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         if (firstTarget != null) {
-            MageObject targetSource = game.getObject(sourceId);
+            MageObject targetSource = game.getObject(source);
             if (targetSource != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                     if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                         if (firstTarget.getManaValue() >= permanent.getManaValue()) {
                             possibleTargets.add(permanent.getId());

@@ -30,8 +30,8 @@ public final class SpiritShield extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}, {tap}: Target creature gets +0/+2 for as long as Spirit Shield remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(0, 2, Duration.Custom), SourceTappedCondition.instance,
-            "target creature gets +0/+2 for as long as {this} remains tapped"), new ManaCostsImpl("{2}"));
+            new BoostTargetEffect(0, 2, Duration.Custom), SourceTappedCondition.TAPPED,
+            "target creature gets +0/+2 for as long as {this} remains tapped"), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

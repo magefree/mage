@@ -28,7 +28,7 @@ public final class SorayaTheFalconer extends CardImpl {
 
     public SorayaTheFalconer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -38,7 +38,7 @@ public final class SorayaTheFalconer extends CardImpl {
                 new FilterCreaturePermanent(SubType.BIRD, "Bird creatures"), false)));
 
         // {1}{W}: Target Bird creature gains banding until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.BIRD, "Bird creature")));
         this.addAbility(ability);
 

@@ -43,7 +43,7 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AngelicChorusEffect(), false);
     }
 
-    public AngelicChorusTriggeredAbility(AngelicChorusTriggeredAbility ability) {
+    private AngelicChorusTriggeredAbility(final AngelicChorusTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class AngelicChorusEffect extends OneShotEffect {
         staticText = "you gain life equal to its toughness";
     }
 
-    public AngelicChorusEffect(final AngelicChorusEffect effect) {
+    private AngelicChorusEffect(final AngelicChorusEffect effect) {
         super(effect);
     }
 

@@ -1,8 +1,11 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.List;
 
 public final class NinthEdition extends ExpansionSet {
 
@@ -20,9 +23,6 @@ public final class NinthEdition extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
-
-        // scryfall combines Ninth Edition and Ninth Edition Box sets in one, but xmage must split it
-        // reason: remove box's cards from booster? TODO: implement booster ignore settings for cards instead max card number
 
         cards.add(new SetCardInfo("Adarkar Wastes", 317, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Air Elemental", 58, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
@@ -73,6 +73,7 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Confiscate", 68, Rarity.UNCOMMON, mage.cards.c.Confiscate.class));
         cards.add(new SetCardInfo("Consume Spirit", 119, Rarity.UNCOMMON, mage.cards.c.ConsumeSpirit.class));
         cards.add(new SetCardInfo("Contaminated Bond", 120, Rarity.COMMON, mage.cards.c.ContaminatedBond.class));
+        cards.add(new SetCardInfo("Coral Eel", "S3", Rarity.COMMON, mage.cards.c.CoralEel.class));
         cards.add(new SetCardInfo("Counsel of the Soratami", 69, Rarity.COMMON, mage.cards.c.CounselOfTheSoratami.class));
         cards.add(new SetCardInfo("Cowardice", 70, Rarity.RARE, mage.cards.c.Cowardice.class));
         cards.add(new SetCardInfo("Crafty Pathmage", 71, Rarity.COMMON, mage.cards.c.CraftyPathmage.class));
@@ -95,6 +96,7 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon's Claw", 296, Rarity.UNCOMMON, mage.cards.d.DragonsClaw.class));
         cards.add(new SetCardInfo("Dream Prowler", 74, Rarity.UNCOMMON, mage.cards.d.DreamProwler.class));
         cards.add(new SetCardInfo("Drudge Skeletons", 126, Rarity.UNCOMMON, mage.cards.d.DrudgeSkeletons.class));
+        cards.add(new SetCardInfo("Eager Cadet", "S1", Rarity.COMMON, mage.cards.e.EagerCadet.class));
         cards.add(new SetCardInfo("Early Harvest", 235, Rarity.RARE, mage.cards.e.EarlyHarvest.class));
         cards.add(new SetCardInfo("Elvish Bard", 236, Rarity.UNCOMMON, mage.cards.e.ElvishBard.class));
         cards.add(new SetCardInfo("Elvish Berserker", 237, Rarity.COMMON, mage.cards.e.ElvishBerserker.class));
@@ -103,6 +105,7 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Warrior", 240, Rarity.COMMON, mage.cards.e.ElvishWarrior.class));
         cards.add(new SetCardInfo("Emperor Crocodile", 241, Rarity.RARE, mage.cards.e.EmperorCrocodile.class));
         cards.add(new SetCardInfo("Enfeeblement", 127, Rarity.COMMON, mage.cards.e.Enfeeblement.class));
+        cards.add(new SetCardInfo("Enormous Baloth", "S9", Rarity.UNCOMMON, mage.cards.e.EnormousBaloth.class));
         cards.add(new SetCardInfo("Enrage", 180, Rarity.UNCOMMON, mage.cards.e.Enrage.class));
         cards.add(new SetCardInfo("Evacuation", 75, Rarity.RARE, mage.cards.e.Evacuation.class));
         cards.add(new SetCardInfo("Execute", 128, Rarity.UNCOMMON, mage.cards.e.Execute.class));
@@ -132,6 +135,7 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Furnace of Rath", 188, Rarity.RARE, mage.cards.f.FurnaceOfRath.class));
         cards.add(new SetCardInfo("Giant Cockroach", 133, Rarity.COMMON, mage.cards.g.GiantCockroach.class));
         cards.add(new SetCardInfo("Giant Growth", 243, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
+        cards.add(new SetCardInfo("Giant Octopus", "S4", Rarity.COMMON, mage.cards.g.GiantOctopus.class));
         cards.add(new SetCardInfo("Giant Spider", 244, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Gift of Estates", 15, Rarity.UNCOMMON, mage.cards.g.GiftOfEstates.class));
         cards.add(new SetCardInfo("Glorious Anthem", 16, Rarity.RARE, mage.cards.g.GloriousAnthem.class));
@@ -143,6 +147,7 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin King", 192, Rarity.RARE, mage.cards.g.GoblinKing.class));
         cards.add(new SetCardInfo("Goblin Mountaineer", 193, Rarity.COMMON, mage.cards.g.GoblinMountaineer.class));
         cards.add(new SetCardInfo("Goblin Piker", 194, Rarity.COMMON, mage.cards.g.GoblinPiker.class));
+        cards.add(new SetCardInfo("Goblin Raider", "S8", Rarity.COMMON, mage.cards.g.GoblinRaider.class));
         cards.add(new SetCardInfo("Goblin Sky Raider", 195, Rarity.COMMON, mage.cards.g.GoblinSkyRaider.class));
         cards.add(new SetCardInfo("Gravedigger", 136, Rarity.COMMON, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Grave Pact", 135, Rarity.RARE, mage.cards.g.GravePact.class));
@@ -164,6 +169,7 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Hypnotic Specter", 141, Rarity.RARE, mage.cards.h.HypnoticSpecter.class));
         cards.add(new SetCardInfo("Icy Manipulator", 299, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Imaginary Pet", 82, Rarity.RARE, mage.cards.i.ImaginaryPet.class));
+        cards.add(new SetCardInfo("Index", "S5", Rarity.COMMON, mage.cards.i.Index.class));
         cards.add(new SetCardInfo("Infantry Veteran", 21, Rarity.COMMON, mage.cards.i.InfantryVeteran.class));
         cards.add(new SetCardInfo("Inspirit", 22, Rarity.UNCOMMON, mage.cards.i.Inspirit.class));
         cards.add(new SetCardInfo("Island", 335, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -301,6 +307,7 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Feast", 164, Rarity.UNCOMMON, mage.cards.s.SoulFeast.class));
         cards.add(new SetCardInfo("Soul Warden", 46, Rarity.UNCOMMON, mage.cards.s.SoulWarden.class));
         cards.add(new SetCardInfo("Spellbook", 309, Rarity.UNCOMMON, mage.cards.s.Spellbook.class));
+        cards.add(new SetCardInfo("Spined Wurm", "S10", Rarity.COMMON, mage.cards.s.SpinedWurm.class));
         cards.add(new SetCardInfo("Spineless Thug", 165, Rarity.COMMON, mage.cards.s.SpinelessThug.class));
         cards.add(new SetCardInfo("Spirit Link", 47, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
         cards.add(new SetCardInfo("Stone Rain", 221, Rarity.COMMON, mage.cards.s.StoneRain.class));
@@ -345,11 +352,13 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Tower", 329, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class));
         cards.add(new SetCardInfo("Utopia Tree", 277, Rarity.RARE, mage.cards.u.UtopiaTree.class));
         cards.add(new SetCardInfo("Venerable Monk", 51, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
+        cards.add(new SetCardInfo("Vengeance", "S2", Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
         cards.add(new SetCardInfo("Verdant Force", 278, Rarity.RARE, mage.cards.v.VerdantForce.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 279, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
         cards.add(new SetCardInfo("Veteran Cavalier", 52, Rarity.COMMON, mage.cards.v.VeteranCavalier.class));
         cards.add(new SetCardInfo("Viashino Sandstalker", 225, Rarity.UNCOMMON, mage.cards.v.ViashinoSandstalker.class));
         cards.add(new SetCardInfo("Viridian Shaman", 280, Rarity.UNCOMMON, mage.cards.v.ViridianShaman.class));
+        cards.add(new SetCardInfo("Vizzerdrix", "S7", Rarity.RARE, mage.cards.v.Vizzerdrix.class));
         cards.add(new SetCardInfo("Volcanic Hammer", 226, Rarity.COMMON, mage.cards.v.VolcanicHammer.class));
         cards.add(new SetCardInfo("Vulshok Morningstar", 315, Rarity.UNCOMMON, mage.cards.v.VulshokMorningstar.class));
         cards.add(new SetCardInfo("Wanderguard Sentry", 111, Rarity.COMMON, mage.cards.w.WanderguardSentry.class));
@@ -373,5 +382,13 @@ public final class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Zodiac Monkey", 285, Rarity.COMMON, mage.cards.z.ZodiacMonkey.class));
         cards.add(new SetCardInfo("Zombify", 171, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
         cards.add(new SetCardInfo("Zur's Weirding", 114, Rarity.RARE, mage.cards.z.ZursWeirding.class));
+    }
+
+    @Override
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        // card numbers containing S are Starter Set cards not found in boosters
+        cardInfos.removeIf(cardInfo -> cardInfo.getCardNumber().contains("S"));
+        return cardInfos;
     }
 }

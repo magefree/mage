@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,7 +47,7 @@ class FeedThePackEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public FeedThePackEffect() {
@@ -56,7 +55,7 @@ class FeedThePackEffect extends OneShotEffect {
         this.staticText = "sacrifice a nontoken creature. If you do, create X 2/2 green Wolf creature tokens, where X is the sacrificed creature's toughness";
     }
 
-    public FeedThePackEffect(final FeedThePackEffect effect) {
+    private FeedThePackEffect(final FeedThePackEffect effect) {
         super(effect);
     }
 
@@ -69,7 +68,7 @@ class FeedThePackEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Target target = new TargetPermanent(filter);
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (player != null && player.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null && permanent.sacrifice(source, game)) {
                 int toughness = permanent.getToughness().getValue();

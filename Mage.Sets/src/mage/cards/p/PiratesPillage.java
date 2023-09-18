@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -10,8 +8,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.TreasureToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PiratesPillage extends CardImpl {
@@ -24,8 +23,7 @@ public final class PiratesPillage extends CardImpl {
 
         // Draw two cards and create two colorless Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), 2)
-                .setText("and create two colorless Treasure artifacts with \"{T}, Sacrifice this artifact: Add one mana of any color"));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), 2).concatBy("and"));
     }
 
     private PiratesPillage(final PiratesPillage card) {

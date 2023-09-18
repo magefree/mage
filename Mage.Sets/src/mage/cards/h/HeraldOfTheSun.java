@@ -44,7 +44,7 @@ public final class HeraldOfTheSun extends CardImpl {
 
         // {3}{W}: Put a +1/+1 counter on another target creature with flying.
         Ability ability = new SimpleActivatedAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{3}{W}")
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{3}{W}")
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

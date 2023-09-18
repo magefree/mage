@@ -26,8 +26,7 @@ public final class AlleyEvasion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Return target creature you control to its owner's hand.
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

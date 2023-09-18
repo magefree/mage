@@ -24,7 +24,7 @@ public final class SengirAutocrat extends CardImpl {
 
     static {
         filter.add(SubType.SERF.getPredicate());
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public SengirAutocrat(UUID ownerId, CardSetInfo setInfo) {

@@ -87,7 +87,7 @@ class ShadowsVerdictEffect extends OneShotEffect {
         game.getBattlefield()
                 .getActivePermanents(
                         filter, source.getControllerId(),
-                        source.getSourceId(), game
+                        source, game
                 ).stream()
                 .forEach(cards::add);
         game.getState()

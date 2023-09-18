@@ -46,7 +46,7 @@ class SecondHarvestEffect extends OneShotEffect {
         this.staticText = "For each token you control, create a token that's a copy of that permanent";
     }
 
-    public SecondHarvestEffect(final SecondHarvestEffect effect) {
+    private SecondHarvestEffect(final SecondHarvestEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class SecondHarvestEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterControlledPermanent filter = new FilterControlledPermanent("each token you control");
-            filter.add(TokenPredicate.instance);
+            filter.add(TokenPredicate.TRUE);
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
                 if (permanent != null) {
                     CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();

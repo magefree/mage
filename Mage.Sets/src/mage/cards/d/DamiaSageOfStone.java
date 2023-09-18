@@ -29,7 +29,7 @@ public final class DamiaSageOfStone extends CardImpl {
 
     public DamiaSageOfStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GORGON);
         this.subtype.add(SubType.WIZARD);
 
@@ -62,7 +62,7 @@ class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility
         super(new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(CardsInControllerHandCount.instance, -1))), TargetController.YOU, false);
     }
 
-    DamiaSageOfStoneTriggeredAbility(final DamiaSageOfStoneTriggeredAbility ability) {
+    private DamiaSageOfStoneTriggeredAbility(final DamiaSageOfStoneTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,6 +82,6 @@ class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference";
+        return "At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.";
     }
 }

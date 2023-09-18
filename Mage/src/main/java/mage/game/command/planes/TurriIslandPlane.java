@@ -31,7 +31,6 @@ public class TurriIslandPlane extends Plane {
 
     public TurriIslandPlane() {
         this.setPlaneType(Planes.PLANE_TURRI_ISLAND);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Creature spells cost {2} less to cast.
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new TurriIslandEffect(2));
@@ -51,6 +50,15 @@ public class TurriIslandPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private TurriIslandPlane(final TurriIslandPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TurriIslandPlane copy() {
+        return new TurriIslandPlane(this);
     }
 }
 

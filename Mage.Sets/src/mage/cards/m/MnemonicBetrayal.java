@@ -53,14 +53,14 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
 
     public MnemonicBetrayalExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile all cards from all opponents' graveyards. " +
+        this.staticText = "exile all opponents' graveyards. " +
                 "You may cast spells from among those cards this turn, " +
                 "and you may spend mana as though it were mana of any type to cast those spells. " +
                 "At the beginning of the next end step, if any of those cards remain exiled, " +
                 "return them to their owners' graveyards";
     }
 
-    public MnemonicBetrayalExileEffect(final MnemonicBetrayalExileEffect effect) {
+    private MnemonicBetrayalExileEffect(final MnemonicBetrayalExileEffect effect) {
         super(effect);
     }
 
@@ -82,10 +82,10 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .map(Player::getGraveyard)
                 .map(g -> g.getCards(game))
-                .forEach(cards::addAll);
+                .forEach(cards::addAllCards);
         controller.moveCardsToExile(
                 cards.getCards(game), source, game, true,
-                source.getSourceId(), CardUtil.getSourceLogName(game, source)
+                source.getSourceId(), CardUtil.getSourceName(game, source)
         );
         for (Card card : cards.getCards(game)) {
             if (card.isLand(game)) {
@@ -113,7 +113,7 @@ class MnemonicBetrayalDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.morSet.addAll(morSet);
     }
 
-    public MnemonicBetrayalDelayedTriggeredAbility(final MnemonicBetrayalDelayedTriggeredAbility ability) {
+    private MnemonicBetrayalDelayedTriggeredAbility(final MnemonicBetrayalDelayedTriggeredAbility ability) {
         super(ability);
         this.morSet.addAll(ability.morSet);
     }
@@ -155,7 +155,7 @@ class MnemonicBetrayalReturnEffect extends OneShotEffect {
         this.morSet.addAll(morSet);
     }
 
-    public MnemonicBetrayalReturnEffect(final MnemonicBetrayalReturnEffect effect) {
+    private MnemonicBetrayalReturnEffect(final MnemonicBetrayalReturnEffect effect) {
         super(effect);
         this.morSet.addAll(effect.morSet);
     }

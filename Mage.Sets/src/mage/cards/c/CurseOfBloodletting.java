@@ -31,7 +31,7 @@ public final class CurseOfBloodletting extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // If a source would deal damage to enchanted player, it deals double that damage to that player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfBloodlettingEffect()));
@@ -54,7 +54,7 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
         staticText = "If a source would deal damage to enchanted player, it deals double that damage to that player instead";
     }
 
-    public CurseOfBloodlettingEffect(final CurseOfBloodlettingEffect effect) {
+    private CurseOfBloodlettingEffect(final CurseOfBloodlettingEffect effect) {
         super(effect);
     }
 

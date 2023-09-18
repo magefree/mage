@@ -56,7 +56,7 @@ public final class WickedAkuba extends CardImpl {
     }
 }
 
-class WickedAkubaPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class WickedAkubaPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

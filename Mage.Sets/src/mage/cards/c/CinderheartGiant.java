@@ -70,14 +70,14 @@ class CinderheartGiantEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || game.getBattlefield().count(
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         ) < 1) {
             return false;
         }
         TargetPermanent target = new TargetOpponentsCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setRandom(true);
-        player.chooseTarget(outcome, target, source, game);
+        target.chooseTarget(outcome, player.getId(), source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.damage(7, source.getSourceId(), source, game) > 0;
     }

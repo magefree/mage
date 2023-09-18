@@ -25,6 +25,7 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ import static com.google.common.collect.Iterables.getOnlyElement;
 public class StubPlayer extends PlayerImpl implements Player {
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         if (target instanceof TargetPlayer) {
             for (Player player : game.getPlayers().values()) {
                 if (player.getId().equals(getId()) && target.canTarget(getId(), game)) {
@@ -50,7 +51,7 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         cards.getCards(game).stream().map(MageItem::getId).forEach(cardId -> target.add(cardId, game));
         return true;
     }
@@ -103,14 +104,14 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         return false;
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (target.getFilter().getMessage() != null && target.getFilter().getMessage().endsWith(" more) to put on the bottom of your library")) {
-            chooseDiscardBottom(game, target.getMinNumberOfTargets(), new ArrayList<>(target.possibleTargets(null, null, game)))
+            chooseDiscardBottom(game, target.getMinNumberOfTargets(), new ArrayList<>(target.possibleTargets(null, source, game)))
                     .forEach(cardId -> target.add(cardId, game));
         }
         return false;
@@ -207,7 +208,8 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         return null;
     }
 

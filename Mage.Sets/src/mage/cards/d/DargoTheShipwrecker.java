@@ -31,16 +31,15 @@ public final class DargoTheShipwrecker extends CardImpl {
     public DargoTheShipwrecker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
 
         // As an additional cost to cast this spell, you may sacrifice any number of artifacts and/or creatures. This spell costs {2} less to cast for each permanent sacrificed this way and {2} less to cast for each other artifact or creature you've sacrificed this turn.
-        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE);
-        cost.setText("As an additional cost to cast this spell, " +
-                "you may sacrifice any number of artifacts and/or creatures. " +
+        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE, true);
+        cost.setText("you may sacrifice any number of artifacts and/or creatures. " +
                 "This spell costs {2} less to cast for each permanent sacrificed this way " +
                 "and {2} less to cast for each other artifact or creature you've sacrificed this turn");
         this.getSpellAbility().addCost(cost);
@@ -71,7 +70,7 @@ class DargoTheShipwreckerEffect extends CostModificationEffectImpl {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
     }
 
-    public DargoTheShipwreckerEffect(final DargoTheShipwreckerEffect effect) {
+    private DargoTheShipwreckerEffect(final DargoTheShipwreckerEffect effect) {
         super(effect);
     }
 
@@ -126,7 +125,7 @@ class DargoTheShipwreckerWatcher extends Watcher {
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (permanent != null && (permanent.isCreature(game) || permanent.isArtifact(game))) {
-            sacMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            sacMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
         }
     }
 

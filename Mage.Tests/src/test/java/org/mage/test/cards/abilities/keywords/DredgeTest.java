@@ -46,7 +46,7 @@ public class DredgeTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 3);
         
-        assertPermanentCount(playerA, "Zombie", 1); // May only be one creature
+        assertPermanentCount(playerA, "Zombie Token", 1); // May only be one creature
         
     }
 
@@ -67,7 +67,7 @@ public class DredgeTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Silvercoat Lion", 5);
         skipInitShuffling();
         
-        setChoice(playerB, "Yes"); // Use Dredge
+        setChoice(playerB, true); // Use Dredge
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -78,7 +78,7 @@ public class DredgeTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Stinkweed Imp", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 5);
         
-        assertPermanentCount(playerB, "Zombie", 1); // May only be one creature
+        assertPermanentCount(playerB, "Zombie Token", 1); // May only be one creature
         
     }
 

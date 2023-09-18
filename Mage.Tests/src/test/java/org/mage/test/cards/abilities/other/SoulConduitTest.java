@@ -35,7 +35,9 @@ public class SoulConduitTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 9);
         addCard(Zone.BATTLEFIELD, playerA, soulConduit);
         addCard(Zone.HAND, playerA, liveFast);
-        
+
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, liveFast); // to force losing two life
         activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "{6}");
         addTarget(playerA, playerA);

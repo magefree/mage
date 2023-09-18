@@ -23,7 +23,7 @@ public final class TempleOfEnlightenment extends CardImpl {
         // Temple of Enlightenment enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Enlightenment enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
         // {T}: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());        

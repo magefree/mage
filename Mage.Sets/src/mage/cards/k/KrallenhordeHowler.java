@@ -29,7 +29,6 @@ public final class KrallenhordeHowler extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         // Creature spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(FILTER, 1)));

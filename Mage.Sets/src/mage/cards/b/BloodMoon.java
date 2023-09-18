@@ -47,9 +47,10 @@ public final class BloodMoon extends CardImpl {
             super(Duration.WhileOnBattlefield, Outcome.Detriment);
             this.staticText = "Nonbasic lands are Mountains";
             this.dependencyTypes.add(DependencyType.BecomeMountain);
+            this.dependendToTypes.add(DependencyType.BecomeNonbasicLand);
         }
 
-        BloodMoonEffect(final BloodMoonEffect effect) {
+        private BloodMoonEffect(final BloodMoonEffect effect) {
             super(effect);
         }
 

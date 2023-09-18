@@ -3,6 +3,7 @@ package mage.abilities.costs.common;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class ExileFromHandCost extends CostImpl {
 
     List<Card> cards = new ArrayList<>();
-    private boolean setXFromCMC;
+    private final boolean setXFromCMC;
 
     public ExileFromHandCost(TargetCardInHand target) {
         this(target, false);
@@ -32,15 +33,16 @@ public class ExileFromHandCost extends CostImpl {
     /**
      * @param target
      * @param setXFromCMC the spells X value on the stack is set to the
-     *                    converted mana costs of the exiled card
+     *                    converted mana costs of the exiled card (alternative cost)
      */
     public ExileFromHandCost(TargetCardInHand target, boolean setXFromCMC) {
         this.addTarget(target);
-        this.text = "exile " + target.getTargetName();
+        this.text = "exile " + target.getDescription() +
+                (target.getDescription().contains("from your hand") ? "" : " from your hand");
         this.setXFromCMC = setXFromCMC;
     }
 
-    public ExileFromHandCost(final ExileFromHandCost cost) {
+    protected ExileFromHandCost(final ExileFromHandCost cost) {
         super(cost);
         for (Card card : cost.cards) {
             this.cards.add(card.copy());
@@ -50,7 +52,7 @@ public class ExileFromHandCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             Player player = game.getPlayer(controllerId);
             int cmc = 0;
             for (UUID targetId : targets.get(0).getTargets()) {
@@ -62,16 +64,17 @@ public class ExileFromHandCost extends CostImpl {
                 this.cards.add(card);
             }
             Cards cardsToExile = new CardsImpl();
-            cardsToExile.addAll(cards);
+            cardsToExile.addAllCards(cards);
             player.moveCards(cardsToExile, Zone.EXILED, ability, game);
             paid = true;
             if (setXFromCMC) {
-                VariableManaCost vmc = new VariableManaCost();
+                VariableManaCost vmc = new VariableManaCost(VariableCostType.ALTERNATIVE);
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
+                // TODO: wtf, look at setXFromCMC usage -- it used in cards with alternative costs, not additional... need to fix?
                 vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
-                ability.getManaCostsToPay().add(vmc);
+                ability.addManaCostsToPay(vmc);
             }
         }
         return paid;
@@ -79,7 +82,7 @@ public class ExileFromHandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

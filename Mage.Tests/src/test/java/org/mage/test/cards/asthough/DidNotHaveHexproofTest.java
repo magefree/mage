@@ -44,6 +44,5 @@ public class DidNotHaveHexproofTest extends CardTestPlayerBase {
         assertTapped(dTower, true);
         assertGraveyardCount(playerA, "Shock", 1);
         assertLife(playerB, 18);
-        assertAllCommandsUsed();
     }
 }

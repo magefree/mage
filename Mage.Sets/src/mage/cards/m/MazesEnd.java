@@ -110,7 +110,7 @@ class MazesEndEffect extends OneShotEffect {
         this.staticText = "If you control ten or more Gates with different names, you win the game";
     }
 
-    public MazesEndEffect(final MazesEndEffect effect) {
+    private MazesEndEffect(final MazesEndEffect effect) {
         super(effect);
     }
 

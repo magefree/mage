@@ -7,28 +7,26 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author TacomenX
  */
 
 public final class MerfolkHexproofToken extends TokenImpl {
-    
+
     public MerfolkHexproofToken() {
-        super("Merfolk", "1/1 blue Merfolk creature token with hexproof");
+        super("Merfolk Token", "1/1 blue Merfolk creature token with hexproof");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.MERFOLK);
-        this.color = ObjectColor.BLUE;
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public MerfolkHexproofToken(final MerfolkHexproofToken token) {
+    protected MerfolkHexproofToken(final MerfolkHexproofToken token) {
         super(token);
     }
 
     public MerfolkHexproofToken copy() {
         return new MerfolkHexproofToken(this);
     }
-
 }

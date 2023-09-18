@@ -38,14 +38,14 @@ public final class HazduhrTheAbbot extends CardImpl {
 
     public HazduhrTheAbbot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
         // {X}, {T}: The next X damage that would be dealt this turn to target white creature you control is dealt to Hazduhr the Abbot instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HazduhrTheAbbotRedirectDamageEffect(Duration.EndOfTurn), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HazduhrTheAbbotRedirectDamageEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
@@ -66,11 +66,11 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
     private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public HazduhrTheAbbotRedirectDamageEffect(Duration duration) {
-        super(duration, 0, UsageType.ONE_USAGE_ABSOLUTE);
+        super(duration, 0, UsageType.ACCORDING_DURATION);
         this.staticText = "The next X damage that would be dealt this turn to target white creature you control is dealt to {this} instead";
     }
 
-    public HazduhrTheAbbotRedirectDamageEffect(final HazduhrTheAbbotRedirectDamageEffect effect) {
+    private HazduhrTheAbbotRedirectDamageEffect(final HazduhrTheAbbotRedirectDamageEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+            if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                     if (event.getTargetId() != null) {
                         TargetPermanent target = new TargetPermanent();

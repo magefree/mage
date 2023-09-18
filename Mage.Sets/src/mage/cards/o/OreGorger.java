@@ -25,7 +25,7 @@ public final class OreGorger extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastControllerTriggeredAbility(new DestroyTargetEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new DestroyTargetEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true);
         ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
     }

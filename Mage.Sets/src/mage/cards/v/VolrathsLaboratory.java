@@ -1,10 +1,8 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -19,11 +17,11 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.VolrathsLaboratoryToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class VolrathsLaboratory extends CardImpl {
@@ -32,7 +30,7 @@ public final class VolrathsLaboratory extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // As Volrath's Laboratory enters the battlefield, choose a color and a creature type.
-        Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
+        Ability ability = new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
         Effect effect = new ChooseCreatureTypeEffect(Outcome.Neutral);
         effect.setText("and a creature type");
         ability.addEffect(effect);
@@ -61,7 +59,7 @@ class VolrathsLaboratoryEffect extends OneShotEffect {
         this.staticText = "Create a 2/2 creature token of the chosen color and type";
     }
 
-    VolrathsLaboratoryEffect(final VolrathsLaboratoryEffect effect) {
+    private VolrathsLaboratoryEffect(final VolrathsLaboratoryEffect effect) {
         super(effect);
     }
 
@@ -74,7 +72,9 @@ class VolrathsLaboratoryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-        Token token = new VolrathsLaboratoryToken(color, subType);
-        return token.putOntoBattlefield(1, game, source, source.getControllerId());
+        if (subType == null || color == null) {
+            return false;
+        }
+        return new VolrathsLaboratoryToken(color, subType).putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }

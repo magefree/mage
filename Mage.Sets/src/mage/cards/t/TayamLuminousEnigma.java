@@ -32,10 +32,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import static com.google.common.collect.Iterables.getOnlyElement;
 
 /**
  * @author htrajan
@@ -45,7 +44,7 @@ public final class TayamLuminousEnigma extends CardImpl {
     public TayamLuminousEnigma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
@@ -86,7 +85,7 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
         super(new TargetPermanent(1, 1, filter, true), null, 3);
     }
 
-    public TayamLuminousEnigmaCost(TayamLuminousEnigmaCost cost) {
+    private TayamLuminousEnigmaCost(final TayamLuminousEnigmaCost cost) {
         super(cost);
     }
 
@@ -96,15 +95,14 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
         int countersRemoved = 0;
         Player controller = game.getPlayer(controllerId);
         for (int i = 0; i < countersToRemove; i++) {
-            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), game)) {
-                UUID targetId = getOnlyElement(target.getTargets());
-                Permanent permanent = game.getPermanent(targetId);
+            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), source, game)) {
+                Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     if (!permanent.getCounters(game).isEmpty()) {
                         String counterName = null;
                         if (permanent.getCounters(game).size() > 1) {
                             Choice choice = new ChoiceImpl(true);
-                            Set<String> choices = new HashSet<>();
+                            Set<String> choices = new LinkedHashSet<>();
                             for (Counter counter : permanent.getCounters(game).values()) {
                                 if (permanent.getCounters(game).getCount(counter.getName()) > 0) {
                                     choices.add(counter.getName());
@@ -187,8 +185,8 @@ class TayamLuminousEnigmaEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
-        if (!player.choose(outcome, player.getGraveyard(), target, game)) {
+        target.withNotTarget(true);
+        if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return false;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);

@@ -31,7 +31,7 @@ public final class Enslave extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // You control enchanted creature.
@@ -59,7 +59,7 @@ class EnslaveEffect extends OneShotEffect {
         staticText = "enchanted creature deals 1 damage to its owner";
     }
 
-    EnslaveEffect(final EnslaveEffect effect) {
+    private EnslaveEffect(final EnslaveEffect effect) {
         super(effect);
     }
 

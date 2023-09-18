@@ -28,7 +28,7 @@ public final class UrborgMindsucker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}, Sacrifice Urborg Mindsucker: Target opponent discards a card at random. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), new ManaCostsImpl("{B}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), new ManaCostsImpl<>("{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

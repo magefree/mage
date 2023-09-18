@@ -35,7 +35,7 @@ public final class MartyrsOfKorlis extends CardImpl {
         // As long as Martyrs of Korlis is untapped, all damage that would be dealt to you by artifacts is dealt to Martyrs of Korlis instead.
         Effect effect = new ConditionalReplacementEffect(
                 new RedirectArtifactDamageFromPlayerToSourceEffect(Duration.WhileOnBattlefield),
-                new InvertCondition(SourceTappedCondition.instance),
+                SourceTappedCondition.UNTAPPED,
                 null);
         effect.setText("{this} redirects artifact damage from controller as long as it's untapped");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
@@ -57,7 +57,7 @@ class RedirectArtifactDamageFromPlayerToSourceEffect extends RedirectionEffect {
         super(duration);
     }
 
-    public RedirectArtifactDamageFromPlayerToSourceEffect(final RedirectArtifactDamageFromPlayerToSourceEffect effect) {
+    private RedirectArtifactDamageFromPlayerToSourceEffect(final RedirectArtifactDamageFromPlayerToSourceEffect effect) {
         super(effect);
     }
 

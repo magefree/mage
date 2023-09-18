@@ -9,6 +9,7 @@ import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
+import mage.abilities.hint.common.CreaturesDiedThisTurnHint;
 import mage.abilities.keyword.HexproofFromArtifactsCreaturesAndEnchantments;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +30,7 @@ public final class NevinyrralUrborgTyrant extends CardImpl {
     public NevinyrralUrborgTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -41,7 +42,7 @@ public final class NevinyrralUrborgTyrant extends CardImpl {
         // When Nevinyrral, Urborg Tyrant enters the battlefield, create a tapped 2/2 black Zombie creature token for each creature that died this turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(
                 new ZombieToken(), CreaturesDiedThisTurnCount.instance, true, false
-        ).setText("create a tapped 2/2 black Zombie creature token for each creature that died this turn")), new CreaturesDiedWatcher());
+        ).setText("create a tapped 2/2 black Zombie creature token for each creature that died this turn")).addHint(CreaturesDiedThisTurnHint.instance));
 
         // When Nevinyrral dies, you may pay {1}. When you do, destroy all artifacts, creatures, and enchantments.
         this.addAbility(new DiesSourceTriggeredAbility(

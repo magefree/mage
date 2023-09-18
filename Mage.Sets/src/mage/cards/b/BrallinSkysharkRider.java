@@ -29,7 +29,7 @@ public final class BrallinSkysharkRider extends CardImpl {
     public BrallinSkysharkRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
@@ -50,7 +50,7 @@ public final class BrallinSkysharkRider extends CardImpl {
         // {R}: Target Shark gains trample until end of turn.
         ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{R}"));
+        ), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

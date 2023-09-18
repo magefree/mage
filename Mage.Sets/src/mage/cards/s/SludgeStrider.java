@@ -63,7 +63,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SludgeStriderEffect(), new GenericManaCost(1)), false);
     }
 
-    public SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
+    private SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
         super(ability);
     }
 
@@ -76,7 +76,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (permanent != null && filter.match(permanent, getControllerId(), this, game)) {
                 return true;
             }
         }
@@ -88,7 +88,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
                 if (permanent == null) {
                     permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
                 }
-                return permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game);
+                return permanent != null && filter.match(permanent, getControllerId(), this, game);
             }
         }
         return false;
@@ -112,7 +112,7 @@ class SludgeStriderEffect extends OneShotEffect {
         staticText = "target player loses 1 life and you gain 1 life";
     }
 
-    SludgeStriderEffect(final SludgeStriderEffect effect) {
+    private SludgeStriderEffect(final SludgeStriderEffect effect) {
         super(effect);
     }
 

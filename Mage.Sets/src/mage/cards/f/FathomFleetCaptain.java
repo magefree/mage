@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.PirateToken;
@@ -31,7 +30,7 @@ public final class FathomFleetCaptain extends CardImpl {
     static {
         filter.add(SubType.PIRATE.getPredicate());
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public FathomFleetCaptain(UUID ownerId, CardSetInfo setInfo) {
@@ -43,7 +42,7 @@ public final class FathomFleetCaptain extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Fathom Fleet Captain attacks, if you control another nontoken Pirate, you may pay {2}. If you do, creature a 2/2 black Pirate creature token with menace.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

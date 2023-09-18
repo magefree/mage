@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class ConsulsShieldguard extends CardImpl {
 
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature();
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("another target attacking creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -41,13 +41,10 @@ public final class ConsulsShieldguard extends CardImpl {
         // When Consul's Shieldguard enters the battlefield, you get {E}{E}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
-        // Whenever Consul's Shiedguard attacks, you may pay {E}. If you do, another target attacking creature gets indestructible until end of turn.
-        DoIfCostPaid doIfCostPaidEffect = new DoIfCostPaid(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new PayEnergyCost(1));
-        Ability ability = new AttacksTriggeredAbility(doIfCostPaidEffect, false,
-                "Whenever {this} attacks, you may pay {E}. If you do, another target attacking creature gets indestructible until end of turn.");
+        // Whenever Consul's Shieldguard attacks, you may pay {E}. If you do, another target attacking creature gains indestructible until end of turn.
+        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new PayEnergyCost(1)));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-
     }
 
     private ConsulsShieldguard(final ConsulsShieldguard card) {

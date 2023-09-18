@@ -24,8 +24,7 @@ public final class WailOfTheNim extends CardImpl {
         this.getSpellAbility().addEffect(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));
         
         // or Wail of the Nim deals 1 damage to each creature and each player.
-        Mode mode = new Mode();
-        mode.addEffect(new DamageEverythingEffect(1));
+        Mode mode = new Mode(new DamageEverythingEffect(1));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine {B}

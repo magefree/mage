@@ -37,7 +37,7 @@ public class DetainTargetEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public DetainTargetEffect(final DetainTargetEffect effect) {
+    protected DetainTargetEffect(final DetainTargetEffect effect) {
         super(effect);
     }
 
@@ -79,14 +79,14 @@ public class DetainTargetEffect extends OneShotEffect {
             sb.append("detain up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
         }
         sb.append(". <i>(Until your next turn, ");
-
-        if (target instanceof TargetCreaturePermanent) {
-            sb.append(target.getMaxNumberOfTargets() == 1 ? "that creature" : "those creatures");
-        } else {
-            sb.append(target.getMaxNumberOfTargets() == 1 ? "that permanent" : "those permanents");
+        boolean plural = target.getMaxNumberOfTargets() > 1;
+        sb.append(plural ? "those " : "that ");
+        sb.append(target.getTargetName().contains("creature") ? "creature" : "permanent");
+        if (plural) {
+            sb.append('s');
         }
         sb.append(" can't attack or block and ");
-        sb.append(target.getMaxNumberOfTargets() == 1 ? "its" : "their");
+        sb.append(plural ? "their" : "its");
         sb.append(" activated abilities can't be activated.)</i>");
         return sb.toString();
     }
@@ -99,7 +99,7 @@ class DetainRestrictionEffect extends RestrictionEffect {
         staticText = "";
     }
 
-    public DetainRestrictionEffect(final DetainRestrictionEffect effect) {
+    protected DetainRestrictionEffect(final DetainRestrictionEffect effect) {
         super(effect);
     }
 

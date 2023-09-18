@@ -20,9 +20,7 @@ public final class TourachsCanticle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Target opponent reveals their hand. You choose a card from it. That player discards that card, then discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(
-                StaticFilters.FILTER_CARD, TargetController.OPPONENT
-        ));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true)
                 .setText(", then discards a card at random"));
         this.getSpellAbility().addTarget(new TargetOpponent());

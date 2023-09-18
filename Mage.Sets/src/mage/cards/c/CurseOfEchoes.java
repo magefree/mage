@@ -38,7 +38,7 @@ public final class CurseOfEchoes extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy they control.
         this.addAbility(new CurseOfEchoesCopyTriggeredAbility());
@@ -68,7 +68,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CurseOfEchoesEffect(), false);
     }
 
-    public CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
+    private CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -110,7 +110,7 @@ class CurseOfEchoesEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
+    private CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
         super(effect);
     }
 

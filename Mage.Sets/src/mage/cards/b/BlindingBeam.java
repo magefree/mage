@@ -41,8 +41,7 @@ public final class BlindingBeam extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2,2));
         // or creatures don't untap during target player's next untap step.
-        Mode mode = new Mode();
-        mode.addEffect(new BlindingBeamEffect());
+        Mode mode = new Mode(new BlindingBeamEffect());
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
 
@@ -67,7 +66,7 @@ class BlindingBeamEffect extends OneShotEffect {
         staticText = "creatures don't untap during target player's next untap step";
     }
 
-    public BlindingBeamEffect(final BlindingBeamEffect effect) {
+    private BlindingBeamEffect(final BlindingBeamEffect effect) {
         super(effect);
     }
 
@@ -99,7 +98,7 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
         this.targetPlayerId = targetPlayerId;
     }
 
-    public BlindingBeamEffect2(final BlindingBeamEffect2 effect) {
+    private BlindingBeamEffect2(final BlindingBeamEffect2 effect) {
         super(effect);
         this.targetPlayerId = effect.targetPlayerId;
     }
@@ -133,7 +132,7 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // prevent untap event of creatures of target player
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.isControlledBy(targetPlayerId) && filter.match(permanent, game)) {
                 return true;

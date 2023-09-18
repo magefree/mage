@@ -8,7 +8,7 @@ import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 public class ManaReflectionTest extends CardTestPlayerBase {
@@ -58,7 +58,7 @@ public class ManaReflectionTest extends CardTestPlayerBase {
 
         assertManaPool(playerA, ManaType.GREEN, 2);
     }
-    
+
     @Test
     public void ManaReflectionWithGoblinClearcutterTest() {
         // If you tap a permanent for mana, it produces twice as much of that mana instead.
@@ -66,12 +66,11 @@ public class ManaReflectionTest extends CardTestPlayerBase {
         // {T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G}.
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Clearcutter");
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
-        
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-       
+
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
         assertManaOptions("{R}{R}{R}{R}{R}{R}{G}{G}", manaOptions);
@@ -79,5 +78,20 @@ public class ManaReflectionTest extends CardTestPlayerBase {
         assertManaOptions("{R}{R}{G}{G}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
     }
-    
+
+    @Test
+    public void ManaReflectionWithHavenwoodBattlegroundTest() {
+        // If you tap a permanent for mana, it produces twice as much of that mana instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Reflection");
+        // {T}, Sacrifice Havenwood Battleground: Add {G}{G}.
+        addCard(Zone.BATTLEFIELD, playerA, "Havenwood Battleground");
+        addCard(Zone.BATTLEFIELD, playerA, "Upwelling"); // Prevent mana from emptying before we can check it
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertManaPool(playerA, ManaType.GREEN, 4);
+    }
 }

@@ -53,7 +53,7 @@ public final class GoblinEngineer extends CardImpl {
 
         // {R}, {T}, Sacrifice an artifact: Return target artifact card with converted mana cost 3 or less from your graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{R}")
+                new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

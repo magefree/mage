@@ -34,8 +34,7 @@ public final class DawnToDusk extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard).withChooseHint("return from graveyard to hand"));
         // and/or destroy target enchantment.
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetEnchantmentPermanent().withChooseHint("destroy"));
         this.getSpellAbility().addMode(mode);
     }

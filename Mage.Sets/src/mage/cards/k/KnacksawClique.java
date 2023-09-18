@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class KnacksawClique extends CardImpl {
 
     public KnacksawClique(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.ROGUE);
 
@@ -43,13 +42,13 @@ public final class KnacksawClique extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // {1}{U}, {untap}: Target opponent exiles the top card of their library. Until end of turn, you may play that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnacksawCliqueEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnacksawCliqueEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        
+
     }
 
     private KnacksawClique(final KnacksawClique card) {
@@ -69,7 +68,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
         this.staticText = "Target opponent exiles the top card of their library. Until end of turn, you may play that card";
     }
 
-    public KnacksawCliqueEffect(final KnacksawCliqueEffect effect) {
+    private KnacksawCliqueEffect(final KnacksawCliqueEffect effect) {
         super(effect);
     }
 
@@ -81,7 +80,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && opponent != null) {
             if (opponent.getLibrary().hasCards()) {
                 Library library = opponent.getLibrary();
@@ -89,7 +88,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
                 if (card != null) {
                     opponent.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source, game, Zone.LIBRARY, true);
                     ContinuousEffect effect = new KnacksawCliqueCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    effect.setTargetPointer(new FixedTarget(card.getId(), game));
                     game.addEffect(effect, source);
                 }
             }
@@ -106,7 +105,7 @@ class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "Until end of turn, you may play that card";
     }
 
-    public KnacksawCliqueCastFromExileEffect(final KnacksawCliqueCastFromExileEffect effect) {
+    private KnacksawCliqueCastFromExileEffect(final KnacksawCliqueCastFromExileEffect effect) {
         super(effect);
     }
 

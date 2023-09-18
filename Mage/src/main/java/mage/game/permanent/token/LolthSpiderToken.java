@@ -12,17 +12,21 @@ import mage.constants.SubType;
 public final class LolthSpiderToken extends TokenImpl {
 
     public LolthSpiderToken() {
-        super("Spider", "2/1 black Spider creature token with menace and reach");
+        super("Spider Token", "2/1 black Spider creature token with menace and reach");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SPIDER);
         power = new MageInt(2);
         toughness = new MageInt(1);
-        addAbility(new MenaceAbility());
-        addAbility(ReachAbility.getInstance());
+
+        // Menace
+        this.addAbility(new MenaceAbility());
+
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
     }
 
-    public LolthSpiderToken(final LolthSpiderToken token) {
+    protected LolthSpiderToken(final LolthSpiderToken token) {
         super(token);
     }
 

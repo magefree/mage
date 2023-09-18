@@ -53,14 +53,14 @@ class DeclarationInStoneEffect extends OneShotEffect {
         staticText = "Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way.";
     }
 
-    public DeclarationInStoneEffect(final DeclarationInStoneEffect effect) {
+    private DeclarationInStoneEffect(final DeclarationInStoneEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {

@@ -41,9 +41,9 @@ class EscapeToTheWildsEffect extends OneShotEffect {
 
     EscapeToTheWildsEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile the top five cards of your library. " +
-                "You may play cards exiled this way until the end of your next turn.<br>" +
-                "You may play an additional land this turn.";
+        this.staticText = "Exile the top five cards of your library. "
+                + "You may play cards exiled this way until the end of your next turn.<br>"
+                + "You may play an additional land this turn.";
     }
 
     private EscapeToTheWildsEffect(final EscapeToTheWildsEffect effect) {
@@ -67,7 +67,7 @@ class EscapeToTheWildsEffect extends OneShotEffect {
 
         cards.getCards(game).stream().forEach(card -> {
             ContinuousEffect effect = new EscapeToTheWildsMayPlayEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId()));
+            effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
         });
         game.addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn), source);

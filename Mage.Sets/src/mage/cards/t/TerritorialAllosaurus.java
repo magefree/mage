@@ -36,7 +36,7 @@ public final class TerritorialAllosaurus extends CardImpl {
         // When Territorial Allosaurus enters the battlefield, if it was kicked, it fights another target creature.
         EntersBattlefieldTriggeredAbility ability
                 = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect());
-        Ability conditionalAbility = new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
+        Ability conditionalAbility = new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
                 "When {this} enters the battlefield, if it was kicked, it fights another target creature.");
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(AnotherPredicate.instance);

@@ -35,7 +35,7 @@ public final class InnocenceKami extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false));
     }
 
     private InnocenceKami(final InnocenceKami card) {

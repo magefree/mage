@@ -15,8 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,12 +26,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class GildedDrake extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public GildedDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -47,7 +40,7 @@ public final class GildedDrake extends CardImpl {
         // This ability can't be countered except by spells and abilities.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GildedDrakeEffect());
         ability.setCanFizzle(false);
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false));
         this.addAbility(ability);
     }
 
@@ -68,7 +61,7 @@ class GildedDrakeEffect extends OneShotEffect {
         this.staticText = "exchange control of {this} and up to one target creature an opponent controls. If you don't or can't make an exchange, sacrifice {this}. This ability still resolves if its target becomes illegal";
     }
 
-    public GildedDrakeEffect(final GildedDrakeEffect effect) {
+    private GildedDrakeEffect(final GildedDrakeEffect effect) {
         super(effect);
     }
 
@@ -79,24 +72,23 @@ class GildedDrakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
-            if (sourceObject != null) {
-                if (targetPointer.getFirst(game, source) != null) {
-                    Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
-                    if (targetPermanent != null) {
-                        ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
-                        effect.setTargetPointer(targetPointer);
-                        game.addEffect(effect, source);
-                        return true;
-                    }
-                }
-                sourceObject.sacrifice(source, game);
-            }
+        if (controller == null) {
+            return false;
+        }
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null) {
+            return false;
+        }
+
+        if (targetPointer.getFirst(game, source) == null || game.getPermanent(targetPointer.getFirst(game, source)) == null) {
+            sourceObject.sacrifice(source, game);
             return true;
         }
-        return false;
+
+        ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
+        effect.setTargetPointer(targetPointer);
+        game.addEffect(effect, source);
+        return true;
     }
 }

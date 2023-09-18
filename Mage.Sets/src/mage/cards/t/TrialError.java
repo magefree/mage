@@ -67,7 +67,7 @@ class TrialEffect extends OneShotEffect {
         this.staticText = "Return all creatures blocking or blocked by target creature to their owner's hand";
     }
 
-    public TrialEffect(final TrialEffect effect) {
+    private TrialEffect(final TrialEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
     public AtalyaSamiteMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -43,7 +43,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
         // {X}, {tap}: Choose one - Prevent the next X damage that would be dealt to target creature this turn; or you gain X life. Spend only white mana on X. 
         PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.REGULAR);
         effect.setText("Prevent the next X damage that would be dealt to target creature this turn. Spend only white mana on X.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
 
         VariableCost variableCost = ability.getManaCostsToPay().getVariableCosts().get(0);
@@ -54,8 +54,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
 
         // or you gain X life
-        Mode mode = new Mode();
-        mode.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR).setText("You gain X life. Spend only white mana on X."));
+        Mode mode = new Mode(new GainLifeEffect(ManacostVariableValue.REGULAR).setText("You gain X life. Spend only white mana on X."));
         ability.addMode(mode);
 
         this.addAbility(ability);

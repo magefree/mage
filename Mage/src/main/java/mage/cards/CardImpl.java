@@ -8,6 +8,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.ReconfigureAbility;
+import mage.abilities.keyword.SunburstAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -38,13 +40,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     private static final Logger logger = Logger.getLogger(CardImpl.class);
 
     protected UUID ownerId;
-    protected String cardNumber;
-    protected String expansionSetCode;
-    protected String tokenSetCode;
-    protected String tokenDescriptor;
     protected Rarity rarity;
-    protected boolean transformable;
-    protected Class<?> secondSideCardClazz;
+    protected Class<? extends Card> secondSideCardClazz;
+    protected Class<? extends Card> meldsWithClazz;
+    protected Class<? extends Card> meldsToClazz;
+    protected Card meldsToCard;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -53,16 +53,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean morphCard;
     protected List<UUID> attachments = new ArrayList<>();
+    protected boolean extraDeckCard = false;
 
-    public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
+    protected CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
     }
-
-    public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
+    protected CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
         this(ownerId, setInfo.getName());
+
         this.rarity = setInfo.getRarity();
-        this.cardNumber = setInfo.getCardNumber();
-        this.expansionSetCode = setInfo.getExpansionSetCode();
+        this.setExpansionSetCode(setInfo.getExpansionSetCode());
+        this.setCardNumber(setInfo.getCardNumber());
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
         setDefaultColor();
@@ -102,6 +103,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     protected CardImpl(UUID ownerId, String name) {
+        super();
         this.ownerId = ownerId;
         this.name = name;
     }
@@ -112,25 +114,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.name = name;
     }
 
-    public CardImpl(final CardImpl card) {
+    protected CardImpl(final CardImpl card) {
         super(card);
         ownerId = card.ownerId;
-        cardNumber = card.cardNumber;
-        expansionSetCode = card.expansionSetCode;
-        tokenSetCode = card.tokenSetCode;
-        tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
-        transformable = card.transformable;
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         nightCard = card.nightCard;
+        meldsWithClazz = card.meldsWithClazz;
+        meldsToClazz = card.meldsToClazz;
+        meldsToCard = null; // will be set on first getMeldsToCard call if card has one
 
         spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
         usesVariousArt = card.usesVariousArt;
         morphCard = card.morphCard;
+        extraDeckCard = card.extraDeckCard;
 
         this.attachments.addAll(card.attachments);
     }
@@ -195,11 +196,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public UUID getOwnerId() {
         return ownerId;
-    }
-
-    @Override
-    public String getCardNumber() {
-        return cardNumber;
     }
 
     @Override
@@ -271,7 +267,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     && mainCardState != null
                     && !mainCardState.hasLostAllAbilities()
                     && mainCardState.getAbilities().containsClass(FlashbackAbility.class)) {
-                FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant(game) ? TimingRule.INSTANT : TimingRule.SORCERY);
+                FlashbackAbility flash = new FlashbackAbility(this, this.getManaCost());
                 flash.setSourceId(this.getId());
                 flash.setControllerId(this.getOwnerId());
                 flash.setSpellAbilityType(this.getSpellAbility().getSpellAbilityType());
@@ -305,9 +301,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        for (Ability subAbility : ability.getSubAbilities()) {
-            abilities.add(subAbility);
-        }
+        abilities.addAll(ability.getSubAbilities());
 
         // dynamic check: you can't add ability to the PermanentCard, use permanent.addAbility(a, source, game) instead
         // reason: triggered abilities are not processing here
@@ -329,12 +323,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                             + ability.getClass().getSimpleName() + "; " + ability.getRule());
                 }
             }
-        }
-    }
-
-    protected void addAbilities(List<Ability> abilities) {
-        for (Ability ability : abilities) {
-            addAbility(ability);
         }
     }
 
@@ -373,21 +361,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;
         abilities.setControllerId(ownerId);
-    }
-
-    @Override
-    public String getExpansionSetCode() {
-        return expansionSetCode;
-    }
-
-    @Override
-    public String getTokenSetCode() {
-        return tokenSetCode;
-    }
-
-    @Override
-    public String getTokenDescriptor() {
-        return tokenDescriptor;
     }
 
     @Override
@@ -432,7 +405,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability, controllerId, fromZone, Zone.STACK);
         Spell spell = new Spell(this, ability.getSpellAbilityToResolve(game), controllerId, event.getFromZone(), game);
         ZoneChangeInfo.Stack info = new ZoneChangeInfo.Stack(event, spell);
-        return ZonesHandler.cast(info, game, ability);
+        return ZonesHandler.cast(info, ability, game);
     }
 
     @Override
@@ -474,89 +447,94 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
         boolean removed = false;
         MageObject lkiObject = null;
-        switch (fromZone) {
-            case GRAVEYARD:
-                removed = game.getPlayer(ownerId).removeFromGraveyard(this, game);
-                break;
-            case HAND:
-                removed = game.getPlayer(ownerId).removeFromHand(this, game);
-                break;
-            case LIBRARY:
-                removed = game.getPlayer(ownerId).removeFromLibrary(this, game);
-                break;
-            case EXILED:
-                if (game.getExile().getCard(getId(), game) != null) {
-                    removed = game.getExile().removeCard(this, game);
-                }
-                break;
-            case STACK:
-                StackObject stackObject;
-                if (getSpellAbility() != null) {
-                    stackObject = game.getStack().getSpell(getSpellAbility().getId(), false);
-                } else {
-                    stackObject = game.getStack().getSpell(this.getId(), false);
-                }
+        if (isCopy()) { // copied cards have no need to be removed from a previous zone
+            removed = true;
+        } else {
+            switch (fromZone) {
+                case GRAVEYARD:
+                    removed = game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                    break;
+                case HAND:
+                    removed = game.getPlayer(ownerId).removeFromHand(this, game);
+                    break;
+                case LIBRARY:
+                    removed = game.getPlayer(ownerId).removeFromLibrary(this, game);
+                    break;
+                case EXILED:
+                    if (game.getExile().getCard(getId(), game) != null) {
+                        removed = game.getExile().removeCard(this, game);
+                    }
+                    break;
+                case STACK:
+                    StackObject stackObject;
+                    if (getSpellAbility() != null) {
+                        stackObject = game.getStack().getSpell(getSpellAbility().getId(), false);
+                    } else {
+                        stackObject = game.getStack().getSpell(this.getId(), false);
+                    }
 
-                // handle half of Split Cards on stack
-                if (stackObject == null && (this instanceof SplitCard)) {
-                    stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
+                    // handle half of Split Cards on stack
+                    if (stackObject == null && (this instanceof SplitCard)) {
+                        stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
+                        if (stackObject == null) {
+                            stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(),
+                                    false);
+                        }
+                    }
+
+                    // handle half of Modal Double Faces Cards on stack
+                    if (stackObject == null && (this instanceof ModalDoubleFacedCard)) {
+                        stackObject = game.getStack().getSpell(((ModalDoubleFacedCard) this).getLeftHalfCard().getId(),
+                                false);
+                        if (stackObject == null) {
+                            stackObject = game.getStack()
+                                    .getSpell(((ModalDoubleFacedCard) this).getRightHalfCard().getId(), false);
+                        }
+                    }
+
+                    if (stackObject == null && (this instanceof AdventureCard)) {
+                        stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId(), false);
+                    }
+
                     if (stackObject == null) {
-                        stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(), false);
+                        stackObject = game.getStack().getSpell(getId(), false);
                     }
-                }
-
-                // handle half of Modal Double Faces Cards on stack
-                if (stackObject == null && (this instanceof ModalDoubleFacesCard)) {
-                    stackObject = game.getStack().getSpell(((ModalDoubleFacesCard) this).getLeftHalfCard().getId(), false);
-                    if (stackObject == null) {
-                        stackObject = game.getStack().getSpell(((ModalDoubleFacesCard) this).getRightHalfCard().getId(), false);
+                    if (stackObject != null) {
+                        removed = game.getStack().remove(stackObject, game);
+                        lkiObject = stackObject;
                     }
-                }
-
-                if (stackObject == null && (this instanceof AdventureCard)) {
-                    stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId(), false);
-                }
-
-                if (stackObject == null) {
-                    stackObject = game.getStack().getSpell(getId(), false);
-                }
-                if (stackObject != null) {
-                    removed = game.getStack().remove(stackObject, game);
-                    lkiObject = stackObject;
-                }
-                break;
-            case COMMAND:
-                for (CommandObject commandObject : game.getState().getCommand()) {
-                    if (commandObject.getId().equals(objectId)) {
-                        lkiObject = commandObject;
+                    break;
+                case COMMAND:
+                    for (CommandObject commandObject : game.getState().getCommand()) {
+                        if (commandObject.getId().equals(objectId)) {
+                            lkiObject = commandObject;
+                        }
                     }
-                }
-                if (lkiObject != null) {
-                    removed = game.getState().getCommand().remove(lkiObject);
-                }
-                break;
-            case OUTSIDE:
-                if (isCopy()) { // copied cards have no need to be removed from a previous zone
+                    if (lkiObject != null) {
+                        removed = game.getState().getCommand().remove(lkiObject);
+                    }
+                    break;
+                case OUTSIDE:
+                    if (game.getPlayer(ownerId).getSideboard().contains(this.getId())) {
+                        game.getPlayer(ownerId).getSideboard().remove(this.getId());
+                        removed = true;
+                    } else if (game.getPhase() == null) {
+                        // E.g. Commander of commander game
+                        removed = true;
+                    } else {
+                        // Unstable - Summon the Pack
+                        removed = true;
+                    }
+                    break;
+                case BATTLEFIELD: // for sacrificing permanents or putting to library
                     removed = true;
-                } else if (game.getPlayer(ownerId).getSideboard().contains(this.getId())) {
-                    game.getPlayer(ownerId).getSideboard().remove(this.getId());
-                    removed = true;
-                } else if (game.getPhase() == null) {
-                    // E.g. Commander of commander game
-                    removed = true;
-                } else {
-                    // Unstable - Summon the Pack
-                    removed = true;
-                }
-                break;
-            case BATTLEFIELD: // for sacrificing permanents or putting to library
-                removed = true;
-                break;
-            default:
-                MageObject sourceObject = game.getObject(source.getSourceId());
-                logger.fatal("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
-                        + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + ']');
-                break;
+                    break;
+                default:
+                    MageObject sourceObject = game.getObject(source);
+                    logger.fatal("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
+                            + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + ']');
+                    break;
+            }
         }
         if (removed) {
             if (fromZone != Zone.OUTSIDE) {
@@ -620,34 +598,74 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean isTransformable() {
-        return this.transformable;
-    }
-
-    @Override
-    public void setTransformable(boolean transformable) {
-        this.transformable = transformable;
+        // warning, not all multifaces cards can be transformable (meld, mdfc)
+        // mtg rules method: here
+        // GUI related method: search "transformable = true" in CardView
+        // TODO: check and fix method usage in game engine, it's must be mtg rules logic, not GUI
+        return this.secondSideCardClazz != null || this.nightCard;
     }
 
     @Override
     public final Card getSecondCardFace() {
-        // init second side card on first call
+        // init card side on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
         }
 
-        if (secondSideCard != null) {
-            return secondSideCard;
+        if (secondSideCard == null) {
+            secondSideCard = initSecondSideCard(secondSideCardClazz);
+            if (secondSideCard != null && secondSideCard.getSpellAbility() != null) {
+                secondSideCard.getSpellAbility().setSourceId(this.getId());
+                secondSideCard.getSpellAbility().setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
+                secondSideCard.getSpellAbility().setSpellAbilityCastMode(SpellAbilityCastMode.TRANSFORMED);
+            }
         }
 
+        return secondSideCard;
+    }
+
+    private Card initSecondSideCard(Class<? extends Card> cardClazz) {
         // must be non strict search in any sets, not one set
         // example: if set contains only one card side
         // method used in cards database creating, so can't use repository here
-        ExpansionSet.SetCardInfo info = Sets.findCardByClass(secondSideCardClazz, expansionSetCode);
+        ExpansionSet.SetCardInfo info = Sets.findCardByClass(cardClazz, this.getExpansionSetCode(), this.getCardNumber());
         if (info == null) {
             return null;
         }
-        secondSideCard = createCard(secondSideCardClazz, new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
-        return secondSideCard;
+        return createCard(cardClazz, new CardSetInfo(info.getName(), this.getExpansionSetCode(), info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
+    }
+
+    @Override
+    public SpellAbility getSecondFaceSpellAbility() {
+        Card secondFace = getSecondCardFace();
+        if (secondFace == null || secondFace.getClass().equals(getClass())) {
+            throw new IllegalArgumentException("Wrong code usage: getSecondFaceSpellAbility can only be used for double faced card (main side), broken card: " + this.getName());
+        }
+        return secondFace.getSpellAbility();
+    }
+
+    @Override
+    public boolean meldsWith(Card card) {
+        return this.meldsWithClazz != null && this.meldsWithClazz.isInstance(card.getMainCard());
+    }
+
+    @Override
+    public Class<? extends Card> getMeldsToClazz() {
+        return this.meldsToClazz;
+    }
+
+    @Override
+    public Card getMeldsToCard() {
+        // init card on first call
+        if (meldsToClazz == null && meldsToCard == null) {
+            return null;
+        }
+
+        if (meldsToCard == null) {
+            meldsToCard = initSecondSideCard(meldsToClazz);
+        }
+
+        return meldsToCard;
     }
 
     @Override
@@ -688,6 +706,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public boolean addCounters(Counter counter, Ability source, Game game) {
+        return addCounters(counter, source.getControllerId(), source, game);
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return addCounters(counter, playerAddingCounters, source, game, null, true);
     }
@@ -704,12 +727,25 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+        return addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, Integer.MAX_VALUE);
+    }
+
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
+        if (this instanceof Permanent && !((Permanent) this).isPhasedIn()) {
+            return false;
+        }
+
         boolean returnCode = true;
         GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, source, playerAddingCounters, counter.getName(), counter.getCount());
         addingAllEvent.setAppliedEffects(appliedEffects);
         addingAllEvent.setFlag(isEffect);
         if (!game.replaceEvent(addingAllEvent)) {
-            int amount = addingAllEvent.getAmount();
+            int amount;
+            if (maxCounters < Integer.MAX_VALUE) {
+                amount = Integer.min(addingAllEvent.getAmount(), maxCounters - this.getCounters(game).getCount(counter.getName()));
+            } else {
+                amount = addingAllEvent.getAmount();
+            }
             boolean isEffectFlag = addingAllEvent.getFlag();
             int finalAmount = amount;
             for (int i = 0; i < amount; i++) {
@@ -747,11 +783,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 break;
             }
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, source, getControllerOrOwner());
+            if (source != null
+                    && source.getControllerId() != null) {
+                event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
+            }
             event.setData(name);
             game.fireEvent(event);
             finalAmount++;
         }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, source, getControllerOrOwner());
+        if (source != null
+                && source.getControllerId() != null) {
+            event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
+        }
         event.setData(name);
         event.setAmount(finalAmount);
         game.fireEvent(event);
@@ -800,21 +844,34 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean addAttachment(UUID permanentId, Ability source, Game game) {
-        if (!this.attachments.contains(permanentId)) {
-            Permanent attachment = game.getPermanent(permanentId);
-            if (attachment == null) {
-                attachment = game.getPermanentEntering(permanentId);
-            }
-            if (attachment != null) {
-                if (!game.replaceEvent(new AttachEvent(objectId, attachment, source))) {
-                    this.attachments.add(permanentId);
-                    attachment.attachTo(objectId, source, game);
-                    game.fireEvent(new AttachedEvent(objectId, attachment, source));
-                    return true;
-                }
-            }
+        if (permanentId == null
+                || this.attachments.contains(permanentId)
+                || permanentId.equals(this.getId())) {
+            return false;
         }
-        return false;
+        Permanent attachment = game.getPermanent(permanentId);
+        if (attachment == null) {
+            attachment = game.getPermanentEntering(permanentId);
+        }
+        if (attachment == null) {
+            return false;
+        }
+        if (attachment.hasSubtype(SubType.EQUIPMENT, game)
+                && (attachment.isCreature(game)  // seems strange and perhaps someone knows why this is checked.
+                && !attachment.getAbilities(game).containsClass(ReconfigureAbility.class))) {
+            return false;
+        }
+        if (attachment.hasSubtype(SubType.FORTIFICATION, game)
+                && (attachment.isCreature(game) || !this.isLand(game))) {
+            return false;
+        }
+        if (game.replaceEvent(new AttachEvent(objectId, attachment, source))) {
+            return false;
+        }
+        this.attachments.add(permanentId);
+        attachment.attachTo(objectId, source, game);
+        game.fireEvent(new AttachedEvent(objectId, attachment, source));
+        return true;
     }
 
     @Override
@@ -865,5 +922,41 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // changeling (any subtype)
         return subType.getSubTypeSet() == SubTypeSet.CreatureType
                 && this.getAbilities().containsClass(ChangelingAbility.class);
+    }
+
+    /**
+     * This is used for disabling auto-payments for any any cards which care about the color
+     * of the mana used to cast it beyond color requirements. E.g. Sunburst, Adamant, Flamespout.
+     * <p>
+     * This is <b>not</b> about which colors are in the mana costs.
+     * <p>
+     * E.g. "Pentad Prism" {2} will return true since it has Sunburst, but "Abbey Griffin" {3}{W} will
+     * return false since the mana spent on the generic cost has no impact on the card.
+     *
+     * @return Whether the given spell cares about the mana color used to pay for it.
+     */
+    public boolean caresAboutManaColor(Game game) {
+        // SunburstAbility
+        if (abilities.containsClass(SunburstAbility.class)) {
+            return true;
+        }
+
+        // Look at each individual ability
+        //      ConditionalInterveningIfTriggeredAbility (e.g. Ogre Savant)
+        //      Spellability with ManaWasSpentCondition (e.g. Firespout)
+        //      Modular (only Arcbound Wanderer)
+        for (Ability ability : getAbilities(game)) {
+            if (((AbilityImpl) ability).caresAboutManaColor()) {
+                return true;
+            }
+        }
+
+        // Only way to get here is if none of the effects on the card care about mana color.
+        return false;
+    }
+
+    @Override
+    public boolean isExtraDeckCard() {
+        return extraDeckCard;
     }
 }

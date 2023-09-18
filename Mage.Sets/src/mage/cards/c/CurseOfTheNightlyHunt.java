@@ -30,7 +30,7 @@ public final class CurseOfTheNightlyHunt extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Creatures enchanted player controls attack each turn if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfTheNightlyHuntEffect()));
@@ -54,7 +54,7 @@ class CurseOfTheNightlyHuntEffect extends RequirementEffect {
         staticText = "Creatures enchanted player controls attack each turn if able";
     }
 
-    public CurseOfTheNightlyHuntEffect(final CurseOfTheNightlyHuntEffect effect) {
+    private CurseOfTheNightlyHuntEffect(final CurseOfTheNightlyHuntEffect effect) {
         super(effect);
     }
 

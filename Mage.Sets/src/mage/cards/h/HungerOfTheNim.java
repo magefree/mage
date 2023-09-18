@@ -2,7 +2,6 @@ package mage.cards.h;
 
 import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.CardImpl;
@@ -22,8 +21,7 @@ public final class HungerOfTheNim extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Target creature gets +1/+0 until end of turn for each artifact you control.
-        Effect effect = new BoostTargetEffect(ArtifactYouControlCount.instance, StaticValue.get(0), Duration.EndOfTurn, true);
-        getSpellAbility().addEffect(effect);
+        getSpellAbility().addEffect(new BoostTargetEffect(ArtifactYouControlCount.instance, StaticValue.get(0), Duration.EndOfTurn));
         getSpellAbility().addTarget(new TargetCreaturePermanent());
         getSpellAbility().addHint(ArtifactYouControlHint.instance);
     }

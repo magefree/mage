@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class GeistOfSaintTraft extends CardImpl {
 
     public GeistOfSaintTraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.CLERIC);
 
@@ -34,6 +33,7 @@ public final class GeistOfSaintTraft extends CardImpl {
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
+
         // Whenever Geist of Saint Traft attacks, create a 4/4 white Angel creature token with flying tapped and attacking. Exile that token at end of combat.
         this.addAbility(new AttacksTriggeredAbility(new GeistOfSaintTraftEffect(), false));
     }
@@ -52,10 +52,10 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
 
     GeistOfSaintTraftEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "create a 4/4 white Angel creature token with flying tapped and attacking. Exile that token at end of combat";
+        staticText = "create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat";
     }
 
-    GeistOfSaintTraftEffect(final GeistOfSaintTraftEffect effect) {
+    private GeistOfSaintTraftEffect(final GeistOfSaintTraftEffect effect) {
         super(effect);
     }
 

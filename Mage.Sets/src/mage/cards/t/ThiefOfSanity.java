@@ -8,6 +8,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -78,9 +79,9 @@ class ThiefOfSanityEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && damagedPlayer != null && sourceObject != null) {
             Cards topCards = new CardsImpl();
-            topCards.addAll(damagedPlayer.getLibrary().getTopCards(game, 3));
+            topCards.addAllCards(damagedPlayer.getLibrary().getTopCards(game, 3));
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile face down"));
-            if (controller.choose(outcome, topCards, target, game)) {
+            if (controller.choose(outcome, topCards, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     topCards.remove(card);
@@ -105,7 +106,7 @@ class ThiefOfSanityEffect extends OneShotEffect {
                         effect.setTargetPointer(new FixedTarget(card.getId(), game));
                         game.addEffect(effect, source);
                         // For as long as that card remains exiled, you may look at it
-                        effect = new ThiefOfSanityLookEffect(controller.getId());
+                        effect = new MayLookAtTargetCardEffect(controller.getId());
                         effect.setTargetPointer(new FixedTarget(card.getId(), game));
                         game.addEffect(effect, source);
                     }
@@ -210,41 +211,5 @@ class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         return mana.getFirstAvailable();
-    }
-}
-
-class ThiefOfSanityLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    public ThiefOfSanityLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-        staticText = "For as long as that card remains exiled, you may look at it";
-    }
-
-    private ThiefOfSanityLookEffect(final ThiefOfSanityLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ThiefOfSanityLookEffect copy() {
-        return new ThiefOfSanityLookEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        }
-        return affectedControllerId.equals(authorizedPlayerId)
-                && objectId.equals(cardId);
     }
 }

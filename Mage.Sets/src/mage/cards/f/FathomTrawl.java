@@ -41,7 +41,7 @@ public final class FathomTrawl extends CardImpl {
             this.staticText = "Reveal cards from the top of your library until you reveal three nonland cards. Put the nonland cards revealed this way into your hand, then put the rest of the revealed cards on the bottom of your library in any order";
         }
 
-        public FathomTrawlEffect(final FathomTrawlEffect effect) {
+        private FathomTrawlEffect(final FathomTrawlEffect effect) {
             super(effect);
         }
 
@@ -52,7 +52,7 @@ public final class FathomTrawl extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller == null || sourceObject == null) {
                 return false;

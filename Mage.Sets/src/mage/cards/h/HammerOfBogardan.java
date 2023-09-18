@@ -31,7 +31,7 @@ public final class HammerOfBogardan extends CardImpl {
 
         // {2}{R}{R}{R}: Return Hammer of Bogardan from your graveyard to your hand. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{R}{R}{R}"), new IsStepCondition(PhaseStep.UPKEEP), null));
+                new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{R}{R}{R}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     private HammerOfBogardan(final HammerOfBogardan card) {

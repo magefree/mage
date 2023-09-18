@@ -35,7 +35,7 @@ public final class FrayingSanity extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of each end step, enchanted player puts the top X cards of their library into their graveyard, where X is the total number of cards put into their graveyard from anywhere this turn.
@@ -59,7 +59,7 @@ class FrayingSanityTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new FrayingSanityEffect());
     }
 
-    public FrayingSanityTriggeredAbility(final FrayingSanityTriggeredAbility ability) {
+    private FrayingSanityTriggeredAbility(final FrayingSanityTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,7 +93,7 @@ class FrayingSanityEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public FrayingSanityEffect(final FrayingSanityEffect effect) {
+    private FrayingSanityEffect(final FrayingSanityEffect effect) {
         super(effect);
     }
 

@@ -25,7 +25,6 @@ public class ZabazTheGlimmerwaspTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, worker, 1, 1);
         assertPowerToughness(playerA, zabaz, 1, 1);
@@ -42,13 +41,12 @@ public class ZabazTheGlimmerwaspTest extends CardTestPlayerBase {
 
         setChoice(playerA, worker);
         addTarget(playerA, zabaz);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, worker, 1);
         assertPowerToughness(playerA, zabaz, 1 + 1 + 1, 1 + 1 + 1);

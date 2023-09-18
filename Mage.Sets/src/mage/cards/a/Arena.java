@@ -49,10 +49,11 @@ class ArenaEffect extends OneShotEffect {
 
     ArenaEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other.";
+        this.staticText = "Tap target creature you control and target creature of an opponent's choice they control. " +
+                "Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>";
     }
 
-    ArenaEffect(final ArenaEffect effect) {
+    private ArenaEffect(final ArenaEffect effect) {
         super(effect);
     }
 

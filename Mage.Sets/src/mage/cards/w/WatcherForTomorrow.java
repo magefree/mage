@@ -2,13 +2,12 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HideawayAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -19,7 +18,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -35,7 +33,8 @@ public final class WatcherForTomorrow extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Hideaway
-        this.addAbility(new HideawayAbility("creatures"));
+        this.addAbility(new HideawayAbility(4));
+        this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Watcher for Tomorrow leaves the battlefield, put the exiled card into its owner's hand.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new WatcherForTomorrowEffect(), false));
@@ -70,18 +69,10 @@ class WatcherForTomorrowEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        ExileZone zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -1));
+        if (player == null || zone == null || zone.isEmpty()) {
             return false;
         }
-        Permanent permanentLeftBattlefield = (Permanent) getValue("permanentLeftBattlefield");
-        if (permanentLeftBattlefield == null) {
-            return false;
-        }
-        ExileZone zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), permanentLeftBattlefield.getZoneChangeCounter(game)));
-        if (zone == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl(zone.getCards(game));
-        return player.moveCards(cards, Zone.HAND, source, game);
+        return player.moveCards(zone, Zone.HAND, source, game);
     }
 }

@@ -28,7 +28,7 @@ public final class HeliodGodOfTheSun extends CardImpl {
 
     public HeliodGodOfTheSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(5);
@@ -44,12 +44,12 @@ public final class HeliodGodOfTheSun extends CardImpl {
         // Other creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE, true
+                StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
 
         // {2}{W}{W}: Create a 2/1 white Cleric enchantment creature token.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new HeliodGodOfTheSunToken()), new ManaCostsImpl("{2}{W}{W}")
+                new CreateTokenEffect(new HeliodGodOfTheSunToken()), new ManaCostsImpl<>("{2}{W}{W}")
         ));
 
     }

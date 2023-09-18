@@ -30,12 +30,14 @@ public final class WildGrowth extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted land is tapped for mana, its controller adds {G}.
         this.addAbility(new EnchantedTappedTriggeredManaAbility(
-                new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.G), "their")
+                new AddManaToManaPoolTargetControllerEffect(
+                        new Mana(ColoredManaSymbol.G), "their"
+                ).setText("its controller adds an additional {G}")
         ));
     }
 

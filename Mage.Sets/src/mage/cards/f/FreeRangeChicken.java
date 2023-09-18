@@ -16,6 +16,7 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public final class FreeRangeChicken extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}: Roll two six-sided dice. If both results are the same, Free-Range Chicken gets +X/+X until end of turn, where X is that result. If the total of those results is equal to any other total you have rolled this turn for Free-Range Chicken, sacrifice it. (For example, if you roll two 3s, Free-Range Chicken gets +3/+3. If you roll a total of 6 for Free-Range Chicken later that turn, sacrifice it.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FreeRangeChickenEffect(), new ManaCostsImpl("{1}{G}")), new FreeRangeChickenWatcher());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FreeRangeChickenEffect(), new ManaCostsImpl<>("{1}{G}")), new FreeRangeChickenWatcher());
     }
 
     private FreeRangeChicken(final FreeRangeChicken card) {
@@ -51,7 +52,7 @@ class FreeRangeChickenEffect extends OneShotEffect {
         this.staticText = "Roll two six-sided dice. If both results are the same, Free-Range Chicken gets +X/+X until end of turn, where X is that result. If the total of those results is equal to any other total you have rolled this turn for Free-Range Chicken, sacrifice it";
     }
 
-    public FreeRangeChickenEffect(final FreeRangeChickenEffect effect) {
+    private FreeRangeChickenEffect(final FreeRangeChickenEffect effect) {
         super(effect);
     }
 
@@ -64,8 +65,9 @@ class FreeRangeChickenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int firstRoll = controller.rollDice(source, game, 6);
-            int secondRoll = controller.rollDice(source, game, 6);
+            List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
+            int firstRoll = results.get(0);
+            int secondRoll = results.get(1);
             if (firstRoll == secondRoll) {
                 game.addEffect(new BoostSourceEffect(firstRoll, firstRoll, Duration.EndOfTurn), source);
             }

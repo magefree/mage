@@ -43,7 +43,7 @@ public final class JeweledSpirit extends CardImpl {
 
         // Sacrifice two lands: Jeweled Spirit gains protection from artifacts or from the color of your choice until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JeweledSpiritEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
+                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), true))));
     }
 
     private JeweledSpirit(final JeweledSpirit card) {
@@ -63,7 +63,7 @@ class JeweledSpiritEffect extends OneShotEffect {
         this.staticText = "{this} gains protection from artifacts or from the color of your choice until end of turn";
     }
 
-    public JeweledSpiritEffect(final JeweledSpiritEffect effect) {
+    private JeweledSpiritEffect(final JeweledSpiritEffect effect) {
         super(effect);
     }
 

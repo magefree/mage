@@ -25,12 +25,11 @@ public final class CloisteredYouth extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.u.UnholyFiend.class;
 
         // At the beginning of your upkeep, you may transform Cloistered Youth.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, true));
     }
 
     private CloisteredYouth(final CloisteredYouth card) {

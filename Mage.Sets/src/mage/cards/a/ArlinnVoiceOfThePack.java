@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -26,15 +25,15 @@ public final class ArlinnVoiceOfThePack extends CardImpl {
     public ArlinnVoiceOfThePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
+        this.setStartingLoyalty(7);
 
         // Each creature you control that's a Wolf or Werewolf enters the battlefield with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(new ArlinnVoiceOfThePackReplacementEffect()));
 
         // -2: Create a 2/2 green Wolf creature token.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WolfToken("WAR")), -2));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WolfToken()), -2));
     }
 
     private ArlinnVoiceOfThePack(final ArlinnVoiceOfThePack card) {
@@ -51,7 +50,7 @@ class ArlinnVoiceOfThePackReplacementEffect extends ReplacementEffectImpl {
 
     ArlinnVoiceOfThePackReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each creature you control that's a Wolf or Werewolf " +
+        staticText = "Each creature you control that's a Wolf or a Werewolf " +
                 "enters the battlefield with an additional +1/+1 counter on it";
     }
 

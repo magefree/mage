@@ -26,7 +26,7 @@ public class LoseLifeControllerAttachedEffect extends OneShotEffect {
         setText();
     }
 
-    public LoseLifeControllerAttachedEffect(final LoseLifeControllerAttachedEffect effect) {
+    protected LoseLifeControllerAttachedEffect(final LoseLifeControllerAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }

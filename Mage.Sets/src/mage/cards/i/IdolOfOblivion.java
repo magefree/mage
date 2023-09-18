@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CreatedTokenThisTurnCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -12,17 +12,10 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.EldraziToken;
-import mage.watchers.Watcher;
+import mage.watchers.common.CreatedTokenWatcher;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -36,8 +29,8 @@ public final class IdolOfOblivion extends CardImpl {
         // {T}: Draw a card. Activate this ability only if you created a token this turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new TapSourceCost(), IdolOfOblivionCondition.instance
-        ));
+                new TapSourceCost(), CreatedTokenThisTurnCondition.instance
+        ).addHint(CreatedTokenThisTurnCondition.getHint()), new CreatedTokenWatcher());
 
         // {8}, {T}, Sacrifice Idol of Oblivion: Create 10/10 colorless Eldrazi creature token.
         Ability ability = new SimpleActivatedAbility(
@@ -45,7 +38,7 @@ public final class IdolOfOblivion extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability, new IdolOfOblivionWatcher());
+        this.addAbility(ability);
     }
 
     private IdolOfOblivion(final IdolOfOblivion card) {
@@ -55,49 +48,5 @@ public final class IdolOfOblivion extends CardImpl {
     @Override
     public IdolOfOblivion copy() {
         return new IdolOfOblivion(this);
-    }
-}
-
-enum IdolOfOblivionCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        IdolOfOblivionWatcher watcher = game.getState().getWatcher(IdolOfOblivionWatcher.class);
-        return watcher != null && watcher.tokenEntered(source.getControllerId());
-    }
-
-    @Override
-    public String toString() {
-        return "if you created a token this turn";
-    }
-}
-
-class IdolOfOblivionWatcher extends Watcher {
-
-    private final Set<UUID> playerIds = new HashSet<>();
-
-    IdolOfOblivionWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            return;
-        }
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent instanceof PermanentToken) {
-            playerIds.add(permanent.getControllerId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        playerIds.clear();
-    }
-
-    boolean tokenEntered(UUID playerId) {
-        return playerIds.contains(playerId);
     }
 }

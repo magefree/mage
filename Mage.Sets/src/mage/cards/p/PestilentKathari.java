@@ -32,7 +32,7 @@ public final class PestilentKathari extends CardImpl {
     this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(DeathtouchAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")));
     }
 
     private PestilentKathari(final PestilentKathari card) {

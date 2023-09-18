@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.constants.AbilityWord;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +34,7 @@ public final class LotlethGiant extends CardImpl {
                         StaticFilters.FILTER_CARD_CREATURE
                 ), "it"), false);
         ability.addTarget(new TargetOpponent());
-        ability.withFlavorWord("Undergrowth");
+        ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);
     }
 

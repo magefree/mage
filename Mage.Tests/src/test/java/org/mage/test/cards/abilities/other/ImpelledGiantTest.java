@@ -21,8 +21,6 @@ public class ImpelledGiantTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertTapped("Hurloon Minotaur", true);
         assertPowerToughness(playerA, "Impelled Giant", 5, 3);
     }

@@ -28,7 +28,7 @@ public final class TasigurTheGoldenFang extends CardImpl {
 
     public TasigurTheGoldenFang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
@@ -38,7 +38,7 @@ public final class TasigurTheGoldenFang extends CardImpl {
         this.addAbility(new DelveAbility());
 
         // {2}{G/U}{G/U}: Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(new MillCardsControllerEffect(2), new ManaCostsImpl("{2}{G/U}{G/U}"));
+        Ability ability = new SimpleActivatedAbility(new MillCardsControllerEffect(2), new ManaCostsImpl<>("{2}{G/U}{G/U}"));
         ability.addEffect(new TasigurTheGoldenFangEffect());
         this.addAbility(ability);
     }
@@ -88,7 +88,7 @@ class TasigurTheGoldenFangEffect extends OneShotEffect {
                     FilterNonlandCard filter = new FilterNonlandCard("nonland card from " + controller.getLogName() + " graveyard");
                     filter.add(new OwnerIdPredicate(controller.getId()));
                     Target target = new TargetCardInGraveyard(filter);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     opponent.chooseTarget(outcome, target, source, game);
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

@@ -61,7 +61,7 @@ class DemonstrateEffect extends OneShotEffect {
         }
         spell.createCopyOnStack(game, source, source.getControllerId(), true);
         TargetOpponent target = new TargetOpponent(true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         if (game.getPlayer(target.getFirstTarget()) != null) {
             spell.createCopyOnStack(game, source, target.getFirstTarget(), true);
         }

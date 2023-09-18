@@ -27,7 +27,7 @@ public final class ImposingVantasaur extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Cycling {1}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private ImposingVantasaur(final ImposingVantasaur card) {

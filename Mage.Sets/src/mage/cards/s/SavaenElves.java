@@ -15,8 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -43,7 +43,7 @@ public final class SavaenElves extends CardImpl {
         // {G}{G}, {tap}: Destroy target Aura attached to a land.
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target Aura attached to a land");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -59,9 +59,9 @@ public final class SavaenElves extends CardImpl {
     }
 }
 
-class SavaenElvesPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class SavaenElvesPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attachment = input.getObject();
         if (attachment != null) {
             Permanent permanent = game.getPermanent(attachment.getAttachedTo());

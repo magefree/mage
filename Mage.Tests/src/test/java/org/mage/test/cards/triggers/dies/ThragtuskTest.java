@@ -30,7 +30,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Thragtusk", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Thragtusk");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Public Execution", "Thragtusk");
@@ -46,7 +46,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
         assertLife(playerA, 23);
         assertLife(playerB, 20); // Thragtusk ETB ability does not trigger if set to battlefield on test game start
 
-        assertPermanentCount(playerA, "Beast", 1);
+        assertPermanentCount(playerA, "Beast Token", 1);
 
     }
 
@@ -70,7 +70,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Thragtusk", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Thragtusk");
 
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Tortoise Formation");
@@ -93,7 +93,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
         assertLife(playerA, 23);
         assertLife(playerB, 20); // Thragtusk ETB ability does not trigger if set to battlefield on test game start
 
-        assertPermanentCount(playerA, "Beast", 0);
+        assertPermanentCount(playerA, "Beast Token", 0);
 
     }
 

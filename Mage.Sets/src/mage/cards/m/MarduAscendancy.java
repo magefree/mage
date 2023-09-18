@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.GoblinToken;
 
@@ -29,7 +28,7 @@ public final class MarduAscendancy extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 
     static {
-        attackFilter.add(Predicates.not(TokenPredicate.instance));
+        attackFilter.add(TokenPredicate.FALSE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 

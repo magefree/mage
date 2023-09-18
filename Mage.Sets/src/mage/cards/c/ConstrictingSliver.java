@@ -5,32 +5,19 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author awjackson
  */
 public final class ConstrictingSliver extends CardImpl {
-
-    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filterTarget.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public ConstrictingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
@@ -41,15 +28,13 @@ public final class ConstrictingSliver extends CardImpl {
 
         // Sliver creatures you control have "When this creature enters the battlefield, you may exile target creature an opponent controls
         // until this creature leaves the battlefield."
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ConstrictingSliverExileEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filterTarget));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(), true);
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability,
-                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS)
                         .setText("Sliver creatures you control have \"When this creature enters the battlefield, "
                                 + "you may exile target creature an opponent controls until this creature leaves the battlefield.\"")));
-
     }
 
     private ConstrictingSliver(final ConstrictingSliver card) {
@@ -59,33 +44,5 @@ public final class ConstrictingSliver extends CardImpl {
     @Override
     public ConstrictingSliver copy() {
         return new ConstrictingSliver(this);
-    }
-}
-
-class ConstrictingSliverExileEffect extends OneShotEffect {
-
-    public ConstrictingSliverExileEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "you may exile target creature an opponent controls until this creature leaves the battlefield";
-    }
-
-    public ConstrictingSliverExileEffect(final ConstrictingSliverExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ConstrictingSliverExileEffect copy() {
-        return new ConstrictingSliverExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        // If the creature leaves the battlefield before its triggered ability resolves,
-        // the target creature won't be exiled.
-        if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName()).apply(game, source);
-        }
-        return false;
     }
 }

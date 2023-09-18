@@ -26,14 +26,14 @@ public final class BarrinMasterWizard extends CardImpl {
 
     public BarrinMasterWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         //{2}, Sacrifice a permanent: Return target creature to its owner's hand.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{2}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent())));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

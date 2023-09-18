@@ -45,7 +45,7 @@ class TrackDownEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a creature or land card, draw a card";
     }
 
-    public TrackDownEffect(final TrackDownEffect effect) {
+    private TrackDownEffect(final TrackDownEffect effect) {
         super(effect);
     }
 
@@ -57,7 +57,7 @@ class TrackDownEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
 
         if (sourceObject == null || controller == null) {
             return false;

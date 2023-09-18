@@ -17,7 +17,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 
 /**
- *
  * @author LevelX2
  */
 public class CantBeTargetedAttachedEffect extends ContinuousRuleModifyingEffectImpl {
@@ -33,7 +32,7 @@ public class CantBeTargetedAttachedEffect extends ContinuousRuleModifyingEffectI
         this.targetController = targetController;
     }
 
-    public CantBeTargetedAttachedEffect(final CantBeTargetedAttachedEffect effect) {
+    protected CantBeTargetedAttachedEffect(final CantBeTargetedAttachedEffect effect) {
         super(effect);
         this.filterSource = effect.filterSource.copy();
         this.attachmentType = effect.attachmentType;

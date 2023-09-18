@@ -42,7 +42,7 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), false);
     }
 
-    public CowardiceTriggeredAbility(CowardiceTriggeredAbility ability) {
+    private CowardiceTriggeredAbility(final CowardiceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -55,7 +55,7 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isCreature(game)) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         return false;
@@ -63,7 +63,7 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand";
+        return "Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand.";
     }
 
     @Override

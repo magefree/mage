@@ -38,7 +38,7 @@ public final class KothophedSoulHoarder extends CardImpl {
 
     public KothophedSoulHoarder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -48,11 +48,11 @@ public final class KothophedSoulHoarder extends CardImpl {
 
         // Whenever a permanent owned by another player is put into the graveyard from the battlefield, you draw one card and lose 1 life.
         Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("you draw one card");
+        effect.setText("you draw a card");
         Ability ability = new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, filter,
-                "Whenever a permanent owned by another player is put into the graveyard from the battlefield, ", false);
+                "Whenever a permanent owned by another player is put into a graveyard from the battlefield, ", false);
         effect = new LoseLifeSourceControllerEffect(1);
-        effect.setText("and lose 1 life");
+        effect.setText("and you lose 1 life");
         ability.addEffect(effect);
         this.addAbility(ability);
     }
@@ -71,9 +71,10 @@ class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
 
     public KothophedSoulHoarderTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever a creature leaves an opponent's graveyard, ");
     }
 
-    public KothophedSoulHoarderTriggeredAbility(final KothophedSoulHoarderTriggeredAbility ability) {
+    private KothophedSoulHoarderTriggeredAbility(final KothophedSoulHoarderTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,10 +97,5 @@ class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
             return card != null && controller != null && controller.hasOpponent(card.getOwnerId(), game);
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature leaves an opponent's graveyard, " ;
     }
 }

@@ -7,7 +7,6 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -39,10 +38,10 @@ public final class SarkhanUnbroken extends CardImpl {
 
     public SarkhanUnbroken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Draw a card, then add one mana of any color.
         this.addAbility(new LoyaltyAbility(new SarkhanUnbrokenAbility1(), 1));
@@ -69,7 +68,7 @@ class SarkhanUnbrokenAbility1 extends OneShotEffect {
         this.staticText = "Draw a card, then add one mana of any color.";
     }
 
-    public SarkhanUnbrokenAbility1(final SarkhanUnbrokenAbility1 effect) {
+    private SarkhanUnbrokenAbility1(final SarkhanUnbrokenAbility1 effect) {
         super(effect);
     }
 

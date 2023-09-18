@@ -10,8 +10,8 @@ import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TargetController targetController;
-    private boolean setTargetPointer;
+    private final TargetController targetController;
+    private final boolean setTargetPointer;
 
     public BeginningOfCombatTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional, false);
@@ -21,9 +21,10 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfCombatTriggeredAbility(final BeginningOfCombatTriggeredAbility ability) {
+    protected BeginningOfCombatTriggeredAbility(final BeginningOfCombatTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;
@@ -62,6 +63,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
                     return true;
                 }
                 break;
+            case EACH_PLAYER:
             case ANY:
                 if (setTargetPointer) {
                     this.getEffects().forEach(effect -> {
@@ -73,13 +75,14 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of combat on your turn, " + generateZoneString();
             case OPPONENT:
-                return "At the beginning of each opponent's combat step, " + generateZoneString();
+                return "At the beginning of combat on each opponent's turn, " + generateZoneString();
+            case EACH_PLAYER:
+                return "At the beginning of combat on each player's turn, " + generateZoneString();
             case ANY:
                 return "At the beginning of each combat, " + generateZoneString();
         }
@@ -87,9 +90,8 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private String generateZoneString() {
-        switch (getZone()) {
-            case GRAVEYARD:
-                return "if {this} is in your graveyard, ";
+        if (getZone() == Zone.GRAVEYARD) {
+            return "if {this} is in your graveyard, ";
         }
         return "";
     }

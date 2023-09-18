@@ -30,7 +30,7 @@ public final class SacellumArchers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {R}{W}, {tap}: Sacellum Archers deals 2 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{R}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);

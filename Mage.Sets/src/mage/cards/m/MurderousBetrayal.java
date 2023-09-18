@@ -1,8 +1,6 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -14,11 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -29,20 +24,14 @@ import mage.util.CardUtil;
  */
 public final class MurderousBetrayal extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
-
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
-
     public MurderousBetrayal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // {B}{B}, Pay half your life, rounded up: Destroy target nonblack creature. It can't be regenerated.
         Effect effect = new DestroyTargetEffect(true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new MurderousBetrayalCost());
-        ability.addCost(new ManaCostsImpl("{B}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addCost(new ManaCostsImpl<>("{B}{B}"));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability);
     }
 
@@ -62,7 +51,7 @@ class MurderousBetrayalCost extends CostImpl {
         this.text = "Pay half your life, rounded up";
     }
 
-    MurderousBetrayalCost(MurderousBetrayalCost cost) {
+    private MurderousBetrayalCost(final MurderousBetrayalCost cost) {
         super(cost);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.game.draft;
 
 import java.util.*;
@@ -9,12 +8,20 @@ import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.players.Player;
 import mage.players.PlayerList;
+import org.apache.log4j.Logger;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class DraftImpl implements Draft {
+
+    protected static final Logger logger = Logger.getLogger(DraftImpl.class);
 
     protected final UUID id;
     protected final Map<UUID, DraftPlayer> players = new LinkedHashMap<>();
@@ -23,16 +30,20 @@ public abstract class DraftImpl implements Draft {
     protected DraftCube draftCube;
     protected List<ExpansionSet> sets;
     protected List<String> setCodes;
-    protected int boosterNum = 0;
-    protected int cardNum = 0;
+    protected int boosterNum = 1; // starts with booster 1
+    protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected TimingOption timing;
-    protected int[] times = {75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5};
+    protected int boosterLoadingCounter; // number of times the boosters have been sent to players until all are confirmed to have received them
+    protected final int BOOSTER_LOADING_INTERVAL = 2; // interval in seconds
 
     protected boolean abort = false;
     protected boolean started = false;
 
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
+    
+    protected ScheduledFuture<?> boosterLoadingHandle;
+    protected final ScheduledExecutorService boosterLoadingExecutor = Executors.newSingleThreadScheduledExecutor();
 
     public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
         id = UUID.randomUUID();
@@ -147,15 +158,19 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void autoPick(UUID playerId) {
-        List<Card> booster = players.get(playerId).getBooster();
-        this.addPick(playerId, booster.get(booster.size()-1).getId(), null);
+        if (players.containsKey(playerId)) {
+            List<Card> booster = players.get(playerId).getBooster();
+            if (booster.size() > 0) {
+                this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+            }
+        }
     }
 
-    protected void passLeft() {
+    protected void passBoosterToLeft() {
         synchronized (players) {
             UUID startId = table.get(0);
             UUID currentId = startId;
-            UUID nextId = table.getNext();
+            UUID nextId = table.getNext(); // getNext return left player by default
             DraftPlayer current = players.get(currentId);
             DraftPlayer next = players.get(nextId);
             List<Card> currentBooster = current.booster;
@@ -172,11 +187,11 @@ public abstract class DraftImpl implements Draft {
         }
     }
 
-    protected void passRight() {
+    protected void passBoosterToRight() {
         synchronized (players) {
             UUID startId = table.get(0);
             UUID currentId = startId;
-            UUID prevId = table.getPrevious();
+            UUID prevId = table.getPrevious(); // getPrevious return right player by default
             DraftPlayer current = players.get(currentId);
             DraftPlayer prev = players.get(prevId);
             List<Card> currentBooster = current.booster;
@@ -194,40 +209,71 @@ public abstract class DraftImpl implements Draft {
     }
 
     protected void openBooster() {
-        if (boosterNum < numberBoosters) {
+        if (boosterNum <= numberBoosters) {
             for (DraftPlayer player : players.values()) {
                 if (draftCube != null) {
                     player.setBooster(draftCube.createBooster());
                 } else {
-                    player.setBooster(sets.get(boosterNum).createBooster());
+                    player.setBooster(sets.get(boosterNum - 1).createBooster());
                 }
             }
         }
-        boosterNum++;
-        cardNum = 1;
-        fireUpdatePlayersEvent();
     }
 
     protected boolean pickCards() {
-        cardNum++;
         for (DraftPlayer player : players.values()) {
             if (player.getBooster().isEmpty()) {
                 return false;
             }
             player.setPicking();
-            player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
+            player.setBoosterNotLoaded();
         }
+        setupBoosterLoadingHandle();
         synchronized (this) {
             while (!donePicking()) {
                 try {
-                    this.wait();
+                    this.wait(10000); // checked every 10s to make sure the draft moves on
                 } catch (InterruptedException ex) {
                 }
             }
         }
+        cardNum++;
         return true;
     }
-
+    
+    protected void setupBoosterLoadingHandle() {
+        cancelBoosterLoadingHandle();
+        boosterLoadingCounter = 0;
+        boosterLoadingHandle = boosterLoadingExecutor.scheduleAtFixedRate(() -> {
+            try {
+                if (loadBoosters() == true) {
+                    cancelBoosterLoadingHandle();
+                } else {
+                    boosterLoadingCounter++;
+                }
+            } catch (Exception ex) {
+                logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
+            }
+        }, 0, BOOSTER_LOADING_INTERVAL, TimeUnit.SECONDS);
+    }
+    
+    protected void cancelBoosterLoadingHandle() {
+        if (boosterLoadingHandle != null) {
+            boosterLoadingHandle.cancel(true);
+        }
+    }
+    
+    protected boolean loadBoosters () {
+        boolean allBoostersLoaded = true;
+        for (DraftPlayer player : players.values()) {
+            if (player.isPicking() && !player.isBoosterLoaded()) {
+                allBoostersLoaded = false;
+                player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
+            }
+        }
+        return allBoostersLoaded;
+    }
+    
     protected boolean donePicking() {
         if (isAbort()) {
             return true;
@@ -267,10 +313,13 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
-        if (cardNum > 15) {
-            cardNum = 15;
+        int cardNum = Math.min(15, this.cardNum);
+        int time = timing.getPickTimeout(cardNum);
+        // if the pack is re-sent to a player because they haven't been able to successfully load it, the pick time is reduced appropriately because of the elapsed time
+        // the time is always at least 1 second unless it's set to 0, i.e. unlimited time
+        if (time > 0) {
+            time = Math.max(1, time - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL);
         }
-        int time = times[cardNum - 1] * timing.getFactor();
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
 
@@ -291,6 +340,12 @@ public abstract class DraftImpl implements Draft {
         }
         return !player.isPicking();
     }
+    
+    @Override
+    public void setBoosterLoaded(UUID playerId) {
+        DraftPlayer player = players.get(playerId);
+        player.setBoosterLoaded();
+    }
 
     @Override
     public boolean isAbort() {
@@ -310,18 +365,6 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void setStarted() {
         started = true;
-    }
-
-    @Override
-    public void resetBufferedCards() {
-        Set<ExpansionSet> setsDone = new HashSet<>();
-        for (ExpansionSet set : sets) {
-            if (!setsDone.contains(set)) {
-                set.removeSavedCards();
-                setsDone.add(set);
-            }
-        }
-
     }
 
 }

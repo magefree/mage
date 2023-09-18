@@ -7,7 +7,6 @@ import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 /**
@@ -22,7 +21,7 @@ public final class NightmareVoid extends CardImpl {
 
         // Target player reveals their hand. You choose a card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
         // Dredge 2
         this.addAbility(new DredgeAbility(2));
     }

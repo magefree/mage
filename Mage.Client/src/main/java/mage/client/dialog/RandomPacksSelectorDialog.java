@@ -18,31 +18,31 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
      * Creates new form RandomPacksSelectorDialog
      */
     private boolean boxesCreated;
-    private boolean isRandomDraft;
-    private boolean isRichManDraft;
-    private String title = "";
     public static final String randomDraftDescription = ("The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.");
 
-    public RandomPacksSelectorDialog(boolean isRandomDraft, boolean isRichManDraft) {
+    public RandomPacksSelectorDialog() {
         initComponents();
-        setType(isRandomDraft, isRichManDraft);
         this.pnlApply.setToolTipText(randomDraftDescription);
         this.pnlSelect.setToolTipText(randomDraftDescription);
         boxesCreated = false;
     }
 
-    public void setType(boolean isRandomDraft, boolean isRichManDraft) {
-        this.isRandomDraft = isRandomDraft;
-        this.isRichManDraft = isRichManDraft;
-        if (this.isRandomDraft) {
+    private void setType(boolean isRandomDraft, boolean isRichManDraft, boolean isRemixedDraft) {
+        String title;
+        if (isRandomDraft) {
             title = "Random Booster Draft Packs Selector";
-        } else if (this.isRichManDraft) {
+        } else if (isRichManDraft) {
             title = "Rich Man Booster Draft Packs Selector";
+        } else if (isRemixedDraft) {
+            title = "Chaos Remixed Draft Set Selector";
+        } else {
+            title = "Booster Draft Packs Selector";
         }
         setTitle(title);
     }
 
-    public void showDialog() {
+    public void showDialog(boolean isRandomDraft, boolean isRichManDraft, boolean isRemixedDraft) {
+        setType(isRandomDraft, isRichManDraft, isRemixedDraft);
         createCheckboxes();
         pnlPacks.setVisible(true);
         pnlPacks.revalidate();
@@ -116,15 +116,15 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         setTitle("Random Booster Draft Packs Selector");
         setModal(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-        setPreferredSize(new java.awt.Dimension(600, 450));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(875, 475));
+        setResizable(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        pnlPacks.setLayout(new java.awt.GridLayout(12, 13));
+        pnlPacks.setLayout(new java.awt.GridLayout(14, 14));
 
         pnlSelect.setLayout(new javax.swing.BoxLayout(pnlSelect, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -204,10 +204,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosing
 
     public void doApply() {
-        if (getSelectedPacks().size() < 2 && isRandomDraft) {
-            JOptionPane.showMessageDialog(this, "At least 2 sets must be selected", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (getSelectedPacks().isEmpty() && isRichManDraft) {
-            JOptionPane.showMessageDialog(this, "At least 1 set must be selected", "Error", JOptionPane.ERROR_MESSAGE);
+        if (getSelectedPacks().size() < 1) {
+            JOptionPane.showMessageDialog(this, "At least one set must be selected", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             this.setVisible(false);
         }

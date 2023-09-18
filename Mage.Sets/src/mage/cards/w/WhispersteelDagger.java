@@ -15,11 +15,14 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.ManaPoolItem;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -43,7 +46,7 @@ public final class WhispersteelDagger extends CardImpl {
         this.addAbility(ability, new WhispersteelDaggerWatcher());
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private WhispersteelDagger(final WhispersteelDagger card) {
@@ -189,6 +192,6 @@ class WhispersteelDaggerWatcher extends Watcher {
         );
         morMap.computeIfAbsent(mor, m -> new HashMap<>())
                 .computeIfAbsent(ownerId, m -> new HashMap<>())
-                .compute(source.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+                .compute(source.getControllerId(), CardUtil::setOrIncrementValue);
     }
 }

@@ -19,7 +19,7 @@ public class DivineVerdictTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
 
         attack(2, playerB, "Sejiri Merfolk");
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Divine Verdict", "Sejiri Merfolk");
+        checkPlayableAbility("Can't cast after combat", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Divine", false);
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -28,6 +28,4 @@ public class DivineVerdictTest extends CardTestPlayerBase {
         assertLife(playerA, 18);
         assertLife(playerB, 22);
     }
-
-
 }

@@ -1,11 +1,10 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.TargetOfOpponentsSpellOrAbilityTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -13,9 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
 
     public LeovoldEmissaryOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(3);
@@ -35,7 +35,7 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeovoldEmissaryOfTrestEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
-        this.addAbility(new LeovoldEmissaryOfTrestTriggeredAbility());
+        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new DrawCardSourceControllerEffect(1), true, false));
     }
 
     private LeovoldEmissaryOfTrest(final LeovoldEmissaryOfTrest card) {
@@ -55,7 +55,7 @@ class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Each opponent can't draw more than one card each turn";
     }
 
-    public LeovoldEmissaryOfTrestEffect(final LeovoldEmissaryOfTrestEffect effect) {
+    private LeovoldEmissaryOfTrestEffect(final LeovoldEmissaryOfTrestEffect effect) {
         super(effect);
     }
 
@@ -80,49 +80,5 @@ class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         return watcher != null && controller != null && watcher.getAmountCardsDrawn(event.getPlayerId()) >= 1
                 && game.isOpponent(controller, event.getPlayerId());
-    }
-
-}
-
-class LeovoldEmissaryOfTrestTriggeredAbility extends TriggeredAbilityImpl {
-
-    LeovoldEmissaryOfTrestTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
-    }
-
-    LeovoldEmissaryOfTrestTriggeredAbility(final LeovoldEmissaryOfTrestTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LeovoldEmissaryOfTrestTriggeredAbility copy() {
-        return new LeovoldEmissaryOfTrestTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Player controller = game.getPlayer(this.getControllerId());
-        Player targetter = game.getPlayer(event.getPlayerId());
-        if (controller != null && targetter != null
-                && game.isOpponent(controller, targetter.getId())) {
-            if (event.getTargetId().equals(controller.getId())) {
-                return true; // Player was targeted
-            }
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent != null && this.isControlledBy(permanent.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, " ;
     }
 }

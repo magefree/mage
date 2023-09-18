@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -11,10 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -25,13 +23,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class CourtStreetDenizen extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another white creature");
-    private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another white creature");
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
     }
     public CourtStreetDenizen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -42,8 +37,8 @@ public final class CourtStreetDenizen extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another white creature enters the battlefield under your control, tap target creature an opponent controls.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(),filter,false,null, true);
-        ability.addTarget(new TargetCreaturePermanent(filterOpponentCreature));
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter, false, null, true);
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

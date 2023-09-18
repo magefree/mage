@@ -1,19 +1,18 @@
 package mage.cards.p;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author cbt33, Loki (Heartbeat of Spring)
@@ -39,37 +38,36 @@ public final class PriceOfGlory extends CardImpl {
 
 class PriceOfGloryAbility extends TriggeredAbilityImpl {
 
-    private static final String staticText = "Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.";
+    private static final String staticText = "Whenever a player taps a land for mana, " +
+            "if it's not that player's turn, destroy that land.";
 
-    public PriceOfGloryAbility() {
-        super(Zone.BATTLEFIELD, new PriceOfGloryEffect());
+    PriceOfGloryAbility() {
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }
 
-    public PriceOfGloryAbility(PriceOfGloryAbility ability) {
+    private PriceOfGloryAbility(final PriceOfGloryAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        if (game.inCheckPlayableState()) {
-            return false;
-        }
         return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent == null) {
+        // it's non mana triggered ability, so ignore it on checking, see TAPPED_FOR_MANA
+        if (game.inCheckPlayableState()) {
             return false;
         }
-        if (permanent.isLand(game)
-                && game.getState().getPlayersInRange(controllerId, game).contains(permanent.getControllerId())
-                && !permanent.isControlledBy(game.getActivePlayerId())) { // intervening if clause
-            getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
-            return true;
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        if (permanent == null
+                || !permanent.isLand(game)
+                || game.isActivePlayer(event.getPlayerId())) {
+            return false;
         }
-        return false;
+        getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        return true;
     }
 
     @Override
@@ -80,35 +78,5 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return staticText;
-    }
-}
-
-class PriceOfGloryEffect extends OneShotEffect {
-
-    public PriceOfGloryEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "if it's not that player's turn, destroy that land.";
-    }
-
-    public PriceOfGloryEffect(final PriceOfGloryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent land = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (land != null && !land.isControlledBy(game.getActivePlayerId())) { // intervening if clause has to be checked again
-                land.destroy(source, game, false);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public PriceOfGloryEffect copy() {
-        return new PriceOfGloryEffect(this);
     }
 }

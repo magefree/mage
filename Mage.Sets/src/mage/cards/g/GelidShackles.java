@@ -25,14 +25,14 @@ public final class GelidShackles extends CardImpl {
 
     public GelidShackles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't block, and its activated abilities can't be activated.
@@ -40,7 +40,7 @@ public final class GelidShackles extends CardImpl {
         
         // {snow}: Enchanted creature gains defender until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(),
-            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{S}")));        
+            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));        
     }
 
     private GelidShackles(final GelidShackles card) {

@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author LevelX2
  */
-public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
 
     public enum FaceDownType {
         MANIFESTED,
@@ -66,7 +66,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         this.faceDownType = faceDownType;
     }
 
-    public BecomesFaceDownCreatureEffect(final BecomesFaceDownCreatureEffect effect) {
+    protected BecomesFaceDownCreatureEffect(final BecomesFaceDownCreatureEffect effect) {
         super(effect);
         this.zoneChangeCounter = effect.zoneChangeCounter;
         if (effect.turnFaceUpAbility != null) {
@@ -133,7 +133,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.setName("");
-                    permanent.getSuperType().clear();
+                    permanent.removeAllSuperTypes(game);
                     permanent.removeAllCardTypes(game);
                     permanent.addCardType(game, CardType.CREATURE);
                     permanent.removeAllSubTypes(game);
@@ -176,8 +176,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(2);
-                        permanent.getToughness().setValue(2);
+                        permanent.getPower().setModifiedBaseValue(2);
+                        permanent.getToughness().setModifiedBaseValue(2);
                     }
             }
         } else if (duration == Duration.Custom && foundPermanent == true) {

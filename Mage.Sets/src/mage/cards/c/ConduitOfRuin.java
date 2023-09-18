@@ -19,8 +19,8 @@ import mage.constants.ComparisonType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Controllable;
@@ -52,7 +52,7 @@ public final class ConduitOfRuin extends CardImpl {
 
         // When you cast Conduit of Ruin, you may search your library for a colorless creature card with converted mana cost 7 or greater, then shuffle your library and put that card on top of it.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        this.addAbility(new CastSourceTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), true));
+        this.addAbility(new CastSourceTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true), true));
 
         // The first creature spell you cast each turn costs {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filterCost, 2);
@@ -100,10 +100,10 @@ class ConduitOfRuinWatcher extends Watcher {
     }
 }
 
-class FirstCastCreatureSpellPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<Controllable> {
 
     @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
         if (input.getObject() instanceof Card
                 && ((Card) input.getObject()).isCreature(game)) {
             ConduitOfRuinWatcher watcher = game.getState().getWatcher(ConduitOfRuinWatcher.class);

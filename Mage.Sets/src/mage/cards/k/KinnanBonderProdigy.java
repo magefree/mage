@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
@@ -34,7 +33,7 @@ public final class KinnanBonderProdigy extends CardImpl {
     public KinnanBonderProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
@@ -47,14 +46,12 @@ public final class KinnanBonderProdigy extends CardImpl {
                 effect, filter, SetTargetPointer.PERMANENT
         ));
 
-        // {5}{G}{U}: Look at the top five cards of your library. You may put a non-Human creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(5), false, StaticValue.get(1), filter2, Zone.LIBRARY, false,
-                true, false, Zone.BATTLEFIELD, true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top five cards of your library. " +
-                "You may put a non-Human creature card from among them onto the battlefield. " +
-                "Put the rest on the bottom of your library in a random order."
-        ), new ManaCostsImpl("{5}{G}{U}")));
+        // {5}{G}{U}: Look at the top five cards of your library.
+        // You may put a non-Human creature card from among them onto the battlefield.
+        // Put the rest on the bottom of your library in a random order.
+        this.addAbility(new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(5, 1, filter2, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM),
+                new ManaCostsImpl<>("{5}{G}{U}")));
     }
 
     private KinnanBonderProdigy(final KinnanBonderProdigy card) {

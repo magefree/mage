@@ -32,7 +32,7 @@ public final class DireFleetRavager extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
@@ -58,7 +58,7 @@ class DireFleetRavagerEffect extends OneShotEffect {
         this.staticText = "each player loses a third of their life, rounded up";
     }
 
-    DireFleetRavagerEffect(final DireFleetRavagerEffect effect) {
+    private DireFleetRavagerEffect(final DireFleetRavagerEffect effect) {
         super(effect);
     }
 

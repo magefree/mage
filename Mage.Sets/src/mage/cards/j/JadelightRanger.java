@@ -21,12 +21,13 @@ public final class JadelightRanger extends CardImpl {
 
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // When Jadelight Ranger enters the battlefield, it explores, then it explores again.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect(false, "it"), false);
-        ability.addEffect(new ExploreSourceEffect().setText(", then it explores again. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard. Then repeat this process.) "));
+        ability.addEffect(new ExploreSourceEffect().setText(", then it explores again. <i>(Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard. Then repeat this process.)</i>"));
         this.addAbility(ability);
     }
 

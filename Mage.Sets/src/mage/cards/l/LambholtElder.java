@@ -23,7 +23,6 @@ public final class LambholtElder extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SilverpeltWerewolf.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Elder.

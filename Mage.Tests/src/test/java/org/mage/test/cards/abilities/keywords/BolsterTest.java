@@ -33,7 +33,6 @@ public class BolsterTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount("Elite Scaleguard", CounterType.P1P1, 2);
         assertPowerToughness(playerA, "Elite Scaleguard", 4, 5);
@@ -53,7 +52,6 @@ public class BolsterTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Elite Scaleguard", 2, 3);
         assertCounterCount("Silvercoat Lion", CounterType.P1P1, 2);
@@ -79,7 +77,6 @@ public class BolsterTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Elite Scaleguard", 2, 3);
         assertCounterCount("Silvercoat Lion", CounterType.P1P1, 2);
@@ -115,7 +112,6 @@ public class BolsterTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Elite Scaleguard", 2, 3);
         assertCounterCount("Silvercoat Lion", CounterType.P1P1, 2);

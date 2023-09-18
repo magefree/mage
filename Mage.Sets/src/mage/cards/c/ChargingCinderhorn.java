@@ -77,7 +77,7 @@ class ChargingCinderhornDamageTargetEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public ChargingCinderhornDamageTargetEffect(ChargingCinderhornDamageTargetEffect copy) {
+    private ChargingCinderhornDamageTargetEffect(final ChargingCinderhornDamageTargetEffect copy) {
         super(copy);
     }
 

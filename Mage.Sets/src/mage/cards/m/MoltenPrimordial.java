@@ -83,7 +83,7 @@ class MoltenPrimordialEffect extends OneShotEffect {
         this.staticText = "for each opponent, take control of up to one target creature that player controls until end of turn. Untap those creatures. They have haste until end of turn";
     }
 
-    public MoltenPrimordialEffect(final MoltenPrimordialEffect effect) {
+    private MoltenPrimordialEffect(final MoltenPrimordialEffect effect) {
         super(effect);
     }
 
@@ -100,11 +100,11 @@ class MoltenPrimordialEffect extends OneShotEffect {
                 Permanent targetCreature = game.getPermanent(target.getFirstTarget());
                 if (targetCreature != null) {
                     ContinuousEffect effect1 = new GainControlTargetEffect(Duration.EndOfTurn);
-                    effect1.setTargetPointer(new FixedTarget(targetCreature.getId()));
+                    effect1.setTargetPointer(new FixedTarget(targetCreature.getId(), game));
                     game.addEffect(effect1, source);
 
                     ContinuousEffect effect2 = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    effect2.setTargetPointer(new FixedTarget(targetCreature.getId()));
+                    effect2.setTargetPointer(new FixedTarget(targetCreature.getId(), game));
                     game.addEffect(effect2, source);
 
                     targetCreature.untap(game);

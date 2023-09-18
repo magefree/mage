@@ -11,7 +11,7 @@ import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TargetController targetController;
+    private final TargetController targetController;
 
     /**
      * The Ability sets if no target is defined the target pointer to the active
@@ -28,9 +28,10 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
     public BeginningOfDrawTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfDrawTriggeredAbility(final BeginningOfDrawTriggeredAbility ability) {
+    protected BeginningOfDrawTriggeredAbility(final BeginningOfDrawTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
     }
@@ -50,10 +51,8 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
         switch (targetController) {
             case YOU:
                 boolean yours = event.getPlayerId().equals(this.controllerId);
-                if (yours) {
-                    if (getTargets().isEmpty()) {
-                        this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
+                if (yours && getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return yours;
             case OPPONENT:
@@ -84,6 +83,15 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                     }
                 }
                 break;
+            case ENCHANTED:
+                Permanent permanent = getSourcePermanentIfItStillExists(game);
+                if (permanent == null || !game.isActivePlayer(permanent.getAttachedTo())) {
+                    break;
+                }
+                if (getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
             case ANY:
             case ACTIVE:
                 if (getTargets().isEmpty()) {
@@ -94,8 +102,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case ACTIVE:
             case YOU:
@@ -108,6 +115,8 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 return "At the beginning of each player's draw step, " + generateZoneString();
             case CONTROLLER_ATTACHED_TO:
                 return "At the beginning of the draw step of enchanted creature's controller, " + generateZoneString();
+            case ENCHANTED:
+                return "At the beginning of enchanted player's draw step, " + generateZoneString();
         }
         return "";
     }

@@ -43,7 +43,7 @@ public final class RuthlessRipper extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         
         // Morph - Reveal a black card in your hand.
-        this.addAbility(new MorphAbility(this, new RevealTargetFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new MorphAbility(new RevealTargetFromHandCost(new TargetCardInHand(filter))));
 
         // When Ruthless Ripper is turned face up, target player loses 2 life.
         Effect effect = new LoseLifeTargetEffect(2);

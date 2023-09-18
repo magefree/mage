@@ -37,7 +37,7 @@ public class InvestigateTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Briarbridge Patrol", 1);
         assertHandCount(playerA, 2); // 1 from sacrificed Clue and 1 from draw of turn 3
-        assertPermanentCount(playerA, "Clue", 1);
+        assertPermanentCount(playerA, "Clue Token", 1);
 
     }
 }

@@ -1,5 +1,6 @@
 package mage.abilities.costs.common;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -29,6 +30,7 @@ public class ExileSourceFromHandCost extends CostImpl {
         Card card = game.getCard(source.getSourceId());
         if (player != null && player.getHand().contains(source.getSourceId()) && card != null) {
             paid = player.moveCards(card, Zone.EXILED, source, game);
+            source.getEffects().setValue("exiledHandCardRef", new MageObjectReference(card, game));
         }
         return paid;
     }

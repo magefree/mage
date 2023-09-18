@@ -14,6 +14,7 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
@@ -30,7 +31,7 @@ public final class GarthOneEye extends CardImpl {
     public GarthOneEye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
@@ -95,7 +96,7 @@ class GarthOneEyeEffect extends OneShotEffect {
             return false;
         }
         Set<String> alreadyChosen = getAlreadyChosen(game, source);
-        Set<String> choices = new HashSet<>(names);
+        Set<String> choices = new LinkedHashSet<>(names);
         choices.removeAll(alreadyChosen);
         String chosen;
         switch (choices.size()) {
@@ -105,7 +106,7 @@ class GarthOneEyeEffect extends OneShotEffect {
                 chosen = choices.stream().findAny().orElse(null);
                 break;
             default:
-                Choice choice = new ChoiceImpl(true);
+                Choice choice = new ChoiceImpl(true, ChoiceHintType.CARD);
                 choice.setChoices(choices);
                 player.choose(outcome, choice, game);
                 chosen = choice.getChoice();

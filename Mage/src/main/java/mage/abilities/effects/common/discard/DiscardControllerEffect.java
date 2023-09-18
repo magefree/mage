@@ -36,7 +36,7 @@ public class DiscardControllerEffect extends OneShotEffect {
         setText();
     }
 
-    public DiscardControllerEffect(final DiscardControllerEffect effect) {
+    protected DiscardControllerEffect(final DiscardControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.randomDiscard = effect.randomDiscard;
@@ -55,27 +55,17 @@ public class DiscardControllerEffect extends OneShotEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder("discard ");
-        if (amount.toString().equals("1")) {
-            sb.append('a');
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString()));
-        }
-        sb.append(" card");
-        try {
-            if (Integer.parseInt(amount.toString()) > 1) {
-                sb.append('s');
-            }
-        } catch (Exception e) {
-            sb.append('s');
-        }
+        String value = amount.toString();
+        sb.append(CardUtil.numberToText(value, "a"));
+        sb.append(value.equals("1") ? " card" : " cards");
         if (randomDiscard) {
             sb.append(" at random");
         }
         String message = amount.getMessage();
         if (!message.isEmpty()) {
-            sb.append(" for each ");
+            sb.append(value.equals("X") ? ", where X is " : " for each ");
+            sb.append(message);
         }
-        sb.append(message);
         staticText = sb.toString();
     }
 }

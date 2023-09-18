@@ -54,13 +54,13 @@ class CorruptEffect extends OneShotEffect {
         staticText = "{this} deals damage to any target equal to the number of Swamps you control. You gain life equal to the damage dealt this way";
     }
 
-    public CorruptEffect(final CorruptEffect effect) {
+    private CorruptEffect(final CorruptEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int amount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (amount > 0) {
             int damageDealt = amount;
             Permanent permanent = game.getPermanent(source.getFirstTarget());

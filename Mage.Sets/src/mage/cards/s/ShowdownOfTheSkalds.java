@@ -34,7 +34,7 @@ public final class ShowdownOfTheSkalds extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Exile the top four cards of your library. Until the end of your next turn, you may play those cards.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new ShowdownOfTheSkaldsEffect());

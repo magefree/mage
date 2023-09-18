@@ -51,7 +51,7 @@ class HeatStrokeEffect extends OneShotEffect {
         this.staticText = "destroy each creature that blocked or was blocked this turn";
     }
 
-    public HeatStrokeEffect(HeatStrokeEffect effect) {
+    private HeatStrokeEffect(final HeatStrokeEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class HeatStrokeEffect extends OneShotEffect {
         BlockedThisTurnWatcher blockedWatcher = game.getState().getWatcher(BlockedThisTurnWatcher.class);
         WasBlockedThisTurnWatcher wasBlockedThisTurnWatcher = game.getState().getWatcher(WasBlockedThisTurnWatcher.class);
 
-        Set<Permanent> inROI = new HashSet<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
+        Set<Permanent> inROI = new HashSet<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game));
         boolean toRet = false;
         Set<MageObjectReference> toDestroy = new HashSet<>();
 

@@ -22,7 +22,7 @@ public final class SmolderingCrater extends CardImpl {
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new RedManaAbility());
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private SmolderingCrater(final SmolderingCrater card) {

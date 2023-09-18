@@ -39,7 +39,7 @@ public final class DirtyWererat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {B}, Discard a card: Regenerate Dirty Wererat.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
 

@@ -12,10 +12,10 @@ import mage.constants.SubType;
 public final class KrakenToken extends TokenImpl {
 
     public KrakenToken() {
-        super("Kraken", "8/8 blue Kraken creature token");
+        super("Kraken Token", "8/8 blue Kraken creature token");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.KRAKEN);
-        this.color = ObjectColor.BLUE;
+        this.color.setBlue(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
     }
@@ -27,5 +27,4 @@ public final class KrakenToken extends TokenImpl {
     public KrakenToken copy() {
         return new KrakenToken(this);
     }
-
 }

@@ -58,17 +58,17 @@ class SehtsTigerEffect extends OneShotEffect {
 
     public SehtsTigerEffect() {
         super(Outcome.Protect);
-        staticText = "you gain protection from the color of your choice until end of turn <i>(You can't be targeted, dealt damage, or enchanted by anything of the chosen color.)</i>";
+        staticText = "you gain protection from the color of your choice until end of turn. <i>(You can't be targeted, dealt damage, or enchanted by anything of the chosen color.)</i>";
     }
 
-    public SehtsTigerEffect(final SehtsTigerEffect effect) {
+    private SehtsTigerEffect(final SehtsTigerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         ChoiceColor choice = new ChoiceColor();
         if (controller != null && mageObject != null && controller.choose(Outcome.Protect, choice, game)) {
             game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());

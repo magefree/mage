@@ -35,7 +35,7 @@ public final class Dichotomancy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Suspend 3-{1}{U}{U}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{U}{U}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{U}{U}"), this));
     }
 
     private Dichotomancy(final Dichotomancy card) {

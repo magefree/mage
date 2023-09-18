@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
@@ -44,7 +44,7 @@ public final class OctopusUmbra extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature has base power and toughness 8/8 and has "Whenever this creature attacks, you may tap target creature with power 8 or less."
@@ -52,7 +52,7 @@ public final class OctopusUmbra extends CardImpl {
         abilityToAdd.addTarget(new TargetCreaturePermanent(filter));
         ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new SetPowerToughnessEnchantedEffect(8, 8)
+                new SetBasePowerToughnessEnchantedEffect(8, 8)
         );
         ability.addEffect(new GainAbilityAttachedEffect(
                 abilityToAdd, AttachmentType.AURA

@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -14,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -35,7 +33,7 @@ public final class FracturedLoyalty extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature.
@@ -53,12 +51,12 @@ public final class FracturedLoyalty extends CardImpl {
 
     private static class FracturedLoyaltyEffect extends OneShotEffect {
 
-        public FracturedLoyaltyEffect() {
+        FracturedLoyaltyEffect() {
             super(Outcome.GainControl);
             this.staticText = "that spell or ability's controller gains control of that creature";
         }
 
-        private FracturedLoyaltyEffect(FracturedLoyaltyEffect effect) {
+        private FracturedLoyaltyEffect(final FracturedLoyaltyEffect effect) {
             super(effect);
         }
 
@@ -77,7 +75,7 @@ public final class FracturedLoyalty extends CardImpl {
                     if (enchantment.getAttachedTo() != null) {
                         if (controller != null && !enchantedCreature.isControlledBy(this.getTargetPointer().getFirst(game, source))) {
                             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, this.getTargetPointer().getFirst(game, source));
-                            effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                            effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
                             game.addEffect(effect, source);
                             return true;
                         }
@@ -88,7 +86,7 @@ public final class FracturedLoyalty extends CardImpl {
         }
 
         @Override
-        public Effect copy() {
+        public FracturedLoyaltyEffect copy() {
             return new FracturedLoyaltyEffect(this);
         }
 
@@ -100,7 +98,7 @@ public final class FracturedLoyalty extends CardImpl {
             super(Zone.BATTLEFIELD, new FracturedLoyaltyEffect(), false);
         }
 
-        public FracturedLoyaltyTriggeredAbility(final FracturedLoyaltyTriggeredAbility ability) {
+        private FracturedLoyaltyTriggeredAbility(final FracturedLoyaltyTriggeredAbility ability) {
             super(ability);
         }
 

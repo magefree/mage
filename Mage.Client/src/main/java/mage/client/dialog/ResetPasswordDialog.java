@@ -258,7 +258,7 @@ public class ResetPasswordDialog extends MageDialog {
 
         connection = new Connection();
         connection.setHost(this.txtServer.getText().trim());
-        connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
+        connection.setPort(Integer.parseInt(this.txtPort.getText().trim()));
         PreferencesDialog.setProxyInformation(connection);
         connection.setEmail(this.txtEmail.getText().trim());
 
@@ -286,7 +286,7 @@ public class ResetPasswordDialog extends MageDialog {
 
         connection = new Connection();
         connection.setHost(this.txtServer.getText().trim());
-        connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
+        connection.setPort(Integer.parseInt(this.txtPort.getText().trim()));
         PreferencesDialog.setProxyInformation(connection);
         connection.setEmail(this.txtEmail.getText().trim());
         connection.setAuthToken(this.txtAuthToken.getText().trim());

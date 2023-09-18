@@ -31,7 +31,7 @@ public final class WildfireEmissary extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         
         // {1}{R}: Wildfire Emissary gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private WildfireEmissary(final WildfireEmissary card) {

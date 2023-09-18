@@ -40,9 +40,10 @@ class ProfaneMementoTriggeredAbility extends TriggeredAbilityImpl {
     
     public ProfaneMementoTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);
+        setTriggerPhrase("Whenever a creature card is put into an opponent's graveyard from anywhere, ");
     }
     
-    public ProfaneMementoTriggeredAbility(final ProfaneMementoTriggeredAbility ability) {
+    private ProfaneMementoTriggeredAbility(final ProfaneMementoTriggeredAbility ability) {
         super(ability);
     }
     
@@ -65,10 +66,5 @@ class ProfaneMementoTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-    
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature card is put into an opponent's graveyard from anywhere, " ;
     }
 }

@@ -21,7 +21,6 @@ public final class RecklessWaif extends CardImpl {
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.m.MercilessPredator.class;
 
         this.power = new MageInt(1);

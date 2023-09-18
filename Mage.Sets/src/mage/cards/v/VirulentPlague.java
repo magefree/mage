@@ -20,7 +20,7 @@ public final class VirulentPlague extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public VirulentPlague(UUID ownerId, CardSetInfo setInfo) {

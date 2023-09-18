@@ -46,7 +46,7 @@ class SphinxsDecreeEffect extends OneShotEffect {
         this.staticText = "Each opponent can't cast instant or sorcery spells during that player's next turn";
     }
 
-    public SphinxsDecreeEffect(final SphinxsDecreeEffect effect) {
+    private SphinxsDecreeEffect(final SphinxsDecreeEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class SphinxsDecreeCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         playersNextTurn = 0;
     }
 
-    public SphinxsDecreeCantCastEffect(final SphinxsDecreeCantCastEffect effect) {
+    private SphinxsDecreeCantCastEffect(final SphinxsDecreeCantCastEffect effect) {
         super(effect);
         this.playersNextTurn = effect.playersNextTurn;
     }
@@ -93,7 +93,7 @@ class SphinxsDecreeCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast instant or sorcery spells this turn (" + mageObject.getIdName() + ").";
         }

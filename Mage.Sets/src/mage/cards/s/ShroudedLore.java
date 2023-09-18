@@ -49,7 +49,7 @@ class ShroudedLoreEffect extends OneShotEffect {
         staticText = "Target opponent chooses a card in your graveyard. You may pay {B}. If you do, repeat this process except that opponent can't choose a card already chosen for {this}. Then put the last chosen card into your hand.";
     }
 
-    public ShroudedLoreEffect(final ShroudedLoreEffect effect) {
+    private ShroudedLoreEffect(final ShroudedLoreEffect effect) {
         super(effect);
     }
 
@@ -65,14 +65,14 @@ class ShroudedLoreEffect extends OneShotEffect {
         if (you != null && opponent != null) {
             FilterCard filter = new FilterCard();
             filter.add(new OwnerIdPredicate(you.getId()));
-            Cost cost = new ManaCostsImpl("{B}");
+            Cost cost = new ManaCostsImpl<>("{B}");
             TargetCardInGraveyard chosenCard;
             Card card = null;
             boolean done = false;
             do {
                 chosenCard = new TargetCardInGraveyard(filter);
-                chosenCard.setNotTarget(true);
-                if (chosenCard.canChoose(source.getSourceId(), opponent.getId(), game)) {
+                chosenCard.withNotTarget(true);
+                if (chosenCard.canChoose(opponent.getId(), source, game)) {
                     opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
                     card = game.getCard(chosenCard.getFirstTarget());
                     if (card != null) {
@@ -84,13 +84,12 @@ class ShroudedLoreEffect extends OneShotEffect {
                 }
 
                 if (!done) {
+                    done = true;
                     if (cost.canPay(source, source, you.getId(), game) && you.chooseUse(Outcome.Benefit, "Pay {B} to choose a different card ?", source, game)) {
                         cost.clearPaid();
-                        if (!cost.pay(source, game, source, you.getId(), false, null)) {
-                            done = true;
+                        if (cost.pay(source, game, source, you.getId(), false, null)) {
+                            done = false;
                         }
-                    } else {
-                        done = true;
                     }
                 }
 

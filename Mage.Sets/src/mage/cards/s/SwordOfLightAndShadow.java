@@ -49,7 +49,7 @@ public final class SwordOfLightAndShadow extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private SwordOfLightAndShadow(final SwordOfLightAndShadow card) {
@@ -69,7 +69,7 @@ class SwordOfLightAndShadowEffect extends OneShotEffect {
         staticText = "and you may return up to one target creature card from your graveyard to your hand";
     }
 
-    public SwordOfLightAndShadowEffect(final SwordOfLightAndShadowEffect effect) {
+    private SwordOfLightAndShadowEffect(final SwordOfLightAndShadowEffect effect) {
         super(effect);
     }
 

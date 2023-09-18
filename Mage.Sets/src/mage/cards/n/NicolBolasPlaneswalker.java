@@ -3,7 +3,6 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
@@ -35,10 +34,10 @@ public final class NicolBolasPlaneswalker extends CardImpl {
 
     public NicolBolasPlaneswalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +3: Destroy target noncreature permanent.
         LoyaltyAbility ability = new LoyaltyAbility(new DestroyTargetEffect(), 3);
@@ -55,7 +54,7 @@ public final class NicolBolasPlaneswalker extends CardImpl {
                 .setText("That player or that planeswalker's controller discards seven cards")
         );
         ability.addEffect(new SacrificeEffect(new FilterPermanent(), 7, "then")
-                .setText("then sacrifices seven permanents")
+                .setText(", then sacrifices seven permanents")
         );
         this.addAbility(ability);
     }

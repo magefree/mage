@@ -42,12 +42,12 @@ public final class SwordOfFireAndIce extends CardImpl {
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
                 new DamageTargetEffect(2), "equipped creature", false
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1, "you").concatBy("and"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2), false));
     }
 
     private SwordOfFireAndIce(final SwordOfFireAndIce card) {

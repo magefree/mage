@@ -32,7 +32,7 @@ public final class KavuScout extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Domain - Kavu Scout gets +1/+0 for each basic land type among lands you control.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), StaticValue.get(0), Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(DomainValue.REGULAR, StaticValue.get(0), Duration.WhileOnBattlefield));
         ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability.addHint(DomainHint.instance));
     }

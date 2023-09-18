@@ -2,7 +2,6 @@ package org.mage.test.multiplayer;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander4PlayersWithAIHelps;
 
@@ -62,10 +61,9 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 6, 6);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
     }
 
     @Test
@@ -79,10 +77,9 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 2, 2);
-        assertPermanentCount(playerA, "Soldier", 4);
+        assertPermanentCount(playerA, "Soldier Token", 4);
     }
 
     @Test
@@ -96,10 +93,9 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 4, 4);
-        assertPermanentCount(playerA, "Soldier", 2);
+        assertPermanentCount(playerA, "Soldier Token", 2);
     }
 
     @Test
@@ -118,7 +114,6 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, tyrant, 1);
         assertLife(playerA, 20);
@@ -152,7 +147,6 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, tyrant, 1);
         assertLife(playerA, 20);
@@ -168,16 +162,15 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         addCard(Zone.HAND, playerA, lieutenant);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoices("Yes", "Yes", "No", "No");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 5, 5);
-        assertPermanentCount(playerA, "Soldier", 2);
+        assertPermanentCount(playerA, "Soldier Token", 2);
     }
 
     @Test
@@ -188,16 +181,15 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
         setChoices("Yes", "Yes", "No", "No");
-        setChoice(playerA, "Yes"); // to have an additional vote
-        setChoice(playerA, "No"); // the additional vote
+        setChoice(playerA, true); // to have an additional vote
+        setChoice(playerA, false); // the additional vote
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 4, 4);
-        assertPermanentCount(playerA, "Soldier", 3);
+        assertPermanentCount(playerA, "Soldier Token", 3);
     }
 
     @Test
@@ -208,15 +200,14 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerA, "Yes", 4);
+        setChoice(playerA, true, 4);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 6, 6);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
     }
 
     @Test
@@ -228,15 +219,14 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerA, "Yes", 5);
+        setChoice(playerA, true, 5);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 7, 7);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
     }
 
     @Test
@@ -250,15 +240,14 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, illusion);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerB, "Yes", 4);
+        setChoice(playerB, true, 4);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 6, 6);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
     }
 
     @Test
@@ -269,16 +258,15 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         addCard(Zone.HAND, playerA, lieutenant);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         setChoices("Yes", "No", "No", "No");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 4, 4);
-        assertPermanentCount(playerA, "Soldier", 3);
+        assertPermanentCount(playerA, "Soldier Token", 3);
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2);
         assertLife(playerC, 20 - 2);
@@ -294,17 +282,16 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         addCard(Zone.HAND, playerA, lieutenant);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerA, "No");
-        setChoice(playerB, "No");
+        setChoice(playerA, false);
+        setChoice(playerB, false);
         setChoices("Yes");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 6, 6);
-        assertPermanentCount(playerA, "Soldier", 2);
+        assertPermanentCount(playerA, "Soldier Token", 2);
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertLife(playerC, 20);

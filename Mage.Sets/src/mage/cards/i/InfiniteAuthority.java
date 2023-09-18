@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.Objects;
@@ -41,7 +40,7 @@ public final class InfiniteAuthority extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature.
@@ -61,10 +60,12 @@ public final class InfiniteAuthority extends CardImpl {
 class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
 
     InfiniteAuthorityTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new InfiniteAuthorityEffect())));
+        super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(
+                new InfiniteAuthorityEffect()).setTriggerPhrase("")));
+        setTriggerPhrase("Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, ");
     }
 
-    InfiniteAuthorityTriggeredAbility(final InfiniteAuthorityTriggeredAbility ability) {
+    private InfiniteAuthorityTriggeredAbility(final InfiniteAuthorityTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,23 +91,18 @@ class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
                 if (blocker != null
                         && Objects.equals(blocked, enchantedCreature)
                         && blocker.getToughness().getValue() <= 3) {
-                    effect.setTargetPointer(new FixedTarget(blocker.getId()));
+                    effect.setTargetPointer(new FixedTarget(blocker.getId(), game));
                     return true;
                 }
                 if (blocked != null
                         && Objects.equals(blocker, enchantedCreature)
                         && blocked.getToughness().getValue() <= 3) {
-                    effect.setTargetPointer(new FixedTarget(blocked.getId()));
+                    effect.setTargetPointer(new FixedTarget(blocked.getId(), game));
                     return true;
                 }
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, " ;
     }
 }
 
@@ -117,7 +113,7 @@ class InfiniteAuthorityEffect extends OneShotEffect {
         staticText = "destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature";
     }
 
-    InfiniteAuthorityEffect(final InfiniteAuthorityEffect effect) {
+    private InfiniteAuthorityEffect(final InfiniteAuthorityEffect effect) {
         super(effect);
     }
 

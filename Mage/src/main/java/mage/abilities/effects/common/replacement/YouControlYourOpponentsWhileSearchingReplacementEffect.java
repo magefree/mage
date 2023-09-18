@@ -38,7 +38,10 @@ public class YouControlYourOpponentsWhileSearchingReplacementEffect extends Repl
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        return controller != null && game.isOpponent(controller, event.getPlayerId());
+        return controller != null
+                && game.isOpponent(controller, event.getPlayerId())
+                // verify that the controller of the ability is searching their library
+                && event.getTargetId().equals(event.getPlayerId());
     }
 
     @Override

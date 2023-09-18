@@ -44,7 +44,7 @@ public final class NimDevourer extends CardImpl {
         // {B}{B}: Return Nim Devourer from your graveyard to the battlefield, then sacrifice a creature. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
-                new ManaCostsImpl("{B}{B}"),
+                new ManaCostsImpl<>("{B}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP), null);
         ability.addEffect(new NimDevourerEffect());
         this.addAbility(ability);
@@ -67,7 +67,7 @@ class NimDevourerEffect extends OneShotEffect {
         this.staticText = ", then sacrifice a creature";
     }
 
-    public NimDevourerEffect(final NimDevourerEffect effect) {
+    private NimDevourerEffect(final NimDevourerEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class NimDevourerEffect extends OneShotEffect {
         if (player != null) {
             Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
 
-            if (target.canChoose(source.getSourceId(), player.getId(), game) && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            if (target.canChoose(player.getId(), source, game) && player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     return permanent.sacrifice(source, game);

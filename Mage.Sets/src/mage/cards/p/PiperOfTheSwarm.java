@@ -43,19 +43,19 @@ public final class PiperOfTheSwarm extends CardImpl {
 
         // Rats you control have menace.
         this.addAbility(new SimpleStaticAbility(
-                new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)
+                new GainAbilityControlledEffect(new MenaceAbility(false), Duration.WhileOnBattlefield, filter)
         ));
 
         // {1}{B}, {T}: Create a 1/1 black Rat creature token.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new RatToken()), new ManaCostsImpl("{1}{B}")
+                new CreateTokenEffect(new RatToken()), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {2}{B}{B}, {T}, Sacrifice three Rats: Gain control of target creature.
         ability = new SimpleActivatedAbility(
-                new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl("{2}{B}{B}")
+                new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl<>("{2}{B}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter2)));

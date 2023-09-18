@@ -1,5 +1,3 @@
-
-
 package mage.abilities.keyword;
 
 import mage.abilities.ActivatedAbilityImpl;
@@ -18,13 +16,13 @@ public class ChannelAbility extends ActivatedAbilityImpl {
     }
 
     public ChannelAbility(String manaString, Effect effect, TimingRule timing) {
-        super(Zone.HAND, effect, new ManaCostsImpl(manaString));
+        super(Zone.HAND, effect, new ManaCostsImpl<>(manaString));
         this.addCost(new DiscardSourceCost());
         this.timing = timing;
         this.setAbilityWord(AbilityWord.CHANNEL);
     }
 
-    public ChannelAbility(final ChannelAbility ability) {
+    protected ChannelAbility(final ChannelAbility ability) {
         super(ability);
     }
 
@@ -40,6 +38,4 @@ public class ChannelAbility extends ActivatedAbilityImpl {
         }
         return super.getRule();
     }
-
 }
-

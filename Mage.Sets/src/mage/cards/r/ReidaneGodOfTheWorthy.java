@@ -7,17 +7,18 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -29,18 +30,26 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ReidaneGodOfTheWorthy extends ModalDoubleFacesCard {
+public final class ReidaneGodOfTheWorthy extends ModalDoubleFacedCard {
+
+    private static final FilterPermanent filter = new FilterLandPermanent("snow lands your opponents control");
+
+    static {
+        filter.add(SuperType.SNOW.getPredicate());
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+    }
 
     public ReidaneGodOfTheWorthy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{W}",
-                "Valkmira, Protector's Shield", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{W}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{W}",
+                "Valkmira, Protector's Shield",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{W}"
         );
 
         // 1.
         // Reidane, God of the Worthy
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(3));
 
         // Flying
@@ -50,7 +59,7 @@ public final class ReidaneGodOfTheWorthy extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // Snow lands your opponents control enter the battlefield tapped.
-        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new ReidaneGodOfTheWorthyTapEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(filter)));
 
         // Noncreature spells your opponents cast with converted mana cost 4 or more cost {2} more to cast.
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new ReidaneGodOfTheWorthyCostEffect()));
@@ -58,8 +67,6 @@ public final class ReidaneGodOfTheWorthy extends ModalDoubleFacesCard {
         // 2.
         // Valkmira, Protector's Shield
         // Legendary Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new ValkmiraProtectorsShieldPreventionEffect()));
 
@@ -74,46 +81,6 @@ public final class ReidaneGodOfTheWorthy extends ModalDoubleFacesCard {
     @Override
     public ReidaneGodOfTheWorthy copy() {
         return new ReidaneGodOfTheWorthy(this);
-    }
-}
-
-class ReidaneGodOfTheWorthyTapEffect extends ReplacementEffectImpl {
-
-    ReidaneGodOfTheWorthyTapEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "snow lands your opponents control enter the battlefield tapped";
-    }
-
-    private ReidaneGodOfTheWorthyTapEffect(final ReidaneGodOfTheWorthyTapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.setTapped(true);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            return false;
-        }
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.isLand(game) && permanent.isSnow();
-    }
-
-    @Override
-    public ReidaneGodOfTheWorthyTapEffect copy() {
-        return new ReidaneGodOfTheWorthyTapEffect(this);
     }
 }
 
@@ -214,6 +181,9 @@ class ValkmiraProtectorsShieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getTargetId().equals(getSourceId())) {
+            return false;
+        }
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (stackObject == null || !game.getOpponents(getControllerId()).contains(stackObject.getControllerId())) {
             return false;
@@ -232,7 +202,7 @@ class ValkmiraProtectorsShieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you or a permanent you control becomes the target of a spell or ability " +
+        return "Whenever you or another permanent you control becomes the target of a spell or ability " +
                 "an opponent controls, counter that spell or ability unless its controller pays {1}.";
     }
 }

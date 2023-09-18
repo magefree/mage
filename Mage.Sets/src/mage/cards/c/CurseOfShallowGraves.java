@@ -38,7 +38,7 @@ public final class CurseOfShallowGraves extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a tapped 2/2 black Zombie creature token.
         this.addAbility(new CurseOfShallowTriggeredAbility());
@@ -64,7 +64,7 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public CurseOfShallowTriggeredAbility(final CurseOfShallowTriggeredAbility ability) {
+    private CurseOfShallowTriggeredAbility(final CurseOfShallowTriggeredAbility ability) {
         super(ability);
     }
 
@@ -106,7 +106,7 @@ class CurseOfShallowEffect extends OneShotEffect {
         this.staticText = "that attacking player may create a tapped 2/2 black Zombie creature token";
     }
 
-    public CurseOfShallowEffect(final CurseOfShallowEffect effect) {
+    private CurseOfShallowEffect(final CurseOfShallowEffect effect) {
         super(effect);
     }
 

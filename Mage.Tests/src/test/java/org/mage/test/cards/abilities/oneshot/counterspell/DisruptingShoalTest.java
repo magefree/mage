@@ -37,7 +37,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -60,7 +59,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
@@ -89,7 +87,7 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pillarfield Ox");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disrupting Shoal", "Pillarfield Ox", "Pillarfield Ox");
-        setChoice(playerB, "Yes"); // use alternate costs
+        setChoice(playerB, true); // use alternate costs
         setChoice(playerB, "Mistfire Adept"); // pay to cast Mistfire Adept (CMC = 4)
 
         // rules: 202.3e When calculating the converted mana cost of an object with an {X} in its mana cost,
@@ -103,7 +101,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -139,13 +136,12 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
 
         // try to pay by split card, but can't counter -- X <> bear's cmc
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disrupting Shoal", "Grizzly Bears", "Grizzly Bears");
-        setChoice(playerB, "Yes"); // use alternative cost
+        setChoice(playerB, true); // use alternative cost
         setChoice(playerB, "Far // Away"); // pay by card (cmc = 5, so X = 5 too)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, 1); // Far // Away should be exiled as part of Disrupting alternative cost
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);
@@ -171,13 +167,12 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
 
         // try to pay by split card, but can't counter -- X <> centaur's cmc
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disrupting Shoal", "Centaur Courser", "Centaur Courser");
-        setChoice(playerB, "Yes"); // use alternative cost
+        setChoice(playerB, true); // use alternative cost
         setChoice(playerB, "Far // Away"); // pay by card (cmc = 5, so X = 5 too)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, 1); // Far // Away should be exiled as part of Disrupting alternative cost
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);
@@ -203,13 +198,12 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
 
         // try to pay by split card and it works
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disrupting Shoal", "Air Elemental", "Air Elemental");
-        setChoice(playerB, "Yes"); // use alternative cost
+        setChoice(playerB, true); // use alternative cost
         setChoice(playerB, "Far // Away"); // pay by card (cmc = 5, so X = 5 too)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, 1); // Far // Away should be exiled as part of Disrupting alternative cost
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);

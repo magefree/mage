@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -14,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.CorpseweftZombieToken;
 import mage.players.Player;
@@ -30,8 +29,8 @@ public final class Corpseweft extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // {1}{B}, Exile one or more creature cards from your graveyard: Create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CorpseweftEffect(), new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(1, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard"))));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CorpseweftEffect(), new ManaCostsImpl<>("{1}{B}"));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(1, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD)));
         this.addAbility(ability);
     }
 
@@ -52,7 +51,7 @@ class CorpseweftEffect extends OneShotEffect {
         this.staticText = "create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way";
     }
 
-    public CorpseweftEffect(final CorpseweftEffect effect) {
+    private CorpseweftEffect(final CorpseweftEffect effect) {
         super(effect);
     }
 

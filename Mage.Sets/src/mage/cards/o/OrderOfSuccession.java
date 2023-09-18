@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.HashMap;
@@ -55,7 +54,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
         this.staticText = "Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose";
     }
 
-    public OrderOfSuccessionEffect(final OrderOfSuccessionEffect effect) {
+    private OrderOfSuccessionEffect(final OrderOfSuccessionEffect effect) {
         super(effect);
     }
 
@@ -100,8 +99,8 @@ class OrderOfSuccessionEffect extends OneShotEffect {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + nextPlayer.getLogName());
                     filter.add(new ControllerIdPredicate(nextPlayer.getId()));
                     Target target = new TargetCreaturePermanent(filter);
-                    target.setNotTarget(true);
-                    if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)) {
+                    target.withNotTarget(true);
+                    if (target.canChoose(currentPlayer.getId(), source, game)) {
                         if (currentPlayer.chooseTarget(outcome, target, source, game)) {
                             playerCreature.put(currentPlayer.getId(), target.getFirstTarget());
                         }
@@ -116,7 +115,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
                     Permanent creature = game.getPermanent(entry.getValue());
                     if (creature != null) {
                         ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, player.getId());
-                        effect.setTargetPointer(new FixedTarget(creature.getId()));
+                        effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                         game.addEffect(effect, source);
                         game.informPlayers(new StringBuilder(player.getLogName()).append(" gains control of ").append(creature.getName()).toString());
                     }

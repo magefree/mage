@@ -48,7 +48,7 @@ public final class PaladinClass extends CardImpl {
         // Spells your opponents cast during your turn cost {1} more to cast.
         this.addAbility(new SimpleStaticAbility(new ConditionalCostModificationEffect(
                 new SpellsCostIncreasingAllEffect(
-                        2, StaticFilters.FILTER_CARD, TargetController.OPPONENT
+                        1, StaticFilters.FILTER_CARD, TargetController.OPPONENT
                 ), MyTurnCondition.instance, "spells your opponents cast during your turn cost {1} more to cast"
         )));
 
@@ -65,10 +65,10 @@ public final class PaladinClass extends CardImpl {
 
         // Whenever you attack, until end of turn, target attacking creature gets +1/+1 for each other attacking creature and gains double strike.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true)
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn)
                         .setText("until end of turn, target attacking creature " +
                                 "gets +1/+1 for each other attacking creature"),
-                0
+                1
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 DoubleStrikeAbility.getInstance(), Duration.EndOfTurn

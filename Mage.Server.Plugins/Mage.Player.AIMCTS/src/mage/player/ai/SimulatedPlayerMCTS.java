@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -33,9 +34,10 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     private int actionCount = 0;
     private static final Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
 
-    public SimulatedPlayerMCTS(UUID id, boolean isSimulatedPlayer) {
-        super(id);
+    public SimulatedPlayerMCTS(Player originalPlayer, boolean isSimulatedPlayer) {
+        super(originalPlayer.getId());
         this.isSimulatedPlayer = isSimulatedPlayer;
+        this.matchPlayer = new MatchPlayer(originalPlayer.getMatchPlayer(), this);
     }
 
     public SimulatedPlayerMCTS(final SimulatedPlayerMCTS player) {
@@ -93,7 +95,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
                 if (amount > 0) {
                     ability = ability.copy();
-                    ability.getManaCostsToPay().add(new GenericManaCost(RandomUtil.nextInt(amount)));
+                    ability.addManaCostsToPay(new GenericManaCost(RandomUtil.nextInt(amount)));
                 }
             }
             // check if ability kills player, if not then it's ok to play
@@ -219,7 +221,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     protected boolean chooseRandomTarget(Target target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return false;
         }
@@ -243,28 +245,28 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         if (this.isHuman()) {
             return chooseRandom(target, game);
         }
-        return super.choose(outcome, target, sourceId, game);
+        return super.choose(outcome, target, source, game);
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         if (this.isHuman()) {
             return chooseRandom(target, game);
         }
-        return super.choose(outcome, target, sourceId, game, options);
+        return super.choose(outcome, target, source, game, options);
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (this.isHuman()) {
             if (cards.isEmpty()) {
                 return false;
             }
-            Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, game);
+            Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, source, game);
             if (possibleTargets.isEmpty()) {
                 return false;
             }
@@ -277,7 +279,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             target.add(targetId, game);
             return true;
         }
-        return super.choose(outcome, cards, target, game);
+        return super.choose(outcome, cards, target, source, game);
     }
 
     @Override
@@ -300,7 +302,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return !target.isRequired(source);
         }

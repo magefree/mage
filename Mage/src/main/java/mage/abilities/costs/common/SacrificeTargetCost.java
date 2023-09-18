@@ -1,12 +1,13 @@
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.SacrificeCost;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -19,13 +20,17 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeTargetCost extends CostImpl {
+public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     private final List<Permanent> permanents = new ArrayList<>();
 
+    public SacrificeTargetCost(FilterControlledPermanent filter) {
+        this(new TargetControlledPermanent(filter));
+    }
+
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
-        target.setNotTarget(true); // sacrifice is never targeted
+        target.withNotTarget(true); // sacrifice is never targeted
         target.setRequired(false); // can be canceled
         this.text = "sacrifice " + makeText(target);
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
@@ -49,13 +54,13 @@ public class SacrificeTargetCost extends CostImpl {
             activator = ((ActivatedAbilityImpl) ability).getActivatorId();
         }
         // can be cancel by user
-        if (targets.choose(Outcome.Sacrifice, activator, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.Sacrifice, activator, source.getSourceId(), source, game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
                     return false;
                 }
-                permanents.add(permanent.copy());
+                addSacrificeTarget(game, permanent);
                 paid |= permanent.sacrifice(source, game);
             }
             if (!paid && targets.get(0).getNumberOfTargets() == 0) {
@@ -63,6 +68,10 @@ public class SacrificeTargetCost extends CostImpl {
             }
         }
         return paid;
+    }
+
+    protected void addSacrificeTarget(Game game, Permanent permanent) {
+        permanents.add(permanent.copy());
     }
 
     @Override
@@ -86,6 +95,10 @@ public class SacrificeTargetCost extends CostImpl {
                     return true;
                 }
             }
+        }
+        // solves issue #8097, if a sacrifice cost is optional and you don't have valid targets, then the cost can be paid
+        if (validTargets == 0 && targets.get(0).getMinNumberOfTargets() == 0) {
+            return true;
         }
         return false;
     }

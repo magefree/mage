@@ -36,7 +36,7 @@ public final class SiegebreakerGiant extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CantBlockTargetEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{3}{R}")
+                new ManaCostsImpl<>("{3}{R}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

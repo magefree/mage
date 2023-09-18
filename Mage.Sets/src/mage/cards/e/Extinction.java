@@ -46,14 +46,14 @@ class ExtinctionEffect extends OneShotEffect {
         staticText = "Destroy all creatures of the creature type of your choice";
     }
 
-    public ExtinctionEffect(final ExtinctionEffect effect) {
+    private ExtinctionEffect(final ExtinctionEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             Choice typeChoice = new ChoiceCreatureType(sourceObject);
 

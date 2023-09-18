@@ -54,7 +54,7 @@ class RetaliatorGriffinTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new RetaliatorGriffinEffect(), true);
     }
 
-    public RetaliatorGriffinTriggeredAbility(final RetaliatorGriffinTriggeredAbility ability) {
+    private RetaliatorGriffinTriggeredAbility(final RetaliatorGriffinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,7 +93,7 @@ class RetaliatorGriffinEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    public RetaliatorGriffinEffect(final RetaliatorGriffinEffect effect) {
+    private RetaliatorGriffinEffect(final RetaliatorGriffinEffect effect) {
         super(effect);
     }
 

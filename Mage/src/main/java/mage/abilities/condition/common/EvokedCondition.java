@@ -23,7 +23,7 @@ public enum EvokedCondition implements Condition {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
             return card.getAbilities(game).stream()
-                    .filter(ab -> ab instanceof EvokeAbility)
+                    .filter(EvokeAbility.class::isInstance)
                     .anyMatch(evoke -> ((EvokeAbility) evoke).isActivated(source, game));
         }
         return false;

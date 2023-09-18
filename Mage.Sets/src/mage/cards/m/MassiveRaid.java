@@ -19,7 +19,7 @@ public final class MassiveRaid extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
 
         // Massive Raid deals damage to any target equal to the number of creatures you control.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(CreaturesYouControlCount.instance));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(CreaturesYouControlCount.instance).setText("{this} deals damage to any target equal to the number of creatures you control"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }

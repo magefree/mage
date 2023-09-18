@@ -1,12 +1,11 @@
 package mage.constants;
 
 import mage.cards.Card;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -25,7 +24,11 @@ public enum TargetController {
     OWNER,
     CONTROLLER_ATTACHED_TO,
     NEXT,
-    EACH_PLAYER;
+    EACH_PLAYER,
+    ENCHANTED,
+    SOURCE_TARGETS,
+    MONARCH,
+    SOURCE_CONTROLLER;
 
     private final OwnerPredicate ownerPredicate;
     private final PlayerPredicate playerPredicate;
@@ -49,7 +52,7 @@ public enum TargetController {
         return controllerPredicate;
     }
 
-    public static class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
+    public static class OwnerPredicate implements ObjectSourcePlayerPredicate<Card> {
 
         private final TargetController targetOwner;
 
@@ -58,7 +61,7 @@ public enum TargetController {
         }
 
         @Override
-        public boolean apply(ObjectPlayer<Card> input, Game game) {
+        public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
             Card card = input.getObject();
             UUID playerId = input.getPlayerId();
             if (card == null || playerId == null) {
@@ -67,26 +70,26 @@ public enum TargetController {
 
             switch (targetOwner) {
                 case YOU:
-                    if (card.isOwnedBy(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return card.isOwnedBy(playerId);
                 case OPPONENT:
-                    if (!card.isOwnedBy(playerId)
-                            && game.getPlayer(playerId).hasOpponent(card.getOwnerId(), game)) {
-                        return true;
-                    }
-                    break;
+                    return !card.isOwnedBy(playerId)
+                            && game.getPlayer(playerId).hasOpponent(card.getOwnerId(), game);
                 case NOT_YOU:
-                    if (!card.isOwnedBy(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return !card.isOwnedBy(playerId);
+                case ENCHANTED:
+                    Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
+                    return permanent != null && input.getObject().isOwnedBy(permanent.getAttachedTo());
+                case SOURCE_CONTROLLER:
+                    return card.isOwnedBy(input.getSource().getControllerId());
+                case SOURCE_TARGETS:
+                    return card.isOwnedBy(input.getSource().getFirstTarget());
+                case MONARCH:
+                    return card.isOwnedBy(game.getMonarchId());
                 case ANY:
                     return true;
+                default:
+                    throw new UnsupportedOperationException("TargetController not supported");
             }
-
-            return false;
         }
 
         @Override
@@ -95,7 +98,7 @@ public enum TargetController {
         }
     }
 
-    public static class PlayerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+    public static class PlayerPredicate implements ObjectSourcePlayerPredicate<Player> {
 
         private final TargetController targetPlayer;
 
@@ -113,24 +116,21 @@ public enum TargetController {
 
             switch (targetPlayer) {
                 case YOU:
-                    if (player.getId().equals(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return player.getId().equals(playerId);
                 case OPPONENT:
-                    if (!player.getId().equals(playerId) &&
-                            game.getPlayer(playerId).hasOpponent(player.getId(), game)) {
-                        return true;
-                    }
-                    break;
+                    return !player.getId().equals(playerId) &&
+                            game.getPlayer(playerId).hasOpponent(player.getId(), game);
                 case NOT_YOU:
-                    if (!player.getId().equals(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return !player.getId().equals(playerId);
+                case SOURCE_CONTROLLER:
+                    return player.getId().equals(input.getSource().getControllerId());
+                case SOURCE_TARGETS:
+                    return player.getId().equals(input.getSource().getFirstTarget());
+                case MONARCH:
+                    return player.getId().equals(game.getMonarchId());
+                default:
+                    throw new UnsupportedOperationException("TargetController not supported");
             }
-
-            return false;
         }
 
         @Override
@@ -139,7 +139,7 @@ public enum TargetController {
         }
     }
 
-    public static class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+    public static class ControllerPredicate implements ObjectSourcePlayerPredicate<Controllable> {
 
         private final TargetController controller;
 
@@ -148,42 +148,36 @@ public enum TargetController {
         }
 
         @Override
-        public boolean apply(ObjectPlayer<Controllable> input, Game game) {
+        public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
             Controllable object = input.getObject();
             UUID playerId = input.getPlayerId();
 
             switch (controller) {
                 case YOU:
-                    if (object.isControlledBy(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return object.isControlledBy(playerId);
                 case TEAM:
-                    if (!game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
-                        return true;
-                    }
-                    break;
+                    return !game.getPlayer(playerId).hasOpponent(object.getControllerId(), game);
                 case OPPONENT:
-                    if (!object.isControlledBy(playerId)
-                            && game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
-                        return true;
-                    }
-                    break;
+                    return !object.isControlledBy(playerId)
+                            && game.getPlayer(playerId).hasOpponent(object.getControllerId(), game);
                 case NOT_YOU:
-                    if (!object.isControlledBy(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return !object.isControlledBy(playerId);
                 case ACTIVE:
-                    if (object.isControlledBy(game.getActivePlayerId())) {
-                        return true;
-                    }
-                    break;
+                    return object.isControlledBy(game.getActivePlayerId());
+                case ENCHANTED:
+                    Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
+                    return permanent != null && input.getObject().isControlledBy(permanent.getAttachedTo());
+                case SOURCE_CONTROLLER:
+                    return object.isControlledBy(input.getSource().getControllerId());
+                case SOURCE_TARGETS:
+                    return object.isControlledBy(input.getSource().getFirstTarget());
+                case MONARCH:
+                    return object.isControlledBy(game.getMonarchId());
                 case ANY:
                     return true;
+                default:
+                    throw new UnsupportedOperationException("TargetController not supported");
             }
-
-            return false;
         }
 
         @Override

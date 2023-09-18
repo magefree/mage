@@ -56,7 +56,7 @@ class ChainOfAcidEffect extends OneShotEffect {
         this.staticText = "Destroy target noncreature permanent. Then that permanent's controller may copy this spell and may choose a new target for that copy.";
     }
 
-    ChainOfAcidEffect(final ChainOfAcidEffect effect) {
+    private ChainOfAcidEffect(final ChainOfAcidEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class ChainOfAcidEffect extends OneShotEffect {
                 Player affectedPlayer = game.getPlayer(permanent.getControllerId());
                 if (affectedPlayer != null) {
                     Effect effect = new DestroyTargetEffect();
-                    effect.setTargetPointer(new FixedTarget(targetId));
+                    effect.setTargetPointer(new FixedTarget(targetId, game));
                     effect.apply(game, source);
                     if (affectedPlayer.chooseUse(Outcome.Copy, "Copy the spell?", source, game)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());

@@ -13,7 +13,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class NorinTheWary extends CardImpl {
 
     public NorinTheWary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -48,10 +47,11 @@ public final class NorinTheWary extends CardImpl {
 class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public NorinTheWaryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), false);
+        super(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(), false);
+        setTriggerPhrase("When a player casts a spell or a creature attacks, ");
     }
 
-    public NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {
+    private NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {
         super(ability);
     }
 
@@ -64,11 +64,6 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When a player casts a spell or a creature attacks, " ;
     }
 
     @Override

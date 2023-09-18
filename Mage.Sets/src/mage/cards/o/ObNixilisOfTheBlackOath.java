@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -29,10 +28,10 @@ public final class ObNixilisOfTheBlackOath extends CardImpl {
 
     public ObNixilisOfTheBlackOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIXILIS);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: Each opponent loses 1 life. You gain life equal to the life lost this way.
         this.addAbility(new LoyaltyAbility(new ObNixilisOfTheBlackOathEffect1(), 2));
@@ -66,7 +65,7 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
         staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
-    public ObNixilisOfTheBlackOathEffect1(final ObNixilisOfTheBlackOathEffect1 effect) {
+    private ObNixilisOfTheBlackOathEffect1(final ObNixilisOfTheBlackOathEffect1 effect) {
         super(effect);
     }
 

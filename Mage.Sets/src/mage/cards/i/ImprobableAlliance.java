@@ -1,6 +1,6 @@
 package mage.cards.i;
 
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -21,11 +21,11 @@ public final class ImprobableAlliance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}");
 
         // Whenever you draw your second card each turn, create a 1/1 blue Faerie creature token with flying.
-        this.addAbility(new DrawSecondCardTriggeredAbility(new CreateTokenEffect(new FaerieToken()), false));
+        this.addAbility(new DrawNthCardTriggeredAbility(new CreateTokenEffect(new FaerieToken()), false, 2));
 
         // {4}{U}{R}: Draw a card, then discard a card.
         this.addAbility(new SimpleActivatedAbility(
-                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl("{4}{U}{R}")
+                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{4}{U}{R}")
         ));
     }
 

@@ -10,7 +10,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.common.LandsYouControlHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -24,13 +24,13 @@ import java.util.UUID;
  *
  * @author htrajan
  */
-public final class AugmenterPugilist extends ModalDoubleFacesCard {
+public final class AugmenterPugilist extends ModalDoubleFacedCard {
 
     public AugmenterPugilist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.TROLL, SubType.DRUID}, "{1}{G}{G}",
                 "Echoing Equation", new CardType[]{CardType.SORCERY}, new SubType[]{}, "{3}{U}{U}");
-        
+
         // 1.
         // Augmenter Pugilist
         // Creature — Troll Druid
@@ -78,10 +78,10 @@ class EchoingEquationEffect extends OneShotEffect {
 
     public EchoingEquationEffect() {
         super(Outcome.Benefit);
-        staticText = "choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren't legendary if the chosen creature is legendary";
+        staticText = "choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren't legendary";
     }
 
-    EchoingEquationEffect(EchoingEquationEffect effect) {
+    private EchoingEquationEffect(final EchoingEquationEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class EchoingEquationEffect extends OneShotEffect {
                 .forEach(copyTo -> game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new CopyApplier() {
                     @Override
                     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-                        blueprint.getSuperType().remove(SuperType.LEGENDARY);
+                        blueprint.removeSuperType(SuperType.LEGENDARY);
                         return true;
                     }
                 }));

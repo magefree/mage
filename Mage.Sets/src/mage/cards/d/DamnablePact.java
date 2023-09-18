@@ -44,7 +44,7 @@ class DamnablePactEffect extends OneShotEffect {
         staticText = "Target player draws X cards and loses X life";
     }
 
-    public DamnablePactEffect(DamnablePactEffect effect) {
+    private DamnablePactEffect(final DamnablePactEffect effect) {
         super(effect);
     }
 

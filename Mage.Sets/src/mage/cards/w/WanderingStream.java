@@ -21,7 +21,7 @@ public final class WanderingStream extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Domain - You gain 2 life for each basic land type among lands you control.
-        Effect effect = new GainLifeEffect(new MultipliedValue(new DomainValue(), 2));
+        Effect effect = new GainLifeEffect(new MultipliedValue(DomainValue.REGULAR, 2));
         effect.setText("<i>Domain</i> &mdash; You gain 2 life for each basic land type among lands you control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addHint(DomainHint.instance);

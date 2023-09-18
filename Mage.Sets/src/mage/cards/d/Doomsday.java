@@ -47,7 +47,7 @@ class DoomsdayEffect extends OneShotEffect {
         staticText = "Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order";
     }
 
-    public DoomsdayEffect(final DoomsdayEffect effect) {
+    private DoomsdayEffect(final DoomsdayEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class DoomsdayEffect extends OneShotEffect {
             int number = Math.min(5, allCards.size());
             TargetCard target = new TargetCard(number, number, Zone.ALL, new FilterCard());
 
-            if (controller.choose(Outcome.Benefit, allCards, target, game)) {
+            if (controller.choose(Outcome.Benefit, allCards, target, source, game)) {
                 Cards toLibrary = new CardsImpl(target.getTargets());
                 allCards.removeAll(toLibrary);
                 // Exile the rest

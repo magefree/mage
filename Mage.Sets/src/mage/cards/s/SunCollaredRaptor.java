@@ -34,7 +34,7 @@ public final class SunCollaredRaptor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(3, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{R}"))
+                new ManaCostsImpl<>("{2}{R}"))
         );
     }
 

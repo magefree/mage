@@ -30,7 +30,7 @@ public final class CircleOfProtectionArtifacts extends CardImpl {
 
         // {2}: The next time an artifact source of your choice would deal damage to you this turn, prevent that damage.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("2")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}")));
     }
 
     private CircleOfProtectionArtifacts(final CircleOfProtectionArtifacts card) {

@@ -13,10 +13,8 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsNoSourcePredicate;
 import mage.filter.predicate.permanent.PermanentInListPredicate;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -24,7 +22,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAttackingCreature;
 import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
 
 import java.util.*;
@@ -38,7 +35,7 @@ public final class FalseOrders extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(FalseOrdersDefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsNoSourcePredicate.instance);
     }
 
     public FalseOrders(UUID ownerId, CardSetInfo setInfo) {
@@ -62,15 +59,6 @@ public final class FalseOrders extends CardImpl {
         return new FalseOrders(this);
     }
 
-}
-
-enum FalseOrdersDefendingPlayerControlsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
-        return game.getCombat().getPlayerDefenders(game).contains(input.getObject().getControllerId());
-    }
 }
 
 class FalseOrdersUnblockEffect extends OneShotEffect {
@@ -138,9 +126,10 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
         }
         FilterAttackingCreature filter = new FilterAttackingCreature("creature attacking " + targetsController.getLogName());
         filter.add(new PermanentInListPredicate(list));
-        TargetAttackingCreature target = new TargetAttackingCreature(1, 1, filter, true);
-        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-            while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+        TargetPermanent target = new TargetPermanent(filter);
+        target.withNotTarget(true);
+        if (target.canChoose(controller.getId(), source, game)) {
+            while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                 controller.chooseTarget(outcome, target, source, game);
             }
         } else {
@@ -178,6 +167,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
                 );
             }
             game.fireEvent(new BlockerDeclaredEvent(chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, permanent.getId(), source, null));
         }
         CombatGroup blockGroup = findBlockingGroup(permanent, game); // a new blockingGroup is formed, so it's necessary to find it again
         if (blockGroup != null) {

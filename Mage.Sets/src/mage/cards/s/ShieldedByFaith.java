@@ -18,7 +18,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -36,7 +36,7 @@ public final class ShieldedByFaith extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         
         // Enchanted creature has indestructible.
         Effect effect = new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), 
@@ -48,7 +48,7 @@ public final class ShieldedByFaith extends CardImpl {
         // Whenever a creature enters the battlefield, you may attach Shielded by Faith to that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Benefit, "attach {this} to that creature"),
-                new FilterCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, null, false));
+                StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT, null, false));
     }
 
     private ShieldedByFaith(final ShieldedByFaith card) {

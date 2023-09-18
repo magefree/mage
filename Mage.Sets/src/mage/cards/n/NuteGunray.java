@@ -20,7 +20,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.DroidToken;
 import mage.target.common.TargetControlledPermanent;
@@ -34,12 +33,12 @@ public final class NuteGunray extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("non-token artifact");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public NuteGunray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NEIMOIDIAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

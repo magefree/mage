@@ -39,18 +39,19 @@ import mage.target.targetpointer.FixedTarget;
 public class HauntAbility extends TriggeredAbilityImpl {
 
     private boolean usedFromExile = false;
-    private boolean creatureHaunt;
 
     public HauntAbility(Card card, Effect effect) {
         super(Zone.ALL, effect, false);
-        creatureHaunt = card.isCreature();
+        boolean creatureHaunt = card.isCreature();
         addSubAbility(new HauntExileAbility(creatureHaunt));
+        setTriggerPhrase((creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
+                                        : "When the creature {this} haunts dies, ")
+        );
     }
 
     private HauntAbility(final HauntAbility ability) {
         super(ability);
         this.usedFromExile = ability.usedFromExile;
-        this.creatureHaunt = ability.creatureHaunt;
     }
 
     @Override
@@ -80,8 +81,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
                     return false;
                 }
                 Card card = game.getCard(getSourceId());
-                if (card == null
-                        || game.getCard(event.getTargetId()) == null) {
+                if (card == null) {
                     return false;
                 }
                 String key = new StringBuilder("Haunting_")
@@ -103,13 +103,6 @@ public class HauntAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return (creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
-                : "When the creature {this} haunts dies, ")
-                ;
-    }
 }
 
 class HauntExileAbility extends ZoneChangeTriggeredAbility {
@@ -127,7 +120,6 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility {
         this.creatureHaunt = creatureHaunt;
         this.setRuleAtTheTop(creatureHaunt);
         this.addTarget(new TargetCreaturePermanent());
-
     }
 
     private HauntExileAbility(final HauntExileAbility ability) {
@@ -201,7 +193,7 @@ class HauntEffect extends OneShotEffect {
                 .append(source.getSourceId().toString())
                 .append(card.getZoneChangeCounter(game)
                         + hauntedCreature.getZoneChangeCounter(game)).toString();  // in case it is blinked
-        game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source)));
+        game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source), game));
         card.addInfo("hauntinfo", new StringBuilder("Haunting ").append(hauntedCreature.getLogName()).toString(), game);
         hauntedCreature.addInfo("hauntinfo", new StringBuilder("Haunted by ").append(card.getLogName()).toString(), game);
         game.informPlayers(new StringBuilder(card.getName()).append(" haunting ").append(hauntedCreature.getLogName()).toString());

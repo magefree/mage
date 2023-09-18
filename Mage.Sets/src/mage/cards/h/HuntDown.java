@@ -58,7 +58,7 @@ class HuntDownEffect extends RequirementEffect {
         staticText = "Target creature blocks target creature this turn if able";
     }
 
-    public HuntDownEffect(final HuntDownEffect effect) {
+    private HuntDownEffect(final HuntDownEffect effect) {
         super(effect);
     }
 

@@ -20,7 +20,7 @@ public final class GoBlank extends CardImpl {
         // Target player discards two cards. Then exile all cards from that player's graveyard.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect()
-                .setText("Then exile all cards from that player's graveyard"));
+                .setText("Then exile that player's graveyard"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

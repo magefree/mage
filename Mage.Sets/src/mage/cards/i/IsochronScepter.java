@@ -11,10 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
@@ -33,15 +30,13 @@ public final class IsochronScepter extends CardImpl {
     public IsochronScepter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // Imprint - When Isochron Scepter enters the battlefield, you may exile an 
-        // instant card with converted mana cost 2 or less from your hand.
+        // Imprint - When Isochron Scepter enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new IsochronScepterImprintEffect(),true)
-                .withFlavorWord("Imprint")
+                .setAbilityWord(AbilityWord.IMPRINT)
         );
 
-        // {2}, {tap}: You may copy the exiled card. If you do, you may cast the 
-        // copy without paying its mana cost.
+        // {2}, {T}: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new IsochronScepterCopyEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
@@ -74,7 +69,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
         staticText = "you may exile an instant card with mana value 2 or less from your hand";
     }
 
-    public IsochronScepterImprintEffect(IsochronScepterImprintEffect effect) {
+    private IsochronScepterImprintEffect(final IsochronScepterImprintEffect effect) {
         super(effect);
     }
 
@@ -85,8 +80,8 @@ class IsochronScepterImprintEffect extends OneShotEffect {
         if (controller != null) {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                        && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+                if (target.canChoose(source.getControllerId(), source, game)
+                        && controller.choose(Outcome.Benefit, controller.getHand(), target, source, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
@@ -121,7 +116,7 @@ class IsochronScepterCopyEffect extends OneShotEffect {
                 + "you may cast the copy without paying its mana cost";
     }
 
-    public IsochronScepterCopyEffect(final IsochronScepterCopyEffect effect) {
+    private IsochronScepterCopyEffect(final IsochronScepterCopyEffect effect) {
         super(effect);
     }
 
@@ -144,8 +139,6 @@ class IsochronScepterCopyEffect extends OneShotEffect {
                     if (controller.chooseUse(outcome, "Create a copy of " + imprintedInstant.getName() + '?', source, game)) {
                         Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                         if (copiedCard != null) {
-                            game.getExile().add(source.getSourceId(), "", copiedCard);
-                            game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                             if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
                                     game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);

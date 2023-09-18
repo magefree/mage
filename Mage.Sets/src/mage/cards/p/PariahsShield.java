@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class PariahsShield extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahEffect()));
         
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private PariahsShield(final PariahsShield card) {
@@ -51,7 +52,7 @@ public final class PariahsShield extends CardImpl {
             staticText = "All damage that would be dealt to you is dealt to equipped creature instead";
         }
 
-        PariahEffect(final PariahEffect effect) {
+        private PariahEffect(final PariahEffect effect) {
             super(effect);
         }
 

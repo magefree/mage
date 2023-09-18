@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import java.util.UUID;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -15,10 +14,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.ValueHint;
-import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,10 +44,11 @@ public final class Demilich extends CardImpl {
         // This spell costs {U} less to cast for each instant and sorcery you've cast this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(
                 new ManaCostsImpl<>("{U}"), DemilichValue.instance
-        )).addHint(new ValueHint("Instants and sorceries you've cast this turn", DemilichValue.instance)), new SpellsCastWatcher());
+        )).addHint(new ValueHint("Instants and sorceries you've cast this turn", DemilichValue.instance)));
 
         // Whenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
-        Ability ability = new AttacksTriggeredAbility(new DemilichCopyEffect());
+        Ability ability = new AttacksTriggeredAbility(new ExileTargetCardCopyAndCastEffect(false).setText(
+                "exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy"));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
@@ -76,7 +75,7 @@ enum DemilichValue implements DynamicValue {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             for (Spell spell : watcher.getSpellsCastThisTurn(sourceAbility.getControllerId())) {
-                if (spell.isInstantOrSorcery()) {
+                if (spell.isInstantOrSorcery(game)) {
                     spells++;
                 }
             }
@@ -91,42 +90,7 @@ enum DemilichValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "instant and sorcery you've cast this turn";
-    }
-}
-
-class DemilichCopyEffect extends OneShotEffect {
-
-    public DemilichCopyEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy";
-    }
-
-    private DemilichCopyEffect(final DemilichCopyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DemilichCopyEffect copy() {
-        return new DemilichCopyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (controller == null || card == null) {
-            return false;
-        }
-        controller.moveCards(card, Zone.EXILED, source, game);
-        if (controller.chooseUse(outcome, "Cast copy of " + card.getName() + '?', source, game)) {
-            Card copiedCard = game.copyCard(card, source, controller.getId());
-            game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-            controller.cast(controller.chooseAbilityForCast(copiedCard, game, false),
-                    game, false, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
-        }
-        return true;
+        return "instant and sorcery spell you've cast this turn";
     }
 }
 
@@ -134,7 +98,7 @@ class DemilichPlayEffect extends AsThoughEffectImpl {
 
     public DemilichPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        this.staticText = "You may cast {this} from your graveyard by exiling four instants and/or sorcery cards from your graveyard in addition to paying its other costs";
+        this.staticText = "You may cast {this} from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs";
     }
 
     private DemilichPlayEffect(final DemilichPlayEffect effect) {

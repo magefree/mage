@@ -33,7 +33,7 @@ public final class UrborgSyphonMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{B}, {tap}, Discard a card: Each other player loses 2 life. You gain life equal to the life lost this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrborgSyphonMageEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrborgSyphonMageEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

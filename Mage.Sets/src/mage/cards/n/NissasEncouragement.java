@@ -55,7 +55,7 @@ class NissasEncouragementEffect extends OneShotEffect {
         this.staticText = "Search your library and graveyard for a card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage. Reveal those cards, put them into your hand, then shuffle.";
     }
 
-    public NissasEncouragementEffect(final NissasEncouragementEffect effect) {
+    private NissasEncouragementEffect(final NissasEncouragementEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class NissasEncouragementEffect extends OneShotEffect {
                     namedFilterGY.add(new NamePredicate(name));
                     if (player.getGraveyard().count(namedFilterGY, game) > 0) {
                         TargetCard targetGY = new TargetCard(0, 1, Zone.GRAVEYARD, namedFilterGY);
-                        if (player.choose(Outcome.ReturnToHand, player.getGraveyard(), targetGY, game)) {
+                        if (player.choose(Outcome.ReturnToHand, player.getGraveyard(), targetGY, source, game)) {
                             for (UUID cardIdGY : targetGY.getTargets()) {
                                 Card cardGY = player.getGraveyard().get(cardIdGY, game);
                                 cards.add(cardGY);
@@ -135,7 +135,7 @@ class NissasEncouragementTarget extends TargetCardInLibrary {
         super(0, 3, filter);
     }
 
-    public NissasEncouragementTarget(final NissasEncouragementTarget target) {
+    private NissasEncouragementTarget(final NissasEncouragementTarget target) {
         super(target);
     }
 

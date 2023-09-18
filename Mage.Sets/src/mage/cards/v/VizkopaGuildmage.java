@@ -45,12 +45,12 @@ public final class VizkopaGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // 1{W}{B}: Target creature gains lifelink until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // 1{W}{B}: Whenever you gain life this turn, each opponent loses that much life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new VizkopaGuildmageDelayedTriggeredAbility()), new ManaCostsImpl("{1}{W}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new VizkopaGuildmageDelayedTriggeredAbility()), new ManaCostsImpl<>("{1}{W}{B}")));
 
     }
 
@@ -70,7 +70,7 @@ class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new OpponentsLoseLifeEffect(), Duration.EndOfTurn, false);
     }
 
-    public VizkopaGuildmageDelayedTriggeredAbility(VizkopaGuildmageDelayedTriggeredAbility ability) {
+    private VizkopaGuildmageDelayedTriggeredAbility(final VizkopaGuildmageDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -105,7 +105,7 @@ class OpponentsLoseLifeEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public OpponentsLoseLifeEffect(final OpponentsLoseLifeEffect effect) {
+    private OpponentsLoseLifeEffect(final OpponentsLoseLifeEffect effect) {
         super(effect);
     }
 

@@ -7,6 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.TwoChoiceVote;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -32,7 +33,7 @@ public final class OrchardElemental extends CardImpl {
         // <i>Council's dilemma</i> &mdash When Orchard Elemental enters the battlefield, starting with you, each player votes for sprout or harvest. Put two +1/+1 counters on Orchard Elemental for each sprout vote. You gain 3 life for each harvest vote.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new OrchardElementalEffect(), false)
-                .withFlavorWord("Council's dilemma")
+                .setAbilityWord(AbilityWord.COUNCILS_DILEMMA)
         );
     }
 

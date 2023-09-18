@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
@@ -36,15 +35,14 @@ public final class GideonBattleForged extends CardImpl {
 
     public GideonBattleForged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
         this.color.setWhite(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: Up to one target creature an opponent controls attacks Gideon, Battle-Forged during its controller's next turn if able.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new GideonBattleForgedAttacksIfAbleTargetEffect(Duration.Custom), 2);
@@ -62,7 +60,7 @@ public final class GideonBattleForged extends CardImpl {
         this.addAbility(loyaltyAbility);
 
         // 0: Until end of turn, Gideon, Battle-Forged becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-        LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonBattleForgedToken(), "planeswalker", Duration.EndOfTurn), 0);
+        LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonBattleForgedToken(), CardType.PLANESWALKER, Duration.EndOfTurn), 0);
         effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt to him this turn");
         ability3.addEffect(effect);
@@ -92,7 +90,7 @@ class GideonBattleForgedToken extends TokenImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public GideonBattleForgedToken(final GideonBattleForgedToken token) {
+    private GideonBattleForgedToken(final GideonBattleForgedToken token) {
         super(token);
     }
 
@@ -110,7 +108,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         staticText = "Up to one target creature an opponent controls attacks {this} during its controller's next turn if able";
     }
 
-    public GideonBattleForgedAttacksIfAbleTargetEffect(final GideonBattleForgedAttacksIfAbleTargetEffect effect) {
+    private GideonBattleForgedAttacksIfAbleTargetEffect(final GideonBattleForgedAttacksIfAbleTargetEffect effect) {
         super(effect);
         this.targetPermanentReference = effect.targetPermanentReference;
     }
@@ -129,7 +127,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         if (targetPermanent == null) {
             return true;
         }
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game); // discard on end of their next turn
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game); // discard on end of their next turn
     }
 
     @Override

@@ -44,7 +44,7 @@ public final class HiredMuscle extends CardImpl {
         this.flipCardName = "Scarmaker";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Hired Muscle.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Hired Muscle, you may flip it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
@@ -67,7 +67,7 @@ class Scarmaker extends TokenImpl {
 
     Scarmaker() {
         super("Scarmaker", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SPIRIT);
@@ -82,7 +82,7 @@ class Scarmaker extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public Scarmaker(final Scarmaker token) {
+    private Scarmaker(final Scarmaker token) {
         super(token);
     }
 

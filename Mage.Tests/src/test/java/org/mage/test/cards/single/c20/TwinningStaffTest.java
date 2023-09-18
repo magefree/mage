@@ -29,14 +29,13 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, growth);
 
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // skip stack order
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, bear);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, growth, zada);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, zada, 3 + 3, 3 + 3);
         assertPowerToughness(playerA, bear, 2 + 3 + 3, 2 + 3 + 3);
@@ -57,7 +56,6 @@ public class TwinningStaffTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, zada, 3 + 3, 3 + 3);
         assertPowerToughness(playerA, bear, 2 + 3 + 3 + 3, 2 + 3 + 3 + 3);
@@ -74,18 +72,34 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, fork);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, disfigure, bear);
-        setChoice(playerA, "Yes", 2);
+        setChoice(playerA, true, 2);
         addTarget(playerA, elite, 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fork, disfigure, disfigure);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, disfigure, 1);
         assertGraveyardCount(playerA, fork, 1);
         assertGraveyardCount(playerA, bear, 1);
         assertGraveyardCount(playerA, elite, 1);
+    }
+
+    @Test
+    public void testThousandYearStormZeroCopies() {
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Thousand-Year Storm");
+        addCard(Zone.BATTLEFIELD, playerA, staff);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Lightning Bolt", playerB);
+        checkLife("before", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStrictChooseMode(false);
+        checkLife("copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 3);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
     }
 }

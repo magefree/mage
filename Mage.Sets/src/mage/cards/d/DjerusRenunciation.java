@@ -24,7 +24,7 @@ public final class DjerusRenunciation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Cycling {W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W}")));
 
     }
 

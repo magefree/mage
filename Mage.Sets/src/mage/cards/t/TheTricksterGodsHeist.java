@@ -33,7 +33,7 @@ public final class TheTricksterGodsHeist extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — You may exchange control of two target creatures.
         sagaAbility.addChapterEffect(
@@ -108,13 +108,13 @@ class TheTricksterGodsHeistTarget extends TargetPermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         Set<CardType> cardTypes = new HashSet<>();
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         if (targetSource == null) {
             return false;
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
             if (!permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                 continue;
             }

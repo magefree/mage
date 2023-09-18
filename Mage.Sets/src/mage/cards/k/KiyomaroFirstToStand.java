@@ -15,7 +15,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -37,14 +36,14 @@ public final class KiyomaroFirstToStand extends CardImpl {
 
     public KiyomaroFirstToStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Kiyomaro, First to Stand's power and toughness are each equal to the number of cards in your hand.
         DynamicValue xValue= CardsInControllerHandCount.instance;
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
         
         // As long as you have four or more cards in hand, Kiyomaro has vigilance.
         Condition condition = new CardsInHandCondition(ComparisonType.MORE_THAN,3);
@@ -77,7 +76,7 @@ class KiyomaroFirstToStandDealsDamageTriggeredAbility extends TriggeredAbilityIm
         super(Zone.BATTLEFIELD, new GainLifeEffect(7), false);
     }
 
-    public KiyomaroFirstToStandDealsDamageTriggeredAbility(final KiyomaroFirstToStandDealsDamageTriggeredAbility ability) {
+    private KiyomaroFirstToStandDealsDamageTriggeredAbility(final KiyomaroFirstToStandDealsDamageTriggeredAbility ability) {
         super(ability);
     }
 

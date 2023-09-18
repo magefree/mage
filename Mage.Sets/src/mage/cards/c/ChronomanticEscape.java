@@ -30,11 +30,11 @@ public final class ChronomanticEscape extends CardImpl {
         getSpellAbility().addEffect(new CantAttackYouAllEffect(Duration.UntilYourNextTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
         getSpellAbility().addEffect(new ExileSpellEffect());
         Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), true, true);
-        effect.setText("with 3 time counters on it");
+        effect.setText("with three time counters on it");
         getSpellAbility().addEffect(effect);
 
         // Suspend 3-{2}{W}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{W}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{W}"), this));
     }
 
     private ChronomanticEscape(final ChronomanticEscape card) {

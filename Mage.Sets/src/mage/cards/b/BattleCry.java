@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class BattleCry extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white creatures you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -55,7 +54,7 @@ class BattleCryTriggeredAbility extends DelayedTriggeredAbility {
         super(new BoostTargetEffect(0, 1, Duration.EndOfTurn), Duration.EndOfTurn, false, false);
     }
 
-    public BattleCryTriggeredAbility(final BattleCryTriggeredAbility ability) {
+    private BattleCryTriggeredAbility(final BattleCryTriggeredAbility ability) {
         super(ability);
     }
 
@@ -66,12 +65,12 @@ class BattleCryTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
+        getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 

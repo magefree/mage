@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -20,9 +19,9 @@ public final class DictateOfKarametra extends CardImpl {
     public DictateOfKarametra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
 
-
         // Flash
         this.addAbility(FlashAbility.getInstance());
+
         // Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaOfAnyTypeProducedEffect(),

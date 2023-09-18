@@ -28,20 +28,22 @@ public class PutToGraveyardTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stasis Snare");
         addTarget(playerA, "Silvercoat Lion");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G},", TestPlayer.NO_TARGET, "");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}{G},", TestPlayer.NO_TARGET, "");
         addTarget(playerA, "Silvercoat Lion");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Stasis Snare", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 0);
         assertExileCount(playerB, 0);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
-        assertPermanentCount(playerA, "Eldrazi Scion", 1);
+        assertPermanentCount(playerA, "Eldrazi Scion Token", 1);
 
     }
 

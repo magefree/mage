@@ -16,7 +16,7 @@ public final class ElvishRanger extends CardImpl {
 
     public ElvishRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.ELF, SubType.RANGER);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);

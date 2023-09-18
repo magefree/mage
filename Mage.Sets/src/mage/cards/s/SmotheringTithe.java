@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DrawCardOpponentTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,9 +43,7 @@ class SmotheringTitheEffect extends OneShotEffect {
 
     SmotheringTitheEffect() {
         super(Outcome.Benefit);
-        staticText = "that player may pay {2}. If the player doesn't, " +
-                "you create a colorless Treasure artifact token " +
-                "with \"{T}, Sacrifice this artifact: Add one mana of any color.\"";
+        staticText = "that player may pay {2}. If the player doesn't, you create a Treasure token";
     }
 
     private SmotheringTitheEffect(final SmotheringTitheEffect effect) {
@@ -67,7 +64,7 @@ class SmotheringTitheEffect extends OneShotEffect {
         Cost cost = ManaUtil.createManaCost(2, false);
         if (!player.chooseUse(Outcome.Detriment, "Pay {2} to prevent this effect?", source, game)
                 || !cost.pay(source, game, source, player.getId(), false)) {
-            return new CreateTokenEffect(new TreasureToken()).apply(game, source);
+            return new TreasureToken().putOntoBattlefield(1, game, source, source.getControllerId());
         }
         return false;
     }

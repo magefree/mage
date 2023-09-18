@@ -54,7 +54,7 @@ class EmissaryOfDespairCount implements DynamicValue {
         }
         FilterArtifactPermanent filter = new FilterArtifactPermanent();
         filter.add(new ControllerIdPredicate(effect.getTargetPointer().getFirst(game, sourceAbility)));
-        return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        return game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
     }
 
     @Override

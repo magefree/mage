@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -33,7 +32,7 @@ public final class IvoryGuardians extends CardImpl {
 
     static {
         controlFilter.add(new ColorPredicate(ObjectColor.RED));
-        controlFilter.add(Predicates.not(TokenPredicate.instance));
+        controlFilter.add(TokenPredicate.FALSE);
         boostFilter.add(new NamePredicate("Ivory Guardians"));
     }
 

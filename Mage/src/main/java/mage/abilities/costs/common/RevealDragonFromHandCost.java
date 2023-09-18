@@ -27,6 +27,7 @@ public class RevealDragonFromHandCost extends RevealTargetFromHandCost {
 
     public RevealDragonFromHandCost() {
         super(new TargetCardInHand(0, 1, filter));
+        this.text = "you may reveal a Dragon card from your hand";
     }
 
     private RevealDragonFromHandCost(final RevealDragonFromHandCost cost) {
@@ -43,7 +44,7 @@ public class RevealDragonFromHandCost extends RevealTargetFromHandCost {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         super.pay(ability, game, source, controllerId, noMana, costToPay);
         revealedOrControlled = numberCardsRevealed > 0
-                || game.getBattlefield().count(filter2, source.getSourceId(), controllerId, game) > 0;
+                || game.getBattlefield().count(filter2, controllerId, source, game) > 0;
         return paid = true;
     }
 

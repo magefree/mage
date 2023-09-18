@@ -48,7 +48,7 @@ class HarnessedLightningEffect extends OneShotEffect {
         this.staticText = "Choose target creature. You get {E}{E}{E}, then you may pay any amount of {E}. {this} deals that much damage to that creature";
     }
 
-    public HarnessedLightningEffect(final HarnessedLightningEffect effect) {
+    private HarnessedLightningEffect(final HarnessedLightningEffect effect) {
         super(effect);
     }
 

@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
@@ -31,7 +30,7 @@ public class ExileAllEffect extends OneShotEffect {
         setText();
     }
 
-    public ExileAllEffect(final ExileAllEffect effect) {
+    protected ExileAllEffect(final ExileAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.forSource = effect.forSource;
@@ -45,16 +44,15 @@ public class ExileAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         ).stream().forEach(cards::add);
         if (forSource) {
-            return controller.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), sourceObject.getName());
+            return controller.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         }
         return controller.moveCards(cards, Zone.EXILED, source, game);
 

@@ -37,7 +37,7 @@ public final class OathOfLimDul extends CardImpl {
         this.addAbility(new OathOfLimDulTriggeredAbility());
 
         // {B}{B}: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{B}{B}")));
 
     }
 
@@ -57,7 +57,7 @@ class OathOfLimDulTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new OathOfLimDulEffect());
     }
 
-    public OathOfLimDulTriggeredAbility(final OathOfLimDulTriggeredAbility ability) {
+    private OathOfLimDulTriggeredAbility(final OathOfLimDulTriggeredAbility ability) {
         super(ability);
     }
 
@@ -98,7 +98,7 @@ class OathOfLimDulEffect extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public OathOfLimDulEffect(final OathOfLimDulEffect effect) {
+    private OathOfLimDulEffect(final OathOfLimDulEffect effect) {
         super(effect);
     }
 
@@ -113,8 +113,8 @@ class OathOfLimDulEffect extends OneShotEffect {
         if (amountDamage > 0
                 && controller != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(0, numberOfControlledPermanents, filter, true);
-            target.setNotTarget(true);
-            if (controller.choose(Outcome.Detriment, target, source.getSourceId(), game)) {
+            target.withNotTarget(true);
+            if (controller.choose(Outcome.Detriment, target, source, game)) {
                 for (UUID targetPermanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetPermanentId);
                     if (permanent != null

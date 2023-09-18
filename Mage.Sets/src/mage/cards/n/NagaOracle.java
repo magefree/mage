@@ -1,21 +1,16 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
- *
  * @author stravant
  */
 public final class NagaOracle extends CardImpl {
@@ -30,21 +25,7 @@ public final class NagaOracle extends CardImpl {
 
         // When Naga Oracle enters the battlefield, look at the top three cards of your library. Put any number of them into your graveyard
         // and the rest back on top of your library in any order.
-        Effect effect = new LookLibraryAndPickControllerEffect(
-                        /* oh god, Microsoft looks conservative with their function parameters in comparison */
-                        StaticValue.get(3),
-                        false,
-                        StaticValue.get(3),
-                        new FilterCard("cards"),
-                        Zone.LIBRARY,
-                        true,
-                        false,
-                        true,
-                        Zone.GRAVEYARD,
-                        false);
-        effect.setText("look at the top three cards of your library. Put any number of them into your graveyard "
-                + "and the rest back on top of your library in any order");
-        addAbility(new EntersBattlefieldTriggeredAbility(effect));
+        addAbility(new EntersBattlefieldTriggeredAbility(new SurveilEffect(3)));
     }
 
     private NagaOracle(final NagaOracle card) {

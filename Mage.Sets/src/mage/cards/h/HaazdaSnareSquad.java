@@ -12,8 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,11 +26,6 @@ import java.util.UUID;
 
 public final class HaazdaSnareSquad extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public HaazdaSnareSquad (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add(SubType.HUMAN);
@@ -41,15 +35,15 @@ public final class HaazdaSnareSquad extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Haazda Snare Squad attacks you may pay {W}. If you do, tap target creature an opponent controls.
-        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new TapTargetEffect(), new ManaCostsImpl("{W}")),false,
+        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new TapTargetEffect(), new ManaCostsImpl<>("{W}")),false,
                 "Whenever {this} attacks, you may pay {W}. If you do, tap target creature an opponent controls.");
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);
 
     }
 
-    public HaazdaSnareSquad (final HaazdaSnareSquad card) {
+    private HaazdaSnareSquad(final HaazdaSnareSquad card) {
         super(card);
     }
 

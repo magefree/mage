@@ -6,7 +6,7 @@ import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -54,7 +54,7 @@ public final class WorkshopElders extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(new AddCardTypeTargetEffect(
                 Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE
         ).setText("target noncreature artifact you control become a 0/0 artifact creature"), TargetController.YOU, true);
-        ability.addEffect(new SetPowerToughnessTargetEffect(
+        ability.addEffect(new SetBasePowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
         ).setText("If you do"));
         ability.addEffect(new AddCountersTargetEffect(

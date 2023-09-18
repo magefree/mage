@@ -32,7 +32,7 @@ public final class OrosTheAvenger extends CardImpl {
 
     public OrosTheAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(6);
@@ -42,7 +42,7 @@ public final class OrosTheAvenger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Oros, the Avenger deals combat damage to a player, you may pay {2}{W}. If you do, Oros deals 3 damage to each nonwhite creature.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new DamageAllEffect(3, filter), new ManaCostsImpl("{2}{W}")), false));
+                new DoIfCostPaid(new DamageAllEffect(3, filter), new ManaCostsImpl<>("{2}{W}")), false));
     }
 
     private OrosTheAvenger(final OrosTheAvenger card) {

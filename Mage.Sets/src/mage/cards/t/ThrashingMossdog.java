@@ -31,11 +31,11 @@ public final class ThrashingMossdog extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Scavenge {4}{G}{G}
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{4}{G}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{4}{G}{G}")));
 
     }
 
-    public ThrashingMossdog (final ThrashingMossdog card) {
+    private ThrashingMossdog(final ThrashingMossdog card) {
         super(card);
     }
 

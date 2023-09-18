@@ -11,7 +11,7 @@ import mage.game.draft.DraftCube;
 public class MonoBlueCube extends DraftCube {
 
     public MonoBlueCube() {
-        super("Mono Blue Cube");
+        super("elmikkino's Mono Blue Cube");
 
         cubeCards.add(new CardIdentity("Academy Ruins", ""));
         cubeCards.add(new CardIdentity("Adaptive Automaton", ""));

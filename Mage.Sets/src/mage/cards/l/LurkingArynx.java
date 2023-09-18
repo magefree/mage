@@ -34,7 +34,7 @@ public final class LurkingArynx extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{G}"),
+                new ManaCostsImpl<>("{2}{G}"),
                 FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         ability.addTarget(new TargetCreaturePermanent());

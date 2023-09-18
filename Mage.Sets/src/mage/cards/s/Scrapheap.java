@@ -10,7 +10,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
@@ -46,7 +45,7 @@ class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
         return new ScrapheapTriggeredAbility(this);
     }
     
-    public ScrapheapTriggeredAbility(final ScrapheapTriggeredAbility ability){
+    private ScrapheapTriggeredAbility(final ScrapheapTriggeredAbility ability){
         super(ability);
     }
     
@@ -65,7 +64,7 @@ class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && permanent.isOwnedBy(this.getControllerId())) {
-                if (StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.match(permanent, sourceId, controllerId, game)) {
+                if (StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.match(permanent, controllerId, this, game)) {
                     return true;
                 }
             }

@@ -20,7 +20,7 @@
  import java.util.*;
 
  /**
-  * Panel for stack and hand zones
+  * Panel for stack and hand zones, component for lookAt and reveal windows (CardInfoWindowDialog)
   *
   * @author BetaSteward_at_googlemail.com, JayDi85
   */
@@ -385,5 +385,15 @@
 
      public void setZone(Zone zone) {
          this.zone = zone;
+     }
+
+     /**
+      * For GUI: get mage card components for update (example: change playable status)
+      * Warning, do not change the list
+      *
+      * @return
+      */
+     public Map<UUID, MageCard> getMageCardsForUpdate() {
+         return this.cards;
      }
  }

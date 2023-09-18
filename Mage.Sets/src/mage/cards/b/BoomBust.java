@@ -1,8 +1,6 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardSetInfo;
@@ -13,6 +11,7 @@ import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 public final class BoomBust extends SplitCard {
 
@@ -29,9 +28,7 @@ public final class BoomBust extends SplitCard {
 
         // Boom
         // Destroy target land you control and target land you don't control.
-        Effect effect = new DestroyTargetEffect(false, true);
-        effect.setText("Destroy target land you control and target land you don't control");
-        getLeftHalfCard().getSpellAbility().addEffect(effect);
+        getLeftHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer()));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter1));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter2));
 

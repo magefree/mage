@@ -2,6 +2,7 @@
 package mage.cards.r;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -45,7 +46,7 @@ class ReverseTheSandsEffect extends OneShotEffect {
         this.staticText = "Redistribute any number of players' life totals";
     }
 
-    public ReverseTheSandsEffect(final ReverseTheSandsEffect effect) {
+    private ReverseTheSandsEffect(final ReverseTheSandsEffect effect) {
         super(effect);
     }
 
@@ -59,7 +60,7 @@ class ReverseTheSandsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice lifeChoice = new ChoiceImpl(true);
-            Set<String> choices = new HashSet<>();
+            Set<String> choices = new LinkedHashSet<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

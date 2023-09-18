@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -21,19 +20,16 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- * @author nantuko
+ * @author nantuko, xenohedron
  */
 public final class SuturedGhoul extends CardImpl {
-
-    private static final String staticText = "exile any number of creature cards from your graveyard";
-    private static final String staticText2 = "Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness";
 
     public SuturedGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
@@ -45,12 +41,12 @@ public final class SuturedGhoul extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.
-        this.addAbility(new AsEntersBattlefieldAbility(new SuturedGhoulEffect(), staticText));
+        this.addAbility(new AsEntersBattlefieldAbility(new SuturedGhoulEffect()));
 
         // Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-        BoostSourceEffect effect = new BoostSourceEffect(SuturedGhoulPowerCount.instance, SuturedGhoulToughnessCount.instance, Duration.WhileOnBattlefield);
-        effect.setText(staticText2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
+                SuturedGhoulPowerCount.instance, SuturedGhoulToughnessCount.instance, Duration.WhileOnBattlefield,
+                "{this}'s power is equal to the total power of the exiled cards and its toughness is equal to their total toughness")));
     }
 
     private SuturedGhoul(final SuturedGhoul card) {
@@ -65,12 +61,12 @@ public final class SuturedGhoul extends CardImpl {
 
 class SuturedGhoulEffect extends OneShotEffect {
 
-    public SuturedGhoulEffect() {
+    SuturedGhoulEffect() {
         super(Outcome.Benefit);
         staticText = "exile any number of creature cards from your graveyard";
     }
 
-    public SuturedGhoulEffect(SuturedGhoulEffect effect) {
+    private SuturedGhoulEffect(final SuturedGhoulEffect effect) {
         super(effect);
     }
 
@@ -82,7 +78,7 @@ class SuturedGhoulEffect extends OneShotEffect {
             return false;
         }
         if (!controller.getGraveyard().isEmpty()) {
-            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard"));
+            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD);
             if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 int count = 0;
                 for (UUID uuid : target.getTargets()) {

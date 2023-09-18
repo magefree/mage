@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -60,7 +59,7 @@ class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public ThunderbreakRegentTriggeredAbility(final ThunderbreakRegentTriggeredAbility ability) {
+    private ThunderbreakRegentTriggeredAbility(final ThunderbreakRegentTriggeredAbility ability) {
         super(ability);
     }
 
@@ -78,7 +77,7 @@ class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
+            if (creature != null && filter.match(creature, getControllerId(), this, game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
@@ -90,6 +89,6 @@ class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Dragon you control becomes the target of a spell or ability your opponent controls, {this} deals 3 damage to that player.";
+        return "Whenever a Dragon you control becomes the target of a spell or ability an opponent controls, {this} deals 3 damage to that player.";
     }
 }

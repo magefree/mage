@@ -59,7 +59,7 @@ public final class DiamondKnight extends CardImpl {
     }
 }
 
-enum DiamondKnightPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum DiamondKnightPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

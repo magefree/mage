@@ -26,7 +26,7 @@ public final class SamutsSprint extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains haste until end of turn"));
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

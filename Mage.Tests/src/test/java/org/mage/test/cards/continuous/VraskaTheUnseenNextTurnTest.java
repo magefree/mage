@@ -39,6 +39,5 @@ public class VraskaTheUnseenNextTurnTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 }

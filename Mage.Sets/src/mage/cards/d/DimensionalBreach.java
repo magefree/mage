@@ -163,8 +163,8 @@ class DimensionalBreachReturnEffect extends OneShotEffect {
         }
         if (cards.size() > 1) {
             TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
-            target.setNotTarget(true);
-            player.choose(outcome, cards, target, game);
+            target.withNotTarget(true);
+            player.choose(outcome, cards, target, source, game);
             cards.clear();
             cards.add(target.getFirstTarget());
         }

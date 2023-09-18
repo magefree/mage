@@ -51,7 +51,7 @@ class TempleAltisaurPreventEffect extends PreventionEffectImpl {
         consumable = false;
     }
 
-    public TempleAltisaurPreventEffect(TempleAltisaurPreventEffect effect) {
+    private TempleAltisaurPreventEffect(final TempleAltisaurPreventEffect effect) {
         super(effect);
     }
 

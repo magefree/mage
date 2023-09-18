@@ -42,7 +42,7 @@ public final class InfiltratorsMagemark extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Creatures you control that are enchanted get +1/+1 and can't be blocked except by creatures with defender.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
@@ -71,7 +71,7 @@ class InfiltratorsMagemarkCantBeBlockedAllEffect extends RestrictionEffect {
         this.staticText = "and can't be blocked except by creatures with defender";
     }
 
-    public InfiltratorsMagemarkCantBeBlockedAllEffect(InfiltratorsMagemarkCantBeBlockedAllEffect effect) {
+    private InfiltratorsMagemarkCantBeBlockedAllEffect(final InfiltratorsMagemarkCantBeBlockedAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -88,6 +88,6 @@ class InfiltratorsMagemarkCantBeBlockedAllEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 }

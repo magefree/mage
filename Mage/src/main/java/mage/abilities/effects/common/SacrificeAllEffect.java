@@ -40,7 +40,7 @@ public class SacrificeAllEffect extends OneShotEffect {
         setText();
     }
 
-    public SacrificeAllEffect(final SacrificeAllEffect effect) {
+    protected SacrificeAllEffect(final SacrificeAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter.copy();
@@ -64,9 +64,9 @@ public class SacrificeAllEffect extends OneShotEffect {
             if (player != null) {
                 int numTargets = Math.min(amount.calculate(game, source, this), game.getBattlefield().countAll(filter, player.getId(), game));
                 TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, true);
-                if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                if (target.canChoose(player.getId(), source, game)) {
                     while (!target.isChosen() && player.canRespond()) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                     }
                     perms.addAll(target.getTargets());
                 }

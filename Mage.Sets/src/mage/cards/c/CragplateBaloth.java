@@ -42,7 +42,7 @@ public final class CragplateBaloth extends CardImpl {
 
         // If Cragplate Baloth was kicked, it enters the battlefield with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), KickedCondition.instance,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), KickedCondition.ONCE,
                 "If {this} was kicked, it enters the battlefield with four +1/+1 counters on it.", ""
         ));
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -41,7 +40,7 @@ public final class SurgeOfStrength extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains trample");
         this.getSpellAbility().addEffect(effect);
-        effect = new BoostTargetEffect(TargetManaValue.instance, StaticValue.get(0), Duration.EndOfTurn, true);
+        effect = new BoostTargetEffect(TargetManaValue.instance, StaticValue.get(0), Duration.EndOfTurn);
         effect.setText("and gets +X/+0 until end of turn, where X is that creature's mana value");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

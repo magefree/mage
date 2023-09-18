@@ -55,7 +55,7 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
                 + "Each opponent who controls more lands than you can't play lands.";
     }
 
-    public WardOfBonesEffect(final WardOfBonesEffect effect) {
+    private WardOfBonesEffect(final WardOfBonesEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't play the land or cast the spell (" + mageObject.getLogName() + " in play).";
         }
@@ -103,8 +103,8 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;
             }
             if (card.isEnchantment(game)
-                    && game.getBattlefield().countAll(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, opponent.getId(), game)
-                    > game.getBattlefield().countAll(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, source.getControllerId(), game)) {
+                    && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, opponent.getId(), game)
+                    > game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, source.getControllerId(), game)) {
                 return true;
             }
             final int yourLands = game.getBattlefield().countAll(new FilterLandPermanent(), source.getControllerId(), game);

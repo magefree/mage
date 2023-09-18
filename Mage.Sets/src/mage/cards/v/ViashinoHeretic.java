@@ -33,7 +33,7 @@ public final class ViashinoHeretic extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{R}, {tap}: Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoHereticEffect(), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoHereticEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
@@ -54,9 +54,10 @@ class ViashinoHereticEffect extends OneShotEffect {
 
     public ViashinoHereticEffect() {
         super(Outcome.DestroyPermanent);
+        this.staticText = "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's mana value";
     }
 
-    public ViashinoHereticEffect(final ViashinoHereticEffect effect) {
+    private ViashinoHereticEffect(final ViashinoHereticEffect effect) {
         super(effect);
     }
 
@@ -79,10 +80,5 @@ class ViashinoHereticEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's mana value";
     }
 }

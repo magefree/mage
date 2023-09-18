@@ -28,12 +28,11 @@ public final class ElusiveTormentor extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.i.InsidiousMist.class;
 
         // {1}, Discard a card: Transform Elusive Tormentor.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new GenericManaCost(1));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

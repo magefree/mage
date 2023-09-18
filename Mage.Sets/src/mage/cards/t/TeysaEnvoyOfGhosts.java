@@ -20,8 +20,8 @@ import mage.game.permanent.token.WhiteBlackSpiritToken;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.filter.common.FilterCreatureCard;
 
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  * @author LevelX2
@@ -30,7 +30,7 @@ public final class TeysaEnvoyOfGhosts extends CardImpl {
 
     public TeysaEnvoyOfGhosts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 
@@ -41,7 +41,7 @@ public final class TeysaEnvoyOfGhosts extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // protection from creatures
-        this.addAbility(new ProtectionAbility(FILTER_PERMANENT_CREATURES));
+        this.addAbility(new ProtectionAbility(new FilterCreatureCard("creatures")));
 
         // Whenever a creature deals combat damage to you, destroy that creature. Create a 1/1 white and black Spirit creature token with flying.
         this.addAbility(new TeysaEnvoyOfGhostsTriggeredAbility());
@@ -65,7 +65,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
     }
 
-    public TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
+    private TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
         super(ability);
     }
 

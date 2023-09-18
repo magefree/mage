@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -14,27 +13,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class StreambedAquitects extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creature");
-    static {
-        filter.add(SubType.MERFOLK.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.MERFOLK, "Merfolk creature");
 
     public StreambedAquitects(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SCOUT);
 
@@ -42,16 +35,18 @@ public final class StreambedAquitects extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Target Merfolk creature gets +1/+1 and gains islandwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1,1, Duration.EndOfTurn), new TapSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(new IslandwalkAbility(false), Duration.EndOfTurn));
-        Target target = new TargetCreaturePermanent(filter);
-        ability.addTarget(target);
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(
+                1, 1, Duration.EndOfTurn
+        ).setText("target Merfolk creature gets +1/+1"), new TapSourceCost());
+        ability.addEffect(new GainAbilityTargetEffect(
+                new IslandwalkAbility(false), Duration.EndOfTurn
+        ).setText("and gains islandwalk until end of turn"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // {tap}: Target land becomes an Island until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.ISLAND), new TapSourceCost());
-        target = new TargetLandPermanent();
-        ability.addTarget(target);
+        ability = new SimpleActivatedAbility(new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.ISLAND), new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
 

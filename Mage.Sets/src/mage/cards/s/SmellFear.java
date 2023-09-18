@@ -22,7 +22,7 @@ public final class SmellFear extends CardImpl {
         this.getSpellAbility().addEffect(new ProliferateEffect());
 
         // Target creature you control fights up to one target creature you don't control.
-        this.getSpellAbility().addEffect(new FightTargetsEffect(
+        this.getSpellAbility().addEffect(new FightTargetsEffect().setText(
                 "<br>Target creature you control fights up to one target creature you don't control"
         ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

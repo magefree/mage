@@ -54,7 +54,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Spells with the chosen name can't be cast";
     }
 
-    public MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {
+    private MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast a spell with that name (" + mageObject.getName() + " in play).";
         }

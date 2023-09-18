@@ -25,7 +25,7 @@ public final class EdricSpymasterOfTrest extends CardImpl {
 
     public EdricSpymasterOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
 
@@ -52,7 +52,7 @@ class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1, true), false);
     }
 
-    public EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
+    private EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
         super(ability);
     }
 

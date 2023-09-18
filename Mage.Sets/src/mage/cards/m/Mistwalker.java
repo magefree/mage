@@ -34,7 +34,7 @@ public final class Mistwalker extends CardImpl {
 
         // {1}{U}: Mistwalker gets +1/-1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")
+                new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")
         ));
     }
 

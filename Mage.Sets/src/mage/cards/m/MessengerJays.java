@@ -8,6 +8,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.TwoChoiceVote;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -36,7 +37,7 @@ public final class MessengerJays extends CardImpl {
         // <i>Council's dilemma &mdash; When Messenger Jays enters the battlefield, starting with you, each player votes for feather or quill. Put a +1/+1 counter on Messenger Jays for each feather vote and draw a card for each quill vote. For each card drawn this way, discard a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new MessengerJaysEffect(), false)
-                .withFlavorWord("Council's dilemma")
+                .setAbilityWord(AbilityWord.COUNCILS_DILEMMA)
         );
     }
 

@@ -21,7 +21,7 @@ public final class MephiticVapors extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn));
 
         // Surveil 2.
-        this.getSpellAbility().addEffect(new SurveilEffect(2));
+        this.getSpellAbility().addEffect(new SurveilEffect(2).concatBy("<br>"));
     }
 
     private MephiticVapors(final MephiticVapors card) {

@@ -35,7 +35,7 @@ public final class Kudzu extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted land becomes tapped, destroy it. That land's controller attaches Kudzu to a land of their choice.
@@ -60,7 +60,7 @@ class KudzuEffect extends OneShotEffect {
         staticText = "destroy it. That land's controller attaches {this} to a land of their choice";
     }
 
-    public KudzuEffect(final KudzuEffect effect) {
+    private KudzuEffect(final KudzuEffect effect) {
         super(effect);
     }
 
@@ -83,10 +83,10 @@ class KudzuEffect extends OneShotEffect {
                 }
                 if (!game.getBattlefield().getAllActivePermanents(CardType.LAND, game).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
-                    target.setNotTarget(true); //not a target, it is chosen
+                    target.withNotTarget(true); //not a target, it is chosen
                     Card kudzuCard = game.getCard(source.getSourceId());
                     if (kudzuCard != null && landsController != null) {
-                        if (landsController.choose(Outcome.Detriment, target, source.getId(), game)) {
+                        if (landsController.choose(Outcome.Detriment, target, source, game)) {
                             if (target.getFirstTarget() != null) {
                                 Permanent landChosen = game.getPermanent(target.getFirstTarget());
                                 if (landChosen != null) {

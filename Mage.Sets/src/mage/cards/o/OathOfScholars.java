@@ -64,7 +64,7 @@ enum OathOfScholarsAdjuster implements TargetAdjuster {
     }
 }
 
-class OathOfScholarsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class OathOfScholarsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
@@ -94,13 +94,13 @@ class OathOfScholarsEffect extends OneShotEffect {
         staticText = "that player chooses target player who has more cards in hand than they do and is their opponent. The first player may discard their hand and draw three cards";
     }
 
-    public OathOfScholarsEffect(OathOfScholarsEffect effect) {
+    private OathOfScholarsEffect(final OathOfScholarsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player firstPlayer = game.getPlayer(game.getActivePlayerId());
         if (sourceObject == null || firstPlayer == null) {
             return false;

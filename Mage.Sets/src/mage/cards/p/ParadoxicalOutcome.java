@@ -33,7 +33,7 @@ public final class ParadoxicalOutcome extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public ParadoxicalOutcome(UUID ownerId, CardSetInfo setInfo) {
@@ -63,7 +63,7 @@ class ParadoxicalOutcomeEffect extends OneShotEffect {
         this.staticText = "Return any number of target nonland, nontoken permanents you control to their owners' hands. Draw a card for each card returned to your hand this way";
     }
 
-    ParadoxicalOutcomeEffect(final ParadoxicalOutcomeEffect effect) {
+    private ParadoxicalOutcomeEffect(final ParadoxicalOutcomeEffect effect) {
         super(effect);
     }
 

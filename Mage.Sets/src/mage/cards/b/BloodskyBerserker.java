@@ -28,13 +28,15 @@ public final class BloodskyBerserker extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever you cast your second spell each turn, put two +1/+1 counters on Bloodsky Berserker. It gains menace until end of turn.
+        // Whenever you cast your second spell each turn, put two +1/+1 counters on Bloodsky Berserker.
         Ability ability = new CastSecondSpellTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))
         );
+        // It gains menace until end of turn.
         ability.addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(), Duration.EndOfTurn
-        ).setText("It gains menace until end of turn"));
+        ).setText("It gains menace until end of turn. " +
+                "<i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
     }
 

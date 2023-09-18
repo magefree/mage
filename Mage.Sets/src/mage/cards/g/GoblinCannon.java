@@ -23,7 +23,7 @@ public final class GoblinCannon extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}: Goblin Cannon deals 1 damage to any target. Sacrifice Goblin Cannon.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new SacrificeSourceEffect());
         this.addAbility(ability);

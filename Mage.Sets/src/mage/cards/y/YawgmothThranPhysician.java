@@ -35,7 +35,7 @@ public final class YawgmothThranPhysician extends CardImpl {
     public YawgmothThranPhysician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -56,7 +56,7 @@ public final class YawgmothThranPhysician extends CardImpl {
         this.addAbility(ability);
 
         // {B}{B}, Discard a card: Proliferate.
-        ability = new SimpleActivatedAbility(new ProliferateEffect(), new ManaCostsImpl("{B}{B}"));
+        ability = new SimpleActivatedAbility(new ProliferateEffect(), new ManaCostsImpl<>("{B}{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

@@ -37,7 +37,6 @@ public class TheOzolithTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(THE_OZOLITH, CounterType.P1P1, 2);
@@ -57,11 +56,10 @@ public class TheOzolithTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, FERTILID);
 
-        setChoice(playerA, "Yes"); // Move counters at beginning of combat
+        setChoice(playerA, true); // Move counters at beginning of combat
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(WALKING_CORPSE, CounterType.P1P1, 2);
@@ -80,11 +78,10 @@ public class TheOzolithTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, FERTILID);
 
-        setChoice(playerA, "Yes"); // Move counters at beginning of combat
+        setChoice(playerA, true); // Move counters at beginning of combat
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(TATTERKITE, CounterType.P1P1, 0);
@@ -105,11 +102,10 @@ public class TheOzolithTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, FERTILID);
 
-        setChoice(playerA, "Yes"); // Move counters at beginning of combat
+        setChoice(playerA, true); // Move counters at beginning of combat
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(WALKING_CORPSE, CounterType.P1P1, 0);
@@ -132,11 +128,10 @@ public class TheOzolithTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, FERTILID);
 
-        setChoice(playerA, "Yes", 2); // Move counters at beginning of combat
+        setChoice(playerA, true, 2); // Move counters at beginning of combat
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(WALKING_CORPSE, CounterType.P1P1, 4);
@@ -154,13 +149,12 @@ public class TheOzolithTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, BRANCHING_EVOLUTION);
         addCard(Zone.HAND, playerA, PUNCTURE_BLAST);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, FERTILID);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, BRANCHING_EVOLUTION);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, FERTILID, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, BRANCHING_EVOLUTION ,true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, PUNCTURE_BLAST, FERTILID);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         // The Ozolith should be a creature which received 4 +1/+1 counters and 3 -1/-1 counters

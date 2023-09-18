@@ -53,7 +53,7 @@ class TsabosWebPreventUntapEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step";
     }
 
-    public TsabosWebPreventUntapEffect(final TsabosWebPreventUntapEffect effect) {
+    private TsabosWebPreventUntapEffect(final TsabosWebPreventUntapEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class TsabosWebPreventUntapEffect extends ContinuousRuleModifyingEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.isLand(game)) {
                 for (Ability ability :permanent.getAbilities()) {

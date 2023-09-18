@@ -32,7 +32,7 @@ public final class Vandalblast extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
         // Overload {4}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new DestroyAllEffect(FILTER), new ManaCostsImpl("{4}{R}")));
+        this.addAbility(new OverloadAbility(this, new DestroyAllEffect(FILTER), new ManaCostsImpl<>("{4}{R}")));
 
     }
 

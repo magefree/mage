@@ -40,7 +40,7 @@ public final class HighlandBerserker extends CardImpl {
         // Whenever Highland Berserker or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
         Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
         effect.setText("you may have Ally creatures you control gain first strike until end of turn");
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(effect, true));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(effect, true).setAbilityWord(null));
     }
 
     private HighlandBerserker(final HighlandBerserker card) {

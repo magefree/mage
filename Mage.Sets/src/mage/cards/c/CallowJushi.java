@@ -43,7 +43,7 @@ public final class CallowJushi extends CardImpl {
         this.flipCardName = "Jaraku the Interloper";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Callow Jushi.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Callow Jushi, you may flip it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
@@ -66,7 +66,7 @@ class JarakuTheInterloper extends TokenImpl {
 
     JarakuTheInterloper() {
         super("Jaraku the Interloper", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.SPIRIT);
@@ -81,7 +81,7 @@ class JarakuTheInterloper extends TokenImpl {
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
-    public JarakuTheInterloper(final JarakuTheInterloper token) {
+    private JarakuTheInterloper(final JarakuTheInterloper token) {
         super(token);
     }
 

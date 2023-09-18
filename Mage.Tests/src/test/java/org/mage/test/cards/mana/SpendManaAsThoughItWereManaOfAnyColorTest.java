@@ -40,7 +40,7 @@ public class SpendManaAsThoughItWereManaOfAnyColorTest extends CardTestPlayerBas
 
         assertExileCount(playerA, 0);
         assertGraveyardCount(playerA, "Moan of the Unhallowed", 1);
-        assertPermanentCount(playerB, "Zombie", 2);
+        assertPermanentCount(playerB, "Zombie Token", 2);
 
     }
 
@@ -70,6 +70,7 @@ public class SpendManaAsThoughItWereManaOfAnyColorTest extends CardTestPlayerBas
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.UPKEEP, playerB, "Lightning Bolt", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Darksteel Forge");
 

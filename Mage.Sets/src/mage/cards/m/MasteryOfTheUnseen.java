@@ -29,7 +29,7 @@ public final class MasteryOfTheUnseen extends CardImpl {
                 new FilterControlledPermanent("a permanent you control")));
 
         // {3}{W}: Manifest the top card of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManifestEffect(1), new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManifestEffect(1), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private MasteryOfTheUnseen(final MasteryOfTheUnseen card) {

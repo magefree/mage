@@ -69,7 +69,7 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         return object != null
                 && !object.isLand(game)
                 && object.getManaValue() <= counters;
@@ -86,7 +86,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
     private boolean wasActivated;
 
     AsForetoldAlternativeCost(int timeCounters) {
-        super(new ManaCostsImpl("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
+        super(new ManaCostsImpl<>("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
     }
 
     private AsForetoldAlternativeCost(final AsForetoldAlternativeCost ability) {
@@ -131,7 +131,7 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on {this}.";
     }
 
-    public AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
+    private AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
         super(effect);
     }
 
@@ -152,7 +152,7 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
                         + sourcePermanent.getTurnsOnBattlefield());
                 // If we haven't used it yet this turn, give the option of using the zero alternative cost
                 if (wasItUsed == null) {
-                    int timeCounters = sourcePermanent.getCounters(game).getCount("time");
+                    int timeCounters = sourcePermanent.getCounters(game).getCount(CounterType.TIME);
                     AsForetoldAlternativeCost alternateCostAbility = new AsForetoldAlternativeCost(timeCounters);
                     alternateCostAbility.setSourceId(source.getSourceId());
                     controller.getAlternativeSourceCosts().add(alternateCostAbility);

@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -29,14 +28,14 @@ import mage.target.targetpointer.FixedTarget;
 public final class InterventionPact extends CardImpl {
 
     public InterventionPact(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{0}");
 
         this.color.setWhite(true);
-        
+
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new InterventionPactEffect());
         // At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{1}{W}{W}")), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl<>("{1}{W}{W}")), false));
     }
 
     private InterventionPact(final InterventionPact card) {
@@ -56,7 +55,7 @@ class InterventionPactEffect extends OneShotEffect {
         this.staticText = "The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way";
     }
 
-    public InterventionPactEffect(final InterventionPactEffect effect) {
+    private InterventionPactEffect(final InterventionPactEffect effect) {
         super(effect);
     }
 
@@ -71,10 +70,10 @@ class InterventionPactEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetSource();
             target.setRequired(true);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 ContinuousEffect continuousEffect = new InterventionPactPreventDamageEffect();
-                continuousEffect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+                continuousEffect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
                 game.addEffect(continuousEffect, source);
             }
             return true;
@@ -90,7 +89,7 @@ class InterventionPactPreventDamageEffect extends PreventionEffectImpl {
         staticText = "The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way";
     }
 
-    public InterventionPactPreventDamageEffect(final InterventionPactPreventDamageEffect effect) {
+    private InterventionPactPreventDamageEffect(final InterventionPactPreventDamageEffect effect) {
         super(effect);
     }
 
@@ -109,8 +108,8 @@ class InterventionPactPreventDamageEffect extends PreventionEffectImpl {
         PreventionEffectData preventEffectData = preventDamageAction(event, source, game);
         if (preventEffectData.getPreventedDamage() > 0) {
             used = true;
-            Player player = game .getPlayer(source.getControllerId());
-            if(player != null){
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
                 player.gainLife(preventEffectData.getPreventedDamage(), game, source);
             }
         }

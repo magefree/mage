@@ -47,6 +47,7 @@ public class HauntTest extends CardTestPlayerBase {
                 for (String rule : card.getRules(currentGame)) {
                     if (rule.startsWith("Haunting") &&  rule.contains("Goblin Roughrider")) {
                         found = true;
+                        break;
                     }
                 }
             }
@@ -57,8 +58,9 @@ public class HauntTest extends CardTestPlayerBase {
         for (Card card : currentGame.getBattlefield().getAllActivePermanents()) {
             if (card.getName().equals("Goblin Roughrider")) {
                 for (String rule : card.getRules(currentGame)) {
-                    if (rule.startsWith("Haunted by") &&  rule.contains("Blind Hunter")) {
+                    if (rule.startsWith("Haunted by") && rule.contains("Blind Hunter")) {
                         found = true;
+                        break;
                     }
                 }
             }
@@ -85,20 +87,40 @@ public class HauntTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 2);
         assertExileCount("Blind Hunter", 1);
         assertGraveyardCount(playerA, "Goblin Roughrider", 1);
-        
+        assertLife(playerA, 22);
 
         boolean found = false;
         for (Card card : currentGame.getPlayer(playerA.getId()).getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Goblin Roughrider")) {
                 for (String rule : card.getRules(currentGame)) {
-                    if (rule.startsWith("Haunted by") &&  rule.contains("Blind Hunter")) {
+                    if (rule.startsWith("Haunted by") && rule.contains("Blind Hunter")) {
                         found = true;
+                        break;
                     }
                 }
             }
         }
         Assert.assertFalse("Found Haunted by rule text displayed for the card", found);
         
+    }
+
+    @Test
+    public void testHauntToken() {
+        addCard(Zone.BATTLEFIELD, playerA, "Blind Hunter");
+        addCard(Zone.HAND, playerA, "Satyr's Cunning");
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Satyr's Cunning");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", "Blind Hunter");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Satyr Token");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 2);
+        assertExileCount("Blind Hunter", 1);
+        assertLife(playerA, 22);
     }
     
 }

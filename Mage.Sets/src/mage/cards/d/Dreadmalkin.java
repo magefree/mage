@@ -48,7 +48,7 @@ public final class Dreadmalkin extends CardImpl {
 
         // {2}{B}, Sacrifice another creature or planeswalker: Put two +1/+1 counters on Dreadmalkin.
         Ability ability = new SimpleActivatedAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl("{2}{B}")
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

@@ -1,21 +1,21 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -40,10 +40,10 @@ public final class Immerwolf extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
 
         // Other Wolf and Werewolf creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // Non-Human Werewolves you control can't transform.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ImmerwolfEffect()));
+        this.addAbility(new SimpleStaticAbility(new ImmerwolfEffect()));
 
     }
 
@@ -57,21 +57,20 @@ public final class Immerwolf extends CardImpl {
     }
 }
 
-class ImmerwolfEffect extends ContinuousRuleModifyingEffectImpl {
+class ImmerwolfEffect extends RestrictionEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.WEREWOLF);
 
     static {
-        filter.add(SubType.WEREWOLF.getPredicate());
         filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public ImmerwolfEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield);
         staticText = "Non-Human Werewolves you control can't transform";
     }
 
-    public ImmerwolfEffect(final ImmerwolfEffect effect) {
+    private ImmerwolfEffect(final ImmerwolfEffect effect) {
         super(effect);
     }
 
@@ -81,15 +80,12 @@ class ImmerwolfEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORM;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
-    
+
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && 
-                permanent.isControlledBy(source.getControllerId()) &&
-                filter.match(permanent, game) ;
+    public boolean canTransform(Game game, boolean canUseChooseDialogs) {
+        return false;
     }
 }

@@ -47,12 +47,8 @@ public class TableManagerImpl implements TableManager {
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
     private final ReadWriteLock tablesLock = new ReentrantReadWriteLock();
 
-    /**
-     * Defines how often checking process should be run on server.
-     * <p>
-     * In minutes.
-     */
-    private static final int EXPIRE_CHECK_PERIOD = 10;
+    // defines how often checking process should be run on server (in minutes)
+    private static final int TABLE_HEALTH_CHECK_TIMEOUT_MINS = 10;
 
     public TableManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
@@ -66,7 +62,7 @@ public class TableManagerImpl implements TableManager {
             } catch (Exception ex) {
                 logger.fatal("Check table health state job error:", ex);
             }
-        }, EXPIRE_CHECK_PERIOD, EXPIRE_CHECK_PERIOD, TimeUnit.MINUTES);
+        }, TABLE_HEALTH_CHECK_TIMEOUT_MINS, TABLE_HEALTH_CHECK_TIMEOUT_MINS, TimeUnit.MINUTES);
     }
 
     @Override

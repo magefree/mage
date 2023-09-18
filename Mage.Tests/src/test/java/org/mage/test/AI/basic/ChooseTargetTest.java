@@ -21,12 +21,11 @@ public class ChooseTargetTest extends CardTestPlayerBase {
 
         setChoice(playerA, "Silvercoat Lion");
         setChoice(playerB, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
@@ -44,12 +43,11 @@ public class ChooseTargetTest extends CardTestPlayerBase {
         // AI must choose itself (strict mode must be disabled)
         //setChoice(playerA, "Silvercoat Lion");
         //setChoice(playerB, "Silvercoat Lion");
-        //setChoice(playerA, "Yes");
+        //setChoice(playerA, true);
 
         //setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);

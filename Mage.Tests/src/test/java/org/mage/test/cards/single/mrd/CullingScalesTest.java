@@ -48,7 +48,8 @@ public class CullingScalesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Elvish Visionary"); // CMC = 2
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Culling Scales"); // CMC = 3
-        
+
+        setStrictChooseMode(true);
         // On upkeep Culling Scales targets Elvish Visionary
         addTarget(playerA, "Elvish Visionary");
         
@@ -58,7 +59,7 @@ public class CullingScalesTest extends CardTestPlayerBase {
         execute();
         
         // Culling Scales trigger fizzles since the Visionary no longer has the lowest CMC
-        assertPermanentCount(playerB, "Soldier", 2);
+        assertPermanentCount(playerB, "Soldier Token", 2);
         assertPermanentCount(playerB, "Elvish Visionary", 1);
         assertPermanentCount(playerB, "Plains", 5);
         assertPermanentCount(playerA, "Culling Scales", 1);

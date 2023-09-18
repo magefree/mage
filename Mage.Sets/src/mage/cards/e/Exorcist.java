@@ -39,7 +39,7 @@ public final class Exorcist extends CardImpl {
         // {1}{W}, {tap}: Destroy target black creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new DestroyTargetEffect(),  
-                new ManaCostsImpl("{1}{W}"));
+                new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

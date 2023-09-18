@@ -3,10 +3,13 @@ package mage.abilities.costs;
 import mage.abilities.Ability;
 import mage.game.Game;
 
+import java.io.Serializable;
+
 /**
  * @author TheElk801
  */
-public interface CostAdjuster {
+@FunctionalInterface
+public interface CostAdjuster extends Serializable {
 
     /**
      * Must check playable and real cast states.

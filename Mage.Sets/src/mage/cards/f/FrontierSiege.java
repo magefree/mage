@@ -36,8 +36,8 @@ public final class FrontierSiege extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    private static final String ruleTrigger1 = "&bull Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
-    private static final String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
+    private static final String ruleTrigger1 = "&bull  Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
+    private static final String ruleTrigger2 = "&bull  Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
 
     public FrontierSiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
@@ -76,7 +76,7 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
 
     FrontierSiegeKhansTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(2)), false);
-
+        setTriggerPhrase("At the beginning of each of your main phases, ");
     }
 
     private FrontierSiegeKhansTriggeredAbility(final FrontierSiegeKhansTriggeredAbility ability) {
@@ -98,12 +98,6 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.controllerId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each of your main phases, " ;
-    }
-
 }
 
 class FrontierSiegeFightEffect extends OneShotEffect {

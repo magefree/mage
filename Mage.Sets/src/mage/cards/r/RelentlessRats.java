@@ -58,7 +58,7 @@ public final class RelentlessRats extends CardImpl {
             staticText = "{this} gets +1/+1 for each other creature on the battlefield named Relentless Rats";
         }
 
-        public RelentlessRatsEffect(final RelentlessRatsEffect effect) {
+        private RelentlessRatsEffect(final RelentlessRatsEffect effect) {
             super(effect);
         }
 
@@ -69,7 +69,7 @@ public final class RelentlessRats extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) - 1;
+            int count = game.getBattlefield().count(filter, source.getControllerId(), source, game) - 1;
             if (count > 0) {
                 Permanent target = game.getPermanent(source.getSourceId());
                 if (target != null) {

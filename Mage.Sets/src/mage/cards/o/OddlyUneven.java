@@ -27,8 +27,7 @@ public final class OddlyUneven extends CardImpl {
         // * Destroy each creature with an odd number of words in its name. (Hyphenated words are one word.)
         this.getSpellAbility().addEffect(new OddOrEvenEffect(true));
         // * Destroy each creature with an even number of words in its name.
-        Mode mode = new Mode();
-        mode.addEffect(new OddOrEvenEffect(false));
+        Mode mode = new Mode(new OddOrEvenEffect(false));
         this.getSpellAbility().addMode(mode);
     }
 
@@ -52,7 +51,7 @@ class OddOrEvenEffect extends OneShotEffect {
         this.staticText = "Destroy each creature with an " + (odd ? "odd" : "even") + " number of words in its name. (Hyphenated words are one word.)";
     }
 
-    public OddOrEvenEffect(final OddOrEvenEffect effect) {
+    private OddOrEvenEffect(final OddOrEvenEffect effect) {
         super(effect);
         this.odd = effect.odd;
     }

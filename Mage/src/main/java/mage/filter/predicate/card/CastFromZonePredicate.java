@@ -1,16 +1,15 @@
 package mage.filter.predicate.card;
 
-import mage.cards.Card;
+import mage.MageObject;
 import mage.constants.Zone;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
 /**
- *
  * @author LevelX2
  */
-public class CastFromZonePredicate implements Predicate<Card> {
+public class CastFromZonePredicate implements Predicate<MageObject> {
 
     private final Zone zone;
 
@@ -19,7 +18,7 @@ public class CastFromZonePredicate implements Predicate<Card> {
     }
 
     @Override
-    public boolean apply(Card input, Game game) {
+    public boolean apply(MageObject input, Game game) {
         if (input instanceof Spell) {
             return zone.match(((Spell) input).getFromZone());
         } else {

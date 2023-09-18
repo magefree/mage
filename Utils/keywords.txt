@@ -3,32 +3,42 @@ Afterlife|number|
 Annihilator|number|
 Ascend|new|
 Assist|new|
+Backup|card, number|
 Basic landcycling|cost|
+Bargain|new|
 Battle cry|new|
 Bestow|card, manaString|
+Blitz|card, manaString|
 Bloodthirst|number|
 Bushido|number|
 Buyback|manaString|
 Cascade|new|
-Changeling|instance|
+Casualty|card, number|
+Changeling|new|
+Cleave|card, manaString|
+Compleated|instance|
 Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|
 Cycling|cost|
-Dash|card, manaString|
+Dash|manaString|
+Daybound|new|
 Deathtouch|instance|
 Demonstrate|new|
 Delve|new|
 Dethrone|new|
 Devoid|color|
 Defender|instance|
+Disturb|cost|
 Dredge|number|
+Doctor's companion|instance|
 Double Strike|instance|
 Dredge|number|
 Echo|manaString|
 Embalm|cost, card|
 Enchant|type|
 Encore|cost|
+Enlist|new|
 Entwine|manaString|
 Eternalize|cost, card|
 Evoke|manaString|
@@ -41,13 +51,16 @@ Fear|instance|
 First strike|instance|
 Flanking|new|
 Flash|instance|
-Flashback|cost|
+Flashback|card, cost|
 Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
+For Mirrodin!|new|
+Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
+Hideaway|number|
 Improvise|new|
 Indestructible|instance|
 Infect|instance|
@@ -59,19 +72,22 @@ Jump-start|card|
 Kicker|manaString|
 Level up|cost|
 Lifelink|instance|
+Living metal|new|
 Living weapon|new|
-Madness|card, cost|
+Madness|cost|
 Melee|new|
 Menace|new|
 Mentor|new|
-Miracle|cost|
+Miracle|manaString|
 Modular|card, number|
 Mountaincycling|cost|
 Mountainwalk|new|
-Morph|card, cost|
+More Than Meets The Eye|card, manaString|
+Morph|cost|
 Mutate|card, manaString|
 Myriad|new|
-Ninjutsu|cost|
+Nightbound|new|
+Ninjutsu|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|
@@ -79,26 +95,32 @@ Phasing|instance|
 Plainscycling|cost|
 Plainswalk|new|
 Poisonous|number|
+Prototype|card, manaString|
 Provoke|new|
 Prowess|new|
+Ravenous|new|
 Reach|instance|
 Rebound|new|
+Reconfigure|manaString|
 Renown|number|
-Replicate|card, manaString|
+Replicate|manaString|
 Riot|new|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
-Soulbond|instance|
+Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
+Squad|new|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
+Toxic|number|
+Training|new|
 Trample|instance|
 Tribute|number|
 Unblockable|new|

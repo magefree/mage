@@ -16,7 +16,6 @@ import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class SweepEffect extends OneShotEffect {
@@ -29,7 +28,7 @@ public class SweepEffect extends OneShotEffect {
         this.staticText = "<i>Sweep</i> &mdash; Return any number of " + sweepSubtype + (sweepSubtype.getDescription().endsWith("s") ? "" : "s") + " you control to their owner's hand";
     }
 
-    public SweepEffect(final SweepEffect effect) {
+    protected SweepEffect(final SweepEffect effect) {
         super(effect);
         this.sweepSubtype = effect.sweepSubtype;
     }

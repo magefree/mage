@@ -39,7 +39,7 @@ public final class RealityAcid extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Vanishing 3
@@ -70,7 +70,7 @@ class RealityAcidTriggeredAbility extends ZoneChangeTriggeredAbility {
         super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
     }
 
-    public RealityAcidTriggeredAbility(RealityAcidTriggeredAbility ability) {
+    private RealityAcidTriggeredAbility(final RealityAcidTriggeredAbility ability) {
         super(ability);
     }
 

@@ -49,7 +49,7 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
         staticText = "Destroy any number of target creatures. For each creature destroyed this way, its controller creates a 4/4 red Dragon creature token with flying";
     }
 
-    public DescentOfTheDragonsEffect(final DescentOfTheDragonsEffect effect) {
+    private DescentOfTheDragonsEffect(final DescentOfTheDragonsEffect effect) {
         super(effect);
     }
 
@@ -71,11 +71,11 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
                         if (permanent.destroy(source, game, false)) {
                             int count = playersWithTargets.getOrDefault(controllerOfTargetId, 0);
                             playersWithTargets.put(controllerOfTargetId, count + 1);
-
                         }
                     }
                 }
             }
+            game.getState().processAction(game);
             DragonToken dragonToken = new DragonToken();
             for (Map.Entry<UUID, Integer> amountTokensPerPlayer : playersWithTargets.entrySet()) {
                 dragonToken.putOntoBattlefield(amountTokensPerPlayer.getValue(), game, source, amountTokensPerPlayer.getKey());

@@ -23,7 +23,6 @@ public class GainControlAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Island", 4);
         assertPermanentCount(playerA, "Swamp", 1);
@@ -43,7 +42,6 @@ public class GainControlAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Island", 4);
         assertPermanentCount(playerA, "Swamp", 1);
@@ -64,7 +62,6 @@ public class GainControlAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Island", 4);
         assertPermanentCount(playerA, "Swamp", 0);

@@ -45,7 +45,7 @@ public final class FireAndBrimstone extends CardImpl {
     }
 }
 
-enum FireAndBrimstonePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+enum FireAndBrimstonePredicate implements ObjectSourcePlayerPredicate<Player> {
     instance;
 
     @Override

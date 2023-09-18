@@ -43,7 +43,7 @@ public class ConditionalRestrictionEffect extends RestrictionEffect {
         }
     }
 
-    public ConditionalRestrictionEffect(final ConditionalRestrictionEffect effect) {
+    protected ConditionalRestrictionEffect(final ConditionalRestrictionEffect effect) {
         super(effect);
         this.effect = (RestrictionEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {
@@ -149,4 +149,8 @@ public class ConditionalRestrictionEffect extends RestrictionEffect {
         return new ConditionalRestrictionEffect(this);
     }
 
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

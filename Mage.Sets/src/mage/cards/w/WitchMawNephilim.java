@@ -56,7 +56,7 @@ class WitchMawNephilimEffect extends OneShotEffect {
         this.staticText = "it gains trample until end of turn if its power is 10 or greater";
     }
 
-    public WitchMawNephilimEffect(final WitchMawNephilimEffect effect) {
+    private WitchMawNephilimEffect(final WitchMawNephilimEffect effect) {
         super(effect);
     }
 

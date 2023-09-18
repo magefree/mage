@@ -5,22 +5,18 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.abilities.effects.common.PutOnTopOrBottomLibraryTargetEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
@@ -57,7 +53,10 @@ public final class Subtlety extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Subtlety enters the battlefield, choose up to one target creature spell or planeswalker spell. Its owner puts it on the top or bottom of their library.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SubtletyEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnTopOrBottomLibraryTargetEffect(
+                "choose up to one target creature spell or planeswalker spell. " +
+                        "Its owner puts it on the top or bottom of their library"
+        ));
         ability.addTarget(new TargetSpell(0, 1, filter));
         this.addAbility(ability);
 
@@ -72,36 +71,5 @@ public final class Subtlety extends CardImpl {
     @Override
     public Subtlety copy() {
         return new Subtlety(this);
-    }
-}
-
-class SubtletyEffect extends OneShotEffect {
-
-    SubtletyEffect() {
-        super(Outcome.Removal);
-        staticText = "choose up to one target creature spell or planeswalker spell. " +
-                "Its owner puts it on the top or bottom of their library";
-    }
-
-    private SubtletyEffect(final SubtletyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SubtletyEffect copy() {
-        return new SubtletyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getOwnerId(source.getFirstTarget()));
-        if (player == null) {
-            return false;
-        }
-        if (player.chooseUse(Outcome.Detriment, "Put the targeted spell on the top or bottom of your library?",
-                "", "Top", "Bottom", source, game)) {
-            return new PutOnLibraryTargetEffect(true).apply(game, source);
-        }
-        return new PutOnLibraryTargetEffect(false).apply(game, source);
     }
 }

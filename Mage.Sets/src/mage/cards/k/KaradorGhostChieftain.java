@@ -31,7 +31,7 @@ public final class KaradorGhostChieftain extends CardImpl {
 
     public KaradorGhostChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.SPIRIT);
 
@@ -65,7 +65,7 @@ class KaradorGhostChieftainCostReductionEffect extends CostModificationEffectImp
         staticText = "this spell costs {1} less to cast for each creature card in your graveyard";
     }
 
-    KaradorGhostChieftainCostReductionEffect(KaradorGhostChieftainCostReductionEffect effect) {
+    private KaradorGhostChieftainCostReductionEffect(final KaradorGhostChieftainCostReductionEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
         staticText = "During each of your turns, you may cast a creature spell from your graveyard";
     }
 
-    KaradorGhostChieftainCastFromGraveyardEffect(final KaradorGhostChieftainCastFromGraveyardEffect effect) {
+    private KaradorGhostChieftainCastFromGraveyardEffect(final KaradorGhostChieftainCastFromGraveyardEffect effect) {
         super(effect);
     }
 

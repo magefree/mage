@@ -1,12 +1,10 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForetellAbility;
@@ -20,6 +18,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
@@ -47,7 +46,6 @@ public final class GloriousProtector extends CardImpl {
 
         // When Glorious Protector enters the battlefield, you may exile any number of non-Angel creatures you control until Glorious Protector leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GloriousProtectorEffect(),true);
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 
         // Foretell {2}{W}
@@ -90,12 +88,12 @@ class GloriousProtectorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (player == null || sourceObject == null) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         if (target.getTargets().isEmpty()) {
             return false;
         }
@@ -105,6 +103,7 @@ class GloriousProtectorEffect extends OneShotEffect {
                         game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
                 ), sourceObject.getIdName()
         );
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         return true;
     }
 }

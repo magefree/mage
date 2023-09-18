@@ -68,7 +68,7 @@ public class GathererSets implements Iterable<DownloadJob> {
             // "PALP" -- Gatherer does not have the set Asia Pacific Land Program
             // "ATH" -- has cards from many sets, symbol does not exist on gatherer
             // "CP", "DPA", "PELP", "PGPX", "PGRU", "H17", "JR", "SWS", // need to fix
-            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "8EB", "9EB", "CHR", "G18", "GVL", "S00", "S99", "UGL" // ok
+            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "CHR", "G18", "GVL", "S00", "S99", "UGL" // ok
             // current testing
     };
 
@@ -97,7 +97,13 @@ public class GathererSets implements Iterable<DownloadJob> {
             "GS1", "BBD", "C18",
             "GNT", "UMA", "GRN",
             "RNA", "WAR", "MH1",
-            "M20"
+            "M20",
+            "C19","ELD","MB1","GN2","J20","THB","UND","C20","IKO","M21",
+            "JMP","2XM","ZNR","KLR","CMR","KHC","KHM","TSR","STX","STA",
+            "C21","MH2","AFR","AFC","J21","MID","MIC","VOW","VOC","YMID",
+            "NEC","NEO","SNC","NCC","CLB","2X2","DMU","DMC","40K","GN3",
+            "UNF","BRO","BRC","BOT","30A","J22","SCD","DMR","ONE","ONC",
+            "MOM","MOC","MUL","MAT","LTR","CMM","WOE","WHO","RVR","WOT","WOC" 
             // "HHO", "ANA" -- do not exist on gatherer
     };
 
@@ -160,8 +166,6 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("USG", "UZ");
         codeReplacements.put("VIS", "VI");
         codeReplacements.put("WTH", "WL");
-        codeReplacements.put("8EB", "8ED"); // inner xmage set for 8th edition
-        codeReplacements.put("9EB", "8ED"); // inner xmage set for 9th edition
     }
 
     public GathererSets() {
@@ -175,15 +179,6 @@ public class GathererSets implements Iterable<DownloadJob> {
 
     // checks for wrong card settings and support (easy to control what all good)
     private static final HashMap<String, CheckResult> setsToDownload = new HashMap<>();
-    private static final HashMap<String, String> codesToIgnoreCheck = new HashMap<>();
-
-    static {
-        // xMage have inner sets for 8th and 9th Edition for booster workaround (cards from core game do not include in boosters)
-        // see https://mtg.gamepedia.com/8th_Edition/Core_Game
-        // check must ignore that sets
-        codesToIgnoreCheck.put("8EB", "8th Edition Box");
-        codesToIgnoreCheck.put("9EB", "9th Edition Box");
-    }
 
     private void CheckSearchResult(String searchCode, ExpansionSet foundedExp, boolean canDownloadTask,
                                    boolean haveCommon, boolean haveUncommon, boolean haveRare, boolean haveMyth) {
@@ -220,11 +215,6 @@ public class GathererSets implements Iterable<DownloadJob> {
 
         for (ExpansionSet set : Sets.getInstance().values()) {
 
-            // ignore some inner sets
-            if (codesToIgnoreCheck.get(set.getCode()) != null) {
-                continue;
-            }
-
             CheckResult res = setsToDownload.get(set.getCode());
 
             // 1. not configured at all
@@ -259,7 +249,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                     }
                 }
 
-                // 4. info: sets with missing cards for boosters (todo: what about +20 number for alternative land arts?)
+                // 4. info: sets with missing cards for boosters
                 if (set.getMaxCardNumberInBooster() != Integer.MAX_VALUE) {
                     for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                         if (card.getCardNumberAsInt() > set.getMaxCardNumberInBooster()) {

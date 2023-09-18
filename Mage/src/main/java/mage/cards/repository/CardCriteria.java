@@ -5,6 +5,8 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,18 +18,21 @@ import java.util.List;
  */
 public class CardCriteria {
 
+    private String nameContains;
     private String name;
-    private String nameExact;
     private String rules;
     private final List<String> setCodes;
     private final List<String> ignoreSetCodes; // sets to ignore, use with little amount of sets (example: ignore sets with snow lands)
     private final List<CardType> types;
     private final List<CardType> notTypes;
-    private final List<String> supertypes;
-    private final List<String> notSupertypes;
-    private final List<String> subtypes;
+    private final List<SuperType> supertypes;
+    private final List<SuperType> notSupertypes;
+    private final List<SubType> subtypes;
     private final List<Rarity> rarities;
+    private Boolean variousArt;
     private Boolean doubleFaced;
+    private Boolean modalDoubleFaced;
+    private boolean nightCard;
     private boolean black;
     private boolean blue;
     private boolean green;
@@ -38,6 +43,7 @@ public class CardCriteria {
     private String sortBy;
     private Long start;
     private Long count;
+    // compare numerical card numbers (123b -> 123)
     private int minCardNumber;
     private int maxCardNumber;
 
@@ -50,6 +56,7 @@ public class CardCriteria {
         this.supertypes = new ArrayList<>();
         this.notSupertypes = new ArrayList<>();
         this.subtypes = new ArrayList<>();
+        this.nightCard = false;
 
         this.black = true;
         this.blue = true;
@@ -92,18 +99,33 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria variousArt(boolean variousArt) {
+        this.variousArt = variousArt;
+        return this;
+    }
+
     public CardCriteria doubleFaced(boolean doubleFaced) {
         this.doubleFaced = doubleFaced;
         return this;
     }
 
-    public CardCriteria name(String name) {
-        this.name = name;
+    public CardCriteria modalDoubleFaced(boolean modalDoubleFaced) {
+        this.modalDoubleFaced = modalDoubleFaced;
         return this;
     }
 
-    public CardCriteria nameExact(String nameExact) {
-        this.nameExact = nameExact;
+    public CardCriteria nightCard(boolean nightCard) {
+        this.nightCard = nightCard;
+        return this;
+    }
+
+    public CardCriteria nameContains(String str) {
+        this.nameContains = str;
+        return this;
+    }
+
+    public CardCriteria name(String name) {
+        this.name = name;
         return this;
     }
 
@@ -128,7 +150,11 @@ public class CardCriteria {
     }
 
     public CardCriteria setCodes(String... setCodes) {
-        this.setCodes.addAll(Arrays.asList(setCodes));
+        return setCodes(Arrays.asList(setCodes));
+    }
+
+    public CardCriteria setCodes(List<String> setCodes) {
+        this.setCodes.addAll(setCodes);
         return this;
     }
 
@@ -152,17 +178,17 @@ public class CardCriteria {
         return this;
     }
 
-    public CardCriteria supertypes(String... supertypes) {
+    public CardCriteria supertypes(SuperType... supertypes) {
         this.supertypes.addAll(Arrays.asList(supertypes));
         return this;
     }
 
-    public CardCriteria notSupertypes(String... supertypes) {
+    public CardCriteria notSupertypes(SuperType... supertypes) {
         this.notSupertypes.addAll(Arrays.asList(supertypes));
         return this;
     }
 
-    public CardCriteria subtypes(String... subtypes) {
+    public CardCriteria subtypes(SubType... subtypes) {
         this.subtypes.addAll(Arrays.asList(subtypes));
         return this;
     }
@@ -191,15 +217,15 @@ public class CardCriteria {
         optimize();
 
         Where where = qb.where();
-        where.eq("nightCard", false);
+        where.eq("nightCard", nightCard);
         where.eq("splitCardHalf", false);
         int clausesCount = 2;
-        if (name != null) {
-            where.like("name", new SelectArg('%' + name + '%'));
+        if (nameContains != null) {
+            where.like("name", new SelectArg('%' + nameContains + '%'));
             clausesCount++;
         }
-        if (nameExact != null) {
-            where.like("name", new SelectArg(nameExact));
+        if (name != null) {
+            where.eq("name", new SelectArg(name));
             clausesCount++;
         }
         if (rules != null) {
@@ -207,8 +233,18 @@ public class CardCriteria {
             clausesCount++;
         }
 
+        if (variousArt != null) {
+            where.eq("variousArt", variousArt);
+            clausesCount++;
+        }
+
         if (doubleFaced != null) {
             where.eq("doubleFaced", doubleFaced);
+            clausesCount++;
+        }
+
+        if (modalDoubleFaced != null) {
+            where.eq("modalDoubleFacedCard", modalDoubleFaced);
             clausesCount++;
         }
 
@@ -232,7 +268,7 @@ public class CardCriteria {
             where.ne("setCode", ignoreSetCode);
         }
         if (!ignoreSetCodes.isEmpty()) {
-            where.or(ignoreSetCodes.size());
+            where.and(ignoreSetCodes.size());
             clausesCount++;
         }
 
@@ -251,17 +287,17 @@ public class CardCriteria {
             clausesCount++;
         }
 
-        for (String superType : supertypes) {
-            where.like("supertypes", new SelectArg('%' + superType + '%'));
+        for (SuperType superType : supertypes) {
+            where.like("supertypes", new SelectArg('%' + superType.name() + '%'));
             clausesCount++;
         }
-        for (String subType : notSupertypes) {
-            where.not().like("supertypes", new SelectArg('%' + subType + '%'));
+        for (SuperType superType : notSupertypes) {
+            where.not().like("supertypes", new SelectArg('%' + superType.name() + '%'));
             clausesCount++;
         }
 
-        for (String subType : subtypes) {
-            where.like("subtypes", new SelectArg('%' + subType + '%'));
+        for (SubType subType : subtypes) {
+            where.like("subtypes", new SelectArg('%' + subType.toString() + '%'));
             clausesCount++;
         }
 
@@ -302,12 +338,12 @@ public class CardCriteria {
         }
 
         if (minCardNumber != Integer.MIN_VALUE) {
-            where.ge("cardNumber", minCardNumber);
+            where.ge("cardNumberAsInt", minCardNumber);
             clausesCount++;
         }
 
         if (maxCardNumber != Integer.MAX_VALUE) {
-            where.le("cardNumber", maxCardNumber);
+            where.le("cardNumberAsInt", maxCardNumber);
             clausesCount++;
         }
 
@@ -361,12 +397,12 @@ public class CardCriteria {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public String getNameContains() {
+        return nameContains;
     }
 
-    public String getNameExact() {
-        return nameExact;
+    public String getName() {
+        return name;
     }
 
     public String getRules() {
@@ -389,15 +425,15 @@ public class CardCriteria {
         return notTypes;
     }
 
-    public List<String> getSupertypes() {
+    public List<SuperType> getSupertypes() {
         return supertypes;
     }
 
-    public List<String> getNotSupertypes() {
+    public List<SuperType> getNotSupertypes() {
         return notSupertypes;
     }
 
-    public List<String> getSubtypes() {
+    public List<SubType> getSubtypes() {
         return subtypes;
     }
 
@@ -405,8 +441,16 @@ public class CardCriteria {
         return rarities;
     }
 
+    public Boolean getVariousArt() {
+        return variousArt;
+    }
+
     public Boolean getDoubleFaced() {
         return doubleFaced;
+    }
+
+    public Boolean getModalDoubleFaced() {
+        return modalDoubleFaced;
     }
 
     public boolean isBlack() {

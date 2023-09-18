@@ -27,7 +27,7 @@ public final class SengirTheDarkBaron extends CardImpl {
     public SengirTheDarkBaron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(4);
@@ -107,7 +107,7 @@ class SengirTheDarkBaronWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.BEGINNING_PHASE_PRE) {
+        if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE) {
             game.getPlayers()
                     .values()
                     .stream()

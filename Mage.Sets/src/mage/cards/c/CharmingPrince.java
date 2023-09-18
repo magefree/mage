@@ -90,7 +90,7 @@ class CharmingPrinceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
@@ -98,9 +98,7 @@ class CharmingPrinceEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        if (!controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
-            return false;
-        }
+        controller.moveCards(permanent, Zone.EXILED, source, game);
         //create delayed triggered ability
         Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
         effect.setText("Return it to the battlefield under your control at the beginning of the next end step");

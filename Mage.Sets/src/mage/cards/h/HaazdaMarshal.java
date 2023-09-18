@@ -47,7 +47,7 @@ class HaazdaMarshalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierLifelinkToken()));
     }
 
-    public HaazdaMarshalTriggeredAbility(final HaazdaMarshalTriggeredAbility ability) {
+    private HaazdaMarshalTriggeredAbility(final HaazdaMarshalTriggeredAbility ability) {
         super(ability);
     }
 
@@ -70,6 +70,6 @@ class HaazdaMarshalTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} and at least two other creatures attack, "
-                + "create a 1/1 white Solider creature token with lifelink.";
+                + "create a 1/1 white Soldier creature token with lifelink.";
     }
 }

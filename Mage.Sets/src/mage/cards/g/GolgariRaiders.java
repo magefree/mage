@@ -1,22 +1,22 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class GolgariRaiders extends CardImpl {
@@ -39,10 +39,9 @@ public final class GolgariRaiders extends CardImpl {
                         new CardsInControllerGraveyardCount(
                                 StaticFilters.FILTER_CARD_CREATURE
                         ), true
-                ), "with a +1/+1 counter on it "
-                + "for each creature card in your graveyard"
+                ), null, AbilityWord.UNDERGROWTH.formatWord() + "{this} enters the battlefield " +
+                "with a +1/+1 counter on it for each creature card in your graveyard.", null
         );
-        ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);
     }
 

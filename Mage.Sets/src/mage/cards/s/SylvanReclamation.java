@@ -37,7 +37,7 @@ public final class SylvanReclamation extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Basic landcycling {2}
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private SylvanReclamation(final SylvanReclamation card) {

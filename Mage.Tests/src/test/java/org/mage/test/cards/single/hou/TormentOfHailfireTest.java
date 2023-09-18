@@ -25,10 +25,10 @@ public class TormentOfHailfireTest extends CardTestMultiPlayerBase {
         // Start Life = 2
         Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         // Player order: A -> D -> C -> B
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
-        playerD = createPlayer(game, playerD, "PlayerD");
+        playerA = createPlayer(game, "PlayerA");
+        playerB = createPlayer(game, "PlayerB");
+        playerC = createPlayer(game, "PlayerC");
+        playerD = createPlayer(game, "PlayerD");
         return game;
     }
 
@@ -51,31 +51,29 @@ public class TormentOfHailfireTest extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Torment of Hailfire");
         setChoice(playerA, "X=10");
         
-        setChoice(playerD, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerD, true);// Sacrifices a nonland permanent?
         setChoice(playerD, "Silvercoat Lion");
 
-        setChoice(playerB, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerB, true);// Sacrifices a nonland permanent?
         setChoice(playerB, "Silvercoat Lion");
 
-        setChoice(playerD, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerD, true);// Sacrifices a nonland permanent?
         setChoice(playerD, "Silvercoat Lion");
 
-        setChoice(playerB, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerB, true);// Sacrifices a nonland permanent?
         setChoice(playerB, "Silvercoat Lion");
 
-        setChoice(playerD, "No");// Sacrifices a nonland permanent?
-        setChoice(playerD, "Yes");// Discard a card?
+        setChoice(playerD, false);// Sacrifices a nonland permanent?
+        setChoice(playerD, true);// Discard a card?
         
-        setChoice(playerB, "Yes");// Discard a card?
+        setChoice(playerB, true);// Discard a card?
 
-        setChoice(playerD, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerD, true);// Sacrifices a nonland permanent?
         setChoice(playerD, "Silvercoat Lion");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertGraveyardCount(playerA, "Torment of Hailfire", 1);
         
         assertLife(playerA, 20);

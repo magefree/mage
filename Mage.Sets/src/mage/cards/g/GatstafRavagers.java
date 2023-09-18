@@ -23,7 +23,6 @@ public final class GatstafRavagers extends CardImpl {
 
         this.color.setRed(true);
 
-        this.transformable = true;
         this.nightCard = true;
 
         // Menace

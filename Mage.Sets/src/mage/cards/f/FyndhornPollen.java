@@ -11,8 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -20,19 +18,17 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class FyndhornPollen extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures");
-
     public FyndhornPollen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // All creatures get -1/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield)));
 
         // {1}{G}: All creatures get -1/-0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(-1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private FyndhornPollen(final FyndhornPollen card) {

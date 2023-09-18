@@ -18,7 +18,7 @@ public enum BuybackCondition implements Condition {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
             return card.getAbilities(game).stream()
-                    .filter(a -> a instanceof BuybackAbility)
+                    .filter(BuybackAbility.class::isInstance)
                     .anyMatch(a -> ((BuybackAbility) a).isBuybackActivated(game));
         }
         return false;

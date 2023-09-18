@@ -34,7 +34,7 @@ public final class WarteyeWitch extends CardImpl {
 
         // Whenever Warteye Witch or another creature you control dies, scry 1.
         this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
-                new ScryEffect(1), false, filter
+                new ScryEffect(1, false), false, filter
         ));
     }
 

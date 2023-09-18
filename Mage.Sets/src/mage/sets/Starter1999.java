@@ -113,7 +113,7 @@ public final class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Man-o'-War", 41, Rarity.UNCOMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 42, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mind Rot", 83, Rarity.COMMON, mage.cards.m.MindRot.class));
-        cards.add(new SetCardInfo("Mons's Goblin Raiders", 112, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
+        cards.add(new SetCardInfo("Mons's Goblin Raiders", 112, Rarity.RARE, mage.cards.m.MonssGoblinRaiders.class));
         cards.add(new SetCardInfo("Monstrous Growth", 132, Rarity.COMMON, mage.cards.m.MonstrousGrowth.class));
         cards.add(new SetCardInfo("Moon Sprite", 133, Rarity.UNCOMMON, mage.cards.m.MoonSprite.class));
         cards.add(new SetCardInfo("Mountain", 166, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -127,6 +127,7 @@ public final class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Norwood Archers", 137, Rarity.COMMON, mage.cards.n.NorwoodArchers.class));
         cards.add(new SetCardInfo("Norwood Ranger", 138, Rarity.COMMON, mage.cards.n.NorwoodRanger.class));
         cards.add(new SetCardInfo("Ogre Warrior", 113, Rarity.COMMON, mage.cards.o.OgreWarrior.class));
+        cards.add(new SetCardInfo("Owl Familiar", 43, Rarity.UNCOMMON, mage.cards.o.OwlFamiliar.class));
         cards.add(new SetCardInfo("Path of Peace", 21, Rarity.COMMON, mage.cards.p.PathOfPeace.class));
         cards.add(new SetCardInfo("Phantom Warrior", 44, Rarity.RARE, mage.cards.p.PhantomWarrior.class));
         cards.add(new SetCardInfo("Plains", 154, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));

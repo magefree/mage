@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,25 +10,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class GoblinArtillery extends CardImpl {
 
     public GoblinArtillery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
+        ability.addEffect(new DamageControllerEffect(3).setText("and 3 damage to you"));
         ability.addTarget(new TargetAnyTarget());
-        ability.addEffect(new DamageControllerEffect(3));
         this.addAbility(ability);
     }
 

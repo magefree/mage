@@ -1,14 +1,14 @@
 
 package mage;
 
+import mage.constants.ColoredManaSymbol;
+import mage.util.Copyable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import mage.constants.ColoredManaSymbol;
-import mage.util.Copyable;
 
 public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
 
@@ -18,7 +18,9 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public static final ObjectColor RED = new ObjectColor("R");
     public static final ObjectColor GREEN = new ObjectColor("G");
 
-    public static final ObjectColor GOLD = new ObjectColor("O");
+    public static final ObjectColor COLORLESS = new ObjectColor();
+
+    public static final ObjectColor GOLD = new ObjectColor("O"); // Not multicolored - Sword of Dungeons & Dragons
 
     private boolean white;
     private boolean blue;
@@ -182,13 +184,13 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public void setColor(ObjectColor color) {
-        this.setBlack(color.isBlack());
-        this.setBlue(color.isBlue());
-        this.setGreen(color.isGreen());
-        this.setRed(color.isRed());
-        this.setWhite(color.isWhite());
+        this.setBlack(color != null && color.isBlack());
+        this.setBlue(color != null && color.isBlue());
+        this.setGreen(color != null && color.isGreen());
+        this.setRed(color != null && color.isRed());
+        this.setWhite(color != null && color.isWhite());
 
-        this.setGold(color.isGold());
+        this.setGold(color != null && color.isGold());
     }
 
     public void addColor(ObjectColor color) {

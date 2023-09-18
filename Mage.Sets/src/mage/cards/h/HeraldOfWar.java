@@ -33,7 +33,7 @@ public final class HeraldOfWar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Herald of War attacks, put a +1/+1 counter on it.
-        this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"), false));
 
         // Angel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on Herald of War.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeraldOfWarCostReductionEffect()));
@@ -56,7 +56,7 @@ class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Angel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on {this}";
     }
 
-    HeraldOfWarCostReductionEffect(HeraldOfWarCostReductionEffect effect) {
+    private HeraldOfWarCostReductionEffect(final HeraldOfWarCostReductionEffect effect) {
         super(effect);
     }
 

@@ -20,6 +20,8 @@ import mage.players.Player;
 
 import java.util.Objects;
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -38,7 +40,7 @@ public final class SeraphicGreatsword extends CardImpl {
         this.addAbility(new SeraphicGreatswordTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private SeraphicGreatsword(final SeraphicGreatsword card) {
@@ -57,7 +59,7 @@ class SeraphicGreatswordTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public SeraphicGreatswordTriggeredAbility(final SeraphicGreatswordTriggeredAbility abiltity) {
+    private SeraphicGreatswordTriggeredAbility(final SeraphicGreatswordTriggeredAbility abiltity) {
         super(abiltity);
     }
 

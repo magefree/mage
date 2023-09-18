@@ -38,7 +38,7 @@ public final class CurseOfVengeance extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted player casts a spell, put a spite counter on Curse of Vengeance.
         this.addAbility(new CurseOfVengeanceTriggeredAbility());
@@ -67,7 +67,7 @@ class CurseOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public CurseOfVengeanceTriggeredAbility(final CurseOfVengeanceTriggeredAbility ability) {
+    private CurseOfVengeanceTriggeredAbility(final CurseOfVengeanceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -84,7 +84,7 @@ class CurseOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
 
         if (enchantment != null && spell != null
                 && enchantment.isAttachedTo(spell.getControllerId())) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(getSourceId()));
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(getSourceId(), game));
             return true;
         }
         return false;
@@ -107,7 +107,7 @@ class CurseOfVengeancePlayerLosesTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CurseOfVengeanceDrawLifeEffect(), false);
     }
 
-    public CurseOfVengeancePlayerLosesTriggeredAbility(final CurseOfVengeancePlayerLosesTriggeredAbility ability) {
+    private CurseOfVengeancePlayerLosesTriggeredAbility(final CurseOfVengeancePlayerLosesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -142,7 +142,7 @@ class CurseOfVengeanceDrawLifeEffect extends OneShotEffect {
                 + "number of spite counters on {this}";
     }
 
-    public CurseOfVengeanceDrawLifeEffect(final CurseOfVengeanceDrawLifeEffect effect) {
+    private CurseOfVengeanceDrawLifeEffect(final CurseOfVengeanceDrawLifeEffect effect) {
         super(effect);
     }
 

@@ -37,7 +37,7 @@ public final class StitchersApprentice extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{U}, {tap}: Create a 2/2 blue Homunculus creature token, then sacrifice a creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new StitchersApprenticeHomunculusToken()), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new StitchersApprenticeHomunculusToken()), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new StitchersApprenticeEffect());
         this.addAbility(ability);
@@ -60,7 +60,7 @@ class StitchersApprenticeEffect extends OneShotEffect {
         this.staticText = "then sacrifice a creature";
     }
 
-    public StitchersApprenticeEffect(final StitchersApprenticeEffect effect) {
+    private StitchersApprenticeEffect(final StitchersApprenticeEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class StitchersApprenticeEffect extends OneShotEffect {
         if (player != null) {
             Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
 
-            if (target.canChoose(source.getSourceId(), player.getId(), game) && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            if (target.canChoose(player.getId(), source, game) && player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     return permanent.sacrifice(source, game);

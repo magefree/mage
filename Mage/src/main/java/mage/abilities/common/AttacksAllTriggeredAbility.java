@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -11,15 +10,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterCreaturePermanent filter;
-    protected boolean attacksYouOrYourPlaneswalker;
+    protected final FilterCreaturePermanent filter;
+    protected final boolean attacksYouOrYourPlaneswalker;
     protected SetTargetPointer setTargetPointer;
     protected boolean controller;
 
@@ -41,11 +42,13 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
         this.attacksYouOrYourPlaneswalker = attacksYouOrYourPlaneswalker;
         this.setTargetPointer = setTargetPointer;
         this.controller = controller;
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks"
+                + (attacksYouOrYourPlaneswalker ? " you or a planeswalker you control" : "") + ", ");
     }
 
-    public AttacksAllTriggeredAbility(final AttacksAllTriggeredAbility ability) {
+    protected AttacksAllTriggeredAbility(final AttacksAllTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter.copy();
+        this.filter = ability.filter; // TODO: Does this have to be a copy?
         this.attacksYouOrYourPlaneswalker = ability.attacksYouOrYourPlaneswalker;
         this.setTargetPointer = ability.setTargetPointer;
         this.controller = ability.controller;
@@ -59,7 +62,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (filter.match(permanent, getControllerId(), this, game)) {
             if (attacksYouOrYourPlaneswalker) {
                 boolean check = false;
                 if (event.getTargetId().equals(getControllerId())) {
@@ -74,18 +77,15 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
                     return false;
                 }
             }
+            getEffects().setValue("attacker", permanent);
             switch (setTargetPointer) {
                 case PERMANENT:
-                    for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(permanent, game));
-                    }
+                    getEffects().setTargetPointer(new FixedTarget(permanent, game));
                     break;
                 case PLAYER:
                     UUID playerId = controller ? permanent.getControllerId() : game.getCombat().getDefendingPlayerId(permanent.getId(), game);
                     if (playerId != null) {
-                        for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(playerId));
-                        }
+                        getEffects().setTargetPointer(new FixedTarget(playerId));
                     }
                     break;
             }
@@ -98,13 +98,4 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
     public AttacksAllTriggeredAbility copy() {
         return new AttacksAllTriggeredAbility(this);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + (filter.getMessage().startsWith("an") ? "" : "a ")
-                + filter.getMessage() + " attacks"
-                + (attacksYouOrYourPlaneswalker ? " you or a planeswalker you control" : "")
-                + ", " ;
-    }
-
 }

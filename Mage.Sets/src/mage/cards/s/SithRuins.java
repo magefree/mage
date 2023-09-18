@@ -47,7 +47,7 @@ public final class SithRuins extends CardImpl {
 
     public static class SithRuinsAbility extends ActivatedAbilityImpl {
 
-        public SithRuinsAbility(SithRuinsAbility ability) {
+        private SithRuinsAbility(final SithRuinsAbility ability) {
             super(ability);
         }
 
@@ -64,7 +64,7 @@ public final class SithRuins extends CardImpl {
             filter.add(Predicates.or(subtypePredicates));
             filter.add(SuperType.BASIC.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
+            addEffect(new SearchLibraryPutInPlayEffect(target, true));
         }
 
         @Override

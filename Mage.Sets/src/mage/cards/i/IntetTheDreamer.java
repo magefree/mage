@@ -20,9 +20,6 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SourceRemainsInZoneCondition;
-import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -34,7 +31,7 @@ public final class IntetTheDreamer extends CardImpl {
 
     public IntetTheDreamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -45,7 +42,7 @@ public final class IntetTheDreamer extends CardImpl {
         // Whenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down.
         // You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new IntetTheDreamerExileEffect(), new ManaCostsImpl("{2}{U}")), false, true));
+                new DoIfCostPaid(new IntetTheDreamerExileEffect(), new ManaCostsImpl<>("{2}{U}")), false, true));
 
         // You may look at that card for as long as it remains exiled.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new IntetTheDreamerLookEffect()));
@@ -65,11 +62,11 @@ public final class IntetTheDreamer extends CardImpl {
 class IntetTheDreamerExileEffect extends OneShotEffect {
 
     public IntetTheDreamerExileEffect() {
-        super(Outcome.Discard);
+        super(Outcome.Benefit);
         staticText = "exile the top card of your library face down. You may play that card without paying its mana cost for as long as Intet remains on the battlefield";
     }
 
-    public IntetTheDreamerExileEffect(final IntetTheDreamerExileEffect effect) {
+    private IntetTheDreamerExileEffect(final IntetTheDreamerExileEffect effect) {
         super(effect);
     }
 
@@ -85,10 +82,8 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
                         CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game)), // sourceObject must be used due to source not working correctly
                         sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ")");
                 card.setFaceDown(true, game);
-                ContinuousEffect effect = new ConditionalAsThoughEffect(
-                        new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.Custom, true),
-                        new SourceRemainsInZoneCondition(Zone.BATTLEFIELD));
-                effect.setTargetPointer(new FixedTarget(card, game));
+                IntetTheDreamerAsThoughEffect effect = new IntetTheDreamerAsThoughEffect();
+                effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
                 game.getState().addEffect(effect, source);
                 game.getState().setValue("Exiled_IntetTheDreamer" + card.getId(), Boolean.TRUE); // TODO This value will never be removed
                 return true;
@@ -103,6 +98,66 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
     }
 }
 
+class IntetTheDreamerAsThoughEffect extends AsThoughEffectImpl {
+
+    public IntetTheDreamerAsThoughEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        staticText = "You may play that card without paying its mana cost for as long as Intet remains on the battlefield.";
+    }
+
+    private IntetTheDreamerAsThoughEffect(final IntetTheDreamerAsThoughEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public IntetTheDreamerAsThoughEffect copy() {
+        return new IntetTheDreamerAsThoughEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        // note to always discard the effect if anything fails
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        if (targetId == null) {
+            this.discard();
+            return false;
+        }
+        Card card = game.getCard(objectId);
+        if (card == null) {
+            this.discard();
+            return false;
+        }
+
+        // split cards, etc
+        objectId = card.getMainCard().getId();
+
+        if (objectId.equals(targetId)
+                && affectedControllerId.equals(source.getControllerId())) {
+            Card exiledCard = game.getCard(objectId);
+            if (exiledCard == null) {
+                this.discard();
+                return false;
+            }
+
+            // cast without mana
+            allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
+
+            // while Intet remains on battlefield
+            if(!(new SourceRemainsInZoneCondition(Zone.BATTLEFIELD).apply(game, source))) {
+                this.discard();
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+}
+
 class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
 
     public IntetTheDreamerLookEffect() {
@@ -110,7 +165,7 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
         staticText = "You may look at that card for as long as it remains exiled";
     }
 
-    public IntetTheDreamerLookEffect(final IntetTheDreamerLookEffect effect) {
+    private IntetTheDreamerLookEffect(final IntetTheDreamerLookEffect effect) {
         super(effect);
     }
 

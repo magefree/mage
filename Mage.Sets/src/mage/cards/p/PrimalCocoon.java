@@ -36,7 +36,7 @@ public final class PrimalCocoon extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         this.addAbility(new PrimalCocoonAbility1());
         this.addAbility(new PrimalCocoonAbility2());
@@ -59,7 +59,7 @@ class PrimalCocoonAbility1 extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1));
     }
 
-    public PrimalCocoonAbility1(final PrimalCocoonAbility1 ability) {
+    private PrimalCocoonAbility1(final PrimalCocoonAbility1 ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class PrimalCocoonAbility2 extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroySourceEffect());
     }
 
-    public PrimalCocoonAbility2(final PrimalCocoonAbility2 ability) {
+    private PrimalCocoonAbility2(final PrimalCocoonAbility2 ability) {
         super(ability);
     }
 

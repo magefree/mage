@@ -1,9 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,15 +9,18 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class MenacingOgre extends CardImpl {
@@ -61,7 +60,7 @@ class MenacingOgreEffect extends OneShotEffect {
         this.staticText = "each player secretly chooses a number. Then those numbers are revealed. Each player with the highest number loses that much life. If you are one of those players, put two +1/+1 counters on {this}";
     }
 
-    public MenacingOgreEffect(final MenacingOgreEffect effect) {
+    private MenacingOgreEffect(final MenacingOgreEffect effect) {
         super(effect);
     }
 
@@ -79,7 +78,8 @@ class MenacingOgreEffect extends OneShotEffect {
         Map<Player, Integer> numberChosen = new HashMap<>();
 
         //players choose numbers
-        for (Player player : game.getPlayers().values()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
             if (player != null) {
                 number = player.getAmount(0, 1000, message, game);
                 numberChosen.put(player, number);
@@ -92,7 +92,8 @@ class MenacingOgreEffect extends OneShotEffect {
             }
         }
         //reveal numbers to players and follow through with effect
-        for (Player player : game.getPlayers().values()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
             if (player != null) {
                 game.informPlayers(player.getLogName() + " chose number " + numberChosen.get(player));
                 if (numberChosen.get(player) >= highestNumber) {

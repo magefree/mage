@@ -4,12 +4,12 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -23,7 +23,7 @@ public final class BiomassMutation extends CardImpl {
 
         // Creatures you control have base power and toughness X/X until end of turn.
         DynamicValue variableMana = ManacostVariableValue.REGULAR;
-        this.getSpellAbility().addEffect(new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control"), true));
+        this.getSpellAbility().addEffect(new SetBasePowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true));
     }
 
     private BiomassMutation(final BiomassMutation card) {

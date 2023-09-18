@@ -25,7 +25,7 @@ public final class TitaniumGolem extends CardImpl {
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private TitaniumGolem(final TitaniumGolem card) {

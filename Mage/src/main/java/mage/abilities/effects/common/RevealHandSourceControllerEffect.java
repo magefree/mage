@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author noahg
  */
 public class RevealHandSourceControllerEffect extends OneShotEffect {
@@ -19,14 +18,14 @@ public class RevealHandSourceControllerEffect extends OneShotEffect {
         this.staticText = "reveal your hand";
     }
 
-    public RevealHandSourceControllerEffect(final RevealHandSourceControllerEffect effect) {
+    protected RevealHandSourceControllerEffect(final RevealHandSourceControllerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             player.revealCards(sourceObject.getIdName(), player.getHand(), game);
             return true;

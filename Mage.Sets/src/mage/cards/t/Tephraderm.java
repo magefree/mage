@@ -1,9 +1,6 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -21,6 +18,8 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author Quercitron
@@ -28,7 +27,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class Tephraderm extends CardImpl {
 
     public Tephraderm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -54,11 +53,11 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent FILTER_CREATURE = new FilterCreaturePermanent();
 
-    public TephradermCreatureDamageTriggeredAbility() {
+    TephradermCreatureDamageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
     }
 
-    public TephradermCreatureDamageTriggeredAbility(final TephradermCreatureDamageTriggeredAbility ability) {
+    private TephradermCreatureDamageTriggeredAbility(final TephradermCreatureDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -74,10 +73,11 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (sourcePermanent != null && FILTER_CREATURE.match(sourcePermanent, getSourceId(), getControllerId(), game)) {
+        if (sourcePermanent != null
+                && FILTER_CREATURE.match(sourcePermanent, getControllerId(), this, game)) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
-                    effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
                     ((DamageTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
                 }
             }
@@ -88,7 +88,7 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public TephradermCreatureDamageTriggeredAbility copy() {
         return new TephradermCreatureDamageTriggeredAbility(this);
     }
 
@@ -100,11 +100,11 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
 
 class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    public TephradermSpellDamageTriggeredAbility() {
+    TephradermSpellDamageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
     }
 
-    public TephradermSpellDamageTriggeredAbility(final TephradermSpellDamageTriggeredAbility ability) {
+    private TephradermSpellDamageTriggeredAbility(final TephradermSpellDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -120,7 +120,7 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         StackObject sourceSpell = game.getStack().getStackObject(event.getSourceId());
-        if (sourceSpell != null && StaticFilters.FILTER_SPELL.match(sourceSpell, getSourceId(), getControllerId(), game)) {
+        if (sourceSpell != null && StaticFilters.FILTER_SPELL.match(sourceSpell, getControllerId(), this, game)) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     effect.setTargetPointer(new FixedTarget(sourceSpell.getControllerId()));
@@ -134,7 +134,7 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public TephradermSpellDamageTriggeredAbility copy() {
         return new TephradermSpellDamageTriggeredAbility(this);
     }
 

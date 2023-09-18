@@ -24,12 +24,11 @@ public class ChaosWandTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}, {T}: ");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes"); // cast for free
+        setChoice(playerA, true); // cast for free
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 3); // +3 from blood
         assertLife(playerB, 20 - 3); // -3 from blood

@@ -41,10 +41,9 @@ public final class MentorsGuidance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // When you cast this spell, copy it if you control a planeswalker, Cleric, Druid, Shaman, Warlock, or Wizard.
-        new CastSourceTriggeredAbility(new ConditionalOneShotEffect(
+        this.addAbility(new CastSourceTriggeredAbility(new ConditionalOneShotEffect(
                 new CopySourceSpellEffect(), condition, "copy it if you control " +
-                "a planeswalker, Cleric, Druid, Shaman, Warlock, or Wizard"
-        ));
+                "a planeswalker, Cleric, Druid, Shaman, Warlock, or Wizard")));
 
         // Scry 1, then draw a card.
         this.getSpellAbility().addEffect(new ScryEffect(1, false));

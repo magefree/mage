@@ -39,7 +39,13 @@ public interface TriggeredAbility extends Ability {
 
     boolean checkTriggeredAlready(Game game);
 
-    TriggeredAbility setTriggersOnce(boolean triggersOnce);
+    boolean checkUsedAlready(Game game);
+
+    TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce);
+
+    TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce);
+
+    TriggeredAbility setReplaceRuleText(boolean replaceRuleText);
 
     boolean checkInterveningIfClause(Game game);
 
@@ -56,5 +62,5 @@ public interface TriggeredAbility extends Ability {
 
     GameEvent getTriggerEvent();
 
-    String getTriggerPhrase();
+    TriggeredAbility setTriggerPhrase(String triggerPhrase);
 }

@@ -47,7 +47,7 @@ public final class CastleGarenbrig extends CardImpl {
 
         // {2}{G}{G}, {T}: Add six {G}. Spend this mana only to cast creature spells or activate abilities of creatures.
         Ability ability = new ConditionalColoredManaAbility(
-                new ManaCostsImpl("{2}{G}{G}"), Mana.GreenMana(6), new CastleGarenbrigManaBuilder()
+                new ManaCostsImpl<>("{2}{G}{G}"), Mana.GreenMana(6), new CastleGarenbrigManaBuilder()
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -90,7 +90,7 @@ enum CastleGarenbrigManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         if (object != null && object.isCreature(game)) {
             return true;
         }

@@ -19,14 +19,14 @@ public final class GraniticTitan extends CardImpl {
         toughness = new MageInt(4);
 
         // Menace
-        addAbility(new MenaceAbility());
+        addAbility(new MenaceAbility(false));
 
         // Cycling {2}
         addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 
-    public GraniticTitan(final GraniticTitan graniticTitan){
+    private GraniticTitan(final GraniticTitan graniticTitan){
         super(graniticTitan);
     }
 

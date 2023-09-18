@@ -101,7 +101,7 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Counsel of the Soratami", 1);
-        assertPermanentCount(playerA, "Bear", 1);
+        assertPermanentCount(playerA, "Bear Token", 1);
         assertHandCount(playerA, 1);
     }
 }

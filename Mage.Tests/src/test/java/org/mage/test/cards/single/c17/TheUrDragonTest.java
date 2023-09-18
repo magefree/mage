@@ -27,20 +27,19 @@ public class TheUrDragonTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Dragon Hatchling", 2); // Creature Dragon {1}{R}  (0/1)
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragon Hatchling");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragon Hatchling", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragon Hatchling");
         
         attack(3, playerA, "The Ur-Dragon");
         attack(3, playerA, "Dragon Hatchling");
         attack(3, playerA, "Dragon Hatchling");
-        setChoice(playerA, "Yes"); // Put a permanent card from your hand onto the battlefield?
+        setChoice(playerA, true); // Put a permanent card from your hand onto the battlefield?
         setChoice(playerA, "Silvercoat Lion");
         
         setStopAt(3, PhaseStep.END_COMBAT);
         
         execute();
-        assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Dragon Hatchling", 2);
         assertPermanentCount(playerA, "Silvercoat Lion", 1  );
         assertHandCount(playerA, 3);

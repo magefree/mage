@@ -27,7 +27,7 @@ public final class TarielReckonerOfSouls extends CardImpl {
 
     public TarielReckonerOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
@@ -60,7 +60,7 @@ class TarielReckonerOfSoulsEffect extends OneShotEffect {
         this.staticText = "Choose a creature card at random from target opponent's graveyard. Put that card onto the battlefield under your control";
     }
 
-    public TarielReckonerOfSoulsEffect(final TarielReckonerOfSoulsEffect effect) {
+    private TarielReckonerOfSoulsEffect(final TarielReckonerOfSoulsEffect effect) {
         super(effect);
     }
 

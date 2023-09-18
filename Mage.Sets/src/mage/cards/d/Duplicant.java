@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,7 @@ public final class Duplicant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public Duplicant(UUID ownerId, CardSetInfo setInfo) {
@@ -43,7 +42,7 @@ public final class Duplicant extends CardImpl {
         // Imprint - When Duplicant enters the battlefield, you may exile target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DuplicantExileTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.withFlavorWord("Imprint");
+        ability.setAbilityWord(AbilityWord.IMPRINT);
         this.addAbility(ability);
         // As long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DuplicantContinuousEffect()));
@@ -63,9 +62,10 @@ class DuplicantExileTargetEffect extends OneShotEffect {
 
     public DuplicantExileTargetEffect() {
         super(Outcome.Exile);
+        this.staticText = "you may exile target nontoken creature";
     }
 
-    public DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
+    private DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
         super(effect);
     }
 
@@ -88,11 +88,6 @@ class DuplicantExileTargetEffect extends OneShotEffect {
 
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "you may exile target nontoken creature";
-    }
 }
 
 class DuplicantContinuousEffect extends ContinuousEffectImpl {
@@ -102,7 +97,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         staticText = "As long as a card exiled with {this} is a creature card, {this} has the power, toughness, and creature types of the last creature card exiled with {this}. It's still a Shapeshifter.";
     }
 
-    public DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {
+    private DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {
         super(effect);
     }
 
@@ -134,8 +129,8 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(card.getPower().getValue());
-                    permanent.getToughness().setValue(card.getToughness().getValue());
+                    permanent.getPower().setModifiedBaseValue(card.getPower().getValue());
+                    permanent.getToughness().setModifiedBaseValue(card.getToughness().getValue());
                 }
         }
         return true;

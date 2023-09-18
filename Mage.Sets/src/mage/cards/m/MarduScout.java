@@ -23,7 +23,7 @@ public final class MarduScout extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Dash {1}{R}
-        this.addAbility(new DashAbility(this, "{1}{R}"));        
+        this.addAbility(new DashAbility("{1}{R}"));
     }
 
     private MarduScout(final MarduScout card) {

@@ -34,7 +34,7 @@ public final class Occupation extends CardImpl {
         // {W}{B}: Target creature can't attack or block this turn, and its activated abilities can't be activated until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new OccupationOneShotEffect("Target creature can't attack or block this turn, and its activated abilities can't be activated until end of turn"),
-                new ManaCostsImpl("{W}{B}"));
+                new ManaCostsImpl<>("{W}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -56,7 +56,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
         staticText = "Creatures your opponents control enter the battlefield tapped";
     }
 
-    OccupationTapEffect(final OccupationTapEffect effect) {
+    private OccupationTapEffect(final OccupationTapEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class OccupationOneShotEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public OccupationOneShotEffect(final OccupationOneShotEffect effect) {
+    private OccupationOneShotEffect(final OccupationOneShotEffect effect) {
         super(effect);
     }
 
@@ -124,7 +124,7 @@ class OccupationRestrictionEffect extends RestrictionEffect {
         staticText = "";
     }
 
-    public OccupationRestrictionEffect(final OccupationRestrictionEffect effect) {
+    private OccupationRestrictionEffect(final OccupationRestrictionEffect effect) {
         super(effect);
     }
 

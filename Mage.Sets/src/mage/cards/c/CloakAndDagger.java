@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -16,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -23,11 +23,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class CloakAndDagger extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a Rogue creature");
-
-    static {
-        filter.add(SubType.ROGUE.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.ROGUE, "a Rogue creature");
 
     public CloakAndDagger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{2}");
@@ -43,7 +39,7 @@ public final class CloakAndDagger extends CardImpl {
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private CloakAndDagger(final CloakAndDagger card) {

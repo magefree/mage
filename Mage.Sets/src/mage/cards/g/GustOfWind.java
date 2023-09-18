@@ -51,7 +51,7 @@ public final class GustOfWind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter2));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private GustOfWind(final GustOfWind card) {

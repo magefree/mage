@@ -52,7 +52,7 @@ class ChickenEggEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. If you roll a 6, sacrifice {this} and create a 4/4 red Giant Bird creature token";
     }
 
-    ChickenEggEffect(final ChickenEggEffect effect) {
+    private ChickenEggEffect(final ChickenEggEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class ChickenEggEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int result = controller.rollDice(source, game, 6);
+            int result = controller.rollDice(outcome, source, game, 6);
             if (result == 6) {
                 new SacrificeSourceEffect().apply(game, source);
                 return (new CreateTokenEffect(new GiantBirdToken(), 1)).apply(game, source);

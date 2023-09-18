@@ -36,7 +36,7 @@ public final class EyeOfUgin extends CardImpl {
 
     public EyeOfUgin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Colorless Eldrazi spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterSpells, 2)));
@@ -45,7 +45,7 @@ public final class EyeOfUgin extends CardImpl {
         Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
                 new TapSourceCost());
-        searchAbility.addCost(new ManaCostsImpl("{7}"));
+        searchAbility.addCost(new ManaCostsImpl<>("{7}"));
         this.addAbility(searchAbility);
     }
 

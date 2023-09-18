@@ -26,14 +26,14 @@ public final class HallOfHeliodsGenerosity extends CardImpl {
     public HallOfHeliodsGenerosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{W}, {T}: Put target enchantment card from your graveyard on top of your library.
         Ability ability = new SimpleActivatedAbility(
-                new PutOnLibraryTargetEffect(true), new ManaCostsImpl("{1}{W}")
+                new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));

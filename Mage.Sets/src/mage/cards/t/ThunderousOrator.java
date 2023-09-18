@@ -87,13 +87,13 @@ class ThunderousOratorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Ability> abilities = new ArrayList<>();
-        if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
+        if (game.getBattlefield().count(filter, source.getControllerId(), source, game) > 0) {
             abilities.add(new MenaceAbility());
         }
         game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        source.getControllerId(), source.getSourceId(), game
+                        source.getControllerId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(p -> p.getAbilities(game))

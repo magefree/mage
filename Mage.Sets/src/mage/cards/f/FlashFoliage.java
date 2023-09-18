@@ -38,7 +38,7 @@ public final class FlashFoliage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou()));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private FlashFoliage(final FlashFoliage card) {
@@ -58,7 +58,7 @@ class FlashFoliageEffect extends OneShotEffect {
         this.staticText = "create a 1/1 green Saproling creature token that's blocking target creature attacking you";
     }
 
-    public FlashFoliageEffect(final FlashFoliageEffect effect) {
+    private FlashFoliageEffect(final FlashFoliageEffect effect) {
         super(effect);
     }
 

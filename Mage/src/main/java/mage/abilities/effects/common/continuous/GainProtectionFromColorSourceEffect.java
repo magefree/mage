@@ -14,7 +14,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect {
@@ -26,7 +25,7 @@ public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect
         protectionFilter = (FilterCard) ((ProtectionAbility) ability).getFilter();
     }
 
-    public GainProtectionFromColorSourceEffect(final GainProtectionFromColorSourceEffect effect) {
+    protected GainProtectionFromColorSourceEffect(final GainProtectionFromColorSourceEffect effect) {
         super(effect);
         this.protectionFilter = effect.protectionFilter.copy();
     }
@@ -44,7 +43,7 @@ public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect
             ChoiceColor colorChoice = new ChoiceColor(true);
             colorChoice.setMessage("Choose color for protection ability");
             if (controller.choose(outcome, colorChoice, game)) {
-                game.informPlayers("Choosen color: " + colorChoice.getColor());
+                game.informPlayers("Chosen color: " + colorChoice.getColor());
                 protectionFilter.add(new ColorPredicate(colorChoice.getColor()));
                 protectionFilter.setMessage(colorChoice.getChoice());
                 ((ProtectionAbility) ability).setFilter(protectionFilter);

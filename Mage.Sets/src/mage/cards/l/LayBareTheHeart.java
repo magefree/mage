@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -29,8 +28,8 @@ public final class LayBareTheHeart extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Target opponent reveals their hand. You choose a nonlegendary, nonland card from it. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
+        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
     private LayBareTheHeart(final LayBareTheHeart card) {

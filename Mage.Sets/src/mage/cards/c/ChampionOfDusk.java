@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -8,6 +7,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +18,6 @@ import mage.filter.common.FilterControlledPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class ChampionOfDusk extends CardImpl {
@@ -28,6 +28,9 @@ public final class ChampionOfDusk extends CardImpl {
         filter.add(SubType.VAMPIRE.getPredicate());
     }
 
+    private static final DynamicValue xCount = new PermanentsOnBattlefieldCount(filter);
+    private static final Hint hint = new ValueHint("Vampires you control", xCount);
+
     public ChampionOfDusk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
@@ -36,10 +39,12 @@ public final class ChampionOfDusk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Champion of Dusk enters the battlefield, you draw X cards and you lose X life, where X is the number of Vampires you control.
-        DynamicValue xCount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xCount));
-        ability.addEffect(new LoseLifeSourceControllerEffect(xCount));
-        this.addAbility(ability);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DrawCardSourceControllerEffect(xCount).setText("you draw X cards")
+        );
+        ability.addEffect(new LoseLifeSourceControllerEffect(xCount)
+                .setText("and you lose X life, where X is the number of Vampires you control"));
+        this.addAbility(ability.addHint(hint));
     }
 
     private ChampionOfDusk(final ChampionOfDusk card) {

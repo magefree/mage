@@ -39,7 +39,7 @@ public final class IllusionaryPresence extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cumulative upkeep {U}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}")));
 
         // At the beginning of your upkeep, choose a land type. Illusionary Presence gains landwalk of the chosen type until end of turn.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ChooseBasicLandTypeEffect(Outcome.Neutral), TargetController.YOU, false);
@@ -67,7 +67,7 @@ class IllusionaryPresenceEffect extends OneShotEffect {
         this.staticText = "{this} gains landwalk of the chosen type until end of turn";
     }
 
-    public IllusionaryPresenceEffect(final IllusionaryPresenceEffect effect) {
+    private IllusionaryPresenceEffect(final IllusionaryPresenceEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class IllusionaryPresenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             SubType landTypeChoice = SubType.byDescription((String) game.getState().getValue(mageObject.getId().toString() + "BasicLandType"));
             if (landTypeChoice != null) {

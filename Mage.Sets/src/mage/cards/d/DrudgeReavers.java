@@ -28,7 +28,7 @@ public final class DrudgeReavers extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // {B}: Regenerate Drudge Reavers.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private DrudgeReavers(final DrudgeReavers card) {

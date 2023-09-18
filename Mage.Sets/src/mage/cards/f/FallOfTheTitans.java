@@ -21,7 +21,7 @@ public final class FallOfTheTitans extends CardImpl {
 
         // Fall of the Titans deals X damage to each of up to two target creatures and/or players.
         this.getSpellAbility().addTarget(new TargetAnyTarget(0, 2));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR, true, "each of up to two targets"));
 
         // Surge {X}{R}
         addAbility(new SurgeAbility(this, "{X}{R}"));

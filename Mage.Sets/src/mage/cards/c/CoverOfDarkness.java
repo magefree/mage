@@ -1,7 +1,7 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -14,8 +14,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CoverOfDarkness extends CardImpl {
@@ -44,10 +45,10 @@ class FilterCoverOfDarkness extends FilterCreaturePermanent {
     private SubType subType = null;
 
     public FilterCoverOfDarkness() {
-        super("All creatures of the chosen type");
+        super("creatures of the chosen type");
     }
 
-    public FilterCoverOfDarkness(final FilterCoverOfDarkness filter) {
+    private FilterCoverOfDarkness(final FilterCoverOfDarkness filter) {
         super(filter);
         this.subType = filter.subType;
     }
@@ -58,10 +59,10 @@ class FilterCoverOfDarkness extends FilterCreaturePermanent {
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (super.match(permanent, sourceId, playerId, game)) {
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        if (super.match(permanent, playerId, source, game)) {
             if (subType == null) {
-                subType = ChooseCreatureTypeEffect.getChosenCreatureType(sourceId, game);
+                subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
                 if (subType == null) {
                     return false;
                 }

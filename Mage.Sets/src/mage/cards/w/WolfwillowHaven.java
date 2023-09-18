@@ -35,7 +35,7 @@ public final class WolfwillowHaven extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted land is tapped for mana, its controller adds an additional {G}.
@@ -46,7 +46,7 @@ public final class WolfwillowHaven extends CardImpl {
         // {4}{G}, Sacrifice Wolfwillow Haven: Create a 2/2 green Wolf creature token. Activate this ability only during your turn.
         ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()),
-                new ManaCostsImpl("{4}{G}"), MyTurnCondition.instance
+                new ManaCostsImpl<>("{4}{G}"), MyTurnCondition.instance
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addHint(MyTurnHint.instance);

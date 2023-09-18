@@ -51,6 +51,7 @@ public class MageDrawAction extends MageAction {
         int numDrawn = 0;
         int score = 0;
         GameEvent event = new DrawCardsEvent(this.player.getId(), source, this.originalDrawEvent, this.amount);
+        // TODO: This needs a better description of how it works. Why "amount < 2"?
         if (amount < 2 || !game.replaceEvent(event)) {
             amount = event.getAmount();
             for (int i = 0; i < amount; i++) {
@@ -64,9 +65,7 @@ public class MageDrawAction extends MageAction {
             if (!player.isTopCardRevealed() && numDrawn > 0) {
                 game.fireInformEvent(player.getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
             }
-
             setScore(player, score);
-            game.setStateCheckRequired();
         }
         return numDrawn;
     }

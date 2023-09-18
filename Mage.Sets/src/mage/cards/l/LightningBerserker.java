@@ -30,10 +30,10 @@ public final class LightningBerserker extends CardImpl {
         // {R}: Lightning Berserker gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{R}")));
+                new ManaCostsImpl<>("{R}")));
         
         // Dash {R}
-        this.addAbility(new DashAbility(this, "{R}"));
+        this.addAbility(new DashAbility("{R}"));
     }
 
     private LightningBerserker(final LightningBerserker card) {

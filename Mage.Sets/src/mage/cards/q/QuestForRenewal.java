@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -26,7 +27,7 @@ public final class QuestForRenewal extends CardImpl {
 
         // Whenever a creature you control becomes tapped, you may put a quest counter on Quest for Renewal.
         this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()),
-                true, new FilterControlledCreaturePermanent("a creature you control")));
+                true, StaticFilters.FILTER_CONTROLLED_A_CREATURE));
 
         // As long as there are four or more quest counters on Quest for Renewal, untap all creatures you control during each other player's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(

@@ -47,7 +47,7 @@ public final class UnderworldSlums extends CardImpl {
 
     public static class UnderworldSlumsAbility extends ActivatedAbilityImpl {
 
-        public UnderworldSlumsAbility(UnderworldSlumsAbility ability) {
+        private UnderworldSlumsAbility(final UnderworldSlumsAbility ability) {
             super(ability);
         }
 
@@ -64,7 +64,7 @@ public final class UnderworldSlums extends CardImpl {
             filter.add(Predicates.or(subtypePredicates));
             filter.add(SuperType.BASIC.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
+            addEffect(new SearchLibraryPutInPlayEffect(target, true));
         }
 
         @Override

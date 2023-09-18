@@ -28,7 +28,7 @@ public final class ZealotOfTheGodPharaoh extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {4}{R}: Zealot of the God-Pharaoh deals 2 damage to target opponent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{4}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{4}{R}"));
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }

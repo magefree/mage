@@ -24,6 +24,7 @@ public class PlayerView implements Serializable {
     private final UUID playerId;
     private final String name;
     private final boolean controlled; // gui: player is current user
+    private final boolean isHuman; // human or computer
     private final int life;
     private final Counters counters;
     private final int wins;
@@ -38,6 +39,7 @@ public class PlayerView implements Serializable {
     private final ManaPoolView manaPool;
     private final CardsView graveyard = new CardsView();
     private final CardsView exile = new CardsView();
+    private final CardsView sideboard = new CardsView();
     private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<>();
     private final CardView topCard;
     private final UserData userData;
@@ -45,6 +47,7 @@ public class PlayerView implements Serializable {
     private final List<UUID> attachments = new ArrayList<>();
     private final int statesSavedSize;
     private final int priorityTimeLeft;
+    private final int bufferTimeLeft;
     private final boolean passedTurn; // F4
     private final boolean passedUntilEndOfTurn; // F5
     private final boolean passedUntilNextMain; // F6
@@ -52,12 +55,14 @@ public class PlayerView implements Serializable {
     private final boolean passedAllTurns; // F9
     private final boolean passedUntilEndStepBeforeMyTurn; // F11
     private final boolean monarch;
+    private final boolean initiative;
     private final List<String> designationNames = new ArrayList<>();
 
     public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         this.playerId = player.getId();
         this.name = player.getName();
         this.controlled = player.getId().equals(createdForPlayerId);
+        this.isHuman = player.isHuman();
         this.life = player.getLife();
         this.counters = player.getCounters();
         this.wins = player.getMatchPlayer().getWins();
@@ -70,6 +75,7 @@ public class PlayerView implements Serializable {
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.bufferTimeLeft = player.getBufferTimeLeft();
         this.timerActive = (this.hasPriority && player.isGameUnderControl())
                 || (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()))
                 || player.getId().equals(game.getState().getChoosingPlayerId());
@@ -85,6 +91,13 @@ public class PlayerView implements Serializable {
                 }
             }
         }
+        if (this.controlled || !player.isHuman()) {
+            // sideboard available for itself or for computer only
+            for (Card card : player.getSideboard().getCards(game)) {
+                sideboard.put(card.getId(), new CardView(card, game, false));
+            }
+        }
+
         try {
             for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
                 if (showInBattlefield(permanent, state)) {
@@ -143,6 +156,7 @@ public class PlayerView implements Serializable {
         this.passedUntilStackResolved = player.getPassedUntilStackResolved();
         this.passedUntilEndStepBeforeMyTurn = player.getPassedUntilEndStepBeforeMyTurn();
         this.monarch = player.getId().equals(game.getMonarchId());
+        this.initiative = player.getId().equals(game.getInitiativeId());
         for (Designation designation : player.getDesignations()) {
             this.designationNames.add(designation.getName());
         }
@@ -165,6 +179,10 @@ public class PlayerView implements Serializable {
 
     public boolean getControlled() {
         return this.controlled;
+    }
+
+    public boolean isHuman() {
+        return this.isHuman;
     }
 
     public int getLife() {
@@ -205,6 +223,10 @@ public class PlayerView implements Serializable {
 
     public CardsView getExile() {
         return exile;
+    }
+
+    public CardsView getSideboard() {
+        return this.sideboard;
     }
 
     public Map<UUID, PermanentView> getBattlefield() {
@@ -255,6 +277,10 @@ public class PlayerView implements Serializable {
         return priorityTimeLeft;
     }
 
+    public int getBufferTimeLeft() {
+        return bufferTimeLeft;
+    }
+
     public boolean hasPriority() {
         return hasPriority;
     }
@@ -289,6 +315,10 @@ public class PlayerView implements Serializable {
 
     public boolean isMonarch() {
         return monarch;
+    }
+
+    public boolean isInitiative() {
+        return initiative;
     }
 
     public List<String> getDesignationNames() {

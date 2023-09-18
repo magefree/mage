@@ -74,7 +74,7 @@ class HeraldicBannerEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Permanent perm : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source.getSourceId(), game
+                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game
         )) {
             if (perm.getColor(game).contains(color)) {
                 perm.addPower(1);

@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.GateYouControlCount;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
@@ -41,7 +41,7 @@ public final class GateColossus extends CardImpl {
         this.addAbility(new DauntAbility());
 
         // Whenever a Gate enters the battlefield under your control, you may put Gate Colossus from your graveyard on top of your library.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD,
                 new PutOnLibrarySourceEffect(
                         true, "put {this} from your graveyard on top of your library"

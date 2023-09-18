@@ -45,7 +45,7 @@ class BloodOfTheMartyrEffect extends ReplacementEffectImpl {
         staticText = "Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead";
     }
 
-    public BloodOfTheMartyrEffect(final BloodOfTheMartyrEffect effect) {
+    private BloodOfTheMartyrEffect(final BloodOfTheMartyrEffect effect) {
         super(effect);
     }
 

@@ -40,7 +40,7 @@ public final class BaruFistOfKrosa extends CardImpl {
 
     public BaruFistOfKrosa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.DRUID);
 
         this.power = new MageInt(4);
@@ -74,7 +74,7 @@ class BaruFistOfKrosaEffect extends OneShotEffect {
         this.staticText = "create an X/X green Wurm creature token, where X is the number of lands you control.";
     }
 
-    BaruFistOfKrosaEffect(final BaruFistOfKrosaEffect effect) {
+    private BaruFistOfKrosaEffect(final BaruFistOfKrosaEffect effect) {
         super(effect);
     }
 

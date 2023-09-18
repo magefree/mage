@@ -36,7 +36,7 @@ public final class FollowedFootsteps extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Copy));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted creature.
@@ -57,10 +57,10 @@ class FollowedFootstepsEffect extends OneShotEffect {
 
     public FollowedFootstepsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "You create a token that's a copy of enchanted creature";
+        this.staticText = "create a token that's a copy of enchanted creature";
     }
 
-    public FollowedFootstepsEffect(final FollowedFootstepsEffect effect) {
+    private FollowedFootstepsEffect(final FollowedFootstepsEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class FollowedFootstepsEffect extends OneShotEffect {
             Permanent target = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
             if (target != null) {
                 Effect effect = new CreateTokenCopyTargetEffect();
-                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
                 return effect.apply(game, source);
             }
         }

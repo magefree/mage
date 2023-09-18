@@ -7,8 +7,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -17,21 +16,15 @@ import mage.target.TargetSpell;
  */
 public final class ScatterArc extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public ScatterArc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Counter target noncreature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ScatterArc(final ScatterArc card) {

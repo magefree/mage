@@ -25,7 +25,7 @@ public final class WirewoodGuardian extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Forestcycling {2}
-        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private WirewoodGuardian(final WirewoodGuardian card) {

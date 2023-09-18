@@ -45,7 +45,7 @@ public final class TravelersCloak extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As Traveler's Cloak enters the battlefield, choose a land type.
@@ -76,6 +76,15 @@ class TravelersCloakGainAbilityAttachedEffect extends GainAbilityAttachedEffect 
         super(new LandwalkAbility(filter), AttachmentType.AURA);
     }
 
+    protected TravelersCloakGainAbilityAttachedEffect(final TravelersCloakGainAbilityAttachedEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public TravelersCloakGainAbilityAttachedEffect copy() {
+        return new TravelersCloakGainAbilityAttachedEffect(this);
+    }
+
     @Override
     public void afterGain(Game game, Ability source, Permanent permanent, Ability addedAbility) {
         super.afterGain(game, source, permanent, addedAbility);
@@ -86,7 +95,7 @@ class TravelersCloakGainAbilityAttachedEffect extends GainAbilityAttachedEffect 
     }
 }
 
-enum TravelersCloakChosenSubtypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum TravelersCloakChosenSubtypePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

@@ -26,12 +26,12 @@ public final class ChimericIdol extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {0}: Tap all lands you control. Chimeric Idol becomes a 3/3 Turtle artifact creature until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(new FilterControlledLandPermanent("lands you control")), new ManaCostsImpl("{0}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(new FilterControlledLandPermanent("lands you control")), new ManaCostsImpl<>("{0}"));
         ability.addEffect(new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 3, "3/3 Turtle artifact creature")
                         .withSubType(SubType.TURTLE)
                         .withType(CardType.ARTIFACT),
-                "", Duration.EndOfTurn));
+                CardType.ARTIFACT, Duration.EndOfTurn));
         this.addAbility(ability);
 
     }

@@ -35,6 +35,7 @@ import mage.server.managers.ConfigSettings;
 import mage.server.util.ConfigFactory;
 import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
+import mage.server.util.SystemUtil;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.target.TargetPermanent;
@@ -78,10 +79,12 @@ public abstract class MageTestPlayerBase {
     protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> commandCards = new HashMap<>();
+    protected Map<TestPlayer, List<Card>> exiledCards = new HashMap<>();
 
     protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
 
-    protected static Map<String, DeckCardLists> loadedDeckCardLists = new HashMap<>(); // test decks buffer
+    protected static Map<String, DeckCardLists> loadedDecks = new HashMap<>(); // deck's cache
+    protected static Map<String, CardInfo> loadedCardInfo = new HashMap<>(); // db card's cache
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
@@ -131,12 +134,15 @@ public abstract class MageTestPlayerBase {
         logger.debug("Logging level: " + logger.getLevel());
         logger.debug("Default charset: " + Charset.defaultCharset());
 
-        deleteSavedGames();
-        ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
-        for (GamePlugin plugin : config.getGameTypes()) {
-            GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+        // one time init for all tests
+        if (GameFactory.instance.getGameTypes().isEmpty()) {
+            deleteSavedGames();
+            ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
+            for (GamePlugin plugin : config.getGameTypes()) {
+                GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+            }
+            Copier.setLoader(classLoader);
         }
-        Copier.setLoader(classLoader);
     }
 
     private static Class<?> loadPlugin(Plugin plugin) {
@@ -265,7 +271,7 @@ public abstract class MageTestPlayerBase {
                         Card newCard = cardInfo != null ? cardInfo.getCard() : null;
                         if (newCard != null) {
                             if (gameZone == Zone.BATTLEFIELD) {
-                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
                                 PermanentCard p = new PermanentCard(permCard, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);
@@ -345,6 +351,15 @@ public abstract class MageTestPlayerBase {
         return res;
     }
 
+    protected List<Card> getExiledCards(TestPlayer player) {
+        if (exiledCards.containsKey(player)) {
+            return exiledCards.get(player);
+        }
+        List<Card> res = new ArrayList<>();
+        exiledCards.put(player, res);
+        return res;
+    }
+
     protected Map<Zone, String> getCommands(TestPlayer player) {
         if (commands.containsKey(player)) {
             return commands.get(player);
@@ -411,14 +426,21 @@ public abstract class MageTestPlayerBase {
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
                                             CardType cardType, String spellCost, Zone putAtZone, SubType... additionalSubTypes) {
-        CustomTestCard.clearCustomAbilities(customName);
-        CustomTestCard.addCustomAbility(customName, spellAbility, ability);
-        CustomTestCard.clearAdditionalSubtypes(customName);
-        CustomTestCard.addAdditionalSubtypes(customName, additionalSubTypes);
+        List<String> cardCommand = SystemUtil.parseSetAndCardNameCommand(customName);
+        String needSetCode = cardCommand.get(0);
+        String needCardName = cardCommand.get(1);
+        if (needSetCode.isEmpty()) {
+            needSetCode = "custom";
+        }
 
-        CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
+        CustomTestCard.clearCustomAbilities(needCardName);
+        CustomTestCard.addCustomAbility(needCardName, spellAbility, ability);
+        CustomTestCard.clearAdditionalSubtypes(needCardName);
+        CustomTestCard.addAdditionalSubtypes(needCardName, additionalSubTypes);
+
+        CardSetInfo testSet = new CardSetInfo(needCardName, needSetCode, "123", Rarity.COMMON);
         Card newCard = new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost);
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
         PermanentCard permanent = new PermanentCard(permCard, controllerPlayer.getId(), currentGame);
 
         switch (putAtZone) {
@@ -436,6 +458,9 @@ public abstract class MageTestPlayerBase {
                 break;
             case COMMAND:
                 getCommandCards(controllerPlayer).add(newCard);
+                break;
+            case EXILED:
+                getExiledCards(controllerPlayer).add(newCard);
                 break;
             default:
                 Assert.fail("Unsupported zone: " + putAtZone);
@@ -470,7 +495,7 @@ public abstract class MageTestPlayerBase {
      * @param damageAmount
      */
     protected void addCustomEffect_TargetDamage(TestPlayer controller, int damageAmount) {
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetAnyTarget());
         addCustomCardWithAbility(
                 "target damage " + damageAmount + " for " + controller.getName(),
@@ -485,7 +510,7 @@ public abstract class MageTestPlayerBase {
      * @param controller
      */
     protected void addCustomEffect_DestroyTarget(TestPlayer controller) {
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility(
                 "target destroy for " + controller.getName(),
@@ -501,7 +526,7 @@ public abstract class MageTestPlayerBase {
      */
     protected void addCustomEffect_ReturnFromAnyToHand(TestPlayer controller) {
         // graveyard
-        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect().setText("return from graveyard"), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect().setText("return from graveyard"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD));
         addCustomCardWithAbility(
                 "return from graveyard for " + controller.getName(),
@@ -510,7 +535,7 @@ public abstract class MageTestPlayerBase {
         );
 
         // exile
-        ability = new SimpleActivatedAbility(new ReturnFromExileEffect(Zone.HAND).setText("return from exile"), new ManaCostsImpl(""));
+        ability = new SimpleActivatedAbility(new ReturnFromExileEffect(Zone.HAND).setText("return from exile"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetCardInExile(StaticFilters.FILTER_CARD));
         addCustomCardWithAbility(
                 "return from exile for " + controller.getName(),
@@ -519,7 +544,7 @@ public abstract class MageTestPlayerBase {
         );
 
         // library
-        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD)).setText("return from library"), new ManaCostsImpl(""));
+        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD), false).setText("return from library"), new ManaCostsImpl<>(""));
         addCustomCardWithAbility(
                 "return from library for " + controller.getName(),
                 controller,

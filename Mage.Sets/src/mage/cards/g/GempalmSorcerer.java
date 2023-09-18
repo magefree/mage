@@ -37,7 +37,7 @@ public final class GempalmSorcerer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cycling {2}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{U}")));
 
         // When you cycle Gempalm Sorcerer, Wizard creatures gain flying until end of turn.
         Ability ability = new CycleTriggeredAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter));

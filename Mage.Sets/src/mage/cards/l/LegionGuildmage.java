@@ -13,8 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,13 +21,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author TheElk801
  */
 public final class LegionGuildmage extends CardImpl {
-
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public LegionGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
@@ -41,7 +33,7 @@ public final class LegionGuildmage extends CardImpl {
         // {5}{R}, {T}: Legion Guildmage deals 3 damage to each opponent.
         Ability ability = new SimpleActivatedAbility(
                 new DamagePlayersEffect(3, TargetController.OPPONENT),
-                new ManaCostsImpl("{5}{R}")
+                new ManaCostsImpl<>("{5}{R}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -49,10 +41,10 @@ public final class LegionGuildmage extends CardImpl {
         // {2}{W}, {T}: Tap another target creature.
         ability = new SimpleActivatedAbility(
                 new TapTargetEffect("tap another target creature"),
-                new ManaCostsImpl("{2}{W}")
+                new ManaCostsImpl<>("{2}{W}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

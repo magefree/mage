@@ -82,7 +82,7 @@ class ClayGolemCost extends CostImpl {
         if (player == null) {
             return paid;
         }
-        lastRoll = player.rollDice(source, game, 8);
+        lastRoll = player.rollDice(Outcome.Benefit, source, game, 8);
         paid = true;
         return paid;
     }

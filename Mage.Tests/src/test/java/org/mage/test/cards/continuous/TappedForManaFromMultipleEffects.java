@@ -29,7 +29,6 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Nyxbloom Ancient", 1);
         assertPermanentCount(playerA, "Chlorophant", 1);
@@ -64,7 +63,6 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Nyxbloom Ancient", 2);
         assertPermanentCount(playerA, "Chlorophant", 1);
@@ -86,7 +84,6 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -97,7 +94,7 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Balduvian Bears", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chrome Mox");
-        setChoice(playerA, "Yes"); // use imprint
+        setChoice(playerA, true); // use imprint
         setChoice(playerA, "Balduvian Bears"); // discard
 
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add one");
@@ -106,7 +103,6 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Chrome Mox", 1);
         assertExileCount(playerA, "Balduvian Bears", 1);
@@ -124,7 +120,6 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -138,7 +133,7 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mana Reflection", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chrome Mox");
-        setChoice(playerA, "Yes"); // use imprint
+        setChoice(playerA, true); // use imprint
         setChoice(playerA, "Balduvian Bears"); // discard
 
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add one");
@@ -147,7 +142,6 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Chrome Mox", 1);
         assertExileCount(playerA, "Balduvian Bears", 1);
@@ -169,7 +163,6 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -191,6 +184,5 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

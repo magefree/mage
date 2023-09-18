@@ -58,7 +58,7 @@ public final class SurgeMare extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, -2, Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{U}")
+                new ManaCostsImpl<>("{1}{U}")
         ));
     }
 

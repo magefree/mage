@@ -35,7 +35,7 @@ public final class IsarethTheAwakener extends CardImpl {
     public IsarethTheAwakener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -82,7 +82,7 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (player == null
                 || !player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
             return false;
@@ -137,7 +137,7 @@ class IsarethTheAwakenerEffect extends OneShotEffect {
         }
         Counters countersToAdd = new Counters();
         countersToAdd.addCounter(CounterType.CORPSE.createInstance());
-        game.setEnterWithCounters(source.getSourceId(), countersToAdd);
+        game.setEnterWithCounters(card.getId(), countersToAdd);
         return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

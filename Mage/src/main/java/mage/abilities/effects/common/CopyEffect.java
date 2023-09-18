@@ -10,20 +10,20 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
 /**
+ * Make battlefield's permanent as a copy of the source object
+ * (source can be a card or another permanent)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class CopyEffect extends ContinuousEffectImpl {
 
-    /**
-     * Object we copy from
-     */
     protected MageObject copyFromObject;
-
     protected UUID copyToObjectId;
     protected CopyApplier applier;
 
@@ -37,7 +37,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         this.copyToObjectId = copyToObjectId;
     }
 
-    public CopyEffect(final CopyEffect effect) {
+    protected CopyEffect(final CopyEffect effect) {
         super(effect);
         this.copyFromObject = effect.copyFromObject.copy();
         this.copyToObjectId = effect.copyToObjectId;
@@ -47,9 +47,13 @@ public class CopyEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+
+        // must copy the default side of the card (example: clone with mdf card)
         if (!(copyFromObject instanceof Permanent) && (copyFromObject instanceof Card)) {
-            this.copyFromObject = new PermanentCard((Card) copyFromObject, source.getControllerId(), game);
+            Card newBluePrint = CardUtil.getDefaultCardSideForBattlefield(game, (Card) copyFromObject);
+            this.copyFromObject = new PermanentCard(newBluePrint, source.getControllerId(), game);
         }
+
         Permanent permanent = game.getPermanent(copyToObjectId);
         if (permanent != null) {
             affectedObjectList.add(new MageObjectReference(permanent, game));
@@ -98,7 +102,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.setName(copyFromObject.getName());
         permanent.getColor(game).setColor(copyFromObject.getColor(game));
         permanent.getManaCost().clear();
-        permanent.getManaCost().add(copyFromObject.getManaCost());
+        permanent.getManaCost().add(copyFromObject.getManaCost().copy());
         permanent.removeAllCardTypes(game);
         for (CardType type : copyFromObject.getCardType(game)) {
             permanent.addCardType(game, type);
@@ -107,9 +111,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, copyFromObject);
 
-        permanent.getSuperType().clear();
-        for (SuperType type : copyFromObject.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : copyFromObject.getSuperType(game)) {
+            permanent.addSuperType(game, type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);
@@ -126,24 +130,26 @@ public class CopyEffect extends ContinuousEffectImpl {
         // Primal Clay example:
         // If a creature that’s already on the battlefield becomes a copy of this creature, it copies the power, toughness,
         // and abilities that were chosen for this creature as it entered the battlefield. (2018-03-16)
-        permanent.getPower().setValue(copyFromObject.getPower().getBaseValueModified());
-        permanent.getToughness().setValue(copyFromObject.getToughness().getBaseValueModified());
+        permanent.getPower().setModifiedBaseValue(copyFromObject.getPower().getModifiedBaseValue());
+        permanent.getToughness().setModifiedBaseValue(copyFromObject.getToughness().getModifiedBaseValue());
+        permanent.setStartingLoyalty(copyFromObject.getStartingLoyalty());
+        permanent.setStartingDefense(copyFromObject.getStartingDefense());
         if (copyFromObject instanceof Permanent) {
             Permanent targetPermanent = (Permanent) copyFromObject;
-            permanent.setTransformed(targetPermanent.isTransformed());
-            permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
+            //707.2. When copying an object, the copy acquires the copiable values of the original object’s characteristics [..]
+            //110.5. A permanent's status is its physical state. There are four status categories, each of which has two possible values:
+            // tapped/untapped, flipped/unflipped, face up/face down, and phased in/phased out.
+            // Each permanent always has one of these values for each of these categories.
+            //110.5a Status is not a characteristic, though it may affect a permanent’s characteristics.
+            //Being transformed is not a copiable characteristic, nor is the back side of a DFC
+            //permanent.setTransformed(targetPermanent.isTransformed());
+            //permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
             permanent.setFlipCard(targetPermanent.isFlipCard());
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
         }
 
-        // to get the image of the copied permanent copy number und expansionCode
-        if (copyFromObject instanceof PermanentCard) {
-            permanent.setCardNumber(((PermanentCard) copyFromObject).getCard().getCardNumber());
-            permanent.setExpansionSetCode(((PermanentCard) copyFromObject).getCard().getExpansionSetCode());
-        } else if (copyFromObject instanceof PermanentToken || copyFromObject instanceof Card) {
-            permanent.setCardNumber(((Card) copyFromObject).getCardNumber());
-            permanent.setExpansionSetCode(((Card) copyFromObject).getExpansionSetCode());
-        }
+        CardUtil.copySetAndCardNumber(permanent, copyFromObject);
+
         return true;
     }
 
@@ -168,8 +174,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         return applier;
     }
 
-    public void setApplier(CopyApplier applier) {
+    public CopyEffect setApplier(CopyApplier applier) {
         this.applier = applier;
+        return this;
     }
 
 }

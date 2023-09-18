@@ -36,8 +36,7 @@ public final class ActiveVolcano extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filterBlue));
 
         // or return target Island to its owner's hand.
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetPermanent(filterIsland));
         this.getSpellAbility().addMode(mode);
     }

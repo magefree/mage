@@ -2,6 +2,7 @@
 package mage.abilities.common;
 
 import java.util.UUID;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -14,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
@@ -42,9 +42,10 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.filter = filter;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " attacks you, ");
     }
 
-    public AttackedByCreatureTriggeredAbility(final AttackedByCreatureTriggeredAbility ability) {
+    protected AttackedByCreatureTriggeredAbility(final AttackedByCreatureTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.filter = ability.filter;
@@ -79,10 +80,4 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public AttackedByCreatureTriggeredAbility copy() {
         return new AttackedByCreatureTriggeredAbility(this);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " attacks you, " ;
-    }
-
 }

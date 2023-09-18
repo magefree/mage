@@ -3,7 +3,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
@@ -28,10 +27,10 @@ public final class ChandraPyrogenius extends CardImpl {
 
     public ChandraPyrogenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +2: Chandra, Pyrogenius deals 2 damage to each opponent.
         this.addAbility(new LoyaltyAbility(new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT), 2));

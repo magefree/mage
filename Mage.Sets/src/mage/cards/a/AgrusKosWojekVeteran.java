@@ -1,9 +1,9 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -27,12 +27,11 @@ public final class AgrusKosWojekVeteran extends CardImpl {
     static {
         filterRed.add(new ColorPredicate(ObjectColor.RED));
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
-
     }
 
     public AgrusKosWojekVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -40,8 +39,9 @@ public final class AgrusKosWojekVeteran extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // Whenever Agrus Kos, Wojek Veteran attacks, attacking red creatures get +2/+0 and attacking white creatures get +0/+2 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(2, 0, Duration.EndOfTurn, filterRed, false), false));
-        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(0, 2, Duration.EndOfTurn, filterWhite, false), false));
+        Ability ability = new AttacksTriggeredAbility(new BoostAllEffect(2, 0, Duration.EndOfTurn, filterRed, false), false);
+        ability.addEffect(new BoostAllEffect(0, 2, Duration.EndOfTurn, filterWhite, false).concatBy("and"));
+        this.addAbility(ability);
     }
 
     private AgrusKosWojekVeteran(final AgrusKosWojekVeteran card) {

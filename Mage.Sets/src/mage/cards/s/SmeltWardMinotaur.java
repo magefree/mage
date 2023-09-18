@@ -30,7 +30,7 @@ public final class SmeltWardMinotaur extends CardImpl {
         // Whenever you cast an instant or sorcery spell, target creature an opponent controls can't block this turn.
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new CantBlockTargetEffect(Duration.EndOfTurn),
-                StaticFilters.FILTER_SPELLS_INSTANT_OR_SORCERY, false
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);

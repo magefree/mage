@@ -1,9 +1,8 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -14,8 +13,9 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class TimbermawLarva extends CardImpl {
@@ -28,15 +28,18 @@ public final class TimbermawLarva extends CardImpl {
 
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+
     public TimbermawLarva(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
+                xValue, xValue, Duration.EndOfTurn, true, "it"
+        ), false));
     }
 
     private TimbermawLarva(final TimbermawLarva card) {

@@ -24,7 +24,7 @@ public final class AnointerPriest extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public AnointerPriest(UUID ownerId, CardSetInfo setInfo) {
@@ -39,7 +39,7 @@ public final class AnointerPriest extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
 
         // Embalm {3}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{W}"), this));
     }
 
     private AnointerPriest(final AnointerPriest card) {

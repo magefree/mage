@@ -70,7 +70,7 @@ class WorldQuellerEffect extends OneShotEffect {
         staticText = "you may choose a card type. If you do, each player sacrifices a permanent of that type";
     }
 
-    public WorldQuellerEffect(final WorldQuellerEffect effect) {
+    private WorldQuellerEffect(final WorldQuellerEffect effect) {
         super(effect);
     }
 
@@ -91,22 +91,22 @@ class WorldQuellerEffect extends OneShotEffect {
                 return false;
             }
             CardType type = null;
-            String choosenType = choiceImpl.getChoice();
-            if (choosenType.equals(CardType.ARTIFACT.toString())) {
+            String chosenType = choiceImpl.getChoice();
+            if (chosenType.equals(CardType.ARTIFACT.toString())) {
                 type = CardType.ARTIFACT;
-            } else if (choosenType.equals(CardType.LAND.toString())) {
+            } else if (chosenType.equals(CardType.LAND.toString())) {
                 type = CardType.LAND;
-            } else if (choosenType.equals(CardType.CREATURE.toString())) {
+            } else if (chosenType.equals(CardType.CREATURE.toString())) {
                 type = CardType.CREATURE;
-            } else if (choosenType.equals(CardType.ENCHANTMENT.toString())) {
+            } else if (chosenType.equals(CardType.ENCHANTMENT.toString())) {
                 type = CardType.ENCHANTMENT;
-            } else if (choosenType.equals(CardType.INSTANT.toString())) {
+            } else if (chosenType.equals(CardType.INSTANT.toString())) {
                 type = CardType.INSTANT;
-            } else if (choosenType.equals(CardType.SORCERY.toString())) {
+            } else if (chosenType.equals(CardType.SORCERY.toString())) {
                 type = CardType.SORCERY;
-            } else if (choosenType.equals(CardType.PLANESWALKER.toString())) {
+            } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                 type = CardType.PLANESWALKER;
-            } else if (choosenType.equals(CardType.TRIBAL.toString())) {
+            } else if (chosenType.equals(CardType.TRIBAL.toString())) {
                 type = CardType.TRIBAL;
             }
             if (type != null) {
@@ -114,12 +114,12 @@ class WorldQuellerEffect extends OneShotEffect {
                 filter.add(type.getPredicate());
 
                 TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player2 = game.getPlayer(playerId);
-                    if (player2 != null && target.canChoose(source.getSourceId(), playerId, game)) {
-                        while (player2.canRespond() && !target.isChosen() && target.canChoose(source.getSourceId(), playerId, game)) {
+                    if (player2 != null && target.canChoose(playerId, source, game)) {
+                        while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, source, game)) {
                             player2.chooseTarget(Outcome.Sacrifice, target, source, game);
                         }
                         Permanent permanent = game.getPermanent(target.getFirstTarget());

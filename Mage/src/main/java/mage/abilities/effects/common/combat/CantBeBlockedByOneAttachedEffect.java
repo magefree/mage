@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
@@ -31,7 +30,7 @@ public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
         staticText = attachmentType.verb() + " creature can't be blocked except by " + amount + " or more creatures";
     }
 
-    public CantBeBlockedByOneAttachedEffect(final CantBeBlockedByOneAttachedEffect effect) {
+    protected CantBeBlockedByOneAttachedEffect(final CantBeBlockedByOneAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.attachmentType = effect.attachmentType;

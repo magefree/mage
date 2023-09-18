@@ -28,7 +28,7 @@ public final class BattlewiseHoplite extends CardImpl {
 
         // Heroic - Whenever you cast a spell that targets Battlewise Hoplite, put a +1/+1 counter on Battlewise Hoplite, then scry 1.
         Ability ability = new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        ability.addEffect(new ScryEffect(1));
+        ability.addEffect(new ScryEffect(1, false));
         this.addAbility(ability);
     }
 

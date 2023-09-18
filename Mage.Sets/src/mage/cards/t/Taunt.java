@@ -43,7 +43,7 @@ class TauntEffect extends RequirementEffect {
         staticText = "During target player's next turn, creatures that player controls attack you if able";
     }
 
-    TauntEffect(final TauntEffect effect) {
+    private TauntEffect(final TauntEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class TauntEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override

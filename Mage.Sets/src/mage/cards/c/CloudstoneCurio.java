@@ -54,7 +54,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
         this.staticText = "you may return another permanent you control that shares a permanent type with it to its owner's hand";
     }
 
-    public CloudstoneCurioEffect(final CloudstoneCurioEffect effect) {
+    private CloudstoneCurioEffect(final CloudstoneCurioEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
                 ));
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
 
-                if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
+                if (target.canChoose(controller.getId(), source, game) && controller.chooseTarget(outcome, target, source, game)) {
                     Permanent returningCreature = game.getPermanent(target.getFirstTarget());
                     if (returningCreature != null) {
                         controller.moveCards(returningCreature, Zone.HAND, source, game);

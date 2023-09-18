@@ -42,7 +42,7 @@ public final class Subversion extends CardImpl {
             staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
         }
 
-        public SubversionEffect(final SubversionEffect effect) {
+        private SubversionEffect(final SubversionEffect effect) {
             super(effect);
         }
 

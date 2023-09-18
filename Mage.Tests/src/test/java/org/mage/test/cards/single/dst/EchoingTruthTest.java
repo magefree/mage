@@ -25,7 +25,8 @@ public class EchoingTruthTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Echoing Truth");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spectral Procession");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Echoing Truth", "Spirit");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Echoing Truth", "Spirit Token");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -35,7 +36,7 @@ public class EchoingTruthTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Spectral Procession", 1);
         assertGraveyardCount(playerB, "Echoing Truth", 1);
-        assertPermanentCount(playerA, "Spirit", 0);
+        assertPermanentCount(playerA, "Spirit Token", 0);
 
     }
 

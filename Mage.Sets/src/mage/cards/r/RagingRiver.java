@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.MageObject;
@@ -17,7 +16,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author L_J
  */
 public final class RagingRiver extends CardImpl {
@@ -42,7 +40,9 @@ public final class RagingRiver extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
 
         // Whenever one or more creatures you control attack, each defending player divides all creatures without flying they control into a "left" pile and a "right" pile. Then, for each attacking creature you control, choose "left" or "right." That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label.
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new RagingRiverEffect(), 1));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(
+                new RagingRiverEffect(), 1
+        ).setTriggerPhrase("Whenever one or more creatures you control attack, "));
     }
 
     private RagingRiver(final RagingRiver card) {
@@ -62,7 +62,7 @@ class RagingRiverEffect extends OneShotEffect {
         staticText = "each defending player divides all creatures without flying they control into a \"left\" pile and a \"right\" pile. Then, for each attacking creature you control, choose \"left\" or \"right.\" That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label";
     }
 
-    public RagingRiverEffect(final RagingRiverEffect effect) {
+    private RagingRiverEffect(final RagingRiverEffect effect) {
         super(effect);
     }
 
@@ -86,26 +86,25 @@ class RagingRiverEffect extends OneShotEffect {
                     FilterControlledCreaturePermanent filterBlockers = new FilterControlledCreaturePermanent("creatures without flying you control to assign to the \"left\" pile (creatures not chosen will be assigned to the \"right\" pile)");
                     filterBlockers.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
                     Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filterBlockers, true);
-                    if (target.canChoose(source.getSourceId(), defenderId, game)) {
+                    if (target.canChoose(defenderId, source, game)) {
                         if (defender.chooseTarget(Outcome.Neutral, target, source, game)) {
                             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
                                 if (target.getTargets().contains(permanent.getId())) {
                                     left.add(permanent);
                                     leftLog.add(permanent);
-                                } 
-                                else if (filterBlockers.match(permanent, source.getSourceId(), defenderId, game)) {
+                                } else if (filterBlockers.match(permanent, defenderId, source, game)) {
                                     right.add(permanent);
                                     rightLog.add(permanent);
                                 }
                             }
                         }
-                        
+
                         // it could be nice to invoke some graphic indicator of which creature is Left or Right in this spot
                         StringBuilder sb = new StringBuilder("Left pile of ").append(defender.getLogName()).append(": ");
                         sb.append(leftLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
 
                         game.informPlayers(sb.toString());
-                        
+
                         sb = new StringBuilder("Right pile of ").append(defender.getLogName()).append(": ");
                         sb.append(rightLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
 
@@ -135,17 +134,17 @@ class RagingRiverEffect extends OneShotEffect {
                                         .filter(permanent -> permanent.isControlledBy(defender.getId()))
                                         .collect(Collectors.toList());
 
-                                
+
                                 if (controller.choosePile(outcome, attacker.getName() + ": attacking " + defender.getName(), leftLog, rightLog, game)) {
-                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentInListPredicate(left))));
+                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(left, game))));
                                     game.informPlayers(attacker.getLogName() + ": attacks left (" + defender.getLogName() + ")");
                                 } else {
-                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentInListPredicate(right))));
+                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(right, game))));
                                     game.informPlayers(attacker.getLogName() + ": attacks right (" + defender.getLogName() + ")");
                                 }
                             }
                             RestrictionEffect effect = new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfCombat);
-                            effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                            effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
                             game.addEffect(effect, source);
                         }
                     }

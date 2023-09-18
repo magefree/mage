@@ -3,7 +3,6 @@ package mage.cards.w;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -15,6 +14,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.ManaUtil;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class WanderingArchaic extends ModalDoubleFacesCard {
+public final class WanderingArchaic extends ModalDoubleFacedCard {
 
     public WanderingArchaic(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -85,7 +85,7 @@ class WanderingArchaicEffect extends OneShotEffect {
         if (controller == null || opponent == null || spell == null) {
             return false;
         }
-        Cost cost = new GenericManaCost(2);
+        Cost cost = ManaUtil.createManaCost(2, false);
         if (cost.canPay(source, source, opponent.getId(), game)
                 && opponent.chooseUse(outcome, "Pay {2}?", source, game)
                 && cost.pay(source, game, source, opponent.getId(), false)) {
@@ -126,7 +126,7 @@ class ExploreTheVastlandsEffect extends OneShotEffect {
             }
             Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 5));
             TargetCard target = new ExploreTheVastlandsTarget();
-            player.choose(outcome, cards, target, game);
+            player.choose(outcome, cards, target, source, game);
             Cards toHand = new CardsImpl(target.getTargets());
             cards.removeIf(target.getTargets()::contains);
             player.revealCards(source, toHand, game);

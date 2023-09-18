@@ -27,7 +27,7 @@ public final class GwafaHazidProfiteer extends CardImpl {
 
     public GwafaHazidProfiteer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
 
@@ -35,7 +35,7 @@ public final class GwafaHazidProfiteer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}{U}, {tap}: Put a bribery counter on target creature you don't control. Its controller draws a card.
-        Ability ability = new SimpleActivatedAbility(new GwafaHazidProfiteerEffect1(), new ManaCostsImpl("{W}{U}"));
+        Ability ability = new SimpleActivatedAbility(new GwafaHazidProfiteerEffect1(), new ManaCostsImpl<>("{W}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);

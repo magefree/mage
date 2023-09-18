@@ -23,8 +23,6 @@ import mage.constants.Zone;
  */
 public final class HoundOfTheFarbogs extends CardImpl {
 
-    static final private String RULE = "{this} has menace as long as there are four or more card types among cards in your graveyard";
-
     public HoundOfTheFarbogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.ZOMBIE);
@@ -33,8 +31,11 @@ public final class HoundOfTheFarbogs extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Delirium</i> &mdash; Hound of the Farborgs has menace as long as there are four or more card types among cards in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield), DeliriumCondition.instance, RULE));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
+                DeliriumCondition.instance,
+                "{this} has menace as long as there are four or more card types among cards in your graveyard. " +
+                        "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"));
         ability.setAbilityWord(AbilityWord.DELIRIUM);
         ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);

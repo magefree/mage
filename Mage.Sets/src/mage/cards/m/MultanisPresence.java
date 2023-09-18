@@ -42,9 +42,10 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public MultanisPresenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
+        setTriggerPhrase("Whenever a spell you've cast is countered, ");
     }
 
-    public MultanisPresenceTriggeredAbility(final MultanisPresenceTriggeredAbility ability) {
+    private MultanisPresenceTriggeredAbility(final MultanisPresenceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -62,11 +63,6 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         MultanisPresenceWatcher watcher = game.getState().getWatcher(MultanisPresenceWatcher.class);
         return watcher != null && watcher.getSpellsCastThisTurn(controllerId).contains(event.getTargetId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a spell you've cast is countered, " ;
     }
 }
 

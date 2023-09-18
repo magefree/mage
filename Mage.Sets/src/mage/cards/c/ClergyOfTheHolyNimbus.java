@@ -32,7 +32,7 @@ public final class ClergyOfTheHolyNimbus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ClergyOfTheHolyNimbusReplacementEffect()));
 
         // {1}: Clergy of the Holy Nimbus can't be regenerated this turn. Only any opponent may activate this ability.
-        this.addAbility(new ActivateOnlyByOpponentActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}")));
+        this.addAbility(new ActivateOnlyByOpponentActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}")));
     }
 
     private ClergyOfTheHolyNimbus(final ClergyOfTheHolyNimbus card) {
@@ -52,7 +52,7 @@ class ClergyOfTheHolyNimbusReplacementEffect extends ReplacementEffectImpl {
         staticText = "If {this} would be destroyed, regenerate it";
     }
 
-    ClergyOfTheHolyNimbusReplacementEffect(ClergyOfTheHolyNimbusReplacementEffect effect) {
+    private ClergyOfTheHolyNimbusReplacementEffect(final ClergyOfTheHolyNimbusReplacementEffect effect) {
         super(effect);
     }
 

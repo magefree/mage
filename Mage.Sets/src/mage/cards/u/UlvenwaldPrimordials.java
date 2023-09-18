@@ -24,13 +24,12 @@ public final class UlvenwaldPrimordials extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // {G}: Regenerate Ulvenwald Primordials.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ulvenwald Primordials.
         this.addAbility(new WerewolfBackTriggeredAbility());

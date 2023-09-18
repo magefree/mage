@@ -48,7 +48,7 @@ public final class GrimReminder extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{B}{B}"),
+                new ManaCostsImpl<>("{B}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
         ));
@@ -73,7 +73,7 @@ class GrimReminderEffect extends OneShotEffect {
                 + "Then shuffle.";
     }
 
-    GrimReminderEffect(final GrimReminderEffect effect) {
+    private GrimReminderEffect(final GrimReminderEffect effect) {
         super(effect);
     }
 

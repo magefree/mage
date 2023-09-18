@@ -43,7 +43,7 @@ class LandEquilibriumAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeEffect(StaticFilters.FILTER_LAND, 1, ""), false);
     }
 
-    public LandEquilibriumAbility(final LandEquilibriumAbility ability) {
+    private LandEquilibriumAbility(final LandEquilibriumAbility ability) {
         super(ability);
     }
 

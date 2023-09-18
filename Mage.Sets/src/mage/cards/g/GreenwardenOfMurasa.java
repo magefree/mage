@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -15,8 +13,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class GreenwardenOfMurasa extends CardImpl {
@@ -33,8 +32,9 @@ public final class GreenwardenOfMurasa extends CardImpl {
         this.addAbility(ability);
 
         // When Greenwarden of  Murasa dies, you may exile it. If you do, return target card from your graveyard to your hand.
-        ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new ExileSourceFromGraveCost(),
-                "Exile {this} and return target card from your graveyard to your hand?", true), false);
+        ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(
+                new ReturnFromGraveyardToHandTargetEffect(), new ExileSourceFromGraveCost().setText("exile it")
+        ), false);
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);
     }

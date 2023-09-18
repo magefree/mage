@@ -26,7 +26,7 @@ public final class UthdenTroll extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}: Regenerate Uthden Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{R}")));
     }
 
     private UthdenTroll(final UthdenTroll card) {

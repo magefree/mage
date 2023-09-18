@@ -4,7 +4,6 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -28,10 +27,10 @@ public final class ElspethTirel extends CardImpl {
 
     public ElspethTirel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         this.addAbility(new LoyaltyAbility(new ElspethTirelFirstEffect(), 2));
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken(), 3), -2));
@@ -55,7 +54,7 @@ class ElspethTirelFirstEffect extends OneShotEffect {
         staticText = "You gain 1 life for each creature you control";
     }
 
-    public ElspethTirelFirstEffect(final ElspethTirelFirstEffect effect) {
+    private ElspethTirelFirstEffect(final ElspethTirelFirstEffect effect) {
         super(effect);
     }
 
@@ -83,7 +82,7 @@ class ElspethTirelThirdEffect extends OneShotEffect {
         staticText = "Destroy all other permanents except for lands and tokens";
     }
 
-    public ElspethTirelThirdEffect(final ElspethTirelThirdEffect effect) {
+    private ElspethTirelThirdEffect(final ElspethTirelThirdEffect effect) {
         super(effect);
     }
 

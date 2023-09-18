@@ -26,8 +26,7 @@ public class ConditionalOneShotEffectTest extends CardTestPlayerBase {
         
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, "Unlicensed Disintegration", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
@@ -55,14 +54,13 @@ public class ConditionalOneShotEffectTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unlicensed Disintegration", "Silvercoat Lion");
         
-        setChoice(playerA, "Yes"); // Get life from Dragon's Claw
+        setChoice(playerA, true); // Get life from Dragon's Claw
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, "Unlicensed Disintegration", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 

@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -40,14 +40,12 @@ public final class MightOfTheWild extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filterMode1, Duration.EndOfTurn));
 
         // Destroy target artifact or enchantment.
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetPermanent(filterMode2));
         this.getSpellAbility().addMode(mode);
 
         // Creatures you control gain indestructible this turn.
-        mode = new Mode();
-        mode.addEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")));
+        mode = new Mode(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -36,7 +36,7 @@ public final class CurseOfBounty extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted player is attacked, untap all nonland permanents you control.
         // Each opponent attacking that player untaps all nonland permanents they control.
@@ -60,7 +60,7 @@ class CurseOfBountyEffect extends OneShotEffect {
         this.staticText = "untap all nonland permanents you control. Each opponent attacking that player does the same.";
     }
 
-    CurseOfBountyEffect(final CurseOfBountyEffect effect) {
+    private CurseOfBountyEffect(final CurseOfBountyEffect effect) {
         super(effect);
     }
 
@@ -109,7 +109,7 @@ class UntapAllNonlandsTargetEffect extends OneShotEffect {
         super(Outcome.Untap);
     }
 
-    public UntapAllNonlandsTargetEffect(final UntapAllNonlandsTargetEffect effect) {
+    private UntapAllNonlandsTargetEffect(final UntapAllNonlandsTargetEffect effect) {
         super(effect);
     }
 

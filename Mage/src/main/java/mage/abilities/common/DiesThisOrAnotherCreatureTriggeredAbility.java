@@ -4,7 +4,8 @@ import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -14,19 +15,24 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterCreaturePermanent filter;
+    protected FilterPermanent filter;
     private boolean applyFilterOnSource = false;
 
     public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterCreaturePermanent());
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE);
     }
 
-    public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
+    public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
         super(Zone.ALL, effect, optional); // Needs "ALL" if the source itself should trigger or multiple (incl. source go to grave)
         this.filter = filter;
+        String filterMessage = filter.getMessage();
+        if (filterMessage.startsWith("a ")) {
+            filterMessage = filterMessage.substring(2);
+        }
+        setTriggerPhrase("Whenever {this} or another " + filterMessage + " dies, ");
     }
 
-    public DiesThisOrAnotherCreatureTriggeredAbility(DiesThisOrAnotherCreatureTriggeredAbility ability) {
+    protected DiesThisOrAnotherCreatureTriggeredAbility(final DiesThisOrAnotherCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.applyFilterOnSource = ability.applyFilterOnSource;
@@ -55,7 +61,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
                 if (!applyFilterOnSource && zEvent.getTarget().getId().equals(this.getSourceId())) {
                     return true;
                 } else {
-                    if (filter.match(zEvent.getTarget(), getSourceId(), getControllerId(), game)) {
+                    if (filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
                         return true;
                     }
                 }
@@ -63,14 +69,9 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
         }
         return false;
     }
-    
+
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or another " + filter.getMessage() + " dies, " ;
     }
 }

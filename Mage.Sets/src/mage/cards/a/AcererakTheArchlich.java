@@ -34,7 +34,7 @@ public final class AcererakTheArchlich extends CardImpl {
     public AcererakTheArchlich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
@@ -44,7 +44,7 @@ public final class AcererakTheArchlich extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect(true)),
                 AcererakTheArchlichCondition.instance, "When {this} enters the battlefield, " +
-                "if you have not completed Tomb of Annihilation, return {this} " +
+                "if you haven't completed Tomb of Annihilation, return {this} " +
                 "to its owner's hand and venture into the dungeon."
         );
         ability.addEffect(new VentureIntoTheDungeonEffect());
@@ -102,8 +102,8 @@ class AcererakTheArchlichEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetControlledCreaturePermanent(0, 1);
-            target.setNotTarget(true);
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            target.withNotTarget(true);
+            player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null && permanent.sacrifice(source, game)) {
                 tokens--;

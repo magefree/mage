@@ -55,9 +55,10 @@ class KamiOfTheHonoredDeadTriggeredAbility extends TriggeredAbilityImpl {
 
     public KamiOfTheHonoredDeadTriggeredAbility() {
         super(Zone.BATTLEFIELD, new KamiOfTheHonoredDeadGainLifeEffect());
+        setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
-    public KamiOfTheHonoredDeadTriggeredAbility(final KamiOfTheHonoredDeadTriggeredAbility effect) {
+    private KamiOfTheHonoredDeadTriggeredAbility(final KamiOfTheHonoredDeadTriggeredAbility effect) {
         super(effect);
     }
 
@@ -79,11 +80,6 @@ class KamiOfTheHonoredDeadTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, " ;
-    }
 }
 
 
@@ -94,7 +90,7 @@ class KamiOfTheHonoredDeadGainLifeEffect extends OneShotEffect {
             staticText = "you gain that much life";
         }
 
-    public KamiOfTheHonoredDeadGainLifeEffect(final KamiOfTheHonoredDeadGainLifeEffect effect) {
+    private KamiOfTheHonoredDeadGainLifeEffect(final KamiOfTheHonoredDeadGainLifeEffect effect) {
         super(effect);
     }
 

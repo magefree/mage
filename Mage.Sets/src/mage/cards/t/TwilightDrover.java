@@ -28,7 +28,7 @@ public final class TwilightDrover extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public TwilightDrover(UUID ownerId, CardSetInfo setInfo) {

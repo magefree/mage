@@ -35,13 +35,11 @@ public final class GremlinInfestation extends CardImpl {
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of your end step, Gremlin Infestation deals 2 damage to enchanted artifact's controller.
-        Effect effect = new DamageAttachedControllerEffect(2);
-        effect.setText("{this} deals 2 damage to enchanted artifact's controller");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageAttachedControllerEffect(2), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageAttachedControllerEffect(2).setText("{this} deals 2 damage to enchanted artifact's controller"), TargetController.YOU, false));
 
         // When enchanted artifact is put into a graveyard, create a 2/2 red Gremlin creature token.
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new GremlinToken()), "enchanted artifact", false, false));

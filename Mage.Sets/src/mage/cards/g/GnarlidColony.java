@@ -14,8 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -23,12 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GnarlidColony extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public GnarlidColony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -42,15 +35,16 @@ public final class GnarlidColony extends CardImpl {
 
         // If Gnarlid Colony was kicked, it enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.instance,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.ONCE,
                 "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""
         ));
 
         // Each creature you control with a +1/+1 counter on it has trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-                TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter,
-                "Each creature you control with a +1/+1 counter on it has trample"
-        )));
+                TrampleAbility.getInstance(),
+                Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1))
+        );
     }
 
     private GnarlidColony(final GnarlidColony card) {

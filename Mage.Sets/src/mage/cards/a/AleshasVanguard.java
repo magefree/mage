@@ -23,7 +23,7 @@ public final class AleshasVanguard extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Dash {2}{B}
-        this.addAbility(new DashAbility(this, "{2}{B}"));
+        this.addAbility(new DashAbility("{2}{B}"));
     }
 
     private AleshasVanguard(final AleshasVanguard card) {

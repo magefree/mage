@@ -6,30 +6,22 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.target.Target;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
- * @author LevelX2
+ * @author TheElk801
  */
 public class TransformTargetEffect extends OneShotEffect {
 
-    private boolean withoutTrigger;
-
     public TransformTargetEffect() {
-        this(true);
-    }
-
-    public TransformTargetEffect(boolean withoutTrigger) {
         super(Outcome.Transform);
-        this.withoutTrigger = withoutTrigger;
     }
 
-    public TransformTargetEffect(final TransformTargetEffect effect) {
+    protected TransformTargetEffect(final TransformTargetEffect effect) {
         super(effect);
-        this.withoutTrigger = effect.withoutTrigger;
     }
 
     @Override
@@ -39,31 +31,13 @@ public class TransformTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            if (permanent.canTransform(source, game)) {
-                // check not to transform twice the same side
-                if (withoutTrigger) {
-                    permanent.setTransformed(!permanent.isTransformed());
-                } else {
-                    permanent.transform(game);
-                }
-                if (!game.isSimulation()) {
-                    if (permanent.isTransformed()) {
-                        if (permanent.getSecondCardFace() != null) {
-                            if (permanent instanceof PermanentCard) {
-                                game.informPlayers(((PermanentCard) permanent).getCard().getLogName() + " transforms into " + permanent.getSecondCardFace().getLogName());
-                            }
-                        }
-                    } else {
-                        game.informPlayers(permanent.getSecondCardFace().getLogName() + " transforms into " + permanent.getLogName());
-                    }
-                }
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (permanent != null) {
+                permanent.transform(source, game);
             }
-
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -71,18 +45,24 @@ public class TransformTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (mode.getTargets().isEmpty()) {
-            return "transform target";
-        }
+        StringBuilder sb = new StringBuilder("transform ");
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-                return "transform " + CardUtil.numberToText(target.getNumberOfTargets()) + " target " + target.getTargetName();
-            } else {
-                return "transform up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " target " + target.getTargetName();
-            }
-        } else {
-            return "transform target " + mode.getTargets().get(0).getTargetName();
+        if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE
+                && target.getMinNumberOfTargets() == 0) {
+            sb.append("any number of ");
+        } else if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+            sb.append("up to ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+            sb.append(' ');
+        } else if (target.getMaxNumberOfTargets() > 1) {
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+            sb.append(' ');
         }
+        String targetName = mode.getTargets().get(0).getTargetName();
+        if (!targetName.contains("target ")) {
+            sb.append("target ");
+        }
+        sb.append(targetName);
+        return sb.toString();
     }
 }

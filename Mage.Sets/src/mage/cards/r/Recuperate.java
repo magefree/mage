@@ -24,8 +24,7 @@ public final class Recuperate extends CardImpl {
         // Choose one - You gain 6 life;
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
         // or prevent the next 6 damage that would be dealt to target creature this turn.
-        Mode mode = new Mode();
-        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 6));
+        Mode mode = new Mode(new PreventDamageToTargetEffect(Duration.EndOfTurn, 6));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

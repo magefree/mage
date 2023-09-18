@@ -37,7 +37,7 @@ public final class GargosViciousWatcher extends CardImpl {
     public GargosViciousWatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(8);
         this.toughness = new MageInt(7);

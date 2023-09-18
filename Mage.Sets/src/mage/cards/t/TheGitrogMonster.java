@@ -28,7 +28,7 @@ public final class TheGitrogMonster extends CardImpl {
 
     public TheGitrogMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(6);
@@ -63,7 +63,7 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public TheGitrogMonsterTriggeredAbility(final TheGitrogMonsterTriggeredAbility ability) {
+    private TheGitrogMonsterTriggeredAbility(final TheGitrogMonsterTriggeredAbility ability) {
         super(ability);
     }
 

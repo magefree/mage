@@ -19,10 +19,9 @@ public class LoseLifeDefendingPlayerEffect extends OneShotEffect {
     private boolean attackerIsSource;
 
     /**
-     *
      * @param amount
      * @param attackerIsSource true if the source.getSourceId() contains the
-     * attacker false if attacker has to be taken from targetPointer
+     *                         attacker false if attacker has to be taken from targetPointer
      */
     public LoseLifeDefendingPlayerEffect(int amount, boolean attackerIsSource) {
         this(StaticValue.get(amount), attackerIsSource);
@@ -34,7 +33,7 @@ public class LoseLifeDefendingPlayerEffect extends OneShotEffect {
         this.attackerIsSource = attackerIsSource;
     }
 
-    public LoseLifeDefendingPlayerEffect(final LoseLifeDefendingPlayerEffect effect) {
+    protected LoseLifeDefendingPlayerEffect(final LoseLifeDefendingPlayerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.attackerIsSource = effect.attackerIsSource;

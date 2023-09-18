@@ -35,14 +35,14 @@ public final class KrasisIncubation extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseLife));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
 
         // {1}{G}{U}, Return Krasis Incubation to its owner's hand: Put two +1/+1 counters on enchanted creature.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(2), new ManaCostsImpl("{1}{G}{U}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(2), new ManaCostsImpl<>("{1}{G}{U}"));
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         this.addAbility(ability);
 

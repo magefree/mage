@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.ExileZone;
@@ -37,7 +36,7 @@ public final class SkyclaveApparition extends CardImpl {
     );
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
     }

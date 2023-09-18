@@ -25,7 +25,7 @@ public class ScorchingLavaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scorching Lava", "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // with Kicker
+        setChoice(playerA, true); // with Kicker
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

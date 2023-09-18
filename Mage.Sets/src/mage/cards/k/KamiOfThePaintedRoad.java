@@ -26,7 +26,7 @@ public final class KamiOfThePaintedRoad extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, Kami of the Painted Road gains protection from the color of your choice until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false));
 
     }
 

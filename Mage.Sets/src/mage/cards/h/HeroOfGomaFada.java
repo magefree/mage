@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -31,7 +31,7 @@ public final class HeroOfGomaFada extends CardImpl {
         // <i>Rally</i> &mdash; Whenever Hero of Goma Fada or another Ally enters the battlefield under your control, creatures you control gain indestructible until end of turn.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(
                 new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn,
-                        new FilterControlledCreaturePermanent("creatures you control")), false);
+                        StaticFilters.FILTER_CONTROLLED_CREATURES), false);
         this.addAbility(ability);
     }
 

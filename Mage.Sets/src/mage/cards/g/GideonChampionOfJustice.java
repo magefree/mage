@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.LockedInDynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
@@ -36,10 +35,10 @@ public final class GideonChampionOfJustice extends CardImpl {
 
     public GideonChampionOfJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.
         LoyaltyAbility ability1 = new LoyaltyAbility(
@@ -50,8 +49,9 @@ public final class GideonChampionOfJustice extends CardImpl {
         // 0: Until end of turn, Gideon becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         LockedInDynamicValue loyaltyCount = new LockedInDynamicValue(new CountersSourceCount(CounterType.LOYALTY));
         LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(
-                new GideonChampionOfJusticeToken(), "planeswalker", Duration.EndOfTurn, false, false, loyaltyCount, loyaltyCount), 0);
-        ability2.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn));
+                new GideonChampionOfJusticeToken(), CardType.PLANESWALKER, Duration.EndOfTurn).withDynamicPT(loyaltyCount, loyaltyCount)
+                .setText("Until end of turn, {this} becomes a Human Soldier creature with power and toughness each equal to the number of loyalty counters on him and gains indestructible. He's still a planeswalker."), 0);
+        ability2.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn).setText("prevent all damage that would be dealt to him this turn"));
         this.addAbility(ability2);
 
         // -15: Exile all other permanents.

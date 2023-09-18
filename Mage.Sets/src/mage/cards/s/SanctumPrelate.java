@@ -1,7 +1,4 @@
-
 package mage.cards.s;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.MageObject;
@@ -18,6 +15,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author maxlebedev
@@ -52,10 +51,10 @@ class ChooseNumberEffect extends OneShotEffect {
 
     public ChooseNumberEffect() {
         super(Outcome.Detriment);
-        staticText = setText();
+        staticText = "choose a number";
     }
 
-    public ChooseNumberEffect(final ChooseNumberEffect effect) {
+    private ChooseNumberEffect(final ChooseNumberEffect effect) {
         super(effect);
     }
 
@@ -67,7 +66,7 @@ class ChooseNumberEffect extends OneShotEffect {
             game.getState().setValue(source.getSourceId().toString(), numberChoice);
 
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
-            if(permanent != null) {
+            if (permanent != null) {
                 permanent.addInfo("chosen players", "<font color = 'blue'>Chosen Number: " + numberChoice + "</font>", game);
 
                 game.informPlayers(permanent.getLogName() + ", chosen number: " + numberChoice);
@@ -80,22 +79,16 @@ class ChooseNumberEffect extends OneShotEffect {
     public ChooseNumberEffect copy() {
         return new ChooseNumberEffect(this);
     }
-
-    private String setText() {
-        return "Choose a number. Noncreature spells with mana value equal to the chosen number can't be cast";
-    }
 }
 
 class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl {
-
-    Integer choiceValue;
 
     public SanctumPrelateReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Noncreature spells with mana value equal to the chosen number can't be cast";
     }
 
-    public SanctumPrelateReplacementEffect(final SanctumPrelateReplacementEffect effect) {
+    private SanctumPrelateReplacementEffect(final SanctumPrelateReplacementEffect effect) {
         super(effect);
     }
 
@@ -111,7 +104,7 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast a noncreature card with that mana value (" + mageObject.getIdName() + " in play).";
         }
@@ -125,10 +118,10 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        choiceValue = (Integer) game.getState().getValue(source.getSourceId().toString());
+        Integer choiceValue = (Integer) game.getState().getValue(source.getSourceId().toString());
         Spell spell = game.getStack().getSpell(event.getTargetId());
 
-        if (spell != null && !spell.isCreature(game)) {
+        if (spell != null && !spell.isCreature(game) && choiceValue != null) {
             return spell.getManaValue() == choiceValue;
         }
         return false;

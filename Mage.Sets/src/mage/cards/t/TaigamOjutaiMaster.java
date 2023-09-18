@@ -44,7 +44,7 @@ public final class TaigamOjutaiMaster extends CardImpl {
     public TaigamOjutaiMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(3);
@@ -74,6 +74,7 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
 
     public TaigamOjutaiMasterTriggeredAbility() {
         super(new TaigamOjutaiMasterGainReboundEffect(), Duration.EndOfTurn, true);
+        setTriggerPhrase("Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, ");
     }
 
     private TaigamOjutaiMasterTriggeredAbility(final TaigamOjutaiMasterTriggeredAbility ability) {
@@ -106,12 +107,6 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, " ;
-
-    }
 }
 
 class TaigamOjutaiMasterGainReboundEffect extends ContinuousEffectImpl {
@@ -121,7 +116,7 @@ class TaigamOjutaiMasterGainReboundEffect extends ContinuousEffectImpl {
         staticText = "that spell gains rebound";
     }
 
-    public TaigamOjutaiMasterGainReboundEffect(final TaigamOjutaiMasterGainReboundEffect effect) {
+    private TaigamOjutaiMasterGainReboundEffect(final TaigamOjutaiMasterGainReboundEffect effect) {
         super(effect);
     }
 

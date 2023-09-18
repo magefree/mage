@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.AsThoughEffectType;
@@ -10,19 +11,22 @@ import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class CanAttackAsThoughItDidntHaveDefenderSourceEffect extends AsThoughEffectImpl {
 
     public CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration duration) {
+        this(duration, "{this}");
+    }
+
+    public CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration duration, String description) {
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
-        staticText = "{this} can attack "
+        staticText = description + " can attack "
                 + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + "as though it didn't have defender";
     }
 
-    public CanAttackAsThoughItDidntHaveDefenderSourceEffect(final CanAttackAsThoughItDidntHaveDefenderSourceEffect effect) {
+    protected CanAttackAsThoughItDidntHaveDefenderSourceEffect(final CanAttackAsThoughItDidntHaveDefenderSourceEffect effect) {
         super(effect);
     }
 

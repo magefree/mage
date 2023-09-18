@@ -29,14 +29,13 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, courser);
 
         setChoice(playerA, disenchant);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Plains", true);
@@ -51,7 +50,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, garth);
 
         setChoice(playerA, braingeyser);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=3");
         addTarget(playerA, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
@@ -59,7 +58,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Island", true);
@@ -74,14 +72,13 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, courser);
 
         setChoice(playerA, terror);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Swamp", true);
@@ -100,7 +97,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Mountain", true);
@@ -116,14 +112,13 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, courser);
 
         setChoice(playerA, regrowth);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Forest", true);
@@ -141,7 +136,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         Permanent permanent = getPermanent(lotus);

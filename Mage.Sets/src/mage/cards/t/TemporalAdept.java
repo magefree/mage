@@ -30,7 +30,7 @@ public final class TemporalAdept extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}{U}{U}, {tap}: Return target permanent to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{U}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{U}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

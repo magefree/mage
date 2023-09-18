@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.HashSet;
@@ -6,7 +5,6 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,13 +16,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterPlayer;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -39,13 +35,9 @@ import mage.target.TargetPlayer;
 public final class KeeperOfTheDead extends CardImpl {
 
     private static final FilterPlayer filter = new FilterPlayer();
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nonblack creature");
-    private static final FilterCard filter3 = new FilterCard("creature cards");
 
     static {
         filter.add(new KeeperOfDeadPredicate());
-        filter2.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filter3.add(CardType.CREATURE.getPredicate());
     }
 
     public KeeperOfTheDead(UUID ownerId, CardSetInfo setInfo) {
@@ -58,7 +50,7 @@ public final class KeeperOfTheDead extends CardImpl {
 
         // {B}, {T}: Choose target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability. Destroy target nonblack creature they control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeeperOfTheDeadEffect(), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{B}"));
+        ability.addCost(new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         ability.addTarget(new KeeperOfTheDeadCreatureTarget());
         this.addAbility(ability);
@@ -74,18 +66,12 @@ public final class KeeperOfTheDead extends CardImpl {
     }
 }
 
-class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
-
-    private static final FilterCard filter = new FilterCard("creature cards");
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-    }
+class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        Permanent sourceObject = game.getPermanent(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentIfItStillExists(game);
         Player controller = null;
         if (sourceObject != null) {
             controller = game.getPlayer(sourceObject.getControllerId());
@@ -96,8 +82,8 @@ class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
                 || !controller.hasOpponent(targetPlayer.getId(), game)) {
             return false;
         }
-        int countGraveyardTargetPlayer = targetPlayer.getGraveyard().getCards(filter, game).size();
-        int countGraveyardController = controller.getGraveyard().getCards(filter, game).size();
+        int countGraveyardTargetPlayer = targetPlayer.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURES, game).size();
+        int countGraveyardController = controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURES, game).size();
         return countGraveyardController >= countGraveyardTargetPlayer + 2;
     }
 
@@ -109,17 +95,11 @@ class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
 
 class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
 
-    private static final FilterCreaturePermanent nonblackCreaturefilter = new FilterCreaturePermanent("nonblack creature");
-
-    static {
-        nonblackCreaturefilter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
-
     public KeeperOfTheDeadCreatureTarget() {
         super(1, 1, new FilterCreaturePermanent("nonblack creature that player controls"), false);
     }
 
-    public KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
+    private KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
         super(target);
     }
 
@@ -134,16 +114,16 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
+        MageObject object = game.getObject(source);
 
         for (StackObject item : game.getState().getStack()) {
-            if (item.getId().equals(sourceId)) {
+            if (item.getId().equals(source.getSourceId())) {
                 object = item;
             }
-            if (item.getSourceId().equals(sourceId)) {
+            if (item.getSourceId().equals(source.getSourceId())) {
                 object = item;
             }
         }
@@ -152,7 +132,7 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
             UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
             for (UUID targetId : availablePossibleTargets) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && nonblackCreaturefilter.match(permanent, game) && permanent.isControlledBy(playerId)) {
+                if (permanent != null && StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK.match(permanent, game) && permanent.isControlledBy(playerId)) {
                     possibleTargets.add(targetId);
                 }
             }
@@ -173,7 +153,7 @@ class KeeperOfTheDeadEffect extends OneShotEffect {
         this.staticText = "Destroy target nonblack creature contolled by target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability";
     }
 
-    public KeeperOfTheDeadEffect(final KeeperOfTheDeadEffect effect) {
+    private KeeperOfTheDeadEffect(final KeeperOfTheDeadEffect effect) {
         super(effect);
     }
 

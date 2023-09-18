@@ -48,7 +48,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
-    public BecomesCreatureAllEffect(final BecomesCreatureAllEffect effect) {
+    protected BecomesCreatureAllEffect(final BecomesCreatureAllEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.theyAreStillType = effect.theyAreStillType;
@@ -63,7 +63,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         super.init(source, game);
         if (this.affectedObjectsSet) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(
-                    filter, source.getControllerId(), source.getSourceId(), game)) {
+                    filter, source.getControllerId(), source, game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }
@@ -83,7 +83,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
             }
         } else {
             affectedPermanents = new HashSet<>(game.getBattlefield()
-                    .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
+                    .getActivePermanents(filter, source.getControllerId(), source, game));
         }
 
         for (Permanent permanent : affectedPermanents) {
@@ -106,10 +106,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                     }
                     permanent.copySubTypesFrom(game, token);
 
-                    for (SuperType t : token.getSuperType()) {
-                        if (!permanent.getSuperType().contains(t)) {
-                            permanent.addSuperType(t);
-                        }
+                    for (SuperType t : token.getSuperType(game)) {
+                        permanent.addSuperType(game, t);
                     }
 
                     break;
@@ -140,8 +138,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                         int power = token.getPower().getValue();
                         int toughness = token.getToughness().getValue();
                         if (power != 0 && toughness != 0) {
-                            permanent.getPower().setValue(power);
-                            permanent.getToughness().setValue(toughness);
+                            permanent.getPower().setModifiedBaseValue(power);
+                            permanent.getToughness().setModifiedBaseValue(toughness);
                         }
                     }
                     break;
@@ -166,6 +164,9 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (duration.toString() != null && !duration.toString().isEmpty()) {
             sb.append(duration.toString()).append(", ");

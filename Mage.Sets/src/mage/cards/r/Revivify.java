@@ -41,7 +41,7 @@ public final class Revivify extends CardImpl {
         // Roll a d20 and add the number of creature cards in your graveyard that were put there from the battlefield this turn.
         RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect(
                 20, "roll a d20 and add the number of creature cards " +
-                "in your graveyard that were put there from the battlefield this turn", xValue
+                "in your graveyard that were put there from the battlefield this turn", xValue, 0
         );
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
@@ -93,7 +93,7 @@ class RevivifyEffect extends OneShotEffect {
             return false;
         }
         return player.moveCards(player.getGraveyard().getCards(
-                Revivify.filter, source.getSourceId(), source.getControllerId(), game
+                Revivify.filter, source.getControllerId(), source, game
         ), toHand ? Zone.HAND : Zone.BATTLEFIELD, source, game);
     }
 }

@@ -47,7 +47,7 @@ public final class PolukranosWorldEater extends CardImpl {
 
     public PolukranosWorldEater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(5);
@@ -90,7 +90,7 @@ class PolukranosWorldEaterEffect extends OneShotEffect {
         this.staticText = "it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos";
     }
 
-    public PolukranosWorldEaterEffect(final PolukranosWorldEaterEffect effect) {
+    private PolukranosWorldEaterEffect(final PolukranosWorldEaterEffect effect) {
         super(effect);
     }
 

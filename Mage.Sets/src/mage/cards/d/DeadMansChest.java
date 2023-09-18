@@ -14,7 +14,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
@@ -31,22 +31,16 @@ import java.util.UUID;
  */
 public final class DeadMansChest extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public DeadMansChest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         this.subtype.add(SubType.AURA);
 
         // Enchant creature an opponent controls
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, exile cards equal to its power from the top of its owner's library. You may cast nonland cards from among them as long as they remain exiled, and you may spend mana as though it were mana of any type to cast those spells.
@@ -68,11 +62,11 @@ class DeadMansChestEffect extends OneShotEffect {
     public DeadMansChestEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile cards equal to its power from the top of its owner's library. "
-                + "You may cast nonland cards from among them as long as they remain exiled, "
+                + "You may cast spells from among those cards for as long as they remain exiled, "
                 + "and you may spend mana as though it were mana of any type to cast those spells";
     }
 
-    public DeadMansChestEffect(final DeadMansChestEffect effect) {
+    private DeadMansChestEffect(final DeadMansChestEffect effect) {
         super(effect);
     }
 
@@ -118,7 +112,7 @@ class DeadMansChestCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may cast nonland cards from among them as long as they remain exiled";
     }
 
-    public DeadMansChestCastFromExileEffect(final DeadMansChestCastFromExileEffect effect) {
+    private DeadMansChestCastFromExileEffect(final DeadMansChestCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -153,7 +147,7 @@ class DeadMansChestSpendManaEffect extends AsThoughEffectImpl implements AsThoug
         staticText = "and you may spend mana as though it were mana of any type to cast those spells";
     }
 
-    public DeadMansChestSpendManaEffect(final DeadMansChestSpendManaEffect effect) {
+    private DeadMansChestSpendManaEffect(final DeadMansChestSpendManaEffect effect) {
         super(effect);
     }
 

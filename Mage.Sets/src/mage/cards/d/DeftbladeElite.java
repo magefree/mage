@@ -36,7 +36,7 @@ public final class DeftbladeElite extends CardImpl {
         // {1}{W}: Prevent all combat damage that would be dealt to and dealt by Deftblade Elite this turn.
         Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all combat damage that would be dealt to");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}"));
         effect = new PreventCombatDamageBySourceEffect(Duration.EndOfTurn);
         effect.setText("and dealt by {this} this turn");
         ability.addEffect(effect);

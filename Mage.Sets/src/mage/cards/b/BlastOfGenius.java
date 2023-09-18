@@ -45,7 +45,7 @@ class BlastOfGeniusEffect extends OneShotEffect {
         this.staticText = "Choose any target. Draw three cards, then discard a card. {this} deals damage equal to the discard card's mana value to that permanent or player";
     }
 
-    public BlastOfGeniusEffect(final BlastOfGeniusEffect effect) {
+    private BlastOfGeniusEffect(final BlastOfGeniusEffect effect) {
         super(effect);
     }
 
@@ -60,8 +60,8 @@ class BlastOfGeniusEffect extends OneShotEffect {
         if (player != null) {
             player.drawCards(3, source, game);
             TargetDiscard target = new TargetDiscard(player.getId());
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                player.choose(Outcome.Discard, target, source.getSourceId(), game);
+            if (target.canChoose(player.getId(), source, game)) {
+                player.choose(Outcome.Discard, target, source, game);
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     player.discard(card, false, source, game);

@@ -29,7 +29,7 @@ public final class NyleaGodOfTheHunt extends CardImpl {
 
     public NyleaGodOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(6);
@@ -45,12 +45,12 @@ public final class NyleaGodOfTheHunt extends CardImpl {
         // Other creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE, true
+                StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
 
         // {3}{G}: Target creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")
+                new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{G}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

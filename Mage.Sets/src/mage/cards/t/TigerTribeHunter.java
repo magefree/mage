@@ -77,7 +77,7 @@ class TigerTribeHunterEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;

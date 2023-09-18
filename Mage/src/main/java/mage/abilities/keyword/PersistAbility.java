@@ -20,7 +20,7 @@ public class PersistAbility extends DiesSourceTriggeredAbility {
         this.addEffect(new ReturnSourceFromGraveyardToBattlefieldEffect(false, true));
     }
 
-    public PersistAbility(final PersistAbility ability) {
+    protected PersistAbility(final PersistAbility ability) {
         super(ability);
     }
 
@@ -47,7 +47,7 @@ public class PersistAbility extends DiesSourceTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Persist <i>(When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)</i>";
+        return "persist <i>(When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)</i>";
     }
 }
 
@@ -58,7 +58,7 @@ class PersistEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public PersistEffect(final PersistEffect effect) {
+    protected PersistEffect(final PersistEffect effect) {
         super(effect);
     }
 

@@ -31,7 +31,7 @@ public final class BalthorTheDefiled extends CardImpl {
 
     public BalthorTheDefiled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE, SubType.DWARF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -41,7 +41,7 @@ public final class BalthorTheDefiled extends CardImpl {
                 new FilterCreaturePermanent(SubType.MINION, "Minion creatures"), false)));
 
         // {B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from their graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalthorTheDefiledEffect(), new ManaCostsImpl("{B}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalthorTheDefiledEffect(), new ManaCostsImpl<>("{B}{B}{B}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
 
@@ -72,7 +72,7 @@ class BalthorTheDefiledEffect extends OneShotEffect {
         this.staticText = "Each player returns all black and all red creature cards from their graveyard to the battlefield";
     }
 
-    public BalthorTheDefiledEffect(final BalthorTheDefiledEffect effect) {
+    private BalthorTheDefiledEffect(final BalthorTheDefiledEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class BalthorTheDefiledEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    cardsToReturn.addAll(player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
+                    cardsToReturn.addAllCards(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
                 }
             }
             controller.moveCards(cardsToReturn.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);

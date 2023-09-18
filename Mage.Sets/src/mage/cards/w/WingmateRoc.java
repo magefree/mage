@@ -38,7 +38,7 @@ public final class WingmateRoc extends CardImpl {
 
         // <i>Raid</i> &mdash; When Wingmate Roc enters the battlefield, if you attacked this turn, create a 3/4 white Bird creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WingmateRocToken())), RaidCondition.instance,
-                        "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, create a 3/4 white Bird creature token with flying.")
+                        "When {this} enters the battlefield, if you attacked this turn, create a 3/4 white Bird creature token with flying.")
                         .setAbilityWord(AbilityWord.RAID)
                         .addHint(RaidHint.instance),
                 new PlayerAttackedWatcher());

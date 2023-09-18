@@ -44,7 +44,7 @@ class UnwindingClockEffect extends ContinuousEffectImpl {
         staticText = "Untap all artifacts you control during each other player's untap step";
     }
 
-    public UnwindingClockEffect(final UnwindingClockEffect effect) {
+    private UnwindingClockEffect(final UnwindingClockEffect effect) {
         super(effect);
     }
 
@@ -57,7 +57,7 @@ class UnwindingClockEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         boolean applied = Boolean.TRUE.equals(game.getState().getValue(source.getSourceId() + "applied"));
         if (!applied && layer == Layer.RulesEffects) {
-            if (!game.isActivePlayer(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
+            if (!game.isActivePlayer(source.getControllerId()) && game.getTurnStepType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
                 for (Permanent artifact : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;
@@ -70,7 +70,7 @@ class UnwindingClockEffect extends ContinuousEffectImpl {
                 }
             }
         } else if (applied && layer == Layer.RulesEffects) {
-            if (game.getStep().getType() == PhaseStep.END_TURN) {
+            if (game.getTurnStepType() == PhaseStep.END_TURN) {
                 game.getState().setValue(source.getSourceId() + "applied", false);
             }
         }

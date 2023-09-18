@@ -52,7 +52,7 @@ class FistfulOfForceEffect extends OneShotEffect {
         this.staticText = "Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn";
     }
 
-    public FistfulOfForceEffect(final FistfulOfForceEffect effect) {
+    private FistfulOfForceEffect(final FistfulOfForceEffect effect) {
         super(effect);
     }
 
@@ -67,12 +67,12 @@ class FistfulOfForceEffect extends OneShotEffect {
         Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && creature != null) {
             ContinuousEffect effect = new BoostTargetEffect(2,2,Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(creature.getId()));
+            effect.setTargetPointer(new FixedTarget(creature.getId(), game));
             game.addEffect(effect, source);
-            if (ClashEffect.getInstance().apply(game, source)) {
+            if (new ClashEffect().apply(game, source)) {
                 game.addEffect(effect.copy(), source);
                 effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
+                effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                 game.addEffect(effect.copy(), source);
             }
             return true;

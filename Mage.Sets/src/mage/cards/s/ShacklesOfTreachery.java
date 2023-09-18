@@ -56,12 +56,12 @@ public final class ShacklesOfTreachery extends CardImpl {
 
 class ShacklesOfTreacheryTriggeredAbility extends TriggeredAbilityImpl {
 
-    private enum ShacklesOfTreacheryPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+    private enum ShacklesOfTreacheryPredicate implements ObjectSourcePlayerPredicate<MageObject> {
         instance;
 
         @Override
         public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-            Permanent permanent = game.getPermanent(input.getSourceId());
+            Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
             return permanent != null && permanent.getAttachments().contains(input.getObject().getId());
         }
     }

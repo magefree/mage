@@ -28,7 +28,7 @@ public final class WordsOfWaste extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // {1}: The next time you would draw a card this turn, each opponent discards a card instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWasteEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWasteEffect(), new ManaCostsImpl<>("{1}")));
     }
 
     private WordsOfWaste(final WordsOfWaste card) {
@@ -48,7 +48,7 @@ class WordsOfWasteEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, each opponent discards a card instead";
     }
 
-    public WordsOfWasteEffect(final WordsOfWasteEffect effect) {
+    private WordsOfWasteEffect(final WordsOfWasteEffect effect) {
         super(effect);
     }
 

@@ -35,7 +35,7 @@ public final class WakerootElemental extends CardImpl {
 
         // {G}{G}{G}{G}{G}: Untap target land you control. It becomes a 5/5 Elemental creature with haste. It's still a land.
         Ability ability = new SimpleActivatedAbility(
-                new UntapTargetEffect(), new ManaCostsImpl("{G}{G}{G}{G}{G}")
+                new UntapTargetEffect(), new ManaCostsImpl<>("{G}{G}{G}{G}{G}")
         );
         ability.addEffect(new BecomesCreatureTargetEffect(
                 new WakerootElementalToken(), false, true, Duration.Custom

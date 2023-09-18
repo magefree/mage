@@ -36,7 +36,7 @@ public final class ThelonOfHavenwood extends CardImpl {
 
     public ThelonOfHavenwood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
@@ -73,7 +73,7 @@ class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
         staticText = "Each Fungus creature gets +1/+1 for each spore counter on it";
     }
 
-    ThelonOfHavenwoodBoostEffect(final ThelonOfHavenwoodBoostEffect effect) {
+    private ThelonOfHavenwoodBoostEffect(final ThelonOfHavenwoodBoostEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             int numCounters = creature.getCounters(game).getCount(CounterType.SPORE);
             if (numCounters > 0) {
                 creature.addPower(numCounters);

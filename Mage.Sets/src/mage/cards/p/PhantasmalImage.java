@@ -4,7 +4,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -24,14 +24,14 @@ import java.util.UUID;
  */
 public final class PhantasmalImage extends CardImpl {
 
-    private static final String effectText = "a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+    private static final String effectText = "as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
 
     private static final CopyApplier phantasmalImageApplier = new CopyApplier() {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
             blueprint.addSubType(SubType.ILLUSION);
-            blueprint.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+            blueprint.getAbilities().add(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
             return true;
         }
     };

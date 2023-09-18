@@ -43,7 +43,7 @@ public final class ClatteringAugur extends CardImpl {
         this.addAbility(ability);
 
         // {2}{B}{B}: Return Clattering Augur from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{B}{B}")));
     }
 
     private ClatteringAugur(final ClatteringAugur card) {

@@ -55,7 +55,7 @@ public final class DestinySpinner extends CardImpl {
         )));
 
         // {3}{G}: Target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is the number of enchantments you control. It's still a land.
-        Ability ability = new SimpleActivatedAbility(new DestinySpinnerEffect(), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DestinySpinnerEffect(), new ManaCostsImpl<>("{3}{G}"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         ability.addHint(new ValueHint("Enchantments you control", DestinySpinnerCount.instance));
         this.addAbility(ability);
@@ -76,7 +76,7 @@ enum DestinySpinnerCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getBattlefield().countAll(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, sourceAbility.getControllerId(), game);
+        return game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, sourceAbility.getControllerId(), game);
     }
 
     @Override

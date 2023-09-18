@@ -33,6 +33,7 @@ public class GainLifeFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
         this.when = when;
         this.addWatcher(new GainLifeFirstTimeWatcher());
         this.addHint(hint);
+        setTriggerPhrase("When" + (when ? "" : "ever") + " you gain life for the first time each turn, ");
     }
 
     private GainLifeFirstTimeTriggeredAbility(final GainLifeFirstTimeTriggeredAbility ability) {
@@ -49,11 +50,6 @@ public class GainLifeFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         GainLifeFirstTimeWatcher watcher = game.getState().getWatcher(GainLifeFirstTimeWatcher.class);
         return watcher != null && watcher.checkEvent(getControllerId(), event);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When" + (when ? "" : "ever") + " you gain life for the first time each turn, " ;
     }
 
     @Override

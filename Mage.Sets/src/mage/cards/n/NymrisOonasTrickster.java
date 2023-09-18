@@ -2,17 +2,15 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.common.FirstSpellOpponentsTurnTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -24,7 +22,7 @@ public final class NymrisOonasTrickster extends CardImpl {
     public NymrisOonasTrickster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(1);
@@ -38,11 +36,9 @@ public final class NymrisOonasTrickster extends CardImpl {
 
         // Whenever you cast your first spell during each opponent's turn, look at the top two cards of your library. Put one of those cards into your hand and the other into your graveyard.
         this.addAbility(new FirstSpellOpponentsTurnTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(2), false, StaticValue.get(1),
-                        StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false
-                ), false
-        ));
+                new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD)
+                        .setText("look at the top two cards of your library. Put one of those cards into your hand and the other into your graveyard"),
+                false));
     }
 
     private NymrisOonasTrickster(final NymrisOonasTrickster card) {

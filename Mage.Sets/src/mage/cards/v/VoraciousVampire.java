@@ -32,10 +32,11 @@ public final class VoraciousVampire extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Voracious Vampire enters the battlefield, target Vampire you control gets +1/+1 and gains menace until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+                .setText("target Vampire you control gets +1/+1"), false);
         Effect effect = new GainAbilityTargetEffect(new MenaceAbility(), Duration.EndOfTurn);
         effect.setText("and gains menace until end of turn.");
         ability.addEffect(effect);

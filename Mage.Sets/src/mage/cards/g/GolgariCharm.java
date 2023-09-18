@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -11,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
 /**
@@ -25,17 +23,15 @@ public final class GolgariCharm extends CardImpl {
 
 
         // Choose one — All creatures get -1/-1 until end of turn;
-        this.getSpellAbility().addEffect(new BoostAllEffect(-1,-1, Duration.EndOfTurn,new FilterCreaturePermanent("All creatures"), false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn));
 
         // or destroy target enchantment;
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addMode(mode);
 
         // or regenerate each creature you control.
-        mode = new Mode();
-        mode.addEffect(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));
+        mode = new Mode(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -31,7 +31,7 @@ public final class UginsConjurant extends CardImpl {
         // Ugin’s Conjurant enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
         // If damage would be dealt to Ugin’s Conjurant while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from Ugin’s Conjurant.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageAndRemoveCountersEffect(true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageAndRemoveCountersEffect(true, true, false)));
     }
 
     private UginsConjurant(final UginsConjurant card) {

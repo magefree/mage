@@ -53,7 +53,7 @@ class RichesEffect extends OneShotEffect {
         this.staticText = "Each opponent chooses a creature they control. You gain control of each of those creatures.";
     }
 
-    public RichesEffect(final RichesEffect effect) {
+    private RichesEffect(final RichesEffect effect) {
         super(effect);
     }
 
@@ -75,8 +75,8 @@ class RichesEffect extends OneShotEffect {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
                         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                        target.setNotTarget(true);
-                        if (opponent.choose(Outcome.Detriment, target, source.getSourceId(), game)) {
+                        target.withNotTarget(true);
+                        if (opponent.choose(Outcome.Detriment, target, source, game)) {
                             creaturesToSteal.add(target.getTargets().get(0));
                         }
                     }
@@ -86,8 +86,8 @@ class RichesEffect extends OneShotEffect {
             // Has to be done as a separate loop in case there's a situation where one creature's
             // controller depends on another creatures controller.
             for (UUID target : creaturesToSteal) {
-                GainControlTargetEffect eff = new GainControlTargetEffect(Duration.Custom, true);
-                eff.setTargetPointer(new FixedTarget(target));
+                GainControlTargetEffect eff = new GainControlTargetEffect(Duration.EndOfGame, true);
+                eff.setTargetPointer(new FixedTarget(target, game));
                 game.addEffect(eff, source);
             }
 

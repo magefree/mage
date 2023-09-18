@@ -54,7 +54,7 @@ class PrimordialOozeEffect extends OneShotEffect {
         this.staticText = "Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap {this} and it deals X damage to you";
     }
 
-    public PrimordialOozeEffect(final PrimordialOozeEffect effect) {
+    private PrimordialOozeEffect(final PrimordialOozeEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class PrimordialOozeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourceObject != null) {
             int counter = sourceObject.getCounters(game).getCount(CounterType.P1P1);
             Cost cost = new ManaCostsImpl<>("{" + counter + '}');

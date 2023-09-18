@@ -27,7 +27,6 @@ public class OboshThePreypiercerTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 3);
     }

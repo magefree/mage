@@ -35,7 +35,7 @@ public final class Curiosity extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature deals damage to an opponent, you may draw a card.
@@ -59,7 +59,7 @@ class CuriosityAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public CuriosityAbility(final CuriosityAbility ability) {
+    private CuriosityAbility(final CuriosityAbility ability) {
         super(ability);
     }
 

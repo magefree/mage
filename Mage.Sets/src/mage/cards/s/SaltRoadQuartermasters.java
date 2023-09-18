@@ -36,7 +36,7 @@ public final class SaltRoadQuartermasters extends CardImpl {
                 "with two +1/+1 counters on it"));
 
         // {2}{G}, Remove a +1/+1 counter from Salt Road Quartermasters: Put a +1/+1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

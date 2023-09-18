@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import com.google.common.collect.Sets;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public final class AkromaVisionOfIxidor extends CardImpl {
     public AkromaVisionOfIxidor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -66,7 +67,7 @@ public final class AkromaVisionOfIxidor extends CardImpl {
 
 class AkromaVisionOfIxidorEffect extends OneShotEffect {
 
-    private static final Set<Class<? extends Ability>> classes = Sets.newHashSet(
+    private static final Set<Class<? extends Ability>> classes = new HashSet<>(Arrays.asList(
             FlyingAbility.class,
             FirstStrikeAbility.class,
             DoubleStrikeAbility.class,
@@ -81,7 +82,7 @@ class AkromaVisionOfIxidorEffect extends OneShotEffect {
             TrampleAbility.class,
             VigilanceAbility.class,
             PartnerAbility.class
-    );
+    ));
 
     AkromaVisionOfIxidorEffect() {
         super(Outcome.Benefit);
@@ -103,9 +104,9 @@ class AkromaVisionOfIxidorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
-            Abilities abilities = permanent.getAbilities(game);
+            Abilities<Ability> abilities = permanent.getAbilities(game);
             int count = classes
                     .stream()
                     .map(clazz -> abilities.stream().anyMatch(clazz::isInstance))
@@ -113,7 +114,7 @@ class AkromaVisionOfIxidorEffect extends OneShotEffect {
                     .sum();
             if (count > 0) {
                 ContinuousEffect effect = new BoostTargetEffect(count, count, Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
                 game.addEffect(effect, source);
             }
         }

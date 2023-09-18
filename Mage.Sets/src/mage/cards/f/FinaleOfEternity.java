@@ -29,6 +29,7 @@ public final class FinaleOfEternity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
         // Destroy up to three target creatures with toughness X or less. If X is 10 or more, return all creature cards from your graveyard to the battlefield.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("destroy up to three target creatures with toughness X or less"));
         this.getSpellAbility().addEffect(new FinaleOfEternityEffect());
         this.getSpellAbility().setTargetAdjuster(FinaleOfEternityAdjuster.instance);
     }
@@ -59,9 +60,8 @@ enum FinaleOfEternityAdjuster implements TargetAdjuster {
 class FinaleOfEternityEffect extends OneShotEffect {
 
     FinaleOfEternityEffect() {
-        super(Outcome.Benefit);
-        staticText = "Destroy up to three target creatures with toughness X or less. " +
-                "If X is 10 or more, return all creature cards from your graveyard to the battlefield.";
+        super(Outcome.PutCreatureInPlay);
+        staticText = "If X is 10 or more, return all creature cards from your graveyard to the battlefield.";
     }
 
     private FinaleOfEternityEffect(final FinaleOfEternityEffect effect) {
@@ -75,7 +75,6 @@ class FinaleOfEternityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        new DestroyTargetEffect(false, true).apply(game, source);
         if (source.getManaCostsToPay().getX() < 10) {
             return true;
         }

@@ -33,6 +33,7 @@ public class EldraziMimicTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thought Harvester");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Thought Harvester");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -59,7 +60,7 @@ public class EldraziMimicTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Mimic", 1); // 2/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Composite Golem");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

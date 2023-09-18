@@ -42,12 +42,12 @@ public final class MaritLagesSlumber extends CardImpl {
     public MaritLagesSlumber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.SNOW);
 
         // Whenever Marit Lage's Slumber or another snow permanent enters the battlefield under your control, scry 1.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new ScryEffect(1), filter, false, true
+                new ScryEffect(1, false), filter, false, true
         ));
 
         // At the beginning of your upkeep, if you control ten or more snow permanents, sacrifice Marit Lage's Slumber. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.

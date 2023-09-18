@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class SigardaHeronsGrace extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans");
 
     static {
         filter.add(SubType.HUMAN.getPredicate());
@@ -35,7 +34,7 @@ public final class SigardaHeronsGrace extends CardImpl {
 
     public SigardaHeronsGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -45,10 +44,10 @@ public final class SigardaHeronsGrace extends CardImpl {
 
         // You and Humans you control have hexproof.
         Effect effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect.setText("You and");
+        effect.setText("You");
         Ability ability =new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter);
-        effect.setText("and Humans you control have hexproof");
+        effect.concatBy("and");
         ability.addEffect(effect);
         this.addAbility(ability);
 

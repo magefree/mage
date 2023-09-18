@@ -25,7 +25,7 @@ public final class GleefulSabotage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));
     }
 
     private GleefulSabotage(final GleefulSabotage card) {

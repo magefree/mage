@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -10,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterAttackingCreature;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetAttackingCreature;
 
 /**
  *
@@ -28,8 +26,8 @@ public final class EliteJavelineer extends CardImpl {
         this.toughness = new MageInt(2);
         
         // Whenever Elite Javelineer blocks, it deals 1 damage to target attacking creature.
-        Ability ability = new BlocksSourceTriggeredAbility(new DamageTargetEffect(1, "it"), false);
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
+        Ability ability = new BlocksSourceTriggeredAbility(new DamageTargetEffect(1, "it"));
+        ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
 

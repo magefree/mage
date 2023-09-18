@@ -32,7 +32,7 @@ public final class IngeniousInfiltrator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ninjutsu {U}{B}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{U}{B}")));
+        this.addAbility(new NinjutsuAbility("{U}{B}"));
 
         // Whenever a Ninja you control deals combat damage to a player, draw a card.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(

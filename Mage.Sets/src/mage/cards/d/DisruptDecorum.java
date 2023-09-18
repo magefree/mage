@@ -6,6 +6,7 @@ import mage.abilities.effects.common.combat.GoadAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -17,7 +18,7 @@ public final class DisruptDecorum extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
         // Goad all creatures you don't control.
-        this.getSpellAbility().addEffect(new GoadAllEffect());
+        this.getSpellAbility().addEffect(new GoadAllEffect(StaticFilters.FILTER_CREATURES_YOU_DONT_CONTROL));
     }
 
     private DisruptDecorum(final DisruptDecorum card) {

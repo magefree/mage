@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -10,11 +9,9 @@ import mage.filter.FilterObject;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffectImpl {
@@ -33,7 +30,7 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
         this(filterTarget, null, duration);
     }
 
-    public CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
+    protected CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
@@ -62,7 +59,7 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.isControlledBy(source.getControllerId())
-                && filterTarget.match(spell, source.getSourceId(), source.getControllerId(), game)) {
+                && filterTarget.match(spell, source.getControllerId(), source, game)) {
             if (filterSource == null) {
                 return true;
             } else {
@@ -77,9 +74,16 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append(filterTarget.getMessage()).append(" can't be countered");
+        sb.append(filterTarget.getMessage());
+        if (!filterTarget.getMessage().contains("you control")) {
+            sb.append(" you control");
+        }
+        sb.append(" can't be countered");
         if (filterSource != null) {
             sb.append(" by ").append(filterSource.getMessage());
+        }
+        if (duration == Duration.EndOfTurn) {
+            sb.append(" this turn");
         }
         staticText = sb.toString();
     }

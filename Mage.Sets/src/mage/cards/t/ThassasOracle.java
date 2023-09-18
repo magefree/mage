@@ -78,7 +78,7 @@ class ThassasOracleEffect extends OneShotEffect {
         int xValue = DevotionCount.U.calculate(game, source, this);
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, xValue));
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD);
-        player.choose(Outcome.DrawCard, cards, target, game);
+        player.choose(Outcome.DrawCard, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         cards.remove(card);
         player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false);

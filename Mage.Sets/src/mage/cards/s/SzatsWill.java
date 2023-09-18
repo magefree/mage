@@ -68,7 +68,7 @@ class SzatsWillEffect extends OneShotEffect {
 
     SzatsWillEffect() {
         super(Outcome.Benefit);
-        staticText = "exile all cards from all opponents' graveyards, "
+        staticText = "exile all opponents' graveyards, "
                 + "then create X 0/1 black Thrull creature tokens, "
                 + "where X is the greatest power among creature cards exiled this way";
     }

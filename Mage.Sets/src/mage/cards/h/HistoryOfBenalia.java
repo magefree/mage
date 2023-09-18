@@ -26,7 +26,7 @@ public final class HistoryOfBenalia extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
         // I, II — Create a 2/2 white Knight creature token with vigilance.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new CreateTokenEffect(new KnightToken()));
         // III — Knights you control get +2/+1 until end of turn.

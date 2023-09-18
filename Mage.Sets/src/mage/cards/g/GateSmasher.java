@@ -54,7 +54,7 @@ public final class GateSmasher extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), target));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), target, false));
 
     }
 

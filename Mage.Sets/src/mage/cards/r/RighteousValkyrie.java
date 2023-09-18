@@ -101,6 +101,6 @@ enum RighteousValkyrieCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getLife() >= game.getLife() + 7;
+        return player != null && player.getLife() >= game.getStartingLife() + 7;
     }
 }

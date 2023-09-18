@@ -41,10 +41,12 @@ public final class VeiledCrocodile extends CardImpl {
 class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
 
     public VeiledCrocodileStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new VeilCrocodileToken(), "", Duration.Custom, true, false));
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new VeilCrocodileToken(), null, Duration.Custom));
+        this.replaceRuleText = false;
+        setTriggerPhrase("When a player has no cards in hand, if {this} is an enchantment, ");
     }
 
-    public VeiledCrocodileStateTriggeredAbility(final VeiledCrocodileStateTriggeredAbility ability) {
+    private VeiledCrocodileStateTriggeredAbility(final VeiledCrocodileStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -98,12 +100,6 @@ class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
     public void counter(Game game) {
         game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When a player has no cards in hand, if {this} is an enchantment, " ;
-    }
-
 }
 
 class VeilCrocodileToken extends TokenImpl {
@@ -116,7 +112,7 @@ class VeilCrocodileToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public VeilCrocodileToken(final VeilCrocodileToken token) {
+    private VeilCrocodileToken(final VeilCrocodileToken token) {
         super(token);
     }
 

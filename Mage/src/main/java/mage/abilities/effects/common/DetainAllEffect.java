@@ -29,7 +29,7 @@ public class DetainAllEffect extends OneShotEffect {
         this.staticText = "detain " + filter.getMessage();
     }
 
-    public DetainAllEffect(final DetainAllEffect effect) {
+    protected DetainAllEffect(final DetainAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -42,7 +42,7 @@ public class DetainAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<FixedTarget> detainedObjects = new ArrayList<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers("Detained permanent: " + permanent.getName());
             }
@@ -65,7 +65,7 @@ class DetainAllRestrictionEffect extends RestrictionEffect {
         staticText = "";
     }
 
-    public DetainAllRestrictionEffect(final DetainAllRestrictionEffect effect) {
+    protected DetainAllRestrictionEffect(final DetainAllRestrictionEffect effect) {
         super(effect);
         this.detainedObjects = effect.detainedObjects;
     }

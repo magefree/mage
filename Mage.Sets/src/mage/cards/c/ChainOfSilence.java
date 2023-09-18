@@ -50,9 +50,10 @@ class ChainOfSilenceEffect extends OneShotEffect {
 
     public ChainOfSilenceEffect() {
         super(Outcome.PreventDamage);
+        this.staticText = "Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
-    public ChainOfSilenceEffect(final ChainOfSilenceEffect effect) {
+    private ChainOfSilenceEffect(final ChainOfSilenceEffect effect) {
         super(effect);
     }
 
@@ -90,10 +91,4 @@ class ChainOfSilenceEffect extends OneShotEffect {
 
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
-    }
-
 }

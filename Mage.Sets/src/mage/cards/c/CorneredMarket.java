@@ -49,7 +49,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(mage.filter.predicate.Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public CorneredMarketReplacementEffect() {
@@ -58,7 +58,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 + "<br> Players can't play nonbasic lands with the same name as a nontoken permanent.";
     }
 
-    CorneredMarketReplacementEffect(final CorneredMarketReplacementEffect effect) {
+    private CorneredMarketReplacementEffect(final CorneredMarketReplacementEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             }
             // play land check
             if (card.isLand(game)
-                    && !card.isBasic()) {
+                    && !card.isBasic(game)) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                     if (permanent != null) {
                         if (CardUtil.haveSameNames(card, permanent.getName(), game)) {

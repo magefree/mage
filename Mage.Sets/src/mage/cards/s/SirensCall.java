@@ -62,7 +62,7 @@ class SirensCallMustAttackEffect extends RequirementEffect {
         staticText = "Creatures the active player controls attack this turn if able";
     }
 
-    SirensCallMustAttackEffect(final SirensCallMustAttackEffect effect) {
+    private SirensCallMustAttackEffect(final SirensCallMustAttackEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class SirensCallDestroyEffect extends OneShotEffect {
         this.staticText = "destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn";
     }
 
-    SirensCallDestroyEffect(final SirensCallDestroyEffect effect) {
+    private SirensCallDestroyEffect(final SirensCallDestroyEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class DecoctionModule extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new GetEnergyCountersControllerEffect(1),
-                StaticFilters.FILTER_PERMANENT_CREATURE_A,
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 false)
         );
 

@@ -40,8 +40,8 @@ public class EvokeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shriekmaw");
-        setChoice(playerA, "Yes");
-        addTarget(playerA, "Silvercoat Lion");
+        setChoice(playerA, true);
+        // addTarget(playerA, "Silvercoat Lion"); Autochosen, only target
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Exhume");
         setStopAt(1, PhaseStep.END_TURN);
         execute();

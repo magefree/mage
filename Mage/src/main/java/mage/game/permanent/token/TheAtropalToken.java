@@ -20,10 +20,12 @@ public final class TheAtropalToken extends TokenImpl {
         subtype.add(SubType.HORROR);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
+        // Deathtouch
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    public TheAtropalToken(final TheAtropalToken token) {
+    protected TheAtropalToken(final TheAtropalToken token) {
         super(token);
     }
 

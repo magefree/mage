@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class KaronaFalseGod extends CardImpl {
 
     public KaronaFalseGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(5);
@@ -64,7 +63,7 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
         this.staticText = "that player untaps {this} and gains control of it";
     }
 
-    public KaronaFalseGodUntapGetControlEffect(final KaronaFalseGodUntapGetControlEffect effect) {
+    private KaronaFalseGodUntapGetControlEffect(final KaronaFalseGodUntapGetControlEffect effect) {
         super(effect);
     }
 
@@ -95,7 +94,7 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, newController.getId());
             effect.setValue("KaronaFalseGodSourceId", source.getSourceId());
             effect.setValue("KaronaFalseGodControllerId", newController.getId());
-            effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+            effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
             effect.setText("and gains control of it");
             game.addEffect(effect, source);
             return true;
@@ -111,7 +110,7 @@ class KaronaFalseGodEffect extends OneShotEffect {
         this.staticText = "creatures of the creature type of your choice get +3/+3 until end of turn";
     }
 
-    public KaronaFalseGodEffect(final KaronaFalseGodEffect effect) {
+    private KaronaFalseGodEffect(final KaronaFalseGodEffect effect) {
         super(effect);
     }
 
@@ -123,7 +122,7 @@ class KaronaFalseGodEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Choice typeChoice = new ChoiceCreatureType(sourceObject);
             if (!controller.choose(Outcome.BoostCreature, typeChoice, game)) {

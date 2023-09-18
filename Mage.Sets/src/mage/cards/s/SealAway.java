@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -22,7 +20,7 @@ import mage.target.TargetPermanent;
  */
 public final class SealAway extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature an opponent controls");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -36,9 +34,8 @@ public final class SealAway extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         //When Seal Away enters the battlefield, exile target tapped creature an opponent controls until Seal Away leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
 

@@ -29,14 +29,14 @@ public class ReinforceAbility extends SimpleActivatedAbility {
     }
 
 
-    public ReinforceAbility(final ReinforceAbility ability) {
+    protected ReinforceAbility(final ReinforceAbility ability) {
         super(ability);
         this.cost = ability.cost.copy();
         this.count = ability.count;
     }
 
     @Override
-    public SimpleActivatedAbility copy() {
+    public ReinforceAbility copy() {
         return new ReinforceAbility(this);
     }
 

@@ -59,7 +59,7 @@ class ShapeshifterEffect extends OneShotEffect {
         this.staticText = "Choose a number between 0 and 7.";
     }
 
-    public ShapeshifterEffect(final ShapeshifterEffect effect) {
+    private ShapeshifterEffect(final ShapeshifterEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class ShapeshifterContinuousEffect extends ContinuousEffectImpl {
         staticText = "{this}'s power is equal to the last chosen number and its toughness is equal to 7 minus that number.";
     }
 
-    public ShapeshifterContinuousEffect(final ShapeshifterContinuousEffect effect) {
+    private ShapeshifterContinuousEffect(final ShapeshifterContinuousEffect effect) {
         super(effect);
     }
 
@@ -118,8 +118,8 @@ class ShapeshifterContinuousEffect extends ContinuousEffectImpl {
         String lastChosen = (String) game.getState().getValue(source.getSourceId().toString() + "_Shapeshifter");
         if (permanent != null && lastChosen != null) {
             int lastChosenNumber = Integer.parseInt(lastChosen);
-            permanent.getPower().modifyBaseValue(lastChosenNumber);
-            permanent.getToughness().modifyBaseValue(7 - lastChosenNumber);
+            permanent.getPower().setModifiedBaseValue(lastChosenNumber);
+            permanent.getToughness().setModifiedBaseValue(7 - lastChosenNumber);
             return true;
         }
         return false;

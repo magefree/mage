@@ -4,7 +4,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -31,7 +31,7 @@ public final class LunkErrant extends CardImpl {
         // Whenever Lunk Errant attacks alone, it gets +1/+1 and gains trample until end of turn.
         Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
         effect.setText("it gets +1/+1");
-        Ability ability = new AttacksAloneTriggeredAbility(effect);
+        Ability ability = new AttacksAloneSourceTriggeredAbility(effect);
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

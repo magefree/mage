@@ -21,7 +21,7 @@ public final class CentaurGlade extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
 
         // {2}{G}{G}: Create a 3/3 green Centaur creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl<>("{2}{G}{G}")));
     }
 
     private CentaurGlade(final CentaurGlade card) {

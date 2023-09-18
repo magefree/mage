@@ -18,6 +18,8 @@ public class HintUtils {
     public static final String HINT_ICON_BAD = "ICON_BAD";
     public static final String HINT_ICON_RESTRICT = "ICON_RESTRICT";
     public static final String HINT_ICON_REQUIRE = "ICON_REQUIRE";
+    public static final String HINT_ICON_DUNGEON_ROOM_CURRENT = "ICON_DUNGEON_ROOM_CURRENT";
+    public static final String HINT_ICON_DUNGEON_ROOM_NEXT = "ICON_DUNGEON_ROOM_NEXT";
 
     //
     public static final String HINT_START_MARK = "<br/><hintstart/>"; // workaround to find hint text in rules list and shows it in html
@@ -34,7 +36,7 @@ public class HintUtils {
             String hex = colorToHtml(color);
             res = String.format("<font color=%s>%s</font>", hex, text);
         } else {
-            res = text;
+            res = (text == null ? "" : text);
         }
 
         // icon

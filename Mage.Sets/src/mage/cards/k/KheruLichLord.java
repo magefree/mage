@@ -51,7 +51,7 @@ public final class KheruLichLord extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of the next end step. If that card would leave the battlefield, exile it instead of putting it anywhere else.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
+                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl<>("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
     }
 
     private KheruLichLord(final KheruLichLord card) {
@@ -71,7 +71,7 @@ class KheruLichLordEffect extends OneShotEffect {
         this.staticText = "return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of the next end step. If that card would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    public KheruLichLordEffect(final KheruLichLordEffect effect) {
+    private KheruLichLordEffect(final KheruLichLordEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class KheruLichLordEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, source.getSourceId(), source.getControllerId(), game));
+            Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, source.getControllerId(), source, game));
             Card card = cards.getRandom(game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
@@ -127,7 +127,7 @@ class KheruLichLordReplacementEffect extends ReplacementEffectImpl {
         staticText = "If that card would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    KheruLichLordReplacementEffect(final KheruLichLordReplacementEffect effect) {
+    private KheruLichLordReplacementEffect(final KheruLichLordReplacementEffect effect) {
         super(effect);
     }
 

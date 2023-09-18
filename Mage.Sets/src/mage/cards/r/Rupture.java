@@ -55,7 +55,7 @@ class RuptureEffect extends OneShotEffect {
         staticText = "Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player";
     }
 
-    public RuptureEffect(final RuptureEffect effect) {
+    private RuptureEffect(final RuptureEffect effect) {
         super(effect);
     }
 
@@ -65,8 +65,8 @@ class RuptureEffect extends OneShotEffect {
         if (player != null) {
             int power = 0;
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("creature to sacrifice"), true);
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(source.getSourceId(), player.getId(), game) && player.canRespond()) {
+            if (target.canChoose(player.getId(), source, game)) {
+                while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
                 }
                 Permanent permanent = game.getPermanent(target.getFirstTarget());

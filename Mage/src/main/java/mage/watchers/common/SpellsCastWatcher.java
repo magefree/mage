@@ -1,6 +1,8 @@
 package mage.watchers.common;
 
 import mage.MageObject;
+import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -11,6 +13,7 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author LevelX2
@@ -57,6 +60,10 @@ public class SpellsCastWatcher extends Watcher {
         spellsCastFromGraveyard.clear();
     }
 
+    public Stream<Spell> getAllSpellsCastThisTurn() {
+        return spellsCast.values().stream().flatMap(Collection::stream);
+    }
+
     public List<Spell> getSpellsCastThisTurn(UUID playerId) {
         return spellsCast.computeIfAbsent(playerId, x -> new ArrayList<>());
     }
@@ -68,4 +75,23 @@ public class SpellsCastWatcher extends Watcher {
     public int getNumberOfNonCreatureSpells() {
         return nonCreatureSpells;
     }
+
+    public UUID getCasterId(Ability source, Game game) {
+        for (Map.Entry<UUID, List<Spell>> entry : spellsCast.entrySet()) {
+            if (entry.getValue()
+                    .stream()
+                    .map(Spell::getCard)
+                    .map(Card::getMainCard)
+                    .anyMatch(card -> card.getId().equals(source.getSourceId())
+                            && card.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter())) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    public int getCount(UUID playerId) {
+        return spellsCast.getOrDefault(playerId, new ArrayList<>()).size();
+    }
+
 }

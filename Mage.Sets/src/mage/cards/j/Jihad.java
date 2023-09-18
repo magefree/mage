@@ -22,7 +22,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -68,9 +67,10 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
 
     public JihadTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("When the chosen player controls no nontoken permanents of the chosen color, ");
     }
 
-    public JihadTriggeredAbility(final JihadTriggeredAbility ability) {
+    private JihadTriggeredAbility(final JihadTriggeredAbility ability) {
         super(ability);
     }
 
@@ -84,13 +84,8 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
         UUID chosenOpponent = (UUID) game.getState().getValue(getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
         FilterPermanent filter = new FilterPermanent();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(getSourceId() + "_color")));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         return game.getBattlefield().countAll(filter, chosenOpponent, game) == 0;
-    }
-    
-    @Override
-    public String getTriggerPhrase() {
-        return "When the chosen player controls no nontoken permanents of the chosen color, " ;
     }
 }
 
@@ -101,7 +96,7 @@ class JihadOpponentCondition implements Condition {
         UUID chosenOpponent = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
         FilterPermanent filter = new FilterPermanent();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         return game.getBattlefield().countAll(filter, chosenOpponent, game) > 0;
     }
 }

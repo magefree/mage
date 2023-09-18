@@ -42,7 +42,7 @@ public final class LedevChampion extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SoldierLifelinkToken()),
-                new ManaCostsImpl("{3}{G}{W}")
+                new ManaCostsImpl<>("{3}{G}{W}")
         ));
     }
 
@@ -71,7 +71,7 @@ class LedevChampionEffect extends OneShotEffect {
                 + "{this} gets +1/+1 until end of turn for each creature tapped this way.";
     }
 
-    public LedevChampionEffect(LedevChampionEffect effect) {
+    private LedevChampionEffect(final LedevChampionEffect effect) {
         super(effect);
     }
 
@@ -79,8 +79,8 @@ class LedevChampionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int tappedAmount = 0;
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
+        if (target.canChoose(source.getControllerId(), source, game)
+                && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), source, game)) {
             for (UUID creatureId : target.getTargets()) {
                 Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {

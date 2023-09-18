@@ -28,7 +28,7 @@ public final class CaptainVargusWrath extends CardImpl {
     public CaptainVargusWrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(1);
@@ -40,7 +40,7 @@ public final class CaptainVargusWrath extends CardImpl {
                 Duration.EndOfTurn, filter, false, true
         ), false, "Whenever {this} attacks, Pirates you control get +1/+1 until end of turn " +
                 "for each time you've cast a commander from the command zone this game."
-        ).addHint(CaptainVargusWrathValue.getHint()), new CommanderPlaysCountWatcher());
+        ).addHint(CaptainVargusWrathValue.getHint()));
     }
 
     private CaptainVargusWrath(final CaptainVargusWrath card) {

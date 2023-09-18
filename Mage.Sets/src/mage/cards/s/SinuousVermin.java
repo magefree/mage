@@ -38,7 +38,8 @@ public final class SinuousVermin extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
                         MonstrousCondition.instance,
-                        "As long as {this} is monstrous, it has menace"));
+                        "As long as {this} is monstrous, it has menace. " +
+                                "<i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
     }
 

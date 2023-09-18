@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.DragonToken2;
@@ -33,7 +32,7 @@ public final class LathlissDragonQueen extends CardImpl {
 
     static {
         filter.add(SubType.DRAGON.getPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(AnotherPredicate.instance);
         filter2.add(SubType.DRAGON.getPredicate());
     }
@@ -41,7 +40,7 @@ public final class LathlissDragonQueen extends CardImpl {
     public LathlissDragonQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -60,7 +59,7 @@ public final class LathlissDragonQueen extends CardImpl {
                         1, 0, Duration.EndOfTurn,
                         filter2, false
                 ),
-                new ManaCostsImpl("{1}{R}")
+                new ManaCostsImpl<>("{1}{R}")
         ));
     }
 

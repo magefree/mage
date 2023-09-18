@@ -28,7 +28,7 @@ public final class KrydleOfBaldursGate extends CardImpl {
     public KrydleOfBaldursGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
@@ -47,7 +47,7 @@ public final class KrydleOfBaldursGate extends CardImpl {
         // Whenever you attack, you may pay {2}. If you do, target creature can't be blocked this turn.
         ability = new AttacksWithCreaturesTriggeredAbility(new DoIfCostPaid(
                 new CantBeBlockedTargetEffect(), new GenericManaCost(2)
-        ), 0);
+        ), 1);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

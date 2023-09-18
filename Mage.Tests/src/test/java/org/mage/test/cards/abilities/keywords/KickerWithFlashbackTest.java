@@ -24,14 +24,13 @@ public class KickerWithFlashbackTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Burst Lightning");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burst Lightning", playerB);
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
 
         checkLife("after", 1, PhaseStep.END_TURN, playerB, 20 - 4);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -57,7 +56,6 @@ public class KickerWithFlashbackTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -77,7 +75,7 @@ public class KickerWithFlashbackTest extends CardTestPlayerBase {
         // cast burst by flashback
         // showAvailableAbilities("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
         activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "Flashback");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         addTarget(playerA, playerB);
 
         checkLife("after", 1, PhaseStep.END_TURN, playerB, 20 - 4);
@@ -85,7 +83,6 @@ public class KickerWithFlashbackTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
 }

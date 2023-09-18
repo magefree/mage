@@ -28,7 +28,7 @@ public class ChangelingTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Long-Forgotten Gohei");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Woodland Changeling");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Woodlan", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -83,7 +83,7 @@ public class ChangelingTest extends CardTestPlayerBase {
      * NOTE: As of 05/06/2017 this test is failing due to a bug in code.
      * See issue #3316
      * <p>
-     * Kaseto, Orochi Archmage do not give Chameleon Colossus +2/+2 , even though Chameleon Colossus should have the "snake" type
+     * Kaseto, Orochi Archmage do not give Chameleon Colossus +2/+2 , even though Chameleon Colossus should have the "Snake Token" type
      */
     @Test
     public void kasetoOrochiArchmageSnakeTest() {
@@ -150,7 +150,7 @@ public class ChangelingTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Merfolk Trickster");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk Trickster");
-        addTarget(playerA, "Game-Trail Changeling");
+        // Game-Trail Changeling autochosen
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

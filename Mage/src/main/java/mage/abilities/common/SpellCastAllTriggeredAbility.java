@@ -42,9 +42,10 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever a player casts " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
-    public SpellCastAllTriggeredAbility(final SpellCastAllTriggeredAbility ability) {
+    protected SpellCastAllTriggeredAbility(final SpellCastAllTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
@@ -59,7 +60,7 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (!filter.match(spell, getSourceId(), getControllerId(), game)) {
+        if (!filter.match(spell, getControllerId(), this, game)) {
             return false;
         }
         getEffects().setValue("spellCast", spell);
@@ -80,11 +81,6 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
             return rule;
         }
         return super.getRule();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts " + CardUtil.addArticle(filter.getMessage()) + ", ";
     }
 
     @Override

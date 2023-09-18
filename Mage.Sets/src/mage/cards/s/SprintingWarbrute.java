@@ -26,7 +26,7 @@ public final class SprintingWarbrute extends CardImpl {
         // Sprinting Warbrute attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
         // Dash {3}{R}
-        this.addAbility(new DashAbility(this, "{3}{R}"));
+        this.addAbility(new DashAbility("{3}{R}"));
     }
 
     private SprintingWarbrute(final SprintingWarbrute card) {

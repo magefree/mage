@@ -31,13 +31,13 @@ public final class TrialOfAmbition extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // When Trial of Ambition enters the battlefield, target opponent sacrifices a creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE_A, 1, "target opponent"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, "target opponent"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // When a Cartouche enters the battlefield under your control, return Trial of Ambition to its owner's hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter,
-                "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
+                "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand."));
     }
 
     private TrialOfAmbition(final TrialOfAmbition card) {

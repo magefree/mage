@@ -22,9 +22,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
-public enum AuthorizedUserRepository {
-
-    instance;
+public class AuthorizedUserRepository {
 
     private static final String JDBC_URL = "jdbc:h2:file:./db/authorized_user.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "authorized_user";
@@ -32,20 +30,29 @@ public enum AuthorizedUserRepository {
     private static final long DB_VERSION = 2;
     private static final RandomNumberGenerator rng = new SecureRandomNumberGenerator();
 
+    private static final AuthorizedUserRepository instance;
+    static {
+        instance = new AuthorizedUserRepository(JDBC_URL);
+    }
+
     private Dao<AuthorizedUser, Object> dao;
 
-    AuthorizedUserRepository() {
+    public AuthorizedUserRepository(String connectionString) {
         File file = new File("db");
         if (!file.exists()) {
             file.mkdirs();
         }
         try {
-            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            ConnectionSource connectionSource = new JdbcConnectionSource(connectionString);
             TableUtils.createTableIfNotExists(connectionSource, AuthorizedUser.class);
             dao = DaoManager.createDao(connectionSource, AuthorizedUser.class);
         } catch (SQLException ex) {
             Logger.getLogger(AuthorizedUserRepository.class).error("Error creating / assigning authorized_user repository - ", ex);
         }
+    }
+
+    public static AuthorizedUserRepository getInstance() {
+        return instance;
     }
 
     public void add(final String userName, final String password, final String email) {

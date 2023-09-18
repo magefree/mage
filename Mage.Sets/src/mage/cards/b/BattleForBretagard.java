@@ -40,7 +40,7 @@ public final class BattleForBretagard extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Create a 1/1 white Human Warrior creature token.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new CreateTokenEffect(new HumanWarriorToken()));
@@ -89,7 +89,7 @@ class BattleForBretagardEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new BattleForBretagardTarget();
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         for (UUID targetId : target.getTargets()) {
             new CreateTokenCopyTargetEffect()
                     .setTargetPointer(new FixedTarget(targetId, game))
@@ -110,7 +110,7 @@ class BattleForBretagardTarget extends TargetPermanent {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate()
         ));
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     BattleForBretagardTarget() {
@@ -145,8 +145,8 @@ class BattleForBretagardTarget extends TargetPermanent {
 
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getPermanent)

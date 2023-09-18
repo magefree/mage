@@ -39,7 +39,7 @@ public class MythUnboundTest extends CardTestCommanderDuelBase {
 
         // destroy
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt", "Oviya Pashiri, Sage Lifecrafter");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         // cast 2 (G + 2 - 1 = 2 mana)
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Oviya Pashiri, Sage Lifecrafter");
@@ -47,7 +47,6 @@ public class MythUnboundTest extends CardTestCommanderDuelBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Myth Unbound", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);

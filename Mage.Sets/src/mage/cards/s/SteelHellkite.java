@@ -51,7 +51,7 @@ public final class SteelHellkite extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD,
                 new SteelHellkiteDestroyEffect(),
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         ), new SteelHellkiteWatcher());
 
     }
@@ -73,7 +73,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
         staticText = "Destroy each nonland permanent with mana value X whose controller was dealt combat damage by {this} this turn";
     }
 
-    public SteelHellkiteDestroyEffect(final SteelHellkiteDestroyEffect effect) {
+    private SteelHellkiteDestroyEffect(final SteelHellkiteDestroyEffect effect) {
         super(effect);
     }
 

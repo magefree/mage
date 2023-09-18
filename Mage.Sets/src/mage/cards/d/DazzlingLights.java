@@ -23,7 +23,7 @@ public final class DazzlingLights extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Surveil 2.
-        this.getSpellAbility().addEffect(new SurveilEffect(2));
+        this.getSpellAbility().addEffect(new SurveilEffect(2).concatBy("<br>"));
     }
 
     private DazzlingLights(final DazzlingLights card) {

@@ -52,7 +52,7 @@ class CycloneEffect extends OneShotEffect {
         this.staticText = "Pay Green Mana for each counter to damage everything or sacrifice Cyclone.";
     }
 
-    public CycloneEffect(final CycloneEffect effect) {
+    private CycloneEffect(final CycloneEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class CycloneEffect extends OneShotEffect {
             greens.append("{G}");
         }
                   
-        if(this.choice(game, source, player, new ManaCostsImpl(greens.toString()))){
+        if(this.choice(game, source, player, new ManaCostsImpl<>(greens.toString()))){
             DamageEverythingEffect dmg = new DamageEverythingEffect(total);
             dmg.apply(game, source);
         } else {            

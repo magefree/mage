@@ -60,7 +60,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
         staticText = "As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step";
     }
 
-    public StorageMatrixRestrictionEffect(final StorageMatrixRestrictionEffect effect) {
+    private StorageMatrixRestrictionEffect(final StorageMatrixRestrictionEffect effect) {
         super(effect);
         this.type = effect.type;
         this.turn = effect.turn;
@@ -69,7 +69,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getStep().getType() == PhaseStep.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP) {
             if (game.getTurnNum() != turn) {
                 turn = game.getTurnNum();
                 applies = false;
@@ -80,13 +80,13 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                     choiceImpl.setChoices(choice);
                     Player player = game.getPlayer(game.getActivePlayerId());
                     if (player != null && player.choose(outcome, choiceImpl, game)) {
-                        String choosenType = choiceImpl.getChoice();
-                        if (choosenType != null) {
-                            game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + choosenType);
+                        String chosenType = choiceImpl.getChoice();
+                        if (chosenType != null) {
+                            game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + chosenType);
 
-                            if (choosenType.equals(CardType.ARTIFACT.toString())) {
+                            if (chosenType.equals(CardType.ARTIFACT.toString())) {
                                 type = CardType.ARTIFACT;
-                            } else if (choosenType.equals(CardType.LAND.toString())) {
+                            } else if (chosenType.equals(CardType.LAND.toString())) {
                                 type = CardType.LAND;
                             } else {
                                 type = CardType.CREATURE;

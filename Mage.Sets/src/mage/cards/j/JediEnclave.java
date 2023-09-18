@@ -47,7 +47,7 @@ public final class JediEnclave extends CardImpl {
 
     public static class JediEnclaveAbility extends ActivatedAbilityImpl {
 
-        public JediEnclaveAbility(JediEnclaveAbility ability) {
+        private JediEnclaveAbility(final JediEnclaveAbility ability) {
             super(ability);
         }
 
@@ -64,7 +64,7 @@ public final class JediEnclave extends CardImpl {
             filter.add(Predicates.or(subtypePredicates));
             filter.add(SuperType.BASIC.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
+            addEffect(new SearchLibraryPutInPlayEffect(target, true));
         }
 
         @Override

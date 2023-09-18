@@ -36,7 +36,7 @@ public final class CacklingWitch extends CardImpl {
         ManacostVariableValue manaX = ManacostVariableValue.REGULAR;
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(manaX, StaticValue.get(0), Duration.EndOfTurn),
-                new ManaCostsImpl("{X}{B}"));
+                new ManaCostsImpl<>("{X}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetCreaturePermanent());

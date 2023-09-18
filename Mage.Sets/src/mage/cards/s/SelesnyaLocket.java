@@ -29,7 +29,7 @@ public final class SelesnyaLocket extends CardImpl {
         // {G/W}{G/W}{G/W}{G/W}, {T}, Sacrifice Selesnya Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(2),
-                new ManaCostsImpl("{G/W}{G/W}{G/W}{G/W}")
+                new ManaCostsImpl<>("{G/W}{G/W}{G/W}{G/W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

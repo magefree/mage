@@ -32,7 +32,7 @@ public final class VolrathsShapeshifter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VolrathsShapeshifterEffect()));
 
         // {2}: Discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl<>("{2}")));
     }
 
     private VolrathsShapeshifter(final VolrathsShapeshifter card) {
@@ -54,7 +54,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
                 + "({this} has that card's name, mana cost, color, types, abilities, power, and toughness.) ";
     }
 
-    public VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
+    private VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
         super(effect);
     }
 
@@ -74,11 +74,11 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        permanent.getPower().setValue(card.getPower().getValue());
-        permanent.getToughness().setValue(card.getToughness().getValue());
+        permanent.getPower().setModifiedBaseValue(card.getPower().getModifiedBaseValue());
+        permanent.getToughness().setModifiedBaseValue(card.getToughness().getModifiedBaseValue());
         permanent.getColor(game).setColor(card.getColor(game));
         permanent.getManaCost().clear();
-        permanent.getManaCost().add(card.getManaCost());
+        permanent.getManaCost().add(card.getManaCost().copy());
         permanent.removeAllCardTypes(game);
         permanent.setName(card.getName());
 
@@ -89,9 +89,9 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, card);
 
-        permanent.getSuperType().clear();
-        for (SuperType type : card.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : card.getSuperType(game)) {
+            permanent.addSuperType(game, type);
 
         }
 

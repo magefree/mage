@@ -50,7 +50,7 @@ class EntrapmentManeuverSacrificeEffect extends OneShotEffect {
         this.staticText = "Target player sacrifices an attacking creature. You create X 1/1 white Soldier creature tokens, where X is that creature's toughness";
     }
 
-    public EntrapmentManeuverSacrificeEffect(final EntrapmentManeuverSacrificeEffect effect) {
+    private EntrapmentManeuverSacrificeEffect(final EntrapmentManeuverSacrificeEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class EntrapmentManeuverSacrificeEffect extends OneShotEffect {
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         if (realCount > 0) {
             Target target = new TargetControlledPermanent(1, 1, filter, true);
-            while (player.canRespond() && !target.isChosen() && target.canChoose(source.getSourceId(), player.getId(), game)) {
+            while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), source, game)) {
                 player.chooseTarget(Outcome.Sacrifice, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());

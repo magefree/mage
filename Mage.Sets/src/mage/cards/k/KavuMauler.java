@@ -1,9 +1,9 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -28,6 +28,8 @@ public final class KavuMauler extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+
     public KavuMauler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add(SubType.KAVU);
@@ -37,8 +39,7 @@ public final class KavuMauler extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Kavu Mauler attacks, it gets +1/+1 until end of turn for each other attacking Kavu.
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
     }
 
     private KavuMauler(final KavuMauler card) {

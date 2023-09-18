@@ -25,7 +25,7 @@ public final class PendrellDrake extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private PendrellDrake(final PendrellDrake card) {

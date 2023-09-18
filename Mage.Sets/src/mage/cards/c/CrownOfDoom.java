@@ -72,13 +72,13 @@ public final class CrownOfDoom extends CardImpl {
     }
 }
 
-enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<Player> {
     instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentOrLKI(game);
         if (targetPlayer == null || sourceObject == null) {
             return false;
         }
@@ -98,7 +98,7 @@ class CrownOfDoomEffect extends OneShotEffect {
         this.staticText = "Target player other than {this}'s owner gains control of it";
     }
 
-    public CrownOfDoomEffect(final CrownOfDoomEffect effect) {
+    private CrownOfDoomEffect(final CrownOfDoomEffect effect) {
         super(effect);
     }
 
@@ -115,7 +115,7 @@ class CrownOfDoomEffect extends OneShotEffect {
                 && newController != null
                 && !Objects.equals(controller.getId(), newController.getId())) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
-            effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
             game.addEffect(effect, source);
             return true;
         }

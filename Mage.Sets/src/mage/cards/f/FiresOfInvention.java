@@ -52,7 +52,7 @@ public final class FiresOfInvention extends CardImpl {
     }
 }
 
-enum FiresOfInventionPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum FiresOfInventionPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

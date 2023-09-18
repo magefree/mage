@@ -24,10 +24,11 @@ public final class ZephyrSpirit extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Zephyr Spirit blocks, return it to its owner's hand.
-        this.addAbility(new BlocksSourceTriggeredAbility(
-                new ReturnToHandSourceEffect(true).setText("return it to its owner's hand"),
-                false, false, true
-        ));
+        this.addAbility(
+                new BlocksSourceTriggeredAbility(
+                        new ReturnToHandSourceEffect(true).setText("return it to its owner's hand")
+                ).setTriggerPhrase("When {this} blocks, ")
+        );
     }
 
     private ZephyrSpirit(final ZephyrSpirit card) {

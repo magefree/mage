@@ -52,7 +52,7 @@ class KrazyKowEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. If you roll a 1, sacrifice {this} and it deals 3 damage to each creature and each player";
     }
 
-    KrazyKowEffect(final KrazyKowEffect effect) {
+    private KrazyKowEffect(final KrazyKowEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class KrazyKowEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int result = controller.rollDice(source, game, 6);
+            int result = controller.rollDice(outcome, source, game, 6);
             if (result == 1) {
                 new SacrificeSourceEffect().apply(game, source);
                 return new DamageEverythingEffect(3).apply(game, source);

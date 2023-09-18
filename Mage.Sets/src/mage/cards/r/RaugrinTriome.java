@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -34,7 +34,7 @@ public final class RaugrinTriome extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new GenericManaCost(3)));
     }
 
     private RaugrinTriome(final RaugrinTriome card) {

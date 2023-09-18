@@ -41,10 +41,10 @@ public final class HoodedHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // When Hooded Hydra dies, create a 1/1 green Snake creature token for each +1/+1 counter on it.
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SnakeToken("KTK"), new CountersSourceCount(CounterType.P1P1)), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SnakeToken(), new CountersSourceCount(CounterType.P1P1)), false));
 
         // Morph {3}{G}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}")));
 
         // As Hooded Hydra is turned face up, put five +1/+1 counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(5));

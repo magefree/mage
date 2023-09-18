@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -28,14 +27,13 @@ public final class ChandraRoaringFlame extends CardImpl {
 
     public ChandraRoaringFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.color.setRed(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Chandra, Roaring Flame deals 2 damage to target player.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DamageTargetEffect(2), 1);
@@ -69,7 +67,7 @@ class ChandraRoaringFlameEmblemEffect extends OneShotEffect {
         this.staticText = "{this} deals 6 damage to each opponent. Each player dealt damage this way gets an emblem with \"At the beginning of your upkeep, this emblem deals 3 damage to you.\"";
     }
 
-    public ChandraRoaringFlameEmblemEffect(final ChandraRoaringFlameEmblemEffect effect) {
+    private ChandraRoaringFlameEmblemEffect(final ChandraRoaringFlameEmblemEffect effect) {
         super(effect);
     }
 

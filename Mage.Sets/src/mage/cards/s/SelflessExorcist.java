@@ -76,7 +76,7 @@ class SelflessExorcistEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.EXILED, source, game);
-        game.applyEffects();
+        game.getState().processAction(game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return true;

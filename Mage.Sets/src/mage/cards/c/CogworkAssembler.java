@@ -58,7 +58,7 @@ class CogworkAssemblerCreateTokenEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target artifact. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    CogworkAssemblerCreateTokenEffect(final CogworkAssemblerCreateTokenEffect effect) {
+    private CogworkAssemblerCreateTokenEffect(final CogworkAssemblerCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class CogworkAssemblerCreateTokenEffect extends OneShotEffect {
         if (copiedPermanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, true);
             if (effect.apply(game, source)) {
-                for (Permanent copyPermanent : effect.getAddedPermanent()) {
+                for (Permanent copyPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
                     exileEffect.setTargetPointer(new FixedTarget(copyPermanent, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

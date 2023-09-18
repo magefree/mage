@@ -27,6 +27,7 @@ import mage.players.Player;
 
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 
@@ -37,7 +38,7 @@ public final class SasayaOrochiAscendant extends CardImpl {
 
     public SasayaOrochiAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.MONK);
 
@@ -48,7 +49,9 @@ public final class SasayaOrochiAscendant extends CardImpl {
         this.flipCardName = "Sasaya's Essence";
 
         // Reveal your hand: If you have seven or more land cards in your hand, flip Sasaya, Orochi Ascendant.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SasayaOrochiAscendantFlipEffect(), new RevealHandSourceControllerCost()));
+        Effect effect = new SasayaOrochiAscendantFlipEffect();
+        effect.setOutcome(Outcome.AIDontUseIt);  // repetition issues need to be fixed for the AI to use this effectively
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new RevealHandSourceControllerCost()));
     }
 
     private SasayaOrochiAscendant(final SasayaOrochiAscendant card) {
@@ -68,7 +71,7 @@ class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
         this.staticText = "If you have seven or more land cards in your hand, flip {this}";
     }
 
-    public SasayaOrochiAscendantFlipEffect(final SasayaOrochiAscendantFlipEffect effect) {
+    private SasayaOrochiAscendantFlipEffect(final SasayaOrochiAscendantFlipEffect effect) {
         super(effect);
     }
 
@@ -94,7 +97,7 @@ class SasayasEssence extends TokenImpl {
 
     SasayasEssence() {
         super("Sasaya's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setGreen(true);
@@ -105,7 +108,7 @@ class SasayasEssence extends TokenImpl {
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
     }
 
-    public SasayasEssence(final SasayasEssence token) {
+    private SasayasEssence(final SasayasEssence token) {
         super(token);
     }
 
@@ -122,7 +125,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
         this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }
 
-    public SasayasEssenceManaEffect(final SasayasEssenceManaEffect effect) {
+    private SasayasEssenceManaEffect(final SasayasEssenceManaEffect effect) {
         super(effect);
     }
 

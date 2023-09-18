@@ -45,7 +45,6 @@ public final class ForerunnerOfTheHeralds extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(
                         new SearchLibraryPutOnLibraryEffect(
                                 new TargetCardInLibrary(new FilterBySubtypeCard(SubType.MERFOLK)),
-                                true,
                                 true
                         ),
                 true

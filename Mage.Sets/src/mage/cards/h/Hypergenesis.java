@@ -31,7 +31,7 @@ public final class Hypergenesis extends CardImpl {
         this.color.setGreen(true);
 
         // Suspend 3-{1}{G}{G}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{G}{G}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{G}{G}"), this));
 
         // Starting with you, each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
         this.getSpellAbility().addEffect(new HypergenesisEffect());
@@ -61,7 +61,7 @@ class HypergenesisEffect extends OneShotEffect {
         this.staticText = "Starting with you, each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.";
     }
 
-    HypergenesisEffect(final HypergenesisEffect effect) {
+    private HypergenesisEffect(final HypergenesisEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class HypergenesisEffect extends OneShotEffect {
                         firstInactivePlayer = currentPlayer.getId();
                     }
                     target.clearChosen();
-                    if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)
+                    if (target.canChoose(currentPlayer.getId(), source, game)
                             && currentPlayer.chooseUse(outcome, "Put card from your hand to play?", source, game)) {
                         if (target.chooseTarget(outcome, currentPlayer.getId(), source, game)) {
                             Card card = game.getCard(target.getFirstTarget());

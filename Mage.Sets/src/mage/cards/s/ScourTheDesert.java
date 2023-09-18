@@ -58,7 +58,7 @@ class ScourTheDesertEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getFirstTarget());
         if (player == null || card == null) {
             return false;

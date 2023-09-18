@@ -40,7 +40,7 @@ public final class TheMirariConjecture extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
         // I — Return target instant card from your graveyard to your hand.                
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
@@ -77,7 +77,7 @@ class TheMirariConjectureDelayedTriggeredAbility extends DelayedTriggeredAbility
         super(new CopyTargetSpellEffect(true), Duration.EndOfTurn, false);
     }
 
-    public TheMirariConjectureDelayedTriggeredAbility(final TheMirariConjectureDelayedTriggeredAbility ability) {
+    private TheMirariConjectureDelayedTriggeredAbility(final TheMirariConjectureDelayedTriggeredAbility ability) {
         super(ability);
     }
 

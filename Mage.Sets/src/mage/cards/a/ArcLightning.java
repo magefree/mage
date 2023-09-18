@@ -1,5 +1,3 @@
-
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -18,7 +16,7 @@ public final class ArcLightning extends CardImpl {
     public ArcLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
-        // Arc Lightning deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
+        // Arc Lightning deals 3 damage divided as you choose among one, two, or three targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
     }

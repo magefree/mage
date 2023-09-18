@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -15,24 +16,23 @@ import mage.target.Target;
 import mage.target.Targets;
 
 /**
- *
  * @author LevelX2
  */
 public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffect {
 
     public ChangeATargetOfTargetSpellAbilityToSourceEffect() {
         super(Outcome.Neutral);
-        staticText = "Change a target of target spell or ability to {this}";
+        staticText = "change a target of target spell or ability to {this}";
     }
 
-    public ChangeATargetOfTargetSpellAbilityToSourceEffect(final ChangeATargetOfTargetSpellAbilityToSourceEffect effect) {
+    protected ChangeATargetOfTargetSpellAbilityToSourceEffect(final ChangeATargetOfTargetSpellAbilityToSourceEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (stackObject != null && sourceObject != null) {
             Targets targets = new Targets();
             Ability sourceAbility;

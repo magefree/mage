@@ -54,7 +54,7 @@ class SkeletonizeEffect extends OneShotEffect {
         this.staticText = "When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with \"{B}: Regenerate this creature.\"";
     }
 
-    public SkeletonizeEffect(final SkeletonizeEffect effect) {
+    private SkeletonizeEffect(final SkeletonizeEffect effect) {
         super(effect);
     }
 
@@ -75,9 +75,10 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public SkeletonizeDelayedTriggeredAbility() {
         super(new CreateTokenEffect(new SkeletonRegenerateToken()), Duration.EndOfTurn);
+        setTriggerPhrase("When a creature dealt damage this way dies this turn, ");
     }
 
-    public SkeletonizeDelayedTriggeredAbility(final SkeletonizeDelayedTriggeredAbility ability) {
+    private SkeletonizeDelayedTriggeredAbility(final SkeletonizeDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,10 +102,5 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When a creature dealt damage this way dies this turn, " ;
     }
 }

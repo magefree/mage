@@ -31,7 +31,7 @@ public final class SpiketailDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Sacrifice Spiketail Drake: Counter target spell unless its controller pays {3}.
-         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl("{3}")), new SacrificeSourceCost());                                                         ability.addTarget(new TargetSpell());                                                              this.addAbility(ability);
+         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl<>("{3}")), new SacrificeSourceCost());                                                         ability.addTarget(new TargetSpell());                                                              this.addAbility(ability);
     }
 
     private SpiketailDrake(final SpiketailDrake card) {

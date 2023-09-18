@@ -341,7 +341,7 @@ public class ConnectDialog extends JDialog {
             JOptionPane.showMessageDialog(rootPane, "Please provide a port number");
             return;
         }
-        if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535) {
+        if (Integer.parseInt(txtPort.getText()) < 1 || Integer.parseInt(txtPort.getText()) > 65535) {
             JOptionPane.showMessageDialog(rootPane, "Invalid port number");
             txtPort.setText(ConsoleFrame.getPreferences().get("serverPort", Integer.toString(17171)));
             return;
@@ -350,13 +350,13 @@ public class ConnectDialog extends JDialog {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         connection = new Connection();
         connection.setHost(this.txtServer.getText());
-        connection.setPort(Integer.valueOf(this.txtPort.getText()));
+        connection.setPort(Integer.parseInt(this.txtPort.getText()));
         connection.setAdminPassword(new String(txtPassword.getPassword()));
         connection.setUsername("Admin");
         connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
         if (!this.cbProxyType.getSelectedItem().equals(ProxyType.NONE)) {
             connection.setProxyHost(this.txtProxyServer.getText());
-            connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
+            connection.setProxyPort(Integer.parseInt(this.txtProxyPort.getText()));
             connection.setProxyUsername(this.txtProxyUserName.getText());
             connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
         }

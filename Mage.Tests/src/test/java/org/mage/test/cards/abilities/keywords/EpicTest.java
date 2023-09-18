@@ -21,9 +21,8 @@ public class EpicTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Snake", 3 + 3 + 4 + 5);
+        assertPermanentCount(playerA, "Snake Token", 3 + 3 + 4 + 5);
         assertPermanentCount(playerA, "Forest", 8);
     }
 
@@ -39,9 +38,8 @@ public class EpicTest extends CardTestPlayerBase {
 
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Snake", 2 * (3 + 3 + 4 + 5));
+        assertPermanentCount(playerA, "Snake Token", 2 * (3 + 3 + 4 + 5));
         assertPermanentCount(playerA, "Tropical Island", 10);
     }
 }

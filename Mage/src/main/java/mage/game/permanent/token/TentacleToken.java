@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class TentacleToken extends TokenImpl {
 
     public TentacleToken() {
-        super("Tentacle", "1/1 blue Tentacle creature token");
+        super("Tentacle Token", "1/1 blue Tentacle creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.TENTACLE);

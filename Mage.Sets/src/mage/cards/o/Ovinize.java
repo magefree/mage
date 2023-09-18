@@ -4,7 +4,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class Ovinize extends CardImpl {
                 new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
                         .setText("Until end of turn, target creature loses all abilities")
         );
-        Effect effect = new SetPowerToughnessTargetEffect(0, 1, Duration.EndOfTurn);
+        Effect effect = new SetBasePowerToughnessTargetEffect(0, 1, Duration.EndOfTurn);
         effect.setText("and has base power and toughness 0/1");
         this.getSpellAbility().addEffect(effect);
     }

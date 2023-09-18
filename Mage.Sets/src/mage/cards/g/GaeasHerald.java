@@ -53,7 +53,7 @@ class CantCounterEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
 
-    public CantCounterEffect(final CantCounterEffect effect) {
+    private CantCounterEffect(final CantCounterEffect effect) {
         super(effect);
     }
 

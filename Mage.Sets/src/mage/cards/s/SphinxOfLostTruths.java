@@ -38,7 +38,7 @@ public final class SphinxOfLostTruths extends CardImpl {
 
         // When Sphinx of Lost Truths enters the battlefield, draw three cards. Then if it wasn't kicked, discard three cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3));
-        ability.addEffect(new ConditionalOneShotEffect(new DiscardControllerEffect(3), new InvertCondition(KickedCondition.instance),
+        ability.addEffect(new ConditionalOneShotEffect(new DiscardControllerEffect(3), new InvertCondition(KickedCondition.ONCE),
                 "Then if it wasn't kicked, discard three cards"));
         this.addAbility(ability);
     }

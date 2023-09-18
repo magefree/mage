@@ -46,10 +46,16 @@ class StrategySchmategyffect extends OneShotEffect {
 
     public StrategySchmategyffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Roll a six-sided die. {this} has the indicated effect. 1 - Do nothing. 2 - Destroy all artifacts. 3 - Destroy all lands. 4 - {this} deals 3 damage to each creature and each player. 5 - Each player discards their hand and draws seven cards. 6 - Repeat this process two more times";
+        this.staticText = "Roll a six-sided die. {this} has the indicated effect." +
+                "<br>1 - Do nothing." +
+                "<br>2 - Destroy all artifacts." +
+                "<br>3 - Destroy all lands." +
+                "<br>4 - {this} deals 3 damage to each creature and each player." +
+                "<br>5 - Each player discards their hand and draws seven cards." +
+                "<br>6 - Repeat this process two more times";
     }
 
-    public StrategySchmategyffect(final StrategySchmategyffect effect) {
+    private StrategySchmategyffect(final StrategySchmategyffect effect) {
         super(effect);
     }
 
@@ -70,7 +76,7 @@ class StrategySchmategyffect extends OneShotEffect {
             // 5 - Each player discards their hand and draws seven cards.
             // 6 - Repeat this process two more times
             while (numTimesToDo > 0) {
-                int amount = controller.rollDice(source, game, 6);
+                int amount = controller.rollDice(Outcome.Detriment, source, game, 6); // ai must try to choose min
                 numTimesToDo--;
                 if (amount == 2) {
                     List<Permanent> artifactPermanents = game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), controller.getId(), game);

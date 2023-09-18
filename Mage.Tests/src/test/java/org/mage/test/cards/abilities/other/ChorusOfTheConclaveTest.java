@@ -33,7 +33,7 @@ public class ChorusOfTheConclaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Goblin Roughrider");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=1");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -69,23 +69,22 @@ public class ChorusOfTheConclaveTest extends CardTestPlayerBase {
         // Creature spells you cast cost {1} less to cast for each creature you control with a +1/+1 counter on it.        
         addCard(Zone.HAND, playerA, "Hamza, Guardian of Arashin"); // {4}{G}{W}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider");
-        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider", true);
+        setChoice(playerA, true);
         setChoice(playerA, "X=1");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hamza, Guardian of Arashin");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=1");
         
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mountain");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Akki Drillmaster");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=1");
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Roughrider", 1); // costs {R}{2} + {1} = 4
         assertCounterCount("Goblin Roughrider", CounterType.P1P1, 1);

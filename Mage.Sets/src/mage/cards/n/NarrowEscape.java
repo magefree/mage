@@ -25,7 +25,7 @@ public final class NarrowEscape extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public NarrowEscape (final NarrowEscape card) {
+    private NarrowEscape(final NarrowEscape card) {
         super(card);
     }
 

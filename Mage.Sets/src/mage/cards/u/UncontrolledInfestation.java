@@ -28,7 +28,7 @@ public final class UncontrolledInfestation extends CardImpl {
         TargetPermanent auraTarget = new TargetNonBasicLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When enchanted land becomes tapped, destroy it.
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), "enchanted land"));

@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenAttachSourceEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -17,7 +18,9 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.permanent.token.ZombieBerserkerToken;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -38,11 +41,14 @@ public final class DraugrsHelm extends CardImpl {
 
         // Equipped creature gets +2/+2 and has menace.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
-        ability.addEffect(new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT).setText("and has menace"));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                new MenaceAbility(true),
+                AttachmentType.EQUIPMENT).setText("and has menace. " +
+                "<i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private DraugrsHelm(final DraugrsHelm card) {

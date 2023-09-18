@@ -42,7 +42,7 @@ public final class MercilessJavelineer extends CardImpl {
                                 CounterType.M1M1.createInstance(),
                                 StaticValue.get(1),
                                 Outcome.Removal),
-                        new ManaCostsImpl("{2}"));
+                        new ManaCostsImpl<>("{2}"));
         ability.addEffect(
                 new CantBlockTargetEffect(Duration.EndOfTurn)
                         .setText("That creature can't block this turn."));

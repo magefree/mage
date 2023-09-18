@@ -29,7 +29,6 @@ public final class MoonscarredWerewolf extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         this.addAbility(VigilanceAbility.getInstance());
 

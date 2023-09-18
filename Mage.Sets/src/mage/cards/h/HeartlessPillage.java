@@ -7,7 +7,6 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetOpponent;
@@ -29,9 +28,9 @@ public final class HeartlessPillage extends CardImpl {
 
         // Raid — If you attacked with a creature this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new TreasureToken()),
-                RaidCondition.instance,
-                "<br/><br/><i>Raid</i> &mdash; If you attacked this turn, create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\""));
+                new CreateTokenEffect(new TreasureToken()), RaidCondition.instance,
+                "<br/><br/><i>Raid</i> &mdash; If you attacked this turn, create a Treasure token"
+        ));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
         this.getSpellAbility().addHint(RaidHint.instance);
     }

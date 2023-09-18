@@ -44,7 +44,7 @@ public final class PrismaticStrands extends CardImpl {
         this.getSpellAbility().addEffect(new PrismaticStrandsEffect());
 
         // Flashback-Tap an untapped white creature you control.
-        this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
     private PrismaticStrands(final PrismaticStrands card) {
@@ -64,7 +64,7 @@ class PrismaticStrandsEffect extends OneShotEffect {
         this.staticText = "Prevent all damage that sources of the color of your choice would deal this turn";
     }
 
-    PrismaticStrandsEffect(final PrismaticStrandsEffect effect) {
+    private PrismaticStrandsEffect(final PrismaticStrandsEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class PrismaticStrandsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             ChoiceColor choice = new ChoiceColor();
             controller.choose(Outcome.PreventDamage, choice, game);
@@ -101,7 +101,7 @@ class PrismaticStrandsPreventionEffect extends PreventionEffectImpl {
         this.color = color;
     }
 
-    PrismaticStrandsPreventionEffect(PrismaticStrandsPreventionEffect effect) {
+    private PrismaticStrandsPreventionEffect(final PrismaticStrandsPreventionEffect effect) {
         super(effect);
         this.color = effect.color;
     }

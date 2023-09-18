@@ -1,5 +1,7 @@
 package org.mage.plugins.card.utils;
 
+import mage.abilities.icon.CardIconColor;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -77,7 +79,7 @@ public interface ImageManager {
 
     Image getToggleRecordMacroButtonImage();
 
-    BufferedImage getCardIcon(String resourceName, int size);
+    BufferedImage getCardIcon(String resourceName, int size, CardIconColor cardIconColor);
 
     Image getPhaseImage(String phase);
 }

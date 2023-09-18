@@ -10,8 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -24,16 +24,13 @@ import mage.abilities.condition.common.SourceRemainsInZoneCondition;
  */
 public final class TheAkroanWar extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterOpponentsCreaturePermanent("creatures your opponents control");
-
     public TheAkroanWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Gain control of target creature for as long as The Akroan War remains on the battlefield.
         sagaAbility.addChapterEffect(
@@ -51,9 +48,7 @@ public final class TheAkroanWar extends CardImpl {
         sagaAbility.addChapterEffect(
                 this,
                 SagaChapter.CHAPTER_II,
-                new AttacksIfAbleAllEffect(
-                        filter, Duration.UntilYourNextTurn, true
-                )
+                new AttacksIfAbleAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.UntilYourNextTurn)
         );
 
         // III — Each tapped creature deals damage to itself equal to its power.

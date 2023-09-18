@@ -51,7 +51,7 @@ public final class SwordOfVengeance extends CardImpl {
         this.addAbility(ability);
 
         // Equip 3
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
     }
 
     protected SwordOfVengeance(SwordOfVengeance me) {

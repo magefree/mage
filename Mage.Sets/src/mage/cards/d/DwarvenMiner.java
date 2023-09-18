@@ -28,7 +28,7 @@ public final class DwarvenMiner extends CardImpl {
         this.toughness = new MageInt(2);
         
         // {2}{R}, {tap}: Destroy target nonbasic land
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);

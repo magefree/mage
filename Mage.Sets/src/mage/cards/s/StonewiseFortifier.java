@@ -35,7 +35,7 @@ public final class StonewiseFortifier extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {4}{W}: Prevent all damage that would be dealt to Stonewise Fortifier by target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StonewiseFortifierPreventAllDamageToEffect(), new ManaCostsImpl("{4}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StonewiseFortifierPreventAllDamageToEffect(), new ManaCostsImpl<>("{4}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -57,7 +57,7 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to {this} by target creature this turn";
     }
 
-    public StonewiseFortifierPreventAllDamageToEffect(final StonewiseFortifierPreventAllDamageToEffect effect) {
+    private StonewiseFortifierPreventAllDamageToEffect(final StonewiseFortifierPreventAllDamageToEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
         if (!game.replaceEvent(preventEvent)) {
             int preventedDamage = event.getAmount();
             MageObject damageSource = game.getObject(event.getSourceId());
-            MageObject preventionSource = game.getObject(source.getSourceId());
+            MageObject preventionSource = game.getObject(source);
             if (damageSource != null && preventionSource != null) {
                 String message = " damage from " +
                         damageSource.getName() + " prevented " +

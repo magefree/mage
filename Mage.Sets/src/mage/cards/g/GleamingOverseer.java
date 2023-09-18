@@ -26,7 +26,7 @@ public final class GleamingOverseer extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "Zombie tokens");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public GleamingOverseer(UUID ownerId, CardSetInfo setInfo) {
@@ -38,7 +38,7 @@ public final class GleamingOverseer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Gleaming Overseer enters the battlefield, amass 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1, SubType.ZOMBIE)));
 
         // Zombie tokens you control have hexproof and menace.
         Ability ability = new SimpleStaticAbility(new GainAbilityControlledEffect(

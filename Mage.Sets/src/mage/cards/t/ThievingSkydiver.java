@@ -38,9 +38,9 @@ public final class ThievingSkydiver extends CardImpl {
 
         // Kicker {X}. X can't be 0.
         KickerAbility kickerAbility = new KickerAbility("{X}");
-        kickerAbility.getKickerCosts().stream().forEach(cost -> {
+        kickerAbility.getKickerCosts().forEach(cost -> {
             cost.setMinimumCost(1);
-            cost.setReminderText(". X can't be 0.");
+            cost.setReminderText(". X can't be 0. <i>(You may pay an additional {X} as you cast this spell.)</i>");
         });
         this.addAbility(kickerAbility);
 
@@ -50,7 +50,7 @@ public final class ThievingSkydiver extends CardImpl {
         // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with converted mana cost X or less. If that artifact is an Equipment, attach it to Thieving Skydiver.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.Custom), false),
-                KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
                 "gain control of target artifact with mana value X or less. " +
                 "If that artifact is an Equipment, attach it to {this}."
         );
@@ -109,7 +109,7 @@ class ThievingSkydiverEffect extends OneShotEffect {
                 || !artifact.hasSubtype(SubType.EQUIPMENT, game)) {
             return false;
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         permanent.addAttachment(artifact.getId(), source, game);
         return true;
     }

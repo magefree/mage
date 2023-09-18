@@ -11,10 +11,7 @@ import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.SubType;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -40,7 +37,7 @@ public final class HeartlashCinder extends CardImpl {
         effect.setText("it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control");
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 effect, false)
-                .withFlavorWord("Chroma")
+                .setAbilityWord(AbilityWord.CHROMA)
                 .addHint(new ValueHint("Red mana symbols in your permanents", xValue))
         );
     }

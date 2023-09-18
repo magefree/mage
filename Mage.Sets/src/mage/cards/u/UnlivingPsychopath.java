@@ -63,11 +63,11 @@ public final class UnlivingPsychopath extends CardImpl {
     }
 }
 
-class UnlivingPsychopathPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class UnlivingPsychopathPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
         return sourcePermanent != null && input.getObject().getPower().getValue() < sourcePermanent.getPower().getValue();
     }
 

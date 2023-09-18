@@ -54,7 +54,7 @@ class ControlsAnotherArtifactCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         List<Permanent> controlledArtifacts = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), game);
         for (Permanent permanent : controlledArtifacts) {
-            if (!permanent.getId().equals(game.getObject(source.getSourceId()).getId())) {
+            if (!permanent.getId().equals(game.getObject(source).getId())) {
                 return true;
             }
         }

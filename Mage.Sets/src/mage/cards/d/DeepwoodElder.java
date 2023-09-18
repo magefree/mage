@@ -39,7 +39,7 @@ public final class DeepwoodElder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {X}{G}{G}, {tap}, Discard a card: X target lands become Forests until end of turn.
-        Ability ability = new SimpleActivatedAbility(new DeepwoodElderEffect(), new ManaCostsImpl("{X}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DeepwoodElderEffect(), new ManaCostsImpl<>("{X}{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
@@ -64,7 +64,7 @@ class DeepwoodElderEffect extends OneShotEffect {
         this.staticText = "X target lands become Forests until end of turn";
     }
 
-    DeepwoodElderEffect(final DeepwoodElderEffect effect) {
+    private DeepwoodElderEffect(final DeepwoodElderEffect effect) {
         super(effect);
     }
 

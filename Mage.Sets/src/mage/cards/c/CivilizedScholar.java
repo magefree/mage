@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -12,7 +11,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.h.HomicidalBruteWatcher;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -31,7 +29,6 @@ public final class CivilizedScholar extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.h.HomicidalBrute.class;
 
         this.power = new MageInt(0);
@@ -39,7 +36,7 @@ public final class CivilizedScholar extends CardImpl {
 
         // {tap}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CivilizedScholarEffect(), new TapSourceCost()));
-        this.addAbility(new TransformAbility(), new HomicidalBruteWatcher());
+        this.addAbility(new TransformAbility());
     }
 
     private CivilizedScholar(final CivilizedScholar card) {
@@ -80,7 +77,7 @@ class CivilizedScholarEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     permanent.untap(game);
-                    permanent.transform(game);
+                    permanent.transform(source, game);
                 }
             }
             return true;

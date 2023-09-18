@@ -1,14 +1,11 @@
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class LlanowarElvesToken extends TokenImpl {
@@ -24,11 +21,9 @@ public final class LlanowarElvesToken extends TokenImpl {
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
-
-        availableImageSetCodes = Arrays.asList("TSR");
     }
 
-    public LlanowarElvesToken(final LlanowarElvesToken token) {
+    protected LlanowarElvesToken(final LlanowarElvesToken token) {
         super(token);
     }
 

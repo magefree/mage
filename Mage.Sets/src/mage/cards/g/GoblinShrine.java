@@ -47,7 +47,7 @@ public final class GoblinShrine extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.
@@ -83,7 +83,7 @@ class EnchantedPermanentSubtypeCondition implements Condition {
         if (enchantment != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
-                return filter.match(permanent, source.getSourceId(), enchantment.getControllerId(), game);
+                return filter.match(permanent, enchantment.getControllerId(), source, game);
                 }
             }
         return false;

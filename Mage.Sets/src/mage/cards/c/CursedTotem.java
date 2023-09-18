@@ -42,7 +42,7 @@ class CursedTotemCantActivateEffect extends RestrictionEffect {
         staticText = "Activated abilities of creatures can't be activated";
     }
 
-    public CursedTotemCantActivateEffect(final CursedTotemCantActivateEffect effect) {
+    private CursedTotemCantActivateEffect(final CursedTotemCantActivateEffect effect) {
         super(effect);
     }
 

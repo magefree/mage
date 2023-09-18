@@ -28,10 +28,10 @@ public final class DuskUrchins extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Dusk Urchins attacks or blocks, put a -1/-1 counter on it.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()).setText("put a -1/-1 counter on it"), false));
 
         // When Dusk Urchins dies, draw a card for each -1/-1 counter on it.
-        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.M1M1))));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.M1M1)).setText("draw a card for each -1/-1 counter on it")));
 
     }
 

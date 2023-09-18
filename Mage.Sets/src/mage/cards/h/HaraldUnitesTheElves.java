@@ -39,7 +39,7 @@ public final class HaraldUnitesTheElves extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Mill three cards. You may put an Elf or Tyvar card from your graveyard onto the battlefield.
         sagaAbility.addChapterEffect(
@@ -105,7 +105,7 @@ class HaraldUnitesTheElvesEffect extends OneShotEffect {
         }
         player.millCards(3, source, game);
         TargetCard targetCard = new TargetCardInYourGraveyard(0, 1, filter, true);
-        player.choose(outcome, targetCard, source.getSourceId(), game);
+        player.choose(outcome, targetCard, source, game);
         Card card = player.getGraveyard().get(targetCard.getFirstTarget(), game);
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);

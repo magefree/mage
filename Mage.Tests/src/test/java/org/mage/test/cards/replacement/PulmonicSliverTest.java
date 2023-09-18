@@ -26,7 +26,7 @@ public class PulmonicSliverTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade");
         addTarget(playerB, "Venom Sliver");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         
@@ -50,8 +50,8 @@ public class PulmonicSliverTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
         
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Damnation");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
         
@@ -79,7 +79,7 @@ public class PulmonicSliverTest extends CardTestPlayerBase {
         
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Path to Exile");
         addTarget(playerB, "Venom Sliver");
-        setChoice(playerA, "Yes"); // should not even have this as a choice
+        setChoice(playerA, true); // should not even have this as a choice
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
         

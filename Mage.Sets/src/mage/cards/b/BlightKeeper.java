@@ -35,7 +35,7 @@ public final class BlightKeeper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {7}{B}, {T}, Sacrifice Blight Keeper: Target opponent loses 4 life and you gain 4 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), new ManaCostsImpl("{7}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), new ManaCostsImpl<>("{7}{B}"));
         ability.addEffect(new GainLifeEffect(4).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         ability.addCost(new TapSourceCost());

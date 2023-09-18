@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -35,9 +34,9 @@ public final class SaheeliTheGifted extends CardImpl {
     public SaheeliTheGifted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAHEELI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Create a 1/1 colorless Servo artifact creature token.
         this.addAbility(new LoyaltyAbility(
@@ -133,7 +132,7 @@ class SaheeliTheGiftedTokenEffect extends OneShotEffect {
                 + "Exile those tokens at the beginning of the next end step.";
     }
 
-    public SaheeliTheGiftedTokenEffect(final SaheeliTheGiftedTokenEffect effect) {
+    private SaheeliTheGiftedTokenEffect(final SaheeliTheGiftedTokenEffect effect) {
         super(effect);
     }
 

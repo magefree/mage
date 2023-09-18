@@ -45,14 +45,14 @@ class RhysticScryingEffect extends OneShotEffect {
         this.staticText = "Then if any player pays {2}, discard three cards";
     }
 
-    public RhysticScryingEffect(final RhysticScryingEffect effect) {
+    private RhysticScryingEffect(final RhysticScryingEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             boolean result = true;
             boolean doEffect = false;

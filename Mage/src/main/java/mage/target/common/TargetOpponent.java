@@ -1,29 +1,30 @@
-
 package mage.target.common;
 
 import mage.filter.FilterOpponent;
+import mage.filter.FilterPlayer;
 import mage.target.TargetPlayer;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
 public class TargetOpponent extends TargetPlayer {
 
+    private static final FilterOpponent filter = new FilterOpponent();
+
     public TargetOpponent() {
         this(false);
     }
-    
+
     public TargetOpponent(boolean notTarget) {
-        this(new FilterOpponent(), notTarget);        
-    }
-    
-    public TargetOpponent(FilterOpponent filter, boolean notTarget) {
-        super(1, 1, notTarget, filter);
+        this(1, 1, notTarget);
     }
 
-    public TargetOpponent(final TargetOpponent target) {
+    public TargetOpponent(int minNumTargets, int maxNumTargets, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, notTarget, filter);
+    }
+
+    private TargetOpponent(final TargetOpponent target) {
         super(target);
     }
 

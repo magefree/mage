@@ -35,7 +35,7 @@ public final class Earthbind extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and Earthbind gains "Enchanted creature loses flying."
@@ -63,7 +63,7 @@ class EarthbindEffect extends OneShotEffect {
         staticText = "if enchanted creature has flying, {this} deals 2 damage to that creature and Earthbind gains \"Enchanted creature loses flying.\"";
     }
 
-    public EarthbindEffect(final EarthbindEffect effect) {
+    private EarthbindEffect(final EarthbindEffect effect) {
         super(effect);
     }
 

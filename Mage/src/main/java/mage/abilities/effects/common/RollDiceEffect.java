@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -12,7 +11,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author spjspj
  */
 public class RollDiceEffect extends OneShotEffect {
@@ -30,7 +28,7 @@ public class RollDiceEffect extends OneShotEffect {
         this.numSides = numSides;
     }
 
-    public RollDiceEffect(final RollDiceEffect effect) {
+    protected RollDiceEffect(final RollDiceEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.numSides = effect.numSides;
@@ -45,9 +43,9 @@ public class RollDiceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && mageObject != null) {
-            controller.rollDice(source, game, numSides);
+            controller.rollDice(outcome, source, game, numSides);
             return true;
         }
         return false;
@@ -58,8 +56,7 @@ public class RollDiceEffect extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("Roll a " + numSides + " sided dice");
-        return sb.toString();
+        return "Roll a " + numSides + " sided die";
     }
 
     @Override

@@ -26,15 +26,18 @@ public class Historic extends Constructed {
         // Additional sets
         setCodes.add("JMP"); // Jumpstart (replacements below)
         setCodes.add("STA"); // Strixhaven Mystical Archive
+        setCodes.add("J21"); // Jumpstart: Historic Horizons
 
         // Regular ban list
         banned.add("Agent of Treachery");
+        banned.add("Brainstorm");
         banned.add("Channel");
         banned.add("Counterspell");
         banned.add("Dark Ritual");
         banned.add("Demonic Tutor");
         banned.add("Fires of Invention");
         banned.add("Lightning Bolt");
+        banned.add("Memory Lapse");
         banned.add("Natural Order");
         banned.add("Nexus of Fate");
         banned.add("Oko, Thief of Crowns");
@@ -43,6 +46,7 @@ public class Historic extends Constructed {
         banned.add("Swords to Plowshares");
         banned.add("Teferi, Time Raveler");
         banned.add("Thassa's Oracle");
+        banned.add("Tibalt's Trickery");
         banned.add("Time Warp");
         banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Veil of Summer");

@@ -36,7 +36,7 @@ public final class CurseOfVitality extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfVitalityEffect()));
@@ -59,7 +59,7 @@ class CurseOfVitalityEffect extends OneShotEffect {
         this.staticText = "gain 2 life. Each opponent attacking that player does the same.";
     }
 
-    CurseOfVitalityEffect(final CurseOfVitalityEffect effect) {
+    private CurseOfVitalityEffect(final CurseOfVitalityEffect effect) {
         super(effect);
     }
 

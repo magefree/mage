@@ -20,6 +20,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -41,6 +42,7 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
 import java.util.*;
@@ -147,6 +149,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int damage(int damage, Ability source, Game game) {
+        return 0;
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
         return 0;
     }
@@ -177,13 +184,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setCanPayLifeCost(boolean canPayLifeCost) {
-
+    public void setPayLifeCostLevel(PayLifeCostLevel playLifeCostLevel) {
     }
 
     @Override
-    public boolean getCanPayLifeCost() {
-        return false;
+    public PayLifeCostLevel getPayLifeCostLevel() {
+        return PayLifeCostLevel.none;
     }
 
     @Override
@@ -236,6 +242,16 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
+        return false;
+    }
+
+    @Override
     public List<AlternativeSourceCosts> getAlternativeSourceCosts() {
         return null;
     }
@@ -243,6 +259,14 @@ public class PlayerStub implements Player {
     @Override
     public Cards getHand() {
         return null;
+    }
+
+    @Override
+    public void incrementLandsPlayed() {
+    }
+
+    @Override
+    public void resetLandsPlayed() {
     }
 
     @Override
@@ -257,16 +281,6 @@ public class PlayerStub implements Player {
 
     @Override
     public void setLandsPerTurn(int landsPerTurn) {
-
-    }
-
-    @Override
-    public int getLoyaltyUsePerTurn() {
-        return 0;
-    }
-
-    @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
 
     }
 
@@ -451,7 +465,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
 
     }
 
@@ -546,11 +560,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean putInHand(Card card, Game game) {
-        return false;
-    }
-
-    @Override
     public boolean removeFromHand(Card card, Game game) {
         return false;
     }
@@ -586,6 +595,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean seekCard(FilterCard filter, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
     }
 
@@ -595,7 +609,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming, ApprovingObject approvingObject) {
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
         return false;
     }
 
@@ -630,22 +644,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
-        return false;
-    }
-
-    @Override
     public boolean flipCoinResult(Game game) {
         return false;
     }
 
     @Override
-    public int rollDice(Ability source, Game game, int numSides) {
-        return 1;
+    public List<Integer> rollDice(Outcome outcome, Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount) {
+        return null;
     }
 
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
+    public int rollDieResult(int sides, Game game) {
         return 1;
     }
 
@@ -825,17 +834,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         return false;
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         return false;
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         return false;
     }
 
@@ -975,7 +984,8 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         return null;
     }
 
@@ -1140,6 +1150,16 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void setBufferTimeLeft(int timeLeft) {
+
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return 0;
+    }
+
+    @Override
     public void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving) {
 
     }
@@ -1201,6 +1221,11 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean moveCardToHandWithInfo(Card card, Ability source, Game game, boolean withName) {
+        return false;
+    }
+
+    @Override
+    public boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName) {
         return false;
     }
 
@@ -1360,23 +1385,13 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public List<UUID> getTurnControllers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -1425,8 +1440,26 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public Permanent getRingBearer(Game game) {
+        return null;
+    }
+
+    @Override
+    public void chooseRingBearer(Game game) {
+    }
+
+    @Override
+    public UserData getControllingPlayersUserData(Game game) {
+        return null;
+    }
+
+    @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         return card.getSpellAbility();
     }
 
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
+    }
 }

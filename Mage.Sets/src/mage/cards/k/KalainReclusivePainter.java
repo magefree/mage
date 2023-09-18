@@ -27,7 +27,7 @@ public final class KalainReclusivePainter extends CardImpl {
     public KalainReclusivePainter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.BARD);
@@ -38,7 +38,7 @@ public final class KalainReclusivePainter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // Other creatures you control enter the battlefield with an additional +1/+1 counter on them for each mana from a Treasure spent to cast them.
-        this.addAbility(new SimpleStaticAbility(new KalainReclusivePainterEffect()), new ManaPaidSourceWatcher());
+        this.addAbility(new SimpleStaticAbility(new KalainReclusivePainterEffect()));
     }
 
     private KalainReclusivePainter(final KalainReclusivePainter card) {

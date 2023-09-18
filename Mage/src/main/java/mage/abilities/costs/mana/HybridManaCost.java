@@ -1,14 +1,14 @@
-
 package mage.abilities.costs.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HybridManaCost extends ManaCostImpl {
 
@@ -50,7 +50,7 @@ public class HybridManaCost extends ManaCostImpl {
 
     @Override
     public String getText() {
-        return '{' + mana1.toString() + '/' + mana2.toString() + '}';
+        return '{' + mana1.toString() + '/' + mana2.toString() + (this.phyrexian ? "/P" : "") + '}';
     }
 
     @Override
@@ -62,37 +62,37 @@ public class HybridManaCost extends ManaCostImpl {
     public boolean testPay(Mana testMana) {
         switch (mana1) {
             case B:
-                if (testMana.getBlack() > 0) {
+                if (testMana.getBlack() > 0 || testMana.getAny() > 0) {
                     return true;
                 }
             case U:
-                if (testMana.getBlue() > 0) {
+                if (testMana.getBlue() > 0 || testMana.getAny() > 0) {
                     return true;
                 }
             case R:
-                if (testMana.getRed() > 0) {
+                if (testMana.getRed() > 0 || testMana.getAny() > 0) {
                     return true;
                 }
             case W:
-                if (testMana.getWhite() > 0) {
+                if (testMana.getWhite() > 0 || testMana.getAny() > 0) {
                     return true;
                 }
             case G:
-                if (testMana.getGreen() > 0) {
+                if (testMana.getGreen() > 0 || testMana.getAny() > 0) {
                     return true;
                 }
         }
         switch (mana2) {
             case B:
-                return testMana.getBlack() > 0;
+                return testMana.getBlack() > 0 || testMana.getAny() > 0;
             case U:
-                return testMana.getBlue() > 0;
+                return testMana.getBlue() > 0 || testMana.getAny() > 0;
             case R:
-                return testMana.getRed() > 0;
+                return testMana.getRed() > 0 || testMana.getAny() > 0;
             case W:
-                return testMana.getWhite() > 0;
+                return testMana.getWhite() > 0 || testMana.getAny() > 0;
             case G:
-                return testMana.getGreen() > 0;
+                return testMana.getGreen() > 0 || testMana.getAny() > 0;
         }
         return false;
     }

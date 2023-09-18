@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -13,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ExileSourceEffect extends OneShotEffect {
@@ -25,10 +25,9 @@ public class ExileSourceEffect extends OneShotEffect {
     }
 
     /**
-     *
      * @param toUniqueExileZone moves the card to a source object dependant
-     * unique exile zone, so another effect of the same source object (e.g.
-     * Deadeye Navigator) can identify the card
+     *                          unique exile zone, so another effect of the same source object (e.g.
+     *                          Deadeye Navigator) can identify the card
      */
     public ExileSourceEffect(boolean toUniqueExileZone) {
         super(Outcome.Exile);
@@ -36,7 +35,7 @@ public class ExileSourceEffect extends OneShotEffect {
         this.toUniqueExileZone = toUniqueExileZone;
     }
 
-    public ExileSourceEffect(final ExileSourceEffect effect) {
+    protected ExileSourceEffect(final ExileSourceEffect effect) {
         super(effect);
         this.toUniqueExileZone = effect.toUniqueExileZone;
     }

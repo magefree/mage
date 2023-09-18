@@ -52,7 +52,7 @@ class PainiacEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. {this} gets +X/+0 until end of turn, where X is the result";
     }
 
-    public PainiacEffect(final PainiacEffect effect) {
+    private PainiacEffect(final PainiacEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class PainiacEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
             game.addEffect(new BoostSourceEffect(amount, 0, Duration.EndOfTurn), source);
             return true;
         }

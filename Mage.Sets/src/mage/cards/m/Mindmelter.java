@@ -36,7 +36,7 @@ public final class Mindmelter extends CardImpl {
 
         // {3}{C}: Target opponent exiles a card from their hand. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.HAND, false), new ManaCostsImpl("{3}{C}")
+                Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.HAND, false), new ManaCostsImpl<>("{3}{C}")
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

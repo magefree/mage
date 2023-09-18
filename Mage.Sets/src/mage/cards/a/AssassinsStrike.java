@@ -48,7 +48,7 @@ class AssassinsStrikeEffect extends OneShotEffect {
         this.staticText = "Its controller discards a card";
     }
 
-    public AssassinsStrikeEffect(final AssassinsStrikeEffect effect) {
+    private AssassinsStrikeEffect(final AssassinsStrikeEffect effect) {
         super(effect);
     }
 

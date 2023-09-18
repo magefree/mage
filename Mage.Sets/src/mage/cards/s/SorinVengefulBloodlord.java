@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.Cost;
@@ -37,9 +36,9 @@ public final class SorinVengefulBloodlord extends CardImpl {
     public SorinVengefulBloodlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // As long as it's your turn, creatures and planeswalkers you control have lifelink.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

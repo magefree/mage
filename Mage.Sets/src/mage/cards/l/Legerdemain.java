@@ -55,7 +55,7 @@ public final class Legerdemain extends CardImpl {
     }
 }
 
-class SharesTypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
+class SharesTypePredicate implements ObjectSourcePlayerPredicate<MageItem> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {

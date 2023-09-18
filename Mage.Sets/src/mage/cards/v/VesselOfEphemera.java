@@ -26,7 +26,7 @@ public final class VesselOfEphemera extends CardImpl {
         // {2}{W}, Sacrifice Vessel of Ephemera: Create two 1/1 white Spirit creature tokens with flying.
         Effect effect = new CreateTokenEffect(new SpiritWhiteToken(), 2);
         effect.setText("Create two 1/1 white Spirit creature tokens with flying");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

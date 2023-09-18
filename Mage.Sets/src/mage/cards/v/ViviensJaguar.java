@@ -41,7 +41,7 @@ public final class ViviensJaguar extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{2}{G}"),
+                new ManaCostsImpl<>("{2}{G}"),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "{2}{G}: Return {this} from your graveyard to your hand. "
                 + "Activate only if you control a Vivien planeswalker."

@@ -26,7 +26,8 @@ public class SilverfurPartisanTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Enlarge", 1); // {3}{G}{G} sorcery: Target creature gets +7/+7 and gains trample until end of turn. 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Silverfur Partisan");  
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Silverfur Partisan");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enlarge", "Howlpack Wolf");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();        
@@ -35,7 +36,7 @@ public class SilverfurPartisanTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Enlarge", 1);
         assertPowerToughness(playerA, "Silverfur Partisan", 5, 5); // +3+3 from Giant Growth
         assertPowerToughness(playerA, "Howlpack Wolf", 10, 10); // +7+7 from Enlarge
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
     }
     
     /**
@@ -55,6 +56,7 @@ public class SilverfurPartisanTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 6);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Howlpack Wolf");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Arrow Storm", "Silverfur Partisan");
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -63,6 +65,6 @@ public class SilverfurPartisanTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Arrow Storm", 1);
         assertGraveyardCount(playerA, "Howlpack Wolf", 1);
         assertGraveyardCount(playerA, "Silverfur Partisan", 1);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
     }
 }

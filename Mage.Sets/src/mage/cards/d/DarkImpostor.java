@@ -39,7 +39,7 @@ public final class DarkImpostor extends CardImpl {
 
         // {4}{B}{B}: Exile target creature and put a +1/+1 counter on Dark Impostor.
         Ability ability = new SimpleActivatedAbility(
-                new DarkImpostorExileTargetEffect(), new ManaCostsImpl("{4}{B}{B}")
+                new DarkImpostorExileTargetEffect(), new ManaCostsImpl<>("{4}{B}{B}")
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 .setText("and put a +1/+1 counter on {this}"));
@@ -83,12 +83,8 @@ class DarkImpostorExileTargetEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent == null) {
-            return player.moveCards(permanent, Zone.EXILED, source, game);
-        }
         return player.moveCardsToExile(
-                permanent, source, game, true, CardUtil.getExileZoneId(game, source), sourcePermanent.getIdName()
+                permanent, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
     }
 }

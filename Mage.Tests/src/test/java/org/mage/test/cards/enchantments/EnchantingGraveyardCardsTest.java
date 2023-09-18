@@ -72,9 +72,9 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         // Lightning Bolt deals 3 damage to any target.
         addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt", 1); // Instant  {R}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloak of Feathers", "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // play the L. Bold
+        setChoice(playerA, true); // play the L. Bold
         addTarget(playerA, playerB); // Add Target for the L. Bold
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -118,9 +118,9 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         // Lightning Bolt deals 3 damage to any target.
         addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt", 1); // Instant  {R}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloak of Feathers", "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // play the L. Bold
+        setChoice(playerA, true); // play the L. Bold
         addTarget(playerA, playerB); // Add Target for the L. Bold
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

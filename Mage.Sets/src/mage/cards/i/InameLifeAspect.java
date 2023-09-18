@@ -35,7 +35,7 @@ public final class InameLifeAspect extends CardImpl {
 
     public InameLifeAspect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(4);
@@ -64,7 +64,7 @@ class InameLifeAspectEffect extends OneShotEffect {
         this.staticText = "you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand";
     }
 
-    public InameLifeAspectEffect(final InameLifeAspectEffect effect) {
+    private InameLifeAspectEffect(final InameLifeAspectEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class InameLifeAspectEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit cards?", source, game)) {
                 Effect effect = new ReturnToHandTargetEffect();

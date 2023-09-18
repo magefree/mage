@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -16,11 +14,12 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class ScrapheapScrounger extends CardImpl {
@@ -28,7 +27,7 @@ public final class ScrapheapScrounger extends CardImpl {
     private static final FilterCard filter = new FilterCreatureCard("another creature card");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ScrapheapScrounger(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +40,7 @@ public final class ScrapheapScrounger extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // {1}{B}, Exile another creature card from your graveyard: Return Scrapheap Scrounger from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
         this.addAbility(ability);
     }

@@ -20,13 +20,13 @@ public final class EmmaraTandris extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature tokens you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public EmmaraTandris(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
 

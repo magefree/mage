@@ -30,7 +30,7 @@ public final class AmphinPathmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{U}: Target creature can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

@@ -9,16 +9,16 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author Styxo
  */
 public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesMonstrousTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a creature you control becomes monstrous, ");
     }
 
-    public BecomesMonstrousTriggeredAbility(final BecomesMonstrousTriggeredAbility ability) {
+    protected BecomesMonstrousTriggeredAbility(final BecomesMonstrousTriggeredAbility ability) {
         super(ability);
     }
 
@@ -41,10 +41,5 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control becomes monstrous, " ;
     }
 }

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -16,15 +14,13 @@ public final class WeirdToken2 extends TokenImpl {
     }
 
     public WeirdToken2(int xValue) {
-        super("Weird", "X/X blue and red Weird creature token");
+        super("Weird Token", "X/X blue and red Weird creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setRed(true);
         subtype.add(SubType.WEIRD);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
-
-        availableImageSetCodes = Arrays.asList("M21");
     }
 
     private WeirdToken2(final WeirdToken2 token) {

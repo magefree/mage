@@ -11,8 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,12 +19,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class IsperiasSkywatch extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
- 
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
     
     public IsperiasSkywatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
@@ -41,7 +34,7 @@ public final class IsperiasSkywatch extends CardImpl {
         // When Isperia's Skywatch enters the battlefield, detain target creature an opponent controls.
         // (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new DetainTargetEffect());
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+        TargetCreaturePermanent target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);
     }

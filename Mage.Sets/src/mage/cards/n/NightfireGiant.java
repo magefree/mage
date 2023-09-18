@@ -23,11 +23,10 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class NightfireGiant extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a Mountain");
+    private static final FilterPermanent filter = new FilterPermanent("Mountain");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-
     }
 
     public NightfireGiant(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +41,7 @@ public final class NightfireGiant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
 
         // {4}{R}: Nightfire Giant deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{4}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{4}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 

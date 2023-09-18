@@ -20,8 +20,8 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
@@ -65,7 +65,7 @@ public final class FrostpyreArcanist extends CardImpl {
 
         // When Frostpyre Arcanist enters the battlefield, search your library for an instant or sorcery card with the same name as a card in your graveyard, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter2), true, true
+                new TargetCardInLibrary(filter2), true
         )));
     }
 
@@ -79,11 +79,11 @@ public final class FrostpyreArcanist extends CardImpl {
     }
 }
 
-enum FrostpyreArcanistPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
+enum FrostpyreArcanistPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
-    public boolean apply(ObjectPlayer<Card> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         Player player = game.getPlayer(input.getPlayerId());
         if (player == null || player.getGraveyard().isEmpty()) {
             return false;

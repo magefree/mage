@@ -31,7 +31,7 @@ public final class Abeyance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Abeyance(final Abeyance card) {
@@ -68,7 +68,7 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast instant or sorcery spells or activate abilities "
                     + "that aren't mana abilities this turn (" + mageObject.getIdName() + ").";

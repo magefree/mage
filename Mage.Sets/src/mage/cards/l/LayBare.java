@@ -48,7 +48,7 @@ class LayBareEffect extends OneShotEffect {
         staticText = "Look at its controller's hand";
     }
 
-    public LayBareEffect(final LayBareEffect effect) {
+    private LayBareEffect(final LayBareEffect effect) {
         super(effect);
     }
 

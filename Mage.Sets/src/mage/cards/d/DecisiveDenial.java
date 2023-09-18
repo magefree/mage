@@ -25,7 +25,8 @@ public final class DecisiveDenial extends CardImpl {
         // Choose one —
         // • Target creature you control fights target creature you don't control.
         this.getSpellAbility().addEffect(new FightTargetsEffect()
-                .setText("target creature you control fights target creature you don't control"));
+                .setText("target creature you control fights target creature you don't control. " +
+                        "<i>(Each deals damage equal to its power to the other.)</i>"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
 

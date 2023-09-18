@@ -30,12 +30,12 @@ public final class ThrashingMudspawn extends CardImpl {
 
         // Whenever Thrashing Mudspawn is dealt damage, you lose that much life.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                new ThrashingMudspawnEffect(), false, false, true
+                new ThrashingMudspawnEffect(), false, false
         );
         this.addAbility(ability);
 
         // Morph {1}{B}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{B}{B}")));
 
     }
 
@@ -56,7 +56,7 @@ class ThrashingMudspawnEffect extends OneShotEffect {
         this.staticText = "you lose that much life";
     }
 
-    public ThrashingMudspawnEffect(final ThrashingMudspawnEffect effect) {
+    private ThrashingMudspawnEffect(final ThrashingMudspawnEffect effect) {
         super(effect);
     }
 

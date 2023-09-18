@@ -19,9 +19,11 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -64,8 +66,8 @@ class DauthiVoidwalkerReplacementEffect extends ReplacementEffectImpl {
 
     DauthiVoidwalkerReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "if a card would be put into an opponent's graveyard from anywhere, " +
-                "instead exile it with a void counter on it";
+        staticText = "if a card would be put into an opponent's graveyard from anywhere, "
+                + "instead exile it with a void counter on it";
     }
 
     private DauthiVoidwalkerReplacementEffect(final DauthiVoidwalkerReplacementEffect effect) {
@@ -79,16 +81,16 @@ class DauthiVoidwalkerReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Card card = ((ZoneChangeEvent) event).getTarget();
         if (card == null) {
             card = game.getCard(event.getTargetId());
         }
-        if (player == null || card == null) {
+
+        if (controller == null || card == null) {
             return false;
         }
-        player.moveCards(card, Zone.EXILED, source, game);
-        card.addCounters(CounterType.VOID.createInstance(), source.getControllerId(), source, game);
+        CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.VOID.createInstance());
         return true;
     }
 
@@ -100,6 +102,7 @@ class DauthiVoidwalkerReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
+                && !(((ZoneChangeEvent) event).getTarget() instanceof PermanentToken)
                 && game.getOpponents(source.getControllerId()).contains(game.getOwnerId(event.getTargetId()));
     }
 }
@@ -116,8 +119,8 @@ class DauthiVoidwalkerPlayEffect extends OneShotEffect {
 
     DauthiVoidwalkerPlayEffect() {
         super(Outcome.Benefit);
-        staticText = "choose an exiled card an opponent owns with a void counter on it. " +
-                "You may play it this turn without paying its mana cost";
+        staticText = "choose an exiled card an opponent owns with a void counter on it. "
+                + "You may play it this turn without paying its mana cost";
     }
 
     private DauthiVoidwalkerPlayEffect(final DauthiVoidwalkerPlayEffect effect) {
@@ -138,7 +141,7 @@ class DauthiVoidwalkerPlayEffect extends OneShotEffect {
         TargetCardInExile target = new TargetCardInExile(
                 0, 1, filter, null, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;
@@ -146,6 +149,7 @@ class DauthiVoidwalkerPlayEffect extends OneShotEffect {
         game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
                 Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true, false
         ).setTargetPointer(new FixedTarget(card, game)), source);
+        game.informPlayers(player.getLogName() + " chose " + card.getLogName());
         return true;
     }
 }

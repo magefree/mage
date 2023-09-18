@@ -29,12 +29,12 @@ public final class AngelsTomb extends CardImpl {
                 .withColor("W")
                 .withSubType(SubType.ANGEL)
                 .withAbility(FlyingAbility.getInstance()),
-                "", Duration.EndOfTurn)
+                CardType.ARTIFACT, Duration.EndOfTurn)
                 .setText("have {this} become a 3/3 white Angel artifact creature with flying until end of turn");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 effect,
-                StaticFilters.FILTER_PERMANENT_CREATURE_A,
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 true)
         );
     }

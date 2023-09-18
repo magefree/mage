@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -31,7 +32,7 @@ public final class GlacianPowerstoneEngineer extends CardImpl {
     public GlacianPowerstoneEngineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
@@ -94,7 +95,7 @@ class GlacianPowerstoneEngineerEffect extends OneShotEffect {
             return false;
         }
         TargetCard targetCard = new TargetCardInLibrary(1, StaticFilters.FILTER_CARD);
-        player.choose(outcome, cards, targetCard, game);
+        player.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card != null && player.moveCards(card, Zone.HAND, source, game)) {
             cards.remove(card);
@@ -114,7 +115,7 @@ class GlacianPowerstoneEngineerCost extends VariableCostImpl {
     }
 
     GlacianPowerstoneEngineerCost() {
-        super("controlled untapped artifacts you would like to tap");
+        super(VariableCostType.NORMAL, "controlled untapped artifacts you would like to tap");
         this.text = "Tap X untapped artifacts you control";
     }
 
@@ -129,7 +130,7 @@ class GlacianPowerstoneEngineerCost extends VariableCostImpl {
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        return game.getBattlefield().count(filter, source.getControllerId(), source, game);
     }
 
     @Override

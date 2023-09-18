@@ -40,7 +40,7 @@ public final class Flameskull extends CardImpl {
 
         // Rejuvenation — When Flameskull dies, exile it. If you do, exile the top card of your library. Until the end of your next turn, you may play one of those cards.
         this.addAbility(new DiesSourceTriggeredAbility(new FlameskullEffect())
-                .withFlavorWord("Rejuventation"), new FlameskullWatcher());
+                .withFlavorWord("Rejuvenation"), new FlameskullWatcher());
     }
 
     private Flameskull(final Flameskull card) {

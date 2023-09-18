@@ -34,7 +34,7 @@ public final class ConsecrateLand extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted land is indestructible and can't be enchanted by other Auras.
@@ -61,7 +61,7 @@ class ConsecrateLandRuleEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "and can't be enchanted by other Auras";
     }
 
-    public ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
+    private ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
         super(effect);
     }
 

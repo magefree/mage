@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryGraveyardPutInHandEffect;
 import mage.cards.CardImpl;
@@ -11,8 +9,9 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LiberatingCombustion extends CardImpl {
@@ -29,9 +28,9 @@ public final class LiberatingCombustion extends CardImpl {
         // Liberating Combustion deals 6 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+
         // You may search your library and/or graveyard for a card named Chandra, Pyrogenius, reveal it, and put it into your hand. If you search your library this way, shuffle it.
-        this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
+        this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter, false, true));
     }
 
     private LiberatingCombustion(final LiberatingCombustion card) {

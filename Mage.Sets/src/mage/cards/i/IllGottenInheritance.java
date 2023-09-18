@@ -35,7 +35,7 @@ public final class IllGottenInheritance extends CardImpl {
         // {5}{B}, Sacrifice Ill-Gotten Inheritance: It deals 4 damage to target opponent and you gain 4 life.
         ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(4, "it"),
-                new ManaCostsImpl("{5}{B}")
+                new ManaCostsImpl<>("{5}{B}")
         );
         ability.addEffect(new GainLifeEffect(4).concatBy("and"));
         ability.addCost(new SacrificeSourceCost());

@@ -39,7 +39,7 @@ public final class TidalCourier extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
         // {3}{U}: Tidal Courier gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(),
-                Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")));
+                Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")));
     }
 
     private TidalCourier(final TidalCourier card) {

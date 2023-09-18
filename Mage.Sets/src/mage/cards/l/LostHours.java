@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -10,12 +9,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +48,7 @@ class LostHoursEffect extends OneShotEffect {
         this.staticText = "Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top";
     }
 
-    public LostHoursEffect(final LostHoursEffect effect) {
+    private LostHoursEffect(final LostHoursEffect effect) {
         super(effect);
     }
 
@@ -64,8 +64,8 @@ class LostHoursEffect extends OneShotEffect {
         if (targetPlayer != null && controller != null) {
             targetPlayer.revealCards(source, targetPlayer.getHand(), game);
             if (targetPlayer.getHand().size() > 0) {
-                TargetCard target = new TargetCard(Zone.HAND, new FilterCard(StaticFilters.FILTER_CARD_A_NON_LAND));
-                if (controller.choose(Outcome.Discard, targetPlayer.getHand(), target, game)) {
+                TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
+                if (controller.choose(Outcome.Discard, targetPlayer.getHand(), target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         targetPlayer.putCardOnTopXOfLibrary(card, game, source, 3, true);

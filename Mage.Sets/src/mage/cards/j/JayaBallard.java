@@ -2,7 +2,6 @@ package mage.cards.j;
 
 import mage.Mana;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
 import mage.abilities.effects.mana.AddConditionalManaEffect;
@@ -25,9 +24,9 @@ public final class JayaBallard extends CardImpl {
     public JayaBallard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JAYA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Add {R}{R}{R}. Spend this mana only to cast instant or sorcery spells.
         this.addAbility(new LoyaltyAbility(new AddConditionalManaEffect(

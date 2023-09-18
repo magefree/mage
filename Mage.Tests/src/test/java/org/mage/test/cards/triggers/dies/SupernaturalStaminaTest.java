@@ -31,7 +31,7 @@ public class SupernaturalStaminaTest extends CardTestPlayerBase {
         // Shock deals 2 damage to any target.
         addCard(Zone.HAND, playerA, "Shock"); // Instant {R}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Channeler Initiate");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Channeler Initiate", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Supernatural Stamina", "Channeler Initiate");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Shock", "Channeler Initiate");
 

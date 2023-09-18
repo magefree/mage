@@ -39,7 +39,7 @@ public final class PurphorosBronzeBlooded extends CardImpl {
     public PurphorosBronzeBlooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
@@ -58,7 +58,7 @@ public final class PurphorosBronzeBlooded extends CardImpl {
         )));
 
         // {2}{R}: You may put a red creature card or an artifact creature card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(new PurphurosBronzeBloodedEffect(), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new PurphurosBronzeBloodedEffect(), new ManaCostsImpl<>("{2}{R}")));
     }
 
     private PurphorosBronzeBlooded(final PurphorosBronzeBlooded card) {
@@ -107,7 +107,7 @@ class PurphurosBronzeBloodedEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (!controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (!controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());

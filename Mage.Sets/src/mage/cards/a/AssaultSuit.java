@@ -40,7 +40,7 @@ public final class AssaultSuit extends CardImpl {
         Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText(", has haste");
         ability.addEffect(effect);
-        effect = new CantAttackControllerAttachedEffect(AttachmentType.EQUIPMENT);
+        effect = new CantAttackControllerAttachedEffect(AttachmentType.EQUIPMENT, true);
         effect.setText(", can't attack you or planeswalkers you control");
         ability.addEffect(effect);
         effect = new AssaultSuitCantBeSacrificed();
@@ -52,7 +52,7 @@ public final class AssaultSuit extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AssaultSuitGainControlEffect(), TargetController.OPPONENT, false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.Detriment, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.Detriment, new GenericManaCost(3), false));
     }
 
     private AssaultSuit(final AssaultSuit card) {
@@ -72,7 +72,7 @@ public final class AssaultSuit extends CardImpl {
         staticText = "and can't be sacrificed";
     }
 
-    public AssaultSuitCantBeSacrificed(final AssaultSuitCantBeSacrificed effect) {
+    private AssaultSuitCantBeSacrificed(final AssaultSuitCantBeSacrificed effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class AssaultSuitGainControlEffect extends OneShotEffect {
         this.staticText = "you may have that player gain control of equipped creature until end of turn. If you do, untap it";
     }
 
-    public AssaultSuitGainControlEffect(final AssaultSuitGainControlEffect effect) {
+    private AssaultSuitGainControlEffect(final AssaultSuitGainControlEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class AssaultSuitGainControlEffect extends OneShotEffect {
                         "Let have " + activePlayer.getLogName() + " gain control of " + equippedCreature.getLogName() + '?', source, game)) {
                     equippedCreature.untap(game);
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn, activePlayer.getId());
-                    effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));
+                    effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game));
                     game.addEffect(effect, source);
                 }
             }

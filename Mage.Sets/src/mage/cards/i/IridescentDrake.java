@@ -67,7 +67,7 @@ class IridescentDrakeEffect extends OneShotEffect {
         this.staticText = "put target Aura card from a graveyard onto the battlefield under your control attached to {this}";
     }
 
-    public IridescentDrakeEffect(final IridescentDrakeEffect effect) {
+    private IridescentDrakeEffect(final IridescentDrakeEffect effect) {
         super(effect);
     }
 

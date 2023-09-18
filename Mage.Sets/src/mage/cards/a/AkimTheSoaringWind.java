@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -37,13 +36,13 @@ public final class AkimTheSoaringWind extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public AkimTheSoaringWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(3);
@@ -67,7 +66,7 @@ public final class AkimTheSoaringWind extends CardImpl {
                         Duration.EndOfTurn,
                         filter,
                         false),
-                new ManaCostsImpl("{3}{U}{R}{W}"))
+                new ManaCostsImpl<>("{3}{U}{R}{W}"))
         );
     }
 
@@ -100,11 +99,11 @@ enum AkimTheSoaringWindCondition implements Condition {
 
 class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 
-    public AkimTheSoaringTokenAbility() {
+    AkimTheSoaringTokenAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BirdToken(), 1), false);
     }
 
-    public AkimTheSoaringTokenAbility(final AkimTheSoaringTokenAbility ability) {
+    private AkimTheSoaringTokenAbility(final AkimTheSoaringTokenAbility ability) {
         super(ability);
     }
 
@@ -124,7 +123,7 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public AkimTheSoaringTokenAbility copy() {
         return new AkimTheSoaringTokenAbility(this);
     }
 

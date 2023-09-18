@@ -45,7 +45,7 @@ public final class FleshCarver extends CardImpl {
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
         // {1}{B}, Sacrifice another creature: Put two +1/+1 counters on Flesh Carver.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
 
@@ -67,9 +67,10 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
 
     public FleshCarverAbility() {
         super(new FleshCarverEffect(), false);
+        setTriggerPhrase("When Flesh Carver dies, ");
     }
 
-    public FleshCarverAbility(final FleshCarverAbility ability) {
+    private FleshCarverAbility(final FleshCarverAbility ability) {
         super(ability);
     }
 
@@ -91,11 +92,6 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When Flesh Carver dies, " ;
-    }
 }
 
 class FleshCarverEffect extends OneShotEffect {
@@ -105,7 +101,7 @@ class FleshCarverEffect extends OneShotEffect {
         staticText = "create an X/X black Horror creature token, where X is {this}'s power";
     }
 
-    public FleshCarverEffect(FleshCarverEffect ability) {
+    private FleshCarverEffect(final FleshCarverEffect ability) {
         super(ability);
     }
 
@@ -123,5 +119,4 @@ class FleshCarverEffect extends OneShotEffect {
     public FleshCarverEffect copy() {
         return new FleshCarverEffect(this);
     }
-
 }

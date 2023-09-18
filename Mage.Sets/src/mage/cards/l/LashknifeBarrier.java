@@ -49,7 +49,7 @@ class LashknifeBarrierEffect extends ReplacementEffectImpl {
         staticText = "If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.";
     }
 
-    public LashknifeBarrierEffect(final LashknifeBarrierEffect effect) {
+    private LashknifeBarrierEffect(final LashknifeBarrierEffect effect) {
         super(effect);
     }
 
@@ -76,8 +76,8 @@ class LashknifeBarrierEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
-        return creature != null && creature.isPlaneswalker(game) && creature.isControlledBy(source.getControllerId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && permanent.isCreature(game) && permanent.isControlledBy(source.getControllerId());
     }
 
 }

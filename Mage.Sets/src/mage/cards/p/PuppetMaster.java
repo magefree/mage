@@ -35,7 +35,7 @@ public final class PuppetMaster extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, return that card to its owner's hand. If that card is returned to its owner’s hand this way, you may pay {U}{U}{U}. If you do, return Puppet Master to its owner’s hand.
@@ -88,7 +88,7 @@ class PuppetMasterEffect extends OneShotEffect {
         if (card == null || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
             return false;
         }
-        Cost cost = new ManaCostsImpl("{U}{U}{U}");
+        Cost cost = new ManaCostsImpl<>("{U}{U}{U}");
         if (!controller.chooseUse(Outcome.Neutral, "Pay " + cost.getText()
                 + " to return " + card.getLogName() + " to its owner's hand?", source, game)
                 || !cost.pay(source, game, source, controller.getId(), false, null)) {

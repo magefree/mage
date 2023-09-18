@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -11,10 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
@@ -24,13 +21,12 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class FoundryStreetDenizen extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another red creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another red creature");
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
-    
+
     public FoundryStreetDenizen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add(SubType.GOBLIN);

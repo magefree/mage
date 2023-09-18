@@ -157,7 +157,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case REPLAY_DONE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.endMessage((String) callback.getData(), callback.getMessageId());
+                            panel.endMessage(null, null, (String) callback.getData(), callback.getMessageId());
                         }
                         break;
                     }
@@ -180,16 +180,17 @@ public class CallbackClientImpl implements CallbackClient {
                     }
 
                     case GAME_OVER: {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             Session session = SessionHandler.getSession();
                             if (session.isJsonLogActive()) {
-                                appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
-                                ActionData actionData = appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
-                                String logFileName = "game-" + actionData.gameId + ".json";
-                                S3Uploader.upload(logFileName, actionData.gameId.toString());
+                                UUID gameId = callback.getObjectId();
+                                appendJsonEvent("GAME_OVER", callback.getObjectId(), message);
+                                String logFileName = "game-" + gameId + ".json";
+                                S3Uploader.upload(logFileName, gameId.toString());
                             }
-                            panel.endMessage((String) callback.getData(), callback.getMessageId());
+                            panel.endMessage(message.getGameView(), message.getOptions(), message.getMessage(), callback.getMessageId());
                         }
                         break;
                     }
@@ -209,35 +210,34 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
 
-                    case GAME_TARGET: // e.g. Pick triggered ability
-                    {
+                    case GAME_TARGET: {
+                        // e.g. Pick triggered ability
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_TARGET", callback.getObjectId(), message);
-                            panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(),
-                                    message.getTargets(), message.isFlag(), message.getOptions(), callback.getMessageId());
+                            panel.pickTarget(message.getGameView(), message.getOptions(), message.getMessage(),
+                                    message.getCardsView1(), message.getTargets(), message.isFlag(), callback.getMessageId());
                         }
                         break;
                     }
 
                     case GAME_SELECT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_SELECT", callback.getObjectId(), message);
-                            panel.select(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
+                            panel.select(message.getGameView(), message.getOptions(), message.getMessage(), callback.getMessageId());
                         }
                         break;
                     }
 
                     case GAME_CHOOSE_ABILITY: {
+                        AbilityPickerView abilityPickerView = (AbilityPickerView) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_CHOOSE_ABILITY", callback.getObjectId(), callback.getData());
-                            panel.pickAbility((AbilityPickerView) callback.getData());
+                            panel.pickAbility(abilityPickerView.getGameView(), null, abilityPickerView);
                         }
                         break;
                     }
@@ -247,19 +247,17 @@ public class CallbackClientImpl implements CallbackClient {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_CHOOSE_PILE", callback.getObjectId(), message);
-                            panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
+                            panel.pickPile(message.getGameView(), message.getOptions(), message.getMessage(), message.getCardsView1(), message.getCardsView2());
                         }
                         break;
                     }
 
                     case GAME_CHOOSE_CHOICE: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
-
                         if (panel != null) {
                             appendJsonEvent("GAME_CHOOSE_CHOICE", callback.getObjectId(), message);
-                            panel.getChoice(message.getChoice(), callback.getObjectId());
+                            panel.getChoice(message.getGameView(), message.getOptions(), message.getChoice(), callback.getObjectId());
                         }
                         break;
                     }
@@ -269,53 +267,48 @@ public class CallbackClientImpl implements CallbackClient {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_PLAY_MANA", callback.getObjectId(), message);
-                            panel.playMana(message.getMessage(), message.getGameView(), message.getOptions(), callback.getMessageId());
+                            panel.playMana(message.getGameView(), message.getOptions(), message.getMessage(), callback.getMessageId());
                         }
                         break;
                     }
 
                     case GAME_PLAY_XMANA: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_PLAY_XMANA", callback.getObjectId(), message);
-                            panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());
+                            panel.playXMana(message.getGameView(), message.getOptions(), message.getMessage(), callback.getMessageId());
                         }
                         break;
                     }
 
                     case GAME_GET_AMOUNT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_GET_AMOUNT", callback.getObjectId(), message);
 
-                            panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
+                            panel.getAmount(message.getGameView(), message.getOptions(), message.getMin(), message.getMax(), message.getMessage());
                         }
                         break;
                     }
 
                     case GAME_GET_MULTI_AMOUNT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_GET_MULTI_AMOUNT", callback.getObjectId(), message);
 
-                            panel.getMultiAmount(message.getMessages(), message.getMin(), message.getMax(), message.getOptions());
+                            panel.getMultiAmount(message.getMessages(), message.getGameView(), message.getOptions(), message.getMin(), message.getMax());
                         }
                         break;
                     }
 
                     case GAME_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
-
                         if (panel != null) {
                             appendJsonEvent("GAME_UPDATE", callback.getObjectId(), callback.getData());
-
-                            panel.updateGame((GameView) callback.getData(), true, null, null); // update after undo
+                            panel.updateGame((GameView) callback.getData(), true, null, null); // update after undo wtf?!
                         }
                         break;
                     }
@@ -376,7 +369,7 @@ public class CallbackClientImpl implements CallbackClient {
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
                         if (message.getFlag()) {
-                            construct(deck, message.getTableId(), message.getTime());
+                            construct_sideboard(deck, message.getTableId(), message.getTime());
                         } else {
                             sideboard(deck, message.getTableId(), message.getTime());
                         }
@@ -388,6 +381,12 @@ public class CallbackClientImpl implements CallbackClient {
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
                         viewLimitedDeck(deck, message.getTableId(), message.getTime());
+                        break;
+                    }
+
+                    case VIEW_SIDEBOARD: {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        viewSideboard(message.getGameId(), message.getPlayerId());
                         break;
                     }
 
@@ -467,50 +466,50 @@ public class CallbackClientImpl implements CallbackClient {
         switch (usedPanel.getChatType()) {
             case GAME:
                 usedPanel.receiveMessage("", new StringBuilder()
-                                .append("HOTKEYS:")
-                                .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
-                                .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CONFIRM)))
-                                .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_NEXT_TURN)))
-                                .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_END_STEP)))
-                                .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SKIP_STEP)))
-                                .append("</b> - Skip current turn but stop on declare attackers/blockers")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_MAIN_STEP)))
-                                .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_YOUR_TURN)))
-                                .append("</b> - Skip everything until your next turn")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_PRIOR_END)))
-                                .append("</b> - Skip everything until the end step just prior to your turn")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP)))
-                                .append("</b> - Undo F4/F5/F7/F9/F11")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
-                                .append("</b> - Switch in/out to chat text field")
-                                /*
+                        .append("HOTKEYS:")
+                        .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
+                        .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CONFIRM)))
+                        .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_NEXT_TURN)))
+                        .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_END_STEP)))
+                        .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SKIP_STEP)))
+                        .append("</b> - Skip current turn but stop on declare attackers/blockers")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_MAIN_STEP)))
+                        .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_YOUR_TURN)))
+                        .append("</b> - Skip everything until your next turn")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_PRIOR_END)))
+                        .append("</b> - Skip everything until the end step just prior to your turn")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP)))
+                        .append("</b> - Undo F4/F5/F7/F9/F11")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
+                        .append("</b> - Switch in/out to chat text field")
+                        /*
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))
                                 .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
                                 .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability")
-                                 */
-                                .append("<br/>")
-                                .append("<br/>")
-                                .append("CHAT COMMANDS:")
-                                .append("<br/>").append("<b>/h username </b> - show player's stats (history)")
-                                .append("<br/>").append("<b>/w username message</b> - send private message to player (whisper)")
-                                .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
-                                .append("<br/>").append("<b>/fix</b> - fix freezed game")
-                                .toString(),
+                         */
+                        .append("<br/>")
+                        .append("<br/>")
+                        .append("CHAT COMMANDS:")
+                        .append("<br/>").append("<b>/h username </b> - show player's stats (history)")
+                        .append("<br/>").append("<b>/w username message</b> - send private message to player (whisper)")
+                        .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
+                        .append("<br/>").append("<b>/fix</b> - fix frozen game")
+                        .toString(),
                         null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:
@@ -520,10 +519,10 @@ public class CallbackClientImpl implements CallbackClient {
             case TABLES:
                 String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" main menu.")
-                                .append("<br/>Download icons and symbols by using the \"Symbols\" main menu.")
-                                .append("<br/>\\list - show a list of available chat commands.")
-                                .append("<br/>").append(IgnoreList.usage(serverAddress))
-                                .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
+                        .append("<br/>Download icons and symbols by using the \"Symbols\" main menu.")
+                        .append("<br/>\\list - show a list of available chat commands.")
+                        .append("<br/>").append(IgnoreList.usage(serverAddress))
+                        .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
                         null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             default:
@@ -612,15 +611,28 @@ public class CallbackClientImpl implements CallbackClient {
         frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
     }
 
+    protected void construct_sideboard(Deck deck, UUID tableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.LIMITED_SIDEBOARD_BUILDING, deck, tableId, time);
+    }
+
     protected void viewLimitedDeck(Deck deck, UUID tableId, int time) {
         frame.showDeckEditor(DeckEditorMode.VIEW_LIMITED_DECK, deck, tableId, time);
+    }
+
+    protected void viewSideboard(UUID gameId, UUID playerId) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.openSideboardWindow(playerId);
+            }
+        });
     }
 
     private void handleException(Exception ex) {
         logger.fatal("Client error\n", ex);
         String errorMessage = ex.getMessage();
         if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
-            errorMessage = ex.getClass().getSimpleName() + " - look server or client logs for more details";
+            errorMessage = ex.getClass().getSimpleName() + " - look at server or client logs for more details";
         }
         frame.showError("Server's error: " + errorMessage);
     }

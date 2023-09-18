@@ -44,4 +44,9 @@ public class HexproofFromArtifactsCreaturesAndEnchantments extends HexproofBaseA
     public String getRule() {
         return "hexproof from artifacts, creatures, and enchantments";
     }
+
+    @Override
+    public String getCardIconHint(Game game) {
+        return "hexproof from artifacts, creatures, and enchantments";
+    }
 }

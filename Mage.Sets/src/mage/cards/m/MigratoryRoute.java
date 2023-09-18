@@ -24,7 +24,7 @@ public final class MigratoryRoute extends CardImpl {
         getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 4));
 
         // Basic landcycling {2}
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private MigratoryRoute(final MigratoryRoute card) {

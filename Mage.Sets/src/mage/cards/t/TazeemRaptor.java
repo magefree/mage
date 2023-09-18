@@ -73,7 +73,7 @@ class TazeemRaptorEffect extends OneShotEffect {
         TargetPermanent target = new TargetControlledPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }

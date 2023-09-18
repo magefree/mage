@@ -32,7 +32,7 @@ public final class WingedShepherd extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Cycling {W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W}")));
 
     }
 

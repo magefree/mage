@@ -46,7 +46,7 @@ public final class ScytheOfTheWretched extends CardImpl {
         this.addAbility(new ScytheOfTheWretchedTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
     }
 
     private ScytheOfTheWretched(final ScytheOfTheWretched card) {
@@ -63,9 +63,10 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScytheOfTheWretchedTriggeredAbility() {
         super(Zone.ALL, new ScytheOfTheWretchedReanimateEffect(), false);
+        setTriggerPhrase("Whenever a creature dealt damage by equipped creature this turn dies, ");
     }
 
-    public ScytheOfTheWretchedTriggeredAbility(final ScytheOfTheWretchedTriggeredAbility ability) {
+    private ScytheOfTheWretchedTriggeredAbility(final ScytheOfTheWretchedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,11 +97,6 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature dealt damage by equipped creature this turn dies, " ;
-    }
-
     private void setTarget(TargetPointer target) {
         for (Effect effect : getEffects()) {
             effect.setTargetPointer(target);
@@ -118,12 +114,12 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
 
 class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
 
-    public ScytheOfTheWretchedReanimateEffect() {
+    ScytheOfTheWretchedReanimateEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return that card to the battlefield under your control. Attach {this} to that creature";
     }
 
-    public ScytheOfTheWretchedReanimateEffect(final ScytheOfTheWretchedReanimateEffect effect) {
+    private ScytheOfTheWretchedReanimateEffect(final ScytheOfTheWretchedReanimateEffect effect) {
         super(effect);
     }
 
@@ -143,7 +139,7 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ScytheOfTheWretchedReanimateEffect copy() {
         return new ScytheOfTheWretchedReanimateEffect(this);
     }
 }

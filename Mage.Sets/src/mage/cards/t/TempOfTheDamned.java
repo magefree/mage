@@ -55,7 +55,7 @@ class TempOfTheDamnedEffect extends OneShotEffect {
         staticText = "roll a six-sided die. {this} enters the battlefield with a number of funk counters on it equal to the result";
     }
 
-    public TempOfTheDamnedEffect(final TempOfTheDamnedEffect effect) {
+    private TempOfTheDamnedEffect(final TempOfTheDamnedEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class TempOfTheDamnedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return new AddCountersSourceEffect(CounterType.FUNK.createInstance(controller.rollDice(source, game, 6))).apply(game, source);
+            return new AddCountersSourceEffect(CounterType.FUNK.createInstance(controller.rollDice(Outcome.Benefit, source, game, 6))).apply(game, source);
         }
         return false;
     }
@@ -81,7 +81,7 @@ class TempOfTheDamnedUpkeepEffect extends OneShotEffect {
         staticText = "remove a funk counter from {this}. If you can't, sacrifice it";
     }
 
-    TempOfTheDamnedUpkeepEffect(final TempOfTheDamnedUpkeepEffect effect) {
+    private TempOfTheDamnedUpkeepEffect(final TempOfTheDamnedUpkeepEffect effect) {
         super(effect);
     }
 

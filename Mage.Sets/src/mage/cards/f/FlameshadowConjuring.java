@@ -17,8 +17,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,22 +30,16 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class FlameshadowConjuring extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
-
-    static {
-        filterNontoken.add(Predicates.not(TokenPredicate.instance));
-    }
-
     public FlameshadowConjuring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
-                new FlameshadowConjuringEffect(), new ManaCostsImpl("{R}"), "Pay {R} to create a token that's a copy of that creature that entered the battlefield?"),
-                filterNontoken, false, SetTargetPointer.PERMANENT,
+                new FlameshadowConjuringEffect(), new ManaCostsImpl<>("{R}"), "Pay {R} to create a token that's a copy of that creature that entered the battlefield?"),
+                StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT,
                 "Whenever a nontoken creature enters the battlefield under your control, "
                 + "you may pay {R}. If you do, create a token that's a copy of that creature. "
-                + "That token gains haste. Exile it at the beginning of the next end step");
+                + "That token gains haste. Exile it at the beginning of the next end step.");
         this.addAbility(ability);
     }
 
@@ -66,7 +60,7 @@ class FlameshadowConjuringEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    public FlameshadowConjuringEffect(final FlameshadowConjuringEffect effect) {
+    private FlameshadowConjuringEffect(final FlameshadowConjuringEffect effect) {
         super(effect);
     }
 
@@ -82,7 +76,7 @@ class FlameshadowConjuringEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
             effect.setTargetPointer(getTargetPointer());
             if (effect.apply(game, source)) {
-                for (Permanent tokenPermanent : effect.getAddedPermanent()) {
+                for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
                     exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

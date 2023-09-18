@@ -56,7 +56,7 @@ public final class WorldBreaker extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         
         // {2}{C}, Sacrifice a land: Return World Breaker from your graveyard to your hand.
-        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{C}"));
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{C}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
         this.addAbility(ability);
     }

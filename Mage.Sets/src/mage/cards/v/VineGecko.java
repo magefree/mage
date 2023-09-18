@@ -16,8 +16,8 @@ import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -67,11 +67,11 @@ public final class VineGecko extends CardImpl {
     }
 }
 
-enum VineGeckoPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
+enum VineGeckoPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
-    public boolean apply(ObjectPlayer<Card> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         VineGeckoWatcher watcher = game.getState().getWatcher(VineGeckoWatcher.class);
         if (watcher == null || watcher.checkPlayer(input.getPlayerId())) {
             return false;
@@ -101,9 +101,7 @@ class VineGeckoWatcher extends Watcher {
             return;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && StaticFilters.FILTER_SPELL_KICKED_A.match(
-                spell, getSourceId(), getControllerId(), game
-        )) {
+        if (spell != null && StaticFilters.FILTER_SPELL_KICKED_A.match(spell, game)) {
             playerSet.add(event.getPlayerId());
         }
     }

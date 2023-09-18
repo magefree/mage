@@ -22,19 +22,34 @@ import java.util.UUID;
 public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect {
 
     private final boolean tapped;
+    private final boolean attacking;
+    // If true, creatures are returned to their owner's control.
+    // If false, creatures are returned under the effect's controller control.
+    private final boolean underOwnerControl;
 
     public ReturnFromGraveyardToBattlefieldTargetEffect() {
         this(false);
     }
 
     public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped) {
+        this(tapped, false);
+    }
+    public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped, boolean attacking) {
+        this(tapped, attacking, false);
+    }
+
+    public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped, boolean attacking, boolean underOwnerControl) {
         super(Outcome.PutCreatureInPlay);
         this.tapped = tapped;
+        this.attacking = attacking;
+        this.underOwnerControl = underOwnerControl;
     }
 
     protected ReturnFromGraveyardToBattlefieldTargetEffect(final ReturnFromGraveyardToBattlefieldTargetEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
+        this.attacking = effect.attacking;
+        this.underOwnerControl = effect.underOwnerControl;
     }
 
     @Override
@@ -53,7 +68,12 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
                     cardsToMove.add(card);
                 }
             }
-            controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
+            controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, tapped, false, underOwnerControl, null);
+            if (attacking) {
+                for (Card card : cardsToMove) {
+                    game.getCombat().addAttackingCreature(card.getId(), game);
+                }
+            }
             return true;
         }
         return false;
@@ -72,21 +92,39 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             sb.append("target creature");
         } else {
             Target target = mode.getTargets().get(0);
-            if (target.getMaxNumberOfTargets() > 1) {
-                if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
+            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE
+                    && target.getMinNumberOfTargets() == 0) {
+                sb.append("any number of ");
+            } else if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
+            } else if (target.getMaxNumberOfTargets() > 1) {
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
             }
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+            String targetName = mode.getTargets().get(0).getTargetName();
+            if (!targetName.contains("target ")) {
+                sb.append("target ");
+            }
+            sb.append(targetName);
         }
         sb.append(yourGrave ? " to" : " onto");
         sb.append(" the battlefield");
-        if (tapped) {
+        if (tapped && attacking) {
+            sb.append(" tapped and attacking");
+        } else if (tapped) {
             sb.append(" tapped");
+        } else if (attacking) {
+            sb.append(" attacking");
         }
         if (!yourGrave) {
-            sb.append(" under your control");
+            if (underOwnerControl) {
+                sb.append("under their owner's control");
+            }
+            else {
+                sb.append(" under your control");
+            }
         }
         return sb.toString();
     }

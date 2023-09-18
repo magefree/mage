@@ -25,7 +25,7 @@ public final class GhastlyDiscovery extends CardImpl {
         this.getSpellAbility().addEffect(new GhastlyDiscoveryEffect());
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.NONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.NONE));
     }
 
     private GhastlyDiscovery(final GhastlyDiscovery card) {
@@ -45,7 +45,7 @@ class GhastlyDiscoveryEffect extends OneShotEffect {
         this.staticText = "Draw two cards, then discard a card";
     }
 
-    public GhastlyDiscoveryEffect(final GhastlyDiscoveryEffect effect) {
+    private GhastlyDiscoveryEffect(final GhastlyDiscoveryEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class LivingWall extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         
         // {1}: Regenerate Living Wall.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}")));
         
     }
 

@@ -44,7 +44,7 @@ public final class SorrowsPath extends CardImpl {
 
         // {T}: Choose two target blocking creatures an opponent controls. If each of those creatures could block all creatures that the other is blocking, remove both of them from combat. Each one then blocks all creatures the other was blocking.
         Ability ability = new SimpleActivatedAbility(new SorrowsPathSwitchBlockersEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanentSameController(2, 2, filter, false));
+        ability.addTarget(new TargetCreaturePermanentSameController(2, filter));
         this.addAbility(ability);
 
         // Whenever Sorrow's Path becomes tapped, it deals 2 damage to you and each creature you control.
@@ -112,17 +112,15 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 // 10/1/2009: When the first ability resolves, if all the creatures that one of the targeted creatures was blocking have left combat, then the other targeted creature 
                 // is considered to be able to block all creatures the first creature is blocking. If the ability has its full effect, the second creature will be removed from combat 
                 // but not returned to combat; it doesn't block anything.
-                game.getCombat().removeFromCombat(blocker1.getId(), game, false);
-                game.getCombat().removeFromCombat(blocker2.getId(), game, false);
-                blocker1.setRemovedFromCombat(attackers2.isEmpty());
-                blocker2.setRemovedFromCombat(attackers1.isEmpty());
+                blocker1.removeFromCombat(game);
+                blocker2.removeFromCombat(game);
 
                 // 10/1/2009: Abilities that trigger whenever one of the targeted creatures blocks will trigger when the first ability resolves, because those creatures will change from 
                 // not blocking (since they're removed from combat) to blocking. It doesn't matter if those abilities triggered when those creatures blocked the first time. Abilities 
                 // that trigger whenever one of the attacking creatures becomes blocked will not trigger again, because they never stopped being blocked creatures. Abilities that 
                 // trigger whenever a creature blocks one of the attacking creatures will trigger again, though; those kinds of abilities trigger once for each creature that blocks.
-                reassignBlocker(blocker1, attackers2, game);
-                reassignBlocker(blocker2, attackers1, game);
+                reassignBlocker(blocker1, attackers2, game, source);
+                reassignBlocker(blocker2, attackers1, game, source);
                 Set<MageObjectReference> morSet = new HashSet<>();
                 attackers1
                         .stream()
@@ -171,17 +169,17 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
         return true;
     }
 
-    private void reassignBlocker(Permanent blocker, Set<Permanent> attackers, Game game) {
+    private void reassignBlocker(Permanent blocker, Set<Permanent> attackers, Game game, Ability source) {
         for (Permanent attacker : attackers) {
             CombatGroup group = game.getCombat().findGroup(attacker.getId());
             if (group != null) {
                 group.addBlockerToGroup(blocker.getId(), blocker.getControllerId(), game);
                 game.getCombat().addBlockingGroup(blocker.getId(), attacker.getId(), blocker.getControllerId(), game);
-                // TODO: find an alternate event solution for multi-blockers (as per issue #4285), this will work fine for single blocker creatures though
                 game.fireEvent(new BlockerDeclaredEvent(attacker.getId(), blocker.getId(), blocker.getControllerId()));
                 group.pickBlockerOrder(attacker.getControllerId(), game);
             }
         }
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, blocker.getId(), source, null));
         CombatGroup blockGroup = findBlockingGroup(blocker, game); // a new blockingGroup is formed, so it's necessary to find it again
         if (blockGroup != null) {
             blockGroup.pickAttackerOrder(blocker.getControllerId(), game);

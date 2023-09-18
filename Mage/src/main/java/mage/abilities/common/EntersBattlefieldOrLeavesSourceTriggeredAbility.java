@@ -17,9 +17,10 @@ public class EntersBattlefieldOrLeavesSourceTriggeredAbility extends TriggeredAb
     public EntersBattlefieldOrLeavesSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("When {this} enters or leaves the battlefield, ");
     }
 
-    public EntersBattlefieldOrLeavesSourceTriggeredAbility(final EntersBattlefieldOrLeavesSourceTriggeredAbility ability) {
+    protected EntersBattlefieldOrLeavesSourceTriggeredAbility(final EntersBattlefieldOrLeavesSourceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -46,10 +47,5 @@ public class EntersBattlefieldOrLeavesSourceTriggeredAbility extends TriggeredAb
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} enters or leaves the battlefield, " ;
     }
 }

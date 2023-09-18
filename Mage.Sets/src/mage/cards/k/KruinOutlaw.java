@@ -22,7 +22,6 @@ public final class KruinOutlaw extends CardImpl {
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.t.TerrorOfKruinPass.class;
 
         this.power = new MageInt(2);

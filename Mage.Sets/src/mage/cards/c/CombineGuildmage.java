@@ -44,14 +44,14 @@ public final class CombineGuildmage extends CardImpl {
 
         // {1}{G}, {T}: This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
         Ability ability = new SimpleActivatedAbility(
-                new CombineGuildmageReplacementEffect(), new ManaCostsImpl("{1}{G}")
+                new CombineGuildmageReplacementEffect(), new ManaCostsImpl<>("{1}{G}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {1}{U}, {T}: Move a +1/+1 counter from target creature you control onto another target creature you control.
         ability = new SimpleActivatedAbility(
-                new CombineGuildmageCounterEffect(), new ManaCostsImpl("{1}{U}")
+                new CombineGuildmageCounterEffect(), new ManaCostsImpl<>("{1}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter1));

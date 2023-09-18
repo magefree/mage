@@ -87,7 +87,7 @@ class ArmoredSkyhunterEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         TargetCardInLibrary targetCard = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, targetCard, game);
+        player.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {
             return player.putCardsOnBottomOfLibrary(cards, game, source, false);
@@ -99,8 +99,8 @@ class ArmoredSkyhunterEffect extends OneShotEffect {
             return player.putCardsOnBottomOfLibrary(cards, game, source, false);
         }
         TargetPermanent targetPermanent = new TargetControlledCreaturePermanent(0, 1);
-        targetCard.setNotTarget(true);
-        player.choose(outcome, targetPermanent, source.getSourceId(), game);
+        targetCard.withNotTarget(true);
+        player.choose(outcome, targetPermanent, source, game);
         Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
         if (permanent != null) {
             permanent.addAttachment(equipment.getId(), source, game);

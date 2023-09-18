@@ -14,6 +14,10 @@ public enum SubType {
     ARCANE("Arcane", SubTypeSet.SpellType),
     LESSON("Lesson", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
+
+    // Battle subtypes
+    SIEGE("Siege", SubTypeSet.BattleType),
+
     // 205.3i: Lands have their own unique set of subtypes; these subtypes are called land types.
     // Of that list, Forest, Island, Mountain, Plains, and Swamp are the basic land types.
     FOREST("Forest", SubTypeSet.BasicLandType),
@@ -25,35 +29,43 @@ public enum SubType {
     GATE("Gate", SubTypeSet.NonBasicLandType),
     LAIR("Lair", SubTypeSet.NonBasicLandType),
     LOCUS("Locus", SubTypeSet.NonBasicLandType),
+    SPHERE("Sphere", SubTypeSet.NonBasicLandType),
     URZAS("Urza's", SubTypeSet.NonBasicLandType),
     MINE("Mine", SubTypeSet.NonBasicLandType),
     POWER_PLANT("Power-Plant", SubTypeSet.NonBasicLandType),
     TOWER("Tower", SubTypeSet.NonBasicLandType),
     // 205.3h Enchantments have their own unique set of subtypes; these subtypes are called enchantment types.
     AURA("Aura", SubTypeSet.EnchantmentType),
+    BACKGROUND("Background", SubTypeSet.EnchantmentType),
     CARTOUCHE("Cartouche", SubTypeSet.EnchantmentType),
     CLASS("Class", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
+    ROLE("Role", SubTypeSet.EnchantmentType),
     RUNE("Rune", SubTypeSet.EnchantmentType),
     SAGA("Saga", SubTypeSet.EnchantmentType),
     SHARD("Shard", SubTypeSet.EnchantmentType),
     SHRINE("Shrine", SubTypeSet.EnchantmentType),
     // 205.3g: Artifacts have their own unique set of subtypes; these subtypes are called artifact types.
+    BLOOD("Blood", SubTypeSet.ArtifactType),
     CLUE("Clue", SubTypeSet.ArtifactType),
     CONTRAPTION("Contraption", SubTypeSet.ArtifactType),
     EQUIPMENT("Equipment", SubTypeSet.ArtifactType),
     FOOD("Food", SubTypeSet.ArtifactType),
     FORTIFICATION("Fortification", SubTypeSet.ArtifactType),
     GOLD("Gold", SubTypeSet.ArtifactType),
+    INCUBATOR("Incubator", SubTypeSet.ArtifactType),
+    POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
     // 205.3m : Creatures and tribals share their lists of subtypes; these subtypes are called creature types.
     // A
     ADVISOR("Advisor", SubTypeSet.CreatureType),
     AETHERBORN("Aetherborn", SubTypeSet.CreatureType),
+    ALIEN("Alien", SubTypeSet.CreatureType),
     ALLY("Ally", SubTypeSet.CreatureType),
     ANGEL("Angel", SubTypeSet.CreatureType),
     ANTELOPE("Antelope", SubTypeSet.CreatureType),
+    ANZELLAN("Anzellan", SubTypeSet.CreatureType, true), // Star Wars
     AQUALISH("Aqualish", SubTypeSet.CreatureType, true), // Star Wars
     APE("Ape", SubTypeSet.CreatureType),
     ARCONA("Arcona", SubTypeSet.CreatureType, true),
@@ -64,6 +76,7 @@ public enum SubType {
     ARTIFICIER("Artificier", SubTypeSet.CreatureType, true),
     ASSASSIN("Assassin", SubTypeSet.CreatureType),
     ASSEMBLY_WORKER("Assembly-Worker", SubTypeSet.CreatureType),
+    ASTARTES("Astartes", SubTypeSet.CreatureType),
     ATOG("Atog", SubTypeSet.CreatureType),
     ATAT("AT-AT", SubTypeSet.CreatureType, true),
     AUROCHS("Aurochs", SubTypeSet.CreatureType),
@@ -104,6 +117,7 @@ public enum SubType {
     CITIZEN("Citizen", SubTypeSet.CreatureType),
     CLAMFOLK("Clamfolk", SubTypeSet.CreatureType, true), // Unglued
     CLERIC("Cleric", SubTypeSet.CreatureType),
+    CLOWN("Clown", SubTypeSet.CreatureType),
     COCKATRICE("Cockatrice", SubTypeSet.CreatureType),
     CONSTRUCT("Construct", SubTypeSet.CreatureType),
     COW("Cow", SubTypeSet.CreatureType, true), // Unglued
@@ -111,17 +125,22 @@ public enum SubType {
     CRAB("Crab", SubTypeSet.CreatureType),
     CROCODILE("Crocodile", SubTypeSet.CreatureType),
     CROLUTE("Crolute", SubTypeSet.CreatureType, true), // Star Wars
+    CTAN("C'tan", SubTypeSet.CreatureType),
+    CUSTODES("Custodes", SubTypeSet.CreatureType),
     CYBORG("Cyborg", SubTypeSet.CreatureType, true), // Star Wars
     CYCLOPS("Cyclops", SubTypeSet.CreatureType),
     // D
-    DATHOMIRIAN("Dathomirian", SubTypeSet.CreatureType, true), // Star Wars
+    DALEK("Dalek", SubTypeSet.CreatureType),
+    DATHOMIRIAN("Dathomirian", SubTypeSet.CreatureType, true), // Star Wars,
     DAUTHI("Dauthi", SubTypeSet.CreatureType),
     DEMIGOD("Demigod", SubTypeSet.CreatureType),
     DEMON("Demon", SubTypeSet.CreatureType),
     DESERTER("Deserter", SubTypeSet.CreatureType),
+    DETECTIVE("Detective", SubTypeSet.CreatureType),
     DEVIL("Devil", SubTypeSet.CreatureType),
     DINOSAUR("Dinosaur", SubTypeSet.CreatureType), // With Ixalan now being spoiled, need this to be selectable
     DJINN("Djinn", SubTypeSet.CreatureType),
+    DOCTOR("Doctor", SubTypeSet.CreatureType),
     DOG("Dog", SubTypeSet.CreatureType),
     DRAGON("Dragon", SubTypeSet.CreatureType),
     DRAKE("Drake", SubTypeSet.CreatureType),
@@ -139,8 +158,8 @@ public enum SubType {
     ELEMENTAL("Elemental", SubTypeSet.CreatureType),
     ELEPHANT("Elephant", SubTypeSet.CreatureType),
     ELF("Elf", SubTypeSet.CreatureType),
-    ELVES("Elves", SubTypeSet.CreatureType, true), // Un-sets
     ELK("Elk", SubTypeSet.CreatureType),
+    EMPLOYEE("Employee", SubTypeSet.CreatureType),
     EYE("Eye", SubTypeSet.CreatureType),
     EWOK("Ewok", SubTypeSet.CreatureType, true), // Star Wars
     EXPANSION_SYMBOL("Expansion-Symbol", SubTypeSet.CreatureType, true), // Unhinged
@@ -160,6 +179,7 @@ public enum SubType {
     GARGOYLE("Gargoyle", SubTypeSet.CreatureType),
     GERM("Germ", SubTypeSet.CreatureType),
     GIANT("Giant", SubTypeSet.CreatureType),
+    GITH("Gith", SubTypeSet.CreatureType),
     GNOME("Gnome", SubTypeSet.CreatureType),
     GNOLL("Gnoll", SubTypeSet.CreatureType),
     GOLEM("Golem", SubTypeSet.CreatureType),
@@ -170,6 +190,7 @@ public enum SubType {
     GRAVEBORN("Graveborn", SubTypeSet.CreatureType),
     GREMLIN("Gremlin", SubTypeSet.CreatureType),
     GRIFFIN("Griffin", SubTypeSet.CreatureType),
+    GUEST("Guest", SubTypeSet.CreatureType),
     GUNGAN("Gungan", SubTypeSet.CreatureType, true), // Star Wars
     // H
     HAG("Hag", SubTypeSet.CreatureType),
@@ -193,6 +214,7 @@ public enum SubType {
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
     INKLING("Inkling", SubTypeSet.CreatureType),
+    INQUISITOR("Inquisitor", SubTypeSet.CreatureType),
     INSECT("Insect", SubTypeSet.CreatureType),
     ITHORIAN("Ithorian", SubTypeSet.CreatureType, true), // Star Wars
     // J
@@ -235,6 +257,7 @@ public enum SubType {
     MINION("Minion", SubTypeSet.CreatureType),
     MINOTAUR("Minotaur", SubTypeSet.CreatureType),
     MIRIALAN("Mirialan", SubTypeSet.CreatureType, true), // Star Wars
+    MITE("Mite", SubTypeSet.CreatureType),
     MOLE("Mole", SubTypeSet.CreatureType),
     MONGER("Monger", SubTypeSet.CreatureType),
     MONGOOSE("Mongoose", SubTypeSet.CreatureType),
@@ -249,6 +272,7 @@ public enum SubType {
     NAGA("Naga", SubTypeSet.CreatureType),
     NAUTILUS("Nautilus", SubTypeSet.CreatureType),
     NAUTOLAN("Nautolan", SubTypeSet.CreatureType, true), // Star Wars
+    NECRON("Necron", SubTypeSet.CreatureType),
     NEIMOIDIAN("Neimoidian", SubTypeSet.CreatureType, true), // Star Wars
     NEPHILIM("Nephilim", SubTypeSet.CreatureType),
     NIGHTMARE("Nightmare", SubTypeSet.CreatureType),
@@ -284,6 +308,7 @@ public enum SubType {
     PIRATE("Pirate", SubTypeSet.CreatureType),
     PLANT("Plant", SubTypeSet.CreatureType),
     PRAETOR("Praetor", SubTypeSet.CreatureType),
+    PRIMARCH("Primarch", SubTypeSet.CreatureType),
     PRISM("Prism", SubTypeSet.CreatureType),
     PROCESSOR("Processor", SubTypeSet.CreatureType),
     PUREBLOOD("Pureblood", SubTypeSet.CreatureType, true),
@@ -291,6 +316,7 @@ public enum SubType {
     QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     // R
     RABBIT("Rabbit", SubTypeSet.CreatureType),
+    RACCOON("Raccoon", SubTypeSet.CreatureType),
     RAIDER("Raider", SubTypeSet.CreatureType, true), // Star Wars
     RANGER("Ranger", SubTypeSet.CreatureType),
     RAT("Rat", SubTypeSet.CreatureType),
@@ -298,6 +324,7 @@ public enum SubType {
     REFLECTION("Reflection", SubTypeSet.CreatureType),
     RHINO("Rhino", SubTypeSet.CreatureType),
     RIGGER("Rigger", SubTypeSet.CreatureType),
+    ROBOT("Robot", SubTypeSet.CreatureType),
     RODIAN("Rodian", SubTypeSet.CreatureType, true), // Star Wars
     ROGUE("Rogue", SubTypeSet.CreatureType),
     // S
@@ -354,6 +381,7 @@ public enum SubType {
     THALAKOS("Thalakos", SubTypeSet.CreatureType),
     THOPTER("Thopter", SubTypeSet.CreatureType),
     TIEFLING("Tiefling", SubTypeSet.CreatureType),
+    TIME_LORD("Time Lord", SubTypeSet.CreatureType),
     TRANDOSHAN("Trandoshan", SubTypeSet.CreatureType, true), // Star Wars
     THRULL("Thrull", SubTypeSet.CreatureType),
     TREEFOLK("Treefolk", SubTypeSet.CreatureType),
@@ -364,6 +392,7 @@ public enum SubType {
     TROOPER("Trooper", SubTypeSet.CreatureType, true), // Star Wars
     TRILOBITE("Trilobite", SubTypeSet.CreatureType),
     TWILEK("Twi'lek", SubTypeSet.CreatureType, true), // Star Wars
+    TYRANID("Tyranid", SubTypeSet.CreatureType),
     // U
     UGNAUGHT("Ugnaught", SubTypeSet.CreatureType, true),
     UNICORN("Unicorn", SubTypeSet.CreatureType),
@@ -375,6 +404,7 @@ public enum SubType {
     VOLVER("Volver", SubTypeSet.CreatureType),
     // W
     WALL("Wall", SubTypeSet.CreatureType),
+    WALRUS("Walrus", SubTypeSet.CreatureType),
     WARLOCK("Warlock", SubTypeSet.CreatureType),
     WARRIOR("Warrior", SubTypeSet.CreatureType),
     WEEQUAY("Weequay", SubTypeSet.CreatureType, true),
@@ -407,6 +437,7 @@ public enum SubType {
     BOLAS("Bolas", SubTypeSet.PlaneswalkerType),
     CALIX("Calix", SubTypeSet.PlaneswalkerType),
     CHANDRA("Chandra", SubTypeSet.PlaneswalkerType),
+    COMET("Comet", SubTypeSet.PlaneswalkerType),
     DACK("Dack", SubTypeSet.PlaneswalkerType),
     DAKKON("Dakkon", SubTypeSet.PlaneswalkerType),
     DARETTI("Daretti", SubTypeSet.PlaneswalkerType),
@@ -416,15 +447,19 @@ public enum SubType {
     DOOKU("Dooku", SubTypeSet.PlaneswalkerType, true), // Star Wars
     DOVIN("Dovin", SubTypeSet.PlaneswalkerType),
     ELLYWICK("Ellywick", SubTypeSet.PlaneswalkerType),
+    ELMINSTER("Elminster", SubTypeSet.PlaneswalkerType),
     ELSPETH("Elspeth", SubTypeSet.PlaneswalkerType),
     ESTRID("Estrid", SubTypeSet.PlaneswalkerType),
     FREYALISE("Freyalise", SubTypeSet.PlaneswalkerType),
     GARRUK("Garruk", SubTypeSet.PlaneswalkerType),
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType),
     GRIST("Grist", SubTypeSet.PlaneswalkerType),
+    GUFF("Guff", SubTypeSet.PlaneswalkerType),
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
     JACE("Jace", SubTypeSet.PlaneswalkerType),
+    JARED("Jared", SubTypeSet.PlaneswalkerType),
     JESKA("Jeska", SubTypeSet.PlaneswalkerType),
+    KAITO("Kaito", SubTypeSet.PlaneswalkerType),
     KARN("Karn", SubTypeSet.PlaneswalkerType),
     KASMINA("Kasmina", SubTypeSet.PlaneswalkerType),
     KAYA("Kaya", SubTypeSet.PlaneswalkerType),
@@ -433,6 +468,7 @@ public enum SubType {
     LILIANA("Liliana", SubTypeSet.PlaneswalkerType),
     LUKKA("Lukka", SubTypeSet.PlaneswalkerType),
     LOLTH("Lolth", SubTypeSet.PlaneswalkerType),
+    MINSC("Minsc", SubTypeSet.PlaneswalkerType),
     MORDENKAINEN("Mordenkainen", SubTypeSet.PlaneswalkerType),
     NAHIRI("Nahiri", SubTypeSet.PlaneswalkerType),
     NARSET("Narset", SubTypeSet.PlaneswalkerType),
@@ -442,25 +478,29 @@ public enum SubType {
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
     OKO("Oko", SubTypeSet.PlaneswalkerType),
     RAL("Ral", SubTypeSet.PlaneswalkerType),
+    REY("Rey", SubTypeSet.PlaneswalkerType, true),  // Star Wars,
     ROWAN("Rowan", SubTypeSet.PlaneswalkerType),
     SAHEELI("Saheeli", SubTypeSet.PlaneswalkerType),
     SAMUT("Samut", SubTypeSet.PlaneswalkerType),
     SARKHAN("Sarkhan", SubTypeSet.PlaneswalkerType),
     SERRA("Serra", SubTypeSet.PlaneswalkerType),
     SIDIOUS("Sidious", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    SIVITRI("Sivitri", SubTypeSet.PlaneswalkerType),
     SORIN("Sorin", SubTypeSet.PlaneswalkerType),
     SZAT("Szat", SubTypeSet.PlaneswalkerType),
     TAMIYO("Tamiyo", SubTypeSet.PlaneswalkerType),
+    TASHA("Tasha", SubTypeSet.PlaneswalkerType),
     TEFERI("Teferi", SubTypeSet.PlaneswalkerType),
     TEYO("Teyo", SubTypeSet.PlaneswalkerType),
     TEZZERET("Tezzeret", SubTypeSet.PlaneswalkerType),
     TIBALT("Tibalt", SubTypeSet.PlaneswalkerType),
     TYVAR("Tyvar", SubTypeSet.PlaneswalkerType),
     UGIN("Ugin", SubTypeSet.PlaneswalkerType),
-    URZA("Urza", SubTypeSet.PlaneswalkerType, true), // Unstable
+    URZA("Urza", SubTypeSet.PlaneswalkerType),
     VENSER("Venser", SubTypeSet.PlaneswalkerType),
     VIVIEN("Vivien", SubTypeSet.PlaneswalkerType),
     VRASKA("Vraska", SubTypeSet.PlaneswalkerType),
+    VRONOS("Vronos", SubTypeSet.PlaneswalkerType),
     WILL("Will", SubTypeSet.PlaneswalkerType),
     WINDGRACE("Windgrace", SubTypeSet.PlaneswalkerType),
     WRENN("Wrenn", SubTypeSet.PlaneswalkerType),
@@ -595,6 +635,8 @@ public enum SubType {
                 return mageObject.isPlaneswalker(game);
             case SpellType:
                 return mageObject.isInstantOrSorcery(game);
+            case BattleType:
+                return mageObject.isBattle(game);
         }
         return false;
     }
@@ -609,12 +651,10 @@ public enum SubType {
 
     public static Set<SubType> getPlaneswalkerTypes() {
         return subTypeSetMap.get(SubTypeSet.PlaneswalkerType);
-
     }
 
     public static Set<SubType> getCreatureTypes() {
         return subTypeSetMap.get(SubTypeSet.CreatureType);
-
     }
 
     public static Set<SubType> getBasicLands() {
@@ -623,6 +663,10 @@ public enum SubType {
 
     public static Set<SubType> getLandTypes() {
         return landTypes;
+    }
+
+    public static Set<SubType> getBattleTypes() {
+        return subTypeSetMap.get(SubTypeSet.BattleType);
     }
 
     public static Set<SubType> getBySubTypeSet(SubTypeSet subTypeSet) {

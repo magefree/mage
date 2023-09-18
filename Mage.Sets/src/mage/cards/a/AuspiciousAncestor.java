@@ -37,7 +37,7 @@ public final class AuspiciousAncestor extends CardImpl {
         // When Auspicious Ancestor dies, you gain 3 life.
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(3), false));
         // Whenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.
-        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{1}")), filter, false));
+        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl<>("{1}")), filter, false));
     }
 
     private AuspiciousAncestor(final AuspiciousAncestor card) {

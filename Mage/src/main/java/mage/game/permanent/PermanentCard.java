@@ -5,10 +5,11 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
@@ -40,7 +41,7 @@ public class PermanentCard extends PermanentImpl {
         // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
         // it's a basic check and still allows to create permanent from instant or sorcery
         boolean goodForBattlefield = true;
-        if (card instanceof ModalDoubleFacesCard) {
+        if (card instanceof ModalDoubleFacedCard) {
             goodForBattlefield = false;
         } else if (card instanceof SplitCard) {
             // fused spells allowed (it uses main card)
@@ -60,6 +61,8 @@ public class PermanentCard extends PermanentImpl {
     private void init(Card card, Game game) {
         power = card.getPower().copy();
         toughness = card.getToughness().copy();
+        startingLoyalty = card.getStartingLoyalty();
+        startingDefense = card.getStartingDefense();
         copyFromCard(card, game);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
@@ -69,16 +72,16 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
-        if (isTransformable()) {
-            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null) {
+        if (card.isTransformable()) {
+            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
+                    || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
-                setTransformed(true);
-                TransformAbility.transform(this, getSecondCardFace(), game, null);
+                TransformAbility.transformPermanent(this, getSecondCardFace(), game, null);
             }
         }
     }
 
-    public PermanentCard(final PermanentCard permanent) {
+    protected PermanentCard(final PermanentCard permanent) {
         super(permanent);
         this.card = permanent.card.copy();
         this.maxLevelCounters = permanent.maxLevelCounters;
@@ -107,11 +110,7 @@ public class PermanentCard extends PermanentImpl {
         } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();
-            // only set spellAbility to null if it has no targets IE: Dance of the Dead bug #7031
-            if (this.getSpellAbility() != null
-                    && this.getSpellAbility().getTargets().isEmpty()) {
-                this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
-            }
+            this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
         }
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
@@ -126,20 +125,20 @@ public class PermanentCard extends PermanentImpl {
         }
         this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
-        supertype.addAll(card.getSuperType());
-        this.expansionSetCode = card.getExpansionSetCode();
+        this.supertype.addAll(card.getSuperType());
+
+        this.setExpansionSetCode(card.getExpansionSetCode());
+        this.setCardNumber(card.getCardNumber());
         this.rarity = card.getRarity();
-        this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
 
-        transformable = card.isTransformable();
-        if (transformable) {
-            this.nightCard = card.isNightCard();
-            if (!this.nightCard) {
-                this.secondSideCard = card.getSecondCardFace();
-                this.secondSideCardClazz = this.secondSideCard.getClass();
-            }
+        if (card.getSecondCardFace() != null) {
+            this.secondSideCardClazz = card.getSecondCardFace().getClass();
         }
+        if (card.getMeldsToCard() != null) {
+            this.meldsToClazz = card.getMeldsToCard().getClass();
+        }
+        this.nightCard = card.isNightCard();
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
     }
@@ -165,8 +164,8 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
         if (super.turnFaceUp(source, game, playerId)) {
-            power.modifyBaseValue(power.getBaseValue());
-            toughness.modifyBaseValue(toughness.getBaseValue());
+            power.setModifiedBaseValue(power.getBaseValue());
+            toughness.setModifiedBaseValue(toughness.getBaseValue());
             setManifested(false);
             setMorphed(false);
             return true;

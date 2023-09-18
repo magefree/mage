@@ -27,7 +27,7 @@ public final class GodtrackerOfJund extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
     
-    String rule = "Whenever a creature with power 5 or greater enters the battlefield under your control, you may put a +1/+1 counter on {this}.";
+    private static final String rule = "Whenever a creature with power 5 or greater enters the battlefield under your control, you may put a +1/+1 counter on {this}.";
 
     public GodtrackerOfJund(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");

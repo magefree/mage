@@ -16,7 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author spjspj
@@ -28,7 +30,7 @@ public final class CapitalOffense extends CardImpl {
 
         // target creature gets -x/-x until end of turn, where x is the number of times a capital letter appears in its rules text. (ignore reminder text and flavor text.)
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                capitaloffensecount.instance, capitaloffensecount.instance, Duration.EndOfTurn, true
+                capitaloffensecount.instance, capitaloffensecount.instance, Duration.EndOfTurn
         ).setText("target creature gets -x/-x until end of turn, where x is the number of times " +
                 "a capital letter appears in its rules text. <i>(ignore reminder text and flavor text.)</i>"
         ));
@@ -42,6 +44,22 @@ public final class CapitalOffense extends CardImpl {
     @Override
     public CapitalOffense copy() {
         return new CapitalOffense(this);
+    }
+
+    @Override
+    public List<String> getRules() {
+        return prepareLowerCaseRules(super.getRules());
+    }
+
+    @Override
+    public List<String> getRules(Game game) {
+        return prepareLowerCaseRules(super.getRules(game));
+    }
+
+    private List<String> prepareLowerCaseRules(List<String> rules) {
+        return rules.stream()
+                .map(s -> s.toLowerCase(Locale.ENGLISH))
+                .collect(Collectors.toList());
     }
 }
 
@@ -59,25 +77,24 @@ enum capitaloffensecount implements DynamicValue {
         if (permanent == null) {
             return 0;
         }
-        int capitals = 0;
-        List<CardInfo> cards = CardRepository.instance.findCards(permanent.getName());
 
-        if (cards == null) {
+        List<CardInfo> cardsInfo = CardRepository.instance.findCards(permanent.getName(), 1);
+        if (cardsInfo.isEmpty()) {
             return 0;
         }
-        for (CardInfo cardInfo : cards) {
-            Card dummy = cardInfo != null ? cardInfo.getCard() : null;
-            if (dummy == null) {
-                return -1 * capitals;
-            }
-            for (String line : dummy.getRules()) {
-                line = line.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-                line = line.replaceAll("\\{this\\}", permanent.getName());
-                capitals += line.length() - line.replaceAll("[A-Z]", "").length();
-            }
-            return -1 * capitals;
+
+        Card card = cardsInfo.get(0).getCard();
+        if (card == null) {
+            return 0;
         }
-        return 0;
+
+        String originalRules = card.getRules(game)
+                .stream()
+                .map(r -> r.replaceAll("(?i)<i.*?</i>", ""))
+                .map(r -> r.replaceAll("\\{this\\}", permanent.getName()))
+                .collect(Collectors.joining("; "));
+        String nonCapitalRules = originalRules.replaceAll("[A-Z]", "");
+        return -1 * (originalRules.length() - nonCapitalRules.length());
     }
 
     @Override

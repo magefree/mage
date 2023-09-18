@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SetTargetPointer;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -42,7 +42,7 @@ public final class LavacoreElemental extends CardImpl {
         effect.setText("put a time counter on {this}");
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 effect,
-                new FilterControlledCreaturePermanent("a creature you control"), false, SetTargetPointer.PERMANENT, true
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.PERMANENT, true
         ));
     }
 

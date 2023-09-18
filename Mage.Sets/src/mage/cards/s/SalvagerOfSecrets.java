@@ -1,20 +1,19 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.constants.SubType;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SalvagerOfSecrets extends CardImpl {
@@ -30,9 +29,8 @@ public final class SalvagerOfSecrets extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Salvager of Secrets enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        Target target = new TargetCardInYourGraveyard(filter);
-        ability.addTarget(target);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

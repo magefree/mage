@@ -26,7 +26,7 @@ public final class StensiaBloodhall extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {3}{B}{R}, {T}: Stensia Bloodhall deals 2 damage to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{3}{B}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

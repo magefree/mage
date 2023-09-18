@@ -61,14 +61,14 @@ class CantBeBlockedByTokenEffect extends RestrictionEffect {
         staticText = "Creatures you control can't be blocked by tokens this turn";
     }
 
-    public CantBeBlockedByTokenEffect(final CantBeBlockedByTokenEffect effect) {
+    private CantBeBlockedByTokenEffect(final CantBeBlockedByTokenEffect effect) {
         super(effect);
     }
 
     @Override
     public void init(Ability source, Game game) {
         affectedObjectsSet = true;
-        for (Permanent perm : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game)) {
             affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }

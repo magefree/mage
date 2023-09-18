@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.target.TargetPlayer;
  */
 public final class CelestialFlare extends CardImpl {
 
-    private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking creature");
+    private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("an attacking or blocking creature");
 
     public CelestialFlare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");

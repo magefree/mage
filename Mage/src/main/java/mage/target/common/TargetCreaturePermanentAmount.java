@@ -2,19 +2,21 @@ package mage.target.common;
 
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author North
  */
 public class TargetCreaturePermanentAmount extends TargetPermanentAmount {
 
+    private static final FilterCreaturePermanent defaultFilter = new FilterCreaturePermanent("target creatures");
+
     public TargetCreaturePermanentAmount(int amount) {
-        super(amount, StaticFilters.FILTER_PERMANENT_CREATURE);
+        super(amount, defaultFilter);
     }
 
     public TargetCreaturePermanentAmount(DynamicValue amount) {
-        this(amount, StaticFilters.FILTER_PERMANENT_CREATURE);
+        this(amount, defaultFilter);
     }
 
     public TargetCreaturePermanentAmount(int amount, FilterPermanent filter) {

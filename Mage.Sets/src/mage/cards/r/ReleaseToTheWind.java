@@ -46,7 +46,7 @@ class ReleaseToTheWindEffect extends OneShotEffect {
         this.staticText = "Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost";
     }
 
-    public ReleaseToTheWindEffect(final ReleaseToTheWindEffect effect) {
+    private ReleaseToTheWindEffect(final ReleaseToTheWindEffect effect) {
         super(effect);
     }
 
@@ -58,13 +58,12 @@ class ReleaseToTheWindEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (targetPermanent != null) {
-                return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent,
-                        TargetController.OWNER, Duration.Custom, true, true);
-            }
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetPermanent == null) {
+            return false;
         }
-        return false;
+
+        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent,
+                TargetController.OWNER, Duration.Custom, true, false, true);
     }
 }

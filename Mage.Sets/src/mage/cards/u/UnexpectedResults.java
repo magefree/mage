@@ -73,7 +73,7 @@ class UnexpectedResultEffect extends OneShotEffect {
                 + "and return {this} to its owner's hand";
     }
 
-    public UnexpectedResultEffect(final UnexpectedResultEffect effect) {
+    private UnexpectedResultEffect(final UnexpectedResultEffect effect) {
         super(effect);
     }
 

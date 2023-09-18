@@ -16,7 +16,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -37,11 +37,11 @@ public final class AnimalBoneyard extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted land has "{T}, Sacrifice a creature: You gain life equal to that creature's toughness."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AnimalBoneyardEffect(), new TapSourceCost());
-        gainedAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        gainedAbility.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted land has \"{T}, Sacrifice a creature: You gain life equal to that creature's toughness.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
@@ -64,7 +64,7 @@ class AnimalBoneyardEffect extends OneShotEffect {
         staticText = "You gain life equal to that creature's toughness";
     }
 
-    public AnimalBoneyardEffect(final AnimalBoneyardEffect effect) {
+    private AnimalBoneyardEffect(final AnimalBoneyardEffect effect) {
         super(effect);
     }
 

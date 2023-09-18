@@ -25,7 +25,6 @@ public final class CryptolithFragment extends CardImpl {
     public CryptolithFragment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AuroraOfEmrakul.class;
 
         // Cryptolith Fragment enters the battlefield tapped.
@@ -39,7 +38,7 @@ public final class CryptolithFragment extends CardImpl {
         // At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
                 new XorLessLifeCondition(XorLessLifeCondition.CheckType.EACH_PLAYER, 10),
                 "At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment."));
     }

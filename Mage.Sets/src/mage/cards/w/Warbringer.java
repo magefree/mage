@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -9,35 +7,32 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DashedCondition;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.DashAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Warbringer extends CardImpl {
 
     public Warbringer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Dash costs you pay cost {2} less (as long as this creature is on the battlefield).
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WarbringerSpellsCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new WarbringerSpellsCostReductionEffect()));
 
         // Dash {2}{R}
-        this.addAbility(new DashAbility(this, "{2}{R}"));
+        this.addAbility(new DashAbility("{2}{R}"));
     }
 
     private Warbringer(final Warbringer card) {
@@ -54,7 +49,7 @@ class WarbringerSpellsCostReductionEffect extends CostModificationEffectImpl {
 
     public WarbringerSpellsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Dash costs you pay cost {2} less (as long as this creature is on the battlefield)";
+        this.staticText = "Dash costs you pay cost {2} less <i>(as long as this creature is on the battlefield)</i>";
     }
 
     protected WarbringerSpellsCostReductionEffect(final WarbringerSpellsCostReductionEffect effect) {
@@ -69,12 +64,15 @@ class WarbringerSpellsCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            if (abilityToModify.isControlledBy(source.getControllerId())) {
-                return DashedCondition.instance.apply(game, abilityToModify);
-            }
+        if (!(abilityToModify instanceof SpellAbility)
+                || !abilityToModify.isControlledBy(source.getControllerId())) {
+            return false;
         }
-        return false;
+        if (game == null || !game.inCheckPlayableState()) {
+            return DashedCondition.instance.apply(game, abilityToModify);
+        }
+        Card card = game.getCard(source.getSourceId());
+        return card != null && card.getAbilities(game).stream().anyMatch(DashAbility.class::isInstance);
     }
 
     @Override

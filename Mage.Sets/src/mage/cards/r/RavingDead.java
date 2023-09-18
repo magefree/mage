@@ -56,7 +56,7 @@ class RavingDeadDamageEffect extends OneShotEffect {
         this.staticText = "that player loses half their life, rounded down";
     }
 
-    public RavingDeadDamageEffect(final RavingDeadDamageEffect effect) {
+    private RavingDeadDamageEffect(final RavingDeadDamageEffect effect) {
         super(effect);
     }
 

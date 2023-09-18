@@ -1,9 +1,7 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,21 +17,13 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LoneFox
  */
 public final class Gloomdrifter extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creatures");
-
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
 
     public Gloomdrifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
@@ -47,7 +37,7 @@ public final class Gloomdrifter extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Gloomdrifter has "When Gloomdrifter enters the battlefield, nonblack creatures get -2/-2 until end of turn."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new GainAbilitySourceEffect(new EntersBattlefieldTriggeredAbility(
-            new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false))),
+            new BoostAllEffect(-2, -2, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, false))),
             new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, nonblack creatures get -2/-2 until end of turn.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);

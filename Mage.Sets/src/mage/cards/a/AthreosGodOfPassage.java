@@ -39,7 +39,7 @@ public final class AthreosGodOfPassage extends CardImpl {
 
     public AthreosGodOfPassage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(5);
@@ -121,6 +121,7 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     AthreosDiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " dies, ");
     }
 
     private AthreosDiesCreatureTriggeredAbility(AthreosDiesCreatureTriggeredAbility ability) {
@@ -144,17 +145,12 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         if (!zEvent.isDiesEvent()) {
             return false;
         }
-        if (zEvent.getTarget() == null || !filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+        if (zEvent.getTarget() == null || !filter.match(zEvent.getTarget(), controllerId, this, game)) {
             return false;
         }
         for (Effect effect : this.getEffects()) {
             effect.setValue("creatureId", event.getTargetId());
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " dies, " ;
     }
 }

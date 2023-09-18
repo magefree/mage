@@ -64,7 +64,7 @@ class LostAuramancersAbility extends PutIntoGraveFromBattlefieldSourceTriggeredA
         super(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterEnchantmentCard())));
     }
 
-    public LostAuramancersAbility(final LostAuramancersAbility ability) {
+    private LostAuramancersAbility(final LostAuramancersAbility ability) {
         super(ability);
     }
 
@@ -86,6 +86,6 @@ class LostAuramancersAbility extends PutIntoGraveFromBattlefieldSourceTriggeredA
 
     @Override
     public String getRule() {
-        return "When {this} dies, if it had no time counters on it, you may search your library for an enchantment card and put it onto the battlefield. If you do, shuffle.";
+        return "When {this} dies, if it had no time counters on it, you may search your library for an enchantment card, put it onto the battlefield, then shuffle.";
     }
 }

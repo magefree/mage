@@ -11,11 +11,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -34,7 +32,7 @@ public final class IdentityThief extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public IdentityThief(UUID ownerId, CardSetInfo setInfo) {
@@ -66,9 +64,10 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
     public IdentityThiefAbility() {
         super(Zone.BATTLEFIELD, null, true);
         this.addEffect(new IdentityThiefEffect());
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public IdentityThiefAbility(final IdentityThiefAbility ability) {
+    private IdentityThiefAbility(final IdentityThiefAbility ability) {
         super(ability);
     }
 
@@ -80,11 +79,6 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, " ;
     }
 
     @Override
@@ -101,7 +95,7 @@ class IdentityThiefEffect extends OneShotEffect {
                 + "Return the exiled card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public IdentityThiefEffect(final IdentityThiefEffect effect) {
+    private IdentityThiefEffect(final IdentityThiefEffect effect) {
         super(effect);
     }
 
@@ -114,7 +108,7 @@ class IdentityThiefEffect extends OneShotEffect {
                 && targetPermanent != null
                 && sourcePermanent != null) {
             ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfTurn, targetPermanent, source.getSourceId());
-            copyEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+            copyEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
             game.addEffect(copyEffect, source);
             UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (controller.moveCardsToExile(targetPermanent, source, game, true, exileZoneId, sourcePermanent.getName())) {

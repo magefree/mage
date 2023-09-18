@@ -31,7 +31,7 @@ public final class TeremkoGriffin extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public TeremkoGriffin (final TeremkoGriffin card) {
+    private TeremkoGriffin(final TeremkoGriffin card) {
         super(card);
     }
 

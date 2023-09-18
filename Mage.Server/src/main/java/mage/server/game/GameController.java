@@ -28,6 +28,7 @@ import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
+import mage.util.MultiAmountMessage;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -80,7 +81,7 @@ public class GameController implements GameCallback {
     private boolean useTimeout = true;
     private final GameOptions gameOptions;
 
-    private UUID userReqestingRollback;
+    private UUID userRequestingRollback;
     private int turnsToRollback;
     private int requestsOpen;
 
@@ -91,7 +92,7 @@ public class GameController implements GameCallback {
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         chatId = managerFactory.chatManager().createChatSession("Game " + game.getId());
-        this.userReqestingRollback = null;
+        this.userRequestingRollback = null;
         this.game = game;
         this.game.setSaveGame(managerFactory.configSettings().isSaveGameActivated());
         this.tableId = tableId;
@@ -149,15 +150,18 @@ public class GameController implements GameCallback {
                                 if (playerId == null) {
                                     throw new MageException("RESUME_TIMER: playerId can't be null");
                                 }
+                                Player player = game.getState().getPlayer(playerId);
+                                if (player == null) {
+                                    throw new MageException("RESUME_TIMER: player can't be null");
+                                }
+
                                 timer = timers.get(playerId);
                                 if (timer == null) {
-                                    Player player = game.getState().getPlayer(playerId);
-                                    if (player != null) {
-                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
-                                    } else {
-                                        throw new MageException("RESUME_TIMER: player can't be null");
-                                    }
+                                    timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
                                 }
+
+                                player.setBufferTimeLeft(game.getBufferTime());
+                                timer.setBufferCount(game.getBufferTime());
                                 timer.resume();
                                 break;
                             case PAUSE_TIMER:
@@ -313,6 +317,11 @@ public class GameController implements GameCallback {
 
     private synchronized void startGame() {
         if (gameFuture == null) {
+            // workaround to fill range info (cause real range fills after game start, but users must get start event with game data already)
+            for (Player player : game.getPlayers().values()) {
+                player.updateRange(game);
+            }
+
             for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
                 gameSessionPlayer.init();
             }
@@ -503,7 +512,7 @@ public class GameController implements GameCallback {
                                 turnsToRollback = -1;
                                 requestsOpen = -1;
                             } else {
-                                userReqestingRollback = userId;
+                                userRequestingRollback = userId;
                             }
                         } else {
                             Player player = game.getPlayer(playerId);
@@ -523,25 +532,25 @@ public class GameController implements GameCallback {
                 }
                 break;
             case ADD_PERMISSION_TO_ROLLBACK_TURN:
-                if (userReqestingRollback != null && requestsOpen > 0 && !userId.equals(userReqestingRollback)) {
+                if (userRequestingRollback != null && requestsOpen > 0 && !userId.equals(userRequestingRollback)) {
                     requestsOpen--;
                     if (requestsOpen == 0) {
                         game.rollbackTurns(turnsToRollback);
                         turnsToRollback = -1;
-                        userReqestingRollback = null;
+                        userRequestingRollback = null;
                         requestsOpen = -1;
                     }
                 }
                 break;
-            case DENY_PERMISSON_TO_ROLLBACK_TURN: // one player has denied - so cancel the request
+            case DENY_PERMISSION_TO_ROLLBACK_TURN: // one player has denied - so cancel the request
             {
                 UUID playerId = getPlayerId(userId);
                 if (playerId != null) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        if (userReqestingRollback != null && requestsOpen > 0 && !userId.equals(userReqestingRollback)) {
+                        if (userRequestingRollback != null && requestsOpen > 0 && !userId.equals(userRequestingRollback)) {
                             turnsToRollback = -1;
-                            userReqestingRollback = null;
+                            userRequestingRollback = null;
                             requestsOpen = -1;
                             game.informPlayers("Rollback request denied by " + player.getLogName());
                         }
@@ -597,6 +606,12 @@ public class GameController implements GameCallback {
                 break;
             case VIEW_LIMITED_DECK:
                 viewLimitedDeck(getPlayerId(userId), userId);
+                break;
+            case VIEW_SIDEBOARD:
+                if (data instanceof UUID) {
+                    UUID targetPlayerId = (UUID) data;
+                    viewSideboard(getPlayerId(userId), userId, targetPlayerId);
+                }
                 break;
             default:
                 game.sendPlayerAction(playerAction, getPlayerId(userId), data);
@@ -656,17 +671,29 @@ public class GameController implements GameCallback {
         }
     }
 
-    private void viewLimitedDeck(UUID userIdRequester, UUID origId) {
-        Player viewLimitedDeckPlayer = game.getPlayer(userIdRequester);
+    private void viewLimitedDeck(UUID playerId, UUID userId) {
+        Player viewLimitedDeckPlayer = game.getPlayer(playerId);
         if (viewLimitedDeckPlayer != null) {
             if (viewLimitedDeckPlayer.isHuman()) {
                 for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
-                    if (p.getPlayer().getId().equals(userIdRequester)) {
-                        Optional<User> u = managerFactory.userManager().getUser(origId);
+                    if (p.getPlayer().getId().equals(playerId)) {
+                        Optional<User> u = managerFactory.userManager().getUser(userId);
                         if (u.isPresent() && p.getDeck() != null) {
                             u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private void viewSideboard(UUID playerId, UUID userId, UUID targetPlayerId) {
+        Player needPlayer = game.getPlayer(playerId);
+        if (needPlayer != null && needPlayer.isHuman()) {
+            for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
+                if (p.getPlayer().getId().equals(playerId)) {
+                    Optional<User> u = managerFactory.userManager().getUser(userId);
+                    u.ifPresent(user -> user.ccViewSideboard(tableId, game.getId(), targetPlayerId));
                 }
             }
         }
@@ -787,7 +814,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void chooseAbility(UUID playerId, final String objectName, final List<? extends Ability> choices, String message) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(objectName, choices, message)));
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(getGameView(playerId), objectName, choices, message)));
     }
 
     private synchronized void choosePile(UUID playerId, final String message, final List<? extends Card> pile1, final List<? extends Card> pile2) throws MageException {
@@ -795,7 +822,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void chooseMode(UUID playerId, final Map<UUID, String> modes, final String message) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(modes, message)));
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(getGameView(playerId), modes, message)));
     }
 
     private synchronized void chooseChoice(UUID playerId, final Choice choice) throws MageException {
@@ -847,14 +874,16 @@ public class GameController implements GameCallback {
         perform(playerId, playerId1 -> getGameSession(playerId1).getAmount(message, min, max));
     }
 
-    private synchronized void multiAmount(UUID playerId, final List<String> messages, final int min, final int max, final Map<String, Serializable> options) throws MageException {
+    private synchronized void multiAmount(UUID playerId, final List<MultiAmountMessage> messages,
+            final int min, final int max, final Map<String, Serializable> options)
+            throws MageException {
         perform(playerId, playerId1 -> getGameSession(playerId1).getMultiAmount(messages, min, max, options));
     }
 
     private void informOthers(UUID playerId) throws MageException {
         StringBuilder message = new StringBuilder();
         if (game.getStep() != null) {
-            message.append(game.getStep().getType().toString()).append(" - ");
+            message.append(game.getTurnStepType().toString()).append(" - ");
         }
         message.append("Waiting for ").append(game.getPlayer(playerId).getLogName());
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
@@ -873,10 +902,10 @@ public class GameController implements GameCallback {
         if (players != null && !players.isEmpty()) {
             controller = game.getPlayer(players.get(0));
         }
-        if (controller == null || game.getStep() == null || game.getStep().getType() == null) {
+        if (controller == null || game.getStep() == null || game.getTurnStepType() == null) {
             return;
         }
-        final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
+        final String message = new StringBuilder(game.getTurnStepType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
             boolean skip = players.stream().anyMatch(playerId -> entry.getKey().equals(playerId));
             if (!skip) {
@@ -894,14 +923,21 @@ public class GameController implements GameCallback {
 
     private void error(String message, Exception ex) {
         StringBuilder sb = new StringBuilder();
-        sb.append(message).append(ex.toString());
+        sb.append(message);
+        sb.append("\n");
+        sb.append("\n");
+        sb.append(ex);
         sb.append("\nServer version: ").append(Main.getVersion().toString());
-        sb.append('\n');
+        sb.append("\nStack trace:");
+        sb.append("\n");
         for (StackTraceElement e : ex.getStackTrace()) {
-            sb.append(e.toString()).append('\n');
+            sb.append(e.toString()).append("\n");
         }
+        String mes = sb.toString();
+
+        // send error for each player
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
-            entry.getValue().gameError(sb.toString());
+            entry.getValue().gameError(mes);
         }
     }
 
@@ -1182,8 +1218,8 @@ public class GameController implements GameCallback {
         sb.append(state.getStepNum());
         sb.append("<br>getTurn: ");
         sb.append(state.getTurn());
-        sb.append("<br>getTurnId: ");
-        sb.append(state.getTurnId());
+        sb.append("<br>getExtraTurnId: ");
+        sb.append(state.getExtraTurnId());
         sb.append("<br>getTurnMods: ");
         sb.append(state.getTurnMods());
         sb.append("<br>getTurnNum: ");
@@ -1273,10 +1309,10 @@ public class GameController implements GameCallback {
         sb.append("<font color='red'>FIX command called by ").append(user.getName()).append("</font>");
         sb.append("<font size='-2'>"); // font resize start for all next logs
         sb.append("<br>Game ID: ").append(game.getId());
-        if (game.getTurn().getPhaseType() == null) {
+        if (game.getTurnPhaseType() == null) {
             sb.append("<br>Phase: not started").append(" Step: not started");
         } else {
-            sb.append("<br>Phase: ").append(game.getTurn().getPhaseType().toString()).append(" Step: ").append(game.getTurn().getStepType().toString());
+            sb.append("<br>Phase: ").append(game.getTurnPhaseType().toString()).append(" Step: ").append(game.getTurnStepType().toString());
         }
         // pings info
         sb.append("<br>");

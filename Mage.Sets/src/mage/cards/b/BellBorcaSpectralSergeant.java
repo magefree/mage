@@ -10,7 +10,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
     public BellBorcaSpectralSergeant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(0);
@@ -46,8 +46,8 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
         this.addAbility(BellBorcaSpectralSergeantAbility.getInstance());
 
         // Bell Borca, Spectral Sergeant's power is equal to the greatest number noted for it this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
-                BellBorcaSpectralSergeantValue.instance, Duration.EndOfGame
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
+                BellBorcaSpectralSergeantValue.instance
         ).setText("{this}'s power is equal to the greatest number noted for it this turn")));
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
@@ -133,8 +133,10 @@ class BellBorcaSpectralSergeantWatcher extends Watcher {
             return;
         }
         int cmc = card.getManaValue();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, game.getActivePlayerId(), game)) {
-            if (permanent == null) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+            if (permanent == null
+                    || cmcMap.get(permanent.getId()) != null
+                    && cmcMap.get(permanent.getId()) >= cmc) {
                 continue;
             }
             cmcMap.put(permanent.getId(), cmc);

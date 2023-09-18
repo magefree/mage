@@ -30,7 +30,7 @@ public final class RecklessImp extends CardImpl {
         this.addAbility(new CantBlockAbility());
                 
         // Dash {1}{B}
-        this.addAbility(new DashAbility(this, "{1}{B}"));
+        this.addAbility(new DashAbility("{1}{B}"));
     }
 
     private RecklessImp(final RecklessImp card) {

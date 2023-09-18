@@ -30,7 +30,7 @@ public final class HeartOfBogardan extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
 
         // Cumulative upkeep-Pay {2}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // When a player doesn't pay Heart of Bogardan's cumulative upkeep, Heart of Bogardan deals X damage to target player and each creature they control, where X is twice the number of age counters on Heart of Bogardan minus 2.
         this.addAbility(new HeartOfBogardanTriggeredAbility());
@@ -53,7 +53,7 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    HeartOfBogardanTriggeredAbility(final HeartOfBogardanTriggeredAbility ability) {
+    private HeartOfBogardanTriggeredAbility(final HeartOfBogardanTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class HeartOfBogardanEffect extends OneShotEffect {
                 + "where X is twice the number of age counters on {this} minus 2";
     }
 
-    public HeartOfBogardanEffect(final HeartOfBogardanEffect effect) {
+    private HeartOfBogardanEffect(final HeartOfBogardanEffect effect) {
         super(effect);
     }
 

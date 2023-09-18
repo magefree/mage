@@ -4,7 +4,6 @@ package mage.cards.g;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -28,13 +27,12 @@ public final class GarrukRelentless extends CardImpl {
 
     public GarrukRelentless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
-        this.transformable = true;
-        this.secondSideCardClazz = GarrukTheVeilCursed.class;
+        this.secondSideCardClazz = mage.cards.g.GarrukTheVeilCursed.class;
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // When Garruk Relentless has two or fewer loyalty counters on him, transform him.
         this.addAbility(new TransformAbility());
@@ -63,10 +61,10 @@ public final class GarrukRelentless extends CardImpl {
 class GarrukRelentlessStateTrigger extends StateTriggeredAbility {
 
     public GarrukRelentlessStateTrigger() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
-    public GarrukRelentlessStateTrigger(final GarrukRelentlessStateTrigger ability) {
+    private GarrukRelentlessStateTrigger(final GarrukRelentlessStateTrigger ability) {
         super(ability);
     }
 
@@ -94,7 +92,7 @@ class GarrukRelentlessDamageEffect extends OneShotEffect {
         staticText = "{this} deals 3 damage to target creature. That creature deals damage equal to its power to him";
     }
 
-    public GarrukRelentlessDamageEffect(GarrukRelentlessDamageEffect effect) {
+    private GarrukRelentlessDamageEffect(final GarrukRelentlessDamageEffect effect) {
         super(effect);
     }
 

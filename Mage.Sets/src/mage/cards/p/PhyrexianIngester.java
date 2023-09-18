@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,7 @@ public final class PhyrexianIngester extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public PhyrexianIngester(UUID ownerId, CardSetInfo setInfo) {
@@ -66,7 +65,7 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
         this.staticText = "exile target nontoken creature";
     }
 
-    public PhyrexianIngesterImprintEffect(final PhyrexianIngesterImprintEffect effect) {
+    private PhyrexianIngesterImprintEffect(final PhyrexianIngesterImprintEffect effect) {
         super(effect);
     }
 
@@ -99,7 +98,7 @@ class PhyrexianIngesterBoostEffect extends ContinuousEffectImpl {
         this.staticText = "{this} gets +X/+Y, where X is the exiled creature card's power and Y is its toughness";
     }
 
-    public PhyrexianIngesterBoostEffect(final PhyrexianIngesterBoostEffect effect) {
+    private PhyrexianIngesterBoostEffect(final PhyrexianIngesterBoostEffect effect) {
         super(effect);
     }
 

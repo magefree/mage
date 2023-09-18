@@ -25,7 +25,7 @@ public final class IndathaCrystal extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private IndathaCrystal(final IndathaCrystal card) {

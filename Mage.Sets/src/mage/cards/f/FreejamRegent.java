@@ -35,7 +35,7 @@ public final class FreejamRegent extends CardImpl {
 
         // {1}{R}: Freejam Regent gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private FreejamRegent(final FreejamRegent card) {

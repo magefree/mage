@@ -20,7 +20,7 @@ public final class LinvalaKeeperOfSilence extends CardImpl {
 
     public LinvalaKeeperOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(3);
@@ -50,7 +50,7 @@ class LinvalaKeeperOfSilenceCantActivateEffect extends RestrictionEffect {
         staticText = "Activated abilities of creatures your opponents control can't be activated";
     }
 
-    public LinvalaKeeperOfSilenceCantActivateEffect(final LinvalaKeeperOfSilenceCantActivateEffect effect) {
+    private LinvalaKeeperOfSilenceCantActivateEffect(final LinvalaKeeperOfSilenceCantActivateEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class FlowstoneWall extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {R}: Flowstone Wall gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private FlowstoneWall(final FlowstoneWall card) {

@@ -18,6 +18,7 @@ import mage.game.permanent.token.FractalToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -72,6 +73,8 @@ class EmergentSequenceEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+
+        // put land
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A);
         player.searchLibrary(target, source, game);
         Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
@@ -84,12 +87,18 @@ class EmergentSequenceEffect extends OneShotEffect {
         if (permanent == null) {
             return true;
         }
+
+        // boost land
         game.addEffect(new BecomesCreatureTargetEffect(
                 new FractalToken(), false, true, Duration.Custom
         ).setTargetPointer(new FixedTarget(permanent, game)), source);
-        permanent.addCounters(CounterType.P1P1.createInstance(
-                EmergentSequenceWatcher.getAmount(source.getControllerId(), game)
-        ), source.getControllerId(), source, game);
+
+        // rules
+        // The last sentence of Emergent Sequence’s ability counts the land it put onto the battlefield.
+        // (2021-04-16)
+        // no ETB yet, so add +1 manually
+        int amount = 1 + EmergentSequenceWatcher.getAmount(source.getControllerId(), game);
+        permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
         return true;
     }
 }
@@ -106,7 +115,7 @@ class EmergentSequenceWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 && ((EntersTheBattlefieldEvent) event).getTarget().isLand(game)) {
-            playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
         }
     }
 

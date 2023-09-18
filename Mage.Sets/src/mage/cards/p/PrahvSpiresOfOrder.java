@@ -26,7 +26,7 @@ public final class PrahvSpiresOfOrder extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {4}{W}{U}, {T}: Prevent all damage a source of your choice would deal this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageBySourceEffect(), new ManaCostsImpl("{4}{W}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageBySourceEffect(), new ManaCostsImpl<>("{4}{W}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

@@ -15,11 +15,10 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED;
 
 /**
  * @author LevelX2
@@ -42,9 +41,9 @@ public final class RadiantDestiny extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
 
         // Creatures you control of the chosen type get +1/+1. As long as you have the city's blessing, they also have vigilance.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
+        Ability ability = new SimpleStaticAbility(new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
         ContinuousEffect effect = new ConditionalContinuousEffect(
-                new GainAbilityAllOfChosenSubtypeEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES_CONTROLLED),
+                new GainAbilityAllOfChosenSubtypeEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED),
                 CitysBlessingCondition.instance,
                 "As long as you have the city's blessing, they also have vigilance.");
         ability.addEffect(effect);

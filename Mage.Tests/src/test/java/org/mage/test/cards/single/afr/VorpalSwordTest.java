@@ -2,7 +2,6 @@ package org.mage.test.cards.single.afr;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -22,7 +21,6 @@ public class VorpalSwordTest extends CardTestPlayerBase {
         attack(3, playerA,"Grizzly Bears", playerB);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertWonTheGame(playerA);
         assertLostTheGame(playerB);
     }

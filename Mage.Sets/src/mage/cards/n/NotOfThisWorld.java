@@ -89,7 +89,7 @@ enum NotOfThisWorldCondition implements Condition {
                 .flatMap(Collection::stream)
                 .map(game::getPermanentOrLKIBattlefield)
                 .anyMatch(permanent -> permanent != null && filter.match(
-                        permanent, sourceSpell.getSourceId(), sourceSpell.getControllerId(), game
+                        permanent, sourceSpell.getControllerId(), source, game
                 ));
     }
 

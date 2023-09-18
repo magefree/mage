@@ -10,6 +10,9 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author weirddan455
@@ -24,7 +27,11 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
     }
 
     public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional) {
-        super();
+        this(counter, additional, false);
+    }
+
+    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional, boolean underOwnerControl) {
+        super(false, false, underOwnerControl);
         this.counter = counter;
         this.additional = additional;
     }
@@ -42,13 +49,19 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AddCounterTargetReplacementEffect counterEffect = new AddCounterTargetReplacementEffect(counter);
-        game.addEffect(counterEffect, source);
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            AddCounterTargetReplacementEffect counterEffect = new AddCounterTargetReplacementEffect(counter);
+            counterEffect.setTargetPointer(new FixedTarget(targetId, game));
+            game.addEffect(counterEffect, source);
+        }
         return super.apply(game, source);
     }
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder(super.getText(mode));
         sb.append(" with ");
         if (additional) {
@@ -69,7 +82,11 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
         if (counter.getCount() != 1) {
             sb.append('s');
         }
-        sb.append(" on it");
+        if (targetPointer.isPlural(mode.getTargets())) {
+            sb.append(" on them");
+        } else {
+            sb.append(" on it");
+        }
         return sb.toString();
     }
 }
@@ -100,7 +117,7 @@ class AddCounterTargetReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+        return getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
 
     @Override

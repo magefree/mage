@@ -9,10 +9,7 @@ import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -27,7 +24,7 @@ import java.util.UUID;
  */
 public final class MelekIzzetParagon extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("cast instant or sorcery spells");
+    private static final FilterCard filter = new FilterCard("cast instant and sorcery spells");
 
     static {
         filter.add(Predicates.or(
@@ -38,7 +35,7 @@ public final class MelekIzzetParagon extends CardImpl {
 
     public MelekIzzetParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WEIRD);
         this.subtype.add(SubType.WIZARD);
 
@@ -49,7 +46,7 @@ public final class MelekIzzetParagon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
 
         // You may cast instant and sorcery spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
 
         // Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
         this.addAbility(new MelekIzzetParagonTriggeredAbility());
@@ -71,7 +68,7 @@ class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), false);
     }
 
-    public MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {
+    private MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {
         super(ability);
     }
 

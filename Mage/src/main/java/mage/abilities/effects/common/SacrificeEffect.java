@@ -37,7 +37,7 @@ public class SacrificeEffect extends OneShotEffect {
         setText();
     }
 
-    public SacrificeEffect(final SacrificeEffect effect) {
+    protected SacrificeEffect(final SacrificeEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.count = effect.count;
@@ -56,9 +56,9 @@ public class SacrificeEffect extends OneShotEffect {
                 int realCount = game.getBattlefield().countAll(newFilter, player.getId(), game);
                 amount = Math.min(amount, realCount);
                 Target target = new TargetPermanent(amount, amount, newFilter, true);
-                if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
+                if (amount > 0 && target.canChoose(player.getId(), source, game)) {
                     while (!target.isChosen()
-                            && target.canChoose(source.getSourceId(), player.getId(), game)
+                            && target.canChoose(player.getId(), source, game)
                             && player.canRespond()) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     }
@@ -89,7 +89,7 @@ public class SacrificeEffect extends OneShotEffect {
         if (preText != null) {
             sb.append(preText);
         }
-        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent"))) {
+        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent") || preText.endsWith("controller"))) {
             sb.append(" sacrifices ");
         } else {
             if (preText == null || preText.isEmpty()) {
@@ -98,12 +98,13 @@ public class SacrificeEffect extends OneShotEffect {
                 sb.append(" sacrifice ");
             }
         }
-        if (!filter.getMessage().startsWith("another")
-                && !filter.getMessage().startsWith("a ")
-                && !filter.getMessage().startsWith("an ")) {
-            sb.append(CardUtil.numberToText(count.toString(), "a")).append(' ');
+        if (count.toString().equals("1")) {
+            sb.append(CardUtil.addArticle(filter.getMessage()));
+        } else {
+            sb.append(CardUtil.numberToText(count.toString(), "a"));
+            sb.append(" ");
+            sb.append(filter.getMessage());
         }
-        sb.append(filter.getMessage());
         staticText = sb.toString();
     }
 }

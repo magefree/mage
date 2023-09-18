@@ -32,8 +32,8 @@ public final class NarfiBetrayerKing extends CardImpl {
     public NarfiBetrayerKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -48,7 +48,7 @@ public final class NarfiBetrayerKing extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
-                new ManaCostsImpl("{S}{S}{S}")
+                new ManaCostsImpl<>("{S}{S}{S}")
         ));
     }
 

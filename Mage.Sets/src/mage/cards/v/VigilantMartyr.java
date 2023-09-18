@@ -31,7 +31,7 @@ public final class VigilantMartyr extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell that targets an enchantment");
 
     static {
-        filter.add(new TargetsPermanentPredicate(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
+        filter.add(new TargetsPermanentPredicate(StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
     }
 
     public VigilantMartyr(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +46,7 @@ public final class VigilantMartyr extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // {W}{W}, {tap}, Sacrifice Vigilant Martyr: Counter target spell that targets an enchantment.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{W}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));

@@ -29,7 +29,6 @@ public class TargetRequiredTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Redcap Melee", 1);
         assertGraveyardCount(playerA, "Mountain", 1);
@@ -51,7 +50,6 @@ public class TargetRequiredTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); AI must select targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Redcap Melee", 1);
         assertGraveyardCount(playerA, "Mountain", 1);
@@ -73,7 +71,6 @@ public class TargetRequiredTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Redcap Melee", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
@@ -93,7 +90,6 @@ public class TargetRequiredTest extends CardTestPlayerBase {
         //setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Redcap Melee", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);

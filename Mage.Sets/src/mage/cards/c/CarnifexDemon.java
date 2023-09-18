@@ -25,7 +25,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class CarnifexDemon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -43,7 +43,7 @@ public final class CarnifexDemon extends CardImpl {
 
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)),
-                "{this} enters the battlefield with two -1/-1 counters on it"
+                "with two -1/-1 counters on it"
         ));
 
         Ability ability = new SimpleActivatedAbility(
@@ -51,7 +51,7 @@ public final class CarnifexDemon extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.M1M1.createInstance(),
                         filter
-                ), new ManaCostsImpl("{B}")
+                ), new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
         this.addAbility(ability);

@@ -138,7 +138,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(Predicates.or(getArabianNightsNamePredicates()));
 
     }
@@ -147,7 +147,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new CityInABottleSacrificeEffect());
     }
 
-    CityInABottleStateTriggeredAbility(final CityInABottleStateTriggeredAbility ability) {
+    private CityInABottleStateTriggeredAbility(final CityInABottleStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -158,7 +158,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().contains(filter, this.getSourceId(), this.getControllerId(), game, 1);
+        return game.getBattlefield().contains(filter, this.getControllerId(), this, game, 1);
     }
 
     @Override
@@ -172,7 +172,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(Predicates.or(getArabianNightsNamePredicates()));
     }
 
@@ -181,7 +181,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
         this.staticText = "its controller sacrifices it";
     }
 
-    CityInABottleSacrificeEffect(final CityInABottleSacrificeEffect effect) {
+    private CityInABottleSacrificeEffect(final CityInABottleSacrificeEffect effect) {
         super(effect);
     }
 
@@ -192,7 +192,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.sacrifice(source, game);
         }
         return true;
@@ -212,7 +212,7 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't play cards originally printed in the <i>Arabian Nights</i> expansion";
     }
 
-    CityInABottleCantPlayEffect(final CityInABottleCantPlayEffect effect) {
+    private CityInABottleCantPlayEffect(final CityInABottleCantPlayEffect effect) {
         super(effect);
     }
 
@@ -239,6 +239,6 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        return filter.match(card, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(card, source.getControllerId(), source, game);
     }
 }

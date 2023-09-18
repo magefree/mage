@@ -1,14 +1,10 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +17,6 @@ public final class MastersEditionIV extends ExpansionSet {
     public static MastersEditionIV getInstance() {
         return instance;
     }
-
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private MastersEditionIV() {
         super("Masters Edition IV", "ME4", ExpansionSet.buildDate(2011, 1, 10), SetType.MAGIC_ONLINE);
@@ -305,16 +299,12 @@ public final class MastersEditionIV extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getSpecialLand() {
-        // ME4 replace all basic lands with special (1 per booster)
-        // https://mtg.gamepedia.com/Masters_Edition_IV
-
-        if (savedSpecialLand.isEmpty()) {
-            savedSpecialLand.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code).name("Urza's Mine")));
-            savedSpecialLand.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code).name("Urza's Power Plant")));
-            savedSpecialLand.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code).name("Urza's Tower")));
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        if (rarity == Rarity.LAND) {
+            // Oasis is a normal common
+            cardInfos.removeIf(cardInfo -> "Oasis".equals(cardInfo.getName()));
         }
-
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 }

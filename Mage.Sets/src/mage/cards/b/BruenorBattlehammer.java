@@ -21,8 +21,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -31,7 +29,7 @@ public final class BruenorBattlehammer extends CardImpl {
     public BruenorBattlehammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
@@ -74,7 +72,7 @@ class BruenorBattlehammerBoostEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             int equipped = permanent
                     .getAttachments()
@@ -91,36 +89,45 @@ class BruenorBattlehammerBoostEffect extends ContinuousEffectImpl {
 class BruenorBattlehammerCostEffect extends CostModificationEffectImpl {
 
     BruenorBattlehammerCostEffect() {
-        super(Duration.Custom, Benefit, CostModificationType.SET_COST);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.SET_COST);
         this.staticText = "you may pay {0} rather than pay the equip cost " +
                 "of the first equip ability you activate each turn.";
     }
 
-    BruenorBattlehammerCostEffect(final BruenorBattlehammerCostEffect effect) {
+    private BruenorBattlehammerCostEffect(final BruenorBattlehammerCostEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return source.isControlledBy(abilityToModify.getControllerId())
-                && !BruenorBattlehammerWatcher.checkPlayer(abilityToModify.getControllerId(), game)
-                && abilityToModify instanceof EquipAbility;
+        return abilityToModify instanceof EquipAbility
+                && source.isControlledBy(abilityToModify.getControllerId())
+                && !BruenorBattlehammerWatcher.checkPlayer(abilityToModify.getControllerId(), game);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        if (!game.inCheckPlayableState()) {
-            return false;
+        boolean applyReduce = false;
+        if (game.inCheckPlayableState()) {
+            // getPlayable use - apply all the time
+            applyReduce = true;
+        } else {
+            // real use - ask the player
+            Player controller = game.getPlayer(abilityToModify.getControllerId());
+            if (controller != null
+                    && controller.chooseUse(Outcome.PlayForFree,
+                    String.format("Pay {0} to equip instead %s?", abilityToModify.getManaCostsToPay().getText()), source, game)) {
+                applyReduce = true;
+            }
         }
-        Player controller = game.getPlayer(abilityToModify.getControllerId());
-        if (controller == null || !controller.chooseUse(
-                Outcome.PlayForFree, "Pay {0} to equip?", source, game
-        )) {
-            return false;
+
+        if (applyReduce) {
+            abilityToModify.clearCosts();
+            abilityToModify.clearManaCostsToPay();
+            return true;
         }
-        abilityToModify.getCosts().clear();
-        abilityToModify.getManaCostsToPay().clear();
-        return true;
+
+        return false;
     }
 
     @Override

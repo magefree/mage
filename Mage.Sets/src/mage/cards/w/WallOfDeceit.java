@@ -34,10 +34,10 @@ public final class WallOfDeceit extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {3}: Turn Wall of Deceit face down.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WallOfDeceitEffect(), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WallOfDeceitEffect(), new ManaCostsImpl<>("{3}")));
 
         // Morph {U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private WallOfDeceit(final WallOfDeceit card) {
@@ -57,7 +57,7 @@ class WallOfDeceitEffect extends OneShotEffect {
         this.staticText = "Turn {this} face down";
     }
 
-    public WallOfDeceitEffect(final WallOfDeceitEffect effect) {
+    private WallOfDeceitEffect(final WallOfDeceitEffect effect) {
         super(effect);
     }
 

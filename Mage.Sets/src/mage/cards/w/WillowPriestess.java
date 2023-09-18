@@ -51,7 +51,7 @@ public final class WillowPriestess extends CardImpl {
         
         // {2}{G}: Target green creature gains protection from black until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl("{2}{G}"));
+                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}"));
         Target target = new TargetPermanent(greenCreature);
         ability.addTarget(target);
         this.addAbility(ability);

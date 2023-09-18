@@ -28,8 +28,8 @@ public final class AffectionateIndrik extends CardImpl {
         // When Affectionate Indrik enters the battlefield, you may have it fight target creature you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new FightTargetSourceEffect()
-                        .setText("you may have it fight "
-                                + "target creature you don't control"),
+                        .setText("you may have it fight target creature you don't control. " +
+                                "<i>(Each deals damage equal to its power to the other.)</i>"),
                 true
         );
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));

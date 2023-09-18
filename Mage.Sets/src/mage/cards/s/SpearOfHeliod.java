@@ -35,14 +35,14 @@ public final class SpearOfHeliod extends CardImpl {
 
     public SpearOfHeliod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
 
         // {1}{W}{W}, {T}: Destroy target creature that dealt damage to you this turn.
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);

@@ -1,21 +1,24 @@
 package mage.game;
 
+import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.CommanderChooseColorAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.abilities.keyword.CompanionAbility;
 import mage.cards.Card;
+import mage.choices.ChoiceColor;
 import mage.constants.*;
+import mage.filter.FilterMana;
 import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
-import mage.watchers.common.CommanderPlaysCountWatcher;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Stream;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
@@ -26,13 +29,15 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean alsoHand = true;    // replace commander going to hand
     protected boolean alsoLibrary = true; // replace commander going to library
 
+    // 103.7a  In a two-player game, the player who plays first skips the draw step
+    // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
-        super(attackOption, range, mulligan, startLife, startingSize);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize) {
+        super(attackOption, range, mulligan, startingLife, minimumDeckSize, 7);
     }
 
-    public GameCommanderImpl(final GameCommanderImpl game) {
+    protected GameCommanderImpl(final GameCommanderImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
         this.alsoLibrary = game.alsoLibrary;
@@ -40,42 +45,91 @@ public abstract class GameCommanderImpl extends GameImpl {
         this.checkCommanderDamage = game.checkCommanderDamage;
     }
 
+    private void handlePipers(Player player, Set<Card> commanders) {
+        int piperCount = commanders
+                .stream()
+                .filter(CommanderChooseColorAbility::checkCard)
+                .mapToInt(x -> 1)
+                .sum();
+        if (piperCount < 1) {
+            return;
+        }
+        FilterMana leftoverColors = new FilterMana();
+        Stream.concat(
+                player.getLibrary().getCards(this).stream(),
+                player.getSideboard().getCards(this).stream()
+        ).map(Card::getColorIdentity).forEach(leftoverColors::addAll);
+        FilterMana nonPiperIdentity = new FilterMana();
+        commanders
+                .stream()
+                .filter(card -> !CommanderChooseColorAbility.checkCard(card))
+                .map(Card::getColorIdentity)
+                .forEach(nonPiperIdentity::addAll);
+        leftoverColors.removeAll(nonPiperIdentity);
+        if (piperCount < leftoverColors.getColorCount()) {
+            throw new UnsupportedOperationException("This deck should not be legal, something went wrong");
+        }
+        Iterator<ObjectColor> iterator = leftoverColors.getColors().listIterator();
+        for (Card commander : commanders) {
+            if (!CommanderChooseColorAbility.checkCard(commander)) {
+                continue;
+            }
+            ObjectColor color;
+            if (!iterator.hasNext()) {
+                ChoiceColor choiceColor = new ChoiceColor(
+                        true, "Choose a color for " + commander.getName()
+                );
+                player.choose(Outcome.Neutral, choiceColor, this);
+                color = choiceColor.getColor();
+            } else {
+                color = iterator.next();
+            }
+            commander.getColor().addColor(color);
+        }
+    }
+
     @Override
     protected void init(UUID choosingPlayerId) {
         // Karn Liberated calls it to restart game, all data and commanders must be re-initialized
 
-        // plays watcher
-        state.addWatcher(new CommanderPlaysCountWatcher());
+        // add game mode specific watchers here
+        //state.addWatcher(new CommanderPlaysCountWatcher());
 
         // move commanders to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
-            if (player != null) {
-                // add new commanders
-                for (UUID cardId : player.getSideboard()) {
-                    Card card = this.getCard(cardId);
-                    if (card != null) {
-                        // Check for companions. If it is the only card in the sideboard, it is the commander, not a companion.
-                        if (player.getSideboard().size() > 1 && card.getAbilities(this).stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
-                            continue;
-                        }
-                        addCommander(card, player);
-                    }
+            if (player == null) {
+                continue;
+            }
+            // add new commanders
+            Set<Card> commanders = new HashSet<>();
+            for (UUID cardId : player.getSideboard()) {
+                Card card = this.getCard(cardId);
+                if (card == null) {
+                    continue;
                 }
+                // Check for companions. If it is the only card in the sideboard, it is the commander, not a companion.
+                if (player.getSideboard().size() > 1 && card.getAbilities(this).stream().anyMatch(CompanionAbility.class::isInstance)) {
+                    continue;
+                }
+                commanders.add(card);
+                addCommander(card, player);
+            }
 
-                // init commanders
-                for (UUID commanderId : this.getCommandersIds(player, CommanderCardType.ANY, false)) {
-                    Card commander = this.getCard(commanderId);
-                    if (commander != null) {
-                        initCommander(commander, player);
-                    }
+            handlePipers(player, commanders);
+
+            // init commanders
+            for (UUID commanderId : this.getCommandersIds(player, CommanderCardType.ANY, false)) {
+                Card commander = this.getCard(commanderId);
+                if (commander != null) {
+                    initCommander(commander, player);
                 }
             }
         }
 
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
-            state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+            state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
         }
     }
 
@@ -117,7 +171,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         // Paris mulligan - no longer used by default for commander
 //        Player player = getPlayer(playerId);
 //        TargetCardInHand target = new TargetCardInHand(1, player.getHand().size(), new FilterCard("card to mulligan"));
-//        target.setNotTarget(true);
+//        target.withNotTarget(true);
 //        target.setRequired(false);
 //        if (player.choose(Outcome.Exile, player.getHand(), target, this)) {
 //            int numCards = target.getTargets().size();

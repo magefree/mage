@@ -33,13 +33,14 @@ public final class RangerOfEos extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // When Ranger of Eos enters the battlefield, you may search your library for up to two creature cards with converted mana cost 1 or less,
         // reveal them, and put them into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
     }
 
     private RangerOfEos(final RangerOfEos card) {

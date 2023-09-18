@@ -23,7 +23,7 @@ public final class StrikeItRich extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
 
         // Flashback {2}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{2}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{R}")));
     }
 
     private StrikeItRich(final StrikeItRich card) {

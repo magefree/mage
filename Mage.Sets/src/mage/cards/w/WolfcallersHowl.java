@@ -47,7 +47,7 @@ class WolfcallersHowlEffect extends OneShotEffect {
         this.staticText = "create X 2/2 green Wolf creature tokens, where X is the number of your opponents with four or more cards in hand";
     }
 
-    public WolfcallersHowlEffect(final WolfcallersHowlEffect effect) {
+    private WolfcallersHowlEffect(final WolfcallersHowlEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class WolfcallersHowlEffect extends OneShotEffect {
                 }
             }
             if (count > 0) {
-                return new CreateTokenEffect(new WolfToken("C14"), count).apply(game, source);
+                return new CreateTokenEffect(new WolfToken(), count).apply(game, source);
             }
             return true;
         }

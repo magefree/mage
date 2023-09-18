@@ -29,7 +29,7 @@ public final class RainbowEfreet extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {U}{U}: Rainbow Efreet phases out.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutSourceEffect(), new ManaCostsImpl("{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutSourceEffect(), new ManaCostsImpl<>("{U}{U}")));
     }
 
     private RainbowEfreet(final RainbowEfreet card) {

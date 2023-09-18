@@ -104,7 +104,7 @@ class DispersalEffect extends OneShotEffect {
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, highestCMC));
             filter.add(new ControllerIdPredicate(opponentId));
             Target target = new TargetPermanent(1, 1, filter, true);
-            if (opponent.choose(outcome, target, source.getSourceId(), game)) {
+            if (opponent.choose(outcome, target, source, game)) {
                 if (target.getFirstTarget() == null) {
                     continue;
                 }

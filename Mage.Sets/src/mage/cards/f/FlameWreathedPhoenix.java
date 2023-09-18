@@ -37,12 +37,12 @@ public final class FlameWreathedPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Tribute 2 (As this creature enters the battlefield, an opponent of your choice may put 2 +1/+1 counter on it.)
         this.addAbility(new TributeAbility(2));
-        // When Flame-Wreathed Phoenix enters the battlefield, if its tribute wasn't paid, it gains haste and "When this creature dies, return it to its owner's hand."
+        // When Flame-Wreathed Phoenix enters the battlefield, if tribute wasn't paid, it gains haste and "When this creature dies, return it to its owner's hand."
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
         Effect effect = new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
         ability.addEffect(effect);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if its tribute wasn't paid, it gains haste and \"When this creature dies, return it to its owner's hand.\""));
+                "When {this} enters the battlefield, if tribute wasn't paid, it gains haste and \"When this creature dies, return it to its owner's hand.\""));
 
     }
 

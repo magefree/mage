@@ -41,7 +41,7 @@ class DispossessEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
         super(true, "target opponent's", "any number of cards with the chosen name");
     }
 
-    public DispossessEffect(final DispossessEffect effect) {
+    private DispossessEffect(final DispossessEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class AetherRiftEffect extends OneShotEffect {
         this.staticText = "discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life";
     }
 
-    public AetherRiftEffect(final AetherRiftEffect effect) {
+    private AetherRiftEffect(final AetherRiftEffect effect) {
         super(effect);
     }
 
@@ -67,9 +67,9 @@ class AetherRiftEffect extends OneShotEffect {
             Card card = controller.discardOne(true, false, source, game);
             if (card != null && card.isCreature(game)) {
                 Effect returnEffect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-                returnEffect.setTargetPointer(new FixedTarget(card.getId()));
                 Effect doEffect = new DoUnlessAnyPlayerPaysEffect(returnEffect, new PayLifeCost(5),
                         "Pay 5 life to prevent " + card.getLogName() + " to return from graveyard to battlefield?");
+                doEffect.setTargetPointer(new FixedTarget(card.getId(), game));
                 return doEffect.apply(game, source);
             }
             return true;

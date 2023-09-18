@@ -41,7 +41,7 @@ public final class TheCircleOfLoyalty extends CardImpl {
     public TheCircleOfLoyalty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {1} less to cast for each Knight you control.
         DynamicValue xValue = new PermanentsOnBattlefieldCount(filterKnight);
@@ -61,7 +61,7 @@ public final class TheCircleOfLoyalty extends CardImpl {
 
         // {3}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new KnightToken()), new ManaCostsImpl("{3}{W}")
+                new CreateTokenEffect(new KnightToken()), new ManaCostsImpl<>("{3}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

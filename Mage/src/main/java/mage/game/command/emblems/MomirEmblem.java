@@ -2,6 +2,7 @@ package mage.game.command.emblems;
 
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -17,13 +18,12 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.EmptyToken;
-import mage.util.CardUtil;
-import mage.util.RandomUtil;
-
-import java.util.List;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
+import mage.util.RandomUtil;
+import mage.util.functions.CopyTokenFunction;
+
+import java.util.List;
 
 /**
  * @author spjspj
@@ -32,15 +32,23 @@ public final class MomirEmblem extends Emblem {
     // Faking Vanguard as an Emblem; need to come back to this and add a new type of CommandObject
 
     public MomirEmblem() {
-        setName("Emblem Momir Vig, Simic Visionary");
-        setExpansionSetCodeForImage("DIS");
+        super("Emblem Momir");
 
         // {X}, Discard a card: Create a token that's a copy of a creature card with converted mana cost X chosen at random.
         // Activate this ability only any time you could cast a sorcery and only once each turn.
-        LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.COMMAND, new MomirEffect(), new VariableManaCost());
+        LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.COMMAND, new MomirEffect(), new VariableManaCost(VariableCostType.NORMAL));
         ability.addCost(new DiscardCardCost());
         ability.setTiming(TimingRule.SORCERY);
         this.getAbilities().add(ability);
+    }
+
+    private MomirEmblem(final MomirEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public MomirEmblem copy() {
+        return new MomirEmblem(this);
     }
 }
 
@@ -65,7 +73,7 @@ class MomirEffect extends OneShotEffect {
         int value = source.getManaCostsToPay().getX();
         if (game.isSimulation()) {
             // Create dummy token to prevent multiple DB find cards what causes H2 java.lang.IllegalStateException if AI cancels calculation because of time out
-            Token token = new CreatureToken(value, value +1);
+            Token token = new CreatureToken(value, value + 1);
             token.putOntoBattlefield(1, game, source, source.getControllerId(), false, false);
             return true;
         }
@@ -78,7 +86,7 @@ class MomirEffect extends OneShotEffect {
         }
 
         // search for a random non custom set creature
-        EmptyToken token = null;
+        Token token = null;
         while (!options.isEmpty()) {
             int index = RandomUtil.nextInt(options.size());
             ExpansionSet expansionSet = Sets.findSet(options.get(index).getSetCode());
@@ -87,8 +95,7 @@ class MomirEffect extends OneShotEffect {
             } else {
                 Card card = options.get(index).getCard();
                 if (card != null) {
-                    token = new EmptyToken();
-                    CardUtil.copyTo(token).from(card, game);
+                    token = CopyTokenFunction.createTokenCopy(card, game);
                     break;
                 } else {
                     options.remove(index);

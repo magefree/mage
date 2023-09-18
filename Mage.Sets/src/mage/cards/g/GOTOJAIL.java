@@ -1,50 +1,40 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseOpponentEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class GOTOJAIL extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public GOTOJAIL(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         // When GO TO JAIL enters the battlefield, exile target creature an opponent controls until GO TO JAIL leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GoToJailExileEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // At the beginning of the upkeep of the exiled card's owner, that player rolls two six-sided dice. If they roll doubles, sacrifice GO TO JAIL.
@@ -68,7 +58,7 @@ class GoToJailExileEffect extends OneShotEffect {
         this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield.";
     }
 
-    public GoToJailExileEffect(final GoToJailExileEffect effect) {
+    private GoToJailExileEffect(final GoToJailExileEffect effect) {
         super(effect);
     }
 
@@ -79,7 +69,7 @@ class GoToJailExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
 
         // If GO TO JAIL leaves the battlefield before its triggered ability resolves,
@@ -88,7 +78,11 @@ class GoToJailExileEffect extends OneShotEffect {
             Player controller = game.getPlayer(targetPermanent.getControllerId());
             if (controller != null) {
                 game.getState().setValue(permanent.getId() + ChooseOpponentEffect.VALUE_KEY, controller.getId());
-                return new ExileTargetEffect(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()).apply(game, source);
+                new ExileTargetEffect(
+                        CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()
+                ).apply(game, source);
+                game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
+                return true;
             }
         }
         return false;
@@ -99,9 +93,10 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
 
     public GoToJailTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GoToJailUpkeepEffect(), false);
+        setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
-    public GoToJailTriggeredAbility(final GoToJailTriggeredAbility ability) {
+    private GoToJailTriggeredAbility(final GoToJailTriggeredAbility ability) {
         super(ability);
     }
 
@@ -119,11 +114,6 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of the chosen player's upkeep, " ;
-    }
 }
 
 class GoToJailUpkeepEffect extends OneShotEffect {
@@ -133,7 +123,7 @@ class GoToJailUpkeepEffect extends OneShotEffect {
         this.staticText = "that player rolls two six-sided dice. If they roll doubles, sacrifice {this}";
     }
 
-    public GoToJailUpkeepEffect(final GoToJailUpkeepEffect effect) {
+    private GoToJailUpkeepEffect(final GoToJailUpkeepEffect effect) {
         super(effect);
     }
 
@@ -145,7 +135,7 @@ class GoToJailUpkeepEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
 
         if (sourceObject instanceof Permanent && permanent != null) {
@@ -153,8 +143,9 @@ class GoToJailUpkeepEffect extends OneShotEffect {
             Player opponent = game.getPlayer(opponentId);
 
             if (opponent != null) {
-                int thisRoll = opponent.rollDice(source, game, 6);
-                int thatRoll = opponent.rollDice(source, game, 6);
+                List<Integer> results = opponent.rollDice(outcome, source, game, 6, 2, 0);
+                int thisRoll = results.get(0);
+                int thatRoll = results.get(1);
                 if (thisRoll == thatRoll) {
                     return permanent.sacrifice(source, game);
                 }

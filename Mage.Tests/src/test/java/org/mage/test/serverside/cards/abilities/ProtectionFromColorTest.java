@@ -17,12 +17,10 @@ public class ProtectionFromColorTest extends CardTestPlayerBase {
         // tapped White Knight with Protection from Black
         addCard(Zone.BATTLEFIELD, playerB, "White Knight", 1, true);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Destroy target tapped creature.", "White Knight");
+        checkPlayableAbility("test", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", false);
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        // no one should be destroyed
-        assertPermanentCount(playerB, "White Knight", 1);
     }
 
     @Test
@@ -81,4 +79,27 @@ public class ProtectionFromColorTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Test that the creature is also protected from targeting
+     */
+    @Test
+    public void testProtectionTargeting() {
+        // {3}{W}
+        // Protection from white
+        String archonOfAbsolution = "Archon of Absolution";
+        // {W}
+        // Exile target creature
+        String pathToExile = "Path to Exile";
+
+        addCard(Zone.BATTLEFIELD, playerA, archonOfAbsolution);
+
+        addCard(Zone.HAND, playerB, pathToExile);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains");
+
+        checkPlayableAbility("Protection works", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast " + pathToExile, false);
+
+        execute();
+
+        assertPermanentCount(playerA, archonOfAbsolution, 1);
+    }
 }

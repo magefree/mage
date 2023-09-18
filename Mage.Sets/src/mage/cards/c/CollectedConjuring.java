@@ -1,10 +1,11 @@
 package mage.cards.c;
 
-import mage.ApprovingObject;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
@@ -13,7 +14,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -51,12 +52,6 @@ class CollectedConjuringEffect extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
-    private static final FilterCard filter2 = filter.copy();
-
-    static {
-        filter2.setMessage("sorcery card with mana value 3 or less");
-    }
-
     CollectedConjuringEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "exile the top six cards of your library. You may cast up to two sorcery spells " +
@@ -76,42 +71,12 @@ class CollectedConjuringEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null
-                || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 6));
-        Cards cardsToChoose = new CardsImpl(cards);
         controller.moveCards(cards, Zone.EXILED, source, game);
-        int cardsCast = 0;
-        while (!cardsToChoose.getCards(filter, source.getSourceId(), source.getControllerId(), game).isEmpty()
-                && cardsCast < 2) {
-            if (!controller.chooseUse(Outcome.PlayForFree, "Cast a card exiled with "
-                    + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
-                break;
-            }
-            TargetCard targetCard = new TargetCard(1, Zone.EXILED, filter2);
-            if (!controller.choose(Outcome.PlayForFree, cardsToChoose, targetCard, game)) {
-                continue;
-            }
-            Card card = game.getCard(targetCard.getFirstTarget());
-            if (card == null) {
-                continue;
-            }
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                    game, true, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-            cardsToChoose.remove(card); // remove on non cast too (infinite freeze fix)
-            if (cardWasCast) {
-                cards.remove(card);
-                cardsCast++;
-            } else {
-                game.informPlayer(controller, "You're not able to cast "
-                        + card.getIdName() + " or you canceled the casting.");
-            }
-        }
+        CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter, 2);
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }

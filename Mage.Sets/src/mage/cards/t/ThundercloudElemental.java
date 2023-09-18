@@ -44,12 +44,12 @@ public final class ThundercloudElemental extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{U}: Tap all creatures with toughness 2 or less.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(toughnessFilter), new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(toughnessFilter), new ManaCostsImpl<>("{3}{U}")));
 
         // {3}{U}: All other creatures lose flying until end of turn.
         Effect effect = new LoseAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, flyingFilter);
         effect.setText("All other creatures lose flying until end of turn");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{U}")));
 
     }
 

@@ -50,7 +50,7 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
         staticText = "<i>Radiance</i> &mdash; Untap target creature and each other creature that shares a color with it";
     }
 
-    public RallyTheRighteousUntapEffect(final RallyTheRighteousUntapEffect effect) {
+    private RallyTheRighteousUntapEffect(final RallyTheRighteousUntapEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
         if (target != null) {
             ObjectColor color = target.getColor(game);
             target.untap(game);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 if (permanent.getColor(game).shares(color) && !permanent.getId().equals(target.getId())) {
                     permanent.untap(game);
                 }
@@ -83,7 +83,7 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
         staticText = "Those creatures get +2/+0 until end of turn";
     }
 
-    public RallyTheRighteousBoostEffect(final RallyTheRighteousBoostEffect effect) {
+    private RallyTheRighteousBoostEffect(final RallyTheRighteousBoostEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
         if (target != null) {
             affectedObjectList.add(new MageObjectReference(target, game));
             ObjectColor color = target.getColor(game);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 if (!permanent.getId().equals(target.getId()) && permanent.getColor(game).shares(color)) {
                     affectedObjectList.add(new MageObjectReference(permanent, game));
                 }

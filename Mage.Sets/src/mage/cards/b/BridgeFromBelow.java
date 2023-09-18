@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -31,7 +30,7 @@ public final class BridgeFromBelow extends CardImpl {
 
     static {
         filter1.add(TargetController.YOU.getOwnerPredicate());
-        filter1.add(Predicates.not(TokenPredicate.instance));
+        filter1.add(TokenPredicate.FALSE);
         filter2.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
@@ -58,14 +57,15 @@ public final class BridgeFromBelow extends CardImpl {
 
 class BridgeFromBelowAbility extends TriggeredAbilityImpl {
 
-    protected FilterCreaturePermanent filter;
+    private final FilterCreaturePermanent filter;
 
     public BridgeFromBelowAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.GRAVEYARD, effect, false);
         this.filter = filter;
+        setTriggerPhrase(filter.getMessage() + ", if {this} is in your graveyard, ");
     }
 
-    public BridgeFromBelowAbility(BridgeFromBelowAbility ability) {
+    private BridgeFromBelowAbility(final BridgeFromBelowAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }
@@ -83,14 +83,12 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null
-                    && filter.match(permanent, sourceId, controllerId, game)) {
-                return true;
-            }
-        }
-        return false;
+        if (!zEvent.isDiesEvent()) { return false; }
+
+        Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+        if (permanent == null) { return false; }
+
+        return filter.match(permanent, controllerId, this, game);
     }
 
     @Override
@@ -98,10 +96,5 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
         Player controller = game.getPlayer(this.getControllerId());
         return controller != null
                 && controller.getGraveyard().contains(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return filter.getMessage() + ", if {this} is in your graveyard, " ;
     }
 }

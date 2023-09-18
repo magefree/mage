@@ -25,11 +25,9 @@ public class BarteredCowTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Bartered Cow", 1);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
     }
 
     @Test
@@ -52,11 +50,9 @@ public class BarteredCowTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerB, "Funeral Charm", 1);
         assertGraveyardCount(playerA, "Bartered Cow", 1);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
     }
 
     @Test
@@ -78,11 +74,9 @@ public class BarteredCowTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerA, "Bartered Cow", 1);
         assertHandCount(playerA, "Silvercoat Lion", 1);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
     }
 
 }

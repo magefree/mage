@@ -21,7 +21,7 @@ public abstract class EffectImpl implements Effect {
     protected EffectType effectType;
 
     // read related docs about static and dynamic targets in ContinuousEffectImpl.affectedObjectsSet
-    protected TargetPointer targetPointer = FirstTargetPointer.getInstance();
+    protected TargetPointer targetPointer = new FirstTargetPointer();
 
     protected String staticText = "";
     protected Map<String, Object> values;
@@ -32,7 +32,7 @@ public abstract class EffectImpl implements Effect {
         this.outcome = outcome;
     }
 
-    public EffectImpl(final EffectImpl effect) {
+    protected EffectImpl(final EffectImpl effect) {
         this.id = effect.id;
         this.outcome = effect.outcome;
         this.staticText = effect.staticText;
@@ -125,4 +125,5 @@ public abstract class EffectImpl implements Effect {
     public String getConcatPrefix() {
         return this.concatPrefix;
     }
+
 }

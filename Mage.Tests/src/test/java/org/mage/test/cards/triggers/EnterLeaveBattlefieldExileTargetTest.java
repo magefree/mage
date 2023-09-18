@@ -23,12 +23,11 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel of Serenity");
         addTarget(playerA, "Silvercoat Lion^Pillarfield Ox");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Angel of Serenity", 1);
         assertExileCount("Silvercoat Lion", 1);
@@ -95,15 +94,14 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
 
         // angel
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel of Serenity");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         //addTarget(playerA, "Silvercoat Lion^Balduvian Bears"); // AI must target
 
         //setStrictChooseMode(true); // AI must target
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Knight Ally", 2);
+        assertPermanentCount(playerA, "Knight Ally Token", 2);
         assertPermanentCount(playerA, "Angel of Serenity", 1);
     }
 }

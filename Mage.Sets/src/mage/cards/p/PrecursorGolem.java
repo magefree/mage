@@ -59,6 +59,7 @@ public final class PrecursorGolem extends CardImpl {
 }
 
 class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
+    // TODO: could be reworked to use SpellCastAllTriggeredAbility like Vesuvan Duplimancy.
 
     PrecursorGolemCopyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PrecursorGolemCopySpellEffect(), false);
@@ -140,11 +141,11 @@ class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect 
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         Permanent permanent = game.getPermanent((UUID) getValue("targetedGolem"));
         return game.getBattlefield()
                 .getActivePermanents(
-                        filter, player.getId(), source.getSourceId(), game
+                        filter, player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(permanent))

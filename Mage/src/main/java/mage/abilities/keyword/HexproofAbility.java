@@ -45,4 +45,9 @@ public class HexproofAbility extends HexproofBaseAbility {
     public String getRule() {
         return "hexproof";
     }
+
+    @Override
+    public String getCardIconHint(Game game) {
+        return "hexproof from all";
+    }
 }

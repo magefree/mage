@@ -15,7 +15,7 @@ public enum PermanentsYouControlCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        return game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT, sourceAbility.getControllerId(), sourceAbility, game);
     }
 
     @Override

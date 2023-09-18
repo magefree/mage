@@ -21,12 +21,11 @@ public class GoblinBushwhackerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Bushwhacker");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Elite Vanguard", 1);
         assertPowerToughness(playerA, "Elite Vanguard", 3, 1);

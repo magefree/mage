@@ -19,7 +19,7 @@ public class GatekeeperOfMalakirTest extends CardTestPlayerBase {
         // Kicker {B} (You may pay an additional {B} as you cast this spell.)
         // When Gatekeeper of Malakir enters the battlefield, if it was kicked, target player sacrifices a creature.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

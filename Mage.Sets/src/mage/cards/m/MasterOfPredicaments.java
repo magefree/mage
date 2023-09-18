@@ -61,7 +61,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                 + "guessed wrong, you may cast the card without paying its mana cost";
     }
 
-    public MasterOfPredicamentsEffect(final MasterOfPredicamentsEffect effect) {
+    private MasterOfPredicamentsEffect(final MasterOfPredicamentsEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                 Card cardFromHand = null;
                 if (controller.getHand().size() > 1) {
                     TargetCard target = new TargetCardInHand(new FilterCard());
-                    if (controller.choose(Outcome.PlayForFree, controller.getHand(), target, game)) {
+                    if (controller.choose(Outcome.PlayForFree, controller.getHand(), target, source, game)) {
                         cardFromHand = game.getCard(target.getFirstTarget());
                     }
                 } else {

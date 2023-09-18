@@ -25,7 +25,7 @@ public final class TahCropSkirmisher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Embalm {3}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{U}"), this));
 
     }
 

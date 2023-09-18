@@ -1,46 +1,44 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
- * @author Ketsuban
+ * @author TheElk801
  */
 public final class GiftOfTheWoods extends CardImpl {
 
     public GiftOfTheWoods(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ENCHANTMENT }, "{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getSpellAbility().addTarget(auraTarget);
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
-        // Whenever enchanted creature blocks or becomes blocked, it gets +0/+3 until
-        // end of turn and you gain 1 life.
-        Ability ability2 = new BlocksOrBecomesBlockedSourceTriggeredAbility(
-                new BoostEnchantedEffect(0, 3, Duration.EndOfTurn), false);
-        ability2.addEffect(new GainLifeEffect(1).concatBy("and"));
-        this.addAbility(ability2);
+        // Whenever enchanted creature blocks or becomes blocked, it gets +0/+3 until end of turn and you gain 1 life.
+        Ability ability = new BlocksOrBlockedAttachedTriggeredAbility(new BoostTargetEffect(0, 3)
+                .setText("it gets +0/+3 until end of turn"), AttachmentType.AURA);
+
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
+        this.addAbility(ability);
     }
 
     private GiftOfTheWoods(final GiftOfTheWoods card) {

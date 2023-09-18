@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -15,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NissaSageAnimistToken;
@@ -32,13 +30,13 @@ public final class NissaSageAnimist extends CardImpl {
 
     public NissaSageAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
         this.color.setGreen(true);
 
         this.nightCard = true;
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
         this.addAbility(new LoyaltyAbility(new NissaSageAnimistPlusOneEffect(), 1));
@@ -48,7 +46,7 @@ public final class NissaSageAnimist extends CardImpl {
 
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), -7);
-        ability.addTarget(new TargetLandPermanent(0, 6, StaticFilters.FILTER_LAND, false));
+        ability.addTarget(new TargetLandPermanent(0, 6));
         ability.addEffect(new NissaSageAnimistMinusAnimateEffect());
         this.addAbility(ability);
     }
@@ -70,7 +68,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.";
     }
 
-    NissaSageAnimistPlusOneEffect(final NissaSageAnimistPlusOneEffect effect) {
+    private NissaSageAnimistPlusOneEffect(final NissaSageAnimistPlusOneEffect effect) {
         super(effect);
     }
 
@@ -82,7 +80,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
@@ -106,7 +104,7 @@ class NissaSageAnimistMinusAnimateEffect extends OneShotEffect {
         this.staticText = "They become 6/6 Elemental creatures. They're still lands";
     }
 
-    public NissaSageAnimistMinusAnimateEffect(final NissaSageAnimistMinusAnimateEffect effect) {
+    private NissaSageAnimistMinusAnimateEffect(final NissaSageAnimistMinusAnimateEffect effect) {
         super(effect);
     }
 

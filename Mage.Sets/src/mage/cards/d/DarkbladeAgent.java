@@ -52,7 +52,7 @@ public final class DarkbladeAgent extends CardImpl {
                         ), Duration.WhileOnBattlefield
                 ), DarkbladeAgentCondition.instance,
                 "and \"Whenever this creature deals "
-                        + "combat damage to a player, draw a card.\""
+                        + "combat damage to a player, you draw a card.\""
         ));
         this.addAbility(ability, new DarkbladeAgentWatcher());
     }

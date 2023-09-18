@@ -47,7 +47,7 @@ class SimoonEffect extends OneShotEffect {
         this.staticText = "{this} deals 1 damage to each creature target opponent controls";
     }
 
-    public SimoonEffect(final SimoonEffect effect) {
+    private SimoonEffect(final SimoonEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class SimoonEffect extends OneShotEffect {
         if (player != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(player.getId()));
-            List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+            List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
             for (Permanent creature : creatures) {
                 creature.damage(1, source.getSourceId(), source, game, false, true);
             }

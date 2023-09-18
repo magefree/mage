@@ -20,11 +20,10 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerA, chatterfang, 1);
-        assertPermanentCount(playerA, "Soldier", 2);
-        assertPermanentCount(playerA, "Squirrel", 2);
+        assertPermanentCount(playerA, "Soldier Token", 2);
+        assertPermanentCount(playerA, "Squirrel Token", 2);
     }
 
     @Test
@@ -38,13 +37,12 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerB, chatterfang, 1);
-        assertPermanentCount(playerA, "Soldier", 2);
-        assertPermanentCount(playerA, "Squirrel", 0);
-        assertPermanentCount(playerB, "Soldier", 0);
-        assertPermanentCount(playerB, "Squirrel", 0);
+        assertPermanentCount(playerA, "Soldier Token", 2);
+        assertPermanentCount(playerA, "Squirrel Token", 0);
+        assertPermanentCount(playerB, "Soldier Token", 0);
+        assertPermanentCount(playerB, "Squirrel Token", 0);
     }
 
     @Test
@@ -62,13 +60,12 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 1);
         assertPermanentCount(playerA, chatterfang, 1);
         assertPermanentCount(playerA, "Academy Manufactor", 1);
-        assertPermanentCount(playerA, "Clue", 1);
-        assertPermanentCount(playerA, "Food", 1);
-        assertPermanentCount(playerA, "Treasure", 1);
-        assertPermanentCount(playerA, "Squirrel", 3);
+        assertPermanentCount(playerA, "Clue Token", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
+        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertPermanentCount(playerA, "Squirrel Token", 3);
     }
 }

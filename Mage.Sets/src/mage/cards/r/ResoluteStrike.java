@@ -69,12 +69,12 @@ class ResoluteStrikeEffect extends OneShotEffect {
         if (player == null
                 || permanent == null
                 || !permanent.hasSubtype(SubType.WARRIOR, game)
-                || game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0
+                || game.getBattlefield().count(filter, source.getControllerId(), source, game) == 0
                 || !player.chooseUse(outcome, "Attach an equipment you control?", source, game)) {
             return false;
         }
         TargetPermanent targetPermanent = new TargetPermanent(0, 1, filter, true);
-        player.choose(outcome, targetPermanent, source.getSourceId(), game);
+        player.choose(outcome, targetPermanent, source, game);
         return permanent.addAttachment(targetPermanent.getFirstTarget(), source, game);
     }
 }

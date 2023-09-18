@@ -47,7 +47,7 @@ public final class InniazTheGaleForce extends CardImpl {
     public InniazTheGaleForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DJINN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -58,7 +58,7 @@ public final class InniazTheGaleForce extends CardImpl {
         // {2}{W/U}: Attacking creatures with flying get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(
                 1, 1, Duration.EndOfTurn, filter, false
-        ), new ManaCostsImpl("{2}{W/U}")));
+        ), new ManaCostsImpl<>("{2}{W/U}")));
 
         // Whenever three or more creatures you control with flying attack, each player gains control 
         // of a nonland permanent of your choice controlled by the player to their right.
@@ -107,8 +107,8 @@ class InniazTheGaleForceEffect extends OneShotEffect {
         }
 
         private void chooseTargets(Player controller, Game game, Ability source) {
-            if (game.getBattlefield().count(this.filter, source.getSourceId(), source.getControllerId(), game) > 0) {
-                controller.choose(Outcome.Neutral, this.target, source.getSourceId(), game);
+            if (game.getBattlefield().count(this.filter, source.getControllerId(), source, game) > 0) {
+                controller.choose(Outcome.Neutral, this.target, source, game);
             }
         }
 

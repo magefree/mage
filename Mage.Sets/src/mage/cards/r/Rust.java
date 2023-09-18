@@ -19,7 +19,7 @@ public final class Rust extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("activated ability from an artifact source");
 
     static {
-        filter.add(new ArtifactSourcePredicate());
+        filter.add(ArtifactSourcePredicate.instance);
     }
 
     public Rust(UUID ownerId, CardSetInfo setInfo) {

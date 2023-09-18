@@ -16,6 +16,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.InsectToken;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -92,7 +93,7 @@ class IridescentHornbeetleWatcher extends Watcher {
                 || !event.getData().equals(CounterType.P1P1.getName())) {
             return;
         }
-        playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+        playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
     }
 
     @Override

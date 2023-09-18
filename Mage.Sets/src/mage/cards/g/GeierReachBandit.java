@@ -24,7 +24,6 @@ public final class GeierReachBandit extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.v.VildinPackAlpha.class;
 
         // Haste

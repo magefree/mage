@@ -7,8 +7,7 @@ import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -17,18 +16,11 @@ import mage.target.TargetSpell;
  */
 public final class Countersquall extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public Countersquall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");
 
-
         // Counter target noncreature spell. Its controller loses 2 life.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }

@@ -69,7 +69,7 @@ class ShiftingSkyEffect extends ContinuousEffectImpl {
             if (color == null) {
                 return false;
             }
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 perm.getColor(game).setColor(color);
             }
             return true;

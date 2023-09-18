@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -8,6 +7,9 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -15,20 +17,32 @@ import mage.game.events.GameEvent;
 public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterPermanent filter;
+    private final boolean setTargetPointer;
 
     public SacrificePermanentTriggeredAbility(Effect effect) {
         this(effect, StaticFilters.FILTER_PERMANENT_A);
     }
 
     public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter) {
-        super(Zone.BATTLEFIELD, effect);
-        setLeavesTheBattlefieldTrigger(true);
-        this.filter = filter;
+        this(effect, filter, false);
     }
 
-    public SacrificePermanentTriggeredAbility(final SacrificePermanentTriggeredAbility ability) {
+    public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer) {
+        this(effect, filter, setTargetPointer, false);
+    }
+
+    public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        setLeavesTheBattlefieldTrigger(true);
+        this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever you sacrifice " + CardUtil.addArticle(filter.getMessage()) + ", ");
+    }
+
+    protected SacrificePermanentTriggeredAbility(final SacrificePermanentTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -43,12 +57,15 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(event.getPlayerId())
-                && filter.match(game.getPermanentOrLKIBattlefield(event.getTargetId()), getSourceId(), getControllerId(), game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice " + filter.getMessage() + ", " ;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (!isControlledBy(event.getPlayerId()) || permanent == null
+                || !filter.match(permanent, getControllerId(), this, game)) {
+            return false;
+        }
+        this.getEffects().setValue("sacrificedPermanent", permanent);
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        }
+        return true;
     }
 }

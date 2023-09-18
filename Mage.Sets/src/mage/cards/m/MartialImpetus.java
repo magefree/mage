@@ -2,8 +2,9 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
-import mage.abilities.common.GoadAttachedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.GoadAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -40,11 +41,13 @@ public final class MartialImpetus extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 and is goaded.
-        this.addAbility(new GoadAttachedAbility(new BoostEnchantedEffect(1, 1)));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
+        ability.addEffect(new GoadAttachedEffect());
+        this.addAbility(ability);
 
         // Whenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn.
         this.addAbility(new AttacksAttachedTriggeredAbility(
@@ -64,12 +67,12 @@ public final class MartialImpetus extends CardImpl {
     }
 }
 
-enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent martialImpetus = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent martialImpetus = input.getSource().getSourcePermanentOrLKI(game);
         if (martialImpetus != null) {
             Permanent attachedTo = game.getPermanentOrLKIBattlefield(martialImpetus.getAttachedTo());
             UUID auraControllerId = martialImpetus.getControllerId();
@@ -78,7 +81,7 @@ enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<ObjectSource
                     && input.getObject() != attachedTo // must be other creature
                     && input.getObject().isAttacking() // attacking
                     && game.getOpponents(auraControllerId) // check for opponents of aura's controller
-                            .contains(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game))) {
+                    .contains(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game))) {
                 return true;
             }
         }

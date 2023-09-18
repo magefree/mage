@@ -24,7 +24,6 @@ public final class SolitaryHunter extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.o.OneOfThePack.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Solitary Hunter.

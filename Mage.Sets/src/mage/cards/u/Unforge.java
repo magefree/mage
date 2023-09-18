@@ -1,9 +1,7 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -22,9 +20,9 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public final class Unforge extends CardImpl {
     
-    private static FilterArtifactPermanent filter = new FilterArtifactPermanent("equipment");
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("Equipment");
     
-    static{
+    static {
         filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
@@ -50,31 +48,30 @@ public final class Unforge extends CardImpl {
 
 class UnforgeEffect extends OneShotEffect{
     
-    public UnforgeEffect(){
+    UnforgeEffect(){
        super(Outcome.Damage);
-       staticText = "If that Equipment was attached to a creature, Unforge deals 2 damage to that creature.";
+       staticText = "If that Equipment was attached to a creature, {this} deals 2 damage to that creature.";
     }
     
-    public UnforgeEffect(final UnforgeEffect effect){
+    private UnforgeEffect(final UnforgeEffect effect){
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent equipment = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if(equipment != null){
+        if (equipment != null) {
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
-            if(creature != null){
+            if (creature != null) {
               creature.damage(2, source.getSourceId(), source, game, false, true);
               return true;
             }
         }
-        
         return false;
     }
 
     @Override
-    public Effect copy() {
+    public UnforgeEffect copy() {
         return new UnforgeEffect(this);
     }
     

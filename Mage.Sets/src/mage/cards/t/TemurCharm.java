@@ -48,14 +48,12 @@ public final class TemurCharm extends CardImpl {
         this.getSpellAbility().addTarget(target);
 
         // Counter target spell unless its controller pays {3}.
-        Mode mode = new Mode();
-        mode.addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
+        Mode mode = new Mode(new CounterUnlessPaysEffect(new GenericManaCost(3)));
         mode.addTarget(new TargetSpell());
         this.getSpellAbility().addMode(mode);
 
         // Creatures with power 3 or less can't block this turn.
-        mode = new Mode();
-        mode.addEffect(new CantBlockAllEffect(filterCantBlock, Duration.EndOfTurn));
+        mode = new Mode(new CantBlockAllEffect(filterCantBlock, Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
     }
 

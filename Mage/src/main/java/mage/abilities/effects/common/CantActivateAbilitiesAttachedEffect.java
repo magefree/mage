@@ -10,7 +10,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -21,7 +20,7 @@ public class CantActivateAbilitiesAttachedEffect extends ContinuousRuleModifying
         staticText = "Enchanted creature's activated abilities can't be activated";
     }
 
-    public CantActivateAbilitiesAttachedEffect(final CantActivateAbilitiesAttachedEffect effect) {
+    protected CantActivateAbilitiesAttachedEffect(final CantActivateAbilitiesAttachedEffect effect) {
         super(effect);
     }
 

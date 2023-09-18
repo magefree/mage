@@ -37,20 +37,22 @@ import mage.game.turn.Turn;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.util.Copyable;
 import mage.util.MessageToClient;
+import mage.util.MultiAmountMessage;
 import mage.util.functions.CopyApplier;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public interface Game extends MageItem, Serializable {
+public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     MatchType getGameType();
 
     int getNumPlayers();
 
-    int getLife();
+    int getStartingLife();
 
     RangeOfInfluence getRangeOfInfluence();
 
@@ -71,7 +73,15 @@ public interface Game extends MageItem, Serializable {
 
     GameOptions getOptions();
 
+    /**
+     * Return object or LKI from battlefield
+     *
+     * @param objectId
+     * @return
+     */
     MageObject getObject(UUID objectId);
+
+    MageObject getObject(Ability source);
 
     MageObject getBaseObject(UUID objectId);
 
@@ -127,14 +137,18 @@ public interface Game extends MageItem, Serializable {
 
     PlayerList getPlayerList();
 
+    default Set<UUID> getOpponents(UUID playerId) {
+        return getOpponents(playerId, false);
+    }
+
     /**
-     * Returns a Set of opponents in range for the given playerId This return
-     * also a player, that has dies this turn.
+     * Returns a Set of opponents in range for the given playerId
      *
      * @param playerId
+     * @param excludeDeadPlayers Determines if players who have lost are excluded from the list
      * @return
      */
-    default Set<UUID> getOpponents(UUID playerId) {
+    default Set<UUID> getOpponents(UUID playerId, boolean excludeDeadPlayers) {
         Player player = getPlayer(playerId);
         if (player == null) {
             return new HashSet<>();
@@ -142,6 +156,7 @@ public interface Game extends MageItem, Serializable {
 
         return player.getInRange().stream()
                 .filter(opponentId -> !opponentId.equals(playerId))
+                .filter(opponentId -> !excludeDeadPlayers || !getPlayer(opponentId).hasLost())
                 .collect(Collectors.toSet());
     }
 
@@ -166,6 +181,19 @@ public interface Game extends MageItem, Serializable {
 
     Turn getTurn();
 
+    /**
+     * @return can return null in non started games
+     */
+    PhaseStep getTurnStepType();
+
+    /**
+     * @return can return null in non started games
+     */
+    TurnPhase getTurnPhaseType();
+
+    /**
+     * @return can return null in non started games
+     */
     Phase getPhase();
 
     Step getStep();
@@ -178,6 +206,8 @@ public interface Game extends MageItem, Serializable {
 
     /**
      * Id of the player the current turn it is.
+     *
+     * Player can be under control of another player, so search a real GUI's controller by Player->getTurnControlledBy
      *
      * @return
      */
@@ -211,8 +241,6 @@ public interface Game extends MageItem, Serializable {
 
     void loadGameStates(GameStates states);
 
-    Game copy();
-
     boolean isSimulation();
 
     void setSimulation(boolean checkPlayableState);
@@ -238,10 +266,6 @@ public interface Game extends MageItem, Serializable {
     void setLosingPlayer(Player player);
 
     Player getLosingPlayer();
-
-    void setStateCheckRequired();
-
-    boolean getStateCheckRequired();
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);
@@ -278,7 +302,7 @@ public interface Game extends MageItem, Serializable {
 
     void fireGetAmountEvent(UUID playerId, String message, int min, int max);
 
-    void fireGetMultiAmountEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options);
+    void fireGetMultiAmountEvent(UUID playerId, List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options);
 
     void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
 
@@ -315,30 +339,16 @@ public interface Game extends MageItem, Serializable {
     boolean replaceEvent(GameEvent event, Ability targetAbility);
 
     /**
-     * Creates and fires an damage prevention event
+     * Creates and fires a damage prevention event
      *
      * @param damageEvent     damage event that will be replaced (instanceof
      *                        check will be done)
      * @param source          ability that's the source of the prevention effect
      * @param game
      * @param amountToPrevent max preventable amount
-     * @return true prevention was successfull / false prevention was replaced
+     * @return true prevention was successful / false prevention was replaced
      */
     PreventionEffectData preventDamage(GameEvent damageEvent, Ability source, Game game, int amountToPrevent);
-
-    /**
-     * Creates and fires an damage prevention event
-     *
-     * @param event            damage event that will be replaced (instanceof
-     *                         check will be done)
-     * @param source           ability that's the source of the prevention
-     *                         effect
-     * @param game
-     * @param preventAllDamage true if there is no limit to the damage that can
-     *                         be prevented
-     * @return true prevention was successfull / false prevention was replaced
-     */
-    PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage);
 
     void start(UUID choosingPlayerId);
 
@@ -391,13 +401,35 @@ public interface Game extends MageItem, Serializable {
 
     void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId);
 
-    boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId);
+    boolean addPlane(Plane plane, UUID toPlayerId);
 
     void addCommander(Commander commander);
 
     Dungeon addDungeon(Dungeon dungeon, UUID playerId);
 
-    void ventureIntoDungeon(UUID playerId);
+    void ventureIntoDungeon(UUID playerId, boolean undercity);
+
+    void temptWithTheRing(UUID playerId);
+
+    /**
+     * Tells whether the current game has day or night, defaults to false
+     */
+    boolean hasDayNight();
+
+    /**
+     * Sets game to day or night, sets hasDayNight to true
+     *
+     * @param daytime day is true, night is false
+     */
+    void setDaytime(boolean daytime);
+
+    /**
+     * Returns true if hasDayNight is true and parameter matches current day/night value
+     * Returns false if hasDayNight is false
+     *
+     * @param daytime day is true, night is false
+     */
+    boolean checkDayNight(boolean daytime);
 
     /**
      * Adds a permanent to the battlefield
@@ -434,6 +466,13 @@ public interface Game extends MageItem, Serializable {
 
     UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source);
 
+    /**
+     * Inner game engine call to reset game objects to actual versions
+     * (reset all objects and apply all effects due layer system)
+     * <p>
+     * Warning, if you need to process object moves in the middle of the effect/ability
+     * then call game.getState().processAction(game) instead
+     */
     void applyEffects();
 
     boolean checkStateAndTriggered();
@@ -451,7 +490,7 @@ public interface Game extends MageItem, Serializable {
 
     int bookmarkState();
 
-    void restoreState(int bookmark, String context);
+    GameState restoreState(int bookmark, String context);
 
     void removeBookmark(int bookmark);
 
@@ -490,6 +529,10 @@ public interface Game extends MageItem, Serializable {
 
     void setPriorityTime(int priorityTime);
 
+    int getBufferTime();
+
+    void setBufferTime(int bufferTime);
+
     UUID getStartingPlayerId();
 
     void setStartingPlayerId(UUID startingPlayerId);
@@ -506,13 +549,33 @@ public interface Game extends MageItem, Serializable {
 
     Counters getEnterWithCounters(UUID sourceId);
 
+    /**
+     * Get the UUID of the current player who is the Monarch, or null if nobody has it.
+     *
+     * @return UUID of the Monarch (null if nobody has it).
+     */
     UUID getMonarchId();
 
     void setMonarchId(Ability source, UUID monarchId);
 
-    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
+    /**
+     * Get the UUID of the current player who has the initiative, or null if nobody has it.
+     *
+     * @return UUID of the player who currently has the Initiative (null if nobody has it).
+     */
+    UUID getInitiativeId();
 
-    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
+    /**
+     * Function to call for a player to take the initiative.
+     *
+     * @param source       The ability granting initiative.
+     * @param initiativeId UUID of the player taking the initiative
+     */
+    void takeInitiative(Ability source, UUID initiativeId);
+
+    int damagePlayerOrPermanent(UUID playerOrPermanent, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
+
+    int damagePlayerOrPermanent(UUID playerOrPermanent, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
 
     Mulligan getMulligan();
 
@@ -634,4 +697,6 @@ public interface Game extends MageItem, Serializable {
     void setGameStopped(boolean gameStopped);
 
     boolean isGameStopped();
+
+    boolean isTurnOrderReversed();
 }

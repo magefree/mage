@@ -22,7 +22,6 @@ public final class ThrabenMilitia extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

@@ -16,14 +16,13 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import mage.utils.ThreadUtils;
 
 public class LinePool {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final org.apache.log4j.Logger logger = Logger.getLogger(LinePool.class);
     private static final int LINE_CLEANUP_INTERVAL = 30000;
 
     private final Queue<SourceDataLine> freeLines = new ArrayDeque<>();
@@ -55,7 +54,7 @@ public class LinePool {
                 SourceDataLine line = (SourceDataLine) mixer.getLine(lineInfo);
                 freeLines.add(line);
             } catch (LineUnavailableException e) {
-                log.warn("Failed to get line from mixer", e);
+                logger.warn("Failed to get line from mixer", e);
             }
         }
         new Timer("Line cleanup", true).scheduleAtFixedRate(new TimerTask() {
@@ -65,7 +64,7 @@ public class LinePool {
                     for (SourceDataLine sourceDataLine : freeLines) {
                         if (sourceDataLine.isOpen()) {
                             sourceDataLine.close();
-                            log.debug("Closed line {}", sourceDataLine);
+                            logger.debug("Closed line " + sourceDataLine);
                         }
                     }
                 }
@@ -96,13 +95,13 @@ public class LinePool {
     public void playSound(final MageClip mageClip) {
         final SourceDataLine line;
         synchronized (LinePool.this) {
-            log.debug("Playing {}", mageClip.getFilename());
+            logger.debug("Playing: " + mageClip.getFilename());
             logLineStats();
             line = borrowLine();
             if (line == null) {
                 // no lines available, queue sound to play it when a line is available
                 queue.add(mageClip);
-                log.debug("Sound {} queued.", mageClip.getFilename());
+                logger.debug("Sound queued: " + mageClip.getFilename());
                 return;
             }
             logLineStats();
@@ -113,19 +112,19 @@ public class LinePool {
                     if (!line.isOpen()) {
                         line.open();
                         line.addLineListener(event -> {
-                            log.debug("Event: {}", event);
+                            logger.debug("Event: " + event);
                             if (event.getType() != Type.STOP) {
                                 return;
                             }
                             synchronized (LinePool.this) {
-                                log.debug("Before stop on line {}", line);
+                                logger.debug("Before stop on line " + line);
                                 logLineStats();
                                 returnLine(line);
-                                log.debug("After stop on line {}", line);
+                                logger.debug("After stop on line " + line);
                                 logLineStats();
                                 MageClip queuedSound = queue.poll();
                                 if (queuedSound != null) {
-                                    log.debug("Playing queued sound {}", queuedSound);
+                                    logger.debug("Playing queued sound " + queuedSound);
                                     playSound(queuedSound);
                                 }
                             }
@@ -133,19 +132,21 @@ public class LinePool {
                     }
                     line.start();
                 } catch (LineUnavailableException e) {
-                    log.warn("Failed to open line", e);
+                    logger.warn("Failed to open line", e);
                 }
             }
             byte[] buffer = mageClip.getBuffer();
-            log.debug("Before write to line {}", line);
+            logger.debug("Before write to line " + line);
             line.write(buffer, 0, buffer.length);
             line.drain();
             line.stop();
-            log.debug("Line completed: {}", line);
+            logger.debug("Line completed: " + line);
         });
     }
 
     private void logLineStats() {
-        log.debug("Free lines: {} Active: {} Busy: {}", freeLines.size(), activeLines.size(), busyLines.size());
+        logger.debug(String.format("Free lines: %d; Active: %d; Busy: %d",
+                freeLines.size(), activeLines.size(), busyLines.size()
+        ));
     }
 }

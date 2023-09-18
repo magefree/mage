@@ -74,7 +74,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
-        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        setChoice(playerA, true); // cast it face down as 2/2 creature
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

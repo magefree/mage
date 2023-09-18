@@ -35,7 +35,7 @@ public final class CephalidColiseum extends CardImpl {
         // Threshold - {U}, {tap}, Sacrifice Cephalid Coliseum: Target player draws three cards, then discards three cards. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new DrawDiscardTargetEffect(3, 3),
-            new ManaCostsImpl("{U}"),
+            new ManaCostsImpl<>("{U}"),
             new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());

@@ -31,7 +31,7 @@ public final class ThroneOfTheGodPharaoh extends CardImpl {
     public ThroneOfTheGodPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, each opponent loses life equal to the number of tapped creatures you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

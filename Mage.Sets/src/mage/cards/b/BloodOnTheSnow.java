@@ -27,7 +27,7 @@ public final class BloodOnTheSnow extends CardImpl {
     public BloodOnTheSnow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Choose one —
         // • Destroy all creatures.
@@ -45,7 +45,6 @@ public final class BloodOnTheSnow extends CardImpl {
                 "Then return a creature or planeswalker card with mana value X or less"
                         + " from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell."
         );
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private BloodOnTheSnow(final BloodOnTheSnow card) {

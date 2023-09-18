@@ -59,7 +59,7 @@ class StumpsquallHydraEffect extends OneShotEffect {
         filter.add(StumpsquallHydraPredicate.instance);
     }
 
-    private enum StumpsquallHydraPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+    private enum StumpsquallHydraPredicate implements ObjectSourcePlayerPredicate<MageObject> {
         instance;
 
         @Override
@@ -96,8 +96,8 @@ class StumpsquallHydraEffect extends OneShotEffect {
             return false;
         }
         TargetAmount targetAmount = new TargetCreatureOrPlaneswalkerAmount(xValue, filter);
-        targetAmount.setNotTarget(true);
-        player.choose(outcome, targetAmount, source.getSourceId(), game);
+        targetAmount.withNotTarget(true);
+        player.choose(outcome, targetAmount, source, game);
         for (UUID targetId : targetAmount.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {

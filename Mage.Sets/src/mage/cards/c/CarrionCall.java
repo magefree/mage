@@ -22,7 +22,7 @@ public final class CarrionCall extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectInfectToken(), 2));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    private CarrionCall(final CarrionCall card) {
         super(card);
     }
 

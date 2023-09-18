@@ -11,22 +11,22 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.text.TextPart;
+import mage.abilities.hint.HintUtils;
 import mage.cards.FrameStyle;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.command.dungeons.DungeonOfTheMadMage;
-import mage.game.command.dungeons.LostMineOfPhandelver;
-import mage.game.command.dungeons.TombOfAnnihilation;
+import mage.game.command.dungeons.DungeonOfTheMadMageDungeon;
+import mage.game.command.dungeons.LostMineOfPhandelverDungeon;
+import mage.game.command.dungeons.TombOfAnnihilationDungeon;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.util.GameLog;
 import mage.util.SubTypes;
 
 import java.util.*;
@@ -34,7 +34,7 @@ import java.util.*;
 /**
  * @author TheElk801
  */
-public class Dungeon implements CommandObject {
+public class Dungeon extends CommandObjectImpl {
 
     private static final Set<String> dungeonNames = new HashSet<>();
 
@@ -44,35 +44,27 @@ public class Dungeon implements CommandObject {
         dungeonNames.add("Dungeon of the Mad Mage");
     }
 
-    private static final List<CardType> emptySet = Arrays.asList(CardType.DUNGEON);
-    private static final ObjectColor emptyColor = new ObjectColor();
+    private static final List<CardType> cardTypes = Collections.unmodifiableList(Arrays.asList(CardType.DUNGEON));
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
-    private final String name;
-    private UUID id;
     private UUID controllerId;
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private final Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private final String expansionSetCodeForImage;
     private final List<DungeonRoom> dungeonRooms = new ArrayList<>();
     private DungeonRoom currentRoom = null;
 
-    public Dungeon(String name, String expansionSetCodeForImage) {
-        this.id = UUID.randomUUID();
-        this.name = name;
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
+    public Dungeon(String name) {
+        super(name);
     }
 
-    public Dungeon(final Dungeon dungeon) {
-        this.id = dungeon.id;
-        this.name = dungeon.name;
+    protected Dungeon(final Dungeon dungeon) {
+        super(dungeon);
         this.frameStyle = dungeon.frameStyle;
         this.controllerId = dungeon.controllerId;
         this.copy = dungeon.copy;
         this.copyFrom = (dungeon.copyFrom != null ? dungeon.copyFrom : null);
-        this.expansionSetCodeForImage = dungeon.expansionSetCodeForImage;
         this.copyRooms(dungeon);
     }
 
@@ -90,7 +82,7 @@ public class Dungeon implements CommandObject {
 
     public void addRoom(DungeonRoom room) {
         this.dungeonRooms.add(room);
-        room.getRoomTriggeredAbility().setSourceId(id);
+        room.getRoomTriggeredAbility().setSourceId(this.getId());
         this.abilites.add(room.getRoomTriggeredAbility());
     }
 
@@ -124,23 +116,44 @@ public class Dungeon implements CommandObject {
                         "Currently in " + currentRoom.getName() :
                         "Not currently in a room"
         ) + ")</i>");
-        dungeonRooms.stream().map(DungeonRoom::toString).forEach(rules::add);
+        dungeonRooms.stream()
+                .map(room -> {
+                    // mark useful rooms by icons
+                    String prefix = "";
+                    if (room.equals(currentRoom)) {
+                        prefix += HintUtils.prepareText(null, null, HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT);
+                    }
+                    if (currentRoom != null && currentRoom.getNextRooms().stream().anyMatch(room::equals)) {
+                        prefix += HintUtils.prepareText(null, null, HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT);
+                    }
+                    return prefix + room;
+                })
+                .forEach(rules::add);
         return rules;
     }
 
     public static Dungeon selectDungeon(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
-        Choice choice = new ChoiceImpl(true);
+        Choice choice = new ChoiceImpl(true, ChoiceHintType.CARD_DUNGEON);
         choice.setMessage("Choose a dungeon to venture into");
         choice.setChoices(dungeonNames);
         player.choose(Outcome.Neutral, choice, game);
-        switch (choice.getChoice()) {
+        if (choice.getChoice() != null) {
+            return createDungeon(choice.getChoice());
+        } else {
+            // on disconnect
+            return createDungeon("Tomb of Annihilation");
+        }
+    }
+
+    public static Dungeon createDungeon(String name) {
+        switch (name) {
             case "Tomb of Annihilation":
-                return new TombOfAnnihilation();
+                return new TombOfAnnihilationDungeon();
             case "Lost Mine of Phandelver":
-                return new LostMineOfPhandelver();
+                return new LostMineOfPhandelverDungeon();
             case "Dungeon of the Mad Mage":
-                return new DungeonOfTheMadMage();
+                return new DungeonOfTheMadMageDungeon();
             default:
                 throw new UnsupportedOperationException("A dungeon should have been chosen");
         }
@@ -149,11 +162,6 @@ public class Dungeon implements CommandObject {
     @Override
     public FrameStyle getFrameStyle() {
         return frameStyle;
-    }
-
-    @Override
-    public void assignNewId() {
-        this.id = UUID.randomUUID();
     }
 
     @Override
@@ -193,32 +201,8 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + ']';
-    }
-
-    @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public String getImageName() {
-        return this.name;
-    }
-
-    @Override
-    public void setName(String name) {
-    }
-
-    @Override
     public List<CardType> getCardType(Game game) {
-        return emptySet;
+        return cardTypes;
     }
 
     @Override
@@ -237,8 +221,8 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
+    public List<SuperType> getSuperType(Game game) {
+        return Collections.emptyList();
     }
 
     @Override
@@ -253,17 +237,17 @@ public class Dungeon implements CommandObject {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
@@ -296,25 +280,17 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public int getStartingDefense() {
+        return 0;
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-    }
-
-    @Override
-    public UUID getId() {
-        return this.id;
+    public void setStartingDefense(int startingDefense) {
     }
 
     @Override
     public Dungeon copy() {
         return new Dungeon(this);
-    }
-
-    public String getExpansionSetCodeForImage() {
-        return expansionSetCodeForImage;
     }
 
     @Override
@@ -353,16 +329,6 @@ public class Dungeon implements CommandObject {
                 }
             }
         }
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

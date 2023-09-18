@@ -62,7 +62,7 @@ public final class EnchantmentAlteration extends CardImpl {
 
 }
 
-class SharesEnchantedCardTypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
+class SharesEnchantedCardTypePredicate implements ObjectSourcePlayerPredicate<MageItem> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {
@@ -108,7 +108,7 @@ class EnchantmentAlterationEffect extends OneShotEffect {
         this.staticText = "Attach target Aura attached to a creature or land to another permanent of that type";
     }
 
-    public EnchantmentAlterationEffect(final EnchantmentAlterationEffect effect) {
+    private EnchantmentAlterationEffect(final EnchantmentAlterationEffect effect) {
         super(effect);
     }
 

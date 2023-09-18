@@ -32,7 +32,7 @@ public final class PutridRaptor extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph-Discard a Zombie card.
-        this.addAbility(new MorphAbility(this, new DiscardCardCost(filter)));
+        this.addAbility(new MorphAbility(new DiscardCardCost(filter)));
     }
 
     private PutridRaptor(final PutridRaptor card) {

@@ -49,7 +49,7 @@ public final class RinAndSeriInseparable extends CardImpl {
     public RinAndSeriInseparable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(4);
@@ -72,7 +72,7 @@ public final class RinAndSeriInseparable extends CardImpl {
         DynamicValue catCount = new PermanentsOnBattlefieldCount(catPermanentFilter);
         Effect lifeGainEffect = new GainLifeEffect(catCount);
         lifeGainEffect.setText("You gain life equal to the number of Cats you control");
-        Ability ability = new SimpleActivatedAbility(damageEffect, new ManaCostsImpl("{R}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(damageEffect, new ManaCostsImpl<>("{R}{G}{W}"));
         ability.addEffect(lifeGainEffect);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

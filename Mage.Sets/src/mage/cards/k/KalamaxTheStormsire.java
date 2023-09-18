@@ -32,14 +32,14 @@ public final class KalamaxTheStormsire extends CardImpl {
     public KalamaxTheStormsire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Whenever you cast your first instant spell each turn, if Kalamax, the Stormsire is tapped, copy that spell. You may choose new targets for the copy.
-        this.addAbility(new KalamaxTheStormsireSpellCastAbility(), new SpellsCastWatcher());
+        this.addAbility(new KalamaxTheStormsireSpellCastAbility());
         // Whenever you copy an instant spell, put a +1/+1 counter on Kalamax.
         this.addAbility(new KalamaxTheStormsireCopyTriggeredAbility());
     }
@@ -59,7 +59,7 @@ class KalamaxTheStormsireSpellCastAbility extends SpellCastControllerTriggeredAb
         super(new CopyTargetSpellEffect(true), new FilterInstantSpell(), false);
     }
 
-    KalamaxTheStormsireSpellCastAbility(KalamaxTheStormsireSpellCastAbility ability) {
+    private KalamaxTheStormsireSpellCastAbility(final KalamaxTheStormsireSpellCastAbility ability) {
         super(ability);
     }
 

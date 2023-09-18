@@ -24,15 +24,9 @@ public class RuneflareTrapTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Runeflare Trap");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Runeflare Trap", playerA);
+        checkPlayableAbility("Can't Runeflare Trap", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Runeflare", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
-        assertHandCount(playerB, "Runeflare Trap", 1);
     }
-
 }

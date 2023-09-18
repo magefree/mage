@@ -100,7 +100,7 @@ class FireGiantsFuryDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.mor = mor;
     }
 
-    private FireGiantsFuryDelayedTriggeredAbility (FireGiantsFuryDelayedTriggeredAbility ability) {
+    private FireGiantsFuryDelayedTriggeredAbility(FireGiantsFuryDelayedTriggeredAbility ability) {
         super(ability);
         this.mor = ability.mor;
     }
@@ -161,7 +161,7 @@ class FireGiantsFuryDelayedEffect extends OneShotEffect {
 
                 for (Card card : cards) {
                     ContinuousEffect effect = new FireGiantsFuryMayPlayEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    effect.setTargetPointer(new FixedTarget(card.getId(), game));
                     game.addEffect(effect, source);
                 }
 

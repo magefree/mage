@@ -3,7 +3,6 @@ package mage.cards.v;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -34,10 +33,10 @@ public final class VraskaTheUnseen extends CardImpl {
 
     public VraskaTheUnseen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature.
         this.addAbility(new LoyaltyAbility(new VraskaTheUnseenGainAbilityEffect(new VraskaTheUnseenTriggeredAbility()), 1));
@@ -71,7 +70,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
         staticText = "Until your next turn, whenever a creature deals combat damage to {this}, destroy that creature";
     }
 
-    public VraskaTheUnseenGainAbilityEffect(final VraskaTheUnseenGainAbilityEffect effect) {
+    private VraskaTheUnseenGainAbilityEffect(final VraskaTheUnseenGainAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }
@@ -93,7 +92,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 }
 
@@ -103,7 +102,7 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }
 
-    public VraskaTheUnseenTriggeredAbility(final VraskaTheUnseenTriggeredAbility ability) {
+    private VraskaTheUnseenTriggeredAbility(final VraskaTheUnseenTriggeredAbility ability) {
         super(ability);
     }
 
@@ -123,7 +122,7 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
             Permanent sourceOfDamage = game.getPermanent(event.getSourceId());
             if (sourceOfDamage != null && sourceOfDamage.isCreature(game)) {
                 Effect effect = this.getEffects().get(0);
-                effect.setTargetPointer(new FixedTarget(sourceOfDamage.getId()));
+                effect.setTargetPointer(new FixedTarget(sourceOfDamage.getId(), game));
                 return true;
             }
         }

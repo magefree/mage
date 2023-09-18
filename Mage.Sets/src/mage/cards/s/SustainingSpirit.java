@@ -31,7 +31,7 @@ public final class SustainingSpirit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Cumulative upkeep {1}{W}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{W}")));
         // Damage that would reduce your life total to less than 1 reduces it to 1 instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SustainingSpiritReplacementEffect()));
 
@@ -54,7 +54,7 @@ class SustainingSpiritReplacementEffect extends ReplacementEffectImpl {
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public SustainingSpiritReplacementEffect(final SustainingSpiritReplacementEffect effect) {
+    private SustainingSpiritReplacementEffect(final SustainingSpiritReplacementEffect effect) {
         super(effect);
     }
 

@@ -36,7 +36,7 @@ public final class SunsetPyramid extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}: Scry 1.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new GenericManaCost(2));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
 

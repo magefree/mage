@@ -28,7 +28,6 @@ public class MurderousRiderTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Murderous Rider", 1);
     }
@@ -48,7 +47,6 @@ public class MurderousRiderTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Murderous Rider", 0);
         assertGraveyardCount(playerA, "Murderous Rider", 0);

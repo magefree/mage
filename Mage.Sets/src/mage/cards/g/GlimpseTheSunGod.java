@@ -7,13 +7,12 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  * @author LevelX2
@@ -46,6 +45,6 @@ enum GlimpseTheSunGodAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int numberToTap = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetCreaturePermanent(numberToTap, numberToTap, FILTER_PERMANENT_CREATURES, false));
+        ability.addTarget(new TargetCreaturePermanent(numberToTap, numberToTap, StaticFilters.FILTER_PERMANENT_CREATURES, false));
     }
 }

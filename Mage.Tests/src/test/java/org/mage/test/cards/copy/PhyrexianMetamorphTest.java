@@ -44,7 +44,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Cloudshift", 1);
 
         assertPermanentCount(playerA, "Ponyback Brigade", 1);
-        assertPermanentCount(playerA, "Goblin", 3);
+        assertPermanentCount(playerA, "Goblin Token", 3);
 
     }
 
@@ -87,7 +87,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
 
         assertPermanentCount(playerA, "Ponyback Brigade", 1);
-        assertPermanentCount(playerA, "Goblin", 3);
+        assertPermanentCount(playerA, "Goblin Token", 3);
 
     }
 

@@ -30,7 +30,7 @@ public final class AshlingThePilgrim extends CardImpl {
 
     public AshlingThePilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.SHAMAN);
 
@@ -39,7 +39,7 @@ public final class AshlingThePilgrim extends CardImpl {
 
         // {1}{R}: Put a +1/+1 counter on Ashling the Pilgrim. If this is the third time this ability has resolved this turn, remove all +1/+1 counters from Ashling the Pilgrim, and it deals that much damage to each creature and each player.
         Ability ability = new SimpleActivatedAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R}")
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(Outcome.Damage, 3, new AshlingThePilgrimEffect()));
         ability.addHint(AbilityResolutionCountHint.instance);

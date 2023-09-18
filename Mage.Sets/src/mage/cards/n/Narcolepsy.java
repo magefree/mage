@@ -34,7 +34,7 @@ public final class Narcolepsy extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
+        EnchantAbility ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of each upkeep, if enchanted creature is untapped, tap it.
@@ -57,7 +57,7 @@ class NarcolepsyTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
         super(new NarcolepsyEffect(), TargetController.ANY, false);
     }
     
-    NarcolepsyTriggeredAbility(final NarcolepsyTriggeredAbility ability) {
+    private NarcolepsyTriggeredAbility(final NarcolepsyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class NarcolepsyEffect extends OneShotEffect {
         super(Outcome.Tap);
     }
 
-    NarcolepsyEffect(final NarcolepsyEffect effect) {
+    private NarcolepsyEffect(final NarcolepsyEffect effect) {
         super(effect);
     }
 

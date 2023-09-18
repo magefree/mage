@@ -24,10 +24,10 @@ public final class EtheriumAbomination extends CardImpl {
         
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{U}{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{U}{B}")));
     }
 
-    public EtheriumAbomination (final EtheriumAbomination card) {
+    private EtheriumAbomination(final EtheriumAbomination card) {
         super(card);
     }
 

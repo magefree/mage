@@ -11,8 +11,8 @@ import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -24,11 +24,9 @@ import java.util.UUID;
 public final class UbulSarGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-    private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(SubType.GATE.getPredicate());
-        targetFilter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     private static final Condition gatesCondition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
@@ -46,7 +44,7 @@ public final class UbulSarGatekeepers extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn)),
                 gatesCondition,
                 "Whenever {this} enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.");
-        Target target = new TargetCreaturePermanent(targetFilter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         ability.addHint(new ConditionHint(gatesCondition, "You control two or more Gates"));
         this.addAbility(ability);

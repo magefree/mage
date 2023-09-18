@@ -73,7 +73,7 @@ class ScholarshipSponsorEffect extends OneShotEffect {
         Map<UUID, Integer> playerMap = game
                 .getBattlefield()
                 .getActivePermanents(
-                        StaticFilters.FILTER_LAND, source.getControllerId(), source.getSourceId(), game
+                        StaticFilters.FILTER_LAND, source.getControllerId(), source, game
                 )
                 .stream()
                 .map(Controllable::getControllerId)

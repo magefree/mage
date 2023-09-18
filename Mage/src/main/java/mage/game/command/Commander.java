@@ -4,24 +4,25 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.*;
-import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.GameLog;
 import mage.util.SubTypes;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
-public class Commander implements CommandObject {
+public class Commander extends CommandObjectImpl {
 
     private final Card sourceObject;
     private boolean copy;
@@ -29,6 +30,7 @@ public class Commander implements CommandObject {
     private final Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     public Commander(Card card) {
+        super(card.getName());
         this.sourceObject = card;
 
         // All abilities must be added to the game before usage. It adding by addCard and addCommandObject calls
@@ -53,7 +55,7 @@ public class Commander implements CommandObject {
                     case ADVENTURE_SPELL:
                         // can be used from command zone
                         if (canUseAbilityFromCommandZone(spellAbility)) {
-                            abilities.add(new CastCommanderAbility(card, spellAbility));
+                            abilities.add(spellAbility.copyWithZone(Zone.COMMAND));
                         }
                         break;
                     case FACE_DOWN_CREATURE: // dynamic added spell for alternative cost like cast as face down
@@ -104,6 +106,7 @@ public class Commander implements CommandObject {
     }
 
     private Commander(final Commander commander) {
+        super(commander);
         this.sourceObject = commander.sourceObject.copy();
         this.copy = commander.copy;
         this.copyFrom = (commander.copyFrom != null ? commander.copyFrom.copy() : null);
@@ -123,10 +126,6 @@ public class Commander implements CommandObject {
     @Override
     public UUID getControllerId() {
         return sourceObject.getOwnerId();
-    }
-
-    @Override
-    public void assignNewId() {
     }
 
     @Override
@@ -161,15 +160,6 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public void setName(String name) {
-    }
-
-    @Override
     public List<CardType> getCardType(Game game) {
         return sourceObject.getCardType(game);
     }
@@ -190,8 +180,8 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
-        return sourceObject.getSuperType();
+    public List<SuperType> getSuperType(Game game) {
+        return sourceObject.getSuperType(game);
     }
 
     @Override
@@ -274,21 +264,17 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public int getStartingDefense() {
+        return sourceObject.getStartingDefense();
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
+    public void setStartingDefense(int startingDefense) {
     }
 
     @Override
     public UUID getId() {
         return sourceObject.getId();
-    }
-
-    @Override
-    public String getImageName() {
-        return sourceObject.getImageName();
     }
 
     @Override
@@ -308,25 +294,17 @@ public class Commander implements CommandObject {
 
     @Override
     public boolean isAllCreatureTypes(Game game) {
-        return false;
+        return sourceObject.isAllCreatureTypes(game);
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+        sourceObject.setIsAllCreatureTypes(value);
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sourceObject.setIsAllCreatureTypes(game, value);
     }
 
     @Override

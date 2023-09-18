@@ -56,7 +56,7 @@ class LobotomyEffect extends OneShotEffect {
         staticText = "Target player reveals their hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles";
     }
 
-    public LobotomyEffect(final LobotomyEffect effect) {
+    private LobotomyEffect(final LobotomyEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class LobotomyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (targetPlayer != null && sourceObject != null && controller != null) {
 
             // reveal hand of target player
@@ -72,7 +72,7 @@ class LobotomyEffect extends OneShotEffect {
 
             // You choose card other than a basic land card
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Card chosenCard = null;
             if (controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());

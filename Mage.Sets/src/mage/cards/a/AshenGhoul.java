@@ -39,7 +39,7 @@ public final class AshenGhoul extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl("{B}"),
+                new ManaCostsImpl<>("{B}"),
                 AshenGhoulCondition.instance
         ));
     }
@@ -61,7 +61,7 @@ enum AshenGhoulCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (game.getStep().getType() != PhaseStep.UPKEEP
+        if (game.getTurnStepType() != PhaseStep.UPKEEP
                 || !game.isActivePlayer(source.getControllerId())) {
             return false;
         }

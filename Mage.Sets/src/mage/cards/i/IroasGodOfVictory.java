@@ -35,7 +35,7 @@ public final class IroasGodOfVictory extends CardImpl {
 
     public IroasGodOfVictory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(7);
@@ -50,7 +50,7 @@ public final class IroasGodOfVictory extends CardImpl {
 
         // Creatures you control have menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(
-                new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)
+                new GainAbilityAllEffect(new MenaceAbility(false), Duration.WhileOnBattlefield, filter)
         ));
 
         // Prevent all damage that would be dealt to attacking creatures you control.

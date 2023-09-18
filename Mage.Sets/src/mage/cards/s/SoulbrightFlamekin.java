@@ -38,7 +38,7 @@ public final class SoulbrightFlamekin extends CardImpl {
         // {2}: Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{2}"));
+        ), new ManaCostsImpl<>("{2}"));
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(Outcome.PutManaInPool, 3, new SoulbrightFlamekinEffect()));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addHint(AbilityResolutionCountHint.instance);

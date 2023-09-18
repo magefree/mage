@@ -20,7 +20,7 @@ public final class HeartlessHidetsugu extends CardImpl {
 
     public HeartlessHidetsugu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.SHAMAN);
 
@@ -49,7 +49,7 @@ class HeartlessHidetsuguDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to each player equal to half that player's life total, rounded down";
     }
 
-    public HeartlessHidetsuguDamageEffect(final HeartlessHidetsuguDamageEffect effect) {
+    private HeartlessHidetsuguDamageEffect(final HeartlessHidetsuguDamageEffect effect) {
         super(effect);
     }
 

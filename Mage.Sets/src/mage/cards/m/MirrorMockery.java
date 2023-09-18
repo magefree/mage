@@ -36,7 +36,7 @@ public final class MirrorMockery extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Copy));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks, you may create a token that's a copy of that creature. Exile that token at the end of combat.
@@ -60,7 +60,7 @@ class MirrorMockeryEffect extends OneShotEffect {
         this.staticText = "you may create a token that's a copy of that creature. Exile that token at end of combat";
     }
 
-    public MirrorMockeryEffect(final MirrorMockeryEffect effect) {
+    private MirrorMockeryEffect(final MirrorMockeryEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class MirrorMockeryEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
             effect.setTargetPointer(new FixedTarget(enchanted, game));
             effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 if (addedToken != null) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
                     exileEffect.setTargetPointer(new FixedTarget(addedToken, game));

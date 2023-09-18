@@ -1,16 +1,13 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
@@ -26,16 +23,16 @@ public final class CurseOfOblivion extends CardImpl {
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
-        TargetPlayer target = new TargetPlayer();
-        this.getSpellAbility().addTarget(target);
+        TargetPlayer auraTarget = new TargetPlayer();
+        this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(target.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, that player exiles two cards from their graveyard.
-        this.addAbility(new BeginningOfUpkeepAttachedTriggeredAbility(new ExileFromZoneTargetEffect(
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ExileFromZoneTargetEffect(
                 Zone.GRAVEYARD, StaticFilters.FILTER_CARD_CARDS, 2, false
-        ).setText("that player exiles two cards from their graveyard")));
+        ).setText("that player exiles two cards from their graveyard"), TargetController.ENCHANTED, false));
     }
 
     private CurseOfOblivion(final CurseOfOblivion card) {

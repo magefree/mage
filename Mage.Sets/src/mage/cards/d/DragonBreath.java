@@ -44,7 +44,7 @@ public final class DragonBreath extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         
         // Enchanted creature has haste.
@@ -74,7 +74,7 @@ class DragonBreathEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonBreathEffect(final DragonBreathEffect effect) {
+    private DragonBreathEffect(final DragonBreathEffect effect) {
         super(effect);
     }
     

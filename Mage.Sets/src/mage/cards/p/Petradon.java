@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
@@ -34,15 +34,14 @@ public final class Petradon extends CardImpl {
 
         // When Petradon enters the battlefield, exile two target lands.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        ability.addTarget(new TargetLandPermanent(2, 2, new FilterLandPermanent("lands"), false));
+        ability.addTarget(new TargetLandPermanent(2));
         this.addAbility(ability);
 
         // When Petradon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)
-                .withReturnName("cards", "their owners'"), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD).withText(true, true), false));
 
         // {R}: Petradon gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private Petradon(final Petradon card) {

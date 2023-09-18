@@ -21,11 +21,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -73,7 +71,7 @@ class LichLifeGainReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would gain life, draw that many cards instead";
     }
 
-    LichLifeGainReplacementEffect(final LichLifeGainReplacementEffect effect) {
+    private LichLifeGainReplacementEffect(final LichLifeGainReplacementEffect effect) {
         super(effect);
     }
 
@@ -108,7 +106,7 @@ class LichDamageTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LichDamageEffect(), false);
     }
 
-    LichDamageTriggeredAbility(final LichDamageTriggeredAbility ability) {
+    private LichDamageTriggeredAbility(final LichDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -145,7 +143,7 @@ class LichDamageEffect extends OneShotEffect {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nontoken permanent");
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
     
     private int amount = 0;
@@ -155,7 +153,7 @@ class LichDamageEffect extends OneShotEffect {
         this.staticText = "sacrifice that many nontoken permanents. If you can't, you lose the game";
     }
     
-    LichDamageEffect(final LichDamageEffect effect) {
+    private LichDamageEffect(final LichDamageEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -170,8 +168,8 @@ class LichDamageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetControlledPermanent(amount, amount, filter, true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)) {
+                if (controller.choose(Outcome.Sacrifice, target, source, game)) {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null) {

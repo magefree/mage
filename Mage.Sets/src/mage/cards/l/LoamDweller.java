@@ -27,7 +27,7 @@ public final class LoamDweller extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may put a land card from your hand onto the battlefield tapped.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A, false, true),
-                StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+                StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
     }
 
     private LoamDweller(final LoamDweller card) {

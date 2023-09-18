@@ -35,7 +35,7 @@ public final class Sunstone extends CardImpl {
         // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
         Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }

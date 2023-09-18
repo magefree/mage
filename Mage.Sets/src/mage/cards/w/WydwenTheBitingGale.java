@@ -25,7 +25,7 @@ public final class WydwenTheBitingGale extends CardImpl {
 
     public WydwenTheBitingGale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -36,7 +36,7 @@ public final class WydwenTheBitingGale extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {U}{B}, Pay 1 life: Return Wydwen, the Biting Gale to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{U}{B}"));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }

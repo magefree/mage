@@ -36,7 +36,7 @@ public final class Deathrender extends CardImpl {
         // Whenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach Deathrender to it.
         this.addAbility(new DiesAttachedTriggeredAbility(new DeathrenderEffect(), "equipped creature"));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private Deathrender(final Deathrender card) {
@@ -56,7 +56,7 @@ class DeathrenderEffect extends OneShotEffect {
         this.staticText = "you may put a creature card from your hand onto the battlefield and attach {this} to it";
     }
 
-    DeathrenderEffect(final DeathrenderEffect effect) {
+    private DeathrenderEffect(final DeathrenderEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class DeathrenderEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             TargetCardInHand target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_CREATURE);
-            if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Card creatureInHand = game.getCard(target.getFirstTarget());
                 if (creatureInHand != null) {
                     if (controller.moveCards(creatureInHand, Zone.BATTLEFIELD, source, game)) {

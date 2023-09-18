@@ -40,12 +40,11 @@ public class CastBGPartnerCommanderTest extends CardTestCommanderDuelBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Titan's Presence", "Reyhan, Last of the Abzan");
         setChoice(playerB, "Ancient Stone Idol");
 
-        setChoice(playerA, "Yes"); // Commander goes to command zone
+        setChoice(playerA, true); // Commander goes to command zone
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Titan's Presence", 1);
         assertCommandZoneCount(playerA, "Reyhan, Last of the Abzan", 1);
@@ -78,8 +77,6 @@ public class CastBGPartnerCommanderTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Reyhan, Last of the Abzan", 0);
         assertCommandZoneCount(playerA, "Ikra Shidiqi, the Usurper", 0);

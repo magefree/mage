@@ -28,7 +28,7 @@ public final class MaskOfRiddles extends CardImpl {
         // Whenever equipped creature deals combat damage to a player, you may draw a card.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "equipped", true));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private MaskOfRiddles(final MaskOfRiddles card) {

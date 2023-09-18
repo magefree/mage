@@ -44,7 +44,7 @@ class BakisCurseEffect extends OneShotEffect {
             staticText = "Baki's Curse deals 2 damage to each creature for each Aura attached to that creature.";
     }
 
-    public BakisCurseEffect(final BakisCurseEffect effect) {
+    private BakisCurseEffect(final BakisCurseEffect effect) {
         super(effect);
     }
 
@@ -55,7 +55,7 @@ class BakisCurseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source, game)) {
             int count = 0;
             List<UUID> attachments = creature.getAttachments();
             for (UUID attachmentId : attachments) {

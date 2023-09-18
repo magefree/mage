@@ -21,14 +21,15 @@ public final class OyobiWhoSplitTheHeavens extends CardImpl {
 
     public OyobiWhoSplitTheHeavens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever you cast a Spirit or Arcane spell, create a 3/3 white Spirit creature token with flying.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AnotherSpiritToken()), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AnotherSpiritToken()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false));
     }
 
     private OyobiWhoSplitTheHeavens(final OyobiWhoSplitTheHeavens card) {

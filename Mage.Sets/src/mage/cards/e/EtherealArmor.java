@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -37,7 +38,7 @@ public final class EtherealArmor extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each enchantment you control and has first strike.
@@ -47,7 +48,7 @@ public final class EtherealArmor extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 FirstStrikeAbility.getInstance(), AttachmentType.AURA
         ).setText("and has first strike"));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(new ValueHint("Enchantments you control", xValue)));
     }
 
     private EtherealArmor(final EtherealArmor card) {

@@ -1,9 +1,9 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -27,6 +27,8 @@ public final class DireFleetCaptain extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+
     public DireFleetCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
 
@@ -36,9 +38,7 @@ public final class DireFleetCaptain extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Dire Fleet Captain attacks, it gets +1/+1 until end of turn for each other attacking Pirate.
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn, true)
-                .setText("it gets +1/+1 until end of turn for each other attacking Pirate"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
     }
 
     private DireFleetCaptain(final DireFleetCaptain card) {

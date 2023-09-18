@@ -24,13 +24,11 @@ public class DemonsHornTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Demon's Horn", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Abyssal Gatekeeper");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Abyssal Gatekeeper", 1);
 
         assertLife(playerA, 20);
@@ -61,8 +59,6 @@ public class DemonsHornTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Alesha, Who Smiles at Death", 1);
 
         assertLife(playerA, 20);

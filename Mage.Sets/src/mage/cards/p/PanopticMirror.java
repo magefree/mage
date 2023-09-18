@@ -4,6 +4,7 @@ import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -30,7 +31,7 @@ public final class PanopticMirror extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Imprint - {X}, {tap}: You may exile an instant or sorcery card with converted mana cost X from your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PanopticMirrorExileEffect(), new VariableManaCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PanopticMirrorExileEffect(), new VariableManaCost(VariableCostType.NORMAL));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
         // At the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
@@ -54,7 +55,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         this.staticText = "You may exile an instant or sorcery card with mana value X from your hand";
     }
 
-    public PanopticMirrorExileEffect(final PanopticMirrorExileEffect effect) {
+    private PanopticMirrorExileEffect(final PanopticMirrorExileEffect effect) {
         super(effect);
     }
 
@@ -79,7 +80,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PlayForFree, target, source.getSourceId(), game)) {
+        if (player.choose(Outcome.PlayForFree, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Panoptic Mirror", source, game);
@@ -101,7 +102,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
         this.staticText = "you may copy a card exiled with {this}. If you do, you may cast the copy without paying its mana cost";
     }
 
-    public PanopticMirrorCastEffect(final PanopticMirrorCastEffect effect) {
+    private PanopticMirrorCastEffect(final PanopticMirrorCastEffect effect) {
         super(effect);
     }
 
@@ -128,9 +129,9 @@ class PanopticMirrorCastEffect extends OneShotEffect {
                     if (card instanceof SplitCard) {
                         cards.add(((SplitCard) card).getLeftHalfCard());
                         cards.add(((SplitCard) card).getRightHalfCard());
-                    } else if (card instanceof ModalDoubleFacesCard) {
-                        cards.add(((ModalDoubleFacesCard) card).getLeftHalfCard());
-                        cards.add(((ModalDoubleFacesCard) card).getRightHalfCard());
+                    } else if (card instanceof ModalDoubleFacedCard) {
+                        cards.add(((ModalDoubleFacedCard) card).getLeftHalfCard());
+                        cards.add(((ModalDoubleFacedCard) card).getRightHalfCard());
                     } else {
                         cards.add(card);
                     }
@@ -141,7 +142,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
                 cardToCopy = cards.getCards(game).iterator().next();
             } else {
                 TargetCard target = new TargetCard(1, Zone.EXILED, new FilterCard("card to copy"));
-                controller.choose(Outcome.Copy, cards, target, game);
+                controller.choose(Outcome.Copy, cards, target, source, game);
                 cardToCopy = cards.get(target.getFirstTarget(), game);
             }
             if (cardToCopy != null) {

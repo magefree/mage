@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import com.google.common.collect.Iterables;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -44,8 +43,7 @@ public final class ConfrontThePast extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ConfrontThePastAdjuster.instance);
 
         // • Remove twice X loyalty counters from target planeswalker an opponent controls.
-        Mode mode = new Mode();
-        mode.addEffect(new ConfrontThePastLoyaltyEffect());
+        Mode mode = new Mode(new ConfrontThePastLoyaltyEffect());
         mode.addTarget(new TargetPlaneswalkerPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
@@ -65,7 +63,8 @@ enum ConfrontThePastAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (Iterables.getOnlyElement(ability.getEffects()) instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
+        if (ability.getEffects().size() == 1
+                && ability.getEffects().get(0) instanceof  ReturnFromGraveyardToBattlefieldTargetEffect) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterPermanentCard filter = new FilterPermanentCard("planeswalker card with mana value X or less");
@@ -83,7 +82,7 @@ class ConfrontThePastLoyaltyEffect extends OneShotEffect {
         staticText = "remove twice X loyalty counters from target planeswalker an opponent controls";
     }
 
-    public ConfrontThePastLoyaltyEffect(ConfrontThePastLoyaltyEffect effect) {
+    private ConfrontThePastLoyaltyEffect(final ConfrontThePastLoyaltyEffect effect) {
         super(effect);
     }
 

@@ -45,7 +45,7 @@ class IgniteMemoriesEffect extends OneShotEffect {
         staticText = "Target player reveals a card at random from their hand. {this} deals damage to that player equal to that card's mana value";
     }
 
-    public IgniteMemoriesEffect(final IgniteMemoriesEffect effect) {
+    private IgniteMemoriesEffect(final IgniteMemoriesEffect effect) {
         super(effect);
     }
 

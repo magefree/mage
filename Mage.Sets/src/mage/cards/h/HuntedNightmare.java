@@ -34,7 +34,7 @@ public final class HuntedNightmare extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Hunted Nightmare enters the battlefield, target opponent puts a deathtouch counter on a creature they control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new HuntedNightmareEffect());
@@ -77,8 +77,8 @@ class HuntedNightmareEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.addCounters(CounterType.DEATHTOUCH.createInstance(), player.getId(), source, game);
     }

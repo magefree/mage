@@ -40,7 +40,7 @@ public final class WakestoneGargoyle extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{W}: Creatures you control with defender can attack this turn as though they didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{W}") ));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration.EndOfTurn, filter), new ManaCostsImpl<>("{1}{W}") ));
     }
 
     private WakestoneGargoyle(final WakestoneGargoyle card) {

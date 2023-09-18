@@ -30,7 +30,7 @@ public final class CavernCrawler extends CardImpl {
         this.addAbility(new MountainwalkAbility());
         
         // {R}: Cavern Crawler gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private CavernCrawler(final CavernCrawler card) {

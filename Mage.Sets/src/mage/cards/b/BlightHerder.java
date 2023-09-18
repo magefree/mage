@@ -58,7 +58,7 @@ class BlightHerderEffect extends OneShotEffect {
         this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, create three 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}.";
     }
 
-    public BlightHerderEffect(final BlightHerderEffect effect) {
+    private BlightHerderEffect(final BlightHerderEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class BlightHerderEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetCardInExile(2, 2, filter, null);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (target.canChoose(source.getControllerId(), source, game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Cards cardsToGraveyard = new CardsImpl(target.getTargets());
                     controller.moveCards(cardsToGraveyard, Zone.GRAVEYARD, source, game);

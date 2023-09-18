@@ -23,7 +23,7 @@ public class RegenerateAttachedEffect extends OneShotEffect {
         this.setText();
     }
 
-    public RegenerateAttachedEffect(final RegenerateAttachedEffect effect) {
+    protected RegenerateAttachedEffect(final RegenerateAttachedEffect effect) {
         super(effect);
         this.attachmentType = effect.attachmentType;
     }

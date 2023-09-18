@@ -3,7 +3,6 @@ package mage.cards.u;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
@@ -52,10 +51,10 @@ public final class UrzaAcademyHeadmaster extends CardImpl {
 
     public UrzaAcademyHeadmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.URZA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Head to AskUrza.com and click +1.
         this.addAbility(new LoyaltyAbility(new UrzaAcademyHeadmasterRandomEffect(1, setInfo), 1));
@@ -114,7 +113,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
         }
     }
 
-    public UrzaAcademyHeadmasterRandomEffect(final UrzaAcademyHeadmasterRandomEffect effect) {
+    private UrzaAcademyHeadmasterRandomEffect(final UrzaAcademyHeadmasterRandomEffect effect) {
         super(effect);
         this.selection = effect.selection;
         this.setInfo = effect.setInfo.copy();
@@ -213,7 +212,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 17: // TEZZERET AGENT OF BOLAS 1
                                 sb.append("Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.");
-                                effects.add(new LookLibraryAndPickControllerEffect(5, 1, new FilterArtifactCard(), true));
+                                effects.add(new LookLibraryAndPickControllerEffect(5, 1, StaticFilters.FILTER_CARD_ARTIFACT_AN, PutCards.HAND, PutCards.BOTTOM_ANY));
                                 break;
                             case 18: // UGIN 1
                                 sb.append("Urza deals 3 damage to any target.");
@@ -269,7 +268,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 8: // JACE MEMORY ADEPT 2
                                 sb.append("Target player mills ten cards.");
-                                effects.add(new PutLibraryIntoGraveTargetEffect(10));
+                                effects.add(new MillCardsTargetEffect(10));
                                 target = new TargetPlayer();
                                 break;
                             case 9: // JACE ARCHITECT OF THOUGHT 2
@@ -287,7 +286,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 12: // (altered) LILIANA VESS 2
                                 sb.append("Search your library for a card and put that card into your hand. Then shuffle.");
-                                effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false, true));
+                                effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false));
                                 break;
                             case 13: // (double) LILIANA OF THE VEIL 2
                                 sb.append("Target player sacrifices two creatures.");
@@ -431,7 +430,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
                 game.informPlayers(sb.toString());
                 if (target != null) {
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                    if (target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                         target.chooseTarget(outcome, controller.getId(), source, game);
                     } else {
                         // 1/19/2018 	(...) If the ability that comes up requires a target and there are no legal targets available, click again until that’s not true.
@@ -473,7 +472,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
         super(Outcome.PutManaInPool);
     }
 
-    public UrzaAcademyHeadmasterManaEffect(final UrzaAcademyHeadmasterManaEffect effect) {
+    private UrzaAcademyHeadmasterManaEffect(final UrzaAcademyHeadmasterManaEffect effect) {
         super(effect);
     }
 
@@ -486,7 +485,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
+            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game);
             Choice manaChoice = new ChoiceImpl();
             Set<String> choices = new LinkedHashSet<>();
             choices.add("White");
@@ -537,7 +536,7 @@ class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
         staticText = "draw three cards, then put a card from your hand on top of your library";
     }
 
-    public UrzaAcademyHeadmasterBrainstormEffect(final UrzaAcademyHeadmasterBrainstormEffect effect) {
+    private UrzaAcademyHeadmasterBrainstormEffect(final UrzaAcademyHeadmasterBrainstormEffect effect) {
         super(effect);
     }
 
@@ -559,7 +558,7 @@ class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.canChoose(player.getId(), source, game)) {
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

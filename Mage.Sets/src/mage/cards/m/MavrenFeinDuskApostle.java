@@ -13,7 +13,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -29,7 +28,7 @@ public final class MavrenFeinDuskApostle extends CardImpl {
     public MavrenFeinDuskApostle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -55,15 +54,16 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(SubType.VAMPIRE.getPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public MavrenFeinDuskApostleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new IxalanVampireToken()), false);
+        setTriggerPhrase("Whenever one or more nontoken Vampires you control attack, ");
     }
 
-    public MavrenFeinDuskApostleTriggeredAbility(final MavrenFeinDuskApostleTriggeredAbility ability) {
+    private MavrenFeinDuskApostleTriggeredAbility(final MavrenFeinDuskApostleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,10 +86,5 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more nontoken Vampires you control attack, " ;
     }
 }
