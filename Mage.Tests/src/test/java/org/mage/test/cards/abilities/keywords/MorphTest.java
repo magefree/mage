@@ -1101,4 +1101,21 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
     }
+
+    @Test
+    public void test_MorphIsColorlessFlash() {
+        addCard(Zone.HAND, playerA, "Pine Walker", 1);
+        addCard(Zone.HAND, playerA, "Zoetic Cavern", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Liberator, Urza's Battlethopter", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Pine Walker using Morph");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Zoetic Cavern using Morph");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+    }
+
 }
