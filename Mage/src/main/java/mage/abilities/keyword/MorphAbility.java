@@ -81,11 +81,12 @@ public class MorphAbility extends SpellAbility {
     }
 
     public MorphAbility(Card card, Cost morphCost, boolean megamorph) {
-        super(new GenericManaCost(3), card.getName() + " with " + ABILITY_KEYWORD);
+        super(new GenericManaCost(3), card.getName());
         this.morphCosts = new CostsImpl<>();
         this.morphCosts.add(morphCost);
         this.megamorph = megamorph;
         this.setSpellAbilityCastMode(SpellAbilityCastMode.MORPH);
+        //this.setSpellAbilityType(SpellAbilityType.FACE_DOWN_CREATURE);
         this.setWorksFaceDown(true);
         Ability ability = new SimpleStaticAbility(new BecomesFaceDownCreatureEffect(
                 morphCosts, (megamorph ? FaceDownType.MEGAMORPHED : FaceDownType.MORPHED)));
