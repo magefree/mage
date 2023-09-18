@@ -17,8 +17,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class EmblemOfCard extends Emblem {
-    private boolean usesVariousArt;
+    private final boolean usesVariousArt;
     private static final Logger logger = Logger.getLogger(EmblemOfCard.class);
+    
     public static Card lookupCard(
             String cardName,
             String cardNumber,
@@ -39,6 +40,7 @@ public final class EmblemOfCard extends Emblem {
                         .orElseThrow(() -> new IllegalArgumentException("No real card for " + infoTypeForError + " " + cardName)))
                 .getCard();
     }
+    
     public static Card cardFromDeckInfo(DeckCardInfo info) {
         return lookupCard(
                 info.getCardName(),
@@ -47,6 +49,7 @@ public final class EmblemOfCard extends Emblem {
                 "DeckCardInfo"
         );
     }
+    
     public EmblemOfCard(Card card, Zone zone) {
         super(card.getName());
         if (card instanceof MockCard) {
@@ -71,6 +74,7 @@ public final class EmblemOfCard extends Emblem {
         this.setImageNumber(card.getImageNumber());
         this.usesVariousArt = card.getUsesVariousArt();
     }
+    
     public EmblemOfCard(Card card) {
         this(card, Zone.BATTLEFIELD);
     }
@@ -80,14 +84,17 @@ public final class EmblemOfCard extends Emblem {
         this.usesVariousArt = eoc.usesVariousArt;
     }
     @Override
-    public Emblem copy() {
+    public EmblemOfCard copy() {
         return new EmblemOfCard(this);
     }
 
     @Override
     public void setSourceObject(MageObject sourceObject) {
         this.sourceObject = sourceObject;
+        // super method would try and fail to find the emblem image here
+        // (not sure why that would be setSoureObject's job; we get our image during construction)
     }
+    
     public boolean getUsesVariousArt() {
         return usesVariousArt;
     }
