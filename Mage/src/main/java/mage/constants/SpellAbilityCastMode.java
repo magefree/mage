@@ -53,7 +53,7 @@ public enum SpellAbilityCastMode {
             }
         }
         if (this.equals(MORPH)) {
-            MorphAbility.setObjectToFaceDownCreature(cardCopy, game);
+            MorphAbility.setCardToFaceDownCreature(cardCopy);
         }
         return cardCopy;
     }

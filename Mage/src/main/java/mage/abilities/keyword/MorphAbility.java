@@ -128,7 +128,16 @@ public class MorphAbility extends SpellAbility {
      * @param game
      */
     public static void setPermanentToFaceDownCreature(MageObject targetObject, Permanent sourcePermanent, Game game) {
-        setObjectToFaceDownCreature(targetObject, game);
+        targetObject.getPower().setModifiedBaseValue(2);
+        targetObject.getToughness().setModifiedBaseValue(2);
+        targetObject.getAbilities().clear();
+        targetObject.getColor(game).setColor(new ObjectColor());
+        targetObject.setName("");
+        targetObject.removeAllCardTypes(game);
+        targetObject.addCardType(game, CardType.CREATURE);
+        targetObject.removeAllSubTypes(game);
+        targetObject.removeAllSuperTypes(game);
+        targetObject.getManaCost().clear();
 
         Token emptyImage = new EmptyToken();
 
@@ -144,16 +153,16 @@ public class MorphAbility extends SpellAbility {
             throw new IllegalArgumentException("Wrong code usage: un-supported targetObject in face down method: " + targetObject.getClass().getSimpleName());
         }
     }
-    public static void setObjectToFaceDownCreature(MageObject targetObject, Game game) {
-        targetObject.getPower().setModifiedBaseValue(2);
-        targetObject.getToughness().setModifiedBaseValue(2);
-        targetObject.getAbilities().clear();
-        targetObject.getColor(game).setColor(new ObjectColor());
-        targetObject.setName("");
-        targetObject.removeAllCardTypes(game);
-        targetObject.addCardType(game, CardType.CREATURE);
-        targetObject.removeAllSubTypes(game);
-        targetObject.removeAllSuperTypes(game);
-        targetObject.getManaCost().clear();
+    public static void setCardToFaceDownCreature(Card targetCard) {
+        targetCard.getPower().setModifiedBaseValue(2);
+        targetCard.getToughness().setModifiedBaseValue(2);
+        targetCard.getAbilities().clear();
+        targetCard.getColor().setColor(new ObjectColor());
+        targetCard.setName("");
+        targetCard.removeAllCardTypes();
+        targetCard.addCardType(CardType.CREATURE);
+        targetCard.getSubtype().clear();
+        targetCard.removeAllSuperTypes();
+        targetCard.getManaCost().clear();
     }
 }
