@@ -4,6 +4,7 @@ import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.game.stack.Spell;
 
 /**
  * @author LevelX2
@@ -53,6 +54,10 @@ public enum SpellAbilityCastMode {
             }
         }
         if (this.equals(MORPH)) {
+            if (cardCopy instanceof Spell) {
+                //Spell doesn't support setName, so make a copy of the card (we're blowing it away anyway)
+                cardCopy = ((Spell) cardCopy).getCard().copy();
+            }
             MorphAbility.setCardToFaceDownCreature(cardCopy);
         }
         return cardCopy;

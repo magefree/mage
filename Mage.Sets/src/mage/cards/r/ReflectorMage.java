@@ -2,6 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -13,7 +14,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -113,15 +113,11 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getSourceId());
-        if (card != null) {
-            Spell spell = game.getState().getStack().getSpell(event.getSourceId());
-            if (spell != null && spell.isFaceDown(game)) {
-                return false; // Face Down cast spell (Morph creature) has no name
-            }
-            return CardUtil.haveSameNames(card, creatureName, game) && Objects.equals(ownerId, card.getOwnerId());
-        }
-        return false;
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) { return false;}
+        Card card = spellAbility.getCharacteristics(game);
+        if (card == null) { return false;}
+        return CardUtil.haveSameNames(card, creatureName, game) && Objects.equals(ownerId, card.getOwnerId());
     }
 
     @Override

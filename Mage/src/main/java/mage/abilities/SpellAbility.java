@@ -306,7 +306,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     public static SpellAbility getSpellAbilityFromEvent(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.CAST_SPELL) {
+        if (event.getType() != GameEvent.EventType.CAST_SPELL && event.getType() != GameEvent.EventType.CAST_SPELL_LATE) {
             return null;
         }
 
