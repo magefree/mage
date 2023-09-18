@@ -3,6 +3,7 @@ package org.mage.test.cards.single.unf;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -15,19 +16,19 @@ public class CometStellarPupTest extends CardTestPlayerBase {
      * Comet, Stellar Pup
      * {2}{R}{W}
      * Legendary Planeswalker — Comet
-     *
+     * -
      * 0: Roll a six-sided die.
      * 1 or 2 — [+2], then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn.
      * 3 — [−1], then return a card with mana value 2 or less from your graveyard to your hand.
      * 4 or 5 — Comet, Stellar Pup deals damage equal to the number of loyalty counters on him to a creature or player, then [−2].
      * 6 — [+1], and you may activate Comet, Stellar Pup’s loyalty ability two more times this turn.
-     *
+     * -
      * Loyalty: 5
      */
     private final static String comet = "Comet, Stellar Pup";
 
     private final static String cometAbility = "0: Roll a six-sided die."
-            + "<br>1 or 2 &mdash; [+2] , then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn."
+            + "<br>1 or 2 &mdash; [+2], then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn."
             + "<br>3 &mdash; [-1], then return a card with mana value 2 or less from your graveyard to your hand."
             + "<br>4 or 5 &mdash; {this} deals damage equal to the number of loyalty counters on him to a creature or player, then [-2]."
             + "<br>6 &mdash; [+1], and you may activate Comet, Stellar Pup's loyalty ability two more times this turn.";
@@ -93,7 +94,8 @@ public class CometStellarPupTest extends CardTestPlayerBase {
 
     // TODO: Currently it is not possible to choose a player of a TargetCreatureOrPlayer
     //       the 4 roll is tested in testRoll6 on a permanent.
-    //@Test
+    @Ignore
+    @Test
     public void testRoll4() {
         setStrictChooseMode(true);
 
