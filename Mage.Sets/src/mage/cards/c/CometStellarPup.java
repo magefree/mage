@@ -73,7 +73,7 @@ class CometStellarPupAbility extends OneShotEffect {
     CometStellarPupAbility() {
         super(Outcome.Benefit);
         staticText = "Roll a six-sided die.<br>"
-                + "1 or 2 &mdash; [+2] , then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn.<br>"
+                + "1 or 2 &mdash; [+2], then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn.<br>"
                 + "3 &mdash; [-1], then return a card with mana value 2 or less from your graveyard to your hand.<br>"
                 + "4 or 5 &mdash; {this} deals damage equal to the number of loyalty counters on him to a creature or player, then [-2].<br>"
                 + "6 &mdash; [+1], and you may activate Comet, Stellar Pup's loyalty ability two more times this turn.";

@@ -21,7 +21,7 @@ public final class HailStorm extends CardImpl {
 
         // Hail Storm deals 2 damage to each attacking creature and 1 damage to you and each creature you control.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, new FilterAttackingCreature()));
-        this.getSpellAbility().addEffect(new DamageControllerEffect(1).setText("and 1 damage to you "));
+        this.getSpellAbility().addEffect(new DamageControllerEffect(1).setText("and 1 damage to you"));
         this.getSpellAbility().addEffect(new DamageAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED).setText("and each creature you control."));
     }
 

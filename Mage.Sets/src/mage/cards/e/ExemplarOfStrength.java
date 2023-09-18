@@ -39,7 +39,7 @@ public final class ExemplarOfStrength extends CardImpl {
         // Whenever Exemplar of Strength attacks, remove a -1/-1 counter from it. If you do, you gain 1 life.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new GainLifeEffect(1),
-                new RemoveCountersSourceCost(CounterType.M1M1.createInstance()),
+                new RemoveCountersSourceCost(CounterType.M1M1.createInstance()).setText("remove a -1/-1 counter from it"),
                 null, false
         ), false));
     }
