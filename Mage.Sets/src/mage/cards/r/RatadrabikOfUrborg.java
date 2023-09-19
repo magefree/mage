@@ -99,7 +99,7 @@ class RatadrabikOfUrborgEffect extends OneShotEffect {
             return false;
         }
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false,1,false,false,null,2,2,false);
-        effect.setAdditionalSubType(SubType.ZOMBIE);
+        effect.withAdditionalSubType(SubType.ZOMBIE);
         effect.setIsntLegendary(true);
         effect.setTargetPointer(new FixedTarget(copyFrom.getId(),game));
         ObjectColor colors = copyFrom.getColor();

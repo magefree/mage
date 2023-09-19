@@ -91,7 +91,7 @@ class NightmareShepherdEffect extends OneShotEffect {
                 false, null, 1, 1, false
         );
         effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
-        effect.setAdditionalSubType(SubType.NIGHTMARE);
+        effect.withAdditionalSubType(SubType.NIGHTMARE);
         player.moveCards(card, Zone.EXILED, source, game);
         effect.apply(game, source);
         return true;

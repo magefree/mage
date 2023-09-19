@@ -2,7 +2,6 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,18 +12,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -73,44 +68,6 @@ public final class GenestealerPatriarch extends CardImpl {
     }
 }
 
-class GenestealerPatriarchTriggeredAbility extends TriggeredAbilityImpl {
-
-    public GenestealerPatriarchTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GenestealerPatriarchCloneEffect());
-        setTriggerPhrase("Whenever a creature with an infection counter on it dies, ");
-        ;
-    }
-
-    private GenestealerPatriarchTriggeredAbility(final GenestealerPatriarchTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GenestealerPatriarchTriggeredAbility copy() {
-        return new GenestealerPatriarchTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
-            if (permanent != null
-                    && permanent.isCreature(game)
-                    && permanent.getCounters(game).containsKey(CounterType.INFECTION)) {
-                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
 class GenestealerPatriarchCloneEffect extends OneShotEffect {
 
     public GenestealerPatriarchCloneEffect() {
@@ -137,7 +94,7 @@ class GenestealerPatriarchCloneEffect extends OneShotEffect {
         }
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId());
         effect.setSavedPermanent(creature);
-        effect.setAdditionalSubType(SubType.TYRANID);
+        effect.withAdditionalSubType(SubType.TYRANID);
         return effect.apply(game, source);
     }
 }

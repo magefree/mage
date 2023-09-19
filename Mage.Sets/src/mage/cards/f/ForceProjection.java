@@ -73,7 +73,7 @@ class ForceProjectionEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent, game));
 
             // except that it is an Illusion in addition to its other types
-            effect.setAdditionalSubType(SubType.SPIRIT);
+            effect.withAdditionalSubType(SubType.SPIRIT);
 
             // and gains "When this creature becomes the target of a spell, sacrifice it."
             effect.addAdditionalAbilities(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect(), new FilterSpell()));

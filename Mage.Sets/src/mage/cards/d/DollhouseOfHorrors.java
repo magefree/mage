@@ -90,7 +90,7 @@ class DollhouseOfHorrorsEffect extends OneShotEffect {
                 false, null, 0, 0, false
         );
         effect.setSavedPermanent(new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game));
-        effect.setAdditionalSubType(SubType.CONSTRUCT);
+        effect.withAdditionalSubType(SubType.CONSTRUCT);
         effect.addAdditionalAbilities(new SimpleStaticAbility(new BoostSourceEffect(
                 xValue,
                 xValue,
