@@ -13,7 +13,6 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -57,17 +56,19 @@ public final class KjeldoranGuard extends CardImpl {
                 new TapSourceCost(),
                 condition,
                 "{T}: Target creature gets +1/+1 until end of turn. "
-                + "When that creature leaves the battlefield this turn, sacrifice {this}. "
-                + "Activate only during combat and only if defending player controls no snow lands."
+                        + "When that creature leaves the battlefield this turn, sacrifice {this}. "
+                        + "Activate only during combat and only if defending player controls no snow lands."
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    private KjeldoranGuard(final KjeldoranGuard card) { super(card); }
+    private KjeldoranGuard(final KjeldoranGuard card) {
+        super(card);
+    }
 
     @Override
-    public Card copy() {
+    public KjeldoranGuard copy() {
         return new KjeldoranGuard(this);
     }
 }
@@ -77,8 +78,7 @@ class KjeldoranGuardEffect extends OneShotEffect {
     KjeldoranGuardEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target creature gets +1/+1 until end of turn."
-                + "When that creature leaves the battlefield this turn, sacrifice {this}."
-                + "Activate only during combat and only if defending player controls no snow lands.";
+                + "When that creature leaves the battlefield this turn, sacrifice {this}.";
     }
 
     private KjeldoranGuardEffect(KjeldoranGuardEffect effect) {
@@ -92,15 +92,14 @@ class KjeldoranGuardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID targetId = source.getFirstTarget();
-        Permanent targetPermanent = game.getPermanent(targetId);
-        if (game.getPermanent(targetId) == null) {
+        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
+        if (targetPermanent == null) {
             return false;
         }
 
         // Target creature gets +1/+1 until end of turn.
         BoostTargetEffect buffEffect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        buffEffect.setTargetPointer(new FixedTarget(targetId, game));
+        buffEffect.setTargetPointer(new FixedTarget(targetPermanent, game));
         game.addEffect(buffEffect, source);
 
         // When that creature leaves the battlefield this turn, sacrifice Kjeldoran Guard.
@@ -145,5 +144,7 @@ class KjeldoranGuardDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() { return "sacrifice {this}"; }
+    public String getRule() {
+        return "When that creature leaves the battlefield, Sacrifice {this}";
+    }
 }
