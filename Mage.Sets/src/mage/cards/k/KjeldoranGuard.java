@@ -1,9 +1,13 @@
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DefendingPlayerControlsNoSourceCondition;
+import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,6 +20,7 @@ import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -26,9 +31,11 @@ import java.util.UUID;
  */
 public final class KjeldoranGuard extends CardImpl {
 
-    private static final FilterLandPermanent snowLandFiler = new FilterLandPermanent("a snow land");
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-    static { snowLandFiler.add(SuperType.SNOW.getPredicate()); }
+    static {
+        filter.add(SuperType.SNOW.getPredicate());
+    }
 
     public KjeldoranGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -39,12 +46,19 @@ public final class KjeldoranGuard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target creature gets +1/+1 until end of turn. When that creature leaves the battlefield this turn, sacrifice Kjeldoran Guard. Activate only during combat and only if defending player controls no snow lands.
+        CompoundCondition condition = new CompoundCondition(
+                new IsPhaseCondition(TurnPhase.COMBAT, false), // Only during combat
+                new InvertCondition(new DefendingPlayerControlsNoSourceCondition(filter)) // Only if defending player controls no snow land
+        );
+
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new KjeldoranGuardEffect(),
                 new TapSourceCost(),
-                new DefendingPlayerControlsNoSourceCondition(snowLandFiler),
-                "activate only during combat and only if defending player controls no snow lands"
+                condition,
+                "{T}: Target creature gets +1/+1 until end of turn. "
+                + "When that creature leaves the battlefield this turn, sacrifice {this}. "
+                + "Activate only during combat and only if defending player controls no snow lands."
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -61,15 +75,25 @@ public final class KjeldoranGuard extends CardImpl {
 class KjeldoranGuardEffect extends OneShotEffect {
 
     KjeldoranGuardEffect() {
-        super(Outcome.Neutral);
-        staticText = "Target creature gets +1/+1 until end of turn." +
-                "When that creature leaves the battlefield this turn, sacrifice {this}." +
-                "Activate only during combat and only if defending player controls no snow lands.";
+        super(Outcome.BoostCreature);
+        staticText = "Target creature gets +1/+1 until end of turn."
+                + "When that creature leaves the battlefield this turn, sacrifice {this}."
+                + "Activate only during combat and only if defending player controls no snow lands.";
+    }
+
+    private KjeldoranGuardEffect(KjeldoranGuardEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public KjeldoranGuardEffect copy() {
+        return new KjeldoranGuardEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         UUID targetId = source.getFirstTarget();
+        Permanent targetPermanent = game.getPermanent(targetId);
         if (game.getPermanent(targetId) == null) {
             return false;
         }
@@ -81,31 +105,32 @@ class KjeldoranGuardEffect extends OneShotEffect {
 
         // When that creature leaves the battlefield this turn, sacrifice Kjeldoran Guard.
         game.addDelayedTriggeredAbility(
-                new KjeldoranGuardDelayedTriggeredAbility(targetId),
-                source
+                new KjeldoranGuardDelayedTriggeredAbility(
+                        new MageObjectReference(targetPermanent, game)
+                ), source
         );
 
         return true;
     }
-
-    private KjeldoranGuardEffect(KjeldoranGuardEffect effect) { super(effect); }
-
-    @Override
-    public KjeldoranGuardEffect copy() { return new KjeldoranGuardEffect(this); }
 }
 
 class KjeldoranGuardDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final UUID creatureId;
+    private final MageObjectReference mor;
 
-    KjeldoranGuardDelayedTriggeredAbility(UUID creatureId) {
+    KjeldoranGuardDelayedTriggeredAbility(MageObjectReference mor) {
         super(new SacrificeSourceEffect(), Duration.EndOfTurn, true);
-        this.creatureId = creatureId;
+        this.mor = mor;
     }
 
-    KjeldoranGuardDelayedTriggeredAbility(KjeldoranGuardDelayedTriggeredAbility ability) {
+    private KjeldoranGuardDelayedTriggeredAbility(final KjeldoranGuardDelayedTriggeredAbility ability) {
         super(ability);
-        this.creatureId = ability.creatureId;
+        this.mor = ability.mor;
+    }
+
+    @Override
+    public KjeldoranGuardDelayedTriggeredAbility copy() {
+        return new KjeldoranGuardDelayedTriggeredAbility(this);
     }
 
     @Override
@@ -115,12 +140,8 @@ class KjeldoranGuardDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(creatureId);
-    }
-
-    @Override
-    public KjeldoranGuardDelayedTriggeredAbility copy() {
-        return new KjeldoranGuardDelayedTriggeredAbility(this);
+        Permanent permanentLeaving = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        return permanentLeaving != null && mor.equals(new MageObjectReference(permanentLeaving, game));
     }
 
     @Override
