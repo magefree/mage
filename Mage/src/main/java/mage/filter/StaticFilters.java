@@ -1229,10 +1229,4 @@ public final class StaticFilters {
         FILTER_CONTROLLED_FOOD.setLockedFilter(true);
     }
 
-    public static final FilterCreaturePermanent FILTER_CONTROLLED_CREATURE_EACH = new FilterCreaturePermanent("each creature you control");
-
-    static {
-        FILTER_CONTROLLED_CREATURE_EACH.add(TargetController.YOU.getPlayerPredicate());
-        FILTER_CONTROLLED_CREATURE_EACH.setLockedFilter(true);
-    }
 }
