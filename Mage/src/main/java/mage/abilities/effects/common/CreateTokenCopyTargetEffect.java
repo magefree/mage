@@ -40,7 +40,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final List<Permanent> addedTokenPermanents;
     private final List<Ability> additionalAbilities;
     private final CardType additionalCardType;
-    private SubType additionalSubType;
+    private final List<SubType> additionalSubTypes = new ArrayList<>();
     private final UUID attackedPlayer;
     private UUID attachedTo = null;
     private final boolean attacking;
@@ -133,7 +133,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
         this.additionalAbilities = new ArrayList<>(effect.additionalAbilities);
         this.additionalCardType = effect.additionalCardType;
-        this.additionalSubType = effect.additionalSubType;
+        this.additionalSubTypes.addAll(effect.additionalSubTypes);
         this.attackedPlayer = effect.attackedPlayer;
         this.attachedTo = effect.attachedTo;
         this.attacking = effect.attacking;
@@ -236,8 +236,10 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.removeAllCreatureTypes();
             token.addSubType(onlySubType);
         }
-        if (additionalSubType != null) {
-            token.addSubType(additionalSubType);
+        if (!additionalSubTypes.isEmpty()) {
+            for (SubType additionalSubType : additionalSubTypes) {
+                token.addSubType(additionalSubType);
+            }
         }
         if (color != null) {
             token.setColor(color);
@@ -322,8 +324,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return addedTokenPermanents;
     }
 
-    public CreateTokenCopyTargetEffect setAdditionalSubType(SubType additionalSubType) {
-        this.additionalSubType = additionalSubType;
+    public CreateTokenCopyTargetEffect withAdditionalSubType(SubType additionalSubType) {
+        this.additionalSubTypes.add(additionalSubType);
         return this;
     }
 
