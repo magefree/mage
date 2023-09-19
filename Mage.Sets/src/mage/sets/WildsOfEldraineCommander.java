@@ -121,6 +121,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scion of Oona", 109, Rarity.RARE, mage.cards.s.ScionOfOona.class));
         cards.add(new SetCardInfo("Secluded Glen", 166, Rarity.RARE, mage.cards.s.SecludedGlen.class));
         cards.add(new SetCardInfo("Setessan Champion", 132, Rarity.RARE, mage.cards.s.SetessanChampion.class));
+        cards.add(new SetCardInfo("Shadow Puppeteers", 12, Rarity.RARE, mage.cards.s.ShadowPuppeteers.class));
         cards.add(new SetCardInfo("Shalai, Voice of Plenty", 74, Rarity.RARE, mage.cards.s.ShalaiVoiceOfPlenty.class));
         cards.add(new SetCardInfo("Siona, Captain of the Pyleas", 144, Rarity.UNCOMMON, mage.cards.s.SionaCaptainOfThePyleas.class));
         cards.add(new SetCardInfo("Snake Umbra", 133, Rarity.UNCOMMON, mage.cards.s.SnakeUmbra.class));
