@@ -16,17 +16,22 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
-import mage.watchers.Watcher;
 
-import java.util.*;
+import java.util.UUID;
 
 /**
  * @author Susucr
  */
 public final class LazierGoblin extends CardImpl {
+
+    /**
+     * Key to store that a MOR permanent has been motivated by a player.
+     */
+    static final String keyMotivation(UUID playerId, MageObjectReference mor) {
+        return "LazierGoblinMotivated|" + playerId.toString() + "|" + mor.getSourceId().toString() + "|" + mor.getZoneChangeCounter();
+    }
 
     public LazierGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
@@ -36,7 +41,7 @@ public final class LazierGoblin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Motivate {3}{R} (This creature can't attack or block unless you have paid its motivate cost once. Motivate only as a sorcery.)
-        this.addAbility(new LazierGoblinSpecialAction(), new LazierGoblinWatcher());
+        this.addAbility(new LazierGoblinSpecialAction());
         this.addAbility(new SimpleStaticAbility(new LazierGoblinRestrictionEffect())
                 .addHint(new ConditionPermanentHint(LazierGoblinMotivatedCondition.instance)));
 
@@ -57,6 +62,7 @@ public final class LazierGoblin extends CardImpl {
 }
 
 class LazierGoblinSpecialAction extends SpecialAction {
+
     // Ruling (2019-11-12):
     // Paying a creature's motivate cost is a special action that its controller
     // may take any time they have priority during their main phase with no spells
@@ -100,12 +106,17 @@ class LazierGoblinMotivateEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        LazierGoblinWatcher watcher = game.getState().getWatcher(LazierGoblinWatcher.class);
         Permanent permanent = source.getSourcePermanentOrLKI(game);
-        if (watcher == null || permanent == null) {
+        if (permanent == null) {
             return false;
         }
-        watcher.motivationPaid(source.getControllerId(), new MageObjectReference(permanent, game));
+        game.getState().setValue(
+                LazierGoblin.keyMotivation(
+                        permanent.getControllerId(),
+                        new MageObjectReference(permanent, game)
+                ),
+                true
+        );
         return true;
     }
 }
@@ -128,12 +139,14 @@ class LazierGoblinRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        LazierGoblinWatcher watcher = game.getState().getWatcher(LazierGoblinWatcher.class);
-
-        return watcher != null
-                && permanent != null
+        return permanent != null
                 && permanent.getId().equals(source.getSourceId())
-                && !watcher.isMotivated(permanent.getControllerId(), new MageObjectReference(permanent, game));
+                && null == game.getState().getValue(
+                        LazierGoblin.keyMotivation(
+                                permanent.getControllerId(),
+                                new MageObjectReference(permanent, game)
+                        )
+                );
     }
 
     @Override
@@ -152,40 +165,18 @@ enum LazierGoblinMotivatedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        LazierGoblinWatcher watcher = game.getState().getWatcher(LazierGoblinWatcher.class);
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-
-        return watcher != null
-                && permanent != null
-                && watcher.isMotivated(permanent.getControllerId(), new MageObjectReference(permanent, game));
+        return permanent != null
+                && null != game.getState().getValue(
+                        LazierGoblin.keyMotivation(
+                                permanent.getControllerId(),
+                                new MageObjectReference(permanent, game)
+                        )
+                );
     }
 
     @Override
     public String toString() {
         return "motivated";
-    }
-}
-
-class LazierGoblinWatcher extends Watcher {
-
-    // Player -> all Lazier Goblin MOR that were motivated by that player.
-    private final Map<UUID, Set<MageObjectReference>> motivationMap = new HashMap<>();
-
-    public LazierGoblinWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        // This watcher does not watch anything. Shall it be set up another way?
-    }
-
-    public void motivationPaid(UUID playerId, MageObjectReference mor) {
-        motivationMap.computeIfAbsent(playerId, k -> new HashSet<>());
-        motivationMap.get(playerId).add(mor);
-    }
-
-    public boolean isMotivated(UUID playerId, MageObjectReference mor) {
-        return motivationMap.getOrDefault(playerId, new HashSet<>()).contains(mor);
     }
 }
