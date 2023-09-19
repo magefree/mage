@@ -1,10 +1,8 @@
 package mage.view;
 
-import org.checkerframework.checker.units.qual.C;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -16,7 +14,7 @@ public class ValidateViews {
     // All those class are sent to client as Views or inside Views.
     // The test in this file is attempting to find any class that should
     // not be sent.
-    private static List<Class<?>> toValidate = Arrays.asList(
+    private static final List<Class<?>> toValidate = Arrays.asList(
             // Views
             AbilityPickerView.class, AbilityView.class, CardsView.class,
             CardView.class, ChatMessage.class, CombatGroupView.class,
@@ -89,18 +87,18 @@ public class ValidateViews {
     );
 
     // Those are safe java class we allow in Views.
-    private static List<Class<?>> safeClass = Arrays.asList(
+    private static final List<Class<?>> safeClass = Arrays.asList(
             boolean.class, int.class, long.class, float.class,
             String.class, Date.class, UUID.class
     );
 
     // Those are non-public class
-    private static List<String> nonPublicNames = Arrays.asList(
+    private static final List<String> nonPublicNames = Arrays.asList(
             "mage.players.PlayableObjectRecord"
     );
 
     // Those are excluded as Reflection on type of Map/Set/Collection is really hard.
-    private static List<String> tooHardToRecurseInto = Arrays.asList(
+    private static final List<String> tooHardToRecurseInto = Arrays.asList(
             "mage.view.CardsView<java.util.LinkedHashMap>",        // <UUID, CardView>
             "mage.view.CardsView<java.util.HashMap>",              // <UUID, CardView>
             "mage.view.CardsView<java.util.AbstractMap>",          // <UUID, CardView>
@@ -118,7 +116,7 @@ public class ValidateViews {
     );
 
     // Same, but for fields.
-    private static List<String> tooHardToRecurseIntoField = Arrays.asList(
+    private static final List<String> tooHardToRecurseIntoField = Arrays.asList(
             "mage.view.GameClientMessage: <mage.view.GameClientMessage>::targets<java.util.Set>"  // <UUID>
     );
 
@@ -173,7 +171,7 @@ public class ValidateViews {
         }
 
         msg = msg + "<" + clazz.getName() + ">";
-        if(tooHardToRecurseIntoField.contains(msg)) {
+        if (tooHardToRecurseIntoField.contains(msg)) {
             return;
         }
 
