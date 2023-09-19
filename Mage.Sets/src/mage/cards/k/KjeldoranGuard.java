@@ -77,7 +77,7 @@ class KjeldoranGuardEffect extends OneShotEffect {
 
     KjeldoranGuardEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Target creature gets +1/+1 until end of turn."
+        staticText = "Target creature gets +1/+1 until end of turn. "
                 + "When that creature leaves the battlefield this turn, sacrifice {this}.";
     }
 
