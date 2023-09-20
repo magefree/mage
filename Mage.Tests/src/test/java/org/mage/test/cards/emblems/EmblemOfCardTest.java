@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author noxx
+ * @author Arti
  */
 public class EmblemOfCardTest extends CardTestPlayerBase {
 
