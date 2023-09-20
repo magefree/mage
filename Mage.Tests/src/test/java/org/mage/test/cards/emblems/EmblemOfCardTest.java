@@ -31,6 +31,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 7);
         assertLife(playerA, 13);
+        assertEmblemCount(playerA, 1);
     }
     @Test
     public void testEmblemOfYurlok() {
@@ -51,13 +52,13 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         checkManaPool("after tapping Mountain", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "R", 1);
         checkPlayableAbility("can't tap emblem", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}:", false);
 
-        execute();
-
         // wait for mana burn
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
         checkLife("takes 1 point of mana burn", 1, PhaseStep.BEGIN_COMBAT, playerA, 19);
+        execute();
+
+        assertEmblemCount(playerA, 1);
     }
 
     @Test
@@ -76,6 +77,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertPermanentCount(playerA, "Colossal Dreadmaw", 1);
+        assertEmblemCount(playerA, 1);
     }
     @Test
     public void testEmblemOfParadoxEngine() {
@@ -122,6 +124,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 14);
+        assertEmblemCount(playerA, 1);
     }
     @Test
     public void testEmblemOfDoublingSeason() {
@@ -145,7 +148,8 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Elspeth, Sun's Champion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elspeth, Sun's Champion");
-        checkCardCounters(
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCounters(
                 "Elspeth's loyalty is doubled",
                 1,
                 PhaseStep.PRECOMBAT_MAIN,
@@ -155,8 +159,9 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
                 8
         );
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Create");
+        checkPlayableAbility("can't still activate Griselbrand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pay 7 life:", false);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkCardCounters(
+        checkPermanentCounters(
                 "+1 is not doubled",
                 1,
                 PhaseStep.PRECOMBAT_MAIN,
@@ -173,5 +178,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
                 "Soldier Token",
                 6
         );
+        execute();
+        assertEmblemCount(playerA, 1);
     }
 }
