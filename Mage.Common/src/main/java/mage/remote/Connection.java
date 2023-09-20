@@ -27,22 +27,15 @@ public class Connection {
     private int proxyPort;
     private String proxyUsername;
     private String proxyPassword;
-    private int clientCardDatabaseVersion;
     private boolean forceDBComparison;
     private String userIdStr;
-    private int socketWriteTimeout;
+    private final int socketWriteTimeout;
 
     private UserData userData;
 
-//    private int avatarId;
-//    private boolean showAbilityPickerForced;
-//    private boolean allowRequestShowHandCards;
-//    private boolean confirmEmptyManaPool;
-//    private String flagName;
-//    private UserSkipPrioritySteps userSkipPrioritySteps;
-    private static final String serialization = "?serializationtype=java";
-    private static final String transport = "bisocket";
-    private static final String threadpool = "onewayThreadPool=mage.remote.CustomThreadPool";
+    private static final String SERIALIZATION = "?serializationtype=java";
+    private static final String TRANSPORT = "bisocket";
+    private static final String THREAD_POOL = "onewayThreadPool=mage.remote.CustomThreadPool";
 
     private final String parameter;
 
@@ -57,7 +50,7 @@ public class Connection {
 
     @Override
     public int hashCode() {
-        return (transport + host + Integer.toString(port) + proxyType.toString()).hashCode();
+        return (TRANSPORT + host + Integer.toString(port) + proxyType.toString()).hashCode();
     }
 
     @Override
@@ -71,7 +64,7 @@ public class Connection {
 
     @Override
     public String toString() {
-        return host + ':' + Integer.toString(port) + '/' + serialization + parameter;
+        return host + ':' + Integer.toString(port) + '/' + SERIALIZATION + parameter;
     }
 
     public String getURI() {
@@ -79,13 +72,13 @@ public class Connection {
             try {
                 InetAddress inet = getLocalAddress();
                 if (inet != null) {
-                    return transport + "://" + inet.getHostAddress() + ':' + port + '/' + serialization + "&" + threadpool + parameter;
+                    return TRANSPORT + "://" + inet.getHostAddress() + ':' + port + '/' + SERIALIZATION + "&" + THREAD_POOL + parameter;
                 }
             } catch (SocketException ex) {
                 // just use localhost if can't find local ip
             }
         }
-        return transport + "://" + host + ':' + port + '/' + serialization + "&" + threadpool + parameter;
+        return TRANSPORT + "://" + host + ':' + port + '/' + SERIALIZATION + "&" + THREAD_POOL + parameter;
     }
 
     public ProxyType getProxyType() {

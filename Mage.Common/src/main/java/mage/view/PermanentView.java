@@ -11,7 +11,6 @@ import mage.players.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -128,7 +127,7 @@ public class PermanentView extends CardView {
             }
         }
 
-        // determines if shown in it's own column
+        // determines if shown in its own column
         boolean attachedToPermanent = false;
         boolean attachedControllerDiffers = false;
         if (game != null) {
@@ -150,7 +149,7 @@ public class PermanentView extends CardView {
         this.phasedIn = permanentView.isPhasedIn();
         this.summoningSickness = permanentView.summoningSickness;
         this.damage = permanentView.damage;
-        this.attachments = permanentView.attachments.stream().collect(Collectors.toList());
+        this.attachments = new ArrayList<>(permanentView.attachments);
 
         boolean showFaceDownInfo = controlled || (game != null && game.hasEnded());
 

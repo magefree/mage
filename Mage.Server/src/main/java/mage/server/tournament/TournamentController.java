@@ -319,7 +319,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null && !player.hasQuit()) {
                 tournamentSessions.get(playerId).submitDeck(deck);
-                managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has submitted their tournament deck", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerSubmittedDeck);
+                managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has submitted their tournament deck", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PLAYER_SUBMITTED_DECK);
             }
         }
     }
@@ -406,7 +406,7 @@ public class TournamentController {
             tournamentPlayer.setQuit(info, status);
             tournament.quit(playerId);
             tournamentSession.quit();
-            managerFactory.chatManager().broadcast(chatId, "", tournamentPlayer.getPlayer().getLogName() + " has quit the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
+            managerFactory.chatManager().broadcast(chatId, "", tournamentPlayer.getPlayer().getLogName() + " has quit the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PLAYER_QUIT_TOURNAMENT);
         }
     }
 

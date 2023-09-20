@@ -85,7 +85,7 @@ public class SessionImpl implements Session {
         SwingWorker<Boolean, Object> worker = null;
         Throwable lastError = null;
 
-        abstract public boolean work() throws Throwable;
+        public abstract boolean work() throws Throwable;
 
         boolean doWork() throws Throwable {
             worker = new SwingWorker<Boolean, Object>() {
@@ -1389,7 +1389,7 @@ public class SessionImpl implements Session {
             if (isConnected()) {
                 ActionData actionData = new ActionData("SEND_PLAYER_ACTION", gameId, getSessionId());
 
-                actionData.value = passPriorityAction + (data != null ? " " + data.toString() : "");
+                actionData.value = passPriorityAction + (data != null ? " " + data : "");
                 appendJsonLog(actionData);
 
                 server.sendPlayerAction(passPriorityAction, gameId, sessionId, data);
@@ -1519,7 +1519,7 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             handleThrowable(t);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -1635,13 +1635,10 @@ public class SessionImpl implements Session {
             return;
         }
 
-        if (t instanceof RuntimeException) {
-            RuntimeException re = (RuntimeException) t;
-            if (t.getCause() instanceof InterruptedException) {
+        if (t instanceof RuntimeException && (t.getCause() instanceof InterruptedException)) {
                 //logger.error("Connection error: was interrupted by runtime exception", t.getCause());
                 Thread.currentThread().interrupt();
                 return;
-            }
         }
 
         logger.fatal("Connection error: other", t);

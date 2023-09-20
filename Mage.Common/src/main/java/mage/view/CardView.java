@@ -308,12 +308,7 @@ public class CardView extends SimpleCardView {
         if (game != null) {
             Zone cardZone = game.getState().getZone(card.getId());
             if (card.isFaceDown(game)) {
-                showFaceUp = false;
-                if (Zone.BATTLEFIELD != cardZone) {
-                    if (showFaceDownCard) {
-                        showFaceUp = true;
-                    }
-                }
+                showFaceUp = Zone.BATTLEFIELD != cardZone && (showFaceDownCard);
             }
 
             if (storeZone) {
@@ -432,9 +427,7 @@ public class CardView extends SimpleCardView {
                 }
                 this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
                 this.bandedCards = new ArrayList<>();
-                for (UUID bandedCard : permanent.getBandedCards()) {
-                    bandedCards.add(bandedCard);
-                }
+                bandedCards.addAll(permanent.getBandedCards());
                 if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                     controlledByOwner = false;
                 }
@@ -442,9 +435,7 @@ public class CardView extends SimpleCardView {
 
             // card icons for permanents on battlefield
             // abilities
-            permanent.getAbilities(game).forEach(ability -> {
-                this.cardIcons.addAll(ability.getIcons(game));
-            });
+            permanent.getAbilities(game).forEach(permanentAbility -> this.cardIcons.addAll(permanentAbility.getIcons(game)));
             // face down
             if (permanent.isFaceDown(game)) {
                 this.cardIcons.add(CardIconImpl.FACE_DOWN);

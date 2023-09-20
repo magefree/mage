@@ -1,6 +1,5 @@
 package mage.view;
 
-import mage.cards.Card;
 import mage.game.command.Plane;
 import mage.players.PlayableObjectStats;
 

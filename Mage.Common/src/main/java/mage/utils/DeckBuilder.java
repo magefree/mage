@@ -23,11 +23,7 @@ public final class DeckBuilder {
     private static final int MIN_CARD_SCORE = 25;
     private static final int MIN_SOURCE = 3; // minmal number of sources for a mana color, will be taken also if ratio would give a lower number
     private static Deck deck;
-
-    private static int[] deckCount;
     private static int deckSize;
-    private static int deckSpells;
-    private static int deckLands;
 
     /**
      * Hide constructor.
@@ -35,7 +31,9 @@ public final class DeckBuilder {
     private DeckBuilder() {
     }
 
-    public synchronized static Deck buildDeck(List<Card> spellCardPool, List<ColoredManaSymbol> allowedColors, List<String> setsToUse, List<Card> landCardPool, int deckCardSize, RateCallback callback) {
+    public static synchronized Deck buildDeck(List<Card> spellCardPool, List<ColoredManaSymbol> allowedColors, List<String> setsToUse, List<Card> landCardPool, int deckCardSize, RateCallback callback) {
+        int[] deckCount;
+        int deckSpells;
         deckSize = deckCardSize;
         deck = new Deck();
 
@@ -65,11 +63,9 @@ public final class DeckBuilder {
         if (deckSize == 40) {
             deckCount = DECK_COUNT40;
             deckSpells = 23;
-            deckLands = 17;
         } else {
             deckCount = DECK_COUNT60;
             deckSpells = 35;
-            deckLands = 25;
         }
 
         for (int index = 0; index < deckCount.length; index++) {
@@ -208,7 +204,7 @@ public final class DeckBuilder {
 
     private static class MageScoredCard {
 
-        private Card card;
+        private final Card card;
         private final int score;
 
         private static final int[] SINGLE_PENALTY = {0, 1, 1, 3, 6, 9};

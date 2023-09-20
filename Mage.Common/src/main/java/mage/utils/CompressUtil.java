@@ -12,21 +12,21 @@ public final class CompressUtil {
 
     // disable data compression in client-server traffic, add java param like -Dxmage.network.nocompress
     private static final String NO_COMPRESS_DATA_PROPERTY = "xmage.network.nocompress";
-    private static final boolean compressData;
+    private static final boolean COMPRESS_DATA;
 
     static {
-        compressData = System.getProperty(NO_COMPRESS_DATA_PROPERTY) == null;
+        COMPRESS_DATA = System.getProperty(NO_COMPRESS_DATA_PROPERTY) == null;
     }
 
     public static Object decompress(Object data) {
         if (!(data instanceof ZippedObject)) {
             return data;
         }
-        return ((ZippedObject) data).unzip();
+        return ((ZippedObject<?>) data).unzip();
     }
 
     public static Object compress(Object data) {
-        if (data != null && compressData) {
+        if (data != null && COMPRESS_DATA) {
             return new ZippedObjectImpl<>(data);
         }
         return data;

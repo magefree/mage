@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.jboss.util.threadpool.BasicThreadPool;
 
 public class CustomThreadPool extends BasicThreadPool {
-    private static final Logger logger = Logger.getLogger(SessionImpl.class);
+    private static final Logger logger = Logger.getLogger(CustomThreadPool.class);
 
     @Override
     public void setMaximumPoolSize(int size) {

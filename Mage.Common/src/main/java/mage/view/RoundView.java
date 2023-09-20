@@ -16,8 +16,7 @@ import mage.game.tournament.TournamentPairing;
  */
 public class RoundView implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    List<TournamentGameView> games = new ArrayList<>();
+    private List<TournamentGameView> games = new ArrayList<>();
 
     public RoundView(Round round) {
         try {
@@ -50,5 +49,4 @@ public class RoundView implements Serializable {
     public List<TournamentGameView> getGames() {
         return games;
     }
-
 }

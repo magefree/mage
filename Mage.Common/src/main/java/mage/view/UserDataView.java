@@ -36,7 +36,6 @@ public class UserDataView implements Serializable {
         this.confirmEmptyManaPool = confirmEmptyManaPool;
         this.flagName = flagName;
         this.askMoveToGraveOrder = askMoveToGraveOrder;
-
     }
 
     public UserDataView(UserData userData) {
@@ -72,5 +71,4 @@ public class UserDataView implements Serializable {
     public boolean askMoveToGraveOrder() {
         return askMoveToGraveOrder;
     }
-
 }

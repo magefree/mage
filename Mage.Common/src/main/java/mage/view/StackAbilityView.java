@@ -9,7 +9,6 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.CardIconImpl;
 import mage.cards.Card;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.game.Game;
@@ -32,7 +31,7 @@ public class StackAbilityView extends CardView {
     private static final long serialVersionUID = 1L;
 
     // in GUI: that's view will be replaced by sourceCard, so don't forget to sync settings like
-    // selectable, chooseable, card icons etc. Search by getSourceCard
+    // selectable, choose-able, card icons etc. Search by getSourceCard
     private final CardView sourceCard;
 
     public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {
@@ -165,10 +164,4 @@ public class StackAbilityView extends CardView {
     public CardView getSourceCard() {
         return this.sourceCard;
     }
-
-    @Override
-    public AbilityType getAbilityType() {
-        return abilityType;
-    }
-
 }

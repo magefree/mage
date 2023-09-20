@@ -99,16 +99,16 @@ public class CallbackClientImpl implements CallbackClient {
                             // play the sound related to the message
                             if (message.getSoundToPlay() != null) {
                                 switch (message.getSoundToPlay()) {
-                                    case PlayerLeft:
+                                    case PLAYER_LEFT:
                                         AudioManager.playPlayerLeft();
                                         break;
-                                    case PlayerQuitTournament:
+                                    case PLAYER_QUIT_TOURNAMENT:
                                         AudioManager.playPlayerQuitTournament();
                                         break;
-                                    case PlayerSubmittedDeck:
+                                    case PLAYER_SUBMITTED_DECK:
                                         AudioManager.playPlayerSubmittedDeck();
                                         break;
-                                    case PlayerWhispered:
+                                    case PLAYER_WHISPERED:
                                         AudioManager.playPlayerWhispered();
                                         break;
                                 }

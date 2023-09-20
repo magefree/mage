@@ -67,7 +67,7 @@ public class PlayerView implements Serializable {
         this.counters = player.getCounters();
         this.wins = player.getMatchPlayer().getWins();
         this.winsNeeded = player.getMatchPlayer().getWinsNeeded();
-        // If match ended immediately before, deck can be set to null so check is necessarry here
+        // If match ended immediately before, deck can be set to null so check is necessary here
         this.deckHashCode = player.getMatchPlayer().getDeck() != null ? player.getMatchPlayer().getDeck().getDeckHashCode() : 0;
         this.libraryCount = player.getLibrary().size();
         this.handCount = player.getHand().size();
@@ -137,7 +137,7 @@ public class PlayerView implements Serializable {
                 if (commander.getControllerId().equals(this.playerId)) {
                     Card sourceCard = game.getCard(commander.getSourceId());
                     if (sourceCard != null) {
-                        commandList.add(new CommanderView(commander, sourceCard, game));
+                        commandList.add(new CommanderView(sourceCard, game));
                     }
                 }
             }
@@ -266,7 +266,7 @@ public class PlayerView implements Serializable {
     }
 
     public boolean hasAttachments() {
-        return attachments != null && !attachments.isEmpty();
+        return !attachments.isEmpty();
     }
 
     public int getStatesSavedSize() {

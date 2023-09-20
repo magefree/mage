@@ -12,9 +12,6 @@ import java.util.List;
  * @author JayDi85
  */
 public abstract class MageCard extends JLayeredPane {
-
-    private static final Logger logger = Logger.getLogger(MageCard.class);
-
     /**
      * Return real MageCard panel (example: card icons uses MageLayerCard to implement additional panels)
      * <p>

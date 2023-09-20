@@ -547,7 +547,7 @@ public class TableController {
                     }
                     Optional<User> user = managerFactory.userManager().getUser(userId);
                     if (user.isPresent()) {
-                        managerFactory.chatManager().broadcast(chatId, user.get().getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, null, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
+                        managerFactory.chatManager().broadcast(chatId, user.get().getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, null, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PLAYER_LEFT);
                         if (!table.isTournamentSubTable()) {
                             user.get().removeTable(playerId);
                         }

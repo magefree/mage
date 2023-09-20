@@ -28,7 +28,7 @@ public final class RateCard {
 
     public static final boolean PRELOAD_CARD_RATINGS_ON_STARTUP = false; // warning, rating and card classes preloading can cause lags for users with low memory
 
-    private static Map<String, Integer> baseRatings = new HashMap<>();
+    private static final Map<String, Integer> baseRatings = new HashMap<>();
     private static final Map<String, Integer> ratedCard = new HashMap<>();
     private static final Map<String, Integer> ratedCardView = new HashMap<>(); // Rating is not exactly the same for CardView, so cached in a different map.
     private static boolean isLoaded = false;
@@ -36,7 +36,7 @@ public final class RateCard {
     /**
      * Rating that is given for new cards.
      * Ratings are in [1,10] range, so setting it high will make new cards appear more often.
-     * nowadays, cards that are more rare are more powerful, lets trust that and play the shiny cards.
+     * nowadays, cards that are rarer are more powerful, lets trust that and play the shiny cards.
      */
     private static final int DEFAULT_BASIC_LAND_RATING = 1;
     private static final int DEFAULT_NOT_RATED_CARD_RATING = 40;
@@ -47,8 +47,8 @@ public final class RateCard {
     // Cards that aren't in the deck's colors get a penalty to their rating
     private static final int OFF_COLOR_PENALTY = -100;
 
-    private static String RATINGS_DIR = "/ratings/";
-    private static String RATINGS_SET_LIST = RATINGS_DIR + "setsWithRatings.csv";
+    private static final String RATINGS_DIR = "/ratings/";
+    private static final String RATINGS_SET_LIST = RATINGS_DIR + "setsWithRatings.csv";
 
     private static final Logger log = Logger.getLogger(RateCard.class);
 
@@ -91,8 +91,7 @@ public final class RateCard {
 
         String name = card.getName();
         if (useCache && allowedColors == null && ratedCard.containsKey(name)) {
-            int rate = ratedCard.get(name);
-            return rate;
+            return ratedCard.get(name);
         }
 
         int typeMultiplier = typeMultiplier(card);
@@ -112,8 +111,7 @@ public final class RateCard {
 
         String name = cardview.getName();
         if (useCache && allowedColors == null && ratedCardView.containsKey(name)) {
-            int rate = ratedCardView.get(name);
-            return rate;
+            return ratedCardView.get(name);
         }
 
         int typeMultiplier = typeMultiplier(cardview);
@@ -294,7 +292,7 @@ public final class RateCard {
     /**
      * reads the list of sets that have ratings csv files and read each file
      */
-    public synchronized static void prepareAndLoadRatings() {
+    public static synchronized void prepareAndLoadRatings() {
         if (isLoaded) {
             return;
         }
@@ -306,7 +304,7 @@ public final class RateCard {
             Scanner scanner = new Scanner(is);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if (!line.substring(0, 1).equals("#")) {
+                if (line.charAt(0) != '#') {
                     setsToLoad.add(line);
                 }
             }
@@ -332,9 +330,10 @@ public final class RateCard {
     /**
      * reads ratings from the file
      */
-    private synchronized static void readFromFile(String path) {
+    private static synchronized void readFromFile(String path) {
         // card must get max rating from multiple cards
-        Integer min = Integer.MAX_VALUE, max = 0;
+        int min = Integer.MAX_VALUE;
+        int max = 0;
         Map<String, Integer> thisFileRatings = new HashMap<>();
 
         // load
@@ -344,7 +343,7 @@ public final class RateCard {
             String line = scanner.nextLine();
             String[] s = line.split(":");
             if (s.length == 2) {
-                Integer rating = Integer.parseInt(s[1].trim());
+                int rating = Integer.parseInt(s[1].trim());
                 String name = s[0].trim();
                 name = name.replace("’", "'");
                 if (rating > max) {
@@ -506,14 +505,10 @@ public final class RateCard {
      * @return
      */
     public static boolean isBasicLand(String name) {
-        if (name.equals("Plains")
+        return (name.equals("Plains")
                 || name.equals("Island")
                 || name.equals("Swamp")
                 || name.equals("Mountain")
-                || name.equals("Forest")) {
-            return true;
-        } else {
-            return false;
-        }
+                || name.equals("Forest"));
     }
 }

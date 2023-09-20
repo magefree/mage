@@ -843,8 +843,8 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean watchTournamentTable(final String sessionId, final UUID tableId) throws MageException {
-        return executeWithResult("setUserData", sessionId, new MyActionWithBooleanResult(sessionId, tableId));
+    public void watchTournamentTable(final String sessionId, final UUID tableId) throws MageException {
+        executeWithResult("setUserData", sessionId, new MyActionWithBooleanResult(sessionId, tableId));
     }
 
     @Override
@@ -1245,7 +1245,7 @@ public class MageServerImpl implements MageServer {
         }
 
         @Override
-        public GameView execute() throws MageException {
+        public GameView execute() {
             Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
             if (!session.isPresent()) {
                 logger.error("Session not found : " + sessionId);
@@ -1268,7 +1268,7 @@ public class MageServerImpl implements MageServer {
         }
 
         @Override
-        public Boolean execute() throws MageException {
+        public Boolean execute() {
             Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
             if (!session.isPresent()) {
                 return false;
@@ -1351,7 +1351,7 @@ public class MageServerImpl implements MageServer {
                 userRating = user.getUserData().getConstructedRating();
             }
             if (userRating < minimumRating) {
-                String message = new StringBuilder("Your rating ").append(userRating).append(" is lower than the table requirement ").append(minimumRating).toString();
+                String message = "Your rating " + userRating + " is lower than the table requirement " + minimumRating;
                 user.showUserMessage("Create table", message);
                 throw new MageException("No message");
             }
@@ -1369,5 +1369,4 @@ public class MageServerImpl implements MageServer {
             }
         }
     }
-
 }

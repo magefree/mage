@@ -12,10 +12,10 @@ import java.util.List;
  */
 public final class EntityManagerTest {
 
-    private static DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.FULL);
+    private static final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.FULL);
 
     public static void main(String[] args) throws Exception {
-        List<Log> logs = EntityManager.instance.getAllLogs();
+        List<Log> logs = EntityManager.INSTANCE.getAllLogs();
         System.out.println("logs found: " + logs.size());
         for (Log log : logs) {
             System.out.println("   key=" + log.getKey());
@@ -32,7 +32,7 @@ public final class EntityManagerTest {
 
         System.out.println("********************************");
 
-        List<Feedback> feedbackList = EntityManager.instance.getAllFeedbacks();
+        List<Feedback> feedbackList = EntityManager.INSTANCE.getAllFeedbacks();
         System.out.println("feedbacks found: " + feedbackList.size());
         int count = 1;
         for (Feedback feedback : feedbackList) {

@@ -100,7 +100,7 @@ public class ChatSession {
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
             toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                    new ChatMessage(fromUser.getName(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered)));
+                    new ChatMessage(fromUser.getName(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PLAYER_WHISPERED)));
             if (clients.containsKey(fromUser.getId())) {
                 fromUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
                         new ChatMessage(toUser.getName(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_TO, null)));

@@ -18,8 +18,7 @@ import java.util.List;
  * @author noxx, North
  */
 public enum EntityManager {
-
-    instance;
+    INSTANCE;
 
     private Dao<Log, Object> logDao;
     private Dao<Feedback, Object> feedbackDao;

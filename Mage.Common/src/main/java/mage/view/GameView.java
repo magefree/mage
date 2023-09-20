@@ -223,11 +223,9 @@ public class GameView implements Serializable {
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
         }
-        if (permanent != null) {
-            if (permanent.isTransformed()) {
+        if (permanent != null && (permanent.isTransformed())) {
                 StackAbilityView stackAbilityView = (StackAbilityView) stack.get(stackId);
                 stackAbilityView.getSourceCard().setTransformed(true);
-            }
         }
     }
 

@@ -7,7 +7,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.ExpansionInfo;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
-import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.players.PlayerType;
@@ -63,17 +62,17 @@ public interface MageServer {
 
     TableView createTournamentTable(String sessionId, UUID roomId, TournamentOptions tournamentOptions) throws MageException;
 
-    boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
+    boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException;
 
-    boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
+    boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException;
 
-    boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
+    boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException;
 
-    void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
+    void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException;
 
     boolean watchTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
 
-    boolean watchTournamentTable(String sessionId, UUID tableId) throws MageException;
+    void watchTournamentTable(String sessionId, UUID tableId) throws MageException;
 
     boolean leaveTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
 

@@ -9,8 +9,8 @@ import java.awt.*;
  */
 public class MageCardLocation {
 
-    final private Rectangle componentRect;
-    final private Rectangle cardRect;
+    private final Rectangle componentRect;
+    private final Rectangle cardRect;
 
     public MageCardLocation(Point componentLocation, MageCardSpace cardOuterSpace, Rectangle componentBounds) {
         this.componentRect = new Rectangle(componentLocation.x, componentLocation.y, componentBounds.width, componentBounds.height);

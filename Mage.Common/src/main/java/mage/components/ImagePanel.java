@@ -9,10 +9,8 @@ import javax.swing.JViewport;
 
 @SuppressWarnings("serial")
 public class ImagePanel extends JPanel {
-
-
-    private BufferedImage image;
-    private ImagePanelStyle style;
+    private final BufferedImage image;
+    private final ImagePanelStyle style;
     private float alignmentX = 0.5f;
     private float alignmentY = 0.5f;
 
@@ -27,11 +25,11 @@ public class ImagePanel extends JPanel {
     }
 
     public void setImageAlignmentX(float alignmentX) {
-        this.alignmentX = alignmentX > 1.0f ? 1.0f : alignmentX < 0.0f ? 0.0f : alignmentX;
+        this.alignmentX = alignmentX > 1.0f ? 1.0f : Math.max(alignmentX, 0.0f);
     }
 
     public void setImageAlignmentY(float alignmentY) {
-        this.alignmentY = alignmentY > 1.0f ? 1.0f : alignmentY < 0.0f ? 0.0f : alignmentY;
+        this.alignmentY = alignmentY > 1.0f ? 1.0f : Math.max(alignmentY, 0.0f);
 
     }
 

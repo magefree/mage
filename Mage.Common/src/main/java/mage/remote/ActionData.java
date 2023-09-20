@@ -42,54 +42,52 @@ public class ActionData {
     static class CustomExclusionStrategy implements ExclusionStrategy {
 
         // FIXME: Very crude way of whitelisting, as it applies to all levels of the JSON tree.
-        private final java.util.Set<String> KEEP = new java.util.HashSet<>(
+        private final java.util.Set<String> keep = new java.util.HashSet<>(
                 java.util.Arrays.asList(
-                        new String[]{
-                            "id",
-                            "choice",
-                            "damage",
-                            "abilityType",
-                            "ability",
-                            "abilities",
-                            "method",
-                            "data",
-                            "options",
-                            "life",
-                            "players",
-                            "zone",
-                            "step",
-                            "phase",
-                            "attackers",
-                            "blockers",
-                            "tapped",
-                            "damage",
-                            "combat",
-                            "paid",
-                            "hand",
-                            "stack",
-                            "manaValue",
-                            "gameId",
-                            "canPlayInHand",
-                            "gameView",
-                            "sessionId",
-                            "power",
-                            "choices",
-                            "targets",
-                            "loyalty",
-                            "toughness",
-                            "power",
-                            "type",
-                            "priorityTime",
-                            "manaCost",
-                            "value",
-                            "message",
-                            "cardsView",
-                            "name",
-                            "count",
-                            "counters",
-                            "battlefield",
-                            "parentId"
-                        }));
+                        "id",
+                        "choice",
+                        "damage",
+                        "abilityType",
+                        "ability",
+                        "abilities",
+                        "method",
+                        "data",
+                        "options",
+                        "life",
+                        "players",
+                        "zone",
+                        "step",
+                        "phase",
+                        "attackers",
+                        "blockers",
+                        "tapped",
+                        "damage",
+                        "combat",
+                        "paid",
+                        "hand",
+                        "stack",
+                        "manaValue",
+                        "gameId",
+                        "canPlayInHand",
+                        "gameView",
+                        "sessionId",
+                        "power",
+                        "choices",
+                        "targets",
+                        "loyalty",
+                        "toughness",
+                        "power",
+                        "type",
+                        "priorityTime",
+                        "manaCost",
+                        "value",
+                        "message",
+                        "cardsView",
+                        "name",
+                        "count",
+                        "counters",
+                        "battlefield",
+                        "parentId"));
 
         public CustomExclusionStrategy() {
         }
@@ -99,7 +97,7 @@ public class ActionData {
         @Override
         public boolean shouldSkipField(FieldAttributes f) {
             String name = f.getName();
-            return !KEEP.contains(name);
+            return !keep.contains(name);
         }
 
         // This method is called for all classes. If the method returns true the
