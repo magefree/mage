@@ -1482,6 +1482,10 @@ public abstract class AbilityImpl implements Ability {
 
     public AbilityImpl copyWithZone(Zone zone) {
         AbilityImpl copy = ((AbilityImpl)this.copy());
+        if (copy == this) {
+            // singleton, not safe to change its zone
+            return this;
+        }
         copy.zone = zone;
         copy.newId();
         return copy;
