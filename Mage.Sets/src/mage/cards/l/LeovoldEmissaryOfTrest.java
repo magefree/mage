@@ -1,15 +1,15 @@
-
 package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.BecomesTargetControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.TargetOfOpponentsSpellOrAbilityTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -35,7 +35,8 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeovoldEmissaryOfTrestEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
-        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new DrawCardSourceControllerEffect(1), true, false));
+        this.addAbility(new BecomesTargetControllerTriggeredAbility(new DrawCardSourceControllerEffect(1),
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.NONE, true));
     }
 
     private LeovoldEmissaryOfTrest(final LeovoldEmissaryOfTrest card) {
