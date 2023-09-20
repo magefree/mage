@@ -1481,11 +1481,14 @@ public abstract class AbilityImpl implements Ability {
     }
 
     public AbilityImpl copyWithZone(Zone zone) {
-        AbilityImpl copy = ((AbilityImpl)this.copy());
-        if (copy == this) {
-            // singleton, not safe to change its zone
+        if (this instanceof MageSingleton) {
+            // not safe to change zone for singletons
+            // in theory there could be some sort of wrapper to effectively change
+            // the zone here, but currently no use of copyWithZone actually needs
+            // to change the zone of any existing singleton abilities
             return this;
         }
+        AbilityImpl copy = ((AbilityImpl)this.copy());
         copy.zone = zone;
         copy.newId();
         return copy;
