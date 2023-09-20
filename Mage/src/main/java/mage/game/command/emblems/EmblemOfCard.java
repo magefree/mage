@@ -16,6 +16,12 @@ import org.apache.log4j.Logger;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author artemiswkearney
+ * Emblem with all the abilities of an existing card.
+ * Can be used for custom gamemodes like Omniscience Draft (as seen on Arena),
+ * mana burn with Yurlok of Scorch Thrash, and anything else players might think of.
+ */
 public final class EmblemOfCard extends Emblem {
     private final boolean usesVariousArt;
     private static final Logger logger = Logger.getLogger(EmblemOfCard.class);
