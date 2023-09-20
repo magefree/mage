@@ -53,7 +53,7 @@ class GrislyAnglerfishMustAttackEffect extends RequirementEffect {
         staticText = "Creatures your opponents control attack this turn if able";
     }
 
-    public GrislyAnglerfishMustAttackEffect(final GrislyAnglerfishMustAttackEffect effect) {
+    private GrislyAnglerfishMustAttackEffect(final GrislyAnglerfishMustAttackEffect effect) {
         super(effect);
     }
 

@@ -45,7 +45,7 @@ class InnerStruggleEffect extends OneShotEffect {
         this.staticText = "Target creature deals damage to itself equal to its power";
     }
 
-    public InnerStruggleEffect(final InnerStruggleEffect effect) {
+    private InnerStruggleEffect(final InnerStruggleEffect effect) {
         super(effect);
     }
 

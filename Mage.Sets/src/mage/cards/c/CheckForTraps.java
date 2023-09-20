@@ -68,7 +68,7 @@ class CheckForTrapsEffect extends OneShotEffect {
         }
         opponent.revealCards(source, opponent.getHand(), game);
         TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_NON_LAND);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         boolean opponentLoseLife = false;
         if (controller.choose(outcome, opponent.getHand(), target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());

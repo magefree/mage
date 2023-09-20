@@ -68,7 +68,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
         staticText = "All damage that would be dealt to you and other permanents you control is dealt to {this} instead";
     }
 
-    PalisadeGiantReplacementEffect(final PalisadeGiantReplacementEffect effect) {
+    private PalisadeGiantReplacementEffect(final PalisadeGiantReplacementEffect effect) {
         super(effect);
     }
 

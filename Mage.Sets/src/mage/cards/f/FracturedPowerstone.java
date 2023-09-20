@@ -32,7 +32,7 @@ public final class FracturedPowerstone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FracturedPowerstone(final FracturedPowerstone card) {
+    private FracturedPowerstone(final FracturedPowerstone card) {
         super(card);
     }
 

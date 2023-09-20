@@ -59,7 +59,7 @@ class DrainPowerEffect extends OneShotEffect {
         this.staticText = "Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way";
     }
 
-    public DrainPowerEffect(final DrainPowerEffect effect) {
+    private DrainPowerEffect(final DrainPowerEffect effect) {
         super(effect);
     }
 

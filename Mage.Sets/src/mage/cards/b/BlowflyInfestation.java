@@ -76,7 +76,7 @@ class BlowflyInfestationEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public BlowflyInfestationEffect(BlowflyInfestationEffect effect) {
+    private BlowflyInfestationEffect(final BlowflyInfestationEffect effect) {
         super(effect);
     }
 

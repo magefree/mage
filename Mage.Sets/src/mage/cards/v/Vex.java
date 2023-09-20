@@ -43,7 +43,7 @@ class VexEffect extends OneShotEffect {
         this.staticText = "Counter target spell. That spell's controller may draw a card";
     }
 
-    public VexEffect(final VexEffect effect) {
+    private VexEffect(final VexEffect effect) {
         super(effect);
     }
 

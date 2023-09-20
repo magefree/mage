@@ -58,7 +58,7 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
         this.targetSource = new TargetSource(new FilterObject("source of your choice"));
     }
     
-    public JadeMonolithRedirectionEffect(final JadeMonolithRedirectionEffect effect) {
+    private JadeMonolithRedirectionEffect(final JadeMonolithRedirectionEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }

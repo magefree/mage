@@ -67,7 +67,7 @@ class JangoFettEffect extends OneShotEffect {
         this.staticText = "it gets +X/+0, where X is the number of creatures defending player controls with a bounty counter on them";
     }
 
-    public JangoFettEffect(final JangoFettEffect ability) {
+    private JangoFettEffect(final JangoFettEffect ability) {
         super(ability);
     }
 

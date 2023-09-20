@@ -53,7 +53,7 @@ public final class BorosFuryShield extends CardImpl {
             staticText = "{this} deals damage to that creature's controller equal to the creature's power";
         }
 
-        BorosFuryShieldDamageEffect(final BorosFuryShieldDamageEffect effect) {
+        private BorosFuryShieldDamageEffect(final BorosFuryShieldDamageEffect effect) {
             super(effect);
         }
 

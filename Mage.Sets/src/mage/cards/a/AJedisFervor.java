@@ -51,7 +51,7 @@ class AJedisFervorEffect extends OneShotEffect {
         staticText = "If an opponent cast a black spell this turn, that player sacrifices a creature or planeswalker.";
     }
 
-    public AJedisFervorEffect(final AJedisFervorEffect effect) {
+    private AJedisFervorEffect(final AJedisFervorEffect effect) {
         super(effect);
     }
 

@@ -65,7 +65,7 @@ class VentifactBottleEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    VentifactBottleEffect(final VentifactBottleEffect effect) {
+    private VentifactBottleEffect(final VentifactBottleEffect effect) {
         super(effect);
     }
 

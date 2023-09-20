@@ -61,7 +61,7 @@ class AnuridScavengerCost extends CostImpl {
     }
 
 
-    AnuridScavengerCost(final AnuridScavengerCost cost) {
+    private AnuridScavengerCost(final AnuridScavengerCost cost) {
         super(cost);
     }
 

@@ -56,7 +56,7 @@ class BidentOfThassaTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public BidentOfThassaTriggeredAbility(final BidentOfThassaTriggeredAbility ability) {
+    private BidentOfThassaTriggeredAbility(final BidentOfThassaTriggeredAbility ability) {
         super(ability);
     }
 
@@ -94,7 +94,7 @@ class BidentOfThassaMustAttackEffect extends RequirementEffect {
         staticText = "Creatures your opponents control attack this turn if able";
     }
 
-    public BidentOfThassaMustAttackEffect(final BidentOfThassaMustAttackEffect effect) {
+    private BidentOfThassaMustAttackEffect(final BidentOfThassaMustAttackEffect effect) {
         super(effect);
     }
 

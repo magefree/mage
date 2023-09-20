@@ -52,7 +52,7 @@ class TitaniasChosenAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
 
-    public TitaniasChosenAbility(final TitaniasChosenAbility ability) {
+    private TitaniasChosenAbility(final TitaniasChosenAbility ability) {
         super(ability);
     }
 

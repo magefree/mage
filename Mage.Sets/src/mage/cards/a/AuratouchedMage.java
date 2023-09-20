@@ -54,7 +54,7 @@ class AuratouchedMageEffect extends OneShotEffect {
         staticText = "search your library for an Aura card that could enchant it. If {this} is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle";
     }
 
-    public AuratouchedMageEffect(final AuratouchedMageEffect effect) {
+    private AuratouchedMageEffect(final AuratouchedMageEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class AuratouchedMageEffect extends OneShotEffect {
             filter.add(SubType.AURA.getPredicate());
             filter.add(new AuraCardCanAttachToLKIPermanentId(source.getSourceId()));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.searchLibrary(target, source, game)) {
                 if (target.getFirstTarget() != null) {
                     Card aura = game.getCard(target.getFirstTarget());

@@ -56,7 +56,7 @@ class RealitySmasherTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new DiscardCardCost()), false);
     }
 
-    public RealitySmasherTriggeredAbility(final RealitySmasherTriggeredAbility ability) {
+    private RealitySmasherTriggeredAbility(final RealitySmasherTriggeredAbility ability) {
         super(ability);
     }
 

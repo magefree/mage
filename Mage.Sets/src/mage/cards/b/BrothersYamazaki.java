@@ -79,7 +79,7 @@ class BrothersYamazakiIgnoreLegendRuleEffectEffect extends ContinuousEffectImpl 
         staticText = "If there are exactly two permanents named Brothers Yamazaki on the battlefield, the \"legend rule\" doesn't apply to them";
     }
 
-    public BrothersYamazakiIgnoreLegendRuleEffectEffect(final BrothersYamazakiIgnoreLegendRuleEffectEffect effect) {
+    private BrothersYamazakiIgnoreLegendRuleEffectEffect(final BrothersYamazakiIgnoreLegendRuleEffectEffect effect) {
         super(effect);
     }
 

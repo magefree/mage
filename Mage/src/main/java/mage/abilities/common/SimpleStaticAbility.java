@@ -19,7 +19,7 @@ public class SimpleStaticAbility extends StaticAbility {
         super(zone, effect);
     }
 
-    public SimpleStaticAbility(SimpleStaticAbility ability) {
+    protected SimpleStaticAbility(final SimpleStaticAbility ability) {
         super(ability);
     }
 

@@ -64,7 +64,7 @@ class AetherWebEffect extends AsThoughEffectImpl {
         staticText = ", and can block creatures with shadow as though they didn't have shadow";
     }
 
-    public AetherWebEffect(final AetherWebEffect effect) {
+    private AetherWebEffect(final AetherWebEffect effect) {
         super(effect);
     }
 

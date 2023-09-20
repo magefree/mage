@@ -28,7 +28,7 @@ public final class ArmoredWolfRider extends CardImpl {
 
     }
 
-    public ArmoredWolfRider (final ArmoredWolfRider card) {
+    private ArmoredWolfRider(final ArmoredWolfRider card) {
         super(card);
     }
 

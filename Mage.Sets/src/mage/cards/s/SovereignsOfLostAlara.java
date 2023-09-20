@@ -57,7 +57,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
         staticText = "search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle";
     }
 
-    public SovereignsOfLostAlaraEffect(final SovereignsOfLostAlaraEffect effect) {
+    private SovereignsOfLostAlaraEffect(final SovereignsOfLostAlaraEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
             filter.add(SubType.AURA.getPredicate());
             filter.add(new AuraCardCanAttachToPermanentId(attackingCreature.getId()));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.searchLibrary(target, source, game)) {
                 if (target.getFirstTarget() != null) {
                     Card aura = game.getCard(target.getFirstTarget());

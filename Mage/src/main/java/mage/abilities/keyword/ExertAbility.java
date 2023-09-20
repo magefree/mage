@@ -1,9 +1,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -22,6 +19,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author LevelX2
@@ -81,7 +81,7 @@ class ExertReplacementEffect extends ReplacementEffectImpl {
         this.exertOnlyOncePerTurn = exertOnlyOncePerTurn;
     }
 
-    public ExertReplacementEffect(ExertReplacementEffect effect) {
+    private ExertReplacementEffect(ExertReplacementEffect effect) {
         super(effect);
         this.exertOnlyOncePerTurn = effect.exertOnlyOncePerTurn;
     }

@@ -62,7 +62,7 @@ class PsychicPossessionTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public PsychicPossessionTriggeredAbility(final PsychicPossessionTriggeredAbility ability) {
+    private PsychicPossessionTriggeredAbility(final PsychicPossessionTriggeredAbility ability) {
         super(ability);
     }
 

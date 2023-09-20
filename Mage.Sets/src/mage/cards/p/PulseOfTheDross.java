@@ -47,7 +47,7 @@ class PulseOfTheDrossReturnToHandEffect extends OneShotEffect {
         this.staticText = "Then if that player has more cards in hand than you, return {this} to its owner's hand";
     }
 
-    PulseOfTheDrossReturnToHandEffect(final PulseOfTheDrossReturnToHandEffect effect) {
+    private PulseOfTheDrossReturnToHandEffect(final PulseOfTheDrossReturnToHandEffect effect) {
         super(effect);
     }
 

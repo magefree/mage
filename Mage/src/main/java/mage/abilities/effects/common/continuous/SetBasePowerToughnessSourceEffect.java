@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObject;
@@ -13,8 +12,6 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 
 /**
- * RENAME
- *
  * @author BetaSteward_at_googlemail.com, North, Alex-Vasile, xenohedron
  */
 public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
@@ -23,11 +20,11 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
     private final DynamicValue toughness;
 
     /**
-     * Note: Need to set text manually if calling this constructor directly.
-     * <p>
-     * It is possible to have power or toughness to null, in which case only the other is modified.
+     * This constructor is called by the other more specific constructors which set text for appropriate usages.
+     * @param power can be null, if only toughness is to be modified
+     * @param toughness can be null, if only power is to be modified
      */
-    public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer) {
+    protected SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
         this.power = power;
@@ -42,8 +39,37 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         this.staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }
 
-    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, subLayer);
+    /**
+     * @param amount Power and toughness to set in layer 7b
+     * @param duration Duration for the effect
+     */
+    public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
+        this(amount, amount, duration, SubLayer.SetPT_7b);
+        if (duration.toString().isEmpty()) {
+            staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
+        } else {
+            staticText = "{this} has base power and toughness each equal to the number of " + amount.getMessage() + " " + duration;
+        }
+    }
+
+    /**
+     * @param power set in layer 7b
+     * @param toughness set in layer 7b
+     * @param duration Duration for the effect
+     * @param text Text to set as staticText
+     */
+    public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, String text) {
+        this(power, toughness, duration, SubLayer.SetPT_7b);
+        this.staticText = text;
+    }
+
+    /**
+     * @param power set in layer 7b
+     * @param toughness set in layer 7b
+     * @param duration Duration for the effect
+     */
+    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, SubLayer.SetPT_7b);
         this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
     }
 
@@ -62,25 +88,22 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            if (duration == Duration.Custom || isTemporary()) {
-                mageObject = game.getPermanent(source.getSourceId());
-            } else {
+            if (this.characterDefining || this.duration == Duration.WhileOnBattlefield) {
+                // Duration is a workaround for Primal Clay and similar which are incorrectly implemented
                 mageObject = game.getObject(source);
+            } else {
+                mageObject = source.getSourcePermanentIfItStillExists(game);
             }
         }
-        if (mageObject == null || (power == null && toughness == null)) {
+        if (mageObject == null) {
             discard();
             return false;
         }
-
         if (this.power != null) {
-            int power = this.power.calculate(game, source, this);
-            mageObject.getPower().setModifiedBaseValue(power);
+            mageObject.getPower().setModifiedBaseValue(this.power.calculate(game, source, this));
         }
-
         if (this.toughness != null) {
-            int toughness = this.toughness.calculate(game, source, this);
-            mageObject.getToughness().setModifiedBaseValue(toughness);
+            mageObject.getToughness().setModifiedBaseValue(this.toughness.calculate(game, source, this));
         }
         return true;
     }

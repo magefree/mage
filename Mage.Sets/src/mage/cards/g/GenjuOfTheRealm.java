@@ -75,7 +75,7 @@ public final class GenjuOfTheRealm extends CardImpl {
             this.addAbility(TrampleAbility.getInstance());
         }
 
-        public SpiritToken(final SpiritToken token) {
+        private SpiritToken(final SpiritToken token) {
             super(token);
         }
 

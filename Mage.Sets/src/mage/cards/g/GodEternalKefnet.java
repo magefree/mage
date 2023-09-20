@@ -63,7 +63,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
                 + "or sorcery card this way, copy that card and you may cast the copy. That copy costs {2} less to cast";
     }
 
-    public GodEternalKefnetDrawCardReplacementEffect(final GodEternalKefnetDrawCardReplacementEffect effect) {
+    private GodEternalKefnetDrawCardReplacementEffect(final GodEternalKefnetDrawCardReplacementEffect effect) {
         super(effect);
     }
 

@@ -55,7 +55,7 @@ class GoblinSecretAgentEffect extends OneShotEffect {
         this.staticText = "reveal a card from your hand at random";
     }
     
-    public GoblinSecretAgentEffect(final GoblinSecretAgentEffect effect) {
+    private GoblinSecretAgentEffect(final GoblinSecretAgentEffect effect) {
         super(effect);
     }
 

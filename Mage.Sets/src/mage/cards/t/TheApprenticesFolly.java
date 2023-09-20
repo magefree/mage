@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -49,7 +48,7 @@ public final class TheApprenticesFolly extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
                 new CreateTokenCopyTargetEffect(null, null, true, 1)
                         .setIsntLegendary(true)
-                        .setAdditionalSubType(SubType.REFLECTION)
+                        .withAdditionalSubType(SubType.REFLECTION)
                         .setText("choose target nontoken creature you control that doesn't have the same name as a "
                                 + "token you control. Create a token that's a copy of it, except it isn't legendary, "
                                 + "is a Reflection in addition to its other types, and has haste"),

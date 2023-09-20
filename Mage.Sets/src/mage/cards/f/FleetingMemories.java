@@ -60,7 +60,7 @@ class FleetingMemoriesTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }
 
-    public FleetingMemoriesTriggeredAbility(final FleetingMemoriesTriggeredAbility ability) {
+    private FleetingMemoriesTriggeredAbility(final FleetingMemoriesTriggeredAbility ability) {
         super(ability);
     }
 

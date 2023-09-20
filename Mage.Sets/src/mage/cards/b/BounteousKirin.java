@@ -55,7 +55,7 @@ class BounteousKirinEffect extends OneShotEffect {
         this.staticText = "you may gain life equal to that spell's mana value";
     }
 
-    public BounteousKirinEffect(final BounteousKirinEffect effect) {
+    private BounteousKirinEffect(final BounteousKirinEffect effect) {
         super(effect);
     }
 

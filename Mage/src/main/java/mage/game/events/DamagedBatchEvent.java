@@ -4,11 +4,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
-public abstract class DamagedBatchEvent extends GameEvent {
+public abstract class DamagedBatchEvent extends GameEvent implements BatchGameEvent<DamagedEvent> {
 
     private final Class<? extends DamagedEvent> damageClazz;
     private final Set<DamagedEvent> events = new HashSet<>();
@@ -18,8 +19,17 @@ public abstract class DamagedBatchEvent extends GameEvent {
         this.damageClazz = damageClazz;
     }
 
+    @Override
     public Set<DamagedEvent> getEvents() {
         return events;
+    }
+
+    @Override
+    public Set<UUID> getTargets() {
+        return events.stream()
+                .map(GameEvent::getTargetId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -31,23 +41,15 @@ public abstract class DamagedBatchEvent extends GameEvent {
     }
 
     @Override
+    @Deprecated // events can store a diff value, so search it from events list instead
     public UUID getTargetId() {
-        return events
-                .stream()
-                .map(GameEvent::getTargetId)
-                .filter(Objects::nonNull)
-                .findFirst()
-                .orElse(null);
+        throw new IllegalStateException("Wrong code usage. Must search value from a getEvents list or use CardUtil.getEventTargets(event)");
     }
 
     @Override
+    @Deprecated // events can store a diff value, so search it from events list instead
     public UUID getSourceId() {
-        return events
-                .stream()
-                .map(GameEvent::getSourceId)
-                .filter(Objects::nonNull)
-                .findFirst()
-                .orElse(null);
+        throw new IllegalStateException("Wrong code usage. Must search value from a getEvents list.");
     }
 
     public void addEvent(DamagedEvent event) {
@@ -61,13 +63,13 @@ public abstract class DamagedBatchEvent extends GameEvent {
     public static DamagedBatchEvent makeEvent(DamagedEvent damagedEvent) {
         DamagedBatchEvent event;
         if (damagedEvent instanceof DamagedPlayerEvent) {
-            event = new DamagedPlayerBatchEvent();
+            event = new DamagedBatchForPlayersEvent();
             event.addEvent(damagedEvent);
         } else if (damagedEvent instanceof DamagedPermanentEvent) {
-            event = new DamagedPermanentBatchEvent();
+            event = new DamagedBatchForPermanentsEvent();
             event.addEvent(damagedEvent);
         } else {
-            event = null;
+            throw new IllegalArgumentException("Wrong code usage. Unknown damage event for a new batch: " + damagedEvent.getClass().getName());
         }
         return event;
     }

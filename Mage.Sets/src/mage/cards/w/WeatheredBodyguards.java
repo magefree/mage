@@ -59,7 +59,7 @@ class WeatheredBodyguardsEffect extends ReplacementEffectImpl {
         staticText = "As long as {this} is untapped, all combat damage that would be dealt to you by unblocked creatures is dealt to {this} instead";
     }
 
-    WeatheredBodyguardsEffect(final WeatheredBodyguardsEffect effect) {
+    private WeatheredBodyguardsEffect(final WeatheredBodyguardsEffect effect) {
         super(effect);
     }
 

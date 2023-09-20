@@ -49,7 +49,7 @@ class SoulquakeEffect extends OneShotEffect {
         staticText = "Return all creatures on the battlefield and all creature cards in graveyards to their owners' hands";
     }
 
-    public SoulquakeEffect(final SoulquakeEffect effect) {
+    private SoulquakeEffect(final SoulquakeEffect effect) {
         super(effect);
     }
 

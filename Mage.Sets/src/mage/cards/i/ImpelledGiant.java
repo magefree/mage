@@ -76,7 +76,7 @@ class ImpelledGiantCost extends CostImpl {
         this.text = "Tap an untapped red creature you control other than Impelled Giant";
     }
 
-    public ImpelledGiantCost(final ImpelledGiantCost cost) {
+    private ImpelledGiantCost(final ImpelledGiantCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }
@@ -117,7 +117,7 @@ class ImpelledGiantBoostEffect extends OneShotEffect {
         staticText = "{this} gets +X/+0 until end of turn, where X is the power of the creature tapped this way";
     }
 
-    public ImpelledGiantBoostEffect(ImpelledGiantBoostEffect effect) {
+    private ImpelledGiantBoostEffect(final ImpelledGiantBoostEffect effect) {
         super(effect);
     }
 

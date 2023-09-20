@@ -1,14 +1,14 @@
 
 package mage.cards.basiclands;
 
-import java.util.UUID;
-
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -22,7 +22,7 @@ public abstract class BasicLand extends CardImpl {
         this.addAbility(mana);
     }
 
-    public BasicLand(BasicLand land) {
+    protected BasicLand(final BasicLand land) {
         super(land);
     }
 

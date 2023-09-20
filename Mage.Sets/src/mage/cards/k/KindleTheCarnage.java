@@ -45,7 +45,7 @@ class KindleTheCarnageEffect extends OneShotEffect {
         this.staticText = "Discard a card at random. If you do, {this} deals damage equal to that card's mana value to each creature. You may repeat this process any number of times";
     }
 
-    public KindleTheCarnageEffect(final KindleTheCarnageEffect effect) {
+    private KindleTheCarnageEffect(final KindleTheCarnageEffect effect) {
         super(effect);
     }
 

@@ -68,7 +68,7 @@ class RevokePrivilegeCantCrewEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = ", or crew Vehicles";
     }
 
-    public RevokePrivilegeCantCrewEffect(final RevokePrivilegeCantCrewEffect effect) {
+    private RevokePrivilegeCantCrewEffect(final RevokePrivilegeCantCrewEffect effect) {
         super(effect);
     }
 

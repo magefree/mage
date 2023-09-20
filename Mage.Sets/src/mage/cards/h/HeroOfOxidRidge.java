@@ -52,7 +52,7 @@ class HeroOfOxidRidgeEffect extends RestrictionEffect {
         staticText = "creatures with power 1 or less can't block this turn";
     }
 
-    public HeroOfOxidRidgeEffect(final HeroOfOxidRidgeEffect effect) {
+    private HeroOfOxidRidgeEffect(final HeroOfOxidRidgeEffect effect) {
         super(effect);
     }
 

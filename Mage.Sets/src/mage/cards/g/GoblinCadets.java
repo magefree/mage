@@ -49,7 +49,7 @@ class GoblinCadetsChangeControlEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of it. <i>(This removes {this} from combat.)</i>";
     }
 
-    public GoblinCadetsChangeControlEffect(final GoblinCadetsChangeControlEffect effect) {
+    private GoblinCadetsChangeControlEffect(final GoblinCadetsChangeControlEffect effect) {
         super(effect);
     }
 

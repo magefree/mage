@@ -52,7 +52,7 @@ class BreakingWaveEffect extends OneShotEffect {
         staticText = "Simultaneously untap all tapped creatures and tap all untapped creatures.";
     }
 
-    public BreakingWaveEffect(BreakingWaveEffect copy) {
+    private BreakingWaveEffect(final BreakingWaveEffect copy) {
         super(copy);
     }
 

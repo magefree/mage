@@ -34,7 +34,7 @@ public final class AcademyDrake extends CardImpl {
 
     }
 
-    public AcademyDrake(final AcademyDrake academyDrake) {
+    private AcademyDrake(final AcademyDrake academyDrake) {
         super(academyDrake);
     }
 

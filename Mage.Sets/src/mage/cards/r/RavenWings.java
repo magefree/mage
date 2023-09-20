@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class RavenWings extends CardImpl {
                 FlyingAbility.getInstance(), AttachmentType.AURA
         ).setText(", has flying"));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
-                SubType.BIRD, Duration.WhileOnBattlefield, AttachmentType.AURA
+                SubType.BIRD, AttachmentType.AURA
         ).setText(", and is a Bird in addition to its other types"));
         this.addAbility(ability);
 

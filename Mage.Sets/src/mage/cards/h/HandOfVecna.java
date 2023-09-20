@@ -119,7 +119,7 @@ class HandOfVecnaEffect extends OneShotEffect {
                                 .collect(Collectors.toList())
                 ));
                 TargetPermanent target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 player.choose(outcome, target, source, game);
                 toBoost = game.getPermanent(target.getFirstTarget());
         }

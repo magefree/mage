@@ -52,7 +52,7 @@ class LavaRunnerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterLandPermanent(), 1, ""), false);
     }
 
-    public LavaRunnerAbility(final LavaRunnerAbility ability) {
+    private LavaRunnerAbility(final LavaRunnerAbility ability) {
         super(ability);
     }
 

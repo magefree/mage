@@ -58,7 +58,7 @@ class CosmicHorrorEffect extends OneShotEffect {
         staticText = "destroy {this} unless you pay {3}{B}{B}{B}. If {this} is destroyed this way it deals 7 damage to you";
     }
 
-    public CosmicHorrorEffect(final CosmicHorrorEffect effect) {
+    private CosmicHorrorEffect(final CosmicHorrorEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

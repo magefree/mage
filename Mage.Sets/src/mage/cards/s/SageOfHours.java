@@ -57,7 +57,7 @@ class SageOfHoursEffect extends OneShotEffect {
         this.staticText = "For each five counters removed this way, take an extra turn after this one";
     }
 
-    public SageOfHoursEffect(final SageOfHoursEffect effect) {
+    private SageOfHoursEffect(final SageOfHoursEffect effect) {
         super(effect);
     }
 

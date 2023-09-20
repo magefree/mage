@@ -33,7 +33,7 @@ public final class AeonEngine extends CardImpl {
 	this.addAbility(ability);
     }
 
-    public AeonEngine(final AeonEngine card) {
+    private AeonEngine(final AeonEngine card) {
         super(card);
     }
 
@@ -49,7 +49,7 @@ class AeonEngineEffect extends OneShotEffect {
         this.staticText = "Reverse the game turn order.";
     }
 
-    public AeonEngineEffect(final AeonEngineEffect effect) {
+    private AeonEngineEffect(final AeonEngineEffect effect) {
         super(effect);
     }
 

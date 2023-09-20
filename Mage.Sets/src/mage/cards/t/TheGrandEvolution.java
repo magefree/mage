@@ -103,7 +103,7 @@ class TheGrandEvolutionEffect extends OneShotEffect {
         }
         Cards cards = player.millCards(10, source, game);
         TargetCard target = new TargetCard(0, 2, Zone.ALL, StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(Outcome.PutCreatureInPlay, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;

@@ -48,7 +48,7 @@ class DampingFieldEffect extends RestrictionUntapNotMoreThanEffect {
         staticText = "Players can't untap more than one artifact during their untap steps";
     }
 
-    public DampingFieldEffect(final DampingFieldEffect effect) {
+    private DampingFieldEffect(final DampingFieldEffect effect) {
         super(effect);
     }
 

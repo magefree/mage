@@ -77,7 +77,7 @@ class DanceOfTheDeadDoIfCostPaidEffect extends DoIfCostPaid {
         super(new UntapAttachedEffect(), new ManaCostsImpl<>("{1}{B}"));
     }
 
-    public DanceOfTheDeadDoIfCostPaidEffect(final DanceOfTheDeadDoIfCostPaidEffect effect) {
+    private DanceOfTheDeadDoIfCostPaidEffect(final DanceOfTheDeadDoIfCostPaidEffect effect) {
         super(effect);
     }
 

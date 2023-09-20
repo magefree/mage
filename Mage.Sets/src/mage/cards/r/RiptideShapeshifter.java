@@ -55,7 +55,7 @@ class RiptideShapeshifterEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. Reveal cards from the top of your library until you reveal a creature card of that type. Put that card onto the battlefield and shuffle the rest into your library";
     }
 
-    RiptideShapeshifterEffect(final RiptideShapeshifterEffect effect) {
+    private RiptideShapeshifterEffect(final RiptideShapeshifterEffect effect) {
         super(effect);
     }
 

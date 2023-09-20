@@ -43,7 +43,7 @@ class RitesOfInitiationEffect extends OneShotEffect {
         this.staticText = "Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way";
     }
     
-    RitesOfInitiationEffect(final RitesOfInitiationEffect effect) {
+    private RitesOfInitiationEffect(final RitesOfInitiationEffect effect) {
         super(effect);
     }
     

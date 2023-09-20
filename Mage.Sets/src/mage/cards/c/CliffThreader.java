@@ -26,7 +26,7 @@ public final class CliffThreader extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public CliffThreader (final CliffThreader card) {
+    private CliffThreader(final CliffThreader card) {
         super(card);
     }
 

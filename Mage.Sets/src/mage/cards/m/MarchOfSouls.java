@@ -45,7 +45,7 @@ class MarchOfSoulsEffect extends OneShotEffect {
         staticText = "Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.";
     }
 
-    public MarchOfSoulsEffect(final MarchOfSoulsEffect effect) {
+    private MarchOfSoulsEffect(final MarchOfSoulsEffect effect) {
         super(effect);
     }
 

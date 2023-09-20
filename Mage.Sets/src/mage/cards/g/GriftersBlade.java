@@ -64,7 +64,7 @@ class GriftersBladeChooseCreatureEffect extends OneShotEffect {
         this.staticText = "choose a creature you control it could be attached to. If you do, it enters the battlefield attached to that creature";
     }
 
-    public GriftersBladeChooseCreatureEffect(final GriftersBladeChooseCreatureEffect effect) {
+    private GriftersBladeChooseCreatureEffect(final GriftersBladeChooseCreatureEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class GriftersBladeChooseCreatureEffect extends OneShotEffect {
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (controller != null && mageObject != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.choose(this.outcome, target, source, game)) {
                 Permanent attachToCreature = game.getPermanent(target.getFirstTarget());
                 if (attachToCreature != null) {

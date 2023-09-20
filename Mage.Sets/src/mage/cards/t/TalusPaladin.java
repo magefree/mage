@@ -61,7 +61,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new TalusPaladinEffect());
     }
     
-    TalusPaladinTriggeredAbility(final TalusPaladinTriggeredAbility ability) {
+    private TalusPaladinTriggeredAbility(final TalusPaladinTriggeredAbility ability) {
         super(ability);
     }
     
@@ -102,7 +102,7 @@ class TalusPaladinEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
     
-    public TalusPaladinEffect(final TalusPaladinEffect effect) {
+    private TalusPaladinEffect(final TalusPaladinEffect effect) {
         super(effect);
     }
     

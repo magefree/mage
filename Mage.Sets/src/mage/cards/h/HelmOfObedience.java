@@ -95,7 +95,7 @@ class HelmOfObedienceEffect extends OneShotEffect {
                 break;
             default:
                 TargetCardInGraveyard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 controller.choose(Outcome.PutCreatureInPlay, cards, target, source, game);
                 card = game.getCard(target.getFirstTarget());
         }

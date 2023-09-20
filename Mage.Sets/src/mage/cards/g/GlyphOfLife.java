@@ -59,7 +59,7 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("Whenever that creature is dealt damage by an attacking creature this turn, ");
     }
 
-    public GlyphOfLifeTriggeredAbility(final GlyphOfLifeTriggeredAbility effect) {
+    private GlyphOfLifeTriggeredAbility(final GlyphOfLifeTriggeredAbility effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class GlyphOfLifeGainLifeEffect extends OneShotEffect {
         staticText = "you gain that much life";
     }
 
-    public GlyphOfLifeGainLifeEffect(final GlyphOfLifeGainLifeEffect effect) {
+    private GlyphOfLifeGainLifeEffect(final GlyphOfLifeGainLifeEffect effect) {
         super(effect);
     }
 

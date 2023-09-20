@@ -58,7 +58,7 @@ class BalustradeSpyEffect extends OneShotEffect {
         this.staticText = "target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard";
     }
 
-    public BalustradeSpyEffect(final BalustradeSpyEffect effect) {
+    private BalustradeSpyEffect(final BalustradeSpyEffect effect) {
         super(effect);
     }
 

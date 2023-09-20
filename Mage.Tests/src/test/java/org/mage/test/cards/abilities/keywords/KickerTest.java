@@ -291,7 +291,6 @@ public class KickerTest extends CardTestPlayerBase {
         setChoice(playerA, true);  // use kicker {R} - 2 damage to any target
         setChoice(playerA, false); // not use kicker {W} - destroy target
         addTarget(playerA, playerB); // target for 2 damage
-        setChoice(playerA, true); // put counter on hallar
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -45,7 +45,7 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When you have 10 or less life, if {this} is an enchantment, ");
     }
 
-    public OpalAvengerStateTriggeredAbility(final OpalAvengerStateTriggeredAbility ability) {
+    private OpalAvengerStateTriggeredAbility(final OpalAvengerStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -107,7 +107,7 @@ class OpalAvengerToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public OpalAvengerToken(final OpalAvengerToken token) {
+    private OpalAvengerToken(final OpalAvengerToken token) {
         super(token);
     }
 

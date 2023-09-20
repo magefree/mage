@@ -54,7 +54,7 @@ class MunghaWurmEffect extends RestrictionUntapNotMoreThanEffect {
         staticText = "you can't untap more than one land during your untap step";
     }
 
-    public MunghaWurmEffect(final MunghaWurmEffect effect) {
+    private MunghaWurmEffect(final MunghaWurmEffect effect) {
         super(effect);
     }
 

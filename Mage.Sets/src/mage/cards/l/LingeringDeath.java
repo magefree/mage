@@ -56,7 +56,7 @@ class LingeringDeathAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeTargetEffect());
     }
 
-    public LingeringDeathAbility(final LingeringDeathAbility ability) {
+    private LingeringDeathAbility(final LingeringDeathAbility ability) {
         super(ability);
     }
 

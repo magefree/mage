@@ -47,7 +47,7 @@ class ReciprocateTarget extends TargetPermanent {
         targetName = "creature that dealt damage to you this turn";
     }
 
-    public ReciprocateTarget(final ReciprocateTarget target) {
+    private ReciprocateTarget(final ReciprocateTarget target) {
         super(target);
     }
 

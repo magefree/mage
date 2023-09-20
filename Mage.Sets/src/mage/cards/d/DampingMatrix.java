@@ -58,7 +58,7 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
         staticText = "Activated abilities of artifacts and creatures can't be activated unless they're mana abilities";
     }
 
-    public DampingMatrixEffect(final DampingMatrixEffect effect) {
+    private DampingMatrixEffect(final DampingMatrixEffect effect) {
         super(effect);
     }
 

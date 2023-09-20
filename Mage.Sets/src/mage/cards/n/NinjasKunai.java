@@ -93,6 +93,6 @@ class NinjasKunaiEffect extends OneShotEffect {
         if (object instanceof Permanent) {
             name = ((Permanent) object).getName();
         }
-        return name + "deals 3 damage to target any target.";
+        return name + " deals 3 damage to any target.";
     }
 }

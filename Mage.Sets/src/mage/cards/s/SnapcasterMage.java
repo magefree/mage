@@ -64,7 +64,7 @@ class SnapcasterMageEffect extends ContinuousEffectImpl {
         this.staticText = "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
-    public SnapcasterMageEffect(final SnapcasterMageEffect effect) {
+    private SnapcasterMageEffect(final SnapcasterMageEffect effect) {
         super(effect);
     }
 

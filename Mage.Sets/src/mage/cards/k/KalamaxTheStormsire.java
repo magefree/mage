@@ -59,7 +59,7 @@ class KalamaxTheStormsireSpellCastAbility extends SpellCastControllerTriggeredAb
         super(new CopyTargetSpellEffect(true), new FilterInstantSpell(), false);
     }
 
-    KalamaxTheStormsireSpellCastAbility(KalamaxTheStormsireSpellCastAbility ability) {
+    private KalamaxTheStormsireSpellCastAbility(final KalamaxTheStormsireSpellCastAbility ability) {
         super(ability);
     }
 

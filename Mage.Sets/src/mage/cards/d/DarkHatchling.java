@@ -35,7 +35,7 @@ public final class DarkHatchling extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarkHatchling (final DarkHatchling card) {
+    private DarkHatchling(final DarkHatchling card) {
         super(card);
     }
 

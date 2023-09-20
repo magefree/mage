@@ -63,7 +63,7 @@ class UnbreathingHordeEntersEffect extends OneShotEffect {
         staticText = "{this} enters the battlefield with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard";
     }
 
-    public UnbreathingHordeEntersEffect(final UnbreathingHordeEntersEffect effect) {
+    private UnbreathingHordeEntersEffect(final UnbreathingHordeEntersEffect effect) {
         super(effect);
     }
 

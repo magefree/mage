@@ -48,7 +48,7 @@ class SufferThePastEffect extends OneShotEffect {
         this.staticText = "Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life";
     }
 
-    public SufferThePastEffect(final SufferThePastEffect effect) {
+    private SufferThePastEffect(final SufferThePastEffect effect) {
         super(effect);
     }
 

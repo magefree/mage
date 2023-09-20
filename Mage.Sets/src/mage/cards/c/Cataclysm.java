@@ -51,7 +51,7 @@ class CataclysmEffect extends OneShotEffect {
         staticText = "Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest";
     }
 
-    public CataclysmEffect(CataclysmEffect effect) {
+    private CataclysmEffect(final CataclysmEffect effect) {
         super(effect);
     }
 

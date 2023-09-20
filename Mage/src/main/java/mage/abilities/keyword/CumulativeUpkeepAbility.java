@@ -39,7 +39,7 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     }
 
     @Override
-    public BeginningOfUpkeepTriggeredAbility copy() {
+    public CumulativeUpkeepAbility copy() {
         return new CumulativeUpkeepAbility(this);
     }
 

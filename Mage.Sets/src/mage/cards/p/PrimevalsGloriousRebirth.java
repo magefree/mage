@@ -52,7 +52,7 @@ class PrimevalsGloriousRebirthEffect extends OneShotEffect {
         this.staticText = "Return all legendary permanent cards from your graveyard to the battlefield";
     }
 
-    public PrimevalsGloriousRebirthEffect(final PrimevalsGloriousRebirthEffect effect) {
+    private PrimevalsGloriousRebirthEffect(final PrimevalsGloriousRebirthEffect effect) {
         super(effect);
     }
 

@@ -49,7 +49,7 @@ class StrongarmTacticsEffect extends OneShotEffect {
         this.staticText = "Each player discards a card. Then each player who didn't discard a creature card this way loses 4 life.";
     }
 
-    StrongarmTacticsEffect(final StrongarmTacticsEffect effect) {
+    private StrongarmTacticsEffect(final StrongarmTacticsEffect effect) {
         super(effect);
     }
 

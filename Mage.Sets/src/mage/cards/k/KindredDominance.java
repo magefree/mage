@@ -47,7 +47,7 @@ class KindredDominanceEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. Destroy all creatures that aren't of the chosen type.";
     }
 
-    public KindredDominanceEffect(final KindredDominanceEffect effect) {
+    private KindredDominanceEffect(final KindredDominanceEffect effect) {
         super(effect);
     }
 

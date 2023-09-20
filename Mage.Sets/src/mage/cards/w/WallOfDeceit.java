@@ -57,7 +57,7 @@ class WallOfDeceitEffect extends OneShotEffect {
         this.staticText = "Turn {this} face down";
     }
 
-    public WallOfDeceitEffect(final WallOfDeceitEffect effect) {
+    private WallOfDeceitEffect(final WallOfDeceitEffect effect) {
         super(effect);
     }
 

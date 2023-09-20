@@ -59,7 +59,7 @@ class ShapeshifterEffect extends OneShotEffect {
         this.staticText = "Choose a number between 0 and 7.";
     }
 
-    public ShapeshifterEffect(final ShapeshifterEffect effect) {
+    private ShapeshifterEffect(final ShapeshifterEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class ShapeshifterContinuousEffect extends ContinuousEffectImpl {
         staticText = "{this}'s power is equal to the last chosen number and its toughness is equal to 7 minus that number.";
     }
 
-    public ShapeshifterContinuousEffect(final ShapeshifterContinuousEffect effect) {
+    private ShapeshifterContinuousEffect(final ShapeshifterContinuousEffect effect) {
         super(effect);
     }
 

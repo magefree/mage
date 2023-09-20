@@ -56,7 +56,7 @@ class CullingDaisEffect extends OneShotEffect {
         staticText = "Draw a card for each charge counter on {this}";
     }
 
-    CullingDaisEffect(final CullingDaisEffect effect) {
+    private CullingDaisEffect(final CullingDaisEffect effect) {
         super(effect);
     }
 

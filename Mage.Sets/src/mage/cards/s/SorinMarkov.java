@@ -67,7 +67,7 @@ class SorinMarkovEffect extends OneShotEffect {
         staticText = "Target opponent's life total becomes 10";
     }
 
-    public SorinMarkovEffect(SorinMarkovEffect effect) {
+    private SorinMarkovEffect(final SorinMarkovEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ class ConsecrateLandRuleEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "and can't be enchanted by other Auras";
     }
 
-    public ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
+    private ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
         super(effect);
     }
 

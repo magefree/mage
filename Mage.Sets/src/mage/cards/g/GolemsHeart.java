@@ -42,7 +42,7 @@ class GolemsHeartAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
     }
 
-    public GolemsHeartAbility(final GolemsHeartAbility ability) {
+    private GolemsHeartAbility(final GolemsHeartAbility ability) {
         super(ability);
     }
 

@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class SpellscornCoven extends AdventureCard {
 
     public SpellscornCoven(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{B}", "Take it Back", "{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{B}", "Take It Back", "{2}{U}");
 
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WARLOCK);
@@ -37,6 +37,8 @@ public final class SpellscornCoven extends AdventureCard {
         // Return target spell to its owner's hand.
         this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetSpell());
+
+        this.finalizeAdventure();
     }
 
     private SpellscornCoven(final SpellscornCoven card) {

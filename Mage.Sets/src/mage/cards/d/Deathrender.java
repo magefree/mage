@@ -56,7 +56,7 @@ class DeathrenderEffect extends OneShotEffect {
         this.staticText = "you may put a creature card from your hand onto the battlefield and attach {this} to it";
     }
 
-    DeathrenderEffect(final DeathrenderEffect effect) {
+    private DeathrenderEffect(final DeathrenderEffect effect) {
         super(effect);
     }
 

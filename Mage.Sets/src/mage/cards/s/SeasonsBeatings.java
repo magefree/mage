@@ -49,7 +49,7 @@ class SeasonsBeatingsEffect extends OneShotEffect {
         staticText = "Family gathering <i>Each creature target player controls deals damage equal to its power to another random creature that player controls.</i>";
     }
 
-    SeasonsBeatingsEffect(final SeasonsBeatingsEffect effect) {
+    private SeasonsBeatingsEffect(final SeasonsBeatingsEffect effect) {
         super(effect);
     }
 

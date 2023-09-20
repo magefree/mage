@@ -379,7 +379,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     }
 
                     // select new target
-                    auraTarget.setNotTarget(true);
+                    auraTarget.withNotTarget(true);
                     if (!controller.choose(auraOutcome, auraTarget, source, game)) {
                         break;
                     }

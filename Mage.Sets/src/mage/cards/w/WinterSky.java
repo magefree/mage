@@ -43,7 +43,7 @@ class WinterSkyEffect extends OneShotEffect {
         staticText = "Flip a coin. If you win the flip, {this} deals 1 damage to each creature and each player. If you lose the flip, each player draws a card";
     }
 
-    public WinterSkyEffect(WinterSkyEffect effect) {
+    private WinterSkyEffect(final WinterSkyEffect effect) {
         super(effect);
     }
 

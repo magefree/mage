@@ -55,7 +55,7 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
-    public WallOfEssenceTriggeredAbility(final WallOfEssenceTriggeredAbility effect) {
+    private WallOfEssenceTriggeredAbility(final WallOfEssenceTriggeredAbility effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class PiousWarriorGainLifeEffect extends OneShotEffect {
         staticText = "you gain that much life";
     }
 
-    public PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
+    private PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
         super(effect);
     }
 

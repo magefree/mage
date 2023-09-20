@@ -76,7 +76,7 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
                 + " and put it onto the battlefield. If you search your library this way, shuffle";
     }
 
-    public GateToTheAfterlifeEffect(final GateToTheAfterlifeEffect effect) {
+    private GateToTheAfterlifeEffect(final GateToTheAfterlifeEffect effect) {
         super(effect);
     }
 

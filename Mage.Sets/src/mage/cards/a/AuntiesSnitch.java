@@ -64,7 +64,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), true);
     }
 
-    public AuntiesSnitchTriggeredAbility(final AuntiesSnitchTriggeredAbility ability) {
+    private AuntiesSnitchTriggeredAbility(final AuntiesSnitchTriggeredAbility ability) {
         super(ability);
     }
 

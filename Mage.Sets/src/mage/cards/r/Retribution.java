@@ -49,7 +49,7 @@ class RetributionEffect extends OneShotEffect {
         this.staticText = "Choose two target creatures an opponent controls. That player chooses and sacrifices one of those creatures. Put a -1/-1 counter on the other";
     }
 
-    public RetributionEffect(final RetributionEffect effect) {
+    private RetributionEffect(final RetributionEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class TargetCreaturePermanentOpponentSameController extends TargetCreaturePerman
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetCreaturePermanentOpponentSameController(final TargetCreaturePermanentOpponentSameController target) {
+    private TargetCreaturePermanentOpponentSameController(final TargetCreaturePermanentOpponentSameController target) {
         super(target);
     }
 

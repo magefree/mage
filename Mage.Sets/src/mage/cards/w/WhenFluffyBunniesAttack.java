@@ -52,7 +52,7 @@ class WhenFluffyBunniesAttackEffect extends OneShotEffect {
         staticText = "Target creature gets -X/-X until end of turn, where X is the number of times the letter of your choice appears in that creature's name";
     }
 
-    public WhenFluffyBunniesAttackEffect(final WhenFluffyBunniesAttackEffect effect) {
+    private WhenFluffyBunniesAttackEffect(final WhenFluffyBunniesAttackEffect effect) {
         super(effect);
     }
 

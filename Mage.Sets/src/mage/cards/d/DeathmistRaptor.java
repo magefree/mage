@@ -61,7 +61,7 @@ class DeathmistRaptorEffect extends OneShotEffect {
         this.staticText = "you may return {this} from your graveyard to the battlefield face up or face down";
     }
 
-    public DeathmistRaptorEffect(final DeathmistRaptorEffect effect) {
+    private DeathmistRaptorEffect(final DeathmistRaptorEffect effect) {
         super(effect);
     }
 

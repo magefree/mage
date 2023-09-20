@@ -78,7 +78,7 @@ class InameAsOneEffect extends OneShotEffect {
         this.staticText = "you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield";
     }
 
-    public InameAsOneEffect(final InameAsOneEffect effect) {
+    private InameAsOneEffect(final InameAsOneEffect effect) {
         super(effect);
     }
 

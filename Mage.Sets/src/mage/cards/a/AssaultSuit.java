@@ -72,7 +72,7 @@ public final class AssaultSuit extends CardImpl {
         staticText = "and can't be sacrificed";
     }
 
-    public AssaultSuitCantBeSacrificed(final AssaultSuitCantBeSacrificed effect) {
+    private AssaultSuitCantBeSacrificed(final AssaultSuitCantBeSacrificed effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class AssaultSuitGainControlEffect extends OneShotEffect {
         this.staticText = "you may have that player gain control of equipped creature until end of turn. If you do, untap it";
     }
 
-    public AssaultSuitGainControlEffect(final AssaultSuitGainControlEffect effect) {
+    private AssaultSuitGainControlEffect(final AssaultSuitGainControlEffect effect) {
         super(effect);
     }
 

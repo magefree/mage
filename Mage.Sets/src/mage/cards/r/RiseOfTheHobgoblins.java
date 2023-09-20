@@ -73,7 +73,7 @@ class RiseOfTheHobgoblinsEffect extends OneShotEffect {
         staticText = "you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens";
     }
 
-    public RiseOfTheHobgoblinsEffect(final RiseOfTheHobgoblinsEffect effect) {
+    private RiseOfTheHobgoblinsEffect(final RiseOfTheHobgoblinsEffect effect) {
         super(effect);
     }
 

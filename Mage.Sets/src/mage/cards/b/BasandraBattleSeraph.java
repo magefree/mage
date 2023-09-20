@@ -63,7 +63,7 @@ class BasandraBattleSeraphEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't cast spells during combat";
     }
     
-    public BasandraBattleSeraphEffect(final BasandraBattleSeraphEffect effect) {
+    private BasandraBattleSeraphEffect(final BasandraBattleSeraphEffect effect) {
         super(effect);
     }
     

@@ -64,7 +64,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         this.staticText = "attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand";
     }
 
-    public BrunaLightOfAlabasterEffect(final BrunaLightOfAlabasterEffect effect) {
+    private BrunaLightOfAlabasterEffect(final BrunaLightOfAlabasterEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countBattlefield > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
             Target targetAura = new TargetPermanent(filterAura);
-            targetAura.setNotTarget(true);
+            targetAura.withNotTarget(true);
             if (!controller.choose(Outcome.Benefit, targetAura, source, game)) { continue; }
 
             Permanent aura = game.getPermanent(targetAura.getFirstTarget());

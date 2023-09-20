@@ -65,7 +65,7 @@ class SereneMasterEffect extends OneShotEffect {
         this.staticText = "exchange its power and the power of target creature it's blocking until end of combat";
     }
 
-    public SereneMasterEffect(final SereneMasterEffect effect) {
+    private SereneMasterEffect(final SereneMasterEffect effect) {
         super(effect);
     }
 

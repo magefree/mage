@@ -50,7 +50,7 @@ class SkredDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to target creature equal to the number of snow permanents you control.";
     }
 
-    public SkredDamageEffect(final SkredDamageEffect effect) {
+    private SkredDamageEffect(final SkredDamageEffect effect) {
         super(effect);
     }
 

@@ -62,7 +62,7 @@ class DiabolicServitudeReturnCreatureEffect extends OneShotEffect {
         this.staticText = "return target creature card from your graveyard to the battlefield";
     }
 
-    public DiabolicServitudeReturnCreatureEffect(final DiabolicServitudeReturnCreatureEffect effect) {
+    private DiabolicServitudeReturnCreatureEffect(final DiabolicServitudeReturnCreatureEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
         super(Zone.BATTLEFIELD, new DiabolicServitudeExileCreatureEffect(), false);
     }
 
-    public DiabolicServitudeCreatureDiesTriggeredAbility(final DiabolicServitudeCreatureDiesTriggeredAbility ability) {
+    private DiabolicServitudeCreatureDiesTriggeredAbility(final DiabolicServitudeCreatureDiesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -132,7 +132,7 @@ class DiabolicServitudeExileCreatureEffect extends OneShotEffect {
         this.staticText = "exile it and return {this} to its owner's hand";
     }
 
-    public DiabolicServitudeExileCreatureEffect(final DiabolicServitudeExileCreatureEffect effect) {
+    private DiabolicServitudeExileCreatureEffect(final DiabolicServitudeExileCreatureEffect effect) {
         super(effect);
     }
 
@@ -161,7 +161,7 @@ class DiabolicServitudeSourceLeftBattlefieldEffect extends OneShotEffect {
         this.staticText = "exile the creature put onto the battlefield with {this}";
     }
 
-    public DiabolicServitudeSourceLeftBattlefieldEffect(final DiabolicServitudeSourceLeftBattlefieldEffect effect) {
+    private DiabolicServitudeSourceLeftBattlefieldEffect(final DiabolicServitudeSourceLeftBattlefieldEffect effect) {
         super(effect);
     }
 

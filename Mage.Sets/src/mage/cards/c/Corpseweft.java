@@ -51,7 +51,7 @@ class CorpseweftEffect extends OneShotEffect {
         this.staticText = "create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way";
     }
 
-    public CorpseweftEffect(final CorpseweftEffect effect) {
+    private CorpseweftEffect(final CorpseweftEffect effect) {
         super(effect);
     }
 

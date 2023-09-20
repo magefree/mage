@@ -51,7 +51,7 @@ class MichikoKondaTruthSeekerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 1, "that player"), false);
     }
 
-    public MichikoKondaTruthSeekerAbility(final MichikoKondaTruthSeekerAbility ability) {
+    private MichikoKondaTruthSeekerAbility(final MichikoKondaTruthSeekerAbility ability) {
         super(ability);
     }
 

@@ -79,7 +79,7 @@ class OpenSeasonRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures your opponent control with bounty counters on them can't activate abilities";
     }
 
-    public OpenSeasonRestrictionEffect(final OpenSeasonRestrictionEffect effect) {
+    private OpenSeasonRestrictionEffect(final OpenSeasonRestrictionEffect effect) {
         super(effect);
     }
 
@@ -109,7 +109,7 @@ class OpenSeasonEffect extends OneShotEffect {
         staticText = "that creature's controller loses 2 life. Each other player gains 2 life";
     }
 
-    public OpenSeasonEffect(final OpenSeasonEffect effect) {
+    private OpenSeasonEffect(final OpenSeasonEffect effect) {
         super(effect);
     }
 

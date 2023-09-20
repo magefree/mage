@@ -1,8 +1,8 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.AddCardColorAttachedEffect;
@@ -24,7 +24,6 @@ public final class Ghoulflesh extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
         this.subtype.add(SubType.AURA);
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -32,9 +31,12 @@ public final class Ghoulflesh extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets -1/-1 and is a black Zombie in addition to its other colors and types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect(SubType.ZOMBIE, Duration.WhileOnBattlefield, AttachmentType.AURA)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardColorAttachedEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield, AttachmentType.AURA)));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield));
+        ability.addEffect(new AddCardColorAttachedEffect(ObjectColor.BLACK, AttachmentType.AURA)
+                .setText(" and is a black"));
+        ability.addEffect(new AddCardSubtypeAttachedEffect(SubType.ZOMBIE, AttachmentType.AURA)
+                .setText(" Zombie in addition to its other colors and types"));
+        this.addAbility(ability);
     }
 
     private Ghoulflesh(final Ghoulflesh card) {

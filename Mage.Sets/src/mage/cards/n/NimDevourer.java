@@ -67,7 +67,7 @@ class NimDevourerEffect extends OneShotEffect {
         this.staticText = ", then sacrifice a creature";
     }
 
-    public NimDevourerEffect(final NimDevourerEffect effect) {
+    private NimDevourerEffect(final NimDevourerEffect effect) {
         super(effect);
     }
 

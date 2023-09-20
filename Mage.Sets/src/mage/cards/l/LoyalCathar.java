@@ -63,7 +63,7 @@ class LoyalCatharEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    LoyalCatharEffect(LoyalCatharEffect effect) {
+    private LoyalCatharEffect(final LoyalCatharEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class ReturnLoyalCatharEffect extends OneShotEffect {
         this.staticText = "return it to the battlefield transformed under your control";
     }
 
-    public ReturnLoyalCatharEffect(final ReturnLoyalCatharEffect effect) {
+    private ReturnLoyalCatharEffect(final ReturnLoyalCatharEffect effect) {
         super(effect);
     }
 

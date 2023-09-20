@@ -45,7 +45,7 @@ class SoulsMightEffect extends OneShotEffect {
         this.staticText = "Put X +1/+1 counters on target creature, where X is that creature's power";
     }
 
-    public SoulsMightEffect(final SoulsMightEffect effect) {
+    private SoulsMightEffect(final SoulsMightEffect effect) {
         super(effect);
     }
 

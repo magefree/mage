@@ -149,6 +149,7 @@ class DauthiVoidwalkerPlayEffect extends OneShotEffect {
         game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
                 Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true, false
         ).setTargetPointer(new FixedTarget(card, game)), source);
+        game.informPlayers(player.getLogName() + " chose " + card.getLogName());
         return true;
     }
 }

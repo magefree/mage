@@ -40,7 +40,7 @@ public final class Guttersnipe extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DamagePlayersEffect(2, TargetController.OPPONENT), filter, false));
     }
 
-    public Guttersnipe (final Guttersnipe card) {
+    private Guttersnipe(final Guttersnipe card) {
         super(card);
     }
 

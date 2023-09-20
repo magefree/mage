@@ -61,7 +61,7 @@ class OraclesVaultFreeEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public OraclesVaultFreeEffect(final OraclesVaultFreeEffect effect) {
+    private OraclesVaultFreeEffect(final OraclesVaultFreeEffect effect) {
         super(effect);
     }
 

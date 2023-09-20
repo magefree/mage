@@ -61,7 +61,7 @@ class EmberwildeCaliphTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EmberwildeCaliphEffect(), false);
     }
 
-    public EmberwildeCaliphTriggeredAbility(final EmberwildeCaliphTriggeredAbility ability) {
+    private EmberwildeCaliphTriggeredAbility(final EmberwildeCaliphTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class EmberwildeCaliphEffect extends OneShotEffect {
         super(Outcome.LoseLife);
     }
 
-    public EmberwildeCaliphEffect(final EmberwildeCaliphEffect effect) {
+    private EmberwildeCaliphEffect(final EmberwildeCaliphEffect effect) {
         super(effect);
     }
 

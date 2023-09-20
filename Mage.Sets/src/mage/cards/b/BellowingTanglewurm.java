@@ -39,7 +39,7 @@ public final class BellowingTanglewurm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public BellowingTanglewurm (final BellowingTanglewurm card) {
+    private BellowingTanglewurm(final BellowingTanglewurm card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ class DromarTheBanisherEffect extends OneShotEffect {
         this.staticText = "choose a color, then return all creatures of that color to their owners' hands.";
     }
 
-    DromarTheBanisherEffect(final DromarTheBanisherEffect effect) {
+    private DromarTheBanisherEffect(final DromarTheBanisherEffect effect) {
         super(effect);
     }
 

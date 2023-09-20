@@ -43,7 +43,7 @@ class OustEffect extends OneShotEffect {
         this.staticText = "Put target creature into its owner's library second from the top. Its controller gains 3 life";
     }
 
-    public OustEffect(final OustEffect effect) {
+    private OustEffect(final OustEffect effect) {
         super(effect);
     }
 

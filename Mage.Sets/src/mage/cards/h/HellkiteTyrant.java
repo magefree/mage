@@ -83,7 +83,7 @@ class HellkiteTyrantEffect extends OneShotEffect {
         this.staticText = "gain control of all artifacts that player controls";
     }
 
-    public HellkiteTyrantEffect(final HellkiteTyrantEffect effect) {
+    private HellkiteTyrantEffect(final HellkiteTyrantEffect effect) {
         super(effect);
     }
 
@@ -120,7 +120,7 @@ class HellkiteTyrantControlEffect extends ContinuousEffectImpl {
         this.controllerId = controllerId;
     }
 
-    public HellkiteTyrantControlEffect(final HellkiteTyrantControlEffect effect) {
+    private HellkiteTyrantControlEffect(final HellkiteTyrantControlEffect effect) {
         super(effect);
         this.controllerId = effect.controllerId;
     }

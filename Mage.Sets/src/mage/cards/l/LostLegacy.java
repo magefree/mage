@@ -47,7 +47,7 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
         this.staticText = "Search target player's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way";
     }
 
-    LostLegacyEffect(final LostLegacyEffect effect) {
+    private LostLegacyEffect(final LostLegacyEffect effect) {
         super(effect);
     }
 

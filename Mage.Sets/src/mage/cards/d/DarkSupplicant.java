@@ -64,7 +64,7 @@ class DarkSupplicantEffect extends OneShotEffect {
         this.staticText = "Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle";
     }
 
-    public DarkSupplicantEffect(final DarkSupplicantEffect effect) {
+    private DarkSupplicantEffect(final DarkSupplicantEffect effect) {
         super(effect);
     }
 

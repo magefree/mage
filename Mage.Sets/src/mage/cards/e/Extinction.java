@@ -46,7 +46,7 @@ class ExtinctionEffect extends OneShotEffect {
         staticText = "Destroy all creatures of the creature type of your choice";
     }
 
-    public ExtinctionEffect(final ExtinctionEffect effect) {
+    private ExtinctionEffect(final ExtinctionEffect effect) {
         super(effect);
     }
 

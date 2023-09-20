@@ -70,7 +70,7 @@ class WorldQuellerEffect extends OneShotEffect {
         staticText = "you may choose a card type. If you do, each player sacrifices a permanent of that type";
     }
 
-    public WorldQuellerEffect(final WorldQuellerEffect effect) {
+    private WorldQuellerEffect(final WorldQuellerEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class WorldQuellerEffect extends OneShotEffect {
                 filter.add(type.getPredicate());
 
                 TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player2 = game.getPlayer(playerId);

@@ -435,6 +435,7 @@ public abstract class AbilityImpl implements Ability {
                 case TRANSFORMED:
                 case DISTURB:
                 case MORE_THAN_MEETS_THE_EYE:
+                case BESTOW:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
@@ -444,10 +445,11 @@ public abstract class AbilityImpl implements Ability {
                     canUseAdditionalCost = true;
                     break;
                 case NORMAL:
-                default:
                     canUseAlternativeCost = true;
                     canUseAdditionalCost = true;
                     break;
+                default:
+                    throw new IllegalArgumentException("Unknown ability cast mode: " + ((SpellAbility) this).getSpellAbilityCastMode());
             }
         }
 

@@ -50,7 +50,7 @@ class LifesFinaleEffect extends OneShotEffect {
         staticText = "Destroy all creatures, then search target opponent's library for up to three creature cards and put them into their graveyard. Then that player shuffles";
     }
 
-    public LifesFinaleEffect(final LifesFinaleEffect effect) {
+    private LifesFinaleEffect(final LifesFinaleEffect effect) {
         super(effect);
     }
 

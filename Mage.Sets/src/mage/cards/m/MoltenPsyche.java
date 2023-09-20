@@ -51,7 +51,7 @@ class MoltenPsycheEffect extends OneShotEffect {
                 + "<i>Metalcraft</i> &mdash; If you control three or more artifacts, {this} deals damage to each opponent equal to the number of cards that player has drawn this turn.";
     }
 
-    public MoltenPsycheEffect(final MoltenPsycheEffect effect) {
+    private MoltenPsycheEffect(final MoltenPsycheEffect effect) {
         super(effect);
     }
 

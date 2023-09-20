@@ -78,7 +78,7 @@ class SistersOfStoneDeathEffect extends OneShotEffect {
         staticText = "Put a creature card exiled with {this} onto the battlefield under your control";
     }
 
-    public SistersOfStoneDeathEffect(final SistersOfStoneDeathEffect effect) {
+    private SistersOfStoneDeathEffect(final SistersOfStoneDeathEffect effect) {
         super(effect);
     }
 

@@ -56,7 +56,7 @@ class HumbleDefectorEffect extends OneShotEffect {
         this.staticText = "Draw two cards. Target opponent gains control of {this}.";
     }
 
-    public HumbleDefectorEffect(final HumbleDefectorEffect effect) {
+    private HumbleDefectorEffect(final HumbleDefectorEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class HumbleDefectorControlSourceEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public HumbleDefectorControlSourceEffect(final HumbleDefectorControlSourceEffect effect) {
+    private HumbleDefectorControlSourceEffect(final HumbleDefectorControlSourceEffect effect) {
         super(effect);
     }
 

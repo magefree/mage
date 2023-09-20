@@ -64,7 +64,7 @@ class AddGlobeCountersAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GLOBE.createInstance()));
     }
 
-    public AddGlobeCountersAbility(final AddGlobeCountersAbility ability) {
+    private AddGlobeCountersAbility(final AddGlobeCountersAbility ability) {
         super(ability);
     }
 
@@ -105,7 +105,7 @@ class SnowMercyCost extends CostImpl {
         this.text = "{t}, {q}, {t}, {q}, {t}";
     }
 
-    SnowMercyCost(final SnowMercyCost cost) {
+    private SnowMercyCost(final SnowMercyCost cost) {
         super(cost);
     }
 

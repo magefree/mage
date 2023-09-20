@@ -56,7 +56,7 @@ class HarborSerpentEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless there are five or more Islands on the battlefield";
     }
 
-    public HarborSerpentEffect(final HarborSerpentEffect effect) {
+    private HarborSerpentEffect(final HarborSerpentEffect effect) {
         super(effect);
     }
 

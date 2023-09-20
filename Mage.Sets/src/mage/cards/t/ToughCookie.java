@@ -4,14 +4,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
+import mage.abilities.token.FoodAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -59,10 +56,7 @@ public final class ToughCookie extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Tough Cookie: You gain 3 life.
-        ability = new SimpleActivatedAbility(new GainLifeEffect(3), new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new FoodAbility(true));
     }
 
     private ToughCookie(final ToughCookie card) {

@@ -55,7 +55,7 @@ class GeneralsRegaliaEffect extends RedirectionEffect {
         this.damageSource = new TargetSource();
     }
 
-    public GeneralsRegaliaEffect(final GeneralsRegaliaEffect effect) {
+    private GeneralsRegaliaEffect(final GeneralsRegaliaEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }

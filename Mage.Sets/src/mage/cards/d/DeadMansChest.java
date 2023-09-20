@@ -66,7 +66,7 @@ class DeadMansChestEffect extends OneShotEffect {
                 + "and you may spend mana as though it were mana of any type to cast those spells";
     }
 
-    public DeadMansChestEffect(final DeadMansChestEffect effect) {
+    private DeadMansChestEffect(final DeadMansChestEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class DeadMansChestCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may cast nonland cards from among them as long as they remain exiled";
     }
 
-    public DeadMansChestCastFromExileEffect(final DeadMansChestCastFromExileEffect effect) {
+    private DeadMansChestCastFromExileEffect(final DeadMansChestCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -147,7 +147,7 @@ class DeadMansChestSpendManaEffect extends AsThoughEffectImpl implements AsThoug
         staticText = "and you may spend mana as though it were mana of any type to cast those spells";
     }
 
-    public DeadMansChestSpendManaEffect(final DeadMansChestSpendManaEffect effect) {
+    private DeadMansChestSpendManaEffect(final DeadMansChestSpendManaEffect effect) {
         super(effect);
     }
 

@@ -67,7 +67,7 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} is put into your graveyard from the battlefield, ");
     }
 
-    EnigmaSphinxTriggeredAbility(EnigmaSphinxTriggeredAbility ability) {
+    private EnigmaSphinxTriggeredAbility(final EnigmaSphinxTriggeredAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class EnigmaSphinxEffect extends OneShotEffect {
         staticText = "put it into your library third from the top";
     }
 
-    public EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
+    private EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
         super(effect);
     }
 

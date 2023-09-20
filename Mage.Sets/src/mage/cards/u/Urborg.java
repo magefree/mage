@@ -59,7 +59,7 @@ class UrborgEffect extends OneShotEffect {
         this.staticText = "Target creature loses first strike or swampwalk until end of turn.";
     }
 
-    UrborgEffect(final UrborgEffect effect) {
+    private UrborgEffect(final UrborgEffect effect) {
         super(effect);
     }
 

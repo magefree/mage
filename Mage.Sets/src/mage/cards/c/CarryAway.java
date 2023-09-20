@@ -62,7 +62,7 @@ class CarryAwayEffect extends OneShotEffect {
         this.staticText = "unattach enchanted Equipment.";
     }
 
-    public CarryAwayEffect(final CarryAwayEffect effect) {
+    private CarryAwayEffect(final CarryAwayEffect effect) {
         super(effect);
     }
 

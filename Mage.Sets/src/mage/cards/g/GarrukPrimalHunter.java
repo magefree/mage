@@ -65,7 +65,7 @@ class GarrukPrimalHunterEffect extends OneShotEffect {
         staticText = "Draw cards equal to the greatest power among creatures you control";
     }
 
-    GarrukPrimalHunterEffect(final GarrukPrimalHunterEffect effect) {
+    private GarrukPrimalHunterEffect(final GarrukPrimalHunterEffect effect) {
         super(effect);
     }
 

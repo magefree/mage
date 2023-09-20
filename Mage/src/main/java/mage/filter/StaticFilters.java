@@ -1228,4 +1228,5 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_FOOD.setLockedFilter(true);
     }
+
 }

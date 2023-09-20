@@ -65,7 +65,7 @@ public final class ArchdemonOfGreed extends CardImpl {
             this.staticText = "Sacrifice a Human. If you can't, tap {this} and it deals 9 damage to you.";
         }
 
-        public ArchdemonOfGreedEffect(final ArchdemonOfGreedEffect effect) {
+        private ArchdemonOfGreedEffect(final ArchdemonOfGreedEffect effect) {
             super(effect);
         }
 

@@ -61,7 +61,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
                 "At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard";
     }
 
-    public GrinningTotemSearchAndExileEffect(final GrinningTotemSearchAndExileEffect effect) {
+    private GrinningTotemSearchAndExileEffect(final GrinningTotemSearchAndExileEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.exileZoneId = exileZoneId;
     }
 
-    public GrinningTotemDelayedTriggeredAbility(final GrinningTotemDelayedTriggeredAbility ability) {
+    private GrinningTotemDelayedTriggeredAbility(final GrinningTotemDelayedTriggeredAbility ability) {
         super(ability);
         this.exileZoneId = ability.exileZoneId;
     }
@@ -142,7 +142,7 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
         this.exileZoneId = exileZoneId;
     }
 
-    public GrinningTotemPutIntoGraveyardEffect(final GrinningTotemPutIntoGraveyardEffect effect) {
+    private GrinningTotemPutIntoGraveyardEffect(final GrinningTotemPutIntoGraveyardEffect effect) {
         super(effect);
         this.exileZoneId = effect.exileZoneId;
     }

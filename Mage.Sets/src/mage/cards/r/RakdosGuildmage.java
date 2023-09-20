@@ -63,7 +63,7 @@ class RakdosGuildmageEffect extends OneShotEffect {
         this.staticText = "Create a 2/1 red Goblin creature token with haste. Exile it at the beginning of the next end step";
     }
 
-    public RakdosGuildmageEffect(final RakdosGuildmageEffect effect) {
+    private RakdosGuildmageEffect(final RakdosGuildmageEffect effect) {
         super(effect);
     }
 

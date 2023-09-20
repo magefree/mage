@@ -60,7 +60,7 @@ class TarielReckonerOfSoulsEffect extends OneShotEffect {
         this.staticText = "Choose a creature card at random from target opponent's graveyard. Put that card onto the battlefield under your control";
     }
 
-    public TarielReckonerOfSoulsEffect(final TarielReckonerOfSoulsEffect effect) {
+    private TarielReckonerOfSoulsEffect(final TarielReckonerOfSoulsEffect effect) {
         super(effect);
     }
 

@@ -67,7 +67,7 @@ class FaramirPrinceOfIthilienEffect extends OneShotEffect {
             "Otherwise, create three 1/1 white Human Soldier creature tokens.";
     }
 
-    FaramirPrinceOfIthilienEffect(final FaramirPrinceOfIthilienEffect effect) {
+    private FaramirPrinceOfIthilienEffect(final FaramirPrinceOfIthilienEffect effect) {
         super(effect);
     }
 
@@ -111,7 +111,7 @@ class FaramirPrinceOfIthilienDelayedEffect extends OneShotEffect {
             "Otherwise, create three 1/1 white Human Soldier creature tokens.";
     }
 
-    FaramirPrinceOfIthilienDelayedEffect(final FaramirPrinceOfIthilienDelayedEffect effect) {
+    private FaramirPrinceOfIthilienDelayedEffect(final FaramirPrinceOfIthilienDelayedEffect effect) {
         super(effect);
     }
 

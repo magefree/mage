@@ -50,7 +50,7 @@ class BludgeonBrawlAbility extends StaticAbility {
         this.addEffect(new BludgeonBrawlGainAbilityEffect());
     }
 
-    public BludgeonBrawlAbility(BludgeonBrawlAbility ability) {
+    private BludgeonBrawlAbility(final BludgeonBrawlAbility ability) {
         super(ability);
     }
 
@@ -71,7 +71,7 @@ class BludgeonBrawlAddSubtypeEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
     }
 
-    public BludgeonBrawlAddSubtypeEffect(final BludgeonBrawlAddSubtypeEffect effect) {
+    private BludgeonBrawlAddSubtypeEffect(final BludgeonBrawlAddSubtypeEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class BludgeonBrawlGainAbilityEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public BludgeonBrawlGainAbilityEffect(final BludgeonBrawlGainAbilityEffect effect) {
+    private BludgeonBrawlGainAbilityEffect(final BludgeonBrawlGainAbilityEffect effect) {
         super(effect);
     }
 

@@ -156,7 +156,7 @@ class BaneAlleyBrokerReturnToHandEffect extends OneShotEffect {
             return false;
         }
         TargetCardInExile target = new TargetCardInExile(StaticFilters.FILTER_CARD, exile.getId());
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.chooseTarget(outcome, exile, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

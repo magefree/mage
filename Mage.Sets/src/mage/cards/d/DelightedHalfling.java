@@ -139,7 +139,7 @@ class DelightedHalflingCantCounterEffect extends ContinuousRuleModifyingEffectIm
         staticText = null;
     }
 
-    public DelightedHalflingCantCounterEffect(final DelightedHalflingCantCounterEffect effect) {
+    private DelightedHalflingCantCounterEffect(final DelightedHalflingCantCounterEffect effect) {
         super(effect);
     }
 

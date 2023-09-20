@@ -67,7 +67,7 @@ class FaerieArtisansEffect extends OneShotEffect {
                 + "Then exile all other tokens created with {this}";
     }
 
-    public FaerieArtisansEffect(final FaerieArtisansEffect effect) {
+    private FaerieArtisansEffect(final FaerieArtisansEffect effect) {
         super(effect);
     }
 

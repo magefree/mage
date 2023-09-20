@@ -46,7 +46,7 @@ public final class DeviantGlee extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public DeviantGlee (final DeviantGlee card) {
+    private DeviantGlee(final DeviantGlee card) {
         super(card);
     }
 

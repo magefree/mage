@@ -61,7 +61,7 @@ class TouchOfMoongloveAddTriggerEffect extends OneShotEffect {
         this.staticText = "Whenever a creature dealt damage by that creature dies this turn, its controller loses 2 life";
     }
 
-    public TouchOfMoongloveAddTriggerEffect(final TouchOfMoongloveAddTriggerEffect effect) {
+    private TouchOfMoongloveAddTriggerEffect(final TouchOfMoongloveAddTriggerEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class TouchOfMoongloveDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.creatureToCheck = creatureToCheck;
     }
 
-    public TouchOfMoongloveDelayedTriggeredAbility(TouchOfMoongloveDelayedTriggeredAbility ability) {
+    private TouchOfMoongloveDelayedTriggeredAbility(final TouchOfMoongloveDelayedTriggeredAbility ability) {
         super(ability);
         this.creatureToCheck = ability.creatureToCheck;
     }

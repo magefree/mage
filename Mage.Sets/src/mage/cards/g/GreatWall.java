@@ -44,7 +44,7 @@ class GreatWallEffect extends AsThoughEffectImpl {
         staticText = "Creatures with plainswalk can be blocked as though they didn't have plainswalk";
     }
 
-    public GreatWallEffect(final GreatWallEffect effect) {
+    private GreatWallEffect(final GreatWallEffect effect) {
         super(effect);
     }
 

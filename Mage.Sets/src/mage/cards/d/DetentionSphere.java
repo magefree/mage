@@ -68,7 +68,7 @@ class DetentionSphereEntersEffect extends OneShotEffect {
         staticText = "you may exile target nonland permanent not named Detention Sphere and all other permanents with the same name as that permanent";
     }
 
-    public DetentionSphereEntersEffect(final DetentionSphereEntersEffect effect) {
+    private DetentionSphereEntersEffect(final DetentionSphereEntersEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class DetentionSphereLeavesEffect extends OneShotEffect {
         staticText = "return the exiled cards to the battlefield under their owner's control";
     }
 
-    public DetentionSphereLeavesEffect(final DetentionSphereLeavesEffect effect) {
+    private DetentionSphereLeavesEffect(final DetentionSphereLeavesEffect effect) {
         super(effect);
     }
 

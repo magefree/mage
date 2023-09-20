@@ -58,7 +58,7 @@ class DireFleetRavagerEffect extends OneShotEffect {
         this.staticText = "each player loses a third of their life, rounded up";
     }
 
-    DireFleetRavagerEffect(final DireFleetRavagerEffect effect) {
+    private DireFleetRavagerEffect(final DireFleetRavagerEffect effect) {
         super(effect);
     }
 

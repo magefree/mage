@@ -105,7 +105,7 @@ class ConfoundingConundrumEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }

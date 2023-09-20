@@ -57,7 +57,7 @@ class DakraMysticEffect extends OneShotEffect {
         this.staticText = "Each player reveals the top card of their library. You may put the revealed cards into their owners' graveyard. If you don't, each player draws a card";
     }
 
-    public DakraMysticEffect(final DakraMysticEffect effect) {
+    private DakraMysticEffect(final DakraMysticEffect effect) {
         super(effect);
     }
 

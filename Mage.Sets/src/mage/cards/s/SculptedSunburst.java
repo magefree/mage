@@ -74,7 +74,7 @@ class SculptedSunburstEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
@@ -96,7 +96,7 @@ class SculptedSunburstEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent targetPermanent = new TargetPermanent(filter);
-            targetPermanent.setNotTarget(true);
+            targetPermanent.withNotTarget(true);
             opponent.choose(outcome, targetPermanent, source, game);
             set.add(targetPermanent.getFirstTarget());
         }

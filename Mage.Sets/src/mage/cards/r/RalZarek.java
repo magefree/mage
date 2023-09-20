@@ -84,7 +84,7 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
         this.staticText = "Flip five coins. Take an extra turn after this one for each coin that comes up heads";
     }
 
-    public RalZarekExtraTurnsEffect(final RalZarekExtraTurnsEffect effect) {
+    private RalZarekExtraTurnsEffect(final RalZarekExtraTurnsEffect effect) {
         super(effect);
     }
 

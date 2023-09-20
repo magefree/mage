@@ -2706,7 +2706,7 @@ public abstract class GameImpl implements Game {
                     continue;
                 }
                 Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                targetLegendaryToKeep.setNotTarget(true);
+                targetLegendaryToKeep.withNotTarget(true);
                 targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {

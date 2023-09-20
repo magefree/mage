@@ -42,7 +42,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Shattergang Brothers", "1315*", Rarity.MYTHIC, mage.cards.s.ShattergangBrothers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toxin Sliver", "635Ph", Rarity.RARE, mage.cards.t.ToxinSliver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Virulent Sliver", "659Ph", Rarity.RARE, mage.cards.v.VirulentSliver.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Viscera Seer", "VS", Rarity.COMMON, mage.cards.v.VisceraSeer.class));
+        cards.add(new SetCardInfo("Viscera Seer", "99999VS", Rarity.COMMON, mage.cards.v.VisceraSeer.class)); // workaround until "VS" supported as card number
         cards.add(new SetCardInfo("Snow-Covered Plains", 1, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Island", 2, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 3, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));

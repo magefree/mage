@@ -52,7 +52,7 @@ class SuddenDisappearanceEffect extends OneShotEffect {
         staticText = "Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step";
     }
 
-    public SuddenDisappearanceEffect(final SuddenDisappearanceEffect effect) {
+    private SuddenDisappearanceEffect(final SuddenDisappearanceEffect effect) {
         super(effect);
     }
 

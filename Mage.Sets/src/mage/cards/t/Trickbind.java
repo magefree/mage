@@ -51,7 +51,7 @@ class TrickbindCounterEffect extends OneShotEffect {
         staticText = "Counter target activated or triggered ability. If a permanent's ability is countered this way, activated abilities of that permanent can't be activated this turn";
     }
 
-    public TrickbindCounterEffect(final TrickbindCounterEffect effect) {
+    private TrickbindCounterEffect(final TrickbindCounterEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class TrickbindCantActivateEffect extends RestrictionEffect {
         staticText = "Activated abilities of that permanent can't be activated this turn";
     }
 
-    public TrickbindCantActivateEffect(final TrickbindCantActivateEffect effect) {
+    private TrickbindCantActivateEffect(final TrickbindCantActivateEffect effect) {
         super(effect);
     }
 

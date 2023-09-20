@@ -108,7 +108,7 @@ class DiscerningFinancierEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         TargetPlayer target = new TargetPlayer(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         Permanent treasure = game.getPermanent(source.getFirstTarget());
         if (treasure == null || !target.canChoose(source.getControllerId(), source, game)) {
             return false;

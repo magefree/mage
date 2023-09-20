@@ -49,7 +49,7 @@ public final class TrigonOfCorruption extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public TrigonOfCorruption (final TrigonOfCorruption card) {
+    private TrigonOfCorruption(final TrigonOfCorruption card) {
         super(card);
     }
 

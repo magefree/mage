@@ -56,7 +56,7 @@ class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public LureboundScarecrowTriggeredAbility(LureboundScarecrowTriggeredAbility ability) {
+    private LureboundScarecrowTriggeredAbility(final LureboundScarecrowTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1534,7 +1534,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param noMana
      * @return
      */
-    public static LinkedHashMap<UUID, SpellAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
+    public static Map<UUID, SpellAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
         // it uses simple check from spellCanBeActivatedRegularlyNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
         LinkedHashMap<UUID, SpellAbility> useable = new LinkedHashMap<>();
@@ -1607,7 +1607,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
+    public Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         // stack abilities - can't activate anything
         // spell ability - can activate additional abilities (example: "Lightning Storm")
@@ -1634,7 +1634,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return useable;
     }
 
-    protected LinkedHashMap<UUID, ActivatedManaAbilityImpl> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
+    protected Map<UUID, ActivatedManaAbilityImpl> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedManaAbilityImpl> useable = new LinkedHashMap<>();
         boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
         for (ActivatedManaAbilityImpl ability : object.getAbilities().getActivatedManaAbilities(zone)) {
@@ -2776,7 +2776,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean casted = false;
         TargetCard targetCard = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD);
         targetCard.setTargetName("card to cast from library");
-        targetCard.setNotTarget(true);
+        targetCard.withNotTarget(true);
         while (!castableCards.isEmpty()) {
             targetCard.clearChosen();
             if (!targetPlayer.choose(Outcome.AIDontUseIt, new CardsImpl(castableCards), targetCard, source, game)) {
@@ -5047,7 +5047,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
-                    new FilterCard("card " + (cards.size() == 1 ? "" : "s")
+                    new FilterCard("card" + (cards.size() == 1 ? "" : "s")
                             + " to PUT into your GRAVEYARD (Surveil)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
             moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
@@ -5194,7 +5194,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             if (choosing) {
                 TargetPermanent target = new TargetControlledCreaturePermanent();
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.withChooseHint("to be your Ring-bearer");
                 choose(Outcome.Neutral, target, null, game);
 

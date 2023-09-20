@@ -63,7 +63,7 @@ class QuicksilverDragonEffect extends OneShotEffect {
         this.staticText = "If target spell has only one target and that target is {this}, change that spell's target to another creature";
     }
     
-    QuicksilverDragonEffect(final QuicksilverDragonEffect effect) {
+    private QuicksilverDragonEffect(final QuicksilverDragonEffect effect) {
         super(effect);
     }
     

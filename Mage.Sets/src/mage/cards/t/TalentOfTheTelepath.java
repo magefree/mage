@@ -62,7 +62,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                 "instant and/or sorcery spells from among the revealed cards instead of one.";
     }
 
-    public TalentOfTheTelepathEffect(final TalentOfTheTelepathEffect effect) {
+    private TalentOfTheTelepathEffect(final TalentOfTheTelepathEffect effect) {
         super(effect);
     }
 

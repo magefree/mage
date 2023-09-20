@@ -46,7 +46,7 @@ class InsurrectionEffect extends OneShotEffect {
         this.staticText = "Untap all creatures and gain control of them until end of turn. They gain haste until end of turn";
     }
 
-    public InsurrectionEffect(final InsurrectionEffect effect) {
+    private InsurrectionEffect(final InsurrectionEffect effect) {
         super(effect);
     }
 

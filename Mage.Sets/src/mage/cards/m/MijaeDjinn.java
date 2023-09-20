@@ -48,7 +48,7 @@ class MijaeDjinnEffect extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, remove {this} from combat and tap it";
     }
 
-    public MijaeDjinnEffect(MijaeDjinnEffect effect) {
+    private MijaeDjinnEffect(final MijaeDjinnEffect effect) {
         super(effect);
     }
 

@@ -70,7 +70,7 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
         staticText = "you may exile target land you control";
     }
 
-    public ExtraplanarLensImprintEffect(ExtraplanarLensImprintEffect effect) {
+    private ExtraplanarLensImprintEffect(final ExtraplanarLensImprintEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
         setTriggerPhrase("Whenever a land with the same name as the exiled card is tapped for mana, ");
     }
 
-    public ExtraplanarLensTriggeredAbility(final ExtraplanarLensTriggeredAbility ability) {
+    private ExtraplanarLensTriggeredAbility(final ExtraplanarLensTriggeredAbility ability) {
         super(ability);
     }
 

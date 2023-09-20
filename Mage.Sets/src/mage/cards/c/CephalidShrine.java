@@ -50,7 +50,7 @@ class CephalidShrineTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CephalidShrineEffect(), false);
     }
 
-    public CephalidShrineTriggeredAbility(final CephalidShrineTriggeredAbility ability) {
+    private CephalidShrineTriggeredAbility(final CephalidShrineTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,7 +88,7 @@ class CephalidShrineEffect extends OneShotEffect {
                 + "as the spell";
     }
 
-    public CephalidShrineEffect(final CephalidShrineEffect effect) {
+    private CephalidShrineEffect(final CephalidShrineEffect effect) {
         super(effect);
     }
 

@@ -56,7 +56,7 @@ class PureIntentionsAllTriggeredAbility extends DelayedTriggeredAbility {
         super(new ReturnFromGraveyardToHandTargetEffect(), Duration.EndOfTurn, false);
     }
 
-    public PureIntentionsAllTriggeredAbility(PureIntentionsAllTriggeredAbility ability) {
+    private PureIntentionsAllTriggeredAbility(final PureIntentionsAllTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class PureIntentionsTriggeredAbility extends TriggeredAbilityImpl {
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToHandEffect())), false);
     }
 
-    public PureIntentionsTriggeredAbility(final PureIntentionsTriggeredAbility ability) {
+    private PureIntentionsTriggeredAbility(final PureIntentionsTriggeredAbility ability) {
         super(ability);
     }
 

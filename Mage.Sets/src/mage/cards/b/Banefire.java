@@ -77,7 +77,7 @@ class BaneFireEffect extends OneShotEffect {
         staticText = "{this} deals X damage to any target";
     }
 
-    public BaneFireEffect(final BaneFireEffect effect) {
+    private BaneFireEffect(final BaneFireEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "If X is 5 or more, this spell can't be countered and the damage can't be prevented";
     }
 
-    public BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {
+    private BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }

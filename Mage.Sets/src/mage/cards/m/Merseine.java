@@ -105,7 +105,7 @@ class MerseineCost extends CostImpl {
         this.text = "Pay enchanted creature's mana cost";
     }
 
-    public MerseineCost(final MerseineCost cost) {
+    private MerseineCost(final MerseineCost cost) {
         super(cost);
     }
 

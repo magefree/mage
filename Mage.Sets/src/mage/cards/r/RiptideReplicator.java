@@ -66,7 +66,7 @@ class RiptideReplicatorEffect extends OneShotEffect {
         this.staticText = "Create an X/X creature token of the chosen color and type, where X is the number of charge counters on {this}.";
     }
 
-    RiptideReplicatorEffect(final RiptideReplicatorEffect effect) {
+    private RiptideReplicatorEffect(final RiptideReplicatorEffect effect) {
         super(effect);
     }
 

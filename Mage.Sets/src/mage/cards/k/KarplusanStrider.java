@@ -51,7 +51,7 @@ class KarplusanStriderEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "{this} can't be the target of blue or black spells";
     }
 
-    KarplusanStriderEffect(final KarplusanStriderEffect effect) {
+    private KarplusanStriderEffect(final KarplusanStriderEffect effect) {
         super(effect);
     }
 

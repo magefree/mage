@@ -83,7 +83,7 @@ class MoltenPrimordialEffect extends OneShotEffect {
         this.staticText = "for each opponent, take control of up to one target creature that player controls until end of turn. Untap those creatures. They have haste until end of turn";
     }
 
-    public MoltenPrimordialEffect(final MoltenPrimordialEffect effect) {
+    private MoltenPrimordialEffect(final MoltenPrimordialEffect effect) {
         super(effect);
     }
 

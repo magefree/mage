@@ -46,7 +46,7 @@ class CursedRackHandSizeEffect extends ContinuousEffectImpl {
         staticText = "The chosen player's maximum hand size is four";
     }
 
-    public CursedRackHandSizeEffect(final CursedRackHandSizeEffect effect) {
+    private CursedRackHandSizeEffect(final CursedRackHandSizeEffect effect) {
         super(effect);
     }
 

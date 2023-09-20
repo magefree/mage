@@ -44,7 +44,7 @@ public final class BlastFromThePast extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new GoblinToken()), KickedCondition.ONCE));
     }
 
-    public BlastFromThePast (final BlastFromThePast card) {
+    private BlastFromThePast(final BlastFromThePast card) {
         super(card);
     }
 

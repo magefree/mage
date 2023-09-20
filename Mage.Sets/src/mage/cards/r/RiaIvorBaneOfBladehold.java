@@ -58,7 +58,7 @@ class RiaIvorBaneOfBladeholdEffect extends PreventionEffectImpl {
         this.staticText = "the next time target creature would deal combat damage to one or more players this combat, prevent that damage. If damage is prevented this way, create that many 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and \"This creature can't block.\"";
     }
 
-    public RiaIvorBaneOfBladeholdEffect(final RiaIvorBaneOfBladeholdEffect effect) {
+    private RiaIvorBaneOfBladeholdEffect(final RiaIvorBaneOfBladeholdEffect effect) {
         super(effect);
     }
 

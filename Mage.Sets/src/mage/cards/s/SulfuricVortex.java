@@ -52,7 +52,7 @@ class SulfuricVortexReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a player would gain life, that player gains no life instead";
     }
 
-    public SulfuricVortexReplacementEffect(final SulfuricVortexReplacementEffect effect) {
+    private SulfuricVortexReplacementEffect(final SulfuricVortexReplacementEffect effect) {
         super(effect);
     }
 

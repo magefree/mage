@@ -75,7 +75,7 @@ class CollectiveDefianceEffect extends OneShotEffect {
         this.staticText = "Target player discards all the cards in their hand, then draws that many cards";
     }
 
-    public CollectiveDefianceEffect(final CollectiveDefianceEffect effect) {
+    private CollectiveDefianceEffect(final CollectiveDefianceEffect effect) {
         super(effect);
     }
 

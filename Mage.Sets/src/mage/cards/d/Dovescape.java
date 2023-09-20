@@ -44,7 +44,7 @@ class DovescapeEffect extends OneShotEffect {
         this.staticText = "counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's mana value";
     }
 
-    DovescapeEffect(final DovescapeEffect effect) {
+    private DovescapeEffect(final DovescapeEffect effect) {
         super(effect);
     }
 

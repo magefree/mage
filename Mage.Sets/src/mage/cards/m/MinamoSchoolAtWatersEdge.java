@@ -41,7 +41,7 @@ public final class MinamoSchoolAtWatersEdge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MinamoSchoolAtWatersEdge (final MinamoSchoolAtWatersEdge card) {
+    private MinamoSchoolAtWatersEdge(final MinamoSchoolAtWatersEdge card) {
         super(card);
     }
 

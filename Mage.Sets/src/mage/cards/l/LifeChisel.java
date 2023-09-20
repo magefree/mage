@@ -56,7 +56,7 @@ class LifeChiselEffect extends OneShotEffect {
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public LifeChiselEffect(final LifeChiselEffect effect) {
+    private LifeChiselEffect(final LifeChiselEffect effect) {
         super(effect);
     }
 

@@ -69,7 +69,7 @@ class HordeOfNotionsEffect extends OneShotEffect {
         this.staticText = "You may play target Elemental card from your graveyard without paying its mana cost";
     }
 
-    public HordeOfNotionsEffect(final HordeOfNotionsEffect effect) {
+    private HordeOfNotionsEffect(final HordeOfNotionsEffect effect) {
         super(effect);
     }
 

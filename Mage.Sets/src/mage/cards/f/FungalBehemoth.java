@@ -65,7 +65,7 @@ class FungalBehemothTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
-    public FungalBehemothTriggeredAbility(final FungalBehemothTriggeredAbility ability) {
+    private FungalBehemothTriggeredAbility(final FungalBehemothTriggeredAbility ability) {
         super(ability);
     }
 

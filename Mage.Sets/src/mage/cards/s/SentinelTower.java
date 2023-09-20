@@ -56,7 +56,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
         this.damageInfo = null;
     }
 
-    SentinelTowerTriggeredAbility(final SentinelTowerTriggeredAbility effect) {
+    private SentinelTowerTriggeredAbility(final SentinelTowerTriggeredAbility effect) {
         super(effect);
         this.damageInfo = effect.damageInfo;
     }

@@ -56,7 +56,7 @@ class VeilOfBirdsToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public VeilOfBirdsToken(final VeilOfBirdsToken token) {
+    private VeilOfBirdsToken(final VeilOfBirdsToken token) {
         super(token);
     }
 

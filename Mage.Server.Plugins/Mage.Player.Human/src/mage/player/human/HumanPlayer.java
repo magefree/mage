@@ -41,12 +41,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
-import mage.util.CardUtil;
-import mage.util.GameLog;
-import mage.util.ManaUtil;
-import mage.util.MessageToClient;
-import mage.util.MultiAmountMessage;
-
+import mage.util.*;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
@@ -1213,7 +1208,7 @@ public class HumanPlayer extends PlayerImpl {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
                         // look at card or try to cast/activate abilities
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>();
+                        Map<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>();
 
                         Player actingPlayer = null;
                         if (playerId.equals(game.getPriorityPlayerId())) {
@@ -1559,7 +1554,7 @@ public class HumanPlayer extends PlayerImpl {
 
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
-            LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
+            Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (!useableAbilities.isEmpty()) {
                 // Added to ensure that mana is not being autopaid for spells that care about the color of mana being paid
                 // See https://github.com/magefree/mage/issues/9070
@@ -2009,7 +2004,7 @@ public class HumanPlayer extends PlayerImpl {
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
             Target target = new TargetAnyTarget();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
             }
@@ -2058,8 +2053,14 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-            int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(
+            Outcome outcome,
+            List<MultiAmountMessage> messages,
+            int min,
+            int max,
+            MultiAmountType type,
+            Game game
+    ) {
         int needCount = messages.size();
         List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0 || (needCount == 1 && min == max)
@@ -2146,14 +2147,9 @@ public class HumanPlayer extends PlayerImpl {
             waitForResponse(game);
 
             UUID responseId = getFixedResponseUUID(game);
-            if (responseId != null) {
-                if (specialActions.containsKey(responseId)) {
-                    SpecialAction specialAction = specialActions.get(responseId);
-                    if (unpaidForManaAction != null) {
-                        specialAction.setUnpaidMana(unpaidForManaAction);
-                    }
-                    activateAbility(specialAction, game);
-                }
+            SpecialAction specialAction = specialActions.getOrDefault(responseId, null);
+            if (specialAction != null) {
+                activateAbility(specialAction, game);
             }
         }
     }
@@ -2164,7 +2160,7 @@ public class HumanPlayer extends PlayerImpl {
         return super.activateAbility(ability, game);
     }
 
-    protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
+    protected void activateAbility(Map<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
         if (gameInCheckPlayableState(game)) {
             return;
         }
@@ -2268,7 +2264,7 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
             String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
-            LinkedHashMap<UUID, SpellAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
+            Map<UUID, SpellAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
                 return useableAbilities.values().iterator().next();

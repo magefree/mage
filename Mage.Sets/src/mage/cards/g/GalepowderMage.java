@@ -63,7 +63,7 @@ class GalepowderMageEffect extends OneShotEffect {
         this.staticText = "exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public GalepowderMageEffect(final GalepowderMageEffect effect) {
+    private GalepowderMageEffect(final GalepowderMageEffect effect) {
         super(effect);
     }
 

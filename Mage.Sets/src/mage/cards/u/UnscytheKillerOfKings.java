@@ -67,7 +67,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature dealt damage by equipped creature this turn dies, ");
     }
 
-    public UnscytheKillerOfKingsTriggeredAbility(final UnscytheKillerOfKingsTriggeredAbility ability) {
+    private UnscytheKillerOfKingsTriggeredAbility(final UnscytheKillerOfKingsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -113,7 +113,7 @@ class UnscytheEffect extends OneShotEffect {
         this.staticText = "you may exile that card. If you do, create a 2/2 black Zombie creature token";
     }
 
-    public UnscytheEffect(final UnscytheEffect effect) {
+    private UnscytheEffect(final UnscytheEffect effect) {
         super(effect);
     }
 

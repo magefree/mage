@@ -55,7 +55,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public CreaturesYouControlBecomesTargetTriggeredAbility(final CreaturesYouControlBecomesTargetTriggeredAbility ability) {
+    private CreaturesYouControlBecomesTargetTriggeredAbility(final CreaturesYouControlBecomesTargetTriggeredAbility ability) {
         super(ability);
     }
 

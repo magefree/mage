@@ -147,7 +147,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new CityInABottleSacrificeEffect());
     }
 
-    CityInABottleStateTriggeredAbility(final CityInABottleStateTriggeredAbility ability) {
+    private CityInABottleStateTriggeredAbility(final CityInABottleStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -181,7 +181,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
         this.staticText = "its controller sacrifices it";
     }
 
-    CityInABottleSacrificeEffect(final CityInABottleSacrificeEffect effect) {
+    private CityInABottleSacrificeEffect(final CityInABottleSacrificeEffect effect) {
         super(effect);
     }
 
@@ -212,7 +212,7 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't play cards originally printed in the <i>Arabian Nights</i> expansion";
     }
 
-    CityInABottleCantPlayEffect(final CityInABottleCantPlayEffect effect) {
+    private CityInABottleCantPlayEffect(final CityInABottleCantPlayEffect effect) {
         super(effect);
     }
 

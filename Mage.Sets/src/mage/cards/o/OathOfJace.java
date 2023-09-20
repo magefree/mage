@@ -52,7 +52,7 @@ class OathOfJaceEffect extends OneShotEffect {
         this.staticText = "scry X, where X is the number of planeswalkers you control";
     }
 
-    public OathOfJaceEffect(final OathOfJaceEffect effect) {
+    private OathOfJaceEffect(final OathOfJaceEffect effect) {
         super(effect);
     }
 

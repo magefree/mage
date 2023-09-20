@@ -38,7 +38,7 @@ public final class HairStrungKoto extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HairStrungKoto (final HairStrungKoto card) {
+    private HairStrungKoto(final HairStrungKoto card) {
         super(card);
     }
 

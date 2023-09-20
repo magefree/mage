@@ -41,7 +41,7 @@ public final class NoMercy extends CardImpl {
             super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         }
 
-        public NoMercyTriggeredAbility(final NoMercyTriggeredAbility ability) {
+        private NoMercyTriggeredAbility(final NoMercyTriggeredAbility ability) {
             super(ability);
         }
 

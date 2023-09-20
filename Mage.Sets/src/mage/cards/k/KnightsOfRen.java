@@ -49,7 +49,7 @@ public class KnightsOfRen extends CardImpl {
         this.addAbility(abilityAttacks, new LifeLossOtherFromCombatWatcher());
     }
 
-    public KnightsOfRen(final KnightsOfRen card) {
+    private KnightsOfRen(final KnightsOfRen card) {
         super(card);
     }
 

@@ -62,7 +62,7 @@ class GrizzledAnglerEffect extends OneShotEffect {
         staticText = "Mill two cards. Then if there is a colorless creature card in your graveyard, transform {this}";
     }
 
-    public GrizzledAnglerEffect(final GrizzledAnglerEffect effect) {
+    private GrizzledAnglerEffect(final GrizzledAnglerEffect effect) {
         super(effect);
     }
 

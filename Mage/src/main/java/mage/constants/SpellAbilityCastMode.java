@@ -44,6 +44,12 @@ public enum SpellAbilityCastMode {
         if (this.equals(BESTOW)) {
             BestowAbility.becomeAura(cardCopy);
         }
+        if (this.isTransformed){
+            Card tmp = card.getSecondCardFace();
+            if (tmp != null) {
+                cardCopy = tmp.copy();
+            }
+        }
         return cardCopy;
     }
 }

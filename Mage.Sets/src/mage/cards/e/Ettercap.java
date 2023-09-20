@@ -41,6 +41,8 @@ public final class Ettercap extends AdventureCard {
         // Destroy target creature with flying.
         this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+
+        this.finalizeAdventure();
     }
 
     private Ettercap(final Ettercap card) {

@@ -57,7 +57,7 @@ class GeodeGolemEffect extends OneShotEffect {
                 + "without paying its mana cost";
     }
 
-    public GeodeGolemEffect(final GeodeGolemEffect effect) {
+    private GeodeGolemEffect(final GeodeGolemEffect effect) {
         super(effect);
     }
 

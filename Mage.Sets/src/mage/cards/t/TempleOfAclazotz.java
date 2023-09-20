@@ -58,7 +58,7 @@ class TempleOfAclazotzEffect extends OneShotEffect {
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public TempleOfAclazotzEffect(final TempleOfAclazotzEffect effect) {
+    private TempleOfAclazotzEffect(final TempleOfAclazotzEffect effect) {
         super(effect);
     }
 

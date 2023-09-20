@@ -98,7 +98,7 @@ class GixsCommandCounterEffect extends OneShotEffect {
             return false;
         }
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {

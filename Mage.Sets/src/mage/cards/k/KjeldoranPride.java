@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -48,7 +47,7 @@ public final class KjeldoranPride extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2)));
 
         // 2U: Attach Kjeldoran Pride to target creature other than enchanted creature.
-        Ability ability = new SimpleActivatedAbility(new AttachEffect(Outcome.Benefit), new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(new AttachEffect(Outcome.Benefit, "attach {this} to target " + filter.getMessage()), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

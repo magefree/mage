@@ -66,7 +66,7 @@ class BlindingBeamEffect extends OneShotEffect {
         staticText = "creatures don't untap during target player's next untap step";
     }
 
-    public BlindingBeamEffect(final BlindingBeamEffect effect) {
+    private BlindingBeamEffect(final BlindingBeamEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
         this.targetPlayerId = targetPlayerId;
     }
 
-    public BlindingBeamEffect2(final BlindingBeamEffect2 effect) {
+    private BlindingBeamEffect2(final BlindingBeamEffect2 effect) {
         super(effect);
         this.targetPlayerId = effect.targetPlayerId;
     }

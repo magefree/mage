@@ -57,7 +57,7 @@ class WindingConstrictorPlayerEffect extends ReplacementEffectImpl {
         staticText = "If you would get one or more counters, you get that many plus one of each of those kinds of counters instead";
     }
 
-    WindingConstrictorPlayerEffect(final WindingConstrictorPlayerEffect effect) {
+    private WindingConstrictorPlayerEffect(final WindingConstrictorPlayerEffect effect) {
         super(effect);
     }
 

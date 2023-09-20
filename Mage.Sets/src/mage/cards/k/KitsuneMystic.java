@@ -80,7 +80,7 @@ class AutumnTailKitsuneSage extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
+    private AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
         super(token);
     }
 
@@ -96,7 +96,7 @@ class AutumnTailEffect extends OneShotEffect {
         this.staticText = "Attach target Aura attached to a creature to another creature";
     }
 
-    public AutumnTailEffect(final AutumnTailEffect effect) {
+    private AutumnTailEffect(final AutumnTailEffect effect) {
         super(effect);
     }
 

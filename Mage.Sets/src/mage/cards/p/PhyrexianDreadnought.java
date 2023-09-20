@@ -65,7 +65,7 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
         this.text = "sacrifice any number of creatures with total power 12 or greater";
     }
 
-    public PhyrexianDreadnoughtSacrificeCost(final PhyrexianDreadnoughtSacrificeCost cost) {
+    private PhyrexianDreadnoughtSacrificeCost(final PhyrexianDreadnoughtSacrificeCost cost) {
         super(cost);
     }
 

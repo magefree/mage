@@ -52,7 +52,7 @@ class DecreeOfPainEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way";
     }
 
-    public DecreeOfPainEffect(final DecreeOfPainEffect effect) {
+    private DecreeOfPainEffect(final DecreeOfPainEffect effect) {
         super(effect);
     }
 

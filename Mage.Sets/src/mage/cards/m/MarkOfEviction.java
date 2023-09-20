@@ -62,7 +62,7 @@ class MarkOfEvictionEffect extends OneShotEffect {
         this.staticText = "return enchanted creature and all Auras attached to that creature to their owners' hands";
     }
 
-    public MarkOfEvictionEffect(final MarkOfEvictionEffect effect) {
+    private MarkOfEvictionEffect(final MarkOfEvictionEffect effect) {
         super(effect);
     }
 

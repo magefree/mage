@@ -29,7 +29,7 @@ public final class SerumRaker extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DiscardEachPlayerEffect()));
     }
 
-    public SerumRaker (final SerumRaker card) {
+    private SerumRaker(final SerumRaker card) {
         super(card);
     }
 

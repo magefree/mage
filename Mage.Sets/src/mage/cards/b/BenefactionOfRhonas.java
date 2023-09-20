@@ -46,10 +46,10 @@ class BenefactionOfRhonasEffect extends OneShotEffect {
 
     public BenefactionOfRhonasEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Reveal the top five cards of your library. You may put a creature card and/or enchantment card from among them into your hand. Put the rest into your graveyard";
+        this.staticText = "Reveal the top five cards of your library. You may put a creature card and/or an enchantment card from among them into your hand. Put the rest into your graveyard";
     }
 
-    public BenefactionOfRhonasEffect(final BenefactionOfRhonasEffect effect) {
+    private BenefactionOfRhonasEffect(final BenefactionOfRhonasEffect effect) {
         super(effect);
     }
 

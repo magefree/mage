@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class LordSkitterSewerKing extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Rat");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.RAT, "another Rat");
     private static final FilterCard filterCard = new FilterCard("card from an opponent's graveyard");
 
     static {

@@ -46,7 +46,7 @@ class DeathPitOfferingEffect extends OneShotEffect {
         this.staticText = "sacrifice all creatures you control";
     }
 
-    public DeathPitOfferingEffect(final DeathPitOfferingEffect effect) {
+    private DeathPitOfferingEffect(final DeathPitOfferingEffect effect) {
         super(effect);
     }
 

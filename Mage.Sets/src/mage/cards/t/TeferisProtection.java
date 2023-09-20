@@ -78,7 +78,7 @@ class TeferisProtectionEffect extends OneShotEffect {
         staticText = " and you gain protection from everything";
     }
 
-    public TeferisProtectionEffect(final TeferisProtectionEffect effect) {
+    private TeferisProtectionEffect(final TeferisProtectionEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class TeferisProtectionPhaseOutEffect extends OneShotEffect {
         this.staticText = "All permanents you control phase out. <i>(While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.)</i><br>";
     }
 
-    public TeferisProtectionPhaseOutEffect(final TeferisProtectionPhaseOutEffect effect) {
+    private TeferisProtectionPhaseOutEffect(final TeferisProtectionPhaseOutEffect effect) {
         super(effect);
     }
 

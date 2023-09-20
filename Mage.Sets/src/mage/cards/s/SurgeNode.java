@@ -34,7 +34,7 @@ public final class SurgeNode extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SurgeNode(final SurgeNode card) {
+    private SurgeNode(final SurgeNode card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ class BurnoutCounterTargetEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public BurnoutCounterTargetEffect(final BurnoutCounterTargetEffect effect) {
+    private BurnoutCounterTargetEffect(final BurnoutCounterTargetEffect effect) {
         super(effect);
     }
 

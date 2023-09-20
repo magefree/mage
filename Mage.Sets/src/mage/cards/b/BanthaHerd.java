@@ -53,7 +53,7 @@ class BathaHerdEffect extends OneShotEffect {
         this.staticText = "create X 1/1 white Tusken Raider tokens";
     }
 
-    public BathaHerdEffect(final BathaHerdEffect effect) {
+    private BathaHerdEffect(final BathaHerdEffect effect) {
         super(effect);
     }
 

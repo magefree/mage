@@ -68,7 +68,7 @@ class BishopOfBindingExileEffect extends OneShotEffect {
         this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield";
     }
 
-    public BishopOfBindingExileEffect(final BishopOfBindingExileEffect effect) {
+    private BishopOfBindingExileEffect(final BishopOfBindingExileEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ public final class ShrineOfBoundlessGrowth extends CardImpl {
 
     }
 
-    public ShrineOfBoundlessGrowth (final ShrineOfBoundlessGrowth card) {
+    private ShrineOfBoundlessGrowth(final ShrineOfBoundlessGrowth card) {
         super(card);
     }
 

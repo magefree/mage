@@ -24,7 +24,7 @@ public final class DregReaver extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public DregReaver (final DregReaver card) {
+    private DregReaver(final DregReaver card) {
         super(card);
     }
 

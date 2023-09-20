@@ -69,7 +69,7 @@ class TurntimberSowerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new PlantToken()), false);
     }
 
-    public TurntimberSowerTriggeredAbility(final TurntimberSowerTriggeredAbility ability) {
+    private TurntimberSowerTriggeredAbility(final TurntimberSowerTriggeredAbility ability) {
         super(ability);
     }
 

@@ -23,7 +23,7 @@ public final class StoneRain extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public StoneRain (final StoneRain card) {
+    private StoneRain(final StoneRain card) {
         super(card);
     }
 

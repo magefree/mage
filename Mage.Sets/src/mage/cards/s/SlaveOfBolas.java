@@ -55,7 +55,7 @@ class SlaveOfBolasEffect extends OneShotEffect {
         staticText = "Sacrifice it at the beginning of the next end step";
     }
 
-    public SlaveOfBolasEffect(final SlaveOfBolasEffect effect) {
+    private SlaveOfBolasEffect(final SlaveOfBolasEffect effect) {
         super(effect);
     }
 

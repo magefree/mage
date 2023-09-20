@@ -58,7 +58,7 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
         super(new RashmiEternitiesCrafterEffect(), false);
     }
 
-    RashmiEternitiesCrafterTriggeredAbility(RashmiEternitiesCrafterTriggeredAbility ability) {
+    private RashmiEternitiesCrafterTriggeredAbility(final RashmiEternitiesCrafterTriggeredAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
                 + "revealed card, put it into your hand";
     }
 
-    RashmiEternitiesCrafterEffect(final RashmiEternitiesCrafterEffect effect) {
+    private RashmiEternitiesCrafterEffect(final RashmiEternitiesCrafterEffect effect) {
         super(effect);
     }
 

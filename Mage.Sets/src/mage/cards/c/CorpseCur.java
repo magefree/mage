@@ -39,7 +39,7 @@ public final class CorpseCur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CorpseCur(final CorpseCur card) {
+    private CorpseCur(final CorpseCur card) {
         super(card);
     }
 

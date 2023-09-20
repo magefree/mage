@@ -59,7 +59,7 @@ class PuresightMerrowEffect extends OneShotEffect {
         staticText = "Look at the top card of your library. You may exile that card";
     }
 
-    public PuresightMerrowEffect(final PuresightMerrowEffect effect) {
+    private PuresightMerrowEffect(final PuresightMerrowEffect effect) {
         super(effect);
     }
 

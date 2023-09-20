@@ -63,7 +63,7 @@ class ChandrasDefeatEffect extends OneShotEffect {
         this.staticText = "{this} deals 5 damage to target red creature or red planeswalker. If it was a Chandra planeswalker, you may discard a card. If you do, draw a card.";
     }
 
-    public ChandrasDefeatEffect(final ChandrasDefeatEffect effect) {
+    private ChandrasDefeatEffect(final ChandrasDefeatEffect effect) {
         super(effect);
     }
 

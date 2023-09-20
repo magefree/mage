@@ -19,7 +19,7 @@ public final class TreeOfTales extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public TreeOfTales (final TreeOfTales card) {
+    private TreeOfTales(final TreeOfTales card) {
         super(card);
     }
 

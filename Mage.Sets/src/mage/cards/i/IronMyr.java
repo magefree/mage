@@ -24,7 +24,7 @@ public final class IronMyr extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public IronMyr (final IronMyr card) {
+    private IronMyr(final IronMyr card) {
         super(card);
     }
 

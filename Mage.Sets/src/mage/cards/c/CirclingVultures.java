@@ -57,7 +57,7 @@ class CirclingVulturesSpecialAction extends SpecialAction {
         this.addEffect(new CirclingVulturesDiscardEffect());
     }
 
-    public CirclingVulturesSpecialAction(final CirclingVulturesSpecialAction ability) {
+    private CirclingVulturesSpecialAction(final CirclingVulturesSpecialAction ability) {
         super(ability);
     }
 
@@ -78,7 +78,7 @@ class CirclingVulturesDiscardEffect extends OneShotEffect {
         this.staticText = "discard {this}";
     }
 
-    public CirclingVulturesDiscardEffect(final CirclingVulturesDiscardEffect effect) {
+    private CirclingVulturesDiscardEffect(final CirclingVulturesDiscardEffect effect) {
         super(effect);
     }
 

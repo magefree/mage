@@ -25,7 +25,7 @@ public class UntapTargetCost extends CostImpl {
         this.text = makeText(target);
 
         // It will never target as part of a cost
-        this.target.setNotTarget(true);
+        this.target.withNotTarget(true);
     }
 
     protected UntapTargetCost(final UntapTargetCost cost) {

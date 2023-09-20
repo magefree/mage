@@ -60,7 +60,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature enters the battlefield under enchanted player's control, ");
     }
 
-    public TrespassersCurseTriggeredAbility(final TrespassersCurseTriggeredAbility ability) {
+    private TrespassersCurseTriggeredAbility(final TrespassersCurseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -97,7 +97,7 @@ class TrespassersCurseEffect extends OneShotEffect {
         this.staticText = "that player loses 1 life and you gain 1 life.";
     }
 
-    public TrespassersCurseEffect(final TrespassersCurseEffect effect) {
+    private TrespassersCurseEffect(final TrespassersCurseEffect effect) {
         super(effect);
     }
 

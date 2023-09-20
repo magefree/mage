@@ -58,7 +58,7 @@ class StreetSavvyEffect extends AsThoughEffectImpl {
         staticText = "";
     }
 
-    public StreetSavvyEffect(final StreetSavvyEffect effect) {
+    private StreetSavvyEffect(final StreetSavvyEffect effect) {
         super(effect);
     }
 

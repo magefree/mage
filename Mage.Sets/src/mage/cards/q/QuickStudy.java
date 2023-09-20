@@ -20,7 +20,7 @@ public final class QuickStudy extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public QuickStudy(final QuickStudy card) {
+    private QuickStudy(final QuickStudy card) {
         super(card);
     }
 

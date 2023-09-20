@@ -51,7 +51,7 @@ class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you sacrifice a Clue, ");
     }
 
-    public DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {
+    private DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {
         super(ability);
     }
 

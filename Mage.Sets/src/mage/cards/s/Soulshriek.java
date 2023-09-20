@@ -57,7 +57,7 @@ class SoulshriekEffect extends OneShotEffect {
         this.staticText = "Sacrifice that creature at the beginning of the next end step";
     }
 
-    public SoulshriekEffect(final SoulshriekEffect effect) {
+    private SoulshriekEffect(final SoulshriekEffect effect) {
         super(effect);
     }
 

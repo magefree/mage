@@ -50,7 +50,7 @@ class CounterbalanceEffect extends OneShotEffect {
         this.staticText = "you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card";
     }
 
-    public CounterbalanceEffect(final CounterbalanceEffect effect) {
+    private CounterbalanceEffect(final CounterbalanceEffect effect) {
         super(effect);
     }
 

@@ -70,7 +70,7 @@ class TheloniteDruidLandToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(3);
     }
-    public TheloniteDruidLandToken(final TheloniteDruidLandToken token) {
+    private TheloniteDruidLandToken(final TheloniteDruidLandToken token) {
         super(token);
     }
 

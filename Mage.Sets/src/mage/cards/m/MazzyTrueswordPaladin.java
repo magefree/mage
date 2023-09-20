@@ -78,7 +78,7 @@ class MazzyAttackTriggeredAbility extends AttacksAllTriggeredAbility {
         this.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    MazzyAttackTriggeredAbility(final MazzyAttackTriggeredAbility effect) {
+    private MazzyAttackTriggeredAbility(final MazzyAttackTriggeredAbility effect) {
         super(effect);
     }
 

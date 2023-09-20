@@ -56,7 +56,7 @@ class AggressiveMiningEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "You can't play lands";
     }
     
-    public AggressiveMiningEffect(final AggressiveMiningEffect effect) {
+    private AggressiveMiningEffect(final AggressiveMiningEffect effect) {
         super(effect);
     }
 

@@ -79,7 +79,7 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
         this.ruleText = rule;
     }
 
-    public GroundlingPouncerAbility(GroundlingPouncerAbility ability) {
+    private GroundlingPouncerAbility(final GroundlingPouncerAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
     }

@@ -68,7 +68,7 @@ public enum ScryfallImageSource implements CardImageSource {
 
         // tokens support only direct links
         if (isToken) {
-            baseUrl = ScryfallImageSupportTokens.findTokenLink(card.getSet(), card.getName(), card.getType());
+            baseUrl = ScryfallImageSupportTokens.findTokenLink(card.getSet(), card.getName(), card.getImageNumber());
             alternativeUrl = null;
         }
 

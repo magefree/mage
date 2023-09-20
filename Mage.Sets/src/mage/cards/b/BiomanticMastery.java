@@ -45,7 +45,7 @@ class BiomanticMasteryEffect extends OneShotEffect {
         this.staticText = "Draw a card for each creature target player controls, then draw a card for each creature another target player controls";
     }
 
-    public BiomanticMasteryEffect(final BiomanticMasteryEffect effect) {
+    private BiomanticMasteryEffect(final BiomanticMasteryEffect effect) {
         super(effect);
     }
 

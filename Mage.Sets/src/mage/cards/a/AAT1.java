@@ -63,7 +63,7 @@ public final class AAT1 extends CardImpl {
             setTriggerPhrase("Whenever a repair counter is removed from a creature card in your graveyard ");
         }
 
-        public AAT1TriggeredAbility(AAT1TriggeredAbility ability) {
+        private AAT1TriggeredAbility(final AAT1TriggeredAbility ability) {
             super(ability);
         }
 

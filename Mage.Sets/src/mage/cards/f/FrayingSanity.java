@@ -59,7 +59,7 @@ class FrayingSanityTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new FrayingSanityEffect());
     }
 
-    public FrayingSanityTriggeredAbility(final FrayingSanityTriggeredAbility ability) {
+    private FrayingSanityTriggeredAbility(final FrayingSanityTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,7 +93,7 @@ class FrayingSanityEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public FrayingSanityEffect(final FrayingSanityEffect effect) {
+    private FrayingSanityEffect(final FrayingSanityEffect effect) {
         super(effect);
     }
 

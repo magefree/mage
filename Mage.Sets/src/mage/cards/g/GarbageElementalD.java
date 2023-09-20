@@ -58,7 +58,7 @@ class GarbageElementalDEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. {this} deals damage equal to the result to target opponent";
     }
 
-    GarbageElementalDEffect(final GarbageElementalDEffect effect) {
+    private GarbageElementalDEffect(final GarbageElementalDEffect effect) {
         super(effect);
     }
 

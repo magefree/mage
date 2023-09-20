@@ -50,7 +50,7 @@ public final class NaturalBalance extends CardImpl {
             this.staticText = "Each player who controls six or more lands chooses five lands they control and sacrifices the rest. Each player who controls four or fewer lands may search their library for up to X basic land cards and put them onto the battlefield, where X is five minus the number of lands they control. Then each player who searched their library this way shuffles.";
         }
 
-        public NaturalBalanceEffect(final NaturalBalanceEffect effect) {
+        private NaturalBalanceEffect(final NaturalBalanceEffect effect) {
             super(effect);
         }
 

@@ -50,7 +50,7 @@ class CentaurMediatorEffect extends OneShotEffect {
         staticText = "each player gains 4 life.";
     }
 
-    public CentaurMediatorEffect(final CentaurMediatorEffect effect) {
+    private CentaurMediatorEffect(final CentaurMediatorEffect effect) {
         super(effect);
     }
 

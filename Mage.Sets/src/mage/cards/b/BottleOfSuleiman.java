@@ -47,7 +47,7 @@ class BottleOfSuleimanEffect extends OneShotEffect {
         staticText = "Flip a coin. If you lose the flip, {this} deals 5 damage to you. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying.";
     }
 
-    public BottleOfSuleimanEffect(final BottleOfSuleimanEffect effect) {
+    private BottleOfSuleimanEffect(final BottleOfSuleimanEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class OrzhovAdvokistEffect extends OneShotEffect {
                 + "If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn";
     }
 
-    public OrzhovAdvokistEffect(final OrzhovAdvokistEffect effect) {
+    private OrzhovAdvokistEffect(final OrzhovAdvokistEffect effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class StainTheMindEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
         super(true, "target player's", "any number of cards with that name");
     }
 
-    public StainTheMindEffect(final StainTheMindEffect effect) {
+    private StainTheMindEffect(final StainTheMindEffect effect) {
         super(effect);
     }
 

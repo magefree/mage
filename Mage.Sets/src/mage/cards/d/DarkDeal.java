@@ -44,7 +44,7 @@ class DarkDealEffect extends OneShotEffect {
         this.staticText = "Each player discards all the cards in their hand, then draws that many cards minus one";
     }
 
-    DarkDealEffect(final DarkDealEffect effect) {
+    private DarkDealEffect(final DarkDealEffect effect) {
         super(effect);
     }
 

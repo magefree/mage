@@ -68,7 +68,7 @@ class DesolationEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!target.canChoose(player.getId(), source, game)) {
                 continue;
             }

@@ -51,7 +51,7 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
         this.staticText = "Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or planeswalkers you control that combat";
     }
 
-    public IllusionistsGambitRemoveFromCombatEffect(final IllusionistsGambitRemoveFromCombatEffect effect) {
+    private IllusionistsGambitRemoveFromCombatEffect(final IllusionistsGambitRemoveFromCombatEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
         this.staticText = "Each of those creatures attacks that combat if able";
     }
 
-    public IllusionistsGambitRequirementEffect(final IllusionistsGambitRequirementEffect effect) {
+    private IllusionistsGambitRequirementEffect(final IllusionistsGambitRequirementEffect effect) {
         super(effect);
         this.attackers = effect.attackers;
         this.phase = effect.phase;
@@ -145,7 +145,7 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
         staticText = "They can't attack you or planeswalkers you control that combat";
     }
 
-    public IllusionistsGambitRestrictionEffect(final IllusionistsGambitRestrictionEffect effect) {
+    private IllusionistsGambitRestrictionEffect(final IllusionistsGambitRestrictionEffect effect) {
         super(effect);
         this.attackers = effect.attackers;
         this.phase = effect.phase;

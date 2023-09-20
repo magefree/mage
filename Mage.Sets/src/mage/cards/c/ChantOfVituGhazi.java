@@ -49,7 +49,7 @@ class ChantOfVituGhaziPreventEffect extends PreventAllDamageByAllPermanentsEffec
         staticText = "Prevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way";
     }
 
-    public ChantOfVituGhaziPreventEffect(final ChantOfVituGhaziPreventEffect effect) {
+    private ChantOfVituGhaziPreventEffect(final ChantOfVituGhaziPreventEffect effect) {
         super(effect);
     }
 

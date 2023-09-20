@@ -74,7 +74,7 @@ class GideonOfTheTrialsToken extends TokenImpl {
         toughness = new MageInt(4);
         this.addAbility(IndestructibleAbility.getInstance());
     }
-    public GideonOfTheTrialsToken(final GideonOfTheTrialsToken token) {
+    private GideonOfTheTrialsToken(final GideonOfTheTrialsToken token) {
         super(token);
     }
 

@@ -49,7 +49,7 @@ class EternityVesselEffect extends OneShotEffect {
         staticText = "with X charge counters on it, where X is your life total";
     }
 
-    public EternityVesselEffect(final EternityVesselEffect effect) {
+    private EternityVesselEffect(final EternityVesselEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class EternityVesselEffect2 extends OneShotEffect {
         staticText = "you may have your life total become the number of charge counters on {this}";
     }
 
-    public EternityVesselEffect2(final EternityVesselEffect2 effect) {
+    private EternityVesselEffect2(final EternityVesselEffect2 effect) {
         super(effect);
     }
 

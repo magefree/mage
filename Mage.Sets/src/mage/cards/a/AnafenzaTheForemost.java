@@ -72,7 +72,7 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
         staticText = "If a nontoken creature an opponent owns would die or a creature card not on the battlefield would be put into an opponent's graveyard, exile that card instead";
     }
 
-    public AnafenzaTheForemostEffect(final AnafenzaTheForemostEffect effect) {
+    private AnafenzaTheForemostEffect(final AnafenzaTheForemostEffect effect) {
         super(effect);
     }
 

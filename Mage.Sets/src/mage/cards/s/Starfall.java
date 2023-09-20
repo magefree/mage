@@ -45,7 +45,7 @@ class StarfallEffect extends OneShotEffect {
         staticText = "{this} deals 3 damage to target creature. If that creature is an enchantment, {this} deals 3 damage to that creature's controller";
     }
 
-    public StarfallEffect(final StarfallEffect effect) {
+    private StarfallEffect(final StarfallEffect effect) {
         super(effect);
     }
 

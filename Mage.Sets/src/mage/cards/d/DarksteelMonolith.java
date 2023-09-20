@@ -122,7 +122,7 @@ class DarksteelMonolithAddAltCostEffect extends ContinuousEffectImpl {
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.";
     }
 
-    public DarksteelMonolithAddAltCostEffect(final DarksteelMonolithAddAltCostEffect effect) {
+    private DarksteelMonolithAddAltCostEffect(final DarksteelMonolithAddAltCostEffect effect) {
         super(effect);
     }
 

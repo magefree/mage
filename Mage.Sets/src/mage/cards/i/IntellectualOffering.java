@@ -49,7 +49,7 @@ class IntellectualOfferingDrawEffect extends OneShotEffect {
         this.staticText = "Choose an opponent. You and that player each draw three cards";
     }
     
-    IntellectualOfferingDrawEffect(final IntellectualOfferingDrawEffect effect) {
+    private IntellectualOfferingDrawEffect(final IntellectualOfferingDrawEffect effect) {
         super(effect);
     }
     
@@ -82,7 +82,7 @@ class IntellectualOfferingUntapEffect extends OneShotEffect {
         this.staticText = "<br><br>Choose an opponent. Untap all nonland permanents you control and all nonland permanents that player controls";
     }
     
-    IntellectualOfferingUntapEffect(final IntellectualOfferingUntapEffect effect) {
+    private IntellectualOfferingUntapEffect(final IntellectualOfferingUntapEffect effect) {
         super(effect);
     }
     

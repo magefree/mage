@@ -57,7 +57,7 @@ class DiscipleOfGriselbrandEffect extends OneShotEffect {
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public DiscipleOfGriselbrandEffect(final DiscipleOfGriselbrandEffect effect) {
+    private DiscipleOfGriselbrandEffect(final DiscipleOfGriselbrandEffect effect) {
         super(effect);
     }
 

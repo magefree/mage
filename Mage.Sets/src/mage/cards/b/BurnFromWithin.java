@@ -53,7 +53,7 @@ class BurnFromWithinEffect extends OneShotEffect {
                 "If that creature would die this turn, exile it instead";
     }
 
-    public BurnFromWithinEffect(final BurnFromWithinEffect effect) {
+    private BurnFromWithinEffect(final BurnFromWithinEffect effect) {
         super(effect);
     }
 

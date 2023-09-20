@@ -74,7 +74,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new NimDeathmantleEffect(), false);
     }
 
-    NimDeathmantleTriggeredAbility(NimDeathmantleTriggeredAbility ability) {
+    private NimDeathmantleTriggeredAbility(final NimDeathmantleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -119,7 +119,7 @@ class NimDeathmantleEffect extends OneShotEffect {
 
     }
 
-    public NimDeathmantleEffect(NimDeathmantleEffect effect) {
+    private NimDeathmantleEffect(final NimDeathmantleEffect effect) {
         super(effect);
     }
 

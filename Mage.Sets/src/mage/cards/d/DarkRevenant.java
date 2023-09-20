@@ -54,7 +54,7 @@ class DarkRevenantEffect extends OneShotEffect {
         staticText = "put it on top of its owner's library";
     }
 
-    public DarkRevenantEffect(final DarkRevenantEffect effect) {
+    private DarkRevenantEffect(final DarkRevenantEffect effect) {
         super(effect);
     }
 

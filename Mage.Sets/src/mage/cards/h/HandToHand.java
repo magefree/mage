@@ -44,7 +44,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "During combat, players can't cast instant spells or activate abilities that aren't mana abilities";
     }
 
-    public HandToHandEffect(final HandToHandEffect effect) {
+    private HandToHandEffect(final HandToHandEffect effect) {
         super(effect);
     }
 

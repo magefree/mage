@@ -44,7 +44,7 @@ public class HighestManaValueCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public HighestManaValueCount copy() {
         return new HighestManaValueCount(this);
     }
 

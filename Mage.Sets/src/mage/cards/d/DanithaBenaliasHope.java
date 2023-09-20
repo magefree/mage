@@ -95,7 +95,7 @@ class DanithaBenaliasHopeEffect extends OneShotEffect {
         } else {
             target = new TargetCardInYourGraveyard(filter);
         }
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(controller.getId(), source, game)) {
             controller.chooseTarget(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());

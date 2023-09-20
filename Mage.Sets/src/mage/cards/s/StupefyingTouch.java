@@ -57,7 +57,7 @@ class CantActivateAbilitiesAttachedEffect extends RestrictionEffect {
         staticText = "Enchanted creature's activated abilities can't be activated";
     }
 
-    public CantActivateAbilitiesAttachedEffect(final CantActivateAbilitiesAttachedEffect effect) {
+    private CantActivateAbilitiesAttachedEffect(final CantActivateAbilitiesAttachedEffect effect) {
         super(effect);
     }
 

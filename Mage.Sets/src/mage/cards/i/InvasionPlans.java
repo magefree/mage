@@ -43,10 +43,10 @@ class InvasionPlansEffect extends ContinuousRuleModifyingEffectImpl {
 
     public InvasionPlansEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
-        staticText = "The attacking player chooses how each creature blocks each turn";
+        staticText = "The attacking player chooses how each creature blocks each combat";
     }
 
-    public InvasionPlansEffect(final InvasionPlansEffect effect) {
+    private InvasionPlansEffect(final InvasionPlansEffect effect) {
         super(effect);
     }
 

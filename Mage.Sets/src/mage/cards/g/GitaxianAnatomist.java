@@ -52,7 +52,7 @@ class GitaxianAnatomistCost extends CostImpl {
         this.text = "tap it";
     }
 
-    public GitaxianAnatomistCost(GitaxianAnatomistCost cost) {
+    private GitaxianAnatomistCost(final GitaxianAnatomistCost cost) {
         super(cost);
     }
 

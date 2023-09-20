@@ -2,7 +2,6 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.TargetOfOpponentsSpellOrAbilityTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
@@ -111,7 +110,7 @@ class ParnesseTheSubtleBrushCopySpellTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public ParnesseTheSubtleBrushCopySpellTriggeredAbility copy() {
         return new ParnesseTheSubtleBrushCopySpellTriggeredAbility(this);
     }
 }

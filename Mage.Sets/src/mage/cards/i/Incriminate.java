@@ -73,7 +73,7 @@ class IncriminateEffect extends OneShotEffect {
         }
         filter.add(mage.filter.predicate.Predicates.or(permanentIdPredicates));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.chooseTarget(Outcome.Sacrifice, target, source, game);
         Permanent sacrificeCreature = game.getPermanent(target.getFirstTarget());
         return sacrificeCreature != null

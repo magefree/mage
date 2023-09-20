@@ -76,7 +76,7 @@ class ArachnusSpinnerEffect extends OneShotEffect {
                 + "If you search your library this way, shuffle";
     }
 
-    public ArachnusSpinnerEffect(final ArachnusSpinnerEffect effect) {
+    private ArachnusSpinnerEffect(final ArachnusSpinnerEffect effect) {
         super(effect);
     }
 

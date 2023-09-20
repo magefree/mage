@@ -29,7 +29,7 @@ public final class WelkinTern extends CardImpl {
          this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public WelkinTern (final WelkinTern card) {
+    private WelkinTern(final WelkinTern card) {
         super(card);
     }
 

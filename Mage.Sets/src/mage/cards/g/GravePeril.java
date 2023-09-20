@@ -46,7 +46,7 @@ class GravePerilEffect extends OneShotEffect {
         this.staticText = "sacrifice Grave Peril. If you do, destroy that creature";
     }
 
-    GravePerilEffect(final GravePerilEffect effect) {
+    private GravePerilEffect(final GravePerilEffect effect) {
         super(effect);
     }
 

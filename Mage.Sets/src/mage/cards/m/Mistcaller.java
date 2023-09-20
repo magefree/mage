@@ -55,7 +55,7 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
         staticText = "until end of turn, if a nontoken creature would enter the battlefield and it wasn't cast, exile it instead";
     }
 
-    public ContainmentPriestReplacementEffect(final ContainmentPriestReplacementEffect effect) {
+    private ContainmentPriestReplacementEffect(final ContainmentPriestReplacementEffect effect) {
         super(effect);
     }
 

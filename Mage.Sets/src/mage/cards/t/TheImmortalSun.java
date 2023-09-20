@@ -61,7 +61,7 @@ class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl
         staticText = "Players can't activate planeswalkers' loyalty abilities";
     }
 
-    public TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {
+    private TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {
         super(effect);
     }
 

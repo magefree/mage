@@ -48,7 +48,7 @@ class RiskFactorEffect extends OneShotEffect {
                 + "If that player doesn't, you draw three cards.";
     }
 
-    public RiskFactorEffect(final RiskFactorEffect effect) {
+    private RiskFactorEffect(final RiskFactorEffect effect) {
         super(effect);
     }
 

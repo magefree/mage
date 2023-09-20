@@ -46,7 +46,7 @@ class EndHostilitiesEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures and all permanents attached to creatures.";
     }
 
-    public EndHostilitiesEffect(final EndHostilitiesEffect effect) {
+    private EndHostilitiesEffect(final EndHostilitiesEffect effect) {
         super(effect);
     }
 

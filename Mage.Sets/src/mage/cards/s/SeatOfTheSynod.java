@@ -19,7 +19,7 @@ public final class SeatOfTheSynod extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SeatOfTheSynod (final SeatOfTheSynod card) {
+    private SeatOfTheSynod(final SeatOfTheSynod card) {
         super(card);
     }
 

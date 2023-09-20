@@ -54,7 +54,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    OtherworldlyJourneyEffect(OtherworldlyJourneyEffect effect) {
+    private OtherworldlyJourneyEffect(final OtherworldlyJourneyEffect effect) {
         super(effect);
     }
 

@@ -69,7 +69,7 @@ class CorruptedZendikonOozeToken extends TokenImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
-    public CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
+    private CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
         super(token);
     }
 

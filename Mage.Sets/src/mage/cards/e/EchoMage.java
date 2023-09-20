@@ -81,7 +81,7 @@ class EchoMageEffect extends OneShotEffect {
         this.staticText = "Copy target instant or sorcery spell twice. You may choose new targets for the copies";
     }
 
-    public EchoMageEffect(final EchoMageEffect effect) {
+    private EchoMageEffect(final EchoMageEffect effect) {
         super(effect);
     }
 

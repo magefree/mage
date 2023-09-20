@@ -57,7 +57,7 @@ class AegisOfHonorEffect extends RedirectionEffect {
         		+ "damage to you this turn, that spell deals that damage to its controller instead";
     }
 
-    public AegisOfHonorEffect(final AegisOfHonorEffect card) {
+    private AegisOfHonorEffect(final AegisOfHonorEffect card) {
         super(card);
     }
 

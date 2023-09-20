@@ -22,7 +22,7 @@ public final class RazorfieldThresher extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    private RazorfieldThresher(final RazorfieldThresher card) {
         super(card);
     }
 
