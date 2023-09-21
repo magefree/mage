@@ -123,7 +123,6 @@
          );
 
          protectionTimer = new Timer(protectionTime, e -> {
-             protectionPickNo = pickNo;
              protectionTimer.stop();
          });
      }
@@ -340,6 +339,7 @@
 
              if(pickNo != protectionPickNo && !protectionTimer.isRunning()) {
                  // Restart the protection timer.
+                 protectionPickNo = pickNo;
                  protectionTimer.restart();
              }
          }
