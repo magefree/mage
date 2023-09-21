@@ -19,20 +19,20 @@ import mage.util.CardUtil;
 /**
  * @author North
  */
-public class SourceBecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
+public class BecomesTargetSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterStackObject filter;
     private final SetTargetPointer setTargetPointer;
 
-    public SourceBecomesTargetTriggeredAbility(Effect effect) {
+    public BecomesTargetSourceTriggeredAbility(Effect effect) {
         this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY_A);
     }
 
-    public SourceBecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
+    public BecomesTargetSourceTriggeredAbility(Effect effect, FilterStackObject filter) {
         this(effect, filter, SetTargetPointer.NONE, false);
     }
 
-    public SourceBecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer, boolean optional) {
+    public BecomesTargetSourceTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
@@ -43,15 +43,15 @@ public class SourceBecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase((textWhen ? "When" : "Whenever") + " {this} becomes the target of " + filter.getMessage() + ", ");
     }
 
-    protected SourceBecomesTargetTriggeredAbility(final SourceBecomesTargetTriggeredAbility ability) {
+    protected BecomesTargetSourceTriggeredAbility(final BecomesTargetSourceTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
-    public SourceBecomesTargetTriggeredAbility copy() {
-        return new SourceBecomesTargetTriggeredAbility(this);
+    public BecomesTargetSourceTriggeredAbility copy() {
+        return new BecomesTargetSourceTriggeredAbility(this);
     }
 
     @Override

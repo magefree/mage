@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -38,7 +38,7 @@ public final class RealitySmasher extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Whenever Reality Smasher becomes the target of a spell an opponent controls, counter that spell unless its controller discards a card.
-        this.addAbility(new SourceBecomesTargetTriggeredAbility(
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new CounterUnlessPaysEffect(new DiscardCardCost()).setText("counter that spell unless its controller discards a card"),
                 filter, SetTargetPointer.SPELL, false
         ));

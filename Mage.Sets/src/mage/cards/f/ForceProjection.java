@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -76,7 +76,7 @@ class ForceProjectionEffect extends OneShotEffect {
             effect.setAdditionalSubType(SubType.SPIRIT);
 
             // and gains "When this creature becomes the target of a spell, sacrifice it."
-            effect.addAdditionalAbilities(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect(), new FilterSpell()));
+            effect.addAdditionalAbilities(new BecomesTargetSourceTriggeredAbility(new SacrificeSourceEffect(), new FilterSpell()));
 
             return effect.apply(game, source);
         }

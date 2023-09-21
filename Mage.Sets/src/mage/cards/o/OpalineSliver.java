@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class OpalineSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers have "Whenever this permanent becomes the target of a spell an opponent controls, you may draw a card."
-        Ability gainedTriggeredAbility = new SourceBecomesTargetTriggeredAbility(
+        Ability gainedTriggeredAbility = new BecomesTargetSourceTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filterSpell, SetTargetPointer.NONE, true)
                 .setTriggerPhrase("Whenever this permanent becomes the target of a spell an opponent controls, ");
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
