@@ -300,9 +300,8 @@
          if (this.pickingCardsListener == null) {
              this.pickingCardsListener = event -> {
                  if (event.getEventType() == ClientEventType.DRAFT_PICK_CARD) {
-                     SimpleCardView source = (SimpleCardView) event.getSource();
-
                      // PICK card
+                     SimpleCardView source = (SimpleCardView) event.getSource();
                      DraftPickView view = SessionHandler.sendCardPick(draftId, source.getId(), cardsHidden);
                      if (view != null) {
                          loadCardsToPickedCardsArea(view.getPicks());
