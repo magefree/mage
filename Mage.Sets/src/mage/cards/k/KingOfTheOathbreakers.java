@@ -1,7 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetAnyTriggeredAbility;
 import mage.abilities.common.PhaseInTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PhaseOutTargetEffect;
@@ -43,7 +43,7 @@ public final class KingOfTheOathbreakers extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever King of the Oathbreakers or another Spirit you control becomes the target of a spell, it phases out.
-        this.addAbility(new BecomesTargetTriggeredAbility(
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(
             new PhaseOutTargetEffect("it"),
             filter, StaticFilters.FILTER_SPELL_A
         ));
