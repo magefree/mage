@@ -11,7 +11,7 @@ import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -103,11 +103,16 @@ class KjeldoranGuardEffect extends OneShotEffect {
         game.addEffect(buffEffect, source);
 
         // When that creature leaves the battlefield this turn, sacrifice Kjeldoran Guard.
-        game.addDelayedTriggeredAbility(
-                new KjeldoranGuardDelayedTriggeredAbility(
-                        new MageObjectReference(targetPermanent, game)
-                ), source
+        DelayedTriggeredAbility delayed = new KjeldoranGuardDelayedTriggeredAbility(
+                new MageObjectReference(targetPermanent, game)
         );
+
+        // Locking in the Kjeldoran Guard (and its zcc), to be sacrificed later.
+        Permanent guard = source.getSourcePermanentIfItStillExists(game);
+        if(guard != null) {
+            delayed.getEffects().setTargetPointer(new FixedTarget(guard, game));
+        }
+        game.addDelayedTriggeredAbility(delayed, source);
 
         return true;
     }
@@ -118,7 +123,7 @@ class KjeldoranGuardDelayedTriggeredAbility extends DelayedTriggeredAbility {
     private final MageObjectReference mor;
 
     KjeldoranGuardDelayedTriggeredAbility(MageObjectReference mor) {
-        super(new SacrificeSourceEffect(), Duration.EndOfTurn, true);
+        super(new SacrificeTargetEffect(), Duration.EndOfTurn, true);
         this.mor = mor;
     }
 
