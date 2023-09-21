@@ -1,20 +1,19 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.MageObjectReference;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -38,7 +37,8 @@ public final class FblthpTheLost extends CardImpl {
         this.addAbility(new FblthpTheLostTriggeredAbility());
 
         // When Fblthp becomes the target of a spell, shuffle Fblthp into its owner's library.
-        this.addAbility(new FblthpTheLostTargetedTriggeredAbility());
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect(),
+                StaticFilters.FILTER_SPELL_A));
     }
 
     private FblthpTheLost(final FblthpTheLost card) {
@@ -125,43 +125,6 @@ class FblthpTheLostWatcher extends Watcher {
     public void reset() {
         super.reset();
         spellsCastFromLibrary.clear();
-    }
-
-}
-
-class FblthpTheLostTargetedTriggeredAbility extends TriggeredAbilityImpl {
-
-    FblthpTheLostTargetedTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ShuffleIntoLibrarySourceEffect(), false);
-    }
-
-    private FblthpTheLostTargetedTriggeredAbility(final FblthpTheLostTargetedTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FblthpTheLostTargetedTriggeredAbility copy() {
-        return new FblthpTheLostTargetedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject eventSourceObject = game.getObject(event.getSourceId());
-        if (event.getTargetId().equals(this.getSourceId()) && eventSourceObject instanceof Spell) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes the target of a spell, shuffle {this} into its owner's library.";
     }
 
 }
