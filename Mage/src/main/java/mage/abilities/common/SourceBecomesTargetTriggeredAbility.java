@@ -2,6 +2,10 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
@@ -10,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author North
@@ -24,18 +29,18 @@ public class SourceBecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public SourceBecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        this(effect, filter, SetTargetPointer.NONE);
-    }
-
-    public SourceBecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer) {
-        this(effect, filter, setTargetPointer, false);
+        this(effect, filter, SetTargetPointer.NONE, false);
     }
 
     public SourceBecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("When {this} becomes the target of " + filter.getMessage() + ", ");
+        boolean textWhen = (effect instanceof SacrificeSourceEffect
+                || effect instanceof ReturnToHandSourceEffect
+                || effect instanceof ShuffleIntoLibrarySourceEffect
+                || effect instanceof ExileSourceEffect);
+        setTriggerPhrase((textWhen ? "When" : "Whenever") + " {this} becomes the target of " + filter.getMessage() + ", ");
     }
 
     protected SourceBecomesTargetTriggeredAbility(final SourceBecomesTargetTriggeredAbility ability) {
@@ -56,24 +61,27 @@ public class SourceBecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        if (!event.getTargetId().equals(getSourceId())
-                || !filter.match(sourceObject, getControllerId(), this, game)) {
+        if (!event.getTargetId().equals(getSourceId())) {
+            return false;
+        }
+        StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
+        if (targetingObject == null || !filter.match(targetingObject, getControllerId(), this, game)) {
+            return false;
+        }
+        if (!CardUtil.checkTargetMap(this.id, targetingObject, event, game)) {
             return false;
         }
         switch (setTargetPointer) {
             case PLAYER:
-                this.getEffects().stream()
-                        .forEach(effect -> effect.setTargetPointer(
-                                new FixedTarget(sourceObject.getControllerId(), game)
-                        ));
+                this.getAllEffects().setTargetPointer(new FixedTarget(targetingObject.getControllerId(), game));
                 break;
             case SPELL:
-                this.getEffects().stream()
-                        .forEach(effect -> effect.setTargetPointer(
-                                new FixedTarget(sourceObject.getId(), game)
-                        ));
+                this.getAllEffects().setTargetPointer(new FixedTarget(targetingObject.getId()));
                 break;
+            case NONE:
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported SetTargetPointer in BecomesTargetSourceTriggeredAbility");
         }
         return true;
     }

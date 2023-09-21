@@ -32,8 +32,7 @@ public final class WardenOfTheWoods extends CardImpl {
         this.addAbility(new SourceBecomesTargetTriggeredAbility(
                 new DrawCardSourceControllerEffect(2),
                 StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS,
-                SetTargetPointer.NONE, true
-        ).setTriggerPhrase("Whenever {this} becomes the target of a spell or ability an opponent controls, "));
+                SetTargetPointer.NONE, true));
     }
 
     private WardenOfTheWoods(final WardenOfTheWoods card) {
