@@ -250,6 +250,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             LOGGER.fatal(null, ex);
         }
 
+        // other settings
+        if (ClientCallback.SIMULATE_BAD_CONNECTION) {
+            LOGGER.info("Network: bad connection mode enabled");
+        }
+
         // DATA PREPARE
         RepositoryUtil.bootstrapLocalDb();
         // re-create database on empty (e.g. after new build cleaned db on startup)
