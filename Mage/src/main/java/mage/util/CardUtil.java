@@ -38,6 +38,7 @@ import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
@@ -1007,6 +1008,58 @@ public final class CardUtil {
                 .map(t -> t.possibleTargets(ability.getControllerId(), ability, game))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * For finding the spell or ability on the stack for "becomes the target" triggers.
+     * @param event the GameEvent.EventType.TARGETED from checkTrigger()
+     * @param game the Game from checkTrigger()
+     * @return the StackObject which targeted the source, or null if not found
+     */
+    public static StackObject getTargetingStackObject(GameEvent event, Game game) {
+        // In case of multiple simultaneous triggered abilities from the same source,
+        // need to get the actual one that targeted, see #8026, #8378
+        // Also avoids triggering on cancelled selections, see #8802
+        for (StackObject stackObject : game.getStack()) {
+            Ability stackAbility = stackObject.getStackAbility();
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+                continue;
+            }
+            for (Target target : stackAbility.getTargets()) {
+                if (target.getTargets().contains(event.getTargetId())) {
+                    return stackObject;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * For ensuring that spells/abilities that target the same object twice only trigger "becomes the target" abilities once
+     * @param triggerId this.id of the TriggeredAbility
+     * @param targetingObject from getTargetingStackObject
+     * @param event the GameEvent.EventType.TARGETED from checkTrigger()
+     * @param game the Game from checkTrigger()
+     * @return false if already triggered, true if this is the first/only trigger
+     */
+    public static boolean checkTargetMap(UUID triggerId, StackObject targetingObject, GameEvent event, Game game) {
+        // If a spell or ability an opponent controls targets a single permanent you control more than once,
+        // Battle Mammoth's triggered ability will trigger only once.
+        // However, if a spell or ability an opponent controls targets multiple permanents you control,
+        // Battle Mammoth's triggered ability will trigger once for each of those permanents. (2021-02-05)
+        Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue("targetMap" + triggerId);
+        // targetMap: key - targetId; value - Set of stackObject Ids
+        if (targetMap == null) {
+            targetMap = new HashMap<>();
+        }
+        Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
+        if (!targetingObjects.add(targetingObject.getId())) {
+            return false; // The triggered ability already recorded that target of the stack object
+        }
+        // Otherwise, store this combination of triggered ability / target / stack object
+        targetMap.put(event.getTargetId(), targetingObjects);
+        game.getState().setValue("targetMap" + triggerId, targetMap);
+        return true;
     }
 
     /**
