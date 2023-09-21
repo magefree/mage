@@ -36,7 +36,6 @@ public class ConnectionTest {
         return new ConnectionBuilder();
     }
 
-    @Nested
     class TestsTemplate {
         final ConnectionBuilder testeeBuilder;
 
