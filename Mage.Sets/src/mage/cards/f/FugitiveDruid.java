@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.other.AuraSpellPredicate;
 
 /**
  *
@@ -20,7 +21,7 @@ public final class FugitiveDruid extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Aura spell");
 
     static {
-        filter.add(SubType.AURA.getPredicate());
+        filter.add(AuraSpellPredicate.instance);
     }
 
     public FugitiveDruid(UUID ownerId, CardSetInfo setInfo) {
@@ -31,7 +32,7 @@ public final class FugitiveDruid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Fugitive Druid becomes the target of an Aura spell, you draw a card.
-        this.addAbility(new BecomesTargetSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), filter));
     }
 
     private FugitiveDruid(final FugitiveDruid card) {
