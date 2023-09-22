@@ -61,6 +61,8 @@ public class HumanPlayer extends PlayerImpl {
 
     private static final boolean ALLOW_USERS_TO_PUT_NON_PLAYABLE_SPELLS_ON_STACK_WORKAROUND = false; // warning, see workaround's info on usage
 
+    // TODO: all user feedback actions executed and waited in diff threads and can't catch exeptions, e.g. on wrong code usage
+    //  must catch and log such errors
     private transient Boolean responseOpenedForAnswer = false; // can't get response until prepared target (e.g. until send all fire events to all players)
     private final transient PlayerResponse response = new PlayerResponse();
 
@@ -1330,6 +1332,9 @@ public class HumanPlayer extends PlayerImpl {
                     continue;
                 }
                 if (triggerAutoOrderNameLast.contains(rule)) {
+                    if (abilityOrderLast != null) {
+                        throw new IllegalArgumentException("Wrong code usage. Only one last ability allows by name");
+                    }
                     abilityOrderLast = ability;
                     continue;
                 }
@@ -1350,6 +1355,22 @@ public class HumanPlayer extends PlayerImpl {
             if (abilitiesWithNoOrderSet.size() == 1
                     || autoOrderUse) {
                 return abilitiesWithNoOrderSet.iterator().next();
+            }
+
+            // runtime check: lost triggers for GUI
+            List<Ability> processingAbilities = new ArrayList<>(abilitiesWithNoOrderSet);
+            if (abilityOrderLast != null) {
+                processingAbilities.add(abilityOrderLast);
+            }
+            if (abilities.size() != processingAbilities.size()) {
+                throw new IllegalStateException(String.format("Choose dialog lost some of the triggered abilities:\n"
+                        + "Must %d:\n%s\n"
+                        + "Has %d:\n%s",
+                        abilities.size(),
+                        abilities.stream().map(Ability::getRule).collect(Collectors.joining("\n")),
+                        processingAbilities.size(),
+                        processingAbilities.stream().map(Ability::getRule).collect(Collectors.joining("\n"))
+                ));
             }
 
             macroTriggeredSelectionFlag = true;
@@ -2662,6 +2683,13 @@ public class HumanPlayer extends PlayerImpl {
         }
     }
 
+    /**
+     * GUI related, remember choices for choose trigger dialog
+     *
+     * @param playerAction
+     * @param game
+     * @param data
+     */
     private void setTriggerAutoOrder(PlayerAction playerAction, Game game, Object data) {
         if (playerAction == TRIGGER_AUTO_ORDER_RESET_ALL) {
             triggerAutoOrderAbilityFirst.clear();
@@ -2670,7 +2698,9 @@ public class HumanPlayer extends PlayerImpl {
             triggerAutoOrderNameLast.clear();
             return;
         }
+
         if (data instanceof UUID) {
+            // remember by id
             UUID abilityId = (UUID) data;
             UUID originalId = null;
             for (TriggeredAbility ability : game.getState().getTriggered(getId())) {
@@ -2690,7 +2720,12 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
         } else if (data instanceof String) {
+            // remember by name
             String abilityName = (String) data;
+            if (abilityName.contains("{this}")) {
+                throw new IllegalArgumentException("Wrong code usage. Remembering trigger must contains full rules name without {this}.");
+            }
+
             switch (playerAction) {
                 case TRIGGER_AUTO_ORDER_NAME_FIRST:
                     triggerAutoOrderNameFirst.add(abilityName);

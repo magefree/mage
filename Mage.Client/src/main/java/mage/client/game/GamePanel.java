@@ -2810,6 +2810,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (!cardViewPopupMenu.getAbility().getRules().isEmpty()
                     && !cardViewPopupMenu.getAbility().getRules().get(0).isEmpty()) {
                 abilityRuleText = cardViewPopupMenu.getAbility().getRules().get(0);
+                abilityRuleText = abilityRuleText.replace("{this}", cardViewPopupMenu.getName());
             }
         }
         switch (e.getActionCommand()) {
