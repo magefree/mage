@@ -390,6 +390,7 @@ public final class GamePanel extends javax.swing.JPanel {
         stackObjects.setPreferredSize(newDimension);
         stackObjects.setMinimumSize(newDimension);
         stackObjects.setMaximumSize(newDimension);
+        stackObjects.changeGUISize(); // must call to cards fit
 
         newDimension = new Dimension(newStackWidth, (int) pnlShortCuts.getPreferredSize().getHeight());
         pnlShortCuts.setPreferredSize(newDimension);
