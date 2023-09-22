@@ -7,26 +7,26 @@ package mage.interfaces.callback;
  */
 public enum ClientCallbackType {
 
-    TABLE_CHANGE,
-    UPDATE(true, true),
-    MESSAGE(true, false),
-    DIALOG,
-    CLIENT_SIDE_EVENT(true, true);
+    UPDATE(true, true), // game update
+    TABLE_CHANGE, // all important game events + game update
+    MESSAGE(true, false), // show message/log without game update
+    DIALOG, // all dialogs + game update
+    CLIENT_SIDE_EVENT(true, true); // without game uodate
 
-    final boolean canProcessInAnyOrder;
-    final boolean mustIgnoreOnOutdated;
+    final boolean canComeInAnyOrder;
+    final boolean mustIgnoreOnOutdated; // if event come in any order and contain game update then it must be ignored on outdate
 
     ClientCallbackType() {
         this(false, false);
     }
 
-    ClientCallbackType(boolean canProcessInAnyOrder, boolean mustIgnoreOnOutdated) {
-        this.canProcessInAnyOrder = canProcessInAnyOrder;
+    ClientCallbackType(boolean canComeInAnyOrder, boolean mustIgnoreOnOutdated) {
+        this.canComeInAnyOrder = canComeInAnyOrder;
         this.mustIgnoreOnOutdated = mustIgnoreOnOutdated;
     }
 
-    public boolean canProcessInAnyOrder() {
-        return this.canProcessInAnyOrder;
+    public boolean canComeInAnyOrder() {
+        return this.canComeInAnyOrder;
     }
 
     public boolean mustIgnoreOnOutdated() {

@@ -49,7 +49,7 @@ public enum ClientCallbackMethod {
     // game
     START_GAME(ClientCallbackType.TABLE_CHANGE, "startGame"),
     GAME_INIT(ClientCallbackType.TABLE_CHANGE, "gameInit"),
-    GAME_INFORM(ClientCallbackType.MESSAGE, "gameInform"),
+    GAME_UPDATE_AND_INFORM(ClientCallbackType.UPDATE, "gameInform"), // update game and feedback panel with current status (e.g. on non our priority)
     GAME_INFORM_PERSONAL(ClientCallbackType.MESSAGE, "gameInformPersonal"),
     GAME_ERROR(ClientCallbackType.MESSAGE, "gameError"),
     GAME_UPDATE(ClientCallbackType.UPDATE, "gameUpdate"),

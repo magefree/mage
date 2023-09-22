@@ -81,7 +81,7 @@ public class CallbackClientImpl implements CallbackClient {
                     }
 
                     // keep track of synced messages only
-                    if (!callback.getMethod().getType().canProcessInAnyOrder()) {
+                    if (!callback.getMethod().getType().canComeInAnyOrder()) {
                         this.lastMessages.put(callback.getMethod().getType(), callback.getMessageId());
                     }
                 }
@@ -372,7 +372,7 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
 
-                    case GAME_INFORM: {
+                    case GAME_UPDATE_AND_INFORM: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
