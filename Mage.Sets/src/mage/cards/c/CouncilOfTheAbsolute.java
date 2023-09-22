@@ -65,11 +65,6 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CouncilOfTheAbsoluteReplacementEffect copy() {
         return new CouncilOfTheAbsoluteReplacementEffect(this);
     }

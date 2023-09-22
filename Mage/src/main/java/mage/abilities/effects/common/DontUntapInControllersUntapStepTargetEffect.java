@@ -39,11 +39,6 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
     }

@@ -83,11 +83,6 @@ class LureOfPreyRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public LureOfPreyRestrictionEffect copy() {
         return new LureOfPreyRestrictionEffect(this);
     }

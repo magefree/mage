@@ -70,11 +70,6 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {

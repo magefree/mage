@@ -152,11 +152,6 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities copy() {
         return new PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities(this);
     }

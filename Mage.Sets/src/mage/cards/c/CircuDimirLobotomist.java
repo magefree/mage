@@ -121,9 +121,13 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.CAST_SPELL
-                || !game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             return false;
         }
         MageObject object = game.getObject(event.getSourceId());

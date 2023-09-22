@@ -217,11 +217,6 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CityInABottleCantPlayEffect copy() {
         return new CityInABottleCantPlayEffect(this);
     }

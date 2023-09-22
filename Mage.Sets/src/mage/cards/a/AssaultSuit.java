@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -25,14 +24,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AssaultSuit extends CardImpl {
 
     public AssaultSuit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2, has haste, can't attack you or a planeswalker you control, and can't be sacrificed.
@@ -65,7 +65,7 @@ public final class AssaultSuit extends CardImpl {
     }
 }
 
- class AssaultSuitCantBeSacrificed extends ContinuousRuleModifyingEffectImpl {
+class AssaultSuitCantBeSacrificed extends ContinuousRuleModifyingEffectImpl {
 
     public AssaultSuitCantBeSacrificed() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, true, false);
@@ -82,24 +82,19 @@ public final class AssaultSuit extends CardImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         return "This creature can't be sacrificed.";
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment != null) {
-                return equipment.isAttachedTo(event.getTargetId());
-            }
-        }
-        return false;
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        return equipment != null && equipment.isAttachedTo(event.getTargetId());
     }
 }
 

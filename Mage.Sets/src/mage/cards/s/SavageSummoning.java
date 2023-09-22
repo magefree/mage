@@ -23,7 +23,6 @@ import mage.watchers.Watcher;
 import java.util.*;
 
 /**
- *
  * @author LevelX2
  */
 public final class SavageSummoning extends CardImpl {
@@ -157,7 +156,7 @@ class SavageSummoningWatcher extends Watcher {
         String creatureCardKey = card.getId().toString() + '_' + (card.getZoneChangeCounter(game));
         // add one because card is now gone to battlefield as creature
         String cardKey = cardId.toString() + '_' + zoneChangeCounter;
-        Set<String> savageSpells =  cardsCastWithSavageSummoning.get(creatureCardKey);
+        Set<String> savageSpells = cardsCastWithSavageSummoning.get(creatureCardKey);
         return savageSpells != null && savageSpells.contains(cardKey);
     }
 
@@ -203,11 +202,6 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
@@ -217,12 +211,15 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && watcher.isSpellCastWithThisSavageSummoning(spell.getId(), source.getSourceId(), zoneChangeCounter)) {
-                return true;
-            }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && watcher.isSpellCastWithThisSavageSummoning(spell.getId(), source.getSourceId(), zoneChangeCounter)) {
+            return true;
         }
         return false;
     }

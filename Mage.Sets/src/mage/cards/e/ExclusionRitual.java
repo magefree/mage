@@ -113,11 +113,6 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public ExclusionRitualReplacementEffect copy() {
         return new ExclusionRitualReplacementEffect(this);
     }

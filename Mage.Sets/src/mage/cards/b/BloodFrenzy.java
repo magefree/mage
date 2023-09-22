@@ -79,9 +79,4 @@ class BloodFrenzyCastRestriction extends ContinuousRuleModifyingEffectImpl {
         }
         return false;
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 }
