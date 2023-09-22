@@ -176,8 +176,7 @@ class AureliasFuryDamagedByWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        MageObject obj = game.getObject(event.getSourceId());
-        if (!(obj instanceof Spell) || !sourceId.equals(((Spell) obj).getSourceId())) {
+        if (!isOurSource(event, game)) {
             return;
         }
         switch (event.getType()) {
@@ -190,6 +189,11 @@ class AureliasFuryDamagedByWatcher extends Watcher {
             case DAMAGED_PLAYER:
                 damagedPlayers.add(event.getTargetId());
         }
+    }
+
+    private boolean isOurSource(GameEvent event, Game game) {
+        MageObject obj = game.getObject(event.getSourceId());
+        return obj instanceof Spell && sourceId.equals(((Spell) obj).getSourceId());
     }
 
     @Override
