@@ -19,9 +19,11 @@ import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 import java.util.Collection;
 import java.util.List;
@@ -88,11 +90,14 @@ class AgrusKosEternalSoldierTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getTargetId().equals(getSourceId())) {
             return false;
         }
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-        if (stackObject == null) {
+        StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
+        if (targetingObject == null || targetingObject instanceof Spell) {
             return false;
         }
-        Set<UUID> targets = stackObject
+        if (!CardUtil.checkTargetMap(this.id, targetingObject, event, game)) {
+            return false;
+        }
+        Set<UUID> targets = targetingObject
                 .getStackAbility()
                 .getTargets()
                 .stream()
@@ -102,7 +107,7 @@ class AgrusKosEternalSoldierTriggeredAbility extends TriggeredAbilityImpl {
         if (targets.isEmpty() || !targets.stream().allMatch(getSourceId()::equals)) {
             return false;
         }
-        this.getEffects().setValue("triggeringAbility", stackObject);
+        this.getEffects().setValue("triggeringAbility", targetingObject);
         return true;
     }
 }
