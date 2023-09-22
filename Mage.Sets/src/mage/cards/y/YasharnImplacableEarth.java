@@ -143,13 +143,14 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY
+                || event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (event.getType() != GameEvent.EventType.ACTIVATE_ABILITY
-                && event.getType() != GameEvent.EventType.CAST_SPELL) {
-            return false;
-        }
-
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && permanent == null) {
             return false;
         }
