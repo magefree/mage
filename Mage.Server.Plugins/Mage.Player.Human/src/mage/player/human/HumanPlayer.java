@@ -2685,7 +2685,7 @@ public class HumanPlayer extends PlayerImpl {
                         triggerAutoOrderAbilityFirst.add(originalId);
                         break;
                     case TRIGGER_AUTO_ORDER_ABILITY_LAST:
-                        triggerAutoOrderAbilityFirst.add(originalId);
+                        triggerAutoOrderAbilityLast.add(originalId);
                         break;
                 }
             }
