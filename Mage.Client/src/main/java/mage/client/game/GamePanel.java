@@ -366,7 +366,6 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
 
-        txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         txtHoldPriority.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
 
@@ -777,12 +776,6 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             logger.debug("Step is empty");
             this.txtStep.setText("");
-        }
-        if (lastGameData.game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
-            this.txtSpellsCast.setVisible(true);
-            this.txtSpellsCast.setText(' ' + Integer.toString(lastGameData.game.getSpellsCastCurrentTurn()) + ' ');
-        } else {
-            this.txtSpellsCast.setVisible(false);
         }
 
         this.txtActivePlayer.setText(lastGameData.game.getActivePlayerName());
@@ -1859,14 +1852,8 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority = new javax.swing.JLabel();
         feedbackPanel = new mage.client.game.FeedbackPanel();
 
-        txtSpellsCast = new javax.swing.JLabel();
         Border paddingBorder = BorderFactory.createEmptyBorder(4, 4, 4, 4);
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
-        txtSpellsCast.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
-        txtSpellsCast.setBackground(Color.LIGHT_GRAY);
-        txtSpellsCast.setOpaque(true);
-        txtSpellsCast.setToolTipText("spells cast during the current turn");
-
         txtHoldPriority = new javax.swing.JLabel();
         txtHoldPriority.setText("Hold");
         txtHoldPriority.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
@@ -2339,7 +2326,6 @@ public final class GamePanel extends javax.swing.JPanel {
                 )
                 .addGroup(gl_pnlShortCuts.createSequentialGroup()
                         .addComponent(txtHoldPriority)
-                        .addComponent(txtSpellsCast)
                         /*.addComponent(btnToggleMacro)*/
                         .addComponent(btnSwitchHands)
                         .addComponent(btnCancelSkip)
@@ -2375,7 +2361,6 @@ public final class GamePanel extends javax.swing.JPanel {
                         .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 /*.addComponent(btnToggleMacro)*/
                                 .addComponent(txtHoldPriority)
-                                .addComponent(txtSpellsCast)
                                 .addComponent(btnSwitchHands)
                                 .addComponent(btnCancelSkip)
                                 .addComponent(btnConcede)
@@ -3005,7 +2990,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane2;
     private JPanel jPhases;
     private JPanel phasesContainer;
-    private javax.swing.JLabel txtSpellsCast;
     private javax.swing.JLabel txtHoldPriority;
 
     private HoverButton currentStep;

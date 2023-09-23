@@ -62,7 +62,6 @@ public class GameView implements Serializable {
     private final int turn;
     private boolean special = false;
     private final boolean isPlayer; // false = watching user
-    private final int spellsCastCurrentTurn;
     private final boolean rollbackTurnsAllowed;
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
@@ -195,13 +194,6 @@ public class GameView implements Serializable {
         } else {
             this.special = false;
         }
-
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        if (watcher != null) {
-            spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();
-        } else {
-            spellsCastCurrentTurn = 0;
-        }
         rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
     }
 
@@ -333,10 +325,6 @@ public class GameView implements Serializable {
 
     public void setCanPlayObjects(PlayableObjectsList canPlayObjects) {
         this.canPlayObjects = canPlayObjects;
-    }
-
-    public int getSpellsCastCurrentTurn() {
-        return spellsCastCurrentTurn;
     }
 
     public boolean isRollbackTurnsAllowed() {
