@@ -1317,7 +1317,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             // try to set trigger auto order
             java.util.List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
-            TriggeredAbility abilityOrderLast = null;
+            java.util.List<TriggeredAbility> abilitiesOrderLast = new ArrayList<>();
             for (TriggeredAbility ability : abilities) {
                 if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
                     return ability;
@@ -1328,20 +1328,20 @@ public class HumanPlayer extends PlayerImpl {
                     return ability;
                 }
                 if (triggerAutoOrderAbilityLast.contains(ability.getOriginalId())) {
-                    abilityOrderLast = ability;
+                    // multiple instances of same trigger has same originalId, no need to select order for it
+                    abilitiesOrderLast.add(ability);
                     continue;
                 }
                 if (triggerAutoOrderNameLast.contains(rule)) {
-                    if (abilityOrderLast != null) {
-                        throw new IllegalArgumentException("Wrong code usage. Only one last ability allows by name");
-                    }
-                    abilityOrderLast = ability;
+                    abilitiesOrderLast.add(ability);
                     continue;
                 }
                 if (autoOrderUse) {
+                    // multiple triggers with same rule text will be auto-ordered
                     if (autoOrderRuleText == null) {
                         autoOrderRuleText = rule;
                     } else if (!rule.equals(autoOrderRuleText)) {
+                        // diff triggers, so must use choose dialog
                         autoOrderUse = false;
                     }
                 }
@@ -1349,7 +1349,8 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             if (abilitiesWithNoOrderSet.isEmpty()) {
-                return abilityOrderLast;
+                // user can send diff abilities to the last, will be selected by "first" like first ordered ability above
+                return abilitiesOrderLast.stream().findFirst().orElse(null);
             }
 
             if (abilitiesWithNoOrderSet.size() == 1
@@ -1359,13 +1360,12 @@ public class HumanPlayer extends PlayerImpl {
 
             // runtime check: lost triggers for GUI
             List<Ability> processingAbilities = new ArrayList<>(abilitiesWithNoOrderSet);
-            if (abilityOrderLast != null) {
-                processingAbilities.add(abilityOrderLast);
-            }
+            processingAbilities.addAll(abilitiesOrderLast);
+
             if (abilities.size() != processingAbilities.size()) {
                 throw new IllegalStateException(String.format("Choose dialog lost some of the triggered abilities:\n"
-                        + "Must %d:\n%s\n"
-                        + "Has %d:\n%s",
+                                + "Must %d:\n%s\n"
+                                + "Has %d:\n%s",
                         abilities.size(),
                         abilities.stream().map(Ability::getRule).collect(Collectors.joining("\n")),
                         processingAbilities.size(),
