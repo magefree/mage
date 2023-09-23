@@ -147,6 +147,8 @@ Limited Edition Beta|LimitedEditionBeta|
 The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth|
 Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
+Lost Caverns of Ixalan|LostCavernsOfIxalan|
+Lost Caverns of Ixalan Commander|LostCavernsOfIxalanCommander|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
 Magic 2012|Magic2012|
