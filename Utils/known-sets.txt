@@ -132,6 +132,7 @@ Judgment|Judgment|
 Jumpstart|Jumpstart|
 Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
 Jumpstart 2022|Jumpstart2022|
+Jurassic World Collection|JurassicWorldCollection|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|
@@ -212,6 +213,7 @@ Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
 Shards of Alara|ShardsOfAlara|
+Special Guests|SpecialGuests|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
 Star Wars|StarWars|

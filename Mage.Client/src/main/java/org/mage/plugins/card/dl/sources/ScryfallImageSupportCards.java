@@ -533,6 +533,10 @@ public class ScryfallImageSupportCards {
             add("WOE"); // Wilds of Eldraine
             add("WOT"); // Wilds of Eldraine: Enchanting Tales
             add("WOC"); // Wilds of Eldraine Commander
+            add("LCI"); // Lost Caverns of Ixalan
+            add("LCC"); // Lost Caverns of Ixalan Commander
+            add("REX"); // Jurassic World Collection
+            add("SPG"); // Special Guests
         }
     };
 
