@@ -14,6 +14,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -148,7 +149,7 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
-                    if (!player.choose(outcome, choice, game)) {
+                    if (!player.choose(Outcome.PutManaInPool, choice, game)) {
                         return mana;
                     }
                 }

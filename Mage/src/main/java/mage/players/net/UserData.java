@@ -22,7 +22,7 @@ public class UserData implements Serializable {
     protected boolean manaPoolAutomaticRestricted;
     protected boolean passPriorityCast;
     protected boolean passPriorityActivation;
-    protected boolean autoOrderTrigger;
+    protected boolean autoOrderTrigger; // auto-order triggers with same rule text
     protected int autoTargetLevel;
     protected boolean useSameSettingsForReplacementEffects;
     protected boolean useFirstManaAbility = false;

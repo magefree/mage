@@ -38,15 +38,27 @@ public class MageObjectReferencePredicate implements Predicate<MageItem> {
     }
 
     public String getName(Game game) {
+        UUID id = null;
+        String name = null;
+
         Permanent permanent = mor.getPermanent(game);
         if (permanent != null) {
-            return permanent.getIdName();
+            id = permanent.getId();
+            name = permanent.getName();
         }
+
         Player player = game.getPlayer(mor.getSourceId());
         if (player != null) {
-            return player.getName();
+            id = player.getId();
+            name = player.getName();
         }
-        return null;
+
+        // workaround to use unique keys for choose dialog (getIdName can't be used here)
+        if (id != null) {
+            return String.format("%s [%s]", name, id);
+        } else {
+            return null;
+        }
     }
 
     @Override

@@ -191,7 +191,14 @@ class BuybackEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             // if spell fizzled, the sourceId is null
-            return zEvent.getFromZone() == Zone.STACK && zEvent.getToZone() == Zone.GRAVEYARD
+            return zEvent.getFromZone() == Zone.STACK
+                    && (zEvent.getToZone() == Zone.GRAVEYARD ||
+                            // Innocuous Insect from Mystery Boosters is stretching a little what Buyback can do.
+                            // Although that does not impact normal Buyback usage on instants/sorceries.
+                            //
+                            // (2019-11-12) If you pay the buyback cost for a permanent spell, it doesn't enter
+                            // the battlefield as it resolves. It moves from the stack to its owner's hand.
+                            zEvent.getToZone() == Zone.BATTLEFIELD)
                     && source.getSourceId().equals(event.getSourceId());
         }
         return false;

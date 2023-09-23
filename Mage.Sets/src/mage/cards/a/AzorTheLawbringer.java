@@ -107,17 +107,17 @@ class AzorTheLawbringerCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast instant or sorcery spells this turn (" + mageObject.getIdName() + ").";
         }
         return null;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override

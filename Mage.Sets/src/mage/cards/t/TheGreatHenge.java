@@ -16,10 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -79,7 +76,7 @@ class TheGreatHengeCostReductionEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int reductionAmount = game.getBattlefield()
                 .getAllActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
+                        StaticFilters.FILTER_PERMANENT_CREATURE, abilityToModify.getControllerId(), game
                 ).stream()
                 .map(Permanent::getPower)
                 .mapToInt(MageInt::getValue)

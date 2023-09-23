@@ -271,10 +271,6 @@ public class User {
         fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_TOURNAMENT, tournamentId));
     }
 
-    public void ccShowGameEndDialog(final UUID gameId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_GAME_END_DIALOG, gameId));
-    }
-
     public void showUserMessage(final String titel, String message) {
         List<String> messageData = new LinkedList<>();
         messageData.add(titel);

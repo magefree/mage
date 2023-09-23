@@ -47,7 +47,7 @@ public class ChooseModeEffect extends OneShotEffect {
         if (sourcePermanent == null) {
             sourcePermanent = game.getPermanentEntering(source.getSourceId());
         }
-        if (controller != null) {
+        if (controller != null && sourcePermanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage(choiceMessage);
             choice.getChoices().addAll(modes);

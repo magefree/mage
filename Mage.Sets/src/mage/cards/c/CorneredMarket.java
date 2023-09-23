@@ -105,11 +105,6 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public CorneredMarketReplacementEffect copy() {
         return new CorneredMarketReplacementEffect(this);
     }

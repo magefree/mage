@@ -40,11 +40,6 @@ public class CastOnlyIfYouHaveCastAnotherSpellEffect extends ContinuousRuleModif
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CastOnlyIfYouHaveCastAnotherSpellEffect copy() {
         return new CastOnlyIfYouHaveCastAnotherSpellEffect(this);
     }

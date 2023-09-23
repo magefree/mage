@@ -58,11 +58,6 @@ class AetherStormReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public AetherStormReplacementEffect copy() {
         return new AetherStormReplacementEffect(this);
     }

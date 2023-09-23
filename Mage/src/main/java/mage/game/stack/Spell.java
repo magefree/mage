@@ -774,7 +774,7 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public Card getSecondCardFace() {
-        return null;
+        return card.getSecondCardFace();
     }
 
     @Override

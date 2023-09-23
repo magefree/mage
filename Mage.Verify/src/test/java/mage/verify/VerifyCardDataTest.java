@@ -233,7 +233,6 @@ public class VerifyCardDataTest {
         // file name must be related to sample-decks folder
         // for linux/windows build system use paths constructor
         skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Jumpstart", "jumpstart_custom.txt").toString()); // it's not a deck file
-        skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Commander", "Commander 2019", "Merciless Rage.dck").toString()); // TODO: delete after Aeon Engine implemented
     }
 
     private final ArrayList<String> outputMessages = new ArrayList<>();
@@ -2121,13 +2120,18 @@ public class VerifyCardDataTest {
 
     @Test
     public void test_showCardInfo() {
-        // debug only: show direct card info from class file without db-recreate
+        // debug only: show direct card rules from a class file without db-recreate
         //  - search by card name: Spark Double
         //  - search by class name: SparkDouble
         //  - multiple searches: name1;class2;name3
-        String cardSearches = "Spark Double";
+        String cardSearches = "Spark Double;AbandonedSarcophagus";
+
+        // prepare DBs
         CardScanner.scan();
+        MtgJsonService.cards();
+
         Arrays.stream(cardSearches.split(";")).forEach(searchName -> {
+            // original card
             searchName = searchName.trim();
             CardInfo cardInfo = CardRepository.instance.findCard(searchName);
             if (cardInfo == null) {
@@ -2144,12 +2148,23 @@ public class VerifyCardDataTest {
             }
             CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), "test", "123", Rarity.COMMON);
             Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
             if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
                 card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
+            }
+
+            // ref card
+            System.out.println();
+            MtgJsonCard ref = MtgJsonService.card(card.getName());
+            if (ref != null) {
+                System.out.println("ref: " + ref.getNameAsFace() + " " + ref.manaCost);
+                System.out.println(ref.text);
+            } else {
+                System.out.println("WARNING, can't find mtgjson ref for " + card.getName());
             }
         });
     }

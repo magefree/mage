@@ -19,11 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author jeffwadsworth
@@ -110,22 +106,32 @@ class BenthicExplorersManaEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
-        if (game == null) { return mana; }
-
-        Choice choice = ManaType.getChoiceOfManaTypes(getManaTypes(game, source), false);
-        if (choice.getChoices().isEmpty()) { return mana; }
+        if (game == null) {
+            return mana;
+        }
 
         Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return mana;
+        }
+
+        Choice choice = ManaType.getChoiceOfManaTypes(getManaTypes(game, source), false);
+        if (choice.getChoices().isEmpty()) {
+            return mana;
+        }
+
+
         if (choice.getChoices().size() == 1) {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
-            if (player == null
-                    || !player.choose(Outcome.Neutral, choice, game)) {
+            if (!player.choose(Outcome.PutManaInPool, choice, game)) {
                 return mana;
             }
         }
 
-        if (choice.getChoice() == null) { return mana; }
+        if (choice.getChoice() == null) {
+            return mana;
+        }
 
         switch (choice.getChoice()) {
             case "Black":
@@ -160,7 +166,9 @@ class BenthicExplorersManaEffect extends ManaEffect {
         List<UUID> untapped = (List<UUID>) game.getState()
                 .getValue("UntapTargetCost" + source.getSourceId().toString());
         Permanent land = game.getPermanentOrLKIBattlefield(untapped.get(0));
-        if (land == null) { return types; }
+        if (land == null) {
+            return types;
+        }
 
         Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
         for (ActivatedManaAbilityImpl ability : mana) {

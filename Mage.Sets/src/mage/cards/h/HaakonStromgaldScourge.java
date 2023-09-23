@@ -103,11 +103,6 @@ class HaakonStromgaldScourgePlayEffect2 extends ContinuousRuleModifyingEffectImp
     public HaakonStromgaldScourgePlayEffect2 copy() {
         return new HaakonStromgaldScourgePlayEffect2(this);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
     
     @Override
     public boolean checksEventType(GameEvent event, Game game) {

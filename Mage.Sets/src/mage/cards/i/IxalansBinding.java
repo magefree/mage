@@ -93,11 +93,6 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public IxalansBindingReplacementEffect copy() {
         return new IxalansBindingReplacementEffect(this);
     }

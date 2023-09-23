@@ -29,11 +29,6 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
@@ -44,7 +39,8 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP_STEP || event.getType() == GameEvent.EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP_STEP
+                || event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override

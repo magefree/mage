@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.constants.CardType;
 import mage.constants.ManaType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -100,7 +101,7 @@ class SquanderedResourcesEffect extends ManaEffect {
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {
-                if (!player.choose(outcome, choice, game)) {
+                if (!player.choose(Outcome.PutManaInPool, choice, game)) {
                     return mana;
                 }
             }

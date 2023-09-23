@@ -31,7 +31,7 @@ public final class LiegeOfTheAxe extends CardImpl {
         // Morph {1}{W}
         this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
         // When Liege of the Axe is turned face up, untap it.
-        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new UntapSourceEffect()));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new UntapSourceEffect().setText("untap it")));
     }
 
     private LiegeOfTheAxe(final LiegeOfTheAxe card) {
