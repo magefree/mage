@@ -33,14 +33,9 @@ import java.util.UUID;
  */
 public final class TempleOfPower extends CardImpl {
 
-    // This is an ugly workaround as watcher from secondary sides are not added.
-    // TODO: look at back faces to add watchers of dfc.
-    public static TempleOfPowerWatcher createWatcher() {
-        return new TempleOfPowerWatcher();
-    }
-
     public TempleOfPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        this.nightCard = true;
 
         // <i>(Transforms from Ojer Axonil, Deepest Might.)</i>
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("<i>(Transforms from Ojer Axonil, Deepest Might.)</i>"));

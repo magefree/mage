@@ -42,7 +42,7 @@ public final class OjerAxonilDeepestMight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new OjerAxonilDeepestMightReplacementEffect()));
 
         // When Ojer Axonil dies, return it to the battlefield tapped and transformed under its owner's control.
-        this.addAbility(new TransformAbility(), mage.cards.t.TempleOfPower.createWatcher());
+        this.addAbility(new TransformAbility());
         this.addAbility(new DiesSourceTriggeredAbility(new OjerAxonilDeepestMightTransformEffect()));
     }
 
