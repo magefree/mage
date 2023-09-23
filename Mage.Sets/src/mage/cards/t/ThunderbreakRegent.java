@@ -34,7 +34,7 @@ public final class ThunderbreakRegent extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a Dragon you control becomes the target of a spell or ability your opponent controls, Thunderbreak Regent deals 3 damage to that player.
-        this.addAbility(new BecomesTargetAnyTriggeredAbility(new DamageTargetEffect(3),
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(new DamageTargetEffect(3).setText("{this} deals 3 damage to that player"),
                 filter, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.PLAYER, false));
     }
 

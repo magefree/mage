@@ -19,7 +19,8 @@ public final class WildDefiance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.
-        this.addAbility(new BecomesTargetAnyTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn),
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(
+                new BoostTargetEffect(3, 3, Duration.EndOfTurn).setText("that creature gets +3/+3 until end of turn"),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY));
     }
 

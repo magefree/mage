@@ -10,8 +10,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -63,7 +61,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "return " + getTargetPointer().describeTargets(mode.getTargets(), "") +
+        return "return " + getTargetPointer().describeTargets(mode.getTargets(), "that creature") +
                 (getTargetPointer().isPlural(mode.getTargets()) ? " to their owners' hands" : " to its owner's hand");
     }
 }

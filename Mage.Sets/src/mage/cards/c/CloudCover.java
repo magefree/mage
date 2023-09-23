@@ -28,7 +28,7 @@ public final class CloudCover extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{U}");
 
         // Whenever another permanent you control becomes the target of a spell or ability an opponent controls, you may return that permanent to its owner's hand.
-        this.addAbility(new BecomesTargetAnyTriggeredAbility(new ReturnToHandTargetEffect(),
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(new ReturnToHandTargetEffect().setText("return that permanent to its owner's hand"),
                 filter, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.PERMANENT, true));
     }
 

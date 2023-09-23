@@ -30,7 +30,8 @@ public final class DiffusionSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a Sliver creature you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.
-        this.addAbility(new BecomesTargetAnyTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(2)),
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(2))
+                .setText("counter that spell or ability unless its controller pays {2}"),
                 filter, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.SPELL, false));
     }
 

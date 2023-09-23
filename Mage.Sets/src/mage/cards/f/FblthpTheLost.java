@@ -37,7 +37,8 @@ public final class FblthpTheLost extends CardImpl {
         this.addAbility(new FblthpTheLostTriggeredAbility());
 
         // When Fblthp becomes the target of a spell, shuffle Fblthp into its owner's library.
-        this.addAbility(new BecomesTargetSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect(),
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(
+                new ShuffleIntoLibrarySourceEffect().setText("shuffle {this} into its owner's library"),
                 StaticFilters.FILTER_SPELL_A));
     }
 

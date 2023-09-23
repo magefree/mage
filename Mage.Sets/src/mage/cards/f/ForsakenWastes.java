@@ -29,7 +29,7 @@ public final class ForsakenWastes extends CardImpl {
                 TargetController.ANY, false, true));
         
         // Whenever Forsaken Wastes becomes the target of a spell, that spell's controller loses 5 life.
-        this.addAbility(new BecomesTargetSourceTriggeredAbility(new LoseLifeTargetEffect(5),
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new LoseLifeTargetEffect(5).setText("that spell's controller loses 5 life"),
                 StaticFilters.FILTER_SPELL_A, SetTargetPointer.PLAYER, false));
     }
 
