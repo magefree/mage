@@ -23,7 +23,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author anonymous
+ * @author Codermann63
  */
 public final class LiberatedLivestock extends CardImpl {
 
@@ -59,7 +59,7 @@ class LiberatedLivestockEffect extends OneShotEffect {
 
     LiberatedLivestockEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "When Liberated Livestock dies, create a 1/1 white Cat creature token with lifelink, a 1/1 white Bird creature token with flying, and a 2/4 white Ox creature token. For each of those tokens, you may put an Aura card from your hand and/or graveyard onto the battlefield attached to it.";
+        staticText = "create a 1/1 white Cat creature token with lifelink, a 1/1 white Bird creature token with flying, and a 2/4 white Ox creature token. For each of those tokens, you may put an Aura card from your hand and/or graveyard onto the battlefield attached to it.";
     }
 
     private LiberatedLivestockEffect(final LiberatedLivestockEffect effect) {super(effect);}

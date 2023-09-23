@@ -6,6 +6,11 @@ import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ *
+ * @author Codermann63
+ */
+
 public class LiberatedLivestockTest extends CardTestPlayerBase {
     /**
      * Liberated Livestock
@@ -103,9 +108,9 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, BIRDTOKEN,2);
         assertPermanentCount(playerA, OXTOKEN,2);
         assertPermanentCount(playerA, KEENSENSE, 6);
-        assertIsAttachedTo(playerA, KEENSENSE, CATTOKEN);
-        assertIsAttachedTo(playerA, KEENSENSE, BIRDTOKEN);
-        assertIsAttachedTo(playerA, KEENSENSE, OXTOKEN);
+        assertAttachedTo(playerA, KEENSENSE, CATTOKEN, true);
+        assertAttachedTo(playerA, KEENSENSE, BIRDTOKEN, true);
+        assertAttachedTo(playerA, KEENSENSE, OXTOKEN, true);
 
     }
 
