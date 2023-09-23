@@ -157,7 +157,6 @@ class TempleOfPowerWatcher extends Watcher {
     }
 
     int damageForPlayer(UUID playerId) {
-        System.out.println(damageMap.getOrDefault(playerId, 0));
         return damageMap.getOrDefault(playerId, 0);
     }
 }
