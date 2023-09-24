@@ -101,16 +101,14 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
             }
         }      
         Card cardToCast;
-        switch (cardMap.size()) {
-            case 0:
-                return false;
-            default:
-                Cards castableCards = new CardsImpl(cardMap.keySet());
-                TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
-                target.withNotTarget(true);
-                player.choose(Outcome.Benefit, castableCards, target, source, game);
-                cardToCast = castableCards.get(target.getFirstTarget(), game);
-        }  
+        if (cardMap.isEmpty()) {
+            return false;
+        }
+        Cards castableCards = new CardsImpl(cardMap.keySet());
+        TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
+        target.withNotTarget(true);
+        player.choose(Outcome.Benefit, castableCards, target, source, game);
+        cardToCast = castableCards.get(target.getFirstTarget(), game);
 
         if (cardToCast == null) {
             return false;
