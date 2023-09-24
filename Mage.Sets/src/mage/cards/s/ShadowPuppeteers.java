@@ -1,24 +1,22 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FaerieRogueToken;
-import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -52,17 +50,9 @@ public final class ShadowPuppeteers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FaerieRogueToken(), 2)));
 
         // Whenever a creature you control with flying attacks, you may have it become a red Dragon with base power and toughness 4/4 in addition to its other colors and types until end of turn.
-        Effect effect = new BecomesCreatureTargetEffect(
-                new CreatureToken(4, 4, "red Dragon with base power and toughness 4/4")
-                    .withColor("R")
-                    .withSubType(SubType.DRAGON),
-                false, false,
-                Duration.EndOfTurn, false,
-                true, false,
-                false
-        );
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
-                Zone.BATTLEFIELD, effect, true, filter, true
+                Zone.BATTLEFIELD, new ShadowPuppeteersContinousEffect(),
+                true, filter, true
         ));
     }
 
@@ -73,5 +63,55 @@ public final class ShadowPuppeteers extends CardImpl {
     @Override
     public ShadowPuppeteers copy() {
         return new ShadowPuppeteers(this);
+    }
+}
+
+class ShadowPuppeteersContinousEffect extends ContinuousEffectImpl {
+
+    ShadowPuppeteersContinousEffect() {
+        super(Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "have it become a red Dragon with base power and toughness 4/4 "
+                + "in addition to its other colors and types until end of turn";
+    }
+
+    private ShadowPuppeteersContinousEffect(final ShadowPuppeteersContinousEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ShadowPuppeteersContinousEffect copy() {
+        return new ShadowPuppeteersContinousEffect(this);
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.TypeChangingEffects_4;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent == null) {
+            return false;
+        }
+        switch (layer) {
+            case TypeChangingEffects_4:
+                permanent.addSubType(game, SubType.DRAGON);
+                break;
+            case ColorChangingEffects_5:
+                permanent.getColor(game).setRed(true);
+                break;
+            case PTChangingEffects_7:
+                permanent.getToughness().setModifiedBaseValue(4);
+                permanent.getPower().setModifiedBaseValue(4);
+        }
+        return true;
     }
 }
