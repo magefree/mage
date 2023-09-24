@@ -30,7 +30,7 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
             return;
         }
         StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
-        if (targetingObject == null || !CardUtil.checkTargetMap(null, targetingObject, event, game)) {
+        if (targetingObject == null || CardUtil.checkTargetedEventAlreadyUsed(this.getKey(), targetingObject, event, game)) {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());

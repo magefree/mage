@@ -74,7 +74,7 @@ public class BecomesTargetAnyTriggeredAbility extends TriggeredAbilityImpl {
         if (targetingObject == null || !filterStack.match(targetingObject, getControllerId(), this, game)) {
             return false;
         }
-        if (!CardUtil.checkTargetMap(this.id, targetingObject, event, game)) {
+        if (CardUtil.checkTargetedEventAlreadyUsed(this.id.toString(), targetingObject, event, game)) {
             return false;
         }
         switch (setTargetPointer) {

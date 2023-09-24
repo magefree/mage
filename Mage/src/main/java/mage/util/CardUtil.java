@@ -1012,8 +1012,8 @@ public final class CardUtil {
 
     /**
      * For finding the spell or ability on the stack for "becomes the target" triggers.
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger()
-     * @param game the Game from checkTrigger()
+     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game the Game from checkTrigger() or watch()
      * @return the StackObject which targeted the source, or null if not found
      */
     public static StackObject getTargetingStackObject(GameEvent event, Game game) {
@@ -1035,31 +1035,36 @@ public final class CardUtil {
     }
 
     /**
-     * For ensuring that spells/abilities that target the same object twice only trigger "becomes the target" abilities once
-     * @param triggerId this.id of the TriggeredAbility
+     * For ensuring that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
+     * If this is the first attempt at triggering for a given ability targeting a given object,
+     * this method records that in the game state for later checks by this same method.
+     * @param checkingReference must be unique for each usage (this.id.toString() of the TriggeredAbility, or this.getKey() of the watcher)
      * @param targetingObject from getTargetingStackObject
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger()
-     * @param game the Game from checkTrigger()
-     * @return false if already triggered, true if this is the first/only trigger
+     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game the Game from checkTrigger() or watch()
+     * @return true if already triggered/watched, false if this is the first/only trigger/watch
      */
-    public static boolean checkTargetMap(UUID triggerId, StackObject targetingObject, GameEvent event, Game game) {
+    public static boolean checkTargetedEventAlreadyUsed(String checkingReference, StackObject targetingObject, GameEvent event, Game game) {
+        String stateKey = "targetedMap" + checkingReference;
         // If a spell or ability an opponent controls targets a single permanent you control more than once,
         // Battle Mammoth's triggered ability will trigger only once.
         // However, if a spell or ability an opponent controls targets multiple permanents you control,
         // Battle Mammoth's triggered ability will trigger once for each of those permanents. (2021-02-05)
-        Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue("targetMap" + triggerId);
+        Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue(stateKey);
         // targetMap: key - targetId; value - Set of stackObject Ids
         if (targetMap == null) {
             targetMap = new HashMap<>();
+        } else {
+            targetMap = new HashMap<>(targetMap); // must have new object reference if saved back to game state
         }
         Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
         if (!targetingObjects.add(targetingObject.getId())) {
-            return false; // The triggered ability already recorded that target of the stack object
+            return true; // The trigger/watcher already recorded that target of the stack object
         }
-        // Otherwise, store this combination of triggered ability / target / stack object
+        // Otherwise, store this combination of trigger/watcher + target + stack object
         targetMap.put(event.getTargetId(), targetingObjects);
-        game.getState().setValue("targetMap" + triggerId, targetMap);
-        return true;
+        game.getState().setValue(stateKey, targetMap);
+        return false;
     }
 
     /**

@@ -81,7 +81,7 @@ public class WardAbility extends TriggeredAbilityImpl {
         if (targetingObject == null || !game.getOpponents(getControllerId()).contains(targetingObject.getControllerId())) {
             return false;
         }
-        if (!CardUtil.checkTargetMap(this.id, targetingObject, event, game)) {
+        if (CardUtil.checkTargetedEventAlreadyUsed(this.id.toString(), targetingObject, event, game)) {
             return false;
         }
         getEffects().setTargetPointer(new FixedTarget(targetingObject.getId()));
