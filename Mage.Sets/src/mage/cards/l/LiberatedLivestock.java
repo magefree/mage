@@ -73,16 +73,14 @@ class LiberatedLivestockEffect extends OneShotEffect {
         Token cat = new CatToken2();
         Token bird = new BirdToken();
         Token ox = new OxToken();
+        List<Token> tokens = Arrays.asList(cat, bird, ox);
 
         // pause to get token onto the battlefield all the same time
         game.getState().pause();
-        cat.putOntoBattlefield(1, game, source, source.getControllerId());
-        bird.putOntoBattlefield(1, game, source, source.getControllerId());
-        ox.putOntoBattlefield(1, game, source, source.getControllerId());
+        tokens.forEach(token -> token.putOntoBattlefield(1, game, source, source.getControllerId()));
         game.getState().resume();
 
         // Setup for choosing and attaching auras to tokens
-        List<Token> tokens = Arrays.asList(cat, bird, ox);
         FilterCard filter = new FilterCard("Up to one Aura");
         filter.add(SubType.AURA.getPredicate());
         TargetCard target;
@@ -91,7 +89,9 @@ class LiberatedLivestockEffect extends OneShotEffect {
         for (Token token : tokens){
             for (UUID t : token.getLastAddedTokenIds()){
                 Permanent sourcePermanent = game.getPermanent(t);
-                if (sourcePermanent == null){continue;}
+                if (sourcePermanent == null){
+                    continue;
+                }
                 filter.setMessage("Aura from you hand or graveyard that can attach to " + sourcePermanent.getName());
 
                 // Choose from hand or graveyard?
@@ -104,8 +104,10 @@ class LiberatedLivestockEffect extends OneShotEffect {
                 // Handle putting aura onto the battlefield and attachment to token
                 controller.chooseTarget(outcome, target, source, game);
                 Card card = game.getCard(target.getFirstTarget());
-                if (card == null){continue;}
-                if (sourcePermanent.cantBeAttachedBy(card,source,game,true)){continue;}
+                if (card == null ||
+                        sourcePermanent.cantBeAttachedBy(card,source,game,true)) {
+                    continue;
+                }
                 game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 sourcePermanent.addAttachment(card.getId(), source, game);

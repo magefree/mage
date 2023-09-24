@@ -56,8 +56,8 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
-        // Skip all choices
-        setChoice(playerA, false);
+        // Look in hand but choose nothing to attach to each of the car, bird and ox tokens
+        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
@@ -88,7 +88,7 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
-        // Look in Graveyard for keensense to attach to each token
+        // Look in Graveyard and choose keensense to attach to each token
         setChoice(playerA, false);
         addTarget(playerA, KEENSENSE);
         setChoice(playerA, false);
@@ -132,7 +132,7 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MYSTICREFLECTION, LIBERATEDLIVESTOCK);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
-        // Skip choices
+        // Look in hand but nothing to attach for each of the three Liberated Livestock tokens
         setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         setChoice(playerA, true);
@@ -172,9 +172,10 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         // Look in hand for keensense to attach to Spectral lynx token
         setChoice(playerA, true);
         addTarget(playerA, KEENSENSE);
-        // Skip for next two
+        // Look in graveyard for ARCHNOFORM to attach to second Spectral lynx token
         setChoice(playerA, false);
         addTarget(playerA, ARACHNOFORM);
+        // look in hand but choose nothing to attach to third Spectral lynx token
         setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
 
@@ -227,6 +228,7 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         // Look in graveyard for ARACHNOFORM to attach to DEADLYINSECT token
         setChoice(playerA, false);
         addTarget(playerA, ARACHNOFORM);
+        // Look in hand but choose nothing to attach to DEADLYINSECT token
         setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
 
