@@ -160,7 +160,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 Player player = game.getPlayer(playerId);
                 if (player != null
                         && player.getCastSourceIdWithAlternateMana()
-                                .getOrDefault(getSourceId(), new HashSet<>())
+                                .getOrDefault(getSourceId(), Collections.emptySet())
                                 .contains(MageIdentifier.Default)
                 ) {
                     return ActivationStatus.getFalse();

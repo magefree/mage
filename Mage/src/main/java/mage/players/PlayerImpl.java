@@ -1101,14 +1101,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs, MageIdentifier identifier) {
         // cost must be copied for data consistence between game simulations
-        castSourceIdWithAlternateMana.computeIfAbsent(sourceId, k -> new HashSet<>());
-        castSourceIdWithAlternateMana.get(sourceId).add(identifier);
+        castSourceIdWithAlternateMana
+                .computeIfAbsent(sourceId, k -> new HashSet<>())
+                .add(identifier);
 
-        castSourceIdManaCosts.computeIfAbsent(sourceId, k -> new HashMap<>());
-        castSourceIdManaCosts.get(sourceId).put(identifier, manaCosts != null ? manaCosts.copy() : null);
+        castSourceIdManaCosts
+                .computeIfAbsent(sourceId, k -> new HashMap<>())
+                .put(identifier, manaCosts != null ? manaCosts.copy() : null);
 
-        castSourceIdCosts.computeIfAbsent(sourceId, k -> new HashMap<>());
-        castSourceIdCosts.get(sourceId).put(identifier, costs != null ? costs.copy() : null);
+        castSourceIdCosts
+                .computeIfAbsent(sourceId, k -> new HashMap<>())
+                .put(identifier, costs != null ? costs.copy() : null);
 
         if(identifier == null) {
             boolean a = true;
@@ -1219,24 +1222,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                         ? MageIdentifier.Default
                         : approvingObject.getApprovingAbility().getIdentifier();
 
-                if (!identifier.equals(MageIdentifier.Default)
-                        && getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), new HashSet<>()).contains(identifier)) {
+                if(!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(identifier)) {
+                    // identifier has no alternate cast entry for that sourceId, using Default instead.
+                    identifier = MageIdentifier.Default;
+                }
+
+                if(getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(identifier)) {
                     Ability spellAbility = spell.getSpellAbility();
                     ManaCosts alternateCosts = getCastSourceIdManaCosts().get(ability.getSourceId()).get(identifier);
                     Costs<Cost> costs = getCastSourceIdCosts().get(ability.getSourceId()).get(identifier);
-                    if (alternateCosts == null) {
-                        noMana = true;
-                    } else {
-                        spellAbility.clearManaCosts();
-                        spellAbility.clearManaCostsToPay();
-                        spellAbility.addManaCost(alternateCosts.copy());
-                    }
-                    spellAbility.clearCosts();
-                    spellAbility.addCost(costs);
-                } else if (getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), new HashSet<>()).contains(MageIdentifier.Default)) {
-                    Ability spellAbility = spell.getSpellAbility();
-                    ManaCosts alternateCosts = getCastSourceIdManaCosts().get(ability.getSourceId()).get(MageIdentifier.Default);
-                    Costs<Cost> costs = getCastSourceIdCosts().get(ability.getSourceId()).get(MageIdentifier.Default);
                     if (alternateCosts == null) {
                         noMana = true;
                     } else {

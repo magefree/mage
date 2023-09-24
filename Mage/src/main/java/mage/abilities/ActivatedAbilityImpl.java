@@ -180,15 +180,16 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         // timing check
         //20091005 - 602.5d/602.5e
-        boolean asInstant;
-        Set<ApprovingObject> approvingObjects = game.getContinuousEffects()
+        Set<ApprovingObject> approvingObjects =game
+                .getContinuousEffects()
                 .asThough(sourceId,
                         AsThoughEffectType.ACTIVATE_AS_INSTANT,
                         this,
                         controllerId,
-                        game);
-        asInstant = !approvingObjects.isEmpty();
-        asInstant |= (timing == TimingRule.INSTANT);
+                        game
+                );
+        boolean asInstant = !approvingObjects.isEmpty()
+                || (timing == TimingRule.INSTANT);
         if (!asInstant && !game.canPlaySorcery(playerId)) {
             return ActivationStatus.getFalse();
         }

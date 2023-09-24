@@ -7,10 +7,7 @@ import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.game.Game;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, Susucr
@@ -46,8 +43,10 @@ public interface ActivatedAbility extends Ability {
             return approvingObjects;
         }
 
+        private static final ActivationStatus falseInstance = new ActivationStatus(Collections.emptySet());
+
         public static ActivationStatus getFalse() {
-            return new ActivationStatus(new HashSet<>());
+            return falseInstance;
         }
 
         public static ActivationStatus withoutApprovingObject(boolean forcedCanActivate) {
