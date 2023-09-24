@@ -1,5 +1,14 @@
 package mage.cards.a;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
@@ -12,24 +21,29 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.AdventureCard;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardWithHalves;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
  * @author gravitybone
  * @author Aquid
  */
 public final class AnrakyrTheTraveller extends CardImpl {
-
-    private static final FilterCard filter = new FilterArtifactCard();
 
     public AnrakyrTheTraveller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT, CardType.CREATURE }, "{4}{B}");
@@ -40,7 +54,7 @@ public final class AnrakyrTheTraveller extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Lord of the Pyrrhian Legions — Whenever Anrakyr the Traveller attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
-        Ability ability = new AttacksTriggeredAbility(new AnrakyrTheTravellerEffect(filter));
+        Ability ability = new AttacksTriggeredAbility(new AnrakyrTheTravellerEffect());
 
         this.addAbility(ability.withFlavorWord("Lord of the Pyrrhian Legions"));
     }
@@ -58,10 +72,10 @@ public final class AnrakyrTheTraveller extends CardImpl {
 class AnrakyrTheTravellerEffect extends OneShotEffect {
     private final FilterCard filter;
 
-    AnrakyrTheTravellerEffect(FilterCard filter) {
+    AnrakyrTheTravellerEffect() {
         super(Outcome.AIDontUseIt);
-        this.filter = filter;
-        this.staticText = "you may cast an " + filter.getMessage() + " from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.";
+        this.filter = new FilterArtifactCard("an artifact spell");
+        this.staticText = "you may cast " + filter.getMessage() + " from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.";
     }
 
     private AnrakyrTheTravellerEffect(final AnrakyrTheTravellerEffect effect) {
