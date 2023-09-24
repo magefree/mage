@@ -11,6 +11,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.ValueHint;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,6 +43,7 @@ public final class IzoniThousandEyed extends CardImpl {
                         )
                 ), false)
                 .setAbilityWord(AbilityWord.UNDERGROWTH)
+                .addHint(new ValueHint("Creature cards in your graveyard", new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)))
         );
 
         // {B}{G}, Sacrifice another creature: You gain 1 life and draw a card.
