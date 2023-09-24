@@ -36,13 +36,13 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
             MageObjectReference mor = new MageObjectReference(permanent, game);
-            int nTimes = permanentsTargeted.computeIfAbsent(mor, k -> 0);
+            int nTimes = permanentsTargeted.getOrDefault(mor, 0);
             permanentsTargeted.put(mor, nTimes + 1);
         }
     }
 
     public int numTimesTargetedThisTurn(Permanent permanent, Game game) {
-        return permanentsTargeted.computeIfAbsent(new MageObjectReference(permanent, game), k -> 0);
+        return permanentsTargeted.getOrDefault(new MageObjectReference(permanent, game), 0);
     }
 
     @Override
