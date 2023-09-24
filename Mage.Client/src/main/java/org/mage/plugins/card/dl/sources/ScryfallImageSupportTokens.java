@@ -2177,8 +2177,8 @@ public class ScryfallImageSupportTokens {
         return supportedSets;
     }
 
-    public static String findTokenLink(String setCode, String tokenName, Integer tokenNumber) {
-        String search = setCode + "/" + tokenName + (!tokenNumber.equals(0) ? "/" + tokenNumber : "");
+    public static String findTokenLink(String setCode, String tokenName, Integer imageNumber) {
+        String search = setCode + "/" + tokenName + (!imageNumber.equals(0) ? "/" + imageNumber : "");
         return supportedCards.getOrDefault(search, null);
     }
 }

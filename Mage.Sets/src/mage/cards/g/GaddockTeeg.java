@@ -56,11 +56,6 @@ class GaddockTeegReplacementEffect4 extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GaddockTeegReplacementEffect4 copy() {
         return new GaddockTeegReplacementEffect4(this);
     }
@@ -90,11 +85,6 @@ class GaddockTeegReplacementEffectX extends ContinuousRuleModifyingEffectImpl {
 
     private GaddockTeegReplacementEffectX(final GaddockTeegReplacementEffectX effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

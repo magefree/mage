@@ -72,6 +72,95 @@ public class DisturbTest extends CardTestPlayerBase {
     }
 
     /**
+     * All attributes of the spell should be the back face's
+     * however the MV of the spell is the front face's
+     */
+    @Test
+    public void test_SpellAttributesOnStack2() {
+        // Disturb {4}{U}
+        // Waildrifter
+        addCard(Zone.GRAVEYARD, playerA, "Galedrifter", 1); // {3}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 6);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Waildrifter using Disturb", true);
+
+        // cast with disturb
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Waildrifter using Disturb");
+        checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Waildrifter using Disturb", 1);
+        runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            // Stack must contain another card side, so spell/card characteristics must be diff from main side (only mana value is same)
+            Spell spell = (Spell) game.getStack().getFirst();
+            Assert.assertEquals("Waildrifter", spell.getName());
+            Assert.assertEquals(1, spell.getCardType(game).size());
+            Assert.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
+            Assert.assertEquals(2, spell.getSubtype(game).size());
+            Assert.assertEquals(SubType.HIPPOGRIFF, spell.getSubtype(game).get(0));
+            Assert.assertEquals(SubType.SPIRIT, spell.getSubtype(game).get(1));
+            Assert.assertEquals(2, spell.getPower().getValue());
+            Assert.assertEquals(2, spell.getToughness().getValue());
+            Assert.assertEquals("U", spell.getColor(game).toString());
+
+            Assert.assertEquals(4, spell.getManaValue()); // {3}{U}
+
+            Assert.assertEquals("{4}{U}", spell.getSpellAbility().getManaCosts().getText());
+        });
+
+        // must be transformed
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Waildrifter", 1);
+        checkPT("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Waildrifter", 2, 2);
+        checkSubType("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Waildrifter", SubType.SPIRIT, true);
+
+        // must be exiled on die
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Waildrifter");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after die", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Waildrifter", 0);
+        checkExileCount("after die", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Galedrifter", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertTappedCount("Volcanic Island",true,6); //5+1
+    }
+
+    @Test
+    public void test_SpellAttributesTrigger() {
+        // Disturb {5}{W}{W}
+        // Sinner's Judgment
+        addCard(Zone.GRAVEYARD, playerA, "Faithbound Judge", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Firebrand Archer", 1);
+        //
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sinner's Judgment using Disturb",playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, 9);
+        assertPermanentCount(playerA, "Sinner's Judgment", 1);
+        assertLife(playerB, 19);
+    }
+
+    @Test
+    public void test_SpellAttributesIndirectTrigger() {
+        // Disturb {1}{U}
+        // Hook-Haunt Drifter
+        addCard(Zone.GRAVEYARD, playerA, "Baithook Angler", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Lys Alana Huntmaster", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus", 1);
+        // Transform's copy effect must not override other spell modifications
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Elf Warrior Token", 1);
+    }
+
+    /**
      * Relevant ruling:
      *      To determine the total cost of a spell, start with the mana cost or alternative cost
      *      (such as a disturb cost) you're paying, add any cost increases, then apply any cost
@@ -126,6 +215,27 @@ public class DisturbTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+    }
+
+    @Test
+    public void test_ConditionalCostModifications() {
+        // Disturb {5}{W}{W}
+        // Sinner's Judgment
+        addCard(Zone.GRAVEYARD, playerA, "Faithbound Judge", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Envoy", 1); //-1 if Aura
+        addCard(Zone.BATTLEFIELD, playerB, "Reidane, God of the Worthy", 1); //+2 if noncreature MV>=4, should NOT apply
+        addCard(Zone.BATTLEFIELD, playerA, "Pearl Medallion", 1); //-1 if white
+        //net -2
+
+        //
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sinner's Judgment using Disturb",playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Sinner's Judgment", 1);
+        assertTappedCount("Plains", true, 5);
     }
 
     /**

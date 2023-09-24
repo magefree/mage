@@ -32,9 +32,6 @@ public class LazotepConvertTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        currentGame.debugMessage("Graveyard: "+currentGame.getPlayer(playerA.getId()).getGraveyard().stream()
-                .map(x -> currentGame.getObject(x).getClass().getSimpleName()).collect(Collectors.toList()));
-
         assertPermanentCount(playerA, "Mutagen Connoisseur", 1);
         assertGraveyardCount(playerA, "Mutagen Connoisseur", 1);
         assertSubtype("Mutagen Connoisseur", SubType.ZOMBIE);

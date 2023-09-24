@@ -33,11 +33,6 @@ public class CantBeCounteredSourceEffect extends ContinuousRuleModifyingEffectIm
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
         MageObject sourceObject = game.getObject(source);

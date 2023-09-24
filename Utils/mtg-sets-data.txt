@@ -121,6 +121,8 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
+Lost Caverns of Ixalan|LCI|
+Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|
 Innistrad: Crimson Vow|VOW|
@@ -202,6 +204,7 @@ Prerelease Events|PPRE|
 Portal Three Kingdoms|PTK|
 Ravnica Allegiance|RNA|
 Ravnica: City of Guilds|RAV|
+Jurassic World Collection|REX|
 Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
@@ -217,6 +220,7 @@ Scars of Mirrodin|SOM|
 Streets of New Capenna|SNC|
 New Capenna Commander|NCC|
 Stronghold|STH|
+Special Guests|SPG|
 Super Series|SUS|
 Theros|THS|
 Theros Beyond Death|THB|

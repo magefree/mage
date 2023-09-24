@@ -199,6 +199,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Kjeldoran Dead", 137, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
         cards.add(new SetCardInfo("Kjeldoran Elite Guard", 34, Rarity.UNCOMMON, mage.cards.k.KjeldoranEliteGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Frostbeast", 296, Rarity.UNCOMMON, mage.cards.k.KjeldoranFrostbeast.class));
+        cards.add(new SetCardInfo("Kjeldoran Guard", 35, Rarity.COMMON, mage.cards.k.KjeldoranGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Knight", 36, Rarity.RARE, mage.cards.k.KjeldoranKnight.class));
         cards.add(new SetCardInfo("Kjeldoran Phalanx", 37, Rarity.RARE, mage.cards.k.KjeldoranPhalanx.class));
         cards.add(new SetCardInfo("Kjeldoran Royal Guard", 38, Rarity.RARE, mage.cards.k.KjeldoranRoyalGuard.class));

@@ -67,11 +67,6 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         if (effect.checksEventType(event, game)) {
             return true;

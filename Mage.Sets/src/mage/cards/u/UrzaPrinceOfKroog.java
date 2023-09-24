@@ -42,7 +42,7 @@ public final class UrzaPrinceOfKroog extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new CreateTokenCopyTargetEffect(
                 null, CardType.CREATURE, false, 1, false,
                 false, null, 1, 1, false
-        ).setAdditionalSubType(SubType.SOLDIER).setText("create a token that's a copy of target artifact you control, " +
+        ).withAdditionalSubType(SubType.SOLDIER).setText("create a token that's a copy of target artifact you control, " +
                 "except it's a 1/1 Soldier creature in addition to its other types"), new GenericManaCost(6));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.addAbility(ability);

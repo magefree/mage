@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderAllEffect;
-import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessAllEffect;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessControlledEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -25,12 +25,10 @@ import java.util.UUID;
 public final class ArcadesTheStrategist extends CardImpl {
 
     private static final FilterControlledCreaturePermanent defenderSingle = new FilterControlledCreaturePermanent("a creature with defender");
-    private static final FilterCreaturePermanent defenderPlural = new FilterCreaturePermanent("Each creature you control with defender");
+    private static final FilterCreaturePermanent defenderPlural = new FilterCreaturePermanent("creature you control with defender");
 
     static {
         defenderSingle.add(new AbilityPredicate(DefenderAbility.class));
-        
-        defenderPlural.add(TargetController.YOU.getControllerPredicate());
         defenderPlural.add(new AbilityPredicate(DefenderAbility.class));
     }
 
@@ -55,7 +53,7 @@ public final class ArcadesTheStrategist extends CardImpl {
         ));
 
         // Each creature you control with defender assigns combat damage equal to its toughness rather than its power and can attack as though it didn't have defender.
-        Ability ability = new SimpleStaticAbility(new CombatDamageByToughnessAllEffect(defenderPlural));
+        Ability ability = new SimpleStaticAbility(new CombatDamageByToughnessControlledEffect(defenderPlural));
         ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderAllEffect(
                 Duration.WhileOnBattlefield, defenderSingle
         ).setText("and can attack as though it didn't have defender"));

@@ -105,11 +105,6 @@ class KatabaticWindsRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }

@@ -145,11 +145,6 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public TeferiMageOfZhalfirReplacementEffect copy() {
         return new TeferiMageOfZhalfirReplacementEffect(this);
     }

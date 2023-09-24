@@ -135,11 +135,6 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
@@ -149,11 +144,12 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.ACTIVATE_ABILITY) {
-            return false;
-        }
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (enchantment == null || !event.getPlayerId().equals(enchantment.getAttachedTo())) {
             return false;

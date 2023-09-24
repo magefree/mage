@@ -26,10 +26,10 @@ public class RadiateTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerB, "Kitesail Corsair", 2);
 
         // cast bolt and copy spell for each another target
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // skip stack order
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Radiate", "Lightning Bolt", "Lightning Bolt");
         checkStackSize("before radiate", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // skip stack order for copies
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
         // must have: 2x for corsairs, 2x for bears, 1x for A
         checkStackSize("after radiate", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1 + 5);
@@ -46,8 +46,6 @@ public class RadiateTest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_Play_AI() {
-        // This test has trouble now but the manual version works
-
         // Choose target instant or sorcery spell that targets only a single permanent or player. Copy that spell
         // for each other permanent or player the spell could target. Each copy targets a different one of those
         // permanents and players.

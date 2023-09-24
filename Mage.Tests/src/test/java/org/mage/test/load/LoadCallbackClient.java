@@ -45,7 +45,7 @@ public class LoadCallbackClient implements CallbackClient {
         // ignore bloaded logs
         switch (callback.getMethod()) {
             case CHATMESSAGE:
-            case GAME_INFORM:
+            case GAME_UPDATE_AND_INFORM:
             case GAME_UPDATE:
                 break;
             default:
@@ -77,7 +77,7 @@ public class LoadCallbackClient implements CallbackClient {
                 break;
             }
 
-            case GAME_INFORM:
+            case GAME_UPDATE_AND_INFORM:
             case GAME_INFORM_PERSONAL: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 gameView = message.getGameView();

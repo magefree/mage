@@ -66,11 +66,6 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public RakdosLordOfRiotsCantCastEffect copy() {
         return new RakdosLordOfRiotsCantCastEffect(this);
     }

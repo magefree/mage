@@ -73,11 +73,6 @@ class DontUntapIfAttackedLastTurnEnchantedEffect extends ContinuousRuleModifying
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public DontUntapIfAttackedLastTurnEnchantedEffect copy() {
         return new DontUntapIfAttackedLastTurnEnchantedEffect(this);
     }
