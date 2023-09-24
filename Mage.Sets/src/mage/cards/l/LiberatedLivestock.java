@@ -76,9 +76,8 @@ class LiberatedLivestockEffect extends OneShotEffect {
         List<Token> tokens = Arrays.asList(cat, bird, ox);
 
         // pause to get token onto the battlefield all the same time
-        game.getState().pause();
         tokens.forEach(token -> token.putOntoBattlefield(1, game, source, source.getControllerId()));
-        game.getState().resume();
+        game.getState().processAction(game);
 
         // Setup for choosing and attaching auras to tokens
         FilterCard filter = new FilterCard("Up to one Aura");
