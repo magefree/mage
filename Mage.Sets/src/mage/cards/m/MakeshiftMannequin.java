@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -116,7 +116,7 @@ class MakeshiftMannequinGainAbilityEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.addAbility(
-                    new SourceBecomesTargetTriggeredAbility(
+                    new BecomesTargetSourceTriggeredAbility(
                             new SacrificeSourceEffect()),
                     source.getSourceId(), game);
             return true;

@@ -3,13 +3,14 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.TargetOfOpponentsSpellOrAbilityTriggeredAbility;
+import mage.abilities.common.BecomesTargetControllerTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -35,7 +36,8 @@ public class ParnesseTheSubtleBrush extends CardImpl {
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls,
         // counter that spell or ability unless that player pays 4 life.
-        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new CounterUnlessPaysEffect(new PayLifeCost(4).setText("4 life"))));
+        this.addAbility(new BecomesTargetControllerTriggeredAbility(new CounterUnlessPaysEffect(new PayLifeCost(4).setText("4 life")),
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.SPELL, false));
 
         // Whenever you copy a spell, up to one target opponent may also copy that spell.
         // They may choose new targets for that copy.

@@ -1,30 +1,37 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.*;
 import mage.constants.*;
+import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
 public final class TectonicGiant extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("a spell an opponent controls");
+    static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+    }
 
     public TectonicGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -37,7 +44,12 @@ public final class TectonicGiant extends CardImpl {
         // Whenever Tectonic Giant attacks or becomes the target of a spell an opponent controls, choose one —
         // • Tectonic Giant deals 3 damage to each opponent.
         // • Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card.
-        this.addAbility(new TectonicGiantTriggeredAbility());
+        TriggeredAbility ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(3, TargetController.OPPONENT), false,
+                "Whenever {this} attacks or becomes the target of a spell an opponent controls, ",
+                new AttacksTriggeredAbility(null),
+                new BecomesTargetSourceTriggeredAbility(null, filter));
+        ability.addMode(new Mode(new TectonicGiantEffect()));
+        this.addAbility(ability);
     }
 
     private TectonicGiant(final TectonicGiant card) {
@@ -47,48 +59,6 @@ public final class TectonicGiant extends CardImpl {
     @Override
     public TectonicGiant copy() {
         return new TectonicGiant(this);
-    }
-}
-
-class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
-
-    TectonicGiantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamagePlayersEffect(3, TargetController.OPPONENT), false);
-        this.addMode(new Mode(new TectonicGiantEffect()));
-        setTriggerPhrase("Whenever {this} attacks or becomes the target of a spell an opponent controls, ");
-    }
-
-    private TectonicGiantTriggeredAbility(final TectonicGiantTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS
-                || event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DECLARED_ATTACKERS:
-                return game.getCombat().getAttackers().contains(this.getSourceId());
-            case TARGETED:
-                if (event.getTargetId().equals(getSourceId())) {
-                    MageObject mageObject = game.getObject(event.getSourceId());
-                    Player player = game.getPlayer(getControllerId());
-                    return mageObject != null
-                            && mageObject instanceof Spell
-                            && player != null
-                            && player.hasOpponent(((Spell) mageObject).getControllerId(), game);
-                }
-        }
-        return false;
-    }
-
-    @Override
-    public TectonicGiantTriggeredAbility copy() {
-        return new TectonicGiantTriggeredAbility(this);
     }
 }
 

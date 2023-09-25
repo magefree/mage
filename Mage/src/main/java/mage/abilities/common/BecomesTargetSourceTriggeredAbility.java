@@ -2,6 +2,10 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
@@ -9,38 +13,45 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
-import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
- * @author LoneFox
+ * @author North
  */
-public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl {
+public class BecomesTargetSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterStackObject filter;
     private final SetTargetPointer setTargetPointer;
 
-    public BecomesTargetAttachedTriggeredAbility(Effect effect) {
-        this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY_A, SetTargetPointer.NONE, false);
+    public BecomesTargetSourceTriggeredAbility(Effect effect) {
+        this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY_A);
     }
 
-    public BecomesTargetAttachedTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer, boolean optional) {
+    public BecomesTargetSourceTriggeredAbility(Effect effect, FilterStackObject filter) {
+        this(effect, filter, SetTargetPointer.NONE, false);
+    }
+
+    public BecomesTargetSourceTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("When enchanted creature becomes the target of " + filter.getMessage() + ", ");
+        boolean textWhen = (effect instanceof SacrificeSourceEffect
+                || effect instanceof ReturnToHandSourceEffect
+                || effect instanceof ShuffleIntoLibrarySourceEffect
+                || effect instanceof ExileSourceEffect);
+        setTriggerPhrase((textWhen ? "When" : "Whenever") + " {this} becomes the target of " + filter.getMessage() + ", ");
     }
 
-    protected BecomesTargetAttachedTriggeredAbility(final BecomesTargetAttachedTriggeredAbility ability) {
+    protected BecomesTargetSourceTriggeredAbility(final BecomesTargetSourceTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
-    public BecomesTargetAttachedTriggeredAbility copy() {
-        return new BecomesTargetAttachedTriggeredAbility(this);
+    public BecomesTargetSourceTriggeredAbility copy() {
+        return new BecomesTargetSourceTriggeredAbility(this);
     }
 
     @Override
@@ -50,8 +61,7 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(sourceId);
-        if (enchantment == null || enchantment.getAttachedTo() == null || !event.getTargetId().equals(enchantment.getAttachedTo())) {
+        if (!event.getTargetId().equals(getSourceId())) {
             return false;
         }
         StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
@@ -71,7 +81,7 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
             case NONE:
                 break;
             default:
-                throw new IllegalArgumentException("Unsupported SetTargetPointer in BecomesTargetAttachedTriggeredAbility");
+                throw new IllegalArgumentException("Unsupported SetTargetPointer in BecomesTargetSourceTriggeredAbility");
         }
         return true;
     }
