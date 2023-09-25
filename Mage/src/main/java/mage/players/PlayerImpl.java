@@ -1113,7 +1113,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 .computeIfAbsent(sourceId, k -> new HashMap<>())
                 .put(identifier, costs != null ? costs.copy() : null);
 
-        if(identifier == null) {
+        if (identifier == null) {
             boolean a = true;
         }
     }
@@ -1222,12 +1222,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                         ? MageIdentifier.Default
                         : approvingObject.getApprovingAbility().getIdentifier();
 
-                if(!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(identifier)) {
+                if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(identifier)) {
                     // identifier has no alternate cast entry for that sourceId, using Default instead.
                     identifier = MageIdentifier.Default;
                 }
 
-                if(getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(identifier)) {
+                if (getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(identifier)) {
                     Ability spellAbility = spell.getSpellAbility();
                     ManaCosts alternateCosts = getCastSourceIdManaCosts().get(ability.getSourceId()).get(identifier);
                     Costs<Cost> costs = getCastSourceIdCosts().get(ability.getSourceId()).get(identifier);
@@ -1318,7 +1318,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 activationStatus.getApprovingObjects().stream().collect(Collectors.toList()),
                 false
         );
-        if(approvingResult.status.equals(ApprovingObjectResultStatus.NOT_REQUIRED_NO_CHOICE)) {
+        if (approvingResult.status.equals(ApprovingObjectResultStatus.NOT_REQUIRED_NO_CHOICE)) {
             return false; // canceled choice of approving object.
         }
 
@@ -1388,7 +1388,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 MageObject mageObject = game.getObject(possibleApprovingObject.getApprovingAbility().getSourceId());
                 String choiceValue = "";
                 MageIdentifier identifier = possibleApprovingObject.getApprovingAbility().getIdentifier();
-                if(!identifier.getAdditionalText().isEmpty()) {
+                if (!identifier.getAdditionalText().isEmpty()) {
                     choiceValue += identifier.getAdditionalText() + ": ";
                 }
                 if (mageObject == null) {
@@ -1406,7 +1406,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 Choice choicePermitting = new ChoiceImpl(required);
                 choicePermitting.setMessage("Choose the permitting object");
                 choicePermitting.setKeyChoices(keyChoices);
-                if(canRespond()) {
+                if (canRespond()) {
                     if (choose(Outcome.Neutral, choicePermitting, game)) {
                         String choiceKey = choicePermitting.getChoiceKey();
                         if (choiceKey != null) {
@@ -1579,7 +1579,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             activationStatus.getApprovingObjects().stream().collect(Collectors.toList()),
                             false
                     );
-                    if(approvingResult.status.equals(ApprovingObjectResultStatus.NOT_REQUIRED_NO_CHOICE)) {
+                    if (approvingResult.status.equals(ApprovingObjectResultStatus.NOT_REQUIRED_NO_CHOICE)) {
                         return false; // chosen to not approve any AsThough.
                     }
 

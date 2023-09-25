@@ -180,7 +180,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         // timing check
         //20091005 - 602.5d/602.5e
-        Set<ApprovingObject> approvingObjects =game
+        Set<ApprovingObject> approvingObjects = game
                 .getContinuousEffects()
                 .asThough(sourceId,
                         AsThoughEffectType.ACTIVATE_AS_INSTANT,

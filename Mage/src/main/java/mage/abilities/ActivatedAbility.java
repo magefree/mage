@@ -16,20 +16,22 @@ public interface ActivatedAbility extends Ability {
 
     final class ActivationStatus {
 
+        // Expected to not be modified after creation.
         private final Set<ApprovingObject> approvingObjects;
 
         // If true, the Activation Status will not check if there is an approvingObject.
         private final boolean forcedCanActivate;
 
         public ActivationStatus(ApprovingObject approvingObject) {
-            this(new HashSet<>(Arrays.asList(approvingObject)));
+            this.forcedCanActivate = false;
+            this.approvingObjects = Collections.singleton(approvingObject);
         }
 
         public ActivationStatus(Set<ApprovingObject> approvingObjects) {
             this(false, approvingObjects);
         }
 
-        private ActivationStatus(boolean forcedCanActivate, Set<ApprovingObject> approvingObjects){
+        private ActivationStatus(boolean forcedCanActivate, Set<ApprovingObject> approvingObjects) {
             this.forcedCanActivate = forcedCanActivate;
             this.approvingObjects = new HashSet<>();
             this.approvingObjects.addAll(approvingObjects);
@@ -39,6 +41,11 @@ public interface ActivatedAbility extends Ability {
             return forcedCanActivate || !approvingObjects.isEmpty();
         }
 
+        /**
+         * @return the set of all approving objects for that ActivationStatus.
+         * That Set is readonly in spirit, as there might be different parts
+         * of the engine retrieving info from it.
+         */
         public Set<ApprovingObject> getApprovingObjects() {
             return approvingObjects;
         }
@@ -50,7 +57,7 @@ public interface ActivatedAbility extends Ability {
         }
 
         public static ActivationStatus withoutApprovingObject(boolean forcedCanActivate) {
-            return new ActivationStatus(forcedCanActivate, new HashSet<>());
+            return new ActivationStatus(forcedCanActivate, Collections.emptySet());
         }
     }
 
