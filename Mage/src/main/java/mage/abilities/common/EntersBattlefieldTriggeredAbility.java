@@ -11,8 +11,6 @@ import mage.game.events.GameEvent;
  */
 public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected String etbFlavorWord = null;
-
     public EntersBattlefieldTriggeredAbility(Effect effect) {
         this(effect, false);
     }
@@ -25,7 +23,6 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     protected EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
         super(ability);
-        this.etbFlavorWord = ability.etbFlavorWord;
     }
 
     @Override

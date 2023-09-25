@@ -27,7 +27,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnceEachTurn = false;
     private boolean doOnlyOnceEachTurn = false;
-    protected boolean replaceRuleText = false;
+    protected boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null;
 
