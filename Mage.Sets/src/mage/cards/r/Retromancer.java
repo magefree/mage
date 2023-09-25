@@ -27,7 +27,8 @@ public final class Retromancer extends CardImpl {
         // Whenever Retromancer becomes the target of a spell or ability, Retromancer deals 3 damage to that spell or ability's controller.
         this.addAbility(new BecomesTargetSourceTriggeredAbility(new DamageTargetEffect(3)
                 .setText("{this} deals 3 damage to that spell or ability's controller"),
-                StaticFilters.FILTER_SPELL_OR_ABILITY_A, SetTargetPointer.PLAYER, false));
+                StaticFilters.FILTER_SPELL_OR_ABILITY_A, SetTargetPointer.PLAYER, false)
+                .withRuleTextReplacement(false));
     }
 
     private Retromancer(final Retromancer card) {

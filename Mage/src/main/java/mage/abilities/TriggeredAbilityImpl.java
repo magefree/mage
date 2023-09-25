@@ -220,12 +220,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     superRule = superRule.replaceFirst(" (become|block|deal|discard|gain|get|lose|mill|sacrifice)s? ", " $1 ");
                 }
             }
-            if (replaceRuleText
-                    && triggerPhrase != null
-                    && (superRule.startsWith("{this}")
-                    || superRule.startsWith("sacrifice {this}")
-            )) {
-                superRule = superRule.replace("{this} ", "it ");
+            if (replaceRuleText && triggerPhrase != null) {
+                superRule = superRule.replaceFirst("^(sacrifice )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
             if (triggersOnceEachTurn) {

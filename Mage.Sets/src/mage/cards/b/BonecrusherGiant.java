@@ -31,7 +31,8 @@ public final class BonecrusherGiant extends AdventureCard {
         this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new DamageTargetEffect(
                         2, true, "that spell's controller", "{this}"
-                ), StaticFilters.FILTER_SPELL_A, SetTargetPointer.PLAYER, false));
+                ), StaticFilters.FILTER_SPELL_A, SetTargetPointer.PLAYER, false)
+                .withRuleTextReplacement(false));
 
         // Stomp
         // Damage can’t be prevented this turn. Stomp deals 2 damage to any target.

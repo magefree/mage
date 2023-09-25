@@ -27,7 +27,7 @@ public final class AngelicProtector extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new BoostSourceEffect(0, 3, Duration.EndOfTurn)
-        ).setTriggerPhrase("Whenever {this} becomes the target of a spell or ability, "));
+        ).withRuleTextReplacement(false));
     }
 
     private AngelicProtector(final AngelicProtector card) {

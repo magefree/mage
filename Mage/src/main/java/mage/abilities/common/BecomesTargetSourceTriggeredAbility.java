@@ -41,6 +41,7 @@ public class BecomesTargetSourceTriggeredAbility extends TriggeredAbilityImpl {
                 || effect instanceof ShuffleIntoLibrarySourceEffect
                 || effect instanceof ExileSourceEffect);
         setTriggerPhrase((textWhen ? "When" : "Whenever") + " {this} becomes the target of " + filter.getMessage() + ", ");
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
     protected BecomesTargetSourceTriggeredAbility(final BecomesTargetSourceTriggeredAbility ability) {
