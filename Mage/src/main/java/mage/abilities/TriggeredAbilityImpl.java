@@ -27,7 +27,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnceEachTurn = false;
     private boolean doOnlyOnceEachTurn = false;
-    protected boolean replaceRuleText = true;
+    protected boolean replaceRuleText = false;
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null;
 
@@ -222,12 +222,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             }
             if (replaceRuleText
                     && triggerPhrase != null
-                    && triggerPhrase.contains("{this}")
-                    && !triggerPhrase.contains("other")
-                    && !triggerPhrase.contains(" of a ")
-                    && !triggerPhrase.contains(" by a ")
-                    && !triggerPhrase.contains(" to a ")
-                    && !triggerPhrase.contains(" blocks a ")
                     && (superRule.startsWith("{this}")
                     || superRule.startsWith("sacrifice {this}")
             )) {
