@@ -131,7 +131,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public TriggeredAbility setReplaceRuleText(boolean replaceRuleText) {
+    public TriggeredAbility withRuleTextReplacement(boolean replaceRuleText) {
         this.replaceRuleText = replaceRuleText;
         return this;
     }

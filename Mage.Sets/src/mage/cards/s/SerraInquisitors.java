@@ -36,7 +36,7 @@ public final class SerraInquisitors extends CardImpl {
 
         // Whenever Serra Inquisitors blocks or becomes blocked by one or more black creatures, Serra Inquisitors gets +2/+0 until end of turn.
         this.addAbility(new BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn),
-                filter, false).setReplaceRuleText(false));
+                filter, false).withRuleTextReplacement(false));
     }
 
     private SerraInquisitors(final SerraInquisitors card) {
