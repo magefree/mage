@@ -33,7 +33,7 @@ public final class CursedMonstrosity extends CardImpl {
         this.addAbility(new BecomesTargetSourceTriggeredAbility(
                             new SacrificeSourceUnlessPaysEffect(
                             new DiscardTargetCost(new TargetCardInHand(new FilterLandCard()))
-                )));
+                )).withRuleTextReplacement(true));
     }
 
     private CursedMonstrosity(final CursedMonstrosity card) {

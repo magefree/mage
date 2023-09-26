@@ -34,7 +34,8 @@ public final class AngelicCub extends CardImpl {
 
         // Whenever Angelic Cub becomes the target of a spell or ability for the first time each turn, put a +1/+1 counter on it.
         this.addAbility(new BecomesTargetSourceFirstTimeTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+                        .setText("put a +1/+1 counter on it"),
                 StaticFilters.FILTER_SPELL_OR_ABILITY_A, SetTargetPointer.NONE, false
         ));
         // As long as Angelic Cub has three or more +1/+1 counters on it, it has flying.
