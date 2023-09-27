@@ -14,7 +14,8 @@ import mage.client.util.comparators.CardViewRarityComparator;
 import mage.constants.Constants;
 import mage.view.CardView;
 import mage.view.CardsView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,8 +27,7 @@ import java.util.List;
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
-
-    private static final Logger logger = Logger.getLogger(DraftGrid.class);
+    private static final Logger logger = LoggerFactory.getLogger(DraftGrid.class);
 
     private final DraftPanel parentPanel;
 

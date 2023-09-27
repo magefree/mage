@@ -4,14 +4,14 @@ import mage.util.CardUtil;
 
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class Counter implements Serializable {
-
-    private static final Logger logger = Logger.getLogger(Counter.class);
+    private static final Logger logger = LoggerFactory.getLogger(Counter.class);
 
     protected final String name;
     protected int count;

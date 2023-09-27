@@ -1,6 +1,7 @@
 package mage.cards.decks;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
@@ -11,9 +12,8 @@ import java.util.Set;
  * @author BetaSteward_at_googlemail.com
  */
 public enum DeckValidatorFactory {
-
     instance;
-    private static final Logger logger = Logger.getLogger(DeckValidatorFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeckValidatorFactory.class);
 
     private final Map<String, Class> deckTypes = new LinkedHashMap<>();
 
@@ -24,7 +24,7 @@ public enum DeckValidatorFactory {
             Constructor<?> con = deckTypes.get(deckType).getConstructor();
             validator = (DeckValidator) con.newInstance();
         } catch (Exception ex) {
-            logger.fatal("DeckValidatorFactory error", ex);
+            logger.error("DeckValidatorFactory error", ex);
             return null;
         }
         logger.debug("Deck validator created: " + validator.getName());
@@ -41,5 +41,4 @@ public enum DeckValidatorFactory {
             this.deckTypes.put(name, deckType);
         }
     }
-
 }

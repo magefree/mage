@@ -12,8 +12,9 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.Rarity;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.CardImageUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -30,8 +31,7 @@ import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public final class ManaSymbols {
-
-    private static final Logger logger = Logger.getLogger(ManaSymbols.class);
+    private static final Logger logger = LoggerFactory.getLogger(ManaSymbols.class);
 
     private static final String CSS_FILE_NAME = "mana-svg-settings.css";
     private static final String CSS_ADDITIONAL_SETTINGS = "";

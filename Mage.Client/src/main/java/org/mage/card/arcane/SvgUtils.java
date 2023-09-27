@@ -9,8 +9,9 @@ import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.TranscodingHints;
 import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.util.SVGConstants;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,7 +30,7 @@ import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
  */
 public class SvgUtils {
 
-    private static final Logger logger = Logger.getLogger(SvgUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(SvgUtils.class);
 
     private static boolean haveSvgSupport = false;
 

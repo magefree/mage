@@ -5,7 +5,8 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Session;
 import mage.utils.MageVersion;
 import mage.view.GameView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -15,11 +16,10 @@ import java.util.UUID;
  * @author noxx, JayDi85
  */
 public class SimpleMageClient implements MageClient {
-
     private final UUID clientId;
     private static final MageVersion version = new MageVersion(MageClient.class);
 
-    private static final Logger log = Logger.getLogger(SimpleMageClient.class);
+    private static final Logger log = LoggerFactory.getLogger(SimpleMageClient.class);
 
     private final LoadCallbackClient callbackClient;
 

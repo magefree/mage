@@ -7,15 +7,15 @@ import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.*;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author renli
  */
 public class MusicPlayer {
-
-    private static final Logger log = Logger.getLogger(AudioManager.class);
+    private static final Logger log = LoggerFactory.getLogger(AudioManager.class);
     String filepath;
     String filename;
     final List filelist = new List();

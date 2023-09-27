@@ -10,8 +10,9 @@ import mage.client.util.gui.FastSearchUtil;
 import mage.constants.Rarity;
 import mage.util.RandomUtil;
 import mage.util.DeckBuildUtils;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -26,8 +27,7 @@ import java.util.TreeSet;
  * @author BetaSteward_at_googlemail.com
  */
 public class AddLandDialog extends MageDialog {
-
-    private static final Logger logger = Logger.getLogger(MageDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(MageDialog.class);
 
     private Deck deck;
     

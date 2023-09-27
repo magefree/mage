@@ -1,6 +1,7 @@
 package mage.cards.decks;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.datatransfer.DataFlavor;
@@ -15,8 +16,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 public class DnDDeckTargetListener extends DropTargetAdapter {
-
-    private static final transient Logger logger = Logger.getLogger(DnDDeckTargetListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(DnDDeckTargetListener.class);
     private static final DataFlavor fileFlavor = DataFlavor.javaFileListFlavor;
     private static final DataFlavor plainTextFlavor = DataFlavor.stringFlavor;
 

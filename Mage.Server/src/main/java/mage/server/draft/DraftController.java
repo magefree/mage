@@ -10,7 +10,8 @@ import mage.players.Player;
 import mage.server.game.GameController;
 import mage.server.managers.ManagerFactory;
 import mage.view.DraftPickView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -23,8 +24,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftController {
-
-    private static final Logger logger = Logger.getLogger(GameController.class);
+    private static final Logger logger = LoggerFactory.getLogger(DraftController.class);
 
     private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<>();
@@ -55,7 +55,7 @@ public class DraftController {
                                 break;
                         }
                     } catch (MageException ex) {
-                        logger.fatal("Table event listener error", ex);
+                        logger.error("Table event listener error", ex);
                     }
                 }
         );
@@ -68,7 +68,7 @@ public class DraftController {
                                 break;
                         }
                     } catch (MageException ex) {
-                        logger.fatal("Table event listener error", ex);
+                        logger.error("Table event listener error", ex);
                     }
                 }
         );
@@ -126,7 +126,7 @@ public class DraftController {
     private void startDraft() {
         for (final Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
             if (!entry.getValue().init()) {
-                logger.fatal("Unable to initialize client for playerId " + entry.getKey());
+                logger.error("Unable to initialize client for playerId " + entry.getKey());
                 //TODO: generate client error message
                 return;
             }

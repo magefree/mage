@@ -11,7 +11,8 @@ import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
 import mage.utils.StreamUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +35,7 @@ import static mage.client.dialog.PreferencesDialog.*;
  */
 public class ConnectDialog extends MageDialog {
 
-    private static final Logger logger = Logger.getLogger(ConnectDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConnectDialog.class);
     private Connection connection;
     private ConnectTask task;
     private final RegisterUserDialog registerUserDialog;
@@ -200,7 +201,7 @@ public class ConnectDialog extends MageDialog {
                 }
             }
         } catch (Exception ex) {
-            logger.error(ex, ex);
+            logger.error(String.valueOf(ex), ex);
         } finally {
             StreamUtils.closeQuietly(in);
             StreamUtils.closeQuietly(output);
@@ -710,12 +711,12 @@ public class ConnectDialog extends MageDialog {
                     lblStatus.setText("Could not connect: " + lastConnectError);
                 }
             } catch (InterruptedException | ExecutionException ex) {
-                logger.fatal("Update Players Task error", ex);
+                logger.error("Update Players Task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Connect: canceled");
                 lblStatus.setText("Connect was canceled");
             } catch (TimeoutException ex) {
-                logger.fatal("Connection timeout: ", ex);
+                logger.error("Connection timeout: ", ex);
             } finally {
                 MageFrame.stopConnecting();
                 setConnectButtonsState(true);

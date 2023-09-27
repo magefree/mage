@@ -3,9 +3,10 @@ package mage.client.game;
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
@@ -15,8 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Ignore
 public class StartMultiGamesTest {
-
-    private static final Logger logger = Logger.getLogger(StartMultiGamesTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(StartMultiGamesTest.class);
 
     /**
      * Amount of games to be started from this test.
@@ -45,7 +45,7 @@ public class StartMultiGamesTest {
 
     private void startGame() throws Exception {
         frame = null;
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.fatal(null, e));
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.error(null, e));
         SwingUtilities.invokeLater(() -> {
             synchronized (sync) {
                 try {

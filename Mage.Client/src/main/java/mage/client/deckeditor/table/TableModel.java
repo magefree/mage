@@ -15,7 +15,6 @@ import mage.constants.EnlargeMode;
 import mage.cards.RateCard;
 import mage.view.CardView;
 import mage.view.CardsView;
-import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 
@@ -35,10 +34,7 @@ import java.util.Map.Entry;
  * @author nantuko
  */
 public class TableModel extends AbstractTableModel implements ICardGrid {
-
     private static final long serialVersionUID = -528008802935423088L;
-
-    private static final Logger log = Logger.getLogger(TableModel.class);
 
     protected final CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;

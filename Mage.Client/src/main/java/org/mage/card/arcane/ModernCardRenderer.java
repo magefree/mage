@@ -11,7 +11,9 @@ import mage.constants.SubType;
 import mage.util.SubTypes;
 import mage.view.CardView;
 import mage.view.PermanentView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
 
 import javax.swing.*;
@@ -57,8 +59,7 @@ import java.util.List;
  * M15 frame style, for another styles see https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
  */
 public class ModernCardRenderer extends CardRenderer {
-
-    private static final Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ModernCardRenderer.class);
     private static final GlowText glowTextRenderer = new GlowText();
     public static final Color MANA_ICONS_TEXT_COLOR = Color.DARK_GRAY; // text color of missing mana icons in IMAGE render mode
 

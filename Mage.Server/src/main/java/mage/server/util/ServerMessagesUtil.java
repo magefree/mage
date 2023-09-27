@@ -1,7 +1,8 @@
 package mage.server.util;
 
 import mage.utils.StreamUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +27,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public enum ServerMessagesUtil {
     instance;
 
-    private static final Logger LOGGER = Logger.getLogger(ServerMessagesUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
 
     private final List<String> messages = new ArrayList<>();
@@ -56,7 +57,7 @@ public enum ServerMessagesUtil {
     }
 
     private void reloadMessages() {
-        LOGGER.debug("Reading server messages...");
+        logger.debug("Reading server messages...");
         List<String> motdMessages = readFromFile();
         List<String> newMessages = new ArrayList<>(motdMessages);
         newMessages.add(getServerStatistics());
@@ -81,14 +82,14 @@ public enum ServerMessagesUtil {
         if (!file.exists() || !file.canRead()) {
             // warn user about miss messages file, except dev environment
             if (!file.getAbsolutePath().contains("Mage.Server")) {
-                LOGGER.warn("Couldn't find server messages file using path: " + file.getAbsolutePath());
+                logger.warn("Couldn't find server messages file using path: " + file.getAbsolutePath());
             }
         } else {
             try {
                 is = new FileInputStream(file);
                 ignore = false;
             } catch (Exception f) {
-                LOGGER.error(f, f);
+                logger.error(String.valueOf(f), f);
                 ignore = true;
             }
         }
@@ -107,7 +108,7 @@ public enum ServerMessagesUtil {
                 newMessages.add(message.trim());
             }
         } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
         } finally {
             StreamUtils.closeQuietly(is);
         }

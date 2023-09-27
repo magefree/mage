@@ -31,8 +31,9 @@ import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
 import mage.util.MultiAmountMessage;
 import mage.view.*;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -61,8 +62,7 @@ import static mage.constants.PlayerAction.*;
  * @author BetaSteward_at_googlemail.com, nantuko8, JayDi85
  */
 public final class GamePanel extends javax.swing.JPanel {
-
-    private static final Logger logger = Logger.getLogger(GamePanel.class);
+    private static final Logger logger = LoggerFactory.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
     private static final int X_PHASE_WIDTH = 55;
 
@@ -283,7 +283,7 @@ public final class GamePanel extends javax.swing.JPanel {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
         } catch (InterruptedException ex) {
-            logger.fatal("popupContainer error:", ex);
+            logger.error("popupContainer error:", ex);
         }
         jPanel2.remove(bigCard);
         this.bigCard = null;
@@ -3008,7 +3008,7 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
 
     private final UUID gameId;
 
-    private static final Logger logger = Logger.getLogger(ReplayTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReplayTask.class);
 
     ReplayTask(UUID gameId) {
         this.gameId = gameId;
@@ -3028,7 +3028,7 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Replay Match Task error", ex);
+            logger.error("Replay Match Task error", ex);
         } catch (CancellationException ex) {
         }
     }

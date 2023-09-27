@@ -17,14 +17,15 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author magenoxx_at_gmail.com
  */
 public final class TraceUtil {
     
-    private static final Logger log = Logger.getLogger(TraceUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(TraceUtil.class);
 
     /**
      * This method is intended to catch various bugs with combat.
@@ -47,7 +48,7 @@ public final class TraceUtil {
                         for (UUID blockerId : group.getBlockers()) {
                             Permanent blocker = game.getPermanent(blockerId);
                             if (blocker != null && !hasFlying(blocker) && !hasReach(blocker)) {
-                                log.warn("Found non-flying non-reach creature blocking creature with flying");
+                                logger.warn("Found non-flying non-reach creature blocking creature with flying");
                                 traceCombat(game, attacker, blocker);                                
                             }
                         }
@@ -57,7 +58,7 @@ public final class TraceUtil {
                             Permanent blocker = game.getPermanent(blockerId);
                             if (blocker != null && !blocker.isArtifact(game)
                                     && !attacker.getColor(game).shares(blocker.getColor(game))) {
-                                log.warn("Found creature with intimidate blocked by non artifact not sharing color creature");
+                                logger.warn("Found creature with intimidate blocked by non artifact not sharing color creature");
                                 traceCombat(game, attacker, blocker);                                
                             }
                         }
@@ -66,7 +67,7 @@ public final class TraceUtil {
                         if (!group.getBlockers().isEmpty()) {
                             Permanent blocker = game.getPermanent(group.getBlockers().get(0));
                             if (blocker != null) {
-                                log.warn("Found creature that can't be blocked by some other creature");
+                                logger.warn("Found creature that can't be blocked by some other creature");
                                 traceCombat(game, attacker, blocker);
                             }
                         }
@@ -118,90 +119,90 @@ public final class TraceUtil {
     
     private static void traceCombat(Game game, Permanent attacker, Permanent blocker) {
         String prefix = "> ";
-        log.error(prefix+"Tracing game state...");
+        logger.error(prefix+"Tracing game state...");
         if (blocker != null) {
-            log.error(prefix+blocker.getLogName() + " could block " + attacker.getLogName());
+            logger.error(prefix+blocker.getLogName() + " could block " + attacker.getLogName());
         }
 
-        log.error(prefix);
-        log.error(prefix+"Attacker abilities: ");
+        logger.error(prefix);
+        logger.error(prefix+"Attacker abilities: ");
         for (Ability ability : attacker.getAbilities()) {
-            log.error(prefix+"     " + ability.toString() + ", id=" + ability.getId());
+            logger.error(prefix+"     " + ability.toString() + ", id=" + ability.getId());
         }
         if (blocker != null) {
-            log.error(prefix+"Blocker abilities: ");
+            logger.error(prefix+"Blocker abilities: ");
             for (Ability ability : blocker.getAbilities()) {
-                log.error(prefix+"     " + ability.toString() + ", id=" + ability.getId());
+                logger.error(prefix+"     " + ability.toString() + ", id=" + ability.getId());
             }
         }
 
-        log.error(prefix);
-        log.error(prefix+"Flying ability id: " + FlyingAbility.getInstance().getId());
-        log.error(prefix+"Reach ability id: " + ReachAbility.getInstance().getId());
-        log.error(prefix+"Intimidate ability id: " + IntimidateAbility.getInstance().getId());
-        log.error(prefix);
+        logger.error(prefix);
+        logger.error(prefix+"Flying ability id: " + FlyingAbility.getInstance().getId());
+        logger.error(prefix+"Reach ability id: " + ReachAbility.getInstance().getId());
+        logger.error(prefix+"Intimidate ability id: " + IntimidateAbility.getInstance().getId());
+        logger.error(prefix);
 
-        log.error(prefix+"Restriction effects:");
-        log.error(prefix+"  Applied to ATTACKER:");
+        logger.error(prefix+"Restriction effects:");
+        logger.error(prefix+"  Applied to ATTACKER:");
         Map<RestrictionEffect, Set<Ability>> attackerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game);
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : attackerResEffects.entrySet()) {
-            log.error(prefix+"    " + entry.getKey());
-            log.error(prefix+"        id=" + entry.getKey().getId());
+            logger.error(prefix+"    " + entry.getKey());
+            logger.error(prefix+"        id=" + entry.getKey().getId());
             for (Ability ability: entry.getValue()) {
-                log.error(prefix+"        ability=" + ability);                
+                logger.error(prefix+"        ability=" + ability);
             }
         }
-        log.error(prefix+"  Applied to BLOCKER:");
+        logger.error(prefix+"  Applied to BLOCKER:");
         if (blocker != null) {
             Map<RestrictionEffect, Set<Ability>> blockerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(blocker, game);
             for (Map.Entry<RestrictionEffect, Set<Ability>> entry : blockerResEffects.entrySet()) {
-                log.error(prefix+"    " + entry.getKey());
-                log.error(prefix+"        id=" + entry.getKey().getId());
+                logger.error(prefix+"    " + entry.getKey());
+                logger.error(prefix+"        id=" + entry.getKey().getId());
                 for (Ability ability: entry.getValue()) {
-                    log.error(prefix+"        ability=" + ability);                
+                    logger.error(prefix+"        ability=" + ability);
                 }
             }
         }
         ContinuousEffectsList<RestrictionEffect> restrictionEffects = (ContinuousEffectsList<RestrictionEffect>) game.getContinuousEffects().getRestrictionEffects();
-        log.error(prefix);
-        log.error(prefix+"  List of all restriction effects:");
+        logger.error(prefix);
+        logger.error(prefix+"  List of all restriction effects:");
         for (RestrictionEffect effect : restrictionEffects) {
-            log.error(prefix+"    " + effect);
-            log.error(prefix+"        id=" + effect.getId());
+            logger.error(prefix+"    " + effect);
+            logger.error(prefix+"        id=" + effect.getId());
         }
 
-        log.error(prefix);
-        log.error(prefix+"  Trace Attacker:");
+        logger.error(prefix);
+        logger.error(prefix+"  Trace Attacker:");
         traceForPermanent(game, attacker, prefix, restrictionEffects);
         if (blocker != null) {
-            log.error(prefix);
-            log.error(prefix+"  Trace Blocker:");            
+            logger.error(prefix);
+            logger.error(prefix+"  Trace Blocker:");
             traceForPermanent(game, blocker, prefix, restrictionEffects);
         }
 
-        log.error(prefix);
+        logger.error(prefix);
     }
 
     private static void traceForPermanent(Game game, Permanent permanent, String uuid, ContinuousEffectsList<RestrictionEffect> restrictionEffects) {
         for (RestrictionEffect effect: restrictionEffects) {
-            log.error(uuid+"     effect=" + effect.toString() + " id=" + effect.getId());
+            logger.error(uuid+"     effect=" + effect.toString() + " id=" + effect.getId());
             for (Ability ability : restrictionEffects.getAbility(effect.getId())) {
                 if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, null)) {
-                    log.error(uuid+"        ability=" + ability + ", applies_to_attacker=" + effect.applies(permanent, ability, game));
+                    logger.error(uuid+"        ability=" + ability + ", applies_to_attacker=" + effect.applies(permanent, ability, game));
                 } else {
                     boolean usable = ability.isInUseableZone(game, permanent, null);
-                    log.error(uuid+"        instanceof StaticAbility: " + (ability instanceof StaticAbility) + ", ability=" + ability);
-                    log.error(uuid+"        usable zone: " + usable + ", ability=" + ability);
+                    logger.error(uuid+"        instanceof StaticAbility: " + (ability instanceof StaticAbility) + ", ability=" + ability);
+                    logger.error(uuid+"        usable zone: " + usable + ", ability=" + ability);
                     if (!usable) {
                         Zone zone = ability.getZone();
-                        log.error(uuid+"        zone: " + zone);
+                        logger.error(uuid+"        zone: " + zone);
                         MageObject object = game.getObject(ability.getSourceId());
-                        log.error(uuid+"        object: " + object);
+                        logger.error(uuid+"        object: " + object);
                         if (object != null) {
-                            log.error(uuid + "        contains ability: " + object.getAbilities().contains(ability));
+                            logger.error(uuid + "        contains ability: " + object.getAbilities().contains(ability));
                         }
                         Zone test = game.getState().getZone(ability.getSourceId());
-                        log.error(uuid+"        test_zone: " + test);
+                        logger.error(uuid+"        test_zone: " + test);
                     }
                 }
             }
@@ -209,7 +210,7 @@ public final class TraceUtil {
     }
 
     public static void trace(String msg) {
-        log.info(msg);
+        logger.info(msg);
     }
     
     /**
@@ -217,8 +218,8 @@ public final class TraceUtil {
      * @param game
      */
     public static void traceTriggeredAbilities(Game game) {
-        log.info("-------------------------------------------------------------------------------------------------");
-        log.info("Turn: " + game.getTurnNum() + " - currently existing triggered abilities: " + game.getState().getTriggers().size());
+        logger.info("-------------------------------------------------------------------------------------------------");
+        logger.info("Turn: " + game.getTurnNum() + " - currently existing triggered abilities: " + game.getState().getTriggers().size());
         Map<String, String> orderedAbilities = new TreeMap<>();        
         for (Map.Entry<String, TriggeredAbility> entry : game.getState().getTriggers().entrySet()) {
             Player controller = game.getPlayer(entry.getValue().getControllerId());
@@ -232,9 +233,9 @@ public final class TraceUtil {
             MageObject source = game.getObject(trAbility.getSourceId());
             if (!controller.getName().equals(playerName)) {
                 playerName = controller.getName();
-                log.info("--- Player: " + playerName + "  --------------------------------");
+                logger.info("--- Player: " + playerName + "  --------------------------------");
             }                
-            log.info((source == null ? "no source": source.getIdName()) + " -> "
+            logger.info((source == null ? "no source": source.getIdName()) + " -> "
                     + trAbility.getRule());
         }        
     }    

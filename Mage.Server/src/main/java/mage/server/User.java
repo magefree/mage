@@ -21,7 +21,8 @@ import mage.server.tournament.TournamentSession;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -32,11 +33,10 @@ import java.util.concurrent.TimeUnit;
  * @author BetaSteward_at_googlemail.com
  */
 public class User {
-
-    private static final Logger logger = Logger.getLogger(User.class);
+    private static final Logger logger = LoggerFactory.getLogger(User.class);
 
     public enum UserState {
-        Created, // Used if user is created an not connected to the session
+        Created, // Used if user is created and not connected to the session
         Connected, // Used if user is correctly connected
         Disconnected, // Used if the user lost connection
         Offline // set if the user was disconnected and expired or regularly left XMage. Removed is the user later after some time
@@ -515,11 +515,11 @@ public class User {
                                 }
                             } else {
                                 // can happen if tournamet has just ended
-                                logger.debug(userName + " tournament player missing - tableId:" + table.getId(), null);
+                                logger.debug(userName + " tournament player missing - tableId:" + table.getId());
                                 tablesToDelete.add(tableEntry.getKey());
                             }
                         } else {
-                            logger.error(userName + " tournament key missing - tableId: " + table.getId(), null);
+                            logger.error(userName + " tournament key missing - tableId: " + table.getId());
                         }
                     } else {
                         switch (table.getState()) {

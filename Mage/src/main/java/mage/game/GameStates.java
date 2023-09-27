@@ -1,18 +1,17 @@
-
 package mage.game;
 
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class GameStates implements Serializable {
-
-    private static final Logger logger = Logger.getLogger(GameStates.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameStates.class);
     private final List<GameState> states;
 
     public GameStates() {

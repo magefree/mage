@@ -27,8 +27,9 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.view.*;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -49,9 +50,8 @@ import java.util.stream.IntStream;
  * @author nantuko, JayDi85
  */
 public class MageBook extends JComponent {
-
     private static final long serialVersionUID = 1L;
-    private static final Logger logger = Logger.getLogger(MageBook.class);
+    private static final Logger logger = LoggerFactory.getLogger(MageBook.class);
 
     public static final String LAYOUT_3X3 = "small";
     public static final String LAYOUT_4X4 = "big";
@@ -521,7 +521,7 @@ public class MageBook extends JComponent {
             return new ImagePanel(background, type);
 
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
             return null;
         }
     }
@@ -658,7 +658,6 @@ public class MageBook extends JComponent {
     private String currentSet = "RTR";
 
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
-    private static final Logger log = Logger.getLogger(MageBook.class);
     private Dimension cardDimension;
     private java.util.List<String> setsToDisplay = new ArrayList<>();
     private final java.util.List<HoverButton> tabs = new ArrayList<>();

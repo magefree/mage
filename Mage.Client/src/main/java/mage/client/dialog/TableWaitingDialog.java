@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
-import org.apache.log4j.Logger;
 
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -27,6 +26,8 @@ import mage.players.PlayerType;
 import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
@@ -38,8 +39,7 @@ import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_4
  * @author BetaSteward_at_googlemail.com
  */
 public class TableWaitingDialog extends MageDialog {
-
-    private static final Logger LOGGER = Logger.getLogger(TableWaitingDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(TableWaitingDialog.class);
     private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 50, 100, 100, 100, 100};
 
     private UUID tableId;
@@ -263,7 +263,7 @@ public class TableWaitingDialog extends MageDialog {
             }
         } catch (Exception e) {
             //swallow exception
-            LOGGER.error(e);
+            logger.error(String.valueOf(e));
         }
         closeDialog();
     }//GEN-LAST:event_btnCancelActionPerformed
@@ -385,7 +385,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
     private final TableWaitingDialog dialog;
     private int count = 0;
 
-    private static final Logger logger = Logger.getLogger(TableWaitingDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(TableWaitingDialog.class);
 
     UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
         this.session = session;
@@ -452,7 +452,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Seats Task error", ex);
+            logger.error("Update Seats Task error", ex);
         } catch (CancellationException ex) {
         }
     }

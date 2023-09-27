@@ -1,8 +1,4 @@
-
-
 package mage.client.util.audio;
-
-import org.apache.log4j.Logger;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -13,13 +9,15 @@ import java.io.OutputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author LevelX2
  */
 public class MageClip {
-    private static final Logger log = Logger.getLogger(MageClip.class);
+    private static final Logger log = LoggerFactory.getLogger(MageClip.class);
 
     private final AudioGroup audioGroup;
     private final String filename;

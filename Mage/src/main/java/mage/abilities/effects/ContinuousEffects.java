@@ -26,7 +26,8 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.util.trace.TraceInfo;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.*;
@@ -38,7 +39,7 @@ import java.util.stream.Collectors;
  */
 public class ContinuousEffects implements Serializable {
 
-    private static final Logger logger = Logger.getLogger(ContinuousEffects.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContinuousEffects.class);
 
     private long order = 0;
 
@@ -1301,7 +1302,7 @@ public class ContinuousEffects implements Serializable {
                             ability.setControllerId(controllerId);
                         }
                     } else if (ability.getZone() != Zone.COMMAND) {
-                        logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
+                        logger.error("Continuous effect for ability with no sourceId Ability: " + ability);
                     }
                 }
             }

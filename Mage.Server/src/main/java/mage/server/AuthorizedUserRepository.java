@@ -11,19 +11,20 @@ import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.RepositoryUtil;
-import org.apache.log4j.Logger;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
 public class AuthorizedUserRepository {
-
+    private static final Logger logger = LoggerFactory.getLogger(AuthorizedUserRepository.class);
     private static final String JDBC_URL = "jdbc:h2:file:./db/authorized_user.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "authorized_user";
     // raise this if db structure was changed
@@ -47,7 +48,7 @@ public class AuthorizedUserRepository {
             TableUtils.createTableIfNotExists(connectionSource, AuthorizedUser.class);
             dao = DaoManager.createDao(connectionSource, AuthorizedUser.class);
         } catch (SQLException ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error creating / assigning authorized_user repository - ", ex);
+            logger.error("Error creating / assigning authorized_user repository - ", ex);
         }
     }
 
@@ -61,7 +62,7 @@ public class AuthorizedUserRepository {
             AuthorizedUser user = new AuthorizedUser(userName, hash, email);
             dao.create(user);
         } catch (SQLException ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error adding a user to DB - ", ex);
+            logger.error("Error adding a user to DB - ", ex);
         }
     }
 
@@ -71,7 +72,7 @@ public class AuthorizedUserRepository {
             db.where().eq("name", new SelectArg(userName));
             db.delete();
         } catch (SQLException ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error removing a user from DB - ", ex);
+            logger.error("Error removing a user from DB - ", ex);
         }
     }
 
@@ -85,7 +86,7 @@ public class AuthorizedUserRepository {
             }
             return null;
         } catch (SQLException ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error getting a authorized_user - ", ex);
+            logger.error("Error getting a authorized_user - ", ex);
         }
         return null;
     }
@@ -94,7 +95,7 @@ public class AuthorizedUserRepository {
         try {
             dao.update(authorizedUser);
         } catch (SQLException ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error updating authorized_user", ex);
+            logger.error("Error updating authorized_user", ex);
         }
     }
 
@@ -108,7 +109,7 @@ public class AuthorizedUserRepository {
             }
             return null;
         } catch (SQLException ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error getting a authorized_user - ", ex);
+            logger.error("Error getting a authorized_user - ", ex);
         }
         return null;
     }
@@ -120,7 +121,7 @@ public class AuthorizedUserRepository {
                 conn.executeStatement("shutdown compact", 0);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error closing authorized_user repository - ", ex);
+            logger.error("Error closing authorized_user repository - ", ex);
         }
     }
 
@@ -129,7 +130,7 @@ public class AuthorizedUserRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME);
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting DB version from DB - ", ex);
+            logger.error("Error getting DB version from DB - ", ex);
         }
         return 0;
     }
@@ -144,16 +145,16 @@ public class AuthorizedUserRepository {
 
     private boolean migrateFrom1To2() {
         try {
-            Logger.getLogger(AuthorizedUserRepository.class).info("Starting " + VERSION_ENTITY_NAME + " DB migration from version 1 to version 2");
+            logger.info("Starting " + VERSION_ENTITY_NAME + " DB migration from version 1 to version 2");
             dao.executeRaw("ALTER TABLE authorized_user ADD COLUMN active BOOLEAN DEFAULT true;");
             dao.executeRaw("ALTER TABLE authorized_user ADD COLUMN lockedUntil DATETIME;");
             dao.executeRaw("ALTER TABLE authorized_user ADD COLUMN chatLockedUntil DATETIME;");
             dao.executeRaw("ALTER TABLE authorized_user ADD COLUMN lastConnection DATETIME;");
             RepositoryUtil.updateVersion(dao.getConnectionSource(), VERSION_ENTITY_NAME, DB_VERSION);
-            Logger.getLogger(AuthorizedUserRepository.class).info("Migration finished.");
+            logger.info("Migration finished.");
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error while migrating from version 1 to version 2 - ", ex);
+            logger.error("Error while migrating from version 1 to version 2 - ", ex);
             return false;
         }
     }

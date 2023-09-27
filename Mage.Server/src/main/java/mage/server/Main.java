@@ -21,8 +21,8 @@ import mage.server.tournament.TournamentFactory;
 import mage.server.util.*;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
+import mage.util.LoggerUtil;
 import mage.utils.MageVersion;
-import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.callback.ServerInvokerCallbackHandler;
@@ -31,6 +31,8 @@ import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 import org.jboss.remoting.transporter.TransporterServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
 import javax.management.MBeanServer;
@@ -46,8 +48,7 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public final class Main {
-
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(Main.class);
 
     // arg settings can be setup by run script or IDE's program arguments like -xxx=yyy
@@ -78,7 +79,7 @@ public final class Main {
     public static void main(String[] args) {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         logger.info("Starting MAGE server version " + version);
-        logger.info("Logging level: " + logger.getEffectiveLevel());
+        logger.info("Logging level: " + LoggerUtil.getLogLevel(logger));
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
 
@@ -116,7 +117,7 @@ public final class Main {
         if (config.isAuthenticationActivated()) {
             logger.info("Check authorized user DB version ...");
             if (!AuthorizedUserRepository.getInstance().checkAlterAndMigrateAuthorizedUser()) {
-                logger.fatal("Failed to start server.");
+                logger.error("Failed to start server.");
                 return;
             }
             logger.info("Done.");
@@ -262,17 +263,17 @@ public final class Main {
             if (!isAlreadyRunning(config, serverLocator)) {
                 server = new MageTransporterServer(managerFactory, serverLocator, new MageServerImpl(managerFactory, adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler(managerFactory));
                 server.start();
-                logger.info("Started MAGE server - listening on " + connection.toString());
+                logger.info("Started MAGE server - listening on " + connection);
 
                 if (testMode) {
                     logger.info("MAGE server running in test mode");
                 }
                 initStatistics();
             } else {
-                logger.fatal("Unable to start MAGE server - another server is already started");
+                logger.error("Unable to start MAGE server - another server is already started");
             }
         } catch (Exception ex) {
-            logger.fatal("Failed to start server - " + connection.toString(), ex);
+            logger.error("Failed to start server - " + connection, ex);
         }
     }
 
@@ -408,7 +409,7 @@ public final class Main {
                 String sessionId = handler.getClientSessionId();
                 managerFactory.sessionManager().createSession(sessionId, callbackHandler);
             } catch (Throwable ex) {
-                logger.fatal("", ex);
+                logger.error("", ex);
             }
         }
 
@@ -450,9 +451,9 @@ public final class Main {
             logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
-            logger.warn(new StringBuilder("Plugin not Found: ").append(plugin.getClassName()).append(" - ").append(plugin.getJar()).append(" - check plugin folder"), ex);
+            logger.warn("Plugin not Found: " + plugin.getClassName() + " - " + plugin.getJar() + " - check plugin folder", ex);
         } catch (MalformedURLException ex) {
-            logger.fatal("Error loading plugin " + plugin.getJar(), ex);
+            logger.error("Error loading plugin " + plugin.getJar(), ex);
         }
         return null;
     }
@@ -465,7 +466,7 @@ public final class Main {
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+            logger.error("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
     }
@@ -477,7 +478,7 @@ public final class Main {
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getName() + " / " + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+            logger.error("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
     }

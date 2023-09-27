@@ -12,13 +12,13 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.watchers.common.CastSpellLastTurnWatcher;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Plopman
  */
 public class StormAbility extends TriggeredAbilityImpl {
-
     public StormAbility() {
         super(Zone.STACK, new StormEffect());
     }
@@ -59,7 +59,7 @@ public class StormAbility extends TriggeredAbilityImpl {
 }
 
 class StormEffect extends OneShotEffect {
-
+    private static final Logger logger = LoggerFactory.getLogger(StormEffect.class);
     public StormEffect() {
         super(Outcome.Copy);
     }
@@ -85,7 +85,7 @@ class StormEffect extends OneShotEffect {
                     }
                 }
             } else {
-                Logger.getLogger(StormEffect.class).fatal("CastSpellLastTurnWatcher not found. game = " + game.getGameType().toString());
+                logger.error("CastSpellLastTurnWatcher not found. game = " + game.getGameType().toString());
             }
             return true;
         }

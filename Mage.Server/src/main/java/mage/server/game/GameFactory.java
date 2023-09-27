@@ -1,12 +1,11 @@
-
-
 package mage.server.game;
 
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchType;
 import mage.view.GameTypeView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -19,9 +18,8 @@ import java.util.Map;
  * @author BetaSteward_at_googlemail.com
  */
 public enum GameFactory {
-
     instance;
-    private static final Logger logger = Logger.getLogger(GameFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameFactory.class);
 
     private final Map<String, Class<Match>> games = new HashMap<>();
     private final Map<String, MatchType> gameTypes = new HashMap<>();
@@ -38,7 +36,7 @@ public enum GameFactory {
             Constructor<Match> con = games.get(gameType).getConstructor(MatchOptions.class);
             match = con.newInstance(options);
         } catch (Exception ex) {
-            logger.fatal("Error creating match - " + gameType, ex);
+            logger.error("Error creating match - " + gameType, ex);
             return null;
         }
         logger.debug("Game created: " + gameType); // + game.getId().toString());

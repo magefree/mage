@@ -13,7 +13,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,8 +23,7 @@ import java.util.stream.Collectors;
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsView extends LinkedHashMap<UUID, CardView> {
-
-    private static final Logger LOGGER = Logger.getLogger(CardsView.class);
+    private static final Logger logger = LoggerFactory.getLogger(CardsView.class);
 
     public CardsView() {
     }
@@ -168,7 +168,7 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
         }
 
         if (this.size() != abilities.size()) {
-            LOGGER.error("Can't translate abilities list to cards view (need " + abilities.size() + ", but get " + this.size() + "). Abilities:\n"
+            logger.error("Can't translate abilities list to cards view (need " + abilities.size() + ", but get " + this.size() + "). Abilities:\n"
                     + abilities.stream().map(a -> a.getClass().getSimpleName() + " - " + a.getRule()).collect(Collectors.joining("\n")));
         }
     }

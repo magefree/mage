@@ -34,7 +34,8 @@ import mage.server.util.SystemUtil;
 import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.unbescape.html.HtmlEscape;
 
 import javax.management.timer.Timer;
@@ -46,8 +47,7 @@ import java.util.concurrent.ExecutorService;
  * @author BetaSteward_at_googlemail.com, noxx
  */
 public class MageServerImpl implements MageServer {
-
-    private static final Logger logger = Logger.getLogger(MageServerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(MageServerImpl.class);
     private final ExecutorService callExecutor;
     private static final SecureRandom RANDOM = new SecureRandom();
 
@@ -296,7 +296,7 @@ public class MageServerImpl implements MageServer {
                 UUID userId = session.get().getUserId();
                 logger.debug(name + " joins tableId: " + tableId);
                 if (userId == null) {
-                    logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
+                    logger.error("Got no userId from sessionId" + sessionId + " tableId" + tableId);
                     return false;
                 }
                 Optional<GamesRoom> room = managerFactory.gamesRoomManager().getRoom(roomId);
@@ -324,7 +324,7 @@ public class MageServerImpl implements MageServer {
                     user.ifPresent(user1 -> logger.trace("join tourn. tableId: " + tableId + ' ' + name));
                 }
                 if (userId == null) {
-                    logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
+                    logger.error("Got no userId from sessionId" + sessionId + " tableId" + tableId);
                     return false;
                 }
                 Optional<GamesRoom> room = managerFactory.gamesRoomManager().getRoom(roomId);
@@ -1006,7 +1006,7 @@ public class MageServerImpl implements MageServer {
 
     public void handleException(Exception ex) throws MageException {
         if (!ex.getMessage().equals("No message")) {
-            logger.fatal("", ex);
+            logger.error("", ex);
             throw new MageException("Server error: " + ex.getMessage());
         }
     }

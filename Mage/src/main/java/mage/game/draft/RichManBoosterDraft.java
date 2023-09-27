@@ -6,16 +6,12 @@ import java.util.Objects;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author spjspj
  */
 public class RichManBoosterDraft extends DraftImpl {
-
-    private static final Logger logger = Logger.getLogger(RichManBoosterDraft.class);
-
     // custom timeouts per pick on profi timing
     protected int[] customProfiTimes = {70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
 

@@ -11,7 +11,8 @@ import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.SimpleCardsView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +23,7 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public class GameSessionWatcher {
-
-    protected static final Logger logger = Logger.getLogger(GameSessionWatcher.class);
+    protected static final Logger logger = LoggerFactory.getLogger(GameSessionWatcher.class);
 
     private final UserManager userManager;
     protected final UUID userId;

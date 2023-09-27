@@ -11,7 +11,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +23,6 @@ import java.util.stream.Collectors;
  */
 public final class EmblemOfCard extends Emblem {
     private final boolean usesVariousArt;
-    private static final Logger logger = Logger.getLogger(EmblemOfCard.class);
     
     public static Card lookupCard(
             String cardName,

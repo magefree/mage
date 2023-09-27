@@ -8,7 +8,8 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.ClientDefaultSettings;
 import mage.util.DebugUtil;
 import mage.view.CardView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  */
 public class CardDraggerGlassPane {
 
-    private static final Logger logger = Logger.getLogger(CardDraggerGlassPane.class);
+    private static final Logger logger = LoggerFactory.getLogger(CardDraggerGlassPane.class);
 
     private final DragCardSource source;
     private DragCardTarget currentTarget;

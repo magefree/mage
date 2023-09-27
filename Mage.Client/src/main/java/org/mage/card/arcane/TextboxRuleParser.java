@@ -2,7 +2,8 @@ package org.mage.card.arcane;
 
 import mage.cards.repository.CardInfo;
 import mage.view.CardView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.util.ArrayDeque;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
  */
 public final class TextboxRuleParser {
 
-    private static final Logger LOGGER = Logger.getLogger(TextboxRuleParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TextboxRuleParser.class);
 
     private static final Pattern BasicManaAbility = Pattern.compile("\\{T\\}: Add \\{(\\w)\\}\\.");
     private static final Pattern LevelAbilityPattern = Pattern.compile("Level (\\d+)-?(\\d*)(\\+?)");

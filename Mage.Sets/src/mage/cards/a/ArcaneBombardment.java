@@ -8,7 +8,6 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
@@ -21,7 +20,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import mage.watchers.Watcher;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -113,7 +112,7 @@ class ArcaneBombardmentEffect extends OneShotEffect {
                 );
                 game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
             } else {
-                Logger.getLogger(ArcaneBombardmentEffect.class).error("Arcane Bombardment: "
+                LoggerFactory.getLogger(ArcaneBombardmentEffect.class).error("Arcane Bombardment: "
                         + "spell ability == null " + copiedCard.getName());
             }
         }

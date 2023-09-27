@@ -12,10 +12,10 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.Permanent;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author noxx
@@ -140,11 +140,11 @@ public class CloneTest extends CardTestPlayerBase {
             Assert.assertEquals("Power has to be 0 because copy from nightmare P/T ability may no longer be applied", 0, card.getPower().getValue());
         }
 
-        Logger.getLogger(CloneTest.class).debug("EXISTING CONTINUOUS EFFECTS:");
+        LoggerFactory.getLogger(CloneTest.class).debug("EXISTING CONTINUOUS EFFECTS:");
         for (ContinuousEffectsList effectsList : currentGame.getContinuousEffects().allEffectsLists) {
             for (Object anEffectsList : effectsList) {
                 ContinuousEffect effect = (ContinuousEffect) anEffectsList;
-                Logger.getLogger(CloneTest.class).debug("- " + effect.toString());
+                LoggerFactory.getLogger(CloneTest.class).debug("- " + effect.toString());
             }
         }
     }

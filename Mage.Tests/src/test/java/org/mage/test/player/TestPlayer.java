@@ -51,9 +51,11 @@ import mage.target.common.*;
 import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
@@ -69,8 +71,7 @@ import java.util.stream.Collectors;
  */
 @Ignore
 public class TestPlayer implements Player {
-
-    private static final Logger LOGGER = Logger.getLogger(TestPlayer.class);
+    private static final Logger logger = LoggerFactory.getLogger(TestPlayer.class);
 
     public static final String TARGET_SKIP = "[target_skip]"; // stop/skip targeting
     public static final String CHOICE_SKIP = "[choice_skip]"; // stop/skip choice
@@ -105,7 +106,7 @@ public class TestPlayer implements Player {
 
     // Strict mode for all choose dialogs:
     // - enable checks for wrong or missing choice commands (you must set up all choices by unit test)
-    // - enable inner choice dialogs accessable by set up choices
+    // - enable inner choice dialogs accessible by set up choices
     //   (example: card call TestPlayer's choice, but it uses another choices, see docs in TestComputerPlayer)
     private boolean strictChooseMode = false;
 
@@ -678,7 +679,7 @@ public class TestPlayer implements Player {
                     printEnd();
                     // TODO: enable assert and rewrite failed activateManaAbility tests
                     //  (must use checkAbility instead multiple mana calls)
-                    LOGGER.warn("WARNING, test must be rewritten to use checkAbility instead multiple mana calls");
+                    logger.warn("WARNING, test must be rewritten to use checkAbility instead multiple mana calls");
                     //Assert.fail("Can't find mana ability to activate command: " + command);
                 } else if (action.getAction().startsWith("addCounters:")) {
                     String command = action.getAction();
@@ -1200,7 +1201,7 @@ public class TestPlayer implements Player {
             }
         });
 
-        if (aliases.size() > 0) {
+        if (!aliases.isEmpty()) {
             return prefix + String.join(", ", aliases) + postfix;
         } else {
             return "";
@@ -1208,7 +1209,7 @@ public class TestPlayer implements Player {
     }
 
     private void printPermanents(Game game, List<Permanent> cards, Player controller) {
-        System.out.println(String.format("Total permanents from %s: %d", controller.getName(), cards.size()));
+        System.out.printf("Total permanents from %s: %d%n", controller.getName(), cards.size());
 
         List<String> data = cards.stream()
                 .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
@@ -1252,7 +1253,7 @@ public class TestPlayer implements Player {
                 .map(a -> (a.getZone() + " -> "
                         + a.getSourceObject(game).getIdName() + " -> "
                         + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
-                        + (a.toString().length() > 0
+                        + (!a.toString().isEmpty()
                         ? a.toString().substring(0, Math.min(40, a.toString().length())) + "..."
                         : a.getClass().getSimpleName())
                 ))
@@ -2754,7 +2755,7 @@ public class TestPlayer implements Player {
 
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong target");
-            LOGGER.warn("Wrong target");
+            logger.warn("Wrong target");
         }
 
         this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
@@ -4553,7 +4554,7 @@ public class TestPlayer implements Player {
 
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            logger.warn("Wrong choice");
         }
 
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
@@ -4591,6 +4592,6 @@ public class TestPlayer implements Player {
     private void assertWrongChoiceUsage(String choice) {
         // TODO: enable fail checks and fix tests, it's a part of setStrictChooseMode's implementation to all tests
         //Assert.fail("Wrong choice command: " + choice);
-        LOGGER.warn("Wrong choice command: " + choice);
+        logger.warn("Wrong choice command: " + choice);
     }
 }

@@ -12,14 +12,13 @@ import mage.cards.repository.RepositoryUtil;
 import mage.game.result.ResultProtos;
 import mage.server.rating.GlickoRating;
 import mage.server.rating.GlickoRatingSystem;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.sql.SQLException;
 import java.util.*;
 
 public enum UserStatsRepository {
-
     instance;
 
     private static final String JDBC_URL = "jdbc:sqlite:./db/user_stats.db";
@@ -45,7 +44,7 @@ public enum UserStatsRepository {
             TableUtils.createTableIfNotExists(connectionSource, UserStats.class);
             dao = DaoManager.createDao(connectionSource, UserStats.class);
         } catch (SQLException ex) {
-            Logger.getLogger(UserStatsRepository.class).error("Error creating user_stats repository - ", ex);
+            LoggerFactory.getLogger(UserStatsRepository.class).error("Error creating user_stats repository - ", ex);
         }
     }
 
@@ -53,7 +52,7 @@ public enum UserStatsRepository {
         try {
             dao.create(userStats);
         } catch (SQLException ex) {
-            Logger.getLogger(UserStatsRepository.class).error("Error adding a user_stats to DB - ", ex);
+            LoggerFactory.getLogger(UserStatsRepository.class).error("Error adding a user_stats to DB - ", ex);
         }
     }
 
@@ -61,7 +60,7 @@ public enum UserStatsRepository {
         try {
             dao.update(userStats);
         } catch (SQLException ex) {
-            Logger.getLogger(UserStatsRepository.class).error("Error updating a user_stats in DB - ", ex);
+            LoggerFactory.getLogger(UserStatsRepository.class).error("Error updating a user_stats in DB - ", ex);
         }
     }
 
@@ -74,7 +73,7 @@ public enum UserStatsRepository {
                 return users.get(0);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserStatsRepository.class).error("Error getting a user from DB - ", ex);
+            LoggerFactory.getLogger(UserStatsRepository.class).error("Error getting a user from DB - ", ex);
         }
         return null;
     }
@@ -84,7 +83,7 @@ public enum UserStatsRepository {
             QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
             return dao.query(qb.prepare());
         } catch (SQLException ex) {
-            Logger.getLogger(UserStatsRepository.class).error("Error getting all users from DB - ", ex);
+            LoggerFactory.getLogger(UserStatsRepository.class).error("Error getting all users from DB - ", ex);
         }
         return Collections.emptyList();
     }
@@ -98,13 +97,13 @@ public enum UserStatsRepository {
                 return users.get(0).getEndTimeMs();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserStatsRepository.class).error("Error getting the latest end time from DB - ", ex);
+            LoggerFactory.getLogger(UserStatsRepository.class).error("Error getting the latest end time from DB - ", ex);
         }
         return 0;
     }
 
     // updateUserStats reads tables finished after the last DB update and reflects it to the DB.
-    // It returns the list of user names that are upated.
+    // It returns the list of user names that are updated.
     public List<String> updateUserStats() {
         Set<String> updatedUsers = new HashSet<>();
         // Lock the DB so that no other updateUserStats runs at the same time.
@@ -371,7 +370,7 @@ public enum UserStatsRepository {
                 conn.executeStatement("shutdown compact", 0);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserStatsRepository.class).error("Error closing user_stats repository - ", ex);
+            LoggerFactory.getLogger(UserStatsRepository.class).error("Error closing user_stats repository - ", ex);
         }
     }
 }

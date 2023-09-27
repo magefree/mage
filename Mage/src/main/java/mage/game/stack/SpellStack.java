@@ -1,4 +1,3 @@
-
 package mage.game.stack;
 
 import java.util.ArrayDeque;
@@ -11,14 +10,14 @@ import mage.constants.PutCards;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class SpellStack extends ArrayDeque<StackObject> {
-
-    private static final Logger logger = Logger.getLogger(SpellStack.class);
+    private static final Logger logger = LoggerFactory.getLogger(SpellStack.class);
 
     protected Date dateLastAdded;
 

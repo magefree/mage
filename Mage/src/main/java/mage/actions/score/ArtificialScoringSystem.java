@@ -2,7 +2,8 @@ package mage.actions.score;
 
 import mage.cards.Card;
 import mage.game.Game;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author ayratn
@@ -11,11 +12,11 @@ public class ArtificialScoringSystem implements ScoringSystem {
 
     public static ArtificialScoringSystem inst;
 
-    private static final Logger log = Logger.getLogger(ArtificialScoringSystem.class);
+    private static final Logger logger = LoggerFactory.getLogger(ArtificialScoringSystem.class);
 
     static {
         inst = new ArtificialScoringSystem();
-        log.debug("ArtificialScoringSystem has been instantiated.");
+        logger.debug("ArtificialScoringSystem has been instantiated.");
     }
 
     /**

@@ -69,7 +69,8 @@ import mage.util.*;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
 import mage.watchers.common.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -90,7 +91,7 @@ public abstract class GameImpl implements Game {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
     private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
-    private static final Logger logger = Logger.getLogger(GameImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameImpl.class);
 
     private transient Object customData; // temporary data, used in AI simulations
     private transient Player losingPlayer; // temporary data, used in AI simulations
@@ -1509,7 +1510,7 @@ public abstract class GameImpl implements Game {
         if (player != null) {
             player.timerTimeout(this);
         } else {
-            logger.error(new StringBuilder("timerTimeout - player not found - playerId: ").append(playerId));
+            logger.error("timerTimeout - player not found - playerId: " + playerId);
         }
     }
 
@@ -1519,7 +1520,7 @@ public abstract class GameImpl implements Game {
         if (player != null) {
             player.idleTimeout(this);
         } else {
-            logger.error(new StringBuilder("idleTimeout - player not found - playerId: ").append(playerId));
+            logger.error("idleTimeout - player not found - playerId: " + playerId);
         }
     }
 
@@ -1651,10 +1652,10 @@ public abstract class GameImpl implements Game {
                             }
                         }
                     } catch (Exception ex) {
-                        logger.fatal("Game exception gameId: " + getId(), ex);
+                        logger.error("Game exception gameId: " + getId(), ex);
                         if ((ex instanceof NullPointerException)
                                 && errorContinueCounter == 0 && ex.getStackTrace() != null) {
-                            logger.fatal(ex.getStackTrace());
+                            logger.error(Arrays.toString(ex.getStackTrace()));
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);
 
@@ -1692,7 +1693,7 @@ public abstract class GameImpl implements Game {
                 }
             }
         } catch (Exception ex) {
-            logger.fatal("Game exception " + ex.getMessage(), ex);
+            logger.error("Game exception " + ex.getMessage(), ex);
             this.fireErrorEvent("Game exception occurred: ", ex);
             this.end();
 
@@ -2037,7 +2038,7 @@ public abstract class GameImpl implements Game {
                     sourceName = mageObject.getName();
                 }
             }
-            logger.fatal("Added triggered ability without controller: " + sourceName + " rule: " + ability.getRule());
+            logger.error("Added triggered ability without controller: " + sourceName + " rule: " + ability.getRule());
             return;
         }
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
@@ -3515,7 +3516,7 @@ public abstract class GameImpl implements Game {
                                         player.setLife(amount, this, null);
                                         logger.debug("Setting player's life: ");
                                     } catch (NumberFormatException e) {
-                                        logger.fatal("error setting life", e);
+                                        logger.error("error setting life", e);
                                     }
                                 }
 

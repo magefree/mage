@@ -12,7 +12,6 @@ import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.*;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
@@ -23,6 +22,8 @@ import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.dl.sources.ScryfallSymbolsSource;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +45,7 @@ import java.util.concurrent.TimeUnit;
 @Author(name = "nantuko")
 public class CardPluginImpl implements CardPlugin {
 
-    private static final Logger LOGGER = Logger.getLogger(CardPluginImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CardPluginImpl.class);
 
     private static final int GUTTER_Y = 15; // top offset before cards
     private static final int GUTTER_X = 15; // left offset before cards

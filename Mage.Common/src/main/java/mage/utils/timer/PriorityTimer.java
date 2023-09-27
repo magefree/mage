@@ -5,7 +5,8 @@ import java.util.TimerTask;
 import java.util.UUID;
 import mage.MageException;
 import mage.interfaces.Action;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Priority timer for both server and client sides
@@ -14,8 +15,7 @@ import org.apache.log4j.Logger;
  * @author noxx
  */
 public class PriorityTimer extends TimerTask {
-
-    private static final Logger logger = Logger.getLogger(PriorityTimer.class);
+    private static final Logger logger = LoggerFactory.getLogger(PriorityTimer.class);
 
     private final long delay;
     private final Action taskOnTimeout;

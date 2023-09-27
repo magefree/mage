@@ -1,5 +1,3 @@
-
-
 package mage.server.game;
 
 import java.io.BufferedInputStream;
@@ -15,9 +13,8 @@ import mage.game.GameStates;
 import mage.server.Main;
 import mage.util.CopierObjectInputStream;
 import mage.utils.StreamUtils;
-import org.apache.log4j.Logger;
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -25,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 public class GameReplay {
 
-    private static final Logger logger = Logger.getLogger(GameReplay.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameReplay.class);
 
     private final GameStates savedGame;
     private final Game game;
@@ -72,13 +69,12 @@ public class GameReplay {
             GameStates states = (GameStates) input.readObject();
             loadGame.loadGameStates(states);
             return loadGame;
-
         }
         catch(ClassNotFoundException ex) {
-            logger.fatal("Cannot load game. Class not found.", ex);
+            logger.error("Cannot load game. Class not found.", ex);
         }
         catch(IOException ex) {
-            logger.fatal("Cannot load game:" + gameId, ex);
+            logger.error("Cannot load game:" + gameId, ex);
         } finally {
             StreamUtils.closeQuietly(file);
             StreamUtils.closeQuietly(buffer);

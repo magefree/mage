@@ -8,7 +8,8 @@ import mage.server.managers.ManagerFactory;
 import mage.view.DraftClientMessage;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.rmi.RemoteException;
 import java.util.Optional;
@@ -22,8 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftSession {
-
-    protected static final Logger logger = Logger.getLogger(DraftSession.class);
+    protected static final Logger logger = LoggerFactory.getLogger(DraftSession.class);
 
     private final ManagerFactory managerFactory;
     protected final UUID userId;
@@ -108,7 +108,7 @@ public class DraftSession {
                                 setupTimeout(1); // The timeout keeps happening at a 1 second interval to make sure that the draft moves onto the next pick
                             }
                         } catch (Exception e) {
-                            logger.fatal("DraftSession error - userId " + userId + " draftId " + draft.getId(), e);
+                            logger.error("DraftSession error - userId " + userId + " draftId " + draft.getId(), e);
                         }
                     },
                     seconds, TimeUnit.SECONDS
@@ -123,7 +123,7 @@ public class DraftSession {
     }
 
     protected void handleRemoteException(RemoteException ex) {
-        logger.fatal("DraftSession error ", ex);
+        logger.error("DraftSession error ", ex);
         managerFactory.draftManager().kill(draft.getId(), userId);
     }
 

@@ -8,10 +8,11 @@ import mage.client.util.TransformedImageCache;
 import mage.view.CardView;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.utils.CardImageUtils;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -36,8 +37,7 @@ import java.util.regex.Pattern;
  * @author JayDi85
  */
 public final class ImageCache {
-
-    private static final Logger LOGGER = Logger.getLogger(ImageCache.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageCache.class);
 
     private static final SoftValuesLoadingCache<String, ImageCacheData> IMAGE_CACHE; // cards and tokens
     private static final SoftValuesLoadingCache<String, ImageCacheData> FACE_IMAGE_CACHE;
@@ -293,7 +293,7 @@ public final class ImageCache {
             if (ex.getCause() instanceof NullPointerException) {
                 return new ImageCacheData("ERROR: low memory?", null);
             }
-            LOGGER.error(ex, ex);
+            LOGGER.error(String.valueOf(ex), ex);
             return new ImageCacheData("ERROR: see logs", null);
         }
     }
@@ -309,7 +309,7 @@ public final class ImageCache {
             if (ex.getCause() instanceof NullPointerException) {
                 return new ImageCacheData("ERROR: low memory?", null);
             }
-            LOGGER.error(ex, ex);
+            LOGGER.error(String.valueOf(ex), ex);
             return new ImageCacheData("ERROR: see logs", null);
         }
     }
@@ -322,7 +322,7 @@ public final class ImageCache {
             if (ex.getCause() instanceof NullPointerException) {
                 return new ImageCacheData("ERROR: low memory?", null);
             }
-            LOGGER.error(ex, ex);
+            LOGGER.error(String.valueOf(ex), ex);
             return new ImageCacheData("ERROR: see logs", null);
         }
     }

@@ -3,7 +3,6 @@ package mage.client.util.gui;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.table.TableColumn;
-import org.apache.log4j.Logger;
 import mage.client.dialog.PreferencesDialog;
 
 /**
@@ -19,8 +18,6 @@ public final class TableUtil {
      * @param widthPrefKey
      * @param orderPrefKey
      */
-
-    private static final Logger LOGGER = Logger.getLogger(TableUtil.class);
 
     public static void saveActiveFiltersToPrefs(String filterPrefKey, JToggleButton[] buttons) {
       StringBuilder currentFilters = new StringBuilder();

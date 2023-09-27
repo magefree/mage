@@ -5,12 +5,12 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import mage.game.result.ResultProtos.UserStatsProto;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @DatabaseTable(tableName = "user_stats")
 public class UserStats {
-
-    private static final Logger logger = Logger.getLogger(TableRecord.class);
+    private static final Logger logger = LoggerFactory.getLogger(TableRecord.class);
 
     @DatabaseField(indexName = "user_name_index", unique = true, id = true)
     protected String userName;

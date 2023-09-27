@@ -40,17 +40,17 @@ public abstract class JsonDeckImporter extends DeckImporter {
                             errorMessages.append(sbMessage);
                         } else {
                             // fatal error
-                            logger.fatal(sbMessage);
+                            logger.error(String.valueOf(sbMessage));
                         }
                     }
                 } catch (JsonParseException ex) {
-                    logger.fatal("Can't parse json-deck: " + fileName, ex);
+                    logger.error("Can't parse json-deck: " + fileName, ex);
                 }
             } catch (Exception ex) {
-                logger.fatal(null, ex);
+                logger.error(null, ex);
             }
         } catch (Exception ex) {
-            logger.fatal(null, ex);
+            logger.error(null, ex);
         }
         return deckList;
     }

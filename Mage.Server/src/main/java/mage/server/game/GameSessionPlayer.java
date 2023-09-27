@@ -15,7 +15,8 @@ import mage.server.managers.ManagerFactory;
 import mage.server.managers.UserManager;
 import mage.util.MultiAmountMessage;
 import mage.view.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.*;
@@ -26,8 +27,7 @@ import java.util.concurrent.ExecutorService;
  * @author BetaSteward_at_googlemail.com
  */
 public class GameSessionPlayer extends GameSessionWatcher {
-
-    private static final Logger logger = Logger.getLogger(GameSessionPlayer.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameSessionPlayer.class);
 
     private final UserManager userManager;
     private final UUID playerId;
@@ -267,7 +267,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                             } catch (Exception ex) {
                                 if (ex != null) {
                                     // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
-                                    logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
+                                    logger.error("Game session game quit exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
                                     logger.debug("- gameId:" + game.getId() + "  playerId: " + playerId);
                                     if (ex.getCause() != null) {
                                         logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()), ex);
@@ -275,7 +275,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                                         logger.debug("- ex: " + ex, ex);
                                     }
                                 } else {
-                                    logger.fatal("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
+                                    logger.error("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
                                 }
                             }
                         }

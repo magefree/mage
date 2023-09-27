@@ -28,7 +28,8 @@ import mage.players.PlayerType;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * App GUI: create new TOURNEY
@@ -36,8 +37,7 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class NewTournamentDialog extends MageDialog {
-
-    private static final Logger logger = Logger.getLogger(NewTournamentDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(NewTournamentDialog.class);
 
     private TableView table;
     // private UUID playerId;

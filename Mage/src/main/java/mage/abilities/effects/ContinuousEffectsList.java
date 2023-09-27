@@ -9,7 +9,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -18,8 +19,7 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList<T> {
-
-    private static final Logger logger = Logger.getLogger(ContinuousEffectsList.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContinuousEffectsList.class);
 
     // the effectAbilityMap holds for each effect all abilities that are connected (used) with this effect
     private final Map<UUID, Set<Ability>> effectAbilityMap = new HashMap<>();

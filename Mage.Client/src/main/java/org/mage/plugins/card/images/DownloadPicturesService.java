@@ -16,10 +16,11 @@ import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.utils.CardImageUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,10 +41,9 @@ import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
  * @author JayDi85
  */
 public class DownloadPicturesService extends DefaultBoundedRangeModel implements DownloadServiceInfo, Runnable {
-
     // don't forget to remove new sets from ignore.urls to download (properties file in resources)
     private static DownloadPicturesService instance;
-    private static final Logger logger = Logger.getLogger(DownloadPicturesService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DownloadPicturesService.class);
 
     private static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
     private static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
@@ -535,7 +535,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 allCardsUrls.add(card);
             });
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(String.valueOf(e));
         }
 
         // find missing files
@@ -640,7 +640,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             executor.execute(task);
                         }
                     } catch (Exception ex) {
-                        logger.error(ex, ex);
+                        logger.error(String.valueOf(ex), ex);
                     }
                 }
 
@@ -657,7 +657,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         try {
             TVFS.umount();
         } catch (FsSyncException e) {
-            logger.fatal("Couldn't unmount zip files", e);
+            logger.error("Couldn't unmount zip files", e);
             JOptionPane.showMessageDialog(null, "Couldn't unmount zip files", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             //

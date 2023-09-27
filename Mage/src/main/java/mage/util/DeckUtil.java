@@ -1,6 +1,7 @@
 package mage.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,8 +12,7 @@ import java.io.IOException;
  * @author LevelX2
  */
 public final class DeckUtil {
-
-    private static final Logger logger = Logger.getLogger(DeckUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeckUtil.class);
 
     public static long fixedHash(String string) {
         long h = 1125899906842597L; // prime

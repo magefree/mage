@@ -2,7 +2,8 @@ package mage.server.services.impl;
 
 import mage.db.EntityManager;
 import mage.server.services.FeedbackService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Calendar;
 
@@ -12,7 +13,7 @@ import java.util.Calendar;
 public enum FeedbackServiceImpl implements FeedbackService {
     instance;
 
-    private static final Logger log = Logger.getLogger(FeedbackServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(FeedbackServiceImpl.class);
 
     @Override
     public void feedback(String username, String title, String type, String message, String email, String host) {
@@ -20,7 +21,7 @@ public enum FeedbackServiceImpl implements FeedbackService {
         try {
             EntityManager.instance.insertFeedback(username, title, type, message, email, host, cal.getTime());
         } catch (Exception e) {
-            log.fatal(e);
+            logger.error(String.valueOf(e));
         }
     }
 }

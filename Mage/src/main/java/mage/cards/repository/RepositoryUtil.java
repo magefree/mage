@@ -8,7 +8,8 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import mage.util.JarVersion;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,8 +18,7 @@ import java.util.List;
  * @author North, JayDi85
  */
 public final class RepositoryUtil {
-
-    private static final Logger logger = Logger.getLogger(RepositoryUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(RepositoryUtil.class);
     public static final boolean CARD_DB_RECREATE_BY_CLIENT_SIDE = true; // re-creates db from client (best performance) or downloads from server on connects (can be slow)
 
     public static void bootstrapLocalDb() {

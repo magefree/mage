@@ -19,8 +19,9 @@ import mage.game.TwoPlayerDuel;
 import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
 import mage.players.StubPlayer;
-import org.apache.log4j.Logger;
 import static org.junit.Assert.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 public class MulliganTestBase {
-
-    protected static Logger logger = Logger.getLogger(MulliganTestBase.class);
+    protected static Logger logger = LoggerFactory.getLogger(MulliganTestBase.class);
 
     static class MulliganScenarioTest {
 

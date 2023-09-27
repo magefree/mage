@@ -1,10 +1,8 @@
-
 package mage.player.ai;
 
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import mage.game.Game;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -16,8 +14,6 @@ public class MCTSExecutor implements Callable<Boolean> {
     protected int thinkTime;
     protected UUID playerId;
     protected int simCount;
-
-    private static final Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
 
     public MCTSExecutor(Game sim, UUID playerId, int thinkTime) {
         this.playerId = playerId;

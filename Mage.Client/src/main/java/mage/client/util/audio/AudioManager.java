@@ -2,7 +2,8 @@ package mage.client.util.audio;
 
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Manager class for playing audio files.
@@ -10,8 +11,7 @@ import org.apache.log4j.Logger;
  * @author nantuko
  */
 public class AudioManager {
-
-    private static final Logger log = Logger.getLogger(AudioManager.class);
+    private static final Logger log = LoggerFactory.getLogger(AudioManager.class);
 
     private MageClip nextPageClip = null;
     private MageClip prevPageClip = null;

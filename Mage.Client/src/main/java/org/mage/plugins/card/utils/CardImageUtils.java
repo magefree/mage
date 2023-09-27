@@ -5,10 +5,11 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
-import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.mage.plugins.card.images.CardDownloadData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,8 +30,7 @@ import java.util.Locale;
 import java.util.prefs.Preferences;
 
 public final class CardImageUtils {
-
-    private static final Logger LOGGER = Logger.getLogger(CardImageUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CardImageUtils.class);
 
     public static String prepareCardNameForFile(String cardName) {
         return cardName

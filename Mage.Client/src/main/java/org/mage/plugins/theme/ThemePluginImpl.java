@@ -14,21 +14,21 @@ import mage.interfaces.plugin.ThemePlugin;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @PluginImplementation
 @Author(name = "nantuko")
 /* udpated by Noahsark */
 public class ThemePluginImpl implements ThemePlugin {
-
-    private static final Logger log = Logger.getLogger(ThemePluginImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ThemePluginImpl.class);
     private static BufferedImage background;
     private final List flist = new List();
     private final String BackgroundDir = "backgrounds" + File.separator;
 
     @PluginLoaded
     public void newPlugin(ThemePlugin plugin) {
-        log.info(plugin.toString() + " has been loaded.");
+        logger.info(plugin.toString() + " has been loaded.");
     }
 
     public String toString() {
@@ -92,10 +92,10 @@ public class ThemePluginImpl implements ThemePlugin {
                 bgPanel.add(ui.get("jLayeredPane"));
                 ui.get("gamePanel").add(bgPanel);
             } else {
-                log.error("error: no components");
+                logger.error("error: no components");
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -181,7 +181,7 @@ public class ThemePluginImpl implements ThemePlugin {
                     }
                 }
             } catch (Exception e) {
-                log.error(e.getMessage(), e);
+                logger.error(e.getMessage(), e);
                 return null;
             }
         }

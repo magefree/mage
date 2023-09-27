@@ -4,7 +4,8 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.remote.Connection;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -18,8 +19,7 @@ import java.util.concurrent.TimeoutException;
  *
  */
 public class ResetPasswordDialog extends MageDialog {
-
-    private static final Logger logger = Logger.getLogger(ResetPasswordDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResetPasswordDialog.class);
     private final ConnectDialog connectDialog;
     private Connection connection;
     private GetAuthTokenTask getAuthTokenTask;
@@ -339,12 +339,12 @@ public class ResetPasswordDialog extends MageDialog {
                     lblStatus.setText("There was an issue while requesting an auth token.");
                 }
             } catch (InterruptedException | ExecutionException ex) {
-                logger.fatal("Get Auth Token Task error", ex);
+                logger.error("Get Auth Token Task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Canceled");
                 lblStatus.setText("Canceled");
             } catch (TimeoutException ex) {
-                logger.fatal("Timeout: ", ex);
+                logger.error("Timeout: ", ex);
             } finally {
                 MageFrame.stopConnecting();
                 enableButtons();
@@ -382,12 +382,12 @@ public class ResetPasswordDialog extends MageDialog {
                     lblStatus.setText("There was an issue while resetting password.");
                 }
             } catch (InterruptedException | ExecutionException ex) {
-                logger.fatal("Reset Password Task error", ex);
+                logger.error("Reset Password Task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Canceled");
                 lblStatus.setText("Canceled");
             } catch (TimeoutException ex) {
-                logger.fatal("Timeout: ", ex);
+                logger.error("Timeout: ", ex);
             } finally {
                 MageFrame.stopConnecting();
                 enableButtons();

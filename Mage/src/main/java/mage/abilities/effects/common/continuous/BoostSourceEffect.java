@@ -12,12 +12,14 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostSourceEffect extends ContinuousEffectImpl {
+    private static final Logger logger = LoggerFactory.getLogger(BoostSourceEffect.class);
     private DynamicValue power;
     private DynamicValue toughness;
 
@@ -58,7 +60,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
             try {
                 affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
             } catch (IllegalArgumentException ex) {
-                Logger.getLogger(BoostSourceEffect.class).error("Could not get sourceId reference: " + source.getRule());
+                logger.error("Could not get sourceId reference: " + source.getRule());
             }
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));

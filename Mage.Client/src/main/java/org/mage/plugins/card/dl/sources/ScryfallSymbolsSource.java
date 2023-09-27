@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.utils.CardImageUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import static org.mage.card.arcane.ManaSymbols.getSymbolFileNameAsSVG;
@@ -35,7 +37,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
     static final String REGEXP_MANA_PATTERN = "card-symbol-(.{1,10})\\{background-image.+base64,(.+)(\"\\)\\})";
 
 
-    protected static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(ScryfallSymbolsSource.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ScryfallSymbolsSource.class);
 
     private static final int SYMBOLS_NUMBER_START = 0;
     private static final int SYMBOLS_NUMBER_END = 20;

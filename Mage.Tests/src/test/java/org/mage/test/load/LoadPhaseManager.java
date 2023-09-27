@@ -3,14 +3,15 @@ package org.mage.test.load;
 import mage.constants.PhaseStep;
 import mage.view.GameView;
 import mage.view.PlayerView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class LoadPhaseManager {
-    private static final Logger log = Logger.getLogger("Load phase");
+    private static final Logger logger = LoggerFactory.getLogger("Load phase");
 
     private static final LoadPhaseManager instance = new LoadPhaseManager();
 
@@ -89,7 +90,7 @@ public class LoadPhaseManager {
         if(map.containsKey(gameView.getStep())){
             return map.get(gameView.getStep());
         } else {
-            log.error("Unknown phase manager step: " + gameView.getStep().toString());
+            logger.error("Unknown phase manager step: " + gameView.getStep().toString());
             return false;
         }
     }

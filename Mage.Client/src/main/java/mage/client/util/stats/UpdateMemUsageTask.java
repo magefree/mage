@@ -6,7 +6,8 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This updates the mem usage info in the Mage client every
@@ -16,13 +17,12 @@ import org.apache.log4j.Logger;
  */
 
 public class UpdateMemUsageTask extends SwingWorker<Void, MemoryStats> {
-
     private static final int MEM_USAGE_UPDATE_TIME = 2000;
     private static final int MEM_USAGE_WARNING_PERCENT = 80; // red color for mem used more than xx%
 
     private final JLabel jLabelToDisplayInfo;
 
-    private static final Logger logger = Logger.getLogger(UpdateMemUsageTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdateMemUsageTask.class);
 
     public UpdateMemUsageTask(JLabel jLabelToDisplayInfo) {
         this.jLabelToDisplayInfo = jLabelToDisplayInfo;
@@ -91,7 +91,7 @@ public class UpdateMemUsageTask extends SwingWorker<Void, MemoryStats> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Memory Usage error", ex);
+            logger.error("Update Memory Usage error", ex);
         } catch (CancellationException ex) {
         }
     }

@@ -43,6 +43,7 @@ import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.util.LoggerUtil;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
@@ -52,13 +53,14 @@ import net.java.balloontip.styles.EdgedBalloonStyle;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.SvgUtils;
 import org.mage.plugins.card.images.DownloadPicturesService;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 import org.mage.plugins.card.utils.CardImageUtils;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -84,11 +86,8 @@ import java.util.prefs.Preferences;
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class MageFrame extends javax.swing.JFrame implements MageClient {
-
     private static final String TITLE_NAME = "XMage";
-    private static final Logger logger = Logger.getLogger(MageFrame.class);
-
-    private static final Logger LOGGER = Logger.getLogger(MageFrame.class);
+    private static final Logger logger = LoggerFactory.getLogger(MageFrame.class);
     private static final String LITE_MODE_ARG = "-lite";
     private static final String GRAY_MODE_ARG = "-gray";
     private static final String FILL_SCREEN_ARG = "-fullscreen";
@@ -197,12 +196,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             cacertsFile = new File(System.getProperty("user.dir") + "/cacerts").getAbsoluteFile();
         }
         if (cacertsFile.exists()) {
-            LOGGER.info("Custom (or bundled) Java certificate file (cacerts) file found");
+            logger.info("Custom (or bundled) Java certificate file (cacerts) file found");
             String cacertsPath = cacertsFile.getPath();
             System.setProperty("javax.net.ssl.trustStore", cacertsPath);
             System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
         } else {
-            LOGGER.info("custom Java certificate file not found at: " + cacertsFile.getAbsolutePath());
+            logger.info("custom Java certificate file not found at: " + cacertsFile.getAbsolutePath());
         }
 
         setWindowTitle();
@@ -247,25 +246,25 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             GUISizeHelper.calculateGUISizes();
             // UIManager.put("Table.rowHeight", GUISizeHelper.tableRowHeight);
         } catch (Exception ex) {
-            LOGGER.fatal(null, ex);
+            logger.error(null, ex);
         }
 
         // other settings
         if (ClientCallback.SIMULATE_BAD_CONNECTION) {
-            LOGGER.info("Network: bad connection mode enabled");
+            logger.info("Network: bad connection mode enabled");
         }
 
         // DATA PREPARE
         RepositoryUtil.bootstrapLocalDb();
         // re-create database on empty (e.g. after new build cleaned db on startup)
         if (RepositoryUtil.CARD_DB_RECREATE_BY_CLIENT_SIDE && RepositoryUtil.isDatabaseEmpty()) {
-            LOGGER.info("DB: creating cards database (it can take few minutes)...");
+            logger.info("DB: creating cards database (it can take few minutes)...");
             CardScanner.scan();
-            LOGGER.info("Done.");
+            logger.info("Done.");
         }
 
         // IMAGES CHECK
-        LOGGER.info("Images: search broken files...");
+        logger.info("Images: search broken files...");
         CardImageUtils.checkAndFixImageFiles();
 
         if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
@@ -356,7 +355,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SwingUtilities.invokeLater(() -> {
             disableButtons();
             updateMemUsageTask.execute();
-            LOGGER.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
+            logger.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
             if (autoConnect()) {
                 enableButtons();
             } else {
@@ -390,7 +389,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             cardPreviewContainerRotated = (JPanel) UI.getComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED);
             bigCardRotated = (BigCard) UI.getComponent(MageComponents.CARD_PREVIEW_PANE_ROTATED);
         } catch (InterruptedException e) {
-            LOGGER.fatal("Can't update tooltip panel sizes");
+            logger.error("Can't update tooltip panel sizes");
             Thread.currentThread().interrupt();
             return;
         }
@@ -406,7 +405,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void addTooltipContainer() {
         JEditorPane cardInfoPane = (JEditorPane) Plugins.instance.getCardInfoPane();
         if (cardInfoPane == null) {
-            LOGGER.fatal("Can't find card tooltip plugin");
+            logger.error("Can't find card tooltip plugin");
             return;
         }
         cardInfoPane.setLocation(40, 40);
@@ -469,7 +468,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             bigCardRotated.setSize(height, width + 30);
 
         } catch (Exception e) {
-            LOGGER.warn("Error while changing tooltip container size.", e);
+            logger.warn("Error while changing tooltip container size.", e);
         }
     }
 
@@ -492,7 +491,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             backgroundPane.setSize(1024, 768);
             desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
         } catch (IOException e) {
-            LOGGER.fatal("Error while setting background.", e);
+            logger.error("Error while setting background.", e);
         }
     }
 
@@ -522,7 +521,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         float ratio;
         if (isChristmasTime(Calendar.getInstance().getTime())) {
             // Christmas logo
-            LOGGER.info("Ho Ho Ho, Merry Christmas and a Happy New Year");
+            logger.info("Ho Ho Ho, Merry Christmas and a Happy New Year");
             filename = "/label-xmage-christmas.png";
             ratio = 539.0f / 318.0f;
         } else {
@@ -544,7 +543,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 backgroundPane.add(title);
             }
         } catch (IOException e) {
-            LOGGER.fatal("Error while adding mage label.", e);
+            logger.error("Error while adding mage label.", e);
         }
     }
 
@@ -619,7 +618,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 container.repaint();
             }
         } catch (InterruptedException e) {
-            LOGGER.fatal("MageFrame error", e);
+            logger.error("MageFrame error", e);
             Thread.currentThread().interrupt();
         }
 
@@ -638,7 +637,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             activeFrame = null;
             return;
         }
-        LOGGER.debug("Setting " + frame.getTitle() + " active");
+        logger.debug("Setting " + frame.getTitle() + " active");
         activeFrame = frame;
         desktopPane.moveToFront(frame);
         activeFrame.setBounds(0, 0, desktopPane.getWidth(), desktopPane.getHeight());
@@ -791,7 +790,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         boolean autoConnectParamValue = startUser != null || Boolean.parseBoolean(PREFS.get("autoConnect", "false"));
         boolean status = false;
         if (autoConnectParamValue) {
-            LOGGER.info("Auto-connecting to " + MagePreferences.getServerAddress());
+            logger.info("Auto-connecting to " + MagePreferences.getServerAddress());
             status = performConnect(false);
         }
         return status;
@@ -832,7 +831,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         try {
-            LOGGER.debug("connecting (auto): " + currentConnection.getProxyType().toString()
+            logger.debug("connecting (auto): " + currentConnection.getProxyType().toString()
                     + ' ' + currentConnection.getProxyHost() + ' ' + currentConnection.getProxyPort() + ' ' + currentConnection.getProxyUsername());
             if (MageFrame.connect(currentConnection)) {
                 prepareAndShowTablesPane();
@@ -1288,17 +1287,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public static void main(final String[] args) {
         // Workaround for #451
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        LOGGER.info("Starting MAGE client version " + VERSION);
-        LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());
-        LOGGER.info("Default charset: " + Charset.defaultCharset());
+        logger.info("Starting MAGE client version " + VERSION);
+        logger.info("Logging level: " + LoggerUtil.getLogLevel(logger));
+        logger.info("Default charset: " + Charset.defaultCharset());
         if (!Charset.defaultCharset().toString().equals("UTF-8")) {
-            LOGGER.warn("WARNING, bad charset. Some images will not be downloaded. You must:");
-            LOGGER.warn("* Open launcher -> settings -> java -> client java options");
-            LOGGER.warn("* Insert additional command at the the end: -Dfile.encoding=UTF-8");
+            logger.warn("WARNING, bad charset. Some images will not be downloaded. You must:");
+            logger.warn("* Open launcher -> settings -> java -> client java options");
+            logger.warn("* Insert additional command at the the end: -Dfile.encoding=UTF-8");
         }
 
         startTime = System.currentTimeMillis();
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> LOGGER.fatal(null, e));
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.error(null, e));
 
         SwingUtilities.invokeLater(() -> {
             for (int i = 0; i < args.length; i++) {
@@ -1352,7 +1351,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             try {
                 instance = new MageFrame();
             } catch (Throwable e) {
-                logger.fatal("Critical error on start up, app will be closed: " + e.getMessage(), e);
+                logger.error("Critical error on start up, app will be closed: " + e.getMessage(), e);
                 System.exit(1);
             }
 
@@ -1488,14 +1487,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void disconnected(final boolean askToReconnect) {
         if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
             // REMOTE task, e.g. connecting
-            LOGGER.info("Disconnected from remote task");
+            logger.info("Disconnected from remote task");
             setConnectButtonText(NOT_CONNECTED_BUTTON);
             disableButtons();
             hideGames();
             hideTables();
         } else {
             // USER mode, e.g. user plays and got disconnect
-            LOGGER.info("Disconnected from user mode");
+            logger.info("Disconnected from user mode");
             SwingUtilities.invokeLater(() -> {
                         SessionHandler.disconnect(false); // user already disconnected, can't do any online actions like quite chat
                         setConnectButtonText(NOT_CONNECTED_BUTTON);
@@ -1678,9 +1677,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 desktop.browse(newsURI);
             }
         } catch (URISyntaxException e) {
-            LOGGER.error("URI Syntax error when creating news link", e);
+            logger.error("URI Syntax error when creating news link", e);
         } catch (IOException e) {
-            LOGGER.error("IOException while loading news page", e);
+            logger.error("IOException while loading news page", e);
         }
     }
 

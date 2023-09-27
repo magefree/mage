@@ -13,7 +13,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.view.CardView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.*;
@@ -50,7 +51,7 @@ public final class RateCard {
     private static String RATINGS_DIR = "/ratings/";
     private static String RATINGS_SET_LIST = RATINGS_DIR + "setsWithRatings.csv";
 
-    private static final Logger log = Logger.getLogger(RateCard.class);
+    private static final Logger logger = LoggerFactory.getLogger(RateCard.class);
 
     /**
      * Hide constructor.
@@ -60,7 +61,7 @@ public final class RateCard {
 
     public static void bootstrapCardsAndRatings() {
         // preload cards and ratings
-        log.info("Loading cards and rating...");
+        logger.info("Loading cards and rating...");
         List<Card> cards = CardScanner.getAllCards(false);
         for (Card card : cards) {
             RateCard.rateCard(card, null);
@@ -311,7 +312,7 @@ public final class RateCard {
                 }
             }
         } catch (Throwable e) {
-            log.error("Failed to read ratings sets list file: " + RATINGS_SET_LIST, e);
+            logger.error("Failed to read ratings sets list file: " + RATINGS_SET_LIST, e);
         }
 
         // load set data
@@ -323,7 +324,7 @@ public final class RateCard {
                 readFromFile(rateFile);
             }
         } catch (Exception e) {
-            log.error("Failed to read ratings set file: " + rateFile, e);
+            logger.error("Failed to read ratings set file: " + rateFile, e);
         }
 
         isLoaded = true;

@@ -6,13 +6,15 @@ import mage.cards.repository.CardRepository;
 import mage.game.GameException;
 import mage.util.Copyable;
 import mage.util.DeckUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Deck implements Serializable, Copyable<Deck> {
+    private static final Logger logger = LoggerFactory.getLogger(Deck.class);
 
     static final int MAX_CARDS_PER_DECK = 2000;
 
@@ -141,7 +143,7 @@ public class Deck implements Serializable, Copyable<Deck> {
             CardRepository.instance.closeDB();
             CardRepository.instance.openDB();
             cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
-            Logger.getLogger(Deck.class).error("Tried to restart the DB: " + (cardInfo == null ? "not successful" : "successful"));
+            logger.error("Tried to restart the DB: " + (cardInfo == null ? "not successful" : "successful"));
         }
 
         if (cardInfo != null) {

@@ -44,7 +44,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -59,7 +60,7 @@ import java.util.stream.Stream;
  */
 public final class CardUtil {
 
-    private static final Logger logger = Logger.getLogger(CardUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(CardUtil.class);
 
     public static final List<String> RULES_ERROR_INFO = ImmutableList.of("Exception occurred in rules generation");
 

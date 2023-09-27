@@ -7,7 +7,8 @@ import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -46,7 +47,7 @@ public abstract class DraftCube {
         }
     }
 
-    private static final Logger logger = Logger.getLogger(DraftCube.class);
+    private static final Logger logger = LoggerFactory.getLogger(DraftCube.class);
 
     private final String name;
     private final String code;
@@ -99,11 +100,11 @@ public abstract class DraftCube {
                         booster.add(cardInfo.getCard());
                         done = true;
                     } else {
-                        logger.warn(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(':').append(cardId.extension));
+                        logger.warn(this.getName() + " - Card not found: " + cardId.getName() + ':' + cardId.extension);
                         notValid++;
                     }
                 } else {
-                    logger.error(new StringBuilder(this.getName()).append(" - Empty card name: ").append(cardId.getName()).append(':').append(cardId.extension));
+                    logger.error(this.getName() + " - Empty card name: " + cardId.getName() + ':' + cardId.extension);
                     notValid++;
                 }
 
@@ -111,7 +112,7 @@ public abstract class DraftCube {
                     leftCubeCards.addAll(cubeCards);
                 }
                 if (notValid > cubeCards.size()) {
-                    logger.error(new StringBuilder(this.getName()).append(" - Booster could not be created, no valid cards found "));
+                    logger.error(this.getName() + " - Booster could not be created, no valid cards found ");
                     done = true;
                 }
             }

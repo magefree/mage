@@ -12,7 +12,8 @@ import mage.game.turn.EndOfCombatStep;
 import mage.game.turn.FirstCombatDamageStep;
 import mage.game.turn.Step;
 import mage.players.Player;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -22,10 +23,9 @@ import java.util.*;
  * @author noxx
  */
 public final class CombatUtil {
-
     private static final List<Permanent> emptyList = Collections.unmodifiableList(new ArrayList<>());
 
-    private static final Logger log = Logger.getLogger(CombatUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(CombatUtil.class);
 
     private CombatUtil() {
     }
@@ -161,7 +161,7 @@ public final class CombatUtil {
         UUID attackerId = game.getCombat().getAttackingPlayerId();
         UUID defenderId = game.getCombat().getDefenders().iterator().next();
         if (attackerId == null || defenderId == null) {
-            log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
+            logger.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
             return new CombatInfo();
         }
 
@@ -298,7 +298,7 @@ public final class CombatUtil {
         UUID attackerId = game.getCombat().getAttackingPlayerId();
         UUID defenderId = game.getCombat().getDefenders().iterator().next();
         if (attackerId == null || defenderId == null) {
-            log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
+            logger.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
             return new CombatInfo();
         }
 

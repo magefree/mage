@@ -11,7 +11,8 @@
  import mage.constants.Zone;
  import mage.util.DebugUtil;
  import mage.view.*;
- import org.apache.log4j.Logger;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
 
  import javax.swing.*;
  import javax.swing.border.Border;
@@ -25,8 +26,7 @@
   * @author BetaSteward_at_googlemail.com, JayDi85
   */
  public class Cards extends javax.swing.JPanel {
-
-     private static final Logger logger = Logger.getLogger(Cards.class);
+     private static final Logger logger = LoggerFactory.getLogger(Cards.class);
      private static final Border EMPTY_BORDER = new EmptyBorder(0, 0, 0, 0);
 
      private final Map<UUID, MageCard> cards = new LinkedHashMap<>();
@@ -151,13 +151,13 @@
          // Workaround for bug leaving display of objects on the stack (issue #213 https://github.com/magefree/mage/issues/213)
          if (cardsView.isEmpty() && countCards() > 0) {
              // problem happens with transformable cards
-             logger.fatal("Card object on the cards panel was not removed");
+             logger.error("Card object on the cards panel was not removed");
              for (Component comp : cardArea.getComponents()) {
                  if (comp instanceof MageCard) {
                      MageCard mageCard = (MageCard) comp;
-                     logger.fatal("MageCard name:" + mageCard.getName() + " toolTiptext:" + mageCard.getToolTipText());
+                     logger.error("MageCard name:" + mageCard.getName() + " toolTiptext:" + mageCard.getToolTipText());
                  } else {
-                     logger.fatal("Unknown object:" + comp.getName() + " className:" + comp.getClass().getName());
+                     logger.error("Unknown object:" + comp.getName() + " className:" + comp.getClass().getName());
                  }
                  cardArea.remove(comp);
              }

@@ -1,11 +1,12 @@
 package org.mage.plugins.card.dl.sources;
 
 import mage.constants.SubType;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.DownloadPicturesService;
 import org.mage.plugins.card.utils.CardImageUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,9 +21,8 @@ import java.util.*;
  * @author Quercitron
  */
 public enum TokensMtgImageSource implements CardImageSource {
-
     instance;
-    private static final Logger LOGGER = Logger.getLogger(TokensMtgImageSource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokensMtgImageSource.class);
 
     // [[EXP/Name, TokenData>
     private HashMap<String, List<TokenData>> tokensData;

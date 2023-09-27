@@ -1,7 +1,6 @@
 package mage.client.table;
 
 import mage.client.util.GUISizeHelper;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
@@ -12,8 +11,6 @@ import java.awt.event.MouseEvent;
  * @author JayDi85
  */
 public class MageTable extends JTable {
-
-    private static final Logger logger = Logger.getLogger(MageTable.class);
     private TableInfo tableInfo;
 
     public MageTable() {

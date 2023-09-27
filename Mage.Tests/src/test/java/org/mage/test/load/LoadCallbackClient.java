@@ -5,8 +5,9 @@ import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Session;
 import mage.view.*;
-import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,9 +16,7 @@ import java.util.UUID;
  * @author JayDi85
  */
 public class LoadCallbackClient implements CallbackClient {
-
-    //private static final Logger log = Logger.getLogger(LoadCallbackClient.class);
-    private static final Logger log = Logger.getLogger("Load call");
+    private static final Logger logger = LoggerFactory.getLogger(LoadCallbackClient.class);
 
     private Session session;
     private UUID gameId;
@@ -52,7 +51,7 @@ public class LoadCallbackClient implements CallbackClient {
             case GAME_UPDATE:
                 break;
             default:
-                log.info(getLogStartInfo() + "callback: " + callback.getMethod());
+                logger.info(getLogStartInfo() + "callback: " + callback.getMethod());
         }
 
         switch (callback.getMethod()) {
@@ -67,13 +66,13 @@ public class LoadCallbackClient implements CallbackClient {
             case CHATMESSAGE: {
                 ChatMessage message = (ChatMessage) callback.getData();
                 String mes = this.showLogsAsHtml ? message.getMessage() : Jsoup.parse(message.getMessage()).text();
-                log.info(getLogStartInfo() + "chat message" + (message.getTurnInfo() == null ? "" : " at " + message.getTurnInfo()) + ": " + mes);
+                logger.info(getLogStartInfo() + "chat message" + (message.getTurnInfo() == null ? "" : " at " + message.getTurnInfo()) + ": " + mes);
                 break;
             }
 
             case START_GAME: {
                 TableClientMessage message = (TableClientMessage) callback.getData();
-                log.info(getLogStartInfo() + "game started");
+                logger.info(getLogStartInfo() + "game started");
                 gameId = message.getGameId();
                 playerId = message.getPlayerId();
                 session.joinGame(message.getGameId());
@@ -91,49 +90,49 @@ public class LoadCallbackClient implements CallbackClient {
 
             case SHOW_USERMESSAGE: {
                 List<String> messageData = (List<String>) callback.getData();
-                log.info(getLogStartInfo() + "warning message: " + String.join(" - ", messageData));
+                logger.info(getLogStartInfo() + "warning message: " + String.join(" - ", messageData));
                 break;
             }
 
             case GAME_TARGET: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 this.gameView = message.getGameView();
-                log.info(getLogStartInfo() + " target: " + message.getMessage());
+                logger.info(getLogStartInfo() + " target: " + message.getMessage());
                 switch (message.getMessage()) {
                     case "Select a starting player":
                         session.sendPlayerUUID(gameId, playerId);
                         return;
                     case "Select a card to discard":
-                        log.info(getLogStartInfo() + "hand size: " + gameView.getHand().size());
+                        logger.info(getLogStartInfo() + "hand size: " + gameView.getHand().size());
                         SimpleCardView card = gameView.getHand().values().iterator().next();
                         session.sendPlayerUUID(gameId, card.getId());
                         return;
                     default:
-                        log.error(getLogStartInfo() + "unknown GAME_TARGET message: " + message.toString());
+                        logger.error(getLogStartInfo() + "unknown GAME_TARGET message: " + message);
                         return;
                 }
             }
 
             case GAME_ASK: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
-                log.info(getLogStartInfo() + "ask: " + message.getMessage());
+                logger.info(getLogStartInfo() + "ask: " + message.getMessage());
                 if (message.getMessage().startsWith("Mulligan")) {
                     session.sendPlayerBoolean(gameId, false);
                     return;
                 } else {
-                    log.error(getLogStartInfo() + "unknown GAME_ASK message: " + message.toString());
+                    logger.error(getLogStartInfo() + "unknown GAME_ASK message: " + message);
                 }
                 break;
             }
 
             case GAME_SELECT: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
-                log.info(getLogStartInfo() + "select: " + message.getMessage());
+                logger.info(getLogStartInfo() + "select: " + message.getMessage());
                 this.gameView = message.getGameView();
 
                 // concede
                 if (needToConcede) {
-                    log.info(getLogStartInfo() + "game conceded");
+                    logger.info(getLogStartInfo() + "game conceded");
                     needToConcede = false;
                     session.sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
                     return;
@@ -154,14 +153,14 @@ public class LoadCallbackClient implements CallbackClient {
             }
 
             case GAME_OVER:
-                log.info(getLogStartInfo() + "game over");
+                logger.info(getLogStartInfo() + "game over");
                 gameOver = true;
                 break;
 
             case END_GAME_INFO:
                 GameEndView message = (GameEndView) callback.getData();
                 this.gameResult = message.hasWon() ? "win" : "lose";
-                log.info(getLogStartInfo() + "game end info, " + this.gameResult);
+                logger.info(getLogStartInfo() + "game end info, " + this.gameResult);
                 break;
 
             // skip callbacks (no need to react)
@@ -170,7 +169,7 @@ public class LoadCallbackClient implements CallbackClient {
                 break;
 
             default:
-                log.error(getLogStartInfo() + "unknown callback: " + callback.getMethod() + ", " + callback.getData().toString());
+                logger.error(getLogStartInfo() + "unknown callback: " + callback.getMethod() + ", " + callback.getData().toString());
                 session.sendPlayerBoolean(gameId, false);
                 break;
         }
@@ -221,7 +220,7 @@ public class LoadCallbackClient implements CallbackClient {
                 }
 
                 if (controlCount > 5) {
-                    log.warn(getLogStartInfo() + "game seems frozen. Sending boolean message to server.");
+                    logger.warn(getLogStartInfo() + "game seems frozen. Sending boolean message to server.");
                     session.sendPlayerBoolean(gameId, false);
                     controlCount = 0;
                 }

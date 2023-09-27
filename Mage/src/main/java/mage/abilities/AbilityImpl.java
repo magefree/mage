@@ -38,7 +38,8 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -46,8 +47,7 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class AbilityImpl implements Ability {
-
-    private static final Logger logger = Logger.getLogger(AbilityImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbilityImpl.class);
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 

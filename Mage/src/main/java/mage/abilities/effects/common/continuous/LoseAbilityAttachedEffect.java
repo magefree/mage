@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -7,15 +5,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class LoseAbilityAttachedEffect extends ContinuousEffectImpl {
-
-    private static final Logger logger = Logger.getLogger(LoseAbilityAttachedEffect.class);
-
     protected Ability ability;
     protected AttachmentType attachmentType;
 

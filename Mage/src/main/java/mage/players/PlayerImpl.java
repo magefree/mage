@@ -63,7 +63,8 @@ import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.*;
@@ -71,8 +72,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public abstract class PlayerImpl implements Player, Serializable {
-
-    private static final Logger logger = Logger.getLogger(PlayerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(PlayerImpl.class);
 
     /**
      * Used to cancel waiting requests send to the player

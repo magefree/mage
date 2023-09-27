@@ -34,7 +34,8 @@ import mage.utils.timer.PriorityTimer;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
@@ -55,7 +56,7 @@ public class GameController implements GameCallback {
     private static final int GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS = 2 * 60; // leave player from game if it don't join and inactive on server
 
     private final ExecutorService gameExecutor;
-    private static final Logger logger = Logger.getLogger(GameController.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
     protected final ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
 
@@ -177,13 +178,13 @@ public class GameController implements GameCallback {
                                 break;
                         }
                     } catch (MageException ex) {
-                        logger.fatal("Table event listener error ", ex);
+                        logger.error("Table event listener error ", ex);
                     }
                 }
         );
         game.addPlayerQueryEventListener(
                 (Listener<PlayerQueryEvent>) event -> {
-                    logger.trace(new StringBuilder(event.getPlayerId().toString()).append("--").append(event.getQueryType()).append("--").append(event.getMessage()).toString());
+                    logger.trace(event.getPlayerId().toString() + "--" + event.getQueryType() + "--" + event.getMessage());
                     try {
                         switch (event.getQueryType()) {
                             case ASK:
@@ -231,7 +232,7 @@ public class GameController implements GameCallback {
                                 break;
                         }
                     } catch (MageException ex) {
-                        logger.fatal("Player event listener error ", ex);
+                        logger.error("Player event listener error ", ex);
                     }
                 }
         );
@@ -239,7 +240,7 @@ public class GameController implements GameCallback {
             try {
                 sendInfoAboutPlayersNotJoinedYetAndTryToFixIt();
             } catch (Exception ex) {
-                logger.fatal("Send info about player not joined yet:", ex);
+                logger.error("Send info about player not joined yet:", ex);
             }
         }, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, TimeUnit.SECONDS);
         checkStart();
@@ -279,19 +280,19 @@ public class GameController implements GameCallback {
     public void join(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
         if (playerId == null) {
-            logger.fatal("Join game failed!");
-            logger.fatal("- gameId: " + game.getId());
-            logger.fatal("- userId: " + userId);
+            logger.error("Join game failed!");
+            logger.error("- gameId: " + game.getId());
+            logger.error("- userId: " + userId);
             return;
         }
         Optional<User> user = managerFactory.userManager().getUser(userId);
         if (!user.isPresent()) {
-            logger.fatal("User not found : " + userId);
+            logger.error("User not found : " + userId);
             return;
         }
         Player player = game.getPlayer(playerId);
         if (player == null) {
-            logger.fatal("Player not found - playerId: " + playerId);
+            logger.error("Player not found - playerId: " + playerId);
             return;
         }
         GameSessionPlayer gameSession = gameSessions.get(playerId);
@@ -340,7 +341,7 @@ public class GameController implements GameCallback {
     }
 
     private void sendInfoAboutPlayersNotJoinedYetAndTryToFixIt() {
-        // runs every 5 secs untill all players join
+        // runs every 5 secs until all players join
         for (Player player : game.getPlayers().values()) {
             if (player.canRespond() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
@@ -950,7 +951,7 @@ public class GameController implements GameCallback {
         try {
             endGame(result);
         } catch (MageException ex) {
-            logger.fatal("Game Result error", ex);
+            logger.error("Game Result error", ex);
         }
     }
 
@@ -967,7 +968,7 @@ public class GameController implements GameCallback {
             logger.debug("Saved game:" + game.getId());
             return true;
         } catch (IOException ex) {
-            logger.fatal("Cannot save game.", ex);
+            logger.error("Cannot save game.", ex);
         } finally {
             StreamUtils.closeQuietly(file);
             StreamUtils.closeQuietly(output);

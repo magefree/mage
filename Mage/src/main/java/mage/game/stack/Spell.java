@@ -33,7 +33,6 @@ import mage.util.ManaUtil;
 import mage.util.SubTypes;
 import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.StackObjectCopyApplier;
-import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -41,9 +40,6 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public class Spell extends StackObjectImpl implements Card {
-
-    private static final Logger logger = Logger.getLogger(Spell.class);
-
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
 
     private final Card card;

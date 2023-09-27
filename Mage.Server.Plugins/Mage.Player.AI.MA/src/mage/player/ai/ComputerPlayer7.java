@@ -3,7 +3,8 @@ package mage.player.ai;
 import mage.abilities.Ability;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -12,8 +13,7 @@ import java.util.LinkedList;
  * @author ayratn
  */
 public class ComputerPlayer7 extends ComputerPlayer6 {
-
-    private static final Logger logger = Logger.getLogger(ComputerPlayer7.class);
+    private static final Logger logger = LoggerFactory.getLogger(ComputerPlayer7.class);
 
     private boolean allowBadMoves;
 

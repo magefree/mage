@@ -4,8 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.client.constants.Constants;
 import mage.constants.Rarity;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadJob;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
@@ -41,7 +43,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     private static File outDir;
 
     private static final int DAYS_BEFORE_RELEASE_TO_DOWNLOAD = +14; // Try to load the symbolsBasic eralies 14 days before release date
-    private static final Logger logger = Logger.getLogger(GathererSets.class);
+    private static final Logger logger = LoggerFactory.getLogger(GathererSets.class);
 
     private static final String[] symbolsBasic = {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "3ED", "2ED", "LEB", "LEA",
             "HOP",

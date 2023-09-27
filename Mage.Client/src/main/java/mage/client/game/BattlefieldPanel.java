@@ -17,7 +17,6 @@ import mage.interfaces.callback.ClientCallbackMethod;
 import mage.util.DebugUtil;
 import mage.view.CounterView;
 import mage.view.PermanentView;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -38,9 +37,6 @@ import java.util.Map.Entry;
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class BattlefieldPanel extends javax.swing.JLayeredPane {
-
-    private static final Logger logger = Logger.getLogger(BattlefieldPanel.class);
-
     private static final int GAME_REDRAW_TIMEOUT_MS = 300; // timeout before game goes to redraw on scrollbars change
 
     // WARNING, permanents contains top level PANELS (cards), use getMainPanel for real MagePermanent (permanents)

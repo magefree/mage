@@ -1,5 +1,3 @@
-
-
 package mage.server.tournament;
 
 import mage.cards.Sets;
@@ -9,7 +7,8 @@ import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
 import mage.server.draft.CubeFactory;
 import mage.view.TournamentTypeView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -20,7 +19,7 @@ import java.util.*;
  */
 public enum TournamentFactory {
     instance;
-    private static final Logger logger = Logger.getLogger(TournamentFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(TournamentFactory.class);
 
     private final Map<String, Class<Tournament>> tournaments = new HashMap<>();
     private final Map<String, TournamentType> tournamentTypes = new HashMap<>();
@@ -80,7 +79,7 @@ public enum TournamentFactory {
             }
 
         } catch (Exception ex) {
-            logger.fatal("TournamentFactory error ", ex);
+            logger.error("TournamentFactory error ", ex);
             return null;
         }
         logger.debug("Tournament created: " + tournamentType + ' ' + tournament.getId());

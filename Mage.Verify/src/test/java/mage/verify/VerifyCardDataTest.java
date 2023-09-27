@@ -40,12 +40,13 @@ import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
 import mage.verify.mtgjson.MtgJsonSet;
 import mage.watchers.Watcher;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.reflections.Reflections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.*;
@@ -60,8 +61,7 @@ import java.util.stream.Collectors;
  * @author JayDi85
  */
 public class VerifyCardDataTest {
-
-    private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(VerifyCardDataTest.class);
 
     private static final String FULL_ABILITIES_CHECK_SET_CODES = "WHO;LTC;LCI;LCC;REX"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages

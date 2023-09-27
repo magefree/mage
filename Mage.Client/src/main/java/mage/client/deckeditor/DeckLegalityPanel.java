@@ -7,7 +7,8 @@ import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
 import mage.client.components.LegalityLabel;
 import mage.deck.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -18,8 +19,7 @@ import java.util.stream.Stream;
  * @author Elandril
  */
 public class DeckLegalityPanel extends javax.swing.JPanel {
-
-    private static final Logger logger = Logger.getLogger(DeckLegalityPanel.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeckLegalityPanel.class);
 
     /**
      * Creates new form DeckLegalityPanel

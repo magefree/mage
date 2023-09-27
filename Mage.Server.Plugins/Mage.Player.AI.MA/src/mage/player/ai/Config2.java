@@ -1,22 +1,19 @@
-
-
 package mage.player.ai;
-
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Config2 {
-
-    private static final Logger logger = Logger.getLogger(Config2.class);
+    private static final Logger logger = LoggerFactory.getLogger(Config2.class);
 
 //    public static final int maxDepth;
     public static final int maxNodes;

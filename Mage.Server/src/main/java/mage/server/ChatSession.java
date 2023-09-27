@@ -8,7 +8,8 @@ import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.util.*;
@@ -22,8 +23,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author BetaSteward_at_googlemail.com
  */
 public class ChatSession {
-
-    private static final Logger logger = Logger.getLogger(ChatSession.class);
+    private static final Logger logger = LoggerFactory.getLogger(ChatSession.class);
     private static final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
 
     private final ManagerFactory managerFactory;
@@ -62,7 +62,7 @@ public class ChatSession {
 
         try {
             if (reason == null) {
-                logger.fatal("User kill without disconnect reason  userId: " + userId);
+                logger.error("User kill without disconnect reason  userId: " + userId);
                 reason = DisconnectReason.Undefined;
             }
             if (userId != null && clients.containsKey(userId)) {
@@ -84,7 +84,7 @@ public class ChatSession {
                 }
             }
         } catch (Exception ex) {
-            logger.fatal("exception: " + ex.toString());
+            logger.error("exception: " + ex.toString());
         }
     }
 

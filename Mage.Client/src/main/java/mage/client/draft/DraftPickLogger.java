@@ -9,13 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-import org.apache.log4j.Logger;
-
 import mage.view.DraftView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DraftPickLogger {
-
-  private static final Logger LOGGER = Logger.getLogger(DraftPickLogger.class);
+  private static final Logger logger = LoggerFactory.getLogger(DraftPickLogger.class);
 
   private final Path logPath;
   private final boolean logging;
@@ -30,7 +29,7 @@ public class DraftPickLogger {
     try {
       Files.write(logPath, new byte[0], StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     } catch (IOException ex) {
-      LOGGER.error(null, ex);
+      logger.error(null, ex);
     }
   }
 
@@ -77,7 +76,7 @@ public class DraftPickLogger {
       try {
         Files.write(logPath, data.getBytes(), StandardOpenOption.APPEND);
       } catch (IOException ex) {
-        LOGGER.error(null, ex);
+        logger.error(null, ex);
       }
     }
   }

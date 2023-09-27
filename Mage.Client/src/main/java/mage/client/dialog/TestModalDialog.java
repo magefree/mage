@@ -1,7 +1,8 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -12,8 +13,7 @@ import java.awt.event.KeyEvent;
  * @author JayDi85
  */
 public class TestModalDialog extends MageDialog {
-
-    private static final Logger logger = Logger.getLogger(TestModalDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(TestModalDialog.class);
 
     private final TestModalSampleDialog constModalDialog1;
     private final TestModalSampleDialog constModalDialog2;

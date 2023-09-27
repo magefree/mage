@@ -9,7 +9,8 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 import mage.game.events.Listener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +21,7 @@ import java.awt.*;
  * @author nantuko
  */
 public final class CollectionViewerPanel extends JPanel {
-
-    private static final Logger logger = Logger.getLogger(CollectionViewerPanel.class);
+    private static final Logger logger = LoggerFactory.getLogger(CollectionViewerPanel.class);
 
     protected static final String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
     private static final String FORMAT_CONFIG_KEY = "collectionViewerFormat";
@@ -33,7 +33,7 @@ public final class CollectionViewerPanel extends JPanel {
             String format = PreferencesDialog.getCachedValue(CollectionViewerPanel.FORMAT_CONFIG_KEY, ConstructedFormats.getDefault());
             formats.setSelectedItem(format);
         } catch (Exception e) {
-            logger.fatal("Error setting selected format", e);
+            logger.error("Error setting selected format", e);
         }
     }
 

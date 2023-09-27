@@ -8,7 +8,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.player.ai.ma.ArtificialScoringSystem;
 import mage.players.Player;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -18,8 +19,7 @@ import java.util.UUID;
  * This evaluator is only good for two player games
  */
 public final class GameStateEvaluator2 {
-
-    private static final Logger logger = Logger.getLogger(GameStateEvaluator2.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameStateEvaluator2.class);
 
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
@@ -70,7 +70,7 @@ public final class GameStateEvaluator2 {
             if (logger.isDebugEnabled()) {
                 sbPlayer.insert(0, playerPermanentsScore + " - ");
                 sbPlayer.insert(0, "Player..: ");
-                logger.debug(sbPlayer);
+                logger.debug(String.valueOf(sbPlayer));
             }
 
             // add values of opponent
@@ -84,7 +84,7 @@ public final class GameStateEvaluator2 {
             if (logger.isDebugEnabled()) {
                 sbOpponent.insert(0, opponentPermanentsScore + " - ");
                 sbOpponent.insert(0, "Opponent: ");
-                logger.debug(sbOpponent);
+                logger.debug(String.valueOf(sbOpponent));
             }
         } catch (Throwable t) {
         }

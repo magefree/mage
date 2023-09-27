@@ -34,7 +34,8 @@ import mage.target.common.TargetDefender;
 import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.*;
@@ -44,8 +45,7 @@ import java.util.stream.Collectors;
  * @author BetaSteward_at_googlemail.com
  */
 public class Combat implements Serializable, Copyable<Combat> {
-
-    private static final Logger logger = Logger.getLogger(Combat.class);
+    private static final Logger logger = LoggerFactory.getLogger(Combat.class);
 
     private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
     private static final FilterPermanent filterBattles = new FilterBattlePermanent();

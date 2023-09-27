@@ -9,9 +9,10 @@ import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.cards.*;
 import mage.target.Target;
-import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -23,8 +24,7 @@ import java.util.List;
  * @author JayDi85 & ZeldaZach
  */
 public class ExportJsonGameplayDataTest {
-
-    private static final Logger logger = Logger.getLogger(ExportJsonGameplayDataTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExportJsonGameplayDataTest.class);
     private static final boolean MTGJSON_WRITE_TO_FILES = false;
 
     @Test
@@ -89,7 +89,7 @@ public class ExportJsonGameplayDataTest {
                                 resEffect.addProperty("outcome", effect.getOutcome().toString());
                                 resEffect.addProperty("text", effect.getText(mode));
                             }
-                            if (resEffects.size() == 0) {
+                            if (resEffects.isEmpty()) {
                                 resMode.remove("effects");
                             }
 
@@ -105,7 +105,7 @@ public class ExportJsonGameplayDataTest {
                                 resTarget.addProperty("min", target.getMinNumberOfTargets());
                                 resTarget.addProperty("max", target.getMaxNumberOfTargets());
                             }
-                            if (resTargets.size() == 0) {
+                            if (resTargets.isEmpty()) {
                                 resMode.remove("targets");
                             }
 
@@ -113,7 +113,7 @@ public class ExportJsonGameplayDataTest {
                                 resModes.remove(resMode);
                             }
                         }
-                        if (resModes.size() == 0) {
+                        if (resModes.isEmpty()) {
                             resAbility.remove("modes");
                         }
                     }

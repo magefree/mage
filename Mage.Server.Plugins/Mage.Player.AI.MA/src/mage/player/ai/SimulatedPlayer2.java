@@ -21,7 +21,8 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.players.net.UserData;
 import mage.target.Target;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -32,8 +33,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @author BetaSteward_at_googlemail.com
  */
 public class SimulatedPlayer2 extends ComputerPlayer {
-
-    private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
+    private static final Logger logger = LoggerFactory.getLogger(SimulatedPlayer2.class);
     private static final PassAbility pass = new PassAbility();
 
     private final boolean isSimulatedPlayer;

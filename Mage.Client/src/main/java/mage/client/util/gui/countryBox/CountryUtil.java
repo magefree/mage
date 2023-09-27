@@ -7,15 +7,15 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author LevelX2
  */
 public final class CountryUtil {
-
-    private static final Logger LOGGER = Logger.getLogger(CountryUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CountryUtil.class);
     private static final Map<String, ImageIcon> FLAG_ICON_CACHE = new HashMap<>();
     private static final Map<String, String> COUNTRY_MAP = new HashMap<>();
 

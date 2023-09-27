@@ -7,8 +7,9 @@ import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
-import org.apache.log4j.Logger;
 import org.junit.Ignore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.util.concurrent.CountDownLatch;
@@ -21,8 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Ignore
 public class MultiConnectTest {
-
-    private static final Logger logger = Logger.getLogger(MultiConnectTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(MultiConnectTest.class);
 
     /**
      * Amount of games to be started from this test.
@@ -106,7 +106,7 @@ public class MultiConnectTest {
     }
 
     private void connect(final int index) throws Exception {
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.fatal(null, e));
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.error(null, e));
         SwingUtilities.invokeLater(() -> {
             String username = "player" + index;
             ClientMock client = new ClientMock(username);

@@ -27,8 +27,9 @@ import mage.filter.predicate.card.ExpansionSetPredicate;
 import mage.game.events.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbolsCellRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -47,8 +48,7 @@ import static mage.client.dialog.PreferencesDialog.*;
  * @author BetaSteward_at_googlemail.com, nantuko, JayDi85
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener, DragCardTarget {
-
-    private static final Logger logger = Logger.getLogger(CardSelector.class);
+    private static final Logger logger = LoggerFactory.getLogger(CardSelector.class);
     private final String MULTI_SETS_SELECTION_TEXT = "Multiple sets selected";
 
     private final java.util.List<Card> cards = new ArrayList<>();
@@ -509,7 +509,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             oos.writeObject(object);
             logger.info(name + ": " + baos.size());
         } catch (Throwable e) {
-            logger.fatal("Can't find object size: " + e.getMessage(), e);
+            logger.error("Can't find object size: " + e.getMessage(), e);
         }
     }
 

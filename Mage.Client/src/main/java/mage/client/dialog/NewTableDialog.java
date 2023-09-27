@@ -17,7 +17,8 @@ import mage.game.match.MatchOptions;
 import mage.players.PlayerType;
 import mage.view.GameTypeView;
 import mage.view.TableView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -32,8 +33,7 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class NewTableDialog extends MageDialog {
-
-    private static final Logger logger = Logger.getLogger(NewTableDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(NewTableDialog.class);
 
     private CustomOptionsDialog customOptions;
     private TableView table;
@@ -787,7 +787,7 @@ public class NewTableDialog extends MageDialog {
     }
 
     private void handleError(Exception ex) {
-        logger.fatal("Error loading deck", ex);
+        logger.error("Error loading deck", ex);
         MageFrame.getInstance().showErrorDialog("Error loading deck", ex.getMessage());
     }
 

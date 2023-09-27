@@ -3,11 +3,12 @@ package mage.remote;
 import java.lang.reflect.Field;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import org.apache.log4j.Logger;
 import org.jboss.util.threadpool.BasicThreadPool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CustomThreadPool extends BasicThreadPool {
-    private static final Logger logger = Logger.getLogger(SessionImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomThreadPool.class);
 
     @Override
     public void setMaximumPoolSize(int size) {

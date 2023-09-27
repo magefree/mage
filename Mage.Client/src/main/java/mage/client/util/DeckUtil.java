@@ -1,5 +1,3 @@
-
-
 package mage.client.util;
 
 import mage.cards.Card;
@@ -8,7 +6,8 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.view.DeckView;
 import mage.view.SimpleCardView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utility class for decks.
@@ -16,8 +15,7 @@ import org.apache.log4j.Logger;
  * @author nantuko
  */
 public final class DeckUtil {
-
-    private static final Logger log = Logger.getLogger(DeckUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeckUtil.class);
 
     private DeckUtil() {
     }
@@ -30,7 +28,7 @@ public final class DeckUtil {
             if (card != null) {
                 deck.getCards().add(card);
             } else {
-                log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
+                logger.error("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
             }
         }
         for (SimpleCardView cardView : view.getSideboard().values()) {
@@ -39,7 +37,7 @@ public final class DeckUtil {
             if (card != null) {
                 deck.getSideboard().add(card);
             } else {
-                log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
+                logger.error("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
             }
         }
         return deck;

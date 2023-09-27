@@ -11,7 +11,8 @@ import mage.server.util.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -27,8 +28,7 @@ import java.util.stream.Collectors;
  * @author BetaSteward_at_googlemail.com
  */
 public class ChatManagerImpl implements ChatManager {
-
-    private static final Logger logger = Logger.getLogger(ChatManagerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ChatManagerImpl.class);
     private static final HashMap<String, String> userMessages = new HashMap<>();
 
     private final ManagerFactory managerFactory;

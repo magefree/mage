@@ -9,7 +9,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.players.Player;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ import java.util.*;
  */
 public class ManaOptions extends LinkedHashSet<Mana> {
 
-    private static final Logger logger = Logger.getLogger(ManaOptions.class);
+    private static final Logger logger = LoggerFactory.getLogger(ManaOptions.class);
 
     public ManaOptions() {
     }

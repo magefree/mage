@@ -15,7 +15,8 @@ import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UsersView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.*;
@@ -28,8 +29,7 @@ import java.util.concurrent.TimeUnit;
  * @author BetaSteward_at_googlemail.com
  */
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
-
-    private static final Logger LOGGER = Logger.getLogger(GamesRoomImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(GamesRoomImpl.class);
 
     private static final ScheduledExecutorService UPDATE_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<>();
@@ -46,7 +46,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             try {
                 update();
             } catch (Exception ex) {
-                LOGGER.fatal("Games room update exception! " + ex.toString(), ex);
+                logger.error("Games room update exception! " + ex, ex);
             }
 
         }, 2, 2, TimeUnit.SECONDS);
@@ -87,7 +87,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                             user.getUserData().getGeneralRating(), user.getUserData().getConstructedRating(),
                             user.getUserData().getLimitedRating()));
                 } catch (Exception ex) {
-                    LOGGER.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
+                    logger.error("User update exception: " + user.getName() + " - " + ex, ex);
                     users.add(new UsersView(
                             (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
                             user.getName() != null ? user.getName() : "<no name>",
@@ -170,8 +170,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         if (table != null) {
             table.cleanUp();
             tables.remove(tableId);
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Table removed: " + tableId);
+            if (logger.isDebugEnabled()) {
+                logger.debug("Table removed: " + tableId);
             }
         }
     }

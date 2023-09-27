@@ -14,7 +14,6 @@ import mage.client.dialog.PreferencesDialog;
 import mage.constants.Zone;
 import mage.util.DebugUtil;
 import mage.view.CardView;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -36,9 +35,6 @@ import java.util.Map;
  * @author JayDi85
  */
 public class MageLayer extends MageCard {
-
-    private static final Logger logger = Logger.getLogger(MageLayer.class);
-
     JLayeredPane mainContainer;
     JPanel mainLayerCard;
     JPanel mainLayerIcons;

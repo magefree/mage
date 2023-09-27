@@ -17,14 +17,10 @@ import mage.game.MageObjectAttribute;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypes;
-import org.apache.log4j.Logger;
 
 import java.util.*;
 
 public abstract class MageObjectImpl implements MageObject {
-
-    private static final Logger logger = Logger.getLogger(MageObjectImpl.class);
-
     protected UUID objectId;
 
     protected String name;

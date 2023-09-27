@@ -4,7 +4,6 @@ import mage.cards.MageCard;
 import mage.client.util.comparators.CardViewComparator;
 import mage.cards.RateCard;
 import mage.view.CardView;
-import org.apache.log4j.Logger;
 
 /**
  * {@link MageCard} comparator. Used to sort cards in Deck Editor Table View
@@ -13,9 +12,6 @@ import org.apache.log4j.Logger;
  * @author nantuko
  */
 public class MageCardComparator implements CardViewComparator {
-
-    private static final Logger logger = Logger.getLogger(MageCardComparator.class);
-
     private final int column;
     private final boolean ascending;
 

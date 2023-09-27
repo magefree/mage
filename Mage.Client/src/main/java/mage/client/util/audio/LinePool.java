@@ -16,13 +16,12 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
 
-import org.apache.log4j.Logger;
-
 import mage.utils.ThreadUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LinePool {
-
-    private final org.apache.log4j.Logger logger = Logger.getLogger(LinePool.class);
+    private static final Logger logger = LoggerFactory.getLogger(LinePool.class);
     private static final int LINE_CLEANUP_INTERVAL = 30000;
 
     private final Queue<SourceDataLine> freeLines = new ArrayDeque<>();

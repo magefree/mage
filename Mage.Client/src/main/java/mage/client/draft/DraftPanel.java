@@ -14,7 +14,6 @@
  import mage.client.util.gui.BufferedImageBuilder;
  import mage.constants.PlayerAction;
  import mage.view.*;
- import org.apache.log4j.Logger;
 
  import javax.swing.Timer;
  import javax.swing.*;
@@ -34,9 +33,6 @@
   * @author BetaSteward_at_googlemail.com, JayDi85
   */
  public class DraftPanel extends javax.swing.JPanel {
-
-     private static final Logger logger = Logger.getLogger(DraftPanel.class);
-
      private UUID draftId;
      private Timer countdown;
      private int timeout;

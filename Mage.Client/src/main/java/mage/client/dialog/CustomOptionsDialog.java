@@ -7,7 +7,6 @@ import mage.client.MageFrame;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.mulligan.MulliganType;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.io.File;
@@ -83,7 +82,6 @@ public class CustomOptionsDialog extends MageDialog {
         }
     }
 
-    private static final Logger logger = Logger.getLogger(CustomOptionsDialog.class);
     private final SaveLoadKeys saveLoadKeys;
     private final JButton openButton;
     private final JFileChooser fcSelectEmblemCardsPerPlayer;

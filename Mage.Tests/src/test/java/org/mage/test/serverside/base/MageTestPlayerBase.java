@@ -45,12 +45,13 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 import mage.util.Copier;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import mage.util.LoggerUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,8 +66,7 @@ import java.util.regex.Pattern;
  * @author ayratn, JayDi85
  */
 public abstract class MageTestPlayerBase {
-
-    protected static Logger logger = Logger.getLogger(MageTestPlayerBase.class);
+    protected static Logger logger = LoggerFactory.getLogger(MageTestPlayerBase.class);
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
 
@@ -99,7 +99,7 @@ public abstract class MageTestPlayerBase {
     protected static Match currentMatch = null;
 
     /**
-     * Player thats starts the game first. By default, it is ComputerA.
+     * Player that starts the game first. By default, it is ComputerA.
      */
     protected static Player activePlayer = null;
 
@@ -129,9 +129,8 @@ public abstract class MageTestPlayerBase {
 
     @BeforeClass
     public static void init() {
-        Logger.getRootLogger().setLevel(Level.DEBUG);
         logger.debug("Starting MAGE tests");
-        logger.debug("Logging level: " + logger.getLevel());
+        logger.debug("Logging level: " + LoggerUtil.getLogLevel(logger));
         logger.debug("Default charset: " + Charset.defaultCharset());
 
         // one time init for all tests
@@ -153,7 +152,7 @@ public abstract class MageTestPlayerBase {
         } catch (ClassNotFoundException ex) {
             logger.warn("Plugin not Found:" + plugin.getJar() + " - check plugin folder");
         } catch (Exception ex) {
-            logger.fatal("Error loading plugin " + plugin.getJar(), ex);
+            logger.error("Error loading plugin " + plugin.getJar(), ex);
         }
         return null;
     }
@@ -166,7 +165,7 @@ public abstract class MageTestPlayerBase {
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");
         } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+            logger.error("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
     }
@@ -178,7 +177,7 @@ public abstract class MageTestPlayerBase {
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");
         } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+            logger.error("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
     }
@@ -279,8 +278,8 @@ public abstract class MageTestPlayerBase {
                                 cards.add(newCard);
                             }
                         } else {
-                            logger.fatal("Couldn't find a card: " + cardName);
-                            logger.fatal("line: " + line);
+                            logger.error("Couldn't find a card: " + cardName);
+                            logger.error("line: " + line);
                         }
                     }
                 }
@@ -382,7 +381,7 @@ public abstract class MageTestPlayerBase {
                     logger.warn("Ignored (file doesn't exist): " + line);
                 }
             } else {
-                logger.warn("Ignored (wrong charactres): " + line);
+                logger.warn("Ignored (wrong characters): " + line);
             }
         } else {
             logger.warn("Ignored (wrong size): " + line);
@@ -468,7 +467,7 @@ public abstract class MageTestPlayerBase {
     }
 
     /**
-     * Add cost modification effect to the game (all cast cost will be increaded or decreased for controller)
+     * Add cost modification effect to the game (all cast cost will be increased or decreased for controller)
      *
      * @param controller
      * @param modificationAmount
@@ -553,7 +552,7 @@ public abstract class MageTestPlayerBase {
     }
 }
 
-// custom card with global abilities list to init (can contains abilities per card name)
+// custom card with global abilities list to init (can contain abilities per card name)
 class CustomTestCard extends CardImpl {
 
     static private final Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
@@ -592,18 +591,16 @@ class CustomTestCard extends CardImpl {
         if (spellAbilitiesList.containsKey(setInfo.getName())) {
             this.replaceSpellAbility(spellAbilitiesList.get(setInfo.getName()));
         }
-        Abilities<Ability> extraAbitilies = abilitiesList.get(setInfo.getName());
-        if (extraAbitilies != null) {
-            for (Ability ability : extraAbitilies) {
+        Abilities<Ability> extraAbilities = abilitiesList.get(setInfo.getName());
+        if (extraAbilities != null) {
+            for (Ability ability : extraAbilities) {
                 this.addAbility(ability.copy());
             }
         }
 
         Set<SubType> subTypeSet = subTypesList.get(setInfo.getName());
         if (subTypeSet != null) {
-            for (SubType subType : subTypeSet) {
-                this.subtype.add(subType);
-            }
+            this.subtype.addAll(subTypeSet);
         }
         if (cardType == CardType.CREATURE) {
             this.power = new MageInt(1);

@@ -1,7 +1,8 @@
 package mage.cards.repository;
 
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -13,12 +14,11 @@ import java.util.stream.Collectors;
  * @author JayDi85
  */
 public enum TokenRepository {
-
     instance;
 
     public static final String XMAGE_TOKENS_SET_CODE = "XMAGE";
 
-    private static final Logger logger = Logger.getLogger(TokenRepository.class);
+    private static final Logger logger = LoggerFactory.getLogger(TokenRepository.class);
 
     private ArrayList<TokenInfo> allTokens = new ArrayList<>();
     private final Map<String, List<TokenInfo>> indexByClassName = new HashMap<>();

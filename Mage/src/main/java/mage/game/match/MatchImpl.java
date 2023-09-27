@@ -13,7 +13,8 @@ import mage.game.result.ResultProtos.MatchQuitStatus;
 import mage.players.Player;
 import mage.util.DateFormat;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -21,8 +22,7 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class MatchImpl implements Match {
-
-    private static final Logger logger = Logger.getLogger(MatchImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(MatchImpl.class);
 
     protected UUID id = UUID.randomUUID();
     protected List<MatchPlayer> players = new ArrayList<>();

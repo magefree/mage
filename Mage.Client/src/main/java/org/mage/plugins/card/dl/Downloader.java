@@ -1,6 +1,5 @@
 package org.mage.plugins.card.dl;
 
-import org.apache.log4j.Logger;
 import org.jetlang.channels.Channel;
 import org.jetlang.channels.MemoryChannel;
 import org.jetlang.core.Callback;
@@ -10,6 +9,8 @@ import org.mage.plugins.card.dl.DownloadJob.Destination;
 import org.mage.plugins.card.dl.DownloadJob.Source;
 import org.mage.plugins.card.dl.DownloadJob.State;
 import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.io.*;
@@ -27,8 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @author Clemens Koza, JayDi85
  */
 public class Downloader extends AbstractLaternaBean {
-
-    private static final Logger logger = Logger.getLogger(Downloader.class);
+    private static final Logger logger = LoggerFactory.getLogger(Downloader.class);
 
     private final List<DownloadJob> jobs = properties.list("jobs");
     private final Channel<DownloadJob> jobsQueue = new MemoryChannel<>();

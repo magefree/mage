@@ -5,13 +5,14 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.util.CardLanguage;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.utils.CardImageUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.*;
@@ -23,10 +24,9 @@ import java.util.concurrent.TimeUnit;
  * @author North
  */
 public enum WizardCardsImageSource implements CardImageSource {
-
     instance;
 
-    private static final Logger logger = Logger.getLogger(WizardCardsImageSource.class);
+    private static final Logger logger = LoggerFactory.getLogger(WizardCardsImageSource.class);
 
     private final Map<String, String> setsAliases;
     private final Map<CardLanguage, String> languageAliases;

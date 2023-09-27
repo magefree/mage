@@ -210,12 +210,9 @@
     <dependencies>
         <!-- GLOBAL dependencies - used in all xmage modules (no need to add it to child modules) -->
         <dependency>
-            <!-- logs support (log4j as engine + slf4j as facade) -->
-            <!-- TODO: migrate from log4j to logback code usage (see SLF4J Migrator http://www.slf4j.org/migrator.html) -->
-            <!-- TODO: migrate log4j configs to logback xml (see properties to xml translation http://logback.qos.ch/translator/ -->
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.32</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.11</version>
         </dependency>
 
         <dependency>

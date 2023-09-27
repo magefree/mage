@@ -24,8 +24,8 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.PlayableObjectsList;
 import mage.players.Player;
-import mage.watchers.common.CastSpellLastTurnWatcher;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class GameView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOGGER = Logger.getLogger(GameView.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameView.class);
     private final int priorityTime;
     private final int bufferTime;
     private final List<PlayerView> players = new ArrayList<>();
@@ -133,7 +133,7 @@ public class GameView implements Serializable {
                         if (designation != null) {
                             stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, designation.getName(), new CardView(designation, game)));
                         } else {
-                            LOGGER.fatal("Designation object not found: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
+                            logger.error("Designation object not found: " + object.getName() + ' ' + object + ' ' + object.getClass());
                         }
                     } else if (object instanceof StackAbility) {
                         StackAbility stackAbility = ((StackAbility) object);
@@ -141,14 +141,14 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(), new CardView(stackObject, game));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else {
-                        LOGGER.fatal("Object can't be cast to StackAbility: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
+                        logger.error("Object can't be cast to StackAbility: " + object.getName() + ' ' + object + ' ' + object.getClass());
                     }
                 } else {
                     // can happen if a player times out while ability is on the stack
-                    LOGGER.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
+                    logger.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
             } else if (stackObject != null) {
-                LOGGER.fatal("Unknown type of StackObject: " + stackObject.getName() + ' ' + stackObject.toString() + ' ' + stackObject.getClass().toString());
+                logger.error("Unknown type of StackObject: " + stackObject.getName() + ' ' + stackObject + ' ' + stackObject.getClass());
             }
             //stackOrder.add(stackObject.getId());
         }

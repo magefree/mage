@@ -16,7 +16,8 @@ import mage.players.PlayerType;
 import mage.server.game.GameController;
 import mage.server.managers.TableManager;
 import mage.server.managers.ManagerFactory;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -38,7 +39,7 @@ public class TableManagerImpl implements TableManager {
 
     // protected static ScheduledExecutorService expireExecutor = ThreadExecutorImpl.getInstance().getExpireExecutor();
     private final ManagerFactory managerFactory;
-    private final Logger logger = Logger.getLogger(TableManagerImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(TableManagerImpl.class);
     private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
     private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
@@ -60,7 +61,7 @@ public class TableManagerImpl implements TableManager {
                 managerFactory.chatManager().clearUserMessageStorage();
                 checkTableHealthState();
             } catch (Exception ex) {
-                logger.fatal("Check table health state job error:", ex);
+                logger.error("Check table health state job error:", ex);
             }
         }, TABLE_HEALTH_CHECK_TIMEOUT_MINS, TABLE_HEALTH_CHECK_TIMEOUT_MINS, TimeUnit.MINUTES);
     }
@@ -455,7 +456,7 @@ public class TableManagerImpl implements TableManager {
                                 logger.warn("Removing unhealthy tableId " + table.getId());
                                 removeTable(table.getId());
                             } catch (Exception e) {
-                                logger.error(e);
+                                logger.error(String.valueOf(e));
                             }
                         }
                     });
@@ -466,6 +467,5 @@ public class TableManagerImpl implements TableManager {
             }
         }
         logger.debug("TABLE HEALTH CHECK - END");
-
     }
 }

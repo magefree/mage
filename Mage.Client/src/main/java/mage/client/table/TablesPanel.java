@@ -23,12 +23,13 @@ import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UserRequestMessage;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRendererUtils;
 import org.ocpsoft.prettytime.Duration;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.TimeFormat;
 import org.ocpsoft.prettytime.units.JustNow;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -60,8 +61,7 @@ import static mage.client.dialog.PreferencesDialog.*;
  * @author BetaSteward_at_googlemail.com
  */
 public class TablesPanel extends javax.swing.JPanel {
-
-    private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
+    private static final Logger logger = LoggerFactory.getLogger(TablesPanel.class);
     private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 100, 50, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
     // ping timeout (warning, must be less than SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS)
@@ -443,18 +443,18 @@ public class TablesPanel extends javax.swing.JPanel {
                                         try {
                                             frame.setSelected(true);
                                         } catch (PropertyVetoException ve) {
-                                            LOGGER.error(ve);
+                                            logger.error(String.valueOf(ve));
                                         }
                                     }
 
                                 }
                             } catch (InterruptedException ex) {
-                                LOGGER.error(ex);
+                                logger.error(String.valueOf(ex));
                             }
                             return;
                         }
                         if (isTournament) {
-                            LOGGER.info("Joining tournament " + tableId);
+                            logger.info("Joining tournament " + tableId);
                             if (!gameType.startsWith("Constructed")) {
                                 if (TablesTableModel.PASSWORD_VALUE_YES.equals(pwdColumn)) {
                                     joinTableDialog.showDialog(roomId, tableId, true, !gameType.startsWith("Constructed"));
@@ -465,7 +465,7 @@ public class TablesPanel extends javax.swing.JPanel {
                                 joinTableDialog.showDialog(roomId, tableId, true, !gameType.startsWith("Constructed"));
                             }
                         } else {
-                            LOGGER.info("Joining table " + tableId);
+                            logger.info("Joining table " + tableId);
                             joinTableDialog.showDialog(roomId, tableId, false, false);
                         }
                         break;
@@ -477,18 +477,18 @@ public class TablesPanel extends javax.swing.JPanel {
                         break;
                     case "Show":
                         if (isTournament) {
-                            LOGGER.info("Showing tournament table " + tableId);
+                            logger.info("Showing tournament table " + tableId);
                             SessionHandler.watchTable(roomId, tableId);
                         }
                         break;
                     case "Watch":
                         if (!isTournament) {
-                            LOGGER.info("Watching table " + tableId);
+                            logger.info("Watching table " + tableId);
                             SessionHandler.watchTable(roomId, tableId);
                         }
                         break;
                     case "Replay":
-                        LOGGER.info("Replaying game " + gameId);
+                        logger.info("Replaying game " + gameId);
                         SessionHandler.replayGame(gameId);
                         break;
                 }
@@ -519,7 +519,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         break;
                     case "Show":
                         if (matchesModel.isTournament(modelRow)) {
-                            LOGGER.info("Showing tournament table " + matchesModel.getTableId(modelRow));
+                            logger.info("Showing tournament table " + matchesModel.getTableId(modelRow));
                             SessionHandler.watchTable(roomId, matchesModel.getTableId(modelRow));
                         }
                         break;
@@ -1778,7 +1778,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnQuickStartMCTSActionPerformed
 
     private void handleError(Exception ex) {
-        LOGGER.fatal("Error loading deck: ", ex);
+        logger.error("Error loading deck: ", ex);
         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
@@ -1840,12 +1840,11 @@ public class TablesPanel extends javax.swing.JPanel {
 }
 
 class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
-
     private final UUID roomId;
     private final TablesPanel panel;
     private boolean isFirstRun = true;
 
-    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdateTablesTask.class);
 
     private int count = 0;
 
@@ -1885,7 +1884,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Tables Task error", ex);
+            logger.error("Update Tables Task error", ex);
         } catch (CancellationException ex) {
         }
     }
@@ -1897,7 +1896,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
     private final UUID roomId;
     private final PlayersChatPanel chat;
 
-    private static final Logger logger = Logger.getLogger(UpdatePlayersTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdatePlayersTask.class);
 
     UpdatePlayersTask(UUID roomId, PlayersChatPanel chat) {
 
@@ -1924,7 +1923,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Players Task error", ex);
+            logger.error("Update Players Task error", ex);
         } catch (CancellationException ex) {
         }
     }
@@ -1936,7 +1935,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     private final UUID roomId;
     private final TablesPanel panel;
 
-    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdateTablesTask.class);
 
     UpdateMatchesTask(UUID roomId, TablesPanel panel) {
         this.roomId = roomId;
@@ -1962,7 +1961,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Matches Task error", ex);
+            logger.error("Update Matches Task error", ex);
         } catch (CancellationException ex) {
         }
     }

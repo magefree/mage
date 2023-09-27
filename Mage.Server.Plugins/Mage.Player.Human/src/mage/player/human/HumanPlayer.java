@@ -45,7 +45,8 @@ import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
 import mage.util.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -71,7 +72,7 @@ public class HumanPlayer extends PlayerImpl {
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
     protected final Choice replacementEffectChoice;
-    private static final Logger logger = Logger.getLogger(HumanPlayer.class);
+    private static final Logger logger = LoggerFactory.getLogger(HumanPlayer.class);
 
     protected HashSet<String> autoSelectReplacementEffects = new LinkedHashSet<>(); // must be sorted
     protected ManaCost currentlyUnpaidMana;
@@ -2584,7 +2585,7 @@ public class HumanPlayer extends PlayerImpl {
         // (some choose logic can asks another question with different game state priority)
         if (game.getState().getPriorityPlayerId() != null) { // don't do it if priority was set to null before (e.g. discard in cleanaup)
             if (getId() == null) {
-                logger.fatal("Player with no ID: " + name);
+                logger.error("Player with no ID: " + name);
                 this.quit(game);
                 return;
             }

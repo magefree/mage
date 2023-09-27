@@ -6,7 +6,8 @@ import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.view.UserView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -26,7 +27,7 @@ public class UserManagerImpl implements UserManager {
     private static final int SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS = 3 * 60; // removes from all games and chats too (can be seen in users list with disconnected status)
     private static final int SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS = 8 * 60; // removes from users list
 
-    private static final Logger logger = Logger.getLogger(UserManagerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserManagerImpl.class);
 
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
     protected final ScheduledExecutorService userListExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -288,12 +289,12 @@ public class UserManagerImpl implements UserManager {
     @Override
     public void handleException(Exception ex) {
         if (ex != null) {
-            logger.fatal("User manager exception ", ex);
+            logger.error("User manager exception ", ex);
             if (ex.getStackTrace() != null) {
-                logger.fatal(ex.getStackTrace());
+                logger.error(Arrays.toString(ex.getStackTrace()));
             }
         } else {
-            logger.fatal("User manager exception - null");
+            logger.error("User manager exception - null");
         }
     }
 

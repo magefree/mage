@@ -10,7 +10,6 @@ import mage.constants.MultiAmountType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +18,6 @@ import java.util.List;
  * @author noxx
  */
 public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
-
-    private static final Logger logger = Logger.getLogger(AddConditionalManaOfAnyColorEffect.class);
-
     private final DynamicValue amount;
     private final DynamicValue netAmount;
     private final ConditionalManaBuilder manaBuilder;

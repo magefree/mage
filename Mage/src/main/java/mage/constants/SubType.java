@@ -3,6 +3,7 @@ package mage.constants;
 import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -609,7 +610,7 @@ public enum SubType {
                 return s;
             }
         }
-        org.apache.log4j.Logger.getLogger(SubType.class).error("no subtype for " + subType + " exists");
+        LoggerFactory.getLogger(SubType.class).error("no subtype for " + subType + " exists");
         return null;
     }
 

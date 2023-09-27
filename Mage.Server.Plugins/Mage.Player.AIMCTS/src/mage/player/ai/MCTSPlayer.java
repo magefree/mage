@@ -1,4 +1,3 @@
-
 package mage.player.ai;
 
 import mage.abilities.Ability;
@@ -8,7 +7,6 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +17,6 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public class MCTSPlayer extends ComputerPlayer {
-
-     private static final Logger logger = Logger.getLogger(MCTSPlayer.class);
-
     protected PassAbility pass = new PassAbility();
 
     private NextAction nextAction;

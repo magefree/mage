@@ -4,13 +4,13 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
 public class S3Uploader {
-
-    private static final Logger logger = Logger.getLogger(S3Uploader.class);
+    private static final Logger logger = LoggerFactory.getLogger(S3Uploader.class);
 
     public static Boolean upload(String filePath, String keyName) throws Exception {
         String existingBucketName = System.getenv("S3_BUCKET") != null ? System.getenv("S3_BUCKET")
@@ -39,7 +39,7 @@ public class S3Uploader {
             new File(path);
             return true;
         } catch (AmazonClientException amazonClientException) {
-            logger.fatal("Unable to upload file, upload was aborted.", amazonClientException);
+            logger.error("Unable to upload file, upload was aborted.", amazonClientException);
             return false;
         }
     }

@@ -19,7 +19,6 @@ import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.utils.CompressUtil;
 import mage.view.*;
-import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
@@ -27,6 +26,8 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.io.*;
@@ -45,7 +46,7 @@ public class SessionImpl implements Session {
         DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_STARTING
     }
 
-    private static final Logger logger = Logger.getLogger(SessionImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(SessionImpl.class);
 
     private final MageClient client;
 
@@ -134,7 +135,7 @@ public class SessionImpl implements Session {
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
-                    logger.fatal("waiting of error message had failed", e);
+                    logger.error("waiting of error message had failed", e);
                     Thread.currentThread().interrupt();
                 }
             }
@@ -142,7 +143,7 @@ public class SessionImpl implements Session {
         } catch (InterruptedException | CancellationException t) {
             // was canceled by user, nothing to show
         } catch (MalformedURLException ex) {
-            logger.fatal("Connect: wrong server address", ex);
+            logger.error("Connect: wrong server address", ex);
             showMessageToUser(ex.getMessage());
         } catch (UndeclaredThrowableException ex) {
             String addMessage = "";
@@ -164,11 +165,11 @@ public class SessionImpl implements Session {
                         + "server version is not compatible with the client: " + cause.getMessage();
             }
             if (addMessage.isEmpty()) {
-                logger.fatal("Connect: unknown error", ex);
+                logger.error("Connect: unknown error", ex);
             }
             showMessageToUser(addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (IOException ex) {
-            logger.fatal("Connect: unknown IO error", ex);
+            logger.error("Connect: unknown IO error", ex);
             String addMessage = "";
             if (ex.getMessage() != null && ex.getMessage().startsWith("Unable to perform invocation")) {
                 addMessage = "Maybe the server version is not compatible. ";
@@ -185,7 +186,7 @@ public class SessionImpl implements Session {
                 handleCannotConnectException(ex);
             }
         } catch (Throwable t) {
-            logger.fatal("Connect: FAIL", t);
+            logger.error("Connect: FAIL", t);
             disconnect(false);
             if (!canceled) {
                 showMessageToUser(t.getMessage());
@@ -538,7 +539,7 @@ public class SessionImpl implements Session {
             }
             TransporterClient.destroyTransporterClient(server);
         } catch (Throwable ex) {
-            logger.fatal("Disconnecting FAIL", ex);
+            logger.error("Disconnecting FAIL", ex);
         }
 
         if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
@@ -565,7 +566,7 @@ public class SessionImpl implements Session {
                 server.sendFeedbackMessage(sessionId, connection.getUsername(), title, type, message, email);
                 return true;
             } catch (MageException e) {
-                logger.error(e);
+                logger.error(String.valueOf(e));
             }
         }
         return false;
@@ -1644,11 +1645,11 @@ public class SessionImpl implements Session {
             }
         }
 
-        logger.fatal("Connection error: other", t);
+        logger.error("Connection error: other", t);
     }
 
     private void handleMageException(MageException ex) {
-        logger.fatal("Server error", ex);
+        logger.error("Server error", ex);
         client.showError(ex.getMessage());
     }
 

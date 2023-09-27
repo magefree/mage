@@ -9,7 +9,8 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PlayerAction;
 import mage.constants.TurnPhase;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,8 +28,7 @@ import static mage.constants.Constants.Option.*;
  * @author BetaSteward_at_googlemail.com
  */
 public class FeedbackPanel extends javax.swing.JPanel {
-
-    private static final Logger LOGGER = Logger.getLogger(FeedbackPanel.class);
+    private static final Logger logger = LoggerFactory.getLogger(FeedbackPanel.class);
 
     public enum FeedbackMode {
         INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END
@@ -153,7 +153,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
      */
     private void endWithTimeout() {
         Runnable task = () -> {
-            LOGGER.info("Ending game...");
+            logger.info("Ending game...");
             Component c = MageFrame.getGame(gameId);
             while (c != null && !(c instanceof GamePane)) {
                 c = c.getParent();

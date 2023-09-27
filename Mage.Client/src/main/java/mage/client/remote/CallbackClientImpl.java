@@ -21,7 +21,8 @@ import mage.remote.ActionData;
 import mage.remote.Session;
 import mage.view.*;
 import mage.view.ChatMessage.MessageType;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -31,8 +32,7 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public class CallbackClientImpl implements CallbackClient {
-
-    private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CallbackClientImpl.class);
     private final MageFrame frame;
     private final Map<ClientCallbackType, Integer> lastMessages;
 
@@ -653,7 +653,7 @@ public class CallbackClientImpl implements CallbackClient {
     }
 
     private void handleException(Exception ex) {
-        logger.fatal("Client error\n", ex);
+        logger.error("Client error\n", ex);
         String errorMessage = ex.getMessage();
         if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
             errorMessage = ex.getClass().getSimpleName() + " - look at server or client logs for more details";

@@ -1,8 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.*;
@@ -12,9 +13,8 @@ import java.util.concurrent.TimeUnit;
  * @author spjspj
  */
 public enum GrabbagImageSource implements CardImageSource {
-
     instance;
-    private static final Logger LOGGER = Logger.getLogger(GrabbagImageSource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GrabbagImageSource.class);
 
     private static final Set<String> supportedSets = new LinkedHashSet<String>() {
         {

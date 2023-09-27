@@ -1,11 +1,10 @@
-
-
 package mage.server.game;
 
 import mage.constants.RangeOfInfluence;
 import mage.players.Player;
 import mage.players.PlayerType;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.EnumMap;
@@ -16,9 +15,8 @@ import java.util.Set;
  * @author BetaSteward_at_googlemail.com
  */
 public enum PlayerFactory {
-
     instance;
-    private static final Logger logger = Logger.getLogger(PlayerFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(PlayerFactory.class);
 
     private final EnumMap<PlayerType, Class> playerTypes = new EnumMap<>(PlayerType.class);
 
@@ -32,10 +30,10 @@ public enum PlayerFactory {
                 logger.trace("Player created: " + name + " - " + player.getId());
                 return Optional.of(player);
             } else {
-                logger.fatal("Unknown player type: " + playerType);
+                logger.error("Unknown player type: " + playerType);
             }
         } catch (Exception ex) {
-            logger.fatal("PlayerFactory error ", ex);
+            logger.error("PlayerFactory error ", ex);
         }
         return Optional.empty();
     }

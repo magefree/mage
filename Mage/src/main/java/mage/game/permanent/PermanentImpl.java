@@ -37,7 +37,6 @@ import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
@@ -46,8 +45,6 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class PermanentImpl extends CardImpl implements Permanent {
-
-    private static final Logger logger = Logger.getLogger(PermanentImpl.class);
 
     private static class MarkedDamageInfo implements Serializable {
 

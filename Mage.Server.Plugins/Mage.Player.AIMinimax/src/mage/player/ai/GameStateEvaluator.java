@@ -1,4 +1,3 @@
-
 package mage.player.ai;
 
 import java.util.UUID;
@@ -15,7 +14,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -25,8 +25,7 @@ import org.apache.log4j.Logger;
  *
  */
 public final class GameStateEvaluator {
-
-    private static final Logger logger = Logger.getLogger(GameStateEvaluator.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameStateEvaluator.class);
 
     private static final int LIFE_FACTOR = Config.evaluatorLifeFactor;
     private static final int PERMANENT_FACTOR = Config.evaluatorPermanentFactor;

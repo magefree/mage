@@ -5,7 +5,7 @@ import mage.game.tournament.Tournament;
 import mage.server.managers.TournamentManager;
 import mage.server.managers.ManagerFactory;
 import mage.view.TournamentView;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -16,7 +16,6 @@ import java.util.concurrent.ConcurrentMap;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentManagerImpl implements TournamentManager {
-
     private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, TournamentController> controllers = new ConcurrentHashMap<>();
 
@@ -46,7 +45,7 @@ public class TournamentManagerImpl implements TournamentManager {
         if (tournamentController != null) {
             tournamentController.quit(userId);
         } else {
-            Logger.getLogger(TournamentManagerImpl.class).error("Tournament controller missing  tournamentid: " + tournamentId + " userId: " + userId);
+            LoggerFactory.getLogger(TournamentManagerImpl.class).error("Tournament controller missing  tournamentid: " + tournamentId + " userId: " + userId);
         }
     }
 

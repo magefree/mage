@@ -12,7 +12,8 @@ import mage.constants.SuperType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.*;
@@ -22,8 +23,7 @@ import java.util.stream.Collectors;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
-
-    private static final Logger logger = Logger.getLogger(ExpansionSet.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExpansionSet.class);
     public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);

@@ -19,7 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -146,7 +146,7 @@ class IsochronScepterCopyEffect extends OneShotEffect {
                                             game, true, new ApprovingObject(source, game));
                                     game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                                 } else {
-                                    Logger.getLogger(IsochronScepterCopyEffect.class).error("Isochron Scepter: "
+                                    LoggerFactory.getLogger(IsochronScepterCopyEffect.class).error("Isochron Scepter: "
                                             + "spell ability == null " + copiedCard.getName());
                                 }
                             }

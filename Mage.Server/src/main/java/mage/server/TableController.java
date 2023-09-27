@@ -27,7 +27,8 @@ import mage.server.record.TableRecorderImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
 import mage.view.ChatMessage;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -40,8 +41,7 @@ import java.util.concurrent.TimeUnit;
  * @author BetaSteward_at_googlemail.com
  */
 public class TableController {
-
-    private static final Logger logger = Logger.getLogger(TableController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TableController.class);
 
     private final ManagerFactory managerFactory;
     private final UUID userId;
@@ -84,7 +84,7 @@ public class TableController {
         if (userId != null) {
             Optional<User> user = managerFactory.userManager().getUser(userId);
             if (!user.isPresent()) {
-                logger.fatal(new StringBuilder("User for userId ").append(userId).append(" could not be retrieved from UserManagerImpl").toString());
+                logger.error("User for userId " + userId + " could not be retrieved from UserManagerImpl");
                 controllerName = "[unknown]";
             } else {
                 controllerName = user.get().getName();
@@ -107,7 +107,7 @@ public class TableController {
                                 break;
                         }
                     } catch (MageException ex) {
-                        logger.fatal("Table event listener error", ex);
+                        logger.error("Table event listener error", ex);
                     }
                 }
         );
@@ -124,7 +124,7 @@ public class TableController {
         }
         Optional<User> _user = managerFactory.userManager().getUser(userId);
         if (!_user.isPresent()) {
-            logger.fatal("couldn't get user " + name + " for join tournament userId = " + userId);
+            logger.error("couldn't get user " + name + " for join tournament userId = " + userId);
             return false;
         }
         User user = _user.get();
@@ -165,8 +165,8 @@ public class TableController {
         // Check quit ratio.
         int quitRatio = table.getTournament().getOptions().getQuitRatio();
         if (quitRatio < user.getTourneyQuitRatio()) {
-            String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
-                    .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
+            String message = "Your quit ratio " + user.getTourneyQuitRatio() +
+                    "% is higher than the table requirement " + quitRatio + '%';
             user.showUserMessage("Join Table", message);
             return false;
         }
@@ -180,8 +180,8 @@ public class TableController {
             userRating = user.getUserData().getConstructedRating();
         }
         if (userRating < minimumRating) {
-            String message = new StringBuilder("Your rating ").append(userRating)
-                    .append(" is lower than the table requirement ").append(minimumRating).toString();
+            String message = "Your rating " + userRating +
+                    " is lower than the table requirement " + minimumRating;
             user.showUserMessage("Join Table", message);
             return false;
         }
@@ -190,7 +190,7 @@ public class TableController {
         if (playerOptional.isPresent()) {
             Player player = playerOptional.get();
             if (!player.canJoinTable(table)) {
-                user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
+                user.showUserMessage("Join Table", "A " + seat.getPlayerType() + " player can't join this table.");
                 return false;
             }
             tournament.addPlayer(player, seat.getPlayerType());
@@ -467,7 +467,7 @@ public class TableController {
             if (tournament != null) {
                 validDeck = managerFactory.tournamentManager().updateDeck(tournament.getId(), playerId, deck);
             } else {
-                logger.fatal("Tournament == null  table: " + table.getId() + " userId: " + userId);
+                logger.error("Tournament == null  table: " + table.getId() + " userId: " + userId);
             }
         } else if (TableState.SIDEBOARDING == table.getState()) {
             validDeck = match.updateDeck(playerId, deck);
@@ -614,7 +614,7 @@ public class TableController {
                 match.startMatch();
                 startGame(null);
             } catch (GameException ex) {
-                logger.fatal("Error starting match ", ex);
+                logger.error("Error starting match ", ex);
                 match.endGame();
             }
         }
@@ -676,7 +676,7 @@ public class TableController {
                 logger.debug("- chatId:  " + managerFactory.gameManager().getChatId(match.getGame().getId()));
             }
         } catch (Exception ex) {
-            logger.fatal("Error starting game table: " + table.getId(), ex);
+            logger.error("Error starting game table: " + table.getId(), ex);
             if (table != null) {
                 managerFactory.tableManager().removeTable(table.getId());
             }
@@ -697,14 +697,14 @@ public class TableController {
                 managerFactory.tournamentManager().createTournamentSession(tournament, userPlayerMap, table.getId());
                 for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
                     managerFactory.userManager().getUser(entry.getKey()).ifPresent(user -> {
-                        logger.info(new StringBuilder("User ").append(user.getName()).append(" tournament started: ").append(tournament.getId()).append(" userId: ").append(user.getId()));
+                        logger.info("User " + user.getName() + " tournament started: " + tournament.getId() + " userId: " + user.getId());
                         user.ccTournamentStarted(tournament.getId(), entry.getValue());
                     });
                 }
                 ServerMessagesUtil.instance.incTournamentsStarted();
             }
         } catch (Exception ex) {
-            logger.fatal("Error starting tournament", ex);
+            logger.error("Error starting tournament", ex);
             managerFactory.tableManager().removeTable(table.getId());
             managerFactory.tournamentManager().quit(tournament.getId(), userId);
         }
@@ -716,10 +716,10 @@ public class TableController {
         for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
             Optional<User> user = managerFactory.userManager().getUser(entry.getKey());
             if (user.isPresent()) {
-                logger.info(new StringBuilder("User ").append(user.get().getName()).append(" draft started: ").append(draft.getId()).append(" userId: ").append(user.get().getId()));
+                logger.info("User " + user.get().getName() + " draft started: " + draft.getId() + " userId: " + user.get().getId());
                 user.get().ccDraftStarted(draft.getId(), entry.getValue());
             } else {
-                logger.fatal(new StringBuilder("Start draft user not found userId: ").append(entry.getKey()));
+                logger.error("Start draft user not found userId: " + entry.getKey());
             }
         }
     }
@@ -792,7 +792,7 @@ public class TableController {
                 closeTable();
             }
         } catch (GameException ex) {
-            logger.fatal(null, ex);
+            logger.error(null, ex);
         }
         return match.hasEnded();
     }

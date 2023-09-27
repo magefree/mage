@@ -20,7 +20,8 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -28,8 +29,7 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class AwakenAbility extends SpellAbility {
-
-    private static final Logger logger = Logger.getLogger(AwakenAbility.class);
+    private static final Logger logger = LoggerFactory.getLogger(AwakenAbility.class);
 
     private static final String filterMessage = "a land you control to awake";
 
@@ -113,13 +113,13 @@ public class AwakenAbility extends SpellAbility {
                 }
             } else // source should never be null, but we are seeing a lot of NPEs from this section
                 if (source == null) {
-                    logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
+                    logger.error("Source was null in AwakenAbility: Create a bug report or fix the source code");
                 } else if (source.getTargets() == null) {
                     MageObject sourceObj = source.getSourceObject(game);
                     if (sourceObj != null) {
                         Class<? extends MageObject> sourceClass = sourceObj.getClass();
                         if (sourceClass != null) {
-                            logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
+                            logger.error("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
                         }
                     }
                 }

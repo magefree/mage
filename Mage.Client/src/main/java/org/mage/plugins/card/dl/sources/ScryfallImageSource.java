@@ -6,9 +6,10 @@ import com.google.gson.JsonParser;
 import mage.MageException;
 import mage.client.util.CardLanguage;
 import mage.util.JsonUtil;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -22,10 +23,9 @@ import java.util.*;
  * @author JayDi85
  */
 public enum ScryfallImageSource implements CardImageSource {
-
     instance;
 
-    private static final Logger logger = Logger.getLogger(ScryfallImageSource.class);
+    private static final Logger logger = LoggerFactory.getLogger(ScryfallImageSource.class);
 
     private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language

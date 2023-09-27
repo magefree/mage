@@ -1,4 +1,3 @@
-
 package mage.player.ai;
 
 import java.util.ArrayDeque;
@@ -20,18 +19,18 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.turn.Step.StepPart;
 import mage.players.Player;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class MCTSNode {
-
     public static final boolean USE_ACTION_CACHE = false;
     private static final double selectionCoefficient = Math.sqrt(2.0);
     private static final double passRatioTolerance = 0.0;
-    private static final Logger logger = Logger.getLogger(MCTSNode.class);
+    private static final Logger logger = LoggerFactory.getLogger(MCTSNode.class);
 
     private int visits = 0;
     private int wins = 0;
@@ -125,7 +124,7 @@ public class MCTSNode {
     public void expand() {
         MCTSPlayer player = (MCTSPlayer) game.getPlayer(playerId);
         if (player.getNextAction() == null) {
-            logger.fatal("next action is null");
+            logger.error("next action is null");
         }
         switch (player.getNextAction()) {
             case PRIORITY:

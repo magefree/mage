@@ -7,13 +7,14 @@ import mage.client.game.GamePanel;
 import mage.client.util.ImageHelper;
 import mage.remote.Session;
 import mage.view.AbilityPickerView;
-import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 import org.jdesktop.swingx.JXPanel;
 import org.jsoup.Jsoup;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,12 +28,11 @@ import java.util.*;
  * @author nantuko, JayDi85
  */
 public class AbilityPicker extends JXPanel implements MouseWheelListener {
-
     private static final String DEFAULT_MESSAGE = "Choose spell or ability to play (single-click)";
     private static final int DIALOG_WIDTH = 440;
     private static final int DIALOG_HEIGHT = 260;
 
-    private static final Logger log = Logger.getLogger(AbilityPicker.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbilityPicker.class);
 
     private JList rows;
     private List<Object> choices;
@@ -454,7 +454,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         try {
             SessionHandler.sendPlayerBoolean(gameId, false);
         } catch (Exception e) {
-            log.error("Couldn't cancel choose dialog: " + e, e);
+            logger.error("Couldn't cancel choose dialog: " + e, e);
         }
     }
 

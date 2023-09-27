@@ -9,7 +9,8 @@ import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,8 +20,7 @@ import java.util.stream.Collectors;
  * @author BetaSteward_at_googlemail.com
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
-
-    private static final Logger logger = Logger.getLogger(AbilitiesImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbilitiesImpl.class);
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
@@ -90,7 +90,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     }
                 } else { // logging so we can still can be made aware of rule problems a card has
                     String cardName = ((SpellAbility) ability).getCardName();
-                    logger.fatal("Error in rule text generation of " + cardName + ": Create a bug report or fix the source code");
+                    logger.error("Error in rule text generation of " + cardName + ": Create a bug report or fix the source code");
                 }
             }
         }

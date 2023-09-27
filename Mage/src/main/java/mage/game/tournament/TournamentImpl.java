@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 import mage.cards.ExpansionSet;
@@ -33,14 +31,15 @@ import mage.game.result.ResultProtos.TourneyRoundProto;
 import mage.players.Player;
 import mage.players.PlayerType;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class TournamentImpl implements Tournament {
-
+    protected static final Logger logger = LoggerFactory.getLogger(TournamentImpl.class);
     protected UUID id = UUID.randomUUID();
     protected List<Round> rounds = new CopyOnWriteArrayList<>();
     protected Map<UUID, TournamentPlayer> players = new HashMap<>();
@@ -231,7 +230,7 @@ public abstract class TournamentImpl implements Tournament {
                 //TODO: improve this
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(TournamentImpl.class).warn("TournamentImpl playRound error ", ex);
+                logger.warn("TournamentImpl playRound error ", ex);
                 break;
             }
         }

@@ -1,7 +1,8 @@
 package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Locale;
@@ -40,7 +41,7 @@ public abstract class DeckImporter {
         }
     }
 
-    protected static final Logger logger = Logger.getLogger(DeckImporter.class);
+    protected static final Logger logger = LoggerFactory.getLogger(DeckImporter.class);
 
     private static final String[] SIDEBOARD_MARKS = new String[]{"//sideboard", "sb: "};
 

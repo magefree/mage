@@ -4,8 +4,9 @@ import mage.MageException;
 import mage.players.net.UserData;
 import mage.server.managers.SessionManager;
 import mage.server.managers.ManagerFactory;
-import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -15,8 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author BetaSteward_at_googlemail.com
  */
 public class SessionManagerImpl implements SessionManager {
-
-    private static final Logger logger = Logger.getLogger(SessionManagerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(SessionManagerImpl.class);
 
     private final ManagerFactory managerFactory;
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();

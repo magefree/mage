@@ -4,7 +4,8 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.remote.Connection;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -18,8 +19,7 @@ import java.util.concurrent.TimeoutException;
  *
  */
 public class RegisterUserDialog extends MageDialog {
-
-    private static final Logger logger = Logger.getLogger(ConnectDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConnectDialog.class);
     private final ConnectDialog connectDialog;
     private Connection connection;
     private ConnectTask task;
@@ -242,12 +242,12 @@ public class RegisterUserDialog extends MageDialog {
                     lblStatus.setText("Could not register");
                 }
             } catch (InterruptedException | ExecutionException ex) {
-                logger.fatal("Registration task error", ex);
+                logger.error("Registration task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Registration was canceled");
                 lblStatus.setText("Registration was canceled (but an account might have been actually created)");
             } catch (TimeoutException ex) {
-                logger.fatal("Registration timeout: ", ex);
+                logger.error("Registration timeout: ", ex);
             } finally {
                 MageFrame.stopConnecting();
                 btnRegister.setEnabled(true);

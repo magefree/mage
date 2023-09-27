@@ -28,6 +28,8 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -50,7 +52,7 @@ public final class SystemUtil {
     public static final DateFormat dateFormat = new SimpleDateFormat("yy-M-dd HH:mm:ss");
 
     private static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
-    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(SystemUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(SystemUtil.class);
 
     // replace ref group command like @group by real commands from that group
     // example:
@@ -430,7 +432,7 @@ public final class SystemUtil {
                         Map<String, String> choices = new HashMap<>();
                         abilities.forEach(ability -> {
                             MageObject object = ability.getSourceObject(game);
-                            choices.put(ability.getId().toString(), object.getName() + ": " + ability.toString());
+                            choices.put(ability.getId().toString(), object.getName() + ": " + ability);
                         });
                         // TODO: set priority for us?
                         Choice choice = new ChoiceImpl();
@@ -719,7 +721,7 @@ public final class SystemUtil {
                 break;
         }
         game.applyEffects();
-        logger.info("Added card to player's " + zone.toString() + ": " + card.getName() + ", player = " + player.getName());
+        logger.info("Added card to player's " + zone + ": " + card.getName() + ", player = " + player.getName());
     }
 
     public static boolean putPlaneToGame(Game game, Player player, String planeClassName) {

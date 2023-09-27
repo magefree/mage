@@ -12,7 +12,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.util.DebugUtil;
 import mage.view.*;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,9 +28,6 @@ import java.util.UUID;
  *  Uses in some dialogs like pile choose and cards choosing
  */
 public class CardArea extends JPanel implements CardEventProducer {
-
-    private static final Logger logger = Logger.getLogger(CardArea.class);
-
     protected final CardEventSource cardEventSource = new CardEventSource();
 
     private static int MAX_CARDS_PER_COLUMN = 20; // max cards amount in one column

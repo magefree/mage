@@ -3,7 +3,8 @@
  import mage.remote.Session;
  import mage.view.TableView;
  import mage.view.UserView;
- import org.apache.log4j.Logger;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
 
  import javax.swing.*;
  import javax.swing.table.AbstractTableModel;
@@ -21,9 +22,6 @@
   * @author BetaSteward_at_googlemail.com
   */
  public class ConsolePanel extends javax.swing.JPanel {
-
-     private static final Logger logger = Logger.getLogger(ConsolePanel.class);
-
      private final TableUserModel tableUserModel;
      private final TableTableModel tableTableModel;
      private UpdateUsersTask updateUsersTask;
@@ -559,7 +557,7 @@
      private final ConsolePanel panel;
      private List<UserView> previousUsers;
 
-     private static final Logger logger = Logger.getLogger(UpdateUsersTask.class);
+     private static final Logger logger = LoggerFactory.getLogger(UpdateUsersTask.class);
      Map<String, String> peopleIps = new HashMap<>();
 
      UpdateUsersTask(Session session, ConsolePanel panel) {
@@ -624,10 +622,8 @@
      protected void done() {
          try {
              get();
-         } catch (InterruptedException ex) {
-             logger.fatal("Update Users Task error", ex);
-         } catch (ExecutionException ex) {
-             logger.fatal("Update Users Task error", ex);
+         } catch (InterruptedException | ExecutionException ex) {
+             logger.error("Update Users Task error", ex);
          } catch (CancellationException ex) {
          }
      }
@@ -639,7 +635,7 @@
      private final UUID roomId;
      private final ConsolePanel panel;
 
-     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
+     private static final Logger logger = LoggerFactory.getLogger(UpdateTablesTask.class);
 
      UpdateTablesTask(Session session, UUID roomId, ConsolePanel panel) {
          this.session = session;
@@ -676,10 +672,8 @@
      protected void done() {
          try {
              get();
-         } catch (InterruptedException ex) {
-             logger.fatal("Update Tables Task error", ex);
-         } catch (ExecutionException ex) {
-             logger.fatal("Update Tables Task error", ex);
+         } catch (InterruptedException | ExecutionException ex) {
+             logger.error("Update Tables Task error", ex);
          } catch (CancellationException ex) {
          }
      }

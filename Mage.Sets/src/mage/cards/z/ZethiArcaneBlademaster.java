@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -151,7 +151,7 @@ class ZethiArcaneBlademasterCastEffect extends OneShotEffect {
                     );
                     game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                 } else {
-                    Logger.getLogger(ZethiArcaneBlademasterCastEffect.class).error("Chun Li, Countless Kicks: "
+                    LoggerFactory.getLogger(ZethiArcaneBlademasterCastEffect.class).error("Chun Li, Countless Kicks: "
                             + "spell ability == null " + copiedCard.getName());
                 }
             }

@@ -11,7 +11,8 @@ import mage.cards.mock.MockSplitCard;
 import mage.constants.*;
 import mage.util.CardUtil;
 import mage.util.SubTypes;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
  */
 @DatabaseTable(tableName = "card")
 public class CardInfo {
+    private static final Logger logger = LoggerFactory.getLogger(CardInfo.class);
 
     private static final int MAX_RULE_LENGTH = 750;
 
@@ -216,7 +218,7 @@ public class CardInfo {
                     break;
                 }
             }
-            Logger.getLogger(CardInfo.class).warn("Card rule text was cut - cardname: " + card.getName());
+            logger.warn("Card rule text was cut - card name: " + card.getName());
             this.setRules(shortRules);
         } else {
             this.setRules(rulesList);

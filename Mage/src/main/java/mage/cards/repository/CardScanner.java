@@ -1,7 +1,6 @@
 package mage.cards.repository;
 
 import mage.cards.*;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,10 +11,7 @@ import java.util.Objects;
  * @author North
  */
 public final class CardScanner {
-
     public static boolean scanned = false;
-
-    private static final Logger logger = Logger.getLogger(CardScanner.class);
 
     public static void scan() {
         scan(null);

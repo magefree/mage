@@ -36,7 +36,8 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.Targets;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.*;
@@ -47,8 +48,7 @@ import java.util.stream.Collectors;
  * @author nantuko
  */
 public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
-
-    private static final Logger logger = Logger.getLogger(ComputerPlayer6.class);
+    private static final Logger logger = LoggerFactory.getLogger(ComputerPlayer6.class);
     private static final ExecutorService pool = Executors.newFixedThreadPool(1);
     protected int maxDepth;
     protected int maxNodes;
@@ -229,10 +229,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 StringBuilder sb = new StringBuilder("Add Actions -- reached end state  <").append(val).append('>');
                 SimulationNode2 logNode = node;
                 do {
-                    sb.append(new StringBuilder(" <- [" + logNode.getDepth() + ']' + (logNode.getAbilities() != null ? logNode.getAbilities().toString() : "[empty]")));
+                    sb.append(" <- [").append(logNode.getDepth()).append(']').append(logNode.getAbilities() != null ? logNode.getAbilities().toString() : "[empty]");
                     logNode = logNode.getParent();
                 } while ((logNode.getParent() != null));
-                logger.trace(sb);
+                logger.trace(String.valueOf(sb));
             }
         } else if (!node.getChildren().isEmpty()) {
             if (logger.isDebugEnabled()) {
@@ -244,7 +244,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString() : "null").append(", ");
                 }
                 sb.append(')');
-                logger.debug(sb);
+                logger.debug(String.valueOf(sb));
             }
             val = minimaxAB(node, depth - 1, alpha, beta);
         } else {
@@ -283,7 +283,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                         sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString() : "null").append(", ");
                     }
                     sb.append(')');
-                    logger.debug(sb);
+                    logger.debug(String.valueOf(sb));
                 }
                 val = minimaxAB(node, depth - 1, alpha, beta);
             } else {

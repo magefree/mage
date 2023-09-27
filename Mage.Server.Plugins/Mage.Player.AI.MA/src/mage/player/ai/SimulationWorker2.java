@@ -1,19 +1,17 @@
-
-
 package mage.player.ai;
 
 import java.util.concurrent.Callable;
 import mage.abilities.Ability;
 import mage.game.Game;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class SimulationWorker2 implements Callable {
-
-    private static final Logger logger = Logger.getLogger(SimulationWorker2.class);
+    private static final Logger logger = LoggerFactory.getLogger(SimulationWorker2.class);
 
     private Game game;
     private SimulatedAction2 previousActions;

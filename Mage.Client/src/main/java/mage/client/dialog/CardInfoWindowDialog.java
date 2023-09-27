@@ -21,8 +21,9 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.ExileView;
 import mage.view.SimpleCardsView;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Game GUI: popup windows with title like reveal, graveyard
@@ -30,8 +31,7 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class CardInfoWindowDialog extends MageDialog {
-
-    private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CardInfoWindowDialog.class);
 
     public enum ShowType {
         REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, COMPANION, SIDEBOARD, OTHER

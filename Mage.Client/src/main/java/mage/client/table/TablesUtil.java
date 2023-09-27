@@ -1,15 +1,14 @@
 package mage.client.table;
 
-import org.apache.log4j.Logger;
-
 import javax.swing.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author JayDi85
  */
 public class TablesUtil {
-
-    private static final Logger logger = Logger.getLogger(TablesUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(TablesUtil.class);
 
     public static String getSearchIdFromTable(JTable table, int row) {
         // tableUUID;gameUUID

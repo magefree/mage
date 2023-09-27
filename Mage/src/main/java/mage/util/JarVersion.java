@@ -1,6 +1,7 @@
 package mage.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.time.ZoneOffset;
@@ -13,8 +14,7 @@ import java.util.jar.Manifest;
  * @author JayDi85
  */
 public class JarVersion {
-
-    private static final Logger logger = Logger.getLogger(JarVersion.class);
+    private static final Logger logger = LoggerFactory.getLogger(JarVersion.class);
     public static final String JAR_BUILD_TIME_FROM_CLASSES = "runtime";
     private static final String JAR_BUILD_TIME_ERROR = "n/a";
 

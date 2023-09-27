@@ -1,6 +1,5 @@
 package org.mage.plugins.card.dl.sources;
 
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
@@ -17,9 +16,8 @@ import java.util.Map;
  * @author spjspj
  */
 public enum MtgOnlTokensImageSource implements CardImageSource {
-
     instance;
-    private static final Logger logger = Logger.getLogger(MtgOnlTokensImageSource.class);
+
     private static int maxTimes = 0;
 
     @Override

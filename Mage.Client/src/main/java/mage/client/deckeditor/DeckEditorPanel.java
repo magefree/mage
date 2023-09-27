@@ -27,7 +27,8 @@ import mage.remote.Session;
 import mage.util.DeckUtil;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -45,8 +46,7 @@ import java.util.concurrent.*;
  * @author BetaSteward_at_googlemail.com, JayDi85, Elandril
  */
 public class DeckEditorPanel extends javax.swing.JPanel {
-
-    private static final Logger logger = Logger.getLogger(DeckEditorPanel.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeckEditorPanel.class);
     private static final Border LEGALITY_LABEL_BORDER_SELECTED = BorderFactory.createLineBorder(Color.gray, 2);
     private static final Border LEGALITY_LABEL_BORDER_EMPTY = BorderFactory.createEmptyBorder();
 
@@ -288,7 +288,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         Card card = temporaryCards.get(cardView.getId());
         if (card == null) {
             // Need to make a new card
-            Logger.getLogger(DeckEditorPanel.class).info("Retrieve " + cardView.getCardNumber() + " Failed");
+            logger.info("Retrieve " + cardView.getCardNumber() + " Failed");
             card = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).getCard();
         } else {
             // Only need a temporary card once
@@ -770,7 +770,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception ex) {
-                logger.fatal(ex);
+                logger.error(String.valueOf(ex));
             } finally {
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -870,7 +870,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     logger.error("Error on save last used export folder: " + ex.getMessage());
                 }
             } catch (Exception ex) {
-                logger.fatal(ex);
+                logger.error(String.valueOf(ex));
             } finally {
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -1598,7 +1598,7 @@ class ImportFilter extends FileFilter {
 
 class UpdateDeckTask extends SwingWorker<Void, Void> {
 
-    private static final Logger logger = Logger.getLogger(UpdateDeckTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdateDeckTask.class);
     private final Session session;
     private final UUID tableId;
     private final Deck deck;
@@ -1623,7 +1623,7 @@ class UpdateDeckTask extends SwingWorker<Void, Void> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Matches Task error", ex);
+            logger.error("Update Matches Task error", ex);
         } catch (CancellationException ex) {
         }
     }

@@ -17,16 +17,16 @@ import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 import net.xeoh.plugins.base.util.uri.ClassURI;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.MageLayer;
 import org.mage.plugins.card.CardPluginImpl;
 import org.mage.plugins.theme.ThemePluginImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -37,7 +37,7 @@ public enum Plugins implements MagePlugins {
     instance;
     public static final String PLUGINS_DIRECTORY = "plugins";
 
-    private static final Logger LOGGER = Logger.getLogger(Plugins.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Plugins.class);
     private static PluginManager pm;
 
     private ThemePlugin themePlugin = null;
@@ -153,7 +153,7 @@ public enum Plugins implements MagePlugins {
                 try {
                     return this.counterPlugin.getGamePlayed();
                 } catch (PluginException e) {
-                    LOGGER.fatal(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     throw new RuntimeException(e);
                 }
             }
@@ -168,7 +168,7 @@ public enum Plugins implements MagePlugins {
                 try {
                     this.counterPlugin.addGamePlayed();
                 } catch (PluginException e) {
-                    LOGGER.fatal(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     throw new RuntimeException(e);
                 }
             }

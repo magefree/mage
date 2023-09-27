@@ -2,8 +2,8 @@ package mage.watchers;
 
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
@@ -11,8 +11,7 @@ import java.util.HashMap;
  * @author BetaSteward_at_googlemail.com
  */
 public class Watchers extends HashMap<String, Watcher> {
-
-    private static Logger logger = LogManager.getLogger(Watcher.class.getSimpleName());
+    private static final Logger logger = LoggerFactory.getLogger(Watcher.class.getSimpleName());
 
     public Watchers() {
     }

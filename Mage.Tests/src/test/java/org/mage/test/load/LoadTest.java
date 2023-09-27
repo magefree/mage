@@ -14,12 +14,13 @@ import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.util.RandomUtil;
 import mage.view.*;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.utils.DeckTestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -37,8 +38,7 @@ import java.util.*;
  * @author JayDi85
  */
 public class LoadTest {
-
-    private static final Logger logger = Logger.getLogger(LoadTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoadTest.class);
 
     private static final String TEST_SERVER = "localhost";
     private static final int TEST_PORT = 17171;
@@ -200,7 +200,7 @@ public class LoadTest {
         // playing until game over
         while (!player1.client.isGameOver() && !player2.client.isGameOver()) {
             checkGame = monitor.getTable(tableId);
-            logger.warn(checkGame.get().getTableState());
+            logger.warn(checkGame.get().getTableState().toString());
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -562,7 +562,7 @@ public class LoadTest {
                     res.addAll(roomUsers.getUsersView());
                 }
             } catch (MageRemoteException e) {
-                logger.error(e);
+                logger.error(String.valueOf(e));
             }
             return res;
         }
@@ -675,7 +675,7 @@ public class LoadTest {
                     player2.lastGameResult = player2.client.getLastGameResult();
                 } catch (Throwable e) {
                     this.gameResult = "error";
-                    logger.fatal("Game thread " + this.gameName + " was stopped by error");
+                    logger.error("Game thread " + this.gameName + " was stopped by error");
                     e.printStackTrace();
                 }
 

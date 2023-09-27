@@ -1,16 +1,14 @@
-
-
 package mage.client.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class EDTExceptionHandler implements Thread.UncaughtExceptionHandler {
-
-    private static final Logger logger = Logger.getLogger(EDTExceptionHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(EDTExceptionHandler.class);
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
@@ -19,7 +17,7 @@ public class EDTExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     public void handle(Throwable throwable) {
         try {
-            logger.fatal("MAGE Client UI error", throwable);
+            logger.error("MAGE Client UI error", throwable);
             // JOptionPane.showMessageDialog(MageFrame.getDesktop(), throwable, "MAGE Client UI error", JOptionPane.ERROR_MESSAGE);
         } catch (Throwable t) {}
     }

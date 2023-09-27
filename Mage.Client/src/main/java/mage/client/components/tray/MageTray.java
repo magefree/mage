@@ -3,17 +3,17 @@ package mage.client.components.tray;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 import mage.client.MageFrame;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author noxx
  */
 public enum MageTray {
-
     instance;
 
-    private static final Logger log = Logger.getLogger(MageTray.class);
+    private static final Logger logger = LoggerFactory.getLogger(MageTray.class);
 
     private Image mainImage;
     private Image flashedImage;
@@ -23,7 +23,7 @@ public enum MageTray {
 
     public void install() {
         if (!SystemTray.isSupported()) {
-            log.warn("SystemTray is not supported");
+            logger.warn("SystemTray is not supported");
             return;
         }
 
@@ -77,11 +77,11 @@ public enum MageTray {
             try {
                 tray.add(trayIcon);
             } catch (AWTException e) {
-                log.error("TrayIcon could not be added: ", e);
+                logger.error("TrayIcon could not be added: ", e);
             }
 
         } catch (Exception e) {
-            log.error(e);
+            logger.error(String.valueOf(e));
         }
     }
 

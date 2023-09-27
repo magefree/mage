@@ -9,7 +9,8 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import mage.game.events.Listener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -22,10 +23,9 @@ import java.util.List;
  * @author North, JayDi85
  */
 public enum ExpansionRepository {
-
     instance;
 
-    private static final Logger logger = Logger.getLogger(ExpansionRepository.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExpansionRepository.class);
 
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
@@ -59,7 +59,6 @@ public enum ExpansionRepository {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
     public void subscribe(Listener<RepositoryEvent> listener) {
@@ -77,7 +76,7 @@ public enum ExpansionRepository {
                             expansionDao.create(exp);
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding expansions to DB - ", ex);
+                        logger.error("Error adding expansions to DB - ", ex);
                     }
                 }
 
@@ -89,7 +88,7 @@ public enum ExpansionRepository {
                             expansionDao.update(exp);
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding expansions to DB - ", ex);
+                        logger.error("Error adding expansions to DB - ", ex);
                     }
                 }
 
@@ -135,7 +134,7 @@ public enum ExpansionRepository {
             return resList.toArray(new ExpansionInfo[0]);
 
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(String.valueOf(ex));
             return new ExpansionInfo[0];
         }
     }
@@ -148,7 +147,7 @@ public enum ExpansionRepository {
             qb.where().eq("basicLands", new SelectArg(true));
             sets = expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(String.valueOf(ex));
         }
         return sets;
     }
@@ -160,7 +159,7 @@ public enum ExpansionRepository {
             qb.where().eq("blockName", new SelectArg(blockName));
             return expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(String.valueOf(ex));
         }
         return sets;
     }
@@ -175,7 +174,7 @@ public enum ExpansionRepository {
                 set = expansions.get(0);
             }
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(String.valueOf(ex));
         }
         return set;
     }
@@ -190,7 +189,7 @@ public enum ExpansionRepository {
                 set = expansions.get(0);
             }
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(String.valueOf(ex));
         }
         return set;
     }
@@ -201,7 +200,7 @@ public enum ExpansionRepository {
             qb.orderBy("releaseDate", true);
             return expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(String.valueOf(ex));
         }
         return Collections.emptyList();
     }
@@ -211,7 +210,7 @@ public enum ExpansionRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME + "Content");
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.error(String.valueOf(ex));
         }
         return 0;
     }
@@ -221,7 +220,7 @@ public enum ExpansionRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.error(String.valueOf(ex));
         }
     }
 

@@ -6,7 +6,8 @@ import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
@@ -25,7 +26,7 @@ public class CounterPluginImpl implements CounterPlugin {
 
     private static final String DATA_STORAGE_FILE = "counters";
 
-    private static final Logger log = Logger.getLogger(CounterPluginImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CounterPluginImpl.class);
 
     private boolean isLoaded = false;
 
@@ -44,7 +45,7 @@ public class CounterPluginImpl implements CounterPlugin {
                 data.getParentFile().mkdirs();
                 data.createNewFile();
             } catch (IOException e) {
-                log.error(e.getMessage(), e);
+                logger.error(e.getMessage(), e);
                 throw new RuntimeException("Couldn't create data file for counter plugin: " + e.getMessage());
             }
         }
@@ -54,7 +55,7 @@ public class CounterPluginImpl implements CounterPlugin {
 
     @PluginLoaded
     public void newPlugin(CounterPlugin plugin) {
-        log.info(plugin.toString() + " has been loaded.");
+        logger.info(plugin.toString() + " has been loaded.");
     }
 
     @Override
@@ -95,7 +96,7 @@ public class CounterPluginImpl implements CounterPlugin {
                 throw new PluginException(e);
             }
         } else {
-            log.error("Counter plugin: data file doesn't exist, please restart plugin.");
+            logger.error("Counter plugin: data file doesn't exist, please restart plugin.");
         }
     }
 
@@ -125,7 +126,7 @@ public class CounterPluginImpl implements CounterPlugin {
                 throw new PluginException(e);
             }
         } else {
-            log.error("Counter plugin: data file doesn't exist, please restart plugin.");
+            logger.error("Counter plugin: data file doesn't exist, please restart plugin.");
             return 0;
         }
     }

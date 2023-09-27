@@ -12,7 +12,8 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.player.ai.MCTSPlayer.NextAction;
 import mage.players.Player;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     protected transient MCTSNode root;
     protected int maxThinkTime;
-    private static final Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+    private static final Logger logger = LoggerFactory.getLogger(ComputerPlayerMCTS.class);
     private int poolSize;
 
     public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
@@ -77,7 +78,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         getNextAction(game, NextAction.PRIORITY);
         Ability ability = root.getAction();
         if (ability == null)
-            logger.fatal("null ability");
+            logger.error("null ability");
         activateAbility((ActivatedAbility) ability, game);
         if (ability instanceof PassAbility)
             return false;

@@ -3,7 +3,8 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +17,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class MageDialog extends javax.swing.JInternalFrame {
-
-    private static final Logger LOGGER = Logger.getLogger(MageDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(MageDialog.class);
 
     protected boolean modal = false;
 
@@ -107,10 +107,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
                 try {
                     SwingUtilities.invokeAndWait(() -> stopModal());
                 } catch (InterruptedException ex) {
-                    LOGGER.fatal("MageDialog error", ex);
+                    logger.error("MageDialog error", ex);
                     Thread.currentThread().interrupt();
                 } catch (InvocationTargetException ex) {
-                    LOGGER.fatal("MageDialog error", ex);
+                    logger.error("MageDialog error", ex);
                 }
             }
         }
@@ -175,7 +175,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                         } else if (source instanceof MenuComponent) {
                             ((MenuComponent) source).dispatchEvent(event);
                         } else {
-                            LOGGER.warn("Unable to dispatch: " + event);
+                            logger.warn("Unable to dispatch: " + event);
                         }
                     }
                 }
@@ -185,7 +185,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                 }
             }
         } catch (InterruptedException e) {
-            LOGGER.fatal("MageDialog error", e);
+            logger.error("MageDialog error", e);
             Thread.currentThread().interrupt();
         }
     }
@@ -214,7 +214,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
         try {
             this.setClosed(true);
         } catch (PropertyVetoException ex) {
-            LOGGER.error("setClosed(false) failed", ex);
+            logger.error("setClosed(false) failed", ex);
         }
         MageFrame.getDesktop().remove(this);
     }

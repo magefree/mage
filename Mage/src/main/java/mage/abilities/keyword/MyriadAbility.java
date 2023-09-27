@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.ArrayList;
@@ -18,7 +17,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MyriadAbility extends AttacksTriggeredAbility {
 
@@ -43,7 +43,7 @@ public class MyriadAbility extends AttacksTriggeredAbility {
 }
 
 class MyriadEffect extends OneShotEffect {
-
+    private static final Logger logger = LoggerFactory.getLogger(MyriadEffect.class);
     public MyriadEffect() {
         super(Outcome.Benefit);
         this.staticText = "for each opponent other than the defending player, you may put a token "
@@ -68,7 +68,7 @@ class MyriadEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
             if (defendingPlayerId == null) {
-                Logger.getLogger(MyriadEffect.class).error("defending player == null source: " + sourceObject.getName() + " attacking: " + (sourceObject.isAttacking() ? "Y" : "N"));
+                logger.error("defending player == null source: " + sourceObject.getName() + " attacking: " + (sourceObject.isAttacking() ? "Y" : "N"));
                 return false;
             }
             List<Permanent> tokens = new ArrayList<>();

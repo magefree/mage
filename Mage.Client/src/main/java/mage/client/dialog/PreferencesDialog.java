@@ -18,7 +18,8 @@ import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.view.UserRequestMessage;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -38,8 +39,7 @@ import java.util.prefs.Preferences;
  * @author nantuko, JayDi85, leemi
  */
 public class PreferencesDialog extends javax.swing.JDialog {
-
-    private static final Logger logger = Logger.getLogger(PreferencesDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(PreferencesDialog.class);
 
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";

@@ -23,10 +23,10 @@ import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.util.CardUtil;
 import mage.util.Copier;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.mage.test.player.TestPlayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,8 +40,7 @@ import java.util.regex.Pattern;
  * @author ayratn
  */
 public abstract class MageTestBase {
-
-    protected static Logger logger = Logger.getLogger(MageTestBase.class);
+    protected static Logger logger = LoggerFactory.getLogger(MageTestBase.class);
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
 
@@ -70,7 +69,7 @@ public abstract class MageTestBase {
     protected static Game currentGame = null;
 
     /**
-     * Player thats starts the game first. By default, it is ComputerA.
+     * Player that starts the game first. By default, it is ComputerA.
      */
     protected static Player activePlayer = null;
 
@@ -100,8 +99,6 @@ public abstract class MageTestBase {
 
     @BeforeClass
     public static void init() {
-        Logger.getRootLogger().setLevel(Level.DEBUG);
-
         // one time init for all tests
         if (GameFactory.instance.getGameTypes().isEmpty()) {
             deleteSavedGames();
@@ -131,7 +128,7 @@ public abstract class MageTestBase {
         } catch (ClassNotFoundException ex) {
             logger.warn("Plugin not Found:" + plugin.getJar() + " - check plugin folder");
         } catch (Exception ex) {
-            logger.fatal("Error loading plugin " + plugin.getJar(), ex);
+            logger.error("Error loading plugin " + plugin.getJar(), ex);
         }
         return null;
     }
@@ -144,7 +141,7 @@ public abstract class MageTestBase {
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+            logger.error("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
     }
@@ -156,7 +153,7 @@ public abstract class MageTestBase {
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");
         } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
+            logger.error("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
     }
@@ -262,8 +259,8 @@ public abstract class MageTestBase {
                                 cards.add(newCard);
                             }
                         } else {
-                            logger.fatal("Couldn't find a card: " + cardName);
-                            logger.fatal("line: " + line);
+                            logger.error("Couldn't find a card: " + cardName);
+                            logger.error("line: " + line);
                         }
                     }
                 }

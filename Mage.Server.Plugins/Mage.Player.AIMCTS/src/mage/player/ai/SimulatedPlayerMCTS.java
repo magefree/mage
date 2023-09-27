@@ -18,7 +18,6 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
@@ -29,10 +28,8 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public class SimulatedPlayerMCTS extends MCTSPlayer {
-
     private boolean isSimulatedPlayer;
     private int actionCount = 0;
-    private static final Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
 
     public SimulatedPlayerMCTS(Player originalPlayer, boolean isSimulatedPlayer) {
         super(originalPlayer.getId());

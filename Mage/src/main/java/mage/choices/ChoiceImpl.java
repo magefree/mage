@@ -2,7 +2,8 @@ package mage.choices;
 
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -10,8 +11,7 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ChoiceImpl implements Choice {
-
-    private static final Logger logger = Logger.getLogger(Choice.class);
+    private static final Logger logger = LoggerFactory.getLogger(Choice.class);
 
     protected boolean chosenNormal;
     protected boolean chosenSpecial;

@@ -7,20 +7,20 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
- * A object reference that takes zone changes into account.
+ * An object reference that takes zone changes into account.
  *
  * @author LevelX2
  */
 public class MageObjectReference implements Comparable<MageObjectReference>, Serializable {
-
-    private static final Logger logger = Logger.getLogger(MageObjectReference.class);
+    private static final Logger logger = LoggerFactory.getLogger(MageObjectReference.class);
 
     private final UUID sourceId;
     private final int zoneChangeCounter;

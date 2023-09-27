@@ -37,7 +37,6 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
@@ -50,13 +49,11 @@ import static java.util.Collections.emptyList;
  * @author BetaSteward_at_googlemail.com
  * <p>
  * since at any time the game state may be copied and restored you cannot rely
- * on any object maintaining it's instance it then becomes necessary to only
+ * on any object maintaining its instance it then becomes necessary to only
  * refer to objects by their ids since these will always remain constant
  * throughout its lifetime
  */
 public class GameState implements Serializable, Copyable<GameState> {
-
-    private static final Logger logger = Logger.getLogger(GameState.class);
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
 
     // save copied cards between game cycles (lki workaround)

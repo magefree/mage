@@ -27,17 +27,17 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.watchers.Watcher;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
-
     private static final long serialVersionUID = 1L;
 
-    private static final Logger logger = Logger.getLogger(CardImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CardImpl.class);
 
     protected UUID ownerId;
     protected Rarity rarity;
@@ -155,7 +155,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             } catch (ClassNotFoundException ex2) {
                 // ignored
             }
-            logger.fatal("Error loading card: " + name, ex);
+            logger.error("Error loading card: " + name, ex);
             return null;
         }
     }
@@ -184,9 +184,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
 
             if (e instanceof InvocationTargetException) {
-                logger.fatal(err, ((InvocationTargetException) e).getTargetException());
+                logger.error(err, ((InvocationTargetException) e).getTargetException());
             } else {
-                logger.fatal(err, e);
+                logger.error(err, e);
             }
 
             return null;
@@ -531,7 +531,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     break;
                 default:
                     MageObject sourceObject = game.getObject(source);
-                    logger.fatal("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
+                    logger.error("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
                             + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + ']');
                     break;
             }

@@ -27,7 +27,8 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import mage.view.TournamentView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -39,8 +40,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentController {
-
-    private static final Logger logger = Logger.getLogger(TournamentController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TournamentController.class);
 
     private final ManagerFactory managerFactory;
     private final UUID chatId;
@@ -114,7 +114,7 @@ public class TournamentController {
                                 break;
                         }
                     } catch (MageException ex) {
-                        logger.fatal("Player event listener error", ex);
+                        logger.error("Player event listener error", ex);
                     }
                 }
         );
@@ -162,11 +162,11 @@ public class TournamentController {
     public void rejoin(UUID playerId) {
         TournamentSession tournamentSession = tournamentSessions.get(playerId);
         if (tournamentSession == null) {
-            logger.fatal("Tournament session not found - playerId:" + playerId + "  tournamentId " + tournament.getId());
+            logger.error("Tournament session not found - playerId:" + playerId + "  tournamentId " + tournament.getId());
             return;
         }
         if (!tournamentSession.init()) {
-            logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
+            logger.error("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
             return;
         }
         tournamentSession.update();
@@ -193,7 +193,7 @@ public class TournamentController {
     private synchronized void startTournament() {
         for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             if (!tournamentSession.init()) {
-                logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
+                logger.error("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
                 //TODO: generate client error message
                 return;
             }
@@ -230,7 +230,7 @@ public class TournamentController {
             if (player1.getPlayerType() == PlayerType.HUMAN) {
                 Optional<UUID> user1Id = getPlayerUserId(player1.getPlayer().getId());
                 if (!user1Id.isPresent()) {
-                    logger.fatal("Player 1 not found");
+                    logger.error("Player 1 not found");
                 } else {
                     user1Uuid = user1Id.get();
                 }
@@ -238,7 +238,7 @@ public class TournamentController {
             if (player2.getPlayerType() == PlayerType.HUMAN) {
                 Optional<UUID> user2Id = getPlayerUserId(player2.getPlayer().getId());
                 if (!user2Id.isPresent()) {
-                    logger.fatal("Player 2 not found");
+                    logger.error("Player 2 not found");
                 } else {
                     user2Uuid = user2Id.get();
                 }
@@ -255,7 +255,7 @@ public class TournamentController {
                 player2.setState(TournamentPlayerState.DUELING);
             });
         } catch (GameException ex) {
-            logger.fatal("TournamentController startMatch error", ex);
+            logger.error("TournamentController startMatch error", ex);
         }
     }
 
@@ -282,7 +282,7 @@ public class TournamentController {
                 });
             }
         } catch (GameException ex) {
-            logger.fatal("TournamentController startMatch error", ex);
+            logger.error("TournamentController startMatch error", ex);
         }
     }
 
@@ -344,7 +344,7 @@ public class TournamentController {
                         -> sb.append(user.getName()));
 
                 sb.append(" - no deck found for auto submit");
-                logger.fatal(sb);
+                logger.error(String.valueOf(sb));
                 tournamentPlayer.setEliminated();
                 tournamentPlayer.setStateInfo("No deck for auto submit");
             }

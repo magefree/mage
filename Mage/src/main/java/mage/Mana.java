@@ -6,7 +6,8 @@ import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
 import mage.util.Copyable;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.*;
@@ -19,7 +20,7 @@ import java.util.function.BiFunction;
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
-    private static final transient Logger logger = Logger.getLogger(Mana.class);
+    private static final Logger logger = LoggerFactory.getLogger(Mana.class);
 
     protected int white;
     protected int blue;

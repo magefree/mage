@@ -4,7 +4,8 @@ import com.google.common.base.Function;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.ForwardingLoadingCache;
 import com.google.common.cache.LoadingCache;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -13,9 +14,8 @@ import java.util.concurrent.TimeUnit;
 import static com.google.common.cache.CacheBuilder.newBuilder;
 
 public class SoftValuesLoadingCache<K, V> extends ForwardingLoadingCache<K, Optional<V>> {
-
     private final LoadingCache<K, Optional<V>> cache;
-    private static final Logger logger = Logger.getLogger(SoftValuesLoadingCache.class);
+    private static final Logger logger = LoggerFactory.getLogger(SoftValuesLoadingCache.class);
 
     public SoftValuesLoadingCache(CacheLoader<K, Optional<V>> loader) {
         cache = newBuilder()

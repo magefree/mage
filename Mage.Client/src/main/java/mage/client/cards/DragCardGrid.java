@@ -24,9 +24,10 @@ import mage.util.DebugUtil;
 import mage.util.RandomUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRenderer;
 import org.mage.card.arcane.ManaSymbols;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,8 +42,7 @@ import java.util.stream.Collectors;
  * @author StravantUser, JayDi85
  */
 public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarget, CardEventProducer {
-
-    private static final Logger logger = Logger.getLogger(DragCardGrid.class);
+    private static final Logger logger = LoggerFactory.getLogger(DragCardGrid.class);
     private static final String DOUBLE_CLICK_MODE_INFO = "<html>Double click mode: <b>%s</b>";
 
     private Constants.DeckEditorMode mode;

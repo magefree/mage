@@ -5,8 +5,11 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
+import mage.util.LoggerUtil;
 import mage.utils.MageVersion;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -20,8 +23,7 @@ import java.util.prefs.Preferences;
  * @author BetaSteward_at_googlemail.com
  */
 public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
-
-    private static final Logger logger = Logger.getLogger(ConsoleFrame.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConsoleFrame.class);
 
     private static Session session;
     private ConnectDialog connectDialog;
@@ -64,7 +66,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             session = new SessionImpl(this);
             connectDialog = new ConnectDialog();
         } catch (Exception ex) {
-            logger.fatal("", ex);
+            logger.error("", ex);
         }
 
         pingTaskExecutor.scheduleAtFixedRate(() -> session.ping(), 20, 20, TimeUnit.SECONDS);
@@ -176,7 +178,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
      */
     public static void main(String[] args) {
         logger.info("Starting MAGE server console version " + version);
-        logger.info("Logging level: " + logger.getEffectiveLevel());
+        logger.info("Logging level: " + LoggerUtil.getLogLevel(logger));
 
         java.awt.EventQueue.invokeLater(() -> {
             new ConsoleFrame().setVisible(true);

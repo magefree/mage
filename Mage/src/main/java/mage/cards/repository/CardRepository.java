@@ -13,7 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -23,10 +24,9 @@ import java.util.*;
  * @author North, JayDi85
  */
 public enum CardRepository {
-
     instance;
 
-    private static final Logger logger = Logger.getLogger(CardRepository.class);
+    private static final Logger logger = LoggerFactory.getLogger(CardRepository.class);
 
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE;IGNORECASE=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
@@ -62,7 +62,7 @@ public enum CardRepository {
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
+            LoggerFactory.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
         }
     }
 
@@ -80,7 +80,7 @@ public enum CardRepository {
                             }
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
+                        logger.error("Error adding cards to DB - ", ex);
                     }
                 }
 
@@ -136,7 +136,7 @@ public enum CardRepository {
                 addNewNames(card, names);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting names from DB : " + ex);
+            logger.error("Error getting names from DB : " + ex);
         }
         return names;
     }
@@ -152,8 +152,7 @@ public enum CardRepository {
                 addNewNames(card, names);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+            logger.error("Error getting non-land names from DB : " + ex);
         }
         return names;
     }
@@ -173,8 +172,7 @@ public enum CardRepository {
                 addNewNames(card, names);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+            logger.error("Error getting non-land names from DB : " + ex);
         }
         return names;
     }
@@ -190,8 +188,7 @@ public enum CardRepository {
                 addNewNames(card, names);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+            logger.error("Error getting non-land names from DB : " + ex);
         }
         return names;
     }
@@ -207,8 +204,7 @@ public enum CardRepository {
                 addNewNames(card, names);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting creature names from DB : " + ex);
-
+            logger.error("Error getting creature names from DB : " + ex);
         }
         return names;
     }
@@ -224,8 +220,7 @@ public enum CardRepository {
                 addNewNames(card, names);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting artifact names from DB : " + ex);
-
+            logger.error("Error getting artifact names from DB : " + ex);
         }
         return names;
     }
@@ -245,7 +240,7 @@ public enum CardRepository {
                 addNewNames(card, names);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land and non-creature names from DB : " + ex);
+            logger.error("Error getting non-land and non-creature names from DB : " + ex);
         }
         return names;
     }
@@ -265,8 +260,7 @@ public enum CardRepository {
                 addNewNames(card, names);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-artifact non-land names from DB : " + ex);
-
+            logger.error("Error getting non-artifact non-land names from DB : " + ex);
         }
         return names;
     }
@@ -297,8 +291,7 @@ public enum CardRepository {
                 return result.get(0);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error finding card from DB : " + ex);
-
+            logger.error("Error finding card from DB : " + ex);
         }
         return null;
     }
@@ -311,7 +304,7 @@ public enum CardRepository {
                 names.add(card.getClassName());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting classnames from DB : " + ex);
+            logger.error("Error getting classnames from DB : " + ex);
         }
         return names;
     }
@@ -323,8 +316,7 @@ public enum CardRepository {
 
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting missing cards from DB : " + ex);
-
+            logger.error("Error getting missing cards from DB : " + ex);
         }
 
         return Collections.emptyList();
@@ -509,7 +501,7 @@ public enum CardRepository {
             }
             return results;
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
+            logger.error("Error during execution of raw sql statement", ex);
         }
 
         return Collections.emptyList();
@@ -525,7 +517,7 @@ public enum CardRepository {
             queryBuilder.where().eq("className", new SelectArg(canonicalClassName));
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
+            logger.error("Error during execution of raw sql statement", ex);
         }
         return Collections.emptyList();
     }
@@ -546,7 +538,7 @@ public enum CardRepository {
 
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of card repository query statement", ex);
+            logger.error("Error during execution of card repository query statement", ex);
         }
         return Collections.emptyList();
     }
@@ -587,7 +579,7 @@ public enum CardRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME + "Content");
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting content version from DB - ", ex);
+            logger.error("Error getting content version from DB - ", ex);
         }
         return 0;
     }
@@ -597,7 +589,7 @@ public enum CardRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting content version - ", ex);
+            logger.error("Error getting content version - ", ex);
         }
     }
 
@@ -620,7 +612,7 @@ public enum CardRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
         } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error opening card repository - ", ex);
+            logger.error("Error opening card repository - ", ex);
         }
     }
 }

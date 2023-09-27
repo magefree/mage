@@ -21,7 +21,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -182,7 +182,7 @@ class SpellbinderCopyEffect extends OneShotEffect {
                                             game, true, new ApprovingObject(source, game));
                                     game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                                 } else {
-                                    Logger.getLogger(SpellbinderCopyEffect.class).error(
+                                    LoggerFactory.getLogger(SpellbinderCopyEffect.class).error(
                                             "Spellbinder: spell ability == null " + copiedCard.getName());
                                 }
                             }

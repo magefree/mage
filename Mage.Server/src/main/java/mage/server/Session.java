@@ -11,11 +11,12 @@ import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.SystemUtil;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -30,8 +31,7 @@ import static mage.server.DisconnectReason.LostConnection;
  * @author BetaSteward_at_googlemail.com
  */
 public class Session {
-
-    private static final Logger logger = Logger.getLogger(Session.class);
+    private static final Logger logger = LoggerFactory.getLogger(Session.class);
     private static final Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
     private static final Pattern digitsPattern = Pattern.compile("[0-9]");
 
@@ -206,7 +206,7 @@ public class Session {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                logger.fatal("waiting of error message had failed", e);
+                logger.error("waiting of error message had failed", e);
                 Thread.currentThread().interrupt();
             }
             sendErrorMessageToClient(returnMessage);

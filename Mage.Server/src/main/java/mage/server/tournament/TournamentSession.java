@@ -7,7 +7,8 @@ import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.view.TournamentView;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -19,8 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentSession {
-
-    protected static final Logger logger = Logger.getLogger(TournamentSession.class);
+    private static final Logger logger = LoggerFactory.getLogger(TournamentSession.class);
 
     private final ManagerFactory managerFactory;
     protected final UUID userId;
@@ -106,7 +106,7 @@ public class TournamentSession {
                         try {
                             managerFactory.tournamentManager().timeout(tournament.getId(), userId);
                         } catch (Exception e) {
-                            logger.fatal("TournamentSession error - userId " + userId + " tId " + tournament.getId(), e);
+                            logger.error("TournamentSession error - userId " + userId + " tId " + tournament.getId(), e);
                         }
                     },
                     seconds, TimeUnit.SECONDS
@@ -152,5 +152,4 @@ public class TournamentSession {
             user.get().removeTournament(playerId);
         }
     }
-
 }

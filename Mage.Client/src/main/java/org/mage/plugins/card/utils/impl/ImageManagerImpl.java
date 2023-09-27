@@ -3,10 +3,11 @@ package org.mage.plugins.card.utils.impl;
 import mage.abilities.icon.CardIconColor;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.BufferedImageBuilder;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.SvgUtils;
 import org.mage.plugins.card.utils.ImageManager;
 import org.mage.plugins.card.utils.Transparency;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,7 +21,7 @@ import java.util.Map;
 public enum ImageManagerImpl implements ImageManager {
     instance;
 
-    private static final Logger logger = Logger.getLogger(ImageManagerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ImageManagerImpl.class);
 
     ImageManagerImpl() {
         init();

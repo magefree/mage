@@ -1,9 +1,9 @@
-
 package mage.server.draft;
 
 import mage.cards.decks.Deck;
 import mage.game.draft.DraftCube;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
@@ -15,13 +15,10 @@ import java.util.Set;
  * @author LevelX2
  */
 public enum CubeFactory {
-
     instance;
-    private static final Logger logger = Logger.getLogger(CubeFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(CubeFactory.class);
 
     private final Map<String, Class> draftCubes = new LinkedHashMap<>();
-
-
 
     public DraftCube createDraftCube(String draftCubeName) {
 
@@ -30,7 +27,7 @@ public enum CubeFactory {
             Constructor<?> con = draftCubes.get(draftCubeName).getConstructor();
             draftCube = (DraftCube)con.newInstance();
         } catch (Exception ex) {
-            logger.fatal("CubeFactory error", ex);
+            logger.error("CubeFactory error", ex);
             return null;
         }
         logger.debug("Draft cube created: " + draftCube.getName());
@@ -45,7 +42,7 @@ public enum CubeFactory {
             Constructor<?> con = draftCubes.get(draftCubeName).getConstructor(Deck.class);
             draftCube = (DraftCube)con.newInstance(cubeFromDeck);
         } catch (Exception ex) {
-            logger.fatal("CubeFactory error", ex);
+            logger.error("CubeFactory error", ex);
             return null;
         }
         logger.debug("Draft cube created: " + draftCube.getName());

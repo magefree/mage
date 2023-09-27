@@ -11,15 +11,15 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.*;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class ConnectDialog extends JDialog {
-
-    private static final Logger logger = Logger.getLogger(ConnectDialog.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConnectDialog.class);
     private ConsoleFrame console;
     private Connection connection;
     private ConnectTask task;
@@ -391,10 +391,8 @@ public class ConnectDialog extends JDialog {
                 } else {
                     lblStatus.setText("Could not connect");
                 }
-            } catch (InterruptedException ex) {
-                logger.fatal("Update Players Task error", ex);
-            } catch (ExecutionException ex) {
-                logger.fatal("Update Players Task error", ex);
+            } catch (InterruptedException | ExecutionException ex) {
+                logger.error("Update Players Task error", ex);
             } catch (CancellationException ex) {
             }
         }
@@ -455,7 +453,7 @@ public class ConnectDialog extends JDialog {
 
             in.close();
         } catch (Exception ex) {
-            logger.error(ex, ex);
+            logger.error(String.valueOf(ex), ex);
         } finally {
             if (in != null) {
                 try {

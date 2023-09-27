@@ -12,8 +12,9 @@ import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +37,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     private static final long serialVersionUID = -3272134219262184410L;
 
-    private static final Logger logger = Logger.getLogger(CardPanel.class);
+    private static final Logger logger = LoggerFactory.getLogger(CardPanel.class);
 
     public static final double TAPPED_ANGLE = Math.PI / 2;
     public static final double FLIPPED_ANGLE = Math.PI;

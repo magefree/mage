@@ -10,7 +10,8 @@ import mage.constants.Rarity;
 import mage.filter.FilterMana;
 import mage.util.ClassScanner;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -19,7 +20,7 @@ import java.util.*;
  */
 public class Sets extends HashMap<String, ExpansionSet> {
 
-    private static final Logger logger = Logger.getLogger(Sets.class);
+    private static final Logger logger = LoggerFactory.getLogger(Sets.class);
     private static final Sets instance = new Sets();
 
     public static Sets getInstance() {
@@ -35,7 +36,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
             try {
                 addSet((ExpansionSet) c.getMethod("getInstance").invoke(null));
             } catch (Exception ex) {
-                logger.error(ex);
+                logger.error(String.valueOf(ex));
             }
         }
     }

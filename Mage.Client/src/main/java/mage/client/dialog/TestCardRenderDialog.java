@@ -40,7 +40,6 @@ import mage.players.StubPlayer;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import mage.view.*;
-import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
 
 import javax.swing.*;
@@ -55,8 +54,6 @@ import java.util.*;
  * @author JayDi85
  */
 public class TestCardRenderDialog extends MageDialog {
-
-    private static final Logger logger = Logger.getLogger(TestCardRenderDialog.class);
     float cardSizeMod = 1.0f;
     private Game game = null;
     Listener<Event> cardListener = null;

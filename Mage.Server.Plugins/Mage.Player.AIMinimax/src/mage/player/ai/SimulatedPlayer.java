@@ -1,5 +1,3 @@
-
-
 package mage.player.ai;
 
 import mage.abilities.Ability;
@@ -16,7 +14,8 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -27,7 +26,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class SimulatedPlayer extends ComputerPlayer {
 
-    private static final Logger logger = Logger.getLogger(SimulatedPlayer.class);
+    private static final Logger logger = LoggerFactory.getLogger(SimulatedPlayer.class);
     private boolean isSimulatedPlayer;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private static PassAbility pass = new PassAbility();

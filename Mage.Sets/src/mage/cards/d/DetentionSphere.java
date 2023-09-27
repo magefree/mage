@@ -21,7 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -119,7 +119,7 @@ class DetentionSphereLeavesEffect extends OneShotEffect {
         if (sourceObject != null && controller != null) {
             Permanent permanentLeftBattlefield = (Permanent) getValue("permanentLeftBattlefield");
             if (permanentLeftBattlefield == null) {
-                Logger.getLogger(ReturnFromExileForSourceEffect.class).error("Permanent not found: " + sourceObject.getName());
+                LoggerFactory.getLogger(DetentionSphereLeavesEffect.class).error("Permanent not found: " + sourceObject.getName());
                 return false;
             }
             ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), permanentLeftBattlefield.getZoneChangeCounter(game)));

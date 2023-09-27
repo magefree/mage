@@ -6,7 +6,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.PlayerList;
 import mage.util.Copyable;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.lang.reflect.*;
@@ -19,7 +20,7 @@ import java.util.*;
  */
 public abstract class Watcher implements Serializable {
 
-    private static final Logger logger = Logger.getLogger(Watcher.class);
+    private static final Logger logger = LoggerFactory.getLogger(Watcher.class);
 
     protected UUID controllerId;
     protected UUID sourceId;

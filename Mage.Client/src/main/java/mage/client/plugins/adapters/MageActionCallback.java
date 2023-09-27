@@ -24,9 +24,10 @@ import mage.constants.Zone;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PermanentView;
-import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.plugins.card.images.ImageCache;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,8 +55,7 @@ import java.util.concurrent.TimeUnit;
  * @author Nantuko, noxx, JayDi85
  */
 public class MageActionCallback implements ActionCallback {
-
-    private static final Logger logger = Logger.getLogger(ActionCallback.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActionCallback.class);
 
     // hand and stack panel sizes (without scrolls)
     public static final int HAND_CARDS_BETWEEN_GAP_X = 5; // space between cards in hand // TODO: make it gui's sizeable

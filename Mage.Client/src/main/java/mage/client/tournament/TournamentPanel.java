@@ -15,7 +15,8 @@ import mage.constants.PlayerAction;
 import mage.view.TournamentPlayerView;
 import mage.view.TournamentView;
 import mage.view.UserRequestMessage;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -36,7 +37,7 @@ import static mage.client.dialog.PreferencesDialog.*;
  */
 public class TournamentPanel extends javax.swing.JPanel {
 
-    private static final Logger LOGGER = Logger.getLogger(TournamentPanel.class);
+    private static final Logger logger = LoggerFactory.getLogger(TournamentPanel.class);
 
     private static final int[] DEFAULT_COLUMNS_WIDTH_PLAYERS = {30, 150, 150, 60, 400, 100};
     private static final int[] DEFAULT_COLUMNS_WIDTH_MATCHES = {60, 140, 140, 400, 80};
@@ -93,7 +94,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 //                    session.replayGame(gameId);
 //                }
                 if (state.startsWith("Dueling") && actionText.equals("Watch")) {
-                    LOGGER.info("Watching game " + gameId);
+                    logger.info("Watching game " + gameId);
                     SessionHandler.watchTournamentTable(tableId);
                 }
             }
@@ -598,7 +599,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     private final UUID tournamentId;
     private final TournamentPanel panel;
 
-    private static final Logger logger = Logger.getLogger(UpdateTournamentTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdateTournamentTask.class);
 
     UpdateTournamentTask(UUID tournamentId, TournamentPanel panel) {
 
@@ -627,7 +628,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Tournament Task error", ex);
+            logger.error("Update Tournament Task error", ex);
         } catch (CancellationException ex) {
         }
     }
