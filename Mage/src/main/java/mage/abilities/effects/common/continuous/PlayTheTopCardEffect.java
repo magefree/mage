@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
@@ -87,6 +88,10 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("ERROR, can't call applies method on empty affectedAbility");
+    }
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         // main card and all parts are checks in different calls.
         // two modes:
         // * can play cards (must check main card and allows any parts)
@@ -101,10 +106,15 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
         if (this.canPlayCardOnly) {
             // check whole card instead part
             cardToCheck = cardToCheck.getMainCard();
+        } else if (affectedAbility instanceof SpellAbility) {
+            SpellAbility spell = (SpellAbility) affectedAbility;
+            cardToCheck = spell.getCharacteristics(game);
+            if (spell.getManaCosts().isEmpty()){
+                return false;
+            }
         }
-
         // must be you
-        if (!affectedControllerId.equals(source.getControllerId())) {
+        if (!playerId.equals(source.getControllerId())) {
             return false;
         }
 
@@ -154,12 +164,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
             }
         }
 
-        // can't cast without mana cost
-        if (!cardToCheck.isLand(game) && cardToCheck.getManaCost().isEmpty()) {
-            return false;
-        }
-
         // must be correct card
-        return filter.match(cardToCheck, affectedControllerId, source, game);
+        return filter.match(cardToCheck, playerId, source, game);
     }
 }
