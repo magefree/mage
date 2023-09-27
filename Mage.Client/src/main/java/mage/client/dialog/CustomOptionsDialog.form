@@ -22,11 +22,26 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSeparator4" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnOK" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="txtEmblemCardsPerPlayer" max="32767" attributes="2"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEmblemCardsPerPlayer" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="txtEmblemCardsStartingPlayer" max="32767" attributes="2"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEmblemCardsStartingPlayer" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblMulliganType" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -35,20 +50,21 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="spnFreeMulligans" pref="126" max="32767" attributes="0"/>
+                      <Component id="spnFreeMulligans" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblGeneralOptions" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblVariantOptions" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkEmblemCards" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEmblemCardsPerPlayer" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEmblemCardsStartingPlayer" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGeneralOptions" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnOK" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="planechaseDescriptionLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="emblemCardsDescriptionLabel" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -76,6 +92,28 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="planechaseDescriptionLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="chkEmblemCards" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="emblemCardsDescriptionLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblEmblemCardsPerPlayer" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtEmblemCardsPerPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEmblemCardsPerPlayer" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblEmblemCardsStartingPlayer" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtEmblemCardsStartingPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEmblemCardsStartingPlayer" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jSeparator4" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="btnOK" min="-2" pref="30" max="-2" attributes="0"/>
@@ -173,7 +211,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkPlaneChase">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PlaneChase"/>
+        <Property name="text" type="java.lang.String" value="Planechase"/>
         <Property name="toolTipText" type="java.lang.String" value="Use the PlaneChase variant for your game."/>
       </Properties>
       <AccessibilityProperties>
@@ -185,6 +223,19 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkPlaneChaseActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JLabel" name="planechaseDescriptionLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Shared planar deck of all implemented planes.&lt;br&gt;Uses a 9-sided planar die with 2 planeswalk sides and 2 chaos sides.&lt;br&gt;Some ability text may be incorrect.&lt;br&gt;Some rules details (such as who controls plane abilities) may be incorrect."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Planechase Description"/>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Shared planar deck of all implemented planes.&#xa;Uses a 9-sided planar die with 2 planeswalk sides and 2 chaos sides.&#xa;Some ability text may be incorrect.&#xa;Some rules details (such as who controls plane abilities) may be incorrect."/>
+        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="chkPlaneChase"/>
+        </Property>
+      </AccessibilityProperties>
+    </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator4">
     </Component>
     <Component class="javax.swing.JButton" name="btnOK">
@@ -194,6 +245,81 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOKActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator3">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkEmblemCards">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Emblem Cards (Experimental)"/>
+        <Property name="toolTipText" type="java.lang.String" value="If enabled, select cards to give players emblem copies of"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkEmblemCardsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEmblemCardsPerPlayer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmblemCardsPerPlayerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEmblemCardsPerPlayer">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmblemCardsPerPlayerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmblemCardsPerPlayer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Per-Player File"/>
+        <Property name="toolTipText" type="java.lang.String" value="An emblem of each card in this file is given to each player"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="chkEmblemCards"/>
+        </Property>
+      </AccessibilityProperties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEmblemCardsStartingPlayer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmblemCardsStartingPlayerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEmblemCardsStartingPlayer">
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmblemCardsStartingPlayerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmblemCardsStartingPlayer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Starting Player File"/>
+        <Property name="toolTipText" type="java.lang.String" value="An emblem of every card in this file is given to the starting player (useful for symmetric effects)"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="chkEmblemCards"/>
+        </Property>
+      </AccessibilityProperties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="emblemCardsDescriptionLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Give players emblems with the abilities of cards.&lt;br&gt;Note that some abilities may not function correctly from the command zone.&lt;br&gt;If anything breaks, please report it on GitHub."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Emblem Cards description"/>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Give players emblems with the abilities of cards.&#xa;Note that some abilities may not function correctly from the command zone.&#xa;If anything breaks, please report it on GitHub."/>
+      </AccessibilityProperties>
     </Component>
   </SubComponents>
 </Form>
