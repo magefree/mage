@@ -92,6 +92,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Dunedain Rangers", 159, Rarity.UNCOMMON, mage.cards.d.DunedainRangers.class));
         cards.add(new SetCardInfo("Dunland Crebain", 411, Rarity.COMMON, mage.cards.d.DunlandCrebain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dunland Crebain", 82, Rarity.COMMON, mage.cards.d.DunlandCrebain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eagle of Deliverance", 824, Rarity.RARE, mage.cards.e.EagleOfDeliverance.class));
         cards.add(new SetCardInfo("Eagles of the North", 7, Rarity.COMMON, mage.cards.e.EaglesOfTheNorth.class));
         cards.add(new SetCardInfo("East-Mark Cavalier", 9, Rarity.COMMON, mage.cards.e.EastMarkCavalier.class));
         cards.add(new SetCardInfo("Easterling Vanguard", 83, Rarity.COMMON, mage.cards.e.EasterlingVanguard.class));
