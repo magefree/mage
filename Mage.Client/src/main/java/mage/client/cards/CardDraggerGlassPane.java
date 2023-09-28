@@ -8,8 +8,6 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.ClientDefaultSettings;
 import mage.util.DebugUtil;
 import mage.view.CardView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,9 +20,6 @@ import java.util.ArrayList;
  * @author StravantUser, JayDi85
  */
 public class CardDraggerGlassPane {
-
-    private static final Logger logger = LoggerFactory.getLogger(CardDraggerGlassPane.class);
-
     private final DragCardSource source;
     private DragCardTarget currentTarget;
 
@@ -121,7 +116,7 @@ public class CardDraggerGlassPane {
         }
         draggingGlassPane.add(draggingDrawView);
 
-        // Notify the sounce
+        // Notify the source
         source.dragCardBegin();
 
         // Update the target

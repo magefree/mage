@@ -79,9 +79,8 @@ public enum MageTray {
             } catch (AWTException e) {
                 logger.error("TrayIcon could not be added: ", e);
             }
-
         } catch (Exception e) {
-            logger.error(String.valueOf(e));
+            logger.error("MageTray error!", e);
         }
     }
 
@@ -101,7 +100,7 @@ public enum MageTray {
                             trayIcon.setImage(mainImage);
                             state = 0;
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            logger.error("Interrupted exception!", e);
                         }
 
                     }).start();

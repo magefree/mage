@@ -35,8 +35,10 @@ public class MultiConnectTest {
 
     private static volatile int connected;
 
-    private final Object sync = new Object();
     private MageUI ui;
+
+    public MultiConnectTest() {
+    }
 
     private static class ClientMock implements MageClient {
 
@@ -105,8 +107,8 @@ public class MultiConnectTest {
         logger.info("Connected: " + connected + " of " + USER_CONNECT_COUNT);
     }
 
-    private void connect(final int index) throws Exception {
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.error(null, e));
+    private void connect(final int index) {
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.error("Uncaught exception", e));
         SwingUtilities.invokeLater(() -> {
             String username = "player" + index;
             ClientMock client = new ClientMock(username);
@@ -119,7 +121,7 @@ public class MultiConnectTest {
         try {
             TimeUnit.MILLISECONDS.sleep(ms);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Exception while sleeping", e);
         }
     }
 }

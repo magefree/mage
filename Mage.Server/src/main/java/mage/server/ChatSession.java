@@ -59,10 +59,9 @@ public class ChatSession {
     }
 
     public void kill(UUID userId, DisconnectReason reason) {
-
         try {
             if (reason == null) {
-                logger.error("User kill without disconnect reason  userId: " + userId);
+                logger.error("User kill without disconnect reason userId: " + userId);
                 reason = DisconnectReason.Undefined;
             }
             if (userId != null && clients.containsKey(userId)) {
@@ -75,7 +74,7 @@ public class ChatSession {
                     } finally {
                         w.unlock();
                     }
-                    logger.debug(userName + '(' + reason.toString() + ')' + " removed from chatId " + chatId);
+                    logger.debug(userName + '(' + reason + ')' + " removed from chatId " + chatId);
                 }
                 String message = reason.getMessage();
 
@@ -84,7 +83,7 @@ public class ChatSession {
                 }
             }
         } catch (Exception ex) {
-            logger.error("exception: " + ex.toString());
+            logger.error("Exception killing chat session", ex);
         }
     }
 

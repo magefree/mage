@@ -244,7 +244,7 @@ public class TableController {
         }
         User user = _user.get();
         if (userPlayerMap.containsKey(userId) && playerType == PlayerType.HUMAN) {
-            user.showUserMessage("Join Table", new StringBuilder("You can join a table only one time.").toString());
+            user.showUserMessage("Join Table", "You can join a table only one time.");
             return false;
         }
         if (table.getState() != TableState.WAITING) {
@@ -282,8 +282,7 @@ public class TableController {
         // Check quit ratio.
         int quitRatio = table.getMatch().getOptions().getQuitRatio();
         if (quitRatio < user.getMatchQuitRatio()) {
-            String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
-                    .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
+            String message = "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + '%';
             user.showUserMessage("Join Table", message);
             return false;
         }
@@ -297,8 +296,7 @@ public class TableController {
             userRating = user.getUserData().getConstructedRating();
         }
         if (userRating < minimumRating) {
-            String message = new StringBuilder("Your rating ").append(userRating)
-                    .append(" is lower than the table requirement ").append(minimumRating).toString();
+            String message = "Your rating " + userRating + " is lower than the table requirement " + minimumRating;
             user.showUserMessage("Join Table", message);
             return false;
         }
@@ -308,9 +306,9 @@ public class TableController {
         if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase(Locale.ENGLISH).equals("commander")) {
             int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
             if (deckEdhPowerLevel % 100 > edhPowerLevel) {
-                String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")
-                        .append("\nThe table requirement has a maximum power level of ").append(edhPowerLevel).append(" whilst your deck has a calculated power level of ")
-                        .append(deckEdhPowerLevel % 100).toString();
+                String message = "Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. " +
+                        "\nThe table requirement has a maximum power level of " + edhPowerLevel + " whilst your deck has a calculated power level of " +
+                        deckEdhPowerLevel % 100;
                 user.showUserMessage("Join Table", message);
                 return false;
             }
@@ -339,11 +337,8 @@ public class TableController {
                 badColor = "green";
             }
             if (restrictedColor) {
-                String message = new StringBuilder("Your deck contains ")
-                        .append(badColor)
-                        .append(".  The creator of the table has requested no ")
-                        .append(badColor)
-                        .append(" cards to be on the table!").toString();
+                String message = "Your deck contains " + badColor + ".  The creator of the table has requested no " +
+                        badColor + " cards to be on the table!";
                 user.showUserMessage("Join Table", message);
                 return false;
             }
@@ -592,7 +587,7 @@ public class TableController {
     /**
      * Used from non tournament match to start
      *
-     * @param userId owner of the tabel
+     * @param userId owner of the table
      */
     public synchronized void startMatch(UUID userId) {
         if (isOwner(userId)) {
@@ -677,9 +672,7 @@ public class TableController {
             }
         } catch (Exception ex) {
             logger.error("Error starting game table: " + table.getId(), ex);
-            if (table != null) {
-                managerFactory.tableManager().removeTable(table.getId());
-            }
+            managerFactory.tableManager().removeTable(table.getId());
             if (match != null) {
                 Game game = match.getGame();
                 if (game != null) {
@@ -792,7 +785,7 @@ public class TableController {
                 closeTable();
             }
         } catch (GameException ex) {
-            logger.error(null, ex);
+            logger.error("GameException occurred", ex);
         }
         return match.hasEnded();
     }

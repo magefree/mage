@@ -201,13 +201,13 @@ public class MageServerImpl implements MageServer {
                 try {
                     Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
                     if (!session.isPresent()) {
-                        logger.error("Session to found : " + sessionId);
+                        logger.error("Session not found: " + sessionId);
                         return null;
                     }
                     UUID userId = session.get().getUserId();
                     Optional<User> _user = managerFactory.userManager().getUser(userId);
                     if (!_user.isPresent()) {
-                        logger.error("User for session not found. session = " + sessionId);
+                        logger.error("User for session not found, session = " + sessionId);
                         return null;
                     }
                     User user = _user.get();
@@ -238,8 +238,7 @@ public class MageServerImpl implements MageServer {
                     // check if the user satisfies the quitRatio requirement.
                     int quitRatio = options.getQuitRatio();
                     if (quitRatio < user.getTourneyQuitRatio()) {
-                        String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
-                                .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
+                        String message = "Your quit ratio " + user.getTourneyQuitRatio() + "% is higher than the table requirement " + quitRatio + '%';
                         user.showUserMessage("Create tournament", message);
                         throw new MageException("No message");
                     }
@@ -253,15 +252,12 @@ public class MageServerImpl implements MageServer {
                         userRating = user.getUserData().getConstructedRating();
                     }
                     if (userRating < minimumRating) {
-                        String message = new StringBuilder("Your rating ").append(userRating)
-                                .append(" is lower than the table requirement ").append(minimumRating).toString();
+                        String message = "Your rating " + userRating + " is lower than the table requirement " + minimumRating;
                         user.showUserMessage("Create tournament", message);
                         throw new MageException("No message");
                     }
                     Optional<GamesRoom> room = managerFactory.gamesRoomManager().getRoom(roomId);
-                    if (!room.isPresent()) {
-
-                    } else {
+                    if (room.isPresent()) {
                         TableView table = room.get().createTournamentTable(userId, options);
                         logger.debug("Tournament table " + table.getTableId() + " created");
                         return table;
@@ -304,7 +300,6 @@ public class MageServerImpl implements MageServer {
                     return false;
                 }
                 return room.get().joinTable(userId, tableId, name, playerType, skill, deckList, password);
-
             }
         });
     }
@@ -321,7 +316,7 @@ public class MageServerImpl implements MageServer {
                 UUID userId = session.get().getUserId();
                 if (logger.isTraceEnabled()) {
                     Optional<User> user = managerFactory.userManager().getUser(userId);
-                    user.ifPresent(user1 -> logger.trace("join tourn. tableId: " + tableId + ' ' + name));
+                    user.ifPresent(user1 -> logger.trace("join tournament tableId: " + tableId + ' ' + name));
                 }
                 if (userId == null) {
                     logger.error("Got no userId from sessionId" + sessionId + " tableId" + tableId);
@@ -332,7 +327,6 @@ public class MageServerImpl implements MageServer {
                     return room.get().joinTournamentTable(userId, tableId, name, playerType, skill, deckList, password);
                 }
                 return null;
-
             }
         });
     }
@@ -361,7 +355,6 @@ public class MageServerImpl implements MageServer {
             Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
             if (!session.isPresent()) {
                 logger.error("Session not found : " + sessionId);
-
             } else {
                 UUID userId = session.get().getUserId();
                 managerFactory.tableManager().updateDeck(userId, tableId, deckList);
@@ -418,7 +411,6 @@ public class MageServerImpl implements MageServer {
         try {
             Optional<GamesRoom> room = managerFactory.gamesRoomManager().getRoom(roomId);
             return room.flatMap(r -> r.getTable(tableId)).orElse(null);
-
         } catch (Exception ex) {
             handleException(ex);
         }
@@ -851,7 +843,7 @@ public class MageServerImpl implements MageServer {
     public boolean watchGame(final UUID gameId, final String sessionId) throws MageException {
         return executeWithResult("watchGame", sessionId, new ActionWithResult<Boolean>() {
             @Override
-            public Boolean execute() throws MageException {
+            public Boolean execute() {
                 return managerFactory.sessionManager().getSession(sessionId)
                         .map(session -> {
                             UUID userId = session.getUserId();
@@ -1006,7 +998,7 @@ public class MageServerImpl implements MageServer {
 
     public void handleException(Exception ex) throws MageException {
         if (!ex.getMessage().equals("No message")) {
-            logger.error("", ex);
+            logger.error("Exception occurred", ex);
             throw new MageException("Server error: " + ex.getMessage());
         }
     }
@@ -1219,7 +1211,7 @@ public class MageServerImpl implements MageServer {
     private static class MyActionWithNullNegativeResult extends ActionWithNullNegativeResult<Object> {
 
         @Override
-        public Object execute() throws MageException {
+        public Object execute() {
             return CompressUtil.compress(ServerMessagesUtil.instance.getMessages());
         }
     }
@@ -1227,7 +1219,7 @@ public class MageServerImpl implements MageServer {
     private class ListActionWithNullNegativeResult extends ActionWithNullNegativeResult<List<UserView>> {
 
         @Override
-        public List<UserView> execute() throws MageException {
+        public List<UserView> execute() {
             return managerFactory.userManager().getUserInfoList();
         }
     }
@@ -1245,13 +1237,12 @@ public class MageServerImpl implements MageServer {
         }
 
         @Override
-        public GameView execute() throws MageException {
+        public GameView execute() {
             Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
             if (!session.isPresent()) {
                 logger.error("Session not found : " + sessionId);
                 return null;
             } else {
-                //UUID userId = session.get().getUserId();
                 return managerFactory.gameManager().getGameView(gameId, playerId);
             }
         }
@@ -1268,7 +1259,7 @@ public class MageServerImpl implements MageServer {
         }
 
         @Override
-        public Boolean execute() throws MageException {
+        public Boolean execute() {
             Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
             if (!session.isPresent()) {
                 return false;
@@ -1351,7 +1342,7 @@ public class MageServerImpl implements MageServer {
                 userRating = user.getUserData().getConstructedRating();
             }
             if (userRating < minimumRating) {
-                String message = new StringBuilder("Your rating ").append(userRating).append(" is lower than the table requirement ").append(minimumRating).toString();
+                String message = "Your rating " + userRating + " is lower than the table requirement " + minimumRating;
                 user.showUserMessage("Create table", message);
                 throw new MageException("No message");
             }
@@ -1369,5 +1360,4 @@ public class MageServerImpl implements MageServer {
             }
         }
     }
-
 }

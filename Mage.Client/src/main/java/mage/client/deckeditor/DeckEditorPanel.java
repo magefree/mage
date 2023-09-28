@@ -110,34 +110,32 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         // deck legality cards selection
         Arrays.stream(deckLegalityDisplay.getComponents())
                 .filter(LegalityLabel.class::isInstance)
-                .forEach(c -> {
-                    c.addMouseListener(new MouseAdapter() {
-                        public void mouseClicked(MouseEvent e) {
-                            List<String> cardNames = new ArrayList<>();
-                            LegalityLabel label = (LegalityLabel) e.getComponent();
-                            label.getValidator().getErrorsList().stream()
-                                    .map(DeckValidatorError::getCardName)
-                                    .filter(Objects::nonNull)
-                                    .forEach(cardNames::add);
-                            deckArea.getDeckList().deselectAll();
-                            deckArea.getDeckList().selectByName(cardNames);
-                            deckArea.getSideboardList().deselectAll();
-                            deckArea.getSideboardList().selectByName(cardNames);
-                        }
+                .forEach(c -> c.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        List<String> cardNames = new ArrayList<>();
+                        LegalityLabel label = (LegalityLabel) e.getComponent();
+                        label.getValidator().getErrorsList().stream()
+                                .map(DeckValidatorError::getCardName)
+                                .filter(Objects::nonNull)
+                                .forEach(cardNames::add);
+                        deckArea.getDeckList().deselectAll();
+                        deckArea.getDeckList().selectByName(cardNames);
+                        deckArea.getSideboardList().deselectAll();
+                        deckArea.getSideboardList().selectByName(cardNames);
+                    }
 
-                        @Override
-                        public void mouseEntered(MouseEvent e) {
-                            LegalityLabel label = (LegalityLabel) e.getComponent();
-                            label.setBorder(LEGALITY_LABEL_BORDER_SELECTED);
-                        }
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        LegalityLabel label = (LegalityLabel) e.getComponent();
+                        label.setBorder(LEGALITY_LABEL_BORDER_SELECTED);
+                    }
 
-                        @Override
-                        public void mouseExited(MouseEvent e) {
-                            LegalityLabel label = (LegalityLabel) e.getComponent();
-                            label.setBorder(LEGALITY_LABEL_BORDER_EMPTY);
-                        }
-                    });
-                });
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        LegalityLabel label = (LegalityLabel) e.getComponent();
+                        label.setBorder(LEGALITY_LABEL_BORDER_EMPTY);
+                    }
+                }));
     }
 
     /**
@@ -175,7 +173,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void restoreDividerLocationsAndDeckAreaSettings() {
-        String dividerLocation = "";
+        String dividerLocation;
         boolean isLimitedBuildingOrientation = (mode != DeckEditorMode.FREE_BUILDING);
         if (isLimitedBuildingOrientation) {
             dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_LIMITED, "");
@@ -749,15 +747,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 if (importer != null) {
                     StringBuilder errorMessages = new StringBuilder();
-                    Deck newDeck = null;
-
-                    newDeck = Deck.load(importer.importDeck(file.getPath(), errorMessages, true)); // file will be auto-fixed and saved on simple errors
+                    Deck newDeck = Deck.load(importer.importDeck(file.getPath(), errorMessages, true)); // file will be auto-fixed and saved on simple errors
                     processAndShowImportErrors(errorMessages);
 
-                    if (newDeck != null) {
-                        deck = newDeck;
-                        refreshDeck();
-                    }
+                    deck = newDeck;
+                    refreshDeck();
 
                     // save last deck import folder
                     try {
@@ -792,18 +786,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         dialog.showDialog();
 
         if (!dialog.getTmpPath().isEmpty()) {
-            Deck deckToAppend = null;
             StringBuilder errorMessages = new StringBuilder();
-
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            try {
-                deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages, false), true, true);
-                processAndShowImportErrors(errorMessages);
 
-                if (deckToAppend != null) {
-                    deck = Deck.append(deckToAppend, deck);
-                    refreshDeck();
-                }
+            try {
+                Deck deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages, false), true, true);
+                processAndShowImportErrors(errorMessages);
+                Deck.append(deckToAppend, deck);
+                refreshDeck();
             } catch (GameException e1) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
             } finally {
@@ -886,7 +876,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private void processAndShowImportErrors(StringBuilder errorMessages) {
         // show up errors list
         if (errorMessages.length() > 0) {
-            String mes = "Found problems with deck: \n\n" + errorMessages.toString();
+            String mes = "Found problems with deck: \n\n" + errorMessages;
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), mes.substring(0, Math.min(1000, mes.length())), "Errors while loading deck", JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -897,13 +887,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             StringBuilder errorMessages = new StringBuilder();
             Deck newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages, saveAutoFixedFile), true, true);
             processAndShowImportErrors(errorMessages);
-
-            if (newDeck != null) {
-                deck = newDeck;
-                refreshDeck();
-                return true;
-            }
-
+            deck = newDeck;
+            refreshDeck();
+            return true;
         } catch (GameException e1) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -1417,10 +1403,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 newDeck = Deck.load(DeckImporter.importDeckFromFile(file.getPath(), errorMessages, true), true, true);
                 processAndShowImportErrors(errorMessages);
 
-                if (newDeck != null) {
-                    deck = newDeck;
-                    refreshDeck(true);
-                }
+                deck = newDeck;
+                refreshDeck(true);
 
                 // save last deck history
                 try {

@@ -242,7 +242,7 @@ public final class SessionHandler {
             try {
                 XMAGE.getExporter().writeDeck(new File("gamelogs"), logFilename, deckList);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Error auto-saving deck", e);
             }
         }
     }

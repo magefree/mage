@@ -3,7 +3,6 @@ package mage.server;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.game.Game;
-import mage.server.exceptions.UserNotFoundException;
 import mage.server.game.GameController;
 import mage.server.managers.ChatManager;
 import mage.server.managers.ManagerFactory;
@@ -54,7 +53,6 @@ public class ChatManagerImpl implements ChatManager {
         } else {
             logger.trace("Chat to join not found - chatId: " + chatId + " userId: " + userId);
         }
-
     }
 
     @Override
@@ -187,7 +185,7 @@ public class ChatManagerImpl implements ChatManager {
     private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
         if (doError) {
-            message += new StringBuilder("<br/>Invalid User Command '" + message + "'.").append(COMMANDS_LIST).toString();
+            message += "<br/>Invalid User Command '" + message + "'." + COMMANDS_LIST;
             message += "<br/>Type <font color=green>\\w " + user.getName() + " profanity 0 (or 1 or 2)</font> to use/not use the profanity filter";
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
@@ -273,10 +271,11 @@ public class ChatManagerImpl implements ChatManager {
                 CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardName);
                 if (cardInfo != null) {
                     cardInfo.getRules();
-                    message = "<font color=orange>" + cardInfo.getName() + "</font>: Cost:" + cardInfo.getManaCosts(CardInfo.ManaCostSide.ALL).toString() + ",  Types:" + cardInfo.getTypes().toString() + ", ";
+                    StringBuilder messageBuilder = new StringBuilder("<font color=orange>" + cardInfo.getName() + "</font>: Cost:" + cardInfo.getManaCosts(CardInfo.ManaCostSide.ALL) + ",  Types:" + cardInfo.getTypes() + ", ");
                     for (String rule : cardInfo.getRules()) {
-                        message = message + rule;
+                        messageBuilder.append(rule);
                     }
+                    message = messageBuilder.toString();
                 } else {
                     message = "Couldn't find: " + cardName;
 
@@ -294,11 +293,11 @@ public class ChatManagerImpl implements ChatManager {
                 Optional<User> userTo = managerFactory.userManager().getUserByName(userToName);
                 if (userTo.isPresent()) {
                     if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo.get(), rest)) {
-                        message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
+                        message += "<br/>User " + userToName + " not found";
                         chatSessions.get(chatId).broadcastInfoToUser(user, message);
                     }
                 } else {
-                    message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
+                    message += "<br/>User " + userToName + " not found";
                     chatSessions.get(chatId).broadcastInfoToUser(user, message);
                 }
                 return true;
@@ -320,10 +319,9 @@ public class ChatManagerImpl implements ChatManager {
      * @param userId
      * @param message
      * @param color
-     * @throws mage.server.exceptions.UserNotFoundException
      */
     @Override
-    public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
+    public void broadcast(UUID userId, String message, MessageColor color) {
         managerFactory.userManager().getUser(userId).ifPresent(user -> {
             getChatSessions()
                     .stream()
@@ -362,7 +360,7 @@ public class ChatManagerImpl implements ChatManager {
                     .filter(chat -> chat.hasUser(userId))
                     .collect(Collectors.toList());
 
-            if (chatSessions.size() > 0) {
+            if (!chatSessions.isEmpty()) {
                 logger.info("INFORM OPPONENTS by " + user.getName() + ": " + message);
                 chatSessions.forEach(chatSession -> chatSession.broadcast(null, message, MessageColor.BLUE, true, null, MessageType.STATUS, null));
             }

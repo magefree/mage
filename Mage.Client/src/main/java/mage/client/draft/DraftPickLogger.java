@@ -29,7 +29,7 @@ public class DraftPickLogger {
     try {
       Files.write(logPath, new byte[0], StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     } catch (IOException ex) {
-      logger.error(null, ex);
+      logger.error("Exception creating draft log", ex);
     }
   }
 
@@ -76,9 +76,8 @@ public class DraftPickLogger {
       try {
         Files.write(logPath, data.getBytes(), StandardOpenOption.APPEND);
       } catch (IOException ex) {
-        logger.error(null, ex);
+        logger.error("Exception writing to draft log", ex);
       }
     }
   }
-
 }

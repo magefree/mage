@@ -40,7 +40,7 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     }
 
     /**
-     * That values manually (can be used to let it reference to a Permanent that
+     * That values manually can be used to let it reference to a Permanent that
      * is not yet on the battlefield.
      *
      * @param sourceId          can be null

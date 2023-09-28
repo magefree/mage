@@ -30,7 +30,6 @@
      private static final Border EMPTY_BORDER = new EmptyBorder(0, 0, 0, 0);
 
      private final Map<UUID, MageCard> cards = new LinkedHashMap<>();
-     private boolean dontDisplayTapped = false;
      private Zone zone;
      private int lastLoadedCardsCount = 0;
      private final JScrollPane parentScrollPane;
@@ -132,7 +131,7 @@
      }
 
      public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, boolean revertOrder) {
-         boolean changed = false;
+         boolean changed;
 
          // auto-move scrollbars to the end of the list
          boolean moveScrollbar;
@@ -175,11 +174,6 @@
 
          // add objects to the panel
          for (CardView card : orderedList) {
-             if (dontDisplayTapped) {
-                 if (card instanceof PermanentView) {
-                     ((PermanentView) card).overrideTapped(false);
-                 }
-             }
              if (card instanceof StackAbilityView) {
                  // replace ability by original card
                  CardView tmp = ((StackAbilityView) card).getSourceCard();
@@ -308,7 +302,7 @@
                      changed = true;
                  }
              } else {
-                 logger.error("Unknown card conponent in cards panel to remove: " + comp);
+                 logger.error("Unknown card component in cards panel to remove: " + comp);
              }
          }
 

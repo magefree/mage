@@ -246,7 +246,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             GUISizeHelper.calculateGUISizes();
             // UIManager.put("Table.rowHeight", GUISizeHelper.tableRowHeight);
         } catch (Exception ex) {
-            logger.error(null, ex);
+            logger.error("MageFrame error", ex);
         }
 
         // other settings
@@ -295,7 +295,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
         UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-        PING_TASK_EXECUTOR.scheduleAtFixedRate(() -> SessionHandler.ping(), TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
+        PING_TASK_EXECUTOR.scheduleAtFixedRate(SessionHandler::ping, TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 
@@ -820,6 +820,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             try {
                 allMAC = Connection.getMAC();
             } catch (SocketException ex) {
+                logger.error("Socket Exception", ex);
             }
             currentConnection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);
             currentConnection.setProxyType(proxyType);
@@ -906,7 +907,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         mageToolbar.setFloatable(false);
         mageToolbar.setRollover(true);
-        mageToolbar.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        mageToolbar.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 48)); // NOI18N
         mageToolbar.setMaximumSize(new java.awt.Dimension(614, 60));
         mageToolbar.setMinimumSize(new java.awt.Dimension(566, 60));
         mageToolbar.setPreferredSize(new java.awt.Dimension(614, 60));

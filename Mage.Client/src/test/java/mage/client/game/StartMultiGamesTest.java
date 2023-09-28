@@ -45,7 +45,7 @@ public class StartMultiGamesTest {
 
     private void startGame() throws Exception {
         frame = null;
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.error(null, e));
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.error("Uncaught exception", e));
         SwingUtilities.invokeLater(() -> {
             synchronized (sync) {
                 try {

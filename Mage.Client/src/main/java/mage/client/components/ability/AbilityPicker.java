@@ -52,7 +52,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private static final String IMAGE_RIGHT_HOVERED_PATH = "/game/right_hovered.png";
 
     private static final Color SELECTED_COLOR = new Color(64, 147, 208);
-    private static Color BORDER_COLOR = new Color(0, 0, 0, 50);
+    private static final Color BORDER_COLOR = new Color(0, 0, 0, 50);
 
     private boolean selected = false;
 
@@ -164,10 +164,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             }
         });
         rows.setSelectedIndex(0);
-        rows.setFont(new Font("Times New Roman", 1, 17));
+        rows.setFont(new Font("Times New Roman", Font.BOLD, 17));
         rows.setBorder(BorderFactory.createEmptyBorder());
         rows.addMouseWheelListener(this);
-
 
         jScrollPane2.setViewportView(rows);
         jScrollPane2.setViewportBorder(BorderFactory.createEmptyBorder());
@@ -454,7 +453,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         try {
             SessionHandler.sendPlayerBoolean(gameId, false);
         } catch (Exception e) {
-            logger.error("Couldn't cancel choose dialog: " + e, e);
+            logger.error("Couldn't cancel choose dialog: ", e);
         }
     }
 
