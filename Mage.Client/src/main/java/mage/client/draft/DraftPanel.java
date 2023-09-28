@@ -44,7 +44,7 @@
      /**
       * ms delay between booster showing up and pick being allowed.
       */
-     private static final int protectionTime = 2000;
+     private static final int protectionTime = 1500;
      /**
       * Timer starting at booster being displayed, to protect from early pick due to clicking
       * a little too much on the last pick.
