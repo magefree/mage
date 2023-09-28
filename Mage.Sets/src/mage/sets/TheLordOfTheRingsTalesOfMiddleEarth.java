@@ -284,6 +284,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Mines of Moria", 753, Rarity.RARE, mage.cards.m.MinesOfMoria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirkwood Bats", 421, Rarity.COMMON, mage.cards.m.MirkwoodBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirkwood Bats", 95, Rarity.COMMON, mage.cards.m.MirkwoodBats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirkwood Channeler", 828, Rarity.RARE, mage.cards.m.MirkwoodChanneler.class));
         cards.add(new SetCardInfo("Mirkwood Spider", 178, Rarity.COMMON, mage.cards.m.MirkwoodSpider.class));
         cards.add(new SetCardInfo("Mirror of Galadriel", 244, Rarity.UNCOMMON, mage.cards.m.MirrorOfGaladriel.class));
         cards.add(new SetCardInfo("Mirrormere Guardian", 179, Rarity.COMMON, mage.cards.m.MirrormereGuardian.class));
