@@ -122,9 +122,7 @@
                  }
          );
 
-         protectionTimer = new Timer(protectionTime, e -> {
-             protectionTimer.stop();
-         });
+         protectionTimer = new Timer(protectionTime, e -> protectionTimer.stop());
      }
 
      public void cleanUp() {
@@ -337,7 +335,7 @@
          if (!draftBooster.isEmptyGrid()) {
              SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
 
-             if(pickNo != protectionPickNo && !protectionTimer.isRunning()) {
+             if (pickNo != protectionPickNo && !protectionTimer.isRunning()) {
                  // Restart the protection timer.
                  protectionPickNo = pickNo;
                  protectionTimer.restart();
@@ -451,7 +449,7 @@
      // that's why instead of proactively logging our pick we instead
      // log *last* pick from the list of picks.
      // To make this possible we cache the list of cards from the
-     // previous booster and it's sequence number (pack number / pick number)
+     // previous booster and its sequence number (pack number / pick number)
      // in fields currentBooster and currentBoosterHeader.
      private void logLastPick(DraftPickView pickView) {
          if (!isLogging()) {
@@ -472,11 +470,13 @@
 
      private String getCurrentSetCode() {
          // TODO: Record set codes for random drafts correctly
-         if (setCodes.size() >= packNo) {
-             return setCodes.get(packNo - 1);
-         } else {
-             return "   ";
+         if (setCodes != null && setCodes.size() >= packNo) {
+             String setCode = setCodes.get(packNo - 1);
+             if (setCode != null) { // Not sure how, but got a NPE from this method P1P2 in a ZEN/ZEN/WWK draft
+                 return setCode;
+             }
          }
+         return "   ";
      }
 
      private static boolean isLogging() {
