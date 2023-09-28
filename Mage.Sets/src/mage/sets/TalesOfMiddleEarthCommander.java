@@ -127,6 +127,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Galadhrim Brigade", 502, Rarity.RARE, mage.cards.g.GaladhrimBrigade.class));
         cards.add(new SetCardInfo("Gandalf, Westward Voyager", 6, Rarity.MYTHIC, mage.cards.g.GandalfWestwardVoyager.class));
         cards.add(new SetCardInfo("Galadriel, Elven-Queen", 3, Rarity.MYTHIC, mage.cards.g.GaladrielElvenQueen.class));
+        cards.add(new SetCardInfo("Galadriel, Light of Valinor", 498, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class));
         cards.add(new SetCardInfo("Gemstone Caverns", 364, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class));
         cards.add(new SetCardInfo("Genesis Wave", 245, Rarity.RARE, mage.cards.g.GenesisWave.class));
         cards.add(new SetCardInfo("Ghost Quarter", 314, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
