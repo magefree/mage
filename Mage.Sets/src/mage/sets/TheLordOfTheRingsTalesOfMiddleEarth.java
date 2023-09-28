@@ -280,6 +280,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Minas Tirith", 256, Rarity.RARE, mage.cards.m.MinasTirith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minas Tirith", 341, Rarity.RARE, mage.cards.m.MinasTirith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minas Tirith", 420, Rarity.RARE, mage.cards.m.MinasTirith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Minas Tirith Garrison", 825, Rarity.RARE, mage.cards.m.MinasTirithGarrison.class));
         cards.add(new SetCardInfo("Mines of Moria", 257, Rarity.RARE, mage.cards.m.MinesOfMoria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mines of Moria", 342, Rarity.RARE, mage.cards.m.MinesOfMoria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mines of Moria", 753, Rarity.RARE, mage.cards.m.MinesOfMoria.class, NON_FULL_USE_VARIOUS));
