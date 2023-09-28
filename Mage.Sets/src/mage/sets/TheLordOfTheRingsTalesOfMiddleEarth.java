@@ -359,6 +359,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Relentless Rohirrim", 144, Rarity.COMMON, mage.cards.r.RelentlessRohirrim.class));
         cards.add(new SetCardInfo("Reprieve", 26, Rarity.UNCOMMON, mage.cards.r.Reprieve.class));
         cards.add(new SetCardInfo("Revive the Shire", 185, Rarity.COMMON, mage.cards.r.ReviveTheShire.class));
+        cards.add(new SetCardInfo("Riders of the Mark", 827, Rarity.RARE, mage.cards.r.RidersOfTheMark.class));
         cards.add(new SetCardInfo("Ringsight", 220, Rarity.UNCOMMON, mage.cards.r.Ringsight.class));
         cards.add(new SetCardInfo("Ringwraiths", 284, Rarity.RARE, mage.cards.r.Ringwraiths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ringwraiths", 385, Rarity.RARE, mage.cards.r.Ringwraiths.class, NON_FULL_USE_VARIOUS));
