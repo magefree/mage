@@ -3,12 +3,12 @@
   <appender name="diagfile" class="ch.qos.logback.core.FileAppender">
     <File>magediag.log</File>
     <encoder>
-      <pattern>%-5p [%d{yyyy-MM-dd HH:mm [ss:SSS]}] %C{1}[%t]: %m%n</pattern>
+      <pattern>%-5p [%d] %C{1}[%t]: %m%n</pattern>
     </encoder>
   </appender>
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss,SSS} %-90m =&gt;[%t] %C{1}.%M %n</pattern>
+      <pattern>%-5p %d %-90m =&gt;[%t] %C{1}.%M %n</pattern>
     </encoder>
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
       <level>debug</level>
@@ -17,7 +17,7 @@
   <appender name="logfile" class="ch.qos.logback.core.FileAppender">
     <File>mageserver.log</File>
     <encoder>
-      <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss,SSS} %-90m =&gt;[%t] %C{1}.%M %n</pattern>
+      <pattern>%-5p %d %-90m =&gt;[%t] %C{1}.%M %n</pattern>
     </encoder>
   </appender>
   <logger name="mage.player.ai" level="warn"/>

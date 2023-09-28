@@ -2,7 +2,7 @@
 <configuration>
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss,SSS} %-90m =&gt;[%t] %C{1}.%M %n</pattern>
+      <pattern>%-5p %d %-90m =&gt;[%t] %C{1}.%M %n</pattern>
     </encoder>
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
       <level>debug</level>
@@ -11,7 +11,7 @@
   <appender name="logfile" class="ch.qos.logback.core.FileAppender">
     <File>mageadmin.log</File>
     <encoder>
-      <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss,SSS} %-90m =&gt;[%t] %C{1}.%M %n</pattern>
+      <pattern>%-5p %d %-90m =&gt;[%t] %C{1}.%M %n</pattern>
     </encoder>
   </appender>
   <logger name="com.j256.ormlite" level="warn"/>

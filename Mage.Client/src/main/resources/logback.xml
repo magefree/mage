@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+  <property name="MAGE_CLIENT_LOG" value="mageclient.log" />
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss,SSS} %-90m =&gt;[%t] %C{1}.%M %n</pattern>
+      <pattern>%-5p %d %-90m =&gt;[%t] %C{1}.%M %n</pattern>
     </encoder>
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
       <level>info</level>
@@ -10,18 +11,15 @@
   </appender>
   <appender name="logfileByIndex" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
-    <File>mageclient.log</File>
-    <append>true</append>
+    <file>${MAGE_CLIENT_LOG}</file>
     <encoder>
-      <pattern>%-5p %d{yyyy-MM-dd HH:mm:ss,SSS} %-90m =&gt;[%t] %C{1}.%M %n</pattern>
+      <pattern>%-5p %d %-90m =&gt;[%t] %C{1}.%M %n</pattern>
     </encoder>
-    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-      <maxIndex>5</maxIndex>
-      <FileNamePattern>mageclient.log.%i</FileNamePattern>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <maxHistory>5</maxHistory>
+      <maxFileSize>10MB</maxFileSize>
+      <FileNamePattern>${MAGE_CLIENT_LOG}-%d{yyyyMMdd}.%i.log</FileNamePattern>
     </rollingPolicy>
-    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-      <MaxFileSize>10MB</MaxFileSize>
-    </triggeringPolicy>
   </appender>
   <logger name="com.j256.ormlite" level="warn"/>
   <root level="info">
