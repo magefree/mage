@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class WargRider extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent filterOrcAndGoblins =
+    private static final FilterControlledCreaturePermanent filterOrcAndGoblins =
             new FilterControlledCreaturePermanent("Orcs and Goblins");
 
     static {
@@ -40,7 +40,7 @@ public final class WargRider extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Other Orcs and Goblins you control have menace.
         this.addAbility(new SimpleStaticAbility(

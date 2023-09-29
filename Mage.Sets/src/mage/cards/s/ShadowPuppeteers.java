@@ -44,7 +44,7 @@ public final class ShadowPuppeteers extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // When Shadow Puppeteers enters the battlefield, create two 1/1 black Faerie Rogue creature tokens with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FaerieRogueToken(), 2)));
