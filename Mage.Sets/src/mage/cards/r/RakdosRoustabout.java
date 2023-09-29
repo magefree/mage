@@ -65,7 +65,7 @@ class RakdosRoustaboutAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (sourceId.equals(event.getTargetId())) {
             this.getEffects().get(0).setTargetPointer(
-                    new FixedTarget(game.getCombat().getDefenderId(event.getTargetId()), game)
+                    new FixedTarget(game.getCombat().getDefenderMOR(event.getTargetId()))
             );
             return true;
         }

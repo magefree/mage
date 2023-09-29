@@ -1,19 +1,20 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +64,7 @@ class HarborGuardianEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
+        UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
         Player defender = game.getPlayer(defenderId);
         if (defender != null) {
             if (defender.chooseUse(outcome, "Draw a card?", source, game)) {

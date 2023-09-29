@@ -1,9 +1,6 @@
 package mage.players;
 
-import mage.ApprovingObject;
-import mage.MageItem;
-import mage.MageObject;
-import mage.Mana;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -777,7 +774,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void pickCard(List<Card> cards, Deck deck, Draft draft);
 
-    void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo);
+    void declareAttacker(UUID attackerId, MageObjectReference defenderMOR, Game game, boolean allowUndo);
 
     void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game);
 

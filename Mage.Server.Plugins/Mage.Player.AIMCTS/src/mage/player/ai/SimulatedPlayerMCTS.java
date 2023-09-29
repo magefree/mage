@@ -1,5 +1,6 @@
 package mage.player.ai;
 
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -167,7 +168,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         for (int i = 0; i < attackersList.size(); i++) {
             if (binary.charAt(i) == '1') {
                 setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
-                if (!game.getCombat().declareAttacker(attackersList.get(i).getId(), defenderId, playerId, game)) {
+                if (!game.getCombat().declareAttacker(attackersList.get(i).getId(), new MageObjectReference(defenderId, game), playerId, game)) {
                     game.undo(playerId);
                 }
             }

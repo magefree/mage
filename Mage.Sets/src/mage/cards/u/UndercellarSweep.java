@@ -59,7 +59,7 @@ enum UndercellarSweepCondition implements Condition {
                 .getAttackers()
                 .stream()
                 .filter(uuid -> source.isControlledBy(game.getControllerId(uuid)))
-                .map(game.getCombat()::getDefenderId)
+                .map(game.getCombat()::getDefenderPlayerId)
                 .anyMatch(game.getInitiativeId()::equals);
     }
 }

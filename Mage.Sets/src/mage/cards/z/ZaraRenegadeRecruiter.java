@@ -1,6 +1,7 @@
 package mage.cards.z;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -115,7 +116,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
             controller.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }
-        game.getCombat().addAttackerToCombat(permanent.getId(), defenderId, game);
+        game.getCombat().addAttackerToCombat(permanent.getId(), new MageObjectReference(defenderId, game), game);
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new ReturnToHandTargetEffect().setTargetPointer(new FixedTarget(permanent, game))
         ), source);

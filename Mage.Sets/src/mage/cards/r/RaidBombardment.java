@@ -1,7 +1,7 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -10,9 +10,10 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,8 +64,11 @@ class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl {
             Permanent attacker = game.getPermanent(event.getSourceId());
             if (attacker != null) {
                 if (attacker.getPower().getValue() <= 2) {
-                    UUID defendingPlayerId = game.getCombat().getDefenderId(attacker.getId());
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
+                    MageObjectReference defendingPlayerMOR = game.getCombat().getDefenderMOR(attacker.getId());
+                    if (defendingPlayerMOR == null) {
+                        return false;
+                    }
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerMOR));
                     return true;
                 }
             }

@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,13 +11,15 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +74,7 @@ class WatchdogFilter extends FilterAttackingCreature {
         for (CombatGroup group : game.getCombat().getGroups()) {
             for (UUID attacker : group.getAttackers()) {
                 if (attacker.equals(permanent.getId())) {
-                    UUID defenderId = group.getDefenderId();
+                    UUID defenderId = group.getDefenderPlayerID();
                     if (defenderId.equals(playerId)) {
                         return true;
                     }

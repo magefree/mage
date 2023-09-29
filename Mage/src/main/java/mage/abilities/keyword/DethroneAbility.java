@@ -1,8 +1,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Zone;
@@ -10,6 +8,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * Dethrone triggers whenever a creature with dethrone attacks the player with
@@ -47,7 +47,7 @@ public class DethroneAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID defenderId = game.getCombat().getDefenderId(getSourceId());
+        UUID defenderId = game.getCombat().getDefenderPlayerId(getSourceId());
         if (defenderId != null) {
             Player attackedPlayer = game.getPlayer(defenderId);
             Player controller = game.getPlayer(getControllerId());

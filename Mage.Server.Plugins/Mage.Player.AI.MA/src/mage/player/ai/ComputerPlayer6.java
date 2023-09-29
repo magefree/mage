@@ -1,6 +1,7 @@
 package mage.player.ai;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
@@ -889,7 +890,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 List<Permanent> killers = CombatUtil.canKillOpponent(game, attackersList, possibleBlockers, defender);
                 if (!killers.isEmpty()) {
                     for (Permanent attacker : killers) {
-                        attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
+                        attackingPlayer.declareAttacker(attacker.getId(), new MageObjectReference(defenderId, game), game, false);
                     }
                     return;
                 }
@@ -987,7 +988,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                         // kill the Planeswalker
                         for (Permanent attacker : attackersToCheck) {
                             loyaltyCounters -= attacker.getPower().getValue();
-                            attackingPlayer.declareAttacker(attacker.getId(), planeswalker.getId(), game, true);
+                            attackingPlayer.declareAttacker(attacker.getId(), new MageObjectReference(planeswalker.getId(), game), game, true);
                             if (loyaltyCounters <= 0) {
                                 break;
                             }
@@ -999,7 +1000,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 for (Permanent attackingPermanent : attackersToCheck) {
                     // if not already attacking a Planeswalker...
                     if (!attackingPermanent.isAttacking()) {
-                        attackingPlayer.declareAttacker(attackingPermanent.getId(), defenderId, game, true);
+                        attackingPlayer.declareAttacker(attackingPermanent.getId(), new MageObjectReference(defenderId, game), game, true);
                     }
                 }
             }

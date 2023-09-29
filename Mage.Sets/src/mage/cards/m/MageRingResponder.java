@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,8 +18,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +73,7 @@ class MageRingResponderAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defenderId = game.getCombat().getDefenderId(sourceId);
+            UUID defenderId = game.getCombat().getDefendingPlayerId(sourceId, game);
             filter.add(new ControllerIdPredicate(defenderId));
 
             this.getTargets().clear();

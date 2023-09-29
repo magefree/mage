@@ -64,7 +64,7 @@ class CalculatingLichTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Player player = game.getPlayer(getControllerId());
-        UUID defenderId = game.getCombat().getDefenderId(event.getSourceId());
+        UUID defenderId = game.getCombat().getDefenderPlayerId(event.getSourceId());
         if (player == null || !player.hasOpponent(defenderId, game)) {
             return false;
         }

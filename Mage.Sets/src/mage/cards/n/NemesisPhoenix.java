@@ -72,7 +72,7 @@ enum NemesisPhoenixCondition implements Condition {
                         .stream()
                         .map(game::getControllerId)
                         .anyMatch(source::isControlledBy))
-                .map(CombatGroup::getDefenderId)
+                .map(CombatGroup::getDefenderMOR)
                 .filter(Objects::nonNull)
                 .distinct()
                 .filter(opponents::contains)

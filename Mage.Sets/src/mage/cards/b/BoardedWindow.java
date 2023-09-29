@@ -1,7 +1,6 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,6 +18,8 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.DamageDoneWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,8 +75,8 @@ class BoardedWindowFilter extends FilterAttackingCreature {
         for (CombatGroup group : game.getCombat().getGroups()) {
             for (UUID attacker : group.getAttackers()) {
                 if (attacker.equals(permanent.getId())) {
-                    UUID defenderId = group.getDefenderId();
-                    if (defenderId.equals(playerId)) {
+                    MageObjectReference defenderMOR = group.getDefenderMOR();
+                    if (defenderMOR != null && defenderMOR.getSourceId().equals(playerId)) {
                         return true;
                     }
                 }

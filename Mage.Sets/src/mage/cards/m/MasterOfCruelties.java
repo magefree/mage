@@ -87,7 +87,7 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                 if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
                     // check if a player is attacked (instead of a planeswalker)
-                    Player defendingPlayer = game.getPlayer(combatGroup.getDefenderId());
+                    Player defendingPlayer = game.getPlayer(combatGroup.getDefenderPlayerID());
                     if (defendingPlayer != null) {
                         return true;
                     }
@@ -116,7 +116,7 @@ class MasterOfCrueltiesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player defendingPlayer = game.getPlayer(game.getCombat().getDefenderId(source.getSourceId()));
+        Player defendingPlayer = game.getPlayer(game.getCombat().getDefenderPlayerId(source.getSourceId()));
         if (defendingPlayer != null) {
             defendingPlayer.setLife(1, game, source);
             return true;

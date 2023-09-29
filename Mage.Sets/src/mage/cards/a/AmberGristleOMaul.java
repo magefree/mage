@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
@@ -71,9 +72,10 @@ enum AmberGristleOMaulValue implements DynamicValue {
                         .stream()
                         .map(game::getControllerId)
                         .anyMatch(sourceAbility::isControlledBy))
-                .map(CombatGroup::getDefenderId)
+                .map(CombatGroup::getDefenderMOR)
                 .filter(Objects::nonNull)
                 .distinct()
+                .map(MageObjectReference::getSourceId)
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
                 .mapToInt(x -> 1)

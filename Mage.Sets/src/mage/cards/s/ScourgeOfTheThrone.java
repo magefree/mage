@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -19,6 +18,8 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +72,7 @@ enum ScourgeOfTheThroneCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
+        UUID defenderId = game.getCombat().getDefenderPlayerId(source.getSourceId());
         if (defenderId != null) {
             Player attackedPlayer = game.getPlayer(defenderId);
             Player controller = game.getPlayer(source.getControllerId());

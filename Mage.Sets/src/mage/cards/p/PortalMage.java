@@ -2,6 +2,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.IsStepCondition;
@@ -100,17 +101,17 @@ class PortalMageEffect extends OneShotEffect {
                 // restrictions, and costs associated with attacking.
 
                 // Update possible defender
-                Set<UUID> defenders = new LinkedHashSet<>();
+                Set<MageObjectReference> defenders = new LinkedHashSet<>();
                 for (UUID playerId : game.getCombat().getAttackablePlayers(game)) {
-                    defenders.add(playerId);
+                    defenders.add(new MageObjectReference(playerId, game));
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, playerId, game)) {
-                        defenders.add(permanent.getId());
+                        defenders.add(new MageObjectReference(permanent.getId(), game));
                     }
                 }
                 // Select the new defender
                 TargetDefender target = new TargetDefender(defenders);
                 if (controller.chooseTarget(Outcome.Damage, target, source, game)) {
-                    if (combatGroupTarget.getDefenderId() != null && !combatGroupTarget.getDefenderId().equals(target.getFirstTarget())) {
+                    if (combatGroupTarget.getDefenderMOR() != null && !combatGroupTarget.getDefenderMOR().equals(target.getFirstTarget())) {
                         if (combatGroupTarget.changeDefenderPostDeclaration(target.getFirstTarget(), game)) {
                             String attacked = "";
                             Player player = game.getPlayer(target.getFirstTarget());

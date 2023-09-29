@@ -1,5 +1,6 @@
 package mage.player.ai;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.PassAbility;
@@ -117,9 +118,9 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         sb.append(game.getTurn().getValue(game.getTurnNum())).append(" player ").append(name).append(" attacking with: ");
         getNextAction(game, NextAction.SELECT_ATTACKERS);
         Combat combat = root.getCombat();
-        UUID opponentId = game.getCombat().getDefenders().iterator().next();
+        MageObjectReference defenderMOR = game.getCombat().getDefenders().iterator().next();
         for (UUID attackerId : combat.getAttackers()) {
-            this.declareAttacker(attackerId, opponentId, game, false);
+            this.declareAttacker(attackerId, defenderMOR, game, false);
             sb.append(game.getPermanent(attackerId).getName()).append(',');
         }
         logger.info(sb.toString());

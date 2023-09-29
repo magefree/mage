@@ -2,6 +2,7 @@
 
 package mage.player.ai;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
@@ -156,7 +157,7 @@ public class SimulatedPlayer extends ComputerPlayer {
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
                     setStoredBookmark(sim.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
-                    if (!sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, playerId, sim)) {
+                    if (!sim.getCombat().declareAttacker(attackersList.get(j).getId(), new MageObjectReference(defenderId, game), playerId, sim)) {
                         sim.undo(playerId);
                     }                    
                 }

@@ -72,6 +72,6 @@ enum BlastFurnaceHellkitePredicate implements ObjectSourcePlayerPredicate<Perman
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         return game.getOpponents(input.getSource().getControllerId())
-                .contains(game.getCombat().getDefenderId(input.getObject().getId()));
+                .contains(game.getCombat().getDefenderPlayerId(input.getObject().getId()));
     }
 }

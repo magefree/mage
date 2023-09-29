@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +14,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -69,9 +72,34 @@ class FathomFleetSwordjackEffect extends OneShotEffect {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
                 source.getControllerId(), source, game
         );
-        return artifactCount > 0 && game.damagePlayerOrPermanent(
-                game.getCombat().getDefenderId(source.getSourceId()), artifactCount,
-                source.getSourceId(), source, game, false, true
-        ) > 0;
+
+        if (artifactCount <= 0) {
+            return false;
+        }
+
+        MageObjectReference defenderMOR = game.getCombat().getDefenderMOR(source.getSourceId());
+        if (defenderMOR == null) {
+            return false;
+        }
+
+        Permanent permanent = defenderMOR.getPermanent(game);
+        if (permanent != null) {
+            game.damagePlayerOrPermanent(
+                    permanent.getId(), artifactCount,
+                    source.getSourceId(), source, game, false, true
+            );
+            return true;
+        }
+
+        Player player = game.getPlayer(defenderMOR.getSourceId());
+        if (player != null) {
+            game.damagePlayerOrPermanent(
+                    player.getId(), artifactCount,
+                    source.getSourceId(), source, game, false, true
+            );
+            return true;
+        }
+
+        return false;
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,15 +12,13 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +72,7 @@ class TrepanationBladeDiscardEffect extends OneShotEffect {
             if (creature == null) {
                 return false;
             }
-            UUID defenderId = game.getCombat().getDefenderId(creature.getId());
+            UUID defenderId = game.getCombat().getDefendingPlayerId(creature.getId(), game);
             Player defendingPlayer = game.getPlayer(defenderId);
             if (defendingPlayer == null) {
                 return false;

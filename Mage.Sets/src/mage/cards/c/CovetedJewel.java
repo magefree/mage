@@ -87,7 +87,7 @@ class CovetedJewelTriggeredAbility extends TriggeredAbilityImpl {
             Permanent attackingCreature = game.getPermanent(attacker);
             if (attackingCreature != null
                     && currentController.hasOpponent(attackingCreature.getControllerId(), game)
-                    && getControllerId().equals(game.getCombat().getDefenderId(attacker)) // does not trigger if planeswalker is attacked
+                    && getControllerId().equals(game.getCombat().getDefenderPlayerId(attacker)) // does not trigger if planeswalker is attacked
                     && !attackingCreature.isBlocked(game)) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId(), game));
                 return true;

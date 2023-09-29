@@ -31,12 +31,12 @@ public class AttacksOpponentWithMostLifeTriggeredAbility extends TriggeredAbilit
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getCombat().getAttackers().contains(this.getSourceId())
-                && game.getPlayer(game.getCombat().getDefenderId(this.getSourceId())) != null;
+                && game.getPlayer(game.getCombat().getDefenderPlayerId(this.getSourceId())) != null;
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        Player defender = game.getPlayer(game.getCombat().getDefenderId(getSourceId()));
+        Player defender = game.getPlayer(game.getCombat().getDefenderPlayerId(getSourceId()));
         return defender != null
                 && game
                 .getOpponents(getControllerId(), true)

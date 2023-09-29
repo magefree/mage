@@ -1,20 +1,22 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +81,7 @@ class ViashinoBeyEffect extends OneShotEffect {
                     targetDefender.add(game.getOpponents(controller.getId()).iterator().next(), game);
                 }
                 if (permanent.canAttack(targetDefender.getFirstTarget(), game)) {
-                    controller.declareAttacker(permanent.getId(), targetDefender.getFirstTarget(), game, false);
+                    controller.declareAttacker(permanent.getId(), new MageObjectReference(targetDefender.getFirstTarget(), game), game, false);
                 }
             });
         }

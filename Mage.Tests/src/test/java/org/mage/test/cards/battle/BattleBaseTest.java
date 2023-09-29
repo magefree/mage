@@ -13,6 +13,8 @@ public class BattleBaseTest extends CardTestPlayerBase {
     protected static final String belenon = "Invasion of Belenon";
     protected static final String warAnthem = "Belenon War Anthem";
     protected static final String kaladesh = "Invasion of Kaladesh";
+    protected static final String azgol = "Invasion of Azgol";
+    protected static final String ashenReaper = "Ashen Reaper";
     protected static final String bear = "Grizzly Bears";
     protected static final String confiscate = "Confiscate";
     protected static final String impact = "Explosive Impact";

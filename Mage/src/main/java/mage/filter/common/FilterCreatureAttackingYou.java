@@ -1,11 +1,11 @@
 
 package mage.filter.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -50,7 +50,7 @@ public class FilterCreatureAttackingYou extends FilterAttackingCreature {
         } else {
             return super.match(permanent, playerId, source, game)
                     && permanent.isAttacking() // to prevent unneccessary combat checking if not attacking
-                    && playerId.equals(game.getCombat().getDefenderId(permanent.getId()));
+                    && playerId.equals(game.getCombat().getDefenderPlayerId(permanent.getId()));
         }
     }
 }

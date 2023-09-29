@@ -67,7 +67,7 @@ class ElderBrainTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player player = game.getPlayer(game.getCombat().getDefenderId(this.getSourceId()));
+        Player player = game.getPlayer(game.getCombat().getDefenderPlayerId(this.getSourceId()));
         if (player == null) {
             return false;
         }

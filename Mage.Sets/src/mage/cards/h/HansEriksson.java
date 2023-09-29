@@ -1,9 +1,11 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.cards.Card;
@@ -19,10 +21,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -111,7 +112,7 @@ class HansErikssonEffect extends OneShotEffect {
             defenderId = target.getFirstTarget();
         }
         if (defenderId != null) {
-            game.getCombat().addAttackerToCombat(permanent.getId(), defenderId, game);
+            game.getCombat().addAttackerToCombat(permanent.getId(), new MageObjectReference(defenderId, game), game);
         }
         Effect fightEffect = new FightTargetSourceEffect();
         fightEffect.setTargetPointer(new FixedTarget(permanent, game));

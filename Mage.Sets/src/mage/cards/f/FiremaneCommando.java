@@ -84,7 +84,7 @@ class FiremaneCommandoTriggeredAbility extends TriggeredAbilityImpl {
                 .getCombat()
                 .getGroups()
                 .stream()
-                .map(CombatGroup::getDefenderId)
+                .map(CombatGroup::getDefenderMOR)
                 .filter(Objects::nonNull)
                 .anyMatch(this.getControllerId()::equals);
         this.getEffects().setValue("damage", youWereAttacked ? 0 : 1);

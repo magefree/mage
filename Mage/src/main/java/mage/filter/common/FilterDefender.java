@@ -1,13 +1,12 @@
 package mage.filter.common;
 
+import mage.MageObjectReference;
 import mage.constants.CardType;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.other.PlayerIdPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
 
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public class FilterDefender extends FilterPermanentOrPlayer {
 
-    public FilterDefender(Set<UUID> defenders) {
+    public FilterDefender(Set<MageObjectReference> defenders) {
         super("player, planeswalker, or battle to attack");
         this.permanentFilter.add(Predicates.or(
                 CardType.PLANESWALKER.getPredicate(),
@@ -24,12 +23,13 @@ public class FilterDefender extends FilterPermanentOrPlayer {
         this.permanentFilter.add(Predicates.or(
                 defenders
                         .stream()
-                        .map(PermanentIdPredicate::new)
+                        .map(MageObjectReferencePredicate::new)
                         .collect(Collectors.toList())
         ));
         this.playerFilter.add(Predicates.or(
                 defenders
                         .stream()
+                        .map(MageObjectReference::getSourceId)
                         .map(PlayerIdPredicate::new)
                         .collect(Collectors.toList())
         ));

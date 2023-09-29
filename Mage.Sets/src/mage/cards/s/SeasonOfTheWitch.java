@@ -1,9 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -26,6 +23,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -125,12 +126,12 @@ class CouldAttackThisTurnWatcher extends Watcher {
             }
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
                 if (permanent.isCreature(game)) {
-                    for (UUID defender : game.getCombat().getDefenders()) {
+                    for (MageObjectReference defender : game.getCombat().getDefenders()) {
                         if (!defender.equals(activePlayer.getId())) {
-                            if (permanent.canAttack(defender, game)) {
+                            if (permanent.canAttack(defender.getSourceId(), game)) {
                                 // exclude Propaganda style effects
                                 if (!game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                                        new DeclareAttackerEvent(defender, permanent.getId(), permanent.getControllerId()), game)) {
+                                        new DeclareAttackerEvent(defender.getSourceId(), permanent.getId(), permanent.getControllerId()), game)) {
                                     this.couldAttackThisTurnCreatures.add(new MageObjectReference(permanent.getId(), game));
                                     break;
                                 }
