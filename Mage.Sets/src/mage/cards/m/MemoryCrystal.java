@@ -14,9 +14,7 @@ import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 /**
@@ -29,7 +27,7 @@ public final class MemoryCrystal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Buyback costs cost {2} less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MemoryCrystalSpellsCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new MemoryCrystalSpellsCostReductionEffect()));
     }
 
     private MemoryCrystal(final MemoryCrystal card) {
@@ -44,26 +42,23 @@ public final class MemoryCrystal extends CardImpl {
 
 class MemoryCrystalSpellsCostReductionEffect extends CostModificationEffectImpl {
 
-    public MemoryCrystalSpellsCostReductionEffect() {
+    MemoryCrystalSpellsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Buyback costs cost {2} less.";
     }
 
-    protected MemoryCrystalSpellsCostReductionEffect(final MemoryCrystalSpellsCostReductionEffect effect) {
+    private MemoryCrystalSpellsCostReductionEffect(final MemoryCrystalSpellsCostReductionEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-
         Card card = game.getCard(abilityToModify.getSourceId());
         if (card != null) {
             for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof BuybackAbility) {
-                    if (ability.isActivated()) {
-                        int amountToReduce = ((BuybackAbility) ability).reduceCost(2);
-                        CardUtil.reduceCost(abilityToModify, amountToReduce);
-                    }
+                if (ability instanceof BuybackAbility && ability.isActivated()) {
+                    int amountToReduce = ((BuybackAbility) ability).reduceCost(2);
+                    CardUtil.reduceCost(abilityToModify, amountToReduce);
                 }
             }
         }
@@ -73,14 +68,7 @@ class MemoryCrystalSpellsCostReductionEffect extends CostModificationEffectImpl 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if (abilityToModify.isControlledBy(source.getControllerId())) {
-                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-                if (spell != null) {
-                    if (BuybackCondition.instance.apply(game, abilityToModify)) {
-                        return true;
-                    }
-                }
-            }
+            return game.getSpell(abilityToModify.getId()) != null && BuybackCondition.instance.apply(game, abilityToModify);
         }
         return false;
     }
