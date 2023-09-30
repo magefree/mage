@@ -87,12 +87,7 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }
