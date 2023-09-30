@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -71,12 +70,7 @@ class FollowedFootstepsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // In the case that Followed Footsteps is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment != null) {
             Permanent target = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
             if (target != null) {
