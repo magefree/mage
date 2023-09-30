@@ -14,6 +14,7 @@ import mage.client.components.KeyboundButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.layout.RelativeLayout;
+import mage.client.components.tray.MageTray;
 import mage.client.dialog.*;
 import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.game.FeedbackPanel.FeedbackMode;
@@ -501,6 +502,10 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             // play start sound
             AudioManager.playYourGameStarted();
+            if (!AppUtil.isAppActive()) {
+                MageTray.instance.displayMessage("Your match has started!");
+                MageTray.instance.blink();
+            }
         }
     }
 
