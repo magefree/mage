@@ -127,7 +127,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
 
 class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private static final FilterCard filter = new FilterCard("cards originally printed in the Arabian Nights expansion");
+    private static final FilterCard filter = new FilterCard();
 
     static {
         filter.add(Predicates.or(CityInABottle.ARABIAN_NIGHTS_CARD_NAME_PREDICATES));
@@ -135,7 +135,7 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
     CityInABottleCantPlayEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Players can't play cards originally printed in the <i>Arabian Nights</i> expansion";
+        staticText = "Players can't cast spells or play lands with a name originally printed in the <i>Arabian Nights</i> expansion";
     }
 
     private CityInABottleCantPlayEffect(final CityInABottleCantPlayEffect effect) {
@@ -149,7 +149,7 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        return "You can't play cards originally printed in the Arabian Nights expansion";
+        return "You can't play cards with a name originally printed in the Arabian Nights expansion";
     }
 
     @Override
