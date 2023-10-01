@@ -13,10 +13,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SpellAbilityCastMode;
-import mage.constants.TimingRule;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -86,8 +83,7 @@ public class MorphAbility extends SpellAbility {
         this.morphCosts.add(morphCost);
         this.megamorph = megamorph;
         this.setSpellAbilityCastMode(SpellAbilityCastMode.MORPH);
-        //this.setSpellAbilityType(SpellAbilityType.FACE_DOWN_CREATURE);
-        this.setWorksFaceDown(true);
+        this.setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
         Ability ability = new SimpleStaticAbility(new BecomesFaceDownCreatureEffect(
                 morphCosts, (megamorph ? FaceDownType.MEGAMORPHED : FaceDownType.MORPHED)));
         ability.setWorksFaceDown(true);

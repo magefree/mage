@@ -281,11 +281,8 @@ public abstract class AbilityImpl implements Ability {
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
-        if (isMainPartAbility && !activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)) {
-            if (getAbilityType() == AbilityType.SPELL
-                    && ((SpellAbility) this).getSpellAbilityType() == SpellAbilityType.FACE_DOWN_CREATURE) {
-                return false;
-            }
+        if (isMainPartAbility) {
+            activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game);
         }
 
         // 117.6. Some mana costs contain no mana symbols. This represents an unpayable cost. An ability can
