@@ -14,20 +14,12 @@ import java.util.UUID;
  */
 public class PhaseOutTargetEffect extends OneShotEffect {
 
-    protected final String targetDescription;
-
     public PhaseOutTargetEffect() {
-        this((String) null);
-    }
-
-    public PhaseOutTargetEffect(String targetDescription) {
         super(Outcome.Detriment);
-        this.targetDescription = targetDescription;
     }
 
     private PhaseOutTargetEffect(final PhaseOutTargetEffect effect) {
         super(effect);
-        this.targetDescription = effect.targetDescription;
     }
 
     @Override
