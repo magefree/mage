@@ -44,7 +44,7 @@ public final class CharixTheRagingIsle extends CardImpl {
 
         // {3}: Charix gets +X/-X until end of turn, where X is the number of Islands you control.
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
-                xValue, xValue2, Duration.EndOfTurn, true
+                xValue, xValue2, Duration.EndOfTurn
         ).setText("{this} gets +X/-X until end of turn, where X is the number of Islands you control"), new GenericManaCost(3)));
     }
 

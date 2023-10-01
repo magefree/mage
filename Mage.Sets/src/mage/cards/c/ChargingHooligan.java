@@ -55,7 +55,7 @@ public final class ChargingHooligan extends CardImpl {
 
         // Whenever Charging Hooligan attacks, it gets +1/+0 until end of turn for each attacking creature. If a Rat is attacking, Charging Hooligan gains trample until end of turn.
         Ability ability = new AttacksTriggeredAbility(
-                new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it")
+                new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, "it")
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(

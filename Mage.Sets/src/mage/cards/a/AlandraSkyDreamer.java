@@ -49,8 +49,7 @@ public final class AlandraSkyDreamer extends CardImpl {
                 new BoostSourceEffect(
                         CardsInControllerHandCount.instance,
                         CardsInControllerHandCount.instance,
-                        Duration.EndOfTurn,
-                        true
+                        Duration.EndOfTurn
                 ).setText("{this}"),
                 false,
                 5
