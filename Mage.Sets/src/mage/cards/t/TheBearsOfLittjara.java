@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class TheBearsOfLittjara extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent(
-            SubType.SHAPESHIFTER, "any number of target Shapeshifter creatures you control"
+            SubType.SHAPESHIFTER, "Shapeshifter creatures you control"
     );
 
     public TheBearsOfLittjara(UUID ownerId, CardSetInfo setInfo) {
