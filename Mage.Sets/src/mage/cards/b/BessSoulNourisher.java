@@ -53,7 +53,7 @@ public class BessSoulNourisher extends CardImpl {
         DynamicValue xValue = new CountersSourceCount(CounterType.P1P1);
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(
                 xValue, xValue, Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURE, true, true
+                StaticFilters.FILTER_PERMANENT_CREATURE, true
         ).setText("each other creature you control with base power and toughness 1/1 " +
                 "gets +X/+X until end of turn, where X is the number of +1/+1 counters on {this}"),
                 false));

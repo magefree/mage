@@ -31,7 +31,7 @@ public final class WildBeastmaster extends CardImpl {
 
         // Whenever Wild Beastmaster attacks, each other creature you control gets +X/+X until end of turn, where X is Wild Beastmaster's power.
         SourcePermanentPowerCount creaturePower = new SourcePermanentPowerCount();
-        BoostControlledEffect effect = new BoostControlledEffect(creaturePower, creaturePower, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true, true);
+        BoostControlledEffect effect = new BoostControlledEffect(creaturePower, creaturePower, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true);
         effect.setText(EFFECT_TEXT);
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }

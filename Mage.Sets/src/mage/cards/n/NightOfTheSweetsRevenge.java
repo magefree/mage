@@ -52,7 +52,7 @@ public final class NightOfTheSweetsRevenge extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new BoostControlledEffect(
                         xValue, xValue, Duration.EndOfTurn,
-                        StaticFilters.FILTER_PERMANENT_CREATURES, false, true
+                        StaticFilters.FILTER_PERMANENT_CREATURES, false
                 ).setText("creatures you control get +X/+X until end of turn, where X is the number of Foods you control"),
                 new ManaCostsImpl<>("{5}{G}{G}")
         ).addHint(hint);

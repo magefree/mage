@@ -45,24 +45,13 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, excludeSource, true);
-    }
-
-    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        this(power, toughness, duration, filter, excludeSource, false);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, excludeSource);
     }
 
     /**
-     * @param power
-     * @param toughness
-     * @param duration
-     * @param filter        AnotherPredicate is not working, you need to use the
-     *                      excludeSource option
-     * @param lockedIn      if true, power and toughness will be calculated only
-     *                      once, when the ability resolves
-     * @param excludeSource
+     * Note: use excludeSource rather than AnotherPredicate
      */
-    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, boolean lockedIn) {
+    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
