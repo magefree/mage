@@ -2,7 +2,6 @@ package mage.abilities.effects.common.continuous;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -11,7 +10,7 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -28,7 +27,7 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
     private DynamicValue toughness;
 
     public SetBasePowerToughnessAllEffect(int power, int toughness, Duration duration) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, new FilterCreaturePermanent("Creatures"));
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_CREATURES);
     }
 
     public SetBasePowerToughnessAllEffect(int power, int toughness, Duration duration, FilterPermanent filter) {
@@ -40,6 +39,10 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
         this.power = power;
         this.toughness = toughness;
         this.filter = filter;
+        this.staticText = filter.getMessage()
+                + (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each ") ? " has " : " have ")
+                + "base power and toughness " + power + '/' + toughness
+                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 
     protected SetBasePowerToughnessAllEffect(final SetBasePowerToughnessAllEffect effect) {
@@ -89,23 +92,4 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage());
-        if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each ")) {
-            sb.append(" has base power and toughness ");
-        } else {
-            sb.append(" have base power and toughness ");
-        }
-        sb.append(power).append('/').append(toughness);
-        if (!duration.toString().isEmpty()) {
-            sb.append(' ').append(duration.toString());
-        }
-        return sb.toString();
-    }
 }
