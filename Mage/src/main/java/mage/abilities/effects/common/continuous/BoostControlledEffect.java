@@ -27,7 +27,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     private DynamicValue toughness;
     protected FilterCreaturePermanent filter;
     protected boolean excludeSource;
-    protected boolean lockedIn = false;
 
     public BoostControlledEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_CREATURES, false);
@@ -69,7 +68,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         this.toughness = toughness;
         this.filter = (filter == null ? StaticFilters.FILTER_PERMANENT_CREATURES : filter);
         this.excludeSource = excludeSource;
-        this.lockedIn = lockedIn;
         setText();
     }
 
@@ -79,7 +77,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         this.toughness = effect.toughness;
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
-        this.lockedIn = effect.lockedIn;
     }
 
     @Override
@@ -139,11 +136,4 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         staticText = sb.toString();
     }
 
-    public void setRule(String rule) {
-        staticText = rule;
-    }
-
-    public void setLockedIn(boolean lockedIn) {
-        this.lockedIn = lockedIn;
-    }
 }
