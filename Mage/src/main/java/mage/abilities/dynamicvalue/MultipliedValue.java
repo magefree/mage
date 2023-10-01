@@ -18,7 +18,7 @@ public class MultipliedValue implements DynamicValue {
         this.multiplier = multiplier;
     }
 
-    MultipliedValue(final MultipliedValue dynamicValue) {
+    private MultipliedValue(final MultipliedValue dynamicValue) {
         this.value = dynamicValue.value.copy();
         this.multiplier = dynamicValue.multiplier;
     }

@@ -1,17 +1,16 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.MutateAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -19,6 +18,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +67,7 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control mutates, ");
     }
 
-    public EssenceSymbioteTriggeredAbility(final mage.cards.e.EssenceSymbioteTriggeredAbility ability) {
+    private EssenceSymbioteTriggeredAbility(final EssenceSymbioteTriggeredAbility ability) {
         super(ability);
     }
 

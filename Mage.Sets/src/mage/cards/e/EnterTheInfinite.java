@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -21,6 +20,8 @@ import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -31,7 +32,7 @@ public final class EnterTheInfinite extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}{U}{U}");
 
         // Draw cards equal to the number of cards in your library,
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new CardsInControllerLibraryCount()));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(CardsInControllerLibraryCount.instance));
         //then put a card from your hand on top of your library.
         this.getSpellAbility().addEffect(new PutCardOnLibraryEffect());
         //You have no maximum hand size until your next turn.
@@ -48,7 +49,8 @@ public final class EnterTheInfinite extends CardImpl {
     }
 }
 
-class CardsInControllerLibraryCount implements DynamicValue {
+enum CardsInControllerLibraryCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -63,7 +65,7 @@ class CardsInControllerLibraryCount implements DynamicValue {
 
     @Override
     public CardsInControllerLibraryCount copy() {
-        return new CardsInControllerLibraryCount();
+        return this;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class IntPlusDynamicValue implements DynamicValue {
         this.baseValue = baseValue;
     }
 
-    IntPlusDynamicValue(final IntPlusDynamicValue dynamicValue) {
+    private IntPlusDynamicValue(final IntPlusDynamicValue dynamicValue) {
         this.value = dynamicValue.value;
         this.baseValue = dynamicValue.baseValue;
     }

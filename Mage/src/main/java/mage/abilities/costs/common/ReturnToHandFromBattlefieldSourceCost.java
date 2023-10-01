@@ -1,7 +1,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -9,6 +8,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -19,7 +20,7 @@ public class ReturnToHandFromBattlefieldSourceCost extends CostImpl {
         this.text = "return {this} to its owner's hand";
     }
 
-    public ReturnToHandFromBattlefieldSourceCost(ReturnToHandFromBattlefieldSourceCost cost) {
+    private ReturnToHandFromBattlefieldSourceCost(final ReturnToHandFromBattlefieldSourceCost cost) {
         super(cost);
     }
 

@@ -48,7 +48,7 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
         super(Duration.WhileOnStack, Outcome.Detriment);
     }
 
-    SplitSecondEffect(final SplitSecondEffect effect) {
+    private SplitSecondEffect(final SplitSecondEffect effect) {
         super(effect);
     }
 

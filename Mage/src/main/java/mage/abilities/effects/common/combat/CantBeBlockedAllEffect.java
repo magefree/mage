@@ -24,7 +24,7 @@ public class CantBeBlockedAllEffect extends RestrictionEffect {
         }
     }
 
-    public CantBeBlockedAllEffect(CantBeBlockedAllEffect effect) {
+    protected CantBeBlockedAllEffect(final CantBeBlockedAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

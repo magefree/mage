@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -33,7 +32,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
         this.counter = counter;
     }
 
-    public RemoveCounterTargetEffect(RemoveCounterTargetEffect effect) {
+    private RemoveCounterTargetEffect(final RemoveCounterTargetEffect effect) {
         super(effect);
         this.counter = (effect.counter == null ? null : effect.counter.copy());
     }

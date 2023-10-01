@@ -1,7 +1,6 @@
 
 package mage.abilities.decorator;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -12,6 +11,8 @@ import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  * The card / permanent has the ability only, if the condition is true.
@@ -42,7 +43,7 @@ public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
         this.staticText = rule;
     }
 
-    public ConditionalGainActivatedAbility(ConditionalGainActivatedAbility ability) {
+    private ConditionalGainActivatedAbility(final ConditionalGainActivatedAbility ability) {
         super(ability);
         this.staticText = ability.staticText;
     }

@@ -43,7 +43,7 @@ public final class SpinyStarfish extends CardImpl {
                         new BeginningOfEndStepTriggeredAbility(
                                 new CreateTokenEffect(
                                         new StarfishToken(),
-                                        new SpinyStarfishDynamicValue()),
+                                        SpinyStarfishDynamicValue.instance),
                                 TargetController.ANY,
                                 false),
                         SpinyStarfishCondition.instance,
@@ -112,7 +112,8 @@ class SpinyStarfishWatcher extends Watcher {
 
 }
 
-class SpinyStarfishDynamicValue implements DynamicValue {
+enum SpinyStarfishDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -126,7 +127,7 @@ class SpinyStarfishDynamicValue implements DynamicValue {
 
     @Override
     public SpinyStarfishDynamicValue copy() {
-        return new SpinyStarfishDynamicValue();
+        return this;
     }
 
     @Override

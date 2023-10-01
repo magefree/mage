@@ -40,7 +40,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         this.addTarget(target);
     }
 
-    public SacrificeTargetCost(SacrificeTargetCost cost) {
+    protected SacrificeTargetCost(final SacrificeTargetCost cost) {
         super(cost);
         for (Permanent permanent : cost.permanents) {
             this.permanents.add(permanent.copy());

@@ -5,7 +5,6 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -18,7 +17,7 @@ public class ControllerPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you play a land, ");
     }
 
-    public ControllerPlaysLandTriggeredAbility(ControllerPlaysLandTriggeredAbility ability) {
+    private ControllerPlaysLandTriggeredAbility(final ControllerPlaysLandTriggeredAbility ability) {
         super(ability);
     }
 

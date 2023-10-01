@@ -14,14 +14,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-
-import mage.filter.StaticFilters;
 
 /**
  * @author LePwnerer
@@ -61,7 +59,7 @@ class HostileHostelEffect extends OneShotEffect {
                 "Then if there are three or more soul counters on it, remove those counters, transform it, then untap it.";
     }
 
-    HostileHostelEffect(final mage.cards.h.HostileHostelEffect effect) {
+    private HostileHostelEffect(final HostileHostelEffect effect) {
         super(effect);
     }
 

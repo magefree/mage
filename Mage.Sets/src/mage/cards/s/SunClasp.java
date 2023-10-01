@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,6 +17,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ class SunClaspReturnEffect extends OneShotEffect {
         staticText = "Return enchanted creature to its owner's hand";
     }
 
-    public SunClaspReturnEffect(final mage.cards.s.SunClaspReturnEffect effect) {
+    private SunClaspReturnEffect(final SunClaspReturnEffect effect) {
         super(effect);
     }
 

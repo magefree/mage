@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -20,6 +19,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,70 +50,70 @@ public final class DivineIntervention extends CardImpl {
     public DivineIntervention copy() {
         return new DivineIntervention(this);
     }
+}
 
-    class DivineInterventionAbility extends TriggeredAbilityImpl {
+class DivineInterventionAbility extends TriggeredAbilityImpl {
 
-        public DivineInterventionAbility() {
-            super(Zone.BATTLEFIELD, new DivineAbilityEffect2(), false);
-        }
-
-        private DivineInterventionAbility(final DivineInterventionAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public DivineInterventionAbility copy() {
-            return new DivineInterventionAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.COUNTERS_REMOVED;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            return (event.getData().equals(CounterType.INTERVENTION.getName())
-                    && event.getTargetId().equals(this.getSourceId())
-                    && event.getPlayerId() != null
-                    && event.getPlayerId() == this.getControllerId());  // the controller of this removed the counter 
-        }
-
-        @Override
-        public String getRule() {
-            return "When you remove the last intervention counter from {this}, the game is drawn.";
-        }
+    DivineInterventionAbility() {
+        super(Zone.BATTLEFIELD, new DivineAbilityEffect2(), false);
     }
 
-    class DivineAbilityEffect2 extends OneShotEffect {
+    private DivineInterventionAbility(final DivineInterventionAbility ability) {
+        super(ability);
+    }
 
-        public DivineAbilityEffect2() {
-            super(Outcome.Neutral);
-            this.staticText = "you draw the game";
-        }
+    @Override
+    public DivineInterventionAbility copy() {
+        return new DivineInterventionAbility(this);
+    }
 
-        private DivineAbilityEffect2(final DivineAbilityEffect2 effect) {
-            super(effect);
-        }
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTERS_REMOVED;
+    }
 
-        @Override
-        public DivineAbilityEffect2 copy() {
-            return new DivineAbilityEffect2(this);
-        }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return (event.getData().equals(CounterType.INTERVENTION.getName())
+                && event.getTargetId().equals(this.getSourceId())
+                && event.getPlayerId() != null
+                && event.getPlayerId() == this.getControllerId());  // the controller of this removed the counter
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (controller != null 
-                    && sourcePermanent != null) {
-                if (game.getState().getZone(sourcePermanent.getId()) == Zone.BATTLEFIELD
-                        && sourcePermanent.getCounters(game).getCount(CounterType.INTERVENTION) == 0) {
-                    game.setDraw(controller.getId());
-                }
-                return true;
+    @Override
+    public String getRule() {
+        return "When you remove the last intervention counter from {this}, the game is drawn.";
+    }
+}
+
+class DivineAbilityEffect2 extends OneShotEffect {
+
+    DivineAbilityEffect2() {
+        super(Outcome.Neutral);
+        this.staticText = "you draw the game";
+    }
+
+    private DivineAbilityEffect2(final DivineAbilityEffect2 effect) {
+        super(effect);
+    }
+
+    @Override
+    public DivineAbilityEffect2 copy() {
+        return new DivineAbilityEffect2(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller != null
+                && sourcePermanent != null) {
+            if (game.getState().getZone(sourcePermanent.getId()) == Zone.BATTLEFIELD
+                    && sourcePermanent.getCounters(game).getCount(CounterType.INTERVENTION) == 0) {
+                game.setDraw(controller.getId());
             }
-            return false;
+            return true;
         }
+        return false;
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class FromUnderTheFloorboards extends CardImpl {
         
         // Create three 2/2 black Zombie creature tokens tapped and you gain 3 life.        
         // If From Under the Floorboards's madness cost was paid, instead create X of those tokens tapped and you gain X life.      
-        DynamicValue xValue = new FromUnderTheFloorboardsManacostVariableValue();
+        DynamicValue xValue = FromUnderTheFloorboardsManacostVariableValue.instance;
         Effect effect = new CreateTokenEffect(new ZombieToken(), xValue, true, false);
         effect.setText("Create three 2/2 black Zombie creature tokens tapped and you gain 3 life. If {this} madness cost was paid, instead create X of those tokens tapped and you gain X life");
         this.getSpellAbility().addEffect(effect);
@@ -49,7 +50,8 @@ public final class FromUnderTheFloorboards extends CardImpl {
     }
 }
 
-class FromUnderTheFloorboardsManacostVariableValue implements DynamicValue {
+enum FromUnderTheFloorboardsManacostVariableValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -62,7 +64,7 @@ class FromUnderTheFloorboardsManacostVariableValue implements DynamicValue {
 
     @Override
     public FromUnderTheFloorboardsManacostVariableValue copy() {
-        return new FromUnderTheFloorboardsManacostVariableValue();
+        return this;
     }
 
     @Override

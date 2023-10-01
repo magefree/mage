@@ -37,7 +37,7 @@ public final class MintharaMercilessSoul extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ward {X}, where X is the number of experience counters you have.
-        DynamicValue value = new MintharaMercilessSoulCount();
+        DynamicValue value = MintharaMercilessSoulCount.instance;
         Ability ability = new WardAbility(value, "the number of experience counters you have");
         this.addAbility(ability);
 
@@ -62,7 +62,8 @@ public final class MintharaMercilessSoul extends CardImpl {
     }
 }
 
-class MintharaMercilessSoulCount implements DynamicValue {
+enum MintharaMercilessSoulCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -76,7 +77,7 @@ class MintharaMercilessSoulCount implements DynamicValue {
 
     @Override
     public MintharaMercilessSoulCount copy() {
-        return new MintharaMercilessSoulCount();
+        return this;
     }
 
     @Override

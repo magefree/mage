@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -12,12 +11,14 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class StoneforgeMasterwork extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each other creature you control that shares a creature type with it.
-        StoneforgeMasterworkDynamicValue countEnchantments = new StoneforgeMasterworkDynamicValue();
+        StoneforgeMasterworkDynamicValue countEnchantments = StoneforgeMasterworkDynamicValue.instance;
         Effect effect = new BoostEquippedEffect(countEnchantments, countEnchantments);
         effect.setText("Equipped creature gets +1/+1 for each other creature you control that shares a creature type with it");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
@@ -49,7 +50,8 @@ public final class StoneforgeMasterwork extends CardImpl {
     }
 }
 
-class StoneforgeMasterworkDynamicValue implements DynamicValue {
+enum StoneforgeMasterworkDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -72,7 +74,7 @@ class StoneforgeMasterworkDynamicValue implements DynamicValue {
 
     @Override
     public StoneforgeMasterworkDynamicValue copy() {
-        return new StoneforgeMasterworkDynamicValue();
+        return this;
     }
 
     @Override

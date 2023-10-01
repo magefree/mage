@@ -24,7 +24,7 @@ public class LimitedDynamicValue implements DynamicValue {
         this.limit = limit;
     }
 
-    LimitedDynamicValue(final LimitedDynamicValue dynamicValue) {
+    protected LimitedDynamicValue(final LimitedDynamicValue dynamicValue) {
         this.value = dynamicValue.value;
         this.limit = dynamicValue.limit;
     }

@@ -13,7 +13,7 @@ public class EndTurnEffect extends OneShotEffect {
         staticText = "End the turn. <i>(Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and \"this turn\" and \"until end of turn\" effects end.)</i>";
     }
 
-    public EndTurnEffect(EndTurnEffect effect) {
+    private EndTurnEffect(final EndTurnEffect effect) {
         super(effect);
     }
 

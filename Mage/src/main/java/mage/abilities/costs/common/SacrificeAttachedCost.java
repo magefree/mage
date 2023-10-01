@@ -18,7 +18,7 @@ public class SacrificeAttachedCost extends CostImpl implements SacrificeCost {
         this.text = "Sacrifice enchanted creature";
     }
 
-    public SacrificeAttachedCost(SacrificeAttachedCost cost) {
+    private SacrificeAttachedCost(final SacrificeAttachedCost cost) {
         super(cost);
     }
 

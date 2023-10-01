@@ -33,7 +33,7 @@ public class AbilitiesCostReductionControllerEffect extends CostModificationEffe
         this.excludeSource = excludeSource;
     }
 
-    public AbilitiesCostReductionControllerEffect(AbilitiesCostReductionControllerEffect effect) {
+    private AbilitiesCostReductionControllerEffect(final AbilitiesCostReductionControllerEffect effect) {
         super(effect);
         this.activatedAbility = effect.activatedAbility;
         this.amount = effect.amount;

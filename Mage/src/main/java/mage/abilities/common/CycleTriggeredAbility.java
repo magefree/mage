@@ -21,7 +21,7 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
         this(effect, false);
     }
 
-    protected CycleTriggeredAbility(CycleTriggeredAbility ability) {
+    protected CycleTriggeredAbility(final CycleTriggeredAbility ability) {
         super(ability);
     }
 

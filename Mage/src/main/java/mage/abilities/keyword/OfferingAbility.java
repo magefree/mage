@@ -56,7 +56,7 @@ public class OfferingAbility extends StaticAbility implements AlternateManaPayme
         this.addEffect(new OfferingAsThoughEffect());
     }
 
-    public OfferingAbility(OfferingAbility ability) {
+    private OfferingAbility(final OfferingAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,7 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +53,7 @@ class AbyssalPersecutorCannotWinEffect extends ContinuousRuleModifyingEffectImpl
         staticText = "You can't win the game and your opponents can't lose the game";
     }
 
-    AbyssalPersecutorCannotWinEffect ( final AbyssalPersecutorCannotWinEffect effect ) {
+    private AbyssalPersecutorCannotWinEffect(final AbyssalPersecutorCannotWinEffect effect) {
         super(effect);
     }
 

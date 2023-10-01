@@ -45,31 +45,37 @@ public final class DroidFactory extends CardImpl {
         return new DroidFactory(this);
     }
 
-    public final class DroidFactoryAbility extends ActivatedAbilityImpl {
+}
 
-        private DroidFactoryAbility(final DroidFactoryAbility ability) {
-            super(ability);
-        }
+class DroidFactoryAbility extends ActivatedAbilityImpl {
 
-        public DroidFactoryAbility() {
-            super(Zone.BATTLEFIELD, null);
-            addCost(new TapSourceCost());
-            addCost(new SacrificeSourceCost());
-            FilterCard filter = new FilterCard("basic Plains, Island or Swamp");
-            filter.add(CardType.LAND.getPredicate());
-            List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
-            subtypePredicates.add(SubType.SWAMP.getPredicate());
-            subtypePredicates.add(SubType.PLAINS.getPredicate());
-            subtypePredicates.add(SubType.ISLAND.getPredicate());
-            filter.add(Predicates.or(subtypePredicates));
-            filter.add(SuperType.BASIC.getPredicate());
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            addEffect(new SearchLibraryPutInPlayEffect(target, true));
-        }
+    private static final FilterCard filter = new FilterCard("basic Plains, Island or Swamp");
 
-        @Override
-        public DroidFactoryAbility copy() {
-            return new DroidFactoryAbility(this);
-        }
+    static {
+        filter.add(CardType.LAND.getPredicate());
+        List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
+        filter.add(Predicates.or(
+                SubType.SWAMP.getPredicate(),
+                SubType.PLAINS.getPredicate(),
+                SubType.ISLAND.getPredicate()
+        ));
+        filter.add(SuperType.BASIC.getPredicate());
+    }
+
+    private DroidFactoryAbility(final DroidFactoryAbility ability) {
+        super(ability);
+    }
+
+    public DroidFactoryAbility() {
+        super(Zone.BATTLEFIELD, null);
+        addCost(new TapSourceCost());
+        addCost(new SacrificeSourceCost());
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        addEffect(new SearchLibraryPutInPlayEffect(target, true));
+    }
+
+    @Override
+    public DroidFactoryAbility copy() {
+        return new DroidFactoryAbility(this);
     }
 }

@@ -11,6 +11,8 @@ import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.LockedInDynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -287,7 +289,7 @@ public class VerifyCardDataTest {
         checkWrongAbilitiesTextStart();
 
         int cardIndex = 0;
-        for (Card card : CardScanner.getAllCards()) {
+        for (Card card : CardScanner.getAllCards(false)) {
             cardIndex++;
             if (card instanceof CardWithHalves) {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
@@ -1574,13 +1576,25 @@ public class VerifyCardDataTest {
     }
 
     private void check(Card card, int cardIndex) {
-        MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
-        if (ref != null) {
-            checkAll(card, ref, cardIndex);
-        } else if (!CHECK_ONLY_ABILITIES_TEXT) {
-            warn(card, "Can't find card in mtgjson to verify");
+        boolean isCustomSet = CardScanner.isSetCustom(card.getExpansionSetCode());
+        if (!isCustomSet) {
+            MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
+            if (ref != null) {
+                checkAll(card, ref, cardIndex);
+            } else {
+                warn(card, "Can't find card in mtgjson to verify");
+            }
+        }
+        checkAllIncludingCustom(card);
+    }
+
+    // We still want to do some checks even when there is no MtgJson reference.
+    private void checkAllIncludingCustom(Card card) {
+        if (!CHECK_ONLY_ABILITIES_TEXT) {
+            checkCardCanBeCopied(card);
         }
     }
+
 
     private boolean contains(Collection<String> options, String value) {
         return options != null && options.contains(value);
@@ -1608,7 +1622,6 @@ public class VerifyCardDataTest {
             checkRarityAndBasicLands(card, ref);
             checkMissingAbilities(card, ref);
             checkWrongSymbolsInRules(card);
-            checkCardCanBeCopied(card);
         }
         checkWrongAbilitiesText(card, ref, cardIndex);
     }
@@ -1695,7 +1708,6 @@ public class VerifyCardDataTest {
                     }
                 }
 
-                //System.out.println(msg);
                 Class class1 = obj1.getClass();
                 Class class2 = obj2.getClass();
                 do {
@@ -1706,6 +1718,7 @@ public class VerifyCardDataTest {
                         fail(originalCard, "copy", "not same class for " + msg + "<" + obj1.getClass() + ">" + "]");
                         return;
                     }
+										
                     if (class1.equals(ArrayList.class)) {
                         List list1 = (ArrayList) obj1;
                         List list2 = (ArrayList) obj2;
@@ -1721,7 +1734,68 @@ public class VerifyCardDataTest {
                         return;
                     }
 
+                    if (!class1.getName().startsWith("java")
+                            && !(obj1 instanceof Condition)
+                            && !(class1.getName().equals(StaticValue.class.getName()))
+                            && !(class1.getName().equals(LockedInDynamicValue.class.getName()))) {
 
+                        // ------------------------ //
+                        // Checking the copy method //
+                        // ------------------------ //
+                        if (!Modifier.isAbstract(class1.getModifiers())) {
+                            try {
+                                Method copyMethod = class1.getMethod("copy");
+                                if (!copyMethod.getReturnType().getName().equals(class1.getName())) {
+                                    // To fix: have the copy method return the class type.
+                                    fail(originalCard, "copy", "copy method does not return the same class " + msg + "<" + class1.getName() + ">" + "]");
+                                }
+                                if (copyMethod.getParameterCount() != 0) {
+                                    // To fix: remove parameters from copy method.
+                                    fail(originalCard, "copy", "copy method has parameters, but should have none " + msg + "<" + class1.getName() + ">" + "]");
+                                }
+                            } catch (NoSuchMethodException e) {
+                                // To fix: add a copy method to the class.
+                                fail(originalCard, "copy", "copy method not found " + msg + "<" + class1.getName() + ">" + "]");
+                            }
+                        }
+
+                        // ----------------------------- //
+                        // Checking the copy constructor //
+                        // ----------------------------- //
+                        boolean foundCopyConstructor = false;
+                        for (Constructor constructor : class1.getDeclaredConstructors()) {
+                            constructor.setAccessible(true);
+                            if (constructor.getParameterCount() != 1) {
+                                continue; // Not a 1 parameter constructor => not the copy constructor
+                            }
+
+                            Parameter parameter = constructor.getParameters()[0];
+                            if (!parameter.getType().getName().equals(class1.getName())) {
+                                continue; // Another 1 parameter constructor.
+                            }
+                            // Ideally, we would check 'final' there, but could not find how to get that.
+
+                            int modifier = constructor.getModifiers();
+                            if (!Modifier.isProtected(modifier) && !Modifier.isPrivate(modifier)) {
+                                // To fix: set the copy constructor private (in card file) or protected (when common class)
+                                fail(originalCard, "copy", "copy constructor should be private or protected " + msg + "<" + class1.getName() + ">" + "]");
+                            }
+
+                            if (foundCopyConstructor) {
+                                // Probably a bug with reflection code above.
+                                fail(originalCard, "copy", "multiple copy constructor were found " + msg + "<" + class1.getName() + ">" + "]");
+                            }
+                            foundCopyConstructor = true;
+                        }
+                        if (!foundCopyConstructor) {
+                            // To fix: add a copy constructor.
+                            fail(originalCard, "copy", "copy constructor is missing " + msg + "<" + class1.getName() + ">" + "]");
+                        }
+                    }
+
+                    // ----------------- //
+                    // Checking subfield //
+                    // ----------------- //
                     List<Field> ability2Fields = Arrays.stream(class2.getDeclaredFields()).collect(Collectors.toList());
 
                     // Special fields for CardImpl.class

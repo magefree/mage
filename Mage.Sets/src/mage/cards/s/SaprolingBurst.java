@@ -1,9 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -24,6 +21,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingBurstToken;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

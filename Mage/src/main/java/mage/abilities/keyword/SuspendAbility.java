@@ -196,7 +196,7 @@ public class SuspendAbility extends SpecialAction {
         return exileId;
     }
 
-    public SuspendAbility(SuspendAbility ability) {
+    private SuspendAbility(final SuspendAbility ability) {
         super(ability);
         this.ruleText = ability.getRule();
         this.gainedTemporary = ability.gainedTemporary;
@@ -286,7 +286,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
         setRuleVisible(false);
     }
 
-    public SuspendPlayCardAbility(SuspendPlayCardAbility ability) {
+    private SuspendPlayCardAbility(final SuspendPlayCardAbility ability) {
         super(ability);
     }
 

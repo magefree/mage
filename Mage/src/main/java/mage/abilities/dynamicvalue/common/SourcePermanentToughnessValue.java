@@ -7,26 +7,12 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.io.ObjectStreamException;
-
 /**
  * @author LevelX2
  */
 
-public class SourcePermanentToughnessValue implements DynamicValue {
-
-    private static final SourcePermanentToughnessValue instance = new SourcePermanentToughnessValue();
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    public static SourcePermanentToughnessValue getInstance() {
-        return instance;
-    }
-
-    private SourcePermanentToughnessValue() {
-    }
+public enum SourcePermanentToughnessValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -42,7 +28,7 @@ public class SourcePermanentToughnessValue implements DynamicValue {
 
     @Override
     public SourcePermanentToughnessValue copy() {
-        return new SourcePermanentToughnessValue();
+        return this;
     }
 
     @Override

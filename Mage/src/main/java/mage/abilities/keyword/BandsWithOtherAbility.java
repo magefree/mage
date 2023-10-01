@@ -41,7 +41,7 @@ public class BandsWithOtherAbility extends StaticAbility {
         this.bandingName = bandingName;
     }
 
-    public BandsWithOtherAbility(BandsWithOtherAbility ability) {
+    private BandsWithOtherAbility(final BandsWithOtherAbility ability) {
         super(ability);
         this.subtype = ability.subtype;
         this.supertype = ability.supertype;

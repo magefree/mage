@@ -21,7 +21,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
         staticText = "remove " + counter.getDescription() + " from {this}";
     }
 
-    public RemoveCounterSourceEffect(RemoveCounterSourceEffect effect) {
+    protected RemoveCounterSourceEffect(final RemoveCounterSourceEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
     }

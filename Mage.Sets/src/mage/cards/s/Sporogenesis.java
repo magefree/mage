@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -26,6 +25,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public final class Sporogenesis extends CardImpl {
 class SporogenesisTriggeredAbility extends TriggeredAbilityImpl {
 
     public SporogenesisTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(), new SporogenesisCount()), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(), SporogenesisCount.instance), false);
     }
 
     private SporogenesisTriggeredAbility(final SporogenesisTriggeredAbility ability) {
@@ -106,7 +107,8 @@ class SporogenesisTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class SporogenesisCount implements DynamicValue {
+enum SporogenesisCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -119,7 +121,7 @@ class SporogenesisCount implements DynamicValue {
 
     @Override
     public SporogenesisCount copy() {
-        return new SporogenesisCount();
+        return this;
     }
 
     @Override

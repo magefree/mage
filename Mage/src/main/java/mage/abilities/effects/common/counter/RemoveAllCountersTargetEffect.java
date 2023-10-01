@@ -22,7 +22,7 @@ public class RemoveAllCountersTargetEffect extends OneShotEffect {
         staticText = "remove all " + counterType.getName() + " counters from it.";
     }
 
-    public RemoveAllCountersTargetEffect(RemoveAllCountersTargetEffect effect) {
+    private RemoveAllCountersTargetEffect(final RemoveAllCountersTargetEffect effect) {
         super(effect);
         this.counterType = effect.counterType;
     }

@@ -33,7 +33,7 @@ public final class RuneflareTrap extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{R}"), RuneflareTrapCondition.instance), new CardsAmountDrawnThisTurnWatcher());
 
         // Runeflare Trap deals damage to target player equal to the number of cards in that player's hand.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(TargetPlayerCardsInHandCount.instance));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
     }
@@ -48,7 +48,8 @@ public final class RuneflareTrap extends CardImpl {
     }
 }
 
-class TargetPlayerCardsInHandCount implements DynamicValue {
+enum TargetPlayerCardsInHandCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -62,7 +63,7 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
 
     @Override
     public TargetPlayerCardsInHandCount copy() {
-        return new TargetPlayerCardsInHandCount();
+        return this;
     }
 
     @Override

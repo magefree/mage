@@ -19,7 +19,7 @@ public class YouControlYourOpponentsWhileSearchingReplacementEffect extends Repl
         staticText = "You control your opponents while they're searching their libraries";
     }
 
-    YouControlYourOpponentsWhileSearchingReplacementEffect(final YouControlYourOpponentsWhileSearchingReplacementEffect effect) {
+    private YouControlYourOpponentsWhileSearchingReplacementEffect(final YouControlYourOpponentsWhileSearchingReplacementEffect effect) {
         super(effect);
     }
 

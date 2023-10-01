@@ -40,7 +40,7 @@ public final class RighteousAuthority extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each card in its controller's hand.
-        CardsInEnchantedControllerHandCount boost = new CardsInEnchantedControllerHandCount();
+        CardsInEnchantedControllerHandCount boost = CardsInEnchantedControllerHandCount.instance;
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(boost, boost, Duration.WhileOnBattlefield)));
 
         // At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
@@ -58,7 +58,8 @@ public final class RighteousAuthority extends CardImpl {
 }
 
 
-class CardsInEnchantedControllerHandCount implements DynamicValue {
+enum CardsInEnchantedControllerHandCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -79,7 +80,7 @@ class CardsInEnchantedControllerHandCount implements DynamicValue {
 
     @Override
     public CardsInEnchantedControllerHandCount copy() {
-        return new CardsInEnchantedControllerHandCount();
+        return this;
     }
 
     @Override

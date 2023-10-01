@@ -37,7 +37,7 @@ public class CantBlockUnlessPayManaAllEffect extends PayCostToAttackBlockEffectI
                 + " for each blocking creature they control";
     }
 
-    public CantBlockUnlessPayManaAllEffect(CantBlockUnlessPayManaAllEffect effect) {
+    protected CantBlockUnlessPayManaAllEffect(final CantBlockUnlessPayManaAllEffect effect) {
         super(effect);
         this.filterCreaturePermanent = effect.filterCreaturePermanent;
     }

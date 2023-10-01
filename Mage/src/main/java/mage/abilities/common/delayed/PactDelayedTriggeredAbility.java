@@ -19,7 +19,7 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("<br>At the beginning of your next upkeep, ");
     }
 
-    public PactDelayedTriggeredAbility(PactDelayedTriggeredAbility ability) {
+    private PactDelayedTriggeredAbility(final PactDelayedTriggeredAbility ability) {
         super(ability);
     }
 

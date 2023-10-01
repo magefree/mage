@@ -53,7 +53,7 @@ public final class KalemneDiscipleOfIroas extends CardImpl {
         ), filterSpell, false));
 
         // Kalemne, Disciple of Iroas gets +1/+1 for each experience counter you have.
-        DynamicValue value = new SourceControllerExperienceCountersCount();
+        DynamicValue value = SourceControllerExperienceCountersCount.instance;
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
     }
 
@@ -67,7 +67,8 @@ public final class KalemneDiscipleOfIroas extends CardImpl {
     }
 }
 
-class SourceControllerExperienceCountersCount implements DynamicValue {
+enum SourceControllerExperienceCountersCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -81,7 +82,7 @@ class SourceControllerExperienceCountersCount implements DynamicValue {
 
     @Override
     public SourceControllerExperienceCountersCount copy() {
-        return new SourceControllerExperienceCountersCount();
+        return this;
     }
 
     @Override

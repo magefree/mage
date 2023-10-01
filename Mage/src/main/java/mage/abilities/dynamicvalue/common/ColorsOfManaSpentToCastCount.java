@@ -1,6 +1,5 @@
 package mage.abilities.dynamicvalue.common;
 
-import java.io.ObjectStreamException;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -10,19 +9,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
+import java.io.ObjectStreamException;
+
 /**
- *
  * @author LevelX2
  */
-public class ColorsOfManaSpentToCastCount implements DynamicValue {
-
-    private static final ColorsOfManaSpentToCastCount instance = new ColorsOfManaSpentToCastCount();
+public enum ColorsOfManaSpentToCastCount implements DynamicValue {
+    instance;
 
     private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    public static ColorsOfManaSpentToCastCount getInstance() {
         return instance;
     }
 
@@ -60,7 +55,7 @@ public class ColorsOfManaSpentToCastCount implements DynamicValue {
 
     @Override
     public ColorsOfManaSpentToCastCount copy() {
-        return new ColorsOfManaSpentToCastCount();
+        return this;
     }
 
     @Override

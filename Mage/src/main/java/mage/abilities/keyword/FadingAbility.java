@@ -72,7 +72,7 @@ class FadingEffect extends OneShotEffect {
         staticText = "remove a fade counter from {this}. If you can't, sacrifice it";
     }
 
-    FadingEffect(final FadingEffect effect) {
+    private FadingEffect(final FadingEffect effect) {
         super(effect);
     }
 

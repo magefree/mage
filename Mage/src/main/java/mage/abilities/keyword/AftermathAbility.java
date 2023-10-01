@@ -127,7 +127,7 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
         this.staticText = "Exile it afterwards.";
     }
 
-    AftermathExileAsResolvesFromGraveyard(AftermathExileAsResolvesFromGraveyard effect) {
+    private AftermathExileAsResolvesFromGraveyard(final AftermathExileAsResolvesFromGraveyard effect) {
         super(effect);
     }
 

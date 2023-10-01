@@ -1,10 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,6 +11,11 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class MoralityShift extends CardImpl {
 
 class MoralityShiftEffect extends OneShotEffect {
 
-   MoralityShiftEffect() {
+    MoralityShiftEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Exchange your graveyard and library. Then shuffle your library.";
     }

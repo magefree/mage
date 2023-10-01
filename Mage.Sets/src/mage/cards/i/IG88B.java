@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public final class IG88B extends CardImpl {
 
 class CountersOnDefendingPlayerCreaturesCount implements DynamicValue {
 
-    private CounterType counterType;
+    private final CounterType counterType;
 
     public CountersOnDefendingPlayerCreaturesCount(CounterType counterType) {
         this.counterType = counterType;
@@ -76,9 +77,14 @@ class CountersOnDefendingPlayerCreaturesCount implements DynamicValue {
         return count;
     }
 
+
+    private CountersOnDefendingPlayerCreaturesCount(final CountersOnDefendingPlayerCreaturesCount value) {
+        this.counterType = value.counterType;
+    }
+
     @Override
     public CountersOnDefendingPlayerCreaturesCount copy() {
-        return new CountersOnDefendingPlayerCreaturesCount(counterType);
+        return new CountersOnDefendingPlayerCreaturesCount(this);
     }
 
     @Override

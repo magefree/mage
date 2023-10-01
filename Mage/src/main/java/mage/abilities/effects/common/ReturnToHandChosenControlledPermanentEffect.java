@@ -21,7 +21,7 @@ public class ReturnToHandChosenControlledPermanentEffect extends ReturnToHandCho
         super(filter, number);
     }
 
-    public ReturnToHandChosenControlledPermanentEffect(ReturnToHandChosenControlledPermanentEffect effect) {
+    protected ReturnToHandChosenControlledPermanentEffect(final ReturnToHandChosenControlledPermanentEffect effect) {
         super(effect);
     }
 

@@ -16,7 +16,7 @@ public class CantBeCounteredSourceAbility extends StaticAbility {
         super(Zone.STACK, new CantBeCounteredSourceEffect());
     }
 
-    public CantBeCounteredSourceAbility(CantBeCounteredSourceAbility ability) {
+    protected CantBeCounteredSourceAbility(final CantBeCounteredSourceAbility ability) {
         super(ability);
     }
 

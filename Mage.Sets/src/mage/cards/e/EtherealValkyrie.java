@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -9,13 +8,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForetellAbility;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.ModalDoubleFacedCardHalf;
-import mage.cards.SplitCard;
+import mage.abilities.keyword.ForetellAddCostEffect;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -25,6 +19,8 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -147,7 +143,7 @@ class EtherealValkyrieEffect extends OneShotEffect {
             foretellAbility.setControllerId(exileCard.getOwnerId());
             game.getState().addOtherAbility(exileCard, foretellAbility);
             foretellAbility.activate(game, true);
-            ContinuousEffect effect = foretellAbility.new ForetellAddCostEffect(new MageObjectReference(exileCard, game));
+            ContinuousEffect effect = new ForetellAddCostEffect(new MageObjectReference(exileCard, game));
             game.addEffect(effect, copiedSource);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FORETOLD, exileCard.getId(), null, null));
         }

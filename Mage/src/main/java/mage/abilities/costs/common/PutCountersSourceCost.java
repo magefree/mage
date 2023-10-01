@@ -1,7 +1,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -9,6 +8,8 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public class PutCountersSourceCost extends CostImpl {
 
     }
 
-    public PutCountersSourceCost(PutCountersSourceCost cost) {
+    private PutCountersSourceCost(final PutCountersSourceCost cost) {
         super(cost);
         this.counter = cost.counter;
         this.amount = cost.amount;

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,6 +11,8 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ class DarkSuspicionsEffect extends OneShotEffect {
         staticText = "that player loses X life, where X is the number of cards in that player's hand minus the number of cards in your hand";
     }
 
-    public DarkSuspicionsEffect(final mage.cards.d.DarkSuspicionsEffect effect) {
+    private DarkSuspicionsEffect(final DarkSuspicionsEffect effect) {
         super(effect);
     }
 

@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class GlintingCreeper extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ColorsOfManaSpentToCastCount.getInstance(), 2);
+    private static final DynamicValue xValue = new MultipliedValue(ColorsOfManaSpentToCastCount.instance, 2);
 
     public GlintingCreeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

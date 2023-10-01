@@ -20,7 +20,7 @@ import mage.filter.StaticFilters;
  */
 public final class RoilmagesTrick extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(ColorsOfManaSpentToCastCount.getInstance());
+    private static final DynamicValue xValue = new SignInversionDynamicValue(ColorsOfManaSpentToCastCount.instance);
 
     public RoilmagesTrick(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

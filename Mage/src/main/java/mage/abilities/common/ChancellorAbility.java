@@ -70,7 +70,7 @@ class ChancellorEffect extends OneShotEffect {
         staticText = text;
     }
 
-    ChancellorEffect(ChancellorEffect effect) {
+    private ChancellorEffect(final ChancellorEffect effect) {
         super(effect);
         this.ability = effect.ability;
     }

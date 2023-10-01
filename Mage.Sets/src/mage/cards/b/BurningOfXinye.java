@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -17,6 +16,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,13 +49,13 @@ public final class BurningOfXinye extends CardImpl {
 class BurningOfXinyeEffect extends OneShotEffect{
 
     private static final FilterControlledLandPermanent filter =  new FilterControlledLandPermanent();
-    
-    public BurningOfXinyeEffect() {
+
+    BurningOfXinyeEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "You destroy four lands you control, then target opponent destroys four lands they control";
     }
 
-    public BurningOfXinyeEffect ( BurningOfXinyeEffect effect ) {
+    private BurningOfXinyeEffect(final BurningOfXinyeEffect effect) {
         super(effect);
     }
 

@@ -19,7 +19,7 @@ public class IngestAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
 
     }
 
-    public IngestAbility(IngestAbility ability) {
+    private IngestAbility(final IngestAbility ability) {
         super(ability);
     }
 

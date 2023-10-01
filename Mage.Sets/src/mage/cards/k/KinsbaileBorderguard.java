@@ -44,7 +44,7 @@ public final class KinsbaileBorderguard extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
                 new PermanentsOnBattlefieldCount(filter), true), "with a +1/+1 counter on it for each other Kithkin you control"));
         // When Kinsbaile Borderguard dies, create a 1/1 white Kithkin Soldier creature token for each counter on it.
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new KithkinSoldierToken(), new AllCountersCount())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new KithkinSoldierToken(), AllCountersCount.instance)));
     }
 
     private KinsbaileBorderguard(final KinsbaileBorderguard card) {
@@ -57,7 +57,8 @@ public final class KinsbaileBorderguard extends CardImpl {
     }
 }
 
-class AllCountersCount implements DynamicValue {
+enum AllCountersCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -74,7 +75,7 @@ class AllCountersCount implements DynamicValue {
 
     @Override
     public AllCountersCount copy() {
-        return new AllCountersCount();
+        return this;
     }
 
     @Override

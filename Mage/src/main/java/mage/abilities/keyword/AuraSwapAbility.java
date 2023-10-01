@@ -49,7 +49,7 @@ class AuraSwapEffect extends OneShotEffect {
         this.staticText = "Exchange this Aura with an Aura card in your hand.";
     }
 
-    AuraSwapEffect(final AuraSwapEffect effect) {
+    private AuraSwapEffect(final AuraSwapEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public class LicidAbility extends ActivatedAbilityImpl {
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public LicidAbility(LicidAbility ability) {
+    private LicidAbility(final LicidAbility ability) {
         super(ability);
     }
 
@@ -54,7 +54,7 @@ class LicidEffect extends OneShotEffect {
         this.staticText = "{this} loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay " + specialActionCost.getText() + " to end this effect";
     }
 
-    LicidEffect(final LicidEffect effect) {
+    private LicidEffect(final LicidEffect effect) {
         super(effect);
         this.specialActionCost = effect.specialActionCost;
     }

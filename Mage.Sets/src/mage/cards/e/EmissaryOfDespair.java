@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class EmissaryOfDespair extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Emissary of Despair deals combat damage to a player, that player loses 1 life for each artifact they control.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseLifeTargetEffect(new EmissaryOfDespairCount()), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseLifeTargetEffect(EmissaryOfDespairCount.instance), false, true));
     }
 
     private EmissaryOfDespair(final EmissaryOfDespair card) {
@@ -45,7 +46,8 @@ public final class EmissaryOfDespair extends CardImpl {
     }
 }
 
-class EmissaryOfDespairCount implements DynamicValue {
+enum EmissaryOfDespairCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -59,7 +61,7 @@ class EmissaryOfDespairCount implements DynamicValue {
 
     @Override
     public EmissaryOfDespairCount copy() {
-        return new EmissaryOfDespairCount();
+        return this;
     }
 
     @Override

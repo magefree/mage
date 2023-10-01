@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -21,6 +20,8 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -39,10 +40,10 @@ public final class WolfOfDevilsBreach extends CardImpl {
         Costs toPay = new CostsImpl<>();
         toPay.add(new ManaCostsImpl<>("{1}{R}"));
         toPay.add(new DiscardCardCost());
-        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new WolfOfDevilsBreachDiscardCostCardConvertedManaCount()), toPay,
+        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(WolfOfDevilsBreachDiscardCostCardConvertedManaCount.instance), toPay,
                 "Pay {1}{R} and discard a card to let {this} do damage to target creature or planeswalker equal to the discarded card's mana value?", true), false,
                 "Whenever {this} attacks, you may pay {1}{R} and discard a card. If you do, {this} deals damage to target creature or planeswalker "
-                + "equal to the discarded card's mana value.");
+                        + "equal to the discarded card's mana value.");
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);
     }
@@ -57,7 +58,8 @@ public final class WolfOfDevilsBreach extends CardImpl {
     }
 }
 
-class WolfOfDevilsBreachDiscardCostCardConvertedManaCount implements DynamicValue {
+enum WolfOfDevilsBreachDiscardCostCardConvertedManaCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -84,7 +86,7 @@ class WolfOfDevilsBreachDiscardCostCardConvertedManaCount implements DynamicValu
 
     @Override
     public WolfOfDevilsBreachDiscardCostCardConvertedManaCount copy() {
-        return new WolfOfDevilsBreachDiscardCostCardConvertedManaCount();
+        return this;
     }
 
     @Override

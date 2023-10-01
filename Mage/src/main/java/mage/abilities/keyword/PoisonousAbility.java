@@ -15,14 +15,14 @@ import mage.counters.CounterType;
  */
 public class PoisonousAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
 
-    int n;
+    private final int n;
 
     public PoisonousAbility(int n) {
         super(new AddPoisonCountersEffect(n), false, true);
         this.n = n;
     }
 
-    public PoisonousAbility(PoisonousAbility ability) {
+    private PoisonousAbility(final PoisonousAbility ability) {
         super(ability);
         this.n = ability.n;
     }

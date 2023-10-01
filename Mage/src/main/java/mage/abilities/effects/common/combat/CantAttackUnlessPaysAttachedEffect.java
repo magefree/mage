@@ -9,7 +9,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -25,7 +24,7 @@ public class CantAttackUnlessPaysAttachedEffect extends PayCostToAttackBlockEffe
                 + (manaCosts == null ? "" : manaCosts.getText());
     }
 
-    public CantAttackUnlessPaysAttachedEffect(CantAttackUnlessPaysAttachedEffect effect) {
+    private CantAttackUnlessPaysAttachedEffect(final CantAttackUnlessPaysAttachedEffect effect) {
         super(effect);
     }
 

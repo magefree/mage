@@ -38,7 +38,7 @@ public final class PaladinOfAtonement extends CardImpl {
                 "At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on {this}"));
 
         // When Paladin of Atonement dies, you gain life equal to it's toughness.
-        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(SourcePermanentToughnessValue.getInstance(),
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(SourcePermanentToughnessValue.instance,
                 "you gain life equal to its toughness")));
     }
 

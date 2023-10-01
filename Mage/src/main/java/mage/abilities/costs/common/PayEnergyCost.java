@@ -1,13 +1,14 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +23,7 @@ public class PayEnergyCost extends CostImpl {
         setText();
     }
 
-    public PayEnergyCost(PayEnergyCost cost) {
+    private PayEnergyCost(final PayEnergyCost cost) {
         super(cost);
         this.amount = cost.amount;
     }

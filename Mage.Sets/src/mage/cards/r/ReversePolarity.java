@@ -1,9 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -17,6 +14,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth, MTGFan & L_J
@@ -27,7 +28,7 @@ public final class ReversePolarity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{W}");
 
         // You gain X life, where X is twice the damage dealt to you so far this turn by artifacts.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new ReversePolarityAmount(), "You gain X life, where X is twice the damage dealt to you so far this turn by artifacts"));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ReversePolarityAmount.instance, "You gain X life, where X is twice the damage dealt to you so far this turn by artifacts"));
         this.getSpellAbility().addWatcher(new ReversePolarityWatcher());
     }
 
@@ -41,12 +42,13 @@ public final class ReversePolarity extends CardImpl {
     }
 }
 
-class ReversePolarityAmount implements DynamicValue {
+enum ReversePolarityAmount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         ReversePolarityWatcher watcher = game.getState().getWatcher(ReversePolarityWatcher.class);
-        if(watcher != null) {
+        if (watcher != null) {
             return watcher.getArtifactDamageReceivedThisTurn(sourceAbility.getControllerId()) * 2;
         }
         return 0;
@@ -54,7 +56,7 @@ class ReversePolarityAmount implements DynamicValue {
 
     @Override
     public ReversePolarityAmount copy() {
-        return new ReversePolarityAmount();
+        return this;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility extends Tri
         setTriggerPhrase("Whenever {this} or another " + filter.getMessage() + " dies, ");
     }
 
-    public DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility(DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility ability) {
+    private DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility(final DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }

@@ -31,7 +31,7 @@ public class ExileReturnBattlefieldOwnerNextEndStepSourceEffect extends OneShotE
                 "under its owner's control at the beginning of the next end step";
     }
 
-    public ExileReturnBattlefieldOwnerNextEndStepSourceEffect(ExileReturnBattlefieldOwnerNextEndStepSourceEffect effect) {
+    private ExileReturnBattlefieldOwnerNextEndStepSourceEffect(final ExileReturnBattlefieldOwnerNextEndStepSourceEffect effect) {
         super(effect);
         this.returnTapped = effect.returnTapped;
     }

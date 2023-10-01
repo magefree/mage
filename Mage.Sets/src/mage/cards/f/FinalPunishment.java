@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -13,6 +12,8 @@ import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -23,7 +24,7 @@ public final class FinalPunishment extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Target player loses life equal to the damage already dealt to that player this turn.
-        Effect effect = new LoseLifeTargetEffect(new FinalPunishmentAmount());
+        Effect effect = new LoseLifeTargetEffect(FinalPunishmentAmount.instance);
         effect.setText("target player loses life equal to the damage already dealt to that player this turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -40,13 +41,14 @@ public final class FinalPunishment extends CardImpl {
     }
 }
 
-class FinalPunishmentAmount implements DynamicValue {
+enum FinalPunishmentAmount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         AmountOfDamageAPlayerReceivedThisTurnWatcher watcher
-            = game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
-        if(watcher != null) {
+                = game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
+        if (watcher != null) {
             return watcher.getAmountOfDamageReceivedThisTurn(sourceAbility.getFirstTarget());
         }
         return 0;
@@ -54,7 +56,7 @@ class FinalPunishmentAmount implements DynamicValue {
 
     @Override
     public FinalPunishmentAmount copy() {
-        return new FinalPunishmentAmount();
+        return this;
     }
 
     @Override

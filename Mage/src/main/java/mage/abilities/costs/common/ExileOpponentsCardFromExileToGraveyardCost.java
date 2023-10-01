@@ -1,6 +1,5 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -13,6 +12,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public class ExileOpponentsCardFromExileToGraveyardCost extends CostImpl {
         }
     }
 
-    public ExileOpponentsCardFromExileToGraveyardCost(ExileOpponentsCardFromExileToGraveyardCost cost) {
+    private ExileOpponentsCardFromExileToGraveyardCost(final ExileOpponentsCardFromExileToGraveyardCost cost) {
         super(cost);
     }
 

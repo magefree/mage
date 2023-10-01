@@ -59,7 +59,7 @@ class BelzenlokDemonTokenEffect extends OneShotEffect {
         this.staticText = "sacrifice another creature. If you can't, this creature deals 6 damage to you.";
     }
 
-    BelzenlokDemonTokenEffect(final BelzenlokDemonTokenEffect effect) {
+    private BelzenlokDemonTokenEffect(final BelzenlokDemonTokenEffect effect) {
         super(effect);
     }
 

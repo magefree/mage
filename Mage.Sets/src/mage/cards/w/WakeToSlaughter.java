@@ -67,7 +67,7 @@ class WakeToSlaughterEffect extends OneShotEffect {
                 "Exile it at the beginning of the next end step.";
     }
 
-    public WakeToSlaughterEffect(final mage.cards.w.WakeToSlaughterEffect effect) {
+    private WakeToSlaughterEffect(final WakeToSlaughterEffect effect) {
         super(effect);
     }
 

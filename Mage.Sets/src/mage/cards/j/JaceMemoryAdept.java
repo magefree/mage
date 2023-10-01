@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -15,6 +14,8 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -62,7 +63,7 @@ class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
         staticText = "Any number of target players each draw twenty cards";
     }
 
-    private JaceMemoryAdeptEffect(final DrawCardTargetEffect effect) {
+    private JaceMemoryAdeptEffect(final JaceMemoryAdeptEffect effect) {
         super(effect);
     }
 

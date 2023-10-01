@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,6 +15,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.ZombieToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward
@@ -28,7 +29,7 @@ public final class EndlessRanksOfTheDead extends CardImpl {
         // At the beginning of your upkeep, create X 2/2 black Zombie creature tokens,
         // where X is half the number of Zombies you control, rounded down.
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
-                new CreateTokenEffect(new ZombieToken(), new HalfZombiesCount())));
+                new CreateTokenEffect(new ZombieToken(), HalfZombiesCount.instance)));
 
     }
 
@@ -42,7 +43,8 @@ public final class EndlessRanksOfTheDead extends CardImpl {
     }
 }
 
-class HalfZombiesCount implements DynamicValue {
+enum HalfZombiesCount implements DynamicValue {
+    instance;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -58,7 +60,7 @@ class HalfZombiesCount implements DynamicValue {
 
     @Override
     public HalfZombiesCount copy() {
-        return new HalfZombiesCount();
+        return this;
     }
 
     @Override

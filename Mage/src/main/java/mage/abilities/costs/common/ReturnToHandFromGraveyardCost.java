@@ -1,9 +1,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -13,6 +10,10 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public class ReturnToHandFromGraveyardCost extends CostImpl {
         this.text = "return " + target.getDescription() + " from your graveyard to your hand";
     }
 
-    public ReturnToHandFromGraveyardCost(ReturnToHandFromGraveyardCost cost) {
+    private ReturnToHandFromGraveyardCost(final ReturnToHandFromGraveyardCost cost) {
         super(cost);
     }
 

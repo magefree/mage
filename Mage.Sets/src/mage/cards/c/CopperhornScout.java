@@ -1,8 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,13 +8,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -78,11 +79,11 @@ class CopperhornScoutTriggeredAbility extends TriggeredAbilityImpl {
 
 class CopperhornScoutUntapEffect extends OneShotEffect {
 
-    CopperhornScoutUntapEffect ( ) {
+    CopperhornScoutUntapEffect() {
         super(Outcome.Untap);
     }
 
-    CopperhornScoutUntapEffect ( CopperhornScoutUntapEffect effect ) {
+    private CopperhornScoutUntapEffect(final CopperhornScoutUntapEffect effect) {
         super(effect);
     }
 

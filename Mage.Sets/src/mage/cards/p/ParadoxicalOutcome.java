@@ -1,17 +1,12 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -22,6 +17,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -113,9 +110,13 @@ class ParadoxicalOutcomeNumber implements DynamicValue {
         return number;
     }
 
+    private ParadoxicalOutcomeNumber(final ParadoxicalOutcomeNumber value) {
+        this.previousZone = value.previousZone;
+    }
+
     @Override
     public ParadoxicalOutcomeNumber copy() {
-        return new ParadoxicalOutcomeNumber(previousZone);
+        return new ParadoxicalOutcomeNumber(this);
     }
 
     @Override

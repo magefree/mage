@@ -60,7 +60,7 @@ public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
         this.addSubAbility(new SoulbondEntersOtherAbility());
     }
 
-    public SoulbondAbility(SoulbondAbility ability) {
+    protected SoulbondAbility(final SoulbondAbility ability) {
         super(ability);
     }
 
@@ -174,12 +174,12 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
         soulbondFilter.add(AnotherPredicate.instance);
     }
 
-    public SoulbondEntersOtherAbility() {
+    SoulbondEntersOtherAbility() {
         super(Zone.BATTLEFIELD, new SoulboundEntersOtherEffect(), soulbondFilter, true, SetTargetPointer.PERMANENT, "");
         setRuleVisible(false);
     }
 
-    public SoulbondEntersOtherAbility(SoulbondEntersOtherAbility ability) {
+    private SoulbondEntersOtherAbility(final SoulbondEntersOtherAbility ability) {
         super(ability);
     }
 

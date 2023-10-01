@@ -31,10 +31,9 @@ public class RippleAbility extends TriggeredAbilityImpl {
         this.rippleNumber = rippleNumber;
     }
 
-    public RippleAbility(RippleAbility ability) {
+    private RippleAbility(final RippleAbility ability) {
         super(ability);
         this.rippleNumber = ability.rippleNumber;
-
     }
 
     @Override

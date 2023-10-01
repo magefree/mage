@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,11 +23,11 @@ public final class BenedictionOfMoons extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");
 
         // You gain 1 life for each player.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new PlayerCount()).setText("you gain 1 life for each player"));
+        this.getSpellAbility().addEffect(new GainLifeEffect(PlayerCount.instance).setText("you gain 1 life for each player"));
 
         // Haunt
         // When the creature Benediction of Moons haunts dies, you gain 1 life for each player.
-        this.addAbility(new HauntAbility(this, new GainLifeEffect(new PlayerCount()).setText("you gain 1 life for each player")));
+        this.addAbility(new HauntAbility(this, new GainLifeEffect(PlayerCount.instance).setText("you gain 1 life for each player")));
 
     }
 
@@ -40,7 +41,8 @@ public final class BenedictionOfMoons extends CardImpl {
     }
 }
 
-class PlayerCount implements DynamicValue {
+enum PlayerCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -49,7 +51,7 @@ class PlayerCount implements DynamicValue {
 
     @Override
     public PlayerCount copy() {
-        return new PlayerCount();
+        return this;
     }
 
     @Override

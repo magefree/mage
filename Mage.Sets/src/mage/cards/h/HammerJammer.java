@@ -57,11 +57,11 @@ public final class HammerJammer extends CardImpl {
 
 class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
 
-    public HammerJammerEntersEffect(Counter counter) {
+    HammerJammerEntersEffect(Counter counter) {
         super(counter);
     }
 
-    public HammerJammerEntersEffect(EntersBattlefieldWithXCountersEffect effect) {
+    private HammerJammerEntersEffect(final HammerJammerEntersEffect effect) {
         super(effect);
     }
 

@@ -15,7 +15,7 @@ public class DealsDamageToOneOrMoreCreaturesTriggeredAbility extends DealsDamage
         setTriggerPhrase("Whenever {this} deals " + (combatOnly ? "combat " : "") + "damage to one or more creatures, ");
     }
 
-    public DealsDamageToOneOrMoreCreaturesTriggeredAbility(DealsDamageToOneOrMoreCreaturesTriggeredAbility ability) {
+    private DealsDamageToOneOrMoreCreaturesTriggeredAbility(final DealsDamageToOneOrMoreCreaturesTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -13,14 +12,16 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class DyingWish extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, target player loses X life and you gain X life, where X is its power.
-        DynamicValue attachedPower = new DyingWishAttachedPermanentPowerCount();
+        DynamicValue attachedPower = DyingWishAttachedPermanentPowerCount.instance;
         ability = new DiesAttachedTriggeredAbility(new LoseLifeTargetEffect(attachedPower), "enchanted creature");
         ability.addEffect(new GainLifeEffect(attachedPower));
         ability.addTarget(new TargetPlayer());
@@ -58,7 +59,8 @@ public final class DyingWish extends CardImpl {
     }
 }
 
-class DyingWishAttachedPermanentPowerCount implements DynamicValue {
+enum DyingWishAttachedPermanentPowerCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -79,7 +81,7 @@ class DyingWishAttachedPermanentPowerCount implements DynamicValue {
 
     @Override
     public DyingWishAttachedPermanentPowerCount copy() {
-        return new DyingWishAttachedPermanentPowerCount();
+        return this;
     }
 
     @Override

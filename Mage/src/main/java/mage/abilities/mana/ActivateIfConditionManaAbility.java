@@ -22,7 +22,7 @@ public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
         this.condition = condition;
     }
 
-    public ActivateIfConditionManaAbility(ActivateIfConditionManaAbility ability) {
+    private ActivateIfConditionManaAbility(final ActivateIfConditionManaAbility ability) {
         super(ability);
     }
 

@@ -80,7 +80,7 @@ class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
         this.optional = optional;
     }
 
-    public PutIntoGraveFromAnywhereEffect(PutIntoGraveFromAnywhereEffect effect) {
+    private PutIntoGraveFromAnywhereEffect(final PutIntoGraveFromAnywhereEffect effect) {
         super(effect);
         this.baseEffects = effect.baseEffects.copy();
         this.text = effect.text;

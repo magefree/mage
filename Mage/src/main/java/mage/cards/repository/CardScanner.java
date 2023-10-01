@@ -100,4 +100,9 @@ public final class CardScanner {
         }
         return cards;
     }
+
+    public static boolean isSetCustom(String setCode) {
+        ExpansionSet set = Sets.getInstance().get(setCode);
+        return set == null || set.getSetType().isCustomSet();
+    }
 }

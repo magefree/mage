@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,8 +34,8 @@ public final class ChildrenOfKorlis extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Children of Korlis: You gain life equal to the life you've lost this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainLifeEffect(new SourceControllerLostLifeCount(),"You gain life equal to the life you've lost this turn"), 
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainLifeEffect(SourceControllerLostLifeCount.instance, "You gain life equal to the life you've lost this turn"),
                 new SacrificeSourceCost()));
     }
 
@@ -48,7 +49,8 @@ public final class ChildrenOfKorlis extends CardImpl {
     }
 }
 
-class SourceControllerLostLifeCount implements DynamicValue {
+enum SourceControllerLostLifeCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -61,7 +63,7 @@ class SourceControllerLostLifeCount implements DynamicValue {
 
     @Override
     public SourceControllerLostLifeCount copy() {
-        return new SourceControllerLostLifeCount();
+        return this;
     }
 
     @Override

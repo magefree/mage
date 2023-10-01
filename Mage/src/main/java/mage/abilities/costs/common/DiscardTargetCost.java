@@ -33,7 +33,7 @@ public class DiscardTargetCost extends CostImpl {
         this.text = "discard " + target.getDescription();
     }
 
-    public DiscardTargetCost(DiscardTargetCost cost) {
+    protected DiscardTargetCost(final DiscardTargetCost cost) {
         super(cost);
         this.cards.addAll(cost.cards);
         this.randomDiscard = cost.randomDiscard;
