@@ -97,8 +97,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
-        }
-        if (this.lockedIn) {
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }
