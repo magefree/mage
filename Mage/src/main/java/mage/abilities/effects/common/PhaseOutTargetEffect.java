@@ -51,7 +51,7 @@ public class PhaseOutTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return getTargetPointer().describeTargets(mode.getTargets(), "that creature")
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
                 + (getTargetPointer().isPlural(mode.getTargets()) ? " phase out" : " phases out");
     }
 }
