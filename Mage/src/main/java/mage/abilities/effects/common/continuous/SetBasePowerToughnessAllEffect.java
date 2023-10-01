@@ -26,22 +26,20 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
     private final FilterPermanent filter;
     private DynamicValue power;
     private DynamicValue toughness;
-    private final boolean lockedInPT;
 
     public SetBasePowerToughnessAllEffect(int power, int toughness, Duration duration) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, new FilterCreaturePermanent("Creatures"), true);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, new FilterCreaturePermanent("Creatures"));
     }
 
-    public SetBasePowerToughnessAllEffect(int power, int toughness, Duration duration, FilterPermanent filter, boolean lockedInPT) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, lockedInPT);
+    public SetBasePowerToughnessAllEffect(int power, int toughness, Duration duration, FilterPermanent filter) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter);
     }
 
-    public SetBasePowerToughnessAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter, boolean lockedInPT) {
+    public SetBasePowerToughnessAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filter = filter;
-        this.lockedInPT = lockedInPT;
     }
 
     protected SetBasePowerToughnessAllEffect(final SetBasePowerToughnessAllEffect effect) {
@@ -49,7 +47,6 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
         this.power = effect.power;
         this.toughness = effect.toughness;
         this.filter = effect.filter;
-        this.lockedInPT = effect.lockedInPT;
     }
 
     @Override
@@ -64,8 +61,6 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }
-        }
-        if (lockedInPT) {
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }
