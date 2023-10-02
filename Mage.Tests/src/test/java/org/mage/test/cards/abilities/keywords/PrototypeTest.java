@@ -458,10 +458,47 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, evenRegOddProto, 1, 3);
     }
+    @Test
+    public void testCopyOnStack() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 2);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        checkAutomaton(true, 2);
+    }
+    @Test
+    public void testHumility() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 4+3+2);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Humility");
+        addCard(Zone.HAND, playerA, "Disenchant");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Humility");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+
+        checkPT("Humility with Prototype", 1, PhaseStep.BEGIN_COMBAT, playerA, automaton, 1, 1);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disenchant", "Humility");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        checkAutomaton(true);
+    }
 
     /*
      * More tests suggested by Zerris:
-     * 1) Copy permanent on the stack: See Double
+     * DONE 1) Copy permanent on the stack: See Double
      * 2) Gain control of spell on the stack: Aethersnatch
      * 3) Check LKI if card immediately leaves the battlefield due to state-based actions:
      *      4x Flowstone Surge, Absolute Law, Electropotence, Drizzt Do'Urden, Flayer of the Hatebound in play.
@@ -474,6 +511,7 @@ public class PrototypeTest extends CardTestPlayerBase {
      * 6) Ensure Prototype is not treated as an ability while in play, but does remove the textbox: Dress Down with it in play
      * 7) Phasing: Slip Out the Back
      * 8) Alternate Cost: Fires of Invention (Cannot cast at all with fires on 3 lands, cannot cast prototyped even on 7)
+     *      NOTE: This test is probably wrong, Prototype is apparently NOT an alternate cost! https://magic.wizards.com/en/news/feature/comprehensive-rules-changes
      * 9) Delayed copies of a clone copy: Progenitor Mimic
      * 14) Cast from zones other than the hand: Ensure that if you cast a card from exile (Gonti, Lord of Luxury) you can Prototype it
      *      (and use mana of any color) as expected, and the same for Graveyards (Chainer, Nightmare Adept)
@@ -483,7 +521,7 @@ public class PrototypeTest extends CardTestPlayerBase {
      *      (and attempt to equip to Master of Waves)
      * 20) Ensure colored mana in a Prototype cost is treated properly - can be paid for by Jegantha and Somberwald Sage,
      *      reduced by Morophon but not Ugin, the Ineffable
-     * 22) Cast it Prototyped while Humility is in play (it's still a 1/1)
+     * DONE 22) Cast it Prototyped while Humility is in play (it's still a 1/1)
      * 23) Jegantha can still be your companion with Depth Charge Colossus in your deck
      */
 
