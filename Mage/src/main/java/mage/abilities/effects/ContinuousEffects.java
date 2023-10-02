@@ -1,6 +1,7 @@
 package mage.abilities.effects;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -506,9 +507,10 @@ public class ContinuousEffects implements Serializable {
      * @param affectedAbility null if check full object or ability if check only one ability from that object
      * @param controllerId
      * @param game
-     * @return sourceId of the permitting effect if any exists otherwise returns null
+     * @return Set of all the ApprovingObject related to that asThough.
      */
-    public ApprovingObject asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    public Set<ApprovingObject> asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+        Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
 
         // usage check: effect must apply for specific ability only, not to full object (example: PLAY_FROM_NOT_OWN_HAND_ZONE)
         if (type.needAffectedAbility() && affectedAbility == null) {
@@ -553,18 +555,13 @@ public class ContinuousEffects implements Serializable {
                 idToCheck = objectId;
             }
 
-            Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
             for (AsThoughEffect effect : asThoughEffectsList) {
                 Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
                 for (Ability ability : abilities) {
                     if (affectedAbility == null) {
                         // applies to full object (one effect can be used in multiple abilities)
                         if (effect.applies(idToCheck, ability, controllerId, game)) {
-                            if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                                possibleApprovingObjects.add(new ApprovingObject(ability, game));
-                            } else {
-                                return new ApprovingObject(ability, game);
-                            }
+                            possibleApprovingObjects.add(new ApprovingObject(ability, game));
                         }
                     } else {
                         // applies to one affected ability
@@ -575,46 +572,13 @@ public class ContinuousEffects implements Serializable {
                         }
 
                         if (effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
-                            if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                                possibleApprovingObjects.add(new ApprovingObject(ability, game));
-                            } else {
-                                return new ApprovingObject(ability, game);
-                            }
+                            possibleApprovingObjects.add(new ApprovingObject(ability, game));
                         }
                     }
                 }
             }
-
-            if (possibleApprovingObjects.size() == 1) {
-                return possibleApprovingObjects.iterator().next();
-            } else if (possibleApprovingObjects.size() > 1) {
-                // Select the ability that you use to permit the action                
-                Map<String, String> keyChoices = new HashMap<>();
-                for (ApprovingObject approvingObject : possibleApprovingObjects) {
-                    MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-                    String choiceKey = approvingObject.getApprovingAbility().getId().toString();
-                    String choiceValue;
-                    if (mageObject == null) {
-                        choiceValue = approvingObject.getApprovingAbility().getRule();
-                    } else {
-                        choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
-                    }
-                    keyChoices.put(choiceKey, choiceValue);
-                }
-                Choice choicePermitting = new ChoiceImpl(true);
-                choicePermitting.setMessage("Choose the permitting object");
-                choicePermitting.setKeyChoices(keyChoices);
-                Player player = game.getPlayer(controllerId);
-                player.choose(Outcome.Detriment, choicePermitting, game);
-                for (ApprovingObject approvingObject : possibleApprovingObjects) {
-                    if (approvingObject.getApprovingAbility().getId().toString().equals(choicePermitting.getChoiceKey())) {
-                        return approvingObject;
-                    }
-                }
-            }
-
         }
-        return null;
+        return possibleApprovingObjects;
     }
 
     /**

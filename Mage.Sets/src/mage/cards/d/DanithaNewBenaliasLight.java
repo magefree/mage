@@ -63,7 +63,7 @@ public final class DanithaNewBenaliasLight extends CardImpl {
 class DanithaNewBenaliasLightCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     DanithaNewBenaliasLightCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCardInPlay, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCardInPlay);
         staticText = "once during each of your turns, you may cast an Aura or Equipment spell from your graveyard";
     }
 

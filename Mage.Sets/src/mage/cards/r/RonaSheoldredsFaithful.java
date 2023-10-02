@@ -1,5 +1,6 @@
 package mage.cards.r;
 
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,7 +43,8 @@ public final class RonaSheoldredsFaithful extends CardImpl {
         ));
 
         // You may cast Rona, Sheoldred's Faithful from your graveyard by discarding two cards in addition to paying its other costs.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RonaSheoldredsFaithfulEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RonaSheoldredsFaithfulEffect())
+                .setIdentifier(MageIdentifier.RonaSheoldredsFaithfulAlternateCast));
     }
 
     private RonaSheoldredsFaithful(final RonaSheoldredsFaithful card) {
@@ -90,7 +92,10 @@ class RonaSheoldredsFaithfulEffect extends AsThoughEffectImpl {
         }
         Costs<Cost> costs = new CostsImpl<>();
         costs.add(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
-        controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{1}{U}{B}{B}"), costs);
+        controller.setCastSourceIdWithAlternateMana(
+                objectId, new ManaCostsImpl<>("{1}{U}{B}{B}"), costs,
+                MageIdentifier.RonaSheoldredsFaithfulAlternateCast
+        );
         return true;
     }
 }

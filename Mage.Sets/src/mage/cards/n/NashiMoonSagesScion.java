@@ -1,5 +1,6 @@
 package mage.cards.n;
 
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -43,7 +44,7 @@ public final class NashiMoonSagesScion extends CardImpl {
         // Whenever Nashi, Moon Sage's Scion deals combat damage to a player, exile the top card of each player's library. Until end of turn, you may play one of those cards. If you cast a spell this way, pay life equal to its mana value rather than paying its mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new NashiMoonSagesScionEffect(), false
-        ), new NashiMoonSagesScionWatcher());
+        ).setIdentifier(MageIdentifier.NashiMoonSagesScionAlternateCast), new NashiMoonSagesScionWatcher());
     }
 
     private NashiMoonSagesScion(final NashiMoonSagesScion card) {
@@ -194,7 +195,10 @@ class NashiMoonSagesScionPlayEffect extends CanPlayCardControllerEffect {
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.add(lifeCost);
         newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
-        controller.setCastSourceIdWithAlternateMana(cardToCheck.getId(), null, newCosts);
+        controller.setCastSourceIdWithAlternateMana(
+                cardToCheck.getId(), null, newCosts,
+                MageIdentifier.NashiMoonSagesScionAlternateCast
+        );
         return true;
     }
 }

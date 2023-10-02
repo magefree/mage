@@ -1,17 +1,13 @@
 package mage.abilities.effects.common.asthought;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -65,7 +61,7 @@ public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
                     }
                     break;
             }
-            return !onlyOwnedCards || card.getOwnerId().equals(source.getControllerId())
+            return (!onlyOwnedCards || card.getOwnerId().equals(source.getControllerId()))
                     && filter.match(card, game)
                     && game.getState().getZone(card.getId()).match(fromZone);
         }

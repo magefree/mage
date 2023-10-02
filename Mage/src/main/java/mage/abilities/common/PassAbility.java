@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.ApprovingObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.effects.common.PassEffect;
 import mage.constants.Zone;
@@ -30,7 +31,7 @@ public class PassAbility extends ActivatedAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        return ActivationStatus.getTrue(this, game);
+        return new ActivationStatus(new ApprovingObject(this, game));
     }
 
     @Override

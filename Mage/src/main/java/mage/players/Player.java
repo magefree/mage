@@ -1,9 +1,6 @@
 package mage.players;
 
-import mage.ApprovingObject;
-import mage.MageItem;
-import mage.MageObject;
-import mage.Mana;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -1054,13 +1051,28 @@ public interface Player extends MageItem, Copyable<Player> {
      *                  cost
      * @param costs     alternate other costs you need to pay
      */
-    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs);
+    default void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
+        setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs, MageIdentifier.Default);
+    }
 
-    Set<UUID> getCastSourceIdWithAlternateMana();
+    /**
+     * If the next spell cast has the set sourceId, the spell will be cast
+     * without mana (null) or the mana set to manaCosts instead of its normal
+     * mana costs.
+     *
+     * @param sourceId  the source that can be cast without mana
+     * @param manaCosts alternate ManaCost, null if it can be cast without mana
+     *                  cost
+     * @param costs     alternate other costs you need to pay
+     * @param identifier if not using the MageIdentifier.Default, only apply the alternate mana when ApprovingSource if of that kind.
+     */
+    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs, MageIdentifier identifier);
 
-    Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts();
+    Map<UUID, Set<MageIdentifier>> getCastSourceIdWithAlternateMana();
 
-    Map<UUID, Costs<Cost>> getCastSourceIdCosts();
+    Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> getCastSourceIdManaCosts();
+
+    Map<UUID, Map<MageIdentifier, Costs<Cost>>> getCastSourceIdCosts();
 
     void clearCastSourceIdManaCosts();
 
