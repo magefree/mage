@@ -305,6 +305,15 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return spellCharacteristics;
     }
 
+    /**
+     * Given a spell cast event, returns the relevant SpellAbility involved
+     * Currently used to get the characteristics of the spell, specifically
+     * for "can't cast" effects using CAST_SPELL_LATE events
+     *
+     * @param event
+     * @param game
+     * @return SpellAbility of the event
+     */
     public static SpellAbility getSpellAbilityFromEvent(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.CAST_SPELL && event.getType() != GameEvent.EventType.CAST_SPELL_LATE) {
             return null;
