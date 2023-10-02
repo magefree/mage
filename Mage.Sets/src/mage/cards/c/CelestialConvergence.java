@@ -56,7 +56,7 @@ class CelestialConvergenceEffect extends OneShotEffect {
         this.staticText = "If there are no omen counters on {this}, the player with the highest life total wins the game. If two or more players are tied for highest life total, the game is a draw";
     }
 
-    public CelestialConvergenceEffect(final CelestialConvergenceEffect effect) {
+    private CelestialConvergenceEffect(final CelestialConvergenceEffect effect) {
         super(effect);
     }
 

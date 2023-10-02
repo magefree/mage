@@ -48,7 +48,7 @@ class ArboriaEffect extends RestrictionEffect {
         staticText = "Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn";
     }
 
-    public ArboriaEffect(final ArboriaEffect effect) {
+    private ArboriaEffect(final ArboriaEffect effect) {
         super(effect);
     }
 

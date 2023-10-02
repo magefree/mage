@@ -49,7 +49,7 @@ class TalruumPiperEffect extends RequirementEffect {
         staticText = "All creatures with flying able to block {this} do so";
     }
 
-    public TalruumPiperEffect(TalruumPiperEffect effect) {
+    private TalruumPiperEffect(final TalruumPiperEffect effect) {
         super(effect);
     }
 

@@ -53,7 +53,7 @@ class PolymorphEffect extends OneShotEffect {
         this.staticText = "Its controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library";
     }
 
-    public PolymorphEffect(final PolymorphEffect effect) {
+    private PolymorphEffect(final PolymorphEffect effect) {
         super(effect);
     }
 

@@ -38,7 +38,7 @@ public final class StunSniper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StunSniper (final StunSniper card) {
+    private StunSniper(final StunSniper card) {
         super(card);
     }
 

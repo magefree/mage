@@ -55,7 +55,7 @@ class ElementalUprisingToken extends TokenImpl {
 
         this.addAbility(HasteAbility.getInstance());
     }
-    public ElementalUprisingToken(final ElementalUprisingToken token) {
+    private ElementalUprisingToken(final ElementalUprisingToken token) {
         super(token);
     }
 

@@ -58,7 +58,7 @@ class GahijiHonoredOneTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public GahijiHonoredOneTriggeredAbility(final GahijiHonoredOneTriggeredAbility ability) {
+    private GahijiHonoredOneTriggeredAbility(final GahijiHonoredOneTriggeredAbility ability) {
         super(ability);
     }
 

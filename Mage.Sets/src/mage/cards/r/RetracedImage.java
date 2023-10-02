@@ -47,7 +47,7 @@ class RetracedImageEffect extends OneShotEffect {
         this.staticText = "Reveal a card in your hand, then put that card onto the battlefield if it has the same name as a permanent";
     }
 
-    public RetracedImageEffect(final RetracedImageEffect effect) {
+    private RetracedImageEffect(final RetracedImageEffect effect) {
         super(effect);
     }
 

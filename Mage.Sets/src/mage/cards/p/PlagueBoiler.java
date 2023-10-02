@@ -60,7 +60,7 @@ class PlagueBoilerEffect extends OneShotEffect {
         this.staticText = "Put a plague counter on {this} or remove a plague counter from it";
     }
 
-    public PlagueBoilerEffect(final PlagueBoilerEffect effect) {
+    private PlagueBoilerEffect(final PlagueBoilerEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} has three or more plague counters on it, ");
     }
 
-    public PlagueBoilerTriggeredAbility(final PlagueBoilerTriggeredAbility ability) {
+    private PlagueBoilerTriggeredAbility(final PlagueBoilerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -124,7 +124,7 @@ class PlagueBoilerSacrificeDestroyEffect extends OneShotEffect {
         this.staticText = "sacrifice it. If you do, destroy all nonland permanents";
     }
 
-    public PlagueBoilerSacrificeDestroyEffect(final PlagueBoilerSacrificeDestroyEffect effect) {
+    private PlagueBoilerSacrificeDestroyEffect(final PlagueBoilerSacrificeDestroyEffect effect) {
         super(effect);
     }
 

@@ -71,7 +71,7 @@ class AvariceAmuletChangeControlEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    AvariceAmuletChangeControlEffect(final AvariceAmuletChangeControlEffect effect) {
+    private AvariceAmuletChangeControlEffect(final AvariceAmuletChangeControlEffect effect) {
         super(effect);
     }
 

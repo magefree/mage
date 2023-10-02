@@ -51,7 +51,7 @@ class SelfInflictedWoundEffect extends OneShotEffect {
         staticText = "Target opponent sacrifices a green or white creature. If that player does, they lose 2 life";
     }
 
-    SelfInflictedWoundEffect(SelfInflictedWoundEffect effect) {
+    private SelfInflictedWoundEffect(final SelfInflictedWoundEffect effect) {
         super(effect);
     }
 

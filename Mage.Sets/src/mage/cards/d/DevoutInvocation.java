@@ -55,7 +55,7 @@ class DevoutInvocationEffect extends OneShotEffect {
         staticText = "Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way";
     }
 
-    public DevoutInvocationEffect(DevoutInvocationEffect effect) {
+    private DevoutInvocationEffect(final DevoutInvocationEffect effect) {
         super(effect);
     }
 

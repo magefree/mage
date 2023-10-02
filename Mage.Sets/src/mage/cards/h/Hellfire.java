@@ -44,7 +44,7 @@ class HellfireEffect extends OneShotEffect {
         this.staticText = "Destroy all nonblack creatures. {this} deals X plus 3 damage to you, where X is the number of creatures that died this way";
     }
 
-    public HellfireEffect(final HellfireEffect effect) {
+    private HellfireEffect(final HellfireEffect effect) {
         super(effect);
     }
 

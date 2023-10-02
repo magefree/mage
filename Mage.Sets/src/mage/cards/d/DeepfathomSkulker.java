@@ -62,7 +62,7 @@ class DeepfathomSkulkerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public DeepfathomSkulkerTriggeredAbility(final DeepfathomSkulkerTriggeredAbility ability) {
+    private DeepfathomSkulkerTriggeredAbility(final DeepfathomSkulkerTriggeredAbility ability) {
         super(ability);
     }
 

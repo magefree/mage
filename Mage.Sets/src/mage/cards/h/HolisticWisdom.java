@@ -57,7 +57,7 @@ class HolisticWisdomEffect extends OneShotEffect {
         this.staticText = "Return target card from your graveyard to your hand if it shares a card type with the card exiled this way";
     }
 
-    public HolisticWisdomEffect(final HolisticWisdomEffect effect) {
+    private HolisticWisdomEffect(final HolisticWisdomEffect effect) {
         super(effect);
     }
 

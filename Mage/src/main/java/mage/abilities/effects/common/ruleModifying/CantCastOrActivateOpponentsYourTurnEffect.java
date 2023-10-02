@@ -31,11 +31,6 @@ public class CantCastOrActivateOpponentsYourTurnEffect extends ContinuousRuleMod
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         MageObject mageObject = game.getObject(source);

@@ -65,7 +65,7 @@ class TrenchBehemothEffect extends RequirementEffect {
         staticText = "target creature an opponent controls attacks during its controller's next combat phase if able";
     }
 
-    public TrenchBehemothEffect(final TrenchBehemothEffect effect) {
+    private TrenchBehemothEffect(final TrenchBehemothEffect effect) {
         super(effect);
     }
 

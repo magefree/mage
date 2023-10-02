@@ -56,7 +56,7 @@ class TrailOfMysteryTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
         super(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new FilterControlledCreaturePermanent(), true);
     }
 
-    public TrailOfMysteryTriggeredAbility(final TrailOfMysteryTriggeredAbility ability) {
+    private TrailOfMysteryTriggeredAbility(final TrailOfMysteryTriggeredAbility ability) {
         super(ability);
     }
 

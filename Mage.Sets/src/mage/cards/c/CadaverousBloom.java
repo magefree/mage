@@ -51,7 +51,7 @@ class CadaverousBloomManaEffect extends BasicManaEffect {
         super(mana);
     }
 
-    public CadaverousBloomManaEffect(final CadaverousBloomManaEffect effect) {
+    private CadaverousBloomManaEffect(final CadaverousBloomManaEffect effect) {
         super(effect);
     }
 

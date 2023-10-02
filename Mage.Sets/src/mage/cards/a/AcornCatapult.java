@@ -52,7 +52,7 @@ class AcornCatapultEffect extends OneShotEffect {
         staticText = "that creature's controller or that player creates a 1/1 green Squirrel creature token";
     }
 
-    public AcornCatapultEffect(final AcornCatapultEffect effect) {
+    private AcornCatapultEffect(final AcornCatapultEffect effect) {
         super(effect);
     }
 

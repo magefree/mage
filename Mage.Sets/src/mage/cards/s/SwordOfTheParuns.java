@@ -81,7 +81,7 @@ class MayTapOrUntapAttachedEffect extends OneShotEffect {
         this.staticText = "You may tap or untap equipped creature.";
     }
 
-    public MayTapOrUntapAttachedEffect(final MayTapOrUntapAttachedEffect effect) {
+    private MayTapOrUntapAttachedEffect(final MayTapOrUntapAttachedEffect effect) {
         super(effect);
     }
 

@@ -55,7 +55,7 @@ class EvraHalcyonWitnessEffect extends OneShotEffect {
         staticText = "Exchange your life total with {this}'s power";
     }
 
-    public EvraHalcyonWitnessEffect(final EvraHalcyonWitnessEffect effect) {
+    private EvraHalcyonWitnessEffect(final EvraHalcyonWitnessEffect effect) {
         super(effect);
     }
 

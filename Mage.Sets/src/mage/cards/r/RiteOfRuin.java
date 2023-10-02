@@ -44,7 +44,7 @@ class RiteOfRuinEffect extends OneShotEffect {
         this.staticText = "Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type";
     }
 
-    public RiteOfRuinEffect(final RiteOfRuinEffect effect) {
+    private RiteOfRuinEffect(final RiteOfRuinEffect effect) {
         super(effect);
     }
 

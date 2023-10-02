@@ -61,7 +61,7 @@ class RithTheAwakenerEffect extends OneShotEffect {
         this.staticText = "choose a color, then create a 1/1 green Saproling creature token for each permanent of that color";
     }
 
-    public RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
+    private RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
         super(effect);
     }
 

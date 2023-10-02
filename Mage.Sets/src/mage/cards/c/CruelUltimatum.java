@@ -57,7 +57,7 @@ class CruelUltimatumEffect extends OneShotEffect {
                 + "to your hand, draw three cards, then gain 5 life";
     }
 
-    public CruelUltimatumEffect(final CruelUltimatumEffect effect) {
+    private CruelUltimatumEffect(final CruelUltimatumEffect effect) {
         super(effect);
     }
 

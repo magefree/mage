@@ -51,7 +51,7 @@ class DeathsCaressEffect extends OneShotEffect {
         this.staticText = "If that creature was a Human, you gain life equal to its toughness";
     }
 
-    public DeathsCaressEffect(final DeathsCaressEffect effect) {
+    private DeathsCaressEffect(final DeathsCaressEffect effect) {
         super(effect);
     }
 

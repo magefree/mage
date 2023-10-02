@@ -55,7 +55,7 @@ class JinxedIdolEffect extends ContinuousEffectImpl {
         staticText = "Target opponent gains control of {this}";
     }
 
-    public JinxedIdolEffect(final JinxedIdolEffect effect) {
+    private JinxedIdolEffect(final JinxedIdolEffect effect) {
         super(effect);
     }
 

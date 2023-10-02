@@ -46,7 +46,7 @@ public final class ShapeAnew extends CardImpl {
             staticText = "The controller of target artifact sacrifices it, then reveals cards from the top of their library until they reveal an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library";
         }
 
-        public ShapeAnewEffect(ShapeAnewEffect effect) {
+        private ShapeAnewEffect(final ShapeAnewEffect effect) {
             super(effect);
         }
 

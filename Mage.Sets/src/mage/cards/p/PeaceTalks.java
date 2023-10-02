@@ -47,7 +47,7 @@ class PeaceTalksEffect extends OneShotEffect {
                 + "or activated abilities";
     }
 
-    public PeaceTalksEffect(final PeaceTalksEffect effect) {
+    private PeaceTalksEffect(final PeaceTalksEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class PeaceTalksCantAttackEffect extends RestrictionEffect {
         startedTurnNum = game.getTurnNum();
     }
 
-    public PeaceTalksCantAttackEffect(final PeaceTalksCantAttackEffect effect) {
+    private PeaceTalksCantAttackEffect(final PeaceTalksCantAttackEffect effect) {
         super(effect);
         this.startedTurnNum = effect.startedTurnNum;
     }
@@ -120,7 +120,7 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
         staticText = "players and permanents can't be the targets of spells or activated abilities";
     }
 
-    public PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities(final PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities effect) {
+    private PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities(final PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities effect) {
         super(effect);
         this.startedTurnNum = effect.startedTurnNum;
     }
@@ -149,11 +149,6 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

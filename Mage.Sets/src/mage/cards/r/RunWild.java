@@ -31,7 +31,7 @@ public final class RunWild extends CardImpl {
         this.getSpellAbility().addEffect(effect1);
 
         Effect effect2 = new GainAbilityTargetEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")), Duration.EndOfTurn);
-        effect2.setText("and \"{G}: Regenerate this creature\"");
+        effect2.setText("and \"{G}: Regenerate this creature.\"");
         this.getSpellAbility().addEffect(effect2);
 
     }

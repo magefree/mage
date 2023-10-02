@@ -1,28 +1,28 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.BecomesTargetAnyTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author xenohedron
  */
 public final class ThunderbreakRegent extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Dragon you control");
+    static {
+        filter.add(SubType.DRAGON.getPredicate());
+    }
 
     public ThunderbreakRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
@@ -34,7 +34,8 @@ public final class ThunderbreakRegent extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a Dragon you control becomes the target of a spell or ability your opponent controls, Thunderbreak Regent deals 3 damage to that player.
-        this.addAbility(new ThunderbreakRegentTriggeredAbility(new DamageTargetEffect(3)));
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(new DamageTargetEffect(3).setText("{this} deals 3 damage to that player"),
+                filter, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.PLAYER, false));
     }
 
     private ThunderbreakRegent(final ThunderbreakRegent card) {
@@ -44,51 +45,5 @@ public final class ThunderbreakRegent extends CardImpl {
     @Override
     public ThunderbreakRegent copy() {
         return new ThunderbreakRegent(this);
-    }
-}
-
-class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Sliver creature you control");
-
-    static {
-        filter.add(SubType.DRAGON.getPredicate());
-    }
-
-    public ThunderbreakRegentTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public ThunderbreakRegentTriggeredAbility(final ThunderbreakRegentTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ThunderbreakRegentTriggeredAbility copy() {
-        return new ThunderbreakRegentTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && filter.match(creature, getControllerId(), this, game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Dragon you control becomes the target of a spell or ability an opponent controls, {this} deals 3 damage to that player.";
     }
 }

@@ -95,7 +95,7 @@ class MalignusEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Damage that would be dealt by {this} can't be prevented";
     }
 
-    public MalignusEffect(final MalignusEffect effect) {
+    private MalignusEffect(final MalignusEffect effect) {
         super(effect);
     }
 

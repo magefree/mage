@@ -62,7 +62,7 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public GideonsInterventionCantCastEffect(final GideonsInterventionCantCastEffect effect) {
+    private GideonsInterventionCantCastEffect(final GideonsInterventionCantCastEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.";
     }
 
-    public GideonsInterventionPreventAllDamageEffect(final GideonsInterventionPreventAllDamageEffect effect) {
+    private GideonsInterventionPreventAllDamageEffect(final GideonsInterventionPreventAllDamageEffect effect) {
         super(effect);
     }
 

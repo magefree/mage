@@ -58,7 +58,7 @@ class FalkenrathTorturerEffect extends OneShotEffect {
         this.staticText = "If the sacrificed creature was a Human, put a +1/+1 counter on {this}";
     }
 
-    public FalkenrathTorturerEffect(final FalkenrathTorturerEffect effect) {
+    private FalkenrathTorturerEffect(final FalkenrathTorturerEffect effect) {
         super(effect);
     }
 

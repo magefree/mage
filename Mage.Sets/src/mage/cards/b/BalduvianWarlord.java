@@ -113,7 +113,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                     FilterAttackingCreature filter = new FilterAttackingCreature("creature attacking " + targetsController.getLogName());
                     filter.add(new PermanentInListPredicate(list));
                     TargetPermanent target = new TargetPermanent(filter);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.canChoose(controller.getId(), source, game)) {
                         while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                             controller.chooseTarget(outcome, target, source, game);

@@ -44,7 +44,7 @@ class DivinePresenceEffect extends ReplacementEffectImpl {
         staticText = "If a source would deal 4 or more damage to a permanent or player, that source deals 3 damage to that permanent or player instead.";
     }
 
-    public DivinePresenceEffect(final DivinePresenceEffect effect) {
+    private DivinePresenceEffect(final DivinePresenceEffect effect) {
         super(effect);
     }
 

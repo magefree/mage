@@ -37,7 +37,7 @@ public final class Painsmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Painsmith (final Painsmith card) {
+    private Painsmith(final Painsmith card) {
         super(card);
     }
 

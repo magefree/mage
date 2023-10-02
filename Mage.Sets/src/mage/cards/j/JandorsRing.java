@@ -58,7 +58,7 @@ class JandorsRingEffect extends OneShotEffect {
         staticText = "Draw a card";
     }
 
-    public JandorsRingEffect(final JandorsRingEffect effect) {
+    private JandorsRingEffect(final JandorsRingEffect effect) {
         super(effect);
     }
 

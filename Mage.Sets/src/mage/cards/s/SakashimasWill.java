@@ -77,7 +77,7 @@ class SakashimasWillStealEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }
@@ -115,7 +115,7 @@ class SakashimasWillCopyEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }

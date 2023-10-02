@@ -67,7 +67,7 @@ class JinxedRingEffect extends ContinuousEffectImpl {
         staticText = "Target opponent gains control of {this}";
     }
 
-    public JinxedRingEffect(final JinxedRingEffect effect) {
+    private JinxedRingEffect(final JinxedRingEffect effect) {
         super(effect);
     }
 

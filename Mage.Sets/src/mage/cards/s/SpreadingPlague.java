@@ -57,7 +57,7 @@ class SpreadingPlagueEffect extends OneShotEffect {
         staticText = "destroy all other creatures that share a color with it. They can't be regenerated";
     }
 
-    SpreadingPlagueEffect(final SpreadingPlagueEffect effect) {
+    private SpreadingPlagueEffect(final SpreadingPlagueEffect effect) {
         super(effect);
     }
 

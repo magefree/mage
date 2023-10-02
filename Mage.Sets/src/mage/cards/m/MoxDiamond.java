@@ -53,7 +53,7 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
         staticText = "If {this} would enter the battlefield, you may discard a land card instead. If you do, put {this} onto the battlefield. If you don't, put it into its owner's graveyard";
     }
 
-    public MoxDiamondReplacementEffect(final MoxDiamondReplacementEffect effect) {
+    private MoxDiamondReplacementEffect(final MoxDiamondReplacementEffect effect) {
         super(effect);
     }
 

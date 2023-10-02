@@ -49,7 +49,7 @@ class HalcyonGlazeToken extends TokenImpl {
         toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public HalcyonGlazeToken(final HalcyonGlazeToken token) {
+    private HalcyonGlazeToken(final HalcyonGlazeToken token) {
         super(token);
     }
 

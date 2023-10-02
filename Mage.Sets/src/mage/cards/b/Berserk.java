@@ -68,22 +68,22 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Cast this spell only before the combat damage step";
     }
 
-    BerserkReplacementEffect(final BerserkReplacementEffect effect) {
+    private BerserkReplacementEffect(final BerserkReplacementEffect effect) {
         super(effect);
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
+        if (event.getSourceId().equals(source.getSourceId())) {
             CombatDamageStepStartedWatcher watcher = game.getState().getWatcher(CombatDamageStepStartedWatcher.class);
             return watcher == null || watcher.conditionMet();
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -115,7 +115,7 @@ class BerserkDestroyEffect extends OneShotEffect {
         this.staticText = "At the beginning of the next end step, destroy that creature if it attacked this turn";
     }
 
-    public BerserkDestroyEffect(final BerserkDestroyEffect effect) {
+    private BerserkDestroyEffect(final BerserkDestroyEffect effect) {
         super(effect);
     }
 
@@ -146,7 +146,7 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
         this.staticText = "destroy that creature if it attacked this turn";
     }
 
-    public BerserkDelayedDestroyEffect(final BerserkDelayedDestroyEffect effect) {
+    private BerserkDelayedDestroyEffect(final BerserkDelayedDestroyEffect effect) {
         super(effect);
     }
 

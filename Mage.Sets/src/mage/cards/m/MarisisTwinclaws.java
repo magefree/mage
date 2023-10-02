@@ -28,7 +28,7 @@ public final class MarisisTwinclaws extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public MarisisTwinclaws (final MarisisTwinclaws card) {
+    private MarisisTwinclaws(final MarisisTwinclaws card) {
         super(card);
     }
 

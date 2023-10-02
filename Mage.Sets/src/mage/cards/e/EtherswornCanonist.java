@@ -87,7 +87,7 @@ class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectI
         staticText = "Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells";
     }
 
-    public EtherswornCanonistReplacementEffect(final EtherswornCanonistReplacementEffect effect) {
+    private EtherswornCanonistReplacementEffect(final EtherswornCanonistReplacementEffect effect) {
         super(effect);
     }
 

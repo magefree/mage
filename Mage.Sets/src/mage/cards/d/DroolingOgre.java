@@ -84,7 +84,7 @@ public final class DroolingOgre extends CardImpl {
             super(Zone.BATTLEFIELD, new DroolingOgreEffect(), false);
         }
 
-        public DroolingOgreTriggeredAbility(final DroolingOgreTriggeredAbility ability) {
+        private DroolingOgreTriggeredAbility(final DroolingOgreTriggeredAbility ability) {
             super(ability);
         }
 

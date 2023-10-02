@@ -69,7 +69,7 @@ class EbonPraetorEffect extends OneShotEffect {
         this.staticText = "If the sacrificed creature was a Thrull, put a +1/+0 counter on {this}";
     }
 
-    public EbonPraetorEffect(final EbonPraetorEffect effect) {
+    private EbonPraetorEffect(final EbonPraetorEffect effect) {
         super(effect);
     }
 

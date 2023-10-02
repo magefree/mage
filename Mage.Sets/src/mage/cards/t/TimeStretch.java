@@ -45,7 +45,7 @@ class TimeStretchEffect extends OneShotEffect {
         staticText = "Target player takes two extra turns after this one";
     }
 
-    public TimeStretchEffect(final TimeStretchEffect effect) {
+    private TimeStretchEffect(final TimeStretchEffect effect) {
         super(effect);
     }
 

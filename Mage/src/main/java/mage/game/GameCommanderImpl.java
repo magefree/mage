@@ -171,7 +171,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         // Paris mulligan - no longer used by default for commander
 //        Player player = getPlayer(playerId);
 //        TargetCardInHand target = new TargetCardInHand(1, player.getHand().size(), new FilterCard("card to mulligan"));
-//        target.setNotTarget(true);
+//        target.withNotTarget(true);
 //        target.setRequired(false);
 //        if (player.choose(Outcome.Exile, player.getHand(), target, this)) {
 //            int numCards = target.getTargets().size();

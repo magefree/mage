@@ -64,7 +64,7 @@ class CorrosiveOozeEffect extends OneShotEffect {
         this.staticText = "destroy all Equipment attached to that creature at end of combat";
     }
 
-    public CorrosiveOozeEffect(final CorrosiveOozeEffect effect) {
+    private CorrosiveOozeEffect(final CorrosiveOozeEffect effect) {
         super(effect);
     }
 

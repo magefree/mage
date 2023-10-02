@@ -54,7 +54,7 @@ class KindredChargeEffect extends OneShotEffect {
                 + "Those tokens gain haste. Exile them at the beginning of the next end step";
     }
 
-    public KindredChargeEffect(final KindredChargeEffect effect) {
+    private KindredChargeEffect(final KindredChargeEffect effect) {
         super(effect);
     }
 

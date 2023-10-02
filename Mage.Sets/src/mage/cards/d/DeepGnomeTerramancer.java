@@ -59,7 +59,7 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
         addEffect(new SearchLibraryPutInPlayEffect(target, true));
     }
 
-    DeepGnomeTerramancerTriggeredAbility(DeepGnomeTerramancerTriggeredAbility ability) {
+    private DeepGnomeTerramancerTriggeredAbility(final DeepGnomeTerramancerTriggeredAbility ability) {
         super(ability);
     }
 

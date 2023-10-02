@@ -71,7 +71,7 @@ class FoodChainManaEffect extends ManaEffect {
         this.staticText = "Add X mana of any one color, where X is 1 plus the exiled creature's mana value. Spend this mana only to cast creature spells";
     }
 
-    FoodChainManaEffect(final FoodChainManaEffect effect) {
+    private FoodChainManaEffect(final FoodChainManaEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ class OverwhelmingStampedeInitEffect extends OneShotEffect {
         this.staticText = "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control";
     }
 
-    public OverwhelmingStampedeInitEffect(final OverwhelmingStampedeInitEffect effect) {
+    private OverwhelmingStampedeInitEffect(final OverwhelmingStampedeInitEffect effect) {
         super(effect);
     }
 

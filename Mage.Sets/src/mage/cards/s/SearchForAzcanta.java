@@ -56,7 +56,7 @@ class SearchForAzcantaEffect extends OneShotEffect {
         this.staticText = "Then if you have seven or more cards in your graveyard, you may transform {this}.";
     }
 
-    public SearchForAzcantaEffect(final SearchForAzcantaEffect effect) {
+    private SearchForAzcantaEffect(final SearchForAzcantaEffect effect) {
         super(effect);
     }
 

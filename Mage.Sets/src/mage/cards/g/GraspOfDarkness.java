@@ -23,7 +23,7 @@ public final class GraspOfDarkness extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GraspOfDarkness (final GraspOfDarkness card) {
+    private GraspOfDarkness(final GraspOfDarkness card) {
         super(card);
     }
 

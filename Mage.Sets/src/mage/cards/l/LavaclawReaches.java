@@ -62,7 +62,7 @@ class LavaclawReachesToken extends TokenImpl {
         toughness = new MageInt(2);
         addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn), new ManaCostsImpl<>("{X}")));
     }
-    public LavaclawReachesToken(final LavaclawReachesToken token) {
+    private LavaclawReachesToken(final LavaclawReachesToken token) {
         super(token);
     }
 

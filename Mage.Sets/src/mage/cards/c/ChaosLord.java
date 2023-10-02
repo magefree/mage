@@ -103,7 +103,7 @@ class GainControlSourceEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    public GainControlSourceEffect(final GainControlSourceEffect effect) {
+    private GainControlSourceEffect(final GainControlSourceEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class ChaosLordEffect extends AsThoughEffectImpl {
         staticText = "Chaos Lord can attack as though it had haste unless it entered the battlefield this turn";
     }
 
-    public ChaosLordEffect(final ChaosLordEffect effect) {
+    private ChaosLordEffect(final ChaosLordEffect effect) {
         super(effect);
     }
 

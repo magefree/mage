@@ -26,7 +26,7 @@ public final class DimirSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DimirSignet (final DimirSignet card) {
+    private DimirSignet(final DimirSignet card) {
         super(card);
     }
 

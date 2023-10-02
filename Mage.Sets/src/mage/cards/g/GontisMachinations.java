@@ -60,7 +60,7 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you lose life for the first time each turn, ");
     }
 
-    public GontisMachinationsTriggeredAbility(final GontisMachinationsTriggeredAbility ability) {
+    private GontisMachinationsTriggeredAbility(final GontisMachinationsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -125,7 +125,7 @@ class GontisMachinationsEffect extends OneShotEffect {
         staticText = "Each opponent loses 3 life. You gain life equal to the life lost this way";
     }
 
-    public GontisMachinationsEffect(final GontisMachinationsEffect effect) {
+    private GontisMachinationsEffect(final GontisMachinationsEffect effect) {
         super(effect);
     }
 

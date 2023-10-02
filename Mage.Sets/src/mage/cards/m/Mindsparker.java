@@ -65,7 +65,7 @@ class MindsparkerEffect extends OneShotEffect {
         staticText = "{this} deals 2 damage to that player";
     }
 
-    public MindsparkerEffect(final MindsparkerEffect effect) {
+    private MindsparkerEffect(final MindsparkerEffect effect) {
         super(effect);
     }
 

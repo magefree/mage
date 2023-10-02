@@ -45,7 +45,7 @@ class GhastlyDiscoveryEffect extends OneShotEffect {
         this.staticText = "Draw two cards, then discard a card";
     }
 
-    public GhastlyDiscoveryEffect(final GhastlyDiscoveryEffect effect) {
+    private GhastlyDiscoveryEffect(final GhastlyDiscoveryEffect effect) {
         super(effect);
     }
 

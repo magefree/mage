@@ -64,7 +64,7 @@ class InameLifeAspectEffect extends OneShotEffect {
         this.staticText = "you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand";
     }
 
-    public InameLifeAspectEffect(final InameLifeAspectEffect effect) {
+    private InameLifeAspectEffect(final InameLifeAspectEffect effect) {
         super(effect);
     }
 

@@ -41,7 +41,7 @@ class SqueesRevengeEffect extends OneShotEffect {
         staticText = "Choose a number. Flip a coin that many times or until you lose a flip, whichever comes first. If you win all the flips, draw two cards for each flip.";
     }
 
-    public SqueesRevengeEffect(final SqueesRevengeEffect effect) {
+    private SqueesRevengeEffect(final SqueesRevengeEffect effect) {
         super(effect);
     }
 

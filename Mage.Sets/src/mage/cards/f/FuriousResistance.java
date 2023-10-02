@@ -52,7 +52,7 @@ class FuriousResistanceEffect extends OneShotEffect {
         staticText = "Target blocking creature gets +3/+0 and gains first strike until end of turn";
     }
 
-    public FuriousResistanceEffect(final FuriousResistanceEffect effect) {
+    private FuriousResistanceEffect(final FuriousResistanceEffect effect) {
         super(effect);
     }
 

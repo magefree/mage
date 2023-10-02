@@ -30,7 +30,7 @@ public final class FulgentDistraction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 
-    public FulgentDistraction (final FulgentDistraction card) {
+    private FulgentDistraction(final FulgentDistraction card) {
         super(card);
     }
 

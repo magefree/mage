@@ -74,7 +74,7 @@ class TheLocustGodEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    TheLocustGodEffect(TheLocustGodEffect effect) {
+    private TheLocustGodEffect(final TheLocustGodEffect effect) {
         super(effect);
     }
 

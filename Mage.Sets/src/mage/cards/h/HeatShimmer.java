@@ -49,7 +49,7 @@ class HeatShimmerEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target creature, except it has haste and \"At the beginning of the end step, exile this permanent.\"";
     }
 
-    public HeatShimmerEffect(final HeatShimmerEffect effect) {
+    private HeatShimmerEffect(final HeatShimmerEffect effect) {
         super(effect);
     }
 

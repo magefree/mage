@@ -72,7 +72,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
         this.staticText = "search your library for up to three instant cards, exile them, then shuffle";
     }
 
-    public KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {
+    private KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {
         super(effect);
     }
 
@@ -109,7 +109,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
                 "from among cards exiled with {this} without paying its mana cost";
     }
 
-    public KahoMinamoHistorianCastEffect(final KahoMinamoHistorianCastEffect effect) {
+    private KahoMinamoHistorianCastEffect(final KahoMinamoHistorianCastEffect effect) {
         super(effect);
     }
 

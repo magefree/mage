@@ -101,7 +101,7 @@ class KathrilAspectWarperEffect extends OneShotEffect {
             FilterControlledPermanent filter
                     = new FilterControlledCreaturePermanent("creature to give a " + counterType + " counter");
             Target target = new TargetControlledPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!player.choose(outcome, target, source, game)) {
                 continue;
             }

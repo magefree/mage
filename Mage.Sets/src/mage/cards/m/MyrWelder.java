@@ -58,7 +58,7 @@ class MyrWelderEffect extends OneShotEffect {
         staticText = "Exile target artifact card from a graveyard";
     }
 
-    public MyrWelderEffect(MyrWelderEffect effect) {
+    private MyrWelderEffect(final MyrWelderEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class MyrWelderContinuousEffect extends ContinuousEffectImpl {
         staticText = "{this} has all activated abilities of all cards exiled with it";
     }
 
-    public MyrWelderContinuousEffect(final MyrWelderContinuousEffect effect) {
+    private MyrWelderContinuousEffect(final MyrWelderContinuousEffect effect) {
         super(effect);
     }
 

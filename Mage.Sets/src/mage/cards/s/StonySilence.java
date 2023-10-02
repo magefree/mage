@@ -44,7 +44,7 @@ class StonySilenceCantActivateEffect extends RestrictionEffect {
         staticText = "Activated abilities of artifacts can't be activated";
     }
 
-    public StonySilenceCantActivateEffect(final StonySilenceCantActivateEffect effect) {
+    private StonySilenceCantActivateEffect(final StonySilenceCantActivateEffect effect) {
         super(effect);
     }
 

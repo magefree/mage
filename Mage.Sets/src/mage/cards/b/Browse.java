@@ -46,7 +46,7 @@ class BrowseEffect extends OneShotEffect {
         this.staticText = "Look at the top five cards of your library, put one of them into your hand, and exile the rest";
     }
 
-    public BrowseEffect(final BrowseEffect effect) {
+    private BrowseEffect(final BrowseEffect effect) {
         super(effect);
     }
 

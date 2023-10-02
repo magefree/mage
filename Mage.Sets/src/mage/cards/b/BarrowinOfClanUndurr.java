@@ -52,7 +52,7 @@ public final class BarrowinOfClanUndurr extends CardImpl {
                 CompletedDungeonCondition.instance, "return up to one creature card " +
                 "with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon"
         ));
-        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter, true));
         this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 

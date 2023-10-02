@@ -59,7 +59,7 @@ class CageOfHandsEffect extends RestrictionEffect {
         staticText = "Enchanted creature can't attack or block";
     }
 
-    public CageOfHandsEffect(final CageOfHandsEffect effect) {
+    private CageOfHandsEffect(final CageOfHandsEffect effect) {
         super(effect);
     }
 

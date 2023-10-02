@@ -57,7 +57,7 @@ class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
         this.staticText = "Look at target player's hand,";
     }
 
-    public SpyNetworkLookAtTargetPlayerHandEffect(final SpyNetworkLookAtTargetPlayerHandEffect effect) {
+    private SpyNetworkLookAtTargetPlayerHandEffect(final SpyNetworkLookAtTargetPlayerHandEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
         this.staticText = "and any face-down creatures they control";
     }
 
-    public SpyNetworkFaceDownEffect(final SpyNetworkFaceDownEffect effect) {
+    private SpyNetworkFaceDownEffect(final SpyNetworkFaceDownEffect effect) {
         super(effect);
     }
 

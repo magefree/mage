@@ -54,7 +54,7 @@ class EntrailsFeasterEffect extends OneShotEffect {
         this.staticText = "you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on {this}. If you don't, tap {this}";
     }
 
-    public EntrailsFeasterEffect(final EntrailsFeasterEffect effect) {
+    private EntrailsFeasterEffect(final EntrailsFeasterEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class EntrailsFeasterEffect extends OneShotEffect {
         if (controller != null && source.getSourceId() != null) {
             Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (target.canChoose(controller.getId(), source, game) && controller.chooseUse(outcome, "Exile a creature card from a graveyard?", source, game)) {
                 if (controller.choose(Outcome.Exile, target, source, game)) {
                     Card cardChosen = game.getCard(target.getFirstTarget());

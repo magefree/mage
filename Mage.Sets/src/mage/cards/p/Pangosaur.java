@@ -46,7 +46,7 @@ class PangosaurTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect());
     }
 
-    PangosaurTriggeredAbility(PangosaurTriggeredAbility ability) {
+    private PangosaurTriggeredAbility(final PangosaurTriggeredAbility ability) {
         super(ability);
     }
 

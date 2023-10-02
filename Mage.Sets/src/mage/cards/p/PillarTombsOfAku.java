@@ -54,7 +54,7 @@ class PillarTombsOfAkuEffect extends OneShotEffect {
                 + "player doesn't, they lose 5 life and you sacrifice {this}";
     }
 
-    public PillarTombsOfAkuEffect(final PillarTombsOfAkuEffect effect) {
+    private PillarTombsOfAkuEffect(final PillarTombsOfAkuEffect effect) {
         super(effect);
     }
 

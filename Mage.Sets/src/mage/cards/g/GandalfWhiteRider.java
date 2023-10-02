@@ -69,7 +69,7 @@ class GandalfWhiteRiderDyingEffect extends OneShotEffect {
         staticText = "put it into its owner's library fifth from the top";
     }
 
-    public GandalfWhiteRiderDyingEffect(final GandalfWhiteRiderDyingEffect effect) {
+    private GandalfWhiteRiderDyingEffect(final GandalfWhiteRiderDyingEffect effect) {
         super(effect);
     }
 

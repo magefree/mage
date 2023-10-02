@@ -43,7 +43,7 @@ class DingusStaffEffect extends OneShotEffect {
         this.staticText = "{this} deals 2 damage to that creature's controller";
     }
 
-    public DingusStaffEffect(final DingusStaffEffect effect) {
+    private DingusStaffEffect(final DingusStaffEffect effect) {
         super(effect);
     }
 

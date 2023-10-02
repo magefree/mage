@@ -67,11 +67,6 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         if (effect.checksEventType(event, game)) {
             return true;
@@ -111,17 +106,17 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
 
     @Override
     public boolean sendMessageToGameLog() {
-        return effect.sendMessageToGameLog(); //To change body of generated methods, choose Tools | Templates.
+        return effect.sendMessageToGameLog();
     }
 
     @Override
     public boolean sendMessageToUser() {
-        return effect.sendMessageToUser(); //To change body of generated methods, choose Tools | Templates.
+        return effect.sendMessageToUser();
     }
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        return effect.getInfoMessage(source, event, game); //To change body of generated methods, choose Tools | Templates.
+        return effect.getInfoMessage(source, event, game);
     }
 
     @Override

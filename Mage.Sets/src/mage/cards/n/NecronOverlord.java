@@ -36,12 +36,12 @@ public final class NecronOverlord extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // Relentless Mind -- {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.
+        // Relentless March -- {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}"));
         ability.addTarget(new TargetOpponent());
         ability.addCost(new TapSourceCost());
         ability.addCost(new NecronOverlordTapVariableArtifactCost());
-        ability.withFlavorWord("Relentless Mind");
+        ability.withFlavorWord("Relentless March");
         this.addAbility(ability);
 
     }

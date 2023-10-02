@@ -76,7 +76,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
         this.staticText = "For each creature token you control, create a token that's a copy of that creature";
     }
 
-    public RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {
+    private RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {
         super(effect);
     }
 

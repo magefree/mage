@@ -47,7 +47,7 @@ class DesecratedEarthEffect extends OneShotEffect {
         this.staticText = "Its controller discards a card";
     }
 
-    public DesecratedEarthEffect(final DesecratedEarthEffect effect) {
+    private DesecratedEarthEffect(final DesecratedEarthEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,7 @@ class DoomCannonFilter extends FilterControlledCreaturePermanent {
         super("a creature of the chosen type");
     }
 
-    public DoomCannonFilter(final DoomCannonFilter filter) {
+    private DoomCannonFilter(final DoomCannonFilter filter) {
         super(filter);
     }
 

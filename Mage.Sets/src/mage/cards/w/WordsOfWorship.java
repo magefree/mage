@@ -47,7 +47,7 @@ class WordsOfWorshipEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, you gain 5 life instead.";
     }
     
-    WordsOfWorshipEffect(final WordsOfWorshipEffect effect) {
+    private WordsOfWorshipEffect(final WordsOfWorshipEffect effect) {
         super(effect);
     }
     

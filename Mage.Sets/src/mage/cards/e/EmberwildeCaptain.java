@@ -55,7 +55,7 @@ class EmberwildeCaptainTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EmberwildeCaptainEffect(), false);
     }
 
-    public EmberwildeCaptainTriggeredAbility(final EmberwildeCaptainTriggeredAbility ability) {
+    private EmberwildeCaptainTriggeredAbility(final EmberwildeCaptainTriggeredAbility ability) {
         super(ability);
     }
 

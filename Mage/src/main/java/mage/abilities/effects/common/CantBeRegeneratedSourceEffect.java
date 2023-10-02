@@ -32,18 +32,13 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.REGENERATE;
     }
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {

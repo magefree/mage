@@ -33,7 +33,7 @@ public abstract class Emblem extends CommandObjectImpl {
     private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private UUID controllerId;
-    private MageObject sourceObject;
+    protected MageObject sourceObject;
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;

@@ -47,7 +47,7 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
         staticText = "that player returns a creature they control to its owner's hand";
     }
 
-    public SunkenHopeReturnToHandEffect(final SunkenHopeReturnToHandEffect effect) {
+    private SunkenHopeReturnToHandEffect(final SunkenHopeReturnToHandEffect effect) {
         super(effect);
     }
 

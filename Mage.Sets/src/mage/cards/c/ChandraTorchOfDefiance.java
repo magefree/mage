@@ -72,7 +72,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
         this.staticText = "Exile the top card of your library. You may cast that card. If you don't, {this} deals 2 damage to each opponent";
     }
 
-    public ChandraTorchOfDefianceEffect(final ChandraTorchOfDefianceEffect effect) {
+    private ChandraTorchOfDefianceEffect(final ChandraTorchOfDefianceEffect effect) {
         super(effect);
     }
 

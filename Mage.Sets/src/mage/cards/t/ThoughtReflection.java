@@ -48,7 +48,7 @@ class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would draw a card, draw two cards instead";
     }
 
-    public ThoughtReflectionReplacementEffect(final ThoughtReflectionReplacementEffect effect) {
+    private ThoughtReflectionReplacementEffect(final ThoughtReflectionReplacementEffect effect) {
         super(effect);
     }
 

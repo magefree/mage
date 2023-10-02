@@ -93,7 +93,7 @@ class KjeldoranEliteGuardDelayedTriggeredAbility extends DelayedTriggeredAbility
         this.creatureId = creatureId;
     }
 
-    KjeldoranEliteGuardDelayedTriggeredAbility(KjeldoranEliteGuardDelayedTriggeredAbility ability) {
+    private KjeldoranEliteGuardDelayedTriggeredAbility(final KjeldoranEliteGuardDelayedTriggeredAbility ability) {
         super(ability);
         this.creatureId = ability.creatureId;
     }

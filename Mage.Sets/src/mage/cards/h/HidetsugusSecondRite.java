@@ -43,7 +43,7 @@ class HidetsugusSecondRiteEffect extends OneShotEffect {
         this.staticText = "If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player";
     }
 
-    public HidetsugusSecondRiteEffect(final HidetsugusSecondRiteEffect effect) {
+    private HidetsugusSecondRiteEffect(final HidetsugusSecondRiteEffect effect) {
         super(effect);
     }
 

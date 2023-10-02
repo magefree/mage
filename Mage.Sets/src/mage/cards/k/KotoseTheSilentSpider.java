@@ -75,7 +75,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
                 "play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it";
     }
 
-    public KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {
+    private KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {
         super(effect);
     }
 

@@ -62,7 +62,7 @@ class StormchaserChimeraEffect extends OneShotEffect {
         this.staticText = ", then reveal the top card of your library. Stormchaser Chimera gets +X/+0 until end of turn, where X is that card's mana value";
     }
 
-    public StormchaserChimeraEffect(final StormchaserChimeraEffect effect) {
+    private StormchaserChimeraEffect(final StormchaserChimeraEffect effect) {
         super(effect);
     }
 

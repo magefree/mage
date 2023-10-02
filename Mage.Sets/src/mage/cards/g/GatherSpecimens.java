@@ -47,7 +47,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead";
     }
 
-    public GatherSpecimensReplacementEffect(final GatherSpecimensReplacementEffect effect) {
+    private GatherSpecimensReplacementEffect(final GatherSpecimensReplacementEffect effect) {
         super(effect);
     }
 

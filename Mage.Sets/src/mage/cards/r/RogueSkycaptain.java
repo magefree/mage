@@ -89,7 +89,7 @@ class RogueSkycaptainEffect extends OneShotEffect {
                     opponent = game.getPlayer(opponents.iterator().next());
                 } else {
                     Target target = new TargetOpponent(true);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     target.choose(Outcome.GainControl, source.getControllerId(), source.getSourceId(), source, game);
                     opponent = game.getPlayer(target.getFirstTarget());
                 }

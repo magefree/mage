@@ -55,7 +55,7 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player casts a spell from their hand, ");
     }
 
-    public PossibilityStormTriggeredAbility(final PossibilityStormTriggeredAbility ability) {
+    private PossibilityStormTriggeredAbility(final PossibilityStormTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class PossibilityStormEffect extends OneShotEffect {
         staticText = "that player exiles it, then exiles cards from the top of their library until they exile a card that shares a card type with it. That player may cast that card without paying its mana cost. Then they put all cards exiled with {this} on the bottom of their library in a random order";
     }
 
-    public PossibilityStormEffect(final PossibilityStormEffect effect) {
+    private PossibilityStormEffect(final PossibilityStormEffect effect) {
         super(effect);
     }
 

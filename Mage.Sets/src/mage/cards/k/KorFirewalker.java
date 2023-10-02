@@ -38,7 +38,7 @@ public final class KorFirewalker extends CardImpl {
 
     }
 
-    public KorFirewalker (final KorFirewalker card) {
+    private KorFirewalker(final KorFirewalker card) {
         super(card);
     }
 
@@ -55,7 +55,7 @@ class KorFirewalkerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
     }
 
-    public KorFirewalkerAbility(final KorFirewalkerAbility ability) {
+    private KorFirewalkerAbility(final KorFirewalkerAbility ability) {
         super(ability);
     }
 

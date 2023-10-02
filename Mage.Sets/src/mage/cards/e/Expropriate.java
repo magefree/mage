@@ -100,7 +100,7 @@ class ExpropriateEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(moneyCount, filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(Outcome.GainControl, target, source, game);
             target.getTargets()
                     .stream()

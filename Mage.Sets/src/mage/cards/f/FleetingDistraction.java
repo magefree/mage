@@ -25,7 +25,7 @@ public final class FleetingDistraction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FleetingDistraction (final FleetingDistraction card) {
+    private FleetingDistraction(final FleetingDistraction card) {
         super(card);
     }
 

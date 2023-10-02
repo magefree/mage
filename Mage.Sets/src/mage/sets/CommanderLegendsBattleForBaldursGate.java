@@ -206,6 +206,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Dungeoneer's Pack", 312, Rarity.UNCOMMON, mage.cards.d.DungeoneersPack.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 691, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Dusk Mangler", 751, Rarity.UNCOMMON, mage.cards.d.DuskMangler.class));
+        cards.add(new SetCardInfo("Dynaheir, Invoker Adept", 273, Rarity.RARE, mage.cards.d.DynaheirInvokerAdept.class));
         cards.add(new SetCardInfo("Earth Tremor", 171, Rarity.COMMON, mage.cards.e.EarthTremor.class));
         cards.add(new SetCardInfo("Earthquake Dragon", 228, Rarity.RARE, mage.cards.e.EarthquakeDragon.class));
         cards.add(new SetCardInfo("Eight-and-a-Half-Tails", 692, Rarity.RARE, mage.cards.e.EightAndAHalfTails.class));
@@ -312,6 +313,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Horror", 758, Rarity.RARE, mage.cards.h.HuntedHorror.class));
         cards.add(new SetCardInfo("Icewind Stalwart", 27, Rarity.COMMON, mage.cards.i.IcewindStalwart.class));
         cards.add(new SetCardInfo("Ignite the Future", 797, Rarity.RARE, mage.cards.i.IgniteTheFuture.class));
+        cards.add(new SetCardInfo("Illithid Harvester", 76, Rarity.RARE, mage.cards.i.IllithidHarvester.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Illithid Harvester", 564, Rarity.RARE, mage.cards.i.IllithidHarvester.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class));
         cards.add(new SetCardInfo("In Garruk's Wake", 759, Rarity.RARE, mage.cards.i.InGarruksWake.class));
         cards.add(new SetCardInfo("Ingenious Artillerist", 182, Rarity.COMMON, mage.cards.i.IngeniousArtillerist.class));

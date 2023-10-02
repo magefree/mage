@@ -46,7 +46,7 @@ class TimelyReinforcementsEffect extends OneShotEffect {
         staticText = "If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, create three 1/1 white Soldier creature tokens";
     }
 
-    public TimelyReinforcementsEffect(TimelyReinforcementsEffect effect) {
+    private TimelyReinforcementsEffect(final TimelyReinforcementsEffect effect) {
         super(effect);
     }
 

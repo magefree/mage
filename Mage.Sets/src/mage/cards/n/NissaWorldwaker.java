@@ -72,7 +72,7 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
         this.staticText = "Search your library for any number of basic land cards, put them onto the battlefield, then shuffle. Those lands become 4/4 Elemental creatures with trample. They're still lands";
     }
 
-    public NissaWorldwakerSearchEffect(final NissaWorldwakerSearchEffect effect) {
+    private NissaWorldwakerSearchEffect(final NissaWorldwakerSearchEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class NissaWorldwakerToken extends TokenImpl {
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
     }
-    public NissaWorldwakerToken(final NissaWorldwakerToken token) {
+    private NissaWorldwakerToken(final NissaWorldwakerToken token) {
         super(token);
     }
 

@@ -83,7 +83,7 @@ class TamiyosCompleationTapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {

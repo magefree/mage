@@ -97,7 +97,7 @@ class SyrixCarrierOfTheFlameCastEffect extends OneShotEffect {
         this.staticText = "you may cast {this} from your graveyard";
     }
 
-    SyrixCarrierOfTheFlameCastEffect(final SyrixCarrierOfTheFlameCastEffect effect) {
+    private SyrixCarrierOfTheFlameCastEffect(final SyrixCarrierOfTheFlameCastEffect effect) {
         super(effect);
     }
 

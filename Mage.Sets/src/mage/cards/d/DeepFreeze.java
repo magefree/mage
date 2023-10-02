@@ -70,7 +70,7 @@ class DeepFreezeToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public DeepFreezeToken(final DeepFreezeToken token) {
+    private DeepFreezeToken(final DeepFreezeToken token) {
         super(token);
     }
 

@@ -64,7 +64,7 @@ class FrenzyAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn));
     }
 
-    public FrenzyAbility(final FrenzyAbility ability) {
+    private FrenzyAbility(final FrenzyAbility ability) {
         super(ability);
     }
 

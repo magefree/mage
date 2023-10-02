@@ -54,7 +54,7 @@ class AjanisChosenEffect extends OneShotEffect {
         staticText = "create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token";
     }
 
-    public AjanisChosenEffect(final AjanisChosenEffect effect) {
+    private AjanisChosenEffect(final AjanisChosenEffect effect) {
         super(effect);
     }
 

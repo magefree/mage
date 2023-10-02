@@ -22,6 +22,7 @@ public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever {this} becomes blocked, ");
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
     protected BecomesBlockedSourceTriggeredAbility(final BecomesBlockedSourceTriggeredAbility ability) {

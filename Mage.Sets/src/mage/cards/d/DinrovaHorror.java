@@ -54,7 +54,7 @@ class DinrovaHorrorEffect extends OneShotEffect {
         this.staticText = "return target permanent to its owner's hand, then that player discards a card";
     }
 
-    public DinrovaHorrorEffect(final DinrovaHorrorEffect effect) {
+    private DinrovaHorrorEffect(final DinrovaHorrorEffect effect) {
         super(effect);
     }
 

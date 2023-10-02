@@ -56,7 +56,7 @@ class BurnAtTheStakeEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to any target equal to three times the number of creatures tapped this way";
     }
 
-    public BurnAtTheStakeEffect(final BurnAtTheStakeEffect effect) {
+    private BurnAtTheStakeEffect(final BurnAtTheStakeEffect effect) {
         super(effect);
     }
 

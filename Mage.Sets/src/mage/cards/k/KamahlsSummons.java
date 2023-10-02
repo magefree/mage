@@ -49,7 +49,7 @@ class KamahlsSummonsEffect extends OneShotEffect {
         this.staticText = "Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way";
     }
 
-    public KamahlsSummonsEffect(final KamahlsSummonsEffect effect) {
+    private KamahlsSummonsEffect(final KamahlsSummonsEffect effect) {
         super(effect);
     }
 

@@ -46,7 +46,7 @@ class RapidHybridizationEffect extends OneShotEffect {
         staticText = "That creature's controller creates a 3/3 green Frog Lizard creature token";
     }
 
-    public RapidHybridizationEffect(final RapidHybridizationEffect effect) {
+    private RapidHybridizationEffect(final RapidHybridizationEffect effect) {
         super(effect);
     }
 

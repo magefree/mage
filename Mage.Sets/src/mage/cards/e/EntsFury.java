@@ -55,7 +55,7 @@ class EntsFuryEffect extends OneShotEffect {
                 "Then that creature gets +1/+1 until end of turn and fights target creature you don't control.";
     }
 
-    public EntsFuryEffect(final EntsFuryEffect effect) {
+    private EntsFuryEffect(final EntsFuryEffect effect) {
         super(effect);
     }
 

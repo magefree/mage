@@ -57,7 +57,7 @@ class BosiumStripCastFromGraveyardEffect extends AsThoughEffectImpl {
         staticText = "Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card";
     }
 
-    BosiumStripCastFromGraveyardEffect(final BosiumStripCastFromGraveyardEffect effect) {
+    private BosiumStripCastFromGraveyardEffect(final BosiumStripCastFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a card cast this way would be put into a graveyard this turn, exile it instead";
     }
 
-    BosiumStripReplacementEffect(final BosiumStripReplacementEffect effect) {
+    private BosiumStripReplacementEffect(final BosiumStripReplacementEffect effect) {
         super(effect);
     }
 

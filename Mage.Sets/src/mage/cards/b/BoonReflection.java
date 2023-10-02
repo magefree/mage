@@ -44,7 +44,7 @@ class BoonReflectionEffect extends ReplacementEffectImpl {
         staticText = "If you would gain life, you gain twice that much life instead";
     }
 
-    public BoonReflectionEffect(final BoonReflectionEffect effect) {
+    private BoonReflectionEffect(final BoonReflectionEffect effect) {
         super(effect);
     }
 

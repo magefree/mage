@@ -75,7 +75,7 @@ class RowanKenrithAttackEffect extends RequirementEffect {
         staticText = "During target player's next turn, each creature that player controls attacks if able";
     }
 
-    public RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
+    private RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class RowanKenrithDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals 3 damage to each tapped creature target player controls";
     }
 
-    RowanKenrithDamageEffect(final RowanKenrithDamageEffect effect) {
+    private RowanKenrithDamageEffect(final RowanKenrithDamageEffect effect) {
         super(effect);
     }
 

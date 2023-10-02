@@ -60,7 +60,7 @@ class TangleEffect extends OneShotEffect {
         this.staticText = "Each attacking creature doesn't untap during its controller's next untap step";
     }
 
-    public TangleEffect(final TangleEffect effect) {
+    private TangleEffect(final TangleEffect effect) {
         super(effect);
     }
 

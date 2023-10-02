@@ -60,7 +60,7 @@ class RafinnesGuidancePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard by paying {2}{W} rather than paying its mana cost.";
     }
 
-    public RafinnesGuidancePlayEffect(final RafinnesGuidancePlayEffect effect) {
+    private RafinnesGuidancePlayEffect(final RafinnesGuidancePlayEffect effect) {
         super(effect);
     }
 

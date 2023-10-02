@@ -46,7 +46,7 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature with flying attacks, ");
     }
 
-    public GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
+    private GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
         super(ability);
     }
 
@@ -80,7 +80,7 @@ class GravityWellEffect extends ContinuousEffectImpl {
         staticText = "it loses flying until end of turn";
     }
 
-    public GravityWellEffect(final GravityWellEffect effect) {
+    private GravityWellEffect(final GravityWellEffect effect) {
         super(effect);
     }
 

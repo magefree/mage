@@ -111,7 +111,7 @@ class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
         this.staticText = "Create two tokens that are copies of the exiled card.";
     }
 
-    public OsgirTheReconstructorCreateArtifactTokensEffect(final OsgirTheReconstructorCreateArtifactTokensEffect effect)  {
+    private OsgirTheReconstructorCreateArtifactTokensEffect(final OsgirTheReconstructorCreateArtifactTokensEffect effect)  {
         super(effect);
     }
 

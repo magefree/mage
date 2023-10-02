@@ -72,7 +72,7 @@ class AureliaExemplarOfJusticeEffect extends OneShotEffect {
                 + "and gains vigilance if it's white.";
     }
 
-    public AureliaExemplarOfJusticeEffect(final AureliaExemplarOfJusticeEffect effect) {
+    private AureliaExemplarOfJusticeEffect(final AureliaExemplarOfJusticeEffect effect) {
         super(effect);
     }
 

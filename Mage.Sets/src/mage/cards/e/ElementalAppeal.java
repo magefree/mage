@@ -57,7 +57,7 @@ class ElementalAppealEffect extends OneShotEffect {
                 + "If this spell was kicked, that creature gets +7/+0 until end of turn";
     }
 
-    public ElementalAppealEffect(final ElementalAppealEffect effect) {
+    private ElementalAppealEffect(final ElementalAppealEffect effect) {
         super(effect);
     }
 

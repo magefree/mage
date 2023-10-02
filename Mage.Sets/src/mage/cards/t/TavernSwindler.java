@@ -54,7 +54,7 @@ class TavernSwindlerEffect extends OneShotEffect {
         staticText = "Flip a coin. If you win the flip, you gain 6 life";
     }
 
-    public TavernSwindlerEffect(TavernSwindlerEffect effect) {
+    private TavernSwindlerEffect(final TavernSwindlerEffect effect) {
         super(effect);
     }
 

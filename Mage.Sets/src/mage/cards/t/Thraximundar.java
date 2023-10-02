@@ -70,7 +70,7 @@ class ThraximundarTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, "defending player"));
     }
 
-    public ThraximundarTriggeredAbility(final ThraximundarTriggeredAbility ability) {
+    private ThraximundarTriggeredAbility(final ThraximundarTriggeredAbility ability) {
         super(ability);
     }
 
@@ -108,7 +108,7 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player sacrifices a creature, ");
     }
 
-    public PlayerSacrificesCreatureTriggeredAbility(final PlayerSacrificesCreatureTriggeredAbility ability) {
+    private PlayerSacrificesCreatureTriggeredAbility(final PlayerSacrificesCreatureTriggeredAbility ability) {
         super(ability);
     }
 

@@ -59,7 +59,7 @@ class MetathranAerostatEffect extends OneShotEffect {
                 + "If you do, return {this} to its owner's hand";
     }
 
-    public MetathranAerostatEffect(final MetathranAerostatEffect effect) {
+    private MetathranAerostatEffect(final MetathranAerostatEffect effect) {
         super(effect);
     }
 

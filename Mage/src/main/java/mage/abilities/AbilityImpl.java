@@ -435,6 +435,7 @@ public abstract class AbilityImpl implements Ability {
                 case TRANSFORMED:
                 case DISTURB:
                 case MORE_THAN_MEETS_THE_EYE:
+                case BESTOW:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
@@ -444,10 +445,11 @@ public abstract class AbilityImpl implements Ability {
                     canUseAdditionalCost = true;
                     break;
                 case NORMAL:
-                default:
                     canUseAlternativeCost = true;
                     canUseAdditionalCost = true;
                     break;
+                default:
+                    throw new IllegalArgumentException("Unknown ability cast mode: " + ((SpellAbility) this).getSpellAbilityCastMode());
             }
         }
 
@@ -1480,6 +1482,13 @@ public abstract class AbilityImpl implements Ability {
     }
 
     public AbilityImpl copyWithZone(Zone zone) {
+        if (this instanceof MageSingleton) {
+            // not safe to change zone for singletons
+            // in theory there could be some sort of wrapper to effectively change
+            // the zone here, but currently no use of copyWithZone actually needs
+            // to change the zone of any existing singleton abilities
+            return this;
+        }
         AbilityImpl copy = ((AbilityImpl)this.copy());
         copy.zone = zone;
         copy.newId();

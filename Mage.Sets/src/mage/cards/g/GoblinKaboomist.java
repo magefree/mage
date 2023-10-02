@@ -57,7 +57,7 @@ class GoblinKaboomistFlipCoinEffect extends OneShotEffect {
         staticText = "Then flip a coin. If you lose the flip, {this} deals 2 damage to itself";
     }
 
-    public GoblinKaboomistFlipCoinEffect(final GoblinKaboomistFlipCoinEffect effect) {
+    private GoblinKaboomistFlipCoinEffect(final GoblinKaboomistFlipCoinEffect effect) {
         super(effect);
     }
 

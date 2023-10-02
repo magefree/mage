@@ -44,7 +44,7 @@ class EssenceBacklashEffect extends OneShotEffect {
         staticText = "Counter target creature spell. {this} deals damage equal to that spell's power to its controller";
     }
 
-    public EssenceBacklashEffect(final EssenceBacklashEffect effect) {
+    private EssenceBacklashEffect(final EssenceBacklashEffect effect) {
         super(effect);
     }
 

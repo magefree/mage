@@ -58,7 +58,7 @@ class KamiOfTheHonoredDeadTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
-    public KamiOfTheHonoredDeadTriggeredAbility(final KamiOfTheHonoredDeadTriggeredAbility effect) {
+    private KamiOfTheHonoredDeadTriggeredAbility(final KamiOfTheHonoredDeadTriggeredAbility effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class KamiOfTheHonoredDeadGainLifeEffect extends OneShotEffect {
             staticText = "you gain that much life";
         }
 
-    public KamiOfTheHonoredDeadGainLifeEffect(final KamiOfTheHonoredDeadGainLifeEffect effect) {
+    private KamiOfTheHonoredDeadGainLifeEffect(final KamiOfTheHonoredDeadGainLifeEffect effect) {
         super(effect);
     }
 

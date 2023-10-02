@@ -34,7 +34,7 @@ public final class CrimsonWisps extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
-    public CrimsonWisps(final CrimsonWisps card) {
+    private CrimsonWisps(final CrimsonWisps card) {
         super(card);
     }
 

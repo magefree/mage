@@ -46,7 +46,7 @@ class ElementalAuguryEffect extends OneShotEffect {
         this.staticText = "look at the top three cards of target player's library, then put them back in any order";
     }
 
-    public ElementalAuguryEffect(final ElementalAuguryEffect effect) {
+    private ElementalAuguryEffect(final ElementalAuguryEffect effect) {
         super(effect);
     }
 

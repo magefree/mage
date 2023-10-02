@@ -55,7 +55,7 @@ class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
         addWatcher(new InvestigatedWatcher());
     }
 
-    public ErdwalIlluminatorTriggeredAbility(final ErdwalIlluminatorTriggeredAbility ability) {
+    private ErdwalIlluminatorTriggeredAbility(final ErdwalIlluminatorTriggeredAbility ability) {
         super(ability);
     }
 

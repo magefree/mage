@@ -59,7 +59,7 @@ class AcademicProbationRestrictionEffect extends RestrictionEffect {
         staticText = "choose target nonland permanent. Until your next turn, it can't attack or block, and its activated abilities can't be activated";
     }
 
-    AcademicProbationRestrictionEffect(final AcademicProbationRestrictionEffect effect) {
+    private AcademicProbationRestrictionEffect(final AcademicProbationRestrictionEffect effect) {
         super(effect);
     }
 

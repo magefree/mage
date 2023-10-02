@@ -65,7 +65,7 @@ class PossessedSkaabDiesEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, exile it instead";
     }
 
-    public PossessedSkaabDiesEffect(final PossessedSkaabDiesEffect effect) {
+    private PossessedSkaabDiesEffect(final PossessedSkaabDiesEffect effect) {
         super(effect);
     }
 

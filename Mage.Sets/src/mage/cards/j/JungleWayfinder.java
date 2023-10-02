@@ -54,7 +54,7 @@ class JungleWayfinderEffect extends OneShotEffect {
         this.staticText = "each player may search their library for a basic land card, reveal it, put it into their hand, then shuffle";
     }
 
-    public JungleWayfinderEffect(final JungleWayfinderEffect effect) {
+    private JungleWayfinderEffect(final JungleWayfinderEffect effect) {
         super(effect);
     }
 

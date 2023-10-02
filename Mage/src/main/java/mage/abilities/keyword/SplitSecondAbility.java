@@ -59,7 +59,8 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+        return event.getType() == GameEvent.EventType.CAST_SPELL
+                || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
@@ -73,11 +74,6 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

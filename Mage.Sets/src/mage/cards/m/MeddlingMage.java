@@ -54,13 +54,8 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Spells with the chosen name can't be cast";
     }
 
-    public MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {
+    private MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

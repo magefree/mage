@@ -91,7 +91,7 @@ class DiluvianPrimordialEffect extends OneShotEffect {
                 + "into a graveyard, exile it instead";
     }
 
-    public DiluvianPrimordialEffect(final DiluvianPrimordialEffect effect) {
+    private DiluvianPrimordialEffect(final DiluvianPrimordialEffect effect) {
         super(effect);
     }
 
@@ -135,7 +135,7 @@ class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a card cast this way would be put into a graveyard this turn, exile it instead";
     }
 
-    public DiluvianPrimordialReplacementEffect(final DiluvianPrimordialReplacementEffect effect) {
+    private DiluvianPrimordialReplacementEffect(final DiluvianPrimordialReplacementEffect effect) {
         super(effect);
     }
 

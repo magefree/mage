@@ -53,7 +53,7 @@ class FalkenrathNobleTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetPlayer());
     }
 
-    public FalkenrathNobleTriggeredAbility(final FalkenrathNobleTriggeredAbility ability) {
+    private FalkenrathNobleTriggeredAbility(final FalkenrathNobleTriggeredAbility ability) {
         super(ability);
     }
 

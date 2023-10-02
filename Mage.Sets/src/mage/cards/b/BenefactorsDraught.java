@@ -52,7 +52,7 @@ class BenefactorsDraughtTriggeredAbility extends DelayedTriggeredAbility {
         super(new DrawCardSourceControllerEffect(1), Duration.EndOfTurn, false);
     }
 
-    BenefactorsDraughtTriggeredAbility(final BenefactorsDraughtTriggeredAbility ability) {
+    private BenefactorsDraughtTriggeredAbility(final BenefactorsDraughtTriggeredAbility ability) {
         super(ability);
     }
 

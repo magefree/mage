@@ -58,7 +58,7 @@ class MindblazeEffect extends OneShotEffect {
                 "{this} deals 8 damage to that player. Then that player shuffles";
     }
 
-    MindblazeEffect(final MindblazeEffect effect) {
+    private MindblazeEffect(final MindblazeEffect effect) {
         super(effect);
     }
 

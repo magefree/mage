@@ -54,7 +54,7 @@ class TreacherousPitDwellerEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    public TreacherousPitDwellerEffect(final TreacherousPitDwellerEffect effect) {
+    private TreacherousPitDwellerEffect(final TreacherousPitDwellerEffect effect) {
         super(effect);
     }
 

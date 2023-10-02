@@ -50,7 +50,7 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't cast spells that share a color with the spell most recently cast this turn";
     }
 
-    ManaMazeEffect(final ManaMazeEffect effect) {
+    private ManaMazeEffect(final ManaMazeEffect effect) {
         super(effect);
     }
 
@@ -68,11 +68,6 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
                 return !card.getColor(game).intersection(watcher.getLastSpellCast().getColor(game)).isColorless();
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

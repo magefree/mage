@@ -48,7 +48,7 @@ class SpelljackEffect extends OneShotEffect {
         this.staticText = "Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may play it without paying its mana cost for as long as it remains exiled";
     }
 
-    SpelljackEffect(final SpelljackEffect effect) {
+    private SpelljackEffect(final SpelljackEffect effect) {
         super(effect);
     }
 

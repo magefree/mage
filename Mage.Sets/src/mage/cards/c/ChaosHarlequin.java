@@ -48,7 +48,7 @@ class ChaosHarlequinEffect extends OneShotEffect {
                 "{this} gets -4/-0 until end of turn. Otherwise, {this} gets +2/+0 until end of turn";
     }
 
-    public ChaosHarlequinEffect(final ChaosHarlequinEffect effect) {
+    private ChaosHarlequinEffect(final ChaosHarlequinEffect effect) {
         super(effect);
     }
 

@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -45,7 +45,7 @@ public final class TheHowlingAbomination extends CardImpl {
         )));
 
         // Electric Thunder—Whenever Blanka becomes the target of a spell, he gets +2/+2 until end of turn and deals 2 damage to each opponent.
-        Ability ability = new SourceBecomesTargetTriggeredAbility(new BoostSourceEffect(
+        Ability ability = new BecomesTargetSourceTriggeredAbility(new BoostSourceEffect(
                 2, 2, Duration.EndOfTurn
         ).setText("it gets +2/+2 until end of turn"), StaticFilters.FILTER_SPELL_A).setTriggerPhrase("Whenever {this} becomes the target of a spell, ");
         ability.addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT)

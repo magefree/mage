@@ -83,7 +83,7 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
         this.staticText = "Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it";
     }
 
-    NahiriTheLithomancerFirstAbilityEffect(final NahiriTheLithomancerFirstAbilityEffect effect) {
+    private NahiriTheLithomancerFirstAbilityEffect(final NahiriTheLithomancerFirstAbilityEffect effect) {
         super(effect);
     }
 

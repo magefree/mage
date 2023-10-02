@@ -51,7 +51,7 @@ class BeckTriggeredAbility extends DelayedTriggeredAbility {
         optional = true;
     }
 
-    public BeckTriggeredAbility(BeckTriggeredAbility ability) {
+    private BeckTriggeredAbility(final BeckTriggeredAbility ability) {
         super(ability);
     }
 

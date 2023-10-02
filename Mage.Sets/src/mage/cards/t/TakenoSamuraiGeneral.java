@@ -58,7 +58,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
         staticText = "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
     }
 
-    public TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
+    private TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
         super(effect);
     }
 

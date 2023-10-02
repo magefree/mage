@@ -55,7 +55,7 @@ class SkirkCommandoTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredA
         super(new DamageTargetEffect(2), true, false);
     }
 
-    public SkirkCommandoTriggeredAbility(SkirkCommandoTriggeredAbility ability) {
+    private SkirkCommandoTriggeredAbility(final SkirkCommandoTriggeredAbility ability) {
         super(ability);
     }
 

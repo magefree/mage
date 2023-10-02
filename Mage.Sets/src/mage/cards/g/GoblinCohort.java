@@ -51,7 +51,7 @@ class GoblinCohortEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you've cast a creature spell this turn";
     }
 
-    public GoblinCohortEffect(final GoblinCohortEffect effect) {
+    private GoblinCohortEffect(final GoblinCohortEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class LoyalApprenticeEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public LoyalApprenticeEffect(final LoyalApprenticeEffect effect) {
+    private LoyalApprenticeEffect(final LoyalApprenticeEffect effect) {
         super(effect);
     }
 

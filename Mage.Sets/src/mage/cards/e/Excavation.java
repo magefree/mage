@@ -53,7 +53,7 @@ class ExcavationEffect extends OneShotEffect {
         this.staticText = "Draw a card. Any player may activate this ability";
     }
 
-    public ExcavationEffect(final ExcavationEffect effect) {
+    private ExcavationEffect(final ExcavationEffect effect) {
         super(effect);
     }
 

@@ -52,7 +52,7 @@ class ChandrasSpitfireAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), false);
     }
 
-    public ChandrasSpitfireAbility(final ChandrasSpitfireAbility ability) {
+    private ChandrasSpitfireAbility(final ChandrasSpitfireAbility ability) {
         super(ability);
     }
 

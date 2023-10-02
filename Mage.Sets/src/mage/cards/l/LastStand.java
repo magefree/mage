@@ -63,7 +63,7 @@ class LastStandEffect extends OneShotEffect {
         this.staticText = "Target opponent loses 2 life for each Swamp you control. Last Stand deals damage to target creature equal to the number of Mountains you control. Create a 1/1 green Saproling creature token for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards";
     }
 
-    public LastStandEffect(final LastStandEffect effect) {
+    private LastStandEffect(final LastStandEffect effect) {
         super(effect);
     }
 

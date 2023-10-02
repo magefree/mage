@@ -59,7 +59,7 @@ class DoomgapeEffect extends OneShotEffect {
         this.staticText = "sacrifice a creature. You gain life equal to that creature's toughness";
     }
 
-    public DoomgapeEffect(final DoomgapeEffect effect) {
+    private DoomgapeEffect(final DoomgapeEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class DoomgapeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {

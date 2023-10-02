@@ -52,7 +52,7 @@ class HarborGuardianEffect extends OneShotEffect {
         staticText = "defending player may draw a card";
     }
 
-    public HarborGuardianEffect(final HarborGuardianEffect effect) {
+    private HarborGuardianEffect(final HarborGuardianEffect effect) {
         super(effect);
     }
 

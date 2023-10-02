@@ -79,7 +79,7 @@ class BreachTheMultiverseEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         TargetCard target = new TargetCardInGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null || player.getGraveyard().count(filter, game) < 1) {

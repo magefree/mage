@@ -50,7 +50,7 @@ class BloomTenderEffect extends ManaEffect {
         staticText = "For each color among permanents you control, add one mana of that color";
     }
 
-    public BloomTenderEffect(final BloomTenderEffect effect) {
+    private BloomTenderEffect(final BloomTenderEffect effect) {
         super(effect);
     }
 

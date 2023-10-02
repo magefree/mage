@@ -73,7 +73,7 @@ class ThelonsCurseEffect extends OneShotEffect {
         staticText = "that player may choose any number of tapped blue creatures they control and pay {U} for each creature chosen this way. If the player does, untap those creatures.";
     }
 
-    ThelonsCurseEffect(ThelonsCurseEffect effect) {
+    private ThelonsCurseEffect(final ThelonsCurseEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class NinThePainArtistEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to target creature. That creature's controller draws X cards.";
     }
     
-    NinThePainArtistEffect(final NinThePainArtistEffect effect) {
+    private NinThePainArtistEffect(final NinThePainArtistEffect effect) {
         super(effect);
     }
     

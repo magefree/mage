@@ -56,7 +56,7 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you activate {this}'s outlast ability, ");
     }
 
-    public HeraldOfAnafenzaTriggeredAbility(final HeraldOfAnafenzaTriggeredAbility ability) {
+    private HeraldOfAnafenzaTriggeredAbility(final HeraldOfAnafenzaTriggeredAbility ability) {
         super(ability);
     }
 

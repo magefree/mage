@@ -64,7 +64,7 @@ class FeralDeceiverEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn";
     }
 
-    public FeralDeceiverEffect(final FeralDeceiverEffect effect) {
+    private FeralDeceiverEffect(final FeralDeceiverEffect effect) {
         super(effect);
     }
 

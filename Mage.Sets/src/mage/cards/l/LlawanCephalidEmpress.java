@@ -75,18 +75,13 @@ class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
         staticText = "Your opponents can't cast blue creature spells";
     }
 
-    public LlawanCephalidRuleModifyingEffect(final LlawanCephalidRuleModifyingEffect effect) {
+    private LlawanCephalidRuleModifyingEffect(final LlawanCephalidRuleModifyingEffect effect) {
         super(effect);
     }
 
     @Override
     public LlawanCephalidRuleModifyingEffect copy() {
         return new LlawanCephalidRuleModifyingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -47,7 +47,7 @@ class PrimalOrderDamageTargetEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to that player equal to the number of nonbasic lands they control";
     }
 
-    public PrimalOrderDamageTargetEffect(PrimalOrderDamageTargetEffect copy) {
+    private PrimalOrderDamageTargetEffect(final PrimalOrderDamageTargetEffect copy) {
         super(copy);
     }
 

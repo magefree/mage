@@ -53,7 +53,7 @@ class SeverTheBloodlineEffect extends OneShotEffect {
         this.staticText = "Exile target creature and all other creatures with the same name as that creature";
     }
 
-    public SeverTheBloodlineEffect(final SeverTheBloodlineEffect effect) {
+    private SeverTheBloodlineEffect(final SeverTheBloodlineEffect effect) {
         super(effect);
     }
 

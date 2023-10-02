@@ -59,7 +59,7 @@ class AlpineMoonEffect extends ContinuousEffectImpl {
                 + "and they gain \"{T}: Add one mana of any color.\"";
     }
 
-    public AlpineMoonEffect(final AlpineMoonEffect effect) {
+    private AlpineMoonEffect(final AlpineMoonEffect effect) {
         super(effect);
     }
 

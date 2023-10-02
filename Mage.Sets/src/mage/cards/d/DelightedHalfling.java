@@ -139,18 +139,13 @@ class DelightedHalflingCantCounterEffect extends ContinuousRuleModifyingEffectIm
         staticText = null;
     }
 
-    public DelightedHalflingCantCounterEffect(final DelightedHalflingCantCounterEffect effect) {
+    private DelightedHalflingCantCounterEffect(final DelightedHalflingCantCounterEffect effect) {
         super(effect);
     }
 
     @Override
     public DelightedHalflingCantCounterEffect copy() {
         return new DelightedHalflingCantCounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

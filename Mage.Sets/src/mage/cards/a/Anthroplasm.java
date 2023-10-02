@@ -59,7 +59,7 @@ class AnthroplasmEffect extends OneShotEffect {
         staticText = "Remove all +1/+1 counters from {this} and put X +1/+1 counters on it";
     }
 
-    AnthroplasmEffect(AnthroplasmEffect effect) {
+    private AnthroplasmEffect(final AnthroplasmEffect effect) {
         super(effect);
     }
 

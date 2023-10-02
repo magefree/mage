@@ -47,7 +47,7 @@ class TragicLessonEffect extends OneShotEffect {
         staticText = "Then discard a card unless you return a land you control to its owner's hand.";
     }
 
-    public TragicLessonEffect(final TragicLessonEffect effect) {
+    private TragicLessonEffect(final TragicLessonEffect effect) {
         super(effect);
     }
 

@@ -40,7 +40,7 @@ public final class BorosBattleshaper extends CardImpl {
 
     }
 
-    public BorosBattleshaper(final BorosBattleshaper card) {
+    private BorosBattleshaper(final BorosBattleshaper card) {
         super(card);
     }
 
@@ -58,7 +58,7 @@ class BorosBattleshaperEffect extends OneShotEffect {
         this.staticText = "up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat";
     }
 
-    public BorosBattleshaperEffect(final BorosBattleshaperEffect effect) {
+    private BorosBattleshaperEffect(final BorosBattleshaperEffect effect) {
         super(effect);
     }
 

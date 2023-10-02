@@ -60,7 +60,7 @@ class GuardDogsEffect extends PreventionEffectImpl {
         this.staticText = "Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent";
     }
 
-    public GuardDogsEffect(final GuardDogsEffect effect) {
+    private GuardDogsEffect(final GuardDogsEffect effect) {
         super(effect);
     }
     
@@ -68,7 +68,7 @@ class GuardDogsEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         this.controlledTarget = new TargetControlledPermanent();
-        this.controlledTarget.setNotTarget(true);
+        this.controlledTarget.withNotTarget(true);
         this.controlledTarget.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }

@@ -66,7 +66,7 @@ class StarkeOfRathEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact or creature. That permanent's controller gains control of {this}";
     }
 
-    public StarkeOfRathEffect(final StarkeOfRathEffect effect) {
+    private StarkeOfRathEffect(final StarkeOfRathEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class StarkeOfRathControlEffect extends ContinuousEffectImpl {
         staticText = "That permanent's controller gains control of {this}";
     }
 
-    public StarkeOfRathControlEffect(final StarkeOfRathControlEffect effect) {
+    private StarkeOfRathControlEffect(final StarkeOfRathControlEffect effect) {
         super(effect);
     }
 

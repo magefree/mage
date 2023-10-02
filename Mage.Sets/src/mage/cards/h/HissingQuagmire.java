@@ -63,7 +63,7 @@ class HissingQuagmireToken extends TokenImpl {
         toughness = new MageInt(2);
         addAbility(DeathtouchAbility.getInstance());
     }
-    public HissingQuagmireToken(final HissingQuagmireToken token) {
+    private HissingQuagmireToken(final HissingQuagmireToken token) {
         super(token);
     }
 

@@ -39,7 +39,7 @@ class RuthlessInvasionEffect extends RestrictionEffect {
         staticText = "Nonartifact creatures can't block this turn";
     }
 
-    RuthlessInvasionEffect(final RuthlessInvasionEffect effect) {
+    private RuthlessInvasionEffect(final RuthlessInvasionEffect effect) {
         super(effect);
     }
 

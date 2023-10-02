@@ -56,7 +56,7 @@ class ShapeStealerEffect extends OneShotEffect {
         this.staticText = "change {this}'s base power and toughness to that creature's power and toughness until end of turn";
     }
 
-    public ShapeStealerEffect(final ShapeStealerEffect effect) {
+    private ShapeStealerEffect(final ShapeStealerEffect effect) {
         super(effect);
     }
 

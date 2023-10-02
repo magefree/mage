@@ -48,7 +48,7 @@ public final class DemonicEmbrace extends CardImpl {
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has flying");
         ability.addEffect(effect);
-        effect = new AddCardSubtypeAttachedEffect(SubType.DEMON, Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect = new AddCardSubtypeAttachedEffect(SubType.DEMON, AttachmentType.AURA);
         effect.setText(", and is a Demon in addition to its other types");
         ability.addEffect(effect);
         this.addAbility(ability);
@@ -75,7 +75,7 @@ class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard by paying 3 life and discarding a card in addition to paying its other costs";
     }
 
-    public DemonicEmbracePlayEffect(final DemonicEmbracePlayEffect effect) {
+    private DemonicEmbracePlayEffect(final DemonicEmbracePlayEffect effect) {
         super(effect);
     }
 

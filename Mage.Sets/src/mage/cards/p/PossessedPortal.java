@@ -55,7 +55,7 @@ class PossessedPortalReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a player would draw a card, that player skips that draw instead";
     }
 
-    PossessedPortalReplacementEffect(final PossessedPortalReplacementEffect effect) {
+    private PossessedPortalReplacementEffect(final PossessedPortalReplacementEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class PossessedPortalEffect extends OneShotEffect {
         this.staticText = "each player sacrifices a permanent unless they discard a card";
     }
     
-    PossessedPortalEffect(final PossessedPortalEffect effect) {
+    private PossessedPortalEffect(final PossessedPortalEffect effect) {
         super(effect);
     }
     

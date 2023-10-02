@@ -70,7 +70,7 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
         setTriggerPhrase("When Flesh Carver dies, ");
     }
 
-    public FleshCarverAbility(final FleshCarverAbility ability) {
+    private FleshCarverAbility(final FleshCarverAbility ability) {
         super(ability);
     }
 
@@ -101,7 +101,7 @@ class FleshCarverEffect extends OneShotEffect {
         staticText = "create an X/X black Horror creature token, where X is {this}'s power";
     }
 
-    public FleshCarverEffect(FleshCarverEffect ability) {
+    private FleshCarverEffect(final FleshCarverEffect ability) {
         super(ability);
     }
 

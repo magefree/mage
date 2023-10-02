@@ -46,7 +46,7 @@ class RecoilEffect extends OneShotEffect {
         this.staticText = "return target permanent to its owner's hand. Then that player discards a card";
     }
 
-    public RecoilEffect(final RecoilEffect effect) {
+    private RecoilEffect(final RecoilEffect effect) {
         super(effect);
     }
 

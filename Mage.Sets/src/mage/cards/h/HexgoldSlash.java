@@ -43,7 +43,7 @@ class HexgoldSlashEffect extends OneShotEffect {
                 "{this} deals 4 damage to that creature instead";
     }
 
-    public HexgoldSlashEffect(final HexgoldSlashEffect effect) {
+    private HexgoldSlashEffect(final HexgoldSlashEffect effect) {
         super(effect);
     }
 

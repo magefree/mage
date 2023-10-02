@@ -58,7 +58,7 @@ class BlightHerderEffect extends OneShotEffect {
         this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, create three 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}.";
     }
 
-    public BlightHerderEffect(final BlightHerderEffect effect) {
+    private BlightHerderEffect(final BlightHerderEffect effect) {
         super(effect);
     }
 

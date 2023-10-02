@@ -65,7 +65,7 @@ class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
         staticText = "you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead";
     }
 
-    public EmeriaShepherdReturnToHandTargetEffect(final EmeriaShepherdReturnToHandTargetEffect effect) {
+    private EmeriaShepherdReturnToHandTargetEffect(final EmeriaShepherdReturnToHandTargetEffect effect) {
         super(effect);
     }
 

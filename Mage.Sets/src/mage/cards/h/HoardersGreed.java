@@ -43,7 +43,7 @@ class HoardersGreedEffect extends OneShotEffect {
         this.staticText = "You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process";
     }
 
-    public HoardersGreedEffect(final HoardersGreedEffect effect) {
+    private HoardersGreedEffect(final HoardersGreedEffect effect) {
         super(effect);
     }
 

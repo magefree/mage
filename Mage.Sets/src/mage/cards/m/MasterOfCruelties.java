@@ -63,7 +63,7 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} attacks a player and isn't blocked, ");
     }
 
-    public MasterOfCrueltiesTriggeredAbility(final MasterOfCrueltiesTriggeredAbility ability) {
+    private MasterOfCrueltiesTriggeredAbility(final MasterOfCrueltiesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -105,7 +105,7 @@ class MasterOfCrueltiesEffect extends OneShotEffect {
         this.staticText = "that player's life total becomes 1";
     }
 
-    public MasterOfCrueltiesEffect(final MasterOfCrueltiesEffect effect) {
+    private MasterOfCrueltiesEffect(final MasterOfCrueltiesEffect effect) {
         super(effect);
     }
 
@@ -132,7 +132,7 @@ class MasterOfCrueltiesNoDamageEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "{this} assigns no combat damage this combat";
     }
 
-    public MasterOfCrueltiesNoDamageEffect(final MasterOfCrueltiesNoDamageEffect effect) {
+    private MasterOfCrueltiesNoDamageEffect(final MasterOfCrueltiesNoDamageEffect effect) {
         super(effect);
     }
 

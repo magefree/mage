@@ -112,7 +112,7 @@ class CombatCalligrapherEffect extends RestrictionEffect {
         this.staticText = "Inklings can't attack you or planeswalkers you control";
     }
 
-    public CombatCalligrapherEffect(final CombatCalligrapherEffect effect) {
+    private CombatCalligrapherEffect(final CombatCalligrapherEffect effect) {
         super(effect);
     }
 

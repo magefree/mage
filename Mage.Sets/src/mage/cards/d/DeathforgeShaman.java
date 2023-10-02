@@ -56,7 +56,7 @@ class DeathforgeShamanEffect extends OneShotEffect {
         staticText = "it deals damage to target player or planeswalker equal to twice the number of times it was kicked";
     }
 
-    public DeathforgeShamanEffect(final DeathforgeShamanEffect effect) {
+    private DeathforgeShamanEffect(final DeathforgeShamanEffect effect) {
         super(effect);
     }
 

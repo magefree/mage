@@ -60,7 +60,7 @@ class ArtificersHexEffect extends OneShotEffect {
         this.staticText = "if enchanted Equipment is attached to a creature, destroy that creature";
     }
 
-    public ArtificersHexEffect(final ArtificersHexEffect effect) {
+    private ArtificersHexEffect(final ArtificersHexEffect effect) {
         super(effect);
     }
 

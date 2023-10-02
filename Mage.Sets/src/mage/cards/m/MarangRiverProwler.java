@@ -70,7 +70,7 @@ class MarangRiverProwlerCastEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard as long as you control a black or green permanent";
     }
 
-    MarangRiverProwlerCastEffect(final MarangRiverProwlerCastEffect effect) {
+    private MarangRiverProwlerCastEffect(final MarangRiverProwlerCastEffect effect) {
         super(effect);
     }
 

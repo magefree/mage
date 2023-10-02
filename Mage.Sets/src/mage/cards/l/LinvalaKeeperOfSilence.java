@@ -50,7 +50,7 @@ class LinvalaKeeperOfSilenceCantActivateEffect extends RestrictionEffect {
         staticText = "Activated abilities of creatures your opponents control can't be activated";
     }
 
-    public LinvalaKeeperOfSilenceCantActivateEffect(final LinvalaKeeperOfSilenceCantActivateEffect effect) {
+    private LinvalaKeeperOfSilenceCantActivateEffect(final LinvalaKeeperOfSilenceCantActivateEffect effect) {
         super(effect);
     }
 

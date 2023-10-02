@@ -57,7 +57,7 @@ class StanggCreateTokenEffect extends OneShotEffect {
                 + "Sacrifice {this} when that token leaves the battlefield";
     }
 
-    public StanggCreateTokenEffect(final StanggCreateTokenEffect effect) {
+    private StanggCreateTokenEffect(final StanggCreateTokenEffect effect) {
         super(effect);
     }
 

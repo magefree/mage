@@ -58,7 +58,7 @@ class TeferisResponseEffect extends OneShotEffect {
         this.staticText = "Counter target spell or ability an opponent controls that targets a land you control. If a permanent's ability is countered this way, destroy that permanent";
     }
         
-    public TeferisResponseEffect(final TeferisResponseEffect effect) {
+    private TeferisResponseEffect(final TeferisResponseEffect effect) {
         super(effect);
     }
 

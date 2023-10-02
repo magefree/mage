@@ -70,7 +70,7 @@ class DreamsOfTheDeadEffect extends OneShotEffect {
         this.staticText = "Return target white or black creature card from your graveyard to the battlefield. That creature gains \"Cumulative upkeep {2}.\"";
     }
 
-    public DreamsOfTheDeadEffect(final DreamsOfTheDeadEffect effect) {
+    private DreamsOfTheDeadEffect(final DreamsOfTheDeadEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class DreamsOfTheDeadReplacementEffect extends ReplacementEffectImpl {
         staticText = "If the creature would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    DreamsOfTheDeadReplacementEffect(final DreamsOfTheDeadReplacementEffect effect) {
+    private DreamsOfTheDeadReplacementEffect(final DreamsOfTheDeadReplacementEffect effect) {
         super(effect);
     }
 

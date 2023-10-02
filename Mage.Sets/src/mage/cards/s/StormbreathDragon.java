@@ -60,7 +60,7 @@ class StormbreathDragonDamageEffect extends OneShotEffect {
         this.staticText = "it deals damage to each opponent equal to the number of cards in that player's hand";
     }
 
-    public StormbreathDragonDamageEffect(final StormbreathDragonDamageEffect effect) {
+    private StormbreathDragonDamageEffect(final StormbreathDragonDamageEffect effect) {
         super(effect);
     }
 

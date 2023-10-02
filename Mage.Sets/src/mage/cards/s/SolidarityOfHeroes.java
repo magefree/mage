@@ -48,7 +48,7 @@ class SolidarityOfHeroesEffect extends OneShotEffect {
         this.staticText = "Choose any number of target creatures. Double the number of +1/+1 counters on each of them";
     }
 
-    public SolidarityOfHeroesEffect(final SolidarityOfHeroesEffect effect) {
+    private SolidarityOfHeroesEffect(final SolidarityOfHeroesEffect effect) {
         super(effect);
     }
 

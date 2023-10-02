@@ -53,7 +53,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
         this.staticText = "Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control";
     }
 
-    public SpellRuptureCounterUnlessPaysEffect(final SpellRuptureCounterUnlessPaysEffect effect) {
+    private SpellRuptureCounterUnlessPaysEffect(final SpellRuptureCounterUnlessPaysEffect effect) {
         super(effect);
     }
 

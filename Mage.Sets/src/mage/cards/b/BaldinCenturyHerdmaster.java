@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -37,7 +36,7 @@ public final class BaldinCenturyHerdmaster extends CardImpl {
 
         // As long as it's your turn, each creature assigns combat damage equal to its toughness rather than its power.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new CombatDamageByToughnessAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE),
+                new CombatDamageByToughnessAllEffect(),
                 MyTurnCondition.instance, "as long as it's your turn, each creature " +
                 "assigns combat damage equal to its toughness rather than its power"
         )));

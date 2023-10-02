@@ -55,7 +55,7 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you pay {this}'s cumulative upkeep, ");
     }
 
-    public HibernationsEndAbility(final HibernationsEndAbility ability) {
+    private HibernationsEndAbility(final HibernationsEndAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class HibernationsEndEffect extends OneShotEffect {
         this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this}, put it onto the battlefield, then shuffle.";
     }
 
-    public HibernationsEndEffect(final HibernationsEndEffect effect) {
+    private HibernationsEndEffect(final HibernationsEndEffect effect) {
         super(effect);
     }
 

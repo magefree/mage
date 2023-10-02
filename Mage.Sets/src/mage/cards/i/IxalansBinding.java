@@ -53,7 +53,7 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "Your opponents can't cast spells with the same name as the exiled card";
     }
 
-    IxalansBindingReplacementEffect(final IxalansBindingReplacementEffect effect) {
+    private IxalansBindingReplacementEffect(final IxalansBindingReplacementEffect effect) {
         super(effect);
     }
 
@@ -89,11 +89,6 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 }
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

@@ -56,7 +56,7 @@ class SkybindEffect extends OneShotEffect {
         staticText = "exile target nonenchantment permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public SkybindEffect(final SkybindEffect effect) {
+    private SkybindEffect(final SkybindEffect effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class PathOfPeaceEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. Its owner gains 4 life";
     }
 
-    public PathOfPeaceEffect(final PathOfPeaceEffect effect) {
+    private PathOfPeaceEffect(final PathOfPeaceEffect effect) {
         super(effect);
     }
 

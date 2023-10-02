@@ -54,7 +54,7 @@ class MirrorMatchEffect extends OneShotEffect {
         this.staticText = "For each creature attacking you or a planeswalker you control, create a token that's a copy of that creature blocking that creature. Exile those tokens at end of combat";
     }
 
-    public MirrorMatchEffect(final MirrorMatchEffect effect) {
+    private MirrorMatchEffect(final MirrorMatchEffect effect) {
         super(effect);
     }
 

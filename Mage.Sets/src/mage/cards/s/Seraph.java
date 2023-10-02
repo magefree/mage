@@ -67,7 +67,7 @@ class SeraphEffect extends OneShotEffect {
         staticText = "put that card onto the battlefield under your control. Sacrifice it when you lose control of {this}";
     }
 
-    SeraphEffect(SeraphEffect effect) {
+    private SeraphEffect(final SeraphEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class SeraphDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.seraph = seraph;
     }
 
-    SeraphDelayedTriggeredAbility(SeraphDelayedTriggeredAbility ability) {
+    private SeraphDelayedTriggeredAbility(final SeraphDelayedTriggeredAbility ability) {
         super(ability);
         this.seraph = ability.seraph;
     }

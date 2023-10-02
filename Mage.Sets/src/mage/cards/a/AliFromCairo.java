@@ -48,7 +48,7 @@ class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public AliFromCairoReplacementEffect(final AliFromCairoReplacementEffect effect) {
+    private AliFromCairoReplacementEffect(final AliFromCairoReplacementEffect effect) {
         super(effect);
     }
 

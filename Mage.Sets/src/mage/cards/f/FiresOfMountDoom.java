@@ -72,7 +72,7 @@ class FiresOfMountDoomEffect extends OneShotEffect {
             "When you play a card this way, Fires of Mount Doom deals 2 damage to each player";
     }
 
-    public FiresOfMountDoomEffect(final FiresOfMountDoomEffect effect) {
+    private FiresOfMountDoomEffect(final FiresOfMountDoomEffect effect) {
         super(effect);
     }
 
@@ -120,7 +120,7 @@ class FiresOfMountDoomDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.cardId = cardId;
     }
 
-    public FiresOfMountDoomDelayedTriggeredAbility(FiresOfMountDoomDelayedTriggeredAbility ability) {
+    private FiresOfMountDoomDelayedTriggeredAbility(final FiresOfMountDoomDelayedTriggeredAbility ability) {
         super(ability);
         this.cardId = ability.cardId;
     }

@@ -98,7 +98,7 @@ class NecroticPlagueEffect extends OneShotEffect {
                 "Return {this} from its owner's graveyard to the battlefield attached to that creature";
     }
 
-    public NecroticPlagueEffect(final NecroticPlagueEffect effect) {
+    private NecroticPlagueEffect(final NecroticPlagueEffect effect) {
         super(effect);
     }
 

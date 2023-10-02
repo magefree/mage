@@ -44,7 +44,7 @@ class CertainDeathEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. Its controller loses 2 life and you gain 2 life";
     }
 
-    public CertainDeathEffect(final CertainDeathEffect effect) {
+    private CertainDeathEffect(final CertainDeathEffect effect) {
         super(effect);
     }
 

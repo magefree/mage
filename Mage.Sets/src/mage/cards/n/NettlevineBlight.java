@@ -64,7 +64,7 @@ class NettlevineBlightEffect extends OneShotEffect {
         this.staticText = "sacrifice this permanent and attach {this} to a creature or land you control";
     }
 
-    public NettlevineBlightEffect(final NettlevineBlightEffect effect) {
+    private NettlevineBlightEffect(final NettlevineBlightEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class NettlevineBlightEffect extends OneShotEffect {
                 filter.add(new ControllerIdPredicate(newController.getId()));
                 filter.add(new CanBeEnchantedByPredicate(nettlevineBlight));
                 Target target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.canChoose(newController.getId(), source, game)
                         && newController.choose(outcome, target, source, game)) {
                     Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());

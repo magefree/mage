@@ -27,7 +27,7 @@ public final class FlamebornHellion extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public FlamebornHellion (final FlamebornHellion card) {
+    private FlamebornHellion(final FlamebornHellion card) {
         super(card);
     }
 

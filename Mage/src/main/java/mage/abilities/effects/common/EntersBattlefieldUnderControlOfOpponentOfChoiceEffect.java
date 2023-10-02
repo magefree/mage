@@ -41,7 +41,7 @@ public class EntersBattlefieldUnderControlOfOpponentOfChoiceEffect extends OneSh
             return false;
         }
         Target target = new TargetOpponent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!controller.choose(Outcome.Benefit, target, source, game)) {
             return false;
         }

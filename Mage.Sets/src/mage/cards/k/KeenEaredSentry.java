@@ -83,11 +83,6 @@ class KeenEaredSentryEffect extends ContinuousRuleModifyingEffectImpl {
         return game.getOpponents(source.getControllerId()).contains(event.getTargetId())
                 && KeenEaredSentryWatcher.checkPlayer(event.getTargetId(), game);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 }
 
 class KeenEaredSentryWatcher extends Watcher {

@@ -56,7 +56,7 @@ class ThrashingMudspawnEffect extends OneShotEffect {
         this.staticText = "you lose that much life";
     }
 
-    public ThrashingMudspawnEffect(final ThrashingMudspawnEffect effect) {
+    private ThrashingMudspawnEffect(final ThrashingMudspawnEffect effect) {
         super(effect);
     }
 

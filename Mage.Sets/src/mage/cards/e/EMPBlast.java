@@ -48,7 +48,7 @@ class EMPBlastEffect extends OneShotEffect {
         this.staticText = "Tap all other artifacts";
     }
 
-    public EMPBlastEffect(final EMPBlastEffect effect) {
+    private EMPBlastEffect(final EMPBlastEffect effect) {
         super(effect);
     }
 

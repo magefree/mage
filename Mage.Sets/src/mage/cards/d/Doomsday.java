@@ -47,7 +47,7 @@ class DoomsdayEffect extends OneShotEffect {
         staticText = "Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order";
     }
 
-    public DoomsdayEffect(final DoomsdayEffect effect) {
+    private DoomsdayEffect(final DoomsdayEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class CombustibleGearhulkEffect extends OneShotEffect {
         staticText = "target opponent may have you draw three cards. If the player doesn't, you mill three cards, then {this} deals damage to that player equal to the total mana value of those cards";
     }
 
-    public CombustibleGearhulkEffect(final CombustibleGearhulkEffect effect) {
+    private CombustibleGearhulkEffect(final CombustibleGearhulkEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class CombustibleGearhulkMillAndDamageEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public CombustibleGearhulkMillAndDamageEffect(final CombustibleGearhulkMillAndDamageEffect effect) {
+    private CombustibleGearhulkMillAndDamageEffect(final CombustibleGearhulkMillAndDamageEffect effect) {
         super(effect);
     }
 

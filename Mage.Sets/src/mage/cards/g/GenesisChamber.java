@@ -74,7 +74,7 @@ class GenesisChamberEffect extends OneShotEffect {
         this.staticText = "that creature's controller creates a 1/1 colorless Myr artifact creature token";
     }
 
-    public GenesisChamberEffect(final GenesisChamberEffect effect) {
+    private GenesisChamberEffect(final GenesisChamberEffect effect) {
         super(effect);
     }
 

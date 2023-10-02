@@ -89,7 +89,7 @@ class RevealVariableBlackCardsFromHandCost extends VariableCostImpl {
         this.text = "Reveal " + xText + " black cards from your hand";
     }
 
-    RevealVariableBlackCardsFromHandCost(final RevealVariableBlackCardsFromHandCost cost) {
+    private RevealVariableBlackCardsFromHandCost(final RevealVariableBlackCardsFromHandCost cost) {
         super(cost);
     }
 

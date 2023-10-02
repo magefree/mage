@@ -50,7 +50,7 @@ class DesperateCastawaysEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control an artifact";
     }
 
-    public DesperateCastawaysEffect(final DesperateCastawaysEffect effect) {
+    private DesperateCastawaysEffect(final DesperateCastawaysEffect effect) {
         super(effect);
     }
 

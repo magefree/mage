@@ -69,7 +69,7 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
         this.staticText = "Until end of turn, {this} gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow";
     }
 
-    public JodahsAvengerEffect(final JodahsAvengerEffect effect) {
+    private JodahsAvengerEffect(final JodahsAvengerEffect effect) {
         super(effect);
     }
 

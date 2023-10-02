@@ -65,7 +65,7 @@ class VialSmasherTheFierceTriggeredAbility extends SpellCastControllerTriggeredA
         super(new VialSmasherTheFierceEffect(), false);
     }
 
-    VialSmasherTheFierceTriggeredAbility(VialSmasherTheFierceTriggeredAbility ability) {
+    private VialSmasherTheFierceTriggeredAbility(final VialSmasherTheFierceTriggeredAbility ability) {
         super(ability);
     }
 

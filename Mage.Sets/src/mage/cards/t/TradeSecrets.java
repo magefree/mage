@@ -46,7 +46,7 @@ class TradeSecretsEffect extends OneShotEffect {
         this.staticText = "Target opponent draws two cards, then you draw up to four cards. That opponent may repeat this process as many times as they choose";
     }
 
-    public TradeSecretsEffect(final TradeSecretsEffect effect) {
+    private TradeSecretsEffect(final TradeSecretsEffect effect) {
         super(effect);
     }
 

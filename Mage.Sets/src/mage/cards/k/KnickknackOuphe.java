@@ -68,7 +68,7 @@ class KnickknackOuphePutOntoBattlefieldEffect extends OneShotEffect {
         "Then put all cards revealed this way that weren't put onto the battlefield on the bottom of your library in a random order";
     }
 
-    public KnickknackOuphePutOntoBattlefieldEffect(final KnickknackOuphePutOntoBattlefieldEffect effect) {
+    private KnickknackOuphePutOntoBattlefieldEffect(final KnickknackOuphePutOntoBattlefieldEffect effect) {
         super(effect);
     }
 

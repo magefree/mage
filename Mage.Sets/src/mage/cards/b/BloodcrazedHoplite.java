@@ -57,7 +57,7 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a +1/+1 counter is put on {this}, ");
     }
 
-    public BloodcrazedHopliteTriggeredAbility(BloodcrazedHopliteTriggeredAbility ability) {
+    private BloodcrazedHopliteTriggeredAbility(final BloodcrazedHopliteTriggeredAbility ability) {
         super(ability);
     }
 

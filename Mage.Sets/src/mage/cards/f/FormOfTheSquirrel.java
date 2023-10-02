@@ -64,7 +64,7 @@ class FormOfTheSquirrelCreateTokenEffect extends OneShotEffect {
         staticText = "create a 1/1 green Squirrel creature token. You lose the game when that creature leaves the battlefield";
     }
 
-    public FormOfTheSquirrelCreateTokenEffect(final FormOfTheSquirrelCreateTokenEffect effect) {
+    private FormOfTheSquirrelCreateTokenEffect(final FormOfTheSquirrelCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class FormOfTheSquirrelCantCastEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "You can't cast spells";
     }
 
-    public FormOfTheSquirrelCantCastEffect(final FormOfTheSquirrelCantCastEffect effect) {
+    private FormOfTheSquirrelCantCastEffect(final FormOfTheSquirrelCantCastEffect effect) {
         super(effect);
     }
 
@@ -111,12 +111,12 @@ class FormOfTheSquirrelCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId());
     }
 }

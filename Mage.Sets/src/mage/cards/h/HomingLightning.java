@@ -47,7 +47,7 @@ class HomingLightningEffect extends OneShotEffect {
         staticText = "{this} deals 4 damage to target creature and each other creature with the same name as that creature";
     }
 
-    public HomingLightningEffect(final HomingLightningEffect effect) {
+    private HomingLightningEffect(final HomingLightningEffect effect) {
         super(effect);
     }
 

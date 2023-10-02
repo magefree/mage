@@ -44,7 +44,7 @@ class CleansingEffect extends OneShotEffect {
         staticText = "For each land, destroy that land unless any player pays 1 life";
     }
 
-    CleansingEffect(final CleansingEffect effect) {
+    private CleansingEffect(final CleansingEffect effect) {
         super(effect);
     }
 

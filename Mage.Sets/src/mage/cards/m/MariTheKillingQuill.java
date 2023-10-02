@@ -165,7 +165,7 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MariTheKillingQuillExileCreatureEffect(), false);
     }
 
-    public MariTheKillingQuillCreatureDiesAbility(final MariTheKillingQuillCreatureDiesAbility ability) {
+    private MariTheKillingQuillCreatureDiesAbility(final MariTheKillingQuillCreatureDiesAbility ability) {
         super(ability);
     }
 
@@ -209,7 +209,7 @@ class MariTheKillingQuillExileCreatureEffect extends OneShotEffect {
         this.staticText = "exile it with a hit counter on it";
     }
 
-    public MariTheKillingQuillExileCreatureEffect(final MariTheKillingQuillExileCreatureEffect effect) {
+    private MariTheKillingQuillExileCreatureEffect(final MariTheKillingQuillExileCreatureEffect effect) {
         super(effect);
     }
 

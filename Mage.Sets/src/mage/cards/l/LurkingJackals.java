@@ -42,9 +42,10 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
     public LurkingJackalsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LurkingJackalsToken(), null, Duration.Custom));
         setTriggerPhrase("When an opponent has 10 or less life, if {this} is an enchantment, ");
+        this.replaceRuleText = true;
     }
 
-    public LurkingJackalsStateTriggeredAbility(final LurkingJackalsStateTriggeredAbility ability) {
+    private LurkingJackalsStateTriggeredAbility(final LurkingJackalsStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -110,7 +111,7 @@ class LurkingJackalsToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public LurkingJackalsToken(final LurkingJackalsToken token) {
+    private LurkingJackalsToken(final LurkingJackalsToken token) {
         super(token);
     }
 

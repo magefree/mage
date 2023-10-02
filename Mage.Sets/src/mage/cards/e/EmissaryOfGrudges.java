@@ -69,7 +69,7 @@ class EmissaryOfGrudgesEffect extends OneShotEffect {
                 + " if it targets you or a permanent you control. Activate only once.";
     }
 
-    public EmissaryOfGrudgesEffect(final EmissaryOfGrudgesEffect effect) {
+    private EmissaryOfGrudgesEffect(final EmissaryOfGrudgesEffect effect) {
         super(effect);
     }
 

@@ -26,7 +26,7 @@ public final class SteadyProgress extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
-    public SteadyProgress (final SteadyProgress card) {
+    private SteadyProgress(final SteadyProgress card) {
         super(card);
     }
 

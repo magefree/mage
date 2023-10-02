@@ -58,7 +58,7 @@ class ShredsOfSanityEffect extends OneShotEffect {
         this.staticText = "return up to one target instant card and up to one target sorcery card from your graveyard to your hand, then discard a card";
     }
 
-    public ShredsOfSanityEffect(final ShredsOfSanityEffect effect) {
+    private ShredsOfSanityEffect(final ShredsOfSanityEffect effect) {
         super(effect);
     }
 

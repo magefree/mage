@@ -63,7 +63,7 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
         staticText = "Basic lands of the first chosen type are the second chosen type";
     }
 
-    public IllusionaryTerrainEffect(final IllusionaryTerrainEffect effect) {
+    private IllusionaryTerrainEffect(final IllusionaryTerrainEffect effect) {
         super(effect);
     }
 
@@ -141,7 +141,7 @@ class ChooseTwoBasicLandTypesEffect extends OneShotEffect {
         this.staticText = "choose two basic land types";
     }
 
-    public ChooseTwoBasicLandTypesEffect(final ChooseTwoBasicLandTypesEffect effect) {
+    private ChooseTwoBasicLandTypesEffect(final ChooseTwoBasicLandTypesEffect effect) {
         super(effect);
     }
 

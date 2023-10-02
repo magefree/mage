@@ -58,7 +58,7 @@ class InfernalOfferingSacrificeEffect extends OneShotEffect {
         this.staticText = "Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards";
     }
 
-    InfernalOfferingSacrificeEffect(final InfernalOfferingSacrificeEffect effect) {
+    private InfernalOfferingSacrificeEffect(final InfernalOfferingSacrificeEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class InfernalOfferingReturnEffect extends OneShotEffect {
         this.staticText = "Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from their graveyard to the battlefield";
     }
 
-    InfernalOfferingReturnEffect(final InfernalOfferingReturnEffect effect) {
+    private InfernalOfferingReturnEffect(final InfernalOfferingReturnEffect effect) {
         super(effect);
     }
 

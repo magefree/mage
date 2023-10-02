@@ -55,7 +55,7 @@ class EarthlinkEffect extends OneShotEffect {
         this.staticText = "that creature's controller sacrifices a land";
     }
 
-    public EarthlinkEffect(final EarthlinkEffect effect) {
+    private EarthlinkEffect(final EarthlinkEffect effect) {
         super(effect);
     }
 

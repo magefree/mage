@@ -72,7 +72,7 @@ class GraspOfTheHieromancerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public GraspOfTheHieromancerTriggeredAbility(final GraspOfTheHieromancerTriggeredAbility ability) {
+    private GraspOfTheHieromancerTriggeredAbility(final GraspOfTheHieromancerTriggeredAbility ability) {
         super(ability);
     }
 

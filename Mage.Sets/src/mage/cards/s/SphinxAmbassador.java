@@ -59,7 +59,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
         this.staticText = "search that player's library for a card, then that player chooses a card name. If you searched for a creature card that doesn't have that name, you may put it onto the battlefield under your control. Then that player shuffles";
     }
 
-    public SphinxAmbassadorEffect(final SphinxAmbassadorEffect effect) {
+    private SphinxAmbassadorEffect(final SphinxAmbassadorEffect effect) {
         super(effect);
     }
 

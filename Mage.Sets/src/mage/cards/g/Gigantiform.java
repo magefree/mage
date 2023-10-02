@@ -76,7 +76,7 @@ class GigantiformAbility extends StaticAbility {
         this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));
     }
 
-    public GigantiformAbility(GigantiformAbility ability) {
+    private GigantiformAbility(final GigantiformAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class GigantiformEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
     }
 
-    public GigantiformEffect(final GigantiformEffect effect) {
+    private GigantiformEffect(final GigantiformEffect effect) {
         super(effect);
     }
 

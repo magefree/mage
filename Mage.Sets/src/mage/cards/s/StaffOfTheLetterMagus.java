@@ -53,7 +53,7 @@ class StaffOfTheLetterMagusChooseLetterEffect extends OneShotEffect {
         staticText = "choose a consonant other than N, R, S, or T";
     }
 
-    public StaffOfTheLetterMagusChooseLetterEffect(final StaffOfTheLetterMagusChooseLetterEffect effect) {
+    private StaffOfTheLetterMagusChooseLetterEffect(final StaffOfTheLetterMagusChooseLetterEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class StaffOfTheLetterMagusEffect extends OneShotEffect {
         staticText = "you gain 1 life for each time the chosen letter appears in that spell's name";
     }
 
-    public StaffOfTheLetterMagusEffect(final StaffOfTheLetterMagusEffect effect) {
+    private StaffOfTheLetterMagusEffect(final StaffOfTheLetterMagusEffect effect) {
         super(effect);
     }
 

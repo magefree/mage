@@ -10,6 +10,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.CommanderCardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterMana;
 import mage.game.Game;
@@ -132,7 +133,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
-                    if (!controller.choose(outcome, choice, game)) {
+                    if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
                         return mana;
                     }
                 }

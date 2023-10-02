@@ -56,18 +56,13 @@ class RootSliverEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Sliver spells can't be countered";
     }
 
-    public RootSliverEffect(final RootSliverEffect effect) {
+    private RootSliverEffect(final RootSliverEffect effect) {
         super(effect);
     }
 
     @Override
     public RootSliverEffect copy() {
         return new RootSliverEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

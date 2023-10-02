@@ -67,7 +67,7 @@ class CurseOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public CurseOfVengeanceTriggeredAbility(final CurseOfVengeanceTriggeredAbility ability) {
+    private CurseOfVengeanceTriggeredAbility(final CurseOfVengeanceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -107,7 +107,7 @@ class CurseOfVengeancePlayerLosesTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CurseOfVengeanceDrawLifeEffect(), false);
     }
 
-    public CurseOfVengeancePlayerLosesTriggeredAbility(final CurseOfVengeancePlayerLosesTriggeredAbility ability) {
+    private CurseOfVengeancePlayerLosesTriggeredAbility(final CurseOfVengeancePlayerLosesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -142,7 +142,7 @@ class CurseOfVengeanceDrawLifeEffect extends OneShotEffect {
                 + "number of spite counters on {this}";
     }
 
-    public CurseOfVengeanceDrawLifeEffect(final CurseOfVengeanceDrawLifeEffect effect) {
+    private CurseOfVengeanceDrawLifeEffect(final CurseOfVengeanceDrawLifeEffect effect) {
         super(effect);
     }
 

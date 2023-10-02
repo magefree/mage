@@ -43,7 +43,7 @@ class StormWorldEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to that player, where X is 4 minus the number of cards in their hand";
     }
 
-    public StormWorldEffect(final StormWorldEffect effect) {
+    private StormWorldEffect(final StormWorldEffect effect) {
         super(effect);
     }
 

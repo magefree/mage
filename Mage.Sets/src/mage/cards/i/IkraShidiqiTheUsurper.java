@@ -59,7 +59,7 @@ class IkraShidiqiTheUsurperTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public IkraShidiqiTheUsurperTriggeredAbility(final IkraShidiqiTheUsurperTriggeredAbility ability) {
+    private IkraShidiqiTheUsurperTriggeredAbility(final IkraShidiqiTheUsurperTriggeredAbility ability) {
         super(ability);
     }
 

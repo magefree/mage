@@ -61,7 +61,7 @@ class CantBeBlockedByTokenEffect extends RestrictionEffect {
         staticText = "Creatures you control can't be blocked by tokens this turn";
     }
 
-    public CantBeBlockedByTokenEffect(final CantBeBlockedByTokenEffect effect) {
+    private CantBeBlockedByTokenEffect(final CantBeBlockedByTokenEffect effect) {
         super(effect);
     }
 

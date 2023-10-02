@@ -60,7 +60,7 @@ class DevouringGreedEffect extends OneShotEffect {
         this.staticText = "Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life";
     }
 
-    public DevouringGreedEffect(final DevouringGreedEffect effect) {
+    private DevouringGreedEffect(final DevouringGreedEffect effect) {
         super(effect);
     }
 

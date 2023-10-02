@@ -48,7 +48,7 @@ class TheAbyssTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);
     }
 
-    TheAbyssTriggeredAbility(final TheAbyssTriggeredAbility ability) {
+    private TheAbyssTriggeredAbility(final TheAbyssTriggeredAbility ability) {
         super(ability);
     }
 

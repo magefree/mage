@@ -46,7 +46,7 @@ class MartialCoupEffect extends OneShotEffect {
         staticText = "create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures";
     }
 
-    public MartialCoupEffect(final MartialCoupEffect effect) {
+    private MartialCoupEffect(final MartialCoupEffect effect) {
         super(effect);
     }
 

@@ -42,12 +42,12 @@ public final class EndlessEvil extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, create a token that’s a copy of enchanted creature, except the token is 1/1.
-        TriggeredAbility CloneAbility = new BeginningOfUpkeepTriggeredAbility(
+        TriggeredAbility cloneAbility = new BeginningOfUpkeepTriggeredAbility(
                 new EndlessEvilCloneEffect(),
                 TargetController.YOU,
                 false
         );
-        this.addAbility(CloneAbility);
+        this.addAbility(cloneAbility);
 
         // When enchanted creature dies, if that creature was a Horror, return Endless Evil to its owner’s hand.
         this.addAbility(new EndlessEvilBounceAbility());
@@ -70,7 +70,7 @@ class EndlessEvilCloneEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of enchanted creature, except the token is 1/1";
     }
 
-    public EndlessEvilCloneEffect(final EndlessEvilCloneEffect effect) {
+    private EndlessEvilCloneEffect(final EndlessEvilCloneEffect effect) {
         super(effect);
     }
 
@@ -81,11 +81,7 @@ class EndlessEvilCloneEffect extends OneShotEffect {
 
     @Override
     public boolean apply (Game game, Ability source) {
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // In the case that Endless Evil is blinked
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment != null) {
             Permanent target = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
             if (target != null) {
@@ -105,7 +101,7 @@ class EndlessEvilBounceAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(false, true));
     }
 
-    public EndlessEvilBounceAbility(final EndlessEvilBounceAbility effect) {
+    private EndlessEvilBounceAbility(final EndlessEvilBounceAbility effect) {
         super(effect);
     }
 

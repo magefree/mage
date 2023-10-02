@@ -58,7 +58,7 @@ class SylvanLibraryEffect extends OneShotEffect {
         this.staticText = "you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library";
     }
 
-    public SylvanLibraryEffect(final SylvanLibraryEffect effect) {
+    private SylvanLibraryEffect(final SylvanLibraryEffect effect) {
         super(effect);
     }
 

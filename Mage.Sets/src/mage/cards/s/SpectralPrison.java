@@ -9,10 +9,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -37,7 +34,7 @@ public final class SpectralPrison extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
 
         // When enchanted creature becomes the target of a spell, sacrifice Spectral Prison.
-        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A));
+        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A, SetTargetPointer.NONE, false));
     }
 
     private SpectralPrison(final SpectralPrison card) {

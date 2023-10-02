@@ -52,7 +52,7 @@ class PurgingScytheEffect extends OneShotEffect {
                 + "If two or more creatures are tied for least toughness, you choose one of them";
     }
 
-    public PurgingScytheEffect(final PurgingScytheEffect effect) {
+    private PurgingScytheEffect(final PurgingScytheEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class PurgingScytheEffect extends OneShotEffect {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("one of the creatures with the least toughness");
                 filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, leastToughness));
                 Target target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.canChoose(source.getControllerId(), source, game)) {
                     if (controller.choose(outcome, target, source, game)) {
                         permanentToDamage = game.getPermanent(target.getFirstTarget());

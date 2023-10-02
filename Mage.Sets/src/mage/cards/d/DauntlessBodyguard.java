@@ -61,7 +61,7 @@ class DauntlessBodyguardGainAbilityEffect extends OneShotEffect {
         this.staticText = "The chosen creature gains indestructible until end of turn";
     }
 
-    public DauntlessBodyguardGainAbilityEffect(final DauntlessBodyguardGainAbilityEffect effect) {
+    private DauntlessBodyguardGainAbilityEffect(final DauntlessBodyguardGainAbilityEffect effect) {
         super(effect);
     }
 

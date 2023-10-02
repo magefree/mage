@@ -52,7 +52,7 @@ class ArbiterOfKnollridgeEffect extends OneShotEffect {
         staticText = "each player's life total becomes the highest life total among all players";
     }
 
-    ArbiterOfKnollridgeEffect(final ArbiterOfKnollridgeEffect effect) {
+    private ArbiterOfKnollridgeEffect(final ArbiterOfKnollridgeEffect effect) {
         super(effect);
     }
 

@@ -26,7 +26,7 @@ public final class SigiledBehemoth extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public SigiledBehemoth (final SigiledBehemoth card) {
+    private SigiledBehemoth(final SigiledBehemoth card) {
         super(card);
     }
 

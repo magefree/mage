@@ -54,7 +54,7 @@ class CunningAbductionExileEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. You choose a nonland card from that player's hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    public CunningAbductionExileEffect(final CunningAbductionExileEffect effect) {
+    private CunningAbductionExileEffect(final CunningAbductionExileEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class CunningAbductionSpendAnyManaEffect extends AsThoughEffectImpl implements A
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
-    public CunningAbductionSpendAnyManaEffect(final CunningAbductionSpendAnyManaEffect effect) {
+    private CunningAbductionSpendAnyManaEffect(final CunningAbductionSpendAnyManaEffect effect) {
         super(effect);
     }
 

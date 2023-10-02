@@ -79,7 +79,7 @@ class BasriDevotedPaladinTriggeredAbility extends DelayedTriggeredAbility {
         super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.EndOfTurn, false);
     }
 
-    public BasriDevotedPaladinTriggeredAbility(BasriDevotedPaladinTriggeredAbility ability) {
+    private BasriDevotedPaladinTriggeredAbility(final BasriDevotedPaladinTriggeredAbility ability) {
         super(ability);
     }
 

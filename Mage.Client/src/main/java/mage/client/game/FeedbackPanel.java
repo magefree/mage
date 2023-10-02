@@ -38,7 +38,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private FeedbackMode mode;
     private MageDialog connectedDialog;
     private ChatPanelBasic connectedChatPanel;
-    private int lastMessageId;
     private Map<String, Serializable> lastOptions = new HashMap<>();
 
     private static final ScheduledExecutorService WORKER = Executors.newSingleThreadScheduledExecutor();
@@ -66,14 +65,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void prepareFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
-                                int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
+                                boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
         synchronized (this) {
-            if (messageId < this.lastMessageId) {
-                // if too many warning messages here then look at GAME_REDRAW_GUI event logic
-                LOGGER.warn("catch un-synced message from later source (possible reason: connection or performance problems): " + messageId + ", text=" + message);
-                return;
-            }
-            this.lastMessageId = messageId;
             this.lastOptions = options;
             this.mode = mode;
         }

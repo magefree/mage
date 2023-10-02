@@ -69,7 +69,7 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you cast this spell, ");
     }
 
-    UlamogExilePermanentsOnCastAbility(UlamogExilePermanentsOnCastAbility ability) {
+    private UlamogExilePermanentsOnCastAbility(final UlamogExilePermanentsOnCastAbility ability) {
         super(ability);
     }
 

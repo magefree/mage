@@ -59,24 +59,11 @@ public abstract class ContinuousRuleModifyingEffectImpl extends ContinuousEffect
         this.messageToGameLog = effect.messageToGameLog;
     }
 
-    /**
-     * An early check for the event types this effect applies to. This check was
-     * added to speed up event handling. Once all existing
-     * ContinuousRuleModifiyingEffects have implemented this method, the method
-     * should be changed to abstract here or removed.
-     *
-     * @param event
-     * @param game
-     * @return
-     */
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    final public boolean apply(Game game, Ability source) {
+        // not used in rule modifying effects because it allows or disallows related event only without data
+        // modification or choose dialogs (see applies method)
+        throw new IllegalStateException("Wrong code usage. Rules modifying effects don't use apply methods");
     }
 
     @Override

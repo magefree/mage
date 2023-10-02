@@ -35,7 +35,7 @@ public final class Esperzoa extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledArtifactPermanent()), TargetController.YOU, false));
     }
 
-    public Esperzoa (final Esperzoa card) {
+    private Esperzoa(final Esperzoa card) {
         super(card);
     }
 

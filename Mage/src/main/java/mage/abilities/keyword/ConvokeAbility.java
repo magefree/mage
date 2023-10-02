@@ -228,6 +228,7 @@ class ConvokeEffect extends OneShotEffect {
                         if (chooseManaType.getChoices().size() > 1) {
                             chooseManaType.getChoices().add("Colorless");
                             chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
+                            // TODO: must be AI optimization to pay most rare mana color first
                             if (!controller.choose(Outcome.Benefit, chooseManaType, game)) {
                                 return false;
                             }

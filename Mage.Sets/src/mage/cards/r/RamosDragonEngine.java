@@ -69,7 +69,7 @@ class RamosDragonEngineAddCountersEffect extends OneShotEffect {
         staticText = "put a +1/+1 counter on {this} for each of that spell's colors";
     }
 
-    public RamosDragonEngineAddCountersEffect(final RamosDragonEngineAddCountersEffect effect) {
+    private RamosDragonEngineAddCountersEffect(final RamosDragonEngineAddCountersEffect effect) {
         super(effect);
     }
 

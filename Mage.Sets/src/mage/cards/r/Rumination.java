@@ -43,7 +43,7 @@ public final class Rumination extends CardImpl {
             staticText = "Draw three cards, then put a card from your hand on top of your library.";
         }
 
-        public RuminationEffect(final RuminationEffect effect) {
+        private RuminationEffect(final RuminationEffect effect) {
             super(effect);
         }
 

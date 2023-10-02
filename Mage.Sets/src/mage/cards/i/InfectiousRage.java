@@ -66,7 +66,7 @@ class InfectiousRageReattachEffect extends OneShotEffect {
         this.staticText = "choose a creature at random {this} can enchant. Return {this} to the battlefield attached to that creature.";
     }
 
-    public InfectiousRageReattachEffect(final InfectiousRageReattachEffect effect) {
+    private InfectiousRageReattachEffect(final InfectiousRageReattachEffect effect) {
         super(effect);
     }
 

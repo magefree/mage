@@ -62,7 +62,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
         staticText = "you may have {this} become a copy of that card, except its name is Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it has hexproof and this ability";
     }
 
-    LazavDimirMastermindEffect(final LazavDimirMastermindEffect effect) {
+    private LazavDimirMastermindEffect(final LazavDimirMastermindEffect effect) {
         super(effect);
     }
 

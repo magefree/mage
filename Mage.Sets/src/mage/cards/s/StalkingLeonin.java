@@ -62,7 +62,7 @@ class StalkingLeoninEffect extends OneShotEffect {
         this.staticText = "Exile target creature that's attacking you if it's controlled by the chosen player. Activate only once";
     }
 
-    public StalkingLeoninEffect(final StalkingLeoninEffect effect) {
+    private StalkingLeoninEffect(final StalkingLeoninEffect effect) {
         super(effect);
     }
 

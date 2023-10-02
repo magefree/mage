@@ -67,7 +67,7 @@ class RoonOfTheHiddenRealmEffect extends OneShotEffect {
         this.staticText = "Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public RoonOfTheHiddenRealmEffect(final RoonOfTheHiddenRealmEffect effect) {
+    private RoonOfTheHiddenRealmEffect(final RoonOfTheHiddenRealmEffect effect) {
         super(effect);
     }
 

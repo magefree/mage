@@ -48,7 +48,7 @@ class AllianceOfArmsEffect extends OneShotEffect {
                 "creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way";
     }
 
-    public AllianceOfArmsEffect(final AllianceOfArmsEffect effect) {
+    private AllianceOfArmsEffect(final AllianceOfArmsEffect effect) {
         super(effect);
     }
 

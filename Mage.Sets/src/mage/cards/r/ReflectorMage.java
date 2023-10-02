@@ -62,7 +62,7 @@ class ReflectorMageEffect extends OneShotEffect {
         this.staticText = "return target creature an opponent controls to its owner's hand. That creature's owner can't cast spells with the same name as that creature until your next turn";
     }
 
-    public ReflectorMageEffect(final ReflectorMageEffect effect) {
+    private ReflectorMageEffect(final ReflectorMageEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
         this.ownerId = ownerId;
     }
 
-    ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
+    private ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
         super(effect);
         this.creatureName = effect.creatureName;
         this.ownerId = effect.ownerId;
@@ -121,11 +121,6 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
             }
             return CardUtil.haveSameNames(card, creatureName, game) && Objects.equals(ownerId, card.getOwnerId());
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

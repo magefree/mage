@@ -67,7 +67,7 @@ class HourOfEternityEffect extends OneShotEffect {
                 "except it's a 4/4 black Zombie";
     }
 
-    HourOfEternityEffect(final HourOfEternityEffect effect) {
+    private HourOfEternityEffect(final HourOfEternityEffect effect) {
         super(effect);
     }
 

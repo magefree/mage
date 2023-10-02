@@ -53,7 +53,7 @@ class ArashinSovereignEffect extends OneShotEffect {
         this.staticText = "you may put it on the top or bottom of its owner's library";
     }
     
-    public ArashinSovereignEffect(final ArashinSovereignEffect effect) {
+    private ArashinSovereignEffect(final ArashinSovereignEffect effect) {
         super(effect);
     }
     

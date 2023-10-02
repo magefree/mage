@@ -70,7 +70,7 @@ class RealityAcidTriggeredAbility extends ZoneChangeTriggeredAbility {
         super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
     }
 
-    public RealityAcidTriggeredAbility(RealityAcidTriggeredAbility ability) {
+    private RealityAcidTriggeredAbility(final RealityAcidTriggeredAbility ability) {
         super(ability);
     }
 

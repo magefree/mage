@@ -64,7 +64,7 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
         staticText = "choose flying, first strike, trample, or rampage 3. {this} gains that ability until your next upkeep";
     }
 
-    public GabrielAngelfireGainAbilityEffect(final GabrielAngelfireGainAbilityEffect effect) {
+    private GabrielAngelfireGainAbilityEffect(final GabrielAngelfireGainAbilityEffect effect) {
         super(effect);
         ability.newId();
     }

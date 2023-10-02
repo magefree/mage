@@ -81,7 +81,7 @@ class AkroanHorseChangeControlEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetOpponent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(outcome, target, source, game);
         ContinuousEffect effect = new AkroanHorseGainControlEffect(Duration.Custom, target.getFirstTarget());
         effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
@@ -100,7 +100,7 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
         this.staticText = "Gain control of Akroan Horse";
     }
 
-    public AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
+    private AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }

@@ -97,7 +97,7 @@ class JumboImpAddCountersEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die and put a number of +1/+1 counters on {this} equal to the result";
     }
 
-    public JumboImpAddCountersEffect(final JumboImpAddCountersEffect effect) {
+    private JumboImpAddCountersEffect(final JumboImpAddCountersEffect effect) {
         super(effect);
     }
 
@@ -126,7 +126,7 @@ class JumboImpRemoveCountersEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die and remove a number of +1/+1 counters on {this} equal to the result";
     }
 
-    public JumboImpRemoveCountersEffect(final JumboImpRemoveCountersEffect effect) {
+    private JumboImpRemoveCountersEffect(final JumboImpRemoveCountersEffect effect) {
         super(effect);
     }
 

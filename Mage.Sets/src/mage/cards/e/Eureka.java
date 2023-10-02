@@ -47,7 +47,7 @@ class EurekaEffect extends OneShotEffect {
         this.staticText = "Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield";
     }
 
-    public EurekaEffect(final EurekaEffect effect) {
+    private EurekaEffect(final EurekaEffect effect) {
         super(effect);
     }
 

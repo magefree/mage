@@ -63,7 +63,7 @@ class JolraelEmpressOfBeastsEffect extends OneShotEffect {
         this.staticText = "All lands target player controls become 3/3 creatures until end of turn. They're still lands.";
     }
 
-    public JolraelEmpressOfBeastsEffect(final JolraelEmpressOfBeastsEffect effect) {
+    private JolraelEmpressOfBeastsEffect(final JolraelEmpressOfBeastsEffect effect) {
         super(effect);
     }
 

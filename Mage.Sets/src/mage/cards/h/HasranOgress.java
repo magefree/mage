@@ -48,7 +48,7 @@ class HasranOgressEffect extends OneShotEffect {
         this.staticText = "{this} deals 3 damage to you unless you pay {2}";
     }
 
-    public HasranOgressEffect(final HasranOgressEffect effect) {
+    private HasranOgressEffect(final HasranOgressEffect effect) {
         super(effect);
     }
 

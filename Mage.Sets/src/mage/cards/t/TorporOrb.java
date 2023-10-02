@@ -49,7 +49,7 @@ class TorporOrbEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Creatures entering the battlefield don't cause abilities to trigger";
     }
 
-    TorporOrbEffect(final TorporOrbEffect effect) {
+    private TorporOrbEffect(final TorporOrbEffect effect) {
         super(effect);
     }
 

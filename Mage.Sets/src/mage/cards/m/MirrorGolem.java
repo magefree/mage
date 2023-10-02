@@ -60,7 +60,7 @@ class MirrorGolemImprintEffect extends OneShotEffect {
         this.staticText = "you may exile target card from a graveyard";
     }
 
-    MirrorGolemImprintEffect(final MirrorGolemImprintEffect effect) {
+    private MirrorGolemImprintEffect(final MirrorGolemImprintEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
         staticText = "{this} has protection from each of the exiled card's card types.";
     }
 
-    public MirrorGolemEffect(final MirrorGolemEffect effect) {
+    private MirrorGolemEffect(final MirrorGolemEffect effect) {
         super(effect);
     }
 

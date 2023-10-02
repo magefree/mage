@@ -48,7 +48,7 @@ class GamePreserveEffect extends OneShotEffect {
         this.staticText = "each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control";
     }
 
-    public GamePreserveEffect(final GamePreserveEffect effect) {
+    private GamePreserveEffect(final GamePreserveEffect effect) {
         super(effect);
     }
 

@@ -132,7 +132,7 @@ class KairiTheSwirlingSkyEffect extends OneShotEffect {
         TargetCard target = new TargetCardInGraveyard(
                 0, 2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }

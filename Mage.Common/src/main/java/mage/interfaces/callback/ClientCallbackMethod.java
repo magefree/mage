@@ -1,68 +1,86 @@
 package mage.interfaces.callback;
 
 /**
- * Created by IGOUDT on 4-4-2017.
+ * Server's commands to process on client side. Commands can come in un-synced state due bad/slow network
+ * <p>
+ * Can be:
+ * - critical events (messages, game events, choose dialogs, etc)
+ * - non-critical events (game updates, messages)
  */
 public enum ClientCallbackMethod {
 
-    CHATMESSAGE("chatMessage"),
-    TOURNAMENT_INIT("tournamentInit"),
-    TOURNAMENT_UPDATE("tournamentUpdate"),
-    TOURNAMENT_OVER("tournamentOver"),
-    JOINED_TABLE("joinedTable"),
-    START_DRAFT("startDraft"),
-    START_TOURNAMENT("startTournament"),
-    SIDEBOARD("sideboard"),
-    VIEW_LIMITED_DECK("viewLimitedDeck"),
-    VIEW_SIDEBOARD("viewSideboard"),
-    CONSTRUCT("construct"),
-    SHOW_USERMESSAGE("showUserMessage"),
-    WATCHGAME("watchGame"),
-    REPLAY_GAME("replayGame"),
-    START_GAME("startGame"),
-    SHOW_TOURNAMENT("showTournament"),
-    SHOW_GAME_END_DIALOG("showGameEndDialog"),
-    SERVER_MESSAGE("serverMessage"),
-    GAME_INIT("gameInit"),
-    GAME_OVER("gameOver"),
-    GAME_INFORM("gameInform"),
-    GAME_INFORM_PERSONAL("gameInformPersonal"),
-    GAME_ERROR("gameError"),
-    GAME_UPDATE("gameUpdate"),
-    GAME_REDRAW_GUI("gameRedrawGUI", true),
-    DRAFT_OVER("draftOver"),
-    REPLAY_DONE("replayDone"),
-    USER_REQUEST_DIALOG("userRequestDialog"),
-    REPLAY_UPDATE("replayUpdate"),
-    REPLAY_INIT("replayInit"),
-    END_GAME_INFO("endGameInfo"),
-    GAME_TARGET("gameTarget"),
-    GAME_CHOOSE_ABILITY("gameChooseAbility"),
-    GAME_CHOOSE_PILE("gameChoosePile"),
-    GAME_CHOOSE_CHOICE("gameChooseChoice"),
-    GAME_ASK("gameAsk"),
-    GAME_SELECT("gameSelect"),
-    GAME_PLAY_MANA("gamePlayMana"),
-    GAME_PLAY_XMANA("gamePlayXMana"),
-    GAME_GET_AMOUNT("gameSelectAmount"),
-    GAME_GET_MULTI_AMOUNT("gameSelectMultiAmount"),
-    DRAFT_INIT("draftInit"),
-    DRAFT_PICK("draftPick"),
-    DRAFT_UPDATE("draftUpdate");
+    // TODO: rename events due place/action like GAME_STARTED, GAME_ASK_DIALOG, GAME_TARGET_DIALOG
 
-    String code;
-    boolean isClientSideMessage;
+    // messages
+    CHATMESSAGE(ClientCallbackType.MESSAGE, "chatMessage"),
+    SHOW_USERMESSAGE(ClientCallbackType.MESSAGE, "showUserMessage"),
+    SERVER_MESSAGE(ClientCallbackType.MESSAGE, "serverMessage"),
 
-    ClientCallbackMethod(String code) {
-        this(code, false);
-    }
+    // table
+    JOINED_TABLE(ClientCallbackType.TABLE_CHANGE, "joinedTable"),
 
-    ClientCallbackMethod(String code, boolean isClientSideMessage) {
+    // tournament
+    START_TOURNAMENT(ClientCallbackType.TABLE_CHANGE, "startTournament"),
+    TOURNAMENT_INIT(ClientCallbackType.TABLE_CHANGE, "tournamentInit"), // TODO: unused on client
+    TOURNAMENT_UPDATE(ClientCallbackType.UPDATE, "tournamentUpdate"), // TODO: unused on client
+    TOURNAMENT_OVER(ClientCallbackType.TABLE_CHANGE, "tournamentOver"), // TODO: unused on client
+
+    // draft/sideboard
+    START_DRAFT(ClientCallbackType.TABLE_CHANGE, "startDraft"),
+    SIDEBOARD(ClientCallbackType.TABLE_CHANGE, "sideboard"),
+    CONSTRUCT(ClientCallbackType.TABLE_CHANGE, "construct"),
+    DRAFT_OVER(ClientCallbackType.TABLE_CHANGE, "draftOver"),
+    DRAFT_INIT(ClientCallbackType.TABLE_CHANGE, "draftInit"),
+    DRAFT_PICK(ClientCallbackType.TABLE_CHANGE, "draftPick"),
+    DRAFT_UPDATE(ClientCallbackType.UPDATE, "draftUpdate"),
+
+    // watch
+    SHOW_TOURNAMENT(ClientCallbackType.TABLE_CHANGE, "showTournament"),
+    WATCHGAME(ClientCallbackType.TABLE_CHANGE, "watchGame"),
+
+    // in-game actions
+    VIEW_LIMITED_DECK(ClientCallbackType.MESSAGE, "viewLimitedDeck"),
+    VIEW_SIDEBOARD(ClientCallbackType.MESSAGE, "viewSideboard"),
+
+    // other
+    USER_REQUEST_DIALOG(ClientCallbackType.DIALOG, "userRequestDialog"),
+    GAME_REDRAW_GUI(ClientCallbackType.CLIENT_SIDE_EVENT, "gameRedrawGUI"),
+
+    // game
+    START_GAME(ClientCallbackType.TABLE_CHANGE, "startGame"),
+    GAME_INIT(ClientCallbackType.TABLE_CHANGE, "gameInit"),
+    GAME_UPDATE_AND_INFORM(ClientCallbackType.UPDATE, "gameInform"), // update game and feedback panel with current status (e.g. on non our priority)
+    GAME_INFORM_PERSONAL(ClientCallbackType.MESSAGE, "gameInformPersonal"),
+    GAME_ERROR(ClientCallbackType.MESSAGE, "gameError"),
+    GAME_UPDATE(ClientCallbackType.UPDATE, "gameUpdate"),
+    GAME_TARGET(ClientCallbackType.DIALOG, "gameTarget"),
+    GAME_CHOOSE_ABILITY(ClientCallbackType.DIALOG, "gameChooseAbility"),
+    GAME_CHOOSE_PILE(ClientCallbackType.DIALOG, "gameChoosePile"),
+    GAME_CHOOSE_CHOICE(ClientCallbackType.DIALOG, "gameChooseChoice"),
+    GAME_ASK(ClientCallbackType.DIALOG, "gameAsk"),
+    GAME_SELECT(ClientCallbackType.DIALOG, "gameSelect"),
+    GAME_PLAY_MANA(ClientCallbackType.DIALOG, "gamePlayMana"),
+    GAME_PLAY_XMANA(ClientCallbackType.DIALOG, "gamePlayXMana"),
+    GAME_GET_AMOUNT(ClientCallbackType.DIALOG, "gameSelectAmount"),
+    GAME_GET_MULTI_AMOUNT(ClientCallbackType.DIALOG, "gameSelectMultiAmount"),
+    GAME_OVER(ClientCallbackType.TABLE_CHANGE, "gameOver"),
+    END_GAME_INFO(ClientCallbackType.TABLE_CHANGE, "endGameInfo"),
+
+    // replay (unsupported)
+    REPLAY_GAME(ClientCallbackType.TABLE_CHANGE, "replayGame"),
+    REPLAY_INIT(ClientCallbackType.TABLE_CHANGE, "replayInit"),
+    REPLAY_UPDATE(ClientCallbackType.UPDATE, "replayUpdate"),
+    REPLAY_DONE(ClientCallbackType.TABLE_CHANGE, "replayDone");
+
+    final ClientCallbackType type;
+    final String code;
+
+    ClientCallbackMethod(ClientCallbackType type, String code) {
+        this.type = type;
         this.code = code;
-        this.isClientSideMessage = isClientSideMessage;
     }
 
-    public boolean isClientSideMessage() {
-        return this.isClientSideMessage;
+    public ClientCallbackType getType() {
+        return this.type;
     }
 }

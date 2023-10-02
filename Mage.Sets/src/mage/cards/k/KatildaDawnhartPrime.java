@@ -174,7 +174,7 @@ class KatildaDawnhartPrimeManaEffect extends ManaEffect {
         if (choice.getChoices().size() == 1) {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
-            controller.choose(outcome, choice, game);
+            controller.choose(Outcome.PutManaInPool, choice, game);
         }
         if (choice.getChoice() == null) {
             return new Mana();

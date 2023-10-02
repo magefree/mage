@@ -53,7 +53,7 @@ class PeregrinationEffect extends OneShotEffect {
         staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle";
     }
 
-    public PeregrinationEffect(final PeregrinationEffect effect) {
+    private PeregrinationEffect(final PeregrinationEffect effect) {
         super(effect);
     }
 

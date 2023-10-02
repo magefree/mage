@@ -54,7 +54,7 @@ class TwoHeadedGiantEffect extends OneShotEffect {
                 + " If both coins come up tails, {this} gains menace until end of turn";
     }
 
-    public TwoHeadedGiantEffect(final TwoHeadedGiantEffect effect) {
+    private TwoHeadedGiantEffect(final TwoHeadedGiantEffect effect) {
         super(effect);
     }
 

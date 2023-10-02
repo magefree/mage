@@ -50,7 +50,7 @@ class GoblinFurrierPreventEffectEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that {this} would deal to snow creatures";
     }
 
-    public GoblinFurrierPreventEffectEffect(final GoblinFurrierPreventEffectEffect effect) {
+    private GoblinFurrierPreventEffectEffect(final GoblinFurrierPreventEffectEffect effect) {
         super(effect);
     }
 

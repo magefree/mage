@@ -45,7 +45,7 @@ class RhysticScryingEffect extends OneShotEffect {
         this.staticText = "Then if any player pays {2}, discard three cards";
     }
 
-    public RhysticScryingEffect(final RhysticScryingEffect effect) {
+    private RhysticScryingEffect(final RhysticScryingEffect effect) {
         super(effect);
     }
 

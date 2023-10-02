@@ -58,7 +58,7 @@ class SpelltitheEnforcerEffect extends SacrificeEffect {
         this.staticText = "that player sacrifices a permanent unless they pay {1}";
     }
 
-    SpelltitheEnforcerEffect(final SpelltitheEnforcerEffect effect) {
+    private SpelltitheEnforcerEffect(final SpelltitheEnforcerEffect effect) {
         super(effect);
     }
 
