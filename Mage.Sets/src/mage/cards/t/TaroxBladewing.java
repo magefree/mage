@@ -37,7 +37,7 @@ public final class TaroxBladewing extends CardImpl {
         
         // Grandeur - Discard another card named Tarox Bladewing: Tarox Bladewing gets +X/+X until end of turn, where X is its power.
         SourcePermanentPowerCount x = new SourcePermanentPowerCount();
-        this.addAbility(new GrandeurAbility(new BoostSourceEffect(x, x, Duration.EndOfTurn, true), "Tarox Bladewing"));
+        this.addAbility(new GrandeurAbility(new BoostSourceEffect(x, x, Duration.EndOfTurn), "Tarox Bladewing"));
     }
 
     private TaroxBladewing(final TaroxBladewing card) {

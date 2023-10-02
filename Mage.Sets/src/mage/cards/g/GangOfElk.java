@@ -29,7 +29,7 @@ public final class GangOfElk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Gang of Elk becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
-        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it"), false));
     }
 
     private GangOfElk(final GangOfElk card) {

@@ -38,7 +38,7 @@ public final class JolraelMwonvuliRecluse extends CardImpl {
         // {4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.
         this.addAbility(new SimpleActivatedAbility(new SetBasePowerToughnessAllEffect(
                 CardsInControllerHandCount.instance, CardsInControllerHandCount.instance,
-                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true
+                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES
         ).setText("until end of turn, creatures you control have base power and toughness X/X, " +
                 "where X is the number of cards in your hand"), new ManaCostsImpl<>("{4}{G}{G}")));
     }
