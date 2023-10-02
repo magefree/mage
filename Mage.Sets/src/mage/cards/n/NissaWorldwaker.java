@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import mage.MageInt;
@@ -32,7 +31,7 @@ import java.util.UUID;
  */
 public final class NissaWorldwaker extends CardImpl {
 
-    private static final FilterPermanent filterForest = new FilterPermanent(SubType.FOREST, "Forest");
+    private static final FilterPermanent filterForest = new FilterPermanent(SubType.FOREST, "Forests");
 
     public NissaWorldwaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");

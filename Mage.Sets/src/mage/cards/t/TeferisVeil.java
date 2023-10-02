@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ public final class TeferisVeil extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Whenever a creature you control attacks, it phases out at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new PhaseOutTargetEffect("it")));
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new PhaseOutTargetEffect()));
         effect.setText("it phases out at end of combat");
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(effect, false, true));
     }

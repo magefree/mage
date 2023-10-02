@@ -16,7 +16,7 @@ import mage.players.Player;
  */
 public class GainLifeTargetEffect extends OneShotEffect {
 
-    private DynamicValue life;
+    private final DynamicValue life;
 
     public GainLifeTargetEffect(int life) {
         this(StaticValue.get(life));
@@ -50,20 +50,13 @@ public class GainLifeTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
+        sb.append(" gains ");
         String message = life.getMessage();
-
-        if (!mode.getTargets().isEmpty() && mode.getTargets().get(0).getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-            sb.append("any number of target players each gain ");
-        } else if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" gains ");
-        } else {
-            sb.append("that player gains ");
-        }
-        if (message.isEmpty() || !message.equals("1")) {
+        if (!message.equals("1")) {
             sb.append(life.toString()).append(' ');
         }
         sb.append("life");
