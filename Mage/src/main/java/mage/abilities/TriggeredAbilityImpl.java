@@ -27,7 +27,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnceEachTurn = false;
     private boolean doOnlyOnceEachTurn = false;
-    protected boolean replaceRuleText = true;
+    protected boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null;
 
@@ -131,7 +131,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public TriggeredAbility setReplaceRuleText(boolean replaceRuleText) {
+    public TriggeredAbility withRuleTextReplacement(boolean replaceRuleText) {
         this.replaceRuleText = replaceRuleText;
         return this;
     }
@@ -220,18 +220,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     superRule = superRule.replaceFirst(" (become|block|deal|discard|gain|get|lose|mill|sacrifice)s? ", " $1 ");
                 }
             }
-            if (replaceRuleText
-                    && triggerPhrase != null
-                    && triggerPhrase.contains("{this}")
-                    && !triggerPhrase.contains("other")
-                    && !triggerPhrase.contains(" of a ")
-                    && !triggerPhrase.contains(" by a ")
-                    && !triggerPhrase.contains(" to a ")
-                    && !triggerPhrase.contains(" blocks a ")
-                    && (superRule.startsWith("{this}")
-                    || superRule.startsWith("sacrifice {this}")
-            )) {
-                superRule = superRule.replace("{this} ", "it ");
+            if (replaceRuleText && triggerPhrase != null) {
+                superRule = superRule.replaceFirst("^(sacrifice )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
             if (triggersOnceEachTurn) {

@@ -1,12 +1,21 @@
 package mage.client.dialog;
 
+import mage.cards.decks.Deck;
+import mage.cards.decks.DeckFileFilter;
+import mage.cards.decks.importer.DeckImporter;
+import mage.client.MageFrame;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
+import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.mulligan.MulliganType;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
 
 /**
  * App GUI: custom options for match/tournament
@@ -19,28 +28,49 @@ public class CustomOptionsDialog extends MageDialog {
         TABLE(
                 PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS,
                 PreferencesDialog.KEY_NEW_TABLE_MULLIGAN_TYPE,
-                PreferencesDialog.KEY_NEW_TABLE_PLANECHASE
+                PreferencesDialog.KEY_NEW_TABLE_PLANECHASE,
+                PreferencesDialog.KEY_NEW_TABLE_EMBLEM_CARDS_ENABLED,
+                PreferencesDialog.KEY_NEW_TABLE_EMBLEM_CARDS_PER_PLAYER_FILE,
+                PreferencesDialog.KEY_NEW_TABLE_EMBLEM_CARDS_STARTING_PLAYER_FILE
         ),
 
         TOURNEY(
                 PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS,
                 PreferencesDialog.KEY_NEW_TOURNAMENT_MULLIGUN_TYPE,
-                PreferencesDialog.KEY_NEW_TOURNAMENT_PLANE_CHASE
+                PreferencesDialog.KEY_NEW_TOURNAMENT_PLANE_CHASE,
+                PreferencesDialog.KEY_NEW_TOURNAMENT_EMBLEM_CARDS_ENABLED,
+                PreferencesDialog.KEY_NEW_TOURNAMENT_EMBLEM_CARDS_PER_PLAYER_FILE,
+                PreferencesDialog.KEY_NEW_TOURNAMENT_EMBLEM_CARDS_STARTING_PLAYER_FILE
         );
         public final String NUMBER_OF_FREE_MULLIGANS;
         public final String MULLIGAN_TYPE;
         public final String PLANECHASE;
+        public final String EMBLEM_CARDS_ENABLED;
+        public final String EMBLEM_CARDS_PER_PLAYER_FILE;
+        public final String EMBLEM_CARDS_STARTING_PLAYER_FILE;
 
-        SaveLoadKeys(String numberOfFreeMulligans, String mulliganType, String planechase) {
+        SaveLoadKeys(
+                String numberOfFreeMulligans,
+                String mulliganType,
+                String planechase,
+                String emblemCardsEnabled,
+                String emblemCardsPerPlayerFile,
+                String emblemCardsStartingPlayerFile
+        ) {
             NUMBER_OF_FREE_MULLIGANS = numberOfFreeMulligans;
             MULLIGAN_TYPE = mulliganType;
             PLANECHASE = planechase;
+            EMBLEM_CARDS_ENABLED = emblemCardsEnabled;
+            EMBLEM_CARDS_PER_PLAYER_FILE = emblemCardsPerPlayerFile;
+            EMBLEM_CARDS_STARTING_PLAYER_FILE = emblemCardsStartingPlayerFile;
         }
     }
 
     private static final Logger logger = Logger.getLogger(CustomOptionsDialog.class);
     private final SaveLoadKeys saveLoadKeys;
     private final JButton openButton;
+    private final JFileChooser fcSelectEmblemCardsPerPlayer;
+    private final JFileChooser fcSelectEmblemCardsStartingPlayer;
 
     /**
      * Creates new form NewTableDialog
@@ -52,6 +82,12 @@ public class CustomOptionsDialog extends MageDialog {
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         cbMulliganType.setModel(new DefaultComboBoxModel(MulliganType.values()));
         this.setModal(true);
+        fcSelectEmblemCardsPerPlayer = new JFileChooser();
+        fcSelectEmblemCardsPerPlayer.setAcceptAllFileFilterUsed(false);
+        fcSelectEmblemCardsPerPlayer.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
+        fcSelectEmblemCardsStartingPlayer = new JFileChooser();
+        fcSelectEmblemCardsStartingPlayer.setAcceptAllFileFilterUsed(false);
+        fcSelectEmblemCardsStartingPlayer.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
     }
 
     /**
@@ -71,8 +107,18 @@ public class CustomOptionsDialog extends MageDialog {
         jSeparator2 = new javax.swing.JSeparator();
         lblVariantOptions = new javax.swing.JLabel();
         chkPlaneChase = new javax.swing.JCheckBox();
+        planechaseDescriptionLabel = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         btnOK = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        chkEmblemCards = new javax.swing.JCheckBox();
+        btnEmblemCardsPerPlayer = new javax.swing.JButton();
+        txtEmblemCardsPerPlayer = new javax.swing.JTextField();
+        lblEmblemCardsPerPlayer = new javax.swing.JLabel();
+        btnEmblemCardsStartingPlayer = new javax.swing.JButton();
+        txtEmblemCardsStartingPlayer = new javax.swing.JTextField();
+        lblEmblemCardsStartingPlayer = new javax.swing.JLabel();
+        emblemCardsDescriptionLabel = new javax.swing.JLabel();
 
         setTitle("Custom Options");
 
@@ -103,13 +149,16 @@ public class CustomOptionsDialog extends MageDialog {
         lblVariantOptions.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblVariantOptions.setText("Variant Options");
 
-        chkPlaneChase.setText("PlaneChase");
+        chkPlaneChase.setText("Planechase");
         chkPlaneChase.setToolTipText("Use the PlaneChase variant for your game.");
         chkPlaneChase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkPlaneChaseActionPerformed(evt);
             }
         });
+
+        planechaseDescriptionLabel.setText("<html>Shared planar deck of all implemented planes.<br>Uses a 9-sided planar die with 2 planeswalk sides and 2 chaos sides.<br>Some ability text may be incorrect.<br>Some rules details (such as who controls plane abilities) may be incorrect.");
+        planechaseDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -118,32 +167,90 @@ public class CustomOptionsDialog extends MageDialog {
             }
         });
 
+        chkEmblemCards.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chkEmblemCards.setText("Emblem Cards (Experimental)");
+        chkEmblemCards.setToolTipText("If enabled, select cards to give players emblem copies of");
+        chkEmblemCards.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkEmblemCardsActionPerformed(evt);
+            }
+        });
+
+        btnEmblemCardsPerPlayer.setText("...");
+        btnEmblemCardsPerPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmblemCardsPerPlayerActionPerformed(evt);
+            }
+        });
+
+        txtEmblemCardsPerPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmblemCardsPerPlayerActionPerformed(evt);
+            }
+        });
+
+        lblEmblemCardsPerPlayer.setText("Per-Player File");
+        lblEmblemCardsPerPlayer.setToolTipText("An emblem of each card in this file is given to each player");
+
+        btnEmblemCardsStartingPlayer.setText("...");
+        btnEmblemCardsStartingPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmblemCardsStartingPlayerActionPerformed(evt);
+            }
+        });
+
+        txtEmblemCardsStartingPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmblemCardsStartingPlayerActionPerformed(evt);
+            }
+        });
+
+        lblEmblemCardsStartingPlayer.setText("Starting Player File");
+        lblEmblemCardsStartingPlayer.setToolTipText("An emblem of every card in this file is given to the starting player (useful for symmetric effects)");
+
+        emblemCardsDescriptionLabel.setText("<html>Give players emblems with the abilities of cards.<br>Note that some abilities may not function correctly from the command zone.<br>If anything breaks, please report it on GitHub.");
+        emblemCardsDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator2)
-                    .addComponent(jSeparator4)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnOK))
+                    .addComponent(jSeparator3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtEmblemCardsPerPlayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEmblemCardsPerPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtEmblemCardsStartingPlayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEmblemCardsStartingPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMulliganType)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbMulliganType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFreeMulligans)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkPlaneChase)
-                            .addComponent(lblGeneralOptions)
-                            .addComponent(lblVariantOptions))
-                        .addGap(0, 125, Short.MAX_VALUE))
+                        .addComponent(spnFreeMulligans))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOK)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblVariantOptions)
+                            .addComponent(chkPlaneChase)
+                            .addComponent(chkEmblemCards)
+                            .addComponent(lblEmblemCardsPerPlayer)
+                            .addComponent(lblEmblemCardsStartingPlayer)
+                            .addComponent(lblGeneralOptions))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(planechaseDescriptionLabel)
+                    .addComponent(emblemCardsDescriptionLabel))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -166,6 +273,26 @@ public class CustomOptionsDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkPlaneChase)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(planechaseDescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkEmblemCards)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emblemCardsDescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmblemCardsPerPlayer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmblemCardsPerPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmblemCardsPerPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmblemCardsStartingPlayer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmblemCardsStartingPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmblemCardsStartingPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,6 +309,14 @@ public class CustomOptionsDialog extends MageDialog {
         spnFreeMulligans.getAccessibleContext().setAccessibleDescription("Select the number of free mulligans");
         spnFreeMulligans.getAccessibleContext().setAccessibleParent(lblFreeMulligans);
         chkPlaneChase.getAccessibleContext().setAccessibleParent(lblVariantOptions);
+        planechaseDescriptionLabel.getAccessibleContext().setAccessibleName("Planechase Description");
+        planechaseDescriptionLabel.getAccessibleContext().setAccessibleDescription("Shared planar deck of all implemented planes.\nUses a 9-sided planar die with 2 planeswalk sides and 2 chaos sides.\nSome ability text may be incorrect.\nSome rules details (such as who controls plane abilities) may be incorrect.");
+        planechaseDescriptionLabel.getAccessibleContext().setAccessibleParent(chkPlaneChase);
+        lblEmblemCardsPerPlayer.getAccessibleContext().setAccessibleParent(chkEmblemCards);
+        txtEmblemCardsStartingPlayer.getAccessibleContext().setAccessibleDescription("");
+        lblEmblemCardsStartingPlayer.getAccessibleContext().setAccessibleParent(chkEmblemCards);
+        emblemCardsDescriptionLabel.getAccessibleContext().setAccessibleName("Emblem Cards description");
+        emblemCardsDescriptionLabel.getAccessibleContext().setAccessibleDescription("Give players emblems with the abilities of cards.\nNote that some abilities may not function correctly from the command zone.\nIf anything breaks, please report it on GitHub.");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -205,9 +340,49 @@ public class CustomOptionsDialog extends MageDialog {
         updateActiveCount();
     }//GEN-LAST:event_chkPlaneChaseActionPerformed
 
+    private void chkEmblemCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEmblemCardsActionPerformed
+        updateActiveCount();
+    }//GEN-LAST:event_chkEmblemCardsActionPerformed
+
+    private void btnEmblemCardsPerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmblemCardsPerPlayerActionPerformed
+        loadEmblemCardFile(false);
+    }//GEN-LAST:event_btnEmblemCardsPerPlayerActionPerformed
+
+    private void txtEmblemCardsPerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmblemCardsPerPlayerActionPerformed
+
+    }//GEN-LAST:event_txtEmblemCardsPerPlayerActionPerformed
+
+    private void btnEmblemCardsStartingPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmblemCardsStartingPlayerActionPerformed
+        loadEmblemCardFile(true);
+    }//GEN-LAST:event_btnEmblemCardsStartingPlayerActionPerformed
+
+    private void txtEmblemCardsStartingPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmblemCardsStartingPlayerActionPerformed
+
+    }//GEN-LAST:event_txtEmblemCardsStartingPlayerActionPerformed
+
     public void showDialog() {
         this.setLocation(150, 100);
         this.setVisible(true);
+    }
+    private void loadEmblemCardFile(boolean isStartingPlayer) {
+        JFileChooser fileChooser = isStartingPlayer ? fcSelectEmblemCardsStartingPlayer : fcSelectEmblemCardsPerPlayer;
+        JTextField textField = isStartingPlayer ? txtEmblemCardsStartingPlayer : txtEmblemCardsPerPlayer;
+        String prefKey = isStartingPlayer ? "lastStartingPlayerEmblemCardsFolder" : "lastPerPlayerEmblemCardsFolder";
+
+        String lastFolder = MageFrame.getPreferences().get(prefKey, "");
+        if (!lastFolder.isEmpty()) {
+            fileChooser.setCurrentDirectory(new File(lastFolder));
+        }
+        int ret = fileChooser.showDialog(this, "Select Emblem Cards");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            textField.setText(file.getPath());
+            try {
+                MageFrame.getPreferences().put(prefKey, file.getCanonicalPath());
+            } catch (IOException ex) {
+            }
+        }
+        fileChooser.setSelectedFile(null);
     }
 
     public void onLoadSettings(int version) {
@@ -231,6 +406,9 @@ public class CustomOptionsDialog extends MageDialog {
         this.chkPlaneChase.setSelected(PreferencesDialog.getCachedValue(saveLoadKeys.PLANECHASE + versionStr, "No").equals("Yes"));
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(saveLoadKeys.NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
         this.cbMulliganType.setSelectedItem(MulliganType.valueByName(PreferencesDialog.getCachedValue(saveLoadKeys.MULLIGAN_TYPE + versionStr, MulliganType.GAME_DEFAULT.toString())));
+        this.chkEmblemCards.setSelected(PreferencesDialog.getCachedValue(saveLoadKeys.EMBLEM_CARDS_ENABLED + versionStr, "No").equals("Yes"));
+        this.txtEmblemCardsPerPlayer.setText(PreferencesDialog.getCachedValue(saveLoadKeys.EMBLEM_CARDS_PER_PLAYER_FILE, ""));
+        this.txtEmblemCardsStartingPlayer.setText(PreferencesDialog.getCachedValue(saveLoadKeys.EMBLEM_CARDS_STARTING_PLAYER_FILE, ""));
         updateActiveCount();
     }
 
@@ -250,6 +428,10 @@ public class CustomOptionsDialog extends MageDialog {
         PreferencesDialog.saveValue(saveLoadKeys.NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(options.getFreeMulligans()));
         PreferencesDialog.saveValue(saveLoadKeys.MULLIGAN_TYPE + versionStr, options.getMulliganType().toString());
         PreferencesDialog.saveValue(saveLoadKeys.PLANECHASE + versionStr, options.isPlaneChase() ? "Yes" : "No");
+        PreferencesDialog.saveValue(saveLoadKeys.EMBLEM_CARDS_ENABLED + versionStr,
+                !(options.getGlobalEmblemCards().isEmpty() && options.getPerPlayerEmblemCards().isEmpty()) ? "Yes" : "No");
+        PreferencesDialog.saveValue(saveLoadKeys.EMBLEM_CARDS_PER_PLAYER_FILE + versionStr, txtEmblemCardsPerPlayer.getText());
+        PreferencesDialog.saveValue(saveLoadKeys.EMBLEM_CARDS_STARTING_PLAYER_FILE + versionStr, txtEmblemCardsStartingPlayer.getText());
     }
 
     /**
@@ -259,6 +441,42 @@ public class CustomOptionsDialog extends MageDialog {
         options.setFreeMulligans((Integer) spnFreeMulligans.getValue());
         options.setMullgianType((MulliganType) cbMulliganType.getSelectedItem());
         options.setPlaneChase(chkPlaneChase.isSelected());
+        if (chkEmblemCards.isSelected()) {
+            if (!txtEmblemCardsPerPlayer.getText().isEmpty()) {
+                Deck perPlayerEmblemDeck = null;
+                try {
+                    perPlayerEmblemDeck = Deck.load(DeckImporter.importDeckFromFile(txtEmblemCardsPerPlayer.getText(), true), true, true);
+                } catch (GameException e1) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+                }
+                if (perPlayerEmblemDeck != null) {
+                    perPlayerEmblemDeck.clearLayouts();
+                    options.setPerPlayerEmblemCards(perPlayerEmblemDeck.getDeckCardLists().getCards());
+                }
+                else {
+                    options.setPerPlayerEmblemCards(Collections.emptySet());
+                }
+            }
+            if (!txtEmblemCardsStartingPlayer.getText().isEmpty()) {
+                Deck startingPlayerEmblemDeck = null;
+                try {
+                    startingPlayerEmblemDeck = Deck.load(DeckImporter.importDeckFromFile(txtEmblemCardsStartingPlayer.getText(), true), true, true);
+                } catch (GameException e1) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+                }
+                if (startingPlayerEmblemDeck != null) {
+                    startingPlayerEmblemDeck.clearLayouts();
+                    options.setGlobalEmblemCards(startingPlayerEmblemDeck.getDeckCardLists().getCards());
+                }
+                else {
+                    options.setGlobalEmblemCards(Collections.emptySet());
+                }
+            }
+        }
+        else {
+            options.setPerPlayerEmblemCards(Collections.emptySet());
+            options.setGlobalEmblemCards(Collections.emptySet());
+        }
     }
 
     public void updateActiveCount() {
@@ -266,6 +484,7 @@ public class CustomOptionsDialog extends MageDialog {
         if ((Integer)spnFreeMulligans.getValue() > 0) activeCount++;
         if (!cbMulliganType.getSelectedItem().toString().equals(MulliganType.GAME_DEFAULT.toString())) activeCount++;
         if (chkPlaneChase.isSelected()) activeCount++;
+        if (chkEmblemCards.isSelected()) activeCount++;
         if (activeCount == 0) {
             openButton.setText("Custom Options...");
         }
@@ -275,15 +494,25 @@ public class CustomOptionsDialog extends MageDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEmblemCardsPerPlayer;
+    private javax.swing.JButton btnEmblemCardsStartingPlayer;
     private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbMulliganType;
+    private javax.swing.JCheckBox chkEmblemCards;
     private javax.swing.JCheckBox chkPlaneChase;
+    private javax.swing.JLabel emblemCardsDescriptionLabel;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lblEmblemCardsPerPlayer;
+    private javax.swing.JLabel lblEmblemCardsStartingPlayer;
     private javax.swing.JLabel lblFreeMulligans;
     private javax.swing.JLabel lblGeneralOptions;
     private javax.swing.JLabel lblMulliganType;
     private javax.swing.JLabel lblVariantOptions;
+    private javax.swing.JLabel planechaseDescriptionLabel;
     private javax.swing.JSpinner spnFreeMulligans;
+    private javax.swing.JTextField txtEmblemCardsPerPlayer;
+    private javax.swing.JTextField txtEmblemCardsStartingPlayer;
     // End of variables declaration//GEN-END:variables
 }

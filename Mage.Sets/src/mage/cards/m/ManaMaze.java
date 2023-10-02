@@ -73,11 +73,6 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public ManaMazeEffect copy() {
         return new ManaMazeEffect(this);
     }

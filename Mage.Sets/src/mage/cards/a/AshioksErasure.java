@@ -152,11 +152,6 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public AshioksErasureReplacementEffect copy() {
         return new AshioksErasureReplacementEffect(this);
     }

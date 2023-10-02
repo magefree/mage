@@ -1,15 +1,16 @@
 package mage.client.cards;
 
-import mage.cards.CardDimensions;
 import mage.abilities.icon.CardIconRenderSettings;
+import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.draft.DraftPanel;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.comparators.CardViewRarityComparator;
 import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
+import mage.client.util.comparators.CardViewRarityComparator;
 import mage.constants.Constants;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -28,6 +29,8 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
 
     private static final Logger logger = Logger.getLogger(DraftGrid.class);
 
+    private final DraftPanel parentPanel;
+
     protected final CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected MageCard markedCard;
@@ -36,22 +39,28 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
     /**
      * Creates new form DraftGrid
      */
-    public DraftGrid() {
+    public DraftGrid(DraftPanel panel) {
         initComponents();
+        parentPanel = panel;
         markedCard = null;
         emptyGrid = true;
 
         // ENABLE picks and other actions
-        cardEventSource.addListener(new Listener<Event>() {
-            @Override
-            public void event(Event event) {
-                if (event.getEventType() == ClientEventType.CARD_DOUBLE_CLICK) {
-                    CardView card = (CardView) event.getSource();
+        cardEventSource.addListener(event -> {
+            if (event.getEventType() == ClientEventType.CARD_DOUBLE_CLICK
+                    || event.getEventType() == ClientEventType.CARD_CLICK) {
+                // There is a protection against picking too early in DraftPanel logic.
+                // So, when double clicking early, we do mark the card as selected like
+                //     a single click would.
+
+                CardView card = (CardView) event.getSource();
+                if(event.getEventType() == ClientEventType.CARD_DOUBLE_CLICK
+                        && parentPanel.isAllowedToPick()
+                ) {
                     cardEventSource.fireEvent(card, ClientEventType.DRAFT_PICK_CARD);
                     hidePopup();
                     AudioManager.playOnDraftSelect();
-                } else if (event.getEventType() == ClientEventType.CARD_CLICK) {
-                    CardView card = (CardView) event.getSource();
+                } else {
                     MageCard cardPanel = (MageCard) event.getComponent();
                     if (markedCard != null) {
                         markedCard.setSelected(false);

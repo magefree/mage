@@ -1,17 +1,14 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.*;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.AuraCardCanAttachToPermanentId;
@@ -19,8 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,29 +81,27 @@ class DanithaBenaliasHopeEffect extends OneShotEffect {
         }
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         UUID sourcePermanentId = sourcePermanent == null ? null : sourcePermanent.getId();
+        String sourcePermanentName = sourcePermanent == null ? "" : sourcePermanent.getName();
         FilterCard filter = new FilterCard("an Aura or Equipment card");
         filter.add(Predicates.or(
                 Predicates.and(SubType.AURA.getPredicate(), new AuraCardCanAttachToPermanentId(sourcePermanentId)),
                 SubType.EQUIPMENT.getPredicate()
         ));
-        TargetCard target;
-        if (controller.chooseUse(outcome, "Look in Hand or Graveyard?", null, "Hand", "Graveyard", source, game)) {
-            target = new TargetCardInHand(filter);
-        } else {
-            target = new TargetCardInYourGraveyard(filter);
-        }
+        Cards cards = new CardsImpl();
+        cards.addAllCards(controller.getHand().getCards(filter, game));
+        cards.addAllCards(controller.getGraveyard().getCards(filter, game));
+        TargetCard target = new TargetCard(Zone.ALL, filter);
         target.withNotTarget(true);
-        if (target.canChoose(controller.getId(), source, game)) {
-            controller.chooseTarget(outcome, target, source, game);
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                if (sourcePermanent != null) {
-                    game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
-                }
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                if (sourcePermanent != null) {
-                    sourcePermanent.addAttachment(card.getId(), source, game);
-                }
+        target.withChooseHint("to attach to " + sourcePermanentName);
+        controller.choose(outcome, cards, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card != null) {
+            if (sourcePermanent != null) {
+                game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
+            }
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+            if (sourcePermanent != null) {
+                sourcePermanent.addAttachment(card.getId(), source, game);
             }
         }
         return true;

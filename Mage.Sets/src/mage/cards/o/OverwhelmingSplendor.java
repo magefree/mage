@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import mage.MageObject;
@@ -60,7 +59,7 @@ public final class OverwhelmingSplendor extends CardImpl {
 
 class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
 
-    public OverwhelmingSplendorLoseAbilitiesEffect() {
+    OverwhelmingSplendorLoseAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
         staticText = "Creatures enchanted player controls lose all abilities and have base power and toughness 1/1";
     }
@@ -76,21 +75,14 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (enchantment == null) {
-                return false;
-            }
+            return false;
         }
-
         Player player = game.getPlayer(enchantment.getAttachedTo());
         if (player == null) {
             return false;
         }
-
         for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
@@ -120,7 +112,7 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
 
 class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OverwhelmingSplendorCantActivateEffect() {
+    OverwhelmingSplendorCantActivateEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities";
     }
@@ -135,11 +127,6 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
@@ -149,11 +136,12 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.ACTIVATE_ABILITY) {
-            return false;
-        }
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (enchantment == null || !event.getPlayerId().equals(enchantment.getAttachedTo())) {
             return false;

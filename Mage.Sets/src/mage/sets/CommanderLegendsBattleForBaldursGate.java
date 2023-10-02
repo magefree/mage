@@ -313,6 +313,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Horror", 758, Rarity.RARE, mage.cards.h.HuntedHorror.class));
         cards.add(new SetCardInfo("Icewind Stalwart", 27, Rarity.COMMON, mage.cards.i.IcewindStalwart.class));
         cards.add(new SetCardInfo("Ignite the Future", 797, Rarity.RARE, mage.cards.i.IgniteTheFuture.class));
+        cards.add(new SetCardInfo("Illithid Harvester", 76, Rarity.RARE, mage.cards.i.IllithidHarvester.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Illithid Harvester", 564, Rarity.RARE, mage.cards.i.IllithidHarvester.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class));
         cards.add(new SetCardInfo("In Garruk's Wake", 759, Rarity.RARE, mage.cards.i.InGarruksWake.class));
         cards.add(new SetCardInfo("Ingenious Artillerist", 182, Rarity.COMMON, mage.cards.i.IngeniousArtillerist.class));

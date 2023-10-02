@@ -19,6 +19,9 @@ public class AttachedToMatchesFilterCondition implements Condition {
 
     public AttachedToMatchesFilterCondition(FilterPermanent filter) {
         this.filter = filter;
+        if (filter == null) {
+            throw new IllegalStateException("Wrong code usage. Filter must be non-nullable.");
+        }
     }
 
     @Override

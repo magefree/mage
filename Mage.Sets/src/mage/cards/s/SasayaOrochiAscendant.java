@@ -226,14 +226,21 @@ class SasayasEssenceManaEffect extends ManaEffect {
 
                     for (int i = 0; i < count; i++) {
                         choice.clearChoice();
+                        String chosenColor;
                         if (choice.getChoices().size() == 1) {
-                            choice.setChoice(choice.getChoices().iterator().next());
+                            chosenColor = choice.getChoices().iterator().next();
                         } else {
-                            if (!controller.choose(outcome, choice, game)) {
-                                return newMana;
+                            // workaround to skip choose dialog in check playable state
+                            if (game.inCheckPlayableState()) {
+                                chosenColor = "Any";
+                            } else {
+                                if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
+                                    return newMana;
+                                }
+                                chosenColor = choice.getChoice();
                             }
                         }
-                        switch (choice.getChoice()) {
+                        switch (chosenColor) {
                             case "Black":
                                 newMana.increaseBlack();
                                 break;
@@ -251,6 +258,9 @@ class SasayasEssenceManaEffect extends ManaEffect {
                                 break;
                             case "Colorless":
                                 newMana.increaseColorless();
+                                break;
+                            case "Any":
+                                newMana.increaseAny();
                                 break;
                         }
                     }

@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class TaskForce extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Task Force becomes the target of a spell or ability, it gets +0/+3 until end of turn.
-        this.addAbility(new SourceBecomesTargetTriggeredAbility(
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new BoostSourceEffect(0, 3, Duration.EndOfTurn, "it")
         ).setTriggerPhrase("Whenever {this} becomes the target of a spell or ability, "));
     }

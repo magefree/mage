@@ -192,7 +192,7 @@ class ChromeMoxManaEffect extends ManaEffect {
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
-                            if (!player.choose(outcome, choice, game)) {
+                            if (!player.choose(Outcome.PutManaInPool, choice, game)) {
                                 return mana;
                             }
                         }

@@ -183,11 +183,6 @@ class DreadWightDoNotUntapEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
         if (permanentToUntap != null) {

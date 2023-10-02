@@ -71,11 +71,6 @@ class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
@@ -111,11 +106,6 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
     @Override
     public MoonholdEffect2 copy() {
         return new MoonholdEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

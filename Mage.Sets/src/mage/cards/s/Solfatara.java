@@ -62,11 +62,6 @@ class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
@@ -76,11 +71,12 @@ class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PLAY_LAND && event.getPlayerId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PLAY_LAND;
     }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getPlayerId().equals(source.getFirstTarget());
+    }
 }

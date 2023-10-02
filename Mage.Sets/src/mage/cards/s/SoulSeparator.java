@@ -41,7 +41,7 @@ public final class SoulSeparator extends CardImpl {
         // “create” those tokens.
 
         CreateTokenCopyTargetEffect copyEffect = new CreateTokenCopyTargetEffect(null, null, false, 1, false, false, null, 1, 1, true);
-        copyEffect.setAdditionalSubType(SubType.SPIRIT);
+        copyEffect.withAdditionalSubType(SubType.SPIRIT);
         copyEffect.setText("Exile target creature card from your graveyard. Create a token that's a copy of that card, except it's 1/1, it's a Spirit in addition to its other types, and it has flying");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, copyEffect, new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());

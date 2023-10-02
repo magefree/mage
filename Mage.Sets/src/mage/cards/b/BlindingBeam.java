@@ -109,11 +109,6 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean isInactive(Ability source, Game game) {
         // the PRE step part is directly after the UNTAP events for permanents
         if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE) {
