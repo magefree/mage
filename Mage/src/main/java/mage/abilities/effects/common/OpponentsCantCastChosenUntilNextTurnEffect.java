@@ -47,11 +47,17 @@ public class OpponentsCantCastChosenUntilNextTurnEffect extends ContinuousRuleMo
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) { return false; }
+        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            return false;
+        }
         SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-        if (spellAbility == null) { return false; }
+        if (spellAbility == null) {
+            return false;
+        }
         Card card = spellAbility.getCharacteristics(game);
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         return CardUtil.haveSameNames(card, cardName, game);
     }

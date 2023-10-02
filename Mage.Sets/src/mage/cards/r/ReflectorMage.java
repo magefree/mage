@@ -114,9 +114,13 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-        if (spellAbility == null) { return false;}
+        if (spellAbility == null) {
+            return false;
+        }
         Card card = spellAbility.getCharacteristics(game);
-        if (card == null) { return false;}
+        if (card == null) {
+            return false;
+        }
         return CardUtil.haveSameNames(card, creatureName, game) && Objects.equals(ownerId, card.getOwnerId());
     }
 

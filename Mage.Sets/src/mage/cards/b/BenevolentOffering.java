@@ -63,12 +63,16 @@ class BenevolentOfferingEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Target target = new TargetOpponent(true);
         target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
-        if (opponent == null) { return false; }
+        if (opponent == null) {
+            return false;
+        }
 
         Effect effect = new CreateTokenTargetEffect(new SpiritWhiteToken(), 3);
         effect.setTargetPointer(new FixedTarget(opponent.getId()));
@@ -97,12 +101,16 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Target target = new TargetOpponent(true);
         target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
-        if (opponent == null) { return false; }
+        if (opponent == null) {
+            return false;
+        }
 
         int count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game) * 2;
         controller.gainLife(count, game, source);

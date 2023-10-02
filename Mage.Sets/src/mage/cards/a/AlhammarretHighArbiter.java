@@ -155,9 +155,13 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-            if (spellAbility == null) { return false;}
+            if (spellAbility == null) {
+                return false;
+            }
             Card card = spellAbility.getCharacteristics(game);
-            if (card == null) { return false;}
+            if (card == null) {
+                return false;
+            }
             return CardUtil.haveSameNames(card, cardName, game);
         }
         return false;

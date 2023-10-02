@@ -93,7 +93,9 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-            if (spellAbility == null) { return false;}
+            if (spellAbility == null) {
+                return false;
+            }
             Card card = spellAbility.getCharacteristics(game);
             return card != null && CardUtil.haveSameNames(card, cardName, game);
         }

@@ -73,7 +73,9 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-        if (spellAbility == null) { return false;}
+        if (spellAbility == null) {
+            return false;
+        }
         Card card = spellAbility.getCharacteristics(game);
         if (card != null) {
             Spell spell = game.getState().getStack().getSpell(event.getSourceId());

@@ -59,7 +59,9 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-        if (spellAbility == null) { return false;}
+        if (spellAbility == null) {
+            return false;
+        }
         Card card = spellAbility.getCharacteristics(game);
         if (card != null) {
             LastSpellCastWatcher watcher = game.getState().getWatcher(LastSpellCastWatcher.class);

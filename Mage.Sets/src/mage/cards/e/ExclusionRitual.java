@@ -102,9 +102,13 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-        if (spellAbility == null) { return false;}
+        if (spellAbility == null) {
+            return false;
+        }
         Card card = spellAbility.getCharacteristics(game);
-        if (card == null) { return false;}
+        if (card == null) {
+            return false;
+        }
         if (sourcePermanent != null && !sourcePermanent.getImprinted().isEmpty()) {
             Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
             if (imprintedCard != null) {

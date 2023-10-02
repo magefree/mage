@@ -118,7 +118,9 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             return false;
         }
         SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-        if (spellAbility == null) { return false;}
+        if (spellAbility == null) {
+            return false;
+        }
         Card card = spellAbility.getCharacteristics(game);
         if (sourcePermanent == null
                 || card == null) {

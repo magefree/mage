@@ -130,13 +130,19 @@ class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.COUNTER) { return false; }
+        if (event.getType() != GameEvent.EventType.COUNTER) {
+            return false;
+        }
 
         Card card = game.getCard(source.getSourceId());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         UUID spellId = card.getSpellAbility().getId();
-        if (!event.getTargetId().equals(spellId)) { return false; }
+        if (!event.getTargetId().equals(spellId)) {
+            return false;
+        }
 
         return condition.apply(game, source);
     }
