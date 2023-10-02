@@ -272,6 +272,8 @@ public class ManaPool implements Serializable {
                         && conditionalItem.get(manaType) > 0) {
                     total += emptyItem(item, conditionalItem, game, manaType);
                 }
+                Player player = game.getPlayer(playerId);
+                //somehow remove the resources from the player at end of turn here
             }
             if (item.count() == 0) {
                 it.remove();
