@@ -24,7 +24,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class PrototypeTest extends CardTestPlayerBase {
 
     private static final String automaton = "Blitz Automaton";
-    private static final String automatonWithPrototype = "Blitz Automaton with prototype";
+    private static final String automatonWithPrototype = "Blitz Automaton using Prototype";
     private static final String bolt = "Lightning Bolt";
     private static final String cloudshift = "Cloudshift";
     private static final String clone = "Clone";
@@ -447,10 +447,10 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Taiga");
 
-        //checkPlayableAbility("cast even proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Boulderbranch Golem with prototype", false);
-        checkPlayableAbility("cast odd proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fallaji Dragon Engine with prototype", true);
+        //checkPlayableAbility("cast even proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Boulderbranch Golem using Prototype", false);
+        checkPlayableAbility("cast odd proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fallaji Dragon Engine using Prototype", true);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto + " with prototype");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto + " using Prototype");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
