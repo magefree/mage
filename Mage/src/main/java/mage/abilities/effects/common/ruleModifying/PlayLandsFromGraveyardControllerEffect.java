@@ -49,7 +49,7 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        throw new IllegalArgumentException("ERROR, can't call applies method on empty affectedAbility");
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
     }
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
