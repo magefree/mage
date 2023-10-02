@@ -7,9 +7,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileSourceReplacementEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -18,8 +18,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -110,48 +108,8 @@ class RealmbreakerTheInvasionTreeEffect extends OneShotEffect {
             return false;
         }
         game.addEffect(new GainAbilityTargetEffect(
-                new SimpleStaticAbility(new RealmbreakerTheInvasionTreeReplacementEffect()), Duration.Custom
+                new SimpleStaticAbility(new LeaveBattlefieldExileSourceReplacementEffect("this land")), Duration.Custom
         ).setTargetPointer(new FixedTarget(permanent, game)), source);
         return true;
-    }
-}
-
-class RealmbreakerTheInvasionTreeReplacementEffect extends ReplacementEffectImpl {
-
-    RealmbreakerTheInvasionTreeReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "If this land would leave the battlefield, exile it instead of putting it anywhere else";
-    }
-
-    private RealmbreakerTheInvasionTreeReplacementEffect(final RealmbreakerTheInvasionTreeReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RealmbreakerTheInvasionTreeReplacementEffect copy() {
-        return new RealmbreakerTheInvasionTreeReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 }

@@ -5,9 +5,9 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileTargetReplacementEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -18,8 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
@@ -41,7 +39,7 @@ public final class GruesomeEncore extends CardImpl {
         this.getSpellAbility().addEffect(new GruesomeEncoreEffect());
 
         // Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
-        this.getSpellAbility().addEffect(new GruesomeEncoreReplacementEffect());
+        this.getSpellAbility().addEffect(new LeaveBattlefieldExileTargetReplacementEffect("that creature"));
         this.getSpellAbility().addTarget(new TargetCardInOpponentsGraveyard(filter));
     }
 
@@ -93,46 +91,6 @@ class GruesomeEncoreEffect extends OneShotEffect {
             return true;
         }
 
-        return false;
-    }
-}
-
-class GruesomeEncoreReplacementEffect extends ReplacementEffectImpl {
-
-    GruesomeEncoreReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Tap);
-        staticText = "If that creature would leave the battlefield, exile it instead of putting it anywhere else";
-    }
-
-    private GruesomeEncoreReplacementEffect(final GruesomeEncoreReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GruesomeEncoreReplacementEffect copy() {
-        return new GruesomeEncoreReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getFirstTarget())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 }
