@@ -13,7 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author TheElk801, Susucr
+ * @author TheElk801, Susucr, notgreat
  */
 public class PrototypeAbility extends SpellAbility {
 
@@ -56,23 +56,21 @@ public class PrototypeAbility extends SpellAbility {
     }
 
     //based on TransformAbility
-    public Card transformCardSpellStatic(Card original) {
+    public Card prototypeCardSpell(Card original) {
         Card newCard = original.copy();
-        newCard.getManaCost().clear();
-        newCard.getManaCost().add(new ManaCostsImpl<>(manaString));
+        newCard.setManaCost(new ManaCostsImpl<>(manaString));
         newCard.getPower().setModifiedBaseValue(power);
         newCard.getToughness().setModifiedBaseValue(toughness);
         newCard.getColor().setColor(new ObjectColor(manaString));
         return newCard;
     }
 
-    public void transformPermanent(MageObject targetObject, Game game) {
+    public void prototypePermanent(MageObject targetObject, Game game) {
         if (targetObject instanceof Permanent) {
             ((Permanent)targetObject).setPrototyped(true);
         }
         targetObject.getColor(game).setColor(new ObjectColor(manaString));
-        targetObject.getManaCost().clear();
-        targetObject.getManaCost().add(new ManaCostsImpl<>(manaString));
+        targetObject.setManaCost(new ManaCostsImpl<>(manaString));
         targetObject.getPower().setModifiedBaseValue(power);
         targetObject.getToughness().setModifiedBaseValue(toughness);
     }

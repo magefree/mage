@@ -84,7 +84,7 @@ public class Spell extends StackObjectImpl implements Card {
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
         if (ability instanceof PrototypeAbility){
-            affectedCard = ((PrototypeAbility)ability).transformCardSpellStatic(card);
+            affectedCard = ((PrototypeAbility)ability).prototypeCardSpell(card);
             this.prototyped = true;
         }
 

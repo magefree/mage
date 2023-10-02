@@ -1982,7 +1982,7 @@ public abstract class GameImpl implements Game {
                 Abilities<Ability> abilities = copyFromPermanent.getAbilities();
                 for (Ability ability : abilities){
                     if (ability instanceof PrototypeAbility) {
-                        ((PrototypeAbility) ability).transformPermanent(newBluePrint, this);
+                        ((PrototypeAbility) ability).prototypePermanent(newBluePrint, this);
                     }
                 }
             }

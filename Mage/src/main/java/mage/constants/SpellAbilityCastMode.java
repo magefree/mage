@@ -53,7 +53,7 @@ public enum SpellAbilityCastMode {
             }
         }
         if (this.equals(PROTOTYPE)){
-            ((PrototypeAbility)spellAbility).transformCardSpellStatic(cardCopy);
+            ((PrototypeAbility)spellAbility).prototypeCardSpell(cardCopy);
         }
         return cardCopy;
     }

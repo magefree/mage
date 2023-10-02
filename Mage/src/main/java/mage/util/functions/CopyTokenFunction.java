@@ -89,7 +89,7 @@ public class CopyTokenFunction {
                 Abilities<Ability> abilities = source.getAbilities();
                 for (Ability ability : abilities){
                     if (ability instanceof PrototypeAbility) {
-                        ((PrototypeAbility) ability).transformPermanent(target, game);
+                        ((PrototypeAbility) ability).prototypePermanent(target, game);
                     }
                 }
             }
