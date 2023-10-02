@@ -34,7 +34,7 @@ public final class WelcomeToRathe extends ExpansionSet {
         this.ratioBoosterMythic = 7;
         this.maxCardNumberInBooster = 1;
 
-        cards.add(new SetCardInfo("Aeronaut Cavalry", 1, Rarity.COMMON, mage.cards.a.AeronautCavalry.class));
+        cards.add(new SetCardInfo("RagingOnslaught", 1, Rarity.COMMON, mage.cards.r.RagingOnslaughtBlue.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
