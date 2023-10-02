@@ -444,6 +444,7 @@ public abstract class AbilityImpl implements Ability {
                     // mandatory additional costs the spell has, such as that of Tormenting Voice. (2018-12-07)
                     canUseAdditionalCost = true;
                     break;
+                case PROTOTYPE:
                 case NORMAL:
                     canUseAlternativeCost = true;
                     canUseAdditionalCost = true;

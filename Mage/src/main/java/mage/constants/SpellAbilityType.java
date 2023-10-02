@@ -16,8 +16,7 @@ public enum SpellAbilityType {
     MODAL_LEFT("LeftModal SpellAbility"),
     MODAL_RIGHT("RightModal SpellAbility"),
     SPLICE("Spliced SpellAbility"),
-    ADVENTURE_SPELL("Adventure SpellAbility"),
-    PROTOTYPE("Prototype SpellAbility");
+    ADVENTURE_SPELL("Adventure SpellAbility");
 
     private final String text;
 

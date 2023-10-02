@@ -1,8 +1,9 @@
 package mage.constants;
 
+import mage.abilities.SpellAbility;
 import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.Card;
-import mage.game.Game;
 
 /**
  * @author LevelX2
@@ -12,6 +13,7 @@ public enum SpellAbilityCastMode {
     MADNESS("Madness"),
     FLASHBACK("Flashback"),
     BESTOW("Bestow"),
+    PROTOTYPE("Prototype"),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
     MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true);
@@ -39,7 +41,7 @@ public enum SpellAbilityCastMode {
         return text;
     }
 
-    public Card getTypeModifiedCardObjectCopy(Card card, Game game) {
+    public Card getTypeModifiedCardObjectCopy(Card card, SpellAbility spellAbility) {
         Card cardCopy = card.copy();
         if (this.equals(BESTOW)) {
             BestowAbility.becomeAura(cardCopy);
@@ -49,6 +51,9 @@ public enum SpellAbilityCastMode {
             if (tmp != null) {
                 cardCopy = tmp.copy();
             }
+        }
+        if (this.equals(PROTOTYPE)){
+            ((PrototypeAbility)spellAbility).transformCardSpellStatic(cardCopy);
         }
         return cardCopy;
     }

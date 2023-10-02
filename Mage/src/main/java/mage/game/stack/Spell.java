@@ -9,9 +9,9 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -83,6 +83,10 @@ public class Spell extends StackObjectImpl implements Card {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
+        if (ability instanceof PrototypeAbility){
+            affectedCard = ((PrototypeAbility)ability).transformCardSpellStatic(card);
+            this.prototyped = true;
+        }
 
         this.card = affectedCard;
         this.manaCost = this.card.getManaCost().copy();
@@ -96,22 +100,18 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
 
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT_FUSED:
-                // if this spell is going to be a copy, these abilities will be copied in copySpell
-                if (!isCopy) {
-                    SpellAbility left = ((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy();
-                    SpellAbility right = ((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy();
-                    left.setSourceId(ability.getSourceId());
-                    right.setSourceId(ability.getSourceId());
-                    spellAbilities.add(left);
-                    spellAbilities.add(right);
-                }
-                break;
-            case PROTOTYPE:
-                this.prototyped = true;
-            default:
-                spellAbilities.add(ability);
+        if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
+            // if this spell is going to be a copy, these abilities will be copied in copySpell
+            if (!isCopy) {
+                SpellAbility left = ((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy();
+                SpellAbility right = ((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy();
+                left.setSourceId(ability.getSourceId());
+                right.setSourceId(ability.getSourceId());
+                spellAbilities.add(left);
+                spellAbilities.add(right);
+            }
+        } else {
+            spellAbilities.add(ability);
         }
 
         this.controllerId = controllerId;

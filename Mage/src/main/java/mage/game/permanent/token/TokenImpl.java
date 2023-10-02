@@ -332,7 +332,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 }
 
                 // prototyped spell tokens make prototyped permanent tokens on resolution.
-                if (source instanceof SpellAbility && ((SpellAbility) source).getSpellAbilityType() == SpellAbilityType.PROTOTYPE) {
+                if (source instanceof SpellAbility && ((SpellAbility) source).getSpellAbilityCastMode() == SpellAbilityCastMode.PROTOTYPE) {
                     permanent.setPrototyped(true);
                 }
 

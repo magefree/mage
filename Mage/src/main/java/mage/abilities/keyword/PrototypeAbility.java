@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -10,29 +11,38 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 
 /**
  * @author TheElk801, Susucr
  */
 public class PrototypeAbility extends SpellAbility {
 
+    private final int power;
+    private final int toughness;
+    private final String manaString;
     private final String rule;
 
     public PrototypeAbility(Card card, String manaString, int power, int toughness) {
-        super(new ManaCostsImpl<>(manaString), card.getName() + " with prototype", Zone.HAND, SpellAbilityType.PROTOTYPE);
+        super(new ManaCostsImpl<>(manaString), card.getName() + " with prototype");
+        this.setSpellAbilityCastMode(SpellAbilityCastMode.PROTOTYPE);
         this.setTiming(TimingRule.SORCERY);
         this.addSubAbility(new SimpleStaticAbility(
-                Zone.ALL, new PrototypeEffect(power, toughness, manaString)
+                Zone.BATTLEFIELD, new PrototypeEffect(power, toughness, manaString)
         ).setRuleVisible(false));
         this.rule = "Prototype " + manaString + " &mdash; " + power + "/" + toughness +
                 " <i>(You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)</i>";
         setRuleAtTheTop(true);
+        this.power = power;
+        this.toughness = toughness;
+        this.manaString = manaString;
     }
 
     private PrototypeAbility(final PrototypeAbility ability) {
         super(ability);
         this.rule = ability.rule;
+        this.power = ability.power;
+        this.toughness = ability.toughness;
+        this.manaString = ability.manaString;
     }
 
     @Override
@@ -43,6 +53,28 @@ public class PrototypeAbility extends SpellAbility {
     @Override
     public String getRule() {
         return rule;
+    }
+
+    //based on TransformAbility
+    public Card transformCardSpellStatic(Card original) {
+        Card newCard = original.copy();
+        newCard.getManaCost().clear();
+        newCard.getManaCost().add(new ManaCostsImpl<>(manaString));
+        newCard.getPower().setModifiedBaseValue(power);
+        newCard.getToughness().setModifiedBaseValue(toughness);
+        newCard.getColor().setColor(new ObjectColor(manaString));
+        return newCard;
+    }
+
+    public void transformPermanent(MageObject targetObject, Game game) {
+        if (targetObject instanceof Permanent) {
+            ((Permanent)targetObject).setPrototyped(true);
+        }
+        targetObject.getColor(game).setColor(new ObjectColor(manaString));
+        targetObject.getManaCost().clear();
+        targetObject.getManaCost().add(new ManaCostsImpl<>(manaString));
+        targetObject.getPower().setModifiedBaseValue(power);
+        targetObject.getToughness().setModifiedBaseValue(toughness);
     }
 }
 
@@ -76,35 +108,14 @@ class PrototypeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        switch (game.getState().getZone(source.getSourceId())) {
-            case BATTLEFIELD:
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent == null || !permanent.isPrototyped()) {
-                    return false;
-                }
-                permanent.setManaCost(new ManaCostsImpl<>(manaString));
-                permanent.getColor(game).setColor(color);
-                permanent.getPower().setModifiedBaseValue(power);
-                permanent.getToughness().setModifiedBaseValue(toughness);
-                return true;
-            case STACK:
-                Spell spell = game.getSpell(source.getSourceId());
-                if (spell == null || !spell.isPrototyped()) {
-                    return false;
-                }
-                game.getState().getCreateMageObjectAttribute(spell, game).getColor().setColor(color);
-                spell.getPower().setModifiedBaseValue(power);
-                spell.getToughness().setModifiedBaseValue(toughness);
-                spell.setManaCost(new ManaCostsImpl<>(manaString));
-                return true;
-            default:
-                Card card = game.getCard(source.getSourceId());
-                if (card == null) {
-                    return false;
-                }
-                card.getPower().resetToBaseValue();
-                card.getToughness().resetToBaseValue();
-                return true;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null || !permanent.isPrototyped()) {
+            return false;
         }
+        permanent.setManaCost(new ManaCostsImpl<>(manaString));
+        permanent.getColor(game).setColor(color);
+        permanent.getPower().setModifiedBaseValue(power);
+        permanent.getToughness().setModifiedBaseValue(toughness);
+        return true;
     }
 }
