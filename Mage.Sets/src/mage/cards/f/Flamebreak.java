@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -20,8 +19,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.common.DamagedByWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Flamebreak extends CardImpl {
@@ -33,7 +33,7 @@ public final class Flamebreak extends CardImpl {
     }
 
     public Flamebreak(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}{R}");
 
 
         // Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
@@ -59,7 +59,7 @@ class FlamebreakCantRegenerateEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Creatures dealt damage this way can't be regenerated this turn";
     }
 
-    public FlamebreakCantRegenerateEffect(final FlamebreakCantRegenerateEffect effect) {
+    private FlamebreakCantRegenerateEffect(final FlamebreakCantRegenerateEffect effect) {
         super(effect);
     }
 
@@ -69,19 +69,14 @@ class FlamebreakCantRegenerateEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.REGENERATE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.REGENERATE) {
-            DamagedByWatcher watcher = game.getState().getWatcher(DamagedByWatcher.class, source.getSourceId());
-            if (watcher != null) {
-                return watcher.wasDamaged(event.getTargetId(), game);
-            }
-        }
-        return false;
+        DamagedByWatcher watcher = game.getState().getWatcher(DamagedByWatcher.class, source.getSourceId());
+        return watcher != null && watcher.wasDamaged(event.getTargetId(), game);
     }
 
 }

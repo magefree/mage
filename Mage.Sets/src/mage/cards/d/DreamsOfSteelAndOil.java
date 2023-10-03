@@ -71,7 +71,7 @@ class DreamsOfSteelAndOilEffect extends OneShotEffect {
         FilterCard filter = new FilterCard("artifact or creature card from " + opponent.getName() + "'s hand");
         filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
         TargetCard target = new TargetCard(Zone.HAND, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(Outcome.Discard, opponent.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
@@ -80,7 +80,7 @@ class DreamsOfSteelAndOilEffect extends OneShotEffect {
 
         filter.setMessage("artifact or creature card from " + opponent.getName() + "'s graveyard");
         target = new TargetCard(Zone.GRAVEYARD, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(Outcome.Exile, opponent.getGraveyard(), target, source, game);
         card = game.getCard(target.getFirstTarget());
         if (card != null) {

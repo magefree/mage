@@ -9,8 +9,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 /**
  * @author North
@@ -57,31 +55,8 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (mode.getTargets().isEmpty()) {
-            return "";
-        }
-
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-            sb.append("up to ");
-            if (target.getMaxNumberOfTargets() == 1) {
-                sb.append("one ");
-            }
-        }
-        if (target.getMaxNumberOfTargets() > 1) {
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-        }
-        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        if (target.getMaxNumberOfTargets() > 1) {
-            sb.append("s can't be blocked");
-        } else {
-            sb.append(" can't be blocked");
-        }
-
-        if (Duration.EndOfTurn == this.duration) {
-            sb.append(" this turn");
-        }
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "that creature")
+                + " can't be blocked"
+                + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 }

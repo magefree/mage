@@ -58,7 +58,7 @@ class FlashFoliageEffect extends OneShotEffect {
         this.staticText = "create a 1/1 green Saproling creature token that's blocking target creature attacking you";
     }
 
-    public FlashFoliageEffect(final FlashFoliageEffect effect) {
+    private FlashFoliageEffect(final FlashFoliageEffect effect) {
         super(effect);
     }
 

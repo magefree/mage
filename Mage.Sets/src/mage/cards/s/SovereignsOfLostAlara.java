@@ -70,7 +70,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
             filter.add(SubType.AURA.getPredicate());
             filter.add(new AuraCardCanAttachToPermanentId(attackingCreature.getId()));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.searchLibrary(target, source, game)) {
                 if (target.getFirstTarget() != null) {
                     Card aura = game.getCard(target.getFirstTarget());

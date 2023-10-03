@@ -80,7 +80,7 @@ class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override

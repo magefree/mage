@@ -51,7 +51,7 @@ class CorpseLungeEffect extends OneShotEffect {
         this.staticText = "{this} deals damage equal to the exiled card's power to target creature";
     }
 
-    public CorpseLungeEffect(final CorpseLungeEffect effect) {
+    private CorpseLungeEffect(final CorpseLungeEffect effect) {
         super(effect);
     }
 

@@ -56,7 +56,7 @@ class SoltariVisionaryTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
 
-    SoltariVisionaryTriggeredAbility(final SoltariVisionaryTriggeredAbility ability) {
+    private SoltariVisionaryTriggeredAbility(final SoltariVisionaryTriggeredAbility ability) {
         super(ability);
     }
 

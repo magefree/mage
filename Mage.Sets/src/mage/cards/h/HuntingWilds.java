@@ -67,7 +67,7 @@ class HuntingWildsEffect extends OneShotEffect {
         this.staticText = "Untap all Forests put onto the battlefield this way. They become 3/3 green creatures with haste that are still lands";
     }
 
-    public HuntingWildsEffect(final HuntingWildsEffect effect) {
+    private HuntingWildsEffect(final HuntingWildsEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class HuntingWildsToken extends TokenImpl {
 
         this.addAbility(HasteAbility.getInstance());
     }
-    public HuntingWildsToken(final HuntingWildsToken token) {
+    private HuntingWildsToken(final HuntingWildsToken token) {
         super(token);
     }
 

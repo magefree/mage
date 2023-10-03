@@ -61,7 +61,7 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} deals combat damage to one or more blockers, ");
     }
 
-    public ArashinWarBeastTriggeredAbility(final ArashinWarBeastTriggeredAbility ability) {
+    private ArashinWarBeastTriggeredAbility(final ArashinWarBeastTriggeredAbility ability) {
         super(ability);
         this.usedForCombatDamageStep = ability.usedForCombatDamageStep;
     }

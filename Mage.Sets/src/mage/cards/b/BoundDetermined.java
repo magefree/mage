@@ -67,7 +67,7 @@ class BoundEffect extends OneShotEffect {
         this.staticText = "Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was";
     }
 
-    public BoundEffect(final BoundEffect effect) {
+    private BoundEffect(final BoundEffect effect) {
         super(effect);
     }
 
@@ -110,18 +110,13 @@ class DeterminedEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Other spells you control can't be countered this turn";
     }
 
-    DeterminedEffect(final DeterminedEffect effect) {
+    private DeterminedEffect(final DeterminedEffect effect) {
         super(effect);
     }
 
     @Override
     public DeterminedEffect copy() {
         return new DeterminedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

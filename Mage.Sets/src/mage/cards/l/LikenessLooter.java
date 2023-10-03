@@ -87,7 +87,7 @@ class LikenessLooterEffect extends OneShotEffect {
                 + "except it has flying and this ability.";
     }
 
-    LikenessLooterEffect(final LikenessLooterEffect effect) {
+    private LikenessLooterEffect(final LikenessLooterEffect effect) {
         super(effect);
     }
 

@@ -72,7 +72,7 @@ class IzzetChemisterCastFromExileEffect extends OneShotEffect {
         staticText = "cast any number of cards exiled with {this} without paying their mana costs";
     }
 
-    public IzzetChemisterCastFromExileEffect(final IzzetChemisterCastFromExileEffect effect) {
+    private IzzetChemisterCastFromExileEffect(final IzzetChemisterCastFromExileEffect effect) {
         super(effect);
     }
 

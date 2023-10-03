@@ -391,10 +391,10 @@ public class TestPlayer implements Player {
                     || searchObject.contains("fused ")) {
                 Assert.assertFalse("alternative spell don't support alias", searchObject.startsWith(ALIAS_PREFIX));
                 foundObject = true;
-                foundAbility = ability.toString().startsWith(nameOrAlias);
+                foundAbility = ability.toString().equals(nameOrAlias);
             } else {
                 foundObject = hasObjectTargetNameOrAlias(game.getObject(ability.getSourceId()), searchObject);
-                foundAbility = searchObject.startsWith(ALIAS_PREFIX) || ability.toString().startsWith(nameOrAlias);
+                foundAbility = searchObject.startsWith(ALIAS_PREFIX) || ability.toString().equals(nameOrAlias);
             }
         } else if (nameOrAlias.startsWith(ALIAS_PREFIX)) {
             // object alias with ability text:
@@ -2196,11 +2196,15 @@ public class TestPlayer implements Player {
             List<UUID> usedTargets = new ArrayList<>();
 
 
+            // TODO: Allow to choose a player with TargetPermanentOrPlayer
             if ((target.getOriginalTarget() instanceof TargetPermanent)
-                    || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemted yet
+                    || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) // player target not implemented yet
+                    || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemented yet
                 FilterPermanent filterPermanent;
                 if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                     filterPermanent = ((TargetPermanentOrPlayer) target.getOriginalTarget()).getFilterPermanent();
+                } else if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
+                    filterPermanent = ((TargetCreatureOrPlayer) target.getOriginalTarget()).getFilterCreature();
                 } else {
                     filterPermanent = ((TargetPermanent) target.getOriginalTarget()).getFilter();
                 }
@@ -2379,7 +2383,7 @@ public class TestPlayer implements Player {
     }
 
     private void checkTargetDefinitionMarksSupport(Target needTarget, String targetDefinition, String canSupportChars) {
-        // fail on wrong chars in definition    `   `   `   `   `   `   `   ``````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+        // fail on wrong chars in definition
         // ^ - multiple targets
         // [] - special option like [no copy]
         // = - target type like targetPlayer=PlayerA
@@ -3157,22 +3161,22 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs) {
-        computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs);
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs, MageIdentifier identifier) {
+        computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs, identifier);
     }
 
     @Override
-    public Set<UUID> getCastSourceIdWithAlternateMana() {
+    public Map<UUID, Set<MageIdentifier>> getCastSourceIdWithAlternateMana() {
         return computerPlayer.getCastSourceIdWithAlternateMana();
     }
 
     @Override
-    public Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts() {
+    public Map<UUID, Map<MageIdentifier,ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
         return computerPlayer.getCastSourceIdManaCosts();
     }
 
     @Override
-    public Map<UUID, Costs<Cost>> getCastSourceIdCosts() {
+    public Map<UUID, Map<MageIdentifier,Costs<Cost>>> getCastSourceIdCosts() {
         return computerPlayer.getCastSourceIdCosts();
     }
 
@@ -4290,10 +4294,11 @@ public class TestPlayer implements Player {
                             if (specialAction.canActivate(this.getId(), game).canActivate()) {
                                 choices.remove(0);
                                 choiceRemoved = true;
-                                specialAction.setUnpaidMana(unpaid);
                                 if (activateAbility(specialAction, game)) {
                                     choiceUsed = true;
                                 }
+                            } else {
+                                Assert.fail("Found non active special mana action, but must generates only active: " + specialAction.getRule(true));
                             }
                         }
                     }

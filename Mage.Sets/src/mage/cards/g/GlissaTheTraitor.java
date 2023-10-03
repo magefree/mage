@@ -53,7 +53,7 @@ public final class GlissaTheTraitor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlissaTheTraitor(final GlissaTheTraitor card) {
+    private GlissaTheTraitor(final GlissaTheTraitor card) {
         super(card);
     }
 

@@ -2,7 +2,6 @@ package mage.game.stack;
 
 import mage.*;
 import mage.abilities.*;
-import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -88,6 +87,12 @@ public class Spell extends StackObjectImpl implements Card {
         this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
         this.ability.setControllerId(controllerId);
+
+        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MORPH){
+            this.faceDown = true;
+            this.getColor(game).setColor(null);
+            game.getState().getCreateMageObjectAttribute(this.getCard(), game).getSubtype().clear();
+        }
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             // if this spell is going to be a copy, these abilities will be copied in copySpell
             if (!isCopy) {
@@ -179,11 +184,8 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     public String getSpellCastText(Game game) {
-        for (Ability spellAbility : getAbilities()) {
-            if (spellAbility instanceof MorphAbility
-                    && ((AlternativeSourceCosts) spellAbility).isActivated(getSpellAbility(), game)) {
-                return "a card face down";
-            }
+        if (this.getSpellAbility() instanceof MorphAbility) {
+            return "a card face down";
         }
 
         if (card instanceof AdventureCardSpell) {
@@ -775,7 +777,7 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public Card getSecondCardFace() {
-        return null;
+        return card.getSecondCardFace();
     }
 
     @Override

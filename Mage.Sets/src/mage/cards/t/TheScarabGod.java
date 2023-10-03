@@ -161,7 +161,7 @@ class TheScarabGodEffect3 extends OneShotEffect {
         staticText = effectText;
     }
 
-    TheScarabGodEffect3(TheScarabGodEffect3 effect) {
+    private TheScarabGodEffect3(final TheScarabGodEffect3 effect) {
         super(effect);
     }
 

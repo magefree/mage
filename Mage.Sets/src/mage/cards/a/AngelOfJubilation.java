@@ -62,7 +62,7 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
         staticText = "Players can't pay life or sacrifice creatures to cast spells";
     }
 
-    public AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
+    private AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
         super(effect);
     }
 

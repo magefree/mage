@@ -45,7 +45,7 @@ class DeathFrenzyDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new GainLifeEffect(1), Duration.EndOfTurn, false);
     }
 
-    public DeathFrenzyDelayedTriggeredAbility(DeathFrenzyDelayedTriggeredAbility ability) {
+    private DeathFrenzyDelayedTriggeredAbility(final DeathFrenzyDelayedTriggeredAbility ability) {
         super(ability);
     }
 

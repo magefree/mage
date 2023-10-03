@@ -30,13 +30,13 @@ public class ConditionalRequirementEffect extends RequirementEffect {
     }
 
     public ConditionalRequirementEffect(RequirementEffect effect, Condition condition, String text) {
-        this(effect.getDuration(), effect, condition, null, false);
+        this(effect.getDuration(), effect, condition, null);
         if (text != null) {
             setText(text);
         }
     }
 
-    public ConditionalRequirementEffect(Duration duration, RequirementEffect effect, Condition condition, RequirementEffect otherwiseEffect, boolean lockedInCondition) {
+    public ConditionalRequirementEffect(Duration duration, RequirementEffect effect, Condition condition, RequirementEffect otherwiseEffect) {
         super(duration);
         this.effectType = EffectType.REQUIREMENT;
         this.effect = effect;

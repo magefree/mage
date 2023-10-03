@@ -56,7 +56,7 @@ class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Angel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on {this}";
     }
 
-    HeraldOfWarCostReductionEffect(HeraldOfWarCostReductionEffect effect) {
+    private HeraldOfWarCostReductionEffect(final HeraldOfWarCostReductionEffect effect) {
         super(effect);
     }
 

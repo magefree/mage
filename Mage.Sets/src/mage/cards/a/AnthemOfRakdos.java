@@ -58,7 +58,7 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
         staticText = "<i>Hellbent</i> &mdash; As long as you have no cards in hand, if a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.";
     }
 
-    public AnthemOfRakdosHellbentEffect(final AnthemOfRakdosHellbentEffect effect) {
+    private AnthemOfRakdosHellbentEffect(final AnthemOfRakdosHellbentEffect effect) {
         super(effect);
     }
 

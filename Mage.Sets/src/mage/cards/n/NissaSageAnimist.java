@@ -68,7 +68,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.";
     }
 
-    NissaSageAnimistPlusOneEffect(final NissaSageAnimistPlusOneEffect effect) {
+    private NissaSageAnimistPlusOneEffect(final NissaSageAnimistPlusOneEffect effect) {
         super(effect);
     }
 

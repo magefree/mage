@@ -46,7 +46,7 @@ class CruelEntertainmentEffect extends OneShotEffect {
                 + " during the second player's next turn, and the second player controls the first player during the first player's next turn";
     }
 
-    public CruelEntertainmentEffect(final CruelEntertainmentEffect effect) {
+    private CruelEntertainmentEffect(final CruelEntertainmentEffect effect) {
         super(effect);
     }
 

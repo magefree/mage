@@ -72,7 +72,7 @@ class LobotomyEffect extends OneShotEffect {
 
             // You choose card other than a basic land card
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Card chosenCard = null;
             if (controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());

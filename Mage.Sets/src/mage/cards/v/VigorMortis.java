@@ -55,7 +55,7 @@ class VigorMortisReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    VigorMortisReplacementEffect(VigorMortisReplacementEffect effect) {
+    private VigorMortisReplacementEffect(final VigorMortisReplacementEffect effect) {
         super(effect);
     }
 

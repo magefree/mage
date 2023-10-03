@@ -43,7 +43,7 @@ class AwakenTheErstwhileEffect extends OneShotEffect {
         this.staticText = "each player discards all the cards in their hand, then creates that many 2/2 black Zombie creature tokens";
     }
 
-    public AwakenTheErstwhileEffect(final AwakenTheErstwhileEffect effect) {
+    private AwakenTheErstwhileEffect(final AwakenTheErstwhileEffect effect) {
         super(effect);
     }
 

@@ -94,7 +94,7 @@ class SplinteringWindDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.tokenId = tokenId;
     }
 
-    SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
+    private SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
         super(ability);
         this.tokenId = ability.tokenId;
     }

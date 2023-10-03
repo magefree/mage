@@ -80,7 +80,7 @@ class GrandArchitectEffect extends ContinuousEffectImpl {
         staticText = "Target artifact creature becomes blue until end of turn";
     }
 
-    public GrandArchitectEffect(final GrandArchitectEffect effect) {
+    private GrandArchitectEffect(final GrandArchitectEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
         this.filter = filter;
     }
 
-    GrandArchitectManaAbility(GrandArchitectManaAbility ability) {
+    private GrandArchitectManaAbility(final GrandArchitectManaAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
     }

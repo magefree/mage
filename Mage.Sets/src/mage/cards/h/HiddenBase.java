@@ -39,7 +39,7 @@ public class HiddenBase extends CardImpl {
         this.addAbility(simpleActivatedAbility);
     }
 
-    public HiddenBase(final HiddenBase card) {
+    private HiddenBase(final HiddenBase card) {
         super(card);
     }
 

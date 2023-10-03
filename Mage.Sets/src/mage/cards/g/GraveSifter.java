@@ -59,7 +59,7 @@ class GraveSifterEffect extends OneShotEffect {
         this.staticText = "each player chooses a creature type and returns any number of cards of that type from their graveyard to their hand";
     }
 
-    public GraveSifterEffect(final GraveSifterEffect effect) {
+    private GraveSifterEffect(final GraveSifterEffect effect) {
         super(effect);
     }
 

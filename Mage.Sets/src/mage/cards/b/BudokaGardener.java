@@ -65,14 +65,16 @@ class BudokaGardenerEffect extends OneShotEffect {
         staticText = "If you control ten or more lands, flip {this}";
     }
 
-    BudokaGardenerEffect(final BudokaGardenerEffect effect) {
+    private BudokaGardenerEffect(final BudokaGardenerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
         if (game.getBattlefield().count(filterLands, source.getControllerId(), source, game) < 10) {
             return false;
         }
@@ -104,7 +106,7 @@ class DokaiWeaverofLife extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public DokaiWeaverofLife(final DokaiWeaverofLife token) {
+    private DokaiWeaverofLife(final DokaiWeaverofLife token) {
         super(token);
     }
 

@@ -72,7 +72,7 @@ class HedronFieldPuristsEffect extends PreventionEffectImpl {
         this.staticText = "If a source would deal damage to you or a creature you control, prevent " + amount + " of that damage";
     }
 
-    public HedronFieldPuristsEffect(HedronFieldPuristsEffect effect) {
+    private HedronFieldPuristsEffect(final HedronFieldPuristsEffect effect) {
         super(effect);
     }
 

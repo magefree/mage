@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.List;
@@ -10,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -73,7 +73,7 @@ class SufferThePastEffect extends OneShotEffect {
                         for (UUID targetId : targets) {
                             Card card = game.getCard(targetId);
                             if (card != null) {
-                                card.moveToExile(id, "Suffer the Past", source, game);
+                                you.moveCards(card, Zone.EXILED, source, game);
                                 numberExiled ++;
                             }
                         }
@@ -87,5 +87,3 @@ class SufferThePastEffect extends OneShotEffect {
         return false;
     }
 }
-
-

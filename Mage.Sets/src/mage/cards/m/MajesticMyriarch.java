@@ -90,7 +90,7 @@ class MajesticMyriarchEffect extends OneShotEffect {
                 "The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.";
     }
 
-    MajesticMyriarchEffect(final MajesticMyriarchEffect effect) {
+    private MajesticMyriarchEffect(final MajesticMyriarchEffect effect) {
         super(effect);
     }
 

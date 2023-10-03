@@ -134,7 +134,7 @@ class KayaIntangibleSlayerExileEffect extends OneShotEffect {
         );
         effect.setSavedPermanent(permanent);
         effect.setOnlyColor(ObjectColor.WHITE);
-        effect.setAdditionalSubType(SubType.SPIRIT);
+        effect.withAdditionalSubType(SubType.SPIRIT);
         effect.apply(game, source);
         return true;
     }

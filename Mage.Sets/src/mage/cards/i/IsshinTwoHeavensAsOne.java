@@ -50,7 +50,7 @@ class IsshinTwoHeavensAsOneEffect extends ReplacementEffectImpl {
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 
-    IsshinTwoHeavensAsOneEffect(final IsshinTwoHeavensAsOneEffect effect) {
+    private IsshinTwoHeavensAsOneEffect(final IsshinTwoHeavensAsOneEffect effect) {
         super(effect);
     }
 

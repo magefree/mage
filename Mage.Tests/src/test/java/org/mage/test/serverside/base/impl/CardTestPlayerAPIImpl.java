@@ -18,6 +18,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.*;
 import mage.game.command.CommandObject;
+import mage.game.command.Emblem;
 import mage.game.match.MatchOptions;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -701,6 +702,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void addPlane(Player player, Planes plane) {
         assertTrue("Can't put plane to game: " + plane.getClassName(), SystemUtil.putPlaneToGame(currentGame, player, plane.getClassName()));
+    }
+
+    public void addEmblem(Player player, Emblem emblem) {
+        Emblem newEmblem = emblem.copy();
+        newEmblem.setControllerId(player.getId());
+        newEmblem.assignNewId();
+        newEmblem.getAbilities().newId();
+        for (Ability ability : newEmblem.getAbilities()) {
+            ability.setSourceId(newEmblem.getId());
+        }
+
+        currentGame.getState().addCommandObject(newEmblem);
     }
 
     /**
@@ -1556,23 +1569,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertTopCardRevealed(TestPlayer player, boolean isRevealed) {
         Assert.assertEquals(isRevealed, player.isTopCardRevealed());
     }
-
-    public void assertIsAttachedTo(TestPlayer thePlayer, String theAttachment, String thePermanent) {
-
+    /**
+     * Asserts if, or if not, theAttachment is attached to thePermanent.
+     *
+     * @param isAttached true => assertIsAttachedTo, false => assertIsNotAttachedTo
+     */
+    public void assertAttachedTo(TestPlayer thePlayer, String theAttachment, String thePermanent, boolean isAttached) {
         List<Permanent> permanents = currentGame.getBattlefield().getAllActivePermanents().stream()
                 .filter(permanent -> permanent.isControlledBy(thePlayer.getId()))
                 .filter(permanent -> permanent.getName().equals(thePermanent))
                 .collect(Collectors.toList());
-        assertTrue(theAttachment + " was not attached to " + thePermanent,
+        assertTrue(theAttachment + " was "+ (!isAttached ? "":"not") +" attached to " + thePermanent,
+                !isAttached ^
                 permanents.stream()
                         .anyMatch(permanent -> permanent.getAttachments()
                                 .stream()
                                 .map(id -> currentGame.getCard(id))
                                 .map(MageObject::getName)
                                 .collect(Collectors.toList()).contains(theAttachment)));
-
-
     }
+
 
     public Permanent getPermanent(String cardName, UUID controller) {
         assertAliaseSupportInActivateCommand(cardName, false);

@@ -49,7 +49,7 @@ class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEff
         this.staticText = "Creatures of the chosen type don't untap during their controllers' untap steps";
     }
 
-    public AnZerrinRuinsDontUntapEffect(final AnZerrinRuinsDontUntapEffect effect) {
+    private AnZerrinRuinsDontUntapEffect(final AnZerrinRuinsDontUntapEffect effect) {
         super(effect);
     }
 

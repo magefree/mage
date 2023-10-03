@@ -40,7 +40,7 @@ public final class GlintHawkIdol extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public GlintHawkIdol (final GlintHawkIdol card) {
+    private GlintHawkIdol(final GlintHawkIdol card) {
         super(card);
     }
 
@@ -61,7 +61,7 @@ class GlintHawkIdolToken extends TokenImpl {
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
     }
-    public GlintHawkIdolToken(final GlintHawkIdolToken token) {
+    private GlintHawkIdolToken(final GlintHawkIdolToken token) {
         super(token);
     }
 

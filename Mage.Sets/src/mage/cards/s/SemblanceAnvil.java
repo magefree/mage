@@ -93,7 +93,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
         staticText = effectText;
     }
 
-    SemblanceAnvilCostReductionEffect(SemblanceAnvilCostReductionEffect effect) {
+    private SemblanceAnvilCostReductionEffect(final SemblanceAnvilCostReductionEffect effect) {
         super(effect);
     }
 

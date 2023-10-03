@@ -70,7 +70,7 @@ class OrimsThunderEffect2 extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    OrimsThunderEffect2(final OrimsThunderEffect2 effect) {
+    private OrimsThunderEffect2(final OrimsThunderEffect2 effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class OrimsThunderEffect extends OneShotEffect {
         staticText = "Destroy target artifact or enchantment";
     }
 
-    OrimsThunderEffect(final OrimsThunderEffect effect) {
+    private OrimsThunderEffect(final OrimsThunderEffect effect) {
         super(effect);
     }
 

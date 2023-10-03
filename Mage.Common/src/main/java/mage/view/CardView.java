@@ -716,8 +716,9 @@ public class CardView extends SimpleCardView {
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
-        this.cardNumber = "";
+        this.cardNumber = emblem.getCardNumber();
         this.imageNumber = emblem.getImageNumber();
+        this.usesVariousArt = emblem.getUsesVariousArt();
         this.rarity = Rarity.COMMON;
 
         this.playableStats = emblem.playableStats.copy();

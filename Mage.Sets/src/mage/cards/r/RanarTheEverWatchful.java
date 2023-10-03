@@ -101,7 +101,7 @@ class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), false);
     }
 
-    RanarTheEverWatchfulTriggeredAbility(final RanarTheEverWatchfulTriggeredAbility ability) {
+    private RanarTheEverWatchfulTriggeredAbility(final RanarTheEverWatchfulTriggeredAbility ability) {
         super(ability);
     }
 

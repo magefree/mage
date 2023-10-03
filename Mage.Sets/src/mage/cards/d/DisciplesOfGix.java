@@ -54,7 +54,7 @@ class DisciplesOfGixEffect extends OneShotEffect {
         staticText = "search your library for up to three artifact cards, put them into your graveyard, then shuffle";
     }
 
-    public DisciplesOfGixEffect(final DisciplesOfGixEffect effect) {
+    private DisciplesOfGixEffect(final DisciplesOfGixEffect effect) {
         super(effect);
     }
 

@@ -80,7 +80,7 @@ class BontuTheGlorifiedRestrictionEffect extends RestrictionEffect {
         staticText = "{this} can't attack or block unless a creature died under your control this turn";
     }
 
-    public BontuTheGlorifiedRestrictionEffect(final BontuTheGlorifiedRestrictionEffect effect) {
+    private BontuTheGlorifiedRestrictionEffect(final BontuTheGlorifiedRestrictionEffect effect) {
         super(effect);
     }
 

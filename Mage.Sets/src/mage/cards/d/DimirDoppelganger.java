@@ -60,7 +60,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
         staticText = "Exile target creature card from a graveyard. {this} becomes a copy of that card, except it has this ability";
     }
 
-    DimirDoppelgangerEffect(final DimirDoppelgangerEffect effect) {
+    private DimirDoppelgangerEffect(final DimirDoppelgangerEffect effect) {
         super(effect);
     }
 

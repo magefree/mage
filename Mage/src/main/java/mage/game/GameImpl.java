@@ -23,6 +23,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -42,6 +43,7 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
+import mage.game.command.emblems.EmblemOfCard;
 import mage.game.command.emblems.TheRingEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
@@ -1322,6 +1324,22 @@ public abstract class GameImpl implements Game {
             plane.setControllerId(startingPlayerId);
             addPlane(plane, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
+        }
+
+        if (!gameOptions.perPlayerEmblemCards.isEmpty()) {
+            for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+                for (DeckCardInfo info : gameOptions.perPlayerEmblemCards) {
+                    Card card = EmblemOfCard.cardFromDeckInfo(info);
+                    addEmblem(new EmblemOfCard(card), card, playerId);
+                }
+            }
+        }
+
+        if (!gameOptions.globalEmblemCards.isEmpty()) {
+            for (DeckCardInfo info : gameOptions.globalEmblemCards) {
+                Card card = EmblemOfCard.cardFromDeckInfo(info);
+                addEmblem(new EmblemOfCard(card), card, startingPlayerId);
+            }
         }
     }
 
@@ -2694,7 +2712,7 @@ public abstract class GameImpl implements Game {
                     continue;
                 }
                 Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                targetLegendaryToKeep.setNotTarget(true);
+                targetLegendaryToKeep.withNotTarget(true);
                 targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {

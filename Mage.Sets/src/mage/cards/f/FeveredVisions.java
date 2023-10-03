@@ -44,7 +44,7 @@ class FeveredVisionsEffect extends OneShotEffect {
         staticText = "that player draws a card. If the player is your opponent and has four or more cards in hand, {this} deals 2 damage to that player";
     }
 
-    public FeveredVisionsEffect(final FeveredVisionsEffect effect) {
+    private FeveredVisionsEffect(final FeveredVisionsEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class TheBattleOfEndorEffect extends OneShotEffect {
         staticText = "Put X +1/+1 counters on each creature you control";
     }
 
-    TheBattleOfEndorEffect(TheBattleOfEndorEffect effect) {
+    private TheBattleOfEndorEffect(final TheBattleOfEndorEffect effect) {
         super(effect);
     }
 

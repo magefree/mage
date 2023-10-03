@@ -57,7 +57,7 @@ class FruitOfTheFirstTreeEffect extends OneShotEffect {
         this.staticText = "you gain X life and draw X cards, where X is its toughness";
     }
 
-    public FruitOfTheFirstTreeEffect(FruitOfTheFirstTreeEffect copy) {
+    private FruitOfTheFirstTreeEffect(final FruitOfTheFirstTreeEffect copy) {
         super(copy);
     }
 

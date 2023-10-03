@@ -127,7 +127,7 @@ class BlackGateEffect extends OneShotEffect {
         }
 
         TargetPlayer target = new TargetPlayer(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!controller.choose(Outcome.Detriment, target, source, game)) {
             return false;
         }

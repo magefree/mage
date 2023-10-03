@@ -91,7 +91,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
         staticText = "If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead";
     }
 
-    PrimalVigorCounterEffect(final PrimalVigorCounterEffect effect) {
+    private PrimalVigorCounterEffect(final PrimalVigorCounterEffect effect) {
         super(effect);
     }
 

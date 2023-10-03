@@ -115,7 +115,7 @@ class SithMagicReplacementEffect extends ReplacementEffectImpl {
         staticText = "or if it would leave the battlefield";
     }
 
-    SithMagicReplacementEffect(final SithMagicReplacementEffect effect) {
+    private SithMagicReplacementEffect(final SithMagicReplacementEffect effect) {
         super(effect);
     }
 

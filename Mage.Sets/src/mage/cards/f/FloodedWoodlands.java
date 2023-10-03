@@ -51,7 +51,7 @@ class FloodedWoodlandsCostToAttackBlockEffect extends PayCostToAttackBlockEffect
         staticText = "Green creatures can't attack unless their controller sacrifices a land <i>(This cost is paid as attackers are declared.)</i>";
     }
 
-    FloodedWoodlandsCostToAttackBlockEffect(FloodedWoodlandsCostToAttackBlockEffect effect) {
+    private FloodedWoodlandsCostToAttackBlockEffect(final FloodedWoodlandsCostToAttackBlockEffect effect) {
         super(effect);
     }
 

@@ -69,7 +69,7 @@ class GurzigostCost extends CostImpl {
     }
 
 
-    GurzigostCost(final GurzigostCost cost) {
+    private GurzigostCost(final GurzigostCost cost) {
         super(cost);
     }
 

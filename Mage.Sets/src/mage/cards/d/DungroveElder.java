@@ -41,7 +41,7 @@ public final class DungroveElder extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands))));
     }
 
-    public DungroveElder (final DungroveElder card) {
+    private DungroveElder(final DungroveElder card) {
         super(card);
     }
 

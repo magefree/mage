@@ -67,7 +67,7 @@ class BaronVonCountPutCounterEffect extends OneShotEffect {
         staticText = "with a doom counter on \"5.\"";
     }
 
-    public BaronVonCountPutCounterEffect(final BaronVonCountPutCounterEffect effect) {
+    private BaronVonCountPutCounterEffect(final BaronVonCountPutCounterEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, ");
     }
 
-    public BaronVonCountTriggeredAbility(final BaronVonCountTriggeredAbility abiltity) {
+    private BaronVonCountTriggeredAbility(final BaronVonCountTriggeredAbility abiltity) {
         super(abiltity);
     }
 
@@ -160,7 +160,7 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
         staticText = "move the doom counter one numeral to the left";
     }
 
-    public BaronVonCountMoveDoomCounterEffect(final BaronVonCountMoveDoomCounterEffect effect) {
+    private BaronVonCountMoveDoomCounterEffect(final BaronVonCountMoveDoomCounterEffect effect) {
         super(effect);
     }
 
@@ -202,7 +202,7 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When the doom counter moves from \"1,\" ");
     }
 
-    public BaronVonCountSecondTriggeredAbility(BaronVonCountSecondTriggeredAbility ability) {
+    private BaronVonCountSecondTriggeredAbility(final BaronVonCountSecondTriggeredAbility ability) {
         super(ability);
     }
 
@@ -229,7 +229,7 @@ class BaronVonCountDestroyPlayerEffect extends OneShotEffect {
         staticText = "destroy target player and put that doom counter on \"5.\"";
     }
 
-    public BaronVonCountDestroyPlayerEffect(final BaronVonCountDestroyPlayerEffect effect) {
+    private BaronVonCountDestroyPlayerEffect(final BaronVonCountDestroyPlayerEffect effect) {
         super(effect);
     }
 

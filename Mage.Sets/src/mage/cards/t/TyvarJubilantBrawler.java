@@ -122,7 +122,7 @@ class TyvarJubilantBrawlerReturnEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(0, 1, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         return card != null && player.moveCards(card, Zone.BATTLEFIELD, source, game);

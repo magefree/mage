@@ -54,7 +54,7 @@ class BattleCryTriggeredAbility extends DelayedTriggeredAbility {
         super(new BoostTargetEffect(0, 1, Duration.EndOfTurn), Duration.EndOfTurn, false, false);
     }
 
-    public BattleCryTriggeredAbility(final BattleCryTriggeredAbility ability) {
+    private BattleCryTriggeredAbility(final BattleCryTriggeredAbility ability) {
         super(ability);
     }
 

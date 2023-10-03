@@ -98,7 +98,7 @@ class SoulEchoReplacementEffect extends ReplacementEffectImpl {
         super(Duration.UntilYourNextUpkeepStep, Outcome.PreventDamage);
     }
 
-    SoulEchoReplacementEffect(final SoulEchoReplacementEffect effect) {
+    private SoulEchoReplacementEffect(final SoulEchoReplacementEffect effect) {
         super(effect);
     }
 

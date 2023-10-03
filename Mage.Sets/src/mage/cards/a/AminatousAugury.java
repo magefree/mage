@@ -1,26 +1,13 @@
 package mage.cards.a;
 
-import java.util.EnumSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.ModalDoubleFacedCardHalf;
+import mage.cards.*;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -28,6 +15,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.EnumSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +57,7 @@ class AminatousAuguryEffect extends OneShotEffect {
                 + "you may cast a spell of that type from among the exiled cards without paying its mana cost.";
     }
 
-    public AminatousAuguryEffect(final AminatousAuguryEffect effect) {
+    private AminatousAuguryEffect(final AminatousAuguryEffect effect) {
         super(effect);
     }
 
@@ -142,7 +133,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "Cast this card without paying its mana cost";
     }
 
-    public AminatousAuguryCastFromExileEffect(final AminatousAuguryCastFromExileEffect effect) {
+    private AminatousAuguryCastFromExileEffect(final AminatousAuguryCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -218,7 +209,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             usedCardTypes.addAll(unusedCardTypes);
             game.getState().setValue(source.getSourceId().toString() + "cardTypes", usedCardTypes);
         }
-        player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+        allowCardToPlayWithoutMana(objectId, source, player.getId(), game);
         return true;
     }
 }

@@ -52,7 +52,7 @@ public final class PariahsShield extends CardImpl {
             staticText = "All damage that would be dealt to you is dealt to equipped creature instead";
         }
 
-        PariahEffect(final PariahEffect effect) {
+        private PariahEffect(final PariahEffect effect) {
             super(effect);
         }
 

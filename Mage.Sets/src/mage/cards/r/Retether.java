@@ -99,7 +99,7 @@ class RetetherEffect extends OneShotEffect {
                     }
                     if (target != null) {
                         target.getFilter().add(CardType.CREATURE.getPredicate());
-                        target.setNotTarget(true);
+                        target.withNotTarget(true);
                         if (target.canChoose(controller.getId(), source, game)) {
                             target.setTargetName("creature to enchant (" + aura.getLogName() + ')');
                             if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {

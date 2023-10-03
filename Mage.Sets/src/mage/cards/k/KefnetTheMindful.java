@@ -105,7 +105,7 @@ class KefnetTheMindfulEffect extends OneShotEffect {
         staticText = "Draw a card, then you may return a land you control to its owner's hand";
     }
 
-    KefnetTheMindfulEffect(final KefnetTheMindfulEffect effect) {
+    private KefnetTheMindfulEffect(final KefnetTheMindfulEffect effect) {
         super(effect);
     }
 

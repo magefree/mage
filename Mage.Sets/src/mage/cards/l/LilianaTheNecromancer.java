@@ -84,7 +84,7 @@ class LilianaTheNecromancerEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInGraveyard(0, 2, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }

@@ -57,7 +57,7 @@ class HeraldsHornEffect extends OneShotEffect {
         this.staticText = "look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand";
     }
 
-    public HeraldsHornEffect(final HeraldsHornEffect effect) {
+    private HeraldsHornEffect(final HeraldsHornEffect effect) {
         super(effect);
     }
 

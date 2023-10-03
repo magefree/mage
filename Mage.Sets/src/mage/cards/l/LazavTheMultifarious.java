@@ -92,7 +92,7 @@ class LazavTheMultifariousEffect extends OneShotEffect {
                 + "and it has this ability";
     }
 
-    LazavTheMultifariousEffect(final LazavTheMultifariousEffect effect) {
+    private LazavTheMultifariousEffect(final LazavTheMultifariousEffect effect) {
         super(effect);
     }
 

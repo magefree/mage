@@ -52,7 +52,7 @@ class LurkingEvilCost extends CostImpl {
         this.text = "Pay half your life, rounded up";
     }
 
-    LurkingEvilCost(LurkingEvilCost cost) {
+    private LurkingEvilCost(final LurkingEvilCost cost) {
         super(cost);
     }
 

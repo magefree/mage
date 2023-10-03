@@ -69,7 +69,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
         staticText = "you may exile an instant card with mana value 2 or less from your hand";
     }
 
-    public IsochronScepterImprintEffect(IsochronScepterImprintEffect effect) {
+    private IsochronScepterImprintEffect(final IsochronScepterImprintEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class IsochronScepterCopyEffect extends OneShotEffect {
                 + "you may cast the copy without paying its mana cost";
     }
 
-    public IsochronScepterCopyEffect(final IsochronScepterCopyEffect effect) {
+    private IsochronScepterCopyEffect(final IsochronScepterCopyEffect effect) {
         super(effect);
     }
 

@@ -19,7 +19,7 @@
  import java.util.UUID;
 
  /**
-  * Game GUI: choose target card from the cards list (example: exile and choose card to cast)
+  * Game GUI: choose target card from the cards list (example: exile and choose card to cast, choose triggers order, etc)
   *
   * @author BetaSteward_at_googlemail.com
   */

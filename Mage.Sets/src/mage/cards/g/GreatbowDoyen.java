@@ -61,7 +61,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an Archer you control deals damage to a creature, ");
     }
 
-    public GreatbowDoyenTriggeredAbility(final GreatbowDoyenTriggeredAbility ability) {
+    private GreatbowDoyenTriggeredAbility(final GreatbowDoyenTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class GreatbowDoyenEffect extends OneShotEffect {
         this.staticText = "that Archer deals that much damage to that creature's controller";
     }
 
-    public GreatbowDoyenEffect(final GreatbowDoyenEffect effect) {
+    private GreatbowDoyenEffect(final GreatbowDoyenEffect effect) {
         super(effect);
     }
 

@@ -52,7 +52,7 @@ class RaidersSpoilsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayLifeCost(1)), false);
     }
     
-    RaidersSpoilsTriggeredAbility(final RaidersSpoilsTriggeredAbility ability) {
+    private RaidersSpoilsTriggeredAbility(final RaidersSpoilsTriggeredAbility ability) {
         super(ability);
     }
     

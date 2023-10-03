@@ -66,7 +66,7 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
         this.staticText = "Counter target spell if its mana value is X";
     }
 
-    public DisruptingShoalCounterTargetEffect(final DisruptingShoalCounterTargetEffect effect) {
+    private DisruptingShoalCounterTargetEffect(final DisruptingShoalCounterTargetEffect effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class DiminishingReturnsEffect extends OneShotEffect {
         staticText = "You exile the top ten cards of your library. Then each player draws up to seven cards.";
     }
 
-    public DiminishingReturnsEffect(final DiminishingReturnsEffect effect) {
+    private DiminishingReturnsEffect(final DiminishingReturnsEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.";
     }
 
-    public AladdinsLampEffect(final AladdinsLampEffect effect) {
+    private AladdinsLampEffect(final AladdinsLampEffect effect) {
         super(effect);
     }
 

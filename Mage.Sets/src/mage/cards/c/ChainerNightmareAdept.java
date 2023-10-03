@@ -3,6 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -92,18 +93,21 @@ class ChainerNightmareAdeptContinuousEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         ChainerNightmareAdeptWatcher watcher = game.getState().getWatcher(ChainerNightmareAdeptWatcher.class);
         if (watcher == null || !watcher.checkPermission(
-                affectedControllerId, source, game
-        ) || game.getState().getZone(sourceId) != Zone.GRAVEYARD) {
+                playerId, source, game
+        ) || game.getState().getZone(objectId) != Zone.GRAVEYARD) {
             return false;
         }
-        Card card = game.getCard(sourceId);
-        return card != null
-                && card.getOwnerId().equals(affectedControllerId)
-                && card.isCreature(game)
-                && !card.isLand(game);
+        Card card = game.getCard(objectId);
+        return card != null && affectedAbility instanceof SpellAbility
+                && card.getOwnerId().equals(playerId)
+                && ((SpellAbility) affectedAbility).getCharacteristics(game).isCreature();
     }
 }
 

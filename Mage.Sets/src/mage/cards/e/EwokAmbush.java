@@ -49,7 +49,7 @@ class EwokAmbushCreateTokenEffect extends OneShotEffect {
         this.staticText = "Create two 1/1 green Ewok creature tokens. Those tokens gain haste until end of turn";
     }
 
-    public EwokAmbushCreateTokenEffect(final EwokAmbushCreateTokenEffect effect) {
+    private EwokAmbushCreateTokenEffect(final EwokAmbushCreateTokenEffect effect) {
         super(effect);
     }
 

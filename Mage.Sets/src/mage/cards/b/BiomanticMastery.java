@@ -45,7 +45,7 @@ class BiomanticMasteryEffect extends OneShotEffect {
         this.staticText = "Draw a card for each creature target player controls, then draw a card for each creature another target player controls";
     }
 
-    public BiomanticMasteryEffect(final BiomanticMasteryEffect effect) {
+    private BiomanticMasteryEffect(final BiomanticMasteryEffect effect) {
         super(effect);
     }
 
@@ -57,7 +57,9 @@ class BiomanticMasteryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         for (UUID playerId : getTargetPointer().getTargets(game, source)) {
             Player player = game.getPlayer(playerId);

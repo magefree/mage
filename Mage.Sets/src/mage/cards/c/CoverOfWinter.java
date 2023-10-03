@@ -59,7 +59,7 @@ class CoverOfWinterEffect extends PreventionEffectImpl {
         this.staticText = "If a creature would deal combat damage to you and/or one or more creatures you control, prevent X of that damage, where X is the number of age counters on {this}";
     }
 
-    public CoverOfWinterEffect(CoverOfWinterEffect effect) {
+    private CoverOfWinterEffect(final CoverOfWinterEffect effect) {
         super(effect);
     }
 

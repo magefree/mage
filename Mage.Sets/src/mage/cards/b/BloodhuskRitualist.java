@@ -37,7 +37,7 @@ public final class BloodhuskRitualist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodhuskRitualist (final BloodhuskRitualist card) {
+    private BloodhuskRitualist(final BloodhuskRitualist card) {
         super(card);
     }
 

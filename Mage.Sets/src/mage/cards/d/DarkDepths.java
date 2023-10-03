@@ -59,7 +59,7 @@ class DarkDepthsSacrificeEffect extends SacrificeSourceEffect {
         super();
     }
 
-    public DarkDepthsSacrificeEffect(final DarkDepthsSacrificeEffect effect) {
+    private DarkDepthsSacrificeEffect(final DarkDepthsSacrificeEffect effect) {
         super(effect);
         this.sacrificed = effect.sacrificed;
     }
@@ -89,7 +89,7 @@ class DarkDepthsAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new DarkDepthsSacrificeEffect());
     }
 
-    public DarkDepthsAbility(final DarkDepthsAbility ability) {
+    private DarkDepthsAbility(final DarkDepthsAbility ability) {
         super(ability);
     }
 

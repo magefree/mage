@@ -66,7 +66,7 @@ class FealtyToTheRealmEffect extends ContinuousEffectImpl {
         staticText = "the monarch controls enchanted creature";
     }
 
-    public FealtyToTheRealmEffect(final FealtyToTheRealmEffect effect) {
+    private FealtyToTheRealmEffect(final FealtyToTheRealmEffect effect) {
         super(effect);
     }
 

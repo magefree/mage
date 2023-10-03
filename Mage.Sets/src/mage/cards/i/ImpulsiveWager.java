@@ -52,7 +52,7 @@ class ImpulsiveWagerEffect extends OneShotEffect {
         staticText = "If the discarded card was a nonland card, draw two cards. Otherwise, put a bounty counter on target creature";
     }
 
-    public ImpulsiveWagerEffect(final ImpulsiveWagerEffect effect) {
+    private ImpulsiveWagerEffect(final ImpulsiveWagerEffect effect) {
         super(effect);
     }
 

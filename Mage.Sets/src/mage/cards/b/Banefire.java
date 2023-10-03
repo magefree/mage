@@ -77,7 +77,7 @@ class BaneFireEffect extends OneShotEffect {
         staticText = "{this} deals X damage to any target";
     }
 
-    public BaneFireEffect(final BaneFireEffect effect) {
+    private BaneFireEffect(final BaneFireEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "If X is 5 or more, this spell can't be countered and the damage can't be prevented";
     }
 
-    public BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {
+    private BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }
@@ -124,19 +124,21 @@ class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.COUNTER) { return false; }
-
         Card card = game.getCard(source.getSourceId());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         UUID spellId = card.getSpellAbility().getId();
-        if (!event.getTargetId().equals(spellId)) { return false; }
+        if (!event.getTargetId().equals(spellId)) {
+            return false;
+        }
 
         return condition.apply(game, source);
     }

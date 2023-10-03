@@ -55,7 +55,7 @@ class DryadGreenseekerEffect extends OneShotEffect {
                 + "If it's a land card, you may reveal it and put it into your hand.";
     }
 
-    public DryadGreenseekerEffect(final DryadGreenseekerEffect effect) {
+    private DryadGreenseekerEffect(final DryadGreenseekerEffect effect) {
         super(effect);
     }
 

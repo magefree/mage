@@ -26,7 +26,7 @@ public final class GoblinWardriver extends CardImpl {
         this.addAbility(new BattleCryAbility());
     }
 
-    public GoblinWardriver (final GoblinWardriver card) {
+    private GoblinWardriver(final GoblinWardriver card) {
         super(card);
     }
 

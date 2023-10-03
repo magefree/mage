@@ -168,18 +168,13 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = null;
     }
 
-    public CavernOfSoulsCantCounterEffect(final CavernOfSoulsCantCounterEffect effect) {
+    private CavernOfSoulsCantCounterEffect(final CavernOfSoulsCantCounterEffect effect) {
         super(effect);
     }
 
     @Override
     public CavernOfSoulsCantCounterEffect copy() {
         return new CavernOfSoulsCantCounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

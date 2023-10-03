@@ -70,7 +70,7 @@ class EmbalmersToolsEffect extends CostModificationEffectImpl {
         staticText = effectText;
     }
 
-    public EmbalmersToolsEffect(final EmbalmersToolsEffect effect) {
+    private EmbalmersToolsEffect(final EmbalmersToolsEffect effect) {
         super(effect);
     }
 

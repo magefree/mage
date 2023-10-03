@@ -64,7 +64,7 @@ public final class LordOfTheNazgul extends CardImpl {
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
         ability.addEffect(new ConditionalContinuousEffect(
-                new SetBasePowerToughnessAllEffect(9, 9, Duration.EndOfTurn, filterWraith, true),
+                new SetBasePowerToughnessAllEffect(9, 9, Duration.EndOfTurn, filterWraith),
                 condition, "Then if you control nine or more Wraiths, Wraiths you control have base power and toughness 9/9 until end of turn"
         ));
         this.addAbility(ability.addHint(hint));

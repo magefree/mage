@@ -67,7 +67,7 @@ class DomriRadeEffect1 extends OneShotEffect {
         this.staticText = "Look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand";
     }
 
-    public DomriRadeEffect1(final DomriRadeEffect1 effect) {
+    private DomriRadeEffect1(final DomriRadeEffect1 effect) {
         super(effect);
     }
 

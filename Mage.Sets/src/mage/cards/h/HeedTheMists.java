@@ -43,7 +43,7 @@ public final class HeedTheMists extends CardImpl {
             staticText = "Mill a card, then draw cards equal to the milled card's mana value";
         }
 
-        public HeedTheMistsEffect(HeedTheMistsEffect effect) {
+        private HeedTheMistsEffect(final HeedTheMistsEffect effect) {
             super(effect);
         }
 

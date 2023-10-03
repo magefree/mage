@@ -50,7 +50,7 @@ public class PermanentCard extends PermanentImpl {
             }
         }
         if (!goodForBattlefield) {
-            throw new IllegalArgumentException("ERROR, can't create permanent card from split or mdf: " + card.getName());
+            throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: " + card.getName());
         }
 
         this.card = card;

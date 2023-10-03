@@ -63,7 +63,7 @@ class BomatCourierExileEffect extends OneShotEffect {
         this.staticText = "exile the top card of your library face down";
     }
 
-    BomatCourierExileEffect(final BomatCourierExileEffect effect) {
+    private BomatCourierExileEffect(final BomatCourierExileEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class BomatCourierReturnEffect extends OneShotEffect {
         this.staticText = "Put all cards exiled with {this} into their owners' hands";
     }
 
-    BomatCourierReturnEffect(final BomatCourierReturnEffect effect) {
+    private BomatCourierReturnEffect(final BomatCourierReturnEffect effect) {
         super(effect);
     }
 

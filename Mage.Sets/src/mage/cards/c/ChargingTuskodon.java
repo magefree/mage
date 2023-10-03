@@ -56,7 +56,7 @@ class ChargingTuskodonEffect extends ReplacementEffectImpl {
         staticText = "If {this} would deal combat damage to a player, it deals double that damage to that player instead";
     }
 
-    public ChargingTuskodonEffect(final ChargingTuskodonEffect effect) {
+    private ChargingTuskodonEffect(final ChargingTuskodonEffect effect) {
         super(effect);
     }
 

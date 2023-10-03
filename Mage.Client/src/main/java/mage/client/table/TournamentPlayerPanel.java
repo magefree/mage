@@ -78,7 +78,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Skill:");
 
-        spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
+        spnLevel.setModel(new javax.swing.SpinnerNumberModel(2, 1, 10, 1));
         spnLevel.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout pnlPlayerNameLayout = new javax.swing.GroupLayout(pnlPlayerName);

@@ -61,7 +61,7 @@ class IsolatedWatchtowerEffect extends OneShotEffect {
                 + "put it onto the battlefield tapped";
     }
 
-    public IsolatedWatchtowerEffect(final IsolatedWatchtowerEffect effect) {
+    private IsolatedWatchtowerEffect(final IsolatedWatchtowerEffect effect) {
         super(effect);
     }
 

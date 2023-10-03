@@ -63,7 +63,7 @@ class UnboostCreaturesDefendingPlayerEffect extends ContinuousEffectImpl {
         staticText = "creatures defending player controls get -1/-1 until end of turn for each +1/+1 counter on Darth Vader";
     }
 
-    public UnboostCreaturesDefendingPlayerEffect(final UnboostCreaturesDefendingPlayerEffect effect) {
+    private UnboostCreaturesDefendingPlayerEffect(final UnboostCreaturesDefendingPlayerEffect effect) {
         super(effect);
     }
 

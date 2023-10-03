@@ -49,7 +49,7 @@ class BoneDancerEffect extends OneShotEffect {
         this.staticText = "put the top creature card of defending player's graveyard onto the battlefield under your control";
     }
 
-    public BoneDancerEffect(final BoneDancerEffect effect) {
+    private BoneDancerEffect(final BoneDancerEffect effect) {
         super(effect);
     }
 

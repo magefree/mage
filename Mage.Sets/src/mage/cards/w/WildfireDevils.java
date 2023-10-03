@@ -86,7 +86,7 @@ class WildfireDevilsEffect extends OneShotEffect {
             return false;
         }
         TargetCardInGraveyard targetCard = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
-        targetCard.setNotTarget(true);
+        targetCard.withNotTarget(true);
         if (!randomPlayer.choose(Outcome.Discard, randomPlayer.getGraveyard(), targetCard, source, game)) {
             return false;
         }

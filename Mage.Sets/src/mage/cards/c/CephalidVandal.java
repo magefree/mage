@@ -56,7 +56,7 @@ class CephalidVandalEffect extends OneShotEffect {
         staticText = "Then mill a card for each shred counter on {this}";
     }
 
-    public CephalidVandalEffect(final CephalidVandalEffect effect) {
+    private CephalidVandalEffect(final CephalidVandalEffect effect) {
         super(effect);
     }
 

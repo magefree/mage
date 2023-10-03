@@ -66,7 +66,7 @@ class FallOfTheHammerDamageEffect extends OneShotEffect {
         this.staticText = "Target creature you control deals damage equal to its power to another target creature";
     }
 
-    public FallOfTheHammerDamageEffect(final FallOfTheHammerDamageEffect effect) {
+    private FallOfTheHammerDamageEffect(final FallOfTheHammerDamageEffect effect) {
         super(effect);
     }
 

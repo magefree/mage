@@ -91,7 +91,7 @@ class LivingLoreExileEffect extends OneShotEffect {
         TargetCard target = new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

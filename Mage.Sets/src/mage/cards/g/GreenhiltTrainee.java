@@ -38,7 +38,7 @@ public final class GreenhiltTrainee extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GreenhiltTrainee(final GreenhiltTrainee card) {
+    private GreenhiltTrainee(final GreenhiltTrainee card) {
         super(card);
     }
 

@@ -62,7 +62,7 @@ class KyrenArchiveExileEffect extends OneShotEffect {
         this.staticText = "exile the top card of your library face down";
     }
 
-    KyrenArchiveExileEffect(final KyrenArchiveExileEffect effect) {
+    private KyrenArchiveExileEffect(final KyrenArchiveExileEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class KyrenArchiveReturnEffect extends OneShotEffect {
         this.staticText = "Put all cards exiled with {this} into their owners' hands";
     }
 
-    KyrenArchiveReturnEffect(final KyrenArchiveReturnEffect effect) {
+    private KyrenArchiveReturnEffect(final KyrenArchiveReturnEffect effect) {
         super(effect);
     }
 

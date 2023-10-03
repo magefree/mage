@@ -59,7 +59,7 @@ class EnslaveEffect extends OneShotEffect {
         staticText = "enchanted creature deals 1 damage to its owner";
     }
 
-    EnslaveEffect(final EnslaveEffect effect) {
+    private EnslaveEffect(final EnslaveEffect effect) {
         super(effect);
     }
 

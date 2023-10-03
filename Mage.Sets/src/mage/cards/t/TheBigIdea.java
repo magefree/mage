@@ -68,7 +68,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
         staticText = "The next time you would roll a six-sided die, instead roll two six-sided dice and use the total of those results";
     }
 
-    TheBigIdeaReplacementEffect(final TheBigIdeaReplacementEffect effect) {
+    private TheBigIdeaReplacementEffect(final TheBigIdeaReplacementEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,7 @@ class GarbageElementalCEffect extends OneShotEffect {
         this.staticText = "roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results";
     }
 
-    GarbageElementalCEffect(final GarbageElementalCEffect effect) {
+    private GarbageElementalCEffect(final GarbageElementalCEffect effect) {
         super(effect);
     }
 

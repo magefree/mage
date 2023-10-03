@@ -49,7 +49,7 @@ class HeartlessHidetsuguDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to each player equal to half that player's life total, rounded down";
     }
 
-    public HeartlessHidetsuguDamageEffect(final HeartlessHidetsuguDamageEffect effect) {
+    private HeartlessHidetsuguDamageEffect(final HeartlessHidetsuguDamageEffect effect) {
         super(effect);
     }
 

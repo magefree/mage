@@ -57,18 +57,13 @@ class DragonlordDromokaEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Your opponents can't cast spells during your turn";
     }
 
-    public DragonlordDromokaEffect(final DragonlordDromokaEffect effect) {
+    private DragonlordDromokaEffect(final DragonlordDromokaEffect effect) {
         super(effect);
     }
 
     @Override
     public DragonlordDromokaEffect copy() {
         return new DragonlordDromokaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

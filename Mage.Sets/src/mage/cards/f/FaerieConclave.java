@@ -50,7 +50,7 @@ class FaerieConclaveToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public FaerieConclaveToken(final FaerieConclaveToken token) {
+    private FaerieConclaveToken(final FaerieConclaveToken token) {
         super(token);
     }
 

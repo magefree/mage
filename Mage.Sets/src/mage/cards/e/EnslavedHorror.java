@@ -54,7 +54,7 @@ class EnslavedHorrorEffect extends OneShotEffect {
         this.staticText = "each other player may put a creature card from their graveyard onto the battlefield";
     }
 
-    public EnslavedHorrorEffect(final EnslavedHorrorEffect effect) {
+    private EnslavedHorrorEffect(final EnslavedHorrorEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class EnslavedHorrorEffect extends OneShotEffect {
                     FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
                     filterCreatureCard.add(new OwnerIdPredicate(playerId));
                     TargetCardInGraveyard target = new TargetCardInGraveyard(0, 1, filterCreatureCard);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.canChoose(playerId, source, game)
                             && player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());

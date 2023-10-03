@@ -95,12 +95,20 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
         if (permanent.hasSubtype(SubType.FOREST, game)) {
             choice.getChoices().add("Black");
         }
+
         String chosenColor;
         if (choice.getChoices().size() == 1) {
             chosenColor = choice.getChoices().iterator().next();
+        } else if (choice.getChoices().size() == 0) {
+            chosenColor = null;
         } else {
-            controller.choose(Outcome.PutManaInPool, choice, game);
-            chosenColor = choice.getChoice();
+            // workaround to skip choose dialog in check playable state
+            if (game.inCheckPlayableState()) {
+                chosenColor = "Any";
+            } else {
+                controller.choose(Outcome.PutManaInPool, choice, game);
+                chosenColor = choice.getChoice();
+            }
         }
         if (chosenColor == null) {
             return false;
@@ -122,6 +130,9 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
                 break;
             case "Green":
                 mana.setToMana(Mana.GreenMana(amount));
+                break;
+            case "Any":
+                mana.setToMana(Mana.AnyMana(amount));
                 break;
         }
         return false;

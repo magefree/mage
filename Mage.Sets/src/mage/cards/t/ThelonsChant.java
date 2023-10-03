@@ -73,7 +73,7 @@ class ThelonsChantEffect extends OneShotEffect {
         if (player != null && sourcePermanent != null) {
             boolean paid = false;
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (player.chooseUse(Outcome.Detriment, "Put a -1/-1 counter on a creature you control? (otherwise " + sourcePermanent.getLogName() + " deals 3 damage to you)", source, game)
                     && player.choose(Outcome.UnboostCreature, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());

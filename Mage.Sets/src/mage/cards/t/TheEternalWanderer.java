@@ -185,7 +185,7 @@ class TheEternalWandererAttackRestrictionEffect extends RestrictionEffect {
                      " The Eternal Wanderer each combat";
     }
 
-    TheEternalWandererAttackRestrictionEffect(final TheEternalWandererAttackRestrictionEffect effect) {
+    private TheEternalWandererAttackRestrictionEffect(final TheEternalWandererAttackRestrictionEffect effect) {
         super(effect);
     }
 

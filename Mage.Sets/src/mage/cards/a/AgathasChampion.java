@@ -42,7 +42,8 @@ public final class AgathasChampion extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 trigger,
                 BargainedCondition.instance,
-                "When {this} enters the battlefield, if it was bargained, it fights up to one target creature you don't control."
+                "When {this} enters the battlefield, if it was bargained, it fights up to one target creature you don't control." +
+                        " <i>(Each deals damage equal to its power to the other.)</i>"
         ));
     }
 

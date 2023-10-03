@@ -85,7 +85,7 @@ class LiquidFireAdditionalCost extends VariableCostImpl {
 
     LiquidFireAdditionalCost() {
         super(VariableCostType.ADDITIONAL, "Choose a Number");
-        this.text = "as an additional cost to cast this spell, choose a number between 0 and 5";
+        this.text = "choose a number between 0 and 5";
     }
 
     private LiquidFireAdditionalCost(final LiquidFireAdditionalCost cost) {

@@ -102,7 +102,7 @@ class SailIntoTheWestEffect extends OneShotEffect {
                 FilterCard filter = new FilterCard("card from your graveyard");
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Target targetCard = new TargetCardInGraveyard(0,2,filter);
-                targetCard.setNotTarget(true);
+                targetCard.withNotTarget(true);
 
                 if (targetCard.canChoose(player.getId(), source, game)) {
                     if (player.chooseTarget(Outcome.ReturnToHand, targetCard, source, game)) {

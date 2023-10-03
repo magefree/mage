@@ -368,7 +368,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         for (CardDownloadData data : cardsMissing) {
             if (data.isToken()) {
                 if (selectedSource.isTokenSource()
-                        && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getType())
+                        && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getImageNumber())
                         && selectedSets.contains(data.getSet())) {
                     numberTokenImagesAvailable++;
                     cardsDownloadQueue.add(data);
@@ -428,23 +428,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     private static List<CardDownloadData> prepareMissingCards(List<CardInfo> allCards, boolean redownloadMode) {
-
-        // get filter for Standard Type 2 cards
-        Set<String> type2SetsFilter = new HashSet<>();
-        List<String> constructedFormats = ConstructedFormats.getSetsByFormat(ConstructedFormats.STANDARD);
-        if (constructedFormats != null && !constructedFormats.isEmpty()) {
-            type2SetsFilter.addAll(constructedFormats);
-        } else {
-            logger.warn("No formats defined. Try connecting to a server first!");
-        }
-
         // prepare checking list
         List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         try {
             allCards.parallelStream().forEach(card -> {
                 if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
                     String cardName = card.getName();
-                    boolean isType2 = type2SetsFilter.contains(card.getSetCode());
                     CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
 
                     // variations must have diff file names with additional postfix
@@ -454,7 +443,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                     url.setFlipCard(card.isFlipCard());
                     url.setSplitCard(card.isSplitCard());
-                    url.setType2(isType2);
 
                     // main side
                     allCardsUrls.add(url);
@@ -477,7 +465,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 secondSideCard.getCardNumber(),
                                 card.usesVariousArt(),
                                 0, false, card.isDoubleFaced(), true);
-                        url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
                     if (card.isFlipCard()) {
@@ -492,7 +479,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 0, false, card.isDoubleFaced(), card.isNightCard());
                         cardDownloadData.setFlipCard(true);
                         cardDownloadData.setFlippedSide(true);
-                        cardDownloadData.setType2(isType2);
                         allCardsUrls.add(cardDownloadData);
                     }
                     if (card.getMeldsToCardName() != null) {
@@ -512,7 +498,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 meldsToCard.getCardNumber(),
                                 card.usesVariousArt(),
                                 0, false, false, false);
-                        url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
                     if (card.isModalDoubleFacedCard()) {
@@ -525,7 +510,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
                                 0, false, true, true);
-                        cardDownloadData.setType2(isType2);
                         allCardsUrls.add(cardDownloadData);
                     }
                 } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {

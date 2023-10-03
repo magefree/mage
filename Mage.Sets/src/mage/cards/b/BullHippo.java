@@ -25,7 +25,7 @@ public final class BullHippo extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public BullHippo (final BullHippo card) {
+    private BullHippo(final BullHippo card) {
         super(card);
     }
 

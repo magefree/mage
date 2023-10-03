@@ -52,7 +52,7 @@ class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1, true), false);
     }
 
-    public EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
+    private EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
         super(ability);
     }
 

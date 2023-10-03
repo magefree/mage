@@ -53,7 +53,7 @@ class BloodsporeThrinaxEntersBattlefieldEffect extends ReplacementEffectImpl {
         staticText = "Each other creature you control enters the battlefield with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on {this}";
     }
 
-    public BloodsporeThrinaxEntersBattlefieldEffect(BloodsporeThrinaxEntersBattlefieldEffect effect) {
+    private BloodsporeThrinaxEntersBattlefieldEffect(final BloodsporeThrinaxEntersBattlefieldEffect effect) {
         super(effect);
     }
 

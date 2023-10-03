@@ -220,7 +220,7 @@ class TergridsLaternEffect extends OneShotEffect {
         switch (chosen) {
             case SACRIFICE_CHOICE:
                 TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 targetedPlayer.choose(Outcome.Sacrifice, target, source, game);
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 return chosenLand != null && chosenLand.sacrifice(source, game);

@@ -57,7 +57,7 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever enchanted creature is turned face up, ");
     }
 
-    public FatalMutationAbility(final FatalMutationAbility ability) {
+    private FatalMutationAbility(final FatalMutationAbility ability) {
         super(ability);
     }
 

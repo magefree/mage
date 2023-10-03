@@ -59,7 +59,7 @@ class CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect extends OneShotE
         this.staticText = "Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step";
     }
 
-    public CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect(final CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect effect) {
+    private CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect(final CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class CauldronDancePutCreatureFromHandOntoBattlefieldEffect extends OneShotEffec
         this.staticText = "You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step";
     }
 
-    public CauldronDancePutCreatureFromHandOntoBattlefieldEffect(final CauldronDancePutCreatureFromHandOntoBattlefieldEffect effect) {
+    private CauldronDancePutCreatureFromHandOntoBattlefieldEffect(final CauldronDancePutCreatureFromHandOntoBattlefieldEffect effect) {
         super(effect);
     }
 

@@ -72,7 +72,7 @@ class SaheeliRaiCreateTokenEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target artifact or creature you control, except it's an artifact in addition to its other types. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    SaheeliRaiCreateTokenEffect(final SaheeliRaiCreateTokenEffect effect) {
+    private SaheeliRaiCreateTokenEffect(final SaheeliRaiCreateTokenEffect effect) {
         super(effect);
     }
 

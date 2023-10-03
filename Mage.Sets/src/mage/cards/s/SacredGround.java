@@ -42,7 +42,7 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect());
     }
 
-    SacredGroundTriggeredAbility(final SacredGroundTriggeredAbility ability) {
+    private SacredGroundTriggeredAbility(final SacredGroundTriggeredAbility ability) {
         super(ability);
     }
 

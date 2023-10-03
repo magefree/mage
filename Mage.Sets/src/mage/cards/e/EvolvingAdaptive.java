@@ -66,7 +66,7 @@ class EvolvingAdaptiveTriggeredAbility extends TriggeredAbilityImpl {
                 "control, if that creature has greater power or toughness than {this}, ");
     }
 
-    public EvolvingAdaptiveTriggeredAbility(final EvolvingAdaptiveTriggeredAbility ability) {
+    private EvolvingAdaptiveTriggeredAbility(final EvolvingAdaptiveTriggeredAbility ability) {
         super(ability);
     }
 

@@ -62,7 +62,7 @@ class GerrardCapashenEffect extends OneShotEffect {
         staticText = "you gain 1 life for each card in target opponent's hand.";
     }
 
-    public GerrardCapashenEffect(final GerrardCapashenEffect effect) {
+    private GerrardCapashenEffect(final GerrardCapashenEffect effect) {
         super(effect);
     }
 

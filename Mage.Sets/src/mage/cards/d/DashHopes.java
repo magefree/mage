@@ -51,7 +51,7 @@ class DashHopesCounterSourceEffect extends OneShotEffect {
         staticText = "any player may pay 5 life. If a player does, counter {this}";
     }
 
-    public DashHopesCounterSourceEffect(final DashHopesCounterSourceEffect effect) {
+    private DashHopesCounterSourceEffect(final DashHopesCounterSourceEffect effect) {
         super(effect);
     }
 

@@ -81,7 +81,7 @@ class RiseOfTheWitchKingEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!target.canChoose(playerId, source, game)) {
                 continue;
             }

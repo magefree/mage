@@ -1,6 +1,8 @@
-
 package mage.cards.g;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.card.ExpansionSetPredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,18 +51,22 @@ class GolgothianSylexEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.and(
-                new ExpansionSetPredicate("ATQ"),
-                TokenPredicate.FALSE
-        ));
+        // Antiquities names per CR 206.3b
+        List<String> nameStrings = Arrays.asList("Amulet of Kroog", "Argivian Archaeologist", "Argivian Blacksmith", "Argothian Pixies", "Argothian Treefolk", "Armageddon Clock", "Artifact Blast", "Artifact Possession", "Artifact Ward", "Ashnod's Altar", "Ashnod's Battle Gear", "Ashnod's Transmogrant", "Atog", "Battering Ram", "Bronze Tablet", "Candelabra of Tawnos", "Circle of Protection: Artifacts", "Citanul Druid", "Clay Statue", "Clockwork Avian", "Colossus of Sardia", "Coral Helm", "Crumble", "Cursed Rack", "Damping Field", "Detonate", "Drafna's Restoration", "Dragon Engine", "Dwarven Weaponsmith", "Energy Flux", "Feldon's Cane", "Gaea's Avenger", "Gate to Phyrexia", "Goblin Artisans", "Golgothian Sylex", "Grapeshot Catapult", "Haunting Wind", "Hurkyl's Recall", "Ivory Tower", "Jalum Tome", "Martyrs of Korlis", "Mightstone", "Millstone", "Mishra's Factory", "Mishra's War Machine", "Mishra's Workshop", "Obelisk of Undoing", "Onulet", "Orcish Mechanics", "Ornithopter", "Phyrexian Gremlins", "Power Artifact", "Powerleech", "Priest of Yawgmoth", "Primal Clay", "The Rack", "Rakalite", "Reconstruction", "Reverse Polarity", "Rocket Launcher", "Sage of Lat-Nam", "Shapeshifter", "Shatterstorm", "Staff of Zegon", "Strip Mine", "Su-Chi", "Tablet of Epityr", "Tawnos's Coffin", "Tawnos's Wand", "Tawnos's Weaponry", "Tetravus", "Titania's Song", "Transmute Artifact", "Triskelion", "Urza's Avenger", "Urza's Chalice", "Urza's Mine", "Urza's Miter", "Urza's Power Plant", "Urza's Tower", "Wall of Spears", "Weakstone", "Xenic Poltergeist", "Yawgmoth Demon", "Yotian Soldier");
+        List<NamePredicate> namePredicates = new ArrayList<>();
+        for (String name: nameStrings) {
+            namePredicates.add(new NamePredicate(name));
+        }
+        filter.add(TokenPredicate.FALSE);
+        filter.add(Predicates.or(namePredicates));
     }
 
-    public GolgothianSylexEffect() {
+    GolgothianSylexEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each nontoken permanent from the Antiquities expansion is sacrificed by its controller.";
     }
 
-    public GolgothianSylexEffect(final GolgothianSylexEffect effect) {
+    private GolgothianSylexEffect(final GolgothianSylexEffect effect) {
         super(effect);
     }
 
@@ -72,7 +78,7 @@ class GolgothianSylexEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
              permanent.sacrifice(source, game);
         }
         return true;

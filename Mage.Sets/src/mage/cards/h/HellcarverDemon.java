@@ -59,7 +59,7 @@ class HellcarverDemonEffect extends OneShotEffect {
                 + "spells from among cards exiled this way without paying their mana costs";
     }
 
-    public HellcarverDemonEffect(final HellcarverDemonEffect effect) {
+    private HellcarverDemonEffect(final HellcarverDemonEffect effect) {
         super(effect);
     }
 

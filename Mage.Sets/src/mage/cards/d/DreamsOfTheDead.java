@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -8,8 +7,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileTargetReplacementEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -22,8 +21,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -49,7 +46,7 @@ public final class DreamsOfTheDead extends CardImpl {
         // {1}{U}: Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep {2}." If the creature would leave the battlefield, exile it instead of putting it anywhere else.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DreamsOfTheDeadEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        ability.addEffect(new DreamsOfTheDeadReplacementEffect());
+        ability.addEffect(new LeaveBattlefieldExileTargetReplacementEffect("the creature"));
         this.addAbility(ability);
     }
 
@@ -65,12 +62,12 @@ public final class DreamsOfTheDead extends CardImpl {
 
 class DreamsOfTheDeadEffect extends OneShotEffect {
 
-    public DreamsOfTheDeadEffect() {
+    DreamsOfTheDeadEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return target white or black creature card from your graveyard to the battlefield. That creature gains \"Cumulative upkeep {2}.\"";
     }
 
-    public DreamsOfTheDeadEffect(final DreamsOfTheDeadEffect effect) {
+    private DreamsOfTheDeadEffect(final DreamsOfTheDeadEffect effect) {
         super(effect);
     }
 
@@ -94,49 +91,6 @@ class DreamsOfTheDeadEffect extends OneShotEffect {
             }
             return true;
         }
-        return false;
-    }
-}
-
-class DreamsOfTheDeadReplacementEffect extends ReplacementEffectImpl {
-
-    DreamsOfTheDeadReplacementEffect() {
-        super(Duration.OneUse, Outcome.Tap);
-        staticText = "If the creature would leave the battlefield, exile it instead of putting it anywhere else";
-    }
-
-    DreamsOfTheDeadReplacementEffect(final DreamsOfTheDeadReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DreamsOfTheDeadReplacementEffect copy() {
-        return new DreamsOfTheDeadReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getFirstTarget())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 }

@@ -76,7 +76,7 @@ class PriestOfTheWakeningSunEffect extends OneShotEffect {
         this.staticText = "reveal a Dinosaur card from your hand. If you do, you gain 2 life";
     }
 
-    PriestOfTheWakeningSunEffect(final PriestOfTheWakeningSunEffect effect) {
+    private PriestOfTheWakeningSunEffect(final PriestOfTheWakeningSunEffect effect) {
         super(effect);
     }
 

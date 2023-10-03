@@ -14,6 +14,7 @@ import mage.client.components.KeyboundButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.layout.RelativeLayout;
+import mage.client.components.tray.MageTray;
 import mage.client.dialog.*;
 import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.game.FeedbackPanel.FeedbackMode;
@@ -122,8 +123,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private JPopupMenu popupMenuTriggerOrder;
 
     // keep game data for updates/re-draws
-    // warning, it keeps updates from GAME_UPDATE events only and ignore another events with GameView
     static class LastGameData {
+        int messageId;
         GameView game;
         boolean showPlayable;
         Map<String, Serializable> options;
@@ -366,7 +367,6 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
 
-        txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         txtHoldPriority.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
 
@@ -390,6 +390,7 @@ public final class GamePanel extends javax.swing.JPanel {
         stackObjects.setPreferredSize(newDimension);
         stackObjects.setMinimumSize(newDimension);
         stackObjects.setMaximumSize(newDimension);
+        stackObjects.changeGUISize(); // must call to cards fit
 
         newDimension = new Dimension(newStackWidth, (int) pnlShortCuts.getPreferredSize().getHeight());
         pnlShortCuts.setPreferredSize(newDimension);
@@ -501,6 +502,10 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             // play start sound
             AudioManager.playYourGameStarted();
+            if (!AppUtil.isAppActive()) {
+                MageTray.instance.displayMessage("Your match has started!");
+                MageTray.instance.blink();
+            }
         }
     }
 
@@ -571,7 +576,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public synchronized void init(GameView game) {
+    public synchronized void init(int messageId, GameView game) {
         addPlayers(game);
         // default menu states
         setMenuStates(
@@ -581,7 +586,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 holdingPriority
         );
 
-        updateGame(game);
+        updateGame(messageId, game);
     }
 
     private void addPlayers(GameView game) {
@@ -706,12 +711,12 @@ public final class GamePanel extends javax.swing.JPanel {
          */
     }
 
-    public synchronized void updateGame(GameView game) {
-        updateGame(game, false, null, null);
+    public synchronized void updateGame(int messageId, GameView game) {
+        updateGame(messageId, game, false, null, null);
     }
 
-    public synchronized void updateGame(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
-        keepLastGameData(game, showPlayable, options, targets);
+    public synchronized void updateGame(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+        keepLastGameData(messageId, game, showPlayable, options, targets);
         prepareSelectableView();
         updateGame();
     }
@@ -776,12 +781,6 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             logger.debug("Step is empty");
             this.txtStep.setText("");
-        }
-        if (lastGameData.game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
-            this.txtSpellsCast.setVisible(true);
-            this.txtSpellsCast.setText(' ' + Integer.toString(lastGameData.game.getSpellsCastCurrentTurn()) + ' ');
-        } else {
-            this.txtSpellsCast.setVisible(false);
         }
 
         this.txtActivePlayer.setText(lastGameData.game.getActivePlayerName());
@@ -946,6 +945,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
+        //logger.info("game update, message = " + lastGameData.messageId + ", options = " + lastGameData.options + ", priority = " + lastGameData.game.getPriorityPlayerName());
         feedbackPanel.disableUndo();
         feedbackPanel.updateOptions(lastGameData.options);
 
@@ -1361,12 +1361,13 @@ public final class GamePanel extends javax.swing.JPanel {
         windowMap.entrySet().removeIf(entry -> entry.getValue().isClosed());
     }
 
-    public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
-        updateGame(gameView, false, options, null);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
+    public void ask(int messageId, GameView gameView, String question, Map<String, Serializable> options) {
+        updateGame(messageId, gameView, false, options, null);
+        this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, true, gameView.getPhase());
     }
 
-    private void keepLastGameData(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+    private void keepLastGameData(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+        lastGameData.messageId = messageId;
         lastGameData.game = game;
         lastGameData.showPlayable = showPlayable;
         lastGameData.options = options;
@@ -1623,8 +1624,8 @@ public final class GamePanel extends javax.swing.JPanel {
      * @param options
      * @param messageId
      */
-    public void pickTarget(GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView, Set<UUID> targets, boolean required, int messageId) {
-        updateGame(gameView, false, options, targets);
+    public void pickTarget(int messageId, GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView, Set<UUID> targets, boolean required) {
+        updateGame(messageId, gameView, false, options, targets);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
         clearPickTargetDialogs();
@@ -1652,28 +1653,28 @@ public final class GamePanel extends javax.swing.JPanel {
             dialog = prepareCardsDialog(message, cardsView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, true, gameView.getPhase());
         if (dialog != null) {
             this.pickTarget.add(dialog);
         }
     }
 
-    public void inform(String information, GameView gameView, int messageId) {
-        updateGame(gameView);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId, false, gameView.getPhase());
+    public void inform(int messageId, GameView gameView, String information) {
+        updateGame(messageId, gameView);
+        this.feedbackPanel.prepareFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, false, gameView.getPhase());
     }
 
-    public void endMessage(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
-        updateGame(gameView, false, options, null);
+    public void endMessage(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.END, message, false, null, messageId, true, null);
+        this.feedbackPanel.prepareFeedback(FeedbackMode.END, message, false, null, true, null);
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
-    public void select(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
-        updateGame(gameView, true, options, null);
+    public void select(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
+        updateGame(messageId, gameView, true, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1716,31 +1717,31 @@ public final class GamePanel extends javax.swing.JPanel {
             priorityPlayerText = " / priority " + gameView.getPriorityPlayerName();
         }
         String messageToDisplay = message + FeedbackPanel.getSmallText(activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, true, gameView.getPhase());
     }
 
-    public void playMana(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
-        updateGame(gameView, true, options, null);
+    public void playMana(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
+        updateGame(messageId, gameView, true, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, true, gameView.getPhase());
     }
 
-    public void playXMana(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
-        updateGame(gameView, true, options, null);
+    public void playXMana(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
+        updateGame(messageId, gameView, true, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, true, gameView.getPhase());
     }
 
     public void replayMessage(String message) {
         //TODO: implement this
     }
 
-    public void pickAbility(GameView gameView, Map<String, Serializable> options, AbilityPickerView choices) {
-        updateGame(gameView, false, options, null);
+    public void pickAbility(int messageId, GameView gameView, Map<String, Serializable> options, AbilityPickerView choices) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1764,8 +1765,8 @@ public final class GamePanel extends javax.swing.JPanel {
         return showCards;
     }
 
-    public void getAmount(GameView gameView, Map<String, Serializable> options, int min, int max, String message) {
-        updateGame(gameView, false, options, null);
+    public void getAmount(int messageId, GameView gameView, Map<String, Serializable> options, int min, int max, String message) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1777,9 +1778,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void getMultiAmount(List<MultiAmountMessage> messages, GameView gameView, Map<String, Serializable> options,
+    public void getMultiAmount(int messageId, GameView gameView, List<MultiAmountMessage> messages, Map<String, Serializable> options,
             int min, int max) {
-        updateGame(gameView, false, options, null);
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1787,8 +1788,8 @@ public final class GamePanel extends javax.swing.JPanel {
         SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
     }
 
-    public void getChoice(GameView gameView, Map<String, Serializable> options, Choice choice, UUID objectId) {
-        updateGame(gameView, false, options, null);
+    public void getChoice(int messageId, GameView gameView, Map<String, Serializable> options, Choice choice, UUID objectId) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1813,8 +1814,8 @@ public final class GamePanel extends javax.swing.JPanel {
         pickChoice.removeDialog();
     }
 
-    public void pickPile(GameView gameView, Map<String, Serializable> options, String message, CardsView pile1, CardsView pile2) {
-        updateGame(gameView, false, options, null);
+    public void pickPile(int messageId, GameView gameView, Map<String, Serializable> options, String message, CardsView pile1, CardsView pile2) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1856,14 +1857,8 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority = new javax.swing.JLabel();
         feedbackPanel = new mage.client.game.FeedbackPanel();
 
-        txtSpellsCast = new javax.swing.JLabel();
         Border paddingBorder = BorderFactory.createEmptyBorder(4, 4, 4, 4);
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
-        txtSpellsCast.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
-        txtSpellsCast.setBackground(Color.LIGHT_GRAY);
-        txtSpellsCast.setOpaque(true);
-        txtSpellsCast.setToolTipText("spells cast during the current turn");
-
         txtHoldPriority = new javax.swing.JLabel();
         txtHoldPriority.setText("Hold");
         txtHoldPriority.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
@@ -2336,7 +2331,6 @@ public final class GamePanel extends javax.swing.JPanel {
                 )
                 .addGroup(gl_pnlShortCuts.createSequentialGroup()
                         .addComponent(txtHoldPriority)
-                        .addComponent(txtSpellsCast)
                         /*.addComponent(btnToggleMacro)*/
                         .addComponent(btnSwitchHands)
                         .addComponent(btnCancelSkip)
@@ -2372,7 +2366,6 @@ public final class GamePanel extends javax.swing.JPanel {
                         .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 /*.addComponent(btnToggleMacro)*/
                                 .addComponent(txtHoldPriority)
-                                .addComponent(txtSpellsCast)
                                 .addComponent(btnSwitchHands)
                                 .addComponent(btnCancelSkip)
                                 .addComponent(btnConcede)
@@ -2808,6 +2801,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (!cardViewPopupMenu.getAbility().getRules().isEmpty()
                     && !cardViewPopupMenu.getAbility().getRules().get(0).isEmpty()) {
                 abilityRuleText = cardViewPopupMenu.getAbility().getRules().get(0);
+                abilityRuleText = abilityRuleText.replace("{this}", cardViewPopupMenu.getName());
             }
         }
         switch (e.getActionCommand()) {
@@ -3001,7 +2995,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane2;
     private JPanel jPhases;
     private JPanel phasesContainer;
-    private javax.swing.JLabel txtSpellsCast;
     private javax.swing.JLabel txtHoldPriority;
 
     private HoverButton currentStep;

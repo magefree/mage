@@ -44,7 +44,7 @@ public final class HungryFlames extends CardImpl {
             this.staticText = "{this} deals 3 damage to target creature and 2 damage to target player or planeswalker";
         }
 
-        HungryFlamesEffect(final HungryFlamesEffect effect) {
+        private HungryFlamesEffect(final HungryFlamesEffect effect) {
             super(effect);
         }
 

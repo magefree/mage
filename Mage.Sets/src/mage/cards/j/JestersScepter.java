@@ -154,7 +154,7 @@ class JestersScepterCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, ability));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (cards != null
                     && !cards.isEmpty()
@@ -198,7 +198,7 @@ class JestersScepterCounterEffect extends OneShotEffect {
         staticText = "Counter target spell if it has the same name as that card";
     }
 
-    JestersScepterCounterEffect(final JestersScepterCounterEffect effect) {
+    private JestersScepterCounterEffect(final JestersScepterCounterEffect effect) {
         super(effect);
     }
 

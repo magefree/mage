@@ -57,7 +57,7 @@ class BosiumStripCastFromGraveyardEffect extends AsThoughEffectImpl {
         staticText = "Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card";
     }
 
-    BosiumStripCastFromGraveyardEffect(final BosiumStripCastFromGraveyardEffect effect) {
+    private BosiumStripCastFromGraveyardEffect(final BosiumStripCastFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a card cast this way would be put into a graveyard this turn, exile it instead";
     }
 
-    BosiumStripReplacementEffect(final BosiumStripReplacementEffect effect) {
+    private BosiumStripReplacementEffect(final BosiumStripReplacementEffect effect) {
         super(effect);
     }
 
@@ -109,10 +109,14 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Card card = (Card) game.getState().getValue("BosiumStrip");
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
         return true;
@@ -126,12 +130,18 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() != Zone.GRAVEYARD) { return false; }
+        if (zEvent.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
 
         Card card = game.getCard(event.getSourceId());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
-        if (!StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)) { return false; }
+        if (!StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)) {
+            return false;
+        }
 
         CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
         return watcher != null

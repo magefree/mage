@@ -17,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -179,15 +180,16 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         // timing check
         //20091005 - 602.5d/602.5e
-        boolean asInstant;
-        ApprovingObject approvingObject = game.getContinuousEffects()
+        Set<ApprovingObject> approvingObjects = game
+                .getContinuousEffects()
                 .asThough(sourceId,
                         AsThoughEffectType.ACTIVATE_AS_INSTANT,
                         this,
                         controllerId,
-                        game);
-        asInstant = approvingObject != null;
-        asInstant |= (timing == TimingRule.INSTANT);
+                        game
+                );
+        boolean asInstant = !approvingObjects.isEmpty()
+                || (timing == TimingRule.INSTANT);
         if (!asInstant && !game.canPlaySorcery(playerId)) {
             return ActivationStatus.getFalse();
         }
@@ -204,7 +206,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         //  game.inCheckPlayableState() can't be a help here cause some cards checking activating status,
         //  activatorId must be removed
         this.activatorId = playerId;
-        return new ActivationStatus(true, approvingObject);
+
+        if (approvingObjects.isEmpty()) {
+            return ActivationStatus.withoutApprovingObject(true);
+        }
+        else {
+            return new ActivationStatus(approvingObjects);
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
@@ -54,7 +55,7 @@ public class SurgeAbility extends SpellAbility {
                     if (!player.hasOpponent(playerToCheckId, game)) {
                         if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(playerToCheckId) > 0
                                 && super.canActivate(playerId, game).canActivate()) {
-                            return ActivationStatus.getTrue(this, game);
+                            return new ActivationStatus(new ApprovingObject(this, game));
                         }
                     }
                 }

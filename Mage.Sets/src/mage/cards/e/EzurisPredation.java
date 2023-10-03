@@ -51,7 +51,7 @@ class EzurisPredationEffect extends OneShotEffect {
         this.staticText = "For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those tokens fights a different one of those creatures";
     }
 
-    public EzurisPredationEffect(final EzurisPredationEffect effect) {
+    private EzurisPredationEffect(final EzurisPredationEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
                 + "player hasn't played the card, they put it into their graveyard";
     }
 
-    public ElkinLairUpkeepEffect(final ElkinLairUpkeepEffect effect) {
+    private ElkinLairUpkeepEffect(final ElkinLairUpkeepEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class ElkinLairPutIntoGraveyardEffect extends OneShotEffect {
         staticText = "if the player hasn't played the card, they put it into their graveyard";
     }
 
-    public ElkinLairPutIntoGraveyardEffect(final ElkinLairPutIntoGraveyardEffect effect) {
+    private ElkinLairPutIntoGraveyardEffect(final ElkinLairPutIntoGraveyardEffect effect) {
         super(effect);
     }
 

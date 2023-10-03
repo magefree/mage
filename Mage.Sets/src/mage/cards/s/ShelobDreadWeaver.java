@@ -131,7 +131,7 @@ class ShelobDreadWeaverCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCreatureCard(), CardUtil.getCardExileZoneId(game, ability));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (cards != null
                     && !cards.isEmpty()

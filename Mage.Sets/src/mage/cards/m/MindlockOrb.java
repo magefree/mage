@@ -52,13 +52,13 @@ class MindlockRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SEARCH_LIBRARY;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.SEARCH_LIBRARY;
+        return true;
     }
 
     @Override

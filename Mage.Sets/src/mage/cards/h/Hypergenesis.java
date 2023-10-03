@@ -61,7 +61,7 @@ class HypergenesisEffect extends OneShotEffect {
         this.staticText = "Starting with you, each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.";
     }
 
-    HypergenesisEffect(final HypergenesisEffect effect) {
+    private HypergenesisEffect(final HypergenesisEffect effect) {
         super(effect);
     }
 

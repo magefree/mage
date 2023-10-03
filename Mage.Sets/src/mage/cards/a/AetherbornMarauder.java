@@ -60,7 +60,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
         this.staticText = "move any number of +1/+1 counters from other permanents you control onto {this}";
     }
 
-    public AetherbornMarauderEffect(final AetherbornMarauderEffect effect) {
+    private AetherbornMarauderEffect(final AetherbornMarauderEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
                 if (controller.chooseUse(outcome, "Move " + (firstRun ? "any" : "more") + " +1/+1 counters from other permanents you control to " + sourceObject.getLogName() + '?', source, game)) {
                     firstRun = false;
                     TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), source, game)) {
                         Permanent fromPermanent = game.getPermanent(target.getFirstTarget());
                         if (fromPermanent != null) {

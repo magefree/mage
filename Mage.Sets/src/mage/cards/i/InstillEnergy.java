@@ -63,7 +63,7 @@ class CanAttackAsThoughItHadHasteEnchantedEffect extends AsThoughEffectImpl {
         staticText = "Enchanted creature can attack as though it had haste";
     }
 
-    public CanAttackAsThoughItHadHasteEnchantedEffect(final CanAttackAsThoughItHadHasteEnchantedEffect effect) {
+    private CanAttackAsThoughItHadHasteEnchantedEffect(final CanAttackAsThoughItHadHasteEnchantedEffect effect) {
         super(effect);
     }
 

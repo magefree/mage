@@ -65,7 +65,7 @@ class ChecksAndBalancesEffect extends OneShotEffect {
         staticText = "each of that player's opponents may discard a card. If they do, counter that spell";
     }
 
-    public ChecksAndBalancesEffect(final ChecksAndBalancesEffect effect) {
+    private ChecksAndBalancesEffect(final ChecksAndBalancesEffect effect) {
         super(effect);
     }
 

@@ -47,14 +47,16 @@ class UntapAllArtifactsEffect extends OneShotEffect {
         staticText = "Untap all artifacts";
     }
 
-    public UntapAllArtifactsEffect(final UntapAllArtifactsEffect effect) {
+    private UntapAllArtifactsEffect(final UntapAllArtifactsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) { return false; }
+        if (player == null) {
+            return false;
+        }
 
         for (Permanent artifact: game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), game)) {
             artifact.untap(game);

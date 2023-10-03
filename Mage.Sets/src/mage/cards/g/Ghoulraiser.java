@@ -73,7 +73,7 @@ class GhoulraiserEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setRandom(true);
         target.chooseTarget(outcome, player.getId(), source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);

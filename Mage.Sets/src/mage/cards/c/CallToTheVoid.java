@@ -58,7 +58,7 @@ class CallToTheVoidEffect extends OneShotEffect {
     private void chooseCreature(Map<String, List<String>> map, Set<Permanent> permanents, FilterPermanent filter, Player player, Ability source, Game game) {
         if (game.getBattlefield().count(filter, player.getId(), source, game) > 0) {
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

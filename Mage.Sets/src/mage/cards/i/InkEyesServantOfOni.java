@@ -63,7 +63,7 @@ class InkEyesServantOfOniTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
     }
 
-    public InkEyesServantOfOniTriggeredAbility(final InkEyesServantOfOniTriggeredAbility ability) {
+    private InkEyesServantOfOniTriggeredAbility(final InkEyesServantOfOniTriggeredAbility ability) {
         super(ability);
     }
 

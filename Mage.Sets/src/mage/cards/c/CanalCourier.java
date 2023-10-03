@@ -61,7 +61,7 @@ class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} and another creature attack different players, ");
     }
 
-    public CanalCourierTriggeredAbility(final CanalCourierTriggeredAbility ability) {
+    private CanalCourierTriggeredAbility(final CanalCourierTriggeredAbility ability) {
         super(ability);
     }
 

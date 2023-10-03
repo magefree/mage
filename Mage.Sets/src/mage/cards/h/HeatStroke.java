@@ -51,7 +51,7 @@ class HeatStrokeEffect extends OneShotEffect {
         this.staticText = "destroy each creature that blocked or was blocked this turn";
     }
 
-    public HeatStrokeEffect(HeatStrokeEffect effect) {
+    private HeatStrokeEffect(final HeatStrokeEffect effect) {
         super(effect);
     }
 

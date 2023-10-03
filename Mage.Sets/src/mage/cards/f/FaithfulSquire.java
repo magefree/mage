@@ -114,7 +114,7 @@ class KaisoMemoryOfLoyaltyToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public KaisoMemoryOfLoyaltyToken(final KaisoMemoryOfLoyaltyToken token) {
+    private KaisoMemoryOfLoyaltyToken(final KaisoMemoryOfLoyaltyToken token) {
         super(token);
     }
 

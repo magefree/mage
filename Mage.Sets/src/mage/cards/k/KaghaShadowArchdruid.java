@@ -72,7 +72,7 @@ public final class KaghaShadowArchdruid extends CardImpl {
 class KaghaShadowArchdruidEffect extends AsThoughEffectImpl {
 
     KaghaShadowArchdruidEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "Once during each of your turns, you may play a land or cast a permanent spell from among cards in your graveyard that were put there from your library this turn.";
     }
 

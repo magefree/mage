@@ -81,7 +81,7 @@ class RaidingPartyEffect extends OneShotEffect {
         staticText = "Each player may tap any number of untapped white creatures they control. For each creature tapped this way, that player chooses up to two Plains. Then destroy all Plains that weren't chosen this way by any player";
     }
 
-    RaidingPartyEffect(RaidingPartyEffect effect) {
+    private RaidingPartyEffect(final RaidingPartyEffect effect) {
         super(effect);
     }
 

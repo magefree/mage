@@ -71,7 +71,7 @@ class ShroudedLoreEffect extends OneShotEffect {
             boolean done = false;
             do {
                 chosenCard = new TargetCardInGraveyard(filter);
-                chosenCard.setNotTarget(true);
+                chosenCard.withNotTarget(true);
                 if (chosenCard.canChoose(opponent.getId(), source, game)) {
                     opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
                     card = game.getCard(chosenCard.getFirstTarget());

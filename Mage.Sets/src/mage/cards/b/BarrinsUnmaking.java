@@ -48,7 +48,7 @@ class BarrinsUnmakingEffect extends OneShotEffect {
         this.staticText = "Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.";
     }
 
-    public BarrinsUnmakingEffect(final BarrinsUnmakingEffect effect) {
+    private BarrinsUnmakingEffect(final BarrinsUnmakingEffect effect) {
         super(effect);
     }
 

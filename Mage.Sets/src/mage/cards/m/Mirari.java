@@ -58,7 +58,7 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
                 new GenericManaCost(3)), false);
     }
 
-    MirariTriggeredAbility(final MirariTriggeredAbility ability) {
+    private MirariTriggeredAbility(final MirariTriggeredAbility ability) {
         super(ability);
     }
 

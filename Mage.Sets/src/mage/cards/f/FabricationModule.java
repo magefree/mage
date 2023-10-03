@@ -55,7 +55,7 @@ class FabricationModuleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    FabricationModuleTriggeredAbility(final FabricationModuleTriggeredAbility ability) {
+    private FabricationModuleTriggeredAbility(final FabricationModuleTriggeredAbility ability) {
         super(ability);
     }
 

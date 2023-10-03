@@ -70,7 +70,7 @@ class GoldenGuardianEffect extends OneShotEffect {
         this.staticText = "{this} fights another target creature you control";
     }
 
-    public GoldenGuardianEffect(final GoldenGuardianEffect effect) {
+    private GoldenGuardianEffect(final GoldenGuardianEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("When {this} dies this turn, ");
     }
 
-    public GoldenGuardianDelayedTriggeredAbility(final GoldenGuardianDelayedTriggeredAbility ability) {
+    private GoldenGuardianDelayedTriggeredAbility(final GoldenGuardianDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -127,7 +127,7 @@ class GoldenGuardianReturnTransformedEffect extends OneShotEffect {
         this.staticText = "return it to the battlefield transformed under your control";
     }
 
-    public GoldenGuardianReturnTransformedEffect(final GoldenGuardianReturnTransformedEffect effect) {
+    private GoldenGuardianReturnTransformedEffect(final GoldenGuardianReturnTransformedEffect effect) {
         super(effect);
     }
 

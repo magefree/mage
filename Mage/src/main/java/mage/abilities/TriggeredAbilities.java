@@ -1,5 +1,3 @@
-
-
 package mage.abilities;
 
 import mage.MageObject;
@@ -9,6 +7,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -64,9 +63,10 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                 if (object != null) {
                     boolean controllerSet = false;
+                    Set<UUID> eventTargets = CardUtil.getEventTargets(event);
                     if (ability.getZone() != Zone.COMMAND
                             && event != null
-                            && event.getTargetId() != null
+                            && !eventTargets.isEmpty()
                             && ability.isLeavesTheBattlefieldTrigger()
                             && game.getLKI().get(Zone.BATTLEFIELD) != null
                             && game.getLKI().get(Zone.BATTLEFIELD).containsKey(ability.getSourceId())) {
@@ -96,7 +96,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                 if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game) && !ability.checkUsedAlready(game)) {
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
                     // event == null - state based triggers like StateTriggeredAbility, must be ignored for number event
-                    if (event == null || !game.replaceEvent(numberOfTriggersEvent)) {
+                    if (event == null || !game.replaceEvent(numberOfTriggersEvent, ability)) {
                         for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {
                             ability.trigger(game, ability.getControllerId(), event);
                         }

@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.choices.Choice;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -117,7 +118,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
             Player player = game.getPlayer(source.getControllerId());
-            if (player == null || !player.choose(outcome, choice, game)) {
+            if (player == null || !player.choose(Outcome.PutManaInPool, choice, game)) {
                 return null;
             }
         }

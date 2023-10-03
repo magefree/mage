@@ -49,7 +49,7 @@ class SedrisTheTraitorKingEffect extends ContinuousEffectImpl {
         staticText = "Each creature card in your graveyard has unearth {2}{B}";
     }
 
-    SedrisTheTraitorKingEffect(final SedrisTheTraitorKingEffect effect) {
+    private SedrisTheTraitorKingEffect(final SedrisTheTraitorKingEffect effect) {
         super(effect);
     }
 

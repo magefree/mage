@@ -1,5 +1,6 @@
 package mage.abilities.effects;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
@@ -19,23 +20,16 @@ import mage.cards.AdventureCard;
 public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements AsThoughEffect {
 
     protected AsThoughEffectType type;
-    boolean consumable;
 
     public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome) {
-        this(type, duration, outcome, false);
-    }
-
-    public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome, boolean consumable) {
         super(duration, outcome);
         this.type = type;
         this.effectType = EffectType.ASTHOUGH;
-        this.consumable = consumable;
     }
 
     protected AsThoughEffectImpl(final AsThoughEffectImpl effect) {
         super(effect);
         this.type = effect.type;
-        this.consumable = effect.consumable;
     }
 
     @Override
@@ -84,6 +78,10 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
      * @return
      */
     protected boolean allowCardToPlayWithoutMana(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, MageIdentifier.Default, game);
+    }
+
+    protected boolean allowCardToPlayWithoutMana(UUID objectId, Ability source, UUID affectedControllerId, MageIdentifier identifier, Game game){
         Player player = game.getPlayer(affectedControllerId);
         Card card = game.getCard(objectId);
         if (card == null || player == null) {
@@ -92,33 +90,27 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
         if (!card.isLand(game)) {
             if (card instanceof SplitCard) {
                 Card leftCard = ((SplitCard) card).getLeftHalfCard();
-                player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());
+                player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts(), identifier);
                 Card rightCard = ((SplitCard) card).getRightHalfCard();
-                player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
+                player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts(), identifier);
             } else if (card instanceof ModalDoubleFacedCard) {
                 Card leftCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
                 Card rightCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                 // some MDFC's are land.  IE: sea gate restoration
                 if (!leftCard.isLand(game)) {
-                    player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());
+                    player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts(), identifier);
                 }
                 if (!rightCard.isLand(game)) {
-                    player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
+                    player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts(), identifier);
                 }
             } else if (card instanceof AdventureCard) {
                 Card creatureCard = card.getMainCard();
                 Card spellCard = ((AdventureCard) card).getSpellCard();
-                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), null, creatureCard.getSpellAbility().getCosts());
-                player.setCastSourceIdWithAlternateMana(spellCard.getId(), null, spellCard.getSpellAbility().getCosts());
+                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), null, creatureCard.getSpellAbility().getCosts(), identifier);
+                player.setCastSourceIdWithAlternateMana(spellCard.getId(), null, spellCard.getSpellAbility().getCosts(), identifier);
             }
-            player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+            player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts(), identifier);
         }
         return true;
     }
-
-    @Override
-    public boolean isConsumable() {
-        return consumable;
-    }
-
 }

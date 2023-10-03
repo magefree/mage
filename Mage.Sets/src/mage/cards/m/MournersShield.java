@@ -66,7 +66,7 @@ class MournersShieldImprintEffect extends OneShotEffect {
         this.staticText = "you may exile target card from a graveyard";
     }
 
-    MournersShieldImprintEffect(final MournersShieldImprintEffect effect) {
+    private MournersShieldImprintEffect(final MournersShieldImprintEffect effect) {
         super(effect);
     }
 

@@ -85,7 +85,7 @@ class BiophagusEntersBattlefieldEffect extends ReplacementEffectImpl {
         this.mor = mor;
     }
 
-    public BiophagusEntersBattlefieldEffect(BiophagusEntersBattlefieldEffect effect) {
+    private BiophagusEntersBattlefieldEffect(final BiophagusEntersBattlefieldEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }

@@ -31,7 +31,7 @@ public final class YewSpirit extends CardImpl {
         // {2}{G}{G}: Yew Spirit gets +X/+X until end of turn, where X is its power.
         SourcePermanentPowerCount x = new SourcePermanentPowerCount();
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(x, x, Duration.EndOfTurn, true),
+                new BoostSourceEffect(x, x, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{2}{G}{G}")));
     }
 

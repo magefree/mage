@@ -87,7 +87,7 @@ class AuthorOfShadowsEffect extends OneShotEffect {
         }
 
         TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD_A_NON_LAND);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

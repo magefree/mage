@@ -68,10 +68,14 @@ class KnowledgePoolExileThreeCardsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject == null) { return false; }
+        if (sourceObject == null) {
+            return false;
+        }
 
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -117,10 +121,14 @@ class KnowledgePoolWhenCastFromHandAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getZone() != Zone.HAND) { return false; }
+        if (event.getZone() != Zone.HAND) {
+            return false;
+        }
 
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null) { return false; }
+        if (spell == null) {
+            return false;
+        }
 
         for (Effect effect : this.getEffects()) {
             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -143,13 +151,19 @@ class KnowledgePoolExileAndPlayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell == null) { return false; }
+        if (spell == null) {
+            return false;
+        }
 
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourceObject == null ) { return false; }
+        if (sourceObject == null ) {
+            return false;
+        }
 
         Player spellController = game.getPlayer(spell.getControllerId());
-        if (spellController == null) { return false; }
+        if (spellController == null) {
+            return false;
+        }
 
         UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
 
@@ -168,7 +182,7 @@ class KnowledgePoolExileAndPlayEffect extends OneShotEffect {
         filter.add(Predicates.not(new CardIdPredicate(spell.getSourceId())));
 
         TargetCardInExile target = new TargetCardInExile(0, 1, filter, source.getSourceId());
-        target.setNotTarget(true);
+        target.withNotTarget(true);
 
         if (!spellController.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, source, game)) {
             // Player chose to not cast any ofthe spells

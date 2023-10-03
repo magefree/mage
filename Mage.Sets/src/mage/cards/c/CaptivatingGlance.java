@@ -63,7 +63,7 @@ class CaptivatingGlanceEffect extends OneShotEffect {
         this.staticText = "clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature";
     }
 
-    public CaptivatingGlanceEffect(final CaptivatingGlanceEffect effect) {
+    private CaptivatingGlanceEffect(final CaptivatingGlanceEffect effect) {
         super(effect);
     }
 

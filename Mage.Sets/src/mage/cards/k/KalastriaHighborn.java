@@ -62,7 +62,7 @@ class LoseGainEffect extends OneShotEffect {
         this.staticText = "target player loses 2 life and you gain 2 life";
     }
 
-    LoseGainEffect(final LoseGainEffect effect) {
+    private LoseGainEffect(final LoseGainEffect effect) {
         super(effect);
     }
 

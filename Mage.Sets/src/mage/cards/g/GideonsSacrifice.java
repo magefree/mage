@@ -79,7 +79,7 @@ class GideonsSacrificeEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }

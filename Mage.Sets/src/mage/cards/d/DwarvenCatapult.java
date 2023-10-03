@@ -46,7 +46,7 @@ class DwarvenCatapultEffect extends OneShotEffect {
         staticText = "{this} deals X damage divided evenly, rounded down, among all creatures target opponent controls.";
     }
 
-    public DwarvenCatapultEffect(final DwarvenCatapultEffect effect) {
+    private DwarvenCatapultEffect(final DwarvenCatapultEffect effect) {
         super(effect);
     }
 

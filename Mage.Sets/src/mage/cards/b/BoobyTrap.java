@@ -55,7 +55,7 @@ class BoobyTrapTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(10, true, "that player"), new SacrificeSourceCost(), "", false), false);
     }
 
-    public BoobyTrapTriggeredAbility(BoobyTrapTriggeredAbility ability) {
+    private BoobyTrapTriggeredAbility(final BoobyTrapTriggeredAbility ability) {
         super(ability);
     }
 

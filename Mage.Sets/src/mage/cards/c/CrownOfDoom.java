@@ -98,7 +98,7 @@ class CrownOfDoomEffect extends OneShotEffect {
         this.staticText = "Target player other than {this}'s owner gains control of it";
     }
 
-    public CrownOfDoomEffect(final CrownOfDoomEffect effect) {
+    private CrownOfDoomEffect(final CrownOfDoomEffect effect) {
         super(effect);
     }
 

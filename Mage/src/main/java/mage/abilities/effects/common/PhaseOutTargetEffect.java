@@ -14,20 +14,12 @@ import java.util.UUID;
  */
 public class PhaseOutTargetEffect extends OneShotEffect {
 
-    protected final String targetDescription;
-
     public PhaseOutTargetEffect() {
-        this((String) null);
-    }
-
-    public PhaseOutTargetEffect(String targetDescription) {
         super(Outcome.Detriment);
-        this.targetDescription = targetDescription;
     }
 
     private PhaseOutTargetEffect(final PhaseOutTargetEffect effect) {
         super(effect);
-        this.targetDescription = effect.targetDescription;
     }
 
     @Override
@@ -51,18 +43,7 @@ public class PhaseOutTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (targetDescription != null && !targetDescription.isEmpty()) {
-            sb.append(targetDescription);
-        } else {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        }
-        sb.append(" phase");
-        if (mode.getTargets().isEmpty()
-                || mode.getTargets().get(0).getMaxNumberOfTargets() <= 1) {
-            sb.append('s');
-        }
-        sb.append(" out");
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
+                + (getTargetPointer().isPlural(mode.getTargets()) ? " phase out" : " phases out");
     }
 }

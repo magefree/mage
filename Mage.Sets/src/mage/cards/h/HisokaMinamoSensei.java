@@ -56,7 +56,7 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
         staticText = "Counter target spell if it has the same mana value as the discarded card";
     }
 
-    HisokaMinamoSenseiCounterEffect(final HisokaMinamoSenseiCounterEffect effect) {
+    private HisokaMinamoSenseiCounterEffect(final HisokaMinamoSenseiCounterEffect effect) {
         super(effect);
     }
 

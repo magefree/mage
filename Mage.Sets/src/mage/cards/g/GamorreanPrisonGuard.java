@@ -56,7 +56,7 @@ class GamorreanPrisonGuardEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public GamorreanPrisonGuardEffect(final GamorreanPrisonGuardEffect effect) {
+    private GamorreanPrisonGuardEffect(final GamorreanPrisonGuardEffect effect) {
         super(effect);
     }
 

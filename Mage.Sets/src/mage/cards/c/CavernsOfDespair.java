@@ -48,7 +48,7 @@ class CavernsOfDespairAttackRestrictionEffect extends RestrictionEffect {
         staticText = "No more than two creatures can attack each combat";
     }
 
-    public CavernsOfDespairAttackRestrictionEffect(final CavernsOfDespairAttackRestrictionEffect effect) {
+    private CavernsOfDespairAttackRestrictionEffect(final CavernsOfDespairAttackRestrictionEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class CavernsOfDespairBlockRestrictionEffect extends RestrictionEffect {
         staticText = "No more than two creatures can block each combat";
     }
 
-    public CavernsOfDespairBlockRestrictionEffect(final CavernsOfDespairBlockRestrictionEffect effect) {
+    private CavernsOfDespairBlockRestrictionEffect(final CavernsOfDespairBlockRestrictionEffect effect) {
         super(effect);
     }
 

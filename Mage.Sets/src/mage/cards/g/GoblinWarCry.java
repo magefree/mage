@@ -49,7 +49,7 @@ class GoblinWarCryEffect extends OneShotEffect {
         this.staticText = "Target opponent chooses a creature they control. Other creatures they control can't block this turn.";
     }
 
-    GoblinWarCryEffect(final GoblinWarCryEffect effect) {
+    private GoblinWarCryEffect(final GoblinWarCryEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class GoblinWarCryRestrictionEffect extends RestrictionEffect {
         this.targetId = targetId;
     }
 
-    public GoblinWarCryRestrictionEffect(final GoblinWarCryRestrictionEffect effect) {
+    private GoblinWarCryRestrictionEffect(final GoblinWarCryRestrictionEffect effect) {
         super(effect);
         targetId = effect.targetId;
     }

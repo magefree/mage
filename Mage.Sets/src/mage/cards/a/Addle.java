@@ -49,7 +49,7 @@ class AddleEffect extends OneShotEffect {
         staticText = "Choose a color. Target player reveals their hand and you choose a card of that color from it. That player discards that card.";
     }
 
-    AddleEffect(final AddleEffect effect) {
+    private AddleEffect(final AddleEffect effect) {
         super(effect);
     }
 

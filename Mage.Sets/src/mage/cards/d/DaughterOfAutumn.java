@@ -68,7 +68,7 @@ class DaughterOfAutumnPreventDamageTargetEffect extends RedirectionEffect {
         staticText = "The next " + amount + " damage that would be dealt to target white creature this turn is dealt to {this} instead";
     }
 
-    public DaughterOfAutumnPreventDamageTargetEffect(final DaughterOfAutumnPreventDamageTargetEffect effect) {
+    private DaughterOfAutumnPreventDamageTargetEffect(final DaughterOfAutumnPreventDamageTargetEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class NecroplasmEffect extends OneShotEffect {
         this.staticText = "destroy each creature with mana value equal to the number of +1/+1 counters on {this}.";
     }
     
-    NecroplasmEffect(final NecroplasmEffect effect) {
+    private NecroplasmEffect(final NecroplasmEffect effect) {
         super(effect);
     }
     

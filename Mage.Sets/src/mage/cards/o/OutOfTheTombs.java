@@ -77,7 +77,7 @@ class OutOfTheTombsReplacementEffect extends ReplacementEffectImpl {
         }
         boolean cardReturned = false;
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(player.getId(), source, game)) {
             if (target.choose(Outcome.PutCreatureInPlay, player.getId(), source.getSourceId(), source, game)) {
                 Card card = game.getCard(target.getFirstTarget());

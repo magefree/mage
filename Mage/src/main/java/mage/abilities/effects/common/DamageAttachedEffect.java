@@ -1,12 +1,10 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -47,12 +45,7 @@ public class DamageAttachedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

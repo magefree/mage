@@ -63,7 +63,7 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
         staticText = "&bull; Dragons &mdash; Spells your opponents cast that target you or a permanent you control cost {2} more to cast";
     }
 
-    MonasterySiegeCostIncreaseEffect(MonasterySiegeCostIncreaseEffect effect) {
+    private MonasterySiegeCostIncreaseEffect(final MonasterySiegeCostIncreaseEffect effect) {
         super(effect);
     }
 

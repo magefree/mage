@@ -54,7 +54,7 @@ class AshnodsCylixEffect extends OneShotEffect {
         this.staticText = "Target player looks at the top three cards of their library, puts one of them back on top of their library, then exiles the rest";
     }
 
-    AshnodsCylixEffect(final AshnodsCylixEffect effect) {
+    private AshnodsCylixEffect(final AshnodsCylixEffect effect) {
         super(effect);
     }
 

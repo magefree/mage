@@ -48,7 +48,7 @@ class ChastiseEffect extends OneShotEffect {
         this.staticText = "You gain life equal to its power";
     }
 
-    public ChastiseEffect(final ChastiseEffect effect) {
+    private ChastiseEffect(final ChastiseEffect effect) {
         super(effect);
     }
 

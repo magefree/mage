@@ -58,11 +58,6 @@ class OmenMachineEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public OmenMachineEffect copy() {
         return new OmenMachineEffect(this);
     }

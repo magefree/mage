@@ -49,7 +49,7 @@ class DruidicSatchelEffect extends OneShotEffect {
         staticText = "Reveal the top card of your library. If it's a creature card, create a 1/1 green Saproling creature token. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life";
     }
 
-    public DruidicSatchelEffect(final DruidicSatchelEffect effect) {
+    private DruidicSatchelEffect(final DruidicSatchelEffect effect) {
         super(effect);
     }
 

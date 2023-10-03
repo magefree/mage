@@ -56,18 +56,13 @@ class AggressiveMiningEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "You can't play lands";
     }
     
-    public AggressiveMiningEffect(final AggressiveMiningEffect effect) {
+    private AggressiveMiningEffect(final AggressiveMiningEffect effect) {
         super(effect);
     }
 
     @Override
     public AggressiveMiningEffect copy() {
         return new AggressiveMiningEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

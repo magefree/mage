@@ -53,7 +53,7 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When the names of three or more nonland permanents begin with the same letter, ");
     }
 
-    public BloodletterStateTriggeredAbility(final BloodletterStateTriggeredAbility ability) {
+    private BloodletterStateTriggeredAbility(final BloodletterStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,7 +86,7 @@ class BloodletterEffect extends OneShotEffect {
         staticText = "sacrifice {this}. If you do, it deals 2 damage to each creature and each player";
     }
 
-    public BloodletterEffect(final BloodletterEffect effect) {
+    private BloodletterEffect(final BloodletterEffect effect) {
         super(effect);
     }
 

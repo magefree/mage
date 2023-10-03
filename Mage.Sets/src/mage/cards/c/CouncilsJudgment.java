@@ -99,7 +99,7 @@ class CouncilsJudgmentVote extends VoteHandler<Permanent> {
         }
         TargetPermanent target = new TargetPermanent(1, filter);
         target.withChooseHint(voteInfo + " (to exile)");
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         decidingPlayer.choose(Outcome.Exile, target, source, game);
         return game.getPermanent(target.getFirstTarget());
     }

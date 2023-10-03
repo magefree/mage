@@ -60,7 +60,7 @@ class VarolzTheScarStripedEffect extends ContinuousEffectImpl {
         staticText = "Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost";
     }
 
-    VarolzTheScarStripedEffect(final VarolzTheScarStripedEffect effect) {
+    private VarolzTheScarStripedEffect(final VarolzTheScarStripedEffect effect) {
         super(effect);
     }
 

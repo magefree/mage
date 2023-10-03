@@ -23,7 +23,7 @@ public final class BullRush extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BullRush (final BullRush card) {
+    private BullRush(final BullRush card) {
         super(card);
     }
 

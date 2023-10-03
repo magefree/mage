@@ -93,11 +93,6 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SanctumPrelateReplacementEffect copy() {
         return new SanctumPrelateReplacementEffect(this);
     }

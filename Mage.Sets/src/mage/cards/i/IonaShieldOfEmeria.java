@@ -60,7 +60,7 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
         staticText = "Your opponents can't cast spells of the chosen color";
     }
 
-    IonaShieldOfEmeriaReplacementEffect(final IonaShieldOfEmeriaReplacementEffect effect) {
+    private IonaShieldOfEmeriaReplacementEffect(final IonaShieldOfEmeriaReplacementEffect effect) {
         super(effect);
     }
 

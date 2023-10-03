@@ -66,11 +66,6 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public RakdosLordOfRiotsCantCastEffect copy() {
         return new RakdosLordOfRiotsCantCastEffect(this);
     }
@@ -96,7 +91,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn";
     }
 
-    RakdosLordOfRiotsCostReductionEffect(RakdosLordOfRiotsCostReductionEffect effect) {
+    private RakdosLordOfRiotsCostReductionEffect(final RakdosLordOfRiotsCostReductionEffect effect) {
         super(effect);
     }
 

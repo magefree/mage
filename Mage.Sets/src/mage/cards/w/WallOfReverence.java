@@ -55,7 +55,7 @@ class WallOfReverenceTriggeredEffect extends OneShotEffect {
         staticText = "gain life equal to the power of target creature you control";
     }
 
-    WallOfReverenceTriggeredEffect(WallOfReverenceTriggeredEffect effect) {
+    private WallOfReverenceTriggeredEffect(final WallOfReverenceTriggeredEffect effect) {
         super(effect);
     }
 

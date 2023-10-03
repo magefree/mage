@@ -53,7 +53,7 @@ class AkoumStonewakerEffect extends OneShotEffect {
         this.staticText = "create a 3/1 red Elemental creature token with trample and haste. Exile that token at the beginning of the next end step";
     }
 
-    public AkoumStonewakerEffect(final AkoumStonewakerEffect effect) {
+    private AkoumStonewakerEffect(final AkoumStonewakerEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,7 @@ class FreneticEfreetEffect extends OneShotEffect {
                 + "{this} phases out. If you lose the flip, sacrifice {this}";
     }
 
-    public FreneticEfreetEffect(FreneticEfreetEffect effect) {
+    private FreneticEfreetEffect(final FreneticEfreetEffect effect) {
         super(effect);
     }
 

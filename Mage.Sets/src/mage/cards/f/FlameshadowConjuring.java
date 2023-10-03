@@ -60,7 +60,7 @@ class FlameshadowConjuringEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    public FlameshadowConjuringEffect(final FlameshadowConjuringEffect effect) {
+    private FlameshadowConjuringEffect(final FlameshadowConjuringEffect effect) {
         super(effect);
     }
 

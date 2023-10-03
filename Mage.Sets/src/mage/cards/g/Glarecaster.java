@@ -69,7 +69,7 @@ class GlarecasterEffect extends RedirectionEffect {
         staticText = "The next time damage would be dealt to {this} and/or you this turn, that damage is dealt to any target instead";
     }
 
-    public GlarecasterEffect(final GlarecasterEffect effect) {
+    private GlarecasterEffect(final GlarecasterEffect effect) {
         super(effect);
         this.redirectToObject = effect.redirectToObject;
     }

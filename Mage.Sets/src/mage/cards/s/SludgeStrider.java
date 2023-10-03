@@ -112,7 +112,7 @@ class SludgeStriderEffect extends OneShotEffect {
         staticText = "target player loses 1 life and you gain 1 life";
     }
 
-    SludgeStriderEffect(final SludgeStriderEffect effect) {
+    private SludgeStriderEffect(final SludgeStriderEffect effect) {
         super(effect);
     }
 

@@ -52,7 +52,7 @@ class CycloneEffect extends OneShotEffect {
         this.staticText = "Pay Green Mana for each counter to damage everything or sacrifice Cyclone.";
     }
 
-    public CycloneEffect(final CycloneEffect effect) {
+    private CycloneEffect(final CycloneEffect effect) {
         super(effect);
     }
 

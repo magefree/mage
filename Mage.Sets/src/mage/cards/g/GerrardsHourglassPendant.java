@@ -61,7 +61,7 @@ class GerrardsHourglassPendantSkipExtraTurnsEffect extends ReplacementEffectImpl
         staticText = "If a player would begin an extra turn, that player skips that turn instead";
     }
 
-    public GerrardsHourglassPendantSkipExtraTurnsEffect(final GerrardsHourglassPendantSkipExtraTurnsEffect effect) {
+    private GerrardsHourglassPendantSkipExtraTurnsEffect(final GerrardsHourglassPendantSkipExtraTurnsEffect effect) {
         super(effect);
     }
 

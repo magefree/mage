@@ -90,7 +90,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
             }
             filter.add(Predicates.or(cardIdPredicates));
             Target target = new TargetCardInGraveyard(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

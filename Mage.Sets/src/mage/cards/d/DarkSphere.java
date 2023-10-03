@@ -58,7 +58,7 @@ class DarkSpherePreventionEffect extends ReplacementEffectImpl {
         this.targetSource = new TargetSource(new FilterObject("source of your choice"));
     }
     
-    public DarkSpherePreventionEffect(final DarkSpherePreventionEffect effect) {
+    private DarkSpherePreventionEffect(final DarkSpherePreventionEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }

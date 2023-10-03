@@ -53,7 +53,7 @@ class DwarvenDrillerEffect extends OneShotEffect {
         this.staticText = "Destroy target land unless its controller has {this} deal 2 damage to them";
     }
 
-    public DwarvenDrillerEffect(final DwarvenDrillerEffect effect) {
+    private DwarvenDrillerEffect(final DwarvenDrillerEffect effect) {
         super(effect);
     }
 

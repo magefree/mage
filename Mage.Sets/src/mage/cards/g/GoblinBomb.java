@@ -63,7 +63,7 @@ class GoblinBombEffect extends OneShotEffect {
         staticText = "flip a coin. If you win the flip, put a fuse counter on {this}. If you lose the flip, remove a fuse counter from {this}";
     }
 
-    public GoblinBombEffect(GoblinBombEffect effect) {
+    private GoblinBombEffect(final GoblinBombEffect effect) {
         super(effect);
     }
 

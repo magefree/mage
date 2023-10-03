@@ -69,7 +69,7 @@ class MudslideEffect extends OneShotEffect {
         staticText = "that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.";
     }
 
-    MudslideEffect(MudslideEffect effect) {
+    private MudslideEffect(final MudslideEffect effect) {
         super(effect);
     }
 

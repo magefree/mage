@@ -114,7 +114,7 @@ class RowanKenrithDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals 3 damage to each tapped creature target player controls";
     }
 
-    RowanKenrithDamageEffect(final RowanKenrithDamageEffect effect) {
+    private RowanKenrithDamageEffect(final RowanKenrithDamageEffect effect) {
         super(effect);
     }
 

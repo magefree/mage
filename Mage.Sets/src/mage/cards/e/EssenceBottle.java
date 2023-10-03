@@ -56,7 +56,7 @@ class EssenceBottleEffect extends OneShotEffect {
         this.staticText = "You gain 2 life for each elixir counter removed this way";
     }
 
-    public EssenceBottleEffect(final EssenceBottleEffect effect) {
+    private EssenceBottleEffect(final EssenceBottleEffect effect) {
         super(effect);
     }
 

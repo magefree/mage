@@ -136,7 +136,7 @@ class MaddeningImpDelayedDestroyEffect extends OneShotEffect {
         this.staticText = "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn";
     }
 
-    MaddeningImpDelayedDestroyEffect(final MaddeningImpDelayedDestroyEffect effect) {
+    private MaddeningImpDelayedDestroyEffect(final MaddeningImpDelayedDestroyEffect effect) {
         super(effect);
         this.activeCreatures = effect.activeCreatures;
     }
