@@ -48,7 +48,7 @@ class EchoCircletEffect extends ContinuousEffectImpl {
         staticText = "Equipped creature can block an additional creature each combat";
     }
 
-    public EchoCircletEffect(final EchoCircletEffect effect) {
+    private EchoCircletEffect(final EchoCircletEffect effect) {
         super(effect);
     }
 

@@ -25,7 +25,7 @@ public final class WakingNightmare extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public WakingNightmare (final WakingNightmare card) {
+    private WakingNightmare(final WakingNightmare card) {
         super(card);
     }
 

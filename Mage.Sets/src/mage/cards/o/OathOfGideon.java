@@ -51,7 +51,7 @@ class OathOfGideonReplacementEffect extends ReplacementEffectImpl {
         staticText = "Each planeswalker you control enters the battlefield with an additional loyalty counter on it";
     }
 
-    OathOfGideonReplacementEffect(OathOfGideonReplacementEffect effect) {
+    private OathOfGideonReplacementEffect(final OathOfGideonReplacementEffect effect) {
         super(effect);
     }
 

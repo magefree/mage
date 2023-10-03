@@ -37,7 +37,7 @@ public final class CennsHeir extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Cenn's Heir attacks, it gets +1/+1 until end of turn for each other attacking Kithkin.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it"), false));
     }
 
     private CennsHeir(final CennsHeir card) {

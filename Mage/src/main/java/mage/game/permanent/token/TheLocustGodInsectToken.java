@@ -23,7 +23,7 @@ public final class TheLocustGodInsectToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public TheLocustGodInsectToken(final TheLocustGodInsectToken token) {
+    protected TheLocustGodInsectToken(final TheLocustGodInsectToken token) {
         super(token);
     }
 

@@ -129,7 +129,7 @@ class NahirisResolveReturnEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
         return player != null && !cards.isEmpty() && player.moveCards(
-                cards.getCards(game), Zone.EXILED, source, game, false,
+                cards.getCards(game), Zone.BATTLEFIELD, source, game, false,
                 false, true, null
         );
     }

@@ -68,7 +68,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
         staticText = "The next time you would roll a six-sided die, instead roll two six-sided dice and use the total of those results";
     }
 
-    TheBigIdeaReplacementEffect(final TheBigIdeaReplacementEffect effect) {
+    private TheBigIdeaReplacementEffect(final TheBigIdeaReplacementEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class TheBigIdeaEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. Create a number of 1/1 red Brainiac creature tokens equal to the result";
     }
 
-    public TheBigIdeaEffect(final TheBigIdeaEffect effect) {
+    private TheBigIdeaEffect(final TheBigIdeaEffect effect) {
         super(effect);
     }
 

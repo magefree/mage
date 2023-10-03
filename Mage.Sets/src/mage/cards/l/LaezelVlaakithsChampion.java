@@ -54,7 +54,7 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
                 "put that many plus one of each of those kinds of counters on that permanent or player instead";
     }
 
-    LaezelVlaakithsChampionEffect(final LaezelVlaakithsChampionEffect effect) {
+    private LaezelVlaakithsChampionEffect(final LaezelVlaakithsChampionEffect effect) {
         super(effect);
     }
 

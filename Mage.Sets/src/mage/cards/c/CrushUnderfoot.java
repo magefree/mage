@@ -57,7 +57,7 @@ class CrushUnderfootEffect extends OneShotEffect {
         this.staticText = "Choose a Giant creature you control. It deals damage equal to its power to target creature";
     }
 
-    public CrushUnderfootEffect(final CrushUnderfootEffect effect) {
+    private CrushUnderfootEffect(final CrushUnderfootEffect effect) {
         super(effect);
     }
 

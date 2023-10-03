@@ -72,7 +72,7 @@ class BalthorTheDefiledEffect extends OneShotEffect {
         this.staticText = "Each player returns all black and all red creature cards from their graveyard to the battlefield";
     }
 
-    public BalthorTheDefiledEffect(final BalthorTheDefiledEffect effect) {
+    private BalthorTheDefiledEffect(final BalthorTheDefiledEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class BalthorTheDefiledEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    cardsToReturn.addAll(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
+                    cardsToReturn.addAllCards(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
                 }
             }
             controller.moveCards(cardsToReturn.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);

@@ -48,7 +48,7 @@ class ChandrasRevolutionEffect extends OneShotEffect {
         this.staticText = "{this} deals 4 damage to target creature. Tap target land. That land doesn't untap during its controller's next untap step";
     }
 
-    public ChandrasRevolutionEffect(final ChandrasRevolutionEffect effect) {
+    private ChandrasRevolutionEffect(final ChandrasRevolutionEffect effect) {
         super(effect);
     }
 

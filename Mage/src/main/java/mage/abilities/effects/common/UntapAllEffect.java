@@ -22,7 +22,7 @@ public class UntapAllEffect extends OneShotEffect {
         this.filter = filter;
     }
 
-    public UntapAllEffect(final UntapAllEffect effect) {
+    protected UntapAllEffect(final UntapAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +34,7 @@ public final class AncientLumberknot extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessEffect(filter, true)));
+        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessControlledEffect(filter)));
     }
 
     private AncientLumberknot(final AncientLumberknot card) {

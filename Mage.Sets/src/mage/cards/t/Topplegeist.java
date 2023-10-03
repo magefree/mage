@@ -70,7 +70,7 @@ class TopplegeistAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TapTargetEffect());
     }
 
-    public TopplegeistAbility(final TopplegeistAbility ability) {
+    private TopplegeistAbility(final TopplegeistAbility ability) {
         super(ability);
     }
 

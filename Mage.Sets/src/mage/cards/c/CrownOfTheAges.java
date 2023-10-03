@@ -64,7 +64,7 @@ class CrownOfTheAgesEffect extends OneShotEffect {
         this.staticText = "Attach target Aura attached to a creature to another creature";
     }
 
-    public CrownOfTheAgesEffect(final CrownOfTheAgesEffect effect) {
+    private CrownOfTheAgesEffect(final CrownOfTheAgesEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class CrownOfTheAgesEffect extends OneShotEffect {
         filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
 
         Target chosenCreatureToAttachAura = new TargetPermanent(filterChoice);
-        chosenCreatureToAttachAura.setNotTarget(true);
+        chosenCreatureToAttachAura.withNotTarget(true);
 
         if (chosenCreatureToAttachAura.canChoose(source.getControllerId(), source, game)
                 && controller.choose(Outcome.Neutral, chosenCreatureToAttachAura, source, game)) {

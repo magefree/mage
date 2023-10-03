@@ -58,7 +58,7 @@ class EmissaryOfHopeEffect extends OneShotEffect {
         staticText = "you gain 1 life for each artifact that player controls";
     }
 
-    EmissaryOfHopeEffect(final EmissaryOfHopeEffect effect) {
+    private EmissaryOfHopeEffect(final EmissaryOfHopeEffect effect) {
         super(effect);
     }
 

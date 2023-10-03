@@ -37,7 +37,7 @@ public class AftermathAbility extends SimpleStaticAbility {
         addEffect(new AftermathExileAsResolvesFromGraveyard());
     }
 
-    public AftermathAbility(final AftermathAbility ability) {
+    protected AftermathAbility(final AftermathAbility ability) {
         super(ability);
     }
 
@@ -58,7 +58,7 @@ class AftermathCastFromGraveyard extends AsThoughEffectImpl {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
     }
 
-    public AftermathCastFromGraveyard(final AftermathCastFromGraveyard effect) {
+    protected AftermathCastFromGraveyard(final AftermathCastFromGraveyard effect) {
         super(effect);
     }
 
@@ -95,18 +95,13 @@ class AftermathCantCastFromHand extends ContinuousRuleModifyingEffectImpl {
         staticText = ", but not from anywhere else";
     }
 
-    public AftermathCantCastFromHand(final AftermathCantCastFromHand effect) {
+    protected AftermathCantCastFromHand(final AftermathCantCastFromHand effect) {
         super(effect);
     }
 
     @Override
     public AftermathCantCastFromHand copy() {
         return new AftermathCantCastFromHand(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -34,10 +34,10 @@ public final class NymrisOonasTrickster extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever you cast your first spell during each opponent's turn, look at the top two cards of your library.
-        // Put one of those cards into your hand and the other into your graveyard.
+        // Whenever you cast your first spell during each opponent's turn, look at the top two cards of your library. Put one of those cards into your hand and the other into your graveyard.
         this.addAbility(new FirstSpellOpponentsTurnTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD),
+                new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD)
+                        .setText("look at the top two cards of your library. Put one of those cards into your hand and the other into your graveyard"),
                 false));
     }
 

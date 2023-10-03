@@ -54,11 +54,11 @@ public final class JorKadeenFirstGoldwarden extends CardImpl {
 
         // Whenever Jor Kadeen, First Goldwarden attacks, it gets +X/+X until end of turn, where X is the number of equipped creatures you control. Then if Jor Kadeen's power is 4 or greater, draw a card.
         Ability ability = new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, xValue, Duration.EndOfTurn, true, "it"
+                xValue, xValue, Duration.EndOfTurn, "it"
         ));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
-                condition, "Then if {this}'s power is 4 or greater"
+                condition, "Then if {this}'s power is 4 or greater, draw a card"
         ));
         this.addAbility(ability.addHint(hint));
     }

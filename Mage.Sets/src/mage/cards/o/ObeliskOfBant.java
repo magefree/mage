@@ -23,7 +23,7 @@ public final class ObeliskOfBant extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public ObeliskOfBant (final ObeliskOfBant card) {
+    private ObeliskOfBant(final ObeliskOfBant card) {
         super(card);
     }
 

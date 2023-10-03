@@ -51,7 +51,7 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "The next creature spell you cast this turn can't be countered";
     }
 
-    InsistEffect(final InsistEffect effect) {
+    private InsistEffect(final InsistEffect effect) {
         super(effect);
     }
 
@@ -67,11 +67,6 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
         if (watcher != null) {
             watcher.setReady();
         }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

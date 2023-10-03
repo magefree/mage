@@ -35,7 +35,7 @@ public final class VeteransArmaments extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
-        Ability gainedAbility = new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true), false);
+        Ability gainedAbility = new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn), false);
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature.\"");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

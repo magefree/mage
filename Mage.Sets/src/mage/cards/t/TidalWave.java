@@ -46,7 +46,7 @@ class TidalWaveEffect extends OneShotEffect {
         this.staticText = "Create a 5/5 blue Wall creature token with defender. Sacrifice it at the beginning of the next end step.";
     }
 
-    public TidalWaveEffect(TidalWaveEffect effect) {
+    private TidalWaveEffect(final TidalWaveEffect effect) {
         super(effect);
     }
 

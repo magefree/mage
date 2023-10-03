@@ -76,7 +76,7 @@ class MomirVigSimicVisionaryEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a creature card, put that card into your hand";
     }
 
-    public MomirVigSimicVisionaryEffect(final MomirVigSimicVisionaryEffect effect) {
+    private MomirVigSimicVisionaryEffect(final MomirVigSimicVisionaryEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class MomirVigSimicVisionaryEffect extends OneShotEffect {
         }
 
         CardsImpl cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 1));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, 1));
         controller.revealCards(sourceObject.getIdName(), cards, game);
 
         Set<Card> cardsList = cards.getCards(game);

@@ -62,13 +62,8 @@ class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Enchanted creature's controller can't cast creature spells";
     }
 
-    public BrandOfIllOmenEffect(final BrandOfIllOmenEffect effect) {
+    private BrandOfIllOmenEffect(final BrandOfIllOmenEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

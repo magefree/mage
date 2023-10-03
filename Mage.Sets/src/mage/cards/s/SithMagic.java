@@ -70,7 +70,7 @@ class SithMagicEffect extends OneShotEffect {
         staticText = "return target card from a graveyard to the battlefield under your control. It gains lifelink and haste. Exile it at the beginning of the next end step or if it would leave the battlefield";
     }
 
-    public SithMagicEffect(final SithMagicEffect effect) {
+    private SithMagicEffect(final SithMagicEffect effect) {
         super(effect);
     }
 
@@ -115,7 +115,7 @@ class SithMagicReplacementEffect extends ReplacementEffectImpl {
         staticText = "or if it would leave the battlefield";
     }
 
-    SithMagicReplacementEffect(final SithMagicReplacementEffect effect) {
+    private SithMagicReplacementEffect(final SithMagicReplacementEffect effect) {
         super(effect);
     }
 

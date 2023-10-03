@@ -54,23 +54,21 @@ class ConjurersBanEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ConjurersBanEffect copy() {
         return new ConjurersBanEffect(this);
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL
+                || event.getType() == GameEvent.EventType.PLAY_LAND;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.PLAY_LAND) {
-            MageObject object = game.getObject(event.getSourceId());
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return CardUtil.haveSameNames(object, cardName, game);
-        }
-        return false;
+        MageObject object = game.getObject(event.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        return CardUtil.haveSameNames(object, cardName, game);
     }
 
     @Override

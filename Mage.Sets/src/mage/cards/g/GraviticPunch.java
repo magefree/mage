@@ -51,7 +51,7 @@ class GraviticPunchEffect extends OneShotEffect {
                 + "equal to its power to target player.";
     }
 
-    public GraviticPunchEffect(final GraviticPunchEffect effect) {
+    private GraviticPunchEffect(final GraviticPunchEffect effect) {
         super(effect);
     }
 

@@ -19,7 +19,7 @@ public final class VaultOfWhispers extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public VaultOfWhispers (final VaultOfWhispers card) {
+    private VaultOfWhispers(final VaultOfWhispers card) {
         super(card);
     }
 

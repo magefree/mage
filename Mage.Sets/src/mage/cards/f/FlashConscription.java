@@ -61,7 +61,7 @@ class FlashConscriptionTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public FlashConscriptionTriggeredAbility(final FlashConscriptionTriggeredAbility ability) {
+    private FlashConscriptionTriggeredAbility(final FlashConscriptionTriggeredAbility ability) {
         super(ability);
     }
 

@@ -59,7 +59,7 @@ class SmeagolHelpfulGuideEffect extends OneShotEffect {
 
     SmeagolHelpfulGuideEffect() {
         super(Outcome.PutLandInPlay);
-        staticText = "target opponent reveals cards from the top of their library until they reveal" +
+        staticText = "target opponent reveals cards from the top of their library until they reveal " +
             "a land card. Put that card onto the battlefield tapped under your control " +
             "and the rest into their graveyard.";
     }
@@ -87,10 +87,10 @@ class SmeagolHelpfulGuideEffect extends OneShotEffect {
         // Every card is revealed, land included.
         opponent.revealCards(source, revealed, game);
 
-        // If there was a land card, the source's controller puts in on the battlefield.
-        if(land != null) {
+        // If there was a land card, the source's controller puts in on the battlefield tapped.
+        if (land != null) {
             revealed.remove(land);
-            controller.moveCards(land, Zone.BATTLEFIELD, source, game);
+            controller.moveCards(land, Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
 
         // Rest of the revealed cards are put into the opponent's graveyard.

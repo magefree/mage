@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -51,7 +50,7 @@ public class DonalHeraldOfWings extends CardImpl {
         // Do this only once each turn. (The copy becomes a token.)
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DonalHeraldOfWingsEffect(), filterSpell, true
-        ).setDoOnlyOnce(true));
+        ).setDoOnlyOnceEachTurn(true));
     }
 
     private DonalHeraldOfWings(final DonalHeraldOfWings card) {
@@ -91,7 +90,7 @@ class DonalHeraldOfWingsEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public DonalHeraldOfWingsEffect copy() {
         return new DonalHeraldOfWingsEffect(this);
     }
 }
@@ -104,7 +103,7 @@ enum DonalHeraldOfWingsApplier implements StackObjectCopyApplier {
         copiedSpell.addSubType(SubType.SPIRIT);
         copiedSpell.getPower().setModifiedBaseValue(1);
         copiedSpell.getToughness().setModifiedBaseValue(1);
-        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(1,1, Duration.Custom, SubLayer.SetPT_7b));
+        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(1,1, Duration.Custom));
         ability.setRuleVisible(false);
         copiedSpell.getAbilities().add(ability);
     }

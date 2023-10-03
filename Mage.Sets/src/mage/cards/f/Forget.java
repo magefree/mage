@@ -44,7 +44,7 @@ class ForgetEffect extends OneShotEffect {
         this.staticText = "Target player discards two cards, then draws as many cards as they discarded this way";
     }
     
-    public ForgetEffect(final ForgetEffect effect) {
+    private ForgetEffect(final ForgetEffect effect) {
         super(effect);
     }
     

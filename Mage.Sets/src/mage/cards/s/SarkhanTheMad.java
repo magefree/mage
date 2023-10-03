@@ -69,7 +69,7 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    SarkhanTheMadRevealAndDrawEffect(SarkhanTheMadRevealAndDrawEffect effect) {
+    private SarkhanTheMadRevealAndDrawEffect(final SarkhanTheMadRevealAndDrawEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    SarkhanTheMadSacEffect(SarkhanTheMadSacEffect effect) {
+    private SarkhanTheMadSacEffect(final SarkhanTheMadSacEffect effect) {
         super(effect);
     }
 
@@ -149,7 +149,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    SarkhanTheMadDragonDamageEffect(SarkhanTheMadDragonDamageEffect effect) {
+    private SarkhanTheMadDragonDamageEffect(final SarkhanTheMadDragonDamageEffect effect) {
         super(effect);
     }
 
@@ -158,7 +158,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
         List<Permanent> dragons = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
         if (dragons != null && !dragons.isEmpty()) {
             for (Permanent dragon : dragons) {
-                game.damagePlayerOrPlaneswalker(source.getFirstTarget(), dragon.getPower().getValue(), dragon.getId(), source, game, false, true);
+                game.damagePlayerOrPermanent(source.getFirstTarget(), dragon.getPower().getValue(), dragon.getId(), source, game, false, true);
             }
             return true;
         }

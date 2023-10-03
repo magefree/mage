@@ -55,7 +55,7 @@ class InterventionPactEffect extends OneShotEffect {
         this.staticText = "The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way";
     }
 
-    public InterventionPactEffect(final InterventionPactEffect effect) {
+    private InterventionPactEffect(final InterventionPactEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class InterventionPactEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetSource();
             target.setRequired(true);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 ContinuousEffect continuousEffect = new InterventionPactPreventDamageEffect();
                 continuousEffect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
@@ -89,7 +89,7 @@ class InterventionPactPreventDamageEffect extends PreventionEffectImpl {
         staticText = "The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way";
     }
 
-    public InterventionPactPreventDamageEffect(final InterventionPactPreventDamageEffect effect) {
+    private InterventionPactPreventDamageEffect(final InterventionPactPreventDamageEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ public final class DroidFactory extends CardImpl {
 
     public final class DroidFactoryAbility extends ActivatedAbilityImpl {
 
-        public DroidFactoryAbility(DroidFactoryAbility ability) {
+        private DroidFactoryAbility(final DroidFactoryAbility ability) {
             super(ability);
         }
 

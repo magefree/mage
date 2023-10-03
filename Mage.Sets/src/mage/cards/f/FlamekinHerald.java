@@ -2,13 +2,14 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.GainAbilitySpellsEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 
 import java.util.UUID;
@@ -18,10 +19,11 @@ import java.util.UUID;
  */
 public final class FlamekinHerald extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Commander spells you cast");
+    private static final FilterCard filter = new FilterCard("Commander spells you cast");
 
     static {
         filter.add(CommanderPredicate.instance);
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public FlamekinHerald(UUID ownerId, CardSetInfo setInfo) {
@@ -33,7 +35,7 @@ public final class FlamekinHerald extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Commander spells you cast have cascade.
-        this.addAbility(new SimpleStaticAbility(new GainAbilitySpellsEffect(new CascadeAbility(false), filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new CascadeAbility(false), filter)));
     }
 
     private FlamekinHerald(final FlamekinHerald card) {

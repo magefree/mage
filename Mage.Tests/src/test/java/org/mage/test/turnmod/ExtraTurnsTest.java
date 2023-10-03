@@ -2,104 +2,92 @@ package org.mage.test.turnmod;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class ExtraTurnsTest extends CardTestPlayerBase {
 
-    /**
-     * Emrakul, the Promised End not giving an extra turn when cast in the
-     * opponent's turn
-     */
-    @Test
-    public void testEmrakulCastOnOpponentsTurnCheckTurn3() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 12);
-        addCard(Zone.GRAVEYARD, playerA, "Island", 1);
-        // Emrakul, the Promised End costs {1} less to cast for each card type among cards in your graveyard.
-        // When you cast Emrakul, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.
-        // Flying
-        // Trample
-        // Protection from instants
-        addCard(Zone.HAND, playerA, "Emrakul, the Promised End", 1); // {13}
-        // Flash (You may cast this spell any time you could cast an instant.)
-        // Creature cards you own that aren't on the battlefield have flash.
-        // Each opponent can cast spells only any time they could cast a sorcery.
-        addCard(Zone.BATTLEFIELD, playerA, "Teferi, Mage of Zhalfir", 1);
-
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");
-        // Turn 4 is the next turn of opponent (player B)  that player A controls
-        // So Turn 5 is the extra turn for player B after Turn 4
-        setStopAt(3, PhaseStep.DRAW);
-        execute();
-
-        assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
-        Assert.assertTrue("Turn 3 is no extra turn ", !currentGame.getState().isExtraTurn());
-        Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerA has to be the active player but active player is: "
-                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerA.getId());
+    private void checkTurnControl(int turn, TestPlayer needTurnController, boolean isExtraTurn) {
+        runCode("checking turn " + turn, turn, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
+            Player defaultTurnController = game.getPlayer(game.getActivePlayerId());
+            Player realTurnController = defaultTurnController.getTurnControlledBy() == null ? defaultTurnController : game.getPlayer(defaultTurnController.getTurnControlledBy());
+            Assert.assertEquals(String.format("turn %d must be controlled by %s", turn, needTurnController.getName()),
+                    needTurnController.getName(), realTurnController.getName());
+            Assert.assertEquals(String.format("turn %d must be %s", turn, (isExtraTurn ? "extra turn" : "normal turn")),
+                    isExtraTurn, game.getState().isExtraTurn());
+        });
     }
 
     @Test
-    public void testEmrakulCastOnOpponentsTurnCheckTurn4() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 12);
-        addCard(Zone.GRAVEYARD, playerA, "Island", 1);
+    public void test_EmrakulMustGiveExtraTurn_OnOwnTurn() {
         // Emrakul, the Promised End costs {1} less to cast for each card type among cards in your graveyard.
         // When you cast Emrakul, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.
-        // Flying
-        // Trample
-        // Protection from instants
         addCard(Zone.HAND, playerA, "Emrakul, the Promised End", 1); // {13}
-        // Flash (You may cast this spell any time you could cast an instant.)
-        // Creature cards you own that aren't on the battlefield have flash.
-        // Each opponent can cast spells only any time they could cast a sorcery.
-        addCard(Zone.BATTLEFIELD, playerA, "Teferi, Mage of Zhalfir", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 12);
+        addCard(Zone.GRAVEYARD, playerA, "Island", 1);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");
+        // cast emrakul on own turn and take extra turn
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");
+        addTarget(playerA, playerB);
+
+        // checks for all turns
         // Turn 4 is the next turn of opponent (player B)  that player A controls
         // So Turn 5 is the extra turn for player B after Turn 4
-        setStopAt(4, PhaseStep.DRAW);
-        execute();
+        checkTurnControl(1, playerA, false);
+        checkTurnControl(2, playerB, false);
+        checkTurnControl(3, playerA, false);
+        checkTurnControl(4, playerA, false); // A take control of B's turn
+        checkTurnControl(5, playerB, true); // B take extra turn
+        checkTurnControl(6, playerA, false);
+        checkTurnControl(7, playerB, false);
 
-        assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
-        Assert.assertTrue("Turn 4 is a controlled turn ", !playerB.isGameUnderControl());
-        Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
-                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerB.getId());
+        setStrictChooseMode(true);
+        setStopAt(8, PhaseStep.END_TURN);
+        execute();
     }
 
     @Test
-    public void testEmrakulCastOnOpponentsTurnCheckTurn5() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 12);
-        addCard(Zone.GRAVEYARD, playerA, "Island", 1);
+    public void test_EmrakulMustGiveExtraTurn_OnOpponentTurn() {
         // Emrakul, the Promised End costs {1} less to cast for each card type among cards in your graveyard.
         // When you cast Emrakul, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.
-        // Flying
-        // Trample
-        // Protection from instants
         addCard(Zone.HAND, playerA, "Emrakul, the Promised End", 1); // {13}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 12);
+        addCard(Zone.GRAVEYARD, playerA, "Island", 1);
+        //
         // Flash (You may cast this spell any time you could cast an instant.)
         // Creature cards you own that aren't on the battlefield have flash.
         // Each opponent can cast spells only any time they could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerA, "Teferi, Mage of Zhalfir", 1);
 
+        // cast emrakul on opponent's turn and take extra turn
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");
+        addTarget(playerA, playerB);
+
+        // checks for all turns
         // Turn 4 is the next turn of opponent (player B)  that player A controls
         // So Turn 5 is the extra turn for player B after Turn 4
-        setStopOnTurn(5);
-        execute();
+        checkTurnControl(1, playerA, false);
+        checkTurnControl(2, playerB, false);
+        checkTurnControl(3, playerA, false);
+        checkTurnControl(4, playerA, false); // A take control of B's turn
+        checkTurnControl(5, playerB, true); // B take extra turn
+        checkTurnControl(6, playerA, false);
+        checkTurnControl(7, playerB, false);
 
-        assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
-        Assert.assertTrue("Turn 5 is an extra turn ", currentGame.getState().isExtraTurn());
-        Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
-                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerB.getId());
+        setStrictChooseMode(true);
+        setStopAt(8, PhaseStep.END_TURN);
+        execute();
     }
 
     /**
      * https://github.com/magefree/mage/issues/6824
-     *
+     * <p>
      * When you cast miracled Temporal Mastery with God-Eternal Kefnet on the
      * battlefield and copy it with it's ability you get only 1 extra turn. It
      * should be 2, since you cast Temporal Mastery with it's miracle ability +
@@ -107,9 +95,7 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
      * proceeds to next player.
      */
     @Test
-    public void testCopyMiracledTemporalMastery4TwoExtraTurns() {
-        setStrictChooseMode(true);
-
+    public void test_MiracledTemporalMastery_MustGives2ExtraTurnsWithCopy() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 7);
         // Flying
         // You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or sorcery card this way,
@@ -129,15 +115,18 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         setChoice(playerB, false); // Would you like to reveal first drawn card? (Turn 3)
         setChoice(playerB, false); // Would you like to reveal first drawn card? (Turn 4)
 
+        // turn checks
         // Turn 3 + 4 are extra turns
-        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        checkTurnControl(1, playerA, false);
+        checkTurnControl(2, playerB, false);
+        checkTurnControl(3, playerB, true); // extra turn for B
+        checkTurnControl(4, playerB, true); // extra turn for B
+        checkTurnControl(5, playerA, false);
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
         execute();
 
         assertExileCount(playerB, "Temporal Mastery", 1);
-
-        Assert.assertTrue("Turn 4 is an extra turn ", currentGame.getState().isExtraTurn());
-        Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
-                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerB.getId());
     }
-
 }

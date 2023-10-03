@@ -42,7 +42,7 @@ class LightFromWithinEffect extends ContinuousEffectImpl {
         staticText = "Each creature you control gets +1/+1 for each white mana symbol in its mana cost";
     }
 
-    public LightFromWithinEffect(final LightFromWithinEffect effect) {
+    private LightFromWithinEffect(final LightFromWithinEffect effect) {
         super(effect);
     }
 

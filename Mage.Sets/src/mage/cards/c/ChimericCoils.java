@@ -46,7 +46,7 @@ class ChimericCoilsEffect extends ContinuousEffectImpl {
         staticText = "{this} becomes an X/X Construct artifact creature";
     }
 
-    public ChimericCoilsEffect(final ChimericCoilsEffect effect) {
+    private ChimericCoilsEffect(final ChimericCoilsEffect effect) {
         super(effect);
     }
 

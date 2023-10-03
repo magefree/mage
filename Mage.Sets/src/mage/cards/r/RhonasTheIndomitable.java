@@ -76,7 +76,7 @@ class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
         staticText = "{this} can't attack or block unless you control another creature with power 4 or greater";
     }
 
-    public RhonasTheIndomitableRestrictionEffect(final RhonasTheIndomitableRestrictionEffect effect) {
+    private RhonasTheIndomitableRestrictionEffect(final RhonasTheIndomitableRestrictionEffect effect) {
         super(effect);
     }
 

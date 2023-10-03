@@ -56,7 +56,7 @@ class VirtussManeuverEffect extends OneShotEffect {
                 + "Each foe sacrifices a creature they control";
     }
 
-    VirtussManeuverEffect(final VirtussManeuverEffect effect) {
+    private VirtussManeuverEffect(final VirtussManeuverEffect effect) {
         super(effect);
     }
 

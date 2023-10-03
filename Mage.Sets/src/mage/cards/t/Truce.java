@@ -41,7 +41,7 @@ class TruceEffect extends OneShotEffect {
         this.staticText = "Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life";
     }
 
-    TruceEffect(final TruceEffect effect) {
+    private TruceEffect(final TruceEffect effect) {
         super(effect);
     }
 

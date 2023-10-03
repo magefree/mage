@@ -56,7 +56,7 @@ class ChaoticBacklashEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to target player equal to twice the number of white and/or blue permanents they control";
     }
 
-    public ChaoticBacklashEffect(final ChaoticBacklashEffect effect) {
+    private ChaoticBacklashEffect(final ChaoticBacklashEffect effect) {
         super(effect);
     }
 

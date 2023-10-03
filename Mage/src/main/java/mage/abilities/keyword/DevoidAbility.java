@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public class DevoidAbility extends SimpleStaticAbility {
@@ -20,7 +19,7 @@ public class DevoidAbility extends SimpleStaticAbility {
         setRuleAtTheTop(true);
     }
 
-    public DevoidAbility(final DevoidAbility ability) {
+    protected DevoidAbility(final DevoidAbility ability) {
         super(ability);
     }
 

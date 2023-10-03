@@ -7,6 +7,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.*;
@@ -83,16 +84,24 @@ class PredatorsHourEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        if (opponent == null) { return false; }
+        if (opponent == null) {
+            return false;
+        }
 
         MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject == null) { return false; }
+        if (sourceObject == null) {
+            return false;
+        }
 
         Card topCard = opponent.getLibrary().getFromTop(game);
-        if (topCard == null) { return false; }
+        if (topCard == null) {
+            return false;
+        }
 
         UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         topCard.setFaceDown(true, game);
@@ -119,7 +128,7 @@ class PredatorsHourEffect extends OneShotEffect {
             game.addEffect(effect, source);
 
             // For as long as that card remains exiled, you may look at it
-            effect = new PredatorsHourLookEffect(controller.getId());
+            effect = new MayLookAtTargetCardEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(topCard.getId(), game));
             game.addEffect(effect, source);
         }
@@ -153,7 +162,9 @@ class PredatorsHourPlayFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null ) { return false; }
+        if (theCard == null ) {
+            return false;
+        }
 
         // for split cards
         objectId = theCard.getMainCard().getId();
@@ -184,7 +195,9 @@ class PredatorsHourSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card theCard = game.getCard(objectId);
-        if (theCard == null) { return false; }
+        if (theCard == null) {
+            return false;
+        }
 
         // for split cards
         objectId = theCard.getMainCard().getId();
@@ -203,37 +216,5 @@ class PredatorsHourSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         return mana.getFirstAvailable();
-    }
-}
-
-class PredatorsHourLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    public PredatorsHourLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-        staticText = "You may look at the cards exiled with {this}";
-    }
-
-    private PredatorsHourLookEffect(final PredatorsHourLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) { return true; }
-
-    @Override
-    public PredatorsHourLookEffect copy() { return new PredatorsHourLookEffect(this); }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-
-        // card is no longer in the origin zone, effect can be discarded
-        if (cardId == null) { this.discard(); }
-
-        return affectedControllerId.equals(authorizedPlayerId) && objectId.equals(cardId);
     }
 }

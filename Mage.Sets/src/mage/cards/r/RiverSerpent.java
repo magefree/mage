@@ -53,7 +53,7 @@ class RiverSerpentEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless there are five or more cards in your graveyard";
     }
 
-    public RiverSerpentEffect(final RiverSerpentEffect effect) {
+    private RiverSerpentEffect(final RiverSerpentEffect effect) {
         super(effect);
     }
 

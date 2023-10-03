@@ -62,7 +62,7 @@ class GlowsporeShamanEffect extends OneShotEffect {
                 + "on top of your library.";
     }
 
-    public GlowsporeShamanEffect(final GlowsporeShamanEffect effect) {
+    private GlowsporeShamanEffect(final GlowsporeShamanEffect effect) {
         super(effect);
     }
 

@@ -60,7 +60,7 @@ public final class CrushingPain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public CrushingPain (final CrushingPain card) {
+    private CrushingPain(final CrushingPain card) {
         super(card);
     }
 

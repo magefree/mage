@@ -19,7 +19,7 @@ public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
         addAbility(new ChangelingAbility());
     }
 
-    public CribSwapShapeshifterWhiteToken(final CribSwapShapeshifterWhiteToken token) {
+    protected CribSwapShapeshifterWhiteToken(final CribSwapShapeshifterWhiteToken token) {
         super(token);
     }
 

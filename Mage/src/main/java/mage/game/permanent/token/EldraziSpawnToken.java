@@ -23,7 +23,7 @@ public final class EldraziSpawnToken extends TokenImpl {
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
     }
 
-    public EldraziSpawnToken(final EldraziSpawnToken token) {
+    protected EldraziSpawnToken(final EldraziSpawnToken token) {
         super(token);
     }
 

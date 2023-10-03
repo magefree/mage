@@ -47,7 +47,7 @@ class BriberyEffect extends OneShotEffect {
         this.staticText = "Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles";
     }
 
-    public BriberyEffect(final BriberyEffect effect) {
+    private BriberyEffect(final BriberyEffect effect) {
         super(effect);
     }
 

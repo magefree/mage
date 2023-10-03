@@ -55,7 +55,7 @@ public final class MagusOfTheMoon extends CardImpl {
             dependencyTypes.add(DependencyType.BecomeMountain);
         }
 
-        MagusOfTheMoonEffect(final MagusOfTheMoonEffect effect) {
+        private MagusOfTheMoonEffect(final MagusOfTheMoonEffect effect) {
             super(effect);
         }
 

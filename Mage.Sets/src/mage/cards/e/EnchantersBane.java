@@ -50,7 +50,7 @@ class EnchantersBaneEffect extends OneShotEffect {
                 + "unless that player sacrifices it";
     }
 
-    public EnchantersBaneEffect(final EnchantersBaneEffect effect) {
+    private EnchantersBaneEffect(final EnchantersBaneEffect effect) {
         super(effect);
     }
 

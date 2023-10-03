@@ -23,7 +23,7 @@ public final class LeatherbackBaloth extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public LeatherbackBaloth (final LeatherbackBaloth card) {
+    private LeatherbackBaloth(final LeatherbackBaloth card) {
         super(card);
     }
 

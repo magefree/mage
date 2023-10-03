@@ -39,7 +39,7 @@ public final class FiligreeSages extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FiligreeSages (final FiligreeSages card) {
+    private FiligreeSages(final FiligreeSages card) {
         super(card);
     }
 

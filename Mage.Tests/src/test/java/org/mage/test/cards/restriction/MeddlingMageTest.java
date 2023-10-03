@@ -82,8 +82,7 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         setChoice(playerA, "Ainok Tracker"); // name a spell that can't be cast
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ainok Tracker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ainok Tracker using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

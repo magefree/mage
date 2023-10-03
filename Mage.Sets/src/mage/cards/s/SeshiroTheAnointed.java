@@ -62,7 +62,7 @@ class SeshiroTheAnointedAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public SeshiroTheAnointedAbility(final SeshiroTheAnointedAbility ability) {
+    private SeshiroTheAnointedAbility(final SeshiroTheAnointedAbility ability) {
         super(ability);
     }
 

@@ -46,7 +46,7 @@ class SkipNextUntapStepSourceControllerEffect extends OneShotEffect {
         this.staticText = "Skip the untap step of that turn";
     }
 
-    public SkipNextUntapStepSourceControllerEffect(SkipNextUntapStepSourceControllerEffect effect) {
+    private SkipNextUntapStepSourceControllerEffect(final SkipNextUntapStepSourceControllerEffect effect) {
         super(effect);
     }
 
@@ -54,7 +54,7 @@ class SkipNextUntapStepSourceControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.getState().getTurnMods().add(new TurnMod(controller.getId(), PhaseStep.UNTAP));
+            game.getState().getTurnMods().add(new TurnMod(controller.getId()).withSkipStep(PhaseStep.UNTAP));
             return true;
         }
         return false;

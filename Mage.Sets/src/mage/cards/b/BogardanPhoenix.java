@@ -58,7 +58,7 @@ class BogardanPhoenixEffect extends OneShotEffect {
                 + "and put a death counter on it.";
     }
 
-    public BogardanPhoenixEffect(final BogardanPhoenixEffect effect) {
+    private BogardanPhoenixEffect(final BogardanPhoenixEffect effect) {
         super(effect);
     }
 

@@ -55,7 +55,7 @@ class SecretSalvageEffect extends OneShotEffect {
                 "reveal them, put them into your hand, then shuffle";
     }
 
-    public SecretSalvageEffect(final SecretSalvageEffect effect) {
+    private SecretSalvageEffect(final SecretSalvageEffect effect) {
         super(effect);
     }
 

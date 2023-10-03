@@ -68,7 +68,7 @@ class FullMoonsRiseEffect extends OneShotEffect {
         staticText = "Regenerate all Werewolf creatures you control";
     }
 
-    public FullMoonsRiseEffect(final FullMoonsRiseEffect effect) {
+    private FullMoonsRiseEffect(final FullMoonsRiseEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

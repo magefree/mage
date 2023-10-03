@@ -59,7 +59,7 @@ class ScionOfDarknessTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
     }
 
-    public ScionOfDarknessTriggeredAbility(final ScionOfDarknessTriggeredAbility ability) {
+    private ScionOfDarknessTriggeredAbility(final ScionOfDarknessTriggeredAbility ability) {
         super(ability);
     }
 

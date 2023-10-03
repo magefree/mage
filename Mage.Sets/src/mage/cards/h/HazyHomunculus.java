@@ -2,9 +2,10 @@
 package mage.cards.h;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.DefendingPlayerControlsCondition;
+import mage.abilities.condition.common.DefendingPlayerControlsSourceAttackingCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -18,7 +19,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
- *
  * @author North
  */
 public final class HazyHomunculus extends CardImpl {
@@ -30,7 +30,7 @@ public final class HazyHomunculus extends CardImpl {
     }
 
     public HazyHomunculus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HOMUNCULUS);
         this.subtype.add(SubType.ILLUSION);
 
@@ -40,7 +40,7 @@ public final class HazyHomunculus extends CardImpl {
         // Hazy Homunculus can't be blocked as long as defending player controls an untapped land.
         Effect effect = new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(),
-                new DefendingPlayerControlsCondition(filter));
+                new DefendingPlayerControlsSourceAttackingCondition(filter));
         effect.setText("{this} can't be blocked as long as defending player controls an untapped land");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

@@ -46,7 +46,7 @@ class MysticGenesisEffect extends OneShotEffect {
         staticText = "Counter target spell. Create an X/X green Ooze creature token, where X is that spell's mana value";
     }
 
-    public MysticGenesisEffect(final MysticGenesisEffect effect) {
+    private MysticGenesisEffect(final MysticGenesisEffect effect) {
         super(effect);
     }
 

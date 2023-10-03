@@ -58,7 +58,7 @@ class QuarryHaulerEffect extends OneShotEffect {
 
     }
 
-    public QuarryHaulerEffect(final QuarryHaulerEffect effect) {
+    private QuarryHaulerEffect(final QuarryHaulerEffect effect) {
         super(effect);
     }
 

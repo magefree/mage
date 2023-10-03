@@ -47,7 +47,7 @@ class CamaraderieEffect extends OneShotEffect {
                 + "Creatures you control get +1/+1 until end of turn.";
     }
 
-    public CamaraderieEffect(final CamaraderieEffect effect) {
+    private CamaraderieEffect(final CamaraderieEffect effect) {
         super(effect);
     }
 

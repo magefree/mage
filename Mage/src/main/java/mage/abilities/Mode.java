@@ -17,6 +17,12 @@ public class Mode implements Serializable {
     protected final Targets targets;
     protected final Effects effects;
     protected String flavorWord;
+    /**
+     * Optional Tag to distinguish this mode from others.
+     * In the case of modes that players can only choose once,
+     * the tag is directly what is displayed in ModesAlreadyUsedHint
+     */
+    protected String modeTag;
 
     public Mode(Effect effect) {
         this.id = UUID.randomUUID();
@@ -27,11 +33,12 @@ public class Mode implements Serializable {
         }
     }
 
-    public Mode(final Mode mode) {
+    protected Mode(final Mode mode) {
         this.id = mode.id;
         this.targets = mode.targets.copy();
         this.effects = mode.effects.copy();
         this.flavorWord = mode.flavorWord;
+        this.modeTag = mode.modeTag;
     }
 
     public UUID setRandomId() {
@@ -69,6 +76,21 @@ public class Mode implements Serializable {
     public Mode addEffect(Effect effect) {
         effects.add(effect);
         return this;
+    }
+
+    /**
+     * Tag the mode to be retrieved elsewhere thanks to the tag.
+     */
+    public Mode setModeTag(String tag) {
+        this.modeTag = tag;
+        return this;
+    }
+
+    /**
+     * @return the mode tag for this mode, if set
+     */
+    public String getModeTag() {
+        return this.modeTag == null ? "" : this.modeTag;
     }
 
     public String getFlavorWord() {

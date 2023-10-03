@@ -78,7 +78,7 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
         staticText = "If a nontoken creature an opponent controls would die, instead exile that card and create a 2/2 black Zombie creature token";
     }
 
-    public KalitasTraitorOfGhetEffect(final KalitasTraitorOfGhetEffect effect) {
+    private KalitasTraitorOfGhetEffect(final KalitasTraitorOfGhetEffect effect) {
         super(effect);
     }
 

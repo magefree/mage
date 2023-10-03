@@ -59,7 +59,7 @@ class TheFlameOfKeldDamageEffect extends ReplacementEffectImpl {
         this.staticText = "If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 to that permanent or player instead";
     }
 
-    public TheFlameOfKeldDamageEffect(final TheFlameOfKeldDamageEffect effect) {
+    private TheFlameOfKeldDamageEffect(final TheFlameOfKeldDamageEffect effect) {
         super(effect);
     }
 

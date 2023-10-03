@@ -16,9 +16,10 @@ public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             setTriggerPhrase("Whenever {this} attacks or blocks, ");
         }
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
-    public AttacksOrBlocksTriggeredAbility(final AttacksOrBlocksTriggeredAbility ability) {
+    protected AttacksOrBlocksTriggeredAbility(final AttacksOrBlocksTriggeredAbility ability) {
         super(ability);
     }
 

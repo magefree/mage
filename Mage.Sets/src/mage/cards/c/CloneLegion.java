@@ -48,7 +48,7 @@ class CloneLegionEffect extends OneShotEffect {
         this.staticText = "For each creature target player controls, create a token that's a copy of that creature";
     }
 
-    public CloneLegionEffect(final CloneLegionEffect effect) {
+    private CloneLegionEffect(final CloneLegionEffect effect) {
         super(effect);
     }
 

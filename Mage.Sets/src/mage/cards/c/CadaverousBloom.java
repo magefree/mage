@@ -51,7 +51,7 @@ class CadaverousBloomManaEffect extends BasicManaEffect {
         super(mana);
     }
 
-    public CadaverousBloomManaEffect(final CadaverousBloomManaEffect effect) {
+    private CadaverousBloomManaEffect(final CadaverousBloomManaEffect effect) {
         super(effect);
     }
 
@@ -68,14 +68,17 @@ class CadaverousBloomManaEffect extends BasicManaEffect {
             if (player != null) {
                 int count = player.getHand().size();          
                 if (count > 0) {
+                    Mana newManaTemplate = getManaTemplate(); // returns a copy so only copying once for below checks
                     Mana mana = new Mana(
-                            getManaTemplate().getWhite() * count, getManaTemplate().getBlue() * count, getManaTemplate().getBlack() * count, getManaTemplate().getRed() * count,
-                            getManaTemplate().getGreen() * count,
-                            getManaTemplate().getGeneric() * count,
-                            getManaTemplate().getAny() * count,
-                            getManaTemplate().getColorless() * count
+                            newManaTemplate.getWhite() * count,
+                            newManaTemplate.getBlue() * count,
+                            newManaTemplate.getBlack() * count,
+                            newManaTemplate.getRed() * count,
+                            newManaTemplate.getGreen() * count,
+                            newManaTemplate.getGeneric() * count,
+                            newManaTemplate.getAny() * count,
+                            newManaTemplate.getColorless() * count
                     );
-                        
                     netMana.add(mana);
                 }
             }

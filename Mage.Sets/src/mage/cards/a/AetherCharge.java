@@ -54,7 +54,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AetherChargeEffect(), true); // is optional
     }
 
-    public AetherChargeTriggeredAbility(AetherChargeTriggeredAbility ability) {
+    private AetherChargeTriggeredAbility(final AetherChargeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,7 +93,7 @@ class AetherChargeEffect extends OneShotEffect {
         staticText = "you may have it deal 4 damage to target opponent or planeswalker";
     }
 
-    public AetherChargeEffect(final AetherChargeEffect effect) {
+    private AetherChargeEffect(final AetherChargeEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class AetherChargeEffect extends OneShotEffect {
             creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
         }
         if (creature != null) {
-            return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 4, creature.getId(), source, game, false, true) > 0;
+            return game.damagePlayerOrPermanent(source.getFirstTarget(), 4, creature.getId(), source, game, false, true) > 0;
         }
         return false;
     }

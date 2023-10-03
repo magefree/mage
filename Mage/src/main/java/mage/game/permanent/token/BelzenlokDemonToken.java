@@ -35,7 +35,7 @@ public final class BelzenlokDemonToken extends TokenImpl {
         addAbility(new BeginningOfUpkeepTriggeredAbility(new BelzenlokDemonTokenEffect(), TargetController.YOU, false));
     }
 
-    public BelzenlokDemonToken(final BelzenlokDemonToken token) {
+    protected BelzenlokDemonToken(final BelzenlokDemonToken token) {
         super(token);
     }
 

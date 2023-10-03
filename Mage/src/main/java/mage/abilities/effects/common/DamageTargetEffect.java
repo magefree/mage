@@ -86,7 +86,7 @@ public class DamageTargetEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public DamageTargetEffect(final DamageTargetEffect effect) {
+    protected DamageTargetEffect(final DamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.preventable = effect.preventable;
@@ -178,7 +178,10 @@ public class DamageTargetEffect extends OneShotEffect {
                             sb.append(' ');
                         }
                     }
-                    sb.append("target ").append(targetName);
+                    if (!targetName.contains("target ")) {
+                        sb.append("target ");
+                    }
+                    sb.append(targetName);
                 }
             } else {
                 sb.append("that target");

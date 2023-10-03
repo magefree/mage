@@ -33,7 +33,7 @@ public class WhenTargetDiesDelayedTriggeredAbility extends DelayedTriggeredAbili
         setTriggerPhrase("When that creature dies" + (duration == Duration.EndOfTurn ? " this turn, " : ", "));
     }
 
-    public WhenTargetDiesDelayedTriggeredAbility(final WhenTargetDiesDelayedTriggeredAbility ability) {
+    protected WhenTargetDiesDelayedTriggeredAbility(final WhenTargetDiesDelayedTriggeredAbility ability) {
         super(ability);
         this.mor = ability.mor;
         this.setTargetPointer = ability.setTargetPointer;

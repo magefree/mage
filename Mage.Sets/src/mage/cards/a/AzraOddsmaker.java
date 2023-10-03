@@ -64,7 +64,7 @@ class AzraOddsmakerEffect extends OneShotEffect {
         this.staticText = "choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards";
     }
 
-    public AzraOddsmakerEffect(final AzraOddsmakerEffect effect) {
+    private AzraOddsmakerEffect(final AzraOddsmakerEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class AzraOddsmakerEffect extends OneShotEffect {
         }
         Permanent permanent = null;
         TargetCreaturePermanent target = new TargetCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (player.choose(Outcome.DrawCard, target, source, game)) {
             permanent = game.getPermanent(target.getFirstTarget());
         }
@@ -107,7 +107,7 @@ class AzraOddsmakerDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.creatureName = creatureName;
     }
 
-    public AzraOddsmakerDelayedTriggeredAbility(final AzraOddsmakerDelayedTriggeredAbility ability) {
+    private AzraOddsmakerDelayedTriggeredAbility(final AzraOddsmakerDelayedTriggeredAbility ability) {
         super(ability);
         this.mor = ability.mor;
         this.creatureName = ability.creatureName;

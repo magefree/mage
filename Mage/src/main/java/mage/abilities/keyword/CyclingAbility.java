@@ -33,7 +33,7 @@ public class CyclingAbility extends ActivatedAbilityImpl {
         this.text = text;
     }
 
-    public CyclingAbility(final CyclingAbility ability) {
+    protected CyclingAbility(final CyclingAbility ability) {
         super(ability);
         this.cost = ability.cost;
         this.text = ability.text;

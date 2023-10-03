@@ -71,7 +71,7 @@ class JokulmorderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new UntapSourceEffect(), true);
     }
 
-    JokulmorderTriggeredAbility(JokulmorderTriggeredAbility ability) {
+    private JokulmorderTriggeredAbility(final JokulmorderTriggeredAbility ability) {
         super(ability);
     }
 

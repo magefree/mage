@@ -3,6 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,6 +22,9 @@ public final class IthilienKingfisher extends CardImpl {
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
         // When Ithilien Kingfisher dies, draw a card.
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));

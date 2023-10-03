@@ -54,7 +54,7 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetArtifactPermanent());
     }
 
-    public TuktukScrapperTriggeredAbility(final TuktukScrapperTriggeredAbility ability) {
+    private TuktukScrapperTriggeredAbility(final TuktukScrapperTriggeredAbility ability) {
         super(ability);
     }
 
@@ -104,7 +104,7 @@ class TuktukScrapperEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
     }
 
-    public TuktukScrapperEffect(final TuktukScrapperEffect effect) {
+    private TuktukScrapperEffect(final TuktukScrapperEffect effect) {
         super(effect);
     }
 

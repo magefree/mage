@@ -3,6 +3,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -10,7 +11,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class RemoveSpecialActionEffect extends OneShotEffect {
@@ -22,7 +22,7 @@ public class RemoveSpecialActionEffect extends OneShotEffect {
         this.actionId = actionId;
     }
 
-    public RemoveSpecialActionEffect(final RemoveSpecialActionEffect effect) {
+    protected RemoveSpecialActionEffect(final RemoveSpecialActionEffect effect) {
         super(effect);
         this.actionId = effect.actionId;
     }
@@ -34,7 +34,7 @@ public class RemoveSpecialActionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (SpecialAction action: game.getState().getSpecialActions()) {
+        for (SpecialAction action : game.getState().getSpecialActions()) {
             if (action.getId().equals(actionId)) {
                 game.getState().getSpecialActions().remove(action);
                 break;

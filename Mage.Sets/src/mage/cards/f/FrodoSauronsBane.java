@@ -44,7 +44,7 @@ public final class FrodoSauronsBane extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new ConditionalOneShotEffect(new AddContinuousEffectToGame(
                         new AddCardSubTypeSourceEffect(Duration.Custom, SubType.HALFLING, SubType.SCOUT),
-                        new SetBasePowerToughnessSourceEffect(2, 3, Duration.Custom, SubLayer.SetPT_7b),
+                        new SetBasePowerToughnessSourceEffect(2, 3, Duration.Custom),
                         new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.Custom)
                 ), condition1, "if {this} is a Citizen, it becomes a Halfling Scout with base power and toughness 2/3 and lifelink"),
                 new ManaCostsImpl<>("{W/B}{W/B}")

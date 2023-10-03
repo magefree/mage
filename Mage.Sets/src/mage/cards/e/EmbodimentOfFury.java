@@ -74,7 +74,7 @@ class EmbodimentOfFuryToken extends TokenImpl {
         this.toughness = new MageInt(3);
         this.addAbility(HasteAbility.getInstance());
     }
-    public EmbodimentOfFuryToken(final EmbodimentOfFuryToken token) {
+    private EmbodimentOfFuryToken(final EmbodimentOfFuryToken token) {
         super(token);
     }
 

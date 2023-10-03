@@ -74,7 +74,7 @@ class BaruFistOfKrosaEffect extends OneShotEffect {
         this.staticText = "create an X/X green Wurm creature token, where X is the number of lands you control.";
     }
 
-    BaruFistOfKrosaEffect(final BaruFistOfKrosaEffect effect) {
+    private BaruFistOfKrosaEffect(final BaruFistOfKrosaEffect effect) {
         super(effect);
     }
 

@@ -60,7 +60,7 @@ class VengefulArchonEffect extends PreventDamageToControllerEffect {
         staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player or planeswalker";
     }
 
-    public VengefulArchonEffect(final VengefulArchonEffect effect) {
+    private VengefulArchonEffect(final VengefulArchonEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class VengefulArchonEffect extends PreventDamageToControllerEffect {
         PreventionEffectData preventionEffectData = super.preventDamageAction(event, source, game);
         int damage = preventionEffectData.getPreventedDamage();
         if (damage > 0) {
-            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
+            game.damagePlayerOrPermanent(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
         }
         return preventionEffectData;
     }

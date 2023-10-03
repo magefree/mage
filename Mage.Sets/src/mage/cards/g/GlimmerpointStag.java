@@ -70,7 +70,7 @@ class GlimmerpointStagEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    GlimmerpointStagEffect(GlimmerpointStagEffect effect) {
+    private GlimmerpointStagEffect(final GlimmerpointStagEffect effect) {
         super(effect);
     }
 

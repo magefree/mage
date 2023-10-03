@@ -55,7 +55,7 @@ class ChaosWandEffect extends OneShotEffect {
                 + "bottom of that library in a random order.";
     }
 
-    public ChaosWandEffect(final ChaosWandEffect effect) {
+    private ChaosWandEffect(final ChaosWandEffect effect) {
         super(effect);
     }
 

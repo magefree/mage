@@ -49,7 +49,7 @@ class DreadSlaverEffect extends OneShotEffect {
         staticText = "return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types";
     }
 
-    public DreadSlaverEffect(final DreadSlaverEffect effect) {
+    private DreadSlaverEffect(final DreadSlaverEffect effect) {
         super(effect);
     }
 

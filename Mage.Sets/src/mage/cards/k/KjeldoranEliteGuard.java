@@ -9,7 +9,6 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -48,7 +47,7 @@ public final class KjeldoranEliteGuard extends CardImpl {
     private KjeldoranEliteGuard(final KjeldoranEliteGuard card) { super(card); }
 
     @Override
-    public Card copy() {
+    public KjeldoranEliteGuard copy() {
         return new KjeldoranEliteGuard(this);
     }
 }
@@ -64,7 +63,9 @@ class KjeldoranEliteGuardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getPermanent(source.getFirstTarget()) == null) { return false; }
+        if (game.getPermanent(source.getFirstTarget()) == null) {
+            return false;
+        }
 
         // Target creature gets +2/+2 until end of turn.
         BoostTargetEffect buffEffect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
@@ -94,7 +95,7 @@ class KjeldoranEliteGuardDelayedTriggeredAbility extends DelayedTriggeredAbility
         this.creatureId = creatureId;
     }
 
-    KjeldoranEliteGuardDelayedTriggeredAbility(KjeldoranEliteGuardDelayedTriggeredAbility ability) {
+    private KjeldoranEliteGuardDelayedTriggeredAbility(final KjeldoranEliteGuardDelayedTriggeredAbility ability) {
         super(ability);
         this.creatureId = ability.creatureId;
     }

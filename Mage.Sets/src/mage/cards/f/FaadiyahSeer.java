@@ -57,7 +57,7 @@ class FaadiyahSeerEffect extends OneShotEffect {
         this.staticText = "Draw a card and reveal it. If it isn't a land card, discard it";
     }
 
-    public FaadiyahSeerEffect(final FaadiyahSeerEffect effect) {
+    private FaadiyahSeerEffect(final FaadiyahSeerEffect effect) {
         super(effect);
     }
 

@@ -35,7 +35,7 @@ public final class DeepGnomeTerramancer extends CardImpl {
         // Whenever one or more lands enter the battlefield under an opponent's control
         // without being played, you may search your library for a Plains card, put it
         // onto the battlefield tapped, then shuffle. Do this only once each turn.
-        this.addAbility(new DeepGnomeTerramancerTriggeredAbility().setDoOnlyOnce(true), new PlayLandWatcher());
+        this.addAbility(new DeepGnomeTerramancerTriggeredAbility().setDoOnlyOnceEachTurn(true), new PlayLandWatcher());
     }
 
     private DeepGnomeTerramancer(final DeepGnomeTerramancer card) {
@@ -59,7 +59,7 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
         addEffect(new SearchLibraryPutInPlayEffect(target, true));
     }
 
-    DeepGnomeTerramancerTriggeredAbility(DeepGnomeTerramancerTriggeredAbility ability) {
+    private DeepGnomeTerramancerTriggeredAbility(final DeepGnomeTerramancerTriggeredAbility ability) {
         super(ability);
     }
 

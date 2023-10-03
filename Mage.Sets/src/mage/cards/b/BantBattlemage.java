@@ -41,7 +41,7 @@ public final class BantBattlemage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BantBattlemage (final BantBattlemage card) {
+    private BantBattlemage(final BantBattlemage card) {
         super(card);
     }
 

@@ -16,7 +16,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -62,7 +62,7 @@ class RagingRiverEffect extends OneShotEffect {
         staticText = "each defending player divides all creatures without flying they control into a \"left\" pile and a \"right\" pile. Then, for each attacking creature you control, choose \"left\" or \"right.\" That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label";
     }
 
-    public RagingRiverEffect(final RagingRiverEffect effect) {
+    private RagingRiverEffect(final RagingRiverEffect effect) {
         super(effect);
     }
 
@@ -136,10 +136,10 @@ class RagingRiverEffect extends OneShotEffect {
 
 
                                 if (controller.choosePile(outcome, attacker.getName() + ": attacking " + defender.getName(), leftLog, rightLog, game)) {
-                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentInListPredicate(left))));
+                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(left, game))));
                                     game.informPlayers(attacker.getLogName() + ": attacks left (" + defender.getLogName() + ")");
                                 } else {
-                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentInListPredicate(right))));
+                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(right, game))));
                                     game.informPlayers(attacker.getLogName() + ": attacks right (" + defender.getLogName() + ")");
                                 }
                             }

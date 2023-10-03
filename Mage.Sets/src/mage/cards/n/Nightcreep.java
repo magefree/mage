@@ -48,7 +48,7 @@ class NightcreepLandEffect extends BecomesBasicLandTargetEffect {
         this.staticText = "and all lands become Swamps";
     }
 
-    public NightcreepLandEffect(NightcreepLandEffect effect) {
+    private NightcreepLandEffect(final NightcreepLandEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class NightcreepCreatureEffect extends BecomesColorTargetEffect {
         this.staticText = "Until end of turn, all creatures become black";
     }
 
-    public NightcreepCreatureEffect(NightcreepCreatureEffect effect) {
+    private NightcreepCreatureEffect(final NightcreepCreatureEffect effect) {
         super(effect);
     }
 

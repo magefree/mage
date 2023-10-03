@@ -27,7 +27,7 @@ public final class BlackcleaveGoblin extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public BlackcleaveGoblin (final BlackcleaveGoblin card) {
+    private BlackcleaveGoblin(final BlackcleaveGoblin card) {
         super(card);
     }
 

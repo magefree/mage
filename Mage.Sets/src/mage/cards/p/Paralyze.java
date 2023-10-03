@@ -56,10 +56,10 @@ public final class Paralyze extends CardImpl {
 class ParalyzeEffect extends DoIfCostPaid {
 
     public ParalyzeEffect() {
-        super(new UntapEnchantedEffect(), new GenericManaCost(4));
+        super(new UntapAttachedEffect(), new GenericManaCost(4));
     }
 
-    public ParalyzeEffect(final ParalyzeEffect effect) {
+    private ParalyzeEffect(final ParalyzeEffect effect) {
         super(effect);
     }
 

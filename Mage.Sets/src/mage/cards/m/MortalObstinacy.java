@@ -70,7 +70,7 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever enchanted creature deals combat damage to a player, ");
     }
 
-    public MortalObstinacyAbility(final MortalObstinacyAbility ability) {
+    private MortalObstinacyAbility(final MortalObstinacyAbility ability) {
         super(ability);
     }
 

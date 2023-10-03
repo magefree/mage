@@ -72,7 +72,7 @@ class HomaridTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("Whenever there are four tide counters on {this}, ");
     }
 
-    public HomaridTriggeredAbility(final HomaridTriggeredAbility ability) {
+    private HomaridTriggeredAbility(final HomaridTriggeredAbility ability) {
         super(ability);
     }
 

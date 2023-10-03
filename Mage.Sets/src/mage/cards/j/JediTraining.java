@@ -56,7 +56,7 @@ class JediTrainingTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ScryEffect(1));
     }
 
-    public JediTrainingTriggeredAbility(final JediTrainingTriggeredAbility ability) {
+    private JediTrainingTriggeredAbility(final JediTrainingTriggeredAbility ability) {
         super(ability);
     }
 

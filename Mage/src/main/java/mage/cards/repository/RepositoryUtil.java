@@ -29,11 +29,12 @@ public final class RepositoryUtil {
         TokenRepository.instance.getAll().size();
 
         // stats
+        int totalSets = ExpansionRepository.instance.getAll().size();
         int totalCards = CardRepository.instance.findCards(new CardCriteria().nightCard(false)).size()
                 + CardRepository.instance.findCards(new CardCriteria().nightCard(true)).size();
         logger.info("Database stats:");
-        logger.info(" - sets: " + ExpansionRepository.instance.getAll().size());
-        logger.info(" - cards: " + totalCards);
+        logger.info(" - sets: " + (totalSets == 0 ? "updating" : totalSets));
+        logger.info(" - cards: " + (totalCards == 0 ? "updating" : totalCards));
         logger.info(" - tokens: " + TokenRepository.instance.getByType(TokenType.TOKEN).size());
         logger.info(" - emblems: " + TokenRepository.instance.getByType(TokenType.EMBLEM).size());
         logger.info(" - planes: " + TokenRepository.instance.getByType(TokenType.PLANE).size());

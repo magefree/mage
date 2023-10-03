@@ -14,7 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ public final class TerraRavager extends CardImpl {
     private static final FilterPermanent filter = new FilterLandPermanent("lands defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
@@ -41,7 +41,7 @@ public final class TerraRavager extends CardImpl {
 
         // Whenever Terra Ravager attacks, it gets +X/+0 until end of turn, where X is the number of lands defending player controls.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"
+                xValue, StaticValue.get(0), Duration.EndOfTurn, "it"
         ), false));
     }
 

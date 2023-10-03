@@ -1,10 +1,8 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -12,9 +10,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +32,8 @@ public final class EternalScourge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.EXILED, new EternalScourgePlayEffect()));
 
         // When Eternal Scourge becomes the target of a spell or ability an opponent controls, exile Eternal Scourge.
-        this.addAbility(new EternalScourgeAbility());
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new ExileSourceEffect(),
+                StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS));
     }
 
     private EternalScourge(final EternalScourge card) {
@@ -53,7 +53,7 @@ class EternalScourgePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from exile";
     }
 
-    public EternalScourgePlayEffect(final EternalScourgePlayEffect effect) {
+    private EternalScourgePlayEffect(final EternalScourgePlayEffect effect) {
         super(effect);
     }
 
@@ -76,39 +76,5 @@ class EternalScourgePlayEffect extends AsThoughEffectImpl {
             }
         }
         return false;
-    }
-}
-
-class EternalScourgeAbility extends TriggeredAbilityImpl {
-
-    public EternalScourgeAbility() {
-        super(Zone.BATTLEFIELD, new ExileSourceEffect(), false);
-    }
-
-    public EternalScourgeAbility(final EternalScourgeAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EternalScourgeAbility copy() {
-        return new EternalScourgeAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes the target of a spell or ability an opponent controls, exile {this}.";
     }
 }

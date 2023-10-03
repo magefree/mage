@@ -33,7 +33,7 @@ public final class DeemWorthy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeemWorthy(final DeemWorthy card) {
+    private DeemWorthy(final DeemWorthy card) {
         super(card);
     }
 

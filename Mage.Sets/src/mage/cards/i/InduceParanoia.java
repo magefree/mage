@@ -53,7 +53,7 @@ class InduceParanoiaEffect extends OneShotEffect {
         this.staticText = "Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's mana value.";
     }
 
-    InduceParanoiaEffect(final InduceParanoiaEffect effect) {
+    private InduceParanoiaEffect(final InduceParanoiaEffect effect) {
         super(effect);
     }
 

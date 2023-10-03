@@ -34,7 +34,6 @@ public final class Seedtime extends CardImpl {
 
         // Take an extra turn after this one if an opponent cast a blue spell this turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new AddExtraTurnControllerEffect(), OpponentCastBlueSpellThisTurnCondition.instance, rule2));
-        this.getSpellAbility().addWatcher(new SpellsCastWatcher());
 
     }
 

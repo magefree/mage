@@ -62,7 +62,7 @@ class MordantDragonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MordantDragonEffect(), true);
     }
 
-    public MordantDragonTriggeredAbility(final MordantDragonTriggeredAbility ability) {
+    private MordantDragonTriggeredAbility(final MordantDragonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -110,7 +110,7 @@ class MordantDragonEffect extends OneShotEffect {
         staticText = "it deals that much damage to target creature that player controls";
     }
 
-    public MordantDragonEffect(final MordantDragonEffect effect) {
+    private MordantDragonEffect(final MordantDragonEffect effect) {
         super(effect);
     }
 

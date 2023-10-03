@@ -58,7 +58,7 @@ class TrevaTheRenewerEffect extends OneShotEffect {
         this.staticText = "choose a color, then you gain 1 life for each permanent of that color.";
     }
 
-    public TrevaTheRenewerEffect(final TrevaTheRenewerEffect effect) {
+    private TrevaTheRenewerEffect(final TrevaTheRenewerEffect effect) {
         super(effect);
     }
 

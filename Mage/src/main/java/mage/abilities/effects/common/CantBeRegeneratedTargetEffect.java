@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -8,7 +7,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -20,18 +18,13 @@ public class CantBeRegeneratedTargetEffect extends ContinuousRuleModifyingEffect
         super(duration, Outcome.Benefit, false, false);
     }
 
-    public CantBeRegeneratedTargetEffect(final CantBeRegeneratedTargetEffect effect) {
+    protected CantBeRegeneratedTargetEffect(final CantBeRegeneratedTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public CantBeRegeneratedTargetEffect copy() {
         return new CantBeRegeneratedTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -49,10 +42,7 @@ public class CantBeRegeneratedTargetEffect extends ContinuousRuleModifyingEffect
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"));
         sb.append(" can't be regenerated");
         if (!duration.toString().isEmpty()) {
             if (duration == Duration.EndOfTurn) {

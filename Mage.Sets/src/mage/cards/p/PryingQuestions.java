@@ -47,7 +47,7 @@ class PryingQuestionsEffect extends OneShotEffect {
         this.staticText = "puts a card from their hand on top of their library";
     }
 
-    public PryingQuestionsEffect(final PryingQuestionsEffect effect) {
+    private PryingQuestionsEffect(final PryingQuestionsEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class PryingQuestionsEffect extends OneShotEffect {
         if (targetOpponent != null) {
             if (!targetOpponent.getHand().isEmpty()) {
                 TargetCardInHand target = new TargetCardInHand();
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.setTargetName("a card from your hand to put on top of your library");
                 targetOpponent.choose(Outcome.Detriment, target, source, game);
                 Card card = targetOpponent.getHand().get(target.getFirstTarget(), game);

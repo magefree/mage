@@ -47,7 +47,7 @@ class ThoughtweftGambitEffect extends OneShotEffect {
         staticText = "Tap all creatures your opponents control and untap all creatures you control";
     }
 
-    public ThoughtweftGambitEffect(final ThoughtweftGambitEffect effect) {
+    private ThoughtweftGambitEffect(final ThoughtweftGambitEffect effect) {
         super(effect);
     }
 

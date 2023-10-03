@@ -76,7 +76,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private SpecialActions specialActions;
     private Watchers watchers;
     private Turn turn;
-    private TurnMods turnMods;
+    private TurnMods turnMods; // one time turn modifications (turn, phase or step)
     private UUID activePlayerId; // playerId which turn it is
     private UUID priorityPlayerId; // player that has currently priority
     private UUID playerByOrderId; // player that has currently priority
@@ -91,8 +91,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Battlefield battlefield;
     private int turnNum = 1;
     private int stepNum = 0;
-    private UUID turnId = null;
-    private boolean extraTurn = false;
+    private UUID extraTurnId = null; // id of the current extra turn (null on normal turn or after game stopped)
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
@@ -136,7 +135,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         applyEffectsCounter = 0;
     }
 
-    public GameState(final GameState state) {
+    protected GameState(final GameState state) {
         this.players = state.players.copy();
         this.playerList = state.playerList.copy();
         this.choosingPlayerId = state.choosingPlayerId;
@@ -162,7 +161,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.extraTurn = state.extraTurn;
+        this.extraTurnId = state.extraTurnId;
         this.effects = state.effects.copy();
         for (TriggeredAbility trigger : state.triggered) {
             this.triggered.add(trigger.copy());
@@ -229,7 +228,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         companion.clear();
         turnNum = 1;
         stepNum = 0;
-        extraTurn = false;
+        extraTurnId = null;
         gameOver = false;
         specialActions.clear();
         cardState.clear();
@@ -265,7 +264,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.extraTurn = state.extraTurn;
+        this.extraTurnId = state.extraTurnId;
         this.effects = state.effects;
         this.triggered = state.triggered;
         this.triggers = state.triggers;
@@ -616,20 +615,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnNum = turnNum;
     }
 
-    public UUID getTurnId() {
-        return this.turnId;
+    public UUID getExtraTurnId() {
+        return this.extraTurnId;
     }
 
-    public void setTurnId(UUID turnId) {
-        this.turnId = turnId;
+    public void setExtraTurnId(UUID extraTurnId) {
+        this.extraTurnId = extraTurnId;
     }
 
     public boolean isExtraTurn() {
-        return extraTurn;
-    }
-
-    public void setExtraTurn(boolean extraTurn) {
-        this.extraTurn = extraTurn;
+        return this.extraTurnId != null;
     }
 
     public boolean isGameOver() {
@@ -660,10 +655,19 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.gameOver = true;
     }
 
-    // 608.2e
+    /**
+     * Must be called between effects/steps in the ability's resolve
+     * <p>
+     * 608.2e
+     * Some spells and abilities have multiple steps or actions, denoted by separate sentences or clauses,
+     * that involve multiple players. In these cases, the choices for the first action are made in APNAP order,
+     * and then the first action is processed simultaneously. Then the choices for the second action are made in
+     * APNAP order, and then that action is processed simultaneously, and so on. See rule 101.4.
+     */
     public void processAction(Game game) {
         game.getState().handleSimultaneousEvent(game);
         game.applyEffects();
+        game.getState().getTriggers().checkStateTriggers(game);
     }
 
     public void applyEffects(Game game) {
@@ -813,20 +817,46 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
-        // combine damages per type (player or permanent)
-        boolean flag = false;
+        // Combine multiple damage events in the single event (batch)
+        // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
+        // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
+        //
+        // Warning, one event can be stored in multiple batches,
+        // example: DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
+
+        boolean isPlayerDamage = damagedEvent instanceof DamagedPlayerEvent;
+
+        // existing batch
+        boolean isDamageBatchUsed = false;
+        boolean isPlayerBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
+
+            // per damage type
             if ((event instanceof DamagedBatchEvent)
                     && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
-                // old batch
                 ((DamagedBatchEvent) event).addEvent(damagedEvent);
-                flag = true;
-                break;
+                isDamageBatchUsed = true;
+            }
+
+            // per player
+            if (isPlayerDamage && event instanceof DamagedBatchForOnePlayerEvent) {
+                DamagedBatchForOnePlayerEvent oldPlayerBatch = (DamagedBatchForOnePlayerEvent) event;
+                if (oldPlayerBatch.getDamageClazz().isInstance(damagedEvent)
+                        && event.getPlayerId().equals(damagedEvent.getTargetId())) {
+                    oldPlayerBatch.addEvent(damagedEvent);
+                    isPlayerBatchUsed = true;
+                }
             }
         }
-        if (!flag) {
-            // new batch
+
+        // new batch
+        if (!isDamageBatchUsed) {
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
+        }
+        if (!isPlayerBatchUsed && isPlayerDamage) {
+            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent.getTargetId());
+            event.addEvent(damagedEvent);
+            addSimultaneousEvent(event, game);
         }
     }
 
@@ -1183,8 +1213,6 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      */
     public void addOtherAbility(Card attachedTo, Ability ability) {
-        checkWrongDynamicAbilityUsage(attachedTo, ability);
-
         addOtherAbility(attachedTo, ability, true);
     }
 
@@ -1202,6 +1230,12 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         Ability newAbility;
         if (ability instanceof MageSingleton || !copyAbility) {
+            // Avoid adding another instance of an ability where multiple copies are redundant
+            if (attachedTo.getAbilities().contains(ability)
+                    || (getAllOtherAbilities(attachedTo.getId()) != null
+                    && getAllOtherAbilities(attachedTo.getId()).contains(ability))) {
+                return;
+            }
             newAbility = ability;
         } else {
             // must use new id, so you can add multiple instances of the same ability

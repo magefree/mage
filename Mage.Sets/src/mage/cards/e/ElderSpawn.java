@@ -68,7 +68,7 @@ class ElderSpawnEffect extends OneShotEffect {
         staticText = "unless you sacrifice an Island, sacrifice {this} and it deals 6 damage to you";
     }
 
-    public ElderSpawnEffect(final ElderSpawnEffect effect) {
+    private ElderSpawnEffect(final ElderSpawnEffect effect) {
         super(effect);
     }
 

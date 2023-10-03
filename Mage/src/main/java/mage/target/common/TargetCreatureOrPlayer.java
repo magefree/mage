@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,7 +46,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         this.targetName = filter.getMessage();
     }
 
-    public TargetCreatureOrPlayer(final TargetCreatureOrPlayer target) {
+    protected TargetCreatureOrPlayer(final TargetCreatureOrPlayer target) {
         super(target);
         this.filter = target.filter.copy();
     }
@@ -217,4 +218,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         return new TargetCreatureOrPlayer(this);
     }
 
+    public FilterCreaturePermanent getFilterCreature() {
+        return filter.getCreatureFilter().copy();
+    }
 }

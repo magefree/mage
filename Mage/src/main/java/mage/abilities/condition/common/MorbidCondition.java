@@ -19,6 +19,6 @@ public enum MorbidCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if a creature died this turn";
+        return "a creature died this turn";
     }
 }

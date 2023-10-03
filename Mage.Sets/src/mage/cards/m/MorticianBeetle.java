@@ -50,7 +50,7 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player sacrifices a creature, ");
     }
 
-    public PlayerSacrificesCreatureTriggeredAbility(final PlayerSacrificesCreatureTriggeredAbility ability) {
+    private PlayerSacrificesCreatureTriggeredAbility(final PlayerSacrificesCreatureTriggeredAbility ability) {
         super(ability);
     }
 

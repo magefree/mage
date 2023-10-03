@@ -47,7 +47,7 @@ class StolenGoodsEffect extends OneShotEffect {
         this.staticText = "Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost";
     }
 
-    public StolenGoodsEffect(final StolenGoodsEffect effect) {
+    private StolenGoodsEffect(final StolenGoodsEffect effect) {
         super(effect);
     }
 

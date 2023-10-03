@@ -19,7 +19,7 @@ public final class GiantWarriorToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public GiantWarriorToken(final GiantWarriorToken token) {
+    protected GiantWarriorToken(final GiantWarriorToken token) {
         super(token);
     }
 

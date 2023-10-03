@@ -61,7 +61,7 @@ class DeathEffect extends OneShotEffect {
         this.staticText = "return target creature card from your graveyard to the battlefield. You lose life equal to its mana value";
     }
 
-    public DeathEffect(final DeathEffect effect) {
+    private DeathEffect(final DeathEffect effect) {
         super(effect);
     }
 

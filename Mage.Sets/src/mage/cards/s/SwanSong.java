@@ -55,7 +55,7 @@ class SwanSongEffect extends OneShotEffect {
         this.staticText = "Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying";
     }
 
-    public SwanSongEffect(final SwanSongEffect effect) {
+    private SwanSongEffect(final SwanSongEffect effect) {
         super(effect);
     }
 

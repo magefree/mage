@@ -51,7 +51,7 @@ class SpitfireHandlerCantBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block creatures with power greater than {this}'s power";
     }
 
-    public SpitfireHandlerCantBlockEffect(final SpitfireHandlerCantBlockEffect effect) {
+    private SpitfireHandlerCantBlockEffect(final SpitfireHandlerCantBlockEffect effect) {
         super(effect);
     }
 

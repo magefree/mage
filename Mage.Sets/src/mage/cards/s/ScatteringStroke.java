@@ -50,7 +50,7 @@ class ScatteringStrokeEffect extends OneShotEffect {
         this.staticText = "Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add an amount of {C} equal to that spell's mana value";
     }
 
-    public ScatteringStrokeEffect(final ScatteringStrokeEffect effect) {
+    private ScatteringStrokeEffect(final ScatteringStrokeEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class ScatteringStrokeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && spell != null) {
             game.getStack().counter(spell.getId(), source, game);
-            if (ClashEffect.getInstance().apply(game, source)) {
+            if (new ClashEffect().apply(game, source)) {
                 Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(0, 0, 0, 0, 0, 0, 0, spell.getManaValue()));
                 AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
                         = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, true, TargetController.YOU, AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN);

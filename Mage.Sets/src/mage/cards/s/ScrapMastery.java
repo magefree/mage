@@ -49,7 +49,7 @@ class ScrapMasteryEffect extends OneShotEffect {
         this.staticText = "Each player exiles all artifact cards from their graveyard, then sacrifices all artifacts they control, then puts all cards they exiled this way onto the battlefield";
     }
 
-    public ScrapMasteryEffect(final ScrapMasteryEffect effect) {
+    private ScrapMasteryEffect(final ScrapMasteryEffect effect) {
         super(effect);
     }
 

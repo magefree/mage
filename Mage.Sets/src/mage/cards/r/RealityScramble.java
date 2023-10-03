@@ -69,7 +69,7 @@ class RealityScrambleEffect extends OneShotEffect {
                 + "on the bottom of your library in a random order.";
     }
 
-    public RealityScrambleEffect(final RealityScrambleEffect effect) {
+    private RealityScrambleEffect(final RealityScrambleEffect effect) {
         super(effect);
     }
 

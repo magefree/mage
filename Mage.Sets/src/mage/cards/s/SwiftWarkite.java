@@ -74,7 +74,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
         this.staticText = "that creature gains haste. Return it to your hand at the beginning of the next end step";
     }
 
-    SwiftWarkiteEffect(final SwiftWarkiteEffect effect) {
+    private SwiftWarkiteEffect(final SwiftWarkiteEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ class JoragaInvocationEffect extends OneShotEffect {
         this.staticText = "and must be blocked this turn if able";
     }
 
-    public JoragaInvocationEffect(final JoragaInvocationEffect effect) {
+    private JoragaInvocationEffect(final JoragaInvocationEffect effect) {
         super(effect);
     }
 

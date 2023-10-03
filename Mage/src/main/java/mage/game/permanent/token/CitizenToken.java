@@ -19,7 +19,7 @@ public final class CitizenToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public CitizenToken(final CitizenToken token) {
+    protected CitizenToken(final CitizenToken token) {
         super(token);
     }
 

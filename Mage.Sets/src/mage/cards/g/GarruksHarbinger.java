@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.HexproofFromBlackAbility;
@@ -45,9 +45,9 @@ public final class GarruksHarbinger extends CardImpl {
         // Whenever Garruk's Harbinger deals combat damage to a player or planeswalker, look at that many cards from the top of your library.
         // You may reveal a creature card or Garruk planeswalker card from among them and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+        this.addAbility(new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(SavedDamageValue.MANY, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                false, true).setOrPlaneswalker(true));
+                false));
     }
 
     private GarruksHarbinger(final GarruksHarbinger card) {

@@ -65,7 +65,7 @@ class FertileImaginationEffect extends OneShotEffect {
         staticText = "Choose a card type. Target opponent reveals their hand. Create two 1/1 green Saproling creature tokens for each card of the chosen type revealed this way";
     }
 
-    public FertileImaginationEffect(final FertileImaginationEffect effect) {
+    private FertileImaginationEffect(final FertileImaginationEffect effect) {
         super(effect);
     }
 

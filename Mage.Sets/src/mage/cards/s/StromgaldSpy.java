@@ -63,7 +63,7 @@ class StromgaldSpyEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
     }
 
-    public StromgaldSpyEffect(final StromgaldSpyEffect effect) {
+    private StromgaldSpyEffect(final StromgaldSpyEffect effect) {
         super(effect);
     }
 

@@ -62,7 +62,7 @@ class TidehollowScullerExileEffect extends OneShotEffect {
         this.staticText = "target opponent reveals their hand and you choose a nonland card from it. Exile that card";
     }
 
-    public TidehollowScullerExileEffect(final TidehollowScullerExileEffect effect) {
+    private TidehollowScullerExileEffect(final TidehollowScullerExileEffect effect) {
         super(effect);
     }
 
@@ -109,7 +109,7 @@ class TidehollowScullerLeaveEffect extends OneShotEffect {
         this.staticText = "return the exiled card to its owner's hand";
     }
 
-    public TidehollowScullerLeaveEffect(final TidehollowScullerLeaveEffect effect) {
+    private TidehollowScullerLeaveEffect(final TidehollowScullerLeaveEffect effect) {
         super(effect);
     }
 

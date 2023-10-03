@@ -43,10 +43,10 @@ class CountermandEffect extends OneShotEffect {
 
     public CountermandEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell. Its controller puts the top four cards of their library into their graveyard";
+        staticText = "Counter target spell. Its controller mills four cards.";
     }
 
-    public CountermandEffect(final CountermandEffect effect) {
+    private CountermandEffect(final CountermandEffect effect) {
         super(effect);
     }
 

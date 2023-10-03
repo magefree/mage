@@ -1,5 +1,6 @@
 package mage.player.human;
 
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
@@ -16,6 +17,8 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -41,10 +44,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
-import mage.util.CardUtil;
-import mage.util.GameLog;
-import mage.util.ManaUtil;
-import mage.util.MessageToClient;
+import mage.util.*;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
@@ -54,9 +54,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -64,6 +61,8 @@ public class HumanPlayer extends PlayerImpl {
 
     private static final boolean ALLOW_USERS_TO_PUT_NON_PLAYABLE_SPELLS_ON_STACK_WORKAROUND = false; // warning, see workaround's info on usage
 
+    // TODO: all user feedback actions executed and waited in diff threads and can't catch exeptions, e.g. on wrong code usage
+    //  must catch and log such errors
     private transient Boolean responseOpenedForAnswer = false; // can't get response until prepared target (e.g. until send all fire events to all players)
     private final transient PlayerResponse response = new PlayerResponse();
 
@@ -465,6 +464,13 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
 
+        if (choice.isKeyChoice() && choice.getKeyChoices().isEmpty()) {
+            throw new IllegalArgumentException("Wrong code usage. Key choices must contains some values");
+        }
+        if (!choice.isKeyChoice() && choice.getChoices().isEmpty()) {
+            throw new IllegalArgumentException("Wrong code usage. Choices must contains some values");
+        }
+
         // Try to autopay for mana
         if (Outcome.PutManaInPool == outcome && currentlyUnpaidMana != null) {
             // Check check if the spell being paid for cares about the color of mana being paid
@@ -540,7 +546,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -640,7 +646,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -738,7 +744,8 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets)
+                    : null;
 
             if (responseId == null) {
                 Map<String, Serializable> options = getOptions(target, null);
@@ -819,7 +826,8 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets)
+                    : null;
 
             if (responseId == null) {
                 List<UUID> chosenTargets = target.getTargets();
@@ -894,7 +902,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -1003,6 +1011,8 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
+            // TODO: check that all skips and stops used from real controlling player
+            //  like holdingPriority (is it a bug here?)
             if (getJustActivatedType() != null && !holdingPriority) {
                 if (controllingPlayer.getUserData().isPassPriorityCast()
                         && getJustActivatedType() == AbilityType.SPELL) {
@@ -1200,7 +1210,7 @@ public class HumanPlayer extends PlayerImpl {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
                         // look at card or try to cast/activate abilities
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>();
+                        Map<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>();
 
                         Player actingPlayer = null;
                         if (playerId.equals(game.getPriorityPlayerId())) {
@@ -1307,7 +1317,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             // try to set trigger auto order
             java.util.List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
-            TriggeredAbility abilityOrderLast = null;
+            java.util.List<TriggeredAbility> abilitiesOrderLast = new ArrayList<>();
             for (TriggeredAbility ability : abilities) {
                 if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
                     return ability;
@@ -1318,17 +1328,20 @@ public class HumanPlayer extends PlayerImpl {
                     return ability;
                 }
                 if (triggerAutoOrderAbilityLast.contains(ability.getOriginalId())) {
-                    abilityOrderLast = ability;
+                    // multiple instances of same trigger has same originalId, no need to select order for it
+                    abilitiesOrderLast.add(ability);
                     continue;
                 }
                 if (triggerAutoOrderNameLast.contains(rule)) {
-                    abilityOrderLast = ability;
+                    abilitiesOrderLast.add(ability);
                     continue;
                 }
                 if (autoOrderUse) {
+                    // multiple triggers with same rule text will be auto-ordered
                     if (autoOrderRuleText == null) {
                         autoOrderRuleText = rule;
                     } else if (!rule.equals(autoOrderRuleText)) {
+                        // diff triggers, so must use choose dialog
                         autoOrderUse = false;
                     }
                 }
@@ -1336,12 +1349,28 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             if (abilitiesWithNoOrderSet.isEmpty()) {
-                return abilityOrderLast;
+                // user can send diff abilities to the last, will be selected by "first" like first ordered ability above
+                return abilitiesOrderLast.stream().findFirst().orElse(null);
             }
 
             if (abilitiesWithNoOrderSet.size() == 1
                     || autoOrderUse) {
                 return abilitiesWithNoOrderSet.iterator().next();
+            }
+
+            // runtime check: lost triggers for GUI
+            List<Ability> processingAbilities = new ArrayList<>(abilitiesWithNoOrderSet);
+            processingAbilities.addAll(abilitiesOrderLast);
+
+            if (abilities.size() != processingAbilities.size()) {
+                throw new IllegalStateException(String.format("Choose dialog lost some of the triggered abilities:\n"
+                                + "Must %d:\n%s\n"
+                                + "Has %d:\n%s",
+                        abilities.size(),
+                        abilities.stream().map(Ability::getRule).collect(Collectors.joining("\n")),
+                        processingAbilities.size(),
+                        processingAbilities.stream().map(Ability::getRule).collect(Collectors.joining("\n"))
+                ));
             }
 
             macroTriggeredSelectionFlag = true;
@@ -1546,7 +1575,7 @@ public class HumanPlayer extends PlayerImpl {
 
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
-            LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
+            Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (!useableAbilities.isEmpty()) {
                 // Added to ensure that mana is not being autopaid for spells that care about the color of mana being paid
                 // See https://github.com/magefree/mage/issues/9070
@@ -1996,7 +2025,7 @@ public class HumanPlayer extends PlayerImpl {
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
             Target target = new TargetAnyTarget();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
             }
@@ -2045,10 +2074,18 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(
+            Outcome outcome,
+            List<MultiAmountMessage> messages,
+            int min,
+            int max,
+            MultiAmountType type,
+            Game game
+    ) {
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
-        if (needCount == 0) {
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
+        if (needCount == 0 || (needCount == 1 && min == max)
+                || messages.stream().map(m -> m.min == m.max).reduce(true, Boolean::logicalAnd)) {
             return defaultList;
         }
 
@@ -2070,8 +2107,8 @@ public class HumanPlayer extends PlayerImpl {
 
             // waiting correct values only
             if (response.getString() != null) {
-                answer = MultiAmountType.parseAnswer(response.getString(), needCount, min, max, false);
-                if (MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+                answer = MultiAmountType.parseAnswer(response.getString(), messages, min, max, false);
+                if (MultiAmountType.isGoodValues(answer, messages, min, max)) {
                     break;
                 } else {
                     // it's not normal: can be cheater or a wrong GUI checks
@@ -2131,14 +2168,9 @@ public class HumanPlayer extends PlayerImpl {
             waitForResponse(game);
 
             UUID responseId = getFixedResponseUUID(game);
-            if (responseId != null) {
-                if (specialActions.containsKey(responseId)) {
-                    SpecialAction specialAction = specialActions.get(responseId);
-                    if (unpaidForManaAction != null) {
-                        specialAction.setUnpaidMana(unpaidForManaAction);
-                    }
-                    activateAbility(specialAction, game);
-                }
+            SpecialAction specialAction = specialActions.getOrDefault(responseId, null);
+            if (specialAction != null) {
+                activateAbility(specialAction, game);
             }
         }
     }
@@ -2149,7 +2181,7 @@ public class HumanPlayer extends PlayerImpl {
         return super.activateAbility(ability, game);
     }
 
-    protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
+    protected void activateAbility(Map<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
         if (gameInCheckPlayableState(game)) {
             return;
         }
@@ -2228,7 +2260,7 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // hide on alternative cost activated
-            if (!getCastSourceIdWithAlternateMana().contains(ability.getSourceId())
+            if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(MageIdentifier.Default)
                     && ability.getManaCostsToPay().manaValue() > 0) {
                 return true;
             }
@@ -2253,7 +2285,7 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
             String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
-            LinkedHashMap<UUID, SpellAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
+            Map<UUID, SpellAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
                 return useableAbilities.values().iterator().next();
@@ -2651,6 +2683,13 @@ public class HumanPlayer extends PlayerImpl {
         }
     }
 
+    /**
+     * GUI related, remember choices for choose trigger dialog
+     *
+     * @param playerAction
+     * @param game
+     * @param data
+     */
     private void setTriggerAutoOrder(PlayerAction playerAction, Game game, Object data) {
         if (playerAction == TRIGGER_AUTO_ORDER_RESET_ALL) {
             triggerAutoOrderAbilityFirst.clear();
@@ -2659,7 +2698,9 @@ public class HumanPlayer extends PlayerImpl {
             triggerAutoOrderNameLast.clear();
             return;
         }
+
         if (data instanceof UUID) {
+            // remember by id
             UUID abilityId = (UUID) data;
             UUID originalId = null;
             for (TriggeredAbility ability : game.getState().getTriggered(getId())) {
@@ -2674,12 +2715,17 @@ public class HumanPlayer extends PlayerImpl {
                         triggerAutoOrderAbilityFirst.add(originalId);
                         break;
                     case TRIGGER_AUTO_ORDER_ABILITY_LAST:
-                        triggerAutoOrderAbilityFirst.add(originalId);
+                        triggerAutoOrderAbilityLast.add(originalId);
                         break;
                 }
             }
         } else if (data instanceof String) {
+            // remember by name
             String abilityName = (String) data;
+            if (abilityName.contains("{this}")) {
+                throw new IllegalArgumentException("Wrong code usage. Remembering trigger must contains full rules name without {this}.");
+            }
+
             switch (playerAction) {
                 case TRIGGER_AUTO_ORDER_NAME_FIRST:
                     triggerAutoOrderNameFirst.add(abilityName);

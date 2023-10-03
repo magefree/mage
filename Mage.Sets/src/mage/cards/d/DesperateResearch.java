@@ -47,7 +47,7 @@ class DesperateResearchEffect extends OneShotEffect {
         this.staticText = "Reveal the top seven cards of your library and put all of them with that name into your hand. Exile the rest";
     }
 
-    public DesperateResearchEffect(final DesperateResearchEffect effect) {
+    private DesperateResearchEffect(final DesperateResearchEffect effect) {
         super(effect);
     }
 

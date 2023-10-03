@@ -62,7 +62,7 @@ class InvaderParasiteImprintEffect extends OneShotEffect {
         staticText = "exile target land";
     }
 
-    InvaderParasiteImprintEffect(final InvaderParasiteImprintEffect effect) {
+    private InvaderParasiteImprintEffect(final InvaderParasiteImprintEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
-    InvaderParasiteTriggeredAbility(final InvaderParasiteTriggeredAbility ability) {
+    private InvaderParasiteTriggeredAbility(final InvaderParasiteTriggeredAbility ability) {
         super(ability);
     }
 
@@ -125,6 +125,6 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, {this} deals 2 damage to that player";
+        return "Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, {this} deals 2 damage to that player.";
     }
 }

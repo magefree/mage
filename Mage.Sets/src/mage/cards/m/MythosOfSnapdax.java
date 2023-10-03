@@ -102,7 +102,7 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
                     continue;
                 }
                 TargetPermanent target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (conditionMet) {
                     controller.choose(outcome, target, source, game);
                 } else {

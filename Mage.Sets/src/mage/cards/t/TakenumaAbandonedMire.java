@@ -86,7 +86,7 @@ class TakenumaAbandonedMireEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }

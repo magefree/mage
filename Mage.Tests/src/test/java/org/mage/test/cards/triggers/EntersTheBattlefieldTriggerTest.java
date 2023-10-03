@@ -400,7 +400,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath with Escape");
         setChoice(playerA, "Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears");
         setChoice(playerA, "When {this} enters the battlefield, sacrifice it"); // sacrifice trigger must go first
         setChoice(playerA, false); // do not put land to battlefield

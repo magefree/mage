@@ -58,7 +58,7 @@ class ThassasEmissaryTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} or enchanted creature deals combat damage to a player, ");
     }
 
-    public ThassasEmissaryTriggeredAbility(final ThassasEmissaryTriggeredAbility ability) {
+    private ThassasEmissaryTriggeredAbility(final ThassasEmissaryTriggeredAbility ability) {
         super(ability);
     }
 

@@ -20,8 +20,6 @@ import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -58,7 +56,7 @@ public final class MythosOfVadrok extends CardImpl {
 class MythosOfVadrokEffect extends OneShotEffect {
 
     MythosOfVadrokEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
     }
 
     private MythosOfVadrokEffect(final MythosOfVadrokEffect effect) {
@@ -83,7 +81,7 @@ class MythosOfVadrokRestrictionEffect extends RestrictionEffect {
         super(Duration.UntilYourNextTurn, Outcome.UnboostCreature);
     }
 
-    MythosOfVadrokRestrictionEffect(final MythosOfVadrokRestrictionEffect effect) {
+    private MythosOfVadrokRestrictionEffect(final MythosOfVadrokRestrictionEffect effect) {
         super(effect);
     }
 

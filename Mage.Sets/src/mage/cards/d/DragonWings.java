@@ -72,7 +72,7 @@ class DragonWingsEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonWingsEffect(final DragonWingsEffect effect) {
+    private DragonWingsEffect(final DragonWingsEffect effect) {
         super(effect);
     }
     

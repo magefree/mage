@@ -49,7 +49,7 @@ class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
         this.staticText = "Each player with exactly 13 life loses the game, then each player gains 1 life";
     }
 
-    public TriskaidekaphobiaGainLifeEffect(final TriskaidekaphobiaGainLifeEffect effect) {
+    private TriskaidekaphobiaGainLifeEffect(final TriskaidekaphobiaGainLifeEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class TriskaidekaphobiaLoseLifeEffect extends OneShotEffect {
         this.staticText = "Each player with exactly 13 life loses the game, then each player loses 1 life";
     }
 
-    public TriskaidekaphobiaLoseLifeEffect(final TriskaidekaphobiaLoseLifeEffect effect) {
+    private TriskaidekaphobiaLoseLifeEffect(final TriskaidekaphobiaLoseLifeEffect effect) {
         super(effect);
     }
 

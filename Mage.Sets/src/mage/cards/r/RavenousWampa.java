@@ -62,7 +62,7 @@ class RavenousWampaEffect extends OneShotEffect {
         this.staticText = "you gain life equal to the sacrificied creature's toughness";
     }
 
-    public RavenousWampaEffect(final RavenousWampaEffect effect) {
+    private RavenousWampaEffect(final RavenousWampaEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class RavenousWampaSacrificeTargetCost extends SacrificeTargetCost {
         super(target);
     }
 
-    public RavenousWampaSacrificeTargetCost(RavenousWampaSacrificeTargetCost cost) {
+    private RavenousWampaSacrificeTargetCost(final RavenousWampaSacrificeTargetCost cost) {
         super(cost);
     }
 

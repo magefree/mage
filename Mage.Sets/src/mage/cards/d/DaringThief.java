@@ -65,7 +65,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         setTargetName("nonland permanent you control");
     }
 
-    public TargetControlledPermanentSharingOpponentPermanentCardType(final TargetControlledPermanentSharingOpponentPermanentCardType target) {
+    private TargetControlledPermanentSharingOpponentPermanentCardType(final TargetControlledPermanentSharingOpponentPermanentCardType target) {
         super(target);
     }
 
@@ -135,7 +135,7 @@ class DaringThiefSecondTarget extends TargetPermanent {
         setTargetName("permanent an opponent controls that shares a card type with it");
     }
 
-    public DaringThiefSecondTarget(final DaringThiefSecondTarget target) {
+    private DaringThiefSecondTarget(final DaringThiefSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }

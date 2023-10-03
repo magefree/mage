@@ -58,7 +58,7 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public XantidSwarmTriggeredAbility(final XantidSwarmTriggeredAbility ability) {
+    private XantidSwarmTriggeredAbility(final XantidSwarmTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,18 +90,13 @@ class XantidSwarmReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "defending player can't cast spells this turn";
     }
 
-    public XantidSwarmReplacementEffect(final XantidSwarmReplacementEffect effect) {
+    private XantidSwarmReplacementEffect(final XantidSwarmReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public XantidSwarmReplacementEffect copy() {
         return new XantidSwarmReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

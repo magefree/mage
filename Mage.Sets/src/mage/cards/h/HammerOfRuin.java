@@ -42,7 +42,7 @@ public final class HammerOfRuin extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
-    public HammerOfRuin (final HammerOfRuin card) {
+    private HammerOfRuin(final HammerOfRuin card) {
         super(card);
     }
 
@@ -59,7 +59,7 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    HammerOfRuinTriggeredAbility(final HammerOfRuinTriggeredAbility ability) {
+    private HammerOfRuinTriggeredAbility(final HammerOfRuinTriggeredAbility ability) {
         super(ability);
     }
 

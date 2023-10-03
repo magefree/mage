@@ -44,8 +44,8 @@ public final class KamahlsWill extends CardImpl {
                         .withAbility(IndestructibleAbility.getInstance())
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.EndOfTurn
-        ).withDurationRuleAtStart(true)/*.setText("until end of turn, any number of target lands you control become 1/1 Elemental creatures " +
-                "with vigilance, indestructible, and haste. They're still lands")*/);
+        ).setText("until end of turn, any number of target lands you control become 1/1 Elemental creatures " +
+                "with vigilance, indestructible, and haste. They're still lands"));
         this.getSpellAbility().addTarget(new TargetPermanent(
                 0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, false
         ));

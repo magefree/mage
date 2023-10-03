@@ -53,7 +53,7 @@ class MycoidShepherdTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(5), true);
     }
 
-    public MycoidShepherdTriggeredAbility(final MycoidShepherdTriggeredAbility ability) {
+    private MycoidShepherdTriggeredAbility(final MycoidShepherdTriggeredAbility ability) {
         super(ability);
     }
 

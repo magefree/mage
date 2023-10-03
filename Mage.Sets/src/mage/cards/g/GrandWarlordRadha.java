@@ -90,7 +90,7 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever one or more creatures you control attack, ");
     }
 
-    public GrandWarlordRadhaTriggeredAbility(final GrandWarlordRadhaTriggeredAbility ability) {
+    private GrandWarlordRadhaTriggeredAbility(final GrandWarlordRadhaTriggeredAbility ability) {
         super(ability);
     }
 
@@ -125,7 +125,7 @@ class GrandWarlordRadhaEffect extends OneShotEffect {
         this.staticText = "add that much mana in any combination of {R} and/or {G}. Until end of turn, you don't lose this mana as steps and phases end";
     }
 
-    public GrandWarlordRadhaEffect(final GrandWarlordRadhaEffect effect) {
+    private GrandWarlordRadhaEffect(final GrandWarlordRadhaEffect effect) {
         super(effect);
     }
 

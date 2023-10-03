@@ -58,7 +58,7 @@ class KnightOfTheHolyNimbusReplacementEffect extends ReplacementEffectImpl {
         staticText = "If {this} would be destroyed, regenerate it";
     }
 
-    KnightOfTheHolyNimbusReplacementEffect(KnightOfTheHolyNimbusReplacementEffect effect) {
+    private KnightOfTheHolyNimbusReplacementEffect(final KnightOfTheHolyNimbusReplacementEffect effect) {
         super(effect);
     }
 

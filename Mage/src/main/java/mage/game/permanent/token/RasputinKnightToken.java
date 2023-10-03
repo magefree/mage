@@ -21,7 +21,7 @@ public final class RasputinKnightToken extends TokenImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public RasputinKnightToken(final RasputinKnightToken token) {
+    protected RasputinKnightToken(final RasputinKnightToken token) {
         super(token);
     }
 

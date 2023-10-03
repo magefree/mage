@@ -56,7 +56,7 @@ class TrygonPredatorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    public TrygonPredatorTriggeredAbility(final TrygonPredatorTriggeredAbility ability) {
+    private TrygonPredatorTriggeredAbility(final TrygonPredatorTriggeredAbility ability) {
         super(ability);
     }
 

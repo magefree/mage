@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterCreatureForCombatBlock extends FilterCreatureForCombatBase {
@@ -21,7 +20,7 @@ public class FilterCreatureForCombatBlock extends FilterCreatureForCombatBase {
         this.add(new BlockTappedPredicate());
     }
 
-    public FilterCreatureForCombatBlock(final FilterCreatureForCombatBlock filter) {
+    protected FilterCreatureForCombatBlock(final FilterCreatureForCombatBlock filter) {
         super(filter);
     }
 
@@ -35,7 +34,7 @@ class BlockTappedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return !input.isTapped() || null != game.getState().getContinuousEffects().asThough(input.getId(), AsThoughEffectType.BLOCK_TAPPED, null, input.getControllerId(), game);
+        return !input.isTapped() || !game.getState().getContinuousEffects().asThough(input.getId(), AsThoughEffectType.BLOCK_TAPPED, null, input.getControllerId(), game).isEmpty();
     }
 
     @Override

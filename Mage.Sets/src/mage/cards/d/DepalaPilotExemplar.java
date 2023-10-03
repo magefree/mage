@@ -72,7 +72,7 @@ class DepalaPilotExemplarEffect extends OneShotEffect {
         this.staticText = "pay {X}. If you do, reveal the top X cards of your library, put all Dwarf and Vehicle cards from among them into your hand, then put the rest on the bottom of your library in a random order";
     }
 
-    DepalaPilotExemplarEffect(final DepalaPilotExemplarEffect effect) {
+    private DepalaPilotExemplarEffect(final DepalaPilotExemplarEffect effect) {
         super(effect);
     }
 

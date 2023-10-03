@@ -63,7 +63,7 @@ class SabaccGameEffect extends OneShotEffect {
                 + "If you lose the flip, your opponent gains control of the permanent they chose";
     }
 
-    public SabaccGameEffect(final SabaccGameEffect effect) {
+    private SabaccGameEffect(final SabaccGameEffect effect) {
         super(effect);
     }
 

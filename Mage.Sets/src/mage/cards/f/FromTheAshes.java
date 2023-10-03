@@ -48,7 +48,7 @@ class FromTheAshesEffect extends OneShotEffect {
         this.staticText = "Destroy all nonbasic lands. For each land destroyed this way, its controller may search their library for a basic land card and put it onto the battlefield. Then each player who searched their library this way shuffles";
     }
 
-    public FromTheAshesEffect(final FromTheAshesEffect effect) {
+    private FromTheAshesEffect(final FromTheAshesEffect effect) {
         super(effect);
     }
 

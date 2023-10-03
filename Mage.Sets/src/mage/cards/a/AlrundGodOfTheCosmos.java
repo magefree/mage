@@ -89,7 +89,7 @@ class AlrundGodOfTheCosmosEffect extends OneShotEffect {
         staticText = ", then reveal the top two cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order";
     }
 
-    public AlrundGodOfTheCosmosEffect(final AlrundGodOfTheCosmosEffect effect) {
+    private AlrundGodOfTheCosmosEffect(final AlrundGodOfTheCosmosEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class AlrundGodOfTheCosmosEffect extends OneShotEffect {
         if (controller != null) {
             Set<Card> twoCardsFromTop = controller.getLibrary().getTopCards(game, 2);
             Cards cards = new CardsImpl();
-            cards.addAll(twoCardsFromTop);
+            cards.addAllCards(twoCardsFromTop);
             controller.revealCards(source, cards, game);
             for (Card card : cards.getCards(game)) {
                 if (card.getCardType(game).toString().contains(chosenCardType)) {

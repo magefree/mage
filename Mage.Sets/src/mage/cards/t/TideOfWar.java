@@ -51,7 +51,7 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever one or more creatures block, ");
     }
 
-    public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
+    private BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,7 +83,7 @@ class TideOfWarEffect extends OneShotEffect {
         this.staticText = "flip a coin. If you win the flip, each blocking creature is sacrificed by its controller. If you lose the flip, each blocked creature is sacrificed by its controller";
     }
 
-    public TideOfWarEffect(final TideOfWarEffect effect) {
+    private TideOfWarEffect(final TideOfWarEffect effect) {
         super(effect);
     }
 

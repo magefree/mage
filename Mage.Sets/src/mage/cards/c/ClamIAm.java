@@ -44,7 +44,7 @@ class ClamIAmEffect extends ReplacementEffectImpl {
         staticText = "If you roll a 3 on a six-sided die, you may reroll that die";
     }
 
-    ClamIAmEffect(final ClamIAmEffect effect) {
+    private ClamIAmEffect(final ClamIAmEffect effect) {
         super(effect);
     }
 

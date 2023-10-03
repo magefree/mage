@@ -56,7 +56,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
         staticText = "Creatures your opponents control enter the battlefield tapped";
     }
 
-    OccupationTapEffect(final OccupationTapEffect effect) {
+    private OccupationTapEffect(final OccupationTapEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class OccupationOneShotEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public OccupationOneShotEffect(final OccupationOneShotEffect effect) {
+    private OccupationOneShotEffect(final OccupationOneShotEffect effect) {
         super(effect);
     }
 
@@ -124,7 +124,7 @@ class OccupationRestrictionEffect extends RestrictionEffect {
         staticText = "";
     }
 
-    public OccupationRestrictionEffect(final OccupationRestrictionEffect effect) {
+    private OccupationRestrictionEffect(final OccupationRestrictionEffect effect) {
         super(effect);
     }
 

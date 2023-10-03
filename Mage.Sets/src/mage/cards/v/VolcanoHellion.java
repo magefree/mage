@@ -57,7 +57,7 @@ class VolcanoHellionEffect extends OneShotEffect {
         this.staticText = "it deals an amount of damage of your choice to you and target creature. The damage can't be prevented";
     }
 
-    public VolcanoHellionEffect(final VolcanoHellionEffect effect) {
+    private VolcanoHellionEffect(final VolcanoHellionEffect effect) {
         super(effect);
     }
 

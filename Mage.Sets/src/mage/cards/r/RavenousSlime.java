@@ -56,7 +56,7 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
                 + "equal to that creature's power on {this}";
     }
 
-    public RavenousSlimeEffect(final RavenousSlimeEffect effect) {
+    private RavenousSlimeEffect(final RavenousSlimeEffect effect) {
         super(effect);
     }
 

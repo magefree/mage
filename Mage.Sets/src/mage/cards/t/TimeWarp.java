@@ -44,7 +44,7 @@ class TimeWarpEffect extends OneShotEffect {
         staticText = "Target player takes an extra turn after this one";
     }
 
-    public TimeWarpEffect(final TimeWarpEffect effect) {
+    private TimeWarpEffect(final TimeWarpEffect effect) {
         super(effect);
     }
 
@@ -55,8 +55,10 @@ class TimeWarpEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
+        if (source.getFirstTarget() == null) {
+            return false;
+        }
+        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget()).withExtraTurn());
         return true;
     }
-
 }

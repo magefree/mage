@@ -28,8 +28,6 @@ import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -44,7 +42,6 @@ public final class GiftOfDoom extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.getSpellAbility().setTargetAdjuster(GiftOfDoomAdjuster.instance);  // to remove the target set if Morph casting cost is paid
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -58,7 +55,7 @@ public final class GiftOfDoom extends CardImpl {
         this.addAbility(ability2);
 
         // Morph—Sacrifice another creature.
-        this.addAbility(new MorphAbility(new SacrificeTargetCost(
+        this.addAbility(new MorphAbility(this, new SacrificeTargetCost(
                 new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         )));
 
@@ -79,18 +76,6 @@ public final class GiftOfDoom extends CardImpl {
     }
 }
 
-enum GiftOfDoomAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        // if the Morph casting cost is paid, clear the target of Enchant Creature
-        if (game.getState().getValue("MorphAbility" + ability.getSourceId()) == "activated") {
-            ability.getTargets().clear();
-        }
-    }
-}
-
 class GiftOfDoomEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
@@ -100,7 +85,7 @@ class GiftOfDoomEffect extends OneShotEffect {
     }
 
     GiftOfDoomEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "attach it to a creature";
     }
 
@@ -121,7 +106,7 @@ class GiftOfDoomEffect extends OneShotEffect {
             return false;
         }
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (player.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null
                 && !game.getPermanent(target.getFirstTarget()).cantBeAttachedBy(giftOfDoom, source, game, false)) {

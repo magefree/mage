@@ -1,6 +1,8 @@
 
 package mage.game.match;
 
+import mage.cards.decks.DeckCardInfo;
+import mage.constants.MatchBufferTime;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -10,10 +12,7 @@ import mage.game.result.ResultProtos;
 import mage.players.PlayerType;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -48,7 +47,11 @@ public class MatchOptions implements Serializable {
      * Time each player has during the game to play using his\her priority.
      */
     protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
+    protected MatchBufferTime matchBufferTime; // Amount of time each player gets before their normal time limit counts down. Refreshes each time the normal timer is invoked.
     protected MulliganType mulliganType;
+
+    protected Collection<DeckCardInfo> perPlayerEmblemCards;
+    protected Collection<DeckCardInfo> globalEmblemCards;
 
     /*public MatchOptions(String name, String gameType) {
         this.name = name;
@@ -63,6 +66,8 @@ public class MatchOptions implements Serializable {
         this.password = "";
         this.multiPlayer = multiPlayer;
         this.numSeats = numSeats;
+        this.perPlayerEmblemCards = Collections.emptySet();
+        this.globalEmblemCards = Collections.emptySet();
     }
 
     public void setNumSeats (int numSeats) {
@@ -158,6 +163,21 @@ public class MatchOptions implements Serializable {
 
     public void setMatchTimeLimit(MatchTimeLimit matchTimeLimit) {
         this.matchTimeLimit = matchTimeLimit;
+    }
+
+    public int getBufferTime() {
+        if (matchBufferTime == null) {
+            return MatchBufferTime.NONE.getBufferTime();
+        }
+        return matchBufferTime.getBufferTime();
+    }
+
+    public MatchBufferTime getMatchBufferTime() {
+        return this.matchBufferTime;
+    }
+
+    public void setMatchBufferTime(MatchBufferTime matchBufferTime) {
+        this.matchBufferTime = matchBufferTime;
     }
 
     public String getPassword() {
@@ -271,4 +291,19 @@ public class MatchOptions implements Serializable {
         return mulliganType;
     }
 
+    public Collection<DeckCardInfo> getPerPlayerEmblemCards() {
+        return perPlayerEmblemCards;
+    }
+
+    public void setPerPlayerEmblemCards(Collection<DeckCardInfo> perPlayerEmblemCards) {
+        this.perPlayerEmblemCards = perPlayerEmblemCards;
+    }
+
+    public Collection<DeckCardInfo> getGlobalEmblemCards() {
+        return globalEmblemCards;
+    }
+
+    public void setGlobalEmblemCards(Collection<DeckCardInfo> globalEmblemCards) {
+        this.globalEmblemCards = globalEmblemCards;
+    }
 }

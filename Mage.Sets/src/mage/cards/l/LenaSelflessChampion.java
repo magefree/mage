@@ -77,7 +77,7 @@ class LenaSelflessChampionEffect extends OneShotEffect {
                 + "{this}'s power gain indestructible until end of turn";
     }
 
-    public LenaSelflessChampionEffect(final LenaSelflessChampionEffect effect) {
+    private LenaSelflessChampionEffect(final LenaSelflessChampionEffect effect) {
         super(effect);
     }
 

@@ -84,7 +84,7 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
         this.staticText = "Flip five coins. Take an extra turn after this one for each coin that comes up heads";
     }
 
-    public RalZarekExtraTurnsEffect(final RalZarekExtraTurnsEffect effect) {
+    private RalZarekExtraTurnsEffect(final RalZarekExtraTurnsEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
         if (controller != null) {
             for (int i = 0; i < 5; i++) {
                 if (controller.flipCoin(source, game, false)) {
-                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
                 }
             }
             return true;

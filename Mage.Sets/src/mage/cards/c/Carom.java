@@ -61,7 +61,7 @@ class CaromEffect extends RedirectionEffect {
         staticText = "The next " + amount + " damage that would be dealt to target creature this turn is dealt to another target creature instead";
     }
 
-    public CaromEffect(final CaromEffect effect) {
+    private CaromEffect(final CaromEffect effect) {
         super(effect);
     }
 

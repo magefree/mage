@@ -55,7 +55,7 @@ class OutOfTheTombsReplacementEffect extends ReplacementEffectImpl {
                 "from your graveyard to the battlefield. If you can't, you lose the game.";
     }
 
-    public OutOfTheTombsReplacementEffect(final OutOfTheTombsReplacementEffect effect) {
+    private OutOfTheTombsReplacementEffect(final OutOfTheTombsReplacementEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class OutOfTheTombsReplacementEffect extends ReplacementEffectImpl {
         }
         boolean cardReturned = false;
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(player.getId(), source, game)) {
             if (target.choose(Outcome.PutCreatureInPlay, player.getId(), source.getSourceId(), source, game)) {
                 Card card = game.getCard(target.getFirstTarget());

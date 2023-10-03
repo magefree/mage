@@ -53,7 +53,7 @@ class WellEffect extends OneShotEffect {
         staticText = "You gain 2 life for each creature you control";
     }
 
-    public WellEffect(final WellEffect effect) {
+    private WellEffect(final WellEffect effect) {
         super(effect);
     }
 

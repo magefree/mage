@@ -27,7 +27,7 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
         staticText = "regenerate " + targetName;
     }
 
-    public RegenerateSourceEffect(final RegenerateSourceEffect effect) {
+    protected RegenerateSourceEffect(final RegenerateSourceEffect effect) {
         super(effect);
     }
 

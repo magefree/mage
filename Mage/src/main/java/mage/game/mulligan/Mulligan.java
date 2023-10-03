@@ -91,4 +91,7 @@ public abstract class Mulligan implements Serializable {
         return freeMulligans;
     }
 
+    public void drawHand(int numCards, Player player, Game game){
+        player.drawCards(numCards, null, game);
+    }
 }

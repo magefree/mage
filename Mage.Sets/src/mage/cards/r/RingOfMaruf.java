@@ -54,7 +54,7 @@ class RingOfMarufEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.";
     }
 
-    public RingOfMarufEffect(final RingOfMarufEffect effect) {
+    private RingOfMarufEffect(final RingOfMarufEffect effect) {
         super(effect);
     }
 

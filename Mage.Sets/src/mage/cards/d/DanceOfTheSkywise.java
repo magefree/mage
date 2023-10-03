@@ -53,7 +53,7 @@ public final class DanceOfTheSkywise extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
-        public DragonIllusionToken(final DragonIllusionToken token) {
+        private DragonIllusionToken(final DragonIllusionToken token) {
             super(token);
         }
 

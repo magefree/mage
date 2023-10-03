@@ -113,7 +113,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
         }
     }
 
-    public UrzaAcademyHeadmasterRandomEffect(final UrzaAcademyHeadmasterRandomEffect effect) {
+    private UrzaAcademyHeadmasterRandomEffect(final UrzaAcademyHeadmasterRandomEffect effect) {
         super(effect);
         this.selection = effect.selection;
         this.setInfo = effect.setInfo.copy();
@@ -268,7 +268,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 8: // JACE MEMORY ADEPT 2
                                 sb.append("Target player mills ten cards.");
-                                effects.add(new PutLibraryIntoGraveTargetEffect(10));
+                                effects.add(new MillCardsTargetEffect(10));
                                 target = new TargetPlayer();
                                 break;
                             case 9: // JACE ARCHITECT OF THOUGHT 2
@@ -472,7 +472,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
         super(Outcome.PutManaInPool);
     }
 
-    public UrzaAcademyHeadmasterManaEffect(final UrzaAcademyHeadmasterManaEffect effect) {
+    private UrzaAcademyHeadmasterManaEffect(final UrzaAcademyHeadmasterManaEffect effect) {
         super(effect);
     }
 
@@ -536,7 +536,7 @@ class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
         staticText = "draw three cards, then put a card from your hand on top of your library";
     }
 
-    public UrzaAcademyHeadmasterBrainstormEffect(final UrzaAcademyHeadmasterBrainstormEffect effect) {
+    private UrzaAcademyHeadmasterBrainstormEffect(final UrzaAcademyHeadmasterBrainstormEffect effect) {
         super(effect);
     }
 

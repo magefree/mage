@@ -103,10 +103,22 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             });
             final PriorityTimer pt = timer;
             timer.setTaskOnTick(() -> {
-                int priorityTimeValue = pt.getCount();
+                int priorityTimeValue = pt.getCount() + pt.getBufferCount();
                 String text = getPriorityTimeLeftString(priorityTimeValue);
+                // Set timer text colors (note, if you change it here, change it in update() as well)
+                Color textColor = null;  // use default in HoverButton
+                Color foregroundColor = Color.BLACK;
+                if (pt.getBufferCount() > 0) {
+                    textColor = Color.GREEN;
+                    foregroundColor = Color.GREEN.darker().darker();
+                } else if (pt.getCount() < 300) { // visual indication for under 5 minutes
+                    textColor = Color.RED;
+                    foregroundColor = Color.RED.darker().darker();
+                }
                 PlayerPanelExt.this.avatar.setTopText(text);
+                PlayerPanelExt.this.avatar.setTopTextColor(textColor);
                 PlayerPanelExt.this.timerLabel.setText(text);
+                PlayerPanelExt.this.timerLabel.setForeground(foregroundColor);
                 PlayerPanelExt.this.avatar.repaint();
             });
             timer.init(gameId);
@@ -191,10 +203,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             if (playerLife != pastLife) {
                 if (playerLife > pastLife) {
                     avatar.gainLifeDisplay();
-                } else if (playerLife < pastLife) {
+                } else {
                     avatar.loseLifeDisplay();
                 }
-            } else if (playerLife == pastLife) {
+            } else {
                 avatar.stopLifeDisplay();
             }
         }
@@ -304,8 +316,21 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
                 String priorityTimeValue = getPriorityTimeLeftString(player);
                 this.timer.setCount(player.getPriorityTimeLeft());
+                this.timer.setBufferCount(player.getBufferTimeLeft());
                 this.avatar.setTopText(priorityTimeValue);
                 this.timerLabel.setText(priorityTimeValue);
+                // Set timer text colors (note, if you change it here, change it in init()::timer.setTaskOnTick() as well)
+                Color textColor = null; // use default in HoverButton
+                Color foregroundColor = Color.BLACK;
+                if (player.getBufferTimeLeft() > 0) {
+                    textColor = Color.GREEN;
+                    foregroundColor = Color.GREEN.darker().darker();
+                } else if (player.getPriorityTimeLeft() < 300) { // visual indication for under 5 minutes
+                    textColor = Color.RED;
+                    foregroundColor = Color.RED.darker().darker();
+                }
+                this.avatar.setTopTextColor(textColor);
+                this.timerLabel.setForeground(foregroundColor);
             }
             if (player.isTimerActive()) {
                 this.timer.resume();
@@ -351,25 +376,17 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private void updateAvatar() {
         if (flagName == null) { // do only once
             avatar.setText(this.player.getName());
-            if (!player.getUserData().getFlagName().equals(flagName)) {
-                flagName = player.getUserData().getFlagName();
-                this.avatar.setTopTextImage(CountryUtil.getCountryFlagIconSize(flagName, 11).getImage());
-            }
-            // TODO: Add the wins to the tooltiptext of the avatar
-            String countryname = CountryUtil.getCountryName(flagName);
-            if (countryname == null) {
-                countryname = "Unknown";
-            }
+            flagName = player.getUserData().getFlagName();
+            this.avatar.setTopTextImage(CountryUtil.getCountryFlagIconSize(flagName, 11).getImage());
+            String countryName = CountryUtil.getCountryName(flagName);
             basicTooltipText = "<HTML>Name: " + player.getName()
-                    + "<br/>Country: " + countryname
-                    + "<br/>Constructed rating: " + player.getUserData().getConstructedRating()
-                    + "<br/>Limited rating: " + player.getUserData().getLimitedRating()
+                    + "<br/>Flag: " + (countryName == null ? "Unknown" : countryName)
                     + "<br/>Deck hash code: " + player.getDeckHashCode()
-                    + "<br/>This match wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)"
-                    + (player.getUserData() == null ? "" : "<br/>History: " + player.getUserData().getHistory());
+                    + "<br/>This match wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)";
         }
         // Extend tooltip
         StringBuilder tooltipText = new StringBuilder(basicTooltipText);
+        tooltipText.append("<br/>Match time remaining: ").append(getPriorityTimeLeftString(player));
         this.avatar.setTopTextImageRight(null);
         for (String name : player.getDesignationNames()) {
             tooltipText.append("<br/>").append(name);
@@ -396,7 +413,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private String getPriorityTimeLeftString(PlayerView player) {
-        int priorityTimeLeft = player.getPriorityTimeLeft();
+        int priorityTimeLeft = player.getPriorityTimeLeft() + player.getBufferTimeLeft();
         return getPriorityTimeLeftString(priorityTimeLeft);
     }
 

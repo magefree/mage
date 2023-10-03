@@ -61,7 +61,7 @@ class DelayTacticEffect extends OneShotEffect {
         this.staticText = "Creatures target opponent controls don't untap during their next untap step";
     }
 
-    DelayTacticEffect(final DelayTacticEffect effect) {
+    private DelayTacticEffect(final DelayTacticEffect effect) {
         super(effect);
     }
 

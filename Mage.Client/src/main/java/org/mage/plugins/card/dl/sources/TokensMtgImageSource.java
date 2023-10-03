@@ -81,7 +81,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     public CardImageUrls generateTokenUrl(CardDownloadData card) throws IOException {
         String name = card.getName();
         String set = card.getSet();
-        int type = card.getType();
+        int imageNumber = card.getImageNumber();
 
         // handle emblems
         if (name.toLowerCase(Locale.ENGLISH).contains("emblem")) {
@@ -110,14 +110,14 @@ public enum TokensMtgImageSource implements CardImageSource {
         }
 
         TokenData tokenData;
-        if (type == 0) {
+        if (imageNumber == 0) {
             tokenData = list.get(0);
         } else {
-            if (type > list.size()) {
-                LOGGER.warn("Not enough images variants for token with type number " + type + ", name " + name + ", set " + set + '.');
+            if (imageNumber > list.size()) {
+                LOGGER.warn("Not enough images variants for token with type number " + imageNumber + ", name " + name + ", set " + set + '.');
                 return null;
             }
-            tokenData = list.get(card.getType() - 1);
+            tokenData = list.get(card.getImageNumber() - 1);
         }
 
         String url = "https://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + '_'

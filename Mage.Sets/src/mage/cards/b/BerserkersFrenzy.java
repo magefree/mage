@@ -98,7 +98,7 @@ class BerserkersFrenzyEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         game.addEffect(new BlocksIfAbleTargetEffect(Duration.EndOfTurn)
                 .setTargetPointer(new FixedTargets(new CardsImpl(target.getTargets()), game)), source);

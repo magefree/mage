@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -59,7 +58,7 @@ class JandorsRingEffect extends OneShotEffect {
         staticText = "Draw a card";
     }
 
-    public JandorsRingEffect(final JandorsRingEffect effect) {
+    private JandorsRingEffect(final JandorsRingEffect effect) {
         super(effect);
     }
 
@@ -77,7 +76,7 @@ class JandorsRingEffect extends OneShotEffect {
             if (card != null) {
                 FilterCard filter = new FilterCard(card.getName());
                 filter.add(new CardIdPredicate(card.getId()));
-                DiscardCardYouChooseTargetEffect effect = new DiscardCardYouChooseTargetEffect(filter, TargetController.YOU);
+                DiscardCardYouChooseTargetEffect effect = new DiscardCardYouChooseTargetEffect(filter);
                 if (effect.apply(game, source)) {//Conditional was already checked, card should be in hand, but if for some weird reason it fails, the card won't be drawn, although the cost will already be paid
                     Player controller = game.getPlayer(source.getControllerId());
                     if(controller != null) {

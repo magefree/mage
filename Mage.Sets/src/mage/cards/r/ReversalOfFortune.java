@@ -52,7 +52,7 @@ class ReversalOfFortuneEffect extends OneShotEffect {
                 + "copy without paying its mana cost";
     }
 
-    public ReversalOfFortuneEffect(final ReversalOfFortuneEffect effect) {
+    private ReversalOfFortuneEffect(final ReversalOfFortuneEffect effect) {
         super(effect);
     }
 

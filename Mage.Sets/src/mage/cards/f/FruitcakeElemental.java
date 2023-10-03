@@ -69,7 +69,7 @@ class FruitcakeElementalEffect extends OneShotEffect {
         this.staticText = "Target player gains control of {this}.";
     }
 
-    public FruitcakeElementalEffect(final FruitcakeElementalEffect effect) {
+    private FruitcakeElementalEffect(final FruitcakeElementalEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class FruitcakeElementalControlSourceEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public FruitcakeElementalControlSourceEffect(final FruitcakeElementalControlSourceEffect effect) {
+    private FruitcakeElementalControlSourceEffect(final FruitcakeElementalControlSourceEffect effect) {
         super(effect);
     }
 

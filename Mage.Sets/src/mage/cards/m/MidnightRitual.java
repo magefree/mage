@@ -61,7 +61,7 @@ class MidnightRitualEffect extends OneShotEffect {
         this.staticText = "Exile X target creature cards from your graveyard. For each creature card exiled this way, create a 2/2 black Zombie creature token";
     }
 
-    public MidnightRitualEffect(final MidnightRitualEffect effect) {
+    private MidnightRitualEffect(final MidnightRitualEffect effect) {
         super(effect);
     }
 
@@ -77,6 +77,7 @@ class MidnightRitualEffect extends OneShotEffect {
             Cards cardsToExile = new CardsImpl(getTargetPointer().getTargets(game, source));
             controller.moveCards(cardsToExile, Zone.EXILED, source, game);
             if (!cardsToExile.isEmpty()) {
+                game.getState().processAction(game);
                 new ZombieToken().putOntoBattlefield(cardsToExile.size(), game, source, controller.getId());
             }
             return true;

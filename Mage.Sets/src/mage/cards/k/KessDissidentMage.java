@@ -60,11 +60,11 @@ public final class KessDissidentMage extends CardImpl {
 class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     KessDissidentMageCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "During each of your turns, you may cast an instant or sorcery card from your graveyard";
     }
 
-    KessDissidentMageCastFromGraveyardEffect(final KessDissidentMageCastFromGraveyardEffect effect) {
+    private KessDissidentMageCastFromGraveyardEffect(final KessDissidentMageCastFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class KessDissidentMageReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a card cast this way would be put into your graveyard, exile it instead";
     }
 
-    KessDissidentMageReplacementEffect(final KessDissidentMageReplacementEffect effect) {
+    private KessDissidentMageReplacementEffect(final KessDissidentMageReplacementEffect effect) {
         super(effect);
     }
 

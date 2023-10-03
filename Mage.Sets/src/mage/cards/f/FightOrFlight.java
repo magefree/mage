@@ -54,7 +54,7 @@ class FightOrFlightEffect extends OneShotEffect {
         this.staticText = "separate all creatures that player controls into two piles. Only creatures in the pile of their choice can attack this turn";
     }
 
-    public FightOrFlightEffect(final FightOrFlightEffect effect) {
+    private FightOrFlightEffect(final FightOrFlightEffect effect) {
         super(effect);
     }
 

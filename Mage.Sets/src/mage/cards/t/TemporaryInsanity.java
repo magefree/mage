@@ -59,7 +59,7 @@ class TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard extends Target
         targetName = "creature with power less than the number of cards in your graveyard";
     }
 
-    public TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard(final TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard target) {
+    private TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard(final TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard target) {
         super(target);
     }
 

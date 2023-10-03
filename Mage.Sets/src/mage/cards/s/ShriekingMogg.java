@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -20,7 +19,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class ShriekingMogg extends CardImpl {
 
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all other creatures");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);

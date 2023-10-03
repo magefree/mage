@@ -44,7 +44,7 @@ public final class MasterOfTheVeil extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{U}")));
 
         // When Master of the Veil is turned face up, you may turn target creature with a morph ability face down.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new MasterOfTheVeilEffect(), false, true);
@@ -69,7 +69,7 @@ class MasterOfTheVeilEffect extends OneShotEffect {
         this.staticText = "turn target creature with a morph ability face down";
     }
 
-    MasterOfTheVeilEffect(final MasterOfTheVeilEffect effect) {
+    private MasterOfTheVeilEffect(final MasterOfTheVeilEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class VolrathsLaboratoryEffect extends OneShotEffect {
         this.staticText = "Create a 2/2 creature token of the chosen color and type";
     }
 
-    VolrathsLaboratoryEffect(final VolrathsLaboratoryEffect effect) {
+    private VolrathsLaboratoryEffect(final VolrathsLaboratoryEffect effect) {
         super(effect);
     }
 

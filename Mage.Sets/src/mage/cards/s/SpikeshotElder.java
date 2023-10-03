@@ -51,7 +51,7 @@ class SpikeshotElderEffect extends OneShotEffect {
         staticText = "{this} deals damage equal to its power to any target";
     }
 
-    public SpikeshotElderEffect(final SpikeshotElderEffect effect) {
+    private SpikeshotElderEffect(final SpikeshotElderEffect effect) {
         super(effect);
     }
 

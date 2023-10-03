@@ -39,37 +39,38 @@ public final class PlatinumAngel extends CardImpl {
     public PlatinumAngel copy() {
         return new PlatinumAngel(this);
     }
+}
 
-    static class PlatinumAngelEffect extends ContinuousRuleModifyingEffectImpl {
+class PlatinumAngelEffect extends ContinuousRuleModifyingEffectImpl {
 
-        public PlatinumAngelEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
-            staticText = "You can't lose the game and your opponents can't win the game";
+    public PlatinumAngelEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
+        staticText = "You can't lose the game and your opponents can't win the game";
+    }
+
+    private PlatinumAngelEffect(final PlatinumAngelEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public PlatinumAngelEffect copy() {
+        return new PlatinumAngelEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.WINS
+                || event.getType() == GameEvent.EventType.LOSES;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        switch (event.getType()) {
+            case WINS:
+                return game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
+            case LOSES:
+                return source.isControlledBy(event.getPlayerId());
         }
-
-        public PlatinumAngelEffect(final PlatinumAngelEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public PlatinumAngelEffect copy() {
-            return new PlatinumAngelEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
-        public boolean applies(GameEvent event, Ability source, Game game) {
-            switch (event.getType()) {
-                case WINS:
-                    return game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
-                case LOSES:
-                    return source.isControlledBy(event.getPlayerId());
-            }
-            return false;
-        }
+        return false;
     }
 }

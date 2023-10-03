@@ -70,7 +70,7 @@ class DargoTheShipwreckerEffect extends CostModificationEffectImpl {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
     }
 
-    public DargoTheShipwreckerEffect(final DargoTheShipwreckerEffect effect) {
+    private DargoTheShipwreckerEffect(final DargoTheShipwreckerEffect effect) {
         super(effect);
     }
 

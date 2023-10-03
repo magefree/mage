@@ -63,7 +63,7 @@ class WitchstalkerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    public WitchstalkerTriggeredAbility(final WitchstalkerTriggeredAbility ability) {
+    private WitchstalkerTriggeredAbility(final WitchstalkerTriggeredAbility ability) {
         super(ability);
     }
 

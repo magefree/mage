@@ -22,7 +22,7 @@ public final class GiantBaitingGiantWarriorToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public GiantBaitingGiantWarriorToken(final GiantBaitingGiantWarriorToken token) {
+    protected GiantBaitingGiantWarriorToken(final GiantBaitingGiantWarriorToken token) {
         super(token);
     }
 

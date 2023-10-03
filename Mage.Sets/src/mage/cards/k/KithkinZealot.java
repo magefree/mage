@@ -63,7 +63,7 @@ class KithkinZealotEffect extends OneShotEffect {
         this.staticText = "you gain 1 life for each black and/or red permanent target opponent controls";
     }
 
-    public KithkinZealotEffect(final KithkinZealotEffect effect) {
+    private KithkinZealotEffect(final KithkinZealotEffect effect) {
         super(effect);
     }
 

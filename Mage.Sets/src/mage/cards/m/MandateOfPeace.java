@@ -8,7 +8,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,23 +51,18 @@ public final class MandateOfPeace extends CardImpl {
 
 class MandateOfPeaceOpponentsCantCastSpellsEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MandateOfPeaceOpponentsCantCastSpellsEffect() {
+    MandateOfPeaceOpponentsCantCastSpellsEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Your opponents can't cast spells this turn";
     }
 
-    public MandateOfPeaceOpponentsCantCastSpellsEffect(final MandateOfPeaceOpponentsCantCastSpellsEffect effect) {
+    private MandateOfPeaceOpponentsCantCastSpellsEffect(final MandateOfPeaceOpponentsCantCastSpellsEffect effect) {
         super(effect);
     }
 
     @Override
     public MandateOfPeaceOpponentsCantCastSpellsEffect copy() {
         return new MandateOfPeaceOpponentsCantCastSpellsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -94,14 +88,14 @@ class MandateOfPeaceOpponentsCantCastSpellsEffect extends ContinuousRuleModifyin
 
 class MandateOfPeaceEndCombatEffect extends OneShotEffect {
 
-    public MandateOfPeaceEndCombatEffect() {
+    MandateOfPeaceEndCombatEffect() {
         super(Outcome.Benefit);
         this.staticText = "End the combat phase. <i>(Remove all attackers "
                 + "and blockers from combat. Exile all spells and abilities "
                 + "from the stack, including this spell.)</i>";
     }
 
-    public MandateOfPeaceEndCombatEffect(OneShotEffect effect) {
+    private MandateOfPeaceEndCombatEffect(final MandateOfPeaceEndCombatEffect effect) {
         super(effect);
     }
 
@@ -128,7 +122,7 @@ class MandateOfPeaceEndCombatEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public MandateOfPeaceEndCombatEffect copy() {
         return new MandateOfPeaceEndCombatEffect(this);
     }
 }

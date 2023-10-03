@@ -49,7 +49,7 @@ class IncreasingConfusionEffect extends OneShotEffect {
         staticText = "Target player mills X cards. If this spell was cast from a graveyard, that player mills twice that many cards";
     }
 
-    public IncreasingConfusionEffect(final IncreasingConfusionEffect effect) {
+    private IncreasingConfusionEffect(final IncreasingConfusionEffect effect) {
         super(effect);
     }
 

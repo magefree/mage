@@ -5,6 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.common.delayed.AtTheBeginOfNextCleanupDelayedTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -21,7 +23,7 @@ import java.util.UUID;
 public class DistributeCountersEffect extends OneShotEffect {
 
     private final CounterType counterType;
-    private final int amount;
+    private final DynamicValue amount;
     private final boolean removeAtEndOfTurn;
     private final String targetDescription;
 
@@ -30,6 +32,10 @@ public class DistributeCountersEffect extends OneShotEffect {
     }
 
     public DistributeCountersEffect(CounterType counterType, int amount, boolean removeAtEndOfTurn, String targetDescription) {
+        this(counterType, StaticValue.get(amount), removeAtEndOfTurn, targetDescription);
+    }
+
+    public DistributeCountersEffect(CounterType counterType, DynamicValue amount, boolean removeAtEndOfTurn, String targetDescription) {
         super(Outcome.BoostCreature);
         this.counterType = counterType;
         this.amount = amount;
@@ -37,7 +43,7 @@ public class DistributeCountersEffect extends OneShotEffect {
         this.targetDescription = targetDescription;
     }
 
-    public DistributeCountersEffect(final DistributeCountersEffect effect) {
+    protected DistributeCountersEffect(final DistributeCountersEffect effect) {
         super(effect);
         this.counterType = effect.counterType;
         this.amount = effect.amount;
@@ -75,14 +81,14 @@ public class DistributeCountersEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
         String name = counterType.getName();
-        String text = "distribute " + CardUtil.numberToText(amount) + ' ' + name + " counters among " + targetDescription;
+        String number = (amount instanceof StaticValue) ? CardUtil.numberToText(((StaticValue) amount).getValue()) : amount.toString();
+        String text = "distribute " + number + ' ' + name + " counters among " + targetDescription;
         if (removeAtEndOfTurn) {
-            text += " For each " + name + " counter you put on a creature this way, remove a "
+            text += ". For each " + name + " counter you put on a creature this way, remove a "
                     + name + " counter from that creature at the beginning of the next cleanup step.";
         }
         return text;
@@ -101,7 +107,7 @@ class RemoveCountersAtEndOfTurn extends OneShotEffect {
                 + name + " counter from that creature at the beginning of the next cleanup step.";
     }
 
-    public RemoveCountersAtEndOfTurn(final RemoveCountersAtEndOfTurn effect) {
+    protected RemoveCountersAtEndOfTurn(final RemoveCountersAtEndOfTurn effect) {
         super(effect);
         this.counterType = effect.counterType;
     }

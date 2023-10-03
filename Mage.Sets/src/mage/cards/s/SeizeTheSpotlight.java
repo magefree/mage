@@ -91,7 +91,7 @@ class SeizeTheSpotlightEffect extends OneShotEffect {
             FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + opponent.getName());
             filter.add(new ControllerIdPredicate(opponent.getId()));
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!target.canChoose(source.getSourceId(), source, game)) {
                 continue;
             }

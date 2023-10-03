@@ -47,18 +47,13 @@ class VeilstoneAmuletEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "creatures you control can't be the targets of spells or abilities your opponents control this turn";
     }
 
-    public VeilstoneAmuletEffect(final VeilstoneAmuletEffect effect) {
+    private VeilstoneAmuletEffect(final VeilstoneAmuletEffect effect) {
         super(effect);
     }
 
     @Override
     public VeilstoneAmuletEffect copy() {
         return new VeilstoneAmuletEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

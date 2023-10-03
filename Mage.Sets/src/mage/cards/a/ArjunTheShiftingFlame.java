@@ -54,7 +54,7 @@ class ArjunTheShiftingFlameEffect extends OneShotEffect {
         staticText = "put the cards in your hand on the bottom of your library in any order, then draw that many cards";
     }
 
-    public ArjunTheShiftingFlameEffect(final ArjunTheShiftingFlameEffect effect) {
+    private ArjunTheShiftingFlameEffect(final ArjunTheShiftingFlameEffect effect) {
         super(effect);
     }
 

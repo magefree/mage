@@ -63,7 +63,7 @@ class ChirrutImweEffect extends ContinuousEffectImpl {
         staticText = "{this} can block up to two additional creatures";
     }
     
-    public ChirrutImweEffect(final ChirrutImweEffect effect) {
+    private ChirrutImweEffect(final ChirrutImweEffect effect) {
         super(effect);
     }
     

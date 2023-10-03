@@ -33,7 +33,7 @@ public final class DawnOfANewAge extends CardImpl {
         DynamicValue numberCounters = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.HOPE.createInstance(0), numberCounters, true),
-                "with a Hope counter on it for each creature you control")
+                "with a hope counter on it for each creature you control")
         );
 
         // At the beginning of your end step, remove a hope counter from Dawn of a New Age. If you do, draw a card. Then if Dawn of a New Age has no hope counters on it, sacrifice it and you gain 4 life.

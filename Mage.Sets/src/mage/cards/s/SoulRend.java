@@ -48,7 +48,7 @@ class SoulRendEffect extends OneShotEffect {
         staticText = "destroy target creature if it's white. A creature destroyed this way can't be regenerated";
     }
 
-    SoulRendEffect(final SoulRendEffect effect) {
+    private SoulRendEffect(final SoulRendEffect effect) {
         super(effect);
     }
 

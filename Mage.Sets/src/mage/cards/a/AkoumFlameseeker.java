@@ -64,7 +64,7 @@ class AkoumFlameseekerEffect extends OneShotEffect {
         this.staticText = "Discard a card. If you do, draw a card";
     }
 
-    public AkoumFlameseekerEffect(final AkoumFlameseekerEffect effect) {
+    private AkoumFlameseekerEffect(final AkoumFlameseekerEffect effect) {
         super(effect);
     }
 

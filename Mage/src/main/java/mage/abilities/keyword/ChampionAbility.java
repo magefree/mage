@@ -102,7 +102,7 @@ public class ChampionAbility extends StaticAbility {
         addSubAbility(ability2);
     }
 
-    public ChampionAbility(final ChampionAbility ability) {
+    protected ChampionAbility(final ChampionAbility ability) {
         super(ability);
         this.objectDescription = ability.objectDescription;
     }

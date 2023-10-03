@@ -41,7 +41,7 @@ public final class BullAurochs extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Bull Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, "it"), false));
     }
 
     private BullAurochs(final BullAurochs card) {

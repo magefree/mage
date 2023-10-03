@@ -57,11 +57,11 @@ public final class GisaAndGeralf extends CardImpl {
 class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     GisaAndGeralfCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCreatureInPlay, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCreatureInPlay);
         staticText = "During each of your turns, you may cast a Zombie creature spell from your graveyard";
     }
 
-    GisaAndGeralfCastFromGraveyardEffect(final GisaAndGeralfCastFromGraveyardEffect effect) {
+    private GisaAndGeralfCastFromGraveyardEffect(final GisaAndGeralfCastFromGraveyardEffect effect) {
         super(effect);
     }
 

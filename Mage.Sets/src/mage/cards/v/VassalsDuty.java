@@ -56,7 +56,7 @@ class VassalsDutyPreventDamageTargetEffect extends RedirectionEffect {
         staticText = "The next " + amount + " damage that would be dealt to target legendary creature you control this turn is dealt to you instead";
     }
 
-    public VassalsDutyPreventDamageTargetEffect(final VassalsDutyPreventDamageTargetEffect effect) {
+    private VassalsDutyPreventDamageTargetEffect(final VassalsDutyPreventDamageTargetEffect effect) {
         super(effect);
     }
 

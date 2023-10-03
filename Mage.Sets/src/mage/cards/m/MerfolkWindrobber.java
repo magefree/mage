@@ -9,7 +9,7 @@ import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -60,10 +60,10 @@ public final class MerfolkWindrobber extends CardImpl {
 class MerfolkWindrobberTriggeredAbility extends TriggeredAbilityImpl {
 
     public MerfolkWindrobberTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1));
+        super(Zone.BATTLEFIELD, new MillCardsTargetEffect(1));
     }
 
-    public MerfolkWindrobberTriggeredAbility(final MerfolkWindrobberTriggeredAbility ability) {
+    private MerfolkWindrobberTriggeredAbility(final MerfolkWindrobberTriggeredAbility ability) {
         super(ability);
     }
 

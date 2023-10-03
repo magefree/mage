@@ -33,7 +33,7 @@ public final class JhoiraWeatherlightCaptain extends CardImpl {
 
     }
 
-    public JhoiraWeatherlightCaptain(final JhoiraWeatherlightCaptain jhoiraWeatherlightCaptain) {
+    private JhoiraWeatherlightCaptain(final JhoiraWeatherlightCaptain jhoiraWeatherlightCaptain) {
         super(jhoiraWeatherlightCaptain);
     }
 

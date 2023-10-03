@@ -61,7 +61,7 @@ class ExcavatorEffect extends ContinuousEffectImpl {
         setText("Target creature gains landwalk of each of the land types of the sacrificed land until end of turn");
     }
 
-    public ExcavatorEffect(final ExcavatorEffect effect) {
+    private ExcavatorEffect(final ExcavatorEffect effect) {
         super(effect);
         this.abilities = abilities.copy();
     }

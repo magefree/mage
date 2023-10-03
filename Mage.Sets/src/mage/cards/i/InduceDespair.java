@@ -54,7 +54,7 @@ class InduceDespairEffect extends OneShotEffect {
         staticText = "Target creature gets -X/-X until end of turn, where X is the revealed card's mana value";
     }
 
-    public InduceDespairEffect(InduceDespairEffect effect) {
+    private InduceDespairEffect(final InduceDespairEffect effect) {
         super(effect);
     }
 

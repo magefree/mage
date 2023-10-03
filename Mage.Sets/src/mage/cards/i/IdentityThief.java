@@ -67,7 +67,7 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public IdentityThiefAbility(final IdentityThiefAbility ability) {
+    private IdentityThiefAbility(final IdentityThiefAbility ability) {
         super(ability);
     }
 
@@ -95,7 +95,7 @@ class IdentityThiefEffect extends OneShotEffect {
                 + "Return the exiled card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public IdentityThiefEffect(final IdentityThiefEffect effect) {
+    private IdentityThiefEffect(final IdentityThiefEffect effect) {
         super(effect);
     }
 

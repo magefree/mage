@@ -56,7 +56,7 @@ class SphinxsTutelageEffect extends OneShotEffect {
         this.staticText = "target opponent mills two cards. If two nonland cards that share a color were milled this way, repeat this process.";
     }
 
-    public SphinxsTutelageEffect(final SphinxsTutelageEffect effect) {
+    private SphinxsTutelageEffect(final SphinxsTutelageEffect effect) {
         super(effect);
     }
 

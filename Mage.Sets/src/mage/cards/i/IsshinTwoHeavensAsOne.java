@@ -50,7 +50,7 @@ class IsshinTwoHeavensAsOneEffect extends ReplacementEffectImpl {
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 
-    IsshinTwoHeavensAsOneEffect(final IsshinTwoHeavensAsOneEffect effect) {
+    private IsshinTwoHeavensAsOneEffect(final IsshinTwoHeavensAsOneEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,12 @@ class IsshinTwoHeavensAsOneEffect extends ReplacementEffectImpl {
         if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
             return false;
         }
+
         GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        if (sourceEvent == null) {
+            return false;
+        }
+
         switch (sourceEvent.getType()) {
             case ATTACKER_DECLARED:
             case DECLARED_ATTACKERS:

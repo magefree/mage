@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.TemptedByTheRingWatcher;
 
@@ -53,15 +54,16 @@ public final class TheRingEmblem extends Emblem {
     }
 
     public void addNextAbility(Game game) {
+        String logText;
         Ability ability;
         switch (TemptedByTheRingWatcher.getCount(this.getControllerId(), game)) {
             case 0:
-                // Your Ring-bearer is legendary and can't be blocked by creatures with greater power.
+                logText = "Your Ring-bearer is legendary and can't be blocked by creatures with greater power.";
                 ability = new SimpleStaticAbility(Zone.COMMAND, new TheRingEmblemLegendaryEffect());
                 ability.addEffect(new TheRingEmblemEvasionEffect());
                 break;
             case 1:
-                // Whenever your Ring-bearer attacks, draw a card, then discard a card.
+                logText = "Whenever your Ring-bearer attacks, draw a card, then discard a card.";
                 ability = new AttacksCreatureYouControlTriggeredAbility(
                         Zone.COMMAND,
                         new DrawDiscardControllerEffect(1, 1),
@@ -69,11 +71,11 @@ public final class TheRingEmblem extends Emblem {
                 ).setTriggerPhrase("Whenever your Ring-bearer attacks, ");
                 break;
             case 2:
-                // Whenever your Ring-bearer becomes blocked by a creature, that creature's controller sacrifices it at end of combat.
+                logText ="Whenever your Ring-bearer becomes blocked by a creature, that creature's controller sacrifices it at end of combat.";
                 ability = new TheRingEmblemTriggeredAbility();
                 break;
             case 3:
-                // Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.
+                logText = "Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.";
                 ability = new DealsDamageToAPlayerAllTriggeredAbility(
                         Zone.COMMAND, new LoseLifeOpponentsEffect(3), filter, false,
                         SetTargetPointer.NONE, true, false
@@ -82,10 +84,20 @@ public final class TheRingEmblem extends Emblem {
             default:
                 return;
         }
+        UUID controllerId = this.getControllerId();
         this.getAbilities().add(ability);
         ability.setSourceId(this.getId());
-        ability.setControllerId(this.getControllerId());
+        ability.setControllerId(controllerId);
         game.getState().addAbility(ability, this);
+
+        String name = "";
+        if(controllerId  != null){
+            Player player = game.getPlayer(controllerId);
+            if(player != null){
+                name = player.getLogName();
+            }
+        }
+        game.informPlayers(name + " gains a new Ring ability: \"" + logText + "\"");
     }
 }
 
@@ -94,7 +106,7 @@ enum TheRingEmblemPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.isRingBearer(game);
+        return input.isRingBearer();
     }
 }
 
@@ -148,7 +160,7 @@ class TheRingEmblemEvasionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return permanent.isControlledBy(source.getControllerId())
-                && permanent.isRingBearer(game);
+                && permanent.isRingBearer();
     }
 
     @Override
@@ -184,7 +196,7 @@ class TheRingEmblemTriggeredAbility extends TriggeredAbilityImpl {
         if (attacker == null
                 || blocker == null
                 || attacker.isControlledBy(getControllerId())
-                || !attacker.isRingBearer(game)) {
+                || !attacker.isRingBearer()) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(blocker, game));

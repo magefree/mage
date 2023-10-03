@@ -56,7 +56,7 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
 
     SatoruUmezawaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
         setTriggerPhrase("Whenever you activate a ninjutsu ability, ");
     }
 
@@ -91,7 +91,7 @@ class SatoruUmezawaEffect extends ContinuousEffectImpl {
         this.staticText = "each creature card in your hand has ninjutsu {2}{U}{B}";
     }
 
-    public SatoruUmezawaEffect(final SatoruUmezawaEffect effect) {
+    private SatoruUmezawaEffect(final SatoruUmezawaEffect effect) {
         super(effect);
     }
 

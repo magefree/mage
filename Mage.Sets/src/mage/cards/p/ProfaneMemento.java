@@ -43,7 +43,7 @@ class ProfaneMementoTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature card is put into an opponent's graveyard from anywhere, ");
     }
     
-    public ProfaneMementoTriggeredAbility(final ProfaneMementoTriggeredAbility ability) {
+    private ProfaneMementoTriggeredAbility(final ProfaneMementoTriggeredAbility ability) {
         super(ability);
     }
     

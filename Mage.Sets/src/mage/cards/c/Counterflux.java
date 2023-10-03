@@ -74,7 +74,7 @@ class CounterfluxEffect extends OneShotEffect {
 
     }
 
-    public CounterfluxEffect(final CounterfluxEffect effect) {
+    private CounterfluxEffect(final CounterfluxEffect effect) {
         super(effect);
     }
 

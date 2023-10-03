@@ -96,18 +96,13 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
         staticText = null;
     }
 
-    public BoseijuWhoSheltersAllCantCounterEffect(final BoseijuWhoSheltersAllCantCounterEffect effect) {
+    private BoseijuWhoSheltersAllCantCounterEffect(final BoseijuWhoSheltersAllCantCounterEffect effect) {
         super(effect);
     }
 
     @Override
     public BoseijuWhoSheltersAllCantCounterEffect copy() {
         return new BoseijuWhoSheltersAllCantCounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -61,7 +61,7 @@ class SoulReapEffect extends OneShotEffect {
                 "loses 3 life if you've cast another black spell this turn";
     }
 
-    public SoulReapEffect(final SoulReapEffect effect) {
+    private SoulReapEffect(final SoulReapEffect effect) {
         super(effect);
     }
 

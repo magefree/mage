@@ -50,7 +50,7 @@ class LonghornFirebeastEffect extends OneShotEffect {
         staticText = "any opponent may have it deal 5 damage to them. If a player does, sacrifice {this}";
     }
 
-    LonghornFirebeastEffect(final LonghornFirebeastEffect effect) {
+    private LonghornFirebeastEffect(final LonghornFirebeastEffect effect) {
         super(effect);
     }
 

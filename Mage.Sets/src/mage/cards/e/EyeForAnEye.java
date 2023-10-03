@@ -47,7 +47,7 @@ class EyeForAnEyeEffect extends ReplacementEffectImpl {
         this.damageSource = new TargetSource();
     }
 
-    public EyeForAnEyeEffect(final EyeForAnEyeEffect effect) {
+    private EyeForAnEyeEffect(final EyeForAnEyeEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }

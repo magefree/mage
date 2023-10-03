@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HumanKnightToken;
@@ -34,7 +34,7 @@ public final class ForthEorlingas extends CardImpl {
         ));
 
         // Whenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ForthEorlingasTriggeredAbility()));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ForthEorlingasTriggeredAbility()).concatBy("<br>"));
     }
 
     private ForthEorlingas(final ForthEorlingas card) {
@@ -54,18 +54,18 @@ class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility {
         this.setTriggerPhrase("Whenever one or more creatures you control deal combat damage to one or more players this turn, ");
     }
 
-    public ForthEorlingasTriggeredAbility(ForthEorlingasTriggeredAbility ability) {
+    private ForthEorlingasTriggeredAbility(final ForthEorlingasTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
+        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
         for (DamagedEvent damagedEvent : dEvent.getEvents()) {
             if (!damagedEvent.isCombatDamage()) {
                 continue;

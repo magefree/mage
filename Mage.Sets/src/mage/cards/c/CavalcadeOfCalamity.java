@@ -63,7 +63,7 @@ class CavalcadeOfCalamityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.damagePlayerOrPlaneswalker(
+        return game.damagePlayerOrPermanent(
                 game.getCombat().getDefenderId(targetPointer.getFirst(game, source)), 1,
                 source.getSourceId(), source, game, false, true
         ) > 0;

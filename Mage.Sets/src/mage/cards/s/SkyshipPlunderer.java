@@ -1,11 +1,9 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -56,12 +54,12 @@ public final class SkyshipPlunderer extends CardImpl {
 
 class SkyshipPlundererEffect extends OneShotEffect {
 
-    public SkyshipPlundererEffect() {
+    SkyshipPlundererEffect() {
         super(Outcome.Neutral);
         this.staticText = "for each kind of counter on target permanent or player, give that permanent or player another counter of that kind";
     }
 
-    public SkyshipPlundererEffect(final SkyshipPlundererEffect effect) {
+    private SkyshipPlundererEffect(final SkyshipPlundererEffect effect) {
         super(effect);
     }
 
@@ -105,7 +103,7 @@ class SkyshipPlundererEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public SkyshipPlundererEffect copy() {
         return new SkyshipPlundererEffect(this);
     }
 

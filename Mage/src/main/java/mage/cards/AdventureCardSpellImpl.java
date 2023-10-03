@@ -35,7 +35,13 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
         this.adventureCardParent = adventureCardParent;
     }
 
-    public AdventureCardSpellImpl(final AdventureCardSpellImpl card) {
+    public void finalizeAdventure() {
+        if (spellAbility instanceof AdventureCardSpellAbility) {
+            ((AdventureCardSpellAbility) spellAbility).finalizeAdventure();
+        }
+    }
+
+    protected AdventureCardSpellImpl(final AdventureCardSpellImpl card) {
         super(card);
         this.adventureCardParent = card.adventureCardParent;
     }
@@ -77,7 +83,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     }
 
     @Override
-    public AdventureCardSpell copy() {
+    public AdventureCardSpellImpl copy() {
         return new AdventureCardSpellImpl(this);
     }
 
@@ -100,18 +106,35 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
 
 class AdventureCardSpellAbility extends SpellAbility {
 
-    String nameFull;
+    private String nameFull;
+    private boolean finalized = false;
 
     public AdventureCardSpellAbility(final SpellAbility baseSpellAbility, String adventureName, CardType[] cardTypes, String costs) {
         super(baseSpellAbility);
         this.setName(cardTypes, adventureName, costs);
-        this.addEffect(ExileAdventureSpellEffect.getInstance());
         this.setCardName(adventureName);
     }
 
-    public AdventureCardSpellAbility(final AdventureCardSpellAbility ability) {
+    // The exile effect needs to be added last.
+    public void finalizeAdventure() {
+        if (finalized) {
+            throw new IllegalStateException("Wrong code usage. "
+                    + "Adventure (" + cardName + ") "
+                    + "need to call finalizeAdventure() exactly once.");
+        }
+        this.addEffect(ExileAdventureSpellEffect.getInstance());
+        this.finalized = true;
+    }
+
+    protected AdventureCardSpellAbility(final AdventureCardSpellAbility ability) {
         super(ability);
         this.nameFull = ability.nameFull;
+        if (!ability.finalized) {
+            throw new IllegalStateException("Wrong code usage. "
+                    + "Adventure (" + cardName + ") "
+                    + "need to call finalizeAdventure() at the very end of the card's constructor.");
+        }
+        this.finalized = true;
     }
 
     @Override
@@ -142,7 +165,7 @@ class AdventureCardSpellAbility extends SpellAbility {
         StringBuilder sbRule = new StringBuilder();
         sbRule.append(this.nameFull);
         sbRule.append(" ");
-        sbRule.append(manaCosts.getText());
+        sbRule.append(getManaCosts().getText());
         sbRule.append(" &mdash; ");
         Modes modes = this.getModes();
         if (modes.size() <= 1) {
@@ -155,7 +178,7 @@ class AdventureCardSpellAbility extends SpellAbility {
     }
 
     @Override
-    public SpellAbility copy() {
+    public AdventureCardSpellAbility copy() {
         return new AdventureCardSpellAbility(this);
     }
 }

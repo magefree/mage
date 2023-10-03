@@ -32,7 +32,7 @@ public final class SaltRoadAmbushers extends CardImpl {
         this.addAbility(new SaltRoadAmbushersTriggeredAbility());
         
         // Megamorph {3}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}"), true));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{G}{G}"), true));
     }
 
     private SaltRoadAmbushers(final SaltRoadAmbushers card) {
@@ -58,7 +58,7 @@ private static final FilterControlledCreaturePermanent filter = new FilterContro
         super(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), filter, true);
     }
 
-    public SaltRoadAmbushersTriggeredAbility(final SaltRoadAmbushersTriggeredAbility ability) {
+    private SaltRoadAmbushersTriggeredAbility(final SaltRoadAmbushersTriggeredAbility ability) {
         super(ability);
     }
 

@@ -106,7 +106,7 @@ class HansErikssonEffect extends OneShotEffect {
             filter.getPlayerFilter().add(new PlayerIdPredicate(defendingPlayerId));
             filter.getPermanentFilter().add(new ControllerIdPredicate(defendingPlayerId));
             TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }

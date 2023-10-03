@@ -54,7 +54,7 @@ class SustainingSpiritReplacementEffect extends ReplacementEffectImpl {
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public SustainingSpiritReplacementEffect(final SustainingSpiritReplacementEffect effect) {
+    private SustainingSpiritReplacementEffect(final SustainingSpiritReplacementEffect effect) {
         super(effect);
     }
 

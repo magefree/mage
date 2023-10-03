@@ -20,7 +20,7 @@ public abstract class CostImpl implements Cost {
         targets = new Targets();
     }
 
-    public CostImpl(final CostImpl cost) {
+    protected CostImpl(final CostImpl cost) {
         this.id = cost.id;
         this.text = cost.text;
         this.paid = cost.paid;
@@ -62,6 +62,7 @@ public abstract class CostImpl implements Cost {
     @Override
     public void clearPaid() {
         paid = false;
+        targets.clearChosen();
     }
 
     @Override

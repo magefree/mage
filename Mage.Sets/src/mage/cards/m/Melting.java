@@ -43,7 +43,7 @@ class MeltingEffect extends ContinuousEffectImpl {
         this.staticText = "All lands are no longer snow";
     }
 
-    public MeltingEffect(final MeltingEffect effect) {
+    private MeltingEffect(final MeltingEffect effect) {
         super(effect);
     }
 

@@ -32,7 +32,7 @@ public final class MagdaBrazenOutlaw extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.DWARF, "Dwarves");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.DWARF, "a Dwarf you control");
     private static final FilterCard filter3 = new FilterCard("an artifact or Dragon card");
-    private static final FilterControlledPermanent filter4 = new FilterControlledPermanent(SubType.TREASURE, "treasures");
+    private static final FilterControlledPermanent filter4 = new FilterControlledPermanent(SubType.TREASURE, "Treasures");
     static {
         filter3.add(Predicates.or(CardType.ARTIFACT.getPredicate(), SubType.DRAGON.getPredicate()));
     }

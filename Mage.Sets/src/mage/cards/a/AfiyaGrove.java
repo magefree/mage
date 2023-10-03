@@ -60,7 +60,7 @@ class MoveCounterToTargetFromSourceEffect extends OneShotEffect {
         this.staticText = "move a +1/+1 counter from {this} onto target creature";
     }
 
-    public MoveCounterToTargetFromSourceEffect(final MoveCounterToTargetFromSourceEffect effect) {
+    private MoveCounterToTargetFromSourceEffect(final MoveCounterToTargetFromSourceEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class AfiyaGroveNoCountersAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public AfiyaGroveNoCountersAbility(final AfiyaGroveNoCountersAbility ability) {
+    private AfiyaGroveNoCountersAbility(final AfiyaGroveNoCountersAbility ability) {
         super(ability);
     }
 

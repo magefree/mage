@@ -44,7 +44,7 @@ class ParallectricFeedbackEffect extends OneShotEffect {
         staticText = "{this} deals damage to target spell's controller equal to that spell's mana value";
     }
 
-    public ParallectricFeedbackEffect(final ParallectricFeedbackEffect effect) {
+    private ParallectricFeedbackEffect(final ParallectricFeedbackEffect effect) {
         super(effect);
     }
 

@@ -43,7 +43,7 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
         this.filter.add(TargetController.YOU.getControllerPredicate());
     }
 
-    public SacrificeOpponentsEffect(final SacrificeOpponentsEffect effect) {
+    protected SacrificeOpponentsEffect(final SacrificeOpponentsEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter.copy();

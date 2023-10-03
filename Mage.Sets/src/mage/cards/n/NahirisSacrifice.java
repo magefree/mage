@@ -72,7 +72,7 @@ class SacrificeXManaValueCost extends VariableCostImpl implements SacrificeCost 
         this.filter = filter;
     }
 
-    public SacrificeXManaValueCost(final SacrificeXManaValueCost cost) {
+    private SacrificeXManaValueCost(final SacrificeXManaValueCost cost) {
         super(cost);
         this.filter = cost.filter;
     }
@@ -102,7 +102,7 @@ class SacrificeXCostConvertedMana implements DynamicValue {
         this.type = type;
     }
 
-    public SacrificeXCostConvertedMana(SacrificeXCostConvertedMana value) {
+    private SacrificeXCostConvertedMana(final SacrificeXCostConvertedMana value) {
         this.type = value.type;
     }
 

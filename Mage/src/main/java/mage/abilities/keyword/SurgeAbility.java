@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
@@ -29,8 +30,8 @@ public class SurgeAbility extends SpellAbility {
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
 
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
         this.addManaCost(new ManaCostsImpl<>(surgeCosts));
 
         this.setRuleAtTheTop(true);
@@ -38,7 +39,7 @@ public class SurgeAbility extends SpellAbility {
                 + " <i>(You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)</i>";
     }
 
-    public SurgeAbility(final SurgeAbility ability) {
+    protected SurgeAbility(final SurgeAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }
@@ -54,7 +55,7 @@ public class SurgeAbility extends SpellAbility {
                     if (!player.hasOpponent(playerToCheckId, game)) {
                         if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(playerToCheckId) > 0
                                 && super.canActivate(playerId, game).canActivate()) {
-                            return ActivationStatus.getTrue(this, game);
+                            return new ActivationStatus(new ApprovingObject(this, game));
                         }
                     }
                 }

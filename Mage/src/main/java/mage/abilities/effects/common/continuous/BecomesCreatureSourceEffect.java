@@ -44,20 +44,30 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
 
     /**
-     * @param token       Token as blueprint for creature to become
-     * @param retainType  If null, permanent loses its previous types, otherwise retains types with appropriate text
-     * @param duration    Duration for the effect
+     * @param token      Token as blueprint for creature to become
+     * @param retainType If null, permanent loses its previous types, otherwise retains types with appropriate text
+     * @param duration   Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, CardType retainType, Duration duration) {
+        this(token, retainType, duration, (retainType == CardType.PLANESWALKER || retainType == CardType.CREATURE));
+    }
+
+    /**
+     * @param token               Token as blueprint for creature to become
+     * @param retainType          If null, permanent loses its previous types, otherwise retains types with appropriate text
+     * @param duration            Duration for the effect
+     * @param durationRuleAtStart for text rule generation
+     */
+    public BecomesCreatureSourceEffect(Token token, CardType retainType, Duration duration, boolean durationRuleAtStart) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.retainType = retainType;
-        this.durationRuleAtStart = (retainType == CardType.PLANESWALKER || retainType == CardType.CREATURE);
+        this.durationRuleAtStart = durationRuleAtStart;
         setText();
         this.addDependencyType(DependencyType.BecomeCreature);
     }
 
-    public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
+    protected BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.retainType = effect.retainType;
@@ -104,6 +114,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
                 if (retainType == null) {
                     permanent.removeAllCardTypes(game);
                     permanent.removeAllSubTypes(game);
+                }
+                for (SuperType superType : token.getSuperType(game)) {
+                    permanent.addSuperType(game, superType);
                 }
                 for (CardType cardType : token.getCardType(game)) {
                     permanent.addCardType(game, cardType);

@@ -62,7 +62,7 @@ class SaskiaTheUnyieldingEffect extends OneShotEffect {
         this.staticText = "it deals that much damage to the chosen player";
     }
 
-    public SaskiaTheUnyieldingEffect(final SaskiaTheUnyieldingEffect effect) {
+    private SaskiaTheUnyieldingEffect(final SaskiaTheUnyieldingEffect effect) {
         super(effect);
     }
 

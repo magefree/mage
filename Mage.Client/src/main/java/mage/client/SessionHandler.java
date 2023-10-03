@@ -1,7 +1,9 @@
 package mage.client;
 
 import mage.cards.decks.DeckCardLists;
+import static mage.cards.decks.DeckFormats.XMAGE;
 import mage.client.chat.LocalCommands;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -16,6 +18,9 @@ import mage.remote.SessionImpl;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -191,7 +196,6 @@ public final class SessionHandler {
             logger.info(e);
             return null;
         }
-
     }
 
     public static String getUserName() {
@@ -230,8 +234,27 @@ public final class SessionHandler {
         return session.getTournamentTypes();
     }
 
-    public static boolean submitDeck(UUID tableId, DeckCardLists deckCardLists) {
-        return session.submitDeck(tableId, deckCardLists);
+    private static void autoSaveLimitedDeck(DeckCardLists deckList) {
+        String autoSave = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_LIMITED_DECK_AUTO_SAVE, "true");
+        if(autoSave.equals("true")){
+            // Log the submitted deck in the log folder.
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            String logFilename = sdf.format(new Date()) + "_limited" + ".dck";
+            try {
+                XMAGE.getExporter().writeDeck(new File("gamelogs"), logFilename, deckList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static boolean submitDeck(DeckEditorMode mode, UUID tableId, DeckCardLists deckCardLists) {
+        boolean success = session.submitDeck(tableId, deckCardLists);
+        if(DeckEditorMode.LIMITED_BUILDING.equals(mode)) {
+            // AutoSaving is done after submitting, to not let the server wait.
+            autoSaveLimitedDeck(deckCardLists);
+        }
+        return success;
     }
 
     public static String[] getDeckTypes() {
@@ -273,7 +296,7 @@ public final class SessionHandler {
     public static void sendCardMark(UUID draftId, UUID id) {
         session.sendCardMark(draftId, id);
     }
-    
+
     public static void setBoosterLoaded(UUID draftId) {
         session.setBoosterLoaded(draftId);
     }

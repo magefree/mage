@@ -2,6 +2,7 @@ package mage.players;
 
 import java.io.Serializable;
 import java.util.UUID;
+
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -10,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.ManaType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ManaPoolItem implements Serializable, Emptiable {
@@ -54,7 +54,7 @@ public class ManaPoolItem implements Serializable, Emptiable {
         this.duration = Duration.EndOfStep;
     }
 
-    public ManaPoolItem(final ManaPoolItem item) {
+    protected ManaPoolItem(final ManaPoolItem item) {
         this.red = item.red;
         this.green = item.green;
         this.blue = item.blue;

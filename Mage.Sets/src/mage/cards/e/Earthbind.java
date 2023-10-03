@@ -63,7 +63,7 @@ class EarthbindEffect extends OneShotEffect {
         staticText = "if enchanted creature has flying, {this} deals 2 damage to that creature and Earthbind gains \"Enchanted creature loses flying.\"";
     }
 
-    public EarthbindEffect(final EarthbindEffect effect) {
+    private EarthbindEffect(final EarthbindEffect effect) {
         super(effect);
     }
 

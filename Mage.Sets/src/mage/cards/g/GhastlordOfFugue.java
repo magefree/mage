@@ -62,7 +62,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
         staticText = "that player reveals their hand. You choose a card from it. That player exiles that card";
     }
 
-    public GhastlordOfFugueEffect(final GhastlordOfFugueEffect effect) {
+    private GhastlordOfFugueEffect(final GhastlordOfFugueEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
 
             // You choose a card from it
             TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Card chosenCard = null;
             if (controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());

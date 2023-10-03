@@ -21,7 +21,7 @@ public final class DragonSpiritToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public DragonSpiritToken(final DragonSpiritToken token) {
+    protected DragonSpiritToken(final DragonSpiritToken token) {
         super(token);
     }
 

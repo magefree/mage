@@ -43,7 +43,7 @@ class MindsAglowEffect extends OneShotEffect {
         this.staticText = "<i>Join forces</i> &mdash; Starting with you, each player may pay any amount of mana. Each player draws X cards, where X is the total amount of mana paid this way";
     }
 
-    public MindsAglowEffect(final MindsAglowEffect effect) {
+    private MindsAglowEffect(final MindsAglowEffect effect) {
         super(effect);
     }
 

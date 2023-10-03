@@ -1,12 +1,9 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -15,12 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetAttackingCreature;
 
 import java.util.UUID;
@@ -44,7 +36,8 @@ public class FamilysFavor extends CardImpl {
                 new DealsCombatDamageToAPlayerTriggeredAbility(
                         new DoIfCostPaid(
                                 new DrawCardSourceControllerEffect(1),
-                                new RemoveCountersSourceCost(CounterType.SHIELD.createInstance())),
+                                new RemoveCountersSourceCost(CounterType.SHIELD.createInstance()),
+                                null, false),
                         false),
                 Duration.EndOfTurn,
                 "Until end of turn, it gains " +

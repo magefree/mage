@@ -63,7 +63,7 @@ class MeriekeRiBeritCreateDelayedTriggerEffect extends OneShotEffect {
         this.staticText = "When {this} leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated";
     }
 
-    public MeriekeRiBeritCreateDelayedTriggerEffect(final MeriekeRiBeritCreateDelayedTriggerEffect effect) {
+    private MeriekeRiBeritCreateDelayedTriggerEffect(final MeriekeRiBeritCreateDelayedTriggerEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class MeriekeRiBeritDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new DestroyTargetEffect(true), Duration.Custom, true);
     }
 
-    MeriekeRiBeritDelayedTriggeredAbility(MeriekeRiBeritDelayedTriggeredAbility ability) {
+    private MeriekeRiBeritDelayedTriggeredAbility(final MeriekeRiBeritDelayedTriggeredAbility ability) {
         super(ability);
     }
 

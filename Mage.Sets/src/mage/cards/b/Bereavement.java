@@ -44,7 +44,7 @@ class BereavementTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1));
     }
 
-    public BereavementTriggeredAbility(final BereavementTriggeredAbility ability) {
+    private BereavementTriggeredAbility(final BereavementTriggeredAbility ability) {
         super(ability);
     }
 

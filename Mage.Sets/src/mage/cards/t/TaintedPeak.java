@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class TaintedPeak extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("you control a swamp");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("you control a Swamp");
     static {
         filter.add(SubType.SWAMP.getPredicate());
     }

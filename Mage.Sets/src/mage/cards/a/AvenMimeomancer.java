@@ -59,7 +59,7 @@ class AvenEffect extends ContinuousEffectImpl {
         this.staticText = "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
     }
 
-    public AvenEffect(final AvenEffect effect) {
+    private AvenEffect(final AvenEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class AvenEffect2 extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.BoostCreature);
     }
 
-    public AvenEffect2(final AvenEffect2 effect) {
+    private AvenEffect2(final AvenEffect2 effect) {
         super(effect);
     }
 

@@ -74,7 +74,7 @@ class ChokingMiasmaEffect extends OneShotEffect {
             return false;
         }
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(controller.getId(), source, game)) {
             return false;
         }

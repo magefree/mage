@@ -47,7 +47,7 @@ class AetherSnapEffect extends OneShotEffect {
         this.staticText = "Remove all counters from all permanents and exile all tokens";
     }
 
-    public AetherSnapEffect(final AetherSnapEffect effect) {
+    private AetherSnapEffect(final AetherSnapEffect effect) {
         super(effect);
     }
 

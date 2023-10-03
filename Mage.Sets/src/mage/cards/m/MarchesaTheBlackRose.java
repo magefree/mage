@@ -69,7 +69,7 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
     }
 
-    public MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
+    private MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -109,7 +109,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
         this.staticText = "return that card to the battlefield under your control at the beginning of the next end step.";
     }
 
-    MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
+    private MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
         super(effect);
     }
 

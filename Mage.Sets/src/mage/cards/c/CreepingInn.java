@@ -67,7 +67,7 @@ class CreepingInnEffect extends OneShotEffect {
                 "where X is the number of creature cards exiled with Creeping Inn.";
     }
 
-    public CreepingInnEffect(final CreepingInnEffect effect) {
+    private CreepingInnEffect(final CreepingInnEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class CreepingInnEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             UUID exileId = CardUtil.getExileZoneId(game, source);
             TargetCardInGraveyard target = new TargetCardInGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (target.canChoose(player.getId(), source, game)) {
                 if (player.choose(Outcome.Exile, target, source, game)) {
                     Card cardChosen = game.getCard(target.getFirstTarget());

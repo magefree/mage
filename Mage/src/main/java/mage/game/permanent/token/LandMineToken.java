@@ -33,7 +33,7 @@ public final class LandMineToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public LandMineToken(final LandMineToken token) {
+    protected LandMineToken(final LandMineToken token) {
         super(token);
     }
 

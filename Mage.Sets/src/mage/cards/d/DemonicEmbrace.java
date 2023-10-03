@@ -1,7 +1,8 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
+import mage.MageIdentifier;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
@@ -9,22 +10,22 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author arcox
@@ -48,13 +49,13 @@ public final class DemonicEmbrace extends CardImpl {
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has flying");
         ability.addEffect(effect);
-        effect = new AddCardSubtypeAttachedEffect(SubType.DEMON, Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect = new AddCardSubtypeAttachedEffect(SubType.DEMON, AttachmentType.AURA);
         effect.setText(", and is a Demon in addition to its other types");
         ability.addEffect(effect);
         this.addAbility(ability);
 
         // You may cast Demonic Embrace from your graveyard by paying 3 life and discarding a card in addition to paying its other costs.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DemonicEmbracePlayEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DemonicEmbracePlayEffect()).setIdentifier(MageIdentifier.DemonicEmbraceAlternateCast));
     }
 
     private DemonicEmbrace(final DemonicEmbrace card) {
@@ -75,7 +76,7 @@ class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard by paying 3 life and discarding a card in addition to paying its other costs";
     }
 
-    public DemonicEmbracePlayEffect(final DemonicEmbracePlayEffect effect) {
+    private DemonicEmbracePlayEffect(final DemonicEmbracePlayEffect effect) {
         super(effect);
     }
 
@@ -98,7 +99,10 @@ class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
                     Costs<Cost> costs = new CostsImpl<>();
                     costs.add(new PayLifeCost(3));
                     costs.add(new DiscardCardCost());
-                    player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{1}{B}{B}"), costs);
+                    player.setCastSourceIdWithAlternateMana(
+                            sourceId, new ManaCostsImpl<>("{1}{B}{B}"), costs,
+                            MageIdentifier.DemonicEmbraceAlternateCast
+                    );
                     return true;
                 }
             }

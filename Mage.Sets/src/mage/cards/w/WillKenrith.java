@@ -91,7 +91,7 @@ class WillKenrithCostReductionEffect extends OneShotEffect {
         this.staticText = "Until your next turn, instant, sorcery, and planeswalker spells that player casts cost {2} less to cast";
     }
 
-    WillKenrithCostReductionEffect(final WillKenrithCostReductionEffect effect) {
+    private WillKenrithCostReductionEffect(final WillKenrithCostReductionEffect effect) {
         super(effect);
     }
 

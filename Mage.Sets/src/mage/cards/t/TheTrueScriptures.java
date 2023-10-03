@@ -91,9 +91,12 @@ enum TheTrueScripturesAdjuster implements TargetAdjuster {
                 continue;
             }
             FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
-                    "creature or planswalker controlled by " + player.getName()
+                    "creature or planeswalker controlled by " + player.getName()
             );
             filter.add(new ControllerIdPredicate(playerId));
+            if (game.getBattlefield().count(filter, ability.getControllerId(), ability, game) == 0) {
+                continue;
+            }
             ability.addTarget(new TargetPermanent(0, 1, filter));
         }
     }

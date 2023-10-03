@@ -52,18 +52,13 @@ class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Target player can't play land cards this turn";
     }
 
-    public SolfataraEffect(final SolfataraEffect effect) {
+    private SolfataraEffect(final SolfataraEffect effect) {
         super(effect);
     }
 
     @Override
     public SolfataraEffect copy() {
         return new SolfataraEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -76,11 +71,12 @@ class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PLAY_LAND && event.getPlayerId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PLAY_LAND;
     }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getPlayerId().equals(source.getFirstTarget());
+    }
 }

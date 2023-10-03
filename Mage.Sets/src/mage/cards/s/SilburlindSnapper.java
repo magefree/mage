@@ -30,7 +30,7 @@ public final class SilburlindSnapper extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Silburlind Snapper can't attack unless you've cast a noncreature spell this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilburlindSnapperEffect()), new SpellsCastWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilburlindSnapperEffect()));
     }
 
     private SilburlindSnapper(final SilburlindSnapper card) {
@@ -50,7 +50,7 @@ class SilburlindSnapperEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you've cast a noncreature spell this turn";
     }
 
-    public SilburlindSnapperEffect(final SilburlindSnapperEffect effect) {
+    private SilburlindSnapperEffect(final SilburlindSnapperEffect effect) {
         super(effect);
     }
 

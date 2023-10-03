@@ -50,7 +50,7 @@ class OrcishMedicineEffect extends OneShotEffect {
 
     OrcishMedicineEffect() {
         super(Outcome.Benefit);
-        staticText = "";
+        staticText = "target creature gains your choice of lifelink or indestructible until end of turn";
     }
 
     private OrcishMedicineEffect(final OrcishMedicineEffect effect) {

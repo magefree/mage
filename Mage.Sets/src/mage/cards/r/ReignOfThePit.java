@@ -47,7 +47,7 @@ class ReignOfThePitEffect extends OneShotEffect {
         this.staticText = "Each player sacrifices a creature. Create an X/X black Demon creature token with flying, where X is the total power of the creatures sacrificed this way";
     }
 
-    ReignOfThePitEffect(final ReignOfThePitEffect effect) {
+    private ReignOfThePitEffect(final ReignOfThePitEffect effect) {
         super(effect);
     }
 

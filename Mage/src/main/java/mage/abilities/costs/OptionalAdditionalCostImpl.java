@@ -29,7 +29,7 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
         this.add(cost);
     }
 
-    public OptionalAdditionalCostImpl(final OptionalAdditionalCostImpl cost) {
+    protected OptionalAdditionalCostImpl(final OptionalAdditionalCostImpl cost) {
         super(cost);
         this.name = cost.name;
         this.reminderText = cost.reminderText;

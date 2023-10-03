@@ -45,7 +45,7 @@ class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    public CircleOfFlameTriggeredAbility(final CircleOfFlameTriggeredAbility ability) {
+    private CircleOfFlameTriggeredAbility(final CircleOfFlameTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -9,24 +8,17 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentsComparedToOpponentsCondition;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.SubType;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,19 +60,19 @@ public final class ChaosLord extends CardImpl {
 
 class ChaosLordTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
-    public ChaosLordTriggeredAbility() {
+    ChaosLordTriggeredAbility() {
         super(Zone.BATTLEFIELD,
                 new GainControlSourceEffect(),
                 TargetController.YOU,
                 false);
     }
 
-    public ChaosLordTriggeredAbility(ChaosLordTriggeredAbility ability) {
+    private ChaosLordTriggeredAbility(final ChaosLordTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public BeginningOfUpkeepTriggeredAbility copy() {
+    public ChaosLordTriggeredAbility copy() {
         return new ChaosLordTriggeredAbility(this);
     }
 
@@ -111,7 +103,7 @@ class GainControlSourceEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    public GainControlSourceEffect(final GainControlSourceEffect effect) {
+    private GainControlSourceEffect(final GainControlSourceEffect effect) {
         super(effect);
     }
 
@@ -139,7 +131,7 @@ class ChaosLordEffect extends AsThoughEffectImpl {
         staticText = "Chaos Lord can attack as though it had haste unless it entered the battlefield this turn";
     }
 
-    public ChaosLordEffect(final ChaosLordEffect effect) {
+    private ChaosLordEffect(final ChaosLordEffect effect) {
         super(effect);
     }
 

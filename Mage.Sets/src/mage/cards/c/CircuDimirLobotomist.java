@@ -75,7 +75,7 @@ class CircuDimirLobotomistEffect extends OneShotEffect {
         this.staticText = "exile the top card of target player's library";
     }
 
-    public CircuDimirLobotomistEffect(final CircuDimirLobotomistEffect effect) {
+    private CircuDimirLobotomistEffect(final CircuDimirLobotomistEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
         staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }
 
-    public CircuDimirLobotomistRuleModifyingEffect(final CircuDimirLobotomistRuleModifyingEffect effect) {
+    private CircuDimirLobotomistRuleModifyingEffect(final CircuDimirLobotomistRuleModifyingEffect effect) {
         super(effect);
     }
 
@@ -121,9 +121,13 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.CAST_SPELL
-                || !game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             return false;
         }
         MageObject object = game.getObject(event.getSourceId());

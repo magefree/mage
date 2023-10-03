@@ -64,7 +64,7 @@ class EtrataTheSilencerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EtrataTheSilencerEffect());
     }
 
-    public EtrataTheSilencerTriggeredAbility(final EtrataTheSilencerTriggeredAbility ability) {
+    private EtrataTheSilencerTriggeredAbility(final EtrataTheSilencerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -117,7 +117,7 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public EtrataTheSilencerEffect(final EtrataTheSilencerEffect effect) {
+    private EtrataTheSilencerEffect(final EtrataTheSilencerEffect effect) {
         super(effect);
     }
 

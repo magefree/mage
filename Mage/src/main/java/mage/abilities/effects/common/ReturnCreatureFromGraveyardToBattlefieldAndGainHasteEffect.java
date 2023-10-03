@@ -21,7 +21,7 @@ public class ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect extends 
         this.staticText = "put target creature card from a graveyard onto the battlefield under your control. It gains haste";
     }
 
-    public ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect(final ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect effect) {
+    protected ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect(final ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect effect) {
         super(effect);
     }
 

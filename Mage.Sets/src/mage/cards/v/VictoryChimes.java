@@ -55,7 +55,7 @@ class VictoryChimesManaEffect extends ManaEffect {
         this.staticText = "a player of your choice adds {C}";
     }
 
-    public VictoryChimesManaEffect(final VictoryChimesManaEffect effect) {
+    private VictoryChimesManaEffect(final VictoryChimesManaEffect effect) {
         super(effect);
     }
 

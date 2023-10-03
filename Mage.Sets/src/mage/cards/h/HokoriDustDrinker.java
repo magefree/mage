@@ -59,7 +59,7 @@ class HokoriDustDrinkerUntapEffect extends OneShotEffect {
         this.staticText = "that player untaps a land they control";
     }
 
-    public HokoriDustDrinkerUntapEffect(final HokoriDustDrinkerUntapEffect effect) {
+    private HokoriDustDrinkerUntapEffect(final HokoriDustDrinkerUntapEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
         staticText = "If {this} would deal combat damage to a player, instead put that many +1/+1 counters on {this} and that player mills that many cards";
     }
 
-    SzadekLordOfSecretsEffect(final SzadekLordOfSecretsEffect effect) {
+    private SzadekLordOfSecretsEffect(final SzadekLordOfSecretsEffect effect) {
         super(effect);
     }
 

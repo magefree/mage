@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -12,10 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -25,8 +21,9 @@ import mage.game.permanent.token.MetallurgicSummoningsConstructToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class MetallurgicSummonings extends CardImpl {
@@ -43,14 +40,14 @@ public final class MetallurgicSummonings extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // Whenever you cast an instant or sorcery spell, create an X/X colorless Construct artifact creature token, where X is that spell's converted mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new MetallurgicSummoningsTokenEffect(), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new MetallurgicSummoningsTokenEffect(), filter, false, SetTargetPointer.SPELL));
 
         // {3}{U}{U}, Exile Metallurgic Summons: Return all instant and sorcery cards from your graveyard to your hand. Activate this ability only if you control six or more artifacts.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl<>("{3}{U}{U}"),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 5),
                 "{3}{U}{U}, Exile {this}: Return all instant and sorcery cards from your graveyard to your hand."
-                + " Activate only if you control six or more artifacts.");
+                        + " Activate only if you control six or more artifacts.");
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }
@@ -72,7 +69,7 @@ class MetallurgicSummoningsTokenEffect extends OneShotEffect {
         staticText = "create an X/X colorless Construct artifact creature token, where X is that spell's mana value";
     }
 
-    public MetallurgicSummoningsTokenEffect(MetallurgicSummoningsTokenEffect ability) {
+    private MetallurgicSummoningsTokenEffect(final MetallurgicSummoningsTokenEffect ability) {
         super(ability);
     }
 
@@ -102,7 +99,7 @@ class MetallurgicSummoningsReturnEffect extends OneShotEffect {
         this.staticText = "Return all instant and sorcery cards from your graveyard to your hand. Activate only if you control six or more artifacts";
     }
 
-    MetallurgicSummoningsReturnEffect(final MetallurgicSummoningsReturnEffect effect) {
+    private MetallurgicSummoningsReturnEffect(final MetallurgicSummoningsReturnEffect effect) {
         super(effect);
     }
 

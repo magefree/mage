@@ -52,7 +52,7 @@ class LavalancheEffect extends OneShotEffect {
         staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls";
     }
 
-    public LavalancheEffect(final LavalancheEffect effect) {
+    private LavalancheEffect(final LavalancheEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

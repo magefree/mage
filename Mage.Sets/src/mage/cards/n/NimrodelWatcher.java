@@ -29,7 +29,7 @@ public final class NimrodelWatcher extends CardImpl {
         // Whenever you scry, Nimrodel Watcher gets +1/+0 until end of turn and can't be blocked this turn. This ability triggers only once each turn.
         Ability ability = new ScryTriggeredAbility(new BoostSourceEffect(
                 1, 0, Duration.EndOfTurn
-        )).setTriggersOnce(true);
+        )).setTriggersOnceEachTurn(true);
         ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn)
                 .setText("and can't be blocked this turn"));
         this.addAbility(ability);

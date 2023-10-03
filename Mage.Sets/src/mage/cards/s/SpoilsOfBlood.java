@@ -50,7 +50,7 @@ class SpoilsOfBloodEffect extends OneShotEffect {
         staticText = "Create an X/X black Horror creature token, where X is the number of creatures that died this turn";
     }
 
-    public SpoilsOfBloodEffect(SpoilsOfBloodEffect ability) {
+    private SpoilsOfBloodEffect(final SpoilsOfBloodEffect ability) {
         super(ability);
     }
 

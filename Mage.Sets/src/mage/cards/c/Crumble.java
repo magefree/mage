@@ -46,7 +46,7 @@ class CrumbleEffect extends OneShotEffect {
         staticText = "That artifact's controller gains life equal to its mana value";
     }
 
-    public CrumbleEffect(final CrumbleEffect effect) {
+    private CrumbleEffect(final CrumbleEffect effect) {
         super(effect);
     }
 

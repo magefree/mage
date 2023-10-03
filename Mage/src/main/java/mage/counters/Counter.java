@@ -3,6 +3,7 @@ package mage.counters;
 import mage.util.CardUtil;
 
 import java.io.Serializable;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -30,7 +31,7 @@ public class Counter implements Serializable {
      * Creates a {@link Counter} with the provided {@code name} and
      * {@code count}
      *
-     * @param name the name of this counter.
+     * @param name  the name of this counter.
      * @param count the value of this counter.
      */
     public Counter(final String name, final int count) {
@@ -43,7 +44,7 @@ public class Counter implements Serializable {
      *
      * @param counter the {@link Counter} to create a copy from.
      */
-    public Counter(final Counter counter) {
+    protected Counter(final Counter counter) {
         this.name = counter.name;
         this.count = counter.count;
     }

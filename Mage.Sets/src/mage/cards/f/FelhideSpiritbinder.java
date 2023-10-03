@@ -60,7 +60,7 @@ class FelhideSpiritbinderEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of another target creature except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step";
     }
 
-    public FelhideSpiritbinderEffect(final FelhideSpiritbinderEffect effect) {
+    private FelhideSpiritbinderEffect(final FelhideSpiritbinderEffect effect) {
         super(effect);
     }
 

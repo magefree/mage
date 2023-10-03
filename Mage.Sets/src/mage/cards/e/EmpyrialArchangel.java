@@ -55,7 +55,7 @@ class EmpyrialArchangelEffect extends ReplacementEffectImpl {
         staticText = "All damage that would be dealt to you is dealt to {this} instead";
     }
 
-    EmpyrialArchangelEffect(final EmpyrialArchangelEffect effect) {
+    private EmpyrialArchangelEffect(final EmpyrialArchangelEffect effect) {
         super(effect);
     }
 

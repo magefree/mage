@@ -20,7 +20,7 @@ public final class SoldierLifelinkToken extends TokenImpl {
         addAbility(LifelinkAbility.getInstance());
     }
 
-    public SoldierLifelinkToken(final SoldierLifelinkToken token) {
+    protected SoldierLifelinkToken(final SoldierLifelinkToken token) {
         super(token);
     }
 

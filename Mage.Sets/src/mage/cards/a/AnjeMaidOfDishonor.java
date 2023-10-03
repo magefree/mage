@@ -71,7 +71,7 @@ class AnjeMaidOfDishonorTriggeredAbility extends TriggeredAbilityImpl {
 
     public AnjeMaidOfDishonorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BloodToken()));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
         setTriggerPhrase("Whenever {this} and/or one or more other Vampires enter the battlefield under your control, ");
     }
 

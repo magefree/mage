@@ -9,7 +9,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.keyword.AmassEffect;
 import mage.abilities.hint.ConditionHint;
@@ -20,7 +20,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -55,7 +54,10 @@ public final class BaradDur extends CardImpl {
 
         // {X}{X}{B}, {T}: Amass Orcs X. Activate only if a creature died this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new BaradDurEffect(), new ManaCostsImpl<>("{X}{X}{B}"), MorbidCondition.instance
+                Zone.BATTLEFIELD,
+                new AmassEffect(ManacostVariableValue.REGULAR, SubType.ORC, false),
+                new ManaCostsImpl<>("{X}{X}{B}"),
+                MorbidCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -68,27 +70,5 @@ public final class BaradDur extends CardImpl {
     @Override
     public BaradDur copy() {
         return new BaradDur(this);
-    }
-}
-
-class BaradDurEffect extends OneShotEffect {
-
-    BaradDurEffect() {
-        super(Outcome.Benefit);
-        staticText = "amass Orcs X";
-    }
-
-    private BaradDurEffect(final BaradDurEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BaradDurEffect copy() {
-        return new BaradDurEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return AmassEffect.doAmass(source.getManaCostsToPay().getX(), SubType.ORC, game, source) != null;
     }
 }

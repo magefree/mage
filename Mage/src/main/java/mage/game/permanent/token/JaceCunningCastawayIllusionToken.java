@@ -1,19 +1,13 @@
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
+import mage.filter.StaticFilters;
 
 /**
- *
  * @author TheElk801
  */
 public final class JaceCunningCastawayIllusionToken extends TokenImpl {
@@ -27,10 +21,11 @@ public final class JaceCunningCastawayIllusionToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        this.addAbility(new IllusionTokenTriggeredAbility());
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it"), StaticFilters.FILTER_SPELL_A)
+                .setTriggerPhrase("When this creature becomes the target of a spell, "));
     }
 
-    public JaceCunningCastawayIllusionToken(final JaceCunningCastawayIllusionToken token) {
+    private JaceCunningCastawayIllusionToken(final JaceCunningCastawayIllusionToken token) {
         super(token);
     }
 
@@ -38,40 +33,4 @@ public final class JaceCunningCastawayIllusionToken extends TokenImpl {
     public JaceCunningCastawayIllusionToken copy() {
         return new JaceCunningCastawayIllusionToken(this);
     }
-}
-
-class IllusionTokenTriggeredAbility extends TriggeredAbilityImpl {
-
-    public IllusionTokenTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
-    }
-
-    public IllusionTokenTriggeredAbility(final IllusionTokenTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public IllusionTokenTriggeredAbility copy() {
-        return new IllusionTokenTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject eventSourceObject = game.getObject(event.getSourceId());
-        if (event.getTargetId().equals(this.getSourceId()) && eventSourceObject instanceof Spell) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When this creature becomes the target of a spell, sacrifice it.";
-    }
-
 }

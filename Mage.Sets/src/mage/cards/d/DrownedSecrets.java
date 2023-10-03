@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,7 +29,7 @@ public final class DrownedSecrets extends CardImpl {
 
         // Whenever you cast a blue spell, target player puts the top two cards if their library into their graveyard.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new PutLibraryIntoGraveTargetEffect(2), filter, false
+                new MillCardsTargetEffect(2), filter, false
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

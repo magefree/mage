@@ -98,7 +98,7 @@ class InallaArchmageRitualistEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of that Wizard. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    public InallaArchmageRitualistEffect(final InallaArchmageRitualistEffect effect) {
+    private InallaArchmageRitualistEffect(final InallaArchmageRitualistEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,7 @@ class TreasureMapEffect extends OneShotEffect {
                 + "three Treasure tokens";
     }
 
-    TreasureMapEffect(final TreasureMapEffect effect) {
+    private TreasureMapEffect(final TreasureMapEffect effect) {
         super(effect);
     }
 

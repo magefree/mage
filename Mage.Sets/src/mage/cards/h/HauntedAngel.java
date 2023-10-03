@@ -54,7 +54,7 @@ class HauntedAngelEffect extends OneShotEffect {
         staticText = "and each other player creates a 3/3 black Angel creature token with flying.";
     }
 
-    public HauntedAngelEffect(HauntedAngelEffect copy) {
+    private HauntedAngelEffect(final HauntedAngelEffect copy) {
         super(copy);
     }
 

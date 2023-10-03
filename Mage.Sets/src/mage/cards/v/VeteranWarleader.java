@@ -79,7 +79,7 @@ class VeteranWarleaderEffect extends OneShotEffect {
         staticText = "{this} gains your choice of first strike, vigilance, or trample until end of turn";
     }
 
-    VeteranWarleaderEffect(final VeteranWarleaderEffect effect) {
+    private VeteranWarleaderEffect(final VeteranWarleaderEffect effect) {
         super(effect);
     }
 

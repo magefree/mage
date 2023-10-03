@@ -72,7 +72,7 @@ class AnakinSkywalkerEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, regenerate and transform him instead";
     }
 
-    AnakinSkywalkerEffect(final AnakinSkywalkerEffect effect) {
+    private AnakinSkywalkerEffect(final AnakinSkywalkerEffect effect) {
         super(effect);
     }
 

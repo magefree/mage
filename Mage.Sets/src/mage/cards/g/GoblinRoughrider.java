@@ -24,7 +24,7 @@ public final class GoblinRoughrider extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GoblinRoughrider (final GoblinRoughrider card) {
+    private GoblinRoughrider(final GoblinRoughrider card) {
         super(card);
     }
 

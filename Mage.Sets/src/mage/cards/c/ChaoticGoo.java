@@ -58,7 +58,7 @@ class ChaoticGooEffect extends OneShotEffect {
         staticText = "flip a coin. If you win the flip, put a +1/+1 counter on {this}. If you lose the flip, remove a +1/+1 counter from {this}";
     }
 
-    public ChaoticGooEffect(ChaoticGooEffect effect) {
+    private ChaoticGooEffect(final ChaoticGooEffect effect) {
         super(effect);
     }
 

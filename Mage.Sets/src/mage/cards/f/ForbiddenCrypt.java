@@ -52,7 +52,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game";
     }
 
-    public ForbiddenCryptDrawCardReplacementEffect(final ForbiddenCryptDrawCardReplacementEffect effect) {
+    private ForbiddenCryptDrawCardReplacementEffect(final ForbiddenCryptDrawCardReplacementEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             boolean cardReturned = false;
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (target.canChoose(controller.getId(), source, game)) {
                 if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
@@ -105,7 +105,7 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
         this.staticText = "If a card would be put into your graveyard from anywhere, exile that card instead";
     }
 
-    public ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
+    private ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
         super(effect);
     }
 

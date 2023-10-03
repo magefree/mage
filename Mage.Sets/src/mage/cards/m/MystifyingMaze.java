@@ -65,7 +65,7 @@ class MystifyingMazeEffect extends OneShotEffect {
         staticText = "Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control";
     }
 
-    public MystifyingMazeEffect(final MystifyingMazeEffect effect) {
+    private MystifyingMazeEffect(final MystifyingMazeEffect effect) {
         super(effect);
     }
 

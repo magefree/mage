@@ -46,7 +46,7 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
         staticText = "If combat damage would be dealt to {this}, prevent that damage and exile that many cards from the top of your library";
     }
 
-    GloomSurgeonEffect(final GloomSurgeonEffect effect) {
+    private GloomSurgeonEffect(final GloomSurgeonEffect effect) {
         super(effect);
     }
 

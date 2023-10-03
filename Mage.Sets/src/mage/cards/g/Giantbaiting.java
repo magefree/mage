@@ -47,7 +47,7 @@ class GiantbaitingEffect extends OneShotEffect {
         this.staticText = "Create a 4/4 red and green Giant Warrior creature token with haste. Exile it at the beginning of the next end step";
     }
 
-    public GiantbaitingEffect(final GiantbaitingEffect effect) {
+    private GiantbaitingEffect(final GiantbaitingEffect effect) {
         super(effect);
     }
 

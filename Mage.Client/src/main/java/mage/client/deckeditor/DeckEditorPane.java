@@ -45,7 +45,9 @@ public class DeckEditorPane extends MagePane {
     }
 
     public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
+        if (mode == DeckEditorMode.SIDEBOARDING
+                || mode == DeckEditorMode.LIMITED_BUILDING
+                || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING) {
             this.setTitle("Deck Editor - " + tableId.toString());
         } else if (mode == DeckEditorMode.VIEW_LIMITED_DECK) {
             this.setTitle("Deck Editor - Current Deck");

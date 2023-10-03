@@ -66,7 +66,7 @@ class HomingSliverEffect extends ContinuousEffectImpl {
         this.staticText = "each Sliver card in each player's hand has slivercycling {3}";
     }
 
-    public HomingSliverEffect(final HomingSliverEffect effect) {
+    private HomingSliverEffect(final HomingSliverEffect effect) {
         super(effect);
     }
 

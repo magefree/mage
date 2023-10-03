@@ -20,7 +20,7 @@ public final class RocEggToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public RocEggToken(final RocEggToken token) {
+    protected RocEggToken(final RocEggToken token) {
         super(token);
     }
 

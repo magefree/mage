@@ -52,7 +52,7 @@ class TribalUnityEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public TribalUnityEffect(final TribalUnityEffect effect) {
+    private TribalUnityEffect(final TribalUnityEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

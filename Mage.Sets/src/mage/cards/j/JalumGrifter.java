@@ -69,7 +69,7 @@ class JalumGrifterEffect extends OneShotEffect {
         this.staticText = "Shuffle {this} and two lands you control face down. Target opponent chooses one of those cards. Turn the cards face up. If they chose {this}, sacrifice it. Otherwise, destroy target permanent";
     }
 
-    public JalumGrifterEffect(final JalumGrifterEffect effect) {
+    private JalumGrifterEffect(final JalumGrifterEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class JalumGrifterEffect extends OneShotEffect {
             game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
             CardsImpl cards = new CardsImpl();
-            cards.addAll(shellGamePile);
+            cards.addAllCards(shellGamePile);
             if (opponent.choose(Outcome.Sacrifice, cards, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {

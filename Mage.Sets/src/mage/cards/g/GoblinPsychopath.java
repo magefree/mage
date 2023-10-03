@@ -53,7 +53,7 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
         staticText = "flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead";
     }
 
-    public GoblinPsychopathEffect(final GoblinPsychopathEffect effect) {
+    private GoblinPsychopathEffect(final GoblinPsychopathEffect effect) {
         super(effect);
     }
 

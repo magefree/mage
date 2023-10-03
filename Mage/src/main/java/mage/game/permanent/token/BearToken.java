@@ -18,7 +18,7 @@ public final class BearToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public BearToken(final BearToken token) {
+    protected BearToken(final BearToken token) {
         super(token);
     }
 

@@ -12,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
- *
  * @author LevelX2
  */
 public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifyingEffectImpl {
@@ -24,7 +23,7 @@ public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifyingEffec
         this.targetController = targetController;
     }
 
-    public CantCastMoreThanOneSpellEffect(final CantCastMoreThanOneSpellEffect effect) {
+    protected CantCastMoreThanOneSpellEffect(final CantCastMoreThanOneSpellEffect effect) {
         super(effect);
         this.targetController = effect.targetController;
     }
@@ -32,11 +31,6 @@ public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifyingEffec
     @Override
     public CantCastMoreThanOneSpellEffect copy() {
         return new CantCastMoreThanOneSpellEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

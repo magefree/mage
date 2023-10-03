@@ -7,7 +7,6 @@ import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
 /**
- *
  * @author L_J
  */
 public final class TombspawnZombieToken extends TokenImpl {
@@ -22,7 +21,7 @@ public final class TombspawnZombieToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public TombspawnZombieToken(final TombspawnZombieToken token) {
+    protected TombspawnZombieToken(final TombspawnZombieToken token) {
         super(token);
     }
 

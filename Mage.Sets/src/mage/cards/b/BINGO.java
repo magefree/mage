@@ -72,7 +72,7 @@ class BingoEffect extends OneShotEffect {
         staticText = "put a chip counter on its mana value";
     }
 
-    public BingoEffect(final BingoEffect effect) {
+    private BingoEffect(final BingoEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class BingoCount implements DynamicValue {
     public BingoCount() {
     }
 
-    public BingoCount(final BingoCount countersCount) {
+    private BingoCount(final BingoCount countersCount) {
     }
 
     @Override

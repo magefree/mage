@@ -32,7 +32,7 @@ public abstract class EffectImpl implements Effect {
         this.outcome = outcome;
     }
 
-    public EffectImpl(final EffectImpl effect) {
+    protected EffectImpl(final EffectImpl effect) {
         this.id = effect.id;
         this.outcome = effect.outcome;
         this.staticText = effect.staticText;

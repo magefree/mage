@@ -42,7 +42,7 @@ public final class TrainingGrounds extends CardImpl {
 class TrainingGroundsEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "Activated abilities of creatures you control "
-            + "cost up to {2} less to activate. "
+            + "cost {2} less to activate. "
             + "This effect can't reduce the mana in that cost to less than one mana";
 
     TrainingGroundsEffect() {

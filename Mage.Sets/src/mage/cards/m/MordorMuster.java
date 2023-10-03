@@ -23,7 +23,7 @@ public final class MordorMuster extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
 
         // Amass Orcs 1.
-        this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ORC));
+        this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ORC).concatBy("<br>"));
     }
 
     private MordorMuster(final MordorMuster card) {

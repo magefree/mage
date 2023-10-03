@@ -45,7 +45,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
         this.showAbilityHint = showAbilityHint;
     }
 
-    public EquipAbility(final EquipAbility ability) {
+    protected EquipAbility(final EquipAbility ability) {
         super(ability);
         this.costReduceText = ability.costReduceText;
         this.showAbilityHint = ability.showAbilityHint;
@@ -63,19 +63,19 @@ public class EquipAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         String targetText = getTargets().get(0) != null ? getTargets().get(0).getFilter().getMessage() : "creature";
-        String reminderText = " <i>(" + manaCosts.getText() + ": Attach to target " + targetText + ". Equip only as a sorcery.)</i>";
+        String reminderText = " <i>(" + getManaCosts().getText() + ": Attach to target " + targetText + ". Equip only as a sorcery.)</i>";
 
         StringBuilder sb = new StringBuilder("Equip");
         if (!targetText.equals("creature you control")) {
             sb.append(' ').append(targetText);
         }
-        String costText = costs.getText();
+        String costText = getCosts().getText();
         if (costText != null && !costText.isEmpty()) {
             sb.append("&mdash;").append(costText).append('.');
         } else {
             sb.append(' ');
         }
-        sb.append(manaCosts.getText());
+        sb.append(getManaCosts().getText());
         if (costReduceText != null && !costReduceText.isEmpty()) {
             sb.append(". ");
             sb.append(costReduceText);

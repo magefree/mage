@@ -45,7 +45,7 @@ class KillingWaveEffect extends OneShotEffect {
         this.staticText = "For each creature, its controller sacrifices it unless they pay X life";
     }
 
-    public KillingWaveEffect(final KillingWaveEffect effect) {
+    private KillingWaveEffect(final KillingWaveEffect effect) {
         super(effect);
     }
 

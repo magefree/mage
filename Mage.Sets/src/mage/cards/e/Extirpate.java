@@ -67,7 +67,7 @@ class ExtirpateEffect extends OneShotEffect {
                 + "as that card and exile them. Then that player shuffles";
     }
 
-    public ExtirpateEffect(final ExtirpateEffect effect) {
+    private ExtirpateEffect(final ExtirpateEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class ExtirpateEffect extends OneShotEffect {
             // search cards in hand
             filterNamedCard.setMessage("card named " + chosenCard.getLogName() + " in the hand of " + owner.getLogName());
             TargetCard targetCardInHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCard);
-            targetCardInHand.setNotTarget(true);
+            targetCardInHand.withNotTarget(true);
             if (controller.chooseTarget(Outcome.Exile, owner.getHand(), targetCardInHand, source, game)) {
                 List<UUID> targets = targetCardInHand.getTargets();
                 for (UUID targetId : targets) {

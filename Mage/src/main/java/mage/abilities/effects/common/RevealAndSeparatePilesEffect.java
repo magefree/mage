@@ -128,7 +128,7 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
 
         game.informPlayers("Pile 1, going to " + pile1Zone + ": " + (pile1.isEmpty() ? " (none)" : pile1.stream().map(MageObject::getName).collect(Collectors.joining(", "))));
         cards.clear();
-        cards.addAll(pile1);
+        cards.addAllCards(pile1);
         if (pile1Zone == Zone.LIBRARY) {
             controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
         } else {
@@ -137,7 +137,7 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
 
         game.informPlayers("Pile 2, going to " + pile2Zone + ": " + (pile2.isEmpty() ? " (none)" : pile2.stream().map(MageObject::getName).collect(Collectors.joining(", "))));
         cards.clear();
-        cards.addAll(pile2);
+        cards.addAllCards(pile2);
         if (pile2Zone == Zone.LIBRARY) {
             controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
         } else {

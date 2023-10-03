@@ -78,7 +78,7 @@ class KozilekDrawEffect extends OneShotEffect {
         this.staticText = "if you have fewer than seven cards in hand, draw cards equal to the difference";
     }
 
-    public KozilekDrawEffect(final KozilekDrawEffect effect) {
+    private KozilekDrawEffect(final KozilekDrawEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class KozilekDiscardCost extends CostImpl {
         this.text = "discard a card with mana value X";
     }
 
-    public KozilekDiscardCost(final KozilekDiscardCost cost) {
+    private KozilekDiscardCost(final KozilekDiscardCost cost) {
         super(cost);
     }
 
@@ -134,12 +134,6 @@ class KozilekDiscardCost extends CostImpl {
             }
         }
         return paid;
-    }
-
-    @Override
-    public void clearPaid() {
-        super.clearPaid();
-        this.targets.clearChosen();
     }
 
     @Override

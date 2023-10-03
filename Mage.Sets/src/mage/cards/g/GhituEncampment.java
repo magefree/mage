@@ -56,7 +56,7 @@ class GhituEncampmentToken extends TokenImpl {
 
         this.addAbility(FirstStrikeAbility.getInstance());
     }
-    public GhituEncampmentToken(final GhituEncampmentToken token) {
+    private GhituEncampmentToken(final GhituEncampmentToken token) {
         super(token);
     }
 

@@ -55,7 +55,7 @@ class MishrasWarMachineEffect extends OneShotEffect {
         staticText = "{this} deals 3 damage to you unless you discard a card. If Mishra's War Machine deals damage to you this way, tap it";
     }
 
-    public MishrasWarMachineEffect(final MishrasWarMachineEffect effect) {
+    private MishrasWarMachineEffect(final MishrasWarMachineEffect effect) {
         super(effect);
     }
 

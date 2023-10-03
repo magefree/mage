@@ -60,7 +60,7 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl {
         staticText = "You can't get poison counters";
     }
 
-    public MeliraSylvokOutcastEffect(final MeliraSylvokOutcastEffect effect) {
+    private MeliraSylvokOutcastEffect(final MeliraSylvokOutcastEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
         staticText = "Creatures you control can't have -1/-1 counters put on them";
     }
 
-    public MeliraSylvokOutcastEffect2(final MeliraSylvokOutcastEffect2 effect) {
+    private MeliraSylvokOutcastEffect2(final MeliraSylvokOutcastEffect2 effect) {
         super(effect);
     }
 
@@ -134,7 +134,7 @@ class MeliraSylvokOutcastEffect3 extends ContinuousEffectImpl {
         staticText = "Creatures your opponents control lose infect";
     }
 
-    public MeliraSylvokOutcastEffect3(final MeliraSylvokOutcastEffect3 effect) {
+    private MeliraSylvokOutcastEffect3(final MeliraSylvokOutcastEffect3 effect) {
         super(effect);
     }
 

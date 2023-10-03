@@ -44,7 +44,7 @@ class DeadfallEffect extends AsThoughEffectImpl {
         staticText = "Creatures with forestwalk can be blocked as though they didn't have forestwalk";
     }
 
-    public DeadfallEffect(final DeadfallEffect effect) {
+    private DeadfallEffect(final DeadfallEffect effect) {
         super(effect);
     }
 

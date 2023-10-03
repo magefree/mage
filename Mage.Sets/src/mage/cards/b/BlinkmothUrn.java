@@ -49,7 +49,7 @@ class BlinkmothUrnEffect extends OneShotEffect {
         this.staticText = "if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control";
     }
 
-    public BlinkmothUrnEffect(final BlinkmothUrnEffect effect) {
+    private BlinkmothUrnEffect(final BlinkmothUrnEffect effect) {
         super(effect);
     }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -18,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.NumberOfTargetsPredicate;
@@ -28,13 +28,15 @@ import mage.target.TargetPermanent;
 import mage.target.TargetStackObject;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author spjspj
  */
 public final class VeryCrypticCommandD extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("spell or ability with a single target");
+    private static final FilterStackObject filter = new FilterSpell("spell with a single target");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nontoken creature");
 
     static {
@@ -88,7 +90,7 @@ class TurnOverEffect extends OneShotEffect {
         this.staticText = "Turn over target nontoken creature";
     }
 
-    TurnOverEffect(final TurnOverEffect effect) {
+    private TurnOverEffect(final TurnOverEffect effect) {
         super(effect);
     }
 

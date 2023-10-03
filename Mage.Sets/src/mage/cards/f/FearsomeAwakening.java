@@ -48,7 +48,7 @@ class FearsomeAwakeningEffect extends OneShotEffect {
         this.staticText = "If it's a Dragon, put two +1/+1 counters on it";
     }
 
-    public FearsomeAwakeningEffect(final FearsomeAwakeningEffect effect) {
+    private FearsomeAwakeningEffect(final FearsomeAwakeningEffect effect) {
         super(effect);
     }
 

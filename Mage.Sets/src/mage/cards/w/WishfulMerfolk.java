@@ -51,7 +51,7 @@ class WishfulMerfolkEffect extends ContinuousEffectImpl {
         staticText = "{this} loses defender and becomes a Human until end of turn";
     }
 
-    public WishfulMerfolkEffect(final WishfulMerfolkEffect effect) {
+    private WishfulMerfolkEffect(final WishfulMerfolkEffect effect) {
         super(effect);
     }
 

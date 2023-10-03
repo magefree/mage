@@ -56,12 +56,13 @@ class CheeseStandsAloneContinuousEffect extends ContinuousRuleModifyingEffectImp
         staticText = "When you control no permanents other than {this} and have no cards in hand, you win the game";
     }
 
-    public CheeseStandsAloneContinuousEffect(final CheeseStandsAloneContinuousEffect effect) {
+    private CheeseStandsAloneContinuousEffect(final CheeseStandsAloneContinuousEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean checksEventType(GameEvent event, Game game) {
+        // TODO: workaround to check win conditional on any event, but must be state base action instead
         return true;
     }
 

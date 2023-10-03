@@ -39,7 +39,7 @@ public final class LiegeOfThePit extends CardImpl {
         // At the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LiegeOfThePitEffect(), TargetController.YOU, false));
         // Morph {B}{B}{B}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{B}{B}{B}{B}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{B}{B}{B}{B}")));
     }
 
     private LiegeOfThePit(final LiegeOfThePit card) {
@@ -60,7 +60,7 @@ class LiegeOfThePitEffect extends OneShotEffect {
         this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }
 
-    public LiegeOfThePitEffect(final LiegeOfThePitEffect effect) {
+    private LiegeOfThePitEffect(final LiegeOfThePitEffect effect) {
         super(effect);
     }
 

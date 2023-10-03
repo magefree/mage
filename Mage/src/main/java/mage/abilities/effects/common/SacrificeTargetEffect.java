@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -10,7 +11,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author ayratn
  */
 public class SacrificeTargetEffect extends OneShotEffect {
@@ -26,10 +26,9 @@ public class SacrificeTargetEffect extends OneShotEffect {
     }
 
     /**
-     *
-     * @param text use this text as rule text for the effect
+     * @param text                       use this text as rule text for the effect
      * @param playerIdThatHasToSacrifice only this playerId has to sacrifice
-     * (others can't)
+     *                                   (others can't)
      */
     public SacrificeTargetEffect(String text, UUID playerIdThatHasToSacrifice) {
         super(Outcome.Sacrifice);
@@ -37,7 +36,7 @@ public class SacrificeTargetEffect extends OneShotEffect {
         staticText = text;
     }
 
-    public SacrificeTargetEffect(final SacrificeTargetEffect effect) {
+    protected SacrificeTargetEffect(final SacrificeTargetEffect effect) {
         super(effect);
         this.playerIdThatHasToSacrifice = effect.playerIdThatHasToSacrifice;
     }

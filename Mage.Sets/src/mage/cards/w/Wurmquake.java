@@ -52,7 +52,7 @@ class WurmquakeEffect extends OneShotEffect {
         this.staticText = AbilityWord.CORRUPTED.formatWord() + "Create an X/X green Phyrexian Wurm creature token with trample and toxic 1, where X is the amount of mana spent to cast this spell. Then for each opponent with three or more poison counters, you create another one of those tokens.";
     }
 
-    public WurmquakeEffect(final WurmquakeEffect effect) {
+    private WurmquakeEffect(final WurmquakeEffect effect) {
         super(effect);
     }
 

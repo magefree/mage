@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.icon.abilities.FlyingAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -22,7 +22,7 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
     static {
         instance = new FlyingAbility();
-        instance.addIcon(FlyingAbilityIcon.instance);
+        instance.addIcon(CardIconImpl.ABILITY_FLYING);
     }
 
     private Object readResolve() throws ObjectStreamException {
@@ -55,7 +55,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public FlyingEffect(final FlyingEffect effect) {
+    protected FlyingEffect(final FlyingEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                 || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())
-                || (null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, null, blocker.getControllerId(), game)
+                || (!game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, null, blocker.getControllerId(), game).isEmpty()
                 && attacker.hasSubtype(SubType.DRAGON, game));
     }
 
