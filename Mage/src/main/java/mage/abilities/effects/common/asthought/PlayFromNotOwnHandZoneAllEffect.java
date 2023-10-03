@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.asthought;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
@@ -47,16 +48,23 @@ public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Card card = game.getCard(objectId);
         if (card != null) {
+            if (affectedAbility instanceof SpellAbility) {
+                card = ((SpellAbility) affectedAbility).getCharacteristics(game);
+            }
             switch (allowedCaster) {
                 case YOU:
-                    if (affectedControllerId != source.getControllerId()) {
+                    if (playerId != source.getControllerId()) {
                         return false;
                     }
                     break;
                 case OPPONENT:
-                    if (!game.getOpponents(source.getControllerId()).contains(affectedControllerId)) {
+                    if (!game.getOpponents(source.getControllerId()).contains(playerId)) {
                         return false;
                     }
                     break;

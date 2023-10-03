@@ -533,7 +533,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         // showAvailableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // retrace - You may cast this card from your graveyard by discarding a land card as an additional cost to cast it
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share with retrace");
         setChoice(playerA, "Forest");
 
         setStrictChooseMode(true);

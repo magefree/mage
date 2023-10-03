@@ -514,14 +514,14 @@ public class ContinuousEffects implements Serializable {
 
         // usage check: effect must apply for specific ability only, not to full object (example: PLAY_FROM_NOT_OWN_HAND_ZONE)
         if (type.needAffectedAbility() && affectedAbility == null) {
-            throw new IllegalArgumentException("ERROR, you can't call asThough check to whole object, call it with affected ability instead: " + type);
+            throw new IllegalArgumentException("Wrong code usage: you can't call asThough check to whole object, call it with affected ability instead: " + type);
         }
 
         // usage check: effect must apply to full object, not specific ability (example: ATTACK_AS_HASTE)
         // P.S. In theory a same AsThough effect can be applied to object or to ability, so if you really, really
         // need it then disable that check or add extra param to AsThoughEffectType like needAffectedAbilityOrFullObject
         if (!type.needAffectedAbility() && affectedAbility != null) {
-            throw new IllegalArgumentException("ERROR, you can't call AsThough check to affected ability, call it with empty affected ability instead: " + type);
+            throw new IllegalArgumentException("Wrong code usage: you can't call AsThough check to affected ability, call it with empty affected ability instead: " + type);
         }
 
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);

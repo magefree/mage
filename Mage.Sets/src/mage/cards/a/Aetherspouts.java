@@ -72,7 +72,9 @@ class AetherspoutsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         PlayerList playerList = game.getState().getPlayersInRange(controller.getId(), game);
         playerList.setCurrent(game.getActivePlayerId());

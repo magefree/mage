@@ -68,7 +68,9 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
         if (bountyOfLuxa != null && bountyOfLuxa.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter()) {
             bountyOfLuxa = null;
         }
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         if (bountyOfLuxa != null
                 && bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) > 0) {

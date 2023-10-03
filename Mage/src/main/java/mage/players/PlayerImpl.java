@@ -1267,31 +1267,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean playLand(Card card, Game game, boolean ignoreTiming) {
-        // Check for alternate casting possibilities: e.g. land with Morph
         if (card == null) {
             return false;
         }
         ActivatedAbility playLandAbility = null;
-        boolean foundAlternative = false;
         for (Ability ability : card.getAbilities(game)) {
-            // if cast for noMana no Alternative costs are allowed
-            if ((ability instanceof AlternativeSourceCosts)
-                    || (ability instanceof OptionalAdditionalSourceCosts)) {
-                foundAlternative = true;
-            }
             if (ability instanceof PlayLandAbility) {
                 playLandAbility = (ActivatedAbility) ability;
-            }
-        }
-
-        // try alternative cast (face down)
-        if (foundAlternative) {
-            SpellAbility spellAbility = new SpellAbility(null, "",
-                    game.getState().getZone(card.getId()), SpellAbilityType.FACE_DOWN_CREATURE);
-            spellAbility.setControllerId(this.getId());
-            spellAbility.setSourceId(card.getId());
-            if (cast(spellAbility, game, false, null)) {
-                return true;
             }
         }
 

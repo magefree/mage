@@ -71,10 +71,14 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getZone() != Zone.HAND) { return false; }
+        if (event.getZone() != Zone.HAND) {
+            return false;
+        }
 
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null) { return false; }
+        if (spell == null) {
+            return false;
+        }
 
         for (Effect effect : this.getEffects()) {
             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -102,13 +106,19 @@ class PossibilityStormEffect extends OneShotEffect {
             spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
             noLongerOnStack = true;
         }
-        if (spell == null) { return false; }
+        if (spell == null) {
+            return false;
+        }
 
         Player spellController = game.getPlayer(spell.getControllerId());
-        if (spellController == null) { return false; }
+        if (spellController == null) {
+            return false;
+        }
 
         MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject == null) { return false; }
+        if (sourceObject == null) {
+            return false;
+        }
 
         if (!noLongerOnStack) {
             spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName());
