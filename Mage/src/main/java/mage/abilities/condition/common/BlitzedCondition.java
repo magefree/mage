@@ -8,7 +8,7 @@ import mage.util.CardUtil;
 
 
 /**
- * @author TheElk801
+ * @author notgreat
  */
 public enum BlitzedCondition implements Condition {
     instance;

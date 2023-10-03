@@ -1595,8 +1595,8 @@ public final class CardUtil {
         return new MageObjectReference(ability.getSourceId(), zcc, game);
     }
     /**
-     * Find cost tags of either the source ability, or the permanent source of the ability
-     * works in any moment (even before source ability activated)
+     * Find cost tags of either the source ability, or the permanent source of the ability.
+     * Works in any moment (even before source ability activated)
      * <p>
      * Used for kicker and other similar effects
      *

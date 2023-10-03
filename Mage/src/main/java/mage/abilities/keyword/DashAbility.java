@@ -22,7 +22,6 @@ public class DashAbility extends AlternativeSourceCostsImpl {
     protected static final String REMINDER_TEXT = "You may cast this spell for its dash cost. "
             + "If you do, it gains haste, and it's returned from the battlefield to its owner's "
             + "hand at the beginning of the next end step.";
-
     public DashAbility(String manaString) {
         super(KEYWORD, REMINDER_TEXT, manaString);
         Ability ability = new EntersBattlefieldAbility(
@@ -40,6 +39,10 @@ public class DashAbility extends AlternativeSourceCostsImpl {
     @Override
     public DashAbility copy() {
         return new DashAbility(this);
+    }
+
+    public static String getActivationKey(){
+        return getActivationKey(KEYWORD);
     }
 }
 
