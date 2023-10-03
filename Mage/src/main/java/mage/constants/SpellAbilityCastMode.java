@@ -56,7 +56,7 @@ public enum SpellAbilityCastMode {
             }
         }
         if (this.equals(PROTOTYPE)) {
-            ((PrototypeAbility) spellAbility).prototypeCardSpell(cardCopy);
+            cardCopy = ((PrototypeAbility) spellAbility).prototypeCardSpell(cardCopy);
         }
         if (this.equals(MORPH)) {
             if (cardCopy instanceof Spell) {

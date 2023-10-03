@@ -460,8 +460,7 @@ public class PrototypeTest extends CardTestPlayerBase {
     }
     @Test
     public void testCopyOnStack() {
-        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Frontier Bivouac", 3+2);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Double Major");
 
@@ -495,6 +494,51 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(true);
     }
+    @Test
+    public void testColorCostReduction() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.BATTLEFIELD, playerA, "Ruby Medallion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        checkAutomaton(true);
+        assertTappedCount("Mountain", true, 2);
+    }
+    @Test
+    public void testAbilityRemovalPre() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Dress Down");
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Dress Down");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, automaton, 3, 2);
+    }
+    @Test
+    public void testAbilityRemovalPost() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Dress Down");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Dress Down");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, automaton, 3, 2);
+    }
 
     /*
      * More tests suggested by Zerris:
@@ -508,7 +552,7 @@ public class PrototypeTest extends CardTestPlayerBase {
      * 4) Ensure Copy effects layer properly: Essence of the Wild in play
      * 5) Check other things becoming copies of it, particularly other prototype cards:
      *      Infinite Reflection on it, followed by casting a copy of a different prototype-able card (both Prototyped and Normal for each)
-     * 6) Ensure Prototype is not treated as an ability while in play, but does remove the textbox: Dress Down with it in play
+     * DONE 6) Ensure Prototype is not treated as an ability while in play, but does remove the textbox: Dress Down with it in play
      * 7) Phasing: Slip Out the Back
      * 8) Alternate Cost: Fires of Invention (Cannot cast at all with fires on 3 lands, cannot cast prototyped even on 7)
      *      NOTE: This test is probably wrong, Prototype is apparently NOT an alternate cost! https://magic.wizards.com/en/news/feature/comprehensive-rules-changes
