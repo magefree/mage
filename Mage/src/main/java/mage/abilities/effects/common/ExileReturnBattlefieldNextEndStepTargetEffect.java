@@ -23,18 +23,35 @@ import java.util.stream.Collectors;
 public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect {
 
     private boolean yourControl;
+    private boolean textThatCard;
+    private boolean exiledOnly;
 
     public ExileReturnBattlefieldNextEndStepTargetEffect() {
         super(Outcome.Neutral);
+        this.yourControl = false;
+        this.textThatCard = true;
+        this.exiledOnly = false;
     }
 
     protected ExileReturnBattlefieldNextEndStepTargetEffect(final ExileReturnBattlefieldNextEndStepTargetEffect effect) {
         super(effect);
         this.yourControl = effect.yourControl;
+        this.textThatCard = effect.textThatCard;
+        this.exiledOnly = effect.exiledOnly;
     }
 
     public ExileReturnBattlefieldNextEndStepTargetEffect underYourControl(boolean yourControl) {
         this.yourControl = yourControl;
+        return this;
+    }
+
+    public ExileReturnBattlefieldNextEndStepTargetEffect withTextThatCard(boolean textThatCard) {
+        this.textThatCard = textThatCard;
+        return this;
+    }
+
+    public ExileReturnBattlefieldNextEndStepTargetEffect returnExiledOnly(boolean exiledOnly) {
+        this.exiledOnly = exiledOnly;
         return this;
     }
 
@@ -54,8 +71,8 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
         }
         controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         Effect effect = yourControl
-                ? new ReturnToBattlefieldUnderYourControlTargetEffect()
-                : new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
+                ? new ReturnToBattlefieldUnderYourControlTargetEffect(exiledOnly)
+                : new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, exiledOnly);
         effect.setTargetPointer(new FixedTargets(new CardsImpl(toExile), game));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         return true;
@@ -72,14 +89,29 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
             return staticText;
         }
         String text = "exile " + getTargetPointer().describeTargets(mode.getTargets(), "that creature") + ". Return ";
-        if (yourControl) {
-            text += "it to the battlefield under your";
-        } else if (getTargetPointer().isPlural(mode.getTargets())) {
-            text += "those cards to the battlefield under their owner's";
+        boolean plural = getTargetPointer().isPlural(mode.getTargets());
+        if (plural) {
+            if (textThatCard) {
+                text += (exiledOnly ? "the exiled cards" : "those cards");
+            } else {
+                text += "them";
+            }
         } else {
-            text += "that card to the battlefield under its owner's";
+            if (textThatCard) {
+                text += (exiledOnly ? "the exiled card" : "that card");
+            } else {
+                text += "it";
+            }
         }
-        return text + " control at the beginning of the next end step";
+        text += " to the battlefield";
+        if (yourControl) {
+            text += " under your control";
+        } else if (plural) {
+            text += " under their owner's control";
+        } else {
+            text += " under its owner's control";
+        }
+        return text + " at the beginning of the next end step";
     }
 
 }
