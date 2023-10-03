@@ -10,6 +10,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -56,7 +57,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
         if (toFlicker.isEmpty()) {
             return false;
         }

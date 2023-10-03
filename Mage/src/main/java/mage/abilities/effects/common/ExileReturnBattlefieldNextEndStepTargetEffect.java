@@ -13,6 +13,7 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -65,7 +66,7 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
         if (toExile.isEmpty()) {
             return false;
         }
