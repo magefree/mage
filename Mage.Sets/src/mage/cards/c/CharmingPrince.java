@@ -47,7 +47,7 @@ public final class CharmingPrince extends CardImpl {
         ability.addMode(new Mode(new GainLifeEffect(3)));
 
         // • Exile another target creature you own. Return it to the battlefield under your control at the beginning of the next end step.
-        Mode mode = new Mode(new ExileReturnBattlefieldNextEndStepTargetEffect().underYourControl(true));
+        Mode mode = new Mode(new ExileReturnBattlefieldNextEndStepTargetEffect().underYourControl(true).withTextThatCard(false));
         mode.addTarget(new TargetPermanent(filter));
         ability.addMode(mode);
         this.addAbility(ability);

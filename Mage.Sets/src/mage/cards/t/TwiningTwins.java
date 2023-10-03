@@ -10,7 +10,8 @@ import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -19,6 +20,11 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class TwiningTwins extends AdventureCard {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
+    static {
+        filter.add(TokenPredicate.FALSE);
+    }
 
     public TwiningTwins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{U}{U}", "Swift Spiral", "{1}{W}");
@@ -40,7 +46,7 @@ public final class TwiningTwins extends AdventureCard {
         // Swift Spiral
         // Exile target nontoken creature. Return it to the battlefield under its owner’s control at the beginning of the next end step.
         this.getSpellCard().getSpellAbility().addEffect(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_NON_TOKEN));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         this.finalizeAdventure();
     }

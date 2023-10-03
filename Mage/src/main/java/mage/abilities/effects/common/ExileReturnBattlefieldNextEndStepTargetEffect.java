@@ -90,26 +90,18 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
         }
         String text = "exile " + getTargetPointer().describeTargets(mode.getTargets(), "that creature") + ". Return ";
         boolean plural = getTargetPointer().isPlural(mode.getTargets());
-        if (plural) {
-            if (textThatCard) {
-                text += (exiledOnly ? "the exiled cards" : "those cards");
-            } else {
-                text += "them";
-            }
+        if (exiledOnly) {
+            text += plural ? "the exiled cards" : "the exiled card";
+        } else if (textThatCard) {
+            text += plural ? "those cards" : "that card";
         } else {
-            if (textThatCard) {
-                text += (exiledOnly ? "the exiled card" : "that card");
-            } else {
-                text += "it";
-            }
+            text += plural ? "them" : "it";
         }
         text += " to the battlefield";
         if (yourControl) {
             text += " under your control";
-        } else if (plural) {
-            text += " under their owner's control";
         } else {
-            text += " under its owner's control";
+            text += " under " + (plural ? "their" : "its") + " owner's control";
         }
         return text + " at the beginning of the next end step";
     }

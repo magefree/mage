@@ -34,7 +34,7 @@ public final class VenserTheSojourner extends CardImpl {
         this.setStartingLoyalty(3);
 
         // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new ExileReturnBattlefieldNextEndStepTargetEffect().underYourControl(true), 2);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new ExileReturnBattlefieldNextEndStepTargetEffect().underYourControl(true).withTextThatCard(false), 2);
         Target target = new TargetPermanent(filter);
         ability1.addTarget(target);
         this.addAbility(ability1);
