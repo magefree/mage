@@ -9,7 +9,6 @@ import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -30,7 +29,7 @@ import java.util.UUID;
  */
 public final class ThePhasingOfZhalfir extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterNonlandPermanent("another nonland permanent");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("another target nonland permanent");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -48,7 +47,7 @@ public final class ThePhasingOfZhalfir extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
                 new Effects(
-                        new PhaseOutTargetEffect("another target nonland permanent"),
+                        new PhaseOutTargetEffect(),
                         new ThePhasingOfZhalfirPhaseEffect()
                 ), new TargetPermanent(filter)
         );

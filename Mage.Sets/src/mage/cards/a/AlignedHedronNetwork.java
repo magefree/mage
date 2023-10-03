@@ -69,13 +69,19 @@ class AlignedHedronNetworkExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false;}
+        if (controller == null) {
+            return false;
+        }
 
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         Set<Card> toExile = new LinkedHashSet<>(game.getBattlefield().getActivePermanents(filter, controller.getId(), source, game));
-        if (toExile.isEmpty()) { return false; }
+        if (toExile.isEmpty()) {
+            return false;
+        }
         
         controller.moveCardsToExile(toExile, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);

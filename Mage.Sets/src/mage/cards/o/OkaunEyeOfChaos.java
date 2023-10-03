@@ -43,8 +43,7 @@ public final class OkaunEyeOfChaos extends CardImpl {
                 new BoostSourceEffect(
                         sourcePower,
                         SourcePermanentToughnessValue.getInstance(),
-                        Duration.EndOfTurn,
-                        true
+                        Duration.EndOfTurn
                 ).setText("double {this}'s power and toughness until end of turn")
         ));
     }

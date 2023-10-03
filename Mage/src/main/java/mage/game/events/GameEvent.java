@@ -716,7 +716,7 @@ public class GameEvent implements Serializable {
         if (approvingObject == null) {
             return false;
         }
-        if (identifier == null) {
+        if (identifier.equals(MageIdentifier.Default)) {
             return false;
         }
         return identifier.equals(approvingObject.getApprovingAbility().getIdentifier());

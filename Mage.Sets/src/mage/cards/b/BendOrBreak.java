@@ -64,7 +64,9 @@ class BendOrBreakEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         // Map of players and their piles
         Map<UUID, List<List<Permanent>>> playerPermanents = new LinkedHashMap<>();

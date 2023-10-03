@@ -65,10 +65,14 @@ class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         return (controller.getLife() > 0) && (controller.getLife() - event.getAmount()) < 1
                 && event.getPlayerId().equals(controller.getId());
@@ -77,7 +81,9 @@ class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         // 10/1/2008: The ability doesn't change how much damage is dealt;
         //            it just changes how much life that damage makes you lose.

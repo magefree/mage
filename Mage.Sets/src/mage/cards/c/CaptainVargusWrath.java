@@ -37,7 +37,7 @@ public final class CaptainVargusWrath extends CardImpl {
         // Whenever Captain Vargus Wrath attacks, Pirates you control get +1/+1 until end of turn for each time you've cast a commander from the command zone this game.
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(
                 CaptainVargusWrathValue.instance, CaptainVargusWrathValue.instance,
-                Duration.EndOfTurn, filter, false, true
+                Duration.EndOfTurn, filter, false
         ), false, "Whenever {this} attacks, Pirates you control get +1/+1 until end of turn " +
                 "for each time you've cast a commander from the command zone this game."
         ).addHint(CaptainVargusWrathValue.getHint()));

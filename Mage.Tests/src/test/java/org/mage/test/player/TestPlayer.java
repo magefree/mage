@@ -391,10 +391,10 @@ public class TestPlayer implements Player {
                     || searchObject.contains("fused ")) {
                 Assert.assertFalse("alternative spell don't support alias", searchObject.startsWith(ALIAS_PREFIX));
                 foundObject = true;
-                foundAbility = ability.toString().startsWith(nameOrAlias);
+                foundAbility = ability.toString().equals(nameOrAlias);
             } else {
                 foundObject = hasObjectTargetNameOrAlias(game.getObject(ability.getSourceId()), searchObject);
-                foundAbility = searchObject.startsWith(ALIAS_PREFIX) || ability.toString().startsWith(nameOrAlias);
+                foundAbility = searchObject.startsWith(ALIAS_PREFIX) || ability.toString().equals(nameOrAlias);
             }
         } else if (nameOrAlias.startsWith(ALIAS_PREFIX)) {
             // object alias with ability text:
@@ -3161,22 +3161,22 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs) {
-        computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs);
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs, MageIdentifier identifier) {
+        computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs, identifier);
     }
 
     @Override
-    public Set<UUID> getCastSourceIdWithAlternateMana() {
+    public Map<UUID, Set<MageIdentifier>> getCastSourceIdWithAlternateMana() {
         return computerPlayer.getCastSourceIdWithAlternateMana();
     }
 
     @Override
-    public Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts() {
+    public Map<UUID, Map<MageIdentifier,ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
         return computerPlayer.getCastSourceIdManaCosts();
     }
 
     @Override
-    public Map<UUID, Costs<Cost>> getCastSourceIdCosts() {
+    public Map<UUID, Map<MageIdentifier,Costs<Cost>>> getCastSourceIdCosts() {
         return computerPlayer.getCastSourceIdCosts();
     }
 

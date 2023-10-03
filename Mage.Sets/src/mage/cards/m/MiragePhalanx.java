@@ -70,7 +70,9 @@ class MiragePhalanxEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         // It has haste
         CreateTokenCopyTargetEffect tokenCopyEffect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);

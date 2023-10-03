@@ -1,5 +1,6 @@
 package mage.cards.w;
 
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.common.IsStepCondition;
@@ -63,7 +64,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
                 && getCosts().canPay(this, this, playerId, game)
                 && game.isActivePlayer(playerId)) {
             this.activatorId = playerId;
-            return ActivationStatus.getTrue(this, game);
+            return new ActivationStatus(new ApprovingObject(this, game));
         }
         return ActivationStatus.getFalse();
 

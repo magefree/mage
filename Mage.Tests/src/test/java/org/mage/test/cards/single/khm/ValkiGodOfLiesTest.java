@@ -46,6 +46,7 @@ public class ValkiGodOfLiesTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Exile the top card of each player's library.");
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Plains");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ephemerate", "Grizzly Bears");
+        setChoice(playerA, "Emblem Tibalt");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

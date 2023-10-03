@@ -44,7 +44,7 @@ public final class KingOfTheOathbreakers extends CardImpl {
 
         // Whenever King of the Oathbreakers or another Spirit you control becomes the target of a spell, it phases out.
         this.addAbility(new BecomesTargetAnyTriggeredAbility(
-            new PhaseOutTargetEffect("it"),
+            new PhaseOutTargetEffect(),
             filter, StaticFilters.FILTER_SPELL_A
         ));
 

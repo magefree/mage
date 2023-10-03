@@ -75,7 +75,9 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Token token = new CatSoldierCreatureToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId());

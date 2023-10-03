@@ -127,7 +127,9 @@ class BerserkDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         //create delayed triggered ability
         Effect effect = new BerserkDelayedDestroyEffect();
@@ -158,13 +160,19 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
-        if (watcher == null) { return false; }
+        if (watcher == null) {
+            return false;
+        }
 
         return watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))
                 && permanent.destroy(source, game, false);
