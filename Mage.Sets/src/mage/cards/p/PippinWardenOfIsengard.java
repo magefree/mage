@@ -18,6 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetControlledPermanent;
@@ -54,7 +55,7 @@ public final class PippinWardenOfIsengard extends CardImpl {
         ).setText("other creatures you control get +3/+3"), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(4, filter)));
         ability.addEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn
+                HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, true
         ).setText("and gain haste until end of turn"));
         this.addAbility(ability);
     }
