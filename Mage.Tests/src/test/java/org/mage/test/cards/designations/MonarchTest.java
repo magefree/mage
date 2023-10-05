@@ -21,7 +21,7 @@ public class MonarchTest extends CardTestMultiPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         // reason: must use MultiplayerAttackOption.MULTIPLE
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");
         playerB = createPlayer(game, "PlayerB");

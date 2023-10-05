@@ -16,13 +16,15 @@ public class FreeformUnlimitedCommanderTest extends MageTestPlayerBase {
         // Arrange
         Mulligan mulligan = new LondonMulligan(1);
         int startLife = 40;
+        int startHandSize = 7;
 
         // Assert
         FreeformUnlimitedCommander game = new FreeformUnlimitedCommander(
                 MultiplayerAttackOption.MULTIPLE,
                 RangeOfInfluence.ALL,
                 mulligan,
-                startLife
+                startLife,
+                startHandSize
         );
 
         // Assert

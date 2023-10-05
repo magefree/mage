@@ -6,7 +6,6 @@ import mage.game.match.MatchOptions;
 import mage.game.mulligan.Mulligan;
 
 /**
- *
  * @author nigelzor
  */
 public class MomirFreeForAllMatch extends MatchImpl {
@@ -21,7 +20,12 @@ public class MomirFreeForAllMatch extends MatchImpl {
         int startLife = 24;
 
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        MomirGame game = new MomirGame(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        startLife = options.isCustomStartLifeEnabled() ? options.getCustomStartLife() : startLife;
+        int startHandSize = options.isCustomStartHandSizeEnabled() ? options.getCustomStartHandSize() : 7;
+        MomirGame game = new MomirGame(
+                options.getAttackOption(), options.getRange(),
+                mulligan, startLife, startHandSize
+        );
         game.setStartMessage(this.createGameStartMessage());
 
         this.initGame(game);

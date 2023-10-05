@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 
 /**
  * PlayerA is full AI player and process all actions as AI logic. You don't need aiXXX commands in that tests.
- *
+ * <p>
  * If you need custom AI tests then use CardTestPlayerBaseWithAIHelps with aiXXX commands
  *
  * @author LevelX2
@@ -25,7 +25,7 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 60, 20, 7);
 
         playerA = createPlayer(game, "PlayerA");
         playerB = createPlayer(game, "PlayerB");

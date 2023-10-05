@@ -288,7 +288,7 @@ public class TestCardRenderDialog extends MageDialog {
             cardsPanel.addCardEventListener(this.cardListener);
         }
 
-        game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
         Deck deck = new Deck();
         Player playerYou = new StubPlayer("player1", RangeOfInfluence.ALL);
         game.addPlayer(playerYou, deck);
@@ -750,8 +750,8 @@ class TestGame extends GameImpl {
 
     private int numPlayers;
 
-    public TestGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60, 7);
+    public TestGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 60, startLife, startHandSize);
     }
 
     public TestGame(final TestGame game) {
