@@ -1,30 +1,24 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
- *
  * @author dustinconrad
  */
 public final class AvenRiftwatcher extends CardImpl {
 
     public AvenRiftwatcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.REBEL);
         this.subtype.add(SubType.SOLDIER);
@@ -34,12 +28,9 @@ public final class AvenRiftwatcher extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Vanishing 3
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(3));
-        this.addAbility(new VanishingSacrificeAbility());
+        this.addAbility(new VanishingAbility(3));
 
         // When Aven Riftwatcher enters the battlefield or leaves the battlefield, you gain 2 life.
         this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new GainLifeEffect(2), false));

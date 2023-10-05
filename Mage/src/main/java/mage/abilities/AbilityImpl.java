@@ -1104,10 +1104,11 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void setRuleVisible(boolean ruleVisible) {
+    public AbilityImpl setRuleVisible(boolean ruleVisible) {
         if (!(this instanceof MageSingleton)) { // prevent to change singletons
             this.ruleVisible = ruleVisible;
         }
+        return this;
     }
 
     @Override
