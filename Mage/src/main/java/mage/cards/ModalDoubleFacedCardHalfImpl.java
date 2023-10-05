@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.ZoneChangeInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,12 +51,12 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
+    public List<ZoneChangeInfo> moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         return parentCard.moveToZone(toZone, source, game, flag, appliedEffects);
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
+    public List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         return parentCard.moveToExile(exileId, name, source, game, appliedEffects);
     }
 

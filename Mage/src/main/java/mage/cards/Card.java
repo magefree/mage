@@ -14,6 +14,7 @@ import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.ZoneChangeInfo;
 import mage.game.permanent.Permanent;
 import mage.util.ManaUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
@@ -106,11 +107,11 @@ public interface Card extends MageObject {
      *               <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false -
      *               untapped</li></ul></li>
      *               </ul>
-     * @return true if card was moved to zone
+     * @return The list of all ZoneChangeInfo (there might be multiple resulting cards moved)
      */
-    boolean moveToZone(Zone zone, Ability source, Game game, boolean flag);
+    List<ZoneChangeInfo> moveToZone(Zone zone, Ability source, Game game, boolean flag);
 
-    boolean moveToZone(Zone zone, Ability source, Game game, boolean flag, List<UUID> appliedEffects);
+    List<ZoneChangeInfo> moveToZone(Zone zone, Ability source, Game game, boolean flag, List<UUID> appliedEffects);
 
     /**
      * Moves the card to an exile zone
@@ -121,9 +122,9 @@ public interface Card extends MageObject {
      * @param game
      * @return true if card was moved to zone
      */
-    boolean moveToExile(UUID exileId, String name, Ability source, Game game);
+    List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game);
 
-    boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects);
+    List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects);
 
     boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
 

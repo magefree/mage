@@ -59,7 +59,7 @@ class LongRoadHomeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Long Road Home", source, game)) {
+            if (!permanent.moveToExile(source.getSourceId(), "Long Road Home", source, game).isEmpty()) {
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {

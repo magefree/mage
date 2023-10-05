@@ -1,11 +1,11 @@
 package mage.game.events;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -18,6 +18,7 @@ public class ZoneChangeEvent extends GameEvent {
     private Zone originalToZone;
     private Permanent target;
     private Ability source; // link to source ability, can be null in rare situations
+    protected UUID initialTargetId = null; // The end targetId might not be the initial one.
 
     public ZoneChangeEvent(Permanent target, Ability source, UUID playerId, Zone fromZone, Zone toZone) {
         super(GameEvent.EventType.ZONE_CHANGE, target.getId(), source, playerId);
@@ -75,6 +76,22 @@ public class ZoneChangeEvent extends GameEvent {
         this.toZone = toZone;
         if (originalToZone == null && toZone != null) {
             originalToZone = toZone;
+        }
+    }
+
+    @Override
+    public void setTargetId(UUID targetId) {
+        if (initialTargetId == null) {
+            this.initialTargetId = this.targetId;
+        }
+        this.targetId = targetId;
+    }
+
+    public UUID getInitialTargetId() {
+        if (initialTargetId == null) {
+            return targetId;
+        } else {
+            return initialTargetId;
         }
     }
 
