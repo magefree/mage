@@ -128,7 +128,7 @@ class SquadTriggerAbility extends EntersBattlefieldTriggeredAbility {
     @Override
     public String getRule() {
         return "Squad <i>(When this creature enters the battlefield, if its squad cost was paid, "
-                + "create a token that is a copy of it for each time its squad cost was paid.)</i>";
+                + "create a token that's a copy of it for each time its squad cost was paid.)</i>";
     }
 }
 
