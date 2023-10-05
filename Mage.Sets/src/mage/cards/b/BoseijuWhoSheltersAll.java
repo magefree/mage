@@ -43,7 +43,7 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
         ability.getEffects().get(0).setText("Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered");
         this.addAbility(ability, new BoseijuWhoSheltersAllWatcher(ability.getOriginalId()));
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoseijuWhoSheltersAllCantCounterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoseijuWhoSheltersAllCantCounterEffect()).setRuleVisible(false));
     }
 
     private BoseijuWhoSheltersAll(final BoseijuWhoSheltersAll card) {
@@ -91,9 +91,8 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
 
 class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BoseijuWhoSheltersAllCantCounterEffect() {
+    BoseijuWhoSheltersAllCantCounterEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);
-        staticText = null;
     }
 
     private BoseijuWhoSheltersAllCantCounterEffect(final BoseijuWhoSheltersAllCantCounterEffect effect) {
