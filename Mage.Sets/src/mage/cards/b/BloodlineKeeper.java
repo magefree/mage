@@ -30,11 +30,7 @@ import mage.game.permanent.token.VampireToken;
  */
 public final class BloodlineKeeper extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control five or more Vampires");
-
-    static {
-        filter.add(SubType.VAMPIRE.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.VAMPIRE, "you control five or more Vampires");
 
     public BloodlineKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

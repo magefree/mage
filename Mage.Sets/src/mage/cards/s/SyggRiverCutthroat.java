@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -6,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,8 @@ public final class SyggRiverCutthroat extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 TargetController.ANY,
                 new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 2),
-                true));
+                true
+        ).addHint(new ConditionHint(new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 2), "An opponent lost 3 or more life this turn")));
     }
 
     private SyggRiverCutthroat(final SyggRiverCutthroat card) {

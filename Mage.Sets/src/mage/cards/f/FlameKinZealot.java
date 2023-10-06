@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -30,8 +29,10 @@ public final class FlameKinZealot extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Flame-Kin Zealot enters the battlefield, creatures you control get +1/+1 and gain haste until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn)
+                .setText("creatures you control get +1/+1"));
+        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)
+                .setText("and gain haste until end of turn"));
         this.addAbility(ability);
     }
 
