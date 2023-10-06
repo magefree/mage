@@ -1,16 +1,13 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
-import mage.abilities.effects.common.ExileThenReturnTargetEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.RollDieWithResultTableEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.abilities.effects.common.*;
+import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.PutCards;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -71,24 +68,29 @@ class LaezelsAcrobaticsEffect extends RollDieWithResultTableEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        Cards toExile = new CardsImpl(game.getBattlefield().getActivePermanents(creatureFilter, player.getId(), game));
-        int result = player.rollDice(outcome, source, game, 20);
+        Cards toFlicker = new CardsImpl(game.getBattlefield().getActivePermanents(creatureFilter, controller.getId(), game));
+        controller.moveCards(toFlicker, Zone.EXILED, source, game);
+        game.getState().processAction(game);
+        int result = controller.rollDice(outcome, source, game, 20);
         if (result >= 1 && result <= 9) {
-            Effect effect = new ExileReturnBattlefieldNextEndStepTargetEffect();
-            effect.setTargetPointer(new FixedTargets(toExile, game));
-            effect.apply(game, source);
+            Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
+            effect.setTargetPointer(new FixedTargets(new CardsImpl(toFlicker), game));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         } else if (result >= 10 && result <= 20) {
-            Effect effect = new ExileThenReturnTargetEffect(false, true);
-            effect.setTargetPointer(new FixedTargets(toExile, game));
-            effect.apply(game, source);
+            for (UUID cardId : toFlicker) {
+                Card card = game.getCard(cardId);
+                if (card != null) {
+                    PutCards.BATTLEFIELD.moveCard(game.getPlayer(card.getOwnerId()), card.getMainCard(), source, game, "card");
+                }
+            }
             game.getState().processAction(game);
-            Effect effect2 = new ExileReturnBattlefieldNextEndStepTargetEffect();
-            effect2.setTargetPointer(new FixedTargets(toExile, game));
-            effect2.apply(game, source);
+            Effect effect = new ExileReturnBattlefieldNextEndStepTargetEffect();
+            effect.setTargetPointer(new FixedTargets(toFlicker, game));
+            effect.apply(game, source);
         }
         return true;
     }
