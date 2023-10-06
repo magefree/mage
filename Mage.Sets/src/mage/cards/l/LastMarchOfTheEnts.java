@@ -50,7 +50,7 @@ public final class LastMarchOfTheEnts extends CardImpl {
 class LastMarchOfTheEntsEffect extends OneShotEffect {
 
     LastMarchOfTheEntsEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PutCreatureInPlay);
         staticText = ", then put any number of creature cards from your hand onto the battlefield";
     }
 
@@ -70,7 +70,7 @@ class LastMarchOfTheEntsEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES);
-        player.choose(Outcome.PutCreatureInPlay, target, source, game);
+        player.choose(outcome, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
     }
