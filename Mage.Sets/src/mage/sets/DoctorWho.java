@@ -34,6 +34,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Glade", 262, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("City of Death", 99, Rarity.RARE, mage.cards.c.CityOfDeath.class));
         cards.add(new SetCardInfo("Clockspinning", 215, Rarity.COMMON, mage.cards.c.Clockspinning.class));
+        cards.add(new SetCardInfo("Clockwork Droid", 172, Rarity.UNCOMMON, mage.cards.c.ClockworkDroid.class));
         cards.add(new SetCardInfo("Command Tower", 263, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 240, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Creeping Tar Pit", 267, Rarity.RARE, mage.cards.c.CreepingTarPit.class));
