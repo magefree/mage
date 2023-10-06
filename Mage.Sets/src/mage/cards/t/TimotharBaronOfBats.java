@@ -84,11 +84,15 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         // Check vampire card still exists and is still in the graveyard
         Card vampireCard = game.getCard(targetPointer.getFirst(game, source));
-        if (vampireCard == null) { return false; }
+        if (vampireCard == null) {
+            return false;
+        }
 
         // Create costs
         ManaCosts<ManaCost> costs = new ManaCostsImpl<>("{1}");
@@ -99,9 +103,15 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
                 "sacrifice it and return the exiled card to the battlefield tapped\".";
 
         // Ask player if they wanna pay cost
-        if (!costs.canPay(source, source, controller.getId(), game)) { return false; }
-        if (!controller.chooseUse(Outcome.Benefit, costPromptMessage, source, game)) { return false; }
-        if (!costs.pay(source, game, source, controller.getId(),false)) { return false; }
+        if (!costs.canPay(source, source, controller.getId(), game)) {
+            return false;
+        }
+        if (!controller.chooseUse(Outcome.Benefit, costPromptMessage, source, game)) {
+            return false;
+        }
+        if (!costs.pay(source, game, source, controller.getId(),false)) {
+            return false;
+        }
         // Exile the card as part of the cost.
         // Handled this way so that the player doesn't have to dig through their graveyard for the card.
         controller.moveCards(vampireCard, Zone.EXILED, source, game);
@@ -144,10 +154,14 @@ class TimotharBaronOfBatsReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) { return false; }
+        if (player == null) {
+            return false;
+        }
 
         Card card = morOfCardToReturn.getCard(game);
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
     }

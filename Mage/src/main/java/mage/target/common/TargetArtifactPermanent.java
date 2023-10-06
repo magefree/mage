@@ -10,20 +10,21 @@ import mage.target.TargetPermanent;
 public class TargetArtifactPermanent extends TargetPermanent {
 
     public TargetArtifactPermanent() {
-        this(1, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT, false);
-    }
-
-
-    public TargetArtifactPermanent(FilterArtifactPermanent filter) {
-        this(1, 1, filter, false);
+        this(1);
     }
 
     public TargetArtifactPermanent(int numTargets) {
-        this(numTargets, numTargets, StaticFilters.FILTER_PERMANENT_ARTIFACT, false);
+        this(numTargets, numTargets);
     }
 
     public TargetArtifactPermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_PERMANENT_ARTIFACT, false);
+        this(minNumTargets, maxNumTargets,
+                (maxNumTargets > 1 ? StaticFilters.FILTER_PERMANENT_ARTIFACTS : StaticFilters.FILTER_PERMANENT_ARTIFACT),
+                false);
+    }
+
+    public TargetArtifactPermanent(FilterArtifactPermanent filter) {
+        this(1, 1, filter, false);
     }
 
     public TargetArtifactPermanent(int minNumTargets, int maxNumTargets, FilterArtifactPermanent filter, boolean notTarget) {

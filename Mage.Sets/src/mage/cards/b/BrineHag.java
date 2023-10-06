@@ -81,7 +81,7 @@ class BrineHagEffect extends OneShotEffect {
         if (!set.isEmpty()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new PermanentReferenceInCollectionPredicate(set));
-            game.addEffect(new SetBasePowerToughnessAllEffect(0, 2, Duration.Custom, filter, true), source);
+            game.addEffect(new SetBasePowerToughnessAllEffect(0, 2, Duration.Custom, filter), source);
         }
         return true;
     }

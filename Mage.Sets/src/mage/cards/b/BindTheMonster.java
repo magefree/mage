@@ -73,7 +73,7 @@ class BindTheMonsterEffect extends OneShotEffect {
 
     @Override
     public boolean apply (Game game, Ability source) {
-        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
+        Permanent attachment = source.getSourcePermanentOrLKI(game);
         if (attachment != null) {
             Permanent creature = game.getPermanent(attachment.getAttachedTo());
             if (creature != null) {

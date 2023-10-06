@@ -19,7 +19,6 @@
  import javax.swing.Timer;
  import javax.swing.*;
  import java.awt.*;
- import java.awt.dnd.DragSourceEvent;
  import java.awt.event.ActionEvent;
  import java.awt.event.ActionListener;
  import java.awt.event.KeyEvent;
@@ -41,6 +40,20 @@
      private UUID draftId;
      private Timer countdown;
      private int timeout;
+
+     /**
+      * ms delay between booster showing up and pick being allowed.
+      */
+     private static final int protectionTime = 1500;
+     /**
+      * Timer starting at booster being displayed, to protect from early pick due to clicking
+      * a little too much on the last pick.
+      */
+     private Timer protectionTimer;
+     /**
+      * Number of the latest card pick for which the protection timer has been set.
+      */
+     private int protectionPickNo = 0;
 
      // popup menu area picked cards
      private final JPopupMenu popupMenuPickedArea;
@@ -108,6 +121,8 @@
                      }
                  }
          );
+
+         protectionTimer = new Timer(protectionTime, e -> protectionTimer.stop());
      }
 
      public void cleanUp() {
@@ -118,6 +133,13 @@
              countdown.stop();
              for (ActionListener al : countdown.getActionListeners()) {
                  countdown.removeActionListener(al);
+             }
+         }
+
+         if (protectionTimer != null) {
+             protectionTimer.stop();
+             for (ActionListener al : protectionTimer.getActionListeners()) {
+                 protectionTimer.removeActionListener(al);
              }
          }
      }
@@ -311,7 +333,13 @@
          }
          
          if (!draftBooster.isEmptyGrid()) {
-            SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
+             SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
+
+             if (pickNo != protectionPickNo && !protectionTimer.isRunning()) {
+                 // Restart the protection timer.
+                 protectionPickNo = pickNo;
+                 protectionTimer.restart();
+             }
          }
      }
 
@@ -343,6 +371,10 @@
          if (s == 6 && !draftBooster.isEmptyGrid()) {
              AudioManager.playOnCountdown1();
          }
+     }
+
+     public boolean isAllowedToPick() {
+         return !protectionTimer.isRunning();
      }
 
      public void hideDraft() {
@@ -417,7 +449,7 @@
      // that's why instead of proactively logging our pick we instead
      // log *last* pick from the list of picks.
      // To make this possible we cache the list of cards from the
-     // previous booster and it's sequence number (pack number / pick number)
+     // previous booster and its sequence number (pack number / pick number)
      // in fields currentBooster and currentBoosterHeader.
      private void logLastPick(DraftPickView pickView) {
          if (!isLogging()) {
@@ -438,11 +470,13 @@
 
      private String getCurrentSetCode() {
          // TODO: Record set codes for random drafts correctly
-         if (setCodes.size() >= packNo) {
-             return setCodes.get(packNo - 1);
-         } else {
-             return "   ";
+         if (setCodes != null && setCodes.size() >= packNo) {
+             String setCode = setCodes.get(packNo - 1);
+             if (setCode != null) { // Not sure how, but got a NPE from this method P1P2 in a ZEN/ZEN/WWK draft
+                 return setCode;
+             }
          }
+         return "   ";
      }
 
      private static boolean isLogging() {
@@ -525,7 +559,7 @@
          lblPlayer15 = new javax.swing.JLabel();
          lblPlayer16 = new javax.swing.JLabel();
          draftPicks = new mage.client.cards.CardsList();
-         draftBooster = new mage.client.cards.DraftGrid();
+         draftBooster = new mage.client.cards.DraftGrid(this);
 
          draftLeftPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
          draftLeftPane.setFocusable(false);

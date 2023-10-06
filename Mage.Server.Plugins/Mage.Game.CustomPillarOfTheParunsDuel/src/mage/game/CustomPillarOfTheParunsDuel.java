@@ -32,9 +32,10 @@ import java.util.UUID;
  * To summarize, this uses the default rules for a 1v1 limited match,
  * with two additional custom rules: <p>
  * -> At the beginning of each player's first main phase, that player
- * conjure into play a Pillar of the Paruns. This does count as a
- * land drop for the turn. <p>
- * -> The starting hand size is 6, not 7.
+ * conjure into play a custom version of Pillar of the Paruns. This
+ * does count as a land drop for the turn. The custom Pillar has
+ * hexproof and gain "{T}: add {1}."<p>
+ * -> The starting hand size is 6, and the starting life count is 25.
  * <p> <p>
  * I did took the inspiration for the mode from this cube list (not
  * sure it is the original source for the idea, but i did not found
@@ -49,7 +50,7 @@ import java.util.UUID;
 public class CustomPillarOfTheParunsDuel extends GameImpl {
 
     public CustomPillarOfTheParunsDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan) {
-        super(attackOption, range, mulligan, 20, 40, 6);
+        super(attackOption, range, mulligan, 25, 40, 6);
     }
 
     @Override
@@ -57,7 +58,10 @@ public class CustomPillarOfTheParunsDuel extends GameImpl {
         super.init(choosingPlayerId);
 
         getPlayers().forEach((playerId, p) -> {
-            addDelayedTriggeredAbility(new AtTheBeginOfPlayerFirstMainPhase(playerId, "Pillar of the Paruns"), null);
+                addDelayedTriggeredAbility(
+                        new AtTheBeginOfPlayerFirstMainPhase(playerId, "C-Pillar of the Paruns"),
+                        null // TODO: Not sure how to mock something to be displayed instead.
+                );
         });
 
         state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
@@ -89,28 +93,28 @@ class InitPillarOfTheParunsEffect extends OneShotEffect {
     private UUID playerId;
     private String cardName;
 
-    InitPillarOfTheParunsEffect(UUID playerId, String cardName){
+    InitPillarOfTheParunsEffect(UUID playerId, String cardName) {
         super(Outcome.PutLandInPlay);
         this.playerId = playerId;
         this.cardName = cardName;
         this.staticText = "conjure " + cardName + " in play. It does count as a land played for the turn.";
     }
 
-    private InitPillarOfTheParunsEffect(final InitPillarOfTheParunsEffect effect){
+    private InitPillarOfTheParunsEffect(final InitPillarOfTheParunsEffect effect) {
         super(effect);
         this.playerId = effect.playerId;
         this.cardName = effect.cardName;
     }
 
     @Override
-    public InitPillarOfTheParunsEffect copy(){
+    public InitPillarOfTheParunsEffect copy() {
         return new InitPillarOfTheParunsEffect(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source){
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(playerId);
-        if(player == null){
+        if (player == null) {
             return false;
         }
 

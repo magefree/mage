@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BecomesTargetOpponentAllTriggeredAbility;
+import mage.abilities.common.BecomesTargetAnyTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -52,8 +52,8 @@ public final class MilaCraftyCompanion extends ModalDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new MilaCraftyCompanionTriggeredAbility());
 
         // Whenever a permanent you control becomes the target of a spell or ability and opponent controls, you may draw a card.
-        this.getLeftHalfCard().addAbility(new BecomesTargetOpponentAllTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), true
+        this.getLeftHalfCard().addAbility(new BecomesTargetAnyTriggeredAbility(new DrawCardSourceControllerEffect(1),
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.NONE, true
         ));
 
         // 2.

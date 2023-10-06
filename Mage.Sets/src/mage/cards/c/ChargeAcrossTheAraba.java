@@ -22,7 +22,7 @@ public final class ChargeAcrossTheAraba extends CardImpl {
 
         // Sweep - Return any number of Plains you control to their owner's hand. Creatures you control get +1/+1 until end of turn for each Plains returned this way.
         this.getSpellAbility().addEffect(new SweepEffect(SubType.PLAINS));
-        this.getSpellAbility().addEffect(new BoostControlledEffect(SweepNumber.PLAINS, SweepNumber.PLAINS, Duration.EndOfTurn, null, false, true));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(SweepNumber.PLAINS, SweepNumber.PLAINS, Duration.EndOfTurn, null, false));
     }
 
     private ChargeAcrossTheAraba(final ChargeAcrossTheAraba card) {

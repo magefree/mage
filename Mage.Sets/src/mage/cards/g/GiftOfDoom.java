@@ -42,7 +42,6 @@ public final class GiftOfDoom extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.getSpellAbility().setTargetAdjuster(GiftOfDoomAdjuster.instance);  // to remove the target set if Morph casting cost is paid
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -56,7 +55,7 @@ public final class GiftOfDoom extends CardImpl {
         this.addAbility(ability2);
 
         // Morph—Sacrifice another creature.
-        this.addAbility(new MorphAbility(new SacrificeTargetCost(
+        this.addAbility(new MorphAbility(this, new SacrificeTargetCost(
                 new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         )));
 
@@ -74,18 +73,6 @@ public final class GiftOfDoom extends CardImpl {
     @Override
     public GiftOfDoom copy() {
         return new GiftOfDoom(this);
-    }
-}
-
-enum GiftOfDoomAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        // if the Morph casting cost is paid, clear the target of Enchant Creature
-        if (game.getState().getValue("MorphAbility" + ability.getSourceId()) == "activated") {
-            ability.getTargets().clear();
-        }
     }
 }
 

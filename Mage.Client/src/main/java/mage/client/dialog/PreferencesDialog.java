@@ -213,6 +213,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_MINIMUM_RATING = "newTableMinimumRating";
     public static final String KEY_NEW_TABLE_RATED = "newTableRated";
     public static final String KEY_NEW_TABLE_EDH_POWER_LEVEL = "newTableEdhPowerLevel";
+    public static final String KEY_NEW_TABLE_EMBLEM_CARDS_ENABLED = "newTableEmblemCardsEnabled";
+    public static final String KEY_NEW_TABLE_EMBLEM_CARDS_PER_PLAYER_FILE = "newTableEmblemCardsPerPlayerFile";
+    public static final String KEY_NEW_TABLE_EMBLEM_CARDS_STARTING_PLAYER_FILE = "newTableEmblemCardsStartingPlayerFile";
 
     // pref setting for new tournament dialog
     public static final String KEY_NEW_TOURNAMENT_NAME = "newTournamentName";
@@ -237,6 +240,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_QUIT_RATIO = "newTournamentQuitRatio";
     public static final String KEY_NEW_TOURNAMENT_MINIMUM_RATING = "newTournamentMinimumRating";
     public static final String KEY_NEW_TOURNAMENT_RATED = "newTournamentRated";
+    public static final String KEY_NEW_TOURNAMENT_EMBLEM_CARDS_ENABLED = "newTournamentEmblemCardsEnabled";
+    public static final String KEY_NEW_TOURNAMENT_EMBLEM_CARDS_PER_PLAYER_FILE = "newTournamentEmblemCardsPerPlayerFile";
+    public static final String KEY_NEW_TOURNAMENT_EMBLEM_CARDS_STARTING_PLAYER_FILE = "newTournamentEmblemCardsStartingPlayerFile";
 
     // Settings for auto-choosing targets
     public static final String KEY_AUTO_TARGET_LEVEL = "autoTargetLevel";

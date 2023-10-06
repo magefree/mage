@@ -52,7 +52,7 @@ public final class TanazirQuandrix extends CardImpl {
         // Whenever Tanazir Quandrix attacks, you may have the base power and toughness of other creatures you control become equal to Tanazir Quandrix's power and toughness until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new SetBasePowerToughnessAllEffect(
                 xValue, SourcePermanentToughnessValue.getInstance(), Duration.EndOfTurn,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ).setText("have the base power and toughness of other creatures you control " +
                 "become equal to {this}'s power and toughness until end of turn"), true));
     }

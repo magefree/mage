@@ -25,12 +25,9 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     protected boolean excludeSource;
     protected FilterPermanent filter;
     protected boolean forceQuotes = false;
+    protected boolean durationRuleAtStart = false; // put duration rule to the start of the rules instead end
 
     public GainAbilityControlledEffect(Ability ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
-    }
-
-    public GainAbilityControlledEffect(CompoundAbility ability, Duration duration) {
         this(ability, duration, StaticFilters.FILTER_PERMANENTS);
     }
 
@@ -62,6 +59,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
         this.forceQuotes = effect.forceQuotes;
+        this.durationRuleAtStart = effect.durationRuleAtStart;
     }
 
     @Override
@@ -121,6 +119,9 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
+        if (durationRuleAtStart && !duration.toString().isEmpty() && duration != Duration.EndOfGame) {
+            sb.append(duration.toString()).append(", ");
+        }
         if (excludeSource) {
             sb.append("other ");
         }
@@ -128,14 +129,14 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         sb.append(filter.getMessage()).append(" you control ");
         if (duration == Duration.WhileOnBattlefield || duration == Duration.EndOfGame) {
             sb.append("have ");
-            if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {
-                gainedAbility = '"' + gainedAbility + '"';
-            }
         } else {
             sb.append("gain ");
         }
+        if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {
+            gainedAbility = '"' + gainedAbility + '"';
+        }
         sb.append(gainedAbility);
-        if (!duration.toString().isEmpty() && duration != Duration.EndOfGame) {
+        if (!durationRuleAtStart && !duration.toString().isEmpty() && duration != Duration.EndOfGame) {
             sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();
@@ -143,11 +144,15 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     /**
      * Add quotes to gains abilities (by default static abilities don't have it)
-     *
-     * @return
      */
     public GainAbilityControlledEffect withForceQuotes() {
         this.forceQuotes = true;
+        setText();
+        return this;
+    }
+
+    public GainAbilityControlledEffect withDurationRuleAtStart(boolean durationRuleAtStart) {
+        this.durationRuleAtStart = durationRuleAtStart;
         setText();
         return this;
     }

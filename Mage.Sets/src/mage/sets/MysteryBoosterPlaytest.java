@@ -28,6 +28,7 @@ public class MysteryBoosterPlaytest extends ExpansionSet {
         cards.add(new SetCardInfo("Frogkin Kidnapper", 42, Rarity.RARE, mage.cards.f.FrogkinKidnapper.class));
         cards.add(new SetCardInfo("How to Keep an Izzet Mage Busy", 93, Rarity.RARE, mage.cards.h.HowToKeepAnIzzetMageBusy.class));
         cards.add(new SetCardInfo("Innocuous Insect", 23, Rarity.RARE, mage.cards.i.InnocuousInsect.class));
+        cards.add(new SetCardInfo("Lazier Goblin", 56, Rarity.RARE, mage.cards.l.LazierGoblin.class));
         cards.add(new SetCardInfo("Mirrored Lotus", 107, Rarity.RARE, mage.cards.m.MirroredLotus.class));
         cards.add(new SetCardInfo("Recycla-bird", 28, Rarity.RARE, mage.cards.r.RecyclaBird.class));
         cards.add(new SetCardInfo("Slivdrazi Monstrosity", 102, Rarity.RARE, mage.cards.s.SlivdraziMonstrosity.class));

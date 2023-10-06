@@ -31,7 +31,7 @@ public final class UnstableHulk extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {3}{R}{R} 
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{R}{R}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{R}{R}")));
     
         // When Unstable Hulk is turned face up, it gets +6/+6 and gains trample until end of turn. You skip your next turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new BoostSourceEffect(6,6,Duration.EndOfTurn)

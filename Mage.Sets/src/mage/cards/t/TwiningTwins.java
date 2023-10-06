@@ -1,27 +1,18 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -29,6 +20,11 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class TwiningTwins extends AdventureCard {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
+    static {
+        filter.add(TokenPredicate.FALSE);
+    }
 
     public TwiningTwins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{U}{U}", "Swift Spiral", "{1}{W}");
@@ -49,8 +45,8 @@ public final class TwiningTwins extends AdventureCard {
 
         // Swift Spiral
         // Exile target nontoken creature. Return it to the battlefield under its owner’s control at the beginning of the next end step.
-        this.getSpellCard().getSpellAbility().addEffect(new TwiningTwinsEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_NON_TOKEN));
+        this.getSpellCard().getSpellAbility().addEffect(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         this.finalizeAdventure();
     }
@@ -62,38 +58,5 @@ public final class TwiningTwins extends AdventureCard {
     @Override
     public TwiningTwins copy() {
         return new TwiningTwins(this);
-    }
-}
-
-class TwiningTwinsEffect extends OneShotEffect {
-
-    TwiningTwinsEffect() {
-        super(Outcome.Detriment);
-        staticText = "Exile target nontoken creature. Return it to the battlefield under its "
-                + "owner's control at the beginning of the next end step";
-    }
-
-    private TwiningTwinsEffect(final TwiningTwinsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (player == null || permanent == null) {
-            return false;
-        }
-        player.moveCardsToExile(permanent, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
-        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
-        effect.setText("Return the exiled card to the battlefield under its owner's control");
-        effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-        return true;
-    }
-
-    @Override
-    public TwiningTwinsEffect copy() {
-        return new TwiningTwinsEffect(this);
     }
 }

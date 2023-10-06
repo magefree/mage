@@ -11,6 +11,9 @@ package mage.constants;
  */
 public enum MatchBufferTime {
     NONE(0, "None"),
+    SEC__01(1, "1 Second"),
+    SEC__02(2, "2 Seconds"),
+    SEC__03(3, "3 Seconds"),
     SEC__05(5, "5 Seconds"),
     SEC__10(10, "10 Seconds"),
     SEC__15(15, "15 Seconds"),

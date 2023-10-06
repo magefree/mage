@@ -2,6 +2,7 @@ package mage.util;
 
 import com.google.common.collect.ImmutableList;
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -38,6 +39,7 @@ import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
@@ -146,7 +148,7 @@ public final class CardUtil {
         ability.addManaCostsToPay(adjustedCost);
     }
 
-    private static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
+    public static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
         ManaCosts<ManaCost> newCost = new ManaCostsImpl<>();
 
         // nothing to change
@@ -1010,6 +1012,63 @@ public final class CardUtil {
     }
 
     /**
+     * For finding the spell or ability on the stack for "becomes the target" triggers.
+     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game the Game from checkTrigger() or watch()
+     * @return the StackObject which targeted the source, or null if not found
+     */
+    public static StackObject getTargetingStackObject(GameEvent event, Game game) {
+        // In case of multiple simultaneous triggered abilities from the same source,
+        // need to get the actual one that targeted, see #8026, #8378
+        // Also avoids triggering on cancelled selections, see #8802
+        for (StackObject stackObject : game.getStack()) {
+            Ability stackAbility = stackObject.getStackAbility();
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+                continue;
+            }
+            for (Target target : stackAbility.getTargets()) {
+                if (target.getTargets().contains(event.getTargetId())) {
+                    return stackObject;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * For ensuring that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
+     * If this is the first attempt at triggering for a given ability targeting a given object,
+     * this method records that in the game state for later checks by this same method.
+     * @param checkingReference must be unique for each usage (this.id.toString() of the TriggeredAbility, or this.getKey() of the watcher)
+     * @param targetingObject from getTargetingStackObject
+     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game the Game from checkTrigger() or watch()
+     * @return true if already triggered/watched, false if this is the first/only trigger/watch
+     */
+    public static boolean checkTargetedEventAlreadyUsed(String checkingReference, StackObject targetingObject, GameEvent event, Game game) {
+        String stateKey = "targetedMap" + checkingReference;
+        // If a spell or ability an opponent controls targets a single permanent you control more than once,
+        // Battle Mammoth's triggered ability will trigger only once.
+        // However, if a spell or ability an opponent controls targets multiple permanents you control,
+        // Battle Mammoth's triggered ability will trigger once for each of those permanents. (2021-02-05)
+        Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue(stateKey);
+        // targetMap: key - targetId; value - Set of stackObject Ids
+        if (targetMap == null) {
+            targetMap = new HashMap<>();
+        } else {
+            targetMap = new HashMap<>(targetMap); // must have new object reference if saved back to game state
+        }
+        Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
+        if (!targetingObjects.add(targetingObject.getId())) {
+            return true; // The trigger/watcher already recorded that target of the stack object
+        }
+        // Otherwise, store this combination of trigger/watcher + target + stack object
+        targetMap.put(event.getTargetId(), targetingObjects);
+        game.getState().setValue(stateKey, targetMap);
+        return false;
+    }
+
+    /**
      * Put card to battlefield without resolve (for cheats and tests only)
      *
      * @param source  must be non null (if you need it empty then use fakeSourceAbility)
@@ -1389,8 +1448,8 @@ public final class CardUtil {
                 Costs<Cost> additionalCostsLeft = leftHalfCard.getSpellAbility().getCosts();
                 Costs<Cost> additionalCostsRight = rightHalfCard.getSpellAbility().getCosts();
                 // set alternative cost and any additional cost
-                player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsLeft);
-                player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsRight);
+                player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsLeft, MageIdentifier.Default);
+                player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsRight, MageIdentifier.Default);
             }
             // allow the card to be cast
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
@@ -1407,13 +1466,13 @@ public final class CardUtil {
                     // get additional cost if any
                     Costs<Cost> additionalCostsMDFCLeft = leftHalfCard.getSpellAbility().getCosts();
                     // set alternative cost and any additional cost
-                    player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsMDFCLeft);
+                    player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsMDFCLeft, MageIdentifier.Default);
                 }
                 if (!rightHalfCard.isLand(game)) {
                     // get additional cost if any
                     Costs<Cost> additionalCostsMDFCRight = rightHalfCard.getSpellAbility().getCosts();
                     // set alternative cost and any additional cost
-                    player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsMDFCRight);
+                    player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsMDFCRight, MageIdentifier.Default);
                 }
             }
             // allow the card to be cast
@@ -1430,8 +1489,8 @@ public final class CardUtil {
                 Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
                 Costs<Cost> additionalCostsSpellCard = spellCard.getSpellAbility().getCosts();
                 // set alternative cost and any additional cost
-                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), manaCost, additionalCostsCreature);
-                player.setCastSourceIdWithAlternateMana(spellCard.getId(), manaCost, additionalCostsSpellCard);
+                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), manaCost, additionalCostsCreature, MageIdentifier.Default);
+                player.setCastSourceIdWithAlternateMana(spellCard.getId(), manaCost, additionalCostsSpellCard, MageIdentifier.Default);
             }
             // allow the card to be cast
             game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), Boolean.TRUE);
@@ -1442,7 +1501,7 @@ public final class CardUtil {
         if (manaCost != null) {
             // get additional cost if any
             Costs<Cost> additionalCostsNormalCard = card.getSpellAbility().getCosts();
-            player.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), manaCost, additionalCostsNormalCard);
+            player.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), manaCost, additionalCostsNormalCard, MageIdentifier.Default);
         }
 
         // cast it

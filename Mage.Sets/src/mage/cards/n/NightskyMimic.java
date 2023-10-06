@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import mage.MageInt;
@@ -23,14 +22,12 @@ import java.util.UUID;
  */
 public final class NightskyMimic extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a spell that's both black and green");
+    private static final FilterSpell filter = new FilterSpell("a spell that's both white and black");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
-
-    private static final String rule = "Whenever you cast a spell that's both white and black, {this} has base power and toughness 4/4 until end of turn and gains flying until end of turn.";
 
     public NightskyMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W/B}");
@@ -42,11 +39,12 @@ public final class NightskyMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both white and black, Nightsky Mimic has base power and toughness 4/4 until end of turn and gains flying until end of turn.
-        Ability ability = SpellCastControllerTriggeredAbility.createWithRule(
+        Ability ability = new SpellCastControllerTriggeredAbility(
                 new SetBasePowerToughnessSourceEffect(4, 4, Duration.EndOfTurn),
-                filter, false, rule
+                filter, false
         );
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true));
+        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains flying until end of turn"));
         this.addAbility(ability);
     }
 

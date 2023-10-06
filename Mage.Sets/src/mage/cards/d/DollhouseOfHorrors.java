@@ -95,7 +95,6 @@ class DollhouseOfHorrorsEffect extends OneShotEffect {
                 xValue,
                 xValue,
                 Duration.WhileOnBattlefield,
-                false,
                 "this creature"
         )));
         effect.apply(game, source);

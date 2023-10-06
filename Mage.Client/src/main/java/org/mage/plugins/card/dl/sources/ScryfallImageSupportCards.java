@@ -533,6 +533,13 @@ public class ScryfallImageSupportCards {
             add("WOE"); // Wilds of Eldraine
             add("WOT"); // Wilds of Eldraine: Enchanting Tales
             add("WOC"); // Wilds of Eldraine Commander
+            add("LCI"); // Lost Caverns of Ixalan
+            add("LCC"); // Lost Caverns of Ixalan Commander
+            add("REX"); // Jurassic World Collection
+            add("SPG"); // Special Guests
+
+            // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
+            add("CALC"); // Custom Alchemized versions of existing cards
         }
     };
 
@@ -999,6 +1006,9 @@ public class ScryfallImageSupportCards {
             put("PMEI/Jamuraan Lion/10*", "https://api.scryfall.com/cards/pmei/10★/");
             // PRES
             put("PRES/Lathliss, Dragon Queen/149*", "https://api.scryfall.com/cards/pres/149★/");
+
+            // CALC -- custom alchemy version of cards.
+            put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
         }
     };
 

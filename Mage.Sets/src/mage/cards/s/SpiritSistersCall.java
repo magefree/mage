@@ -8,9 +8,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileSourceReplacementEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,8 +22,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -92,7 +90,7 @@ class SpiritSistersCallDoIfEffect extends OneShotEffect {
 
 class SpiritSistersCallReturnToBattlefieldEffect extends OneShotEffect {
 
-    public SpiritSistersCallReturnToBattlefieldEffect() {
+    SpiritSistersCallReturnToBattlefieldEffect() {
         super(Outcome.PutCardInPlay);
     }
 
@@ -116,46 +114,12 @@ class SpiritSistersCallReturnToBattlefieldEffect extends OneShotEffect {
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null) {
-            ContinuousEffect effect = new GainAbilityTargetEffect(new SimpleStaticAbility(new SpiritSistersCallReplacementEffect()), Duration.Custom);
+            ContinuousEffect effect = new GainAbilityTargetEffect(
+                    new SimpleStaticAbility(new LeaveBattlefieldExileSourceReplacementEffect("this permanent")),
+                    Duration.Custom);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
         return true;
-    }
-}
-
-class SpiritSistersCallReplacementEffect extends ReplacementEffectImpl {
-
-    public SpiritSistersCallReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        this.staticText = "If {this} would leave the battlefield, exile it instead of putting it anywhere else";
-    }
-
-    private SpiritSistersCallReplacementEffect(final SpiritSistersCallReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpiritSistersCallReplacementEffect copy() {
-        return new SpiritSistersCallReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        UUID targetId = zEvent.getTargetId();
-        return targetId != null && targetId.equals(source.getSourceId())
-                && zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED;
     }
 }

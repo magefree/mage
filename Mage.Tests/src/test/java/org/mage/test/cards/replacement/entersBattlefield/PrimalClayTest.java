@@ -199,7 +199,6 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aquamorph);
-        setChoice(playerA, false); // not using morph
         setChoice(playerA, "a 5/1 creature");
 
         setStrictChooseMode(true);
@@ -218,8 +217,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         // Target creature you control gets +2/+2 until end of turn if its power is 2. Then it fights target creature you don’t control.
         addCard(Zone.BATTLEFIELD, playerB, "Siege Mastodon", 1); // 3/5 creature for fighting
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aquamorph);
-        setChoice(playerA, true); // cast facedown as 2/2
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aquamorph+" using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Savage Swipe");
         addTarget(playerA, ""); // morph
