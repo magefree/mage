@@ -102,7 +102,7 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
         if (copyFromPermanent == null) {
             return false;
         }
-        game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new CopyApplier() {
+        Permanent copiedPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new CopyApplier() {
             @Override
             public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                 blueprint.addSubType(SubType.WALL);
@@ -117,7 +117,9 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
         );
         ability.addEffect(new DontUntapInControllersUntapStepTargetEffect(Duration.WhileControlled));
         ability.getEffects().setTargetPointer(new FixedTarget(copyFromPermanent, game));
+        ability.setSourceId(sourcePermanent.getId());
         game.fireReflexiveTriggeredAbility(ability, source);
+        copiedPermanent.addAbility(ability, copiedPermanent.getId(), game);
         return true;
     }
 
