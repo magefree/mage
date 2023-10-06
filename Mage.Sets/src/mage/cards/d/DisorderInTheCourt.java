@@ -86,15 +86,16 @@ class DisorderInTheCourtEffect extends OneShotEffect {
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
-        if (toExile.isEmpty()) {
-            return false;
+        if (!toExile.isEmpty()) {
+            controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
+            game.getState().processAction(game);
         }
-        controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
-        game.getState().processAction(game);
         new InvestigateEffect(ManacostVariableValue.REGULAR).apply(game, source);
-        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
-        effect.setTargetPointer(new FixedTargets(new CardsImpl(toExile), game));
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+        if (!toExile.isEmpty()) {
+            Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
+            effect.setTargetPointer(new FixedTargets(new CardsImpl(toExile), game));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+        }
         return true;
     }
 
