@@ -25,7 +25,7 @@ public class MatchOptions implements Serializable {
     protected int winsNeeded;
     protected int freeMulligans;
     protected boolean customStartLifeEnabled;
-    protected Integer customStartLife; // Only use if customStartLifeEnabled is True
+    protected int customStartLife; // Only use if customStartLifeEnabled is True
     protected boolean customStartHandSizeEnabled;
     protected int customStartHandSize; // Only use if customStartHandSizeEnabled is True
     protected String gameType;
