@@ -13,17 +13,15 @@ import mage.constants.SubType;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.predicate.card.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.*;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- *
- * @author Codermann63
+ * @author Codermann63, xenohedron
  */
 public final class LiberatedLivestock extends CardImpl {
 
@@ -36,11 +34,7 @@ public final class LiberatedLivestock extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 
-
-
-        // When Liberated Livestock dies, create a 1/1 white Cat creature token with lifelink,
-        // a 1/1 white Bird creature token with flying,
-        // and a 2/4 white Ox creature token.
+        // When Liberated Livestock dies, create a 1/1 white Cat creature token with lifelink, a 1/1 white Bird creature token with flying, and a 2/4 white Ox creature token.
         // For each of those tokens, you may put an Aura card from your hand and/or graveyard onto the battlefield attached to it.
         this.addAbility(new DiesSourceTriggeredAbility(new LiberatedLivestockEffect()));
     }
@@ -66,50 +60,35 @@ class LiberatedLivestockEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer((source.getControllerId()));
-        if (controller == null){
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        Token cat = new CatToken2();
-        Token bird = new BirdToken();
-        Token ox = new OxToken();
-        List<Token> tokens = Arrays.asList(cat, bird, ox);
-
-        // pause to get token onto the battlefield all the same time
+        List<Token> tokens = Arrays.asList(new CatToken2(), new BirdToken(), new OxToken());
         tokens.forEach(token -> token.putOntoBattlefield(1, game, source, source.getControllerId()));
         game.getState().processAction(game);
 
-        // Setup for choosing and attaching auras to tokens
-        FilterCard filter = new FilterCard("Up to one Aura");
-        filter.add(SubType.AURA.getPredicate());
-        TargetCard target;
-
-
-        for (Token token : tokens){
-            for (UUID t : token.getLastAddedTokenIds()){
-                Permanent sourcePermanent = game.getPermanent(t);
-                if (sourcePermanent == null){
+        for (Token token : tokens) {
+            for (UUID tokenId : token.getLastAddedTokenIds()) {
+                Permanent tokenPermanent = game.getPermanent(tokenId);
+                if (tokenPermanent == null) {
                     continue;
                 }
-                filter.setMessage("Aura from you hand or graveyard that can attach to " + sourcePermanent.getName());
-
-                // Choose from hand or graveyard?
-                if (controller.chooseUse(outcome, "Look in Hand or Graveyard for aura to attach to "+sourcePermanent.getName()+"?", null, "Hand", "Graveyard", source, game)){
-                    target = new TargetCardInHand(0,1,filter);}
-                else{
-                    target = new TargetCardInYourGraveyard(0,1,filter);}
+                FilterCard filter = new FilterCard("Aura from your hand or graveyard that can attach to " + tokenPermanent.getName());
+                filter.add(SubType.AURA.getPredicate());
+                filter.add(new AuraCardCanAttachToPermanentId(tokenPermanent.getId()));
+                Cards auraCards = new CardsImpl();
+                auraCards.addAllCards(controller.getHand().getCards(filter, game));
+                auraCards.addAllCards(controller.getGraveyard().getCards(filter, game));
+                TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
                 target.withNotTarget(true);
-
-                // Handle putting aura onto the battlefield and attachment to token
-                controller.chooseTarget(outcome, target, source, game);
-                Card card = game.getCard(target.getFirstTarget());
-                if (card == null ||
-                        sourcePermanent.cantBeAttachedBy(card,source,game,true)) {
-                    continue;
+                controller.chooseTarget(outcome, auraCards, target, source, game);
+                Card auraCard = game.getCard(target.getFirstTarget());
+                if (auraCard != null && !tokenPermanent.cantBeAttachedBy(auraCard, source, game, true)) {
+                    game.getState().setValue("attachTo:" + auraCard.getId(), tokenPermanent);
+                    controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
+                    tokenPermanent.addAttachment(auraCard.getId(), source, game);
                 }
-                game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                sourcePermanent.addAttachment(card.getId(), source, game);
             }
         }
         return true;

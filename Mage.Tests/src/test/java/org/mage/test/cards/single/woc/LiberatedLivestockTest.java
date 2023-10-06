@@ -12,15 +12,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 
 public class LiberatedLivestockTest extends CardTestPlayerBase {
-    /**
-     * Liberated Livestock
-     * {5}{W}
-     * Sorcery
-     *
+    /*
+     * Liberated Livestock {5}{W} Sorcery
      * When Liberated Livestock dies, create a 1/1 white Cat creature token with lifelink,
      * a 1/1 white Bird creature token with flying, and a 2/4 white Ox creature token.
      * For each of those tokens, you may put an Aura card from your hand and/or graveyard onto the battlefield attached to it.
-     * */
+     */
     private static final String LIBERATEDLIVESTOCK = "Liberated Livestock";
     // 1 B B - instant- destroy target creature
     private static final String MURDER = "Murder";
@@ -56,12 +53,8 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
-        // Look in hand but choose nothing to attach to each of the car, bird and ox tokens
-        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
-        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
-        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.END_TURN);
 
@@ -88,18 +81,11 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
-        // Look in Graveyard and choose keensense to attach to each token
-        setChoice(playerA, false);
         addTarget(playerA, KEENSENSE);
-        setChoice(playerA, false);
         addTarget(playerA, KEENSENSE);
-        setChoice(playerA, false);
         addTarget(playerA, KEENSENSE);
-        setChoice(playerA, false);
         addTarget(playerA, KEENSENSE);
-        setChoice(playerA, false);
         addTarget(playerA, KEENSENSE);
-        setChoice(playerA, false);
         addTarget(playerA, KEENSENSE);
 
         waitStackResolved(1, PhaseStep.END_TURN);
@@ -116,7 +102,7 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
 
     /**
      * Tests Liberated Livestock's interaction with Mystic Reflection
-     * Excpected every token should be transformed by Mystic Reflection's ability
+     * Expected every token should be transformed by Mystic Reflection's ability
      * (There should be 3 Liberated Livestock on the battlefield)
      */
     @Test
@@ -132,14 +118,9 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MYSTICREFLECTION, LIBERATEDLIVESTOCK);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
-        // Look in hand but nothing to attach for each of the three Liberated Livestock tokens
-        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
-        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
-        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
-
 
         waitStackResolved(1, PhaseStep.END_TURN);
         execute();
@@ -147,9 +128,9 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
     }
 
     /**
-     * Comprehesive rules 701.3b
+     * Comprehensive rules 701.3b
      * If the tokens created by Liberated Livestock has protection from the color of the auras
-     * Then the aura is excpected NOT to move from its current position and NOT be attached to the token
+     * Then the aura is expected NOT to move from its current position and NOT be attached to the token
      */
     @Test
     public void tokensHavingProtection() {
@@ -169,14 +150,8 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MYSTICREFLECTION, SPECTRALLYNX);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
-        // Look in hand for keensense to attach to Spectral lynx token
-        setChoice(playerA, true);
         addTarget(playerA, KEENSENSE);
-        // Look in graveyard for ARCHNOFORM to attach to second Spectral lynx token
-        setChoice(playerA, false);
         addTarget(playerA, ARACHNOFORM);
-        // look in hand but choose nothing to attach to third Spectral lynx token
-        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         waitStackResolved(1, PhaseStep.END_TURN);
@@ -222,16 +197,9 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, DISENCHANT, DRESSDOWN);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
-        // Look in hand for keensense to attach to DEADLYINSECT token
-        setChoice(playerA, true);
         addTarget(playerA, KEENSENSE);
-        // Look in graveyard for ARACHNOFORM to attach to DEADLYINSECT token
-        setChoice(playerA, false);
         addTarget(playerA, ARACHNOFORM);
-        // Look in hand but choose nothing to attach to DEADLYINSECT token
-        setChoice(playerA, true);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
-
 
         waitStackResolved(1, PhaseStep.END_TURN);
         execute();
@@ -242,7 +210,4 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, KEENSENSE, 1);
     }
 
-
 }
-
-
