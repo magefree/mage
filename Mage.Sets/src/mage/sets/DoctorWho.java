@@ -21,6 +21,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 239, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("As Foretold", 214, Rarity.RARE, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Ash Barrens", 257, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Atraxi Warden", 12, Rarity.UNCOMMON, mage.cards.a.AtraxiWarden.class));
         cards.add(new SetCardInfo("Beast Within", 228, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Blasphemous Act", 224, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Canopy Vista", 258, Rarity.RARE, mage.cards.c.CanopyVista.class));
