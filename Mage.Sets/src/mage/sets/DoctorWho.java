@@ -28,6 +28,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Islet", 278, Rarity.RARE, mage.cards.f.FieryIslet.class));
         cards.add(new SetCardInfo("Forest", 204, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Four Knocks", 20, Rarity.RARE, mage.cards.f.FourKnocks.class));
+        cards.add(new SetCardInfo("Gallifrey Stands", 132, Rarity.RARE, mage.cards.g.GallifreyStands.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gallifrey Stands", 418, Rarity.RARE, mage.cards.g.GallifreyStands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 198, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Greaves", 243, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Mind Stone", 244, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
