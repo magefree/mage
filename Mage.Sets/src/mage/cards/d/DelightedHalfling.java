@@ -1,7 +1,6 @@
 package mage.cards.d;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -43,7 +42,7 @@ public final class DelightedHalfling extends CardImpl {
         // {T}: Add one mana of any color. Spend this mana only to cast a legendary spell, and that spell can't be countered.
         Ability ability = new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new DelightedHalflingManaBuilder(), true);
         this.addAbility(ability, new DelightedHalflingWatcher(ability.getOriginalId()));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DelightedHalflingCantCounterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DelightedHalflingCantCounterEffect()).setRuleVisible(false));
     }
 
     private DelightedHalfling(final DelightedHalfling card) {
@@ -134,9 +133,8 @@ class DelightedHalflingWatcher extends Watcher {
 
 class DelightedHalflingCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DelightedHalflingCantCounterEffect() {
+    DelightedHalflingCantCounterEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);
-        staticText = null;
     }
 
     private DelightedHalflingCantCounterEffect(final DelightedHalflingCantCounterEffect effect) {

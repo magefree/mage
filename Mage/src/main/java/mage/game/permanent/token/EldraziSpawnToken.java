@@ -20,10 +20,10 @@ public final class EldraziSpawnToken extends TokenImpl {
         subtype.add(SubType.SPAWN);
         power = new MageInt(0);
         toughness = new MageInt(1);
-        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
+        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost().setText("Sacrifice this creature")));
     }
 
-    protected EldraziSpawnToken(final EldraziSpawnToken token) {
+    private EldraziSpawnToken(final EldraziSpawnToken token) {
         super(token);
     }
 
