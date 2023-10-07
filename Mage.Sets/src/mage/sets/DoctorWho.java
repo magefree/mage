@@ -96,6 +96,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 202, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myriad Landscape", 290, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 291, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
+        cards.add(new SetCardInfo("Ominous Cemetery", 189, Rarity.UNCOMMON, mage.cards.o.OminousCemetery.class));
         cards.add(new SetCardInfo("Out of Time", 209, Rarity.RARE, mage.cards.o.OutOfTime.class));
         cards.add(new SetCardInfo("Overgrown Farmland", 292, Rarity.RARE, mage.cards.o.OvergrownFarmland.class));
         cards.add(new SetCardInfo("Past in Flames", 565, Rarity.RARE, mage.cards.p.PastInFlames.class));
