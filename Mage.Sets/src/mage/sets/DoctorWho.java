@@ -22,6 +22,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("As Foretold", 214, Rarity.RARE, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Ash Barrens", 257, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Astrid Peth", 11, Rarity.RARE, mage.cards.a.AstridPeth.class));
+        cards.add(new SetCardInfo("Banish to Another Universe", 13, Rarity.UNCOMMON, mage.cards.b.BanishToAnotherUniverse.class));
         cards.add(new SetCardInfo("Beast Within", 228, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Blasphemous Act", 224, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Canopy Vista", 258, Rarity.RARE, mage.cards.c.CanopyVista.class));
@@ -36,9 +37,13 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 263, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 240, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Creeping Tar Pit", 267, Rarity.RARE, mage.cards.c.CreepingTarPit.class));
+        cards.add(new SetCardInfo("Crisis of Conscience", 17, Rarity.RARE, mage.cards.c.CrisisOfConscience.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 268, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cultivate", 230, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cursed Mirror", 226, Rarity.RARE, mage.cards.c.CursedMirror.class));
+        cards.add(new SetCardInfo("Cyberman Patrol", 174, Rarity.UNCOMMON, mage.cards.c.CybermanPatrol.class));
+        cards.add(new SetCardInfo("Cybermen Squadron", 176, Rarity.RARE, mage.cards.c.CybermenSquadron.class));
+        cards.add(new SetCardInfo("Dalek Squadron", 65, Rarity.UNCOMMON, mage.cards.d.DalekSquadron.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 269, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Day of Destiny", 206, Rarity.RARE, mage.cards.d.DayOfDestiny.class));
         cards.add(new SetCardInfo("Deserted Beach", 270, Rarity.RARE, mage.cards.d.DesertedBeach.class));
