@@ -41,6 +41,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 230, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cursed Mirror", 226, Rarity.RARE, mage.cards.c.CursedMirror.class));
         cards.add(new SetCardInfo("Cyberman Patrol", 174, Rarity.UNCOMMON, mage.cards.c.CybermanPatrol.class));
+        cards.add(new SetCardInfo("Cybermen Squadron", 176, Rarity.RARE, mage.cards.c.CybermenSquadron.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 269, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Day of Destiny", 206, Rarity.RARE, mage.cards.d.DayOfDestiny.class));
         cards.add(new SetCardInfo("Deserted Beach", 270, Rarity.RARE, mage.cards.d.DesertedBeach.class));
