@@ -116,6 +116,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Scattered Groves", 301, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Search for Tomorrow", 234, Rarity.COMMON, mage.cards.s.SearchForTomorrow.class));
         cards.add(new SetCardInfo("Seaside Citadel", 302, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
+        cards.add(new SetCardInfo("Sergeant John Benton", 157, Rarity.RARE, mage.cards.s.SergeantJohnBenton.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 303, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 304, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Shipwreck Marsh", 305, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class));
