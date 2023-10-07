@@ -108,6 +108,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 295, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Preordain", 218, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Propaganda", 219, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
+        cards.add(new SetCardInfo("Quantum Misalignment", 52, Rarity.RARE, mage.cards.q.QuantumMisalignment.class));
         cards.add(new SetCardInfo("Reliquary Tower", 296, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Return to Dust", 211, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("River of Tears", 297, Rarity.RARE, mage.cards.r.RiverOfTears.class));
