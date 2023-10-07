@@ -1,16 +1,18 @@
-package mage.cards.l;
+package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.combat.GoadTargetEffect;
-import mage.abilities.effects.keyword.SurveilEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -19,34 +21,41 @@ import java.util.UUID;
 /**
  * @author Susucr
  */
-public final class LaserScrewdriver extends CardImpl {
+public final class SonicScrewdriver extends CardImpl {
 
-    public LaserScrewdriver(UUID ownerId, CardSetInfo setInfo) {
+    private static final FilterArtifactPermanent filter
+            = new FilterArtifactPermanent("another target artifact");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
+    public SonicScrewdriver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
-        // {1}, {T}: Tap target artifact.
+        // {1}, {T}: Untap another target artifact.
         Ability ability = new SimpleActivatedAbility(
-                new TapTargetEffect(),
+                new UntapTargetEffect(),
                 new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetArtifactPermanent());
+        ability.addTarget(new TargetArtifactPermanent(filter));
         this.addAbility(ability);
 
-        // {2}, {T}: Surveil 1.
+        // {2}, {T}: Scry 1.
         ability = new SimpleActivatedAbility(
-                new SurveilEffect(1),
+                new ScryEffect(1),
                 new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {3}, {T}: Goad target creature.
+        // {3}, {T}: Target creature can't be blocked this turn.
         ability = new SimpleActivatedAbility(
-                new GoadTargetEffect(),
+                new CantBeBlockedTargetEffect(),
                 new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
@@ -54,12 +63,12 @@ public final class LaserScrewdriver extends CardImpl {
         this.addAbility(ability);
     }
 
-    private LaserScrewdriver(final LaserScrewdriver card) {
+    private SonicScrewdriver(final SonicScrewdriver card) {
         super(card);
     }
 
     @Override
-    public LaserScrewdriver copy() {
-        return new LaserScrewdriver(this);
+    public SonicScrewdriver copy() {
+        return new SonicScrewdriver(this);
     }
 }
