@@ -85,6 +85,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Horizon Canopy", 287, Rarity.RARE, mage.cards.h.HorizonCanopy.class));
         cards.add(new SetCardInfo("Inspiring Refrain", 216, Rarity.RARE, mage.cards.i.InspiringRefrain.class));
         cards.add(new SetCardInfo("Into the Time Vortex", 88, Rarity.RARE, mage.cards.i.IntoTheTimeVortex.class));
+        cards.add(new SetCardInfo("Iraxxa, Empress of Mars", 89, Rarity.UNCOMMON, mage.cards.i.IraxxaEmpressOfMars.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 288, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Island", 198, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jenny, Generated Anomaly", 137, Rarity.RARE, mage.cards.j.JennyGeneratedAnomaly.class));
