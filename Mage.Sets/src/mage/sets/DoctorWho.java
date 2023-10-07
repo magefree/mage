@@ -154,6 +154,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 322, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Eleventh Hour", 41, Rarity.RARE, mage.cards.t.TheEleventhHour.class));
         cards.add(new SetCardInfo("The Flux", 86, Rarity.RARE, mage.cards.t.TheFlux.class));
+        cards.add(new SetCardInfo("The Sixth Doctor", 159, Rarity.RARE, mage.cards.t.TheSixthDoctor.class));
         cards.add(new SetCardInfo("The Thirteenth Doctor", 4, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class));
         cards.add(new SetCardInfo("Thespian's Stage", 323, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("Think Twice", 220, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
