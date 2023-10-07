@@ -43,9 +43,12 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Cursed Mirror", 226, Rarity.RARE, mage.cards.c.CursedMirror.class));
         cards.add(new SetCardInfo("Cyberman Patrol", 174, Rarity.UNCOMMON, mage.cards.c.CybermanPatrol.class));
         cards.add(new SetCardInfo("Cybermen Squadron", 176, Rarity.RARE, mage.cards.c.CybermenSquadron.class));
+        cards.add(new SetCardInfo("Dalek Drone", 64, Rarity.RARE, mage.cards.d.DalekDrone.class));
         cards.add(new SetCardInfo("Dalek Squadron", 65, Rarity.UNCOMMON, mage.cards.d.DalekSquadron.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 269, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Day of Destiny", 206, Rarity.RARE, mage.cards.d.DayOfDestiny.class));
+        cards.add(new SetCardInfo("Decaying Time Loop", 80, Rarity.UNCOMMON, mage.cards.d.DecayingTimeLoop.class));
+        cards.add(new SetCardInfo("Delete", 81, Rarity.RARE, mage.cards.d.Delete.class));
         cards.add(new SetCardInfo("Deserted Beach", 270, Rarity.RARE, mage.cards.d.DesertedBeach.class));
         cards.add(new SetCardInfo("Desolate Lighthouse", 271, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 272, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
@@ -83,6 +86,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Time Vortex", 88, Rarity.RARE, mage.cards.i.IntoTheTimeVortex.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 288, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Island", 198, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jenny, Generated Anomaly", 137, Rarity.RARE, mage.cards.j.JennyGeneratedAnomaly.class));
         cards.add(new SetCardInfo("Jenny Flint", 136, Rarity.RARE, mage.cards.j.JennyFlint.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 289, Rarity.RARE, mage.cards.l.LavaclawReaches.class));
         cards.add(new SetCardInfo("Lightning Greaves", 243, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
