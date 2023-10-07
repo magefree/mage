@@ -141,6 +141,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Indulgence", 252, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 253, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Talisman of Unity", 254, Rarity.UNCOMMON, mage.cards.t.TalismanOfUnity.class));
+        cards.add(new SetCardInfo("Tegan Jovanka", 28, Rarity.RARE, mage.cards.t.TeganJovanka.class));
         cards.add(new SetCardInfo("Temple of Abandon", 313, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Deceit", 314, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 315, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
