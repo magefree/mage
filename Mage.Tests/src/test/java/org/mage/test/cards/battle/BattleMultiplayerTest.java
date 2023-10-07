@@ -23,7 +23,7 @@ public class BattleMultiplayerTest extends BattleBaseTest {
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         Game game = new FreeForAll(
                 MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL,
-                MulliganType.GAME_DEFAULT.getMulligan(0), 20
+                MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7
         );
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");

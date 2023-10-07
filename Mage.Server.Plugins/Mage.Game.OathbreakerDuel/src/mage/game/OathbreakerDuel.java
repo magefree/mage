@@ -12,8 +12,8 @@ import java.util.UUID;
  */
 public class OathbreakerDuel extends OathbreakerFreeForAll {
 
-    public OathbreakerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+    public OathbreakerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, startLife, startHandSize);
         this.startingPlayerSkipsDraw = true;
     }
 
