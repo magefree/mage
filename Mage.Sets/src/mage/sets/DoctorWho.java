@@ -63,6 +63,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Feed the Swarm", 221, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fetid Pools", 277, Rarity.RARE, mage.cards.f.FetidPools.class));
         cards.add(new SetCardInfo("Fiery Islet", 278, Rarity.RARE, mage.cards.f.FieryIslet.class));
+        cards.add(new SetCardInfo("Five Hundred Year Diary", 42, Rarity.RARE, mage.cards.f.FiveHundredYearDiary.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 279, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forest", 204, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 280, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
