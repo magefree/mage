@@ -101,11 +101,17 @@ public class TableView implements Serializable {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
                 addInfo.append(" Time: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
                 addInfo.append(" Buffer: ").append(table.getMatch().getOptions().getMatchBufferTime().toString());
-                if (table.getMatch().getOptions().getMulliganType() != MulliganType.GAME_DEFAULT){
+                if (table.getMatch().getOptions().getMulliganType() != MulliganType.GAME_DEFAULT) {
                     addInfo.append(" Mulligan: \"").append(table.getMatch().getOptions().getMulliganType().toString()).append("\"");
                 }
                 if (table.getMatch().getFreeMulligans() > 0) {
                     addInfo.append(" FM: ").append(table.getMatch().getFreeMulligans());
+                }
+                if (table.getMatch().getOptions().isCustomStartLifeEnabled()) {
+                    addInfo.append(" StartLife: ").append(table.getMatch().getOptions().getCustomStartLife());
+                }
+                if (table.getMatch().getOptions().isCustomStartHandSizeEnabled()) {
+                    addInfo.append(" StartHandSize: ").append(table.getMatch().getOptions().getCustomStartHandSize());
                 }
             } else {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
@@ -118,7 +124,7 @@ public class TableView implements Serializable {
                 addInfo.append(" PC");
             }
             if (!(table.getMatch().getOptions().getPerPlayerEmblemCards().isEmpty())
-                || !(table.getMatch().getOptions().getGlobalEmblemCards().isEmpty())) {
+                    || !(table.getMatch().getOptions().getGlobalEmblemCards().isEmpty())) {
                 addInfo.append(" EC");
             }
             if (table.getMatch().getOptions().isSpectatorsAllowed()) {
@@ -162,11 +168,17 @@ public class TableView implements Serializable {
                     MatchOptions tourneyMatchOptions = table.getTournament().getOptions().getMatchOptions();
                     infoText.append(" Time: ").append(tourneyMatchOptions.getMatchTimeLimit().toString());
                     infoText.append(" Buffer: ").append(tourneyMatchOptions.getMatchBufferTime().toString());
-                    if (tourneyMatchOptions.getMulliganType() != MulliganType.GAME_DEFAULT){
+                    if (tourneyMatchOptions.getMulliganType() != MulliganType.GAME_DEFAULT) {
                         infoText.append(" Mulligan: \"").append(tourneyMatchOptions.getMulliganType().toString()).append("\"");
                     }
                     if (tourneyMatchOptions.getFreeMulligans() > 0) {
                         infoText.append(" FM: ").append(tourneyMatchOptions.getFreeMulligans());
+                    }
+                    if (table.getMatch().getOptions().isCustomStartLifeEnabled()) {
+                        infoText.append(" StartLife: ").append(table.getMatch().getOptions().getCustomStartLife());
+                    }
+                    if (table.getMatch().getOptions().isCustomStartHandSizeEnabled()) {
+                        infoText.append(" StartHandSize: ").append(table.getMatch().getOptions().getCustomStartHandSize());
                     }
                     if (table.getTournament().getTournamentType().isLimited()) {
                         infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
@@ -188,7 +200,7 @@ public class TableView implements Serializable {
                     if (table.getTournament().getOptions().isWatchingAllowed()) {
                         infoText.append(" SP");
                     }
-                    
+
                     break;
                 case DUELING:
                     stateText.append(" Round: ").append(table.getTournament().getRounds().size());
