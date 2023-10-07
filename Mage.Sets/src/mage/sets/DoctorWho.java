@@ -69,6 +69,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Grasp of Fate", 208, Rarity.RARE, mage.cards.g.GraspOfFate.class));
         cards.add(new SetCardInfo("Growth Spiral", 237, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Haunted Ridge", 286, Rarity.RARE, mage.cards.h.HauntedRidge.class));
+        cards.add(new SetCardInfo("Heaven Sent", 134, Rarity.RARE, mage.cards.h.HeavenSent.class));
         cards.add(new SetCardInfo("Hero's Blade", 241, Rarity.UNCOMMON, mage.cards.h.HerosBlade.class));
         cards.add(new SetCardInfo("Heroes' Podium", 242, Rarity.RARE, mage.cards.h.HeroesPodium.class));
         cards.add(new SetCardInfo("Heroic Intervention", 233, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
