@@ -111,7 +111,7 @@ public class MorphAbility extends SpellAbility {
     public String getRule() {
         boolean isMana = morphCosts.get(0) instanceof ManaCost;
         String name = megamorph ? ABILITY_KEYWORD_MEGA : ABILITY_KEYWORD;
-        String reminder = megamorph ? REMINDER_TEXT_MEGA : REMINDER_TEXT;
+        String reminder = " <i>(" + (megamorph ? REMINDER_TEXT_MEGA : REMINDER_TEXT) + ")</i>";
         return name + (isMana ? " " : "&mdash;") +
                 morphCosts.getText() + (isMana ? ' ' : ". ") + reminder;
     }

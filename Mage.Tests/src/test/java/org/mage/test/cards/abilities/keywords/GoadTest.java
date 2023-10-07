@@ -34,7 +34,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 40);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 40, 7);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");
         playerB = createPlayer(game, "PlayerB");
@@ -65,8 +65,8 @@ public class GoadTest extends CardTestMultiPlayerBase {
     /**
      * Checks whether the given attacker is NOT goaded by the provided player(s).
      *
-     * @param attacker  the name of the attacker
-     * @param players   the player(s) that the attacker is supposed to be goaded by.
+     * @param attacker the name of the attacker
+     * @param players  the player(s) that the attacker is supposed to be goaded by.
      */
     private void assertNotGoaded(String attacker, TestPlayer... players) {
         Assert.assertTrue("At least one player should be provided", players.length > 0);
@@ -87,8 +87,8 @@ public class GoadTest extends CardTestMultiPlayerBase {
     /**
      * Checks whether the given attacker is goaded by the provided player(s).
      *
-     * @param attacker  the name of the attacker
-     * @param players   the player(s) that the attacker is supposed to be goaded by.
+     * @param attacker the name of the attacker
+     * @param players  the player(s) that the attacker is supposed to be goaded by.
      */
     private void assertGoaded(String attacker, TestPlayer... players) {
         Assert.assertTrue("At least one player should be provided", players.length > 0);
@@ -220,10 +220,10 @@ public class GoadTest extends CardTestMultiPlayerBase {
     /**
      * Reported bug: https://github.com/magefree/mage/issues/9227
      * Geode Rager (and other goad all effects) goad creatures that enter the battlefield after the effect resolved.
-     *
+     * <p>
      * Ruling:
-     *      Creatures that enter the battlefield or come under the target player’s control after Geode Rager’s ability has resolved won’t be goaded.
-     *      (2020-09-25)
+     * Creatures that enter the battlefield or come under the target player’s control after Geode Rager’s ability has resolved won’t be goaded.
+     * (2020-09-25)
      */
     @Test
     public void goadAllCorrectAffect() {

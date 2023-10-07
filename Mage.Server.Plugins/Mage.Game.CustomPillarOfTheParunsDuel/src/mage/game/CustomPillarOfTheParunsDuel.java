@@ -49,8 +49,8 @@ import java.util.UUID;
  */
 public class CustomPillarOfTheParunsDuel extends GameImpl {
 
-    public CustomPillarOfTheParunsDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan) {
-        super(attackOption, range, mulligan, 25, 40, 6);
+    public CustomPillarOfTheParunsDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 40, startLife, startHandSize);
     }
 
     @Override
@@ -58,10 +58,10 @@ public class CustomPillarOfTheParunsDuel extends GameImpl {
         super.init(choosingPlayerId);
 
         getPlayers().forEach((playerId, p) -> {
-                addDelayedTriggeredAbility(
-                        new AtTheBeginOfPlayerFirstMainPhase(playerId, "C-Pillar of the Paruns"),
-                        null // TODO: Not sure how to mock something to be displayed instead.
-                );
+            addDelayedTriggeredAbility(
+                    new AtTheBeginOfPlayerFirstMainPhase(playerId, "C-Pillar of the Paruns"),
+                    null // TODO: Not sure how to mock something to be displayed instead.
+            );
         });
 
         state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));

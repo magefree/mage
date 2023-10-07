@@ -18,6 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
@@ -60,7 +61,7 @@ public final class GarrukSavageHerald extends CardImpl {
         this.addAbility(minusAbility);
 
         // −7: Until end of turn, creatures you control gain "You may have this creature assign its combat damage as though it weren't blocked."
-        ContinuousEffect ultimateEffect = new GainAbilityControlledEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.EndOfTurn);
+        ContinuousEffect ultimateEffect = new GainAbilityControlledEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         ultimateEffect.setText("Until end of turn, creatures you control gain \"You may have this creature assign its combat damage as though it weren't blocked.\"");
         this.addAbility(new LoyaltyAbility(ultimateEffect, -7));
     }

@@ -45,6 +45,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Court of Ardenvale", 21, Rarity.RARE, mage.cards.c.CourtOfArdenvale.class));
         cards.add(new SetCardInfo("Court of Embereth", 24, Rarity.RARE, mage.cards.c.CourtOfEmbereth.class));
         cards.add(new SetCardInfo("Court of Garenbrig", 25, Rarity.RARE, mage.cards.c.CourtOfGarenbrig.class));
+        cards.add(new SetCardInfo("Court of Locthwain", 23, Rarity.RARE, mage.cards.c.CourtOfLocthwain.class));
         cards.add(new SetCardInfo("Court of Vantress", 22, Rarity.RARE, mage.cards.c.CourtOfVantress.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 64, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 157, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
@@ -88,6 +89,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Spiritdancer", 69, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Korvold, Gleeful Glutton", 26, Rarity.MYTHIC, mage.cards.k.KorvoldGleefulGlutton.class));
         cards.add(new SetCardInfo("Krosan Verge", 163, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Liberated Livestock", 5, Rarity.RARE, mage.cards.l.LiberatedLivestock.class));
         cards.add(new SetCardInfo("Loamcrafter Faun", 19, Rarity.RARE, mage.cards.l.LoamcrafterFaun.class));
         cards.add(new SetCardInfo("Malleable Impostor", 10, Rarity.RARE, mage.cards.m.MalleableImpostor.class));
         cards.add(new SetCardInfo("Mantle of the Ancients", 70, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));

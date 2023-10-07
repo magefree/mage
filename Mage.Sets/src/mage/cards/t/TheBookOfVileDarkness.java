@@ -11,6 +11,7 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -46,7 +47,7 @@ public final class TheBookOfVileDarkness extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), TargetController.YOU,
                 TheBookOfVileDarknessCondition.instance, false
-        ));
+        ).addHint(new ConditionHint(TheBookOfVileDarknessCondition.instance, "You lost 2 or more life this turn")));
 
         // {T}, Exile The Book of Vile Darkness and artifacts you control named Eye of Vecna and Hand of Vecna: Create Vecna, a legendary 8/8 black Zombie God creature token with indestructible and all triggered abilities of the exiled cards.
         Ability ability = new SimpleActivatedAbility(new TheBookOfVileDarknessEffect(), new TapSourceCost());
