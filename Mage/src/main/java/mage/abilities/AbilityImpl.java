@@ -443,6 +443,8 @@ public abstract class AbilityImpl implements Ability {
                     canUseAdditionalCost = true;
                     break;
                 case PROTOTYPE:
+                    // Notably, casting a spell as a prototype does not count as paying an alternative cost.
+                    // https://magic.wizards.com/en/news/feature/comprehensive-rules-changes
                 case NORMAL:
                     canUseAlternativeCost = true;
                     canUseAdditionalCost = true;

@@ -24,7 +24,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class PrototypeTest extends CardTestPlayerBase {
 
     private static final String automaton = "Blitz Automaton";
-    private static final String automatonWithPrototype = "Blitz Automaton using Prototype";
+    private static final String withPrototype = " using Prototype";
+    private static final String automatonWithPrototype = automaton+withPrototype;
     private static final String bolt = "Lightning Bolt";
     private static final String cloudshift = "Cloudshift";
     private static final String clone = "Clone";
@@ -447,10 +448,10 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Taiga");
 
-        //checkPlayableAbility("cast even proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Boulderbranch Golem using Prototype", false);
-        checkPlayableAbility("cast odd proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fallaji Dragon Engine using Prototype", true);
+        //checkPlayableAbility("cast even proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Boulderbranch Golem"+withPrototype, false);
+        checkPlayableAbility("cast odd proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fallaji Dragon Engine"+withPrototype, true);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto + " using Prototype");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto + ""+withPrototype);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -539,33 +540,153 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, automaton, 3, 2);
     }
+    @Test
+    public void testEssenceOfWild() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Essence of the Wild", 1);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Pyroclasm");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Pyroclasm");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, "Essence of the Wild", 2);
+    }
+    @Test
+    public void testChainer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Chainer, Nightmare Adept", 1);
+        addCard(Zone.GRAVEYARD, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Plains");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard a card:");
+        setChoice(playerA, "Plains");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, automatonWithPrototype);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        checkAutomaton(true);
+    }
+    @Test
+    public void testMetamorphCopyA() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3+9);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Hulking Metamorph");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hulking Metamorph");
+        setChoice(playerA, true);
+        setChoice(playerA, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, automaton, 3, 2);
+        assertPowerToughness(playerA, automaton, 7, 7);
+    }
+    @Test
+    public void testMetamorphCopyB() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 7+4);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Hulking Metamorph");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hulking Metamorph"+withPrototype);
+        setChoice(playerA, true);
+        setChoice(playerA, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, automaton, 6, 4);
+        assertPowerToughness(playerA, automaton, 3, 3);
+    }
+    @Test
+    public void testReflectionA() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3+6+6);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Goring Warplow");
+        addCard(Zone.HAND, playerA, "Infinite Reflection");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infinite Reflection", automaton);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Goring Warplow");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        checkAutomaton(true, 2);
+    }
+    @Test
+    public void testReflectionB() {
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 7+6+2);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Goring Warplow");
+        addCard(Zone.HAND, playerA, "Infinite Reflection");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infinite Reflection", automaton);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Goring Warplow"+withPrototype);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        checkAutomaton(false, 2);
+    }
+    @Test
+    public void testProgenitor() {
+        addCard(Zone.BATTLEFIELD, playerA, "Frontier Bivouac", 3+6);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Progenitor Mimic");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);;
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Progenitor Mimic");;
+        setChoice(playerA, true);
+        setChoice(playerA, automaton);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        checkAutomaton(true, 3);
+    }
+
 
     /*
      * More tests suggested by Zerris:
-     * DONE 1) Copy permanent on the stack: See Double
      * 2) Gain control of spell on the stack: Aethersnatch
      * 3) Check LKI if card immediately leaves the battlefield due to state-based actions:
      *      4x Flowstone Surge, Absolute Law, Electropotence, Drizzt Do'Urden, Flayer of the Hatebound in play.
      *      (Cast both Prototype and Normal, assert both have expected P/T on entering and leaving battlefield for all triggers;
      *      Absolute Law protects as expected against colors.
      *      Reanimate the card after having prototyped it, assert the reanimated copy has correct P/T and Absolute Law fails to protect.)
-     * 4) Ensure Copy effects layer properly: Essence of the Wild in play
-     * 5) Check other things becoming copies of it, particularly other prototype cards:
-     *      Infinite Reflection on it, followed by casting a copy of a different prototype-able card (both Prototyped and Normal for each)
-     * DONE 6) Ensure Prototype is not treated as an ability while in play, but does remove the textbox: Dress Down with it in play
      * 7) Phasing: Slip Out the Back
      * 8) Alternate Cost: Fires of Invention (Cannot cast at all with fires on 3 lands, cannot cast prototyped even on 7)
      *      NOTE: This test is probably wrong, Prototype is apparently NOT an alternate cost! https://magic.wizards.com/en/news/feature/comprehensive-rules-changes
-     * 9) Delayed copies of a clone copy: Progenitor Mimic
-     * 14) Cast from zones other than the hand: Ensure that if you cast a card from exile (Gonti, Lord of Luxury) you can Prototype it
-     *      (and use mana of any color) as expected, and the same for Graveyards (Chainer, Nightmare Adept)
      * 15) Yixlid Jailer + Chainer, Nightmare Adept - I believe you should be able to cast your card, but not Prototype it,
      *      because that decision is made before it goes on the stack (and thus leaves the graveyard).
      * 19) Ensure Prototype is preserved through type changes - Swift Reconfiguration + Bludgeon Brawl on a prototyped card
      *      (and attempt to equip to Master of Waves)
      * 20) Ensure colored mana in a Prototype cost is treated properly - can be paid for by Jegantha and Somberwald Sage,
      *      reduced by Morophon but not Ugin, the Ineffable
-     * DONE 22) Cast it Prototyped while Humility is in play (it's still a 1/1)
      * 23) Jegantha can still be your companion with Depth Charge Colossus in your deck
      */
 
