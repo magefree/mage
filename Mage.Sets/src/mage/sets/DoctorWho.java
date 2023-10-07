@@ -71,6 +71,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Four Knocks", 20, Rarity.RARE, mage.cards.f.FourKnocks.class));
         cards.add(new SetCardInfo("Fractured Identity", 236, Rarity.RARE, mage.cards.f.FracturedIdentity.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 281, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
+        cards.add(new SetCardInfo("Frost Fair Lure Fish", 129, Rarity.RARE, mage.cards.f.FrostFairLureFish.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 282, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 283, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Gallifrey Stands", 132, Rarity.RARE, mage.cards.g.GallifreyStands.class));
