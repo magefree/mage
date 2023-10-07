@@ -19,15 +19,15 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- *
  * @author nigelzor
  */
 public class MomirGame extends GameImpl {
 
     private int numPlayers;
 
-    public MomirGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60, 7);
+    public MomirGame(MultiplayerAttackOption attackOption, RangeOfInfluence range,
+                     Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 60, startLife, startHandSize);
     }
 
     public MomirGame(final MomirGame game) {
