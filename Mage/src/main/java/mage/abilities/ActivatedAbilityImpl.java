@@ -4,7 +4,6 @@ import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.ManaOptions;
@@ -73,16 +72,6 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         super(AbilityType.ACTIVATED, zone);
         this.addEffect(effect);
         this.addCost(cost);
-    }
-
-    protected ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
-        super(AbilityType.ACTIVATED, zone);
-        this.addEffect(effect);
-        if (costs != null) {
-            for (Cost cost : costs) {
-                this.addCost(cost);
-            }
-        }
     }
 
     @Override
