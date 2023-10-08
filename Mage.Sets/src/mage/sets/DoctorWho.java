@@ -117,6 +117,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Scattered Groves", 301, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Search for Tomorrow", 234, Rarity.COMMON, mage.cards.s.SearchForTomorrow.class));
         cards.add(new SetCardInfo("Seaside Citadel", 302, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
+        cards.add(new SetCardInfo("Sergeant John Benton", 157, Rarity.RARE, mage.cards.s.SergeantJohnBenton.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 303, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 304, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Shipwreck Marsh", 305, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class));
@@ -125,6 +126,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Snuff Out", 222, Rarity.UNCOMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Sol Ring", 245, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 246, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Star Whale", 55, Rarity.UNCOMMON, mage.cards.s.StarWhale.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 308, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 309, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
         cards.add(new SetCardInfo("Sundown Pass", 310, Rarity.RARE, mage.cards.s.SundownPass.class));
@@ -140,6 +142,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Indulgence", 252, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 253, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Talisman of Unity", 254, Rarity.UNCOMMON, mage.cards.t.TalismanOfUnity.class));
+        cards.add(new SetCardInfo("Tegan Jovanka", 28, Rarity.RARE, mage.cards.t.TeganJovanka.class));
         cards.add(new SetCardInfo("Temple of Abandon", 313, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Deceit", 314, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 315, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
@@ -152,6 +155,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 322, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Eleventh Hour", 41, Rarity.RARE, mage.cards.t.TheEleventhHour.class));
         cards.add(new SetCardInfo("The Flux", 86, Rarity.RARE, mage.cards.t.TheFlux.class));
+        cards.add(new SetCardInfo("The Sixth Doctor", 159, Rarity.RARE, mage.cards.t.TheSixthDoctor.class));
         cards.add(new SetCardInfo("The Thirteenth Doctor", 4, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class));
         cards.add(new SetCardInfo("Thespian's Stage", 323, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("Think Twice", 220, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
@@ -165,6 +169,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Throes of Chaos", 227, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
         cards.add(new SetCardInfo("Time Lord Regeneration", 59, Rarity.UNCOMMON, mage.cards.t.TimeLordRegeneration.class));
         cards.add(new SetCardInfo("Time Wipe", 238, Rarity.RARE, mage.cards.t.TimeWipe.class));
+        cards.add(new SetCardInfo("Vashta Nerada", 73, Rarity.RARE, mage.cards.v.VashtaNerada.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 329, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
         cards.add(new SetCardInfo("War Room", 330, Rarity.RARE, mage.cards.w.WarRoom.class));
         cards.add(new SetCardInfo("Waterlogged Grove", 331, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
