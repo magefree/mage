@@ -52,6 +52,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="spnFreeMulligans" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="planechaseDescriptionLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="emblemCardsDescriptionLabel" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblVariantOptions" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -63,8 +65,15 @@
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="planechaseDescriptionLabel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="emblemCardsDescriptionLabel" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="checkStartingLife" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="spnCustomLifeTotal" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="checkStartingHandSize" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="spnCustomStartingHand" min="-2" pref="46" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -84,6 +93,17 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="spnFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="spnCustomStartingHand" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkStartingHandSize" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="spnCustomLifeTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkStartingLife" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
@@ -320,6 +340,48 @@
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Emblem Cards description"/>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Give players emblems with the abilities of cards.&#xa;Note that some abilities may not function correctly from the command zone.&#xa;If anything breaks, please report it on GitHub."/>
       </AccessibilityProperties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnCustomLifeTotal">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Custom starting life total"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Custom starting life total"/>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Set a custom starting life total"/>
+      </AccessibilityProperties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnCustomLifeTotalStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkStartingLife">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Check to use a specific starting life total"/>
+        <Property name="actionCommand" type="java.lang.String" value="checkCustomLife"/>
+        <Property name="horizontalTextPosition" type="int" value="10"/>
+        <Property name="label" type="java.lang.String" value="Custom Starting Life"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Custom starting life"/>
+      </AccessibilityProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkStartingLifeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkStartingHandSize">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Custom Starting Hand"/>
+        <Property name="toolTipText" type="java.lang.String" value="Check to use a specific starting hand size"/>
+        <Property name="actionCommand" type="java.lang.String" value="checkCustomHandSize"/>
+        <Property name="horizontalTextPosition" type="int" value="10"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkStartingHandSizeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnCustomStartingHand">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnCustomStartingHandStateChanged"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

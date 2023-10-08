@@ -16,7 +16,12 @@ public class CustomPillarOfTheParunsDuelMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        CustomPillarOfTheParunsDuel game = new CustomPillarOfTheParunsDuel(options.getAttackOption(), options.getRange(), mulligan);
+        int startLife = options.isCustomStartLifeEnabled() ? options.getCustomStartLife() : 25;
+        int startHandSize = options.isCustomStartHandSizeEnabled() ? options.getCustomStartHandSize() : 6;
+        CustomPillarOfTheParunsDuel game = new CustomPillarOfTheParunsDuel(
+                options.getAttackOption(), options.getRange(),
+                mulligan, startLife, startHandSize
+        );
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);
 

@@ -34,8 +34,8 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
     // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 50, 7);
+    public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 50, startLife, startHandSize);
     }
 
     protected GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
