@@ -6,12 +6,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- * @author spjspj
+ * @author Susucr
  */
 public final class AlienWarriorToken extends TokenImpl {
 
     public AlienWarriorToken() {
-        super("Allien Warrior Token", "2/2 red Allien Warrior creature token");
+        super("Alien Warrior Token", "2/2 red Alien Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ALIEN);
