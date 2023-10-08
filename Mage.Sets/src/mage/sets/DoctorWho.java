@@ -64,6 +64,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Feed the Swarm", 221, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fetid Pools", 277, Rarity.RARE, mage.cards.f.FetidPools.class));
         cards.add(new SetCardInfo("Fiery Islet", 278, Rarity.RARE, mage.cards.f.FieryIslet.class));
+        cards.add(new SetCardInfo("Flaming Tyrannosaurus", 85, Rarity.RARE, mage.cards.f.FlamingTyrannosaurus.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 279, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forest", 204, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 280, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
@@ -75,6 +76,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Gallifrey Stands", 132, Rarity.RARE, mage.cards.g.GallifreyStands.class));
         cards.add(new SetCardInfo("Game Trail", 284, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Glacial Fortress", 285, Rarity.RARE, mage.cards.g.GlacialFortress.class));
+        cards.add(new SetCardInfo("Graham O'Brien", 104, Rarity.RARE, mage.cards.g.GrahamOBrien.class));
         cards.add(new SetCardInfo("Grasp of Fate", 208, Rarity.RARE, mage.cards.g.GraspOfFate.class));
         cards.add(new SetCardInfo("Growth Spiral", 237, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Haunted Ridge", 286, Rarity.RARE, mage.cards.h.HauntedRidge.class));
@@ -85,6 +87,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Horizon Canopy", 287, Rarity.RARE, mage.cards.h.HorizonCanopy.class));
         cards.add(new SetCardInfo("Inspiring Refrain", 216, Rarity.RARE, mage.cards.i.InspiringRefrain.class));
         cards.add(new SetCardInfo("Into the Time Vortex", 88, Rarity.RARE, mage.cards.i.IntoTheTimeVortex.class));
+        cards.add(new SetCardInfo("Iraxxa, Empress of Mars", 89, Rarity.UNCOMMON, mage.cards.i.IraxxaEmpressOfMars.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 288, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Island", 198, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jenny, Generated Anomaly", 137, Rarity.RARE, mage.cards.j.JennyGeneratedAnomaly.class));
@@ -93,6 +96,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 243, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Madame Vastra", 142, Rarity.RARE, mage.cards.m.MadameVastra.class));
         cards.add(new SetCardInfo("Martha Jones", 48, Rarity.RARE, mage.cards.m.MarthaJones.class));
+        cards.add(new SetCardInfo("Memory Worm", 90, Rarity.UNCOMMON, mage.cards.m.MemoryWorm.class));
         cards.add(new SetCardInfo("Mind Stone", 244, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mountain", 202, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myriad Landscape", 290, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
@@ -126,6 +130,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowblood Ridge", 303, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 304, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Shipwreck Marsh", 305, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class));
+        cards.add(new SetCardInfo("Sisterhood of Karn", 109, Rarity.RARE, mage.cards.s.SisterhoodOfKarn.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 306, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 307, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Snuff Out", 222, Rarity.UNCOMMON, mage.cards.s.SnuffOut.class));
