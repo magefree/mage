@@ -1,9 +1,9 @@
-
 package mage.abilities.effects.common;
 
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -17,20 +17,18 @@ public class UntapAllLandsControllerEffect extends OneShotEffect {
     private final FilterLandPermanent filter;
 
     public UntapAllLandsControllerEffect() {
-        super(Outcome.Untap);
-        staticText = "Untap all lands you control";
-        filter = new FilterLandPermanent();
-    }
-
-    protected UntapAllLandsControllerEffect(final UntapAllLandsControllerEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
+        this(StaticFilters.FILTER_LANDS);
     }
 
     public UntapAllLandsControllerEffect(FilterLandPermanent filter) {
         super(Outcome.Untap);
         staticText = "untap all " + filter.getMessage() + " you control";
         this.filter = filter;
+    }
+
+    protected UntapAllLandsControllerEffect(final UntapAllLandsControllerEffect effect) {
+        super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
