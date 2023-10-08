@@ -4,7 +4,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLoyaltyCost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 
@@ -18,18 +17,8 @@ public class LoyaltyAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public LoyaltyAbility(Effects effects, int loyalty) {
-        super(Zone.BATTLEFIELD, effects, new PayLoyaltyCost(loyalty));
-        this.timing = TimingRule.SORCERY;
-    }
-
     public LoyaltyAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, new PayVariableLoyaltyCost());
-        this.timing = TimingRule.SORCERY;
-    }
-
-    public LoyaltyAbility(Effects effects) {
-        super(Zone.BATTLEFIELD, effects, new PayVariableLoyaltyCost());
         this.timing = TimingRule.SORCERY;
     }
 
