@@ -64,13 +64,16 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Feed the Swarm", 221, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fetid Pools", 277, Rarity.RARE, mage.cards.f.FetidPools.class));
         cards.add(new SetCardInfo("Fiery Islet", 278, Rarity.RARE, mage.cards.f.FieryIslet.class));
+        cards.add(new SetCardInfo("Five Hundred Year Diary", 42, Rarity.RARE, mage.cards.f.FiveHundredYearDiary.class));
         cards.add(new SetCardInfo("Flaming Tyrannosaurus", 85, Rarity.RARE, mage.cards.f.FlamingTyrannosaurus.class));
+        cards.add(new SetCardInfo("Flatline", 43, Rarity.RARE, mage.cards.f.Flatline.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 279, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forest", 204, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 280, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
         cards.add(new SetCardInfo("Four Knocks", 20, Rarity.RARE, mage.cards.f.FourKnocks.class));
         cards.add(new SetCardInfo("Fractured Identity", 236, Rarity.RARE, mage.cards.f.FracturedIdentity.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 281, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
+        cards.add(new SetCardInfo("Frost Fair Lure Fish", 129, Rarity.RARE, mage.cards.f.FrostFairLureFish.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 282, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 283, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Gallifrey Stands", 132, Rarity.RARE, mage.cards.g.GallifreyStands.class));
@@ -92,6 +95,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 198, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jenny, Generated Anomaly", 137, Rarity.RARE, mage.cards.j.JennyGeneratedAnomaly.class));
         cards.add(new SetCardInfo("Jenny Flint", 136, Rarity.RARE, mage.cards.j.JennyFlint.class));
+        cards.add(new SetCardInfo("Laser Screwdriver", 178, Rarity.UNCOMMON, mage.cards.l.LaserScrewdriver.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 289, Rarity.RARE, mage.cards.l.LavaclawReaches.class));
         cards.add(new SetCardInfo("Lightning Greaves", 243, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Madame Vastra", 142, Rarity.RARE, mage.cards.m.MadameVastra.class));
@@ -136,6 +140,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Snuff Out", 222, Rarity.UNCOMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Sol Ring", 245, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 246, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Sonic Screwdriver", 184, Rarity.UNCOMMON, mage.cards.s.SonicScrewdriver.class));
         cards.add(new SetCardInfo("Star Whale", 55, Rarity.UNCOMMON, mage.cards.s.StarWhale.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 308, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 309, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
