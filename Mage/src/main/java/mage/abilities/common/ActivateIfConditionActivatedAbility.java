@@ -46,7 +46,11 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
                 && !condition.toString().startsWith("if")) {
             sb.append("if ");
         }
-        sb.append(condition.toString()).append('.');
+        sb.append(condition.toString());
+        if (timing == TimingRule.SORCERY) {
+            sb.append(" and only as a sorcery");
+        }
+        sb.append('.');
 
         return sb.toString();
     }

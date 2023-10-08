@@ -81,7 +81,7 @@ enum TempleOfPowerCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery";
+        return "if red sources you controlled dealt 4 or more noncombat damage this turn";
     }
 }
 
