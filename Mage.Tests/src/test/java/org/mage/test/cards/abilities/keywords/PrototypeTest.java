@@ -451,7 +451,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         //checkPlayableAbility("cast even proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Boulderbranch Golem"+withPrototype, false);
         checkPlayableAbility("cast odd proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fallaji Dragon Engine"+withPrototype, true);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto + ""+withPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto+withPrototype);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -657,8 +657,8 @@ public class PrototypeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Progenitor Mimic");
 
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);;
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Progenitor Mimic");;
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Progenitor Mimic");
         setChoice(playerA, true);
         setChoice(playerA, automaton);
 
@@ -668,16 +668,52 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(true, 3);
     }
+    @Test
+    public void testInstantaneousLKI() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3+2);
+        addCard(Zone.BATTLEFIELD, playerA, "Flowstone Surge", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Drizzt Do'Urden", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Warstorm Surge", 1);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Slimebind");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Slimebind", "Drizzt Do'Urden");
+        checkPT("Drizzt is shrunk",1, PhaseStep.BEGIN_COMBAT, playerA, "Drizzt Do'Urden",1, 1);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, automatonWithPrototype); // 5/0
+        setChoice(playerA, "Whenever a creature enters"); //Stack the trigger
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, "Drizzt Do'Urden", 5, 5);
+        assertGraveyardCount(playerA, automaton, 1);
+        assertLife(playerB, 20-5);
+    }
+    @Test
+    public void testReanimate() {
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 3+1+1);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, "Cut Down");
+        addCard(Zone.HAND, playerA, "Reanimate");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Cut Down", automaton);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Reanimate", automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        checkAutomaton(false);
+        assertLife(playerA, 20-7);
+    }
 
 
     /*
      * More tests suggested by Zerris:
      * 2) Gain control of spell on the stack: Aethersnatch
-     * 3) Check LKI if card immediately leaves the battlefield due to state-based actions:
-     *      4x Flowstone Surge, Absolute Law, Electropotence, Drizzt Do'Urden, Flayer of the Hatebound in play.
-     *      (Cast both Prototype and Normal, assert both have expected P/T on entering and leaving battlefield for all triggers;
-     *      Absolute Law protects as expected against colors.
-     *      Reanimate the card after having prototyped it, assert the reanimated copy has correct P/T and Absolute Law fails to protect.)
      * 7) Phasing: Slip Out the Back
      * 8) Alternate Cost: Fires of Invention (Cannot cast at all with fires on 3 lands, cannot cast prototyped even on 7)
      *      NOTE: This test is probably wrong, Prototype is apparently NOT an alternate cost! https://magic.wizards.com/en/news/feature/comprehensive-rules-changes
