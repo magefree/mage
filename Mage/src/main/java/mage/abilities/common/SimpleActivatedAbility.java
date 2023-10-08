@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.constants.Zone;
@@ -34,7 +33,7 @@ public class SimpleActivatedAbility extends ActivatedAbilityImpl {
         super(zone, effect, cost);
     }
 
-    protected SimpleActivatedAbility(SimpleActivatedAbility ability) {
+    protected SimpleActivatedAbility(final SimpleActivatedAbility ability) {
         super(ability);
     }
 
