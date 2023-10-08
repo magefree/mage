@@ -252,8 +252,9 @@ public class TableController {
             return false;
         }
         // check password
-        if (!table.getMatch().getOptions().getPassword().isEmpty() && playerType == PlayerType.HUMAN) {
-            if (!table.getMatch().getOptions().getPassword().equals(password)) {
+        Match match = table.getMatch().get();
+        if (!match.getOptions().getPassword().isEmpty() && playerType == PlayerType.HUMAN) {
+            if (!match.getOptions().getPassword().equals(password)) {
                 user.showUserMessage("Join Table", "Wrong password.");
                 return false;
             }
@@ -280,7 +281,7 @@ public class TableController {
             return false;
         }
         // Check quit ratio.
-        int quitRatio = table.getMatch().getOptions().getQuitRatio();
+        int quitRatio = match.getOptions().getQuitRatio();
         if (quitRatio < user.getMatchQuitRatio()) {
             String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
                     .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
@@ -289,9 +290,9 @@ public class TableController {
         }
 
         // Check minimum rating.
-        int minimumRating = table.getMatch().getOptions().getMinimumRating();
+        int minimumRating = match.getOptions().getMinimumRating();
         int userRating;
-        if (table.getMatch().getOptions().isLimited()) {
+        if (match.getOptions().isLimited()) {
             userRating = user.getUserData().getLimitedRating();
         } else {
             userRating = user.getUserData().getConstructedRating();
@@ -304,7 +305,7 @@ public class TableController {
         }
 
         // Check power level for table (currently only used for EDH/Commander table)
-        int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
+        int edhPowerLevel = match.getOptions().getEdhPowerLevel();
         if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase(Locale.ENGLISH).equals("commander")) {
             int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
             if (deckEdhPowerLevel % 100 > edhPowerLevel) {
@@ -398,8 +399,8 @@ public class TableController {
             if (player == null || player.hasQuit()) {
                 return true; // so the construct panel closes after submit
             }
-        } else if (table.getMatch() != null) {
-            MatchPlayer mPlayer = table.getMatch().getPlayer(playerId);
+        } else if (table.getMatch().isPresent()) {
+            MatchPlayer mPlayer = table.getMatch().get().getPlayer(playerId);
             if (mPlayer == null || mPlayer.hasQuit()) {
                 return true; // so the construct panel closes after submit
             }
@@ -414,8 +415,8 @@ public class TableController {
             return false;
         }
         Deck deck = Deck.load(deckList, false, false);
-        if (table.getState() == TableState.SIDEBOARDING && table.getMatch() != null) {
-            MatchPlayer mPlayer = table.getMatch().getPlayer(playerId);
+        if (table.getState() == TableState.SIDEBOARDING && table.getMatch().isPresent()) {
+            MatchPlayer mPlayer = table.getMatch().get().getPlayer(playerId);
             if (mPlayer != null) {
                 deck.setName(mPlayer.getDeck().getName());
             }

@@ -60,6 +60,7 @@ public class Table implements Serializable {
     }
 
     protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Set<String> bannedUsernames, boolean isPlaneChase) {
+        this.match = null; // Declarative, unset state
         tableId = UUID.randomUUID();
         this.roomId = roomId;
         this.numSeats = playerTypes.size();
@@ -242,8 +243,8 @@ public class Table implements Serializable {
         tableEventSource.addListener(listener);
     }
 
-    public Match getMatch() {
-        return match;
+    public Optional<Match> getMatch() {
+        return Optional.ofNullable(match);
     }
 
     public Tournament getTournament() {
@@ -291,7 +292,7 @@ public class Table implements Serializable {
         if (this.isTournament()) {
             builder.getTourneyBuilder().mergeFrom(this.getTournament().toProto());
         } else {
-            builder.getMatchBuilder().mergeFrom(this.getMatch().toProto());
+            builder.getMatchBuilder().mergeFrom(this.getMatch().map(Match::toProto).orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")));
         }
         return builder.setGameType(this.getGameType())
                 .setName(this.getName())

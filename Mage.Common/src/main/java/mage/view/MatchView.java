@@ -46,7 +46,7 @@ public class MatchView implements Serializable {
 
     // used for matches
     private void initMatchTable(Table table) {
-        Match match = table.getMatch();
+        Match match = table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none"));
         this.matchId = match.getId();
         this.matchName = match.getName();
         this.gameType = match.getOptions().getGameType();

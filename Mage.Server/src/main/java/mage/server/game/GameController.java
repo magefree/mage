@@ -675,7 +675,7 @@ public class GameController implements GameCallback {
         Player viewLimitedDeckPlayer = game.getPlayer(playerId);
         if (viewLimitedDeckPlayer != null) {
             if (viewLimitedDeckPlayer.isHuman()) {
-                for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
+                for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().get().getPlayers()) {
                     if (p.getPlayer().getId().equals(playerId)) {
                         Optional<User> u = managerFactory.userManager().getUser(userId);
                         if (u.isPresent() && p.getDeck() != null) {
@@ -690,7 +690,7 @@ public class GameController implements GameCallback {
     private void viewSideboard(UUID playerId, UUID userId, UUID targetPlayerId) {
         Player needPlayer = game.getPlayer(playerId);
         if (needPlayer != null && needPlayer.isHuman()) {
-            for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
+            for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().get().getPlayers()) {
                 if (p.getPlayer().getId().equals(playerId)) {
                     Optional<User> u = managerFactory.userManager().getUser(userId);
                     u.ifPresent(user -> user.ccViewSideboard(tableId, game.getId(), targetPlayerId));
@@ -799,7 +799,7 @@ public class GameController implements GameCallback {
     private synchronized void endGameInfo() {
         Table table = managerFactory.tableManager().getTable(tableId);
         if (table != null) {
-            if (table.getMatch() != null) {
+            if (table.getMatch().isPresent()) {
                 for (final GameSessionPlayer gameSession : getGameSessions()) {
                     gameSession.endGameInfo(table);
                 }

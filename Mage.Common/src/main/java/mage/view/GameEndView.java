@@ -61,7 +61,7 @@ public class GameEndView implements Serializable {
         }
         matchView = new MatchView(table);
 
-        Match match = table.getMatch();
+        Match match = table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set, but instead there was none"));
         MatchPlayer matchWinner = null;
         winsNeeded = match.getOptions().getWinsNeeded();
         StringBuilder additonalText = new StringBuilder();

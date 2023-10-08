@@ -383,10 +383,10 @@ public class TableManagerImpl implements TableManager {
                 w.unlock();
             }
 
-            Match match = table.getMatch();
+            Optional<Match> match = table.getMatch();
             Game game = null;
-            if (match != null) {
-                game = match.getGame();
+            if (match.isPresent()) {
+                game = match.get().getGame();
                 if (game != null && !game.hasEnded()) {
                     game.end();
                 }

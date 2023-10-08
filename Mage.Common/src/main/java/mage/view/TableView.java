@@ -7,6 +7,7 @@ import mage.game.Seat;
 import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftOptions;
+import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchPlayer;
 import mage.game.mulligan.MulliganType;
@@ -60,7 +61,7 @@ public class TableView implements Serializable {
             if (table.isTournament()) {
                 this.createTime = table.getTournament().getStartTime();
             } else {
-                this.createTime = table.getMatch().getStartTime();
+                this.createTime = table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")).getStartTime();
             }
         }
         this.isTournament = table.isTournament();
@@ -69,18 +70,18 @@ public class TableView implements Serializable {
         }
         if (!table.isTournament()) {
             // MATCH
-            seatsInfo = "" + table.getMatch().getPlayers().size() + '/' + table.getSeats().length;
+            seatsInfo = "" + table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")).getPlayers().size() + '/' + table.getSeats().length;
             if (table.getState() == TableState.WAITING || table.getState() == TableState.READY_TO_START) {
                 tableStateText = table.getState().toString() + " (" + seatsInfo + ')';
             } else {
                 tableStateText = table.getState().toString();
             }
-            for (Game game : table.getMatch().getGames()) {
+            for (Game game : table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")).getGames()) {
                 games.add(game.getId());
             }
             StringBuilder sb = new StringBuilder();
             StringBuilder sbScore = new StringBuilder();
-            for (MatchPlayer matchPlayer : table.getMatch().getPlayers()) {
+            for (MatchPlayer matchPlayer : table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")).getPlayers()) {
                 if (matchPlayer.getPlayer() == null) {
                     sb.append(", ").append("[unknown]");
                     sbScore.append('-').append(matchPlayer.getWins());
@@ -91,56 +92,57 @@ public class TableView implements Serializable {
                     sbScore.insert(0, matchPlayer.getWins()).insert(0, " Score: ");
                 }
             }
-            if (table.getMatch().getDraws() > 0) {
-                sbScore.append(" Draws: ").append(table.getMatch().getDraws());
+            Match match = table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none"));
+            if (match.getDraws() > 0) {
+                sbScore.append(" Draws: ").append(match.getDraws());
             }
             this.controllerName += sb.toString();
             this.deckType = table.getDeckType();
             StringBuilder addInfo = new StringBuilder();
-            if (table.getMatch().getGames().isEmpty()) {
-                addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
-                addInfo.append(" Time: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
-                addInfo.append(" Buffer: ").append(table.getMatch().getOptions().getMatchBufferTime().toString());
-                if (table.getMatch().getOptions().getMulliganType() != MulliganType.GAME_DEFAULT) {
-                    addInfo.append(" Mulligan: \"").append(table.getMatch().getOptions().getMulliganType().toString()).append("\"");
+            if (match.getGames().isEmpty()) {
+                addInfo.append("Wins:").append(match.getWinsNeeded());
+                addInfo.append(" Time: ").append(match.getOptions().getMatchTimeLimit().toString());
+                addInfo.append(" Buffer: ").append(match.getOptions().getMatchBufferTime().toString());
+                if (match.getOptions().getMulliganType() != MulliganType.GAME_DEFAULT) {
+                    addInfo.append(" Mulligan: \"").append(match.getOptions().getMulliganType().toString()).append("\"");
                 }
-                if (table.getMatch().getFreeMulligans() > 0) {
-                    addInfo.append(" FM: ").append(table.getMatch().getFreeMulligans());
+                if (match.getFreeMulligans() > 0) {
+                    addInfo.append(" FM: ").append(match.getFreeMulligans());
                 }
-                if (table.getMatch().getOptions().isCustomStartLifeEnabled()) {
-                    addInfo.append(" StartLife: ").append(table.getMatch().getOptions().getCustomStartLife());
+                if (match.getOptions().isCustomStartLifeEnabled()) {
+                    addInfo.append(" StartLife: ").append(match.getOptions().getCustomStartLife());
                 }
-                if (table.getMatch().getOptions().isCustomStartHandSizeEnabled()) {
-                    addInfo.append(" StartHandSize: ").append(table.getMatch().getOptions().getCustomStartHandSize());
+                if (match.getOptions().isCustomStartHandSizeEnabled()) {
+                    addInfo.append(" StartHandSize: ").append(match.getOptions().getCustomStartHandSize());
                 }
             } else {
-                addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
+                addInfo.append("Wins:").append(match.getWinsNeeded());
                 addInfo.append(sbScore.toString());
             }
-            if (table.getMatch().getOptions().isRollbackTurnsAllowed()) {
+            if (match.getOptions().isRollbackTurnsAllowed()) {
                 addInfo.append(" RB");
             }
-            if (table.getMatch().getOptions().isPlaneChase()) {
+            if (match.getOptions().isPlaneChase()) {
                 addInfo.append(" PC");
             }
-            if (!(table.getMatch().getOptions().getPerPlayerEmblemCards().isEmpty())
-                    || !(table.getMatch().getOptions().getGlobalEmblemCards().isEmpty())) {
+            if (!(match.getOptions().getPerPlayerEmblemCards().isEmpty())
+                    || !(match.getOptions().getGlobalEmblemCards().isEmpty())) {
                 addInfo.append(" EC");
             }
-            if (table.getMatch().getOptions().isSpectatorsAllowed()) {
+            if (match.getOptions().isSpectatorsAllowed()) {
                 addInfo.append(" SP");
             }
             if (table.getNumberOfSeats() > 3) {
-                addInfo.append(" Rng: ").append(table.getMatch().getOptions().getRange().toString());
+                addInfo.append(" Rng: ").append(match.getOptions().getRange().toString());
             }
             this.additionalInfo = addInfo.toString();
-            this.skillLevel = table.getMatch().getOptions().getSkillLevel();
-            this.quitRatio = Integer.toString(table.getMatch().getOptions().getQuitRatio());
-            this.minimumRating = Integer.toString(table.getMatch().getOptions().getMinimumRating());
-            this.limited = table.getMatch().getOptions().isLimited();
-            this.rated = table.getMatch().getOptions().isRated();
-            this.passworded = !table.getMatch().getOptions().getPassword().isEmpty();
-            this.spectatorsAllowed = table.getMatch().getOptions().isSpectatorsAllowed();
+            this.skillLevel = match.getOptions().getSkillLevel();
+            this.quitRatio = Integer.toString(match.getOptions().getQuitRatio());
+            this.minimumRating = Integer.toString(match.getOptions().getMinimumRating());
+            this.limited = match.getOptions().isLimited();
+            this.rated = match.getOptions().isRated();
+            this.passworded = !match.getOptions().getPassword().isEmpty();
+            this.spectatorsAllowed = match.getOptions().isSpectatorsAllowed();
         } else {
             // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
@@ -174,11 +176,12 @@ public class TableView implements Serializable {
                     if (tourneyMatchOptions.getFreeMulligans() > 0) {
                         infoText.append(" FM: ").append(tourneyMatchOptions.getFreeMulligans());
                     }
-                    if (table.getMatch().getOptions().isCustomStartLifeEnabled()) {
-                        infoText.append(" StartLife: ").append(table.getMatch().getOptions().getCustomStartLife());
+                    Match match = table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to exist but was none"));
+                    if (match.getOptions().isCustomStartLifeEnabled()) {
+                        infoText.append(" StartLife: ").append(match.getOptions().getCustomStartLife());
                     }
-                    if (table.getMatch().getOptions().isCustomStartHandSizeEnabled()) {
-                        infoText.append(" StartHandSize: ").append(table.getMatch().getOptions().getCustomStartHandSize());
+                    if (match.getOptions().isCustomStartHandSizeEnabled()) {
+                        infoText.append(" StartHandSize: ").append(match.getOptions().getCustomStartHandSize());
                     }
                     if (table.getTournament().getTournamentType().isLimited()) {
                         infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
