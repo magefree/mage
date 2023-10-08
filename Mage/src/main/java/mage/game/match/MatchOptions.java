@@ -15,7 +15,6 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class MatchOptions implements Serializable {
@@ -25,6 +24,10 @@ public class MatchOptions implements Serializable {
     protected RangeOfInfluence range;
     protected int winsNeeded;
     protected int freeMulligans;
+    protected boolean customStartLifeEnabled;
+    protected int customStartLife; // Only use if customStartLifeEnabled is True
+    protected boolean customStartHandSizeEnabled;
+    protected int customStartHandSize; // Only use if customStartHandSizeEnabled is True
     protected String gameType;
     protected String deckType;
     protected boolean limited;
@@ -53,13 +56,6 @@ public class MatchOptions implements Serializable {
     protected Collection<DeckCardInfo> perPlayerEmblemCards;
     protected Collection<DeckCardInfo> globalEmblemCards;
 
-    /*public MatchOptions(String name, String gameType) {
-        this.name = name;
-        this.gameType = gameType;
-        this.password = "";
-        this.multiPlayer = false;
-        this.numSeats = 2;
-    }*/
     public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats) {
         this.name = name;
         this.gameType = gameType;
@@ -70,11 +66,11 @@ public class MatchOptions implements Serializable {
         this.globalEmblemCards = Collections.emptySet();
     }
 
-    public void setNumSeats (int numSeats) {
+    public void setNumSeats(int numSeats) {
         this.numSeats = numSeats;
     }
 
-    public int getNumSeats () {
+    public int getNumSeats() {
         return numSeats;
     }
 
@@ -120,6 +116,38 @@ public class MatchOptions implements Serializable {
 
     public void setFreeMulligans(int freeMulligans) {
         this.freeMulligans = freeMulligans;
+    }
+
+    public boolean isCustomStartLifeEnabled() {
+        return customStartLifeEnabled;
+    }
+
+    public void setCustomStartLifeEnabled(boolean value) {
+        this.customStartLifeEnabled = value;
+    }
+
+    public int getCustomStartLife() {
+        return customStartLife;
+    }
+
+    public void setCustomStartLife(int startLife) {
+        this.customStartLife = startLife;
+    }
+
+    public boolean isCustomStartHandSizeEnabled() {
+        return customStartHandSizeEnabled;
+    }
+
+    public void setCustomStartHandSizeEnabled(boolean value) {
+        this.customStartHandSizeEnabled = value;
+    }
+
+    public int getCustomStartHandSize() {
+        return customStartHandSize;
+    }
+
+    public void setCustomStartHandSize(int startHandSize) {
+        this.customStartHandSize = startHandSize;
     }
 
     public String getGameType() {
@@ -211,11 +239,11 @@ public class MatchOptions implements Serializable {
     public void setSpectatorsAllowed(boolean spectatorsAllowed) {
         this.spectatorsAllowed = spectatorsAllowed;
     }
-    
+
     public boolean isPlaneChase() {
         return planeChase;
     }
-    
+
     public void setPlaneChase(boolean planeChase) {
         this.planeChase = planeChase;
     }
@@ -228,9 +256,13 @@ public class MatchOptions implements Serializable {
         this.quitRatio = quitRatio;
     }
 
-    public int getMinimumRating() { return minimumRating; }
+    public int getMinimumRating() {
+        return minimumRating;
+    }
 
-    public void setMinimumRating(int minimumRating) { this.minimumRating = minimumRating; }
+    public void setMinimumRating(int minimumRating) {
+        this.minimumRating = minimumRating;
+    }
 
     public int getEdhPowerLevel() {
         return edhPowerLevel;
