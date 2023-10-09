@@ -4,7 +4,6 @@ import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
@@ -62,15 +61,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         this.addEffect(effect);
     }
 
-    protected ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
-        super(AbilityType.ACTIVATED, zone);
-        this.addEffect(effect);
-        this.addManaCost(cost);
-    }
-
     protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-        super(AbilityType.ACTIVATED, zone);
-        this.addEffect(effect);
+        this(zone, effect);
         this.addCost(cost);
     }
 

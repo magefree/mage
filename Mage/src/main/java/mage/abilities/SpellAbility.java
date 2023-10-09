@@ -45,7 +45,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.cardName = cardName;
         this.spellAbilityType = spellAbilityType;
         this.spellAbilityCastMode = spellAbilityCastMode;
-        this.addManaCost(cost);
+        this.addCost(cost);
         this.setIdentifier(MageIdentifier.Default);
         setSpellName();
     }
