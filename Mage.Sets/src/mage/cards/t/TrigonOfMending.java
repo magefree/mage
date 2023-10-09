@@ -30,7 +30,7 @@ public final class TrigonOfMending extends CardImpl {
 
         // {W}{W}, {T}: Put a charge counter on Trigon of Mending.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl<>("{W}{W}"));
+        ability2.addCost(new ManaCostsImpl<>("{W}{W}"));
         this.addAbility(ability2);
 
         // {2}, {T}, Remove a charge counter from Trigon of Mending: Target player gains 3 life.
