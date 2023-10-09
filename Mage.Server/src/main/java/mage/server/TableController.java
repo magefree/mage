@@ -70,8 +70,8 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
-                options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), match, options.getBannedUsers(), options.isPlaneChase());
+        table = new Table(new TableMatch(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
+                options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), match, options.getBannedUsers(), options.isPlaneChase()));
         chatId = managerFactory.chatManager().createChatSession("Match Table " + table.getId());
         init();
     }
@@ -92,8 +92,8 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()),
-                options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), tournament, options.getMatchOptions().getBannedUsers(), options.isPlaneChase());
+        table = new Table(new TableTournament(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()),
+                options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), tournament, options.getMatchOptions().getBannedUsers(), options.isPlaneChase()));
         chatId = managerFactory.chatManager().createChatSession("Tourn. table " + table.getId());
     }
 

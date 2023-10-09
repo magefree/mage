@@ -45,22 +45,24 @@ public class Table implements Serializable {
 
     protected TableEventSource tableEventSource = new TableEventSource();
 
-    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Tournament tournament, Set<String> bannedUsernames, boolean isPlaneChase) {
-        this(roomId, gameType, name, controllerName, validator, playerTypes, recorder, bannedUsernames, isPlaneChase);
-        this.tournament = tournament;
+    public Table(TableTournament tt) {
+        this(tt.roomId, tt.gameType, tt.name, tt.controllerName, tt.validator, tt.playerTypes, tt.recorder, tt.bannedUsernames, tt.isPlaneChase);
+        this.tournament = tt.tournament;
         this.isTournament = true;
         setState(TableState.WAITING);
     }
 
-    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Match match, Set<String> bannedUsernames, boolean isPlaneChase) {
-        this(roomId, gameType, name, controllerName, validator, playerTypes, recorder, bannedUsernames, isPlaneChase);
-        this.match = match;
+    public Table(TableMatch tm) {
+        this(tm.roomId, tm.gameType, tm.name, tm.controllerName, tm.validator, tm.playerTypes, tm.recorder, tm.bannedUsernames, tm.isPlaneChase);
+        this.match = tm.match;
         this.isTournament = false;
         setState(TableState.WAITING);
     }
 
-    protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Set<String> bannedUsernames, boolean isPlaneChase) {
-        this.match = null; // Declarative, unset state
+    /**
+     * All args constructor
+     */
+    private Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Set<String> bannedUsernames, boolean isPlaneChase) {
         tableId = UUID.randomUUID();
         this.roomId = roomId;
         this.numSeats = playerTypes.size();
@@ -244,6 +246,9 @@ public class Table implements Serializable {
     }
 
     public Optional<Match> getMatch() {
+        if (isTournament) {
+            throw new IllegalStateException("Table is a tournament and not a match");
+        }
         return Optional.ofNullable(match);
     }
 

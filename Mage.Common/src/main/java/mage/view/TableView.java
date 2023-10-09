@@ -14,10 +14,7 @@ import mage.game.mulligan.MulliganType;
 import mage.game.tournament.TournamentPlayer;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -176,13 +173,14 @@ public class TableView implements Serializable {
                     if (tourneyMatchOptions.getFreeMulligans() > 0) {
                         infoText.append(" FM: ").append(tourneyMatchOptions.getFreeMulligans());
                     }
-                    Match match = table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to exist but was none"));
-                    if (match.getOptions().isCustomStartLifeEnabled()) {
-                        infoText.append(" StartLife: ").append(match.getOptions().getCustomStartLife());
-                    }
-                    if (match.getOptions().isCustomStartHandSizeEnabled()) {
-                        infoText.append(" StartHandSize: ").append(match.getOptions().getCustomStartHandSize());
-                    }
+                    table.getMatch().ifPresent(match -> {
+                        if (match.getOptions().isCustomStartLifeEnabled()) {
+                            infoText.append(" StartLife: ").append(match.getOptions().getCustomStartLife());
+                        }
+                        if (match.getOptions().isCustomStartHandSizeEnabled()) {
+                            infoText.append(" StartHandSize: ").append(match.getOptions().getCustomStartHandSize());
+                        }
+                    });
                     if (table.getTournament().getTournamentType().isLimited()) {
                         infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
                     }
