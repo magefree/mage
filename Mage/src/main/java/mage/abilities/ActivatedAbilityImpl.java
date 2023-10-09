@@ -56,13 +56,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         condition = ability.condition;
     }
 
-    protected ActivatedAbilityImpl(Zone zone, Effect effect) {
+    protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
         super(AbilityType.ACTIVATED, zone);
         this.addEffect(effect);
-    }
-
-    protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-        this(zone, effect);
         this.addCost(cost);
     }
 
