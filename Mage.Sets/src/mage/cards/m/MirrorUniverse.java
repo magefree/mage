@@ -29,8 +29,8 @@ public final class MirrorUniverse extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ExchangeLifeControllerTargetEffect(),
                 new TapSourceCost(),
-                new IsStepCondition(PhaseStep.UPKEEP),
-                null);
+                new IsStepCondition(PhaseStep.UPKEEP)
+        );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

@@ -33,7 +33,7 @@ public final class Scourglass extends CardImpl {
 
         // {T}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new DestroyAllEffect(filter), new TapSourceCost(), new IsStepCondition(PhaseStep.UPKEEP), null);
+                new DestroyAllEffect(filter), new TapSourceCost(), new IsStepCondition(PhaseStep.UPKEEP));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

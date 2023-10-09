@@ -53,7 +53,7 @@ public class EscapeAbility extends SpellAbility {
         }
 
         text += ", Exile " + CardUtil.numberToText(exileCount) + " other cards from your graveyard."
-                + "<i>(You may cast this card from your graveyard for its escape cost.)</i>";
+                + " <i>(You may cast this card from your graveyard for its escape cost.)</i>";
         this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(exileCount, filter), "")); // hide additional cost text from rules
 
         this.staticText = text;

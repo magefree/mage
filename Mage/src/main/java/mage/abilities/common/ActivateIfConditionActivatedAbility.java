@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.ActivatedAbilityImpl;
@@ -8,12 +7,12 @@ import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.game.Game;
 
 /**
  * @author LevelX2
  */
 public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
+
     public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         this(zone, effect, cost, condition, TimingRule.INSTANT);
     }
@@ -26,11 +25,6 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
     protected ActivateIfConditionActivatedAbility(final ActivateIfConditionActivatedAbility ability) {
         super(ability);
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        return super.resolve(game);
     }
 
     @Override
