@@ -14,7 +14,10 @@ import mage.game.mulligan.MulliganType;
 import mage.game.tournament.TournamentPlayer;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
