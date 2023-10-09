@@ -245,10 +245,11 @@ public class Table implements Serializable {
         tableEventSource.addListener(listener);
     }
 
+    /**
+     * Get the match of the table
+     * @return an Empty for tournament, Match for match
+     */
     public Optional<Match> getMatch() {
-        if (isTournament) {
-            throw new IllegalStateException("Table is a tournament and not a match");
-        }
         return Optional.ofNullable(match);
     }
 
