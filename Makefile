@@ -6,6 +6,9 @@ include .env
 # Alternatively, you can set this variable in the .env file
 TARGET_DIR ?= deploy/
 
+# Note that the proper install script is located under ./Utils/build-and-package.pl
+# and that should be used instead. This script is purely for convenience.
+# The perl script bundles the artifacts into a single zip
 .PHONY: install
 install:
 	# Building project
