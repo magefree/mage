@@ -211,7 +211,7 @@ public class TableManagerImpl implements TableManager {
     @Override
     public void userQuitTournamentSubTables(UUID tournamentId, UUID userId) {
         for (TableController controller : getControllers()) {
-            if (controller.getTable().isTournamentSubTable() && controller.getTable().getTournament().getId().equals(tournamentId)) {
+            if (controller.getTable().isTournamentSubTable() && controller.getTable().getTournament().get().getId().equals(tournamentId)) {
                 if (controller.hasPlayer(userId)) {
                     controller.leaveTable(userId);
                 }

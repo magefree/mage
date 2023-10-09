@@ -483,7 +483,7 @@ public class User {
                 if (table != null) {
                     if (table.isTournament()) {
                         if (tableEntry.getKey() != null) {
-                            TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(tableEntry.getKey());
+                            TournamentPlayer tournamentPlayer = table.getTournament().get().getPlayer(tableEntry.getKey());
                             if (tournamentPlayer != null) {
                                 if (!tournamentPlayer.isEliminated()) {
                                     switch (table.getState()) {

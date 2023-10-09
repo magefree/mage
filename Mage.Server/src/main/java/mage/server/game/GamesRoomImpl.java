@@ -69,9 +69,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                 matchList.add(new MatchView(table));
             } else {
                 // more since 50 matches finished since this match so removeUserFromAllTablesAndChat it
-                if (table.isTournament()) {
-                    managerFactory.tournamentManager().removeTournament(table.getTournament().getId());
-                }
+                table.getTournament().ifPresent(tournament -> {
+                    managerFactory.tournamentManager().removeTournament(tournament.getId());
+                });
                 this.removeTable(table.getId());
             }
         }

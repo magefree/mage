@@ -406,7 +406,7 @@ public class TableController {
                 return true; // so the construct panel closes after submit
             }
             if (table.isTournamentSubTable()) {
-                TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(mPlayer.getPlayer().getId());
+                TournamentPlayer tournamentPlayer = table.getTournament().get().getPlayer(mPlayer.getPlayer().getId());
                 if (tournamentPlayer != null) {
                     tournamentPlayer.setStateInfo(""); // reset sideboarding state
                 }
@@ -481,10 +481,10 @@ public class TableController {
 
     public boolean watchTable(UUID userId) {
         if (table.isTournament()) {
-            managerFactory.userManager().getUser(userId).ifPresent(user -> user.ccShowTournament(table.getTournament().getId()));
+            managerFactory.userManager().getUser(userId).ifPresent(user -> user.ccShowTournament(table.getTournament().get().getId()));
             return true;
         } else {
-            if (table.isTournamentSubTable() && !table.getTournament().getOptions().isWatchingAllowed()) {
+            if (table.isTournamentSubTable() && !table.getTournament().get().getOptions().isWatchingAllowed()) {
                 return false;
             }
             if (table.getState() != TableState.DUELING) {
@@ -561,7 +561,7 @@ public class TableController {
                     if (table.isTournament()) {
                         logger.debug("Quit tournament sub tables for userId: " + userId);
                         managerFactory.tableManager().userQuitTournamentSubTables(tournament.getId(), userId);
-                        logger.debug("Quit tournament  Id: " + table.getTournament().getId() + '(' + table.getTournament().getTournamentState() + ')');
+                        logger.debug("Quit tournament  Id: " + table.getTournament().get().getId() + '(' + table.getTournament().get().getTournamentState() + ')');
                         managerFactory.tournamentManager().quit(tournament.getId(), userId);
                     } else {
                         MatchPlayer matchPlayer = match.getPlayer(playerId);
@@ -606,7 +606,7 @@ public class TableController {
         if (table.getState() == TableState.STARTING) {
             try {
                 if (table.isTournamentSubTable()) {
-                    logger.info("Tourn. match started id:" + match.getId() + " tournId: " + table.getTournament().getId());
+                    logger.info("Tourn. match started id:" + match.getId() + " tournId: " + table.getTournament().get().getId());
                 } else {
                     managerFactory.userManager().getUser(userId).ifPresent(user -> {
                         logger.info("MATCH started [" + match.getName() + "] " + match.getId() + '(' + user.getName() + ')');
@@ -805,7 +805,7 @@ public class TableController {
         if (table.isTournamentSubTable()) {
             for (MatchPlayer matchPlayer : match.getPlayers()) {
                 if (!matchPlayer.hasQuit()) {
-                    TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
+                    TournamentPlayer tournamentPlayer = table.getTournament().get().getPlayer(matchPlayer.getPlayer().getId());
                     if (tournamentPlayer != null) {
                         tournamentPlayer.setStateInfo("sideboarding");
                     }
@@ -816,7 +816,7 @@ public class TableController {
         cancelTimeout();
         if (table.isTournamentSubTable()) {
             for (MatchPlayer matchPlayer : match.getPlayers()) {
-                TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
+                TournamentPlayer tournamentPlayer = table.getTournament().get().getPlayer(matchPlayer.getPlayer().getId());
                 if (tournamentPlayer != null && tournamentPlayer.getStateInfo().equals("sideboarding")) {
                     tournamentPlayer.setStateInfo("");
                 }
@@ -845,7 +845,7 @@ public class TableController {
                                 StringBuilder sb = new StringBuilder();
                                 if (table.isTournamentSubTable()) {
                                     sb.append("Your tournament match of round ");
-                                    sb.append(table.getTournament().getRounds().size());
+                                    sb.append(table.getTournament().get().getRounds().size());
                                     sb.append(" is over. ");
                                 } else {
                                     sb.append("Match [").append(match.getName()).append("] is over. ");
@@ -935,9 +935,9 @@ public class TableController {
     }
 
     public boolean isTournamentStillValid() {
-        if (table.getTournament() != null) {
+        if (table.getTournament().isPresent()) {
             if (table.getState() != TableState.WAITING && table.getState() != TableState.READY_TO_START && table.getState() != TableState.STARTING) {
-                return managerFactory.tournamentManager().getTournamentController(table.getTournament().getId())
+                return managerFactory.tournamentManager().getTournamentController(table.getTournament().get().getId())
                         .map(tc -> tc.isTournamentStillValid(table.getState()))
                         .orElse(false);
 
