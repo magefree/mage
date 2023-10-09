@@ -58,7 +58,7 @@ public class TableView implements Serializable {
             if (table.isTournament()) {
                 this.createTime = table.getTournament().getStartTime();
             } else {
-                this.createTime = table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")).getStartTime();
+                this.createTime = table.getMatch().get().getStartTime();
             }
         }
         this.isTournament = table.isTournament();
@@ -67,18 +67,19 @@ public class TableView implements Serializable {
         }
         if (!table.isTournament()) {
             // MATCH
-            seatsInfo = "" + table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")).getPlayers().size() + '/' + table.getSeats().length;
+            Match match = table.getMatch().get();
+            seatsInfo = "" + match.getPlayers().size() + '/' + table.getSeats().length;
             if (table.getState() == TableState.WAITING || table.getState() == TableState.READY_TO_START) {
                 tableStateText = table.getState().toString() + " (" + seatsInfo + ')';
             } else {
                 tableStateText = table.getState().toString();
             }
-            for (Game game : table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")).getGames()) {
+            for (Game game : match.getGames()) {
                 games.add(game.getId());
             }
             StringBuilder sb = new StringBuilder();
             StringBuilder sbScore = new StringBuilder();
-            for (MatchPlayer matchPlayer : table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")).getPlayers()) {
+            for (MatchPlayer matchPlayer : match.getPlayers()) {
                 if (matchPlayer.getPlayer() == null) {
                     sb.append(", ").append("[unknown]");
                     sbScore.append('-').append(matchPlayer.getWins());
@@ -89,7 +90,6 @@ public class TableView implements Serializable {
                     sbScore.insert(0, matchPlayer.getWins()).insert(0, " Score: ");
                 }
             }
-            Match match = table.getMatch().orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none"));
             if (match.getDraws() > 0) {
                 sbScore.append(" Draws: ").append(match.getDraws());
             }
@@ -174,6 +174,7 @@ public class TableView implements Serializable {
                         infoText.append(" FM: ").append(tourneyMatchOptions.getFreeMulligans());
                     }
                     table.getMatch().ifPresent(match -> {
+                        // TODO for review: This technically isn't possible since a match isn't a tournament?
                         if (match.getOptions().isCustomStartLifeEnabled()) {
                             infoText.append(" StartLife: ").append(match.getOptions().getCustomStartLife());
                         }
