@@ -32,7 +32,7 @@ public final class TrigonOfCorruption extends CardImpl {
 
         // {B}{B}, {T}: Put a charge counter on Trigon of Corruption.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl<>("{B}{B}"));
+        ability2.addCost(new ManaCostsImpl<>("{B}{B}"));
         this.addAbility(ability2);
 
         // {2}, {T}, Remove a charge counter from Trigon of Corruption: Put a -1/-1 counter on target creature.

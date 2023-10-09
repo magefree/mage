@@ -32,7 +32,7 @@ public class SpellTransformedAbility extends SpellAbility {
         this.manaCost = manaCost;
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(new ManaCostsImpl<>(manaCost));
+        this.addCost(new ManaCostsImpl<>(manaCost));
         this.addSubAbility(new TransformAbility());
     }
 

@@ -32,7 +32,7 @@ public class SpectacleAbility extends SpellAbility {
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(spectacleCosts.copy());
+        this.addCost(spectacleCosts.copy());
 
         this.setRuleAtTheTop(true);
         this.rule = "Spectacle " + spectacleCosts.getText()
@@ -58,7 +58,7 @@ public class SpectacleAbility extends SpellAbility {
     @SuppressWarnings("unchecked")
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            List<Integer> spectacleActivations = (ArrayList) game.getState().getValue(SPECTACLE_ACTIVATION_VALUE_KEY + getSourceId());
+            List<Integer> spectacleActivations = (List<Integer>) game.getState().getValue(SPECTACLE_ACTIVATION_VALUE_KEY + getSourceId());
             if (spectacleActivations == null) {
                 spectacleActivations = new ArrayList<>(); // zoneChangeCounter
                 game.getState().setValue(SPECTACLE_ACTIVATION_VALUE_KEY + getSourceId(), spectacleActivations);

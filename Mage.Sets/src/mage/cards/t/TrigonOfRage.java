@@ -32,7 +32,7 @@ public final class TrigonOfRage extends CardImpl {
 
         // {R}{R}, {T}: Put a charge counter on Trigon of Rage.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl<>("{R}{R}"));
+        ability2.addCost(new ManaCostsImpl<>("{R}{R}"));
         this.addAbility(ability2);
 
         // {2}, {T}, Remove a charge counter from Trigon of Rage: Target creature gets +3/+0 until end of turn.

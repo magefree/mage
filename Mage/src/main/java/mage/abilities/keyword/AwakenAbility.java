@@ -31,10 +31,10 @@ public class AwakenAbility extends SpellAbility {
 
     private static final Logger logger = Logger.getLogger(AwakenAbility.class);
 
-    private static String filterMessage = "a land you control to awake";
+    private static final String filterMessage = "a land you control to awake";
 
-    private String rule;
-    private int awakenValue;
+    private final String rule;
+    private final int awakenValue;
 
     public AwakenAbility(Card card, int awakenValue, String awakenCosts) {
         super(card.getSpellAbility());
@@ -45,7 +45,7 @@ public class AwakenAbility extends SpellAbility {
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(new ManaCostsImpl<>(awakenCosts));
+        this.addCost(new ManaCostsImpl<>(awakenCosts));
 
         this.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent(filterMessage)));
         this.addEffect(new AwakenEffect());

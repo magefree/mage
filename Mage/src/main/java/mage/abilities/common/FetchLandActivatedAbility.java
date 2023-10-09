@@ -23,8 +23,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
     }
 
     public FetchLandActivatedAbility(boolean withDamage, SubType subType1, SubType subType2) {
-        super(Zone.BATTLEFIELD, null);
-        addCost(new TapSourceCost());
+        super(Zone.BATTLEFIELD, null, new TapSourceCost());
         if (withDamage) {
             addCost(new PayLifeCost(1));
         }
