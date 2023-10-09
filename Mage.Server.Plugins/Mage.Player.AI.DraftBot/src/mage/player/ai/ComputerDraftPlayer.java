@@ -45,7 +45,7 @@ public class ComputerDraftPlayer extends ComputerPlayer implements Player {
     @Override
     public boolean canJoinTable(Table table) {
         if (table.isTournament()) {
-            TournamentType tournamentType = table.getTournament().getTournamentType();
+            TournamentType tournamentType = table.getTournament().get().getTournamentType();
             if(tournamentType != null && tournamentType.isDraft()) {
                 return true;
             }

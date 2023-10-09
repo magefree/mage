@@ -129,8 +129,9 @@ public class TableController {
         }
         User user = _user.get();
         // check password
-        if (!table.getTournament().getOptions().getPassword().isEmpty() && playerType == PlayerType.HUMAN) {
-            if (!table.getTournament().getOptions().getPassword().equals(password)) {
+        Tournament tournament = table.getTournament().get();
+        if (!tournament.getOptions().getPassword().isEmpty() && playerType == PlayerType.HUMAN) {
+            if (!tournament.getOptions().getPassword().equals(password)) {
                 user.showUserMessage("Join Table", "Wrong password.");
                 return false;
             }
@@ -140,7 +141,7 @@ public class TableController {
             return false;
         }
         Deck deck = null;
-        if (!table.getTournament().getTournamentType().isLimited()) {
+        if (!tournament.getTournamentType().isLimited()) {
             if (deckList != null) {
                 deck = Deck.load(deckList, false, false);
             } else {
@@ -163,7 +164,7 @@ public class TableController {
             }
         }
         // Check quit ratio.
-        int quitRatio = table.getTournament().getOptions().getQuitRatio();
+        int quitRatio = tournament.getOptions().getQuitRatio();
         if (quitRatio < user.getTourneyQuitRatio()) {
             String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
                     .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
@@ -172,9 +173,9 @@ public class TableController {
         }
 
         // Check minimum rating.
-        int minimumRating = table.getTournament().getOptions().getMinimumRating();
+        int minimumRating = tournament.getOptions().getMinimumRating();
         int userRating;
-        if (table.getTournament().getOptions().getMatchOptions().isLimited()) {
+        if (tournament.getOptions().getMatchOptions().isLimited()) {
             userRating = user.getUserData().getLimitedRating();
         } else {
             userRating = user.getUserData().getConstructedRating();

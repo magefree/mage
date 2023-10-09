@@ -217,9 +217,7 @@ public class Table implements Serializable {
 
     final public void setState(TableState state) {
         this.state = state;
-        if (isTournament()) {
-            getTournament().setTournamentState(state.toString());
-        }
+        getTournament().ifPresent(t -> t.setTournamentState(state.toString()));
         if (state == TableState.FINISHED) {
             this.recorder.record(this);
         }
@@ -253,8 +251,12 @@ public class Table implements Serializable {
         return Optional.ofNullable(match);
     }
 
-    public Tournament getTournament() {
-        return tournament;
+    /**
+     * get the tournament
+     * @return tournament or Empty if not tournament, but match
+     */
+    public Optional<Tournament> getTournament() {
+        return Optional.ofNullable(tournament);
     }
 
     public void setTournament(Tournament tournament) {
@@ -296,9 +298,9 @@ public class Table implements Serializable {
     public TableProto toProto() {
         TableProto.Builder builder = TableProto.newBuilder();
         if (this.isTournament()) {
-            builder.getTourneyBuilder().mergeFrom(this.getTournament().toProto());
+            builder.getTourneyBuilder().mergeFrom(this.getTournament().map(Tournament::toProto).get());
         } else {
-            builder.getMatchBuilder().mergeFrom(this.getMatch().map(Match::toProto).orElseThrow(() -> new IllegalStateException("Expected a match to have been set but instead there was none")));
+            builder.getMatchBuilder().mergeFrom(this.getMatch().map(Match::toProto).get());
         }
         return builder.setGameType(this.getGameType())
                 .setName(this.getName())

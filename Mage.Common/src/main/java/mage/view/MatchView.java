@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.Table;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
+import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPlayer;
 
 /**
@@ -97,38 +98,39 @@ public class MatchView implements Serializable {
 
     // used for tournaments
     private void initTournamentTable(Table table) {
-        this.matchId = table.getTournament().getId();
+        Tournament tournament = table.getTournament().get();
+        this.matchId = tournament.getId();
         this.matchName = table.getName();
         this.gameType = table.getGameType();
-        if (table.getTournament().getOptions().getNumberRounds() > 0) {
-            this.gameType = new StringBuilder(this.gameType).append(' ').append(table.getTournament().getOptions().getNumberRounds()).append(" Rounds").toString();
+        if (tournament.getOptions().getNumberRounds() > 0) {
+            this.gameType = new StringBuilder(this.gameType).append(' ').append(tournament.getOptions().getNumberRounds()).append(" Rounds").toString();
         }
         StringBuilder sbDeckType = new StringBuilder(table.getDeckType());
-        if (!table.getTournament().getBoosterInfo().isEmpty()) {
-            sbDeckType.append(' ').append(table.getTournament().getBoosterInfo());
+        if (!tournament.getBoosterInfo().isEmpty()) {
+            sbDeckType.append(' ').append(tournament.getBoosterInfo());
         }
         if (table.getName() != null && !table.getName().isEmpty()) {
             sbDeckType.append(table.getDeckType()).append(" [").append(table.getName()).append(']');
         }
         this.deckType = sbDeckType.toString();
         StringBuilder sb1 = new StringBuilder();
-        for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
+        for (TournamentPlayer tPlayer : tournament.getPlayers()) {
             sb1.append(tPlayer.getPlayer().getName()).append(" (").append(tPlayer.getPoints()).append(" P.) ");
         }
         this.players = sb1.toString();
         StringBuilder sb2 = new StringBuilder();
-        if (!table.getTournament().getRounds().isEmpty()) {
-            for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
+        if (!tournament.getRounds().isEmpty()) {
+            for (TournamentPlayer tPlayer : tournament.getPlayers()) {
                 sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(' ');
             }
         } else {
           sb2.append("Canceled");
         }
         this.result = sb2.toString();
-        this.startTime = table.getTournament().getStartTime();
-        this.endTime = table.getTournament().getEndTime();
+        this.startTime = tournament.getStartTime();
+        this.endTime = tournament.getEndTime();
         this.replayAvailable = false;
-        this.rated = table.getTournament().getOptions().getMatchOptions().isRated();
+        this.rated = tournament.getOptions().getMatchOptions().isRated();
     }
 
     public UUID getMatchId() {

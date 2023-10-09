@@ -798,7 +798,7 @@ public class MageServerImpl implements MageServer {
                                                 UUID tableId = managerFactory.draftManager().getControllerByDraftId(draftId).getTableId();
                                                 Table table = managerFactory.tableManager().getTable(tableId);
                                                 if (table.isTournament()) {
-                                                    UUID tournamentId = table.getTournament().getId();
+                                                    UUID tournamentId = table.getTournament().get().getId();
                                                     managerFactory.tournamentManager().quit(tournamentId, userId);
                                                 }
                                             });

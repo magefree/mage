@@ -11,6 +11,7 @@ import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchPlayer;
 import mage.game.mulligan.MulliganType;
+import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPlayer;
 
 import java.io.Serializable;
@@ -59,7 +60,7 @@ public class TableView implements Serializable {
             this.createTime = table.getCreateTime();
         } else {
             if (table.isTournament()) {
-                this.createTime = table.getTournament().getStartTime();
+                this.createTime = table.getTournament().get().getStartTime();
             } else {
                 this.createTime = table.getMatch().get().getStartTime();
             }
@@ -145,29 +146,30 @@ public class TableView implements Serializable {
             this.spectatorsAllowed = match.getOptions().isSpectatorsAllowed();
         } else {
             // TOURNAMENT
-            if (table.getTournament().getOptions().getNumberRounds() > 0) {
-                this.gameType = new StringBuilder(this.gameType).append(' ').append(table.getTournament().getOptions().getNumberRounds()).append(" Rounds").toString();
+            Tournament tournament = table.getTournament().get();
+            if (tournament.getOptions().getNumberRounds() > 0) {
+                this.gameType = new StringBuilder(this.gameType).append(' ').append(tournament.getOptions().getNumberRounds()).append(" Rounds").toString();
             }
             StringBuilder sb1 = new StringBuilder();
-            for (TournamentPlayer tp : table.getTournament().getPlayers()) {
+            for (TournamentPlayer tp : tournament.getPlayers()) {
                 if (!tp.getPlayer().getName().equals(table.getControllerName())) {
                     sb1.append(", ").append(tp.getPlayer().getName());
                 }
             }
             this.controllerName += sb1.toString();
-            this.seatsInfo = "" + table.getTournament().getPlayers().size() + "/" + table.getNumberOfSeats();
+            this.seatsInfo = "" + tournament.getPlayers().size() + "/" + table.getNumberOfSeats();
             StringBuilder infoText = new StringBuilder();
             StringBuilder stateText = new StringBuilder(table.getState().toString());
-            infoText.append("Wins:").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded());
+            infoText.append("Wins:").append(tournament.getOptions().getMatchOptions().getWinsNeeded());
             infoText.append(" Seats: ").append(this.seatsInfo);
             switch (table.getState()) {
                 case WAITING:
                 case READY_TO_START:
                 case STARTING:
                     if (TableState.WAITING.equals(table.getState())) {
-                        stateText.append(" (").append(table.getTournament().getPlayers().size()).append('/').append(table.getNumberOfSeats()).append(')');
+                        stateText.append(" (").append(tournament.getPlayers().size()).append('/').append(table.getNumberOfSeats()).append(')');
                     }
-                    MatchOptions tourneyMatchOptions = table.getTournament().getOptions().getMatchOptions();
+                    MatchOptions tourneyMatchOptions = tournament.getOptions().getMatchOptions();
                     infoText.append(" Time: ").append(tourneyMatchOptions.getMatchTimeLimit().toString());
                     infoText.append(" Buffer: ").append(tourneyMatchOptions.getMatchBufferTime().toString());
                     if (tourneyMatchOptions.getMulliganType() != MulliganType.GAME_DEFAULT) {
@@ -176,20 +178,17 @@ public class TableView implements Serializable {
                     if (tourneyMatchOptions.getFreeMulligans() > 0) {
                         infoText.append(" FM: ").append(tourneyMatchOptions.getFreeMulligans());
                     }
-                    table.getMatch().ifPresent(match -> {
-                        // TODO for review: This technically isn't possible since a match isn't a tournament?
-                        if (match.getOptions().isCustomStartLifeEnabled()) {
-                            infoText.append(" StartLife: ").append(match.getOptions().getCustomStartLife());
-                        }
-                        if (match.getOptions().isCustomStartHandSizeEnabled()) {
-                            infoText.append(" StartHandSize: ").append(match.getOptions().getCustomStartHandSize());
-                        }
-                    });
-                    if (table.getTournament().getTournamentType().isLimited()) {
-                        infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
+                    if (tournament.getOptions().getMatchOptions().isCustomStartLifeEnabled()) {
+                        infoText.append(" StartLife: ").append(tournament.getOptions().getMatchOptions().getCustomStartLife());
                     }
-                    if (table.getTournament().getOptions().getLimitedOptions() instanceof DraftOptions) {
-                        DraftOptions draftOptions = (DraftOptions) table.getTournament().getOptions().getLimitedOptions();
+                    if (tournament.getOptions().getMatchOptions().isCustomStartHandSizeEnabled()) {
+                        infoText.append(" StartHandSize: ").append(tournament.getOptions().getMatchOptions().getCustomStartHandSize());
+                    }
+                    if (tournament.getTournamentType().isLimited()) {
+                        infoText.append(" Constr.: ").append(tournament.getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
+                    }
+                    if (tournament.getOptions().getLimitedOptions() instanceof DraftOptions) {
+                        DraftOptions draftOptions = (DraftOptions) tournament.getOptions().getLimitedOptions();
                         infoText.append(" Pick time: ").append(draftOptions.getTiming().getShortName());
                     }
                     if (tourneyMatchOptions.isRollbackTurnsAllowed()) {
@@ -198,20 +197,20 @@ public class TableView implements Serializable {
                     if (tourneyMatchOptions.isPlaneChase()) {
                         infoText.append(" PC");
                     }
-                    if (!(table.getTournament().getOptions().getMatchOptions().getPerPlayerEmblemCards().isEmpty())
-                            || !(table.getTournament().getOptions().getMatchOptions().getGlobalEmblemCards().isEmpty())) {
+                    if (!(tournament.getOptions().getMatchOptions().getPerPlayerEmblemCards().isEmpty())
+                            || !(tournament.getOptions().getMatchOptions().getGlobalEmblemCards().isEmpty())) {
                         infoText.append(" EC");
                     }
-                    if (table.getTournament().getOptions().isWatchingAllowed()) {
+                    if (tournament.getOptions().isWatchingAllowed()) {
                         infoText.append(" SP");
                     }
 
                     break;
                 case DUELING:
-                    stateText.append(" Round: ").append(table.getTournament().getRounds().size());
+                    stateText.append(" Round: ").append(tournament.getRounds().size());
                     break;
                 case DRAFTING:
-                    Draft draft = table.getTournament().getDraft();
+                    Draft draft = tournament.getDraft();
                     if (draft != null) {
                         stateText.append(' ').append(draft.getBoosterNum()).append('/').append(draft.getCardNum());
                     }
@@ -220,14 +219,14 @@ public class TableView implements Serializable {
             }
             this.additionalInfo = infoText.toString();
             this.tableStateText = stateText.toString();
-            this.deckType = table.getDeckType() + ' ' + table.getTournament().getBoosterInfo();
-            this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
-            this.quitRatio = Integer.toString(table.getTournament().getOptions().getQuitRatio());
-            this.minimumRating = Integer.toString(table.getTournament().getOptions().getMinimumRating());
-            this.limited = table.getTournament().getOptions().getMatchOptions().isLimited();
-            this.rated = table.getTournament().getOptions().getMatchOptions().isRated();
-            this.passworded = !table.getTournament().getOptions().getPassword().isEmpty();
-            this.spectatorsAllowed = table.getTournament().getOptions().isWatchingAllowed();
+            this.deckType = table.getDeckType() + ' ' + tournament.getBoosterInfo();
+            this.skillLevel = tournament.getOptions().getMatchOptions().getSkillLevel();
+            this.quitRatio = Integer.toString(tournament.getOptions().getQuitRatio());
+            this.minimumRating = Integer.toString(tournament.getOptions().getMinimumRating());
+            this.limited = tournament.getOptions().getMatchOptions().isLimited();
+            this.rated = tournament.getOptions().getMatchOptions().isRated();
+            this.passworded = !tournament.getOptions().getPassword().isEmpty();
+            this.spectatorsAllowed = tournament.getOptions().isWatchingAllowed();
         }
     }
 
