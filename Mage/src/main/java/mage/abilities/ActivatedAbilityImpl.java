@@ -4,10 +4,8 @@ import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
@@ -59,69 +57,21 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         condition = ability.condition;
     }
 
-    public ActivatedAbilityImpl(Zone zone) {
-        this(zone, null);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effect effect) {
+    protected ActivatedAbilityImpl(Zone zone, Effect effect) {
         super(AbilityType.ACTIVATED, zone);
         this.addEffect(effect);
     }
 
-    public ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
+    protected ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
         super(AbilityType.ACTIVATED, zone);
         this.addEffect(effect);
         this.addManaCost(cost);
     }
 
-    public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
-        super(AbilityType.ACTIVATED, zone);
-        if (effects != null) {
-            for (Effect effect : effects) {
-                this.addEffect(effect);
-            }
-        }
-        this.addManaCost(cost);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
+    protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
         super(AbilityType.ACTIVATED, zone);
         this.addEffect(effect);
         this.addCost(cost);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
-        super(AbilityType.ACTIVATED, zone);
-        this.addEffect(effect);
-        if (costs != null) {
-            for (Cost cost : costs) {
-                this.addCost(cost);
-            }
-        }
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effects effects, Cost cost) {
-        super(AbilityType.ACTIVATED, zone);
-        if (effects != null) {
-            for (Effect effect : effects) {
-                this.addEffect(effect);
-            }
-        }
-        this.addCost(cost);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
-        super(AbilityType.ACTIVATED, zone);
-        if (effects != null) {
-            for (Effect effect : effects) {
-                this.addEffect(effect);
-            }
-        }
-        if (costs != null) {
-            for (Cost cost : costs) {
-                this.addCost(cost);
-            }
-        }
     }
 
     @Override

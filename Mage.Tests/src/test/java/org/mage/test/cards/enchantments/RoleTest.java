@@ -11,9 +11,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class RoleTest extends CardTestPlayerBase {
 
-    private static final String courtier = "Cursed Courtier";
-    private static final String rage = "Monstrous Rage";
-    private static final String wardens = "Nexus Wardens";
+    private static final String courtier = "Cursed Courtier"; // When Cursed Courtier enters the battlefield, create a Cursed Role token attached to it.
+    private static final String rage = "Monstrous Rage"; // Target creature gets +2/+0 until end of turn. Create a Monster Role token attached to it.
+    private static final String wardens = "Nexus Wardens"; // Whenever an enchantment enters the battlefield under your control, you gain 2 life.
     private static final String murder = "Murder";
 
     @Test
@@ -130,4 +130,24 @@ public class RoleTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, murder, 1);
         assertLife(playerA, 20);
     }
+
+    @Test
+    public void testProtectionNotCreated() {
+        String firstwing = "Azorius First-Wing"; // 2/2 Flying, protection from enchantments
+        addCard(Zone.BATTLEFIELD, playerA, firstwing);
+        addCard(Zone.BATTLEFIELD, playerA, wardens);
+        addCard(Zone.HAND, playerA, rage);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rage, firstwing);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, rage, 1);
+        assertPowerToughness(playerA, firstwing, 4, 2);
+        assertLife(playerA, 20);
+    }
+
 }

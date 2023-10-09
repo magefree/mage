@@ -3,7 +3,6 @@ package mage.abilities.decorator;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -32,12 +31,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
-        this.condition = condition;
-        this.ruleText = rule;
-    }
-
-    public ConditionalActivatedAbility(Zone zone, Effect effect, Costs<Cost> costs, Condition condition, String rule) {
-        super(zone, effect, costs);
         this.condition = condition;
         this.ruleText = rule;
     }
@@ -80,7 +73,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         if (conditionText.startsWith("during")
                 || conditionText.startsWith("before")
                 || conditionText.startsWith("if")) {
-            sb.append("");
         } else {
             sb.append("if ");
         }

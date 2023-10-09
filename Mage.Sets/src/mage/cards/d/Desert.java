@@ -37,7 +37,7 @@ public final class Desert extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost(), new IsStepCondition(PhaseStep.END_COMBAT, false), null);
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost(), new IsStepCondition(PhaseStep.END_COMBAT, false));
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);

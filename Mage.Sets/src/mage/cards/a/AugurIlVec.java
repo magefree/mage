@@ -35,7 +35,7 @@ public final class AugurIlVec extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
                 new GainLifeEffect(4), 
                 new SacrificeSourceCost(), 
-                new IsStepCondition(PhaseStep.UPKEEP), null));
+                new IsStepCondition(PhaseStep.UPKEEP)));
     }
 
     private AugurIlVec(final AugurIlVec card) {

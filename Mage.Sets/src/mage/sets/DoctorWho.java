@@ -102,6 +102,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Laser Screwdriver", 178, Rarity.UNCOMMON, mage.cards.l.LaserScrewdriver.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 289, Rarity.RARE, mage.cards.l.LavaclawReaches.class));
         cards.add(new SetCardInfo("Lightning Greaves", 243, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
+        cards.add(new SetCardInfo("Lunar Hatchling", 141, Rarity.RARE, mage.cards.l.LunarHatchling.class));
         cards.add(new SetCardInfo("Madame Vastra", 142, Rarity.RARE, mage.cards.m.MadameVastra.class));
         cards.add(new SetCardInfo("Martha Jones", 48, Rarity.RARE, mage.cards.m.MarthaJones.class));
         cards.add(new SetCardInfo("Memory Worm", 90, Rarity.UNCOMMON, mage.cards.m.MemoryWorm.class));

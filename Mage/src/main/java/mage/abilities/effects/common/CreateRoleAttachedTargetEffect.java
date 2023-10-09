@@ -39,7 +39,7 @@ public class CreateRoleAttachedTargetEffect extends OneShotEffect {
         }
         Token token = roleType.createToken(permanent, game, source);
         // The token may not be created, for instance if the creature has protection from enchantments.
-        return token.getLastAddedTokenIds().size() > 0;
+        return !token.getLastAddedTokenIds().isEmpty();
     }
 
     @Override

@@ -83,15 +83,16 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.getEffects().setValue("spellCast", spell);
         switch (setTargetPointer) {
             case NONE:
+            case PLAYER: // for subclasses only, needs to be handled there
                 break;
             case SPELL:
-                getEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
+                getAllEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
                 break;
             case CARD:
-                getEffects().setTargetPointer(new FixedTarget(spell.getCard().getId()));
+                getAllEffects().setTargetPointer(new FixedTarget(spell.getCard().getId()));
                 break;
             default:
-                throw new UnsupportedOperationException("Unexpected setTargetPointer " + setTargetPointer);
+                throw new UnsupportedOperationException("Unexpected setTargetPointer in SpellCastControllerTriggeredAbility: " + setTargetPointer);
         }
         return true;
     }
@@ -114,7 +115,6 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
                 text += " from your " + fromZone.toString().toLowerCase();
                 break;
         }
-
         setTriggerPhrase(text + ", ");
     }
 }
