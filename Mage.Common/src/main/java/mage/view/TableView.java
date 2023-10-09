@@ -174,11 +174,11 @@ public class TableView implements Serializable {
                     if (tourneyMatchOptions.getFreeMulligans() > 0) {
                         infoText.append(" FM: ").append(tourneyMatchOptions.getFreeMulligans());
                     }
-                    if (table.getMatch().getOptions().isCustomStartLifeEnabled()) {
-                        infoText.append(" StartLife: ").append(table.getMatch().getOptions().getCustomStartLife());
+                    if (tourneyMatchOptions.isCustomStartLifeEnabled()) {
+                        infoText.append(" StartLife: ").append(tourneyMatchOptions.getCustomStartLife());
                     }
-                    if (table.getMatch().getOptions().isCustomStartHandSizeEnabled()) {
-                        infoText.append(" StartHandSize: ").append(table.getMatch().getOptions().getCustomStartHandSize());
+                    if (tourneyMatchOptions.isCustomStartHandSizeEnabled()) {
+                        infoText.append(" StartHandSize: ").append(tourneyMatchOptions.getCustomStartHandSize());
                     }
                     if (table.getTournament().getTournamentType().isLimited()) {
                         infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
