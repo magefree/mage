@@ -14,9 +14,9 @@ install:
 	# Building project
 	mvn clean install package -DskipTests
 	# Packaging Mage.Client to zip
-	cd Mage.Client && mvn assembly:assembly -DskipTests
+	cd Mage.Client && mvn assembly:assembly
 	# Packaging Mage.Server to zip
-	cd Mage.Server && mvn assembly:assembly -DskipTests
+	cd Mage.Server && mvn assembly:assembly
 	# Copying the files to the target directory
 	mkdir -p $(TARGET_DIR)
 	cp ./Mage.Server/target/mage-server.zip $(TARGET_DIR)
