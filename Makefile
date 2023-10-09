@@ -1,13 +1,13 @@
 include .env
 
-# Define the target directory as a variable with a default value.
+# The target directory is used for setting where the output zip files will end up
 # You can override this with an environment variable, ex
 # TARGET_DIR=my_custom_directory make deploy
 # Alternatively, you can set this variable in the .env file
 TARGET_DIR ?= deploy/
 
-.PHONY: deploy
-deploy:
+.PHONY: install
+install:
 	# Building project
 	cd . && mvn clean install package -DskipTests
 	# Packaging Mage.Client to zip
