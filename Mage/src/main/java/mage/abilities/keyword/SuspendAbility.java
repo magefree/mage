@@ -132,7 +132,7 @@ public class SuspendAbility extends SpecialAction {
         if (suspend == Integer.MAX_VALUE) {
             VariableManaCost xCosts = new VariableManaCost(VariableCostType.ALTERNATIVE);
             xCosts.setMinX(1);
-            this.addManaCost(xCosts);
+            this.addCost(xCosts);
             cost = new ManaCostsImpl<>("{X}" + cost.getText());
         }
         StringBuilder sb = new StringBuilder("Suspend ");

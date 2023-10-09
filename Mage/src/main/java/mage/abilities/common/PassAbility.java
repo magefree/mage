@@ -16,7 +16,7 @@ import java.util.UUID;
 public class PassAbility extends ActivatedAbilityImpl {
 
     public PassAbility() {
-        super(Zone.ALL, new PassEffect());
+        super(Zone.ALL, new PassEffect(), null);
         this.usesStack = false;
     }
 

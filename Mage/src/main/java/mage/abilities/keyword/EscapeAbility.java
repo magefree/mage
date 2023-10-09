@@ -46,7 +46,7 @@ public class EscapeAbility extends SpellAbility {
         this.clearManaCostsToPay();
 
         String text = "Escape&mdash;" + manaCost;
-        this.addManaCost(new ManaCostsImpl<>(manaCost));
+        this.addCost(new ManaCostsImpl<>(manaCost));
         for (Cost cost : additionalCosts) {
             text += ", " + CardUtil.getTextWithFirstCharUpperCase(cost.getText());
             this.addCost(cost.copy().setText("")); // hide additional cost text from rules

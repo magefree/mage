@@ -1,5 +1,3 @@
-
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -27,7 +25,7 @@ public final class ElixirOfImmortality extends CardImpl {
     public ElixirOfImmortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElixerOfImmortalityEffect(), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(2));
+        ability.addCost(new GenericManaCost(2));
         this.addAbility(ability);
     }
 

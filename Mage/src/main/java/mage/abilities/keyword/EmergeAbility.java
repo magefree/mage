@@ -37,7 +37,7 @@ public class EmergeAbility extends SpellAbility {
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(emergeCost.copy());
+        this.addCost(emergeCost.copy());
 
         this.setRuleAtTheTop(true);
     }
