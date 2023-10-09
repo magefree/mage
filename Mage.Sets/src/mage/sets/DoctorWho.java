@@ -19,6 +19,7 @@ public final class DoctorWho extends ExpansionSet {
         super("Doctor Who", "WHO", ExpansionSet.buildDate(2023, 10, 13), SetType.SUPPLEMENTAL);
 
         cards.add(new SetCardInfo("Ace, Fearless Rebel", 98, Rarity.RARE, mage.cards.a.AceFearlessRebel.class));
+        cards.add(new SetCardInfo("Adric, Mathematical Genius", 33, Rarity.RARE, mage.cards.a.AdricMathematicalGenius.class));
         cards.add(new SetCardInfo("Arcane Signet", 239, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("As Foretold", 214, Rarity.RARE, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Ash Barrens", 257, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
