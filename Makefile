@@ -9,7 +9,7 @@ TARGET_DIR ?= deploy/
 .PHONY: install
 install:
 	# Building project
-	cd . && mvn clean install package -DskipTests
+	mvn clean install package -DskipTests
 	# Packaging Mage.Client to zip
 	cd Mage.Client && mvn assembly:assembly -DskipTests
 	# Packaging Mage.Server to zip
