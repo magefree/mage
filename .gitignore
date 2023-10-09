@@ -126,7 +126,3 @@ build-output.log
 
 # Visual Studio Code
 .history
-
-# Makefile
-.env
-deploy/
