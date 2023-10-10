@@ -13,7 +13,6 @@ import mage.constants.SetType;
 import mage.util.RandomUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -453,10 +452,10 @@ public final class TheBrothersWar extends ExpansionSet {
                 .forEach(cardInfo -> inBoosterMap.put("BRR_" + cardInfo.getCardNumber(), cardInfo));
     }
 
-//    @Override
-//    public BoosterCollator createCollator() {
-//        return new TheBrothersWarCollator();
-//    }
+    @Override
+    public BoosterCollator createCollator() {
+        return new TheBrothersWarCollator();
+    }
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/bro.html
