@@ -47,7 +47,7 @@ public final class SonicScrewdriver extends CardImpl {
 
         // {2}, {T}: Scry 1.
         ability = new SimpleActivatedAbility(
-                new ScryEffect(1),
+                new ScryEffect(1, false),
                 new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());

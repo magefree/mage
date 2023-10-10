@@ -29,7 +29,7 @@ public final class ClockworkDroid extends CardImpl {
         BecomesExertSourceTriggeredAbility trigger = new BecomesExertSourceTriggeredAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn)
         );
-        trigger.addEffect(new ScryEffect(1).concatBy("and"));
+        trigger.addEffect(new ScryEffect(1, false).concatBy("and you"));
         this.addAbility(new ExertAbility(trigger));
     }
 

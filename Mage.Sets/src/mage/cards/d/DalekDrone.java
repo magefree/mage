@@ -31,7 +31,7 @@ public final class DalekDrone extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Exterminate! -- When Dalek Drone enters the battlefield, destroy target creature an opponent controls. That player loses 3 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
