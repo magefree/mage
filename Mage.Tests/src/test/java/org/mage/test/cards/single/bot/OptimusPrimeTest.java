@@ -6,6 +6,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.stream.Collectors;
+
 /**
  * @author xenohedron
  */
@@ -44,18 +46,22 @@ public class OptimusPrimeTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, Sacrifice"); // gain 2 life
         setChoice(playerA, optimus); // sac, returns transformed
-
+        showBattlefield("part 1", 1, PhaseStep.BEGIN_COMBAT, playerA);
         attack(1, playerA, ghoul, playerB);
         addTarget(playerA, ghoul); // choice for bolster, becomes a 4/4 with trample
         block(1, playerB, centaur, ghoul);
         setChoice(playerA, "X=3"); // assign 3 damage to centaur, 1 damage tramples over
+        showBattlefield("part 2", 1, PhaseStep.END_COMBAT, playerA);
         // optimus triggers and transforms
         // at end step, bolster 1, only target is myr
-
-        setStopAt(2, PhaseStep.UPKEEP);
+        showBattlefield("part 3", 2, PhaseStep.UPKEEP, playerA);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
 
+        currentGame.debugMessage(getBattlefieldCards(playerA).stream().map(
+                (x) -> "\n"+x.getName()+": "+x.getPower()+"/"+x.getToughness()+" - "+x.isTransformed()
+        ).collect(Collectors.toList()).toString());
         assertLife(playerA, 20 + 2);
         assertLife(playerB, 20 - 1);
         assertGraveyardCount(playerB, centaur, 1);

@@ -10,6 +10,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.MageObjectAttribute;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
@@ -114,6 +115,9 @@ public class TransformAbility extends SimpleStaticAbility {
             game.getState().addOtherAbility(spell.getCard(), ability);
         }
     }
+    public void force_apply(Game game){
+        getEffects().forEach((effect) -> ((TransformEffect)effect).apply_force(game, this));
+    }
 }
 
 class TransformEffect extends ContinuousEffectImpl {
@@ -150,6 +154,46 @@ class TransformEffect extends ContinuousEffectImpl {
         } else {
             card = permanent.getSecondCardFace();
         }
+
+        if (card == null) {
+            return false;
+        }
+
+        TransformAbility.transformPermanent(permanent, card, game, source);
+
+        return true;
+
+    }
+
+    //apply but also applies from back side to front, so that we don't need to reset
+    public boolean apply_force(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+
+        if (permanent == null) {
+            return false;
+        }
+
+        if (permanent.isCopy()) { // copies can't transform
+            return true;
+        }
+
+        MageObject card;
+        if (permanent.isTransformed()) {
+            if (permanent instanceof PermanentToken) {
+                card = ((PermanentToken) permanent).getToken().getBackFace();
+            } else {
+                card = permanent.getSecondCardFace();
+            }
+        } else {
+            if (permanent instanceof PermanentToken) {
+                card = ((PermanentToken) permanent).getToken();
+            } else if (permanent instanceof PermanentCard){
+                card = ((PermanentCard)permanent).getCard();
+            } else {
+                throw new IllegalArgumentException("Force transform on non-token non-card permanent");
+            }
+        }
+        game.debugMessage("Applying force "+(permanent.isTransformed()?"Transform":"Untransform")+" to "+permanent.getName());
 
         if (card == null) {
             return false;
