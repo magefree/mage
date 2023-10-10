@@ -57,7 +57,7 @@ class OutOfTimePhaseOutEffect extends OneShotEffect {
     public OutOfTimePhaseOutEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "untap all creatures, then those creatures phase out until {this} leaves the battlefield. "
-                + "Put a time counter on {this} for each creature phased out this way";
+                + "Put a time counter on {this} for each creature that phased out this way";
     }
 
     private OutOfTimePhaseOutEffect(final OutOfTimePhaseOutEffect effect) {

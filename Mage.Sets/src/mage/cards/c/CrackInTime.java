@@ -36,7 +36,8 @@ public final class CrackInTime extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Crack in Time enters the battlefield and at the beginning of your precombat main phase, exile target creature an opponent controls until Crack in Time leaves the battlefield.
-        ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(),
+        ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(), false,
+                "When {this} enters the battlefield and at the beginning of your precombat main phase, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new BeginningOfPreCombatMainTriggeredAbility(null, TargetController.YOU, false)
         );

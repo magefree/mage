@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class FrostFairLureFish extends CardImpl {
 
     private static final FilterControlledPermanent filter =
-            new FilterControlledPermanent(SubType.FISH, "Fish you control");
+            new FilterControlledPermanent(SubType.FISH, "Fish");
     private static final FilterCreaturePermanent filterHumans =
             new FilterCreaturePermanent(SubType.HUMAN, "Humans");
 
