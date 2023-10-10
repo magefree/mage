@@ -32,7 +32,7 @@ public final class ShabrazTheSkyshark extends CardImpl {
     public ShabrazTheSkyshark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHARK);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(3);

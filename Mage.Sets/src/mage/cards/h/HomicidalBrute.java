@@ -55,7 +55,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
         addEffect(new TransformSourceEffect());
     }
 
-    public HomicidalBruteTriggeredAbility(HomicidalBruteTriggeredAbility ability) {
+    private HomicidalBruteTriggeredAbility(final HomicidalBruteTriggeredAbility ability) {
         super(ability);
     }
 

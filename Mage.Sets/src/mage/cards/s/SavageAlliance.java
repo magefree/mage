@@ -85,7 +85,7 @@ class SavageAllianceGainTrampleEffect extends OneShotEffect {
         staticText = "Creatures target player controls gain trample until end of turn";
     }
 
-    public SavageAllianceGainTrampleEffect(final SavageAllianceGainTrampleEffect effect) {
+    private SavageAllianceGainTrampleEffect(final SavageAllianceGainTrampleEffect effect) {
         super(effect);
     }
 
@@ -115,7 +115,7 @@ class SavageAllianceDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals 1 damage to each creature target opponent controls";
     }
 
-    public SavageAllianceDamageEffect(final SavageAllianceDamageEffect effect) {
+    private SavageAllianceDamageEffect(final SavageAllianceDamageEffect effect) {
         super(effect);
     }
 

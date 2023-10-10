@@ -38,7 +38,7 @@ public final class AquamorphEntity extends CardImpl {
         this.addAbility(ability);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{U}")));
     }
 
     private AquamorphEntity(final AquamorphEntity card) {
@@ -124,7 +124,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 toughness = 5;
                 break;
         }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield), source);
         return false;
     }
 

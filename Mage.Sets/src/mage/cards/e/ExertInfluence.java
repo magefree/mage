@@ -51,7 +51,7 @@ class ExertInfluenceEffect extends OneShotEffect {
         this.staticText = "Gain control of target creature if its power is less than or equal to the number of colors of mana spent to cast this spell";
     }
 
-    public ExertInfluenceEffect(final ExertInfluenceEffect effect) {
+    private ExertInfluenceEffect(final ExertInfluenceEffect effect) {
         super(effect);
     }
 

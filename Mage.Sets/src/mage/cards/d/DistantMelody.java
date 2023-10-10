@@ -47,7 +47,7 @@ class DistantMelodyEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. Draw a card for each permanent you control of that type";
     }
 
-    DistantMelodyEffect(final DistantMelodyEffect effect) {
+    private DistantMelodyEffect(final DistantMelodyEffect effect) {
         super(effect);
     }
 

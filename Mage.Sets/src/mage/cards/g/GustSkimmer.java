@@ -29,7 +29,7 @@ public final class GustSkimmer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
-    public GustSkimmer (final GustSkimmer card) {
+    private GustSkimmer(final GustSkimmer card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class EtaliPrimalStorm extends CardImpl {
 
     public EtaliPrimalStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(6);
@@ -54,7 +54,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                 + "any number of spells from among those cards without paying their mana costs";
     }
 
-    public EtaliPrimalStormEffect(final EtaliPrimalStormEffect effect) {
+    private EtaliPrimalStormEffect(final EtaliPrimalStormEffect effect) {
         super(effect);
     }
 

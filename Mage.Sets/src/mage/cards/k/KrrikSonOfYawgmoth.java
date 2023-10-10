@@ -42,7 +42,7 @@ public final class KrrikSonOfYawgmoth extends CardImpl {
     public KrrikSonOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B/P}{B/P}{B/P}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.subtype.add(SubType.MINION);
@@ -78,7 +78,7 @@ class KrrikSonOfYawgmothPhyrexianEffect extends ContinuousEffectImpl {
         this.staticText = "for each {B} in a cost, you may pay 2 life rather than pay that mana";
     }
 
-    public KrrikSonOfYawgmothPhyrexianEffect(final KrrikSonOfYawgmothPhyrexianEffect effect) {
+    private KrrikSonOfYawgmothPhyrexianEffect(final KrrikSonOfYawgmothPhyrexianEffect effect) {
         super(effect);
     }
 

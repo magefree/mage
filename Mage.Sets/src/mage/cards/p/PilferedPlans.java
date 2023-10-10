@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +20,7 @@ public final class PilferedPlans extends CardImpl {
 
 
         // Target player puts the top two cards of their library into their graveyard. Draw two cards.
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(2));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(2));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
         

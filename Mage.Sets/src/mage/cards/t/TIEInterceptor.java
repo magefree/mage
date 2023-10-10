@@ -51,7 +51,7 @@ class TIEInterceptorEffect extends OneShotEffect {
         staticText = "each opponent loses 2 life";
     }
 
-    TIEInterceptorEffect(final TIEInterceptorEffect effect) {
+    private TIEInterceptorEffect(final TIEInterceptorEffect effect) {
         super(effect);
     }
 

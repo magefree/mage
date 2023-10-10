@@ -51,7 +51,7 @@ class HallowedMoonlightEffect extends ReplacementEffectImpl {
         staticText = "Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead";
     }
 
-    public HallowedMoonlightEffect(final HallowedMoonlightEffect effect) {
+    private HallowedMoonlightEffect(final HallowedMoonlightEffect effect) {
         super(effect);
     }
 

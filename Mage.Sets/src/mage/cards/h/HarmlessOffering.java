@@ -49,7 +49,7 @@ class HarmlessOfferingEffect extends ContinuousEffectImpl {
         this.staticText = "Target opponent gains control of target permanent you control";
     }
 
-    public HarmlessOfferingEffect(final HarmlessOfferingEffect effect) {
+    private HarmlessOfferingEffect(final HarmlessOfferingEffect effect) {
         super(effect);
     }
 

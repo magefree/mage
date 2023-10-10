@@ -20,7 +20,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.watchers.common.AttackedThisTurnWatcher;
@@ -31,7 +30,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public final class Aggression extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature");
 
     static {
         filter.add(Predicates.not(SubType.WALL.getPredicate()));
@@ -51,13 +50,12 @@ public final class Aggression extends CardImpl {
 
         // Enchanted creature has first strike and trample.
         Ability ability2 = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAttachedEffect(
                         FirstStrikeAbility.getInstance(),
                         AttachmentType.AURA));
         ability2.addEffect(new GainAbilityAttachedEffect(
                 TrampleAbility.getInstance(),
-                AttachmentType.AURA));
+                AttachmentType.AURA).setText("and trample"));
         this.addAbility(ability2);
 
         // At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.

@@ -23,7 +23,7 @@ public final class ArcumsAstrolabe extends CardImpl {
     public ArcumsAstrolabe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{S}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // ({S} can be paid with one mana from a snow permanent.)
         this.addAbility(new SimpleStaticAbility(

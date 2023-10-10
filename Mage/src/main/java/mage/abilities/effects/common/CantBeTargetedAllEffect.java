@@ -16,7 +16,6 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
@@ -35,7 +34,7 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
         setText();
     }
 
-    public CantBeTargetedAllEffect(final CantBeTargetedAllEffect effect) {
+    protected CantBeTargetedAllEffect(final CantBeTargetedAllEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
@@ -48,11 +47,6 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public CantBeTargetedAllEffect copy() {
         return new CantBeTargetedAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -90,7 +84,9 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
         } else {
             sb.append("spells");
         }
-        if (!duration.toString().isEmpty()) {
+        if (duration == Duration.EndOfTurn) {
+            sb.append(" this turn");
+        } else if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();

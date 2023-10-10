@@ -36,7 +36,7 @@ public final class JaredCarthalion extends CardImpl {
 
     public JaredCarthalion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JARED);
 
         this.setStartingLoyalty(5);
@@ -76,7 +76,7 @@ class JaredCarthalionBoostEffect extends OneShotEffect {
                 "a number of +1/+1 counters on it equal to the number of colors it is.";
     }
 
-    public JaredCarthalionBoostEffect(final JaredCarthalionBoostEffect effect) {
+    private JaredCarthalionBoostEffect(final JaredCarthalionBoostEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class JaredCarthalionUltimateEffect extends OneShotEffect {
                 "If that card was all colors, draw a card and create two Treasure tokens.";
     }
 
-    public JaredCarthalionUltimateEffect(final JaredCarthalionUltimateEffect effect) {
+    private JaredCarthalionUltimateEffect(final JaredCarthalionUltimateEffect effect) {
         super(effect);
     }
 

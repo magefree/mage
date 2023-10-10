@@ -1,15 +1,12 @@
-
 package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -26,7 +23,7 @@ public final class BelligerentBrontodon extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Each creature you control assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CombatDamageByToughnessEffect(StaticFilters.FILTER_PERMANENT_CREATURE, true)));
+        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessControlledEffect()));
     }
 
     private BelligerentBrontodon(final BelligerentBrontodon card) {

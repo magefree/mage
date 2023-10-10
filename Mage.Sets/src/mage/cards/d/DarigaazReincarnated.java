@@ -35,7 +35,7 @@ public final class DarigaazReincarnated extends CardImpl {
     public DarigaazReincarnated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -73,7 +73,7 @@ class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, instead exile it with three egg counters on it";
     }
 
-    public DarigaazReincarnatedDiesEffect(final DarigaazReincarnatedDiesEffect effect) {
+    private DarigaazReincarnatedDiesEffect(final DarigaazReincarnatedDiesEffect effect) {
         super(effect);
     }
 
@@ -118,7 +118,7 @@ class DarigaazReincarnatedInterveningIfTriggeredAbility extends ConditionalInter
                         + "remove an egg counter from it. Then if {this} has no egg counters on it, return it to the battlefield");
     }
 
-    public DarigaazReincarnatedInterveningIfTriggeredAbility(final DarigaazReincarnatedInterveningIfTriggeredAbility effect) {
+    private DarigaazReincarnatedInterveningIfTriggeredAbility(final DarigaazReincarnatedInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
@@ -135,7 +135,7 @@ class DarigaazReincarnatedReturnEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    DarigaazReincarnatedReturnEffect(final DarigaazReincarnatedReturnEffect effect) {
+    private DarigaazReincarnatedReturnEffect(final DarigaazReincarnatedReturnEffect effect) {
         super(effect);
     }
 

@@ -33,7 +33,7 @@ public final class SerrasSanctum extends CardImpl {
 
     public SerrasSanctum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         DynamicManaAbility ability = new DynamicManaAbility(Mana.WhiteMana(1), new PermanentsOnBattlefieldCount(filter));
         this.addAbility(ability.addHint(hint));

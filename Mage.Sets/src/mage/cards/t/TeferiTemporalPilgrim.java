@@ -31,7 +31,7 @@ public final class TeferiTemporalPilgrim extends CardImpl {
     public TeferiTemporalPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
         this.setStartingLoyalty(4);
 
@@ -83,7 +83,7 @@ class TeferiTemporalPilgrimEffect extends OneShotEffect {
             return false;
         }
         TargetControlledPermanent target = new TargetControlledPermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         opponent.chooseTarget(Outcome.ReturnToHand, target, source, game);
         Permanent toHand = game.getPermanent(target.getFirstTarget());
         if (toHand != null) {

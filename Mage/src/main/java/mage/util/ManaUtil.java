@@ -15,7 +15,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
 import mage.cards.AdventureCard;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
@@ -62,10 +62,10 @@ public final class ManaUtil {
      *
      * @param unpaid           Mana we need to pay. Can be null (it is for X costs now).
      * @param useableAbilities List of mana abilities permanent may produce
-     * @return List of mana abilities permanent may produce and are reasonable
+     * @return Map of mana abilities permanent may produce and are reasonable
      * for unpaid mana
      */
-    public static LinkedHashMap<UUID, ActivatedManaAbilityImpl> tryToAutoPay(ManaCost unpaid, LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities) {
+    public static Map<UUID, ActivatedManaAbilityImpl> tryToAutoPay(ManaCost unpaid, Map<UUID, ActivatedManaAbilityImpl> useableAbilities) {
 
         // first check if we have only basic mana abilities
         for (ActivatedManaAbilityImpl ability : useableAbilities.values()) {
@@ -141,7 +141,7 @@ public final class ManaUtil {
         return false;
     }
 
-    private static LinkedHashMap<UUID, ActivatedManaAbilityImpl> getManaAbilitiesUsingManaSymbols(LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities, ManaSymbols symbols, Mana unpaidMana) {
+    private static Map<UUID, ActivatedManaAbilityImpl> getManaAbilitiesUsingManaSymbols(Map<UUID, ActivatedManaAbilityImpl> useableAbilities, ManaSymbols symbols, Mana unpaidMana) {
         Set<ManaSymbol> countColored = new HashSet<>();
 
         ActivatedManaAbilityImpl chosenManaAbility = null;
@@ -355,7 +355,7 @@ public final class ManaUtil {
      * @param useableAbilities
      * @return
      */
-    private static LinkedHashMap<UUID, ActivatedManaAbilityImpl> getManaAbilitiesUsingMana(ManaCost unpaid, LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities) {
+    private static Map<UUID, ActivatedManaAbilityImpl> getManaAbilitiesUsingMana(ManaCost unpaid, Map<UUID, ActivatedManaAbilityImpl> useableAbilities) {
         Mana mana = unpaid.getMana();
 
         int countColorfull = 0;
@@ -408,7 +408,7 @@ public final class ManaUtil {
         return replace(useableAbilities, chosenManaAbility);
     }
 
-    private static LinkedHashMap<UUID, ActivatedManaAbilityImpl> replace(LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities, ActivatedManaAbilityImpl chosenManaAbility) {
+    private static Map<UUID, ActivatedManaAbilityImpl> replace(Map<UUID, ActivatedManaAbilityImpl> useableAbilities, ActivatedManaAbilityImpl chosenManaAbility) {
         // modify the map with the chosen mana ability
         useableAbilities.clear();
         useableAbilities.put(chosenManaAbility.getId(), chosenManaAbility);
@@ -631,8 +631,8 @@ public final class ManaUtil {
             secondSide = ((SplitCard) card).getRightHalfCard();
         } else if (card instanceof AdventureCard) {
             secondSide = ((AdventureCard) card).getSpellCard();
-        } else if (card instanceof ModalDoubleFacesCard) {
-            secondSide = ((ModalDoubleFacesCard) card).getRightHalfCard();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            secondSide = ((ModalDoubleFacedCard) card).getRightHalfCard();
         } else {
             secondSide = card.getSecondCardFace();
         }

@@ -76,7 +76,7 @@ class DragonTempestDamageEffect extends OneShotEffect {
         staticText = "it deals X damage to any target, where X is the number of Dragons you control";
     }
 
-    public DragonTempestDamageEffect(final DragonTempestDamageEffect effect) {
+    private DragonTempestDamageEffect(final DragonTempestDamageEffect effect) {
         super(effect);
     }
 

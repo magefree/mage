@@ -36,7 +36,7 @@ public final class TheBigIdea extends CardImpl {
     public TheBigIdea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BRAINIAC);
         this.subtype.add(SubType.VILLAIN);
         this.power = new MageInt(4);
@@ -68,7 +68,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
         staticText = "The next time you would roll a six-sided die, instead roll two six-sided dice and use the total of those results";
     }
 
-    TheBigIdeaReplacementEffect(final TheBigIdeaReplacementEffect effect) {
+    private TheBigIdeaReplacementEffect(final TheBigIdeaReplacementEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class TheBigIdeaEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. Create a number of 1/1 red Brainiac creature tokens equal to the result";
     }
 
-    public TheBigIdeaEffect(final TheBigIdeaEffect effect) {
+    private TheBigIdeaEffect(final TheBigIdeaEffect effect) {
         super(effect);
     }
 

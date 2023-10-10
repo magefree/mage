@@ -63,7 +63,7 @@ class ElementalResonanceEffect extends OneShotEffect {
         this.staticText = "add mana equal to enchanted permanent's mana cost.";
     }
 
-    ElementalResonanceEffect(final ElementalResonanceEffect effect) {
+    private ElementalResonanceEffect(final ElementalResonanceEffect effect) {
         super(effect);
     }
 

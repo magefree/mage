@@ -29,7 +29,7 @@ public final class KarnLegacyReforged extends CardImpl {
     public KarnLegacyReforged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

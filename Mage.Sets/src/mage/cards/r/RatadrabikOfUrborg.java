@@ -41,7 +41,7 @@ public final class RatadrabikOfUrborg extends CardImpl {
     public RatadrabikOfUrborg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -82,7 +82,7 @@ class RatadrabikOfUrborgEffect extends OneShotEffect {
                 "except it's not legendary and it's a 2/2 black Zombie in addition to its other colors and types.";
     }
 
-    public RatadrabikOfUrborgEffect(final RatadrabikOfUrborgEffect effect) {
+    private RatadrabikOfUrborgEffect(final RatadrabikOfUrborgEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class RatadrabikOfUrborgEffect extends OneShotEffect {
             return false;
         }
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false,1,false,false,null,2,2,false);
-        effect.setAdditionalSubType(SubType.ZOMBIE);
+        effect.withAdditionalSubType(SubType.ZOMBIE);
         effect.setIsntLegendary(true);
         effect.setTargetPointer(new FixedTarget(copyFrom.getId(),game));
         ObjectColor colors = copyFrom.getColor();

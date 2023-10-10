@@ -27,7 +27,7 @@ public final class GerrardsHourglassPendant extends CardImpl {
 
     public GerrardsHourglassPendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
@@ -61,7 +61,7 @@ class GerrardsHourglassPendantSkipExtraTurnsEffect extends ReplacementEffectImpl
         staticText = "If a player would begin an extra turn, that player skips that turn instead";
     }
 
-    public GerrardsHourglassPendantSkipExtraTurnsEffect(final GerrardsHourglassPendantSkipExtraTurnsEffect effect) {
+    private GerrardsHourglassPendantSkipExtraTurnsEffect(final GerrardsHourglassPendantSkipExtraTurnsEffect effect) {
         super(effect);
     }
 

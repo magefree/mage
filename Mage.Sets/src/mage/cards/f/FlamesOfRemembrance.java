@@ -61,7 +61,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
         this.staticText = "Exile top X cards of your library, where X is the number of lore counters on {this}. Until end of turn you play cards exile this way";
     }
 
-    public FlamesOfRemembranceExileEffect(final FlamesOfRemembranceExileEffect effect) {
+    private FlamesOfRemembranceExileEffect(final FlamesOfRemembranceExileEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -95,7 +95,7 @@ class FlamesOfRemembranceMayPlayExiledEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    public FlamesOfRemembranceMayPlayExiledEffect(final FlamesOfRemembranceMayPlayExiledEffect effect) {
+    private FlamesOfRemembranceMayPlayExiledEffect(final FlamesOfRemembranceMayPlayExiledEffect effect) {
         super(effect);
     }
 

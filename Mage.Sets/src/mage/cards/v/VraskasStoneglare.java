@@ -56,7 +56,7 @@ class VraskasStoneglareEffect extends OneShotEffect {
                 + "You gain life equal to its toughness";
     }
 
-    public VraskasStoneglareEffect(final VraskasStoneglareEffect effect) {
+    private VraskasStoneglareEffect(final VraskasStoneglareEffect effect) {
         super(effect);
     }
 

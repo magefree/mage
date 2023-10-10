@@ -20,7 +20,7 @@ public final class WandOfTheElementsFirstToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WandOfTheElementsFirstToken(final WandOfTheElementsFirstToken token) {
+    protected WandOfTheElementsFirstToken(final WandOfTheElementsFirstToken token) {
         super(token);
     }
 

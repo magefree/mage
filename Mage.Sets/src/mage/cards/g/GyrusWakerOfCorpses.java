@@ -42,7 +42,7 @@ public final class GyrusWakerOfCorpses extends CardImpl {
     public GyrusWakerOfCorpses(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -75,7 +75,7 @@ class GyrusWakerOfCorpsesEffect extends OneShotEffect {
         this.staticText = "exile target creature card with lesser power from your graveyard. If you do, create a token that's a copy of that card and that's tapped and attacking. Exile the token at the end of combat.";
     }
 
-    public GyrusWakerOfCorpsesEffect(final GyrusWakerOfCorpsesEffect effect) {
+    private GyrusWakerOfCorpsesEffect(final GyrusWakerOfCorpsesEffect effect) {
         super(effect);
     }
 

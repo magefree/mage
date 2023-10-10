@@ -56,7 +56,7 @@ class LookAtRandomCardEffect extends OneShotEffect {
         this.staticText = "Look at a card at random in target player's hand";
     }
 
-    public LookAtRandomCardEffect(final LookAtRandomCardEffect effect) {
+    private LookAtRandomCardEffect(final LookAtRandomCardEffect effect) {
         super(effect);
     }
 

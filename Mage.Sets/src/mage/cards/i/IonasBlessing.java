@@ -69,7 +69,7 @@ class IonasBlessingEffect extends ContinuousEffectImpl {
         staticText = ", and can block an additional creature each combat";
     }
 
-    public IonasBlessingEffect(final IonasBlessingEffect effect) {
+    private IonasBlessingEffect(final IonasBlessingEffect effect) {
         super(effect);
     }
 

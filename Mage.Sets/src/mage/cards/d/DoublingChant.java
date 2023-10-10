@@ -52,7 +52,7 @@ class DoublingChantEffect extends OneShotEffect {
                 "Put those cards onto the battlefield, then shuffle";
     }
 
-    public DoublingChantEffect(final DoublingChantEffect effect) {
+    private DoublingChantEffect(final DoublingChantEffect effect) {
         super(effect);
     }
 

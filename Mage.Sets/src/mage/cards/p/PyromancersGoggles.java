@@ -28,7 +28,7 @@ public final class PyromancersGoggles extends CardImpl {
 
     public PyromancersGoggles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {R}.
         Ability ability = new RedManaAbility();
@@ -67,7 +67,7 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When that mana is used to cast a red instant or sorcery spell, ");
     }
 
-    public PyromancersGogglesTriggeredAbility(final PyromancersGogglesTriggeredAbility ability) {
+    private PyromancersGogglesTriggeredAbility(final PyromancersGogglesTriggeredAbility ability) {
         super(ability);
         this.abilityOriginalId = ability.abilityOriginalId;
     }

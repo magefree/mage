@@ -5,12 +5,12 @@ import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
-import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -47,6 +47,7 @@ public class Spell extends StackObjectImpl implements Card {
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
 
     private final Card card;
+    private ManaCosts<ManaCost> manaCost;
     private final ObjectColor color;
     private final ObjectColor frameColor;
     private final FrameStyle frameStyle;
@@ -61,7 +62,9 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean faceDown;
     private boolean countered;
     private boolean resolving = false;
-    private UUID commandedBy = null; // for Word of Command
+    private UUID commandedByPlayerId = null; // controller of the spell resolve, example: Word of Command
+    private String commandedByInfo; // info about spell commanded, e.g. source
+    private boolean prototyped;
     private int startingLoyalty;
     private int startingDefense;
 
@@ -75,12 +78,17 @@ public class Spell extends StackObjectImpl implements Card {
         Card affectedCard = card;
 
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.TRANSFORMED && affectedCard.getSecondCardFace() != null) {
+        if (ability.getSpellAbilityCastMode().isTransformed() && affectedCard.getSecondCardFace() != null) {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
+        if (ability instanceof PrototypeAbility){
+            affectedCard = ((PrototypeAbility)ability).prototypeCardSpell(card);
+            this.prototyped = true;
+        }
 
         this.card = affectedCard;
+        this.manaCost = this.card.getManaCost().copy();
         this.color = affectedCard.getColor(null).copy();
         this.frameColor = affectedCard.getFrameColor(null).copy();
         this.frameStyle = affectedCard.getFrameStyle();
@@ -90,6 +98,12 @@ public class Spell extends StackObjectImpl implements Card {
         this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
         this.ability.setControllerId(controllerId);
+
+        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MORPH){
+            this.faceDown = true;
+            this.getColor(game).setColor(null);
+            game.getState().getCreateMageObjectAttribute(this.getCard(), game).getSubtype().clear();
+        }
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             // if this spell is going to be a copy, these abilities will be copied in copySpell
             if (!isCopy) {
@@ -103,12 +117,13 @@ public class Spell extends StackObjectImpl implements Card {
         } else {
             spellAbilities.add(ability);
         }
+
         this.controllerId = controllerId;
         this.fromZone = fromZone;
         this.countered = false;
     }
 
-    public Spell(final Spell spell) {
+    protected Spell(final Spell spell) {
         this.id = spell.id;
         this.zoneChangeCounter = spell.zoneChangeCounter;
         for (SpellAbility spellAbility : spell.spellAbilities) {
@@ -122,6 +137,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.card = spell.card.copy();
 
         this.fromZone = spell.fromZone;
+        this.manaCost = spell.getManaCost().copy();
         this.color = spell.color.copy();
         this.frameColor = spell.color.copy();
         this.frameStyle = spell.frameStyle;
@@ -132,10 +148,12 @@ public class Spell extends StackObjectImpl implements Card {
         this.faceDown = spell.faceDown;
         this.countered = spell.countered;
         this.resolving = spell.resolving;
-        this.commandedBy = spell.commandedBy;
+        this.commandedByPlayerId = spell.commandedByPlayerId;
+        this.commandedByInfo = spell.commandedByInfo;
 
         this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
+        this.prototyped = spell.prototyped;
         this.startingLoyalty = spell.startingLoyalty;
         this.startingDefense = spell.startingDefense;
     }
@@ -180,11 +198,8 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     public String getSpellCastText(Game game) {
-        for (Ability spellAbility : getAbilities()) {
-            if (spellAbility instanceof MorphAbility
-                    && ((AlternativeSourceCosts) spellAbility).isActivated(getSpellAbility(), game)) {
-                return "a card face down";
-            }
+        if (this.getSpellAbility() instanceof MorphAbility) {
+            return "a card face down";
         }
 
         if (card instanceof AdventureCardSpell) {
@@ -193,8 +208,8 @@ public class Spell extends StackObjectImpl implements Card {
                     + " as Adventure spell of " + GameLog.getColoredObjectIdName(adventureCard);
         }
 
-        if (card instanceof ModalDoubleFacesCardHalf) {
-            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getMainCard();
+        if (card instanceof ModalDoubleFacedCardHalf) {
+            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getMainCard();
             return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), mdfCard)
                     + " as mdf side of " + GameLog.getColoredObjectIdName(mdfCard);
         }
@@ -240,12 +255,16 @@ public class Spell extends StackObjectImpl implements Card {
             return false;
         }
         this.resolving = true;
-        if (commandedBy != null && !commandedBy.equals(getControllerId())) {
-            Player turnController = game.getPlayer(commandedBy);
-            if (turnController != null) {
-                turnController.controlPlayersTurn(game, controller.getId());
+
+        // setup new turn controller for spell's resolve, example: Word of Command
+        // original controller will be reset after spell's resolve
+        if (commandedByPlayerId != null && !commandedByPlayerId.equals(getControllerId())) {
+            Player newTurnController = game.getPlayer(commandedByPlayerId);
+            if (newTurnController != null) {
+                newTurnController.controlPlayersTurn(game, controller.getId(), commandedByInfo);
             }
         }
+
         if (this.isInstantOrSorcery(game)) {
             int index = 0;
             result = false;
@@ -308,7 +327,7 @@ public class Spell extends StackObjectImpl implements Card {
                 if (isCopy()) {
                     Token token = CopyTokenFunction.createTokenCopy(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-                    if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
+                    if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false)) {
                         permId = token.getLastAddedTokenIds().stream().findFirst().orElse(null);
                         flag = true;
                     } else {
@@ -375,7 +394,7 @@ public class Spell extends StackObjectImpl implements Card {
         } else if (isCopy()) {
             Token token = CopyTokenFunction.createTokenCopy(card, game, this);
             // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
+            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
             return true;
         } else {
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
@@ -568,8 +587,8 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
-        return card.getSuperType();
+    public List<SuperType> getSuperType(Game game) {
+        return card.getSuperType(game);
     }
 
     public List<SpellAbility> getSpellAbilities() {
@@ -624,8 +643,11 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
-        return card.getManaCost();
+        return this.manaCost;
     }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) { this.manaCost = costs.copy(); }
 
     /**
      * 202.3b When calculating the converted mana cost of an object with an {X}
@@ -644,7 +666,7 @@ public class Spell extends StackObjectImpl implements Card {
         for (SpellAbility spellAbility : spellAbilities) {
             cmc += spellAbility.getConvertedXManaCost(getCard());
         }
-        cmc += getCard().getManaCost().manaValue();
+        cmc += this.manaCost.manaValue();
         return cmc;
     }
 
@@ -768,7 +790,7 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public Card getSecondCardFace() {
-        return null;
+        return card.getSecondCardFace();
     }
 
     @Override
@@ -779,6 +801,10 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean isNightCard() {
         return false;
+    }
+
+    public boolean isPrototyped() {
+        return prototyped;
     }
 
     @Override
@@ -1109,25 +1135,37 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public List<UUID> getAttachments() {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
     public boolean addAttachment(UUID permanentId, Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
     public boolean removeAttachment(UUID permanentId, Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
-    public void setCommandedBy(UUID playerId) {
-        this.commandedBy = playerId;
+    /**
+     * Add temporary turn controller while resolving (e.g. all choices will be made by another player)
+     * Example: Word of Command
+     *
+     * @param newTurnControllerId
+     * @param info                additional info for game logs
+     */
+    public void setCommandedBy(UUID newTurnControllerId, String info) {
+        this.commandedByPlayerId = newTurnControllerId;
+        this.commandedByInfo = info;
     }
 
-    public UUID getCommandedBy() {
-        return commandedBy;
+    public UUID getCommandedByPlayerId() {
+        return commandedByPlayerId;
+    }
+
+    public String getCommandedByInfo() {
+        return commandedByInfo == null ? "" : commandedByInfo;
     }
 
     @Override

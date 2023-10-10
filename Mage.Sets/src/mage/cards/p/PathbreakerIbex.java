@@ -53,7 +53,7 @@ class PathbreakerIbexEffect extends OneShotEffect {
         this.staticText = "creatures you control gain trample and get +X/+X until end of turn, where X is the greatest power among creatures you control";
     }
 
-    public PathbreakerIbexEffect(final PathbreakerIbexEffect effect) {
+    private PathbreakerIbexEffect(final PathbreakerIbexEffect effect) {
         super(effect);
     }
 

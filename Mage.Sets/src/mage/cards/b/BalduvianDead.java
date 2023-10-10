@@ -20,7 +20,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.BalduvianToken;
+import mage.game.permanent.token.GravebornToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -41,7 +41,6 @@ public final class BalduvianDead extends CardImpl {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
         ability.addCost(new ExileFromGraveCost(target));
         this.addAbility(ability);
-
     }
 
     private BalduvianDead(final BalduvianDead card) {
@@ -61,7 +60,7 @@ class BalduvianDeadEffect extends OneShotEffect {
         this.staticText = "Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step";
     }
 
-    public BalduvianDeadEffect(final BalduvianDeadEffect effect) {
+    private BalduvianDeadEffect(final BalduvianDeadEffect effect) {
         super(effect);
     }
 
@@ -72,7 +71,7 @@ class BalduvianDeadEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect = new CreateTokenEffect(new BalduvianToken());
+        CreateTokenEffect effect = new CreateTokenEffect(new GravebornToken());
         effect.apply(game, source);
         for (UUID tokenId : effect.getLastAddedTokenIds()) {
             Permanent tokenPermanent = game.getPermanent(tokenId);

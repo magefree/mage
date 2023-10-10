@@ -28,7 +28,7 @@ public final class MazirekKraulDeathPriest extends CardImpl {
 
     public MazirekKraulDeathPriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -58,7 +58,7 @@ class PlayerSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player sacrifices another permanent, ");
     }
 
-    public PlayerSacrificesPermanentTriggeredAbility(final PlayerSacrificesPermanentTriggeredAbility ability) {
+    private PlayerSacrificesPermanentTriggeredAbility(final PlayerSacrificesPermanentTriggeredAbility ability) {
         super(ability);
     }
 

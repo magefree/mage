@@ -59,7 +59,7 @@ public final class TheArchimandrite extends CardImpl {
     public TheArchimandrite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(0);
@@ -78,7 +78,7 @@ public final class TheArchimandrite extends CardImpl {
         ).setText("each Advisor, Artificer, and Monk you control gains vigilance"));
         ability.addEffect(new BoostControlledEffect(
                 TheArchimandriteValue.instance, StaticValue.get(0), Duration.EndOfTurn,
-                filter2, false, true
+                filter2, false
         ).setText("and gets +X/+0 until end of turn, where X is the amount of life you gained"));
         this.addAbility(ability);
 

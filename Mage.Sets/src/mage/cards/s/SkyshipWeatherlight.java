@@ -32,7 +32,7 @@ public final class SkyshipWeatherlight extends CardImpl {
 
     public SkyshipWeatherlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Skyship Weatherlight enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SkyshipWeatherlightEffect(), false));
@@ -71,7 +71,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
 
     }
 
-    public SkyshipWeatherlightEffect(final SkyshipWeatherlightEffect effect) {
+    private SkyshipWeatherlightEffect(final SkyshipWeatherlightEffect effect) {
         super(effect);
     }
 
@@ -111,7 +111,7 @@ class SkyshipWeatherlightEffect2 extends OneShotEffect {
         this.staticText = "Choose a card at random that was exiled with {this}. Put that card into its owner's hand";
     }
 
-    public SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {
+    private SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {
         super(effect);
     }
 

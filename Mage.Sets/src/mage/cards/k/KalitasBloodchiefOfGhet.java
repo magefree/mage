@@ -30,7 +30,7 @@ public final class KalitasBloodchiefOfGhet extends CardImpl {
 
     public KalitasBloodchiefOfGhet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -60,7 +60,7 @@ class KalitasDestroyEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. If that creature dies this way, create a black Vampire creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness";
     }
 
-    public KalitasDestroyEffect(final KalitasDestroyEffect effect) {
+    private KalitasDestroyEffect(final KalitasDestroyEffect effect) {
         super(effect);
     }
 

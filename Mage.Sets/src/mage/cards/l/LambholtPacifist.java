@@ -62,7 +62,7 @@ class LambholtPacifistEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control a creature with power 4 or greater";
     }
 
-    public LambholtPacifistEffect(final LambholtPacifistEffect effect) {
+    private LambholtPacifistEffect(final LambholtPacifistEffect effect) {
         super(effect);
     }
 

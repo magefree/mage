@@ -54,7 +54,7 @@ class EquipoiseEffect extends OneShotEffect {
         this.staticText = "for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures";
     }
 
-    public EquipoiseEffect(final EquipoiseEffect effect) {
+    private EquipoiseEffect(final EquipoiseEffect effect) {
         super(effect);
     }
 

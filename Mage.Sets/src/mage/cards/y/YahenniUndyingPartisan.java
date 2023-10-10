@@ -28,7 +28,7 @@ public final class YahenniUndyingPartisan extends CardImpl {
     public YahenniUndyingPartisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AETHERBORN);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(2);

@@ -30,7 +30,7 @@ public final class SetonKrosanProtector extends CardImpl {
     
     public SetonKrosanProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.DRUID);
 
@@ -66,7 +66,7 @@ class SetonKrosanProtectorManaEffect extends BasicManaEffect {
         this.filter = filter;
     }
 
-    public SetonKrosanProtectorManaEffect(final SetonKrosanProtectorManaEffect effect) {
+    private SetonKrosanProtectorManaEffect(final SetonKrosanProtectorManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

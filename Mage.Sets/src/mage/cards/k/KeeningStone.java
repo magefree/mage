@@ -48,7 +48,7 @@ class KeeningStoneEffect extends OneShotEffect {
         this.staticText = "Target player mills X cards, where X is the number of cards in that player's graveyard";
     }
 
-    public KeeningStoneEffect(final KeeningStoneEffect effect) {
+    private KeeningStoneEffect(final KeeningStoneEffect effect) {
         super(effect);
     }
 

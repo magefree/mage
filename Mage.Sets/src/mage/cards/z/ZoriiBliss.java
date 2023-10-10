@@ -21,7 +21,7 @@ import java.util.UUID;
 public class ZoriiBliss extends CardImpl {
     public ZoriiBliss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.REBEL);
         this.addSubType(SubType.ROGUE);
         this.power = new MageInt(3);
@@ -39,7 +39,7 @@ public class ZoriiBliss extends CardImpl {
         this.addAbility(attacksTriggeredAbility);
     }
 
-    public ZoriiBliss(final ZoriiBliss card) {
+    private ZoriiBliss(final ZoriiBliss card) {
         super(card);
     }
 

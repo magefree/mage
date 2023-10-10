@@ -71,7 +71,7 @@ class AlchemistsGambitEffect extends ReplacementEffectImpl {
         this.turnId = turnId;
     }
 
-    public AlchemistsGambitEffect(final AlchemistsGambitEffect effect) {
+    private AlchemistsGambitEffect(final AlchemistsGambitEffect effect) {
         super(effect);
         this.turnId = effect.turnId;
     }
@@ -93,6 +93,6 @@ class AlchemistsGambitEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.getState().getTurnId().equals(turnId);
+        return this.turnId != null && turnId.equals(game.getState().getExtraTurnId());
     }
 }

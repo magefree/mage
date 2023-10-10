@@ -61,7 +61,7 @@ class NotoriousThrongEffect extends OneShotEffect {
         staticText = "create X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn";
     }
 
-    public NotoriousThrongEffect(NotoriousThrongEffect effect) {
+    private NotoriousThrongEffect(final NotoriousThrongEffect effect) {
         super(effect);
     }
 

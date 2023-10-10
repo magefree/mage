@@ -30,7 +30,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Audacious Reshapers", 112, Rarity.RARE, mage.cards.a.AudaciousReshapers.class));
         cards.add(new SetCardInfo("Austere Command", 69, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Azorius Chancery", 175, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
-        cards.add(new SetCardInfo("Azorius Signet", 133, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
+        cards.add(new SetCardInfo("Azorius Signet", 133, Rarity.COMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Baleful Strix", 120, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Bedevil", 121, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Bident of Thassa", 80, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
@@ -87,6 +87,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 31, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izzet Boilerworks", 188, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Jhoira, Weatherlight Captain", 126, Rarity.MYTHIC, mage.cards.j.JhoiraWeatherlightCaptain.class));
+        cards.add(new SetCardInfo("Kayla's Music Box", 15, Rarity.RARE, mage.cards.k.KaylasMusicBox.class));
         cards.add(new SetCardInfo("Liquimetal Torque", 145, Rarity.UNCOMMON, mage.cards.l.LiquimetalTorque.class));
         cards.add(new SetCardInfo("Lithoform Engine", 146, Rarity.MYTHIC, mage.cards.l.LithoformEngine.class));
         cards.add(new SetCardInfo("Losheel, Clockwork Scholar", 73, Rarity.RARE, mage.cards.l.LosheelClockworkScholar.class));
@@ -96,7 +97,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Master Transmuter", 87, Rarity.RARE, mage.cards.m.MasterTransmuter.class));
         cards.add(new SetCardInfo("Master of Etherium", 86, Rarity.RARE, mage.cards.m.MasterOfEtherium.class));
         cards.add(new SetCardInfo("Metalwork Colossus", 147, Rarity.RARE, mage.cards.m.MetalworkColossus.class));
-        cards.add(new SetCardInfo("Mind Stone", 148, Rarity.COMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mind Stone", 148, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mirrorworks", 149, Rarity.RARE, mage.cards.m.Mirrorworks.class));
         cards.add(new SetCardInfo("Mishra, Eminent One", 1, Rarity.MYTHIC, mage.cards.m.MishraEminentOne.class));
         cards.add(new SetCardInfo("Mistvault Bridge", 189, Rarity.COMMON, mage.cards.m.MistvaultBridge.class));
@@ -121,11 +122,12 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Preordain", 92, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Prophetic Prism", 155, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 194, Rarity.UNCOMMON, mage.cards.r.RakdosCarnarium.class));
-        cards.add(new SetCardInfo("Rakdos Signet", 156, Rarity.UNCOMMON, mage.cards.r.RakdosSignet.class));
+        cards.add(new SetCardInfo("Rakdos Signet", 156, Rarity.COMMON, mage.cards.r.RakdosSignet.class));
         cards.add(new SetCardInfo("Razortide Bridge", 195, Rarity.COMMON, mage.cards.r.RazortideBridge.class));
         cards.add(new SetCardInfo("Relic of Progenitus", 157, Rarity.UNCOMMON, mage.cards.r.RelicOfProgenitus.class));
         cards.add(new SetCardInfo("Reliquary Tower", 196, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("River of Tears", 197, Rarity.RARE, mage.cards.r.RiverOfTears.class));
+        cards.add(new SetCardInfo("Rootpath Purifier", 24, Rarity.MYTHIC, mage.cards.r.RootpathPurifier.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 93, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
         cards.add(new SetCardInfo("Sanwell, Avenger Ace", 5, Rarity.RARE, mage.cards.s.SanwellAvengerAce.class));
         cards.add(new SetCardInfo("Sardian Avenger", 23, Rarity.RARE, mage.cards.s.SardianAvenger.class));

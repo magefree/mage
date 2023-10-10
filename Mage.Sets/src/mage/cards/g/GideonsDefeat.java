@@ -56,7 +56,7 @@ class GideonsDefeatEffect extends OneShotEffect {
         staticText = "Exile target white creature that's attacking or blocking. If it was a Gideon planeswalker, you gain 5 life";
     }
 
-    public GideonsDefeatEffect(final GideonsDefeatEffect effect) {
+    private GideonsDefeatEffect(final GideonsDefeatEffect effect) {
         super(effect);
     }
 

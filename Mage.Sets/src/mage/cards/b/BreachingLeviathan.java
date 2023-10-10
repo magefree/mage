@@ -70,7 +70,7 @@ class BreachingLeviathanEffect extends OneShotEffect {
         this.staticText = "tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps";
     }
 
-    public BreachingLeviathanEffect(final BreachingLeviathanEffect effect) {
+    private BreachingLeviathanEffect(final BreachingLeviathanEffect effect) {
         super(effect);
     }
 

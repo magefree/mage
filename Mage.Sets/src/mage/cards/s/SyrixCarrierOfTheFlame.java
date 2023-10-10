@@ -46,7 +46,7 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
     public SyrixCarrierOfTheFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.PHOENIX);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -97,7 +97,7 @@ class SyrixCarrierOfTheFlameCastEffect extends OneShotEffect {
         this.staticText = "you may cast {this} from your graveyard";
     }
 
-    SyrixCarrierOfTheFlameCastEffect(final SyrixCarrierOfTheFlameCastEffect effect) {
+    private SyrixCarrierOfTheFlameCastEffect(final SyrixCarrierOfTheFlameCastEffect effect) {
         super(effect);
     }
 

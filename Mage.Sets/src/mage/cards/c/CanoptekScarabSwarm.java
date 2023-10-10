@@ -14,7 +14,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.InsectColorlessToken;
+import mage.game.permanent.token.InsectColorlessArtifactToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
@@ -85,7 +85,7 @@ class CanoptekScarabSwarmEffect extends OneShotEffect {
         }
         int count = player.getGraveyard().count(filter, game);
         player.moveCards(player.getGraveyard(), Zone.EXILED, source, game);
-        new InsectColorlessToken().putOntoBattlefield(count, game, source);
+        new InsectColorlessArtifactToken().putOntoBattlefield(count, game, source);
         return true;
     }
 }

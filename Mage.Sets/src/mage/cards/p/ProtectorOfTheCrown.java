@@ -58,7 +58,7 @@ class ProtectorOfTheCrownEffect extends ReplacementEffectImpl {
         staticText = "All damage that would be dealt to you is dealt to {this} instead";
     }
 
-    ProtectorOfTheCrownEffect(final ProtectorOfTheCrownEffect effect) {
+    private ProtectorOfTheCrownEffect(final ProtectorOfTheCrownEffect effect) {
         super(effect);
     }
 

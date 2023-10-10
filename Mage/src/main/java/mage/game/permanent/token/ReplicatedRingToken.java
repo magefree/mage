@@ -11,7 +11,7 @@ public final class ReplicatedRingToken extends TokenImpl {
 
     public ReplicatedRingToken() {
         super("Replicated Ring", "colorless snow artifact token named Replicated Ring with \"{T}: Add one mana of any color.\"");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         cardType.add(CardType.ARTIFACT);
 
         this.addAbility(new AnyColorManaAbility());

@@ -67,7 +67,7 @@ class SowerOfTemptationGainControlEffect extends OneShotEffect {
         this.staticText = "gain control of target creature for as long as {this} remains on the battlefield";
     }
 
-    public SowerOfTemptationGainControlEffect(final SowerOfTemptationGainControlEffect effect) {
+    private SowerOfTemptationGainControlEffect(final SowerOfTemptationGainControlEffect effect) {
         super(effect);
     }
 

@@ -125,6 +125,7 @@ class FroghemothEffect extends OneShotEffect {
         }
         if (!cardsToExile.isEmpty()) {
             controller.moveCards(cardsToExile, Zone.EXILED, source, game);
+            game.getState().processAction(game);
             if (numCounters > 0) {
                 Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                 if (permanent != null) {

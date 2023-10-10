@@ -42,7 +42,7 @@ public final class HopeOfGhirapur extends CardImpl {
     public HopeOfGhirapur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.THOPTER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -73,18 +73,13 @@ class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Until your next turn, target player who was dealt combat damage by {this} this turn can't cast noncreature spells";
     }
 
-    public HopeOfGhirapurCantCastEffect(final HopeOfGhirapurCantCastEffect effect) {
+    private HopeOfGhirapurCantCastEffect(final HopeOfGhirapurCantCastEffect effect) {
         super(effect);
     }
 
     @Override
     public HopeOfGhirapurCantCastEffect copy() {
         return new HopeOfGhirapurCantCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -68,7 +68,7 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
     }
 
-    public AkoumFirebirdLandfallAbility(final AkoumFirebirdLandfallAbility ability) {
+    private AkoumFirebirdLandfallAbility(final AkoumFirebirdLandfallAbility ability) {
         super(ability);
     }
 

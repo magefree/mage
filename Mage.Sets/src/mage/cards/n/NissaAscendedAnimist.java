@@ -24,7 +24,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.PhyrexianHorrorGreenToken;
-import mage.game.permanent.token.PhyrexianHorrorRedToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -39,7 +38,7 @@ public final class NissaAscendedAnimist extends CardImpl {
     public NissaAscendedAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}{G/P}{G/P}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
         this.setStartingLoyalty(7);
 
@@ -58,7 +57,7 @@ public final class NissaAscendedAnimist extends CardImpl {
         ability = new LoyaltyAbility(new BoostControlledEffect(
                 xValue, xValue, Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE,
-                false, true
+                false
         ).setText("until end of turn, creatures you control get +1/+1 for each Forest you control"), -7);
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,

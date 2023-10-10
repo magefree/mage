@@ -30,7 +30,7 @@ public final class GaviNestWarden extends CardImpl {
     public GaviNestWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -96,9 +96,9 @@ class CyclingZeroCostEffect extends CostModificationEffectImpl {
         if (player == null || !player.chooseUse(outcome, "Pay {0} to cycle this card?", source, game)) {
             return true;
         }
-        abilityToModify.getManaCostsToPay().clear();
+        abilityToModify.clearManaCostsToPay();
         abilityToModify.getCosts().removeIf(cost -> !CyclingDiscardCost.class.isInstance(cost));
-        abilityToModify.getManaCostsToPay().add(new GenericManaCost(0));
+        abilityToModify.addManaCostsToPay(new GenericManaCost(0));
         return true;
     }
 

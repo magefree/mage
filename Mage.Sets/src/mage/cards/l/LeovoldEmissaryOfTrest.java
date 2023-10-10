@@ -1,20 +1,21 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.BecomesTargetControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.TargetOfOpponentsSpellOrAbilityTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
 
     public LeovoldEmissaryOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(3);
@@ -34,7 +35,8 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeovoldEmissaryOfTrestEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
-        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        this.addAbility(new BecomesTargetControllerTriggeredAbility(new DrawCardSourceControllerEffect(1),
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.NONE, true));
     }
 
     private LeovoldEmissaryOfTrest(final LeovoldEmissaryOfTrest card) {
@@ -54,7 +56,7 @@ class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Each opponent can't draw more than one card each turn";
     }
 
-    public LeovoldEmissaryOfTrestEffect(final LeovoldEmissaryOfTrestEffect effect) {
+    private LeovoldEmissaryOfTrestEffect(final LeovoldEmissaryOfTrestEffect effect) {
         super(effect);
     }
 
@@ -66,11 +68,6 @@ class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

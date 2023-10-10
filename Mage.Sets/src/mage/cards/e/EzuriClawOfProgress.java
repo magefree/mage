@@ -36,7 +36,7 @@ public final class EzuriClawOfProgress extends CardImpl {
 
     public EzuriClawOfProgress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
@@ -71,7 +71,7 @@ class EzuriClawOfProgressEffect extends OneShotEffect {
         this.staticText = "put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have";
     }
 
-    public EzuriClawOfProgressEffect(final EzuriClawOfProgressEffect effect) {
+    private EzuriClawOfProgressEffect(final EzuriClawOfProgressEffect effect) {
         super(effect);
     }
 

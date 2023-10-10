@@ -24,7 +24,7 @@ public final class KasetoOrochiArchmage extends CardImpl {
 
     public KasetoOrochiArchmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -53,7 +53,7 @@ class KasetoEffect extends OneShotEffect {
         staticText = "Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn";
     }
 
-    public KasetoEffect(final KasetoEffect effect) {
+    private KasetoEffect(final KasetoEffect effect) {
         super(effect);
     }
 

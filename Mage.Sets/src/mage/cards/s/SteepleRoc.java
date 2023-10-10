@@ -32,7 +32,7 @@ public final class SteepleRoc extends CardImpl {
 
     }
 
-    public SteepleRoc (final SteepleRoc card) {
+    private SteepleRoc(final SteepleRoc card) {
         super(card);
     }
 

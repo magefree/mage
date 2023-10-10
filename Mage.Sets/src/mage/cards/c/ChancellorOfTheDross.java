@@ -57,7 +57,7 @@ class ChancellorOfTheDrossDelayedTriggeredAbility extends DelayedTriggeredAbilit
         super(new ChancellorOfTheDrossEffect());
     }
 
-    ChancellorOfTheDrossDelayedTriggeredAbility(ChancellorOfTheDrossDelayedTriggeredAbility ability) {
+    private ChancellorOfTheDrossDelayedTriggeredAbility(final ChancellorOfTheDrossDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,7 +83,7 @@ class ChancellorOfTheDrossEffect extends OneShotEffect {
         staticText = "each opponent loses 3 life, then you gain life equal to the life lost this way";
     }
 
-    ChancellorOfTheDrossEffect(ChancellorOfTheDrossEffect effect) {
+    private ChancellorOfTheDrossEffect(final ChancellorOfTheDrossEffect effect) {
         super(effect);
     }
 

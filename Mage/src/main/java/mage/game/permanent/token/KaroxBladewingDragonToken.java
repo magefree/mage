@@ -13,10 +13,10 @@ import mage.constants.SuperType;
 public final class KaroxBladewingDragonToken extends TokenImpl {
 
     public KaroxBladewingDragonToken() {
-        super("Karox Bladewing Token", "legendary 4/4 red Dragon creature token with flying");
+        super("Karox Bladewing", "Karox Bladewing, a legendary 4/4 red Dragon creature token with flying");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.DRAGON);
         this.color.setRed(true);
@@ -24,7 +24,7 @@ public final class KaroxBladewingDragonToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public KaroxBladewingDragonToken(final KaroxBladewingDragonToken token) {
+    protected KaroxBladewingDragonToken(final KaroxBladewingDragonToken token) {
         super(token);
     }
 

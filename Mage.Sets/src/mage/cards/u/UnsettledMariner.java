@@ -1,21 +1,16 @@
 package mage.cards.u;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.TargetOfOpponentsSpellOrAbilityTriggeredAbility;
+import mage.abilities.common.BecomesTargetControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -36,7 +31,8 @@ public final class UnsettledMariner extends CardImpl {
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls,
         // counter that spell or ability unless its controller pays {1}.
-        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1))));
+        this.addAbility(new BecomesTargetControllerTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)),
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.SPELL, false));
     }
 
     private UnsettledMariner(final UnsettledMariner card) {

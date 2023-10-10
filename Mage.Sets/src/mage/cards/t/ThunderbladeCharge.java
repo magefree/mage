@@ -13,7 +13,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
@@ -34,10 +36,12 @@ public final class ThunderbladeCharge extends CardImpl {
         // Whenever one or more creatures you control deal combat damage to a player, 
         // if Thunderblade Charge is in your graveyard, you may pay {2}{R}{R}{R}. 
         // If you do, you may cast it without paying its mana cost.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.GRAVEYARD,
-                new DoIfCostPaid(new ThunderbladeChargeCastEffect(), new ManaCostsImpl<>("{2}{R}{R}{R}"))
-                        .setText("if {this} is in your graveyard, you may pay {2}{R}{R}{R}. "
-                                + "If you do, you may cast it without paying its mana cost")));
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+            Zone.GRAVEYARD,
+            new DoIfCostPaid(new ThunderbladeChargeCastEffect(), new ManaCostsImpl<>("{2}{R}{R}{R}"))
+                    .setText("if {this} is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost"),
+            StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.NONE, false)
+        );
     }
 
     private ThunderbladeCharge(final ThunderbladeCharge card) {
@@ -57,7 +61,7 @@ class ThunderbladeChargeCastEffect extends OneShotEffect {
         this.staticText = "you may cast {this} without paying its mana cost";
     }
 
-    public ThunderbladeChargeCastEffect(final ThunderbladeChargeCastEffect effect) {
+    private ThunderbladeChargeCastEffect(final ThunderbladeChargeCastEffect effect) {
         super(effect);
     }
 

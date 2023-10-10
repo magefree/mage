@@ -48,7 +48,7 @@ public final class StabWound extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
-    public StabWound (final StabWound card) {
+    private StabWound(final StabWound card) {
         super(card);
     }
 

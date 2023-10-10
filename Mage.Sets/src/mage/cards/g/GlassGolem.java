@@ -22,7 +22,7 @@ public final class GlassGolem extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GlassGolem (final GlassGolem card) {
+    private GlassGolem(final GlassGolem card) {
         super(card);
     }
 

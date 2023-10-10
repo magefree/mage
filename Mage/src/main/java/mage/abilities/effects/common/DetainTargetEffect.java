@@ -10,8 +10,6 @@ import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
-import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -32,12 +30,7 @@ public class DetainTargetEffect extends OneShotEffect {
         super(Outcome.LoseAbility);
     }
 
-    public DetainTargetEffect(String ruleText) {
-        super(Outcome.LoseAbility);
-        staticText = ruleText;
-    }
-
-    public DetainTargetEffect(final DetainTargetEffect effect) {
+    protected DetainTargetEffect(final DetainTargetEffect effect) {
         super(effect);
     }
 
@@ -56,8 +49,7 @@ public class DetainTargetEffect extends OneShotEffect {
                 }
             }
         }
-        DetainRestrictionEffect effect = new DetainRestrictionEffect();
-        game.addEffect(effect, source);
+        game.addEffect(new DetainRestrictionEffect(), source);
         return true;
     }
 
@@ -66,40 +58,24 @@ public class DetainTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-
-        if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-            if (target.getMaxNumberOfTargets() == 1) {
-                sb.append("detain target ").append(target.getTargetName());
-            } else {
-                sb.append("detain ").append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
-            }
-        } else {
-            sb.append("detain up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
-        }
-        sb.append(". <i>(Until your next turn, ");
-        boolean plural = target.getMaxNumberOfTargets() > 1;
-        sb.append(plural ? "those " : "that ");
-        sb.append(target.getTargetName().contains("creature") ? "creature" : "permanent");
-        if (plural) {
-            sb.append('s');
-        }
-        sb.append(" can't attack or block and ");
-        sb.append(plural ? "their" : "its");
-        sb.append(" activated abilities can't be activated.)</i>");
-        return sb.toString();
+        String description = getTargetPointer().describeTargets(mode.getTargets(), "that creature");
+        boolean plural = getTargetPointer().isPlural(mode.getTargets());
+        String reminder = ". <i>(Until your next turn, " + (plural ? "those " : "that ")
+                + (description.contains("creature") ? "creature" : "permanent") + (plural ? "s" : "")
+                + " can't attack or block and " + (plural ? "their" : "its")
+                + " activated abilities can't be activated.)</i>";
+        return "detain " + description + reminder;
     }
 }
 
 class DetainRestrictionEffect extends RestrictionEffect {
 
-    public DetainRestrictionEffect() {
+    DetainRestrictionEffect() {
         super(Duration.Custom);
         staticText = "";
     }
 
-    public DetainRestrictionEffect(final DetainRestrictionEffect effect) {
+    private DetainRestrictionEffect(final DetainRestrictionEffect effect) {
         super(effect);
     }
 

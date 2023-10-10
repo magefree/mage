@@ -29,7 +29,7 @@ public final class AshiokNightmareWeaver extends CardImpl {
 
     public AshiokNightmareWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASHIOK);
 
         this.setStartingLoyalty(3);
@@ -64,7 +64,7 @@ class AshiokNightmareWeaverExileEffect extends OneShotEffect {
         this.staticText = "Exile the top three cards of target opponent's library";
     }
 
-    public AshiokNightmareWeaverExileEffect(final AshiokNightmareWeaverExileEffect effect) {
+    private AshiokNightmareWeaverExileEffect(final AshiokNightmareWeaverExileEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
         this.staticText = "Put a creature card with mana value X exiled with {this} onto the battlefield under your control. That creature is a Nightmare in addition to its other types";
     }
 
-    public AshiokNightmareWeaverPutIntoPlayEffect(final AshiokNightmareWeaverPutIntoPlayEffect effect) {
+    private AshiokNightmareWeaverPutIntoPlayEffect(final AshiokNightmareWeaverPutIntoPlayEffect effect) {
         super(effect);
     }
 
@@ -146,7 +146,7 @@ class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
         this.staticText = "Exile all cards from all opponents' hands and graveyards";
     }
 
-    public AshiokNightmareWeaverExileAllEffect(final AshiokNightmareWeaverExileAllEffect effect) {
+    private AshiokNightmareWeaverExileAllEffect(final AshiokNightmareWeaverExileAllEffect effect) {
         super(effect);
     }
 

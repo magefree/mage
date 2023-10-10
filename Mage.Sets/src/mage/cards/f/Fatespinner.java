@@ -61,7 +61,7 @@ class FatespinnerChooseEffect extends OneShotEffect {
         staticText = "that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.";
     }
 
-    public FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {
+    private FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
         this.phase = phase;
     }
 
-    public FatespinnerSkipEffect(final FatespinnerSkipEffect effect) {
+    private FatespinnerSkipEffect(final FatespinnerSkipEffect effect) {
         super(effect);
         this.phase = effect.phase;
     }

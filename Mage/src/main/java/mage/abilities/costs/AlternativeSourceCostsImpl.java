@@ -67,14 +67,14 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
                 throw new IllegalArgumentException("source card not found");
             }
         }
-        ability.getManaCostsToPay().clear();
-        ability.getCosts().clear();
+        ability.clearManaCostsToPay();
+        ability.clearCosts();
         for (Iterator<Cost> it = ((Costs<Cost>) alternativeCost).iterator(); it.hasNext(); ) {
             Cost cost = it.next();
             if (cost instanceof ManaCost) {
-                ability.getManaCostsToPay().add((ManaCost) cost.copy());
+                ability.addManaCostsToPay((ManaCost) cost.copy());
             } else {
-                ability.getCosts().add(cost.copy());
+                ability.addCost(cost.copy());
             }
         }
         return true;

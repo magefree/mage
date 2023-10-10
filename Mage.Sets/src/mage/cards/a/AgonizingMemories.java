@@ -48,7 +48,7 @@ class AgonizingMemoriesEffect extends OneShotEffect {
         this.staticText = "Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.";
     }
 
-    public AgonizingMemoriesEffect(final AgonizingMemoriesEffect effect) {
+    private AgonizingMemoriesEffect(final AgonizingMemoriesEffect effect) {
         super(effect);
     }
 

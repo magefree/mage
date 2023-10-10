@@ -21,7 +21,6 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -63,8 +62,8 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         }
 
         public String getReminder() {
-            return "as you cast this spell, you may tap two untapped creatures you control " +
-                    "that share a color with it. When you do, copy it" + message;
+            return "As you cast this spell, you may tap two untapped creatures you control " +
+                    "that share a color with it. When you do, copy it" + message + ".";
         }
     }
 
@@ -91,7 +90,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         this.addSubAbility(new ConspireTriggeredAbility(conspireId));
     }
 
-    public ConspireAbility(final ConspireAbility ability) {
+    protected ConspireAbility(final ConspireAbility ability) {
         super(ability);
         this.conspireId = ability.conspireId;
         this.addedById = ability.addedById;
@@ -132,12 +131,11 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
             return;
         }
         ability.getAllEffects().setValue("ConspireActivation" + conspireId + addedById, true);
-        for (Iterator<Cost> it = ((Costs<Cost>) conspireCost).iterator(); it.hasNext(); ) {
-            Cost cost = (Cost) it.next();
+        for (Cost cost : (Costs<Cost>) conspireCost) {
             if (cost instanceof ManaCostsImpl) {
-                ability.getManaCostsToPay().add((ManaCostsImpl<?>) cost.copy());
+                ability.addManaCostsToPay((ManaCostsImpl<?>) cost.copy());
             } else {
-                ability.getCosts().add(cost.copy());
+                ability.addCost(cost.copy());
             }
         }
     }

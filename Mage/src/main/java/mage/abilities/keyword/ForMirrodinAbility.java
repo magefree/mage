@@ -14,7 +14,7 @@ public class ForMirrodinAbility extends EntersBattlefieldTriggeredAbility {
         super(new CreateTokenAttachSourceEffect(new RebelRedToken()));
     }
 
-    public ForMirrodinAbility(final ForMirrodinAbility ability) {
+    protected ForMirrodinAbility(final ForMirrodinAbility ability) {
         super(ability);
     }
 

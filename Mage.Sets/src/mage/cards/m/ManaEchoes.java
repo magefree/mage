@@ -48,7 +48,7 @@ class ManaEchoesEffect extends OneShotEffect {
         this.staticText = "you may add X mana of {C}, where X is the number of creatures you control that share a creature type with it";
     }
 
-    public ManaEchoesEffect(final ManaEchoesEffect effect) {
+    private ManaEchoesEffect(final ManaEchoesEffect effect) {
         super(effect);
     }
 

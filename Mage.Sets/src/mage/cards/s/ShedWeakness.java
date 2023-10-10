@@ -50,7 +50,7 @@ class MayRemoveM1M1CouterTargetEffect extends OneShotEffect {
         this.staticText = "You may remove a -1/-1 counter from it.";
     }
 
-    public MayRemoveM1M1CouterTargetEffect(final MayRemoveM1M1CouterTargetEffect effect) {
+    private MayRemoveM1M1CouterTargetEffect(final MayRemoveM1M1CouterTargetEffect effect) {
         super(effect);
         this.staticText = "You may remove a -1/-1 counter from it.";
     }

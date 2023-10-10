@@ -29,7 +29,7 @@ public final class StitcherGeralf extends CardImpl {
 
     public StitcherGeralf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -59,7 +59,7 @@ class StitcherGeralfEffect extends OneShotEffect {
         this.staticText = "Each player mills three cards. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way";
     }
 
-    public StitcherGeralfEffect(final StitcherGeralfEffect effect) {
+    private StitcherGeralfEffect(final StitcherGeralfEffect effect) {
         super(effect);
     }
 

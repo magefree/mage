@@ -39,7 +39,7 @@ public final class RonaDiscipleOfGix extends CardImpl {
     public RonaDiscipleOfGix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
@@ -81,7 +81,7 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
         staticText = "You may cast nonland cards exiled with {this}";
     }
 
-    public RonaDiscipleOfGixPlayNonLandEffect(final RonaDiscipleOfGixPlayNonLandEffect effect) {
+    private RonaDiscipleOfGixPlayNonLandEffect(final RonaDiscipleOfGixPlayNonLandEffect effect) {
         super(effect);
     }
 
@@ -119,7 +119,7 @@ class RonaDiscipleOfGixExileEffect extends OneShotEffect {
         this.staticText = "Exile the top card of your library";
     }
 
-    public RonaDiscipleOfGixExileEffect(final RonaDiscipleOfGixExileEffect effect) {
+    private RonaDiscipleOfGixExileEffect(final RonaDiscipleOfGixExileEffect effect) {
         super(effect);
     }
 

@@ -21,7 +21,7 @@ public final class MasakoTheHumorless extends CardImpl {
 
     public MasakoTheHumorless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 
@@ -51,7 +51,7 @@ class BlockTappedEffect extends AsThoughEffectImpl {
         staticText ="Tapped creatures you control can block as though they were untapped";
     }
 
-    public BlockTappedEffect(final BlockTappedEffect effect) {
+    private BlockTappedEffect(final BlockTappedEffect effect) {
         super(effect);
     }
 

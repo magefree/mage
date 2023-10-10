@@ -43,7 +43,7 @@ class MindmoilEffect extends OneShotEffect {
         staticText = "put the cards in your hand on the bottom of your library in any order, then draw that many cards";
     }
 
-    public MindmoilEffect(final MindmoilEffect effect) {
+    private MindmoilEffect(final MindmoilEffect effect) {
         super(effect);
     }
 

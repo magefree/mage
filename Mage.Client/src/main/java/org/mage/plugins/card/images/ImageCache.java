@@ -86,6 +86,7 @@ public final class ImageCache {
                         tokenFile = getTFile(path);
 
                         // try token from card
+                        // TODO: return image from another set on empty image?
                         if (tokenFile == null || !tokenFile.exists()) {
                             CardDownloadData tempInfo = new CardDownloadData(info);
                             tempInfo.setToken(false);

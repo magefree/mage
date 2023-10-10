@@ -52,7 +52,7 @@ public class MariTheKillingQuill extends CardImpl {
     public MariTheKillingQuill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.VAMPIRE, SubType.ASSASSIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -165,7 +165,7 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MariTheKillingQuillExileCreatureEffect(), false);
     }
 
-    public MariTheKillingQuillCreatureDiesAbility(final MariTheKillingQuillCreatureDiesAbility ability) {
+    private MariTheKillingQuillCreatureDiesAbility(final MariTheKillingQuillCreatureDiesAbility ability) {
         super(ability);
     }
 
@@ -209,7 +209,7 @@ class MariTheKillingQuillExileCreatureEffect extends OneShotEffect {
         this.staticText = "exile it with a hit counter on it";
     }
 
-    public MariTheKillingQuillExileCreatureEffect(final MariTheKillingQuillExileCreatureEffect effect) {
+    private MariTheKillingQuillExileCreatureEffect(final MariTheKillingQuillExileCreatureEffect effect) {
         super(effect);
     }
 

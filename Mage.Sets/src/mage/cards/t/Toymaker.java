@@ -68,7 +68,7 @@ class ToymakerEffect extends ContinuousEffectImpl {
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }
 
-    public ToymakerEffect(final ToymakerEffect effect) {
+    private ToymakerEffect(final ToymakerEffect effect) {
         super(effect);
     }
 

@@ -21,12 +21,12 @@ public final class EldraziSliverToken extends TokenImpl {
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
     }
 
-    public EldraziSliverToken(final EldraziSliverToken token) {
+    protected EldraziSliverToken(final EldraziSliverToken token) {
         super(token);
     }
 
     @Override
     public EldraziSliverToken copy() {
-        return new EldraziSliverToken(this); //To change body of generated methods, choose Tools | Templates.
+        return new EldraziSliverToken(this);
     }
 }

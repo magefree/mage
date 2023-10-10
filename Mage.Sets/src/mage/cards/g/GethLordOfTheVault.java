@@ -35,7 +35,7 @@ public final class GethLordOfTheVault extends CardImpl {
 
     public GethLordOfTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
 
@@ -70,7 +70,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
         staticText = "Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards";
     }
 
-    public GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {
+    private GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {
         super(effect);
     }
 

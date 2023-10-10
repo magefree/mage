@@ -68,7 +68,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
         staticText = "attach all Auras enchanting target permanent to another permanent with the same controller";
     }
 
-    public GlamerSpinnersEffect(final GlamerSpinnersEffect effect) {
+    private GlamerSpinnersEffect(final GlamerSpinnersEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
             filterChoice.add(Predicates.not(new PermanentIdPredicate(targetPermanent.getId())));
 
             Target chosenPermanentToAttachAuras = new TargetPermanent(filterChoice);
-            chosenPermanentToAttachAuras.setNotTarget(true);
+            chosenPermanentToAttachAuras.withNotTarget(true);
 
             LinkedList<UUID> auras = new LinkedList<>();
             auras.addAll(targetPermanent.getAttachments());

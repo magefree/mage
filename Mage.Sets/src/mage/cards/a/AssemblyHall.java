@@ -58,7 +58,7 @@ class AssemblyHallEffect extends OneShotEffect {
                 + "reveal it, and put it into your hand. Then shuffle";
     }
 
-    public AssemblyHallEffect(final AssemblyHallEffect effect) {
+    private AssemblyHallEffect(final AssemblyHallEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class AssemblyHallEffect extends OneShotEffect {
         }
         Card cardToReveal = null;
         Target target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.chooseTarget(outcome, target, source, game)) {
             cardToReveal = game.getCard(target.getFirstTarget());
         }
@@ -87,6 +87,6 @@ class AssemblyHallEffect extends OneShotEffect {
         String nameToSearch = CardUtil.getCardNameForSameNameSearch(cardToReveal);
         FilterCard filterCard = new FilterCard("card named " + nameToSearch);
         filterCard.add(new NamePredicate(nameToSearch));
-        return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
+        return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true).apply(game, source);
     }
 }

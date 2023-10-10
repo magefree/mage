@@ -31,7 +31,7 @@ public final class DranaAndLinvala extends CardImpl {
     public DranaAndLinvala(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(3);

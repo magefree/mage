@@ -48,10 +48,10 @@ class HornOfPlentyEffect extends OneShotEffect {
 
     public HornOfPlentyEffect() {
         super(Outcome.Detriment);
-        this.staticText = "they may pay {1}. If that player does, they draw a card at the beginning of the next end step";
+        this.staticText = "they may pay {1}. If the player does, they draw a card at the beginning of the next end step";
     }
 
-    public HornOfPlentyEffect(final HornOfPlentyEffect effect) {
+    private HornOfPlentyEffect(final HornOfPlentyEffect effect) {
         super(effect);
     }
 

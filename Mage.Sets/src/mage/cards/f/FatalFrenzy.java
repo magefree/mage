@@ -60,7 +60,7 @@ class FatalFrenzyEffect extends OneShotEffect {
         this.staticText = "Sacrifice it at the beginning of the next end step";
     }
 
-    public FatalFrenzyEffect(final FatalFrenzyEffect effect) {
+    private FatalFrenzyEffect(final FatalFrenzyEffect effect) {
         super(effect);
     }
 

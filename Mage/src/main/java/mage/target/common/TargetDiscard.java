@@ -9,11 +9,11 @@ import mage.game.Game;
 import mage.target.TargetCard;
 
 import java.util.UUID;
+
 import mage.filter.StaticFilters;
 import mage.filter.predicate.card.OwnerIdPredicate;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetDiscard extends TargetCard {
@@ -39,7 +39,7 @@ public class TargetDiscard extends TargetCard {
         this.targetName = this.filter.getMessage() + " to discard";
     }
 
-    public TargetDiscard(final TargetDiscard target) {
+    protected TargetDiscard(final TargetDiscard target) {
         super(target);
         this.playerId = target.playerId;
     }

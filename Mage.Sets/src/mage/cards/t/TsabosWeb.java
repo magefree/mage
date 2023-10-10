@@ -53,7 +53,7 @@ class TsabosWebPreventUntapEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step";
     }
 
-    public TsabosWebPreventUntapEffect(final TsabosWebPreventUntapEffect effect) {
+    private TsabosWebPreventUntapEffect(final TsabosWebPreventUntapEffect effect) {
         super(effect);
     }
 

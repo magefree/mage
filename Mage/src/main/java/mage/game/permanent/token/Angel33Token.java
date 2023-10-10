@@ -22,7 +22,7 @@ public final class Angel33Token extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public Angel33Token(final Angel33Token token) {
+    protected Angel33Token(final Angel33Token token) {
         super(token);
     }
 

@@ -2,6 +2,7 @@ package mage.cards.a;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,7 +50,7 @@ public final class AshioksErasure extends CardImpl {
 
         // When Ashiok's Erasure leaves the battlefield, return the exiled card to its owner's hand.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(
-                Zone.HAND, false, true
+                Zone.HAND
         ).setText("return the exiled card to its owner's hand"), false));
     }
 
@@ -116,7 +117,11 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         if (event.getPlayerId().equals(source.getControllerId())) {
             return false;
         }
-        Card card = game.getCard(event.getSourceId());
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) {
+            return false;
+        }
+        Card card = spellAbility.getCharacteristics(game);
         if (sourcePermanent == null
                 || card == null) {
             return false;
@@ -143,11 +148,6 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         if (exiledCard != null) {
             return CardUtil.haveSameNames(exiledCard, card);
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

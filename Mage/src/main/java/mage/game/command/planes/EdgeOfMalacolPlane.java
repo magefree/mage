@@ -75,18 +75,13 @@ class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "If a creature you control would untap during your untap step, put two +1/+1 counters on it instead";
     }
 
-    public EdgeOfMalacolEffect(final EdgeOfMalacolEffect effect) {
+    protected EdgeOfMalacolEffect(final EdgeOfMalacolEffect effect) {
         super(effect);
     }
 
     @Override
     public EdgeOfMalacolEffect copy() {
         return new EdgeOfMalacolEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

@@ -19,7 +19,7 @@ public final class Elemental11BlueRedToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public Elemental11BlueRedToken(final Elemental11BlueRedToken token) {
+    protected Elemental11BlueRedToken(final Elemental11BlueRedToken token) {
         super(token);
     }
 

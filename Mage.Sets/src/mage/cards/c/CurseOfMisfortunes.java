@@ -64,7 +64,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
         staticText = "you may search your library for a Curse card that doesn't have the same name as a Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle";
     }
 
-    public CurseOfMisfortunesEffect(final CurseOfMisfortunesEffect effect) {
+    private CurseOfMisfortunesEffect(final CurseOfMisfortunesEffect effect) {
         super(effect);
     }
 

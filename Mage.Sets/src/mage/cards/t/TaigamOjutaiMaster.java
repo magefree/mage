@@ -44,7 +44,7 @@ public final class TaigamOjutaiMaster extends CardImpl {
     public TaigamOjutaiMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(3);
@@ -116,7 +116,7 @@ class TaigamOjutaiMasterGainReboundEffect extends ContinuousEffectImpl {
         staticText = "that spell gains rebound";
     }
 
-    public TaigamOjutaiMasterGainReboundEffect(final TaigamOjutaiMasterGainReboundEffect effect) {
+    private TaigamOjutaiMasterGainReboundEffect(final TaigamOjutaiMasterGainReboundEffect effect) {
         super(effect);
     }
 

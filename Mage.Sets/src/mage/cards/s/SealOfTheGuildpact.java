@@ -58,7 +58,7 @@ class SealOfTheGuildpactChooseColorEffect extends OneShotEffect {
         this.staticText = "choose two colors";
     }
 
-    SealOfTheGuildpactChooseColorEffect(final SealOfTheGuildpactChooseColorEffect effect) {
+    private SealOfTheGuildpactChooseColorEffect(final SealOfTheGuildpactChooseColorEffect effect) {
         super(effect);
     }
 
@@ -115,7 +115,7 @@ class SealOfTheGuildpactCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Each spell you cast costs {1} less to cast for each of the chosen colors it is";
     }
 
-    SealOfTheGuildpactCostReductionEffect(SealOfTheGuildpactCostReductionEffect effect) {
+    private SealOfTheGuildpactCostReductionEffect(final SealOfTheGuildpactCostReductionEffect effect) {
         super(effect);
     }
 

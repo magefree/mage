@@ -48,7 +48,7 @@ class AethermagesTouchEffect extends OneShotEffect {
         this.staticText = "Reveal the top four cards of your library. You may put a creature card from among them onto the battlefield. It gains \"At the beginning of your end step, return this creature to its owner's hand.\" Then put the rest of the cards revealed this way on the bottom of your library in any order";
     }
 
-    public AethermagesTouchEffect(final AethermagesTouchEffect effect) {
+    private AethermagesTouchEffect(final AethermagesTouchEffect effect) {
         super(effect);
     }
 

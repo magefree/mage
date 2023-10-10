@@ -22,7 +22,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         createZone(PERMANENT, "Permanent");
     }
 
-    public Exile(final Exile exile) {
+    protected Exile(final Exile exile) {
         for (Entry<UUID, ExileZone> entry : exile.exileZones.entrySet()) {
             exileZones.put(entry.getKey(), entry.getValue().copy());
         }
@@ -76,7 +76,7 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     /**
-     * Return exiled cards from specific player. Use it in effects to find all cards in range.
+     * Return exiled cards owned by a specific player. Use it in effects to find all cards in range.
      *
      * @param game
      * @param fromPlayerId

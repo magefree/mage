@@ -67,7 +67,7 @@ class HungeringHydraEffect extends OneShotEffect {
         this.staticText = "put that many +1/+1 counters on it";
     }
 
-    public HungeringHydraEffect(final HungeringHydraEffect effect) {
+    private HungeringHydraEffect(final HungeringHydraEffect effect) {
         super(effect);
     }
 

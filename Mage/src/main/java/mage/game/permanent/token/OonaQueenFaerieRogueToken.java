@@ -22,7 +22,7 @@ public final class OonaQueenFaerieRogueToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public OonaQueenFaerieRogueToken(final OonaQueenFaerieRogueToken token) {
+    protected OonaQueenFaerieRogueToken(final OonaQueenFaerieRogueToken token) {
         super(token);
     }
 

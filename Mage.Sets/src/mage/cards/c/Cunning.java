@@ -43,7 +43,8 @@ public final class Cunning extends CardImpl {
 
         // When enchanted creature attacks or blocks, sacrifice Cunning at the beginning of the next cleanup step.
         this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(
-                new SacrificeSourceBeginningCleanupStepEffect(), AttachmentType.AURA));
+                new SacrificeSourceBeginningCleanupStepEffect(), AttachmentType.AURA)
+                .setTriggerPhrase("When enchanted creature attacks or blocks, "));
     }
 
     private Cunning(final Cunning card) {
@@ -63,7 +64,7 @@ class SacrificeSourceBeginningCleanupStepEffect extends OneShotEffect {
         this.staticText = "sacrifice {this} at the beginning of the next cleanup step";
     }
 
-    public SacrificeSourceBeginningCleanupStepEffect(final SacrificeSourceBeginningCleanupStepEffect effect) {
+    private SacrificeSourceBeginningCleanupStepEffect(final SacrificeSourceBeginningCleanupStepEffect effect) {
         super(effect);
     }
 

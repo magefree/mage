@@ -54,7 +54,7 @@ class ServantOfTymaretEffect extends OneShotEffect {
         staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
-    public ServantOfTymaretEffect(final ServantOfTymaretEffect effect) {
+    private ServantOfTymaretEffect(final ServantOfTymaretEffect effect) {
         super(effect);
     }
 

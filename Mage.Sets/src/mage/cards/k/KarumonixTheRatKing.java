@@ -30,7 +30,7 @@ public final class KarumonixTheRatKing extends CardImpl {
     public KarumonixTheRatKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.RAT);
         this.power = new MageInt(3);

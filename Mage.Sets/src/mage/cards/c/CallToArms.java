@@ -83,7 +83,7 @@ class CallToArmsEffect extends ContinuousEffectImpl {
                 + "the chosen player controls but isn't tied for most common.";
     }
 
-    public CallToArmsEffect(final CallToArmsEffect effect) {
+    private CallToArmsEffect(final CallToArmsEffect effect) {
         super(effect);
     }
 
@@ -117,7 +117,7 @@ class CallToArmsStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public CallToArmsStateTriggeredAbility(final CallToArmsStateTriggeredAbility ability) {
+    private CallToArmsStateTriggeredAbility(final CallToArmsStateTriggeredAbility ability) {
         super(ability);
     }
 

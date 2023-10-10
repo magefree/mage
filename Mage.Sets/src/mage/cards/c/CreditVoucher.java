@@ -53,7 +53,7 @@ class CreditVoucherEffect extends OneShotEffect {
         this.staticText = "Shuffle any number of cards from your hand into your library, then draw that many cards";
     }
 
-    CreditVoucherEffect(final CreditVoucherEffect effect) {
+    private CreditVoucherEffect(final CreditVoucherEffect effect) {
         super(effect);
     }
 

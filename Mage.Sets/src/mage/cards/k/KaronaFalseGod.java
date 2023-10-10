@@ -30,7 +30,7 @@ public final class KaronaFalseGod extends CardImpl {
 
     public KaronaFalseGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(5);
@@ -63,7 +63,7 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
         this.staticText = "that player untaps {this} and gains control of it";
     }
 
-    public KaronaFalseGodUntapGetControlEffect(final KaronaFalseGodUntapGetControlEffect effect) {
+    private KaronaFalseGodUntapGetControlEffect(final KaronaFalseGodUntapGetControlEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class KaronaFalseGodEffect extends OneShotEffect {
         this.staticText = "creatures of the creature type of your choice get +3/+3 until end of turn";
     }
 
-    public KaronaFalseGodEffect(final KaronaFalseGodEffect effect) {
+    private KaronaFalseGodEffect(final KaronaFalseGodEffect effect) {
         super(effect);
     }
 

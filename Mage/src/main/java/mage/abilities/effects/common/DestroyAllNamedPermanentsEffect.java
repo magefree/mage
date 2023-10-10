@@ -20,7 +20,7 @@ public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
     }
 
-    public DestroyAllNamedPermanentsEffect(final DestroyAllNamedPermanentsEffect effect) {
+    protected DestroyAllNamedPermanentsEffect(final DestroyAllNamedPermanentsEffect effect) {
         super(effect);
     }
 

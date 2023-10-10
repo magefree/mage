@@ -43,7 +43,7 @@ class PrimalSurgeEffect extends OneShotEffect {
         this.staticText = "Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process";
     }
 
-    public PrimalSurgeEffect(final PrimalSurgeEffect effect) {
+    private PrimalSurgeEffect(final PrimalSurgeEffect effect) {
         super(effect);
     }
 

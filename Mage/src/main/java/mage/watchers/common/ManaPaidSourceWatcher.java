@@ -67,7 +67,7 @@ public class ManaPaidSourceWatcher extends Watcher {
             if (sourceObject != null && sourceObject.isCreature(game)) {
                 creature++;
             }
-            if (sourceObject != null && !sourceObject.isSnow()) {
+            if (sourceObject != null && !sourceObject.isSnow(game)) {
                 return;
             }
             switch (manaType) {

@@ -28,7 +28,7 @@ public final class SorinMarkov extends CardImpl {
 
     public SorinMarkov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
 
         this.setStartingLoyalty(4);
@@ -67,7 +67,7 @@ class SorinMarkovEffect extends OneShotEffect {
         staticText = "Target opponent's life total becomes 10";
     }
 
-    public SorinMarkovEffect(SorinMarkovEffect effect) {
+    private SorinMarkovEffect(final SorinMarkovEffect effect) {
         super(effect);
     }
 

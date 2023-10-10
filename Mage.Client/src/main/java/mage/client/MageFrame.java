@@ -37,7 +37,7 @@ import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.PlayerAction;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
@@ -73,7 +73,6 @@ import java.io.InputStream;
 import java.net.SocketException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -249,6 +248,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             // UIManager.put("Table.rowHeight", GUISizeHelper.tableRowHeight);
         } catch (Exception ex) {
             LOGGER.fatal(null, ex);
+        }
+
+        // other settings
+        if (ClientCallback.SIMULATE_BAD_CONNECTION) {
+            LOGGER.info("Network: bad connection mode enabled");
         }
 
         // DATA PREPARE
@@ -1198,6 +1202,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 DeckEditorPane deckEditorPane = (DeckEditorPane) window;
                 if (deckEditorPane.getDeckEditorMode() == DeckEditorMode.LIMITED_BUILDING
                         || deckEditorPane.getDeckEditorMode() == DeckEditorMode.SIDEBOARDING
+                        || deckEditorPane.getDeckEditorMode() == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING
                         || deckEditorPane.getDeckEditorMode() == DeckEditorMode.VIEW_LIMITED_DECK) {
                     deckEditorPane.removeFrame();
                 }
@@ -1208,7 +1213,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
         String name;
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
+        if (mode == DeckEditorMode.SIDEBOARDING
+                || mode == DeckEditorMode.LIMITED_BUILDING
+                || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING
+                || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
             name = "Deck Editor - " + tableId.toString();
         } else {
             if (deck != null) {

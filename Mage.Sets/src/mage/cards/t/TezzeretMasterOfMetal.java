@@ -30,7 +30,7 @@ public final class TezzeretMasterOfMetal extends CardImpl {
 
     public TezzeretMasterOfMetal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
 
         this.setStartingLoyalty(5);
@@ -73,7 +73,7 @@ class TezzeretMasterOfMetalEffect extends OneShotEffect {
         this.staticText = "Gain control of all artifacts and creatures target opponent controls";
     }
 
-    public TezzeretMasterOfMetalEffect(final TezzeretMasterOfMetalEffect effect) {
+    private TezzeretMasterOfMetalEffect(final TezzeretMasterOfMetalEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class TezzeretMasterOfMetalControlEffect extends ContinuousEffectImpl {
         this.controllerId = controllerId;
     }
 
-    public TezzeretMasterOfMetalControlEffect(final TezzeretMasterOfMetalControlEffect effect) {
+    private TezzeretMasterOfMetalControlEffect(final TezzeretMasterOfMetalControlEffect effect) {
         super(effect);
         this.controllerId = effect.controllerId;
     }

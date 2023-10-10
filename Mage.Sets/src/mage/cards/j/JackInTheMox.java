@@ -60,7 +60,7 @@ class JackInTheMoxManaEffect extends ManaEffect {
                 + "<br>6 - Add {G}.";
     }
 
-    JackInTheMoxManaEffect(final JackInTheMoxManaEffect effect) {
+    private JackInTheMoxManaEffect(final JackInTheMoxManaEffect effect) {
         super(effect);
     }
 

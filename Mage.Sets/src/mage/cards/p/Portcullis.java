@@ -78,7 +78,7 @@ class PortcullisExileEffect extends OneShotEffect {
         this.staticText = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature";
     }
 
-    public PortcullisExileEffect(final PortcullisExileEffect effect) {
+    private PortcullisExileEffect(final PortcullisExileEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class PortcullisReturnToBattlefieldTriggeredAbility extends DelayedTriggeredAbil
         this.fixedTarget = fixedTarget;
     }
 
-    public PortcullisReturnToBattlefieldTriggeredAbility(final PortcullisReturnToBattlefieldTriggeredAbility ability) {
+    private PortcullisReturnToBattlefieldTriggeredAbility(final PortcullisReturnToBattlefieldTriggeredAbility ability) {
         super(ability);
         this.fixedTarget = ability.fixedTarget;
     }

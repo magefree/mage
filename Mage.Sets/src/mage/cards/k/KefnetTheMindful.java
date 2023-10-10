@@ -29,7 +29,7 @@ public final class KefnetTheMindful extends CardImpl {
     public KefnetTheMindful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -66,7 +66,7 @@ class KefnetTheMindfulRestrictionEffect extends RestrictionEffect {
         staticText = "{this} can't attack or block unless you have seven or more cards in your hand";
     }
 
-    public KefnetTheMindfulRestrictionEffect(final KefnetTheMindfulRestrictionEffect effect) {
+    private KefnetTheMindfulRestrictionEffect(final KefnetTheMindfulRestrictionEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class KefnetTheMindfulEffect extends OneShotEffect {
         staticText = "Draw a card, then you may return a land you control to its owner's hand";
     }
 
-    KefnetTheMindfulEffect(final KefnetTheMindfulEffect effect) {
+    private KefnetTheMindfulEffect(final KefnetTheMindfulEffect effect) {
         super(effect);
     }
 

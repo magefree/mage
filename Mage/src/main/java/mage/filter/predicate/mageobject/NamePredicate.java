@@ -17,10 +17,21 @@ public class NamePredicate implements Predicate<MageObject> {
     private final String name;
     private final Boolean ignoreMtgRuleForEmptyNames; // NamePredicate uses at test and checks, it's must ignore that rules (empty names is not equals in mtg)
 
+    /**
+     * For cards/effects, must have a name to search
+     *
+     * @param name empty name for non-selected target/choice, e.g. return nothing
+     */
     public NamePredicate(String name) {
         this(name, false);
     }
 
+    /**
+     * For tests only, can find face down permanents too
+     *
+     * @param name
+     * @param ignoreMtgRuleForEmptyNames
+     */
     public NamePredicate(String name, Boolean ignoreMtgRuleForEmptyNames) {
         this.name = name;
         this.ignoreMtgRuleForEmptyNames = ignoreMtgRuleForEmptyNames;

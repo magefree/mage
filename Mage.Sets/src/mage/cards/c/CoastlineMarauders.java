@@ -16,7 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class CoastlineMarauders extends CardImpl {
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
@@ -46,7 +46,7 @@ public final class CoastlineMarauders extends CardImpl {
 
         // Whenever Coastline Marauders attacks, it gets +1/+0 until end of turn for each land defending player controls.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true
+                xValue, StaticValue.get(0), Duration.EndOfTurn
         ).setText("it gets +1/+0 until end of turn for each land defending player controls"), false));
 
         // Encore {4}{R}{R}

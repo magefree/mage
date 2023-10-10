@@ -52,7 +52,7 @@ class SpectralSearchlightManaEffect extends ManaEffect {
         this.staticText = "That player adds one mana of any color they choose";
     }
 
-    public SpectralSearchlightManaEffect(final SpectralSearchlightManaEffect effect) {
+    private SpectralSearchlightManaEffect(final SpectralSearchlightManaEffect effect) {
         super(effect);
     }
 

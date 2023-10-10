@@ -31,7 +31,7 @@ public final class BellowsLizard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
-    public BellowsLizard (final BellowsLizard card) {
+    private BellowsLizard(final BellowsLizard card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class SlobadIronGoblin extends CardImpl {
     public SlobadIronGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ARTIFICER);

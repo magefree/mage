@@ -8,7 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.token.TreasureAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,12 +31,10 @@ public final class CouriersBriefcase extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CitizenGreenWhiteToken())));
 
         // {T}, Sacrifice Courier's Briefcase: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility();
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new TreasureAbility(true));
 
         // {W}{U}{B}{R}{G}, {T}, Sacrifice Courier's Briefcase: Draw three cards.
-        ability = new SimpleActivatedAbility(
+        Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(3), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
         );
         ability.addCost(new TapSourceCost());

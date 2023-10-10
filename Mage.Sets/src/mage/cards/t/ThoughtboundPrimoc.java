@@ -62,7 +62,7 @@ class ThoughtboundPrimocEffect extends OneShotEffect {
         this.staticText = "the player who controls the most Wizards gains control of {this}";
     }
 
-    public ThoughtboundPrimocEffect(final ThoughtboundPrimocEffect effect) {
+    private ThoughtboundPrimocEffect(final ThoughtboundPrimocEffect effect) {
         super(effect);
     }
 

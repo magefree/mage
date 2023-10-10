@@ -65,7 +65,7 @@ class OupheVandalsEffect extends OneShotEffect {
         this.staticText = "Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield.";
     }
 
-    public OupheVandalsEffect(final OupheVandalsEffect effect) {
+    private OupheVandalsEffect(final OupheVandalsEffect effect) {
         super(effect);
     }
 

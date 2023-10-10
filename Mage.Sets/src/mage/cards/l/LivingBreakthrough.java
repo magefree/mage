@@ -60,6 +60,7 @@ class LivingBreakthroughEffect extends ContinuousRuleModifyingEffectImpl {
 
     private LivingBreakthroughEffect(final LivingBreakthroughEffect effect) {
         super(effect);
+        this.manaValue = effect.manaValue;
     }
 
     @Override
@@ -98,10 +99,5 @@ class LivingBreakthroughEffect extends ContinuousRuleModifyingEffectImpl {
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
         return spell != null && spell.getManaValue() == this.manaValue;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 }

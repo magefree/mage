@@ -52,7 +52,7 @@ class MindswipeEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to that spell's controller";
     }
 
-    public MindswipeEffect(final MindswipeEffect effect) {
+    private MindswipeEffect(final MindswipeEffect effect) {
         super(effect);
     }
 

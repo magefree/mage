@@ -24,7 +24,7 @@ public final class TakenoSamuraiGeneral extends CardImpl {
 
     public TakenoSamuraiGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SAMURAI);
 
@@ -58,7 +58,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
         staticText = "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
     }
 
-    public TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
+    private TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
         super(effect);
     }
 

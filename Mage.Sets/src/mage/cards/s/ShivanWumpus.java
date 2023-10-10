@@ -55,7 +55,7 @@ class ShivanWumpusEffect extends PutOnLibrarySourceEffect {
         this.staticText = "any player may sacrifice a land. If a player does, put {this} on top of its owner's library";
     }
     
-    ShivanWumpusEffect(final ShivanWumpusEffect effect) {
+    private ShivanWumpusEffect(final ShivanWumpusEffect effect) {
         super(effect);
     }
     

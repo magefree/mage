@@ -35,7 +35,7 @@ public final class FrontlineSage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FrontlineSage (final FrontlineSage card) {
+    private FrontlineSage(final FrontlineSage card) {
         super(card);
     }
 

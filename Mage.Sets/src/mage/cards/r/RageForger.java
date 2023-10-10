@@ -71,7 +71,7 @@ class RageForgerDamageEffect extends OneShotEffect {
         this.staticText = "you may have that creature deal 1 damage to target player or planeswalker";
     }
 
-    public RageForgerDamageEffect(final RageForgerDamageEffect effect) {
+    private RageForgerDamageEffect(final RageForgerDamageEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class RageForgerDamageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent attackingCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (controller != null && attackingCreature != null) {
-            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 1, attackingCreature.getId(), source, game, false, true);
+            game.damagePlayerOrPermanent(source.getFirstTarget(), 1, attackingCreature.getId(), source, game, false, true);
             return true;
         }
         return false;

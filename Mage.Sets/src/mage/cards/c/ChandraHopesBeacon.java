@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class ChandraHopesBeacon extends CardImpl {
     public ChandraHopesBeacon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.CHANDRA);
         this.setStartingLoyalty(5);
 
@@ -39,8 +39,9 @@ public class ChandraHopesBeacon extends CardImpl {
         //triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CopyTargetSpellEffect(true).withSpellName("it"),
-                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, true
-        ).setTriggersOnce(true));
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
+                false, SetTargetPointer.SPELL
+        ).setTriggersOnceEachTurn(true));
 
         //+2: Add two mana in any combination of colors.
         this.addAbility(new LoyaltyAbility(new AddManaInAnyCombinationEffect(2), 2));

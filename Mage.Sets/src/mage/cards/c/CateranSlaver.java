@@ -1,5 +1,3 @@
-
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -30,7 +28,7 @@ public final class CateranSlaver extends CardImpl {
 
     static {
         filter.add(SubType.MERCENARY.getPredicate());
-	filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 6));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 6));
     }
 
     public CateranSlaver(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +44,7 @@ public final class CateranSlaver extends CardImpl {
 
         // {5}, {T}: Search your library for a Mercenary permanent card with converted mana cost 5 or less and put it onto the battlefield. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(5));
+        ability.addCost(new GenericManaCost(5));
         this.addAbility(ability);
     }
 

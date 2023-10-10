@@ -55,7 +55,7 @@ class ThornbowArcherEffect extends OneShotEffect {
         this.staticText = "each opponent who doesn't control an Elf loses 1 life";
     }
 
-    public ThornbowArcherEffect(final ThornbowArcherEffect effect) {
+    private ThornbowArcherEffect(final ThornbowArcherEffect effect) {
         super(effect);
     }
 

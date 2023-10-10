@@ -62,7 +62,7 @@ class SigardasAidEffect extends OneShotEffect {
         this.staticText = "you may attach it to target creature you control";
     }
 
-    public SigardasAidEffect(final SigardasAidEffect effect) {
+    private SigardasAidEffect(final SigardasAidEffect effect) {
         super(effect);
     }
 

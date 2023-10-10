@@ -49,7 +49,7 @@ public final class MountDoom extends CardImpl {
     public MountDoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}, Pay 1 life: Add {B} or {R}.
         Ability ability = new BlackManaAbility();
@@ -110,7 +110,7 @@ class MountDoomEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreaturePermanent(0, 2);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("the rest will be destroyed");
         player.choose(outcome, target, source, game);
         FilterPermanent filter = new FilterCreaturePermanent();

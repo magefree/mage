@@ -33,7 +33,7 @@ public final class KravTheUnredeemed extends CardImpl {
     public KravTheUnredeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -65,7 +65,7 @@ class KravTheUnredeemedEffect extends OneShotEffect {
         this.staticText = "Target player draws X cards and gains X life. Put X +1/+1 counters on {this}";
     }
 
-    KravTheUnredeemedEffect(final KravTheUnredeemedEffect effect) {
+    private KravTheUnredeemedEffect(final KravTheUnredeemedEffect effect) {
         super(effect);
     }
 

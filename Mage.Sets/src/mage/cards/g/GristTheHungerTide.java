@@ -41,7 +41,7 @@ public final class GristTheHungerTide extends CardImpl {
     public GristTheHungerTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GRIST);
         this.setStartingLoyalty(3);
 

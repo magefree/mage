@@ -21,7 +21,7 @@ public class GainAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
     }
 
-    public GainAllCreatureTypesTargetEffect(final GainAllCreatureTypesTargetEffect effect) {
+    protected GainAllCreatureTypesTargetEffect(final GainAllCreatureTypesTargetEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class DroningBureaucratsEffect extends OneShotEffect {
         this.staticText = "Each creature with mana value X can't attack or block this turn";
     }
 
-    DroningBureaucratsEffect(final DroningBureaucratsEffect effect) {
+    private DroningBureaucratsEffect(final DroningBureaucratsEffect effect) {
         super(effect);
     }
 

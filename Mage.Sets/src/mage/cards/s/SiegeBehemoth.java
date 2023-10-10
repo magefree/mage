@@ -54,7 +54,7 @@ class SiegeBehemothEffect extends AsThoughEffectImpl {
         this.staticText = "As long as {this} is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked";
     }
 
-    public SiegeBehemothEffect(SiegeBehemothEffect effect) {
+    private SiegeBehemothEffect(final SiegeBehemothEffect effect) {
         super(effect);
     }
 

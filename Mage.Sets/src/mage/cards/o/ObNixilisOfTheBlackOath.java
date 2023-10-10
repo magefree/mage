@@ -28,7 +28,7 @@ public final class ObNixilisOfTheBlackOath extends CardImpl {
 
     public ObNixilisOfTheBlackOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIXILIS);
 
         this.setStartingLoyalty(3);
@@ -65,7 +65,7 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
         staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
-    public ObNixilisOfTheBlackOathEffect1(final ObNixilisOfTheBlackOathEffect1 effect) {
+    private ObNixilisOfTheBlackOathEffect1(final ObNixilisOfTheBlackOathEffect1 effect) {
         super(effect);
     }
 

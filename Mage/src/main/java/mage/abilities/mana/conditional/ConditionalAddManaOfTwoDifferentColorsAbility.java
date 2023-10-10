@@ -8,7 +8,6 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.Zone;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class ConditionalAddManaOfTwoDifferentColorsAbility extends ActivatedManaAbilityImpl {
@@ -21,10 +20,10 @@ public class ConditionalAddManaOfTwoDifferentColorsAbility extends ActivatedMana
         super(Zone.BATTLEFIELD, new AddConditionalManaOfTwoDifferentColorsEffect(manaBuilder), cost);
     }
 
-    public ConditionalAddManaOfTwoDifferentColorsAbility(final ConditionalAddManaOfTwoDifferentColorsAbility ability) {
+    protected ConditionalAddManaOfTwoDifferentColorsAbility(final ConditionalAddManaOfTwoDifferentColorsAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public ConditionalAddManaOfTwoDifferentColorsAbility copy() {
         return new ConditionalAddManaOfTwoDifferentColorsAbility(this);

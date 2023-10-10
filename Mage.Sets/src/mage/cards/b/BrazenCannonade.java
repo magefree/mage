@@ -45,7 +45,7 @@ public final class BrazenCannonade extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfPostCombatMainTriggeredAbility(
                         new ExileTopXMayPlayUntilEndOfTurnEffect(
-                                1, false, Duration.UntilYourNextEndCombatStep
+                                1, false, Duration.UntilEndCombatOfYourNextTurn
                         ), TargetController.YOU, false
                 ), RaidCondition.instance, "At the beginning of your postcombat main phase, " +
                 "if you attacked with a creature this turn, exile the top card of your library. " +

@@ -52,7 +52,7 @@ class BaneOfBalaGedEffect extends OneShotEffect {
         this.staticText = "defending player exiles two permanents they control";
     }
 
-    public BaneOfBalaGedEffect(final BaneOfBalaGedEffect effect) {
+    private BaneOfBalaGedEffect(final BaneOfBalaGedEffect effect) {
         super(effect);
     }
 

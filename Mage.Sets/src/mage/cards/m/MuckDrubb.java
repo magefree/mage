@@ -1,11 +1,10 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChangeATargetOfTargetSpellAbilityToSourceEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -15,15 +14,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
-import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
 import mage.target.Target;
 import mage.target.TargetSpell;
-import mage.util.TargetAddress;
+
+import java.util.UUID;
 
 /**
  * 
@@ -34,8 +30,7 @@ public final class MuckDrubb extends CardImpl {
     protected static final FilterSpell filter = new FilterSpell("spell that targets only a single creature");
 
     static {
-        filter.add(new SpellWithOnlySingleTargetPredicate());
-        filter.add(new TargetsPermanentPredicate(new FilterCreaturePermanent()));
+        filter.add(new HasOnlySingleTargetPermanentPredicate(StaticFilters.FILTER_PERMANENT_CREATURE));
     }
 
     public MuckDrubb(UUID ownerId, CardSetInfo setInfo) {
@@ -66,28 +61,5 @@ public final class MuckDrubb extends CardImpl {
     @Override
     public MuckDrubb copy() {
         return new MuckDrubb(this);
-    }
-}
-
-class SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<Spell> {
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
-        Spell spell = input.getObject();
-        if (spell == null) {
-            return false;
-        }
-        UUID singleTarget = null;
-        for (TargetAddress addr : TargetAddress.walk(spell)) {
-            Target targetInstance = addr.getTarget(spell);
-            for (UUID targetId : targetInstance.getTargets()) {
-                if (singleTarget == null) {
-                    singleTarget = targetId;
-                } else if (!singleTarget.equals(targetId)) {
-                    return false;
-                }
-            }
-        }
-        return singleTarget != null;
     }
 }

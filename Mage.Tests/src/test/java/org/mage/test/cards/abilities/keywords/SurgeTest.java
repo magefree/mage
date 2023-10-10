@@ -83,7 +83,7 @@ public class SurgeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tyrant of Valakut");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tyrant of Valakut with surge");
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -109,7 +109,7 @@ public class SurgeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Containment Membrane", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Containment Membrane with surge", "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

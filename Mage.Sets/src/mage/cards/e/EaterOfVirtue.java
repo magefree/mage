@@ -53,7 +53,7 @@ public final class EaterOfVirtue extends CardImpl {
     public EaterOfVirtue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature dies, exile it.
@@ -87,7 +87,7 @@ class EaterOfVirtueExileEffect extends OneShotEffect {
         this.staticText = "exile it";
     }
 
-    EaterOfVirtueExileEffect(final EaterOfVirtueExileEffect effect) {
+    private EaterOfVirtueExileEffect(final EaterOfVirtueExileEffect effect) {
         super(effect);
     }
 
@@ -119,7 +119,7 @@ class EaterOfVirtueGainAbilityAttachedEffect extends ContinuousEffectImpl {
         staticText = "As long as a card exiled with Eater of Virtue has flying, equipped creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance";
     }
 
-    public EaterOfVirtueGainAbilityAttachedEffect(final EaterOfVirtueGainAbilityAttachedEffect effect) {
+    private EaterOfVirtueGainAbilityAttachedEffect(final EaterOfVirtueGainAbilityAttachedEffect effect) {
         super(effect);
     }
 

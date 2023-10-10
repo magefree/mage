@@ -34,7 +34,7 @@ class ObNixilisEmblemTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.COMMAND, effect, optional);
     }
 
-    public ObNixilisEmblemTriggeredAbility(final ObNixilisEmblemTriggeredAbility ability) {
+    protected ObNixilisEmblemTriggeredAbility(final ObNixilisEmblemTriggeredAbility ability) {
         super(ability);
     }
 

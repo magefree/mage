@@ -25,7 +25,7 @@ public final class BrightPalmSoulAwakener extends CardImpl {
     public BrightPalmSoulAwakener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);

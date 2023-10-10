@@ -27,7 +27,7 @@ public final class MyojinOfRoaringBlades extends CardImpl {
     public MyojinOfRoaringBlades(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);

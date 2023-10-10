@@ -98,7 +98,7 @@ class GokaTheUnjust extends TokenImpl {
 
     GokaTheUnjust() {
         super("Goka the Unjust", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.OGRE, SubType.SHAMAN);
@@ -110,7 +110,7 @@ class GokaTheUnjust extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
-    public GokaTheUnjust(final GokaTheUnjust token) {
+    private GokaTheUnjust(final GokaTheUnjust token) {
         super(token);
     }
 

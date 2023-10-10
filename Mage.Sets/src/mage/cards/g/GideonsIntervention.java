@@ -2,12 +2,14 @@ package mage.cards.g;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -62,7 +64,7 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public GideonsInterventionCantCastEffect(final GideonsInterventionCantCastEffect effect) {
+    private GideonsInterventionCantCastEffect(final GideonsInterventionCantCastEffect effect) {
         super(effect);
     }
 
@@ -90,8 +92,12 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
     public boolean applies(GameEvent event, Ability source, Game game) {
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            return object != null && object.getName().equals(cardName);
+            SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+            if (spellAbility == null) {
+                return false;
+            }
+            Card card = spellAbility.getCharacteristics(game);
+            return card != null && CardUtil.haveSameNames(card, cardName, game);
         }
         return false;
     }
@@ -104,7 +110,7 @@ class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.";
     }
 
-    public GideonsInterventionPreventAllDamageEffect(final GideonsInterventionPreventAllDamageEffect effect) {
+    private GideonsInterventionPreventAllDamageEffect(final GideonsInterventionPreventAllDamageEffect effect) {
         super(effect);
     }
 

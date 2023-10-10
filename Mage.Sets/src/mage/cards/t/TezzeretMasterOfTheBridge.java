@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class TezzeretMasterOfTheBridge extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature and planeswalker spells");
+    private static final FilterCard filter = new FilterCard("creature and planeswalker spells you cast");
 
     static {
         filter.add(Predicates.or(
@@ -38,7 +38,7 @@ public final class TezzeretMasterOfTheBridge extends CardImpl {
     public TezzeretMasterOfTheBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
         this.setStartingLoyalty(5);
 

@@ -60,7 +60,7 @@ class RagManDiscardEffect extends OneShotEffect {
         this.staticText = "and discards a creature card at random";
     }
 
-    public RagManDiscardEffect(final RagManDiscardEffect effect) {
+    private RagManDiscardEffect(final RagManDiscardEffect effect) {
         super(effect);
     }
 

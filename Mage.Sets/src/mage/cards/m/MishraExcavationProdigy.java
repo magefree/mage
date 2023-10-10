@@ -31,7 +31,7 @@ public final class MishraExcavationProdigy extends CardImpl {
     public MishraExcavationProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
@@ -49,7 +49,7 @@ public final class MishraExcavationProdigy extends CardImpl {
         // Whenever you discard one or more artifact cards, add {R}{R}. This ability triggers only once each turn.
         this.addAbility(new DiscardCardControllerTriggeredAbility(
                 new BasicManaEffect(Mana.RedMana(2)), false, filter
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private MishraExcavationProdigy(final MishraExcavationProdigy card) {

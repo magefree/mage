@@ -30,7 +30,7 @@ public final class DevilToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public DevilToken(final DevilToken token) {
+    protected DevilToken(final DevilToken token) {
         super(token);
     }
 

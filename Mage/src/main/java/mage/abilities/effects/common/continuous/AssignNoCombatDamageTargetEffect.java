@@ -9,7 +9,6 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author awjackson
  */
 
@@ -24,7 +23,7 @@ public class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
         staticText = text;
     }
 
-    public AssignNoCombatDamageTargetEffect(final AssignNoCombatDamageTargetEffect effect) {
+    protected AssignNoCombatDamageTargetEffect(final AssignNoCombatDamageTargetEffect effect) {
         super(effect);
     }
 

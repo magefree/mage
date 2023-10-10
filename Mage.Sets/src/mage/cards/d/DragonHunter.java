@@ -50,7 +50,7 @@ class CanBlockDragonsAsThoughtIthadReachEffect extends AsThoughEffectImpl {
         staticText = "{this} can block Dragons as though it had reach";
     }
 
-    public CanBlockDragonsAsThoughtIthadReachEffect(final CanBlockDragonsAsThoughtIthadReachEffect effect) {
+    private CanBlockDragonsAsThoughtIthadReachEffect(final CanBlockDragonsAsThoughtIthadReachEffect effect) {
         super(effect);
     }
 

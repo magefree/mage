@@ -52,7 +52,7 @@ class TormentedThoughtsDiscardEffect extends OneShotEffect {
         this.staticText = "Target player discards a number of cards equal to the sacrificed creature's power";
     }
 
-    public TormentedThoughtsDiscardEffect(final TormentedThoughtsDiscardEffect effect) {
+    private TormentedThoughtsDiscardEffect(final TormentedThoughtsDiscardEffect effect) {
         super(effect);
     }
 

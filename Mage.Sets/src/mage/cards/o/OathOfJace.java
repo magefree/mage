@@ -25,7 +25,7 @@ public final class OathOfJace extends CardImpl {
 
     public OathOfJace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Jace enters the battlefield, draw three cards, then discard two cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(3, 2), false));
@@ -52,7 +52,7 @@ class OathOfJaceEffect extends OneShotEffect {
         this.staticText = "scry X, where X is the number of planeswalkers you control";
     }
 
-    public OathOfJaceEffect(final OathOfJaceEffect effect) {
+    private OathOfJaceEffect(final OathOfJaceEffect effect) {
         super(effect);
     }
 

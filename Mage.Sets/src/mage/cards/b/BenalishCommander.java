@@ -67,7 +67,7 @@ class BenalishCommanderTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
-    public BenalishCommanderTriggeredAbility(final BenalishCommanderTriggeredAbility ability) {
+    private BenalishCommanderTriggeredAbility(final BenalishCommanderTriggeredAbility ability) {
         super(ability);
     }
 

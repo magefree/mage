@@ -57,7 +57,7 @@ class ImpsMischiefLoseLifeEffect extends OneShotEffect {
         staticText = "You lose life equal to that spell's mana value";
     }
 
-    public ImpsMischiefLoseLifeEffect(final ImpsMischiefLoseLifeEffect effect) {
+    private ImpsMischiefLoseLifeEffect(final ImpsMischiefLoseLifeEffect effect) {
         super(effect);
     }
 

@@ -56,7 +56,7 @@ class MeglonothEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to that creature's controller equal to {this}'s power";
     }
 
-    public MeglonothEffect(final MeglonothEffect effect) {
+    private MeglonothEffect(final MeglonothEffect effect) {
         super(effect);
     }
 

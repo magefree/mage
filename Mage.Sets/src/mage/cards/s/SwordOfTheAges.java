@@ -65,7 +65,7 @@ class SwordOfTheAgesEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile {this} and those creature cards";
     }
 
-    public SwordOfTheAgesEffect(final SwordOfTheAgesEffect effect) {
+    private SwordOfTheAgesEffect(final SwordOfTheAgesEffect effect) {
         super(effect);
     }
 

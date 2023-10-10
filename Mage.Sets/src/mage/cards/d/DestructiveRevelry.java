@@ -46,7 +46,7 @@ class DestructiveRevelryEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact or enchantment. {this} deals 2 damage to that permanent's controller";
     }
 
-    public DestructiveRevelryEffect(final DestructiveRevelryEffect effect) {
+    private DestructiveRevelryEffect(final DestructiveRevelryEffect effect) {
         super(effect);
     }
 

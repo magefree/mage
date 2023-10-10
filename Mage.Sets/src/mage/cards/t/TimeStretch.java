@@ -45,7 +45,7 @@ class TimeStretchEffect extends OneShotEffect {
         staticText = "Target player takes two extra turns after this one";
     }
 
-    public TimeStretchEffect(final TimeStretchEffect effect) {
+    private TimeStretchEffect(final TimeStretchEffect effect) {
         super(effect);
     }
 
@@ -56,8 +56,12 @@ class TimeStretchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
-        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
+        if (source.getFirstTarget() == null) {
+            return false;
+        }
+
+        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget()).withExtraTurn());
+        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget()).withExtraTurn());
         return true;
     }
 }

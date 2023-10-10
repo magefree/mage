@@ -3,7 +3,6 @@
 package mage.choices;
 
 /**
- *
  * @author LevelX2
  */
 public class ChoiceBasicLandType extends ChoiceImpl {
@@ -18,7 +17,7 @@ public class ChoiceBasicLandType extends ChoiceImpl {
         this.message = "Choose a basic land type";
     }
 
-    public ChoiceBasicLandType(final ChoiceBasicLandType choice) {
+    protected ChoiceBasicLandType(final ChoiceBasicLandType choice) {
         super(choice);
     }
 

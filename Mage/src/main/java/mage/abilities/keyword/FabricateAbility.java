@@ -21,11 +21,11 @@ public class FabricateAbility extends EntersBattlefieldTriggeredAbility {
     private final int value;
 
     public FabricateAbility(int value) {
-        super(new FabricateEffect(value), false, true);
+        super(new FabricateEffect(value), false);
         this.value = value;
     }
 
-    public FabricateAbility(final FabricateAbility ability) {
+    protected FabricateAbility(final FabricateAbility ability) {
         super(ability);
         this.value = ability.value;
     }

@@ -38,7 +38,7 @@ public final class UnctusGrandMetatect extends CardImpl {
     public UnctusGrandMetatect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.VEDALKEN);
         this.power = new MageInt(2);

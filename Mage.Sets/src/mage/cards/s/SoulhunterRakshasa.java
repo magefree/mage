@@ -64,7 +64,7 @@ class SoulhunterRakshasaEffect extends OneShotEffect {
         this.staticText = "{this} deals 1 damage to target opponent for each Swamp you control.";
     }
 
-    public SoulhunterRakshasaEffect(final SoulhunterRakshasaEffect effect) {
+    private SoulhunterRakshasaEffect(final SoulhunterRakshasaEffect effect) {
         super(effect);
     }
 

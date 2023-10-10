@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -21,8 +22,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author TheElk801
@@ -48,9 +47,7 @@ public final class MutualDestruction extends CardImpl {
         )).setRuleAtTheTop(true));
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        ));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target creature"));

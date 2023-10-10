@@ -18,7 +18,7 @@ public final class BorealCentaur extends CardImpl {
 
     public BorealCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.CENTAUR, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

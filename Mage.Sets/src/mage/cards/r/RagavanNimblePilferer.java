@@ -25,7 +25,7 @@ public final class RagavanNimblePilferer extends CardImpl {
     public RagavanNimblePilferer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MONKEY);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);

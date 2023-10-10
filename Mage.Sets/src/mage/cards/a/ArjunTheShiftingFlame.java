@@ -24,7 +24,7 @@ public final class ArjunTheShiftingFlame extends CardImpl {
 
     public ArjunTheShiftingFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
@@ -54,7 +54,7 @@ class ArjunTheShiftingFlameEffect extends OneShotEffect {
         staticText = "put the cards in your hand on the bottom of your library in any order, then draw that many cards";
     }
 
-    public ArjunTheShiftingFlameEffect(final ArjunTheShiftingFlameEffect effect) {
+    private ArjunTheShiftingFlameEffect(final ArjunTheShiftingFlameEffect effect) {
         super(effect);
     }
 

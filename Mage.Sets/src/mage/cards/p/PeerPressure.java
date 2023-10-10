@@ -53,7 +53,7 @@ class PeerPressureEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type";
     }
 
-    PeerPressureEffect(final PeerPressureEffect effect) {
+    private PeerPressureEffect(final PeerPressureEffect effect) {
         super(effect);
     }
 

@@ -31,14 +31,14 @@ public final class Skinshifter extends CardImpl {
         this.toughness = new MageInt(1);
 
         Ability ability = new SimpleActivatedAbility(
-                new BecomesCreatureSourceEffect(new RhinoToken(), "", Duration.EndOfTurn),
+                new BecomesCreatureSourceEffect(new RhinoToken(), CardType.CREATURE, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}"));
         ability.getModes().setChooseText("Choose one. Activate only once each turn.");
 
-        Mode mode = new Mode(new BecomesCreatureSourceEffect(new BirdToken(), "", Duration.EndOfTurn));
+        Mode mode = new Mode(new BecomesCreatureSourceEffect(new BirdToken(), CardType.CREATURE, Duration.EndOfTurn));
         ability.addMode(mode);
 
-        mode = new Mode(new BecomesCreatureSourceEffect(new PlantToken(), "", Duration.EndOfTurn));
+        mode = new Mode(new BecomesCreatureSourceEffect(new PlantToken(), CardType.CREATURE, Duration.EndOfTurn));
         ability.addMode(mode);
 
         this.addAbility(ability);
@@ -66,7 +66,7 @@ public final class Skinshifter extends CardImpl {
             this.addAbility(TrampleAbility.getInstance());
         }
 
-        public RhinoToken(final RhinoToken token) {
+        private RhinoToken(final RhinoToken token) {
             super(token);
         }
 
@@ -88,7 +88,7 @@ public final class Skinshifter extends CardImpl {
             this.addAbility(FlyingAbility.getInstance());
         }
 
-        public BirdToken(final BirdToken token) {
+        private BirdToken(final BirdToken token) {
             super(token);
         }
 
@@ -109,7 +109,7 @@ public final class Skinshifter extends CardImpl {
             this.toughness = new MageInt(8);
         }
 
-        public PlantToken(final PlantToken token) {
+        private PlantToken(final PlantToken token) {
             super(token);
         }
 

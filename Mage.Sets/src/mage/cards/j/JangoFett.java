@@ -29,7 +29,7 @@ public final class JangoFett extends CardImpl {
 
     public JangoFett(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(2);
@@ -67,7 +67,7 @@ class JangoFettEffect extends OneShotEffect {
         this.staticText = "it gets +X/+0, where X is the number of creatures defending player controls with a bounty counter on them";
     }
 
-    public JangoFettEffect(final JangoFettEffect ability) {
+    private JangoFettEffect(final JangoFettEffect ability) {
         super(ability);
     }
 

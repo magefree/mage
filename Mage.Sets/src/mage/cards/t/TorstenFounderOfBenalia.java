@@ -34,7 +34,7 @@ public final class TorstenFounderOfBenalia extends CardImpl {
     public TorstenFounderOfBenalia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

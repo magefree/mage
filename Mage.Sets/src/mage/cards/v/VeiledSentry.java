@@ -53,7 +53,7 @@ class VeiledSentryEffect extends ContinuousEffectImpl {
         staticText = "{this} becomes an Illusion creature with power and toughness equal to that spell's mana value";
     }
 
-    public VeiledSentryEffect(final VeiledSentryEffect effect) {
+    private VeiledSentryEffect(final VeiledSentryEffect effect) {
         super(effect);
         this.spellMV = effect.spellMV;
     }

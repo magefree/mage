@@ -49,7 +49,7 @@ class PerilousPredicamentSacrificeOpponentsEffect extends OneShotEffect {
         staticText = "Each opponent sacrifices an artifact creature and a nonartifact creature";
     }
 
-    public PerilousPredicamentSacrificeOpponentsEffect(final PerilousPredicamentSacrificeOpponentsEffect effect) {
+    private PerilousPredicamentSacrificeOpponentsEffect(final PerilousPredicamentSacrificeOpponentsEffect effect) {
         super(effect);
     }
 

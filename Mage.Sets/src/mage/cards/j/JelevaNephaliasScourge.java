@@ -34,7 +34,7 @@ public final class JelevaNephaliasScourge extends CardImpl {
 
     public JelevaNephaliasScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WIZARD);
 
@@ -71,7 +71,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
                 + "where X is the amount of mana spent to cast this spell";
     }
 
-    public JelevaNephaliasScourgeEffect(final JelevaNephaliasScourgeEffect effect) {
+    private JelevaNephaliasScourgeEffect(final JelevaNephaliasScourgeEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
                 "from among cards exiled with {this} without paying its mana cost";
     }
 
-    public JelevaNephaliasCastEffect(final JelevaNephaliasCastEffect effect) {
+    private JelevaNephaliasCastEffect(final JelevaNephaliasCastEffect effect) {
         super(effect);
     }
 

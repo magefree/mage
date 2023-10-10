@@ -3,8 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TransformsOrEntersTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.cards.CardImpl;
@@ -35,7 +33,6 @@ public final class BrutalCathar extends CardImpl {
                 new ExileUntilSourceLeavesEffect(), false
         ).setTriggerPhrase("When this creature enters the battlefield or transforms into {this}, ");
         ability.addTarget(new TargetOpponentsCreaturePermanent());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 
         // Daybound

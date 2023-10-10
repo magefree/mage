@@ -50,7 +50,7 @@ public class ZoneChangeInfo {
             this.top = top;
         }
 
-        public Library(final Library info) {
+        protected Library(final Library info) {
             super(info);
             this.top = info.top;
         }
@@ -78,7 +78,7 @@ public class ZoneChangeInfo {
             this.name = name;
         }
 
-        public Exile(final Exile info) {
+        protected Exile(final Exile info) {
             super(info);
             this.id = info.id;
             this.name = info.name;
@@ -107,7 +107,7 @@ public class ZoneChangeInfo {
             this.source = source;
         }
 
-        public Battlefield(final Battlefield info) {
+        protected Battlefield(final Battlefield info) {
             super(info);
             this.tapped = info.tapped;
             this.source = info.source;
@@ -133,7 +133,7 @@ public class ZoneChangeInfo {
             this.spell = spell;
         }
 
-        public Stack(final Stack info) {
+        protected Stack(final Stack info) {
             super(info);
             this.spell = info.spell;
         }

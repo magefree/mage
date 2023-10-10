@@ -40,7 +40,7 @@ public final class NicolBolasTheArisen extends CardImpl {
     public NicolBolasTheArisen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
         this.color.setBlue(true);
@@ -86,7 +86,7 @@ class NicolBolasTheArisenEffect extends OneShotEffect {
         this.staticText = "Exile all but the bottom card of target player's library.";
     }
 
-    public NicolBolasTheArisenEffect(final NicolBolasTheArisenEffect effect) {
+    private NicolBolasTheArisenEffect(final NicolBolasTheArisenEffect effect) {
         super(effect);
     }
 

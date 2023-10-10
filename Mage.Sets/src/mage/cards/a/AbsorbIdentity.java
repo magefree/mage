@@ -53,7 +53,7 @@ class AbsorbIdentityEffect extends OneShotEffect {
         this.staticText = "You may have Shapeshifters you control become copies of that creature until end of turn.";
     }
 
-    public AbsorbIdentityEffect(final AbsorbIdentityEffect effect) {
+    private AbsorbIdentityEffect(final AbsorbIdentityEffect effect) {
         super(effect);
     }
 

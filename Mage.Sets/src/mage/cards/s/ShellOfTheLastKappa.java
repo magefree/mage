@@ -44,7 +44,7 @@ public final class ShellOfTheLastKappa extends CardImpl {
 
     public ShellOfTheLastKappa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {3}, {tap}: Exile target instant or sorcery spell that targets you.
         Ability ability = new SimpleActivatedAbility(
@@ -82,7 +82,7 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
         this.staticText = "Exile target instant or sorcery spell that targets you";
     }
 
-    public ShellOfTheLastKappaEffect(final ShellOfTheLastKappaEffect effect) {
+    private ShellOfTheLastKappaEffect(final ShellOfTheLastKappaEffect effect) {
         super(effect);
     }
 
@@ -120,7 +120,7 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
         this.staticText = "You may cast a spell from among cards exiled with {this} without paying its mana cost";
     }
 
-    public ShellOfTheLastKappaCastEffect(final ShellOfTheLastKappaCastEffect effect) {
+    private ShellOfTheLastKappaCastEffect(final ShellOfTheLastKappaCastEffect effect) {
         super(effect);
     }
 

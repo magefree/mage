@@ -38,7 +38,7 @@ public final class YasharnImplacableEarth extends CardImpl {
     public YasharnImplacableEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.BOAR);
         this.power = new MageInt(4);
@@ -119,18 +119,13 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities";
     }
 
-    public YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
+    private YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
         super(effect);
     }
 
     @Override
     public YasharnImplacableEarthEffect copy() {
         return new YasharnImplacableEarthEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -143,13 +138,14 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY
+                || event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (event.getType() != GameEvent.EventType.ACTIVATE_ABILITY
-                && event.getType() != GameEvent.EventType.CAST_SPELL) {
-            return false;
-        }
-
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && permanent == null) {
             return false;
         }
@@ -166,7 +162,7 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;  // can't pay with life
             }
             if (cost instanceof SacrificeSourceCost
-                    && !permanent.isLand()) {
+                    && !permanent.isLand(game)) {
                 return true;
             }
             if (cost instanceof SacrificeTargetCost) {

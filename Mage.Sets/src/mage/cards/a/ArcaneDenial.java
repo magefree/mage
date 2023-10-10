@@ -59,7 +59,7 @@ class ArcaneDenialEffect extends OneShotEffect {
                 + "at the beginning of the next turn's upkeep";
     }
 
-    public ArcaneDenialEffect(final ArcaneDenialEffect effect) {
+    private ArcaneDenialEffect(final ArcaneDenialEffect effect) {
         super(effect);
     }
 

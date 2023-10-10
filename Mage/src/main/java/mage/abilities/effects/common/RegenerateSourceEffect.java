@@ -19,16 +19,15 @@ import java.util.UUID;
 public class RegenerateSourceEffect extends ReplacementEffectImpl {
 
     public RegenerateSourceEffect() {
-        super(Duration.EndOfTurn, Outcome.Regenerate);
-        staticText = "Regenerate {this}";
+        this("{this}");
     }
 
     public RegenerateSourceEffect(String targetName) {
         super(Duration.EndOfTurn, Outcome.Regenerate);
-        staticText = "Regenerate " + targetName;
+        staticText = "regenerate " + targetName;
     }
 
-    public RegenerateSourceEffect(final RegenerateSourceEffect effect) {
+    protected RegenerateSourceEffect(final RegenerateSourceEffect effect) {
         super(effect);
     }
 

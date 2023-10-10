@@ -30,7 +30,7 @@ public final class TahngarthFirstMate extends CardImpl {
     public TahngarthFirstMate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
@@ -126,7 +126,7 @@ class TahngarthFirstMateEffect extends OneShotEffect {
             return false;
         }
         TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!controller.choose(outcome, target, source, game)) {
             return false;
         }

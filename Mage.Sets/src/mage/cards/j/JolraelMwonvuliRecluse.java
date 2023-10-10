@@ -26,7 +26,7 @@ public final class JolraelMwonvuliRecluse extends CardImpl {
     public JolraelMwonvuliRecluse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(1);
@@ -38,7 +38,7 @@ public final class JolraelMwonvuliRecluse extends CardImpl {
         // {4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.
         this.addAbility(new SimpleActivatedAbility(new SetBasePowerToughnessAllEffect(
                 CardsInControllerHandCount.instance, CardsInControllerHandCount.instance,
-                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true
+                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES
         ).setText("until end of turn, creatures you control have base power and toughness X/X, " +
                 "where X is the number of cards in your hand"), new ManaCostsImpl<>("{4}{G}{G}")));
     }

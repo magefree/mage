@@ -30,7 +30,7 @@ public final class NissaSageAnimist extends CardImpl {
 
     public NissaSageAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
         this.color.setGreen(true);
 
@@ -68,7 +68,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.";
     }
 
-    NissaSageAnimistPlusOneEffect(final NissaSageAnimistPlusOneEffect effect) {
+    private NissaSageAnimistPlusOneEffect(final NissaSageAnimistPlusOneEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class NissaSageAnimistMinusAnimateEffect extends OneShotEffect {
         this.staticText = "They become 6/6 Elemental creatures. They're still lands";
     }
 
-    public NissaSageAnimistMinusAnimateEffect(final NissaSageAnimistMinusAnimateEffect effect) {
+    private NissaSageAnimistMinusAnimateEffect(final NissaSageAnimistMinusAnimateEffect effect) {
         super(effect);
     }
 

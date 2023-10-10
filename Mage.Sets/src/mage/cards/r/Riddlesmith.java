@@ -7,8 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -16,8 +15,6 @@ import java.util.UUID;
  * @author Loki, North
  */
 public final class Riddlesmith extends CardImpl {
-
-    private static final FilterSpell filter = new FilterArtifactSpell("an artifact spell");
 
     public Riddlesmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -29,11 +26,11 @@ public final class Riddlesmith extends CardImpl {
 
         // Whenever you cast an artifact spell, you may draw a card. If you do, discard a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new DrawDiscardControllerEffect(true), filter, false
+                new DrawDiscardControllerEffect(true), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false
         ));
     }
 
-    public Riddlesmith(final Riddlesmith card) {
+    private Riddlesmith(final Riddlesmith card) {
         super(card);
     }
 

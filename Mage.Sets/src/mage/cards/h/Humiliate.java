@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -29,7 +28,7 @@ public final class Humiliate extends CardImpl {
 
         // Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. Put a +1/+1 counter on a creature you control.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(
-                StaticFilters.FILTER_CARD_NON_LAND, TargetController.OPPONENT
+                StaticFilters.FILTER_CARD_NON_LAND
         ));
         this.getSpellAbility().addEffect(new HumiliateEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -71,7 +70,7 @@ class HumiliateEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("+1/+1 counter");
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());

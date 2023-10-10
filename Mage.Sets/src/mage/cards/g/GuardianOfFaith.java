@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -21,12 +20,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class GuardianOfFaith extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("other creatures you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other target creatures you control");
 
     public GuardianOfFaith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
@@ -43,9 +37,7 @@ public final class GuardianOfFaith extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Guardian of Faith enters the battlefield, any number of other target creatures you control phase out.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new PhaseOutTargetEffect(
-                "any number of other target creatures you control"
-        ));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new PhaseOutTargetEffect());
         ability.addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
         this.addAbility(ability);
     }

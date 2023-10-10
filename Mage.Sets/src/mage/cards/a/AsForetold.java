@@ -131,7 +131,7 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on {this}.";
     }
 
-    public AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
+    private AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
         super(effect);
     }
 
@@ -152,7 +152,7 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
                         + sourcePermanent.getTurnsOnBattlefield());
                 // If we haven't used it yet this turn, give the option of using the zero alternative cost
                 if (wasItUsed == null) {
-                    int timeCounters = sourcePermanent.getCounters(game).getCount("time");
+                    int timeCounters = sourcePermanent.getCounters(game).getCount(CounterType.TIME);
                     AsForetoldAlternativeCost alternateCostAbility = new AsForetoldAlternativeCost(timeCounters);
                     alternateCostAbility.setSourceId(source.getSourceId());
                     controller.getAlternativeSourceCosts().add(alternateCostAbility);

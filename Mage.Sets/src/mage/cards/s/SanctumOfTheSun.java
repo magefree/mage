@@ -23,7 +23,7 @@ public final class SanctumOfTheSun extends CardImpl {
     public SanctumOfTheSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.nightCard = true;
 
@@ -33,7 +33,7 @@ public final class SanctumOfTheSun extends CardImpl {
 
         // {T}: Add X mana of any one color, where X is your life total.
         this.addAbility(new DynamicManaAbility(new Mana(0, 0, 0, 0, 0, 0, 1, 0), ControllerLifeCount.instance, new TapSourceCost(),
-                "Add X mana of any one color, where X is is your life total", true));
+                "Add X mana of any one color, where X is your life total", true));
 
     }
 

@@ -62,7 +62,7 @@ class PlayerLosesTheGameTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), false);
     }
 
-    public PlayerLosesTheGameTriggeredAbility(final PlayerLosesTheGameTriggeredAbility ability) {
+    private PlayerLosesTheGameTriggeredAbility(final PlayerLosesTheGameTriggeredAbility ability) {
         super(ability);
     }
 
@@ -94,7 +94,7 @@ class BloodTyrantEffect extends OneShotEffect {
         staticText = "each player loses 1 life. Put a +1/+1 counter on {this} for each 1 life lost this way";
     }
 
-    public BloodTyrantEffect(final BloodTyrantEffect effect) {
+    private BloodTyrantEffect(final BloodTyrantEffect effect) {
         super(effect);
     }
 

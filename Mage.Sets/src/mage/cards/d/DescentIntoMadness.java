@@ -72,7 +72,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
         this.staticText = "put a despair counter on {this}, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on {this}";
     }
 
-    public DescentIntoMadnessEffect(final DescentIntoMadnessEffect effect) {
+    private DescentIntoMadnessEffect(final DescentIntoMadnessEffect effect) {
         super(effect);
     }
 

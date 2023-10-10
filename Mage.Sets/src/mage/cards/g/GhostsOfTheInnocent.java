@@ -50,7 +50,7 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
         staticText = "If a source would deal damage to a permanent or player, it deals half that damage, rounded down, to that permanent or player instead";
     }
 
-    public GhostsOfTheInnocentPreventDamageEffect(final GhostsOfTheInnocentPreventDamageEffect effect) {
+    private GhostsOfTheInnocentPreventDamageEffect(final GhostsOfTheInnocentPreventDamageEffect effect) {
         super(effect);
     }
 

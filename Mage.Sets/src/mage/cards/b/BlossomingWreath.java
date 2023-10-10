@@ -40,7 +40,7 @@ public final class BlossomingWreath extends CardImpl {
             this.staticText = "You gain life equal to the number of creature cards in your graveyard";
         }
 
-        public BlossomingWreathEffect(final BlossomingWreathEffect effect) {
+        private BlossomingWreathEffect(final BlossomingWreathEffect effect) {
             super(effect);
         }
 

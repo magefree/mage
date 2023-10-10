@@ -34,7 +34,7 @@ public final class UlamogTheCeaselessHunger extends CardImpl {
 
     public UlamogTheCeaselessHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
@@ -69,7 +69,7 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you cast this spell, ");
     }
 
-    UlamogExilePermanentsOnCastAbility(UlamogExilePermanentsOnCastAbility ability) {
+    private UlamogExilePermanentsOnCastAbility(final UlamogExilePermanentsOnCastAbility ability) {
         super(ability);
     }
 
@@ -97,7 +97,7 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public UlamogAttackTriggeredAbility(final UlamogAttackTriggeredAbility ability) {
+    private UlamogAttackTriggeredAbility(final UlamogAttackTriggeredAbility ability) {
         super(ability);
     }
 
@@ -132,7 +132,7 @@ class UlamogExileLibraryEffect extends OneShotEffect {
         this.staticText = "defending player exiles the top twenty cards of their library";
     }
 
-    public UlamogExileLibraryEffect(final UlamogExileLibraryEffect effect) {
+    private UlamogExileLibraryEffect(final UlamogExileLibraryEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public final class HordeOfNotions extends CardImpl {
 
     public HordeOfNotions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -69,7 +69,7 @@ class HordeOfNotionsEffect extends OneShotEffect {
         this.staticText = "You may play target Elemental card from your graveyard without paying its mana cost";
     }
 
-    public HordeOfNotionsEffect(final HordeOfNotionsEffect effect) {
+    private HordeOfNotionsEffect(final HordeOfNotionsEffect effect) {
         super(effect);
     }
 

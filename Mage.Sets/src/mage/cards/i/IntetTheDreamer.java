@@ -31,7 +31,7 @@ public final class IntetTheDreamer extends CardImpl {
 
     public IntetTheDreamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -66,7 +66,7 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
         staticText = "exile the top card of your library face down. You may play that card without paying its mana cost for as long as Intet remains on the battlefield";
     }
 
-    public IntetTheDreamerExileEffect(final IntetTheDreamerExileEffect effect) {
+    private IntetTheDreamerExileEffect(final IntetTheDreamerExileEffect effect) {
         super(effect);
     }
 
@@ -165,7 +165,7 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
         staticText = "You may look at that card for as long as it remains exiled";
     }
 
-    public IntetTheDreamerLookEffect(final IntetTheDreamerLookEffect effect) {
+    private IntetTheDreamerLookEffect(final IntetTheDreamerLookEffect effect) {
         super(effect);
     }
 

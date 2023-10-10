@@ -24,7 +24,7 @@ public class DyadForceTransfer extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(3, true));
     }
 
-    public DyadForceTransfer(final DyadForceTransfer card) {
+    private DyadForceTransfer(final DyadForceTransfer card) {
         super(card);
     }
 

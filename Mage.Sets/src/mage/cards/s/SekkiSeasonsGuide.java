@@ -37,7 +37,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
 
     public SekkiSeasonsGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(0);
@@ -52,7 +52,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
         // Sacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new SacrificeTargetCost(new TargetControlledPermanent(8, 8, filter, true))));
     }
 
@@ -73,7 +73,7 @@ class SekkiSeasonsGuideEffect extends PreventionEffectImpl {
         staticText = "If damage would be dealt to {this}, prevent that damage, remove that many +1/+1 counters from {this}, and create that many 1/1 colorless Spirit creature tokens";
     }
 
-    public SekkiSeasonsGuideEffect(final SekkiSeasonsGuideEffect effect) {
+    private SekkiSeasonsGuideEffect(final SekkiSeasonsGuideEffect effect) {
         super(effect);
     }
 

@@ -42,7 +42,7 @@ public final class KotoseTheSilentSpider extends CardImpl {
 
     public KotoseTheSilentSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NINJA);
 
@@ -75,7 +75,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
                 "play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it";
     }
 
-    public KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {
+    private KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {
         super(effect);
     }
 

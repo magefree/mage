@@ -49,7 +49,7 @@ class EncirclingFissurePreventEffect extends PreventionEffectImpl {
         staticText = "Prevent all combat damage that would be dealt this turn by creatures target opponent controls";
     }
 
-    public EncirclingFissurePreventEffect(final EncirclingFissurePreventEffect effect) {
+    private EncirclingFissurePreventEffect(final EncirclingFissurePreventEffect effect) {
         super(effect);
     }
 

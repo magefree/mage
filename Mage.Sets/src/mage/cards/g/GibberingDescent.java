@@ -57,7 +57,7 @@ class GibberingDescentSkipUpkeepEffect extends ContinuousRuleModifyingEffectImpl
         this.staticText = "skip your upkeep step if you have no cards in hand";
     }
 
-    GibberingDescentSkipUpkeepEffect(final GibberingDescentSkipUpkeepEffect effect) {
+    private GibberingDescentSkipUpkeepEffect(final GibberingDescentSkipUpkeepEffect effect) {
         super(effect);
     }
 

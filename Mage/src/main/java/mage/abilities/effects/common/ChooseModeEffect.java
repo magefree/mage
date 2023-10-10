@@ -4,6 +4,7 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
@@ -14,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class ChooseModeEffect extends OneShotEffect {
@@ -29,7 +29,7 @@ public class ChooseModeEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public ChooseModeEffect(final ChooseModeEffect effect) {
+    protected ChooseModeEffect(final ChooseModeEffect effect) {
         super(effect);
         this.modes.addAll(effect.modes);
         this.choiceMessage = effect.choiceMessage;
@@ -47,7 +47,7 @@ public class ChooseModeEffect extends OneShotEffect {
         if (sourcePermanent == null) {
             sourcePermanent = game.getPermanentEntering(source.getSourceId());
         }
-        if (controller != null) {
+        if (controller != null && sourcePermanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage(choiceMessage);
             choice.getChoices().addAll(modes);

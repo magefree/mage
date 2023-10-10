@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -32,7 +33,7 @@ public final class SqueeDubiousMonarch extends CardImpl {
     public SqueeDubiousMonarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(2);
@@ -47,7 +48,8 @@ public final class SqueeDubiousMonarch extends CardImpl {
         )));
 
         // You may cast Squee, Dubious Monarch from your graveyard by paying {3}{R} and exiling four other cards from your graveyard rather than paying its mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SqueeDubiousMonarchEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SqueeDubiousMonarchEffect())
+                .setIdentifier(MageIdentifier.SqueeDubiousMonarchAlternateCast));
     }
 
     private SqueeDubiousMonarch(final SqueeDubiousMonarch card) {
@@ -101,7 +103,10 @@ class SqueeDubiousMonarchEffect extends AsThoughEffectImpl {
         }
         Costs<Cost> costs = new CostsImpl<>();
         costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(4, filter)));
-        controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{3}{R}"), costs);
+        controller.setCastSourceIdWithAlternateMana(
+                objectId, new ManaCostsImpl<>("{3}{R}"), costs,
+                MageIdentifier.SqueeDubiousMonarchAlternateCast
+        );
         return true;
     }
 }

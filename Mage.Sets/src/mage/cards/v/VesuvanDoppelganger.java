@@ -62,7 +62,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public VesuvanDoppelgangerCopyEffect(final VesuvanDoppelgangerCopyEffect effect) {
+    private VesuvanDoppelgangerCopyEffect(final VesuvanDoppelgangerCopyEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
             if (source instanceof SimpleStaticAbility) {
                 target = new TargetPermanent(new FilterCreaturePermanent("creature (you copy from)"));
                 target.setRequired(false);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
             }
             if (target.canChoose(source.getControllerId(), source, game)) {
                 controller.choose(Outcome.Copy, target, source, game);

@@ -38,7 +38,7 @@ public final class SasayaOrochiAscendant extends CardImpl {
 
     public SasayaOrochiAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.MONK);
 
@@ -71,7 +71,7 @@ class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
         this.staticText = "If you have seven or more land cards in your hand, flip {this}";
     }
 
-    public SasayaOrochiAscendantFlipEffect(final SasayaOrochiAscendantFlipEffect effect) {
+    private SasayaOrochiAscendantFlipEffect(final SasayaOrochiAscendantFlipEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class SasayasEssence extends TokenImpl {
 
     SasayasEssence() {
         super("Sasaya's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setGreen(true);
@@ -108,7 +108,7 @@ class SasayasEssence extends TokenImpl {
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
     }
 
-    public SasayasEssence(final SasayasEssence token) {
+    private SasayasEssence(final SasayasEssence token) {
         super(token);
     }
 
@@ -125,7 +125,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
         this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }
 
-    public SasayasEssenceManaEffect(final SasayasEssenceManaEffect effect) {
+    private SasayasEssenceManaEffect(final SasayasEssenceManaEffect effect) {
         super(effect);
     }
 
@@ -226,14 +226,21 @@ class SasayasEssenceManaEffect extends ManaEffect {
 
                     for (int i = 0; i < count; i++) {
                         choice.clearChoice();
+                        String chosenColor;
                         if (choice.getChoices().size() == 1) {
-                            choice.setChoice(choice.getChoices().iterator().next());
+                            chosenColor = choice.getChoices().iterator().next();
                         } else {
-                            if (!controller.choose(outcome, choice, game)) {
-                                return newMana;
+                            // workaround to skip choose dialog in check playable state
+                            if (game.inCheckPlayableState()) {
+                                chosenColor = "Any";
+                            } else {
+                                if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
+                                    return newMana;
+                                }
+                                chosenColor = choice.getChoice();
                             }
                         }
-                        switch (choice.getChoice()) {
+                        switch (chosenColor) {
                             case "Black":
                                 newMana.increaseBlack();
                                 break;
@@ -251,6 +258,9 @@ class SasayasEssenceManaEffect extends ManaEffect {
                                 break;
                             case "Colorless":
                                 newMana.increaseColorless();
+                                break;
+                            case "Any":
+                                newMana.increaseAny();
                                 break;
                         }
                     }

@@ -21,11 +21,10 @@ public final class SylvanParadise extends CardImpl {
     public SylvanParadise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
-        // Any number of target creatures become green until end of turn.
+        // One or more target creatures become green until end of turn.
         Effect effect = new BecomesColorTargetEffect(ObjectColor.GREEN, Duration.EndOfTurn);
-        effect.setText("Any number of target creatures become green until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, Integer.MAX_VALUE));
 
     }
 

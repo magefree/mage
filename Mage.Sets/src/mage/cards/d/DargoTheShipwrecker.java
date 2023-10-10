@@ -31,7 +31,7 @@ public final class DargoTheShipwrecker extends CardImpl {
     public DargoTheShipwrecker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(7);
@@ -70,7 +70,7 @@ class DargoTheShipwreckerEffect extends CostModificationEffectImpl {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
     }
 
-    public DargoTheShipwreckerEffect(final DargoTheShipwreckerEffect effect) {
+    private DargoTheShipwreckerEffect(final DargoTheShipwreckerEffect effect) {
         super(effect);
     }
 

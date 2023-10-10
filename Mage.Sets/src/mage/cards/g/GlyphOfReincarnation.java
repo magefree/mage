@@ -68,7 +68,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures that were blocked by target Wall this turn. They can't be regenerated. For each creature that died this way, put a creature card from the graveyard of the player who controlled that creature the last time it became blocked by that Wall onto the battlefield under its owner's control";
     }
 
-    public GlyphOfReincarnationEffect(final GlyphOfReincarnationEffect effect) {
+    private GlyphOfReincarnationEffect(final GlyphOfReincarnationEffect effect) {
         super(effect);
     }
 
@@ -98,6 +98,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
                         }
                     }
                 }
+                game.getState().processAction(game);
                 // For each creature that died this way, put a creature card from the graveyard of the player who controlled that creature the last time it became blocked by that Wall 
                 // onto the battlefield under its owner’s control
                 for (Map.Entry<UUID, Player> entry : destroyed.entrySet()) {
@@ -107,7 +108,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
                         FilterCreatureCard filter = new FilterCreatureCard("a creature card from " + player.getName() + "'s graveyard");
                         filter.add(new OwnerIdPredicate(player.getId()));
                         Target targetCreature = new TargetCardInGraveyard(filter);
-                        targetCreature.setNotTarget(true);
+                        targetCreature.withNotTarget(true);
                         if (targetCreature.canChoose(controller.getId(), source, game)
                                 && controller.chooseTarget(outcome, targetCreature, source, game)) {
                             Card card = game.getCard(targetCreature.getFirstTarget());

@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.PhaseOutTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class VisionCharm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Choose one - Target player puts the top four cards of their library into their graveyard;
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // or choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn;

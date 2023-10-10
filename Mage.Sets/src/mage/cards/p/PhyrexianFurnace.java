@@ -60,7 +60,7 @@ class PhyrexianFurnaceEffect extends OneShotEffect {
         this.staticText = "exile the bottom card of target player's graveyard";
     }
 
-    public PhyrexianFurnaceEffect(final PhyrexianFurnaceEffect effect) {
+    private PhyrexianFurnaceEffect(final PhyrexianFurnaceEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever any player taps a permanent, ");
     }
 
-    public BurningCinderFuryOfCrimsonChaosFireAbility(BurningCinderFuryOfCrimsonChaosFireAbility ability) {
+    private BurningCinderFuryOfCrimsonChaosFireAbility(final BurningCinderFuryOfCrimsonChaosFireAbility ability) {
         super(ability);
     }
 
@@ -95,7 +95,7 @@ class BurningCinderFuryOfCrimsonChaosFireEffect extends OneShotEffect {
         this.staticText = "that player choose one of their opponents. The chosen player gains control of that permanent at the beginning of the next end step";
     }
 
-    public BurningCinderFuryOfCrimsonChaosFireEffect(final BurningCinderFuryOfCrimsonChaosFireEffect effect) {
+    private BurningCinderFuryOfCrimsonChaosFireEffect(final BurningCinderFuryOfCrimsonChaosFireEffect effect) {
         super(effect);
         this.firstControllerId = effect.firstControllerId;
     }
@@ -149,7 +149,7 @@ class BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect extends Conti
         this.staticText = "the chosen player gains control of that permanent";
     }
 
-    public BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect(final BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect effect) {
+    private BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect(final BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }

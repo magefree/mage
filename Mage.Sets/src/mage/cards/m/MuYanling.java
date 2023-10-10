@@ -29,7 +29,7 @@ public final class MuYanling extends CardImpl {
     public MuYanling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.YANLING);
         this.setStartingLoyalty(5);
 
@@ -62,7 +62,7 @@ class MuYanlingEffect extends OneShotEffect {
         staticText = "tap all creatures your opponents control. You take an extra turn after this one.";
     }
 
-    public MuYanlingEffect(final MuYanlingEffect effect) {
+    private MuYanlingEffect(final MuYanlingEffect effect) {
         super(effect);
     }
 

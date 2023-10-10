@@ -57,7 +57,7 @@ class GloomwidowsFeastEffect extends OneShotEffect {
         this.staticText = "Destroy target creature with flying. If that creature was blue or black, create a 1/2 green Spider creature token with reach";
     }
 
-    public GloomwidowsFeastEffect(final GloomwidowsFeastEffect effect) {
+    private GloomwidowsFeastEffect(final GloomwidowsFeastEffect effect) {
         super(effect);
     }
 

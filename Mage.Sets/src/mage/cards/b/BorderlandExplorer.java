@@ -57,7 +57,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                 + "for a basic land card, reveal it, put it into their hand, then shuffle";
     }
 
-    public BorderlandExplorerEffect(final BorderlandExplorerEffect effect) {
+    private BorderlandExplorerEffect(final BorderlandExplorerEffect effect) {
         super(effect);
     }
 

@@ -36,14 +36,14 @@ public final class VialSmasherTheFierce extends CardImpl {
     public VialSmasherTheFierce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
         // Whenever you cast your first spell each turn, Vial Smasher the Fierce deals damage equal to that spell's converted mana cost to an opponent chosen at random.
-        this.addAbility(new VialSmasherTheFierceTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new VialSmasherTheFierceTriggeredAbility());
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
@@ -65,7 +65,7 @@ class VialSmasherTheFierceTriggeredAbility extends SpellCastControllerTriggeredA
         super(new VialSmasherTheFierceEffect(), false);
     }
 
-    VialSmasherTheFierceTriggeredAbility(VialSmasherTheFierceTriggeredAbility ability) {
+    private VialSmasherTheFierceTriggeredAbility(final VialSmasherTheFierceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -78,16 +78,13 @@ class VialSmasherTheFierceTriggeredAbility extends SpellCastControllerTriggeredA
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-            if (watcher != null) {
-                List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
-                if (spells != null && spells.size() == 1) {
-                    Spell spell = game.getStack().getSpell(event.getTargetId());
-                    if (spell != null) {
-                        for (Effect effect : getEffects()) {
-                            effect.setValue("VialSmasherTheFierceCMC", spell.getManaValue());
-                        }
-                        return true;
+            if (watcher != null && watcher.getCount(event.getPlayerId()) == 1) {
+                Spell spell = game.getStack().getSpell(event.getTargetId());
+                if (spell != null) {
+                    for (Effect effect : getEffects()) {
+                        effect.setValue("VialSmasherTheFierceCMC", spell.getManaValue());
                     }
+                    return true;
                 }
             }
         }
@@ -108,7 +105,7 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
         this.staticText = "{this} choose an opponent at random. {this} deals damage equal to that spell's mana value to that player or a planeswalker that player controls";
     }
 
-    public VialSmasherTheFierceEffect(final VialSmasherTheFierceEffect effect) {
+    private VialSmasherTheFierceEffect(final VialSmasherTheFierceEffect effect) {
         super(effect);
     }
 
@@ -136,7 +133,7 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
                 Collections.shuffle(opponents);
                 Player opponent = opponents.get(0);
                 game.informPlayers(opponent.getLogName() + " was chosen at random.");
-                if (game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponent.getId(), game).size() > 0) {
+                if (!game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponent.getId(), game).isEmpty()) {
                     if (controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
                         FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
                         filter.add(new ControllerIdPredicate(opponent.getId()));

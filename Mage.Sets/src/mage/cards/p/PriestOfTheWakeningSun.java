@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -15,19 +14,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class PriestOfTheWakeningSun extends CardImpl {
@@ -52,7 +48,7 @@ public final class PriestOfTheWakeningSun extends CardImpl {
 
         // {3}{W}{W}, Sacrifice Priest of the Wakening Sun: Search your library for a Dinosaur card, reveal it, put it into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(target), true, true), new ManaCostsImpl<>("{3}{W}{W}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(target, true), new ManaCostsImpl<>("{3}{W}{W}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
     }
@@ -80,7 +76,7 @@ class PriestOfTheWakeningSunEffect extends OneShotEffect {
         this.staticText = "reveal a Dinosaur card from your hand. If you do, you gain 2 life";
     }
 
-    PriestOfTheWakeningSunEffect(final PriestOfTheWakeningSunEffect effect) {
+    private PriestOfTheWakeningSunEffect(final PriestOfTheWakeningSunEffect effect) {
         super(effect);
     }
 

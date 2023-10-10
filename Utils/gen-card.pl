@@ -209,7 +209,7 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
 			$vars{'hasSubTypes'} = 'true';
         } else {
             my $st = uc($1);
-            $vars{'subType'} .= "\n        this.addSuperType(SuperType.$st);";
+            $vars{'subType'} .= "\n        this.supertype.add(SuperType.$st);";
 			$vars{'hasSuperTypes'} = 'true';
         }
     }

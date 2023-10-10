@@ -20,7 +20,7 @@ public final class OphiomancerSnakeToken extends TokenImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public OphiomancerSnakeToken(final OphiomancerSnakeToken token) {
+    protected OphiomancerSnakeToken(final OphiomancerSnakeToken token) {
         super(token);
     }
 

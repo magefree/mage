@@ -51,7 +51,7 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), false);
     }
 
-    WasteNotCreatureTriggeredAbility(final WasteNotCreatureTriggeredAbility ability) {
+    private WasteNotCreatureTriggeredAbility(final WasteNotCreatureTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,7 +88,7 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(2)), false);
     }
 
-    WasteNotLandTriggeredAbility(final WasteNotLandTriggeredAbility ability) {
+    private WasteNotLandTriggeredAbility(final WasteNotLandTriggeredAbility ability) {
         super(ability);
     }
 
@@ -125,7 +125,7 @@ class WasteNotOtherTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    WasteNotOtherTriggeredAbility(final WasteNotOtherTriggeredAbility ability) {
+    private WasteNotOtherTriggeredAbility(final WasteNotOtherTriggeredAbility ability) {
         super(ability);
     }
 

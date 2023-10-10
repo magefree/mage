@@ -45,7 +45,7 @@ public final class PriceOfKnowledge extends CardImpl {
 
 class PriceOfKnowledgeEffect extends OneShotEffect {
 
-    public PriceOfKnowledgeEffect(final PriceOfKnowledgeEffect effect) {
+    private PriceOfKnowledgeEffect(final PriceOfKnowledgeEffect effect) {
         super(effect);
     }
 

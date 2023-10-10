@@ -30,7 +30,7 @@ public final class MagusLuceaKane extends CardImpl {
     public MagusLuceaKane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.TYRANID);
         this.subtype.add(SubType.WIZARD);

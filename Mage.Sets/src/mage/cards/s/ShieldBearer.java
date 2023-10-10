@@ -28,7 +28,7 @@ public final class ShieldBearer extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public ShieldBearer (final ShieldBearer card) {
+    private ShieldBearer(final ShieldBearer card) {
         super(card);
     }
 

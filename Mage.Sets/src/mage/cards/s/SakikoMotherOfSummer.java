@@ -28,7 +28,7 @@ public final class SakikoMotherOfSummer extends CardImpl {
 
     public SakikoMotherOfSummer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SHAMAN);
 
@@ -56,7 +56,7 @@ class SakikoMotherOfSummerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public SakikoMotherOfSummerTriggeredAbility(final SakikoMotherOfSummerTriggeredAbility ability) {
+    private SakikoMotherOfSummerTriggeredAbility(final SakikoMotherOfSummerTriggeredAbility ability) {
         super(ability);
     }
 

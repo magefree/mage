@@ -9,10 +9,10 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileTargetReplacementEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
@@ -21,8 +21,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -37,7 +35,7 @@ public final class WhipOfErebos extends CardImpl {
 
     public WhipOfErebos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Creatures you control have lifelink.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
@@ -54,7 +52,7 @@ public final class WhipOfErebos extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        ability.addEffect(new WhipOfErebosReplacementEffect());
+        ability.addEffect(new LeaveBattlefieldExileTargetReplacementEffect("it"));
         this.addAbility(ability);
     }
 
@@ -105,49 +103,6 @@ class WhipOfErebosEffect extends OneShotEffect {
             }
             return true;
         }
-        return false;
-    }
-}
-
-class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
-
-    WhipOfErebosReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Tap);
-        staticText = "If it would leave the battlefield, exile it instead of putting it anywhere else";
-    }
-
-    private WhipOfErebosReplacementEffect(final WhipOfErebosReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WhipOfErebosReplacementEffect copy() {
-        return new WhipOfErebosReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getFirstTarget())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 }

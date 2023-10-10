@@ -23,7 +23,7 @@ public final class KreshTheBloodbraided extends CardImpl {
 
     public KreshTheBloodbraided(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -51,7 +51,7 @@ class KreshTheBloodbraidedEffect extends OneShotEffect {
         staticText = "you may put X +1/+1 counters on {this}, where X is that creature's power";
     }
 
-    KreshTheBloodbraidedEffect(final KreshTheBloodbraidedEffect effect) {
+    private KreshTheBloodbraidedEffect(final KreshTheBloodbraidedEffect effect) {
         super(effect);
     }
 

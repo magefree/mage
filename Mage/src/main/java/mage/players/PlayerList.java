@@ -15,7 +15,7 @@ public class PlayerList extends CircularList<UUID> {
     public PlayerList() {
     }
 
-    public PlayerList(final PlayerList list) {
+    protected PlayerList(final PlayerList list) {
         super(list);
     }
 

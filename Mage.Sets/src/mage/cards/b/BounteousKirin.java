@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -15,15 +14,16 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BounteousKirin extends CardImpl {
 
     public BounteousKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN, SubType.SPIRIT);
 
         this.power = new MageInt(4);
@@ -32,7 +32,10 @@ public final class BounteousKirin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new BounteousKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new BounteousKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD,
+                true, SetTargetPointer.SPELL
+        ));
     }
 
     private BounteousKirin(final BounteousKirin card) {
@@ -52,7 +55,7 @@ class BounteousKirinEffect extends OneShotEffect {
         this.staticText = "you may gain life equal to that spell's mana value";
     }
 
-    public BounteousKirinEffect(final BounteousKirinEffect effect) {
+    private BounteousKirinEffect(final BounteousKirinEffect effect) {
         super(effect);
     }
 

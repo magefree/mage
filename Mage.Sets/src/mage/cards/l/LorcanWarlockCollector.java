@@ -7,18 +7,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
+import mage.abilities.effects.common.replacement.CreaturesAreExiledOnDeathReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -32,7 +30,7 @@ public final class LorcanWarlockCollector extends CardImpl {
     public LorcanWarlockCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -48,7 +46,9 @@ public final class LorcanWarlockCollector extends CardImpl {
         ));
 
         // If a Warlock you control would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(new LorcanWarlockCollectorReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(
+            new CreaturesAreExiledOnDeathReplacementEffect(new FilterControlledCreaturePermanent(SubType.WARLOCK))
+        ));
     }
 
     private LorcanWarlockCollector(final LorcanWarlockCollector card) {
@@ -94,46 +94,5 @@ class LorcanWarlockCollectorReturnEffect extends OneShotEffect {
         game.addEffect(new AddCardSubTypeTargetEffect(SubType.WARLOCK, Duration.Custom).setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1)), source);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         return true;
-    }
-}
-
-class LorcanWarlockCollectorReplacementEffect extends ReplacementEffectImpl {
-
-    LorcanWarlockCollectorReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "if a Warlock you control would die, exile it instead";
-    }
-
-    private LorcanWarlockCollectorReplacementEffect(final LorcanWarlockCollectorReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LorcanWarlockCollectorReplacementEffect copy() {
-        return new LorcanWarlockCollectorReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        if (permanent == null) {
-            return false;
-        }
-        Player player = game.getPlayer(permanent.getControllerId());
-        return player != null && player.moveCards(permanent, Zone.EXILED, source, game);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getTarget() != null
-                && zEvent.getTarget().isControlledBy(source.getControllerId())
-                && zEvent.getTarget().hasSubtype(SubType.WARLOCK, game)
-                && zEvent.isDiesEvent();
     }
 }

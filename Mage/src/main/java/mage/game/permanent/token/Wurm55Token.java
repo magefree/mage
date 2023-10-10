@@ -18,7 +18,7 @@ public final class Wurm55Token extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public Wurm55Token(final Wurm55Token token) {
+    protected Wurm55Token(final Wurm55Token token) {
         super(token);
     }
 

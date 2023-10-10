@@ -1,8 +1,6 @@
 package mage.cards.c;
 
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,8 +18,7 @@ public final class Cloudshift extends CardImpl {
 
         // Exile target creature you control, then return that card to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect().concatBy(", then"));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(true, true));
     }
 
     private Cloudshift(final Cloudshift card) {

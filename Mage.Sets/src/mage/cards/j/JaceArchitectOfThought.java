@@ -25,7 +25,7 @@ public final class JaceArchitectOfThought extends CardImpl {
 
     public JaceArchitectOfThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.setStartingLoyalty(4);
@@ -62,7 +62,7 @@ class JaceArchitectOfThoughtStartEffect1 extends OneShotEffect {
                 + "controls attacks, it gets -1/-0 until end of turn";
     }
 
-    public JaceArchitectOfThoughtStartEffect1(final JaceArchitectOfThoughtStartEffect1 effect) {
+    private JaceArchitectOfThoughtStartEffect1(final JaceArchitectOfThoughtStartEffect1 effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
         this.startingTurn = startingTurn;
     }
 
-    public JaceArchitectOfThoughtDelayedTriggeredAbility(final JaceArchitectOfThoughtDelayedTriggeredAbility ability) {
+    private JaceArchitectOfThoughtDelayedTriggeredAbility(final JaceArchitectOfThoughtDelayedTriggeredAbility ability) {
         super(ability);
         this.startingTurn = ability.startingTurn;
     }
@@ -134,7 +134,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                 + "then that player shuffles. You may cast those cards without paying their mana costs";
     }
 
-    public JaceArchitectOfThoughtEffect3(final JaceArchitectOfThoughtEffect3 effect) {
+    private JaceArchitectOfThoughtEffect3(final JaceArchitectOfThoughtEffect3 effect) {
         super(effect);
     }
 

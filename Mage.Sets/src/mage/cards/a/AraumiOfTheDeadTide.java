@@ -26,7 +26,7 @@ public final class AraumiOfTheDeadTide extends CardImpl {
     public AraumiOfTheDeadTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -95,7 +95,7 @@ class AraumiOfTheDeadTideCost extends CostImpl {
         }
         int oppCount = game.getOpponents(controllerId).size();
         TargetCard target = new TargetCardInYourGraveyard(oppCount, StaticFilters.FILTER_CARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(Outcome.Exile, target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         if (cards.size() < oppCount) {

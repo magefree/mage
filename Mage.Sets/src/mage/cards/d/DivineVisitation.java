@@ -54,7 +54,7 @@ class DivineVisitationEffect extends ReplacementEffectImpl {
                 + "tokens with flying and vigilance are created instead.";
     }
 
-    public DivineVisitationEffect(DivineVisitationEffect effect) {
+    private DivineVisitationEffect(final DivineVisitationEffect effect) {
         super(effect);
     }
 

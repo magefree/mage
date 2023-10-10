@@ -64,18 +64,13 @@ class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "and its activated abilities can't be activated unless they're mana abilities";
     }
 
-    public FaithsFettersEffect(final FaithsFettersEffect effect) {
+    private FaithsFettersEffect(final FaithsFettersEffect effect) {
         super(effect);
     }
 
     @Override
     public FaithsFettersEffect copy() {
         return new FaithsFettersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

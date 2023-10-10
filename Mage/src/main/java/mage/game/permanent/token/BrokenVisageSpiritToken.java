@@ -6,13 +6,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj & L_J
  */
 public final class BrokenVisageSpiritToken extends TokenImpl {
 
     public BrokenVisageSpiritToken() {
-        this(0,0);
+        this(0, 0);
     }
 
     public BrokenVisageSpiritToken(int tokenPower, int tokenToughness) {
@@ -24,7 +23,7 @@ public final class BrokenVisageSpiritToken extends TokenImpl {
         toughness = new MageInt(tokenToughness);
     }
 
-    public BrokenVisageSpiritToken(final BrokenVisageSpiritToken token) {
+    protected BrokenVisageSpiritToken(final BrokenVisageSpiritToken token) {
         super(token);
     }
 

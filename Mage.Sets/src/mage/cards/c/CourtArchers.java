@@ -28,7 +28,7 @@ public final class CourtArchers extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public CourtArchers (final CourtArchers card) {
+    private CourtArchers(final CourtArchers card) {
         super(card);
     }
 

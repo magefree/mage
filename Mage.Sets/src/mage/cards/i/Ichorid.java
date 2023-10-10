@@ -66,19 +66,19 @@ class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public IchoridTriggerdAbility() {
+    IchoridTriggerdAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(filter))
         ), TargetController.YOU, false);
     }
 
-    public IchoridTriggerdAbility(IchoridTriggerdAbility ability) {
+    private IchoridTriggerdAbility(IchoridTriggerdAbility ability) {
         super(ability);
     }
 
     @Override
-    public BeginningOfUpkeepTriggeredAbility copy() {
+    public IchoridTriggerdAbility copy() {
         return new IchoridTriggerdAbility(this);
     }
 

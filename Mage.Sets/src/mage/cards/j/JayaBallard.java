@@ -24,7 +24,7 @@ public final class JayaBallard extends CardImpl {
     public JayaBallard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JAYA);
         this.setStartingLoyalty(5);
 

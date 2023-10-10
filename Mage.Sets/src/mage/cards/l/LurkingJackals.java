@@ -40,11 +40,12 @@ public final class LurkingJackals extends CardImpl {
 class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 
     public LurkingJackalsStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LurkingJackalsToken(), "", Duration.Custom, true, false));
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LurkingJackalsToken(), null, Duration.Custom));
         setTriggerPhrase("When an opponent has 10 or less life, if {this} is an enchantment, ");
+        this.replaceRuleText = true;
     }
 
-    public LurkingJackalsStateTriggeredAbility(final LurkingJackalsStateTriggeredAbility ability) {
+    private LurkingJackalsStateTriggeredAbility(final LurkingJackalsStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -73,44 +74,19 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
         return false;
     }
 
-    @Override
-    public boolean canTrigger(Game game) {
-        //20100716 - 603.8
-        return !Boolean.TRUE.equals(game.getState().getValue(getSourceId().toString() + "triggered"));
-    }
-
-    @Override
-    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
-        //20100716 - 603.8
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
-        super.trigger(game, controllerId, triggeringEvent);
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        //20100716 - 603.8
-        boolean result = super.resolve(game);
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
-        return result;
-    }
-
-    @Override
-    public void counter(Game game) {
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
-    }
 }
 
 class LurkingJackalsToken extends TokenImpl {
 
     public LurkingJackalsToken() {
-        super("Dog", "3/2 Dog creature");
+        super("Dog", "3/2 Jackal creature");
         cardType.add(CardType.CREATURE);
-        subtype.add(SubType.DOG);
+        subtype.add(SubType.JACKAL);
         power = new MageInt(3);
         toughness = new MageInt(2);
     }
 
-    public LurkingJackalsToken(final LurkingJackalsToken token) {
+    private LurkingJackalsToken(final LurkingJackalsToken token) {
         super(token);
     }
 

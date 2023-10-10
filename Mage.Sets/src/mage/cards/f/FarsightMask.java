@@ -40,7 +40,7 @@ class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public FarsightMaskTriggeredAbility(final FarsightMaskTriggeredAbility ability) {
+    private FarsightMaskTriggeredAbility(final FarsightMaskTriggeredAbility ability) {
         super(ability);
     }
 

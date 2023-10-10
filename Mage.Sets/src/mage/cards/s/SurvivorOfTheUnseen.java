@@ -58,7 +58,7 @@ class SurvivorOfTheUnseenEffect extends OneShotEffect {
         staticText = "Draw two cards, then put a card from your hand on top of your library";
     }
 
-    public SurvivorOfTheUnseenEffect(final SurvivorOfTheUnseenEffect effect) {
+    private SurvivorOfTheUnseenEffect(final SurvivorOfTheUnseenEffect effect) {
         super(effect);
     }
 

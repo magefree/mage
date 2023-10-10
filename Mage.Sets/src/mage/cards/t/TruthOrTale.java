@@ -47,7 +47,7 @@ class TruthOrTaleEffect extends OneShotEffect {
         this.staticText = "Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put a card from the chosen pile into your hand, then put all other cards revealed this way on the bottom of your library in any order";
     }
 
-    public TruthOrTaleEffect(final TruthOrTaleEffect effect) {
+    private TruthOrTaleEffect(final TruthOrTaleEffect effect) {
         super(effect);
     }
 

@@ -54,7 +54,7 @@ class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
                 + "with the same name as the exiled card, exile those cards, then that player shuffles";
     }
 
-    public PickTheBrainEffect(final PickTheBrainEffect effect) {
+    private PickTheBrainEffect(final PickTheBrainEffect effect) {
         super(effect);
     }
 

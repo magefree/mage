@@ -65,7 +65,7 @@ class GomazoaEffect extends OneShotEffect {
         this.staticText = "Put {this} and each creature it's blocking on top of their owners' libraries, then those players shuffle";
     }
 
-    public GomazoaEffect(final GomazoaEffect effect) {
+    private GomazoaEffect(final GomazoaEffect effect) {
         super(effect);
     }
 

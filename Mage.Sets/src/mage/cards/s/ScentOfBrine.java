@@ -55,7 +55,7 @@ class ScentOfBrineEffect extends OneShotEffect {
                 + "Counter target spell unless its controller pays {1} for each card revealed this way";
     }
 
-    public ScentOfBrineEffect(final ScentOfBrineEffect effect) {
+    private ScentOfBrineEffect(final ScentOfBrineEffect effect) {
         super(effect);
     }
 

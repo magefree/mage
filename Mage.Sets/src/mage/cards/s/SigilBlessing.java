@@ -49,7 +49,7 @@ class SigilBlessingBoostControlledEffect extends ContinuousEffectImpl {
         staticText = "Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1";
     }
 
-    public SigilBlessingBoostControlledEffect(final SigilBlessingBoostControlledEffect effect) {
+    private SigilBlessingBoostControlledEffect(final SigilBlessingBoostControlledEffect effect) {
         super(effect);
     }
 

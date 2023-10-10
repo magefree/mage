@@ -30,13 +30,13 @@ public class SplitSecondAbility extends SimpleStaticAbility  {
         return "Split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
-    public SplitSecondAbility(SplitSecondAbility ability) {
+    protected SplitSecondAbility(final SplitSecondAbility ability) {
         super(ability);
     }
 
     @Override
-    public SimpleStaticAbility copy() {
-          return new SplitSecondAbility(this);
+    public SplitSecondAbility copy() {
+        return new SplitSecondAbility(this);
     }
 }
 
@@ -59,7 +59,8 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+        return event.getType() == GameEvent.EventType.CAST_SPELL
+                || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
@@ -73,11 +74,6 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

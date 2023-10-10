@@ -57,7 +57,7 @@ class LightningCoilsEffect extends OneShotEffect {
         staticText = "if {this} has five or more charge counters on it, remove all of them from it and create that many 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.";
     }
 
-    LightningCoilsEffect(final LightningCoilsEffect effect) {
+    private LightningCoilsEffect(final LightningCoilsEffect effect) {
         super(effect);
     }
 

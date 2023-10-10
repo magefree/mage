@@ -53,7 +53,7 @@ class MistOfStagnationEffect extends OneShotEffect {
         this.staticText = "that player chooses a permanent for each card in their graveyard, then untaps those permanents";
     }
 
-    MistOfStagnationEffect(final MistOfStagnationEffect effect) {
+    private MistOfStagnationEffect(final MistOfStagnationEffect effect) {
         super(effect);
     }
 

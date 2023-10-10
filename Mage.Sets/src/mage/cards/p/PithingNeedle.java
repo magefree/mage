@@ -52,18 +52,13 @@ class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Activated abilities of sources with the chosen name can't be activated unless they're mana abilities";
     }
 
-    public PithingNeedleEffect(final PithingNeedleEffect effect) {
+    private PithingNeedleEffect(final PithingNeedleEffect effect) {
         super(effect);
     }
 
     @Override
     public PithingNeedleEffect copy() {
         return new PithingNeedleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

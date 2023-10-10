@@ -44,10 +44,10 @@ class ManaSeismEffect extends OneShotEffect {
 
     public ManaSeismEffect() {
         super(Outcome.Neutral);
-        staticText  = "Sacrifice any number of lands. Add {C} for each land sacrificed this way";
+        staticText  = "Sacrifice any number of lands, then add that much {C}";
     }
 
-    public ManaSeismEffect(final ManaSeismEffect effect) {
+    private ManaSeismEffect(final ManaSeismEffect effect) {
         super(effect);
     }
 

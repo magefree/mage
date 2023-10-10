@@ -38,7 +38,7 @@ public final class OblivionSower extends CardImpl {
         this.toughness = new MageInt(8);
 
         // When you cast Oblivion Sower, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control.
-        Ability ability = new CastSourceTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(4, "target opponent"), false);
+        Ability ability = new CastSourceTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(4), false);
         ability.addEffect(new OblivionSowerEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -61,7 +61,7 @@ class OblivionSowerEffect extends OneShotEffect {
         this.staticText = ", then you may put any number of land cards that player owns from exile onto the battlefield under your control";
     }
 
-    public OblivionSowerEffect(final OblivionSowerEffect effect) {
+    private OblivionSowerEffect(final OblivionSowerEffect effect) {
         super(effect);
     }
 
@@ -83,9 +83,9 @@ class OblivionSowerEffect extends OneShotEffect {
             filter.add(new OwnerIdPredicate(targetPlayer.getId()));
             filter.add(Predicates.not(FaceDownPredicate.instance));
             Cards exiledCards = new CardsImpl();
-            exiledCards.addAll(game.getExile().getAllCards(game));
+            exiledCards.addAllCards(game.getExile().getAllCards(game));
             Cards exiledLands = new CardsImpl();
-            exiledLands.addAll(exiledCards.getCards(filter, controller.getId(), source, game));
+            exiledLands.addAllCards(exiledCards.getCards(filter, controller.getId(), source, game));
             if (!exiledLands.isEmpty() && controller.chooseUse(outcome, "Put lands into play?", source, game)) {
                 FilterCard filterToPlay = new FilterCard("land"
                         + (exiledLands.size() > 1 ? "s" : "") + " from exile owned by "

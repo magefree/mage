@@ -60,7 +60,7 @@ class BatwingBrumeEffect extends OneShotEffect {
         super(Outcome.LoseLife);
     }
 
-    public BatwingBrumeEffect(final BatwingBrumeEffect effect) {
+    private BatwingBrumeEffect(final BatwingBrumeEffect effect) {
         super(effect);
     }
 

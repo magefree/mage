@@ -42,7 +42,7 @@ public final class KiboUktabiPrince extends CardImpl {
     public KiboUktabiPrince(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MONKEY);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(2);

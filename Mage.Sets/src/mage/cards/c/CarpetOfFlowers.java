@@ -53,7 +53,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of each of your main phases, if you haven't added mana with this ability this turn, ");
     }
 
-    CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
+    private CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
         super(ability);
     }
 
@@ -115,7 +115,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
         staticText = "you may add X mana of any one color, where X is the number of Islands target opponent controls";
     }
 
-    CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {
+    private CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {
         super(effect);
     }
 

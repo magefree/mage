@@ -102,7 +102,7 @@ class OathOfDruidsEffect extends OneShotEffect {
                 + "If they do, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard";
     }
 
-    public OathOfDruidsEffect(OathOfDruidsEffect effect) {
+    private OathOfDruidsEffect(final OathOfDruidsEffect effect) {
         super(effect);
     }
 

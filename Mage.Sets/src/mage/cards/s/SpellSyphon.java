@@ -59,7 +59,7 @@ class SpellSyphonEffect extends OneShotEffect {
         this.staticText = "Counter target spell unless its controller pays {1} for each blue permanent you control";
     }
 
-    public SpellSyphonEffect(final SpellSyphonEffect effect) {
+    private SpellSyphonEffect(final SpellSyphonEffect effect) {
         super(effect);
     }
 

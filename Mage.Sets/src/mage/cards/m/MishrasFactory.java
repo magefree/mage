@@ -39,7 +39,7 @@ public final class MishrasFactory extends CardImpl {
                         2, 2,
                         "2/2 Assembly-Worker artifact creature",
                         SubType.ASSEMBLY_WORKER
-                ).withType(CardType.ARTIFACT), "land", Duration.EndOfTurn
+                ).withType(CardType.ARTIFACT), CardType.LAND, Duration.EndOfTurn
         ), new GenericManaCost(1)));
 
         // {tap}: Target Assembly-Worker creature gets +1/+1 until end of turn.

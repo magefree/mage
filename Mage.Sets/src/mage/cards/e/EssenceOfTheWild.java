@@ -46,7 +46,7 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
         staticText = "Creatures you control enter the battlefield as a copy of {this}";
     }
 
-    public EssenceOfTheWildEffect(EssenceOfTheWildEffect effect) {
+    private EssenceOfTheWildEffect(final EssenceOfTheWildEffect effect) {
         super(effect);
     }
 

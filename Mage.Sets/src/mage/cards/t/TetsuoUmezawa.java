@@ -40,7 +40,7 @@ public final class TetsuoUmezawa extends CardImpl {
 
     public TetsuoUmezawa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(3);
@@ -72,7 +72,7 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "{this} can't be the target of Aura spells";
     }
 
-    public TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
+    private TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
         super(effect);
     }
 
@@ -84,11 +84,6 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TARGET;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -41,7 +41,7 @@ public final class KatildaDawnhartPrime extends CardImpl {
     public KatildaDawnhartPrime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(1);
@@ -174,7 +174,7 @@ class KatildaDawnhartPrimeManaEffect extends ManaEffect {
         if (choice.getChoices().size() == 1) {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
-            controller.choose(outcome, choice, game);
+            controller.choose(Outcome.PutManaInPool, choice, game);
         }
         if (choice.getChoice() == null) {
             return new Mana();

@@ -34,7 +34,7 @@ public final class NicolBolasDragonGod extends CardImpl {
     public NicolBolasDragonGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{U}{B}{B}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
         this.setStartingLoyalty(4);
 
@@ -148,7 +148,7 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
             }
             // permanent
             TargetPermanent targetPermanent = new TargetControlledPermanent();
-            targetPermanent.setNotTarget(true);
+            targetPermanent.withNotTarget(true);
             targetPermanent.setTargetController(opponentId);
             if (!targetPermanent.possibleTargets(opponentId, game).isEmpty()) {
                 possibleTargetTypes.add(targetPermanent);

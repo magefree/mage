@@ -26,7 +26,7 @@ public final class AvacynsMemorial extends CardImpl {
     public AvacynsMemorial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}{W}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());

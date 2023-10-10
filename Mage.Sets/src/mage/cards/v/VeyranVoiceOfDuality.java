@@ -26,7 +26,7 @@ public final class VeyranVoiceOfDuality extends CardImpl {
     public VeyranVoiceOfDuality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EFREET);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -75,6 +75,10 @@ class VeyranVoiceOfDualityEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
         GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        if (sourceEvent == null) {
+            return false;
+        }
+
         if (sourceEvent.getType() == GameEvent.EventType.SPELL_CAST
                 || sourceEvent.getType() == GameEvent.EventType.COPIED_STACKOBJECT) {
             Spell spell = game.getSpell(sourceEvent.getTargetId());

@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
@@ -31,10 +31,10 @@ public final class AvatarOfSlaughter extends CardImpl {
         this.toughness = new MageInt(8);
 
         // All creatures have double strike and attack each turn if able.
-        Effect effect = new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES);
+        Effect effect = new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("All creatures have double strike");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new AttacksIfAbleAllEffect(FILTER_PERMANENT_CREATURES);
+        effect = new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("and attack each combat if able");
         ability.addEffect(effect);
         this.addAbility(ability, new AttackedThisTurnWatcher());

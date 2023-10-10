@@ -1,9 +1,6 @@
 package mage.players;
 
-import mage.ApprovingObject;
-import mage.MageItem;
-import mage.MageObject;
-import mage.Mana;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -38,9 +35,11 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -209,6 +208,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     Cards getHand();
 
+    void incrementLandsPlayed();
+    void resetLandsPlayed();
+
     int getLandsPlayed();
 
     int getLandsPerTurn();
@@ -316,9 +318,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * Defines player whose turn this player controls at the moment.
      *
      * @param game
-     * @param playerId
+     * @param playerUnderControlId
+     * @param info additional info to show in game logs like source
      */
-    void controlPlayersTurn(Game game, UUID playerId);
+    void controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
 
     /**
      * Sets player {@link UUID} who controls this player's turn.
@@ -567,11 +570,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void revealCards(Ability source, Cards cards, Game game);
 
-    void revealCards(String titelSuffix, Cards cards, Game game);
+    void revealCards(String titleSuffix, Cards cards, Game game);
 
-    void revealCards(Ability source, String titelSuffix, Cards cards, Game game);
+    void revealCards(Ability source, String titleSuffix, Cards cards, Game game);
 
-    void revealCards(String titelSuffix, Cards cards, Game game, boolean postToLog);
+    void revealCards(String titleSuffix, Cards cards, Game game, boolean postToLog);
 
     /**
      * Adds the cards to the reveal window and adds the source object's id name
@@ -743,7 +746,27 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game);
+    default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type,
+            Game game) {
+        List<MultiAmountMessage> constraints = messages.stream().map(s -> new MultiAmountMessage(s, 0, max))
+                .collect(Collectors.toList());
+
+        return getMultiAmountWithIndividualConstraints(outcome, constraints, min, max, type, game);
+    }
+
+    /**
+     * Player distributes amount among multiple options
+     *
+     * @param outcome  AI hint
+     * @param messages List of options to distribute amount among. Each option has a constraint on the min, max chosen for it
+     * @param totalMin Total minimum amount to be distributed
+     * @param totalMax Total amount to be distributed
+     * @param type     MultiAmountType enum to set dialog options such as title and header
+     * @param game     Game
+     * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
+     */
+    List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages, int min,
+            int max, MultiAmountType type, Game game);
 
     void sideboard(Match match, Deck deck);
 
@@ -785,7 +808,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     PlayableObjectsList getPlayableObjects(Game game, Zone zone);
 
-    LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
+    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 
@@ -828,6 +851,20 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     int getPriorityTimeLeft();
+
+    /**
+     * Set seconds left before priority time starts ticking down.
+     *
+     * @param timeLeft
+     */
+    void setBufferTimeLeft(int timeLeft);
+
+    /**
+     * Returns seconds left before priority time starts ticking down.
+     *
+     * @return
+     */
+    int getBufferTimeLeft();
 
     void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving);
 
@@ -1014,13 +1051,28 @@ public interface Player extends MageItem, Copyable<Player> {
      *                  cost
      * @param costs     alternate other costs you need to pay
      */
-    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs);
+    default void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
+        setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs, MageIdentifier.Default);
+    }
 
-    Set<UUID> getCastSourceIdWithAlternateMana();
+    /**
+     * If the next spell cast has the set sourceId, the spell will be cast
+     * without mana (null) or the mana set to manaCosts instead of its normal
+     * mana costs.
+     *
+     * @param sourceId  the source that can be cast without mana
+     * @param manaCosts alternate ManaCost, null if it can be cast without mana
+     *                  cost
+     * @param costs     alternate other costs you need to pay
+     * @param identifier if not using the MageIdentifier.Default, only apply the alternate mana when ApprovingSource if of that kind.
+     */
+    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs, MageIdentifier identifier);
 
-    Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts();
+    Map<UUID, Set<MageIdentifier>> getCastSourceIdWithAlternateMana();
 
-    Map<UUID, Costs<Cost>> getCastSourceIdCosts();
+    Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> getCastSourceIdManaCosts();
+
+    Map<UUID, Map<MageIdentifier, Costs<Cost>>> getCastSourceIdCosts();
 
     void clearCastSourceIdManaCosts();
 
@@ -1079,8 +1131,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     FilterMana getPhyrexianColors();
-
-    UUID getRingBearerId();
 
     Permanent getRingBearer(Game game);
 

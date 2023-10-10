@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ public final class ReefPirates extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Reef Pirates deals damage to an opponent, that player puts the top card of their library into their graveyard.
-        Effect effect = new PutLibraryIntoGraveTargetEffect(1);
+        Effect effect = new MillCardsTargetEffect(1);
         effect.setText("that player mills a card");
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }

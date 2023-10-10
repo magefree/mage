@@ -63,7 +63,7 @@ class CovetedJewelTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new UntapSourceEffect());
     }
 
-    public CovetedJewelTriggeredAbility(final CovetedJewelTriggeredAbility ability) {
+    private CovetedJewelTriggeredAbility(final CovetedJewelTriggeredAbility ability) {
         super(ability);
     }
 
@@ -110,7 +110,7 @@ class CovetedJewelControlEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public CovetedJewelControlEffect(final CovetedJewelControlEffect effect) {
+    private CovetedJewelControlEffect(final CovetedJewelControlEffect effect) {
         super(effect);
     }
 

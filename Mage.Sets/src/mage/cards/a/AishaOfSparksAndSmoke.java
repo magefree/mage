@@ -29,7 +29,7 @@ public final class AishaOfSparksAndSmoke extends CardImpl {
     public AishaOfSparksAndSmoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
@@ -44,9 +44,7 @@ public final class AishaOfSparksAndSmoke extends CardImpl {
         ), new ManaCostsImpl<>("{R/W}")));
 
         // Shoryuken—Whenever Ken deals combat damage, you may cast a sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost.
-        this.addAbility(new DealsCombatDamageTriggeredAbility(
-                new AishaOfSparksAndSmokeEffect(), false
-        ).withFlavorWord("Shoryuken"));
+        this.addAbility(new DealsCombatDamageTriggeredAbility(new AishaOfSparksAndSmokeEffect(), false));
     }
 
     private AishaOfSparksAndSmoke(final AishaOfSparksAndSmoke card) {

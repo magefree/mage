@@ -81,7 +81,7 @@ class GiltLeafArchdruidEffect extends OneShotEffect {
         this.staticText = "gain control of all lands target player controls";
     }
 
-    public GiltLeafArchdruidEffect(final GiltLeafArchdruidEffect effect) {
+    private GiltLeafArchdruidEffect(final GiltLeafArchdruidEffect effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class UnwindingClockEffect extends ContinuousEffectImpl {
         staticText = "Untap all artifacts you control during each other player's untap step";
     }
 
-    public UnwindingClockEffect(final UnwindingClockEffect effect) {
+    private UnwindingClockEffect(final UnwindingClockEffect effect) {
         super(effect);
     }
 

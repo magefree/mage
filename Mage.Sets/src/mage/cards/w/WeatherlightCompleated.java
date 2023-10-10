@@ -32,7 +32,7 @@ public final class WeatherlightCompleated extends CardImpl {
     public WeatherlightCompleated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

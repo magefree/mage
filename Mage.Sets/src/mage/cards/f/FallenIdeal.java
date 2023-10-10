@@ -14,13 +14,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author fireshoes
@@ -44,7 +43,7 @@ public final class FallenIdeal extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 new SimpleActivatedAbility(
                         new BoostSourceEffect(2, 1, Duration.EndOfTurn),
-                        new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
                 ), AttachmentType.AURA, Duration.WhileOnBattlefield
         ).setText("and \"Sacrifice a creature: This creature gets +2/+1 until end of turn.\""));
         this.addAbility(ability);

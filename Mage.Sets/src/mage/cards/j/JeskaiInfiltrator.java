@@ -70,7 +70,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
         this.staticText = "exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards";
     }
 
-    JeskaiInfiltratorEffect(final JeskaiInfiltratorEffect effect) {
+    private JeskaiInfiltratorEffect(final JeskaiInfiltratorEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             exileZone.getCards(game).forEach(card -> {
                 ManaCosts manaCosts = null;
                 if (card.isCreature(game)) {
-                    manaCosts = card.getSpellAbility().getManaCosts();
+                    manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                     if (manaCosts == null) {
                         manaCosts = new ManaCostsImpl<>("{0}");
                     }

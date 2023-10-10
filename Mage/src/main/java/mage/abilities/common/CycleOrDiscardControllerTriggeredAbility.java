@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author fireshoes
  */
 public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityImpl {
@@ -22,7 +21,7 @@ public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityIm
         setTriggerPhrase("Whenever you cycle or discard a card, ");
     }
 
-    public CycleOrDiscardControllerTriggeredAbility(final CycleOrDiscardControllerTriggeredAbility ability) {
+    protected CycleOrDiscardControllerTriggeredAbility(final CycleOrDiscardControllerTriggeredAbility ability) {
         super(ability);
     }
 

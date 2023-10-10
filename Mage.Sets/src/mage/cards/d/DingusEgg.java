@@ -42,7 +42,7 @@ class DingusEggTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
     }
 
-    public DingusEggTriggeredAbility(final DingusEggTriggeredAbility ability) {
+    private DingusEggTriggeredAbility(final DingusEggTriggeredAbility ability) {
         super(ability);
     }
 

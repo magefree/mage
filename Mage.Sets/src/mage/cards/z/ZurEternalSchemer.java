@@ -44,7 +44,7 @@ public final class ZurEternalSchemer extends CardImpl {
     public ZurEternalSchemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -81,7 +81,7 @@ class ZurEternalSchemerEffect extends ContinuousEffectImpl {
                 "and has base power and base toughness each equal to its mana value.";
     }
 
-    public ZurEternalSchemerEffect(final ZurEternalSchemerEffect effect) {
+    private ZurEternalSchemerEffect(final ZurEternalSchemerEffect effect) {
         super(effect);
     }
 

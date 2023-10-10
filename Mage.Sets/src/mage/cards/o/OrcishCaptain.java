@@ -59,7 +59,7 @@ class OrcishCaptainEffect extends OneShotEffect {
         staticText = "Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn";
     }
 
-    public OrcishCaptainEffect(OrcishCaptainEffect effect) {
+    private OrcishCaptainEffect(final OrcishCaptainEffect effect) {
         super(effect);
     }
 

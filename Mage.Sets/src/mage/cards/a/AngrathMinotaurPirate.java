@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -34,17 +33,14 @@ public final class AngrathMinotaurPirate extends CardImpl {
     public AngrathMinotaurPirate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGRATH);
         this.setStartingLoyalty(5);
 
         // +2: Angrath, Minotaur Pirate deals 1 damage to target opponent and each creature that player controls.
-        Effects effects1 = new Effects();
-        effects1.add(new DamageTargetEffect(1));
-        effects1.add(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent())
-                .setText("and each creature that player or that planeswalker's controller controls")
-        );
-        LoyaltyAbility ability1 = new LoyaltyAbility(effects1, +2);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), +2);
+        ability1.addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent())
+                .setText("and each creature that player or that planeswalker's controller controls"));
         ability1.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability1);
 
@@ -79,7 +75,7 @@ class AngrathMinotaurPirateThirdAbilityEffect extends OneShotEffect {
         this.staticText = "Destroy all creature target opponent controls. {this} deals damage to that player equal to their total power";
     }
 
-    public AngrathMinotaurPirateThirdAbilityEffect(final AngrathMinotaurPirateThirdAbilityEffect effect) {
+    private AngrathMinotaurPirateThirdAbilityEffect(final AngrathMinotaurPirateThirdAbilityEffect effect) {
         super(effect);
     }
 

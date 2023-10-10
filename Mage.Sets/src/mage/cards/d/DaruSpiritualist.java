@@ -1,26 +1,24 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.BecomesTargetAnyTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
- * @author L_J
+ * @author xenohedron
  */
 public final class DaruSpiritualist extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.CLERIC, "a Cleric creature you control");
 
     public DaruSpiritualist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -31,7 +29,7 @@ public final class DaruSpiritualist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a Cleric creature you control becomes the target of a spell or ability, it gets +0/+2 until end of turn.
-        this.addAbility(new DaruSpiritualistTriggeredAbility(new BoostTargetEffect(0, 2, Duration.EndOfTurn)));
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(new BoostTargetEffect(0, 2, Duration.EndOfTurn), filter));
     }
 
     private DaruSpiritualist(final DaruSpiritualist card) {
@@ -41,41 +39,5 @@ public final class DaruSpiritualist extends CardImpl {
     @Override
     public DaruSpiritualist copy() {
         return new DaruSpiritualist(this);
-    }
-}
-
-class DaruSpiritualistTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DaruSpiritualistTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public DaruSpiritualistTriggeredAbility(final DaruSpiritualistTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DaruSpiritualistTriggeredAbility copy() {
-        return new DaruSpiritualistTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
-        if (creature != null && creature.hasSubtype(SubType.CLERIC, game) && creature.getControllerId().equals(getControllerId()) && creature.isCreature(game)) {
-            this.getEffects().setTargetPointer(new FixedTarget(creature, game));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Cleric creature you control becomes the target of a spell or ability, it gets +0/+2 until end of turn.";
     }
 }

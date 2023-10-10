@@ -25,7 +25,7 @@ public final class GarrukCursedHuntsman extends CardImpl {
     public GarrukCursedHuntsman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
         this.setStartingLoyalty(5);
 

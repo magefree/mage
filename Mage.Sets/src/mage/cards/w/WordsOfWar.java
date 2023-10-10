@@ -50,7 +50,7 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, {this} deals 2 damage to any target instead.";
     }
 
-    WordsOfWarEffect(final WordsOfWarEffect effect) {
+    private WordsOfWarEffect(final WordsOfWarEffect effect) {
         super(effect);
     }
 

@@ -10,9 +10,6 @@ import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
-import mage.abilities.keyword.BlocksThisTurnMarkerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -43,7 +40,7 @@ public final class BorosBattleshaper extends CardImpl {
 
     }
 
-    public BorosBattleshaper(final BorosBattleshaper card) {
+    private BorosBattleshaper(final BorosBattleshaper card) {
         super(card);
     }
 
@@ -61,7 +58,7 @@ class BorosBattleshaperEffect extends OneShotEffect {
         this.staticText = "up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat";
     }
 
-    public BorosBattleshaperEffect(final BorosBattleshaperEffect effect) {
+    private BorosBattleshaperEffect(final BorosBattleshaperEffect effect) {
         super(effect);
     }
 
@@ -79,18 +76,11 @@ class BorosBattleshaperEffect extends OneShotEffect {
                 ContinuousEffectImpl effect = new BlocksIfAbleTargetEffect(Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(creature1.getId(), game));
                 game.addEffect(effect, source);
-                effect = new GainAbilityTargetEffect(BlocksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, "");
-                effect.setTargetPointer(new FixedTarget(creature1.getId(), game));
-                game.addEffect(effect, source);
             } else {
                 // Attacks
                 ContinuousEffectImpl effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(creature1.getId(), game));
                 game.addEffect(effect, source);
-                effect = new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, "");
-                effect.setTargetPointer(new FixedTarget(creature1.getId(), game));
-                game.addEffect(effect, source);
-
             }
         }
         Permanent creature2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());

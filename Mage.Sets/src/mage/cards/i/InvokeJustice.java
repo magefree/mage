@@ -88,7 +88,7 @@ class InvokeJusticeEffect extends OneShotEffect {
         }
         // todo: the pop-up window for assigning the amount of counters uses the damage GUI.  it should have its own GUI for assigning counters
         TargetAmount target = new TargetCreaturePermanentAmount(4, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         // note, when using TargetAmount, the target must be used to embed the chosen creatures in this case
         target.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : target.getTargets()) {

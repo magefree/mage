@@ -28,7 +28,7 @@ public final class TobiasBeckett extends CardImpl {
     public TobiasBeckett(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(4);
@@ -61,7 +61,7 @@ class TobiasBeckettEffect extends OneShotEffect {
         staticText = "exile the top card of that player's library. You may cast cards exiled this way and spend mana as though it were mana of any type to cast that spell";
     }
 
-    public TobiasBeckettEffect(final TobiasBeckettEffect effect) {
+    private TobiasBeckettEffect(final TobiasBeckettEffect effect) {
         super(effect);
     }
 

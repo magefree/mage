@@ -4,13 +4,11 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
@@ -55,7 +53,7 @@ public final class BorosFuryShield extends CardImpl {
             staticText = "{this} deals damage to that creature's controller equal to the creature's power";
         }
 
-        BorosFuryShieldDamageEffect(final BorosFuryShieldDamageEffect effect) {
+        private BorosFuryShieldDamageEffect(final BorosFuryShieldDamageEffect effect) {
             super(effect);
         }
 
@@ -74,7 +72,7 @@ public final class BorosFuryShield extends CardImpl {
         }
 
         @Override
-        public Effect copy() {
+        public BorosFuryShieldDamageEffect copy() {
             return new BorosFuryShieldDamageEffect(this);
         }
 

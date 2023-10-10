@@ -52,7 +52,7 @@ class WarpWorldEffect extends OneShotEffect {
         this.staticText = "Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library";
     }
 
-    public WarpWorldEffect(final WarpWorldEffect effect) {
+    private WarpWorldEffect(final WarpWorldEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class WarpWorldEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 CardsImpl cards = new CardsImpl();
-                cards.addAll(player.getLibrary().getTopCards(game, permanentsCount.get(player.getId())));
+                cards.addAllCards(player.getLibrary().getTopCards(game, permanentsCount.get(player.getId())));
                 player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cards, game);
                 cardsRevealed.put(player.getId(), cards);
             }

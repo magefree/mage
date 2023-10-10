@@ -62,7 +62,7 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
         staticText = "As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value";
     }
 
-    public AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
+    private AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
         super(effect);
     }
 

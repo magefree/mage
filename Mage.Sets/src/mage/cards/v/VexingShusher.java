@@ -60,18 +60,13 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffect
         staticText = "Target spell can't be countered";
     }
 
-    public VexingShusherCantCounterTargetEffect(final VexingShusherCantCounterTargetEffect effect) {
+    private VexingShusherCantCounterTargetEffect(final VexingShusherCantCounterTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public VexingShusherCantCounterTargetEffect copy() {
         return new VexingShusherCantCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

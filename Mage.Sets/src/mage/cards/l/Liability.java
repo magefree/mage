@@ -51,7 +51,7 @@ class LiabilityEffect extends OneShotEffect {
         this.staticText = "that player loses 1 life.";
     }
 
-    public LiabilityEffect(final LiabilityEffect effect) {
+    private LiabilityEffect(final LiabilityEffect effect) {
         super(effect);
     }
 

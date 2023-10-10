@@ -27,7 +27,7 @@ public final class BananaToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public BananaToken(final BananaToken token) {
+    protected BananaToken(final BananaToken token) {
         super(token);
     }
 

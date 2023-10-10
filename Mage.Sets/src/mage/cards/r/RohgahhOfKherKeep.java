@@ -46,7 +46,7 @@ public final class RohgahhOfKherKeep extends CardImpl {
     public RohgahhOfKherKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOBOLD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -81,7 +81,7 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
         this.staticText = "you may pay {R}{R}{R}. If you don't, tap {this} and all creatures named Kobolds of Kher Keep, then an opponent gains control of them.";
     }
 
-    RohgahhOfKherKeepEffect(final RohgahhOfKherKeepEffect effect) {
+    private RohgahhOfKherKeepEffect(final RohgahhOfKherKeepEffect effect) {
         super(effect);
     }
 

@@ -93,7 +93,7 @@ class LeviathanCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
         staticText = "{this} can't attack unless you sacrifice two Islands. <i>(This cost is paid as attackers are declared.)</i>";
     }
 
-    LeviathanCostToAttackBlockEffect(LeviathanCostToAttackBlockEffect effect) {
+    private LeviathanCostToAttackBlockEffect(final LeviathanCostToAttackBlockEffect effect) {
         super(effect);
     }
 

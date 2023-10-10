@@ -57,7 +57,7 @@ class SubterraneanTremorsEffect extends OneShotEffect {
         staticText = "{this} deals X damage to each creature without flying. If X is 4 or more, destroy all artifacts. If X is 8 or more, create an 8/8 red Lizard creature token.";
     }
 
-    public SubterraneanTremorsEffect(final SubterraneanTremorsEffect effect) {
+    private SubterraneanTremorsEffect(final SubterraneanTremorsEffect effect) {
         super(effect);
     }
 

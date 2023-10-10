@@ -25,7 +25,7 @@ public final class DreadStatuary extends CardImpl {
     public DreadStatuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DreadStatuaryToken(), "land", Duration.EndOfTurn), new ManaCostsImpl<>("{4}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DreadStatuaryToken(), CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{4}")));
     }
 
     private DreadStatuary(final DreadStatuary card) {
@@ -43,13 +43,13 @@ class DreadStatuaryToken extends TokenImpl {
 
     public DreadStatuaryToken() {
         super("", "4/2 Golem artifact creature");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);
         power = new MageInt(4);
         toughness = new MageInt(2);
     }
-    public DreadStatuaryToken(final DreadStatuaryToken token) {
+    private DreadStatuaryToken(final DreadStatuaryToken token) {
         super(token);
     }
 

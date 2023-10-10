@@ -50,7 +50,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
         this.staticText = "Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield";
     }
 
-    public TheGreatAuroraEffect(final TheGreatAuroraEffect effect) {
+    private TheGreatAuroraEffect(final TheGreatAuroraEffect effect) {
         super(effect);
     }
 

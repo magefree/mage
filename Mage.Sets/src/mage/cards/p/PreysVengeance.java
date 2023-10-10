@@ -25,7 +25,7 @@ public final class PreysVengeance extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public PreysVengeance (final PreysVengeance card) {
+    private PreysVengeance(final PreysVengeance card) {
         super(card);
     }
 

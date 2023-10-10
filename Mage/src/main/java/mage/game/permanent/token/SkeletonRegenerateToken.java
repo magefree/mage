@@ -21,7 +21,7 @@ public final class SkeletonRegenerateToken extends TokenImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public SkeletonRegenerateToken(final SkeletonRegenerateToken token) {
+    protected SkeletonRegenerateToken(final SkeletonRegenerateToken token) {
         super(token);
     }
 

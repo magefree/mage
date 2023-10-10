@@ -20,7 +20,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
@@ -34,15 +33,16 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     @FunctionalInterface
     public interface PermanentModifier {
-        void apply(Token token, Game game);
+        void apply(Token token);
     }
 
     private final Set<Class<? extends Ability>> abilityClazzesToRemove;
     private final List<Permanent> addedTokenPermanents;
     private final List<Ability> additionalAbilities;
     private final CardType additionalCardType;
-    private SubType additionalSubType;
+    private final List<SubType> additionalSubTypes = new ArrayList<>();
     private final UUID attackedPlayer;
+    private UUID attachedTo = null;
     private final boolean attacking;
     private boolean becomesArtifact;
     private ObjectColor color;
@@ -60,7 +60,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean useLKI = false;
-    private PermanentModifier permanentModifier = null;
+    private PermanentModifier permanentModifier = null; // TODO: miss copy constructor? Make serializable?
+
+    // TODO: These constructors are a mess. Copy effects need to be reworked altogether, hopefully clean it up then.
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -124,15 +126,16 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.additionalAbilities = new ArrayList<>();
     }
 
-    public CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
+    protected CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
         super(effect);
 
         this.abilityClazzesToRemove = new HashSet<>(effect.abilityClazzesToRemove);
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
         this.additionalAbilities = new ArrayList<>(effect.additionalAbilities);
         this.additionalCardType = effect.additionalCardType;
-        this.additionalSubType = effect.additionalSubType;
+        this.additionalSubTypes.addAll(effect.additionalSubTypes);
         this.attackedPlayer = effect.attackedPlayer;
+        this.attachedTo = effect.attachedTo;
         this.attacking = effect.attacking;
         this.becomesArtifact = effect.becomesArtifact;
         this.color = effect.color;
@@ -233,15 +236,17 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.removeAllCreatureTypes();
             token.addSubType(onlySubType);
         }
-        if (additionalSubType != null) {
-            token.addSubType(additionalSubType);
+        if (!additionalSubTypes.isEmpty()) {
+            for (SubType additionalSubType : additionalSubTypes) {
+                token.addSubType(additionalSubType);
+            }
         }
         if (color != null) {
             token.setColor(color);
         }
         additionalAbilities.stream().forEach(token::addAbility);
         if (permanentModifier != null) {
-            permanentModifier.apply(token, game);
+            permanentModifier.apply(token);
         }
 
         if (!this.abilityClazzesToRemove.isEmpty()) {
@@ -263,7 +268,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             }
         }
 
-        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
+        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
@@ -303,19 +308,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             }
             sb.append("tokens that are copies of ");
         }
-        if (mode.getTargets().isEmpty()) {
-            throw new UnsupportedOperationException("Using default rule generation of target effect without having a target object");
-        }
-        if (mode.getTargets().get(0).getMinNumberOfTargets() == 0) {
-            sb.append("up to ");
-            sb.append(CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()));
-            sb.append(' ');
-        }
-        String targetName = mode.getTargets().get(0).getTargetName();
-        if (!targetName.startsWith("another target")) {
-            sb.append("target ");
-        }
-        sb.append(targetName);
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
 
         if (attacking) {
             sb.append(" that are");
@@ -331,8 +324,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return addedTokenPermanents;
     }
 
-    public CreateTokenCopyTargetEffect setAdditionalSubType(SubType additionalSubType) {
-        this.additionalSubType = additionalSubType;
+    public CreateTokenCopyTargetEffect withAdditionalSubType(SubType additionalSubType) {
+        this.additionalSubTypes.add(additionalSubType);
         return this;
     }
 
@@ -394,6 +387,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public CreateTokenCopyTargetEffect setPermanentModifier(PermanentModifier permanentModifier) {
         this.permanentModifier = permanentModifier;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setAttachedTo(UUID attachedTo) {
+        this.attachedTo = attachedTo;
         return this;
     }
 

@@ -628,6 +628,8 @@ public class TableController {
             gameOptions.rollbackTurnsAllowed = match.getOptions().isRollbackTurnsAllowed();
             gameOptions.bannedUsers = match.getOptions().getBannedUsers();
             gameOptions.planeChase = match.getOptions().isPlaneChase();
+            gameOptions.perPlayerEmblemCards = match.getOptions().getPerPlayerEmblemCards();
+            gameOptions.globalEmblemCards = match.getOptions().getGlobalEmblemCards();
             match.getGame().setGameOptions(gameOptions);
             managerFactory.gameManager().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId, gameOptions);
             String creator = null;

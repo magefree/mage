@@ -23,7 +23,7 @@ public final class TomikDistinguishedAdvokist extends CardImpl {
     public TomikDistinguishedAdvokist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ADVISOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -96,11 +96,6 @@ class TomikDistinguishedAdvokistRestrictionEffect extends ContinuousRuleModifyin
     @Override
     public TomikDistinguishedAdvokistRestrictionEffect copy() {
         return new TomikDistinguishedAdvokistRestrictionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

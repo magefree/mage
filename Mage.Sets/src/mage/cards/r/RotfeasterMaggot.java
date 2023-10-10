@@ -54,7 +54,7 @@ class RotfeasterMaggotExileEffect extends OneShotEffect {
         this.staticText = "exile target creature card from a graveyard. You gain life equal to that card's toughness";
     }
 
-    public RotfeasterMaggotExileEffect(final RotfeasterMaggotExileEffect effect) {
+    private RotfeasterMaggotExileEffect(final RotfeasterMaggotExileEffect effect) {
         super(effect);
     }
 

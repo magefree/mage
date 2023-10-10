@@ -30,7 +30,7 @@ public final class GimbalGremlinProdigy extends CardImpl {
     public GimbalGremlinProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GREMLIN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);

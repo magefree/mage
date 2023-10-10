@@ -59,7 +59,7 @@ class TheBattleOfNabooEffect extends OneShotEffect {
         staticText = "Draw twice that many cards";
     }
 
-    public TheBattleOfNabooEffect(final TheBattleOfNabooEffect effect) {
+    private TheBattleOfNabooEffect(final TheBattleOfNabooEffect effect) {
         super(effect);
     }
 

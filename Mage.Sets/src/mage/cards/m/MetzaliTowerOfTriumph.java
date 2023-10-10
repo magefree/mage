@@ -37,7 +37,7 @@ public final class MetzaliTowerOfTriumph extends CardImpl {
     public MetzaliTowerOfTriumph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.nightCard = true;
 
         // <i>(Transforms from Path of Mettle.)</i>
@@ -79,7 +79,7 @@ class MetzaliTowerOfTriumphEffect extends OneShotEffect {
         this.staticText = "Choose a creature at random that attacked this turn. Destroy that creature";
     }
 
-    public MetzaliTowerOfTriumphEffect(final MetzaliTowerOfTriumphEffect effect) {
+    private MetzaliTowerOfTriumphEffect(final MetzaliTowerOfTriumphEffect effect) {
         super(effect);
     }
 

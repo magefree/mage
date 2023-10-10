@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -12,9 +8,9 @@ import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
+import mage.util.CardUtil;
 
 /**
- *
  * @author Quercitron
  */
 public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffectImpl {
@@ -35,7 +31,7 @@ public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffe
         this.staticText = setText();
     }
 
-    public PreventNextDamageFromChosenSourceToYouEffect(final PreventNextDamageFromChosenSourceToYouEffect effect) {
+    protected PreventNextDamageFromChosenSourceToYouEffect(final PreventNextDamageFromChosenSourceToYouEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
@@ -68,7 +64,7 @@ public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffe
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("The next time a ").append(targetSource.getFilter().getMessage());
+        StringBuilder sb = new StringBuilder("The next time ").append(CardUtil.addArticle(targetSource.getFilter().getMessage()));
         sb.append(" of your choice would deal damage to you");
         if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");

@@ -52,18 +52,13 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Your opponents can't cast spells with even mana values. <i>(Zero is even.)</i>";
     }
 
-    public VoidWinnowerCantCastEffect(final VoidWinnowerCantCastEffect effect) {
+    private VoidWinnowerCantCastEffect(final VoidWinnowerCantCastEffect effect) {
         super(effect);
     }
 
     @Override
     public VoidWinnowerCantCastEffect copy() {
         return new VoidWinnowerCantCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -100,7 +95,7 @@ class VoidWinnowerCantBlockEffect extends RestrictionEffect {
         staticText = "Your opponents can't block with creatures with even mana values";
     }
 
-    public VoidWinnowerCantBlockEffect(final VoidWinnowerCantBlockEffect effect) {
+    private VoidWinnowerCantBlockEffect(final VoidWinnowerCantBlockEffect effect) {
         super(effect);
     }
 

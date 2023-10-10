@@ -55,10 +55,10 @@ class StormscaleAnarchEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "{this} deals 2 damage to any target. "
                 + "If the discarded card was multicolored, "
-                + "{this} deals 4 damage to that permanent or player instead.";
+                + "{this} deals 4 damage instead.";
     }
 
-    public StormscaleAnarchEffect(final StormscaleAnarchEffect effect) {
+    private StormscaleAnarchEffect(final StormscaleAnarchEffect effect) {
         super(effect);
     }
 

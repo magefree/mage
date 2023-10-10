@@ -49,7 +49,7 @@ class CabalShrineTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CabalShrineEffect(), false);
     }
 
-    public CabalShrineTriggeredAbility(final CabalShrineTriggeredAbility ability) {
+    private CabalShrineTriggeredAbility(final CabalShrineTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,7 +83,7 @@ class CabalShrineEffect extends OneShotEffect {
         staticText = "Whenever a player casts a spell, that player discards X cards, where X is the number of cards in all graveyards with the same name as that spell";
     }
 
-    public CabalShrineEffect(final CabalShrineEffect effect) {
+    private CabalShrineEffect(final CabalShrineEffect effect) {
         super(effect);
     }
 

@@ -28,7 +28,7 @@ public final class TymaretChosenFromDeath extends CardImpl {
     public TymaretChosenFromDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);
@@ -96,7 +96,10 @@ class TymaretChosenFromDeathEffect extends OneShotEffect {
                 .filter(Zone.EXILED::equals)
                 .mapToInt(x -> 1)
                 .sum();
-        player.gainLife(lifeGain, game, source);
+        if (lifeGain > 0) {
+            game.getState().processAction(game);
+            player.gainLife(lifeGain, game, source);
+        }
         return true;
     }
 }

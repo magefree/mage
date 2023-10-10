@@ -78,7 +78,7 @@ class IceCauldronExileEffect extends OneShotEffect {
         this.staticText = "and exile a nonland card from your hand. You may cast that card for as long as it remains exiled";
     }
 
-    public IceCauldronExileEffect(final IceCauldronExileEffect effect) {
+    private IceCauldronExileEffect(final IceCauldronExileEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class IceCauldronExileEffect extends OneShotEffect {
                 return true;
             }
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Card chosenCard = null;
             if (controller.choose(Outcome.Benefit, target, source, game)) {
                 chosenCard = controller.getHand().get(target.getFirstTarget(), game);
@@ -121,7 +121,7 @@ class IceCauldronCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may cast that card for as long as it remains exiled";
     }
 
-    IceCauldronCastFromExileEffect(final IceCauldronCastFromExileEffect effect) {
+    private IceCauldronCastFromExileEffect(final IceCauldronCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -157,7 +157,7 @@ class IceCauldronNoteManaEffect extends OneShotEffect {
         this.staticText = "Note the type and amount of mana spent to pay this activation cost";
     }
 
-    public IceCauldronNoteManaEffect(final IceCauldronNoteManaEffect effect) {
+    private IceCauldronNoteManaEffect(final IceCauldronNoteManaEffect effect) {
         super(effect);
         manaUsedString = effect.manaUsedString;
     }
@@ -191,7 +191,7 @@ class IceCauldronAddManaEffect extends ManaEffect {
         staticText = "Add {this}'s last noted type and amount of mana. Spend this mana only to cast the last card exiled with {this}";
     }
 
-    IceCauldronAddManaEffect(IceCauldronAddManaEffect effect) {
+    private IceCauldronAddManaEffect(final IceCauldronAddManaEffect effect) {
         super(effect);
         storedMana = effect.storedMana == null ? null : effect.storedMana.copy();
         exiledCardMor = effect.exiledCardMor;

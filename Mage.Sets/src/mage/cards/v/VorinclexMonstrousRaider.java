@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public final class VorinclexMonstrousRaider extends CardImpl {
     public VorinclexMonstrousRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.PRAETOR);
         this.power = new MageInt(6);
@@ -73,7 +74,7 @@ class VorinclexMonstrousRaiderEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (source.isControlledBy(event.getPlayerId())) {
-            event.setAmountForCounters(2 * event.getAmount(), true);
+            event.setAmountForCounters(CardUtil.overflowMultiply(event.getAmount(), 2), true);
         } else if (game.getOpponents(event.getPlayerId()).contains(source.getControllerId())) {
             event.setAmountForCounters(Math.floorDiv(event.getAmount(), 2), true);
         }
@@ -88,13 +89,13 @@ class VorinclexMonstrousRaiderEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player targetPlayer = game.getPlayer(event.getTargetId());
-        Permanent targetPermanet = game.getPermanentEntering(event.getTargetId());
-        if (targetPermanet == null) {
-            targetPermanet = game.getPermanent(event.getTargetId());
+        Permanent targetPermanent = game.getPermanentEntering(event.getTargetId());
+        if (targetPermanent == null) {
+            targetPermanent = game.getPermanent(event.getTargetId());
         }
 
         // on a permanent or player
-        if (targetPlayer == null && targetPermanet == null) {
+        if (targetPlayer == null && targetPermanent == null) {
             return false;
         }
 

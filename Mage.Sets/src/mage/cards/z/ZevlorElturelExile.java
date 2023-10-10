@@ -41,7 +41,7 @@ public final class ZevlorElturelExile extends CardImpl {
     public ZevlorElturelExile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIEFLING);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
@@ -69,6 +69,7 @@ public final class ZevlorElturelExile extends CardImpl {
 }
 
 class ZevlorElturelExileTriggeredAbility extends DelayedTriggeredAbility {
+    // TODO: it might be possible to refactor Zevlor using the same Trigger/filter than Ivy, Gleeful Spellthief.
 
     ZevlorElturelExileTriggeredAbility() {
         super(new ZevlorElturelExileEffect(), Duration.EndOfTurn, true, false);
@@ -181,7 +182,7 @@ class ZevlorElturelExileEffect extends CopySpellForEachItCouldTargetEffect {
                 FilterPermanent filter = new FilterPermanent("Permanent to target");
                 filter.add(Predicates.or(targetAb.stream().map(PermanentIdPredicate::new).collect(Collectors.toSet())));
                 TargetPermanent target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 player.choose(outcome, target, source, game);
                 predicates.add(new MageObjectReferencePredicate(target.getFirstTarget(), game));
             }

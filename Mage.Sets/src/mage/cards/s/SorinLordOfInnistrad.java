@@ -42,7 +42,7 @@ public final class SorinLordOfInnistrad extends CardImpl {
 
     public SorinLordOfInnistrad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
 
         this.setStartingLoyalty(3);
@@ -76,7 +76,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect {
         this.staticText = "Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control";
     }
 
-    public SorinLordOfInnistradEffect(final SorinLordOfInnistradEffect effect) {
+    private SorinLordOfInnistradEffect(final SorinLordOfInnistradEffect effect) {
         super(effect);
     }
 

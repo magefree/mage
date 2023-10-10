@@ -7,7 +7,6 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class PirateToken extends TokenImpl {
@@ -22,7 +21,7 @@ public final class PirateToken extends TokenImpl {
         addAbility(new MenaceAbility());
     }
 
-    public PirateToken(final PirateToken token) {
+    protected PirateToken(final PirateToken token) {
         super(token);
     }
 

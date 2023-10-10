@@ -53,7 +53,7 @@ class BurnFromWithinEffect extends OneShotEffect {
                 "If that creature would die this turn, exile it instead";
     }
 
-    public BurnFromWithinEffect(final BurnFromWithinEffect effect) {
+    private BurnFromWithinEffect(final BurnFromWithinEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,9 @@ class BurnFromWithinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         int amount = source.getManaCostsToPay().getX();
 

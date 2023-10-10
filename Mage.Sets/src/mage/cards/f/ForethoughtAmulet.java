@@ -52,7 +52,7 @@ class ForethoughtAmuletEffect extends ReplacementEffectImpl {
         staticText = "If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead";
     }
 
-    public ForethoughtAmuletEffect(final ForethoughtAmuletEffect effect) {
+    private ForethoughtAmuletEffect(final ForethoughtAmuletEffect effect) {
         super(effect);
     }
 

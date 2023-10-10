@@ -68,7 +68,7 @@ class PrimalAmuletEffect extends OneShotEffect {
                 + "you may remove those counters and transform it";
     }
 
-    PrimalAmuletEffect(final PrimalAmuletEffect effect) {
+    private PrimalAmuletEffect(final PrimalAmuletEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class PrimalAmuletEffect extends OneShotEffect {
             permanent.addCounters(CounterType.CHARGE.createInstance(), source.getControllerId(), source, game);
             int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (counters > 3 && player.chooseUse(Outcome.Benefit, "Transform this?", source, game)) {
-                permanent.removeCounters("charge", counters, source, game);
+                permanent.removeCounters(CounterType.CHARGE.getName(), counters, source, game);
                 new TransformSourceEffect().apply(game, source);
             }
             return true;

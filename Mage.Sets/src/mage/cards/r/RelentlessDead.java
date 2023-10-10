@@ -60,7 +60,7 @@ class RelentlessDeadEffect extends OneShotEffect {
         this.staticText = "you may pay {X}. If you do, return another target Zombie creature card with mana value X from your graveyard to the battlefield";
     }
 
-    public RelentlessDeadEffect(final RelentlessDeadEffect effect) {
+    private RelentlessDeadEffect(final RelentlessDeadEffect effect) {
         super(effect);
     }
 

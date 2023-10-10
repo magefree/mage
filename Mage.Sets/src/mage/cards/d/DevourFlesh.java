@@ -47,7 +47,7 @@ class DevourFleshSacrificeEffect extends OneShotEffect {
         this.staticText = "Target player sacrifices a creature, then gains life equal to that creature's toughness";
     }
 
-    public DevourFleshSacrificeEffect(final DevourFleshSacrificeEffect effect) {
+    private DevourFleshSacrificeEffect(final DevourFleshSacrificeEffect effect) {
         super(effect);
     }
 

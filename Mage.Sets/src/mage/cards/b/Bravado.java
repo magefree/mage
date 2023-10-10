@@ -56,7 +56,7 @@ class BravadoBoostEnchantedEffect extends ContinuousEffectImpl {
 		staticText = "Enchanted creature gets +1/+1 for each other creature you control";
     }
 
-    public BravadoBoostEnchantedEffect(final BravadoBoostEnchantedEffect effect) {
+    private BravadoBoostEnchantedEffect(final BravadoBoostEnchantedEffect effect) {
         super(effect);
     }
 

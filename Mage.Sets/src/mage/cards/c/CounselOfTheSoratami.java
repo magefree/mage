@@ -20,7 +20,7 @@ public final class CounselOfTheSoratami extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public CounselOfTheSoratami (final CounselOfTheSoratami card) {
+    private CounselOfTheSoratami(final CounselOfTheSoratami card) {
         super(card);
     }
 

@@ -59,7 +59,7 @@ class VeteranExplorerEffect extends OneShotEffect {
                 "put them onto the battlefield, then shuffle";
     }
 
-    public VeteranExplorerEffect(final VeteranExplorerEffect effect) {
+    private VeteranExplorerEffect(final VeteranExplorerEffect effect) {
         super(effect);
     }
 

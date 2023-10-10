@@ -35,7 +35,7 @@ public final class HandOfVecna extends CardImpl {
     public HandOfVecna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // At the beginning of combat on your turn, equipped creature or a creature you control named Vecna gets +X/+X until end of turn, where X is the number of cards in your hand.
@@ -119,7 +119,7 @@ class HandOfVecnaEffect extends OneShotEffect {
                                 .collect(Collectors.toList())
                 ));
                 TargetPermanent target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 player.choose(outcome, target, source, game);
                 toBoost = game.getPermanent(target.getFirstTarget());
         }

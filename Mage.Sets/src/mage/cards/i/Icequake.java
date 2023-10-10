@@ -47,7 +47,7 @@ class IcequakeEffect extends OneShotEffect {
         this.staticText = "Destroy target land.<br>If that land was a snow land, {this} deals 1 damage to that land's controller.";
     }
 
-    public IcequakeEffect(final IcequakeEffect effect) {
+    private IcequakeEffect(final IcequakeEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class IcequakeEffect extends OneShotEffect {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
                 permanent.destroy(source, game, false);
-                if (permanent.isSnow()) {
+                if (permanent.isSnow(game)) {
                     controller.damage(1, source.getSourceId(), source, game);
                 }
                 return true;

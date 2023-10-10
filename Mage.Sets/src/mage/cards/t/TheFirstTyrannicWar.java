@@ -104,7 +104,7 @@ class TheFirstTyrannicWarReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    TheFirstTyrannicWarReplacementEffect(TheFirstTyrannicWarReplacementEffect effect) {
+    private TheFirstTyrannicWarReplacementEffect(final TheFirstTyrannicWarReplacementEffect effect) {
         super(effect);
     }
 

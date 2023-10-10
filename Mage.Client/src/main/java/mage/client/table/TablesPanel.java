@@ -99,7 +99,8 @@ public class TablesPanel extends javax.swing.JPanel {
                             + "<br>FM: = Numbers of freee mulligans"
                             + "<br>Constr.: = Construction time for limited tournament formats"                              
                             + "<br>RB = Rollback allowed"                            
-                            + "<br>PC = Planechase active"                            
+                            + "<br>PC = Planechase active"
+                            + "<br>EC = One or more emblem cards in use"
                             + "<br>SP = Spectators allowed"
                             + "<br>Rng: Range of visibility for multiplayer matches"
             )
@@ -1708,6 +1709,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setRange(RangeOfInfluence.ONE);
             options.setWinsNeeded(2);
             options.setMatchTimeLimit(MatchTimeLimit.NONE);
+            options.setMatchBufferTime(MatchBufferTime.NONE);
             options.setFreeMulligans(2);
             options.setSkillLevel(SkillLevel.CASUAL);
             options.setRollbackTurnsAllowed(true);

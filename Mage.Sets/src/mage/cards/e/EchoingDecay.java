@@ -49,7 +49,7 @@ class EchoingDecayEffect extends OneShotEffect {
         this.staticText = "Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn";
     }
 
-    public EchoingDecayEffect(final EchoingDecayEffect effect) {
+    private EchoingDecayEffect(final EchoingDecayEffect effect) {
         super(effect);
     }
 

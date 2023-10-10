@@ -47,7 +47,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
         this.staticText = "Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
-    public PastInFlamesEffect(final PastInFlamesEffect effect) {
+    private PastInFlamesEffect(final PastInFlamesEffect effect) {
         super(effect);
     }
 

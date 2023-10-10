@@ -73,7 +73,7 @@ class LowlandOafEffect extends OneShotEffect {
         this.staticText = "Sacrifice that creature at the beginning of the next end step";
     }
 
-    public LowlandOafEffect(final LowlandOafEffect effect) {
+    private LowlandOafEffect(final LowlandOafEffect effect) {
         super(effect);
     }
 

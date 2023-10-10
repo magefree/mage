@@ -54,7 +54,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
         this.staticText = "you may return another permanent you control that shares a permanent type with it to its owner's hand";
     }
 
-    public CloudstoneCurioEffect(final CloudstoneCurioEffect effect) {
+    private CloudstoneCurioEffect(final CloudstoneCurioEffect effect) {
         super(effect);
     }
 

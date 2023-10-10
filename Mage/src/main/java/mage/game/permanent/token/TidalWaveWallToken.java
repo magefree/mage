@@ -20,7 +20,7 @@ public final class TidalWaveWallToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public TidalWaveWallToken(final TidalWaveWallToken token) {
+    protected TidalWaveWallToken(final TidalWaveWallToken token) {
         super(token);
     }
 

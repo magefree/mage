@@ -57,7 +57,7 @@ class CagedSunEffect2 extends ContinuousEffectImpl {
         staticText = "Creatures you control of the chosen color get +1/+1";
     }
 
-    public CagedSunEffect2(final CagedSunEffect2 effect) {
+    private CagedSunEffect2(final CagedSunEffect2 effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
         super(Zone.BATTLEFIELD, new CagedSunEffect());
     }
 
-    public CagedSunTriggeredAbility(CagedSunTriggeredAbility ability) {
+    private CagedSunTriggeredAbility(final CagedSunTriggeredAbility ability) {
         super(ability);
     }
 
@@ -131,7 +131,7 @@ class CagedSunEffect extends ManaEffect {
         super();
     }
 
-    public CagedSunEffect(final CagedSunEffect effect) {
+    private CagedSunEffect(final CagedSunEffect effect) {
         super(effect);
     }
 

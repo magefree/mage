@@ -61,11 +61,11 @@ class LightningStormCountCondition implements DynamicValue {
 
     private final CounterType counter;
 
-    public LightningStormCountCondition(CounterType counter) {
+    LightningStormCountCondition(CounterType counter) {
         this.counter = counter;
     }
 
-    public LightningStormCountCondition(final LightningStormCountCondition countersCount) {
+    private LightningStormCountCondition(final LightningStormCountCondition countersCount) {
         this.counter = countersCount.counter;
     }
 
@@ -79,7 +79,7 @@ class LightningStormCountCondition implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public LightningStormCountCondition copy() {
         return new LightningStormCountCondition(this);
     }
 
@@ -101,7 +101,7 @@ class LightningStormAddCounterEffect extends OneShotEffect {
         this.staticText = "Put two charge counters on {this}. You may choose a new target for it.";
     }
 
-    public LightningStormAddCounterEffect(final LightningStormAddCounterEffect effect) {
+    private LightningStormAddCounterEffect(final LightningStormAddCounterEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class OketraTheTrue extends CardImpl {
     public OketraTheTrue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
@@ -64,7 +64,7 @@ class OketraTheTrueRestrictionEffect extends RestrictionEffect {
         staticText = "{this} can't attack or block unless you control at least three other creatures";
     }
 
-    public OketraTheTrueRestrictionEffect(final OketraTheTrueRestrictionEffect effect) {
+    private OketraTheTrueRestrictionEffect(final OketraTheTrueRestrictionEffect effect) {
         super(effect);
     }
 

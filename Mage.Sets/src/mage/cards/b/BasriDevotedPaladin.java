@@ -36,7 +36,7 @@ public final class BasriDevotedPaladin extends CardImpl {
     public BasriDevotedPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BASRI);
         this.setStartingLoyalty(4);
 
@@ -79,7 +79,7 @@ class BasriDevotedPaladinTriggeredAbility extends DelayedTriggeredAbility {
         super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.EndOfTurn, false);
     }
 
-    public BasriDevotedPaladinTriggeredAbility(BasriDevotedPaladinTriggeredAbility ability) {
+    private BasriDevotedPaladinTriggeredAbility(final BasriDevotedPaladinTriggeredAbility ability) {
         super(ability);
     }
 

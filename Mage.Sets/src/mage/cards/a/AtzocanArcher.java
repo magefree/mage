@@ -12,8 +12,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,12 +20,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author TheElk801
  */
 public final class AtzocanArcher extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AtzocanArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -44,7 +37,7 @@ public final class AtzocanArcher extends CardImpl {
         effect.setText("you may have it fight another target creature. " +
                 "<i>(Each deals damage equal to its power to the other.)</i>");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

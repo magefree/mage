@@ -33,7 +33,7 @@ public final class TezzeretCruelMachinist extends CardImpl {
     public TezzeretCruelMachinist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
         this.setStartingLoyalty(4);
 
@@ -71,7 +71,7 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
         this.staticText = "put any number of cards from your hand onto the battlefield face down. They're 5/5 artifact creatures";
     }
 
-    public TezzeretCruelMachinistEffect(final TezzeretCruelMachinistEffect effect) {
+    private TezzeretCruelMachinistEffect(final TezzeretCruelMachinistEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class TezzeretCruelMachinistCardTypeEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.Neutral);
     }
 
-    public TezzeretCruelMachinistCardTypeEffect(final TezzeretCruelMachinistCardTypeEffect effect) {
+    private TezzeretCruelMachinistCardTypeEffect(final TezzeretCruelMachinistCardTypeEffect effect) {
         super(effect);
     }
 
@@ -131,11 +131,10 @@ class TezzeretCruelMachinistCardTypeEffect extends ContinuousEffectImpl {
                 continue;
             }
             flag = true;
-            target.getSuperType().clear();
+            target.removeAllSuperTypes(game);
             target.removeAllCardTypes(game);
             target.removeAllSubTypes(game);
-            target.addCardType(game, CardType.ARTIFACT);
-            target.addCardType(game, CardType.CREATURE);
+            target.addCardType(game, CardType.ARTIFACT, CardType.CREATURE);
             target.getPower().setModifiedBaseValue(5);
             target.getToughness().setModifiedBaseValue(5);
         }

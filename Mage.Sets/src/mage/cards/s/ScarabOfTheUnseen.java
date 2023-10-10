@@ -66,7 +66,7 @@ class ScarabOfTheUnseenEffect extends OneShotEffect {
         this.staticText = "Return all Auras attached to target permanent you own to their owners' hands";
     }
 
-    public ScarabOfTheUnseenEffect(final ScarabOfTheUnseenEffect effect) {
+    private ScarabOfTheUnseenEffect(final ScarabOfTheUnseenEffect effect) {
         super(effect);
     }
 

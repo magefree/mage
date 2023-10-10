@@ -7,6 +7,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -36,7 +37,7 @@ public final class ChandraDressedToKill extends CardImpl {
     public ChandraDressedToKill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(3);
 
@@ -165,10 +166,10 @@ class ChandraDressedToKillPlayEffect extends PlayFromNotOwnHandZoneTargetEffect 
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        if (!super.applies(objectId, affectedAbility, source, game, playerId)) {
+        if (!(super.applies(objectId, affectedAbility, source, game, playerId) && affectedAbility instanceof SpellAbility)) {
             return false;
         }
-        Card card = game.getCard(objectId);
+        Card card = ((SpellAbility) affectedAbility).getCharacteristics(game);
         return card != null && card.getColor(game).isRed();
     }
 }

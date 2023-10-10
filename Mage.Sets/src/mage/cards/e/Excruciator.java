@@ -50,7 +50,7 @@ class ExcruciatorEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Damage that would be dealt by {this} can't be prevented";
     }
 
-    public ExcruciatorEffect(final ExcruciatorEffect effect) {
+    private ExcruciatorEffect(final ExcruciatorEffect effect) {
         super(effect);
     }
 

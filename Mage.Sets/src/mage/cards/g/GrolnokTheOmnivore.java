@@ -33,7 +33,7 @@ public final class GrolnokTheOmnivore extends CardImpl {
     public GrolnokTheOmnivore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FROG);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -6,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -30,7 +28,7 @@ public final class AjaniCallerOfThePride extends CardImpl {
 
     public AjaniCallerOfThePride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
         this.setStartingLoyalty(4);
@@ -41,10 +39,10 @@ public final class AjaniCallerOfThePride extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
         // -3: Target creature gains flying and double strike until end of turn.
-        Effects effects = new Effects();
-        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        ability = new LoyaltyAbility(effects, -3);
+        Effect flyingEffect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("target creature gains flying");
+        Effect doubleStrike = new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and double strike until end of turn");
+        ability = new LoyaltyAbility(flyingEffect, -3);
+        ability.addEffect(doubleStrike);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // -8: create X 2/2 white Cat creature tokens, where X is your life total.

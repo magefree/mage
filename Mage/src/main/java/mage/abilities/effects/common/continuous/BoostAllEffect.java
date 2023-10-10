@@ -86,7 +86,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         }
     }
 
-    public BoostAllEffect(final BoostAllEffect effect) {
+    protected BoostAllEffect(final BoostAllEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

@@ -21,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class FleshpulperGiant extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughess 2 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 2 or less");
     
     static {
         filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));

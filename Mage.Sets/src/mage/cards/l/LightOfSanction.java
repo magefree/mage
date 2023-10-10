@@ -48,7 +48,7 @@ class LightOfSanctionEffect extends PreventionEffectImpl {
         consumable = false;
     }
 
-    public LightOfSanctionEffect(LightOfSanctionEffect effect) {
+    private LightOfSanctionEffect(final LightOfSanctionEffect effect) {
         super(effect);
     }
 

@@ -71,7 +71,7 @@ class HauntedFengrafEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setRandom(true);
         target.chooseTarget(outcome, player.getId(), source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);

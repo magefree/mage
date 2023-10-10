@@ -33,7 +33,7 @@ public final class SzarekhTheSilentKing extends CardImpl {
     public SzarekhTheSilentKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NECRON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

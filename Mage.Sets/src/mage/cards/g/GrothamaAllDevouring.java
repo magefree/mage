@@ -37,7 +37,7 @@ public final class GrothamaAllDevouring extends CardImpl {
     public GrothamaAllDevouring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WURM);
         this.power = new MageInt(10);
         this.toughness = new MageInt(8);
@@ -74,7 +74,7 @@ class GrothamaAllDevouringGainAbilityEffect extends GainAbilityAllEffect {
         this.staticText = "Other creatures have \"Whenever this creature attacks, you may have it fight {this}.\"";
     }
 
-    GrothamaAllDevouringGainAbilityEffect(final GrothamaAllDevouringGainAbilityEffect effect) {
+    private GrothamaAllDevouringGainAbilityEffect(final GrothamaAllDevouringGainAbilityEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class GrothamaAllDevouringFightEffect extends OneShotEffect {
         this.staticText = "you may have it fight " + fightName;
     }
 
-    GrothamaAllDevouringFightEffect(final GrothamaAllDevouringFightEffect effect) {
+    private GrothamaAllDevouringFightEffect(final GrothamaAllDevouringFightEffect effect) {
         super(effect);
         this.fightId = effect.fightId;
     }
@@ -133,7 +133,7 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
                 + "damage dealt to {this} this turn by sources they controlled.";
     }
 
-    GrothamaAllDevouringDrawCardsEffect(final GrothamaAllDevouringDrawCardsEffect effect) {
+    private GrothamaAllDevouringDrawCardsEffect(final GrothamaAllDevouringDrawCardsEffect effect) {
         super(effect);
     }
 

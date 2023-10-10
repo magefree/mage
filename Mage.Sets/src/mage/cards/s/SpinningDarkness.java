@@ -63,7 +63,7 @@ class SpinningDarknessCost extends CostImpl {
         this.text = "exile the top three black cards of your graveyard";      
     }
 
-    SpinningDarknessCost(final SpinningDarknessCost cost) {
+    private SpinningDarknessCost(final SpinningDarknessCost cost) {
         super(cost);
     }
 

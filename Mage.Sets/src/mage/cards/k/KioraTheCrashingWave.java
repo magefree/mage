@@ -38,7 +38,7 @@ public final class KioraTheCrashingWave extends CardImpl {
 
     public KioraTheCrashingWave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIORA);
 
         this.setStartingLoyalty(2);
@@ -75,7 +75,7 @@ class KioraPreventionEffect extends PreventionEffectImpl {
         staticText = "Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls";
     }
 
-    public KioraPreventionEffect(final KioraPreventionEffect effect) {
+    private KioraPreventionEffect(final KioraPreventionEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you sacrifice a creature, ");
     }
 
-    public DragonAppeasementTriggeredAbility(final DragonAppeasementTriggeredAbility ability) {
+    private DragonAppeasementTriggeredAbility(final DragonAppeasementTriggeredAbility ability) {
         super(ability);
     }
 

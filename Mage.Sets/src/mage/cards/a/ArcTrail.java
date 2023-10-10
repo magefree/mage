@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -97,7 +96,7 @@ class ArcTrailEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ArcTrailEffect copy() {
         return instance;
     }
 

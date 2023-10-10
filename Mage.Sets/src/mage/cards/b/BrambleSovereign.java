@@ -68,7 +68,7 @@ class BrambleSovereignEffect extends OneShotEffect {
         this.staticText = "its controller creates a token that's a copy of that creature";
     }
 
-    BrambleSovereignEffect(final BrambleSovereignEffect effect) {
+    private BrambleSovereignEffect(final BrambleSovereignEffect effect) {
         super(effect);
     }
 

@@ -27,7 +27,7 @@ public final class NullChamber extends CardImpl {
     public NullChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // As Null Chamber enters the battlefield, you and an opponent each name a card other than a basic land card.
         // The named cards can't be played.
@@ -56,7 +56,7 @@ class NullChamberChooseEffect extends OneShotEffect {
         staticText = "you and an opponent each choose a card name other than a basic land card name";
     }
 
-    public NullChamberChooseEffect(final NullChamberChooseEffect effect) {
+    private NullChamberChooseEffect(final NullChamberChooseEffect effect) {
         super(effect);
     }
 
@@ -107,13 +107,8 @@ class NullChamberReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "The named cards can't be played";
     }
 
-    public NullChamberReplacementEffect(final NullChamberReplacementEffect effect) {
+    private NullChamberReplacementEffect(final NullChamberReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

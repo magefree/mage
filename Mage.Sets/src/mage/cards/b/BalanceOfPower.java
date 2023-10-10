@@ -44,7 +44,7 @@ class BalanceOfPowerEffect extends OneShotEffect {
         this.staticText = "If target opponent has more cards in hand than you, draw cards equal to the difference";
     }
 
-    public BalanceOfPowerEffect(final BalanceOfPowerEffect effect) {
+    private BalanceOfPowerEffect(final BalanceOfPowerEffect effect) {
         super(effect);
     }
 

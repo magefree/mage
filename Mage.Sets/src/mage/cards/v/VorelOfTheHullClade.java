@@ -39,7 +39,7 @@ public final class VorelOfTheHullClade extends CardImpl {
 
     public VorelOfTheHullClade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MERFOLK);
 
@@ -71,7 +71,7 @@ class VorelOfTheHullCladeEffect extends OneShotEffect {
         staticText = "double the number of each kind of counter on target artifact, creature, or land";
     }
 
-    public VorelOfTheHullCladeEffect(VorelOfTheHullCladeEffect effect) {
+    private VorelOfTheHullCladeEffect(final VorelOfTheHullCladeEffect effect) {
         super(effect);
     }
 

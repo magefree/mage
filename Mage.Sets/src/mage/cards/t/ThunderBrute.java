@@ -37,7 +37,7 @@ public final class ThunderBrute extends CardImpl {
         // When Thunder Brute enters the battlefield, if tribute wasn't paid, it gains haste until end of turn.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if its tribute wasn't paid, it gains haste until end of turn."));        
+                "When {this} enters the battlefield, if tribute wasn't paid, it gains haste until end of turn."));        
     }
 
     private ThunderBrute(final ThunderBrute card) {

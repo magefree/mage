@@ -59,7 +59,7 @@ class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature with flying attacks, ");
     }
 
-    public WindreaderSphinxTriggeredAbility(final WindreaderSphinxTriggeredAbility ability) {
+    private WindreaderSphinxTriggeredAbility(final WindreaderSphinxTriggeredAbility ability) {
         super(ability);
     }
 

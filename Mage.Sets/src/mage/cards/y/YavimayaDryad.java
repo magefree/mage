@@ -63,7 +63,7 @@ class YavimayaDryadEffect extends SearchEffect {
         staticText = "you may search your library for a Forest card, put it onto the battlefield tapped under target player's control, then shuffle";
     }
 
-    public YavimayaDryadEffect(final YavimayaDryadEffect effect) {
+    private YavimayaDryadEffect(final YavimayaDryadEffect effect) {
         super(effect);
     }
 

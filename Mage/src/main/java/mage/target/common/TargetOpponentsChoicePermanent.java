@@ -22,7 +22,7 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetOpponentsChoicePermanent(final TargetOpponentsChoicePermanent target) {
+    protected TargetOpponentsChoicePermanent(final TargetOpponentsChoicePermanent target) {
         super(target);
         this.opponentId = target.opponentId;
     }

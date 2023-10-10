@@ -24,7 +24,7 @@ public final class ThadaAdelAcquisitor extends CardImpl {
 
     public ThadaAdelAcquisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ROGUE);
 
@@ -57,7 +57,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
         staticText = "search that player's library for an artifact card and exile it. Then that player shuffles. Until end of turn, you may play that card";
     }
 
-    ThadaAdelAcquisitorEffect(final ThadaAdelAcquisitorEffect effect) {
+    private ThadaAdelAcquisitorEffect(final ThadaAdelAcquisitorEffect effect) {
         super(effect);
     }
 

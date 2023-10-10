@@ -66,7 +66,7 @@ class ConspiracyTheoristAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    ConspiracyTheoristAbility(ConspiracyTheoristAbility ability) {
+    private ConspiracyTheoristAbility(final ConspiracyTheoristAbility ability) {
         super(ability);
     }
 
@@ -109,7 +109,7 @@ class ConspiracyTheoristEffect extends OneShotEffect {
         this.discardedCards = discardedCards;
     }
 
-    ConspiracyTheoristEffect(ConspiracyTheoristEffect effect) {
+    private ConspiracyTheoristEffect(final ConspiracyTheoristEffect effect) {
         super(effect);
         this.discardedCards = effect.discardedCards;
     }

@@ -42,7 +42,7 @@ public final class GremlinMine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {1}, {tap}, Sacrifice Gremlin Mine: Gremlin Mine deals 4 damage to target artifact creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4, "it"), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent(filterCreature));
@@ -72,7 +72,7 @@ class GremlinMineEffect extends OneShotEffect {
         this.staticText = "Remove up to four charge counters from target noncreature artifact";
     }
 
-    public GremlinMineEffect(GremlinMineEffect effect) {
+    private GremlinMineEffect(final GremlinMineEffect effect) {
         super(effect);
     }
 

@@ -35,7 +35,7 @@ public final class KairiTheSwirlingSky extends CardImpl {
     public KairiTheSwirlingSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(6);
@@ -132,7 +132,7 @@ class KairiTheSwirlingSkyEffect extends OneShotEffect {
         TargetCard target = new TargetCardInGraveyard(
                 0, 2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }

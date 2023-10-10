@@ -50,7 +50,7 @@ class FlashEffect extends OneShotEffect {
         this.staticText = "You may put a creature card from your hand onto the battlefield. If you do, sacrifice it unless you pay its mana cost reduced by up to {2}.";
     }
 
-    public FlashEffect(final FlashEffect effect) {
+    private FlashEffect(final FlashEffect effect) {
         super(effect);
     }
 

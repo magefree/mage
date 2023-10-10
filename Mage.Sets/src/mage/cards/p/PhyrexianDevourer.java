@@ -61,7 +61,7 @@ class PhyrexianDevourerStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public PhyrexianDevourerStateTriggeredAbility(final PhyrexianDevourerStateTriggeredAbility ability) {
+    private PhyrexianDevourerStateTriggeredAbility(final PhyrexianDevourerStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class PhyrexianDevourerEffect extends OneShotEffect {
         this.staticText = "Put X +1/+1 counters on {this}, where X is the exiled card's mana value";
     }
 
-    public PhyrexianDevourerEffect(final PhyrexianDevourerEffect effect) {
+    private PhyrexianDevourerEffect(final PhyrexianDevourerEffect effect) {
         super(effect);
     }
 
@@ -129,7 +129,7 @@ class ExileTopCardLibraryCost extends CostImpl {
         this.text = "Exile the top card of your library";
     }
 
-    public ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
+    private ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
         super(cost);
         this.card = cost.getCard();
     }

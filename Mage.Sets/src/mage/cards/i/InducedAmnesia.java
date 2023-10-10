@@ -50,7 +50,7 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
 
     InducedAmnesiaExileEffect() {
         super(Outcome.Detriment);
-        this.staticText = "target player exiles all the cards in their hand face down, then draws that many cards";
+        this.staticText = "target player exiles all cards from their hand face down, then draws that many cards";
     }
 
     private InducedAmnesiaExileEffect(final InducedAmnesiaExileEffect effect) {

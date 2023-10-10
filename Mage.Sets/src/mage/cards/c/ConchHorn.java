@@ -51,7 +51,7 @@ class ConchHornEffect extends OneShotEffect {
         staticText = "Draw two cards, then put a card from your hand on top of your library";
     }
 
-    public ConchHornEffect(final ConchHornEffect effect) {
+    private ConchHornEffect(final ConchHornEffect effect) {
         super(effect);
     }
 

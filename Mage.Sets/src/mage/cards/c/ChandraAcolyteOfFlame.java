@@ -4,13 +4,15 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.*;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,8 +24,6 @@ import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.RedElementalToken;
 import mage.game.permanent.token.Token;
@@ -32,17 +32,15 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
- * @author TheElk801
+ * @author TheElk801, xenohedron
  */
 public final class ChandraAcolyteOfFlame extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledPlaneswalkerPermanent("red planeswalker you control");
     private static final FilterCard filter2
-            = new FilterInstantOrSorceryCard("instant or sorcery card with mana value 3 or less");
+            = new FilterInstantOrSorceryCard("instant or sorcery card with mana value 3 or less from your graveyard");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
@@ -52,7 +50,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
     public ChandraAcolyteOfFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(4);
 
@@ -63,7 +61,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraAcolyteOfFlameEffect(), 0));
 
         // -2: You may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard. If that card would be put into your graveyard this turn, exile it instead.
-        Ability ability = new LoyaltyAbility(new ChandraAcolyteOfFlameGraveyardEffect(), -2);
+        Ability ability = new LoyaltyAbility(new MayCastTargetThenExileEffect(false), -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }
@@ -81,7 +79,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
 class ChandraAcolyteOfFlameEffect extends OneShotEffect {
 
     ChandraAcolyteOfFlameEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Create two 1/1 red Elemental creature tokens. They gain haste. " +
                 "Sacrifice them at the beginning of the next end step.";
     }
@@ -119,103 +117,5 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
         });
 
         return true;
-    }
-}
-
-class ChandraAcolyteOfFlameGraveyardEffect extends OneShotEffect {
-
-    ChandraAcolyteOfFlameGraveyardEffect() {
-        super(Benefit);
-        this.staticText = "You may cast target instant or sorcery card " +
-                "with mana value 3 or less from your graveyard this turn. " +
-                "If that card would be put into your graveyard this turn, exile it instead";
-    }
-
-    private ChandraAcolyteOfFlameGraveyardEffect(final ChandraAcolyteOfFlameGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChandraAcolyteOfFlameGraveyardEffect copy() {
-        return new ChandraAcolyteOfFlameGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            ContinuousEffect effect = new ChandraAcolyteOfFlameCastFromGraveyardEffect();
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
-            effect = new ChandraAcolyteOfFlameReplacementEffect(card.getId());
-            game.addEffect(effect, source);
-            return true;
-        }
-        return false;
-    }
-}
-
-class ChandraAcolyteOfFlameCastFromGraveyardEffect extends AsThoughEffectImpl {
-
-    ChandraAcolyteOfFlameCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Benefit);
-    }
-
-    private ChandraAcolyteOfFlameCastFromGraveyardEffect(final ChandraAcolyteOfFlameCastFromGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ChandraAcolyteOfFlameCastFromGraveyardEffect copy() {
-        return new ChandraAcolyteOfFlameCastFromGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(this.getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId());
-    }
-}
-
-class ChandraAcolyteOfFlameReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    ChandraAcolyteOfFlameReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-        staticText = "If that card would be put into your graveyard this turn, exile it instead";
-    }
-
-    private ChandraAcolyteOfFlameReplacementEffect(final ChandraAcolyteOfFlameReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public ChandraAcolyteOfFlameReplacementEffect copy() {
-        return new ChandraAcolyteOfFlameReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
     }
 }

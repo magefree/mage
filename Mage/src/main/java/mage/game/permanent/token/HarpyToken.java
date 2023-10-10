@@ -6,7 +6,6 @@ import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class HarpyToken extends TokenImpl {
@@ -22,7 +21,7 @@ public final class HarpyToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public HarpyToken(final HarpyToken token) {
+    protected HarpyToken(final HarpyToken token) {
         super(token);
     }
 

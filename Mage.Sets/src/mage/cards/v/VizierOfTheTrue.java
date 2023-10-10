@@ -54,7 +54,7 @@ class VizierOfTheTrueAbility extends TriggeredAbilityImpl {
         addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 
-    public VizierOfTheTrueAbility(final VizierOfTheTrueAbility ability) {
+    private VizierOfTheTrueAbility(final VizierOfTheTrueAbility ability) {
         super(ability);
     }
 

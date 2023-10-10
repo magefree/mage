@@ -59,7 +59,7 @@ class ChasmSkulkerEffect extends OneShotEffect {
         this.staticText = "create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on Chasm Skulker";
     }
 
-    public ChasmSkulkerEffect(final ChasmSkulkerEffect effect) {
+    private ChasmSkulkerEffect(final ChasmSkulkerEffect effect) {
         super(effect);
     }
 

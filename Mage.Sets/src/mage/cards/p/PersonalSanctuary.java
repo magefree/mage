@@ -46,7 +46,7 @@ class PersonalSanctuaryEffect extends PreventionEffectImpl {
         staticText = "During your turn, prevent all damage that would be dealt to you";
     }
 
-    public PersonalSanctuaryEffect(PersonalSanctuaryEffect effect) {
+    private PersonalSanctuaryEffect(final PersonalSanctuaryEffect effect) {
         super(effect);
     }
 

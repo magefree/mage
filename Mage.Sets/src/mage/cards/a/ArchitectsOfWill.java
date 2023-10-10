@@ -56,7 +56,7 @@ class ArchitectsOfWillEffect extends OneShotEffect {
         this.staticText = "look at the top three cards of target player's library, then put them back in any order";
     }
 
-    public ArchitectsOfWillEffect(final ArchitectsOfWillEffect effect) {
+    private ArchitectsOfWillEffect(final ArchitectsOfWillEffect effect) {
         super(effect);
     }
 

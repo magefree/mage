@@ -18,7 +18,7 @@ public final class OneDozenEyesBeastToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public OneDozenEyesBeastToken(final OneDozenEyesBeastToken token) {
+    protected OneDozenEyesBeastToken(final OneDozenEyesBeastToken token) {
         super(token);
     }
 

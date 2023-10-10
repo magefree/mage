@@ -41,7 +41,7 @@ public final class MuldrothaTheGravetide extends CardImpl {
     public MuldrothaTheGravetide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(6);
@@ -66,12 +66,12 @@ public final class MuldrothaTheGravetide extends CardImpl {
 class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     public MuldrothaTheGravetideCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "During each of your turns, you may play a land and cast a permanent spell of each permanent type from your graveyard. "
                 + "<i>(If a card has multiple permanent types, choose one as you play it.)</i>";
     }
 
-    public MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
+    private MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
         super(effect);
     }
 

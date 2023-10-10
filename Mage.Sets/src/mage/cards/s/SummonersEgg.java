@@ -57,7 +57,7 @@ class SummonersEggImprintEffect extends OneShotEffect {
         staticText = "exile a card from your hand face down";
     }
 
-    public SummonersEggImprintEffect(SummonersEggImprintEffect effect) {
+    private SummonersEggImprintEffect(final SummonersEggImprintEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class SummonersEggPutOntoBattlefieldEffect extends OneShotEffect {
         this.staticText = "turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control";
     }
 
-    public SummonersEggPutOntoBattlefieldEffect(final SummonersEggPutOntoBattlefieldEffect effect) {
+    private SummonersEggPutOntoBattlefieldEffect(final SummonersEggPutOntoBattlefieldEffect effect) {
         super(effect);
     }
 

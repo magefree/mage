@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -27,7 +27,7 @@ public final class GateToPhyrexia extends CardImpl {
 
         // Sacrifice a creature: Destroy target artifact. Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
                 1, new IsStepCondition(PhaseStep.UPKEEP));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

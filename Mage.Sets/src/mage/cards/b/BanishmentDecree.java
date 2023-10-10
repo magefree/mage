@@ -32,7 +32,7 @@ public final class BanishmentDecree extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public BanishmentDecree (final BanishmentDecree card) {
+    private BanishmentDecree(final BanishmentDecree card) {
         super(card);
     }
 

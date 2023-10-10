@@ -25,7 +25,7 @@ public final class HaakonStromgaldScourge extends CardImpl {
 
     public HaakonStromgaldScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.KNIGHT);
 
@@ -63,7 +63,7 @@ class HaakonStromgaldScourgePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard";
     }
 
-    public HaakonStromgaldScourgePlayEffect(final HaakonStromgaldScourgePlayEffect effect) {
+    private HaakonStromgaldScourgePlayEffect(final HaakonStromgaldScourgePlayEffect effect) {
         super(effect);
     }
 
@@ -82,9 +82,7 @@ class HaakonStromgaldScourgePlayEffect extends AsThoughEffectImpl {
         if (objectId.equals(source.getSourceId()) &&
                 affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                return true;
-            }
+            return card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
         }
         return false;
     }
@@ -97,18 +95,13 @@ class HaakonStromgaldScourgePlayEffect2 extends ContinuousRuleModifyingEffectImp
         staticText = ", but not from anywhere else";
     }
 
-    public HaakonStromgaldScourgePlayEffect2 (final HaakonStromgaldScourgePlayEffect2 effect) {
+    private HaakonStromgaldScourgePlayEffect2(final HaakonStromgaldScourgePlayEffect2 effect) {
         super(effect);
     }
 
     @Override
     public HaakonStromgaldScourgePlayEffect2 copy() {
         return new HaakonStromgaldScourgePlayEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
     
     @Override
@@ -121,9 +114,7 @@ class HaakonStromgaldScourgePlayEffect2 extends ContinuousRuleModifyingEffectImp
         Card card = game.getCard(event.getSourceId());
         if (card != null && card.getId().equals(source.getSourceId())) {
             Zone zone = game.getState().getZone(card.getId());
-            if (zone != null && (zone != Zone.GRAVEYARD)) {
-                return true;
-            }
+            return zone != null && (zone != Zone.GRAVEYARD);
         }
         return false;
     }
@@ -133,10 +124,10 @@ class HaakonPlayKnightsFromGraveyardEffect extends AsThoughEffectImpl {
 
     public HaakonPlayKnightsFromGraveyardEffect () {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As long as {this} is on the battlefield, you may play Knight cards from your graveyard";
+        staticText = "As long as {this} is on the battlefield, you may cast Knight spells from your graveyard";
     }
 
-    public HaakonPlayKnightsFromGraveyardEffect(final HaakonPlayKnightsFromGraveyardEffect effect) {
+    private HaakonPlayKnightsFromGraveyardEffect(final HaakonPlayKnightsFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -154,14 +145,12 @@ class HaakonPlayKnightsFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {       
         if (affectedControllerId.equals(source.getControllerId())) {
             Card knightToCast = game.getCard(objectId);
-            if (knightToCast != null
+            return knightToCast != null
                     && knightToCast.hasSubtype(SubType.KNIGHT, game)
+                    && !knightToCast.isLand(game)
                     && knightToCast.isOwnedBy(source.getControllerId())
-                    && game.getState().getZone(objectId) == Zone.GRAVEYARD) {
-                return true;
-            }
+                    && game.getState().getZone(objectId) == Zone.GRAVEYARD;
         }
         return false;
     }
 }
-

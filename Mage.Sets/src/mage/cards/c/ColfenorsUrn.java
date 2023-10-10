@@ -64,7 +64,7 @@ class ColfenorsUrnEffect extends OneShotEffect {
         this.staticText = "If you do, return those cards to the battlefield under their owner's control";
     }
 
-    public ColfenorsUrnEffect(final ColfenorsUrnEffect effect) {
+    private ColfenorsUrnEffect(final ColfenorsUrnEffect effect) {
         super(effect);
     }
 

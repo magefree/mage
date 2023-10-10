@@ -53,7 +53,7 @@ class FirstDayOfClassTriggeredAbility extends DelayedTriggeredAbility {
         this.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public FirstDayOfClassTriggeredAbility(FirstDayOfClassTriggeredAbility ability) {
+    private FirstDayOfClassTriggeredAbility(final FirstDayOfClassTriggeredAbility ability) {
         super(ability);
     }
 

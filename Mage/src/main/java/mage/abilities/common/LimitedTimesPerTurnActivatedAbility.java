@@ -6,7 +6,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.game.Game;
 import mage.util.CardUtil;
 
 /**
@@ -29,15 +28,10 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
         this.condition = condition;
     }
 
-    public LimitedTimesPerTurnActivatedAbility(final LimitedTimesPerTurnActivatedAbility ability) {
+    protected LimitedTimesPerTurnActivatedAbility(final LimitedTimesPerTurnActivatedAbility ability) {
         super(ability);
         this.maxActivationsPerTurn = ability.maxActivationsPerTurn;
         this.condition = ability.condition;
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        return super.resolve(game);
     }
 
     @Override

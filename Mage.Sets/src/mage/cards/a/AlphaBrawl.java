@@ -48,7 +48,7 @@ class AlphaBrawlEffect extends OneShotEffect {
         staticText = "Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature";
     }
 
-    public AlphaBrawlEffect(final AlphaBrawlEffect effect) {
+    private AlphaBrawlEffect(final AlphaBrawlEffect effect) {
         super(effect);
     }
 

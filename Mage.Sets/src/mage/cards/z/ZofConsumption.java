@@ -4,9 +4,8 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.mana.BlackManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -15,7 +14,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class ZofConsumption extends ModalDoubleFacesCard {
+public final class ZofConsumption extends ModalDoubleFacedCard {
 
     public ZofConsumption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

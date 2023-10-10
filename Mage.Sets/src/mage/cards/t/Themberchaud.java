@@ -20,6 +20,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
@@ -34,7 +35,7 @@ public final class Themberchaud extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new AbilityPredicate(FlyingAbility.class));
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
     private static final DynamicValue xValue
@@ -44,7 +45,7 @@ public final class Themberchaud extends CardImpl {
     public Themberchaud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

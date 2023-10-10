@@ -51,7 +51,7 @@ class SibilantSpiritEffect extends OneShotEffect {
         staticText = "defending player may draw a card";
     }
 
-    public SibilantSpiritEffect(final SibilantSpiritEffect effect) {
+    private SibilantSpiritEffect(final SibilantSpiritEffect effect) {
         super(effect);
     }
 

@@ -21,7 +21,7 @@ public final class InvokeTheDivine extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public InvokeTheDivine(final InvokeTheDivine invokeTheDivine) {
+    private InvokeTheDivine(final InvokeTheDivine invokeTheDivine) {
         super(invokeTheDivine);
     }
 

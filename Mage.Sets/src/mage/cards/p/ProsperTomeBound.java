@@ -3,15 +3,18 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.PlayCardTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
+import mage.game.stack.Spell;
 
 import java.util.UUID;
 
@@ -23,7 +26,7 @@ public final class ProsperTomeBound extends CardImpl {
     public ProsperTomeBound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIEFLING);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(1);
@@ -53,10 +56,10 @@ public final class ProsperTomeBound extends CardImpl {
     }
 }
 
-class ProsperTomeBoundTriggeredAbility extends TriggeredAbilityImpl {
+class ProsperTomeBoundTriggeredAbility extends PlayCardTriggeredAbility {
 
     ProsperTomeBoundTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
+        super(TargetController.YOU, Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
         this.flavorWord = "Pact Boon";
         setTriggerPhrase("Whenever you play a card from exile, ");
     }
@@ -66,14 +69,8 @@ class ProsperTomeBoundTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST
-                || event.getType() == GameEvent.EventType.LAND_PLAYED;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(event.getPlayerId()) && event.getZone() == Zone.EXILED;
+        return super.checkTrigger(event, game) && event.getZone() == Zone.EXILED;
     }
 
     @Override

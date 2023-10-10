@@ -24,7 +24,7 @@ public final class QuilledSlagwurm extends CardImpl {
         this.toughness = new MageInt(8);
     }
 
-    public QuilledSlagwurm (final QuilledSlagwurm card) {
+    private QuilledSlagwurm(final QuilledSlagwurm card) {
         super(card);
     }
 

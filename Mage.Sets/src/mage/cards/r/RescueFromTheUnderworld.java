@@ -84,7 +84,7 @@ class RescueFromTheUnderworldTextEffect extends OneShotEffect {
         this.staticText = "Choose target creature card in your graveyard";
     }
 
-    public RescueFromTheUnderworldTextEffect(final RescueFromTheUnderworldTextEffect effect) {
+    private RescueFromTheUnderworldTextEffect(final RescueFromTheUnderworldTextEffect effect) {
         super(effect);
     }
 
@@ -109,7 +109,7 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
         this.staticText = "Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep";
     }
 
-    public RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(final RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect effect) {
+    private RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(final RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }
@@ -153,7 +153,7 @@ class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbi
         super(effect);
     }
 
-    public RescueFromTheUnderworldDelayedTriggeredAbility(RescueFromTheUnderworldDelayedTriggeredAbility ability) {
+    private RescueFromTheUnderworldDelayedTriggeredAbility(final RescueFromTheUnderworldDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -184,7 +184,7 @@ class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public RescueFromTheUnderworldReturnEffect(final RescueFromTheUnderworldReturnEffect effect) {
+    private RescueFromTheUnderworldReturnEffect(final RescueFromTheUnderworldReturnEffect effect) {
         super(effect);
     }
 

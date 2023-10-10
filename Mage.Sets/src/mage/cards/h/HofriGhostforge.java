@@ -48,7 +48,7 @@ public final class HofriGhostforge extends CardImpl {
     public HofriGhostforge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);
@@ -109,7 +109,7 @@ class HofriGhostforgeEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId());
         effect.setTargetPointer(new FixedTarget(card, game));
-        effect.setAdditionalSubType(SubType.SPIRIT);
+        effect.withAdditionalSubType(SubType.SPIRIT);
         effect.addAdditionalAbilities(new ZoneChangeTriggeredAbility(
                 Zone.ALL, Zone.BATTLEFIELD, null, new HofriGhostforgeReturnEffect(card, game),
                 "When this creature leaves the battlefield, ", false

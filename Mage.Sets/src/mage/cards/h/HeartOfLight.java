@@ -57,7 +57,7 @@ class HeartOfLightEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to and dealt by enchanted creature";
     }
 
-    public HeartOfLightEffect(final HeartOfLightEffect effect) {
+    private HeartOfLightEffect(final HeartOfLightEffect effect) {
         super(effect);
     }
 

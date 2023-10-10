@@ -31,7 +31,7 @@ public final class HuntingCheetah extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Hunting Cheetah deals damage to an opponent, you may search your library for a Forest card, reveal that card, put it into your hand, then shuffle your library.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
     private HuntingCheetah(final HuntingCheetah card) {

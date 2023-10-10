@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -45,7 +44,7 @@ public final class Dub extends CardImpl {
         effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has first strike");
         ability.addEffect(effect);
-        effect = new AddCardSubtypeAttachedEffect(SubType.KNIGHT, Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect = new AddCardSubtypeAttachedEffect(SubType.KNIGHT, AttachmentType.AURA);
         effect.setText(", and is a Knight in addition to its other types");
         ability.addEffect(effect);
         this.addAbility(ability);

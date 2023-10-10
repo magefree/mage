@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
@@ -11,8 +10,9 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CruxOfFate extends CardImpl {
@@ -24,13 +24,13 @@ public final class CruxOfFate extends CardImpl {
     }
 
     public CruxOfFate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
         // Choose one -
         // * Destroy all Dragon creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent(SubType.DRAGON, "Dragon creatures")));
         // * Destroy all non-Dragon creatures.
-        Mode mode = new Mode(new DestroyAllEffect(new FilterCreaturePermanent(filterNonDragon)));
+        Mode mode = new Mode(new DestroyAllEffect(filterNonDragon));
         this.getSpellAbility().addMode(mode);
     }
 

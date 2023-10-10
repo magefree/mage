@@ -34,7 +34,7 @@ public final class FeldonOfTheThirdPath extends CardImpl {
 
     public FeldonOfTheThirdPath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -65,7 +65,7 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step";
     }
 
-    public FeldonOfTheThirdPathEffect(final FeldonOfTheThirdPathEffect effect) {
+    private FeldonOfTheThirdPathEffect(final FeldonOfTheThirdPathEffect effect) {
         super(effect);
     }
 

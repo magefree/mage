@@ -32,7 +32,7 @@ public final class SanctumOfFruitfulHarvest extends CardImpl {
     public SanctumOfFruitfulHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your precombat main phase, add X mana of any one color, where X is the number of Shrines you control.

@@ -93,7 +93,7 @@ class MoggAssassinEffect extends OneShotEffect {
         this.staticText = "You choose target creature an opponent controls, and that opponent chooses target creature. Flip a coin. If you win the flip, destroy the creature you chose. If you lose the flip, destroy the creature your opponent chose";
     }
 
-    public MoggAssassinEffect(final MoggAssassinEffect effect) {
+    private MoggAssassinEffect(final MoggAssassinEffect effect) {
         super(effect);
     }
 

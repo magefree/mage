@@ -49,7 +49,7 @@ class IceCaveEffect extends OneShotEffect {
         this.staticText = "any other player may pay that spell's mana cost. If a player does, counter the spell";
     }
 
-    public IceCaveEffect(final IceCaveEffect effect) {
+    private IceCaveEffect(final IceCaveEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class IceCaveEffect extends OneShotEffect {
         Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (sourcePermanent != null && spell != null && controller != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
-            Cost cost = new ManaCostsImpl<>(spell.getSpellAbility().getManaCosts().getText());
+            Cost cost = new ManaCostsImpl<>(spell.getSpellAbility() == null ? "" : spell.getSpellAbility().getManaCosts().getText());
             if (spellController != null) {
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);

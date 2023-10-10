@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class SpikeToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class SpikeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SpikeToken(final SpikeToken token) {
+    protected SpikeToken(final SpikeToken token) {
         super(token);
     }
 

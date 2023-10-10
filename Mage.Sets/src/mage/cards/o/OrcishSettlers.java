@@ -59,7 +59,7 @@ class OrcishSettlersEffect extends OneShotEffect {
         this.staticText = "Destroy X target lands";
     }
 
-    public OrcishSettlersEffect(final OrcishSettlersEffect effect) {
+    private OrcishSettlersEffect(final OrcishSettlersEffect effect) {
         super(effect);
     }
 

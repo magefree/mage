@@ -8,19 +8,15 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -30,7 +26,7 @@ public final class BabaLysagaNightWitch extends CardImpl {
     public BabaLysagaNightWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(3);
@@ -38,9 +34,7 @@ public final class BabaLysagaNightWitch extends CardImpl {
 
         // {T}, Sacrifice up to three permanents: If there were three or more card types among the sacrificed permanents, each opponent loses 3 life, you gain 3 life, and you draw three cards.
         Ability ability = new SimpleActivatedAbility(new BabaLysagaNightWitchEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                0, 3, StaticFilters.FILTER_CONTROLLED_PERMANENTS, true
-        )));
+        ability.addCost(new BabaLysagaNightWitchSacrificeCost());
         this.addAbility(ability);
     }
 
@@ -51,6 +45,37 @@ public final class BabaLysagaNightWitch extends CardImpl {
     @Override
     public BabaLysagaNightWitch copy() {
         return new BabaLysagaNightWitch(this);
+    }
+}
+
+class BabaLysagaNightWitchSacrificeCost extends SacrificeTargetCost {
+
+    private Set<CardType> sacrificeTypes = new HashSet<>();
+
+    BabaLysagaNightWitchSacrificeCost() {
+        super(new TargetControlledPermanent(0, 3, StaticFilters.FILTER_CONTROLLED_PERMANENTS, true));
+        setText("Sacrifice up to three permanents");
+    }
+
+    private BabaLysagaNightWitchSacrificeCost(final BabaLysagaNightWitchSacrificeCost cost) {
+        super(cost);
+        this.sacrificeTypes.addAll(cost.sacrificeTypes);
+    }
+
+    @Override
+    public BabaLysagaNightWitchSacrificeCost copy() {
+        return new BabaLysagaNightWitchSacrificeCost(this);
+    }
+
+    Set<CardType> getCardTypes() {
+        return this.sacrificeTypes;
+    }
+
+    @Override
+    protected void addSacrificeTarget(Game game, Permanent permanent) {
+        super.addSacrificeTarget(game, permanent);
+        // The Permanent's types will lose the gained/lose types after the sacrifice, so they are stored right before.
+        this.sacrificeTypes.addAll(permanent.getCardType(game));
     }
 }
 
@@ -74,11 +99,9 @@ class BabaLysagaNightWitchEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (CardUtil
-                .castStream(source.getCosts().stream(), SacrificeTargetCost.class)
+                .castStream(source.getCosts().stream(), BabaLysagaNightWitchSacrificeCost.class)
                 .filter(Objects::nonNull)
-                .map(SacrificeTargetCost::getPermanents)
-                .flatMap(Collection::stream)
-                .map(permanent -> permanent.getCardType(game))
+                .map(BabaLysagaNightWitchSacrificeCost::getCardTypes)
                 .flatMap(Collection::stream)
                 .distinct()
                 .count() < 3) {

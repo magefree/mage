@@ -38,7 +38,7 @@ public final class YawgmothsVileOffering extends CardImpl {
 
     public YawgmothsVileOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
         this.addAbility(new LegendarySpellAbility());
@@ -68,7 +68,7 @@ class YawgmothsVileOfferingEffect extends OneShotEffect {
         this.staticText = "Put up to one target creature or planeswalker card from a graveyard onto the battlefield under your control. Destroy up to one target creature or planeswalker";
     }
 
-    public YawgmothsVileOfferingEffect(final YawgmothsVileOfferingEffect effect) {
+    private YawgmothsVileOfferingEffect(final YawgmothsVileOfferingEffect effect) {
         super(effect);
     }
 

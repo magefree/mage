@@ -75,7 +75,7 @@ class FirstResponderEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(Outcome.ReturnToHand, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {

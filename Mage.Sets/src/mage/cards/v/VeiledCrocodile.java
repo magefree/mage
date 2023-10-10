@@ -41,11 +41,12 @@ public final class VeiledCrocodile extends CardImpl {
 class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
 
     public VeiledCrocodileStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new VeilCrocodileToken(), "", Duration.Custom, true, false));
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new VeilCrocodileToken(), null, Duration.Custom));
+        this.replaceRuleText = false;
         setTriggerPhrase("When a player has no cards in hand, if {this} is an enchantment, ");
     }
 
-    public VeiledCrocodileStateTriggeredAbility(final VeiledCrocodileStateTriggeredAbility ability) {
+    private VeiledCrocodileStateTriggeredAbility(final VeiledCrocodileStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -74,31 +75,6 @@ class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
         return false;
     }
 
-    @Override
-    public boolean canTrigger(Game game) {
-        //20100716 - 603.8
-        return !Boolean.TRUE.equals(game.getState().getValue(getSourceId().toString() + "triggered"));
-    }
-
-    @Override
-    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
-        //20100716 - 603.8
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
-        super.trigger(game, controllerId, triggeringEvent);
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        //20100716 - 603.8
-        boolean result = super.resolve(game);
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
-        return result;
-    }
-
-    @Override
-    public void counter(Game game) {
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
-    }
 }
 
 class VeilCrocodileToken extends TokenImpl {
@@ -111,7 +87,7 @@ class VeilCrocodileToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public VeilCrocodileToken(final VeilCrocodileToken token) {
+    private VeilCrocodileToken(final VeilCrocodileToken token) {
         super(token);
     }
 

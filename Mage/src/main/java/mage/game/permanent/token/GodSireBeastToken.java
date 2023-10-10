@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class GodSireBeastToken extends TokenImpl {
@@ -22,7 +21,7 @@ public final class GodSireBeastToken extends TokenImpl {
         toughness = new MageInt(8);
     }
 
-    public GodSireBeastToken(final GodSireBeastToken token) {
+    protected GodSireBeastToken(final GodSireBeastToken token) {
         super(token);
     }
 

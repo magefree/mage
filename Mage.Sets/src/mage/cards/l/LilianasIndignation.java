@@ -44,7 +44,7 @@ class LilianasIndignationEffect extends OneShotEffect {
         this.staticText = "Mill X cards. Target player loses 2 life for each creature card put into your graveyard this way";
     }
 
-    public LilianasIndignationEffect(final LilianasIndignationEffect effect) {
+    private LilianasIndignationEffect(final LilianasIndignationEffect effect) {
         super(effect);
     }
 
@@ -75,6 +75,7 @@ class LilianasIndignationEffect extends OneShotEffect {
         if (creatures > 0) {
             Player targetPlayer = game.getPlayer(source.getFirstTarget());
             if (targetPlayer != null) {
+                game.getState().processAction(game);
                 targetPlayer.loseLife(creatures, game, source, false);
             }
         }

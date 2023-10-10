@@ -49,7 +49,7 @@ class ManaCryptEffect extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, {this} deals 3 damage to you";
     }
 
-    ManaCryptEffect(final ManaCryptEffect effect) {
+    private ManaCryptEffect(final ManaCryptEffect effect) {
         super(effect);
     }
 

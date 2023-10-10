@@ -47,7 +47,7 @@ public final class TamiyoFieldResearcher extends CardImpl {
 
     public TamiyoFieldResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
 
         this.setStartingLoyalty(4);
@@ -86,7 +86,7 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
         this.staticText = "Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card";
     }
 
-    public TamiyoFieldResearcherEffect1(final TamiyoFieldResearcherEffect1 effect) {
+    private TamiyoFieldResearcherEffect1(final TamiyoFieldResearcherEffect1 effect) {
         super(effect);
     }
 
@@ -124,7 +124,7 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
         this.startingTurn = startingTurn;
     }
 
-    public TamiyoFieldResearcherDelayedTriggeredAbility(final TamiyoFieldResearcherDelayedTriggeredAbility ability) {
+    private TamiyoFieldResearcherDelayedTriggeredAbility(final TamiyoFieldResearcherDelayedTriggeredAbility ability) {
         super(ability);
         this.creatures = ability.creatures;
         this.startingTurn = ability.startingTurn;

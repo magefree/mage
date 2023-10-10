@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author fireshoes
  */
 public class PhaseOutSourceEffect extends OneShotEffect {
@@ -17,7 +16,7 @@ public class PhaseOutSourceEffect extends OneShotEffect {
         this.staticText = "{this} phases out";
     }
 
-    public PhaseOutSourceEffect(final PhaseOutSourceEffect effect) {
+    protected PhaseOutSourceEffect(final PhaseOutSourceEffect effect) {
         super(effect);
     }
 

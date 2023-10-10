@@ -1,12 +1,10 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SourceDealsDamageToThisTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
@@ -15,10 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -35,7 +30,7 @@ public final class CragSaurian extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a source deals damage to Crag Saurian, that source's controller gains control of Crag Saurian.
-        this.addAbility(new CragSaurianTriggeredAbility());
+        this.addAbility(new SourceDealsDamageToThisTriggeredAbility(new CragSaurianEffect()));
     }
 
     private CragSaurian(final CragSaurian card) {
@@ -55,7 +50,7 @@ class CragSaurianEffect extends OneShotEffect {
         this.staticText = "that source's controller gains control of {this}";
     }
 
-    private CragSaurianEffect(CragSaurianEffect effect) {
+    private CragSaurianEffect(final CragSaurianEffect effect) {
         super(effect);
     }
 
@@ -73,44 +68,7 @@ class CragSaurianEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public CragSaurianEffect copy() {
         return new CragSaurianEffect(this);
-    }
-}
-
-class CragSaurianTriggeredAbility extends TriggeredAbilityImpl {
-
-    CragSaurianTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CragSaurianEffect());
-        setTriggerPhrase("Whenever a source deals damage to {this}, ");
-    }
-
-    CragSaurianTriggeredAbility(final CragSaurianTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CragSaurianTriggeredAbility copy() {
-        return new CragSaurianTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId)) {
-            UUID controller = game.getControllerId(event.getSourceId());
-            if (controller != null) {
-                Player player = game.getPlayer(controller);
-                if (player != null) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

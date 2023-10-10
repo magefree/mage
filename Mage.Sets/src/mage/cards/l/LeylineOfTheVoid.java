@@ -53,7 +53,7 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl {
         staticText = "If a card would be put into an opponent's graveyard from anywhere, exile it instead";
     }
 
-    public LeylineOfTheVoidEffect(final LeylineOfTheVoidEffect effect) {
+    private LeylineOfTheVoidEffect(final LeylineOfTheVoidEffect effect) {
         super(effect);
     }
 

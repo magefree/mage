@@ -45,7 +45,7 @@ class FluxEffect extends OneShotEffect {
         this.staticText = "Each player discards any number of cards, then draws that many cards";
     }
 
-    FluxEffect(final FluxEffect effect) {
+    private FluxEffect(final FluxEffect effect) {
         super(effect);
     }
 

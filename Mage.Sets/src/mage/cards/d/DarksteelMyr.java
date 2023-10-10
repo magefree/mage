@@ -24,7 +24,7 @@ public final class DarksteelMyr extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public DarksteelMyr (final DarksteelMyr card) {
+    private DarksteelMyr(final DarksteelMyr card) {
         super(card);
     }
 

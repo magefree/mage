@@ -35,7 +35,7 @@ public final class ChandraAblaze extends CardImpl {
 
     public ChandraAblaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
         this.setStartingLoyalty(5);
@@ -73,7 +73,7 @@ class ChandraAblazeEffect1 extends OneShotEffect {
         this.staticText = "Discard a card";
     }
 
-    public ChandraAblazeEffect1(final ChandraAblazeEffect1 effect) {
+    private ChandraAblazeEffect1(final ChandraAblazeEffect1 effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class ChandraAblazeEffect2 extends OneShotEffect {
         this.staticText = "If a red card is discarded this way, {this} deals 4 damage to any target";
     }
 
-    public ChandraAblazeEffect2(final ChandraAblazeEffect2 effect) {
+    private ChandraAblazeEffect2(final ChandraAblazeEffect2 effect) {
         super(effect);
     }
 
@@ -149,7 +149,7 @@ class ChandraAblazeEffect5 extends OneShotEffect {
         this.staticText = "Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs";
     }
 
-    public ChandraAblazeEffect5(final ChandraAblazeEffect5 effect) {
+    private ChandraAblazeEffect5(final ChandraAblazeEffect5 effect) {
         super(effect);
     }
 

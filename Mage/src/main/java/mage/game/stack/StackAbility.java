@@ -33,7 +33,10 @@ import mage.util.SubTypes;
 import mage.util.functions.StackObjectCopyApplier;
 import mage.watchers.Watcher;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -42,7 +45,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     private static final List<CardType> emptyCardType = Collections.unmodifiableList(new ArrayList<>());
     private static final List<String> emptyString = Collections.unmodifiableList(new ArrayList<>());
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
     private static final Costs<Cost> emptyCosts = new CostsImpl<>();
     private static final Abilities<Ability> emptyAbilites = new AbilitiesImpl<>();
@@ -62,7 +64,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
         this.name = "stack ability (" + ability.getRule() + ')';
     }
 
-    public StackAbility(final StackAbility stackAbility) {
+    protected StackAbility(final StackAbility stackAbility) {
         super();
         this.ability = stackAbility.ability.copy();
         this.controllerId = stackAbility.controllerId;
@@ -199,8 +201,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
+    public List<SuperType> getSuperType(Game game) {
+        return Collections.emptyList();
     }
 
     @Override
@@ -220,12 +222,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
@@ -242,6 +244,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
@@ -392,7 +399,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void addManaCost(ManaCost cost) {
+    public void addManaCostsToPay(ManaCost manaCost) {
+        // Do nothing
     }
 
     @Override
@@ -477,8 +485,9 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void setRuleVisible(boolean ruleVisible) {
+    public Ability setRuleVisible(boolean ruleVisible) {
         this.ability.setRuleVisible(ruleVisible);
+        return this;
     }
 
     @Override
@@ -513,12 +522,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public String getGameLogMessage(Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
@@ -695,6 +704,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public Ability addHint(Hint hint) {
         throw new IllegalArgumentException("Stack ability is not supports hint adding");
+    }
+
+    @Override
+    public void setModeTag(String tag) {
+        throw new IllegalArgumentException("Stack ability does not supports setting modeTag");
     }
 
     @Override

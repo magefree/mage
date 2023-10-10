@@ -50,7 +50,7 @@ class BoundlessRealmsEffect extends OneShotEffect {
                 "lands you control, put them onto the battlefield tapped, then shuffle";
     }
 
-    public BoundlessRealmsEffect(final BoundlessRealmsEffect effect) {
+    private BoundlessRealmsEffect(final BoundlessRealmsEffect effect) {
         super(effect);
     }
 

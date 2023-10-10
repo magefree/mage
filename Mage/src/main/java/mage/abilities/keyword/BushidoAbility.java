@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -23,12 +22,12 @@ public class BushidoAbility extends BlocksOrBlockedSourceTriggeredAbility {
     }
 
     public BushidoAbility(DynamicValue value) {
-        super(new BoostSourceEffect(value, value, Duration.EndOfTurn, true));
+        super(new BoostSourceEffect(value, value, Duration.EndOfTurn));
         this.value = value;
         rule = (
                 value instanceof StaticValue ?
-                "Bushido " + value.toString() :
-                "{this} has bushido X, where X is " + value.getMessage()
+                        "Bushido " + value.toString() :
+                        "{this} has bushido X, where X is " + value.getMessage()
         ) + getReminder(value.toString());
     }
 
@@ -36,7 +35,7 @@ public class BushidoAbility extends BlocksOrBlockedSourceTriggeredAbility {
         return "  <i>(Whenever this creature blocks or becomes blocked, it gets +" + xValue + "/+" + xValue + " until end of turn.)</i>";
     }
 
-    public BushidoAbility(final BushidoAbility ability) {
+    protected BushidoAbility(final BushidoAbility ability) {
         super(ability);
         this.value = ability.value;
         this.rule = ability.rule;

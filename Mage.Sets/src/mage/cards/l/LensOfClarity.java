@@ -55,7 +55,7 @@ class LensOfClarityLookLibraryAbility extends ActivatedAbilityImpl {
         this.usesStack = false;
     }
 
-    public LensOfClarityLookLibraryAbility(LensOfClarityLookLibraryAbility ability) {
+    private LensOfClarityLookLibraryAbility(final LensOfClarityLookLibraryAbility ability) {
         super(ability);
     }
 
@@ -73,7 +73,7 @@ class LensOfClarityLookLibraryEffect extends OneShotEffect {
         this.staticText = "You may look at the top card of your library";
     }
 
-    public LensOfClarityLookLibraryEffect(final LensOfClarityLookLibraryEffect effect) {
+    private LensOfClarityLookLibraryEffect(final LensOfClarityLookLibraryEffect effect) {
         super(effect);
     }
 
@@ -115,10 +115,10 @@ class LensOfClarityLookFaceDownAbility extends ActivatedAbilityImpl {
     public LensOfClarityLookFaceDownAbility() {
         super(Zone.BATTLEFIELD, new LensOfClarityLookFaceDownEffect(), new GenericManaCost(0));
         this.usesStack = false;
-        this.addTarget(new TargetCreaturePermanent(filter));
+        this.addTarget(new TargetCreaturePermanent(filter).withNotTarget(true));
     }
 
-    public LensOfClarityLookFaceDownAbility(LensOfClarityLookFaceDownAbility ability) {
+    private LensOfClarityLookFaceDownAbility(final LensOfClarityLookFaceDownAbility ability) {
         super(ability);
     }
 
@@ -136,7 +136,7 @@ class LensOfClarityLookFaceDownEffect extends OneShotEffect {
         this.staticText = "You may look at face-down creatures you don't control";
     }
 
-    public LensOfClarityLookFaceDownEffect(final LensOfClarityLookFaceDownEffect effect) {
+    private LensOfClarityLookFaceDownEffect(final LensOfClarityLookFaceDownEffect effect) {
         super(effect);
     }
 

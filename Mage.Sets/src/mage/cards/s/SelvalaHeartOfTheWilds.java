@@ -38,7 +38,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
 
     public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
@@ -80,7 +80,7 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
         this.staticText = "that creature's controller may draw a card";
     }
 
-    public SelvalaHeartOfTheWildsEffect(final SelvalaHeartOfTheWildsEffect effect) {
+    private SelvalaHeartOfTheWildsEffect(final SelvalaHeartOfTheWildsEffect effect) {
         super(effect);
     }
 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.filter.common;
 
 import mage.constants.CardType;
@@ -9,7 +5,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -24,7 +19,7 @@ public class FilterInstantOrSorceryCard extends FilterCard {
         this.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
-    public FilterInstantOrSorceryCard(final FilterInstantOrSorceryCard filter) {
+    protected FilterInstantOrSorceryCard(final FilterInstantOrSorceryCard filter) {
         super(filter);
     }
 

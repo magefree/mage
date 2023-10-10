@@ -55,18 +55,13 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
                 + "Each opponent who controls more lands than you can't play lands.";
     }
 
-    public WardOfBonesEffect(final WardOfBonesEffect effect) {
+    private WardOfBonesEffect(final WardOfBonesEffect effect) {
         super(effect);
     }
 
     @Override
     public WardOfBonesEffect copy() {
         return new WardOfBonesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

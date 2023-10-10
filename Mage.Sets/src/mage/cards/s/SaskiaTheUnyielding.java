@@ -26,7 +26,7 @@ public final class SaskiaTheUnyielding extends CardImpl {
     public SaskiaTheUnyielding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -62,7 +62,7 @@ class SaskiaTheUnyieldingEffect extends OneShotEffect {
         this.staticText = "it deals that much damage to the chosen player";
     }
 
-    public SaskiaTheUnyieldingEffect(final SaskiaTheUnyieldingEffect effect) {
+    private SaskiaTheUnyieldingEffect(final SaskiaTheUnyieldingEffect effect) {
         super(effect);
     }
 

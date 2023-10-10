@@ -24,7 +24,7 @@ public final class WildSlash extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // <i>Ferocious</i> If you control a creature with power 4 or greater, damage can't be prevented this turn.
-        ContinuousRuleModifyingEffect effect = new DamageCantBePreventedEffect(Duration.EndOfTurn, "damage can't be prevented this turn", false, false);
+        ContinuousRuleModifyingEffect effect = new DamageCantBePreventedEffect(Duration.EndOfTurn, "damage can't be prevented this turn");
         effect.setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, damage can't be prevented this turn.<br>");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(effect,
                 new LockedInCondition(FerociousCondition.instance)));

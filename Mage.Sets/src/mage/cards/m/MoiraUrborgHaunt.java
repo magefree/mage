@@ -33,7 +33,7 @@ public final class MoiraUrborgHaunt extends CardImpl {
 
     public MoiraUrborgHaunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WIZARD);
 

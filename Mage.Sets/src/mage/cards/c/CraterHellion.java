@@ -56,7 +56,7 @@ class CraterHellionEffect extends OneShotEffect {
         staticText = "it deals 4 damage to each other creature";
     }
 
-    public CraterHellionEffect(final CraterHellionEffect effect) {
+    private CraterHellionEffect(final CraterHellionEffect effect) {
         super(effect);
     }
 

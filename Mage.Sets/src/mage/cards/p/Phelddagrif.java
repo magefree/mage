@@ -31,7 +31,7 @@ public final class Phelddagrif extends CardImpl {
 
     public Phelddagrif(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHELDDAGRIF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

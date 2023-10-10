@@ -49,7 +49,7 @@ class DuneblastEffect extends OneShotEffect {
         this.staticText = "Choose up to one creature. Destroy the rest";
     }
 
-    public DuneblastEffect(final DuneblastEffect effect) {
+    private DuneblastEffect(final DuneblastEffect effect) {
         super(effect);
     }
 

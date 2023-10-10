@@ -48,7 +48,7 @@ class DwarvenShrineTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DwarvenShrineEffect(), false);
     }
 
-    public DwarvenShrineTriggeredAbility(final DwarvenShrineTriggeredAbility ability) {
+    private DwarvenShrineTriggeredAbility(final DwarvenShrineTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,7 +81,7 @@ class DwarvenShrineEffect extends OneShotEffect {
         staticText = "Whenever a player casts a spell, {this} deals X damage to that player, where X is twice the number of cards in all graveyards with the same name as that spell.";
     }
 
-    public DwarvenShrineEffect(final DwarvenShrineEffect effect) {
+    private DwarvenShrineEffect(final DwarvenShrineEffect effect) {
         super(effect);
     }
 

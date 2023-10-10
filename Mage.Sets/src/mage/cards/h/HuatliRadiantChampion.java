@@ -27,7 +27,7 @@ public final class HuatliRadiantChampion extends CardImpl {
     public HuatliRadiantChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
         this.setStartingLoyalty(3);
 

@@ -59,7 +59,7 @@ class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
         staticText = "The controller of target instant or sorcery spell copies it. That player may choose new targets for the copy";
     }
 
-    public MeletisCharlatanCopyTargetSpellEffect(final MeletisCharlatanCopyTargetSpellEffect effect) {
+    private MeletisCharlatanCopyTargetSpellEffect(final MeletisCharlatanCopyTargetSpellEffect effect) {
         super(effect);
     }
 

@@ -49,7 +49,7 @@ class BlindCreeperAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player casts a spell, ");
     }
 
-    public BlindCreeperAbility(final BlindCreeperAbility ability) {
+    private BlindCreeperAbility(final BlindCreeperAbility ability) {
         super(ability);
     }
 

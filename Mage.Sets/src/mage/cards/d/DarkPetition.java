@@ -23,7 +23,7 @@ public final class DarkPetition extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true));
 
         // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B}.
         Effect effect = new ConditionalOneShotEffect(new AddManaToManaPoolSourceControllerEffect(Mana.BlackMana(3)),

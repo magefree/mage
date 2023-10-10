@@ -63,7 +63,7 @@ class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
         this.staticText = "Activated abilities of nontoken Rebels cost an additional \"Sacrifice a land\" to activate";
     }
 
-    BrutalSuppressionAdditionalCostEffect(BrutalSuppressionAdditionalCostEffect effect) {
+    private BrutalSuppressionAdditionalCostEffect(final BrutalSuppressionAdditionalCostEffect effect) {
         super(effect);
     }
 

@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public final class WalkerOfTheWastes extends CardImpl {
     
-    private static final FilterLandPermanent filter = new FilterLandPermanent("each land you control named Wastes");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control named Wastes");
 
     static {
         filter.add(new NamePredicate("Wastes"));

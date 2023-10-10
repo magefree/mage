@@ -34,7 +34,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
             "W/U/P", "U/B/P", "B/R/P", "R/G/P", "G/W/P", "W/B/P", "U/R/P", "B/G/P", "R/W/P", "G/U/P",
             "2/W", "2/U", "2/B", "2/R", "2/G",
             "WP", "UP", "BP", "RP", "GP",
-            "X", "S", "T", "Q", "C", "E"};
+            "X", "S", "T", "Q", "C", "E", "P"};
     private static final int minNumeric = 0, maxNumeric = 16;
 
     public GathererSymbols() {
@@ -98,6 +98,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                             case "GWP":
                             case "RGP":
                             case "RWP":
+                            case "P":
                                 // need replace to medium size
                                 modSizeIndex = 1;
                                 break;
@@ -116,6 +117,9 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                             break;
                         case "S":
                             symbol = "snow";
+                            break;
+                        case "P":
+                            symbol = "p";
                             break;
                     }
 

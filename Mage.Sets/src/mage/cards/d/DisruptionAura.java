@@ -61,7 +61,7 @@ class DisruptionAuraEffect extends OneShotEffect {
         staticText =  "sacrifice this artifact unless you pay its mana cost";
      }
 
-    public DisruptionAuraEffect(final DisruptionAuraEffect effect) {
+    private DisruptionAuraEffect(final DisruptionAuraEffect effect) {
         super(effect);
     }
 

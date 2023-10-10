@@ -61,7 +61,7 @@ class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
-    public StuffyDollTriggeredAbility(final StuffyDollTriggeredAbility effect) {
+    private StuffyDollTriggeredAbility(final StuffyDollTriggeredAbility effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class StuffyDollGainLifeEffect extends OneShotEffect {
         staticText = "it deals that much damage to the chosen player";
     }
 
-    public StuffyDollGainLifeEffect(final StuffyDollGainLifeEffect effect) {
+    private StuffyDollGainLifeEffect(final StuffyDollGainLifeEffect effect) {
         super(effect);
     }
 

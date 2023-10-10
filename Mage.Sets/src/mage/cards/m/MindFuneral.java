@@ -48,7 +48,7 @@ class MindFuneralEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals cards from the top of their library until four land cards are revealed. That player puts all cards revealed this way into their graveyard";
     }
 
-    public MindFuneralEffect(final MindFuneralEffect effect) {
+    private MindFuneralEffect(final MindFuneralEffect effect) {
         super(effect);
     }
 

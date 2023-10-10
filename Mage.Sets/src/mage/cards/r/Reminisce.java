@@ -42,7 +42,7 @@ class ReminisceEffect extends OneShotEffect {
         this.staticText = "Target player shuffles their graveyard into their library";
     }
 
-    ReminisceEffect(final ReminisceEffect effect) {
+    private ReminisceEffect(final ReminisceEffect effect) {
         super(effect);
     }
 

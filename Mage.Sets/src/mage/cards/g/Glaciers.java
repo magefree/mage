@@ -52,7 +52,7 @@ public final class Glaciers extends CardImpl {
             this.staticText = "All Mountains are Plains";
         }
 
-        GlaciersEffect(final GlaciersEffect effect) {
+        private GlaciersEffect(final GlaciersEffect effect) {
             super(effect);
         }
 

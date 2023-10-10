@@ -530,4 +530,22 @@ public class BestowTest extends CardTestPlayerBase {
         assertType("Nylea's Emissary", CardType.CREATURE, false);
         assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
     }
+    @Test
+    public void testCastBestowFlash() {
+        addCard(Zone.HAND, playerA, "Nylea's Emissary"); // +3/+3, only an aura if cast with bestow
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Sigarda's Aid"); //aura spells have flash
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1); // 1/1
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Nylea's Emissary using bestow", "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Nylea's Emissary", 1);
+        assertPowerToughness(playerA, "Memnite", 4, 4);
+        assertType("Nylea's Emissary", CardType.CREATURE, false);
+        assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
+    }
 }

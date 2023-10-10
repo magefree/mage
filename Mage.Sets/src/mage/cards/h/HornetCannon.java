@@ -52,7 +52,7 @@ class HornetCannonEffect extends OneShotEffect {
         staticText = "Create a 1/1 colorless Insect artifact creature token with flying and haste named Hornet. Destroy it at the beginning of the next end step.";
     }
 
-    public HornetCannonEffect(final HornetCannonEffect effect) {
+    private HornetCannonEffect(final HornetCannonEffect effect) {
         super(effect);
     }
 

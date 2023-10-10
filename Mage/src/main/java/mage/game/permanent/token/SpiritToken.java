@@ -17,7 +17,7 @@ public final class SpiritToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SpiritToken(final SpiritToken token) {
+    protected SpiritToken(final SpiritToken token) {
         super(token);
     }
 

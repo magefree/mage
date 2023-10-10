@@ -32,7 +32,7 @@ public final class MishraArtificerProdigy extends CardImpl {
 
     public MishraArtificerProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);
@@ -58,7 +58,7 @@ class MishraArtificerProdigyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MishraArtificerProdigyEffect(), true);
     }
 
-    MishraArtificerProdigyTriggeredAbility(final MishraArtificerProdigyTriggeredAbility ability) {
+    private MishraArtificerProdigyTriggeredAbility(final MishraArtificerProdigyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class MishraArtificerProdigyEffect extends OneShotEffect {
         this.staticText = "Search your graveyard, hand, and/or library for a card named <i>" + cardName + "</i> and put it onto the battlefield. If you search your library this way, shuffle.";
     }
 
-    MishraArtificerProdigyEffect(final MishraArtificerProdigyEffect effect) {
+    private MishraArtificerProdigyEffect(final MishraArtificerProdigyEffect effect) {
         super(effect);
         this.cardName = effect.cardName;
     }

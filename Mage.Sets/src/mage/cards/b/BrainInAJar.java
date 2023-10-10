@@ -46,7 +46,7 @@ public final class BrainInAJar extends CardImpl {
         // {3}, {T}, Remove X charge counters from Brain in a Jar: Scry X.
         ability = new SimpleActivatedAbility(new BrainInAJarScryEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE));
         this.addAbility(ability);
     }
 
@@ -69,7 +69,7 @@ class BrainInAJarCastEffect extends OneShotEffect {
                 + "counters on {this} from your hand without paying its mana cost";
     }
 
-    public BrainInAJarCastEffect(final BrainInAJarCastEffect effect) {
+    private BrainInAJarCastEffect(final BrainInAJarCastEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class BrainInAJarScryEffect extends OneShotEffect {
         this.staticText = "Scry X";
     }
 
-    public BrainInAJarScryEffect(final BrainInAJarScryEffect effect) {
+    private BrainInAJarScryEffect(final BrainInAJarScryEffect effect) {
         super(effect);
     }
 

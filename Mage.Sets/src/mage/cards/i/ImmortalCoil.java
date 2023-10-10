@@ -117,7 +117,7 @@ class ImmortalCoilPreventionEffect extends PreventionEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(damage, player.getGraveyard().size()), StaticFilters.FILTER_CARD);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             player.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
         }

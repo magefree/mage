@@ -20,7 +20,7 @@ public final class OboroPalaceInTheClouds extends CardImpl {
 
     public OboroPalaceInTheClouds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
         // {1}: Return Oboro, Palace in the Clouds to its owner's hand.

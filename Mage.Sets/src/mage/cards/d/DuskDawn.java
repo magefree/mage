@@ -63,7 +63,7 @@ class DawnEffect extends OneShotEffect {
         this.staticText = "Return all creature cards with power 2 or less from your graveyard to your hand.";
     }
 
-    DawnEffect(final DawnEffect effect) {
+    private DawnEffect(final DawnEffect effect) {
         super(effect);
     }
 
