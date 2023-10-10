@@ -6,16 +6,12 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author TheElk801
  */
 public final class TheBrothersWar extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Autonomous Assembler", "Blitz Automaton", "Boulderbranch Golem", "Combat Thresher", "Cradle Clearcutter", "Depth Charge Colossus", "Fallaji Dragon Engine", "Goring Warplow", "Hulking Metamorph", "Iron-Craw Crusher", "Phyrexian Fleshgorger", "Rootwire Amalgam", "Rust Goliath", "Skitterbeam Battalion", "Spotter Thopter", "Steel Seraph", "Woodcaller Automaton");
-
     private static final TheBrothersWar instance = new TheBrothersWar();
 
     public static TheBrothersWar getInstance() {
@@ -421,8 +417,6 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Yotian Medic", 33, Rarity.COMMON, mage.cards.y.YotianMedic.class));
         cards.add(new SetCardInfo("Yotian Tactician", 228, Rarity.UNCOMMON, mage.cards.y.YotianTactician.class));
         cards.add(new SetCardInfo("Zephyr Sentinel", 74, Rarity.UNCOMMON, mage.cards.z.ZephyrSentinel.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 
     @Override

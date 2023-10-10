@@ -116,6 +116,8 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     ManaCosts<ManaCost> getManaCost();
 
+    void setManaCost(ManaCosts<ManaCost> costs);
+
     default List<String> getManaCostSymbols() {
         List<String> symbols = new ArrayList<>();
         for (ManaCost cost : getManaCost()) {

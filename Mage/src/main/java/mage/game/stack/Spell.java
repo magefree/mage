@@ -10,6 +10,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -46,6 +47,7 @@ public class Spell extends StackObjectImpl implements Card {
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
 
     private final Card card;
+    private ManaCosts<ManaCost> manaCost;
     private final ObjectColor color;
     private final ObjectColor frameColor;
     private final FrameStyle frameStyle;
@@ -62,6 +64,7 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean resolving = false;
     private UUID commandedByPlayerId = null; // controller of the spell resolve, example: Word of Command
     private String commandedByInfo; // info about spell commanded, e.g. source
+    private boolean prototyped;
     private int startingLoyalty;
     private int startingDefense;
 
@@ -79,8 +82,13 @@ public class Spell extends StackObjectImpl implements Card {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
+        if (ability instanceof PrototypeAbility){
+            affectedCard = ((PrototypeAbility)ability).prototypeCardSpell(card);
+            this.prototyped = true;
+        }
 
         this.card = affectedCard;
+        this.manaCost = this.card.getManaCost().copy();
         this.color = affectedCard.getColor(null).copy();
         this.frameColor = affectedCard.getFrameColor(null).copy();
         this.frameStyle = affectedCard.getFrameStyle();
@@ -109,6 +117,7 @@ public class Spell extends StackObjectImpl implements Card {
         } else {
             spellAbilities.add(ability);
         }
+
         this.controllerId = controllerId;
         this.fromZone = fromZone;
         this.countered = false;
@@ -128,6 +137,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.card = spell.card.copy();
 
         this.fromZone = spell.fromZone;
+        this.manaCost = spell.getManaCost().copy();
         this.color = spell.color.copy();
         this.frameColor = spell.color.copy();
         this.frameStyle = spell.frameStyle;
@@ -143,6 +153,7 @@ public class Spell extends StackObjectImpl implements Card {
 
         this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
+        this.prototyped = spell.prototyped;
         this.startingLoyalty = spell.startingLoyalty;
         this.startingDefense = spell.startingDefense;
     }
@@ -632,8 +643,11 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
-        return card.getManaCost();
+        return this.manaCost;
     }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) { this.manaCost = costs.copy(); }
 
     /**
      * 202.3b When calculating the converted mana cost of an object with an {X}
@@ -652,7 +666,7 @@ public class Spell extends StackObjectImpl implements Card {
         for (SpellAbility spellAbility : spellAbilities) {
             cmc += spellAbility.getConvertedXManaCost(getCard());
         }
-        cmc += getCard().getManaCost().manaValue();
+        cmc += this.manaCost.manaValue();
         return cmc;
     }
 
@@ -787,6 +801,10 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean isNightCard() {
         return false;
+    }
+
+    public boolean isPrototyped() {
+        return prototyped;
     }
 
     @Override

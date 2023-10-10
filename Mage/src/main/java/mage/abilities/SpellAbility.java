@@ -322,7 +322,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
         if (spellCharacteristics != null) {
             if (getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, game);
+                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, this);
             }
         }
         return spellCharacteristics;

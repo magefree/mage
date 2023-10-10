@@ -1978,6 +1978,14 @@ public abstract class GameImpl implements Game {
             if (copyFromPermanent.isTransformed()) {
                 TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
             }
+            if (copyFromPermanent.isPrototyped()) {
+                Abilities<Ability> abilities = copyFromPermanent.getAbilities();
+                for (Ability ability : abilities){
+                    if (ability instanceof PrototypeAbility) {
+                        ((PrototypeAbility) ability).prototypePermanent(newBluePrint, this);
+                    }
+                }
+            }
         }
         if (applier != null) {
             applier.apply(this, newBluePrint, source, copyToPermanentId);
