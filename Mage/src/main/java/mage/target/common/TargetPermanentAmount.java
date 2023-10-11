@@ -72,7 +72,7 @@ public class TargetPermanentAmount extends TargetAmount {
             return filter.match(permanent, game);
         }
         MageObject targetSource = source.getSourceObject(game);
-        return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
+        return (notTarget || permanent.canBeTargetedBy(targetSource, source.getControllerId(), game))
                 && filter.match(permanent, source.getControllerId(), source, game);
     }
 
@@ -106,7 +106,7 @@ public class TargetPermanentAmount extends TargetAmount {
                 .getActivePermanents(filter, sourceControllerId, source, game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(permanent -> permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
+                .filter(permanent -> notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
                 .map(Permanent::getId)
                 .collect(Collectors.toSet());
     }
