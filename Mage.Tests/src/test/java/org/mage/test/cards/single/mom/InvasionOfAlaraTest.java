@@ -61,7 +61,7 @@ public class InvasionOfAlaraTest extends CardTestPlayerBase {
         checkHandCardCount("Divination in hand", 1, PhaseStep.BEGIN_COMBAT, playerA, divination, 1);
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice", invasion); // remove all counters
-        //setChoice(playerA, true); // yes to cast
+        setChoice(playerA, true); // yes to cast
         addTarget(playerA, playerA); // to draw 2 cards (meteor and puma)
         addTarget(playerA, golems); // to destroy (last effect)
         // now resolve
