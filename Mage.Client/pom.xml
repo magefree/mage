@@ -48,6 +48,10 @@
             <groupId>org.unbescape</groupId>
             <artifactId>unbescape</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
 
         <dependency>
             <!-- inner lib for jboss network implementation -->
@@ -109,12 +113,6 @@
             <groupId>org.jdesktop</groupId>
             <artifactId>beansbinding</artifactId>
             <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <!-- scraping lib to download and parse symbols/images/svg -->
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.14.3</version>
         </dependency>
 
         <!-- music player START -->

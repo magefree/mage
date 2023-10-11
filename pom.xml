@@ -313,6 +313,12 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.12.0</version>
             </dependency>
+            <dependency>
+                <!-- scraping lib to download and parse html/symbols/images/svg -->
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.14.3</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
