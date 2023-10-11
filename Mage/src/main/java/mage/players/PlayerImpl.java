@@ -4548,8 +4548,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setPriorityTimeLeft(int timeLeft
-    ) {
+    public void setPriorityTimeLeft(int timeLeft) {
         priorityTimeLeft = timeLeft;
     }
 
