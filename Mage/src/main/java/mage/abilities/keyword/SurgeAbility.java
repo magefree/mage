@@ -67,7 +67,7 @@ public class SurgeAbility extends SpellAbility {
     @Override
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            costsTagMap.put(SURGE_ACTIVATION_VALUE_KEY, 1);
+            getCostsTagMap().put(SURGE_ACTIVATION_VALUE_KEY, 1);
             return true;
         }
         return false;

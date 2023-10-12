@@ -77,7 +77,7 @@ public class BlitzAbility extends SpellAbility {
         if (!super.activate(game, noMana)) {
             return false;
         }
-        this.costsTagMap.put(BLITZ_ACTIVATION_VALUE_KEY,1);
+        getCostsTagMap().put(BLITZ_ACTIVATION_VALUE_KEY,1);
         return true;
     }
 }
