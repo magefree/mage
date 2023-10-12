@@ -28,13 +28,10 @@ public final class CrackInTime extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // Vanishing 3
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
         this.addAbility(new VanishingAbility(3));
 
         // When Crack in Time enters the battlefield and at the beginning of your precombat main phase, exile target creature an opponent controls until Crack in Time leaves the battlefield.
-        ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(), false,
+        Ability ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(), false,
                 "When {this} enters the battlefield and at the beginning of your precombat main phase, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new BeginningOfPreCombatMainTriggeredAbility(null, TargetController.YOU, false)
