@@ -94,7 +94,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
                     ability.addCost(cost.copy());
                 }
             }
-            ability.getCostsTagMap().put(ENTWINE_ACTIVATION_VALUE_KEY,1);
+            ability.getCostsTagMap().put(ENTWINE_ACTIVATION_VALUE_KEY,null);
         }
     }
 

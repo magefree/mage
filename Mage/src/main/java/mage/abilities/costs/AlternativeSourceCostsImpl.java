@@ -62,7 +62,7 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
                 || !player.chooseUse(Outcome.Benefit, "Cast this for its " + this.name + " cost? (" + alternativeCost.getText(true) + ')', ability, game)) {
             return false;
         }
-        ability.getCostsTagMap().put(activationKey,1);
+        ability.getCostsTagMap().put(activationKey,null);
         alternativeCost.activate();
         ability.clearManaCostsToPay();
         ability.clearCosts();

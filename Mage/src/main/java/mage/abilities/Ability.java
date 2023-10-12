@@ -155,13 +155,6 @@ public interface Ability extends Controllable, Serializable {
      * @return All {@link ManaCosts} that must be paid.
      */
     ManaCosts<ManaCost> getManaCostsToPay();
-    /**
-     * Gets a map of the cost tags (set while casting)
-     * Note that tag entries should always be immutable
-     *
-     * @return All {@link Costs} that must be paid.
-     */
-    Map<String, Object> getCostsTagMap();
 
     /**
      * Adds a {@link ManaCost} to this ability that must be paid before this
@@ -585,6 +578,14 @@ public interface Ability extends Controllable, Serializable {
      * Tag the current mode to be retrieved elsewhere thanks to the tag.
      */
     void setModeTag(String tag);
+
+    /**
+     * Gets a map of the cost tags (set while casting/activating)
+     * Note that tag entries should always be immutable
+     *
+     * @return The map of tags and corresponding objects (usually Integer or Boolean, sometimes other)
+     */
+    Map<String, Object> getCostsTagMap();
 
     /**
      * For abilities with static icons
