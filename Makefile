@@ -1,4 +1,4 @@
-include .env
+-include .env
 
 # The target directory is used for setting where the output zip files will end up
 # You can override this with an environment variable, ex
