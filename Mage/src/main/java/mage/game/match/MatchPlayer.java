@@ -22,7 +22,7 @@ public class MatchPlayer implements Serializable {
 
     private boolean quit;
     private boolean doneSideboarding;
-    private int priorityTimeLeft;
+    private int priorityTimeLeft; // keep left time for next game
 
     public MatchPlayer(Player player, Deck deck, Match match) {
         this.player = player;

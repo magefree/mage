@@ -3,8 +3,6 @@ package mage.abilities.decorator;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
@@ -30,21 +28,8 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         this.condition = condition;
     }
 
-    public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
-        super(zone, effect, cost);
-        this.condition = condition;
-        this.ruleText = rule;
-    }
-
-    public ConditionalActivatedAbility(Zone zone, Effect effect, Costs<Cost> costs, Condition condition, String rule) {
-        super(zone, effect, costs);
-        this.condition = condition;
-        this.ruleText = rule;
-    }
-
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
-        super(zone, effect, cost);
-        this.condition = condition;
+        this(zone, effect, cost, condition);
         this.ruleText = rule;
     }
 
@@ -77,11 +62,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
             sb.append("as a sorcery and only ");
         }
         String conditionText = condition.toString();
-        if (conditionText.startsWith("during")
-                || conditionText.startsWith("before")
-                || conditionText.startsWith("if")) {
-            sb.append("");
-        } else {
+        if (!conditionText.startsWith("during") && !conditionText.startsWith("before") && !conditionText.startsWith("if")) {
             sb.append("if ");
         }
         sb.append(conditionText);

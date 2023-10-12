@@ -30,7 +30,7 @@ public class SpectacleAbility extends SpellAbility {
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(spectacleCosts.copy());
+        this.addCost(spectacleCosts.copy());
 
         this.setRuleAtTheTop(true);
         this.rule = "Spectacle " + spectacleCosts.getText()
@@ -55,7 +55,7 @@ public class SpectacleAbility extends SpellAbility {
     @Override
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            this.costsTagMap.put(SPECTACLE_ACTIVATION_VALUE_KEY,1);
+            getCostsTagMap().put(SPECTACLE_ACTIVATION_VALUE_KEY,null);
             return true;
         }
         return false;

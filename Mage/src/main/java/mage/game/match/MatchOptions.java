@@ -43,15 +43,11 @@ public class MatchOptions implements Serializable {
     protected int minimumRating;
     protected int edhPowerLevel;
     protected boolean rated;
-    protected int numSeatsForMatch;
     protected Set<String> bannedUsers = new HashSet<>();
 
-    /**
-     * Time each player has during the game to play using his\her priority.
-     */
-    protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
-    protected MatchBufferTime matchBufferTime; // Amount of time each player gets before their normal time limit counts down. Refreshes each time the normal timer is invoked.
-    protected MulliganType mulliganType;
+    protected MatchTimeLimit matchTimeLimit = MatchTimeLimit.NONE; // total time limit for priority
+    protected MatchBufferTime matchBufferTime = MatchBufferTime.NONE; // additional/buffer time limit for each priority before real time ticking starts
+    protected MulliganType mulliganType = MulliganType.GAME_DEFAULT;
 
     protected Collection<DeckCardInfo> perPlayerEmblemCards;
     protected Collection<DeckCardInfo> globalEmblemCards;
@@ -178,26 +174,12 @@ public class MatchOptions implements Serializable {
         this.limited = limited;
     }
 
-    public int getPriorityTime() {
-        if (matchTimeLimit == null) {
-            return MatchTimeLimit.NONE.getTimeLimit();
-        }
-        return matchTimeLimit.getTimeLimit();
-    }
-
     public MatchTimeLimit getMatchTimeLimit() {
         return this.matchTimeLimit;
     }
 
     public void setMatchTimeLimit(MatchTimeLimit matchTimeLimit) {
-        this.matchTimeLimit = matchTimeLimit;
-    }
-
-    public int getBufferTime() {
-        if (matchBufferTime == null) {
-            return MatchBufferTime.NONE.getBufferTime();
-        }
-        return matchBufferTime.getBufferTime();
+        this.matchTimeLimit = Optional.ofNullable(matchTimeLimit).orElse(MatchTimeLimit.NONE);
     }
 
     public MatchBufferTime getMatchBufferTime() {
@@ -205,7 +187,7 @@ public class MatchOptions implements Serializable {
     }
 
     public void setMatchBufferTime(MatchBufferTime matchBufferTime) {
-        this.matchBufferTime = matchBufferTime;
+        this.matchBufferTime = Optional.ofNullable(matchBufferTime).orElse(MatchBufferTime.NONE);
     }
 
     public String getPassword() {
@@ -295,9 +277,10 @@ public class MatchOptions implements Serializable {
                 .setRated(this.isRated())
                 .setWinsNeeded(this.getWinsNeeded());
 
-        ResultProtos.SkillLevel skillLevel = ResultProtos.SkillLevel.BEGINNER;
+        ResultProtos.SkillLevel skillLevel;
         switch (this.getSkillLevel()) {
             case BEGINNER:
+            default:
                 skillLevel = ResultProtos.SkillLevel.BEGINNER;
                 break;
             case CASUAL:
@@ -313,13 +296,10 @@ public class MatchOptions implements Serializable {
     }
 
     public void setMullgianType(MulliganType mulliganType) {
-        this.mulliganType = mulliganType;
+        this.mulliganType = Optional.ofNullable(mulliganType).orElse(MulliganType.GAME_DEFAULT);
     }
 
     public MulliganType getMulliganType() {
-        if (mulliganType == null) {
-            return MulliganType.GAME_DEFAULT;
-        }
         return mulliganType;
     }
 

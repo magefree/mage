@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -38,17 +37,20 @@ public class ExertAbility extends SimpleStaticAbility {
         super(Zone.BATTLEFIELD, new ExertReplacementEffect(exertOnlyOncePerTurn));
         ruleText = (exertOnlyOncePerTurn
                 ? "If {this} hasn't been exerted this turn, you may exert it"
-                : "You may exert {this}") + " as it attacks. ";
+                : "You may exert {this}") + " as it attacks.";
         if (ability != null) {
             this.addSubAbility(ability);
-            ruleText += "When you do,";
+            ruleText += " When you do,";
             ability.getEffects().forEach(effect -> {
-                ruleText += " " + effect.getText(ability.getModes().getMode());
+                if (!effect.getConcatPrefix().isEmpty()) {
+                    ruleText += " " + effect.getConcatPrefix();
+                }
+                ruleText += " " + effect.getText(ability.getModes().getMode()).replaceFirst("^\\{this\\}", "it");
             });
-            ruleText += ". ";
+            ruleText += ".";
             ability.setRuleVisible(false);
         }
-        ruleText += "<i>(An exerted creature won't untap during your next untap step.)</i>";
+        ruleText += " <i>(An exerted creature won't untap during your next untap step.)</i>";
         if (exertOnlyOncePerTurn) {
             getWatchers().add(new ExertedThisTurnWatcher());
         }

@@ -21,7 +21,7 @@ public class SurgeAbility extends SpellAbility {
 
     public static final String SURGE_ACTIVATION_VALUE_KEY = "surgeActivation";
 
-    private String rule;
+    private final String rule;
 
     public SurgeAbility(Card card, String surgeCosts) {
         super(card.getSpellAbility());
@@ -32,7 +32,7 @@ public class SurgeAbility extends SpellAbility {
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(new ManaCostsImpl<>(surgeCosts));
+        this.addCost(new ManaCostsImpl<>(surgeCosts));
 
         this.setRuleAtTheTop(true);
         this.rule = "Surge " + surgeCosts

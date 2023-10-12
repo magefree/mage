@@ -1,9 +1,7 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -43,10 +41,8 @@ public final class AjaniVengeant extends CardImpl {
         this.addAbility(ability1);
 
         // −2: Ajani Vengeant deals 3 damage to any target and you gain 3 life.
-        Effects effects1 = new Effects();
-        effects1.add(new DamageTargetEffect(3));
-        effects1.add(new GainLifeEffect(3).concatBy("and"));
-        LoyaltyAbility ability2 = new LoyaltyAbility(effects1, -2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(3), -2);
+        ability2.addEffect(new GainLifeEffect(3).concatBy("and"));
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);
 

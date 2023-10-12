@@ -36,7 +36,7 @@ public class BecomesTargetSourceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        boolean textWhen = (effect instanceof SacrificeSourceEffect
+        boolean textWhen = !optional && (effect instanceof SacrificeSourceEffect
                 || effect instanceof ReturnToHandSourceEffect
                 || effect instanceof ShuffleIntoLibrarySourceEffect
                 || effect instanceof ExileSourceEffect);

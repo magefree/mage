@@ -28,7 +28,7 @@ public final class TheThirteenthDoctor extends CardImpl {
     private static final FilterSpell filter
             = new FilterSpell("a spell from anywhere other than your hand");
     private static final FilterPermanent filter2
-            = new FilterControlledCreaturePermanent("creature you control with a counter on it");
+            = new FilterControlledCreaturePermanent("each creature you control with a counter on it");
 
     static {
         filter.add(Predicates.not(new CastFromZonePredicate(Zone.HAND)));

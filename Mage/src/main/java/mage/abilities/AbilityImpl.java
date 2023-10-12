@@ -58,7 +58,7 @@ public abstract class AbilityImpl implements Ability {
     protected UUID sourceId;
     private final ManaCosts<ManaCost> manaCosts;
     private final ManaCosts<ManaCost> manaCostsToPay;
-    private Costs<Cost> costs;
+    private final Costs<Cost> costs;
     protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
@@ -444,6 +444,9 @@ public abstract class AbilityImpl implements Ability {
                     // mandatory additional costs the spell has, such as that of Tormenting Voice. (2018-12-07)
                     canUseAdditionalCost = true;
                     break;
+                case PROTOTYPE:
+                    // Notably, casting a spell as a prototype does not count as paying an alternative cost.
+                    // https://magic.wizards.com/en/news/feature/comprehensive-rules-changes
                 case NORMAL:
                     canUseAlternativeCost = true;
                     canUseAdditionalCost = true;
@@ -869,7 +872,6 @@ public abstract class AbilityImpl implements Ability {
         if (cost == null) {
             return;
         }
-
         if (cost instanceof Costs) {
             // as list of costs
             Costs<Cost> list = (Costs<Cost>) cost;
@@ -879,11 +881,9 @@ public abstract class AbilityImpl implements Ability {
         } else {
             // as single cost
             if (cost instanceof ManaCost) {
-                addManaCost((ManaCost) cost);
+                manaCosts.add((ManaCost) cost);
+                manaCostsToPay.add((ManaCost) cost);
             } else {
-                if (costs == null) {
-                    costs = new CostsImpl<>();
-                }
                 costs.add(cost);
             }
         }
@@ -899,15 +899,6 @@ public abstract class AbilityImpl implements Ability {
         } else {
             manaCostsToPay.add(manaCost);
         }
-    }
-
-    @Override
-    public void addManaCost(ManaCost manaCost) {
-        if (manaCost == null) {
-            return;
-        }
-        manaCosts.add(manaCost);
-        manaCostsToPay.add(manaCost);
     }
 
     @Override
@@ -1155,10 +1146,10 @@ public abstract class AbilityImpl implements Ability {
         if (object == null) { // e.g. sacrificed token
             logger.warn("Could get no object: " + this);
         }
-        return new StringBuilder(" activates: ")
-                .append(object != null ? this.formatRule(getModes().getText(), object.getLogName()) : getModes().getText())
-                .append(" from ")
-                .append(getMessageText(game)).toString();
+        return " activates: " +
+                (object != null ? this.formatRule(getModes().getText(), object.getLogName()) : getModes().getText()) +
+                " from " +
+                getMessageText(game);
     }
 
     protected String getMessageText(Game game) {

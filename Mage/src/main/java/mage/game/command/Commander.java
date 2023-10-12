@@ -239,6 +239,11 @@ public class Commander extends CommandObjectImpl {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public int getManaValue() {
         return sourceObject.getManaValue();
     }

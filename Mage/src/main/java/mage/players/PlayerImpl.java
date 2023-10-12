@@ -1113,9 +1113,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 .computeIfAbsent(sourceId, k -> new HashMap<>())
                 .put(identifier, costs != null ? costs.copy() : null);
 
-        if (identifier == null) {
-            boolean a = true;
-        }
     }
 
     @Override
@@ -1236,7 +1233,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     } else {
                         spellAbility.clearManaCosts();
                         spellAbility.clearManaCostsToPay();
-                        spellAbility.addManaCost(alternateCosts.copy());
+                        spellAbility.addCost(alternateCosts.copy());
                     }
                     spellAbility.clearCosts();
                     spellAbility.addCost(costs);
@@ -4551,8 +4548,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setPriorityTimeLeft(int timeLeft
-    ) {
+    public void setPriorityTimeLeft(int timeLeft) {
         priorityTimeLeft = timeLeft;
     }
 

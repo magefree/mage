@@ -862,9 +862,9 @@ public class TableController {
                         });
                     }
                 }
-                // free resources no longer needed
-                match.cleanUpOnMatchEnd(managerFactory.configSettings().isSaveGameActivated(), table.isTournament());
             }
+            // free resources no longer needed
+            match.cleanUpOnMatchEnd(managerFactory.configSettings().isSaveGameActivated(), table.isTournament());
         }
     }
 

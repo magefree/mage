@@ -244,6 +244,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public List<String> getManaCostSymbols() {
         return super.getManaCostSymbols();
     }
@@ -392,11 +397,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public Map<String, Object> getCostsTagMap() {
         return ability.getCostsTagMap();
-    }
-
-    @Override
-    public void addManaCost(ManaCost manaCost) {
-        // Do nothing
     }
 
     @Override

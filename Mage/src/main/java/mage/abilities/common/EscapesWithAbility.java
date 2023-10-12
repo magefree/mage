@@ -16,7 +16,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,11 +58,10 @@ public class EscapesWithAbility extends EntersBattlefieldAbility {
             sb.append(" on it.");
         }
 
-        if (triggeredAbility == null) {
-            // Do nothing
-        } else if (triggeredAbility instanceof DelayedTriggeredAbility) {
+        if (triggeredAbility instanceof DelayedTriggeredAbility) {
+            sb.append(" ");
             sb.append(this.triggeredAbility.getRule());
-        } else {
+        } else if (triggeredAbility != null) {
             sb.append("\"");
             sb.append(this.triggeredAbility.getRule());
             sb.append("\"");
@@ -107,7 +105,7 @@ class EscapesWithEffect extends OneShotEffect {
         }
 
         if (counter > 0) {
-            List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+            List<UUID> appliedEffects = (List<UUID>) this.getValue("appliedEffects");
             permanent.addCounters(CounterType.P1P1.createInstance(counter), source.getControllerId(), source, game, appliedEffects);
         }
 

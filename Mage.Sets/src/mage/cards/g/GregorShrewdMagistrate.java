@@ -35,7 +35,7 @@ public final class GregorShrewdMagistrate extends CardImpl {
 
         // Whenever Glenn deals combat damage to a player, draw cards equal to his power.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DrawCardSourceControllerEffect(xValue).setText("draw cards equal to his power"), false
+                new DrawCardSourceControllerEffect(xValue).setText("draw cards equal to its power"), false
         ));
     }
 

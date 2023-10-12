@@ -503,7 +503,7 @@ public final class GamePanel extends javax.swing.JPanel {
             // play start sound
             AudioManager.playYourGameStarted();
             if (!AppUtil.isAppActive()) {
-                MageTray.instance.displayMessage("Your match has started!");
+                MageTray.instance.displayMessage("Your game has started!");
                 MageTray.instance.blink();
             }
         }

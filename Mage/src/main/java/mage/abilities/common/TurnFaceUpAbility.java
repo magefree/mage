@@ -1,11 +1,9 @@
-
 package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.AbilityType;
@@ -28,14 +26,7 @@ public class TurnFaceUpAbility extends SpecialAction {
     public TurnFaceUpAbility(Costs<Cost> costs, boolean megamorph) {
         super(Zone.BATTLEFIELD);
         this.addEffect(new TurnFaceUpEffect(megamorph));
-        for (Cost cost : costs) {
-            if (cost instanceof ManaCost) {
-                this.addManaCost((ManaCost) cost);
-            } else {
-                this.addCost(cost);
-            }
-        }
-
+        this.addCost(costs);
         this.usesStack = false;
         this.abilityType = AbilityType.SPECIAL_ACTION;
         this.setRuleVisible(false); // will be made visible only to controller in CardView

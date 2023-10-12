@@ -23,9 +23,9 @@ public class SimpleMageClient implements MageClient {
 
     private final LoadCallbackClient callbackClient;
 
-    public SimpleMageClient(boolean joinGameChat, String logsPrefix) {
+    public SimpleMageClient(boolean joinGameChat, String logsPrefix, Boolean showLogsAsHtml) {
         clientId = UUID.randomUUID();
-        callbackClient = new LoadCallbackClient(joinGameChat, logsPrefix);
+        callbackClient = new LoadCallbackClient(joinGameChat, logsPrefix, showLogsAsHtml);
     }
 
     @Override
