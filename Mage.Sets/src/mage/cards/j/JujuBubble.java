@@ -31,7 +31,7 @@ public final class JujuBubble extends CardImpl {
                 new SacrificeSourceEffect(), false));
 
         // {2}: You gain 1 life.
-        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(2)));
     }
 
     private JujuBubble(final JujuBubble card) {
