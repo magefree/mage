@@ -2214,6 +2214,54 @@ public class VerifyCardDataTest {
         });
     }
 
+    @Ignore
+    @Test
+    public void test_find_uninplemented() {
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for (ExpansionSet set : sets.stream()
+                .sorted(Comparator.comparingLong(set -> set.getReleaseDate().getTime()))
+                .collect(Collectors.toList())
+        ) {
+            switch (set.getSetType()) {
+                case CUSTOM_SET:
+                case JOKESET:
+                case MAGIC_ARENA:
+                case MAGIC_ONLINE:
+                case PROMOTIONAL:
+                    continue;
+            }
+            if (set.getMaxCardNumberInBooster() == Integer.MAX_VALUE) {
+                if (set.hasBoosters())
+                    System.out.println(set.getCode() + " Missing maxCardNumber set " + set.getName());
+                continue;
+            }
+
+            Set<Integer> implemented = new HashSet<>();
+            for (ExpansionSet.SetCardInfo sci : set.getSetCardInfo()) {
+                implemented.add(sci.getCardNumberAsInt());
+            }
+
+            List<Integer> notImplemented = new ArrayList<>();
+            for (int i = 1; i <= set.getMaxCardNumberInBooster(); ++i) {
+                if (!implemented.contains(i)) {
+                    notImplemented.add(i);
+                }
+            }
+
+            if (!notImplemented.isEmpty()) {
+                String search = "https://scryfall.com/search?q=set%3A" + set.getCode() + "+%28";
+                String sep = "cn%3D";
+                for (int i : notImplemented) {
+                    search += sep + i;
+                    sep = "+or+cn%3D";
+                }
+                search += "%29";
+                int count = notImplemented.size();
+                System.out.println(set.getCode() + " " + (count > 9 ? count : " " + count) + " " + search);
+            }
+        }
+    }
+
     private void printAbilityText(String text) {
         text = text.replace("<br>", "\n");
         System.out.println(text);
