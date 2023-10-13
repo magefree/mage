@@ -130,7 +130,7 @@ public class VintageCubeOctober2023 extends DraftCube {
         cubeCards.add(new CardIdentity("Time Walk", ""));
         cubeCards.add(new CardIdentity("Timetwister", ""));
         cubeCards.add(new CardIdentity("Tinker", ""));
-        cubeCards.add(new CardIdentity("Lórien Revealed", ""));
+        cubeCards.add(new CardIdentity("Lorien Revealed", ""));
         cubeCards.add(new CardIdentity("Time Warp", ""));
         cubeCards.add(new CardIdentity("Echo of Eons", ""));
         cubeCards.add(new CardIdentity("Mind's Desire", ""));
@@ -166,7 +166,7 @@ public class VintageCubeOctober2023 extends DraftCube {
         cubeCards.add(new CardIdentity("Custodi Lich", ""));
         cubeCards.add(new CardIdentity("Grave Titan", ""));
         cubeCards.add(new CardIdentity("Massacre Wurm", ""));
-        cubeCards.add(new CardIdentity("Troll of Khazad-dûm", ""));
+        cubeCards.add(new CardIdentity("Troll of Khazad-dum", ""));
         cubeCards.add(new CardIdentity("Phyrexian Fleshgorger", ""));
         cubeCards.add(new CardIdentity("Archon of Cruelty", ""));
         cubeCards.add(new CardIdentity("Griselbrand", ""));
@@ -450,12 +450,12 @@ public class VintageCubeOctober2023 extends DraftCube {
         cubeCards.add(new CardIdentity("Pentad Prism", ""));
         cubeCards.add(new CardIdentity("Smuggler's Copter", ""));
         cubeCards.add(new CardIdentity("Umezawa's Jitte", ""));
-        cubeCards.add(new CardIdentity("Andúril, Flame of the West", ""));
+        cubeCards.add(new CardIdentity("Anduril, Flame of the West", ""));
         cubeCards.add(new CardIdentity("Basalt Monolith", ""));
         cubeCards.add(new CardIdentity("Coalition Relic", ""));
         cubeCards.add(new CardIdentity("Crucible of Worlds", ""));
         cubeCards.add(new CardIdentity("Mirage Mirror", ""));
-        cubeCards.add(new CardIdentity("Palantír of Orthanc", ""));
+        cubeCards.add(new CardIdentity("Palantir of Orthanc", ""));
         cubeCards.add(new CardIdentity("Aetherflux Reservoir", ""));
         cubeCards.add(new CardIdentity("Mystic Forge", ""));
         cubeCards.add(new CardIdentity("The One Ring", ""));
