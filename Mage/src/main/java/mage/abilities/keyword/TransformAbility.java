@@ -160,7 +160,6 @@ class TransformEffect extends ContinuousEffectImpl {
         }
 
         TransformAbility.transformPermanent(permanent, card, game, source);
-
         return true;
 
     }
@@ -178,6 +177,7 @@ class TransformEffect extends ContinuousEffectImpl {
         }
 
         MageObject card;
+        boolean transformed = permanent.isTransformed();
         if (permanent.isTransformed()) {
             if (permanent instanceof PermanentToken) {
                 card = ((PermanentToken) permanent).getToken().getBackFace();
@@ -193,13 +193,12 @@ class TransformEffect extends ContinuousEffectImpl {
                 throw new IllegalArgumentException("Force transform on non-token non-card permanent");
             }
         }
-        game.debugMessage("Applying force "+(permanent.isTransformed()?"Transform":"Untransform")+" to "+permanent.getName());
-
         if (card == null) {
             return false;
         }
 
         TransformAbility.transformPermanent(permanent, card, game, source);
+        permanent.setTransformed(transformed);
 
         return true;
 
