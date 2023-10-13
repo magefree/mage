@@ -49,6 +49,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Creeping Tar Pit", 267, Rarity.RARE, mage.cards.c.CreepingTarPit.class));
         cards.add(new SetCardInfo("Crisis of Conscience", 17, Rarity.RARE, mage.cards.c.CrisisOfConscience.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 268, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
+        cards.add(new SetCardInfo("Cult of Skaro", 117, Rarity.RARE, mage.cards.c.CultOfSkaro.class));
         cards.add(new SetCardInfo("Cultivate", 230, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cursed Mirror", 226, Rarity.RARE, mage.cards.c.CursedMirror.class));
         cards.add(new SetCardInfo("Cyberman Patrol", 174, Rarity.UNCOMMON, mage.cards.c.CybermanPatrol.class));
