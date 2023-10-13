@@ -44,12 +44,14 @@ public class OptimusPrimeTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, Sacrifice"); // gain 2 life
         setChoice(playerA, optimus); // sac, returns transformed
+
         attack(1, playerA, ghoul, playerB);
         addTarget(playerA, ghoul); // choice for bolster, becomes a 4/4 with trample
         block(1, playerB, centaur, ghoul);
         setChoice(playerA, "X=3"); // assign 3 damage to centaur, 1 damage tramples over
         // optimus triggers and transforms
         // at end step, bolster 1, only target is myr
+
         setStopAt(2, PhaseStep.UPKEEP);
         setStrictChooseMode(true);
         execute();
