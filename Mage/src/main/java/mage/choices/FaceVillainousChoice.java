@@ -3,6 +3,7 @@ package mage.choices;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
@@ -21,7 +22,17 @@ public class FaceVillainousChoice {
     }
 
     public boolean faceChoice(Player player, Game game, Ability source) {
-        return handleChoice(player, game, source);
+        GameEvent event = GameEvent.getEvent(
+                GameEvent.EventType.FACE_VILLAINOUS_CHOICE,
+                player.getId(), source, source.getControllerId(), 1
+        );
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+        for (int i = 0; i < event.getAmount(); i++) {
+            handleChoice(player, game, source);
+        }
+        return true;
     }
 
     private boolean handleChoice(Player player, Game game, Ability source) {

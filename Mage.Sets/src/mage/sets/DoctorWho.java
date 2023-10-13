@@ -186,6 +186,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Flux", 86, Rarity.RARE, mage.cards.t.TheFlux.class));
         cards.add(new SetCardInfo("The Sixth Doctor", 159, Rarity.RARE, mage.cards.t.TheSixthDoctor.class));
         cards.add(new SetCardInfo("The Thirteenth Doctor", 4, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class));
+        cards.add(new SetCardInfo("The Valeyard", 165, Rarity.RARE, mage.cards.t.TheValeyard.class));
         cards.add(new SetCardInfo("Thespian's Stage", 323, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("Think Twice", 220, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thought Vessel", 255, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
