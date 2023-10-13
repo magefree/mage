@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -27,8 +26,7 @@ public final class OketrasLastMercy extends CardImpl {
         // Your life total becomes your starting life total. Lands you control don't untap during your next untap phase.
         this.getSpellAbility().addEffect(new OketrasLastMercyEffect());
         this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
-                Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
-                .setText("Lands you control don't untap during your next untap phase"));
+                Duration.UntilYourNextTurn, TargetController.YOU, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS));
     }
 
     private OketrasLastMercy(final OketrasLastMercy card) {

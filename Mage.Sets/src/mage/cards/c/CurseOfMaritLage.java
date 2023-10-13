@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class CurseOfMaritLage extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
         
         // Islands don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
