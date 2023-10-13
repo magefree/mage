@@ -51,6 +51,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 230, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cursed Mirror", 226, Rarity.RARE, mage.cards.c.CursedMirror.class));
         cards.add(new SetCardInfo("Cyberman Patrol", 174, Rarity.UNCOMMON, mage.cards.c.CybermanPatrol.class));
+        cards.add(new SetCardInfo("Cybermat", 175, Rarity.UNCOMMON, mage.cards.c.Cybermat.class));
         cards.add(new SetCardInfo("Cybermen Squadron", 176, Rarity.RARE, mage.cards.c.CybermenSquadron.class));
         cards.add(new SetCardInfo("Dalek Drone", 64, Rarity.RARE, mage.cards.d.DalekDrone.class));
         cards.add(new SetCardInfo("Dalek Squadron", 65, Rarity.UNCOMMON, mage.cards.d.DalekSquadron.class));
