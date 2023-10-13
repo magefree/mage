@@ -2216,7 +2216,7 @@ public class VerifyCardDataTest {
 
     @Ignore
     @Test
-    public void test_find_uninplemented() {
+    public void test_find_unimplemented() {
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets.stream()
                 .sorted(Comparator.comparingLong(set -> set.getReleaseDate().getTime()))
@@ -2230,19 +2230,44 @@ public class VerifyCardDataTest {
                 case PROMOTIONAL:
                     continue;
             }
-            if (set.getMaxCardNumberInBooster() == Integer.MAX_VALUE) {
-                if (set.hasBoosters())
-                    System.out.println(set.getCode() + " Missing maxCardNumber set " + set.getName());
+
+            // if (set.hasBoosters()) continue;
+
+            int checkUpTo = set.getExpectedMaxCardNumber();
+            if (checkUpTo == Integer.MAX_VALUE && set.hasBoosters()) {
+                checkUpTo = set.getMaxCardNumberInBooster();
+            }
+
+            if (checkUpTo == Integer.MAX_VALUE) {
+                // do not check those non-booster sets.
+                if (set.getName().startsWith("From the Vault:")
+                        || set.getName().startsWith("Premium Deck Series:")
+                        || set.getName().startsWith("Welcome Deck")
+                        || set.getName().startsWith("Signature Spellbook:")
+                        || set.getName().startsWith("Commander Collection:")
+                        || set.getName().startsWith("Starter 2000") // 20 cards on Scryfall, up to 45 cn
+                ) {
+                    continue;
+                }
+                System.out.println(set.getCode() + " Missing maxCardNumber set " + set.getName());
                 continue;
             }
 
             Set<Integer> implemented = new HashSet<>();
+            int unexpectedMax = 0;
             for (ExpansionSet.SetCardInfo sci : set.getSetCardInfo()) {
-                implemented.add(sci.getCardNumberAsInt());
+                int num = sci.getCardNumberAsInt();
+                implemented.add(num);
+                if (num > set.getExpectedMaxCardNumber()) {
+                    unexpectedMax = Math.max(num, unexpectedMax);
+                }
+            }
+            if (unexpectedMax > 0) {
+                System.out.println(set.getCode() + " unexpected max not correct set to " + set.getExpectedMaxCardNumber() + " but found " + unexpectedMax);
             }
 
             List<Integer> notImplemented = new ArrayList<>();
-            for (int i = 1; i <= set.getMaxCardNumberInBooster(); ++i) {
+            for (int i = 1; i <= checkUpTo; ++i) {
                 if (!implemented.contains(i)) {
                     notImplemented.add(i);
                 }
@@ -2251,13 +2276,23 @@ public class VerifyCardDataTest {
             if (!notImplemented.isEmpty()) {
                 String search = "https://scryfall.com/search?q=set%3A" + set.getCode() + "+%28";
                 String sep = "cn%3D";
+                int count = notImplemented.size();
+                int j = 0;
                 for (int i : notImplemented) {
+                    if (j == 60) {
+                        // Print searchs 60 per 60
+                        search += "%29&order=set&dir=asc&unique=prints";
+                        System.out.println(set.getCode() + " " + count + " " + search);
+                        search = "https://scryfall.com/search?q=set%3A" + set.getCode() + "+%28";
+                        sep = "cn%3D";
+                        j = 0;
+                    }
+                    j++;
                     search += sep + i;
                     sep = "+or+cn%3D";
                 }
-                search += "%29";
-                int count = notImplemented.size();
-                System.out.println(set.getCode() + " " + (count > 9 ? count : " " + count) + " " + search);
+                search += "%29&order=set&dir=asc&unique=prints";
+                System.out.println(set.getCode() + " " + count + " " + search);
             }
         }
     }
