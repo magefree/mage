@@ -19,6 +19,7 @@ public final class MultiverseLegends extends ExpansionSet {
         super("Multiverse Legends", "MUL", ExpansionSet.buildDate(2023, 4, 21), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 195;
 
         cards.add(new SetCardInfo("Aegar, the Freezing Flame", 161, Rarity.UNCOMMON, mage.cards.a.AegarTheFreezingFlame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aegar, the Freezing Flame", 31, Rarity.UNCOMMON, mage.cards.a.AegarTheFreezingFlame.class, NON_FULL_USE_VARIOUS));

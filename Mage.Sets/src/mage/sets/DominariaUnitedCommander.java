@@ -18,6 +18,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
     private DominariaUnitedCommander() {
         super("Dominaria United Commander", "DMC", ExpansionSet.buildDate(2022, 9, 9), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 240;
 
         cards.add(new SetCardInfo("Abundant Growth", 128, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Abzan Charm", 138, Rarity.UNCOMMON, mage.cards.a.AbzanCharm.class));

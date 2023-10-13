@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoeS
  */
 public final class Commander2016Edition extends ExpansionSet {
@@ -20,6 +19,8 @@ public final class Commander2016Edition extends ExpansionSet {
     private Commander2016Edition() {
         super("Commander 2016 Edition", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 351;
+
         cards.add(new SetCardInfo("Abzan Charm", 177, Rarity.UNCOMMON, mage.cards.a.AbzanCharm.class));
         cards.add(new SetCardInfo("Abzan Falconer", 57, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Academy Elite", 81, Rarity.RARE, mage.cards.a.AcademyElite.class));

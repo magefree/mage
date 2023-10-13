@@ -19,6 +19,7 @@ public final class GlobalSeriesJiangYangguAndMuYanling extends ExpansionSet {
         super("Global Series: Jiang Yanggu & Mu Yanling", "GS1", ExpansionSet.buildDate(2018, 6, 22), SetType.SUPPLEMENTAL);
         this.blockName = "Global Series";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 40;
 
         cards.add(new SetCardInfo("Aggressive Instinct", 34, Rarity.COMMON, mage.cards.a.AggressiveInstinct.class));
         cards.add(new SetCardInfo("Ancestor Dragon", 12, Rarity.RARE, mage.cards.a.AncestorDragon.class));

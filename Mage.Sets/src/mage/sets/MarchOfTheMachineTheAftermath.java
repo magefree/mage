@@ -20,6 +20,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         this.blockName = "March of the Machine";
         this.hasBasicLands = false;
         this.hasBoosters = false; // temporary
+        this.expectedMaxCardNumber = 230;
 
         cards.add(new SetCardInfo("Animist's Might", 120, Rarity.UNCOMMON, mage.cards.a.AnimistsMight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Animist's Might", 20, Rarity.UNCOMMON, mage.cards.a.AnimistsMight.class, NON_FULL_USE_VARIOUS));

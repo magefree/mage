@@ -19,6 +19,7 @@ public final class ModernHorizons1Timeshifts extends ExpansionSet {
         super("Modern Horizons 1 Timeshifts", "H1R", ExpansionSet.buildDate(2021, 6, 11), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 40;
 
         cards.add(new SetCardInfo("Archmage's Charm", 7, Rarity.RARE, mage.cards.a.ArchmagesCharm.class));
         cards.add(new SetCardInfo("Ayula, Queen Among Bears", 19, Rarity.RARE, mage.cards.a.AyulaQueenAmongBears.class));

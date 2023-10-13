@@ -7,6 +7,7 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/s00
+ *
  * @author LevelX2
  */
 public final class Starter2000 extends ExpansionSet {

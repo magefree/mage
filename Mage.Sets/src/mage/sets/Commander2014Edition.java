@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
 public final class Commander2014Edition extends ExpansionSet {
@@ -20,6 +19,8 @@ public final class Commander2014Edition extends ExpansionSet {
     private Commander2014Edition() {
         super("Commander 2014 Edition", "C14", ExpansionSet.buildDate(2014, 11, 7), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 337;
+
         cards.add(new SetCardInfo("Abyssal Persecutor", 132, Rarity.MYTHIC, mage.cards.a.AbyssalPersecutor.class));
         cards.add(new SetCardInfo("Adarkar Valkyrie", 63, Rarity.RARE, mage.cards.a.AdarkarValkyrie.class));
         cards.add(new SetCardInfo("Aether Gale", 11, Rarity.RARE, mage.cards.a.AetherGale.class));

@@ -18,6 +18,7 @@ public final class ZendikarRisingCommander extends ExpansionSet {
     private ZendikarRisingCommander() {
         super("Zendikar Rising Commander", "ZNC", ExpansionSet.buildDate(2020, 9, 25), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 142;
 
         cards.add(new SetCardInfo("Abundance", 58, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Abzan Falconer", 9, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));

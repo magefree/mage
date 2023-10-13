@@ -18,6 +18,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
     private MidnightHuntCommander() {
         super("Midnight Hunt Commander", "MIC", ExpansionSet.buildDate(2021, 9, 24), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 187;
 
         cards.add(new SetCardInfo("Abzan Falconer", 77, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Aetherspouts", 97, Rarity.RARE, mage.cards.a.Aetherspouts.class));

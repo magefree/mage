@@ -18,6 +18,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
     private ForgottenRealmsCommander() {
         super("Forgotten Realms Commander", "AFC", ExpansionSet.buildDate(2021, 7, 23), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 331;
 
         cards.add(new SetCardInfo("Abundant Growth", 150, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Acidic Slime", 151, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));

@@ -17,6 +17,7 @@ public final class CommanderMasters extends ExpansionSet {
         this.blockName = "Commander Masters";
         this.hasBasicLands = true;
         this.hasBoosters = false; //temporary
+        this.expectedMaxCardNumber = 1067;
 
         cards.add(new SetCardInfo("Abrade", 203, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Abstruse Archaic", 712, Rarity.RARE, mage.cards.a.AbstruseArchaic.class, NON_FULL_USE_VARIOUS));

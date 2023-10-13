@@ -18,6 +18,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
     private WildsOfEldraineCommander() {
         super("Wilds of Eldraine Commander", "WOC", ExpansionSet.buildDate(2023, 9, 8), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 173;
 
         cards.add(new SetCardInfo("Ajani's Chosen", 59, Rarity.RARE, mage.cards.a.AjanisChosen.class));
         cards.add(new SetCardInfo("Alela, Cunning Conqueror", 3, Rarity.MYTHIC, mage.cards.a.AlelaCunningConqueror.class));

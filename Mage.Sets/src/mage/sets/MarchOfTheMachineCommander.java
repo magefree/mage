@@ -18,6 +18,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
     private MarchOfTheMachineCommander() {
         super("March of the Machine Commander", "MOC", ExpansionSet.buildDate(2023, 4, 21), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 450;
 
         cards.add(new SetCardInfo("Abzan Battle Priest", 164, Rarity.UNCOMMON, mage.cards.a.AbzanBattlePriest.class));
         cards.add(new SetCardInfo("Abzan Falconer", 165, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));

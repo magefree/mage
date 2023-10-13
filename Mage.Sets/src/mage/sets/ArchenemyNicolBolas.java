@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
 public final class ArchenemyNicolBolas extends ExpansionSet {
@@ -20,6 +19,7 @@ public final class ArchenemyNicolBolas extends ExpansionSet {
     private ArchenemyNicolBolas() {
         super("Archenemy: Nicol Bolas", "E01", ExpansionSet.buildDate(2017, 6, 16), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 106;
 
         cards.add(new SetCardInfo("Aegis Angel", 1, Rarity.RARE, mage.cards.a.AegisAngel.class));
         cards.add(new SetCardInfo("Aerial Responder", 2, Rarity.UNCOMMON, mage.cards.a.AerialResponder.class));

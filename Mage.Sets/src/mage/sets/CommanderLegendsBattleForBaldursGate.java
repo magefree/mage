@@ -20,6 +20,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         this.blockName = "Commander Legends";
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
+        this.expectedMaxCardNumber = 936;
 
         cards.add(new SetCardInfo("Aarakocra Sneak", 54, Rarity.COMMON, mage.cards.a.AarakocraSneak.class));
         cards.add(new SetCardInfo("Abdel Adrian, Gorion's Ward", 2, Rarity.UNCOMMON, mage.cards.a.AbdelAdrianGorionsWard.class));

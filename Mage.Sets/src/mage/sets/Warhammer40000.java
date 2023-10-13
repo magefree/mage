@@ -8,7 +8,7 @@ import mage.constants.SetType;
  * @author TheElk801
  */
 public final class Warhammer40000 extends ExpansionSet {
-	
+
     private static final Warhammer40000 instance = new Warhammer40000();
 
     public static Warhammer40000 getInstance() {
@@ -19,6 +19,7 @@ public final class Warhammer40000 extends ExpansionSet {
         super("Warhammer 40,000", "40K", ExpansionSet.buildDate(2022, 4, 29), SetType.SUPPLEMENTAL);
         this.hasBasicLands = true;
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 321;
 
         cards.add(new SetCardInfo("Abaddon the Despoiler", 2, Rarity.MYTHIC, mage.cards.a.AbaddonTheDespoiler.class));
         cards.add(new SetCardInfo("Aberrant", 86, Rarity.UNCOMMON, mage.cards.a.Aberrant.class));

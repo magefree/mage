@@ -15,6 +15,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
     private TalesOfMiddleEarthCommander() {
         super("Tales of Middle-earth Commander", "LTC", ExpansionSet.buildDate(2023, 6, 23), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 558;
 
         cards.add(new SetCardInfo("Abyssal Persecutor", 525, Rarity.MYTHIC, mage.cards.a.AbyssalPersecutor.class));
         cards.add(new SetCardInfo("Access Tunnel", 294, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));

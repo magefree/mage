@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Planechase extends ExpansionSet {
@@ -20,6 +19,8 @@ public final class Planechase extends ExpansionSet {
     private Planechase() {
         super("Planechase", "HOP", ExpansionSet.buildDate(2009, 8, 4), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 169;
+
         cards.add(new SetCardInfo("Akroma's Vengeance", 1, Rarity.RARE, mage.cards.a.AkromasVengeance.class));
         cards.add(new SetCardInfo("Ancient Den", 130, Rarity.COMMON, mage.cards.a.AncientDen.class));
         cards.add(new SetCardInfo("Arc Lightning", 46, Rarity.COMMON, mage.cards.a.ArcLightning.class));

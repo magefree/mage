@@ -20,6 +20,7 @@ public final class WildsOfEldraineEnchantingTales extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
         this.maxCardNumberInBooster = 63;
+        this.expectedMaxCardNumber = 103;
 
         cards.add(new SetCardInfo("Aggravated Assault", 39, Rarity.RARE, mage.cards.a.AggravatedAssault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aggravated Assault", 76, Rarity.RARE, mage.cards.a.AggravatedAssault.class, NON_FULL_USE_VARIOUS));

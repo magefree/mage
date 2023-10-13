@@ -15,6 +15,7 @@ public final class DuelsOfThePlaneswalkers extends ExpansionSet {
 
     private DuelsOfThePlaneswalkers() {
         super("Duels of the Planeswalkers", "DPA", ExpansionSet.buildDate(2010, 6, 4), SetType.SUPPLEMENTAL);
+        this.expectedMaxCardNumber = 113;
 
         cards.add(new SetCardInfo("Abyssal Specter", 18, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));
         cards.add(new SetCardInfo("Act of Treason", 37, Rarity.UNCOMMON, mage.cards.a.ActOfTreason.class));

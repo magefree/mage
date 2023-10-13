@@ -20,6 +20,7 @@ public final class UniversesWithin extends ExpansionSet {
         super("Universes Within", "SLX", ExpansionSet.buildDate(2022, 3, 3), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 23;
 
         cards.add(new SetCardInfo("Aisha of Sparks and Smoke", 12, Rarity.RARE, mage.cards.a.AishaOfSparksAndSmoke.class));
         cards.add(new SetCardInfo("Arvinox, the Mind Flail", 1, Rarity.MYTHIC, mage.cards.a.ArvinoxTheMindFlail.class));
