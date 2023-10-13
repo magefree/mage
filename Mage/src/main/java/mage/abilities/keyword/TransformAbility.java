@@ -178,7 +178,7 @@ class TransformEffect extends ContinuousEffectImpl {
 
         MageObject card;
         boolean transformed = permanent.isTransformed();
-        if (permanent.isTransformed()) {
+        if (transformed) {
             if (permanent instanceof PermanentToken) {
                 card = ((PermanentToken) permanent).getToken().getBackFace();
             } else {
@@ -188,7 +188,7 @@ class TransformEffect extends ContinuousEffectImpl {
             if (permanent instanceof PermanentToken) {
                 card = ((PermanentToken) permanent).getToken();
             } else if (permanent instanceof PermanentCard){
-                card = ((PermanentCard)permanent).getCard();
+                card = ((PermanentCard) permanent).getCard();
             } else {
                 throw new IllegalArgumentException("Force transform on non-token non-card permanent");
             }

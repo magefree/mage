@@ -640,9 +640,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 ((TransformAbility) a).force_apply(game);
             }
         }
-        //game.applyEffects();
+        //Old code did game.applyEffects() instead of this force_apply, but this should be much more efficient
         this.replaceEvent(EventType.TRANSFORMING, game);
-        game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
+        game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), source, this.getControllerId()));
         return true;
     }
 

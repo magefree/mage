@@ -6,8 +6,6 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import java.util.stream.Collectors;
-
 /**
  * @author xenohedron
  */
@@ -52,7 +50,7 @@ public class OptimusPrimeTest extends CardTestPlayerBase {
         setChoice(playerA, "X=3"); // assign 3 damage to centaur, 1 damage tramples over
         // optimus triggers and transforms
         // at end step, bolster 1, only target is myr
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.UPKEEP);
         setStrictChooseMode(true);
         execute();
 
