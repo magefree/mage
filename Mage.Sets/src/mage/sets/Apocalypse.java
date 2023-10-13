@@ -145,6 +145,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Standard Bearer", 18, Rarity.COMMON, mage.cards.s.StandardBearer.class));
         cards.add(new SetCardInfo("Strength of Night", 86, Rarity.COMMON, mage.cards.s.StrengthOfNight.class));
         cards.add(new SetCardInfo("Suffocating Blast", 124, Rarity.RARE, mage.cards.s.SuffocatingBlast.class));
+        cards.add(new SetCardInfo("Suppress", 52, Rarity.UNCOMMON, mage.cards.s.Suppress.class));
         cards.add(new SetCardInfo("Sylvan Messenger", 87, Rarity.UNCOMMON, mage.cards.s.SylvanMessenger.class));
         cards.add(new SetCardInfo("Symbiotic Deployment", 88, Rarity.RARE, mage.cards.s.SymbioticDeployment.class));
         cards.add(new SetCardInfo("Tahngarth's Glare", 70, Rarity.COMMON, mage.cards.t.TahngarthsGlare.class));

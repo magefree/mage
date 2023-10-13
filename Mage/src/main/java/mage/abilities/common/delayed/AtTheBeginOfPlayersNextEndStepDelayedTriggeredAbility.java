@@ -16,6 +16,7 @@ public class AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility extends Delay
     public AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(Effect effect, UUID playerId) {
         super(effect, Duration.Custom, true, false);
         this.playerId = playerId;
+        this.setTriggerPhrase("At the beginning of its owners next end step, ");
     }
 
     protected AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(final AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility ability) {
@@ -36,11 +37,6 @@ public class AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility extends Delay
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getActivePlayerId().equals(playerId);
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of its owners next end step, " + super.getRule();
     }
 
 }
