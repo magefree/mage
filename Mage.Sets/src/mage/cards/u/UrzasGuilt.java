@@ -22,10 +22,10 @@ public final class UrzasGuilt extends CardImpl {
         // Each player draws two cards, then discards three cards, then loses 4 life.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(2));
         Effect effect = new DiscardEachPlayerEffect(3, false);
-        effect.setText("then discards three cards,");
+        effect.setText(", then discards three cards");
         this.getSpellAbility().addEffect(effect);
         effect = new LoseLifeAllPlayersEffect(4);
-        effect.setText("then loses 4 life");
+        effect.setText(", then loses 4 life");
         this.getSpellAbility().addEffect(effect);
     }
 

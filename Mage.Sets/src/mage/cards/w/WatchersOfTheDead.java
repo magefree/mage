@@ -49,9 +49,9 @@ public final class WatchersOfTheDead extends CardImpl {
 
 class WatchersOfTheDeadEffect extends OneShotEffect {
 
-    public WatchersOfTheDeadEffect() {
+    WatchersOfTheDeadEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each opponent chooses 2 cards in their graveyard and exiles the rest";
+        this.staticText = "Each opponent chooses two cards in their graveyard and exiles the rest";
     }
 
     private WatchersOfTheDeadEffect(final WatchersOfTheDeadEffect effect) {

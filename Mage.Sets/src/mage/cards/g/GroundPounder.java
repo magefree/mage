@@ -109,6 +109,6 @@ class GroundPounderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you roll a 5 or higher on a die, {this} gains trample until end of turn";
+        return "Whenever you roll a 5 or higher on a die, {this} gains trample until end of turn.";
     }
 }

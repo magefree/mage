@@ -40,7 +40,7 @@ class BloodMoneyEffect extends OneShotEffect {
 
     BloodMoneyEffect() {
         super(Outcome.Benefit);
-        staticText = "destroy all creatures. For each nontoken creature destroyed this way, create a tapped Treasure token";
+        staticText = "destroy all creatures. For each nontoken creature destroyed this way, you create a tapped Treasure token";
     }
 
     private BloodMoneyEffect(final BloodMoneyEffect effect) {

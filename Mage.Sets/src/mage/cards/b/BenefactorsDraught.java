@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -10,10 +9,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -27,7 +25,7 @@ public final class BenefactorsDraught extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Untap all creatures.
-        this.getSpellAbility().addEffect(new UntapAllEffect(new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new UntapAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
 
         // Until end of turn, whenever a creature an opponent controls blocks, draw a card.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BenefactorsDraughtTriggeredAbility()));
