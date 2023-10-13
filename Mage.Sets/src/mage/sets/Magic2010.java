@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Magic2010 extends ExpansionSet {
@@ -20,6 +19,7 @@ public final class Magic2010 extends ExpansionSet {
     private Magic2010() {
         super("Magic 2010", "M10", ExpansionSet.buildDate(2009, 7, 17), SetType.CORE);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author nantuko84
  */
 public final class ScarsOfMirrodin extends ExpansionSet {
@@ -27,6 +26,7 @@ public final class ScarsOfMirrodin extends ExpansionSet {
         super("Scars of Mirrodin", "SOM", ExpansionSet.buildDate(2010, 10, 1), SetType.EXPANSION);
         this.blockName = "Scars of Mirrodin";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

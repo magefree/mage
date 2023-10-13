@@ -7,7 +7,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class RevisedEdition extends ExpansionSet {
@@ -21,6 +20,7 @@ public final class RevisedEdition extends ExpansionSet {
     private RevisedEdition() {
         super("Revised Edition", "3ED", ExpansionSet.buildDate(1994, 3, 1), SetType.CORE);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 306;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

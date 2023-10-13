@@ -19,6 +19,7 @@ public final class IceAge extends ExpansionSet {
         super("Ice Age", "ICE", ExpansionSet.buildDate(1995, 5, 1), SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 383;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

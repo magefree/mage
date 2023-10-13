@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author North
  */
 public final class AvacynRestored extends ExpansionSet {
@@ -28,6 +27,7 @@ public final class AvacynRestored extends ExpansionSet {
         this.blockName = "Innistrad";
         this.parentSet = Innistrad.getInstance();
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 244;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Legends extends ExpansionSet {
@@ -20,6 +19,7 @@ public final class Legends extends ExpansionSet {
         super("Legends", "LEG", ExpansionSet.buildDate(1994, 6, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 310;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author noxx
  */
 public final class Weatherlight extends ExpansionSet {
@@ -22,6 +21,7 @@ public final class Weatherlight extends ExpansionSet {
         this.parentSet = Mirage.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 167;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

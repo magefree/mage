@@ -18,6 +18,7 @@ public final class Alliances extends ExpansionSet {
         this.parentSet = IceAge.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 144;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 8;
         this.numBoosterUncommon = 3;

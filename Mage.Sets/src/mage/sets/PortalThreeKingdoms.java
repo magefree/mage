@@ -20,6 +20,7 @@ public final class PortalThreeKingdoms extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true; // note: paper boosters had only 10 cards (2 lands, 5 commons, 2 uncommons, 1 rare)
+        this.maxCardNumberInBooster = 180;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author nantuko84
  */
 public final class MirrodinBesieged extends ExpansionSet {
@@ -22,6 +21,7 @@ public final class MirrodinBesieged extends ExpansionSet {
         this.blockName = "Scars of Mirrodin";
         this.parentSet = ScarsOfMirrodin.getInstance();
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 155;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

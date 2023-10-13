@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author North
  */
 public final class Magic2014 extends ExpansionSet {
@@ -26,6 +25,7 @@ public final class Magic2014 extends ExpansionSet {
     private Magic2014() {
         super("Magic 2014", "M14", ExpansionSet.buildDate(2013, 7, 19), SetType.CORE);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

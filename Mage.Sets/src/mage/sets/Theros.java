@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
 public final class Theros extends ExpansionSet {
@@ -27,6 +26,7 @@ public final class Theros extends ExpansionSet {
         super("Theros", "THS", ExpansionSet.buildDate(2013, 9, 27), SetType.EXPANSION);
         this.blockName = "Theros";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

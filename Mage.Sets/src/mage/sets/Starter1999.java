@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
 public final class Starter1999 extends ExpansionSet {
@@ -21,6 +20,7 @@ public final class Starter1999 extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 173;
         this.numBoosterLands = 2;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;

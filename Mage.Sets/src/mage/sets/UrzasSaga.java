@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author Backfir3
  */
 public final class UrzasSaga extends ExpansionSet {
@@ -20,6 +19,7 @@ public final class UrzasSaga extends ExpansionSet {
         super("Urza's Saga", "USG", ExpansionSet.buildDate(1998, 10, 12), SetType.EXPANSION);
         this.blockName = "Urza";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 350;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

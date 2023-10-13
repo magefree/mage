@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Morningtide extends ExpansionSet {
@@ -23,6 +22,7 @@ public final class Morningtide extends ExpansionSet {
         this.parentSet = Morningtide.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 150;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

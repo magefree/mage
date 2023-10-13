@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Worldwake extends ExpansionSet {
@@ -29,6 +28,7 @@ public final class Worldwake extends ExpansionSet {
         this.parentSet = Zendikar.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 145;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
