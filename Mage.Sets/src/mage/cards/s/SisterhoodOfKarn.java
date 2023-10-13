@@ -7,6 +7,7 @@ import mage.abilities.effects.common.DoubleCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -45,7 +46,7 @@ public final class SisterhoodOfKarn extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DoubleCountersSourceEffect(CounterType.P1P1),
                 filter, false
-        ).withFlavorWord("Paradox"));
+        ).setAbilityWord(AbilityWord.PARADOX));
     }
 
     private SisterhoodOfKarn(final SisterhoodOfKarn card) {

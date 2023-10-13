@@ -6,10 +6,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DoctorsCompanionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.CastFromZonePredicate;
@@ -41,7 +38,7 @@ public final class GrahamOBrien extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CreateTokenEffect(new FoodToken()),
                 filter, false
-        ).withFlavorWord("Paradox"));
+        ).setAbilityWord(AbilityWord.PARADOX));
 
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());

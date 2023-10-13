@@ -42,6 +42,7 @@ public enum AbilityWord {
     MAGECRAFT("Magecraft"),
     MORBID("Morbid"),
     PACK_TACTICS("Pack tactics"),
+    PARADOX("Paradox"),
     PARLEY("Parley"),
     RADIANCE("Radiance"),
     RAID("Raid"),
