@@ -17,6 +17,7 @@ public final class NewPhyrexia extends ExpansionSet {
         this.blockName = "Scars of Mirrodin";
         this.parentSet = ScarsOfMirrodin.getInstance();
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 175;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

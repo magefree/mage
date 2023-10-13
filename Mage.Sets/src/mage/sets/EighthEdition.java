@@ -18,6 +18,7 @@ public final class EighthEdition extends ExpansionSet {
     private EighthEdition() {
         super("Eighth Edition", "8ED", ExpansionSet.buildDate(2003, 7, 28), SetType.CORE);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 350;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

@@ -32,6 +32,7 @@ public final class EldritchMoon extends ExpansionSet {
         this.blockName = "Shadows over Innistrad";
         this.parentSet = ShadowsOverInnistrad.getInstance();
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 205;
         this.hasBasicLands = false;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;

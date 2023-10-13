@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class ShardsOfAlara extends ExpansionSet {
@@ -28,6 +27,7 @@ public final class ShardsOfAlara extends ExpansionSet {
         super("Shards of Alara", "ALA", ExpansionSet.buildDate(2008, 10, 3), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

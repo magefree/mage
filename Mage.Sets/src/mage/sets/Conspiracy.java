@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
 public final class Conspiracy extends ExpansionSet {
@@ -22,6 +21,7 @@ public final class Conspiracy extends ExpansionSet {
         this.blockName = "Conspiracy";
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 210;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

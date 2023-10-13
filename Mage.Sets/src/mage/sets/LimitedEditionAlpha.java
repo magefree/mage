@@ -7,7 +7,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class LimitedEditionAlpha extends ExpansionSet {
@@ -21,6 +20,7 @@ public final class LimitedEditionAlpha extends ExpansionSet {
     private LimitedEditionAlpha() {
         super("Limited Edition Alpha", "LEA", ExpansionSet.buildDate(1993, 8, 5), SetType.CORE);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 295;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

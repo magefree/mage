@@ -18,6 +18,7 @@ public final class FourthEdition extends ExpansionSet {
     private FourthEdition() {
         super("Fourth Edition", "4ED", ExpansionSet.buildDate(1995, 3, 1), SetType.CORE);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 378;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

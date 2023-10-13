@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Lorwyn extends ExpansionSet {
@@ -21,6 +20,7 @@ public final class Lorwyn extends ExpansionSet {
         super("Lorwyn", "LRW", ExpansionSet.buildDate(2007, 10, 12), SetType.EXPANSION);
         this.blockName = "Lorwyn";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 301;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

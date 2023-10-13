@@ -19,6 +19,7 @@ public final class Shadowmoor extends ExpansionSet {
         super("Shadowmoor", "SHM", ExpansionSet.buildDate(2008, 4, 2), SetType.EXPANSION);
         this.blockName = "Shadowmoor";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 301;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

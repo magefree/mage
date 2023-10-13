@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class PlanarChaos extends ExpansionSet {
@@ -23,6 +22,7 @@ public final class PlanarChaos extends ExpansionSet {
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 165;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

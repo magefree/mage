@@ -4,7 +4,6 @@ package mage.sets;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author North
  */
 public final class DarkAscension extends ExpansionSet {
@@ -32,6 +30,7 @@ public final class DarkAscension extends ExpansionSet {
         super("Dark Ascension", "DKA", ExpansionSet.buildDate(2012, 1, 3), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 158;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
@@ -251,8 +250,8 @@ class DarkAscensionCollator implements BoosterCollator {
     private final CardRun land = new CardRun(false, "ISD_250", "ISD_251", "ISD_252", "ISD_253", "ISD_254", "ISD_255", "ISD_256", "ISD_257", "ISD_258", "ISD_259", "ISD_260", "ISD_261", "ISD_262", "ISD_263", "ISD_264");
 
     private final BoosterStructure AAAAABBBB = new BoosterStructure(
-        commonA, commonA, commonA, commonA, commonA,
-        commonB, commonB, commonB, commonB
+            commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB
     );
     private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
     private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);

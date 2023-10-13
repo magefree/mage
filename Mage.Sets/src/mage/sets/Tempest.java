@@ -16,6 +16,7 @@ public final class Tempest extends ExpansionSet {
         super("Tempest", "TMP", ExpansionSet.buildDate(1997, 10, 1), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 350;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

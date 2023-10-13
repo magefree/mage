@@ -18,6 +18,7 @@ public class SummerMagic extends ExpansionSet {
     private SummerMagic() {
         super("Summer Magic", "SUM", ExpansionSet.buildDate(1994, 6, 21), SetType.CORE);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 304;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
@@ -330,5 +331,5 @@ public class SummerMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Wooden Sphere", 281, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));
         cards.add(new SetCardInfo("Wrath of God", 46, Rarity.RARE, mage.cards.w.WrathOfGod.class));
         cards.add(new SetCardInfo("Zombie Master", 138, Rarity.RARE, mage.cards.z.ZombieMaster.class));
-     }
+    }
 }

@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author Plopman
  */
 public final class PortalSecondAge extends ExpansionSet {
@@ -22,6 +21,7 @@ public final class PortalSecondAge extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 165;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

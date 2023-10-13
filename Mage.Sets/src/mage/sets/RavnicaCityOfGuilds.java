@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author loki
  */
 public final class RavnicaCityOfGuilds extends ExpansionSet {
@@ -21,6 +20,7 @@ public final class RavnicaCityOfGuilds extends ExpansionSet {
         super("Ravnica: City of Guilds", "RAV", ExpansionSet.buildDate(2005, 9, 24), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 306;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

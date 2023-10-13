@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author magenoxx_at_gmail.com
  */
 public final class ReturnToRavnica extends ExpansionSet {
@@ -27,6 +26,7 @@ public final class ReturnToRavnica extends ExpansionSet {
         super("Return to Ravnica", "RTR", ExpansionSet.buildDate(2012, 10, 5), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 274;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

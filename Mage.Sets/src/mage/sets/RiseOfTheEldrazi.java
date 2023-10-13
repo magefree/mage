@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class RiseOfTheEldrazi extends ExpansionSet {
@@ -28,6 +27,7 @@ public final class RiseOfTheEldrazi extends ExpansionSet {
         this.blockName = "Zendikar";
         this.parentSet = Zendikar.getInstance();
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 248;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

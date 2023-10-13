@@ -21,6 +21,7 @@ public final class Stronghold extends ExpansionSet {
         this.parentSet = Tempest.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 143;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

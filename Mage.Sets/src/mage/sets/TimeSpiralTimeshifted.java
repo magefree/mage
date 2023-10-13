@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class TimeSpiralTimeshifted extends ExpansionSet {
@@ -20,6 +19,7 @@ public final class TimeSpiralTimeshifted extends ExpansionSet {
         super("Time Spiral \"Timeshifted\"", "TSB", ExpansionSet.buildDate(2006, 9, 9), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
+        this.maxCardNumberInBooster = 121;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 1, Rarity.SPECIAL, mage.cards.a.AkromaAngelOfWrath.class));
         cards.add(new SetCardInfo("Arena", 117, Rarity.SPECIAL, mage.cards.a.Arena.class));

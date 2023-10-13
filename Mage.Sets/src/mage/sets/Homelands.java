@@ -19,6 +19,7 @@ public final class Homelands extends ExpansionSet {
         super("Homelands", "HML", ExpansionSet.buildDate(1995, 9, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 115;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

@@ -18,6 +18,7 @@ public final class NinthEdition extends ExpansionSet {
     private NinthEdition() {
         super("Ninth Edition", "9ED", ExpansionSet.buildDate(2005, 7, 29), SetType.CORE);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 350;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

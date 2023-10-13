@@ -30,6 +30,7 @@ public final class BattleForZendikar extends ExpansionSet {
         this.blockName = "Battle for Zendikar";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.maxCardNumberInBooster = 274;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

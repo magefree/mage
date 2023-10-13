@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author noxx
  */
 public final class UrzasLegacy extends ExpansionSet {
@@ -23,6 +22,7 @@ public final class UrzasLegacy extends ExpansionSet {
         this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 143;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

@@ -1,5 +1,6 @@
 package mage.sets;
 
+import static java.util.Arrays.asList;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
@@ -13,8 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.Arrays.asList;
 
 /**
  * https://mtg.gamepedia.com/Mystery_Booster
@@ -50,6 +49,7 @@ public class MysteryBooster extends ExpansionSet {
     private MysteryBooster() {
         super("Mystery Booster", "MB1", ExpansionSet.buildDate(2019, 11, 7), SetType.SUPPLEMENTAL);
         this.hasBoosters = true;
+        this.maxCardNumberInBooster = 1696;
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Absorb Vis", 558, Rarity.COMMON, mage.cards.a.AbsorbVis.class));
