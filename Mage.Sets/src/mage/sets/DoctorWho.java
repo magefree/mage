@@ -93,6 +93,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Fortress", 285, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Graham O'Brien", 104, Rarity.RARE, mage.cards.g.GrahamOBrien.class));
         cards.add(new SetCardInfo("Grasp of Fate", 208, Rarity.RARE, mage.cards.g.GraspOfFate.class));
+        cards.add(new SetCardInfo("Great Intelligence's Plan", 133, Rarity.UNCOMMON, mage.cards.g.GreatIntelligencesPlan.class));
         cards.add(new SetCardInfo("Growth Spiral", 237, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Haunted Ridge", 286, Rarity.RARE, mage.cards.h.HauntedRidge.class));
         cards.add(new SetCardInfo("Heaven Sent", 134, Rarity.RARE, mage.cards.h.HeavenSent.class));
