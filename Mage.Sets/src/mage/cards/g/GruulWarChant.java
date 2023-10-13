@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 
@@ -33,10 +31,9 @@ public final class GruulWarChant extends CardImpl {
 
 
         // Attacking creatures you control get +1/+0 and have menace. (They can't be blocked except by two or more creatures.)
-        Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(new MenaceAbility(false), Duration.WhileOnBattlefield, filter));
-        ability.addEffect(new BoostAllEffect(1,0, Duration.WhileOnBattlefield, filter, false));
+        Ability ability = new SimpleStaticAbility(new BoostAllEffect(1,0, Duration.WhileOnBattlefield, filter, false));
+        ability.addEffect(new GainAbilityAllEffect(new MenaceAbility(false), Duration.WhileOnBattlefield, filter)
+                .setText("and have menace"));
         this.addAbility(ability);
     }
 

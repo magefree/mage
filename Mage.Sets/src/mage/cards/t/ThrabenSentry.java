@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  * @author nantuko
@@ -32,7 +32,7 @@ public final class ThrabenSentry extends CardImpl {
 
         // Whenever another creature you control dies, you may transform Thraben Sentry.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(), true, new FilterControlledCreaturePermanent()));
+        this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(), true, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
     }
 
     private ThrabenSentry(final ThrabenSentry card) {

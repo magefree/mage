@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -80,6 +79,6 @@ class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature deals combat damage to one of your opponents, its controller may draw a card";
+        return "Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.";
     }
 }

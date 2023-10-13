@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class EarlOfSquirrel extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens you control");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Squirrels you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Squirrels");
 
     static {
         filter.add(TokenPredicate.TRUE);

@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class KarplusanHound extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new DamageTargetEffect(2), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "if you control a Chandra planeswalker, "
+                "Whenever {this} attacks, if you control a Chandra planeswalker, "
                 + "this creature deals 2 damage to any target"
         );
         ability.addTarget(new TargetAnyTarget());

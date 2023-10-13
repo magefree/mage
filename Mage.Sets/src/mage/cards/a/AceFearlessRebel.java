@@ -53,7 +53,7 @@ public final class AceFearlessRebel extends CardImpl {
                 ability,
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN),
                 "Sacrifice an artifact?"
-        )).setTriggerPhrase("Nitro-9"));
+        )).withFlavorWord("Nitro-9"));
 
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());

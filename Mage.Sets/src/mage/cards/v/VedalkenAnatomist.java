@@ -33,7 +33,7 @@ public final class VedalkenAnatomist extends CardImpl {
         this.toughness = new MageInt(2);
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl<>("{2}{U}"));
-        ability.addEffect(new MayTapOrUntapTargetEffect());
+        ability.addEffect(new MayTapOrUntapTargetEffect().setText("You may tap or untap that creature"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

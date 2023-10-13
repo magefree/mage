@@ -41,9 +41,9 @@ public final class OketrasLastMercy extends CardImpl {
 
 class OketrasLastMercyEffect extends OneShotEffect {
 
-    public OketrasLastMercyEffect() {
+    OketrasLastMercyEffect() {
         super(Outcome.Benefit);
-        staticText = "Your life total becomes your starting life total";
+        staticText = "Your life total becomes equal to your starting life total";
     }
 
     private OketrasLastMercyEffect(final OketrasLastMercyEffect effect) {

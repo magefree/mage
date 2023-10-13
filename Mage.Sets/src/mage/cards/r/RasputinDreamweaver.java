@@ -43,7 +43,7 @@ public final class RasputinDreamweaver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Rasputin Dreamweaver enters the battlefield with seven dream counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance(7)), "seven dream counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance(7)), "with seven dream counters on it"));
 
         // Remove a dream counter from Rasputin: Add {C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1),

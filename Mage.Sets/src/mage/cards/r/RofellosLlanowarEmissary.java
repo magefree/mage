@@ -1,5 +1,3 @@
-
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -21,7 +19,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public final class RofellosLlanowarEmissary extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Forest you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
         filter.add(SubType.FOREST.getPredicate());

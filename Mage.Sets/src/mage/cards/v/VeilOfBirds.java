@@ -32,7 +32,7 @@ public final class VeilOfBirds extends CardImpl {
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new VeilOfBirdsToken(), null, Duration.WhileOnBattlefield),
                 filter, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
-                "Whenever an opponent casts a spell, if Veil of Birds is an enchantment, Veil of Birds becomes a 1/1 Bird creature with flying."));
+                "When an opponent casts a spell, if {this} is an enchantment, {this} becomes a 1/1 Bird creature with flying."));
     }
 
     private VeilOfBirds(final VeilOfBirds card) {
