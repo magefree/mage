@@ -24,10 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
-import mage.player.ai.ma.optimizers.impl.DiscardCardOptimizer;
-import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
-import mage.player.ai.ma.optimizers.impl.LevelUpOptimizer;
-import mage.player.ai.ma.optimizers.impl.OutcomeOptimizer;
+import mage.player.ai.ma.optimizers.impl.*;
 import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
@@ -72,6 +69,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected static final String BLANKS = "...............................................";
 
     static {
+        optimizers.add(new WrongCodeUsageOptimizer());
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
         optimizers.add(new DiscardCardOptimizer());

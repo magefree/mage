@@ -34,7 +34,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
-    private static final PassAbility pass = new PassAbility();
 
     private final boolean isSimulatedPlayer;
     private final List<String> suggested;
@@ -45,7 +44,6 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer, List<String> suggested) {
         super(originalPlayer.getId());
         this.originalPlayer = originalPlayer.copy();
-        pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
         this.userData = UserData.getDefaultUserDataView();
@@ -76,7 +74,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Collections.reverse(list);
 
         if (!forced) {
-            list.add(pass);
+            list.add(new PassAbility());
         }
 
         if (logger.isTraceEnabled()) {
