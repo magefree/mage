@@ -34,7 +34,7 @@ public final class ChaosOrb extends CardImpl {
     public ChaosOrb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // {1}, {T}: Choose a nontoken permanent. A number between 1 and 20 is generated at random. If the number is 4 or more, destroy the chosen permanent. Then destroy Chaos Orb.
+        // {1}, {T}: If Chaos Orb is on the battlefield, choose a nontoken permanent, then a number between 1 and 20 is generated at random. If the number is 4 or more, destroy the chosen permanent. Then destroy Chaos Orb.
         Ability ability = new SimpleActivatedAbility(
                 new ChaosOrbEffect(),
                 new GenericManaCost(1)
@@ -64,8 +64,8 @@ class ChaosOrbEffect extends OneShotEffect {
 
     ChaosOrbEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "choose a nontoken permanent. "
-                + "A number between 1 and 20 is generated at random. "
+        staticText = "if {this} is on the battlefield, choose a nontoken permanent, "
+                + "then a number between 1 and 20 is generated at random. "
                 + "If the number is 4 or more, destroy the chosen permanent";
     }
 
@@ -81,7 +81,8 @@ class ChaosOrbEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Permanent orb = source.getSourcePermanentIfItStillExists(game);
+        if (player == null || orb == null) {
             return false;
         }
 
