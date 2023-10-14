@@ -210,6 +210,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Time Beetle", 58, Rarity.UNCOMMON, mage.cards.t.TimeBeetle.class));
         cards.add(new SetCardInfo("Time Lord Regeneration", 59, Rarity.UNCOMMON, mage.cards.t.TimeLordRegeneration.class));
         cards.add(new SetCardInfo("Time Wipe", 238, Rarity.RARE, mage.cards.t.TimeWipe.class));
+        cards.add(new SetCardInfo("Traverse Eternity", 60, Rarity.RARE, mage.cards.t.TraverseEternity.class));
         cards.add(new SetCardInfo("Vashta Nerada", 73, Rarity.RARE, mage.cards.v.VashtaNerada.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 329, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
         cards.add(new SetCardInfo("War Room", 330, Rarity.RARE, mage.cards.w.WarRoom.class));
