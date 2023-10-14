@@ -207,6 +207,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Isle", 327, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
         cards.add(new SetCardInfo("Thriving Moor", 328, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Throes of Chaos", 227, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
+        cards.add(new SetCardInfo("Time Beetle", 58, Rarity.UNCOMMON, mage.cards.t.TimeBeetle.class));
         cards.add(new SetCardInfo("Time Lord Regeneration", 59, Rarity.UNCOMMON, mage.cards.t.TimeLordRegeneration.class));
         cards.add(new SetCardInfo("Time Wipe", 238, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Vashta Nerada", 73, Rarity.RARE, mage.cards.v.VashtaNerada.class));
