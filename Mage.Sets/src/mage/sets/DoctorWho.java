@@ -108,6 +108,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Iraxxa, Empress of Mars", 89, Rarity.UNCOMMON, mage.cards.i.IraxxaEmpressOfMars.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 288, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Island", 198, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jamie McCrimmon", 105, Rarity.RARE, mage.cards.j.JamieMcCrimmon.class));
         cards.add(new SetCardInfo("Jenny Flint", 136, Rarity.RARE, mage.cards.j.JennyFlint.class));
         cards.add(new SetCardInfo("Jenny, Generated Anomaly", 137, Rarity.RARE, mage.cards.j.JennyGeneratedAnomaly.class));
         cards.add(new SetCardInfo("K-9, Mark I", 47, Rarity.RARE, mage.cards.k.K9MarkI.class));
