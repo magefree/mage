@@ -182,6 +182,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Triumph", 321, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 320, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 322, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("The Dalek Emperor", 120, Rarity.RARE, mage.cards.t.TheDalekEmperor.class));
         cards.add(new SetCardInfo("The Eleventh Hour", 41, Rarity.RARE, mage.cards.t.TheEleventhHour.class));
         cards.add(new SetCardInfo("The Flux", 86, Rarity.RARE, mage.cards.t.TheFlux.class));
         cards.add(new SetCardInfo("The Sixth Doctor", 159, Rarity.RARE, mage.cards.t.TheSixthDoctor.class));
