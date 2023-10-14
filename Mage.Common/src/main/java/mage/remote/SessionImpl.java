@@ -37,6 +37,8 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Network: client side session
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class SessionImpl implements Session {
