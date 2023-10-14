@@ -38,7 +38,10 @@ import mage.util.Copyable;
 import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -56,10 +59,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * Default is PayLifeCostLevel.allAbilities.
      */
     enum PayLifeCostLevel {
-        allAbilities,
-        nonSpellnonActivatedAbilities,
-        onlyManaAbilities,
-        none
+        allAbilities, nonSpellnonActivatedAbilities, onlyManaAbilities, none
     }
 
     /**
@@ -209,6 +209,7 @@ public interface Player extends MageItem, Copyable<Player> {
     Cards getHand();
 
     void incrementLandsPlayed();
+
     void resetLandsPlayed();
 
     int getLandsPlayed();
@@ -319,7 +320,7 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param game
      * @param playerUnderControlId
-     * @param info additional info to show in game logs like source
+     * @param info                 additional info to show in game logs like source
      */
     void controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
 
@@ -556,8 +557,18 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int getStoredBookmark();
 
+    /**
+     * Save player's bookmark for undo, e.g. enable undo button on mana payment
+     *
+     * @param bookmark
+     */
     void setStoredBookmark(int bookmark);
 
+    /**
+     * Reset player's bookmark, e.g. disable undo button
+     *
+     * @param game
+     */
     void resetStoredBookmark(Game game);
 
     default GameState restoreState(int bookmark, String text, Game game) {
@@ -746,10 +757,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type,
-            Game game) {
-        List<MultiAmountMessage> constraints = messages.stream().map(s -> new MultiAmountMessage(s, 0, max))
-                .collect(Collectors.toList());
+    default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+        List<MultiAmountMessage> constraints = messages.stream().map(s -> new MultiAmountMessage(s, 0, max)).collect(Collectors.toList());
 
         return getMultiAmountWithIndividualConstraints(outcome, constraints, min, max, type, game);
     }
@@ -765,8 +774,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages, int min,
-            int max, MultiAmountType type, Game game);
+    List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages, int min, int max, MultiAmountType type, Game game);
 
     void sideboard(Match match, Deck deck);
 
@@ -1060,10 +1068,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * without mana (null) or the mana set to manaCosts instead of its normal
      * mana costs.
      *
-     * @param sourceId  the source that can be cast without mana
-     * @param manaCosts alternate ManaCost, null if it can be cast without mana
-     *                  cost
-     * @param costs     alternate other costs you need to pay
+     * @param sourceId   the source that can be cast without mana
+     * @param manaCosts  alternate ManaCost, null if it can be cast without mana
+     *                   cost
+     * @param costs      alternate other costs you need to pay
      * @param identifier if not using the MageIdentifier.Default, only apply the alternate mana when ApprovingSource if of that kind.
      */
     void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs, MageIdentifier identifier);

@@ -488,11 +488,28 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     //game transaction methods
     void saveState(boolean bookmark);
 
+    /**
+     * Save current game state and return bookmark to it
+     *
+     * @return
+     */
     int bookmarkState();
 
     GameState restoreState(int bookmark, String context);
 
+    /**
+     * Remove selected bookmark and all newer bookmarks and game states
+     * Part of restore/rollback lifecycle
+     *
+     * @param bookmark
+     */
     void removeBookmark(int bookmark);
+
+    /**
+     * TODO: remove logic changed, must research each usage of removeBookmark and replace it with new code
+     * @param bookmark
+     */
+    void removeBookmark_v2(int bookmark);
 
     int getSavedStateSize();
 
