@@ -27,6 +27,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Ash Barrens", 257, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Astrid Peth", 11, Rarity.RARE, mage.cards.a.AstridPeth.class));
         cards.add(new SetCardInfo("Atraxi Warden", 12, Rarity.UNCOMMON, mage.cards.a.AtraxiWarden.class));
+        cards.add(new SetCardInfo("Auton Soldier", 36, Rarity.RARE, mage.cards.a.AutonSoldier.class));
         cards.add(new SetCardInfo("Banish to Another Universe", 13, Rarity.UNCOMMON, mage.cards.b.BanishToAnotherUniverse.class));
         cards.add(new SetCardInfo("Beast Within", 228, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Become the Pilot", 37, Rarity.RARE, mage.cards.b.BecomeThePilot.class));
