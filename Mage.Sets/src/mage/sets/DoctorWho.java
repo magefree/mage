@@ -141,6 +141,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("River of Tears", 297, Rarity.RARE, mage.cards.r.RiverOfTears.class));
         cards.add(new SetCardInfo("Rockfall Vale", 298, Rarity.RARE, mage.cards.r.RockfallVale.class));
         cards.add(new SetCardInfo("Rogue's Passage", 299, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Romana II", 27, Rarity.RARE, mage.cards.r.RomanaII.class));
         cards.add(new SetCardInfo("Rootbound Crag", 300, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Sarah Jane Smith", 6, Rarity.RARE, mage.cards.s.SarahJaneSmith.class));
         cards.add(new SetCardInfo("Scattered Groves", 301, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
