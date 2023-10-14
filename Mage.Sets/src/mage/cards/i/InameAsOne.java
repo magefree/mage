@@ -43,7 +43,7 @@ public final class InameAsOne extends CardImpl {
 
     public InameAsOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}{B}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -78,7 +78,7 @@ class InameAsOneEffect extends OneShotEffect {
         this.staticText = "you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield";
     }
 
-    public InameAsOneEffect(final InameAsOneEffect effect) {
+    private InameAsOneEffect(final InameAsOneEffect effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class ThermokarstEffect extends OneShotEffect {
         this.staticText = "Destroy target land. If that land was a snow land, you gain 1 life.";
     }
 
-    public ThermokarstEffect(final ThermokarstEffect effect) {
+    private ThermokarstEffect(final ThermokarstEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class ThermokarstEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controller != null) {
             permanent.destroy(source, game, false);
-            if (permanent.isSnow()) {
+            if (permanent.isSnow(game)) {
                 controller.gainLife(1, game, source);
             }
             return true;

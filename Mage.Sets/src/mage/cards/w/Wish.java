@@ -77,7 +77,7 @@ class WishEffect extends OneShotEffect {
 class WishPlayFromSideboardEffect extends AsThoughEffectImpl {
 
     public WishPlayFromSideboardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 
     private WishPlayFromSideboardEffect(final WishPlayFromSideboardEffect effect) {

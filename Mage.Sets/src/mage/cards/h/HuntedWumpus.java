@@ -53,7 +53,7 @@ class HuntedWumpusEffect extends OneShotEffect {
         this.staticText = "each other player may put a creature card from their hand onto the battlefield";
     }
 
-    public HuntedWumpusEffect(final HuntedWumpusEffect effect) {
+    private HuntedWumpusEffect(final HuntedWumpusEffect effect) {
         super(effect);
     }
 

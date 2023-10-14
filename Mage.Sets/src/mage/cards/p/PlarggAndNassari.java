@@ -26,7 +26,7 @@ public final class PlarggAndNassari extends CardImpl {
     public PlarggAndNassari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.EFREET);
         this.power = new MageInt(5);
@@ -102,7 +102,7 @@ class PlarggAndNassariEffect extends OneShotEffect {
         Player opponent = getOpponent(controller, source, game);
         if (opponent != null) {
             TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD_NON_LAND);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             opponent.choose(outcome, cards, target, source, game);
             cards.remove(game.getCard(target.getFirstTarget()));
         }

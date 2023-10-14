@@ -61,7 +61,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                 + "guessed wrong, you may cast the card without paying its mana cost";
     }
 
-    public MasterOfPredicamentsEffect(final MasterOfPredicamentsEffect effect) {
+    private MasterOfPredicamentsEffect(final MasterOfPredicamentsEffect effect) {
         super(effect);
     }
 

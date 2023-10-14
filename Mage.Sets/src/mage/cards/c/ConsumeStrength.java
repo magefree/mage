@@ -57,7 +57,7 @@ class ConsumeStrengthEffect extends OneShotEffect {
         this.staticText = "Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn";
     }
 
-    public ConsumeStrengthEffect(final ConsumeStrengthEffect effect) {
+    private ConsumeStrengthEffect(final ConsumeStrengthEffect effect) {
         super(effect);
     }
 

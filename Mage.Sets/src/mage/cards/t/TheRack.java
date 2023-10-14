@@ -48,7 +48,7 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
-    public TheRackTriggeredAbility(final TheRackTriggeredAbility ability) {
+    private TheRackTriggeredAbility(final TheRackTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,7 +75,7 @@ class TheRackEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
-    public TheRackEffect(final TheRackEffect effect) {
+    private TheRackEffect(final TheRackEffect effect) {
         super(effect);
     }
 

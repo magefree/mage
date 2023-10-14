@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author Quercitron
  */
 public class RevealHandTargetEffect extends OneShotEffect {
@@ -27,7 +26,7 @@ public class RevealHandTargetEffect extends OneShotEffect {
         this.staticText = getText();
     }
 
-    public RevealHandTargetEffect(final RevealHandTargetEffect effect) {
+    protected RevealHandTargetEffect(final RevealHandTargetEffect effect) {
         super(effect);
         this.targetController = effect.targetController;
     }

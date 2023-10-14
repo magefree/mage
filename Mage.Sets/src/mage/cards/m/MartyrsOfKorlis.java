@@ -57,7 +57,7 @@ class RedirectArtifactDamageFromPlayerToSourceEffect extends RedirectionEffect {
         super(duration);
     }
 
-    public RedirectArtifactDamageFromPlayerToSourceEffect(final RedirectArtifactDamageFromPlayerToSourceEffect effect) {
+    private RedirectArtifactDamageFromPlayerToSourceEffect(final RedirectArtifactDamageFromPlayerToSourceEffect effect) {
         super(effect);
     }
 

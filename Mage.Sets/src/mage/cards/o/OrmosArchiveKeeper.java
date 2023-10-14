@@ -35,7 +35,7 @@ public final class OrmosArchiveKeeper extends CardImpl {
     public OrmosArchiveKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

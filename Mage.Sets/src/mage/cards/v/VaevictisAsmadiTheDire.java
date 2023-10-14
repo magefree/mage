@@ -35,7 +35,7 @@ public final class VaevictisAsmadiTheDire extends CardImpl {
     public VaevictisAsmadiTheDire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
@@ -64,7 +64,7 @@ class VaevictisAsmadiTheDireTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new VaevictisAsmadiTheDireEffect(), false);
     }
 
-    public VaevictisAsmadiTheDireTriggeredAbility(final VaevictisAsmadiTheDireTriggeredAbility ability) {
+    private VaevictisAsmadiTheDireTriggeredAbility(final VaevictisAsmadiTheDireTriggeredAbility ability) {
         super(ability);
     }
 
@@ -117,7 +117,7 @@ class VaevictisAsmadiTheDireEffect extends OneShotEffect {
                 + "then puts it onto the battlefield if it's a permanent card";
     }
 
-    public VaevictisAsmadiTheDireEffect(final VaevictisAsmadiTheDireEffect effect) {
+    private VaevictisAsmadiTheDireEffect(final VaevictisAsmadiTheDireEffect effect) {
         super(effect);
     }
 

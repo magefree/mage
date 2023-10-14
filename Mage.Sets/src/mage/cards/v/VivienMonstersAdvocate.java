@@ -28,7 +28,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -40,7 +39,7 @@ public final class VivienMonstersAdvocate extends CardImpl {
     public VivienMonstersAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.setStartingLoyalty(3);
 
@@ -150,7 +149,7 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public DelayedTriggeredAbility copy() {
+    public VivienMonstersAdvocateTriggeredAbility copy() {
         return new VivienMonstersAdvocateTriggeredAbility(this);
     }
 

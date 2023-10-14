@@ -21,12 +21,12 @@ public final class SoldierTokenWithHaste extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public SoldierTokenWithHaste(final SoldierTokenWithHaste token) {
+    protected SoldierTokenWithHaste(final SoldierTokenWithHaste token) {
         super(token);
     }
 
     @Override
     public SoldierTokenWithHaste copy() {
-        return new SoldierTokenWithHaste(this); //To change body of generated methods, choose Tools | Templates.
+        return new SoldierTokenWithHaste(this);
     }
 }

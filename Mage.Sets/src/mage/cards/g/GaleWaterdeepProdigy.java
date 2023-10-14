@@ -33,7 +33,7 @@ public final class GaleWaterdeepProdigy extends CardImpl {
     public GaleWaterdeepProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -75,7 +75,7 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
         addWatcher(new CastFromHandWatcher());
     }
 
-    public GaleWaterdeepProdigyTriggeredAbility(GaleWaterdeepProdigyTriggeredAbility ability) {
+    private GaleWaterdeepProdigyTriggeredAbility(final GaleWaterdeepProdigyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,7 +96,7 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
         }
 
         FilterCard filterCard;
-        if (spell.isSorcery()) {
+        if (spell.isSorcery(game)) {
             filterCard = INSTANT_FILTER;
         } else {
             filterCard = SORCERY_FILTER;

@@ -45,7 +45,7 @@ class GoblinGameEffect extends OneShotEffect {
                 "If two or more players are tied for fewest, each loses half their life, rounded up.";
     }
 
-    public GoblinGameEffect(final GoblinGameEffect effect) {
+    private GoblinGameEffect(final GoblinGameEffect effect) {
         super(effect);
     }
 

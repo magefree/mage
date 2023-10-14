@@ -36,7 +36,7 @@ public final class KiyomaroFirstToStand extends CardImpl {
 
     public KiyomaroFirstToStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -76,7 +76,7 @@ class KiyomaroFirstToStandDealsDamageTriggeredAbility extends TriggeredAbilityIm
         super(Zone.BATTLEFIELD, new GainLifeEffect(7), false);
     }
 
-    public KiyomaroFirstToStandDealsDamageTriggeredAbility(final KiyomaroFirstToStandDealsDamageTriggeredAbility ability) {
+    private KiyomaroFirstToStandDealsDamageTriggeredAbility(final KiyomaroFirstToStandDealsDamageTriggeredAbility ability) {
         super(ability);
     }
 

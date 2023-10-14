@@ -25,7 +25,7 @@ public final class EnfysNest extends CardImpl {
     public EnfysNest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.REBEL);
         this.power = new MageInt(2);
@@ -57,7 +57,7 @@ class EnfysNestEffect extends ExileTargetEffect {
         staticText = "you may exile target creature an opponent controls. If you do, that player gains life equal to that creature's power";
     }
 
-    public EnfysNestEffect(final EnfysNestEffect effect) {
+    private EnfysNestEffect(final EnfysNestEffect effect) {
         super(effect);
     }
 

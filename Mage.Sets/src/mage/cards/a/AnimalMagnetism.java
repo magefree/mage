@@ -45,7 +45,7 @@ class AnimalMagnetismEffect extends OneShotEffect {
         this.staticText = "Reveal the top five cards of your library. An opponent chooses a creature card from among them. Put that card onto the battlefield and the rest into your graveyard";
     }
 
-    public AnimalMagnetismEffect(final AnimalMagnetismEffect effect) {
+    private AnimalMagnetismEffect(final AnimalMagnetismEffect effect) {
         super(effect);
     }
 

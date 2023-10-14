@@ -59,7 +59,7 @@ class EldraziMimicEffect extends OneShotEffect {
         staticText = "you may have the base power and toughness of {this} become that creature's power and toughness until end of turn";
     }
 
-    public EldraziMimicEffect(final EldraziMimicEffect effect) {
+    private EldraziMimicEffect(final EldraziMimicEffect effect) {
         super(effect);
     }
 

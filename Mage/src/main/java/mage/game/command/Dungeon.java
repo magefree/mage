@@ -27,7 +27,6 @@ import mage.game.command.dungeons.TombOfAnnihilationDungeon;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.util.GameLog;
 import mage.util.SubTypes;
 
 import java.util.*;
@@ -45,8 +44,7 @@ public class Dungeon extends CommandObjectImpl {
         dungeonNames.add("Dungeon of the Mad Mage");
     }
 
-    private static final List<CardType> emptyList = Collections.unmodifiableList(Arrays.asList(CardType.DUNGEON));
-    private static final ObjectColor emptyColor = new ObjectColor();
+    private static final List<CardType> cardTypes = Collections.unmodifiableList(Arrays.asList(CardType.DUNGEON));
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
     private UUID controllerId;
@@ -61,7 +59,7 @@ public class Dungeon extends CommandObjectImpl {
         super(name);
     }
 
-    public Dungeon(final Dungeon dungeon) {
+    protected Dungeon(final Dungeon dungeon) {
         super(dungeon);
         this.frameStyle = dungeon.frameStyle;
         this.controllerId = dungeon.controllerId;
@@ -204,7 +202,7 @@ public class Dungeon extends CommandObjectImpl {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptyList;
+        return cardTypes;
     }
 
     @Override
@@ -223,8 +221,8 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
+    public List<SuperType> getSuperType(Game game) {
+        return Collections.emptyList();
     }
 
     @Override
@@ -239,22 +237,27 @@ public class Dungeon extends CommandObjectImpl {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override

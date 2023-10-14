@@ -31,7 +31,7 @@ public final class RithTheAwakener extends CardImpl {
 
     public RithTheAwakener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(6);
@@ -61,7 +61,7 @@ class RithTheAwakenerEffect extends OneShotEffect {
         this.staticText = "choose a color, then create a 1/1 green Saproling creature token for each permanent of that color";
     }
 
-    public RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
+    private RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
         super(effect);
     }
 

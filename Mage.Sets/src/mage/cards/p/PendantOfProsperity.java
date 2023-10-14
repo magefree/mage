@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -21,8 +22,6 @@ import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
 import mage.abilities.effects.common.EntersBattlefieldUnderControlOfOpponentOfChoiceEffect;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -57,7 +56,7 @@ class PendantOfProsperityEffect extends OneShotEffect {
     private static final Effect effect2 = new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A);
 
     PendantOfProsperityEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Draw a card, then you may put a land card from your hand onto the battlefield. " +
                 "{this}'s owner draws a card, then that player may put a land card from their hand onto the battlefield.";
     }

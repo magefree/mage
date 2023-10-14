@@ -35,7 +35,7 @@ public final class TyvarTheBellicose extends CardImpl {
     public TyvarTheBellicose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
@@ -73,7 +73,7 @@ class TyvarTheBellicoseTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(0), SavedDamageValue.MANY, false
         ));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
     }
 
     private TyvarTheBellicoseTriggeredAbility(final TyvarTheBellicoseTriggeredAbility ability) {

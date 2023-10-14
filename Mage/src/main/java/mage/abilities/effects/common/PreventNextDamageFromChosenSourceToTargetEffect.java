@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -16,31 +12,30 @@ import mage.game.events.GameEvent;
 import mage.target.TargetSource;
 
 /**
- *
  * @author emerald000
  */
 public class PreventNextDamageFromChosenSourceToTargetEffect extends PreventionEffectImpl {
 
     protected final TargetSource targetSource;
-    
+
     public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration) {
         this(duration, new FilterObject<>("source"));
     }
-    
+
     public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration, FilterObject<MageObject> filter) {
         this(duration, filter, false);
     }
-    
+
     public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration, FilterObject<MageObject> filter, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.targetSource = new TargetSource(filter);
     }
-    
-    public PreventNextDamageFromChosenSourceToTargetEffect(final PreventNextDamageFromChosenSourceToTargetEffect effect) {
+
+    protected PreventNextDamageFromChosenSourceToTargetEffect(final PreventNextDamageFromChosenSourceToTargetEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
-    
+
     @Override
     public PreventNextDamageFromChosenSourceToTargetEffect copy() {
         return new PreventNextDamageFromChosenSourceToTargetEffect(this);
@@ -70,9 +65,16 @@ public class PreventNextDamageFromChosenSourceToTargetEffect extends PreventionE
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder("The next time a ").append(targetSource.getFilter().getMessage());
-        sb.append(" of your choice would deal damage to target ");
-        sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append(" of your choice would deal damage to ");
+        String targetName = mode.getTargets().get(0).getTargetName();
+        if (!targetName.contains("target ") && !targetName.endsWith("any target")) {
+            sb.append("target ");
+        }
+        sb.append(targetName);
         if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }

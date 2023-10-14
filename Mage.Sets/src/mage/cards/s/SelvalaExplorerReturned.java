@@ -30,7 +30,7 @@ public final class SelvalaExplorerReturned extends CardImpl {
 
     public SelvalaExplorerReturned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
@@ -62,7 +62,7 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
         this.staticText = "Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life";
     }
 
-    public SelvalaExplorerReturnedEffect(final SelvalaExplorerReturnedEffect effect) {
+    private SelvalaExplorerReturnedEffect(final SelvalaExplorerReturnedEffect effect) {
         super(effect);
     }
 

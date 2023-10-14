@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
+ * TODO: part of replay system? Un-used, can be deleted
+ *
  * Utility class to save an object on disk.
  *
  * @author ayrat

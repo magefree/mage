@@ -31,7 +31,7 @@ public final class IxhelScionOfAtraxa extends CardImpl {
 
     public IxhelScionOfAtraxa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN, SubType.ANGEL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

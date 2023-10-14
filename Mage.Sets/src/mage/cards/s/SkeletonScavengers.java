@@ -63,7 +63,7 @@ class DynamicValueGenericManaCost extends CostImpl {
         setText();
     }
 
-    public DynamicValueGenericManaCost(DynamicValueGenericManaCost cost) {
+    private DynamicValueGenericManaCost(final DynamicValueGenericManaCost cost) {
         super(cost);
         this.amount = cost.amount;
     }
@@ -108,7 +108,7 @@ class SkeletonScavengersEffect extends OneShotEffect {
         this.staticText = "Regenerate {this}. When it regenerates this way, put a +1/+1 counter on it";
     }
 
-    SkeletonScavengersEffect(final SkeletonScavengersEffect effect) {
+    private SkeletonScavengersEffect(final SkeletonScavengersEffect effect) {
         super(effect);
     }
 

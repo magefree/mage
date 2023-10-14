@@ -69,7 +69,7 @@ class FloatingShieldEffect extends OneShotEffect {
         this.staticText = "target creature gains protection from the chosen color until end of turn";
     }
 
-    public FloatingShieldEffect(final FloatingShieldEffect effect) {
+    private FloatingShieldEffect(final FloatingShieldEffect effect) {
         super(effect);
     }
 

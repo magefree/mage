@@ -21,7 +21,7 @@ public final class HuntedCentaurToken extends TokenImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public HuntedCentaurToken(final HuntedCentaurToken token) {
+    protected HuntedCentaurToken(final HuntedCentaurToken token) {
         super(token);
     }
 

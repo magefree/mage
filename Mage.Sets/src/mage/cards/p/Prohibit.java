@@ -52,7 +52,7 @@ class ProhibitEffect extends OneShotEffect {
                 + "spell if its mana value is 4 or less instead.";
     }
 
-    ProhibitEffect(final ProhibitEffect effect) {
+    private ProhibitEffect(final ProhibitEffect effect) {
         super(effect);
     }
 

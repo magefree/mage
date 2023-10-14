@@ -96,7 +96,7 @@ class KaylasCommandCounterEffect extends OneShotEffect {
             return false;
         }
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {

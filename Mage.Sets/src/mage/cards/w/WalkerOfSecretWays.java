@@ -73,7 +73,7 @@ class WalkerOfSecretWaysEffect extends OneShotEffect {
         staticText = "look at that player's hand";
     }
 
-    WalkerOfSecretWaysEffect(final WalkerOfSecretWaysEffect effect) {
+    private WalkerOfSecretWaysEffect(final WalkerOfSecretWaysEffect effect) {
         super(effect);
     }
 

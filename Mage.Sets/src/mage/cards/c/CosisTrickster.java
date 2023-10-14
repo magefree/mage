@@ -48,7 +48,7 @@ class CosisTricksterTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
     }
 
-    public CosisTricksterTriggeredAbility(final CosisTricksterTriggeredAbility ability) {
+    private CosisTricksterTriggeredAbility(final CosisTricksterTriggeredAbility ability) {
         super(ability);
     }
 

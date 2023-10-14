@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -14,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  *
@@ -37,7 +35,7 @@ public final class LightningShrieker extends CardImpl {
         // At the beginning of the end step, Lightning Shrieker's owner shuffles it into their library.
         Effect effect = new ShuffleIntoLibrarySourceEffect();
         effect.setText("{this}'s owner shuffles it into their library.");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(effect, TargetController.NEXT, false));
     }
 
     private LightningShrieker(final LightningShrieker card) {

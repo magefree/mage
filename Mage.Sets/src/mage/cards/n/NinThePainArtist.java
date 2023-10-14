@@ -28,7 +28,7 @@ public final class NinThePainArtist extends CardImpl {
 
     public NinThePainArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.WIZARD);
 
@@ -59,7 +59,7 @@ class NinThePainArtistEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to target creature. That creature's controller draws X cards.";
     }
     
-    NinThePainArtistEffect(final NinThePainArtistEffect effect) {
+    private NinThePainArtistEffect(final NinThePainArtistEffect effect) {
         super(effect);
     }
     

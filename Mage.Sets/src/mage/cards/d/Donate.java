@@ -50,7 +50,7 @@ class DonateEffect extends OneShotEffect {
         this.staticText = "Target player gains control of target permanent you control";
     }
     
-    public DonateEffect(final DonateEffect effect) {
+    private DonateEffect(final DonateEffect effect) {
         super(effect);
     }
 

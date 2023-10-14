@@ -47,7 +47,7 @@ public class JumpStartAbility extends SpellAbility {
         this.addCost(cost);
     }
 
-    public JumpStartAbility(final JumpStartAbility ability) {
+    protected JumpStartAbility(final JumpStartAbility ability) {
         super(ability);
         this.replacementEffectAdded = ability.replacementEffectAdded;
     }
@@ -93,7 +93,7 @@ class JumpStartReplacementEffect extends ReplacementEffectImpl {
                 + "any time it would leave the stack)";
     }
 
-    public JumpStartReplacementEffect(final JumpStartReplacementEffect effect) {
+    protected JumpStartReplacementEffect(final JumpStartReplacementEffect effect) {
         super(effect);
     }
 

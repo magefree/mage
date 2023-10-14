@@ -24,7 +24,7 @@ public final class GeistOfSaintTraft extends CardImpl {
 
     public GeistOfSaintTraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.CLERIC);
 
@@ -55,7 +55,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
         staticText = "create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat";
     }
 
-    GeistOfSaintTraftEffect(final GeistOfSaintTraftEffect effect) {
+    private GeistOfSaintTraftEffect(final GeistOfSaintTraftEffect effect) {
         super(effect);
     }
 

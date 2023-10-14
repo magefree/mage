@@ -31,7 +31,7 @@ public final class BloodhunterBat extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Bloodhunter Bat enters the battlefield, target player loses 2 life and you gain 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(2));
-        ability.addEffect(new GainLifeEffect(2));
+        ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

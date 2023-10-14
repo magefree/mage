@@ -43,7 +43,7 @@ public class ConditionalPreventionEffect extends PreventionEffectImpl {
         this.staticText = text;
     }
 
-    public ConditionalPreventionEffect(final ConditionalPreventionEffect effect) {
+    protected ConditionalPreventionEffect(final ConditionalPreventionEffect effect) {
         super(effect);
         this.effect = (PreventionEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {

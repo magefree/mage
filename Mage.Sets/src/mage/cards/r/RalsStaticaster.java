@@ -46,7 +46,7 @@ public final class RalsStaticaster extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new BoostSourceEffect(
                         CardsInControllerHandCount.instance, StaticValue.get(0),
-                        Duration.EndOfTurn, true), false),
+                        Duration.EndOfTurn), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "Whenever {this} attacks, if you control a Ral planeswalker, "
                 + "{this} gets +1/+0 for each card in your hand until end of turn."

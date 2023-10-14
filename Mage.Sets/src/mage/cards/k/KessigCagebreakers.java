@@ -50,7 +50,7 @@ class KessigCagebreakersEffect extends OneShotEffect {
         this.staticText = "create a 2/2 green Wolf creature token that's tapped and attacking for each creature card in your graveyard";
     }
 
-    public KessigCagebreakersEffect(final KessigCagebreakersEffect effect) {
+    private KessigCagebreakersEffect(final KessigCagebreakersEffect effect) {
         super(effect);
     }
 

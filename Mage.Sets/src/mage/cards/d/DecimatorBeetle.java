@@ -15,7 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -32,7 +32,7 @@ public final class DecimatorBeetle extends CardImpl {
     public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public DecimatorBeetle(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +72,7 @@ class DecimatorBeetleEffect extends OneShotEffect {
         staticText = "remove a -1/-1 counter from target creature you control and put a -1/-1 counter on up to one target creature defending player controls";
     }
 
-    public DecimatorBeetleEffect(DecimatorBeetleEffect effect) {
+    private DecimatorBeetleEffect(final DecimatorBeetleEffect effect) {
         super(effect);
     }
 

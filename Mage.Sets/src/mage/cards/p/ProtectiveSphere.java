@@ -63,7 +63,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public ProtectiveSphereEffect(final ProtectiveSphereEffect effect) {
+    private ProtectiveSphereEffect(final ProtectiveSphereEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -75,7 +75,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setRequired(false);
         Player controller = game.getPlayer(source.getControllerId());
         Permanent protectiveSphere = game.getPermanent(source.getSourceId());

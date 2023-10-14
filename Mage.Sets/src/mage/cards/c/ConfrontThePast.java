@@ -82,7 +82,7 @@ class ConfrontThePastLoyaltyEffect extends OneShotEffect {
         staticText = "remove twice X loyalty counters from target planeswalker an opponent controls";
     }
 
-    public ConfrontThePastLoyaltyEffect(ConfrontThePastLoyaltyEffect effect) {
+    private ConfrontThePastLoyaltyEffect(final ConfrontThePastLoyaltyEffect effect) {
         super(effect);
     }
 

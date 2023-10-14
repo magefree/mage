@@ -57,7 +57,7 @@ class MagusOfTheMindEffect extends OneShotEffect {
         this.staticText = "Shuffle your library, then exile the top X cards, where X is one plus the number of spells cast this turn. Until end of turn, you may play cards exiled this way without paying their mana costs";
     }
 
-    MagusOfTheMindEffect(final MagusOfTheMindEffect effect) {
+    private MagusOfTheMindEffect(final MagusOfTheMindEffect effect) {
         super(effect);
     }
 

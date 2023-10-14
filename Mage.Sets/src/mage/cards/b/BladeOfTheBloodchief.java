@@ -52,7 +52,7 @@ class BladeOfTheBloodchiefEffect extends OneShotEffect {
                 + "put two +1/+1 counters on it instead.";
     }
 
-    public BladeOfTheBloodchiefEffect(final BladeOfTheBloodchiefEffect ability) {
+    private BladeOfTheBloodchiefEffect(final BladeOfTheBloodchiefEffect ability) {
         super(ability);
     }
 

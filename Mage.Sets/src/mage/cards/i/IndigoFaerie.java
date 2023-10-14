@@ -62,7 +62,7 @@ class BecomesBlueTargetEffect extends ContinuousEffectImpl {
         staticText = "Target permanent becomes blue in addition to its other colors until end of turn";
     }
 
-    public BecomesBlueTargetEffect(final BecomesBlueTargetEffect effect) {
+    private BecomesBlueTargetEffect(final BecomesBlueTargetEffect effect) {
         super(effect);
     }
 

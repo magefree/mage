@@ -35,7 +35,7 @@ public final class NissaVitalForce extends CardImpl {
 
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
         this.setStartingLoyalty(5);
@@ -79,7 +79,7 @@ class NissaVitalForceToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public NissaVitalForceToken(final NissaVitalForceToken token) {
+    private NissaVitalForceToken(final NissaVitalForceToken token) {
         super(token);
     }
 

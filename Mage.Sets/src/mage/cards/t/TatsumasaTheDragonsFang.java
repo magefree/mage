@@ -32,7 +32,7 @@ public final class TatsumasaTheDragonsFang extends CardImpl {
 
     public TatsumasaTheDragonsFang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +5/+5.
@@ -65,7 +65,7 @@ class TatsumaTheDragonsFangEffect extends OneShotEffect {
                 "Return {this} to the battlefield under its owner's control when that token dies";
     }
 
-    public TatsumaTheDragonsFangEffect(final TatsumaTheDragonsFangEffect effect) {
+    private TatsumaTheDragonsFangEffect(final TatsumaTheDragonsFangEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
         tokens.addAll(token.getLastAddedTokenIds());
     }
 
-    public TatsumaTheDragonsFangTriggeredAbility(final TatsumaTheDragonsFangTriggeredAbility ability) {
+    private TatsumaTheDragonsFangTriggeredAbility(final TatsumaTheDragonsFangTriggeredAbility ability) {
         super(ability);
         tokens.addAll(ability.tokens);
     }

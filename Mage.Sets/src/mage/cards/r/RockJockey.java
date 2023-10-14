@@ -38,7 +38,7 @@ public final class RockJockey extends CardImpl {
                 ), new PlayLandWatcher());
 
         // You can't play lands if you've cast Rock Jockey this turn.
-        this.addAbility(new SimpleStaticAbility(new RockJockeyEffect()), new SpellsCastWatcher());
+        this.addAbility(new SimpleStaticAbility(new RockJockeyEffect()));
     }
 
     private RockJockey(final RockJockey card) {
@@ -58,7 +58,7 @@ class RockJockeyEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "You can't play lands if you've cast {this} this turn";
     }
 
-    public RockJockeyEffect(final RockJockeyEffect effect) {
+    private RockJockeyEffect(final RockJockeyEffect effect) {
         super(effect);
     }
 

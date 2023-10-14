@@ -40,7 +40,7 @@ public class MyojinOfGrimBetrayal extends CardImpl {
     public MyojinOfGrimBetrayal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
@@ -88,7 +88,9 @@ class MyojinOfGrimBetrayalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
-        if (controller == null || watcher == null) { return false; }
+        if (controller == null || watcher == null) {
+            return false;
+        }
 
         Cards cards = new CardsImpl(watcher.getCardsPutIntoGraveyardFromBattlefield(game));
         cards.removeIf(uuid -> !game.getCard(uuid).isCreature(game));

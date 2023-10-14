@@ -38,7 +38,7 @@ public final class AngrathTheFlameChained extends CardImpl {
     public AngrathTheFlameChained(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGRATH);
         this.setStartingLoyalty(4);
 
@@ -77,7 +77,7 @@ class AngrathTheFlameUltimateEffect extends OneShotEffect {
         this.staticText = "Each opponent loses life equal to the number of cards in their graveyard";
     }
 
-    public AngrathTheFlameUltimateEffect(final AngrathTheFlameUltimateEffect effect) {
+    private AngrathTheFlameUltimateEffect(final AngrathTheFlameUltimateEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class AngrathTheFlameCreateDelayedTriggerEffect extends OneShotEffect {
         staticText = "Sacrifice it at the beginning of the next end step if it has mana value 3 or less";
     }
 
-    public AngrathTheFlameCreateDelayedTriggerEffect(final AngrathTheFlameCreateDelayedTriggerEffect effect) {
+    private AngrathTheFlameCreateDelayedTriggerEffect(final AngrathTheFlameCreateDelayedTriggerEffect effect) {
         super(effect);
     }
 
@@ -134,7 +134,7 @@ class AngrathTheFlameChainedDelayedTriggeredAbility extends DelayedTriggeredAbil
         super(effect, Duration.Custom);
     }
 
-    public AngrathTheFlameChainedDelayedTriggeredAbility(final AngrathTheFlameChainedDelayedTriggeredAbility ability) {
+    private AngrathTheFlameChainedDelayedTriggeredAbility(final AngrathTheFlameChainedDelayedTriggeredAbility ability) {
         super(ability);
     }
 

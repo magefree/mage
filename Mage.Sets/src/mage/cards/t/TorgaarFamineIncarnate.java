@@ -28,7 +28,7 @@ public final class TorgaarFamineIncarnate extends CardImpl {
     public TorgaarFamineIncarnate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
@@ -64,7 +64,7 @@ class TorgaarFamineIncarnateEffect extends OneShotEffect {
         this.staticText = "up to one target player's life total becomes half their starting life total, rounded down";
     }
 
-    public TorgaarFamineIncarnateEffect(final TorgaarFamineIncarnateEffect effect) {
+    private TorgaarFamineIncarnateEffect(final TorgaarFamineIncarnateEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class TorgaarFamineIncarnateEffectCostReductionEffect extends CostModificationEf
         staticText = "This spell costs {2} less to cast for each creature sacrificed this way";
     }
 
-    public TorgaarFamineIncarnateEffectCostReductionEffect(final TorgaarFamineIncarnateEffectCostReductionEffect effect) {
+    private TorgaarFamineIncarnateEffectCostReductionEffect(final TorgaarFamineIncarnateEffectCostReductionEffect effect) {
         super(effect);
     }
 

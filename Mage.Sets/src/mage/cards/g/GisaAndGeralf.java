@@ -29,7 +29,7 @@ public final class GisaAndGeralf extends CardImpl {
 
     public GisaAndGeralf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -57,11 +57,11 @@ public final class GisaAndGeralf extends CardImpl {
 class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     GisaAndGeralfCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCreatureInPlay, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCreatureInPlay);
         staticText = "During each of your turns, you may cast a Zombie creature spell from your graveyard";
     }
 
-    GisaAndGeralfCastFromGraveyardEffect(final GisaAndGeralfCastFromGraveyardEffect effect) {
+    private GisaAndGeralfCastFromGraveyardEffect(final GisaAndGeralfCastFromGraveyardEffect effect) {
         super(effect);
     }
 

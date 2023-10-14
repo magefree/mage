@@ -86,7 +86,7 @@ class DanseMacabreEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
@@ -117,7 +117,7 @@ class DanseMacabreEffect extends OneShotEffect {
         } else {
             return true;
         }
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(Outcome.PutCreatureInPlay, target, source, game);
         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;

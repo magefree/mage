@@ -68,7 +68,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
         this.staticText = "Target opponent exiles the top card of their library. Until end of turn, you may play that card";
     }
 
-    public KnacksawCliqueEffect(final KnacksawCliqueEffect effect) {
+    private KnacksawCliqueEffect(final KnacksawCliqueEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "Until end of turn, you may play that card";
     }
 
-    public KnacksawCliqueCastFromExileEffect(final KnacksawCliqueCastFromExileEffect effect) {
+    private KnacksawCliqueCastFromExileEffect(final KnacksawCliqueCastFromExileEffect effect) {
         super(effect);
     }
 

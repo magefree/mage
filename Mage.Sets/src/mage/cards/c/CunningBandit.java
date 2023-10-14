@@ -66,7 +66,7 @@ class AzamukiTreacheryIncarnate extends TokenImpl {
 
     AzamukiTreacheryIncarnate() {
         super("Azamuki, Treachery Incarnate", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.SPIRIT);
@@ -81,7 +81,7 @@ class AzamukiTreacheryIncarnate extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
+    private AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
         super(token);
     }
 

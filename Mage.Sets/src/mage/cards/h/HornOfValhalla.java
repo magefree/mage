@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -10,13 +11,12 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.permanent.token.SoldierToken;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.constants.Outcome;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -41,6 +41,8 @@ public final class HornOfValhalla extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(
                 new SoldierToken(), ManacostVariableValue.REGULAR
         ));
+        
+        this.finalizeAdventure();
     }
 
     private HornOfValhalla(final HornOfValhalla card) {

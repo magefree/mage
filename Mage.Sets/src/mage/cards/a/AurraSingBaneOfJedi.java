@@ -34,7 +34,7 @@ public final class AurraSingBaneOfJedi extends CardImpl {
 
     public AurraSingBaneOfJedi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AURRA);
 
         this.setStartingLoyalty(3);
@@ -74,7 +74,7 @@ class AurraSingBaneOfJediEffect extends OneShotEffect {
         staticText = "You may have {this} deal 2 damage to target creature. If you don't, {this} deals 1 damage to you";
     }
 
-    public AurraSingBaneOfJediEffect(final AurraSingBaneOfJediEffect effect) {
+    private AurraSingBaneOfJediEffect(final AurraSingBaneOfJediEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class SacrificeAllEffect extends OneShotEffect {
         staticText = "and sacrificies all creatures they control";
     }
 
-    SacrificeAllEffect(final SacrificeAllEffect effect) {
+    private SacrificeAllEffect(final SacrificeAllEffect effect) {
         super(effect);
     }
 

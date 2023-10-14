@@ -26,7 +26,7 @@ public final class NissasRevelation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}");
 
         // Scry 5, then reveal the top card of your library. If it's a creature card, you draw cards equal to its power and you gain life equal to its toughness.
-        this.getSpellAbility().addEffect(new ScryEffect(5));
+        this.getSpellAbility().addEffect(new ScryEffect(5, false));
         this.getSpellAbility().addEffect(new NissasRevelationEffect());
 
     }
@@ -48,7 +48,7 @@ class NissasRevelationEffect extends OneShotEffect {
         this.staticText = ", then reveal the top card of your library. If it's a creature card, you draw cards equal to its power and you gain life equal to its toughness";
     }
 
-    public NissasRevelationEffect(final NissasRevelationEffect effect) {
+    private NissasRevelationEffect(final NissasRevelationEffect effect) {
         super(effect);
     }
 

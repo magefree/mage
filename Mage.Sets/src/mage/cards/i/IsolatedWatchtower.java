@@ -61,7 +61,7 @@ class IsolatedWatchtowerEffect extends OneShotEffect {
                 + "put it onto the battlefield tapped";
     }
 
-    public IsolatedWatchtowerEffect(final IsolatedWatchtowerEffect effect) {
+    private IsolatedWatchtowerEffect(final IsolatedWatchtowerEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class IsolatedWatchtowerEffect extends OneShotEffect {
         }
         Card card = player.getLibrary().getFromTop(game);
         player.revealCards(source, new CardsImpl(card), game);
-        if (card.isBasic() && card.isLand(game)) {
+        if (card.isBasic(game) && card.isLand(game)) {
             player.moveCards(
                     card, Zone.BATTLEFIELD, source,
                     game, true, false, true, null

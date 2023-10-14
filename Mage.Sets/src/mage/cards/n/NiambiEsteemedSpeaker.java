@@ -18,9 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,19 +32,16 @@ import java.util.UUID;
  */
 public final class NiambiEsteemedSpeaker extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another target creature you control");
     private static final FilterCard filter2 = new FilterCard("a legendary card");
 
     static {
-        filter.add(AnotherPredicate.instance);
         filter2.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public NiambiEsteemedSpeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -58,7 +53,7 @@ public final class NiambiEsteemedSpeaker extends CardImpl {
         // When Niambi, Esteemed Speaker enters the battlefield, you may return another target creature you control to its owner's hand. If you do, you gain life equal to that creature's converted mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
         ability.addEffect(new NiambiEsteemedSpeakerEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
         // {1}{W}{U}, {T}, Discard a legendary card: Draw two cards.

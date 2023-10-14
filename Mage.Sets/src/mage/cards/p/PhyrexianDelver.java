@@ -57,7 +57,7 @@ class PhyrexianDelverEffect extends OneShotEffect {
         this.staticText = "return target creature card from your graveyard to the battlefield. You lose life equal to that card's mana value";
     }
 
-    public PhyrexianDelverEffect(final PhyrexianDelverEffect effect) {
+    private PhyrexianDelverEffect(final PhyrexianDelverEffect effect) {
         super(effect);
     }
 

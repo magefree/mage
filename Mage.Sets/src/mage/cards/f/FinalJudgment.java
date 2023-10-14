@@ -6,7 +6,7 @@ import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -18,7 +18,7 @@ public final class FinalJudgment extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
         // Exile all creatures.
-        this.getSpellAbility().addEffect(new ExileAllEffect(new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new ExileAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private FinalJudgment(final FinalJudgment card) {

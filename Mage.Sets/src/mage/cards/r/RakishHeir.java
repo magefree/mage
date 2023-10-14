@@ -52,7 +52,7 @@ class RakishHeirTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public RakishHeirTriggeredAbility(final RakishHeirTriggeredAbility ability) {
+    private RakishHeirTriggeredAbility(final RakishHeirTriggeredAbility ability) {
         super(ability);
     }
 

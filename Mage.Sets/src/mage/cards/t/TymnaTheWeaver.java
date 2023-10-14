@@ -30,7 +30,7 @@ public final class TymnaTheWeaver extends CardImpl {
     public TymnaTheWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -63,7 +63,7 @@ class TymnaTheWeaverEffect extends OneShotEffect {
         this.staticText = "you may pay X life, where X is the number of opponents that were dealt combat damage this turn. If you do, draw X cards";
     }
 
-    public TymnaTheWeaverEffect(final TymnaTheWeaverEffect effect) {
+    private TymnaTheWeaverEffect(final TymnaTheWeaverEffect effect) {
         super(effect);
     }
 

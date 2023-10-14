@@ -25,7 +25,7 @@ public final class WulfgarOfIcewindDale extends CardImpl {
     public WulfgarOfIcewindDale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(4);
@@ -52,11 +52,11 @@ class WulfgarOfIcewindDaleEffect extends ReplacementEffectImpl {
 
     WulfgarOfIcewindDaleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if a creature you control attacking would cause a triggered ability " +
+        staticText = "if a creature you control attacking causes a triggered ability " +
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 
-    WulfgarOfIcewindDaleEffect(final WulfgarOfIcewindDaleEffect effect) {
+    private WulfgarOfIcewindDaleEffect(final WulfgarOfIcewindDaleEffect effect) {
         super(effect);
     }
 
@@ -78,6 +78,10 @@ class WulfgarOfIcewindDaleEffect extends ReplacementEffectImpl {
             return false;
         }
         GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        if (sourceEvent == null) {
+            return false;
+        }
+
         switch (sourceEvent.getType()) {
             case ATTACKER_DECLARED:
                 return source.isControlledBy(sourceEvent.getPlayerId());

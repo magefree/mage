@@ -48,7 +48,7 @@ public final class CruelSadist extends CardImpl {
                 new DamageTargetEffect(RemovedCountersForCostValue.instance, "it"), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

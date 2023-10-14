@@ -67,7 +67,7 @@ class Scarmaker extends TokenImpl {
 
     Scarmaker() {
         super("Scarmaker", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SPIRIT);
@@ -82,7 +82,7 @@ class Scarmaker extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public Scarmaker(final Scarmaker token) {
+    private Scarmaker(final Scarmaker token) {
         super(token);
     }
 

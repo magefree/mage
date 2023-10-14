@@ -71,7 +71,7 @@ class LichLifeGainReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would gain life, draw that many cards instead";
     }
 
-    LichLifeGainReplacementEffect(final LichLifeGainReplacementEffect effect) {
+    private LichLifeGainReplacementEffect(final LichLifeGainReplacementEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class LichDamageTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LichDamageEffect(), false);
     }
 
-    LichDamageTriggeredAbility(final LichDamageTriggeredAbility ability) {
+    private LichDamageTriggeredAbility(final LichDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -153,7 +153,7 @@ class LichDamageEffect extends OneShotEffect {
         this.staticText = "sacrifice that many nontoken permanents. If you can't, you lose the game";
     }
     
-    LichDamageEffect(final LichDamageEffect effect) {
+    private LichDamageEffect(final LichDamageEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

@@ -25,7 +25,7 @@ import mage.target.TargetSpell;
  */
 public final class HydromorphGuardian extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
+    private static final FilterSpell filter = new FilterSpell("spell that targets a creature you control");
 
     static {
         filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));

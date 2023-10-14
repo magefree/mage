@@ -27,7 +27,7 @@ public final class GahijiHonoredOne extends CardImpl {
 
     public GahijiHonoredOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(4);
@@ -58,7 +58,7 @@ class GahijiHonoredOneTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public GahijiHonoredOneTriggeredAbility(final GahijiHonoredOneTriggeredAbility ability) {
+    private GahijiHonoredOneTriggeredAbility(final GahijiHonoredOneTriggeredAbility ability) {
         super(ability);
     }
 

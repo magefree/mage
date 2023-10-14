@@ -53,7 +53,7 @@ class EvolutionaryEscalationEffect extends OneShotEffect {
         staticText = "put three +1/+1 counters on target creature you control and three +1/+1 counters on target creature an opponent controls";
     }
 
-    public EvolutionaryEscalationEffect(final EvolutionaryEscalationEffect effect) {
+    private EvolutionaryEscalationEffect(final EvolutionaryEscalationEffect effect) {
         super(effect);
     }
 

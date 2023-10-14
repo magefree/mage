@@ -38,7 +38,7 @@ public final class SydriGalvanicGenius extends CardImpl {
 
     public SydriGalvanicGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -75,7 +75,7 @@ class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }
 
-    public SydriGalvanicGeniusEffect(final SydriGalvanicGeniusEffect effect) {
+    private SydriGalvanicGeniusEffect(final SydriGalvanicGeniusEffect effect) {
         super(effect);
     }
 

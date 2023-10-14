@@ -52,7 +52,7 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
                 "Otherwise, add {C}{G}{U}";
     }
 
-    public BountyOfTheLuxaEffect(final BountyOfTheLuxaEffect effect) {
+    private BountyOfTheLuxaEffect(final BountyOfTheLuxaEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,9 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
         if (bountyOfLuxa != null && bountyOfLuxa.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter()) {
             bountyOfLuxa = null;
         }
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         if (bountyOfLuxa != null
                 && bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) > 0) {

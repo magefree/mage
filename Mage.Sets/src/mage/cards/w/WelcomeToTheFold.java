@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,14 +15,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WelcomeToTheFold extends CardImpl {
 
     public WelcomeToTheFold(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
         // Madness {X}{U}{U} <i>(If you discard this card
         // discard it into exile. When you do
@@ -55,7 +55,7 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
         staticText = "Gain control of target creature if its toughness is 2 or less. If Welcome to the Fold's madness cost was paid, instead gain control of that creature if its toughness is X or less";
     }
 
-    public WelcomeToTheFoldEffect(GainControlTargetEffect effect) {
+    private WelcomeToTheFoldEffect(final WelcomeToTheFoldEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
     }
 
     @Override
-    public GainControlTargetEffect copy() {
+    public WelcomeToTheFoldEffect copy() {
         return new WelcomeToTheFoldEffect(this);
     }
 

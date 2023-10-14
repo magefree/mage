@@ -36,7 +36,7 @@ public final class KothFireOfResistance extends CardImpl {
     public KothFireOfResistance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOTH);
         this.setStartingLoyalty(4);
 

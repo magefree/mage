@@ -29,10 +29,6 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
     protected boolean forceQuotes = false;
 
-    public GainAbilityAllEffect(Ability ability, Duration duration) {
-        this(ability, duration, new FilterPermanent());
-    }
-
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter) {
         this(ability, duration, filter, false);
     }
@@ -43,11 +39,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
-        this(ability, duration, filter, excludeSource, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA);
-    }
-
-    public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource, Layer layer, SubLayer subLayer) {
-        super(duration, layer, subLayer, Outcome.AddAbility);
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability.copy();
         this.ability.newId();
         this.filter = filter;
@@ -56,7 +48,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         this.generateGainAbilityDependencies(ability, filter);
     }
 
-    public GainAbilityAllEffect(final GainAbilityAllEffect effect) {
+    protected GainAbilityAllEffect(final GainAbilityAllEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
@@ -157,7 +149,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             sb.append(CardUtil.getTextWithFirstCharUpperCase(ability.getRule()));
             sb.append('"');
         } else {
-            sb.append(ability.getRule());
+            sb.append(CardUtil.stripReminderText(ability.getRule()));
         }
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());

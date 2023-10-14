@@ -54,7 +54,7 @@ class EpicExperimentEffect extends OneShotEffect {
                 + "cards exiled this way that weren't cast into your graveyard";
     }
 
-    public EpicExperimentEffect(final EpicExperimentEffect effect) {
+    private EpicExperimentEffect(final EpicExperimentEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
         staticText = "The next creature card you play this turn can be played as though it had flash";
     }
 
-    public ScoutsWarningAsThoughEffect(final ScoutsWarningAsThoughEffect effect) {
+    private ScoutsWarningAsThoughEffect(final ScoutsWarningAsThoughEffect effect) {
         super(effect);
         this.watcher = effect.watcher;
         this.zoneChangeCounter = effect.zoneChangeCounter;

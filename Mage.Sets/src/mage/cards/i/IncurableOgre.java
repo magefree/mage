@@ -24,7 +24,7 @@ public final class IncurableOgre extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public IncurableOgre (final IncurableOgre card) {
+    private IncurableOgre(final IncurableOgre card) {
         super(card);
     }
 

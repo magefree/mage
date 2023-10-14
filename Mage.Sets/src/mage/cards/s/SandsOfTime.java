@@ -61,7 +61,7 @@ class SandsOfTimeEffect extends OneShotEffect {
         staticText = "that player simultaneously untaps each tapped artifact, creature, and land they control and taps each untapped artifact, creature, and land they control";
     }
 
-    public SandsOfTimeEffect(SandsOfTimeEffect copy) {
+    private SandsOfTimeEffect(final SandsOfTimeEffect copy) {
         super(copy);
     }
 

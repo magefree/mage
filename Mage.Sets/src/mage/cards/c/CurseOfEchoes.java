@@ -68,7 +68,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CurseOfEchoesEffect(), false);
     }
 
-    public CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
+    private CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -110,7 +110,7 @@ class CurseOfEchoesEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
+    private CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
         super(effect);
     }
 

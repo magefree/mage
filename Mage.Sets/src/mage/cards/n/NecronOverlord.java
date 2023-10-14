@@ -36,12 +36,12 @@ public final class NecronOverlord extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // Relentless Mind -- {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.
+        // Relentless March -- {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}"));
         ability.addTarget(new TargetOpponent());
         ability.addCost(new TapSourceCost());
-        ability.addCost(new NecronOverlordTapVariableArtifactCost().setText("Tap X untapped artifacts you control"));
-        ability.withFlavorWord("Relentless Mind");
+        ability.addCost(new NecronOverlordTapVariableArtifactCost());
+        ability.withFlavorWord("Relentless March");
         this.addAbility(ability);
 
     }
@@ -58,23 +58,12 @@ public final class NecronOverlord extends CardImpl {
 
 class NecronOverlordTapVariableArtifactCost extends VariableCostImpl {
 
-    public NecronOverlordTapVariableArtifactCost() {
-        this( 0);
-    }
-
-    public NecronOverlordTapVariableArtifactCost(String text) {
-        this(0, text);
-    }
-
-    public NecronOverlordTapVariableArtifactCost(int minimalCountersToPay) {
-        this( minimalCountersToPay, "");
-    }
-
-    public NecronOverlordTapVariableArtifactCost(int minimalCountersToPay, String text) {
+    NecronOverlordTapVariableArtifactCost() {
         super(VariableCostType.NORMAL, "x");
+        setText("Tap X untapped artifacts you control");
     }
 
-    public NecronOverlordTapVariableArtifactCost(final NecronOverlordTapVariableArtifactCost cost) {
+    private NecronOverlordTapVariableArtifactCost(final NecronOverlordTapVariableArtifactCost cost) {
         super(cost);
     }
 
@@ -86,8 +75,7 @@ class NecronOverlordTapVariableArtifactCost extends VariableCostImpl {
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
         TargetControlledPermanent target = new TargetControlledPermanent(xValue, xValue, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, true);
-        Cost targetCost = new TapTargetCost(target);
-        return targetCost;
+        return new TapTargetCost(target);
     }
 
     @Override

@@ -58,7 +58,7 @@ class MindblazeEffect extends OneShotEffect {
                 "{this} deals 8 damage to that player. Then that player shuffles";
     }
 
-    MindblazeEffect(final MindblazeEffect effect) {
+    private MindblazeEffect(final MindblazeEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class MindblazeEffect extends OneShotEffect {
         game.informPlayers(sourceObject.getIdName() + " - Chosen number: [" + numberChoice.getChoice() + ']');
 
         Cards cards = new CardsImpl();
-        cards.addAll(player.getLibrary().getCards(game));
+        cards.addAllCards(player.getLibrary().getCards(game));
         playerControls.revealCards("Library", cards, game);
         FilterCard filter = new FilterCard();
         filter.add(new NamePredicate(cardName));

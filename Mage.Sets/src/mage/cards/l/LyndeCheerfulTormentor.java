@@ -35,7 +35,7 @@ public final class LyndeCheerfulTormentor extends CardImpl {
     public LyndeCheerfulTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(2);
@@ -166,7 +166,7 @@ class LyndeCheerfulTormentorAttachCurseEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetPermanent targetPermanent = new TargetPermanent(filter);
-            targetPermanent.setNotTarget(true);
+            targetPermanent.withNotTarget(true);
             if (controller.chooseTarget(outcome, targetPermanent, source, game)) {
                 Permanent curse = game.getPermanent(targetPermanent.getFirstTarget());
                 if (curse != null) {

@@ -31,10 +31,10 @@ public class AwakenAbility extends SpellAbility {
 
     private static final Logger logger = Logger.getLogger(AwakenAbility.class);
 
-    static private String filterMessage = "a land you control to awake";
+    private static final String filterMessage = "a land you control to awake";
 
-    private String rule;
-    private int awakenValue;
+    private final String rule;
+    private final int awakenValue;
 
     public AwakenAbility(Card card, int awakenValue, String awakenCosts) {
         super(card.getSpellAbility());
@@ -43,9 +43,9 @@ public class AwakenAbility extends SpellAbility {
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
 
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
-        this.addManaCost(new ManaCostsImpl<>(awakenCosts));
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
+        this.addCost(new ManaCostsImpl<>(awakenCosts));
 
         this.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent(filterMessage)));
         this.addEffect(new AwakenEffect());
@@ -56,7 +56,7 @@ public class AwakenAbility extends SpellAbility {
                 + " +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)</i>";
     }
 
-    public AwakenAbility(final AwakenAbility ability) {
+    protected AwakenAbility(final AwakenAbility ability) {
         super(ability);
         this.awakenValue = ability.awakenValue;
         this.rule = ability.rule;
@@ -84,7 +84,7 @@ public class AwakenAbility extends SpellAbility {
             this.staticText = "put " + CardUtil.numberToText(awakenValue, "a") + " +1/+1 counters on target land you control";
         }
 
-        public AwakenEffect(final AwakenEffect effect) {
+        protected AwakenEffect(final AwakenEffect effect) {
             super(effect);
         }
 
@@ -142,7 +142,7 @@ class AwakenElementalToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public AwakenElementalToken(final AwakenElementalToken token) {
+    protected AwakenElementalToken(final AwakenElementalToken token) {
         super(token);
     }
 

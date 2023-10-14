@@ -15,7 +15,7 @@ public final class MyrToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public MyrToken(final MyrToken token) {
+    protected MyrToken(final MyrToken token) {
         super(token);
     }
 

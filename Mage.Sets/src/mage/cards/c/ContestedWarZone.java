@@ -57,7 +57,7 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ContestedWarZoneEffect());
     }
 
-    public ContestedWarZoneAbility(final ContestedWarZoneAbility ability) {
+    private ContestedWarZoneAbility(final ContestedWarZoneAbility ability) {
         super(ability);
     }
 
@@ -98,7 +98,7 @@ class ContestedWarZoneEffect extends ContinuousEffectImpl {
         this.staticText = "Gain control of {this}";
     }
 
-    public ContestedWarZoneEffect(final ContestedWarZoneEffect effect) {
+    private ContestedWarZoneEffect(final ContestedWarZoneEffect effect) {
         super(effect);
     }
 

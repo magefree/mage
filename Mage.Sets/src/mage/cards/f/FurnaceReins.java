@@ -1,6 +1,6 @@
 package mage.cards.f;
 
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -30,9 +30,9 @@ public final class FurnaceReins extends CardImpl {
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("Until end of turn, it gains haste"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
-                new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(
                         new CreateTokenEffect(new TreasureToken()), false
-                ).setOrBattle(true), Duration.EndOfTurn
+                ), Duration.EndOfTurn
         ).setText("and \"Whenever this creature deals combat damage to a player or battle, create a Treasure token.\""));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

@@ -1,7 +1,7 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,15 +14,12 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +37,8 @@ public final class ScourgeOfNelToth extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // You may cast Scourge of Nel Toth from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ScourgeOfNelTothPlayEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ScourgeOfNelTothPlayEffect())
+                .setIdentifier(MageIdentifier.ScourgeOfNelTothAlternateCast));
     }
 
     private ScourgeOfNelToth(final ScourgeOfNelToth card) {
@@ -60,7 +58,7 @@ class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost";
     }
 
-    public ScourgeOfNelTothPlayEffect(final ScourgeOfNelTothPlayEffect effect) {
+    private ScourgeOfNelTothPlayEffect(final ScourgeOfNelTothPlayEffect effect) {
         super(effect);
     }
 
@@ -80,10 +78,12 @@ class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
             if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
-                    // can sometimes be cast with base mana cost from grave????
                     Costs<Cost> costs = new CostsImpl<>();
                     costs.add(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));
-                    player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{B}{B}"), costs);
+                    player.setCastSourceIdWithAlternateMana(
+                            sourceId, new ManaCostsImpl<>("{B}{B}"), costs,
+                            MageIdentifier.ScourgeOfNelTothAlternateCast
+                    );
                     return true;
                 }
             }

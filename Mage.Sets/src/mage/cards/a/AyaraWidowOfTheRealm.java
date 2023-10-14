@@ -8,7 +8,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
+import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class AyaraWidowOfTheRealm extends CardImpl {
 
-    private static final DynamicValue xValue = new SacrificeCostConvertedMana("permanent");
+    private static final DynamicValue xValue = SacrificeCostManaValue.PERMANENT;
     private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer(
             "opponent or battle", StaticFilters.FILTER_PERMANENT_BATTLE, new FilterOpponent()
     );
@@ -38,7 +38,7 @@ public final class AyaraWidowOfTheRealm extends CardImpl {
     public AyaraWidowOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(3);

@@ -37,7 +37,7 @@ public final class RugOfSmothering extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(
                 new RugOfSmotheringEffect(), StaticFilters.FILTER_SPELL_A,
                 false, SetTargetPointer.PLAYER
-        ), new SpellsCastWatcher());
+        ));
     }
 
     private RugOfSmothering(final RugOfSmothering card) {

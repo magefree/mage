@@ -39,7 +39,7 @@ public final class KavuMauler extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Kavu Mauler attacks, it gets +1/+1 until end of turn for each other attacking Kavu.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it"), false));
     }
 
     private KavuMauler(final KavuMauler card) {

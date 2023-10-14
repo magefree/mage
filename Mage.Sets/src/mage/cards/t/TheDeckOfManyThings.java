@@ -35,7 +35,7 @@ public final class TheDeckOfManyThings extends CardImpl {
     public TheDeckOfManyThings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {2}, {T}: Roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand.
         // 1-9 | Return a card at random from your graveyard to your hand.
@@ -113,7 +113,7 @@ class TheDeckOfManyThingsRandomEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD);
         target.setRandom(true);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.chooseTarget(outcome, player.getId(), source, game);
 
         Card card = game.getCard(target.getFirstTarget());
@@ -145,7 +145,7 @@ class TheDeckOfManyThingsReturnEffect extends OneShotEffect {
             return false;
         }
         TargetCardInGraveyard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }

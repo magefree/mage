@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -24,6 +23,8 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
@@ -31,7 +32,7 @@ public final class SkyfireKirin extends CardImpl {
 
     public SkyfireKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
 
@@ -42,8 +43,9 @@ public final class SkyfireKirin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                Zone.BATTLEFIELD, new SkyfireKirinEffect(),
-                StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true, true
+                new SkyfireKirinEffect(),
+                StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD,
+                true, SetTargetPointer.SPELL
         );
         ability.addTarget(new TargetCreaturePermanent());
         ability.setTargetAdjuster(SkyfireKirinAdjuster.instance);
@@ -83,7 +85,7 @@ class SkyfireKirinEffect extends OneShotEffect {
         this.staticText = "you may gain control of target creature with that spell's mana value until end of turn";
     }
 
-    public SkyfireKirinEffect(final SkyfireKirinEffect effect) {
+    private SkyfireKirinEffect(final SkyfireKirinEffect effect) {
         super(effect);
     }
 

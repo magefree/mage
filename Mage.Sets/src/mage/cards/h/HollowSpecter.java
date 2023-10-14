@@ -10,12 +10,10 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.ManaUtil;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -55,7 +53,7 @@ class HollowSpecterEffect extends OneShotEffect {
         staticText = "you may pay {X}. If you do, that player reveals X cards from their hand and you choose one of them. That player discards that card";
     }
 
-    public HollowSpecterEffect(final HollowSpecterEffect effect) {
+    private HollowSpecterEffect(final HollowSpecterEffect effect) {
         super(effect);
     }
 
@@ -72,7 +70,7 @@ class HollowSpecterEffect extends OneShotEffect {
         if (targetPlayer != null && controller != null && controller.chooseUse(Outcome.Benefit, "Pay {X}?", source, game)) {
             int payCount = ManaUtil.playerPaysXGenericMana(true, "Hollow Specter", controller, source, game);
             if (payCount > 0) {
-                return new DiscardCardYouChooseTargetEffect(TargetController.ANY, payCount).setTargetPointer(targetPointer).apply(game, source);
+                return new DiscardCardYouChooseTargetEffect(payCount).setTargetPointer(targetPointer).apply(game, source);
             }
             return true;
         }

@@ -36,15 +36,15 @@ public class PlayGameTest extends MageTestBase {
     @Ignore
     @Test
     public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 60, 20, 7);
 
         Player computerA = createPlayer("ComputerA", PlayerType.COMPUTER_MINIMAX_HYBRID);
 //        Player playerA = createPlayer("ComputerA", "Computer - mad");
 //        Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
         Deck deck = generateRandomDeck();
 
-        if (deck.getCards().size() < DECK_SIZE) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck.getCards().size() + ", but must be " + DECK_SIZE);
+        if (deck.getMaindeckCards().size() < DECK_SIZE) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck.getMaindeckCards().size() + ", but must be " + DECK_SIZE);
         }
         game.addPlayer(computerA, deck);
         game.loadCards(deck.getCards(), computerA.getId());
@@ -53,8 +53,8 @@ public class PlayGameTest extends MageTestBase {
 //        Player playerB = createPlayer("ComputerB", "Computer - mad");
 //        Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
         Deck deck2 = generateRandomDeck();
-        if (deck2.getCards().size() < DECK_SIZE) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck2.getCards().size() + ", but must be " + DECK_SIZE);
+        if (deck2.getMaindeckCards().size() < DECK_SIZE) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck2.getMaindeckCards().size() + ", but must be " + DECK_SIZE);
         }
         game.addPlayer(computerB, deck2);
         game.loadCards(deck2.getCards(), computerB.getId());

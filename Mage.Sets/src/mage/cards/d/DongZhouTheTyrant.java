@@ -22,7 +22,7 @@ public final class DongZhouTheTyrant extends CardImpl {
 
     public DongZhouTheTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -51,7 +51,7 @@ class DongZhouTheTyrantEffect extends OneShotEffect {
         staticText = "target creature an opponent controls deals damage equal to its power to that player";
     }
 
-    public DongZhouTheTyrantEffect(final DongZhouTheTyrantEffect effect) {
+    private DongZhouTheTyrantEffect(final DongZhouTheTyrantEffect effect) {
         super(effect);
     }
 

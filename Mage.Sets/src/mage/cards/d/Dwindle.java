@@ -59,7 +59,7 @@ class DwindleTriggeredAbility extends BlocksAttachedTriggeredAbility {
         super(new DestroyAttachedToEffect(""), "", false);
     }
 
-    DwindleTriggeredAbility(final DwindleTriggeredAbility ability) {
+    private DwindleTriggeredAbility(final DwindleTriggeredAbility ability) {
         super(ability);
     }
 

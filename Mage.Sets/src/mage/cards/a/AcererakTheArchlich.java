@@ -34,7 +34,7 @@ public final class AcererakTheArchlich extends CardImpl {
     public AcererakTheArchlich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
@@ -102,7 +102,7 @@ class AcererakTheArchlichEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetControlledCreaturePermanent(0, 1);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null && permanent.sacrifice(source, game)) {

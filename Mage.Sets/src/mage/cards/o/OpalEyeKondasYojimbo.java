@@ -29,7 +29,7 @@ public final class OpalEyeKondasYojimbo extends CardImpl {
 
     public OpalEyeKondasYojimbo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.SAMURAI);
 
@@ -70,7 +70,7 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl {
         this.target = new TargetSource();
     }
 
-    OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
+    private OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

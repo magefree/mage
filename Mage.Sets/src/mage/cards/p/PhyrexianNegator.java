@@ -53,7 +53,7 @@ class PhyrexianNegatorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 0,""));
     }
 
-    PhyrexianNegatorTriggeredAbility(final PhyrexianNegatorTriggeredAbility ability) {
+    private PhyrexianNegatorTriggeredAbility(final PhyrexianNegatorTriggeredAbility ability) {
         super(ability);
     }
     

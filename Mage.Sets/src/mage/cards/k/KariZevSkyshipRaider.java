@@ -28,7 +28,7 @@ public final class KariZevSkyshipRaider extends CardImpl {
     public KariZevSkyshipRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(1);
@@ -61,7 +61,7 @@ class KariZevSkyshipRaiderEffect extends OneShotEffect {
         staticText = "create Ragavan, a legendary 2/1 red Monkey creature token. Ragavan enters the battlefield tapped and attacking. Exile that token at end of combat";
     }
 
-    KariZevSkyshipRaiderEffect(final KariZevSkyshipRaiderEffect effect) {
+    private KariZevSkyshipRaiderEffect(final KariZevSkyshipRaiderEffect effect) {
         super(effect);
     }
 

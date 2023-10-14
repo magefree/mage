@@ -52,7 +52,7 @@ class CulturalExchangeEffect extends OneShotEffect {
                 + "Those players exchange control of those creatures.";
     }
 
-    CulturalExchangeEffect(final CulturalExchangeEffect effect) {
+    private CulturalExchangeEffect(final CulturalExchangeEffect effect) {
         super(effect);
     }
 

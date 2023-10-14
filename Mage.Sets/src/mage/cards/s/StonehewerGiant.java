@@ -68,7 +68,7 @@ class StonehewerGiantEffect extends OneShotEffect {
         this.staticText = "search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle";
     }
 
-    public StonehewerGiantEffect(final StonehewerGiantEffect effect) {
+    private StonehewerGiantEffect(final StonehewerGiantEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class StonehewerGiantEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent equipment = game.getPermanent(card.getId());
                 Target targetCreature = new TargetControlledCreaturePermanent();
-                targetCreature.setNotTarget(true);
+                targetCreature.withNotTarget(true);
                 if (equipment != null && controller.choose(Outcome.BoostCreature, targetCreature, source, game)) {
                     Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
                     permanent.addAttachment(equipment.getId(), source, game);

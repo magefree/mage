@@ -25,7 +25,7 @@ public final class UrgorosTheEmptyOne extends CardImpl {
     public UrgorosTheEmptyOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPECTER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -54,7 +54,7 @@ class UrgorosTheEmptyOneEffect extends OneShotEffect {
         this.staticText = "that player discards a card at random. If the player can't, you draw a card";
     }
 
-    public UrgorosTheEmptyOneEffect(final UrgorosTheEmptyOneEffect effect) {
+    private UrgorosTheEmptyOneEffect(final UrgorosTheEmptyOneEffect effect) {
         super(effect);
     }
 

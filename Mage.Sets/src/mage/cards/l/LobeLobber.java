@@ -56,7 +56,7 @@ class LobeLobberEffect extends OneShotEffect {
         this.staticText = "This creature deals 1 damage to target player. Roll a six-sided die. On a 5 or higher, untap it";
     }
 
-    public LobeLobberEffect(final LobeLobberEffect effect) {
+    private LobeLobberEffect(final LobeLobberEffect effect) {
         super(effect);
     }
 

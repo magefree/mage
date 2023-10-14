@@ -59,7 +59,7 @@ class FuneralMarchTriggeredAbility extends ZoneChangeTriggeredAbility {
         super(Zone.BATTLEFIELD, null, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "its controller"), "When enchanted creature leaves the battlefield, ", false);
     }
 
-    public FuneralMarchTriggeredAbility(final FuneralMarchTriggeredAbility ability) {
+    private FuneralMarchTriggeredAbility(final FuneralMarchTriggeredAbility ability) {
         super(ability);
     }
 

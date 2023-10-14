@@ -52,7 +52,7 @@ class PacksDisdainEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control";
     }
 
-    PacksDisdainEffect(final PacksDisdainEffect effect) {
+    private PacksDisdainEffect(final PacksDisdainEffect effect) {
         super(effect);
     }
 

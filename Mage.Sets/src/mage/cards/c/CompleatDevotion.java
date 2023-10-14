@@ -44,7 +44,7 @@ class CompleatDevotionEffect extends OneShotEffect {
         staticText = "";
     }
 
-    public CompleatDevotionEffect(final CompleatDevotionEffect effect) {
+    private CompleatDevotionEffect(final CompleatDevotionEffect effect) {
         super(effect);
     }
 

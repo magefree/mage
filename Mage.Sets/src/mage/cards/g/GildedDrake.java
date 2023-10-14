@@ -61,7 +61,7 @@ class GildedDrakeEffect extends OneShotEffect {
         this.staticText = "exchange control of {this} and up to one target creature an opponent controls. If you don't or can't make an exchange, sacrifice {this}. This ability still resolves if its target becomes illegal";
     }
 
-    public GildedDrakeEffect(final GildedDrakeEffect effect) {
+    private GildedDrakeEffect(final GildedDrakeEffect effect) {
         super(effect);
     }
 

@@ -5,19 +5,21 @@ import mage.abilities.common.BecomesClassLevelTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.effects.common.replacement.GainPlusOneLifeReplacementEffect;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -39,7 +41,7 @@ public final class ClericClass extends CardImpl {
         this.addAbility(new ClassReminderAbility());
 
         // If you would gain life, you gain that much life plus 1 instead.
-        this.addAbility(new SimpleStaticAbility(new ClericClassLifeEffect()));
+        this.addAbility(new SimpleStaticAbility(new GainPlusOneLifeReplacementEffect()));
 
         // {3}{W}: Level 2
         this.addAbility(new ClassLevelAbility(2, "{3}{W}"));
@@ -67,44 +69,6 @@ public final class ClericClass extends CardImpl {
     @Override
     public ClericClass copy() {
         return new ClericClass(this);
-    }
-}
-
-class ClericClassLifeEffect extends ReplacementEffectImpl {
-
-    ClericClassLifeEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would gain life, you gain that much life plus 1 instead";
-    }
-
-    private ClericClassLifeEffect(final ClericClassLifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ClericClassLifeEffect copy() {
-        return new ClericClassLifeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.GAIN_LIFE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.isControlledBy(event.getPlayerId());
     }
 }
 

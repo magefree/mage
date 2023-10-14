@@ -56,7 +56,7 @@ class BoneMaskEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public BoneMaskEffect(final BoneMaskEffect effect) {
+    private BoneMaskEffect(final BoneMaskEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

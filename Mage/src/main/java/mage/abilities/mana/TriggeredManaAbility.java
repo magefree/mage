@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import mage.constants.ManaType;
 
 /**
@@ -22,7 +23,7 @@ import mage.constants.ManaType;
 public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implements ManaAbility {
 
     protected List<Mana> netMana = new ArrayList<>();
-        protected boolean poolDependant;
+    protected boolean poolDependant;
 
     public TriggeredManaAbility(Zone zone, ManaEffect effect) {
         this(zone, effect, false);
@@ -35,7 +36,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
 
     }
 
-    public TriggeredManaAbility(final TriggeredManaAbility ability) {
+    protected TriggeredManaAbility(final TriggeredManaAbility ability) {
         super(ability);
         this.netMana.addAll(ability.netMana);
         this.poolDependant = ability.poolDependant;
@@ -61,7 +62,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
         }
         return new ArrayList<>(netMana);
     }
-    
+
     @Override
     public List<Mana> getNetMana(Game game, Mana possibleManaInPool) {
         if (isPoolDependant()) {
@@ -74,11 +75,11 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
                     }
                 }
             }
-            return poolDependantNetMana;            
+            return poolDependantNetMana;
         }
         return getNetMana(game);
     }
-    
+
     @Override
     public Set<ManaType> getProducableManaTypes(Game game) {
         Set<ManaType> manaTypes = new HashSet<>();
@@ -89,7 +90,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
         }
         return manaTypes;
     }
-    
+
     /**
      * Used to check if the ability itself defines mana types it can produce.
      *
@@ -109,6 +110,6 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
     public TriggeredManaAbility setPoolDependant(boolean poolDependant) {
         this.poolDependant = poolDependant;
         return this;
-    }    
-    
+    }
+
 }

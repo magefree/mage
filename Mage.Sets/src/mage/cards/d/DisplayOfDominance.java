@@ -71,18 +71,13 @@ class DisplayOfDominanceEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "permanents you control can't be the targets of blue or black spells your opponents control this turn";
     }
 
-    public DisplayOfDominanceEffect(final DisplayOfDominanceEffect effect) {
+    private DisplayOfDominanceEffect(final DisplayOfDominanceEffect effect) {
         super(effect);
     }
 
     @Override
     public DisplayOfDominanceEffect copy() {
         return new DisplayOfDominanceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

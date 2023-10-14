@@ -75,7 +75,7 @@ class DistendedMindbenderEffect extends OneShotEffect {
                 "That player discards those cards.";
     }
 
-    public DistendedMindbenderEffect(final DistendedMindbenderEffect effect) {
+    private DistendedMindbenderEffect(final DistendedMindbenderEffect effect) {
         super(effect);
     }
 

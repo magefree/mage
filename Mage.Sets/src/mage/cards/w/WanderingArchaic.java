@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class WanderingArchaic extends ModalDoubleFacesCard {
+public final class WanderingArchaic extends ModalDoubleFacedCard {
 
     public WanderingArchaic(UUID ownerId, CardSetInfo setInfo) {
         super(

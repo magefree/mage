@@ -25,7 +25,7 @@ public final class TheManaRig extends CardImpl {
 
     public TheManaRig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you cast a multicolored spell, create a tapped Powerstone token.
         this.addAbility(new SpellCastControllerTriggeredAbility(

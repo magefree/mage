@@ -50,7 +50,7 @@ class PyroblastCounterTargetEffect extends OneShotEffect {
         this.staticText = "Counter target spell if it's blue";
     }
 
-    public PyroblastCounterTargetEffect(final PyroblastCounterTargetEffect effect) {
+    private PyroblastCounterTargetEffect(final PyroblastCounterTargetEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class PyroblastDestroyTargetEffect extends OneShotEffect {
         this.staticText = "Destroy target permanent if it's blue";
     }
 
-    public PyroblastDestroyTargetEffect(final PyroblastDestroyTargetEffect effect) {
+    private PyroblastDestroyTargetEffect(final PyroblastDestroyTargetEffect effect) {
         super(effect);
     }
 

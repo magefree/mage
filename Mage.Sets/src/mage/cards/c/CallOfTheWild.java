@@ -44,7 +44,7 @@ class CallOfTheWildEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard";
     }
 
-    public CallOfTheWildEffect(final CallOfTheWildEffect effect) {
+    private CallOfTheWildEffect(final CallOfTheWildEffect effect) {
         super(effect);
     }
 

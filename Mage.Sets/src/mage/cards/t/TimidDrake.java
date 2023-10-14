@@ -1,30 +1,22 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author TheElk801
  */
 public final class TimidDrake extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public TimidDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -38,7 +30,8 @@ public final class TimidDrake extends CardImpl {
 
         // When another creature enters the battlefield, return Timid Drake to its owner's hand.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), filter, false,
+                Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true),
+                StaticFilters.FILTER_ANOTHER_CREATURE, false,
                 "When another creature enters the battlefield, return {this} to its owner's hand."
         ));
     }

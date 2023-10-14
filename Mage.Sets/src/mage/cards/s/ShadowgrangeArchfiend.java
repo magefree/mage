@@ -69,7 +69,9 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {return false; }
+        if (controller == null) {
+            return false;
+        }
 
         List<Permanent> toSacrifice = new ArrayList<>();
 

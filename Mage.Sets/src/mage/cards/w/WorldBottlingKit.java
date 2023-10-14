@@ -52,7 +52,7 @@ class WorldBottlingKitEffect extends OneShotEffect {
         this.staticText = "Choose a Magic set. Exile all permanents with that set's expansion symbol except for basic lands";
     }
 
-    public WorldBottlingKitEffect(final WorldBottlingKitEffect effect) {
+    private WorldBottlingKitEffect(final WorldBottlingKitEffect effect) {
         super(effect);
     }
 

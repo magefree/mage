@@ -47,7 +47,7 @@ class RhysticStudyDrawEffect extends OneShotEffect {
         this.staticText = "you may draw a card unless that player pays {1}";
     }
 
-    public RhysticStudyDrawEffect(final RhysticStudyDrawEffect effect) {
+    private RhysticStudyDrawEffect(final RhysticStudyDrawEffect effect) {
         super(effect);
     }
 

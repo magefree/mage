@@ -27,7 +27,7 @@ public final class Mutavault extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BecomesCreatureSourceEffect(new MutavaultToken(), "land", Duration.EndOfTurn),
+                new BecomesCreatureSourceEffect(new MutavaultToken(), CardType.LAND, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}")));
     }
 
@@ -50,7 +50,7 @@ class MutavaultToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
-    public MutavaultToken(final MutavaultToken token) {
+    private MutavaultToken(final MutavaultToken token) {
         super(token);
     }
 

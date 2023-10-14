@@ -54,7 +54,7 @@ public final class PrimalCommand extends CardImpl {
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
         // or search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
-        mode = new Mode(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true, true));
+        mode = new Mode(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true));
         this.getSpellAbility().getModes().addMode(mode);
 
     }
@@ -76,7 +76,7 @@ class PrimalCommandShuffleGraveyardEffect extends OneShotEffect {
         this.staticText = "target player shuffles their graveyard into their library";
     }
 
-    public PrimalCommandShuffleGraveyardEffect(final PrimalCommandShuffleGraveyardEffect effect) {
+    private PrimalCommandShuffleGraveyardEffect(final PrimalCommandShuffleGraveyardEffect effect) {
         super(effect);
     }
 

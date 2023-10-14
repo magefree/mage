@@ -3,6 +3,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.choices.ChoiceImpl;
@@ -13,7 +14,6 @@ import mage.players.Player;
 import mage.target.Target;
 
 /**
- *
  * @author a
  */
 public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEffect {
@@ -29,7 +29,7 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
         this.ability2 = ability2;
     }
 
-    public LoseAbilityOrAnotherAbilityTargetEffect(final LoseAbilityOrAnotherAbilityTargetEffect effect) {
+    protected LoseAbilityOrAnotherAbilityTargetEffect(final LoseAbilityOrAnotherAbilityTargetEffect effect) {
         super(effect);
         this.ability2 = effect.ability2.copy();
     }

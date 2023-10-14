@@ -1,8 +1,10 @@
 package mage.util.functions;
 
 import mage.MageObject;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.SuperType;
@@ -82,6 +84,14 @@ public class CopyTokenFunction {
             if (((Card) sourceObj).isTransformable()) {
                 copyToToken(target.getBackFace(), ((Card) sourceObj).getSecondCardFace(), game);
                 CardUtil.copySetAndCardNumber(target.getBackFace(), ((Card) sourceObj).getSecondCardFace());
+            }
+            if (((PermanentCard) source).isPrototyped()){
+                Abilities<Ability> abilities = source.getAbilities();
+                for (Ability ability : abilities){
+                    if (ability instanceof PrototypeAbility) {
+                        ((PrototypeAbility) ability).prototypePermanent(target, game);
+                    }
+                }
             }
             return;
         }

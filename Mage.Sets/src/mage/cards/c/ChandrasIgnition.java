@@ -44,7 +44,7 @@ class ChandrasIgnitionEffect extends OneShotEffect {
         this.staticText = "Target creature you control deals damage equal to its power to each other creature and each opponent";
     }
 
-    public ChandrasIgnitionEffect(final ChandrasIgnitionEffect effect) {
+    private ChandrasIgnitionEffect(final ChandrasIgnitionEffect effect) {
         super(effect);
     }
 

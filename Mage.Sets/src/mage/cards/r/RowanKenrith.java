@@ -30,7 +30,7 @@ public final class RowanKenrith extends CardImpl {
     public RowanKenrith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROWAN);
         this.setStartingLoyalty(4);
 
@@ -75,7 +75,7 @@ class RowanKenrithAttackEffect extends RequirementEffect {
         staticText = "During target player's next turn, each creature that player controls attacks if able";
     }
 
-    public RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
+    private RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class RowanKenrithDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals 3 damage to each tapped creature target player controls";
     }
 
-    RowanKenrithDamageEffect(final RowanKenrithDamageEffect effect) {
+    private RowanKenrithDamageEffect(final RowanKenrithDamageEffect effect) {
         super(effect);
     }
 

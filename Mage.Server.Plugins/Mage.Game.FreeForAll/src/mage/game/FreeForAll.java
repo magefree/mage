@@ -7,15 +7,15 @@ import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FreeForAll extends GameImpl {
 
     private int numPlayers;
 
-    public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+    public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range,
+                      Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 60, startLife, startHandSize);
     }
 
     public FreeForAll(final FreeForAll game) {

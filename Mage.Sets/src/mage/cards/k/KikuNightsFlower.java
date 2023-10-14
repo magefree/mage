@@ -28,7 +28,7 @@ public final class KikuNightsFlower extends CardImpl {
 
     public KikuNightsFlower (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ASSASSIN);
 
@@ -47,7 +47,7 @@ public final class KikuNightsFlower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KikuNightsFlower (final KikuNightsFlower card) {
+    private KikuNightsFlower(final KikuNightsFlower card) {
         super(card);
     }
 
@@ -64,7 +64,7 @@ class KikuNightsFlowerEffect extends OneShotEffect {
             this.staticText = "Target creature deals damage to itself equal to its power";        
         }
 
-    public KikuNightsFlowerEffect(final KikuNightsFlowerEffect effect) {
+    private KikuNightsFlowerEffect(final KikuNightsFlowerEffect effect) {
         super(effect);
     }
 

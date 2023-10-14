@@ -43,7 +43,7 @@ public final class CommodoreGuff extends CardImpl {
     public CommodoreGuff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GUFF);
         this.setStartingLoyalty(5);
 

@@ -44,7 +44,7 @@ class SpipTurnEffect extends OneShotEffect {
         staticText = "You skip your next turn";
     }
 
-    public SpipTurnEffect(final SpipTurnEffect effect) {
+    private SpipTurnEffect(final SpipTurnEffect effect) {
         super(effect);
     }
 
@@ -55,7 +55,7 @@ class SpipTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), true));
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withSkipTurn());
         return true;
     }
 

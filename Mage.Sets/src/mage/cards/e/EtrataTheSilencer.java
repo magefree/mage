@@ -35,7 +35,7 @@ public final class EtrataTheSilencer extends CardImpl {
     public EtrataTheSilencer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(3);
@@ -64,7 +64,7 @@ class EtrataTheSilencerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EtrataTheSilencerEffect());
     }
 
-    public EtrataTheSilencerTriggeredAbility(final EtrataTheSilencerTriggeredAbility ability) {
+    private EtrataTheSilencerTriggeredAbility(final EtrataTheSilencerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -117,7 +117,7 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public EtrataTheSilencerEffect(final EtrataTheSilencerEffect effect) {
+    private EtrataTheSilencerEffect(final EtrataTheSilencerEffect effect) {
         super(effect);
     }
 

@@ -10,6 +10,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.CommanderCardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterMana;
 import mage.game.Game;
@@ -32,7 +33,7 @@ public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl 
         super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(), cost);
     }
 
-    public CommanderColorIdentityManaAbility(final CommanderColorIdentityManaAbility ability) {
+    protected CommanderColorIdentityManaAbility(final CommanderColorIdentityManaAbility ability) {
         super(ability);
     }
 
@@ -55,7 +56,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
         this.staticText = "Add one mana of any color in your commander's color identity";
     }
 
-    public CommanderIdentityManaEffect(final CommanderIdentityManaEffect effect) {
+    protected CommanderIdentityManaEffect(final CommanderIdentityManaEffect effect) {
         super(effect);
     }
 
@@ -132,7 +133,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
-                    if (!controller.choose(outcome, choice, game)) {
+                    if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
                         return mana;
                     }
                 }

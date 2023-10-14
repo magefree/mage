@@ -1,6 +1,7 @@
 package mage.abilities.effects;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -24,7 +25,6 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
 import mage.util.trace.TraceInfo;
 import org.apache.log4j.Logger;
 
@@ -66,7 +66,7 @@ public class ContinuousEffects implements Serializable {
         collectAllEffects();
     }
 
-    public ContinuousEffects(final ContinuousEffects effect) {
+    protected ContinuousEffects(final ContinuousEffects effect) {
         applyCounters = effect.applyCounters.copy();
         auraReplacementEffect = effect.auraReplacementEffect.copy();
         layeredEffects = effect.layeredEffects.copy();
@@ -507,20 +507,21 @@ public class ContinuousEffects implements Serializable {
      * @param affectedAbility null if check full object or ability if check only one ability from that object
      * @param controllerId
      * @param game
-     * @return sourceId of the permitting effect if any exists otherwise returns null
+     * @return Set of all the ApprovingObject related to that asThough.
      */
-    public ApprovingObject asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    public Set<ApprovingObject> asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+        Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
 
         // usage check: effect must apply for specific ability only, not to full object (example: PLAY_FROM_NOT_OWN_HAND_ZONE)
         if (type.needAffectedAbility() && affectedAbility == null) {
-            throw new IllegalArgumentException("ERROR, you can't call asThough check to whole object, call it with affected ability instead: " + type);
+            throw new IllegalArgumentException("Wrong code usage: you can't call asThough check to whole object, call it with affected ability instead: " + type);
         }
 
         // usage check: effect must apply to full object, not specific ability (example: ATTACK_AS_HASTE)
         // P.S. In theory a same AsThough effect can be applied to object or to ability, so if you really, really
         // need it then disable that check or add extra param to AsThoughEffectType like needAffectedAbilityOrFullObject
         if (!type.needAffectedAbility() && affectedAbility != null) {
-            throw new IllegalArgumentException("ERROR, you can't call AsThough check to affected ability, call it with empty affected ability instead: " + type);
+            throw new IllegalArgumentException("Wrong code usage: you can't call AsThough check to affected ability, call it with empty affected ability instead: " + type);
         }
 
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
@@ -541,7 +542,7 @@ public class ContinuousEffects implements Serializable {
             } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
                 // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
                 idToCheck = ((AdventureCardSpell) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacesCardHalf) {
+            } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacedCardHalf) {
                 // each mdf side uses own characteristics to check for playing, all other cases must use main card
                 // rules:
                 // "If an effect allows you to play a land or cast a spell from among a group of cards,
@@ -549,23 +550,18 @@ public class ContinuousEffects implements Serializable {
                 // of that effect. For example, if Sejiri Shelter / Sejiri Glacier is in your graveyard
                 // and an effect allows you to play lands from your graveyard, you could play Sejiri Glacier.
                 // That effect doesn't allow you to cast Sejiri Shelter."
-                idToCheck = ((ModalDoubleFacesCardHalf) objectToCheck).getMainCard().getId();
+                idToCheck = ((ModalDoubleFacedCardHalf) objectToCheck).getMainCard().getId();
             } else {
                 idToCheck = objectId;
             }
 
-            Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
             for (AsThoughEffect effect : asThoughEffectsList) {
                 Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
                 for (Ability ability : abilities) {
                     if (affectedAbility == null) {
                         // applies to full object (one effect can be used in multiple abilities)
                         if (effect.applies(idToCheck, ability, controllerId, game)) {
-                            if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                                possibleApprovingObjects.add(new ApprovingObject(ability, game));
-                            } else {
-                                return new ApprovingObject(ability, game);
-                            }
+                            possibleApprovingObjects.add(new ApprovingObject(ability, game));
                         }
                     } else {
                         // applies to one affected ability
@@ -576,46 +572,13 @@ public class ContinuousEffects implements Serializable {
                         }
 
                         if (effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
-                            if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                                possibleApprovingObjects.add(new ApprovingObject(ability, game));
-                            } else {
-                                return new ApprovingObject(ability, game);
-                            }
+                            possibleApprovingObjects.add(new ApprovingObject(ability, game));
                         }
                     }
                 }
             }
-
-            if (possibleApprovingObjects.size() == 1) {
-                return possibleApprovingObjects.iterator().next();
-            } else if (possibleApprovingObjects.size() > 1) {
-                // Select the ability that you use to permit the action                
-                Map<String, String> keyChoices = new HashMap<>();
-                for (ApprovingObject approvingObject : possibleApprovingObjects) {
-                    MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-                    String choiceKey = approvingObject.getApprovingAbility().getId().toString();
-                    String choiceValue;
-                    if (mageObject == null) {
-                        choiceValue = approvingObject.getApprovingAbility().getRule();
-                    } else {
-                        choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
-                    }
-                    keyChoices.put(choiceKey, choiceValue);
-                }
-                Choice choicePermitting = new ChoiceImpl(true);
-                choicePermitting.setMessage("Choose the permitting object");
-                choicePermitting.setKeyChoices(keyChoices);
-                Player player = game.getPlayer(controllerId);
-                player.choose(Outcome.Detriment, choicePermitting, game);
-                for (ApprovingObject approvingObject : possibleApprovingObjects) {
-                    if (approvingObject.getApprovingAbility().getId().toString().equals(choicePermitting.getChoiceKey())) {
-                        return approvingObject;
-                    }
-                }
-            }
-
         }
-        return null;
+        return possibleApprovingObjects;
     }
 
     /**

@@ -27,7 +27,7 @@ public final class SearchForAzcanta extends CardImpl {
 
         this.secondSideCardClazz = mage.cards.a.AzcantaTheSunkenRuin.class;
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your upkeep, look at the top card of your library. You may put it into your graveyard. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
@@ -56,7 +56,7 @@ class SearchForAzcantaEffect extends OneShotEffect {
         this.staticText = "Then if you have seven or more cards in your graveyard, you may transform {this}.";
     }
 
-    public SearchForAzcantaEffect(final SearchForAzcantaEffect effect) {
+    private SearchForAzcantaEffect(final SearchForAzcantaEffect effect) {
         super(effect);
     }
 

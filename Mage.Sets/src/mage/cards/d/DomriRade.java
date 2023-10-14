@@ -27,7 +27,7 @@ public final class DomriRade extends CardImpl {
 
     public DomriRade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
 
         this.setStartingLoyalty(3);
@@ -67,7 +67,7 @@ class DomriRadeEffect1 extends OneShotEffect {
         this.staticText = "Look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand";
     }
 
-    public DomriRadeEffect1(final DomriRadeEffect1 effect) {
+    private DomriRadeEffect1(final DomriRadeEffect1 effect) {
         super(effect);
     }
 

@@ -72,7 +72,7 @@ class KithkinArmorCost extends CostImpl {
         this.text = "sacrifice {this}";
     }
 
-    public KithkinArmorCost(KithkinArmorCost cost) {
+    private KithkinArmorCost(final KithkinArmorCost cost) {
         super(cost);
     }
 
@@ -109,7 +109,7 @@ class KithkinArmorRestrictionEffect extends RestrictionEffect {
         staticText = "Enchanted creature can't be blocked by creatures with power 3 or greater";
     }
 
-    public KithkinArmorRestrictionEffect(final KithkinArmorRestrictionEffect effect) {
+    private KithkinArmorRestrictionEffect(final KithkinArmorRestrictionEffect effect) {
         super(effect);
     }
 
@@ -143,7 +143,7 @@ class KithkinArmorPreventionEffect extends PreventionEffectImpl {
         staticText = "The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage";
     }
 
-    KithkinArmorPreventionEffect(final KithkinArmorPreventionEffect effect) {
+    private KithkinArmorPreventionEffect(final KithkinArmorPreventionEffect effect) {
         super(effect);
     }
 

@@ -23,7 +23,7 @@ public final class AutumnWillow extends CardImpl {
 
     public AutumnWillow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -54,7 +54,7 @@ class AutumnWillowEffect extends AsThoughEffectImpl {
         staticText = "Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud";
     }
 
-    public AutumnWillowEffect(final AutumnWillowEffect effect) {
+    private AutumnWillowEffect(final AutumnWillowEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,9 @@ class AutumnWillowEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!affectedControllerId.equals(source.getFirstTarget())) { return false; }
+        if (!affectedControllerId.equals(source.getFirstTarget())) {
+            return false;
+        }
         Permanent creature = game.getPermanent(sourceId);
 
         return creature != null &&sourceId.equals(source.getSourceId());

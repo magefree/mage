@@ -27,7 +27,7 @@ public final class IkraShidiqiTheUsurper extends CardImpl {
     public IkraShidiqiTheUsurper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAGA);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -59,7 +59,7 @@ class IkraShidiqiTheUsurperTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public IkraShidiqiTheUsurperTriggeredAbility(final IkraShidiqiTheUsurperTriggeredAbility ability) {
+    private IkraShidiqiTheUsurperTriggeredAbility(final IkraShidiqiTheUsurperTriggeredAbility ability) {
         super(ability);
     }
 

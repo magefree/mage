@@ -33,7 +33,7 @@ public final class KoglaAndYidaro extends CardImpl {
     public KoglaAndYidaro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.APE);
         this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.TURTLE);

@@ -54,13 +54,19 @@ class SlayersCleaverEffect extends RequirementEffect {
         staticText = "and must be blocked by an Eldrazi if able";
     }
 
-    public SlayersCleaverEffect(final SlayersCleaverEffect effect) {
+    private SlayersCleaverEffect(final SlayersCleaverEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.canBlock(source.getSourceId(), game) && permanent.hasSubtype(SubType.ELDRAZI, game);
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment == null || equipment.getAttachedTo() == null) {
+            return false;
+        }
+        Permanent attachedCreature = game.getPermanent(equipment.getAttachedTo());
+        return attachedCreature != null && attachedCreature.isAttacking()
+                && permanent.canBlock(equipment.getAttachedTo(), game) && permanent.hasSubtype(SubType.ELDRAZI, game);
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -10,20 +9,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author ciaccona007
  */
 public final class FirebrandArcher extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
     
     public FirebrandArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -34,7 +26,8 @@ public final class FirebrandArcher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a noncreature spell, Firebrand Archer deals 1 damage to each opponent.
-        addAbility(new SpellCastControllerTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), filter, false));
+        addAbility(new SpellCastControllerTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
     }
 
     private FirebrandArcher(final FirebrandArcher card) {

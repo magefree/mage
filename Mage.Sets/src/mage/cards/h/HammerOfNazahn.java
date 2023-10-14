@@ -29,7 +29,7 @@ public final class HammerOfNazahn extends CardImpl {
 
     public HammerOfNazahn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever Hammer of Nazahn or another Equipment enters the battlefiend under your control, you may attach that Equipment to target creature you control.
@@ -68,7 +68,7 @@ class HammerOfNazahnEffect extends OneShotEffect {
         this.staticText = "you may attach that Equipment to target creature you control";
     }
 
-    public HammerOfNazahnEffect(final HammerOfNazahnEffect effect) {
+    private HammerOfNazahnEffect(final HammerOfNazahnEffect effect) {
         super(effect);
     }
 

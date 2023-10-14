@@ -60,7 +60,7 @@ class CemeteryPucaEffect extends OneShotEffect {
         staticText = "{this} becomes a copy of that creature, except it has this ability";
     }
 
-    public CemeteryPucaEffect(final CemeteryPucaEffect effect) {
+    private CemeteryPucaEffect(final CemeteryPucaEffect effect) {
         super(effect);
     }
 

@@ -56,7 +56,7 @@ class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
         this.staticText = "Put up to two creature cards from your hand onto the battlefield";
     }
 
-    public ToothAndNailPutCreatureOnBattlefieldEffect(final ToothAndNailPutCreatureOnBattlefieldEffect effect) {
+    private ToothAndNailPutCreatureOnBattlefieldEffect(final ToothAndNailPutCreatureOnBattlefieldEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class DragonlordKolaghan extends CardImpl {
 
     public DragonlordKolaghan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
@@ -43,7 +43,7 @@ public final class DragonlordKolaghan extends CardImpl {
 
         // Other creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true)));
+                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));
 
         // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, that player loses 10 life.
         Effect effect = new LoseLifeTargetEffect(10);
@@ -69,7 +69,7 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, ");
     }
 
-    public DragonlordKolaghanTriggeredAbility(final DragonlordKolaghanTriggeredAbility ability) {
+    private DragonlordKolaghanTriggeredAbility(final DragonlordKolaghanTriggeredAbility ability) {
         super(ability);
     }
 

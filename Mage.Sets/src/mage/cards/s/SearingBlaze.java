@@ -59,7 +59,7 @@ class SearingBlazeEffect extends OneShotEffect {
                 "to that player or planeswalker and 3 damage to that creature instead.";
     }
 
-    public SearingBlazeEffect(final SearingBlazeEffect effect) {
+    private SearingBlazeEffect(final SearingBlazeEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class SearingBlazeEffect extends OneShotEffect {
         if (watcher != null && watcher.landPlayed(source.getControllerId())) {
             damage = 3;
         }
-        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
+        game.damagePlayerOrPermanent(source.getTargets().get(0).getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
         if (creature != null) {
             creature.damage(damage, source.getSourceId(), source, game, false, true);
         }
@@ -91,7 +91,7 @@ class SearingBlazeTarget extends TargetPermanent {
         super(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
-    public SearingBlazeTarget(final SearingBlazeTarget target) {
+    private SearingBlazeTarget(final SearingBlazeTarget target) {
         super(target);
     }
 

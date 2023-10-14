@@ -117,8 +117,8 @@ public final class CardImageUtils {
         String setPath = buildImagePathToSet(card);
 
         String prefixType = "";
-        if (card.getType() != 0) {
-            prefixType = " " + card.getType();
+        if (card.getImageNumber() != 0) {
+            prefixType = " " + card.getImageNumber();
         }
 
         String cardName = card.getFileName();

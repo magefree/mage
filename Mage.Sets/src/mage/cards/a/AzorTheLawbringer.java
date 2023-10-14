@@ -34,7 +34,7 @@ public final class AzorTheLawbringer extends CardImpl {
 
     public AzorTheLawbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -66,7 +66,7 @@ class AzorTheLawbringerEntersBattlefieldEffect extends OneShotEffect {
         this.staticText = "each opponent can't cast instant or sorcery spells during that player's next turn";
     }
 
-    public AzorTheLawbringerEntersBattlefieldEffect(final AzorTheLawbringerEntersBattlefieldEffect effect) {
+    private AzorTheLawbringerEntersBattlefieldEffect(final AzorTheLawbringerEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class AzorTheLawbringerCantCastEffect extends ContinuousRuleModifyingEffectImpl 
         playersNextTurn = 0;
     }
 
-    public AzorTheLawbringerCantCastEffect(final AzorTheLawbringerCantCastEffect effect) {
+    private AzorTheLawbringerCantCastEffect(final AzorTheLawbringerCantCastEffect effect) {
         super(effect);
         this.playersNextTurn = effect.playersNextTurn;
     }
@@ -107,17 +107,17 @@ class AzorTheLawbringerCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast instant or sorcery spells this turn (" + mageObject.getIdName() + ").";
         }
         return null;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
@@ -153,7 +153,7 @@ class AzorTheLawbringerAttacksEffect extends OneShotEffect {
         staticText = "you may pay {X}{W}{U}{U}. If you do, you gain X life and draw X cards";
     }
 
-    AzorTheLawbringerAttacksEffect(final AzorTheLawbringerAttacksEffect effect) {
+    private AzorTheLawbringerAttacksEffect(final AzorTheLawbringerAttacksEffect effect) {
         super(effect);
     }
 

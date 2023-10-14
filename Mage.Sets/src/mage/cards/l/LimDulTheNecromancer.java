@@ -38,7 +38,7 @@ public final class LimDulTheNecromancer extends CardImpl {
 
     public LimDulTheNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -71,7 +71,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
         staticText = "return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types";
     }
 
-    public LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
+    private LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
         super(effect);
     }
 

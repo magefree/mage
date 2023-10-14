@@ -61,7 +61,7 @@ class AuraFinesseEffect extends OneShotEffect {
         this.staticText = "Attach target Aura you control to target creature";
     }
 
-    public AuraFinesseEffect(final AuraFinesseEffect effect) {
+    private AuraFinesseEffect(final AuraFinesseEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,9 @@ class AuraFinesseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Permanent aura = game.getPermanent(source.getFirstTarget());
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());

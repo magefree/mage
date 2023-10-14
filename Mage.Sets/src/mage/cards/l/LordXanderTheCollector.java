@@ -27,7 +27,7 @@ public final class LordXanderTheCollector extends CardImpl {
     public LordXanderTheCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.NOBLE);
@@ -129,7 +129,7 @@ class LordXanderTheCollectorEffect extends OneShotEffect {
                 TargetPermanent target = new TargetPermanent(
                         count / 2, StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
                 );
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.withChooseHint("sacrifice");
                 target.setRequired(true);
                 player.choose(outcome, target, source, game);

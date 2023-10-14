@@ -55,10 +55,10 @@ class BatheInLightEffect extends OneShotEffect {
 
     public BatheInLightEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn";
+        this.staticText = "Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn";
     }
 
-    public BatheInLightEffect(final BatheInLightEffect effect) {
+    private BatheInLightEffect(final BatheInLightEffect effect) {
         super(effect);
     }
 
@@ -70,13 +70,19 @@ class BatheInLightEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target == null) { return false; }
+        if (target == null) {
+            return false;
+        }
 
         ChoiceColor colorChoice = new ChoiceColor();
-        if (!controller.choose(Outcome.Benefit, colorChoice, game)) { return false; }
+        if (!controller.choose(Outcome.Benefit, colorChoice, game)) {
+            return false;
+        }
 
         game.informPlayers(target.getName() + ": " + controller.getLogName() + " has chosen " + colorChoice.getChoice());
         game.getState().setValue(target.getId() + "_color", colorChoice.getColor());
@@ -108,7 +114,7 @@ class ProtectionChosenColorTargetEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
+    private ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
         super(effect);
         if (effect.chosenColor != null) {
             this.chosenColor = effect.chosenColor.copy();
@@ -126,7 +132,9 @@ class ProtectionChosenColorTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
         if (color != null && (protectionAbility == null || !color.equals(chosenColor))) {

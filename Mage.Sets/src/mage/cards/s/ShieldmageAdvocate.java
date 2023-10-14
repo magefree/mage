@@ -70,7 +70,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
         this.targetSource = new TargetSource();
     }
     
-    public ShieldmageAdvocateEffect(final ShieldmageAdvocateEffect effect) {
+    private ShieldmageAdvocateEffect(final ShieldmageAdvocateEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }

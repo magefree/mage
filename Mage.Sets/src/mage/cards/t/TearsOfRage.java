@@ -36,7 +36,7 @@ public final class TearsOfRage extends CardImpl {
 
         // Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
         BoostControlledEffect effect = new BoostControlledEffect(new AttackingCreatureCount("the number of attacking creatures"), StaticValue.get(0),
-                Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, true);
+                Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false);
         getSpellAbility().addEffect(effect);
         getSpellAbility().addEffect(new TearsOfRageEffect());
     }
@@ -58,7 +58,7 @@ class TearsOfRageEffect extends OneShotEffect {
         this.staticText = "Sacrifice those creatures at the beginning of the next end step";
     }
 
-    public TearsOfRageEffect(final TearsOfRageEffect effect) {
+    private TearsOfRageEffect(final TearsOfRageEffect effect) {
         super(effect);
     }
 

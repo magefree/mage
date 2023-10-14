@@ -29,7 +29,6 @@ public final class JaceUnravelerOfSecretsEmblem extends Emblem {
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell");
         Ability ability = new JaceUnravelerOfSecretsTriggeredAbility(effect, false);
-        ability.addWatcher(new SpellsCastWatcher());
         this.getAbilities().add(ability);
     }
 

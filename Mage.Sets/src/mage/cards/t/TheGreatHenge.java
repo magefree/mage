@@ -16,10 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -34,7 +31,7 @@ public final class TheGreatHenge extends CardImpl {
     public TheGreatHenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheGreatHengeCostReductionEffect()));
@@ -79,7 +76,7 @@ class TheGreatHengeCostReductionEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int reductionAmount = game.getBattlefield()
                 .getAllActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
+                        StaticFilters.FILTER_PERMANENT_CREATURE, abilityToModify.getControllerId(), game
                 ).stream()
                 .map(Permanent::getPower)
                 .mapToInt(MageInt::getValue)

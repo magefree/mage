@@ -10,10 +10,12 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -27,6 +29,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -59,8 +62,8 @@ public final class HellkiteTyrant extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 new PermanentsOnTheBattlefieldCondition(new FilterArtifactPermanent(), ComparisonType.MORE_THAN, 19),
-                "At the beginning of your upkeep, if you control twenty or more artifacts, you win the game."));
-
+                "At the beginning of your upkeep, if you control twenty or more artifacts, you win the game."
+        ).addHint(new ValueHint("Artifacts you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT))));
     }
 
     private HellkiteTyrant(final HellkiteTyrant card) {
@@ -80,7 +83,7 @@ class HellkiteTyrantEffect extends OneShotEffect {
         this.staticText = "gain control of all artifacts that player controls";
     }
 
-    public HellkiteTyrantEffect(final HellkiteTyrantEffect effect) {
+    private HellkiteTyrantEffect(final HellkiteTyrantEffect effect) {
         super(effect);
     }
 
@@ -117,7 +120,7 @@ class HellkiteTyrantControlEffect extends ContinuousEffectImpl {
         this.controllerId = controllerId;
     }
 
-    public HellkiteTyrantControlEffect(final HellkiteTyrantControlEffect effect) {
+    private HellkiteTyrantControlEffect(final HellkiteTyrantControlEffect effect) {
         super(effect);
         this.controllerId = effect.controllerId;
     }

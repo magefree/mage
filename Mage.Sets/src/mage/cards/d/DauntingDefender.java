@@ -52,7 +52,7 @@ class DauntingDefenderEffect extends PreventionEffectImpl {
         this.staticText = "If a source would deal damage to a Cleric creature you control, prevent " + amount + " of that damage";
     }
 
-    public DauntingDefenderEffect(DauntingDefenderEffect effect) {
+    private DauntingDefenderEffect(final DauntingDefenderEffect effect) {
         super(effect);
     }
 

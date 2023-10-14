@@ -89,7 +89,7 @@ class IncrementalBlightEffect extends OneShotEffect {
         this.staticText = "Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature";
     }
    
-    public IncrementalBlightEffect(final IncrementalBlightEffect effect) {
+    private IncrementalBlightEffect(final IncrementalBlightEffect effect) {
         super(effect);
     }
    

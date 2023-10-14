@@ -17,8 +17,8 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetAmount;
 import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
 
@@ -50,24 +50,10 @@ public final class FeastOfTheVictoriousDead extends CardImpl {
     }
 }
 
-enum FeastOfTheVictoriousDeadCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return CreaturesDiedThisTurnCount.instance.calculate(game, source, null) > 0;
-    }
-
-    @Override
-    public String toString() {
-        return "one or more creatures died this turn";
-    }
-}
-
 class FeastOfTheVictoriousDeadEffect extends OneShotEffect {
 
     FeastOfTheVictoriousDeadEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.BoostCreature);
         staticText = "and distribute that many +1/+1 counters among creatures you control";
     }
 
@@ -82,13 +68,20 @@ class FeastOfTheVictoriousDeadEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        int amount = CreaturesDiedThisTurnCount.instance.calculate(game, source, this);
+        if (amount <= 0) {
             return false;
         }
-        TargetAmount target = new TargetCreaturePermanentAmount(CreaturesDiedThisTurnCount.instance, StaticFilters.FILTER_CONTROLLED_CREATURE);
-        target.setNotTarget(true);
-        player.choose(outcome, target, source, game);
+
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null || game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game) < 1) {
+            return false;
+        }
+        TargetPermanentAmount target = new TargetCreaturePermanentAmount(amount, StaticFilters.FILTER_CONTROLLED_CREATURE);
+        target.setMinNumberOfTargets(1);
+        target.withNotTarget(true);
+        target.withChooseHint("to distribute " + amount + " counters");
+        target.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
@@ -96,5 +89,20 @@ class FeastOfTheVictoriousDeadEffect extends OneShotEffect {
             }
         }
         return true;
+    }
+
+}
+
+enum FeastOfTheVictoriousDeadCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return CreaturesDiedThisTurnCount.instance.calculate(game, source, null) > 0;
+    }
+
+    @Override
+    public String toString() {
+        return "one or more creatures died this turn";
     }
 }

@@ -50,7 +50,7 @@ class StuntedGrowthEffect extends OneShotEffect {
         this.staticText = "Target player chooses three cards from their hand and puts them on top of their library in any order";
     }
 
-    public StuntedGrowthEffect(final StuntedGrowthEffect effect) {
+    private StuntedGrowthEffect(final StuntedGrowthEffect effect) {
         super(effect);
     }
 

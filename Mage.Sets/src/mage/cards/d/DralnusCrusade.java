@@ -62,7 +62,7 @@ class DralnusCrusadeEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    public DralnusCrusadeEffect(final DralnusCrusadeEffect effect) {
+    private DralnusCrusadeEffect(final DralnusCrusadeEffect effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class ParaseleneEffect extends OneShotEffect {
         staticText = "Destroy all enchantments. You gain 1 life for each enchantment destroyed this way";
     }
 
-    public ParaseleneEffect(ParaseleneEffect effect) {
+    private ParaseleneEffect(final ParaseleneEffect effect) {
         super(effect);
     }
 

@@ -31,7 +31,7 @@ public final class LuxCannon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LuxCannon (final LuxCannon card) {
+    private LuxCannon(final LuxCannon card) {
         super(card);
     }
 

@@ -59,7 +59,7 @@ class BeaconOfDestinyEffect extends RedirectionEffect {
         this.damageSource = new TargetSource();
     }
 
-    public BeaconOfDestinyEffect(final BeaconOfDestinyEffect effect) {
+    private BeaconOfDestinyEffect(final BeaconOfDestinyEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }

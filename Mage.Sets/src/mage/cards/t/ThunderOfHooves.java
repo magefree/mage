@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageEverythingEffect;
@@ -15,12 +14,13 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ThunderOfHooves extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filterNotFlying = new FilterCreaturePermanent();
     private static final FilterPermanent filterBeasts = new FilterPermanent();
 
@@ -30,10 +30,10 @@ public final class ThunderOfHooves extends CardImpl {
     }
 
     public ThunderOfHooves(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
-        Effect effect = new DamageEverythingEffect(new PermanentsOnBattlefieldCount(new FilterPermanent(filterBeasts)), new FilterCreaturePermanent(filterNotFlying));
+        Effect effect = new DamageEverythingEffect(new PermanentsOnBattlefieldCount(filterBeasts), filterNotFlying);
         effect.setText("{this} deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield");
         this.getSpellAbility().addEffect(effect);
     }

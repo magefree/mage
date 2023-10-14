@@ -69,7 +69,7 @@ class GryffsBoonEffect extends OneShotEffect {
         staticText = "Return {this} from your graveyard to the battlefield attached to target creature";
     }
 
-    public GryffsBoonEffect(final GryffsBoonEffect effect) {
+    private GryffsBoonEffect(final GryffsBoonEffect effect) {
         super(effect);
     }
 

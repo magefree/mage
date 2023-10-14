@@ -99,6 +99,11 @@ public class GameEvent implements Serializable {
         DISCARDED_CARD,
         DISCARDED_CARDS,
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
+        /* CLASHED (one event fired for each player involved)
+         playerId    the id of the clashing player
+         flag        true = playerId won the clash
+         targetId    the id of the other player in the clash
+         */
         CLASH, CLASHED,
         DAMAGE_PLAYER,
         MILL_CARDS,
@@ -107,21 +112,27 @@ public class GameEvent implements Serializable {
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
-         flag        true = comabat damage - other damage = false
+         flag        true = combat damage - other damage = false
          */
         DAMAGED_PLAYER,
 
-        /* DAMAGED_PLAYER_BATCH
-         combines all player damaged events in one single event
+        /* DAMAGED_BATCH_FOR_PLAYERS,
+         combines all player damage events to a single batch (event)
          */
-        DAMAGED_PLAYER_BATCH,
+        DAMAGED_BATCH_FOR_PLAYERS,
+
+        /* DAMAGED_BATCH_FOR_ONE_PLAYER
+         combines all player damage events to a single batch (event) and split it per damaged player
+         playerId    the id of the damaged player
+         */
+        DAMAGED_BATCH_FOR_ONE_PLAYER,
 
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
          flag        is it combat damage
          */
@@ -134,7 +145,7 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the ability which caused the lose
          playerId    the id of the player loosing life
          amount      amount of life loss
-         flag        true = from comabat damage - other from non combat damage
+         flag        true = from combat damage - other from non combat damage
          */
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
@@ -321,7 +332,7 @@ public class GameEvent implements Serializable {
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
-        LIFE_PAID,
+        PAY_LIFE, LIFE_PAID,
         CASCADE_LAND,
         LEARN,
         //permanent events
@@ -333,8 +344,8 @@ public class GameEvent implements Serializable {
         TAP,
         /* TAPPED,
          targetId    tapped permanent
-         sourceId    id of the abilitity's source (can be null for standard tap actions like combat)
-         playerId    controller of the tapped permanent
+         sourceId    id of the ability's source (can be null for standard tap actions like combat)
+         playerId    source's controller, null if no source
          amount      not used for this event
          flag        is it tapped for combat
          */
@@ -396,10 +407,10 @@ public class GameEvent implements Serializable {
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
 
-        /*  DAMAGED_PERMANENT_BATCH
-         combine all permanent damage events to single event
+        /*  DAMAGED_BATCH_FOR_PERMANENTS
+         combine all permanent damage events to a single batch (event)
          */
-        DAMAGED_PERMANENT_BATCH,
+        DAMAGED_BATCH_FOR_PERMANENTS,
 
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
@@ -441,7 +452,7 @@ public class GameEvent implements Serializable {
         /* LOST_CONTROL
          targetId    id of the creature that lost control
          sourceId    null
-         playerId    player that controlles the creature before
+         playerId    player that controls the creature before
          amount      not used for this event
          flag        not used for this event
          */
@@ -582,6 +593,11 @@ public class GameEvent implements Serializable {
         return id;
     }
 
+    /**
+     * Some batch events can contain multiple events list, see BatchGameEvent for usage
+     *
+     * @return
+     */
     public UUID getTargetId() {
         return targetId;
     }
@@ -700,7 +716,7 @@ public class GameEvent implements Serializable {
         if (approvingObject == null) {
             return false;
         }
-        if (identifier == null) {
+        if (identifier.equals(MageIdentifier.Default)) {
             return false;
         }
         return identifier.equals(approvingObject.getApprovingAbility().getIdentifier());

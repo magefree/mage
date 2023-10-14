@@ -40,7 +40,7 @@ public final class Ferrovore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Ferrovore (final Ferrovore card) {
+    private Ferrovore(final Ferrovore card) {
         super(card);
     }
 

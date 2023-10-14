@@ -40,7 +40,7 @@ public final class GeyadroneDihada extends CardImpl {
     public GeyadroneDihada(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DIHADA);
         this.setStartingLoyalty(4);
 

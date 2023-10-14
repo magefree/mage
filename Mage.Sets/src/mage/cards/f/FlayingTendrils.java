@@ -51,7 +51,7 @@ class FlayingTendrilsReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a creature would die this turn, exile it instead";
     }
 
-    public FlayingTendrilsReplacementEffect(final FlayingTendrilsReplacementEffect effect) {
+    private FlayingTendrilsReplacementEffect(final FlayingTendrilsReplacementEffect effect) {
         super(effect);
     }
 

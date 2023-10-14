@@ -5,6 +5,7 @@ Ascend|new|
 Assist|new|
 Backup|card, number|
 Basic landcycling|cost|
+Bargain|new|
 Battle cry|new|
 Bestow|card, manaString|
 Blitz|card, manaString|
@@ -30,6 +31,7 @@ Devoid|color|
 Defender|instance|
 Disturb|cost|
 Dredge|number|
+Doctor's companion|instance|
 Double Strike|instance|
 Dredge|number|
 Echo|manaString|

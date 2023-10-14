@@ -31,7 +31,7 @@ public final class Urabrask extends CardImpl {
     public Urabrask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.PRAETOR);
         this.power = new MageInt(4);
@@ -54,7 +54,7 @@ public final class Urabrask extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                 new ManaCostsImpl<>("{R}"), UrabraskCondition.instance
-        ).setTiming(TimingRule.SORCERY), new SpellsCastWatcher());
+        ).setTiming(TimingRule.SORCERY));
     }
 
     private Urabrask(final Urabrask card) {

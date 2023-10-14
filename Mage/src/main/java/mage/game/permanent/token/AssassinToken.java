@@ -21,7 +21,7 @@ public final class AssassinToken extends TokenImpl {
         addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
     }
 
-    public AssassinToken(final AssassinToken token) {
+    protected AssassinToken(final AssassinToken token) {
         super(token);
     }
 

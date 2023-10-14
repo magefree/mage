@@ -51,7 +51,7 @@ class DeadReckoningEffect extends OneShotEffect {
         this.setTargetPointer(new EachTargetPointer());
     }
 
-    public DeadReckoningEffect(final DeadReckoningEffect effect) {
+    private DeadReckoningEffect(final DeadReckoningEffect effect) {
         super(effect);
     }
 

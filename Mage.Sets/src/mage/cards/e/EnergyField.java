@@ -54,7 +54,7 @@ class EnergyFieldEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you by sources you don't control";
     }
 
-    public EnergyFieldEffect(EnergyFieldEffect effect) {
+    private EnergyFieldEffect(final EnergyFieldEffect effect) {
         super(effect);
     }
 

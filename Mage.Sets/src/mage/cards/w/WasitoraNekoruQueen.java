@@ -31,7 +31,7 @@ public final class WasitoraNekoruQueen extends CardImpl {
     public WasitoraNekoruQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
@@ -64,7 +64,7 @@ class WasitoraNekoruQueenEffect extends OneShotEffect {
         staticText = "that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying";
     }
 
-    public WasitoraNekoruQueenEffect(final WasitoraNekoruQueenEffect effect) {
+    private WasitoraNekoruQueenEffect(final WasitoraNekoruQueenEffect effect) {
         super(effect);
     }
 

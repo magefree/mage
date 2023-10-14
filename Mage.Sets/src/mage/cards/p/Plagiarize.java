@@ -46,7 +46,7 @@ class PlagiarizeEffect extends ReplacementEffectImpl {
         staticText = "Until end of turn, if target player would draw a card, instead that player skips that draw and you draw a card";
     }
     
-    public PlagiarizeEffect(final PlagiarizeEffect effect) {
+    private PlagiarizeEffect(final PlagiarizeEffect effect) {
         super(effect);
     }
     

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -57,10 +56,10 @@ class FollowedFootstepsEffect extends OneShotEffect {
 
     public FollowedFootstepsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "You create a token that's a copy of enchanted creature";
+        this.staticText = "create a token that's a copy of enchanted creature";
     }
 
-    public FollowedFootstepsEffect(final FollowedFootstepsEffect effect) {
+    private FollowedFootstepsEffect(final FollowedFootstepsEffect effect) {
         super(effect);
     }
 
@@ -71,12 +70,7 @@ class FollowedFootstepsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // In the case that Followed Footsteps is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment != null) {
             Permanent target = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
             if (target != null) {

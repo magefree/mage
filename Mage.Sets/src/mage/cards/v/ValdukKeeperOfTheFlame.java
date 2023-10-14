@@ -29,7 +29,7 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
     public ValdukKeeperOfTheFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
@@ -56,7 +56,7 @@ class ValdukKeeperOfTheFlameEffect extends OneShotEffect {
         this.staticText = "for each Aura and Equipment attached to {this}, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step";
     }
 
-    public ValdukKeeperOfTheFlameEffect(final ValdukKeeperOfTheFlameEffect effect) {
+    private ValdukKeeperOfTheFlameEffect(final ValdukKeeperOfTheFlameEffect effect) {
         super(effect);
     }
 

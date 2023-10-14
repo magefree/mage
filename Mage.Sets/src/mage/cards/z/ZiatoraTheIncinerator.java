@@ -30,7 +30,7 @@ public final class ZiatoraTheIncinerator extends CardImpl {
     public ZiatoraTheIncinerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);

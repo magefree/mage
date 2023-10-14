@@ -43,7 +43,7 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
-    public PermanentToken(final PermanentToken permanent) {
+    protected PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
     }
@@ -103,7 +103,7 @@ public class PermanentToken extends PermanentImpl {
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
         this.supertype.clear();
-        this.supertype.addAll(token.getSuperType());
+        this.supertype.addAll(token.getSuperType(game));
         this.subtype.copyFrom(token.getSubtype(game));
         this.startingLoyalty = token.getStartingLoyalty();
         this.startingDefense = token.getStartingDefense();

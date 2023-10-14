@@ -54,7 +54,7 @@ class ThranTurbineEffect extends OneShotEffect {
         staticText = "add {C}{C}. You can't spend this mana to cast spells";
     }
 
-    public ThranTurbineEffect(final ThranTurbineEffect effect) {
+    private ThranTurbineEffect(final ThranTurbineEffect effect) {
         super(effect);
     }
 

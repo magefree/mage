@@ -50,7 +50,7 @@ class MassPolymorphEffect extends OneShotEffect {
         staticText = "Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards. Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library";
     }
 
-    public MassPolymorphEffect(final MassPolymorphEffect effect) {
+    private MassPolymorphEffect(final MassPolymorphEffect effect) {
         super(effect);
     }
 

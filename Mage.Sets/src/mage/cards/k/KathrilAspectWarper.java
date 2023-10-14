@@ -35,7 +35,7 @@ public final class KathrilAspectWarper extends CardImpl {
     public KathrilAspectWarper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(3);
@@ -101,7 +101,7 @@ class KathrilAspectWarperEffect extends OneShotEffect {
             FilterControlledPermanent filter
                     = new FilterControlledCreaturePermanent("creature to give a " + counterType + " counter");
             Target target = new TargetControlledPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!player.choose(outcome, target, source, game)) {
                 continue;
             }

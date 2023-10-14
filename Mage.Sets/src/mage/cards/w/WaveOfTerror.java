@@ -53,7 +53,7 @@ class WaveOfTerrorEffect extends OneShotEffect {
         this.staticText = "destroy each creature with mana value equal to the number of age counters on {this}. They can't be regenerated.";
     }
 
-    WaveOfTerrorEffect(final WaveOfTerrorEffect effect) {
+    private WaveOfTerrorEffect(final WaveOfTerrorEffect effect) {
         super(effect);
     }
 

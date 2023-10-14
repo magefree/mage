@@ -6,6 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * Adds condition to {@link OneShotEffect}. Acts as decorator.
@@ -38,7 +39,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         this.staticText = text;
     }
 
-    public ConditionalOneShotEffect(ConditionalOneShotEffect effect) {
+    protected ConditionalOneShotEffect(final ConditionalOneShotEffect effect) {
         super(effect);
         this.effects.addAll(effect.effects.copy());
         this.otherwiseEffects.addAll(effect.otherwiseEffects.copy());
@@ -68,6 +69,13 @@ public class ConditionalOneShotEffect extends OneShotEffect {
     }
 
     @Override
+    public void setValue(String key, Object value) {
+        super.setValue(key, value);
+        this.effects.setValue(key, value);
+        this.otherwiseEffects.setValue(key, value);
+    }
+
+    @Override
     public ConditionalOneShotEffect copy() {
         return new ConditionalOneShotEffect(this);
     }
@@ -77,10 +85,18 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (otherwiseEffects.isEmpty()) {
-            return "if " + condition.toString() + ", " + effects.getText(mode);
+
+        String conditionText = condition.toString();
+        if (conditionText.startsWith("if ") || conditionText.startsWith("If ")) {
+            conditionText = conditionText.substring(3);
         }
-        return effects.getText(mode) + ". If " + condition.toString() + ", " + otherwiseEffects.getText(mode);
+
+        if (otherwiseEffects.isEmpty()) {
+            return "if " + conditionText + ", "
+                    + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+        }
+        return effects.getText(mode) + ". If " + conditionText + ", "
+                + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));
     }
 
     @Override

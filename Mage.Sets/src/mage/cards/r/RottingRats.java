@@ -35,7 +35,7 @@ public final class RottingRats extends CardImpl {
 
     }
 
-    public RottingRats (final RottingRats card) {
+    private RottingRats(final RottingRats card) {
         super(card);
     }
 

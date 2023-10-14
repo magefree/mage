@@ -54,7 +54,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
                 + "({this} has that card's name, mana cost, color, types, abilities, power, and toughness.) ";
     }
 
-    public VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
+    private VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
         super(effect);
     }
 
@@ -89,9 +89,9 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, card);
 
-        permanent.getSuperType().clear();
-        for (SuperType type : card.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : card.getSuperType(game)) {
+            permanent.addSuperType(game, type);
 
         }
 

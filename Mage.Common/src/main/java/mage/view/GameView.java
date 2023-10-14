@@ -42,6 +42,7 @@ public class GameView implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(GameView.class);
     private final int priorityTime;
+    private final int bufferTime;
     private final List<PlayerView> players = new ArrayList<>();
     private CardsView hand;
     private PlayableObjectsList canPlayObjects;
@@ -61,13 +62,13 @@ public class GameView implements Serializable {
     private final int turn;
     private boolean special = false;
     private final boolean isPlayer; // false = watching user
-    private final int spellsCastCurrentTurn;
     private final boolean rollbackTurnsAllowed;
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         Player createdForPlayer = null;
         this.isPlayer = createdForPlayerId != null;
         this.priorityTime = game.getPriorityTime();
+        this.bufferTime = game.getBufferTime();
         for (Player player : state.getPlayers().values()) {
             players.add(new PlayerView(player, state, game, createdForPlayerId, watcherUserId));
             if (player.getId().equals(createdForPlayerId)) {
@@ -193,13 +194,6 @@ public class GameView implements Serializable {
         } else {
             this.special = false;
         }
-
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        if (watcher != null) {
-            spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();
-        } else {
-            spellsCastCurrentTurn = 0;
-        }
         rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
     }
 
@@ -313,6 +307,10 @@ public class GameView implements Serializable {
         return priorityTime;
     }
 
+    public int getBufferTime() {
+        return bufferTime;
+    }
+
     public UUID getActivePlayerId() {
         return activePlayerId;
     }
@@ -327,10 +325,6 @@ public class GameView implements Serializable {
 
     public void setCanPlayObjects(PlayableObjectsList canPlayObjects) {
         this.canPlayObjects = canPlayObjects;
-    }
-
-    public int getSpellsCastCurrentTurn() {
-        return spellsCastCurrentTurn;
     }
 
     public boolean isRollbackTurnsAllowed() {

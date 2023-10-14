@@ -70,7 +70,7 @@ class SporogenesisTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(), new SporogenesisCount()), false);
     }
 
-    public SporogenesisTriggeredAbility(SporogenesisTriggeredAbility ability) {
+    private SporogenesisTriggeredAbility(final SporogenesisTriggeredAbility ability) {
         super(ability);
     }
 
@@ -140,7 +140,7 @@ class SporogenesisRemoveCountersEffect extends OneShotEffect {
         staticText = "remove all fungus counters from all creatures";
     }
 
-    public SporogenesisRemoveCountersEffect(final SporogenesisRemoveCountersEffect effect) {
+    private SporogenesisRemoveCountersEffect(final SporogenesisRemoveCountersEffect effect) {
         super(effect);
     }
 

@@ -71,7 +71,7 @@ class NumbingDoseTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
     }
 
-    public NumbingDoseTriggeredAbility(final NumbingDoseTriggeredAbility ability) {
+    private NumbingDoseTriggeredAbility(final NumbingDoseTriggeredAbility ability) {
         super(ability);
     }
 

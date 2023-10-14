@@ -46,7 +46,7 @@ public final class ClawsOfValakut extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClawsOfValakut (final ClawsOfValakut card) {
+    private ClawsOfValakut(final ClawsOfValakut card) {
         super(card);
     }
 

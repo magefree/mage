@@ -41,8 +41,7 @@ public final class LlanowarAugur extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 effect,
                 new SacrificeSourceCost(),
-                new IsStepCondition(PhaseStep.UPKEEP),
-                null
+                new IsStepCondition(PhaseStep.UPKEEP)
         );
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, "and gains trample until end of turn");
         ability.addEffect(effect);

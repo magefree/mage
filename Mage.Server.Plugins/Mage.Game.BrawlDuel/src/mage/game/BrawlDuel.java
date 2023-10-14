@@ -8,9 +8,9 @@ import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 
 public class BrawlDuel extends GameCommanderImpl {
-   
-    public BrawlDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+
+    public BrawlDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 60, startLife, startHandSize);
     }
 
     public BrawlDuel(final BrawlDuel game) {

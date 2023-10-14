@@ -11,7 +11,6 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.cards.repository.TokenInfo;
 import mage.cards.repository.TokenRepository;
@@ -21,20 +20,19 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.GameLog;
 import mage.util.RandomUtil;
 import mage.util.SubTypes;
 
 import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author spjspj
  */
 public abstract class Plane extends CommandObjectImpl {
 
-    private static final List<CardType> emptyList = Collections.unmodifiableList(new ArrayList<>());
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private Planes planeType = null;
@@ -51,7 +49,7 @@ public abstract class Plane extends CommandObjectImpl {
         this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
-    public Plane(final Plane plane) {
+    protected Plane(final Plane plane) {
         super(plane);
         this.planeType = plane.planeType;
         this.frameStyle = plane.frameStyle;
@@ -144,7 +142,7 @@ public abstract class Plane extends CommandObjectImpl {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptyList;
+        return Collections.emptyList();
     }
 
     @Override
@@ -163,8 +161,8 @@ public abstract class Plane extends CommandObjectImpl {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
+    public List<SuperType> getSuperType(Game game) {
+        return Collections.emptyList();
     }
 
     @Override
@@ -179,22 +177,27 @@ public abstract class Plane extends CommandObjectImpl {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override

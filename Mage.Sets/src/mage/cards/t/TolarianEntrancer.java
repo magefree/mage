@@ -48,7 +48,7 @@ public final class TolarianEntrancer extends CardImpl {
             super(new GainControlTargetEffect(Duration.EndOfGame));
         }
 
-        public TolarianEntrancerDelayedTriggeredAbility(final TolarianEntrancerDelayedTriggeredAbility ability) {
+        private TolarianEntrancerDelayedTriggeredAbility(final TolarianEntrancerDelayedTriggeredAbility ability) {
             super(ability);
         }
 

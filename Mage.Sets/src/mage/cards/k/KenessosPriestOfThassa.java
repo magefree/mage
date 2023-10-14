@@ -28,7 +28,7 @@ public final class KenessosPriestOfThassa extends CardImpl {
     public KenessosPriestOfThassa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
@@ -108,7 +108,7 @@ class KenessosPriestOfThassaActivatedEffect extends OneShotEffect {
                 "you may put it on the bottom of your library.";
     }
 
-    public KenessosPriestOfThassaActivatedEffect(final KenessosPriestOfThassaActivatedEffect effect) {
+    private KenessosPriestOfThassaActivatedEffect(final KenessosPriestOfThassaActivatedEffect effect) {
         super(effect);
     }
 

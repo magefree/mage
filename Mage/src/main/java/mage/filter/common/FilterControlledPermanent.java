@@ -29,7 +29,7 @@ public class FilterControlledPermanent extends FilterPermanent {
         }
     }
 
-    public FilterControlledPermanent(final FilterControlledPermanent filter) {
+    protected FilterControlledPermanent(final FilterControlledPermanent filter) {
         super(filter);
     }
 

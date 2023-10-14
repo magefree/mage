@@ -1,5 +1,7 @@
 package mage.verify.mtgjson;
 
+import mage.constants.Rarity;
+
 import java.util.List;
 
 public final class MtgJsonCard {
@@ -9,7 +11,8 @@ public final class MtgJsonCard {
 
     public String name;
     public String asciiName; // mtgjson uses it for some cards like El-Hajjaj
-    public String number; // from sets source only, see https://mtgjson.com/data-models/card/
+    public String number; // from sets source only, see https://mtgjson.com/data-models/card-set/
+    public String rarity; // from sets source only, see https://mtgjson.com/data-models/card-set/
 
     public String faceName;
     public String side;
@@ -22,7 +25,7 @@ public final class MtgJsonCard {
     public List<String> types;
     public List<String> subtypes;
 
-    public String text; // rules splits by \n
+    public String text; // rules splits by \n, can be null on empty abilities list
 
     public String loyalty;
     public String defense;
@@ -65,6 +68,46 @@ public final class MtgJsonCard {
             return getNameAsFace();
         }
 
-        return asciiName != null ? asciiName : name;
+        return getNameAsASCII();
+    }
+
+    public String getNameAsUnicode() {
+        return this.name;
+    }
+
+    public String getNameAsASCII() {
+        return this.asciiName != null ? this.asciiName : this.name;
+    }
+
+    public boolean isUseUnicodeName() {
+        return this.asciiName != null && this.name != null && !this.asciiName.equals(this.name);
+    }
+
+    /**
+     * @return the Rarity of the card if present in the mtgjson file
+     * null if not present.
+     */
+    public Rarity getRarity() {
+        if (rarity.isEmpty()) {
+            return null;
+        }
+
+        switch (rarity) {
+            case "common":
+                return Rarity.COMMON;
+            case "uncommon":
+                return Rarity.UNCOMMON;
+            case "rare":
+                return Rarity.RARE;
+            case "mythic":
+                return Rarity.MYTHIC;
+            case "special":
+                return Rarity.SPECIAL;
+            case "bonus":
+                return Rarity.BONUS;
+
+            default: // Maybe a new rarity has been introduced?
+                throw new EnumConstantNotPresentException(Rarity.class, rarity);
+        }
     }
 }

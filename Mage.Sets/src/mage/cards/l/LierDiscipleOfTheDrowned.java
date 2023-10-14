@@ -25,7 +25,7 @@ public final class LierDiscipleOfTheDrowned extends CardImpl {
     public LierDiscipleOfTheDrowned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -65,11 +65,6 @@ class LierDiscipleOfTheDrownedCounteredEffect extends ContinuousRuleModifyingEff
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTER;
     }
@@ -88,7 +83,7 @@ class LierDiscipleOfTheDrownedFlashbackEffect extends ContinuousEffectImpl {
                 "The flashback cost is equal to that card's mana cost";
     }
 
-    public LierDiscipleOfTheDrownedFlashbackEffect(final LierDiscipleOfTheDrownedFlashbackEffect effect) {
+    private LierDiscipleOfTheDrownedFlashbackEffect(final LierDiscipleOfTheDrownedFlashbackEffect effect) {
         super(effect);
     }
 

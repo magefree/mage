@@ -31,7 +31,7 @@ public final class GoroGoroAndSatoru extends CardImpl {
     public GoroGoroAndSatoru(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(3);
@@ -73,7 +73,7 @@ class GoroGoroAndSatoruTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonSpiritToken()), false);
     }
 
-    public GoroGoroAndSatoruTriggeredAbility(final GoroGoroAndSatoruTriggeredAbility ability) {
+    private GoroGoroAndSatoruTriggeredAbility(final GoroGoroAndSatoruTriggeredAbility ability) {
         super(ability);
     }
 

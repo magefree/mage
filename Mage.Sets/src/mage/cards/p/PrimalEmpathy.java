@@ -86,7 +86,7 @@ class PrimalEmpathyEffect extends OneShotEffect {
             return player.drawCards(1, source, game) > 0;
         }
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }

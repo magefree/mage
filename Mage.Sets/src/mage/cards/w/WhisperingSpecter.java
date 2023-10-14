@@ -1,12 +1,12 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
@@ -34,8 +34,12 @@ public final class WhisperingSpecter extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeSourceEffect(), true, true);
-        ability.addEffect(new WhisperingSpecterEffect());
+
+        // Whenever Whispering Specter deals combat damage to a player, you may sacrifice it.
+        // If you do, that player discards a card for each poison counter they have.
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
+                new WhisperingSpecterEffect(), new SacrificeSourceCost()
+        ), false, true);
         this.addAbility(ability);
     }
 
@@ -52,10 +56,10 @@ public final class WhisperingSpecter extends CardImpl {
 class WhisperingSpecterEffect extends OneShotEffect {
     WhisperingSpecterEffect() {
         super(Outcome.Discard);
-        staticText = "If you do, that player discards a card for each poison counter they have";
+        staticText = "that player discards a card for each poison counter they have";
     }
 
-    WhisperingSpecterEffect(final WhisperingSpecterEffect effect) {
+    private WhisperingSpecterEffect(final WhisperingSpecterEffect effect) {
         super(effect);
     }
 

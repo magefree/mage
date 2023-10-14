@@ -66,7 +66,7 @@ class WingsOfHubrisEffect extends OneShotEffect {
         this.staticText = "Equipped creature can't be blocked this turn. Sacrifice it at the beginning of the next end step";
     }
 
-    public WingsOfHubrisEffect(final WingsOfHubrisEffect effect) {
+    private WingsOfHubrisEffect(final WingsOfHubrisEffect effect) {
         super(effect);
     }
 

@@ -27,12 +27,10 @@ import mage.game.stack.StackObject;
  */
 public final class ThrunBreakerOfSilence extends CardImpl {
 
-
-
     public ThrunBreakerOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(5);
@@ -65,23 +63,18 @@ public final class ThrunBreakerOfSilence extends CardImpl {
 
 class ThrunBreakerOfSilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ThrunBreakerOfSilenceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+    ThrunBreakerOfSilenceEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.AddAbility);
         staticText = "{this} can't be the target of nongreen spells your opponents control or abilities from nongreen sources your opponents control";
     }
 
-    public ThrunBreakerOfSilenceEffect(final mage.cards.t.ThrunBreakerOfSilenceEffect effect) {
+    private ThrunBreakerOfSilenceEffect(final ThrunBreakerOfSilenceEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.t.ThrunBreakerOfSilenceEffect copy() {
-        return new mage.cards.t.ThrunBreakerOfSilenceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public ThrunBreakerOfSilenceEffect copy() {
+        return new ThrunBreakerOfSilenceEffect(this);
     }
 
     @Override

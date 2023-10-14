@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsNoSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -26,7 +26,7 @@ public final class BlazeOfGlory extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsNoSourcePredicate.instance);
     }
 
     public BlazeOfGlory(UUID ownerId, CardSetInfo setInfo) {
@@ -58,7 +58,7 @@ class BlazeOfGloryRequirementEffect extends RequirementEffect {
         this.staticText = "It blocks each attacking creature this turn if able";
     }
 
-    public BlazeOfGloryRequirementEffect(final BlazeOfGloryRequirementEffect effect) {
+    private BlazeOfGloryRequirementEffect(final BlazeOfGloryRequirementEffect effect) {
         super(effect);
     }
 

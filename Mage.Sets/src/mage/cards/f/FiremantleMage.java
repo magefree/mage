@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -29,7 +29,8 @@ public final class FiremantleMage extends CardImpl {
 
         // <i>Rally</i> &mdash; Whenver Firemantle Mage or another Ally enters the battlefield under your control, creatures you control gain menace until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
+                new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)
+                        .setText("creatures you control gain menace until end of turn. <i>(A creature with menace can't be blocked except by two or more creatures.)</i>"), false));
     }
 
     private FiremantleMage(final FiremantleMage card) {

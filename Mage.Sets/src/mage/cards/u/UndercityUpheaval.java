@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class UndercityUpheaval extends CardImpl {
 
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
-    private static final Hint hint = new ValueHint("Creatures in your graveyard", xValue);
+    private static final Hint hint = new ValueHint("Creature cards in your graveyard", xValue);
 
     public UndercityUpheaval(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
@@ -36,7 +36,7 @@ public final class UndercityUpheaval extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.getSpellAbility().setAbilityWord(AbilityWord.UNDERGROWTH);
         this.getSpellAbility().addHint(hint);
     }

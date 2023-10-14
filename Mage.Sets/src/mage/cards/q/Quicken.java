@@ -56,7 +56,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
         staticText = "The next sorcery spell you cast this turn can be cast as though it had flash";
     }
 
-    public QuickenAsThoughEffect(final QuickenAsThoughEffect effect) {
+    private QuickenAsThoughEffect(final QuickenAsThoughEffect effect) {
         super(effect);
         this.quickenWatcher = effect.quickenWatcher;
         this.zoneChangeCounter = effect.zoneChangeCounter;

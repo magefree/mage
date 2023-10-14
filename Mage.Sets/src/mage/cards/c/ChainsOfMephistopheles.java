@@ -46,7 +46,7 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a player would draw a card except the first one they draw in each of their draw steps, that player discards a card instead. If the player discards a card this way, they draw a card. If the player doesn't discard a card this way, they mill a card";
     }
 
-    public ChainsOfMephistophelesReplacementEffect(final ChainsOfMephistophelesReplacementEffect effect) {
+    private ChainsOfMephistophelesReplacementEffect(final ChainsOfMephistophelesReplacementEffect effect) {
         super(effect);
     }
 

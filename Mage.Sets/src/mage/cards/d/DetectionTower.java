@@ -57,7 +57,7 @@ class DetectionTowerEffect extends AsThoughEffectImpl {
                 + "you control as though they didn't have hexproof";
     }
 
-    public DetectionTowerEffect(final DetectionTowerEffect effect) {
+    private DetectionTowerEffect(final DetectionTowerEffect effect) {
         super(effect);
     }
 

@@ -52,7 +52,7 @@ public final class XathridGorgon extends CardImpl {
         effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT);
         effect.setText("and becomes a colorless");
         ability.addEffect(effect);
-        ability.addEffect(new BecomesColorTargetEffect(new ObjectColor(), Duration.Custom, "artifact in addition to its other types"));
+        ability.addEffect(new BecomesColorTargetEffect(ObjectColor.COLORLESS, Duration.Custom, " artifact in addition to its other types"));
         ability.addEffect(new XathridGorgonCantActivateEffect());
         this.addAbility(ability);
 
@@ -75,7 +75,7 @@ class XathridGorgonCantActivateEffect extends RestrictionEffect {
         staticText = "Its activated abilities can't be activated";
     }
 
-    public XathridGorgonCantActivateEffect(final XathridGorgonCantActivateEffect effect) {
+    private XathridGorgonCantActivateEffect(final XathridGorgonCantActivateEffect effect) {
         super(effect);
     }
 

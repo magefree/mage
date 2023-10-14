@@ -35,7 +35,7 @@ public final class SkittishValesk extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SkittishValeskEffect(), TargetController.YOU, false));
 
         // Morph {5}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{R}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{5}{R}")));
     }
 
     private SkittishValesk(final SkittishValesk card) {
@@ -55,7 +55,7 @@ class SkittishValeskEffect extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, turn {this} face down";
     }
 
-    public SkittishValeskEffect(SkittishValeskEffect effect) {
+    private SkittishValeskEffect(final SkittishValeskEffect effect) {
         super(effect);
     }
 

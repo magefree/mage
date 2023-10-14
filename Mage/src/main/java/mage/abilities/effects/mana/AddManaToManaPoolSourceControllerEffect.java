@@ -20,7 +20,7 @@ public class AddManaToManaPoolSourceControllerEffect extends OneShotEffect {
         this.staticText = "Add " + mana.toString() + "";
     }
 
-    public AddManaToManaPoolSourceControllerEffect(final AddManaToManaPoolSourceControllerEffect effect) {
+    protected AddManaToManaPoolSourceControllerEffect(final AddManaToManaPoolSourceControllerEffect effect) {
         super(effect);
         this.mana = effect.mana.copy();
     }

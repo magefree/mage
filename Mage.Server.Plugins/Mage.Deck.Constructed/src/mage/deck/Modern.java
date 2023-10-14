@@ -53,7 +53,6 @@ public class Modern extends Constructed {
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
         banned.add("Ponder");
-        banned.add("Preordain");
         banned.add("Punishing Fire");
         banned.add("Rite of Flame");
         banned.add("Seat of the Synod");
@@ -69,7 +68,7 @@ public class Modern extends Constructed {
         banned.add("Tree of Tales");
         banned.add("Umezawa's Jitte");
         banned.add("Uro, Titan of Nature's Wrath");
-        banned.add("Yorion, the Sky Nomad");
+        banned.add("Yorion, Sky Nomad");
         banned.add("Vault of Whispers");
     }
 }

@@ -53,7 +53,7 @@ class SandstoneOracleEffect extends OneShotEffect {
         this.staticText = "choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference";
     }
 
-    SandstoneOracleEffect(final SandstoneOracleEffect effect) {
+    private SandstoneOracleEffect(final SandstoneOracleEffect effect) {
         super(effect);
     }
 

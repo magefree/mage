@@ -74,7 +74,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                 "Those players put the exiled cards onto the battlefield, then shuffle";
     }
 
-    public IndomitableCreativityEffect(final IndomitableCreativityEffect effect) {
+    private IndomitableCreativityEffect(final IndomitableCreativityEffect effect) {
         super(effect);
     }
 

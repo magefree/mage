@@ -26,7 +26,7 @@ public final class RiaIvorBaneOfBladehold extends CardImpl {
     public RiaIvorBaneOfBladehold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
@@ -58,7 +58,7 @@ class RiaIvorBaneOfBladeholdEffect extends PreventionEffectImpl {
         this.staticText = "the next time target creature would deal combat damage to one or more players this combat, prevent that damage. If damage is prevented this way, create that many 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and \"This creature can't block.\"";
     }
 
-    public RiaIvorBaneOfBladeholdEffect(final RiaIvorBaneOfBladeholdEffect effect) {
+    private RiaIvorBaneOfBladeholdEffect(final RiaIvorBaneOfBladeholdEffect effect) {
         super(effect);
     }
 

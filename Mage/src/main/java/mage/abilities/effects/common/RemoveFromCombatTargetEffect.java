@@ -1,7 +1,7 @@
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class RemoveFromCombatTargetEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class RemoveFromCombatTargetEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public RemoveFromCombatTargetEffect(final RemoveFromCombatTargetEffect effect) {
+    protected RemoveFromCombatTargetEffect(final RemoveFromCombatTargetEffect effect) {
         super(effect);
     }
 
@@ -44,7 +43,7 @@ public class RemoveFromCombatTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "Remove target " + mode.getTargets().get(0).getTargetName() + " from combat";
+        return "remove " + getTargetPointer().describeTargets(mode.getTargets(), "that creature") + " from combat";
     }
 
 }

@@ -46,9 +46,10 @@ class RunicArmasaurTriggeredAbility extends TriggeredAbilityImpl {
 
     RunicArmasaurTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
+        setTriggerPhrase("Whenever an opponent activates an ability of a creature or land that isn't a mana ability, ");
     }
 
-    RunicArmasaurTriggeredAbility(final RunicArmasaurTriggeredAbility ability) {
+    private RunicArmasaurTriggeredAbility(final RunicArmasaurTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,8 +78,4 @@ class RunicArmasaurTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever an opponent activates an ability of a creature or a land that is not a mana ability, you may draw a card.";
-    }
 }

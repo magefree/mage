@@ -59,7 +59,7 @@ class AvengerEnDalEffect extends OneShotEffect {
         staticText = "Its controller gains life equal to its toughness";
     }
 
-    public AvengerEnDalEffect(final AvengerEnDalEffect effect) {
+    private AvengerEnDalEffect(final AvengerEnDalEffect effect) {
         super(effect);
     }
 

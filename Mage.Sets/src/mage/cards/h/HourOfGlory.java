@@ -51,7 +51,7 @@ class HourOfGloryEffect extends OneShotEffect {
         this.staticText = "Exile target creature. If that creature was a God, its controller reveals their hand and exiles all cards with the same name as that creature";
     }
 
-    public HourOfGloryEffect(final HourOfGloryEffect effect) {
+    private HourOfGloryEffect(final HourOfGloryEffect effect) {
         super(effect);
     }
 

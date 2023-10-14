@@ -38,7 +38,7 @@ public final class FeastOfWorms extends CardImpl {
         this.getSpellAbility().addEffect(new FeastOfWormsEffect());
     }
 
-    public FeastOfWorms (final FeastOfWorms card) {
+    private FeastOfWorms(final FeastOfWorms card) {
         super(card);
     }
 
@@ -56,7 +56,7 @@ class FeastOfWormsEffect extends OneShotEffect {
         staticText = "If that land was legendary, its controller sacrifices another land";
     }
 
-    FeastOfWormsEffect(FeastOfWormsEffect effect) {
+    private FeastOfWormsEffect(final FeastOfWormsEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class FeastOfWormsEffect extends OneShotEffect {
         if (permanent != null) {
             targetPlayer = game.getPlayer(permanent.getControllerId());
         }
-        if (targetPlayer != null && permanent != null && (permanent.isLegendary())) {
+        if (targetPlayer != null && permanent != null && (permanent.isLegendary(game))) {
             FilterControlledPermanent filter = new FilterControlledLandPermanent("land to sacrifice");
             filter.add(new ControllerIdPredicate(targetPlayer.getId()));
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);

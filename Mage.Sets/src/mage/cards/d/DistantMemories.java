@@ -45,7 +45,7 @@ class DistantMemoriesEffect extends OneShotEffect {
                 + "your hand. If no player does, you draw three cards";
     }
 
-    public DistantMemoriesEffect(final DistantMemoriesEffect effect) {
+    private DistantMemoriesEffect(final DistantMemoriesEffect effect) {
         super(effect);
     }
 

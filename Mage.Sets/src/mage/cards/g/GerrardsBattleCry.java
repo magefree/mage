@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -21,7 +20,9 @@ public final class GerrardsBattleCry extends CardImpl {
     public GerrardsBattleCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false), new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false),
+                new ManaCostsImpl<>("{2}{W}")));
     }
 
     private GerrardsBattleCry(final GerrardsBattleCry card) {

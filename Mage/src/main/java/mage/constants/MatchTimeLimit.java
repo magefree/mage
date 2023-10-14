@@ -22,16 +22,16 @@ public enum MatchTimeLimit {
     MIN__90(5400, "90 Minutes"),
     MIN_120(7200, "120 Minutes");
 
-    private final int matchSeconds;
+    private final int prioritySecs;
     private final String name;
 
-    MatchTimeLimit(int matchSeconds, String name) {
-        this.matchSeconds = matchSeconds;
+    MatchTimeLimit(int prioritySecs, String name) {
+        this.prioritySecs = prioritySecs;
         this.name = name;
     }
 
-    public int getTimeLimit() {
-        return matchSeconds;
+    public int getPrioritySecs() {
+        return prioritySecs;
     }
 
     public String getName() {

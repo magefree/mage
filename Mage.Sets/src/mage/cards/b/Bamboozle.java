@@ -51,7 +51,7 @@ class BamboozleEffect extends OneShotEffect {
         staticText = "Target player reveals the top four cards of their library. You choose two of those cards and put them into their graveyard. Put the rest on top of their library in any order";
     }
 
-    BamboozleEffect(final BamboozleEffect effect) {
+    private BamboozleEffect(final BamboozleEffect effect) {
         super(effect);
     }
 

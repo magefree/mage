@@ -52,7 +52,7 @@ class GravebladeMarauderEffect extends OneShotEffect {
         this.staticText = "that player loses life equal to the number of creature cards in your graveyard";
     }
 
-    public GravebladeMarauderEffect(final GravebladeMarauderEffect effect) {
+    private GravebladeMarauderEffect(final GravebladeMarauderEffect effect) {
         super(effect);
     }
 

@@ -62,7 +62,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
         this.staticText = "Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
     }
 
-    public MerchantsDockhandEffect(final MerchantsDockhandEffect effect) {
+    private MerchantsDockhandEffect(final MerchantsDockhandEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
 
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
@@ -118,7 +118,7 @@ class TapXTargetCost extends VariableCostImpl {
         this.text = "Tap X untapped artifacts you control";
     }
 
-    public TapXTargetCost(final TapXTargetCost cost) {
+    private TapXTargetCost(final TapXTargetCost cost) {
         super(cost);
     }
 

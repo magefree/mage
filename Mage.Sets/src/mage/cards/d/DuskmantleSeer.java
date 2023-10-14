@@ -55,7 +55,7 @@ class DuskmantleSeerEffect extends OneShotEffect {
                 "loses life equal to that card's mana value, then puts it into their hand";
     }
 
-    public DuskmantleSeerEffect(final DuskmantleSeerEffect effect) {
+    private DuskmantleSeerEffect(final DuskmantleSeerEffect effect) {
         super(effect);
     }
 

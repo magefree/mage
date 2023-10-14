@@ -64,7 +64,7 @@ class DeepwoodElderEffect extends OneShotEffect {
         this.staticText = "X target lands become Forests until end of turn";
     }
 
-    DeepwoodElderEffect(final DeepwoodElderEffect effect) {
+    private DeepwoodElderEffect(final DeepwoodElderEffect effect) {
         super(effect);
     }
 

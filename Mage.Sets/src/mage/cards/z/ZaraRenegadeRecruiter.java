@@ -32,7 +32,7 @@ public final class ZaraRenegadeRecruiter extends CardImpl {
     public ZaraRenegadeRecruiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(4);
@@ -111,7 +111,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
             filter.getPlayerFilter().add(new PlayerIdPredicate(player.getId()));
             filter.getPermanentFilter().add(new ControllerIdPredicate(player.getId()));
             TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }

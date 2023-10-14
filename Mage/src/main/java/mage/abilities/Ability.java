@@ -102,6 +102,18 @@ public interface Ability extends Controllable, Serializable {
      */
     void setSourceId(UUID sourceID);
 
+    default void clearCosts() {
+        getCosts().clear();
+    }
+
+    default void clearManaCosts() {
+        getManaCosts().clear();
+    }
+
+    default void clearManaCostsToPay() {
+        getManaCostsToPay().clear();
+    }
+
     /**
      * Gets all {@link Costs} associated with this ability.
      *
@@ -143,13 +155,7 @@ public interface Ability extends Controllable, Serializable {
      */
     ManaCosts<ManaCost> getManaCostsToPay();
 
-    /**
-     * Adds a {@link ManaCost} to this ability that must be paid before this
-     * ability is activated.
-     *
-     * @param cost The {@link ManaCost} to add.
-     */
-    void addManaCost(ManaCost cost);
+    void addManaCostsToPay(ManaCost manaCost);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of
@@ -428,7 +434,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param ruleVisible
      */
-    void setRuleVisible(boolean ruleVisible);
+    Ability setRuleVisible(boolean ruleVisible);
 
     /**
      * Returns true if the additional costs of the abilitiy should be visible on
@@ -556,6 +562,11 @@ public interface Ability extends Controllable, Serializable {
     List<Hint> getHints();
 
     Ability addHint(Hint hint);
+
+    /**
+     * Tag the current mode to be retrieved elsewhere thanks to the tag.
+     */
+    void setModeTag(String tag);
 
     /**
      * For abilities with static icons

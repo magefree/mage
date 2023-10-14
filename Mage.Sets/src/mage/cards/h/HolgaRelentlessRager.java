@@ -29,7 +29,7 @@ public final class HolgaRelentlessRager extends CardImpl {
     public HolgaRelentlessRager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(4);

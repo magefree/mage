@@ -49,7 +49,7 @@ class RainOfGoreEffect extends ReplacementEffectImpl {
         staticText = "If a spell or ability would cause its controller to gain life, that player loses that much life instead";
     }
 
-    public RainOfGoreEffect(final RainOfGoreEffect effect) {
+    private RainOfGoreEffect(final RainOfGoreEffect effect) {
         super(effect);
     }
 

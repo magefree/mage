@@ -29,7 +29,7 @@ public final class Vigilance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Vigilance (final Vigilance card) {
+    private Vigilance(final Vigilance card) {
         super(card);
     }
 

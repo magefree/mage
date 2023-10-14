@@ -49,7 +49,7 @@ class SuicidalChargeEffect extends RequirementEffect {
         staticText = "Those creatures attack this turn if able";
     }
 
-    public SuicidalChargeEffect(final SuicidalChargeEffect effect) {
+    private SuicidalChargeEffect(final SuicidalChargeEffect effect) {
         super(effect);
     }
 

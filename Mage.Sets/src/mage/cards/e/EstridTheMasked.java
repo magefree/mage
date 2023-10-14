@@ -1,20 +1,14 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.filter.predicate.Predicates;
@@ -26,8 +20,9 @@ import mage.game.permanent.token.MaskToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class EstridTheMasked extends CardImpl {
@@ -43,7 +38,7 @@ public final class EstridTheMasked extends CardImpl {
     public EstridTheMasked(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ESTRID);
         this.setStartingLoyalty(3);
 
@@ -87,7 +82,7 @@ class EstridTheMaskedTokenEffect extends OneShotEffect {
                 + "The token has enchant permanent and totem armor";
     }
 
-    public EstridTheMaskedTokenEffect(final EstridTheMaskedTokenEffect effect) {
+    private EstridTheMaskedTokenEffect(final EstridTheMaskedTokenEffect effect) {
         super(effect);
     }
 
@@ -98,17 +93,11 @@ class EstridTheMaskedTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect = new CreateTokenEffect(new MaskToken());
-        effect.apply(game, source);
-        for (UUID tokenId : effect.getLastAddedTokenIds()) {
-            Permanent token = game.getPermanent(tokenId);
-            if (token == null) {
-                continue;
-            }
-            token.getAbilities().get(0).getTargets().get(0).add(source.getFirstTarget(), game);
-            token.getAbilities().get(0).getEffects().get(0).apply(game, token.getAbilities().get(0));
-        }
-        return true;
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        return permanent != null && new MaskToken().putOntoBattlefield(
+                1, game, source, source.getControllerId(), false,
+                false, null, permanent.getId()
+        );
     }
 }
 
@@ -132,7 +121,7 @@ class EstridTheMaskedGraveyardEffect extends OneShotEffect {
                 + "then do the same for Aura cards";
     }
 
-    public EstridTheMaskedGraveyardEffect(final EstridTheMaskedGraveyardEffect effect) {
+    private EstridTheMaskedGraveyardEffect(final EstridTheMaskedGraveyardEffect effect) {
         super(effect);
     }
 

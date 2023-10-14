@@ -53,7 +53,7 @@ class ShallowGraveEffect extends OneShotEffect {
         this.staticText = "Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step";
     }
 
-    public ShallowGraveEffect(final ShallowGraveEffect effect) {
+    private ShallowGraveEffect(final ShallowGraveEffect effect) {
         super(effect);
     }
 

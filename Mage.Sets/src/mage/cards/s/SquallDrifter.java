@@ -25,7 +25,7 @@ public final class SquallDrifter extends CardImpl {
 
     public SquallDrifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -94,7 +94,7 @@ class KayaTheInexorableEmblemEffect extends OneShotEffect {
                 cards.addAll(player.getGraveyard());
                 break;
             case "Exile":
-                cards.addAll(game.getExile().getCards(filter, game));
+                cards.addAllCards(game.getExile().getCards(filter, game));
                 break;
         }
         return CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter2);

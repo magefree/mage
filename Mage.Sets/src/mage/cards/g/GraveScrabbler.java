@@ -8,7 +8,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,7 +40,7 @@ public final class GraveScrabbler extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public GraveScrabbler copy() {
         return new GraveScrabbler(this);
     }
 

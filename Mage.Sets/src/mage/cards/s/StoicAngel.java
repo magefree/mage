@@ -59,7 +59,7 @@ class StoicAngelEffect extends RestrictionUntapNotMoreThanEffect {
         staticText = "Players can't untap more than one creature during their untap steps";
     }
 
-    public StoicAngelEffect(final StoicAngelEffect effect) {
+    private StoicAngelEffect(final StoicAngelEffect effect) {
         super(effect);
     }
 

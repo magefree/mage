@@ -40,7 +40,7 @@ public final class JiangYanggu extends CardImpl {
     public JiangYanggu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.YANGGU);
         this.setStartingLoyalty(4);
 

@@ -69,7 +69,7 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetOpponent());
     }
 
-    public DiregrafCaptainTriggeredAbility(final DiregrafCaptainTriggeredAbility ability) {
+    private DiregrafCaptainTriggeredAbility(final DiregrafCaptainTriggeredAbility ability) {
         super(ability);
     }
 

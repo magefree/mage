@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.BackupAbility;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -36,9 +36,9 @@ public final class ArchpriestOfShadows extends CardImpl {
         backupAbility.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever this creature deals combat damage to a player or battle, return target creature card from your graveyard to the battlefield.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
+        Ability ability = new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), false
-        ).setOrBattle(true).setTriggerPhrase("Whenever this creature deals combat damage to a player or battle, ");
+        ).setTriggerPhrase("Whenever this creature deals combat damage to a player or battle, ");
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         backupAbility.addAbility(ability);
     }

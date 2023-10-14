@@ -3,8 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.CreaturesBecomeOtherTypeEffect;
@@ -53,7 +52,7 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
         this.staticText = this.staticText + " and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
     }
 
-    DismissIntoDreamEffect(final DismissIntoDreamEffect effect) {
+    private DismissIntoDreamEffect(final DismissIntoDreamEffect effect) {
         super(effect);
     }
 
@@ -73,7 +72,7 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
 
         if (layer == Layer.AbilityAddingRemovingEffects_6) {
             for (Permanent object: game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game)) {
-                object.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
+                object.addAbility(new BecomesTargetSourceTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
             }
         }
 

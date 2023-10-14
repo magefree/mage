@@ -38,7 +38,7 @@ public final class MagefireWings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagefireWings(final MagefireWings card) {
+    private MagefireWings(final MagefireWings card) {
         super(card);
     }
 

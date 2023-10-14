@@ -22,7 +22,7 @@ public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
         addDependencyType(dependency);
     }
 
-    public AddCardSubtypeAllEffect(final AddCardSubtypeAllEffect effect) {
+    protected AddCardSubtypeAllEffect(final AddCardSubtypeAllEffect effect) {
         super(effect);
         filter = effect.filter;
         addedSubtype = effect.addedSubtype;

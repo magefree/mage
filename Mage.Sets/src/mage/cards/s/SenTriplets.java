@@ -26,7 +26,7 @@ public final class SenTriplets extends CardImpl {
 
     public SenTriplets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -69,11 +69,6 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public SenTripletsRuleModifyingEffect copy() {
         return new SenTripletsRuleModifyingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -132,7 +127,7 @@ class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
         staticText = "You may play lands and cast spells from that player's hand this turn";
     }
 
-    public SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
+    private SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
         super(effect);
     }
 

@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -38,7 +38,7 @@ public final class EmblemOfTheWarmind extends CardImpl {
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES)));
+                new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
     private EmblemOfTheWarmind(final EmblemOfTheWarmind card) {

@@ -25,7 +25,7 @@ public final class MaralenOfTheMornsong extends CardImpl {
 
     public MaralenOfTheMornsong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -56,13 +56,8 @@ class MaralenOfTheMornsongEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't draw cards";
     }
 
-    public MaralenOfTheMornsongEffect(final MaralenOfTheMornsongEffect effect) {
+    private MaralenOfTheMornsongEffect(final MaralenOfTheMornsongEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -89,7 +84,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
         staticText = "that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles";
     }
 
-    public MaralenOfTheMornsongEffect2(final MaralenOfTheMornsongEffect2 effect) {
+    private MaralenOfTheMornsongEffect2(final MaralenOfTheMornsongEffect2 effect) {
         super(effect);
     }
 

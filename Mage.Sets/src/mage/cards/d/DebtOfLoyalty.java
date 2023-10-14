@@ -42,7 +42,7 @@ public final class DebtOfLoyalty extends CardImpl {
             this.staticText = "Regenerate target creature. You gain control of that creature if it regenerates this way.";
         }
 
-        public DebtOfLoyaltyEffect(final DebtOfLoyaltyEffect effect) {
+        private DebtOfLoyaltyEffect(final DebtOfLoyaltyEffect effect) {
             super(effect);
         }
         

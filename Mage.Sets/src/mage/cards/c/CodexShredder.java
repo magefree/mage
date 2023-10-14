@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class CodexShredder extends CardImpl {
 
         // {T}: Target player puts the top card of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(
-                new PutLibraryIntoGraveTargetEffect(1), new TapSourceCost()
+                new MillCardsTargetEffect(1), new TapSourceCost()
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

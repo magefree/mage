@@ -60,7 +60,7 @@ class CruelDeceiverEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gains \"Whenever Cruel Deceiver deals damage to a creature, destroy that creature\" until end of turn";
     }
 
-    public CruelDeceiverEffect(final CruelDeceiverEffect effect) {
+    private CruelDeceiverEffect(final CruelDeceiverEffect effect) {
         super(effect);
     }
 

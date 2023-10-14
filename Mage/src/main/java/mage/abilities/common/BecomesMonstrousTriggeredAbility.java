@@ -9,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author Styxo
  */
 public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
@@ -19,7 +18,7 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control becomes monstrous, ");
     }
 
-    public BecomesMonstrousTriggeredAbility(final BecomesMonstrousTriggeredAbility ability) {
+    protected BecomesMonstrousTriggeredAbility(final BecomesMonstrousTriggeredAbility ability) {
         super(ability);
     }
 

@@ -60,7 +60,7 @@ class DayEffect extends ContinuousEffectImpl {
         staticText = "Creatures target player controls get +1/+1 until end of turn";
     }
 
-    public DayEffect(final DayEffect effect) {
+    private DayEffect(final DayEffect effect) {
         super(effect);
     }
 

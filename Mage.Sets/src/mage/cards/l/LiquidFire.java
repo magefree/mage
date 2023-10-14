@@ -6,7 +6,6 @@ import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,13 +47,13 @@ public final class LiquidFire extends CardImpl {
     private static class LiquidFireEffect extends OneShotEffect {
         protected DynamicValue choiceValue;
 
-        public LiquidFireEffect(DynamicValue choiceValue) {
+        LiquidFireEffect(DynamicValue choiceValue) {
             super(Outcome.Damage);
             this.staticText = "{this} deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.";
             this.choiceValue = choiceValue;
         }
 
-        public LiquidFireEffect(LiquidFireEffect effect) {
+        private LiquidFireEffect(final LiquidFireEffect effect) {
             super(effect);
             this.choiceValue = effect.choiceValue;
         }
@@ -76,7 +75,7 @@ public final class LiquidFire extends CardImpl {
         }
 
         @Override
-        public Effect copy() {
+        public LiquidFireEffect copy() {
             return new LiquidFireEffect(this);
         }
     }
@@ -84,17 +83,17 @@ public final class LiquidFire extends CardImpl {
 
 class LiquidFireAdditionalCost extends VariableCostImpl {
 
-    public LiquidFireAdditionalCost() {
+    LiquidFireAdditionalCost() {
         super(VariableCostType.ADDITIONAL, "Choose a Number");
-        this.text = "as an additional cost to cast this spell, choose a number between 0 and 5";
+        this.text = "choose a number between 0 and 5";
     }
 
-    public LiquidFireAdditionalCost(final LiquidFireAdditionalCost cost) {
+    private LiquidFireAdditionalCost(final LiquidFireAdditionalCost cost) {
         super(cost);
     }
 
     @Override
-    public Cost copy() {
+    public LiquidFireAdditionalCost copy() {
         return new LiquidFireAdditionalCost(this);
     }
 

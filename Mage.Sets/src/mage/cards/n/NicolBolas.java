@@ -24,7 +24,7 @@ public final class NicolBolas extends CardImpl {
 
     public NicolBolas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{B}{B}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
 
@@ -37,7 +37,7 @@ public final class NicolBolas extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}{B}{R}")), TargetController.YOU, false));
 
         // Whenever Nicol Bolas deals damage to an opponent, that player discards their hand.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardHandTargetEffect("that player"), false, false, true));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardHandTargetEffect(), false, false, true));
     }
 
     private NicolBolas(final NicolBolas card) {

@@ -42,7 +42,7 @@ class KrakensEyeAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
     }
 
-    public KrakensEyeAbility(final KrakensEyeAbility ability) {
+    private KrakensEyeAbility(final KrakensEyeAbility ability) {
         super(ability);
     }
 

@@ -23,7 +23,7 @@ public final class RuneTailKitsuneAscendant extends CardImpl {
 
     public RuneTailKitsuneAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.MONK);
 
@@ -52,7 +52,7 @@ class RuneTailKitsuneAscendantFlipAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new RuneTailEssence()));
     }
 
-    public RuneTailKitsuneAscendantFlipAbility(final RuneTailKitsuneAscendantFlipAbility ability) {
+    private RuneTailKitsuneAscendantFlipAbility(final RuneTailKitsuneAscendantFlipAbility ability) {
         super(ability);
     }
 
@@ -81,7 +81,7 @@ class RuneTailEssence extends TokenImpl {
 
     RuneTailEssence() {
         super("Rune-Tail's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setWhite(true);
@@ -91,7 +91,7 @@ class RuneTailEssence extends TokenImpl {
                 new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES)));
     }
 
-    public RuneTailEssence(final RuneTailEssence token) {
+    private RuneTailEssence(final RuneTailEssence token) {
         super(token);
     }
 

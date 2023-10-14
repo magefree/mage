@@ -56,7 +56,7 @@ public final class InallaArchmageRitualist extends CardImpl {
     public InallaArchmageRitualist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -98,7 +98,7 @@ class InallaArchmageRitualistEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of that Wizard. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    public InallaArchmageRitualistEffect(final InallaArchmageRitualistEffect effect) {
+    private InallaArchmageRitualistEffect(final InallaArchmageRitualistEffect effect) {
         super(effect);
     }
 

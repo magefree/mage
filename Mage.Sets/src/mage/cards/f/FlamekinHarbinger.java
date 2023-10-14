@@ -35,7 +35,7 @@ public final class FlamekinHarbinger extends CardImpl {
         // When Flamekin Harbinger enters the battlefield, you may search your library for an Elemental card,
         // reveal it, then shuffle your library and put that card on top of it.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true), true));
     }
 
     private FlamekinHarbinger(final FlamekinHarbinger card) {

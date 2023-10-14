@@ -50,7 +50,7 @@ class ClamavusEffect extends ContinuousEffectImpl {
         this.staticText = "each creature you control gets +1/+1 for each +1/+1 counter on it";
     }
 
-    public ClamavusEffect(final ClamavusEffect effect) {
+    private ClamavusEffect(final ClamavusEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class ClamavusEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
+                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game
         );
         for (Permanent permanent : permanents) {
             int count = permanent.getCounters(game).getCount(CounterType.P1P1);

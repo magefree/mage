@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -44,7 +45,7 @@ class EnterTheGodEternalsEffect extends OneShotEffect {
     EnterTheGodEternalsEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals 4 damage to target creature and you gain life equal to the damage dealt this way. "
-                + "Target player mills four cards. Amass 4.";
+                + "Target player mills four cards. Amass Zombies 4.";
     }
 
     private EnterTheGodEternalsEffect(final EnterTheGodEternalsEffect effect) {
@@ -75,6 +76,6 @@ class EnterTheGodEternalsEffect extends OneShotEffect {
                 }
             }
         }
-        return new AmassEffect(4).apply(game, source);
+        return new AmassEffect(4, SubType.ZOMBIE).apply(game, source);
     }
 }

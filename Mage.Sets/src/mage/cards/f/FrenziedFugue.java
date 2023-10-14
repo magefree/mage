@@ -57,7 +57,7 @@ class FrenziedFugueTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public FrenziedFugueTriggeredAbility(final FrenziedFugueTriggeredAbility ability) {
+    private FrenziedFugueTriggeredAbility(final FrenziedFugueTriggeredAbility ability) {
         super(ability);
     }
 

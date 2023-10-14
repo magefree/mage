@@ -2,6 +2,7 @@ package mage.interfaces.callback;
 
 import mage.remote.traffic.ZippedObject;
 import mage.utils.CompressUtil;
+import mage.utils.ThreadUtils;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -11,10 +12,22 @@ import java.util.UUID;
  */
 public class ClientCallback implements Serializable {
 
+    // for debug only: simulate bad connection on client side, use launcher's client param like -Dxmage.badconnection
+    private static final String SIMULATE_BAD_CONNECTION_PROP = "xmage.badconnection";
+    public static final boolean SIMULATE_BAD_CONNECTION;
+
+    static {
+        SIMULATE_BAD_CONNECTION = System.getProperty(SIMULATE_BAD_CONNECTION_PROP) != null;
+    }
+
     private UUID objectId;
     private Object data;
     private ClientCallbackMethod method;
     private int messageId;
+
+    public ClientCallback(ClientCallbackMethod method, UUID objectId) {
+        this(method, objectId, null);
+    }
 
     public ClientCallback(ClientCallbackMethod method, UUID objectId, Object data) {
         this(method, objectId, data, true);
@@ -26,8 +39,10 @@ public class ClientCallback implements Serializable {
         this.setData(data, useCompress);
     }
 
-    public ClientCallback(ClientCallbackMethod method, UUID objectId) {
-        this(method, objectId, null);
+    private void simulateBadConnection() {
+        if (SIMULATE_BAD_CONNECTION) {
+            ThreadUtils.sleep(100);
+        }
     }
 
     public void clear() {
@@ -55,12 +70,14 @@ public class ClientCallback implements Serializable {
             this.data = data;
         } else {
             this.data = CompressUtil.compress(data);
+            simulateBadConnection();
         }
     }
 
     public void decompressData() {
         if (this.data instanceof ZippedObject) {
             this.data = CompressUtil.decompress(this.data);
+            simulateBadConnection();
         }
     }
 

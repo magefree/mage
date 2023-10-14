@@ -14,9 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,19 +60,13 @@ public class EvolvingAdaptive extends CardImpl {
 
 class EvolvingAdaptiveTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public EvolvingAdaptiveTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.OIL.createInstance()));
         this.setTriggerPhrase("Whenever another creature enters the battlefield under your " +
                 "control, if that creature has greater power or toughness than {this}, ");
     }
 
-    public EvolvingAdaptiveTriggeredAbility(final EvolvingAdaptiveTriggeredAbility ability) {
+    private EvolvingAdaptiveTriggeredAbility(final EvolvingAdaptiveTriggeredAbility ability) {
         super(ability);
     }
 
@@ -91,10 +83,13 @@ class EvolvingAdaptiveTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enteringCreature = game.getPermanent(event.getTargetId());
-        if (enteringCreature == null || !filter.match(enteringCreature, getControllerId(), this, game)) {
+        Permanent permanent = getSourcePermanentIfItStillExists(game);
+        if (enteringCreature == null
+                || permanent == null
+                || !StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL.match(enteringCreature, getControllerId(), this, game)) {
             return false;
         }
-        Permanent permanent = getSourcePermanentIfItStillExists(game);
+
         return !(enteringCreature.getPower().getValue() <= permanent.getPower().getValue() &&
                 enteringCreature.getToughness().getValue() <= permanent.getToughness().getValue());
     }

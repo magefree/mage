@@ -33,7 +33,7 @@ public final class KnightsOfThorn extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public KnightsOfThorn (final KnightsOfThorn card) {
+    private KnightsOfThorn(final KnightsOfThorn card) {
         super(card);
     }
 

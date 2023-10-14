@@ -29,7 +29,7 @@ public final class PopularEntertainer extends CardImpl {
     public PopularEntertainer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "Whenever one or more creatures you control deal combat damage to a player, goad target creature that player controls."

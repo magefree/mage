@@ -22,7 +22,7 @@ public final class SedrisTheTraitorKing extends CardImpl {
 
     public SedrisTheTraitorKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -49,7 +49,7 @@ class SedrisTheTraitorKingEffect extends ContinuousEffectImpl {
         staticText = "Each creature card in your graveyard has unearth {2}{B}";
     }
 
-    SedrisTheTraitorKingEffect(final SedrisTheTraitorKingEffect effect) {
+    private SedrisTheTraitorKingEffect(final SedrisTheTraitorKingEffect effect) {
         super(effect);
     }
 

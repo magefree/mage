@@ -55,7 +55,7 @@ class FumbleEffect extends OneShotEffect {
                 + "then attach them to another creature";
     }
 
-    FumbleEffect(final FumbleEffect effect) {
+    private FumbleEffect(final FumbleEffect effect) {
         super(effect);
     }
 

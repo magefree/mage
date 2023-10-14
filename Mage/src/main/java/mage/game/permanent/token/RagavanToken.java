@@ -20,7 +20,7 @@ public final class RagavanToken extends TokenImpl {
         this.cardType.add(CardType.CREATURE);
     }
 
-    public RagavanToken(final RagavanToken token) {
+    protected RagavanToken(final RagavanToken token) {
         super(token);
     }
 

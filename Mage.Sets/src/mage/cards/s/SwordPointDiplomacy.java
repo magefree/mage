@@ -49,7 +49,7 @@ class SwordPointDiplomacyEffect extends OneShotEffect {
         this.staticText = "Reveal the top three cards of your library. For each of those cards, put that card into your hand unless any opponent pays 3 life. Then exile the rest.";
     }
 
-    SwordPointDiplomacyEffect(final SwordPointDiplomacyEffect effect) {
+    private SwordPointDiplomacyEffect(final SwordPointDiplomacyEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class SwordPointDiplomacyEffect extends OneShotEffect {
         }
         int amount = Math.min(controller.getLibrary().size(), 3);
         CardsImpl cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, amount));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, amount));
         controller.revealCards(sourceObject.getIdName(), cards, game);
         Set<Card> cardsList = cards.getCards(game);
         Cards cardsToHand = new CardsImpl();

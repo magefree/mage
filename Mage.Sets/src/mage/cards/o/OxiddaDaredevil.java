@@ -41,7 +41,7 @@ public final class OxiddaDaredevil extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public OxiddaDaredevil (final OxiddaDaredevil card) {
+    private OxiddaDaredevil(final OxiddaDaredevil card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public class ChoiceColor extends ChoiceImpl {
         this.setSubMessage(chooseSubMessage);
     }
 
-    public ChoiceColor(final ChoiceColor choice) {
+    protected ChoiceColor(final ChoiceColor choice) {
         super(choice);
     }
 

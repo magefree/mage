@@ -58,7 +58,7 @@ class ScalpelexisEffect extends OneShotEffect {
         this.staticText = "that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process";
     }
 
-    public ScalpelexisEffect(final ScalpelexisEffect effect) {
+    private ScalpelexisEffect(final ScalpelexisEffect effect) {
         super(effect);
     }
 

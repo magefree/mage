@@ -51,7 +51,7 @@ class RideTheAvalancheAsThoughEffect extends AsThoughEffectImpl {
         staticText = "The next spell you cast this turn can be cast as though it had flash";
     }
 
-    public RideTheAvalancheAsThoughEffect(final RideTheAvalancheAsThoughEffect effect) {
+    private RideTheAvalancheAsThoughEffect(final RideTheAvalancheAsThoughEffect effect) {
         super(effect);
     }
 

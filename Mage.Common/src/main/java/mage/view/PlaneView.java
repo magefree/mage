@@ -15,6 +15,7 @@ public class PlaneView implements CommandObjectView, Serializable {
 
     protected UUID id;
     protected String name;
+    protected int imageNum;
     protected String expansionSetCode;
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
@@ -22,6 +23,7 @@ public class PlaneView implements CommandObjectView, Serializable {
     public PlaneView(Plane plane) {
         this.id = plane.getId();
         this.name = plane.getName();
+        this.imageNum = plane.getImageNumber();
         this.expansionSetCode = plane.getExpansionSetCode();
         this.rules = plane.getAbilities().getRules(plane.getName());
     }
@@ -39,6 +41,11 @@ public class PlaneView implements CommandObjectView, Serializable {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public int getImageNumber() {
+        return imageNum;
     }
 
     @Override

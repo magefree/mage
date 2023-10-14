@@ -20,7 +20,7 @@ public final class TimelessLotus extends CardImpl {
     public TimelessLotus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Timeless Lotus enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

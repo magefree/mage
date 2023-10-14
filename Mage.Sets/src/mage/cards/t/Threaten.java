@@ -23,7 +23,7 @@ public final class Threaten extends CardImpl {
 
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap target creature"));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn).setText("and gain control of it until end of turn"));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("That creature gains haste until end of turn."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

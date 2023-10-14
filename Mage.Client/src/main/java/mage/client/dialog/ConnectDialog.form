@@ -365,6 +365,7 @@
             <Property name="text" type="java.lang.String" value="X"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to xmage.de (first Europe server, most popular, registration needs)"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
@@ -424,6 +425,7 @@
             <Property name="text" type="java.lang.String" value="US"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to us.xmage.today (USA, use any username without registration)"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
@@ -453,6 +455,7 @@
             <Property name="text" type="java.lang.String" value="EU"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to eu.xmage.today (second Europe server, use any username without registration)"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
@@ -527,6 +530,7 @@
             <Property name="text" type="java.lang.String" value="Check online status"/>
             <Property name="toolTipText" type="java.lang.String" value="Go to servers online statuses page"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 2, 2, 2]"/>
             </Property>

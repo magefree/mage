@@ -7,7 +7,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class ExploreTargetEffect extends OneShotEffect {
@@ -21,7 +20,7 @@ public class ExploreTargetEffect extends OneShotEffect {
         this.staticText = ExploreSourceEffect.getRuleText(showAbilityHint);
     }
 
-    public ExploreTargetEffect(final ExploreTargetEffect effect) {
+    protected ExploreTargetEffect(final ExploreTargetEffect effect) {
         super(effect);
     }
 

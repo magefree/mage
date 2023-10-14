@@ -36,7 +36,7 @@ public final class NissaStewardOfElements extends CardImpl {
 
     public NissaStewardOfElements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{X}{G}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
         this.setStartingLoyalty(-2); // -2 loyalty means X
@@ -77,7 +77,7 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
                 + "to the number of loyalty counters on {this}, you may put that card onto the battlefield";
     }
 
-    public NissaStewardOfElementsEffect(final NissaStewardOfElementsEffect effect) {
+    private NissaStewardOfElementsEffect(final NissaStewardOfElementsEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class NissaStewardOfElementsToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
+    private NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
         super(token);
     }
 

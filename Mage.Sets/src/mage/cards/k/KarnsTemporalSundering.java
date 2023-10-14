@@ -26,7 +26,7 @@ public final class KarnsTemporalSundering extends CardImpl {
 
     public KarnsTemporalSundering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
         this.addAbility(new LegendarySpellAbility());
@@ -55,7 +55,7 @@ class KarnsTemporalSunderingEffect extends OneShotEffect {
         this.staticText = "Target player takes an extra turn after this one. Return up to one target nonland permanent to its owner's hand";
     }
 
-    public KarnsTemporalSunderingEffect(final KarnsTemporalSunderingEffect effect) {
+    private KarnsTemporalSunderingEffect(final KarnsTemporalSunderingEffect effect) {
         super(effect);
     }
 
@@ -66,13 +66,15 @@ class KarnsTemporalSunderingEffect extends OneShotEffect {
             return false;
         }
 
-        game.getState().getTurnMods().add(new TurnMod(source.getTargets().getFirstTarget(), false));
+        if (source.getTargets().getFirstTarget() != null) {
+            game.getState().getTurnMods().add(new TurnMod(source.getTargets().getFirstTarget()).withExtraTurn());
+        }
 
         Permanent returnPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-
         if (returnPermanent != null) {
             controller.moveCards(returnPermanent, Zone.HAND, source, game);
         }
+
         return true;
     }
 

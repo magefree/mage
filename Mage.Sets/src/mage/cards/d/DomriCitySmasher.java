@@ -28,7 +28,7 @@ public final class DomriCitySmasher extends CardImpl {
     public DomriCitySmasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
         this.setStartingLoyalty(4);
 
@@ -37,7 +37,7 @@ public final class DomriCitySmasher extends CardImpl {
                 1, 1, Duration.EndOfTurn
         ).setText("creatures you control get +1/+1"), 2);
         ability.addEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn
+                HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and gain haste until end of turn"));
         this.addAbility(ability);
 
@@ -52,7 +52,7 @@ public final class DomriCitySmasher extends CardImpl {
                 StaticFilters.FILTER_CONTROLLED_CREATURE
         ), -8);
         ability.addEffect(new GainAbilityControlledEffect(
-                TrampleAbility.getInstance(), Duration.EndOfTurn
+                TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("Those creatures gain trample until end of turn"));
         this.addAbility(ability);
     }

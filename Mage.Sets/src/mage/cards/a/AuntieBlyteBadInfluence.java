@@ -33,7 +33,7 @@ public final class AuntieBlyteBadInfluence extends CardImpl {
     public AuntieBlyteBadInfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
@@ -50,7 +50,7 @@ public final class AuntieBlyteBadInfluence extends CardImpl {
                 new DamageTargetEffect(GetXValue.instance, "it"), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

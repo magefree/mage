@@ -61,7 +61,7 @@ class PhyrexianMarauderCantAttackUnlessYouPayEffect extends CantAttackBlockUnles
         staticText = "{this} can't attack unless you pay {1} for each +1/+1 counter on it";
     }
 
-    PhyrexianMarauderCantAttackUnlessYouPayEffect(PhyrexianMarauderCantAttackUnlessYouPayEffect effect) {
+    private PhyrexianMarauderCantAttackUnlessYouPayEffect(final PhyrexianMarauderCantAttackUnlessYouPayEffect effect) {
         super(effect);
     }
 

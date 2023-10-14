@@ -10,8 +10,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
@@ -28,11 +30,7 @@ import mage.game.permanent.token.VampireToken;
  */
 public final class BloodlineKeeper extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control five or more Vampires");
-
-    static {
-        filter.add(SubType.VAMPIRE.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.VAMPIRE, "you control five or more Vampires");
 
     public BloodlineKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
@@ -52,7 +50,7 @@ public final class BloodlineKeeper extends CardImpl {
                 new TransformSourceEffect(),
                 new ManaCostsImpl<>("{B}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(new ValueHint("Vampires you control", new PermanentsOnBattlefieldCount(filter))));
     }
 
     private BloodlineKeeper(final BloodlineKeeper card) {
@@ -63,5 +61,4 @@ public final class BloodlineKeeper extends CardImpl {
     public BloodlineKeeper copy() {
         return new BloodlineKeeper(this);
     }
-
 }

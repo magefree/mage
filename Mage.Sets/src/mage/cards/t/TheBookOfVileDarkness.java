@@ -11,6 +11,7 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -40,13 +41,13 @@ public final class TheBookOfVileDarkness extends CardImpl {
     public TheBookOfVileDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), TargetController.YOU,
                 TheBookOfVileDarknessCondition.instance, false
-        ));
+        ).addHint(new ConditionHint(TheBookOfVileDarknessCondition.instance, "You lost 2 or more life this turn")));
 
         // {T}, Exile The Book of Vile Darkness and artifacts you control named Eye of Vecna and Hand of Vecna: Create Vecna, a legendary 8/8 black Zombie God creature token with indestructible and all triggered abilities of the exiled cards.
         Ability ability = new SimpleActivatedAbility(new TheBookOfVileDarknessEffect(), new TapSourceCost());
@@ -95,7 +96,7 @@ class TheBookOfVileDarknessCost extends CostImpl {
         this.text = "exile {this} and artifacts you control named Eye of Vecna and Hand of Vecna";
     }
 
-    public TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
+    private TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
         super(cost);
     }
 
@@ -144,7 +145,7 @@ class TheBookOfVileDarknessCost extends CostImpl {
                 break;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(Outcome.Sacrifice, target, source, game);
         return game.getPermanent(target.getFirstTarget());
     }

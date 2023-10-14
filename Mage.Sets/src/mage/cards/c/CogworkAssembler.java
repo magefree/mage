@@ -58,7 +58,7 @@ class CogworkAssemblerCreateTokenEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target artifact. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    CogworkAssemblerCreateTokenEffect(final CogworkAssemblerCreateTokenEffect effect) {
+    private CogworkAssemblerCreateTokenEffect(final CogworkAssemblerCreateTokenEffect effect) {
         super(effect);
     }
 

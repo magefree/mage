@@ -27,7 +27,7 @@ public final class SilasRennSeekerAdept extends CardImpl {
     public SilasRennSeekerAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -60,7 +60,7 @@ class SilasRennSeekerAdeptPlayEffect extends AsThoughEffectImpl {
         staticText = "choose target artifact card in your graveyard. You may cast that card this turn";
     }
 
-    public SilasRennSeekerAdeptPlayEffect(final SilasRennSeekerAdeptPlayEffect effect) {
+    private SilasRennSeekerAdeptPlayEffect(final SilasRennSeekerAdeptPlayEffect effect) {
         super(effect);
     }
 

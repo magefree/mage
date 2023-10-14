@@ -54,7 +54,7 @@ class JotunGruntCost extends CostImpl {
     }
 
 
-    JotunGruntCost(final JotunGruntCost cost) {
+    private JotunGruntCost(final JotunGruntCost cost) {
         super(cost);
     }
 

@@ -1,5 +1,6 @@
 package mage.cards.x;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -36,6 +37,7 @@ public final class XandersPact extends CardImpl {
 
         // Each opponent exiles the top card of their library. You may cast spells from among those cards this turn. If you cast a spell this way, pay life equal to that spell's mana value rather than pay its mana cost.
         this.getSpellAbility().addEffect(new XandersPactExileEffect());
+        this.getSpellAbility().setIdentifier(MageIdentifier.XandersPactAlternateCast);
     }
 
     private XandersPact(final XandersPact card) {
@@ -120,7 +122,10 @@ class XandersPactCastEffect extends CanPlayCardControllerEffect {
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.add(new PayLifeCost(cardToCheck.getManaValue()));
         newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
-        controller.setCastSourceIdWithAlternateMana(cardToCheck.getId(), null, newCosts);
+        controller.setCastSourceIdWithAlternateMana(
+                cardToCheck.getId(), null, newCosts,
+                MageIdentifier.XandersPactAlternateCast
+        );
         return true;
     }
 }

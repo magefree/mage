@@ -33,7 +33,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
     public RadhaHeartOfKeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -57,7 +57,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
 
         // 4RG: Radha gets +X/+X until end of turn, where X is the number of lands you control.
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
-        BoostSourceEffect bse = new BoostSourceEffect(controlledLands, controlledLands, Duration.EndOfTurn, true);
+        BoostSourceEffect bse = new BoostSourceEffect(controlledLands, controlledLands, Duration.EndOfTurn);
         bse.setText("Radha gets +X/+X until end of turn, where X is the number of lands you control");
         this.addAbility(new SimpleActivatedAbility(bse, new ManaCostsImpl<>("{4}{R}{G}")));
     }

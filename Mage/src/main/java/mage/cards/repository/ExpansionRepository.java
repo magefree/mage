@@ -62,8 +62,17 @@ public enum ExpansionRepository {
 
     }
 
+    /**
+     * Warning, don't forget to unsubscribe due memory leak problems
+     *
+     * @param listener
+     */
     public void subscribe(Listener<RepositoryEvent> listener) {
         eventSource.addListener(listener);
+    }
+
+    public void unsubscribe(Listener<RepositoryEvent> listener) {
+        eventSource.removeListener(listener);
     }
 
     public void saveSets(final List<ExpansionInfo> newSets, final List<ExpansionInfo> updatedSets, long newContentVersion) {

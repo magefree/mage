@@ -29,7 +29,7 @@ public final class LaeliaTheBladeReforged extends CardImpl {
     public LaeliaTheBladeReforged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -61,7 +61,7 @@ class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbility
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    LaeliaTheBladeReforgedAddCountersTriggeredAbility(final LaeliaTheBladeReforgedAddCountersTriggeredAbility ability) {
+    private LaeliaTheBladeReforgedAddCountersTriggeredAbility(final LaeliaTheBladeReforgedAddCountersTriggeredAbility ability) {
         super(ability);
     }
 

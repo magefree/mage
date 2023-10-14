@@ -48,7 +48,7 @@ class TreacherousTerrainEffect extends OneShotEffect {
         staticText = "{this} deals damage to each opponent equal to the number of lands that player controls";
     }
 
-    public TreacherousTerrainEffect(final TreacherousTerrainEffect effect) {
+    private TreacherousTerrainEffect(final TreacherousTerrainEffect effect) {
         super(effect);
     }
 

@@ -40,6 +40,8 @@ public final class TwoHandedAxe extends AdventureCard {
         // Target creature you control gains double strike until end of turn.
         this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance()));
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private TwoHandedAxe(final TwoHandedAxe card) {

@@ -8,7 +8,6 @@ import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,7 +45,7 @@ public final class OpalTitan extends CardImpl {
     }
 }
 
-class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl implements SourceEffect {
+class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl {
 
     public OpalTitanBecomesCreatureEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
@@ -54,7 +53,7 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl implements Sou
         this.addDependencyType(DependencyType.BecomeCreature);
     }
 
-    public OpalTitanBecomesCreatureEffect(final OpalTitanBecomesCreatureEffect effect) {
+    private OpalTitanBecomesCreatureEffect(final OpalTitanBecomesCreatureEffect effect) {
         super(effect);
     }
 

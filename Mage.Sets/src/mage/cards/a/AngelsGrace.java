@@ -53,7 +53,7 @@ class AngelsGraceEffect extends ContinuousRuleModifyingEffectImpl {
                 + "and your opponents can't win the game this turn";
     }
 
-    public AngelsGraceEffect(final AngelsGraceEffect effect) {
+    private AngelsGraceEffect(final AngelsGraceEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class AngelsGraceReplacementEffect extends ReplacementEffectImpl {
                 + "life total to less than 1 reduces it to 1 instead";
     }
 
-    public AngelsGraceReplacementEffect(final AngelsGraceReplacementEffect effect) {
+    private AngelsGraceReplacementEffect(final AngelsGraceReplacementEffect effect) {
         super(effect);
     }
 

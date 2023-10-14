@@ -43,7 +43,7 @@ class DeadRingersEffect extends DestroyTargetEffect {
         staticText = "Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.";
     }
 
-    public DeadRingersEffect(final DeadRingersEffect effect) {
+    private DeadRingersEffect(final DeadRingersEffect effect) {
         super(effect);
     }
 

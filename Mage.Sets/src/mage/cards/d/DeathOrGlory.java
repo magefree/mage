@@ -46,7 +46,7 @@ class DeathOrGloryEffect extends OneShotEffect {
         this.staticText = "Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield";
     }
 
-    DeathOrGloryEffect(final DeathOrGloryEffect effect) {
+    private DeathOrGloryEffect(final DeathOrGloryEffect effect) {
         super(effect);
     }
 

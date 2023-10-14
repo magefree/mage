@@ -1,8 +1,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,9 +28,7 @@ public final class GhostlyFlicker extends CardImpl {
 
         // Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetPermanent(2, filter));
-        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect()
-                .setText(", then return those cards to the battlefield under your control"));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(true, true));
     }
 
     private GhostlyFlicker(final GhostlyFlicker card) {

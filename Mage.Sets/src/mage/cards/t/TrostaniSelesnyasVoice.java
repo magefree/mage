@@ -33,7 +33,7 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
 
     public TrostaniSelesnyasVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(2);
@@ -65,7 +65,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever another creature enters the battlefield under your control, ");
     }
 
-    public TrostaniSelesnyasVoiceTriggeredAbility(TrostaniSelesnyasVoiceTriggeredAbility ability) {
+    private TrostaniSelesnyasVoiceTriggeredAbility(final TrostaniSelesnyasVoiceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -104,7 +104,7 @@ class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
         staticText = "you gain life equal to that creature's toughness";
     }
 
-    public TrostaniSelesnyasVoiceEffect(final TrostaniSelesnyasVoiceEffect effect) {
+    private TrostaniSelesnyasVoiceEffect(final TrostaniSelesnyasVoiceEffect effect) {
         super(effect);
     }
 

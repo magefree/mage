@@ -63,10 +63,14 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (!conditionState(source, game)) { return false; }
+        if (!conditionState(source, game)) {
+            return false;
+        }
 
         Permanent creature = game.getPermanent(source.getSourceId());
-        if (creature == null) { return false; }
+        if (creature == null) {
+            return false;
+        }
 
         switch (layer) {
             case PTChangingEffects_7:
@@ -89,15 +93,23 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     private boolean conditionState(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
-        if (controller.getLife() < 30) { return false; }
+        if (controller.getLife() < 30) {
+            return false;
+        }
 
         for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            if (!controller.hasOpponent(opponentId, game)) { return false; }
+            if (!controller.hasOpponent(opponentId, game)) {
+                return false;
+            }
 
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) { return false; }
+            if (opponent == null) {
+                return false;
+            }
 
             return opponent.getLife() < 11;
         }

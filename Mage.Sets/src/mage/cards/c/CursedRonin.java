@@ -33,7 +33,7 @@ public final class CursedRonin extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public CursedRonin (final CursedRonin card) {
+    private CursedRonin(final CursedRonin card) {
         super(card);
     }
 

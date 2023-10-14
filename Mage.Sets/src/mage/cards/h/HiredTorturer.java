@@ -1,5 +1,3 @@
-
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -51,7 +49,7 @@ public final class HiredTorturer extends CardImpl {
 
     }
 
-    public HiredTorturer (final HiredTorturer card) {
+    private HiredTorturer(final HiredTorturer card) {
         super(card);
     }
 
@@ -66,10 +64,10 @@ class HiredTorturerEffect extends OneShotEffect {
 
     public HiredTorturerEffect() {
         super(Outcome.Detriment);
-        staticText = "and reveals a card at random from their hand";
+        staticText = ", then reveals a card at random from their hand";
     }
 
-    public HiredTorturerEffect(final HiredTorturerEffect effect) {
+    private HiredTorturerEffect(final HiredTorturerEffect effect) {
         super(effect);
     }
 

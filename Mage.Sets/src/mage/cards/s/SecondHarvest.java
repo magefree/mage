@@ -46,7 +46,7 @@ class SecondHarvestEffect extends OneShotEffect {
         this.staticText = "For each token you control, create a token that's a copy of that permanent";
     }
 
-    public SecondHarvestEffect(final SecondHarvestEffect effect) {
+    private SecondHarvestEffect(final SecondHarvestEffect effect) {
         super(effect);
     }
 

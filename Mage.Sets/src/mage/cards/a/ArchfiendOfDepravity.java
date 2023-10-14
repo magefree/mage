@@ -57,7 +57,7 @@ class ArchfiendOfDepravityEffect extends OneShotEffect {
         this.staticText = "that player chooses up to two creatures they control, then sacrifices the rest";
     }
 
-    public ArchfiendOfDepravityEffect(final ArchfiendOfDepravityEffect effect) {
+    private ArchfiendOfDepravityEffect(final ArchfiendOfDepravityEffect effect) {
         super(effect);
     }
 

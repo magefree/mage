@@ -68,7 +68,7 @@ class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
-    public DetritivoreTriggeredAbility(final DetritivoreTriggeredAbility ability) {
+    private DetritivoreTriggeredAbility(final DetritivoreTriggeredAbility ability) {
         super(ability);
     }
 

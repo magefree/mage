@@ -38,7 +38,7 @@ public final class MathasFiendSeeker extends CardImpl {
     public MathasFiendSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -72,7 +72,7 @@ class MathasFiendSeekerGainAbilityEffect extends GainAbilityTargetEffect {
         super(ability, duration, rule);
     }
 
-    public MathasFiendSeekerGainAbilityEffect(final MathasFiendSeekerGainAbilityEffect effect) {
+    private MathasFiendSeekerGainAbilityEffect(final MathasFiendSeekerGainAbilityEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class OpponentsGainLifeEffect extends OneShotEffect {
         staticText = "and gains 2 life.";
     }
 
-    public OpponentsGainLifeEffect(final OpponentsGainLifeEffect effect) {
+    private OpponentsGainLifeEffect(final OpponentsGainLifeEffect effect) {
         super(effect);
     }
 

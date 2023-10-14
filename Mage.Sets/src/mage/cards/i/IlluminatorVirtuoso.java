@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.effects.keyword.ConniveSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class IlluminatorVirtuoso extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Whenever Illuminator Virtuoso becomes the target of a spell you control, it connives.
-        this.addAbility(new BecomesTargetTriggeredAbility(
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new ConniveSourceEffect(), filter
         ).setTriggerPhrase("Whenever {this} becomes the target of a spell you control, "));
     }

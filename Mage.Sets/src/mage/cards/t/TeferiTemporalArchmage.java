@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.command.emblems.TeferiTemporalArchmageEmblem;
 import mage.target.TargetPermanent;
 
@@ -24,7 +24,7 @@ public final class TeferiTemporalArchmage extends CardImpl {
 
     public TeferiTemporalArchmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
 
         this.setStartingLoyalty(5);
@@ -34,7 +34,7 @@ public final class TeferiTemporalArchmage extends CardImpl {
 
         // -1: Untap up to four target permanents.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new UntapTargetEffect(), -1);
-        loyaltyAbility.addTarget(new TargetPermanent(0, 4, new FilterPermanent(), false));
+        loyaltyAbility.addTarget(new TargetPermanent(0, 4, StaticFilters.FILTER_PERMANENTS, false));
         this.addAbility(loyaltyAbility);
 
         // -10: You get an emblem with "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."

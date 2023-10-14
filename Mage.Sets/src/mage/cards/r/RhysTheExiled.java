@@ -7,18 +7,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -32,7 +30,7 @@ public final class RhysTheExiled extends CardImpl {
 
     public RhysTheExiled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
 
@@ -40,7 +38,9 @@ public final class RhysTheExiled extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Rhys the Exiled attacks, you gain 1 life for each Elf you control.
-        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(xValue), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(xValue)
+                .setText("you gain 1 life for each Elf you control"), false)
+                .addHint(new ValueHint("Elves you control", xValue)));
 
         // {B}, Sacrifice an Elf: Regenerate Rhys the Exiled.
         Ability ability = new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));

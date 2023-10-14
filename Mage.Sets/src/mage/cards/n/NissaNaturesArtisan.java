@@ -10,6 +10,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.*;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -25,7 +26,7 @@ public final class NissaNaturesArtisan extends CardImpl {
 
     public NissaNaturesArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
         this.setStartingLoyalty(5);
@@ -42,7 +43,7 @@ public final class NissaNaturesArtisan extends CardImpl {
                 5, 5, Duration.EndOfTurn
         ).setText("creatures you control get +5/+5"), -12);
         ability.addEffect(new GainAbilityControlledEffect(
-                TrampleAbility.getInstance(), Duration.EndOfTurn
+                TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and gain trample until end of turn"));
         this.addAbility(ability);
     }
@@ -65,7 +66,7 @@ class NissaNaturesArtisanEffect extends OneShotEffect {
                 + "from among them onto the battlefield and the rest into your hand";
     }
 
-    public NissaNaturesArtisanEffect(final NissaNaturesArtisanEffect effect) {
+    private NissaNaturesArtisanEffect(final NissaNaturesArtisanEffect effect) {
         super(effect);
     }
 

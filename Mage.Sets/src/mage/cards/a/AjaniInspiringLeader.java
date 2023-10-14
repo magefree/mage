@@ -28,7 +28,7 @@ public final class AjaniInspiringLeader extends CardImpl {
     public AjaniInspiringLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
         this.setStartingLoyalty(5);
 

@@ -48,7 +48,7 @@ class SulfuricVaporsEffect extends ReplacementEffectImpl {
         staticText = "If a red spell would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead";
     }
 
-    public SulfuricVaporsEffect(final SulfuricVaporsEffect effect) {
+    private SulfuricVaporsEffect(final SulfuricVaporsEffect effect) {
         super(effect);
     }
 

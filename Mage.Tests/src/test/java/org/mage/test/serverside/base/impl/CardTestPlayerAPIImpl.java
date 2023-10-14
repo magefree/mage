@@ -18,6 +18,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.*;
 import mage.game.command.CommandObject;
+import mage.game.command.Emblem;
 import mage.game.match.MatchOptions;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -31,6 +32,7 @@ import mage.server.util.SystemUtil;
 import mage.util.CardUtil;
 import mage.view.GameView;
 import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestPlayer;
@@ -43,8 +45,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * API for test initialization and asserting the test results.
@@ -85,6 +85,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PLAYABLE_ABILITY = "PLAYABLE_ABILITY";
+    public static final String CHECK_COMMAND_MAY_ATTACK_DEFENDER = "MAY_ATTACK_DEFENDER";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
     public static final String CHECK_COMMAND_PERMANENT_TAPPED = "PERMANENT_TAPPED";
     public static final String CHECK_COMMAND_PERMANENT_COUNTERS = "PERMANENT_COUNTERS";
@@ -95,6 +96,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
     public static final String CHECK_COMMAND_HAND_CARD_COUNT = "HAND_CARD_COUNT";
     public static final String CHECK_COMMAND_COMMAND_CARD_COUNT = "COMMAND_CARD_COUNT";
+    public static final String CHECK_COMMAND_EMBLEM_COUNT = "EMBLEM_COUNT";
     public static final String CHECK_COMMAND_COLOR = "COLOR";
     public static final String CHECK_COMMAND_TYPE = "TYPE";
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
@@ -103,6 +105,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_PLAYER_IN_GAME = "PLAYER_IN_GAME";
     public static final String CHECK_COMMAND_STACK_SIZE = "STACK_SIZE";
     public static final String CHECK_COMMAND_STACK_OBJECT = "STACK_OBJECT";
+    public static final String CHECK_COMMAND_MONARCH = "MONARCH";
 
     // TODO: add target player param to commands
     public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
@@ -217,8 +220,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
         Deck deck = Deck.load(list, false, false, loadedCardInfo);
         logger.debug("Done!");
-        if (deck.getCards().size() < 40) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
+        if (deck.getMaindeckCards().size() < 40) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getMaindeckCards().size());
         }
 
         game.loadCards(deck.getCards(), player.getId());
@@ -390,6 +393,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_PLAYABLE_ABILITY, abilityStartText, mustHave.toString());
     }
 
+    /**
+     * Checks whether or not a creature can attack on a given turn a defender (player only for now, could be extended to permanents)
+     *
+     * @param checkName       String to show up if the check fails, for display purposes only.
+     * @param turnNum         The turn number to check on.
+     * @param player          The player to be checked for the ability.
+     * @param attackerName    The attacker permanent to check.
+     * @param defendingPlayer The defending player.
+     * @param mayAttack       Whether the attack is possible or not.
+     */
+    public void checkMayAttackDefender(String checkName, int turnNum, TestPlayer player, String attackerName, TestPlayer defendingPlayer, Boolean mayAttack) {
+        check(checkName, turnNum, PhaseStep.BEGIN_COMBAT, player, CHECK_COMMAND_MAY_ATTACK_DEFENDER, attackerName, defendingPlayer.getId().toString(), mayAttack.toString());
+    }
+
     public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
         checkPermanentCount(checkName, turnNum, step, player, player, permanentName, count);
@@ -445,6 +462,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_COMMAND_CARD_COUNT, cardName, count.toString());
     }
 
+    public void checkEmblemCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String emblemName, Integer count) {
+        //Assert.assertNotEquals("", emblemName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_EMBLEM_COUNT, emblemName, count.toString());
+    }
+
     public void checkColor(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, String colors, Boolean mustHave) {
         //Assert.assertNotEquals("", permanentName);
         check(checkName, turnNum, step, player, CHECK_COMMAND_COLOR, permanentName, colors, mustHave.toString());
@@ -478,6 +500,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void checkStackObject(String checkName, int turnNum, PhaseStep step, TestPlayer player, String spellAbilityOnStack, Integer needAmount) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_STACK_OBJECT, spellAbilityOnStack, needAmount.toString());
+    }
+
+    public void checkMonarch(String checkName, int turnNum, PhaseStep step, TestPlayer player, TestPlayer monarch) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_MONARCH, (monarch == null ? "null" : monarch.getId().toString()));
     }
 
     // show commands
@@ -676,6 +702,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void addPlane(Player player, Planes plane) {
         assertTrue("Can't put plane to game: " + plane.getClassName(), SystemUtil.putPlaneToGame(currentGame, player, plane.getClassName()));
+    }
+
+    public void addEmblem(Player player, Emblem emblem) {
+        Emblem newEmblem = emblem.copy();
+        newEmblem.setControllerId(player.getId());
+        newEmblem.assignNewId();
+        newEmblem.getAbilities().newId();
+        for (Ability ability : newEmblem.getAbilities()) {
+            ability.setSourceId(newEmblem.getId());
+        }
+
+        currentGame.getState().addCommandObject(newEmblem);
     }
 
     /**
@@ -1531,23 +1569,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertTopCardRevealed(TestPlayer player, boolean isRevealed) {
         Assert.assertEquals(isRevealed, player.isTopCardRevealed());
     }
-
-    public void assertIsAttachedTo(TestPlayer thePlayer, String theAttachment, String thePermanent) {
-
+    /**
+     * Asserts if, or if not, theAttachment is attached to thePermanent.
+     *
+     * @param isAttached true => assertIsAttachedTo, false => assertIsNotAttachedTo
+     */
+    public void assertAttachedTo(TestPlayer thePlayer, String theAttachment, String thePermanent, boolean isAttached) {
         List<Permanent> permanents = currentGame.getBattlefield().getAllActivePermanents().stream()
                 .filter(permanent -> permanent.isControlledBy(thePlayer.getId()))
                 .filter(permanent -> permanent.getName().equals(thePermanent))
                 .collect(Collectors.toList());
-        assertTrue(theAttachment + " was not attached to " + thePermanent,
+        assertTrue(theAttachment + " was "+ (!isAttached ? "":"not") +" attached to " + thePermanent,
+                !isAttached ^
                 permanents.stream()
                         .anyMatch(permanent -> permanent.getAttachments()
                                 .stream()
                                 .map(id -> currentGame.getCard(id))
                                 .map(MageObject::getName)
                                 .collect(Collectors.toList()).contains(theAttachment)));
-
-
     }
+
 
     public Permanent getPermanent(String cardName, UUID controller) {
         assertAliaseSupportInActivateCommand(cardName, false);

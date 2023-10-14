@@ -57,7 +57,7 @@ class SkymarkRocAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
     }
 
-    public SkymarkRocAbility(final SkymarkRocAbility ability) {
+    private SkymarkRocAbility(final SkymarkRocAbility ability) {
         super(ability);
     }
 

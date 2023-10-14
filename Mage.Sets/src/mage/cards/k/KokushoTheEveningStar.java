@@ -23,7 +23,7 @@ public final class KokushoTheEveningStar extends CardImpl {
 
     public KokushoTheEveningStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
 
@@ -50,7 +50,7 @@ class KokushoTheEveningStarEffect extends OneShotEffect {
         staticText = "each opponent loses 5 life. You gain life equal to the life lost this way";
     }
 
-    public KokushoTheEveningStarEffect(final KokushoTheEveningStarEffect effect) {
+    private KokushoTheEveningStarEffect(final KokushoTheEveningStarEffect effect) {
         super(effect);
     }
 

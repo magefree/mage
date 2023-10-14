@@ -18,7 +18,7 @@ public final class CamaridToken extends TokenImpl {
         this.cardType.add(CardType.CREATURE);
     }
 
-    public CamaridToken(final CamaridToken token) {
+    protected CamaridToken(final CamaridToken token) {
         super(token);
     }
 

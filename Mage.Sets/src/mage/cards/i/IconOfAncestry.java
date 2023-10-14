@@ -81,7 +81,7 @@ class IconOfAncestryEffect extends OneShotEffect {
         return new LookLibraryAndPickControllerEffect(3, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM).apply(game, source);
     }
 
-    public IconOfAncestryEffect(final IconOfAncestryEffect effect) {
+    private IconOfAncestryEffect(final IconOfAncestryEffect effect) {
         super(effect);
     }
 

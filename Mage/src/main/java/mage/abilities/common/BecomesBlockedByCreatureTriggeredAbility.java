@@ -24,10 +24,11 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
     public BecomesBlockedByCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        this.replaceRuleText = false;
         setTriggerPhrase("Whenever {this} becomes blocked by " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
-    public BecomesBlockedByCreatureTriggeredAbility(final BecomesBlockedByCreatureTriggeredAbility ability) {
+    protected BecomesBlockedByCreatureTriggeredAbility(final BecomesBlockedByCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }

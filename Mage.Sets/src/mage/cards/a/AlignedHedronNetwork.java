@@ -6,9 +6,8 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -58,7 +57,7 @@ class AlignedHedronNetworkExileEffect extends OneShotEffect {
         this.staticText = "exile all creatures with power 5 or greater until {this} leaves the battlefield";
     }
 
-    public AlignedHedronNetworkExileEffect(final AlignedHedronNetworkExileEffect effect) {
+    private AlignedHedronNetworkExileEffect(final AlignedHedronNetworkExileEffect effect) {
         super(effect);
     }
 
@@ -70,16 +69,22 @@ class AlignedHedronNetworkExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false;}
+        if (controller == null) {
+            return false;
+        }
 
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         Set<Card> toExile = new LinkedHashSet<>(game.getBattlefield().getActivePermanents(filter, controller.getId(), source, game));
-        if (toExile.isEmpty()) { return false; }
+        if (toExile.isEmpty()) {
+            return false;
+        }
         
         controller.moveCardsToExile(toExile, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
-        new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()).apply(game, source);
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
 
         return true;
 

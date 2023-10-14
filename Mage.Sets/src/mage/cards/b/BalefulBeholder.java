@@ -35,7 +35,8 @@ public final class BalefulBeholder extends CardImpl {
 
         // • Fear Ray — Creatures you control gain menace until end of turn.
         ability.addMode(new Mode(new GainAbilityControlledEffect(
-                new MenaceAbility(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES))
+                new MenaceAbility(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)
+                .setText("creatures you control gain menace until end of turn. <i>(A creature with menace can't be blocked except by two or more creatures.)</i>"))
                 .withFlavorWord("Fear Ray"));
         this.addAbility(ability);
     }

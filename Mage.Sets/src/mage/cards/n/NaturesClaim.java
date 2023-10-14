@@ -48,7 +48,7 @@ class NaturesClaimEffect extends OneShotEffect {
         staticText = "Its controller gains 4 life";
     }
 
-    NaturesClaimEffect(final NaturesClaimEffect effect) {
+    private NaturesClaimEffect(final NaturesClaimEffect effect) {
         super(effect);
     }
 

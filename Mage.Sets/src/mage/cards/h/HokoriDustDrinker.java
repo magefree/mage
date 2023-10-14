@@ -27,14 +27,14 @@ public final class HokoriDustDrinker extends CardImpl {
 
     public HokoriDustDrinker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Lands don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_LANDS)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_LANDS)));
 
         // At the beginning of each player's upkeep, that player untaps a land they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HokoriDustDrinkerUntapEffect(), TargetController.ANY, false));
@@ -59,7 +59,7 @@ class HokoriDustDrinkerUntapEffect extends OneShotEffect {
         this.staticText = "that player untaps a land they control";
     }
 
-    public HokoriDustDrinkerUntapEffect(final HokoriDustDrinkerUntapEffect effect) {
+    private HokoriDustDrinkerUntapEffect(final HokoriDustDrinkerUntapEffect effect) {
         super(effect);
     }
 

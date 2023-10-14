@@ -37,7 +37,7 @@ public final class SengirConnoisseur extends CardImpl {
 
         // Whenever one or more other creatures die, put a +1/+1 counter on Sengir Connoisseur. This ability triggers only once each turn.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter)
-                .setTriggersOnce(true));
+                .setTriggersOnceEachTurn(true));
     }
 
     private SengirConnoisseur(final SengirConnoisseur card) {

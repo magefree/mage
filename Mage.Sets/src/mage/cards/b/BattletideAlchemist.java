@@ -51,7 +51,7 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
         this.staticText = "If a source would deal damage to a player, you may prevent X of that damage, where X is the number of Clerics you control";
     }
 
-    BattletideAlchemistEffect(final BattletideAlchemistEffect effect) {
+    private BattletideAlchemistEffect(final BattletideAlchemistEffect effect) {
         super(effect);
     }
 

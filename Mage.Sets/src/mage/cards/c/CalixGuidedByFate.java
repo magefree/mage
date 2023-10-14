@@ -42,7 +42,7 @@ public final class CalixGuidedByFate extends CardImpl {
     public CalixGuidedByFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
@@ -56,7 +56,7 @@ public final class CalixGuidedByFate extends CardImpl {
         // Whenever Calix or an enchanted creature you control deals combat damage to a player, you may create a token that's a copy of a nonlegendary enchantment you control. Do this only once each turn.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new CalixGuidedByFateEffect(), filter, true, SetTargetPointer.NONE, true
-        ).setDoOnlyOnce(true));
+        ).setDoOnlyOnceEachTurn(true));
     }
 
     private CalixGuidedByFate(final CalixGuidedByFate card) {

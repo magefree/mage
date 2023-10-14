@@ -77,7 +77,7 @@ class TriumphOfSaintKatherineEffect extends OneShotEffect {
         if (card.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()) {
             cards.add(card);
         }
-        cards.addAll(player.getLibrary().getTopCards(game, 6));
+        cards.addAllCards(player.getLibrary().getTopCards(game, 6));
         if (cards.isEmpty()) {
             return false;
         }

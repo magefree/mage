@@ -57,7 +57,7 @@ class NovaPentacleEffect extends RedirectionEffect {
         this.damageSource = new TargetSource();
     }
 
-    public NovaPentacleEffect(final NovaPentacleEffect effect) {
+    private NovaPentacleEffect(final NovaPentacleEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }

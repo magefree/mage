@@ -15,7 +15,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -60,7 +59,7 @@ class MirrorMockeryEffect extends OneShotEffect {
         this.staticText = "you may create a token that's a copy of that creature. Exile that token at end of combat";
     }
 
-    public MirrorMockeryEffect(final MirrorMockeryEffect effect) {
+    private MirrorMockeryEffect(final MirrorMockeryEffect effect) {
         super(effect);
     }
 
@@ -71,12 +70,7 @@ class MirrorMockeryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-       // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

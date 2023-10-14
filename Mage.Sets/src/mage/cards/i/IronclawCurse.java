@@ -56,7 +56,7 @@ class IronclawCurseEffect extends CantBlockAttachedEffect {
         this.staticText = "Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness";
     }
 
-    public IronclawCurseEffect(final IronclawCurseEffect effect) {
+    private IronclawCurseEffect(final IronclawCurseEffect effect) {
         super(effect);
     }
 
@@ -70,12 +70,7 @@ class IronclawCurseEffect extends CantBlockAttachedEffect {
         if (attacker == null) {
             return true;
         }
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

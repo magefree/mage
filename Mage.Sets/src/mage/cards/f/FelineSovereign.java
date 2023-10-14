@@ -84,7 +84,7 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
 
-    public FelineSovereignTriggeredAbility(final FelineSovereignTriggeredAbility ability) {
+    private FelineSovereignTriggeredAbility(final FelineSovereignTriggeredAbility ability) {
         super(ability);
     }
 

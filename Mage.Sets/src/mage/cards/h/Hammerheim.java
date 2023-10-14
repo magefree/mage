@@ -32,7 +32,7 @@ public final class Hammerheim extends CardImpl {
     public Hammerheim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
@@ -60,7 +60,7 @@ class HammerheimEffect extends ContinuousEffectImpl {
         this.staticText = "Target creature loses all landwalk abilities until end of turn.";
     }
 
-    public HammerheimEffect(final HammerheimEffect effect) {
+    private HammerheimEffect(final HammerheimEffect effect) {
         super(effect);
     }
 

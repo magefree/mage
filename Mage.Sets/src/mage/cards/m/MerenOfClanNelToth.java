@@ -12,8 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -25,17 +23,9 @@ import java.util.UUID;
  */
 public final class MerenOfClanNelToth extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public MerenOfClanNelToth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
@@ -44,7 +34,7 @@ public final class MerenOfClanNelToth extends CardImpl {
         // Whenever another creature you control dies, you get an experience counter.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersPlayersEffect(
                 CounterType.EXPERIENCE.createInstance(), TargetController.YOU
-        ), false, filter));
+        ), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
 
         // At the beginning of your end step, choose target creature card in your graveyard. 
         // If that card's converted mana cost is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand.

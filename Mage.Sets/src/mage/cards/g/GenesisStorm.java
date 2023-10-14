@@ -53,7 +53,7 @@ class GenesisStormEffect extends OneShotEffect {
                 + "on the bottom of your library in a random order";
     }
 
-    public GenesisStormEffect(GenesisStormEffect effect) {
+    private GenesisStormEffect(final GenesisStormEffect effect) {
         super(effect);
     }
 

@@ -33,7 +33,7 @@ public final class SauronTheNecromancer extends CardImpl {
     public SauronTheNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
@@ -89,7 +89,7 @@ class SauronTheNecromancerEffect extends OneShotEffect {
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
                 null, null, false, 1, true, true
         );
-        effect.setPermanentModifier(((token, g) -> {
+        effect.setPermanentModifier(((token) -> {
             token.setColor(ObjectColor.BLACK);
             token.addSubType(SubType.WRAITH);
             token.setPower(3);

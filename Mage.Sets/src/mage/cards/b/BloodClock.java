@@ -72,7 +72,7 @@ class BloodClockEffect extends OneShotEffect {
             return true;
         }
         Target target = new TargetControlledPermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(player.getId(), source, game)
                 || !player.chooseTarget(outcome, target, source, game)) {
             return false;

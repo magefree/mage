@@ -23,7 +23,7 @@ import java.util.UUID;
 public class GeneralOrgana extends CardImpl {
     public GeneralOrgana(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN);
         this.addSubType(SubType.REBEL);
         this.addSubType(SubType.ADVISOR);
@@ -40,7 +40,7 @@ public class GeneralOrgana extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ScryEffect(2), false));
     }
 
-    public GeneralOrgana(final GeneralOrgana card) {
+    private GeneralOrgana(final GeneralOrgana card) {
         super(card);
     }
 

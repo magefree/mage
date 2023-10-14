@@ -72,7 +72,7 @@ class SuncleanserRemoveCountersEffect extends OneShotEffect {
         }
     }
 
-    public SuncleanserRemoveCountersEffect(SuncleanserRemoveCountersEffect effect) {
+    private SuncleanserRemoveCountersEffect(final SuncleanserRemoveCountersEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class SuncleanserPreventCountersEffect extends ContinuousRuleModifyingEffectImpl
         }
     }
 
-    public SuncleanserPreventCountersEffect(final SuncleanserPreventCountersEffect effect) {
+    private SuncleanserPreventCountersEffect(final SuncleanserPreventCountersEffect effect) {
         super(effect);
     }
 

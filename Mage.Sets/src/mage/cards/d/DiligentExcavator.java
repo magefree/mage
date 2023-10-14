@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class DiligentExcavator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a historic spell, target player puts the top two cards of their library into their graveyard.
-        Ability ability = new SpellCastControllerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(2), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new MillCardsTargetEffect(2), filter, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

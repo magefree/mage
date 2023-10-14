@@ -38,7 +38,7 @@ public final class OneWithNature extends CardImpl {
 
         // Whenever enchanted creature deals combat damage to a player, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, Outcome.PutLandInPlay)
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true)
                         .setText("you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."),
                 "enchanted creature", true, false, true, TargetController.ANY);
         this.addAbility(ability);

@@ -57,7 +57,7 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you roll a 5 or higher on a die, ");
     }
 
-    public SteelSquirrelTriggeredAbility(final SteelSquirrelTriggeredAbility ability) {
+    private SteelSquirrelTriggeredAbility(final SteelSquirrelTriggeredAbility ability) {
         super(ability);
     }
 
@@ -91,7 +91,7 @@ class SteelSquirrelEffect extends OneShotEffect {
         this.staticText = "{this} gets +X/+X until end of turn, where X is the result";
     }
 
-    public SteelSquirrelEffect(final SteelSquirrelEffect effect) {
+    private SteelSquirrelEffect(final SteelSquirrelEffect effect) {
         super(effect);
     }
 

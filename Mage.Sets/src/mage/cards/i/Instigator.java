@@ -64,7 +64,7 @@ class InstigatorEffect extends OneShotEffect {
         staticText = "Creatures target player controls attack this turn if able";
     }
 
-    public InstigatorEffect(final InstigatorEffect effect) {
+    private InstigatorEffect(final InstigatorEffect effect) {
         super(effect);
     }
 

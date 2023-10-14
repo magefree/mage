@@ -51,7 +51,7 @@ class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
         staticText = "As long as {this} is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    public DearlyDepartedEntersBattlefieldEffect(DearlyDepartedEntersBattlefieldEffect effect) {
+    private DearlyDepartedEntersBattlefieldEffect(final DearlyDepartedEntersBattlefieldEffect effect) {
         super(effect);
     }
 

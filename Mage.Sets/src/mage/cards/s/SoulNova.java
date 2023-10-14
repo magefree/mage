@@ -45,7 +45,7 @@ class SoulNovaEffect extends OneShotEffect {
         this.staticText = "Exile target attacking creature and all Equipment attached to it.";
     }
 
-    public SoulNovaEffect(final SoulNovaEffect effect) {
+    private SoulNovaEffect(final SoulNovaEffect effect) {
         super(effect);
     }
 

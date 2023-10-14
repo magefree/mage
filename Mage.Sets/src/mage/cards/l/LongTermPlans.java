@@ -42,7 +42,7 @@ class LongTermPlansEffect extends OneShotEffect {
         this.staticText = "Search your library for a card, then shuffle and put that card third from the top";
     }
 
-    LongTermPlansEffect(final LongTermPlansEffect effect) {
+    private LongTermPlansEffect(final LongTermPlansEffect effect) {
         super(effect);
     }
 

@@ -39,7 +39,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
     public SupremeLeaderSnoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNOKE);
         this.setStartingLoyalty(3);
 
@@ -123,7 +123,7 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
         staticText = "Put a loyalty counter on {this} for each life lost by all opponents from noncombat sources this turn";
     }
 
-    public SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
+    private SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
     }

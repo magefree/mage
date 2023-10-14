@@ -30,13 +30,11 @@ public class SimulatedPlayer extends ComputerPlayer {
     private static final Logger logger = Logger.getLogger(SimulatedPlayer.class);
     private boolean isSimulatedPlayer;
     private transient ConcurrentLinkedQueue<Ability> allActions;
-    private static PassAbility pass = new PassAbility();
     protected int maxDepth;
 
     public SimulatedPlayer(Player originalPlayer, boolean isSimulatedPlayer, int maxDepth) {
         super(originalPlayer.getId());
         this.maxDepth = maxDepth;
-        pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.matchPlayer = new MatchPlayer(originalPlayer.getMatchPlayer(), this);
     }
@@ -55,6 +53,7 @@ public class SimulatedPlayer extends ComputerPlayer {
         allActions = new ConcurrentLinkedQueue<>();
         Game sim = game.copy();
 
+        ActivatedAbility pass = new PassAbility();
         simulateOptions(sim, pass);
 
         List<Ability> list = new ArrayList<>(allActions);
@@ -119,7 +118,7 @@ public class SimulatedPlayer extends ComputerPlayer {
         }
         for (int i = start; i < numAvailable; i++) {
             Ability newAbility = ability.copy();
-            newAbility.getManaCostsToPay().add(new GenericManaCost(i));
+            newAbility.addManaCostsToPay(new GenericManaCost(i));
             allActions.add(newAbility);
         }
     }

@@ -36,7 +36,7 @@ public final class StarkeOfRath extends CardImpl {
 
     public StarkeOfRath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -66,7 +66,7 @@ class StarkeOfRathEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact or creature. That permanent's controller gains control of {this}";
     }
 
-    public StarkeOfRathEffect(final StarkeOfRathEffect effect) {
+    private StarkeOfRathEffect(final StarkeOfRathEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class StarkeOfRathControlEffect extends ContinuousEffectImpl {
         staticText = "That permanent's controller gains control of {this}";
     }
 
-    public StarkeOfRathControlEffect(final StarkeOfRathControlEffect effect) {
+    private StarkeOfRathControlEffect(final StarkeOfRathControlEffect effect) {
         super(effect);
     }
 

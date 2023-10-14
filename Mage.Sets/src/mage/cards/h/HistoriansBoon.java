@@ -80,7 +80,7 @@ class HistoriansBoonTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (stackObject == null
                 || permanent == null
                 || !permanent.isControlledBy(getControllerId())

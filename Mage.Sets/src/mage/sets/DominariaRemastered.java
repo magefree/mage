@@ -17,8 +17,13 @@ public class DominariaRemastered extends ExpansionSet {
 
     private DominariaRemastered() {
         super("Dominaria Remastered", "DMR", ExpansionSet.buildDate(2023, 1, 13), SetType.SUPPLEMENTAL);
-        this.hasBoosters = false; // needs to be configured
+        this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.maxCardNumberInBooster = 261;
+        this.numBoosterCommon = 10; // Frame/art variants not yet implemented for booster generation
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 7; // 60 rare, 20 mythic
 
         cards.add(new SetCardInfo("Absorb", 186, Rarity.RARE, mage.cards.a.Absorb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absorb", 354, Rarity.RARE, mage.cards.a.Absorb.class, NON_FULL_USE_VARIOUS));

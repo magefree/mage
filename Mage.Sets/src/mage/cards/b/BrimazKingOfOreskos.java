@@ -30,7 +30,7 @@ public final class BrimazKingOfOreskos extends CardImpl {
 
     public BrimazKingOfOreskos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT, SubType.SOLDIER);
 
         this.power = new MageInt(3);
@@ -63,7 +63,7 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
         this.staticText = "create a 1/1 white Cat Soldier creature token with vigilance blocking that creature";
     }
 
-    public BrimazKingOfOreskosEffect(final BrimazKingOfOreskosEffect effect) {
+    private BrimazKingOfOreskosEffect(final BrimazKingOfOreskosEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,9 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Token token = new CatSoldierCreatureToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId());

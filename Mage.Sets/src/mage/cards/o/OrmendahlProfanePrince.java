@@ -21,7 +21,7 @@ public final class OrmendahlProfanePrince extends CardImpl {
 
     public OrmendahlProfanePrince(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(9);
         this.toughness = new MageInt(7);

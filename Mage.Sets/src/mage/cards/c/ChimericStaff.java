@@ -41,7 +41,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
         staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
     }
 
-    public ChimericStaffEffect(final ChimericStaffEffect effect) {
+    private ChimericStaffEffect(final ChimericStaffEffect effect) {
         super(effect);
     }
 

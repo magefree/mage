@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPlayer;
@@ -30,7 +29,7 @@ public final class PsychicSpear extends CardImpl {
 
         // Target player reveals their hand. You choose a Spirit or Arcane card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
     private PsychicSpear(final PsychicSpear card) {

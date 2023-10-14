@@ -25,7 +25,7 @@ public final class MindUnbound extends CardImpl {
 
         // At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), TargetController.YOU, false);
-        ability.addEffect(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.LORE)));
+        ability.addEffect(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.LORE)).concatBy(", then"));
         this.addAbility(ability);
     }
 

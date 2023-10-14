@@ -48,7 +48,7 @@ class MiraculousRecoveryEffect extends OneShotEffect {
         this.staticText = "Put a +1/+1 counter on it";
     }
 
-    public MiraculousRecoveryEffect(final MiraculousRecoveryEffect effect) {
+    private MiraculousRecoveryEffect(final MiraculousRecoveryEffect effect) {
         super(effect);
     }
 

@@ -69,7 +69,7 @@ class GhostlyWingsReturnEffect extends OneShotEffect {
         staticText = "Return enchanted creature to its owner's hand";
     }
 
-    public GhostlyWingsReturnEffect(final GhostlyWingsReturnEffect effect) {
+    private GhostlyWingsReturnEffect(final GhostlyWingsReturnEffect effect) {
         super(effect);
     }
 

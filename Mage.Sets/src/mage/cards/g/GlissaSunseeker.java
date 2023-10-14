@@ -29,7 +29,7 @@ public final class GlissaSunseeker extends CardImpl {
 
     public GlissaSunseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -60,7 +60,7 @@ class GlissaSunseekerEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact if its mana value is equal to the amount of unspent mana you have";
     }
 
-    public GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {
+    private GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {
         super(effect);
     }
 

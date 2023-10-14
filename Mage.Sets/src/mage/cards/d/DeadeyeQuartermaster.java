@@ -38,7 +38,7 @@ public final class DeadeyeQuartermaster extends CardImpl {
 
         // When Deadeye Quartermaster enters the battlefield, you may search your library for an Equipment or a Vehicle card and put it into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
     }
 
     private DeadeyeQuartermaster(final DeadeyeQuartermaster card) {

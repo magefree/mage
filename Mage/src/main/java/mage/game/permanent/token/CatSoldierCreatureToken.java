@@ -23,7 +23,7 @@ public final class CatSoldierCreatureToken extends TokenImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public CatSoldierCreatureToken(final CatSoldierCreatureToken token) {
+    protected CatSoldierCreatureToken(final CatSoldierCreatureToken token) {
         super(token);
     }
 

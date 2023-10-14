@@ -20,7 +20,7 @@ public final class GlissasScorn extends CardImpl {
 
         // Destroy target artifact. Its controller loses 1 life.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
     }
 

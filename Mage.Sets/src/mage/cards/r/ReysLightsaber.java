@@ -22,7 +22,7 @@ import java.util.UUID;
 public class ReysLightsaber extends CardImpl {
     public ReysLightsaber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.EQUIPMENT);
 
         //Equipped creature gets +2/+0 and has first strike and protection from red.
@@ -45,7 +45,7 @@ public class ReysLightsaber extends CardImpl {
         this.addAbility(new EquipAbility(2, false));
     }
 
-    public ReysLightsaber(final ReysLightsaber card) {
+    private ReysLightsaber(final ReysLightsaber card) {
         super(card);
     }
 

@@ -61,7 +61,7 @@ class MoldgrafMonstrosityEffect extends OneShotEffect {
         this.staticText = "exile it, then return two creature cards at random from your graveyard to the battlefield";
     }
 
-    public MoldgrafMonstrosityEffect(final MoldgrafMonstrosityEffect effect) {
+    private MoldgrafMonstrosityEffect(final MoldgrafMonstrosityEffect effect) {
         super(effect);
     }
 

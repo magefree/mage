@@ -31,6 +31,8 @@ public final class FoulmireKnight extends AdventureCard {
         // You draw a card and you lose 1 life.
         this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("You draw a card"));
         this.getSpellCard().getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+
+        this.finalizeAdventure();
     }
 
     private FoulmireKnight(final FoulmireKnight card) {

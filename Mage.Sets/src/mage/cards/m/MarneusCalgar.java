@@ -30,7 +30,7 @@ public final class MarneusCalgar extends CardImpl {
     public MarneusCalgar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASTARTES, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

@@ -35,7 +35,7 @@ public final class NullstoneGargoyle extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever the first noncreature spell of a turn is cast, counter that spell.
-        this.addAbility(new NullstoneGargoyleTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new NullstoneGargoyleTriggeredAbility());
     }
 
     private NullstoneGargoyle(final NullstoneGargoyle card) {
@@ -54,7 +54,7 @@ class NullstoneGargoyleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
     }
 
-    public NullstoneGargoyleTriggeredAbility(final NullstoneGargoyleTriggeredAbility ability) {
+    private NullstoneGargoyleTriggeredAbility(final NullstoneGargoyleTriggeredAbility ability) {
         super(ability);
     }
 

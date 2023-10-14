@@ -73,11 +73,11 @@ class YouCannotPassWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLegendary()) {
+        if (permanent != null && permanent.isLegendary(game)) {
             set.add(new MageObjectReference(event.getSourceId(), game));
         }
         permanent = game.getPermanent(event.getSourceId());
-        if (permanent != null && permanent.isLegendary()) {
+        if (permanent != null && permanent.isLegendary(game)) {
             set.add(new MageObjectReference(event.getTargetId(), game));
         }
     }

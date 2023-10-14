@@ -29,7 +29,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
 
     public ZedruuTheGreathearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR, SubType.MONK);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -68,7 +68,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
             this.staticText = "Target opponent gains control of target permanent you control";
         }
 
-        public ZedruuTheGreatheartedEffect(final ZedruuTheGreatheartedEffect effect) {
+        private ZedruuTheGreatheartedEffect(final ZedruuTheGreatheartedEffect effect) {
             super(effect);
             this.targetPermanentReference = effect.targetPermanentReference;
         }

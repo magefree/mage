@@ -58,7 +58,7 @@ class GroundPounderEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. {this} gets +X/+X until end of turn, where X is the result";
     }
 
-    public GroundPounderEffect(final GroundPounderEffect effect) {
+    private GroundPounderEffect(final GroundPounderEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class GroundPounderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), false);
     }
 
-    public GroundPounderTriggeredAbility(final GroundPounderTriggeredAbility ability) {
+    private GroundPounderTriggeredAbility(final GroundPounderTriggeredAbility ability) {
         super(ability);
     }
 
@@ -109,6 +109,6 @@ class GroundPounderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you roll a 5 or higher on a die, {this} gains trample until end of turn";
+        return "Whenever you roll a 5 or higher on a die, {this} gains trample until end of turn.";
     }
 }

@@ -49,7 +49,7 @@ class MoggConscriptsEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you've cast a creature spell this turn";
     }
 
-    public MoggConscriptsEffect(final MoggConscriptsEffect effect) {
+    private MoggConscriptsEffect(final MoggConscriptsEffect effect) {
         super(effect);
     }
 

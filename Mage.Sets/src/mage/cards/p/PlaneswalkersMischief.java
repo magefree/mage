@@ -55,7 +55,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals a card at random from their hand. If it's an instant or sorcery card, exile it. You may cast it without paying its mana cost for as long as it remains exiled. At the beginning of the next end step, if you haven't cast it, return it to its owner's hand.";
     }
 
-    public PlaneswalkersMischiefEffect(final PlaneswalkersMischiefEffect effect) {
+    private PlaneswalkersMischiefEffect(final PlaneswalkersMischiefEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
-        if (opponent != null && opponent.getHand().size() > 0) {
+        if (opponent != null && !opponent.getHand().isEmpty()) {
             Card revealedCard = opponent.getHand().getRandom(game);
             if (revealedCard == null) {
                 return false;
@@ -84,7 +84,6 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
                 Condition condition = new PlaneswalkersMischiefCondition(source.getSourceId(), revealedCard.getId());
                 ConditionalOneShotEffect effect3 = new ConditionalOneShotEffect(effect2, condition, "if you haven't cast it, return it to its owner's hand.");
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect3);
-                delayedAbility.addWatcher(new SpellsCastWatcher());
                 game.addDelayedTriggeredAbility(delayedAbility, source);
                 return true;
             }
@@ -100,7 +99,7 @@ class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may cast that card without paying its mana cost as long as it remains exiled";
     }
 
-    PlaneswalkersMischiefCastFromExileEffect(final PlaneswalkersMischiefCastFromExileEffect effect) {
+    private PlaneswalkersMischiefCastFromExileEffect(final PlaneswalkersMischiefCastFromExileEffect effect) {
         super(effect);
     }
 

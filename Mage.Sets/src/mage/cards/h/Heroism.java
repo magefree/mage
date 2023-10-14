@@ -70,7 +70,7 @@ class HeroismEffect extends OneShotEffect {
         this.staticText = "For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays {2}{R}";
     }
 
-    public HeroismEffect(final HeroismEffect effect) {
+    private HeroismEffect(final HeroismEffect effect) {
         super(effect);
     }
 

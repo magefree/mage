@@ -50,7 +50,7 @@ public final class RacecourseFury extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public RacecourseFury (final RacecourseFury card) {
+    private RacecourseFury(final RacecourseFury card) {
         super(card);
     }
 

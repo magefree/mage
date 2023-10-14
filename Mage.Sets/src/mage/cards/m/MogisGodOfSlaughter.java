@@ -27,7 +27,7 @@ public final class MogisGodOfSlaughter extends CardImpl {
 
     public MogisGodOfSlaughter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(7);
@@ -84,7 +84,7 @@ class MogisGodOfSlaughterEffect extends OneShotEffect {
             return player.damage(2, source.getSourceId(), source, game) > 0;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent(1);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(player.getId(), source, game)
                 && player.chooseUse(Outcome.Detriment, "Sacrifice a creature to prevent 2 damage?", source, game)
                 && player.choose(Outcome.Sacrifice, target, source, game)) {

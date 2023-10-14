@@ -53,7 +53,7 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
         this.staticText = "Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands";
     }
 
-    public ReturnToHandAllNamedPermanentsEffect(final ReturnToHandAllNamedPermanentsEffect effect) {
+    private ReturnToHandAllNamedPermanentsEffect(final ReturnToHandAllNamedPermanentsEffect effect) {
         super(effect);
     }
 

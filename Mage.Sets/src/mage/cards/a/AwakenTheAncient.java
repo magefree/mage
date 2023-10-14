@@ -65,7 +65,7 @@ public final class AwakenTheAncient extends CardImpl {
             this.addAbility(HasteAbility.getInstance());
         }
 
-        public GiantToken(final GiantToken token) {
+        private GiantToken(final GiantToken token) {
             super(token);
         }
 

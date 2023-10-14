@@ -1,9 +1,7 @@
-
 package mage.cards.c;
 
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -24,7 +22,7 @@ public final class ChandraNalaar extends CardImpl {
 
     public ChandraNalaar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
         this.setStartingLoyalty(6);
@@ -40,12 +38,10 @@ public final class ChandraNalaar extends CardImpl {
         this.addAbility(ability2);
 
         // -8: Chandra Nalaar deals 10 damage to target player or planeswalker and each creature that player or that planeswalker’s controller controls.
-        Effects effects1 = new Effects();
-        effects1.add(new DamageTargetEffect(10));
-        effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent())
+        LoyaltyAbility ability3 = new LoyaltyAbility(new DamageTargetEffect(10), -8);
+        ability3.addEffect(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent())
                 .setText("and each creature that player or that planeswalker's controller controls")
         );
-        LoyaltyAbility ability3 = new LoyaltyAbility(effects1, -8);
         ability3.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability3);
     }
@@ -59,4 +55,3 @@ public final class ChandraNalaar extends CardImpl {
         return new ChandraNalaar(this);
     }
 }
-

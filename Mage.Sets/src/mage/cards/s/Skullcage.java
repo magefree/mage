@@ -44,7 +44,7 @@ class SkullcageEffect extends OneShotEffect {
         staticText = "{this} deals 2 damage to that player unless they have exactly three or exactly four cards in hand";
     }
 
-    public SkullcageEffect(final SkullcageEffect effect) {
+    private SkullcageEffect(final SkullcageEffect effect) {
         super(effect);
     }
 

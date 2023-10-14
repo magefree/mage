@@ -47,8 +47,7 @@ public final class FacelessDevourer extends CardImpl {
         this.addAbility(ability);
 
         // When Faceless Devourer leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        ability = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)
-                .withReturnName("card", "its owner's"), false);
+        ability = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
         this.addAbility(ability);
     }
 

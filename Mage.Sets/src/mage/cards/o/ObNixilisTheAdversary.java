@@ -1,8 +1,5 @@
 package mage.cards.o;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.StaticAbility;
@@ -15,9 +12,9 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
@@ -30,8 +27,10 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.functions.StackObjectCopyApplier;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ObNixilisTheAdversary extends CardImpl {
@@ -39,7 +38,7 @@ public final class ObNixilisTheAdversary extends CardImpl {
     public ObNixilisTheAdversary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIXILIS);
         this.setStartingLoyalty(3);
 
@@ -170,7 +169,7 @@ class ObNixilisTheAdversaryApplier implements StackObjectCopyApplier {
 
     @Override
     public void modifySpell(StackObject stackObject, Game game) {
-        stackObject.getSuperType().remove(SuperType.LEGENDARY);
+        stackObject.removeSuperType(SuperType.LEGENDARY);
         stackObject.setStartingLoyalty(loyalty);
     }
 

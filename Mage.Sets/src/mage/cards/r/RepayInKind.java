@@ -41,7 +41,7 @@ class RepayInKindEffect extends OneShotEffect {
         staticText = "Each player's life total becomes the lowest life total among all players";
     }
 
-    public RepayInKindEffect(final RepayInKindEffect effect) {
+    private RepayInKindEffect(final RepayInKindEffect effect) {
         super(effect);
     }
 

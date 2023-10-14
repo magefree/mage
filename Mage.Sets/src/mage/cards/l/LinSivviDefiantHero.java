@@ -39,7 +39,7 @@ public final class LinSivviDefiantHero extends CardImpl {
 
     public LinSivviDefiantHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.REBEL);
         this.power = new MageInt(1);
@@ -75,7 +75,7 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
         this.staticText = "Search your library for a Rebel permanent card with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
-    public LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
+    private LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
         super(effect);
     }
 

@@ -37,7 +37,7 @@ public final class CallToTheGrave extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
 
         // At the beginning of each player's upkeep, that player sacrifices a non-Zombie creature.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player "), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false);
         this.addAbility(ability);
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());

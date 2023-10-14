@@ -47,7 +47,7 @@ class CranialExtractionEffect extends SearchTargetGraveyardHandLibraryForCardNam
         this.staticText = "Choose a nonland card name. " + CardUtil.getTextWithFirstCharUpperCase(this.staticText);
     }
 
-    CranialExtractionEffect(final CranialExtractionEffect effect) {
+    private CranialExtractionEffect(final CranialExtractionEffect effect) {
         super(effect);
     }
 

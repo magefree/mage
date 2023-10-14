@@ -69,7 +69,7 @@ class RestInPeaceReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a card or token would be put into a graveyard from anywhere, exile it instead";
     }
 
-    public RestInPeaceReplacementEffect(final RestInPeaceReplacementEffect effect) {
+    private RestInPeaceReplacementEffect(final RestInPeaceReplacementEffect effect) {
         super(effect);
     }
 

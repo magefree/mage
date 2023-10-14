@@ -8,15 +8,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.CastCardFromGraveyardThenExileItEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -31,7 +28,7 @@ public final class VoharVodalianDesecrator extends CardImpl {
     public VoharVodalianDesecrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
@@ -42,9 +39,8 @@ public final class VoharVodalianDesecrator extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new VoharVodalianDesecratorEffect(), new TapSourceCost()));
 
         // {2}, Sacrifice Vohar, Vodalian Desecrator: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(new CastCardFromGraveyardThenExileItEffect()
-                .setText("You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead."),
-                new GenericManaCost(2)
+        Ability ability = new ActivateAsSorceryActivatedAbility(
+                new MayCastTargetThenExileEffect(Duration.EndOfTurn), new GenericManaCost(2)
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));

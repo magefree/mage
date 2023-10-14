@@ -27,7 +27,7 @@ public final class BlizzardSpecter extends CardImpl {
 
     public BlizzardSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SPECTER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -63,7 +63,7 @@ class ReturnToHandEffect extends OneShotEffect {
         staticText = "That player returns a permanent they control to its owner's hand";
     }
 
-    public ReturnToHandEffect(final ReturnToHandEffect effect) {
+    private ReturnToHandEffect(final ReturnToHandEffect effect) {
         super(effect);
     }
 

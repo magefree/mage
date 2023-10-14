@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class CaribouToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class CaribouToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public CaribouToken(final CaribouToken token) {
+    protected CaribouToken(final CaribouToken token) {
         super(token);
     }
 

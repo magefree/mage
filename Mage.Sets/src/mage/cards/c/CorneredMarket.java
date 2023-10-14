@@ -1,7 +1,7 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
@@ -18,6 +18,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +60,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 + "<br> Players can't play nonbasic lands with the same name as a nontoken permanent.";
     }
 
-    CorneredMarketReplacementEffect(final CorneredMarketReplacementEffect effect) {
+    private CorneredMarketReplacementEffect(final CorneredMarketReplacementEffect effect) {
         super(effect);
     }
 
@@ -70,7 +72,11 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getSourceId());
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) {
+            return false;
+        }
+        Card card = spellAbility.getCharacteristics(game);
         if (card != null) {
             Spell spell = game.getState().getStack().getSpell(event.getSourceId());
             // Face Down cast spell (Morph creature) has no name
@@ -80,7 +86,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             }
             // play land check
             if (card.isLand(game)
-                    && !card.isBasic()) {
+                    && !card.isBasic(game)) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                     if (permanent != null) {
                         if (CardUtil.haveSameNames(card, permanent.getName(), game)) {
@@ -101,11 +107,6 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 }
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

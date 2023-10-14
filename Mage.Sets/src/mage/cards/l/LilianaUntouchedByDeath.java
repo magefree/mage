@@ -32,7 +32,7 @@ public final class LilianaUntouchedByDeath extends CardImpl {
     public LilianaUntouchedByDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
         this.setStartingLoyalty(4);
 
@@ -65,7 +65,7 @@ class LilianaUntouchedByDeathEffect extends OneShotEffect {
         this.staticText = "mill three cards. If at least one of them is a Zombie card, each opponent loses 2 life and you gain 2 life";
     }
 
-    public LilianaUntouchedByDeathEffect(final LilianaUntouchedByDeathEffect effect) {
+    private LilianaUntouchedByDeathEffect(final LilianaUntouchedByDeathEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class LilianaUntouchedByDeathGraveyardEffect extends AsThoughEffectImpl {
         staticText = "You may cast Zombie cards from your graveyard this turn";
     }
 
-    public LilianaUntouchedByDeathGraveyardEffect(final LilianaUntouchedByDeathGraveyardEffect effect) {
+    private LilianaUntouchedByDeathGraveyardEffect(final LilianaUntouchedByDeathGraveyardEffect effect) {
         super(effect);
     }
 

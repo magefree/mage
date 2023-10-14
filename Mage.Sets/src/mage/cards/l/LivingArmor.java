@@ -49,7 +49,7 @@ public final class LivingArmor extends CardImpl {
             this.staticText = "Put X +0/+1 counters on target creature, where X is that creature's mana value";
         }
 
-        public LivingArmorEffect(final LivingArmorEffect effect) {
+        private LivingArmorEffect(final LivingArmorEffect effect) {
             super(effect);
         }
 

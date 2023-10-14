@@ -59,7 +59,7 @@ class BanewaspAfflictionLoseLifeEffect extends OneShotEffect {
         this.staticText = "that creature's controller loses life equal to its toughness";
     }
 
-    public BanewaspAfflictionLoseLifeEffect(BanewaspAfflictionLoseLifeEffect copy) {
+    private BanewaspAfflictionLoseLifeEffect(final BanewaspAfflictionLoseLifeEffect copy) {
         super(copy);
     }
 

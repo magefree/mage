@@ -36,7 +36,7 @@ public final class OvikaEnigmaGoliath extends CardImpl {
     public OvikaEnigmaGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.NIGHTMARE);
         this.power = new MageInt(6);

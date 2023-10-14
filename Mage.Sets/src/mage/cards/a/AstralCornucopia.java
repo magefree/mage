@@ -54,7 +54,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
         this.staticText = "Choose a color. Add one mana of that color for each charge counter on {this}";
     }
 
-    public AstralCornucopiaManaEffect(final AstralCornucopiaManaEffect effect) {
+    private AstralCornucopiaManaEffect(final AstralCornucopiaManaEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
             return netMana;
         }
 
-        int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
+        int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
         if (counters > 0) {
             netMana.add(Mana.WhiteMana(counters));
             netMana.add(Mana.BlueMana(counters));
@@ -95,7 +95,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
         if (sourcePermanent == null || controller == null) {
             return null;
         }
-        int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
+        int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
         if (counters == 0) {
             return null;
         }

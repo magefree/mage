@@ -70,7 +70,7 @@ class DemonicHordesEffect extends OneShotEffect {
         staticText = "unless you pay {B}{B}{B}, tap {this} and sacrifice a land of an opponent's choice";
     }
 
-    public DemonicHordesEffect(final DemonicHordesEffect effect) {
+    private DemonicHordesEffect(final DemonicHordesEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }
@@ -92,14 +92,14 @@ class DemonicHordesEffect extends OneShotEffect {
             }
             demonicHordes.tap(source, game);
             Target choiceOpponent = new TargetOpponent();
-            choiceOpponent.setNotTarget(true);
+            choiceOpponent.withNotTarget(true);
             FilterLandPermanent filterLand = new FilterLandPermanent();
             filterLand.add(new ControllerIdPredicate(source.getControllerId()));
             if (controller.choose(Outcome.Neutral, choiceOpponent, source, game)) {
                 Player opponent = game.getPlayer(choiceOpponent.getFirstTarget());
                 if (opponent != null) {
                     Target chosenLand = new TargetLandPermanent(filterLand);
-                    chosenLand.setNotTarget(true);
+                    chosenLand.withNotTarget(true);
                     if (opponent.chooseTarget(Outcome.Sacrifice, chosenLand, source, game)) {
                         Permanent land = game.getPermanent(chosenLand.getFirstTarget());
                         if (land != null) {

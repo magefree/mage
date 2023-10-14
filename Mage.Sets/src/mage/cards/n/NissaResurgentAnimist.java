@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public final class NissaResurgentAnimist extends CardImpl {
     public NissaResurgentAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);
@@ -43,7 +44,7 @@ public final class NissaResurgentAnimist extends CardImpl {
                 Outcome.DrawCard, 2,
                 new RevealCardsFromLibraryUntilEffect(filter, PutCards.HAND, PutCards.BOTTOM_RANDOM)
         ).concatBy("Then"));
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private NissaResurgentAnimist(final NissaResurgentAnimist card) {

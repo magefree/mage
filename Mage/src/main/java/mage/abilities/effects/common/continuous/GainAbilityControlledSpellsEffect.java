@@ -6,10 +6,10 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author Styxo
@@ -23,10 +23,10 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
-        staticText = filter.getMessage() + " you cast have " + ability.getRule() + '.';
+        staticText = filter.getMessage() + " have " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
     }
 
-    public GainAbilityControlledSpellsEffect(final GainAbilityControlledSpellsEffect effect) {
+    private GainAbilityControlledSpellsEffect(final GainAbilityControlledSpellsEffect effect) {
         super(effect);
         this.ability = effect.ability;
         this.filter = effect.filter;
@@ -40,14 +40,12 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player == null || permanent == null) {
+        if (player == null) {
             return false;
         }
 
-        for (Card card : game.getExile().getAllCards(game)) {
-            if (card.isOwnedBy(source.getControllerId())
-                    && filter.match(card, game)) {
+        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
+            if (filter.match(card, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
@@ -71,22 +69,18 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY)
                 .stream()
                 .filter(card -> filter.match(card, game))
-                .forEach(card -> {
-                    game.getState().addOtherAbility(card, ability);
-                });
+                .forEach(card -> game.getState().addOtherAbility(card, ability));
 
         for (StackObject stackObject : game.getStack()) {
-            // only spells cast, so no copies of spells
-            if ((stackObject instanceof Spell)
-                    && !stackObject.isCopy()
-                    && stackObject.isControlledBy(source.getControllerId())) {
-                Card card = game.getCard(stackObject.getSourceId());
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                    return true;
-                }
+            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(source.getControllerId())) {
+                continue;
+            }
+            // TODO: Distinguish "you cast" to exclude copies
+            Card card = game.getCard(stackObject.getSourceId());
+            if (card != null && filter.match((Spell) stackObject, game)) {
+                game.getState().addOtherAbility(card, ability);
             }
         }
-        return false; // TODO: Why is this returning false?
+        return true;
     }
 }

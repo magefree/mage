@@ -53,7 +53,7 @@ class HydraBroodmasterEffect extends OneShotEffect {
         this.staticText = "create X X/X green Hydra creature tokens";
     }
 
-    public HydraBroodmasterEffect(final HydraBroodmasterEffect effect) {
+    private HydraBroodmasterEffect(final HydraBroodmasterEffect effect) {
         super(effect);
     }
 

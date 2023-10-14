@@ -24,7 +24,7 @@ public final class PyriteSpellbomb extends CardImpl {
 
     public PyriteSpellbomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, "it"), new ColoredManaCost(ColoredManaSymbol.R));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetAnyTarget());
         this.addAbility(firstAbility);

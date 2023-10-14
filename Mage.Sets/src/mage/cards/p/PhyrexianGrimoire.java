@@ -56,7 +56,7 @@ class PhyrexianGrimoireEffect extends OneShotEffect {
         this.staticText = "Target opponent chooses one of the top two cards of your graveyard. Exile that card and put the other one into your hand";
     }
 
-    public PhyrexianGrimoireEffect(final PhyrexianGrimoireEffect effect) {
+    private PhyrexianGrimoireEffect(final PhyrexianGrimoireEffect effect) {
         super(effect);
     }
 

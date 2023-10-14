@@ -35,7 +35,7 @@ public class AttackingCreatureCount implements DynamicValue {
         this.filter = filter;
     }
 
-    public AttackingCreatureCount(final AttackingCreatureCount dynamicValue) {
+    protected AttackingCreatureCount(final AttackingCreatureCount dynamicValue) {
         super();
         this.message = dynamicValue.message;
         this.filter = dynamicValue.filter;

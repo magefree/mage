@@ -10,6 +10,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
 /**
@@ -21,13 +22,13 @@ public final class ObiWanKenobiEmblem extends Emblem {
     public ObiWanKenobiEmblem() {
         super("Emblem Obi-Wan Kenobi");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(1, 1, Duration.EndOfGame));
-        Effect effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfGame);
+        Effect effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfGame, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("and have vigilance");
         ability.addEffect(effect);
-        effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
+        effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfGame, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText(", first strike");
         ability.addEffect(effect);
-        effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield);
+        effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfGame, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("and lifelink.");
         ability.addEffect(effect);
         getAbilities().add(ability);

@@ -32,7 +32,7 @@ public final class WrennAndRealmbreaker extends CardImpl {
     public WrennAndRealmbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WRENN);
         this.setStartingLoyalty(4);
 

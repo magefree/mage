@@ -1,9 +1,7 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +33,7 @@ public final class RetributionOfTheMeek extends CardImpl {
     }
     
     @Override
-    public Card copy() {
+    public RetributionOfTheMeek copy() {
         return new RetributionOfTheMeek(this);
     }
     

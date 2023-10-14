@@ -7,7 +7,6 @@ import mage.abilities.effects.common.AmplifyEffect.AmplifyFactor;
 import mage.constants.Zone;
 
 /**
- *
  * @author FenrisulfrX
  */
 public class AmplifyAbility extends SimpleStaticAbility {
@@ -16,7 +15,7 @@ public class AmplifyAbility extends SimpleStaticAbility {
         super(Zone.ALL, new AmplifyEffect(amplifyFactor));
     }
 
-    public AmplifyAbility(final AmplifyAbility ability) {
+    protected AmplifyAbility(final AmplifyAbility ability) {
         super(ability);
     }
 

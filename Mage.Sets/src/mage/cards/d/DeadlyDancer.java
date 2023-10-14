@@ -16,8 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -28,12 +27,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DeadlyDancer extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public DeadlyDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -56,7 +49,7 @@ public final class DeadlyDancer extends CardImpl {
         ).setText("{this}"), new ManaCostsImpl<>("{R}{R}"));
         ability.addEffect(new BoostTargetEffect(1, 0)
                 .setText("and another target creature each get +1/+0 until end of turn"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

@@ -72,7 +72,7 @@ class BalshanBeguilerEffect extends OneShotEffect {
             return false;
         }
         CardsImpl cards = new CardsImpl();
-        cards.addAll(player.getLibrary().getTopCards(game, 2));
+        cards.addAllCards(player.getLibrary().getTopCards(game, 2));
         if (cards.isEmpty()) {
             return false;
         }

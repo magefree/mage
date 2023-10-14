@@ -58,7 +58,7 @@ class ImaginaryThreatsEffect extends OneShotEffect {
         staticText = "Creatures target opponent controls attack this turn if able";
     }
 
-    public ImaginaryThreatsEffect(final ImaginaryThreatsEffect effect) {
+    private ImaginaryThreatsEffect(final ImaginaryThreatsEffect effect) {
         super(effect);
     }
 

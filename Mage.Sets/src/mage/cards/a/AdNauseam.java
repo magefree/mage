@@ -43,7 +43,7 @@ class AdNauseamEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library and put that card into your hand. You lose life equal to its mana value. You may repeat this process any number of times";
     }
 
-    public AdNauseamEffect(final AdNauseamEffect effect) {
+    private AdNauseamEffect(final AdNauseamEffect effect) {
         super(effect);
     }
 

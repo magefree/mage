@@ -26,7 +26,7 @@ public final class SaplingOfColfenor extends CardImpl {
 
     public SaplingOfColfenor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/G}{B/G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.SHAMAN);
 
@@ -58,7 +58,7 @@ class SaplingOfColfenorEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a creature card, you gain life equal to that card's toughness, lose life equal to its power, then put it into your hand";
     }
 
-    public SaplingOfColfenorEffect(final SaplingOfColfenorEffect effect) {
+    private SaplingOfColfenorEffect(final SaplingOfColfenorEffect effect) {
         super(effect);
     }
 

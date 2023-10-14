@@ -12,7 +12,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author North
  */
 public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleModifyingEffectImpl {
@@ -26,18 +25,13 @@ public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleM
         staticText = "{this} doesn't untap during your untap step";
     }
 
-    public DontUntapInControllersUntapStepSourceEffect(final DontUntapInControllersUntapStepSourceEffect effect) {
+    protected DontUntapInControllersUntapStepSourceEffect(final DontUntapInControllersUntapStepSourceEffect effect) {
         super(effect);
     }
 
     @Override
     public DontUntapInControllersUntapStepSourceEffect copy() {
         return new DontUntapInControllersUntapStepSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

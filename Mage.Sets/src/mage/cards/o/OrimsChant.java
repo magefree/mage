@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -57,7 +57,7 @@ class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Target player can't cast spells this turn";
     }
 
-    public OrimsChantCantCastEffect(final OrimsChantCantCastEffect effect) {
+    private OrimsChantCantCastEffect(final OrimsChantCantCastEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class OrimsChantEffect extends OneShotEffect {
         this.staticText = "if this spell was kicked, creatures can't attack this turn";
     }
 
-    public OrimsChantEffect(final OrimsChantEffect effect) {
+    private OrimsChantEffect(final OrimsChantEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class OrimsChantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && KickedCondition.ONCE.apply(game, source)) {
-            game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), source);
+            game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES), source);
             return true;
         }
         return false;

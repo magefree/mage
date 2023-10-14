@@ -63,7 +63,7 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
         staticText = "All combat damage that would be dealt to you by unblocked creatures this turn is dealt to {this} instead";
     }
 
-    KjeldoranRoyalGuardEffect(final KjeldoranRoyalGuardEffect effect) {
+    private KjeldoranRoyalGuardEffect(final KjeldoranRoyalGuardEffect effect) {
         super(effect);
     }
 

@@ -25,7 +25,7 @@ public final class BaneAlleyBlackguard extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public BaneAlleyBlackguard (final BaneAlleyBlackguard card) {
+    private BaneAlleyBlackguard(final BaneAlleyBlackguard card) {
         super(card);
     }
 

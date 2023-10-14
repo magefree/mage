@@ -7,15 +7,14 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,17 +28,15 @@ import java.util.UUID;
  */
 public final class TriadOfFates extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filterCounter = new FilterCreaturePermanent("creature that has a fate counter on it");
 
     static {
-        filter.add(AnotherPredicate.instance);
         filterCounter.add(CounterType.FATE.getPredicate());
     }
 
     public TriadOfFates(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -49,16 +46,15 @@ public final class TriadOfFates extends CardImpl {
         // {1}, {T}: Put a fate counter on another target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FATE.createInstance()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);
 
         // {W}, {T}: Exile target creature that has a fate counter on it, then return it to the battlefield under its owner's control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl<>("{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileThenReturnTargetEffect(false, false), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
         ability.addTarget(target);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         this.addAbility(ability);
 
         // {B}, {T}: Exile target creature that has a fate counter on it. Its controller draws two cards.
@@ -87,7 +83,7 @@ class DrawCardControllerTargetEffect extends OneShotEffect {
         this.staticText = "Its controller draws two cards";
     }
 
-    public DrawCardControllerTargetEffect(final DrawCardControllerTargetEffect effect) {
+    private DrawCardControllerTargetEffect(final DrawCardControllerTargetEffect effect) {
         super(effect);
     }
 

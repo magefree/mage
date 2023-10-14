@@ -36,7 +36,7 @@ public final class KatildaAndLier extends CardImpl {
     public KatildaAndLier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -64,7 +64,7 @@ class KatildaAndLierEffect extends ContinuousEffectImpl {
         this.staticText = "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
-    public KatildaAndLierEffect(final KatildaAndLierEffect effect) {
+    private KatildaAndLierEffect(final KatildaAndLierEffect effect) {
         super(effect);
     }
 

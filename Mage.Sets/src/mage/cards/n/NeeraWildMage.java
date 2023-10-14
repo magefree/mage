@@ -9,10 +9,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -28,20 +25,18 @@ public final class NeeraWildMage extends CardImpl {
     public NeeraWildMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(7);
 
-        // Whenever you cast a spell, you may put it on the bottom of its owner's library.
-        // If you do, reveal cards from the top of your library until you reveal a nonland card.
-        // You may cast that card without paying its mana cost.
-        // Then put the rest on the bottom of your library in a random order.
-        // This ability triggers only once each turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new NeeraWildMageEffect(), StaticFilters.FILTER_SPELL_A,
-                true, true).setTriggersOnce(true));
+        // Whenever you cast a spell, you may put it on the bottom of its owner's library. If you do, reveal cards from the top of your library until you reveal a nonland card. You may cast that card without paying its mana cost. Then put the rest on the bottom of your library in a random order. This ability triggers only once each turn.
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new NeeraWildMageEffect(), StaticFilters.FILTER_SPELL_A,
+                true, SetTargetPointer.SPELL
+        ).setTriggersOnceEachTurn(true));
     }
 
     private NeeraWildMage(final NeeraWildMage card) {
@@ -61,7 +56,7 @@ class NeeraWildMageEffect extends OneShotEffect {
         staticText = "you may put it on the bottom of its owner's library. If you do, reveal cards from the top of your library until you reveal a nonland card. You may cast that card without paying its mana cost. Then put the rest on the bottom of your library in a random order. This ability triggers only once each turn.";
     }
 
-    public NeeraWildMageEffect(final NeeraWildMageEffect effect) {
+    private NeeraWildMageEffect(final NeeraWildMageEffect effect) {
         super(effect);
     }
 
@@ -77,7 +72,7 @@ class NeeraWildMageEffect extends OneShotEffect {
             return false;
         }
 
-        if(!spellController.putCardsOnBottomOfLibrary(spell, game, source, true)) {
+        if (!spellController.putCardsOnBottomOfLibrary(spell, game, source, true)) {
             return false;
         }
 

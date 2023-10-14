@@ -48,7 +48,7 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player casts an instant or sorcery spell, ");
     }
 
-    public HiveMindTriggeredAbility(final HiveMindTriggeredAbility ability) {
+    private HiveMindTriggeredAbility(final HiveMindTriggeredAbility ability) {
         super(ability);
     }
 
@@ -85,7 +85,7 @@ class HiveMindEffect extends OneShotEffect {
         this.staticText = "each other player copies that spell. Each of those players may choose new targets for their copy";
     }
 
-    public HiveMindEffect(final HiveMindEffect effect) {
+    private HiveMindEffect(final HiveMindEffect effect) {
         super(effect);
     }
 

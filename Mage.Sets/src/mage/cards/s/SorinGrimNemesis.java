@@ -24,7 +24,7 @@ public final class SorinGrimNemesis extends CardImpl {
     
     public SorinGrimNemesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
         
         this.setStartingLoyalty(6);
@@ -59,7 +59,7 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its mana value";
     }
     
-    public SorinGrimNemesisRevealEffect(final SorinGrimNemesisRevealEffect effect) {
+    private SorinGrimNemesisRevealEffect(final SorinGrimNemesisRevealEffect effect) {
         super(effect);
     }
     

@@ -23,7 +23,7 @@ public final class BartelRuneaxe extends CardImpl {
 
     public BartelRuneaxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT, SubType.WARRIOR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
@@ -51,7 +51,7 @@ class BartelRuneaxeEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "{this} can't be the target of Aura spells";
     }
 
-    public BartelRuneaxeEffect(final BartelRuneaxeEffect effect) {
+    private BartelRuneaxeEffect(final BartelRuneaxeEffect effect) {
         super(effect);
     }
 
@@ -63,11 +63,6 @@ class BartelRuneaxeEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TARGET;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -30,7 +30,6 @@ public final class HellishRebuke extends CardImpl {
 
         // Until end of turn, permanents your opponents control gain "When this permanent deals damage to the player who cast Hellish Rebuke, sacrifice this permanent. You lose 2 life."
         this.getSpellAbility().addEffect(new HellishRebukeEffect());
-        this.getSpellAbility().addWatcher(new SpellsCastWatcher());
     }
 
     private HellishRebuke(final HellishRebuke card) {
@@ -63,7 +62,6 @@ class HellishRebukeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = source.getSourceObject(game);
         game.addEffect(new GainAbilityAllEffect(
                 new HellishRebukeTriggeredAbility(source, game),
                 Duration.EndOfTurn, StaticFilters.FILTER_OPPONENTS_PERMANENT
@@ -111,12 +109,12 @@ class HellishRebukeTriggeredAbility extends TriggeredAbilityImpl {
                 + sourceName + ", sacrifice this permanent. You lose 2 life.";
     }
 
-    private static final String getSourceName(Ability source, Game game) {
+    private static String getSourceName(Ability source, Game game) {
         MageObject object = source.getSourceObject(game);
         return object != null ? object.getName() : "Hellish Rebuke";
     }
 
-    private static final UUID getCasterId(Ability source, Game game) {
+    private static UUID getCasterId(Ability source, Game game) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         return watcher.getCasterId(source, game);
     }

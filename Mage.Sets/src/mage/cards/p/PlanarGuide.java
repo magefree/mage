@@ -61,7 +61,7 @@ class PlanarGuideExileEffect extends OneShotEffect {
         staticText = "Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
 
-    public PlanarGuideExileEffect(final PlanarGuideExileEffect effect) {
+    private PlanarGuideExileEffect(final PlanarGuideExileEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class PlanarGuideReturnFromExileEffect extends OneShotEffect {
         staticText = "At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
 
-    public PlanarGuideReturnFromExileEffect(final PlanarGuideReturnFromExileEffect effect) {
+    private PlanarGuideReturnFromExileEffect(final PlanarGuideReturnFromExileEffect effect) {
         super(effect);
     }
 

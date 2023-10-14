@@ -53,7 +53,7 @@ class BioplasmEffect extends OneShotEffect {
         this.staticText = "exile the top card of your library. If it's a creature card, {this} gets +X/+Y until end of turn, where X is the exiled creature card's power and Y is its toughness";
     }
 
-    BioplasmEffect(final BioplasmEffect effect) {
+    private BioplasmEffect(final BioplasmEffect effect) {
         super(effect);
     }
 

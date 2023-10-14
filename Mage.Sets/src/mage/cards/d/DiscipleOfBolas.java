@@ -53,7 +53,7 @@ class DiscipleOfBolasEffect extends OneShotEffect {
         this.staticText = "sacrifice another creature. You gain X life and draw X cards, where X is that creature's power";
     }
 
-    public DiscipleOfBolasEffect(final DiscipleOfBolasEffect effect) {
+    private DiscipleOfBolasEffect(final DiscipleOfBolasEffect effect) {
         super(effect);
     }
 

@@ -24,7 +24,7 @@ public final class MichikoKondaTruthSeeker extends CardImpl {
 
     public MichikoKondaTruthSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 
@@ -51,7 +51,7 @@ class MichikoKondaTruthSeekerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 1, "that player"), false);
     }
 
-    public MichikoKondaTruthSeekerAbility(final MichikoKondaTruthSeekerAbility ability) {
+    private MichikoKondaTruthSeekerAbility(final MichikoKondaTruthSeekerAbility ability) {
         super(ability);
     }
 

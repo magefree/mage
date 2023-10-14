@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,11 +14,13 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class VileManifestation extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Vile Manifestation gets +1/+0 for each card with cycling in your graveyard.
-        DynamicValue amount = new CardsInControllerGraveyardCount(new FilterCard(filter));
+        DynamicValue amount = new CardsInControllerGraveyardCount(filter);
         Effect effect = new BoostSourceEffect(amount, StaticValue.get(0), Duration.WhileOnBattlefield);
         effect.setText("Vile Manifestation gets +1/+0 for each card with cycling in your graveyard.");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

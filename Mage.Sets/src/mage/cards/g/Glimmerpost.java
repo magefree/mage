@@ -34,7 +34,7 @@ public final class Glimmerpost extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public Glimmerpost (final Glimmerpost card) {
+    private Glimmerpost(final Glimmerpost card) {
         super(card);
     }
 
@@ -57,7 +57,7 @@ class GlimmerpostEffect extends OneShotEffect {
         staticText = "you gain 1 life for each Locus on the battlefield";
     }
 
-    public GlimmerpostEffect(final GlimmerpostEffect effect) {
+    private GlimmerpostEffect(final GlimmerpostEffect effect) {
         super(effect);
     }
 

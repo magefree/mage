@@ -62,7 +62,7 @@ class BeginTheInvasionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
         return new SearchLibraryPutInPlayEffect(
-                new TargetCardWithDifferentNameInLibrary(0, xValue, filter), false, true
+                new TargetCardWithDifferentNameInLibrary(0, xValue, filter), false
         ).apply(game, source);
     }
 }

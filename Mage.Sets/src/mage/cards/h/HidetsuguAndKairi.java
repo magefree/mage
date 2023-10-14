@@ -29,7 +29,7 @@ public final class HidetsuguAndKairi extends CardImpl {
     public HidetsuguAndKairi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.DRAGON);

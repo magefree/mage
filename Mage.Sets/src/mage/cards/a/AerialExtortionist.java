@@ -70,7 +70,7 @@ class AerialExtortionistExileEffect extends OneShotEffect {
                 "For as long as that card remains exiled, its owner may cast it";
     }
 
-    public AerialExtortionistExileEffect(final AerialExtortionistExileEffect effect) {
+    private AerialExtortionistExileEffect(final AerialExtortionistExileEffect effect) {
         super(effect);
     }
 

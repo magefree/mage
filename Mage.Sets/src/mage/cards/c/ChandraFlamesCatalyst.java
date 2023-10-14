@@ -3,10 +3,10 @@ package mage.cards.c;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.CastCardFromGraveyardThenExileItEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.common.continuous.CastFromHandWithoutPayingManaCostEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
@@ -14,29 +14,27 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
 /**
- *
- * @author htrajan
+ * @author htrajan, xenohedron
  */
 public final class ChandraFlamesCatalyst extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("red instant or sorcery card from your graveyard");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     public ChandraFlamesCatalyst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(5);
 
@@ -44,9 +42,7 @@ public final class ChandraFlamesCatalyst extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DamagePlayersEffect(3, TargetController.OPPONENT), 1));
 
         // −2: You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.
-        CastCardFromGraveyardThenExileItEffect minusEffect = new CastCardFromGraveyardThenExileItEffect();
-        minusEffect.setText("You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead");
-        Ability ability = new LoyaltyAbility(minusEffect, -2);
+        Ability ability = new LoyaltyAbility(new MayCastTargetThenExileEffect(false), -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

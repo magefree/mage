@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class RhonassLastStandToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class RhonassLastStandToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public RhonassLastStandToken(final RhonassLastStandToken token) {
+    protected RhonassLastStandToken(final RhonassLastStandToken token) {
         super(token);
     }
 

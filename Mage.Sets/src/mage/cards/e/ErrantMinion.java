@@ -63,7 +63,7 @@ class ErrantMinionEffect extends OneShotEffect {
         this.staticText = "that player may pay any amount of mana. Errant Minion deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way";
     }
 
-    public ErrantMinionEffect(final ErrantMinionEffect effect) {
+    private ErrantMinionEffect(final ErrantMinionEffect effect) {
         super(effect);
     }
 
@@ -89,11 +89,11 @@ class ErrantMinionEffect extends OneShotEffect {
                 PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.OneUse, manaPaid);
                 effect.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
                 game.addEffect(effect, source);
-                DamageTargetEffect effect2 = new DamageTargetEffect(2);
-                effect2.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
-                effect2.apply(game, source);
-                return true;
             }
+            DamageTargetEffect effect2 = new DamageTargetEffect(2);
+            effect2.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
+            effect2.apply(game, source);
+            return true;
         }
         return false;
     }

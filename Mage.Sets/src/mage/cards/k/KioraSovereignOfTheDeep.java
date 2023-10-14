@@ -42,7 +42,7 @@ public final class KioraSovereignOfTheDeep extends CardImpl {
     public KioraSovereignOfTheDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(4);
@@ -55,7 +55,7 @@ public final class KioraSovereignOfTheDeep extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}"), false));
 
         // Whenever you cast a Kraken, Leviathan, Octopus, or Serpent spell from your hand, look at the top X cards of your library, where X is that spell's mana value. You may cast a spell with mana value less than X from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        this.addAbility(SpellCastControllerTriggeredAbility.createWithFromZone(
                 new KioraSovereignOfTheDeepEffect(), filter, false, Zone.HAND
         ));
     }

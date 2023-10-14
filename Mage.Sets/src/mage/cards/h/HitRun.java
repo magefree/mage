@@ -58,7 +58,7 @@ class HitEffect extends OneShotEffect {
         this.staticText = "Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's mana value";
     }
 
-    public HitEffect(final HitEffect effect) {
+    private HitEffect(final HitEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class RunEffect extends OneShotEffect {
         this.staticText = "Attacking creatures you control get +1/+0 until end of turn for each other attacking creature";
     }
 
-    public RunEffect(final RunEffect effect) {
+    private RunEffect(final RunEffect effect) {
         super(effect);
     }
 

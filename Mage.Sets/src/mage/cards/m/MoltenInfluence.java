@@ -45,7 +45,7 @@ class MoltenInfluenceEffect extends OneShotEffect {
         this.staticText = "Counter target instant or sorcery spell unless its controller has {this} deal 4 damage to them";
     }
 
-    public MoltenInfluenceEffect(final MoltenInfluenceEffect effect) {
+    private MoltenInfluenceEffect(final MoltenInfluenceEffect effect) {
         super(effect);
     }
 

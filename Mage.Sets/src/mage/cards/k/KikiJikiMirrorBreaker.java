@@ -39,7 +39,7 @@ public final class KikiJikiMirrorBreaker extends CardImpl {
 
     public KikiJikiMirrorBreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -72,7 +72,7 @@ class KikiJikiMirrorBreakerEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step";
     }
 
-    public KikiJikiMirrorBreakerEffect(final KikiJikiMirrorBreakerEffect effect) {
+    private KikiJikiMirrorBreakerEffect(final KikiJikiMirrorBreakerEffect effect) {
         super(effect);
     }
 

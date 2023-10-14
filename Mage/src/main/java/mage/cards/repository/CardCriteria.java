@@ -244,7 +244,7 @@ public class CardCriteria {
         }
 
         if (modalDoubleFaced != null) {
-            where.eq("modalDoubleFacesCard", modalDoubleFaced);
+            where.eq("modalDoubleFacedCard", modalDoubleFaced);
             clausesCount++;
         }
 
