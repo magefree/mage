@@ -9,6 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author spjspj
@@ -56,7 +57,7 @@ public class RollDiceEffect extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return "Roll a " + numSides + " sided die";
+        return "Roll a " + CardUtil.numberToText(numSides) + "-sided die";
     }
 
     @Override

@@ -23,7 +23,8 @@ public final class StructuralCollapse extends CardImpl {
 
         // Target player sacrifices an artifact and a land. Structural Collapse deals 2 damage to that player.
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterArtifactPermanent(), 1, "Target player"));
-        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_LANDS, 1, "Target player"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_LANDS, 1, "Target player")
+                .setText("and a land"));
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

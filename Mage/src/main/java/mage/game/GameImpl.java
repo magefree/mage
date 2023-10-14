@@ -118,7 +118,7 @@ public abstract class GameImpl implements Game {
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
     protected GameState state;
-    private transient Stack<Integer> savedStates = new Stack<>();
+    private transient Stack<Integer> savedStates = new Stack<>(); // bookmarks - 0-base refs to gameStates
     protected transient GameStates gameStates = new GameStates();
 
     // game states to allow player rollback
@@ -934,14 +934,27 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void removeBookmark(int bookmark
-    ) {
+    public void removeBookmark(int bookmark) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {
                     savedStates.pop();
                 }
                 gameStates.remove(bookmark);
+            }
+        }
+    }
+
+    @Override
+    public void removeBookmark_v2(int bookmark) {
+        if (!simulation) {
+            if (bookmark != 0) {
+                while (savedStates.size() >= bookmark) {
+                    int outdatedIndex = savedStates.pop();
+                    while (gameStates.getSize() - 1 >= outdatedIndex) {
+                        gameStates.remove(gameStates.getSize() - 1);
+                    }
+                }
             }
         }
     }

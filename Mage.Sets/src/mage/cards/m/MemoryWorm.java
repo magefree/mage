@@ -9,6 +9,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -52,7 +53,7 @@ public final class MemoryWorm extends CardImpl {
         ability.addEffect(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance()
         ));
-        this.addAbility(ability.withFlavorWord("Paradox"));
+        this.addAbility(ability.setAbilityWord(AbilityWord.PARADOX));
     }
 
     private MemoryWorm(final MemoryWorm card) {

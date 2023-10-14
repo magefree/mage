@@ -48,7 +48,7 @@ public final class MiirymSentinelWyrm extends CardImpl {
                 Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(true).setIsntLegendary(true),
                 filter, false, SetTargetPointer.PERMANENT, "Whenever another nontoken Dragon " +
                 "enters the battlefield under your control, create a token that's a copy of it, " +
-                "except the token isn't legendary if that Dragon is legendary."
+                "except the token isn't legendary."
         ));
     }
 

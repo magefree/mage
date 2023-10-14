@@ -167,6 +167,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_RULES, Boolean.toString(chkRules.isSelected()));
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_TYPES, Boolean.toString(chkTypes.isSelected()));
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_UNIQUE, Boolean.toString(chkUnique.isSelected()));
+        ExpansionRepository.instance.unsubscribe(setsDbListener);
     }
 
     public void changeGUISize() {

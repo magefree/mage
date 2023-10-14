@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.HashSet;
@@ -8,7 +7,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -35,7 +34,7 @@ public final class SealOfTheGuildpact extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // As Seal of the Guildpact enters the battlefield, choose two colors.
-        this.addAbility(new EntersBattlefieldAbility(new SealOfTheGuildpactChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new SealOfTheGuildpactChooseColorEffect()));
 
         // Each spell you cast costs {1} less to cast for each of the chosen colors it is.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SealOfTheGuildpactCostReductionEffect()));
