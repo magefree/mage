@@ -57,6 +57,7 @@ public final class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Castle", 9, Rarity.UNCOMMON, mage.cards.c.Castle.class));
         cards.add(new SetCardInfo("Celestial Prism", 235, Rarity.UNCOMMON, mage.cards.c.CelestialPrism.class));
         cards.add(new SetCardInfo("Channel", 189, Rarity.UNCOMMON, mage.cards.c.Channel.class));
+        cards.add(new SetCardInfo("Chaos Orb", 236, Rarity.RARE, mage.cards.c.ChaosOrb.class));
         cards.add(new SetCardInfo("Chaoslace", 140, Rarity.RARE, mage.cards.c.Chaoslace.class));
         cards.add(new SetCardInfo("Circle of Protection: Black", 10, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlack.class));
         cards.add(new SetCardInfo("Circle of Protection: Blue", 11, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlue.class));
