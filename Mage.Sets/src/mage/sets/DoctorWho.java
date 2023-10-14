@@ -67,6 +67,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonskull Summit", 272, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 273, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 274, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
+        cards.add(new SetCardInfo("Ecstatic Beauty", 83, Rarity.RARE, mage.cards.e.EcstaticBeauty.class));
         cards.add(new SetCardInfo("Evolving Wilds", 275, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 276, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 231, Rarity.COMMON, mage.cards.e.Explore.class));
