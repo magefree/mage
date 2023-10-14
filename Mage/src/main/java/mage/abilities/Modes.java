@@ -503,6 +503,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 throw new UnsupportedOperationException(String.format("no text available for this selection of min and max modes (%d and %d)",
                         this.getMinModes(), this.getMaxModes(null, null)));
             }
+            if (isRandom) {
+                sb.append(" at random");
+            }
         } else {
             sb.append(chooseText);
         }
