@@ -63,6 +63,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Emblazoned Golem", 136, Rarity.UNCOMMON, mage.cards.e.EmblazonedGolem.class));
         cards.add(new SetCardInfo("Enlistment Officer", 9, Rarity.UNCOMMON, mage.cards.e.EnlistmentOfficer.class));
         cards.add(new SetCardInfo("Evasive Action", 23, Rarity.UNCOMMON, mage.cards.e.EvasiveAction.class));
+        cards.add(new SetCardInfo("False Dawn", 10, Rarity.RARE, mage.cards.f.FalseDawn.class));
         cards.add(new SetCardInfo("Fervent Charge", 98, Rarity.RARE, mage.cards.f.FerventCharge.class));
         cards.add(new SetCardInfo("Fire // Ice", 128, Rarity.UNCOMMON, mage.cards.f.FireIce.class));
         cards.add(new SetCardInfo("Flowstone Charger", 99, Rarity.UNCOMMON, mage.cards.f.FlowstoneCharger.class));
