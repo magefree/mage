@@ -76,7 +76,7 @@ class FalseDawnManaAddEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId())
-                && game.getControllerId(event.getSourceId()) == source.getControllerId();
+                && game.getControllerId(event.getSourceId()).equals(source.getControllerId());
     }
 }
 //Based on Celestial Dawn
