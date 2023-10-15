@@ -19,6 +19,7 @@ import mage.game.permanent.token.DalekToken;
 import mage.players.Player;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -75,11 +76,15 @@ enum DavrosDalekCreatorHint implements Hint {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         String sep = "";
         String hint = "Opponents that lost 3 or more this turn: [";
+        Set<UUID> opponents = game.getOpponents(ability.getControllerId());
         if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-                int lostLive = watcher.getLifeLost(opponentId);
+            for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
+                if (!opponents.contains(playerId)) {
+                    continue;
+                }
+                int lostLive = watcher.getLifeLost(playerId);
                 if (lostLive >= 3) {
-                    Player player = game.getPlayer(opponentId);
+                    Player player = game.getPlayer(playerId);
                     if (player != null) {
                         hint += sep + player.getName();
                         sep = ", ";
@@ -120,11 +125,15 @@ class DavrosDalekCreatorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
+        Set<UUID> opponents = game.getOpponents(source.getControllerId());
         if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                int lostLive = watcher.getLifeLost(opponentId);
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                if (!opponents.contains(playerId)) {
+                    continue;
+                }
+                int lostLive = watcher.getLifeLost(playerId);
                 if (lostLive >= 3) {
-                    Player player = game.getPlayer(opponentId);
+                    Player player = game.getPlayer(playerId);
                     if (player != null) {
                         choice.faceChoice(player, game, source);
                     }
