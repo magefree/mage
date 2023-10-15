@@ -1,17 +1,18 @@
+package mage.cards.d;
 
-package mage.cards.b;
-
+import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.keyword.DoctorsCompanionAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -19,42 +20,50 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- * @author North
+ * @author TheElk801
  */
-public final class BludgeonBrawl extends CardImpl {
+public final class DanLewis extends CardImpl {
 
-    public BludgeonBrawl(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+    public DanLewis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        // Each noncreature, non-Equipment artifact is an Equipment with equip {X} and "Equipped creature gets +X/+0," where X is that artifact's converted mana cost.
-        this.addAbility(new SimpleStaticAbility(new BludgeonBrawlEffect()));
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.HUMAN);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Noncreature, non-Equipment artifacts you control are Equipment in addition to their other types and have "Equipped creature gets +1/+0" and equip {1}.
+        this.addAbility(new SimpleStaticAbility(new DanLewisEffect()));
+
+        // Doctor's companion
+        this.addAbility(DoctorsCompanionAbility.getInstance());
     }
 
-    private BludgeonBrawl(final BludgeonBrawl card) {
+    private DanLewis(final DanLewis card) {
         super(card);
     }
 
     @Override
-    public BludgeonBrawl copy() {
-        return new BludgeonBrawl(this);
+    public DanLewis copy() {
+        return new DanLewis(this);
     }
 }
 
-class BludgeonBrawlEffect extends ContinuousEffectImpl {
-    private static final FilterPermanent filter = new FilterArtifactPermanent();
+class DanLewisEffect extends ContinuousEffectImpl {
+    private static final FilterPermanent filter = new FilterControlledArtifactPermanent();
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter.add(Predicates.not(SubType.EQUIPMENT.getPredicate()));
     }
 
-    public BludgeonBrawlEffect() {
+    public DanLewisEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "each noncreature, non-Equipment artifact is an Equipment with equip {X} " +
-                "and “Equipped creature gets +X/+0,” where X is that artifact’s mana value.";
+        staticText = "noncreature, non-Equipment artifacts you control are Equipment " +
+                "in addition to their other types and have \"Equipped creature gets +1/+0\" and equip {1}";
     }
 
-    private BludgeonBrawlEffect(final BludgeonBrawlEffect effect) {
+    private DanLewisEffect(final DanLewisEffect effect) {
         super(effect);
     }
 
@@ -73,11 +82,10 @@ class BludgeonBrawlEffect extends ContinuousEffectImpl {
                     permanent.addSubType(game, SubType.EQUIPMENT);
                     break;
                 case AbilityAddingRemovingEffects_6:
-                    int mv = permanent.getManaValue();
                     permanent.addAbility(new SimpleStaticAbility(
-                            new BoostEquippedEffect(mv, 0)
+                            new BoostEquippedEffect(1, 0)
                     ), source.getSourceId(), game);
-                    permanent.addAbility(new EquipAbility(mv, false), source.getSourceId(), game);
+                    permanent.addAbility(new EquipAbility(1, false), source.getSourceId(), game);
             }
         }
         return true;
@@ -89,8 +97,8 @@ class BludgeonBrawlEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public BludgeonBrawlEffect copy() {
-        return new BludgeonBrawlEffect(this);
+    public DanLewisEffect copy() {
+        return new DanLewisEffect(this);
     }
 
     @Override
