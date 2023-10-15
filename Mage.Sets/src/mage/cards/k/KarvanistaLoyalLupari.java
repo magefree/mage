@@ -54,6 +54,7 @@ public final class KarvanistaLoyalLupari extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 IndestructibleAbility.getInstance(), Duration.UntilYourNextTurn, filter, false
         ).setText("Humans you control gain indestructible until your next turn"));
+        this.finalizeAdventure();
     }
 
     private KarvanistaLoyalLupari(final KarvanistaLoyalLupari card) {
