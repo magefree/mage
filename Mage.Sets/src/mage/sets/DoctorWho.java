@@ -115,6 +115,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Judoon Enforcers", 138, Rarity.UNCOMMON, mage.cards.j.JudoonEnforcers.class));
         cards.add(new SetCardInfo("K-9, Mark I", 47, Rarity.RARE, mage.cards.k.K9MarkI.class));
         cards.add(new SetCardInfo("Karvanista, Loyal Lupari", 106, Rarity.RARE, mage.cards.k.KarvanistaLoyalLupari.class));
+        cards.add(new SetCardInfo("Kate Stewart", 139, Rarity.RARE, mage.cards.k.KateStewart.class));
         cards.add(new SetCardInfo("Laser Screwdriver", 178, Rarity.UNCOMMON, mage.cards.l.LaserScrewdriver.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 289, Rarity.RARE, mage.cards.l.LavaclawReaches.class));
         cards.add(new SetCardInfo("Lightning Greaves", 243, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
