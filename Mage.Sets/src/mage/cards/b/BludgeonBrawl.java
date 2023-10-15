@@ -51,7 +51,7 @@ class BludgeonBrawlEffect extends ContinuousEffectImpl {
     public BludgeonBrawlEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "each noncreature, non-Equipment artifact is an Equipment with equip {X} " +
-                "and “Equipped creature gets +X/+0,” where X is that artifact’s mana value.";
+                "and “Equipped creature gets +X/+0,” where X is that artifact's mana value.";
     }
 
     private BludgeonBrawlEffect(final BludgeonBrawlEffect effect) {
