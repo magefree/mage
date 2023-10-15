@@ -50,7 +50,7 @@ class GreatIntelligencesPlanEffect extends OneShotEffect {
 
     GreatIntelligencesPlanEffect() {
         super(Outcome.Benefit);
-        staticText = "then target opponent " + choice.generateRule();
+        staticText = "Then target opponent " + choice.generateRule();
     }
 
     private GreatIntelligencesPlanEffect(final GreatIntelligencesPlanEffect effect) {

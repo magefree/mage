@@ -42,7 +42,7 @@ public final class AbolethSpawn extends CardImpl {
 
         // Whenever a creature entering the battlefield under an opponent's control causes a triggered ability of that creature to trigger,
         // you may copy that ability. You may choose new targets for the copy.
-        this.addAbility(new AbolethSpawnTriggeredAbility());
+        this.addAbility(new AbolethSpawnTriggeredAbility().withFlavorWord("Probing Telepathy"));
     }
 
     private AbolethSpawn(final AbolethSpawn card) {

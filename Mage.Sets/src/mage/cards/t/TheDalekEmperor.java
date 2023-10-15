@@ -100,7 +100,7 @@ class TheDalekEmperorEffect extends OneShotEffect {
 class TheDalekEmperorFirstChoice extends VillainousChoice {
 
     TheDalekEmperorFirstChoice() {
-        super("that player sacrifices a creature they control", "You sacrifice a creature");
+        super("That player sacrifices a creature they control", "You sacrifice a creature");
     }
 
     @Override

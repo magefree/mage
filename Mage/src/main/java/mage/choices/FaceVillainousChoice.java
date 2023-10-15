@@ -37,14 +37,13 @@ public class FaceVillainousChoice {
 
     private boolean handleChoice(Player player, Game game, Ability source) {
         VillainousChoice chosenChoice = player.chooseUse(
-                outcome, "You face a villanous choice:", null,
+                outcome, "You face a villainous choice:", null,
                 firstChoice.getMessage(game, source), secondChoice.getMessage(game, source), source, game
         ) ? firstChoice : secondChoice;
         return chosenChoice.doChoice(player, game, source);
     }
 
     public String generateRule() {
-        return "faces a villanous choice &mdash; " + firstChoice.getRule() + ", or " + secondChoice.getRule();
+        return "faces a villainous choice &mdash; " + firstChoice.getRule() + ", or " + secondChoice.getRule();
     }
 }
-
