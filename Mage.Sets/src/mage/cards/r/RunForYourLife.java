@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -22,7 +23,7 @@ public final class RunForYourLife extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new AbilityPredicate(HasteAbility.class));
+        filter.add(Predicates.not(new AbilityPredicate(HasteAbility.class)));
     }
 
     public RunForYourLife(UUID ownerId, CardSetInfo setInfo) {
