@@ -5,10 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.hint.StaticHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,6 +22,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AlienSalamanderToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.GameLog;
 
 import java.util.UUID;
 
@@ -69,7 +71,6 @@ class TheSeaDevilsTrigger extends DelayedTriggeredAbility {
 
     TheSeaDevilsTrigger() {
         super(new TheSeaDevilsEffect(), Duration.EndOfTurn, false);
-        this.setTriggerPhrase("Until end of turn, whenever a Salamander deals combat damage to a player, ");
     }
 
     private TheSeaDevilsTrigger(final TheSeaDevilsTrigger ability) {
@@ -83,21 +84,7 @@ class TheSeaDevilsTrigger extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER) {
-            return false;
-        }
-
-        // Hints to know what the trigger is set on.
-        this.getHints().clear();
-        int amount = event.getAmount();
-        if (amount > 0) {
-            this.addHint(new StaticHint("Damage: " + amount));
-        }
-        Permanent salamander = game.getPermanent(event.getSourceId());
-        if (salamander != null) {
-            this.addHint(new StaticHint("Salamander: " + salamander.getLogName()));
-        }
-        return true;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -126,7 +113,34 @@ class TheSeaDevilsTrigger extends DelayedTriggeredAbility {
         this.getEffects().setValue("damage", amount);
         this.getEffects().setValue("sourceMOR", salamanderMOR);
 
+        for (Effect effect : this.getEffects()) {
+            if (effect instanceof TheSeaDevilsEffect) {
+                if (salamander != null) {
+                    // This is a workaround to add an hint-like message on the ordering trigger panel.
+                    effect.setTargetPointer(
+                            new FixedTarget(event.getSourceId(), game)
+                                    .withData("damageAmount", "" + amount)
+                                    .withData("triggeredName", GameLog.getColoredObjectIdNameForTooltip(salamander))
+                    );
+                }
+            }
+        }
+
         return true;
+    }
+
+    @Override
+    public String getRule() {
+        // that triggers depends on stack order, so make each trigger unique with extra info
+        String triggeredInfo = "";
+        if (this.getEffects().get(0).getTargetPointer() != null) {
+            if (!this.getEffects().get(0).getTargetPointer().getData("damageAmount").equals("")) {
+                triggeredInfo += "<br><i>Damage: " + this.getEffects().get(0).getTargetPointer().getData("damageAmount") + "</i>";
+                triggeredInfo += "<br><i>Salamander: " + this.getEffects().get(0).getTargetPointer().getData("triggeredName") + "</i>";
+            }
+        }
+        return "Until end of turn, whenever a Salamander deals combat damage to a player, "
+                + "it deals that much damage to target creature that player controls." + triggeredInfo;
     }
 }
 
@@ -155,7 +169,7 @@ class TheSeaDevilsEffect extends OneShotEffect {
 
         int amount = SavedDamageValue.MUCH.calculate(game, source, this);
         Permanent salamander = salamanderMOR.getPermanentOrLKIBattlefield(game);
-        Permanent target = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        Permanent target = game.getPermanent(source.getFirstTarget());
         if (target == null || salamander == null || target == null) {
             return false;
         }
