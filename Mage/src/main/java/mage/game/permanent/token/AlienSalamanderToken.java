@@ -6,7 +6,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- * @author spjspj
+ * @author Susucr
  */
 public final class AlienSalamanderToken extends TokenImpl {
 
