@@ -7,6 +7,8 @@ git:
   submodules: false
 before_install:
   - echo "MAVEN_OPTS='-Xmx2g'" > ~/.mavenrc
+script:
+  - mvn test -B
 cache:
   directories:
     - $HOME/.m2
