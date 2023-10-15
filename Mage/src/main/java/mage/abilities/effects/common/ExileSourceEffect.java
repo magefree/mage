@@ -1,8 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -12,6 +10,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -53,7 +53,7 @@ public class ExileSourceEffect extends OneShotEffect {
             if (sourceObject instanceof Card) {
                 if (sourceObject instanceof Permanent) {
                     if (!((Permanent) sourceObject).isPhasedIn()) {
-                        return true;
+                        return false;
                     }
                 }
                 UUID exileZoneId = null;
@@ -65,7 +65,7 @@ public class ExileSourceEffect extends OneShotEffect {
                 Card sourceCard = (Card) sourceObject;
                 return controller.moveCardsToExile(sourceCard, source, game, true, exileZoneId, exileZoneName);
             }
-            return true;
+            return false;
         }
         return false;
     }
