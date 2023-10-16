@@ -11,9 +11,9 @@ import java.util.UUID;
 /**
  * @author PurpleCrowbar
  */
-public final class WibblywobblyTimeywimey extends CardImpl {
+public final class WibblyWobblyTimeyWimey extends CardImpl {
 
-    public WibblywobblyTimeywimey(UUID ownerId, CardSetInfo setInfo) {
+    public WibblyWobblyTimeyWimey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)
@@ -23,12 +23,12 @@ public final class WibblywobblyTimeywimey extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
-    private WibblywobblyTimeywimey(final WibblywobblyTimeywimey card) {
+    private WibblyWobblyTimeyWimey(final WibblyWobblyTimeyWimey card) {
         super(card);
     }
 
     @Override
-    public WibblywobblyTimeywimey copy() {
-        return new WibblywobblyTimeywimey(this);
+    public WibblyWobblyTimeyWimey copy() {
+        return new WibblyWobblyTimeyWimey(this);
     }
 }
