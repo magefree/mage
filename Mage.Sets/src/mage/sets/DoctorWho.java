@@ -165,6 +165,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowblood Ridge", 303, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 304, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Shipwreck Marsh", 305, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class));
+        cards.add(new SetCardInfo("Sibylline Soothsayer", 95, Rarity.UNCOMMON, mage.cards.s.SibyllineSoothsayer.class));
         cards.add(new SetCardInfo("Sisterhood of Karn", 109, Rarity.RARE, mage.cards.s.SisterhoodOfKarn.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 306, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 307, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
