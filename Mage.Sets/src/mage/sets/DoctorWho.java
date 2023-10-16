@@ -181,6 +181,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Sundown Pass", 310, Rarity.RARE, mage.cards.s.SundownPass.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 311, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 312, Rarity.RARE, mage.cards.s.SunkenHollow.class));
+        cards.add(new SetCardInfo("Surge of Brilliance", 57, Rarity.UNCOMMON, mage.cards.s.SurgeOfBrilliance.class));
         cards.add(new SetCardInfo("Swamp", 200, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 212, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Talisman of Conviction", 247, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
