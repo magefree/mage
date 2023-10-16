@@ -61,6 +61,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Dalek Squadron", 65, Rarity.UNCOMMON, mage.cards.d.DalekSquadron.class));
         cards.add(new SetCardInfo("Dan Lewis", 78, Rarity.RARE, mage.cards.d.DanLewis.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 269, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
+        cards.add(new SetCardInfo("Davros, Dalek Creator", 1, Rarity.MYTHIC, mage.cards.d.DavrosDalekCreator.class));
         cards.add(new SetCardInfo("Day of Destiny", 206, Rarity.RARE, mage.cards.d.DayOfDestiny.class));
         cards.add(new SetCardInfo("Decaying Time Loop", 80, Rarity.UNCOMMON, mage.cards.d.DecayingTimeLoop.class));
         cards.add(new SetCardInfo("Delete", 81, Rarity.RARE, mage.cards.d.Delete.class));
