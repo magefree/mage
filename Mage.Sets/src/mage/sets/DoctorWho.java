@@ -21,6 +21,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Ace, Fearless Rebel", 98, Rarity.RARE, mage.cards.a.AceFearlessRebel.class));
         cards.add(new SetCardInfo("Adric, Mathematical Genius", 33, Rarity.RARE, mage.cards.a.AdricMathematicalGenius.class));
         cards.add(new SetCardInfo("Alistair, the Brigadier", 112, Rarity.RARE, mage.cards.a.AlistairTheBrigadier.class));
+        cards.add(new SetCardInfo("All of History, All at Once", 34, Rarity.RARE, mage.cards.a.AllOfHistoryAllAtOnce.class));
         cards.add(new SetCardInfo("An Unearthly Child", 35, Rarity.RARE, mage.cards.a.AnUnearthlyChild.class));
         cards.add(new SetCardInfo("Arcane Signet", 239, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("As Foretold", 214, Rarity.RARE, mage.cards.a.AsForetold.class));
