@@ -145,6 +145,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Propaganda", 219, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Quantum Misalignment", 52, Rarity.RARE, mage.cards.q.QuantumMisalignment.class));
         cards.add(new SetCardInfo("RMS Titanic", 93, Rarity.RARE, mage.cards.r.RMSTitanic.class));
+        cards.add(new SetCardInfo("Regenerations Restored", 151, Rarity.RARE, mage.cards.r.RegenerationsRestored.class));
         cards.add(new SetCardInfo("Reliquary Tower", 296, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Renegade Silent", 53, Rarity.UNCOMMON, mage.cards.r.RenegadeSilent.class));
         cards.add(new SetCardInfo("Return to Dust", 211, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
