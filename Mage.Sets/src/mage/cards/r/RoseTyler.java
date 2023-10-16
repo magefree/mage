@@ -38,12 +38,13 @@ public final class RoseTyler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Rose Tyler gets +1/+1 for each time counter on it.
-        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)
+                .setText("{this} gets +1/+1 for each time counter on it")));
 
         // Bad Wolf -- Whenever Rose Tyler attacks, put a time counter on it for each suspended card you own and each other permanent you control with a time counter on it.
         this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(
                 CounterType.TIME.createInstance(), RoseTylerValue.instance, true
-        )).addHint(RoseTylerValue.getHint()));
+        )).addHint(RoseTylerValue.getHint()).withFlavorWord("Bad Wolf"));
 
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());
@@ -97,7 +98,7 @@ enum RoseTylerValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "";
+        return "suspended card you own and each other permanent you control with a time counter on it";
     }
 
     @Override
