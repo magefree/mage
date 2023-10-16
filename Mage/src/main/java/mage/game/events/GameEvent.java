@@ -329,6 +329,8 @@ public class GameEvent implements Serializable {
         REPLACE_ROLLED_DIE, // for Clam-I-Am workaround only
         ROLL_DIE, DIE_ROLLED,
         ROLL_DICE, DICE_ROLLED,
+
+        ROLLED_PLANESWALK,CHAOS_ENSUES,
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,

@@ -514,11 +514,27 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int rollDieResult(int sides, Game game);
 
-    default PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game) {
-        return rollPlanarDie(outcome, source, game, GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES, GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES);
+    default void rollPlanarDie(Ability source, Game game) {
+        switch (rollPlanarDieResult(Outcome.Neutral, source, game)) {
+            case CHAOS_ROLL:
+                game.fireEvent(GameEvent.getEvent(
+                        GameEvent.EventType.ROLLED_PLANESWALK,
+                        source.getControllerId(), source, source.getControllerId()
+                ));
+                return;
+            case PLANAR_ROLL:
+                game.fireEvent(GameEvent.getEvent(
+                        GameEvent.EventType.CHAOS_ENSUES,
+                        source.getControllerId(), source, source.getControllerId()
+                ));
+        }
     }
 
-    PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides);
+    default PlanarDieRollResult rollPlanarDieResult(Outcome outcome, Ability source, Game game) {
+        return rollPlanarDieResult(outcome, source, game, GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES, GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES);
+    }
+
+    PlanarDieRollResult rollPlanarDieResult(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides);
 
     Card discardOne(boolean random, boolean payForCost, Ability source, Game game);
 

@@ -2,19 +2,14 @@ package mage.game.command.planes;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.common.ChaosEnsuesTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
-import mage.abilities.effects.common.RollPlanarDieEffect;
-import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
@@ -23,12 +18,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.PlanarRollWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -48,26 +39,17 @@ public class AgyremPlane extends Plane {
         this.setPlaneType(Planes.PLANE_AGYREM);
 
         // Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step
-        DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(Zone.COMMAND, new AgyremEffect(), false, filterWhite, true);
-        this.getAbilities().add(ability);
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                Zone.COMMAND, new AgyremEffect(), false, filterWhite, true
+        ));
+
         // Whenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.
-        DiesCreatureTriggeredAbility ability2 = new DiesCreatureTriggeredAbility(Zone.COMMAND, new AgyremEffect2(), false, filterNonWhite, true);
-        this.getAbilities().add(ability2);
+        this.getAbilities().add(new DiesCreatureTriggeredAbility(
+                Zone.COMMAND, new AgyremEffect2(), false, filterNonWhite, true
+        ));
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, creatures can't attack you until a player planeswalks
-        Effect chaosEffect = new AgyremRestrictionEffect();
-        Target chaosTarget = null;
-
-        List<Effect> chaosEffects = new ArrayList<>();
-        chaosEffects.add(chaosEffect);
-        List<Target> chaosTargets = new ArrayList<>();
-        chaosTargets.add(chaosTarget);
-
-        ActivateIfConditionActivatedAbility chaosAbility = new ActivateIfConditionActivatedAbility(Zone.COMMAND, new RollPlanarDieEffect(chaosEffects, chaosTargets), new GenericManaCost(0), MainPhaseStackEmptyCondition.instance);
-        chaosAbility.addWatcher(new PlanarRollWatcher());
-        this.getAbilities().add(chaosAbility);
-        chaosAbility.setMayActivate(TargetController.ANY);
-        this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+        this.addAbility(new ChaosEnsuesTriggeredAbility(new AgyremRestrictionEffect()));
     }
 
     private AgyremPlane(final AgyremPlane plane) {
