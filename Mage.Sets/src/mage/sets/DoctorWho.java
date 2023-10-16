@@ -152,6 +152,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue's Passage", 299, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Romana II", 27, Rarity.RARE, mage.cards.r.RomanaII.class));
         cards.add(new SetCardInfo("Rootbound Crag", 300, Rarity.RARE, mage.cards.r.RootboundCrag.class));
+        cards.add(new SetCardInfo("Rose Tyler", 5, Rarity.RARE, mage.cards.r.RoseTyler.class));
         cards.add(new SetCardInfo("Run for Your Life", 154, Rarity.RARE, mage.cards.r.RunForYourLife.class));
         cards.add(new SetCardInfo("Sally Sparrow", 155, Rarity.RARE, mage.cards.s.SallySparrow.class));
         cards.add(new SetCardInfo("Sarah Jane Smith", 6, Rarity.RARE, mage.cards.s.SarahJaneSmith.class));
