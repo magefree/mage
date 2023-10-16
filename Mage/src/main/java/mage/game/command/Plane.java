@@ -175,6 +175,10 @@ public abstract class Plane extends CommandObjectImpl {
         return getAbilities().contains(ability);
     }
 
+    public void addAbility(Ability ability) {
+        abilites.add(ability);
+    }
+
     @Override
     public ObjectColor getColor() {
         return ObjectColor.COLORLESS;

@@ -12,7 +12,11 @@ import mage.game.events.GameEvent;
 public class ChaosEnsuesTriggeredAbility extends TriggeredAbilityImpl {
 
     public ChaosEnsuesTriggeredAbility(Effect effect) {
-        super(Zone.COMMAND, effect);
+        this(effect, false);
+    }
+
+    public ChaosEnsuesTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.COMMAND, effect, optional);
         this.setTriggerPhrase("Whenever chaos ensues, ");
     }
 

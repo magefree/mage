@@ -1,25 +1,18 @@
 package mage.game.command.planes;
 
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.common.ChaosEnsuesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RollPlanarDieEffect;
-import mage.abilities.effects.common.UntapAllControllerEffect;
-import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
-import mage.constants.*;
-import mage.filter.common.FilterControlledPermanent;
+import mage.abilities.effects.common.UntapAllEffect;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Planes;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.events.GameEvent;
-import mage.target.Target;
-import mage.watchers.common.PlanarRollWatcher;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author spjspj
@@ -30,24 +23,10 @@ public class TheEonFogPlane extends Plane {
         this.setPlaneType(Planes.PLANE_THE_EON_FOG);
 
         // All players miss their untap step
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new TheEonFogSkipUntapStepEffect(Duration.Custom, true));
-        this.getAbilities().add(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.COMMAND, new TheEonFogSkipUntapStepEffect()));
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, untap all permanents you control
-        Effect chaosEffect = new UntapAllControllerEffect(new FilterControlledPermanent());
-        Target chaosTarget = null;
-
-        List<Effect> chaosEffects = new ArrayList<Effect>();
-        chaosEffects.add(chaosEffect);
-
-        List<Target> chaosTargets = new ArrayList<Target>();
-        chaosTargets.add(chaosTarget);
-
-        ActivateIfConditionActivatedAbility chaosAbility = new ActivateIfConditionActivatedAbility(Zone.COMMAND, new RollPlanarDieEffect(chaosEffects, chaosTargets), new GenericManaCost(0), MainPhaseStackEmptyCondition.instance);
-        chaosAbility.addWatcher(new PlanarRollWatcher());
-        this.getAbilities().add(chaosAbility);
-        chaosAbility.setMayActivate(TargetController.ANY);
-        this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+        this.addAbility(new ChaosEnsuesTriggeredAbility(new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_PERMANENTS)));
     }
 
     private TheEonFogPlane(final TheEonFogPlane plane) {
@@ -62,21 +41,13 @@ public class TheEonFogPlane extends Plane {
 
 class TheEonFogSkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
 
-    final boolean allPlayers;
-
-    public TheEonFogSkipUntapStepEffect() {
-        this(Duration.WhileOnBattlefield, false);
+    TheEonFogSkipUntapStepEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
+        staticText = "players skip their untap steps";
     }
 
-    public TheEonFogSkipUntapStepEffect(Duration duration, boolean allPlayers) {
-        super(duration, Outcome.Neutral, false, false);
-        this.allPlayers = allPlayers;
-        staticText = "Players skip their untap steps";
-    }
-
-    protected TheEonFogSkipUntapStepEffect(final TheEonFogSkipUntapStepEffect effect) {
+    private TheEonFogSkipUntapStepEffect(final TheEonFogSkipUntapStepEffect effect) {
         super(effect);
-        this.allPlayers = effect.allPlayers;
     }
 
     @Override
@@ -91,13 +62,6 @@ class TheEonFogSkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Plane cPlane = game.getState().getCurrentPlane();
-        if (cPlane == null) {
-            return false;
-        }
-        if (!cPlane.getPlaneType().equals(Planes.PLANE_THE_EON_FOG)) {
-            return false;
-        }
         return true;
     }
 }
