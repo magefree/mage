@@ -19,6 +19,7 @@ public class MysteryBoosterRetailEditionFoils extends ExpansionSet {
         super("Mystery Booster Retail Edition Foils", "FMB1", ExpansionSet.buildDate(2020, 3, 8), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 121;
 
         cards.add(new SetCardInfo("Alchemist's Refuge", 117, Rarity.RARE, mage.cards.a.AlchemistsRefuge.class));
         cards.add(new SetCardInfo("Allosaurus Rider", 61, Rarity.RARE, mage.cards.a.AllosaurusRider.class));

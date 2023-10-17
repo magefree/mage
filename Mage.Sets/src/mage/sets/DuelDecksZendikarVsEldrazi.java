@@ -19,6 +19,7 @@ public final class DuelDecksZendikarVsEldrazi extends ExpansionSet {
         super("Duel Decks: Zendikar vs. Eldrazi", "DDP", ExpansionSet.buildDate(2015, 8, 28), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 75;
 
         cards.add(new SetCardInfo("Affa Guard Hound", 2, Rarity.UNCOMMON, mage.cards.a.AffaGuardHound.class));
         cards.add(new SetCardInfo("Akoum Refuge", 67, Rarity.UNCOMMON, mage.cards.a.AkoumRefuge.class));

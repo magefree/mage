@@ -6,6 +6,7 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/g18
+ *
  * @author JayDi85
  */
 public final class M19GiftPack extends ExpansionSet {

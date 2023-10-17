@@ -18,6 +18,7 @@ public final class GameNight extends ExpansionSet {
     private GameNight() {
         super("Game Night", "GNT", ExpansionSet.buildDate(2018, 11, 16), SetType.SUPPLEMENTAL);
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 68;
 
         cards.add(new SetCardInfo("Advanced Stitchwing", 18, Rarity.UNCOMMON, mage.cards.a.AdvancedStitchwing.class));
         cards.add(new SetCardInfo("Aerial Responder", 6, Rarity.UNCOMMON, mage.cards.a.AerialResponder.class));

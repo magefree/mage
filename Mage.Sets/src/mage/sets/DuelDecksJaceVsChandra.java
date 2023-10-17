@@ -19,6 +19,7 @@ public final class DuelDecksJaceVsChandra extends ExpansionSet {
         super("Duel Decks: Jace vs. Chandra", "DD2", ExpansionSet.buildDate(2008, 11, 7), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 62;
 
         cards.add(new SetCardInfo("Aethersnipe", 17, Rarity.COMMON, mage.cards.a.Aethersnipe.class));
         cards.add(new SetCardInfo("Air Elemental", 13, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));

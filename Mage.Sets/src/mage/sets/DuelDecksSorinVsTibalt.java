@@ -20,6 +20,7 @@ public final class DuelDecksSorinVsTibalt extends ExpansionSet {
         super("Duel Decks: Sorin vs. Tibalt", "DDK", ExpansionSet.buildDate(2013, 3, 15), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 80;
 
         cards.add(new SetCardInfo("Absorb Vis", 31, Rarity.COMMON, mage.cards.a.AbsorbVis.class));
         cards.add(new SetCardInfo("Akoum Refuge", 73, Rarity.UNCOMMON, mage.cards.a.AkoumRefuge.class));

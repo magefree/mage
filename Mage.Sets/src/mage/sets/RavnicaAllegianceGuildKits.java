@@ -19,6 +19,7 @@ public final class RavnicaAllegianceGuildKits extends ExpansionSet {
         super("Ravnica Allegiance Guild Kits", "GK2", ExpansionSet.buildDate(2019, 2, 15), SetType.SUPPLEMENTAL);
         this.blockName = "Guild Kits";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 133;
 
         cards.add(new SetCardInfo("Isperia, Supreme Judge", 1, Rarity.MYTHIC, mage.cards.i.IsperiaSupremeJudge.class));
         cards.add(new SetCardInfo("Azorius Herald", 2, Rarity.UNCOMMON, mage.cards.a.AzoriusHerald.class));

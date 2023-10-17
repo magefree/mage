@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class PlanechaseAnthology extends ExpansionSet {
@@ -20,6 +19,7 @@ public final class PlanechaseAnthology extends ExpansionSet {
     private PlanechaseAnthology() {
         super("Planechase Anthology", "PCA", ExpansionSet.buildDate(2016, 11, 25), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 156;
 
         cards.add(new SetCardInfo("Arc Trail", 39, Rarity.UNCOMMON, mage.cards.a.ArcTrail.class));
         cards.add(new SetCardInfo("Armillary Sphere", 108, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));

@@ -2227,11 +2227,8 @@ public class VerifyCardDataTest {
                 case JOKESET:
                 case MAGIC_ARENA:
                 case MAGIC_ONLINE:
-                case PROMOTIONAL:
                     continue;
             }
-
-            // if (set.hasBoosters()) continue;
 
             int checkUpTo = set.getExpectedMaxCardNumber();
             if (checkUpTo == Integer.MAX_VALUE && set.hasBoosters()) {
@@ -2246,6 +2243,10 @@ public class VerifyCardDataTest {
                         || set.getName().startsWith("Signature Spellbook:")
                         || set.getName().startsWith("Commander Collection:")
                         || set.getName().startsWith("Starter 2000") // 20 cards on Scryfall, up to 45 cn
+                        || set.getName().startsWith("Coldsnap Theme Decks") // cn all over the place
+                        || set.getName().startsWith("Mythic Edition") // cn not really numbers
+                        || set.getName().startsWith("M19 Gift Pack") // cn not really numbers
+                        || set.getName().startsWith("Unfinity") // half the set is funny, half is legacy legal. What a mess.
                 ) {
                     continue;
                 }
