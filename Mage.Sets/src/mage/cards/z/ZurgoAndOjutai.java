@@ -21,6 +21,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -101,6 +102,7 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
         List<Permanent> permanents = dEvent
                 .getEvents()
                 .stream()
+                .filter(DamagedEvent::isCombatDamage)
                 .map(e -> {
                     Permanent permanent = game.getPermanent(e.getSourceId());
                     Permanent defender = game.getPermanent(e.getTargetId());
