@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileWithTimeCountersEffect;
+import mage.abilities.effects.common.ExileSpellWithTimeCountersEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class CyclicalEvolution extends CardImpl {
         // Target creature gets +3/+3 until end of turn. Exile Cyclical Evolution with three time counters on it.
         getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getSpellAbility().addEffect(new ExileWithTimeCountersEffect(3));
+        getSpellAbility().addEffect(new ExileSpellWithTimeCountersEffect(3));
 
         // Suspend 3—{2}{G}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{G}"), this));

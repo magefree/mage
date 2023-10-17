@@ -4,7 +4,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileWithTimeCountersEffect;
+import mage.abilities.effects.common.ExileSpellWithTimeCountersEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class RousingRefrain extends CardImpl {
         // Add {R} for each card in target opponent's hand. Until end of turn, you don't lose this mana as steps and phases end. Exile Rousing Refrain with three time counters on it.
         this.getSpellAbility().addEffect(new RousingRefrainEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new ExileWithTimeCountersEffect(3));
+        this.getSpellAbility().addEffect(new ExileSpellWithTimeCountersEffect(3));
 
         // Suspend 3—{1}{R}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{R}"), this));

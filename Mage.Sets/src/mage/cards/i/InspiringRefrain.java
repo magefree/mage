@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ExileWithTimeCountersEffect;
+import mage.abilities.effects.common.ExileSpellWithTimeCountersEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class InspiringRefrain extends CardImpl {
 
         // Draw two cards. Exile Inspiring Refrain with three time counters on it.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
-        this.getSpellAbility().addEffect(new ExileWithTimeCountersEffect(3));
+        this.getSpellAbility().addEffect(new ExileSpellWithTimeCountersEffect(3));
 
         // Suspend 3—{2}{U}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{U}"), this));

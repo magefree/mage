@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileWithTimeCountersEffect;
+import mage.abilities.effects.common.ExileSpellWithTimeCountersEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ public final class VentureForth extends CardImpl {
 
         // Exile cards from the top of your library until you exile a land card. Put that onto the battlefield and the rest on the bottom of your library in a random order. Exile Venture Forth with three time counters on it.
         this.getSpellAbility().addEffect(new VentureForthEffect());
-        this.getSpellAbility().addEffect(new ExileWithTimeCountersEffect(3));
+        this.getSpellAbility().addEffect(new ExileSpellWithTimeCountersEffect(3));
 
         // Suspend 3—{1}{G}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{G}"), this));

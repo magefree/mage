@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileWithTimeCountersEffect;
+import mage.abilities.effects.common.ExileSpellWithTimeCountersEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ public final class RealityStrobe extends CardImpl {
         // Return target permanent to its owner's hand. Exile Reality Strobe with three time counters on it.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
-        this.getSpellAbility().addEffect(new ExileWithTimeCountersEffect(3));
+        this.getSpellAbility().addEffect(new ExileSpellWithTimeCountersEffect(3));
         
         // Suspend 3—{2}{U}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{U}"), this));

@@ -15,24 +15,24 @@ import java.util.UUID;
 /**
  * @author PurpleCrowbar
  */
-public class ExileWithTimeCountersEffect extends OneShotEffect {
+public class ExileSpellWithTimeCountersEffect extends OneShotEffect {
 
     private final int counters;
 
-    public ExileWithTimeCountersEffect(int counters) {
+    public ExileSpellWithTimeCountersEffect(int counters) {
         super(Outcome.Exile);
         this.counters = counters;
         this.staticText = "Exile {this} with " + CardUtil.numberToText(this.counters) + " time counters on it";
     }
 
-    private ExileWithTimeCountersEffect(final ExileWithTimeCountersEffect effect) {
+    private ExileSpellWithTimeCountersEffect(final ExileSpellWithTimeCountersEffect effect) {
         super(effect);
         this.counters = effect.counters;
     }
 
     @Override
-    public ExileWithTimeCountersEffect copy() {
-        return new ExileWithTimeCountersEffect(this);
+    public ExileSpellWithTimeCountersEffect copy() {
+        return new ExileSpellWithTimeCountersEffect(this);
     }
 
     @Override
