@@ -2215,9 +2215,160 @@ public class VerifyCardDataTest {
         });
     }
 
+    private static final Map<String, Set<Integer>> intentionalUnimplemented = new HashMap<>();
+
+    static {
+        intentionalUnimplemented.put(
+                "LEA", new HashSet<>(Arrays.asList(
+                        63, 78,             // Text change
+                        96, 99, 102         // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "LEB", new HashSet<>(Arrays.asList(
+                        64, 79,             // Text change
+                        97, 100, 103        // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "2ED", new HashSet<>(Arrays.asList(
+                        64, 79,             // Text change
+                        97, 100, 103        // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "ARN", new HashSet<>(Arrays.asList(
+                        10,                 // Sub game
+                        66                  // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "ATQ", new HashSet<>(Arrays.asList(
+                        42                  // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "3ED", new HashSet<>(Arrays.asList(
+                        65, 81,             // Text change
+                        97, 100, 103        // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "LEG", new HashSet<>(Arrays.asList(
+                        145,                // Dexterity, might make an errata version of it similar to Chaos Orb
+                        166, 200            // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "SUM", new HashSet<>(Arrays.asList(
+                        65, 81,             // Text change
+                        97, 100, 103        // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "4ED", new HashSet<>(Arrays.asList(
+                        83, 102,            // Text change
+                        225, 267, 303       // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "ICE", new HashSet<>(Arrays.asList(
+                        59, 99,             // Text change
+                        308                 // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "CHR", new HashSet<>(Arrays.asList(
+                        102                 // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "HML", new HashSet<>(Arrays.asList(
+                        58                 // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "MIR", new HashSet<>(Arrays.asList(
+                        77                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "5ED", new HashSet<>(Arrays.asList(
+                        101, 124           // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "TMP", new HashSet<>(Arrays.asList(
+                        102                // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "INV", new HashSet<>(Arrays.asList(
+                        50                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "TOR", new HashSet<>(Arrays.asList(
+                        22                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "ONS", new HashSet<>(Arrays.asList(
+                        67                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "8ED", new HashSet<>(Arrays.asList(
+                        92                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "5DN", new HashSet<>(Arrays.asList(
+                        37                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "CHK", new HashSet<>(Arrays.asList(
+                        94                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "9ED", new HashSet<>(Arrays.asList(
+                        87                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "10E", new HashSet<>(Arrays.asList(
+                        93                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "EVE", new HashSet<>(Arrays.asList(
+                        21                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "DGM", new HashSet<>(Arrays.asList(
+                        18                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "NEC", new HashSet<>(Arrays.asList(
+                        122                // Card did not make it to print. Supposedly Nissa, Voice of Zendikar
+                ))
+        );
+        intentionalUnimplemented.put(
+                "GN3", new HashSet<>(Arrays.asList(
+                        66                // Card did not make it to print. Supposedly Zombify
+                ))
+        );
+    }
+
     @Ignore
     @Test
     public void test_find_unimplemented() {
+        boolean withSkips = true; // Some cards are intentionally not implemented and will not be written out there.
+
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets.stream()
                 .sorted(Comparator.comparingLong(set -> set.getReleaseDate().getTime()))
@@ -2269,6 +2420,18 @@ public class VerifyCardDataTest {
             }
             if (unexpectedMax > 0) {
                 System.out.println(set.getCode() + " unexpected max not correct set to " + set.getExpectedMaxCardNumber() + " but found " + unexpectedMax);
+            }
+
+            if (withSkips) {
+                // Some cards we know won't be implemented any time soon (ante, text change, etc..)
+                Set<Integer> skipped = intentionalUnimplemented.getOrDefault(set.getCode(), Collections.emptySet());
+                skipped.forEach(i -> {
+                    if (implemented.contains(i)) {
+                        System.out.println(set.getCode() + " has #" + i + " implemented altough it is in the skipped set.");
+                    } else {
+                        implemented.add(i);
+                    }
+                });
             }
 
             List<Integer> notImplemented = new ArrayList<>();
