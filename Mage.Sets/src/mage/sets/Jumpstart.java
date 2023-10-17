@@ -403,7 +403,8 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sarkhan's Unsealing", 361, Rarity.RARE, mage.cards.s.SarkhansUnsealing.class));
         cards.add(new SetCardInfo("Savage Stomp", 427, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
         cards.add(new SetCardInfo("Scarecrone", 482, Rarity.RARE, mage.cards.s.Scarecrone.class));
-        cards.add(new SetCardInfo("Scholar of the Lost Trove", 14, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class));
+        cards.add(new SetCardInfo("Scholar of the Lost Trove", 14, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scholar of the Lost Trove", 496, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scourge of Nel Toth", 274, Rarity.RARE, mage.cards.s.ScourgeOfNelToth.class));
         cards.add(new SetCardInfo("Scroll of Avacyn", 483, Rarity.COMMON, mage.cards.s.ScrollOfAvacyn.class));
         cards.add(new SetCardInfo("Scrounging Bandar", 428, Rarity.COMMON, mage.cards.s.ScroungingBandar.class));
