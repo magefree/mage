@@ -211,6 +211,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Ninth Doctor", 148, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 432, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 560, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sea Devils", 108, Rarity.RARE, mage.cards.t.TheSeaDevils.class));
         cards.add(new SetCardInfo("The Sixth Doctor", 159, Rarity.RARE, mage.cards.t.TheSixthDoctor.class));
         cards.add(new SetCardInfo("The Thirteenth Doctor", 4, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class));
         cards.add(new SetCardInfo("The Valeyard", 165, Rarity.RARE, mage.cards.t.TheValeyard.class));
