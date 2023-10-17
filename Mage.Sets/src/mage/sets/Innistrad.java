@@ -26,7 +26,7 @@ public final class Innistrad extends ExpansionSet {
         super("Innistrad", "ISD", ExpansionSet.buildDate(2011, 9, 30), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 264;
+        this.expectedMaxCardNumber = 264;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;

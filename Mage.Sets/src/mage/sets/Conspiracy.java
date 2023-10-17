@@ -21,7 +21,7 @@ public final class Conspiracy extends ExpansionSet {
         this.blockName = "Conspiracy";
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 210;
+        this.expectedMaxCardNumber = 210;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

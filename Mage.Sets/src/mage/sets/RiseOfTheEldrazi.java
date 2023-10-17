@@ -27,12 +27,13 @@ public final class RiseOfTheEldrazi extends ExpansionSet {
         this.blockName = "Zendikar";
         this.parentSet = Zendikar.getInstance();
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 248;
+        this.expectedMaxCardNumber = 248;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Affa Guard Hound", 14, Rarity.UNCOMMON, mage.cards.a.AffaGuardHound.class));
         cards.add(new SetCardInfo("Akoum Boulderfoot", 134, Rarity.UNCOMMON, mage.cards.a.AkoumBoulderfoot.class));
         cards.add(new SetCardInfo("All Is Dust", 1, Rarity.MYTHIC, mage.cards.a.AllIsDust.class));

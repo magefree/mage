@@ -18,12 +18,13 @@ public final class Magic2011 extends ExpansionSet {
     private Magic2011() {
         super("Magic 2011", "M11", ExpansionSet.buildDate(2010, 7, 16), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 249;
+        this.expectedMaxCardNumber = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Acidic Slime", 161, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Act of Treason", 121, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Aether Adept", 41, Rarity.COMMON, mage.cards.a.AetherAdept.class));

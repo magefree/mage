@@ -20,12 +20,13 @@ public final class Starter1999 extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 173;
+        this.expectedMaxCardNumber = 173;
         this.numBoosterLands = 2;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Abyssal Horror", 63, Rarity.RARE, mage.cards.a.AbyssalHorror.class));
         cards.add(new SetCardInfo("Air Elemental", 32, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Alluring Scent", 124, Rarity.RARE, mage.cards.a.AlluringScent.class));

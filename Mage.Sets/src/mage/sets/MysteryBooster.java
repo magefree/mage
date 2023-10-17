@@ -49,7 +49,7 @@ public class MysteryBooster extends ExpansionSet {
     private MysteryBooster() {
         super("Mystery Booster", "MB1", ExpansionSet.buildDate(2019, 11, 7), SetType.SUPPLEMENTAL);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 1696;
+        this.expectedMaxCardNumber = 1696;
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Absorb Vis", 558, Rarity.COMMON, mage.cards.a.AbsorbVis.class));

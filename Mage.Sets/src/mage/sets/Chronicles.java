@@ -20,7 +20,7 @@ public final class Chronicles extends ExpansionSet {
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 116;
+        this.expectedMaxCardNumber = 116;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 2;

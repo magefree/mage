@@ -19,7 +19,7 @@ public final class SeventhEdition extends ExpansionSet {
     private SeventhEdition() {
         super("Seventh Edition", "7ED", ExpansionSet.buildDate(2001, 3, 11), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 350;
+        this.expectedMaxCardNumber = 350;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

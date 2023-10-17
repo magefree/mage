@@ -21,6 +21,7 @@ public final class TimeSpiralTimeshifted extends ExpansionSet {
         this.parentSet = TimeSpiral.getInstance();
         this.expectedMaxCardNumber = 121;
         this.hasBasicLands = false;
+        
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 1, Rarity.SPECIAL, mage.cards.a.AkromaAngelOfWrath.class));
         cards.add(new SetCardInfo("Arena", 117, Rarity.SPECIAL, mage.cards.a.Arena.class));
         cards.add(new SetCardInfo("Assault // Battery", 106, Rarity.SPECIAL, mage.cards.a.AssaultBattery.class));

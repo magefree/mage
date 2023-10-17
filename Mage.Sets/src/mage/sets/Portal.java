@@ -20,7 +20,7 @@ public final class Portal extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 215;
+        this.expectedMaxCardNumber = 215;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

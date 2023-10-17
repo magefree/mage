@@ -20,12 +20,13 @@ public final class UnlimitedEdition extends ExpansionSet {
     private UnlimitedEdition() {
         super("Unlimited Edition", "2ED", ExpansionSet.buildDate(1993, 11, 1), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 302;
+        this.expectedMaxCardNumber = 302;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Air Elemental", 47, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Ancestral Recall", 48, Rarity.RARE, mage.cards.a.AncestralRecall.class));
         cards.add(new SetCardInfo("Animate Artifact", 49, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));

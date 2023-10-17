@@ -20,7 +20,7 @@ public final class Judgment extends ExpansionSet {
         super("Judgment", "JUD", ExpansionSet.buildDate(2002, 5, 27), SetType.EXPANSION);
         this.blockName = "Odyssey";
         this.parentSet = Odyssey.getInstance();
-        this.maxCardNumberInBooster = 143;
+        this.expectedMaxCardNumber = 143;
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

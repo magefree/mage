@@ -32,7 +32,7 @@ public final class DragonsMaze extends ExpansionSet {
         super("Dragon's Maze", "DGM", ExpansionSet.buildDate(2013, 5, 3), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 156;
+        this.expectedMaxCardNumber = 156;
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;

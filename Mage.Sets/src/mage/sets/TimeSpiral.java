@@ -21,7 +21,7 @@ public final class TimeSpiral extends ExpansionSet {
         super("Time Spiral", "TSP", ExpansionSet.buildDate(2006, 9, 9), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 301;
+        this.expectedMaxCardNumber = 301;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

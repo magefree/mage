@@ -27,12 +27,13 @@ public final class ModernMasters extends ExpansionSet {
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 229;
+        this.expectedMaxCardNumber = 229;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Absorb Vis", 71, Rarity.COMMON, mage.cards.a.AbsorbVis.class));
         cards.add(new SetCardInfo("Academy Ruins", 219, Rarity.RARE, mage.cards.a.AcademyRuins.class));
         cards.add(new SetCardInfo("Adarkar Valkyrie", 1, Rarity.RARE, mage.cards.a.AdarkarValkyrie.class));

@@ -20,12 +20,13 @@ public final class LimitedEditionBeta extends ExpansionSet {
     private LimitedEditionBeta() {
         super("Limited Edition Beta", "LEB", ExpansionSet.buildDate(1993, 10, 1), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 302;
+        this.expectedMaxCardNumber = 302;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Air Elemental", 47, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Ancestral Recall", 48, Rarity.RARE, mage.cards.a.AncestralRecall.class));
         cards.add(new SetCardInfo("Animate Artifact", 49, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));

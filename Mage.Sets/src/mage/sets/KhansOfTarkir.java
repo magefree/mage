@@ -26,7 +26,7 @@ public final class KhansOfTarkir extends ExpansionSet {
         super("Khans of Tarkir", "KTK", ExpansionSet.buildDate(2014, 9, 26), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 269;
+        this.expectedMaxCardNumber = 269;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

@@ -16,12 +16,13 @@ public final class Tempest extends ExpansionSet {
         super("Tempest", "TMP", ExpansionSet.buildDate(1997, 10, 1), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 350;
+        this.expectedMaxCardNumber = 350;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Abandon Hope", 107, Rarity.UNCOMMON, mage.cards.a.AbandonHope.class));
         cards.add(new SetCardInfo("Advance Scout", 1, Rarity.COMMON, mage.cards.a.AdvanceScout.class));
         cards.add(new SetCardInfo("Aftershock", 160, Rarity.COMMON, mage.cards.a.Aftershock.class));

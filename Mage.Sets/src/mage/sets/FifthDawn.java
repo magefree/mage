@@ -22,7 +22,7 @@ public final class FifthDawn extends ExpansionSet {
         this.parentSet = Mirrodin.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 165;
+        this.expectedMaxCardNumber = 165;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

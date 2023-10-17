@@ -22,7 +22,7 @@ public final class AlaraReborn extends ExpansionSet {
         this.parentSet = ShardsOfAlara.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 145;
+        this.expectedMaxCardNumber = 145;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

@@ -28,7 +28,7 @@ public final class Gatecrash extends ExpansionSet {
         this.parentSet = ReturnToRavnica.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 249;
+        this.expectedMaxCardNumber = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

@@ -17,12 +17,13 @@ public final class NewPhyrexia extends ExpansionSet {
         this.blockName = "Scars of Mirrodin";
         this.parentSet = ScarsOfMirrodin.getInstance();
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 175;
+        this.expectedMaxCardNumber = 175;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Act of Aggression", 78, Rarity.UNCOMMON, mage.cards.a.ActOfAggression.class));
         cards.add(new SetCardInfo("Alloy Myr", 129, Rarity.UNCOMMON, mage.cards.a.AlloyMyr.class));
         cards.add(new SetCardInfo("Apostle's Blessing", 2, Rarity.COMMON, mage.cards.a.ApostlesBlessing.class));

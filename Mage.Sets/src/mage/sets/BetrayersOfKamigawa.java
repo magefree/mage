@@ -22,7 +22,7 @@ public final class BetrayersOfKamigawa extends ExpansionSet {
         this.parentSet = ChampionsOfKamigawa.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 165;
+        this.expectedMaxCardNumber = 165;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

@@ -20,12 +20,13 @@ public final class PortalThreeKingdoms extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true; // note: paper boosters had only 10 cards (2 lands, 5 commons, 2 uncommons, 1 rare)
-        this.maxCardNumberInBooster = 180;
+        this.expectedMaxCardNumber = 180;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Alert Shu Infantry", 1, Rarity.UNCOMMON, mage.cards.a.AlertShuInfantry.class));
         cards.add(new SetCardInfo("Ambition's Cost", 67, Rarity.RARE, mage.cards.a.AmbitionsCost.class));
         cards.add(new SetCardInfo("Balance of Power", 34, Rarity.RARE, mage.cards.b.BalanceOfPower.class));

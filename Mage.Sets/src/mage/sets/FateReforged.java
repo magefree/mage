@@ -34,7 +34,7 @@ public final class FateReforged extends ExpansionSet {
         this.parentSet = KhansOfTarkir.getInstance();
         this.hasBasicLands = true;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 185;
+        this.expectedMaxCardNumber = 185;
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;

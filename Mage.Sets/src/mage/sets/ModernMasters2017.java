@@ -27,12 +27,13 @@ public final class ModernMasters2017 extends ExpansionSet {
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 249;
+        this.expectedMaxCardNumber = 249;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Abrupt Decay", 146, Rarity.RARE, mage.cards.a.AbruptDecay.class));
         cards.add(new SetCardInfo("Abyssal Specter", 59, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));
         cards.add(new SetCardInfo("Advent of the Wurm", 147, Rarity.RARE, mage.cards.a.AdventOfTheWurm.class));

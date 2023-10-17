@@ -22,7 +22,7 @@ public final class FutureSight extends ExpansionSet {
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 180;
+        this.expectedMaxCardNumber = 180;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

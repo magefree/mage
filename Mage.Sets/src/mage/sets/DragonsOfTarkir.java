@@ -26,7 +26,7 @@ public final class DragonsOfTarkir extends ExpansionSet {
         super("Dragons of Tarkir", "DTK", ExpansionSet.buildDate(2015, 3, 27), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 264;
+        this.expectedMaxCardNumber = 264;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

@@ -20,12 +20,13 @@ public final class RevisedEdition extends ExpansionSet {
     private RevisedEdition() {
         super("Revised Edition", "3ED", ExpansionSet.buildDate(1994, 3, 1), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 306;
+        this.expectedMaxCardNumber = 306;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Air Elemental", 47, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Aladdin's Lamp", 231, Rarity.RARE, mage.cards.a.AladdinsLamp.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 232, Rarity.RARE, mage.cards.a.AladdinsRing.class));

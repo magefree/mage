@@ -19,12 +19,13 @@ public final class Legends extends ExpansionSet {
         super("Legends", "LEG", ExpansionSet.buildDate(1994, 6, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 310;
+        this.expectedMaxCardNumber = 310;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Abomination", 87, Rarity.UNCOMMON, mage.cards.a.Abomination.class));
         cards.add(new SetCardInfo("Acid Rain", 44, Rarity.RARE, mage.cards.a.AcidRain.class));
         cards.add(new SetCardInfo("Active Volcano", 130, Rarity.COMMON, mage.cards.a.ActiveVolcano.class));

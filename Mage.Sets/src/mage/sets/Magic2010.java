@@ -19,12 +19,13 @@ public final class Magic2010 extends ExpansionSet {
     private Magic2010() {
         super("Magic 2010", "M10", ExpansionSet.buildDate(2009, 7, 17), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 249;
+        this.expectedMaxCardNumber = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Acidic Slime", 165, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Acolyte of Xathrid", 83, Rarity.COMMON, mage.cards.a.AcolyteOfXathrid.class));
         cards.add(new SetCardInfo("Act of Treason", 124, Rarity.UNCOMMON, mage.cards.a.ActOfTreason.class));

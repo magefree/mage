@@ -18,12 +18,13 @@ public final class Magic2012 extends ExpansionSet {
     private Magic2012() {
         super("Magic 2012", "M12", ExpansionSet.buildDate(2011, 7, 15), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 249;
+        this.expectedMaxCardNumber = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Acidic Slime", 161, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Act of Treason", 121, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Adaptive Automaton", 201, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class));

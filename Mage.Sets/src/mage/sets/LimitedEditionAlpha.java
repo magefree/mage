@@ -20,12 +20,13 @@ public final class LimitedEditionAlpha extends ExpansionSet {
     private LimitedEditionAlpha() {
         super("Limited Edition Alpha", "LEA", ExpansionSet.buildDate(1993, 8, 5), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 295;
+        this.expectedMaxCardNumber = 295;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Air Elemental", 46, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Ancestral Recall", 47, Rarity.RARE, mage.cards.a.AncestralRecall.class));
         cards.add(new SetCardInfo("Animate Artifact", 48, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));

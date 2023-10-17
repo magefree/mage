@@ -31,7 +31,7 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = true;
         this.hasBasicLands = false;
-        this.maxCardNumberInBooster = 184;
+        this.expectedMaxCardNumber = 184;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

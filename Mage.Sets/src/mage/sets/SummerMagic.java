@@ -18,7 +18,7 @@ public class SummerMagic extends ExpansionSet {
     private SummerMagic() {
         super("Summer Magic", "SUM", ExpansionSet.buildDate(1994, 6, 21), SetType.CORE);
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 304;
+        this.expectedMaxCardNumber = 306;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

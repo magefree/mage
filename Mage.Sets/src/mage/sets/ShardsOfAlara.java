@@ -27,12 +27,13 @@ public final class ShardsOfAlara extends ExpansionSet {
         super("Shards of Alara", "ALA", ExpansionSet.buildDate(2008, 10, 3), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 249;
+        this.expectedMaxCardNumber = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Ad Nauseam", 63, Rarity.RARE, mage.cards.a.AdNauseam.class));
         cards.add(new SetCardInfo("Agony Warp", 153, Rarity.COMMON, mage.cards.a.AgonyWarp.class));
         cards.add(new SetCardInfo("Ajani Vengeant", 154, Rarity.MYTHIC, mage.cards.a.AjaniVengeant.class));

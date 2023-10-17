@@ -19,7 +19,7 @@ public final class Mirage extends ExpansionSet {
         super("Mirage", "MIR", ExpansionSet.buildDate(1996, 8, 21), SetType.EXPANSION);
         this.blockName = "Mirage";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 347;
+        this.expectedMaxCardNumber = 350;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

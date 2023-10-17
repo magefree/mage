@@ -30,7 +30,7 @@ public final class DarkAscension extends ExpansionSet {
         super("Dark Ascension", "DKA", ExpansionSet.buildDate(2012, 1, 3), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.hasBoosters = true;
-        this.maxCardNumberInBooster = 158;
+        this.expectedMaxCardNumber = 158;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
