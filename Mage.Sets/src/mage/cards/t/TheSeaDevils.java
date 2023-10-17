@@ -115,14 +115,13 @@ class TheSeaDevilsTrigger extends DelayedTriggeredAbility {
 
         for (Effect effect : this.getEffects()) {
             if (effect instanceof TheSeaDevilsEffect) {
-                if (salamander != null) {
-                    // This is a workaround to add an hint-like message on the ordering trigger panel.
-                    effect.setTargetPointer(
-                            new FixedTarget(event.getSourceId(), game)
-                                    .withData("damageAmount", "" + amount)
-                                    .withData("triggeredName", GameLog.getColoredObjectIdNameForTooltip(salamander))
-                    );
-                }
+                // This is a workaround to add an hint-like message on the ordering trigger panel.
+                // Which salamander and how much damage it dealt are both important info to order triggers.
+                effect.setTargetPointer(
+                        new FixedTarget(event.getSourceId(), game)
+                                .withData("damageAmount", "" + amount)
+                                .withData("triggeredName", GameLog.getColoredObjectIdNameForTooltip(salamander))
+                );
             }
         }
 
@@ -134,7 +133,7 @@ class TheSeaDevilsTrigger extends DelayedTriggeredAbility {
         // that triggers depends on stack order, so make each trigger unique with extra info
         String triggeredInfo = "";
         if (this.getEffects().get(0).getTargetPointer() != null) {
-            if (!this.getEffects().get(0).getTargetPointer().getData("damageAmount").equals("")) {
+            if (!this.getEffects().get(0).getTargetPointer().getData("damageAmount").isEmpty()) {
                 triggeredInfo += "<br><i>Damage: " + this.getEffects().get(0).getTargetPointer().getData("damageAmount") + "</i>";
                 triggeredInfo += "<br><i>Salamander: " + this.getEffects().get(0).getTargetPointer().getData("triggeredName") + "</i>";
             }
