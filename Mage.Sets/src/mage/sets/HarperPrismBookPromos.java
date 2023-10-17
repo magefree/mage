@@ -19,6 +19,7 @@ public class HarperPrismBookPromos extends ExpansionSet {
         super("HarperPrism Book Promos", "PHPR", ExpansionSet.buildDate(1994, 9, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 5;
 
         cards.add(new SetCardInfo("Arena", 1, Rarity.RARE, mage.cards.a.Arena.class));
         cards.add(new SetCardInfo("Giant Badger", 4, Rarity.RARE, mage.cards.g.GiantBadger.class));

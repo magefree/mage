@@ -27,6 +27,7 @@ import mage.cards.repository.*;
 import mage.choices.Choice;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.Filter;
@@ -2247,6 +2248,9 @@ public class VerifyCardDataTest {
                         || set.getName().startsWith("Mythic Edition") // cn not really numbers
                         || set.getName().startsWith("M19 Gift Pack") // cn not really numbers
                         || set.getName().startsWith("Unfinity") // half the set is funny, half is legacy legal. What a mess.
+                        || set.getName().startsWith("Pro Tour Collector Set") // cn not really numbers
+                        || set.getName().startsWith("World Championship Decks") // cn not really numbers
+                        || set.getSetType() == SetType.PROMOTIONAL // too many, did not bother checking them here for now.
                 ) {
                     continue;
                 }

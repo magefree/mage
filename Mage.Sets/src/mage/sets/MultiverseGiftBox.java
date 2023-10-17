@@ -19,6 +19,7 @@ public class MultiverseGiftBox extends ExpansionSet {
         super("Multiverse Gift Box", "MGB", ExpansionSet.buildDate(1996, 11, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 10;
 
         cards.add(new SetCardInfo("Bull Elephant", 9, Rarity.RARE, mage.cards.b.BullElephant.class));
         cards.add(new SetCardInfo("Dark Privilege", 3, Rarity.RARE, mage.cards.d.DarkPrivilege.class));
@@ -30,5 +31,5 @@ public class MultiverseGiftBox extends ExpansionSet {
         cards.add(new SetCardInfo("Vampirism", 6, Rarity.RARE, mage.cards.v.Vampirism.class));
         cards.add(new SetCardInfo("Viashino Sandstalker", 8, Rarity.RARE, mage.cards.v.ViashinoSandstalker.class));
         cards.add(new SetCardInfo("Wicked Reward", 7, Rarity.RARE, mage.cards.w.WickedReward.class));
-     }
+    }
 }
