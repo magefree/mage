@@ -90,7 +90,7 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <!-- tests runner -->
+                    <!-- test runner for maven, travis-ci (IDE uses own test runner) -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.1.2</version>
@@ -130,23 +130,23 @@
                         <!-- **************** -->
                         <!-- tree view report -->
                         <!-- **************** -->
+                        <!-- for full logs: use xmage.build.tests.treeViewRunnerShowAllLogs -->
+                        <!-- for ai logs in ci build: use .travis/log4j.properties -->
+                        <!-- for default maven logs: delete or comment all settings below -->
                         <consoleOutputReporter>
                             <disable>true</disable>
                         </consoleOutputReporter>
                         <statelessTestsetInfoReporter
                                 implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
                             <theme>ASCII</theme>
-                            <!-- print stack -->
                             <printStacktraceOnError>true</printStacktraceOnError>
                             <printStacktraceOnFailure>true</printStacktraceOnFailure>
-                            <!-- print standard output -->
                             <printStdoutOnError>true</printStdoutOnError>
                             <printStdoutOnFailure>true</printStdoutOnFailure>
-                            <printStdoutOnSuccess>false</printStdoutOnSuccess>
-                            <!-- print error output -->
+                            <printStdoutOnSuccess>${xmage.build.tests.treeViewRunnerShowAllLogs}</printStdoutOnSuccess>
                             <printStderrOnError>true</printStderrOnError>
                             <printStderrOnFailure>true</printStderrOnFailure>
-                            <printStderrOnSuccess>false</printStderrOnSuccess>
+                            <printStderrOnSuccess>${xmage.build.tests.treeViewRunnerShowAllLogs}</printStderrOnSuccess>
                         </statelessTestsetInfoReporter>
 
                         <!-- for compatible with jacoco code coverage - argLine moved to properties section
@@ -244,6 +244,9 @@
         <argLine>-Dfile.encoding=UTF-8</argLine>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+
+        <!-- logs settings for maven tests and travis ci builds -->
+        <xmage.build.tests.treeViewRunnerShowAllLogs>false</xmage.build.tests.treeViewRunnerShowAllLogs>
 
         <!--
             JaCoCo code coverage disabled by default. If you need to generate
