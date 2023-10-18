@@ -24,6 +24,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * Network: client side session
+ *
+ * Only one session/server per GUI's client
+ *
  * Created by IGOUDT on 15-9-2016.
  */
 public final class SessionHandler {

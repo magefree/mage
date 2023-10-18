@@ -1613,7 +1613,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             ability.getId(), ability, ability.getControllerId()
                     ));
                 }
-                game.removeBookmark(bookmark);
+                game.removeBookmark_v2(bookmark);
                 return true;
             }
         }

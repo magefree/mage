@@ -566,7 +566,7 @@ public class User {
         if (!watchedGames.isEmpty()) {
             sb.append("Watch: ").append(watchedGames.size()).append(' ');
         }
-        return sb.toString();
+        return sb.length() == 0 ? "not active" : sb.toString();
     }
 
     public void addGameWatchInfo(UUID gameId) {

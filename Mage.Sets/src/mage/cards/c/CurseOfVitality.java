@@ -55,7 +55,7 @@ class CurseOfVitalityEffect extends OneShotEffect {
 
     CurseOfVitalityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "gain 2 life. Each opponent attacking that player does the same.";
+        this.staticText = "you gain 2 life. Each opponent attacking that player does the same.";
     }
 
     private CurseOfVitalityEffect(final CurseOfVitalityEffect effect) {

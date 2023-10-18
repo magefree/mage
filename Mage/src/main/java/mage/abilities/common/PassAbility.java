@@ -9,7 +9,7 @@ import mage.game.Game;
 import java.util.UUID;
 
 /**
- * AI only: fake ability for game simulations
+ * AI: fake ability to pass priority in game simulations
  *
  * @author BetaSteward_at_googlemail.com
  */

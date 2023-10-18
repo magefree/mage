@@ -508,6 +508,14 @@ public class GameEvent implements Serializable {
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         FORETOLD, // targetId   id of card foretold
         FORETELL, // targetId   id of card foretell  playerId   id of the controller
+        /* villainous choice
+         targetId    player making the choice
+         sourceId    sourceId of the ability forcing the choice
+         playerId    controller of the ability forcing the choice
+         amount      numner of times choice is repeated
+         flag        not used for this event
+         */
+        FACE_VILLAINOUS_CHOICE,
         //custom events
         CUSTOM_EVENT
     }

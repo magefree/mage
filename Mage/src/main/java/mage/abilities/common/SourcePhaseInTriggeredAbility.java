@@ -13,7 +13,7 @@ public class SourcePhaseInTriggeredAbility extends TriggeredAbilityImpl {
 
     public SourcePhaseInTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("When {this} phases in, ");
+        setTriggerPhrase("Whenever {this} phases in, ");
     }
 
     protected SourcePhaseInTriggeredAbility(final SourcePhaseInTriggeredAbility ability) {

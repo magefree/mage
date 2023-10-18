@@ -8,10 +8,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.PlanarDieRollResult;
-import mage.constants.Planes;
 import mage.game.Game;
-import mage.game.command.CommandObject;
-import mage.game.command.Plane;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
@@ -96,43 +93,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                     }
                 }
             } else if (planarRoll == PlanarDieRollResult.PLANAR_ROLL) {
-                // Steps: 1) Remove the last plane and set its effects to discarded
-                for (CommandObject cobject : game.getState().getCommand()) {
-                    if (cobject instanceof Plane) {
-                        if (cobject.getAbilities() != null) {
-                            for (Ability ability : cobject.getAbilities()) {
-                                for (Effect effect : ability.getEffects()) {
-                                    if (effect instanceof ContinuousEffect) {
-                                        ((ContinuousEffect) effect).discard();
-                                    }
-                                }
-                            }
-                        }
-                        game.getState().removeTriggersOfSourceId(cobject.getId());
-                        game.getState().getCommand().remove(cobject);
-                        break;
-                    }
-                }
-
-                // 2) Choose a new random plane we haven't been to, or reset if we've been everywhere
-                List<String> planesVisited = game.getState().getSeenPlanes();
-                if (game.getState().getSeenPlanes() != null) {
-                    if (planesVisited.size() == Planes.values().length) {
-                        game.getState().resetSeenPlanes();
-                    }
-                }
-
-                boolean foundNextPlane = false;
-                while (!foundNextPlane) {
-                    Plane plane = Plane.createRandomPlane();
-                    try {
-                        if (plane != null && !planesVisited.contains(plane.getName())) {
-                            foundNextPlane = true;
-                            game.addPlane(plane, controller.getId());
-                        }
-                    } catch (Exception ex) {
-                    }
-                }
+                return new PlaneswalkEffect(false).apply(game, source);
             }
             return true;
         }

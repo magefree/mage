@@ -11,10 +11,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -54,7 +51,7 @@ public final class FlamingTyrannosaurus extends CardImpl {
         ).concatBy("Then"));
         ability.addTarget(new TargetAnyTarget());
 
-        this.addAbility(ability.withFlavorWord("Paradox"));
+        this.addAbility(ability.setAbilityWord(AbilityWord.PARADOX));
 
         // When Flaming Tyrannosaurus dies, it deals damage equal to its power to each opponent.
         this.addAbility(new DiesSourceTriggeredAbility(

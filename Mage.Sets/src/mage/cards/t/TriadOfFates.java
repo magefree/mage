@@ -13,8 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,11 +28,9 @@ import java.util.UUID;
  */
 public final class TriadOfFates extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filterCounter = new FilterCreaturePermanent("creature that has a fate counter on it");
 
     static {
-        filter.add(AnotherPredicate.instance);
         filterCounter.add(CounterType.FATE.getPredicate());
     }
 
@@ -48,7 +46,7 @@ public final class TriadOfFates extends CardImpl {
         // {1}, {T}: Put a fate counter on another target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FATE.createInstance()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);
 

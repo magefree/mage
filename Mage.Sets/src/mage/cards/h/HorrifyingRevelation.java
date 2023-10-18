@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -18,10 +17,9 @@ public final class HorrifyingRevelation extends CardImpl {
     public HorrifyingRevelation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
-
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
-        this.getSpellAbility().addEffect(new MillCardsTargetEffect(1));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(1).setText(", then mills a card"));
     }
 
     private HorrifyingRevelation(final HorrifyingRevelation card) {
