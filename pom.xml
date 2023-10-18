@@ -90,15 +90,69 @@
                     </configuration>
                 </plugin>
                 <plugin>
+                    <!-- test runner for maven, travis-ci (IDE uses own test runner) -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
-                    <!--
-                    for compatible with jacoco code coverage - argLine moved to properties section
+                    <version>3.1.2</version>
+                    <dependencies>
+                        <!-- tree reporter deps -->
+                        <dependency>
+                            <groupId>me.fabriciorby</groupId>
+                            <artifactId>maven-surefire-junit5-tree-reporter</artifactId>
+                            <version>1.2.1</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
+                        <!-- ******************** -->
+                        <!-- default plain report -->
+                        <!-- ******************** -->
+                        <!--
+                            printSummary: print elapsed time and other stats per test file
+                            - if you disable this, you will not be able to trace the name of the test
+                              from where the logs are printed
+                            - failed tests will be shown anyway
+                        -->
+                        <printSummary>true</printSummary>
+
+                        <!--
+                            reportFormat: summary format
+                            - brief: print total elapsed time only
+                            - plain: print brief + elapsed time for each test name
+                        -->
+                        <reportFormat>brief</reportFormat>
+
+                        <!--
+                            useFile: enable txt and xml reports in .\target\surefire-reports
+                            - useless, so disable it for more performance
+                        -->
+                        <useFile>false</useFile>
+
+                        <!-- **************** -->
+                        <!-- tree view report -->
+                        <!-- **************** -->
+                        <!-- for full logs: use xmage.build.tests.treeViewRunnerShowAllLogs -->
+                        <!-- for ai logs in ci build: use .travis/log4j.properties -->
+                        <!-- for default maven logs: delete or comment all settings below -->
+                        <consoleOutputReporter>
+                            <disable>true</disable>
+                        </consoleOutputReporter>
+                        <statelessTestsetInfoReporter
+                                implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
+                            <theme>ASCII</theme>
+                            <printStacktraceOnError>true</printStacktraceOnError>
+                            <printStacktraceOnFailure>true</printStacktraceOnFailure>
+                            <printStdoutOnError>true</printStdoutOnError>
+                            <printStdoutOnFailure>true</printStdoutOnFailure>
+                            <printStdoutOnSuccess>${xmage.build.tests.treeViewRunnerShowAllLogs}</printStdoutOnSuccess>
+                            <printStderrOnError>true</printStderrOnError>
+                            <printStderrOnFailure>true</printStderrOnFailure>
+                            <printStderrOnSuccess>${xmage.build.tests.treeViewRunnerShowAllLogs}</printStderrOnSuccess>
+                        </statelessTestsetInfoReporter>
+
+                        <!-- for compatible with jacoco code coverage - argLine moved to properties section
                         <argLine>-Dfile.encoding=UTF-8</argLine>
+                        -->
                     </configuration>
-                    -->
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -190,6 +244,9 @@
         <argLine>-Dfile.encoding=UTF-8</argLine>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+
+        <!-- logs settings for maven tests and travis ci builds -->
+        <xmage.build.tests.treeViewRunnerShowAllLogs>false</xmage.build.tests.treeViewRunnerShowAllLogs>
 
         <!--
             JaCoCo code coverage disabled by default. If you need to generate
