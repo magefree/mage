@@ -94,7 +94,18 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.1.2</version>
+                    <dependencies>
+                        <!-- tree reporter deps -->
+                        <dependency>
+                            <groupId>me.fabriciorby</groupId>
+                            <artifactId>maven-surefire-junit5-tree-reporter</artifactId>
+                            <version>1.2.1</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
+                        <!-- ******************** -->
+                        <!-- default plain report -->
+                        <!-- ******************** -->
                         <!--
                             printSummary: print elapsed time and other stats per test file
                             - if you disable this, you will not be able to trace the name of the test
@@ -115,6 +126,28 @@
                             - useless, so disable it for more performance
                         -->
                         <useFile>false</useFile>
+
+                        <!-- **************** -->
+                        <!-- tree view report -->
+                        <!-- **************** -->
+                        <consoleOutputReporter>
+                            <disable>true</disable>
+                        </consoleOutputReporter>
+                        <statelessTestsetInfoReporter
+                                implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
+                            <theme>ASCII</theme>
+                            <!-- print stack -->
+                            <printStacktraceOnError>true</printStacktraceOnError>
+                            <printStacktraceOnFailure>true</printStacktraceOnFailure>
+                            <!-- print standard output -->
+                            <printStdoutOnError>true</printStdoutOnError>
+                            <printStdoutOnFailure>true</printStdoutOnFailure>
+                            <printStdoutOnSuccess>false</printStdoutOnSuccess>
+                            <!-- print error output -->
+                            <printStderrOnError>true</printStderrOnError>
+                            <printStderrOnFailure>true</printStderrOnFailure>
+                            <printStderrOnSuccess>false</printStderrOnSuccess>
+                        </statelessTestsetInfoReporter>
 
                         <!-- for compatible with jacoco code coverage - argLine moved to properties section
                         <argLine>-Dfile.encoding=UTF-8</argLine>
@@ -225,8 +258,7 @@
 
         <!-- Sonar settings for code coverage. Must be only one report for all modules (use report-aggregate goal report from JaCoCo) -->
         <aggregate.report.dir>Mage.Verify/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../${aggregate.report.dir}
-        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencies>
