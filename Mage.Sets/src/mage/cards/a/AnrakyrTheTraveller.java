@@ -113,6 +113,7 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
         
         // pay life
+        // copied from BolassCitadelPlayTheTopCardEffect.applies
         PayLifeCost lifeCost = new PayLifeCost(cardToCast.getSpellAbility().getManaCosts().manaValue());
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.add(lifeCost);
