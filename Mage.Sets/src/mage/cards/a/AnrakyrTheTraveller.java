@@ -38,7 +38,7 @@ public final class AnrakyrTheTraveller extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Lord of the Pyrrhian Legions — Whenever Anrakyr the Traveller attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
-        Ability ability = new AttacksTriggeredAbility(new AnrakyrTheTravellerEffect());
+        Ability ability = new AttacksTriggeredAbility(new AnrakyrTheTravellerEffect(), true);
 
         this.addAbility(ability.withFlavorWord("Lord of the Pyrrhian Legions"));
     }
