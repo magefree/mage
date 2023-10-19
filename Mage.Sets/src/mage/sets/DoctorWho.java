@@ -17,7 +17,7 @@ public final class DoctorWho extends ExpansionSet {
 
     private DoctorWho() {
         super("Doctor Who", "WHO", ExpansionSet.buildDate(2023, 10, 13), SetType.SUPPLEMENTAL);
-        this.expectedMaxCardNumber = 191; // bump to 1165 once the set is filled up.
+        this.expectedMaxCardNumber = 1165;
 
         cards.add(new SetCardInfo("Ace, Fearless Rebel", 98, Rarity.RARE, mage.cards.a.AceFearlessRebel.class));
         cards.add(new SetCardInfo("Ace's Baseball Bat", 170, Rarity.RARE, mage.cards.a.AcesBaseballBat.class));

@@ -62,6 +62,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author JayDi85
@@ -2361,6 +2362,118 @@ public class VerifyCardDataTest {
                 "GN3", new HashSet<>(Arrays.asList(
                         66                // Card did not make it to print. Supposedly Zombify
                 ))
+        );
+        intentionalUnimplemented.put(
+                "BRC", new HashSet<>(Arrays.asList(
+                        37, 38            // Two holes in the Scryfall card numbers.
+                ))
+        );
+
+        // --------------------
+        // Temporary skipped
+        // --------------------
+
+        // NCC: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "NCC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(447)
+                        .filter(i -> i > 93 && i < 191 && i != 105 && i != 137 && i != 121 && i != 173)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // 40K: variants and reprints. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "40K", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(321)
+                        .filter(i -> (i > 168 && i < 181)
+                                || i == 228 || i == 229 || i == 234 || i == 235 || i == 245 || i == 250
+                                || i == 251 || i == 252 || i == 255 || i == 262 || i == 271 || i == 272
+                                || (i > 307 && i != 310 && i != 315 && i != 317))
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // CLB: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "CLB", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(936)
+                        .filter(i -> i > 361 && i != 430 && i != 451 && i != 455 && i != 459 && i != 463
+                                && i != 467 && i != 541 && i != 556 && i != 564 && i != 575 && i != 576
+                                && i != 607 && i != 615 && (i < 646 || i > 930))
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // BOT: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "BOT", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(29)
+                        .filter(i -> i > 15 && i != 27)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // MOC: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "MOC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(450)
+                        .filter(i -> (i >= 47 && i <= 71) // Those are the new planes
+                                || (i > 79 && i < 164 && i != 90 && i != 97 && i != 107 && i != 128 && i != 131 && i != 138)
+                                || i == 448 || i == 449 || i == 450)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // MAT: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "MAT", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(220)
+                        .filter(i -> i == 52 || i == 91 || i == 102 || i == 141 || i == 151
+                                || i == 176 || i == 187 || i == 220)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // LTC: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "LTC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(558)
+                        .filter(i -> (i > 80 && i < 161) || i == 362 || i == 378
+                                || (i > 378 && i < 491 && i != 392)
+                                || i > 534)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // WOC: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "WOC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(58)
+                        .filter(i -> i > 28)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // WHO: reprint & variant. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "WHO", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(1165)
+                        .filter(i -> i == 191 || i == 192 || i == 193 || i == 195 || i == 197
+                                || i == 199 || i == 201 || i == 203 || i == 205 || i == 264
+                                || i == 265 || i == 266
+                                || (i > 331 && i != 432 && i != 446 && i != 461 && i != 560 & i != 561 && i != 565))
+                        .collect(Collectors.toList())
+                )
         );
     }
 
