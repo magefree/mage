@@ -1,14 +1,5 @@
 package mage.cards.a;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
@@ -21,23 +12,16 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.CardWithHalves;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author gravitybone
@@ -70,17 +54,16 @@ public final class AnrakyrTheTraveller extends CardImpl {
 }
 
 class AnrakyrTheTravellerEffect extends OneShotEffect {
-    private final FilterCard filter;
+
+    private static final FilterCard filter = new FilterArtifactCard("an artifact spell");
 
     AnrakyrTheTravellerEffect() {
         super(Outcome.AIDontUseIt);
-        this.filter = new FilterArtifactCard("an artifact spell");
         this.staticText = "you may cast " + filter.getMessage() + " from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.";
     }
 
     private AnrakyrTheTravellerEffect(final AnrakyrTheTravellerEffect effect) {
         super(effect);
-        this.filter = effect.filter;
     }
 
     @Override
