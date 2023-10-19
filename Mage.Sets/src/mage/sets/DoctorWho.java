@@ -207,6 +207,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Dalek Emperor", 120, Rarity.RARE, mage.cards.t.TheDalekEmperor.class));
         cards.add(new SetCardInfo("The Eleventh Hour", 41, Rarity.RARE, mage.cards.t.TheEleventhHour.class));
         cards.add(new SetCardInfo("The Fifth Doctor", 127, Rarity.RARE, mage.cards.t.TheFifthDoctor.class));
+        cards.add(new SetCardInfo("The Flood of Mars", 45, Rarity.RARE, mage.cards.t.TheFloodOfMars.class));
         cards.add(new SetCardInfo("The Flux", 86, Rarity.RARE, mage.cards.t.TheFlux.class));
         cards.add(new SetCardInfo("The Fugitive Doctor", 130, Rarity.RARE, mage.cards.t.TheFugitiveDoctor.class));
         cards.add(new SetCardInfo("The Ninth Doctor", 148, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
