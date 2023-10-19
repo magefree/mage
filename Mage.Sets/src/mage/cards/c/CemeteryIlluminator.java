@@ -104,7 +104,7 @@ class CemeteryIlluminatorExileEffect extends OneShotEffect {
 class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
 
     public CemeteryIlluminatorPlayTopEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast a spell from the top of your library if it shares a card type with a card exiled with {this}";
     }
 

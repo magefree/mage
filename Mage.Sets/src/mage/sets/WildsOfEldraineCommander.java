@@ -45,6 +45,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Court of Ardenvale", 21, Rarity.RARE, mage.cards.c.CourtOfArdenvale.class));
         cards.add(new SetCardInfo("Court of Embereth", 24, Rarity.RARE, mage.cards.c.CourtOfEmbereth.class));
         cards.add(new SetCardInfo("Court of Garenbrig", 25, Rarity.RARE, mage.cards.c.CourtOfGarenbrig.class));
+        cards.add(new SetCardInfo("Court of Locthwain", 23, Rarity.RARE, mage.cards.c.CourtOfLocthwain.class));
         cards.add(new SetCardInfo("Court of Vantress", 22, Rarity.RARE, mage.cards.c.CourtOfVantress.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 64, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 157, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
@@ -62,10 +63,12 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 159, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fact or Fiction", 90, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Faerie Bladecrafter", 14, Rarity.RARE, mage.cards.f.FaerieBladecrafter.class));
+        cards.add(new SetCardInfo("Faerie Conclave", 160, Rarity.UNCOMMON, mage.cards.f.FaerieConclave.class));
         cards.add(new SetCardInfo("Faerie Formation", 91, Rarity.RARE, mage.cards.f.FaerieFormation.class));
         cards.add(new SetCardInfo("Faerie Seer", 92, Rarity.COMMON, mage.cards.f.FaerieSeer.class));
         cards.add(new SetCardInfo("Fellwar Stone", 147, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fertile Ground", 126, Rarity.COMMON, mage.cards.f.FertileGround.class));
+        cards.add(new SetCardInfo("Fortified Village", 161, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
         cards.add(new SetCardInfo("Frantic Search", 93, Rarity.COMMON, mage.cards.f.FranticSearch.class));
         cards.add(new SetCardInfo("Generous Gift", 68, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Giant Inheritance", 17, Rarity.RARE, mage.cards.g.GiantInheritance.class));
@@ -86,6 +89,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Spiritdancer", 69, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Korvold, Gleeful Glutton", 26, Rarity.MYTHIC, mage.cards.k.KorvoldGleefulGlutton.class));
         cards.add(new SetCardInfo("Krosan Verge", 163, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Liberated Livestock", 5, Rarity.RARE, mage.cards.l.LiberatedLivestock.class));
         cards.add(new SetCardInfo("Loamcrafter Faun", 19, Rarity.RARE, mage.cards.l.LoamcrafterFaun.class));
         cards.add(new SetCardInfo("Malleable Impostor", 10, Rarity.RARE, mage.cards.m.MalleableImpostor.class));
         cards.add(new SetCardInfo("Mantle of the Ancients", 70, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
@@ -121,6 +125,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scion of Oona", 109, Rarity.RARE, mage.cards.s.ScionOfOona.class));
         cards.add(new SetCardInfo("Secluded Glen", 166, Rarity.RARE, mage.cards.s.SecludedGlen.class));
         cards.add(new SetCardInfo("Setessan Champion", 132, Rarity.RARE, mage.cards.s.SetessanChampion.class));
+        cards.add(new SetCardInfo("Shadow Puppeteers", 12, Rarity.RARE, mage.cards.s.ShadowPuppeteers.class));
         cards.add(new SetCardInfo("Shalai, Voice of Plenty", 74, Rarity.RARE, mage.cards.s.ShalaiVoiceOfPlenty.class));
         cards.add(new SetCardInfo("Siona, Captain of the Pyleas", 144, Rarity.UNCOMMON, mage.cards.s.SionaCaptainOfThePyleas.class));
         cards.add(new SetCardInfo("Snake Umbra", 133, Rarity.UNCOMMON, mage.cards.s.SnakeUmbra.class));

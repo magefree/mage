@@ -38,7 +38,7 @@ public final class SlumberingKeepguard extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ScryEffect(1, false), new FilterEnchantmentPermanent("an enchantment")));
         // {2}{W}: Slumbering Keepguard gets +1/+1 until end of turn for each enchantment you control.
         this.addAbility(new SimpleActivatedAbility(
-            new BoostSourceEffect(value, value, Duration.EndOfTurn, true), new ManaCostsImpl<>("{2}{W}"))
+            new BoostSourceEffect(value, value, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}"))
             .addHint(new ValueHint("Enchantments you control", value))
         );
     }

@@ -247,6 +247,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public List<String> getManaCostSymbols() {
         return super.getManaCostSymbols();
     }
@@ -394,11 +399,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void addManaCost(ManaCost manaCost) {
-        // Do nothing
-    }
-
-    @Override
     public void addManaCostsToPay(ManaCost manaCost) {
         // Do nothing
     }
@@ -485,8 +485,9 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void setRuleVisible(boolean ruleVisible) {
+    public Ability setRuleVisible(boolean ruleVisible) {
         this.ability.setRuleVisible(ruleVisible);
+        return this;
     }
 
     @Override
@@ -631,8 +632,10 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
-        Ability newAbility = this.copy();
+        Ability newAbility = this.ability.copy();
         newAbility.newId();
+        newAbility.setControllerId(newControllerId);
+
         StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
         game.getStack().push(newStackAbility);
 

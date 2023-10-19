@@ -31,7 +31,7 @@ public final class VeteransPowerblade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
 
         // Equip Soldier {W}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{W}"), new TargetPermanent(filter)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{W}"), new TargetPermanent(filter), false));
 
         // Equip {2}
         this.addAbility(new EquipAbility(2));

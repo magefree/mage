@@ -76,7 +76,9 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         UUID bruna = source.getSourceId();
 
@@ -91,7 +93,9 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         filterAuraCard.add(new AuraCardCanAttachToPermanentId(bruna));
 
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null) { return false; }
+        if (sourcePermanent == null) {
+            return false;
+        }
 
         List<Permanent> fromBattlefield = new ArrayList<>();
         List<Card> fromHandGraveyard = new ArrayList<>();

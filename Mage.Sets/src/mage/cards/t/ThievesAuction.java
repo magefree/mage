@@ -68,7 +68,9 @@ class ThievesAuctionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         // Exile all nontoken permanents.
         Cards exiledCards = new CardsImpl();

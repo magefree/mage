@@ -40,6 +40,7 @@ public final class CollectionViewerPanel extends JPanel {
     public void cleanUp() {
         this.hidePopup();
         this.bigCard = null;
+        ExpansionRepository.instance.unsubscribe(setsDbListener);
     }
 
     private void reloadFormatCombobox() {
@@ -220,7 +221,6 @@ public final class CollectionViewerPanel extends JPanel {
         if (c != null) {
             ((CollectionViewerPane) c).removeFrame();
         }
-
     }
 
     private final class MageBookContainer extends JPanel {

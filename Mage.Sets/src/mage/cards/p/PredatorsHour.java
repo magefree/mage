@@ -84,16 +84,24 @@ class PredatorsHourEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        if (opponent == null) { return false; }
+        if (opponent == null) {
+            return false;
+        }
 
         MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject == null) { return false; }
+        if (sourceObject == null) {
+            return false;
+        }
 
         Card topCard = opponent.getLibrary().getFromTop(game);
-        if (topCard == null) { return false; }
+        if (topCard == null) {
+            return false;
+        }
 
         UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         topCard.setFaceDown(true, game);
@@ -154,7 +162,9 @@ class PredatorsHourPlayFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null ) { return false; }
+        if (theCard == null ) {
+            return false;
+        }
 
         // for split cards
         objectId = theCard.getMainCard().getId();
@@ -185,7 +195,9 @@ class PredatorsHourSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card theCard = game.getCard(objectId);
-        if (theCard == null) { return false; }
+        if (theCard == null) {
+            return false;
+        }
 
         // for split cards
         objectId = theCard.getMainCard().getId();

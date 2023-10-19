@@ -58,7 +58,6 @@ public class Commander extends CommandObjectImpl {
                             abilities.add(spellAbility.copyWithZone(Zone.COMMAND));
                         }
                         break;
-                    case FACE_DOWN_CREATURE: // dynamic added spell for alternative cost like cast as face down
                     case SPLICE: // only from hand
                     case SPLIT_AFTERMATH: // only from graveyard
                         // can't use from command zone
@@ -237,6 +236,11 @@ public class Commander extends CommandObjectImpl {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return sourceObject.getManaCost();
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override

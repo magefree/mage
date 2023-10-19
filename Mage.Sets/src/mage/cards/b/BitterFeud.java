@@ -63,20 +63,30 @@ class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         TargetPlayer target = new TargetPlayer(2, 2, true);
         controller.chooseTarget(outcome, target, source, game);
         Player player1 = game.getPlayer(target.getFirstTarget());
-        if (player1 == null) { return false; }
+        if (player1 == null) {
+            return false;
+        }
 
-        if (target.getTargets().size() <= 1) { return false; }
+        if (target.getTargets().size() <= 1) {
+            return false;
+        }
 
         Player player2 = game.getPlayer(target.getTargets().get(1));
-        if (player2 == null) { return false; }
+        if (player2 == null) {
+            return false;
+        }
 
         game.getState().setValue(source.getSourceId() + "_player1", player1);
         game.getState().setValue(source.getSourceId() + "_player2", player2);
@@ -122,10 +132,14 @@ class BitterFeudEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         player1 = (Player) game.getState().getValue(source.getSourceId() + "_player1");
-        if (player1 == null) { return false; }
+        if (player1 == null) {
+            return false;
+        }
 
         player2 = (Player) game.getState().getValue(source.getSourceId() + "_player2");
-        if (player2 == null) { return false; }
+        if (player2 == null) {
+            return false;
+        }
 
         UUID targetPlayerId;
         switch (event.getType()) {
@@ -134,7 +148,9 @@ class BitterFeudEffect extends ReplacementEffectImpl {
                 break;
             case DAMAGE_PERMANENT:
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent == null) { return false; }
+                if (permanent == null) {
+                    return false;
+                }
 
                 targetPlayerId = permanent.getControllerId();
                 break;
@@ -142,7 +158,9 @@ class BitterFeudEffect extends ReplacementEffectImpl {
                 return false;
         }
 
-        if (!player1.getId().equals(targetPlayerId) && !player2.getId().equals(targetPlayerId)) { return false; }
+        if (!player1.getId().equals(targetPlayerId) && !player2.getId().equals(targetPlayerId)) {
+            return false;
+        }
 
         UUID sourcePlayerId;
         MageObject damageSource = game.getObject(event.getSourceId());

@@ -72,7 +72,9 @@ class BraceForImpactPreventDamageTargetEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (game.replaceEvent(preventEvent)) { return false; }
+        if (game.replaceEvent(preventEvent)) {
+            return false;
+        }
         int prevented;
         int damage = event.getAmount();
         event.setAmount(0);

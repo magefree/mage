@@ -38,6 +38,11 @@ public class MysteryBooster extends ExpansionSet {
     /**
      * This map defines which cards can go into which booster slot.
      * Will be populated when the first booster is requested.
+     * <p>
+     * Of note, this is booster collation for MB1, the 2019 Mystery Booster.
+     * In the 2021 versions (not collated here), there are 1692 cards in common, and two changes:
+     * - Goblin Trenches added instead of Selesnya Guildmage (See Scryfall note on https://scryfall.com/card/mb1/1695/goblin-trenches )
+     * - Prophetic Bolt added instead of Nucklavee (See Scryfall note on https://scryfall.com/card/mb1/1696/prophetic-bolt )
      */
     protected final Map<Integer, List<CardInfo>> possibleCardsPerBoosterSlot = new HashMap<>();
 
@@ -770,6 +775,8 @@ public class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Oriflamme", 958, Rarity.UNCOMMON, mage.cards.g.GoblinOriflamme.class));
         cards.add(new SetCardInfo("Goblin Piledriver", 959, Rarity.RARE, mage.cards.g.GoblinPiledriver.class));
         cards.add(new SetCardInfo("Goblin Roughrider", 960, Rarity.COMMON, mage.cards.g.GoblinRoughrider.class));
+        // Goblin Trenches is not in the collation booster, as it was only added for the second Mystery Booster.
+        cards.add(new SetCardInfo("Goblin Trenches", 1695, Rarity.RARE, mage.cards.g.GoblinTrenches.class));
         cards.add(new SetCardInfo("Goblin War Paint", 962, Rarity.COMMON, mage.cards.g.GoblinWarPaint.class));
         cards.add(new SetCardInfo("Goblin Warchief", 961, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class));
         cards.add(new SetCardInfo("God-Pharaoh's Faithful", 124, Rarity.COMMON, mage.cards.g.GodPharaohsFaithful.class));
@@ -1211,6 +1218,8 @@ public class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Prodigal Sorcerer", 461, Rarity.UNCOMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Promise of Bunrei", 202, Rarity.UNCOMMON, mage.cards.p.PromiseOfBunrei.class));
         cards.add(new SetCardInfo("Propaganda", 462, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
+        // Prophetic Bolt is not in the collation booster, as it was only added for the second Mystery Booster.
+        cards.add(new SetCardInfo("Prophetic Bolt", 1696, Rarity.RARE, mage.cards.p.PropheticBolt.class));
         cards.add(new SetCardInfo("Prophetic Prism", 1622, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Prophetic Ravings", 1028, Rarity.COMMON, mage.cards.p.PropheticRavings.class));
         cards.add(new SetCardInfo("Prosperous Pirates", 463, Rarity.COMMON, mage.cards.p.ProsperousPirates.class));

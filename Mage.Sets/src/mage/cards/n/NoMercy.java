@@ -69,7 +69,7 @@ public final class NoMercy extends CardImpl {
 
         @Override
         public String getRule() {
-            return "Whenever a creature deals damage to you, destroy it";
+            return "Whenever a creature deals damage to you, destroy it.";
         }
 
     }

@@ -6,7 +6,6 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -41,8 +40,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player == null || permanent == null) {
+        if (player == null) {
             return false;
         }
 

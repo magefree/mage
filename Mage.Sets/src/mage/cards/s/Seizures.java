@@ -19,7 +19,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-import mage.constants.Zone;
 
 /**
  * @author LoneFox
@@ -68,12 +67,7 @@ class SeizuresEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

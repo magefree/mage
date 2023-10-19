@@ -1,18 +1,19 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -36,21 +37,12 @@ public class AllegiantGeneralPryde extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trooper creatures you control have "When this creature enters the battlefield, you may sacrifice a creature. If you do, draw two cards and lose 2 life."
-        SacrificeEffect sacrifceEffect = new SacrificeEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED, 1, "");
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(sacrifceEffect, true, true);
-        ability.setTriggerPhrase("When this creature enters the battlefield, ");
-        ability.addTarget(new TargetControlledCreaturePermanent(1));
-        DrawCardSourceControllerEffect drawCardSourceControllerEffect = new DrawCardSourceControllerEffect(2);
-        drawCardSourceControllerEffect.setText("If you do, draw two cards");
-        ability.addEffect(drawCardSourceControllerEffect);
-        LoseLifeSourceControllerEffect loseLifeSourceControllerEffect = new LoseLifeSourceControllerEffect(2);
-        loseLifeSourceControllerEffect.setText("and lose 2 life.");
-        ability.addEffect(loseLifeSourceControllerEffect);
-        //EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2), true);
-        GainAbilityControlledEffect effect = new GainAbilityControlledEffect(
-                ability, Duration.WhileOnBattlefield, filter);
-        this.addAbility(new SimpleStaticAbility(effect));
+        Ability gainedAbility = new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
+                new DrawCardSourceControllerEffect(2),
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+        ).addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and")))
+                .setTriggerPhrase("When this creature enters the battlefield, ");
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(gainedAbility, Duration.WhileOnBattlefield, filter)));
     }
 
     private AllegiantGeneralPryde(final AllegiantGeneralPryde card) {

@@ -54,7 +54,9 @@ class UntapAllArtifactsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) { return false; }
+        if (player == null) {
+            return false;
+        }
 
         for (Permanent artifact: game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), game)) {
             artifact.untap(game);

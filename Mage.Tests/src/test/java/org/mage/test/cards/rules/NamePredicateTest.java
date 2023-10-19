@@ -26,8 +26,7 @@ public class NamePredicateTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Pine Walker"); // {3}{G}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -50,5 +49,31 @@ public class NamePredicateTest extends CardTestPlayerBase {
         assertNamePredicate("by inner - face down choice must work", 1, EmptyNames.FACE_DOWN_CREATURE.toString(), true);
         assertNamePredicate("by inner - non existing name must return zero", 0, "Island", true);
         assertNamePredicate("by inner - existing name must work", 3, "Forest", true);
+    }
+
+    @Test
+    public void testCityInABottle() {
+        String bottle = "City in a Bottle"; // Artifact {2}
+        // Whenever one or more other nontoken permanents with a name originally printed in the Arabian Nights expansion
+        // are on the battlefield, their controllers sacrifice them.
+        // Players can’t cast spells or play lands with a name originally printed in the Arabian Nights expansion.
+        String nomads = "Desert Nomads"; // Creature {2}{R} (originally printed in Arabian Nights)
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5); // printed in Arabian Nights, but first printed in Alpha
+        addCard(Zone.BATTLEFIELD, playerA, "Camel"); // originally printed in Arabian Nights
+        addCard(Zone.HAND, playerA, bottle);
+        addCard(Zone.HAND, playerA, nomads);
+
+        checkPlayableAbility("Nomads, unbottled", 1, PhaseStep.PRECOMBAT_MAIN , playerA, "Cast Desert Nomads", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottle);
+        checkGraveyardCount("Camel sacrificed" , 1, PhaseStep.BEGIN_COMBAT, playerA, "Camel", 1);
+        checkPlayableAbility("Nomads, bottled", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Desert Nomads", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, 1);
+        assertPermanentCount(playerA, bottle, 1);
+        assertPermanentCount(playerA, "Mountain", 5);
     }
 }

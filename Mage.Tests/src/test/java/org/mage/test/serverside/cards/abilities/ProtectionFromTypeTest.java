@@ -53,7 +53,7 @@ public class ProtectionFromTypeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Coral Merfolk");
 
         setStrictChooseMode(true);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, Remove a charge counter from {this}, {T}: Put a -1/-1 counter on target creature.", "Coral Merfolk");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Remove a charge counter from {this}: Put a -1/-1 counter on target creature.", "Coral Merfolk");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

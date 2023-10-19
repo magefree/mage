@@ -34,7 +34,7 @@ public final class BarbarianRing extends CardImpl {
 
         // Threshold - {R}, {T}, Sacrifice Barbarian Ring: Barbarian Ring deals 2 damage to any target. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-            new DamageTargetEffect(2),
+            new DamageTargetEffect(2, "it"),
             new ManaCostsImpl<>("{R}"),
             new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());

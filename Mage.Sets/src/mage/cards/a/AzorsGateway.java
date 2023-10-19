@@ -78,10 +78,14 @@ class AzorsGatewayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject == null) { return false; }
+        if (sourceObject == null) {
+            return false;
+        }
 
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
 

@@ -1,6 +1,7 @@
 package mage.game;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.Outcome;
@@ -361,8 +362,16 @@ public final class ZonesHandler {
                 // put onto battlefield with possible counters
                 game.getPermanentsEntering().put(permanent.getId(), permanent);
                 card.checkForCountersToAdd(permanent, source, game);
+
                 permanent.setTapped(info instanceof ZoneChangeInfo.Battlefield
                         && ((ZoneChangeInfo.Battlefield) info).tapped);
+                
+                if (Zone.STACK == event.getFromZone()) {
+                    Spell spell = game.getStack().getSpell(event.getTargetId());
+                    if (spell != null) {
+                        permanent.setPrototyped(spell.isPrototyped());
+                    }
+                }
 
                 permanent.setFaceDown(info.faceDown, game);
                 if (info.faceDown) {

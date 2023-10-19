@@ -153,7 +153,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             // Create the day night button
             dayNightButton = new JButton("");
             dayNightButton.setSize(32, 32);
-            dayNightButton.setToolTipText("This permanent is a double faced card. To see the another face card, push this button or move mouse wheel down while hovering over it.");
+            dayNightButton.setToolTipText("This permanent is a double faced card. To see the card's other face, push this button or move mouse wheel down while hovering over it.");
             BufferedImage day = ImageManagerImpl.instance.getDayImage();
             dayNightButton.setIcon(new ImageIcon(day));
             dayNightButton.addActionListener(e -> {

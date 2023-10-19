@@ -44,6 +44,7 @@ public class LoadTest {
     private static final int TEST_PORT = 17171;
     private static final String TEST_PROXY_TYPE = "None";
     private static final String TEST_USER_NAME_GLOBAL_PREFIX = "t_";
+    private static final Boolean TEST_SHOW_GAME_LOGS_AS_HTML = false; // html is original format with full data, but can be too bloated
     private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
     private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
     private static final String TEST_AI_RANDOM_DECK_SETS = "NEO"; // set for random generated decks (empty for all sets usage)
@@ -544,7 +545,7 @@ public class LoadTest {
         public LoadPlayer(String userPrefix, boolean joinGameChat, String logsPrefix) {
             this.userName = TEST_USER_NAME_GLOBAL_PREFIX + userPrefix + "_" + RandomUtil.nextInt(10000);
             this.connection = createSimpleConnection(this.userName);
-            this.client = new SimpleMageClient(joinGameChat, logsPrefix);
+            this.client = new SimpleMageClient(joinGameChat, logsPrefix, TEST_SHOW_GAME_LOGS_AS_HTML);
             this.session = new SessionImpl(this.client);
 
             this.session.connect(this.connection);

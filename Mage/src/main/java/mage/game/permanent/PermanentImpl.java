@@ -109,6 +109,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, String> info = new LinkedHashMap<>(); // additional info for permanent's rules
     protected int createOrder;
     protected boolean legendRuleApplies = true;
+    protected boolean prototyped;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<>());
 
@@ -179,6 +180,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
+        this.prototyped = permanent.prototyped;
     }
 
     @Override
@@ -1234,13 +1236,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
         if (source != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
-                if (null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game)) {
+                if (game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game).isEmpty()) {
                     return false;
                 }
             }
 
             if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                    && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game).isEmpty()
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
@@ -1416,10 +1418,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // battles can never attack
             return false;
         }
-        ApprovingObject approvingObject = game.getContinuousEffects().asThough(
+        Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(
                 this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, null, defenderId, game
         );
-        if (hasSummoningSickness() && approvingObject == null) {
+        if (hasSummoningSickness() && approvingObjects.isEmpty()) {
             return false;
         }
         //20101001 - 508.1c
@@ -1435,7 +1437,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         return !abilities.containsKey(DefenderAbility.getInstance().getId())
-                || null != game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, null, this.getControllerId(), game);
+                || !game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, null, this.getControllerId(), game).isEmpty();
     }
 
     private boolean canAttackCheckRestrictionEffects(UUID defenderId, Game game) {
@@ -1455,7 +1457,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canBlock(UUID attackerId, Game game) {
-        if (tapped && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game) == null || isBattle(game)) {
+        if (tapped && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game).isEmpty() || isBattle(game)) {
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);
@@ -1488,7 +1490,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canBlockAny(Game game) {
-        if (tapped && null == game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game)) {
+        if (tapped && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game).isEmpty()) {
             return false;
         }
 
@@ -1614,6 +1616,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean isMonstrous() {
         return this.monstrous;
+    }
+
+    @Override
+    public boolean isPrototyped() {
+        return this.prototyped;
     }
 
     @Override
@@ -1827,6 +1834,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setSecondCardFace(Card card) {
         this.secondSideCard = card;
+    }
+
+    public void setPrototyped(boolean prototyped) {
+        this.prototyped = prototyped;
     }
 
     @Override

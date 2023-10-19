@@ -38,7 +38,7 @@ public final class VeiledApparition extends CardImpl {
          TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new VeilApparitionToken(), null, Duration.WhileOnBattlefield),
                 filter, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
-                "Whenever an opponent casts a spell, if Veiled Apparition is an enchantment, Veiled Apparition becomes a 3/3 Illusion creature with flying and \"At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}."));
+                "When an opponent casts a spell, if {this} is an enchantment, {this} becomes a 3/3 Illusion creature with flying and \"At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}."));
         
     }
 

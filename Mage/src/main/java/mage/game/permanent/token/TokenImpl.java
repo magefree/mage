@@ -331,6 +331,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     allAddedTokens.add((PermanentToken) permanent);
                 }
 
+                // prototyped spell tokens make prototyped permanent tokens on resolution.
+                if (source instanceof SpellAbility && ((SpellAbility) source).getSpellAbilityCastMode() == SpellAbilityCastMode.PROTOTYPE) {
+                    permanent.setPrototyped(true);
+                }
+
                 // if token was created (not a spell copy) handle auras coming into the battlefield
                 // that must determine what to enchant
                 // see #9583 for the root cause issue of why this convoluted searching is necessary
@@ -345,6 +350,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                         if (!(ability instanceof SpellAbility)) {
                             continue;
                         }
+
                         auraOutcome = ability.getEffects().getOutcome(ability);
                         for (Effect effect : ability.getEffects()) {
                             if (!(effect instanceof AttachEffect)) {

@@ -46,7 +46,7 @@ public final class CoastlineMarauders extends CardImpl {
 
         // Whenever Coastline Marauders attacks, it gets +1/+0 until end of turn for each land defending player controls.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true
+                xValue, StaticValue.get(0), Duration.EndOfTurn
         ).setText("it gets +1/+0 until end of turn for each land defending player controls"), false));
 
         // Encore {4}{R}{R}

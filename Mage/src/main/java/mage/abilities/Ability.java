@@ -155,14 +155,6 @@ public interface Ability extends Controllable, Serializable {
      */
     ManaCosts<ManaCost> getManaCostsToPay();
 
-    /**
-     * Adds a {@link ManaCost} to this ability that must be paid before this
-     * ability is activated.
-     *
-     * @param cost The {@link ManaCost} to add.
-     */
-    void addManaCost(ManaCost cost);
-
     void addManaCostsToPay(ManaCost manaCost);
 
     /**
@@ -442,7 +434,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param ruleVisible
      */
-    void setRuleVisible(boolean ruleVisible);
+    Ability setRuleVisible(boolean ruleVisible);
 
     /**
      * Returns true if the additional costs of the abilitiy should be visible on

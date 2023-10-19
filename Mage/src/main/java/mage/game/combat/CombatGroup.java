@@ -174,8 +174,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : attacker.getControllerId());
                     if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
                             player.chooseUse(Outcome.Damage, "Have " + attacker.getLogName() + " assign damage as though it weren't blocked?", null, game)) ||
-                            game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED,
-                                    null, attacker.getControllerId(), game) != null) {
+                            !game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED,
+                                    null, attacker.getControllerId(), game).isEmpty()) {
                         // for handling creatures like Thorn Elemental
                         blocked = false;
                         unblockedDamage(first, game);

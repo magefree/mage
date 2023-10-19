@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -36,7 +37,7 @@ public class EmergeAbility extends SpellAbility {
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(emergeCost.copy());
+        this.addCost(emergeCost.copy());
 
         this.setRuleAtTheTop(true);
     }
@@ -55,7 +56,7 @@ public class EmergeAbility extends SpellAbility {
                         new FilterControlledCreaturePermanent(), this.getControllerId(), this, game)) {
                     ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getManaValue());
                     if (costToPay.canPay(this, this, this.getControllerId(), game)) {
-                        return ActivationStatus.getTrue(this, game);
+                        return new ActivationStatus(new ApprovingObject(this, game));
                     }
                 }
             }

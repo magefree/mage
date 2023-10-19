@@ -215,8 +215,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
 
-        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zoetic Cavern");
-        setChoice(playerA, true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

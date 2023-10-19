@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class OrcishSiegemaster extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent filterOrcAndGoblins =
+    private static final FilterControlledCreaturePermanent filterOrcAndGoblins =
             new FilterControlledCreaturePermanent("Orcs and Goblins");
 
     static {
@@ -62,7 +62,7 @@ public final class OrcishSiegemaster extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(
                 new BoostSourceEffect(
                         GreatestPowerAmongControlledCreaturesValue.instance,
-                        StaticValue.get(0), Duration.EndOfTurn, true, "it"
+                        StaticValue.get(0), Duration.EndOfTurn, "it"
                 )
         ));
     }

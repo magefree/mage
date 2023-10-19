@@ -31,7 +31,7 @@ public final class TickingGnomes extends CardImpl {
         // Echo {3}
         this.addAbility(new EchoAbility("{3}"));
         // Sacrifice Ticking Gnomes: Ticking Gnomes deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "it"), new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

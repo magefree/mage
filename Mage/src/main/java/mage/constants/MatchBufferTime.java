@@ -11,6 +11,9 @@ package mage.constants;
  */
 public enum MatchBufferTime {
     NONE(0, "None"),
+    SEC__01(1, "1 Second"),
+    SEC__02(2, "2 Seconds"),
+    SEC__03(3, "3 Seconds"),
     SEC__05(5, "5 Seconds"),
     SEC__10(10, "10 Seconds"),
     SEC__15(15, "15 Seconds"),
@@ -18,16 +21,16 @@ public enum MatchBufferTime {
     SEC__25(25, "25 Seconds"),
     SEC__30(30, "30 Seconds");
 
-    private final int matchSeconds;
+    private final int bufferSecs;
     private final String name;
 
-    MatchBufferTime(int matchSeconds, String name) {
-        this.matchSeconds = matchSeconds;
+    MatchBufferTime(int bufferSecs, String name) {
+        this.bufferSecs = bufferSecs;
         this.name = name;
     }
 
-    public int getBufferTime() {
-        return matchSeconds;
+    public int getBufferSecs() {
+        return bufferSecs;
     }
 
     public String getName() {

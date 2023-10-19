@@ -1,6 +1,7 @@
 package org.mage.test.stub;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -1270,22 +1271,22 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Set<UUID> getCastSourceIdWithAlternateMana() {
+    public Map<UUID, Set<MageIdentifier>> getCastSourceIdWithAlternateMana() {
         return null;
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs, MageIdentifier identifier) {
 
     }
 
     @Override
-    public Map<UUID, Costs<Cost>> getCastSourceIdCosts() {
+    public Map<UUID, Map<MageIdentifier,Costs<Cost>>> getCastSourceIdCosts() {
         return null;
     }
 
     @Override
-    public Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts() {
+    public Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
         return null;
     }
 

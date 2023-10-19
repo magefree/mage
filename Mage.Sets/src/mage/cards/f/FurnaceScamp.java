@@ -1,12 +1,12 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,8 +26,10 @@ public final class FurnaceScamp extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeSourceEffect(), true, true);
-        ability.addEffect(new DamageTargetEffect(3, true, "that player"));
+        // Whenever Furnace Scamp deals combat damage to a player, you may sacrifice it. If you do, Furnace Scamp deals 3 damage to that player.
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
+                new DamageTargetEffect(3, true, "that player"), new SacrificeSourceCost()
+        ), false, true);
         this.addAbility(ability);
     }
 

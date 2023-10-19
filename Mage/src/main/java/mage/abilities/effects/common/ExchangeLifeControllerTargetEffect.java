@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -39,6 +38,6 @@ public class ExchangeLifeControllerTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "Exchange life totals with target " + mode.getTargets().get(0).getTargetName();
+        return "exchange life totals with " + getTargetPointer().describeTargets(mode.getTargets(), "that player");
     }
 }

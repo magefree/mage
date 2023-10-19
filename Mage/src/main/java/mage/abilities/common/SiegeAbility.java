@@ -44,7 +44,7 @@ public class SiegeAbility extends StaticAbility {
 class SiegeDefeatedTriggeredAbility extends TriggeredAbilityImpl {
 
     SiegeDefeatedTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SiegeDefeatedEffect());
+        super(Zone.BATTLEFIELD, new SiegeDefeatedEffect(), true);
         this.setRuleVisible(false);
     }
 

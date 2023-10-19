@@ -35,7 +35,7 @@ public final class ElectrostaticPummeler extends CardImpl {
 
         // Pay {E}{E}{E}: Electrostatic Pummeler gets +X/+X until end of turn, where X is its power.
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
-                xValue, xValue, Duration.EndOfTurn, true
+                xValue, xValue, Duration.EndOfTurn
         ).setText("{this} gets +X/+X until end of turn, where X is its power"), new PayEnergyCost(3)));
     }
 

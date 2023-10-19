@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class Insight extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("green spell");
+    private static final FilterSpell filter = new FilterSpell("a green spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
@@ -28,7 +28,7 @@ public final class Insight extends CardImpl {
 
 
         // Whenever an opponent casts a green spell, you draw a card.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), filter, false));
     }
 
     private Insight(final Insight card) {

@@ -14,7 +14,6 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
-import mage.game.mulligan.MulliganType;
 import mage.players.PlayerType;
 import mage.view.GameTypeView;
 import mage.view.TableView;
@@ -876,7 +875,7 @@ public class NewTableDialog extends MageDialog {
         }
         int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, "1500"));
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {
-            if (mtl.getTimeLimit() == timeLimit) {
+            if (mtl.getPrioritySecs() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);
                 break;
             }
@@ -884,7 +883,7 @@ public class NewTableDialog extends MageDialog {
         // TODO: Rethink defaults with buffer time?
         int bufferTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_BUFFER_TIME + versionStr, "0"));
         for (MatchBufferTime mtl : MatchBufferTime.values()) {
-            if (mtl.getBufferTime() == bufferTime) {
+            if (mtl.getBufferSecs() == bufferTime) {
                 this.cbBufferTime.setSelectedItem(mtl);
                 break;
             }
@@ -951,8 +950,8 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NAME + versionStr, options.getName());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, options.getPassword());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE + versionStr, options.getDeckType());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, Integer.toString(options.getPriorityTime()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_BUFFER_TIME + versionStr, Integer.toString(options.getBufferTime()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, Integer.toString(options.getMatchTimeLimit().getPrioritySecs()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_BUFFER_TIME + versionStr, Integer.toString(options.getMatchBufferTime().getBufferSecs()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE + versionStr, options.getGameType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS + versionStr, Integer.toString(options.getWinsNeeded()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED + versionStr, options.isRollbackTurnsAllowed() ? "Yes" : "No");

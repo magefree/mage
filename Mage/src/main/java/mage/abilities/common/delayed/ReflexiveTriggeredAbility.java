@@ -62,6 +62,12 @@ public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public ReflexiveTriggeredAbility setTriggerPhrase(String triggerPhrase) {
+        super.setTriggerPhrase(triggerPhrase);
+        return this;
+    }
+
+    @Override
     public ReflexiveTriggeredAbility copy() {
         return new ReflexiveTriggeredAbility(this);
     }

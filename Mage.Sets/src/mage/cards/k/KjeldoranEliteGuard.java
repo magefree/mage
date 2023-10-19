@@ -57,13 +57,14 @@ class KjeldoranEliteGuardEffect extends OneShotEffect {
     KjeldoranEliteGuardEffect() {
         super(Outcome.Neutral);
         staticText = "Target creature gets +2/+2 until end of turn. "
-                + "When that creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard. "
-                + "Activate only during combat.";
+                + "When that creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard.";
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getPermanent(source.getFirstTarget()) == null) { return false; }
+        if (game.getPermanent(source.getFirstTarget()) == null) {
+            return false;
+        }
 
         // Target creature gets +2/+2 until end of turn.
         BoostTargetEffect buffEffect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);

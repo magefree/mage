@@ -1,5 +1,6 @@
 package mage.cards.r;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
@@ -39,8 +40,9 @@ public final class RaffinesGuidance extends CardImpl {
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
 
-        // You may cast Raffine’s Guidance from your graveyard by paying {2}{W} instead of its mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RafinnesGuidancePlayEffect()));
+        // You may cast Raffine's Guidance from your graveyard by paying {2}{W} instead of its mana cost.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RafinnesGuidancePlayEffect())
+                .setIdentifier(MageIdentifier.RafinnesGuidanceAlternateCast));
     }
 
     private RaffinesGuidance(final RaffinesGuidance card) {
@@ -71,7 +73,10 @@ class RafinnesGuidancePlayEffect extends AsThoughEffectImpl {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
                     Costs<Cost> costs = new CostsImpl<>();
-                    player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{2}{W}"), costs);
+                    player.setCastSourceIdWithAlternateMana(
+                            sourceId, new ManaCostsImpl<>("{2}{W}"), costs,
+                            MageIdentifier.RafinnesGuidanceAlternateCast
+                    );
                     return true;
                 }
             }

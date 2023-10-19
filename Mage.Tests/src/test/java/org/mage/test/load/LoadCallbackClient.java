@@ -6,6 +6,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
+import org.jsoup.Jsoup;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,10 +32,12 @@ public class LoadCallbackClient implements CallbackClient {
     private GameView gameView;
 
     private final String logsPrefix;
+    private final Boolean showLogsAsHtml; // original game logs in HTML, but it can be converted to txt for more readable console
 
-    public LoadCallbackClient(boolean joinGameChat, String logsPrefix) {
+    public LoadCallbackClient(boolean joinGameChat, String logsPrefix, Boolean showLogsAsHtml) {
         this.joinGameChat = joinGameChat;
         this.logsPrefix = logsPrefix;
+        this.showLogsAsHtml = showLogsAsHtml;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class LoadCallbackClient implements CallbackClient {
         callback.decompressData();
         controlCount = 0;
 
-        // ignore bloaded logs
+        // ignore bloated logs
         switch (callback.getMethod()) {
             case CHATMESSAGE:
             case GAME_UPDATE_AND_INFORM:
@@ -63,7 +66,8 @@ public class LoadCallbackClient implements CallbackClient {
 
             case CHATMESSAGE: {
                 ChatMessage message = (ChatMessage) callback.getData();
-                log.info(getLogStartInfo() + "chat message: " + message.getMessage());
+                String mes = this.showLogsAsHtml ? message.getMessage() : Jsoup.parse(message.getMessage()).text();
+                log.info(getLogStartInfo() + "chat message" + (message.getTurnInfo() == null ? "" : " at " + message.getTurnInfo()) + ": " + mes);
                 break;
             }
 
@@ -81,7 +85,7 @@ public class LoadCallbackClient implements CallbackClient {
             case GAME_INFORM_PERSONAL: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 gameView = message.getGameView();
-                //log.info(getLogStartInfo() + "Inform: " + message.getMessage());
+                // ignore play priority log
                 break;
             }
 
@@ -99,17 +103,15 @@ public class LoadCallbackClient implements CallbackClient {
                     case "Select a starting player":
                         session.sendPlayerUUID(gameId, playerId);
                         return;
-                    //break;
                     case "Select a card to discard":
                         log.info(getLogStartInfo() + "hand size: " + gameView.getHand().size());
                         SimpleCardView card = gameView.getHand().values().iterator().next();
                         session.sendPlayerUUID(gameId, card.getId());
                         return;
-                    //break;
                     default:
                         log.error(getLogStartInfo() + "unknown GAME_TARGET message: " + message.toString());
+                        return;
                 }
-                break;
             }
 
             case GAME_ASK: {
@@ -170,8 +172,7 @@ public class LoadCallbackClient implements CallbackClient {
             default:
                 log.error(getLogStartInfo() + "unknown callback: " + callback.getMethod() + ", " + callback.getData().toString());
                 session.sendPlayerBoolean(gameId, false);
-                return;
-            //break;
+                break;
         }
     }
 
@@ -188,9 +189,6 @@ public class LoadCallbackClient implements CallbackClient {
 
     private String getLogStartInfo() {
         String mes = "";
-
-        //throw new IllegalArgumentException("test exception");
-
         PlayerView p = getPlayer();
         if (this.gameView != null && p != null && this.gameView.getStep() != null) {
             // never calls for client side client, cause it used as game's watcher, not a player

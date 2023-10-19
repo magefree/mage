@@ -54,7 +54,7 @@ public final class HaldirLorienLieutenant extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn, filter, true
         ).setText("until end of turn, other Elves you control gain vigilance"), new ManaCostsImpl<>("{5}{G}"));
         ability.addEffect(new BoostControlledEffect(
-                xValue, xValue, Duration.EndOfTurn, filter2, true, true
+                xValue, xValue, Duration.EndOfTurn, filter2, true
         ).setText("and get +1/+1 for each +1/+1 counter on {this}"));
         this.addAbility(ability);
     }

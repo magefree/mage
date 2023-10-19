@@ -12,6 +12,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -38,7 +39,8 @@ public final class RhysTheExiled extends CardImpl {
 
         // Whenever Rhys the Exiled attacks, you gain 1 life for each Elf you control.
         this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(xValue)
-                .setText("you gain 1 life for each Elf you control"), false));
+                .setText("you gain 1 life for each Elf you control"), false)
+                .addHint(new ValueHint("Elves you control", xValue)));
 
         // {B}, Sacrifice an Elf: Regenerate Rhys the Exiled.
         Ability ability = new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));

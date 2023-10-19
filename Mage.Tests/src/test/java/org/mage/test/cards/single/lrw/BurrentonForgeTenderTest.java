@@ -117,7 +117,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         activateAbility(2, PhaseStep.END_COMBAT, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.");
         playerA.addChoice("Mogg Fanatic");
 
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}: {this} deals 1 damage to ", "Soldier of the Pantheon");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}: It deals 1 damage to ", "Soldier of the Pantheon");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();

@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -54,7 +53,7 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
 
     public FatalMutationAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("Whenever enchanted creature is turned face up, ");
+        setTriggerPhrase("When enchanted creature is turned face up, ");
     }
 
     private FatalMutationAbility(final FatalMutationAbility ability) {
@@ -81,4 +80,3 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
 
     }
 }
-

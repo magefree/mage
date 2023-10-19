@@ -22,6 +22,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -41,6 +42,7 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
+import mage.game.command.emblems.EmblemOfCard;
 import mage.game.command.emblems.TheRingEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
@@ -116,7 +118,7 @@ public abstract class GameImpl implements Game {
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
     protected GameState state;
-    private transient Stack<Integer> savedStates = new Stack<>();
+    private transient Stack<Integer> savedStates = new Stack<>(); // bookmarks - 0-base refs to gameStates
     protected transient GameStates gameStates = new GameStates();
 
     // game states to allow player rollback
@@ -155,7 +157,7 @@ public abstract class GameImpl implements Game {
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize, int startingHandSize) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startingLife, int startingHandSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
@@ -932,14 +934,27 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void removeBookmark(int bookmark
-    ) {
+    public void removeBookmark(int bookmark) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {
                     savedStates.pop();
                 }
                 gameStates.remove(bookmark);
+            }
+        }
+    }
+
+    @Override
+    public void removeBookmark_v2(int bookmark) {
+        if (!simulation) {
+            if (bookmark != 0) {
+                while (savedStates.size() >= bookmark) {
+                    int outdatedIndex = savedStates.pop();
+                    while (gameStates.getSize() - 1 >= outdatedIndex) {
+                        gameStates.remove(gameStates.getSize() - 1);
+                    }
+                }
             }
         }
     }
@@ -1316,6 +1331,22 @@ public abstract class GameImpl implements Game {
             plane.setControllerId(startingPlayerId);
             addPlane(plane, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
+        }
+
+        if (!gameOptions.perPlayerEmblemCards.isEmpty()) {
+            for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+                for (DeckCardInfo info : gameOptions.perPlayerEmblemCards) {
+                    Card card = EmblemOfCard.cardFromDeckInfo(info);
+                    addEmblem(new EmblemOfCard(card), card, playerId);
+                }
+            }
+        }
+
+        if (!gameOptions.globalEmblemCards.isEmpty()) {
+            for (DeckCardInfo info : gameOptions.globalEmblemCards) {
+                Card card = EmblemOfCard.cardFromDeckInfo(info);
+                addEmblem(new EmblemOfCard(card), card, startingPlayerId);
+            }
         }
     }
 
@@ -1959,6 +1990,14 @@ public abstract class GameImpl implements Game {
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
                 TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
+            }
+            if (copyFromPermanent.isPrototyped()) {
+                Abilities<Ability> abilities = copyFromPermanent.getAbilities();
+                for (Ability ability : abilities){
+                    if (ability instanceof PrototypeAbility) {
+                        ((PrototypeAbility) ability).prototypePermanent(newBluePrint, this);
+                    }
+                }
             }
         }
         if (applier != null) {

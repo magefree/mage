@@ -146,6 +146,7 @@ public class CopyEffect extends ContinuousEffectImpl {
             //permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
             permanent.setFlipCard(targetPermanent.isFlipCard());
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
+            permanent.setPrototyped(targetPermanent.isPrototyped());
         }
 
         CardUtil.copySetAndCardNumber(permanent, copyFromObject);

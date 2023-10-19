@@ -1,5 +1,6 @@
 package mage.cards.f;
 
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -18,12 +19,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -56,7 +57,10 @@ public final class FalcoSparaPactweaver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast spells from the top of your library by removing a counter from a creature you control in addition to paying their other costs.
-        this.addAbility(new SimpleStaticAbility(new FalcoSparaPactweaverEffect()));
+        this.addAbility(
+                new SimpleStaticAbility(new FalcoSparaPactweaverEffect())
+                        .setIdentifier(MageIdentifier.FalcoSparaPactweaverAlternateCast)
+        );
     }
 
     private FalcoSparaPactweaver(final FalcoSparaPactweaver card) {
@@ -113,7 +117,10 @@ class FalcoSparaPactweaverEffect extends AsThoughEffectImpl {
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.add(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));
         newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
-        player.setCastSourceIdWithAlternateMana(cardToCheck.getId(), cardToCheck.getManaCost(), newCosts);
+        player.setCastSourceIdWithAlternateMana(
+                cardToCheck.getId(), cardToCheck.getManaCost(), newCosts,
+                MageIdentifier.FalcoSparaPactweaverAlternateCast
+        );
         return true;
     }
 }

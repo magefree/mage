@@ -25,7 +25,6 @@ public class AddCreatureTypeAdditionEffect extends ContinuousEffectImpl {
         super(effect);
         this.subType = effect.subType;
         this.giveBlackColor = effect.giveBlackColor;
-        updateText();
     }
 
     private void updateText() {

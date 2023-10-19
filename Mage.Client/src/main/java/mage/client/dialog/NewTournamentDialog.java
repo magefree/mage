@@ -1345,7 +1345,7 @@ public class NewTournamentDialog extends MageDialog {
         txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD + versionStr, ""));
         int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT + versionStr, "1500"));
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {
-            if (mtl.getTimeLimit() == timeLimit) {
+            if (mtl.getPrioritySecs() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);
                 break;
             }
@@ -1353,7 +1353,7 @@ public class NewTournamentDialog extends MageDialog {
         // TODO: Rethink default match time with buffer time.
         int bufferTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_BUFFER_TIME + versionStr, "0"));
         for (MatchBufferTime mtl : MatchBufferTime.values()) {
-            if (mtl.getBufferTime() == bufferTime) {
+            if (mtl.getBufferSecs() == bufferTime) {
                 this.cbBufferTime.setSelectedItem(mtl);
                 break;
             }
@@ -1424,8 +1424,8 @@ public class NewTournamentDialog extends MageDialog {
         String versionStr = prepareVersionStr(version, true);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME + versionStr, tOptions.getName());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD + versionStr, tOptions.getPassword());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT + versionStr, Integer.toString(tOptions.getMatchOptions().getPriorityTime()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_BUFFER_TIME + versionStr, Integer.toString(tOptions.getMatchOptions().getBufferTime()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT + versionStr, Integer.toString(tOptions.getMatchOptions().getMatchTimeLimit().getPrioritySecs()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_BUFFER_TIME + versionStr, Integer.toString(tOptions.getMatchOptions().getMatchBufferTime().getBufferSecs()));
         if (this.spnConstructTime.isVisible()) {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME + versionStr, Integer.toString(tOptions.getLimitedOptions().getConstructionTime()));
         }

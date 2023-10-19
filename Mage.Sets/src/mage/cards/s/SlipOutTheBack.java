@@ -20,7 +20,7 @@ public final class SlipOutTheBack extends CardImpl {
 
         // Put a +1/+1 counter on target creature. It phases out.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addEffect(new PhaseOutTargetEffect("it"));
+        this.getSpellAbility().addEffect(new PhaseOutTargetEffect().setText("It phases out"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

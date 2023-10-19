@@ -20,7 +20,12 @@ public class RepositoryEventSource implements EventSource<RepositoryEvent>, Seri
     }
 
     @Override
-    public void removeAllListener() {
+    public void removeListener(Listener<RepositoryEvent> listener) {
+        dispatcher.removeListener(listener);
+    }
+
+    @Override
+    public void removeAllListeners() {
         dispatcher.removeAllListener();
     }
 

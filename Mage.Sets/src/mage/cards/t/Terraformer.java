@@ -128,7 +128,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask"));
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_Terraformer"));
         if (choice == null) {
             return false;
         }

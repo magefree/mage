@@ -35,7 +35,7 @@ public final class SokenzanSpellblade extends CardImpl {
         // Bushido 1
         this.addAbility(new BushidoAbility(1));
         // {1}{R}: Sokenzan Spellblade gets +X/+0 until end of turn, where X is the number of cards in your hand.
-        Effect effect = new BoostSourceEffect(CardsInControllerHandCount.instance, StaticValue.get(0), Duration.EndOfTurn, true);
+        Effect effect = new BoostSourceEffect(CardsInControllerHandCount.instance, StaticValue.get(0), Duration.EndOfTurn);
         effect.setText("{this} gets +X/+0 until end of turn, where X is the number of cards in your hand");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 effect, new ManaCostsImpl<>("{1}{R}")

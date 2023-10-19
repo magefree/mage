@@ -18,7 +18,11 @@ public class UntapAllEffect extends OneShotEffect {
 
     public UntapAllEffect(FilterPermanent filter) {
         super(Outcome.Untap);
-        staticText = "untap all " + filter.getMessage();
+        if (filter.getMessage().startsWith("each")) {
+            staticText = "untap " + filter.getMessage();
+        } else {
+            staticText = "untap all " + filter.getMessage();
+        }
         this.filter = filter;
     }
 

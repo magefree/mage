@@ -37,7 +37,7 @@ public final class GravenDominator extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Haunt
         // When Graven Dominator enters the battlefield or the creature it haunts dies, each other creature has base power and toughness 1/1 until end of turn.
-        Ability ability = new HauntAbility(this, new SetBasePowerToughnessAllEffect(1,1, Duration.EndOfTurn, filter, true));
+        Ability ability = new HauntAbility(this, new SetBasePowerToughnessAllEffect(1,1, Duration.EndOfTurn, filter));
         this.addAbility(ability);
     }
 

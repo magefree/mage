@@ -6,5 +6,5 @@ import java.util.List;
  * @author TheElk801
  */
 public interface BoosterCollator {
-    public List<String> makeBooster();
+    List<String> makeBooster();
 }

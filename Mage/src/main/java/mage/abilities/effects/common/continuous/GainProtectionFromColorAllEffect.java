@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObject;
@@ -13,6 +12,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author LoneFox
@@ -65,6 +65,7 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
             return staticText;
         }
 
-        return "Choose a color. " + filter.getMessage() + " gain protection from the chosen color " + duration.toString();
+        return "Choose a color. " + CardUtil.getTextWithFirstCharUpperCase(filter.getMessage())
+                + " gain protection from the chosen color " + duration.toString();
     }
 }
