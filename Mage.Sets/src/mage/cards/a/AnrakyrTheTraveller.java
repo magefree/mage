@@ -19,6 +19,7 @@ import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -78,7 +79,7 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
         
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards) {
-            List<Card> castableComponents = getCastableComponents(card, filter, source, player, game, false);
+            List<Card> castableComponents = CardUtil.getCastableComponents(card, filter, source, player, game, null, false);
             if (!castableComponents.isEmpty()) {
                 cardMap.put(card.getId(), castableComponents);
             }
@@ -132,27 +133,6 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
             cards.remove(cardToCast);
         }
         return result;
-    }
-
-    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, boolean playLand) {
-        UUID playerId = player.getId();
-        List<Card> cards = new ArrayList<>();
-        if (cardToCast instanceof CardWithHalves) {
-            cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
-            cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
-        } else if (cardToCast instanceof AdventureCard) {
-            cards.add(cardToCast);
-            cards.add(((AdventureCard) cardToCast).getSpellCard());
-        } else {
-            cards.add(cardToCast);
-        }
-        cards.removeIf(Objects::isNull);
-        if (!playLand || !player.canPlayLand() || !game.isActivePlayer(playerId)) {
-            cards.removeIf(card -> card.isLand(game));
-        }
-        cards.removeIf(card -> !filter.match(card, playerId, source, game));
-    
-        return cards;
     }
 
     @Override
