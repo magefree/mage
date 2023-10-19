@@ -4,17 +4,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -101,14 +100,14 @@ class DynamicValueGenericManaCost extends CostImpl {
     }
 }
 
-class SkeletonScavengersEffect extends OneShotEffect {
+class SkeletonScavengersEffect extends RegenerateSourceEffect {
 
-    SkeletonScavengersEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Regenerate {this}. When it regenerates this way, put a +1/+1 counter on it";
+    public SkeletonScavengersEffect() {
+        super();
+        this.staticText = "regenerate {this}. When it regenerates this way, put a +1/+1 counter on it";
     }
 
-    private SkeletonScavengersEffect(final SkeletonScavengersEffect effect) {
+    protected SkeletonScavengersEffect(final SkeletonScavengersEffect effect) {
         super(effect);
     }
 
@@ -119,12 +118,19 @@ class SkeletonScavengersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent skeletonScavengers = game.getPermanent(source.getSourceId());
-        if (skeletonScavengers != null) {
-            if (new RegenerateSourceEffect().apply(game, source)) {
-                return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
-            }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && permanent.regenerate(source, game)) {
+            game.fireReflexiveTriggeredAbility(
+                    new ReflexiveTriggeredAbility(
+                            new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                            false
+                    ).setTriggerPhrase("When it regenerates this way, "),
+                    source
+            );
+            this.used = true;
+            return true;
         }
         return false;
     }
+
 }
