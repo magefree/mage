@@ -65,6 +65,7 @@ class TruthOrConsequencesEffect extends OneShotEffect {
         vote.doVotes(source, game);
         player.drawCards(vote.getVoteCount(true), source, game);
         TargetOpponent target = new TargetOpponent(true);
+        target.setRandom(true);
         target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
         return opponent == null || opponent.damage(3 * vote.getVoteCount(false), source, game) > 0;

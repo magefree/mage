@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class NukaColaVendingMachine extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.CLUE, "a Clue");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.FOOD, "a Food");
 
     public NukaColaVendingMachine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
