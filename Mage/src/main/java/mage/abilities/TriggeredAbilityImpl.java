@@ -315,12 +315,17 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
                 }
                 break;
-            case PHASED_OUT:
             case PHASED_IN:
                 if (isLeavesTheBattlefieldTrigger()) {
                     source = game.getLastKnownInformation(getSourceId(), event.getZone());
                 }
                 if (this.zone == Zone.ALL || game.getLastKnownInformation(getSourceId(), zone) != null) {
+                    return this.hasSourceObjectAbility(game, source, event);
+                }
+                break;
+            case PHASED_OUT:
+                source = game.getPermanent(getSourceId());
+                if (source != null && this.zone == Zone.PHASED_OUT) {
                     return this.hasSourceObjectAbility(game, source, event);
                 }
                 break;

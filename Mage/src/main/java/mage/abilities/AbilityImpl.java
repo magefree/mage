@@ -1050,7 +1050,9 @@ public abstract class AbilityImpl implements Ability {
         }
         if (object != null) {
             if (object instanceof Permanent) {
-                return object.hasAbility(this, game) && ((Permanent) object).isPhasedIn();
+                return object.hasAbility(this, game) && (
+                        ((Permanent) object).isPhasedIn() ^ this.getZone() == Zone.PHASED_OUT
+                );
             } else {
                 // cards and other objects
                 return object.hasAbility(this, game);
@@ -1481,7 +1483,7 @@ public abstract class AbilityImpl implements Ability {
             // to change the zone of any existing singleton abilities
             return this;
         }
-        AbilityImpl copy = ((AbilityImpl)this.copy());
+        AbilityImpl copy = ((AbilityImpl) this.copy());
         copy.zone = zone;
         copy.newId();
         return copy;

@@ -309,6 +309,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Teeka's Dragon", 320, Rarity.RARE, mage.cards.t.TeekasDragon.class));
         cards.add(new SetCardInfo("Teferi's Curse", 96, Rarity.COMMON, mage.cards.t.TeferisCurse.class));
         cards.add(new SetCardInfo("Teferi's Drake", 97, Rarity.COMMON, mage.cards.t.TeferisDrake.class));
+        cards.add(new SetCardInfo("Teferi's Imp", 98, Rarity.RARE, mage.cards.t.TeferisImp.class));
         cards.add(new SetCardInfo("Teferi's Isle", 330, Rarity.RARE, mage.cards.t.TeferisIsle.class));
         cards.add(new SetCardInfo("Telim'Tor", 197, Rarity.RARE, mage.cards.t.TelimTor.class));
         cards.add(new SetCardInfo("Telim'Tor's Darts", 321, Rarity.UNCOMMON, mage.cards.t.TelimTorsDarts.class));
