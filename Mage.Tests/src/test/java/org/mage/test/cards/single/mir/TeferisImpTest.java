@@ -10,6 +10,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class TeferisImpTest extends CardTestPlayerBase {
 
+    /**
+     * {@link mage.cards.t.TeferisImp} <br>
+     * Teferi's Imp {2}{U} <br>
+     * Creature — Imp <br>
+     * Flying <br>
+     * Phasing <br>
+     * Whenever Teferi’s Imp phases out, discard a card. <br>
+     * Whenever Teferi’s Imp phases in, draw a card. <br>
+     * 1/1
+     */
     private static final String imp = "Teferi's Imp";
 
     @Test
