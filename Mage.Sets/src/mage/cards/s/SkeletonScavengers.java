@@ -9,7 +9,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.RegenerateSourceWithReflectiveEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.ManaUtil;
 
@@ -39,7 +38,13 @@ public final class SkeletonScavengers extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // Pay {1} for each +1/+1 counter on Skeleton Scavengers: Regenerate Skeleton Scavengers. When it regenerates this way, put a +1/+1 counter on it.
-        this.addAbility(new SimpleActivatedAbility(new SkeletonScavengersEffect(), new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.P1P1))));
+        this.addAbility(new SimpleActivatedAbility(
+                new RegenerateSourceWithReflectiveEffect(new ReflexiveTriggeredAbility(
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                        false
+                ), false),
+                new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.P1P1))
+        ));
 
     }
 
@@ -98,39 +103,4 @@ class DynamicValueGenericManaCost extends CostImpl {
     private void setText() {
         text = ("Pay {1} for each +1/+1 counter on {this}");
     }
-}
-
-class SkeletonScavengersEffect extends RegenerateSourceEffect {
-
-    public SkeletonScavengersEffect() {
-        super();
-        this.staticText = "regenerate {this}. When it regenerates this way, put a +1/+1 counter on it";
-    }
-
-    protected SkeletonScavengersEffect(final SkeletonScavengersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SkeletonScavengersEffect copy() {
-        return new SkeletonScavengersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.regenerate(source, game)) {
-            game.fireReflexiveTriggeredAbility(
-                    new ReflexiveTriggeredAbility(
-                            new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                            false
-                    ).setTriggerPhrase("When it regenerates this way, "),
-                    source
-            );
-            this.used = true;
-            return true;
-        }
-        return false;
-    }
-
 }
