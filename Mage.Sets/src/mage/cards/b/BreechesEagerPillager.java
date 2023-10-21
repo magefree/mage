@@ -56,8 +56,10 @@ public final class BreechesEagerPillager extends CardImpl {
         ability.addMode(mode);
 
         // * Exile the top card of your library. You may play it this turn.
-        ability.addMode(new Mode(new ExileTopXMayPlayUntilEndOfTurnEffect(1))
-                .setModeTag("exile top card"));
+        ability.addMode(new Mode(
+                new ExileTopXMayPlayUntilEndOfTurnEffect(1)
+                        .setText("exile the top card of your library. You may play it this turn")
+        ).setModeTag("exile top card"));
 
         ability.addHint(ModesAlreadyUsedHint.instance);
         this.addAbility(ability);
