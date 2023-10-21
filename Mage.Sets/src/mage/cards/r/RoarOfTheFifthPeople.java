@@ -41,9 +41,11 @@ public final class RoarOfTheFifthPeople extends CardImpl {
     public RoarOfTheFifthPeople(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
 
-        this.nightCard = true;
-
+        this.color.setWhite(true);
+        this.color.setGreen(true);
+        this.color.setRed(true);
         this.subtype.add(SubType.SAGA);
+        this.nightCard = true;
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_IV);
