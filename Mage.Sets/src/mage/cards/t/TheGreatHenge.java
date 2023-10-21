@@ -1,25 +1,24 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -34,7 +33,9 @@ public final class TheGreatHenge extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheGreatHengeCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SpellCostReductionSourceEffect(GreatestPowerAmongControlledCreaturesValue.instance)
+        ).setRuleAtTheTop(true).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
 
         // {T}: Add {G}{G}. You gain 2 life.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost());
@@ -58,43 +59,5 @@ public final class TheGreatHenge extends CardImpl {
     @Override
     public TheGreatHenge copy() {
         return new TheGreatHenge(this);
-    }
-}
-
-class TheGreatHengeCostReductionEffect extends CostModificationEffectImpl {
-
-    TheGreatHengeCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {X} less to cast, where X is the greatest power among creatures you control";
-    }
-
-    private TheGreatHengeCostReductionEffect(final TheGreatHengeCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield()
-                .getAllActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, abilityToModify.getControllerId(), game
-                ).stream()
-                .map(Permanent::getPower)
-                .mapToInt(MageInt::getValue)
-                .max()
-                .orElse(0);
-        CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof SpellAbility
-                && abilityToModify.getSourceId().equals(source.getSourceId())
-                && game.getCard(abilityToModify.getSourceId()) != null;
-    }
-
-    @Override
-    public TheGreatHengeCostReductionEffect copy() {
-        return new TheGreatHengeCostReductionEffect(this);
     }
 }
