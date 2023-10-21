@@ -10,7 +10,6 @@ public enum Zone {
     GRAVEYARD(true),
     LIBRARY(false),
     BATTLEFIELD(true),
-    PHASED_OUT(true), // This is a fake zone for the phased out triggers to work.
     STACK(true),
     EXILED(true),
     ALL(false),

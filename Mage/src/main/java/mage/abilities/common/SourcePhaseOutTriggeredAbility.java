@@ -12,8 +12,9 @@ import mage.game.events.GameEvent;
 public class SourcePhaseOutTriggeredAbility extends TriggeredAbilityImpl {
 
     public SourcePhaseOutTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.PHASED_OUT, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("Whenever {this} phases out, ");
+        setWorksPhasedOut(true);
     }
 
     protected SourcePhaseOutTriggeredAbility(final SourcePhaseOutTriggeredAbility ability) {

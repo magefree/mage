@@ -70,6 +70,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean ruleAdditionalCostsVisible = true;
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
+    protected boolean worksPhasedOut = false;
     protected int sourceObjectZoneChangeCounter;
     protected List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
     protected List<Ability> subAbilities = null;
@@ -121,6 +122,7 @@ public abstract class AbilityImpl implements Ability {
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
         this.worksFaceDown = ability.worksFaceDown;
+        this.worksPhasedOut = ability.worksPhasedOut;
         this.abilityWord = ability.abilityWord;
         this.flavorWord = ability.flavorWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
@@ -1051,7 +1053,7 @@ public abstract class AbilityImpl implements Ability {
         if (object != null) {
             if (object instanceof Permanent) {
                 return object.hasAbility(this, game) && (
-                        ((Permanent) object).isPhasedIn() ^ this.getZone() == Zone.PHASED_OUT
+                        ((Permanent) object).isPhasedIn() || this.getWorksPhasedOut()
                 );
             } else {
                 // cards and other objects
@@ -1270,6 +1272,16 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setWorksFaceDown(boolean worksFaceDown) {
         this.worksFaceDown = worksFaceDown;
+    }
+
+    @Override
+    public boolean getWorksPhasedOut() {
+        return worksPhasedOut;
+    }
+
+    @Override
+    public void setWorksPhasedOut(boolean worksPhasedOut) {
+        this.worksPhasedOut = worksPhasedOut;
     }
 
     @Override
