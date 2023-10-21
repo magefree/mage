@@ -65,4 +65,40 @@ public class TheSkullsporeNexusTest extends CardTestPlayerBase {
         assertTappedCount("Swamp", true, 2);
         assertTapped(nexus, true);
     }
+
+    // This test is there as some of the cost reduction code has issue with
+    // counting/checking for the right player, when you cast a card you don't
+    // own.
+    @Test
+    public void test_costreduction_opp_card() {
+        setStrictChooseMode(true);
+
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerB, nexus);
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant"); // B has a 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // A has a 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 5 + 2);
+        addCard(Zone.HAND, playerA, "Underground Sea");
+
+        // Siphon Insight {U}{B} -- Instant
+        // Look at the top two cards of target opponent's library.
+        // Exile one of them face down and put the other on the bottom of that library.
+        // You may look at and play the exiled card for as long as it remains exiled,
+        // and you may spend mana as though it were mana of any color to cast that spell.
+        addCard(Zone.HAND, playerA, "Siphon Insight");
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Siphon Insight", playerB);
+        setChoice(playerA, nexus); // choose nexus to exile
+
+        // Nexus should cost 4GG, not 3GG
+        checkPlayableAbility("can't cast with 5 mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + nexus, false);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Underground Sea");
+        checkPlayableAbility("can cast with 6 mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + nexus, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nexus);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertTappedCount("Underground Sea", true, 8);
+    }
 }
