@@ -8,34 +8,34 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Susucr
  */
-public class RegenerateSourceWithReflectiveEffect extends RegenerateSourceEffect {
+public class RegenerateSourceWithReflexiveEffect extends RegenerateSourceEffect {
 
     private final ReflexiveTriggeredAbility reflexive;
-    private final boolean setReflectiveTarget;
+    private final boolean setReflexiveTarget;
 
-    public RegenerateSourceWithReflectiveEffect(ReflexiveTriggeredAbility reflexive, boolean setReflectiveTarget) {
+    public RegenerateSourceWithReflexiveEffect(ReflexiveTriggeredAbility reflexive, boolean setReflexiveTarget) {
         super();
         this.reflexive = reflexive;
         this.reflexive.setTriggerPhrase("When it regenerates this way, ");
-        this.setReflectiveTarget = setReflectiveTarget;
+        this.setReflexiveTarget = setReflexiveTarget;
         this.staticText = "regenerate {this}. " + reflexive.getRule();
     }
 
-    protected RegenerateSourceWithReflectiveEffect(final RegenerateSourceWithReflectiveEffect effect) {
+    protected RegenerateSourceWithReflexiveEffect(final RegenerateSourceWithReflexiveEffect effect) {
         super(effect);
         this.reflexive = effect.reflexive.copy();
-        this.setReflectiveTarget = effect.setReflectiveTarget;
+        this.setReflexiveTarget = effect.setReflexiveTarget;
     }
 
     @Override
-    public RegenerateSourceWithReflectiveEffect copy() {
-        return new RegenerateSourceWithReflectiveEffect(this);
+    public RegenerateSourceWithReflexiveEffect copy() {
+        return new RegenerateSourceWithReflexiveEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         if (super.apply(game, source)) {
-            if (this.setReflectiveTarget) {
+            if (this.setReflexiveTarget) {
                 reflexive.getEffects().setTargetPointer(
                         new FixedTarget(targetPointer.getFirst(game, source), game)
                 );

@@ -9,7 +9,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.RegenerateSourceWithReflectiveEffect;
+import mage.abilities.effects.common.RegenerateSourceWithReflexiveEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class SkeletonScavengers extends CardImpl {
 
         // Pay {1} for each +1/+1 counter on Skeleton Scavengers: Regenerate Skeleton Scavengers. When it regenerates this way, put a +1/+1 counter on it.
         this.addAbility(new SimpleActivatedAbility(
-                new RegenerateSourceWithReflectiveEffect(new ReflexiveTriggeredAbility(
+                new RegenerateSourceWithReflexiveEffect(new ReflexiveTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                         false
                 ), false),

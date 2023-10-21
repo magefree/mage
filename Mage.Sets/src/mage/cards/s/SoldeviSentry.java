@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.RegenerateSourceWithReflectiveEffect;
+import mage.abilities.effects.common.RegenerateSourceWithReflexiveEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,7 +28,7 @@ public final class SoldeviSentry extends CardImpl {
 
         // {1}: Choose target opponent. Regenerate Soldevi Sentry. When it regenerates this way, that player may draw a card.
         Ability ability = new SimpleActivatedAbility(
-                new RegenerateSourceWithReflectiveEffect(new ReflexiveTriggeredAbility(
+                new RegenerateSourceWithReflexiveEffect(new ReflexiveTriggeredAbility(
                         new DrawCardTargetEffect(1, true),
                         false
                 ), true)

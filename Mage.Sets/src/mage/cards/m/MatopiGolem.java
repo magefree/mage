@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.RegenerateSourceWithReflectiveEffect;
+import mage.abilities.effects.common.RegenerateSourceWithReflexiveEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class MatopiGolem extends CardImpl {
 
         // {1}: Regenerate Matopi Golem. When it regenerates this way, put a -1/-1 counter on it.
         this.addAbility(new SimpleActivatedAbility(
-                new RegenerateSourceWithReflectiveEffect(new ReflexiveTriggeredAbility(
+                new RegenerateSourceWithReflexiveEffect(new ReflexiveTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.M1M1.createInstance()),
                         false
                 ), false),
