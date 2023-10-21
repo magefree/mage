@@ -1,23 +1,25 @@
 package mage.cards.t;
 
+import mage.MageInt;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
@@ -25,6 +27,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FungusDinosaurToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,9 +45,7 @@ public final class TheSkullsporeNexus extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(GreatestPowerAmongControlledCreaturesValue.instance)
-        ).setRuleAtTheTop(true).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheSkullsporeNexusReductionEffect()));
 
         // Whenever one or more nontoken creatures you control die, create a green Fungus Dinosaur creature token with base power and toughness each equal to the total power of those creatures.
         this.addAbility(new TheSkullsporeNexusTrigger());
@@ -66,6 +67,44 @@ public final class TheSkullsporeNexus extends CardImpl {
     @Override
     public TheSkullsporeNexus copy() {
         return new TheSkullsporeNexus(this);
+    }
+}
+
+class TheSkullsporeNexusReductionEffect extends CostModificationEffectImpl {
+
+    TheSkullsporeNexusReductionEffect() {
+        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        staticText = "This spell costs {X} less to cast, where X is the greatest power among creatures you control";
+    }
+
+    private TheSkullsporeNexusReductionEffect(final TheSkullsporeNexusReductionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        int reductionAmount = game.getBattlefield()
+                .getAllActivePermanents(
+                        StaticFilters.FILTER_PERMANENT_CREATURE, abilityToModify.getControllerId(), game
+                ).stream()
+                .map(Permanent::getPower)
+                .mapToInt(MageInt::getValue)
+                .max()
+                .orElse(0);
+        CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
+        return true;
+    }
+
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        return abilityToModify instanceof SpellAbility
+                && abilityToModify.getSourceId().equals(source.getSourceId())
+                && game.getCard(abilityToModify.getSourceId()) != null;
+    }
+
+    @Override
+    public TheSkullsporeNexusReductionEffect copy() {
+        return new TheSkullsporeNexusReductionEffect(this);
     }
 }
 
