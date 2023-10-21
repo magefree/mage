@@ -764,7 +764,33 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType, int skill, DeckCardLists deckList, String password) {
+    public boolean hostTournamentTable(UUID roomId, UUID tableId, String playerName, boolean joinAsPlayer, PlayerType playerType,
+                                       int skill, DeckCardLists deckList, String password) {
+        try {
+            if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                if (deckList != null) {
+                    deckList.setCardLayout(null);
+                    deckList.setSideboardLayout(null);
+                }
+                return server.hostTournamentTable(
+                        sessionId, roomId, tableId, playerName, joinAsPlayer,
+                        playerType, skill, deckList, password
+                );
+            }
+        } catch (GameException ex) {
+            handleGameException(ex);
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType,
+                                       int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
                 // Workaround to fix Can't join table problem
@@ -997,7 +1023,7 @@ public class SessionImpl implements Session {
         }
         return null;
     }
-    
+
     @Override
     public boolean setBoosterLoaded(UUID draftId) {
         try {

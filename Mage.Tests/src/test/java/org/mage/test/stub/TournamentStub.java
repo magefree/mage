@@ -1,10 +1,6 @@
 
 package org.mage.test.stub;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.game.draft.Draft;
@@ -16,8 +12,12 @@ import mage.game.tournament.*;
 import mage.players.Player;
 import mage.players.PlayerType;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public class TournamentStub implements Tournament {
@@ -27,6 +27,11 @@ public class TournamentStub implements Tournament {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public void addHost(UUID hostId) {
+
     }
 
     @Override

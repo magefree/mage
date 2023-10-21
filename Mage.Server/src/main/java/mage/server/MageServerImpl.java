@@ -310,6 +310,38 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
+    public boolean hostTournamentTable(
+            final String sessionId, final UUID roomId, final UUID tableId, final String name,
+            final boolean joinAsPlayer, final PlayerType playerType, final int skill,
+            final DeckCardLists deckList, final String password
+    ) throws MageException {
+        return executeWithResult("hostTournamentTable", sessionId, new ActionWithBooleanResult() {
+            @Override
+            public Boolean execute() throws MageException {
+                Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
+                if (!session.isPresent()) {
+                    return false;
+                }
+                UUID userId = session.get().getUserId();
+                if (logger.isTraceEnabled()) {
+                    Optional<User> user = managerFactory.userManager().getUser(userId);
+                    user.ifPresent(user1 -> logger.trace("join tourn. tableId: " + tableId + ' ' + name));
+                }
+                if (userId == null) {
+                    logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
+                    return false;
+                }
+                Optional<GamesRoom> room = managerFactory.gamesRoomManager().getRoom(roomId);
+                if (room.isPresent()) {
+                    return room.get().hostTournamentTable(userId, tableId, name, joinAsPlayer, playerType, skill, deckList, password);
+                }
+                return null;
+
+            }
+        });
+    }
+
+    @Override
     public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException {
         return executeWithResult("joinTournamentTable", sessionId, new ActionWithBooleanResult() {
             @Override
@@ -737,7 +769,7 @@ public class MageServerImpl implements MageServer {
             });
         });
     }
-    
+
     @Override
     public void setBoosterLoaded(final UUID draftId, final String sessionId) throws MageException {
         execute("setBoosterLoaded", sessionId, () -> {

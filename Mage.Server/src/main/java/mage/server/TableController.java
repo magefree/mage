@@ -113,6 +113,40 @@ public class TableController {
         );
     }
 
+    public synchronized boolean hostTournament(
+            UUID userId, String name, boolean joinAsPlayer, PlayerType playerType,
+            int skill, DeckCardLists deckList, String password
+    ) throws GameException {
+        if (table.getState() != TableState.WAITING) {
+            return false;
+        }
+
+        Optional<User> _user = managerFactory.userManager().getUser(userId);
+        if (!_user.isPresent()) {
+            logger.fatal("couldn't get user " + name + " for host tournament userId = " + userId);
+            return false;
+        }
+
+        User user = _user.get();
+        // check password
+        if (!table.getTournament().getOptions().getPassword().isEmpty() && playerType == PlayerType.HUMAN) {
+            if (!table.getTournament().getOptions().getPassword().equals(password)) {
+                user.showUserMessage("Host Table", "Wrong password.");
+                return false;
+            }
+        }
+
+        tournament.addHost(user.getId());
+        user.addHostTable(table);
+
+        if (joinAsPlayer) {
+            return joinTournament(userId, name, playerType, skill, deckList, password);
+        } else {
+            user.ccJoinedTable(table.getRoomId(), table.getId(), true);
+            return true;
+        }
+    }
+
     public synchronized boolean joinTournament(UUID userId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (table.getState() != TableState.WAITING) {
             return false;

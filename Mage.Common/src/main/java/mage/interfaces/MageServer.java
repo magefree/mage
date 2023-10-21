@@ -20,7 +20,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public interface MageServer {
@@ -64,6 +63,8 @@ public interface MageServer {
     TableView createTournamentTable(String sessionId, UUID roomId, TournamentOptions tournamentOptions) throws MageException;
 
     boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
+
+    boolean hostTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, boolean joinAsPlayer, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
 
     boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
 
@@ -183,7 +184,7 @@ public interface MageServer {
     void lockUser(String sessionId, String userName, long durationMinutes) throws MageException;
 
     void setActivation(String sessionId, String userName, boolean active) throws MageException;
-    
+
     void toggleActivation(String sessionId, String userName) throws MageException;
 
     void removeTable(String sessionId, UUID tableId) throws MageException;

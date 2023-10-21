@@ -165,7 +165,21 @@ public class TableManagerImpl implements TableManager {
     }
 
     @Override
-    public boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public boolean hostTournament(
+            UUID userId, UUID tableId, String name, boolean joinAsPlayer, PlayerType playerType,
+            int skill, DeckCardLists deckList, String password
+    ) throws GameException {
+        if (controllers.containsKey(tableId)) {
+            return controllers.get(tableId).hostTournament(userId, name, joinAsPlayer, playerType, skill, deckList, password);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean joinTournament(
+            UUID userId, UUID tableId, String name, PlayerType playerType,
+            int skill, DeckCardLists deckList, String password
+    ) throws GameException {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTournament(userId, name, playerType, skill, deckList, password);
         }

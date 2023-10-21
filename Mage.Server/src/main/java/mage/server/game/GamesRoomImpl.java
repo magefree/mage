@@ -136,6 +136,15 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
+    public boolean hostTournamentTable(UUID userId, UUID tableId, String name, boolean joinAsPlayer, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+        if (tables.containsKey(tableId)) {
+            return managerFactory.tableManager().hostTournament(userId, tableId, name, joinAsPlayer, playerType, skill, deckList, password);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean joinTournamentTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (tables.containsKey(tableId)) {
             return managerFactory.tableManager().joinTournament(userId, tableId, name, playerType, skill, deckList, password);

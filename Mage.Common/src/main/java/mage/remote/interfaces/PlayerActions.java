@@ -39,13 +39,18 @@ public interface PlayerActions {
 
     // boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId);
 
-    boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType, int skill, DeckCardLists deckList, String password);
+    boolean hostTournamentTable(UUID roomId, UUID tableId, String hostName, boolean joinAsPlayer, PlayerType playerType,
+                                int skill, DeckCardLists deckList, String password);
+
+    boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType,
+                                int skill, DeckCardLists deckList, String password);
 
     boolean watchTable(UUID roomId, UUID tableId);
 
     boolean watchTournamentTable(UUID tableId);
 
-    boolean joinTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType, int skill, DeckCardLists deckList, String password);
+    boolean joinTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType,
+                      int skill, DeckCardLists deckList, String password);
 
     Optional<TableView> getTable(UUID roomId, UUID tableId);
 
