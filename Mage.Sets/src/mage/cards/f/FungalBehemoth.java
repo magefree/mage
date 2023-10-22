@@ -1,10 +1,9 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.CounterRemovedFromSourceWhileExiledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -20,12 +19,12 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FungalBehemoth extends CardImpl {
@@ -44,7 +43,13 @@ public final class FungalBehemoth extends CardImpl {
         this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{G}{G}"), this, true));
 
         // Whenever a time counter is removed from Fungal Behemoth while it's exiled, you may put a +1/+1 counter on target creature.
-        this.addAbility(new FungalBehemothTriggeredAbility());
+        Ability ability = new CounterRemovedFromSourceWhileExiledTriggeredAbility(
+                CounterType.TIME,
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                true
+        );
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     private FungalBehemoth(final FungalBehemoth card) {
@@ -54,34 +59,6 @@ public final class FungalBehemoth extends CardImpl {
     @Override
     public FungalBehemoth copy() {
         return new FungalBehemoth(this);
-    }
-}
-
-class FungalBehemothTriggeredAbility extends TriggeredAbilityImpl {
-
-    public FungalBehemothTriggeredAbility() {
-        super(Zone.EXILED, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), true);
-        addTarget(new TargetCreaturePermanent());
-        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
-    }
-
-    private FungalBehemothTriggeredAbility(final FungalBehemothTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FungalBehemothTriggeredAbility copy() {
-        return new FungalBehemothTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
 }
 
