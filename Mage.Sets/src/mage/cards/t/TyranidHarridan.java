@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanentThisOrAnother;
 import mage.game.permanent.token.TyranidGargoyleToken;
 
 import java.util.UUID;
@@ -23,8 +23,8 @@ import java.util.UUID;
  */
 public final class TyranidHarridan extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(
-            SubType.TYRANID, "{this} or another Tyranid you control"
+    private static final FilterPermanent filter = new FilterPermanentThisOrAnother(
+            new FilterPermanent(SubType.TYRANID, "Tyranid you control"), true
     );
 
     public TyranidHarridan(UUID ownerId, CardSetInfo setInfo) {
