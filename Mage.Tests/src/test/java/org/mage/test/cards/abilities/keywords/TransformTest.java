@@ -508,7 +508,7 @@ public class TransformTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.UPKEEP, playerA, "Dress Down");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
-
+        checkPermanentCount("Huntmaster flipped", 1, PhaseStep.BEGIN_COMBAT, playerA, "Ravager of the Fells", 1);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Moonmist");
 
         setStrictChooseMode(true);
