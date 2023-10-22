@@ -1,6 +1,5 @@
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,8 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class QuarryColossus extends CardImpl {
@@ -72,7 +72,7 @@ class QuarryColossusReturnLibraryEffect extends OneShotEffect {
             if (owner != null) {
                 int plains = game.getBattlefield().countAll(new FilterPermanent(
                         SubType.PLAINS, "Plains you control"), source.getControllerId(), game);
-                controller.putCardOnTopXOfLibrary(permanent, game, source, plains, true);
+                controller.putCardOnTopXOfLibrary(permanent, game, source, plains + 1, true);
                 return true;
             }
         }
