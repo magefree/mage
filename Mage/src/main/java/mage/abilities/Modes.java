@@ -102,7 +102,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public Stream<Mode> streamAlreadySelected(Ability source, Game game) {
-        Set<UUID> selected = getAlreadySelectedModes(source, game);
+        Set<UUID> selected = getAlreadySelectedModes(source, game, true);
         return stream().filter(m -> selected.contains(m.getId()));
     }
 
@@ -298,7 +298,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             if (this.size() == this.getMinModes() && !isEachModeMoreThanOnce()) {
                 Set<UUID> onceSelectedModes = null;
                 if (isEachModeOnlyOnce()) {
-                    onceSelectedModes = getAlreadySelectedModes(source, game);
+                    onceSelectedModes = getAlreadySelectedModes(source, game, true);
                 }
                 for (Mode mode : this.values()) {
                     if ((!isEachModeOnlyOnce() || onceSelectedModes == null || !onceSelectedModes.contains(mode.getId()))
@@ -383,7 +383,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     private void clearAlreadySelectedModes(Ability source, Game game) {
-        for (UUID modeId : getAlreadySelectedModes(source, game)) {
+        for (UUID modeId : getAlreadySelectedModes(source, game, false)) {
             String key = getKey(source, game, modeId);
             game.getState().setValue(key, false);
         }
@@ -421,8 +421,12 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     // The already once selected modes for a modal card are stored as a state value
     // That's important for modal abilities with modes that can only selected once while the object stays in its zone
     @SuppressWarnings("unchecked")
-    private Set<UUID> getAlreadySelectedModes(Ability source, Game game) {
+    private Set<UUID> getAlreadySelectedModes(Ability source, Game game, boolean ignoreOldData) {
         Set<UUID> onceSelectedModes = new HashSet<>();
+        if (ignoreOldData && this.isResetEachTurn() && getTurnNum(game, source) != game.getTurnNum()) {
+            // Selected modes is not for current turn, so we ignore any value that may be there.
+            return onceSelectedModes;
+        }
         for (UUID modeId : this.keySet()) {
             Object exist = game.getState().getValue(getKey(source, game, modeId));
             if (exist == Boolean.TRUE) {
@@ -464,7 +468,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (isEachModeMoreThanOnce()) {
             nonAvailableModes = new HashSet<>();
         } else {
-            nonAvailableModes = getAlreadySelectedModes(source, game);
+            nonAvailableModes = getAlreadySelectedModes(source, game, true);
         }
         for (Mode mode : this.values()) {
             if (isEachModeOnlyOnce() && nonAvailableModes.contains(mode.getId())) {
