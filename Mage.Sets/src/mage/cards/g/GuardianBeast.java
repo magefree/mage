@@ -84,7 +84,9 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return true;
+        return event.getType() == GameEvent.EventType.GAIN_CONTROL
+                || event.getType() == GameEvent.EventType.ATTACH
+                || event.getType() == GameEvent.EventType.TARGET;
     }
 
     @Override

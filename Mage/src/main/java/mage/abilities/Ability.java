@@ -420,6 +420,22 @@ public interface Ability extends Controllable, Serializable {
     void setWorksFaceDown(boolean worksFaceDown);
 
     /**
+     * Returns true if this ability has to work also with phased out object.
+     *
+     * @return
+     */
+    boolean getWorksPhasedOut();
+
+    /**
+     * Sets the value for the worksPhasedOut flag
+     * <p>
+     * true = the ability works also if the object is phased out
+     *
+     * @param worksPhasedOut
+     */
+    void setWorksPhasedOut(boolean worksPhasedOut);
+
+    /**
      * Returns true if this ability's rule is visible on the card tooltip
      *
      * @return

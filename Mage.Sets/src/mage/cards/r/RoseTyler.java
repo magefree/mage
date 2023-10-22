@@ -66,6 +66,7 @@ enum RoseTylerValue implements DynamicValue {
 
     static {
         filter.getPermanentFilter().add(AnotherPredicate.instance);
+        filter.getPermanentFilter().add(CounterType.TIME.getPredicate());
         filter.getPermanentFilter().add(TargetController.YOU.getControllerPredicate());
     }
 

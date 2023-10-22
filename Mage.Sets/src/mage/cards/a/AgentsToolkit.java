@@ -84,8 +84,12 @@ class AgentToolkitMoveCounterEffect extends OneShotEffect {
         }
         Permanent enteringCreature = (Permanent) enteringObject;
 
-        Choice moveCounterChoice = new ChoiceImpl(false);
         Set<String> possibleCounterNames = new LinkedHashSet<>(agentsToolkitPermanent.getCounters(game).keySet());
+        if (possibleCounterNames.isEmpty()) {
+            return false;
+        }
+
+        Choice moveCounterChoice = new ChoiceImpl(false);
         moveCounterChoice.setMessage("Choose counter to move");
         moveCounterChoice.setChoices(possibleCounterNames);
 

@@ -70,6 +70,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean ruleAdditionalCostsVisible = true;
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
+    protected boolean worksPhasedOut = false;
     protected int sourceObjectZoneChangeCounter;
     protected List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
     protected List<Ability> subAbilities = null;
@@ -121,6 +122,7 @@ public abstract class AbilityImpl implements Ability {
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
         this.worksFaceDown = ability.worksFaceDown;
+        this.worksPhasedOut = ability.worksPhasedOut;
         this.abilityWord = ability.abilityWord;
         this.flavorWord = ability.flavorWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
@@ -1050,7 +1052,9 @@ public abstract class AbilityImpl implements Ability {
         }
         if (object != null) {
             if (object instanceof Permanent) {
-                return object.hasAbility(this, game) && ((Permanent) object).isPhasedIn();
+                return object.hasAbility(this, game) && (
+                        ((Permanent) object).isPhasedIn() || this.getWorksPhasedOut()
+                );
             } else {
                 // cards and other objects
                 return object.hasAbility(this, game);
@@ -1271,6 +1275,16 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public boolean getWorksPhasedOut() {
+        return worksPhasedOut;
+    }
+
+    @Override
+    public void setWorksPhasedOut(boolean worksPhasedOut) {
+        this.worksPhasedOut = worksPhasedOut;
+    }
+
+    @Override
     public MageObject getSourceObject(Game game) {
         return game.getObject(getSourceId());
     }
@@ -1481,7 +1495,7 @@ public abstract class AbilityImpl implements Ability {
             // to change the zone of any existing singleton abilities
             return this;
         }
-        AbilityImpl copy = ((AbilityImpl)this.copy());
+        AbilityImpl copy = ((AbilityImpl) this.copy());
         copy.zone = zone;
         copy.newId();
         return copy;

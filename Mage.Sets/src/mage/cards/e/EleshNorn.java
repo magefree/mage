@@ -2,8 +2,8 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.SourceDealsDamageToYouTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -15,14 +15,13 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -51,7 +50,7 @@ public final class EleshNorn extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever a source an opponent controls deals damage to you or a permanent you control, that source's controller loses 2 life unless they pay {1}.
-        this.addAbility(new EleshNornTriggeredAbility());
+        this.addAbility(new SourceDealsDamageToYouTriggeredAbility(new EleshNornEffect(), StaticFilters.FILTER_PERMANENT, false));
 
         // {2}{W}, Sacrifice three other creatures: Exile Elesh Norn, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
         this.addAbility(new TransformAbility());
@@ -73,57 +72,11 @@ public final class EleshNorn extends CardImpl {
     }
 }
 
-class EleshNornTriggeredAbility extends TriggeredAbilityImpl {
-
-    EleshNornTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new EleshNornEffect());
-    }
-
-    private EleshNornTriggeredAbility(final EleshNornTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EleshNornTriggeredAbility copy() {
-        return new EleshNornTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGED_PLAYER:
-            case DAMAGE_PERMANENT:
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!game.getOpponents(getControllerId()).contains(game.getControllerId(event.getSourceId()))) {
-            return false;
-        }
-        getEffects().setTargetPointer(new FixedTarget(game.getControllerId(event.getSourceId())));
-        switch (event.getType()) {
-            case DAMAGED_PLAYER:
-                return isControlledBy(event.getTargetId());
-            case DAMAGE_PERMANENT:
-                return isControlledBy(game.getControllerId(event.getTargetId()));
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a source an opponent controls deals damage to you or a permanent you control, " +
-                "that source's controller loses 2 life unless they pay {1}.";
-    }
-}
-
 class EleshNornEffect extends OneShotEffect {
 
     EleshNornEffect() {
         super(Outcome.Benefit);
+        staticText = "that source's controller loses 2 life unless they pay {1}";
     }
 
     private EleshNornEffect(final EleshNornEffect effect) {
@@ -138,9 +91,14 @@ class EleshNornEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Cost cost = new GenericManaCost(1);
-        if (player != null && cost.canPay(source, source, player.getId(), game) && player.chooseUse(Outcome.PreventDamage, "Pay {1}?", source, game) && cost.pay(source, game, source, player.getId(), false)) {
+        if (player == null) {
             return false;
+        }
+        Cost cost = new GenericManaCost(1);
+        if (cost.canPay(source, source, player.getId(), game)
+                && player.chooseUse(Outcome.PreventDamage, "Pay {1}?", source, game)
+                && cost.pay(source, game, source, player.getId(), false)) {
+            return true;
         }
         return player.loseLife(2, game, source, false) > 0;
     }

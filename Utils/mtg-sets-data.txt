@@ -100,6 +100,7 @@ Duel Decks: Elves vs. Inventors|DDU|
 Pro Tour Promos|PPRO|
 Exodus|EXO|
 Zendikar Expeditions|EXP|
+Fallout|PIP|
 Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
