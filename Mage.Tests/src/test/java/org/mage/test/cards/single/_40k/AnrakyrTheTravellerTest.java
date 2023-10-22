@@ -11,7 +11,7 @@ public class AnrakyrTheTravellerTest extends CardTestPlayerBase {
     private static final String ANRAKYR = "Anrakyr the Traveller";
 
     @Test
-    public void testCastArtifactCardForLife_ShouldCastForLife() {
+    public void testCastArtifactCardForLifeFromHand_ShouldCastForLife() {
         // prepare
         final String cryptek = "Cryptek";
         addCard(Zone.BATTLEFIELD, playerA, ANRAKYR);
@@ -53,6 +53,29 @@ public class AnrakyrTheTravellerTest extends CardTestPlayerBase {
         // assert
         assertLife(playerA, 3);
         assertPermanentCount(playerA, cryptek, 0);
+    }
+
+    @Test
+    public void testCastArtifactCardForLifeFromGraveyard_ShouldCastForLife() {
+        // prepare
+        final String cryptek = "Cryptek";
+        addCard(Zone.BATTLEFIELD, playerA, ANRAKYR);
+        addCard(Zone.GRAVEYARD, playerA, cryptek);
+
+        // execute
+        attack(1, playerA, ANRAKYR);
+        setChoice(playerA, true);
+        setChoice(playerA, cryptek);
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // assert
+        assertLife(playerA, 20 - 4);
+        assertPermanentCount(playerA, cryptek, 1);
+        assertGraveyardCount(playerA, cryptek, 0);
     }
 
     @Test
