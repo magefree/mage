@@ -51,7 +51,7 @@ public final class GandalfTheGrey extends CardImpl {
         );
         ability.setModeTag("tap or untap");
         ability.addTarget(new TargetPermanent());
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.getModes().setLimitUsageByOnce(false);
 
         // * Gandalf the Grey deals 3 damage to each opponent.
         ability.addMode(

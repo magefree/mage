@@ -2409,7 +2409,7 @@ public class HumanPlayer extends PlayerImpl {
                     Mode selectedMode = modes.get(selectedModeId);
                     if (mode.getId().equals(selectedMode.getId())) {
                         // mode selected
-                        if (modes.isEachModeMoreThanOnce()) {
+                        if (modes.isMayChooseSameModeMoreThanOnce()) {
                             // can select again
                         } else {
                             // hide mode from dialog
@@ -2423,7 +2423,7 @@ public class HumanPlayer extends PlayerImpl {
                     if (obj != null) {
                         modeText = modeText.replace("{this}", obj.getName());
                     }
-                    if (modes.isEachModeMoreThanOnce()) {
+                    if (modes.isMayChooseSameModeMoreThanOnce()) {
                         if (timesSelected > 0) {
                             modeText = "(selected " + timesSelected + "x) " + modeText;
                         }

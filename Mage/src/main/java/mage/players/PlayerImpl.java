@@ -4300,9 +4300,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     private void addModeOptions(List<Ability> options, Ability option, Game game) {
-        // TODO: Support modal spells with more than one selectable mode
+        // TODO: support modal spells with more than one selectable mode (also must use max modes filter)
         for (Mode mode : option.getModes().values()) {
             Ability newOption = option.copy();
+            // TODO: bugged? Research option.getModes().isMayChooseSameModeMoreThanOnce() - is it affected here
             newOption.getModes().clearSelectedModes();
             newOption.getModes().addSelectedMode(mode.getId());
             newOption.getModes().setActiveMode(mode);

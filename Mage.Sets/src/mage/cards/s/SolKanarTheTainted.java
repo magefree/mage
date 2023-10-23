@@ -53,7 +53,7 @@ public final class SolKanarTheTainted extends CardImpl {
                 new DrawCardSourceControllerEffect(1), TargetController.YOU, false
         );
         ability.setModeTag("draw");
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.getModes().setLimitUsageByOnce(false);
 
         // * Each opponent loses 2 life and you gain 2 life.
         ability.addMode(new Mode(new LoseLifeOpponentsEffect(2))

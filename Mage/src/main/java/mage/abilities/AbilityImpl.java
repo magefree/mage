@@ -986,7 +986,7 @@ public abstract class AbilityImpl implements Ability {
 
             if (validTargets) {
                 found++;
-                if (modes.isEachModeMoreThanOnce()) {
+                if (modes.isMayChooseSameModeMoreThanOnce()) {
                     return true;
                 }
                 if (found >= modes.getMinModes()) {

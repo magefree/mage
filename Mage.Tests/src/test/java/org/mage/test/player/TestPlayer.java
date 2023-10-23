@@ -454,7 +454,7 @@ public class TestPlayer implements Player {
             Mode selectedMode;
             if (targetName.startsWith("mode=")) {
                 int modeNr = Integer.parseInt(targetName.substring(5, 6));
-                if (modeNr == 0 || modeNr > (ability.getModes().isEachModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
+                if (modeNr == 0 || modeNr > (ability.getModes().isMayChooseSameModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
                     throw new UnsupportedOperationException("Given mode number (" + modeNr + ") not available for " + ability.toString());
                 }
                 UUID modeId = ability.getModes().getModeId(modeNr);

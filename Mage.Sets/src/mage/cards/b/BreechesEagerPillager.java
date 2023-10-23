@@ -46,8 +46,7 @@ public final class BreechesEagerPillager extends CardImpl {
                 new CreateTokenEffect(new TreasureToken()), false, filter
         );
         ability.setModeTag("treasure");
-        ability.getModes().setEachModeOnlyOnce(true);
-        ability.getModes().setResetEachTurn(true);
+        ability.getModes().setLimitUsageByOnce(true);
 
         // * Target creature can't block this turn.
         Mode mode = new Mode(new CantBlockTargetEffect(Duration.EndOfTurn))

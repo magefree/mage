@@ -36,7 +36,7 @@ public final class ThreeBowlsOfPorridge extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.setModeTag("deals damage");
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.getModes().setLimitUsageByOnce(false);
 
         // * Tap target creature.
         Mode mode = new Mode(new TapTargetEffect());

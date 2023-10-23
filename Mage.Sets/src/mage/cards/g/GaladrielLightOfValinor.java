@@ -38,8 +38,7 @@ public final class GaladrielLightOfValinor extends CardImpl {
         // • Add {G}{G}{G}.
         Ability ability = new AllianceAbility(new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(3)));
         ability.setModeTag("add mana");
-        ability.getModes().setEachModeOnlyOnce(true);
-        ability.getModes().setResetEachTurn(true);
+        ability.getModes().setLimitUsageByOnce(true);
 
         // • Put a +1/+1 counter on each creature you control.
         ability.addMode(
