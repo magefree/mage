@@ -33,6 +33,7 @@ public final class LostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Ojer Axonil, Deepest Might", 317, Rarity.MYTHIC, mage.cards.o.OjerAxonilDeepestMight.class));
         cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Roar of the Fifth People", 189, Rarity.MYTHIC, mage.cards.r.RoarOfTheFifthPeople.class));
+        cards.add(new SetCardInfo("Spyglass Siren", 78, Rarity.UNCOMMON, mage.cards.s.SpyglassSiren.class));
         cards.add(new SetCardInfo("Swamp", 289, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Temple of Power", 317, Rarity.MYTHIC, mage.cards.t.TempleOfPower.class));
         cards.add(new SetCardInfo("The Skullspore Nexus", 212, Rarity.MYTHIC, mage.cards.t.TheSkullsporeNexus.class));
