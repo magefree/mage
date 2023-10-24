@@ -109,6 +109,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Heroic Intervention", 233, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Horizon Canopy", 287, Rarity.RARE, mage.cards.h.HorizonCanopy.class));
         cards.add(new SetCardInfo("Ian Chesterton", 22, Rarity.RARE, mage.cards.i.IanChesterton.class));
+        cards.add(new SetCardInfo("Impending Flux", 87, Rarity.RARE, mage.cards.i.ImpendingFlux.class));
         cards.add(new SetCardInfo("Inspiring Refrain", 216, Rarity.RARE, mage.cards.i.InspiringRefrain.class));
         cards.add(new SetCardInfo("Into the Time Vortex", 88, Rarity.RARE, mage.cards.i.IntoTheTimeVortex.class));
         cards.add(new SetCardInfo("Iraxxa, Empress of Mars", 89, Rarity.UNCOMMON, mage.cards.i.IraxxaEmpressOfMars.class));
