@@ -1292,7 +1292,22 @@ public final class CardUtil {
         void addCard(Card card, Ability source, Game game);
     }
 
-    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
+    /**
+     * Retrieves a list of all castable components from a given card based on certain conditions.
+     *
+     * Castable components are parts of a card that can be played or cast,
+     * such as the adventure and main side of adventure spells or both sides of a fuse card.
+     *
+     * @param cardToCast
+     * @param filter           A filter to determine if a card is eligible for casting.
+     * @param source           The ability or source responsible for the casting.
+     * @param player
+     * @param game
+     * @param spellCastTracker An optional tracker for spell casting.
+     * @param playLand         A boolean flag indicating whether playing lands is allowed.
+     * @return A list of castable components from the input card, considering the provided conditions.
+     */
+    public static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
         UUID playerId = player.getId();
         List<Card> cards = new ArrayList<>();
         if (cardToCast instanceof CardWithHalves) {
