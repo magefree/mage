@@ -1,6 +1,6 @@
 package mage.server.util;
 
-import mage.utils.StreamUtils;
+import mage.util.StreamUtil;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -109,7 +109,7 @@ public enum ServerMessagesUtil {
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         } finally {
-            StreamUtils.closeQuietly(is);
+            StreamUtil.closeQuietly(is);
         }
         return newMessages;
     }

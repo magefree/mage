@@ -3,7 +3,7 @@
 package mage.server;
 
 import mage.server.util.PluginClassLoader;
-import mage.util.StreamUtils;
+import mage.util.StreamUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public final class ExtensionPackageLoader {
         } catch (ClassCastException e) {
             throw new RuntimeException("Entry point not an instance of ExtensionPackage.", e);
         } finally {
-            StreamUtils.closeQuietly(classLoader);
+            StreamUtil.closeQuietly(classLoader);
         }
     }
 }

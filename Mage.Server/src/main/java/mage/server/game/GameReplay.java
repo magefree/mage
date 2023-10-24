@@ -1,5 +1,3 @@
-
-
 package mage.server.game;
 
 import java.io.BufferedInputStream;
@@ -14,10 +12,8 @@ import mage.game.GameState;
 import mage.game.GameStates;
 import mage.server.Main;
 import mage.util.CopierObjectInputStream;
-import mage.utils.StreamUtils;
+import mage.util.StreamUtil;
 import org.apache.log4j.Logger;
-
-
 
 /**
  *
@@ -80,10 +76,10 @@ public class GameReplay {
         catch(IOException ex) {
             logger.fatal("Cannot load game:" + gameId, ex);
         } finally {
-            StreamUtils.closeQuietly(file);
-            StreamUtils.closeQuietly(buffer);
-            StreamUtils.closeQuietly(input);
-            StreamUtils.closeQuietly(gzip);
+            StreamUtil.closeQuietly(file);
+            StreamUtil.closeQuietly(buffer);
+            StreamUtil.closeQuietly(input);
+            StreamUtil.closeQuietly(gzip);
         }
         return null;
     }

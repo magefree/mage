@@ -38,7 +38,7 @@ public final class DeckUtil {
         } catch (IOException e) {
             logger.error("Can't write deck file to temp file", e);
         } finally {
-            StreamUtils.closeQuietly(bw);
+            StreamUtil.closeQuietly(bw);
         }
         return null;
     }

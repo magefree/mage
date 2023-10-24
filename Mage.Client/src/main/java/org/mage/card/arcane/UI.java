@@ -1,7 +1,5 @@
 package org.mage.card.arcane;
 
-import mage.utils.StreamUtils;
-
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -44,6 +42,7 @@ import javax.swing.text.ViewFactory;
 import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.ImageView;
+import mage.util.StreamUtil;
 
 /**
  * UI utility functions.
@@ -89,7 +88,7 @@ public final class UI {
         } catch (IOException ex) {
             throw new RuntimeException("Error reading image: " + path);
         } finally {
-            StreamUtils.closeQuietly(stream);
+            StreamUtil.closeQuietly(stream);
         }
     }
 

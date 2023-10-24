@@ -1,8 +1,8 @@
-package mage.utils;
+package mage.util;
 
 import java.io.Closeable;
 
-public final class StreamUtils {
+public final class StreamUtil {
 
     /***
      * Quietly closes the closable, ignoring nulls and exceptions

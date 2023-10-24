@@ -2,7 +2,7 @@ package org.mage.card.arcane;
 
 import mage.abilities.icon.CardIconColor;
 import mage.abilities.icon.CardIconImpl;
-import mage.utils.StreamUtils;
+import mage.util.StreamUtil;
 import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
@@ -73,7 +73,7 @@ public class SvgUtils {
             } catch (Throwable e) {
                 logger.error("Can't create css file for svg: " + cssFile.toPath().toAbsolutePath().toString(), e);
             } finally {
-                StreamUtils.closeQuietly(w);
+                StreamUtil.closeQuietly(w);
             }
         }
     }

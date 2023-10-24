@@ -2,12 +2,9 @@
 
 package mage.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 /**
  *
@@ -44,9 +41,9 @@ public class Copier<T> {
         catch(IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            StreamUtils.closeQuietly(fbos);
-            StreamUtils.closeQuietly(out);
-            StreamUtils.closeQuietly(in);
+            StreamUtil.closeQuietly(fbos);
+            StreamUtil.closeQuietly(out);
+            StreamUtil.closeQuietly(in);
         }
         return copy;
 

@@ -10,7 +10,7 @@ import mage.client.util.ClientDefaultSettings;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
-import mage.utils.StreamUtils;
+import mage.util.StreamUtil;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -202,8 +202,8 @@ public class ConnectDialog extends MageDialog {
         } catch (Exception ex) {
             logger.error(ex, ex);
         } finally {
-            StreamUtils.closeQuietly(in);
-            StreamUtils.closeQuietly(output);
+            StreamUtil.closeQuietly(in);
+            StreamUtil.closeQuietly(output);
         }
     }
 

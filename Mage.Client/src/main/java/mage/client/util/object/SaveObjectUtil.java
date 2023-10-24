@@ -1,12 +1,11 @@
 package mage.client.util.object;
 
-import mage.utils.StreamUtils;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import mage.util.StreamUtil;
 
 /**
  * TODO: part of replay system? Un-used, can be deleted
@@ -66,7 +65,7 @@ public final class SaveObjectUtil {
 
             } catch (Exception e) {
             } finally {
-                StreamUtils.closeQuietly(oos);
+                StreamUtil.closeQuietly(oos);
             }
         }
     }

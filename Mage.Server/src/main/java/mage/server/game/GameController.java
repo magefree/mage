@@ -29,7 +29,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.util.MultiAmountMessage;
-import mage.utils.StreamUtils;
+import mage.util.StreamUtil;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
@@ -969,9 +969,9 @@ public class GameController implements GameCallback {
         } catch (IOException ex) {
             logger.fatal("Cannot save game.", ex);
         } finally {
-            StreamUtils.closeQuietly(file);
-            StreamUtils.closeQuietly(output);
-            StreamUtils.closeQuietly(buffer);
+            StreamUtil.closeQuietly(file);
+            StreamUtil.closeQuietly(output);
+            StreamUtil.closeQuietly(buffer);
         }
         return false;
     }

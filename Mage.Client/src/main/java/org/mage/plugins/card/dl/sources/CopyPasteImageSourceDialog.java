@@ -1,6 +1,6 @@
 package org.mage.plugins.card.dl.sources;
 
-import mage.util.StreamUtils;
+import mage.util.StreamUtil;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -51,7 +51,7 @@ public class CopyPasteImageSourceDialog extends JDialog {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            StreamUtils.closeQuietly(bw);
+            StreamUtil.closeQuietly(bw);
         }
 
         dispose();
