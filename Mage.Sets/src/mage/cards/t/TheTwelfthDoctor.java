@@ -18,20 +18,10 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.players.Player;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.SpellsCastWatcher;
-import java.util.List;
-
-
-//TODO manage imports
 
 /**
  * @author Mo1eculeMan
