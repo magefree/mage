@@ -1293,7 +1293,10 @@ public final class CardUtil {
     }
 
     /**
-     * Retrieves a list of castable components from a given card based on certain conditions.
+     * Retrieves a list of all castable components from a given card based on certain conditions.
+     *
+     * Castable components are parts of a card that can be played or cast,
+     * such as the adventure and main side of adventure spells or both sides of a fuse card.
      *
      * @param cardToCast
      * @param filter           A filter to determine if a card is eligible for casting.
