@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -35,7 +36,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.onCard = onCard;
-        this.staticText = "{this} gains " + ability.getRule()
+        this.staticText = "{this} gains " + CardUtil.stripReminderText(ability.getRule())
                 + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
         this.generateGainAbilityDependencies(ability, null);
     }

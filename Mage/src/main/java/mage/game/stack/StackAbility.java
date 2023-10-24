@@ -541,6 +541,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public boolean getWorksPhasedOut() {
+        return this.ability.getWorksPhasedOut();
+    }
+
+    @Override
+    public void setWorksPhasedOut(boolean worksPhasedOut) {
+        this.ability.setWorksPhasedOut(worksPhasedOut);
+    }
+
+    @Override
     public List<Watcher> getWatchers() {
         return this.ability.getWatchers();
     }

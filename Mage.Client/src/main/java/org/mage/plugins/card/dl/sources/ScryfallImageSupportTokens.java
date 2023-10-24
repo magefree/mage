@@ -2162,6 +2162,9 @@ public class ScryfallImageSupportTokens {
             put("WOC/Spirit", "https://api.scryfall.com/cards/twoc/17/en?format=image");
             put("WOC/Virtuous", "https://api.scryfall.com/cards/twoc/3/en?format=image");
 
+            // 8ED
+            put("8ED/Rukh", "https://api.scryfall.com/cards/p03/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

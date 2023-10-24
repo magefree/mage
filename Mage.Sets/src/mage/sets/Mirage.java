@@ -290,6 +290,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Echo", 40, Rarity.RARE, mage.cards.s.SoulEcho.class));
         cards.add(new SetCardInfo("Soul Rend", 144, Rarity.UNCOMMON, mage.cards.s.SoulRend.class));
         cards.add(new SetCardInfo("Soulshriek", 145, Rarity.COMMON, mage.cards.s.Soulshriek.class));
+        cards.add(new SetCardInfo("Spatial Binding", 284, Rarity.UNCOMMON, mage.cards.s.SpatialBinding.class));
         cards.add(new SetCardInfo("Spectral Guardian", 41, Rarity.RARE, mage.cards.s.SpectralGuardian.class));
         cards.add(new SetCardInfo("Spirit of the Night", 146, Rarity.RARE, mage.cards.s.SpiritOfTheNight.class));
         cards.add(new SetCardInfo("Spitting Earth", 193, Rarity.COMMON, mage.cards.s.SpittingEarth.class));
@@ -309,6 +310,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Teeka's Dragon", 320, Rarity.RARE, mage.cards.t.TeekasDragon.class));
         cards.add(new SetCardInfo("Teferi's Curse", 96, Rarity.COMMON, mage.cards.t.TeferisCurse.class));
         cards.add(new SetCardInfo("Teferi's Drake", 97, Rarity.COMMON, mage.cards.t.TeferisDrake.class));
+        cards.add(new SetCardInfo("Teferi's Imp", 98, Rarity.RARE, mage.cards.t.TeferisImp.class));
         cards.add(new SetCardInfo("Teferi's Isle", 330, Rarity.RARE, mage.cards.t.TeferisIsle.class));
         cards.add(new SetCardInfo("Telim'Tor", 197, Rarity.RARE, mage.cards.t.TelimTor.class));
         cards.add(new SetCardInfo("Telim'Tor's Darts", 321, Rarity.UNCOMMON, mage.cards.t.TelimTorsDarts.class));

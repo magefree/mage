@@ -84,6 +84,7 @@ European Land Program|EuropeanLandProgram|
 Eventide|Eventide|
 Exodus|Exodus|
 Explorers of Ixalan|ExplorersOfIxalan|
+Fallout|Fallout|
 Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
