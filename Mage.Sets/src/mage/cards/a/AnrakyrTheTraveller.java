@@ -49,7 +49,7 @@ public final class AnrakyrTheTraveller extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public AnrakyrTheTraveller copy() {
         return new AnrakyrTheTraveller(this);
     }
 }
