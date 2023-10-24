@@ -67,6 +67,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Delete", 81, Rarity.RARE, mage.cards.d.Delete.class));
         cards.add(new SetCardInfo("Deserted Beach", 270, Rarity.RARE, mage.cards.d.DesertedBeach.class));
         cards.add(new SetCardInfo("Desolate Lighthouse", 271, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
+        cards.add(new SetCardInfo("Dinosaurs on a Spaceship", 122, Rarity.RARE, mage.cards.d.DinosaursOnASpaceship.class));
         cards.add(new SetCardInfo("Displaced Dinosaurs", 100, Rarity.UNCOMMON, mage.cards.d.DisplacedDinosaurs.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 272, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 273, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
