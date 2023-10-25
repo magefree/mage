@@ -20,6 +20,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         this.hasBoosters = false; // TODO: enable boosters
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("Bartolome del Presidio", 301, Rarity.COMMON, mage.cards.b.BartolomeDelPresidio.class));
         cards.add(new SetCardInfo("Breeches, Eager Pillager", 137, Rarity.RARE, mage.cards.b.BreechesEagerPillager.class));
         cards.add(new SetCardInfo("Cavern of Souls", 269, Rarity.MYTHIC, mage.cards.c.CavernOfSouls.class));
         cards.add(new SetCardInfo("Cenote Scout", 178, Rarity.UNCOMMON, mage.cards.c.CenoteScout.class));
