@@ -27,6 +27,7 @@ public enum AbilityWord {
     EMINENCE("Eminence"),
     ENRAGE("Enrage"),
     FATEFUL_HOUR("Fateful hour"),
+    FATHOMLESS_DESCENT("Fathomless descent"),
     FEROCIOUS("Ferocious"),
     FORMIDABLE("Formidable"),
     GRANDEUR("Grandeur"),
