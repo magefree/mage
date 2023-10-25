@@ -25,6 +25,7 @@ public enum SubType {
     MOUNTAIN("Mountain", SubTypeSet.BasicLandType),
     PLAINS("Plains", SubTypeSet.BasicLandType),
     SWAMP("Swamp", SubTypeSet.BasicLandType),
+    CAVE("Cave", SubTypeSet.NonBasicLandType),
     DESERT("Desert", SubTypeSet.NonBasicLandType),
     GATE("Gate", SubTypeSet.NonBasicLandType),
     LAIR("Lair", SubTypeSet.NonBasicLandType),
