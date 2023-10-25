@@ -29,7 +29,6 @@ import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.util.MultiAmountMessage;
-import mage.util.StreamUtil;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
@@ -37,6 +36,8 @@ import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.*;
@@ -810,7 +811,6 @@ public class GameController implements GameCallback {
 
     private synchronized void ask(UUID playerId, final String question, final Map<String, Serializable> options) throws MageException {
         perform(playerId, playerId1 -> getGameSession(playerId1).ask(question, options));
-
     }
 
     private synchronized void chooseAbility(UUID playerId, final String objectName, final List<? extends Ability> choices, String message) throws MageException {
@@ -848,7 +848,6 @@ public class GameController implements GameCallback {
                 getGameSession(playerId1).target(question, new CardsView(), targets, required, options);
             }
         });
-
     }
 
     private synchronized void target(UUID playerId, final String question, final Collection<? extends Ability> abilities, final boolean required, final Map<String, Serializable> options) throws MageException {
@@ -905,7 +904,7 @@ public class GameController implements GameCallback {
         if (controller == null || game.getStep() == null || game.getTurnStepType() == null) {
             return;
         }
-        final String message = new StringBuilder(game.getTurnStepType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
+        final String message = game.getTurnStepType().toString() + " - Waiting for " + controller.getName();
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
             boolean skip = players.stream().anyMatch(playerId -> entry.getKey().equals(playerId));
             if (!skip) {
@@ -955,23 +954,13 @@ public class GameController implements GameCallback {
     }
 
     public boolean saveGame() {
-        OutputStream file = null;
-        ObjectOutput output = null;
-        OutputStream buffer = null;
-        try {
-            file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
-            buffer = new BufferedOutputStream(file);
-            output = new ObjectOutputStream(new GZIPOutputStream(buffer));
+        try (ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(new BufferedOutputStream(Files.newOutputStream(Paths.get("saved/" + game.getId().toString() + ".game")))))) {
             output.writeObject(game);
             output.writeObject(game.getGameStates());
             logger.debug("Saved game:" + game.getId());
             return true;
         } catch (IOException ex) {
             logger.fatal("Cannot save game.", ex);
-        } finally {
-            StreamUtil.closeQuietly(file);
-            StreamUtil.closeQuietly(output);
-            StreamUtil.closeQuietly(buffer);
         }
         return false;
     }
@@ -995,7 +984,7 @@ public class GameController implements GameCallback {
     }
 
     private void perform(UUID playerId, Command command, boolean informOthers) throws MageException {
-        if (game.getPlayer(playerId).isGameUnderControl()) { // is the player controlling it's own turn
+        if (game.getPlayer(playerId).isGameUnderControl()) { // is the player controlling its own turn
             if (gameSessions.containsKey(playerId)) {
                 setupTimeout(playerId);
                 command.execute(playerId);

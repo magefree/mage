@@ -1,10 +1,10 @@
 package mage.server.game;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInput;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 import java.util.zip.GZIPInputStream;
 import mage.game.Game;
@@ -12,7 +12,6 @@ import mage.game.GameState;
 import mage.game.GameStates;
 import mage.server.Main;
 import mage.util.CopierObjectInputStream;
-import mage.util.StreamUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -20,9 +19,7 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class GameReplay {
-
     private static final Logger logger = Logger.getLogger(GameReplay.class);
-
     private final GameStates savedGame;
     private final Game game;
     private int stateIndex;
@@ -55,33 +52,16 @@ public class GameReplay {
     }
 
     private Game loadGame(UUID gameId) {
-        InputStream file = null;
-        InputStream buffer = null;
-        InputStream gzip = null;
-        ObjectInput input = null;
-        try{
-            file = new FileInputStream("saved/" + gameId.toString() + ".game");
-            buffer = new BufferedInputStream(file);
-            gzip = new GZIPInputStream(buffer);
-            input = new CopierObjectInputStream(Main.classLoader, gzip);
+        try (ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(new BufferedInputStream(Files.newInputStream(Paths.get("saved/" + gameId.toString() + ".game")))))) {
             Game loadGame = (Game) input.readObject();
             GameStates states = (GameStates) input.readObject();
             loadGame.loadGameStates(states);
             return loadGame;
-
-        }
-        catch(ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             logger.fatal("Cannot load game. Class not found.", ex);
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             logger.fatal("Cannot load game:" + gameId, ex);
-        } finally {
-            StreamUtil.closeQuietly(file);
-            StreamUtil.closeQuietly(buffer);
-            StreamUtil.closeQuietly(input);
-            StreamUtil.closeQuietly(gzip);
         }
         return null;
     }
-
 }

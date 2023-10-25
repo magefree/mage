@@ -1,13 +1,9 @@
-
-
 package mage.server;
-
-import mage.server.util.PluginClassLoader;
-import mage.util.StreamUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import mage.server.util.PluginClassLoader;
 
 /**
  * @author Lymia
@@ -29,10 +25,8 @@ public final class ExtensionPackageLoader {
         String entryPoint = entryPointReader.nextLine().trim();
         entryPointReader.close();
 
-        PluginClassLoader classLoader = null;
-        try {
-            classLoader = new PluginClassLoader();
-            for(File f : packagesDirectory.listFiles()) {
+        try (PluginClassLoader classLoader = new PluginClassLoader()) {
+            for (File f : packagesDirectory.listFiles()) {
                 classLoader.addURL(f.toURI().toURL());
             }
             return (ExtensionPackage) Class.forName(entryPoint, false, classLoader).newInstance();
@@ -42,8 +36,6 @@ public final class ExtensionPackageLoader {
             throw new RuntimeException("Entry point class not found!", e);
         } catch (ClassCastException e) {
             throw new RuntimeException("Entry point not an instance of ExtensionPackage.", e);
-        } finally {
-            StreamUtil.closeQuietly(classLoader);
         }
     }
 }

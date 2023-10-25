@@ -1,7 +1,5 @@
 package org.mage.plugins.card.dl.sources;
 
-import mage.util.StreamUtil;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
@@ -17,8 +15,6 @@ public class CopyPasteImageSourceDialog extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JEditorPane txtDeckList;
-
-    private String tmpPath;
 
     public CopyPasteImageSourceDialog() {
         initComponents();
@@ -42,27 +38,16 @@ public class CopyPasteImageSourceDialog extends JDialog {
     }
 
     private void onOK() {
-        BufferedWriter bw = null;
-        try {
-            File temp = File.createTempFile("import_images_from_url", ".txt");
-            bw = new BufferedWriter(new FileWriter(temp));
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(File.createTempFile("import_images_from_url", ".txt")))) {
             bw.write(txtDeckList.getText());
-            tmpPath = temp.getPath();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            StreamUtil.closeQuietly(bw);
         }
-
         dispose();
     }
 
     private void onCancel() {
         dispose();
-    }
-
-    public String getTmpPath() {
-        return tmpPath;
     }
 
     private void initComponents() {
