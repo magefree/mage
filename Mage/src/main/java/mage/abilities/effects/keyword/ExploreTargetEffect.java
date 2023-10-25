@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
@@ -33,5 +32,4 @@ public class ExploreTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         return ExploreSourceEffect.explorePermanent(game, getTargetPointer().getFirst(game, source), source);
     }
-
 }
