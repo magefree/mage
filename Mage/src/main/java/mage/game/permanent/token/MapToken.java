@@ -26,7 +26,7 @@ public final class MapToken extends TokenImpl {
                 new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
+        ability.addCost(new SacrificeSourceCost().setText("sacrifice this artifact"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
