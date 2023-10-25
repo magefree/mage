@@ -17,7 +17,7 @@ public enum DescendCondition implements Condition {
     FOUR(4),
     EIGHT(8);
     private static final Hint hint = new ValueHint(
-            "Permanent cards in you graveyard",
+            "Permanent cards in your graveyard",
             new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_PERMANENT)
     );
 

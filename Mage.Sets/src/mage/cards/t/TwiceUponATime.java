@@ -11,6 +11,7 @@ import mage.abilities.hint.Hint;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -25,12 +26,12 @@ import java.util.UUID;
 public final class TwiceUponATime extends AdventureCard {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DOCTOR, "you control two or more Doctors");
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
     private static final Hint hint = new ConditionHint(condition, "You control two or more Doctors");
     private static final FilterCard filter2 = new FilterCard("a Doctor card");
 
     static {
-        filter.add(SubType.DOCTOR.getPredicate());
+        filter2.add(SubType.DOCTOR.getPredicate());
     }
 
     public TwiceUponATime(UUID ownerId, CardSetInfo setInfo) {

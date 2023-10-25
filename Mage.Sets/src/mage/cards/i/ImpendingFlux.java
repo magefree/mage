@@ -1,9 +1,8 @@
 package mage.cards.i;
 
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.SpellsCastNotFromHandValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.ForetellAbility;
@@ -22,7 +21,7 @@ import java.util.UUID;
  */
 public final class ImpendingFlux extends CardImpl {
 
-    private static final DynamicValue xValue = new AdditiveDynamicValue(SpellsCastNotFromHandValue.instance, StaticValue.get(1));
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, SpellsCastNotFromHandValue.instance);
 
     public ImpendingFlux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
