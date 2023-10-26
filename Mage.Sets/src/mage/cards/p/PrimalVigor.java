@@ -77,7 +77,7 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (event instanceof CreateTokenEvent) {
-            ((CreateTokenEvent) event).doubleTokens();
+            ((CreateTokenEvent) event).multiplyTokens(2);
         }
         return false;
     }
