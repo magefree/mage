@@ -350,12 +350,17 @@ public class GameEvent implements Serializable {
          flag        is it tapped for combat
          */
         TAPPED,
-        TAPPED_FOR_MANA,
         /* TAPPED_FOR_MANA
          During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
          By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana.
          IMPORTANT: Triggered non mana abilities have to ignore the event if game.inCheckPlayableState is true.
          */
+        TAPPED_FOR_MANA,
+        /*  TAPPED_BATCH
+         combine all TAPPED events occuring at the same time in a single event
+         */
+        TAPPED_BATCH,
+
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
         TRANSFORMING, TRANSFORMED,
