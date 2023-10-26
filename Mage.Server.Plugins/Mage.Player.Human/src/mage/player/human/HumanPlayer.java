@@ -888,6 +888,14 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         int amountTotal = target.getAmountTotal(game, source);
+        if (amountTotal == 0) {
+            return false; // nothing to distribute
+        }
+        MultiAmountType multiAmountType = source.getRule().contains("damage") ? MultiAmountType.DAMAGE : MultiAmountType.P1P1;
+
+        // 601.2d. If the spell requires the player to divide or distribute an effect (such as damage or counters)
+        // among one or more targets, the player announces the division.
+        // Each of these targets must receive at least one of whatever is being divided.
 
         // Two steps logic:
         // 1. Select targets
@@ -896,7 +904,7 @@ public class HumanPlayer extends PlayerImpl {
         // 1. Select targets
         while (canRespond()) {
             Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
-            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+            boolean required = target.isRequired(source.getSourceId(), game);
             if (possibleTargetIds.isEmpty()
                     || target.getSize() >= target.getNumberOfTargets()) {
                 required = false;
@@ -928,9 +936,9 @@ public class HumanPlayer extends PlayerImpl {
                 updateGameStatePriority("chooseTargetAmount", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    // target amount uses for damage only, if you see another use case then message must be changed here and on getMultiAmount call
-
-                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargetIds, required, options);
+                    String multiType = multiAmountType == MultiAmountType.DAMAGE ? " to divide %d damage" : " to distribute %d counters";
+                    String message = target.getMessage() + String.format(multiType, amountTotal);
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), possibleTargetIds, required, options);
                 }
                 waitForResponse(game);
 
@@ -941,7 +949,9 @@ public class HumanPlayer extends PlayerImpl {
                 if (target.contains(responseId)) {
                     // unselect
                     target.remove(responseId);
-                } else if (possibleTargetIds.contains(responseId) && target.canTarget(abilityControllerId, responseId, source, game)) {
+                } else if (possibleTargetIds.contains(responseId)
+                        && target.canTarget(abilityControllerId, responseId, source, game)
+                        && target.getSize() < amountTotal) {
                     // select
                     target.addTarget(responseId, source, game);
                 }
@@ -957,6 +967,26 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // 2. Distribute amount between selected targets
+
+        // if only one target, it gets full amount, no possible choice
+        if (targets.size() == 1) {
+            target.setTargetAmount(targets.get(0), amountTotal, source, game);
+            return true;
+        }
+
+        // if number of targets equal to amount, each get 1, no possible choice
+        if (targets.size() == amountTotal) {
+            for (UUID targetId : targets) {
+                target.setTargetAmount(targetId, 1, source, game);
+            }
+            return true;
+        }
+
+        // should not be able to have more targets than amount, but in such case it's illegal
+        if (targets.size() > amountTotal) {
+            target.clearChosen();
+            return false;
+        }
 
         // prepare targets list with p/t or life stats (cause that's dialog used for damage distribute)
         List<String> targetNames = new ArrayList<>();
@@ -978,7 +1008,6 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
-        MultiAmountType multiAmountType = source.toString().contains("counters") ? MultiAmountType.P1P1 : MultiAmountType.DAMAGE;
         // ask and assign new amount
         List<Integer> targetValues = getMultiAmount(outcome, targetNames, 1, amountTotal, multiAmountType, game);
         for (int i = 0; i < targetValues.size(); i++) {

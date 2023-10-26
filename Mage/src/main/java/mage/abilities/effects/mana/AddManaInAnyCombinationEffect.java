@@ -132,7 +132,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
 
         // Ask player for color distribution
         int manaAmount = amount.calculate(game, source, this);
-        List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, manaAmount, manaAmount, MultiAmountType.MANA, game);
+        List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, 0, manaAmount, MultiAmountType.MANA, game);
 
         // Convert choices to mana
         for (int i = 0; i < size; i++) {
