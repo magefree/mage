@@ -982,6 +982,12 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
 
+        // should not be able to have more targets than amount, but in such case it's illegal
+        if (targets.size() > amountTotal) {
+            target.clearChosen();
+            return false;
+        }
+
         // prepare targets list with p/t or life stats (cause that's dialog used for damage distribute)
         List<String> targetNames = new ArrayList<>();
         for (UUID targetId : targets) {
