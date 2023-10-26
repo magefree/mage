@@ -142,7 +142,7 @@ public enum SubType {
     DESERTER("Deserter", SubTypeSet.CreatureType),
     DETECTIVE("Detective", SubTypeSet.CreatureType),
     DEVIL("Devil", SubTypeSet.CreatureType),
-    DINOSAUR("Dinosaur", SubTypeSet.CreatureType), // With Ixalan now being spoiled, need this to be selectable
+    DINOSAUR("Dinosaur", SubTypeSet.CreatureType),
     DJINN("Djinn", SubTypeSet.CreatureType),
     DOCTOR("Doctor", SubTypeSet.CreatureType),
     DOG("Dog", SubTypeSet.CreatureType),
@@ -249,6 +249,7 @@ public enum SubType {
     LHURGOYF("Lhurgoyf", SubTypeSet.CreatureType),
     LICID("Licid", SubTypeSet.CreatureType),
     LIZARD("Lizard", SubTypeSet.CreatureType),
+    LLAMA("Llama", SubTypeSet.CreatureType),
     LOBSTER("Lobster", SubTypeSet.CreatureType, true), // Unglued
     LUKE("Luke", SubTypeSet.PlaneswalkerType, true), // Star Wars
     // M
