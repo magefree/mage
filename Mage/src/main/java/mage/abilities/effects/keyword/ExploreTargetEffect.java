@@ -38,7 +38,7 @@ public class ExploreTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return ExploreSourceEffect.explorePermanent(game, getTargetPointer().getFirst(game, source), source);
+        return ExploreSourceEffect.explorePermanent(game, getTargetPointer().getFirst(game, source), source, 1);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ExploreTargetEffect extends OneShotEffect {
             return staticText;
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "it")
-                + " explores" + (withReminderText ? REMINDER_TEXT : "") ;
+                + " explores" + (withReminderText ? REMINDER_TEXT : "");
     }
 
 }
