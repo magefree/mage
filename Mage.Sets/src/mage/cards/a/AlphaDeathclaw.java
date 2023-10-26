@@ -49,7 +49,7 @@ public final class AlphaDeathclaw extends CardImpl {
         this.addAbility(trigger);
 
         // {5}{B}{G}: Monstrosity 4.
-        this.addAbility(new MonstrosityAbility("{5}{G}{G}", 4));
+        this.addAbility(new MonstrosityAbility("{5}{B}{G}", 4));
     }
 
     private AlphaDeathclaw(final AlphaDeathclaw card) {
