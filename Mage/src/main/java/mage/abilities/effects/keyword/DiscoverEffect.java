@@ -23,10 +23,20 @@ public class DiscoverEffect extends OneShotEffect {
     private final int amount;
     private final FilterCard filter;
 
+    // If set to true, store in effect setValue which card has been discovered.
+    public final boolean storeDiscoveredCard;
+    // The getValue/setValue key when storing the card.
+    public final static String KEY_DISCOVERED_CARD = "DiscoveredCard";
+
     public DiscoverEffect(int amount) {
+        this(amount, false);
+    }
+
+    public DiscoverEffect(int amount, boolean storeDiscoveredCard) {
         super(Outcome.Benefit);
         this.amount = amount;
         this.filter = new FilterNonlandCard();
+        this.storeDiscoveredCard = storeDiscoveredCard;
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, amount + 1));
         staticText = "Discover " + amount + " <i>(Exile cards from the top of your library " +
                 "until you exile a nonland card with mana value " + amount + " or less. " +
@@ -38,6 +48,7 @@ public class DiscoverEffect extends OneShotEffect {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter.copy();
+        this.storeDiscoveredCard = effect.storeDiscoveredCard;
     }
 
     @Override
@@ -54,6 +65,10 @@ public class DiscoverEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         Card card = getCard(player, cards, game, source);
         if (card != null) {
+            if (this.storeDiscoveredCard) {
+                source.getEffects().setValue(KEY_DISCOVERED_CARD, card);
+            }
+
             CardUtil.castSpellWithAttributesForFree(player, source, game, card, filter);
             if (game.getState().getZone(card.getId()) == Zone.EXILED) {
                 player.moveCards(card, Zone.HAND, source, game);
