@@ -63,6 +63,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Thrashing Brontodon", 216, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
         cards.add(new SetCardInfo("Treasure Cove", 261, Rarity.RARE, mage.cards.t.TreasureCove.class));
         cards.add(new SetCardInfo("Treasure Map", 261, Rarity.RARE, mage.cards.t.TreasureMap.class));
+        cards.add(new SetCardInfo("Vito, Fanatic of Aclazotz", 243, Rarity.MYTHIC, mage.cards.v.VitoFanaticOfAclazotz.class));
         cards.add(new SetCardInfo("Waterwind Scout", 84, Rarity.COMMON, mage.cards.w.WaterwindScout.class));
     }
 }
