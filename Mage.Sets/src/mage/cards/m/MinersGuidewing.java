@@ -33,7 +33,7 @@ public final class MinersGuidewing extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Miner's Guidewing dies, target creature you control explores.
-        Ability ability = new DiesSourceTriggeredAbility(new ExploreTargetEffect().setText("target creature you control explores"));
+        Ability ability = new DiesSourceTriggeredAbility(new ExploreTargetEffect());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

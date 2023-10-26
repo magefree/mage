@@ -3,6 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
@@ -35,6 +36,7 @@ public final class SaheeliTheSunsBrilliance extends CardImpl {
 
         // {U}{R}, {T}: Create a token that's a copy of another target creature or artifact you control, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(new SaheeliTheSunsBrillianceEffect(), new ManaCostsImpl<>("{U}{R}"));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
     }
@@ -53,7 +55,9 @@ class SaheeliTheSunsBrillianceEffect extends OneShotEffect {
 
     SaheeliTheSunsBrillianceEffect() {
         super(Outcome.Benefit);
-        staticText = "";
+        staticText = "create a token that’s a copy of another target creature or artifact you control, " +
+                "except it's an artifact in addition to its other types. It gains haste. " +
+                "Sacrifice it at the beginning of the next end step";
     }
 
     private SaheeliTheSunsBrillianceEffect(final SaheeliTheSunsBrillianceEffect effect) {
