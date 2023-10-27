@@ -9,8 +9,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -23,7 +25,6 @@ public final class HitTheMotherLode extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}{R}");
 
         // Discover 10. If the discovered card's mana value is less than 10, create a number of tapped Treasure tokens equal to the difference.
-        this.getSpellAbility().addEffect(new DiscoverEffect(10, true));
         this.getSpellAbility().addEffect(new HitTheMotherLodeEffect());
     }
 
@@ -39,9 +40,11 @@ public final class HitTheMotherLode extends CardImpl {
 
 class HitTheMotherLodeEffect extends OneShotEffect {
 
+    private static final FilterCard filter = DiscoverEffect.makeDiscoverFilter(10);
+
     HitTheMotherLodeEffect() {
         super(Outcome.Benefit);
-        staticText = "If the discovered card's mana value is less than 10, "
+        staticText = "Discover 10. If the discovered card's mana value is less than 10, "
                 + "create a number of tapped Treasure tokens equal to the difference.";
     }
 
@@ -56,8 +59,12 @@ class HitTheMotherLodeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = (Card) getValue(DiscoverEffect.KEY_DISCOVERED_CARD);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
 
+        Card card = DiscoverEffect.doDiscover(controller, filter, game, source);
         int value = card == null ? 0 : card.getManaValue();
         if (value >= 10) {
             return false;
