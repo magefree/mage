@@ -5,7 +5,9 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterOwnedCard;
 import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
 
 import java.util.UUID;
@@ -14,6 +16,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SunbirdStandard extends CardImpl {
+
+    private static final FilterCard filter = new FilterOwnedCard();
 
     public SunbirdStandard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -26,7 +30,7 @@ public final class SunbirdStandard extends CardImpl {
         this.addAbility(new CraftAbility(
                 "{5}", "one or more",
                 new TargetCardInGraveyardBattlefieldOrStack(
-                        1, Integer.MAX_VALUE, StaticFilters.FILTER_CARD,
+                        1, Integer.MAX_VALUE, filter,
                         StaticFilters.FILTER_CONTROLLED_ANOTHER_PERMANENT
                 )
         ));

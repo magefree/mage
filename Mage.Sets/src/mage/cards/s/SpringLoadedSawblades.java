@@ -8,8 +8,11 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetController;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
@@ -23,9 +26,11 @@ public final class SpringLoadedSawblades extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterOpponentsCreaturePermanent("tapped creature an opponent controls");
+    private static final FilterCard filter2 = new FilterArtifactCard();
 
     static {
         filter.add(TappedPredicate.TAPPED);
+        filter2.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public SpringLoadedSawblades(UUID ownerId, CardSetInfo setInfo) {
@@ -42,8 +47,7 @@ public final class SpringLoadedSawblades extends CardImpl {
 
         // Craft with artifact {3}{W}
         this.addAbility(new CraftAbility(
-                "{3}{W}", "artifact",
-                StaticFilters.FILTER_CARD_ARTIFACT,
+                "{3}{W}", "artifact", filter2,
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT
         ));
     }
