@@ -21,6 +21,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abuelo, Ancestral Echo", 219, Rarity.RARE, mage.cards.a.AbueloAncestralEcho.class));
+        cards.add(new SetCardInfo("Amalia Benavides Aguirre", 221, Rarity.RARE, mage.cards.a.AmaliaBenavidesAguirre.class));
         cards.add(new SetCardInfo("Bartolome del Presidio", 224, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class));
         cards.add(new SetCardInfo("Breeches, Eager Pillager", 137, Rarity.RARE, mage.cards.b.BreechesEagerPillager.class));
         cards.add(new SetCardInfo("Captain Storm, Plunderer of Cosmium", 227, Rarity.UNCOMMON, mage.cards.c.CaptainStormPlundererOfCosmium.class));
