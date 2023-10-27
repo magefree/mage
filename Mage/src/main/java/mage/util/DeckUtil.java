@@ -29,16 +29,19 @@ public final class DeckUtil {
     }
 
     public static String writeTextToTempFile(String filePrefix, String fileSuffix, String text) {
-        BufferedWriter bw = null;
+        String filePath;
         try {
-            File temp = File.createTempFile(filePrefix, fileSuffix);
-            bw = new BufferedWriter(new FileWriter(temp));
+            filePath = File.createTempFile(filePrefix, fileSuffix).getPath();
+        } catch (IOException e) {
+            logger.error("Couldn't create temp file for deck", e);
+            return null;
+        }
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             bw.write(text);
-            return temp.getPath();
+            return filePath;
         } catch (IOException e) {
             logger.error("Can't write deck file to temp file", e);
-        } finally {
-            StreamUtil.closeQuietly(bw);
         }
         return null;
     }

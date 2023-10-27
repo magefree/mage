@@ -1,7 +1,5 @@
 package org.mage.card.arcane;
 
-import mage.util.StreamUtil;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -23,7 +21,7 @@ public final class Util {
     public static final boolean isWindows = !System.getProperty("os.name").toLowerCase(Locale.ENGLISH).contains("windows");
 
     public static final ThreadPoolExecutor threadPool; // uses for card images loading
-    static private int threadCount;
+    private static int threadCount;
 
     static {
         threadPool = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
@@ -39,12 +37,8 @@ public final class Util {
     }
 
     public static void broadcast(byte[] data, int port) throws IOException {
-        DatagramSocket socket = null;
-        try {
-            socket = new DatagramSocket();
+        try (DatagramSocket socket = new DatagramSocket()) {
             broadcast(socket, data, port, NetworkInterface.getNetworkInterfaces());
-        } finally {
-            StreamUtil.closeQuietly(socket);
         }
     }
 

@@ -2,11 +2,12 @@ package org.mage.card.arcane;
 
 import mage.abilities.icon.CardIconColor;
 import mage.abilities.icon.CardIconImpl;
-import mage.util.StreamUtil;
 import org.apache.batik.anim.dom.SVGDOMImplementation;
+import org.apache.batik.transcoder.SVGAbstractTranscoder;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.TranscodingHints;
+import org.apache.batik.transcoder.XMLAbstractTranscoder;
 import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.util.SVGConstants;
 import org.apache.log4j.Logger;
@@ -34,8 +35,7 @@ public class SvgUtils {
     private static boolean haveSvgSupport = false;
 
     // basic css settings for good svg rendering quality, other default settings can be defined by additional param
-    private static final String CSS_BASE_SETTINGS = ""
-            + "shape-rendering: geometricPrecision;"
+    private static final String CSS_BASE_SETTINGS = "shape-rendering: geometricPrecision;"
             + "text-rendering:  geometricPrecision;"
             + "color-rendering: optimizeQuality;"
             + "image-rendering: optimizeQuality;";
@@ -48,32 +48,29 @@ public class SvgUtils {
         return getSvgTempFolder() + File.separator + fileName;
     }
 
-    public static void prepareCss(String cssFileName, String cssAdditionalSettings, Boolean forceToCreateCss) {
+    public static void prepareCss(String cssFileName, String cssAdditionalSettings, boolean forceToCreateCss) {
         // css must be created all the time, so ignore svg check here
         //if (!SvgUtils.haveSvgSupport())
 
         File cssFile = new File(SvgUtils.getSvgTempFile(cssFileName));
         if (forceToCreateCss || !cssFile.exists()) {
-
-            // Rendering hints can't be set programatically, so
+            // Rendering hints can't be set programmatically, so
             // we override defaults with a temporary stylesheet.
             // These defaults emphasize quality and precision, and
             // are more similar to the defaults of other SVG viewers.
             // SVG documents can still override these defaults.
-            String css = "svg {"
-                    + CSS_BASE_SETTINGS
-                    + cssAdditionalSettings
-                    + "}";
-            FileWriter w = null;
             try {
                 cssFile.getParentFile().mkdirs();
                 cssFile.createNewFile();
-                w = new FileWriter(cssFile);
-                w.write(css);
-            } catch (Throwable e) {
-                logger.error("Can't create css file for svg: " + cssFile.toPath().toAbsolutePath().toString(), e);
-            } finally {
-                StreamUtil.closeQuietly(w);
+            } catch (IOException | SecurityException e ) {
+                logger.error("Can't create css file for svg: " + cssFile.toPath().toAbsolutePath(), e);
+                return;
+            }
+
+            try (FileWriter w = new FileWriter(cssFile)) {
+                w.write("svg {" + CSS_BASE_SETTINGS + cssAdditionalSettings + "}");
+            } catch (IOException e) {
+                logger.error("Can't write CSS file content", e);
             }
         }
     }
@@ -119,26 +116,26 @@ public class SvgUtils {
         int shadowY = 0;
         if (useShadow) {
             // shadow size (16px image: 1px left, 2px bottom)
-            shadowX = 1 * Math.round(1f / 16f * resizeToWidth);
+            shadowX = Math.round(1f / 16f * resizeToWidth);
             shadowY = 2 * Math.round(1f / 16f * resizeToHeight);
             resizeToWidth = resizeToWidth - shadowX;
             resizeToHeight = resizeToHeight - shadowY;
         }
 
         if (resizeToWidth > 0) {
-            transcoderHints.put(ImageTranscoder.KEY_WIDTH, (float) resizeToWidth); //your image width
+            transcoderHints.put(SVGAbstractTranscoder.KEY_WIDTH, (float) resizeToWidth); //your image width
         }
         if (resizeToHeight > 0) {
-            transcoderHints.put(ImageTranscoder.KEY_HEIGHT, (float) resizeToHeight); //your image height
+            transcoderHints.put(SVGAbstractTranscoder.KEY_HEIGHT, (float) resizeToHeight); //your image height
         }
 
-        transcoderHints.put(ImageTranscoder.KEY_XML_PARSER_VALIDATING, Boolean.FALSE);
-        transcoderHints.put(ImageTranscoder.KEY_DOM_IMPLEMENTATION,
+        transcoderHints.put(XMLAbstractTranscoder.KEY_XML_PARSER_VALIDATING, Boolean.FALSE);
+        transcoderHints.put(XMLAbstractTranscoder.KEY_DOM_IMPLEMENTATION,
                 SVGDOMImplementation.getDOMImplementation());
-        transcoderHints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT_NAMESPACE_URI,
+        transcoderHints.put(XMLAbstractTranscoder.KEY_DOCUMENT_ELEMENT_NAMESPACE_URI,
                 SVGConstants.SVG_NAMESPACE_URI);
-        transcoderHints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT, "svg");
-        transcoderHints.put(ImageTranscoder.KEY_USER_STYLESHEET_URI, cssFile.toURI().toString());
+        transcoderHints.put(XMLAbstractTranscoder.KEY_DOCUMENT_ELEMENT, "svg");
+        transcoderHints.put(SVGAbstractTranscoder.KEY_USER_STYLESHEET_URI, cssFile.toURI().toString());
 
         try {
             TranscoderInput input = new TranscoderInput(svgFile);
