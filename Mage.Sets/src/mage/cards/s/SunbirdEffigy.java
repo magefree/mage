@@ -165,11 +165,7 @@ class SunbirdEffigyEffect extends ManaEffect {
         }
         ExileZone exileZone = game
                 .getExile()
-                .getExileZone(CardUtil.getExileZoneId(
-                        game,
-                        source.getSourceId(),
-                        game.getState().getZoneChangeCounter(source.getSourceId()) - 2
-                ));
+                .getExileZone(CardUtil.getExileZoneId(game, source, -2));
         if (exileZone == null) {
             return mana;
         }
