@@ -13,7 +13,7 @@ import mage.util.CardUtil;
 
 /**
  * @author Susucr
- *
+ * <p>
  * Have the Controller of target permanent (or LKI controller) create Tokens.
  */
 public class CreateTokenControllerTargetPermanentEffect extends OneShotEffect {
@@ -51,9 +51,9 @@ public class CreateTokenControllerTargetPermanentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (creature != null) {
-            Player controllerOfTarget = game.getPlayer(creature.getControllerId());
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (permanent != null) {
+            Player controllerOfTarget = game.getPlayer(permanent.getControllerId());
             if (controllerOfTarget != null) {
                 int value = amount.calculate(game, source, this);
                 return token.putOntoBattlefield(value, game, source, controllerOfTarget.getId(), tapped, false);
