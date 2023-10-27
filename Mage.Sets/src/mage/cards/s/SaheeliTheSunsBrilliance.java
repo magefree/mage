@@ -55,7 +55,7 @@ class SaheeliTheSunsBrillianceEffect extends OneShotEffect {
 
     SaheeliTheSunsBrillianceEffect() {
         super(Outcome.Benefit);
-        staticText = "create a token that’s a copy of another target creature or artifact you control, " +
+        staticText = "create a token that' a copy of another target creature or artifact you control, " +
                 "except it's an artifact in addition to its other types. It gains haste. " +
                 "Sacrifice it at the beginning of the next end step";
     }
