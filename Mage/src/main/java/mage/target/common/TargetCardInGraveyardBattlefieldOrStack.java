@@ -40,7 +40,7 @@ public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
         this.filterPermanent = filterBattlefield;
         this.filterSpell = filterSpell;
         this.targetName = targetName != null ? targetName : filter.getMessage()
-                + " in a graveyard "
+                + " in a graveyard"
                 + (maxNumTargets > 1 ? " and/or " : " or ")
                 + this.filterPermanent.getMessage()
                 + " on the battlefield";
