@@ -53,4 +53,31 @@ public class CraftTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, relic, 0);
         assertExileCount(playerA, relic, 1);
     }
+
+    private static final String standard = "Sunbird Standard";
+    private static final String effigy = "Sunbird Effigy";
+    private static final String thoctar = "Woolly Thoctar";
+
+    @Test
+    public void testEffigy() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, standard);
+        addCard(Zone.BATTLEFIELD, playerA, thoctar);
+        addCard(Zone.HAND, playerA, thoctar);
+
+        addTarget(playerA, thoctar);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: For each");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, thoctar);
+
+        setStopAt(3, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, standard, 0);
+        assertPermanentCount(playerA, thoctar, 1);
+        assertPowerToughness(playerA, effigy, 3, 3);
+    }
 }
