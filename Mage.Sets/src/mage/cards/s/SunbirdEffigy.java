@@ -24,6 +24,8 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -74,19 +76,11 @@ enum SunbirdEffigyValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ExileZone exileZone = game
-                .getExile()
-                .getExileZone(CardUtil.getExileZoneId(
-                        game,
-                        sourceAbility.getSourceId(),
-                        game.getState().getZoneChangeCounter(sourceAbility.getSourceId()) - 2
-                ));
-        return exileZone == null ? 0 : exileZone
-                .getCards(game)
-                .stream()
-                .map(card -> card.getColor(game))
-                .reduce(new ObjectColor(), (c1, c2) -> c1.union(c2))
-                .getColorCount();
+        return Optional
+                .ofNullable(getColor(game, sourceAbility))
+                .filter(Objects::nonNull)
+                .map(ObjectColor::getColorCount)
+                .orElse(0);
     }
 
     @Override
@@ -103,6 +97,21 @@ enum SunbirdEffigyValue implements DynamicValue {
     public String toString() {
         return "1";
     }
+
+    static ObjectColor getColor(Game game, Ability source) {
+        ExileZone exileZone = game
+                .getExile()
+                .getExileZone(CardUtil.getExileZoneId(
+                        game,
+                        source.getSourceId(),
+                        game.getState().getZoneChangeCounter(source.getSourceId()) - 2
+                ));
+        return exileZone == null ? null : exileZone
+                .getCards(game)
+                .stream()
+                .map(card -> card.getColor(game))
+                .reduce(new ObjectColor(), (c1, c2) -> c1.union(c2));
+    }
 }
 
 enum SunbirdEffigyHint implements Hint {
@@ -110,21 +119,10 @@ enum SunbirdEffigyHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        ExileZone exileZone = game
-                .getExile()
-                .getExileZone(CardUtil.getExileZoneId(
-                        game,
-                        ability.getSourceId(),
-                        game.getState().getZoneChangeCounter(ability.getSourceId()) - 2
-                ));
-        if (exileZone == null) {
+        ObjectColor color = SunbirdEffigyValue.getColor(game, ability);
+        if (color == null) {
             return null;
         }
-        ObjectColor color = exileZone
-                .getCards(game)
-                .stream()
-                .map(card -> card.getColor(game))
-                .reduce(new ObjectColor(), (c1, c2) -> c1.union(c2));
         if (color.isColorless()) {
             return "No colors among exiled cards.";
         }
