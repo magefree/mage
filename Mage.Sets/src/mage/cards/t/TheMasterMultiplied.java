@@ -102,6 +102,6 @@ class TheMasterMultipliedEffect extends ContinuousRuleModifyingEffectImpl {
         return controller != null && permanent != null
                 && filter.match(permanent, source.getControllerId(), source, game)
                 && stackAbility instanceof TriggeredAbility
-                && source.getControllerId() == eventSourceControllerId;
+                && source.getControllerId().equals(eventSourceControllerId);
     }
 }
