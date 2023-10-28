@@ -58,6 +58,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Necropolis", 275, Rarity.COMMON, mage.cards.h.HiddenNecropolis.class));
         cards.add(new SetCardInfo("Hidden Nursery", 276, Rarity.COMMON, mage.cards.h.HiddenNursery.class));
         cards.add(new SetCardInfo("Hidden Volcano", 277, Rarity.COMMON, mage.cards.h.HiddenVolcano.class));
+        cards.add(new SetCardInfo("Hit the Mother Lode", 153, Rarity.RARE, mage.cards.h.HitTheMotherLode.class));
         cards.add(new SetCardInfo("Huatli, Poet of Unity", 189, Rarity.MYTHIC, mage.cards.h.HuatliPoetOfUnity.class));
         cards.add(new SetCardInfo("Idol of the Deep King", 155, Rarity.COMMON, mage.cards.i.IdolOfTheDeepKing.class));
         cards.add(new SetCardInfo("Island", 395, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
