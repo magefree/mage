@@ -84,7 +84,7 @@ public class GameEvent implements Serializable {
          playerId    controller of the card
          */
         MADNESS_CARD_EXILED,
-        INVESTIGATED,
+        INVESTIGATED, // playerId is the player who investigated
         KICKED,
         /* CONVOKED
          targetId    id of the creature that was taped to convoke the sourceId
