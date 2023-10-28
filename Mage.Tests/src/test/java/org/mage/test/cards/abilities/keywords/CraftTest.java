@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -57,6 +58,8 @@ public class CraftTest extends CardTestPlayerBase {
     private static final String standard = "Sunbird Standard";
     private static final String effigy = "Sunbird Effigy";
     private static final String thoctar = "Woolly Thoctar";
+    private static final String watchwolf = "Watchwolf";
+    private static final String yearling = "Cerodon Yearling";
 
     @Test
     public void testEffigy() {
@@ -66,6 +69,32 @@ public class CraftTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, thoctar);
 
         addTarget(playerA, thoctar);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: For each");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, thoctar);
+
+        setStopAt(3, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, standard, 0);
+        assertPermanentCount(playerA, thoctar, 1);
+        assertPowerToughness(playerA, effigy, 3, 3);
+    }
+
+    @Ignore // test fails due to issue with test player target handling
+    @Test
+    public void testEffigyMultiple() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, standard);
+        addCard(Zone.BATTLEFIELD, playerA, yearling);
+        addCard(Zone.GRAVEYARD, playerA, watchwolf);
+        addCard(Zone.HAND, playerA, thoctar);
+
+        addTarget(playerA, yearling);
+        addTarget(playerA, watchwolf);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: For each");
