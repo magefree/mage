@@ -21,12 +21,10 @@ import mage.util.CardUtil;
 public class DiscoverEffect extends OneShotEffect {
 
     private final int amount;
-    private final FilterCard filter;
 
     public DiscoverEffect(int amount) {
         super(Outcome.Benefit);
         this.amount = amount;
-        this.filter = makeDiscoverFilter(amount);
         staticText = "Discover " + amount + " <i>(Exile cards from the top of your library " +
                 "until you exile a nonland card with mana value " + amount + " or less. " +
                 "Cast it without paying its mana cost or put it into your hand. " +
@@ -36,7 +34,6 @@ public class DiscoverEffect extends OneShotEffect {
     private DiscoverEffect(final DiscoverEffect effect) {
         super(effect);
         this.amount = effect.amount;
-        this.filter = effect.filter.copy();
     }
 
     @Override
@@ -51,11 +48,11 @@ public class DiscoverEffect extends OneShotEffect {
             return false;
         }
 
-        doDiscover(player, filter, game, source);
+        doDiscover(player, amount, game, source);
         return true;
     }
 
-    public static FilterCard makeDiscoverFilter(int amount) {
+    private static FilterCard makeDiscoverFilter(int amount) {
         FilterCard filter = new FilterNonlandCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, amount + 1));
         return filter;
@@ -73,8 +70,9 @@ public class DiscoverEffect extends OneShotEffect {
         return null;
     }
 
-    public static Card doDiscover(Player player, FilterCard filter, Game game, Ability source) {
+    public static Card doDiscover(Player player, int amount, Game game, Ability source) {
         Cards cards = new CardsImpl();
+        FilterCard filter = makeDiscoverFilter(amount);
         Card card = getCard(player, filter, cards, game, source);
         if (card != null) {
             CardUtil.castSpellWithAttributesForFree(player, source, game, card, filter);

@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
@@ -40,8 +39,6 @@ public final class HitTheMotherLode extends CardImpl {
 
 class HitTheMotherLodeEffect extends OneShotEffect {
 
-    private static final FilterCard filter = DiscoverEffect.makeDiscoverFilter(10);
-
     HitTheMotherLodeEffect() {
         super(Outcome.Benefit);
         staticText = "Discover 10. If the discovered card's mana value is less than 10, "
@@ -64,7 +61,7 @@ class HitTheMotherLodeEffect extends OneShotEffect {
             return false;
         }
 
-        Card card = DiscoverEffect.doDiscover(controller, filter, game, source);
+        Card card = DiscoverEffect.doDiscover(controller, 10, game, source);
         int value = card == null ? 0 : card.getManaValue();
         if (value >= 10) {
             return false;
