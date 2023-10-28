@@ -70,7 +70,7 @@ class SkySwallowerEffect extends OneShotEffect {
             return false;
         }
         return new GainControlAllEffect(Duration.Custom,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_PERMANENT,
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_TARGET_PERMANENT,
                 opponent.getId()
         ).apply(game, source);
     }
