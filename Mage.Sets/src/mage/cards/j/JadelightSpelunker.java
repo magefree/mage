@@ -26,8 +26,8 @@ public final class JadelightSpelunker extends CardImpl {
 
         // When Jadelight Spelunker enters the battlefield, it explores X times.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new ExploreSourceEffect(ManacostVariableValue.ETB, false, "{it}")
-                        .setText("it explores X times. <i> (To have it explore, reveal the top card of your library. "
+                new ExploreSourceEffect(ManacostVariableValue.ETB, false, "it")
+                        .setText("it explores X times. <i>(To have it explore, reveal the top card of your library. "
                                 + "Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, "
                                 + "then put the card back or put it into your graveyard.)")
         ));

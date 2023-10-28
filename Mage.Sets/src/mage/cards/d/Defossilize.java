@@ -65,6 +65,7 @@ class DefossilizeEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
+        game.getState().processAction(game);
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent == null) {
             return false;

@@ -17,7 +17,7 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- * @author TheElk801, JayDi85
+ * @author TheElk801, JayDi85, Susucr, xenohedron
  */
 public class ExploreSourceEffect extends OneShotEffect {
 
@@ -44,7 +44,7 @@ public class ExploreSourceEffect extends OneShotEffect {
 
         this.amount = amount;
         // triggered ability text gen will replace {this} with "it" where applicable
-        staticText = explorerText + " explores" + (showAbilityHint ? REMINDER_TEXT : "");
+        staticText = "{this} explores" + (showAbilityHint ? REMINDER_TEXT : "");
     }
 
     protected ExploreSourceEffect(final ExploreSourceEffect effect) {
@@ -70,6 +70,10 @@ public class ExploreSourceEffect extends OneShotEffect {
         }
 
         for (int i = 0; i < amount; ++i) {
+            GameEvent event = new GameEvent(GameEvent.EventType.EXPLORE, permanentId, source, permanent.getControllerId());
+            if (game.replaceEvent(event)) {
+                continue;
+            }
             // 701.40a Certain abilities instruct a permanent to explore. To do so, that permanent’s controller reveals
             // the top card of their library. If a land card is revealed this way, that player puts that card into their
             // hand. Otherwise, that player puts a +1/+1 counter on the exploring permanent and may put the revealed
@@ -92,7 +96,7 @@ public class ExploreSourceEffect extends OneShotEffect {
                 // the exploring creature receives a +1/+1 counter.
                 addCounter(game, permanent, source);
             }
-
+            game.getState().processAction(game);
             // 701.40b A permanent “explores” after the process described in rule 701.40a is complete, even if some or all of
             // those actions were impossible.
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId, source, permanent.getControllerId()));

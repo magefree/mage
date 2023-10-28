@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author xenohedron
  */
 public class ExploreTest extends CardTestPlayerBase {
@@ -147,6 +146,63 @@ public class ExploreTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 1);
         assertGraveyardCount(playerA, enter,1);
         assertLibraryCount(playerA, 0);
+    }
+
+    @Test
+    public void exploreTwice() {
+        String jr = "Jadelight Ranger";
+        addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.HAND, playerA, jr);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, quicksand, 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, jr);
+
+        setChoice(playerA, "Whenever a creature you control explores"); // order trigger
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(jr, CounterType.P1P1, 0);
+        assertCounterCount(ww, CounterType.P1P1, 2);
+        assertLife(playerA, 26);
+        assertHandCount(playerA, quicksand, 2);
+        assertGraveyardCount(playerA, 0);
+        assertLibraryCount(playerA, 0);
+    }
+
+    @Test
+    public void exploreXTimes() {
+        String js = "Jadelight Spelunker";
+        addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.HAND, playerA, js);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, gg, 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, js);
+        setChoice(playerA, "X=3");
+        setChoice(playerA, false); // no to graveyard
+        setChoice(playerA, true); // yes to graveyard
+        setChoice(playerA, false); // no to graveyard
+
+        setChoice(playerA, "Whenever a creature you control explores"); // order trigger
+        setChoice(playerA, "Whenever a creature you control explores"); // order trigger
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(js, CounterType.P1P1, 3);
+        assertCounterCount(ww, CounterType.P1P1, 3);
+        assertLife(playerA, 29);
+        assertHandCount(playerA, gg, 0);
+        assertGraveyardCount(playerA, gg, 1);
+        assertLibraryCount(playerA, gg, 2);
     }
     
 }

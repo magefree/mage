@@ -75,7 +75,7 @@ public class GameEvent implements Serializable {
         ZONE_CHANGE_GROUP,
         DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
-        EXPLORED,
+        EXPLORE, EXPLORED, // targetId is exploring permanent
         ECHO_PAID,
         MIRACLE_CARD_REVEALED,
         /* MADNESS_CARD_EXILED,
