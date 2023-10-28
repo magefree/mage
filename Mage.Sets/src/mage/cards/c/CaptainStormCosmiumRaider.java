@@ -20,11 +20,11 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class CaptainStormPlundererOfCosmium extends CardImpl {
+public final class CaptainStormCosmiumRaider extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.PIRATE);
 
-    public CaptainStormPlundererOfCosmium(UUID ownerId, CardSetInfo setInfo) {
+    public CaptainStormCosmiumRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -42,12 +42,12 @@ public final class CaptainStormPlundererOfCosmium extends CardImpl {
         this.addAbility(ability);
     }
 
-    private CaptainStormPlundererOfCosmium(final CaptainStormPlundererOfCosmium card) {
+    private CaptainStormCosmiumRaider(final CaptainStormCosmiumRaider card) {
         super(card);
     }
 
     @Override
-    public CaptainStormPlundererOfCosmium copy() {
-        return new CaptainStormPlundererOfCosmium(this);
+    public CaptainStormCosmiumRaider copy() {
+        return new CaptainStormCosmiumRaider(this);
     }
 }
