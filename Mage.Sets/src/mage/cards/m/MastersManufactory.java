@@ -34,6 +34,7 @@ public final class MastersManufactory extends CardImpl {
 
     public MastersManufactory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
+        this.nightCard = true;
 
         // {T}: Create a 4/4 white and blue Golem artifact creature token. Activate only if Master's Manufactory or another artifact entered the battlefield under your control this turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
