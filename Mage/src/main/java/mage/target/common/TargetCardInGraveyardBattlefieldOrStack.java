@@ -32,7 +32,11 @@ public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
     protected final FilterSpell filterSpell;
 
     public TargetCardInGraveyardBattlefieldOrStack(int minNumTargets, int maxNumTargets, FilterCard filterGraveyard, FilterPermanent filterBattlefield) {
-        this(minNumTargets, maxNumTargets, filterGraveyard, filterBattlefield, defaultSpellFilter, null);
+        this(minNumTargets, maxNumTargets, filterGraveyard, filterBattlefield, null);
+    }
+
+    public TargetCardInGraveyardBattlefieldOrStack(int minNumTargets, int maxNumTargets, FilterCard filterGraveyard, FilterPermanent filterBattlefield, String targetName) {
+        this(minNumTargets, maxNumTargets, filterGraveyard, filterBattlefield, defaultSpellFilter, targetName);
     }
 
     public TargetCardInGraveyardBattlefieldOrStack(int minNumTargets, int maxNumTargets, FilterCard filterGraveyard, FilterPermanent filterBattlefield, FilterSpell filterSpell, String targetName) {

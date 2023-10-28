@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -8,14 +9,14 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterOwnedCard;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -42,11 +43,15 @@ public class CraftAbility extends ActivatedAbilityImpl {
     private final String manaString;
 
     public CraftAbility(String manaString) {
-        this(manaString, "artifact", artifactFilter, StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT);
+        this(manaString, "artifact", "another artifact you control or an artifact card from your graveyard", CardType.ARTIFACT.getPredicate());
     }
 
-    public CraftAbility(String manaString, String description, FilterCard filterCard, FilterPermanent filterPermanent) {
-        this(manaString, description, new TargetCardInGraveyardBattlefieldOrStack(1, 1, filterCard, filterPermanent));
+    public CraftAbility(String manaString, String description, String targetDescription, Predicate<MageObject>... predicates) {
+        this(manaString, description, targetDescription, 1, 1, predicates);
+    }
+
+    public CraftAbility(String manaString, String description, String targetDescription, int minTargets, int maxTargets, Predicate<MageObject>... predicates) {
+        this(manaString, description, makeTarget(minTargets, maxTargets, targetDescription, predicates));
     }
 
     public CraftAbility(String manaString, String description, TargetCardInGraveyardBattlefieldOrStack target) {
@@ -73,6 +78,17 @@ public class CraftAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         return "Craft with " + description + ' ' + manaString;
+    }
+
+    private static TargetCardInGraveyardBattlefieldOrStack makeTarget(int minTargets, int maxTargets, String targetDescription, Predicate<MageObject>... predicates) {
+        FilterPermanent filterPermanent = new FilterControlledPermanent();
+        filterPermanent.add(AnotherPredicate.instance);
+        FilterCard filterCard = new FilterOwnedCard();
+        for (Predicate<MageObject> predicate : predicates) {
+            filterPermanent.add(predicate);
+            filterCard.add(predicate);
+        }
+        return new TargetCardInGraveyardBattlefieldOrStack(minTargets, maxTargets, filterCard, filterPermanent, targetDescription);
     }
 }
 
