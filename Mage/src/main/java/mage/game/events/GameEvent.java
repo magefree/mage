@@ -370,7 +370,7 @@ public class GameEvent implements Serializable {
          */
         UNTAPPED,
         /*  UNTAPPED_BATCH
-         combine all TAPPED events occuring at the same time in a single event
+         combine all UNTAPPED events occuring at the same time in a single event
          */
         UNTAPPED_BATCH,
         FLIP, FLIPPED,
