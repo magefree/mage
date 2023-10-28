@@ -25,6 +25,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Amalia Benavides Aguirre", 221, Rarity.RARE, mage.cards.a.AmaliaBenavidesAguirre.class));
         cards.add(new SetCardInfo("Bartolome del Presidio", 224, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class));
         cards.add(new SetCardInfo("Bladewheel Chariot", 36, Rarity.UNCOMMON, mage.cards.b.BladewheelChariot.class));
+        cards.add(new SetCardInfo("Bloodletter of Aclazotz", 92, Rarity.MYTHIC, mage.cards.b.BloodletterOfAclazotz.class));
         cards.add(new SetCardInfo("Breeches, Eager Pillager", 137, Rarity.RARE, mage.cards.b.BreechesEagerPillager.class));
         cards.add(new SetCardInfo("Broodrage Mycoid", 95, Rarity.COMMON, mage.cards.b.BroodrageMycoid.class));
         cards.add(new SetCardInfo("Captain Storm, Cosmium Raider", 227, Rarity.UNCOMMON, mage.cards.c.CaptainStormCosmiumRaider.class));
