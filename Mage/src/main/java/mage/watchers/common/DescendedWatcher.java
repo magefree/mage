@@ -31,7 +31,7 @@ public class DescendedWatcher extends Watcher {
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Card card = game.getCard(zEvent.getTargetId());
-        if (card != null && zEvent.getToZone() == Zone.GRAVEYARD) {
+        if (card != null && card.isPermanent(game) && zEvent.getToZone() == Zone.GRAVEYARD) {
             playerMap.compute(card.getOwnerId(), CardUtil::setOrIncrementValue);
         }
     }
