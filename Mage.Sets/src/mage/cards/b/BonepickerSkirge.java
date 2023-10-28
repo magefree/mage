@@ -9,6 +9,7 @@ import mage.abilities.condition.common.CorruptedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.AbilityWord;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
@@ -38,7 +39,7 @@ public final class BonepickerSkirge extends CardImpl {
                 "as long as an opponent has three or more poison counters, {this} has deathtouch"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(DeathtouchAbility.getInstance()),
+                new GainAbilitySourceEffect(LifelinkAbility.getInstance()),
                 CorruptedCondition.instance, "and lifelink"
         ));
         this.addAbility(ability.setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint()));

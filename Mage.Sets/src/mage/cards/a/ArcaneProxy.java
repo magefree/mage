@@ -49,7 +49,7 @@ public final class ArcaneProxy extends CardImpl {
 
         // When Arcane Proxy enters the battlefield, if you cast it, exile target instant or sorcery card with mana value less than or equal to Arcane Proxy's power from your graveyard. Copy that card. You may cast the copy without paying its mana cost.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ExileTargetCardCopyAndCastEffect(false)),
+                new EntersBattlefieldTriggeredAbility(new ExileTargetCardCopyAndCastEffect(true)),
                 CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
                 "if you cast it, exile target instant or sorcery card with mana value less than or equal to {this}'s " +
                 "power from your graveyard. Copy that card. You may cast the copy without paying its mana cost."

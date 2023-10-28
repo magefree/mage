@@ -359,6 +359,7 @@ public enum SubType {
     SLITH("Slith", SubTypeSet.CreatureType),
     SLIVER("Sliver", SubTypeSet.CreatureType),
     SLUG("Slug", SubTypeSet.CreatureType),
+    SNAIL("Snail", SubTypeSet.CreatureType),
     SNAKE("Snake", SubTypeSet.CreatureType),
     SOLDIER("Soldier", SubTypeSet.CreatureType),
     SOLTARI("Soltari", SubTypeSet.CreatureType),
@@ -482,6 +483,7 @@ public enum SubType {
     NIXILIS("Nixilis", SubTypeSet.PlaneswalkerType),
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
     OKO("Oko", SubTypeSet.PlaneswalkerType),
+    QUINTORIUS("Quintorius", SubTypeSet.PlaneswalkerType),
     RAL("Ral", SubTypeSet.PlaneswalkerType),
     REY("Rey", SubTypeSet.PlaneswalkerType, true),  // Star Wars,
     ROWAN("Rowan", SubTypeSet.PlaneswalkerType),

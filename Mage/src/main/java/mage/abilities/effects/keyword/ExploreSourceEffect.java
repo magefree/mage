@@ -70,7 +70,10 @@ public class ExploreSourceEffect extends OneShotEffect {
         }
 
         for (int i = 0; i < amount; ++i) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId, source, permanent.getControllerId()));
+            // 701.40a Certain abilities instruct a permanent to explore. To do so, that permanent’s controller reveals
+            // the top card of their library. If a land card is revealed this way, that player puts that card into their
+            // hand. Otherwise, that player puts a +1/+1 counter on the exploring permanent and may put the revealed
+            // card into their graveyard.
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.revealCards("Explored card", new CardsImpl(card), game);
@@ -89,6 +92,10 @@ public class ExploreSourceEffect extends OneShotEffect {
                 // the exploring creature receives a +1/+1 counter.
                 addCounter(game, permanent, source);
             }
+
+            // 701.40b A permanent “explores” after the process described in rule 701.40a is complete, even if some or all of
+            // those actions were impossible.
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId, source, permanent.getControllerId()));
         }
         return true;
     }
