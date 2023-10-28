@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class TheMasterMultiplied extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("creature tokens you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature tokens you control");
 
     static {
         filter.add(TokenPredicate.TRUE);
@@ -61,7 +61,7 @@ public final class TheMasterMultiplied extends CardImpl {
 
 class TheMasterMultipliedEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("tokens you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature tokens you control");
 
     static {
         filter.add(TokenPredicate.TRUE);
