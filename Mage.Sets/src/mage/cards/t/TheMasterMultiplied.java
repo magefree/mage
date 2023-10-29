@@ -15,6 +15,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -84,7 +85,7 @@ class TheMasterMultipliedEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT
-                || event.getType() == GameEvent.EventType.EXILE_PERMANENT;
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -98,6 +99,13 @@ class TheMasterMultipliedEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
         Ability stackAbility = stackObject.getStackAbility();
+
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (!zEvent.getToZone().equals(Zone.EXILED)) {
+                return false;
+            }
+        }
 
         return controller != null && permanent != null
                 && filter.match(permanent, source.getControllerId(), source, game)

@@ -1932,16 +1932,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
-        if (!game.replaceEvent(GameEvent.getEvent(EventType.EXILE_PERMANENT, objectId, source, controllerId))) {
-            Zone fromZone = game.getState().getZone(objectId);
-            ZoneChangeEvent event = new ZoneChangeEvent(this, source, ownerId, fromZone, Zone.EXILED, appliedEffects);
-            ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
+        Zone fromZone = game.getState().getZone(objectId);
+        ZoneChangeEvent event = new ZoneChangeEvent(this, source, ownerId, fromZone, Zone.EXILED, appliedEffects);
+        ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
-            boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
-            //20180810 - 701.3d
-            detachAllAttachments(game);
-            return successfullyMoved;
-        }
-        return false;
+        boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
+        //20180810 - 701.3d
+        detachAllAttachments(game);
+        return successfullyMoved;
     }
 }

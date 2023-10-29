@@ -521,7 +521,6 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         FACE_VILLAINOUS_CHOICE,
-        EXILE_PERMANENT,
         //custom events
         CUSTOM_EVENT
     }
