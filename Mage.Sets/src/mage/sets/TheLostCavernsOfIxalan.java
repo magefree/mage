@@ -92,6 +92,8 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Didact Echo", 53, Rarity.COMMON, mage.cards.d.DidactEcho.class));
         cards.add(new SetCardInfo("Digsite Conservator", 252, Rarity.UNCOMMON, mage.cards.d.DigsiteConservator.class));
         cards.add(new SetCardInfo("Dinotomaton", 144, Rarity.COMMON, mage.cards.d.Dinotomaton.class));
+        cards.add(new SetCardInfo("Dire Blunderbuss", 145, Rarity.RARE, mage.cards.d.DireBlunderbuss.class));
+        cards.add(new SetCardInfo("Dire Flail", 145, Rarity.RARE, mage.cards.d.DireFlail.class));
         cards.add(new SetCardInfo("Disruptor Wanderglyph", 253, Rarity.COMMON, mage.cards.d.DisruptorWanderglyph.class));
         cards.add(new SetCardInfo("Dowsing Device", 146, Rarity.UNCOMMON, mage.cards.d.DowsingDevice.class));
         cards.add(new SetCardInfo("Dreadmaw's Ire", 147, Rarity.UNCOMMON, mage.cards.d.DreadmawsIre.class));
