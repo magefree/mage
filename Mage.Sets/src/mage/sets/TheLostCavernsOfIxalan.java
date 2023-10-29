@@ -101,6 +101,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Poison Dart Frog", 207, Rarity.COMMON, mage.cards.p.PoisonDartFrog.class));
         cards.add(new SetCardInfo("Pugnacious Hammerskull", 208, Rarity.RARE, mage.cards.p.PugnaciousHammerskull.class));
         cards.add(new SetCardInfo("Quintorius Kand", 238, Rarity.MYTHIC, mage.cards.q.QuintoriusKand.class));
+        cards.add(new SetCardInfo("Rampaging Ceratops", 162, Rarity.UNCOMMON, mage.cards.r.RampagingCeratops.class));
         cards.add(new SetCardInfo("Rampaging Spiketail", 116, Rarity.COMMON, mage.cards.r.RampagingSpiketail.class));
         cards.add(new SetCardInfo("Resplendent Angel", 32, Rarity.MYTHIC, mage.cards.r.ResplendentAngel.class));
         cards.add(new SetCardInfo("Restless Anchorage", 280, Rarity.RARE, mage.cards.r.RestlessAnchorage.class));
