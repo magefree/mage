@@ -10,6 +10,7 @@ import mage.abilities.effects.common.DoubleCountersSourceEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.StaticHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,7 +37,7 @@ public final class TheMillenniumCalendar extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you untap one or more permanents during your untap step, put that many time counters on The Millennium Calendar.
-        this.addAbility(new TheMilleniumCalendarTriggeredAbility());
+        this.addAbility(new TheMillenniumCalendarTriggeredAbility());
 
         // {2}, {T}: Double the number of time counters on The Millennium Calendar.
         Ability ability = new SimpleActivatedAbility(
@@ -60,19 +61,19 @@ public final class TheMillenniumCalendar extends CardImpl {
     }
 }
 
-class TheMilleniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
+class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
 
-    public TheMilleniumCalendarTriggeredAbility() {
+    public TheMillenniumCalendarTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    protected TheMilleniumCalendarTriggeredAbility(final TheMilleniumCalendarTriggeredAbility ability) {
+    protected TheMillenniumCalendarTriggeredAbility(final TheMillenniumCalendarTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public TheMilleniumCalendarTriggeredAbility copy() {
-        return new TheMilleniumCalendarTriggeredAbility(this);
+    public TheMillenniumCalendarTriggeredAbility copy() {
+        return new TheMillenniumCalendarTriggeredAbility(this);
     }
 
     @Override
@@ -103,7 +104,8 @@ class TheMilleniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
 
         this.getEffects().clear();
         this.addEffect(new AddCountersSourceEffect(CounterType.TIME.createInstance(count)));
-        this.getEffects().setValue(infoKey, count); // for the trigger on the stack to display the info.
+        this.getHints().clear();
+        this.addHint(new StaticHint("Number of untapped permanents: " + count));
         return true;
     }
 
@@ -111,14 +113,8 @@ class TheMilleniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        // this trigger might want to expose extra info on the stack
-        String triggeredInfo = "";
-        if (!this.getEffects().isEmpty()) {
-            triggeredInfo += "<br><br><i>Number of untapped permanents: " + this.getEffects().get(0).getValue(infoKey) + "</i>";
-        }
         return "Whenever you untap one or more permanents during your untap step, "
-                + "put that many time counters on {this}."
-                + triggeredInfo;
+                + "put that many time counters on {this}.";
     }
 }
 
@@ -128,7 +124,8 @@ class TheMilleniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
 class TheMillenniumCalendarStateTriggeredAbility extends StateTriggeredAbility {
 
     public TheMillenniumCalendarStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect().setText("sacrifice it"));
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        withRuleTextReplacement(true);
         addEffect(new LoseLifeOpponentsEffect(1000).concatBy("and"));
         setTriggerPhrase("When there are 1,000 or more time counters on {this}, ");
     }
