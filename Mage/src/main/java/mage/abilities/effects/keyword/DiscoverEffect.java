@@ -25,7 +25,7 @@ public class DiscoverEffect extends OneShotEffect {
     public DiscoverEffect(int amount) {
         super(Outcome.Benefit);
         this.amount = amount;
-        staticText = "Discover " + amount + " <i>(Exile cards from the top of your library " +
+        staticText = "discover " + amount + ". <i>(Exile cards from the top of your library " +
                 "until you exile a nonland card with mana value " + amount + " or less. " +
                 "Cast it without paying its mana cost or put it into your hand. " +
                 "Put the rest on the bottom in a random order.)</i>";
