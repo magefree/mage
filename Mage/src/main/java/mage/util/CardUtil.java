@@ -1016,8 +1016,9 @@ public final class CardUtil {
 
     /**
      * For finding the spell or ability on the stack for "becomes the target" triggers.
+     *
      * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game the Game from checkTrigger() or watch()
+     * @param game  the Game from checkTrigger() or watch()
      * @return the StackObject which targeted the source, or null if not found
      */
     public static StackObject getTargetingStackObject(GameEvent event, Game game) {
@@ -1042,10 +1043,11 @@ public final class CardUtil {
      * For ensuring that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
      * If this is the first attempt at triggering for a given ability targeting a given object,
      * this method records that in the game state for later checks by this same method.
+     *
      * @param checkingReference must be unique for each usage (this.id.toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param targetingObject from getTargetingStackObject
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game the Game from checkTrigger() or watch()
+     * @param targetingObject   from getTargetingStackObject
+     * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game              the Game from checkTrigger() or watch()
      * @return true if already triggered/watched, false if this is the first/only trigger/watch
      */
     public static boolean checkTargetedEventAlreadyUsed(String checkingReference, StackObject targetingObject, GameEvent event, Game game) {
@@ -1294,7 +1296,7 @@ public final class CardUtil {
 
     /**
      * Retrieves a list of all castable components from a given card based on certain conditions.
-     *
+     * <p>
      * Castable components are parts of a card that can be played or cast,
      * such as the adventure and main side of adventure spells or both sides of a fuse card.
      *
@@ -1590,6 +1592,11 @@ public final class CardUtil {
     public static String getSourceName(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         return sourceObject != null ? sourceObject.getName() : "";
+    }
+
+    public static String getSourceIdName(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        return sourceObject != null ? sourceObject.getIdName() : "";
     }
 
     /**
