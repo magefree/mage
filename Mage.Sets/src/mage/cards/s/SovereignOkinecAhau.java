@@ -32,7 +32,7 @@ public final class SovereignOkinecAhau extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever Sovereign Okinec Ahau attacks, for each creature you control with power greater than that
         // creature's base power, put a number of +1/+1 counters on that creature equal to the difference.
@@ -54,7 +54,7 @@ class SovereignOkinecAhauEffect extends OneShotEffect {
 
     SovereignOkinecAhauEffect() {
         super(Outcome.Benefit);
-        staticText = "for each creature you control with power greater than that" +
+        staticText = "for each creature you control with power greater than that " +
                 "creature's base power, put a number of +1/+1 counters on that creature equal to the difference.";
     }
 

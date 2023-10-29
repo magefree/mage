@@ -34,7 +34,7 @@ public final class AbueloAncestralEcho extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // {1}{W}{U}: Exile another target creature or artifact you control. Return it to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(

@@ -22,7 +22,7 @@ public enum AbilityWord {
     COUNCILS_DILEMMA("Council's dilemma"),
     COVEN("Coven"),
     DELIRIUM("Delirium"),
-    DESCEND_4("Descent 4"),
+    DESCEND_4("Descend 4"),
     DOMAIN("Domain"),
     EMINENCE("Eminence"),
     ENRAGE("Enrage"),

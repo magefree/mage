@@ -41,7 +41,7 @@ public final class TheGrimCaptain extends CardImpl {
         this.color.setBlack(true);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class EarthshakerDreadmaw extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DINOSAUR);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DINOSAUR, "other Dinosaur you control");
 
     static {
         filter.add(AnotherPredicate.instance);

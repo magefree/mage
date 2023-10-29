@@ -32,7 +32,7 @@ public final class AlphaDeathclaw extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

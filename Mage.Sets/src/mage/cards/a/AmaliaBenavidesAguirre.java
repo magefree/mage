@@ -43,14 +43,14 @@ public final class AmaliaBenavidesAguirre extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ward--Pay 3 life.
-        this.addAbility(new WardAbility(new PayLifeCost(3)));
+        this.addAbility(new WardAbility(new PayLifeCost(3), false));
 
         // Whenever you gain life, Amalia Benavides Aguirre explores. Then, destroy all other creatures if Amalia's power is exactly 20.
         Ability ability = new GainLifeControllerTriggeredAbility(new ExploreSourceEffect(false, "{this}"));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DestroyAllEffect(filter),
                 AmaliaBenavidesAguirreCondition.instance
-        ).setText("Then, destroy all other creatures if Amalia's power is exactly 20"));
+        ).setText("Then, destroy all other creatures if its power is exactly 20"));
         this.addAbility(ability);
     }
 

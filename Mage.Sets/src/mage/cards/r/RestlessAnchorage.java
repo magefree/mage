@@ -41,7 +41,7 @@ public final class RestlessAnchorage extends CardImpl {
                         .withSubType(SubType.BIRD)
                         .withAbility(FlyingAbility.getInstance()),
                 CardType.LAND, Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{1}{W}{U}")));
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{1}{W}{U}")));
 
         // Whenever Restless Anchorage attacks, create a Map token.
         this.addAbility(new AttacksTriggeredAbility(

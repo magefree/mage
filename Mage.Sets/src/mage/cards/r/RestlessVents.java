@@ -42,7 +42,7 @@ public final class RestlessVents extends CardImpl {
                         .withSubType(SubType.INSECT)
                         .withAbility(new MenaceAbility(false)),
                 CardType.LAND, Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{1}{B}{R}")));
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{1}{B}{R}")));
 
         // Whenever Restless Vents attacks, you may discard a card. If you do, draw a card.
         this.addAbility(new AttacksTriggeredAbility(

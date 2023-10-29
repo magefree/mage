@@ -35,7 +35,7 @@ public final class TheBelligerent extends CardImpl {
         ability.addEffect(new LookAtTopCardOfLibraryAnyTimeEffect(TargetController.YOU, Duration.EndOfTurn));
         ability.addEffect(new PlayTheTopCardEffect(
                 TargetController.YOU, filter, false
-        ).concatBy("and"));
+        ).concatBy(", and"));
         this.addAbility(ability);
 
         // Crew 3

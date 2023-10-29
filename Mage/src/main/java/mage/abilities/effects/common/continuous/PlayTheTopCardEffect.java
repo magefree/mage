@@ -60,7 +60,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
             default:
                 throw new IllegalArgumentException("Unknown target library type: " + targetLibrary);
         }
-        this.staticText = "You may " + filter.getMessage() + " from the top of " + libInfo;
+        this.staticText = "you may " + filter.getMessage() + " from the top of " + libInfo;
 
         // verify check: if you see "card" text in the rules then use card mode
         // (there aren't any real cards after oracle update, but can be added in the future)
