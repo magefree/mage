@@ -66,14 +66,12 @@ public class MariTheKillingQuill extends CardImpl {
         GainAbilityControlledEffect gainDeathTouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         Ability mainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, gainDeathTouchEffect);
 
-        String abilityText = "Whenever this creature deals combat damage to a player, " +
-                "you may remove a hit counter from a card that player owns in exile. " +
-                "If you do, draw a card and create two Treasure tokens.";
-
         // NOTE: Optional part is handled inside the effect
-        Ability dealsDamageAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new MariTheKillingQuillDealsDamageEffect(), false, true).setTriggerPhrase(abilityText);
+        Ability dealsDamageAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new MariTheKillingQuillDealsDamageEffect(), false, true);
         Effect drawAndTreasureEffect = new GainAbilityControlledEffect(dealsDamageAbility, Duration.WhileOnBattlefield, filter);
-        drawAndTreasureEffect.setText("\"" + abilityText + "\"");
+        drawAndTreasureEffect.setText("\"Whenever this creature deals combat damage to a player, " +
+                "you may remove a hit counter from a card that player owns in exile. " +
+                "If you do, draw a card and create two Treasure tokens.\"");
         drawAndTreasureEffect.concatBy("and");
 
         mainAbility.addEffect(drawAndTreasureEffect);
@@ -95,6 +93,8 @@ class MariTheKillingQuillDealsDamageEffect extends OneShotEffect {
 
     MariTheKillingQuillDealsDamageEffect() {
         super(Outcome.Benefit);
+        staticText =  "you may remove a hit counter from a card that player owns in exile. " +
+                "If you do, draw a card and create two Treasure tokens.";
     }
 
     private MariTheKillingQuillDealsDamageEffect(final MariTheKillingQuillDealsDamageEffect effect) {
