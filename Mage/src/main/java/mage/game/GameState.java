@@ -880,6 +880,27 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    public void addSimultaneousUntapped(UntappedEvent untappedEvent, Game game) {
+        // Combine multiple untapped events in the single event (batch)
+
+        boolean isUntappedBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof UntappedBatchEvent) {
+                // Adding to the existing batch
+                ((UntappedBatchEvent) event).addEvent(untappedEvent);
+                isUntappedBatchUsed = true;
+                break;
+            }
+        }
+
+        // new batch
+        if (!isUntappedBatchUsed) {
+            UntappedBatchEvent batch = new UntappedBatchEvent();
+            batch.addEvent(untappedEvent);
+            addSimultaneousEvent(batch, game);
+        }
+    }
+
     public void handleEvent(GameEvent event, Game game) {
         watchers.watch(event, game);
         delayed.checkTriggers(event, game);

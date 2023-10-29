@@ -360,8 +360,19 @@ public class GameEvent implements Serializable {
          combine all TAPPED events occuring at the same time in a single event
          */
         TAPPED_BATCH,
-
-        UNTAP, UNTAPPED,
+        UNTAP,
+        /* UNTAPPED,
+         targetId    untapped permanent
+         sourceId    not used for this event // TODO: add source for untap?
+         playerId    controller of permanent // TODO: replace by source controller of untap? need to check every usage if so.
+         amount      not used for this event
+         flag        true if untapped during untap step (event is checked at upkeep so can't trust the current Phase)
+         */
+        UNTAPPED,
+        /*  UNTAPPED_BATCH
+         combine all UNTAPPED events occuring at the same time in a single event
+         */
+        UNTAPPED_BATCH,
         FLIP, FLIPPED,
         TRANSFORMING, TRANSFORMED,
         ADAPT,

@@ -545,7 +545,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         //20091005 - 701.15b
         if (tapped && !replaceEvent(EventType.UNTAP, game)) {
             this.tapped = false;
-            fireEvent(EventType.UNTAPPED, game);
+            UntappedEvent event = new UntappedEvent(
+                    objectId, this.controllerId,
+                    // Since triggers are not checked until the next step,
+                    // we use the event flag to know if untapping was done during the untap step
+                    game.getTurnStepType() == PhaseStep.UNTAP
+            );
+            game.fireEvent(event);
+            game.getState().addSimultaneousUntapped(event, game);
             return true;
         }
         return false;
