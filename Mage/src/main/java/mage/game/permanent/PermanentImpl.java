@@ -1931,7 +1931,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
             boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
             //20180810 - 701.3d
-            detachAllAttachments(game);
+            if (successfullyMoved) {
+                detachAllAttachments(game);
+            }
             return successfullyMoved;
         }
         return false;
@@ -1945,7 +1947,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
         //20180810 - 701.3d
-        detachAllAttachments(game);
+        if (successfullyMoved) {
+            detachAllAttachments(game);
+        }
         return successfullyMoved;
     }
 }
