@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.ExploredEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -99,7 +100,7 @@ public class ExploreSourceEffect extends OneShotEffect {
             game.getState().processAction(game);
             // 701.40b A permanent “explores” after the process described in rule 701.40a is complete, even if some or all of
             // those actions were impossible.
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId, source, permanent.getControllerId()));
+            game.fireEvent(new ExploredEvent(permanent, source, card));
         }
         return true;
     }
