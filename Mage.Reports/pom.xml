@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.mage</groupId>
+        <artifactId>mage-root</artifactId>
+        <version>1.4.50</version>
+    </parent>
+
+    <artifactId>mage-reports</artifactId>
+    <packaging>pom</packaging>
+    <name>Mage Reports</name>
+
+    <build>
+        <plugins>
+            <!--
+                 JaCoCo Code Coverage support
+                 Workaround to find modules dependencies (root pom file must contain all modules)
+                 Original code: https://github.com/jacoco/jacoco/pull/1251#issuecomment-1061585625
+                 Can be removed after jacoco implemented a transitive modules support, see https://github.com/jacoco/jacoco/issues/1241
+            -->
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <version>2.1.1</version>
+                <executions>
+                    <execution>
+                        <id>patch-maven-dependencies</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+                                // add all modules to the dependencies to make Jacoco aggregate report work (without listing them manually)
+                                // see https://github.com/jacoco/jacoco/issues/974
+                                for (dependencyProject in session.getProjectDependencyGraph().getSortedProjects()) {
+                                    def dependency = new org.apache.maven.model.Dependency() as Object
+                                    dependency.setGroupId(dependencyProject.getGroupId())
+                                    dependency.setArtifactId(dependencyProject.getArtifactId())
+                                    dependency.setVersion(dependencyProject.getVersion())
+                                    dependency.setScope("compile")
+
+                                    project.getDependencies().add(dependency)
+                                }
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+                JaCoCo Code Coverage support
+                Agent must be injected for all modules (see parent), but real report generates here
+            -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- generate combined report (current and dependency modules) -->
+                        <id>report-aggregate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                        <configuration>
+                            <formats>${jacoco.formats}</formats>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
+</project>
