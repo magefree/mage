@@ -224,6 +224,7 @@
     </build>
 
     <properties>
+        <root.dir>${project.basedir}/..</root.dir>
         <manifest.file>src/main/resources/META-INF/MANIFEST.MF</manifest.file>
     </properties>
 

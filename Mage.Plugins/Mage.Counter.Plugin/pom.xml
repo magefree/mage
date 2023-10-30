@@ -38,4 +38,8 @@
 
         <finalName>mage-counter-plugin</finalName>
     </build>
+
+    <properties>
+        <root.dir>${project.basedir}/../..</root.dir>
+    </properties>
 </project>

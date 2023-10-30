@@ -19,4 +19,8 @@
         <module>Mage.Counter.Plugin</module>
     </modules>
 
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
+
 </project>
