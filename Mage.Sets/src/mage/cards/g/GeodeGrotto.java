@@ -34,9 +34,8 @@ public final class GeodeGrotto extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {2}{R}, {T}: Until end of turn, target creature gains haste and gets +X/+0, where X is the number of artifacts you control. Activate only as a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(
-                new GainAbilityTargetEffect(HasteAbility.getInstance()), new ManaCostsImpl<>("{2}{R}")
-        );
+        Ability ability = new ActivateAsSorceryActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance())
+                .setText("Until end of turn, target creature gains haste"), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new BoostTargetEffect(
                 ArtifactYouControlCount.instance, StaticValue.get(0)

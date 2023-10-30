@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class SoulsOfTheLost extends CardImpl {
 
-    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_PERMANENT);
+    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_PERMANENTS);
 
     public SoulsOfTheLost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

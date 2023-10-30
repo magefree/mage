@@ -109,8 +109,6 @@ class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    private static final String infoKey = "number_untapped";
-
     @Override
     public String getRule() {
         return "Whenever you untap one or more permanents during your untap step, "
@@ -126,7 +124,7 @@ class TheMillenniumCalendarStateTriggeredAbility extends StateTriggeredAbility {
     public TheMillenniumCalendarStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
         withRuleTextReplacement(true);
-        addEffect(new LoseLifeOpponentsEffect(1000).concatBy("and"));
+        addEffect(new LoseLifeOpponentsEffect(1000).setText("and each opponent loses 1,000 life"));
         setTriggerPhrase("When there are 1,000 or more time counters on {this}, ");
     }
 

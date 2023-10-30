@@ -43,7 +43,7 @@ public final class BladewheelChariot extends CardImpl {
         // Tap two other untapped artifacts you control: Bladewheel Chariot becomes an artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(new AddCardTypeSourceEffect(
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
-        ), new TapTargetCost(new TargetControlledPermanent(2, filter))));
+        ).setText("{this} becomes an artifact creature until end of turn"), new TapTargetCost(new TargetControlledPermanent(2, filter))));
 
         // Crew 1
         this.addAbility(new CrewAbility(1));
