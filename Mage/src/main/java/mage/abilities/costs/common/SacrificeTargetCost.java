@@ -112,7 +112,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         return permanents;
     }
 
-    private static final String makeText(TargetControlledPermanent target) {
+    private static String makeText(TargetControlledPermanent target) {
         if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
             return target.getTargetName();
         }
