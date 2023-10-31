@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class Overburden extends CardImpl {
                 StaticFilters.FILTER_CREATURE_NON_TOKEN,
                 false,
                 SetTargetPointer.PLAYER
-        ));
+        ).setTriggerPhrase("Whenever a player puts a nontoken creature onto the battlefield, "));
     }
 
     private Overburden(final Overburden card) {
