@@ -29,7 +29,7 @@ public final class GoldnightCommander extends CardImpl {
 
         // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null, true));
+                new BoostControlledEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null));
     }
 
     private GoldnightCommander(final GoldnightCommander card) {

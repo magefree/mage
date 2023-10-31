@@ -28,7 +28,7 @@ public final class HealerOfThePride extends CardImpl {
 
         // Whenever another creature enters the battlefield under your control, you gain 2 life.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null, true));
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null));
 
     }
 

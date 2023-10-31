@@ -37,7 +37,7 @@ public final class HerosBlade extends CardImpl {
         // Whenever a legendary creature enters the battlefield under your control, you may attach Hero's Blade to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null, true));
+                filter, true, SetTargetPointer.PERMANENT, null));
 
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));

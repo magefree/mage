@@ -16,7 +16,7 @@ public final class NissaVitalForceEmblem extends Emblem {
     public NissaVitalForceEmblem() {
         super("Emblem Nissa");
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(1), new FilterControlledLandPermanent("a land"),
-                true, null, true);
+                true, null);
         getAbilities().add(ability);
     }
 

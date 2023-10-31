@@ -34,7 +34,7 @@ public final class SalivatingGremlins extends CardImpl {
         effect.setText("{this} gets +2/+0");
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
                 effect,
-                new FilterControlledArtifactPermanent("an artifact"), false, null, true);
+                new FilterControlledArtifactPermanent("an artifact"), false, null);
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

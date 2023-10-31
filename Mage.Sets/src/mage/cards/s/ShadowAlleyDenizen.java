@@ -43,7 +43,7 @@ public final class ShadowAlleyDenizen extends CardImpl {
         // Whenever another black creature enters the battlefield under your control, target creature gains intimidate until end of turn.
         Effect effect = new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("target creature gains intimidate until end of turn. <i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>");
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, null, true);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, null);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

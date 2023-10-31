@@ -15,12 +15,7 @@ import mage.game.permanent.Permanent;
 public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
     /**
-     * zone     = BATTLEFIELD
-     * optional = false
-     * rule     = null
-     *
-     * @param effect
-     * @param filter
+     * zone = BATTLEFIELD, optional = false
      */
     public EntersBattlefieldControlledTriggeredAbility(Effect effect, FilterPermanent filter) {
         this(Zone.BATTLEFIELD, effect, filter, false);
@@ -40,7 +35,7 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
     }
 
     public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule) {
-        super(zone, effect, filter, optional, setTargetPointer, rule, true);
+        super(zone, effect, filter, optional, setTargetPointer, rule);
         setTriggerPhrase("Whenever " + getMessageFromFilter() + " under your control, ");
     }
 

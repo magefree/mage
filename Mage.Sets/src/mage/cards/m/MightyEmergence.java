@@ -33,7 +33,7 @@ public final class MightyEmergence extends CardImpl {
         // Whenever a creature with power 5 or greater enters the battlefield under your control, you may put two +1/+1 counters on it.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));
         effect.setText("you may put two +1/+1 counters on it");
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, true, SetTargetPointer.PERMANENT, "", true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, true, SetTargetPointer.PERMANENT, ""));
     }
 
     private MightyEmergence(final MightyEmergence card) {

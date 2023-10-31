@@ -37,7 +37,7 @@ public final class CourtStreetDenizen extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another white creature enters the battlefield under your control, tap target creature an opponent controls.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter, false, null, true);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter, false, null);
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }

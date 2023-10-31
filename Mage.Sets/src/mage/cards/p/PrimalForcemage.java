@@ -42,7 +42,7 @@ public final class PrimalForcemage extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
-                filter, false, SetTargetPointer.PERMANENT, rule, true));
+                filter, false, SetTargetPointer.PERMANENT, rule));
     }
 
     private PrimalForcemage(final PrimalForcemage card) {

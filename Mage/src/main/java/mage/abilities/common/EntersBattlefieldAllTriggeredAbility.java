@@ -19,14 +19,10 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterPermanent filter;
     protected String rule;
-    protected boolean controlledText;
     protected SetTargetPointer setTargetPointer;
 
     /**
      * zone = BATTLEFIELD optional = false
-     *
-     * @param effect
-     * @param filter
      */
     public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter) {
         this(Zone.BATTLEFIELD, effect, filter, false);
@@ -37,26 +33,17 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
-        this(zone, effect, filter, optional, SetTargetPointer.NONE, null, false);
+        this(zone, effect, filter, optional, SetTargetPointer.NONE, null);
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
-        this(zone, effect, filter, optional, rule, false);
-    }
-
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule, boolean controlledText) {
-        this(zone, effect, filter, optional, SetTargetPointer.NONE, rule, controlledText);
+        this(zone, effect, filter, optional, SetTargetPointer.NONE, rule);
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule) {
-        this(zone, effect, filter, optional, setTargetPointer, rule, false);
-    }
-
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlledText) {
         super(zone, effect, optional);
         this.filter = filter;
         this.rule = rule;
-        this.controlledText = controlledText;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever " + getMessageFromFilter() + ", ");
     }
@@ -65,7 +52,6 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;
-        this.controlledText = ability.controlledText;
         this.setTargetPointer = ability.setTargetPointer;
     }
 

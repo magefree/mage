@@ -49,7 +49,7 @@ public final class LonisCryptozoologist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another nontoken creature enters the battlefield under your control, investigate.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), filter, false, null, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), filter, false, null));
 
         // {T}, Sacrifice X Clues: Target opponent reveals the top X cards of their library.
         // You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control.

@@ -35,7 +35,7 @@ public final class PoisonbellyOgre extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield, its controller loses 1 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false, SetTargetPointer.PLAYER, RULE, false));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false, SetTargetPointer.PLAYER, RULE));
         
     }
 

@@ -41,7 +41,7 @@ public final class IvyLaneDenizen extends CardImpl {
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                filter, false, null, true);
+                filter, false, null);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

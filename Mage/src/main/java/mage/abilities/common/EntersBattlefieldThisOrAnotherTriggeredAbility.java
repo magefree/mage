@@ -26,7 +26,7 @@ public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattle
     public EntersBattlefieldThisOrAnotherTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyControlled) {
         super(zone, effect,
                 new FilterPermanentThisOrAnother(filter, onlyControlled),
-                optional, setTargetPointer, null, onlyControlled);
+                optional, setTargetPointer, null);
     }
 
     private EntersBattlefieldThisOrAnotherTriggeredAbility(final EntersBattlefieldThisOrAnotherTriggeredAbility ability) {

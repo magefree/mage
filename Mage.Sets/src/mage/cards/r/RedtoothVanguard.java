@@ -42,7 +42,7 @@ public final class RedtoothVanguard extends CardImpl {
                         new ReturnSourceFromGraveyardToHandEffect(),
                         new GenericManaCost(2)
                 ),
-                filter, false, SetTargetPointer.NONE, null, true
+                filter, false, SetTargetPointer.NONE, null
         ));
     }
 
