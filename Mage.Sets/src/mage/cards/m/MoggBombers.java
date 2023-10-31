@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -38,8 +37,8 @@ public final class MoggBombers extends CardImpl {
                 Zone.BATTLEFIELD,
                 sacrificeMoggBombers,
                 StaticFilters.FILTER_ANOTHER_CREATURE,
-                false,
-                rule);
+                false
+        );
         ability.addEffect(damageTargetPlayer);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

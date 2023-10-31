@@ -47,7 +47,7 @@ public final class MiirymSentinelWyrm extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(true).setIsntLegendary(true)
                 .setText("create a token that's a copy of it, except the token isn't legendary"),
-                filter, false, SetTargetPointer.PERMANENT, null
+                filter, false, SetTargetPointer.PERMANENT
         ));
     }
 

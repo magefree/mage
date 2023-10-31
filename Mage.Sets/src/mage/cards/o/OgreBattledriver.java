@@ -30,7 +30,7 @@ public final class OgreBattledriver extends CardImpl {
         // Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 0, Duration.EndOfTurn).setText("that creature gets +2/+0"),
-                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null);
+                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT);
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains haste until end of turn"));
         this.addAbility(ability);

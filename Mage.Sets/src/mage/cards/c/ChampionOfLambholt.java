@@ -35,7 +35,7 @@ public final class ChampionOfLambholt extends CardImpl {
         // Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                StaticFilters.FILTER_ANOTHER_CREATURE, false, null));
+                StaticFilters.FILTER_ANOTHER_CREATURE, false));
     }
 
     private ChampionOfLambholt(final ChampionOfLambholt card) {

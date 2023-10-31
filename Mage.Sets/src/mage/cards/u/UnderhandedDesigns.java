@@ -35,7 +35,7 @@ public final class UnderhandedDesigns extends CardImpl {
         DoIfCostPaid doIfCostPaid = new DoIfCostPaid(new LoseLifeOpponentsEffect(1), new GenericManaCost(1));
         doIfCostPaid.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
-                doIfCostPaid, StaticFilters.FILTER_PERMANENT_ARTIFACT, false, null));
+                doIfCostPaid, StaticFilters.FILTER_PERMANENT_ARTIFACT, false));
 
         // {1}{B}, Sacrifice Underhanded Designs: Destroy target creature. Activate this ability only if you control two or more artifacts.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,

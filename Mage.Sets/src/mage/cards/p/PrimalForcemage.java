@@ -40,7 +40,7 @@ public final class PrimalForcemage extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn).setText("that creature gets +3/+3 until end of turn"),
-                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null));
+                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT));
     }
 
     private PrimalForcemage(final PrimalForcemage card) {

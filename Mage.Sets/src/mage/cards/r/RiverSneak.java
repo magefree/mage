@@ -40,7 +40,7 @@ public final class RiverSneak extends CardImpl {
 
         // Whenever another Merfolk enters the battlefield under your control, River Sneak gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false, null));
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false));
     }
 
     private RiverSneak(final RiverSneak card) {

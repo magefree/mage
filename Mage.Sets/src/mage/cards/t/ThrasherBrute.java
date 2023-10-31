@@ -34,7 +34,7 @@ public final class ThrasherBrute extends CardImpl {
 
         // Whenever Thrasher Brute or another Warrior enters the battlefield under your team's control, target opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false, null
+                Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false
         ).setTriggerPhrase("Whenever {this} or another Warrior enters the battlefield under your team's control, ");
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());

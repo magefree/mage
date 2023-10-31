@@ -33,7 +33,7 @@ public final class FlameKinWarScout extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
             Zone.BATTLEFIELD, new FlameKinWarScourEffect(),
             StaticFilters.FILTER_ANOTHER_CREATURE, false,
-            SetTargetPointer.PERMANENT, null
+            SetTargetPointer.PERMANENT
         ));
 
     }

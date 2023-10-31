@@ -23,8 +23,8 @@ public final class SeedTheLand extends CardImpl {
 
         // Whenever a land enters the battlefield, its controller creates a 1/1 green Snake creature token.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new CreateTokenTargetEffect(new SnakeToken()), StaticFilters.FILTER_LAND, false, SetTargetPointer.PLAYER,
-                "Whenever a land enters the battlefield, its controller creates a 1/1 green Snake creature token."));
+                new CreateTokenTargetEffect(new SnakeToken()), StaticFilters.FILTER_LAND, false, SetTargetPointer.PLAYER
+        ));
     }
 
     private SeedTheLand(final SeedTheLand card) {

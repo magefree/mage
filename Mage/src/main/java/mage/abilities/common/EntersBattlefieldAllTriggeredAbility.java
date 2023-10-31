@@ -21,7 +21,6 @@ import java.util.UUID;
 public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterPermanent filter;
-    protected String rule;
     protected SetTargetPointer setTargetPointer;
 
     /**
@@ -31,22 +30,13 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this(Zone.BATTLEFIELD, effect, filter, false);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter, String rule) {
-        this(Zone.BATTLEFIELD, effect, filter, false, rule);
-    }
-
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
-        this(zone, effect, filter, optional, SetTargetPointer.NONE, null);
+        this(zone, effect, filter, optional, SetTargetPointer.NONE);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
-        this(zone, effect, filter, optional, SetTargetPointer.NONE, rule);
-    }
-
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule) {
+    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.filter = filter;
-        this.rule = rule;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase(getTriggerPhraseFromFilter() + ", ");
     }
@@ -54,7 +44,6 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     protected EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.rule = ability.rule;
         this.setTargetPointer = ability.setTargetPointer;
     }
 

@@ -45,7 +45,7 @@ public final class BrambleSovereign extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(new BrambleSovereignEffect(), new ManaCostsImpl<>("{1}{G}")),
-                filter, false, SetTargetPointer.PERMANENT, null
+                filter, false, SetTargetPointer.PERMANENT
         ));
     }
 

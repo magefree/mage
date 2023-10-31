@@ -161,7 +161,7 @@ class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldControlledT
 
     ChainerNightmareAdeptTriggeredAbility() {
         super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, StaticFilters.FILTER_CREATURE_NON_TOKEN, false,
-                SetTargetPointer.PERMANENT, null);
+                SetTargetPointer.PERMANENT);
         this.addWatcher(new CastFromHandWatcher());
         setTriggerPhrase("Whenever a nontoken creature enters the battlefield under your control, "
                 + "if you didn't cast it from your hand, ");

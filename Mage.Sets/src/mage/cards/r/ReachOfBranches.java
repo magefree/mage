@@ -29,7 +29,7 @@ public final class ReachOfBranches extends CardImpl {
 
         // Whenever a Forest enters the battlefield under your control, you may return Reach of Branches from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(), filter, true, null));
+                new ReturnSourceFromGraveyardToHandEffect(), filter, true));
     }
 
     private ReachOfBranches(final ReachOfBranches card) {

@@ -21,7 +21,7 @@ public final class KioraMasterOfTheDepthsEmblem extends Emblem {
         super("Emblem Kiora");
 
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.COMMAND,
-                new KioraFightEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT, null);
+                new KioraFightEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT);
         ability.addTarget(new TargetCreaturePermanent());
         this.getAbilities().add(ability);
     }

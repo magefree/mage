@@ -45,16 +45,16 @@ public final class NaturesWrath extends CardImpl {
                 Zone.BATTLEFIELD,
                 new SacrificeEffect(filterBlue, 1, ""),
                 filterBlue,
-                false, SetTargetPointer.PLAYER, 
-                "Whenever a player puts an Island or blue permanent onto the battlefield, they sacrifice an Island or blue permanent."));
+                false, SetTargetPointer.PLAYER
+        ));
 
         // Whenever a player puts a Swamp or black permanent onto the battlefield, they sacrifice a Swamp or black permanent.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new SacrificeEffect(filterBlack, 1, ""),
                 filterBlack,
-                false, SetTargetPointer.PLAYER, 
-                "Whenever a player puts a Swamp or black permanent onto the battlefield, they sacrifice a Swamp or black permanent."));
+                false, SetTargetPointer.PLAYER
+        ));
     }
 
     private NaturesWrath(final NaturesWrath card) {

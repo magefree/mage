@@ -38,7 +38,7 @@ public final class MaraudingRaptor extends CardImpl {
         // Whenever another creature enters the battlefield under your control, Marauding Raptor deals 2 damage to it. If a Dinosaur is dealt damage this way, Marauding Raptor gets +2/+0 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new MaraudingRaptorEffect(),
-                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null
+                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
     }
 

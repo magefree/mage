@@ -32,7 +32,7 @@ public final class SalivatingGremlins extends CardImpl {
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+0");
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
-                effect, StaticFilters.FILTER_PERMANENT_ARTIFACT, false, null);
+                effect, StaticFilters.FILTER_PERMANENT_ARTIFACT, false);
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

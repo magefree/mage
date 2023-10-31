@@ -35,9 +35,7 @@ public final class DecoratedChampion extends CardImpl {
 
         // Whenever another Warrior enters the battlefield under your team's control, put a +1/+1 counter on Decorated Champion.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter,
-                "Whenever another Warrior enters the battlefield under your team's control,"
-                + " put a +1/+1 counter on {this}"
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));
     }
 

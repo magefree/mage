@@ -32,7 +32,7 @@ public final class JuniperOrderRanger extends CardImpl {
         // Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null
+                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 .setText("and a +1/+1 counter on {this}"));

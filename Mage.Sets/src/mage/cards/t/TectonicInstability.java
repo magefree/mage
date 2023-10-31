@@ -23,7 +23,7 @@ public final class TectonicInstability extends CardImpl {
         // Whenever a land enters the battlefield, tap all lands its controller controls.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
             new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_LANDS), StaticFilters.FILTER_LAND,
-            false, SetTargetPointer.PLAYER, null));
+            false, SetTargetPointer.PLAYER));
     }
 
     private TectonicInstability(final TectonicInstability card) {

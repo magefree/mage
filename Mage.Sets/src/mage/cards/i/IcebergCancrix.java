@@ -38,7 +38,7 @@ public final class IcebergCancrix extends CardImpl {
 
         // Whenever another snow permanent enters the battlefield under your control, you may have target player put the top two cards of their library into their graveyard.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter, true, null
+                Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter, true
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

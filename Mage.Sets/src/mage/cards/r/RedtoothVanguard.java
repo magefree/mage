@@ -32,7 +32,7 @@ public final class RedtoothVanguard extends CardImpl {
         // Whenever an enchantment enters the battlefield under your control, you may pay 2. If you do, return Redtooth Vanguard from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD,
                 new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new GenericManaCost(2)),
-                StaticFilters.FILTER_PERMANENT_ENCHANTMENT, false, SetTargetPointer.NONE, null
+                StaticFilters.FILTER_PERMANENT_ENCHANTMENT, false, SetTargetPointer.NONE
         ));
     }
 

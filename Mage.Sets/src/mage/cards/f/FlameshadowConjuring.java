@@ -34,7 +34,7 @@ public final class FlameshadowConjuring extends CardImpl {
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new DoIfCostPaid(new FlameshadowConjuringEffect(), new ManaCostsImpl<>("{R}"),
                         "Pay {R} to create a token that's a copy of that creature that entered the battlefield?"),
-                StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT, null);
+                StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT);
         this.addAbility(ability);
     }
 

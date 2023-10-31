@@ -42,7 +42,7 @@ public final class EmielTheBlessed extends CardImpl {
         // If you do, put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new DoIfCostPaid(new EmielTheBlessedEffect(), new ManaCostsImpl<>("{G/W}")),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
     }
 

@@ -19,7 +19,7 @@ public class EntersBattlefieldCastTriggeredAbility extends EntersBattlefieldCont
 
     public EntersBattlefieldCastTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional,
                                                  SetTargetPointer setTargetPointer, boolean mustCast) {
-        super(zone, effect, filter, optional, setTargetPointer, null);
+        super(zone, effect, filter, optional, setTargetPointer);
         this.mustCast = mustCast;
         this.addWatcher(new PermanentWasCastWatcher());
         setTriggerPhrase(getTriggerPhraseFromFilter() + " under your control, if it " + (mustCast ? "was" : "wasn't") + " cast, " );

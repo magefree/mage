@@ -42,7 +42,7 @@ public final class HalanaKessigRanger extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new DoIfCostPaid(new HalanaKessigRangerTriggerEffect(), new GenericManaCost(2))
                         .setText("you may pay {2}. When you do, that creature deals damage equal to its power to target creature."),
-                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null
+                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
 
         // Partner

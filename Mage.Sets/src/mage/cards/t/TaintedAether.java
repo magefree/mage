@@ -32,7 +32,7 @@ public final class TaintedAether extends CardImpl {
 
         // Whenever a creature enters the battlefield, its controller sacrifices a creature or land.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, "its controller"),
-                StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PLAYER, null));
+                StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PLAYER));
     }
 
     private TaintedAether(final TaintedAether card) {

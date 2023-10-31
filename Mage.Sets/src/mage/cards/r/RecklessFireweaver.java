@@ -27,7 +27,7 @@ public final class RecklessFireweaver extends CardImpl {
 
         // Whenever an artifact enters the battlefield under your control, Reckless Fireweaver deals 1 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT),
-                StaticFilters.FILTER_PERMANENT_ARTIFACT, false, null));
+                StaticFilters.FILTER_PERMANENT_ARTIFACT, false));
     }
 
     private RecklessFireweaver(final RecklessFireweaver card) {

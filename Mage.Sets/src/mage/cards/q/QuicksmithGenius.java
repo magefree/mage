@@ -29,7 +29,7 @@ public final class QuicksmithGenius extends CardImpl {
         // Whenever an artifact enters the battlefield under your control, you may discard a card. If you do, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()),
-                StaticFilters.FILTER_PERMANENT_ARTIFACT, false, null));
+                StaticFilters.FILTER_PERMANENT_ARTIFACT, false));
     }
 
     private QuicksmithGenius(final QuicksmithGenius card) {
