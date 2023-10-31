@@ -1,5 +1,3 @@
-
-
 package mage.abilities.common;
 
 import mage.abilities.effects.Effect;
@@ -43,6 +41,7 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
 
     public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule) {
         super(zone, effect, filter, optional, setTargetPointer, rule, true);
+        setTriggerPhrase("Whenever " + getMessageFromFilter() + " under your control, ");
     }
 
     protected EntersBattlefieldControlledTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {

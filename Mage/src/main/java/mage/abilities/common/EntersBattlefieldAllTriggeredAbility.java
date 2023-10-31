@@ -58,7 +58,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this.rule = rule;
         this.controlledText = controlledText;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase(generateTriggerPhrase());
+        setTriggerPhrase("Whenever " + getMessageFromFilter() + ", ");
     }
 
     protected EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
@@ -102,6 +102,12 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 //        }
 //        return super.getRule();
 //    }
+
+    protected String getMessageFromFilter() {
+        return filter.getMessage().startsWith("one or more")
+                ? filter.getMessage() + " enter the battlefield"
+                : filter.getMessage() + " enters the battlefield";
+    }
 
     protected String generateTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
