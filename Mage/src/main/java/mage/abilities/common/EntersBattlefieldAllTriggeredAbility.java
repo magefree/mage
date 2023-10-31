@@ -95,13 +95,13 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getRule() {
-        if (rule != null && !rule.isEmpty()) {
-            return rule;
-        }
-        return super.getRule();
-    }
+//    @Override
+//    public String getRule() {
+//        if (rule != null && !rule.isEmpty()) {
+//            return rule;
+//        }
+//        return super.getRule();
+//    }
 
     protected String generateTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
