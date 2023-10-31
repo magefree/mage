@@ -19,7 +19,7 @@ public class EntersBattlefieldOpponentTriggeredAbility extends EntersBattlefield
 
     public EntersBattlefieldOpponentTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, filter, optional, setTargetPointer, null);
-        setTriggerPhrase("Whenever " + getMessageFromFilter() + " under an opponent's control, ");
+        setTriggerPhrase(getTriggerPhraseFromFilter() + " under an opponent's control, ");
     }
 
     protected EntersBattlefieldOpponentTriggeredAbility(final EntersBattlefieldOpponentTriggeredAbility ability) {

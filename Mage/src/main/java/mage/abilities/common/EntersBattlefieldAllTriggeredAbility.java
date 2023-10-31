@@ -2,6 +2,8 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -46,7 +48,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.rule = rule;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever " + getMessageFromFilter() + ", ");
+        setTriggerPhrase(getTriggerPhraseFromFilter() + ", ");
     }
 
     protected EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
@@ -82,20 +84,15 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-//    @Override
-//    public String getRule() {
-//        if (rule != null && !rule.isEmpty()) {
-//            return rule;
-//        }
-//        return super.getRule();
-//    }
-
-    protected String getMessageFromFilter() {
+    protected String getTriggerPhraseFromFilter() {
+        String when = (getAllEffects().stream().allMatch(
+                e -> e instanceof ReturnToHandSourceEffect || e instanceof SacrificeSourceEffect
+        ) ? "When " : "Whenever ");
         String filterMessage = filter.getMessage();
         if (filterMessage.startsWith("one or more")) {
-            return filterMessage + " enter the battlefield";
+            return when + filterMessage + " enter the battlefield";
         }
-        return CardUtil.addArticle(filterMessage) + " enters the battlefield";
+        return when + CardUtil.addArticle(filterMessage) + " enters the battlefield";
     }
 
     @Override
