@@ -63,7 +63,7 @@ class BrambleSovereignEffect extends OneShotEffect {
 
     BrambleSovereignEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "its controller creates a token that's a copy of that creature";
+        this.staticText = "that creature's controller creates a token that's a copy of that creature";
     }
 
     private BrambleSovereignEffect(final BrambleSovereignEffect effect) {

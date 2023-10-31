@@ -33,7 +33,8 @@ public final class DireUndercurrents extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U/B}{U/B}");
 
         // Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), filterBlue, true);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1)
+                .setText("you may have target player draw a card"), filterBlue, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
