@@ -74,7 +74,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     protected String getTriggerPhraseFromFilter() {
-        String when = (getAllEffects().stream().allMatch(
+        String when = (!optional && getAllEffects().stream().anyMatch(
                 e -> e instanceof ReturnToHandSourceEffect || e instanceof SacrificeSourceEffect
         ) ? "When " : "Whenever ");
         String filterMessage = filter.getMessage();

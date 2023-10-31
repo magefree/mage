@@ -24,8 +24,6 @@ import mage.game.permanent.Permanent;
  */
 public final class SpreadingPlague extends CardImpl {
 
-    private static final String RULE = "Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.";
-
     public SpreadingPlague(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
 
