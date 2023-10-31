@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -58,11 +57,8 @@ public final class PrestonTheVanisher extends CardImpl {
         effect.setOnlyColor(ObjectColor.WHITE);
         effect.setOnlySubType(SubType.ILLUSION);
         effect.setText("create a token that's a copy of that creature, except it's a 0/1 white Illusion");
-        this.addAbility(
-                new EntersBattlefieldCastTriggeredAbility(Zone.BATTLEFIELD, effect, triggerFilter, false, false,
-                        SetTargetPointer.PERMANENT, null,
-                        true));
-
+        this.addAbility(new EntersBattlefieldCastTriggeredAbility(Zone.BATTLEFIELD, effect, triggerFilter,
+                false, SetTargetPointer.PERMANENT, false));
         // {1}{W}, Sacrifice five Illusions: Exile target nonland permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(),
                 new ManaCostsImpl<>("{1}{W}"));

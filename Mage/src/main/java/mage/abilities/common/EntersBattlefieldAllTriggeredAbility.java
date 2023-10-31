@@ -109,22 +109,6 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
                 : filter.getMessage() + " enters the battlefield";
     }
 
-    protected String generateTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever ");
-        sb.append(filter.getMessage());
-        if (filter.getMessage().startsWith("one or more")) {
-            sb.append(" enter the battlefield");
-        } else {
-            sb.append(" enters the battlefield");
-        }
-        if (controlledText) {
-            sb.append(" under your control, ");
-        } else {
-            sb.append(", ");
-        }
-        return sb.toString();
-    }
-
     @Override
     public EntersBattlefieldAllTriggeredAbility copy() {
         return new EntersBattlefieldAllTriggeredAbility(this);
