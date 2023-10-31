@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -90,9 +91,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 //    }
 
     protected String getMessageFromFilter() {
-        return filter.getMessage().startsWith("one or more")
-                ? filter.getMessage() + " enter the battlefield"
-                : filter.getMessage() + " enters the battlefield";
+        String filterMessage = filter.getMessage();
+        if (filterMessage.startsWith("one or more")) {
+            return filterMessage + " enter the battlefield";
+        }
+        return CardUtil.addArticle(filterMessage) + " enters the battlefield";
     }
 
     @Override
