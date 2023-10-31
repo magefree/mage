@@ -60,6 +60,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Explorer's Cache", 184, Rarity.UNCOMMON, mage.cards.e.ExplorersCache.class));
         cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 401, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gargantuan Leech", 107, Rarity.UNCOMMON, mage.cards.g.GargantuanLeech.class));
         cards.add(new SetCardInfo("Geode Grotto", 146, Rarity.UNCOMMON, mage.cards.g.GeodeGrotto.class));
         cards.add(new SetCardInfo("Geological Appraiser", 150, Rarity.UNCOMMON, mage.cards.g.GeologicalAppraiser.class));
         cards.add(new SetCardInfo("Get Lost", 14, Rarity.RARE, mage.cards.g.GetLost.class));
