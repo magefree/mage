@@ -52,7 +52,7 @@ public final class SmokeShroud extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD, new SmokeShroudEffect(), filter, true,
                 SetTargetPointer.PERMANENT, null
-        ));
+        ).setTriggerPhrase("When a Ninja enters the battlefield under your control, "));
     }
 
     private SmokeShroud(final SmokeShroud card) {
