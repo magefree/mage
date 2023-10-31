@@ -23,6 +23,7 @@ public enum AbilityWord {
     COVEN("Coven"),
     DELIRIUM("Delirium"),
     DESCEND_4("Descend 4"),
+    DESCEND_8("Descend 8"),
     DOMAIN("Domain"),
     EMINENCE("Eminence"),
     ENRAGE("Enrage"),
