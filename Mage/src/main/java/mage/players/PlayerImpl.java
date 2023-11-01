@@ -287,13 +287,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         for (Entry<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> entry : player.getCastSourceIdManaCosts().entrySet()) {
             this.castSourceIdManaCosts.put(entry.getKey(), new HashMap<>());
-            for(Entry<MageIdentifier, ManaCosts<ManaCost>> subEntry : entry.getValue().entrySet()) {
+            for (Entry<MageIdentifier, ManaCosts<ManaCost>> subEntry : entry.getValue().entrySet()) {
                 this.castSourceIdManaCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
             }
         }
         for (Entry<UUID, Map<MageIdentifier, Costs<Cost>>> entry : player.getCastSourceIdCosts().entrySet()) {
             this.castSourceIdCosts.put(entry.getKey(), new HashMap<>());
-            for(Entry<MageIdentifier, Costs<Cost>> subEntry : entry.getValue().entrySet()) {
+            for (Entry<MageIdentifier, Costs<Cost>> subEntry : entry.getValue().entrySet()) {
                 this.castSourceIdCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
             }
         }
@@ -381,13 +381,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         for (Entry<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> entry : player.getCastSourceIdManaCosts().entrySet()) {
             this.castSourceIdManaCosts.put(entry.getKey(), new HashMap<>());
-            for(Entry<MageIdentifier, ManaCosts<ManaCost>> subEntry : entry.getValue().entrySet()) {
+            for (Entry<MageIdentifier, ManaCosts<ManaCost>> subEntry : entry.getValue().entrySet()) {
                 this.castSourceIdManaCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
             }
         }
         for (Entry<UUID, Map<MageIdentifier, Costs<Cost>>> entry : player.getCastSourceIdCosts().entrySet()) {
             this.castSourceIdCosts.put(entry.getKey(), new HashMap<>());
-            for(Entry<MageIdentifier, Costs<Cost>> subEntry : entry.getValue().entrySet()) {
+            for (Entry<MageIdentifier, Costs<Cost>> subEntry : entry.getValue().entrySet()) {
                 this.castSourceIdCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
             }
         }
@@ -3551,7 +3551,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // ALTERNATIVE COST FROM dynamic effects
-            for(MageIdentifier identifier : getCastSourceIdWithAlternateMana().getOrDefault(copy.getSourceId(), new HashSet<>())) {
+            for (MageIdentifier identifier : getCastSourceIdWithAlternateMana().getOrDefault(copy.getSourceId(), new HashSet<>())) {
                 ManaCosts alternateCosts = getCastSourceIdManaCosts().get(copy.getSourceId()).get(identifier);
                 Costs<Cost> costs = getCastSourceIdCosts().get(copy.getSourceId()).get(identifier);
 
@@ -5134,14 +5134,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean surveil(int value, Ability source, Game game) {
+    public SurveilResult doSurveil(int value, Ability source, Game game) {
         GameEvent event = new GameEvent(GameEvent.EventType.SURVEIL, getId(), source, getId(), value, true);
         if (game.replaceEvent(event)) {
-            return false;
+            return SurveilResult.noSurveil();
         }
         game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
+        int totalCount = cards.size();
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                     new FilterCard("card" + (cards.size() == 1 ? "" : "s")
@@ -5152,7 +5153,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             putCardsOnTopOfLibrary(cards, game, source, true);
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
-        return true;
+        return SurveilResult.surveil(totalCount - cards.size(), cards.size());
     }
 
     @Override
