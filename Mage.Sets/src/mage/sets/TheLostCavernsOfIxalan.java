@@ -43,6 +43,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Cavernous Maw", 270, Rarity.UNCOMMON, mage.cards.c.CavernousMaw.class));
         cards.add(new SetCardInfo("Cenote Scout", 178, Rarity.UNCOMMON, mage.cards.c.CenoteScout.class));
         cards.add(new SetCardInfo("Chart a Course", 48, Rarity.UNCOMMON, mage.cards.c.ChartACourse.class));
+        cards.add(new SetCardInfo("Chimil, the Inner Sun", 249, Rarity.MYTHIC, mage.cards.c.ChimilTheInnerSun.class));
         cards.add(new SetCardInfo("Clay-Fired Bricks", 6, Rarity.UNCOMMON, mage.cards.c.ClayFiredBricks.class));
         cards.add(new SetCardInfo("Coati Scavenger", 179, Rarity.UNCOMMON, mage.cards.c.CoatiScavenger.class));
         cards.add(new SetCardInfo("Cogwork Wrestler", 49, Rarity.COMMON, mage.cards.c.CogworkWrestler.class));
