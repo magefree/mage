@@ -10,10 +10,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author TheElk801
  */
 public class FinalityCounterTest extends CardTestPlayerBase {
+
     private static final String viper = "Soulcoil Viper";
     private static final String corpse = "Walking Corpse";
-    private static final String murder = "Murder";
-    private static final String hexmage = "Vampire Hexmage";
 
     @Test
     public void testCounterAdded() {
@@ -33,6 +32,8 @@ public class FinalityCounterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, corpse, 0);
         assertCounterCount(playerA, corpse, CounterType.FINALITY, 1);
     }
+
+    private static final String murder = "Murder";
 
     @Test
     public void testCounterApplies() {
@@ -57,6 +58,8 @@ public class FinalityCounterTest extends CardTestPlayerBase {
         assertExileCount(playerA, corpse, 1);
     }
 
+    private static final String hexmage = "Vampire Hexmage";
+
     @Test
     public void testCounterRemoved() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1 + 3);
@@ -80,6 +83,31 @@ public class FinalityCounterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, viper, 1);
         assertPermanentCount(playerA, corpse, 0);
         assertGraveyardCount(playerA, corpse, 1);
+        assertExileCount(playerA, corpse, 0);
+    }
+
+    private static final String unsummon = "Unsummon";
+
+    @Test
+    public void testCounterDontApply() {
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 1 + 1);
+        addCard(Zone.BATTLEFIELD, playerA, viper);
+        addCard(Zone.HAND, playerA, unsummon);
+        addCard(Zone.GRAVEYARD, playerA, corpse);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B},", corpse);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, unsummon, corpse);
+
+        setStopAt(1, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, viper, 0);
+        assertGraveyardCount(playerA, viper, 1);
+        assertPermanentCount(playerA, corpse, 0);
+        assertHandCount(playerA, corpse, 1);
         assertExileCount(playerA, corpse, 0);
     }
 }

@@ -43,6 +43,9 @@ public class FinalityCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        if (!((ZoneChangeEvent) event).isDiesEvent()) {
+            return false;
+        }
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && permanent.getCounters(game).getCount(CounterType.FINALITY) > 0;
     }
