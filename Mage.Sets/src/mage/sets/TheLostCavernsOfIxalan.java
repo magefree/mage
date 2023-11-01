@@ -184,6 +184,8 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Trumpeting Carnosaur", 324, Rarity.RARE, mage.cards.t.TrumpetingCarnosaur.class));
         cards.add(new SetCardInfo("Vanguard of the Rose", 42, Rarity.UNCOMMON, mage.cards.v.VanguardOfTheRose.class));
         cards.add(new SetCardInfo("Vito, Fanatic of Aclazotz", 243, Rarity.MYTHIC, mage.cards.v.VitoFanaticOfAclazotz.class));
+        cards.add(new SetCardInfo("Waterlogged Hulk", 83, Rarity.UNCOMMON, mage.cards.w.WaterloggedHulk.class));
+        cards.add(new SetCardInfo("Watertight Gondola", 83, Rarity.UNCOMMON, mage.cards.w.WatertightGondola.class));
         cards.add(new SetCardInfo("Waterwind Scout", 84, Rarity.COMMON, mage.cards.w.WaterwindScout.class));
     }
 }
