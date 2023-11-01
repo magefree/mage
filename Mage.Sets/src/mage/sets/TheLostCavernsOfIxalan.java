@@ -51,6 +51,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Colossadactyl", 180, Rarity.UNCOMMON, mage.cards.c.Colossadactyl.class));
         cards.add(new SetCardInfo("Compass Gnome", 250, Rarity.COMMON, mage.cards.c.CompassGnome.class));
         cards.add(new SetCardInfo("Confounding Riddle", 50, Rarity.UNCOMMON, mage.cards.c.ConfoundingRiddle.class));
+        cards.add(new SetCardInfo("Corpses of the Lost", 98, Rarity.RARE, mage.cards.c.CorpsesOfTheLost.class));
         cards.add(new SetCardInfo("Cosmium Confluence", 181, Rarity.RARE, mage.cards.c.CosmiumConfluence.class));
         cards.add(new SetCardInfo("Cosmium Kiln", 6, Rarity.UNCOMMON, mage.cards.c.CosmiumKiln.class));
         cards.add(new SetCardInfo("Dauntless Dismantler", 8, Rarity.UNCOMMON, mage.cards.d.DauntlessDismantler.class));
