@@ -2,10 +2,6 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
@@ -36,11 +32,7 @@ public class BecomesTargetSourceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        boolean textWhen = !optional && (effect instanceof SacrificeSourceEffect
-                || effect instanceof ReturnToHandSourceEffect
-                || effect instanceof ShuffleIntoLibrarySourceEffect
-                || effect instanceof ExileSourceEffect);
-        setTriggerPhrase((textWhen ? "When" : "Whenever") + " {this} becomes the target of " + filter.getMessage() + ", ");
+        setTriggerPhrase(getWhen() + "{this} becomes the target of " + filter.getMessage() + ", ");
         this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 

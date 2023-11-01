@@ -2,8 +2,6 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -12,8 +10,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -54,8 +50,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID targetId = event.getTargetId();
-        Permanent permanent = game.getPermanent(targetId);
+        Permanent permanent = game.getPermanent(event.getTargetId());
         if (!filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
@@ -73,15 +68,12 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    protected String getTriggerPhraseFromFilter() {
-        String when = (!optional && getAllEffects().stream().anyMatch(
-                e -> e instanceof ReturnToHandSourceEffect || e instanceof SacrificeSourceEffect
-        ) ? "When " : "Whenever ");
+    protected final String getTriggerPhraseFromFilter() {
         String filterMessage = filter.getMessage();
         if (filterMessage.startsWith("one or more")) {
-            return when + filterMessage + " enter the battlefield";
+            return getWhen() + filterMessage + " enter the battlefield";
         }
-        return when + CardUtil.addArticle(filterMessage) + " enters the battlefield";
+        return getWhen() + CardUtil.addArticle(filterMessage) + " enters the battlefield";
     }
 
     @Override
