@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.condition.common.DescendCondition;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,9 @@ public final class SquirmingEmergence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{G}");
 
         // Fathomless descent -- Return to the battlefield target nonland permanent card in your graveyard with mana value less than or equal to the number of permanent cards in your graveyard.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
+                .setText("return to the battlefield target nonland permanent card in your graveyard "
+                        + "with mana value less than or equal to the number of permanent cards in your graveyard"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().setAbilityWord(AbilityWord.FATHOMLESS_DESCENT);
         this.getSpellAbility().addHint(DescendCondition.getHint());
