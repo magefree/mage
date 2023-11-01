@@ -24,6 +24,7 @@ public final class WatertightGondola extends CardImpl {
     public WatertightGondola(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
         this.nightCard = true;
+        this.color.setBlue(true);
 
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(4);
