@@ -25,7 +25,7 @@ public final class AetherFlash extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(2).setText("{this} deals 2 damage to it"),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE,
-                false, SetTargetPointer.PERMANENT, null));
+                false, SetTargetPointer.PERMANENT));
     }
 
     private AetherFlash(final AetherFlash card) {

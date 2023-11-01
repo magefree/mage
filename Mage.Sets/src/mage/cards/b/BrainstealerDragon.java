@@ -49,7 +49,7 @@ public final class BrainstealerDragon extends CardImpl {
         // Whenever a nonland permanent an opponent owns enters the battlefield under your control, they lose life equal to its mana value.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new BrainstealerDragonLifeEffect(), filter,
-                false, SetTargetPointer.PERMANENT, null
+                false, SetTargetPointer.PERMANENT
         ));
     }
 

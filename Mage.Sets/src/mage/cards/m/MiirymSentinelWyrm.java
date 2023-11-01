@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class MiirymSentinelWyrm extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON, "another nontoken Dragon");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -45,10 +45,9 @@ public final class MiirymSentinelWyrm extends CardImpl {
 
         // Whenever another nontoken Dragon enters the battlefield under your control, create a token that's a copy of it, except the token isn't legendary if that Dragon is legendary.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(true).setIsntLegendary(true),
-                filter, false, SetTargetPointer.PERMANENT, "Whenever another nontoken Dragon " +
-                "enters the battlefield under your control, create a token that's a copy of it, " +
-                "except the token isn't legendary."
+                Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(true).setIsntLegendary(true)
+                .setText("create a token that's a copy of it, except the token isn't legendary"),
+                filter, false, SetTargetPointer.PERMANENT
         ));
     }
 

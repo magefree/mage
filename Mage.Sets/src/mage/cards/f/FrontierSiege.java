@@ -54,7 +54,7 @@ public final class FrontierSiege extends CardImpl {
 
         // * Dragons - Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.
         Ability ability2 = new ConditionalTriggeredAbility(
-                new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT, ""),
+                new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT),
                 new ModeChoiceSourceCondition("Dragons"),
                 ruleTrigger2);
         ability2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));

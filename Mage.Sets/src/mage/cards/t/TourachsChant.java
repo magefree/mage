@@ -36,8 +36,8 @@ public final class TourachsChant extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}")), TargetController.YOU, false));
 
         // Whenever a player puts a Forest onto the battlefield, Tourach's Chant deals 3 damage to that player unless they put a -1/-1 counter on a creature they control.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TourachsChantEffect(), filter, false, SetTargetPointer.PLAYER,
-                "Whenever a player puts a Forest onto the battlefield, {this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control."));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TourachsChantEffect(), filter, false, SetTargetPointer.PLAYER
+        ).setTriggerPhrase("Whenever a player puts a Forest onto the battlefield, "));
     }
 
     private TourachsChant(final TourachsChant card) {
@@ -52,7 +52,7 @@ public final class TourachsChant extends CardImpl {
 
 class TourachsChantEffect extends OneShotEffect {
 
-    public TourachsChantEffect() {
+    TourachsChantEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control";
     }
