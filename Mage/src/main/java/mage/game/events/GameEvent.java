@@ -528,10 +528,18 @@ public class GameEvent implements Serializable {
          targetId    player making the choice
          sourceId    sourceId of the ability forcing the choice
          playerId    controller of the ability forcing the choice
-         amount      numner of times choice is repeated
+         amount      number of times choice is repeated
          flag        not used for this event
          */
         FACE_VILLAINOUS_CHOICE,
+        /* DISCOVER
+         targetId    not used for this event
+         sourceId    sourceId of the ability discovering
+         playerId    controller of the ability
+         amount      discover value
+         flag        not used for this event
+         */
+        DISCOVER,
         //custom events
         CUSTOM_EVENT
     }

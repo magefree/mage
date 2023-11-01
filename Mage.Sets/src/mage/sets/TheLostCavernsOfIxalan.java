@@ -55,6 +55,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Cosmium Confluence", 181, Rarity.RARE, mage.cards.c.CosmiumConfluence.class));
         cards.add(new SetCardInfo("Cosmium Kiln", 6, Rarity.UNCOMMON, mage.cards.c.CosmiumKiln.class));
         cards.add(new SetCardInfo("Council of Echoes", 51, Rarity.UNCOMMON, mage.cards.c.CouncilOfEchoes.class));
+        cards.add(new SetCardInfo("Curator of Sun's Creation", 141, Rarity.UNCOMMON, mage.cards.c.CuratorOfSunsCreation.class));
         cards.add(new SetCardInfo("Dauntless Dismantler", 8, Rarity.UNCOMMON, mage.cards.d.DauntlessDismantler.class));
         cards.add(new SetCardInfo("Deep-Cavern Bat", 102, Rarity.UNCOMMON, mage.cards.d.DeepCavernBat.class));
         cards.add(new SetCardInfo("Deepfathom Echo", 228, Rarity.RARE, mage.cards.d.DeepfathomEcho.class));
