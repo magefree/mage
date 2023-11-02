@@ -38,7 +38,7 @@ public final class TrumpetingCarnosaur extends CardImpl {
 
         // {2}{R}, Discard Trumpeting Carnosaur: It deals 3 damage to target creature or planeswalker.
         Ability ability = new SimpleActivatedAbility(
-                Zone.HAND, new DamageTargetEffect(3),
+                Zone.HAND, new DamageTargetEffect(3, "It"),
                 new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new DiscardSourceCost());

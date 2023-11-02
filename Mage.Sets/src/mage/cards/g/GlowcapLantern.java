@@ -31,7 +31,7 @@ public final class GlowcapLantern extends CardImpl {
         Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()),
                 AttachmentType.EQUIPMENT
-        ));
+        ).setText("Equipped creature has \"You may look at the top card of your library any time\""));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new AttacksTriggeredAbility(new ExploreSourceEffect(false, "{this}")),
                 AttachmentType.EQUIPMENT

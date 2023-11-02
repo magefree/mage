@@ -78,6 +78,6 @@ class CuratorOfSunsCreationTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you discover, discover again for the same value.";
+        return "Whenever you discover, discover again for the same value. This ability triggers only once each turn.";
     }
 }

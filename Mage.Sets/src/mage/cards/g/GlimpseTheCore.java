@@ -31,10 +31,10 @@ public final class GlimpseTheCore extends CardImpl {
 
         // Choose one --
         // * Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, true));
 
         // * Return target Cave card from your graveyard to the battlefield tapped.
-        this.getSpellAbility().addMode(new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect()).addTarget(new TargetCardInYourGraveyard(filter2)));
+        this.getSpellAbility().addMode(new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect(true)).addTarget(new TargetCardInYourGraveyard(filter2)));
     }
 
     private GlimpseTheCore(final GlimpseTheCore card) {

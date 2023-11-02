@@ -12,7 +12,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -20,7 +19,7 @@ import java.util.Optional;
  */
 public enum CavesControlledAndInGraveCount implements DynamicValue {
     FOR_EACH("1", "Cave you control and each Cave card in your graveyard"),
-    WHERE_X("X", "Caves you control plus the number of Cave cards in your graveyard");
+    WHERE_X("X", "the number of Caves you control plus the number of Cave cards in your graveyard");
     private static final FilterPermanent filter1 = new FilterControlledPermanent(SubType.CAVE);
     private static final FilterCard filter2 = new FilterCard();
 
@@ -49,7 +48,6 @@ public enum CavesControlledAndInGraveCount implements DynamicValue {
                 .count(filter1, sourceAbility.getControllerId(), sourceAbility, game)
                 + Optional
                 .ofNullable(game.getPlayer(sourceAbility.getControllerId()))
-                .filter(Objects::nonNull)
                 .map(Player::getGraveyard)
                 .map(g -> g.count(filter2, game))
                 .orElse(0);
