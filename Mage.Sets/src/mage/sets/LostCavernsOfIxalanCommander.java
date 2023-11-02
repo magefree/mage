@@ -35,6 +35,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 114, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Mimic Vat", 115, Rarity.RARE, mage.cards.m.MimicVat.class));
         cards.add(new SetCardInfo("Mist Dancer", 76, Rarity.RARE, mage.cards.m.MistDancer.class));
+        cards.add(new SetCardInfo("Order of Sacred Dusk", 97, Rarity.RARE, mage.cards.o.OrderOfSacredDusk.class));
         cards.add(new SetCardInfo("Path of Ancestry", 346, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Strionic Resonator", 116, Rarity.RARE, mage.cards.s.StrionicResonator.class));
         cards.add(new SetCardInfo("Temple Bell", 117, Rarity.RARE, mage.cards.t.TempleBell.class));
