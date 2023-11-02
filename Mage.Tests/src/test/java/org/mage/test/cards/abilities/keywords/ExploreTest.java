@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -26,6 +27,9 @@ public class ExploreTest extends CardTestPlayerBase {
     private static final String mb = "Merfolk Branchwalker"; // 1G 2/1 ETB explores
     private static final String ww = "Wildgrowth Walker"; // 1G 1/3
     // Whenever a creature you control explores, put a +1/+1 counter on Wildgrowth Walker and you gain 3 life.
+    private static final String nicanzil = "Nicanzil, Current Conductor";
+    // Whenever a creature you control explores a land card, you may put a land card from your hand onto the battlefield tapped.
+    // Whenever a creature you control explores a nonland card, put a +1/+1 counter on Nicanzil, Current Conductor.
     private static final String enter = "Enter the Unknown"; // G Sorcery - Target creature you control explores.
     private static final String quicksand = "Quicksand"; // Land
     private static final String gg = "Giant Growth"; // Nonland
@@ -81,6 +85,7 @@ public class ExploreTest extends CardTestPlayerBase {
     @Test
     public void exploreNonlandToGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.BATTLEFIELD, playerA, nicanzil);
         addCard(Zone.HAND, playerA, mb);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         removeAllCardsFromLibrary(playerA);
@@ -89,6 +94,7 @@ public class ExploreTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mb);
         setChoice(playerA, true); // yes to graveyard
+        setChoice(playerA, "Whenever a creature you control explores a nonland card,"); // order trigger
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
@@ -96,9 +102,37 @@ public class ExploreTest extends CardTestPlayerBase {
 
         assertCounterCount(mb, CounterType.P1P1, 1);
         assertCounterCount(ww, CounterType.P1P1, 1);
+        assertCounterCount(nicanzil, CounterType.P1P1, 1);
         assertLife(playerA, 23);
         assertHandCount(playerA, 0);
         assertGraveyardCount(playerA, gg,1);
+        assertLibraryCount(playerA, 0);
+    }
+
+    @Test
+    public void exploreLandToBattlefield() {
+        addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.BATTLEFIELD, playerA, nicanzil);
+        addCard(Zone.HAND, playerA, mb);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, quicksand);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mb);
+        setChoice(playerA, "Whenever a creature you control explores a land card,"); // order trigger
+        setChoice(playerA, true); // yes to put land to battlefield tapped
+        setChoice(playerA, quicksand); // choose land
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(mb, CounterType.P1P1, 0);
+        assertCounterCount(ww, CounterType.P1P1, 1);
+        assertLife(playerA, 23);
+        assertTapped(quicksand, true);
+        assertGraveyardCount(playerA, 0);
         assertLibraryCount(playerA, 0);
     }
 
@@ -107,6 +141,7 @@ public class ExploreTest extends CardTestPlayerBase {
         // If no card is revealed, most likely because that player's library is empty,
         // the exploring creature receives a +1/+1 counter.
         addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.BATTLEFIELD, playerA, nicanzil);
         addCard(Zone.HAND, playerA, mb);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         removeAllCardsFromLibrary(playerA);
@@ -120,6 +155,7 @@ public class ExploreTest extends CardTestPlayerBase {
 
         assertCounterCount(mb, CounterType.P1P1, 1);
         assertCounterCount(ww, CounterType.P1P1, 1);
+        assertCounterCount(nicanzil, CounterType.P1P1, 0);
         assertLife(playerA, 23);
         assertHandCount(playerA, 0);
         assertGraveyardCount(playerA, 0);
@@ -203,6 +239,34 @@ public class ExploreTest extends CardTestPlayerBase {
         assertHandCount(playerA, gg, 0);
         assertGraveyardCount(playerA, gg, 1);
         assertLibraryCount(playerA, gg, 2);
+    }
+
+    @Test
+    public void exploreReplacement() {
+        String twists = "Twists and Turns";
+        // If a creature you control would explore, instead you scry 1, then that creature explores.
+
+        addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.BATTLEFIELD, playerA, twists);
+        addCard(Zone.HAND, playerA, mb);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, quicksand);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mb);
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // scry to top (no targets to bottom)
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(mb, CounterType.P1P1, 0);
+        assertCounterCount(ww, CounterType.P1P1, 1);
+        assertLife(playerA, 23);
+        assertHandCount(playerA, quicksand, 1);
+        assertGraveyardCount(playerA, 0);
+        assertLibraryCount(playerA, 0);
     }
     
 }
