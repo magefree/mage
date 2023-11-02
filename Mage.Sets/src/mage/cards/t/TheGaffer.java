@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class TheGaffer extends CardImpl {
         // At the beginning of each end step, if you gained 3 or more life this turn, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), TargetController.ANY, condition, false
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private TheGaffer(final TheGaffer card) {

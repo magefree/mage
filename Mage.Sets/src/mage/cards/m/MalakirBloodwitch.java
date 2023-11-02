@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.Set;
@@ -7,7 +6,9 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -33,9 +34,16 @@ public final class MalakirBloodwitch extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // Protection from white
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new MalakirBloodwitchEffect(), false));
+
+        // When Malakir Bloodwitch enters the battlefield, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new MalakirBloodwitchEffect(), false)
+                .addHint(new ValueHint("Vampires you control", new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.VAMPIRE))))
+        );
     }
 
     private MalakirBloodwitch(final MalakirBloodwitch card) {
@@ -55,7 +63,7 @@ class MalakirBloodwitchEffect extends OneShotEffect {
         this.staticText = "each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way";
     }
 
-    public MalakirBloodwitchEffect(final MalakirBloodwitchEffect effect) {
+    private MalakirBloodwitchEffect(final MalakirBloodwitchEffect effect) {
         super(effect);
     }
 

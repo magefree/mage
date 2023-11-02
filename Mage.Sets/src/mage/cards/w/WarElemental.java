@@ -59,7 +59,7 @@ class WarElementalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new WarElementalEffect(), false);
     }
 
-    public WarElementalTriggeredAbility(final WarElementalTriggeredAbility ability) {
+    private WarElementalTriggeredAbility(final WarElementalTriggeredAbility ability) {
         super(ability);
     }
 
@@ -94,7 +94,7 @@ class WarElementalEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public WarElementalEffect(final WarElementalEffect effect) {
+    private WarElementalEffect(final WarElementalEffect effect) {
         super(effect);
     }
 

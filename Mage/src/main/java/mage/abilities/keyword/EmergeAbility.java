@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -34,14 +35,14 @@ public class EmergeAbility extends SpellAbility {
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
 
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
-        this.addManaCost(emergeCost.copy());
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
+        this.addCost(emergeCost.copy());
 
-        this.setRuleAtTheTop(true);        
+        this.setRuleAtTheTop(true);
     }
 
-    public EmergeAbility(final EmergeAbility ability) {
+    protected EmergeAbility(final EmergeAbility ability) {
         super(ability);
         this.emergeCost = ability.emergeCost.copy();
     }
@@ -55,7 +56,7 @@ public class EmergeAbility extends SpellAbility {
                         new FilterControlledCreaturePermanent(), this.getControllerId(), this, game)) {
                     ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getManaValue());
                     if (costToPay.canPay(this, this, this.getControllerId(), game)) {
-                        return ActivationStatus.getTrue(this, game);
+                        return new ActivationStatus(new ApprovingObject(this, game));
                     }
                 }
             }

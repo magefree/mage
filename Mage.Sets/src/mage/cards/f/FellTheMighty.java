@@ -46,7 +46,7 @@ class FellTheMightyEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures with power greater than target creature's power";
     }
 
-    public FellTheMightyEffect(final FellTheMightyEffect effect) {
+    private FellTheMightyEffect(final FellTheMightyEffect effect) {
         super(effect);
     }
 

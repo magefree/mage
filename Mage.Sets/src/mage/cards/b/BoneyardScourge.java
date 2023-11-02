@@ -72,7 +72,7 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, ");
     }
 
-    public DiesWhileInGraveyardTriggeredAbility(final DiesWhileInGraveyardTriggeredAbility ability) {
+    private DiesWhileInGraveyardTriggeredAbility(final DiesWhileInGraveyardTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }
@@ -90,7 +90,9 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (!zEvent.isDiesEvent()) { return false; }
+        if (!zEvent.isDiesEvent()) {
+            return false;
+        }
 
         for (Zone z : Zone.values()) {
             if (game.getShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {

@@ -48,7 +48,7 @@ class ImperialEdictEffect extends OneShotEffect {
         this.staticText = "Target opponent chooses a creature they control. Destroy it.";
     }
 
-    ImperialEdictEffect(final ImperialEdictEffect effect) {
+    private ImperialEdictEffect(final ImperialEdictEffect effect) {
         super(effect);
     }
 

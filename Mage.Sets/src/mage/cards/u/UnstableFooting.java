@@ -70,7 +70,7 @@ class UnstableFootingEffect extends ReplacementEffectImpl {
         staticText = "Damage can't be prevented this turn";
     }
 
-    public UnstableFootingEffect(final UnstableFootingEffect effect) {
+    private UnstableFootingEffect(final UnstableFootingEffect effect) {
         super(effect);
     }
 

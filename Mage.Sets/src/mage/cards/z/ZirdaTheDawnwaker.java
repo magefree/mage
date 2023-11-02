@@ -20,7 +20,6 @@ import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
-import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -77,9 +76,11 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
         return deck
                 .stream()
                 .filter(MageObject::isPermanent)
-                .map(MageObject::getAbilities)
-                .flatMap(Collection::stream)
-                .anyMatch(ActivatedAbility.class::isInstance);
+                .allMatch(card -> card
+                        .getAbilities()
+                        .stream()
+                        .anyMatch(ActivatedAbility.class::isInstance)
+                );
     }
 }
 

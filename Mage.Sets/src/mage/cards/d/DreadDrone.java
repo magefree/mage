@@ -28,7 +28,7 @@ public final class DreadDrone extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2)));
     }
 
-    public DreadDrone (final DreadDrone card) {
+    private DreadDrone(final DreadDrone card) {
         super(card);
     }
 

@@ -20,7 +20,7 @@ public final class AjanisWelcome extends CardImpl {
         // Whenever a creature enters the battlefield under your control, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new GainLifeEffect(1),
-                StaticFilters.FILTER_PERMANENT_CREATURE
+                StaticFilters.FILTER_PERMANENT_A_CREATURE
         ));
     }
 

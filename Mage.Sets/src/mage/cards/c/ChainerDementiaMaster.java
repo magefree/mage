@@ -80,7 +80,7 @@ class ChainerDementiaMasterEffect extends OneShotEffect {
         this.staticText = "Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types";
     }
     
-    ChainerDementiaMasterEffect(final ChainerDementiaMasterEffect effect) {
+    private ChainerDementiaMasterEffect(final ChainerDementiaMasterEffect effect) {
         super(effect);
     }
     

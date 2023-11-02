@@ -51,7 +51,7 @@ class DongZhouTheTyrantEffect extends OneShotEffect {
         staticText = "target creature an opponent controls deals damage equal to its power to that player";
     }
 
-    public DongZhouTheTyrantEffect(final DongZhouTheTyrantEffect effect) {
+    private DongZhouTheTyrantEffect(final DongZhouTheTyrantEffect effect) {
         super(effect);
     }
 

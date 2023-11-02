@@ -21,7 +21,7 @@ public final class TuktukTheReturnedToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public TuktukTheReturnedToken(final TuktukTheReturnedToken token) {
+    protected TuktukTheReturnedToken(final TuktukTheReturnedToken token) {
         super(token);
     }
 

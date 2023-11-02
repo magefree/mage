@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -27,9 +26,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WickedWolf extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent(SubType.FOOD, "a Food");
 
     public WickedWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
@@ -48,7 +44,7 @@ public final class WickedWolf extends CardImpl {
         // Sacrifice a Food: Put a +1/+1 counter on Wicked Wolf. It gains indestructible until end of turn. Tap it.
         ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD))
         );
         ability.addEffect(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn

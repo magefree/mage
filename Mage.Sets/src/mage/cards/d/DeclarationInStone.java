@@ -3,6 +3,7 @@ package mage.cards.d;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.keyword.InvestigateTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,9 +14,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.ClueArtifactToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
@@ -53,7 +54,7 @@ class DeclarationInStoneEffect extends OneShotEffect {
         staticText = "Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way.";
     }
 
-    public DeclarationInStoneEffect(final DeclarationInStoneEffect effect) {
+    private DeclarationInStoneEffect(final DeclarationInStoneEffect effect) {
         super(effect);
     }
 
@@ -61,42 +62,41 @@ class DeclarationInStoneEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        if (sourceObject != null && controller != null) {
-            Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (targetPermanent != null) {
-                Set<Card> cardsToExile = new HashSet<>();
-                int nonTokenCount = 0;
-                if (CardUtil.haveEmptyName(targetPermanent)) { // face down creature
-                    cardsToExile.add(targetPermanent);
-                    if (!(targetPermanent instanceof PermanentToken)) {
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || sourceObject == null || targetPermanent == null) {
+            return false;
+        }
+        Set<Card> cardsToExile = new HashSet<>();
+        int nonTokenCount = 0;
+        if (CardUtil.haveEmptyName(targetPermanent)) { // face down creature
+            cardsToExile.add(targetPermanent);
+            if (!(targetPermanent instanceof PermanentToken)) {
+                nonTokenCount++;
+            }
+        } else {
+            if (cardsToExile.add(targetPermanent)
+                    && !(targetPermanent instanceof PermanentToken)) {
+                nonTokenCount++;
+            }
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, targetPermanent.getControllerId(), game)) {
+                if (!permanent.getId().equals(targetPermanent.getId())
+                        && CardUtil.haveSameNames(permanent, targetPermanent)) {
+                    cardsToExile.add(permanent);
+                    // exiled count only matters for non-tokens
+                    if (!(permanent instanceof PermanentToken)) {
                         nonTokenCount++;
                     }
-                } else {
-                    if (cardsToExile.add(targetPermanent)
-                            && !(targetPermanent instanceof PermanentToken)) {
-                        nonTokenCount++;
-                    }
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, targetPermanent.getControllerId(), game)) {
-                        if (!permanent.getId().equals(targetPermanent.getId())
-                                && CardUtil.haveSameNames(permanent, targetPermanent)) {
-                            cardsToExile.add(permanent);
-                            // exiled count only matters for non-tokens
-                            if (!(permanent instanceof PermanentToken)) {
-                                nonTokenCount++;
-                            }
-                        }
-                    }
                 }
-                controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-                game.getState().processAction(game);
-                if (nonTokenCount > 0) {
-                    new ClueArtifactToken().putOntoBattlefield(nonTokenCount, game, source, targetPermanent.getControllerId(), false, false);
-                }
-                return true;
             }
         }
-
-        return false;
+        controller.moveCards(cardsToExile, Zone.EXILED, source, game);
+        game.getState().processAction(game);
+        if (nonTokenCount > 0) {
+            new InvestigateTargetEffect(nonTokenCount)
+                    .setTargetPointer(new FixedTarget(targetPermanent.getControllerId()))
+                    .apply(game, source);
+        }
+        return true;
     }
 
     @Override

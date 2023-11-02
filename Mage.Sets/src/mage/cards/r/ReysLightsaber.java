@@ -45,7 +45,7 @@ public class ReysLightsaber extends CardImpl {
         this.addAbility(new EquipAbility(2, false));
     }
 
-    public ReysLightsaber(final ReysLightsaber card) {
+    private ReysLightsaber(final ReysLightsaber card) {
         super(card);
     }
 

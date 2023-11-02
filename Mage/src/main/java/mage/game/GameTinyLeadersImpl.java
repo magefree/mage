@@ -29,13 +29,16 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 
     protected boolean alsoHand; // replace also commander going to library
     protected boolean alsoLibrary; // replace also commander going to library
+
+    // 103.7a  In a two-player game, the player who plays first skips the draw step
+    // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 50, 7);
+    public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 50, startLife, startHandSize);
     }
 
-    public GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
+    protected GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
@@ -83,7 +86,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
         }
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
-            state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+            state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
         }
     }
 
@@ -161,7 +164,7 @@ class DefaultCommander extends CardImpl {
 
     }
 
-    public DefaultCommander(final DefaultCommander card) {
+    protected DefaultCommander(final DefaultCommander card) {
         super(card);
     }
 

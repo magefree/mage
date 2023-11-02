@@ -55,7 +55,7 @@ class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public AshlingTheExtinguisherTriggeredAbility(final AshlingTheExtinguisherTriggeredAbility ability) {
+    private AshlingTheExtinguisherTriggeredAbility(final AshlingTheExtinguisherTriggeredAbility ability) {
         super(ability);
     }
 

@@ -59,7 +59,7 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
         this.staticText = "Creature cards you own that aren't on the battlefield have flash";
     }
 
-    public TeferiMageOfZhalfirAddFlashEffect(final TeferiMageOfZhalfirAddFlashEffect effect) {
+    private TeferiMageOfZhalfirAddFlashEffect(final TeferiMageOfZhalfirAddFlashEffect effect) {
         super(effect);
     }
 
@@ -117,7 +117,7 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
         staticText = "Each opponent can cast spells only any time they could cast a sorcery";
     }
 
-    TeferiMageOfZhalfirReplacementEffect(final TeferiMageOfZhalfirReplacementEffect effect) {
+    private TeferiMageOfZhalfirReplacementEffect(final TeferiMageOfZhalfirReplacementEffect effect) {
         super(effect);
     }
 
@@ -142,11 +142,6 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
             return !game.canPlaySorcery(event.getPlayerId());
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -73,8 +73,8 @@ public class CanadianHighlander extends Constructed {
         boolean valid = true;
         errorsList.clear();
 
-        if (deck.getCards().size() < 100) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain 100 or more singleton cards: has " + (deck.getCards().size()) + " cards");
+        if (deck.getMaindeckCards().size() < 100) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain 100 or more singleton cards: has " + (deck.getMaindeckCards().size()) + " cards");
             valid = false;
         }
 

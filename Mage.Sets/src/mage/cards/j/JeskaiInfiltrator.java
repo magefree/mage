@@ -70,7 +70,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
         this.staticText = "exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards";
     }
 
-    JeskaiInfiltratorEffect(final JeskaiInfiltratorEffect effect) {
+    private JeskaiInfiltratorEffect(final JeskaiInfiltratorEffect effect) {
         super(effect);
     }
 

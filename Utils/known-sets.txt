@@ -46,6 +46,7 @@ Core Set 2021|CoreSet2021|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
+Doctor Who|DoctorWho|
 Dominaria|Dominaria|
 Dominaria United|DominariaUnited|
 Dominaria United Commander|DominariaUnitedCommander|
@@ -83,6 +84,7 @@ European Land Program|EuropeanLandProgram|
 Eventide|Eventide|
 Exodus|Exodus|
 Explorers of Ixalan|ExplorersOfIxalan|
+Fallout|Fallout|
 Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
@@ -131,6 +133,7 @@ Judgment|Judgment|
 Jumpstart|Jumpstart|
 Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
 Jumpstart 2022|Jumpstart2022|
+Jurassic World Collection|JurassicWorldCollection|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|
@@ -145,6 +148,8 @@ Limited Edition Beta|LimitedEditionBeta|
 The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth|
 Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
+The Lost Caverns of Ixalan|TheLostCavernsOfIxalan|
+Lost Caverns of Ixalan Commander|LostCavernsOfIxalanCommander|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
 Magic 2012|Magic2012|
@@ -211,6 +216,7 @@ Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
 Shards of Alara|ShardsOfAlara|
+Special Guests|SpecialGuests|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
 Star Wars|StarWars|
@@ -248,6 +254,8 @@ War of the Spark|WarOfTheSpark|
 Weatherlight|Weatherlight|
 Welcome Deck 2016|WelcomeDeck2016|
 Welcome Deck 2017|WelcomeDeck2017|
+Wilds of Eldraine|WildsOfEldraine|
+Wilds of Eldraine Commander|WildsOfEldraineCommander|
 World Magic Cup Qualifier|WorldMagicCupQualifier|
 Worldwake|Worldwake|
 WPN Gateway|WPNAndGatewayPromos|

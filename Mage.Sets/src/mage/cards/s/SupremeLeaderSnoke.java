@@ -123,7 +123,7 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
         staticText = "Put a loyalty counter on {this} for each life lost by all opponents from noncombat sources this turn";
     }
 
-    public SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
+    private SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
     }

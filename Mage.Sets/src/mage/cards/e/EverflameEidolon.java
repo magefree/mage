@@ -56,7 +56,7 @@ class EverflameEidolonEffect extends OneShotEffect {
         this.staticText = "{this} gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead";
     }
 
-    public EverflameEidolonEffect(final EverflameEidolonEffect effect) {
+    private EverflameEidolonEffect(final EverflameEidolonEffect effect) {
         super(effect);
     }
 

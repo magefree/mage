@@ -45,7 +45,7 @@ class EssenceHarvestEffect extends OneShotEffect {
         this.staticText = "Target player loses X life and you gain X life, where X is the greatest power among creatures you control";
     }
 
-    public EssenceHarvestEffect(final EssenceHarvestEffect effect) {
+    private EssenceHarvestEffect(final EssenceHarvestEffect effect) {
         super(effect);
     }
 

@@ -54,7 +54,7 @@ class MerfolkSpyEffect extends OneShotEffect {
         staticText = "that player reveals a card at random from their hand";
     }
 
-    public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
+    private MerfolkSpyEffect(final MerfolkSpyEffect effect) {
         super(effect);
     }
 

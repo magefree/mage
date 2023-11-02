@@ -52,7 +52,7 @@ class SeedGuardianEffect extends OneShotEffect {
         this.staticText = "create an X/X green Elemental creature token, where X is the number of creature cards in your graveyard";
     }
 
-    public SeedGuardianEffect(final SeedGuardianEffect effect) {
+    private SeedGuardianEffect(final SeedGuardianEffect effect) {
         super(effect);
     }
 

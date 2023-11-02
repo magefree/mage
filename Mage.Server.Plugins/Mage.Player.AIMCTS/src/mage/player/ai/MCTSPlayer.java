@@ -20,9 +20,7 @@ import java.util.UUID;
  */
 public class MCTSPlayer extends ComputerPlayer {
 
-     private static final Logger logger = Logger.getLogger(MCTSPlayer.class);
-
-    protected PassAbility pass = new PassAbility();
+    private static final Logger logger = Logger.getLogger(MCTSPlayer.class);
 
     private NextAction nextAction;
 
@@ -32,12 +30,10 @@ public class MCTSPlayer extends ComputerPlayer {
 
     public MCTSPlayer(UUID id) {
         super(id);
-        this.pass.setControllerId(id);
     }
 
     public MCTSPlayer(final MCTSPlayer player) {
         super(player);
-        this.pass = player.pass.copy();
         this.nextAction = player.nextAction;
     }
 
@@ -48,7 +44,7 @@ public class MCTSPlayer extends ComputerPlayer {
 
     protected List<ActivatedAbility> getPlayableAbilities(Game game) {
         List<ActivatedAbility> playables = getPlayable(game, true);
-        playables.add(pass);
+        playables.add(new PassAbility());
         return playables;
     }
 
@@ -91,7 +87,7 @@ public class MCTSPlayer extends ComputerPlayer {
         }
         for (int i = start; i < numAvailable; i++) {
             Ability newAbility = ability.copy();
-            newAbility.getManaCostsToPay().add(new GenericManaCost(i));
+            newAbility.addManaCostsToPay(new GenericManaCost(i));
             options.add(newAbility);
         }
     }

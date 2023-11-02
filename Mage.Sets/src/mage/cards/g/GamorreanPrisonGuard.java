@@ -36,7 +36,7 @@ public final class GamorreanPrisonGuard extends CardImpl {
 
         // Whenever a creature enters the battlefield under an opponent's control, Gamorrean Prison Guard fights that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new GamorreanPrisonGuardEffect(), filter, false, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, Gamorrean Prison Guard fights that creature."));
+                Zone.BATTLEFIELD, new GamorreanPrisonGuardEffect(), filter, false, SetTargetPointer.PERMANENT));
 
     }
 
@@ -56,7 +56,7 @@ class GamorreanPrisonGuardEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public GamorreanPrisonGuardEffect(final GamorreanPrisonGuardEffect effect) {
+    private GamorreanPrisonGuardEffect(final GamorreanPrisonGuardEffect effect) {
         super(effect);
     }
 

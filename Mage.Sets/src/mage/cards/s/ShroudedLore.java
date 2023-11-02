@@ -49,7 +49,7 @@ class ShroudedLoreEffect extends OneShotEffect {
         staticText = "Target opponent chooses a card in your graveyard. You may pay {B}. If you do, repeat this process except that opponent can't choose a card already chosen for {this}. Then put the last chosen card into your hand.";
     }
 
-    public ShroudedLoreEffect(final ShroudedLoreEffect effect) {
+    private ShroudedLoreEffect(final ShroudedLoreEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class ShroudedLoreEffect extends OneShotEffect {
             boolean done = false;
             do {
                 chosenCard = new TargetCardInGraveyard(filter);
-                chosenCard.setNotTarget(true);
+                chosenCard.withNotTarget(true);
                 if (chosenCard.canChoose(opponent.getId(), source, game)) {
                     opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
                     card = game.getCard(chosenCard.getFirstTarget());

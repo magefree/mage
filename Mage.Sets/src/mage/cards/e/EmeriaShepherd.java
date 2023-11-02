@@ -23,7 +23,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class EmeriaShepherd extends CardImpl {
@@ -35,7 +34,7 @@ public final class EmeriaShepherd extends CardImpl {
     }
 
     public EmeriaShepherd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -45,7 +44,7 @@ public final class EmeriaShepherd extends CardImpl {
         // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand.
         // If that land is a Plains, you may return that nonland permanent card to the battlefield instead.
         Ability ability = new LandfallAbility(Zone.BATTLEFIELD, new EmeriaShepherdReturnToHandTargetEffect(), true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterPermanentCard(filter)));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
@@ -66,7 +65,7 @@ class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
         staticText = "you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead";
     }
 
-    public EmeriaShepherdReturnToHandTargetEffect(final EmeriaShepherdReturnToHandTargetEffect effect) {
+    private EmeriaShepherdReturnToHandTargetEffect(final EmeriaShepherdReturnToHandTargetEffect effect) {
         super(effect);
     }
 

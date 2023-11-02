@@ -64,7 +64,7 @@ class MirriWeatherlightDuelistBlockRestrictionEffect extends RestrictionEffect {
         staticText = "each opponent can't block with more than one creature this combat";
     }
 
-    MirriWeatherlightDuelistBlockRestrictionEffect(final MirriWeatherlightDuelistBlockRestrictionEffect effect) {
+    private MirriWeatherlightDuelistBlockRestrictionEffect(final MirriWeatherlightDuelistBlockRestrictionEffect effect) {
         super(effect);
     }
 

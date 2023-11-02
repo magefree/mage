@@ -49,7 +49,7 @@ class GalvanothEffect extends OneShotEffect {
                 + "sorcery card, you may cast it without paying its mana cost";
     }
 
-    public GalvanothEffect(final GalvanothEffect effect) {
+    private GalvanothEffect(final GalvanothEffect effect) {
         super(effect);
     }
 

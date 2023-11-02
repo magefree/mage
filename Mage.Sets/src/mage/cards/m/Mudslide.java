@@ -39,7 +39,7 @@ public final class Mudslide extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Creatures without flying don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filterCreature)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filterCreature)));
 
         // At the beginning of each player's upkeep, that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MudslideEffect(), TargetController.ANY, false));
@@ -69,7 +69,7 @@ class MudslideEffect extends OneShotEffect {
         staticText = "that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.";
     }
 
-    MudslideEffect(MudslideEffect effect) {
+    private MudslideEffect(final MudslideEffect effect) {
         super(effect);
     }
 

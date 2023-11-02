@@ -67,7 +67,7 @@ public abstract class MageObjectImpl implements MageObject {
         abilities = new AbilitiesImpl<>();
     }
 
-    public MageObjectImpl(final MageObjectImpl object) {
+    protected MageObjectImpl(final MageObjectImpl object) {
         objectId = object.objectId;
         name = object.name;
         manaCost = object.manaCost.copy();
@@ -279,6 +279,11 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return manaCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        this.manaCost = costs.copy();
     }
 
     @Override

@@ -54,7 +54,7 @@ class MarshalingTheTroopsEffect extends OneShotEffect {
         staticText = "Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way";
     }
 
-    public MarshalingTheTroopsEffect(MarshalingTheTroopsEffect effect) {
+    private MarshalingTheTroopsEffect(final MarshalingTheTroopsEffect effect) {
         super(effect);
     }
 

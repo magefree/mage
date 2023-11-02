@@ -60,7 +60,7 @@ class ChariotOfTheSunEffect extends ContinuousEffectImpl {
         staticText = "and has base toughness 1";
     }
 
-    public ChariotOfTheSunEffect(final ChariotOfTheSunEffect effect) {
+    private ChariotOfTheSunEffect(final ChariotOfTheSunEffect effect) {
         super(effect);
     }
 

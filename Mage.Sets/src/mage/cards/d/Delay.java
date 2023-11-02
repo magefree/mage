@@ -52,7 +52,7 @@ class DelayEffect extends OneShotEffect {
         this.staticText = "Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend";
     }
 
-    public DelayEffect(final DelayEffect effect) {
+    private DelayEffect(final DelayEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class DelayEffect extends OneShotEffect {
             if (card != null && effect.apply(game, source) && game.getState().getZone(card.getId()) == Zone.EXILED) {
                 boolean hasSuspend = card.getAbilities(game).containsClass(SuspendAbility.class);
                 UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-                if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getLogName(), source, game, Zone.HAND, true)) {
+                if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source, game, Zone.HAND, true)) {
                     card.addCounters(CounterType.TIME.createInstance(3), source.getControllerId(), source, game);
                     if (!hasSuspend) {
                         game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);

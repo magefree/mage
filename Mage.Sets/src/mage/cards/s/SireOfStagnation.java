@@ -1,34 +1,26 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOpponentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileCardsFromTopOfLibraryTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
  * @author fireshoes
  */
 public final class SireOfStagnation extends CardImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-    private static final String rule = "Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.";
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public SireOfStagnation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");
@@ -40,9 +32,9 @@ public final class SireOfStagnation extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new ExileCardsFromTopOfLibraryTargetEffect(2, "that player"), filter, false, SetTargetPointer.PLAYER, rule, false);
-        ability.addEffect(new DrawCardSourceControllerEffect(2));
+        Ability ability = new EntersBattlefieldOpponentTriggeredAbility(Zone.BATTLEFIELD,
+                new ExileCardsFromTopOfLibraryTargetEffect(2), StaticFilters.FILTER_LAND_A, false, SetTargetPointer.PLAYER);
+        ability.addEffect(new DrawCardSourceControllerEffect(2).concatBy("and you"));
         this.addAbility(ability);
     }
 

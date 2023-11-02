@@ -41,7 +41,7 @@ class BloodTitheEffect extends OneShotEffect {
         staticText = "Each opponent loses 3 life. You gain life equal to the life lost this way";
     }
 
-    public BloodTitheEffect(final BloodTitheEffect effect) {
+    private BloodTitheEffect(final BloodTitheEffect effect) {
         super(effect);
     }
 

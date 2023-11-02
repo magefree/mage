@@ -66,7 +66,7 @@ class EvolvingAdaptiveTriggeredAbility extends TriggeredAbilityImpl {
                 "control, if that creature has greater power or toughness than {this}, ");
     }
 
-    public EvolvingAdaptiveTriggeredAbility(final EvolvingAdaptiveTriggeredAbility ability) {
+    private EvolvingAdaptiveTriggeredAbility(final EvolvingAdaptiveTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,10 +83,13 @@ class EvolvingAdaptiveTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enteringCreature = game.getPermanent(event.getTargetId());
-        if (enteringCreature == null || !StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL.match(enteringCreature, getControllerId(), this, game)) {
+        Permanent permanent = getSourcePermanentIfItStillExists(game);
+        if (enteringCreature == null
+                || permanent == null
+                || !StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL.match(enteringCreature, getControllerId(), this, game)) {
             return false;
         }
-        Permanent permanent = getSourcePermanentIfItStillExists(game);
+
         return !(enteringCreature.getPower().getValue() <= permanent.getPower().getValue() &&
                 enteringCreature.getToughness().getValue() <= permanent.getToughness().getValue());
     }

@@ -12,7 +12,7 @@ import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -30,7 +30,7 @@ public final class StormTheCitadel extends CardImpl {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()
         ));
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public StormTheCitadel(UUID ownerId, CardSetInfo setInfo) {

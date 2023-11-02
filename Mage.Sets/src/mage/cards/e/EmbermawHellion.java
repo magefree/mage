@@ -56,7 +56,7 @@ class EmbermawHellionEffect extends ReplacementEffectImpl {
         staticText = "If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.";
     }
 
-    EmbermawHellionEffect(final EmbermawHellionEffect effect) {
+    private EmbermawHellionEffect(final EmbermawHellionEffect effect) {
         super(effect);
     }
 

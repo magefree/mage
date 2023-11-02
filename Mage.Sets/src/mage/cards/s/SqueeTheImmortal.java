@@ -53,7 +53,7 @@ class SqueePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard or from exile";
     }
 
-    public SqueePlayEffect(final SqueePlayEffect effect) {
+    private SqueePlayEffect(final SqueePlayEffect effect) {
         super(effect);
     }
 

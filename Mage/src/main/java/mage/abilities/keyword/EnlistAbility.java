@@ -92,7 +92,7 @@ class EnlistEffect extends ReplacementEffectImpl {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.tap(source, game)) {

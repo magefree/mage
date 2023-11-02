@@ -71,7 +71,7 @@ class MyojinOfLifesWebPutCreatureOnBattlefieldEffect extends OneShotEffect {
         this.staticText = "Put any number of creature cards from your hand onto the battlefield";
     }
 
-    public MyojinOfLifesWebPutCreatureOnBattlefieldEffect(final MyojinOfLifesWebPutCreatureOnBattlefieldEffect effect) {
+    private MyojinOfLifesWebPutCreatureOnBattlefieldEffect(final MyojinOfLifesWebPutCreatureOnBattlefieldEffect effect) {
         super(effect);
     }
 

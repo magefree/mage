@@ -39,7 +39,7 @@ class EverWatchingThresholdTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public EverWatchingThresholdTriggeredAbility(final EverWatchingThresholdTriggeredAbility ability) {
+    private EverWatchingThresholdTriggeredAbility(final EverWatchingThresholdTriggeredAbility ability) {
         super(ability);
     }
 

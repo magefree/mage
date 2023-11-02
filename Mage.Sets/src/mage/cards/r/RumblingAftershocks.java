@@ -50,7 +50,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a kicked spell, ");
     }
 
-    RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
+    private RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
         this.staticText = "you may have {this} deal damage to any target equal to the number of times that spell was kicked";
     }
 
-    public RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {
+    private RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {
         super(effect);
     }
 

@@ -42,7 +42,7 @@ class WurmsToothAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
     }
 
-    public WurmsToothAbility(final WurmsToothAbility ability) {
+    private WurmsToothAbility(final WurmsToothAbility ability) {
         super(ability);
     }
 

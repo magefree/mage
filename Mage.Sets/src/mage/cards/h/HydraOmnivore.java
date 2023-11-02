@@ -49,7 +49,7 @@ class HydraOmnivoreEffect extends OneShotEffect {
         this.staticText = "it deals that much damage to each other opponent";
     }
 
-    public HydraOmnivoreEffect(final HydraOmnivoreEffect effect) {
+    private HydraOmnivoreEffect(final HydraOmnivoreEffect effect) {
         super(effect);
     }
 

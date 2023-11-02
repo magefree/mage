@@ -71,7 +71,7 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
         staticText = ", and its activated abilities with {T} in their costs can't be activated";
     }
 
-    public SerraBestiaryRuleModifyingEffect(final SerraBestiaryRuleModifyingEffect effect) {
+    private SerraBestiaryRuleModifyingEffect(final SerraBestiaryRuleModifyingEffect effect) {
         super(effect);
     }
 
@@ -81,23 +81,13 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

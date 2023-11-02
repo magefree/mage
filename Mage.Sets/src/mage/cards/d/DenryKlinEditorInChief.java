@@ -6,7 +6,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCountersCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCounterChoiceSourceEffect;
 import mage.cards.CardImpl;
@@ -92,7 +91,7 @@ class DenryKlinEditorInChiefCopyCountersEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public DenryKlinEditorInChiefCopyCountersEffect copy() {
         return new DenryKlinEditorInChiefCopyCountersEffect(this);
     }
 }

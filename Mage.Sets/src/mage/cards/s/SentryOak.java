@@ -58,7 +58,7 @@ class SentryOakEffect extends OneShotEffect {
         this.staticText = "{this} gets +2/+0 and loses defender until end of turn";
     }
 
-    public SentryOakEffect(final SentryOakEffect effect) {
+    private SentryOakEffect(final SentryOakEffect effect) {
         super(effect);
     }
 

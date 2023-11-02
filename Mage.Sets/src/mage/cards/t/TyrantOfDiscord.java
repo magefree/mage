@@ -52,7 +52,7 @@ class TyrantOfDiscordEffect extends OneShotEffect {
         this.staticText = "target opponent chooses a permanent they control at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process";
     }
 
-    public TyrantOfDiscordEffect(final TyrantOfDiscordEffect effect) {
+    private TyrantOfDiscordEffect(final TyrantOfDiscordEffect effect) {
         super(effect);
     }
 

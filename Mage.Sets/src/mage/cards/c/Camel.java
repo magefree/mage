@@ -62,7 +62,7 @@ class CamelEffect extends PreventionEffectImpl {
         staticText = "As long as {this} is attacking, prevent all damage Deserts would deal to {this} and to creatures banded with {this}";
     }
 
-    CamelEffect(final CamelEffect effect) {
+    private CamelEffect(final CamelEffect effect) {
         super(effect);
     }
 

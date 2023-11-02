@@ -61,18 +61,13 @@ class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public MoonholdEffect(final MoonholdEffect effect) {
+    private MoonholdEffect(final MoonholdEffect effect) {
         super(effect);
     }
 
     @Override
     public MoonholdEffect copy() {
         return new MoonholdEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -104,18 +99,13 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public MoonholdEffect2(final MoonholdEffect2 effect) {
+    private MoonholdEffect2(final MoonholdEffect2 effect) {
         super(effect);
     }
 
     @Override
     public MoonholdEffect2 copy() {
         return new MoonholdEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

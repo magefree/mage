@@ -68,7 +68,7 @@ class TombOfTheDuskRoseEffect extends OneShotEffect {
         this.staticText = "Put a creature card exiled with this permanent onto the battlefield under your control";
     }
 
-    public TombOfTheDuskRoseEffect(final TombOfTheDuskRoseEffect effect) {
+    private TombOfTheDuskRoseEffect(final TombOfTheDuskRoseEffect effect) {
         super(effect);
     }
 

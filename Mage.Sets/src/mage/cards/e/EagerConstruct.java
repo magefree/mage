@@ -47,7 +47,7 @@ class EagerConstructEffect extends OneShotEffect {
         this.staticText = "each player may scry 1";
     }
 
-    public EagerConstructEffect(final EagerConstructEffect effect) {
+    private EagerConstructEffect(final EagerConstructEffect effect) {
         super(effect);
     }
 

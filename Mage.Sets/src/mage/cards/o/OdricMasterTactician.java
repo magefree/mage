@@ -52,7 +52,7 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} and at least three other creatures attack, ");
     }
 
-    public OdricMasterTacticianTriggeredAbility(final OdricMasterTacticianTriggeredAbility ability) {
+    private OdricMasterTacticianTriggeredAbility(final OdricMasterTacticianTriggeredAbility ability) {
         super(ability);
     }
 

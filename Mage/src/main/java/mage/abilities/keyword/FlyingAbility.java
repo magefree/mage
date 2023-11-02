@@ -55,7 +55,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public FlyingEffect(final FlyingEffect effect) {
+    protected FlyingEffect(final FlyingEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                 || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())
-                || (null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, null, blocker.getControllerId(), game)
+                || (!game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, null, blocker.getControllerId(), game).isEmpty()
                 && attacker.hasSubtype(SubType.DRAGON, game));
     }
 

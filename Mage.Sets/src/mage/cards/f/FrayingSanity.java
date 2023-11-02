@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -59,7 +58,7 @@ class FrayingSanityTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new FrayingSanityEffect());
     }
 
-    public FrayingSanityTriggeredAbility(final FrayingSanityTriggeredAbility ability) {
+    private FrayingSanityTriggeredAbility(final FrayingSanityTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,14 +85,12 @@ class FrayingSanityTriggeredAbility extends TriggeredAbilityImpl {
 
 class FrayingSanityEffect extends OneShotEffect {
 
-    int xAmount = 0;
-
     public FrayingSanityEffect() {
         super(Outcome.Detriment);
         this.staticText = "";
     }
 
-    public FrayingSanityEffect(final FrayingSanityEffect effect) {
+    private FrayingSanityEffect(final FrayingSanityEffect effect) {
         super(effect);
     }
 
@@ -104,21 +101,14 @@ class FrayingSanityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }
         Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
         if (enchantedPlayer != null) {
             CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
-            if (watcher != null) {
-                xAmount = watcher.getAmountCardsPutToGraveyard(enchantedPlayer.getId());
-            }
+            int xAmount = (watcher == null) ? 0 : watcher.getAmountCardsPutToGraveyard(enchantedPlayer.getId());
             enchantedPlayer.millCards(xAmount, source, game);
             return true;
         }

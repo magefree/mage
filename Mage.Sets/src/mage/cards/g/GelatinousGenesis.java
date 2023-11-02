@@ -42,7 +42,7 @@ class GelatinousGenesisEffect extends OneShotEffect {
         staticText = "create X X/X green Ooze creature tokens";
     }
 
-    public GelatinousGenesisEffect(GelatinousGenesisEffect ability) {
+    private GelatinousGenesisEffect(final GelatinousGenesisEffect ability) {
         super(ability);
     }
 

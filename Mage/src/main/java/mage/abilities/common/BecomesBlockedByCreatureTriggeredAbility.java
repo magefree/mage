@@ -28,7 +28,7 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
         setTriggerPhrase("Whenever {this} becomes blocked by " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
-    public BecomesBlockedByCreatureTriggeredAbility(final BecomesBlockedByCreatureTriggeredAbility ability) {
+    protected BecomesBlockedByCreatureTriggeredAbility(final BecomesBlockedByCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }

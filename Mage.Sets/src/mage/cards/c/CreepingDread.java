@@ -47,7 +47,7 @@ class CreepingDreadEffect extends OneShotEffect {
         this.staticText = "each player discards a card. Each opponent who discarded a card that shares a card type with the card you discarded loses 3 life.";
     }
 
-    public CreepingDreadEffect(final CreepingDreadEffect effect) {
+    private CreepingDreadEffect(final CreepingDreadEffect effect) {
         super(effect);
     }
 

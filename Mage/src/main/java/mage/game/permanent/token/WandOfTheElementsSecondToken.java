@@ -18,7 +18,7 @@ public final class WandOfTheElementsSecondToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public WandOfTheElementsSecondToken(final WandOfTheElementsSecondToken token) {
+    protected WandOfTheElementsSecondToken(final WandOfTheElementsSecondToken token) {
         super(token);
     }
 

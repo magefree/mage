@@ -58,10 +58,10 @@ class ScroungingBandarEffect extends OneShotEffect {
 
     public ScroungingBandarEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may move any number of +1/+1 counters from Scrounging Bandar onto another target creature";
+        this.staticText = "you may move any number of +1/+1 counters from {this} onto another target creature";
     }
 
-    public ScroungingBandarEffect(final ScroungingBandarEffect effect) {
+    private ScroungingBandarEffect(final ScroungingBandarEffect effect) {
         super(effect);
     }
 

@@ -70,7 +70,7 @@ class DementiaSliverEffect extends OneShotEffect {
         staticText = "Target opponent reveals a card at random from their hand. If that card has the chose name, that player discards it";
     }
 
-    public DementiaSliverEffect(final DementiaSliverEffect effect) {
+    private DementiaSliverEffect(final DementiaSliverEffect effect) {
         super(effect);
     }
 

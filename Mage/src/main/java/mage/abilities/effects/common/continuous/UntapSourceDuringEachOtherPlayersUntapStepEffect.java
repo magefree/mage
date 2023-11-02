@@ -17,7 +17,7 @@ public class UntapSourceDuringEachOtherPlayersUntapStepEffect extends Continuous
         staticText = "Untap {this} during each other player's untap step";
     }
 
-    public UntapSourceDuringEachOtherPlayersUntapStepEffect(final UntapSourceDuringEachOtherPlayersUntapStepEffect effect) {
+    protected UntapSourceDuringEachOtherPlayersUntapStepEffect(final UntapSourceDuringEachOtherPlayersUntapStepEffect effect) {
         super(effect);
     }
 

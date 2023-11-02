@@ -44,6 +44,7 @@
         </dependency>
 
         <dependency>
+            <!-- A dependency of jboss.remoting -->
             <groupId>concurrent</groupId>
             <artifactId>concurrent</artifactId>
             <version>1.3.4</version>
@@ -95,4 +96,8 @@
 
         <finalName>mage-common</finalName>
     </build>
+
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
 </project>

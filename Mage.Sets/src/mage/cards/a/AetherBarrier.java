@@ -47,7 +47,7 @@ class AetherBarrierEffect extends SacrificeEffect {
         this.staticText = "that player sacrifices a permanent unless they pay {1}";
     }
 
-    AetherBarrierEffect(final AetherBarrierEffect effect) {
+    private AetherBarrierEffect(final AetherBarrierEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class PursuitOfKnowledgeEffect extends ReplacementEffectImpl {
         staticText = "If you would draw a card, you may put a study counter on {this} instead";
     }
 
-    public PursuitOfKnowledgeEffect(final PursuitOfKnowledgeEffect effect) {
+    private PursuitOfKnowledgeEffect(final PursuitOfKnowledgeEffect effect) {
         super(effect);
     }
 

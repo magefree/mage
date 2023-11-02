@@ -79,7 +79,7 @@ class MetzaliTowerOfTriumphEffect extends OneShotEffect {
         this.staticText = "Choose a creature at random that attacked this turn. Destroy that creature";
     }
 
-    public MetzaliTowerOfTriumphEffect(final MetzaliTowerOfTriumphEffect effect) {
+    private MetzaliTowerOfTriumphEffect(final MetzaliTowerOfTriumphEffect effect) {
         super(effect);
     }
 

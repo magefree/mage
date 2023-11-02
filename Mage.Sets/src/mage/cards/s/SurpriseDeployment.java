@@ -66,7 +66,7 @@ class SurpriseDeploymentEffect extends OneShotEffect {
         this.staticText = "You may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand";
     }
 
-    public SurpriseDeploymentEffect(final SurpriseDeploymentEffect effect) {
+    private SurpriseDeploymentEffect(final SurpriseDeploymentEffect effect) {
         super(effect);
     }
 

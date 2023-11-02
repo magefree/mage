@@ -271,10 +271,6 @@ public class User {
         fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_TOURNAMENT, tournamentId));
     }
 
-    public void ccShowGameEndDialog(final UUID gameId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_GAME_END_DIALOG, gameId));
-    }
-
     public void showUserMessage(final String titel, String message) {
         List<String> messageData = new LinkedList<>();
         messageData.add(titel);
@@ -570,7 +566,7 @@ public class User {
         if (!watchedGames.isEmpty()) {
             sb.append("Watch: ").append(watchedGames.size()).append(' ');
         }
-        return sb.toString();
+        return sb.length() == 0 ? "not active" : sb.toString();
     }
 
     public void addGameWatchInfo(UUID gameId) {

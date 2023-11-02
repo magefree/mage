@@ -81,7 +81,7 @@ class GiveControlEffect extends ContinuousEffectImpl {
         staticText = "Target opponent gains control of {this}";
     }
 
-    public GiveControlEffect(final GiveControlEffect effect) {
+    private GiveControlEffect(final GiveControlEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class CustodyBattleUnlessPaysEffect extends OneShotEffect {
         this.cost = cost;
     }
 
-    public CustodyBattleUnlessPaysEffect(final CustodyBattleUnlessPaysEffect effect) {
+    private CustodyBattleUnlessPaysEffect(final CustodyBattleUnlessPaysEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

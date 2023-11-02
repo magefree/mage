@@ -49,7 +49,7 @@ class AnHavvaConstableEffect extends ContinuousEffectImpl {
         staticText = "{this}'s toughness is equal to 1 plus the number of green creatures on the battlefield";
     }
 
-    public AnHavvaConstableEffect(final AnHavvaConstableEffect effect) {
+    private AnHavvaConstableEffect(final AnHavvaConstableEffect effect) {
         super(effect);
     }
 
@@ -61,10 +61,14 @@ class AnHavvaConstableEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (mageObject == null) { return false; }
+        if (mageObject == null) {
+            return false;
+        }
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
         filter.add(new ColorPredicate(ObjectColor.GREEN));

@@ -61,7 +61,7 @@ class ImmaculateMagistrateEffect extends OneShotEffect {
         this.staticText = "Put a +1/+1 counter on target creature for each Elf you control";
     }
 
-    public ImmaculateMagistrateEffect(final ImmaculateMagistrateEffect effect) {
+    private ImmaculateMagistrateEffect(final ImmaculateMagistrateEffect effect) {
         super(effect);
     }
 

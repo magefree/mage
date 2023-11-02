@@ -66,7 +66,7 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
         this.appliesToSpells = appliesToSpells;
     }
 
-    DroughtAdditionalCostEffect(DroughtAdditionalCostEffect effect) {
+    private DroughtAdditionalCostEffect(final DroughtAdditionalCostEffect effect) {
         super(effect);
         appliesToSpells = effect.appliesToSpells;
     }

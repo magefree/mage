@@ -36,7 +36,7 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, ");
     }
 
-    public DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
+    protected DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

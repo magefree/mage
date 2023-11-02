@@ -64,7 +64,7 @@ class BecomesColorOrColorsEnchantedEffect extends OneShotEffect {
         this.staticText = "Enchanted creature becomes the color or colors of your choice";
     }
 
-    public BecomesColorOrColorsEnchantedEffect(final BecomesColorOrColorsEnchantedEffect effect) {
+    private BecomesColorOrColorsEnchantedEffect(final BecomesColorOrColorsEnchantedEffect effect) {
         super(effect);
     }
 

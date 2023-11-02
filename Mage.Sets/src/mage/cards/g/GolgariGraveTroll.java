@@ -62,7 +62,7 @@ class GolgariGraveTrollEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    public GolgariGraveTrollEffect(final GolgariGraveTrollEffect effect) {
+    private GolgariGraveTrollEffect(final GolgariGraveTrollEffect effect) {
         super(effect);
     }
 

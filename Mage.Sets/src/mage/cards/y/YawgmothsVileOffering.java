@@ -68,7 +68,7 @@ class YawgmothsVileOfferingEffect extends OneShotEffect {
         this.staticText = "Put up to one target creature or planeswalker card from a graveyard onto the battlefield under your control. Destroy up to one target creature or planeswalker";
     }
 
-    public YawgmothsVileOfferingEffect(final YawgmothsVileOfferingEffect effect) {
+    private YawgmothsVileOfferingEffect(final YawgmothsVileOfferingEffect effect) {
         super(effect);
     }
 

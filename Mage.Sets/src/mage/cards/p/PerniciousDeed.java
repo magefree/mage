@@ -51,7 +51,7 @@ class PerniciousDeedEffect extends OneShotEffect {
         staticText = "Destroy each artifact, creature, and enchantment with mana value X or less";
     }
 
-    public PerniciousDeedEffect(final PerniciousDeedEffect effect) {
+    private PerniciousDeedEffect(final PerniciousDeedEffect effect) {
         super(effect);
     }
 

@@ -18,7 +18,7 @@ public final class ShrineToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public ShrineToken(final ShrineToken token) {
+    protected ShrineToken(final ShrineToken token) {
         super(token);
     }
 

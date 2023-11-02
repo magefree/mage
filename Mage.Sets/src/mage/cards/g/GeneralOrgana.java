@@ -40,7 +40,7 @@ public class GeneralOrgana extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ScryEffect(2), false));
     }
 
-    public GeneralOrgana(final GeneralOrgana card) {
+    private GeneralOrgana(final GeneralOrgana card) {
         super(card);
     }
 

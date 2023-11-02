@@ -25,7 +25,7 @@ public final class MysticConfluence extends CardImpl {
         // Choose three. You may choose the same mode more than once. 
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
         
         // - Counter target spell unless its controller pays {3};
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));

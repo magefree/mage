@@ -50,7 +50,7 @@ class HallOfTriumphBoostControlledEffect extends ContinuousEffectImpl {
         staticText = "Creatures you control of the chosen color get +1/+1";
     }
 
-    public HallOfTriumphBoostControlledEffect(final HallOfTriumphBoostControlledEffect effect) {
+    private HallOfTriumphBoostControlledEffect(final HallOfTriumphBoostControlledEffect effect) {
         super(effect);
     }
 

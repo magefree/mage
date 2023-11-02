@@ -30,6 +30,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -71,7 +72,7 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         staticText = text;
     }
 
-    public BecomesColorTargetEffect(final BecomesColorTargetEffect effect) {
+    protected BecomesColorTargetEffect(final BecomesColorTargetEffect effect) {
         super(effect);
         this.setColor = effect.setColor;
     }
@@ -94,7 +95,7 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
             }
         }
 
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
     }
 
     @Override
@@ -135,15 +136,14 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
-        sb.append(" becomes ");
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"));
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes ");
         if (setColor == null) {
             sb.append("the color of your choice");
         } else {
             sb.append(setColor.getDescription());
         }
-        if (!duration.toString().equals("")) {
+        if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
         return sb.toString();

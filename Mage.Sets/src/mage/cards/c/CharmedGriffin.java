@@ -57,7 +57,7 @@ class CharmedGriffinEffect extends OneShotEffect {
         this.staticText = "each other player may put an artifact or enchantment card onto the battlefield from their hand";
     }
 
-    public CharmedGriffinEffect(final CharmedGriffinEffect effect) {
+    private CharmedGriffinEffect(final CharmedGriffinEffect effect) {
         super(effect);
     }
 

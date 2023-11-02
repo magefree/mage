@@ -14,7 +14,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CantBeCounteredSourceEffect extends ContinuousRuleModifyingEffectImpl {
@@ -24,18 +23,13 @@ public class CantBeCounteredSourceEffect extends ContinuousRuleModifyingEffectIm
         staticText = "this spell can't be countered";
     }
 
-    public CantBeCounteredSourceEffect(final CantBeCounteredSourceEffect effect) {
+    protected CantBeCounteredSourceEffect(final CantBeCounteredSourceEffect effect) {
         super(effect);
     }
 
     @Override
     public CantBeCounteredSourceEffect copy() {
         return new CantBeCounteredSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

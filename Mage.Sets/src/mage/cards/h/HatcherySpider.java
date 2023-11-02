@@ -60,7 +60,7 @@ class HatcherySpiderEffect extends OneShotEffect {
                 + "in a random order.";
     }
 
-    public HatcherySpiderEffect(final HatcherySpiderEffect effect) {
+    private HatcherySpiderEffect(final HatcherySpiderEffect effect) {
         super(effect);
     }
 

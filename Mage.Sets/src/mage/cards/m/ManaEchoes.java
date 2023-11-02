@@ -28,7 +28,7 @@ public final class ManaEchoes extends CardImpl {
 
         // Whenever a creature enters the battlefield, you may add X mana of {C}, where X is the number of creatures you control that share a creature type with it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new ManaEchoesEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT, ""));
+                new ManaEchoesEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT));
     }
 
     private ManaEchoes(final ManaEchoes card) {
@@ -48,7 +48,7 @@ class ManaEchoesEffect extends OneShotEffect {
         this.staticText = "you may add X mana of {C}, where X is the number of creatures you control that share a creature type with it";
     }
 
-    public ManaEchoesEffect(final ManaEchoesEffect effect) {
+    private ManaEchoesEffect(final ManaEchoesEffect effect) {
         super(effect);
     }
 

@@ -45,7 +45,7 @@ public abstract class Designation extends MageObjectImpl {
         this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
-    public Designation(final Designation designation) {
+    protected Designation(final Designation designation) {
         super(designation);
         this.designationType = designation.designationType;
         this.unique = designation.unique;
@@ -131,6 +131,11 @@ public abstract class Designation extends MageObjectImpl {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override

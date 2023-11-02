@@ -60,7 +60,7 @@ class GiantAlbatrossEffect extends OneShotEffect {
         this.staticText = "for each creature that dealt damage to {this} this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can't be regenerated";
     }
 
-    public GiantAlbatrossEffect(final GiantAlbatrossEffect effect) {
+    private GiantAlbatrossEffect(final GiantAlbatrossEffect effect) {
         super(effect);
     }
 

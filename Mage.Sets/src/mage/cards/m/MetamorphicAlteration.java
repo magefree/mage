@@ -64,7 +64,7 @@ class ChooseACreature extends OneShotEffect {
         staticText = "choose a creature";
     }
 
-    public ChooseACreature(final ChooseACreature effect) {
+    private ChooseACreature(final ChooseACreature effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class ChooseACreature extends OneShotEffect {
             return false;
         }
         Target target = new TargetCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(controller.getId(), source, game)) {
             return true;
         }
@@ -105,7 +105,7 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         this.staticText = "Enchanted creature is a copy of the chosen creature.";
     }
 
-    public MetamorphicAlterationEffect(MetamorphicAlterationEffect effect) {
+    private MetamorphicAlterationEffect(final MetamorphicAlterationEffect effect) {
         super(effect);
     }
 

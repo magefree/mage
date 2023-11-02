@@ -54,7 +54,7 @@ class SliverAbsorbEffect extends PreventionEffectImpl {
         this.staticText = "Absorb 1 <i>(If a source would deal damage to this creature, prevent 1 of that damage.</i>)";
     }
 
-    public SliverAbsorbEffect(SliverAbsorbEffect effect) {
+    private SliverAbsorbEffect(final SliverAbsorbEffect effect) {
         super(effect);
     }
 

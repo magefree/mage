@@ -56,18 +56,13 @@ class TerritorialDisputeEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "Players can't play lands";
     }
     
-    public TerritorialDisputeEffect(final TerritorialDisputeEffect effect) {
+    private TerritorialDisputeEffect(final TerritorialDisputeEffect effect) {
         super(effect);
     }
 
     @Override
     public TerritorialDisputeEffect copy() {
         return new TerritorialDisputeEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

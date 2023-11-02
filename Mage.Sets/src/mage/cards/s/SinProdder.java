@@ -52,7 +52,7 @@ class SinProdderEffect extends OneShotEffect {
                 + "{this} deals damage to that player equal to that card's mana value. Otherwise, put that card into your hand";
     }
 
-    public SinProdderEffect(final SinProdderEffect effect) {
+    private SinProdderEffect(final SinProdderEffect effect) {
         super(effect);
     }
 

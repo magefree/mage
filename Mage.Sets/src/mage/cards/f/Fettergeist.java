@@ -64,7 +64,7 @@ class FettergeistUnlessPaysEffect extends OneShotEffect {
         staticText = "sacrifice {this} unless you pay {1} for each other creature you control.";
     }
 
-    public FettergeistUnlessPaysEffect(final FettergeistUnlessPaysEffect effect) {
+    private FettergeistUnlessPaysEffect(final FettergeistUnlessPaysEffect effect) {
         super(effect);
     }
 

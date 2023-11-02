@@ -28,7 +28,7 @@ public class BeltOfGiantStrengthTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertIsAttachedTo(playerA, belt, gigantosauras);
+        assertAttachedTo(playerA, belt, gigantosauras, true);
         Assert.assertTrue(
                 "All Forests should be untapped",
                 currentGame
@@ -51,6 +51,6 @@ public class BeltOfGiantStrengthTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertIsAttachedTo(playerA, belt, gigantosauras);
+        assertAttachedTo(playerA, belt, gigantosauras, true);
     }
 }

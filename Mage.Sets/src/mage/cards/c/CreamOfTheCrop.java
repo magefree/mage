@@ -31,12 +31,8 @@ public final class CreamOfTheCrop extends CardImpl {
         // library and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new CreamOfTheCropEffect(),
-                StaticFilters.FILTER_PERMANENT_CREATURE, true, SetTargetPointer.PERMANENT,
-                "Whenever a creature enters the battlefield under your control, "
-                + "you may look at the top X cards of your library, where X "
-                + "is that creature's power. If you do, put one of those cards "
-                + "on top of your library and the rest on the bottom of "
-                + "your library in any order."));
+                StaticFilters.FILTER_PERMANENT_CREATURE, true, SetTargetPointer.PERMANENT
+        ));
     }
 
     private CreamOfTheCrop(final CreamOfTheCrop card) {
@@ -59,7 +55,7 @@ class CreamOfTheCropEffect extends OneShotEffect {
                 + "rest on the bottom of your library in any order";
     }
 
-    CreamOfTheCropEffect(final CreamOfTheCropEffect effect) {
+    private CreamOfTheCropEffect(final CreamOfTheCropEffect effect) {
         super(effect);
     }
 
@@ -76,7 +72,7 @@ class CreamOfTheCropEffect extends OneShotEffect {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, permanent.getPower().getValue()));
             if (!cards.isEmpty()) {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on top of your library"));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 controller.chooseTarget(Outcome.Benefit, cards, target, source, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {

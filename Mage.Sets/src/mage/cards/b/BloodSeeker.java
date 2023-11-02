@@ -50,7 +50,7 @@ class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
     }
 
-    BloodSeekerTriggeredAbility(final BloodSeekerTriggeredAbility ability) {
+    private BloodSeekerTriggeredAbility(final BloodSeekerTriggeredAbility ability) {
         super(ability);
     }
 

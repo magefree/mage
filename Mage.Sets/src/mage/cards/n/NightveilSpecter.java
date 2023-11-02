@@ -73,7 +73,7 @@ class NightveilSpecterExileEffect extends OneShotEffect {
         staticText = "that player exiles the top card of their library";
     }
 
-    public NightveilSpecterExileEffect(final NightveilSpecterExileEffect effect) {
+    private NightveilSpecterExileEffect(final NightveilSpecterExileEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class NightveilSpecterEffect extends AsThoughEffectImpl {
         staticText = "You may play cards exiled with {this}";
     }
 
-    public NightveilSpecterEffect(final NightveilSpecterEffect effect) {
+    private NightveilSpecterEffect(final NightveilSpecterEffect effect) {
         super(effect);
     }
 

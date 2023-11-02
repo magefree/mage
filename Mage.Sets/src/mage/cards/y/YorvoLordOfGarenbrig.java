@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class YorvoLordOfGarenbrig extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another green creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -49,10 +49,7 @@ public final class YorvoLordOfGarenbrig extends CardImpl {
 
         // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on Yorvo. Then if that creature's power is greater than Yorvo's power, put another +1/+1 counter on Yorvo.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new YorvoLordOfGarenbrigEffect(), filter, false, SetTargetPointer.PERMANENT,
-                "Whenever another green creature enters the battlefield under your control, " +
-                        "put a +1/+1 counter on {this}. Then if that creature's power is greater than {this}'s power, " +
-                        "put another +1/+1 counter on {this}."
+                Zone.BATTLEFIELD, new YorvoLordOfGarenbrigEffect(), filter, false, SetTargetPointer.PERMANENT
         ));
     }
 
@@ -70,6 +67,8 @@ class YorvoLordOfGarenbrigEffect extends OneShotEffect {
 
     YorvoLordOfGarenbrigEffect() {
         super(Outcome.Benefit);
+        staticText = "put a +1/+1 counter on {this}. Then if that creature's power is greater than {this}'s power, " +
+                "put another +1/+1 counter on {this}.";
     }
 
     private YorvoLordOfGarenbrigEffect(final YorvoLordOfGarenbrigEffect effect) {

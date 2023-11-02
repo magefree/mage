@@ -46,6 +46,7 @@ class GrudgeKeeperEffect extends OneShotEffect {
 
     GrudgeKeeperEffect() {
         super(Outcome.Benefit);
+        staticText = "each opponent who voted for a choice you didn't vote for loses 2 life";
     }
 
     private GrudgeKeeperEffect(final GrudgeKeeperEffect effect) {

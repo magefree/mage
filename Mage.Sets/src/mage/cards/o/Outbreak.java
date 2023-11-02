@@ -60,7 +60,7 @@ class OutbreakEffect extends OneShotEffect {
         staticText = "Choose a creature type. All creatures of that type get -1/-1 until end of turn";
     }
 
-    public OutbreakEffect(final OutbreakEffect effect) {
+    private OutbreakEffect(final OutbreakEffect effect) {
         super(effect);
     }
 

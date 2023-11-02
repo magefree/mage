@@ -51,7 +51,7 @@ class AltarOfDementiaEffect extends OneShotEffect {
         staticText = "Target player mills cards equal to the sacrificed creature's power";
     }
 
-    public AltarOfDementiaEffect(final AltarOfDementiaEffect effect) {
+    private AltarOfDementiaEffect(final AltarOfDementiaEffect effect) {
         super(effect);
     }
 

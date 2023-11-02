@@ -27,7 +27,8 @@ public abstract class AbstractCommander extends Constructed {
             PartnerValidator.instance,
             FriendsForeverValidator.instance,
             PartnerWithValidator.instance,
-            ChooseABackgroundValidator.instance
+            ChooseABackgroundValidator.instance,
+            DoctorsCompanionValidator.instance
     );
     protected final List<String> bannedCommander = new ArrayList<>();
     protected final List<String> bannedPartner = new ArrayList<>();
@@ -185,11 +186,11 @@ public abstract class AbstractCommander extends Constructed {
                 valid = false;
         }
 
-        if (companion != null && deck.getCards().size() + deck.getSideboard().size() != 101) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 101 + " cards (companion doesn't count for deck size): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        if (companion != null && deck.getMaindeckCards().size() + deck.getSideboard().size() != 101) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 101 + " cards (companion doesn't count for deck size): has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
-        } else if (companion == null && deck.getCards().size() + deck.getSideboard().size() != 100) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 100 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        } else if (companion == null && deck.getMaindeckCards().size() + deck.getSideboard().size() != 100) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 100 + " cards: has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 

@@ -41,7 +41,7 @@ public final class BorderlandBehemoth extends CardImpl {
 
         // Borderland Behemoth gets +4/+4 for each other Giant you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                xValue, xValue, Duration.WhileOnBattlefield, false
+                xValue, xValue, Duration.WhileOnBattlefield
         ).setText("{this} gets +4/+4 for each other Giant you control")));
     }
 

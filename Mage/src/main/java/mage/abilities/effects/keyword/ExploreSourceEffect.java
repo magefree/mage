@@ -1,14 +1,16 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.ExploredEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -16,66 +18,39 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- * @author TheElk801, JayDi85
+ * @author TheElk801, JayDi85, Susucr, xenohedron
  */
 public class ExploreSourceEffect extends OneShotEffect {
 
-    // "it explores. <i>(Reveal the top card of your library. Put that card into
-    // your hand if it's a land. Otherwise, put a +1/+1 counter on this creature,
-    // then put the card back or put it into your graveyard.)</i>";
-    private static final String RULE_TEXT_START = "explores.";
-    private static final String RULE_TEXT_HINT = "<i>(Reveal the top card of your library. "
+    private final DynamicValue amount;
+
+    private static final String REMINDER_TEXT = ". <i>(Reveal the top card of your library. "
             + "Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on "
             + "this creature, then put the card back or put it into your graveyard.)</i>";
 
-    public static String getRuleText(boolean showAbilityHint) {
-        return getRuleText(showAbilityHint, null);
-    }
-
-    public static String getRuleText(boolean showAbilityHint, String whosExplores) {
-
-        String res = whosExplores;
-        if (res == null) {
-            res = "it";
-        }
-
-        res += " " + RULE_TEXT_START;
-
-        if (showAbilityHint) {
-            res += " " + RULE_TEXT_HINT;
-        }
-        return res;
-    }
-
-    private String sourceName = "it";
-    private boolean showAbilityHint = true;
-
     public ExploreSourceEffect() {
-        this(true);
+        this(true, "it");
     }
 
-    public ExploreSourceEffect(boolean showAbilityHint) {
-        this(showAbilityHint, null);
+    public ExploreSourceEffect(boolean showAbilityHint, String explorerText) {
+        this(1, showAbilityHint, explorerText);
     }
 
-    public ExploreSourceEffect(boolean showAbilityHint, String whosExplores) {
+    public ExploreSourceEffect(int amount, boolean showAbilityHint, String explorerText) {
+        this(StaticValue.get(amount), showAbilityHint, explorerText);
+    }
+
+    public ExploreSourceEffect(DynamicValue amount, boolean showAbilityHint, String explorerText) {
         super(Outcome.Benefit);
 
-        this.showAbilityHint = showAbilityHint;
-        if (whosExplores != null) {
-            this.sourceName = whosExplores;
-        }
-        setText();
+        this.amount = amount;
+        // triggered ability text gen will replace {this} with "it" where applicable
+        staticText = "{this} explores" + (showAbilityHint ? REMINDER_TEXT : "");
     }
 
-    public ExploreSourceEffect(final ExploreSourceEffect effect) {
+    protected ExploreSourceEffect(final ExploreSourceEffect effect) {
         super(effect);
-        this.showAbilityHint = effect.showAbilityHint;
-        this.sourceName = effect.sourceName;
-    }
-
-    private void setText() {
-        this.staticText = getRuleText(this.showAbilityHint, this.sourceName);
+        this.amount = effect.amount;
     }
 
     @Override
@@ -85,47 +60,55 @@ public class ExploreSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return explorePermanent(game, source.getSourceId(), source);
+        return explorePermanent(game, source.getSourceId(), source, this.amount.calculate(game, source, this));
     }
 
-    public static boolean explorePermanent(Game game, UUID permanentId, Ability source) {
-        Boolean cardWasRevealed = false;
+    public static boolean explorePermanent(Game game, UUID permanentId, Ability source, int amount) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
-        if (permanent == null) {
+        if (controller == null || permanent == null || amount <= 0) {
             return false;
         }
-        Player permanentController = game.getPlayer(source.getControllerId());
-        if (permanentController == null) {
-            return false;
-        }
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId, source, permanent.getControllerId()));
-        if (permanentController.getLibrary().hasCards()) {
-            Card card = permanentController.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            permanentController.revealCards("Explored card", cards, game);
-            cardWasRevealed = true;
+
+        for (int i = 0; i < amount; ++i) {
+            GameEvent event = new GameEvent(GameEvent.EventType.EXPLORE, permanentId, source, permanent.getControllerId());
+            if (game.replaceEvent(event)) {
+                continue;
+            }
+            // 701.40a Certain abilities instruct a permanent to explore. To do so, that permanent’s controller reveals
+            // the top card of their library. If a land card is revealed this way, that player puts that card into their
+            // hand. Otherwise, that player puts a +1/+1 counter on the exploring permanent and may put the revealed
+            // card into their graveyard.
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
+                controller.revealCards("Explored card", new CardsImpl(card), game);
                 if (card.isLand(game)) {
-                    permanentController.moveCards(card, Zone.HAND, source, game);
+                    controller.moveCards(card, Zone.HAND, source, game);
                 } else {
-                    if (game.getState().getZone(permanentId) == Zone.BATTLEFIELD) { // needed in case LKI object is used
-                        permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                    }
-                    if (permanentController.chooseUse(Outcome.Neutral, "Put " + card.getLogName() + " in your graveyard?", source, game)) {
-                        permanentController.moveCards(card, Zone.GRAVEYARD, source, game);
+                    addCounter(game, permanent, source);
+                    if (controller.chooseUse(Outcome.Neutral, "Put " + card.getLogName() + " in your graveyard?", source, game)) {
+                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     } else {
-                        game.informPlayers(permanentController.getLogName() + " leaves " + card.getLogName() + " on top of their library.");
+                        game.informPlayers(controller.getLogName() + " leaves " + card.getLogName() + " on top of their library.");
                     }
                 }
+            } else {
+                // If no card is revealed, most likely because that player's library is empty,
+                // the exploring creature receives a +1/+1 counter.
+                addCounter(game, permanent, source);
             }
-        }
-        if (!cardWasRevealed
-                && game.getState().getZone(permanentId) == Zone.BATTLEFIELD) {
-            // If no card is revealed, most likely because that player's library is empty,
-            // the exploring creature receives a +1/+1 counter.
-            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+            game.getState().processAction(game);
+            // 701.40b A permanent “explores” after the process described in rule 701.40a is complete, even if some or all of
+            // those actions were impossible.
+            game.fireEvent(new ExploredEvent(permanent, source, card));
         }
         return true;
     }
+
+    private static void addCounter(Game game, Permanent permanent, Ability source) {
+        if (game.getState().getZone(permanent.getId()) == Zone.BATTLEFIELD) { // needed in case LKI object is used
+            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+        }
+    }
+
 }

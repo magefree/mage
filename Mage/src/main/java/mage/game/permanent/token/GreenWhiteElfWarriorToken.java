@@ -20,7 +20,7 @@ public final class GreenWhiteElfWarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public GreenWhiteElfWarriorToken(final GreenWhiteElfWarriorToken token) {
+    protected GreenWhiteElfWarriorToken(final GreenWhiteElfWarriorToken token) {
         super(token);
     }
 

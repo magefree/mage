@@ -58,7 +58,7 @@ class FleshEffect extends OneShotEffect {
         staticText = "Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled";
     }
 
-    public FleshEffect(final FleshEffect effect) {
+    private FleshEffect(final FleshEffect effect) {
         super(effect);
     }
 

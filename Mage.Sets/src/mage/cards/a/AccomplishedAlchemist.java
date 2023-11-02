@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -32,9 +32,9 @@ public final class AccomplishedAlchemist extends CardImpl {
 
         // {T}: Add X mana of any one color, where X is the amount of life you gained this turn.
         this.addAbility(new DynamicManaAbility(
-                Mana.AnyMana(1), ControllerGotLifeCount.instance, new TapSourceCost(), "Add X mana " +
+                Mana.AnyMana(1), ControllerGainedLifeCount.instance, new TapSourceCost(), "Add X mana " +
                 "of any one color, where X is the amount of life you gained this turn", true
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private AccomplishedAlchemist(final AccomplishedAlchemist card) {

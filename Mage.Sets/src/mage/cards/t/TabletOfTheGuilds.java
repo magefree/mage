@@ -1,8 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -13,15 +11,17 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
+import mage.constants.SetTargetPointer;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.Locale;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TabletOfTheGuilds extends CardImpl {
@@ -33,7 +33,12 @@ public final class TabletOfTheGuilds extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TabletOfTheGuildsEntersBattlefieldEffect()));
 
         // Whenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new TabletOfTheGuildsGainLifeEffect(), StaticFilters.FILTER_SPELL_A, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new TabletOfTheGuildsGainLifeEffect(),
+                StaticFilters.FILTER_SPELL_A,
+                false,
+                SetTargetPointer.SPELL
+        ));
     }
 
     private TabletOfTheGuilds(final TabletOfTheGuilds card) {
@@ -53,7 +58,7 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
         staticText = "choose two colors";
     }
 
-    public TabletOfTheGuildsEntersBattlefieldEffect(final TabletOfTheGuildsEntersBattlefieldEffect effect) {
+    private TabletOfTheGuildsEntersBattlefieldEffect(final TabletOfTheGuildsEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -97,7 +102,7 @@ class TabletOfTheGuildsGainLifeEffect extends OneShotEffect {
         staticText = "if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is";
     }
 
-    public TabletOfTheGuildsGainLifeEffect(final TabletOfTheGuildsGainLifeEffect effect) {
+    private TabletOfTheGuildsGainLifeEffect(final TabletOfTheGuildsGainLifeEffect effect) {
         super(effect);
     }
 

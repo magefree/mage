@@ -55,7 +55,7 @@ class NabanDeanOfIterationEffect extends ReplacementEffectImpl {
         staticText = "If a Wizard entering the battlefield under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
     }
 
-    NabanDeanOfIterationEffect(final NabanDeanOfIterationEffect effect) {
+    private NabanDeanOfIterationEffect(final NabanDeanOfIterationEffect effect) {
         super(effect);
     }
 

@@ -15,7 +15,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author MarcoMarin
  */
 public class DoUnlessControllerPaysEffect extends OneShotEffect {
@@ -35,7 +34,7 @@ public class DoUnlessControllerPaysEffect extends OneShotEffect {
         this.chooseUseText = chooseUseText;
     }
 
-    public DoUnlessControllerPaysEffect(final DoUnlessControllerPaysEffect effect) {
+    protected DoUnlessControllerPaysEffect(final DoUnlessControllerPaysEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.cost = effect.cost.copy();
@@ -61,7 +60,7 @@ public class DoUnlessControllerPaysEffect extends OneShotEffect {
             message = CardUtil.replaceSourceName(message, sourceObject.getName());
             boolean result = true;
             boolean doEffect = true;
-            
+
             // check if controller is willing to pay
             if (cost.canPay(source, source, controller.getId(), game) && controller.chooseUse(Outcome.Detriment, message, source, game)) {
                 cost.clearPaid();
@@ -69,7 +68,7 @@ public class DoUnlessControllerPaysEffect extends OneShotEffect {
                     if (!game.isSimulation()) {
                         game.informPlayers(controller.getLogName() + " pays the cost to prevent the effect");
                     }
-                    doEffect = false;                    
+                    doEffect = false;
                 }
             }
 

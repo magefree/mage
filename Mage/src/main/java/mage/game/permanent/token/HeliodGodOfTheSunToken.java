@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class HeliodGodOfTheSunToken extends TokenImpl {
@@ -23,7 +22,7 @@ public final class HeliodGodOfTheSunToken extends TokenImpl {
         this.toughness = new MageInt(1);
     }
 
-    public HeliodGodOfTheSunToken(final HeliodGodOfTheSunToken token) {
+    protected HeliodGodOfTheSunToken(final HeliodGodOfTheSunToken token) {
         super(token);
     }
 

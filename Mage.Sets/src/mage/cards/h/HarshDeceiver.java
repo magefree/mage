@@ -63,7 +63,7 @@ class HarshDeceiverEffect extends OneShotEffect {
         this.staticText = "Reveal the top card of your library. If it's a land card, untap {this} and it gets +1/+1 until end of turn";
     }
 
-    public HarshDeceiverEffect(final HarshDeceiverEffect effect) {
+    private HarshDeceiverEffect(final HarshDeceiverEffect effect) {
         super(effect);
     }
 

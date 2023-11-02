@@ -54,7 +54,7 @@ class MarchOfTheDroidsEffect extends OneShotEffect {
         this.staticText = "Remove all repair counters from all cards in your graveyard. Return each card with a repair counter removed this way from graveyard to the battlefield";
     }
 
-    public MarchOfTheDroidsEffect(final MarchOfTheDroidsEffect effect) {
+    private MarchOfTheDroidsEffect(final MarchOfTheDroidsEffect effect) {
         super(effect);
     }
 

@@ -53,7 +53,7 @@ class AvengingAngelEffect extends OneShotEffect {
         this.staticText = "you may put it on the top of its owner's library";
     }
     
-    public AvengingAngelEffect(final AvengingAngelEffect effect) {
+    private AvengingAngelEffect(final AvengingAngelEffect effect) {
         super(effect);
     }
     

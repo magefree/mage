@@ -51,7 +51,7 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
         this.excludeSource = excludeSource;
     }
 
-    public LoseAbilityAllEffect(final LoseAbilityAllEffect effect) {
+    protected LoseAbilityAllEffect(final LoseAbilityAllEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         this.filter = effect.filter.copy();
@@ -78,7 +78,7 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (this.affectedObjectsSet) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (perm != null) {
                     perm.removeAbilities(ability, source.getSourceId(), game);

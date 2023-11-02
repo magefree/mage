@@ -37,7 +37,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         this.copyToObjectId = copyToObjectId;
     }
 
-    public CopyEffect(final CopyEffect effect) {
+    protected CopyEffect(final CopyEffect effect) {
         super(effect);
         this.copyFromObject = effect.copyFromObject.copy();
         this.copyToObjectId = effect.copyToObjectId;
@@ -146,6 +146,7 @@ public class CopyEffect extends ContinuousEffectImpl {
             //permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
             permanent.setFlipCard(targetPermanent.isFlipCard());
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
+            permanent.setPrototyped(targetPermanent.isPrototyped());
         }
 
         CardUtil.copySetAndCardNumber(permanent, copyFromObject);

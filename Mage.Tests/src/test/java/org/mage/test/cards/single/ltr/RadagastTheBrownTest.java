@@ -1,6 +1,5 @@
 package org.mage.test.cards.single.ltr;
 
-import mage.cards.f.FeldonOfTheThirdPath;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;

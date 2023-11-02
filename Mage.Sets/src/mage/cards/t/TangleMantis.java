@@ -25,7 +25,7 @@ public final class TangleMantis extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public TangleMantis (final TangleMantis card) {
+    private TangleMantis(final TangleMantis card) {
         super(card);
     }
 

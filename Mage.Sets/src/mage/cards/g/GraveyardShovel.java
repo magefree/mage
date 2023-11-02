@@ -67,7 +67,7 @@ class GraveyardShovelEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         targetPlayer.chooseTarget(Outcome.Exile, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

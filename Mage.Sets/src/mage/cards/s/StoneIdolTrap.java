@@ -12,7 +12,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.StoneTrapIdolToken;
+import mage.game.permanent.token.StoneIdolToken;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -91,7 +91,7 @@ class StoneIdolTrapEffect extends OneShotEffect {
         this.staticText = "Create a 6/12 colorless Construct artifact creature token with trample. Exile it at the beginning of your next end step";
     }
 
-    public StoneIdolTrapEffect(final StoneIdolTrapEffect effect) {
+    private StoneIdolTrapEffect(final StoneIdolTrapEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class StoneIdolTrapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect = new CreateTokenEffect(new StoneTrapIdolToken());
+        CreateTokenEffect effect = new CreateTokenEffect(new StoneIdolToken());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

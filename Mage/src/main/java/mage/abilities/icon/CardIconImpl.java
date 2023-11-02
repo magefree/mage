@@ -48,7 +48,7 @@ public class CardIconImpl implements CardIcon, Serializable {
         this.cardIconType = cardIconType;
     }
 
-    public CardIconImpl(final CardIconImpl icon) {
+    protected CardIconImpl(final CardIconImpl icon) {
         this.cardIconType = icon.cardIconType;
         this.text = icon.text;
         this.hint = icon.hint;

@@ -57,7 +57,7 @@ class BrainGorgersCounterSourceEffect extends OneShotEffect {
         staticText = "any player may sacrifice a creature. If a player does, counter {this}";
     }
 
-    public BrainGorgersCounterSourceEffect(final BrainGorgersCounterSourceEffect effect) {
+    private BrainGorgersCounterSourceEffect(final BrainGorgersCounterSourceEffect effect) {
         super(effect);
     }
 

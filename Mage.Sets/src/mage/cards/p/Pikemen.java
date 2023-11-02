@@ -32,7 +32,7 @@ public final class Pikemen extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public Pikemen (final Pikemen card) {
+    private Pikemen(final Pikemen card) {
         super(card);
     }
 

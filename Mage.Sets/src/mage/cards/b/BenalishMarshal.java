@@ -27,7 +27,7 @@ public final class BenalishMarshal extends CardImpl {
     }
 
 
-    public BenalishMarshal(BenalishMarshal benalishMarshall) {
+    private BenalishMarshal(final BenalishMarshal benalishMarshall) {
         super(benalishMarshall);
     }
 

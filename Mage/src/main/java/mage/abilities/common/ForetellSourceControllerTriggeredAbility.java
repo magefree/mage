@@ -18,7 +18,7 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
         setTriggerPhrase("Whenever you foretell a card, ");
     }
 
-    public ForetellSourceControllerTriggeredAbility(final ForetellSourceControllerTriggeredAbility ability) {
+    protected ForetellSourceControllerTriggeredAbility(final ForetellSourceControllerTriggeredAbility ability) {
         super(ability);
     }
 

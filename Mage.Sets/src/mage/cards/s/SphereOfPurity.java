@@ -44,7 +44,7 @@ class SphereOfPurityEffect extends PreventionEffectImpl {
         this.staticText = "If an artifact would deal damage to you, prevent 1 of that damage";
     }
 
-    public SphereOfPurityEffect(SphereOfPurityEffect effect) {
+    private SphereOfPurityEffect(final SphereOfPurityEffect effect) {
         super(effect);
     }
 

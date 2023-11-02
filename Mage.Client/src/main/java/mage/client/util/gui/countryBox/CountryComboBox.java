@@ -271,7 +271,7 @@ public class CountryComboBox extends JComboBox {
         {"Gay", "gay"},
         {"Genderfluid", "genderfluid"},
         {"Genderqueer", "genderqueer"},
-        {"Innersex", "inner"},
+        {"Intersex", "intersex"},
         {"Lesbian", "lesbian"},
         {"LGBT", "lgbt"},
         {"Nonbinary", "nb"},
@@ -304,7 +304,7 @@ public class CountryComboBox extends JComboBox {
 
     @Override
     public Object getSelectedItem() {
-        return super.getSelectedItem(); //To change body of generated methods, choose Tools | Templates.
+        return super.getSelectedItem();
     }
 
 }

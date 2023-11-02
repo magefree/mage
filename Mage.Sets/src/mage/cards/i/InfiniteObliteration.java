@@ -45,7 +45,7 @@ class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCard
         this.staticText = "Choose a creature card name. " + CardUtil.getTextWithFirstCharUpperCase(this.staticText);
     }
 
-    public InfiniteObliterationEffect(final InfiniteObliterationEffect effect) {
+    private InfiniteObliterationEffect(final InfiniteObliterationEffect effect) {
         super(effect);
     }
 

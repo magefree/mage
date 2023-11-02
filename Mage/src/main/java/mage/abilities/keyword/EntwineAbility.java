@@ -57,7 +57,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         this.entwineCost.setCostType(VariableCostType.ADDITIONAL);
     }
 
-    public EntwineAbility(final EntwineAbility ability) {
+    protected EntwineAbility(final EntwineAbility ability) {
         super(ability);
         if (ability.entwineCost != null) {
             this.entwineCost = ability.entwineCost.copy();
@@ -92,9 +92,9 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
             for (Iterator it = ((Costs) entwineCost).iterator(); it.hasNext(); ) {
                 Cost cost = (Cost) it.next();
                 if (cost instanceof ManaCostsImpl) {
-                    ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                    ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
                 } else {
-                    ability.getCosts().add(cost.copy());
+                    ability.addCost(cost.copy());
                 }
             }
             activateEntwine(game, ability);

@@ -70,7 +70,7 @@ class TorWaukiTheYoungerEffect extends ReplacementEffectImpl {
                 "it deals that much damage plus 1 to that permanent or player instead";
     }
 
-    TorWaukiTheYoungerEffect(final TorWaukiTheYoungerEffect effect) {
+    private TorWaukiTheYoungerEffect(final TorWaukiTheYoungerEffect effect) {
         super(effect);
     }
 

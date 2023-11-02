@@ -42,10 +42,8 @@ public final class MoltenEchoes extends CardImpl {
         filter.add(ChosenSubtypePredicate.TRUE);
 
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new MoltenEchoesEffect(),
-                filter, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature of the chosen type enters the battlefield under your control, "
-                        + "create a token that's a copy of that creature. "
-                        + "That token gains haste. Exile it at the beginning of the next end step.");
+                filter, false, SetTargetPointer.PERMANENT
+        );
         this.addAbility(ability);
     }
 
@@ -66,7 +64,7 @@ class MoltenEchoesEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    public MoltenEchoesEffect(final MoltenEchoesEffect effect) {
+    private MoltenEchoesEffect(final MoltenEchoesEffect effect) {
         super(effect);
     }
 
@@ -95,4 +93,3 @@ class MoltenEchoesEffect extends OneShotEffect {
         return false;
     }
 }
-

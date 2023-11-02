@@ -56,7 +56,7 @@ class WorldShaperEffect extends OneShotEffect {
         this.staticText = "return all land cards from your graveyard to the battlefield tapped";
     }
 
-    public WorldShaperEffect(final WorldShaperEffect effect) {
+    private WorldShaperEffect(final WorldShaperEffect effect) {
         super(effect);
     }
 

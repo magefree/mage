@@ -53,7 +53,7 @@ class WarrenPilferersReturnEffect extends OneShotEffect {
         staticText = "return target creature card from your graveyard to your hand. If that card is a Goblin card, Warren Pilferers gains haste until end of turn";
     }
 
-    public WarrenPilferersReturnEffect(final WarrenPilferersReturnEffect effect) {
+    private WarrenPilferersReturnEffect(final WarrenPilferersReturnEffect effect) {
         super(effect);
     }
 

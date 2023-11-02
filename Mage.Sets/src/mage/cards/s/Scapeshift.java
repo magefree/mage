@@ -48,7 +48,7 @@ class ScapeshiftEffect extends OneShotEffect {
         staticText = "Sacrifice any number of lands. Search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle";
     }
 
-    public ScapeshiftEffect(final ScapeshiftEffect effect) {
+    private ScapeshiftEffect(final ScapeshiftEffect effect) {
         super(effect);
     }
 

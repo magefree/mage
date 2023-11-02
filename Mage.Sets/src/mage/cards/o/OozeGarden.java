@@ -61,7 +61,7 @@ class OozeGardenCreateTokenEffect extends OneShotEffect {
         staticText = "Create an X/X green Ooze creature token, where X is the sacrificed creature's power";
     }
 
-    public OozeGardenCreateTokenEffect(final OozeGardenCreateTokenEffect effect) {
+    private OozeGardenCreateTokenEffect(final OozeGardenCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class OozeToken extends TokenImpl {
         this.power = new MageInt(x);
     }
 
-    public OozeToken(final OozeToken token) {
+    private OozeToken(final OozeToken token) {
         super(token);
     }
 

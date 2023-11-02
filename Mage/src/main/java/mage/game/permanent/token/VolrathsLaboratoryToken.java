@@ -23,7 +23,7 @@ public final class VolrathsLaboratoryToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public VolrathsLaboratoryToken(final VolrathsLaboratoryToken token) {
+    protected VolrathsLaboratoryToken(final VolrathsLaboratoryToken token) {
         super(token);
     }
 

@@ -33,7 +33,7 @@ public final class FlameKinWarScout extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
             Zone.BATTLEFIELD, new FlameKinWarScourEffect(),
             StaticFilters.FILTER_ANOTHER_CREATURE, false,
-            SetTargetPointer.PERMANENT, null
+            SetTargetPointer.PERMANENT
         ));
 
     }
@@ -55,7 +55,7 @@ class FlameKinWarScourEffect extends OneShotEffect {
         this.staticText = "sacrifice {this}. If you do, {this} deals 4 damage to that creature.";
     }
 
-    FlameKinWarScourEffect(final FlameKinWarScourEffect effect) {
+    private FlameKinWarScourEffect(final FlameKinWarScourEffect effect) {
         super(effect);
     }
 

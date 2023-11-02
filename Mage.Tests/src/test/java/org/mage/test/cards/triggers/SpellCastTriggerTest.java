@@ -142,7 +142,7 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Glimpse of Freedom");
         
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimpse of Freedom");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimpse of Freedom with Escape");
         setChoice(playerA,"Mountain");
         setChoice(playerA,"Mountain");
         setChoice(playerA,"Mountain");

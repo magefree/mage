@@ -53,7 +53,7 @@ class ReverberationEffect extends ReplacementEffectImpl {
         staticText = "All damage that would be dealt this turn by target sorcery spell is dealt to that spell's controller instead";
     }
 
-    public ReverberationEffect(final ReverberationEffect effect) {
+    private ReverberationEffect(final ReverberationEffect effect) {
         super(effect);
     }
 

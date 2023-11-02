@@ -23,6 +23,7 @@ public enum CounterType {
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),
+    BLESSING("blessing"),
     BLOOD("blood"),
     BLOODLINE("bloodline"),
     BOOK("book"),
@@ -34,6 +35,7 @@ public enum CounterType {
     CARRION("carrion"),
     CHARGE("charge"),
     CHIP("chip"),
+    CHORUS("chorus"),
     COIN("coin"),
     COLLECTION("collection"),
     COMPONENT("component"),
@@ -175,6 +177,7 @@ public enum CounterType {
     SHELL("shell"),
     SHIELD("shield"),
     SHRED("shred"),
+    SKEWER("skewer"),
     SLEEP("sleep"),
     SLIME("slime"),
     SLUMBER("slumber"),
@@ -226,7 +229,7 @@ public enum CounterType {
     }
 
     CounterType(String name) {
-        this(name, "aeiou".contains( String.valueOf( name.charAt( 0 ) ) ) ? "an" : "a");
+        this(name, "aeiou".contains(String.valueOf(name.charAt(0))) ? "an" : "a");
     }
 
     CounterType(String name, String article) {

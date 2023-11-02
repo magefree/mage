@@ -57,7 +57,7 @@ class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Target player can't cast spells this turn";
     }
 
-    public OrimsChantCantCastEffect(final OrimsChantCantCastEffect effect) {
+    private OrimsChantCantCastEffect(final OrimsChantCantCastEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class OrimsChantEffect extends OneShotEffect {
         this.staticText = "if this spell was kicked, creatures can't attack this turn";
     }
 
-    public OrimsChantEffect(final OrimsChantEffect effect) {
+    private OrimsChantEffect(final OrimsChantEffect effect) {
         super(effect);
     }
 

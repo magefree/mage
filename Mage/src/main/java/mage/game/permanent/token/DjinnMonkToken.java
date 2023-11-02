@@ -21,7 +21,7 @@ public final class DjinnMonkToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public DjinnMonkToken(final DjinnMonkToken token) {
+    protected DjinnMonkToken(final DjinnMonkToken token) {
         super(token);
     }
 

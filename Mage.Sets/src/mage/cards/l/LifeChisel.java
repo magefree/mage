@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -33,8 +32,7 @@ public final class LifeChisel extends CardImpl {
                 Zone.BATTLEFIELD,
                 new LifeChiselEffect(),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
-                new IsStepCondition(PhaseStep.UPKEEP),
-                null
+                new IsStepCondition(PhaseStep.UPKEEP)
         );
         this.addAbility(ability);
     }
@@ -56,7 +54,7 @@ class LifeChiselEffect extends OneShotEffect {
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public LifeChiselEffect(final LifeChiselEffect effect) {
+    private LifeChiselEffect(final LifeChiselEffect effect) {
         super(effect);
     }
 

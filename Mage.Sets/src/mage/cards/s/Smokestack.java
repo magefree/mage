@@ -52,7 +52,7 @@ class SmokestackEffect extends OneShotEffect {
         this.staticText = "that player sacrifices a permanent for each soot counter on Smokestack";
     }
 
-    public SmokestackEffect(final SmokestackEffect effect) {
+    private SmokestackEffect(final SmokestackEffect effect) {
         super(effect);
     }
 

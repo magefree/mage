@@ -1,5 +1,3 @@
-
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -27,7 +25,7 @@ public final class ElixirOfImmortality extends CardImpl {
     public ElixirOfImmortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElixerOfImmortalityEffect(), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(2));
+        ability.addCost(new GenericManaCost(2));
         this.addAbility(ability);
     }
 
@@ -49,7 +47,7 @@ class ElixerOfImmortalityEffect extends OneShotEffect {
         staticText = "You gain 5 life. Shuffle {this} and your graveyard into their owner's library";
     }
 
-    public ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {
+    private ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {
         super(effect);
     }
 

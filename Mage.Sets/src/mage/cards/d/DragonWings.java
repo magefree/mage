@@ -52,7 +52,7 @@ public final class DragonWings extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
         
         // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Breath from your graveyard to the battlefield attached to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonWingsEffect(), filter, true, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonWingsEffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 
     private DragonWings(final DragonWings card) {
@@ -72,7 +72,7 @@ class DragonWingsEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonWingsEffect(final DragonWingsEffect effect) {
+    private DragonWingsEffect(final DragonWingsEffect effect) {
         super(effect);
     }
     
@@ -96,4 +96,3 @@ class DragonWingsEffect extends OneShotEffect {
         return false;
     }
 }
-

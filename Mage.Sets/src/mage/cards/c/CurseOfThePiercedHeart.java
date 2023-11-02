@@ -85,7 +85,7 @@ class CurseOfThePiercedHeartEffect extends OneShotEffect {
         FilterPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
         filter.add(new ControllerIdPredicate(opponent.getId()));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent != null) {

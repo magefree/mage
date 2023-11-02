@@ -45,7 +45,7 @@ public final class GathererOfGraces extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public GathererOfGraces(GathererOfGraces gathererOfGraces) {
+    private GathererOfGraces(final GathererOfGraces gathererOfGraces) {
         super(gathererOfGraces);
     }
 

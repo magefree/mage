@@ -63,7 +63,7 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public TheGitrogMonsterTriggeredAbility(final TheGitrogMonsterTriggeredAbility ability) {
+    private TheGitrogMonsterTriggeredAbility(final TheGitrogMonsterTriggeredAbility ability) {
         super(ability);
     }
 

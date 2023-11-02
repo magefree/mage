@@ -47,7 +47,7 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PhyrexianTyrannyEffect(), false);
     }
 
-    PhyrexianTyrannyTriggeredAbility(final PhyrexianTyrannyTriggeredAbility ability) {
+    private PhyrexianTyrannyTriggeredAbility(final PhyrexianTyrannyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -84,7 +84,7 @@ class PhyrexianTyrannyEffect extends OneShotEffect {
         this.staticText = "that player loses 2 life unless they pay {2}";
     }
 
-    PhyrexianTyrannyEffect(final PhyrexianTyrannyEffect effect) {
+    private PhyrexianTyrannyEffect(final PhyrexianTyrannyEffect effect) {
         super(effect);
     }
 

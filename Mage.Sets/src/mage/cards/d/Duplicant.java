@@ -65,7 +65,7 @@ class DuplicantExileTargetEffect extends OneShotEffect {
         this.staticText = "you may exile target nontoken creature";
     }
 
-    public DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
+    private DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         staticText = "As long as a card exiled with {this} is a creature card, {this} has the power, toughness, and creature types of the last creature card exiled with {this}. It's still a Shapeshifter.";
     }
 
-    public DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {
+    private DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {
         super(effect);
     }
 

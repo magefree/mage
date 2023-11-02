@@ -32,7 +32,7 @@ public class ConditionalCostModificationEffect extends CostModificationEffectImp
         }
     }
 
-    public ConditionalCostModificationEffect(final ConditionalCostModificationEffect effect) {
+    protected ConditionalCostModificationEffect(final ConditionalCostModificationEffect effect) {
         super(effect);
         this.effect = (CostModificationEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {

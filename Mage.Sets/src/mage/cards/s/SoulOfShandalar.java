@@ -73,7 +73,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
                 + "and 3 damage to up to one target creature that player or that planeswalker's controller controls";
     }
 
-    public SoulOfShandalarEffect(final SoulOfShandalarEffect effect) {
+    private SoulOfShandalarEffect(final SoulOfShandalarEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), 3, source.getSourceId(), source, game, false, true);
+        game.damagePlayerOrPermanent(source.getTargets().get(0).getFirstTarget(), 3, source.getSourceId(), source, game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.damage(3, source.getSourceId(), source, game, false, true);
@@ -99,7 +99,7 @@ class SoulOfShandalarTarget extends TargetPermanent {
         super(0, 1, new FilterCreaturePermanent("creature that the targeted player or planeswalker's controller controls"), false);
     }
 
-    public SoulOfShandalarTarget(final SoulOfShandalarTarget target) {
+    private SoulOfShandalarTarget(final SoulOfShandalarTarget target) {
         super(target);
     }
 

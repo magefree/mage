@@ -72,7 +72,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
         staticText = "you may sacrifice a Forest. If you sacrifice a snow Forest this way, {this} gains trample until end of turn. If you don't sacrifice a Forest, sacrifice {this} and it deals 7 damage to you.";
     }
 
-    public GargantuanGorillaSacrificeEffect(final GargantuanGorillaSacrificeEffect effect) {
+    private GargantuanGorillaSacrificeEffect(final GargantuanGorillaSacrificeEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class GargantuanGorillaFightEffect extends OneShotEffect {
         this.staticText = "{this} deals damage equal to its power to another target creature. That creature deals damage equal to its power to {this}";
     }
 
-    public GargantuanGorillaFightEffect(final GargantuanGorillaFightEffect effect) {
+    private GargantuanGorillaFightEffect(final GargantuanGorillaFightEffect effect) {
         super(effect);
     }
 

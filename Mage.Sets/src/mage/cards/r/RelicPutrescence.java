@@ -38,7 +38,7 @@ public final class RelicPutrescence extends CardImpl {
         ), "enchanted artifact"));
     }
 
-    public RelicPutrescence(final RelicPutrescence card) {
+    private RelicPutrescence(final RelicPutrescence card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ class ForceOfNatureEffect extends OneShotEffect {
         this.staticText = "{this} deals 8 damage to you unless you pay {G}{G}{G}{G}";
     }
 
-    public ForceOfNatureEffect(final ForceOfNatureEffect effect) {
+    private ForceOfNatureEffect(final ForceOfNatureEffect effect) {
         super(effect);
     }
 

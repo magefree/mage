@@ -57,7 +57,7 @@ class ZameckGuildmageEntersBattlefieldEffect extends ReplacementEffectImpl {
         this.staticText = "This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    public ZameckGuildmageEntersBattlefieldEffect(ZameckGuildmageEntersBattlefieldEffect effect) {
+    private ZameckGuildmageEntersBattlefieldEffect(final ZameckGuildmageEntersBattlefieldEffect effect) {
         super(effect);
     }
 

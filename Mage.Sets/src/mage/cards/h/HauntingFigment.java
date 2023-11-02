@@ -39,7 +39,7 @@ public final class HauntingFigment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield), HauntingFigmentCondition.instance,
                 "{this} can't be blocked as long as you've cast an instant or sorcery spell this turn"
-        )), new SpellsCastWatcher());
+        )));
     }
 
     private HauntingFigment(final HauntingFigment card) {

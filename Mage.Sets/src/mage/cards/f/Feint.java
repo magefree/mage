@@ -51,7 +51,7 @@ class FeintEffect extends OneShotEffect {
         this.staticText = "tap all creatures blocking target attacking creature";
     }
 
-    public FeintEffect(final FeintEffect effect) {
+    private FeintEffect(final FeintEffect effect) {
         super(effect);
     }
 

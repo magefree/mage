@@ -52,7 +52,7 @@ class KrazyKowEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. If you roll a 1, sacrifice {this} and it deals 3 damage to each creature and each player";
     }
 
-    KrazyKowEffect(final KrazyKowEffect effect) {
+    private KrazyKowEffect(final KrazyKowEffect effect) {
         super(effect);
     }
 

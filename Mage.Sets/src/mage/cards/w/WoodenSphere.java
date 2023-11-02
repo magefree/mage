@@ -45,7 +45,7 @@ class WoodenSphereAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);
     }
 
-    public WoodenSphereAbility(final WoodenSphereAbility ability) {
+    private WoodenSphereAbility(final WoodenSphereAbility ability) {
         super(ability);
     }
 

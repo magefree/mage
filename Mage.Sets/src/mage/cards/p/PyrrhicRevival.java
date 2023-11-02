@@ -50,7 +50,7 @@ class PyrrhicRevivalEffect extends OneShotEffect {
         staticText = "Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it";
     }
 
-    public PyrrhicRevivalEffect(final PyrrhicRevivalEffect effect) {
+    private PyrrhicRevivalEffect(final PyrrhicRevivalEffect effect) {
         super(effect);
     }
 

@@ -39,8 +39,8 @@ public final class HungryDragonsnake extends CardImpl {
 
         // Whenever a creature enters the battlefield under an opponents's control, put a +1/+1 counter on Hungry Dragonsnake.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false,
-                "Whenever a creature enters the battlefield under an opponents's control, put a +1/+1 counter on {this}.", false));
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false
+        ));
     }
 
     private HungryDragonsnake(final HungryDragonsnake card) {

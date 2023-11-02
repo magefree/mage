@@ -57,7 +57,7 @@ class VampireHexmageEffect extends OneShotEffect {
         staticText = "Remove all counters from target permanent";
     }
 
-    VampireHexmageEffect(VampireHexmageEffect effect) {
+    private VampireHexmageEffect(final VampireHexmageEffect effect) {
         super(effect);
     }
 

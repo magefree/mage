@@ -47,7 +47,7 @@ class DefyDeathEffect extends OneShotEffect {
         this.staticText = "If it's an Angel, put two +1/+1 counters on it";
     }
 
-    public DefyDeathEffect(final DefyDeathEffect effect) {
+    private DefyDeathEffect(final DefyDeathEffect effect) {
         super(effect);
     }
 

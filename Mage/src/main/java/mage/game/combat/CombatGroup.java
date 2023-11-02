@@ -46,7 +46,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         this.defendingPlayerId = defendingPlayerId;
     }
 
-    public CombatGroup(final CombatGroup group) {
+    protected CombatGroup(final CombatGroup group) {
         this.attackers.addAll(group.attackers);
         this.blockers.addAll(group.blockers);
         this.blockerOrder.addAll(group.blockerOrder);
@@ -67,7 +67,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     /**
-     *
      * @return can be null
      */
     public UUID getDefenderId() {
@@ -175,8 +174,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : attacker.getControllerId());
                     if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
                             player.chooseUse(Outcome.Damage, "Have " + attacker.getLogName() + " assign damage as though it weren't blocked?", null, game)) ||
-                            game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED,
-                                    null, attacker.getControllerId(), game) != null) {
+                            !game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED,
+                                    null, attacker.getControllerId(), game).isEmpty()) {
                         // for handling creatures like Thorn Elemental
                         blocked = false;
                         unblockedDamage(first, game);
@@ -362,14 +361,16 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 if (power != null) {
                     // might be missing canDamage condition?
                     Permanent blocker = game.getPermanent(blockerId);
-                    if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
+                    if (blocker != null && !assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
                         attacker.markDamage(power, blockerId, null, game, true, true);
                     }
                 }
             }
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
                 Permanent blocker = game.getPermanent(entry.getKey());
-                blocker.markDamage(entry.getValue(), attacker.getId(), null, game, true, true);
+                if (blocker != null) {
+                    blocker.markDamage(entry.getValue(), attacker.getId(), null, game, true, true);
+                }
             }
         } else {
             for (UUID blockerId : blockerOrder) {
@@ -694,7 +695,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 logDamageAssignmentOrder("Creatures blocked by ", blockers, attackerOrder, game);
             }
         } else {
-            game.informPlayers(player.getLogName() +  " try to skip choose attacker order");
+            game.informPlayers(player.getLogName() + " try to skip choose attacker order");
         }
     }
 

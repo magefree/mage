@@ -4,12 +4,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -54,7 +52,7 @@ public class RogueSkycaptain extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public RogueSkycaptain copy() {
         return new RogueSkycaptain(this);
     }
 
@@ -62,17 +60,17 @@ public class RogueSkycaptain extends CardImpl {
 
 class RogueSkycaptainEffect extends OneShotEffect {
 
-    public RogueSkycaptainEffect() {
+    RogueSkycaptainEffect() {
         super(Outcome.GainControl);
         staticText = "put a wage counter on {this}. You may pay {2} for each wage counter on it. If you don't, remove all wage counters from {this} and an opponent gains control of it";
     }
 
-    public RogueSkycaptainEffect(final RogueSkycaptainEffect effect) {
+    private RogueSkycaptainEffect(final RogueSkycaptainEffect effect) {
         super(effect);
     }
 
     @Override
-    public Effect copy() {
+    public RogueSkycaptainEffect copy() {
         return new RogueSkycaptainEffect(this);
     }
 
@@ -91,7 +89,7 @@ class RogueSkycaptainEffect extends OneShotEffect {
                     opponent = game.getPlayer(opponents.iterator().next());
                 } else {
                     Target target = new TargetOpponent(true);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     target.choose(Outcome.GainControl, source.getControllerId(), source.getSourceId(), source, game);
                     opponent = game.getPlayer(target.getFirstTarget());
                 }

@@ -47,7 +47,7 @@ class ForceDrainEffect extends OneShotEffect {
         this.staticText = "ForceDrain deals 2 damage to any target. If player was dealt damage this way, you gain 2 life";
     }
 
-    public ForceDrainEffect(final ForceDrainEffect effect) {
+    private ForceDrainEffect(final ForceDrainEffect effect) {
         super(effect);
     }
 

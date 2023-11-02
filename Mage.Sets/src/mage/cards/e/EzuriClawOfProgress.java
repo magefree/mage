@@ -71,7 +71,7 @@ class EzuriClawOfProgressEffect extends OneShotEffect {
         this.staticText = "put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have";
     }
 
-    public EzuriClawOfProgressEffect(final EzuriClawOfProgressEffect effect) {
+    private EzuriClawOfProgressEffect(final EzuriClawOfProgressEffect effect) {
         super(effect);
     }
 

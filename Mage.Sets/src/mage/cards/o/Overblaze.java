@@ -49,7 +49,7 @@ class OverblazeEffect extends ReplacementEffectImpl {
         staticText = "Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.";
     }
 
-    public OverblazeEffect(final OverblazeEffect effect) {
+    private OverblazeEffect(final OverblazeEffect effect) {
         super(effect);
     }
 

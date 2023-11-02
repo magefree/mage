@@ -20,7 +20,7 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent draws a card, ");
     }
 
-    public DrawCardOpponentTriggeredAbility(final DrawCardOpponentTriggeredAbility ability) {
+    protected DrawCardOpponentTriggeredAbility(final DrawCardOpponentTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

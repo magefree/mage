@@ -74,7 +74,7 @@ class TheMycosynthGardensCopyEffect extends OneShotEffect {
         this.staticText = "{this} becomes a copy of target nontoken artifact you control with mana value X.";
     }
 
-    public TheMycosynthGardensCopyEffect(final TheMycosynthGardensCopyEffect effect) {
+    private TheMycosynthGardensCopyEffect(final TheMycosynthGardensCopyEffect effect) {
         super(effect);
     }
 

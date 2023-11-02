@@ -33,7 +33,7 @@ public final class VolunteerReserves extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
     }
 
-    public VolunteerReserves (final VolunteerReserves card) {
+    private VolunteerReserves(final VolunteerReserves card) {
         super(card);
     }
 

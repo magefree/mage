@@ -56,7 +56,7 @@ class ChainOfAcidEffect extends OneShotEffect {
         this.staticText = "Destroy target noncreature permanent. Then that permanent's controller may copy this spell and may choose a new target for that copy.";
     }
 
-    ChainOfAcidEffect(final ChainOfAcidEffect effect) {
+    private ChainOfAcidEffect(final ChainOfAcidEffect effect) {
         super(effect);
     }
 

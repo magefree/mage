@@ -57,7 +57,7 @@ class GrislySpectacleEffect extends OneShotEffect {
         this.staticText = "Its controller mills cards equal to that creature's power";
     }
 
-    public GrislySpectacleEffect(final GrislySpectacleEffect effect) {
+    private GrislySpectacleEffect(final GrislySpectacleEffect effect) {
         super(effect);
     }
 

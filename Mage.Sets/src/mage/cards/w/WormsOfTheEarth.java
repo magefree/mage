@@ -56,18 +56,13 @@ class WormsOfTheEarthPlayEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "Players can't play lands";
     }
 
-    public WormsOfTheEarthPlayEffect(final WormsOfTheEarthPlayEffect effect) {
+    private WormsOfTheEarthPlayEffect(final WormsOfTheEarthPlayEffect effect) {
         super(effect);
     }
 
     @Override
     public WormsOfTheEarthPlayEffect copy() {
         return new WormsOfTheEarthPlayEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -88,7 +83,7 @@ class WormsOfTheEarthEnterEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Lands can't enter the battlefield";
     }
 
-    public WormsOfTheEarthEnterEffect(final WormsOfTheEarthEnterEffect effect) {
+    private WormsOfTheEarthEnterEffect(final WormsOfTheEarthEnterEffect effect) {
         super(effect);
     }
 
@@ -120,7 +115,7 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
         this.staticText = "any player may sacrifice two lands or have {this} deal 5 damage to that player. If a player does either, destroy {this}";
     }
 
-    public WormsOfTheEarthDestroyEffect(final WormsOfTheEarthDestroyEffect effect) {
+    private WormsOfTheEarthDestroyEffect(final WormsOfTheEarthDestroyEffect effect) {
         super(effect);
     }
 

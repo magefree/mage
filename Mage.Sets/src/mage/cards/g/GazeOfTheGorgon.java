@@ -54,7 +54,7 @@ class GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.staticText = "At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn";
     }
 
-    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect(final GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect effect) {
+    private GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect(final GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class GazeOfTheGorgonEffect extends OneShotEffect {
         this.targetCreature = targetCreature;
     }
 
-    public GazeOfTheGorgonEffect(final GazeOfTheGorgonEffect effect) {
+    private GazeOfTheGorgonEffect(final GazeOfTheGorgonEffect effect) {
         super(effect);
         targetCreature = effect.targetCreature;
     }

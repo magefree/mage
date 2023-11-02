@@ -17,7 +17,7 @@ public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends Trigger
         setTriggerPhrase("Whenever an opponent sacrifices a nontoken permanent, ");
     }
 
-    public OpponentSacrificesNonTokenPermanentTriggeredAbility(final OpponentSacrificesNonTokenPermanentTriggeredAbility ability) {
+    protected OpponentSacrificesNonTokenPermanentTriggeredAbility(final OpponentSacrificesNonTokenPermanentTriggeredAbility ability) {
         super(ability);
     }
 

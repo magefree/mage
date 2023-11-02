@@ -40,7 +40,7 @@ public class TorporOrbTest extends CardTestPlayerBase {
      * Hushwing Gryff
      */
     @Test
-    public void testPitTweller() {
+    public void testPitDweller() {
         // Creatures entering the battlefield don't cause abilities to trigger.
         addCard(Zone.BATTLEFIELD, playerB, "Hushwing Gryff");
         addCard(Zone.BATTLEFIELD, playerB, "Treacherous Pit-Dweller");  // 4/3
@@ -61,6 +61,27 @@ public class TorporOrbTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Treacherous Pit-Dweller", 1);
         assertPowerToughness(playerB, "Treacherous Pit-Dweller", 5, 4);
+    }
+
+    @Test
+    public void testHushbringer() {
+        // Creatures entering the battlefield or dying don't cause abilities to trigger.
+        addCard(Zone.BATTLEFIELD, playerA, "Hushbringer");
+        addCard(Zone.BATTLEFIELD, playerA, "Highland Game"); // 2/1
+        // When Highland Game dies, you gain 2 life.
+        addCard(Zone.HAND, playerA, "Shock");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Highland Game");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerA, "Highland Game", 1);
     }
 
 }

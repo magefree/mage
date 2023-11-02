@@ -36,8 +36,8 @@ public final class TourachsChant extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}")), TargetController.YOU, false));
 
         // Whenever a player puts a Forest onto the battlefield, Tourach's Chant deals 3 damage to that player unless they put a -1/-1 counter on a creature they control.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TourachsChantEffect(), filter, false, SetTargetPointer.PLAYER,
-                "Whenever a player puts a Forest onto the battlefield, {this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control."));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TourachsChantEffect(), filter, false, SetTargetPointer.PLAYER
+        ).setTriggerPhrase("Whenever a player puts a Forest onto the battlefield, "));
     }
 
     private TourachsChant(final TourachsChant card) {
@@ -52,12 +52,12 @@ public final class TourachsChant extends CardImpl {
 
 class TourachsChantEffect extends OneShotEffect {
 
-    public TourachsChantEffect() {
+    TourachsChantEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control";
     }
 
-    public TourachsChantEffect(final TourachsChantEffect effect) {
+    private TourachsChantEffect(final TourachsChantEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class TourachsChantEffect extends OneShotEffect {
         if (player != null && sourcePermanent != null) {
             boolean paid = false;
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (player.chooseUse(Outcome.Detriment, "Put a -1/-1 counter on a creature you control? (otherwise " + sourcePermanent.getLogName() + " deals 3 damage to you)", source, game)
                     && player.choose(Outcome.UnboostCreature, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());

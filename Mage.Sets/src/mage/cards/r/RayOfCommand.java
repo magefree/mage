@@ -51,7 +51,7 @@ class RayOfCommandDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new TapTargetEffect(), Duration.EndOfGame, true); // effect can last over turns end, if you still control the target but only one time
     }
 
-    RayOfCommandDelayedTriggeredAbility(RayOfCommandDelayedTriggeredAbility ability) {
+    private RayOfCommandDelayedTriggeredAbility(final RayOfCommandDelayedTriggeredAbility ability) {
         super(ability);
     }
     

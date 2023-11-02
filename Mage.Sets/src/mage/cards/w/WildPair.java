@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class WildPair extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
 
     static {
         // TODO: This should check who cast the spell, not who controls the permanent
@@ -39,11 +39,8 @@ public final class WildPair extends CardImpl {
 
         // Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new WildPairEffect(), filter, true,
-                SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield, " +
-                "if you cast it from your hand, you may search your library for a creature card " +
-                "with the same total power and toughness, put it onto the battlefield, then shuffle."
-        ), new CastFromHandWatcher());
+                Zone.BATTLEFIELD, new WildPairEffect(), filter, true, SetTargetPointer.PERMANENT
+        ).setTriggerPhrase("Whenever a creature enters the battlefield, if you cast it from your hand, "), new CastFromHandWatcher());
     }
 
     private WildPair(final WildPair card) {
@@ -58,12 +55,12 @@ public final class WildPair extends CardImpl {
 
 class WildPairEffect extends OneShotEffect {
 
-    public WildPairEffect() {
+    WildPairEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "search your library for a creature card with the same total power and toughness and put it onto the battlefield";
+        this.staticText = "search your library for a creature card with the same total power and toughness, put it onto the battlefield, then shuffle";
     }
 
-    public WildPairEffect(final WildPairEffect effect) {
+    private WildPairEffect(final WildPairEffect effect) {
         super(effect);
     }
 
@@ -94,7 +91,7 @@ class WildPairEffect extends OneShotEffect {
 
 class WildPairPowerToughnessPredicate extends IntComparePredicate<MageObject> {
 
-    public WildPairPowerToughnessPredicate(int value) {
+    WildPairPowerToughnessPredicate(int value) {
         super(ComparisonType.EQUAL_TO, value);
     }
 

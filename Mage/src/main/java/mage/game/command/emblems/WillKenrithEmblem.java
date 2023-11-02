@@ -2,6 +2,7 @@ package mage.game.command.emblems;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
@@ -19,7 +20,7 @@ public final class WillKenrithEmblem extends Emblem {
                 new CopyTargetSpellEffect(true).withSpellName("it"),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false,
-                true
+                SetTargetPointer.SPELL
         ));
     }
 

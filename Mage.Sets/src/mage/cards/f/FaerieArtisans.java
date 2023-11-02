@@ -1,10 +1,8 @@
 package mage.cards.f;
 
-import java.util.StringTokenizer;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,24 +11,19 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.StringTokenizer;
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
 public final class FaerieArtisans extends CardImpl {
-
-    private static final FilterCreaturePermanent filterNontoken = new FilterCreaturePermanent("nontoken creature");
-
-    static {
-        filterNontoken.add(TokenPredicate.FALSE);
-        filterNontoken.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public FaerieArtisans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -44,8 +37,8 @@ public final class FaerieArtisans extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with Faerie Artisans.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new FaerieArtisansEffect(), filterNontoken, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with {this}.");
+        Ability ability = new EntersBattlefieldOpponentTriggeredAbility(Zone.BATTLEFIELD,
+                new FaerieArtisansEffect(), StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT);
         this.addAbility(ability);
     }
 
@@ -67,7 +60,7 @@ class FaerieArtisansEffect extends OneShotEffect {
                 + "Then exile all other tokens created with {this}";
     }
 
-    public FaerieArtisansEffect(final FaerieArtisansEffect effect) {
+    private FaerieArtisansEffect(final FaerieArtisansEffect effect) {
         super(effect);
     }
 

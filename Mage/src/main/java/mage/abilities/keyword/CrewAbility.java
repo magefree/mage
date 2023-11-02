@@ -58,7 +58,7 @@ public class CrewAbility extends SimpleActivatedAbility {
         }
     }
 
-    public CrewAbility(final CrewAbility ability) {
+    protected CrewAbility(final CrewAbility ability) {
         super(ability);
         this.value = ability.value;
     }

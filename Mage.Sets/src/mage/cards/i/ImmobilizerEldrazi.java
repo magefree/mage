@@ -1,9 +1,6 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,12 +9,13 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import mage.filter.predicate.mageobject.ToughnessGreaterThanPowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +26,7 @@ public final class ImmobilizerEldrazi extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with toughness greater than its power");
 
     static {
-        filter.add(new ImmobilizerEldraziPredicate());
+        filter.add(ToughnessGreaterThanPowerPredicate.instance);
     }
 
     public ImmobilizerEldrazi(UUID ownerId, CardSetInfo setInfo) {
@@ -55,18 +53,5 @@ public final class ImmobilizerEldrazi extends CardImpl {
     @Override
     public ImmobilizerEldrazi copy() {
         return new ImmobilizerEldrazi(this);
-    }
-}
-
-class ImmobilizerEldraziPredicate implements Predicate<MageObject> {
-
-    @Override
-    public boolean apply(MageObject input, Game game) {
-        return input.getToughness().getValue() > input.getPower().getValue();
-    }
-
-    @Override
-    public String toString() {
-        return "toughness greater than its power";
     }
 }

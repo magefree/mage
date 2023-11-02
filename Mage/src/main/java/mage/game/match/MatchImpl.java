@@ -198,10 +198,13 @@ public abstract class MatchImpl implements Match {
                 game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
                 game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
                 game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
-                // set the priority time left for the match
-                if (games.isEmpty()) { // first game full time
-                    matchPlayer.getPlayer().setPriorityTimeLeft(options.getPriorityTime());
+                // time limits
+                matchPlayer.getPlayer().setBufferTimeLeft(options.getMatchBufferTime().getBufferSecs());
+                if (games.isEmpty()) {
+                    // first game
+                    matchPlayer.getPlayer().setPriorityTimeLeft(options.getMatchTimeLimit().getPrioritySecs());
                 } else {
+                    // 2+ games must keep times
                     if (matchPlayer.getPriorityTimeLeft() > 0) {
                         matchPlayer.getPlayer().setPriorityTimeLeft(matchPlayer.getPriorityTimeLeft());
                     }
@@ -212,7 +215,8 @@ public abstract class MatchImpl implements Match {
                 }
             }
         }
-        game.setPriorityTime(options.getPriorityTime());
+        game.setPriorityTime(options.getMatchTimeLimit().getPrioritySecs());
+        game.setBufferTime(options.getMatchBufferTime().getBufferSecs());
     }
 
     protected void shufflePlayers() {

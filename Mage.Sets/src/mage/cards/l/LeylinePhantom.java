@@ -48,7 +48,7 @@ class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} deals combat damage, ");
     }
 
-    public LeylinePhantomTriggeredAbility(final LeylinePhantomTriggeredAbility ability) {
+    private LeylinePhantomTriggeredAbility(final LeylinePhantomTriggeredAbility ability) {
         super(ability);
     }
 

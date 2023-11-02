@@ -50,7 +50,7 @@ public final class GoblinBrawler extends CardImpl {
 
 class CantBeEquippedSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantBeEquippedSourceEffect(CantBeEquippedSourceEffect effect) {
+    private CantBeEquippedSourceEffect(final CantBeEquippedSourceEffect effect) {
         super(effect);
     }
 

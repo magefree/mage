@@ -62,7 +62,7 @@ class ConeOfFlameEffect extends OneShotEffect {
                 + "and 3 damage to a third target";
     }
 
-    public ConeOfFlameEffect(final ConeOfFlameEffect effect) {
+    private ConeOfFlameEffect(final ConeOfFlameEffect effect) {
         super(effect);
     }
 

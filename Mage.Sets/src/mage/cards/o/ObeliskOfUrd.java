@@ -53,7 +53,7 @@ class ObeliskOfUrdBoostEffect extends ContinuousEffectImpl {
         staticText = "Creatures you control of the chosen type get +2/+2.";
     }
 
-    ObeliskOfUrdBoostEffect(final ObeliskOfUrdBoostEffect effect) {
+    private ObeliskOfUrdBoostEffect(final ObeliskOfUrdBoostEffect effect) {
         super(effect);
     }
 

@@ -46,7 +46,7 @@ class AnkhOfMishraAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
-    AnkhOfMishraAbility(final AnkhOfMishraAbility ability) {
+    private AnkhOfMishraAbility(final AnkhOfMishraAbility ability) {
         super(ability);
     }
 

@@ -58,7 +58,7 @@ class AngelOfGlorysRiseEffect extends OneShotEffect {
         staticText = "exile all Zombies, then return all Human creature cards from your graveyard to the battlefield";
     }
 
-    public AngelOfGlorysRiseEffect(final AngelOfGlorysRiseEffect effect) {
+    private AngelOfGlorysRiseEffect(final AngelOfGlorysRiseEffect effect) {
         super(effect);
     }
 

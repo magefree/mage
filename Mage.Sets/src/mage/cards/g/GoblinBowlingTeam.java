@@ -54,7 +54,7 @@ class GoblinBowlingTeamEffect extends ReplacementEffectImpl {
         staticText = "If {this} would deal damage to a permanent or player, it deals that much damage plus the result of a six-sided die roll to that permanent or player instead";
     }
 
-    public GoblinBowlingTeamEffect(final GoblinBowlingTeamEffect effect) {
+    private GoblinBowlingTeamEffect(final GoblinBowlingTeamEffect effect) {
         super(effect);
     }
 

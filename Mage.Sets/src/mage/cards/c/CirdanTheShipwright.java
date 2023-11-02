@@ -121,7 +121,7 @@ class CirdanTheShipwrightVote extends VoteHandler<Player> {
     @Override
     protected Player playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
         TargetPlayer target = new TargetPlayer();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("to vote for");
         decidingPlayer.choose(Outcome.Benefit, target, source, game);
         return game.getPlayer(target.getFirstTarget());

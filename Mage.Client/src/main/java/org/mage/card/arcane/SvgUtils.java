@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.Base64;
 
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
@@ -111,7 +113,8 @@ public class SvgUtils {
         // css settings for svg
         SvgUtils.prepareCss(cssFileName, cssAdditionalSettings, false);
         File cssFile = new File(SvgUtils.getSvgTempFile(cssFileName));
-
+        byte[] cssFileContent = Files.readAllBytes(cssFile.toPath());
+        String cssDataURI = "data:text/css;base64," + Base64.getEncoder().encodeToString(cssFileContent);
         TranscodingHints transcoderHints = new TranscodingHints();
 
         // resize
@@ -138,7 +141,7 @@ public class SvgUtils {
         transcoderHints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT_NAMESPACE_URI,
                 SVGConstants.SVG_NAMESPACE_URI);
         transcoderHints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT, "svg");
-        transcoderHints.put(ImageTranscoder.KEY_USER_STYLESHEET_URI, cssFile.toURI().toString());
+        transcoderHints.put(ImageTranscoder.KEY_USER_STYLESHEET_URI, cssDataURI);
 
         try {
             TranscoderInput input = new TranscoderInput(svgFile);

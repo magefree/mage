@@ -64,7 +64,7 @@ class ToothyImaginaryFriendCountersCount implements DynamicValue {
         this.counterName = counter.getName();
     }
 
-    public ToothyImaginaryFriendCountersCount(final ToothyImaginaryFriendCountersCount countersCount) {
+    private ToothyImaginaryFriendCountersCount(final ToothyImaginaryFriendCountersCount countersCount) {
         this.counterName = countersCount.counterName;
     }
 

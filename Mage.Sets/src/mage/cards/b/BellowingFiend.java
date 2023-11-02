@@ -56,7 +56,7 @@ class BellowingFiendEffect extends OneShotEffect {
         this.staticText = "{this} deals 3 damage to that creature's controller";
     }
 
-    public BellowingFiendEffect(final BellowingFiendEffect effect) {
+    private BellowingFiendEffect(final BellowingFiendEffect effect) {
         super(effect);
     }
 

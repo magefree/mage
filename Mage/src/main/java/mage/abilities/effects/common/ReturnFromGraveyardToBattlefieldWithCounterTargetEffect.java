@@ -59,6 +59,9 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder(super.getText(mode));
         sb.append(" with ");
         if (additional) {

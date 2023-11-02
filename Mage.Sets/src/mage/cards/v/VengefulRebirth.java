@@ -53,7 +53,7 @@ class VengefulRebirthEffect extends OneShotEffect {
                 "{this} deals damage equal to that card's mana value to any target";
     }
 
-    public VengefulRebirthEffect(final VengefulRebirthEffect effect) {
+    private VengefulRebirthEffect(final VengefulRebirthEffect effect) {
         super(effect);
     }
 

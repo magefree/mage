@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -43,7 +42,7 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
         this.withSource = withSource;
     }
 
-    public ExileFromZoneTargetEffect(final ExileFromZoneTargetEffect effect) {
+    protected ExileFromZoneTargetEffect(final ExileFromZoneTargetEffect effect) {
         super(effect);
         this.zone = effect.zone;
         this.filter = effect.filter.copy();
@@ -85,7 +84,10 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "target " + (mode.getTargets().isEmpty() ? "player" : mode.getTargets().get(0).getTargetName())
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player")
                 + " exiles " + CardUtil.numberToText(amount, "a") + ' ' + filter.getMessage()
                 + " from their " + zone.toString().toLowerCase();
     }

@@ -50,7 +50,7 @@ class GostaDirkEffect extends AsThoughEffectImpl {
         staticText = "Creatures with islandwalk can be blocked as though they didn't have islandwalk";
     }
 
-    public GostaDirkEffect(final GostaDirkEffect effect) {
+    private GostaDirkEffect(final GostaDirkEffect effect) {
         super(effect);
     }
 

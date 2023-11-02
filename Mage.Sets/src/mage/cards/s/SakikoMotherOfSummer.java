@@ -56,7 +56,7 @@ class SakikoMotherOfSummerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public SakikoMotherOfSummerTriggeredAbility(final SakikoMotherOfSummerTriggeredAbility ability) {
+    private SakikoMotherOfSummerTriggeredAbility(final SakikoMotherOfSummerTriggeredAbility ability) {
         super(ability);
     }
 

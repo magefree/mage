@@ -60,7 +60,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead";
     }
 
-    SharedFateReplacementEffect(final SharedFateReplacementEffect effect) {
+    private SharedFateReplacementEffect(final SharedFateReplacementEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
         staticText = "Each player may look at and play cards they exiled with {this}";
     }
 
-    SharedFatePlayEffect(final SharedFatePlayEffect effect) {
+    private SharedFatePlayEffect(final SharedFatePlayEffect effect) {
         super(effect);
     }
 
@@ -164,7 +164,7 @@ class SharedFateLookEffect extends AsThoughEffectImpl {
         staticText = "Each player may look at the cards exiled with {this}";
     }
 
-    public SharedFateLookEffect(final SharedFateLookEffect effect) {
+    private SharedFateLookEffect(final SharedFateLookEffect effect) {
         super(effect);
     }
 

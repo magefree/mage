@@ -63,7 +63,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
         staticText = "If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library";
     }
 
-    public WheelOfSunAndMoonEffect(final WheelOfSunAndMoonEffect effect) {
+    private WheelOfSunAndMoonEffect(final WheelOfSunAndMoonEffect effect) {
         super(effect);
     }
 

@@ -21,11 +21,11 @@ import java.util.UUID;
  */
 public abstract class StateTriggeredAbility extends TriggeredAbilityImpl {
 
-    public StateTriggeredAbility(Zone zone, Effect effect) {
+    protected StateTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect);
     }
 
-    public StateTriggeredAbility(final StateTriggeredAbility ability) {
+    protected StateTriggeredAbility(final StateTriggeredAbility ability) {
         super(ability);
     }
 

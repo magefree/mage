@@ -7,17 +7,16 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author TheElk801
  */
 public class SourcePhaseInTriggeredAbility extends TriggeredAbilityImpl {
 
     public SourcePhaseInTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("When {this} phases in, ");
+        setTriggerPhrase("Whenever {this} phases in, ");
     }
 
-    public SourcePhaseInTriggeredAbility(final SourcePhaseInTriggeredAbility ability) {
+    protected SourcePhaseInTriggeredAbility(final SourcePhaseInTriggeredAbility ability) {
         super(ability);
     }
 

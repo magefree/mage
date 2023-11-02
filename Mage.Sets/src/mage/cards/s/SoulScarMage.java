@@ -56,7 +56,7 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a source you control would deal noncombat damage to a creature an opponent controls, put that many -1/-1 counters on that creature instead.";
     }
 
-    public SoulScarMageDamageReplacementEffect(final SoulScarMageDamageReplacementEffect effect) {
+    private SoulScarMageDamageReplacementEffect(final SoulScarMageDamageReplacementEffect effect) {
         super(effect);
     }
 

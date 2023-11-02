@@ -52,11 +52,11 @@ class WulfgarOfIcewindDaleEffect extends ReplacementEffectImpl {
 
     WulfgarOfIcewindDaleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if a creature you control attacking would cause a triggered ability " +
+        staticText = "if a creature you control attacking causes a triggered ability " +
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 
-    WulfgarOfIcewindDaleEffect(final WulfgarOfIcewindDaleEffect effect) {
+    private WulfgarOfIcewindDaleEffect(final WulfgarOfIcewindDaleEffect effect) {
         super(effect);
     }
 

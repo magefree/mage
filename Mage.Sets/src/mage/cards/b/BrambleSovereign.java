@@ -27,7 +27,7 @@ import mage.game.permanent.Permanent;
  */
 public final class BrambleSovereign extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature");
 
     static {
         filter.add(TokenPredicate.FALSE);
@@ -45,9 +45,7 @@ public final class BrambleSovereign extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(new BrambleSovereignEffect(), new ManaCostsImpl<>("{1}{G}")),
-                filter, false, SetTargetPointer.PERMANENT,
-                "Whenever another nontoken creature enters the battlefield, you may pay {1}{G}. "
-                + "If you do, that creature's controller creates a token that's a copy of that creature."
+                filter, false, SetTargetPointer.PERMANENT
         ));
     }
 
@@ -65,10 +63,10 @@ class BrambleSovereignEffect extends OneShotEffect {
 
     BrambleSovereignEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "its controller creates a token that's a copy of that creature";
+        this.staticText = "that creature's controller creates a token that's a copy of that creature";
     }
 
-    BrambleSovereignEffect(final BrambleSovereignEffect effect) {
+    private BrambleSovereignEffect(final BrambleSovereignEffect effect) {
         super(effect);
     }
 

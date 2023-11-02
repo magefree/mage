@@ -52,7 +52,7 @@ class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
         staticText = "If a source would deal damage to a permanent or player, that source deals double that damage to that permanent or player instead";
     }
 
-    public DictateOfTheTwinGodsEffect(final DictateOfTheTwinGodsEffect effect) {
+    private DictateOfTheTwinGodsEffect(final DictateOfTheTwinGodsEffect effect) {
         super(effect);
     }
 

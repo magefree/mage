@@ -51,7 +51,7 @@ class MurderousBetrayalCost extends CostImpl {
         this.text = "Pay half your life, rounded up";
     }
 
-    MurderousBetrayalCost(MurderousBetrayalCost cost) {
+    private MurderousBetrayalCost(final MurderousBetrayalCost cost) {
         super(cost);
     }
 

@@ -8,6 +8,7 @@ import mage.abilities.effects.common.CreateTokenAllEffect;
 import mage.abilities.effects.common.EntersBattlefieldUnderControlOfOpponentOfChoiceEffect;
 import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
+import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,13 +33,22 @@ public final class CaptiveAudience extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new SetPlayerLifeSourceEffect(4), TargetController.YOU, false
         );
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.setModeTag("life total becomes 4");
+        ability.getModes().setLimitUsageByOnce(false);
 
         // • Discard your hand.
-        ability.addMode(new Mode(new DiscardHandControllerEffect()));
+        ability.addMode(
+                new Mode(new DiscardHandControllerEffect())
+                        .setModeTag("discard hand")
+        );
 
         // • Each opponent creates five 2/2 black Zombie creature tokens.
-        ability.addMode(new Mode(new CreateTokenAllEffect(new ZombieToken(), 5, TargetController.OPPONENT)));
+        ability.addMode(
+                new Mode(new CreateTokenAllEffect(new ZombieToken(), 5, TargetController.OPPONENT))
+                        .setModeTag("opponents create Zombies")
+        );
+
+        ability.addHint(ModesAlreadyUsedHint.instance);
         this.addAbility(ability);
     }
 

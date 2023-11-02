@@ -48,7 +48,7 @@ class ArboriaEffect extends RestrictionEffect {
         staticText = "Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn";
     }
 
-    public ArboriaEffect(final ArboriaEffect effect) {
+    private ArboriaEffect(final ArboriaEffect effect) {
         super(effect);
     }
 
@@ -60,6 +60,9 @@ class ArboriaEffect extends RestrictionEffect {
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         if (defenderId == null) {
+            return true;
+        }
+        if (!game.getPlayers().containsKey(defenderId)) {
             return true;
         }
 

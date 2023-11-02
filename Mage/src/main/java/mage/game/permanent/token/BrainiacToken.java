@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class BrainiacToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class BrainiacToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public BrainiacToken(final BrainiacToken token) {
+    protected BrainiacToken(final BrainiacToken token) {
         super(token);
     }
 

@@ -64,7 +64,7 @@ class WojekApothecaryEffect extends OneShotEffect {
         this.staticText = "Prevent the next 1 damage that would be dealt to target creature and each other creature that shares a color with it this turn";
     }
 
-    public WojekApothecaryEffect(final WojekApothecaryEffect effect) {
+    private WojekApothecaryEffect(final WojekApothecaryEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ class EntrapmentManeuverSacrificeEffect extends OneShotEffect {
         this.staticText = "Target player sacrifices an attacking creature. You create X 1/1 white Soldier creature tokens, where X is that creature's toughness";
     }
 
-    public EntrapmentManeuverSacrificeEffect(final EntrapmentManeuverSacrificeEffect effect) {
+    private EntrapmentManeuverSacrificeEffect(final EntrapmentManeuverSacrificeEffect effect) {
         super(effect);
     }
 

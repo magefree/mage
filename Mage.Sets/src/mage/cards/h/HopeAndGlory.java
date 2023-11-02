@@ -22,7 +22,8 @@ public final class HopeAndGlory extends CardImpl {
 
         // Untap two target creatures. Each of them gets +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+                .setText("Each of them gets +1/+1 until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 

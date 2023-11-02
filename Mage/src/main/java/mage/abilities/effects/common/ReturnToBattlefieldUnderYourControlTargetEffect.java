@@ -46,7 +46,7 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
         staticText = "return " + description + " to the battlefield " + (tapped ? "tapped " : "") + "under your control";
     }
 
-    public ReturnToBattlefieldUnderYourControlTargetEffect(final ReturnToBattlefieldUnderYourControlTargetEffect effect) {
+    protected ReturnToBattlefieldUnderYourControlTargetEffect(final ReturnToBattlefieldUnderYourControlTargetEffect effect) {
         super(effect);
         this.returnFromExileZoneOnly = effect.returnFromExileZoneOnly;
         this.tapped = effect.tapped;

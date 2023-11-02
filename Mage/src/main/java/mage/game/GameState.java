@@ -1,5 +1,6 @@
 package mage.game;
 
+import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -44,8 +45,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyList;
-
 /**
  * @author BetaSteward_at_googlemail.com
  * <p>
@@ -76,7 +75,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private SpecialActions specialActions;
     private Watchers watchers;
     private Turn turn;
-    private TurnMods turnMods;
+    private TurnMods turnMods; // one time turn modifications (turn, phase or step)
     private UUID activePlayerId; // playerId which turn it is
     private UUID priorityPlayerId; // player that has currently priority
     private UUID playerByOrderId; // player that has currently priority
@@ -135,7 +134,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         applyEffectsCounter = 0;
     }
 
-    public GameState(final GameState state) {
+    protected GameState(final GameState state) {
         this.players = state.players.copy();
         this.playerList = state.playerList.copy();
         this.choosingPlayerId = state.choosingPlayerId;
@@ -817,20 +816,88 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
-        // combine damages per type (player or permanent)
-        boolean flag = false;
+        // Combine multiple damage events in the single event (batch)
+        // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
+        // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
+        //
+        // Warning, one event can be stored in multiple batches,
+        // example: DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
+
+        boolean isPlayerDamage = damagedEvent instanceof DamagedPlayerEvent;
+
+        // existing batch
+        boolean isDamageBatchUsed = false;
+        boolean isPlayerBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
+
+            // per damage type
             if ((event instanceof DamagedBatchEvent)
                     && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
-                // old batch
                 ((DamagedBatchEvent) event).addEvent(damagedEvent);
-                flag = true;
+                isDamageBatchUsed = true;
+            }
+
+            // per player
+            if (isPlayerDamage && event instanceof DamagedBatchForOnePlayerEvent) {
+                DamagedBatchForOnePlayerEvent oldPlayerBatch = (DamagedBatchForOnePlayerEvent) event;
+                if (oldPlayerBatch.getDamageClazz().isInstance(damagedEvent)
+                        && event.getPlayerId().equals(damagedEvent.getTargetId())) {
+                    oldPlayerBatch.addEvent(damagedEvent);
+                    isPlayerBatchUsed = true;
+                }
+            }
+        }
+
+        // new batch
+        if (!isDamageBatchUsed) {
+            addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
+        }
+        if (!isPlayerBatchUsed && isPlayerDamage) {
+            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent.getTargetId());
+            event.addEvent(damagedEvent);
+            addSimultaneousEvent(event, game);
+        }
+    }
+
+    public void addSimultaneousTapped(TappedEvent tappedEvent, Game game) {
+        // Combine multiple tapped events in the single event (batch)
+
+        boolean isTappedBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof TappedBatchEvent) {
+                // Adding to the existing batch
+                ((TappedBatchEvent) event).addEvent(tappedEvent);
+                isTappedBatchUsed = true;
                 break;
             }
         }
-        if (!flag) {
-            // new batch
-            addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
+
+        // new batch
+        if (!isTappedBatchUsed) {
+            TappedBatchEvent batch = new TappedBatchEvent();
+            batch.addEvent(tappedEvent);
+            addSimultaneousEvent(batch, game);
+        }
+    }
+
+    public void addSimultaneousUntapped(UntappedEvent untappedEvent, Game game) {
+        // Combine multiple untapped events in the single event (batch)
+
+        boolean isUntappedBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof UntappedBatchEvent) {
+                // Adding to the existing batch
+                ((UntappedBatchEvent) event).addEvent(untappedEvent);
+                isUntappedBatchUsed = true;
+                break;
+            }
+        }
+
+        // new batch
+        if (!isUntappedBatchUsed) {
+            UntappedBatchEvent batch = new UntappedBatchEvent();
+            batch.addEvent(untappedEvent);
+            addSimultaneousEvent(batch, game);
         }
     }
 

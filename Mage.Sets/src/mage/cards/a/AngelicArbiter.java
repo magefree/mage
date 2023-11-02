@@ -58,7 +58,7 @@ class AngelicArbiterCantAttackTargetEffect extends RestrictionEffect {
         staticText = "Each opponent who cast a spell this turn can't attack with creatures";
     }
 
-    public AngelicArbiterCantAttackTargetEffect(final AngelicArbiterCantAttackTargetEffect effect) {
+    private AngelicArbiterCantAttackTargetEffect(final AngelicArbiterCantAttackTargetEffect effect) {
         super(effect);
     }
 
@@ -89,18 +89,13 @@ class AngelicArbiterEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Each opponent who attacked with a creature this turn can't cast spells";
     }
 
-    public AngelicArbiterEffect2(final AngelicArbiterEffect2 effect) {
+    private AngelicArbiterEffect2(final AngelicArbiterEffect2 effect) {
         super(effect);
     }
 
     @Override
     public AngelicArbiterEffect2 copy() {
         return new AngelicArbiterEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

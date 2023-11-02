@@ -55,7 +55,7 @@ class FaithsShieldEffect extends OneShotEffect {
                 + "<br/><br/><i>Fateful hour</i> &mdash; If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn";
     }
 
-    public FaithsShieldEffect(final FaithsShieldEffect effect) {
+    private FaithsShieldEffect(final FaithsShieldEffect effect) {
         super(effect);
     }
 

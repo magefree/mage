@@ -11,27 +11,18 @@ import mage.game.events.GameEvent;
  */
 public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected boolean ignoreRulesGeneration; // use it with custom rules (if you don't want ETB auto-generated text)
-    protected String etbFlavorWord = null;
-
     public EntersBattlefieldTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, false);
-    }
-
-    public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean ignoreRulesGeneration) {
         super(Zone.ALL, effect, optional); // Zone.All because a creature with trigger can be put into play and be sacrificed during the resolution of an effect (discard Obstinate Baloth with Smallpox)
-        this.ignoreRulesGeneration = ignoreRulesGeneration;
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
         setTriggerPhrase("When {this} enters the battlefield, ");
     }
 
-    public EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
+    protected EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
         super(ability);
-        this.ignoreRulesGeneration = ability.ignoreRulesGeneration;
-        this.etbFlavorWord = ability.etbFlavorWord;
     }
 
     @Override

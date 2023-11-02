@@ -50,7 +50,7 @@ class MurmursFromBeyondEffect extends OneShotEffect {
         this.staticText = "Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand";
     }
 
-    public MurmursFromBeyondEffect(final MurmursFromBeyondEffect effect) {
+    private MurmursFromBeyondEffect(final MurmursFromBeyondEffect effect) {
         super(effect);
     }
 

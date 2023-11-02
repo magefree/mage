@@ -53,7 +53,7 @@ class GoblinGoonCantAttackEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control more creatures than defending player";
     }
 
-    GoblinGoonCantAttackEffect(final GoblinGoonCantAttackEffect effect) {
+    private GoblinGoonCantAttackEffect(final GoblinGoonCantAttackEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class GoblinGoonCantBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block unless you control more creatures than attacking player";
     }
 
-    GoblinGoonCantBlockEffect(final GoblinGoonCantBlockEffect effect) {
+    private GoblinGoonCantBlockEffect(final GoblinGoonCantBlockEffect effect) {
         super(effect);
     }
 

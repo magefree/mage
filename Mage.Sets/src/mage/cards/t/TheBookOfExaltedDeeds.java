@@ -92,8 +92,9 @@ class TheBookOfExaltedDeedsEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.WINS
+                || event.getType() == GameEvent.EventType.LOSES;
     }
 
     @Override

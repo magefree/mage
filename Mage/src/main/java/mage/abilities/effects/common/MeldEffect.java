@@ -43,7 +43,7 @@ public class MeldEffect extends OneShotEffect {
         this.attacking = attacking;
     }
 
-    public MeldEffect(final MeldEffect effect) {
+    protected MeldEffect(final MeldEffect effect) {
         super(effect);
         this.meldWithName = effect.meldWithName;
         this.meldIntoName = effect.meldIntoName;
@@ -77,7 +77,7 @@ public class MeldEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
 
         Permanent meldWithPermanent = game.getPermanent(target.getFirstTarget());

@@ -1,12 +1,11 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,14 +15,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.ZombieToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class WasteNot extends CardImpl {
 
     public WasteNot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // Whenever an opponent discards a creature card, create a 2/2 black Zombie creature token.
         this.addAbility(new WasteNotCreatureTriggeredAbility());
@@ -51,7 +51,7 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), false);
     }
 
-    WasteNotCreatureTriggeredAbility(final WasteNotCreatureTriggeredAbility ability) {
+    private WasteNotCreatureTriggeredAbility(final WasteNotCreatureTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,7 +88,7 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(2)), false);
     }
 
-    WasteNotLandTriggeredAbility(final WasteNotLandTriggeredAbility ability) {
+    private WasteNotLandTriggeredAbility(final WasteNotLandTriggeredAbility ability) {
         super(ability);
     }
 
@@ -106,9 +106,7 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
-            if (discarded != null && discarded.isLand(game)) {
-                return true;
-            }
+            return discarded != null && discarded.isLand(game);
         }
         return false;
     }
@@ -125,7 +123,7 @@ class WasteNotOtherTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    WasteNotOtherTriggeredAbility(final WasteNotOtherTriggeredAbility ability) {
+    private WasteNotOtherTriggeredAbility(final WasteNotOtherTriggeredAbility ability) {
         super(ability);
     }
 

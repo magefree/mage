@@ -46,7 +46,7 @@ public final class ConfoundingConundrum extends CardImpl {
         // Whenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under their control this turn, they return a land they control to its owner's hand.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new ConfoundingConundrumEffect(), filter,
-                false, SetTargetPointer.PLAYER, ""
+                false, SetTargetPointer.PLAYER
         ), ConfoundingConundrumCondition.instance, "Whenever a land enters the battlefield under " +
                 "an opponent's control, if that player had another land enter the battlefield " +
                 "under their control this turn, they return a land they control to its owner's hand."
@@ -105,7 +105,7 @@ class ConfoundingConundrumEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }

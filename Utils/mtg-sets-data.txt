@@ -53,6 +53,7 @@ Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
 Coldsnap|CSP|
+Doctor Who|WHO|
 Duel Decks: Jace vs. Chandra|DD2|
 Duel Decks: Anthology, Divine vs. Demonic|DVD|
 Duel Decks: Anthology, Elves vs. Goblins|EVG|
@@ -99,6 +100,7 @@ Duel Decks: Elves vs. Inventors|DDU|
 Pro Tour Promos|PPRO|
 Exodus|EXO|
 Zendikar Expeditions|EXP|
+Fallout|PIP|
 Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
@@ -120,6 +122,8 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
+The Lost Caverns of Ixalan|LCI|
+Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|
 Innistrad: Crimson Vow|VOW|
@@ -201,6 +205,7 @@ Prerelease Events|PPRE|
 Portal Three Kingdoms|PTK|
 Ravnica Allegiance|RNA|
 Ravnica: City of Guilds|RAV|
+Jurassic World Collection|REX|
 Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
@@ -216,6 +221,7 @@ Scars of Mirrodin|SOM|
 Streets of New Capenna|SNC|
 New Capenna Commander|NCC|
 Stronghold|STH|
+Special Guests|SPG|
 Super Series|SUS|
 Theros|THS|
 Theros Beyond Death|THB|
@@ -257,6 +263,8 @@ War of the Spark|WAR|
 Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
 Weatherlight|WTH|
+Wilds of Eldraine|WOE|
+Wilds of Eldraine Commander|WOC|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|

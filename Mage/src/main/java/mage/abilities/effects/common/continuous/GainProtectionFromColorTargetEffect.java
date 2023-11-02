@@ -33,7 +33,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         }
     }
 
-    public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
+    protected GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
         super(effect);
         this.choice = effect.choice.copy();
     }
@@ -45,7 +45,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {

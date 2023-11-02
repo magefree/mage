@@ -30,7 +30,7 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
         this(filterTarget, null, duration);
     }
 
-    public CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
+    protected CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
@@ -43,11 +43,6 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
     @Override
     public CantBeCounteredControlledEffect copy() {
         return new CantBeCounteredControlledEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

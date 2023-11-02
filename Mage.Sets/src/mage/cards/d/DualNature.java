@@ -44,8 +44,7 @@ public final class DualNature extends CardImpl {
 
         // Whenever a nontoken creature enters the battlefield, its controller creates a token that's a copy of that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new DualNatureCreateTokenEffect(), filter, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature enters the battlefield, its controller creates a token that's a copy of that creature."
+                Zone.BATTLEFIELD, new DualNatureCreateTokenEffect(), filter, false, SetTargetPointer.PERMANENT
         ));
 
         // Whenever a nontoken creature leaves the battlefield, exile all tokens with the same name as that creature.
@@ -74,7 +73,7 @@ class DualNatureCreateTokenEffect extends OneShotEffect {
         this.staticText = "its controller creates a token that's a copy of that creature";
     }
 
-    DualNatureCreateTokenEffect(final DualNatureCreateTokenEffect effect) {
+    private DualNatureCreateTokenEffect(final DualNatureCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -115,7 +114,7 @@ class DualNatureCreatureLeavesEffect extends OneShotEffect {
         this.staticText = "exile all tokens with the same name as that creature";
     }
 
-    DualNatureCreatureLeavesEffect(final DualNatureCreatureLeavesEffect effect) {
+    private DualNatureCreatureLeavesEffect(final DualNatureCreatureLeavesEffect effect) {
         super(effect);
     }
 
@@ -144,7 +143,7 @@ class DualNatureLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbi
         super(Zone.BATTLEFIELD, null, new DualNatureExileEffect(), "When {this} leaves the battlefield, ", false);
     }
 
-    DualNatureLeavesBattlefieldTriggeredAbility(DualNatureLeavesBattlefieldTriggeredAbility ability) {
+    private DualNatureLeavesBattlefieldTriggeredAbility(final DualNatureLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
@@ -176,7 +175,7 @@ class DualNatureExileEffect extends OneShotEffect {
         this.staticText = "exile all tokens created with {this}.";
     }
 
-    DualNatureExileEffect(final DualNatureExileEffect effect) {
+    private DualNatureExileEffect(final DualNatureExileEffect effect) {
         super(effect);
         this.cardZoneString = effect.cardZoneString;
     }

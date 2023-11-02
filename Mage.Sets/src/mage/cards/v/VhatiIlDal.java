@@ -55,7 +55,7 @@ class VhatiIlDalEffect extends OneShotEffect {
         this.staticText = "Until end of turn, target creature has base power 1 or base toughness 1";
     }
 
-    public VhatiIlDalEffect(final VhatiIlDalEffect effect) {
+    private VhatiIlDalEffect(final VhatiIlDalEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class TorgaarFamineIncarnateEffect extends OneShotEffect {
         this.staticText = "up to one target player's life total becomes half their starting life total, rounded down";
     }
 
-    public TorgaarFamineIncarnateEffect(final TorgaarFamineIncarnateEffect effect) {
+    private TorgaarFamineIncarnateEffect(final TorgaarFamineIncarnateEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class TorgaarFamineIncarnateEffectCostReductionEffect extends CostModificationEf
         staticText = "This spell costs {2} less to cast for each creature sacrificed this way";
     }
 
-    public TorgaarFamineIncarnateEffectCostReductionEffect(final TorgaarFamineIncarnateEffectCostReductionEffect effect) {
+    private TorgaarFamineIncarnateEffectCostReductionEffect(final TorgaarFamineIncarnateEffectCostReductionEffect effect) {
         super(effect);
     }
 

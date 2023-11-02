@@ -375,11 +375,18 @@ public final class StaticFilters {
         FILTER_CONTROLLED_A_PERMANENT.setLockedFilter(true);
     }
 
-    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_PERMANENT = new FilterControlledPermanent("another target permanent you control");
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_PERMANENT = new FilterControlledPermanent("another permanent you control");
 
     static {
         FILTER_CONTROLLED_ANOTHER_PERMANENT.add(AnotherPredicate.instance);
         FILTER_CONTROLLED_ANOTHER_PERMANENT.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_TARGET_PERMANENT = new FilterControlledPermanent("another target permanent you control");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_TARGET_PERMANENT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_TARGET_PERMANENT.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENTS = new FilterControlledPermanent("permanents you control");
@@ -481,6 +488,20 @@ public final class StaticFilters {
 
     static {
         FILTER_CONTROLLED_PERMANENT_ENCHANTMENT.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT = new FilterControlledEnchantmentPermanent("an enchantment you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT = new FilterControlledPermanent("another enchantment");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.add(CardType.ENCHANTMENT.getPredicate());
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_LAND = new FilterControlledLandPermanent();
@@ -625,6 +646,14 @@ public final class StaticFilters {
         FILTER_CONTROLLED_CREATURES.setLockedFilter(true);
     }
 
+
+    public static final FilterControlledCreaturePermanent FILTER_OTHER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("other creatures you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_CREATURES.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_CREATURES.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
 
     static {
@@ -643,6 +672,13 @@ public final class StaticFilters {
     static {
         FILTER_ANOTHER_CREATURE_YOU_CONTROL.add(AnotherPredicate.instance);
         FILTER_ANOTHER_CREATURE_YOU_CONTROL.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL = new FilterControlledCreaturePermanent("another target creature you control");
+
+    static {
+        FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURE = new FilterControlledCreaturePermanent("untapped creature you control");
@@ -995,6 +1031,13 @@ public final class StaticFilters {
         FILTER_SPELL_KICKED_A.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENT_TOKEN = new FilterPermanent("token");
+
+    static {
+        FILTER_PERMANENT_TOKEN.add(TokenPredicate.TRUE);
+        FILTER_PERMANENT_TOKEN.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKEN = new FilterCreaturePermanent("creature token");
 
     static {
@@ -1186,4 +1229,11 @@ public final class StaticFilters {
         FILTER_PLAYER_CONTROLLER.add(TargetController.YOU.getPlayerPredicate());
         FILTER_PLAYER_CONTROLLER.setLockedFilter(true);
     }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_FOOD = new FilterControlledPermanent(SubType.FOOD, "Food");
+
+    static {
+        FILTER_CONTROLLED_FOOD.setLockedFilter(true);
+    }
+
 }

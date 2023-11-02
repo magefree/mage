@@ -53,7 +53,7 @@ class StalkingVengeanceDamageEffect extends OneShotEffect {
         this.staticText = "it deals damage equal to its power to target player or planeswalker";
     }
 
-    public StalkingVengeanceDamageEffect(final StalkingVengeanceDamageEffect effect) {
+    private StalkingVengeanceDamageEffect(final StalkingVengeanceDamageEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class StalkingVengeanceDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
         if (creature != null) {
-            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), creature.getPower().getValue(), creature.getId(), source, game, false, true);
+            game.damagePlayerOrPermanent(source.getFirstTarget(), creature.getPower().getValue(), creature.getId(), source, game, false, true);
             return true;
         }
         return false;

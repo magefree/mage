@@ -63,7 +63,7 @@ class PrismaticCircleEffect extends PreventNextDamageFromChosenSourceToYouEffect
         super.init(source, game);
     }
 
-    public PrismaticCircleEffect(PrismaticCircleEffect effect) {
+    private PrismaticCircleEffect(final PrismaticCircleEffect effect) {
         super(effect);
     }
 

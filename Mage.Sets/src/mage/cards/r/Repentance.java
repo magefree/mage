@@ -44,7 +44,7 @@ class RepentanceEffect extends OneShotEffect {
         this.staticText = "Target creature deals damage to itself equal to its power";
     }
 
-    public RepentanceEffect(final RepentanceEffect effect) {
+    private RepentanceEffect(final RepentanceEffect effect) {
         super(effect);
     }
 

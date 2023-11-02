@@ -59,7 +59,7 @@ class OakenformEffect extends ContinuousEffectImpl {
         staticText = "Enchanted creature gets +3/+3";
     }
 
-    public OakenformEffect(final OakenformEffect effect) {
+    private OakenformEffect(final OakenformEffect effect) {
         super(effect);
     }
 

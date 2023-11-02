@@ -55,7 +55,7 @@ class SwathcutterGiantEffect extends OneShotEffect {
                 + "defending player controls.";
     }
 
-    public SwathcutterGiantEffect(final SwathcutterGiantEffect effect) {
+    private SwathcutterGiantEffect(final SwathcutterGiantEffect effect) {
         super(effect);
     }
 

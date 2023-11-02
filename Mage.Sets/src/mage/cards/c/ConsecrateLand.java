@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -38,7 +37,7 @@ public final class ConsecrateLand extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land is indestructible and can't be enchanted by other Auras.
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land is indestructible"));
+        Ability ability2 = new SimpleStaticAbility(new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has indestructible"));
         ability2.addEffect(new ConsecrateLandRuleEffect());
         this.addAbility(ability2);
     }
@@ -61,7 +60,7 @@ class ConsecrateLandRuleEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "and can't be enchanted by other Auras";
     }
 
-    public ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
+    private ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
         super(effect);
     }
 

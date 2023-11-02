@@ -16,7 +16,7 @@ public class BrainstormEffect extends OneShotEffect {
         staticText = "draw three cards, then put two cards from your hand on top of your library in any order";
     }
 
-    public BrainstormEffect(final BrainstormEffect effect) {
+    protected BrainstormEffect(final BrainstormEffect effect) {
         super(effect);
     }
 

@@ -70,7 +70,7 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
                 "If you don't cast it, draw a card.";
     }
 
-    public YennettCrypticSovereignEffect(final YennettCrypticSovereignEffect effect) {
+    private YennettCrypticSovereignEffect(final YennettCrypticSovereignEffect effect) {
         super(effect);
     }
 

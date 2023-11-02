@@ -64,7 +64,7 @@ class CommandeerEffect extends OneShotEffect {
                 "the permanent enters the battlefield under your control.)</i>";
     }
 
-    public CommandeerEffect(final CommandeerEffect effect) {
+    private CommandeerEffect(final CommandeerEffect effect) {
         super(effect);
     }
 

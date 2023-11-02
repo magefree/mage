@@ -36,7 +36,7 @@ public final class NumaiOutcast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NumaiOutcast (final NumaiOutcast card) {
+    private NumaiOutcast(final NumaiOutcast card) {
         super(card);
     }
 

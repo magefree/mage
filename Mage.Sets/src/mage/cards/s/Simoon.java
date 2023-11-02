@@ -47,7 +47,7 @@ class SimoonEffect extends OneShotEffect {
         this.staticText = "{this} deals 1 damage to each creature target opponent controls";
     }
 
-    public SimoonEffect(final SimoonEffect effect) {
+    private SimoonEffect(final SimoonEffect effect) {
         super(effect);
     }
 

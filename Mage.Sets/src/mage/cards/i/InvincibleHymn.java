@@ -42,7 +42,7 @@ class InvincibleHymnEffect extends OneShotEffect {
         this.staticText = "Count the number of cards in your library. Your life total becomes that number";
     }
 
-    public InvincibleHymnEffect(final InvincibleHymnEffect effect) {
+    private InvincibleHymnEffect(final InvincibleHymnEffect effect) {
         super(effect);
     }
 

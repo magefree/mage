@@ -121,6 +121,8 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Forbidden Lore", 236, Rarity.RARE, mage.cards.f.ForbiddenLore.class));
         cards.add(new SetCardInfo("Force Void", 70, Rarity.UNCOMMON, mage.cards.f.ForceVoid.class));
         cards.add(new SetCardInfo("Forest", 380, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 381, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 382, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Lore", 237, Rarity.UNCOMMON, mage.cards.f.ForgottenLore.class));
         cards.add(new SetCardInfo("Formation", 25, Rarity.RARE, mage.cards.f.Formation.class));
         cards.add(new SetCardInfo("Foul Familiar", 126, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
@@ -199,6 +201,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Kjeldoran Dead", 137, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
         cards.add(new SetCardInfo("Kjeldoran Elite Guard", 34, Rarity.UNCOMMON, mage.cards.k.KjeldoranEliteGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Frostbeast", 296, Rarity.UNCOMMON, mage.cards.k.KjeldoranFrostbeast.class));
+        cards.add(new SetCardInfo("Kjeldoran Guard", 35, Rarity.COMMON, mage.cards.k.KjeldoranGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Knight", 36, Rarity.RARE, mage.cards.k.KjeldoranKnight.class));
         cards.add(new SetCardInfo("Kjeldoran Phalanx", 37, Rarity.RARE, mage.cards.k.KjeldoranPhalanx.class));
         cards.add(new SetCardInfo("Kjeldoran Royal Guard", 38, Rarity.RARE, mage.cards.k.KjeldoranRoyalGuard.class));

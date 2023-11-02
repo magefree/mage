@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.continuous;
 
 import mage.ObjectColor;
@@ -14,20 +12,18 @@ import mage.game.permanent.Permanent;
  */
 public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
 
-    private ObjectColor addedColor;
-    private AttachmentType attachmentType;
+    private final ObjectColor addedColor;
 
-    public AddCardColorAttachedEffect(ObjectColor addedColor, Duration duration, AttachmentType attachmentType) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+    public AddCardColorAttachedEffect(ObjectColor addedColor, AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         this.addedColor = addedColor;
-        this.attachmentType = attachmentType;
-        setText();
+        staticText = attachmentType.verb() + " creature is " + addedColor.getDescription()
+                + " in addition to its other colors";
     }
 
-    public AddCardColorAttachedEffect(final AddCardColorAttachedEffect effect) {
+    protected AddCardColorAttachedEffect(final AddCardColorAttachedEffect effect) {
         super(effect);
         this.addedColor = effect.addedColor;
-        this.attachmentType = effect.attachmentType;
     }
 
     @Override
@@ -56,10 +52,4 @@ public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
         return new AddCardColorAttachedEffect(this);
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb());
-        sb.append(" creature is a ").append(addedColor.getDescription()).append(" in addition to its colors");
-        staticText = sb.toString();
-    }
 }

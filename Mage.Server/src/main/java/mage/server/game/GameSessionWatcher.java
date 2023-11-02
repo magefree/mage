@@ -58,7 +58,7 @@ public class GameSessionWatcher {
 
     public void inform(final String message) {
         if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message))));
+            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_UPDATE_AND_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message))));
         }
 
     }

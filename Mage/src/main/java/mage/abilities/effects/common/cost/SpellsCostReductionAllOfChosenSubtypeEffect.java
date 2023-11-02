@@ -8,7 +8,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReductionAllEffect {
@@ -21,7 +20,7 @@ public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReduc
         super(filter, amount, false, onlyControlled);
     }
 
-    public SpellsCostReductionAllOfChosenSubtypeEffect(final SpellsCostReductionAllOfChosenSubtypeEffect effect) {
+    protected SpellsCostReductionAllOfChosenSubtypeEffect(final SpellsCostReductionAllOfChosenSubtypeEffect effect) {
         super(effect);
     }
 

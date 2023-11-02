@@ -50,7 +50,7 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
         this.staticText = "<i>Tempting offer</i> &mdash; Search your library for a land card and put it onto the battlefield. Each opponent may search their library for a land card and put it onto the battlefield. For each opponent who searches a library this way, search your library for a land card and put it onto the battlefield. Then each player who searched a library this way shuffles";
     }
 
-    public TemptWithDiscoveryEffect(final TemptWithDiscoveryEffect effect) {
+    private TemptWithDiscoveryEffect(final TemptWithDiscoveryEffect effect) {
         super(effect);
     }
 

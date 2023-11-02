@@ -42,7 +42,7 @@ class SlimeMoldingEffect extends OneShotEffect {
         staticText = "Create an X/X green Ooze creature token";
     }
 
-    public SlimeMoldingEffect(SlimeMoldingEffect ability) {
+    private SlimeMoldingEffect(final SlimeMoldingEffect ability) {
         super(ability);
     }
 

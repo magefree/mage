@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.ruleModifying;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
@@ -30,7 +31,7 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         this.staticText = "You may play " + filter.getMessage() + " from your graveyard";
     }
 
-    public PlayLandsFromGraveyardControllerEffect(final PlayLandsFromGraveyardControllerEffect effect) {
+    protected PlayLandsFromGraveyardControllerEffect(final PlayLandsFromGraveyardControllerEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -48,6 +49,10 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         // current card's part
         Card cardToCheck = game.getCard(objectId);
         if (cardToCheck == null) {
@@ -55,13 +60,13 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         }
 
         // must be you
-        if (!affectedControllerId.equals(source.getControllerId())) {
+        if (!playerId.equals(source.getControllerId())) {
             return false;
         }
 
         // must be your card
         Player player = game.getPlayer(cardToCheck.getOwnerId());
-        if (player == null || !player.getId().equals(affectedControllerId)) {
+        if (player == null || !player.getId().equals(playerId)) {
             return false;
         }
 
@@ -75,8 +80,10 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         if (!cardToCheck.isLand(game) && cardToCheck.getManaCost().isEmpty()) {
             return false;
         }
-
+        if (affectedAbility instanceof SpellAbility){
+            cardToCheck = ((SpellAbility) affectedAbility).getCharacteristics(game);
+        }
         // must be correct card
-        return filter.match(cardToCheck, affectedControllerId, source, game);
+        return filter.match(cardToCheck, playerId, source, game);
     }
 }

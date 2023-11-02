@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class MelekIzzetParagon extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("cast instant or sorcery spells");
+    private static final FilterCard filter = new FilterCard("cast instant and sorcery spells");
 
     static {
         filter.add(Predicates.or(
@@ -68,7 +68,7 @@ class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), false);
     }
 
-    public MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {
+    private MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {
         super(ability);
     }
 

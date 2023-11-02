@@ -19,7 +19,7 @@ public final class KithkinSoldierToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public KithkinSoldierToken(final KithkinSoldierToken token) {
+    protected KithkinSoldierToken(final KithkinSoldierToken token) {
         super(token);
     }
 

@@ -30,7 +30,7 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
         this.multiplier = multiplier;
     }
 
-    public DamageWithPowerFromOneToAnotherTargetEffect(final DamageWithPowerFromOneToAnotherTargetEffect effect) {
+    protected DamageWithPowerFromOneToAnotherTargetEffect(final DamageWithPowerFromOneToAnotherTargetEffect effect) {
         super(effect);
         this.firstTargetName = effect.firstTargetName;
         this.multiplier = effect.multiplier;

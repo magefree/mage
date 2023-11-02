@@ -31,8 +31,9 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
     private static final String COMMANDER_NAME_OATHBREAKER = "Oathbreaker";
     private static final String COMMANDER_NAME_SIGNATURE_SPELL = "Signature Spell";
 
-    public OathbreakerFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 100);
+    public OathbreakerFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range,
+                                 Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 100, startLife, startHandSize);
         this.startingPlayerSkipsDraw = false;
     }
 

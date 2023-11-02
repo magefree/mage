@@ -28,7 +28,7 @@ public final class LightningRagerToken extends TokenImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
     }
 
-    public LightningRagerToken(final LightningRagerToken token) {
+    protected LightningRagerToken(final LightningRagerToken token) {
         super(token);
     }
 

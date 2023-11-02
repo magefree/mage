@@ -50,7 +50,7 @@ class BarbarianBullyEffect extends OneShotEffect {
                 + "unless a player has {this} deal 4 damage to them";
     }
 
-    public BarbarianBullyEffect(final BarbarianBullyEffect effect) {
+    private BarbarianBullyEffect(final BarbarianBullyEffect effect) {
         super(effect);
     }
 

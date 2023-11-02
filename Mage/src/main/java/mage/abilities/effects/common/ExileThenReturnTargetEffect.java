@@ -8,12 +8,12 @@ import mage.constants.Outcome;
 import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author xenohedron
@@ -50,15 +50,15 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Set<Card> toFlicker = new LinkedHashSet<>();
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                continue;
-            }
-            toFlicker.add(permanent);
+        if (controller == null) {
+            return false;
         }
-        if (controller == null || toFlicker.isEmpty()) {
+        Set<Card> toFlicker = getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        if (toFlicker.isEmpty()) {
             return false;
         }
         controller.moveCards(toFlicker, Zone.EXILED, source, game);

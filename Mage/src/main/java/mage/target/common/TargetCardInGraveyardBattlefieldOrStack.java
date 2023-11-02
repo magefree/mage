@@ -32,7 +32,11 @@ public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
     protected final FilterSpell filterSpell;
 
     public TargetCardInGraveyardBattlefieldOrStack(int minNumTargets, int maxNumTargets, FilterCard filterGraveyard, FilterPermanent filterBattlefield) {
-        this(minNumTargets, maxNumTargets, filterGraveyard, filterBattlefield, defaultSpellFilter, null);
+        this(minNumTargets, maxNumTargets, filterGraveyard, filterBattlefield, null);
+    }
+
+    public TargetCardInGraveyardBattlefieldOrStack(int minNumTargets, int maxNumTargets, FilterCard filterGraveyard, FilterPermanent filterBattlefield, String targetName) {
+        this(minNumTargets, maxNumTargets, filterGraveyard, filterBattlefield, defaultSpellFilter, targetName);
     }
 
     public TargetCardInGraveyardBattlefieldOrStack(int minNumTargets, int maxNumTargets, FilterCard filterGraveyard, FilterPermanent filterBattlefield, FilterSpell filterSpell, String targetName) {
@@ -40,13 +44,13 @@ public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
         this.filterPermanent = filterBattlefield;
         this.filterSpell = filterSpell;
         this.targetName = targetName != null ? targetName : filter.getMessage()
-                + " in a graveyard "
+                + " in a graveyard"
                 + (maxNumTargets > 1 ? " and/or " : " or ")
                 + this.filterPermanent.getMessage()
                 + " on the battlefield";
     }
 
-    public TargetCardInGraveyardBattlefieldOrStack(final TargetCardInGraveyardBattlefieldOrStack target) {
+    protected TargetCardInGraveyardBattlefieldOrStack(final TargetCardInGraveyardBattlefieldOrStack target) {
         super(target);
         this.filterPermanent = target.filterPermanent;
         this.filterSpell = target.filterSpell;

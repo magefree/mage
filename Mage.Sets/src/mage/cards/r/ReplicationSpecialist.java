@@ -47,7 +47,7 @@ public final class ReplicationSpecialist extends CardImpl {
                         new CreateTokenCopyTargetEffect()
                                 .setText("create a token that's a copy of that artifact"),
                         new ManaCostsImpl<>("{1}{U}")
-                ), filter, false, SetTargetPointer.PERMANENT, null
+                ), filter, false, SetTargetPointer.PERMANENT
         ));
     }
 

@@ -50,7 +50,7 @@ class EchoingCourageEffect extends OneShotEffect {
         this.staticText = "Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn";
     }
 
-    public EchoingCourageEffect(final EchoingCourageEffect effect) {
+    private EchoingCourageEffect(final EchoingCourageEffect effect) {
         super(effect);
     }
 

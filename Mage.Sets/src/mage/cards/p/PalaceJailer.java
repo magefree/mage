@@ -68,7 +68,7 @@ class PalaceJailerExileEffect extends OneShotEffect {
         this.staticText = "exile target creature an opponent controls until an opponent becomes the monarch. <i>(That creature returns under its owner's control.)</i>";
     }
 
-    public PalaceJailerExileEffect(final PalaceJailerExileEffect effect) {
+    private PalaceJailerExileEffect(final PalaceJailerExileEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility extends DelayedTr
         this.setRuleVisible(false);
     }
 
-    public OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility(final OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility ability) {
+    private OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility(final OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility ability) {
         super(ability);
     }
 
@@ -122,7 +122,7 @@ class PalaceJailerReturnExiledPermanentsEffect extends OneShotEffect {
         this.staticText = "Return exiled creature";
     }
 
-    public PalaceJailerReturnExiledPermanentsEffect(final PalaceJailerReturnExiledPermanentsEffect effect) {
+    private PalaceJailerReturnExiledPermanentsEffect(final PalaceJailerReturnExiledPermanentsEffect effect) {
         super(effect);
     }
 

@@ -30,7 +30,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
-        target.setNotTarget(true); // sacrifice is never targeted
+        target.withNotTarget(true); // sacrifice is never targeted
         target.setRequired(false); // can be canceled
         this.text = "sacrifice " + makeText(target);
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
@@ -60,7 +60,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
                 if (permanent == null) {
                     return false;
                 }
-                permanents.add(permanent.copy());
+                addSacrificeTarget(game, permanent);
                 paid |= permanent.sacrifice(source, game);
             }
             if (!paid && targets.get(0).getNumberOfTargets() == 0) {
@@ -68,6 +68,10 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
             }
         }
         return paid;
+    }
+
+    protected void addSacrificeTarget(Game game, Permanent permanent) {
+        permanents.add(permanent.copy());
     }
 
     @Override
@@ -108,7 +112,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         return permanents;
     }
 
-    private static final String makeText(TargetControlledPermanent target) {
+    private static String makeText(TargetControlledPermanent target) {
         if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
             return target.getTargetName();
         }

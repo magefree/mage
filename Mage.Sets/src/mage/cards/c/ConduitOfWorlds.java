@@ -45,7 +45,7 @@ public final class ConduitOfWorlds extends CardImpl {
         // {T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new ConduitOfWorldsEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        this.addAbility(ability, new SpellsCastWatcher());
+        this.addAbility(ability);
     }
 
     private ConduitOfWorlds(final ConduitOfWorlds card) {
@@ -111,7 +111,7 @@ class ConduitOfWorldsCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public ConduitOfWorldsCantCastEffect(final ConduitOfWorldsCantCastEffect effect) {
+    private ConduitOfWorldsCantCastEffect(final ConduitOfWorldsCantCastEffect effect) {
         super(effect);
     }
 

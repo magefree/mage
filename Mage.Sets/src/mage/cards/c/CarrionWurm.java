@@ -54,7 +54,7 @@ class CarrionWurmEffect extends OneShotEffect {
         this.staticText = "any player may exile three cards from their graveyard. If a player does, {this} assigns no combat damage this turn";
     }
 
-    public CarrionWurmEffect(final CarrionWurmEffect effect) {
+    private CarrionWurmEffect(final CarrionWurmEffect effect) {
         super(effect);
     }
 

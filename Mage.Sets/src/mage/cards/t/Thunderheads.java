@@ -45,7 +45,7 @@ class ThunderheadsEffect extends OneShotEffect {
         this.staticText = "Create a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.";
     }
 
-    public ThunderheadsEffect(ThunderheadsEffect effect) {
+    private ThunderheadsEffect(final ThunderheadsEffect effect) {
         super(effect);
     }
 

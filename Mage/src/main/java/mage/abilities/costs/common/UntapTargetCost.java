@@ -25,10 +25,10 @@ public class UntapTargetCost extends CostImpl {
         this.text = makeText(target);
 
         // It will never target as part of a cost
-        this.target.setNotTarget(true);
+        this.target.withNotTarget(true);
     }
 
-    public UntapTargetCost(final UntapTargetCost cost) {
+    protected UntapTargetCost(final UntapTargetCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }

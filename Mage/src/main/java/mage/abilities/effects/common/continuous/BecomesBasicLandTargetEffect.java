@@ -64,7 +64,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         this.loseOther = loseOther;
     }
 
-    public BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
+    protected BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
         super(effect);
         this.landTypes.addAll(effect.landTypes);
         this.chooseLandType = effect.chooseLandType;

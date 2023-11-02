@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class DjinnToken extends TokenImpl {
@@ -22,7 +22,7 @@ public final class DjinnToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public DjinnToken(final DjinnToken token) {
+    protected DjinnToken(final DjinnToken token) {
         super(token);
     }
 

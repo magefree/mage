@@ -45,7 +45,7 @@ public final class WeaverOfLies extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {4}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{U}")));
 
         // When Weaver of Lies is turned face up, turn any number of target creatures with a morph ability other than Weaver of Lies face down.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new WeaverOfLiesEffect(), false, false);
@@ -70,7 +70,7 @@ class WeaverOfLiesEffect extends OneShotEffect {
         this.staticText = "turn any number of target creatures with morph abilities other than {this} face down";
     }
 
-    WeaverOfLiesEffect(final WeaverOfLiesEffect effect) {
+    private WeaverOfLiesEffect(final WeaverOfLiesEffect effect) {
         super(effect);
     }
 

@@ -86,7 +86,7 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a card cast this way would be put into a graveyard this turn, exile it instead";
     }
 
-    public JayaBallardReplacementEffect(final JayaBallardReplacementEffect effect) {
+    protected JayaBallardReplacementEffect(final JayaBallardReplacementEffect effect) {
         super(effect);
     }
 

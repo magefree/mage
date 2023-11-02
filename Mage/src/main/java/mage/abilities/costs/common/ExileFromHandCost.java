@@ -42,7 +42,7 @@ public class ExileFromHandCost extends CostImpl {
         this.setXFromCMC = setXFromCMC;
     }
 
-    public ExileFromHandCost(final ExileFromHandCost cost) {
+    protected ExileFromHandCost(final ExileFromHandCost cost) {
         super(cost);
         for (Card card : cost.cards) {
             this.cards.add(card.copy());
@@ -74,7 +74,7 @@ public class ExileFromHandCost extends CostImpl {
                 // TODO: wtf, look at setXFromCMC usage -- it used in cards with alternative costs, not additional... need to fix?
                 vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
-                ability.getManaCostsToPay().add(vmc);
+                ability.addManaCostsToPay(vmc);
             }
         }
         return paid;

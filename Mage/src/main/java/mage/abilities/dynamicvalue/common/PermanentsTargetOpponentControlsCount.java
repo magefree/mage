@@ -1,6 +1,7 @@
 package mage.abilities.dynamicvalue.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -8,7 +9,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 
 /**
- *
  * @author LoneFox
  */
 public class PermanentsTargetOpponentControlsCount implements DynamicValue {
@@ -29,7 +29,7 @@ public class PermanentsTargetOpponentControlsCount implements DynamicValue {
         this.multiplier = multiplier;
     }
 
-    public PermanentsTargetOpponentControlsCount(final PermanentsTargetOpponentControlsCount dynamicValue) {
+    protected PermanentsTargetOpponentControlsCount(final PermanentsTargetOpponentControlsCount dynamicValue) {
         this.filter = dynamicValue.filter;
         this.multiplier = dynamicValue.multiplier;
     }

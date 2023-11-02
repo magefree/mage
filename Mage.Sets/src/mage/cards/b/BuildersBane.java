@@ -59,7 +59,7 @@ class BuildersBaneEffect extends OneShotEffect {
         this.staticText = "Destroy X target artifacts. {this} deals damage to each player equal to the number of artifacts they controlled that were put into a graveyard this way";
     }
 
-    public BuildersBaneEffect(final BuildersBaneEffect effect) {
+    private BuildersBaneEffect(final BuildersBaneEffect effect) {
         super(effect);
     }
 

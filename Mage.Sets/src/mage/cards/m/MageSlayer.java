@@ -47,7 +47,7 @@ class MageSlayerEffect extends OneShotEffect {
         staticText = "it deals damage equal to its power to the player or planeswalker it's attacking";
     }
 
-    public MageSlayerEffect(final MageSlayerEffect effect) {
+    private MageSlayerEffect(final MageSlayerEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class MageSlayerEffect extends OneShotEffect {
         if (attacker == null) {
             return false;
         }
-        game.damagePlayerOrPlaneswalker(
+        game.damagePlayerOrPermanent(
                 game.getCombat().getDefenderId(attacker.getId()),
                 attacker.getPower().getValue(),
                 attacker.getId(),

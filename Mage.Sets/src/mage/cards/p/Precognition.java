@@ -52,7 +52,7 @@ class PrecognitionEffect extends OneShotEffect {
         staticText = "";
     }
 
-    public PrecognitionEffect(final PrecognitionEffect effect) {
+    private PrecognitionEffect(final PrecognitionEffect effect) {
         super(effect);
     }
 

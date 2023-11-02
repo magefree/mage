@@ -47,7 +47,7 @@ enum FireballAdjuster implements CostAdjuster {
     public void adjustCosts(Ability ability, Game game) {
         int numTargets = ability.getTargets().isEmpty() ? 0 : ability.getTargets().get(0).getTargets().size();
         if (numTargets > 1) {
-            ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
+            ability.addManaCostsToPay(new GenericManaCost(numTargets - 1));
         }
     }
 }
@@ -60,7 +60,7 @@ class FireballEffect extends OneShotEffect {
                 "X damage divided evenly, rounded down, among any number of targets";
     }
 
-    public FireballEffect(final FireballEffect effect) {
+    private FireballEffect(final FireballEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
         super(minNumTargets, maxNumTargets);
     }
 
-    public FireballTargetCreatureOrPlayer(final FireballTargetCreatureOrPlayer target) {
+    private FireballTargetCreatureOrPlayer(final FireballTargetCreatureOrPlayer target) {
         super(target);
     }
 

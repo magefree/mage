@@ -39,7 +39,7 @@ public final class MausoleumHarpy extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL),
                 CitysBlessingCondition.instance,
-                "Whenever another creature you control dies, if you have the city's blessing, put a +1/+1 counter on {this}. ")
+                "Whenever another creature you control dies, if you have the city's blessing, put a +1/+1 counter on {this}.")
                 .addHint(CitysBlessingHint.instance));
 
     }

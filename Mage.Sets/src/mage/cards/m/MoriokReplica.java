@@ -40,7 +40,7 @@ public final class MoriokReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoriokReplica (final MoriokReplica card) {
+    private MoriokReplica(final MoriokReplica card) {
         super(card);
     }
 

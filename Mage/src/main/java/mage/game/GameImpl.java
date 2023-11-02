@@ -22,6 +22,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -41,6 +42,7 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
+import mage.game.command.emblems.EmblemOfCard;
 import mage.game.command.emblems.TheRingEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
@@ -63,10 +65,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
-import mage.util.GameLog;
-import mage.util.MessageToClient;
-import mage.util.RandomUtil;
+import mage.util.*;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
 import mage.watchers.common.*;
@@ -119,7 +118,7 @@ public abstract class GameImpl implements Game {
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
     protected GameState state;
-    private transient Stack<Integer> savedStates = new Stack<>();
+    private transient Stack<Integer> savedStates = new Stack<>(); // bookmarks - 0-base refs to gameStates
     protected transient GameStates gameStates = new GameStates();
 
     // game states to allow player rollback
@@ -142,7 +141,8 @@ public abstract class GameImpl implements Game {
 
     private boolean scopeRelevant = false; // replacement effects: used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
     private boolean saveGame = false; // replay code, not done
-    private int priorityTime; // match time limit
+    private int priorityTime; // Match time limit (per player). Set at the start of the match and only goes down.
+    private int bufferTime; // Buffer time before priority time starts going down. Buffer time is refreshed every time the timer starts.
     private final int startingLife;
     private final int startingHandSize;
     private final int minimumDeckSize;
@@ -157,7 +157,7 @@ public abstract class GameImpl implements Game {
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize, int startingHandSize) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startingLife, int startingHandSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
@@ -171,7 +171,7 @@ public abstract class GameImpl implements Game {
         initGameDefaultWatchers();
     }
 
-    public GameImpl(final GameImpl game) {
+    protected GameImpl(final GameImpl game) {
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
         this.simulation = game.simulation;
@@ -252,6 +252,7 @@ public abstract class GameImpl implements Game {
         this.scopeRelevant = game.scopeRelevant;
         this.saveGame = game.saveGame;
         this.priorityTime = game.priorityTime;
+        this.bufferTime = game.bufferTime;
         this.startingLife = game.startingLife;
         this.startingHandSize = game.startingHandSize;
         this.minimumDeckSize = game.minimumDeckSize;
@@ -933,14 +934,27 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void removeBookmark(int bookmark
-    ) {
+    public void removeBookmark(int bookmark) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {
                     savedStates.pop();
                 }
                 gameStates.remove(bookmark);
+            }
+        }
+    }
+
+    @Override
+    public void removeBookmark_v2(int bookmark) {
+        if (!simulation) {
+            if (bookmark != 0) {
+                while (savedStates.size() >= bookmark) {
+                    int outdatedIndex = savedStates.pop();
+                    while (gameStates.getSize() - 1 >= outdatedIndex) {
+                        gameStates.remove(gameStates.getSize() - 1);
+                    }
+                }
             }
         }
     }
@@ -1038,7 +1052,7 @@ public abstract class GameImpl implements Game {
 
     private boolean playExtraTurns() {
         //20091005 - 500.7
-        TurnMod extraTurn = getNextExtraTurn();
+        TurnMod extraTurn = useNextExtraTurn();
         try {
             while (extraTurn != null) {
                 GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, extraTurn.getPlayerId());
@@ -1046,15 +1060,16 @@ public abstract class GameImpl implements Game {
                     Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
                     if (extraPlayer != null && extraPlayer.canRespond()) {
                         state.setExtraTurnId(extraTurn.getId());
-                        if (!this.isSimulation()) {
-                            informPlayers(extraPlayer.getLogName() + " takes an extra turn");
-                        }
+                        informPlayers(String.format("%s takes an extra turn%s",
+                                extraPlayer.getLogName(),
+                                extraTurn.getInfo()
+                        ));
                         if (!playTurn(extraPlayer)) {
                             return false;
                         }
                     }
                 }
-                extraTurn = getNextExtraTurn();
+                extraTurn = useNextExtraTurn();
             }
         } finally {
             state.setExtraTurnId(null);
@@ -1062,10 +1077,11 @@ public abstract class GameImpl implements Game {
         return true;
     }
 
-    private TurnMod getNextExtraTurn() {
+    private TurnMod useNextExtraTurn() {
         boolean checkForExtraTurn = true;
         while (checkForExtraTurn) {
-            TurnMod extraTurn = getState().getTurnMods().getNextExtraTurn();
+            // user's logs generated in parent method
+            TurnMod extraTurn = getState().getTurnMods().useNextExtraTurn();
             if (extraTurn != null) {
                 GameEvent event = new GameEvent(GameEvent.EventType.EXTRA_TURN, extraTurn.getId(), null, extraTurn.getPlayerId());
                 if (!replaceEvent(event)) {
@@ -1262,7 +1278,7 @@ public abstract class GameImpl implements Game {
                 player.initLife(this.getStartingLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, null, this);
+                mulligan.drawHand(startingHandSize, player, this);
             }
         }
 
@@ -1316,6 +1332,22 @@ public abstract class GameImpl implements Game {
             addPlane(plane, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
         }
+
+        if (!gameOptions.perPlayerEmblemCards.isEmpty()) {
+            for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+                for (DeckCardInfo info : gameOptions.perPlayerEmblemCards) {
+                    Card card = EmblemOfCard.cardFromDeckInfo(info);
+                    addEmblem(new EmblemOfCard(card), card, playerId);
+                }
+            }
+        }
+
+        if (!gameOptions.globalEmblemCards.isEmpty()) {
+            for (DeckCardInfo info : gameOptions.globalEmblemCards) {
+                Card card = EmblemOfCard.cardFromDeckInfo(info);
+                addEmblem(new EmblemOfCard(card), card, startingPlayerId);
+            }
+        }
     }
 
     public void initGameDefaultWatchers() {
@@ -1338,6 +1370,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
         newWatchers.add(new CreaturesDiedWatcher());
         newWatchers.add(new TemptedByTheRingWatcher());
+        newWatchers.add(new SpellsCastWatcher());
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -1714,8 +1747,8 @@ public abstract class GameImpl implements Game {
         // for Word of Command
         Spell spell = getSpellOrLKIStack(topId);
         if (spell != null) {
-            if (spell.getCommandedBy() != null) {
-                UUID commandedBy = spell.getCommandedBy();
+            if (spell.getCommandedByPlayerId() != null) {
+                UUID commandedBy = spell.getCommandedByPlayerId();
                 UUID spellControllerId;
                 if (commandedBy.equals(spell.getControllerId())) {
                     spellControllerId = spell.getSpellAbility().getFirstTarget(); // i.e. resolved spell is Word of Command
@@ -1735,7 +1768,7 @@ public abstract class GameImpl implements Game {
                         }
                     }
                 }
-                spell.setCommandedBy(null);
+                spell.setCommandedBy(null, null);
             }
         }
     }
@@ -1957,6 +1990,14 @@ public abstract class GameImpl implements Game {
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
                 TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
+            }
+            if (copyFromPermanent.isPrototyped()) {
+                Abilities<Ability> abilities = copyFromPermanent.getAbilities();
+                for (Ability ability : abilities){
+                    if (ability instanceof PrototypeAbility) {
+                        ((PrototypeAbility) ability).prototypePermanent(newBluePrint, this);
+                    }
+                }
             }
         }
         if (applier != null) {
@@ -2325,6 +2366,7 @@ public abstract class GameImpl implements Game {
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
+        Map<UUID, Map<UUID, Set<Permanent>>> roleMap = new HashMap<>();
         List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
             if (perm.isCreature(this)) {
@@ -2504,6 +2546,11 @@ public abstract class GameImpl implements Game {
                         }
                     }
                 }
+                if (perm.hasSubtype(SubType.ROLE, this) && state.getZone(perm.getId()) == Zone.BATTLEFIELD) {
+                    roleMap.computeIfAbsent(perm.getControllerId(), x -> new HashMap<>())
+                            .computeIfAbsent(perm.getAttachedTo(), x -> new HashSet<>())
+                            .add(perm);
+                }
             }
             // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
             // and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it.
@@ -2680,7 +2727,7 @@ public abstract class GameImpl implements Game {
                     continue;
                 }
                 Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                targetLegendaryToKeep.setNotTarget(true);
+                targetLegendaryToKeep.withNotTarget(true);
                 targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
@@ -2720,6 +2767,29 @@ public abstract class GameImpl implements Game {
                 for (Permanent permanent : worldEnchantment) {
                     if (newestPermanentControllerRange.contains(permanent.getControllerId())
                             && !Objects.equals(newestPermanent, permanent)) {
+                        movePermanentToGraveyardWithInfo(permanent);
+                        somethingHappened = true;
+                    }
+                }
+            }
+        }
+
+        if (!roleMap.isEmpty()) {
+            List<Set<Permanent>> rolesToHandle = roleMap.values()
+                    .stream()
+                    .map(Map::values)
+                    .flatMap(Collection::stream)
+                    .filter(s -> s.size() > 1)
+                    .collect(Collectors.toList());
+            if (!rolesToHandle.isEmpty()) {
+                for (Set<Permanent> roleSet : rolesToHandle) {
+                    int newest = roleSet
+                            .stream()
+                            .mapToInt(Permanent::getCreateOrder)
+                            .max()
+                            .orElse(-1);
+                    roleSet.removeIf(permanent -> permanent.getCreateOrder() == newest);
+                    for (Permanent permanent : roleSet) {
                         movePermanentToGraveyardWithInfo(permanent);
                         somethingHappened = true;
                     }
@@ -2885,7 +2955,8 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void fireGetMultiAmountEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options) {
+    public void fireGetMultiAmountEvent(UUID playerId, List<MultiAmountMessage> messages, int min, int max,
+                                        Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
@@ -3644,6 +3715,16 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public int getBufferTime() {
+        return bufferTime;
+    }
+
+    @Override
+    public void setBufferTime(int bufferTime) {
+        this.bufferTime = bufferTime;
+    }
+
+    @Override
     public UUID getStartingPlayerId() {
         return startingPlayerId;
     }
@@ -3819,17 +3900,17 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
-        return damagePlayerOrPlaneswalker(playerOrWalker, damage, attackerId, source, game, combatDamage, preventable, null);
+    public int damagePlayerOrPermanent(UUID playerOrPermanent, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
+        return damagePlayerOrPermanent(playerOrPermanent, damage, attackerId, source, game, combatDamage, preventable, null);
     }
 
     @Override
-    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
-        Player player = getPlayer(playerOrWalker);
+    public int damagePlayerOrPermanent(UUID playerOrPermanent, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+        Player player = getPlayer(playerOrPermanent);
         if (player != null) {
             return player.damage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
         }
-        Permanent permanent = getPermanent(playerOrWalker);
+        Permanent permanent = getPermanent(playerOrPermanent);
         if (permanent != null) {
             return permanent.damage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
         }
@@ -3848,7 +3929,7 @@ public abstract class GameImpl implements Game {
         return filterCommandersBySearchZone(mainCards, returnAllCardParts);
     }
 
-    final protected Set<UUID> filterCommandersBySearchZone(Set<UUID> commanderMainCards, boolean returnAllCardParts) {
+    protected final Set<UUID> filterCommandersBySearchZone(Set<UUID> commanderMainCards, boolean returnAllCardParts) {
         // filter by zone search (example: if you search commanders on battlefield then must see all sides of mdf cards)
         Set<UUID> filteredCards = new HashSet<>();
         if (returnAllCardParts) {

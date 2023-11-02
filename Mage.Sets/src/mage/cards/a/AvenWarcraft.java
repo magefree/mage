@@ -49,7 +49,7 @@ class AvenWarcraftEffect extends OneShotEffect {
                 + "choose a color. Creatures you control also gain protection from the chosen color until end of turn";
     }
 
-    AvenWarcraftEffect(final AvenWarcraftEffect effect) {
+    private AvenWarcraftEffect(final AvenWarcraftEffect effect) {
         super(effect);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class SwiftWarkite extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature card with mana value 3 or less from your hand or graveyard");
+    private static final FilterCard filter = new FilterCard("creature card with mana value 3 or less");
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
@@ -71,10 +70,10 @@ class SwiftWarkiteEffect extends OneShotEffect {
 
     SwiftWarkiteEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "that creature gains haste. Return it to your hand at the beginning of the next end step";
+        this.staticText = "That creature gains haste. Return it to your hand at the beginning of the next end step";
     }
 
-    SwiftWarkiteEffect(final SwiftWarkiteEffect effect) {
+    private SwiftWarkiteEffect(final SwiftWarkiteEffect effect) {
         super(effect);
     }
 

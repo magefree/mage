@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author Quercitron
  */
 public class PreventDamageToSourceEffect extends PreventionEffectImpl {
@@ -18,7 +17,7 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
         super(duration, amountToPrevent, false);
     }
 
-    public PreventDamageToSourceEffect(final PreventDamageToSourceEffect effect) {
+    protected PreventDamageToSourceEffect(final PreventDamageToSourceEffect effect) {
         super(effect);
     }
 
@@ -29,7 +28,7 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {

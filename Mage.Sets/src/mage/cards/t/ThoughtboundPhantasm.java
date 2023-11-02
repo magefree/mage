@@ -70,7 +70,7 @@ class ThoughtboundPhantasmTriggeredAbility extends TriggeredAbilityImpl {
         ), false);
     }
 
-    public ThoughtboundPhantasmTriggeredAbility(final ThoughtboundPhantasmTriggeredAbility ability) {
+    private ThoughtboundPhantasmTriggeredAbility(final ThoughtboundPhantasmTriggeredAbility ability) {
         super(ability);
     }
 

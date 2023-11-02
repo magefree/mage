@@ -18,7 +18,7 @@ public final class KherKeepKoboldToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public KherKeepKoboldToken(final KherKeepKoboldToken token) {
+    protected KherKeepKoboldToken(final KherKeepKoboldToken token) {
         super(token);
     }
 

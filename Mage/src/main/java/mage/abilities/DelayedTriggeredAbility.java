@@ -31,7 +31,7 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
         this.triggerOnlyOnce = triggerOnlyOnce;
     }
 
-    public DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
+    protected DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
         super(ability);
         this.duration = ability.duration;
         this.triggerOnlyOnce = ability.triggerOnlyOnce;

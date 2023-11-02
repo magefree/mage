@@ -52,7 +52,7 @@ class PsychicPurgeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new LoseLifeTargetEffect(5), false);
     }
 
-    public PsychicPurgeTriggeredAbility(final PsychicPurgeTriggeredAbility ability) {
+    private PsychicPurgeTriggeredAbility(final PsychicPurgeTriggeredAbility ability) {
         super(ability);
     }
 

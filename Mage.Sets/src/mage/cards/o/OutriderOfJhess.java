@@ -26,7 +26,7 @@ public final class OutriderOfJhess extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public OutriderOfJhess (final OutriderOfJhess card) {
+    private OutriderOfJhess(final OutriderOfJhess card) {
         super(card);
     }
 

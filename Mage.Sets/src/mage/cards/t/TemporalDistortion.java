@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -16,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -46,7 +44,7 @@ public final class TemporalDistortion extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(effect, false, filter, true));
 
         // Permanents with hourglass counters on them don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter2)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter2)));
 
         // At the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TemporalDistortionRemovalEffect(), TargetController.ANY, false));
@@ -64,12 +62,12 @@ public final class TemporalDistortion extends CardImpl {
 
 class TemporalDistortionRemovalEffect extends OneShotEffect {
 
-    public TemporalDistortionRemovalEffect() {
+    TemporalDistortionRemovalEffect() {
         super(Outcome.Neutral);
         staticText = "remove all hourglass counters from permanents that player controls";
     }
 
-    public TemporalDistortionRemovalEffect(final TemporalDistortionRemovalEffect effect) {
+    private TemporalDistortionRemovalEffect(final TemporalDistortionRemovalEffect effect) {
         super(effect);
     }
 

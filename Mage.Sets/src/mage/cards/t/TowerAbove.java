@@ -55,7 +55,7 @@ class TowerAboveEffect extends OneShotEffect {
         staticText = "Until end of turn, target creature gets +4/+4 and gains trample, wither, and \"When this creature attacks, target creature blocks it this turn if able.\"";
     }
 
-    public TowerAboveEffect(final TowerAboveEffect effect) {
+    private TowerAboveEffect(final TowerAboveEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class TowerAboveTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn), false);
     }
 
-    public TowerAboveTriggeredAbility(final TowerAboveTriggeredAbility ability) {
+    private TowerAboveTriggeredAbility(final TowerAboveTriggeredAbility ability) {
         super(ability);
     }
 

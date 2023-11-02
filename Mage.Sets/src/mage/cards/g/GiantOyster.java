@@ -74,7 +74,7 @@ class GiantOysterDontUntapAsLongAsSourceTappedEffect extends DontUntapAsLongAsSo
         staticText = "For as long as {this} remains tapped, target tapped creature doesn't untap during its controller's untap step";
     }
 
-    public GiantOysterDontUntapAsLongAsSourceTappedEffect(final GiantOysterDontUntapAsLongAsSourceTappedEffect effect) {
+    private GiantOysterDontUntapAsLongAsSourceTappedEffect(final GiantOysterDontUntapAsLongAsSourceTappedEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
         this.staticText = "at the beginning of each of your draw steps, put a -1/-1 counter on that creature. When {this} leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.";
     }
 
-    public GiantOysterCreateDelayedTriggerEffects(final GiantOysterCreateDelayedTriggerEffects effect) {
+    private GiantOysterCreateDelayedTriggerEffects(final GiantOysterCreateDelayedTriggerEffects effect) {
         super(effect);
     }
 
@@ -130,7 +130,7 @@ class GiantOysterLeaveUntapDelayedTriggeredAbility extends DelayedTriggeredAbili
         this.addEffect(new RemoveDelayedTriggeredAbilityEffect(abilityToCancel));
     }
 
-    public GiantOysterLeaveUntapDelayedTriggeredAbility(GiantOysterLeaveUntapDelayedTriggeredAbility ability) {
+    private GiantOysterLeaveUntapDelayedTriggeredAbility(final GiantOysterLeaveUntapDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -143,7 +143,6 @@ class GiantOysterLeaveUntapDelayedTriggeredAbility extends DelayedTriggeredAbili
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(GameEvent.EventType.UNTAPPED) && event.getTargetId() != null
                 && event.getTargetId().equals(getSourceId())) {
-            System.out.println("Untapped");
             return true;
         }
         return event.getType().equals(GameEvent.EventType.ZONE_CHANGE) && event.getTargetId() != null

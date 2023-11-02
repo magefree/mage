@@ -50,7 +50,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         this.staticText = "Reveal cards from the top of your library until you reveal a land card. {this} deals damage equal to the number of nonland cards revealed this way to any target. If the revealed land card was a Mountain, {this} deals double that damage instead. Put the revealed cards on the bottom of your library in any order";
     }
 
-    public GoblinCharbelcherEffect(final GoblinCharbelcherEffect effect) {
+    private GoblinCharbelcherEffect(final GoblinCharbelcherEffect effect) {
         super(effect);
     }
 

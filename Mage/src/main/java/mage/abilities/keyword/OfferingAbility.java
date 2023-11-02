@@ -124,7 +124,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
     }
 
-    public OfferingAsThoughEffect(final OfferingAsThoughEffect effect) {
+    protected OfferingAsThoughEffect(final OfferingAsThoughEffect effect) {
         super(effect);
     }
 

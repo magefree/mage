@@ -42,7 +42,7 @@ public final class BarrageOgre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarrageOgre (final BarrageOgre card) {
+    private BarrageOgre(final BarrageOgre card) {
         super(card);
     }
 

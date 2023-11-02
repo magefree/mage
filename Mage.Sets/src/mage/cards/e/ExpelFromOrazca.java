@@ -53,7 +53,7 @@ class ExpelFromOrazcaEffect extends OneShotEffect {
         this.staticText = "Return target nonland permanent to its owner's hand. If you have the city's blessing, you may put that permanent on top of its owner's library instead";
     }
 
-    public ExpelFromOrazcaEffect(final ExpelFromOrazcaEffect effect) {
+    private ExpelFromOrazcaEffect(final ExpelFromOrazcaEffect effect) {
         super(effect);
     }
 

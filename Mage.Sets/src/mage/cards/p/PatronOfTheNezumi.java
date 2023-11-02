@@ -60,7 +60,7 @@ class PatronOfTheNezumiTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
-    public PatronOfTheNezumiTriggeredAbility(final PatronOfTheNezumiTriggeredAbility ability) {
+    private PatronOfTheNezumiTriggeredAbility(final PatronOfTheNezumiTriggeredAbility ability) {
         super(ability);
     }
 

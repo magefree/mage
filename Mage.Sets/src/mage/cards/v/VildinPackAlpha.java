@@ -35,7 +35,7 @@ public final class VildinPackAlpha extends CardImpl {
         // Whenever a Werewolf enters the battlefield under your control, you may transform it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new VildinPackAlphaEffect(), filter,
-                true, SetTargetPointer.PERMANENT, null
+                true, SetTargetPointer.PERMANENT
         ));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Vildin-Pack Alpha.
@@ -59,7 +59,7 @@ class VildinPackAlphaEffect extends OneShotEffect {
         this.staticText = "you may transform it";
     }
 
-    public VildinPackAlphaEffect(final VildinPackAlphaEffect effect) {
+    private VildinPackAlphaEffect(final VildinPackAlphaEffect effect) {
         super(effect);
     }
 

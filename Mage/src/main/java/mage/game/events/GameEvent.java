@@ -75,7 +75,7 @@ public class GameEvent implements Serializable {
         ZONE_CHANGE_GROUP,
         DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
-        EXPLORED,
+        EXPLORE, EXPLORED, // targetId is exploring permanent
         ECHO_PAID,
         MIRACLE_CARD_REVEALED,
         /* MADNESS_CARD_EXILED,
@@ -84,7 +84,7 @@ public class GameEvent implements Serializable {
          playerId    controller of the card
          */
         MADNESS_CARD_EXILED,
-        INVESTIGATED,
+        INVESTIGATED, // playerId is the player who investigated
         KICKED,
         /* CONVOKED
          targetId    id of the creature that was taped to convoke the sourceId
@@ -118,10 +118,16 @@ public class GameEvent implements Serializable {
          */
         DAMAGED_PLAYER,
 
-        /* DAMAGED_PLAYER_BATCH
-         combines all player damaged events in one single event
+        /* DAMAGED_BATCH_FOR_PLAYERS,
+         combines all player damage events to a single batch (event)
          */
-        DAMAGED_PLAYER_BATCH,
+        DAMAGED_BATCH_FOR_PLAYERS,
+
+        /* DAMAGED_BATCH_FOR_ONE_PLAYER
+         combines all player damage events to a single batch (event) and split it per damaged player
+         playerId    the id of the damaged player
+         */
+        DAMAGED_BATCH_FOR_ONE_PLAYER,
 
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
@@ -326,7 +332,7 @@ public class GameEvent implements Serializable {
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
-        LIFE_PAID,
+        PAY_LIFE, LIFE_PAID,
         CASCADE_LAND,
         LEARN,
         //permanent events
@@ -339,18 +345,34 @@ public class GameEvent implements Serializable {
         /* TAPPED,
          targetId    tapped permanent
          sourceId    id of the ability's source (can be null for standard tap actions like combat)
-         playerId    controller of the tapped permanent
+         playerId    source's controller, null if no source
          amount      not used for this event
          flag        is it tapped for combat
          */
         TAPPED,
-        TAPPED_FOR_MANA,
         /* TAPPED_FOR_MANA
          During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
          By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana.
          IMPORTANT: Triggered non mana abilities have to ignore the event if game.inCheckPlayableState is true.
          */
-        UNTAP, UNTAPPED,
+        TAPPED_FOR_MANA,
+        /*  TAPPED_BATCH
+         combine all TAPPED events occuring at the same time in a single event
+         */
+        TAPPED_BATCH,
+        UNTAP,
+        /* UNTAPPED,
+         targetId    untapped permanent
+         sourceId    not used for this event // TODO: add source for untap?
+         playerId    controller of permanent // TODO: replace by source controller of untap? need to check every usage if so.
+         amount      not used for this event
+         flag        true if untapped during untap step (event is checked at upkeep so can't trust the current Phase)
+         */
+        UNTAPPED,
+        /*  UNTAPPED_BATCH
+         combine all UNTAPPED events occuring at the same time in a single event
+         */
+        UNTAPPED_BATCH,
         FLIP, FLIPPED,
         TRANSFORMING, TRANSFORMED,
         ADAPT,
@@ -401,10 +423,10 @@ public class GameEvent implements Serializable {
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
 
-        /*  DAMAGED_PERMANENT_BATCH
-         combine all permanent damage events to single event
+        /*  DAMAGED_BATCH_FOR_PERMANENTS
+         combine all permanent damage events to a single batch (event)
          */
-        DAMAGED_PERMANENT_BATCH,
+        DAMAGED_BATCH_FOR_PERMANENTS,
 
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
@@ -502,6 +524,22 @@ public class GameEvent implements Serializable {
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         FORETOLD, // targetId   id of card foretold
         FORETELL, // targetId   id of card foretell  playerId   id of the controller
+        /* villainous choice
+         targetId    player making the choice
+         sourceId    sourceId of the ability forcing the choice
+         playerId    controller of the ability forcing the choice
+         amount      number of times choice is repeated
+         flag        not used for this event
+         */
+        FACE_VILLAINOUS_CHOICE,
+        /* DISCOVER
+         targetId    not used for this event
+         sourceId    sourceId of the ability discovering
+         playerId    controller of the ability
+         amount      discover value
+         flag        not used for this event
+         */
+        DISCOVER,
         //custom events
         CUSTOM_EVENT
     }
@@ -587,6 +625,11 @@ public class GameEvent implements Serializable {
         return id;
     }
 
+    /**
+     * Some batch events can contain multiple events list, see BatchGameEvent for usage
+     *
+     * @return
+     */
     public UUID getTargetId() {
         return targetId;
     }
@@ -705,7 +748,7 @@ public class GameEvent implements Serializable {
         if (approvingObject == null) {
             return false;
         }
-        if (identifier == null) {
+        if (identifier.equals(MageIdentifier.Default)) {
             return false;
         }
         return identifier.equals(approvingObject.getApprovingAbility().getIdentifier());

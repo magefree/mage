@@ -72,7 +72,7 @@ class MairsilThePretenderExileEffect extends OneShotEffect {
         this.staticText = "you may exile an artifact or creature card from your hand or graveyard and put a cage counter on it.";
     }
 
-    MairsilThePretenderExileEffect(final MairsilThePretenderExileEffect effect) {
+    private MairsilThePretenderExileEffect(final MairsilThePretenderExileEffect effect) {
         super(effect);
     }
 
@@ -125,7 +125,7 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
         staticText = "{this} has all activated abilities of all cards you own in exile with cage counters on them. You may activate each of those abilities only once each turn";
     }
 
-    public MairsilThePretenderGainAbilitiesEffect(final MairsilThePretenderGainAbilitiesEffect effect) {
+    private MairsilThePretenderGainAbilitiesEffect(final MairsilThePretenderGainAbilitiesEffect effect) {
         super(effect);
     }
 

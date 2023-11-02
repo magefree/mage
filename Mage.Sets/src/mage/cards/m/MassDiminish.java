@@ -64,7 +64,7 @@ class MassDiminishEffect extends OneShotEffect {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new ControllerIdPredicate(source.getFirstTarget()));
         game.addEffect(new SetBasePowerToughnessAllEffect(
-                1, 1, Duration.UntilYourNextTurn, filter, true
+                1, 1, Duration.UntilYourNextTurn, filter
         ), source);
         return true;
     }

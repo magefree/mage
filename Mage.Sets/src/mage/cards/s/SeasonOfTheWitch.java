@@ -65,7 +65,7 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
         this.staticText = "destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack";
     }
 
-    SeasonOfTheWitchEffect(final SeasonOfTheWitchEffect effect) {
+    private SeasonOfTheWitchEffect(final SeasonOfTheWitchEffect effect) {
         super(effect);
     }
 

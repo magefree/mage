@@ -1,11 +1,9 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.HighestManaValueCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,17 +39,17 @@ public final class DispersalShield extends CardImpl {
 
 class DispersalShieldEffect extends OneShotEffect {
 
-    public DispersalShieldEffect() {
+    DispersalShieldEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell if its mana value is less than or equal to the highest mana value among permanents you control";
     }
 
-    public DispersalShieldEffect(DispersalShieldEffect effect) {
+    private DispersalShieldEffect(final DispersalShieldEffect effect) {
         super(effect);
     }
 
     @Override
-    public Effect copy() {
+    public DispersalShieldEffect copy() {
         return new DispersalShieldEffect(this);
     }
 

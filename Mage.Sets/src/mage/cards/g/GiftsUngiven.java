@@ -54,7 +54,7 @@ class GiftsUngivenEffect extends OneShotEffect {
                 "and the rest into your hand. Then shuffle";
     }
 
-    public GiftsUngivenEffect(final GiftsUngivenEffect effect) {
+    private GiftsUngivenEffect(final GiftsUngivenEffect effect) {
         super(effect);
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,14 +26,13 @@ public final class CloudstoneCurio extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public CloudstoneCurio(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, SetTargetPointer.PERMANENT, "", true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, SetTargetPointer.PERMANENT));
 
     }
 
@@ -54,7 +53,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
         this.staticText = "you may return another permanent you control that shares a permanent type with it to its owner's hand";
     }
 
-    public CloudstoneCurioEffect(final CloudstoneCurioEffect effect) {
+    private CloudstoneCurioEffect(final CloudstoneCurioEffect effect) {
         super(effect);
     }
 

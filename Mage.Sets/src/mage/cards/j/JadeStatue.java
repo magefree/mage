@@ -48,7 +48,7 @@ public final class JadeStatue extends CardImpl {
             power = new MageInt(3);
             toughness = new MageInt(6);
 	    }
-        public JadeStatueToken(final JadeStatueToken token) {
+        private JadeStatueToken(final JadeStatueToken token) {
             super(token);
         }
 

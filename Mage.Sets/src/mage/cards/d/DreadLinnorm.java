@@ -48,6 +48,8 @@ public final class DreadLinnorm extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new UntapTargetEffect().setText("and untap it"));
         this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance()).setText("It gains hexproof until end of turn"));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private DreadLinnorm(final DreadLinnorm card) {

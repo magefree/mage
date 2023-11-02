@@ -52,7 +52,7 @@ class MishrasGroundbreakerToken extends TokenImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
-    public MishrasGroundbreakerToken(final MishrasGroundbreakerToken token) {
+    private MishrasGroundbreakerToken(final MishrasGroundbreakerToken token) {
         super(token);
     }
 

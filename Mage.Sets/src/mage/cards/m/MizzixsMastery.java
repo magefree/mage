@@ -64,7 +64,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                 + "and you may cast the copy without paying its mana cost. Exile {this}";
     }
 
-    public MizzixsMasteryOverloadEffect(final MizzixsMasteryOverloadEffect effect) {
+    private MizzixsMasteryOverloadEffect(final MizzixsMasteryOverloadEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                             && !copiedCards.isEmpty()) {
                         TargetCard targetCard = new TargetCard(0, 1, Zone.EXILED,
                                 new FilterCard("copied card to cast without paying its mana cost?"));
-                        targetCard.setNotTarget(true);
+                        targetCard.withNotTarget(true);
                         if (controller.chooseTarget(Outcome.PlayForFree, copiedCards, targetCard, source, game)) {
                             Card selectedCard = game.getCard(targetCard.getFirstTarget());
                             if (selectedCard != null

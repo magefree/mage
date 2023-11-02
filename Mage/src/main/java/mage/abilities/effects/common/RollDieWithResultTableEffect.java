@@ -89,6 +89,9 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder(prefixText);
         sb.append('.');
         for (TableEntry tableEntry : this.resultsTable) {
@@ -157,4 +160,3 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         return super.setTargetPointer(targetPointer);
     }
 }
-

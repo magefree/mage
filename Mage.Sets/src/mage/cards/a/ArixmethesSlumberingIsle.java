@@ -43,7 +43,7 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
         // Arixmethes, Slumbering Isle enters the battlefield tapped with five slumber counters on it.
         Ability ability = new EntersBattlefieldAbility(
                 new TapSourceEffect(true), false, null,
-                "{this} enters the battlefield tapped with five slumber counters on it", null
+                "{this} enters the battlefield tapped with five slumber counters on it.", null
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.SLUMBER.createInstance(5)));
         this.addAbility(ability);

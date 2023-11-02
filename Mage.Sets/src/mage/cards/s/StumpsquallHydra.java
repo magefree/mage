@@ -92,12 +92,14 @@ class StumpsquallHydraEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
-        if (player == null || xValue < 1) {
+        if (player == null || xValue < 1 || game.getBattlefield().count(filter, player.getId(), source, game) < 1) {
             return false;
         }
+
         TargetAmount targetAmount = new TargetCreatureOrPlaneswalkerAmount(xValue, filter);
-        targetAmount.setNotTarget(true);
-        player.choose(outcome, targetAmount, source, game);
+        targetAmount.setMinNumberOfTargets(1);
+        targetAmount.withNotTarget(true);
+        targetAmount.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : targetAmount.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {

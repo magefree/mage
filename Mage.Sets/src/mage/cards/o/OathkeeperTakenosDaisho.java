@@ -65,7 +65,7 @@ class OathkeeperExileEquippedEffect extends OneShotEffect {
         staticText = "exile equipped creature";
     }
 
-    public OathkeeperExileEquippedEffect(final OathkeeperExileEquippedEffect effect) {
+    private OathkeeperExileEquippedEffect(final OathkeeperExileEquippedEffect effect) {
         super(effect);
     }
 

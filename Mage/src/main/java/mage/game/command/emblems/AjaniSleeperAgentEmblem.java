@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -21,7 +22,10 @@ public final class AjaniSleeperAgentEmblem extends Emblem {
     // You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
     public AjaniSleeperAgentEmblem() {
         super("Emblem Ajani");
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, new AddPoisonCounterTargetEffect(2), filter, false, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                Zone.COMMAND, new AddPoisonCounterTargetEffect(2),
+                filter, false, SetTargetPointer.NONE
+        );
         ability.addTarget(new TargetOpponent());
         this.getAbilities().add(ability);
     }

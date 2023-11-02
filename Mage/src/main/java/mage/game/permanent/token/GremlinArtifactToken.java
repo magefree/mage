@@ -19,7 +19,7 @@ public final class GremlinArtifactToken extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    public GremlinArtifactToken(final GremlinArtifactToken token) {
+    protected GremlinArtifactToken(final GremlinArtifactToken token) {
         super(token);
     }
 

@@ -42,7 +42,7 @@ class WarReportEffect extends OneShotEffect {
         staticText = "You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield";
     }
 
-    public WarReportEffect(final WarReportEffect effect) {
+    private WarReportEffect(final WarReportEffect effect) {
         super(effect);
     }
 

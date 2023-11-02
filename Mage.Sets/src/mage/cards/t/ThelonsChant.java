@@ -36,8 +36,8 @@ public final class ThelonsChant extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}")), TargetController.YOU, false));
 
         // Whenever a player puts a Swamp onto the battlefield, Thelon's Chant deals 3 damage to that player unless they put a -1/-1 counter on a creature they control.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ThelonsChantEffect(), filter, false, SetTargetPointer.PLAYER,
-                "Whenever a player puts a Swamp onto the battlefield, {this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control."));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ThelonsChantEffect(), filter, false, SetTargetPointer.PLAYER
+        ).setTriggerPhrase("Whenever a player puts a Swamp onto the battlefield, "));
     }
 
     private ThelonsChant(final ThelonsChant card) {
@@ -52,12 +52,12 @@ public final class ThelonsChant extends CardImpl {
 
 class ThelonsChantEffect extends OneShotEffect {
 
-    public ThelonsChantEffect() {
+    ThelonsChantEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control";
     }
 
-    public ThelonsChantEffect(final ThelonsChantEffect effect) {
+    private ThelonsChantEffect(final ThelonsChantEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class ThelonsChantEffect extends OneShotEffect {
         if (player != null && sourcePermanent != null) {
             boolean paid = false;
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (player.chooseUse(Outcome.Detriment, "Put a -1/-1 counter on a creature you control? (otherwise " + sourcePermanent.getLogName() + " deals 3 damage to you)", source, game)
                     && player.choose(Outcome.UnboostCreature, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());

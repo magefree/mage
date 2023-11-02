@@ -49,7 +49,7 @@ class OrbsOfWardingEffect extends PreventionEffectImpl {
         this.staticText = "If a creature would deal damage to you, prevent 1 of that damage";
     }
 
-    public OrbsOfWardingEffect(OrbsOfWardingEffect effect) {
+    private OrbsOfWardingEffect(final OrbsOfWardingEffect effect) {
         super(effect);
     }
 

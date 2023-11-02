@@ -55,7 +55,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         this.staticText = "You may exile an instant or sorcery card with mana value X from your hand";
     }
 
-    public PanopticMirrorExileEffect(final PanopticMirrorExileEffect effect) {
+    private PanopticMirrorExileEffect(final PanopticMirrorExileEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
         this.staticText = "you may copy a card exiled with {this}. If you do, you may cast the copy without paying its mana cost";
     }
 
-    public PanopticMirrorCastEffect(final PanopticMirrorCastEffect effect) {
+    private PanopticMirrorCastEffect(final PanopticMirrorCastEffect effect) {
         super(effect);
     }
 

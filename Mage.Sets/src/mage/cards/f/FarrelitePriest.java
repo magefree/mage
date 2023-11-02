@@ -56,7 +56,7 @@ class FarrelitePriestEffect extends OneShotEffect {
         this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
     }
 
-    public FarrelitePriestEffect(final FarrelitePriestEffect effect) {
+    private FarrelitePriestEffect(final FarrelitePriestEffect effect) {
         super(effect);
     }
 

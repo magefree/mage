@@ -26,7 +26,7 @@ public final class GoblinMountaineer extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public GoblinMountaineer (final GoblinMountaineer card) {
+    private GoblinMountaineer(final GoblinMountaineer card) {
         super(card);
     }
 

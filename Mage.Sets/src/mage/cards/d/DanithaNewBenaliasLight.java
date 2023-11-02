@@ -4,6 +4,7 @@ import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.LifelinkAbility;
@@ -63,11 +64,11 @@ public final class DanithaNewBenaliasLight extends CardImpl {
 class DanithaNewBenaliasLightCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     DanithaNewBenaliasLightCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCardInPlay, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCardInPlay);
         staticText = "once during each of your turns, you may cast an Aura or Equipment spell from your graveyard";
     }
 
-    DanithaNewBenaliasLightCastFromGraveyardEffect(final DanithaNewBenaliasLightCastFromGraveyardEffect effect) {
+    private DanithaNewBenaliasLightCastFromGraveyardEffect(final DanithaNewBenaliasLightCastFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -82,17 +83,21 @@ class DanithaNewBenaliasLightCastFromGraveyardEffect extends AsThoughEffectImpl 
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId) || game.getState().getZone(objectId) != Zone.GRAVEYARD) {
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        if (!source.isControlledBy(playerId) || game.getState().getZone(objectId) != Zone.GRAVEYARD || !(affectedAbility instanceof SpellAbility)) {
             return false;
         }
-        Card objectCard = game.getCard(objectId);
+        Card objectCard = ((SpellAbility) affectedAbility).getCharacteristics(game);
         return objectCard != null
                 && objectCard.isOwnedBy(source.getControllerId())
                 && (objectCard.hasSubtype(SubType.AURA, game) || objectCard.hasSubtype(SubType.EQUIPMENT, game))
                 && objectCard.getSpellAbility() != null
-                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)
+                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game)
                 && !DanithaNewBenaliasLightWatcher.isAbilityUsed(source, game);
+    }
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
     }
 }
 

@@ -64,7 +64,7 @@ class SolphimMayhemDominusEffect extends ReplacementEffectImpl {
                 "it deals double that damage to that player or permanent instead";
     }
 
-    SolphimMayhemDominusEffect(final SolphimMayhemDominusEffect effect) {
+    private SolphimMayhemDominusEffect(final SolphimMayhemDominusEffect effect) {
         super(effect);
     }
 

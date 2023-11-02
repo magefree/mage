@@ -31,7 +31,7 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
         this.otherwiseEffect = otherwiseEffect;
     }
 
-    public ConditionalAsThoughEffect(final ConditionalAsThoughEffect effect) {
+    protected ConditionalAsThoughEffect(final ConditionalAsThoughEffect effect) {
         super(effect);
         this.effect = effect.effect.copy();
         if (effect.otherwiseEffect != null) {

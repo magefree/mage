@@ -5,13 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPermanentBatchEvent;
+import mage.game.events.DamagedBatchForPermanentsEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -39,12 +38,12 @@ public class BenSolo extends CardImpl {
         this.addAbility(new BenSoloTriggeredAbility());
     }
 
-    public BenSolo(final BenSolo card) {
+    private BenSolo(final BenSolo card) {
         super(card);
     }
 
     @Override
-    public Card copy() {
+    public BenSolo copy() {
         return new BenSolo(this);
     }
 }
@@ -71,7 +70,7 @@ class BenSoloTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
     }
 
     @Override
@@ -84,7 +83,7 @@ class BenSoloTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         int damage = 0;
-        DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;
+        DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
         Set<DamagedEvent> set = dEvent.getEvents();
         for (DamagedEvent damagedEvent : set) {
             UUID targetID = damagedEvent.getTargetId();

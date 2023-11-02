@@ -14,8 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -37,7 +35,7 @@ public final class MinionReflector extends CardImpl {
                         new MinionReflectorEffect(), new ManaCostsImpl<>("{2}"), "Pay {2} " +
                         "to create a token that's a copy of that creature that entered the battlefield?"
                 ),
-                StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT, null
+                StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT
         ));
     }
 
@@ -59,7 +57,7 @@ class MinionReflectorEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of that creature, except it has haste and \"At the beginning of the end step, sacrifice this permanent.\"";
     }
 
-    public MinionReflectorEffect(final MinionReflectorEffect effect) {
+    private MinionReflectorEffect(final MinionReflectorEffect effect) {
         super(effect);
     }
 

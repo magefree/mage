@@ -27,7 +27,7 @@ public final class EtheriumAbomination extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{U}{B}")));
     }
 
-    public EtheriumAbomination (final EtheriumAbomination card) {
+    private EtheriumAbomination(final EtheriumAbomination card) {
         super(card);
     }
 

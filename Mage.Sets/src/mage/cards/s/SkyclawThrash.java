@@ -56,7 +56,7 @@ class SkyclawThrashEffect extends OneShotEffect {
         this.staticText = "flip a coin. If you win the flip, {this} gets +1/+1 and gains flying until end of turn";
     }
 
-    public SkyclawThrashEffect(final SkyclawThrashEffect effect) {
+    private SkyclawThrashEffect(final SkyclawThrashEffect effect) {
         super(effect);
     }
 

@@ -21,7 +21,7 @@ public class RegenerateAllEffect extends OneShotEffect {
         staticText = "Regenerate each " + filter.getMessage();
     }
 
-    public RegenerateAllEffect(final RegenerateAllEffect effect) {
+    protected RegenerateAllEffect(final RegenerateAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

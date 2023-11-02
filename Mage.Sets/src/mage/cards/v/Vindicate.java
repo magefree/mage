@@ -23,7 +23,7 @@ public final class Vindicate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public Vindicate (final Vindicate card) {
+    private Vindicate(final Vindicate card) {
         super(card);
     }
 

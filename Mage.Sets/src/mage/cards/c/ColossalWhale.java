@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -12,11 +11,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author awjackson
  */
 public final class ColossalWhale extends CardImpl {
@@ -24,11 +24,11 @@ public final class ColossalWhale extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public ColossalWhale(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add(SubType.WHALE);
 
         this.power = new MageInt(5);

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -15,7 +11,6 @@ import mage.target.TargetSource;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Quercitron
  */
 public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffectImpl {
@@ -36,7 +31,7 @@ public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffe
         this.staticText = setText();
     }
 
-    public PreventNextDamageFromChosenSourceToYouEffect(final PreventNextDamageFromChosenSourceToYouEffect effect) {
+    protected PreventNextDamageFromChosenSourceToYouEffect(final PreventNextDamageFromChosenSourceToYouEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }

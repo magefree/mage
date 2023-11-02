@@ -56,7 +56,7 @@ public final class Pariah extends CardImpl {
             staticText = "All damage that would be dealt to you is dealt to enchanted creature instead";
         }
 
-        PariahEffect(final PariahEffect effect) {
+        private PariahEffect(final PariahEffect effect) {
             super(effect);
         }
 

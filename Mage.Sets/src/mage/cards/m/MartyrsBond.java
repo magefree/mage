@@ -51,7 +51,7 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MartyrsBondEffect());
     }
 
-    public MartyrsBondTriggeredAbility(final MartyrsBondTriggeredAbility ability) {
+    private MartyrsBondTriggeredAbility(final MartyrsBondTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,7 +96,7 @@ class MartyrsBondEffect extends OneShotEffect {
         this.staticText = "each opponent sacrifices a permanent that shares a card type with it";
     }
 
-    public MartyrsBondEffect(final MartyrsBondEffect effect) {
+    private MartyrsBondEffect(final MartyrsBondEffect effect) {
         super(effect);
     }
 

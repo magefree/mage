@@ -57,7 +57,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new ArcbondEffect(), Duration.EndOfTurn, false);
     }
 
-    public ArcbondDelayedTriggeredAbility(ArcbondDelayedTriggeredAbility ability) {
+    private ArcbondDelayedTriggeredAbility(final ArcbondDelayedTriggeredAbility ability) {
         super(ability);
         this.targetObject = ability.targetObject;
     }
@@ -116,7 +116,7 @@ class ArcbondEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public ArcbondEffect(final ArcbondEffect effect) {
+    private ArcbondEffect(final ArcbondEffect effect) {
         super(effect);
     }
 

@@ -28,7 +28,7 @@ public class TargetTriggeredAbility extends TargetObject {
         this.filter = filter;
     }
 
-    public TargetTriggeredAbility(final TargetTriggeredAbility target) {
+    protected TargetTriggeredAbility(final TargetTriggeredAbility target) {
         super(target);
         this.filter = target.filter.copy();
     }

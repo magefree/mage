@@ -68,7 +68,7 @@ class WingedTempleOfOrazcaEffect extends OneShotEffect {
         this.staticText = "target creature you control gains flying and gets +X/+X until end of turn, where X is its power";
     }
 
-    public WingedTempleOfOrazcaEffect(final WingedTempleOfOrazcaEffect effect) {
+    private WingedTempleOfOrazcaEffect(final WingedTempleOfOrazcaEffect effect) {
         super(effect);
     }
 

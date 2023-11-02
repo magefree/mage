@@ -43,7 +43,7 @@ class SpellSwindleEffect extends OneShotEffect {
         staticText = "Counter target spell. Create X Treasure tokens, where X is that spell's mana value.";
     }
 
-    public SpellSwindleEffect(final SpellSwindleEffect effect) {
+    private SpellSwindleEffect(final SpellSwindleEffect effect) {
         super(effect);
     }
 

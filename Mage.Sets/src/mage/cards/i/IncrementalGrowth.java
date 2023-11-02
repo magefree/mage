@@ -65,7 +65,7 @@ class IncrementalGrowthEffect extends OneShotEffect {
                 + "and three +1/+1 counters on a third target creature";
     }
 
-    public IncrementalGrowthEffect(final IncrementalGrowthEffect effect) {
+    private IncrementalGrowthEffect(final IncrementalGrowthEffect effect) {
         super(effect);
     }
 

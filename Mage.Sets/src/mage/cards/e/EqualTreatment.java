@@ -46,7 +46,7 @@ class EqualTreatmentEffect extends ReplacementEffectImpl {
         staticText = "If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead";
     }
 
-    public EqualTreatmentEffect(final EqualTreatmentEffect effect) {
+    private EqualTreatmentEffect(final EqualTreatmentEffect effect) {
         super(effect);
     }
 

@@ -33,7 +33,7 @@ public final class PhyrexianVatmother extends CardImpl {
         ));
     }
 
-    public PhyrexianVatmother(final PhyrexianVatmother card) {
+    private PhyrexianVatmother(final PhyrexianVatmother card) {
         super(card);
     }
 

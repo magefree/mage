@@ -64,7 +64,7 @@ class ThoughtpickerWitchEffect extends OneShotEffect {
         this.staticText = "Look at the top two cards of target opponent's library, then exile one of them";
     }
 
-    ThoughtpickerWitchEffect(final ThoughtpickerWitchEffect effect) {
+    private ThoughtpickerWitchEffect(final ThoughtpickerWitchEffect effect) {
         super(effect);
     }
 

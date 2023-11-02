@@ -71,7 +71,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature has four or more fuse counters on it, ");
     }
 
-    public BombSquadTriggeredAbility(final BombSquadTriggeredAbility ability) {
+    private BombSquadTriggeredAbility(final BombSquadTriggeredAbility ability) {
         super(ability);
     }
 
@@ -109,7 +109,7 @@ class BombSquadDamgeEffect extends OneShotEffect {
         this.staticText = "remove all fuse counters from it and destroy it. That creature deals 4 damage to its controller";
     }
 
-    public BombSquadDamgeEffect(final BombSquadDamgeEffect effect) {
+    private BombSquadDamgeEffect(final BombSquadDamgeEffect effect) {
         super(effect);
     }
 
@@ -153,7 +153,7 @@ class BombSquadBeginningEffect extends OneShotEffect {
         this.staticText = "put a fuse counter on each creature with a fuse counter on it";
     }
 
-    public BombSquadBeginningEffect(final BombSquadBeginningEffect effect) {
+    private BombSquadBeginningEffect(final BombSquadBeginningEffect effect) {
         super(effect);
     }
 

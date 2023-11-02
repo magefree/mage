@@ -60,7 +60,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
                 "return them to their owners' graveyards";
     }
 
-    public MnemonicBetrayalExileEffect(final MnemonicBetrayalExileEffect effect) {
+    private MnemonicBetrayalExileEffect(final MnemonicBetrayalExileEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class MnemonicBetrayalDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.morSet.addAll(morSet);
     }
 
-    public MnemonicBetrayalDelayedTriggeredAbility(final MnemonicBetrayalDelayedTriggeredAbility ability) {
+    private MnemonicBetrayalDelayedTriggeredAbility(final MnemonicBetrayalDelayedTriggeredAbility ability) {
         super(ability);
         this.morSet.addAll(ability.morSet);
     }
@@ -155,7 +155,7 @@ class MnemonicBetrayalReturnEffect extends OneShotEffect {
         this.morSet.addAll(morSet);
     }
 
-    public MnemonicBetrayalReturnEffect(final MnemonicBetrayalReturnEffect effect) {
+    private MnemonicBetrayalReturnEffect(final MnemonicBetrayalReturnEffect effect) {
         super(effect);
         this.morSet.addAll(effect.morSet);
     }

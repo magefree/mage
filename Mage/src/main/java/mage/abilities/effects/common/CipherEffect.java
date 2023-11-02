@@ -18,6 +18,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+
 import mage.ApprovingObject;
 
 /**
@@ -55,7 +56,7 @@ public class CipherEffect extends OneShotEffect {
         staticText = "<br><br/>Cipher <i>(Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)</i>";
     }
 
-    public CipherEffect(final CipherEffect effect) {
+    protected CipherEffect(final CipherEffect effect) {
         super(effect);
     }
 
@@ -64,7 +65,7 @@ public class CipherEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (target.canChoose(source.getControllerId(), source, game)
                     && controller.chooseUse(outcome, "Cipher this spell to a creature?", source, game)) {
                 controller.chooseTarget(outcome, target, source, game);
@@ -105,7 +106,7 @@ class CipherStoreEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public CipherStoreEffect(final CipherStoreEffect effect) {
+    protected CipherStoreEffect(final CipherStoreEffect effect) {
         super(effect);
         this.cipherCardId = effect.cipherCardId;
     }

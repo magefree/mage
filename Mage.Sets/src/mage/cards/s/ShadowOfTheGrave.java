@@ -46,7 +46,7 @@ class ShadowOfTheGraveEffect extends OneShotEffect {
         staticText = "Return to your hand all cards in your graveyard that you cycled or discarded this turn";
     }
 
-    public ShadowOfTheGraveEffect(final ShadowOfTheGraveEffect effect) {
+    private ShadowOfTheGraveEffect(final ShadowOfTheGraveEffect effect) {
         super(effect);
     }
 

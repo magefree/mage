@@ -34,7 +34,7 @@ public abstract class DraftImpl implements Draft {
     protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected TimingOption timing;
     protected int boosterLoadingCounter; // number of times the boosters have been sent to players until all are confirmed to have received them
-    protected final int BOOSTER_LOADING_INTERVAL = 3; // interval in seconds
+    protected final int BOOSTER_LOADING_INTERVAL = 2; // interval in seconds
 
     protected boolean abort = false;
     protected boolean started = false;

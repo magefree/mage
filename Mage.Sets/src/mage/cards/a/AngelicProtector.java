@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -25,9 +25,9 @@ public final class AngelicProtector extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SourceBecomesTargetTriggeredAbility(
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new BoostSourceEffect(0, 3, Duration.EndOfTurn)
-        ).setTriggerPhrase("Whenever {this} becomes the target of a spell or ability, "));
+        ).withRuleTextReplacement(false));
     }
 
     private AngelicProtector(final AngelicProtector card) {

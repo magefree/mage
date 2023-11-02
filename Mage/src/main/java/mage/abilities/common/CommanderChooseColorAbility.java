@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.abilities.StaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.constants.Zone;
 
@@ -10,7 +11,7 @@ import mage.constants.Zone;
 public class CommanderChooseColorAbility extends StaticAbility {
 
     public CommanderChooseColorAbility() {
-        super(Zone.ALL, null);
+        super(Zone.ALL, new InfoEffect("if {this} is your commander, choose a color before the game begins. {this} is the chosen color"));
     }
 
     private CommanderChooseColorAbility(final CommanderChooseColorAbility ability) {
@@ -20,11 +21,6 @@ public class CommanderChooseColorAbility extends StaticAbility {
     @Override
     public CommanderChooseColorAbility copy() {
         return new CommanderChooseColorAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "If {this} is your commander, choose a color before the game begins. {this} is the chosen color.";
     }
 
     public static boolean checkCard(Card card) {

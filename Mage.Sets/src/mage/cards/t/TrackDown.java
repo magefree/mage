@@ -45,7 +45,7 @@ class TrackDownEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a creature or land card, draw a card";
     }
 
-    public TrackDownEffect(final TrackDownEffect effect) {
+    private TrackDownEffect(final TrackDownEffect effect) {
         super(effect);
     }
 

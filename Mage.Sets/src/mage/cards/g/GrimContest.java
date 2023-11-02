@@ -47,7 +47,7 @@ class GrimContestEffect extends OneShotEffect {
         this.staticText = "Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its toughness to the other";
     }
 
-    public GrimContestEffect(final GrimContestEffect effect) {
+    private GrimContestEffect(final GrimContestEffect effect) {
         super(effect);
     }
 

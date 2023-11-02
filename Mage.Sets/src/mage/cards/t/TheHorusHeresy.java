@@ -151,13 +151,13 @@ class TheHorusHeresyDestroyEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(Outcome.DestroyPermanent, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent == null) {
-                continue;
+            if (permanent != null) {
+                permanents.add(permanent);
+                game.informPlayers(player.getLogName() + " chooses " + permanent.getLogName());
             }
-            game.informPlayers(player.getLogName() + " chooses " + permanent.getLogName());
         }
         for (Permanent permanent : permanents) {
             permanent.destroy(source, game);

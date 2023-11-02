@@ -39,7 +39,7 @@ public final class SigardasAid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard, false)));
 
         // Whenever an Equipment enters the battlefield under your control, you may attach it to target creature you control.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new SigardasAidEffect(), filter, true, SetTargetPointer.PERMANENT, "");
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new SigardasAidEffect(), filter, true, SetTargetPointer.PERMANENT);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
@@ -62,7 +62,7 @@ class SigardasAidEffect extends OneShotEffect {
         this.staticText = "you may attach it to target creature you control";
     }
 
-    public SigardasAidEffect(final SigardasAidEffect effect) {
+    private SigardasAidEffect(final SigardasAidEffect effect) {
         super(effect);
     }
 

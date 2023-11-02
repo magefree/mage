@@ -50,7 +50,7 @@ class SamiteMinistrationEffect extends PreventionEffectImpl {
         this.targetSource = new TargetSource();
     }
 
-    public SamiteMinistrationEffect(final SamiteMinistrationEffect effect) {
+    private SamiteMinistrationEffect(final SamiteMinistrationEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }

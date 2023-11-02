@@ -81,7 +81,7 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
         staticText = "You may cast nonland cards exiled with {this}";
     }
 
-    public RonaDiscipleOfGixPlayNonLandEffect(final RonaDiscipleOfGixPlayNonLandEffect effect) {
+    private RonaDiscipleOfGixPlayNonLandEffect(final RonaDiscipleOfGixPlayNonLandEffect effect) {
         super(effect);
     }
 
@@ -119,7 +119,7 @@ class RonaDiscipleOfGixExileEffect extends OneShotEffect {
         this.staticText = "Exile the top card of your library";
     }
 
-    public RonaDiscipleOfGixExileEffect(final RonaDiscipleOfGixExileEffect effect) {
+    private RonaDiscipleOfGixExileEffect(final RonaDiscipleOfGixExileEffect effect) {
         super(effect);
     }
 

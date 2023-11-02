@@ -90,7 +90,7 @@ class NinjutsuEffect extends OneShotEffect {
                 + "from your hand tapped and attacking";
     }
 
-    public NinjutsuEffect(final NinjutsuEffect effect) {
+    protected NinjutsuEffect(final NinjutsuEffect effect) {
         super(effect);
     }
 

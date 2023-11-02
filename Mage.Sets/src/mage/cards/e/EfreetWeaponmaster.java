@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -14,8 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -42,7 +40,7 @@ public final class EfreetWeaponmaster extends CardImpl {
         this.addAbility(new EfreetWeaponmasterAbility());
 
         // Morph {2}{U}{R}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}{R}{W}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{U}{R}{W}")));
     }
 
     private EfreetWeaponmaster(final EfreetWeaponmaster card) {
@@ -57,20 +55,14 @@ public final class EfreetWeaponmaster extends CardImpl {
 
 class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public EfreetWeaponmasterAbility() {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(3,0, Duration.EndOfTurn), false);
-        this.addTarget(new TargetControlledCreaturePermanent(filter));
+        this.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.setWorksFaceDown(true);
         setTriggerPhrase("When {this} enters the battlefield or is turned face up, ");
     }
 
-    public EfreetWeaponmasterAbility(final EfreetWeaponmasterAbility ability) {
+    private EfreetWeaponmasterAbility(final EfreetWeaponmasterAbility ability) {
         super(ability);
     }
 

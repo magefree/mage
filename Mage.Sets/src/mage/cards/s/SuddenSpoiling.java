@@ -53,7 +53,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
         staticText = "Until end of turn, creatures target player controls lose all abilities and have base power and toughness 0/2";
     }
 
-    public SuddenSpoilingEffect(final SuddenSpoilingEffect effect) {
+    private SuddenSpoilingEffect(final SuddenSpoilingEffect effect) {
         super(effect);
     }
 

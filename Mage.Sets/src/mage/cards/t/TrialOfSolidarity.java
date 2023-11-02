@@ -43,8 +43,8 @@ public final class TrialOfSolidarity extends CardImpl {
         this.addAbility(ability);
 
         // When a Cartouche enters the battlefield under you control, return Trial of Solidarity to its owner's hand.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter,
-                "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter
+        ));
     }
 
     private TrialOfSolidarity(final TrialOfSolidarity card) {

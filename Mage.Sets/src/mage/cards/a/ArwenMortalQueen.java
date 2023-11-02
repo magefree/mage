@@ -46,7 +46,7 @@ public final class ArwenMortalQueen extends CardImpl {
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance()),
                 new RemoveCountersSourceCost(CounterType.INDESTRUCTIBLE.createInstance())
         );
-        ability.addManaCost(new GenericManaCost(1));
+        ability.addCost(new GenericManaCost(1));
         ability.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("Put a +1/+1 counter"));
         ability.addEffect(new AddCountersTargetEffect(CounterType.LIFELINK.createInstance())

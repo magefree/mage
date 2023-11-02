@@ -52,7 +52,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
         this.optional = optional;
     }
 
-    public EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
+    protected EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
         super(ability);
         this.abilityRule = ability.abilityRule;
         this.optional = ability.optional;

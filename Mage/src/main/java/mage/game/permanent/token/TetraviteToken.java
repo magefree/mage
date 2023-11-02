@@ -16,8 +16,8 @@ public final class TetraviteToken extends TokenImpl {
 
     public TetraviteToken() {
         super("Tetravite Token", "1/1 colorless Tetravite artifact creature token with flying and \"This creature can't be enchanted.\"");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.TETRAVITE);
         power = new MageInt(1);
         toughness = new MageInt(1);
@@ -26,7 +26,7 @@ public final class TetraviteToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetraviteTokenEffect()));
     }
 
-    public TetraviteToken(final TetraviteToken token) {
+    protected TetraviteToken(final TetraviteToken token) {
         super(token);
     }
 
@@ -42,7 +42,7 @@ class TetraviteTokenEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "this creature can't be enchanted";
     }
 
-    public TetraviteTokenEffect(final TetraviteTokenEffect effect) {
+    protected TetraviteTokenEffect(final TetraviteTokenEffect effect) {
         super(effect);
     }
 

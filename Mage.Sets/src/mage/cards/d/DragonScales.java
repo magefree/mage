@@ -50,7 +50,7 @@ public final class DragonScales extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
         
         // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Scales from your graveyard to the battlefield attached to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonScalesEffect(), filter, true, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonScalesEffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 
     private DragonScales(final DragonScales card) {
@@ -70,7 +70,7 @@ class DragonScalesEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonScalesEffect(final DragonScalesEffect effect) {
+    private DragonScalesEffect(final DragonScalesEffect effect) {
         super(effect);
     }
     

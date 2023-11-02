@@ -49,7 +49,7 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
         this.staticText = "All nonland permanents are legendary";
     }
 
-    public SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
+    private SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
         super(effect);
     }
 

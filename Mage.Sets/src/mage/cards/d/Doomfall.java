@@ -56,10 +56,10 @@ class DoomfallEffect extends OneShotEffect {
 
     public DoomfallEffect() {
         super(Outcome.Exile);
-        this.staticText = "target player exiles a creature they control";
+        this.staticText = "target opponent exiles a creature they control";
     }
 
-    public DoomfallEffect(final DoomfallEffect effect) {
+    private DoomfallEffect(final DoomfallEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class DoomfallEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             Target target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (targetPlayer.choose(outcome, target, source, game)) {
                 targetPlayer.moveCards(game.getPermanent(target.getFirstTarget()), Zone.EXILED, source, game);
             }

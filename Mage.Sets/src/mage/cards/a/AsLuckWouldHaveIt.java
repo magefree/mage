@@ -54,7 +54,7 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you roll a die, ");
     }
 
-    public AsLuckWouldHaveItTriggeredAbility(final AsLuckWouldHaveItTriggeredAbility ability) {
+    private AsLuckWouldHaveItTriggeredAbility(final AsLuckWouldHaveItTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class AsLuckWouldHaveItEffect extends OneShotEffect {
         this.staticText = "put a number of luck counters on {this} equal to the result. Then if there are 100 or more luck counters on {this}, you win the game.";
     }
 
-    public AsLuckWouldHaveItEffect(final AsLuckWouldHaveItEffect effect) {
+    private AsLuckWouldHaveItEffect(final AsLuckWouldHaveItEffect effect) {
         super(effect);
     }
 

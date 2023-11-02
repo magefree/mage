@@ -49,7 +49,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
         this.staticText = "<i>Join forces</i> &mdash; Starting with you, each player may pay any amount of mana. Each player searches their library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles";
     }
 
-    public CollectiveVoyageEffect(final CollectiveVoyageEffect effect) {
+    private CollectiveVoyageEffect(final CollectiveVoyageEffect effect) {
         super(effect);
     }
 

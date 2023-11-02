@@ -1,6 +1,7 @@
 package org.mage.test.stub;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -42,6 +43,7 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
 import java.util.*;
@@ -464,7 +466,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
 
     }
 
@@ -983,7 +985,8 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         return null;
     }
 
@@ -1148,6 +1151,16 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void setBufferTimeLeft(int timeLeft) {
+
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return 0;
+    }
+
+    @Override
     public void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving) {
 
     }
@@ -1258,22 +1271,22 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Set<UUID> getCastSourceIdWithAlternateMana() {
+    public Map<UUID, Set<MageIdentifier>> getCastSourceIdWithAlternateMana() {
         return null;
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs, MageIdentifier identifier) {
 
     }
 
     @Override
-    public Map<UUID, Costs<Cost>> getCastSourceIdCosts() {
+    public Map<UUID, Map<MageIdentifier,Costs<Cost>>> getCastSourceIdCosts() {
         return null;
     }
 
     @Override
-    public Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts() {
+    public Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
         return null;
     }
 
@@ -1374,12 +1387,12 @@ public class PlayerStub implements Player {
 
     @Override
     public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public List<UUID> getTurnControllers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

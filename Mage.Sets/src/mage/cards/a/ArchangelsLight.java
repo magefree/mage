@@ -46,7 +46,7 @@ class ArchangelsLightEffect extends OneShotEffect {
         staticText = "You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library";
     }
 
-    public ArchangelsLightEffect(final ArchangelsLightEffect effect) {
+    private ArchangelsLightEffect(final ArchangelsLightEffect effect) {
         super(effect);
     }
 

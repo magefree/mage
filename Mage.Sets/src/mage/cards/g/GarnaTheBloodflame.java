@@ -72,7 +72,7 @@ class GarnaTheBloodflameEffect extends OneShotEffect {
         staticText = "return to your hand all creature cards in your graveyard that were put there from anywhere this turn";
     }
 
-    GarnaTheBloodflameEffect(final GarnaTheBloodflameEffect effect) {
+    private GarnaTheBloodflameEffect(final GarnaTheBloodflameEffect effect) {
         super(effect);
     }
 

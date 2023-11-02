@@ -52,7 +52,7 @@ class DescendantsPathEffect extends OneShotEffect {
                 "put it on the bottom of your library";
     }
 
-    public DescendantsPathEffect(final DescendantsPathEffect effect) {
+    private DescendantsPathEffect(final DescendantsPathEffect effect) {
         super(effect);
     }
 

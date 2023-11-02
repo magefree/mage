@@ -20,7 +20,7 @@ public final class SorinSolemnVisitorVampireToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public SorinSolemnVisitorVampireToken(final SorinSolemnVisitorVampireToken token) {
+    protected SorinSolemnVisitorVampireToken(final SorinSolemnVisitorVampireToken token) {
         super(token);
     }
 

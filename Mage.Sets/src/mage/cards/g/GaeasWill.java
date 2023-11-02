@@ -87,7 +87,7 @@ class GaeassWillReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "<br>If a card would be put into your graveyard from anywhere this turn, exile that card instead";
     }
 
-    public GaeassWillReplacementEffect(final GaeassWillReplacementEffect effect) {
+    private GaeassWillReplacementEffect(final GaeassWillReplacementEffect effect) {
         super(effect);
     }
 

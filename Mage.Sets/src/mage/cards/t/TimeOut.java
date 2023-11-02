@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -15,8 +14,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class TimeOut extends CardImpl {
@@ -53,7 +53,7 @@ class TimeOutEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. Put target nonland permanent into its owner's library just beneath the top X cards of that library, where X is the result";
     }
 
-    public TimeOutEffect(final TimeOutEffect effect) {
+    private TimeOutEffect(final TimeOutEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class TimeOutEffect extends OneShotEffect {
                     return false;
                 }
                 int amount = controller.rollDice(outcome, source, game, 6);
-                controller.putCardOnTopXOfLibrary(permanent, game, source, amount, true);
+                controller.putCardOnTopXOfLibrary(permanent, game, source, amount + 1, true);
                 return true;
             }
         }

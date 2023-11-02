@@ -43,7 +43,7 @@ class BonusRoundDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new CopyTargetSpellEffect(true, true), Duration.EndOfTurn, false);
     }
 
-    public BonusRoundDelayedTriggeredAbility(final BonusRoundDelayedTriggeredAbility ability) {
+    private BonusRoundDelayedTriggeredAbility(final BonusRoundDelayedTriggeredAbility ability) {
         super(ability);
     }
 

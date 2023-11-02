@@ -76,7 +76,7 @@ public final class GenjuOfTheFields extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(5);
         }
-        public SpiritToken(final SpiritToken token) {
+        private SpiritToken(final SpiritToken token) {
             super(token);
         }
 

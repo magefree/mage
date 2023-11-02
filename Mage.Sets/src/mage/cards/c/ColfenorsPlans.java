@@ -62,7 +62,7 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
         staticText = "exile the top seven cards of your library face down";
     }
 
-    public ColfenorsPlansExileEffect(final ColfenorsPlansExileEffect effect) {
+    private ColfenorsPlansExileEffect(final ColfenorsPlansExileEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
         staticText = "You may play cards exiled with {this}";
     }
 
-    public ColfenorsPlansPlayCardEffect(final ColfenorsPlansPlayCardEffect effect) {
+    private ColfenorsPlansPlayCardEffect(final ColfenorsPlansPlayCardEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public ColfenorsPlansLookAtCardEffect(final ColfenorsPlansLookAtCardEffect effect) {
+    private ColfenorsPlansLookAtCardEffect(final ColfenorsPlansLookAtCardEffect effect) {
         super(effect);
     }
 

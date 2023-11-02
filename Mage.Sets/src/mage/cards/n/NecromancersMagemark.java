@@ -75,7 +75,7 @@ class NecromancersMagemarkEffect extends ReplacementEffectImpl {
         staticText = "If a creature you control that's enchanted would die, return it to its owner's hand instead";
     }
 
-    public NecromancersMagemarkEffect(final NecromancersMagemarkEffect effect) {
+    private NecromancersMagemarkEffect(final NecromancersMagemarkEffect effect) {
         super(effect);
     }
 

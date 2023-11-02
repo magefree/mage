@@ -14,7 +14,6 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CantBeTargetedSourceEffect extends ContinuousRuleModifyingEffectImpl {
@@ -27,7 +26,7 @@ public class CantBeTargetedSourceEffect extends ContinuousRuleModifyingEffectImp
         setText();
     }
 
-    public CantBeTargetedSourceEffect(final CantBeTargetedSourceEffect effect) {
+    protected CantBeTargetedSourceEffect(final CantBeTargetedSourceEffect effect) {
         super(effect);
         this.filterSource = effect.filterSource.copy();
     }
@@ -35,11 +34,6 @@ public class CantBeTargetedSourceEffect extends ContinuousRuleModifyingEffectImp
     @Override
     public CantBeTargetedSourceEffect copy() {
         return new CantBeTargetedSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

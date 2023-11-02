@@ -66,7 +66,7 @@ class RashkaTheSlayerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} blocks a " + filter.getMessage() + ", " );
     }
 
-    public RashkaTheSlayerTriggeredAbility(final RashkaTheSlayerTriggeredAbility ability) {
+    private RashkaTheSlayerTriggeredAbility(final RashkaTheSlayerTriggeredAbility ability) {
         super(ability);
     }
 

@@ -49,6 +49,7 @@ import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
 import mage.util.CardUtil;
+import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -390,10 +391,10 @@ public class TestPlayer implements Player {
                     || searchObject.contains("fused ")) {
                 Assert.assertFalse("alternative spell don't support alias", searchObject.startsWith(ALIAS_PREFIX));
                 foundObject = true;
-                foundAbility = ability.toString().startsWith(nameOrAlias);
+                foundAbility = ability.toString().equals(nameOrAlias);
             } else {
                 foundObject = hasObjectTargetNameOrAlias(game.getObject(ability.getSourceId()), searchObject);
-                foundAbility = searchObject.startsWith(ALIAS_PREFIX) || ability.toString().startsWith(nameOrAlias);
+                foundAbility = searchObject.startsWith(ALIAS_PREFIX) || ability.toString().equals(nameOrAlias);
             }
         } else if (nameOrAlias.startsWith(ALIAS_PREFIX)) {
             // object alias with ability text:
@@ -453,7 +454,7 @@ public class TestPlayer implements Player {
             Mode selectedMode;
             if (targetName.startsWith("mode=")) {
                 int modeNr = Integer.parseInt(targetName.substring(5, 6));
-                if (modeNr == 0 || modeNr > (ability.getModes().isEachModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
+                if (modeNr == 0 || modeNr > (ability.getModes().isMayChooseSameModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
                     throw new UnsupportedOperationException("Given mode number (" + modeNr + ") not available for " + ability.toString());
                 }
                 UUID modeId = ability.getModes().getModeId(modeNr);
@@ -815,6 +816,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check may attack ability:
+                        if (params[0].equals(CHECK_COMMAND_MAY_ATTACK_DEFENDER) && params.length == 4) {
+                            assertMayAttackDefender(action, game, computerPlayer, params[1], game.getPlayer(UUID.fromString(params[2])), Boolean.parseBoolean(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check battlefield count: target player, card name, count
                         if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 4) {
                             assertPermanentCount(action, game, game.getPlayer(UUID.fromString(params[1])), params[2], Integer.parseInt(params[3]));
@@ -1134,7 +1142,7 @@ public class TestPlayer implements Player {
             // all fine
             return perm;
         }
-        Assert.fail(action.getActionName() + " - can''t find permanent to check: " + cardName);
+        Assert.fail(action.getActionName() + " - can't find permanent to check: " + cardName);
         return null;
     }
     
@@ -1369,6 +1377,29 @@ public class TestPlayer implements Player {
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
             Assert.fail("Must not have playable ability, but found: " + abilityStartText);
+        }
+    }
+
+    private void assertMayAttackDefender(PlayerAction action, Game game, Player controller, String permanentName, Player defender, boolean expectedMayAttack) {
+        Permanent attackingPermanent = findPermanentWithAssert(action, game, controller, permanentName);
+
+        // Is the defender in range of the controller?
+        boolean mayAttack = game.getState().getPlayersInRange(controller.getId(), game).contains(defender.getId());
+        // Can the attacking permanent attack the defender?
+        mayAttack &= attackingPermanent.canAttack(defender.getId(), game);
+        // Not allowed to attack self.
+        mayAttack &= !controller.getId().equals(defender.getId());
+
+        if (expectedMayAttack && !mayAttack) {
+            printStart(game, action.getActionName());
+            printEnd();
+            Assert.fail(permanentName + " was expected to be able to attack " + defender.getName() + " but is not able to.");
+        }
+
+        if (!expectedMayAttack && mayAttack) {
+            printStart(game, action.getActionName());
+            printEnd();
+            Assert.fail(permanentName + " was not expected to be able to attack " + defender.getName() + " but is able to.");
         }
     }
 
@@ -2165,11 +2196,15 @@ public class TestPlayer implements Player {
             List<UUID> usedTargets = new ArrayList<>();
 
 
+            // TODO: Allow to choose a player with TargetPermanentOrPlayer
             if ((target.getOriginalTarget() instanceof TargetPermanent)
-                    || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemted yet
+                    || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) // player target not implemented yet
+                    || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemented yet
                 FilterPermanent filterPermanent;
                 if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                     filterPermanent = ((TargetPermanentOrPlayer) target.getOriginalTarget()).getFilterPermanent();
+                } else if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
+                    filterPermanent = ((TargetCreatureOrPlayer) target.getOriginalTarget()).getFilterCreature();
                 } else {
                     filterPermanent = ((TargetPermanent) target.getOriginalTarget()).getFilter();
                 }
@@ -2348,7 +2383,7 @@ public class TestPlayer implements Player {
     }
 
     private void checkTargetDefinitionMarksSupport(Target needTarget, String targetDefinition, String canSupportChars) {
-        // fail on wrong chars in definition    `   `   `   `   `   `   `   ``````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+        // fail on wrong chars in definition
         // ^ - multiple targets
         // [] - special option like [no copy]
         // = - target type like targetPlayer=PlayerA
@@ -2831,11 +2866,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2861,7 +2897,7 @@ public class TestPlayer implements Player {
             }
 
             // extra check
-            if (!MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+            if (!MultiAmountType.isGoodValues(answer, messages, min, max)) {
                 Assert.fail("Wrong choices in multi amount: " + answer
                         .stream()
                         .map(String::valueOf)
@@ -2872,7 +2908,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
-        return computerPlayer.getMultiAmount(outcome, messages, min, max, type, game);
+        return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, min, max, type, game);
     }
 
     @Override
@@ -2960,8 +2996,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
-        computerPlayer.controlPlayersTurn(game, playerId);
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
     }
 
     @Override
@@ -3125,22 +3161,22 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs) {
-        computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs);
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs, MageIdentifier identifier) {
+        computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs, identifier);
     }
 
     @Override
-    public Set<UUID> getCastSourceIdWithAlternateMana() {
+    public Map<UUID, Set<MageIdentifier>> getCastSourceIdWithAlternateMana() {
         return computerPlayer.getCastSourceIdWithAlternateMana();
     }
 
     @Override
-    public Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts() {
+    public Map<UUID, Map<MageIdentifier,ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
         return computerPlayer.getCastSourceIdManaCosts();
     }
 
     @Override
-    public Map<UUID, Costs<Cost>> getCastSourceIdCosts() {
+    public Map<UUID, Map<MageIdentifier,Costs<Cost>>> getCastSourceIdCosts() {
         return computerPlayer.getCastSourceIdCosts();
     }
 
@@ -3177,7 +3213,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
+    public Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
         return computerPlayer.getPlayableActivatedAbilities(object, zone, game);
     }
 
@@ -3855,6 +3891,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void setBufferTimeLeft(int timeLeft) {
+        computerPlayer.setBufferTimeLeft(timeLeft);
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return computerPlayer.getBufferTimeLeft();
+    }
+
+    @Override
     public boolean hasQuit() {
         return computerPlayer.hasQuit();
     }
@@ -4248,10 +4294,11 @@ public class TestPlayer implements Player {
                             if (specialAction.canActivate(this.getId(), game).canActivate()) {
                                 choices.remove(0);
                                 choiceRemoved = true;
-                                specialAction.setUnpaidMana(unpaid);
                                 if (activateAbility(specialAction, game)) {
                                     choiceUsed = true;
                                 }
+                            } else {
+                                Assert.fail("Found non active special mana action, but must generates only active: " + specialAction.getRule(true));
                             }
                         }
                     }

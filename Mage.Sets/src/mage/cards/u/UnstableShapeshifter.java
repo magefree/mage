@@ -41,7 +41,7 @@ public final class UnstableShapeshifter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another creature enters the battlefield, Unstable Shapeshifter becomes a copy of that creature, except it has this ability.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT, ""));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT));
     }
 
     private UnstableShapeshifter(final UnstableShapeshifter card) {
@@ -61,7 +61,7 @@ class UnstableShapeshifterEffect extends OneShotEffect {
         this.staticText = "{this} becomes a copy of that creature, except it has this ability";
     }
 
-    public UnstableShapeshifterEffect(final UnstableShapeshifterEffect effect) {
+    private UnstableShapeshifterEffect(final UnstableShapeshifterEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class UnstableShapeshifterEffect extends OneShotEffect {
         if (targetCreature != null && permanent != null) {
             Permanent blueprintPermanent = game.copyPermanent(Duration.Custom, targetCreature, permanent.getId(), source, new EmptyCopyApplier());
             blueprintPermanent.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                    new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT, ""), source.getSourceId(), game);
+                    new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT), source.getSourceId(), game);
             return true;
         }
         return false;

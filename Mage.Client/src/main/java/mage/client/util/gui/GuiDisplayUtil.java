@@ -2,6 +2,7 @@ package mage.client.util.gui;
 
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
 import mage.client.table.PlayersChatPanel;
 import mage.client.util.GUISizeHelper;
 import mage.constants.*;
@@ -16,8 +17,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
-
-import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
 
 public final class GuiDisplayUtil {
 
@@ -316,6 +315,9 @@ public final class GuiDisplayUtil {
         String pt;
         if (card.isCreature()) {
             pt = card.getPower() + '/' + card.getToughness();
+        } else if (card.showPT()) {
+            // Vehicles have a P/T set to display even when not creatures.
+            pt = "<span color='gray'>(" + card.getPower() + '/' + card.getToughness() + ")</span>";
         } else if (card.isPlaneswalker()) {
             pt = card.getLoyalty();
         } else if (card.isBattle()) {

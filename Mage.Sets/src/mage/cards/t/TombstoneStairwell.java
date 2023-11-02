@@ -65,7 +65,7 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
         this.staticText = "if {this} is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in their graveyard";
     }
 
-    TombstoneStairwellCreateTokenEffect(final TombstoneStairwellCreateTokenEffect effect) {
+    private TombstoneStairwellCreateTokenEffect(final TombstoneStairwellCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TombstoneStairwellDestroyEffect(), false);
     }
 
-    TombstoneStairwellTriggeredAbility(TombstoneStairwellTriggeredAbility ability) {
+    private TombstoneStairwellTriggeredAbility(final TombstoneStairwellTriggeredAbility ability) {
         super(ability);
     }
 
@@ -170,7 +170,7 @@ class TombstoneStairwellDestroyEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    TombstoneStairwellDestroyEffect(final TombstoneStairwellDestroyEffect effect) {
+    private TombstoneStairwellDestroyEffect(final TombstoneStairwellDestroyEffect effect) {
         super(effect);
         this.cardZoneString = effect.cardZoneString;
     }

@@ -84,7 +84,7 @@ class RicochetEffect extends OneShotEffect {
         staticText = "each player rolls a six-sided die. Change the target of that spell to the player with the lowest result. Reroll to break ties, if necessary";
     }
 
-    public RicochetEffect(final RicochetEffect effect) {
+    private RicochetEffect(final RicochetEffect effect) {
         super(effect);
     }
 

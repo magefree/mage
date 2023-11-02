@@ -70,7 +70,7 @@ class DeadlyVanityEffect extends OneShotEffect {
         staticText = "choose a creature or planeswalker, then destroy all other creatures and planeswalkers";
     }
 
-    DeadlyVanityEffect(DeadlyVanityEffect effect) {
+    private DeadlyVanityEffect(final DeadlyVanityEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class DeadlyVanityEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreatureOrPlaneswalker();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
 
         FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();

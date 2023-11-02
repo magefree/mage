@@ -26,7 +26,7 @@ public final class NezumiRonin extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public NezumiRonin (final NezumiRonin card) {
+    private NezumiRonin(final NezumiRonin card) {
         super(card);
     }
 

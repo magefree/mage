@@ -131,7 +131,7 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on {this}.";
     }
 
-    public AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
+    private AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
         super(effect);
     }
 

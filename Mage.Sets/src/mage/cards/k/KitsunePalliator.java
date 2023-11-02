@@ -53,7 +53,7 @@ class KitsunePalliatorEffect extends OneShotEffect {
         this.staticText = "Prevent the next 1 damage that would be dealt to each creature and each player this turn";
     }
 
-    public KitsunePalliatorEffect(final KitsunePalliatorEffect effect) {
+    private KitsunePalliatorEffect(final KitsunePalliatorEffect effect) {
         super(effect);
     }
 

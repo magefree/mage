@@ -78,7 +78,7 @@ class DreamSalvageEffect extends OneShotEffect {
         staticText = "Draw cards equal to the number of cards target opponent discarded this turn";
     }
 
-    public DreamSalvageEffect(final DreamSalvageEffect effect) {
+    private DreamSalvageEffect(final DreamSalvageEffect effect) {
         super(effect);
     }
 

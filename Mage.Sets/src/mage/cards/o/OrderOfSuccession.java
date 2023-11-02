@@ -54,7 +54,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
         this.staticText = "Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose";
     }
 
-    public OrderOfSuccessionEffect(final OrderOfSuccessionEffect effect) {
+    private OrderOfSuccessionEffect(final OrderOfSuccessionEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + nextPlayer.getLogName());
                     filter.add(new ControllerIdPredicate(nextPlayer.getId()));
                     Target target = new TargetCreaturePermanent(filter);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.canChoose(currentPlayer.getId(), source, game)) {
                         if (currentPlayer.chooseTarget(outcome, target, source, game)) {
                             playerCreature.put(currentPlayer.getId(), target.getFirstTarget());

@@ -12,7 +12,6 @@ import mage.counters.Counters;
 import mage.util.Copyable;
 
 /**
- *
  * @author BetaSteward
  */
 public class CardState implements Serializable, Copyable<CardState> {
@@ -31,7 +30,7 @@ public class CardState implements Serializable, Copyable<CardState> {
         counters = new Counters();
     }
 
-    public CardState(final CardState state) {
+    protected CardState(final CardState state) {
         this.faceDown = state.faceDown;
         this.info.putAll(state.info);
         counters = state.counters.copy();

@@ -39,7 +39,7 @@ public final class RiptideEntrancer extends CardImpl {
         this.addAbility(new RiptideEntrancerTriggeredAbility());
 
         // Morph {U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{U}{U}")));
     }
 
     private RiptideEntrancer(final RiptideEntrancer card) {
@@ -61,7 +61,7 @@ class RiptideEntrancerTriggeredAbility extends TriggeredAbilityImpl {
         ), false);
     }
 
-    public RiptideEntrancerTriggeredAbility(final RiptideEntrancerTriggeredAbility ability) {
+    private RiptideEntrancerTriggeredAbility(final RiptideEntrancerTriggeredAbility ability) {
         super(ability);
     }
 

@@ -50,7 +50,7 @@ class CounterlashEffect extends OneShotEffect {
                 + "without paying its mana cost";
     }
 
-    public CounterlashEffect(final CounterlashEffect effect) {
+    private CounterlashEffect(final CounterlashEffect effect) {
         super(effect);
     }
 

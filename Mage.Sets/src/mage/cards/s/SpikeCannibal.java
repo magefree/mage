@@ -61,7 +61,7 @@ class SpikeCannibalEffect extends OneShotEffect {
         this.staticText = "move all +1/+1 counters from all creatures onto it";
     }
 
-    SpikeCannibalEffect(final SpikeCannibalEffect effect) {
+    private SpikeCannibalEffect(final SpikeCannibalEffect effect) {
         super(effect);
     }
 

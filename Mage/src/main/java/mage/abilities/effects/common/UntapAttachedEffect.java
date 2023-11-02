@@ -9,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX
  */
 public class UntapAttachedEffect extends OneShotEffect {
@@ -23,13 +22,13 @@ public class UntapAttachedEffect extends OneShotEffect {
         staticText = "untap " + CardUtil.getTextWithFirstCharLowerCase(attachmentType.verb()) + ' ' + name;
     }
 
-    public UntapAttachedEffect(final UntapAttachedEffect effect) {
+    protected UntapAttachedEffect(final UntapAttachedEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
         if (permanent != null) {
             Permanent attach = game.getPermanent(permanent.getAttachedTo());
             if (attach != null) {

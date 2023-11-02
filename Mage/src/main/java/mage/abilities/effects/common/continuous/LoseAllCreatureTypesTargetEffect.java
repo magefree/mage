@@ -19,7 +19,7 @@ public class LoseAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
     }
 
-    public LoseAllCreatureTypesTargetEffect(final LoseAllCreatureTypesTargetEffect effect) {
+    protected LoseAllCreatureTypesTargetEffect(final LoseAllCreatureTypesTargetEffect effect) {
         super(effect);
     }
 

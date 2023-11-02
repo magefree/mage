@@ -36,7 +36,7 @@ public final class PonybackBrigade extends CardImpl {
         this.addAbility(new PonybackBrigadeAbility(new GoblinToken()));
 
         // Morph {2}{R}{W}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{R}{W}{B}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{R}{W}{B}")));
     }
 
     private PonybackBrigade(final PonybackBrigade card) {
@@ -57,7 +57,7 @@ class PonybackBrigadeAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} enters the battlefield or is turned face up, ");
     }
 
-    public PonybackBrigadeAbility(final PonybackBrigadeAbility ability) {
+    private PonybackBrigadeAbility(final PonybackBrigadeAbility ability) {
         super(ability);
     }
 

@@ -49,7 +49,7 @@ class SleepEffect extends OneShotEffect {
         staticText = "Tap all creatures target player controls. Those creatures don't untap during that player's next untap step";
     }
 
-    public SleepEffect(final SleepEffect effect) {
+    private SleepEffect(final SleepEffect effect) {
         super(effect);
     }
 

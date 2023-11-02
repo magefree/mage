@@ -34,11 +34,6 @@
             <artifactId>mage-client</artifactId>
             <version>${mage-version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.13.3</version>
-        </dependency>
 
         <dependency>
             <groupId>org.reflections</groupId>
@@ -95,6 +90,8 @@
         <finalName>mage-verify</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
 
 </project>

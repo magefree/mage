@@ -28,7 +28,7 @@ public final class BlackSunsZenith extends CardImpl {
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
 
-    public BlackSunsZenith (final BlackSunsZenith card) {
+    private BlackSunsZenith(final BlackSunsZenith card) {
         super(card);
     }
 
@@ -45,7 +45,7 @@ class BlackSunsZenithEffect extends OneShotEffect {
         staticText = "Put X -1/-1 counters on each creature";
     }
 
-    BlackSunsZenithEffect(final BlackSunsZenithEffect effect) {
+    private BlackSunsZenithEffect(final BlackSunsZenithEffect effect) {
         super(effect);
     }
 

@@ -72,7 +72,7 @@ class ZabazTheGlimmerwaspEffect extends ReplacementEffectImpl {
                 "that many plus one +1/+1 counters are put on it instead";
     }
 
-    ZabazTheGlimmerwaspEffect(final ZabazTheGlimmerwaspEffect effect) {
+    private ZabazTheGlimmerwaspEffect(final ZabazTheGlimmerwaspEffect effect) {
         super(effect);
     }
 

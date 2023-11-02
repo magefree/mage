@@ -55,7 +55,7 @@ class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DarienKingOfKjeldorEffect(), true);
     }
 
-    public DarienKingOfKjeldorTriggeredAbility(final DarienKingOfKjeldorTriggeredAbility ability) {
+    private DarienKingOfKjeldorTriggeredAbility(final DarienKingOfKjeldorTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class DarienKingOfKjeldorEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public DarienKingOfKjeldorEffect(final DarienKingOfKjeldorEffect effect) {
+    private DarienKingOfKjeldorEffect(final DarienKingOfKjeldorEffect effect) {
         super(effect);
     }
 

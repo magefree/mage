@@ -607,7 +607,7 @@ public class TableController {
                     logger.info("Tourn. match started id:" + match.getId() + " tournId: " + table.getTournament().getId());
                 } else {
                     managerFactory.userManager().getUser(userId).ifPresent(user -> {
-                        logger.info("MATCH started [" + match.getName() + "] " + match.getId() + '(' + user.getName() + ')');
+                        logger.info("MATCH started [" + match.getName() + "] " + match.getId() + " (" + user.getName() + ')');
                         logger.debug("- " + match.getOptions().getGameType() + " - " + match.getOptions().getDeckType());
                     });
                 }
@@ -628,6 +628,8 @@ public class TableController {
             gameOptions.rollbackTurnsAllowed = match.getOptions().isRollbackTurnsAllowed();
             gameOptions.bannedUsers = match.getOptions().getBannedUsers();
             gameOptions.planeChase = match.getOptions().isPlaneChase();
+            gameOptions.perPlayerEmblemCards = match.getOptions().getPerPlayerEmblemCards();
+            gameOptions.globalEmblemCards = match.getOptions().getGlobalEmblemCards();
             match.getGame().setGameOptions(gameOptions);
             managerFactory.gameManager().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId, gameOptions);
             String creator = null;
@@ -860,9 +862,9 @@ public class TableController {
                         });
                     }
                 }
-                // free resources no longer needed
-                match.cleanUpOnMatchEnd(managerFactory.configSettings().isSaveGameActivated(), table.isTournament());
             }
+            // free resources no longer needed
+            match.cleanUpOnMatchEnd(managerFactory.configSettings().isSaveGameActivated(), table.isTournament());
         }
     }
 

@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -41,7 +40,7 @@ public final class KrovikanHorror extends CardImpl {
         // At the beginning of the end step, if Krovikan Horror is in your graveyard with a creature card directly above it, you may return Krovikan Horror to your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                TargetController.ANY, KrovikanHorrorCondition.instance, true
+                TargetController.NEXT, KrovikanHorrorCondition.instance, true
         ));
 
         // {1}, Sacrifice a creature: Krovikan Horror deals 1 damage to any target.

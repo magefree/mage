@@ -67,10 +67,10 @@ public final class VizkopaGuildmage extends CardImpl {
 class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public VizkopaGuildmageDelayedTriggeredAbility() {
-        super(new OpponentsLoseLifeEffect(), Duration.EndOfTurn, false);
+        super(new VizkopaGuildmageEffect(), Duration.EndOfTurn, false);
     }
 
-    public VizkopaGuildmageDelayedTriggeredAbility(VizkopaGuildmageDelayedTriggeredAbility ability) {
+    private VizkopaGuildmageDelayedTriggeredAbility(final VizkopaGuildmageDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,19 +99,19 @@ class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class OpponentsLoseLifeEffect extends OneShotEffect {
+class VizkopaGuildmageEffect extends OneShotEffect {
 
-    public OpponentsLoseLifeEffect() {
+    public VizkopaGuildmageEffect() {
         super(Outcome.Damage);
     }
 
-    public OpponentsLoseLifeEffect(final OpponentsLoseLifeEffect effect) {
+    private VizkopaGuildmageEffect(final VizkopaGuildmageEffect effect) {
         super(effect);
     }
 
     @Override
-    public OpponentsLoseLifeEffect copy() {
-        return new OpponentsLoseLifeEffect(this);
+    public VizkopaGuildmageEffect copy() {
+        return new VizkopaGuildmageEffect(this);
     }
 
     @Override

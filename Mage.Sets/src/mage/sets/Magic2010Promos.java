@@ -22,8 +22,6 @@ public class Magic2010Promos extends ExpansionSet {
 
         cards.add(new SetCardInfo("Ant Queen", "166*", Rarity.RARE, mage.cards.a.AntQueen.class));
         cards.add(new SetCardInfo("Honor of the Pure", "16*", Rarity.RARE, mage.cards.h.HonorOfThePure.class));
-        cards.add(new SetCardInfo("Mycoid Shepherd", 28, Rarity.RARE, mage.cards.m.MycoidShepherd.class));
-        cards.add(new SetCardInfo("Naya Sojourners", 29, Rarity.RARE, mage.cards.n.NayaSojourners.class));
         cards.add(new SetCardInfo("Vampire Nocturnus", "118*", Rarity.MYTHIC, mage.cards.v.VampireNocturnus.class));
     }
 }

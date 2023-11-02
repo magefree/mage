@@ -27,7 +27,7 @@ public class BlocksOrBlockedAttachedTriggeredAbility extends TriggeredAbilityImp
         this.attachmentType = attachmentType;
     }
 
-    public BlocksOrBlockedAttachedTriggeredAbility(final BlocksOrBlockedAttachedTriggeredAbility ability) {
+    protected BlocksOrBlockedAttachedTriggeredAbility(final BlocksOrBlockedAttachedTriggeredAbility ability) {
         super(ability);
         this.attachmentType = ability.attachmentType;
     }

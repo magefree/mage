@@ -2,11 +2,14 @@ package mage.cards.s;
 
 import mage.MageIdentifier;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.*;
-import mage.cards.*;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -18,8 +21,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -85,7 +86,7 @@ class ShareTheSpoilsExileETBAndPlayerLossAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public ShareTheSpoilsExileETBAndPlayerLossAbility copy() {
         return new ShareTheSpoilsExileETBAndPlayerLossAbility(this);
     }
 
@@ -102,7 +103,7 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
         super(Outcome.Exile);
     }
 
-    public ShareTheSpoilsExileCardFromEveryoneEffect(final ShareTheSpoilsExileCardFromEveryoneEffect effect) {
+    private ShareTheSpoilsExileCardFromEveryoneEffect(final ShareTheSpoilsExileCardFromEveryoneEffect effect) {
         super(effect);
     }
 
@@ -286,7 +287,7 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public ShareTheSpoilsExileCardWhenPlayACardAbility copy() {
         return new ShareTheSpoilsExileCardWhenPlayACardAbility(this);
     }
 

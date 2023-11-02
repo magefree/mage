@@ -63,7 +63,7 @@ class VortexElementalEffect extends OneShotEffect {
         this.staticText = "Put {this} and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle";
     }
 
-    public VortexElementalEffect(final VortexElementalEffect effect) {
+    private VortexElementalEffect(final VortexElementalEffect effect) {
         super(effect);
     }
 

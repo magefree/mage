@@ -1,7 +1,6 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -29,9 +28,10 @@ public class InvestigateEffect extends OneShotEffect {
     public InvestigateEffect(DynamicValue amount) {
         super(Outcome.Benefit);
         this.amount = amount;
+        this.staticText = makeText();
     }
 
-    public InvestigateEffect(final InvestigateEffect effect) {
+    protected InvestigateEffect(final InvestigateEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -54,11 +54,7 @@ public class InvestigateEffect extends OneShotEffect {
         return new InvestigateEffect(this);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
+    private String makeText() {
         String message;
         if (amount instanceof StaticValue) {
             int value = ((StaticValue) amount).getValue();
@@ -75,7 +71,7 @@ public class InvestigateEffect extends OneShotEffect {
         } else {
             message = " X times, where X is the " + amount.getMessage() + ". <i>(To investigate, c";
         }
-        return "investigate" + message + "reate a colorless Clue artifact token " +
-                "with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
+        return "investigate" + message + "reate a Clue token. " +
+                "It's an artifact with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
     }
 }

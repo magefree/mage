@@ -54,7 +54,7 @@ class MoonringMirrorExileEffect extends OneShotEffect {
         staticText = "exile the top card of your library face down";
     }
 
-    public MoonringMirrorExileEffect(final MoonringMirrorExileEffect effect) {
+    private MoonringMirrorExileEffect(final MoonringMirrorExileEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class MoonringMirrorEffect extends OneShotEffect {
         this.staticText = "you may exile all cards from your hand face down. If you do, put all other cards you own exiled with {this} into your hand";
     }
 
-    public MoonringMirrorEffect(final MoonringMirrorEffect effect) {
+    private MoonringMirrorEffect(final MoonringMirrorEffect effect) {
         super(effect);
     }
 

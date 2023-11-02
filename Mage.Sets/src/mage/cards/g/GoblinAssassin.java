@@ -35,7 +35,7 @@ public final class GoblinAssassin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Goblin Assassin or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.
-        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GoblinAssassinTriggeredEffect(), filter));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GoblinAssassinTriggeredEffect(), filter, false, false));
     }
 
     private GoblinAssassin(final GoblinAssassin card) {
@@ -68,7 +68,7 @@ class GoblinAssassinTriggeredEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !player.flipCoin(source, game, false)) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());

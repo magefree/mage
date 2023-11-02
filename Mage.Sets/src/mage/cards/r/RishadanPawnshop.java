@@ -62,7 +62,7 @@ class RishadanPawnshopShuffleIntoLibraryEffect extends OneShotEffect {
         this.staticText = "The owner of target nontoken permanent you control shuffles it into their library";
     }
 
-    public RishadanPawnshopShuffleIntoLibraryEffect(final RishadanPawnshopShuffleIntoLibraryEffect effect) {
+    private RishadanPawnshopShuffleIntoLibraryEffect(final RishadanPawnshopShuffleIntoLibraryEffect effect) {
         super(effect);
     }
 

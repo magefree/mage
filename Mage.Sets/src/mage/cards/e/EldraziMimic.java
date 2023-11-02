@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -11,24 +10,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class EldraziMimic extends CardImpl {
 
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("another colorless creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another colorless creature");
 
     static {
-        FILTER.add(AnotherPredicate.instance);
-        FILTER.add(ColorlessPredicate.instance);
+        filter.add(AnotherPredicate.instance);
+        filter.add(ColorlessPredicate.instance);
     }
 
     public EldraziMimic(UUID ownerId, CardSetInfo setInfo) {
@@ -39,7 +39,10 @@ public final class EldraziMimic extends CardImpl {
 
         // Whenever another colorless creature enters the battlefield under your control, you may have the base power and toughness of Eldrazi Mimic
         // become that creature's power and toughness until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new EldraziMimicEffect(), FILTER, true, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new EldraziMimicEffect(), filter,
+                true, SetTargetPointer.PERMANENT
+        ));
     }
 
     private EldraziMimic(final EldraziMimic card) {
@@ -55,11 +58,11 @@ public final class EldraziMimic extends CardImpl {
 class EldraziMimicEffect extends OneShotEffect {
 
     public EldraziMimicEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.BoostCreature);
         staticText = "you may have the base power and toughness of {this} become that creature's power and toughness until end of turn";
     }
 
-    public EldraziMimicEffect(final EldraziMimicEffect effect) {
+    private EldraziMimicEffect(final EldraziMimicEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class NoosegrafMobEffect extends OneShotEffect {
         staticText = "remove a +1/+1 counter from Noosegraf Mob. If you do, create a 2/2 black Zombie creature token";
     }
 
-    public NoosegrafMobEffect(final NoosegrafMobEffect effect) {
+    private NoosegrafMobEffect(final NoosegrafMobEffect effect) {
         super(effect);
     }
 

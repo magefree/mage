@@ -53,7 +53,7 @@ class LeafCrownedElderPlayEffect extends OneShotEffect {
         staticText = "you may play that card without paying its mana cost";
     }
 
-    public LeafCrownedElderPlayEffect(final LeafCrownedElderPlayEffect effect) {
+    private LeafCrownedElderPlayEffect(final LeafCrownedElderPlayEffect effect) {
         super(effect);
     }
 

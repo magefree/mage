@@ -58,7 +58,7 @@ class IlluminationEffect extends OneShotEffect {
         staticText = "Its controller gains life equal to its mana value";
     }
 
-    public IlluminationEffect(final IlluminationEffect effect) {
+    private IlluminationEffect(final IlluminationEffect effect) {
         super(effect);
     }
 
