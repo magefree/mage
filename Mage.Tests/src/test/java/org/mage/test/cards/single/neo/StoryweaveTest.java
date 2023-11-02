@@ -47,8 +47,14 @@ public class StoryweaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, intervention);
         addCard(Zone.HAND, playerA, fang);
 
+        // For scry, putting 2 cards on top.
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerA, "Elite Vanguard");
+
         addEffectToGame();
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, intervention, true);
+        addTarget(playerA, "Elite Vanguard"); // scry Vanguard on bottom
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, fang);
 
         setStrictChooseMode(true);
@@ -71,9 +77,15 @@ public class StoryweaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, intervention);
         addCard(Zone.HAND, playerA, fang);
 
+        // For scry, putting 2 cards on top.
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerA, "Elite Vanguard");
+
         addEffectToGame();
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fang);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, intervention);
+        addTarget(playerA, "Elite Vanguard"); // scry Vanguard on bottom
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

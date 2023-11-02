@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -49,6 +50,7 @@ public class BestowTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silent Artisan");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Gods Willing", "Silent Artisan");
         setChoice(playerA, "White");
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // scrying 1 to the top
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -530,6 +532,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertType("Nylea's Emissary", CardType.CREATURE, false);
         assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
     }
+
     @Test
     public void testCastBestowFlash() {
         addCard(Zone.HAND, playerA, "Nylea's Emissary"); // +3/+3, only an aura if cast with bestow
