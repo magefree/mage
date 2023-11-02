@@ -8,6 +8,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -44,6 +45,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.*;
 import org.apache.log4j.Logger;
 
@@ -1341,12 +1343,14 @@ public class HumanPlayer extends PlayerImpl {
             return null;
         }
 
+        // automatically order triggers with same ability, rules text, and targets
         String autoOrderRuleText = null;
+        Ability autoOrderAbility = null;
         boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (canRespond()) {
             // try to set trigger auto order
-            java.util.List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
-            java.util.List<TriggeredAbility> abilitiesOrderLast = new ArrayList<>();
+            List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
+            List<TriggeredAbility> abilitiesOrderLast = new ArrayList<>();
             for (TriggeredAbility ability : abilities) {
                 if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
                     return ability;
@@ -1366,12 +1370,33 @@ public class HumanPlayer extends PlayerImpl {
                     continue;
                 }
                 if (autoOrderUse) {
-                    // multiple triggers with same rule text will be auto-ordered
+                    // multiple triggers with same rule text will be auto-ordered if possible
+                    // if different, must use choose dialog
                     if (autoOrderRuleText == null) {
+                        // first trigger, store rule text and ability to compare subsequent triggers
                         autoOrderRuleText = rule;
+                        autoOrderAbility = ability;
                     } else if (!rule.equals(autoOrderRuleText)) {
-                        // diff triggers, so must use choose dialog
+                        // disable auto order if rule text is different
                         autoOrderUse = false;
+                    } else {
+                        // disable auto order if targets are different
+                        Effects effects1 = autoOrderAbility.getEffects();
+                        Effects effects2 = ability.getEffects();
+                        if (effects1.size() != effects2.size()) {
+                            autoOrderUse = false;
+                        } else {
+                            for (int i = 0; i < effects1.size(); i++) {
+                                TargetPointer targetPointer1 = effects1.get(i).getTargetPointer();
+                                TargetPointer targetPointer2 = effects2.get(i).getTargetPointer();
+                                List<UUID> targets1 = (targetPointer1 == null) ? new ArrayList<>() : targetPointer1.getTargets(game, autoOrderAbility);
+                                List<UUID> targets2 = (targetPointer2 == null) ? new ArrayList<>() : targetPointer2.getTargets(game, ability);
+                                if (!targets1.equals(targets2)) {
+                                    autoOrderUse = false;
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
                 abilitiesWithNoOrderSet.add(ability);
@@ -1382,8 +1407,7 @@ public class HumanPlayer extends PlayerImpl {
                 return abilitiesOrderLast.stream().findFirst().orElse(null);
             }
 
-            if (abilitiesWithNoOrderSet.size() == 1
-                    || autoOrderUse) {
+            if (abilitiesWithNoOrderSet.size() == 1 || autoOrderUse) {
                 return abilitiesWithNoOrderSet.iterator().next();
             }
 

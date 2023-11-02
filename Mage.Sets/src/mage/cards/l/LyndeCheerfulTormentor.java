@@ -25,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -91,7 +92,9 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
         if (zEvent.isDiesEvent()) {
             Permanent permanent = zEvent.getTarget();
             if (permanent != null && permanent.hasSubtype(SubType.CURSE, game) && permanent.isOwnedBy(controllerId)) {
-                getEffects().setValue("curse", new MageObjectReference(game.getCard(zEvent.getTargetId()), game));
+                MageObjectReference curse = new MageObjectReference(game.getCard(zEvent.getTargetId()), game);
+                getEffects().setValue("curse", curse);
+                getEffects().setTargetPointer(new FixedTarget(curse));
                 return true;
             }
         }
