@@ -55,7 +55,7 @@ public class LoadCheatsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        setChoice(playerA, "3");
+        setChoice(playerA, "5"); // choose [group 3]: 5 = 2 default menus + 3 group
         SystemUtil.addCardsForTesting(currentGame, commandsFile, playerA);
 
         assertHandCount(playerA, "Razorclaw Bear", 1);
