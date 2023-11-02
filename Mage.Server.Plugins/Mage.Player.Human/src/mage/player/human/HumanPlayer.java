@@ -18,8 +18,6 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -55,6 +53,9 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
+
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -2428,9 +2429,17 @@ public class HumanPlayer extends PlayerImpl {
             return null;
         }
 
-        if (modes.size() > 1) {
-            // done option for up to choices
-            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
+        if (modes.size() == 0) {
+            return null;
+        }
+
+        if (modes.size() == 1) {
+            return modes.getMode();
+        }
+
+        boolean done = false;
+        while (!done && canRespond()) {
+            // prepare modes list
             MageObject obj = game.getObject(source);
             Map<UUID, String> modeMap = new LinkedHashMap<>();
             int modeIndex = 0;
@@ -2468,65 +2477,61 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
-            if (!modeMap.isEmpty()) {
-
-                // can done for up to
-                if (canEndChoice) {
-                    modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
-                }
-                modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
-
-                boolean done = false;
-                while (!done && canRespond()) {
-
-                    String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
-                            + ", min " + modes.getMinModes() + ")";
-                    if (obj != null) {
-                        message = message + "<br>" + obj.getLogName();
-                    }
-
-                    updateGameStatePriority("chooseMode", game);
-                    prepareForResponse(game);
-                    if (!isExecutingMacro()) {
-                        game.fireGetModeEvent(playerId, message, modeMap);
-                    }
-                    waitForResponse(game);
-
-                    UUID responseId = getFixedResponseUUID(game);
-                    if (responseId != null) {
-                        for (Mode mode : modes.getAvailableModes(source, game)) {
-                            if (mode.getId().equals(responseId)) {
-                                // TODO: add checks on 2x selects (cheaters can rewrite client side code and select same mode multiple times)
-                                // reason: wrong setup eachModeMoreThanOnce and eachModeOnlyOnce in many cards
-                                return mode;
-                            }
-                        }
-
-                        // end choice by done option in ability pickup dialog
-                        if (canEndChoice && Modes.CHOOSE_OPTION_DONE_ID.equals(responseId)) {
-                            done = true;
-                        }
-
-                        // cancel choice (remove all selections)
-                        if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(responseId)) {
-                            modes.clearSelectedModes();
-                        }
-                    } else if (canEndChoice) {
-                        // end choice by done button in feedback panel
-                        // disable after done option implemented
-                        // done = true;
-                    }
-
-                    // triggered abilities can't be skipped by cancel or wrong answer
-                    if (source.getAbilityType() != AbilityType.TRIGGERED) {
-                        done = true;
-                    }
-                }
+            // done button for "for up" choices only
+            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
+            if (canEndChoice) {
+                modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
             }
-            return null;
+            modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
+
+            // prepare dialog
+            String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
+                    + ", min " + modes.getMinModes() + ")";
+            if (obj != null) {
+                message = message + "<br>" + obj.getLogName();
+            }
+
+            updateGameStatePriority("chooseMode", game);
+            prepareForResponse(game);
+            if (!isExecutingMacro()) {
+                game.fireGetModeEvent(playerId, message, modeMap);
+            }
+            waitForResponse(game);
+
+            // process choice
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
+                for (Mode mode : modes.getAvailableModes(source, game)) {
+                    if (mode.getId().equals(responseId)) {
+                        // TODO: add checks on 2x selects (cheaters can rewrite client side code and select same mode multiple times)
+                        // reason: wrong setup eachModeMoreThanOnce and eachModeOnlyOnce in many cards
+                        return mode;
+                    }
+                }
+
+                // end choice by done option in ability pickup dialog
+                if (canEndChoice && Modes.CHOOSE_OPTION_DONE_ID.equals(responseId)) {
+                    done = true;
+                }
+
+                // cancel choice (remove all selections)
+                if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(responseId)) {
+                    modes.clearSelectedModes();
+                }
+            } else if (canEndChoice) {
+                // end choice by done button in feedback panel
+                // disable after done option implemented
+                // done = true;
+            }
+
+            // triggered abilities can't be skipped by cancel or wrong answer
+            if (source.getAbilityType() != AbilityType.TRIGGERED) {
+                done = true;
+            }
         }
 
-        return modes.getMode();
+        // user disconnected, press cancel, press done or something else
+        return null;
     }
 
     @Override

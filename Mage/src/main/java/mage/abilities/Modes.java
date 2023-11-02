@@ -45,7 +45,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     private TargetController chooseController;
     private boolean mayChooseSameModeMoreThanOnce = false; // example: choose three... you may choose the same mode more than once
     private boolean mayChooseNone = false;
-    private boolean isRandom = false;
+    private boolean isRandom = false; // random from available modes, not modes TODO: research rules of Cult of Skaro after WHO release (is it random from all modes or from available/valid)
 
     public Modes() {
         // add default mode
@@ -287,19 +287,41 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                 && getOnceTurnNum(game, source) != game.getTurnNum();
     }
 
+    private boolean isSelectedValid(Ability source, Game game) {
+        if (isLimitUsageByOnce()) {
+            setOnceSelectedModes(source, game);
+        }
+        return this.selectedModes.size() >= this.getMinModes()
+                || (this.selectedModes.size() == 0 && mayChooseNone);
+    }
+
     public boolean choose(Game game, Ability source) {
         if (isAlreadySelectedModesOutdated(game, source)) {
             this.clearAlreadySelectedModes(source, game);
         }
-        if (this.size() > 1) {
-            this.clearSelectedModes();
-            if (this.isRandom) {
-                List<Mode> modes = getAvailableModes(source, game);
-                this.addSelectedMode(modes.get(RandomUtil.nextInt(modes.size())).getId());
-                return true;
-            }
+        this.clearSelectedModes();
 
-            // check if mode modifying abilities exist
+        // runtime check
+        if (this.isRandom && limitUsageByOnce) {
+            // non-tested use case, if you catch this error then disable and manually test, if fine then that check can be removed
+            throw new IllegalStateException("Wrong code usage: random modes are not support with once usage");
+        }
+
+        // 700.2b
+        // The controller of a modal triggered ability chooses the mode(s) as part of putting that ability
+        // on the stack. If one of the modes would be illegal (due to an inability to choose legal targets, for
+        // example), that mode can’t be chosen. If no mode is chosen, the ability is removed from the
+        // stack. (See rule 603.3c.)
+        List<Mode> availableModes = getAvailableModes(source, game);
+        if (availableModes.size() == 0) {
+            return isSelectedValid(source, game);
+        }
+
+        // modal spells must show choose dialog even for 1 option, so check this.size instead evailableModes.size here
+        if (this.size() > 1) {
+            // multiple modes
+
+            // modes modifications, e.g. choose max modes instead single
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
                 for (Ability modeModifyingAbility : card.getAbilities(game)) {
@@ -310,7 +332,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                 }
             }
 
-            // check if all modes can be activated automatically
+            // choose random
+            if (this.isRandom) {
+                // TODO: research rules of Cult of Skaro after WHO release (is it random from all modes or from available/valid)
+                this.addSelectedMode(availableModes.get(RandomUtil.nextInt(availableModes.size())).getId());
+                return isSelectedValid(source, game);
+            }
+
+            // UX: check if all modes can be activated automatically
             if (this.size() == this.getMinModes() && !isMayChooseSameModeMoreThanOnce()) {
                 Set<UUID> onceSelectedModes = null;
                 if (isLimitUsageByOnce()) {
@@ -322,10 +351,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                         this.addSelectedMode(mode.getId());
                     }
                 }
-                if (isLimitUsageByOnce()) {
-                    setOnceSelectedModes(source, game);
-                }
-                return !selectedModes.isEmpty();
+                return isSelectedValid(source, game);
             }
 
             // 700.2d
@@ -352,20 +378,15 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             while (this.selectedModes.size() < currentMaxModes) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
-                    if (isLimitUsageByOnce()) {
-                        setOnceSelectedModes(source, game);
-                    }
-                    return this.selectedModes.size() >= this.getMinModes()
-                            || (this.selectedModes.size() == 0 && mayChooseNone);
+                    // user press cancel/stop in choose dialog or nothing to choose
+                    return isSelectedValid(source, game);
                 }
                 this.addSelectedMode(choice.getId());
                 if (currentMode == null) {
                     currentMode = choice;
                 }
             }
-            if (isLimitUsageByOnce()) {
-                setOnceSelectedModes(source, game);
-            }
+            // effects helper (keep real choosing player)
             if (chooseController == TargetController.OPPONENT) {
                 selectedModes
                         .stream()
@@ -374,13 +395,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                         .forEach(effects -> effects.setValue("choosingPlayer", playerId));
             }
         } else {
-            // only one mode available
-            this.clearSelectedModes();
+            // only one mode
             Mode mode = this.values().iterator().next();
             this.addSelectedMode(mode.getId());
             this.setActiveMode(mode);
         }
-        return true;
+
+        return isSelectedValid(source, game);
     }
 
     /**
@@ -449,7 +470,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         Set<UUID> res = new HashSet<>();
 
         // if selected modes is not for current turn, so we ignore any value that may be there
-        if (!ignoreOutdatedData && isAlreadySelectedModesOutdated(game, source)) {
+        if (ignoreOutdatedData && isAlreadySelectedModesOutdated(game, source)) {
             return res;
         }
 
