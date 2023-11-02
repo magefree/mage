@@ -3,6 +3,7 @@ package org.mage.test.cards.single.lci;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -31,7 +32,7 @@ public class StarvingRevenantTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, revenant);
-        // TODO: allow control of surveil with some setChoice
+        addTarget(playerA, "Plains^Island");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -39,5 +40,48 @@ public class StarvingRevenantTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertGraveyardCount(playerA, 2);
         assertHandCount(playerA, 0);
+    }
+
+    @Test
+    public void surveil_one_on_top() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.HAND, playerA, revenant);
+        addCard(Zone.LIBRARY, playerA, "Plains");
+        addCard(Zone.LIBRARY, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, revenant);
+        addTarget(playerA, "Plains");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20 - 3);
+        assertGraveyardCount(playerA, 1);
+        assertHandCount(playerA, 1);
+    }
+
+    @Test
+    public void surveil_both_on_top() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.HAND, playerA, revenant);
+        addCard(Zone.LIBRARY, playerA, "Plains");
+        addCard(Zone.LIBRARY, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, revenant);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        setChoice(playerA, "Plains"); // Plains put on top first
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20 - 3 * 2);
+        assertGraveyardCount(playerA, 0);
+        assertHandCount(playerA, 2);
     }
 }
