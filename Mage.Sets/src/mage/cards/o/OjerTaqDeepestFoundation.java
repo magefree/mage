@@ -1,18 +1,22 @@
 package mage.cards.o;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -38,7 +42,7 @@ public final class OjerTaqDeepestFoundation extends CardImpl {
 
         // When Ojer Taq dies, return it to the battlefield tapped and transformed under its owner's control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesSourceTriggeredAbility(new OjerAxonilDeepestMightTransformEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new OjerTaqDeepestFoundationTransformEffect()));
     }
 
     private OjerTaqDeepestFoundation(final OjerTaqDeepestFoundation card) {
@@ -48,6 +52,38 @@ public final class OjerTaqDeepestFoundation extends CardImpl {
     @Override
     public OjerTaqDeepestFoundation copy() {
         return new OjerTaqDeepestFoundation(this);
+    }
+}
+
+class OjerTaqDeepestFoundationTransformEffect extends OneShotEffect {
+
+    OjerTaqDeepestFoundationTransformEffect() {
+        super(Outcome.Benefit);
+        staticText = "return it to the battlefield tapped and transformed under its owner's control";
+    }
+
+    private OjerTaqDeepestFoundationTransformEffect(final OjerTaqDeepestFoundationTransformEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OjerTaqDeepestFoundationTransformEffect copy() {
+        return new OjerTaqDeepestFoundationTransformEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (!(sourceObject instanceof Card)) {
+            return false;
+        }
+        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game, true, false, true, null);
+        return true;
     }
 }
 
