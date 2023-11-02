@@ -54,6 +54,7 @@ public final class TheTwelfthDoctor extends CardImpl {
     }
 }
 
+// Code adapted from Wild-Magic Sorcerer
 class TheTwelfthDoctorGainDemonstrateEffect extends ContinuousEffectImpl {
 
     public TheTwelfthDoctorGainDemonstrateEffect() {
@@ -92,6 +93,7 @@ class TheTwelfthDoctorGainDemonstrateEffect extends ContinuousEffectImpl {
     }
 }
 
+// Code adapted from Wild-Magic Sorcerer
 enum FirstSpellCastFromNotHandEachTurnCondition implements Condition {
     instance;
 
@@ -107,6 +109,7 @@ enum FirstSpellCastFromNotHandEachTurnCondition implements Condition {
     }
 }
 
+// Code adapted from Wild-Magic Sorcerer
 class TheTwelfthDoctorWatcher extends Watcher {
 
     private final Map<UUID, MageObjectReference> playerMap = new HashMap<>();
@@ -144,6 +147,7 @@ class TheTwelfthDoctorWatcher extends Watcher {
     }
 }
 
+// Code adapted from Kalamax, the Stormsire
 class TheTwelfthDoctorCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     TheTwelfthDoctorCopyTriggeredAbility() {
