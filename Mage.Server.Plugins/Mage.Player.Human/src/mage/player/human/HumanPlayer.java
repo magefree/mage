@@ -2154,6 +2154,9 @@ public class HumanPlayer extends PlayerImpl {
                 Map<String, Serializable> options = new HashMap<>(2);
                 options.put("title", type.getTitle());
                 options.put("header", type.getHeader());
+                if (type.isCanCancel()) {
+                    options.put("canCancel", true);
+                }
                 game.fireGetMultiAmountEvent(playerId, messages, min, max, options);
             }
             waitForResponse(game);
@@ -2169,11 +2172,17 @@ public class HumanPlayer extends PlayerImpl {
                     logger.error(String.format("GUI return wrong MultiAmountType values: %d %d %d - %s", needCount, min, max, response.getString()));
                     game.informPlayer(this, "Error, you must enter correct values.");
                 }
+            } else if (type.isCanCancel() && response.getBoolean() != null) {
+                answer = null;
+                break;
             }
         }
 
         if (answer != null) {
             return answer;
+        } else if (type.isCanCancel()) {
+            // cancel
+            return null;
         } else {
             // something wrong, e.g. player disconnected
             return defaultList;

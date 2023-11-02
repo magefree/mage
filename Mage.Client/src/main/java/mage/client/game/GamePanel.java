@@ -1785,7 +1785,11 @@ public final class GamePanel extends javax.swing.JPanel {
         DialogManager.getManager(gameId).fadeOut();
 
         pickMultiNumber.showDialog(messages, min, max, lastGameData.options);
-        SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
+        if (pickMultiNumber.isCancel()) {
+            SessionHandler.sendPlayerBoolean(gameId, false);
+        } else {
+            SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
+        }
     }
 
     public void getChoice(int messageId, GameView gameView, Map<String, Serializable> options, Choice choice, UUID objectId) {

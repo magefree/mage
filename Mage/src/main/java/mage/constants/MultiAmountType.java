@@ -13,14 +13,21 @@ public enum MultiAmountType {
     MANA("Add mana", "Distribute mana among colors"),
     DAMAGE("Assign damage", "Assign damage among targets"),
     P1P1("Add +1/+1 counters", "Distribute +1/+1 counters among creatures"),
-    COUNTERS("Choose counters", "Move counters");
+    COUNTERS("Choose counters", "Move counters"),
+    CHEAT_LANDS("Choose lands", "Add lands to your battlefield", true);
 
     private final String title;
     private final String header;
+    private final boolean canCancel; // choice dialog will return null instead default values
 
     MultiAmountType(String title, String header) {
+        this(title, header, false);
+    }
+
+    MultiAmountType(String title, String header, boolean canCancel) {
         this.title = title;
         this.header = header;
+        this.canCancel = canCancel;
     }
 
     public String getTitle() {
@@ -31,9 +38,13 @@ public enum MultiAmountType {
         return header;
     }
 
+    public boolean isCanCancel() {
+        return canCancel;
+    }
+
     public static List<Integer> prepareDefaltValues(List<MultiAmountMessage> constraints, int min, int max) {
         // default values must be assigned from first to last by minimum values
-        List<Integer> res = constraints.stream().map(m -> m.min > Integer.MIN_VALUE ? m.min : (0 < max ? 0 : max))
+        List<Integer> res = constraints.stream().map(m -> m.defaultValue > Integer.MIN_VALUE ? m.defaultValue : Math.min(0, max))
                 .collect(Collectors.toList());
         if (res.isEmpty()) {
             return res;
