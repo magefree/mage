@@ -14,6 +14,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.keyword.FinalityCounterEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.effects.keyword.StunCounterEffect;
 import mage.abilities.keyword.*;
@@ -1182,6 +1183,9 @@ public abstract class GameImpl implements Game {
         // Apply stun counter mechanic
         state.addAbility(new SimpleStaticAbility(Zone.ALL, new StunCounterEffect()), null);
 
+        // Apply finality counter mechanic
+        state.addAbility(new SimpleStaticAbility(Zone.ALL, new FinalityCounterEffect()), null);
+
         // Handle companions
         Map<Player, Card> playerCompanionMap = new HashMap<>();
         for (Player player : state.getPlayers().values()) {
@@ -1993,7 +1997,7 @@ public abstract class GameImpl implements Game {
             }
             if (copyFromPermanent.isPrototyped()) {
                 Abilities<Ability> abilities = copyFromPermanent.getAbilities();
-                for (Ability ability : abilities){
+                for (Ability ability : abilities) {
                     if (ability instanceof PrototypeAbility) {
                         ((PrototypeAbility) ability).prototypePermanent(newBluePrint, this);
                     }
