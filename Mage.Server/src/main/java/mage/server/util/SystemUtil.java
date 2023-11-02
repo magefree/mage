@@ -13,11 +13,9 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Planes;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.GameCommanderImpl;
@@ -27,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 
 import java.io.File;
@@ -60,12 +59,14 @@ public final class SystemUtil {
     // [another group]
     // command 2
     // command 3
+    // [@special build-in command]
     private static final String COMMAND_REF_PREFIX = "@";
 
     // transform special group names from init.txt to special commands in choose dialog:
     // [@mana add] -> MANA ADD
+    private static final String COMMAND_CARDS_ADD_TO_HAND = "@card add to hand";
+    private static final String COMMAND_LANDS_ADD_TO_BATTLEFIELD = "@lands add";
     private static final String COMMAND_MANA_ADD = "@mana add"; // TODO: not implemented
-    private static final String COMMAND_LANDS_ADD = "@lands add"; // TODO: not implemented
     private static final String COMMAND_RUN_CUSTOM_CODE = "@run custom code"; // TODO: not implemented
     private static final String COMMAND_SHOW_OPPONENT_HAND = "@show opponent hand";
     private static final String COMMAND_SHOW_OPPONENT_LIBRARY = "@show opponent library";
@@ -76,8 +77,9 @@ public final class SystemUtil {
 
     static {
         // special commands names in choose dialog
+        supportedCommands.put(COMMAND_CARDS_ADD_TO_HAND, "CARDS: ADD TO HAND");
         supportedCommands.put(COMMAND_MANA_ADD, "MANA ADD");
-        supportedCommands.put(COMMAND_LANDS_ADD, "LANDS ADD");
+        supportedCommands.put(COMMAND_LANDS_ADD_TO_BATTLEFIELD, "LANDS: ADD TO BATTLEFIELD");
         supportedCommands.put(COMMAND_RUN_CUSTOM_CODE, "RUN CUSTOM CODE");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_HAND, "SHOW OPPONENT HAND");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_LIBRARY, "SHOW OPPONENT LIBRARY");
@@ -295,48 +297,56 @@ public final class SystemUtil {
             // 1. parse
             List<CommandGroup> groups = new ArrayList<>();
 
+            // read config
+            List<String> initLines = new ArrayList<>();
             try (Scanner scanner = new Scanner(f)) {
-
-                CommandGroup currentGroup = null;
-
                 while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine().trim();
+                    initLines.add(scanner.nextLine().trim());
+                }
+            }
 
-                    // skip comments
-                    if (line.isEmpty() || line.startsWith("#") || line.startsWith("//")) {
+            // add default commands
+            initLines.add(0, String.format("[%s]", COMMAND_LANDS_ADD_TO_BATTLEFIELD));
+            initLines.add(1, String.format("[%s]", COMMAND_CARDS_ADD_TO_HAND));
+
+            // collect all commands
+            CommandGroup currentGroup = null;
+            for (String line : initLines) {
+
+                // skip comments
+                if (line.isEmpty() || line.startsWith("#") || line.startsWith("//")) {
+                    continue;
+                }
+
+                // group
+                Matcher matchGroup = patternGroup.matcher(line);
+                if (matchGroup.matches()) {
+                    String groupName = matchGroup.group(1);
+                    if (groupName.startsWith("@")) {
+                        // special command group
+                        if (supportedCommands.containsKey(groupName)) {
+                            currentGroup = new CommandGroup(groupName, true);
+                            groups.add(currentGroup);
+                        } else {
+                            String mes = String.format("Special group is not supported: %s", groupName);
+                            errorsList.add(mes);
+                            logger.warn(mes);
+                        }
+                        continue;
+                    } else {
+                        // basic group
+                        currentGroup = new CommandGroup(groupName);
+                        groups.add(currentGroup);
                         continue;
                     }
-
-                    // group
-                    Matcher matchGroup = patternGroup.matcher(line);
-                    if (matchGroup.matches()) {
-                        String groupName = matchGroup.group(1);
-                        if (groupName.startsWith("@")) {
-                            // special command group
-                            if (supportedCommands.containsKey(groupName)) {
-                                currentGroup = new CommandGroup(groupName, true);
-                                groups.add(currentGroup);
-                            } else {
-                                String mes = String.format("Special group is not supported: %s", groupName);
-                                errorsList.add(mes);
-                                logger.warn(mes);
-                            }
-                            continue;
-                        } else {
-                            // basic group
-                            currentGroup = new CommandGroup(groupName);
-                            groups.add(currentGroup);
-                            continue;
-                        }
-                    }
-
-                    // command
-                    if (currentGroup == null) {
-                        currentGroup = new CommandGroup("default group");
-                        groups.add(currentGroup);
-                    }
-                    currentGroup.commands.add(line);
                 }
+
+                // command
+                if (currentGroup == null) {
+                    currentGroup = new CommandGroup("default group");
+                    groups.add(currentGroup);
+                }
+                currentGroup.commands.add(line);
             }
 
             // 2. ask user
@@ -388,31 +398,35 @@ public final class SystemUtil {
                 String info;
                 switch (runGroup.name) {
 
-                    case COMMAND_SHOW_OPPONENT_HAND:
+                    case COMMAND_SHOW_OPPONENT_HAND: {
                         if (opponent != null) {
                             info = getCardsListForSpecialInform(game, opponent.getHand(), runGroup.commands);
                             game.informPlayer(feedbackPlayer, info);
                         }
                         break;
+                    }
 
-                    case COMMAND_SHOW_OPPONENT_LIBRARY:
+                    case COMMAND_SHOW_OPPONENT_LIBRARY: {
                         if (opponent != null) {
                             info = getCardsListForSpecialInform(game, opponent.getLibrary().getCardList(), runGroup.commands);
                             game.informPlayer(feedbackPlayer, info);
                         }
                         break;
+                    }
 
-                    case COMMAND_SHOW_MY_HAND:
+                    case COMMAND_SHOW_MY_HAND: {
                         info = getCardsListForSpecialInform(game, feedbackPlayer.getHand(), runGroup.commands);
                         game.informPlayer(feedbackPlayer, info);
                         break;
+                    }
 
-                    case COMMAND_SHOW_MY_LIBRARY:
+                    case COMMAND_SHOW_MY_LIBRARY: {
                         info = getCardsListForSpecialInform(game, feedbackPlayer.getLibrary().getCardList(), runGroup.commands);
                         game.informPlayer(feedbackPlayer, info);
                         break;
+                    }
 
-                    case COMMAND_ACTIVATE_OPPONENT_ABILITY:
+                    case COMMAND_ACTIVATE_OPPONENT_ABILITY: {
                         // WARNING, maybe very bugged if called in wrong priority
                         // uses choose triggered ability dialog to select it
                         UUID savedPriorityPlayer = null;
@@ -457,12 +471,91 @@ public final class SystemUtil {
                             game.firePriorityEvent(savedPriorityPlayer);
                         }
                         break;
+                    }
 
-                    default:
+                    case COMMAND_CARDS_ADD_TO_HAND: {
+
+                        // card
+                        String cardName;
+                        Choice cardChoice = new ChoiceImpl(false, ChoiceHintType.CARD);
+                        cardChoice.setChoices(CardRepository.instance.getNames());
+                        cardChoice.setMessage("Choose card name to put in hand");
+                        if (!feedbackPlayer.choose(Outcome.Detriment, cardChoice, game)
+                                || cardChoice.getChoice() == null) {
+                            break;
+                        }
+                        cardName = cardChoice.getChoice();
+
+                        // amount
+                        int cardAmount = feedbackPlayer.getAmount(1, 100, "How many [" + cardName + "] to add?", game);
+                        if (cardAmount == 0) {
+                            break;
+                        }
+
+                        // add to game
+                        Set<Card> newCards = addNewCardsToGame(game, cardName, null, cardAmount, feedbackPlayer);
+                        if (newCards == null) {
+                            String mes = String.format("Can't add cards to hand: %s", cardName);
+                            errorsList.add(mes);
+                            logger.warn(mes);
+                            break;
+                        }
+
+                        // move to hand
+                        for (Card card : newCards) {
+                            Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                            fakeSourceAbility.setSourceId(card.getId());
+                            putCardToZone(fakeSourceAbility, game, feedbackPlayer, card, Zone.HAND);
+                        }
+                        break;
+                    }
+
+                    case COMMAND_LANDS_ADD_TO_BATTLEFIELD: {
+                        // select lands
+                        List<MultiAmountMessage> lands = new ArrayList<>();
+                        lands.add(new MultiAmountMessage("{W} Plains", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{U} Island", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{B} Swamp", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{R} Mountain", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{G} Forest", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{C} Ash Barrens", 0, 10, 0));
+                        List<Integer> landsAmount = feedbackPlayer.getMultiAmountWithIndividualConstraints(
+                                Outcome.Neutral, lands, 0, 100, MultiAmountType.CHEAT_LANDS, game
+                        );
+                        if (landsAmount == null) {
+                            break;
+                        }
+
+                        // add to game
+                        Set<Card> newCards = new LinkedHashSet<>();
+                        for (int i = 0; i < landsAmount.size(); i++) {
+                            int cardAmount = landsAmount.get(i);
+                            String cardName = lands.get(i).message.substring("{W}".length() + 1);
+                            if (cardAmount > 0) {
+                                Set<Card> addedCards = addNewCardsToGame(game, cardName, null, cardAmount, feedbackPlayer);
+                                if (addedCards != null) {
+                                    newCards.addAll(addedCards);
+                                } else {
+                                    errorsList.add("Can't add land card to game: " + cardName);
+                                }
+                            }
+                        }
+
+                        // move to battlefield
+                        for (Card card : newCards) {
+                            Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                            fakeSourceAbility.setSourceId(card.getId());
+                            putCardToZone(fakeSourceAbility, game, feedbackPlayer, card, Zone.BATTLEFIELD);
+                        }
+                        break;
+                    }
+
+                    default: {
                         String mes = String.format("Unknown system command: %s", runGroup.name);
                         errorsList.add(mes);
                         logger.error(mes);
                         break;
+                    }
                 }
                 sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
                 return;
@@ -554,9 +647,8 @@ public final class SystemUtil {
                 } else if ("stack".equalsIgnoreCase(command.zone)) {
                     // simple cast (without targets or modes)
 
-                    // find card info
-                    CardInfo cardInfo = CardLookup.instance.lookupCardInfo(command.cardName, command.cardSet).orElse(null);
-                    if (cardInfo == null) {
+                    Set<Card> newCards = addNewCardsToGame(game, command.cardName, command.cardSet, command.Amount, player);
+                    if (newCards == null) {
                         String mes = String.format("Unknown card for stack command [%s]: %s",
                                 command.cardName,
                                 line);
@@ -565,15 +657,8 @@ public final class SystemUtil {
                         continue;
                     }
 
-                    // put card to game
-                    Set<Card> cardsToLoad = new HashSet<>();
-                    for (int i = 0; i < command.Amount; i++) {
-                        cardsToLoad.add(cardInfo.getCard());
-                    }
-                    game.loadCards(cardsToLoad, player.getId());
-
                     // move card from exile to stack
-                    for (Card card : cardsToLoad) {
+                    for (Card card : newCards) {
                         Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
                         fakeSourceAbility.setSourceId(card.getId());
                         putCardToZone(fakeSourceAbility, game, player, card, Zone.STACK);
@@ -688,6 +773,27 @@ public final class SystemUtil {
             game.fireErrorEvent("Cheat command errors", new IllegalArgumentException(mes));
         }
         game.informPlayers(String.format("%s: tried to apply cheat commands", feedbackPlayer.getLogName()));
+    }
+
+    /**
+     * For cheats only: add new cards to the game (it's put to outside zone, so you must move it to real zone after that)
+     *
+     * @param setCode can be null for latest set code
+     * @return added cards list
+     */
+    private static Set<Card> addNewCardsToGame(Game game, String cardName, String setCode, int amount, Player owner) {
+        CardInfo cardInfo = CardLookup.instance.lookupCardInfo(cardName, setCode).orElse(null);
+        if (cardInfo == null || amount <= 0) {
+            return null;
+        }
+
+        Set<Card> cardsToLoad = new LinkedHashSet<>();
+        for (int i = 0; i < amount; i++) {
+            cardsToLoad.add(cardInfo.getCard());
+        }
+        game.loadCards(cardsToLoad, owner.getId());
+
+        return cardsToLoad;
     }
 
     /**
