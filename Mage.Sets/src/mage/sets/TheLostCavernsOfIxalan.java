@@ -30,6 +30,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Bartolome del Presidio", 224, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class));
         cards.add(new SetCardInfo("Bedrock Tortoise", 176, Rarity.RARE, mage.cards.b.BedrockTortoise.class));
         cards.add(new SetCardInfo("Belligerent Yearling", 133, Rarity.UNCOMMON, mage.cards.b.BelligerentYearling.class));
+        cards.add(new SetCardInfo("Bitter Triumph", 91, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
         cards.add(new SetCardInfo("Bladewheel Chariot", 36, Rarity.UNCOMMON, mage.cards.b.BladewheelChariot.class));
         cards.add(new SetCardInfo("Bloodletter of Aclazotz", 92, Rarity.MYTHIC, mage.cards.b.BloodletterOfAclazotz.class));
         cards.add(new SetCardInfo("Bloodthorn Flail", 93, Rarity.UNCOMMON, mage.cards.b.BloodthornFlail.class));
