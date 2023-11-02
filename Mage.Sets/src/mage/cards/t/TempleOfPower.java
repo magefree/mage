@@ -18,6 +18,7 @@ import mage.constants.TimingRule;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.Emblem;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -126,18 +127,28 @@ class TempleOfPowerWatcher extends Watcher {
             }
 
             MageObject sourceObject;
-            UUID sourceControllerId;
+            UUID sourceControllerId = null;
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (sourcePermanent == null) {
-                sourceObject = game.getSpellOrLKIStack(event.getSourceId());
-                sourceControllerId = ((StackObject) sourceObject).getControllerId();
-            } else {
+            if (sourcePermanent != null) {
+                // source is a permanent.
                 sourceObject = sourcePermanent;
                 sourceControllerId = sourcePermanent.getControllerId();
+            } else {
+                sourceObject = game.getSpellOrLKIStack(event.getSourceId());
+                if (sourceObject != null) {
+                    // source is a spell.
+                    sourceControllerId = ((StackObject) sourceObject).getControllerId();
+                } else {
+                    // source is an Emblem.
+                    sourceObject = game.getObject(event.getSourceId());
+                    if (sourceObject instanceof Emblem) {
+                        sourceControllerId = ((Emblem) sourceObject).getControllerId();
+                    }
+                }
             }
 
             // watch only red sources dealing damage
-            if (sourceObject == null || !sourceObject.getColor().isRed()) {
+            if (sourceObject == null || sourceControllerId == null || !sourceObject.getColor().isRed()) {
                 return;
             }
 
