@@ -1,0 +1,47 @@
+// Allows run cheat commands. How to use:
+// * open launcher and add to server's command line: -Dxmage.testMode=true
+// * rename that file to init.txt and put to server's config folder
+// * activate smiley button on your player's panel
+
+[init]
+battlefield:Human:Forest:5
+battlefield:Human:Plains:5
+battlefield:Human:Mountain:5
+battlefield:Human:Swamp:5
+battlefield:Human:Island:5
+hand:Human:Lightning Bolt:2
+library:Human:Doom Blade:2
+
+// special command, see SystemUtil for more special commands list
+[@activate opponent ability]
+
+[current test]
+graveyard:Human:Bloodghast:1
+graveyard:Computer:Bloodghast:1
+hand:Human:Bloodghast:1
+hand:Computer:Bloodghast:1
+
+[diff set codes example]
+battlefield:Human:XLN-Island:1
+battlefield:Human:UST-Island:1
+battlefield:Human:HOU-Island:1
+
+// @ref command example (all refs will be replaced by commands from ref's group)
+[another test]
+@init
+hand:Human:Lightning Bolt:2
+
+[2x bears to me]
+battlefield:Human:Kitesail Corsair:2
+
+[2x bears to comp]
+battlefield:Computer:Kitesail Corsair:2
+//battlefield:Computer:Grizzly Bears:1
+
+// create any useful commands
+[clone]
+hand:Human:Clone:3
+[force attack]
+hand:Human:Pit Fight:3
+[exile]
+hand:Human:Angelic Edict:3
