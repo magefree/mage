@@ -36,9 +36,7 @@ import mage.server.util.SystemUtil;
 import mage.sets.TherosBeyondDeath;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
-import mage.verify.mtgjson.MtgJsonCard;
-import mage.verify.mtgjson.MtgJsonService;
-import mage.verify.mtgjson.MtgJsonSet;
+import mage.verify.mtgjson.*;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -122,6 +120,7 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
+        skipListAddName(SKIP_LIST_COLOR, "LCI", "Cosmium Kiln"); // tmp
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);

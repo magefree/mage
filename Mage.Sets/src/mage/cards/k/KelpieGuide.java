@@ -38,7 +38,7 @@ public final class KelpieGuide extends CardImpl {
 
         // {T}: Untap another target permanent you control.
         Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_PERMANENT));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_TARGET_PERMANENT));
         this.addAbility(ability);
 
         // {T}: Tap target permanent. Activate only if you control eight or more lands.

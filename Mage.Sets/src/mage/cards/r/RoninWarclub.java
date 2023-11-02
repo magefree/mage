@@ -28,7 +28,7 @@ public final class RoninWarclub extends CardImpl {
         // Whenever a creature enters the battlefield under your control, attach Ronin Warclub to that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "attach {this} to that creature"),
-                StaticFilters.FILTER_PERMANENT_A_CREATURE, false, SetTargetPointer.PERMANENT, null));
+                StaticFilters.FILTER_PERMANENT_A_CREATURE, false, SetTargetPointer.PERMANENT));
 
         // Equip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));

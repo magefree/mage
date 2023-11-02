@@ -175,7 +175,7 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
     }
 
     public SoulbondEntersOtherAbility() {
-        super(Zone.BATTLEFIELD, new SoulboundEntersOtherEffect(), soulbondFilter, true, SetTargetPointer.PERMANENT, "");
+        super(Zone.BATTLEFIELD, new SoulboundEntersOtherEffect(), soulbondFilter, true, SetTargetPointer.PERMANENT);
         setRuleVisible(false);
     }
 

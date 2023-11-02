@@ -1,9 +1,17 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -184,4 +192,71 @@ public final class MirrodinBesieged extends ExpansionSet {
         cards.add(new SetCardInfo("White Sun's Zenith", 19, Rarity.RARE, mage.cards.w.WhiteSunsZenith.class));
     }
 
+    // need to explicitly add SOM basics for collation since MBS has some basics itself
+    @Override
+    protected void generateBoosterMap() {
+        super.generateBoosterMap();
+        CardRepository
+                .instance
+                .findCards(new CardCriteria().setCodes("SOM").rarities(Rarity.LAND))
+                .stream()
+                .forEach(cardInfo -> inBoosterMap.put("SOM_" + cardInfo.getCardNumber(), cardInfo));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new MirrodinBesiegedCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/mbs.html
+class MirrodinBesiegedCollator implements BoosterCollator {
+    private final CardRun commonMirran = new CardRun(true, "13", "102", "79", "109", "2", "61", "35", "11", "98", "72", "135", "84", "108", "73", "13", "6", "68", "26", "58", "142", "91", "59", "109", "35", "102", "12", "60", "108", "6", "72", "70", "26", "142", "30", "135", "73", "91", "2", "60", "5", "108", "61", "58", "12", "30", "127", "79", "98", "32", "63", "13", "84", "59", "68", "102", "26", "2", "130", "5", "142", "79", "70", "6", "127", "59", "72", "91", "32", "13", "98", "35", "130", "61", "70", "11", "135", "68", "5", "84", "63", "26", "109", "60", "127", "35", "12", "98", "73", "58", "5", "61", "79", "32", "135", "63", "130", "30", "2", "102", "72", "11", "73", "6", "91", "127", "109", "63", "68", "30", "84", "142", "60", "70", "12", "59", "11", "130", "32", "108", "58");
+    private final CardRun commonPhyrexian = new CardRun(true, "51", "45", "86", "128", "56", "38", "95", "139", "16", "120", "33", "80", "41", "57", "106", "25", "77", "51", "128", "3", "90", "107", "38", "49", "120", "54", "139", "25", "95", "17", "47", "80", "110", "31", "107", "41", "93", "40", "106", "16", "38", "86", "47", "116", "3", "77", "139", "29", "57", "80", "106", "45", "54", "93", "33", "128", "17", "86", "120", "56", "29", "77", "49", "110", "51", "40", "16", "25", "80", "107", "139", "33", "41", "95", "45", "56", "17", "40", "49", "116", "93", "16", "31", "57", "90", "25", "110", "54", "47", "77", "17", "116", "45", "33", "106", "49", "90", "29", "51", "107", "56", "95", "3", "40", "38", "116", "31", "86", "41", "47", "93", "128", "120", "57", "3", "54", "29", "110", "90", "31");
+    private final CardRun uncommonA = new CardRun(true, "112", "64", "83", "10", "1", "34", "69", "119", "28", "143", "134", "112", "1", "28", "64", "34", "143", "83", "69", "134", "10", "119", "112", "10", "143", "119", "64", "134", "34", "69", "83", "28", "1", "112", "10", "69", "143", "64", "1", "119", "134", "83", "34", "28", "112", "69", "64", "119", "83", "28", "10", "143", "1", "134", "34", "112", "143", "119", "34", "10", "64", "134", "28", "69", "1", "83");
+    private final CardRun uncommonB = new CardRun(true, "132", "101", "82", "131", "76", "37", "9", "43", "124", "82", "37", "132", "82", "76", "9", "124", "101", "131", "37", "43", "124", "101", "132", "76", "124", "131", "43", "82", "9", "101", "37", "76", "131", "132", "37", "101", "9", "82", "43", "131", "124", "76", "43", "132", "124", "9", "131", "132", "101", "9", "43", "82", "76", "37");
+    private final CardRun uncommonC = new CardRun(true, "4", "48", "36", "125", "133", "94", "121", "87", "137", "67", "42", "4", "48", "87", "36", "133", "42", "125", "94", "137", "121", "67", "4", "87", "133", "125", "137", "67", "48", "36", "42", "94", "121", "4", "36", "125", "121", "48", "133", "94", "67", "87", "42", "137", "4", "133", "137", "48", "42", "121", "87", "125", "67", "36", "94", "4", "42", "67", "133", "121", "36", "137", "87", "94", "48", "125");
+    private final CardRun uncommonD = new CardRun(true, "44", "55", "103", "7", "44", "71", "103", "123", "89", "115", "22", "44", "71", "89", "7", "115", "22", "103", "123", "55", "89", "22", "44", "89", "115", "103", "55", "71", "7", "22", "123", "55", "71", "44", "115", "55", "7", "123", "89", "103", "71", "22", "115", "7", "44", "22", "71", "103", "89", "123", "7", "55", "115", "123");
+
+    // no point in collating the rares/mythics, just randomize with mythics in 1/8 packs
+    private final CardRun rare = new CardRun(false, "39", "20", "100", "144", "78", "23", "104", "105", "24", "62", "81", "65", "145", "111", "113", "14", "114", "27", "117", "118", "50", "85", "15", "122", "52", "126", "74", "53", "129", "75", "136", "140", "141", "18", "19");
+    private final CardRun mythic = new CardRun(false, "99", "21", "96", "8", "66", "46", "88", "138", "97", "92");
+    private final CardRun land = new CardRun(false, "SOM_232", "SOM_233", "SOM_235", "SOM_236", "SOM_240", "SOM_241", "SOM_242", "SOM_243", "SOM_248", "SOM_249", "146", "147", "148", "149", "150", "151", "152", "153", "154", "155");
+
+    private final BoosterStructure commons = new BoosterStructure(
+            commonMirran, commonMirran, commonMirran, commonMirran, commonMirran,
+            commonPhyrexian, commonPhyrexian, commonPhyrexian, commonPhyrexian, commonPhyrexian
+    );
+
+    private final BoosterStructure ABC = new BoosterStructure(uncommonA, uncommonB, uncommonC);
+    private final BoosterStructure BCD = new BoosterStructure(uncommonB, uncommonC, uncommonD);
+
+    private final BoosterStructure CDA = new BoosterStructure(uncommonC, uncommonD, uncommonA);
+    private final BoosterStructure DAB = new BoosterStructure(uncommonD, uncommonA, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure M1 = new BoosterStructure(mythic);
+    private final BoosterStructure L1 = new BoosterStructure(land);
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(commons);
+    // Assuming all uncommons appear with equal frenquency,
+    // each of A and C should be left out 7/40 of the time,
+    // and each of B and D should be left out 13/40 of the time.
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC,
+            BCD, BCD, BCD, BCD, BCD, BCD, BCD,
+            CDA, CDA, CDA, CDA, CDA, CDA, CDA, CDA, CDA, CDA, CDA, CDA, CDA,
+            DAB, DAB, DAB, DAB, DAB, DAB, DAB
+    );
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1, R1, R1, R1, R1, R1, R1, M1);
+    private final RarityConfiguration landRuns = new RarityConfiguration(L1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(landRuns.getNext().makeRun());
+        return booster;
+    }
 }

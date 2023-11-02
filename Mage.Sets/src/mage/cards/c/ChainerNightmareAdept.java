@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -15,8 +15,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
@@ -127,7 +126,6 @@ class ChainerNightmareAdeptWatcher extends Watcher {
             }
             morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
-            return;
         }
     }
 
@@ -156,25 +154,17 @@ class ChainerNightmareAdeptWatcher extends Watcher {
     }
 }
 
-class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
+class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldControlledTriggeredAbility {
 
-    private static final String abilityText = "Whenever a nontoken creature "
-            + "enters the battlefield under your control, "
-            + "if you didn't cast it from your hand, it gains haste until your next turn.";
     private static final ContinuousEffect gainHasteUntilNextTurnEffect
             = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.UntilYourNextTurn);
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     ChainerNightmareAdeptTriggeredAbility() {
-        super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, filter, false,
-                SetTargetPointer.PERMANENT, abilityText);
+        super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, StaticFilters.FILTER_CREATURE_NON_TOKEN, false,
+                SetTargetPointer.PERMANENT);
         this.addWatcher(new CastFromHandWatcher());
+        setTriggerPhrase("Whenever a nontoken creature enters the battlefield under your control, "
+                + "if you didn't cast it from your hand, ");
     }
 
     private ChainerNightmareAdeptTriggeredAbility(final ChainerNightmareAdeptTriggeredAbility effect) {
@@ -188,11 +178,9 @@ class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggere
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-
         CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
-        return watcher != null && !watcher.spellWasCastFromHand(event.getTargetId());
+        return watcher != null && !watcher.spellWasCastFromHand(event.getTargetId())
+                && super.checkTrigger(event, game);
     }
+
 }

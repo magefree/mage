@@ -35,7 +35,7 @@ public final class GoblinAssassin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Goblin Assassin or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.
-        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GoblinAssassinTriggeredEffect(), filter));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GoblinAssassinTriggeredEffect(), filter, false, false));
     }
 
     private GoblinAssassin(final GoblinAssassin card) {

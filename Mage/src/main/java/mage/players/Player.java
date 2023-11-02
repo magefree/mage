@@ -758,8 +758,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
     default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
-        List<MultiAmountMessage> constraints = messages.stream().map(s -> new MultiAmountMessage(s, 0, max)).collect(Collectors.toList());
-
+        List<MultiAmountMessage> constraints = messages.stream()
+                .map(s -> new MultiAmountMessage(s, min, max))
+                .collect(Collectors.toList());
         return getMultiAmountWithIndividualConstraints(outcome, constraints, min, max, type, game);
     }
 
@@ -768,8 +769,8 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param outcome  AI hint
      * @param messages List of options to distribute amount among. Each option has a constraint on the min, max chosen for it
-     * @param totalMin Total minimum amount to be distributed
-     * @param totalMax Total amount to be distributed
+     * @param min      Total minimum amount to be distributed
+     * @param max      Total amount to be distributed
      * @param type     MultiAmountType enum to set dialog options such as title and header
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.

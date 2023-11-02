@@ -46,4 +46,8 @@
         <module>Mage.Tournament.Sealed</module>
     </modules>
 
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
+
 </project>

@@ -94,6 +94,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Frost Fair Lure Fish", 129, Rarity.RARE, mage.cards.f.FrostFairLureFish.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 282, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 283, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
+        cards.add(new SetCardInfo("Gallifrey Council Chamber", 188, Rarity.RARE, mage.cards.g.GallifreyCouncilChamber.class));
         cards.add(new SetCardInfo("Gallifrey Stands", 132, Rarity.RARE, mage.cards.g.GallifreyStands.class));
         cards.add(new SetCardInfo("Game Trail", 284, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Glacial Fortress", 285, Rarity.RARE, mage.cards.g.GlacialFortress.class));
@@ -108,6 +109,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Heroic Intervention", 233, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Horizon Canopy", 287, Rarity.RARE, mage.cards.h.HorizonCanopy.class));
         cards.add(new SetCardInfo("Ian Chesterton", 22, Rarity.RARE, mage.cards.i.IanChesterton.class));
+        cards.add(new SetCardInfo("Impending Flux", 87, Rarity.RARE, mage.cards.i.ImpendingFlux.class));
         cards.add(new SetCardInfo("Inspiring Refrain", 216, Rarity.RARE, mage.cards.i.InspiringRefrain.class));
         cards.add(new SetCardInfo("Into the Time Vortex", 88, Rarity.RARE, mage.cards.i.IntoTheTimeVortex.class));
         cards.add(new SetCardInfo("Iraxxa, Empress of Mars", 89, Rarity.UNCOMMON, mage.cards.i.IraxxaEmpressOfMars.class));
@@ -212,6 +214,9 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Flood of Mars", 45, Rarity.RARE, mage.cards.t.TheFloodOfMars.class));
         cards.add(new SetCardInfo("The Flux", 86, Rarity.RARE, mage.cards.t.TheFlux.class));
         cards.add(new SetCardInfo("The Fugitive Doctor", 130, Rarity.RARE, mage.cards.t.TheFugitiveDoctor.class));
+        cards.add(new SetCardInfo("The Master, Multiplied", 146, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Multiplied", 429, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Multiplied", 545, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 148, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 432, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 560, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
@@ -238,6 +243,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Time Wipe", 238, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Traverse Eternity", 60, Rarity.RARE, mage.cards.t.TraverseEternity.class));
         cards.add(new SetCardInfo("Truth or Consequences", 163, Rarity.UNCOMMON, mage.cards.t.TruthOrConsequences.class));
+        cards.add(new SetCardInfo("Twice Upon a Time", 61, Rarity.RARE, mage.cards.t.TwiceUponATime.class));
         cards.add(new SetCardInfo("Vashta Nerada", 73, Rarity.RARE, mage.cards.v.VashtaNerada.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 329, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
         cards.add(new SetCardInfo("War Room", 330, Rarity.RARE, mage.cards.w.WarRoom.class));

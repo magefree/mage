@@ -25,6 +25,7 @@ public enum SubType {
     MOUNTAIN("Mountain", SubTypeSet.BasicLandType),
     PLAINS("Plains", SubTypeSet.BasicLandType),
     SWAMP("Swamp", SubTypeSet.BasicLandType),
+    CAVE("Cave", SubTypeSet.NonBasicLandType),
     DESERT("Desert", SubTypeSet.NonBasicLandType),
     GATE("Gate", SubTypeSet.NonBasicLandType),
     LAIR("Lair", SubTypeSet.NonBasicLandType),
@@ -55,6 +56,7 @@ public enum SubType {
     FORTIFICATION("Fortification", SubTypeSet.ArtifactType),
     GOLD("Gold", SubTypeSet.ArtifactType),
     INCUBATOR("Incubator", SubTypeSet.ArtifactType),
+    MAP("Map", SubTypeSet.ArtifactType),
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
@@ -140,7 +142,7 @@ public enum SubType {
     DESERTER("Deserter", SubTypeSet.CreatureType),
     DETECTIVE("Detective", SubTypeSet.CreatureType),
     DEVIL("Devil", SubTypeSet.CreatureType),
-    DINOSAUR("Dinosaur", SubTypeSet.CreatureType), // With Ixalan now being spoiled, need this to be selectable
+    DINOSAUR("Dinosaur", SubTypeSet.CreatureType),
     DJINN("Djinn", SubTypeSet.CreatureType),
     DOCTOR("Doctor", SubTypeSet.CreatureType),
     DOG("Dog", SubTypeSet.CreatureType),
@@ -247,6 +249,7 @@ public enum SubType {
     LHURGOYF("Lhurgoyf", SubTypeSet.CreatureType),
     LICID("Licid", SubTypeSet.CreatureType),
     LIZARD("Lizard", SubTypeSet.CreatureType),
+    LLAMA("Llama", SubTypeSet.CreatureType),
     LOBSTER("Lobster", SubTypeSet.CreatureType, true), // Unglued
     LUKE("Luke", SubTypeSet.PlaneswalkerType, true), // Star Wars
     // M
@@ -356,6 +359,7 @@ public enum SubType {
     SLITH("Slith", SubTypeSet.CreatureType),
     SLIVER("Sliver", SubTypeSet.CreatureType),
     SLUG("Slug", SubTypeSet.CreatureType),
+    SNAIL("Snail", SubTypeSet.CreatureType),
     SNAKE("Snake", SubTypeSet.CreatureType),
     SOLDIER("Soldier", SubTypeSet.CreatureType),
     SOLTARI("Soltari", SubTypeSet.CreatureType),
@@ -479,6 +483,7 @@ public enum SubType {
     NIXILIS("Nixilis", SubTypeSet.PlaneswalkerType),
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
     OKO("Oko", SubTypeSet.PlaneswalkerType),
+    QUINTORIUS("Quintorius", SubTypeSet.PlaneswalkerType),
     RAL("Ral", SubTypeSet.PlaneswalkerType),
     REY("Rey", SubTypeSet.PlaneswalkerType, true),  // Star Wars,
     ROWAN("Rowan", SubTypeSet.PlaneswalkerType),

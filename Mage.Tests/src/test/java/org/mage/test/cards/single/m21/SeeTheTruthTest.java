@@ -5,6 +5,9 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * @author Susucr
+ */
 public class SeeTheTruthTest extends CardTestPlayerBase {
 
     // See the Truth {1}{U}
@@ -27,6 +30,7 @@ public class SeeTheTruthTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, seeTheTruth);
         addTarget(playerA, "Bear Cub");         // card chosen to be put in hand
+        setChoice(playerA, "Alpine Grizzly");   // ordering the 2 other cards
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -94,7 +98,9 @@ public class SeeTheTruthTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, seeTheTruth);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", seeTheTruth);
         addTarget(playerA, "Bear Cub");         // card chosen to be put in hand   -- for the copy.
+        setChoice(playerA, "Alpine Grizzly");   // ordering the 2 other cards
         addTarget(playerA, "Enormous Baloth");  // card chosen to be put in hand   -- for the initial cast.
+        setChoice(playerA, "Durkwood Boars");   // ordering the 2 other cards
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

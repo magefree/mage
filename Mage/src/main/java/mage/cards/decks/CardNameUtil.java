@@ -4,13 +4,10 @@ import java.util.regex.Pattern;
 
 public class CardNameUtil {
 
-    public static final Pattern CARD_NAME_PATTERN = Pattern.compile("[ !\"&',\\-./0-9:A-Za-z]+");
+    public static final Pattern CARD_NAME_PATTERN = Pattern.compile("[+ !\"&',\\-./0-9:A-Za-z]+");
 
     /**
      * Convert card names with unicode symbols to ascii, uses to deck import from a third party services
-     *
-     * @param name
-     * @return
      */
     public static String normalizeCardName(String name) {
         // new symbols checks in verify test, no need to manually search it
@@ -36,4 +33,9 @@ public class CardNameUtil {
                 .replace("ñ", "n")
                 .replace("®", "");
     }
+
+    private CardNameUtil() {
+        // utility class
+    }
+
 }

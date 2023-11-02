@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -35,7 +35,8 @@ public final class SkeletonScavengers extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Skeleton Scavengers enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new AsEntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                "with a +1/+1 counter on it"));
 
         // Pay {1} for each +1/+1 counter on Skeleton Scavengers: Regenerate Skeleton Scavengers. When it regenerates this way, put a +1/+1 counter on it.
         this.addAbility(new SimpleActivatedAbility(

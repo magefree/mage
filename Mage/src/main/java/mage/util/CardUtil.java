@@ -1016,8 +1016,9 @@ public final class CardUtil {
 
     /**
      * For finding the spell or ability on the stack for "becomes the target" triggers.
+     *
      * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game the Game from checkTrigger() or watch()
+     * @param game  the Game from checkTrigger() or watch()
      * @return the StackObject which targeted the source, or null if not found
      */
     public static StackObject getTargetingStackObject(GameEvent event, Game game) {
@@ -1042,10 +1043,11 @@ public final class CardUtil {
      * For ensuring that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
      * If this is the first attempt at triggering for a given ability targeting a given object,
      * this method records that in the game state for later checks by this same method.
+     *
      * @param checkingReference must be unique for each usage (this.id.toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param targetingObject from getTargetingStackObject
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game the Game from checkTrigger() or watch()
+     * @param targetingObject   from getTargetingStackObject
+     * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game              the Game from checkTrigger() or watch()
      * @return true if already triggered/watched, false if this is the first/only trigger/watch
      */
     public static boolean checkTargetedEventAlreadyUsed(String checkingReference, StackObject targetingObject, GameEvent event, Game game) {
@@ -1292,7 +1294,22 @@ public final class CardUtil {
         void addCard(Card card, Ability source, Game game);
     }
 
-    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
+    /**
+     * Retrieves a list of all castable components from a given card based on certain conditions.
+     * <p>
+     * Castable components are parts of a card that can be played or cast,
+     * such as the adventure and main side of adventure spells or both sides of a fuse card.
+     *
+     * @param cardToCast
+     * @param filter           A filter to determine if a card is eligible for casting.
+     * @param source           The ability or source responsible for the casting.
+     * @param player
+     * @param game
+     * @param spellCastTracker An optional tracker for spell casting.
+     * @param playLand         A boolean flag indicating whether playing lands is allowed.
+     * @return A list of castable components from the input card, considering the provided conditions.
+     */
+    public static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
         UUID playerId = player.getId();
         List<Card> cards = new ArrayList<>();
         if (cardToCast instanceof CardWithHalves) {
@@ -1575,6 +1592,11 @@ public final class CardUtil {
     public static String getSourceName(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         return sourceObject != null ? sourceObject.getName() : "";
+    }
+
+    public static String getSourceIdName(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        return sourceObject != null ? sourceObject.getIdName() : "";
     }
 
     /**

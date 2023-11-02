@@ -27,7 +27,7 @@ public final class Misfortune extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{R}{G}");
 
         // An opponent chooses one —
-        this.getSpellAbility().getModes().setModeChooser(TargetController.OPPONENT);
+        this.getSpellAbility().getModes().setChooseController(TargetController.OPPONENT);
 
         // • You put a +1/+1 counter on each creature you control and gain 4 life.
         this.getSpellAbility().addEffect(new AddCountersAllEffect(

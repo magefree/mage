@@ -122,7 +122,7 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
-Lost Caverns of Ixalan|LCI|
+The Lost Caverns of Ixalan|LCI|
 Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|

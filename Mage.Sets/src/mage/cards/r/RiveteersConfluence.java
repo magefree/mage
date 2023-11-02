@@ -32,7 +32,7 @@ public class RiveteersConfluence extends CardImpl {
         // Choose three. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         //• You draw a card and you lose 1 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("you draw a card"));

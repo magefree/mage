@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class BladewingsThrall extends CardImpl {
 
-    static final private String RULE = "{this} has flying as long as you control a Dragon";
+    private static final String RULE = "{this} has flying as long as you control a Dragon";
 
     public BladewingsThrall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
@@ -40,7 +40,8 @@ public final class BladewingsThrall extends CardImpl {
 
         // When a Dragon enters the battlefield, you may return Bladewing's Thrall from your graveyard to the battlefield.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(), new FilterPermanent(SubType.DRAGON, "a Dragon"), true));
+                new ReturnSourceFromGraveyardToBattlefieldEffect(), new FilterPermanent(SubType.DRAGON, "a Dragon"), true)
+                .setTriggerPhrase("When a Dragon enters the battlefield, "));
     }
 
     private BladewingsThrall(final BladewingsThrall card) {

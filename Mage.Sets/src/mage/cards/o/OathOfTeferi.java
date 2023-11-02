@@ -27,7 +27,7 @@ public final class OathOfTeferi extends CardImpl {
 
         // When Oath of Teferi enters the battlefield, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_PERMANENT));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_TARGET_PERMANENT));
         this.addAbility(ability);
 
         // You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.

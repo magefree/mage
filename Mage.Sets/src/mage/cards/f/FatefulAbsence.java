@@ -4,14 +4,15 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.keyword.InvestigateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ClueArtifactToken;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -61,7 +62,7 @@ class FatefulAbsenceEffect extends OneShotEffect {
         }
         UUID controllerId = permanent.getControllerId();
         permanent.destroy(source, game, false);
-        new ClueArtifactToken().putOntoBattlefield(1, game, source, controllerId);
+        new InvestigateTargetEffect().setTargetPointer(new FixedTarget(controllerId)).apply(game, source);
         return true;
     }
 }

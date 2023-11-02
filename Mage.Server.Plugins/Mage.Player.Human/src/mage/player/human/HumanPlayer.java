@@ -8,6 +8,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -44,6 +45,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.*;
 import org.apache.log4j.Logger;
 
@@ -888,6 +890,14 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         int amountTotal = target.getAmountTotal(game, source);
+        if (amountTotal == 0) {
+            return false; // nothing to distribute
+        }
+        MultiAmountType multiAmountType = source.getRule().contains("damage") ? MultiAmountType.DAMAGE : MultiAmountType.P1P1;
+
+        // 601.2d. If the spell requires the player to divide or distribute an effect (such as damage or counters)
+        // among one or more targets, the player announces the division.
+        // Each of these targets must receive at least one of whatever is being divided.
 
         // Two steps logic:
         // 1. Select targets
@@ -896,7 +906,7 @@ public class HumanPlayer extends PlayerImpl {
         // 1. Select targets
         while (canRespond()) {
             Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
-            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+            boolean required = target.isRequired(source.getSourceId(), game);
             if (possibleTargetIds.isEmpty()
                     || target.getSize() >= target.getNumberOfTargets()) {
                 required = false;
@@ -928,9 +938,9 @@ public class HumanPlayer extends PlayerImpl {
                 updateGameStatePriority("chooseTargetAmount", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    // target amount uses for damage only, if you see another use case then message must be changed here and on getMultiAmount call
-
-                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargetIds, required, options);
+                    String multiType = multiAmountType == MultiAmountType.DAMAGE ? " to divide %d damage" : " to distribute %d counters";
+                    String message = target.getMessage() + String.format(multiType, amountTotal);
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), possibleTargetIds, required, options);
                 }
                 waitForResponse(game);
 
@@ -941,7 +951,9 @@ public class HumanPlayer extends PlayerImpl {
                 if (target.contains(responseId)) {
                     // unselect
                     target.remove(responseId);
-                } else if (possibleTargetIds.contains(responseId) && target.canTarget(abilityControllerId, responseId, source, game)) {
+                } else if (possibleTargetIds.contains(responseId)
+                        && target.canTarget(abilityControllerId, responseId, source, game)
+                        && target.getSize() < amountTotal) {
                     // select
                     target.addTarget(responseId, source, game);
                 }
@@ -957,6 +969,26 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // 2. Distribute amount between selected targets
+
+        // if only one target, it gets full amount, no possible choice
+        if (targets.size() == 1) {
+            target.setTargetAmount(targets.get(0), amountTotal, source, game);
+            return true;
+        }
+
+        // if number of targets equal to amount, each get 1, no possible choice
+        if (targets.size() == amountTotal) {
+            for (UUID targetId : targets) {
+                target.setTargetAmount(targetId, 1, source, game);
+            }
+            return true;
+        }
+
+        // should not be able to have more targets than amount, but in such case it's illegal
+        if (targets.size() > amountTotal) {
+            target.clearChosen();
+            return false;
+        }
 
         // prepare targets list with p/t or life stats (cause that's dialog used for damage distribute)
         List<String> targetNames = new ArrayList<>();
@@ -978,7 +1010,6 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
-        MultiAmountType multiAmountType = source.toString().contains("counters") ? MultiAmountType.P1P1 : MultiAmountType.DAMAGE;
         // ask and assign new amount
         List<Integer> targetValues = getMultiAmount(outcome, targetNames, 1, amountTotal, multiAmountType, game);
         for (int i = 0; i < targetValues.size(); i++) {
@@ -1312,12 +1343,14 @@ public class HumanPlayer extends PlayerImpl {
             return null;
         }
 
+        // automatically order triggers with same ability, rules text, and targets
         String autoOrderRuleText = null;
+        Ability autoOrderAbility = null;
         boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (canRespond()) {
             // try to set trigger auto order
-            java.util.List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
-            java.util.List<TriggeredAbility> abilitiesOrderLast = new ArrayList<>();
+            List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
+            List<TriggeredAbility> abilitiesOrderLast = new ArrayList<>();
             for (TriggeredAbility ability : abilities) {
                 if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
                     return ability;
@@ -1337,12 +1370,33 @@ public class HumanPlayer extends PlayerImpl {
                     continue;
                 }
                 if (autoOrderUse) {
-                    // multiple triggers with same rule text will be auto-ordered
+                    // multiple triggers with same rule text will be auto-ordered if possible
+                    // if different, must use choose dialog
                     if (autoOrderRuleText == null) {
+                        // first trigger, store rule text and ability to compare subsequent triggers
                         autoOrderRuleText = rule;
+                        autoOrderAbility = ability;
                     } else if (!rule.equals(autoOrderRuleText)) {
-                        // diff triggers, so must use choose dialog
+                        // disable auto order if rule text is different
                         autoOrderUse = false;
+                    } else {
+                        // disable auto order if targets are different
+                        Effects effects1 = autoOrderAbility.getEffects();
+                        Effects effects2 = ability.getEffects();
+                        if (effects1.size() != effects2.size()) {
+                            autoOrderUse = false;
+                        } else {
+                            for (int i = 0; i < effects1.size(); i++) {
+                                TargetPointer targetPointer1 = effects1.get(i).getTargetPointer();
+                                TargetPointer targetPointer2 = effects2.get(i).getTargetPointer();
+                                List<UUID> targets1 = (targetPointer1 == null) ? new ArrayList<>() : targetPointer1.getTargets(game, autoOrderAbility);
+                                List<UUID> targets2 = (targetPointer2 == null) ? new ArrayList<>() : targetPointer2.getTargets(game, ability);
+                                if (!targets1.equals(targets2)) {
+                                    autoOrderUse = false;
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
                 abilitiesWithNoOrderSet.add(ability);
@@ -1353,8 +1407,7 @@ public class HumanPlayer extends PlayerImpl {
                 return abilitiesOrderLast.stream().findFirst().orElse(null);
             }
 
-            if (abilitiesWithNoOrderSet.size() == 1
-                    || autoOrderUse) {
+            if (abilitiesWithNoOrderSet.size() == 1 || autoOrderUse) {
                 return abilitiesWithNoOrderSet.iterator().next();
             }
 
@@ -2380,7 +2433,7 @@ public class HumanPlayer extends PlayerImpl {
                     Mode selectedMode = modes.get(selectedModeId);
                     if (mode.getId().equals(selectedMode.getId())) {
                         // mode selected
-                        if (modes.isEachModeMoreThanOnce()) {
+                        if (modes.isMayChooseSameModeMoreThanOnce()) {
                             // can select again
                         } else {
                             // hide mode from dialog
@@ -2394,7 +2447,7 @@ public class HumanPlayer extends PlayerImpl {
                     if (obj != null) {
                         modeText = modeText.replace("{this}", obj.getName());
                     }
-                    if (modes.isEachModeMoreThanOnce()) {
+                    if (modes.isMayChooseSameModeMoreThanOnce()) {
                         if (timesSelected > 0) {
                             modeText = "(selected " + timesSelected + "x) " + modeText;
                         }

@@ -46,15 +46,15 @@ public class BargainTest extends CardTestPlayerBase {
      * Hamlet Glutton
      * {5}{G}{G}
      * Creature — Giant
-     *
+     * <p>
      * Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
-     *
+     * <p>
      * This spell costs {2} less to cast if it’s bargained.
-     *
+     * <p>
      * Trample
-     *
+     * <p>
      * When Hamlet Glutton enters the battlefield, you gain 3 life.
-     *
+     * <p>
      * 6/6
      */
     private static final String glutton = "Hamlet Glutton";
@@ -223,6 +223,7 @@ public class BargainTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, lightningBolt, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, glider); // Could be bargain.
+        addCard(Zone.LIBRARY, playerA, "Plains"); // see the card on scry
 
         addCard(Zone.BATTLEFIELD, playerB, stoneGolem);
 
@@ -232,6 +233,7 @@ public class BargainTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, torchTheTower, stoneGolem);
         setChoice(playerA, true); // Do bargain.
         setChoice(playerA, glider); // Bargain the glider away.
+        addTarget(playerA, "Plains"); // scry the Plains away
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

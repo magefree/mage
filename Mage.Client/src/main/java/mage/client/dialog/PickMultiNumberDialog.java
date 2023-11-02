@@ -89,7 +89,7 @@ public class PickMultiNumberDialog extends MageDialog {
             labelList.add(label);
 
             JSpinner spinner = new JSpinner();
-            spinner.setModel(new SpinnerNumberModel(0, messages.get(i).min, messages.get(i).max, 1));
+            spinner.setModel(new SpinnerNumberModel(messages.get(i).min, messages.get(i).min, messages.get(i).max, 1));
             spinnerC.weightx = 0.5;
             spinnerC.gridx = 1;
             spinnerC.gridy = i;
