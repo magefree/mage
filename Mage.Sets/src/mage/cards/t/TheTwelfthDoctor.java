@@ -39,7 +39,7 @@ public final class TheTwelfthDoctor extends CardImpl {
 
     // The first spell you cast from anywhere other than your hand each turn has demonstrate.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-            new TheTwelfthDoctorGainDemonstrateFirstSpellCastFromNotHandEffect()),
+            new TheTwelfthDoctorGainDemonstrateEffect()),
             new TheTwelfthDoctorWatcher());
         this.addAbility(new TheTwelfthDoctorCopyTriggeredAbility());
     }
@@ -54,22 +54,20 @@ public final class TheTwelfthDoctor extends CardImpl {
     }
 }
 
-class TheTwelfthDoctorGainDemonstrateFirstSpellCastFromNotHandEffect extends ContinuousEffectImpl {
+class TheTwelfthDoctorGainDemonstrateEffect extends ContinuousEffectImpl {
 
-    private final Ability DemonstrateAbility = new DemonstrateAbility();
-
-    public TheTwelfthDoctorGainDemonstrateFirstSpellCastFromNotHandEffect() {
+    public TheTwelfthDoctorGainDemonstrateEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "The first spell you cast from anywhere other than your hand each turn has demonstrate";
     }
 
-    private TheTwelfthDoctorGainDemonstrateFirstSpellCastFromNotHandEffect(final TheTwelfthDoctorGainDemonstrateFirstSpellCastFromNotHandEffect effect) {
+    private TheTwelfthDoctorGainDemonstrateEffect(final TheTwelfthDoctorGainDemonstrateEffect effect) {
         super(effect);
     }
 
     @Override
-    public TheTwelfthDoctorGainDemonstrateFirstSpellCastFromNotHandEffect copy() {
-        return new TheTwelfthDoctorGainDemonstrateFirstSpellCastFromNotHandEffect(this);
+    public TheTwelfthDoctorGainDemonstrateEffect copy() {
+        return new TheTwelfthDoctorGainDemonstrateEffect(this);
     }
 
     @Override
@@ -81,18 +79,12 @@ class TheTwelfthDoctorGainDemonstrateFirstSpellCastFromNotHandEffect extends Con
         }
 
         for (StackObject stackObject : game.getStack()) {
-            // only spells cast, so no copies of spells
-            System.out.print("Checking if Spell should be demonstrated.");
             if ((stackObject instanceof Spell)
                     && !stackObject.isCopy()
                     && stackObject.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) stackObject;
-                
-                System.out.print("It's demonstratable.");
-
                 if (FirstSpellCastFromNotHandEachTurnCondition.instance.apply(game, source)) {
-                    System.out.print("Demonstrate this beach.");
-                    game.getState().addOtherAbility(spell.getCard(), DemonstrateAbility);
+                    game.getState().addOtherAbility(spell.getCard(), new DemonstrateAbility());
                 }
             }
         }
@@ -143,8 +135,7 @@ class TheTwelfthDoctorWatcher extends Watcher {
     }
 
     static boolean checkSpell(StackObject stackObject, Game game) {
-        if (stackObject.isCopy()
-                || !(stackObject instanceof Spell)) {
+        if (!(stackObject instanceof Spell)) {
             return false;
         }
         TheTwelfthDoctorWatcher watcher = game.getState().getWatcher(TheTwelfthDoctorWatcher.class);
