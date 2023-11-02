@@ -24,12 +24,17 @@ public class DiscoverEffect extends OneShotEffect {
     private final int amount;
 
     public DiscoverEffect(int amount) {
+        this(amount, true);
+    }
+
+    public DiscoverEffect(int amount, boolean withReminderText) {
         super(Outcome.Benefit);
         this.amount = amount;
-        staticText = "discover " + amount + ". <i>(Exile cards from the top of your library " +
+        staticText = "discover " + amount
+                + (withReminderText ? ". <i>(Exile cards from the top of your library " +
                 "until you exile a nonland card with mana value " + amount + " or less. " +
                 "Cast it without paying its mana cost or put it into your hand. " +
-                "Put the rest on the bottom in a random order.)</i>";
+                "Put the rest on the bottom in a random order.)</i>" : "");
     }
 
     private DiscoverEffect(final DiscoverEffect effect) {
