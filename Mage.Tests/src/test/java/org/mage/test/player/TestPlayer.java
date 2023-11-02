@@ -1145,7 +1145,7 @@ public class TestPlayer implements Player {
         Assert.fail(action.getActionName() + " - can't find permanent to check: " + cardName);
         return null;
     }
-    
+
     private void printStart(Game game, String name) {
         System.out.println("\n" + game.toString());
         System.out.println(name + ":");
@@ -2867,7 +2867,7 @@ public class TestPlayer implements Player {
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-            int min, int max, MultiAmountType type, Game game) {
+                                                                 int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
@@ -3171,12 +3171,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Map<UUID, Map<MageIdentifier,ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
+    public Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
         return computerPlayer.getCastSourceIdManaCosts();
     }
 
     @Override
-    public Map<UUID, Map<MageIdentifier,Costs<Cost>>> getCastSourceIdCosts() {
+    public Map<UUID, Map<MageIdentifier, Costs<Cost>>> getCastSourceIdCosts() {
         return computerPlayer.getCastSourceIdCosts();
     }
 
@@ -4372,10 +4372,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean surveil(int value, Ability source,
-                           Game game
-    ) {
-        return computerPlayer.surveil(value, source, game);
+    public SurveilResult doSurveil(int value, Ability source, Game game) {
+        return computerPlayer.doSurveil(value, source, game);
     }
 
     @Override

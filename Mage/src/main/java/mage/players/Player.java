@@ -1108,7 +1108,48 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean scry(int value, Ability source, Game game);
 
-    boolean surveil(int value, Ability source, Game game);
+    /**
+     * result of the doSurveil action.
+     * Sometimes more info is needed for the caller after the surveil is done.
+     */
+    class SurveilResult {
+        private final boolean surveilled;
+        private final int numberInGraveyard; // how many cards were put into the graveyard
+        private final int numberOnTop; // how many cards were put into the graveyard
+
+        private SurveilResult(boolean surveilled, int inGrave, int onTop) {
+            this.surveilled = surveilled;
+            this.numberInGraveyard = inGrave;
+            this.numberOnTop = onTop;
+        }
+
+        public static SurveilResult noSurveil() {
+            return new SurveilResult(false, 0, 0);
+        }
+
+        public static SurveilResult surveil(int inGrave, int onTop) {
+            return new SurveilResult(true, inGrave, onTop);
+        }
+
+        public boolean hasSurveilled() {
+            return this.surveilled;
+        }
+
+        public int getNumberPutInGraveyard() {
+            return this.numberInGraveyard;
+        }
+
+        public int getNumberPutOnTop() {
+            return this.numberOnTop;
+        }
+    }
+
+    SurveilResult doSurveil(int value, Ability source, Game game);
+
+    default boolean surveil(int value, Ability source, Game game) {
+        SurveilResult result = doSurveil(value, source, game);
+        return result.hasSurveilled();
+    }
 
     /**
      * Only used for test player for pre-setting targets
