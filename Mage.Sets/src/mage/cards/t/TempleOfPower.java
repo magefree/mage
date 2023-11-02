@@ -18,7 +18,7 @@ import mage.constants.TimingRule;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.game.command.CommandObject;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -139,10 +139,10 @@ class TempleOfPowerWatcher extends Watcher {
                     // source is a spell.
                     sourceControllerId = ((StackObject) sourceObject).getControllerId();
                 } else {
-                    // source is an Emblem.
                     sourceObject = game.getObject(event.getSourceId());
-                    if (sourceObject instanceof Emblem) {
-                        sourceControllerId = ((Emblem) sourceObject).getControllerId();
+                    if (sourceObject instanceof CommandObject) {
+                        // source is a Command Object. For instance Emblem
+                        sourceControllerId = ((CommandObject) sourceObject).getControllerId();
                     }
                 }
             }
