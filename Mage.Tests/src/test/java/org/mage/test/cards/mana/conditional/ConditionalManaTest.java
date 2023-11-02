@@ -11,7 +11,6 @@ import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -370,6 +369,12 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
         addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 2);
+
+        // Init library to mill a third bear
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+
+        addTarget(playerA, "Grizzly Bears"); // upkeep surveil: put the Bears in the graveyard.
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
