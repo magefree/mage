@@ -2820,4 +2820,44 @@ public class VerifyCardDataTest {
             Assert.fail(String.format("Card name converters contains unsupported unicode symbols in %d cards, see logs above", errorsList.size()));
         }
     }
+
+    /**
+     * Not really a test. Used to make the changelog diff list
+     * for sets that are heavily worked on.
+     */
+    @Ignore
+    @Test
+    public void list_ChangelogHelper() {
+        String setCode = "LCI";
+        int maxCards = 285; // don't want to look above that card number, as those are alternate prints.
+        boolean doExclude = true; // use the excluded array or not.
+
+        // Excluded in that list, either already listed in a previous changelog, or exceptions.
+        Set<Integer> excluded = new HashSet<>(Arrays.asList(
+                14, 17, 19, 21, 24, 25, 26, 28, 34, 36, 48, 50, 52, 53, 77, 78, 84, 116, 119, 137, 144, 150,
+                152, 158, 178, 179, 185, 188, 189, 196, 203, 207, 208, 212, 216, 219, 221, 224, 225, 227, 229,
+                231, 237, 238, 239, 243, 247, 262, 265, 266, 267, 269, 273, 274, 275, 276, 277, 281
+                // 6, 8, 10, 14, 16, 17, 19, 20, 21, 24, 25, 26, 28, 30, 32, 33, 34, 36, 42, 44, 48, 49, 50, 51, 52, 53, 58, 59, 62, 63, 65, 68, 74, 76, 77, 78, 79, 83, 84, 86, 87, 88, 91, 92, 93, 95, 97, 98, 102, 103, 105, 107, 116, 119, 120, 121, 122, 123, 124, 125, 127, 131, 133, 134, 137, 139, 141, 143, 144, 146, 147, 148, 150, 152, 153, 155, 156, 158, 161, 162, 164, 165, 171, 173, 176, 178, 179, 180, 181, 183, 184, 185, 186, 187, 188, 189, 191, 196, 197, 203, 204, 206, 207, 208, 211, 212, 213, 215, 216, 217, 219, 220, 221, 222, 224, 225, 226, 227, 228, 229, 231, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 247, 249, 250, 252, 254, 256, 257, 261, 262, 264, 265, 266, 267, 269, 270, 271, 272, 273, 274, 275, 276, 277, 280, 281, 282, 283, 284
+        ));
+
+        Set<Integer> listChangelog = new HashSet<>();
+        List<ExpansionSet.SetCardInfo> setInfo = Sets.getInstance().get(setCode).getSetCardInfo();
+        for (ExpansionSet.SetCardInfo sci : setInfo) {
+            int cn = sci.getCardNumberAsInt();
+            if (cn > maxCards) continue;
+            if (doExclude && excluded.contains(cn)) continue;
+            listChangelog.add(cn);
+        }
+
+        List<Integer> sorted = listChangelog.stream().sorted().collect(Collectors.toList());
+
+        // to manual update the excluded array
+        System.out.println(sorted.stream().map(cn -> cn + "").collect(Collectors.joining(", ")));
+        // Scryfall list of all the new cards for that set
+        System.out.println(
+                "https://scryfall.com/search?q=s%3A" + setCode + "+-is%3Areprint+%28"
+                        + sorted.stream().map(cn -> "cn%3A" + cn).collect(Collectors.joining("+or+"))
+                        + "%29&order=set&as=grid&unique=cards"
+        );
+    }
 }
