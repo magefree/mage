@@ -184,6 +184,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sentinel of the Nameless City", 211, Rarity.RARE, mage.cards.s.SentinelOfTheNamelessCity.class));
         cards.add(new SetCardInfo("Sinuous Benthisaur", 76, Rarity.UNCOMMON, mage.cards.s.SinuousBenthisaur.class));
         cards.add(new SetCardInfo("Skullcap Snail", 119, Rarity.COMMON, mage.cards.s.SkullcapSnail.class));
+        cards.add(new SetCardInfo("Soaring Sandwing", 35, Rarity.COMMON, mage.cards.s.SoaringSandwing.class));
         cards.add(new SetCardInfo("Song of Stupefaction", 77, Rarity.COMMON, mage.cards.s.SongOfStupefaction.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 261, Rarity.UNCOMMON, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Soulcoil Viper", 120, Rarity.UNCOMMON, mage.cards.s.SoulcoilViper.class));
