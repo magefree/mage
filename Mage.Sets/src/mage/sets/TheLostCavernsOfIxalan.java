@@ -30,7 +30,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Bartolome del Presidio", 224, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class));
         cards.add(new SetCardInfo("Bedrock Tortoise", 176, Rarity.RARE, mage.cards.b.BedrockTortoise.class));
         cards.add(new SetCardInfo("Belligerent Yearling", 133, Rarity.UNCOMMON, mage.cards.b.BelligerentYearling.class));
-        cards.add(new SetCardInfo("Bitter Triumph", 91, Rarity.COMMON, mage.cards.b.BitterTriumph.class));
+        cards.add(new SetCardInfo("Bitter Triumph", 91, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
         cards.add(new SetCardInfo("Bladewheel Chariot", 36, Rarity.UNCOMMON, mage.cards.b.BladewheelChariot.class));
         cards.add(new SetCardInfo("Bloodletter of Aclazotz", 92, Rarity.MYTHIC, mage.cards.b.BloodletterOfAclazotz.class));
         cards.add(new SetCardInfo("Bloodthorn Flail", 93, Rarity.UNCOMMON, mage.cards.b.BloodthornFlail.class));
@@ -137,6 +137,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Palani's Hatcher", 237, Rarity.RARE, mage.cards.p.PalanisHatcher.class));
         cards.add(new SetCardInfo("Pathfinding Axejaw", 206, Rarity.COMMON, mage.cards.p.PathfindingAxejaw.class));
         cards.add(new SetCardInfo("Petrify", 30, Rarity.COMMON, mage.cards.p.Petrify.class));
+        cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 393, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poetic Ingenuity", 161, Rarity.RARE, mage.cards.p.PoeticIngenuity.class));
         cards.add(new SetCardInfo("Poison Dart Frog", 207, Rarity.COMMON, mage.cards.p.PoisonDartFrog.class));
@@ -198,7 +199,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Throne of the Grim Captain", 266, Rarity.RARE, mage.cards.t.ThroneOfTheGrimCaptain.class));
         cards.add(new SetCardInfo("Treasure Cove", 267, Rarity.RARE, mage.cards.t.TreasureCove.class));
         cards.add(new SetCardInfo("Treasure Map", 267, Rarity.RARE, mage.cards.t.TreasureMap.class));
-        cards.add(new SetCardInfo("Trumpeting Carnosaur", 171, Rarity.COMMON, mage.cards.t.TrumpetingCarnosaur.class));
+        cards.add(new SetCardInfo("Trumpeting Carnosaur", 171, Rarity.RARE, mage.cards.t.TrumpetingCarnosaur.class));
         cards.add(new SetCardInfo("Twists and Turns", 217, Rarity.UNCOMMON, mage.cards.t.TwistsAndTurns.class));
         cards.add(new SetCardInfo("Uchbenbak, the Great Mistake", 242, Rarity.UNCOMMON, mage.cards.u.UchbenbakTheGreatMistake.class));
         cards.add(new SetCardInfo("Vanguard of the Rose", 42, Rarity.UNCOMMON, mage.cards.v.VanguardOfTheRose.class));
