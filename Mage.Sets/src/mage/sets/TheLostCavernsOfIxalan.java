@@ -108,6 +108,8 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 395, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", 188, Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class));
         cards.add(new SetCardInfo("Jadelight Spelunker", 196, Rarity.RARE, mage.cards.j.JadelightSpelunker.class));
+        cards.add(new SetCardInfo("Kaslem's Stonetree", 197, Rarity.COMMON, mage.cards.k.KaslemsStonetree.class));
+        cards.add(new SetCardInfo("Kaslem's Strider", 197, Rarity.COMMON, mage.cards.k.KaslemsStrider.class));
         cards.add(new SetCardInfo("Kellan, Daring Traveler", 231, Rarity.RARE, mage.cards.k.KellanDaringTraveler.class));
         cards.add(new SetCardInfo("Kinjalli's Dawnrunner", 19, Rarity.UNCOMMON, mage.cards.k.KinjallisDawnrunner.class));
         cards.add(new SetCardInfo("Kutzil's Flanker", 20, Rarity.RARE, mage.cards.k.KutzilsFlanker.class));
