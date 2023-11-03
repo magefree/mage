@@ -200,6 +200,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Throne of the Grim Captain", 266, Rarity.RARE, mage.cards.t.ThroneOfTheGrimCaptain.class));
         cards.add(new SetCardInfo("Treasure Cove", 267, Rarity.RARE, mage.cards.t.TreasureCove.class));
         cards.add(new SetCardInfo("Treasure Map", 267, Rarity.RARE, mage.cards.t.TreasureMap.class));
+        cards.add(new SetCardInfo("Triumphant Chomp", 170, Rarity.UNCOMMON, mage.cards.t.TriumphantChomp.class));
         cards.add(new SetCardInfo("Trumpeting Carnosaur", 171, Rarity.RARE, mage.cards.t.TrumpetingCarnosaur.class));
         cards.add(new SetCardInfo("Twists and Turns", 217, Rarity.UNCOMMON, mage.cards.t.TwistsAndTurns.class));
         cards.add(new SetCardInfo("Uchbenbak, the Great Mistake", 242, Rarity.UNCOMMON, mage.cards.u.UchbenbakTheGreatMistake.class));
