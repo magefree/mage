@@ -215,6 +215,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Watertight Gondola", 83, Rarity.UNCOMMON, mage.cards.w.WatertightGondola.class));
         cards.add(new SetCardInfo("Waterwind Scout", 84, Rarity.COMMON, mage.cards.w.WaterwindScout.class));
         cards.add(new SetCardInfo("Zoetic Glyph", 86, Rarity.UNCOMMON, mage.cards.z.ZoeticGlyph.class));
+        cards.add(new SetCardInfo("Zoyowa Lava-Tongue", 245, Rarity.UNCOMMON, mage.cards.z.ZoyowaLavaTongue.class));
         cards.add(new SetCardInfo("Zoyowa's Justice", 173, Rarity.UNCOMMON, mage.cards.z.ZoyowasJustice.class));
     }
 }
