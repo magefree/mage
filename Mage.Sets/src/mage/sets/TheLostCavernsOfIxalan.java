@@ -92,6 +92,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Glimpse the Core", 186, Rarity.UNCOMMON, mage.cards.g.GlimpseTheCore.class));
         cards.add(new SetCardInfo("Glowcap Lantern", 187, Rarity.UNCOMMON, mage.cards.g.GlowcapLantern.class));
         cards.add(new SetCardInfo("Goldfury Strider", 152, Rarity.UNCOMMON, mage.cards.g.GoldfuryStrider.class));
+        cards.add(new SetCardInfo("Greedy Freebooter", 109, Rarity.COMMON, mage.cards.g.GreedyFreebooter.class));
         cards.add(new SetCardInfo("Growing Rites of Itlimoc", 188, Rarity.RARE, mage.cards.g.GrowingRitesOfItlimoc.class));
         cards.add(new SetCardInfo("Guardian of the Great Door", 16, Rarity.UNCOMMON, mage.cards.g.GuardianOfTheGreatDoor.class));
         cards.add(new SetCardInfo("Guidestone Compass", 62, Rarity.UNCOMMON, mage.cards.g.GuidestoneCompass.class));
