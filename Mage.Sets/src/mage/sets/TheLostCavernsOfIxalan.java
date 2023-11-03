@@ -63,6 +63,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Curator of Sun's Creation", 141, Rarity.UNCOMMON, mage.cards.c.CuratorOfSunsCreation.class));
         cards.add(new SetCardInfo("Dauntless Dismantler", 8, Rarity.UNCOMMON, mage.cards.d.DauntlessDismantler.class));
         cards.add(new SetCardInfo("Dead Weight", 99, Rarity.COMMON, mage.cards.d.DeadWeight.class));
+        cards.add(new SetCardInfo("Deathcap Marionette", 100, Rarity.COMMON, mage.cards.d.DeathcapMarionette.class));
         cards.add(new SetCardInfo("Deep Goblin Skulltaker", 101, Rarity.COMMON, mage.cards.d.DeepGoblinSkulltaker.class));
         cards.add(new SetCardInfo("Deep-Cavern Bat", 102, Rarity.UNCOMMON, mage.cards.d.DeepCavernBat.class));
         cards.add(new SetCardInfo("Deepfathom Echo", 228, Rarity.RARE, mage.cards.d.DeepfathomEcho.class));
