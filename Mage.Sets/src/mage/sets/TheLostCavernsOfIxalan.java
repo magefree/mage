@@ -168,6 +168,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Restless Ridgeline", 283, Rarity.RARE, mage.cards.r.RestlessRidgeline.class));
         cards.add(new SetCardInfo("Restless Vents", 284, Rarity.RARE, mage.cards.r.RestlessVents.class));
         cards.add(new SetCardInfo("River Herald Guide", 209, Rarity.COMMON, mage.cards.r.RiverHeraldGuide.class));
+        cards.add(new SetCardInfo("River Herald Scout", 72, Rarity.COMMON, mage.cards.r.RiverHeraldScout.class));
         cards.add(new SetCardInfo("Roar of the Fifth People", 189, Rarity.MYTHIC, mage.cards.r.RoarOfTheFifthPeople.class));
         cards.add(new SetCardInfo("Ruin-Lurker Bat", 33, Rarity.UNCOMMON, mage.cards.r.RuinLurkerBat.class));
         cards.add(new SetCardInfo("Rumbling Rockslide", 163, Rarity.COMMON, mage.cards.r.RumblingRockslide.class));
