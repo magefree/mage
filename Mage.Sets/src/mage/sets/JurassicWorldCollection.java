@@ -19,7 +19,6 @@ public final class JurassicWorldCollection extends ExpansionSet {
     private JurassicWorldCollection() {
         super("Jurassic World Collection", "REX", ExpansionSet.buildDate(2023, 11, 17), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Command Tower", 26, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", "26b", Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
