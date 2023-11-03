@@ -43,6 +43,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Caparocti Sunborn", 226, Rarity.UNCOMMON, mage.cards.c.CaparoctiSunborn.class));
         cards.add(new SetCardInfo("Captain Storm, Cosmium Raider", 227, Rarity.UNCOMMON, mage.cards.c.CaptainStormCosmiumRaider.class));
         cards.add(new SetCardInfo("Careening Mine Cart", 247, Rarity.UNCOMMON, mage.cards.c.CareeningMineCart.class));
+        cards.add(new SetCardInfo("Cartographer's Companion", 248, Rarity.COMMON, mage.cards.c.CartographersCompanion.class));
         cards.add(new SetCardInfo("Cavern of Souls", 269, Rarity.MYTHIC, mage.cards.c.CavernOfSouls.class));
         cards.add(new SetCardInfo("Cavernous Maw", 270, Rarity.UNCOMMON, mage.cards.c.CavernousMaw.class));
         cards.add(new SetCardInfo("Cenote Scout", 178, Rarity.UNCOMMON, mage.cards.c.CenoteScout.class));
