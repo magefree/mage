@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.ArrayList;
@@ -8,12 +7,10 @@ import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,15 +38,12 @@ public final class MetzaliTowerOfTriumph extends CardImpl {
         this.nightCard = true;
 
         // <i>(Transforms from Path of Mettle.)</i>
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("<i>(Transforms from Path of Mettle.)</i>"));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
 
         // {t}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // {1}{R}, {T}: Metzali, Tower of Triumph deals 2 damage to each opponent.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT), new ManaCostsImpl<>("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
