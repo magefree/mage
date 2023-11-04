@@ -46,6 +46,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Breeches, Eager Pillager", 137, Rarity.RARE, mage.cards.b.BreechesEagerPillager.class));
         cards.add(new SetCardInfo("Broodrage Mycoid", 95, Rarity.COMMON, mage.cards.b.BroodrageMycoid.class));
         cards.add(new SetCardInfo("Buried Treasure", 246, Rarity.COMMON, mage.cards.b.BuriedTreasure.class));
+        cards.add(new SetCardInfo("Burning Sun Cavalry", 138, Rarity.COMMON, mage.cards.b.BurningSunCavalry.class));
         cards.add(new SetCardInfo("Calamitous Cave-In", 139, Rarity.UNCOMMON, mage.cards.c.CalamitousCaveIn.class));
         cards.add(new SetCardInfo("Canonized in Blood", 96, Rarity.UNCOMMON, mage.cards.c.CanonizedInBlood.class));
         cards.add(new SetCardInfo("Caparocti Sunborn", 226, Rarity.UNCOMMON, mage.cards.c.CaparoctiSunborn.class));
