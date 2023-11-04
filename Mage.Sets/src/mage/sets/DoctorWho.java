@@ -228,6 +228,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Tenth Doctor", 194, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 446, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 561, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Twelfth Doctor", 164, Rarity.RARE, mage.cards.t.TheTwelfthDoctor.class));
         cards.add(new SetCardInfo("Think Twice", 220, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thought Vessel", 255, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Three Visits", 235, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
