@@ -42,7 +42,7 @@ public final class FungalFortitude extends CardImpl {
 
         // When enchanted creature dies, return it to the battlefield tapped under its owner's control.
         this.addAbility(new DiesAttachedTriggeredAbility(
-                new ReturnToBattlefieldUnderOwnerControlAttachedEffect(true),
+                new ReturnToBattlefieldUnderOwnerControlAttachedEffect("it", true),
                 "enchanted creature",
                 false
         ));

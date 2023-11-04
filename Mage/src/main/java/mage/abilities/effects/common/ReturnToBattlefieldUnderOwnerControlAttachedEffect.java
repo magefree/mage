@@ -18,13 +18,15 @@ public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotE
     private final boolean tapped;
 
     public ReturnToBattlefieldUnderOwnerControlAttachedEffect() {
-        this(false);
+        this("that card", false);
     }
 
-    public ReturnToBattlefieldUnderOwnerControlAttachedEffect(boolean tapped) {
+    public ReturnToBattlefieldUnderOwnerControlAttachedEffect(String textCard, boolean tapped) {
         super(Outcome.Neutral);
         this.tapped = tapped;
-        staticText = "return that card to the battlefield under its owner's control";
+        staticText = "return " + textCard + " to the battlefield "
+                + (tapped ? "tapped " : "")
+                + "under its owner's control";
     }
 
     protected ReturnToBattlefieldUnderOwnerControlAttachedEffect(final ReturnToBattlefieldUnderOwnerControlAttachedEffect effect) {
