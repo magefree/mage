@@ -124,6 +124,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public boolean getTriggersOnceEachTurn() {
+        return this.triggersOnceEachTurn;
+    }
+
+    @Override
     public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
         this.optional = true;
         this.doOnlyOnceEachTurn = doOnlyOnce;
