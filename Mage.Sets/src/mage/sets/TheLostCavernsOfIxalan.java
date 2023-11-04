@@ -153,6 +153,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Itzquinth, Firstborn of Gishath", 230, Rarity.UNCOMMON, mage.cards.i.ItzquinthFirstbornOfGishath.class));
         cards.add(new SetCardInfo("Ixalli's Lorekeeper", 194, Rarity.UNCOMMON, mage.cards.i.IxallisLorekeeper.class));
         cards.add(new SetCardInfo("Jadelight Spelunker", 196, Rarity.RARE, mage.cards.j.JadelightSpelunker.class));
+        cards.add(new SetCardInfo("Join the Dead", 110, Rarity.COMMON, mage.cards.j.JoinTheDead.class));
         cards.add(new SetCardInfo("Kaslem's Stonetree", 197, Rarity.COMMON, mage.cards.k.KaslemsStonetree.class));
         cards.add(new SetCardInfo("Kaslem's Strider", 197, Rarity.COMMON, mage.cards.k.KaslemsStrider.class));
         cards.add(new SetCardInfo("Kellan, Daring Traveler", 231, Rarity.RARE, mage.cards.k.KellanDaringTraveler.class));
