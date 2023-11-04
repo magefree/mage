@@ -62,7 +62,7 @@ class DireBlunderbussGainAbilityEffect extends ContinuousEffectImpl {
     DireBlunderbussGainAbilityEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "and has \"Whenever this creature attacks, you may sacrifice an artifact other than {this}. "
-                + "When you do, this creature deals damage equal to its power to target creature\"";
+                + "When you do, this creature deals damage equal to its power to target creature.\"";
     }
 
     protected DireBlunderbussGainAbilityEffect(final DireBlunderbussGainAbilityEffect effect) {
