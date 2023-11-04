@@ -35,7 +35,7 @@ public final class VanguardOfTheRose extends CardImpl {
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}")
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT));
         ability.addEffect(new TapSourceEffect().setText("tap it"));
         this.addAbility(ability);
     }

@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class TarriansSoulcleaver extends CardImpl {
 
-    public static final FilterPermanent filter = new FilterPermanent("another artifact or creature");
+    private static final FilterPermanent filter = new FilterPermanent("another artifact or creature");
 
     static {
         filter.add(AnotherPredicate.instance);

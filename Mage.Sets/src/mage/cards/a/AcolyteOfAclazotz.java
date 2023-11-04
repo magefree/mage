@@ -30,7 +30,7 @@ public final class AcolyteOfAclazotz extends CardImpl {
 
         // {T}, Sacrifice another creature or artifact: Each opponent loses 1 life and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }

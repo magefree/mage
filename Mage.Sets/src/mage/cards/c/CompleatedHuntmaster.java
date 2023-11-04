@@ -32,7 +32,7 @@ public final class CompleatedHuntmaster extends CardImpl {
         // {1}, {T}, Sacrifice another creature or artifact: Incubate 3.
         Ability ability = new SimpleActivatedAbility(new IncubateEffect(3), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT));
         this.addAbility(ability);
     }
 
