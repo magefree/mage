@@ -202,6 +202,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Saheeli's Lattice", 164, Rarity.UNCOMMON, mage.cards.s.SaheelisLattice.class));
         cards.add(new SetCardInfo("Saheeli, the Sun's Brilliance", 239, Rarity.MYTHIC, mage.cards.s.SaheeliTheSunsBrilliance.class));
         cards.add(new SetCardInfo("Sanguine Evangelist", 34, Rarity.RARE, mage.cards.s.SanguineEvangelist.class));
+        cards.add(new SetCardInfo("Scampering Surveyor", 260, Rarity.UNCOMMON, mage.cards.s.ScamperingSurveyor.class));
         cards.add(new SetCardInfo("Screaming Phantom", 118, Rarity.COMMON, mage.cards.s.ScreamingPhantom.class));
         cards.add(new SetCardInfo("Scytheclaw Raptor", 165, Rarity.UNCOMMON, mage.cards.s.ScytheclawRaptor.class));
         cards.add(new SetCardInfo("Seeker of Sunlight", 210, Rarity.COMMON, mage.cards.s.SeekerOfSunlight.class));
