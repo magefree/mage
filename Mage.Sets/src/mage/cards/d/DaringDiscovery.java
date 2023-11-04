@@ -1,10 +1,11 @@
 package mage.cards.d;
 
-import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.keyword.DiscoverEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -18,7 +19,7 @@ public final class DaringDiscovery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Up to three target creatures can't block this turn.
-        this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect());
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3));
 
         // Discover 4.

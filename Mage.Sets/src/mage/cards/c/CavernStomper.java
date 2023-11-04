@@ -32,7 +32,7 @@ public final class CavernStomper extends CardImpl {
 
         // {3}{G}: Cavern Stomper can't be blocked by creatures with power 2 or less this turn.
         this.addAbility(new SimpleActivatedAbility(new CantBeBlockedByCreaturesSourceEffect(
-                DauntAbility.getFilter(), Duration.WhileOnBattlefield
+                DauntAbility.getFilter(), Duration.EndOfTurn
         ), new ManaCostsImpl<>("{3}{G}")));
     }
 
