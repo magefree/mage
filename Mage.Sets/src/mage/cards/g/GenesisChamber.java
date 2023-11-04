@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class GenesisChamber extends CardImpl {
         // Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token.
         TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GenesisChamberEffect(), StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability,
-                SourceUntappedCondition.instance,
+                SourceTappedCondition.UNTAPPED,
                 "Whenever a nontoken creature enters the battlefield, "
                         + "if {this} is untapped, "
                         + "that creature's controller creates a 1/1 colorless Myr artifact creature token"));
@@ -43,25 +43,6 @@ public final class GenesisChamber extends CardImpl {
     @Override
     public GenesisChamber copy() {
         return new GenesisChamber(this);
-    }
-}
-
-enum SourceUntappedCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (permanent != null) {
-            return !permanent.isTapped();
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "if {this} is untapped";
     }
 }
 
