@@ -179,6 +179,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Oteclan Landmark", 29, Rarity.COMMON, mage.cards.o.OteclanLandmark.class));
         cards.add(new SetCardInfo("Oteclan Levitator", 29, Rarity.COMMON, mage.cards.o.OteclanLevitator.class));
         cards.add(new SetCardInfo("Out of Air", 69, Rarity.COMMON, mage.cards.o.OutOfAir.class));
+        cards.add(new SetCardInfo("Over the Edge", 205, Rarity.COMMON, mage.cards.o.OverTheEdge.class));
         cards.add(new SetCardInfo("Palani's Hatcher", 237, Rarity.RARE, mage.cards.p.PalanisHatcher.class));
         cards.add(new SetCardInfo("Panicked Altisaur", 159, Rarity.COMMON, mage.cards.p.PanickedAltisaur.class));
         cards.add(new SetCardInfo("Pathfinding Axejaw", 206, Rarity.COMMON, mage.cards.p.PathfindingAxejaw.class));
