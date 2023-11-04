@@ -2115,6 +2115,8 @@ public class VerifyCardDataTest {
                 .replace("<i>", "")
                 .replace("</i>", "");
 
+        newRule = CardNameUtil.normalizeCardName(newRule);
+
         return newRule.trim();
     }
 
