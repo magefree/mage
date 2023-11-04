@@ -13,7 +13,6 @@ import mage.game.permanent.Permanent;
 public enum AttachedToTappedCondition implements Condition {
     instance;
 
-
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent attachment = game.getPermanent(source.getSourceId());
