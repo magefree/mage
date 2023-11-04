@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class ScamperingSurveyor extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a basic land card or Cave card");
+    private static final FilterCard filter = new FilterCard("a basic land card or a Cave card");
 
     static {
         filter.add(Predicates.or(
