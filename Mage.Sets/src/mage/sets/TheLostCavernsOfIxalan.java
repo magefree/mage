@@ -46,6 +46,8 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodthorn Flail", 93, Rarity.UNCOMMON, mage.cards.b.BloodthornFlail.class));
         cards.add(new SetCardInfo("Bonehoard Dracosaur", 134, Rarity.MYTHIC, mage.cards.b.BonehoardDracosaur.class));
         cards.add(new SetCardInfo("Brackish Blunder", 46, Rarity.COMMON, mage.cards.b.BrackishBlunder.class));
+        cards.add(new SetCardInfo("Braided Net", 47, Rarity.RARE, mage.cards.b.BraidedNet.class));
+        cards.add(new SetCardInfo("Braided Quipu", 47, Rarity.RARE, mage.cards.b.BraidedQuipu.class));
         cards.add(new SetCardInfo("Brazen Blademaster", 136, Rarity.COMMON, mage.cards.b.BrazenBlademaster.class));
         cards.add(new SetCardInfo("Breeches, Eager Pillager", 137, Rarity.RARE, mage.cards.b.BreechesEagerPillager.class));
         cards.add(new SetCardInfo("Bringer of the Last Gift", 94, Rarity.RARE, mage.cards.b.BringerOfTheLastGift.class));
