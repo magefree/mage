@@ -55,8 +55,6 @@ public final class EatenByPiranhas extends CardImpl {
  */
 class EatenByPiranhasEffect extends ContinuousEffectImpl {
 
-    private static final ObjectColor color = new ObjectColor("B");
-
     EatenByPiranhasEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "enchanted creature loses all abilities and is a black Skeleton creature " +
@@ -88,17 +86,19 @@ class EatenByPiranhasEffect extends ContinuousEffectImpl {
                 permanent.addCardType(game, CardType.CREATURE);
                 permanent.removeAllSubTypes(game);
                 permanent.addSubType(game, SubType.SKELETON);
-                return true;
+                break;
             case ColorChangingEffects_5:
-                permanent.getColor(game).setColor(color);
+                permanent.getColor(game).setColor(ObjectColor.BLACK);
+                break;
             case AbilityAddingRemovingEffects_6:
                 permanent.removeAllAbilities(source.getSourceId(), game);
-                return true;
+                break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     permanent.getPower().setModifiedBaseValue(1);
                     permanent.getToughness().setModifiedBaseValue(1);
                 }
+                break;
         }
         return true;
     }
