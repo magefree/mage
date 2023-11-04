@@ -220,6 +220,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Seismic Monstrosaur", 166, Rarity.COMMON, mage.cards.s.SeismicMonstrosaur.class));
         cards.add(new SetCardInfo("Self-Reflection", 74, Rarity.UNCOMMON, mage.cards.s.SelfReflection.class));
         cards.add(new SetCardInfo("Sentinel of the Nameless City", 211, Rarity.RARE, mage.cards.s.SentinelOfTheNamelessCity.class));
+        cards.add(new SetCardInfo("Shipwreck Sentry", 75, Rarity.COMMON, mage.cards.s.ShipwreckSentry.class));
         cards.add(new SetCardInfo("Sinuous Benthisaur", 76, Rarity.UNCOMMON, mage.cards.s.SinuousBenthisaur.class));
         cards.add(new SetCardInfo("Skullcap Snail", 119, Rarity.COMMON, mage.cards.s.SkullcapSnail.class));
         cards.add(new SetCardInfo("Soaring Sandwing", 35, Rarity.COMMON, mage.cards.s.SoaringSandwing.class));
