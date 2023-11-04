@@ -26,6 +26,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Aclazotz, Deepest Betrayal", 88, Rarity.MYTHIC, mage.cards.a.AclazotzDeepestBetrayal.class));
         cards.add(new SetCardInfo("Acolyte of Aclazotz", 89, Rarity.COMMON, mage.cards.a.AcolyteOfAclazotz.class));
         cards.add(new SetCardInfo("Acrobatic Leap", 2, Rarity.COMMON, mage.cards.a.AcrobaticLeap.class));
+        cards.add(new SetCardInfo("Adaptive Gemguard", 3, Rarity.COMMON, mage.cards.a.AdaptiveGemguard.class));
         cards.add(new SetCardInfo("Akal Pakal, First Among Equals", 44, Rarity.RARE, mage.cards.a.AkalPakalFirstAmongEquals.class));
         cards.add(new SetCardInfo("Akawalli, the Seething Tower", 220, Rarity.UNCOMMON, mage.cards.a.AkawalliTheSeethingTower.class));
         cards.add(new SetCardInfo("Amalia Benavides Aguirre", 221, Rarity.RARE, mage.cards.a.AmaliaBenavidesAguirre.class));
