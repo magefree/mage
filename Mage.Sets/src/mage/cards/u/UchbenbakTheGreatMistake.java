@@ -32,7 +32,7 @@ public final class UchbenbakTheGreatMistake extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Descend 8 -- {4}{U}{B}: Return Uchbenbak, the Great Mistake from your graveyard to the battlefield with a finality counter on it. Activate only if there are eight or more permanent cards in your graveyard and only as a sorcery.
         this.addAbility(new ActivateIfConditionActivatedAbility(
