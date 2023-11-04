@@ -1446,6 +1446,7 @@ public abstract class GameImpl implements Game {
             player.endOfTurn(this);
         }
         state.resetWatchers();
+        state.cleanupPermanentCostsTags(this);
     }
 
     protected UUID pickChoosingPlayer() {
