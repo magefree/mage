@@ -97,6 +97,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Flail", 145, Rarity.RARE, mage.cards.d.DireFlail.class));
         cards.add(new SetCardInfo("Disruptor Wanderglyph", 253, Rarity.COMMON, mage.cards.d.DisruptorWanderglyph.class));
         cards.add(new SetCardInfo("Dowsing Device", 146, Rarity.UNCOMMON, mage.cards.d.DowsingDevice.class));
+        cards.add(new SetCardInfo("Dread Osseosaur", 129, Rarity.UNCOMMON, mage.cards.d.DreadOsseosaur.class));
         cards.add(new SetCardInfo("Dreadmaw's Ire", 147, Rarity.UNCOMMON, mage.cards.d.DreadmawsIre.class));
         cards.add(new SetCardInfo("Dusk Rose Reliquary", 10, Rarity.UNCOMMON, mage.cards.d.DuskRoseReliquary.class));
         cards.add(new SetCardInfo("Earthshaker Dreadmaw", 183, Rarity.UNCOMMON, mage.cards.e.EarthshakerDreadmaw.class));
@@ -293,6 +294,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Uchbenbak, the Great Mistake", 242, Rarity.UNCOMMON, mage.cards.u.UchbenbakTheGreatMistake.class));
         cards.add(new SetCardInfo("Unlucky Drop", 82, Rarity.COMMON, mage.cards.u.UnluckyDrop.class));
         cards.add(new SetCardInfo("Vanguard of the Rose", 42, Rarity.UNCOMMON, mage.cards.v.VanguardOfTheRose.class));
+        cards.add(new SetCardInfo("Visage of Dread", 129, Rarity.UNCOMMON, mage.cards.v.VisageOfDread.class));
         cards.add(new SetCardInfo("Vito's Inquisitor", 130, Rarity.COMMON, mage.cards.v.VitosInquisitor.class));
         cards.add(new SetCardInfo("Vito, Fanatic of Aclazotz", 243, Rarity.MYTHIC, mage.cards.v.VitoFanaticOfAclazotz.class));
         cards.add(new SetCardInfo("Volatile Fault", 286, Rarity.UNCOMMON, mage.cards.v.VolatileFault.class));
