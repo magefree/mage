@@ -27,7 +27,7 @@ public final class HulkingRaptor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // At the beginning of your precombat main phase, add {G}{G}.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
