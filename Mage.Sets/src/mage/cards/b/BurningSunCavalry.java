@@ -35,7 +35,7 @@ public final class BurningSunCavalry extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false),
                 condition,
-                "Whenever {this} attacks or blocks while you control a Dinosaur, it gets +1/+1 until end of turn."
+                "Whenever {this} attacks or blocks while you control a Dinosaur, {this} gets +1/+1 until end of turn."
         ));
     }
 

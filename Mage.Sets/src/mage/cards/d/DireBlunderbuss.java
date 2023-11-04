@@ -39,7 +39,7 @@ public final class DireBlunderbuss extends CardImpl {
         this.color.setRed(true);
 
         // Equipped creature gets +3/+0 and has "Whenever this creature attacks, you may sacrifice an artifact other than Dire Blunderbuss. When you do, this creature deals damage equal to its power to target creature"
-        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 3));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 0));
         ability.addEffect(new DireBlunderbussGainAbilityEffect());
         this.addAbility(ability);
 

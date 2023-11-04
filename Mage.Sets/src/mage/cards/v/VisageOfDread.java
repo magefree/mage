@@ -30,7 +30,7 @@ public final class VisageOfDread extends CardImpl {
 
         // Craft with two creatures {5}{B}
         this.addAbility(new CraftAbility(
-                "{5}{B}", "creatures", "other creatures you control and/or " +
+                "{5}{B}", "two creatures", "other creatures you control and/or " +
                 "creature cards in your graveyard", 2, 2, CardType.CREATURE.getPredicate()
         ));
     }

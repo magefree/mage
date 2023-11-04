@@ -49,7 +49,7 @@ public final class ShipwreckSentry extends CardImpl {
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 ShipwreckSentryWatcher::checkPlayer
         ).setText("as long as an artifact entered the battlefield under your control this turn, " +
-                "{this} can attack as though it didn't have defender")), new ShipwreckSentryWatcher());
+                "{this} can attack as though it didn't have defender")).addHint(hint), new ShipwreckSentryWatcher());
     }
 
     private ShipwreckSentry(final ShipwreckSentry card) {

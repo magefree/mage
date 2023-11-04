@@ -11,15 +11,14 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayTargetControll
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -50,9 +49,11 @@ public final class VolatileFault extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new SearchLibraryPutInPlayTargetControllerEffect(false));
+        ability.addEffect(new SearchLibraryPutInPlayTargetControllerEffect(
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND),
+                false, Outcome.PutLandInPlay, "that player"));
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateTokenEffect(new TreasureToken()));
+        ability.addEffect(new CreateTokenEffect(new TreasureToken()).concatBy("you"));
         this.addAbility(ability);
     }
 

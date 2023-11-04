@@ -46,7 +46,7 @@ class AnotherChanceEffect extends OneShotEffect {
 
     AnotherChanceEffect() {
         super(Outcome.Benefit);
-        staticText = "You may mill two cards. Then you return up to two creature cards from your graveyard to your hand";
+        staticText = "You may mill two cards. Then return up to two creature cards from your graveyard to your hand";
     }
 
     private AnotherChanceEffect(final AnotherChanceEffect effect) {

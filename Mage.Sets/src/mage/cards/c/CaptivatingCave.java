@@ -31,14 +31,13 @@ public final class CaptivatingCave extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility();
-        ability.addCost(new GenericManaCost(1));
+        Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {4}, {T}, Sacrifice Captivating Cave: Put two +1/+1 counters on target creature. Activate only as a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(4)
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), new GenericManaCost(4)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
