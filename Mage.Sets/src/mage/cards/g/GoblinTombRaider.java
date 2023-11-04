@@ -27,7 +27,7 @@ public final class GoblinTombRaider extends CardImpl {
 
     public GoblinTombRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
-        
+
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(1);
@@ -42,7 +42,7 @@ public final class GoblinTombRaider extends CardImpl {
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
                 condition, "and has haste"
         ));
-
+        this.addAbility(ability);
     }
 
     private GoblinTombRaider(final GoblinTombRaider card) {
