@@ -216,6 +216,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Spring-Loaded Sawblades", 36, Rarity.UNCOMMON, mage.cards.s.SpringLoadedSawblades.class));
         cards.add(new SetCardInfo("Spyglass Siren", 78, Rarity.UNCOMMON, mage.cards.s.SpyglassSiren.class));
         cards.add(new SetCardInfo("Squirming Emergence", 241, Rarity.RARE, mage.cards.s.SquirmingEmergence.class));
+        cards.add(new SetCardInfo("Staggering Size", 214, Rarity.COMMON, mage.cards.s.StaggeringSize.class));
         cards.add(new SetCardInfo("Stalactite Stalker", 122, Rarity.RARE, mage.cards.s.StalactiteStalker.class));
         cards.add(new SetCardInfo("Starving Revenant", 123, Rarity.RARE, mage.cards.s.StarvingRevenant.class));
         cards.add(new SetCardInfo("Staunch Crewmate", 79, Rarity.UNCOMMON, mage.cards.s.StaunchCrewmate.class));
