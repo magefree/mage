@@ -29,6 +29,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Akal Pakal, First Among Equals", 44, Rarity.RARE, mage.cards.a.AkalPakalFirstAmongEquals.class));
         cards.add(new SetCardInfo("Akawalli, the Seething Tower", 220, Rarity.UNCOMMON, mage.cards.a.AkawalliTheSeethingTower.class));
         cards.add(new SetCardInfo("Amalia Benavides Aguirre", 221, Rarity.RARE, mage.cards.a.AmaliaBenavidesAguirre.class));
+        cards.add(new SetCardInfo("Ancestors' Aid", 132, Rarity.COMMON, mage.cards.a.AncestorsAid.class));
         cards.add(new SetCardInfo("Ancestral Reminiscence", 45, Rarity.COMMON, mage.cards.a.AncestralReminiscence.class));
         cards.add(new SetCardInfo("Attentive Sunscribe", 4, Rarity.COMMON, mage.cards.a.AttentiveSunscribe.class));
         cards.add(new SetCardInfo("Bartolome del Presidio", 224, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class));
