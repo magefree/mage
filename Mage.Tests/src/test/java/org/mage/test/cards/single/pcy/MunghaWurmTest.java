@@ -24,6 +24,7 @@ public class MunghaWurmTest extends CardTestPlayerBase {
     private static final String meadow = "Alpine Meadow";
     private static final String treeline = "Arctic Treeline";
     private static final String guildgate = "Azorius Guildgate";
+    private static final String guildgate2 = "Golgari Guildgate";
 
     // destroy the wurm
     private static final String doomBlade = "Doom Blade";
@@ -34,16 +35,22 @@ public class MunghaWurmTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, wurm);
         addCard(Zone.BATTLEFIELD, playerA, meadow, 10);
-        //addCard(Zone.BATTLEFIELD, playerA, guildgate, 1);
+        addCard(Zone.BATTLEFIELD, playerA, guildgate, 1);
+        addCard(Zone.BATTLEFIELD, playerA, guildgate2, 1);
         addCard(Zone.BATTLEFIELD, playerB, treeline, 10);
 
-        //setChoice(playerA, guildgate);
+        addTarget(playerA, guildgate); // untapping the first guildgate t1
+
+        // t2, no effect since wurm is only messing with its controller untap
+
+        addTarget(playerA, guildgate2); // untapping the second guildgate t3
+
         setStopAt(3, PhaseStep.UPKEEP);
         execute();
 
-        assertTappedCount(meadow, true, 10 - 1);
-        assertTappedCount(meadow, false, 1);
-        //assertTappedCount(guildgate, false, 1);
+        assertTappedCount(meadow, true, 10); // all meadows still tapped
+        assertTappedCount(guildgate, false, 1);
+        assertTappedCount(guildgate2, false, 1);
         assertTappedCount(treeline, false, 10);
     }
 
@@ -54,19 +61,20 @@ public class MunghaWurmTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, doomBlade);
         addCard(Zone.BATTLEFIELD, playerA, wurm);
         addCard(Zone.BATTLEFIELD, playerA, meadow, 10);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-        //addCard(Zone.BATTLEFIELD, playerA, guildgate, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, guildgate, 1);
         addCard(Zone.BATTLEFIELD, playerB, treeline, 10);
+
+        addTarget(playerA, guildgate); // untapping the guildgate t1
 
         // Killing the wurm, get rid of the untap replacement effect.
         castSpell(2, PhaseStep.END_TURN, playerA, doomBlade, wurm);
 
-        //setChoice(playerA, guildgate);
         setStopAt(3, PhaseStep.UPKEEP);
         execute();
 
         assertTappedCount(meadow, false, 10);
-        //assertTappedCount(guildgate, false, 1);
+        assertTappedCount(guildgate, false, 1);
         assertTappedCount(treeline, false, 10);
     }
 }

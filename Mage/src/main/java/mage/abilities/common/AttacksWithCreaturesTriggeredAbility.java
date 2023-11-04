@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
  */
 public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
 
+    // retrieve the number of attackers in triggered effects with getValue
+    public static final String VALUEKEY_NUMBER_ATTACKERS = "number_attackers";
+
     private final FilterPermanent filter;
     private final int minAttackers;
     private final boolean setTargetPointer;
@@ -86,7 +89,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         if (attackers.size() < minAttackers) {
             return false;
         }
-        getEffects().setValue("attackers", attackers.size());
+        getEffects().setValue(VALUEKEY_NUMBER_ATTACKERS, attackers.size());
         if (setTargetPointer) {
             getEffects().setTargetPointer(new FixedTargets(attackers, game));
         }

@@ -18,13 +18,13 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
     private final Counter counter;
 
     public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(Counter counter, boolean tapped) {
-        this(counter, tapped, true, false, false);
+        this(counter, tapped, false, false, false);
     }
 
     public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(Counter counter, boolean tapped, boolean ownerControl, boolean haste, boolean attacking) {
         super(tapped, ownerControl, haste, attacking);
         this.counter = counter;
-        this.staticText = setText();
+        this.staticText += " with " + counter.getDescription() + " on it";
     }
 
     private ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(final ReturnSourceFromGraveyardToBattlefieldWithCounterEffect effect) {
@@ -44,23 +44,6 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
         return super.apply(game, source);
     }
 
-    private String setText() {
-        StringBuilder sb = new StringBuilder(staticText);
-        sb.append(" with ");
-        if (counter.getCount() == 1) {
-            sb.append('a');
-        } else {
-            sb.append(counter.getCount());
-        }
-        sb.append(' ');
-        sb.append(counter.getName());
-        sb.append(" counter");
-        if (counter.getCount() != 1) {
-            sb.append('s');
-        }
-        sb.append(" on it");
-        return sb.toString();
-    }
 }
 
 class AddCounterSourceReplacementEffect extends ReplacementEffectImpl {

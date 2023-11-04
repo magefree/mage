@@ -2,7 +2,7 @@ package mage.abilities;
 
 import mage.MageObject;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.*;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.Zone;
@@ -257,6 +257,19 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 || ruleLow.startsWith("untap");
     }
 
+    /**
+     * For use in generating trigger phrases with correct text
+     * @return "When " for an effect that always removes the source from the battlefield, otherwise "Whenever "
+     */
+    protected final String getWhen() {
+        return (!optional && getAllEffects().stream().anyMatch(
+                effect -> effect instanceof SacrificeSourceEffect
+                        || effect instanceof ReturnToHandSourceEffect
+                        || effect instanceof ShuffleIntoLibrarySourceEffect
+                        || effect instanceof ExileSourceEffect
+        ) ? "When " : "Whenever ");
+    }
+
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
 
@@ -315,7 +328,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
                 }
                 break;
-            case PHASED_OUT:
             case PHASED_IN:
                 if (isLeavesTheBattlefieldTrigger()) {
                     source = game.getLastKnownInformation(getSourceId(), event.getZone());

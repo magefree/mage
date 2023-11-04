@@ -45,5 +45,7 @@
         <finalName>mage-deck-limited</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/../..</root.dir>
+    </properties>
 </project>

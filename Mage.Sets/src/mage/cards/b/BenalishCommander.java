@@ -1,9 +1,8 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.CounterRemovedFromSourceWhileExiledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -17,12 +16,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.SoldierToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BenalishCommander extends CardImpl {
@@ -47,7 +45,7 @@ public final class BenalishCommander extends CardImpl {
         this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{W}{W}"), this, true));
 
         // Whenever a time counter is removed from Benalish Commander while it's exiled, create a 1/1 white Soldier creature token.
-        this.addAbility(new BenalishCommanderTriggeredAbility());
+        this.addAbility(new CounterRemovedFromSourceWhileExiledTriggeredAbility(CounterType.TIME, new CreateTokenEffect(new SoldierToken())));
     }
 
     private BenalishCommander(final BenalishCommander card) {
@@ -57,32 +55,5 @@ public final class BenalishCommander extends CardImpl {
     @Override
     public BenalishCommander copy() {
         return new BenalishCommander(this);
-    }
-}
-
-class BenalishCommanderTriggeredAbility extends TriggeredAbilityImpl {
-
-    public BenalishCommanderTriggeredAbility() {
-        super(Zone.EXILED, new CreateTokenEffect(new SoldierToken()), false);
-        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
-    }
-
-    private BenalishCommanderTriggeredAbility(final BenalishCommanderTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BenalishCommanderTriggeredAbility copy() {
-        return new BenalishCommanderTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
 }

@@ -3,11 +3,11 @@ package org.mage.test.cards.single.lci;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.command.emblems.ChandraTorchOfDefianceEmblem;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author Susucr
  */
 public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
@@ -16,15 +16,15 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
      * Ojer Axonil, Deepest Might
      * {2}{R}{R}
      * Legendary Creature — God
-     *
+     * <p>
      * Trample
      * If a red source you control would deal an amount of noncombat damage less than Ojer Axonil’s power to an opponent, that source deals damage equal to Ojer Axonil’s power instead.
      * When Ojer Axonil dies, return it to the battlefield tapped and transformed under its owner’s control.
      * 4/4
-     *
+     * <p>
      * Temple of Power
      * Land
-     *
+     * <p>
      * (Transforms from Ojer Axonil, Deepest Might.)
      * {T}: Add {R}.
      * {2}{R}, {T}: Transform Temple of Power. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery.
@@ -37,7 +37,7 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
      * Lightning Bolt
      * {R}
      * Instant
-     *
+     * <p>
      * Lightning Bolt deals 3 damage to any target.
      */
     private static final String bolt = "Lightning Bolt";
@@ -45,7 +45,7 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
      * Lava Axe
      * {4}{R}
      * Sorcery
-     *
+     * <p>
      * Lava Axe deals 5 damage to target player or planeswalker.
      */
     private static final String axe = "Lava Axe";
@@ -57,7 +57,7 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, ojer, 1);
         addCard(Zone.HAND, playerA, bolt, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -190,5 +190,27 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 5);
         assertPermanentCount(playerA, ojer, 1);
         assertTapped(ojer, true);
+    }
+
+    @Test
+    public void test_watching_Chandra_emblem_damage() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, ojer, 1);
+        addCard(Zone.HAND, playerA, "Doom Blade"); // destroy ojer
+        addCard(Zone.HAND, playerA, "Lightning Bolt"); // 3 damage instant
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 3);
+        addEmblem(playerA, new ChandraTorchOfDefianceEmblem()); // Whenever you cast a spell, this emblem deals 5 damage to any target.
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade", ojer);
+        addTarget(playerA, playerB); //emblem triggering
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        addTarget(playerA, playerB); //emblem triggering
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20 - 5 - 3 - 5);
     }
 }

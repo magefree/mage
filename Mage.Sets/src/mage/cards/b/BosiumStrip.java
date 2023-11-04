@@ -119,7 +119,7 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
         }
 
         ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return true;
+        return false;
     }
 
     @Override

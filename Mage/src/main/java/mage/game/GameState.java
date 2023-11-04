@@ -1,5 +1,6 @@
 package mage.game;
 
+import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -43,8 +44,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -876,6 +875,48 @@ public class GameState implements Serializable, Copyable<GameState> {
             DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent.getTargetId());
             event.addEvent(damagedEvent);
             addSimultaneousEvent(event, game);
+        }
+    }
+
+    public void addSimultaneousTapped(TappedEvent tappedEvent, Game game) {
+        // Combine multiple tapped events in the single event (batch)
+
+        boolean isTappedBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof TappedBatchEvent) {
+                // Adding to the existing batch
+                ((TappedBatchEvent) event).addEvent(tappedEvent);
+                isTappedBatchUsed = true;
+                break;
+            }
+        }
+
+        // new batch
+        if (!isTappedBatchUsed) {
+            TappedBatchEvent batch = new TappedBatchEvent();
+            batch.addEvent(tappedEvent);
+            addSimultaneousEvent(batch, game);
+        }
+    }
+
+    public void addSimultaneousUntapped(UntappedEvent untappedEvent, Game game) {
+        // Combine multiple untapped events in the single event (batch)
+
+        boolean isUntappedBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof UntappedBatchEvent) {
+                // Adding to the existing batch
+                ((UntappedBatchEvent) event).addEvent(untappedEvent);
+                isUntappedBatchUsed = true;
+                break;
+            }
+        }
+
+        // new batch
+        if (!isUntappedBatchUsed) {
+            UntappedBatchEvent batch = new UntappedBatchEvent();
+            batch.addEvent(untappedEvent);
+            addSimultaneousEvent(batch, game);
         }
     }
 

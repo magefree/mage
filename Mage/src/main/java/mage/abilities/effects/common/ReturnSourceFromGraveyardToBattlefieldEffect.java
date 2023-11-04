@@ -30,7 +30,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped) {
-        this(tapped, true);
+        this(tapped, false);
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped, boolean ownerControl) {

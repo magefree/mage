@@ -155,6 +155,11 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
+        // init the top of library for the scry 2
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerB, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerB, "Abandon Hope");
+
         // cast bolt
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         // counter with condescend
@@ -166,6 +171,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         checkManaPool("mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "C", 4);
         // pay to prevent
         setChoice(playerA, true); // pay 2 to prevent counter
+        addTarget(playerB, "Abandon Hope"); // scry 2: choosing to bottom Abandon Hope.
 
         checkLife("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, 20 - 3);
         checkHandCardCount("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", 0);

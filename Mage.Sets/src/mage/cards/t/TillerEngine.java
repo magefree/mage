@@ -37,7 +37,7 @@ public final class TillerEngine extends CardImpl {
         // • Untap that land.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new UntapTargetEffect().setText("Untap that land"),
-                filter, false, SetTargetPointer.PERMANENT, null
+                filter, false, SetTargetPointer.PERMANENT
         ).setTriggerPhrase("Whenever a land enters the battlefield tapped and under your control, ");
 
         // • Tap target nonland permanent an opponent controls.

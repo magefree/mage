@@ -119,8 +119,11 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         if (excludeSource && !each && !message.startsWith("all")) {
             sb.append("other ");
         }
-        sb.append(filter.getMessage()).append(" you control ");
-        sb.append(each ? "gets " : "get ");
+        sb.append(filter.getMessage());
+        if (!filter.getMessage().endsWith("you control")) {
+            sb.append(" you control");
+        }
+        sb.append(each ? " gets " : " get ");
         sb.append(CardUtil.getBoostText(power, toughness, duration));
         staticText = sb.toString();
     }

@@ -44,7 +44,7 @@ public final class HenrikaDomnathi extends CardImpl {
                 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
         ), TargetController.YOU, false);
         ability.setModeTag("each player sacrifice");
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.getModes().setLimitUsageByOnce(false);
 
         // • You draw a card and you lose 1 life.
         Mode mode = new Mode(new DrawCardSourceControllerEffect(1).setText("you draw a card"));

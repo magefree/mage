@@ -24,7 +24,8 @@ public final class FeignDeath extends CardImpl {
         // Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it."
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
-                new DiesSourceTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(CounterType.P1P1.createInstance(), true)),
+                new DiesSourceTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
+                        CounterType.P1P1.createInstance(), true, true, false, false)),
                 Duration.EndOfTurn,
                 "Until end of turn, target creature gains \"When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it.\""
         ));

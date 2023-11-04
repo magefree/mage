@@ -26,7 +26,7 @@ public final class GravePeril extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // When a nonblack creature enters the battlefield, sacrifice Grave Peril. If you do, destroy that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GravePerilEffect(), StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK, false, SetTargetPointer.PERMANENT, null).setTriggerPhrase("When a nonblack creature enters the battlefield, "));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GravePerilEffect(), StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK, false, SetTargetPointer.PERMANENT).setTriggerPhrase("When a nonblack creature enters the battlefield, "));
     }
 
     private GravePeril(final GravePeril card) {

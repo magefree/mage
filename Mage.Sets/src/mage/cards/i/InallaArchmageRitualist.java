@@ -66,7 +66,7 @@ public final class InallaArchmageRitualist extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(Zone.ALL, new DoIfCostPaid(
                         new InallaArchmageRitualistEffect(), new ManaCostsImpl<>("{1}"), "Pay {1} to create a token copy?"),
-                        filter, false, SetTargetPointer.PERMANENT, ""),
+                        filter, false, SetTargetPointer.PERMANENT),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
                 "Whenever another nontoken Wizard enters the battlefield under your control, "
                 + "{this} is in the command zone or on the battlefield, "

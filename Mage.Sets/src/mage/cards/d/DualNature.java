@@ -44,8 +44,7 @@ public final class DualNature extends CardImpl {
 
         // Whenever a nontoken creature enters the battlefield, its controller creates a token that's a copy of that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new DualNatureCreateTokenEffect(), filter, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature enters the battlefield, its controller creates a token that's a copy of that creature."
+                Zone.BATTLEFIELD, new DualNatureCreateTokenEffect(), filter, false, SetTargetPointer.PERMANENT
         ));
 
         // Whenever a nontoken creature leaves the battlefield, exile all tokens with the same name as that creature.

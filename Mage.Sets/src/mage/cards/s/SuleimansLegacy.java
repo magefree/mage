@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -38,9 +37,9 @@ public final class SuleimansLegacy extends CardImpl {
 
         // Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new DestroyTargetEffect(true), filter, false, SetTargetPointer.PERMANENT,
-                "Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated."
-        ));
+                Zone.BATTLEFIELD, new DestroyTargetEffect("destroy it. It can't be regenerated.", true),
+                filter, false, SetTargetPointer.PERMANENT
+        ).setTriggerPhrase("Whenever a Djinn or Efreet enters the battlefield, "));
     }
 
     private SuleimansLegacy(final SuleimansLegacy card) {

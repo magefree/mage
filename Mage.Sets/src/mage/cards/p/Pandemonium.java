@@ -30,7 +30,7 @@ public final class Pandemonium extends CardImpl {
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new PandemoniumEffect(),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE,
-                false, SetTargetPointer.PERMANENT, ""
+                false, SetTargetPointer.PERMANENT
         );
         ability.addTarget(new TargetAnyTarget());
         ability.setTargetAdjuster(PandemoniumAdjuster.instance);

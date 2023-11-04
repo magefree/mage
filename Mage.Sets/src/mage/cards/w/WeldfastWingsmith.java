@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,8 +27,8 @@ public final class WeldfastWingsmith extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever an artifact enters the battlefield under your control, Weldfast Wingsmith gains flying until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new FilterControlledArtifactPermanent(), "Whenever an artifact enters the battlefield under your control, {this} gains flying until end of turn."));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), StaticFilters.FILTER_PERMANENT_ARTIFACT));
     }
 
     private WeldfastWingsmith(final WeldfastWingsmith card) {

@@ -34,7 +34,7 @@ public final class CaptiveAudience extends CardImpl {
                 new SetPlayerLifeSourceEffect(4), TargetController.YOU, false
         );
         ability.setModeTag("life total becomes 4");
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.getModes().setLimitUsageByOnce(false);
 
         // • Discard your hand.
         ability.addMode(

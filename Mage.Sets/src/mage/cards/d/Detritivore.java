@@ -1,10 +1,9 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.CounterRemovedFromSourceWhileExiledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -22,12 +21,12 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetNonBasicLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Detritivore extends CardImpl {
@@ -46,8 +45,9 @@ public final class Detritivore extends CardImpl {
         this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{3}{R}"), this, true));
 
         // Whenever a time counter is removed from Detritivore while it's exiled, destroy target nonbasic land.
-        this.addAbility(new DetritivoreTriggeredAbility());
-
+        Ability ability = new CounterRemovedFromSourceWhileExiledTriggeredAbility(CounterType.TIME, new DestroyTargetEffect());
+        ability.addTarget(new TargetNonBasicLandPermanent());
+        this.addAbility(ability);
     }
 
     private Detritivore(final Detritivore card) {
@@ -57,34 +57,6 @@ public final class Detritivore extends CardImpl {
     @Override
     public Detritivore copy() {
         return new Detritivore(this);
-    }
-}
-
-class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DetritivoreTriggeredAbility() {
-        super(Zone.EXILED, new DestroyTargetEffect(), false);
-        this.addTarget(new TargetNonBasicLandPermanent());
-        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
-    }
-
-    private DetritivoreTriggeredAbility(final DetritivoreTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DetritivoreTriggeredAbility copy() {
-        return new DetritivoreTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
 }
 

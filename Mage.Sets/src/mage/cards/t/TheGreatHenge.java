@@ -43,11 +43,10 @@ public final class TheGreatHenge extends CardImpl {
 
         // Whenever a nontoken creature enters the battlefield under your control, put a +1/+1 counter on it and draw a card.
         ability = new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT, "Whenever a nontoken creature " +
-                "enters the battlefield under your control, put a +1/+1 counter on it and draw a card."
+                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"),
+                StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

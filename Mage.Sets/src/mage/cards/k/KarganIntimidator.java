@@ -49,8 +49,7 @@ public final class KarganIntimidator extends CardImpl {
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(1)
         );
         ability.setModeTag("gets +1/+1");
-        ability.getModes().setEachModeOnlyOnce(true);
-        ability.getModes().setResetEachTurn(true);
+        ability.getModes().setLimitUsageByOnce(true);
 
         // • Target creature becomes a Coward until end of turn.
         Mode mode = new Mode(new BecomesCreatureTypeTargetEffect(

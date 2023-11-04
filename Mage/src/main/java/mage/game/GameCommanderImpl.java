@@ -80,11 +80,14 @@ public abstract class GameCommanderImpl extends GameImpl {
                         true, "Choose a color for " + commander.getName()
                 );
                 player.choose(Outcome.Neutral, choiceColor, this);
-                color = choiceColor.getColor();
+                color = choiceColor.getColor(); // can be null on disconnect
             } else {
                 color = iterator.next();
             }
-            commander.getColor().addColor(color);
+
+            if (color != null) {
+                commander.getColor().addColor(color);
+            }
         }
     }
 

@@ -50,6 +50,8 @@
         <finalName>mage-player-aiminimax</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/../..</root.dir>
+    </properties>
 
 </project>

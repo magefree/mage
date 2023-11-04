@@ -758,8 +758,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
     default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
-        List<MultiAmountMessage> constraints = messages.stream().map(s -> new MultiAmountMessage(s, 0, max)).collect(Collectors.toList());
-
+        List<MultiAmountMessage> constraints = messages.stream()
+                .map(s -> new MultiAmountMessage(s, min, max))
+                .collect(Collectors.toList());
         return getMultiAmountWithIndividualConstraints(outcome, constraints, min, max, type, game);
     }
 
@@ -768,8 +769,8 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param outcome  AI hint
      * @param messages List of options to distribute amount among. Each option has a constraint on the min, max chosen for it
-     * @param totalMin Total minimum amount to be distributed
-     * @param totalMax Total amount to be distributed
+     * @param min      Total minimum amount to be distributed
+     * @param max      Total amount to be distributed
      * @param type     MultiAmountType enum to set dialog options such as title and header
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
@@ -1107,7 +1108,48 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean scry(int value, Ability source, Game game);
 
-    boolean surveil(int value, Ability source, Game game);
+    /**
+     * result of the doSurveil action.
+     * Sometimes more info is needed for the caller after the surveil is done.
+     */
+    class SurveilResult {
+        private final boolean surveilled;
+        private final int numberInGraveyard; // how many cards were put into the graveyard
+        private final int numberOnTop; // how many cards were put into the graveyard
+
+        private SurveilResult(boolean surveilled, int inGrave, int onTop) {
+            this.surveilled = surveilled;
+            this.numberInGraveyard = inGrave;
+            this.numberOnTop = onTop;
+        }
+
+        public static SurveilResult noSurveil() {
+            return new SurveilResult(false, 0, 0);
+        }
+
+        public static SurveilResult surveil(int inGrave, int onTop) {
+            return new SurveilResult(true, inGrave, onTop);
+        }
+
+        public boolean hasSurveilled() {
+            return this.surveilled;
+        }
+
+        public int getNumberPutInGraveyard() {
+            return this.numberInGraveyard;
+        }
+
+        public int getNumberPutOnTop() {
+            return this.numberOnTop;
+        }
+    }
+
+    SurveilResult doSurveil(int value, Ability source, Game game);
+
+    default boolean surveil(int value, Ability source, Game game) {
+        SurveilResult result = doSurveil(value, source, game);
+        return result.hasSurveilled();
+    }
 
     /**
      * Only used for test player for pre-setting targets

@@ -11,22 +11,13 @@ import mage.filter.FilterPermanentThisOrAnother;
  */
 public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    public EntersBattlefieldThisOrAnotherTriggeredAbility(Effect effect, FilterPermanent filter) {
-        this(effect, filter, false, false);
-    }
-
     public EntersBattlefieldThisOrAnotherTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, boolean onlyControlled) {
         this(effect, filter, optional, SetTargetPointer.NONE, onlyControlled);
     }
 
     public EntersBattlefieldThisOrAnotherTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyControlled) {
-        this(Zone.BATTLEFIELD, effect, filter, optional, setTargetPointer, onlyControlled);
-    }
-
-    public EntersBattlefieldThisOrAnotherTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyControlled) {
-        super(zone, effect,
-                new FilterPermanentThisOrAnother(filter, onlyControlled),
-                optional, setTargetPointer, null, onlyControlled);
+        super(Zone.BATTLEFIELD, effect, new FilterPermanentThisOrAnother(filter, onlyControlled), optional, setTargetPointer);
+        setTriggerPhrase("Whenever " + this.filter.getMessage() + " enters the battlefield" + (onlyControlled ? " under your control, " : ", "));
     }
 
     private EntersBattlefieldThisOrAnotherTriggeredAbility(final EntersBattlefieldThisOrAnotherTriggeredAbility ability) {

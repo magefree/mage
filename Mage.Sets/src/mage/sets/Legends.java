@@ -273,6 +273,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Library", 207, Rarity.UNCOMMON, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Sylvan Paradise", 208, Rarity.UNCOMMON, mage.cards.s.SylvanParadise.class));
         cards.add(new SetCardInfo("Syphon Soul", 118, Rarity.COMMON, mage.cards.s.SyphonSoul.class));
+        cards.add(new SetCardInfo("Takklemaggot", 119, Rarity.UNCOMMON, mage.cards.t.Takklemaggot.class));
         cards.add(new SetCardInfo("Telekinesis", 79, Rarity.RARE, mage.cards.t.Telekinesis.class));
         cards.add(new SetCardInfo("Teleport", 80, Rarity.RARE, mage.cards.t.Teleport.class));
         cards.add(new SetCardInfo("Tetsuo Umezawa", 262, Rarity.RARE, mage.cards.t.TetsuoUmezawa.class));
