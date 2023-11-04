@@ -24,7 +24,8 @@ public final class Petrahydrox extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Petrahydrox becomes the target of a spell or ability, return Petrahydrox to its owner's hand.
-        this.addAbility(new BecomesTargetSourceTriggeredAbility(new ReturnToHandSourceEffect(true)));
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new ReturnToHandSourceEffect(true))
+                .withRuleTextReplacement(false));
     }
 
     private Petrahydrox(final Petrahydrox card) {

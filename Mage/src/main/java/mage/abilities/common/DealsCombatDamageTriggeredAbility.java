@@ -22,7 +22,8 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
     public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.usedThisStep = false;
-        setTriggerPhrase("Whenever {this} deals combat damage, ");
+        setTriggerPhrase(getWhen() + "{this} deals combat damage, ");
+        this.replaceRuleText = true;
     }
 
     protected DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
