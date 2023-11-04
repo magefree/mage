@@ -26,7 +26,7 @@ public final class DireFlail extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
 
         // Craft with artifact {3}{R}{R}
         this.addAbility(new CraftAbility("{3}{R}{R}"));

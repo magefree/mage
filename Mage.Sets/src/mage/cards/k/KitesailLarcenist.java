@@ -41,7 +41,7 @@ public final class KitesailLarcenist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // When Kitesail Larcenist enters the battlefield, for each player, choose up to one other target artifact or creature that player controls. For as long as Kitesail Larcenist remains on the battlefield, the chosen permanents become Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color" and lose all other abilities.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesCreatureTargetEffect(

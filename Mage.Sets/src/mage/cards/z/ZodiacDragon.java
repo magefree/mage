@@ -22,7 +22,8 @@ public final class ZodiacDragon extends CardImpl {
         this.toughness = new MageInt(8);
 
         // When Zodiac Dragon is put into your graveyard from the battlefield, you may return it to your hand.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect(), true, true));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()
+                .setText("return it to your hand"), true, true));
     }
 
     private ZodiacDragon(final ZodiacDragon card) {

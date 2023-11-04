@@ -30,7 +30,7 @@ public final class DeepGoblinSkulltaker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // At the beginning of your end step, if you descended this turn, put a +1/+1 counter on Deep Goblin Skulltaker.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

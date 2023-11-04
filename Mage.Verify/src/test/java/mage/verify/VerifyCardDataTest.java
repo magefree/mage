@@ -2028,7 +2028,7 @@ public class VerifyCardDataTest {
         Map<Class, String> hints = new HashMap<>();
         hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
-        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
+        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom");
         hints.put(EquipAbility.class, "Equip only as a sorcery.");
         hints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
         hints.put(ProliferateEffect.class, "Choose any number of permanents and/or players, then give each another counter of each kind already there.");
