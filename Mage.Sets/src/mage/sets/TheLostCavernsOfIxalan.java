@@ -264,6 +264,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Volatile Wanderglyph", 172, Rarity.COMMON, mage.cards.v.VolatileWanderglyph.class));
         cards.add(new SetCardInfo("Wail of the Forgotten", 244, Rarity.RARE, mage.cards.w.WailOfTheForgotten.class));
         cards.add(new SetCardInfo("Walk with the Ancestors", 218, Rarity.COMMON, mage.cards.w.WalkWithTheAncestors.class));
+        cards.add(new SetCardInfo("Warden of the Inner Sky", 43, Rarity.RARE, mage.cards.w.WardenOfTheInnerSky.class));
         cards.add(new SetCardInfo("Waterlogged Hulk", 83, Rarity.UNCOMMON, mage.cards.w.WaterloggedHulk.class));
         cards.add(new SetCardInfo("Watertight Gondola", 83, Rarity.UNCOMMON, mage.cards.w.WatertightGondola.class));
         cards.add(new SetCardInfo("Waterwind Scout", 84, Rarity.COMMON, mage.cards.w.WaterwindScout.class));
