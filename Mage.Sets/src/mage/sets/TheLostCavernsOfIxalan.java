@@ -152,6 +152,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Matzalantli, the Great Door", 256, Rarity.RARE, mage.cards.m.MatzalantliTheGreatDoor.class));
         cards.add(new SetCardInfo("Mephitic Draught", 112, Rarity.COMMON, mage.cards.m.MephiticDraught.class));
         cards.add(new SetCardInfo("Merfolk Cave-Diver", 65, Rarity.UNCOMMON, mage.cards.m.MerfolkCaveDiver.class));
+        cards.add(new SetCardInfo("Might of the Ancestors", 23, Rarity.UNCOMMON, mage.cards.m.MightOfTheAncestors.class));
         cards.add(new SetCardInfo("Miner's Guidewing", 24, Rarity.COMMON, mage.cards.m.MinersGuidewing.class));
         cards.add(new SetCardInfo("Mineshaft Spider", 202, Rarity.COMMON, mage.cards.m.MineshaftSpider.class));
         cards.add(new SetCardInfo("Mischievous Pup", 25, Rarity.UNCOMMON, mage.cards.m.MischievousPup.class));
