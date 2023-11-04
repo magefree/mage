@@ -133,6 +133,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Huatli's Final Strike", 190, Rarity.COMMON, mage.cards.h.HuatlisFinalStrike.class));
         cards.add(new SetCardInfo("Huatli, Poet of Unity", 189, Rarity.MYTHIC, mage.cards.h.HuatliPoetOfUnity.class));
         cards.add(new SetCardInfo("Hulking Raptor", 191, Rarity.RARE, mage.cards.h.HulkingRaptor.class));
+        cards.add(new SetCardInfo("Hunter's Blowgun", 255, Rarity.COMMON, mage.cards.h.HuntersBlowgun.class));
         cards.add(new SetCardInfo("Hurl into History", 59, Rarity.UNCOMMON, mage.cards.h.HurlIntoHistory.class));
         cards.add(new SetCardInfo("Idol of the Deep King", 155, Rarity.COMMON, mage.cards.i.IdolOfTheDeepKing.class));
         cards.add(new SetCardInfo("Inti, Seneschal of the Sun", 156, Rarity.RARE, mage.cards.i.IntiSeneschalOfTheSun.class));
