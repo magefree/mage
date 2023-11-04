@@ -135,8 +135,10 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Hulking Raptor", 191, Rarity.RARE, mage.cards.h.HulkingRaptor.class));
         cards.add(new SetCardInfo("Hunter's Blowgun", 255, Rarity.COMMON, mage.cards.h.HuntersBlowgun.class));
         cards.add(new SetCardInfo("Hurl into History", 59, Rarity.UNCOMMON, mage.cards.h.HurlIntoHistory.class));
+        cards.add(new SetCardInfo("Iceberg Titan", 60, Rarity.COMMON, mage.cards.i.IcebergTitan.class));
         cards.add(new SetCardInfo("Idol of the Deep King", 155, Rarity.COMMON, mage.cards.i.IdolOfTheDeepKing.class));
         cards.add(new SetCardInfo("Inti, Seneschal of the Sun", 156, Rarity.RARE, mage.cards.i.IntiSeneschalOfTheSun.class));
+        cards.add(new SetCardInfo("Inverted Iceberg", 60, Rarity.COMMON, mage.cards.i.InvertedIceberg.class));
         cards.add(new SetCardInfo("Ironpaw Aspirant", 18, Rarity.COMMON, mage.cards.i.IronpawAspirant.class));
         cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 395, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
