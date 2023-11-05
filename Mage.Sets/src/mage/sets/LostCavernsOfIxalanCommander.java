@@ -135,6 +135,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hinterland Harbor", 336, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Hostage Taker", 271, Rarity.RARE, mage.cards.h.HostageTaker.class));
         cards.add(new SetCardInfo("Icon of Ancestry", 305, Rarity.RARE, mage.cards.i.IconOfAncestry.class));
+        cards.add(new SetCardInfo("Illustrious Wanderglyph", 9, Rarity.RARE, mage.cards.i.IllustriousWanderglyph.class));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 200, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class));
         cards.add(new SetCardInfo("Inspiring Call", 244, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Isolated Chapel", 337, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
