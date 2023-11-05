@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -41,11 +41,7 @@ public final class CleansingBeam extends CardImpl {
 
 class CleansingBeamEffect extends OneShotEffect {
 
-    static final FilterPermanent filter = new FilterPermanent("creature");
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-    }
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     CleansingBeamEffect() {
         super(Outcome.Damage);
