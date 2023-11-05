@@ -95,6 +95,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Distant Melody", 154, Rarity.COMMON, mage.cards.d.DistantMelody.class));
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 193, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Drover of the Mighty", 239, Rarity.UNCOMMON, mage.cards.d.DroverOfTheMighty.class));
+        cards.add(new SetCardInfo("Dusk Legion Sergeant", 80, Rarity.RARE, mage.cards.d.DuskLegionSergeant.class));
         cards.add(new SetCardInfo("Dusk Legion Zealot", 194, Rarity.COMMON, mage.cards.d.DuskLegionZealot.class));
         cards.add(new SetCardInfo("Elenda, the Dusk Rose", 268, Rarity.MYTHIC, mage.cards.e.ElendaTheDuskRose.class));
         cards.add(new SetCardInfo("Emperor Mihail II", 155, Rarity.RARE, mage.cards.e.EmperorMihailII.class));
