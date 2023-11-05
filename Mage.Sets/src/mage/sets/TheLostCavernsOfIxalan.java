@@ -284,6 +284,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Starving Revenant", 123, Rarity.RARE, mage.cards.s.StarvingRevenant.class));
         cards.add(new SetCardInfo("Staunch Crewmate", 79, Rarity.UNCOMMON, mage.cards.s.StaunchCrewmate.class));
         cards.add(new SetCardInfo("Stinging Cave Crawler", 124, Rarity.UNCOMMON, mage.cards.s.StingingCaveCrawler.class));
+        cards.add(new SetCardInfo("Subterranean Schooner", 80, Rarity.RARE, mage.cards.s.SubterraneanSchooner.class));
         cards.add(new SetCardInfo("Sunbird Effigy", 262, Rarity.UNCOMMON, mage.cards.s.SunbirdEffigy.class));
         cards.add(new SetCardInfo("Sunbird Standard", 262, Rarity.UNCOMMON, mage.cards.s.SunbirdStandard.class));
         cards.add(new SetCardInfo("Sunfire Torch", 167, Rarity.COMMON, mage.cards.s.SunfireTorch.class));

@@ -1,11 +1,10 @@
-package mage.cards.g;
+package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.keyword.ExploreTargetEffect;
 import mage.abilities.keyword.CrewAbility;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,7 +20,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GetawayCar extends CardImpl {
+public final class SubterraneanSchooner extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature that crewed it this turn");
 
@@ -29,31 +28,28 @@ public final class GetawayCar extends CardImpl {
         filter.add(CrewedSourceThisTurnPredicate.instance);
     }
 
-    public GetawayCar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+    public SubterraneanSchooner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{U}");
 
         this.subtype.add(SubType.VEHICLE);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-
-        // Whenever Getaway Car attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand.
-        Ability ability = new AttacksOrBlocksTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(0, 1, filter));
+        // Whenever Subterranean Schooner attacks, target creature that crewed it this turn explores.
+        Ability ability = new AttacksTriggeredAbility(new ExploreTargetEffect());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability, new CrewedVehicleWatcher());
 
         // Crew 1
         this.addAbility(new CrewAbility(1));
     }
 
-    private GetawayCar(final GetawayCar card) {
+    private SubterraneanSchooner(final SubterraneanSchooner card) {
         super(card);
     }
 
     @Override
-    public GetawayCar copy() {
-        return new GetawayCar(this);
+    public SubterraneanSchooner copy() {
+        return new SubterraneanSchooner(this);
     }
 }
