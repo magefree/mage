@@ -38,6 +38,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         this.maxCardNumberInBooster = 291;
 
         cards.add(new SetCardInfo("Abrade", 131, Rarity.COMMON, mage.cards.a.Abrade.class));
+        cards.add(new SetCardInfo("Abuelo's Awakening", 1, Rarity.RARE, mage.cards.a.AbuelosAwakening.class));
         cards.add(new SetCardInfo("Abuelo, Ancestral Echo", 219, Rarity.RARE, mage.cards.a.AbueloAncestralEcho.class));
         cards.add(new SetCardInfo("Abyssal Gorestalker", 87, Rarity.UNCOMMON, mage.cards.a.AbyssalGorestalker.class));
         cards.add(new SetCardInfo("Aclazotz, Deepest Betrayal", 88, Rarity.MYTHIC, mage.cards.a.AclazotzDeepestBetrayal.class));

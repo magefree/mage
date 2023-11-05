@@ -36,7 +36,7 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
         this.additional = additional;
     }
 
-    private ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(final ReturnFromGraveyardToBattlefieldWithCounterTargetEffect effect) {
+    protected ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(final ReturnFromGraveyardToBattlefieldWithCounterTargetEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
         this.additional = effect.additional;
