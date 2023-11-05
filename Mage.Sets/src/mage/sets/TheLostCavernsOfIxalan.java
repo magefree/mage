@@ -224,6 +224,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Pathfinding Axejaw", 206, Rarity.COMMON, mage.cards.p.PathfindingAxejaw.class));
         cards.add(new SetCardInfo("Petrify", 30, Rarity.COMMON, mage.cards.p.Petrify.class));
         cards.add(new SetCardInfo("Pirate Hat", 70, Rarity.COMMON, mage.cards.p.PirateHat.class));
+        cards.add(new SetCardInfo("Pit of Offerings", 278, Rarity.UNCOMMON, mage.cards.p.PitOfOfferings.class));
         cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Plains", 393, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plundering Pirate", 160, Rarity.COMMON, mage.cards.p.PlunderingPirate.class));
