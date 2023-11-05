@@ -7,7 +7,6 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReboundAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -16,14 +15,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.FilterSpell;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -155,49 +151,8 @@ class OjerPakpatiqDeepestEpochTrigger extends OneShotEffect {
             return false;
         }
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-
-        OjerPakpatiqDeepestEpochAddCounterReplacementEffect counterEffect =
-                new OjerPakpatiqDeepestEpochAddCounterReplacementEffect();
-        counterEffect.setTargetPointer(new FixedTarget(sourceObject.getId(), game));
-        game.addEffect(counterEffect, source);
+        game.setEnterWithCounters(sourceObject.getId(), new Counters().addCounter(CounterType.TIME.createInstance(3)));
         controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game, true, false, true, null);
         return true;
-    }
-}
-
-class OjerPakpatiqDeepestEpochAddCounterReplacementEffect extends ReplacementEffectImpl {
-
-    public OjerPakpatiqDeepestEpochAddCounterReplacementEffect() {
-        super(Duration.EndOfStep, Outcome.BoostCreature);
-    }
-
-    private OjerPakpatiqDeepestEpochAddCounterReplacementEffect(final OjerPakpatiqDeepestEpochAddCounterReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OjerPakpatiqDeepestEpochAddCounterReplacementEffect copy() {
-        return new OjerPakpatiqDeepestEpochAddCounterReplacementEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return getTargetPointer().getTargets(game, source).contains(event.getTargetId());
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (permanent == null) {
-            return false;
-        }
-        permanent.addCounters(CounterType.TIME.createInstance(3), source.getControllerId(), source, game, event.getAppliedEffects());
-        discard();
-        return false;
     }
 }

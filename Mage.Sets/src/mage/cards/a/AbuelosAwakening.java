@@ -133,7 +133,7 @@ class AbuelosAwakeningContinuousEffect extends ContinuousEffectImpl {
                 creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                 break;
             case PTChangingEffects_7:
-                if (sublayer == SubLayer.CharacteristicDefining_7a) {
+                if (sublayer == SubLayer.SetPT_7b) {
                     creature.getPower().setModifiedBaseValue(1);
                     creature.getToughness().setModifiedBaseValue(1);
                 }
