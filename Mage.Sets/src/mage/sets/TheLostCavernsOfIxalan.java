@@ -230,6 +230,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Plundering Pirate", 160, Rarity.COMMON, mage.cards.p.PlunderingPirate.class));
         cards.add(new SetCardInfo("Poetic Ingenuity", 161, Rarity.RARE, mage.cards.p.PoeticIngenuity.class));
         cards.add(new SetCardInfo("Poison Dart Frog", 207, Rarity.COMMON, mage.cards.p.PoisonDartFrog.class));
+        cards.add(new SetCardInfo("Preacher of the Schism", 113, Rarity.RARE, mage.cards.p.PreacherOfTheSchism.class));
         cards.add(new SetCardInfo("Primordial Gnawer", 114, Rarity.COMMON, mage.cards.p.PrimordialGnawer.class));
         cards.add(new SetCardInfo("Promising Vein", 279, Rarity.COMMON, mage.cards.p.PromisingVein.class));
         cards.add(new SetCardInfo("Pugnacious Hammerskull", 208, Rarity.RARE, mage.cards.p.PugnaciousHammerskull.class));
