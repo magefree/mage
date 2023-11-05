@@ -78,6 +78,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cruel Celebrant", 267, Rarity.UNCOMMON, mage.cards.c.CruelCelebrant.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 326, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cultivate", 235, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Curious Altisaur", 90, Rarity.RARE, mage.cards.c.CuriousAltisaur.class));
         cards.add(new SetCardInfo("Curse of the Swine", 150, Rarity.RARE, mage.cards.c.CurseOfTheSwine.class));
         cards.add(new SetCardInfo("Damn", 191, Rarity.RARE, mage.cards.d.Damn.class));
         cards.add(new SetCardInfo("Daring Saboteur", 151, Rarity.UNCOMMON, mage.cards.d.DaringSaboteur.class));
