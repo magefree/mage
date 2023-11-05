@@ -90,6 +90,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Descendants' Path", 238, Rarity.RARE, mage.cards.d.DescendantsPath.class));
         cards.add(new SetCardInfo("Desolate Lighthouse", 327, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
         cards.add(new SetCardInfo("Dimir Signet", 302, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class));
+        cards.add(new SetCardInfo("Dinosaur Egg", 92, Rarity.RARE, mage.cards.d.DinosaurEgg.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 223, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 192, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Distant Melody", 154, Rarity.COMMON, mage.cards.d.DistantMelody.class));
