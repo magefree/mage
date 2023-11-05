@@ -1,8 +1,14 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Susucr
@@ -17,8 +23,19 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
 
     private TheLostCavernsOfIxalan() {
         super("The Lost Caverns of Ixalan", "LCI", ExpansionSet.buildDate(2023, 11, 17), SetType.EXPANSION);
-        this.hasBoosters = false; // TODO: enable boosters
+        this.blockName = "The Lost Caverns of Ixalan"; // for sorting in GUI
         this.hasBasicLands = true;
+        this.hasBoosters = true;
+        // reference: https://magic.wizards.com/en/news/feature/collecting-the-lost-caverns-of-ixalan
+        this.numBoosterCommon = 9;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = (64.0 + 64.0 + 22.0) / 22.0; // 64 rares, 22 mythics
+        this.numBoosterLands = 1; // 30% basic (full-art core), 70% common Cave
+        this.ratioBoosterSpecialLand = 10;
+        this.ratioBoosterSpecialLandNumerator = 7;
+        this.numBoosterDoubleFaced = 1; // explicit slot for 5 common + 12 uncommon DFCs
+        this.maxCardNumberInBooster = 291;
 
         cards.add(new SetCardInfo("Abrade", 131, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Abuelo, Ancestral Echo", 219, Rarity.RARE, mage.cards.a.AbueloAncestralEcho.class));
@@ -315,4 +332,22 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Zoyowa Lava-Tongue", 245, Rarity.UNCOMMON, mage.cards.z.ZoyowaLavaTongue.class));
         cards.add(new SetCardInfo("Zoyowa's Justice", 173, Rarity.UNCOMMON, mage.cards.z.ZoyowasJustice.class));
     }
+
+    @Override
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        if (rarity == Rarity.RARE || rarity == Rarity.MYTHIC) {
+            return new ArrayList<>(); // Rare/Mythic DFCs are not special cards here
+        } else {
+            return super.findSpecialCardsByRarity(rarity);
+            // this accounts for 7 caves in the land slot, as well as the common/uncommon DFCs
+        }
+    }
+
+    @Override
+    protected void addDoubleFace(List<Card> booster) {
+        int rarityKey = RandomUtil.nextInt(5 + 5 + 12); // 5 C, 12 U - assume commons twice the frequency as uncommons
+        Rarity rarity = (rarityKey > 12) ? Rarity.COMMON : Rarity.UNCOMMON;
+        addToBooster(booster, getSpecialCardsByRarity(rarity));
+    }
+
 }
