@@ -188,6 +188,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Kinjalli's Dawnrunner", 19, Rarity.UNCOMMON, mage.cards.k.KinjallisDawnrunner.class));
         cards.add(new SetCardInfo("Kitesail Larcenist", 61, Rarity.RARE, mage.cards.k.KitesailLarcenist.class));
         cards.add(new SetCardInfo("Kutzil's Flanker", 20, Rarity.RARE, mage.cards.k.KutzilsFlanker.class));
+        cards.add(new SetCardInfo("Locus of Enlightenment", 55, Rarity.MYTHIC, mage.cards.l.LocusOfEnlightenment.class));
         cards.add(new SetCardInfo("Lodestone Needle", 62, Rarity.UNCOMMON, mage.cards.l.LodestoneNeedle.class));
         cards.add(new SetCardInfo("Malamet Brawler", 199, Rarity.COMMON, mage.cards.m.MalametBrawler.class));
         cards.add(new SetCardInfo("Malamet Scythe", 200, Rarity.COMMON, mage.cards.m.MalametScythe.class));
@@ -311,6 +312,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Ancient One", 222, Rarity.MYTHIC, mage.cards.t.TheAncientOne.class));
         cards.add(new SetCardInfo("The Belligerent", 225, Rarity.RARE, mage.cards.t.TheBelligerent.class));
         cards.add(new SetCardInfo("The Core", 256, Rarity.RARE, mage.cards.t.TheCore.class));
+        cards.add(new SetCardInfo("The Enigma Jewel", 55, Rarity.MYTHIC, mage.cards.t.TheEnigmaJewel.class));
         cards.add(new SetCardInfo("The Grim Captain", 266, Rarity.RARE, mage.cards.t.TheGrimCaptain.class));
         cards.add(new SetCardInfo("The Millennium Calendar", 257, Rarity.MYTHIC, mage.cards.t.TheMillenniumCalendar.class));
         cards.add(new SetCardInfo("The Mycotyrant", 235, Rarity.MYTHIC, mage.cards.t.TheMycotyrant.class));
