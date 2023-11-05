@@ -234,6 +234,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Primordial Gnawer", 114, Rarity.COMMON, mage.cards.p.PrimordialGnawer.class));
         cards.add(new SetCardInfo("Promising Vein", 279, Rarity.COMMON, mage.cards.p.PromisingVein.class));
         cards.add(new SetCardInfo("Pugnacious Hammerskull", 208, Rarity.RARE, mage.cards.p.PugnaciousHammerskull.class));
+        cards.add(new SetCardInfo("Queen's Bay Paladin", 115, Rarity.RARE, mage.cards.q.QueensBayPaladin.class));
         cards.add(new SetCardInfo("Quicksand Whirlpool", 31, Rarity.COMMON, mage.cards.q.QuicksandWhirlpool.class));
         cards.add(new SetCardInfo("Quintorius Kand", 238, Rarity.MYTHIC, mage.cards.q.QuintoriusKand.class));
         cards.add(new SetCardInfo("Rampaging Ceratops", 162, Rarity.UNCOMMON, mage.cards.r.RampagingCeratops.class));
