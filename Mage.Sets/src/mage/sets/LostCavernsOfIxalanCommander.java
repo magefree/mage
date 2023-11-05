@@ -120,6 +120,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fist of Suns", 113, Rarity.RARE, mage.cards.f.FistOfSuns.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 330, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Fortified Village", 331, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
+        cards.add(new SetCardInfo("Francisco, Fowl Marauder", 49, Rarity.RARE, mage.cards.f.FranciscoFowlMarauder.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 332, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 333, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Game Trail", 334, Rarity.RARE, mage.cards.g.GameTrail.class));
