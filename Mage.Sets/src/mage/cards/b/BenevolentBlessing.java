@@ -43,7 +43,7 @@ public final class BenevolentBlessing extends CardImpl {
 
         // Enchanted creature has protection from the chosen color. This effect doesn't remove Auras and Equipment you control that are already attached to it.
         this.addAbility(new SimpleStaticAbility(
-                new ProtectionChosenColorAttachedEffect(false)
+                new ProtectionChosenColorAttachedEffect(true)
                         .setNotRemoveControlled(true)
                         .setText("Enchanted creature has protection from the chosen color. This effect doesn't " +
                                 "remove Auras and Equipment you control that are already attached to it.")
