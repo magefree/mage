@@ -34,6 +34,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Embiggen", 137, Rarity.COMMON, mage.cards.e.Embiggen.class));
         cards.add(new SetCardInfo("Forest", 239, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));//there are multipiles so use the true boolean here for useVariousArt
         cards.add(new SetCardInfo("Forest", 244, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("\"Name Sticker\" Goblin", "107m", Rarity.COMMON, mage.cards.n.NameStickerGoblin.class));
         cards.add(new SetCardInfo("Godless Shrine", 282, Rarity.RARE, mage.cards.g.GodlessShrine.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 277, Rarity.RARE, mage.cards.h.HallowedFountain.class));
         cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
