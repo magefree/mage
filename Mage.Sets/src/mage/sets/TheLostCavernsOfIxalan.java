@@ -147,6 +147,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Glowcap Lantern", 187, Rarity.UNCOMMON, mage.cards.g.GlowcapLantern.class));
         cards.add(new SetCardInfo("Goblin Tomb Raider", 151, Rarity.COMMON, mage.cards.g.GoblinTombRaider.class));
         cards.add(new SetCardInfo("Goldfury Strider", 152, Rarity.UNCOMMON, mage.cards.g.GoldfuryStrider.class));
+        cards.add(new SetCardInfo("Grasping Shadows", 108, Rarity.UNCOMMON, mage.cards.g.GraspingShadows.class));
         cards.add(new SetCardInfo("Greedy Freebooter", 109, Rarity.COMMON, mage.cards.g.GreedyFreebooter.class));
         cards.add(new SetCardInfo("Growing Rites of Itlimoc", 188, Rarity.RARE, mage.cards.g.GrowingRitesOfItlimoc.class));
         cards.add(new SetCardInfo("Guardian of the Great Door", 16, Rarity.UNCOMMON, mage.cards.g.GuardianOfTheGreatDoor.class));
@@ -265,6 +266,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Seismic Monstrosaur", 166, Rarity.COMMON, mage.cards.s.SeismicMonstrosaur.class));
         cards.add(new SetCardInfo("Self-Reflection", 74, Rarity.UNCOMMON, mage.cards.s.SelfReflection.class));
         cards.add(new SetCardInfo("Sentinel of the Nameless City", 211, Rarity.RARE, mage.cards.s.SentinelOfTheNamelessCity.class));
+        cards.add(new SetCardInfo("Shadows' Lair", 108, Rarity.UNCOMMON, mage.cards.s.ShadowsLair.class));
         cards.add(new SetCardInfo("Shipwreck Sentry", 75, Rarity.COMMON, mage.cards.s.ShipwreckSentry.class));
         cards.add(new SetCardInfo("Sinuous Benthisaur", 76, Rarity.UNCOMMON, mage.cards.s.SinuousBenthisaur.class));
         cards.add(new SetCardInfo("Skullcap Snail", 119, Rarity.COMMON, mage.cards.s.SkullcapSnail.class));
