@@ -323,6 +323,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Threefold Thunderhulk", 265, Rarity.RARE, mage.cards.t.ThreefoldThunderhulk.class));
         cards.add(new SetCardInfo("Throne of the Grim Captain", 266, Rarity.RARE, mage.cards.t.ThroneOfTheGrimCaptain.class));
         cards.add(new SetCardInfo("Tinker's Tote", 40, Rarity.COMMON, mage.cards.t.TinkersTote.class));
+        cards.add(new SetCardInfo("Tishana's Tidebinder", 81, Rarity.RARE, mage.cards.t.TishanasTidebinder.class));
         cards.add(new SetCardInfo("Tithing Blade", 128, Rarity.COMMON, mage.cards.t.TithingBlade.class));
         cards.add(new SetCardInfo("Treasure Cove", 267, Rarity.RARE, mage.cards.t.TreasureCove.class));
         cards.add(new SetCardInfo("Treasure Map", 267, Rarity.RARE, mage.cards.t.TreasureMap.class));
