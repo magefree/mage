@@ -30,7 +30,7 @@ public final class FrilledCaveWurm extends CardImpl {
         // Descend 4 -- Frilled Cave-Wurm gets +2/+0 as long as there are four or more permanent cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield), DescendCondition.FOUR,
-                "gets +2/+0 as long as there are four or more permanent cards in your graveyard"
+                "{this} gets +2/+0 as long as there are four or more permanent cards in your graveyard"
         )).setAbilityWord(AbilityWord.DESCEND_4).addHint(DescendCondition.getHint()));
     }
 

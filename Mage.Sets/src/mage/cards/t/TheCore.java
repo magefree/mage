@@ -1,20 +1,16 @@
 package mage.cards.t;
 
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DescendCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -33,9 +29,6 @@ public final class TheCore extends CardImpl {
 
         // (Transforms from Matzalantli.)
         this.nightCard = true;
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("<i>(Transforms from Matzalantli.)</i>"));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
 
         // Fathomless descent -- {T}: Add X mana of any one color, where X is the number of permanent cards in your graveyard.
         this.addAbility(new DynamicManaAbility(

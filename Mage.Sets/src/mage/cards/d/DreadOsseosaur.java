@@ -28,7 +28,7 @@ public final class DreadOsseosaur extends CardImpl {
         this.color.setBlack(true);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Dread Osseosaur enters the battlefield or attacks, you may mill two cards.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(

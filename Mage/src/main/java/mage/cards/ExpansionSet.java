@@ -27,6 +27,7 @@ public abstract class ExpansionSet implements Serializable {
     public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
+    public static final CardGraphicInfo FULL_ART_UST_VARIOUS = new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true);
 
     public static class SetCardInfo implements Serializable {
 
@@ -87,7 +88,7 @@ public abstract class ExpansionSet implements Serializable {
         }
     }
 
-    private static enum ExpansionSetComparator implements Comparator<ExpansionSet> {
+    private enum ExpansionSetComparator implements Comparator<ExpansionSet> {
         instance;
 
         @Override
@@ -149,7 +150,7 @@ public abstract class ExpansionSet implements Serializable {
     protected Map<String, List<CardInfo>> savedReprints = null;
     protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
 
-    public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
+    protected ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
         this.name = name;
         this.code = code;
         this.releaseDate = releaseDate;

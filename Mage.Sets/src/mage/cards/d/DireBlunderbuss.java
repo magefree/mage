@@ -39,12 +39,12 @@ public final class DireBlunderbuss extends CardImpl {
         this.color.setRed(true);
 
         // Equipped creature gets +3/+0 and has "Whenever this creature attacks, you may sacrifice an artifact other than Dire Blunderbuss. When you do, this creature deals damage equal to its power to target creature"
-        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 3));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 0));
         ability.addEffect(new DireBlunderbussGainAbilityEffect());
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private DireBlunderbuss(final DireBlunderbuss card) {
@@ -62,7 +62,7 @@ class DireBlunderbussGainAbilityEffect extends ContinuousEffectImpl {
     DireBlunderbussGainAbilityEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "and has \"Whenever this creature attacks, you may sacrifice an artifact other than {this}. "
-                + "When you do, this creature deals damage equal to its power to target creature\"";
+                + "When you do, this creature deals damage equal to its power to target creature.\"";
     }
 
     protected DireBlunderbussGainAbilityEffect(final DireBlunderbussGainAbilityEffect effect) {

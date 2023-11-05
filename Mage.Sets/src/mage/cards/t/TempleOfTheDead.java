@@ -2,11 +2,9 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
@@ -29,15 +27,12 @@ public final class TempleOfTheDead extends CardImpl {
         this.nightCard = true;
 
         // (Transforms from Aclazotz, Deepest Betrayal.)
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("<i>(Transforms from Aclazotz, Deepest Betrayal.)</i>"));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
 
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
 
         // {2}{B}, {T}: Transform Temple of the Dead. Activate only if a player has one or fewer cards in hand and only as a sorcery.
-        ability = new ActivateIfConditionActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new TransformSourceEffect(),
                 new ManaCostsImpl("{2}{B}"),

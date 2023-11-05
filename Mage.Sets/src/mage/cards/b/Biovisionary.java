@@ -32,7 +32,7 @@ public final class Biovisionary extends CardImpl {
         //At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), 
-                TargetController.ANY, 
+                TargetController.NEXT,
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3),
                 false));
     }
@@ -46,4 +46,3 @@ public final class Biovisionary extends CardImpl {
         return new Biovisionary(this);
     }
 }
-
