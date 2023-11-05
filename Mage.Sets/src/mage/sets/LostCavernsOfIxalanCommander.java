@@ -51,6 +51,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Branching Evolution", 234, Rarity.RARE, mage.cards.b.BranchingEvolution.class));
         cards.add(new SetCardInfo("Breeches, Brazen Plunderer", 217, Rarity.UNCOMMON, mage.cards.b.BreechesBrazenPlunderer.class));
         cards.add(new SetCardInfo("Butcher of Malakir", 187, Rarity.RARE, mage.cards.b.ButcherOfMalakir.class));
+        cards.add(new SetCardInfo("Bygone Marvels", 89, Rarity.RARE, mage.cards.b.BygoneMarvels.class));
         cards.add(new SetCardInfo("Canopy Vista", 321, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Captain Lannery Storm", 218, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Captivating Crew", 219, Rarity.RARE, mage.cards.c.CaptivatingCrew.class));
