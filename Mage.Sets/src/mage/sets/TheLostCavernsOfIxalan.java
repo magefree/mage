@@ -209,6 +209,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mycoid Maze", 217, Rarity.UNCOMMON, mage.cards.m.MycoidMaze.class));
         cards.add(new SetCardInfo("Nicanzil, Current Conductor", 236, Rarity.UNCOMMON, mage.cards.n.NicanzilCurrentConductor.class));
         cards.add(new SetCardInfo("Nurturing Bristleback", 203, Rarity.COMMON, mage.cards.n.NurturingBristleback.class));
+        cards.add(new SetCardInfo("Oaken Siren", 66, Rarity.COMMON, mage.cards.o.OakenSiren.class));
         cards.add(new SetCardInfo("Ojer Axonil, Deepest Might", 158, Rarity.MYTHIC, mage.cards.o.OjerAxonilDeepestMight.class));
         cards.add(new SetCardInfo("Ojer Kaslem, Deepest Growth", 204, Rarity.MYTHIC, mage.cards.o.OjerKaslemDeepestGrowth.class));
         cards.add(new SetCardInfo("Ojer Taq, Deepest Foundation", 26, Rarity.MYTHIC, mage.cards.o.OjerTaqDeepestFoundation.class));
