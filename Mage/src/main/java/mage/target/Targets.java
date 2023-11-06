@@ -25,11 +25,11 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
     }
 
     protected Targets(final Targets targets) {
-        this.isReadOnly = targets.isReadOnly;
         this.ensureCapacity(targets.size());
         for (Target target : targets) {
             this.add(target.copy());
         }
+        this.isReadOnly = targets.isReadOnly;
     }
 
     public Targets withReadOnly() {
