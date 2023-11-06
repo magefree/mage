@@ -80,6 +80,7 @@ class EntsFuryEffect extends OneShotEffect {
         ContinuousEffect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setTargetPointer(new FixedTarget(permanent, game));
         game.addEffect(effect, source);
+        game.getState().processAction(game);
         return new FightTargetsEffect(false).apply(game, source);
     }
 }
