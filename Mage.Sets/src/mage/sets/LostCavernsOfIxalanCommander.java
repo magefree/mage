@@ -280,7 +280,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Estate", 369, Rarity.RARE, mage.cards.v.VoldarenEstate.class));
         cards.add(new SetCardInfo("Vona, Butcher of Magan", 293, Rarity.MYTHIC, mage.cards.v.VonaButcherOfMagan.class));
         cards.add(new SetCardInfo("Vorel of the Hull Clade", 294, Rarity.RARE, mage.cards.v.VorelOfTheHullClade.class));
-        cards.add(new SetCardInfo("Wakening Sun's Avatar", 139, Rarity.RARE, mage.cards.w.WakeningSunsAvatar.class));
+        cards.add(new SetCardInfo("Wakening Sun's Avatar", 139, Rarity.MYTHIC, mage.cards.w.WakeningSunsAvatar.class));
         cards.add(new SetCardInfo("Warkite Marauder", 179, Rarity.RARE, mage.cards.w.WarkiteMarauder.class));
         cards.add(new SetCardInfo("Wave Goodbye", 79, Rarity.RARE, mage.cards.w.WaveGoodbye.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 317, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));

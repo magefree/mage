@@ -120,8 +120,6 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
-        skipListAddName(SKIP_LIST_COLOR, "LCI", "Cosmium Kiln"); // tmp
-        skipListAddName(SKIP_LIST_COLOR, "LCI", "Braided Quipu"); // tmp
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
