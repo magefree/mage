@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.constants.Outcome;
 
 /**
  * @author nantuko
@@ -114,7 +115,7 @@ public final class GameStateEvaluator2 {
                 Permanent attachment = game.getPermanent(attachmentId);
                 for (Ability a : attachment.getAbilities(game)) {
                     for (Effect e : a.getEffects()) {
-                        if (!e.getOutcome().isGood()
+                        if (e.getOutcome().equals(Outcome.Detriment)
                                 && attachment.getControllerId().equals(permanent.getControllerId())) {
                             value -= 1000;  // seems to work well ; -300 is not effective enough
                         }
@@ -130,7 +131,6 @@ public final class GameStateEvaluator2 {
     public static int evaluateCreature(Permanent creature, Game game) {
         int value = ArtificialScoringSystem.getFixedPermanentScore(game, creature)
                 + ArtificialScoringSystem.getVariablePermanentScore(game, creature);
-        System.out.println("The VALUE is : " + value);
         return value;
     }
 
