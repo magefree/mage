@@ -45,6 +45,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     private ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
         this.text = costs.text;
+        this.ensureCapacity(costs.size());
         for (T cost : costs) {
             this.add(cost.copy());
         }

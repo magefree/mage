@@ -12,7 +12,7 @@ public abstract class CostImpl implements Cost {
     protected UUID id;
     protected String text;
     protected boolean paid;
-    protected Targets targets;
+    protected Targets targets; // TODO: optimize performance - use private and null by default
 
     public CostImpl() {
         id = UUID.randomUUID();

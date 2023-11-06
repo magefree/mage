@@ -24,11 +24,16 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
+    public AbilitiesImpl() {
+        // fast constructor
+    }
+
     public AbilitiesImpl(T... abilities) {
         Collections.addAll(this, abilities);
     }
 
     public AbilitiesImpl(final AbilitiesImpl<T> abilities) {
+        this.ensureCapacity(abilities.size());
         for (T ability : abilities) {
             this.add((T) ability.copy());
         }

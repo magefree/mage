@@ -4,9 +4,9 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -16,13 +16,16 @@ import java.util.stream.Collectors;
  */
 public class Targets extends ArrayList<Target> {
 
+    public Targets() {
+        // fast constructor
+    }
+
     public Targets(Target... targets) {
-        for (Target target : targets) {
-            this.add(target);
-        }
+        this.addAll(Arrays.asList(targets));
     }
 
     protected Targets(final Targets targets) {
+        this.ensureCapacity(targets.size());
         for (Target target : targets) {
             this.add(target.copy());
         }
