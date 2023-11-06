@@ -78,8 +78,8 @@ class SynthesisPodCost extends CostImpl {
         if (player == null) {
             return false;
         }
-        player.chooseTarget(Outcome.Exile, targets.get(0), source, game);
-        Spell spell = game.getSpell(targets.getFirstTarget());
+        player.chooseTarget(Outcome.Exile, this.getTargets().get(0), source, game);
+        Spell spell = game.getSpell(this.getTargets().getFirstTarget());
         if (spell == null) {
             return false;
         }
@@ -93,7 +93,7 @@ class SynthesisPodCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

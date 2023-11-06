@@ -79,15 +79,15 @@ class ArdentDustspeakerCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (controller.chooseTarget(Outcome.Benefit, targets.get(0), source, game)) {
-                Card card = game.getCard(targets.get(0).getFirstTarget());
+            if (controller.chooseTarget(Outcome.Benefit, this.getTargets().get(0), source, game)) {
+                Card card = game.getCard(this.getTargets().get(0).getFirstTarget());
                 if (card != null) {
                     controller.putCardsOnBottomOfLibrary(card, game, source, true);
                     paid = true;

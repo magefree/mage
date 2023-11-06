@@ -4,17 +4,17 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.Copyable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Targets extends ArrayList<Target> {
+public class Targets extends ArrayList<Target> implements Copyable<Targets> {
+
+    private boolean isReadOnly = false; // runtime protect from not working targets modification, e.g. in composite costs
 
     public Targets() {
         // fast constructor
@@ -25,10 +25,16 @@ public class Targets extends ArrayList<Target> {
     }
 
     protected Targets(final Targets targets) {
+        this.isReadOnly = targets.isReadOnly;
         this.ensureCapacity(targets.size());
         for (Target target : targets) {
             this.add(target.copy());
         }
+    }
+
+    public Targets withReadOnly() {
+        this.isReadOnly = true;
+        return this;
     }
 
     public List<Target> getUnchosen() {
@@ -147,7 +153,44 @@ public class Targets extends ArrayList<Target> {
         return null;
     }
 
+    @Override
     public Targets copy() {
         return new Targets(this);
+    }
+
+    private void checkReadOnlyModification() {
+        if (this.isReadOnly) {
+            throw new IllegalArgumentException("Wrong code usage: you can't modify read only targets list, e.g. from composite costs");
+        }
+    }
+
+    @Override
+    public boolean add(Target target) {
+        checkReadOnlyModification();
+        return super.add(target);
+    }
+
+    @Override
+    public void add(int index, Target element) {
+        checkReadOnlyModification();
+        super.add(index, element);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Target> c) {
+        checkReadOnlyModification();
+        return super.addAll(c);
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends Target> c) {
+        checkReadOnlyModification();
+        return super.addAll(index, c);
+    }
+
+    @Override
+    public void clear() {
+        checkReadOnlyModification();
+        super.clear();
     }
 }

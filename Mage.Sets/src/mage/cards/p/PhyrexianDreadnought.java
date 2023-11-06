@@ -72,8 +72,8 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         int sumPower = 0;
-        if (targets.choose(Outcome.Sacrifice, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
+        if (this.getTargets().choose(Outcome.Sacrifice, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null && permanent.sacrifice(source, game)) {
                     sumPower += permanent.getPower().getValue();
