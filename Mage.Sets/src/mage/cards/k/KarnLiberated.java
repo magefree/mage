@@ -79,14 +79,14 @@ class KarnLiberatedEffect extends OneShotEffect {
         if (sourceObject == null) {
             return false;
         }
-        List<Card> cards = new ArrayList<>();
+        List<Card> exiledCards = new ArrayList<>();
         for (ExileZone zone : game.getExile().getExileZones()) {
             exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (zone.getId().equals(exileId)) {
                 for (Card card : zone.getCards(game)) {
                     if (!card.hasSubtype(SubType.AURA, game)
                             && card.isPermanent(game)) {
-                        cards.add(card);
+                        exiledCards.add(card);
                     }
                 }
             }
@@ -113,7 +113,7 @@ class KarnLiberatedEffect extends OneShotEffect {
                 for (Card card : game.getCards()) {
                     if (card.isOwnedBy(player.getId()) && !card.isCopy() // no copies
                             && !player.getSideboard().contains(card.getId())
-                            && !cards.contains(card)) { // not the exiled cards
+                            && !exiledCards.contains(card)) {
                         if (game.getCommandersIds(player, CommanderCardType.ANY, false).contains(card.getId())) {
                             game.addCommander(new Commander(card)); // TODO: check restart and init
                             // no needs in initCommander call -- it's used on game startup (init)
@@ -127,7 +127,7 @@ class KarnLiberatedEffect extends OneShotEffect {
                 player.init(game);
             }
         }
-        for (Card card : cards) {
+        for (Card card : exiledCards) {
             game.getState().setZone(card.getId(), Zone.EXILED);
             game.getExile().add(exileId, sourceObject.getIdName(), card);
         }
