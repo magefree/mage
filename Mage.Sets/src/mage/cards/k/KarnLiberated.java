@@ -102,6 +102,9 @@ class KarnLiberatedEffect extends OneShotEffect {
         for (Card card : game.getCards()) {
             game.getState().addCard(card);
         }
+        // TODO: miss meld cards?
+        // TODO: miss copied cards?
+
         for (Player player : game.getPlayers().values()) {
             if (player.canRespond()) { // only players alive are in the restarted game
                 player.getGraveyard().clear();
