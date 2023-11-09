@@ -25,7 +25,6 @@ public final class RakshasaVizier extends CardImpl {
     public RakshasaVizier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");
 
-        this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

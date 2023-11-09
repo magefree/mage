@@ -20,7 +20,6 @@ public final class RakshasaGravecaller extends CardImpl {
 
     public RakshasaGravecaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

@@ -28,7 +28,7 @@ public final class SoulhunterRakshasa extends CardImpl {
 
     public SoulhunterRakshasa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.subtype.add(SubType.CAT, SubType.DEMON);
+        this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
