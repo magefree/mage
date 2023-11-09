@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class DuskLegionSergeant extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent(SubType.VAMPIRE, "nontoken Vampire creature you control");
+            = new FilterControlledCreaturePermanent(SubType.VAMPIRE, "each nontoken Vampire creature you control");
 
     static {
         filter.add(TokenPredicate.FALSE);

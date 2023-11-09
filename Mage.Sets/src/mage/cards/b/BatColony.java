@@ -37,7 +37,7 @@ import java.util.UUID;
  */
 public final class BatColony extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CAVE, "a Cave you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CAVE, "a Cave");
 
     private static final Hint hint = new ValueHint("Mana spent from a Cave", BatColonyValue.instance);
 
@@ -86,12 +86,12 @@ enum BatColonyValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "X";
+        return "1";
     }
 
     @Override
     public String getMessage() {
-        return "";
+        return "mana from a Cave spent to cast it";
     }
 
 }
@@ -100,7 +100,7 @@ enum BatColonyValue implements DynamicValue {
 /**
  * Inspired by {@link mage.watchers.common.ManaPaidSourceWatcher}
  * If more cards like Bat Colony care for mana spent by Caves in the future, best to refactor the tracking there.
- * For now the assumpting is that it is a 1of, so don't want to track it in any game.
+ * For now the assumption is that it is a 1of, so don't want to track it in any game.
  */
 class BatColonyWatcher extends Watcher {
     private static final class CaveManaPaidTracker implements Serializable, Copyable<CaveManaPaidTracker> {

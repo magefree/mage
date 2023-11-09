@@ -33,7 +33,7 @@ public final class JadeSeedstones extends CardImpl {
 
         // Craft with creature {5}{G}{G}
         this.addAbility(new CraftAbility(
-                "{4}{B}", "creature", "another creature you control " +
+                "{5}{G}{G}", "creature", "another creature you control " +
                 "or a creature card in your graveyard", CardType.CREATURE.getPredicate())
         );
     }

@@ -26,7 +26,7 @@ public final class MalametBattleGlyph extends CardImpl {
 
         // Choose target creature you control and target creature you don't control. If the creature you control entered the battlefield this turn, put a +1/+1 counter on it. Then those creatures fight each other.
         this.getSpellAbility().addEffect(new MalametBattleGlyphEffect());
-        this.getSpellAbility().addEffect(new FightTargetsEffect().setText("then those creatures fight each other"));
+        this.getSpellAbility().addEffect(new FightTargetsEffect().setText("Then those creatures fight each other"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }

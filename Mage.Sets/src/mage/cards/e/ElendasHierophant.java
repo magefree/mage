@@ -39,7 +39,8 @@ public final class ElendasHierophant extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // When Elenda's Hierophant dies, create X 1/1 white Vampire creature tokens with lifelink, where X is its power.
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken(), xValue)));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken(), xValue)
+                .setText("create X 1/1 white Vampire creature tokens with lifelink, where X is its power")));
     }
 
     private ElendasHierophant(final ElendasHierophant card) {
