@@ -369,7 +369,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
 
     @Override
     protected void addDoubleFace(List<Card> booster) {
-        int rarityKey = RandomUtil.nextInt(5 + 5 + 12); // 5 C, 12 U - assume commons twice the frequency as uncommons
+        int rarityKey = RandomUtil.nextInt((5 * 3) + 12); // 5 C, 12 U - assume commons three times the frequency as uncommons
         Rarity rarity = (rarityKey > 12) ? Rarity.COMMON : Rarity.UNCOMMON;
         addToBooster(booster, getSpecialCardsByRarity(rarity));
     }
