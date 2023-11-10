@@ -30,6 +30,7 @@ public final class TwistsAndTurns extends CardImpl {
 
     public TwistsAndTurns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.secondSideCardClazz = mage.cards.m.MycoidMaze.class;
 
         // If a creature you control would explore, instead you scry 1, then that creature explores.
         this.addAbility(new SimpleStaticAbility(new TwistsAndTurnsReplacementEffect()));
