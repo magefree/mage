@@ -100,6 +100,9 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         }
     }
 
+    public String toString(){
+        return "("+zoneChangeCounter+"|"+sourceId.toString().substring(0,8)+")";
+    }
     public UUID getSourceId() {
         return sourceId;
     }
