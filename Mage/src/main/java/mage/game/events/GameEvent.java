@@ -539,7 +539,7 @@ public class GameEvent implements Serializable {
          amount      discover value
          flag        not used for this event
          */
-        DISCOVER,
+        DISCOVERED,
         //custom events
         CUSTOM_EVENT
     }

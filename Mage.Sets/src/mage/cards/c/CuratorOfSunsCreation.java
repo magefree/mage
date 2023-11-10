@@ -59,7 +59,7 @@ class CuratorOfSunsCreationTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DISCOVER;
+        return event.getType() == GameEvent.EventType.DISCOVERED;
     }
 
     @Override
