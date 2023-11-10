@@ -22,7 +22,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedBatchEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
@@ -79,15 +79,12 @@ class ContestedGameBallTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId() != this.getControllerId()) {
-            return false;
-        }
-        if (((DamagedEvent) event).isCombatDamage()) {
+        if (((DamagedBatchEvent) event).isCombatDamage() && event.getPlayerId().equals(this.getControllerId())) {
             this.getAllEffects().setTargetPointer(new FixedTarget(game.getActivePlayerId()));
             // attacking player is active player
             return true;
