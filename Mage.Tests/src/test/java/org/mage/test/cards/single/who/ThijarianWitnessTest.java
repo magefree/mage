@@ -20,9 +20,9 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
     private static final String witness = "Thijarian Witness";
     private static final String clue = "Clue Token";
     private static final String tiny = "Raging Goblin"; // 1/1
-    private static final String tiny2 = "Banehound"; // 1/1
-    private static final String big = "Thundering Giant"; // 4/3
-    private static final String bolt = "Lightning Bolt";
+    private static final String tiny2 = "Memnite"; // 1/1
+    private static final String big = "Alpine Grizzly"; // 4/2
+    private static final String kill = "Infernal Grasp"; //Also can test with Lightning Bolt
 
     @Test
     public void test_AttackingAloneAfterKill() {
@@ -30,13 +30,13 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, witness);
         addCard(Zone.BATTLEFIELD, playerA, tiny);
         addCard(Zone.BATTLEFIELD, playerA, tiny2);
-        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
-        addCard(Zone.HAND, playerB, bolt, 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Badlands", 4);
+        addCard(Zone.HAND, playerB, kill, 2);
 
         attack(1, playerA, tiny);
         attack(1, playerA, tiny2);
-        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, bolt, tiny, true);
-        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, bolt, tiny2, true);
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, kill, tiny, true);
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, kill, tiny2, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -49,15 +49,15 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, witness);
         addCard(Zone.BATTLEFIELD, playerA, big);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Zone.HAND, playerA, bolt);
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 4);
+        addCard(Zone.HAND, playerA, kill);
         addCard(Zone.BATTLEFIELD, playerB, tiny);
         addCard(Zone.BATTLEFIELD, playerB, tiny2);
 
         attack(1, playerA, big);
         block(1, playerB, tiny, big);
         block(1, playerB, tiny2, big);
-        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, bolt, tiny2);
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, kill, tiny2);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -65,6 +65,49 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, clue, 1);
         assertPermanentCount(playerB, tiny, 0);
         assertPermanentCount(playerA, big, 1);
+        assertExileCount(playerB, 1);
+    }
+    @Test
+    public void test_DoubleBlocked() {
+        //Auto-assign damage
+        //setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, witness);
+        addCard(Zone.BATTLEFIELD, playerA, big);
+        addCard(Zone.BATTLEFIELD, playerB, tiny);
+        addCard(Zone.BATTLEFIELD, playerB, tiny2);
+
+        attack(1, playerA, big);
+        block(1, playerB, tiny, big);
+        block(1, playerB, tiny2, big);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, clue, 1);
+        assertPermanentCount(playerB, tiny, 0);
+        assertPermanentCount(playerA, big, 0);
+        assertExileCount(playerA, 1);
+        assertExileCount(playerB, 0);
+    }
+    @Test
+    public void test_DoubleBlocker() {
+        //Auto-assign damage
+        //setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, witness);
+        addCard(Zone.BATTLEFIELD, playerA, tiny);
+        addCard(Zone.BATTLEFIELD, playerA, tiny2);
+        addCard(Zone.BATTLEFIELD, playerB, "Night Market Guard");
+
+        attack(1, playerA, tiny);
+        attack(1, playerA, tiny2);
+        block(1, playerB, "Night Market Guard", tiny);
+        block(1, playerB, "Night Market Guard", tiny2);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, clue, 1);
+        assertExileCount(playerA, 0);
         assertExileCount(playerB, 1);
     }
     @Test
@@ -90,14 +133,14 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, witness);
         addCard(Zone.BATTLEFIELD, playerA, "Skyknight Vanguard");
-        addCard(Zone.HAND, playerB, bolt);
-        addCard(Zone.HAND, playerB, bolt);
-        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.HAND, playerB, kill);
+        addCard(Zone.HAND, playerB, kill);
+        addCard(Zone.BATTLEFIELD, playerB, "Badlands", 4);
 
         attack(1, playerA, "Skyknight Vanguard");
-        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, bolt, "Skyknight Vanguard");
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, kill, "Skyknight Vanguard");
         waitStackResolved(1, PhaseStep.DECLARE_ATTACKERS);
-        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, bolt, "Soldier Token");
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, kill, "Soldier Token");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
