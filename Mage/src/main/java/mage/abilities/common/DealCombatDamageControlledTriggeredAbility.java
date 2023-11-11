@@ -39,7 +39,8 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.filter = filter;
-        setTriggerPhrase("Whenever one or more " + filter.getMessage() + " you control deal combat damage to a player, ");
+        String filterMessage = (filter.getMessage().contains("you control") ? filter.getMessage() : filter.getMessage() + " you control");
+        setTriggerPhrase("Whenever one or more " + filterMessage + " deal combat damage to a player, ");
     }
 
     protected DealCombatDamageControlledTriggeredAbility(final DealCombatDamageControlledTriggeredAbility ability) {
@@ -65,8 +66,8 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
             .filter(e -> {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(e.getSourceId());
                 return permanent != null
-                        && filter.match(permanent, game)
-                        && permanent.isControlledBy(this.getControllerId());
+                        && permanent.isControlledBy(this.getControllerId())
+                        && filter.match(permanent, game);
             })
             .collect(Collectors.toList());
         

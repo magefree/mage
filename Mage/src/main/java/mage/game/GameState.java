@@ -634,16 +634,23 @@ public class GameState implements Serializable, Copyable<GameState> {
         return this.turnMods;
     }
 
+    /**
+     * Find game scope watcher
+     */
     public <T extends Watcher> T getWatcher(Class<T> watcherClass) {
-        return watcherClass.cast(watchers.get(watcherClass.getSimpleName()));
+        return getWatcher(watcherClass, null);
     }
 
+    /**
+     * Find card/player scope watcher
+     */
     public <T extends Watcher> T getWatcher(Class<T> watcherClass, UUID uuid) {
-        return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), uuid.toString()));
+        String watcherKey = (uuid == null ? "" : uuid.toString()) + watcherClass.getSimpleName();
+        return watcherClass.cast(getWatcher(watcherKey));
     }
 
-    public <T extends Watcher> T getWatcher(Class<T> watcherClass, String prefix) {
-        return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), prefix));
+    public Watcher getWatcher(String key) {
+        return watchers.get(key);
     }
 
     public SpecialActions getSpecialActions() {

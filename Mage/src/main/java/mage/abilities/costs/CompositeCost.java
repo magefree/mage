@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Targets;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class CompositeCost implements Cost {
@@ -75,10 +76,10 @@ public class CompositeCost implements Cost {
 
     @Override
     public Targets getTargets() {
-        Targets result = new Targets();
-        result.addAll(firstCost.getTargets());
-        result.addAll(secondCost.getTargets());
-        return result;
+        Targets res = new Targets();
+        res.addAll(firstCost.getTargets());
+        res.addAll(secondCost.getTargets());
+        return res.withReadOnly();
     }
 
     @Override

@@ -318,8 +318,11 @@ public abstract class GameImpl implements Game {
                 card = ((PermanentCard) card).getCard();
             }
 
-            // init each card by parts... if you add new type here then getInitAbilities must be
-            // implemented too (it allows to split abilities between card and parts)
+            // usage hints:
+            // - each card and parts must be initialized here before usage
+            // - it add card/part to starting zone, assign abilities and init watchers
+            // - warning, if you add new type here then getInitAbilities must be
+            //   implemented too (it allows to split abilities between card and parts)
 
             // main card
             card.setOwnerId(ownerId);
@@ -348,6 +351,14 @@ public abstract class GameImpl implements Game {
                 Card spellCard = ((AdventureCard) card).getSpellCard();
                 spellCard.setOwnerId(ownerId);
                 addCardToState(spellCard);
+            } else if (card.isTransformable() && card.getSecondCardFace() != null) {
+                Card nightCard = card.getSecondCardFace();
+                nightCard.setOwnerId(ownerId);
+                addCardToState(nightCard);
+            } else if (card.getMeldsToClazz() != null) {
+                // meld card will be added and init on meld effect resolve, so ignore it here
+                // TODO: rework meld logic cause card with watchers must be added on game init
+                //  (possible bugs: miss watcher related data in meld cards/rules/hints)
             }
         }
     }

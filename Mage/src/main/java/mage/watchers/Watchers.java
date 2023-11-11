@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class Watchers extends HashMap<String, Watcher> {
 
-    private static Logger logger = LogManager.getLogger(Watcher.class.getSimpleName());
+    private static final Logger logger = LogManager.getLogger(Watcher.class.getSimpleName());
 
     public Watchers() {
     }
@@ -39,15 +39,12 @@ public class Watchers extends HashMap<String, Watcher> {
         this.values().forEach(Watcher::reset);
     }
 
-    public Watcher get(String key, String id) {
-        return get(id + key);
-    }
-
     @Override
     public Watcher get(Object key) {
         if (containsKey(key)) {
             return super.get(key);
         }
+        // can't add game exeption here because it's an easy way to ruin any game with bugged card
         logger.error(key + " not found in watchers", new Throwable());
         return null;
     }

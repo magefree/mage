@@ -127,13 +127,14 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         }
         String gainedAbility = CardUtil.stripReminderText(ability.getRule());
         sb.append(filter.getMessage());
-        if (!filter.getMessage().endsWith("you control")) {
+        if (!filter.getMessage().contains("you control")) {
             sb.append(" you control");
         }
+        boolean singular = filter.getMessage().toLowerCase().startsWith("each");
         if (duration == Duration.WhileOnBattlefield || duration == Duration.EndOfGame) {
-            sb.append(" have ");
+            sb.append(singular ? " has " : " have ");
         } else {
-            sb.append(" gain ");
+            sb.append(singular ? " gains " : " gain ");
         }
         if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {
             gainedAbility = '"' + gainedAbility + '"';

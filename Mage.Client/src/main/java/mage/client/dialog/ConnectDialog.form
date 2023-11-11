@@ -402,8 +402,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnFindBeta">
           <Properties>
-            <Property name="text" type="java.lang.String" value="BETA, AI"/>
-            <Property name="toolTipText" type="java.lang.String" value="Connect to BETA server, AI enabled (use any username without registration)"/>
+            <Property name="text" type="java.lang.String" value="BETA"/>
+            <Property name="toolTipText" type="java.lang.String" value="Connect to BETA server, AI disabled (use any username without registration)"/>
             <Property name="alignmentY" type="float" value="0.0"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">

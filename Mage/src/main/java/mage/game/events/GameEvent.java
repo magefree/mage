@@ -539,7 +539,13 @@ public class GameEvent implements Serializable {
          amount      discover value
          flag        not used for this event
          */
-        DISCOVER,
+        DISCOVERED,
+        /* Exiled while crafting (see Market Gnome)
+         targetId   the permanent exiled
+         sourceId   of the craft ability
+         playerId   the player crafting
+         */
+        EXILED_WHILE_CRAFTING,
         //custom events
         CUSTOM_EVENT
     }

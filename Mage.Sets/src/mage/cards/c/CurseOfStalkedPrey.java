@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -37,7 +36,7 @@ public final class CurseOfStalkedPrey extends CardImpl {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 

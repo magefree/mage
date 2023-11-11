@@ -4,6 +4,8 @@ import mage.constants.CommanderCardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.players.Player;
+import mage.view.GameView;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +17,19 @@ import java.util.UUID;
  * @author JayDi85
  */
 public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHelps {
+
+    private void checkGameView() {
+        // miss CommanderInfoWatcher check, see https://github.com/magefree/mage/issues/11081
+        // original watcher code don't raise game error on miss watcher, but test must fail - so it uses direct key search here
+        GameView gameView = getGameView(playerA);
+        Assert.assertNotNull(gameView);
+        for (Player player : currentGame.getPlayers().values()) {
+            for (UUID commanderId : currentGame.getCommandersIds(player, CommanderCardType.ANY, false)) {
+                String needWatcherKey = commanderId + "CommanderInfoWatcher";
+                Assert.assertNotNull("Watchers must be init with game card all the time, miss " + needWatcherKey, currentGame.getState().getWatcher(needWatcherKey));
+            }
+        }
+    }
 
     @Test
     public void test_KarnLiberated_Manual() {
@@ -28,12 +43,15 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         addCard(Zone.BATTLEFIELD, playerA, "Karn Liberated", 1);
 
         // prepare commander
+        runCode("check", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkGameView());
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
+        runCode("check", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkGameView());
 
         // prepare karn
         addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn Liberated", CounterType.LOYALTY, 20);
+        runCode("check", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkGameView());
 
         // check watcher before restart
         runCode("before restart", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
@@ -45,6 +63,7 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         // game restart
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-14: ");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        runCode("check", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkGameView());
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -54,6 +73,8 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         UUID commanderId = currentGame.getCommandersIds(playerA, CommanderCardType.ANY, false).stream().findFirst().orElse(null);
         CommanderPlaysCountWatcher watcher = currentGame.getState().getWatcher(CommanderPlaysCountWatcher.class);
         Assert.assertEquals("commander tax must be x0", 0, watcher.getPlaysCount(commanderId));
+        //
+        checkGameView();
 
         assertPermanentCount(playerA, 0); // no cards on battle after game restart
     }

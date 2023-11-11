@@ -382,8 +382,8 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnFindBeta.setText("BETA, AI");
-        btnFindBeta.setToolTipText("Connect to BETA server, AI enabled (use any username without registration)");
+        btnFindBeta.setText("BETA");
+        btnFindBeta.setToolTipText("Connect to BETA server, AI disabled (use any username without registration)");
         btnFindBeta.setAlignmentY(0.0F);
         btnFindBeta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFindBeta.setMargin(new java.awt.Insets(2, 2, 2, 2));

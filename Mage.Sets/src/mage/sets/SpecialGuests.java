@@ -38,7 +38,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Crypt", "17f", Rarity.MYTHIC, mage.cards.m.ManaCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mana Crypt", 17, Rarity.MYTHIC, mage.cards.m.ManaCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mephidross Vampire", 4, Rarity.RARE, mage.cards.m.MephidrossVampire.class));
-        cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 15, Rarity.RARE, mage.cards.m.MirriWeatherlightDuelist.class));
+        cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 15, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Pitiless Plunderer", 5, Rarity.UNCOMMON, mage.cards.p.PitilessPlunderer.class));
         cards.add(new SetCardInfo("Polyraptor", 12, Rarity.MYTHIC, mage.cards.p.Polyraptor.class));
         cards.add(new SetCardInfo("Rampaging Ferocidon", 8, Rarity.RARE, mage.cards.r.RampagingFerocidon.class));

@@ -18,6 +18,7 @@ import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
@@ -131,6 +132,8 @@ class CraftCost extends CostImpl {
                 .map(uuid -> {
                     Permanent permanent = game.getPermanent(uuid);
                     if (permanent != null) {
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXILED_WHILE_CRAFTING,
+                                permanent.getId(), source, player.getId()));
                         return permanent;
                     }
                     return game.getCard(uuid);

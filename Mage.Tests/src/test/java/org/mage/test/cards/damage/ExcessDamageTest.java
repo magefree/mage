@@ -130,4 +130,25 @@ public class ExcessDamageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, bolt, 1);
         assertGraveyardCount(playerB, bear, 1);
     }
+
+    @Test
+    public void testMagmaticGalleon() {
+        String mg = "Magmatic Galleon";
+        // Whenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token.
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, mg);
+        addCard(Zone.HAND, playerA, "Storm's Wrath"); // 4 damage to each creature and each planeswalker
+        addCard(Zone.BATTLEFIELD, playerB, bear, 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Storm's Wrath");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertGraveyardCount(playerB, bear, 2);
+    }
+
 }

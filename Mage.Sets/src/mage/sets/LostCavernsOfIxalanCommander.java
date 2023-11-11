@@ -51,6 +51,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Branching Evolution", 234, Rarity.RARE, mage.cards.b.BranchingEvolution.class));
         cards.add(new SetCardInfo("Breeches, Brazen Plunderer", 217, Rarity.UNCOMMON, mage.cards.b.BreechesBrazenPlunderer.class));
         cards.add(new SetCardInfo("Butcher of Malakir", 187, Rarity.RARE, mage.cards.b.ButcherOfMalakir.class));
+        cards.add(new SetCardInfo("Bygone Marvels", 89, Rarity.RARE, mage.cards.b.BygoneMarvels.class));
         cards.add(new SetCardInfo("Canopy Vista", 321, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Captain Lannery Storm", 218, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Captivating Crew", 219, Rarity.RARE, mage.cards.c.CaptivatingCrew.class));
@@ -78,6 +79,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cruel Celebrant", 267, Rarity.UNCOMMON, mage.cards.c.CruelCelebrant.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 326, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cultivate", 235, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Curious Altisaur", 90, Rarity.RARE, mage.cards.c.CuriousAltisaur.class));
         cards.add(new SetCardInfo("Curse of the Swine", 150, Rarity.RARE, mage.cards.c.CurseOfTheSwine.class));
         cards.add(new SetCardInfo("Damn", 191, Rarity.RARE, mage.cards.d.Damn.class));
         cards.add(new SetCardInfo("Daring Saboteur", 151, Rarity.UNCOMMON, mage.cards.d.DaringSaboteur.class));
@@ -88,12 +90,15 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Descendants' Path", 238, Rarity.RARE, mage.cards.d.DescendantsPath.class));
         cards.add(new SetCardInfo("Desolate Lighthouse", 327, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
         cards.add(new SetCardInfo("Dimir Signet", 302, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class));
+        cards.add(new SetCardInfo("Dinosaur Egg", 92, Rarity.RARE, mage.cards.d.DinosaurEgg.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 223, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 192, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Distant Melody", 154, Rarity.COMMON, mage.cards.d.DistantMelody.class));
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 193, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Drover of the Mighty", 239, Rarity.UNCOMMON, mage.cards.d.DroverOfTheMighty.class));
+        cards.add(new SetCardInfo("Dusk Legion Sergeant", 80, Rarity.RARE, mage.cards.d.DuskLegionSergeant.class));
         cards.add(new SetCardInfo("Dusk Legion Zealot", 194, Rarity.COMMON, mage.cards.d.DuskLegionZealot.class));
+        cards.add(new SetCardInfo("Elenda's Hierophant", 71, Rarity.RARE, mage.cards.e.ElendasHierophant.class));
         cards.add(new SetCardInfo("Elenda, the Dusk Rose", 268, Rarity.MYTHIC, mage.cards.e.ElendaTheDuskRose.class));
         cards.add(new SetCardInfo("Emperor Mihail II", 155, Rarity.RARE, mage.cards.e.EmperorMihailII.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 224, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
@@ -115,6 +120,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fist of Suns", 113, Rarity.RARE, mage.cards.f.FistOfSuns.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 330, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Fortified Village", 331, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
+        cards.add(new SetCardInfo("Francisco, Fowl Marauder", 49, Rarity.RARE, mage.cards.f.FranciscoFowlMarauder.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 332, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 333, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Game Trail", 334, Rarity.RARE, mage.cards.g.GameTrail.class));
@@ -130,6 +136,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hinterland Harbor", 336, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Hostage Taker", 271, Rarity.RARE, mage.cards.h.HostageTaker.class));
         cards.add(new SetCardInfo("Icon of Ancestry", 305, Rarity.RARE, mage.cards.i.IconOfAncestry.class));
+        cards.add(new SetCardInfo("Illustrious Wanderglyph", 9, Rarity.RARE, mage.cards.i.IllustriousWanderglyph.class));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 200, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class));
         cards.add(new SetCardInfo("Inspiring Call", 244, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Isolated Chapel", 337, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
@@ -273,7 +280,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Estate", 369, Rarity.RARE, mage.cards.v.VoldarenEstate.class));
         cards.add(new SetCardInfo("Vona, Butcher of Magan", 293, Rarity.MYTHIC, mage.cards.v.VonaButcherOfMagan.class));
         cards.add(new SetCardInfo("Vorel of the Hull Clade", 294, Rarity.RARE, mage.cards.v.VorelOfTheHullClade.class));
-        cards.add(new SetCardInfo("Wakening Sun's Avatar", 139, Rarity.RARE, mage.cards.w.WakeningSunsAvatar.class));
+        cards.add(new SetCardInfo("Wakening Sun's Avatar", 139, Rarity.MYTHIC, mage.cards.w.WakeningSunsAvatar.class));
         cards.add(new SetCardInfo("Warkite Marauder", 179, Rarity.RARE, mage.cards.w.WarkiteMarauder.class));
         cards.add(new SetCardInfo("Wave Goodbye", 79, Rarity.RARE, mage.cards.w.WaveGoodbye.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 317, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));

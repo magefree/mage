@@ -11,6 +11,9 @@ import mage.players.Player;
 import org.apache.log4j.Logger;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
+import mage.constants.Outcome;
 
 /**
  * @author nantuko
@@ -105,7 +108,22 @@ public final class GameStateEvaluator2 {
     }
 
     public static int evaluatePermanent(Permanent permanent, Game game) {
-        int value = ArtificialScoringSystem.getFixedPermanentScore(game, permanent)
+        // prevent AI from attaching bad auras to its own permanents ex: Brainwash and Demonic Torment (no immediate penalty on the battlefield)
+        int value = 0;
+        if (!permanent.getAttachments().isEmpty()) {
+            for (UUID attachmentId : permanent.getAttachments()) {
+                Permanent attachment = game.getPermanent(attachmentId);
+                for (Ability a : attachment.getAbilities(game)) {
+                    for (Effect e : a.getEffects()) {
+                        if (e.getOutcome().equals(Outcome.Detriment)
+                                && attachment.getControllerId().equals(permanent.getControllerId())) {
+                            value -= 1000;  // seems to work well ; -300 is not effective enough
+                        }
+                    }
+                }
+            }
+        }
+        value += ArtificialScoringSystem.getFixedPermanentScore(game, permanent)
                 + ArtificialScoringSystem.getVariablePermanentScore(game, permanent);
         return value;
     }
@@ -117,6 +135,7 @@ public final class GameStateEvaluator2 {
     }
 
     public static class PlayerEvaluateScore {
+
         private int playerLifeScore = 0;
         private int playerHandScore = 0;
         private int playerPermanentsScore = 0;
@@ -132,7 +151,7 @@ public final class GameStateEvaluator2 {
         }
 
         public PlayerEvaluateScore(int playerLifeScore, int playerHandScore, int playerPermanentsScore,
-                                   int opponentLifeScore, int opponentHandScore, int opponentPermanentsScore) {
+                int opponentLifeScore, int opponentHandScore, int opponentPermanentsScore) {
             this.playerLifeScore = playerLifeScore;
             this.playerHandScore = playerHandScore;
             this.playerPermanentsScore = playerPermanentsScore;
@@ -170,27 +189,27 @@ public final class GameStateEvaluator2 {
         }
 
         public String getPlayerInfoFull() {
-            return "Life:" + playerLifeScore +
-                    ", Hand:" + playerHandScore +
-                    ", Perm:" + playerPermanentsScore;
+            return "Life:" + playerLifeScore
+                    + ", Hand:" + playerHandScore
+                    + ", Perm:" + playerPermanentsScore;
         }
 
         public String getPlayerInfoShort() {
-            return "L:" + playerLifeScore +
-                    ",H:" + playerHandScore +
-                    ",P:" + playerPermanentsScore;
+            return "L:" + playerLifeScore
+                    + ",H:" + playerHandScore
+                    + ",P:" + playerPermanentsScore;
         }
 
         public String getOpponentInfoFull() {
-            return "Life:" + opponentLifeScore +
-                    ", Hand:" + opponentHandScore +
-                    ", Perm:" + opponentPermanentsScore;
+            return "Life:" + opponentLifeScore
+                    + ", Hand:" + opponentHandScore
+                    + ", Perm:" + opponentPermanentsScore;
         }
 
         public String getOpponentInfoShort() {
-            return "L:" + opponentLifeScore +
-                    ",H:" + opponentHandScore +
-                    ",P:" + opponentPermanentsScore;
+            return "L:" + opponentLifeScore
+                    + ",H:" + opponentHandScore
+                    + ",P:" + opponentPermanentsScore;
         }
     }
 }

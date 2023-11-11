@@ -9,6 +9,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.keyword.ExploreTargetEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,6 +31,7 @@ public final class TwistsAndTurns extends CardImpl {
 
     public TwistsAndTurns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.secondSideCardClazz = mage.cards.m.MycoidMaze.class;
 
         // If a creature you control would explore, instead you scry 1, then that creature explores.
         this.addAbility(new SimpleStaticAbility(new TwistsAndTurnsReplacementEffect()));
@@ -40,6 +42,7 @@ public final class TwistsAndTurns extends CardImpl {
         this.addAbility(ability);
 
         // When a land enters the battlefield under your control, if you control seven or more lands, transform Twists and Turns.
+        this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(new TransformSourceEffect(), StaticFilters.FILTER_LAND),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.MORE_THAN, 6, true),

@@ -45,11 +45,11 @@ public class ExileTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(ability.getControllerId());
-        if (player == null || !targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
+        if (player == null || !this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             return paid;
         }
         Cards cards = new CardsImpl();
-        for (UUID targetId : targets.get(0).getTargets()) {
+        for (UUID targetId : this.getTargets().get(0).getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {
                 return false;
@@ -72,7 +72,7 @@ public class ExileTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override
