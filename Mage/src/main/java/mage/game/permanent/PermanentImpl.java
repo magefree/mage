@@ -392,6 +392,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public Ability addAbility(Ability ability, UUID sourceId, Game game) {
         return addAbility(ability, sourceId, game, true);
     }
+
+    /**
+     * @param ability The ability to be added
+     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     * @param game
+     * @param withSubabilities if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
+     *                         Otherwise sub-abilities will be added twice to the resulting object
+     * @return The newly added ability copy
+     */
     @Override
     public Ability addAbility(Ability ability, UUID sourceId, Game game, boolean withSubabilities) {
         // singleton abilities -- only one instance

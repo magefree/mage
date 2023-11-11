@@ -81,6 +81,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     public void addAbility(Ability ability) {
         addAbility(ability, true);
     }
+
+    /**
+     * @param ability The ability to be added
+     * @param withSubabilities if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
+     *                         Otherwise sub-abilities will be added twice to the resulting object
+     */
     @Override
     public void addAbility(Ability ability, boolean withSubabilities) {
         ability.setSourceId(this.getId());
