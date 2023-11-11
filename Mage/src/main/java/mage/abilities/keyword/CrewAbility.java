@@ -51,6 +51,8 @@ public class CrewAbility extends SimpleActivatedAbility {
         this.addIcon(new CardIconImpl(CardIconType.ABILITY_CREW, "Crew " + value));
         this.value = value;
         if (altCost != null) {
+            //TODO: the entire alternative cost should be included in the subability, not just the hint text
+            // Heart of Kiran's alternative crew cost is a static ability, not part of the activated ability directly
             this.addSubAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
                     "you may " + CardUtil.addCostVerb(altCost.getText())
                             + " rather than pay {this}'s crew cost"

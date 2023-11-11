@@ -188,7 +188,7 @@ class HavengulLichEffect extends ContinuousEffectImpl {
         Card card = game.getCard(cardId);
         if (permanent != null && card != null) {
             for (ActivatedAbility ability : card.getAbilities(game).getActivatedAbilities(Zone.BATTLEFIELD)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, false);
             }
         }
         return false;
