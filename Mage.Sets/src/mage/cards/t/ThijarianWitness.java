@@ -16,12 +16,12 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.combat.Combat;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -85,7 +85,7 @@ enum AttackBlockAlonePredicate implements Predicate<Permanent> {
     }
 }
 class AttackingBlockingAloneWatcher extends Watcher {
-    //records player -> permanent if that permanent is either attacking or blocking alone
+    //records any permanent that is currently attacking or blocking alone
     //clears the result if attacker/blocker count > 1, does NOT clear if count = 0
     //checks on every event while inCombat is true
     private MageObjectReference loneAttacker = null;
@@ -111,25 +111,33 @@ class AttackingBlockingAloneWatcher extends Watcher {
             inCombat = true;
         }
         if (!inCombat) return;
-        Combat combat = game.getCombat();
-        Set<UUID> attackers = combat.getAttackers();
-        Set<UUID> blockers = combat.getBlockers();
-        if (attackers.size() > 1){
+        List<CombatGroup> combat = game.getCombat().getGroups();
+        int attackers = 0;
+        int blockers = 0;
+        for (CombatGroup group : combat){
+            attackers += group.getAttackers().size();
+            blockers += group.getBlockers().size();
+        }
+        if (blockers == 1 || attackers == 1){
+            for (CombatGroup group : combat){
+                if (blockers == 1 && group.getBlockers().size() == 1){
+                    loneBlocker = new MageObjectReference(group.getBlockers().get(0), game);
+                }
+                if (attackers == 1 && group.getAttackers().size() == 1){
+                    loneAttacker = new MageObjectReference(group.getAttackers().get(0), game);
+                }
+            }
+        }
+        if (attackers > 1){
             loneAttacker = null;
         }
-        if (blockers.size() > 1){
+        if (blockers > 1){
             loneBlocker = null;
-        }
-        if (attackers.size() == 1){
-            loneAttacker = new MageObjectReference(attackers.iterator().next(), game);
-        }
-        if (blockers.size() == 1){
-            loneBlocker = new MageObjectReference(blockers.iterator().next(), game);
         }
     }
     public boolean check(MageObjectReference mor, Game game) {
         //MageObjectReference lastMor = new MageObjectReference(mor.getSourceId(), mor.getZoneChangeCounter()-1, game);
-        game.debugMessage("Checking "+mor+" vs "+loneAttacker+", "+loneBlocker);
+        //game.debugMessage("Checking "+mor+" vs "+loneAttacker+", "+loneBlocker);
         return (mor.equals(loneAttacker) || mor.equals(loneBlocker));
     }
 }
