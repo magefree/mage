@@ -332,6 +332,8 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Gets the list of sub-abilities associated with this ability.
+     * When copying, subabilities are copied separately and thus the list is desynced.
+     * Do not interact with the subabilities list during a game!
      *
      * @return
      */

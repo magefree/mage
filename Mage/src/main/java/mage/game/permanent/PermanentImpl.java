@@ -390,6 +390,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public Ability addAbility(Ability ability, UUID sourceId, Game game) {
+        return addAbility(ability, sourceId, game, true);
+    }
+    @Override
+    public Ability addAbility(Ability ability, UUID sourceId, Game game, boolean withSubabilities) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
@@ -404,7 +408,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.getState().addAbility(copyAbility, sourceId, this);
             }
             abilities.add(copyAbility);
-            abilities.addAll(ability.getSubAbilities());
+            if (withSubabilities) {
+                abilities.addAll(copyAbility.getSubAbilities());
+            }
             return copyAbility;
         }
         return null;
