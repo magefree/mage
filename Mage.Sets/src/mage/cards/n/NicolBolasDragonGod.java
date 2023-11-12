@@ -91,7 +91,7 @@ class NicolBolasDragonGodGainAbilitiesEffect extends ContinuousEffectImpl {
         )) {
             for (Ability ability : permanent.getAbilities()) {
                 if (ability instanceof LoyaltyAbility) {
-                    perm.addAbility(ability, source.getSourceId(), game, false);
+                    perm.addAbility(ability, source.getSourceId(), game, true);
                 }
             }
         }

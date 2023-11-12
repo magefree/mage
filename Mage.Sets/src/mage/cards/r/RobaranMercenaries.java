@@ -87,7 +87,7 @@ class RobaranMercenariesEffect extends ContinuousEffectImpl {
                     || perm.getAbilities(game)
                     .stream()
                     .noneMatch(ability.getClass()::isInstance)) {
-                perm.addAbility(ability, source.getSourceId(), game, false);
+                perm.addAbility(ability, source.getSourceId(), game, true);
             }
         }
         return true;

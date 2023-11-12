@@ -218,7 +218,7 @@ public interface Permanent extends Card, Controllable {
      * @return can be null for exists abilities
      */
     Ability addAbility(Ability ability, UUID sourceId, Game game);
-    Ability addAbility(Ability ability, UUID sourceId, Game game, boolean withSubabilities);
+    Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject);
 
     void removeAllAbilities(UUID sourceId, Game game);
 
