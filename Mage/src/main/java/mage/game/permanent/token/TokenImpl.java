@@ -77,6 +77,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return new ArrayList<>(lastAddedTokenIds);
     }
 
+    /**
+     * Add an ability to the token. When copying from an existing source
+     * you should use the withSubabilities variant of this function to prevent double-copying subabilities
+     * @param ability The ability to be added
+     */
     @Override
     public void addAbility(Ability ability) {
         addAbility(ability, true);
