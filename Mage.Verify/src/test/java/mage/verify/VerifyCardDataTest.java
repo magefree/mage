@@ -120,7 +120,6 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
-        skipListAddName(SKIP_LIST_COLOR, "LCI", "Cosmium Kiln"); // tmp
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
@@ -133,14 +132,13 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "LCI", "Kutzil's Flanker"); // temporary until mtgjson datat is clean
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        skipListAddName(SKIP_LIST_SUBTYPE, "LCI", "Kutzil's Flanker"); // temporary until mtgjson datat is clean
+        subtypesToIgnore.add("Cat"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -2029,7 +2027,7 @@ public class VerifyCardDataTest {
         Map<Class, String> hints = new HashMap<>();
         hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
-        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
+        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom");
         hints.put(EquipAbility.class, "Equip only as a sorcery.");
         hints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
         hints.put(ProliferateEffect.class, "Choose any number of permanents and/or players, then give each another counter of each kind already there.");
@@ -2115,6 +2113,8 @@ public class VerifyCardDataTest {
         newRule = newRule
                 .replace("<i>", "")
                 .replace("</i>", "");
+
+        newRule = CardNameUtil.normalizeCardName(newRule);
 
         return newRule.trim();
     }
@@ -2306,6 +2306,9 @@ public class VerifyCardDataTest {
             refText += "<br>";
             refText = refText.replace("<br>", "\n");
         }
+
+        // remove unnecessary reminder text
+        refText = refText.replaceAll("^\\(.+(can be paid with|ransforms from).+\\)\n", "");
 
         // mana ability fix
         // Current implementation makes one Activated Ability per kind of color.
@@ -2819,5 +2822,58 @@ public class VerifyCardDataTest {
         if (errorsList.size() > 0) {
             Assert.fail(String.format("Card name converters contains unsupported unicode symbols in %d cards, see logs above", errorsList.size()));
         }
+    }
+
+    /**
+     * Not really a test. Used to make the changelog diff list
+     * for sets that are heavily worked on.
+     */
+    @Ignore
+    @Test
+    public void list_ChangelogHelper() {
+
+        String setCode = "LCC";
+        int maxCards = 100; // don't want to look above that card number, as those are alternate prints.
+        boolean doExclude = false; // use the excluded array or not.
+
+        // Excluded in that list, either already listed in a previous changelog, or exceptions.
+        Set<Integer> excluded = new HashSet<>(Arrays.asList(
+                8, 9, 49, 71, 76, 79, 80, 89, 90, 92, 96, 97
+        ));
+
+        for (int i = 17; i <= 68; ++i) {
+            excluded.add(i); // alternates version of the new cards.
+        }
+
+        /*
+        String setCode = "LCI";
+        int maxCards = 285; // don't want to look above that card number, as those are alternate prints.
+        boolean doExclude = false; // use the excluded array or not.
+
+        // Excluded in that list, either already listed in a previous changelog, or exceptions.
+        Set<Integer> excluded = new HashSet<>(Arrays.asList(
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284
+        ));
+        */
+
+        Set<Integer> listChangelog = new HashSet<>();
+        List<ExpansionSet.SetCardInfo> setInfo = Sets.getInstance().get(setCode).getSetCardInfo();
+        for (ExpansionSet.SetCardInfo sci : setInfo) {
+            int cn = sci.getCardNumberAsInt();
+            if (cn > maxCards) continue;
+            if (doExclude && excluded.contains(cn)) continue;
+            listChangelog.add(cn);
+        }
+
+        List<Integer> sorted = listChangelog.stream().sorted().collect(Collectors.toList());
+
+        // to manual update the excluded array
+        System.out.println(sorted.stream().map(cn -> cn + "").collect(Collectors.joining(", ")));
+        // Scryfall list of all the new cards for that set
+        System.out.println(
+                "https://scryfall.com/search?q=s%3A" + setCode + "+-is%3Areprint+%28"
+                        + sorted.stream().map(cn -> "cn%3A" + cn).collect(Collectors.joining("+or+"))
+                        + "%29&order=set&as=grid&unique=cards"
+        );
     }
 }

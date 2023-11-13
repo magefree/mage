@@ -142,7 +142,7 @@ public class OrCost implements Cost {
         if (selectedCost != null) {
             return selectedCost.getTargets();
         }
-        return null;
+        return new Targets().withReadOnly();
     }
 
     @Override

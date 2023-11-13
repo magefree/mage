@@ -140,8 +140,8 @@ public class CopyTokenFunction {
             // otherwise there are problems to check for created continuous effects to check if
             // the source (the Token) has still this ability
             ability.newOriginalId();
-
-            target.addAbility(ability);
+            //Don't re-add subabilities since they've already in sourceObj's abilities list
+            target.addAbility(ability, true);
         }
 
         target.setPower(sourceObj.getPower().getBaseValue());
@@ -152,7 +152,6 @@ public class CopyTokenFunction {
 
     private Token from(Card source, Game game, Spell spell) {
         apply(source, game);
-
         // token's ZCC must be synced with original card to keep abilities settings
         // Example: kicker ability and kicked status
         if (spell != null) {

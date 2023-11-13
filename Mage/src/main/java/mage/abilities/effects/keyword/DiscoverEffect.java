@@ -12,7 +12,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.DiscoverEvent;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -88,7 +88,7 @@ public class DiscoverEffect extends OneShotEffect {
         }
         cards.retainZone(Zone.EXILED, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
-        game.fireEvent(new DiscoverEvent(source, player.getId(), amount));
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCOVERED, null, source, player.getId(), amount));
         return card;
     }
 }

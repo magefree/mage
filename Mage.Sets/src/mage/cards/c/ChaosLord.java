@@ -98,7 +98,7 @@ class ChaosLordTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
 class GainControlSourceEffect extends ContinuousEffectImpl {
 
-    public GainControlSourceEffect() {
+    GainControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "target opponent gains control of {this}";
     }
@@ -126,7 +126,7 @@ class GainControlSourceEffect extends ContinuousEffectImpl {
 
 class ChaosLordEffect extends AsThoughEffectImpl {
 
-    public ChaosLordEffect() {
+    ChaosLordEffect() {
         super(AsThoughEffectType.ATTACK_AS_HASTE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Chaos Lord can attack as though it had haste unless it entered the battlefield this turn";
     }

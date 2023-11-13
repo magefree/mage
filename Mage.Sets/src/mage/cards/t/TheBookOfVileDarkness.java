@@ -191,7 +191,7 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
                     Ability copyAbility = ability.copy();
                     copyAbility.newId();
                     copyAbility.setControllerId(source.getControllerId());
-                    token.addAbility(copyAbility);
+                    token.addAbility(copyAbility, true);
                 }
             }
         }

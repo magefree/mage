@@ -63,8 +63,8 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
     public void testAuraTokenRedirect() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Centaur Courser");
-        addCard(Zone.BATTLEFIELD, playerA, "Hill Giant");
+        addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser");
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant");
         addCard(Zone.HAND, playerA, "Dead Weight");
 
         setChoice(playerA, true);
@@ -73,14 +73,13 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Centaur Courser", 1);
-        assertPowerToughness(playerA, "Centaur Courser", 1, 1);
-        assertPermanentCount(playerA, "Hill Giant", 1);
-        assertPowerToughness(playerA, "Hill Giant", 1, 1);
+        assertPermanentCount(playerB, "Centaur Courser", 1);
+        assertPowerToughness(playerB, "Centaur Courser", 1, 1);
+        assertPermanentCount(playerB, "Hill Giant", 1);
+        assertPowerToughness(playerB, "Hill Giant", 1, 1);
         assertPermanentCount(playerA, "Dead Weight", 2);
     }
 
-    @Ignore // currently fails
     @Test
     public void testKickerTrigger() {
         makeTester();
@@ -98,7 +97,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Grizzly Bears", 4, 2);
     }
 
-    @Ignore // currently fails
     @Test
     public void testKickerReplacement() {
         makeTester();

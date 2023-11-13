@@ -15,13 +15,23 @@ import mage.players.Player;
  */
 public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotEffect {
 
+    private final boolean tapped;
+
     public ReturnToBattlefieldUnderOwnerControlAttachedEffect() {
+        this("that card", false);
+    }
+
+    public ReturnToBattlefieldUnderOwnerControlAttachedEffect(String textCard, boolean tapped) {
         super(Outcome.Neutral);
-        staticText = "return that card to the battlefield under its owner's control";
+        this.tapped = tapped;
+        staticText = "return " + textCard + " to the battlefield "
+                + (tapped ? "tapped " : "")
+                + "under its owner's control";
     }
 
     protected ReturnToBattlefieldUnderOwnerControlAttachedEffect(final ReturnToBattlefieldUnderOwnerControlAttachedEffect effect) {
         super(effect);
+        this.tapped = effect.tapped;
     }
 
     @Override
@@ -39,7 +49,7 @@ public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotE
         if (object instanceof Permanent) {
             Card card = game.getCard(((Permanent) object).getId());
             if (card != null) {
-                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null)) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, this.tapped, false, true, null)) {
                     return true;
                 }
             }

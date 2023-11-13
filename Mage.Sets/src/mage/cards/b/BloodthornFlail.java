@@ -33,7 +33,7 @@ public final class BloodthornFlail extends CardImpl {
                 new OrCost(
                         "Pay {3} or discard a card",
                         new GenericManaCost(3), new DiscardCardCost()
-                )));
+                ), false));
     }
 
     private BloodthornFlail(final BloodthornFlail card) {

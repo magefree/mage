@@ -128,7 +128,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                 case AbilityAddingRemovingEffects_6:
                     if (!token.getAbilities().isEmpty()) {
                         for (Ability ability : token.getAbilities()) {
-                            permanent.addAbility(ability, source.getSourceId(), game);
+                            permanent.addAbility(ability, source.getSourceId(), game, true);
                         }
                     }
                     break;

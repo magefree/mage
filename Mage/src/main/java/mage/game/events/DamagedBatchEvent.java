@@ -14,7 +14,7 @@ public abstract class DamagedBatchEvent extends GameEvent implements BatchGameEv
     private final Class<? extends DamagedEvent> damageClazz;
     private final Set<DamagedEvent> events = new HashSet<>();
 
-    public DamagedBatchEvent(EventType type, Class<? extends DamagedEvent> damageClazz) {
+    protected DamagedBatchEvent(EventType type, Class<? extends DamagedEvent> damageClazz) {
         super(type, null, null, null);
         this.damageClazz = damageClazz;
     }
@@ -38,6 +38,10 @@ public abstract class DamagedBatchEvent extends GameEvent implements BatchGameEv
                 .stream()
                 .mapToInt(GameEvent::getAmount)
                 .sum();
+    }
+
+    public boolean isCombatDamage() {
+        return events.stream().anyMatch(DamagedEvent::isCombatDamage);
     }
 
     @Override

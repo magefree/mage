@@ -31,7 +31,7 @@ public final class BartolomeDelPresidio extends CardImpl {
         // Sacrifice another creature or artifact: Put a +1/+1 counter on Bartolome del Presidio.
         this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT)
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT)
         ));
     }
 

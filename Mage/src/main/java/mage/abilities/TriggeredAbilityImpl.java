@@ -124,6 +124,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public boolean getTriggersOnceEachTurn() {
+        return this.triggersOnceEachTurn;
+    }
+
+    @Override
     public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
         this.optional = true;
         this.doOnlyOnceEachTurn = doOnlyOnce;
@@ -221,7 +226,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
             }
             if (replaceRuleText && triggerPhrase != null) {
-                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |put a [^ ]+ counter on )?\\{this\\}", "$1it");
+                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |put a [^ ]+ counter on |return )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
             if (triggersOnceEachTurn) {

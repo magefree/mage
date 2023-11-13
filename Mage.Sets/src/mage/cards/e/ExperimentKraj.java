@@ -79,7 +79,7 @@ class ExperimentKrajEffect extends ContinuousEffectImpl {
             for (Permanent creature :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)){
                 for (Ability ability: creature.getAbilities()) {
                     if (ability instanceof ActivatedAbility) {
-                        perm.addAbility(ability, source.getSourceId(), game);
+                        perm.addAbility(ability, source.getSourceId(), game, true);
                     }
                 }
             }

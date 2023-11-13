@@ -198,9 +198,7 @@ public class SquadTest extends CardTestPlayerBase {
     }
 
     // The squad status is a copiable value of the spell, and should be carried over on copy.
-    @Ignore
     @Test
-    //TODO: Enable after fixing subability copying twice bug
     public void test_CopyingSpellMustKeepSquadStatus() {
 
         addCard(Zone.HAND, playerA, flagellant, 1);

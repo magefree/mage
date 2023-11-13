@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.EldraziHorrorToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -29,10 +28,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class ExtricatorOfFlesh extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Eldrazi creature");
+    private static final FilterControlledCreaturePermanent filterNonEldrazi = new FilterControlledCreaturePermanent("non-Eldrazi creature");
+    private static final FilterControlledCreaturePermanent filterEldrazi = new FilterControlledCreaturePermanent(SubType.ELDRAZI, "Eldrazi");
 
     static {
-        filter.add(Predicates.not(SubType.ELDRAZI.getPredicate()));
+        filterNonEldrazi.add(Predicates.not(SubType.ELDRAZI.getPredicate()));
     }
 
     public ExtricatorOfFlesh(UUID ownerId, CardSetInfo setInfo) {
@@ -47,12 +47,12 @@ public final class ExtricatorOfFlesh extends CardImpl {
 
         // Eldrazi you control have vigilance
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
-                VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent(SubType.ELDRAZI, "Eldrazi you control "))));
+                VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filterEldrazi)));
 
         // {2}, {T}, Sacrifice a non-Eldrazi creature: Create a 3/2 colorless Eldrazi Horror creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziHorrorToken()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(filterNonEldrazi));
         this.addAbility(ability);
     }
 

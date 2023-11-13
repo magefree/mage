@@ -1,10 +1,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.cards.CardGraphicInfo;
 
 /**
  * @author TheElk801
@@ -32,30 +30,30 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Comet, Stellar Pup", 166, Rarity.MYTHIC, mage.cards.c.CometStellarPup.class));
         cards.add(new SetCardInfo("Dissatisfied Customer", 72, Rarity.COMMON, mage.cards.d.DissatisfiedCustomer.class));
         cards.add(new SetCardInfo("Embiggen", 137, Rarity.COMMON, mage.cards.e.Embiggen.class));
-        cards.add(new SetCardInfo("Forest", 239, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));//there are multipiles so use the true boolean here for useVariousArt
-        cards.add(new SetCardInfo("Forest", 244, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Forest", 239, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_UST_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 244, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 282, Rarity.RARE, mage.cards.g.GodlessShrine.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 277, Rarity.RARE, mage.cards.h.HallowedFountain.class));
-        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", 241, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_UST_VARIOUS));
+        cards.add(new SetCardInfo("Island", 241, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Lila, Hospitality Hostess", 170, Rarity.MYTHIC, mage.cards.l.LilaHospitalityHostess.class));
         cards.add(new SetCardInfo("Monoxa, Midway Manager", 173, Rarity.UNCOMMON, mage.cards.m.MonoxaMidwayManager.class));
-        cards.add(new SetCardInfo("Mountain", 238, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Mountain", 238, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_UST_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Non-Human Cannonball", 115, Rarity.COMMON, mage.cards.n.NonHumanCannonball.class));
         cards.add(new SetCardInfo("One-Clown Band", 117, Rarity.COMMON, mage.cards.o.OneClownBand.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 284, Rarity.RARE, mage.cards.o.OvergrownTomb.class));
         cards.add(new SetCardInfo("Pair o' Dice Lost", 149, Rarity.UNCOMMON, mage.cards.p.PairODiceLost.class));
-        cards.add(new SetCardInfo("Plains", 235, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", 240, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Plains", 235, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 240, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 285, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Saw in Half", 88, Rarity.RARE, mage.cards.s.SawInHalf.class));
         cards.add(new SetCardInfo("Slight Malfunction", 123, Rarity.COMMON, mage.cards.s.SlightMalfunction.class));
         cards.add(new SetCardInfo("Starlight Spectacular", 28, Rarity.RARE, mage.cards.s.StarlightSpectacular.class));
         cards.add(new SetCardInfo("Steam Vents", 283, Rarity.RARE, mage.cards.s.SteamVents.class));
         cards.add(new SetCardInfo("Stomping Ground", 280, Rarity.RARE, mage.cards.s.StompingGround.class));
-        cards.add(new SetCardInfo("Swamp", 237, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 242, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Swamp", 237, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_UST_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 242, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 281, Rarity.RARE, mage.cards.t.TempleGarden.class));
         cards.add(new SetCardInfo("The Space Family Goblinson", 179, Rarity.UNCOMMON, mage.cards.t.TheSpaceFamilyGoblinson.class));
         cards.add(new SetCardInfo("Vegetation Abomination", 160, Rarity.COMMON, mage.cards.v.VegetationAbomination.class));

@@ -3,11 +3,9 @@ package mage.cards.t;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.mana.RedManaAbility;
@@ -39,18 +37,15 @@ public final class TempleOfPower extends CardImpl {
         this.nightCard = true;
 
         // <i>(Transforms from Ojer Axonil, Deepest Might.)</i>
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("<i>(Transforms from Ojer Axonil, Deepest Might.)</i>"));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
 
         // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
 
         // {2}{R}, {T}: Transform Temple of Power. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery.
-        ability = new ActivateIfConditionActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new TransformSourceEffect(),
-                new ManaCostsImpl("{2}{R}"),
+                new ManaCostsImpl<>("{2}{R}"),
                 TempleOfPowerCondition.instance,
                 TimingRule.SORCERY
         );

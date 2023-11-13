@@ -123,8 +123,8 @@ class KozilekDiscardCost extends CostImpl {
         TargetCardInHand target = new TargetCardInHand(filter);
         this.getTargets().clear();
         this.getTargets().add(target);
-        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
+        if (this.getTargets().choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null) {
                     return false;

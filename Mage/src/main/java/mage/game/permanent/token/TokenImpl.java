@@ -77,15 +77,33 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return new ArrayList<>(lastAddedTokenIds);
     }
 
+    /**
+     * Add an ability to the token. When copying from an existing source
+     * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
+     * @param ability The ability to be added
+     */
     @Override
     public void addAbility(Ability ability) {
+        addAbility(ability, false);
+    }
+
+    /**
+     * @param ability The ability to be added
+     * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
+     *                         Otherwise sub-abilities will be added twice to the resulting object
+     */
+    @Override
+    public void addAbility(Ability ability, boolean fromExistingObject) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        abilities.addAll(ability.getSubAbilities());
+        if (!fromExistingObject) {
+            abilities.addAll(ability.getSubAbilities());
+        }
 
         // TODO: remove all override and backFace changes (bug example: active transform ability in back face)
         if (backFace != null) {
             backFace.addAbility(ability);
+            // Maybe supposed to add subabilities here too?
         }
     }
 

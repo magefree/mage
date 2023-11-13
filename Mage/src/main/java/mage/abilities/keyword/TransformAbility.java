@@ -67,7 +67,7 @@ public class TransformAbility extends SimpleStaticAbility {
         for (Ability ability : sourceCard.getAbilities()) {
             // source == null -- call from init card (e.g. own abilities)
             // source != null -- from apply effect
-            permanent.addAbility(ability, source == null ? permanent.getId() : source.getSourceId(), game);
+            permanent.addAbility(ability, source == null ? permanent.getId() : source.getSourceId(), game, true);
         }
         permanent.getPower().setModifiedBaseValue(sourceCard.getPower().getValue());
         permanent.getToughness().setModifiedBaseValue(sourceCard.getToughness().getValue());

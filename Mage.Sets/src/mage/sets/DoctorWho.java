@@ -19,6 +19,7 @@ public final class DoctorWho extends ExpansionSet {
         super("Doctor Who", "WHO", ExpansionSet.buildDate(2023, 10, 13), SetType.SUPPLEMENTAL);
 
         cards.add(new SetCardInfo("Ace, Fearless Rebel", 98, Rarity.RARE, mage.cards.a.AceFearlessRebel.class));
+        cards.add(new SetCardInfo("Ace's Baseball Bat", 170, Rarity.RARE, mage.cards.a.AcesBaseballBat.class));
         cards.add(new SetCardInfo("Adric, Mathematical Genius", 33, Rarity.RARE, mage.cards.a.AdricMathematicalGenius.class));
         cards.add(new SetCardInfo("Alistair, the Brigadier", 112, Rarity.RARE, mage.cards.a.AlistairTheBrigadier.class));
         cards.add(new SetCardInfo("All of History, All at Once", 34, Rarity.RARE, mage.cards.a.AllOfHistoryAllAtOnce.class));
@@ -228,6 +229,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Tenth Doctor", 194, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 446, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 561, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Twelfth Doctor", 164, Rarity.RARE, mage.cards.t.TheTwelfthDoctor.class));
         cards.add(new SetCardInfo("Think Twice", 220, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thought Vessel", 255, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Three Visits", 235, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));

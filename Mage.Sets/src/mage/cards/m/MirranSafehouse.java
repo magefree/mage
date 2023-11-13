@@ -73,7 +73,7 @@ class MirranSafehouseEffect extends ContinuousEffectImpl {
                 .filter(ActivatedAbility.class::isInstance)
                 .collect(Collectors.toSet());
         for (Ability ability : abilities) {
-            permanent.addAbility(ability, source.getSourceId(), game);
+            permanent.addAbility(ability, source.getSourceId(), game, true);
         }
         return true;
     }

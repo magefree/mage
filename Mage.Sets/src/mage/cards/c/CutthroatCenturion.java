@@ -10,7 +10,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -18,6 +20,16 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class CutthroatCenturion extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another artifact or creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+    }
 
     public CutthroatCenturion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
@@ -30,7 +42,7 @@ public final class CutthroatCenturion extends CardImpl {
         // Sacrifice another artifact or creature: Cutthroat Centurion gets +2/+2 until end of turn. Activate only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT)
+                new SacrificeTargetCost(filter)
         ));
     }
 

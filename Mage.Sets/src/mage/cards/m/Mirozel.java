@@ -28,7 +28,7 @@ public final class Mirozel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Mirozel becomes the target of a spell or ability, return Mirozel to its owner's hand.
-        this.addAbility(new BecomesTargetSourceTriggeredAbility(new ReturnToHandSourceEffect(true)));
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new ReturnToHandSourceEffect(true)).withRuleTextReplacement(false));
     }
 
     private Mirozel(final Mirozel card) {

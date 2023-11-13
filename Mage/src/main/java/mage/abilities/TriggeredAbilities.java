@@ -97,7 +97,8 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
                     // event == null - state based triggers like StateTriggeredAbility, must be ignored for number event
                     if (event == null || !game.replaceEvent(numberOfTriggersEvent, ability)) {
-                        for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {
+                        int numTriggers = ability.getTriggersOnceEachTurn() ? 1 : numberOfTriggersEvent.getAmount();
+                        for (int i = 0; i < numTriggers; i++) {
                             ability.trigger(game, ability.getControllerId(), event);
                         }
                     }

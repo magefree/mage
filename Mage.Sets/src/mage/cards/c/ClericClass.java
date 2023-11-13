@@ -77,7 +77,7 @@ class ClericClassReturnEffect extends OneShotEffect {
     ClericClassReturnEffect() {
         super(Outcome.Benefit);
         staticText = "return target creature card from your graveyard to the battlefield. " +
-                "You gain life equal to its toughness";
+                "You gain life equal to that creature's toughness";
     }
 
     private ClericClassReturnEffect(final ClericClassReturnEffect effect) {
@@ -97,6 +97,7 @@ class ClericClassReturnEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
+        game.getState().processAction(game);
         Permanent permanent = game.getPermanent(card.getId());
         int toughness = permanent != null ? permanent.getToughness().getValue() : card.getToughness().getValue();
         player.gainLife(toughness, game, source);

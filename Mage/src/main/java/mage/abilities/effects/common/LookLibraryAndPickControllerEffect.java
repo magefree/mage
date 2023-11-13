@@ -201,6 +201,8 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         if (revealPickedCards) {
             sb.append("and put ");
             sb.append(plural ? "them " : "it ");
+        } else if (putPickedCards == PutCards.TOP_ANY && (numberOfCards instanceof StaticValue)) {
+            sb.append("back ");
         }
         sb.append(putPickedCards.getMessage(false, plural));
 

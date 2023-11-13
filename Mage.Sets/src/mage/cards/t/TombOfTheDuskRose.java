@@ -1,15 +1,12 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -39,8 +36,6 @@ public final class TombOfTheDuskRose extends CardImpl {
         this.nightCard = true;
 
         // <i>(Transforms from Profane Procession.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new InfoEffect("<i>(Transforms from Profane Procession.)</i>")).setRuleAtTheTop(true));
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

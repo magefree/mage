@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CardTypeAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -15,6 +16,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -90,19 +92,10 @@ class OjerKaslemDeepestGrowthTransformEffect extends OneShotEffect {
  */
 class OjerKaslemDeepestGrowthEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("a creature card and/or a land card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
-
     OjerKaslemDeepestGrowthEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal that many cards from the top of your library. "
-                + "Put may put a creature card and/or a land card from among them onto the battlefield. "
+                + "You may put a creature card and/or a land card from among them onto the battlefield. "
                 + "Put the rest on the bottom in a random order";
     }
 
@@ -125,8 +118,7 @@ class OjerKaslemDeepestGrowthEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(source, cards, game);
-            TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filter);
-            target.withNotTarget(true);
+            TargetCard target = new OjerKaslemDeepestGrowthTarget();
             controller.choose(Outcome.PutCardInPlay, cards, target, source, game);
             Cards toBattlefield = new CardsImpl(target.getTargets());
             cards.removeAll(toBattlefield);
@@ -134,5 +126,51 @@ class OjerKaslemDeepestGrowthEffect extends OneShotEffect {
             controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         }
         return true;
+    }
+}
+
+class OjerKaslemDeepestGrowthTarget extends TargetCardInLibrary {
+
+    private static final FilterCard filter
+            = new FilterCard("a creature card and/or a land card");
+
+    static {
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
+    }
+
+    private static final CardTypeAssignment cardTypeAssigner
+            = new CardTypeAssignment(CardType.CREATURE, CardType.LAND);
+
+    OjerKaslemDeepestGrowthTarget() {
+        super(0, 2, filter);
+    }
+
+    private OjerKaslemDeepestGrowthTarget(final OjerKaslemDeepestGrowthTarget target) {
+        super(target);
+    }
+
+    @Override
+    public OjerKaslemDeepestGrowthTarget copy() {
+        return new OjerKaslemDeepestGrowthTarget(this);
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
+        }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
+        }
+        if (this.getTargets().isEmpty()) {
+            return true;
+        }
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.add(card);
+        return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }

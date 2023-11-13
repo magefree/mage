@@ -145,7 +145,7 @@ class SharkeyTyrantOfTheShireContinousEffect extends ContinuousEffectImpl {
                 .filter(Objects::nonNull)
                 .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED) // Mana abilities are separated in their own AbilityType.Mana
                 .collect(Collectors.toList())) {
-            perm.addAbility(ability, source.getSourceId(), game);
+            perm.addAbility(ability, source.getSourceId(), game, true);
         }
         return true;
     }

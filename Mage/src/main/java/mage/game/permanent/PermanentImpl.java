@@ -388,8 +388,29 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return super.getAbilities(game);
     }
 
+    /**
+     * Add an ability to the permanent. When copying from an existing source
+     * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
+     * @param ability The ability to be added
+     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     * @param game
+     * @return The newly added ability copy
+     */
     @Override
     public Ability addAbility(Ability ability, UUID sourceId, Game game) {
+        return addAbility(ability, sourceId, game, false);
+    }
+
+    /**
+     * @param ability The ability to be added
+     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     * @param game
+     * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
+     *                         Otherwise sub-abilities will be added twice to the resulting object
+     * @return The newly added ability copy
+     */
+    @Override
+    public Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
@@ -404,7 +425,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.getState().addAbility(copyAbility, sourceId, this);
             }
             abilities.add(copyAbility);
-            abilities.addAll(ability.getSubAbilities());
+            if (!fromExistingObject) {
+                abilities.addAll(copyAbility.getSubAbilities());
+            }
             return copyAbility;
         }
         return null;
