@@ -159,6 +159,7 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
         attack(1, playerA, tiny);
         block(1, playerB, tiny, tiny);
         setChoice(playerA, ""); //stack triggers
+        setChoice(playerB, "");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
