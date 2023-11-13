@@ -139,7 +139,7 @@ class AgathasSoulCauldronAbilityEffect extends ContinuousEffectImpl {
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             for (Ability ability : abilities) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, true);
             }
         }
         return true;

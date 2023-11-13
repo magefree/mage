@@ -141,7 +141,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
                     permanent.removeAllAbilities(source.getSourceId(), game);
                 }
                 for (Ability ability : token.getAbilities()) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
                 break;
 

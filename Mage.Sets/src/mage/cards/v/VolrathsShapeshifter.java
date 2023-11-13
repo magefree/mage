@@ -97,7 +97,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
 
         for (Ability ability : card.getAbilities(game)) {
             if (!permanent.getAbilities().contains(ability)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, true);
             }
         }
 

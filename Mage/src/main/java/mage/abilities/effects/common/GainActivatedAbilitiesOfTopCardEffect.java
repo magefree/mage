@@ -43,7 +43,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
                 if (permanent != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof ActivatedAbility) {
-                            permanent.addAbility(ability, source.getSourceId(), game);
+                            permanent.addAbility(ability, source.getSourceId(), game, true);
                         }
                     }
                     return true;

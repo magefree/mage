@@ -112,7 +112,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                         break;
                 }
                 for (Ability ability : token.getAbilities()) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
                 break;
 

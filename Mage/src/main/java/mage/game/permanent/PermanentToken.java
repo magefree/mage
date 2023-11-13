@@ -89,7 +89,8 @@ public class PermanentToken extends PermanentImpl {
             // first time -> create ContinuousEffects only once
             // so sourceId must be null (keep triggered abilities forever?)
             for (Ability ability : token.getAbilities()) {
-                this.addAbility(ability, null, game);
+                //Don't add subabilities since the original token already has them in its abilities list
+                this.addAbility(ability, null, game, true);
             }
         }
         this.abilities.setControllerId(this.controllerId);
