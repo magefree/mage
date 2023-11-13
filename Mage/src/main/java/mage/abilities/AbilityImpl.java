@@ -529,6 +529,7 @@ public abstract class AbilityImpl implements Ability {
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
                 announceString.append(message);
+                getCostsTagMap().put("X",xValue);
             }
         }
         return announceString.toString();
@@ -633,6 +634,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
                     getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
+                    getCostsTagMap().put("X",xValue * xValueMultiplier);
                 }
                 variableManaCost.setPaid();
             }
