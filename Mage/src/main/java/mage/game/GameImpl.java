@@ -2,6 +2,7 @@ package mage.game;
 
 import mage.MageException;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
@@ -1451,6 +1452,7 @@ public abstract class GameImpl implements Game {
             player.endOfTurn(this);
         }
         state.resetWatchers();
+        state.cleanupPermanentCostsTags(this);
     }
 
     protected UUID pickChoosingPlayer() {
@@ -3558,6 +3560,11 @@ public abstract class GameImpl implements Game {
     @Override
     public Map<Zone, Map<UUID, MageObject>> getLKI() {
         return lki;
+    }
+
+    @Override
+    public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
+        return state.getPermanentCostsTags();
     }
 
     @Override

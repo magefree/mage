@@ -101,6 +101,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
+    private Map<MageObjectReference, Map<String, Object>> permanentCostsTags = new HashMap<>();
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
@@ -189,6 +190,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<UUID, CardState> entry : state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
+        for (Map.Entry<MageObjectReference, Map<String, Object>> entry : state.permanentCostsTags.entrySet()) {
+            permanentCostsTags.put(entry.getKey(), new HashMap<>(entry.getValue()));
+        }
         for (Map.Entry<UUID, MageObjectAttribute> entry : state.mageObjectAttribute.entrySet()) {
             mageObjectAttribute.put(entry.getKey(), entry.getValue().copy());
         }
@@ -231,6 +235,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         gameOver = false;
         specialActions.clear();
         cardState.clear();
+        permanentCostsTags.clear();
         combat.clear();
         turnMods.clear();
         watchers.clear();
@@ -280,6 +285,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zones = state.zones;
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
+        this.permanentCostsTags = state.permanentCostsTags;
         this.mageObjectAttribute = state.mageObjectAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
@@ -1367,6 +1373,19 @@ public class GameState implements Serializable, Copyable<GameState> {
     public MageObjectAttribute getCreateMageObjectAttribute(MageObject mageObject, Game game) {
         MageObjectAttribute mageObjectAtt = mageObjectAttribute.computeIfAbsent(mageObject.getId(), k -> new MageObjectAttribute(mageObject, game));
         return mageObjectAtt;
+    }
+
+    //Note: The Objects here should always be immutables
+    public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
+        return permanentCostsTags;
+    }
+
+    //Removes the cost tags if the corresponding permanent is no longer on the battlefield
+    //Only use if the stack is empty and nothing can refer to them anymore (such as at EOT, the current behavior)
+    public void cleanupPermanentCostsTags(Game game){
+        getPermanentCostsTags().entrySet().removeIf(entry ->
+                !(entry.getKey().zoneCounterIsCurrent(game))
+        );
     }
 
     public void addWatcher(Watcher watcher) {

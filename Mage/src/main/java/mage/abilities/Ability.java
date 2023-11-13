@@ -26,6 +26,7 @@ import mage.watchers.Watcher;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -156,6 +157,14 @@ public interface Ability extends Controllable, Serializable {
     ManaCosts<ManaCost> getManaCostsToPay();
 
     void addManaCostsToPay(ManaCost manaCost);
+
+    /**
+     * Gets a map of the cost tags (set while casting/activating)
+     * Note that tag entries should always be immutable
+     *
+     * @return The map of tags and corresponding objects (usually Integer or Boolean, sometimes other)
+     */
+    Map<String, Object> getCostsTagMap();
 
     /**
      * Retrieves the effects that are put into the place by the resolution of

@@ -83,6 +83,7 @@ public abstract class AbilityImpl implements Ability {
     protected MageIdentifier identifier = MageIdentifier.Default; // used to identify specific ability (e.g. to match with corresponding watcher)
     protected String appendToRule = null;
     protected int sourcePermanentTransformCount = 0;
+    private Map<String, Object> costsTagMap = new HashMap<>();
 
     protected AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -140,6 +141,7 @@ public abstract class AbilityImpl implements Ability {
         this.activated = ability.activated;
         this.appendToRule = ability.appendToRule;
         this.sourcePermanentTransformCount = ability.sourcePermanentTransformCount;
+        this.costsTagMap.putAll(ability.getCostsTagMap());
     }
 
     @Override
@@ -711,6 +713,16 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public ManaCosts<ManaCost> getManaCostsToPay() {
         return manaCostsToPay;
+    }
+
+    /**
+     * Accessed to see what was optional/variable costs were paid
+     *
+     * @return
+     */
+    @Override
+    public Map<String, Object> getCostsTagMap() {
+        return costsTagMap;
     }
 
     @Override

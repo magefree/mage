@@ -1,9 +1,6 @@
 package mage.game.stack;
 
-import mage.MageInt;
-import mage.MageObject;
-import mage.Mana;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
@@ -336,6 +333,8 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                 } else {
                     permId = card.getId();
+                    MageObjectReference mor = new MageObjectReference(getSpellAbility());
+                    game.getPermanentCostsTags().put(mor,getSpellAbility().getCostsTagMap());
                     flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 }
                 if (flag) {
@@ -397,6 +396,8 @@ public class Spell extends StackObjectImpl implements Card {
             token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
             return true;
         } else {
+            MageObjectReference mor = new MageObjectReference(getSpellAbility());
+            game.getPermanentCostsTags().put(mor,getSpellAbility().getCostsTagMap());
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
         }
     }

@@ -33,10 +33,7 @@ import mage.util.SubTypes;
 import mage.util.functions.StackObjectCopyApplier;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -402,7 +399,10 @@ public class StackAbility extends StackObjectImpl implements Ability {
     public void addManaCostsToPay(ManaCost manaCost) {
         // Do nothing
     }
-
+    @Override
+    public Map<String, Object> getCostsTagMap() {
+        return ability.getCostsTagMap();
+    }
     @Override
     public AbilityType getAbilityType() {
         return ability.getAbilityType();
