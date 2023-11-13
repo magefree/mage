@@ -5,7 +5,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -34,7 +36,8 @@ public final class Biovisionary extends CardImpl {
                 Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), 
                 TargetController.NEXT,
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3),
-                false));
+                false
+        ).addHint(new ValueHint("Creatures you control named Biovisionary", new PermanentsOnBattlefieldCount(filter))));
     }
 
     private Biovisionary(final Biovisionary card) {
