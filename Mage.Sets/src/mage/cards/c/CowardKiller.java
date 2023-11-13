@@ -8,7 +8,7 @@ import mage.abilities.effects.common.counter.TimeTravelEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,8 +48,6 @@ public final class CowardKiller extends SplitCard {
 
 class KillerEffect extends OneShotEffect {
 
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
     KillerEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target creature and each other creature that shares a creature type with it";
@@ -63,10 +61,10 @@ class KillerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
         if (target != null) {
-            target.damage(3, source.getSourceId(), source, game);
-            for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            target.damage(3, source, game);
+            for (Permanent p : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 if (!target.getId().equals(p.getId()) && p.shareCreatureTypes(game,target)) {
-                    p.damage(3, source.getSourceId(), source, game, false, true);
+                    p.damage(3, source, game);
                 }
             }
             return true;

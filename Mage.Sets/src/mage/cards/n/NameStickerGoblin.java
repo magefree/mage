@@ -24,6 +24,9 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
+ * This is the MTGO variant of the card
+ * <a href="https://www.mtgo.com/news/mtgo-woe-8292023#unfinity">Original announcement</a>
+ * <a href="https://scryfall.com/card/unf/107m/name-sticker-goblin">Scryfall link</a>
  * @author notgreat
  */
 public final class NameStickerGoblin extends CardImpl {
@@ -87,7 +90,9 @@ class NameStickerGoblinTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null) return false;
+        if (permanent == null) {
+            return false;
+        }
         Zone zone = ((EntersTheBattlefieldEvent) event).getFromZone();
         return zone != Zone.GRAVEYARD && zone != Zone.EXILED
                 && permanent.getId().equals(getSourceId());

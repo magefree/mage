@@ -43,6 +43,7 @@ public final class ThijarianWitness extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
+        // Bear Witness -- Whenever another creature dies, if it was attacking or blocking alone, exile it and investigate.
         DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(
                 new ExileTargetEffect().setText("if it was attacking or blocking alone, exile it"),
                 false, filter, true

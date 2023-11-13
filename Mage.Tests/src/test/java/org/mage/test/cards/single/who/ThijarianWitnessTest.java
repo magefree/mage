@@ -112,14 +112,14 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
     }
     @Test
     public void test_AttackAndBlock() {
-        //auto-stack triggers
-        //setStrictChooseMode(true);
+        setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, witness);
         addCard(Zone.BATTLEFIELD, playerA, tiny);
         addCard(Zone.BATTLEFIELD, playerB, tiny);
 
         attack(1, playerA, tiny);
         block(1, playerB, tiny, tiny);
+        setChoice(playerA, ""); //stack triggers
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -150,8 +150,7 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
     }
     @Test
     public void test_multipleWitness() {
-        //auto-stack triggers
-        //setStrictChooseMode(true);
+        setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, witness);
         addCard(Zone.BATTLEFIELD, playerB, witness);
         addCard(Zone.BATTLEFIELD, playerA, tiny);
@@ -159,6 +158,7 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
 
         attack(1, playerA, tiny);
         block(1, playerB, tiny, tiny);
+        setChoice(playerA, ""); //stack triggers
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
