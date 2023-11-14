@@ -2,18 +2,15 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,11 +31,7 @@ public final class RegenerationsRestored extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}");
 
         // Vanishing 12
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(12)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(12));
-        this.addAbility(new VanishingSacrificeAbility());
+        this.addAbility(new VanishingAbility(12));
 
         // Whenever one or more time counters are removed from Regenerations Restored, scry 1 and you gain 1 life. Then if Regenerations Restored has no time counters on it, exile it. When you do, take an extra turn after this one.
         this.addAbility(new RegenerationsRestoredTriggeredAbility());
