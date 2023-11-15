@@ -19,8 +19,10 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Abyssal Persecutor", 525, Rarity.MYTHIC, mage.cards.a.AbyssalPersecutor.class));
         cards.add(new SetCardInfo("Access Tunnel", 294, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));
         cards.add(new SetCardInfo("Ancient Tomb", 357, Rarity.MYTHIC, mage.cards.a.AncientTomb.class));
+        cards.add(new SetCardInfo("Anduril, Narsil Reforged", 491, Rarity.RARE, mage.cards.a.AndurilNarsilReforged.class));
         cards.add(new SetCardInfo("Anger", 210, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 265, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
+        cards.add(new SetCardInfo("Aragorn, Hornburg Hero", 492, Rarity.MYTHIC, mage.cards.a.AragornHornburgHero.class));
         cards.add(new SetCardInfo("Aragorn, King of Gondor", 5, Rarity.MYTHIC, mage.cards.a.AragornKingOfGondor.class));
         cards.add(new SetCardInfo("Arbor Elf", 232, Rarity.COMMON, mage.cards.a.ArborElf.class));
         cards.add(new SetCardInfo("Arboreal Alliance", 497, Rarity.RARE, mage.cards.a.ArborealAlliance.class));
@@ -112,6 +114,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Feasting Hobbit", 37, Rarity.RARE, mage.cards.f.FeastingHobbit.class));
         cards.add(new SetCardInfo("Feed the Swarm", 200, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fell Beast of Mordor", 513, Rarity.RARE, mage.cards.f.FellBeastOfMordor.class));
+        cards.add(new SetCardInfo("Fell Beast's Shriek", 508, Rarity.RARE, mage.cards.f.FellBeastsShriek.class));
         cards.add(new SetCardInfo("Fell the Mighty", 167, Rarity.RARE, mage.cards.f.FellTheMighty.class));
         cards.add(new SetCardInfo("Field of Ruin", 308, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
         cards.add(new SetCardInfo("Field-Tested Frying Pan", 11, Rarity.RARE, mage.cards.f.FieldTestedFryingPan.class));
@@ -130,6 +133,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furycalm Snarl", 313, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Galadhrim Ambush", 38, Rarity.RARE, mage.cards.g.GaladhrimAmbush.class));
         cards.add(new SetCardInfo("Galadhrim Brigade", 502, Rarity.RARE, mage.cards.g.GaladhrimBrigade.class));
+        cards.add(new SetCardInfo("Galadriel's Dismissal", 500, Rarity.RARE, mage.cards.g.GaladrielsDismissal.class));
         cards.add(new SetCardInfo("Galadriel, Elven-Queen", 3, Rarity.MYTHIC, mage.cards.g.GaladrielElvenQueen.class));
         cards.add(new SetCardInfo("Galadriel, Light of Valinor", 498, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class));
         cards.add(new SetCardInfo("Gandalf, Westward Voyager", 6, Rarity.MYTHIC, mage.cards.g.GandalfWestwardVoyager.class));
@@ -139,6 +143,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gilded Goose", 246, Rarity.RARE, mage.cards.g.GildedGoose.class));
         cards.add(new SetCardInfo("Gilraen, Dunedain Protector", 13, Rarity.RARE, mage.cards.g.GilraenDunedainProtector.class));
         cards.add(new SetCardInfo("Gimli of the Glittering Caves", 32, Rarity.RARE, mage.cards.g.GimliOfTheGlitteringCaves.class));
+        cards.add(new SetCardInfo("Gimli's Reckless Might", 494, Rarity.RARE, mage.cards.g.GimlisRecklessMight.class));
         cards.add(new SetCardInfo("Glacial Fortress", 315, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Go for the Throat", 201, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Goblin Cratermaker", 218, Rarity.UNCOMMON, mage.cards.g.GoblinCratermaker.class));
@@ -168,6 +173,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Increasing Devotion", 171, Rarity.RARE, mage.cards.i.IncreasingDevotion.class));
         cards.add(new SetCardInfo("Inferno Titan", 223, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
         cards.add(new SetCardInfo("Inscription of Abundance", 251, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
+        cards.add(new SetCardInfo("Isengard Unleashed", 495, Rarity.RARE, mage.cards.i.IsengardUnleashed.class));
         cards.add(new SetCardInfo("Ishkanah, Grafwidow", 516, Rarity.MYTHIC, mage.cards.i.IshkanahGrafwidow.class));
         cards.add(new SetCardInfo("Isolated Chapel", 318, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Karakas", 367, Rarity.MYTHIC, mage.cards.k.Karakas.class));
@@ -192,11 +198,14 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Merciless Executioner", 204, Rarity.UNCOMMON, mage.cards.m.MercilessExecutioner.class));
         cards.add(new SetCardInfo("Merry, Warden of Isengard", 61, Rarity.RARE, mage.cards.m.MerryWardenOfIsengard.class));
         cards.add(new SetCardInfo("Minamo, School at Water's Edge", 369, Rarity.MYTHIC, mage.cards.m.MinamoSchoolAtWatersEdge.class));
+        cards.add(new SetCardInfo("Minas Morgul, Dark Fortress", 514, Rarity.RARE, mage.cards.m.MinasMorgulDarkFortress.class));
         cards.add(new SetCardInfo("Mind Stone", 282, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mirkwood Elk", 41, Rarity.RARE, mage.cards.m.MirkwoodElk.class));
         cards.add(new SetCardInfo("Mirkwood Trapper", 62, Rarity.RARE, mage.cards.m.MirkwoodTrapper.class));
+        cards.add(new SetCardInfo("Mists of Lorien", 501, Rarity.RARE, mage.cards.m.MistsOfLorien.class));
         cards.add(new SetCardInfo("Model of Unity", 78, Rarity.RARE, mage.cards.m.ModelOfUnity.class));
         cards.add(new SetCardInfo("Monstrosity of the Lake", 22, Rarity.RARE, mage.cards.m.MonstrosityOfTheLake.class));
+        cards.add(new SetCardInfo("Mordor on the March", 512, Rarity.RARE, mage.cards.m.MordorOnTheMarch.class));
         cards.add(new SetCardInfo("Moria Scavenger", 63, Rarity.RARE, mage.cards.m.MoriaScavenger.class));
         cards.add(new SetCardInfo("Mortify", 269, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Motivated Pony", 42, Rarity.RARE, mage.cards.m.MotivatedPony.class));
@@ -204,6 +213,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Murmuring Bosk", 320, Rarity.RARE, mage.cards.m.MurmuringBosk.class));
         cards.add(new SetCardInfo("Myriad Landscape", 534, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Confluence", 193, Rarity.RARE, mage.cards.m.MysticConfluence.class));
+        cards.add(new SetCardInfo("Nazgul Battle-Mace", 510, Rarity.RARE, mage.cards.n.NazgulBattleMace.class));
         cards.add(new SetCardInfo("Necroblossom Snarl", 321, Rarity.RARE, mage.cards.n.NecroblossomSnarl.class));
         cards.add(new SetCardInfo("Night's Whisper", 205, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Notion Thief", 270, Rarity.RARE, mage.cards.n.NotionThief.class));
@@ -230,6 +240,8 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prosperous Innkeeper", 256, Rarity.UNCOMMON, mage.cards.p.ProsperousInnkeeper.class));
         cards.add(new SetCardInfo("Radagast, Wizard of Wilds", 66, Rarity.RARE, mage.cards.r.RadagastWizardOfWilds.class));
         cards.add(new SetCardInfo("Raise the Palisade", 23, Rarity.RARE, mage.cards.r.RaiseThePalisade.class));
+        cards.add(new SetCardInfo("Rally the Galadhrim", 499, Rarity.RARE, mage.cards.r.RallyTheGaladhrim.class));
+        cards.add(new SetCardInfo("Rammas Echor, Ancient Shield", 505, Rarity.RARE, mage.cards.r.RammasEchorAncientShield.class));
         cards.add(new SetCardInfo("Rampaging War Mammoth", 34, Rarity.RARE, mage.cards.r.RampagingWarMammoth.class));
         cards.add(new SetCardInfo("Rampant Growth", 257, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rapacious Guest", 28, Rarity.RARE, mage.cards.r.RapaciousGuest.class));
@@ -244,6 +256,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rings of Brighthearth", 352, Rarity.MYTHIC, mage.cards.r.RingsOfBrighthearth.class));
         cards.add(new SetCardInfo("River Kelpie", 524, Rarity.RARE, mage.cards.r.RiverKelpie.class));
         cards.add(new SetCardInfo("Rogue's Passage", 326, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Rohirrim Chargers", 496, Rarity.RARE, mage.cards.r.RohirrimChargers.class));
         cards.add(new SetCardInfo("Sail into the West", 68, Rarity.RARE, mage.cards.s.SailIntoTheWest.class));
         cards.add(new SetCardInfo("Sam, Loyal Attendant", 7, Rarity.MYTHIC, mage.cards.s.SamLoyalAttendant.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 327, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
@@ -329,6 +342,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wind-Scarred Crag", 344, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 345, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Windswift Slice", 45, Rarity.RARE, mage.cards.w.WindswiftSlice.class));
+        cards.add(new SetCardInfo("Witch-king, Sky Scourge", 511, Rarity.MYTHIC, mage.cards.w.WitchKingSkyScourge.class));
         cards.add(new SetCardInfo("Wood Elves", 263, Rarity.COMMON, mage.cards.w.WoodElves.class));
         cards.add(new SetCardInfo("Woodfall Primus", 264, Rarity.RARE, mage.cards.w.WoodfallPrimus.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 346, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
