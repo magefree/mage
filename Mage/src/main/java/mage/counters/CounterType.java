@@ -55,6 +55,7 @@ public enum CounterType {
     DESCENT("descent"),
     DESPAIR("despair"),
     DEVOTION("devotion"),
+    DISCOVERY("discovery"),
     DIVINITY("divinity"),
     DOOM("doom"),
     DOUBLE_STRIKE("double strike"),
