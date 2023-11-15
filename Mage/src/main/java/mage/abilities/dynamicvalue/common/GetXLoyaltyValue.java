@@ -1,8 +1,6 @@
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
@@ -16,7 +14,7 @@ public enum GetXLoyaltyValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return (int) CardUtil.getSourceCostTags(game, sourceAbility).getOrDefault("X",0);
+        return (int) CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override

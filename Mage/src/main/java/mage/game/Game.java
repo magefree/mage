@@ -120,6 +120,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Map<Zone, Map<UUID, MageObject>> getLKI();
     Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags();
+    //Take the source's Costs Tags and store it for later access through the MOR.
+    void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source);
 
     // Result must be checked for null. Possible errors search pattern: (\S*) = game.getCard.+\n(?!.+\1 != null)
     Card getCard(UUID cardId);

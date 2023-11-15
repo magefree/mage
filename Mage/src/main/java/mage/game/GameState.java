@@ -1375,9 +1375,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         return mageObjectAtt;
     }
 
-    //Note: The Objects here should always be immutables
     public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
         return permanentCostsTags;
+    }
+
+    void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
+        permanentCostsTags.put(permanentMOR, source.getCostsTagMap());
     }
 
     //Removes the cost tags if the corresponding permanent is no longer on the battlefield

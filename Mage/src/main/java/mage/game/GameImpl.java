@@ -3566,6 +3566,10 @@ public abstract class GameImpl implements Game {
     public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
         return state.getPermanentCostsTags();
     }
+    @Override
+    public void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
+        state.storePermanentCostsTags(permanentMOR, source);
+    }
 
     @Override
     public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {

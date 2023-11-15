@@ -1654,7 +1654,7 @@ public final class CardUtil {
      * @param ability
      * @return MageObjectReference to the ability's source stack moment
      */
-    public static MageObjectReference getSourceStackMomentReference(Game game, Ability ability){
+    public static MageObjectReference getSourceStackMomentReference(Game game, Ability ability) {
         // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
         // Use cases:
         // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
@@ -1674,28 +1674,46 @@ public final class CardUtil {
         }
         return new MageObjectReference(ability.getSourceId(), zcc, game);
     }
-    /**
-     * Find cost tags of either the source ability, or the permanent source of the ability.
-     * Works in any moment (even before source ability activated)
-     * <p>
-     * Used for kicker and other similar effects
-     *
-     * @param game
-     * @param source
-     * @return CostTags mappings of the source object, or a blank map if not found
-     */
-    public static Map<String, Object> getSourceCostTags(Game game, Ability source){
+
+    //Use the two other functions below to access the tags, this is just the shared logic for them
+    private static Map<String, Object> getCostsTags(Game game, Ability source) {
         Map<String, Object> costTags;
         costTags = source.getCostsTagMap(); //Abilities always have a tag map
         if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
-            costTags = game.getPermanentCostsTags().get(getSourceStackMomentReference(game, source));
+            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
         }
-        if (costTags != null) {
-            return costTags;
-        }
-        return new HashMap<>(0);
+        return costTags;
     }
-
+    /**
+     * Check if a specific tag exists in the cost tags of either the source ability, or the permanent source of the ability.
+     * Works in any moment (even before source ability activated)
+     *
+     * @param game
+     * @param source
+     * @param tag The tag's string identifier to look up
+     * @return The object stored by the tag if found, the default if not
+     */
+    public static boolean checkSourceCostsTagExists(Game game, Ability source, String tag) {
+        Map<String, Object> costTags = getCostsTags(game, source);
+        return costTags != null && costTags.containsKey(tag);
+    }
+    /**
+     * Find a specific tag in the cost tags of either the source ability, or the permanent source of the ability.
+     * Works in any moment (even before source ability activated)
+     *
+     * @param game
+     * @param source
+     * @param tag The tag's string identifier to look up
+     * @param defaultValue A default value to return if the tag is not found
+     * @return The object stored by the tag if found, the default if not
+     */
+    public static Object getSourceCostsTag(Game game, Ability source, String tag, Object defaultValue){
+        Map<String, Object> costTags = getCostsTags(game, source);
+        if (costTags != null) {
+            return costTags.getOrDefault(tag, defaultValue);
+        }
+        return defaultValue;
+    }
 
     public static String addCostVerb(String text) {
         if (costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith)) {
