@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public interface Cards extends Set<UUID>, Serializable {
+public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
 
     /**
      * Add the passed in card to the set if it's not null.

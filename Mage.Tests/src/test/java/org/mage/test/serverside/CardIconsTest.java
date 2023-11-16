@@ -65,7 +65,7 @@ public class CardIconsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_CostX_Copies() {
+    public void test_CostX_StackCopy() {
         // Grenzo, Dungeon Warden enters the battlefield with X +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Grenzo, Dungeon Warden", 1);// {X}{B}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
@@ -125,6 +125,67 @@ public class CardIconsTest extends CardTestPlayerBase {
             PlayerView playerView = gameView.getPlayers().get(0);
             Assert.assertEquals("player", player.getName(), playerView.getName());
             // copied spell goes as token to battlefield, not copied card - so must check isToken
+            // original
+            CardView originalCardView = playerView.getBattlefield().values()
+                    .stream()
+                    .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
+                    .filter(p -> !p.isToken())
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull("original card must be in battlefield", originalCardView);
+            Assert.assertEquals("original must have x cost card icons", 1, originalCardView.getCardIcons().size());
+            Assert.assertEquals("original x cost text", "x=2", originalCardView.getCardIcons().get(0).getText());
+            //
+            CardView copiedCardView = playerView.getBattlefield().values()
+                    .stream()
+                    .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
+                    .filter(p -> p.isToken())
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull("copied card must be in battlefield", copiedCardView);
+            Assert.assertEquals("copied must have x cost card icons", 1, copiedCardView.getCardIcons().size());
+            Assert.assertEquals("copied x cost text", "x=2", copiedCardView.getCardIcons().get(0).getText());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_CostX_TokenCopy() {
+        //Legend Rule doesn't apply
+        addCard(Zone.BATTLEFIELD, playerA, "Mirror Gallery", 1);
+        // Grenzo, Dungeon Warden enters the battlefield with X +1/+1 counters on it.
+        addCard(Zone.HAND, playerA, "Grenzo, Dungeon Warden", 1);// {X}{B}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // Create a token that's a copy of target creature you control.
+        // should not copy the X value of the Grenzo
+        addCard(Zone.HAND, playerA, "Quasiduplicate", 1); // {1}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // cast Grenzo
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grenzo, Dungeon Warden");
+        setChoice(playerA, "X=2");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // cast Quasiduplicate
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 3);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quasiduplicate", "Grenzo, Dungeon Warden");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grenzo, Dungeon Warden", 2);
+
+        // battlefield (card and copied card as token)
+        runCode("card icons in battlefield (cloned)", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            PlayerView playerView = gameView.getPlayers().get(0);
+            Assert.assertEquals("player", player.getName(), playerView.getName());
             // original
             CardView originalCardView = playerView.getBattlefield().values()
                     .stream()

@@ -1,6 +1,7 @@
 package mage.counters;
 
 import mage.util.CardUtil;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 
@@ -9,7 +10,7 @@ import org.apache.log4j.Logger;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Counter implements Serializable {
+public class Counter implements Serializable, Copyable<Counter> {
 
     private static final Logger logger = Logger.getLogger(Counter.class);
 

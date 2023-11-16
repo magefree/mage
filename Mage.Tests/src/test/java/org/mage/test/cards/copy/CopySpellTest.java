@@ -10,6 +10,8 @@ import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -571,10 +573,10 @@ public class CopySpellTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_CopiedSpellsHasntETB() {
+    public void test_CopiedSpellsETBCounters() {
         // testing:
         // - x in copied creature spell (copy x)
-        // - copied spells enters as tokens and it hasn't ETB, see rules below
+        // - copied spells enters as tokens and correctly ETB, see rules below
 
         // 0/0
         // Capricopian enters the battlefield with X +1/+1 counters on it.
@@ -616,36 +618,34 @@ public class CopySpellTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Grenzo, Dungeon Warden", "Grenzo, Dungeon Warden");
 
-        // ETB triggers will not trigger here due not normal cast. From rules:
-        // - The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2021-04-16)
-        // - A nontoken permanent “enters the battlefield” when it’s moved onto the battlefield from another zone.
-        //   A token “enters the battlefield” when it’s created. See rules 403.3, 603.6a, 603.6d, and 614.12.
-        //
-        // So both copies enters without counters:
-        // - Capricopian copy must die
-        // - Grenzo, Dungeon Warden must have default PT
+        // 608.3f If the object that’s resolving is a copy of a permanent spell, it will become a token permanent
+        //   as it is put onto the battlefield in any of the steps above.
+        // 111.12. A copy of a permanent spell becomes a token as it resolves. The token has the characteristics of
+        //   the spell that became that token. The token is not “created” for the purposes of any replacement effects
+        //   or triggered abilities that refer to creating a token.
+        // The tokens must enter with counters
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian", 1); // copy dies
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian", 2);
         checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grenzo, Dungeon Warden", 2);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        // counters checks
+        // counters checks, have to check if it's a card or a token since token copies have isCopy()=false
         int originalCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
                 .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
-                .filter(p -> !p.isCopy())
+                .filter(p -> p instanceof PermanentCard)
                 .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
                 .sum();
         int copyCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
                 .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
-                .filter(p -> p.isCopy())
+                .filter(p -> p instanceof PermanentToken)
                 .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
                 .sum();
         Assert.assertEquals("original grenzo must have 2x counters", 2, originalCounters);
-        Assert.assertEquals("copied grenzo must have 0x counters", 0, copyCounters);
+        Assert.assertEquals("copied grenzo must have 2x counters", 2, copyCounters);
     }
 
     @Test
@@ -748,7 +748,6 @@ public class CopySpellTest extends CardTestPlayerBase {
      * Thieving Skydiver is kicked and then copied, but the copied version does not let you gain control of anything.
      */
     @Test
-    @Ignore
     public void copySpellWithKicker() {
         // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with mana value X or less.
         // If that artifact is an Equipment, attach it to Thieving Skydiver.
@@ -758,7 +757,8 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3); // Original price, + 1 kicker, + 1 for Double Major
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Sol Ring", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Sol Ring", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Expedition Map", 1);
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thieving Skydiver");
@@ -766,14 +766,16 @@ public class CopySpellTest extends CardTestPlayerBase {
         setChoice(playerA, "X=1");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Thieving Skydiver", "Thieving Skydiver");
         addTarget(playerA, "Sol Ring"); // Choice for copy
-        addTarget(playerA, "Sol Ring"); // Choice for original
+        addTarget(playerA, "Expedition Map"); // Choice for original
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
 
-        assertPermanentCount(playerA, "Sol Ring", 2); // 1 taken by original, one by copy
+        assertPermanentCount(playerA, "Sol Ring", 1);
+        assertPermanentCount(playerA, "Expedition Map", 1);
         assertPermanentCount(playerB, "Sol Ring", 0);
+        assertPermanentCount(playerB, "Expedition Map", 0);
     }
 
     private void abilitySourceMustBeSame(Card card, String infoPrefix) {

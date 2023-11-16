@@ -2,6 +2,7 @@ package mage.game;
 
 import mage.MageException;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
@@ -184,48 +185,16 @@ public abstract class GameImpl implements Game {
         //this.tableEventSource = game.tableEventSource; // client-server part, not need on copy/simulations
         //this.playerQueryEventSource = game.playerQueryEventSource; // client-server part, not need on copy/simulations
 
-        for (Entry<UUID, Card> entry : game.gameCards.entrySet()) {
-            this.gameCards.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Entry<UUID, MeldCard> entry : game.meldCards.entrySet()) {
-            this.meldCards.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.gameCards = CardUtil.deepCopyObject(game.gameCards);
+        this.meldCards = CardUtil.deepCopyObject(game.meldCards);
 
-        // lki
-        for (Entry<Zone, Map<UUID, MageObject>> entry : game.lki.entrySet()) {
-            Map<UUID, MageObject> lkiMap = new HashMap<>();
-            for (Entry<UUID, MageObject> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lki.put(entry.getKey(), lkiMap);
-        }
-        // lkiCardState
-        for (Entry<Zone, Map<UUID, CardState>> entry : game.lkiCardState.entrySet()) {
-            Map<UUID, CardState> lkiMap = new HashMap<>();
-            for (Entry<UUID, CardState> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lkiCardState.put(entry.getKey(), lkiMap);
-        }
-        // lkiExtended
-        for (Entry<UUID, Map<Integer, MageObject>> entry : game.lkiExtended.entrySet()) {
-            Map<Integer, MageObject> lkiMap = new HashMap<>();
-            for (Entry<Integer, MageObject> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lkiExtended.put(entry.getKey(), lkiMap);
-        }
-        // lkiShortLiving
-        for (Entry<Zone, Set<UUID>> entry : game.lkiShortLiving.entrySet()) {
-            this.lkiShortLiving.put(entry.getKey(), new HashSet<>(entry.getValue()));
-        }
+        this.lki = CardUtil.deepCopyObject(game.lki);
+        this.lkiCardState = CardUtil.deepCopyObject(game.lkiCardState);
+        this.lkiExtended = CardUtil.deepCopyObject(game.lkiExtended);
+        this.lkiShortLiving = CardUtil.deepCopyObject(game.lkiShortLiving);
 
-        for (Entry<UUID, Permanent> entry : game.permanentsEntering.entrySet()) {
-            this.permanentsEntering.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Entry<UUID, Counters> entry : game.enterWithCounters.entrySet()) {
-            this.enterWithCounters.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.permanentsEntering = CardUtil.deepCopyObject(game.permanentsEntering);
+        this.enterWithCounters = CardUtil.deepCopyObject(game.enterWithCounters);
 
         this.state = game.state.copy();
         // client-server part, not need on copy/simulations:
@@ -1451,6 +1420,10 @@ public abstract class GameImpl implements Game {
             player.endOfTurn(this);
         }
         state.resetWatchers();
+        // Could be done any time as long as the stack is empty
+        // Tags are stored in the game state as a spell resolves into a permanent
+        // and must be kept while any abilities with that permanent as a source could resolve
+        state.cleanupPermanentCostsTags(this);
     }
 
     protected UUID pickChoosingPlayer() {
@@ -3558,6 +3531,15 @@ public abstract class GameImpl implements Game {
     @Override
     public Map<Zone, Map<UUID, MageObject>> getLKI() {
         return lki;
+    }
+
+    @Override
+    public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
+        return state.getPermanentCostsTags();
+    }
+    @Override
+    public void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
+        state.storePermanentCostsTags(permanentMOR, source);
     }
 
     @Override

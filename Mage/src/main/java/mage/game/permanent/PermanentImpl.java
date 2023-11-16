@@ -144,13 +144,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
         this.markedLifelink = permanent.markedLifelink;
-
-        for (Map.Entry<String, List<UUID>> entry : permanent.connectedCards.entrySet()) {
-            this.connectedCards.put(entry.getKey(), new ArrayList<>(entry.getValue()));
-        }
-        if (permanent.dealtDamageByThisTurn != null) {
-            dealtDamageByThisTurn = new HashSet<>(permanent.dealtDamageByThisTurn);
-        }
+        this.connectedCards = CardUtil.deepCopyObject(permanent.connectedCards);
+        this.dealtDamageByThisTurn = CardUtil.deepCopyObject(permanent.dealtDamageByThisTurn);
         if (permanent.markedDamage != null) {
             markedDamage = new ArrayList<>();
             for (MarkedDamageInfo mdi : permanent.markedDamage) {

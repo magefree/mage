@@ -1,8 +1,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
@@ -59,19 +57,12 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
             }
         }
         if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
-                if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast
-                    int amount = spellAbility.getManaCostsToPay().getX() * this.multiplier;
-                    if (amount > 0) {
-                        Counter counterToAdd = counter.copy();
-                        counterToAdd.add(amount - counter.getCount());
-                        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                        permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
-                    }
-                }
+            int amount = ((int) CardUtil.getSourceCostsTag(game, source, "X", 0)) * multiplier;
+            if (amount > 0) {
+                Counter counterToAdd = counter.copy();
+                counterToAdd.add(amount - counter.getCount());
+                List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
             }
         }
         return true;

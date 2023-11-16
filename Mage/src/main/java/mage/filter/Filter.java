@@ -2,6 +2,7 @@ package mage.filter;
 
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public interface Filter<E> extends Serializable {
+public interface Filter<E> extends Serializable, Copyable<Filter<E>> {
 
     enum ComparisonScope {
         Any, All

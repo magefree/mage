@@ -25,8 +25,6 @@ import java.util.UUID;
 public class ManaSpentToCastWatcher extends Watcher {
 
     private final Map<UUID, Mana> manaMap = new HashMap<>();
-    private final Map<UUID, Integer> xValueMap = new HashMap<>();
-    private final Map<UUID, Integer> xValueMapLong = new HashMap<>(); // do not reset, keep until game end
 
     public ManaSpentToCastWatcher() {
         super(WatcherScope.GAME);
@@ -40,15 +38,11 @@ public class ManaSpentToCastWatcher extends Watcher {
                 Spell spell = (Spell) game.getObject(event.getTargetId());
                 if (spell != null) {
                     manaMap.put(spell.getSourceId(), spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay());
-                    xValueMap.put(spell.getSourceId(), spell.getSpellAbility().getManaCostsToPay().getX());
-                    xValueMapLong.put(spell.getSourceId(), spell.getSpellAbility().getManaCostsToPay().getX());
                 }
                 return;
             case ZONE_CHANGE:
                 if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                     manaMap.remove(event.getTargetId());
-                    xValueMap.remove(event.getTargetId());
-                    xValueMapLong.remove(event.getTargetId());
                 }
         }
     }
@@ -57,29 +51,9 @@ public class ManaSpentToCastWatcher extends Watcher {
         return manaMap.getOrDefault(sourceId, null);
     }
 
-    /**
-     * Return X value for casted spell or permanents
-     *
-     * @param source
-     * @param useLongSource - use X value that keeps until end of game (for info only)
-     * @return
-     */
-    public int getLastXValue(Ability source, boolean useLongSource) {
-        Map<UUID, Integer> xSource = useLongSource ? this.xValueMapLong : this.xValueMap;
-        if (xSource.containsKey(source.getSourceId())) {
-            // cast normal way
-            return xSource.get(source.getSourceId());
-        } else {
-            // put to battlefield without cast (example: copied spell must keep announced X)
-            return source.getManaCostsToPay().getX();
-        }
-    }
-
     @Override
     public void reset() {
         super.reset();
         manaMap.clear();
-        xValueMap.clear();
-        // xValueMapLong.clear(); // must keep until game end, so don't clear between turns
     }
 }
