@@ -1677,8 +1677,17 @@ public final class CardUtil {
         return new MageObjectReference(ability.getSourceId(), zcc, game);
     }
 
-    //Use the two other functions below to access the tags, this is just the shared logic for them
-    private static Map<String, Object> getCostsTags(Game game, Ability source) {
+    /**
+     * Returns the entire cost tags map of either the source ability, or the permanent source of the ability. May be null.
+     * Works in any moment (even before source ability activated)
+     * Usually you should use one of the single tag functions instead
+     *
+     * @param game
+     * @param source
+     * @return the tag map (or null)
+     */
+    //
+    public static Map<String, Object> getSourceCostsTags(Game game, Ability source) {
         Map<String, Object> costTags;
         costTags = source.getCostsTagMap();
         if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
@@ -1696,7 +1705,7 @@ public final class CardUtil {
      * @return if the tag was found
      */
     public static boolean checkSourceCostsTagExists(Game game, Ability source, String tag) {
-        Map<String, Object> costTags = getCostsTags(game, source);
+        Map<String, Object> costTags = getSourceCostsTags(game, source);
         return costTags != null && costTags.containsKey(tag);
     }
     /**
@@ -1710,7 +1719,7 @@ public final class CardUtil {
      * @return The object stored by the tag if found, the default if not
      */
     public static Object getSourceCostsTag(Game game, Ability source, String tag, Object defaultValue){
-        Map<String, Object> costTags = getCostsTags(game, source);
+        Map<String, Object> costTags = getSourceCostsTags(game, source);
         if (costTags != null) {
             return costTags.getOrDefault(tag, defaultValue);
         }

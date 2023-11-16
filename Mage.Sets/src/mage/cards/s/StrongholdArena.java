@@ -73,7 +73,7 @@ class StrongholdArenaGainLifeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        controller.gainLife(KickerAbility.getSourceObjectKickedCount(game, source) * 3, game, source);
+        controller.gainLife(KickerAbility.getKickedCounter(game, source) * 3, game, source);
         return true;
     }
 }
