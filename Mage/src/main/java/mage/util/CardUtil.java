@@ -1730,113 +1730,113 @@ public final class CardUtil {
                 || o instanceof MageObjectReference || o instanceof UUID
                 || o.getClass().isEnum();
     }
-    public static Object deepCopyObject(Object value){
+    public static <T> T deepCopyObject(T value){
         if (isImmutableObject(value)) { //immutable values
             return value;
         } else if (value instanceof Copyable) {
-            return ((Copyable)value).copy();
+            return (T) ((Copyable<T>)value).copy();
         } else if (value instanceof Watcher) {
-            return ((Watcher)value).copy();
+            return (T) ((Watcher)value).copy();
         } else if (value instanceof Ability) {
-            return ((Ability)value).copy();
+            return (T) ((Ability)value).copy();
         } else if (value instanceof PlayerList) {
-            return ((PlayerList)value).copy();
+            return (T) ((PlayerList)value).copy();
         } else if (value instanceof EnumSet) {
-            return ((EnumSet) value).clone();
+            return (T) ((EnumSet) value).clone();
         } else if (value instanceof LinkedHashSet) {
-            return deepCopyLinkedHashSet((LinkedHashSet) value);
+            return (T) deepCopyLinkedHashSet((LinkedHashSet) value);
         } else if (value instanceof LinkedHashMap) {
-            return deepCopyLinkedHashMap((LinkedHashMap) value);
+            return (T) deepCopyLinkedHashMap((LinkedHashMap) value);
         } else if (value instanceof TreeSet) {
-            return deepCopyTreeSet((TreeSet) value);
+            return (T) deepCopyTreeSet((TreeSet) value);
         } else if (value instanceof HashSet) {
-            return deepCopyHashSet((HashSet) value);
+            return (T) deepCopyHashSet((HashSet) value);
         } else if (value instanceof HashMap) {
-            return deepCopyHashMap((HashMap) value);
+            return (T) deepCopyHashMap((HashMap) value);
         } else if (value instanceof List) {
-            return deepCopyList((List) value);
+            return (T) deepCopyList((List) value);
         } else if (value instanceof AbstractMap.SimpleImmutableEntry){ //Used by Leonin Arbiter, Vessel Of The All Consuming Wanderer as a generic Pair class
             AbstractMap.SimpleImmutableEntry entryValue = (AbstractMap.SimpleImmutableEntry) value;
-            return new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()),deepCopyObject(entryValue.getValue()));
+            return (T) new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()),deepCopyObject(entryValue.getValue()));
         } else {
             throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " in map during deep copy, must add explicit handling of all Object types");
         }
     }
-    public static TreeSet<Object> deepCopyTreeSet(TreeSet<Object> original) {
+    public static <T extends Comparable<T>> TreeSet<T> deepCopyTreeSet(TreeSet<T> original) {
         if (original == null) {
             return null;
         }
         if (original.getClass() != TreeSet.class) {
             throw new IllegalStateException("Unhandled TreeSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        TreeSet<Object> newSet = new TreeSet<>();
-        for (Object value : original){
-            newSet.add(deepCopyObject(value));
+        TreeSet<T> newSet = new TreeSet<>();
+        for (T value : original){
+            newSet.add((T) deepCopyObject(value));
         }
         return newSet;
     }
-    public static HashSet<Object> deepCopyHashSet(HashSet<Object> original) {
+    public static <T> HashSet<T> deepCopyHashSet(HashSet<T> original) {
         if (original == null) {
             return null;
         }
         if (original.getClass() != HashSet.class) {
             throw new IllegalStateException("Unhandled HashSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        HashSet<Object> newSet = new HashSet<>(original.size());
-        for (Object value : original){
-            newSet.add(deepCopyObject(value));
+        HashSet<T> newSet = new HashSet<>(original.size());
+        for (T value : original){
+            newSet.add((T) deepCopyObject(value));
         }
         return newSet;
     }
-    public static LinkedHashSet<Object> deepCopyLinkedHashSet(LinkedHashSet<Object> original) {
+    public static <T> LinkedHashSet<T> deepCopyLinkedHashSet(LinkedHashSet<T> original) {
         if (original == null) {
             return null;
         }
         if (original.getClass() != LinkedHashSet.class) {
             throw new IllegalStateException("Unhandled LinkedHashSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        LinkedHashSet<Object> newSet = new LinkedHashSet<>(original.size());
-        for (Object value : original){
-            newSet.add(deepCopyObject(value));
+        LinkedHashSet<T> newSet = new LinkedHashSet<>(original.size());
+        for (T value : original){
+            newSet.add((T) deepCopyObject(value));
         }
         return newSet;
     }
-    public static List<Object> deepCopyList(List<Object> original) { //always returns an ArrayList
+    public static <T> List<T> deepCopyList(List<T> original) { //always returns an ArrayList
         if (original == null) {
             return null;
         }
         if (original.getClass() != ArrayList.class) {
             throw new IllegalStateException("Unhandled List type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        ArrayList<Object> newList = new ArrayList<>(original.size());
-        for (Object value : original){
-            newList.add(deepCopyObject(value));
+        ArrayList<T> newList = new ArrayList<>(original.size());
+        for (T value : original){
+            newList.add((T) deepCopyObject(value));
         }
         return newList;
     }
-    public static HashMap<Object, Object> deepCopyHashMap(HashMap<Object, Object> original) {
+    public static <K, V> HashMap<K, V> deepCopyHashMap(Map<K, V> original) {
         if (original == null) {
             return null;
         }
         if (original.getClass() != HashMap.class) {
             throw new IllegalStateException("Unhandled HashMap type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        HashMap<Object, Object> newMap = new HashMap<>(original.size());
-        for (Map.Entry<Object, Object> entry : original.entrySet()) {
-            newMap.put(deepCopyObject(entry.getKey()), deepCopyObject(entry.getValue()));
+        HashMap<K, V> newMap = new HashMap<>(original.size());
+        for (Map.Entry<K, V> entry : original.entrySet()) {
+            newMap.put((K) deepCopyObject(entry.getKey()), (V) deepCopyObject(entry.getValue()));
         }
         return newMap;
     }
-    public static LinkedHashMap<Object, Object> deepCopyLinkedHashMap(LinkedHashMap<Object, Object> original) {
+    public static <K, V> LinkedHashMap<K, V> deepCopyLinkedHashMap(Map<K, V> original) {
         if (original == null) {
             return null;
         }
         if (original.getClass() != LinkedHashMap.class) {
             throw new IllegalStateException("Unhandled LinkedHashMap type " + original.getClass().getSimpleName() + " in deep copy");
         }
-        LinkedHashMap<Object, Object> newMap = new LinkedHashMap<>(original.size());
-        for (Map.Entry<Object, Object> entry : original.entrySet()) {
-            newMap.put(deepCopyObject(entry.getKey()), deepCopyObject(entry.getValue()));
+        LinkedHashMap<K, V> newMap = new LinkedHashMap<>(original.size());
+        for (Map.Entry<K, V> entry : original.entrySet()) {
+            newMap.put((K) deepCopyObject(entry.getKey()), (V) deepCopyObject(entry.getValue()));
         }
         return newMap;
     }
