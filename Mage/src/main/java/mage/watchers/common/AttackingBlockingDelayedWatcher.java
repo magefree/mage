@@ -16,18 +16,16 @@ import java.util.UUID;
  *  3) Land playing or special action taken (just in case that then causes a static effect to kill)
  * Thus the information is available after any involved creatures die
  * and all dying creatures can see all other creatures that were in combat at that time
- * <p>
- * Warning: This information is NOT to be used for static effects
- * since the information will always be outdated.
+ * WARNING: This information is NOT to be used for static effects since the information will always be outdated.
  * Use game.getCombat() directly or one of the other combat watchers instead
  * @author notgreat
  */
-public class AttackingBlockingWatcher extends Watcher {
+public class AttackingBlockingDelayedWatcher extends Watcher {
 
     private Set<UUID> attackers = new HashSet<>();
     private Set<UUID> blockers = new HashSet<>();
 
-    public AttackingBlockingWatcher() {
+    public AttackingBlockingDelayedWatcher() {
         super(WatcherScope.GAME);
     }
     @Override
@@ -66,7 +64,7 @@ public class AttackingBlockingWatcher extends Watcher {
         return attackers.size();
     }
 
-    public static AttackingBlockingWatcher getWatcher(Game game) {
-        return game.getState().getWatcher(AttackingBlockingWatcher.class);
+    public static AttackingBlockingDelayedWatcher getWatcher(Game game) {
+        return game.getState().getWatcher(AttackingBlockingDelayedWatcher.class);
     }
 }

@@ -15,7 +15,7 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.AttackingBlockingWatcher;
+import mage.watchers.common.AttackingBlockingDelayedWatcher;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class ThijarianWitness extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(AttackBlockAlonePredicate.instance);
+        filter.add(WasAttackBlockAlonePredicate.instance);
     }
 
     public ThijarianWitness(UUID ownerId, CardSetInfo setInfo) {
@@ -50,7 +50,7 @@ public final class ThijarianWitness extends CardImpl {
         );
         ability.addEffect(new InvestigateEffect().concatBy("and"));
         ability.withFlavorWord("Bear Witness");
-        ability.addWatcher(new AttackingBlockingWatcher());
+        ability.addWatcher(new AttackingBlockingDelayedWatcher());
 
         this.addAbility(ability);
     }
@@ -64,19 +64,14 @@ public final class ThijarianWitness extends CardImpl {
         return new ThijarianWitness(this);
     }
 }
-enum AttackBlockAlonePredicate implements Predicate<Permanent> {
+enum WasAttackBlockAlonePredicate implements Predicate<Permanent> {
     instance;
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        AttackingBlockingWatcher watcher = AttackingBlockingWatcher.getWatcher(game);
-        if (input.isAttacking()) {
-            return watcher.checkAttacker(input.getId())
-                    && watcher.countAttackers() == 1;
-        } else {
-            return watcher.checkBlocker(input.getId())
-                    && watcher.countBlockers() == 1;
-        }
+        AttackingBlockingDelayedWatcher watcher = AttackingBlockingDelayedWatcher.getWatcher(game);
+        return (watcher.checkAttacker(input.getId()) && watcher.countAttackers() == 1)
+                || (watcher.checkBlocker(input.getId()) && watcher.countBlockers() == 1);
     }
 
     @Override
