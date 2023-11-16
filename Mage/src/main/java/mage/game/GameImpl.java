@@ -1452,6 +1452,9 @@ public abstract class GameImpl implements Game {
             player.endOfTurn(this);
         }
         state.resetWatchers();
+        // Could be done any time as long as the stack is empty
+        // Tags are stored in the game state as a spell resolves into a permanent
+        // and must be kept while any abilities with that permanent as a source could resolve
         state.cleanupPermanentCostsTags(this);
     }
 

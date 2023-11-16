@@ -101,7 +101,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
-    private Map<MageObjectReference, Map<String, Object>> permanentCostsTags = new HashMap<>();
+    private Map<MageObjectReference, Map<String, Object>> permanentCostsTags = new HashMap<>(); // Permanent reference -> map of (tag -> values) describing how the permanent's spell was cast
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
@@ -1359,6 +1359,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         return permanentCostsTags;
     }
 
+    //Store the tags of source using the MOR as a reference
     void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
         permanentCostsTags.put(permanentMOR, CardUtil.deepCopyHashMap((HashMap)source.getCostsTagMap()));
     }
