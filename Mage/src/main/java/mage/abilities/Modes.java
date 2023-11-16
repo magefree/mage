@@ -483,12 +483,16 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         return res;
     }
 
+    private String getKeyPrefix(Game game, Ability source) {
+        return source == null || source.getSourceId() == null ? "" : source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId());
+    }
+
     private String getSelectedModesKey(Ability source, Game game, UUID modeId) {
-        return source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + modeId.toString();
+        return getKeyPrefix(game, source) + modeId.toString();
     }
 
     private String getOnceTurnNumKey(Ability source, Game game) {
-        return source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + "turnNum";
+        return getKeyPrefix(game, source) + "turnNum";
     }
 
     private int getOnceTurnNum(Game game, Ability source) {
@@ -500,8 +504,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     private void setOnceTurnNum(Game game, Ability source) {
-        String key = source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + "turnNum";
-        game.getState().setValue(key, game.getTurnNum());
+        game.getState().setValue(getOnceTurnNumKey(source, game), game.getTurnNum());
     }
 
     /**
