@@ -10,7 +10,6 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.card.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
@@ -18,7 +17,6 @@ import mage.game.permanent.token.HumanWarriorToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -77,7 +75,7 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
                          + "If an Equipment is put onto the battlefield this way, you may attach it to a creature you control." ;
     }
 
-    private Vault101BirthdayPartyEffect(final mage.cards.v.Vault101BirthdayPartyEffect effect) {
+    private Vault101BirthdayPartyEffect(final Vault101BirthdayPartyEffect effect) {
         super(effect);
     }
 
@@ -96,16 +94,16 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
         cards.addAllCards(player.getHand().getCards(filter, game));
         cards.addAllCards(player.getGraveyard().getCards(filter, game));
         TargetCard targetCard = new TargetCard(Zone.ALL, filter);
+        targetCard.withNotTarget(true);
         player.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.LIBRARY);
         Permanent equipment = game.getPermanent(card.getId());
         if (equipment == null || !equipment.hasSubtype(SubType.EQUIPMENT, game)) {
-            return player.putCardsOnBottomOfLibrary(cards, game, source, false);
+            return false;
         }
         TargetPermanent targetPermanent = new TargetControlledCreaturePermanent(0, 1);
         targetCard.withNotTarget(true);
