@@ -168,15 +168,13 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Set tag to the value, initializes this ability's tags map if it is null
-     *
-     * @return The map of tags and corresponding objects (usually Integer or Boolean, sometimes other)
      */
     void setCostsTag(String tag, Object value);
     /**
      * Returns the value of the tag or defaultValue if the tag is not found in this ability's tag map
      * does NOT check the source permanent's tags, use CardUtil.getSourceCostsTag for that
      *
-     * @return The map of tags and corresponding objects (usually Integer or Boolean, sometimes other)
+     * @return The given tag value (or the default if not found)
      */
     Object getCostsTagOrDefault(String tag, Object defaultValue);
 
