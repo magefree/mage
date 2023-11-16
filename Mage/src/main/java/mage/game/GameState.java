@@ -1361,7 +1361,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     //Store the tags of source using the MOR as a reference
     void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
-        permanentCostsTags.put(permanentMOR, CardUtil.deepCopyHashMap((HashMap)source.getCostsTagMap()));
+        if (source.getCostsTagMap() != null) {
+            permanentCostsTags.put(permanentMOR, CardUtil.deepCopyHashMap((HashMap) source.getCostsTagMap()));
+        }
     }
 
     //Removes the cost tags if the corresponding permanent is no longer on the battlefield
