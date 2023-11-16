@@ -39,9 +39,11 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
@@ -1678,8 +1680,8 @@ public final class CardUtil {
     //Use the two other functions below to access the tags, this is just the shared logic for them
     private static Map<String, Object> getCostsTags(Game game, Ability source) {
         Map<String, Object> costTags;
-        costTags = source.getCostsTagMap(); //Abilities always have a tag map
-        if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
+        costTags = source.getCostsTagMap();
+        if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
             costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
         }
         return costTags;
@@ -1720,6 +1722,81 @@ public final class CardUtil {
             return text;
         }
         return "pay " + text;
+    }
+
+    private static boolean isImmutableObject(Object o){
+        return o == null
+                || o instanceof Number || o instanceof Boolean || o instanceof String
+                || o instanceof MageObjectReference || o instanceof UUID
+                || o.getClass().isEnum();
+    }
+    public static Object deepCopyObject(Object value){
+        if (isImmutableObject(value)) { //immutable values
+            return value;
+        } else if (value instanceof Copyable) {
+            return ((Copyable)value).copy();
+        } else if (value instanceof Watcher) {
+            return ((Watcher)value).copy();
+        } else if (value instanceof Ability) {
+            return ((Ability)value).copy();
+        } else if (value instanceof PlayerList) {
+            return ((PlayerList)value).copy();
+        } else if (value instanceof EnumSet) {
+            return ((EnumSet) value).clone();
+        } else if (value instanceof TreeSet) {
+            return deepCopyTreeSet((TreeSet) value);
+        } else if (value instanceof HashSet) {
+            return deepCopyHashSet((HashSet) value);
+        } else if (value instanceof HashMap) {
+            return deepCopyHashMap((HashMap) value);
+        } else if (value instanceof List) {
+            return deepCopyList((List) value);
+        } else if (value instanceof AbstractMap.SimpleImmutableEntry){ //Used by Leonin Arbiter, Vessel Of The All Consuming Wanderer as a generic Pair class
+            AbstractMap.SimpleImmutableEntry entryValue = (AbstractMap.SimpleImmutableEntry) value;
+            return new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()),deepCopyObject(entryValue.getValue()));
+        } else {
+            throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " in map during deep copy, must add explicit handling of all Object types");
+        }
+    }
+    public static TreeSet<Object> deepCopyTreeSet(TreeSet<Object> original) {
+        if (original == null) {
+            return null;
+        }
+        TreeSet<Object> newSet = new TreeSet<>();
+        for (Object value : original){
+            newSet.add(deepCopyObject(value));
+        }
+        return newSet;
+    }
+    public static HashSet<Object> deepCopyHashSet(HashSet<Object> original) {
+        if (original == null) {
+            return null;
+        }
+        HashSet<Object> newSet = new HashSet<>(original.size());
+        for (Object value : original){
+            newSet.add(deepCopyObject(value));
+        }
+        return newSet;
+    }
+    public static List<Object> deepCopyList(List<Object> original) { //always returns an ArrayList
+        if (original == null) {
+            return null;
+        }
+        ArrayList<Object> newList = new ArrayList<>(original.size());
+        for (Object value : original){
+            newList.add(deepCopyObject(value));
+        }
+        return newList;
+    }
+    public static HashMap<Object, Object> deepCopyHashMap(HashMap<Object, Object> original) {
+        if (original == null) {
+            return null;
+        }
+        HashMap<Object, Object> newMap = new HashMap<>(original.size());
+        for (Map.Entry<Object, Object> entry : original.entrySet()) {
+            newMap.put(deepCopyObject(entry.getKey()), deepCopyObject(entry.getValue()));
+        }
+        return newMap;
     }
 
     /**

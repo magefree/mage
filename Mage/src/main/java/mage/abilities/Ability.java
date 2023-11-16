@@ -159,12 +159,26 @@ public interface Ability extends Controllable, Serializable {
     void addManaCostsToPay(ManaCost manaCost);
 
     /**
-     * Gets a map of the cost tags (set while casting/activating)
-     * Note that tag entries should always be immutable
+     * Gets a map of the cost tags (set while casting/activating) of this ability, can be null if no tags have been set yet
+     * does NOT return the source permanent's tags
+     *
+     * @return The map of tags and corresponding objects
+     */
+    Map<String, Object> getCostsTagMap();
+
+    /**
+     * Set tag to the value, initializes this ability's tags map if it is null
      *
      * @return The map of tags and corresponding objects (usually Integer or Boolean, sometimes other)
      */
-    Map<String, Object> getCostsTagMap();
+    void setCostsTag(String tag, Object value);
+    /**
+     * Returns the value of the tag or defaultValue if the tag is not found in this ability's tag map
+     * does NOT check the source permanent's tags, use CardUtil.getSourceCostsTag for that
+     *
+     * @return The map of tags and corresponding objects (usually Integer or Boolean, sometimes other)
+     */
+    Object getCostsTagOrDefault(String tag, Object defaultValue);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of

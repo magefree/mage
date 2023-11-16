@@ -163,39 +163,19 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.stepNum = state.stepNum;
         this.extraTurnId = state.extraTurnId;
         this.effects = state.effects.copy();
-        for (TriggeredAbility trigger : state.triggered) {
-            this.triggered.add(trigger.copy());
-        }
+        this.triggered = CardUtil.deepCopyList((List)state.triggered);
         this.triggers = state.triggers.copy();
         this.delayed = state.delayed.copy();
         this.specialActions = state.specialActions.copy();
         this.combat = state.combat.copy();
         this.turnMods = state.turnMods.copy();
         this.watchers = state.watchers.copy();
-        for (Map.Entry<String, Object> entry : state.values.entrySet()) {
-            if (entry.getValue() instanceof HashSet) {
-                this.values.put(entry.getKey(), ((HashSet) entry.getValue()).clone());
-            } else if (entry.getValue() instanceof EnumSet) {
-                this.values.put(entry.getKey(), ((EnumSet) entry.getValue()).clone());
-            } else if (entry.getValue() instanceof HashMap) {
-                this.values.put(entry.getKey(), ((HashMap) entry.getValue()).clone());
-            } else if (entry.getValue() instanceof List) {
-                this.values.put(entry.getKey(), ((List) entry.getValue()).stream().collect(Collectors.toList()));
-            } else {
-                this.values.put(entry.getKey(), entry.getValue());
-            }
-        }
+        this.values = CardUtil.deepCopyHashMap((HashMap)state.values);
         this.zones.putAll(state.zones);
         this.simultaneousEvents.addAll(state.simultaneousEvents);
-        for (Map.Entry<UUID, CardState> entry : state.cardState.entrySet()) {
-            cardState.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Map.Entry<MageObjectReference, Map<String, Object>> entry : state.permanentCostsTags.entrySet()) {
-            permanentCostsTags.put(entry.getKey(), new HashMap<>(entry.getValue()));
-        }
-        for (Map.Entry<UUID, MageObjectAttribute> entry : state.mageObjectAttribute.entrySet()) {
-            mageObjectAttribute.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.cardState = CardUtil.deepCopyHashMap((HashMap)state.cardState);
+        this.permanentCostsTags = CardUtil.deepCopyHashMap((HashMap)state.permanentCostsTags);
+        this.mageObjectAttribute = CardUtil.deepCopyHashMap((HashMap)state.mageObjectAttribute);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
@@ -1380,7 +1360,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
-        permanentCostsTags.put(permanentMOR, source.getCostsTagMap());
+        permanentCostsTags.put(permanentMOR, CardUtil.deepCopyHashMap((HashMap)source.getCostsTagMap()));
     }
 
     //Removes the cost tags if the corresponding permanent is no longer on the battlefield

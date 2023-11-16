@@ -83,7 +83,7 @@ public abstract class AbilityImpl implements Ability {
     protected MageIdentifier identifier = MageIdentifier.Default; // used to identify specific ability (e.g. to match with corresponding watcher)
     protected String appendToRule = null;
     protected int sourcePermanentTransformCount = 0;
-    private Map<String, Object> costsTagMap = new HashMap<>();
+    private Map<String, Object> costsTagMap = null;
 
     protected AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -108,16 +108,9 @@ public abstract class AbilityImpl implements Ability {
         this.manaCosts = ability.manaCosts.copy();
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
-        for (Watcher watcher : ability.getWatchers()) {
-            watchers.add(watcher.copy());
-        }
+        this.watchers = CardUtil.deepCopyList((List)ability.getWatchers());
 
-        if (ability.subAbilities != null) {
-            this.subAbilities = new ArrayList<>();
-            for (Ability subAbility : ability.subAbilities) {
-                subAbilities.add(subAbility.copy());
-            }
-        }
+        this.subAbilities = CardUtil.deepCopyList((List)ability.subAbilities);
         this.modes = ability.getModes().copy();
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
@@ -130,18 +123,14 @@ public abstract class AbilityImpl implements Ability {
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
         this.costAdjuster = ability.costAdjuster;
-        for (Hint hint : ability.getHints()) {
-            this.hints.add(hint.copy());
-        }
-        for (CardIcon icon : ability.getIcons()) {
-            this.icons.add(icon.copy());
-        }
+        this.hints = CardUtil.deepCopyList((List)ability.getHints());
+        this.icons = CardUtil.deepCopyList((List)ability.getIcons());
         this.customOutcome = ability.customOutcome;
         this.identifier = ability.identifier;
         this.activated = ability.activated;
         this.appendToRule = ability.appendToRule;
         this.sourcePermanentTransformCount = ability.sourcePermanentTransformCount;
-        this.costsTagMap.putAll(ability.getCostsTagMap());
+        this.costsTagMap = CardUtil.deepCopyHashMap((HashMap)ability.costsTagMap);
     }
 
     @Override
@@ -529,7 +518,7 @@ public abstract class AbilityImpl implements Ability {
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
                 announceString.append(message);
-                getCostsTagMap().put("X",xValue);
+                setCostsTag("X",xValue);
             }
         }
         return announceString.toString();
@@ -634,7 +623,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
                     getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
-                    getCostsTagMap().put("X",xValue * xValueMultiplier);
+                    setCostsTag("X",xValue * xValueMultiplier);
                 }
                 variableManaCost.setPaid();
             }
@@ -725,6 +714,18 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Map<String, Object> getCostsTagMap() {
         return costsTagMap;
+    }
+    public void setCostsTag(String tag, Object value){
+        if (costsTagMap == null){
+            costsTagMap = new HashMap<>();
+        }
+        costsTagMap.put(tag, value);
+    }
+    public Object getCostsTagOrDefault(String tag, Object defaultValue){
+        if (costsTagMap != null && costsTagMap.containsKey(tag)){
+            return costsTagMap.get(tag);
+        }
+        return defaultValue;
     }
 
     @Override

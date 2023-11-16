@@ -314,7 +314,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 // (example: etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
 
-                if (source != null && source.getCostsTagMap() != null) {
+                if (source != null) {
                     MageObjectReference mor = new MageObjectReference(newPermanent.getId(),newPermanent.getZoneChangeCounter(game)-1,game);
                     game.storePermanentCostsTags(mor, source);
                 }
