@@ -1302,6 +1302,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean hasProtectionFrom(MageObject source, Game game) {
         for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
             if (!ability.canTarget(source, game)) {
+                //Support cards like "Benevolent Blessing"
+                if (source.hasSubtype(SubType.EQUIPMENT, game) && !ability.removesEquipment() && this.attachments.contains(source.getId())) {
+                    return false;
+                }
+                if (source.hasSubtype(SubType.AURA, game) && !ability.removesAuras() && this.attachments.contains(source.getId()))
+                {
+                    return false;
+                }
                 return true;
             }
         }
