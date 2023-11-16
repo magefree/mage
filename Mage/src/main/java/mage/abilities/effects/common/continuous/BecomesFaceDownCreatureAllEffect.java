@@ -7,6 +7,7 @@ import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacedCardHalf;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -46,11 +47,11 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            if (!perm.isFaceDown(game) && !perm.isTransformable()) {
+            Card card = game.getCard(perm.getId());
+            if (!perm.isFaceDown(game) && !perm.isTransformable() && !(card instanceof ModalDoubleFacedCardHalf)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
                 perm.setFaceDown(true, game);
                 // check for Morph
-                Card card = game.getCard(perm.getId());
                 if (card != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof MorphAbility) {
