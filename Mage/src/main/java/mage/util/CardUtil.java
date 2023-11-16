@@ -1693,7 +1693,7 @@ public final class CardUtil {
      * @param game
      * @param source
      * @param tag The tag's string identifier to look up
-     * @return The object stored by the tag if found, the default if not
+     * @return if the tag was found
      */
     public static boolean checkSourceCostsTagExists(Game game, Ability source, String tag) {
         Map<String, Object> costTags = getCostsTags(game, source);
@@ -1728,19 +1728,19 @@ public final class CardUtil {
         return o == null
                 || o instanceof Number || o instanceof Boolean || o instanceof String
                 || o instanceof MageObjectReference || o instanceof UUID
-                || o.getClass().isEnum();
+                || o instanceof Enum;
     }
     public static <T> T deepCopyObject(T value){
         if (isImmutableObject(value)) {
             return value;
         } else if (value instanceof Copyable) {
-            return (T) ((Copyable<T>)value).copy();
+            return (T) ((Copyable<T>) value).copy();
         } else if (value instanceof Watcher) {
-            return (T) ((Watcher)value).copy();
+            return (T) ((Watcher) value).copy();
         } else if (value instanceof Ability) {
-            return (T) ((Ability)value).copy();
+            return (T) ((Ability) value).copy();
         } else if (value instanceof PlayerList) {
-            return (T) ((PlayerList)value).copy();
+            return (T) ((PlayerList) value).copy();
         } else if (value instanceof EnumSet) {
             return (T) ((EnumSet) value).clone();
         } else if (value instanceof EnumMap) {
@@ -1761,7 +1761,7 @@ public final class CardUtil {
             AbstractMap.SimpleImmutableEntry entryValue = (AbstractMap.SimpleImmutableEntry) value;
             return (T) new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()),deepCopyObject(entryValue.getValue()));
         } else {
-            throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " in map during deep copy, must add explicit handling of all Object types");
+            throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " during deep copy, must add explicit handling of all Object types");
         }
     }
     private static <T extends Comparable<T>> TreeSet<T> deepCopyTreeSet(TreeSet<T> original) {
