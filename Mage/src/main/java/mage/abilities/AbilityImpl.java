@@ -108,9 +108,9 @@ public abstract class AbilityImpl implements Ability {
         this.manaCosts = ability.manaCosts.copy();
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
-        this.watchers = CardUtil.deepCopyList(ability.getWatchers());
+        this.watchers = CardUtil.deepCopyObject(ability.getWatchers());
 
-        this.subAbilities = CardUtil.deepCopyList(ability.subAbilities);
+        this.subAbilities = CardUtil.deepCopyObject(ability.subAbilities);
         this.modes = ability.getModes().copy();
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
@@ -123,14 +123,14 @@ public abstract class AbilityImpl implements Ability {
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
         this.costAdjuster = ability.costAdjuster;
-        this.hints = CardUtil.deepCopyList(ability.getHints());
-        this.icons = CardUtil.deepCopyList(ability.getIcons());
+        this.hints = CardUtil.deepCopyObject(ability.getHints());
+        this.icons = CardUtil.deepCopyObject(ability.getIcons());
         this.customOutcome = ability.customOutcome;
         this.identifier = ability.identifier;
         this.activated = ability.activated;
         this.appendToRule = ability.appendToRule;
         this.sourcePermanentTransformCount = ability.sourcePermanentTransformCount;
-        this.costsTagMap = CardUtil.deepCopyHashMap(ability.costsTagMap);
+        this.costsTagMap = CardUtil.deepCopyObject(ability.costsTagMap);
     }
 
     @Override

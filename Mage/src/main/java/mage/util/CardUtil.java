@@ -1743,6 +1743,8 @@ public final class CardUtil {
             return (T) ((PlayerList)value).copy();
         } else if (value instanceof EnumSet) {
             return (T) ((EnumSet) value).clone();
+        } else if (value instanceof EnumMap) {
+            return (T) deepCopyEnumMap((EnumMap) value);
         } else if (value instanceof LinkedHashSet) {
             return (T) deepCopyLinkedHashSet((LinkedHashSet) value);
         } else if (value instanceof LinkedHashMap) {
@@ -1762,7 +1764,7 @@ public final class CardUtil {
             throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " in map during deep copy, must add explicit handling of all Object types");
         }
     }
-    public static <T extends Comparable<T>> TreeSet<T> deepCopyTreeSet(TreeSet<T> original) {
+    private static <T extends Comparable<T>> TreeSet<T> deepCopyTreeSet(TreeSet<T> original) {
         if (original == null) {
             return null;
         }
@@ -1775,7 +1777,7 @@ public final class CardUtil {
         }
         return newSet;
     }
-    public static <T> HashSet<T> deepCopyHashSet(HashSet<T> original) {
+    private static <T> HashSet<T> deepCopyHashSet(Set<T> original) {
         if (original == null) {
             return null;
         }
@@ -1788,7 +1790,7 @@ public final class CardUtil {
         }
         return newSet;
     }
-    public static <T> LinkedHashSet<T> deepCopyLinkedHashSet(LinkedHashSet<T> original) {
+    private static <T> LinkedHashSet<T> deepCopyLinkedHashSet(LinkedHashSet<T> original) {
         if (original == null) {
             return null;
         }
@@ -1801,7 +1803,7 @@ public final class CardUtil {
         }
         return newSet;
     }
-    public static <T> List<T> deepCopyList(List<T> original) { //always returns an ArrayList
+    private static <T> List<T> deepCopyList(List<T> original) { //always returns an ArrayList
         if (original == null) {
             return null;
         }
@@ -1814,7 +1816,7 @@ public final class CardUtil {
         }
         return newList;
     }
-    public static <K, V> HashMap<K, V> deepCopyHashMap(Map<K, V> original) {
+    private static <K, V> HashMap<K, V> deepCopyHashMap(Map<K, V> original) {
         if (original == null) {
             return null;
         }
@@ -1827,7 +1829,7 @@ public final class CardUtil {
         }
         return newMap;
     }
-    public static <K, V> LinkedHashMap<K, V> deepCopyLinkedHashMap(Map<K, V> original) {
+    private static <K, V> LinkedHashMap<K, V> deepCopyLinkedHashMap(Map<K, V> original) {
         if (original == null) {
             return null;
         }
@@ -1837,6 +1839,19 @@ public final class CardUtil {
         LinkedHashMap<K, V> newMap = new LinkedHashMap<>(original.size());
         for (Map.Entry<K, V> entry : original.entrySet()) {
             newMap.put((K) deepCopyObject(entry.getKey()), (V) deepCopyObject(entry.getValue()));
+        }
+        return newMap;
+    }
+    private static <K extends Enum<K>, V> EnumMap<K, V> deepCopyEnumMap(Map<K, V> original) {
+        if (original == null) {
+            return null;
+        }
+        if (original.getClass() != EnumMap.class) {
+            throw new IllegalStateException("Unhandled EnumMap type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        EnumMap<K, V> newMap = new EnumMap<>(original);
+        for (Map.Entry<K, V> entry : newMap.entrySet()) {
+            entry.setValue((V) deepCopyObject(entry.getValue()));
         }
         return newMap;
     }

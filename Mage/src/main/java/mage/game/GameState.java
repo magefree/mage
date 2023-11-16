@@ -163,19 +163,19 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.stepNum = state.stepNum;
         this.extraTurnId = state.extraTurnId;
         this.effects = state.effects.copy();
-        this.triggered = CardUtil.deepCopyList(state.triggered);
+        this.triggered = CardUtil.deepCopyObject(state.triggered);
         this.triggers = state.triggers.copy();
         this.delayed = state.delayed.copy();
         this.specialActions = state.specialActions.copy();
         this.combat = state.combat.copy();
         this.turnMods = state.turnMods.copy();
         this.watchers = state.watchers.copy();
-        this.values = CardUtil.deepCopyHashMap(state.values);
+        this.values = CardUtil.deepCopyObject(state.values);
         this.zones.putAll(state.zones);
         this.simultaneousEvents.addAll(state.simultaneousEvents);
-        this.cardState = CardUtil.deepCopyHashMap(state.cardState);
-        this.permanentCostsTags = CardUtil.deepCopyHashMap(state.permanentCostsTags);
-        this.mageObjectAttribute = CardUtil.deepCopyHashMap(state.mageObjectAttribute);
+        this.cardState = CardUtil.deepCopyObject(state.cardState);
+        this.permanentCostsTags = CardUtil.deepCopyObject(state.permanentCostsTags);
+        this.mageObjectAttribute = CardUtil.deepCopyObject(state.mageObjectAttribute);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
@@ -1362,7 +1362,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     //Store the tags of source using the MOR as a reference
     void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
         if (source.getCostsTagMap() != null) {
-            permanentCostsTags.put(permanentMOR, CardUtil.deepCopyHashMap((HashMap) source.getCostsTagMap()));
+            permanentCostsTags.put(permanentMOR, CardUtil.deepCopyObject(source.getCostsTagMap()));
         }
     }
 
