@@ -41,7 +41,7 @@ public class TurnFaceDownTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
     }
 
-    // TODO: Currently no implemented cards can turn token creatures face down. This test is to be uncommented after the implementation of [WHO] Cyber Conversion
+    // TODO: Currently no implemented cards can turn token creatures face down. These tests are to be uncommented after the implementation of [WHO] Cyber Conversion
     // Tokens can be turned face down
     /*
     @Test
@@ -60,9 +60,27 @@ public class TurnFaceDownTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
     }
+
+    // Incubator tokens can't be turned face down
+    @Test
+    public void testTurnIncubatorTokenFaceDown() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Searing Barb", 1); // Incubate 1
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Cyber Conversion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Searing Barb", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cyber Conversion", "Incubator Token");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+    }
      */
 
-    // Nontoken, non-DFC creatures should be able to be turned face down
+    // Nontoken, non-DFC creatures can be turned face down
     @Test
     public void testTurnNonTokenFaceDown() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
