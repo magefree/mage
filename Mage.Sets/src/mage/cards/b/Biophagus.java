@@ -36,7 +36,7 @@ public final class Biophagus extends CardImpl {
         Ability ability = new AnyColorManaAbility(new TapSourceCost(), true).withFlavorWord("Genomic Enhancement");
         ability.getEffects().get(0).setText("Add one mana of any color. If this mana is spent to cast a creature spell, " +
                 "that creature enters the battlefield with an additional +1/+1 counter on it.");
-        this.addAbility(ability, new BiophagusWatcher(ability));
+        this.addAbility(ability, new BiophagusWatcher(ability.getId()));
     }
 
     private Biophagus(final Biophagus card) {
@@ -51,11 +51,11 @@ public final class Biophagus extends CardImpl {
 
 class BiophagusWatcher extends Watcher {
 
-    private final Ability source;
+    private final UUID sourceAbilityID;
 
-    BiophagusWatcher(Ability source) {
+    BiophagusWatcher(UUID sourceAbilityID) {
         super(WatcherScope.CARD);
-        this.source = source;
+        this.sourceAbilityID = sourceAbilityID;
     }
 
     @Override
@@ -68,7 +68,8 @@ class BiophagusWatcher extends Watcher {
                     && event.getFlag()) {
                 if (target instanceof Spell) {
                     game.getState().addEffect(new BiophagusEntersBattlefieldEffect(
-                            new MageObjectReference(((Spell) target).getSourceId(), target.getZoneChangeCounter(game), game)), source);
+                            new MageObjectReference(((Spell) target).getSourceId(), target.getZoneChangeCounter(game), game)),
+                        game.getAbility(sourceAbilityID, this.getSourceId()).orElse(null)); //null will cause an immediate crash
                 }
             }
         }
