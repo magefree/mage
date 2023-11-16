@@ -1,6 +1,8 @@
 
 package mage.counters;
 
+import mage.util.Copyable;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Counters extends HashMap<String, Counter> implements Serializable {
+public class Counters extends HashMap<String, Counter> implements Serializable, Copyable<Counters> {
 
     public Counters() {
     }
