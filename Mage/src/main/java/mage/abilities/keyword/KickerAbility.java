@@ -137,7 +137,13 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         String finalActivationKey = getActivationKey(needKickerCost);
         Stream<Map.Entry<String, Object>> tagStream = costsTags.entrySet().stream()
                 .filter(x -> x.getKey().startsWith(finalActivationKey));
-        return tagStream.mapToInt(x -> (int)x.getValue()).sum();
+        return tagStream.mapToInt(x -> {
+                Object value = x.getValue();
+                if (!(value instanceof Integer)){
+                    throw new IllegalStateException("Wrong code usage: Kicker tag "+x.getKey()+" needs Integer but has "+(value==null?"null":value.getClass().getName()));
+                }
+                return (int) value;
+            }).sum();
     }
 
     /**
@@ -182,7 +188,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.KICKED, source.getSourceId(), source, source.getControllerId()));
 
         String activationKey = getActivationKey(kickerCost.getText(true));
-        Integer next = (int)source.getCostsTagOrDefault(activationKey,0)+1;
+        Integer next = CardUtil.getSourceCostsTag(game, source, activationKey,0)+1;
         source.setCostsTag(activationKey,next);
     }
 

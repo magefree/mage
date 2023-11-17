@@ -721,12 +721,6 @@ public abstract class AbilityImpl implements Ability {
         }
         costsTagMap.put(tag, value);
     }
-    public Object getCostsTagOrDefault(String tag, Object defaultValue){
-        if (costsTagMap != null && costsTagMap.containsKey(tag)){
-            return costsTagMap.get(tag);
-        }
-        return defaultValue;
-    }
 
     @Override
     public Effects getEffects() {

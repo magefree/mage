@@ -121,7 +121,7 @@ class SquadTriggerAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        int squadCount = (int)CardUtil.getSourceCostsTag(game, this, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
+        int squadCount = CardUtil.getSourceCostsTag(game, this, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
         return (squadCount > 0);
     }
     @Override
@@ -148,7 +148,7 @@ class SquadEffectETB extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int squadCount = (int)CardUtil.getSourceCostsTag(game, source, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
+        int squadCount = CardUtil.getSourceCostsTag(game, source, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
         CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(squadCount);
         return effect.apply(game, source);
     }

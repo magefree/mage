@@ -1711,6 +1711,7 @@ public final class CardUtil {
     /**
      * Find a specific tag in the cost tags of either the source ability, or the permanent source of the ability.
      * Works in any moment (even before source ability activated)
+     * Do not use with null values, use checkSourceCostsTagExists instead
      *
      * @param game
      * @param source
@@ -1718,10 +1719,17 @@ public final class CardUtil {
      * @param defaultValue A default value to return if the tag is not found
      * @return The object stored by the tag if found, the default if not
      */
-    public static Object getSourceCostsTag(Game game, Ability source, String tag, Object defaultValue){
+    public static <T> T getSourceCostsTag(Game game, Ability source, String tag, T defaultValue){
         Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
         if (costTags != null) {
-            return costTags.getOrDefault(tag, defaultValue);
+            Object value = costTags.getOrDefault(tag, defaultValue);
+            if (value == null) {
+                throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type null but is trying to be read. Use checkSourceCostsTagExists");
+            }
+            if (value.getClass() != defaultValue.getClass()) {
+                throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type " + value.getClass().getName() + " different from default of type " + defaultValue.getClass().getName());
+            }
+            return (T) value;
         }
         return defaultValue;
     }

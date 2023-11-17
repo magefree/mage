@@ -70,7 +70,7 @@ class AlteredEgoCopyApplier extends CopyApplier {
             // except it enters with an additional X +1/+1 counters on it
             blueprint.getAbilities().add(
                     new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(
-                            (int)CardUtil.getSourceCostsTag(game, source, "X", 0)
+                            CardUtil.getSourceCostsTag(game, source, "X", 0)
                     )))
             );
 
