@@ -56,7 +56,7 @@ public class AlteredEgoTest extends CardTestPlayerBase {
 
     /**
      * If the chosen creature has {X} in its mana cost, that X is considered to be 0.
-     * The value of X in Altered Ego’s last ability will be whatever value was chosen for X while casting Altered Ego.
+     * The value of X in Altered Ego's last ability will be whatever value was chosen for X while casting Altered Ego.
      * (2016-04-08)
      */
     @Test

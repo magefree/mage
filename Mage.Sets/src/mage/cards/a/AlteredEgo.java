@@ -73,7 +73,14 @@ class AlteredEgoCopyApplier extends CopyApplier {
                             (int)CardUtil.getSourceCostsTag(game, source, "X", 0)
                     )))
             );
-            CardUtil.getSourceCostsTagsMap(game, source).remove("X"); //X value of Altered Ego is separate from the copied creature's X value
+
+            /*
+             * If the chosen creature has {X} in its mana cost, that X is considered to be 0.
+             * The value of X in Altered Ego's last ability will be whatever value was chosen for X while casting Altered Ego.
+             * (2016-04-08)
+             * So the X value of Altered Ego must be separate from the copied creature's X value
+             */
+            CardUtil.getSourceCostsTagsMap(game, source).remove("X");
         }
 
         return true;
