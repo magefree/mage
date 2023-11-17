@@ -89,11 +89,15 @@ class NameStickerGoblinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent) event;
+        if (zEvent == null) {
+            return false;
+        }
+        Permanent permanent = zEvent.getTarget();
         if (permanent == null) {
             return false;
         }
-        Zone zone = ((EntersTheBattlefieldEvent) event).getFromZone();
+        Zone zone = zEvent.getFromZone();
         return zone != Zone.GRAVEYARD && zone != Zone.EXILED
                 && permanent.getId().equals(getSourceId());
     }

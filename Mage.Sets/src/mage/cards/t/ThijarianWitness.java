@@ -70,6 +70,9 @@ enum WasAttackBlockAlonePredicate implements Predicate<Permanent> {
     @Override
     public boolean apply(Permanent input, Game game) {
         AttackingBlockingDelayedWatcher watcher = AttackingBlockingDelayedWatcher.getWatcher(game);
+        if (watcher == null) {
+            return false;
+        }
         return (watcher.checkAttacker(input.getId()) && watcher.countAttackers() == 1)
                 || (watcher.checkBlocker(input.getId()) && watcher.countBlockers() == 1);
     }
