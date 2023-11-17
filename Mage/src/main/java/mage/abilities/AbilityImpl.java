@@ -706,11 +706,6 @@ public abstract class AbilityImpl implements Ability {
         return manaCostsToPay;
     }
 
-    /**
-     * Accessed to see what was optional/variable costs were paid
-     *
-     * @return
-     */
     @Override
     public Map<String, Object> getCostsTagMap() {
         return costsTagMap;

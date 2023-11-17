@@ -1680,13 +1680,13 @@ public final class CardUtil {
     /**
      * Returns the entire cost tags map of either the source ability, or the permanent source of the ability. May be null.
      * Works in any moment (even before source ability activated)
-     * Usually you should use one of the single tag functions instead
+     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists()
+     * Use this function with caution, as it directly exposes the backing data structure.
      *
      * @param game
      * @param source
      * @return the tag map (or null)
      */
-    //
     public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
         costTags = source.getCostsTagMap();
