@@ -105,7 +105,7 @@ class IllithidHarvesterEffect extends OneShotEffect {
         Predicate<Permanent> pred = new PermanentIdPredicate(UUID.randomUUID());
         for (Target target : source.getTargets()) {
             for (UUID targetId : target.getTargets()) {
-                if (!game.getPermanent(targetId).isTransformable() && !(game.getCard(targetId) instanceof ModalDoubleFacedCardHalf)) {
+                if (game.getPermanent(targetId).canTurnFaceDown(game)) {
                     pred = Predicates.or(pred, new PermanentIdPredicate(targetId));
                 }
             }
