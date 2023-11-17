@@ -26,6 +26,7 @@ import mage.watchers.Watcher;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -156,6 +157,26 @@ public interface Ability extends Controllable, Serializable {
     ManaCosts<ManaCost> getManaCostsToPay();
 
     void addManaCostsToPay(ManaCost manaCost);
+
+    /**
+     * Gets a map of the cost tags (set while casting/activating) of this ability, can be null if no tags have been set yet
+     * does NOT return the source permanent's tags
+     *
+     * @return The map of tags and corresponding objects
+     */
+    Map<String, Object> getCostsTagMap();
+
+    /**
+     * Set tag to the value, initializes this ability's tags map if it is null
+     */
+    void setCostsTag(String tag, Object value);
+    /**
+     * Returns the value of the tag or defaultValue if the tag is not found in this ability's tag map
+     * does NOT check the source permanent's tags, use CardUtil.getSourceCostsTag for that
+     *
+     * @return The given tag value (or the default if not found)
+     */
+    Object getCostsTagOrDefault(String tag, Object defaultValue);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of

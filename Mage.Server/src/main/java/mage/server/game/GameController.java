@@ -1322,87 +1322,13 @@ public class GameController implements GameCallback {
         List<String> fixActions = new ArrayList<>(); // for logs info
 
         // fix active
-        Player playerActive = game.getPlayer(state.getActivePlayerId());
-        sb.append("<br>Fixing active player: ").append(getName(playerActive));
-        if (playerActive != null && !playerActive.canRespond()) {
-            fixActions.add("active player fix");
-
-            sb.append("<br><font color='red'>WARNING, active player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            playerActive.concede(game);
-            playerActive.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            Phase currentPhase = game.getPhase();
-            if (currentPhase != null) {
-                currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                fixedAlready = true;
-                sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-            } else {
-                sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-            }
-        } else {
-            sb.append(playerActive != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getActivePlayerId()), state, "active", sb, fixActions, fixedAlready);
 
         // fix lost choosing dialog
-        Player choosingPlayer = game.getPlayer(state.getChoosingPlayerId());
-        sb.append("<br>Fixing choosing player: ").append(getName(choosingPlayer));
-        if (choosingPlayer != null && !choosingPlayer.canRespond()) {
-            fixActions.add("choosing player fix");
-
-            sb.append("<br><font color='red'>WARNING, choosing player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            choosingPlayer.concede(game);
-            choosingPlayer.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            if (fixedAlready) {
-                sb.append(" (OK, already skipped before)");
-            } else {
-                Phase currentPhase = game.getPhase();
-                if (currentPhase != null) {
-                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                    fixedAlready = true;
-                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-                } else {
-                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-                }
-            }
-        } else {
-            sb.append(choosingPlayer != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getChoosingPlayerId()), state, "choosing", sb, fixActions, fixedAlready);
 
         // fix lost priority
-        Player priorityPlayer = game.getPlayer(state.getPriorityPlayerId());
-        sb.append("<br>Fixing priority player: ").append(getName(priorityPlayer));
-        if (priorityPlayer != null && !priorityPlayer.canRespond()) {
-            fixActions.add("priority player fix");
-
-            sb.append("<br><font color='red'>WARNING, priority player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            priorityPlayer.concede(game);
-            priorityPlayer.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            if (fixedAlready) {
-                sb.append(" (").append(asWarning("OK")).append(", already skipped before)");
-            } else {
-                Phase currentPhase = game.getPhase();
-                if (currentPhase != null) {
-                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                    fixedAlready = true;
-                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-                } else {
-                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-                }
-            }
-        } else {
-            sb.append(priorityPlayer != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getPriorityPlayerId()), state, "priority", sb, fixActions, fixedAlready);
 
         // fix timeout
         sb.append("<br>Fixing future timeout: ");
@@ -1440,5 +1366,36 @@ public class GameController implements GameCallback {
         logger.warn("FIX command result for game " + game.getId() + ": " + appliedFixes);
 
         return sb.toString();
+    }
+
+    private boolean fixPlayer(Player player, GameState state, String fixType, StringBuilder sb, List<String> fixActions, boolean fixedAlready) {
+        sb.append("<br>Fixing ").append(fixType).append(" player: ").append(getName(player));
+        if (player != null && !player.canRespond()) {
+            fixActions.add(fixType + " fix");
+
+            sb.append("<br><font color='red'>WARNING, ").append(fixType).append(" player can't respond.</font>");
+            sb.append("<br>Try to concede...");
+            player.concede(game);
+            player.leave(); // abort any wait response actions
+            sb.append(" (").append(asWarning("OK")).append(", concede done)");
+
+            sb.append("<br>Try to skip step...");
+            if (!fixedAlready) {
+                Phase currentPhase = game.getPhase();
+                if (currentPhase != null) {
+                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
+                    fixedAlready = true;
+                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
+                } else {
+                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
+                }
+            } else {
+                sb.append(" (OK, already skipped before)");
+            }
+        } else {
+            sb.append(player != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
+        }
+
+        return fixedAlready;
     }
 }

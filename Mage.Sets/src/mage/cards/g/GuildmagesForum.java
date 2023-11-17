@@ -39,7 +39,7 @@ public final class GuildmagesForum extends CardImpl {
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1), true);
         ability.getEffects().get(0).setText("Add one mana of any color. If that mana is spent on a multicolored creature spell, that creature enters the battlefield with an additional +1/+1 counter on it");
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability, new GuildmagesForumWatcher(ability));
+        this.addAbility(ability, new GuildmagesForumWatcher(ability.getId()));
     }
 
     private GuildmagesForum(final GuildmagesForum card) {
@@ -54,11 +54,11 @@ public final class GuildmagesForum extends CardImpl {
 
 class GuildmagesForumWatcher extends Watcher {
 
-    private final Ability source;
+    private final UUID sourceAbilityID;
 
-    GuildmagesForumWatcher(Ability source) {
+    GuildmagesForumWatcher(UUID sourceAbilityID) {
         super(WatcherScope.CARD);
-        this.source = source;
+        this.sourceAbilityID = sourceAbilityID;
     }
 
     @Override
@@ -71,7 +71,8 @@ class GuildmagesForumWatcher extends Watcher {
                     && event.getFlag()) {
                 if (target instanceof Spell) {
                     game.getState().addEffect(new GuildmagesForumEntersBattlefieldEffect(
-                            new MageObjectReference(((Spell) target).getSourceId(), target.getZoneChangeCounter(game), game)), source);
+                            new MageObjectReference(((Spell) target).getSourceId(), target.getZoneChangeCounter(game), game)),
+                        game.getAbility(sourceAbilityID, this.getSourceId()).orElse(null)); //null will cause an immediate crash
                 }
             }
         }

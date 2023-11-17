@@ -796,6 +796,43 @@ public class CardView extends SimpleCardView {
         fillEmpty(null, false);
     }
 
+    public static boolean cardViewEquals(CardView a, CardView b) { // TODO: This belongs in CardView
+        if (a == b) {
+            return true;
+        }
+        if (a == null || b == null || a.getClass() != b.getClass()) {
+            return false;
+        }
+
+        if (!(a.getDisplayName().equals(b.getDisplayName()) // TODO: Original code not checking everything. Why is it only checking these values?
+                && a.getPower().equals(b.getPower())
+                && a.getToughness().equals(b.getToughness())
+                && a.getLoyalty().equals(b.getLoyalty())
+                && a.getDefense().equals(b.getDefense())
+                && 0 == a.getColor().compareTo(b.getColor())
+                && a.getCardTypes().equals(b.getCardTypes())
+                && a.getSubTypes().equals(b.getSubTypes())
+                && a.getSuperTypes().equals(b.getSuperTypes())
+                && a.getManaCostStr().equals(b.getManaCostStr())
+                && a.getRules().equals(b.getRules())
+                && Objects.equals(a.getRarity(), b.getRarity())
+                && Objects.equals(a.getCardNumber(), b.getCardNumber())
+                && Objects.equals(a.getExpansionSetCode(), b.getExpansionSetCode())
+                && a.getFrameStyle() == b.getFrameStyle()
+                && Objects.equals(a.getCounters(), b.getCounters())
+                && a.isFaceDown() == b.isFaceDown())) {
+            return false;
+        }
+
+        if (!(a instanceof PermanentView)) {
+            return true;
+        }
+        PermanentView aa = (PermanentView) a;
+        PermanentView bb = (PermanentView) b;
+        return aa.hasSummoningSickness() == bb.hasSummoningSickness()
+                && aa.getDamage() == bb.getDamage();
+    }
+
     private void fillEmpty(Card card, boolean controlled) {
         this.name = "Face Down";
         this.displayName = name;
