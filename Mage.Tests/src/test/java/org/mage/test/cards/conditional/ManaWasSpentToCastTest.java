@@ -25,7 +25,9 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Abzan Banner");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
-        // Abzan Banner is auto-chosen since only possible target
+        addTarget(playerA, "Abzan Banner");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -42,11 +44,10 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Abzan Banner");
 
-        setStrictChooseMode(true);
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
         // {G} was not spent, so no target is chosen
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -69,8 +70,9 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN,true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB,"Lightning Bolt","Tin Street Hooligan");
+        addTarget(playerA, "Abzan Banner");
 
-        // Abzan Banner is auto-chosen since only possible target
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -86,9 +88,12 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Boreal Druid");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
         addCard(Zone.HAND, playerA, "Search for Glory");
+        addCard(Zone.LIBRARY, playerA, "Snow-Covered Plains");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Search for Glory");
+        addTarget(playerA, "Snow-Covered Plains");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -105,12 +110,15 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Vodalian Arcanist");
         addCard(Zone.BATTLEFIELD, playerA, "Rimefeather Owl");
         addCard(Zone.HAND, playerA, "Search for Glory");
+        addCard(Zone.LIBRARY, playerA, "Snow-Covered Plains");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{S}", "Vodalian Arcanist");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Search for Glory");
+        addTarget(playerA, "Snow-Covered Plains");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -126,7 +134,9 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Berg Strider");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Berg Strider");
+        addTarget(playerA, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -140,8 +150,11 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Strike It Rich", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike It Rich", true);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        setChoice(playerA, "Red");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jaded Sell-Sword");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -156,6 +169,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jaded Sell-Sword");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -172,6 +186,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         setChoice(playerA, "X=2");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verazol, the Split Current");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -190,6 +205,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prossh, Skyraider of Kher");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -253,6 +269,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);  // Let the Mana Drain delayed triggered ability resolve
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sliver Construct");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
