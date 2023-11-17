@@ -130,7 +130,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
      * @return
      */
     public static int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
-        Map<String, Object> costsTags = CardUtil.getSourceCostsTags(game, source);
+        Map<String, Object> costsTags = CardUtil.getSourceCostsTagsMap(game, source);
         if (costsTags == null) {
             return 0;
         }

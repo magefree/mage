@@ -1687,7 +1687,7 @@ public final class CardUtil {
      * @return the tag map (or null)
      */
     //
-    public static Map<String, Object> getSourceCostsTags(Game game, Ability source) {
+    public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
         costTags = source.getCostsTagMap();
         if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
@@ -1705,7 +1705,7 @@ public final class CardUtil {
      * @return if the tag was found
      */
     public static boolean checkSourceCostsTagExists(Game game, Ability source, String tag) {
-        Map<String, Object> costTags = getSourceCostsTags(game, source);
+        Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
         return costTags != null && costTags.containsKey(tag);
     }
     /**
@@ -1719,7 +1719,7 @@ public final class CardUtil {
      * @return The object stored by the tag if found, the default if not
      */
     public static Object getSourceCostsTag(Game game, Ability source, String tag, Object defaultValue){
-        Map<String, Object> costTags = getSourceCostsTags(game, source);
+        Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
         if (costTags != null) {
             return costTags.getOrDefault(tag, defaultValue);
         }
