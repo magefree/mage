@@ -13,8 +13,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SpectacleTest extends CardTestPlayerBase {
     @Test
     public void testWithoutSpectacleBasic() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Zone.HAND, playerA, "Spikewheel Acrobat"); // {3}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1+4);
+        addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
+        addCard(Zone.HAND, playerA, "Spikewheel Acrobat"); // {3}{R}, Spectacle {2}{R}
+
+        checkPlayableAbility("Can't cast with Spectacle yet", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Spikewheel Acrobat with spectacle", false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("Can cast with Spectacle", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Spikewheel Acrobat with spectacle", true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spikewheel Acrobat");
 
@@ -23,8 +29,9 @@ public class SpectacleTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA,"Spikewheel Acrobat",1);
-        assertTappedCount("Mountain",true,4);
+        assertTappedCount("Mountain",true,1+4);
     }
+
     @Test
     public void testWithoutSpectacleTriggerAfterDamage() {
         // Rafter Demon {2}{B}{R}
@@ -53,7 +60,7 @@ public class SpectacleTest extends CardTestPlayerBase {
     public void testWithSpectacle() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
-        addCard(Zone.HAND, playerA, "Spikewheel Acrobat"); // Surge {2}{R}
+        addCard(Zone.HAND, playerA, "Spikewheel Acrobat"); // Spectacle {2}{R}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt",playerB);
         waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);

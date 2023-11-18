@@ -43,13 +43,13 @@ public class CostTagCopyCloneTests extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Double Major");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Endless One");
-        setChoice(playerA, "X=1"); // with Kicker
+        setChoice(playerA, "X=1");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major");
         addTarget(playerA, "Endless One");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, true);
-        setChoice(playerA, "Endless One"); // since Clone wasn't kicked, it's a 0/0 and dies
+        setChoice(playerA, "Endless One"); // since Clone doesn't copy X, it's a 0/0 and dies
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
 
@@ -67,7 +67,7 @@ public class CostTagCopyCloneTests extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Clever Impersonator");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Defenders of Humanity");
-        setChoice(playerA, "X=1"); // with Kicker
+        setChoice(playerA, "X=1");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, false);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
@@ -91,7 +91,7 @@ public class CostTagCopyCloneTests extends CardTestPlayerBase {
 
         assertPermanentCount(playerA,"Astartes Warrior Token",0);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Defenders of Humanity");
-        setChoice(playerA, "X=1"); // with Kicker
+        setChoice(playerA, "X=1");
 
         activateAbility(1,PhaseStep.PRECOMBAT_MAIN,playerA,
                 "{1}, {T}, Sacrifice {this}: Copy target spell you control.",
