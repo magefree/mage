@@ -93,7 +93,7 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         cards.addAllCards(player.getHand().getCards(filter, game));
         cards.addAllCards(player.getGraveyard().getCards(filter, game));
-        TargetCard targetCard = new TargetCard(Zone.ALL, filter);
+        TargetCard targetCard = new TargetCard(0, 1, Zone.ALL, filter);
         targetCard.withNotTarget(true);
         player.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
