@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author JayDi85
+ */
 public class CardHintsTest extends CardTestCommanderDuelBase {
 
     // html logs/names used all around xmage (game logs, chats, choose dialogs, etc)
@@ -114,7 +117,7 @@ public class CardHintsTest extends CardTestCommanderDuelBase {
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
 
-        // colleat all possible objects and test logs with it
+        // collect all possible objects and test logs with it
         List<MageObject> sampleObjects = new ArrayList<>();
         sampleObjects.addAll(currentGame.getBattlefield().getAllPermanents());
         sampleObjects.addAll(playerA.getHand().getCards(currentGame));
