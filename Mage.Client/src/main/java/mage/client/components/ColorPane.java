@@ -7,6 +7,7 @@ import mage.client.cards.VirtualCardInfo;
 import mage.client.dialog.PreferencesDialog;
 import mage.game.command.Plane;
 import mage.util.CardUtil;
+import mage.util.GameLog;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PlaneView;
@@ -87,6 +88,8 @@ public class ColorPane extends JEditorPane {
             if (e.getEventType() == EventType.ENTERED) {
                 CardView cardView = null;
 
+                // TODO: add real game object first
+
                 // card
                 CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
                 if (card != null) {
@@ -144,19 +147,20 @@ public class ColorPane extends JEditorPane {
     }
 
     @Override
-    public void setText(String string) {
-        super.setText(string);
+    public void setText(String text) {
+        // must use append to enable popup/hyperlinks support
+        super.setText("");
+        append(text);
     }
 
     public void append(String text) {
         try {
             if (hyperlinkEnabled) {
-                text = text.replaceAll("(<font color=[^>]*>([^<]*)) (\\[[0-9a-fA-F]*\\])</font>", "<a href=\"#$2\">$1</a> $3");
+                text = GameLog.injectPopupSupport(text);
             }
             kit.insertHTML(doc, doc.getLength(), text, 0, 0, null);
             int len = getDocument().getLength();
             setCaretPosition(len);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,7 +186,7 @@ public class ColorPane extends JEditorPane {
         super.paintChildren(g);
     }
 
-    public void enableHyperlinks() {
+    public void enableHyperlinksAndCardPopups() {
         hyperlinkEnabled = true;
         addHyperlinkHandlers();
     }

@@ -86,6 +86,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<String, CardInfoWindowDialog> sideboardWindows = new HashMap<>();
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private final ArrayList<PickPileDialog> pickPile = new ArrayList<>();
+    private final Map<String, CardHintsHelperDialog> cardHintsWindows = new LinkedHashMap<>();
+
     private UUID gameId;
     private UUID playerId; // playerId of the player
     GamePane gamePane;
@@ -275,6 +277,10 @@ public final class GamePanel extends javax.swing.JPanel {
             windowDialog.cleanUp();
             windowDialog.removeDialog();
         }
+        for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
+        }
 
         clearPickDialogs();
 
@@ -348,6 +354,9 @@ public final class GamePanel extends javax.swing.JPanel {
             windowDialog.changeGUISize();
         }
         for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.changeGUISize();
+        }
+        for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
             windowDialog.changeGUISize();
         }
         for (ShowCardsDialog windowDialog : pickTarget) {
@@ -886,15 +895,24 @@ public final class GamePanel extends javax.swing.JPanel {
         GameManager.instance.setStackSize(lastGameData.game.getStack().size());
         displayStack(lastGameData.game, bigCard, feedbackPanel, gameId);
 
+        // auto-show exile views
         for (ExileView exile : lastGameData.game.getExile()) {
-            if (!exiles.containsKey(exile.getId())) {
-                CardInfoWindowDialog newExile = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
-                exiles.put(exile.getId(), newExile);
-                MageFrame.getDesktop().add(newExile, JLayeredPane.PALETTE_LAYER);
-                newExile.show();
+            CardInfoWindowDialog exileWindow = exiles.getOrDefault(exile.getId(), null);
+            if (exileWindow == null) {
+                exileWindow = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
+                exiles.put(exile.getId(), exileWindow);
+                MageFrame.getDesktop().add(exileWindow, JLayeredPane.PALETTE_LAYER);
+                exileWindow.show();
             }
-            exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
+            exileWindow.loadCards(exile, bigCard, gameId);
         }
+
+        // update open or remove closed card hints windows
+        clearClosedCardHintsWindows();
+        cardHintsWindows.forEach((s, windowDialog) -> {
+            // TODO: optimize for multiple windows (prepare data here and send it for filters/groups)
+            windowDialog.loadHints(lastGameData.game);
+        });
 
         // reveal and look at dialogs can unattached, so windows opened by game doesn't have it
         showRevealed(lastGameData.game);
@@ -1197,10 +1215,8 @@ public final class GamePanel extends javax.swing.JPanel {
     // Called if the game frame is deactivated because the tabled the deck editor or other frames go to foreground
     public void deactivated() {
         // hide the non modal windows (because otherwise they are shown on top of the new active pane)
+        // TODO: is it need to hide other dialogs like graveyards (CardsView)?
         for (CardInfoWindowDialog windowDialog : exiles.values()) {
-            windowDialog.hideDialog();
-        }
-        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
             windowDialog.hideDialog();
         }
         for (CardInfoWindowDialog windowDialog : revealed.values()) {
@@ -1209,10 +1225,16 @@ public final class GamePanel extends javax.swing.JPanel {
         for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
             windowDialog.hideDialog();
         }
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.hideDialog();
+        }
         for (CardInfoWindowDialog windowDialog : companion.values()) {
             windowDialog.hideDialog();
         }
         for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.hideDialog();
+        }
+        for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
             windowDialog.hideDialog();
         }
     }
@@ -1223,19 +1245,22 @@ public final class GamePanel extends javax.swing.JPanel {
         for (CardInfoWindowDialog windowDialog : exiles.values()) {
             windowDialog.show();
         }
-        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
-            windowDialog.show();
-        }
         for (CardInfoWindowDialog windowDialog : revealed.values()) {
             windowDialog.show();
         }
         for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
             windowDialog.show();
         }
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.show();
+        }
         for (CardInfoWindowDialog windowDialog : companion.values()) {
             windowDialog.show();
         }
         for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.show();
+        }
+        for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
             windowDialog.show();
         }
     }
@@ -1255,6 +1280,29 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.getDesktop().add(newGraveyard, JLayeredPane.PALETTE_LAYER);
         // use graveyards to sync selection (don't use player data here)
         newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
+    }
+
+    private void clearClosedCardHintsWindows() {
+        cardHintsWindows.entrySet().removeIf(entry -> entry.getValue().isClosed());
+    }
+
+    public void openCardHintsWindow(String code) {
+        // clear closed
+        clearClosedCardHintsWindows();
+
+        // too many dialogs can cause bad GUI performance, so limit it
+        if (cardHintsWindows.size() > CardHintsHelperDialog.GUI_MAX_CARD_HINTS_DIALOGS_PER_GAME) {
+            // show last one instead
+            cardHintsWindows.values().stream().reduce((a, b) -> b).ifPresent(CardHintsHelperDialog::show);
+            return;
+        }
+
+        // open new
+        CardHintsHelperDialog newDialog = new CardHintsHelperDialog();
+        newDialog.setGameData(this.lastGameData.game, this.gameId, this.bigCard);
+        cardHintsWindows.put(code + UUID.randomUUID(), newDialog);
+        MageFrame.getDesktop().add(newDialog, JLayeredPane.PALETTE_LAYER);
+        newDialog.loadHints(lastGameData.game);
     }
 
     public void openSideboardWindow(UUID playerId) {

@@ -46,6 +46,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private UUID playerId;
     private UUID gameId;
     private PlayerView player;
+    private boolean isMe;
 
     private BigCard bigCard;
 
@@ -53,11 +54,13 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private static final int PANEL_WIDTH = 94;
     private static final int PANEL_HEIGHT = 262;
-    private static final int PANEL_HEIGHT_SMALL = 242;
+    private static final int PANEL_HEIGHT_SMALL = 210;
+    private static final int PANEL_HEIGHT_EXTRA_FOR_ME = 25;
     private static final int MANA_LABEL_SIZE_HORIZONTAL = 20;
 
     private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
+    private static final Border YELLOW_BORDER = new LineBorder(Color.yellow, 3);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
     private final Color inactiveBackgroundColor;
     private final Color activeBackgroundColor;
@@ -92,8 +95,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
-        cheat.setVisible(SessionHandler.isTestMode() && controlled);
+        this.isMe = controlled;
+        cheat.setVisible(SessionHandler.isTestMode() && this.isMe);
         cheat.setFocusable(false);
+        toolHintsHelper.setVisible(this.isMe);
         flagName = null;
         if (priorityTime > 0) {
             long delay = 1000L;
@@ -355,6 +360,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
 
+        // possible targeting
+        if (possibleTargets != null && possibleTargets.contains(this.playerId)) {
+            this.avatar.setBorder(YELLOW_BORDER);
+            this.btnPlayer.setBorder(YELLOW_BORDER);
+        }
+
         update(player.getManaPool());
     }
 
@@ -568,6 +579,13 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         cheat.setToolTipText("Cheat button");
         cheat.addActionListener(e -> btnCheatActionPerformed(e));
 
+        // Tools button
+        r = new Rectangle(75, 21);
+        toolHintsHelper = new JButton();
+        toolHintsHelper.setText("hints");
+        toolHintsHelper.setToolTipText("Open new card hints helper window");
+        toolHintsHelper.addActionListener(e -> btnToolHintsHelperActionPerformed(e));
+
         zonesPanel = new JPanel();
         zonesPanel.setPreferredSize(new Dimension(100, 60));
         zonesPanel.setSize(100, 60);
@@ -590,6 +608,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         cheat.setBounds(40, 2, 25, 21);
         zonesPanel.add(cheat);
+
+        toolHintsHelper.setBounds(3, 2 + 21 + 2, 75, 21);
+        zonesPanel.add(toolHintsHelper);
 
         energyExperiencePanel = new JPanel();
         energyExperiencePanel.setPreferredSize(new Dimension(100, 20));
@@ -619,6 +640,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         btnPlayer.setText("Player");
         btnPlayer.setVisible(false);
         btnPlayer.setToolTipText("Player");
+        btnPlayer.setPreferredSize(new Dimension(20, 40));
         btnPlayer.addActionListener(e -> SessionHandler.sendPlayerUUID(gameId, playerId));
 
         // Add mana symbols
@@ -808,7 +830,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                 .addGap(6)
                                 .addComponent(avatar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(btnPlayer)
+                                .addComponent(btnPlayer, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(timerLabel)
                                 .addGap(2)
                                 // Life & Hand
@@ -912,18 +934,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     protected void sizePlayerPanel(boolean smallMode) {
+        int extraForMe = this.isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
         if (smallMode) {
             avatar.setVisible(false);
             btnPlayer.setVisible(true);
             timerLabel.setVisible(true);
-            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL));
-            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL);
+            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL + extraForMe));
+            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL + extraForMe);
         } else {
             avatar.setVisible(true);
             btnPlayer.setVisible(false);
             timerLabel.setVisible(false);
-            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT));
-            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT);
+            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT + extraForMe));
+            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT + extraForMe);
         }
     }
 
@@ -950,6 +973,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
         DckDeckImporter deckImporter = new DckDeckImporter();
         SessionHandler.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck", false));
+    }
+
+    private void btnToolHintsHelperActionPerformed(java.awt.event.ActionEvent evt) {
+        MageFrame.getGame(gameId).openCardHintsWindow("main");
     }
 
     public PlayerView getPlayer() {
@@ -984,6 +1011,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private HoverButton grave;
     private HoverButton library;
     private JButton cheat;
+    private JButton toolHintsHelper;
     private MageRoundPane panelBackground;
 
     private JLabel timerLabel;

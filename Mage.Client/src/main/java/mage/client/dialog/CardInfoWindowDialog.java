@@ -12,11 +12,13 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import mage.cards.MageCard;
 import mage.client.cards.BigCard;
+import mage.client.components.MageDesktopIconifySupport;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.CardType;
+import mage.util.RandomUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.ExileView;
@@ -29,7 +31,7 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class CardInfoWindowDialog extends MageDialog {
+public class CardInfoWindowDialog extends MageDialog implements MageDesktopIconifySupport {
 
     private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
@@ -47,22 +49,6 @@ public class CardInfoWindowDialog extends MageDialog {
         this.showType = showType;
         this.positioned = false;
         initComponents();
-
-        // ENABLE a minimizing window on double clicks
-        BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
-        ui.getNorthPane().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) { // double clicks and repeated double clicks
-                    e.consume();
-                    try {
-                        CardInfoWindowDialog.this.setIcon(!CardInfoWindowDialog.this.isIcon());
-                    } catch (PropertyVetoException exp) {
-                        // ignore read only
-                    }
-                }
-            }
-        });
 
         this.setModal(false);
         switch (this.showType) {
@@ -192,6 +178,7 @@ public class CardInfoWindowDialog extends MageDialog {
 
     @Override
     public void show() {
+        // hide empty exile windows
         if (showType == ShowType.EXILE) {
             if (cards == null || cards.getNumberOfCards() == 0) {
                 return;
@@ -199,7 +186,9 @@ public class CardInfoWindowDialog extends MageDialog {
         }
 
         super.show();
-        if (positioned) { // check if in frame rectangle
+
+        // auto-position on first usage
+        if (positioned) {
             showAndPositionWindow();
         }
     }
@@ -211,8 +200,10 @@ public class CardInfoWindowDialog extends MageDialog {
             if (width > 0 && height > 0) {
                 Point centered = SettingsManager.instance.getComponentPosition(width, height);
                 if (!positioned) {
-                    int xPos = centered.x / 2;
-                    int yPos = centered.y / 2;
+                    // starting position
+                    // little randomize to see multiple opened windows
+                    int xPos = centered.x / 2 + RandomUtil.nextInt(50);
+                    int yPos = centered.y / 2 + RandomUtil.nextInt(50);
                     CardInfoWindowDialog.this.setLocation(xPos, yPos);
                     show();
                     positioned = true;
