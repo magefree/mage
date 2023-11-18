@@ -3,6 +3,7 @@ package mage.util;
 import mage.MageObject;
 import mage.ObjectColor;
 
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 /**
@@ -54,11 +55,59 @@ public final class GameLog {
     }
 
     public static String getColoredObjectIdName(MageObject mageObject, MageObject alternativeObject) {
+        return getColoredObjectIdName(
+                mageObject.getColor(null),
+                mageObject.getId(),
+                mageObject.getName(),
+                String.format("[%s]", mageObject.getId().toString().substring(0, 3)),
+                alternativeObject == null ? null : alternativeObject.getName()
+        );
+    }
+
+    /**
+     * Prepare html text with additional object info (can be used for card popup in GUI)
+     *
+     * @param color text color of the colored part
+     * @param objectID object id
+     * @param visibleColorPart colored part, popup will be work on it
+     * @param visibleNormalPart additional part with default color
+     * @param alternativeName alternative name, popup will use it on unknown object id or name
+     * @return
+     */
+    public static String getColoredObjectIdName(ObjectColor color,
+                                                UUID objectID,
+                                                String visibleColorPart,
+                                                String visibleNormalPart,
+                                                String alternativeName) {
+        String additionalText = !visibleColorPart.isEmpty() && !visibleNormalPart.isEmpty() ? " " : "";
+        additionalText += visibleNormalPart;
         return "<font"
-                + " color='" + getColorName(mageObject.getColor(null)) + "'"
-                + " object_id='" + mageObject.getId() + "'"
-                + (alternativeObject == null ? "" : " alternative_name='" + CardUtil.urlEncode(alternativeObject.getName()) + "'")
-                + ">" + mageObject.getIdName() + "</font>";
+                + " color='" + getColorName(color) + "'"
+                + " object_id='" + objectID + "'"
+                + (alternativeName == null ? "" : " alternative_name='" + CardUtil.urlEncode(alternativeName) + "'")
+                + ">" + visibleColorPart + "</font>"
+                + additionalText;
+    }
+
+    /**
+     * Add popup card support in game logs (client will process all href links)
+     */
+    public static String injectPopupSupport(String htmlLogs) {
+        // input/output examples:
+        // some text
+        //   ignore
+        // <font color='red'>some text</font>
+        //   ignore
+        // <font color='#B0C4DE' object_id='xxx'>Mountain</font> [233]
+        //   <a href="#Mountain"><font color='#B0C4DE' object_id='xxx'>Mountain</font></a> [233]
+        // <font color='#FF6347' object_id='xxx'>[fc7]</font>
+        //   <a href="#[fc7]"><font color='#FF6347' object_id='xxx'>[fc7]</font></a>
+        // <font color='#CCCC33'>16:45, T1.M1: </font><font color='White'><font color='#20B2AA'>Human</font> puts <font color='#B0C4DE' object_id='3d2cae7c-9785-47b6-a636-84b07d939425'>Mountain</font> [3d2] from hand onto the Battlefield</font> [123]
+        //   <font color='#CCCC33'>16:45, T1.M1: </font><font color='White'><font color='#20B2AA'>Human</font> puts <a href="#Mountain"><font color='#B0C4DE' object_id='3d2cae7c-9785-47b6-a636-84b07d939425'>Mountain</font></a> [3d2] from hand onto the Battlefield</font> [123]
+        return htmlLogs.replaceAll("<br>", "\r\n<br>\r\n").replaceAll(
+                "<font (color=[^<]*object_id=[^>]*)>([^<]*)</font>",
+                "<a href=\"#$2\"><font $1>$2</font></a>"
+        );
     }
 
     public static String getColoredObjectIdNameForTooltip(MageObject mageObject) {
