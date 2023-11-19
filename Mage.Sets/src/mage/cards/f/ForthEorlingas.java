@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +27,6 @@ public final class ForthEorlingas extends CardImpl {
 
     public ForthEorlingas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{W}");
-        
 
         // Create X 2/2 red Human Knight creature tokens with trample and haste.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
@@ -34,7 +34,10 @@ public final class ForthEorlingas extends CardImpl {
         ));
 
         // Whenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ForthEorlingasTriggeredAbility()).concatBy("<br>"));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
+                new ForthEorlingasTriggeredAbility()).concatBy("<br>")
+        );
+        this.getSpellAbility().addHint(MonarchHint.instance);
     }
 
     private ForthEorlingas(final ForthEorlingas card) {
@@ -52,6 +55,7 @@ class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility {
     public ForthEorlingasTriggeredAbility() {
         super(new BecomesMonarchSourceEffect(), Duration.EndOfTurn, false);
         this.setTriggerPhrase("Whenever one or more creatures you control deal combat damage to one or more players this turn, ");
+        this.addHint(MonarchHint.instance);
     }
 
     private ForthEorlingasTriggeredAbility(final ForthEorlingasTriggeredAbility ability) {

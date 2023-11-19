@@ -7,6 +7,7 @@ import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -51,6 +52,7 @@ public final class OathOfEorl extends CardImpl {
             new AddCountersTargetEffect(CounterType.INDESTRUCTIBLE.createInstance()),
             new BecomesMonarchSourceEffect()
         );
+        sagaAbility.addHint(MonarchHint.instance);
 
         // III-- Put an indestructible counter on up to one target Human.
         sagaAbility.addChapterEffect(

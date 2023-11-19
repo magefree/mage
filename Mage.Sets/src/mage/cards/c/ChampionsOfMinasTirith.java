@@ -13,6 +13,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.combat.TargetPlayerCantAttackYouEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -36,7 +37,7 @@ public final class ChampionsOfMinasTirith extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Champions of Minas Tirith enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, where X is the number of cards in their hand. If they don't, they can't attack you this combat.
         this.addAbility(new ConditionalTriggeredAbility(
@@ -50,7 +51,7 @@ public final class ChampionsOfMinasTirith extends CardImpl {
                 MonarchIsSourceControllerCondition.instance,
                 "At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, "
                         + "where X is the number of cards in their hand. If they don't, they can't attack you this combat."
-        ));
+        ).addHint(MonarchHint.instance));
     }
 
     private ChampionsOfMinasTirith(final ChampionsOfMinasTirith card) {

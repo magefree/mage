@@ -7,6 +7,7 @@ import mage.abilities.condition.common.MonarchIsNotSetCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LivingMetalAbility;
@@ -51,7 +52,7 @@ public final class StarscreamSeekerLeader extends CardImpl {
             new DealsCombatDamageToAPlayerTriggeredAbility(new BecomesMonarchTargetEffect(), false, true),
             MonarchIsNotSetCondition.instance,
             "Whenever {this} deals combat damage to a player, if there is no monarch, that player becomes the monarch."
-        ));
+        ).addHint(MonarchHint.instance));
 
         // Whenever you become the monarch, convert Starscream.
         this.addAbility(new BecomesMonarchSourceControllerTriggeredAbility(

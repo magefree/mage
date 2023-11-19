@@ -9,6 +9,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -45,6 +46,7 @@ public final class DenethorStoneSeer extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new TargetAnyTarget());
+        ability.addHint(MonarchHint.instance);
 
         this.addAbility(ability);
     }
