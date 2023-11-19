@@ -113,11 +113,14 @@
                               <Component id="spnNumSeats" min="-2" pref="46" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lblPacks" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPlayer1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblPlayer1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="chkHostPlaying" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="pnlDraftOptions" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="lblNumRounds" min="-2" max="-2" attributes="0"/>
@@ -290,7 +293,7 @@
                   <Group type="102" attributes="0">
                       <Component id="pnlPacks" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlRandomPacks" pref="9" max="32767" attributes="0"/>
+                      <Component id="pnlRandomPacks" pref="12" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -307,7 +310,10 @@
                           <Component id="spnNumSeats" alignment="1" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblPlayer1" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblPlayer1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="chkHostPlaying" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="spnConstructTime" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -618,7 +624,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnlOtherPlayers" alignment="0" pref="8" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" alignment="0" pref="9" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -726,6 +732,16 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCustomOptionsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkHostPlaying">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Playing"/>
+        <Property name="toolTipText" type="java.lang.String" value="If checked, you are playing in the tournament"/>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="chkHostPlayingStateChanged"/>
       </Events>
     </Component>
   </SubComponents>

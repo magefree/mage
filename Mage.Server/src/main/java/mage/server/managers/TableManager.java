@@ -36,6 +36,8 @@ public interface TableManager {
 
     boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException;
 
+    boolean hostTournament(UUID userId, UUID tableId, String name, boolean joinAsPlayer, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException;
+
     boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException;
 
     boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException;

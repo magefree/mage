@@ -22,6 +22,7 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
+import org.jboss.util.collection.ConcurrentSet;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -47,6 +48,7 @@ public class User {
     private final String userName;
     private final String host;
     private final Date connectionTime;
+    private final Set<Table> hostTables; // tables for which the user is the host.
     private final Map<UUID, Table> tables;
     private final List<UUID> tablesToDelete;
     private final Map<UUID, GameSessionPlayer> gameSessions;
@@ -89,6 +91,7 @@ public class User {
             this.authorizedUser = null;
         }
 
+        this.hostTables = new ConcurrentSet<>();
         this.tables = new ConcurrentHashMap<>();
         this.gameSessions = new ConcurrentHashMap<>();
         this.draftSessions = new ConcurrentHashMap<>();
@@ -398,6 +401,17 @@ public class User {
 
     public void removeTournament(UUID playerId) {
         userTournaments.remove(playerId);
+    }
+
+    public void addHostTable(Table table) {
+        hostTables.add(table);
+    }
+
+    public void removeHostTable(UUID tableId) {
+        Optional<Table> tableToRemove = hostTables.stream().filter(t -> t.getId().equals(tableId)).findFirst();
+        if (tableToRemove.isPresent()) {
+            hostTables.remove(tableToRemove.get());
+        }
     }
 
     public void addTable(UUID playerId, Table table) {

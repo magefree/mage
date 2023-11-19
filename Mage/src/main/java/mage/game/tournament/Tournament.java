@@ -1,12 +1,9 @@
 
 package mage.game.tournament;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
+import mage.game.GameException;
 import mage.game.draft.Draft;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -15,13 +12,19 @@ import mage.game.result.ResultProtos.TourneyProto;
 import mage.players.Player;
 import mage.players.PlayerType;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public interface Tournament {
 
     UUID getId();
+
+    void addHost(UUID hostId) throws GameException;
 
     void addPlayer(Player player, PlayerType playerType);
 

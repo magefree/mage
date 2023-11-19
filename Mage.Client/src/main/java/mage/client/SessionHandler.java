@@ -25,9 +25,9 @@ import java.util.*;
 
 /**
  * Network: client side session
- *
+ * <p>
  * Only one session/server per GUI's client
- *
+ * <p>
  * Created by IGOUDT on 15-9-2016.
  */
 public final class SessionHandler {
@@ -38,7 +38,7 @@ public final class SessionHandler {
     private static Session session;
     private static String lastConnectError = "";
 
-    private SessionHandler(){
+    private SessionHandler() {
     }
 
     public static void startSession(MageFrame mageFrame) {
@@ -125,8 +125,16 @@ public final class SessionHandler {
         return session.getPlayerTypes();
     }
 
-    public static boolean joinTournamentTable(UUID roomId, UUID tableId, String text, PlayerType selectedItem, Integer integer, DeckCardLists deckCardLists, String s) {
-        return session.joinTournamentTable(roomId, tableId, text, selectedItem, integer, deckCardLists, s);
+    public static boolean hostTournamentTable(UUID roomId, UUID tableId, String hostName, boolean joinAsPlayer, PlayerType playerType,
+                                              Integer skill, DeckCardLists deckCardLists, String password
+    ) {
+        return session.hostTournamentTable(roomId, tableId, hostName, joinAsPlayer, playerType, skill, deckCardLists, password);
+    }
+
+    public static boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, PlayerType playerType,
+                                              Integer skill, DeckCardLists deckCardLists, String password
+    ) {
+        return session.joinTournamentTable(roomId, tableId, playerName, playerType, skill, deckCardLists, password);
     }
 
     public static void sendPlayerInteger(UUID gameId, int data) {
@@ -240,7 +248,7 @@ public final class SessionHandler {
 
     private static void autoSaveLimitedDeck(DeckCardLists deckList) {
         String autoSave = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_LIMITED_DECK_AUTO_SAVE, "true");
-        if(autoSave.equals("true")){
+        if (autoSave.equals("true")) {
             // Log the submitted deck in the log folder.
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             String logFilename = sdf.format(new Date()) + "_limited" + ".dck";
@@ -254,7 +262,7 @@ public final class SessionHandler {
 
     public static boolean submitDeck(DeckEditorMode mode, UUID tableId, DeckCardLists deckCardLists) {
         boolean success = session.submitDeck(tableId, deckCardLists);
-        if(DeckEditorMode.LIMITED_BUILDING.equals(mode)) {
+        if (DeckEditorMode.LIMITED_BUILDING.equals(mode)) {
             // AutoSaving is done after submitting, to not let the server wait.
             autoSaveLimitedDeck(deckCardLists);
         }
