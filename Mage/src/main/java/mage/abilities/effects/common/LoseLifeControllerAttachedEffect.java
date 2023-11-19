@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -38,24 +37,21 @@ public class LoseLifeControllerAttachedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null) {
-            enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        Permanent attachment = source.getSourcePermanentOrLKI(game);
+        if (attachment == null || attachment.getAttachedTo() == null) {
+            return false;
         }
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature == null) {
-                creature = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (creature != null) {
-                Player player = game.getPlayer(creature.getControllerId());
-                if (player != null) {
-                    player.loseLife(amount.calculate(game, source, this), game, source, false);
-                    return true;
-                }
-            }
+        Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
+                    Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
+        if (attachedTo == null) {
+            return false;
         }
-        return false;
+        Player player = game.getPlayer(attachedTo.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        player.loseLife(amount.calculate(game, source, this), game, source, false);
+        return true;
     }
 
     private void setText() {
