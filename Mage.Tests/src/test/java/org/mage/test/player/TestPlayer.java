@@ -2005,7 +2005,7 @@ public class TestPlayer implements Player {
     private String getInfo(Ability o, Game game) {
         if (o != null) {
             MageObject object = o.getSourceObject(game);
-            return "Ability: " + (object == null ? "" : object.getName() + " - " + o.getClass().getSimpleName() + ": " + o.getRule());
+            return "Ability: " + (object == null ? "" : object.getIdName() + " - " + o.getClass().getSimpleName() + ": " + o.getRule());
         }
         return "Ability: null";
     }
