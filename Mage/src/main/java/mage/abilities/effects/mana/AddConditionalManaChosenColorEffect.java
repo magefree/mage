@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * @author Susucr
@@ -26,7 +27,10 @@ public class AddConditionalManaChosenColorEffect extends ManaEffect {
         super();
         this.amount = amount;
         this.manaBuilder = manaBuilder;
-        staticText = "Add " + this.amount.toString() + " mana of the chosen color. " + manaBuilder.getRule();
+        String value = (amount instanceof StaticValue
+                ? CardUtil.numberToText(((StaticValue) amount).getValue())
+                : amount.toString());
+        staticText = "Add " + value + " mana of the chosen color. " + manaBuilder.getRule();
     }
 
     private AddConditionalManaChosenColorEffect(final AddConditionalManaChosenColorEffect effect) {
