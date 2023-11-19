@@ -13,7 +13,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
-import mage.game.permanent.token.HumanWarriorToken;
+import mage.game.permanent.token.HumanSoldierToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
@@ -35,8 +35,8 @@ public final class Vault101BirthdayParty extends CardImpl {
 
         // I -- Create a 1/1 white Human Soldier creature token and a Food token.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
-                new CreateTokenEffect(new HumanWarriorToken()),
-                new CreateTokenEffect(new FoodToken()));
+                new CreateTokenEffect(new HumanSoldierToken()),
+                new CreateTokenEffect(new FoodToken()).setText("and a Food token"));
 
         // II, III -- You may put an Aura or Equipment card from your hand or graveyard onto the battlefield.
         // If an Equipment is put onto the battlefield this way, you may attach it to a creature you control.
@@ -60,7 +60,7 @@ public final class Vault101BirthdayParty extends CardImpl {
 
 class Vault101BirthdayPartyEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("");
+    private static final FilterCard filter = new FilterCard("an Aura or Equipment card from your hand or graveyard");
 
     static {
         filter.add(Predicates.or(
@@ -69,9 +69,9 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
         ));
     }
 
-    public Vault101BirthdayPartyEffect() {
+    Vault101BirthdayPartyEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "put an Aura or Equipment card from your hand or graveyard onto the battlefield. "
+        this.staticText = "you may put an Aura or Equipment card from your hand or graveyard onto the battlefield. "
                          + "If an Equipment is put onto the battlefield this way, you may attach it to a creature you control." ;
     }
 
@@ -80,8 +80,8 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
     }
 
     @Override
-    public mage.cards.v.Vault101BirthdayPartyEffect copy() {
-        return new mage.cards.v.Vault101BirthdayPartyEffect(this);
+    public Vault101BirthdayPartyEffect copy() {
+        return new Vault101BirthdayPartyEffect(this);
     }
 
     @Override
