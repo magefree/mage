@@ -24,6 +24,7 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.TemptedByTheRingWatcher;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
