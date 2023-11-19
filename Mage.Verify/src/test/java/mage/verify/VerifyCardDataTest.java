@@ -15,6 +15,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.common.CitysBlessingHint;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
@@ -36,7 +38,9 @@ import mage.server.util.SystemUtil;
 import mage.sets.TherosBeyondDeath;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
-import mage.verify.mtgjson.*;
+import mage.verify.mtgjson.MtgJsonCard;
+import mage.verify.mtgjson.MtgJsonService;
+import mage.verify.mtgjson.MtgJsonSet;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -2022,22 +2026,39 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "wrong target settings (must set withNotTarget(true), but it not)");
         }
 
-        // special check: missing or wrong ability/effect hints
-        Map<Class, String> hints = new HashMap<>();
-        hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
-        hints.put(MenaceAbility.class, "can't be blocked except by two or more");
-        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom");
-        hints.put(EquipAbility.class, "Equip only as a sorcery.");
-        hints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
-        hints.put(ProliferateEffect.class, "Choose any number of permanents and/or players, then give each another counter of each kind already there.");
-
-        for (Class objectClass : hints.keySet()) {
-            String objectHint = hints.get(objectClass);
+        // special check: missing or wrong ability/effect rules hint
+        Map<Class, String> ruleHints = new HashMap<>();
+        ruleHints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
+        ruleHints.put(MenaceAbility.class, "can't be blocked except by two or more");
+        ruleHints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom");
+        ruleHints.put(EquipAbility.class, "Equip only as a sorcery.");
+        ruleHints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
+        ruleHints.put(ProliferateEffect.class, "Choose any number of permanents and/or players, then give each another counter of each kind already there.");
+        for (Class objectClass : ruleHints.keySet()) {
+            String needText = ruleHints.get(objectClass);
             // ability/effect must have description or not
-            boolean needHint = ref.text.contains(objectHint);
-            boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
+            boolean needHint = ref.text.contains(needText);
+            boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(needText));
             if (needHint != haveHint) {
                 warn(card, "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
+            }
+        }
+
+        // special check: missing card hints like designation
+        Map<Class, String> cardHints = new HashMap<>();
+        cardHints.put(CitysBlessingHint.class, "city's blessing");
+        cardHints.put(MonarchHint.class, "the monarch");
+        for (Class hintClass : cardHints.keySet()) {
+            String lookupText = cardHints.get(hintClass);
+            boolean needHint = ref.text.contains(lookupText);
+            if (needHint) {
+                boolean haveHint = card.getAbilities()
+                        .stream()
+                        .flatMap(ability -> ability.getHints().stream())
+                        .anyMatch(h -> h.getClass().equals(hintClass));
+                if (!haveHint) {
+                    fail(card, "abilities", "miss card hint: " + hintClass.getSimpleName());
+                }
             }
         }
 
