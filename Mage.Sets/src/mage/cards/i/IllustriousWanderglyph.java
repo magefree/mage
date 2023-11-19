@@ -7,6 +7,7 @@ import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,7 +42,7 @@ public final class IllustriousWanderglyph extends CardImpl {
                         StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE, true
                 ), CitysBlessingCondition.instance, "other artifact creatures you control " +
                 "get +2/+2 as long as you have the city's blessing"
-        )));
+        )).addHint(CitysBlessingHint.instance));
 
         // At the beginning of each upkeep, create a 1/1 colorless Gnome artifact creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
