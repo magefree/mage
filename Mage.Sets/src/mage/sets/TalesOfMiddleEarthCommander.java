@@ -282,6 +282,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Smoldering Marsh", 332, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 284, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Song of Earendil", 69, Rarity.RARE, mage.cards.s.SongOfEarendil.class));
+        cards.add(new SetCardInfo("Sorcerous Squall", 504, Rarity.RARE, mage.cards.s.SorcerousSquall.class));
         cards.add(new SetCardInfo("Soul's Attendant", 520, Rarity.UNCOMMON, mage.cards.s.SoulsAttendant.class));
         cards.add(new SetCardInfo("Stonehewer Giant", 521, Rarity.RARE, mage.cards.s.StonehewerGiant.class));
         cards.add(new SetCardInfo("Subjugate the Hobbits", 24, Rarity.RARE, mage.cards.s.SubjugateTheHobbits.class));
