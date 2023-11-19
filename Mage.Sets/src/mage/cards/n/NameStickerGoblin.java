@@ -40,7 +40,7 @@ public final class NameStickerGoblin extends CardImpl {
         this.toughness = new MageInt(2);
 
 
-        RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect();
+        RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect(20, "roll a 20-sided die");
         // When this creature enters the battlefield from anywhere other than a graveyard or exile, if it’s
         // on the battlefield and you control 9 or fewer creatures named “Name Sticker” Goblin, roll a 20-sided die.
         // 1-6 | Add {R}{R}{R}{R}.
