@@ -1,20 +1,18 @@
 package mage.cards.f;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
@@ -118,7 +116,7 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         }
 
         // ask to cast order
-        if (!cardsToCast.isEmpty()) {
+        if (cardsToCast.size() > 1) {
             String cardsOrder = cardsToCast.stream()
                     .map(game::getCard)
                     .filter(Objects::nonNull)
@@ -135,13 +133,7 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         for (UUID id : cardsToCast) {
             Card card = game.getCard(id);
             if (card != null) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                controller.cast(controller.chooseAbilityForCast(card, game, true),
-                        game, true, new ApprovingObject(source, game));
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                ContinuousEffect effect = new FinaleOfPromiseReplacementEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
-                game.addEffect(effect, source);
+                new MayCastTargetThenExileEffect(true).setTargetPointer(new FixedTarget(card, game)).apply(game, source);
             }
         }
 
@@ -160,51 +152,5 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         }
 
         return true;
-    }
-}
-
-class FinaleOfPromiseReplacementEffect extends ReplacementEffectImpl {
-
-    public FinaleOfPromiseReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If a card cast this way would be put into your graveyard this turn, exile it instead";
-    }
-
-    private FinaleOfPromiseReplacementEffect(final FinaleOfPromiseReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FinaleOfPromiseReplacementEffect copy() {
-        return new FinaleOfPromiseReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null) {
-                return controller.moveCards(card, Zone.EXILED, source, game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 }

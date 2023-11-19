@@ -150,9 +150,7 @@ class JeskaThriceRebornEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int amount = event.getAmount();
-        event.setAmount(CardUtil.overflowInc(amount, event.getAmount()));
-        event.setAmount(CardUtil.overflowInc(amount, event.getAmount()));
+        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 3));
         return false;
     }
 }
