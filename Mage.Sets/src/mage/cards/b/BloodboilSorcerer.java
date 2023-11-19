@@ -8,6 +8,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +32,7 @@ public final class BloodboilSorcerer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Bloodboil Sorcerer enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // Crown of Madness — {1}{R}, Sacrifice an artifact or creature: Goad target creature.
         Ability ability = new SimpleActivatedAbility(new GoadTargetEffect(), new ManaCostsImpl<>("{1}{R}"));

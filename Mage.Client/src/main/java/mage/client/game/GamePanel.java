@@ -1291,7 +1291,7 @@ public final class GamePanel extends javax.swing.JPanel {
         clearClosedCardHintsWindows();
 
         // too many dialogs can cause bad GUI performance, so limit it
-        if (cardHintsWindows.size() > CardHintsHelperDialog.GUI_MAX_CARD_HINTS_DIALOGS_PER_GAME) {
+        if (cardHintsWindows.size() >= CardHintsHelperDialog.GUI_MAX_CARD_HINTS_DIALOGS_PER_GAME) {
             // show last one instead
             cardHintsWindows.values().stream().reduce((a, b) -> b).ifPresent(CardHintsHelperDialog::show);
             return;

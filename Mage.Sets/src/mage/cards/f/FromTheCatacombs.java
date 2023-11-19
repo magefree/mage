@@ -3,6 +3,7 @@ package mage.cards.f;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldWithCounterTargetEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.common.replacement.LeaveBattlefieldExileTargetReplacementEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.EscapeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,6 +32,7 @@ public final class FromTheCatacombs extends CardImpl {
 
         // You take the initiative.
         this.getSpellAbility().addEffect(new TakeTheInitiativeEffect().concatBy("<br>"));
+        this.getSpellAbility().addHint(InitiativeHint.instance);
 
         // Escape—{3}{B}{B}, Exile four other cards from your graveyard.
         this.addAbility(new EscapeAbility(this, "{3}{B}{B}", 5));

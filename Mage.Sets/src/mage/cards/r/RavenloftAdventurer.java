@@ -10,6 +10,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -39,7 +40,7 @@ public final class RavenloftAdventurer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Ravenloft Adventurer enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // If a creature an opponent controls would die, instead exile it and put a hit counter on it.
         this.addAbility(new SimpleStaticAbility(new RavenloftAdventurerReplacementEffect()));
