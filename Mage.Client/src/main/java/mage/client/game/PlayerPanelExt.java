@@ -395,9 +395,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                     + "<br/>Deck hash code: " + player.getDeckHashCode()
                     + "<br/>This match wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)";
         }
-        // Extend tooltip
+
+        // extend tooltip
         StringBuilder tooltipText = new StringBuilder(basicTooltipText);
         tooltipText.append("<br/>Match time remaining: ").append(getPriorityTimeLeftString(player));
+
+        // designations
         this.avatar.setTopTextImageRight(null);
         for (String name : player.getDesignationNames()) {
             tooltipText.append("<br/>").append(name);
@@ -406,11 +409,15 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
         if (player.isMonarch()) {
+            tooltipText.append("<br/>").append("The Monarch");
             this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
         }
         if (player.isInitiative()) {
+            tooltipText.append("<br/>").append("Have the Initiative");
             this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/initiative.png"));
         }
+
+        // counters
         for (Counter counter : player.getCounters().values()) {
             tooltipText.append("<br/>").append(counter.getName()).append(" counters: ").append(counter.getCount());
         }
