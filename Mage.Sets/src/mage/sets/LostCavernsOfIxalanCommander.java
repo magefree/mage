@@ -125,7 +125,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furycalm Snarl", 333, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Game Trail", 334, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", 335, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
-        cards.add(new SetCardInfo("Generous Gift", 128, Rarity.COMMON, mage.cards.g.GenerousGift.class));
+        cards.add(new SetCardInfo("Generous Gift", 128, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 157, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Glass-Cast Heart", 199, Rarity.RARE, mage.cards.g.GlassCastHeart.class));
         cards.add(new SetCardInfo("Growth Spiral", 270, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
@@ -294,7 +294,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Xenagos, God of Revels", 295, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
         cards.add(new SetCardInfo("Xolatoyac, the Smiling Flood", 8, Rarity.MYTHIC, mage.cards.x.XolatoyacTheSmilingFlood.class));
         cards.add(new SetCardInfo("Yahenni, Undying Partisan", 214, Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
-        cards.add(new SetCardInfo("Zacama, Primal Calamity", 296, Rarity.RARE, mage.cards.z.ZacamaPrimalCalamity.class));
+        cards.add(new SetCardInfo("Zacama, Primal Calamity", 296, Rarity.MYTHIC, mage.cards.z.ZacamaPrimalCalamity.class));
         cards.add(new SetCardInfo("Zara, Renegade Recruiter", 297, Rarity.RARE, mage.cards.z.ZaraRenegadeRecruiter.class));
         cards.add(new SetCardInfo("Zegana, Utopian Speaker", 298, Rarity.RARE, mage.cards.z.ZeganaUtopianSpeaker.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 141, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
