@@ -54,6 +54,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Another Chance", 90, Rarity.COMMON, mage.cards.a.AnotherChance.class));
         cards.add(new SetCardInfo("Armored Kincaller", 174, Rarity.COMMON, mage.cards.a.ArmoredKincaller.class));
         cards.add(new SetCardInfo("Attentive Sunscribe", 4, Rarity.COMMON, mage.cards.a.AttentiveSunscribe.class));
+        cards.add(new SetCardInfo("Barracks of the Thousand", 39, Rarity.RARE, mage.cards.b.BarracksOfTheThousand.class));
         cards.add(new SetCardInfo("Bartolome del Presidio", 224, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class));
         cards.add(new SetCardInfo("Basking Capybara", 175, Rarity.COMMON, mage.cards.b.BaskingCapybara.class));
         cards.add(new SetCardInfo("Bat Colony", 5, Rarity.UNCOMMON, mage.cards.b.BatColony.class));
@@ -327,6 +328,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Skullspore Nexus", 212, Rarity.MYTHIC, mage.cards.t.TheSkullsporeNexus.class));
         cards.add(new SetCardInfo("Thousand Moons Crackshot", 37, Rarity.COMMON, mage.cards.t.ThousandMoonsCrackshot.class));
         cards.add(new SetCardInfo("Thousand Moons Infantry", 38, Rarity.COMMON, mage.cards.t.ThousandMoonsInfantry.class));
+        cards.add(new SetCardInfo("Thousand Moons Smithy", 39, Rarity.RARE, mage.cards.t.ThousandMoonsSmithy.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 216, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
         cards.add(new SetCardInfo("Threefold Thunderhulk", 265, Rarity.RARE, mage.cards.t.ThreefoldThunderhulk.class));
         cards.add(new SetCardInfo("Throne of the Grim Captain", 266, Rarity.RARE, mage.cards.t.ThroneOfTheGrimCaptain.class));
