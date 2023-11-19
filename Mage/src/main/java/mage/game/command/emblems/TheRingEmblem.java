@@ -24,8 +24,6 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.TemptedByTheRingWatcher;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -71,7 +69,7 @@ public final class TheRingEmblem extends Emblem {
                 ).setTriggerPhrase("Whenever your Ring-bearer attacks, ");
                 break;
             case 2:
-                logText ="Whenever your Ring-bearer becomes blocked by a creature, that creature's controller sacrifices it at end of combat.";
+                logText = "Whenever your Ring-bearer becomes blocked by a creature, that creature's controller sacrifices it at end of combat.";
                 ability = new TheRingEmblemTriggeredAbility();
                 break;
             case 3:
@@ -91,9 +89,9 @@ public final class TheRingEmblem extends Emblem {
         game.getState().addAbility(ability, this);
 
         String name = "";
-        if(controllerId  != null){
+        if (controllerId != null) {
             Player player = game.getPlayer(controllerId);
-            if(player != null){
+            if (player != null) {
                 name = player.getLogName();
             }
         }
@@ -130,7 +128,6 @@ class TheRingEmblemLegendaryEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = Optional
                 .ofNullable(game.getPlayer(source.getControllerId()))
-                .filter(Objects::nonNull)
                 .map(player -> player.getRingBearer(game))
                 .orElse(null);
         if (permanent == null) {
@@ -186,7 +183,7 @@ class TheRingEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
     }
 
     @Override
@@ -195,7 +192,7 @@ class TheRingEmblemTriggeredAbility extends TriggeredAbilityImpl {
         Permanent blocker = game.getPermanent(event.getSourceId());
         if (attacker == null
                 || blocker == null
-                || attacker.isControlledBy(getControllerId())
+                || !attacker.isControlledBy(getControllerId())
                 || !attacker.isRingBearer()) {
             return false;
         }

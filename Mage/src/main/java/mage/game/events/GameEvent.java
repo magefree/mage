@@ -307,13 +307,40 @@ public class GameEvent implements Serializable {
         DECLARING_BLOCKERS,
         DECLARED_BLOCKERS,
         DECLARE_BLOCKER,
+
         /* BLOCKER_DECLARED
+         raise one time for each declared blocker (e.g. multiple events per attacker allows)
+
+         warning, must use for rules: becomes blocked by a creature
+
+         rules ref:
+         Acolyte of the Inferno’s last ability will trigger once for each creature that blocks it.
+         Each of those creatures will be dealt 2 damage.
+         (2015-06-22)
+
          targetId    attacker id
          sourceId    blocker id
          playerId    blocker controller id
          */
         BLOCKER_DECLARED,
+
+        /* CREATURE_BLOCKED
+         raise one time per attacker (e.g. only one event per attacker allows)
+
+         warning, must use for rules: xxx becomes blocked,
+
+         rules ref:
+         Rakdos Roustabout
+         An ability that triggers when a creature becomes blocked triggers only once
+         if two or more creatures block it.
+         (2019-01-25)
+
+         targetId    attacker id
+         sourceId    not used for this event
+         playerId    not used for this event
+         */
         CREATURE_BLOCKED,
+
         CREATURE_BLOCKS,
         BATCH_BLOCK_NONCOMBAT,
         UNBLOCKED_ATTACKER,
