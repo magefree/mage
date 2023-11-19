@@ -34,6 +34,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Sol Ring", 359, Rarity.MYTHIC, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Swamp", 321, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("V.A.T.S.", 50, Rarity.RARE, mage.cards.v.VATS.class));
+        cards.add(new SetCardInfo("Vault 101: Birthday Party", 28, Rarity.RARE, mage.cards.v.Vault101BirthdayParty.class));
         cards.add(new SetCardInfo("Wasteland", 361, Rarity.RARE, mage.cards.w.Wasteland.class));
     }
 }
