@@ -30,7 +30,7 @@ public final class VeiledSentry extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastOpponentTriggeredAbility(new VeiledSentryEffect(), false),
                 condition, "When an opponent casts a spell, if {this} is an enchantment, " +
-                "{this} becomes an Illusion creature with power and toughness equal to that spell's mana value."
+                "{this} becomes an Illusion creature with power and toughness each equal to that spell's mana value."
         ));
     }
 

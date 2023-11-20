@@ -37,7 +37,7 @@ public final class MaelstromDjinn extends CardImpl {
 
         // When Maelstrom Djinn is turned face up, put two time counters on it and it gains vanishing.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.TIME.createInstance(2))
+                new AddCountersSourceEffect(CounterType.TIME.createInstance(2)).setText("put two time counters on it")
         );
         ability.addEffect(new GainAbilitySourceEffect(
                 new VanishingAbility(0), Duration.WhileOnBattlefield

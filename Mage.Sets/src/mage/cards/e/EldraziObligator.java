@@ -42,7 +42,7 @@ public final class EldraziObligator extends CardImpl {
 
         DoIfCostPaid costPaidEffect = new DoIfCostPaid(new GainControlTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{C}"));
         Effect untapEffect = new UntapTargetEffect();
-        untapEffect.setText("untap that creature,");
+        untapEffect.setText(", untap that creature,");
         Effect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         hasteEffect.setText("and it gains haste until end of turn");
         costPaidEffect.addEffect(untapEffect);

@@ -56,7 +56,7 @@ class SleeperAgentChangeControlEffect extends ContinuousEffectImpl {
 
     public SleeperAgentChangeControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "target opponent gains control of {this}";
+        staticText = "target opponent gains control of it";
     }
 
     private SleeperAgentChangeControlEffect(final SleeperAgentChangeControlEffect effect) {
@@ -79,5 +79,3 @@ class SleeperAgentChangeControlEffect extends ContinuousEffectImpl {
         return false;
     }
 }
-
-

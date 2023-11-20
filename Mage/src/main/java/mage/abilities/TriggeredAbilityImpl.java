@@ -226,7 +226,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
             }
             if (replaceRuleText && triggerPhrase != null) {
-                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |put a [^ ]+ counter on |return )?\\{this\\}", "$1it");
+                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |put an? [^ ]+ counter on |return |transform )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
             if (triggersOnceEachTurn) {
@@ -272,6 +272,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         || effect instanceof ReturnToHandSourceEffect
                         || effect instanceof ShuffleIntoLibrarySourceEffect
                         || effect instanceof ExileSourceEffect
+                        || effect instanceof FlipSourceEffect
+                        || effect instanceof DestroySourceEffect
         ) ? "When " : "Whenever ");
     }
 

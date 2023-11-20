@@ -2,9 +2,6 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -25,10 +22,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        boolean textWhen = !optional && (effect instanceof SacrificeSourceEffect
-                || effect instanceof ShuffleIntoLibrarySourceEffect
-                || effect instanceof ExileSourceEffect);
-        setTriggerPhrase((textWhen ? "When" : "Whenever") + " {this} deals combat damage to a player, ");
+        setTriggerPhrase(getWhen() + "{this} deals combat damage to a player, ");
         this.replaceRuleText = true;
     }
 

@@ -75,7 +75,8 @@ public class ProtectionAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove Auras.");
+        return (flavorWord == null ? "protection from " : CardUtil.italicizeWithEmDash(flavorWord) + "Protection from ")
+                + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove Auras.");
     }
 
     public boolean canTarget(MageObject source, Game game) {
@@ -125,7 +126,7 @@ public class ProtectionAbility extends StaticAbility {
         return true;
     }
 
-    private static final String getFilterText(ObjectColor color) {
+    private static String getFilterText(ObjectColor color) {
         return CardUtil.concatWithAnd(
                 color.getColors()
                         .stream()

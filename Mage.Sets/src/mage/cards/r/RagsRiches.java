@@ -48,9 +48,9 @@ public final class RagsRiches extends SplitCard {
 
 class RichesEffect extends OneShotEffect {
 
-    public RichesEffect() {
+    RichesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each opponent chooses a creature they control. You gain control of each of those creatures.";
+        this.staticText = "Each opponent chooses a creature they control. You gain control of those creatures.";
     }
 
     private RichesEffect(final RichesEffect effect) {

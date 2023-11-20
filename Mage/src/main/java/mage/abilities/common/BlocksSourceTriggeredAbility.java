@@ -18,6 +18,7 @@ public class BlocksSourceTriggeredAbility extends TriggeredAbilityImpl {
     public BlocksSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("Whenever {this} blocks, ");
+        this.replaceRuleText = true;
     }
 
     protected BlocksSourceTriggeredAbility(final BlocksSourceTriggeredAbility ability) {

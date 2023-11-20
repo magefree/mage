@@ -56,7 +56,7 @@ class CurseOfBountyEffect extends OneShotEffect {
 
     CurseOfBountyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "untap all nonland permanents you control. Each opponent attacking that player does the same.";
+        this.staticText = "untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents they control.";
     }
 
     private CurseOfBountyEffect(final CurseOfBountyEffect effect) {

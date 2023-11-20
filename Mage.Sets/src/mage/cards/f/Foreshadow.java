@@ -28,12 +28,13 @@ public final class Foreshadow extends CardImpl {
 
         // Choose a card name, then target opponent puts the top card of their library into their graveyard. If that card has the chosen name, you draw a card.
         this.getSpellAbility().addEffect(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL));
-        this.getSpellAbility().addEffect(new ForeshadowEffect().concatBy("then"));
+        this.getSpellAbility().addEffect(new ForeshadowEffect().concatBy(", then"));
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false)
+                .concatBy("<br>"));
     }
 
     private Foreshadow(final Foreshadow card) {
@@ -50,7 +51,7 @@ class ForeshadowEffect extends OneShotEffect {
 
     ForeshadowEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "target opponent mills a card. If that card has the chosen name, you draw a card";
+        this.staticText = "target opponent mills a card. If a card with the chosen name was milled this way, you draw a card";
     }
 
     private ForeshadowEffect(final ForeshadowEffect effect) {

@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -86,7 +85,7 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature deals combat damage to you, that creature's controller gains control of {this}";
+        return "Whenever a creature deals combat damage to you, that creature's controller gains control of {this}.";
     }
 
 }

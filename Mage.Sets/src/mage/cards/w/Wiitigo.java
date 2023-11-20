@@ -41,7 +41,7 @@ public final class Wiitigo extends CardImpl {
 
         // Wiitigo enters the battlefield with six +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(6))));
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(6)), "with six +1/+1 counters on it"));
 
         // At the beginning of your upkeep, put a +1/+1 counter on Wiitigo if it has blocked or been blocked since your last upkeep. Otherwise, remove a +1/+1 counter from it.
         Ability triggeredAbility = new BeginningOfUpkeepTriggeredAbility(
@@ -49,7 +49,7 @@ public final class Wiitigo extends CardImpl {
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                         new RemoveCounterSourceEffect(CounterType.P1P1.createInstance(1)),
                         new BlockedOrBeenBlockedSinceYourLastUpkeepCondition(),
-                        "put a +1/+1 counter on enchanted creature if it blocked or been blocked since your last "
+                        "put a +1/+1 counter on {this} if it has blocked or been blocked since your last "
                         + "upkeep. Otherwise, remove a +1/+1 counter from it"),
                 TargetController.YOU,
                 false);

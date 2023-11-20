@@ -2330,7 +2330,7 @@ public class VerifyCardDataTest {
         }
 
         // remove unnecessary reminder text
-        refText = refText.replaceAll("^\\(.+(can be paid with|ransforms from).+\\)\n", "");
+        refText = refText.replaceAll("^\\(.+(can be paid with|ransforms from|represents).+\\)\n", "");
 
         // mana ability fix
         // Current implementation makes one Activated Ability per kind of color.
