@@ -126,6 +126,16 @@ public class ConditionalRequirementEffect extends RequirementEffect {
     }
 
     @Override
+    public boolean mustBlockAllAttackers(Game game) {
+        if (conditionState) {
+            return effect.mustBlockAllAttackers(game);
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.mustBlockAllAttackers(game);
+        }
+        return false;
+    }
+
+    @Override
     public UUID mustAttackDefender(Ability source, Game game) {
         if (conditionState) {
             return effect.mustAttackDefender(source, game);
@@ -143,6 +153,26 @@ public class ConditionalRequirementEffect extends RequirementEffect {
             return otherwiseEffect.mustBlockAttacker(source, game);
         }
         return null;
+    }
+
+    @Override
+    public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
+        if (conditionState) {
+            return effect.mustBlockAttackerIfElseUnblocked(source, game);
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.mustBlockAttackerIfElseUnblocked(source, game);
+        }
+        return null;
+    }
+
+    @Override
+    public int getMinNumberOfBlockers() {
+        if (conditionState) {
+            return effect.getMinNumberOfBlockers();
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.getMinNumberOfBlockers();
+        }
+        return super.getMinNumberOfBlockers();
     }
 
     @Override
