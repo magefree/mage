@@ -128,9 +128,9 @@ public class ConditionalRequirementEffect extends RequirementEffect {
     @Override
     public boolean mustBlockAllAttackers(Game game) {
         if (conditionState) {
-            return effect.mustBlockAny(game);
+            return effect.mustBlockAllAttackers(game);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.mustBlockAny(game);
+            return otherwiseEffect.mustBlockAllAttackers(game);
         }
         return false;
     }
