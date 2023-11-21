@@ -454,7 +454,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 pnlShortCuts.revalidate();
                 pnlShortCuts.repaint();
                 for (PlayAreaPanel p : players.values()) {
-                    p.sizePlayer(smallMode);
+                    p.setSizeMode(smallMode);
                 }
             }
         } else if (smallMode) {
@@ -466,7 +466,7 @@ public final class GamePanel extends javax.swing.JPanel {
             pnlShortCuts.revalidate();
             pnlShortCuts.repaint();
             for (PlayAreaPanel p : players.values()) {
-                p.sizePlayer(smallMode);
+                p.setSizeMode(smallMode);
             }
         }
 
@@ -691,7 +691,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         for (PlayAreaPanel p : players.values()) {
-            p.sizePlayer(smallMode);
+            p.setSizeMode(smallMode);
         }
 
         GridBagConstraints panelC = new GridBagConstraints();

@@ -562,18 +562,28 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.setLayout(layout);
     }
 
-    public void sizePlayer(boolean smallMode) {
-        this.playerPanel.sizePlayerPanel(smallMode);
+    public void setSizeMode(boolean smallMode) {
         this.smallMode = smallMode;
-        int extraForMe = this.isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
+        sizePlayerPanel(this.playerPanel, this.isMe, this.smallMode);
+        sizeBattlefieldPanel(this.battlefieldPanel, this.isMe, this.smallMode);
+    }
+
+    public static void sizePlayerPanel(PlayerPanelExt playerPanel, boolean isMe, boolean smallMode) {
+        playerPanel.sizePlayerPanel(smallMode);
+        int extraForMe = isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
         if (smallMode) {
-            this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT_SMALL + extraForMe));
-            //this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
-            this.battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT_SMALL + extraForMe));
+            playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT_SMALL + extraForMe));
         } else {
-            this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT + extraForMe));
-            //this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
-            this.battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT + extraForMe));
+            playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT + extraForMe));
+        }
+    }
+
+    public static void sizeBattlefieldPanel(BattlefieldPanel battlefieldPanel, boolean isMe, boolean smallMode) {
+        int extraForMe = isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
+        if (smallMode) {
+            battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT_SMALL + extraForMe));
+        } else {
+            battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT + extraForMe));
         }
     }
 
