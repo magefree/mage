@@ -62,9 +62,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
     private static final Border YELLOW_BORDER = new LineBorder(Color.yellow, 3);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
-    private final Color inactiveBackgroundColor;
-    private final Color activeBackgroundColor;
-    private final Color deadBackgroundColor;
 
     private final Color activeValueColor = new Color(244, 9, 47);
     private final Font fontValuesZero = this.getFont().deriveFont(Font.PLAIN);
@@ -84,11 +81,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         initComponents();
         setGUISize();
-
-        ThemeType currentTheme = PreferencesDialog.getCurrentTheme();
-        inactiveBackgroundColor = currentTheme.getPlayerPanel_inactiveBackgroundColor();
-        activeBackgroundColor = currentTheme.getPlayerPanel_activeBackgroundColor();
-        deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();
     }
 
     public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime) {
@@ -370,15 +362,15 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void resetBackgroundColor() {
-        panelBackground.setBackgroundColor(inactiveBackgroundColor);
+        panelBackground.setBackgroundColor(PreferencesDialog.getCurrentTheme().getPlayerPanel_inactiveBackgroundColor());
     }
 
     private void setGreenBackgroundColor() {
-        panelBackground.setBackgroundColor(activeBackgroundColor);
+        panelBackground.setBackgroundColor(PreferencesDialog.getCurrentTheme().getPlayerPanel_activeBackgroundColor());
     }
 
     private void setDeadBackgroundColor() {
-        panelBackground.setBackgroundColor(deadBackgroundColor);
+        panelBackground.setBackgroundColor(PreferencesDialog.getCurrentTheme().getPlayerPanel_deadBackgroundColor());
     }
 
     /**

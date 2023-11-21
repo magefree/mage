@@ -98,8 +98,8 @@ public class TestCardRenderDialog extends MageDialog {
 
         // init player panel
         player = new PlayerPanelExt();
-        this.panelPlayer.setLayout(new BorderLayout(5, 5));
-        this.panelPlayer.add(player, BorderLayout.NORTH);
+        this.playerPanel.setLayout(new BorderLayout(5, 5));
+        this.playerPanel.add(player, BorderLayout.NORTH);
 
         // render cards
         reloadCardsAndPlayer();
@@ -261,19 +261,58 @@ public class TestCardRenderDialog extends MageDialog {
 
         // update PLAYER
 
-        boolean isMe = true;
-        boolean smallMode = false;
+        // active status (it's already reset to default, e.g. active)
+        switch ((String) Objects.requireNonNull(comboPlayerStatus.getSelectedItem())) {
+            case "Active":
+                this.game.getState().setActivePlayerId(playerYou.getId());
+                break;
+            case "Inactive":
+                this.game.getState().setActivePlayerId(playerOpponent.getId());
+                break;
+            case "Dead":
+                playerYou.leave();
+                this.game.getState().setActivePlayerId(playerOpponent.getId());
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown control type");
+        }
+
+        // control type
+        boolean isMe;
+        UUID controlledId;
+        switch ((String) Objects.requireNonNull(comboPlayerController.getSelectedItem())) {
+            case "me":
+                isMe = true;
+                controlledId = playerYou.getId();
+                break;
+            case "opponent":
+                isMe = false;
+                controlledId = playerOpponent.getId();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown control type");
+        }
+
+        // size mode
+        boolean smallMode = checkPlayerSmallMode.isSelected();
+
+        // possible target
+        Set<UUID> possibleTargets = null;
+        if (checkPlayerAsTarget.isSelected()) {
+            possibleTargets = new LinkedHashSet<>();
+            possibleTargets.add(playerYou.getId());
+        }
 
         this.player.cleanUp();
         this.player.changeGUISize();
-        GameView gameView = new GameView(this.game.getState(), this.game, playerYou.getId(), null);
+        GameView gameView = new GameView(this.game.getState(), this.game, controlledId, null);
         PlayerView currentPlayerView = gameView.getPlayers()
                 .stream()
                 .filter(p -> p.getPlayerId().equals(playerYou.getId()))
                 .findFirst()
                 .orElse(null);
-        this.player.init(this.game.getId(), playerYou.getId(), true, this.bigCard, 0);
-        this.player.update(gameView, currentPlayerView, null);
+        this.player.init(this.game.getId(), playerYou.getId(), isMe, this.bigCard, 0);
+        this.player.update(gameView, currentPlayerView, possibleTargets);
         PlayAreaPanel.sizePlayerPanel(this.player, isMe, smallMode);
 
         // update CARDS
@@ -504,7 +543,13 @@ public class TestCardRenderDialog extends MageDialog {
         comboCardColor = new javax.swing.JComboBox<>();
         panelBattlefield = new javax.swing.JPanel();
         cardsPanel = new mage.client.cards.CardArea();
-        panelPlayer = new javax.swing.JPanel();
+        otherPanel = new javax.swing.JPanel();
+        playerPanel = new javax.swing.JPanel();
+        playerOptions = new javax.swing.JPanel();
+        checkPlayerSmallMode = new javax.swing.JCheckBox();
+        comboPlayerStatus = new javax.swing.JComboBox<>();
+        comboPlayerController = new javax.swing.JComboBox<>();
+        checkPlayerAsTarget = new javax.swing.JCheckBox();
 
         setResizable(true);
 
@@ -642,20 +687,63 @@ public class TestCardRenderDialog extends MageDialog {
         panelBattlefield.setLayout(new java.awt.BorderLayout());
         panelBattlefield.add(cardsPanel, java.awt.BorderLayout.CENTER);
 
-        panelPlayer.setPreferredSize(new java.awt.Dimension(100, 386));
+        otherPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout panelPlayerLayout = new javax.swing.GroupLayout(panelPlayer);
-        panelPlayer.setLayout(panelPlayerLayout);
-        panelPlayerLayout.setHorizontalGroup(
-            panelPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        playerPanel.setPreferredSize(new java.awt.Dimension(100, 10));
+
+        javax.swing.GroupLayout playerPanelLayout = new javax.swing.GroupLayout(playerPanel);
+        playerPanel.setLayout(playerPanelLayout);
+        playerPanelLayout.setHorizontalGroup(
+            playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        panelPlayerLayout.setVerticalGroup(
-            panelPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 386, Short.MAX_VALUE)
+        playerPanelLayout.setVerticalGroup(
+            playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        panelBattlefield.add(panelPlayer, java.awt.BorderLayout.WEST);
+        otherPanel.add(playerPanel, java.awt.BorderLayout.CENTER);
+
+        playerOptions.setLayout(new javax.swing.BoxLayout(playerOptions, javax.swing.BoxLayout.Y_AXIS));
+
+        checkPlayerSmallMode.setText("Small mode");
+        checkPlayerSmallMode.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkPlayerSmallModeItemStateChanged(evt);
+            }
+        });
+        playerOptions.add(checkPlayerSmallMode);
+
+        comboPlayerStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive", "Dead" }));
+        comboPlayerStatus.setToolTipText("");
+        comboPlayerStatus.setAlignmentX(0.0F);
+        comboPlayerStatus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboPlayerStatusItemStateChanged(evt);
+            }
+        });
+        playerOptions.add(comboPlayerStatus);
+
+        comboPlayerController.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "me", "opponent" }));
+        comboPlayerController.setAlignmentX(0.0F);
+        comboPlayerController.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboPlayerControllerItemStateChanged(evt);
+            }
+        });
+        playerOptions.add(comboPlayerController);
+
+        checkPlayerAsTarget.setText("As possible target");
+        checkPlayerAsTarget.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkPlayerAsTargetItemStateChanged(evt);
+            }
+        });
+        playerOptions.add(checkPlayerAsTarget);
+
+        otherPanel.add(playerOptions, java.awt.BorderLayout.NORTH);
+
+        panelBattlefield.add(otherPanel, java.awt.BorderLayout.WEST);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -713,7 +801,7 @@ public class TestCardRenderDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCardIcons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -780,14 +868,34 @@ public class TestCardRenderDialog extends MageDialog {
         }
     }//GEN-LAST:event_comboCardColorItemStateChanged
 
+    private void comboPlayerStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlayerStatusItemStateChanged
+        reloadCardsAndPlayer();
+    }//GEN-LAST:event_comboPlayerStatusItemStateChanged
+
+    private void comboPlayerControllerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlayerControllerItemStateChanged
+        reloadCardsAndPlayer();
+    }//GEN-LAST:event_comboPlayerControllerItemStateChanged
+
+    private void checkPlayerSmallModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkPlayerSmallModeItemStateChanged
+        reloadCardsAndPlayer();
+    }//GEN-LAST:event_checkPlayerSmallModeItemStateChanged
+
+    private void checkPlayerAsTargetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkPlayerAsTargetItemStateChanged
+        reloadCardsAndPlayer();
+    }//GEN-LAST:event_checkPlayerAsTargetItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonReloadCards;
     private mage.client.cards.CardArea cardsPanel;
     private javax.swing.JCheckBox checkBoxGenerateManyCards;
+    private javax.swing.JCheckBox checkPlayerAsTarget;
+    private javax.swing.JCheckBox checkPlayerSmallMode;
     private javax.swing.JComboBox<String> comboCardColor;
     private javax.swing.JComboBox<String> comboCardIconsOrder;
     private javax.swing.JComboBox<String> comboCardIconsPosition;
+    private javax.swing.JComboBox<String> comboPlayerController;
+    private javax.swing.JComboBox<String> comboPlayerStatus;
     private javax.swing.JComboBox<String> comboRenderMode;
     private javax.swing.JComboBox<String> comboTheme;
     private javax.swing.JLabel labelCardColor;
@@ -798,9 +906,11 @@ public class TestCardRenderDialog extends MageDialog {
     private javax.swing.JLabel labelRenderMode;
     private javax.swing.JLabel labelSize;
     private javax.swing.JLabel labelTheme;
+    private javax.swing.JPanel otherPanel;
     private javax.swing.JPanel panelBattlefield;
     private javax.swing.JPanel panelCardIcons;
-    private javax.swing.JPanel panelPlayer;
+    private javax.swing.JPanel playerOptions;
+    private javax.swing.JPanel playerPanel;
     private javax.swing.JSlider sliderSize;
     private javax.swing.JSpinner spinnerCardIconsAdditionalAmount;
     private javax.swing.JSpinner spinnerCardIconsMaxVisible;
