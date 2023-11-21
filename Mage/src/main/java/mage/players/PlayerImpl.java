@@ -282,27 +282,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.bufferTimeLeft = player.getBufferTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
-        for (Entry<UUID, Set<MageIdentifier>> entry : player.getCastSourceIdWithAlternateMana().entrySet()) {
-            this.castSourceIdWithAlternateMana.put(entry.getKey(), (entry.getValue() == null ? null : new HashSet<>(entry.getValue())));
-        }
-        for (Entry<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> entry : player.getCastSourceIdManaCosts().entrySet()) {
-            this.castSourceIdManaCosts.put(entry.getKey(), new HashMap<>());
-            for (Entry<MageIdentifier, ManaCosts<ManaCost>> subEntry : entry.getValue().entrySet()) {
-                this.castSourceIdManaCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
-            }
-        }
-        for (Entry<UUID, Map<MageIdentifier, Costs<Cost>>> entry : player.getCastSourceIdCosts().entrySet()) {
-            this.castSourceIdCosts.put(entry.getKey(), new HashMap<>());
-            for (Entry<MageIdentifier, Costs<Cost>> subEntry : entry.getValue().entrySet()) {
-                this.castSourceIdCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
-            }
-        }
+        this.castSourceIdWithAlternateMana = CardUtil.deepCopyObject(player.castSourceIdWithAlternateMana);
+        this.castSourceIdManaCosts = CardUtil.deepCopyObject(player.castSourceIdManaCosts);
+        this.castSourceIdCosts = CardUtil.deepCopyObject(player.castSourceIdCosts);
 
         this.payManaMode = player.payManaMode;
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.phyrexianColors.copy() : null;
-        for (Designation object : player.designations) {
-            this.designations.add(object.copy());
-        }
+        this.designations = CardUtil.deepCopyObject(player.designations);
     }
 
     @Override

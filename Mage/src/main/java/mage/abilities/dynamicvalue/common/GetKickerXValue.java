@@ -19,7 +19,7 @@ public enum GetKickerXValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         // Currently identical logic to the Manacost X value
         // which should be fine since you can only have one X at a time
-        return (int) CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override

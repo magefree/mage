@@ -57,7 +57,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
             }
         }
         if (permanent != null) {
-            int amount = ((int) CardUtil.getSourceCostsTag(game, source, "X", 0)) * multiplier;
+            int amount = CardUtil.getSourceCostsTag(game, source, "X", 0) * multiplier;
             if (amount > 0) {
                 Counter counterToAdd = counter.copy();
                 counterToAdd.add(amount - counter.getCount());

@@ -46,4 +46,8 @@ public class ProwlAbility extends AlternativeSourceCostsImpl {
     public boolean isAvailable(Ability source, Game game) {
         return ProwlCondition.instance.apply(game, source);
     }
+
+    public static String getActivationKey(){
+        return getActivationKey(PROWL_KEYWORD);
+    }
 }

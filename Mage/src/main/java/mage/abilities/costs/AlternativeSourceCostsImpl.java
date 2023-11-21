@@ -5,11 +5,11 @@ import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.Iterator;
 
@@ -20,7 +20,10 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
 
     protected final AlternativeCost alternativeCost;
     protected final String reminderText;
-    private int zoneChangeCounter = 0;
+    protected final String activationKey;
+    protected static String getActivationKey(String name){
+        return name+"ActivationKey";
+    }
 
     protected AlternativeSourceCostsImpl(String name, String reminderText, String manaString) {
         this(name, reminderText, new ManaCostsImpl<>(manaString));
@@ -31,13 +34,14 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
         this.name = name;
         this.reminderText = reminderText;
         this.alternativeCost = new AlternativeCostImpl<>(name, reminderText, cost);
+        this.activationKey = getActivationKey(name);
     }
 
     protected AlternativeSourceCostsImpl(final AlternativeSourceCostsImpl ability) {
         super(ability);
         this.alternativeCost = ability.alternativeCost.copy();
         this.reminderText = ability.reminderText;
-        this.zoneChangeCounter = ability.zoneChangeCounter;
+        this.activationKey = ability.activationKey;
     }
 
     @Override
@@ -58,15 +62,9 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
                 || !player.chooseUse(Outcome.Benefit, "Cast this for its " + this.name + " cost? (" + alternativeCost.getText(true) + ')', ability, game)) {
             return false;
         }
+        ability.setCostsTag(activationKey, null);
         alternativeCost.activate();
-        if (zoneChangeCounter == 0) {
-            Card card = game.getCard(getSourceId());
-            if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter(game);
-            } else {
-                throw new IllegalArgumentException("source card not found");
-            }
-        }
+
         ability.clearManaCostsToPay();
         ability.clearCosts();
         for (Iterator<Cost> it = ((Costs<Cost>) alternativeCost).iterator(); it.hasNext(); ) {
@@ -82,11 +80,7 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
 
     @Override
     public boolean isActivated(Ability ability, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
-            return alternativeCost.isActivated(game);
-        }
-        return false;
+        return CardUtil.checkSourceCostsTagExists(game, ability, activationKey);
     }
 
     @Override
@@ -102,7 +96,6 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
     @Override
     public void resetCost() {
         alternativeCost.reset();
-        this.zoneChangeCounter = 0;
     }
 
     @Override
