@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,7 +40,7 @@ public final class MinesOfMoria extends CardImpl {
 
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
-    private static final Hint hint = new ConditionHint(condition, "You control a legendary creature");
+    private static final Hint hint = new ConditionHint( new InvertCondition(condition), "You control a legendary creature");
 
     public MinesOfMoria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
