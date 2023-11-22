@@ -12,14 +12,11 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ConvokedSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-import mage.watchers.common.ConvokeWatcher;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,8 +68,10 @@ class LethalSchemeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        HashSet<MageObjectReference> convokingCreatures = CardUtil.getSourceCostsTag(game, source,
+                ConvokeAbility.convokingCreaturesKey, new HashSet<>(0));
         Set<AbstractMap.SimpleEntry<UUID, Permanent>> playerPermanentsPairs =
-                ConvokeWatcher.getConvokingCreatures(new MageObjectReference(source),game)
+                convokingCreatures
                         .stream()
                         .map(mor->mor.getPermanentOrLKIBattlefield(game))
                         .filter(Objects::nonNull)
