@@ -263,7 +263,6 @@ class ConvokeEffect extends OneShotEffect {
                         manaPool.unlockManaType(ManaType.COLORLESS);
                         manaName = "colorless";
                     }
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CONVOKED, perm.getId(), source, source.getControllerId()));
                     HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, spell.getSpellAbility(), ConvokeAbility.convokingCreaturesKey, new HashSet<>());
                     set.add(new MageObjectReference(perm, game));
                     spell.getSpellAbility().setCostsTag(ConvokeAbility.convokingCreaturesKey, set);
