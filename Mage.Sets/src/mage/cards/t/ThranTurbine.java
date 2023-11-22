@@ -3,6 +3,7 @@ package mage.cards.t;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -101,6 +102,6 @@ class ThranTurbineManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        return !(source instanceof Spell);
+        return !(source instanceof SpellAbility && !source.isActivated());
     }
 }

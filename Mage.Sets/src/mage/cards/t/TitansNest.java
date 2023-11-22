@@ -94,7 +94,7 @@ class TitansNestManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        if (!(source instanceof SpellAbility)) {
+        if (!(source instanceof SpellAbility) || source.isActivated()) {
             return false;
         }
         MageObject object = game.getObject(source);

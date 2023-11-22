@@ -85,7 +85,7 @@ class DelightedHalflingManaCondition extends ManaCondition {
     @Override
     public boolean apply(Game game, Ability source) {
         // check: ... to cast a spell
-        if (source instanceof SpellAbility) {
+        if (source instanceof SpellAbility && !source.isActivated()) {
             MageObject object = game.getObject(source);
             // check: ... that is legendary
             if (object != null && object.isLegendary(game)) {

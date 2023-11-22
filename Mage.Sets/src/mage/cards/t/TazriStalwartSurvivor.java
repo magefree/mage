@@ -132,7 +132,7 @@ class TazriStalwartSurvivorManaEffect extends ManaEffect {
                     return false;
             }
             MageObject object = game.getObject(source);
-            return object != null && object.isCreature(game);
+            return object != null && object.isCreature(game) && !source.isActivated();
         }
 
         @Override

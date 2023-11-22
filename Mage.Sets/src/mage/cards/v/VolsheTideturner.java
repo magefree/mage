@@ -75,11 +75,11 @@ class VolsheTideturnerCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (!(source instanceof SpellAbility) && !source.isActivated()) {
+            return false;
+        }
         if (KickedCondition.ONCE.apply(game, source)) {
             return true;
-        }
-        if (!(source instanceof SpellAbility)) {
-            return false;
         }
         MageObject object = game.getObject(source);
         return object != null && object.isInstantOrSorcery(game);
