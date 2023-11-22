@@ -23,7 +23,7 @@ public final class VeneratedLoxodon extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature that convoked it");
 
     static {
-        filter.add(ConvokedSourcePredicate.PERMANENT);
+        filter.add(ConvokedSourcePredicate.instance);
     }
 
     public VeneratedLoxodon(UUID ownerId, CardSetInfo setInfo) {
