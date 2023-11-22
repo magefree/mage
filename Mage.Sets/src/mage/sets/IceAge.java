@@ -27,6 +27,7 @@ public final class IceAge extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abyssal Specter", 113, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));
         cards.add(new SetCardInfo("Adarkar Sentinel", 306, Rarity.UNCOMMON, mage.cards.a.AdarkarSentinel.class));
+        cards.add(new SetCardInfo("Adarkar Unicorn", 1, Rarity.COMMON, mage.cards.a.AdarkarUnicorn.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 351, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aegis of the Meek", 307, Rarity.RARE, mage.cards.a.AegisOfTheMeek.class));
         cards.add(new SetCardInfo("Aggression", 169, Rarity.UNCOMMON, mage.cards.a.Aggression.class));
