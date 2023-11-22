@@ -93,9 +93,9 @@ enum GaladrielsDismissalAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         if (KickedCondition.ONCE.apply(game, ability)) {
-            ability.addTarget(new TargetCreaturePermanent());
-        } else {
             ability.addTarget(new TargetPlayer());
+        } else {
+            ability.addTarget(new TargetCreaturePermanent());
         }
     }
 }
