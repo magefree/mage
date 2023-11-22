@@ -75,7 +75,7 @@ class SorcerousSquallEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from that player’s graveyard");
+        FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from that player's graveyard");
         filter.add(new OwnerIdPredicate(source.getFirstTarget()));
         Target target = new TargetCardInGraveyard(1, 1, filter, true);
         player.choose(outcome, target, source, game);

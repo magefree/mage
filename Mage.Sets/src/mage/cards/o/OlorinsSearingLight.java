@@ -53,7 +53,7 @@ class OlorinsSearingLightEffect extends OneShotEffect {
     public OlorinsSearingLightEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Each opponent exiles a creature with the greatest power among creatures that player controls.<br>"
-                +"<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, Olórin’s Searing Light deals damage to each opponent equal to the power of the creature they exiled.";
+                +"<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, {this} deals damage to each opponent equal to the power of the creature they exiled.";
     }
 
     private OlorinsSearingLightEffect(final OlorinsSearingLightEffect effect) {
