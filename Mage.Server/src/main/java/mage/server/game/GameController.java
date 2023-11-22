@@ -229,6 +229,12 @@ public class GameController implements GameCallback {
                             case PERSONAL_MESSAGE:
                                 informPersonal(event.getPlayerId(), event.getMessage());
                                 break;
+                            case TOURNAMENT_CONSTRUCT:
+                            case DRAFT_PICK_CARD:
+                                // tournament and draft events, impossible to catch it here
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unknown game event: " + event.getQueryType());
                         }
                     } catch (MageException ex) {
                         logger.fatal("Player event listener error ", ex);
@@ -771,15 +777,14 @@ public class GameController implements GameCallback {
 
     public void sendPlayerBoolean(UUID userId, final Boolean data) {
         sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerBoolean(data));
-
     }
 
     public void sendPlayerInteger(UUID userId, final Integer data) {
         sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerInteger(data));
-
     }
 
-    private synchronized void updateGame() {
+    private void updatePriorityTimers() {
+        // update player timers to actual values
         if (!timers.isEmpty()) {
             for (Player player : game.getState().getPlayers().values()) {
                 PriorityTimer timer = timers.get(player.getId());
@@ -788,6 +793,10 @@ public class GameController implements GameCallback {
                 }
             }
         }
+    }
+
+    private synchronized void updateGame() {
+        updatePriorityTimers();
         for (final GameSessionPlayer gameSession : getGameSessions()) {
             gameSession.update();
         }
@@ -941,7 +950,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    public GameView getGameView(UUID playerId) {
+    public synchronized GameView getGameView(UUID playerId) {
         return getGameSession(playerId).getGameView();
     }
 
@@ -1116,14 +1125,13 @@ public class GameController implements GameCallback {
     }
 
     private GameSessionPlayer getGameSession(UUID playerId) {
-        if (!timers.isEmpty()) {
-            Player player = game.getState().getPlayer(playerId);
-            PriorityTimer timer = timers.get(playerId);
-            if (timer != null) {
-                //logger.warn("Timer Player " + player.getName()+ " " + player.getPriorityTimeLeft() + " Timer: " + timer.getCount());
-                player.setPriorityTimeLeft(timer.getCount());
-            }
-        }
+        // TODO: check parent callers - there are possible problems with sync, can be related to broken "fix" logs too
+        //  It modify players data, but:
+        //  * some sendXXX methods calls without synchronized (getGameSession can be in read mode?)
+        //  * some informXXX methods calls with synchronized (users must get actual data, so keep write mode and add synchronized?)
+        // find actual timers before send data
+        updatePriorityTimers();
+
         return gameSessions.get(playerId);
     }
 

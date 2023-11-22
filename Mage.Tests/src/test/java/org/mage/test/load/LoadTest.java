@@ -548,7 +548,7 @@ public class LoadTest {
             this.client = new SimpleMageClient(joinGameChat, logsPrefix, TEST_SHOW_GAME_LOGS_AS_HTML);
             this.session = new SessionImpl(this.client);
 
-            this.session.connect(this.connection);
+            this.session.connectStart(this.connection);
             this.client.setSession(this.session);
             this.roomID = this.session.getMainRoomId();
 
@@ -607,7 +607,7 @@ public class LoadTest {
         }
 
         public void disconnect() {
-            this.session.disconnect(false);
+            this.session.connectStop(false);
         }
 
         public void concede() {

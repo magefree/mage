@@ -271,9 +271,9 @@ public class User {
         fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_TOURNAMENT, tournamentId));
     }
 
-    public void showUserMessage(final String titel, String message) {
+    public void showUserMessage(final String title, String message) {
         List<String> messageData = new LinkedList<>();
-        messageData.add(titel);
+        messageData.add(title);
         messageData.add(message);
         fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }

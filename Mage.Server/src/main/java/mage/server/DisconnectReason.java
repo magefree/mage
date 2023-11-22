@@ -10,7 +10,7 @@ public enum DisconnectReason {
     Disconnected(" has left XMage"),
     CleaningUp(" [cleaning up]"),
     ConnectingOtherInstance(" reconnected and replaced still active old session"),
-    AdminDisconnect(" was disconnected by the Admin"),
+    AdminDisconnect(" was disconnected by the admin"),
     SessionExpired(" session expired"),
     Undefined("");
 

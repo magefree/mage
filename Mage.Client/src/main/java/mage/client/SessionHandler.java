@@ -26,12 +26,11 @@ import java.util.*;
 /**
  * Network: client side session
  *
- * Only one session/server per GUI's client
+ * Only one session/server per GUI's client supports
  *
- * Created by IGOUDT on 15-9-2016.
+ * @author IGOUDT
  */
 public final class SessionHandler {
-
 
     private static final Logger logger = Logger.getLogger(SessionHandler.class);
 
@@ -65,7 +64,7 @@ public final class SessionHandler {
 
     public static boolean connect(Connection connection) {
         lastConnectError = "";
-        if (session.connect(connection)) {
+        if (session.connectStart(connection)) {
             return true;
         } else {
             lastConnectError = session.getLastError();
@@ -78,11 +77,11 @@ public final class SessionHandler {
     }
 
     public static boolean stopConnecting() {
-        return session.stopConnecting();
+        return session.connectAbort();
     }
 
     public static void disconnect(boolean showmessage) {
-        session.disconnect(showmessage);
+        session.connectStop(showmessage);
     }
 
     public static void sendPlayerAction(PlayerAction playerAction, UUID gameId, Object relatedUserId) {
@@ -377,14 +376,14 @@ public final class SessionHandler {
     }
 
     public static boolean emailAuthToken(Connection connection) {
-        return session.emailAuthToken(connection);
+        return session.sendAuthSendTokenToEmail(connection);
     }
 
     public static boolean resetPassword(Connection connection) {
-        return session.resetPassword(connection);
+        return session.sendAuthResetPassword(connection);
     }
 
     public static boolean register(Connection connection) {
-        return session.register(connection);
+        return session.sendAuthRegister(connection);
     }
 }

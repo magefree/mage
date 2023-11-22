@@ -91,7 +91,7 @@ public class SessionManagerImpl implements SessionManager {
         Session session = sessions.get(sessionId);
         if (session != null) {
             session.connectAdmin();
-            logger.info("Admin connected from " + session.getHost());
+            logger.warn("Admin connected from " + session.getHost());
             return true;
         }
         return false;
@@ -155,19 +155,20 @@ public class SessionManagerImpl implements SessionManager {
      */
     @Override
     public void disconnectUser(String sessionId, String userSessionId) {
-        if (isAdmin(sessionId)) {
-            getUserFromSession(sessionId).ifPresent(admin -> {
-                Optional<User> u = getUserFromSession(userSessionId);
-                if (u.isPresent()) {
-                    User user = u.get();
-                    user.showUserMessage("Admin operation", "Your session was disconnected by Admin.");
-                    admin.showUserMessage("Admin action", "User" + user.getName() + " was disconnected.");
-                    disconnect(userSessionId, DisconnectReason.AdminDisconnect);
-                } else {
-                    admin.showUserMessage("Admin operation", "User with sessionId " + userSessionId + " could not be found!");
-                }
-            });
+        if (!checkAdminAccess(sessionId)) {
+            return;
         }
+        getUserFromSession(sessionId).ifPresent(admin -> {
+            Optional<User> u = getUserFromSession(userSessionId);
+            if (u.isPresent()) {
+                User user = u.get();
+                user.showUserMessage("Admin action", "Your session was disconnected by admin");
+                admin.showUserMessage("Admin result", "User " + user.getName() + " was disconnected");
+                disconnect(userSessionId, DisconnectReason.AdminDisconnect);
+            } else {
+                admin.showUserMessage("Admin result", "User with sessionId " + userSessionId + " could not be found");
+            }
+        });
     }
 
     private Optional<User> getUserFromSession(String sessionId) {
@@ -178,15 +179,27 @@ public class SessionManagerImpl implements SessionManager {
 
     @Override
     public void endUserSession(String sessionId, String userSessionId) {
-        if (isAdmin(sessionId)) {
-            disconnect(userSessionId, DisconnectReason.AdminDisconnect);
+        if (!checkAdminAccess(sessionId)) {
+            return;
         }
+
+        disconnect(userSessionId, DisconnectReason.AdminDisconnect);
     }
 
     @Override
-    public boolean isAdmin(String sessionId) {
-        return getSession(sessionId).map(Session::isAdmin).orElse(false);
-
+    public boolean checkAdminAccess(String sessionId) {
+        Session session = sessions.get(sessionId);
+        if (session == null) {
+            logger.error("Wrong admin access with unknown session: " + sessionId, new Throwable());
+        } else if (!session.isAdmin()) {
+            String info = String.format("sessionId %s for userId %s at %s",
+                    session.getId(),
+                    session.getUserId(),
+                    session.getHost()
+            );
+            logger.error("Wrong admin access with user session: " + info, new Throwable());
+        }
+        return session != null && session.isAdmin();
     }
 
     @Override

@@ -55,7 +55,7 @@ public class MultiConnectTest {
             connection.setPort(17171);
             connection.setProxyType(Connection.ProxyType.NONE);
 
-            session.connect(connection);
+            session.connectStart(connection);
         }
 
         @Override

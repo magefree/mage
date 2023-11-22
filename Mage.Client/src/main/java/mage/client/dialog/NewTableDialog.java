@@ -507,7 +507,7 @@ public class NewTableDialog extends MageDialog {
             for (TablePlayerPanel player : players) {
                 if (player.getPlayerType() != PlayerType.HUMAN) {
                     if (!player.joinTable(roomId, table.getTableId())) {
-                        // error message must be send by the server
+                        // error message must be sent by a server
                         SessionHandler.removeTable(roomId, table.getTableId());
                         table = null;
                         return;

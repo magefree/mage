@@ -71,7 +71,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public boolean connect(Connection connection) {
-        if (session.connect(connection)) {
+        if (session.connectStart(connection)) {
             this.consolePanel1.start();
             return true;
         }
@@ -157,7 +157,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         if (session.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 this.consolePanel1.stop();
-                session.disconnect(false);
+                session.connectStop(false);
             }
         } else {
             connectDialog.showDialog(this);
@@ -251,7 +251,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
             }
-            session.disconnect(false);
+            session.connectStop(false);
         } else {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm exit", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
