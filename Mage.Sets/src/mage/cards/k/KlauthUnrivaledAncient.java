@@ -122,7 +122,7 @@ class KlauthUnrivaledAncientManaCondition extends ManaCondition implements Condi
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source instanceof SpellAbility;
+        return source instanceof SpellAbility && !source.isActivated();
     }
 
     @Override

@@ -43,7 +43,7 @@ class SimpleActivatedAbilityManaCondition extends ManaCondition implements Condi
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source instanceof SimpleActivatedAbility;
+        return source instanceof SimpleActivatedAbility && !source.isActivated();
     }
 
     @Override

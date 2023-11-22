@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
@@ -75,7 +76,7 @@ class AutomatedArtificerManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source == null) {
+        if (source == null || source.isActivated()) {
             return false;
         }
         switch (source.getAbilityType()) {
@@ -83,15 +84,10 @@ class AutomatedArtificerManaCondition extends ManaCondition {
             case ACTIVATED:
                 return true;
             case SPELL:
-                MageObject object = source.getSourceObject(game);
-                if (!(object instanceof StackObject) && !game.inCheckPlayableState()) {
-                    return false;
+                if (source instanceof SpellAbility) {
+                    MageObject object = game.getObject(source);
+                    return object != null && object.isArtifact(game);
                 }
-                if (object instanceof Commander) {
-                    Card card = ((Commander) object).getSourceObject();
-                    return card != null && card.isArtifact(game);
-                }
-                return object.isArtifact(game);
         }
         return false;
     }
