@@ -11,14 +11,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.command.Commander;
-import mage.game.stack.StackObject;
 
 import java.util.UUID;
 
