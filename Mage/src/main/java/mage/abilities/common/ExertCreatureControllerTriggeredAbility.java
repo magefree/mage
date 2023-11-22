@@ -40,7 +40,7 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
         boolean exertedIsCreature = (exerted != null) && exerted.isCreature(game);
         if (weAreExerting && exertedIsCreature) {
             if (setTargetPointer) {
-                getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
             }
             return true;
         }
