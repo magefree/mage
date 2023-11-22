@@ -10,7 +10,7 @@ import mage.util.CardUtil;
 import java.util.HashSet;
 
 /**
- * @author TheElk801
+ * @author notgreat
  */
 public enum ConvokedSourceCount implements DynamicValue {
     instance;

@@ -11,7 +11,7 @@ import mage.util.CardUtil;
 import java.util.HashSet;
 
 /**
- * @author TheElk801
+ * @author notgreat
  */
 public enum ConvokedSourcePredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
