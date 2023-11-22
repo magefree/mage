@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.effects.common.combat.GoadAllEffect;
@@ -85,7 +86,8 @@ class FellBeastsShriekEffect extends OneShotEffect {
             FilterPermanent filter = new FilterCreaturePermanent();
             filter.add(new PermanentInListPredicate(creaturesChosen));
             new TapAllEffect(filter).apply(game, source);
-            new GoadAllEffect(filter).apply(game, source);
+            ContinuousEffect goadEffect = new GoadAllEffect(filter);
+            game.addEffect(goadEffect, source);
             return true;
         }
         return false;
