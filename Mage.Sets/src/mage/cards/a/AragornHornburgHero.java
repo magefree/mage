@@ -55,7 +55,7 @@ public final class AragornHornburgHero extends CardImpl {
         // Whenever a renowned creature you control deals combat damage to a player, double the number of +1/+1 counters on it.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new AragornDoubleCountersTargetEffect(), filter,
-                false, SetTargetPointer.NONE, true
+                false, SetTargetPointer.PERMANENT, true
         ));
 
     }
