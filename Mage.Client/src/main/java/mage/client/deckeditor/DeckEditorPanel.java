@@ -113,6 +113,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 .forEach(c -> {
                     c.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
+                            if (!SwingUtilities.isLeftMouseButton(e)) {
+                                return;
+                            }
                             List<String> cardNames = new ArrayList<>();
                             LegalityLabel label = (LegalityLabel) e.getComponent();
                             label.getValidator().getErrorsList().stream()

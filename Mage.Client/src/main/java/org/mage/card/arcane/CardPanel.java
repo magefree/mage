@@ -608,6 +608,11 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             return;
         }
 
+        // ignore all additional mouse buttons
+        if (!SwingUtilities.isLeftMouseButton(e)) {
+            return;
+        }
+
         // double clicks processing, see https://stackoverflow.com/questions/4051659/identifying-double-click-in-java
         // logic: run timer to reset clicks counter
         mouseClicksCount = e.getClickCount();

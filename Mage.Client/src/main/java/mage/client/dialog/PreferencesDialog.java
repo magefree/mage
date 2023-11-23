@@ -3769,6 +3769,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             jLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
+                    if (!SwingUtilities.isLeftMouseButton(e)) {
+                        return;
+                    }
                     if (selectedAvatarId != id) {
                         setSelectedId(id);
                         SessionHandler.updatePreferencesForServer(getUserData());

@@ -789,11 +789,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    isDragging = true;
-                    beginSelectionDrag(e.getX(), e.getY(), e.isShiftDown());
-                    updateSelectionDrag(e.getX(), e.getY());
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
                 }
+                isDragging = true;
+                beginSelectionDrag(e.getX(), e.getY(), e.isShiftDown());
+                updateSelectionDrag(e.getX(), e.getY());
             }
 
             @Override
@@ -973,6 +974,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             visibilityButton.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    if (!SwingUtilities.isLeftMouseButton(e)) {
+                        return;
+                    }
                     visPopup.show(e.getComponent(), 0, e.getComponent().getHeight());
                 }
             });
@@ -2297,6 +2301,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         this.countLabelListener = new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
+                                if (!SwingUtilities.isLeftMouseButton(e)) {
+                                    return;
+                                }
                                 JLabel countLabel = (JLabel) e.getComponent();
                                 List<CardView> cards = findCardStackByCountLabel(countLabel);
                                 boolean selected = !cards.isEmpty() && cards.get(0).isSelected();

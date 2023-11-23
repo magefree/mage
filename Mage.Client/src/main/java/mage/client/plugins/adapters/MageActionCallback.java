@@ -121,6 +121,14 @@ public class MageActionCallback implements ActionCallback {
         if (e.isConsumed()) {
             return;
         }
+
+        // allows only a standard mouse buttons
+        if (!e.isPopupTrigger()
+                && !SwingUtilities.isLeftMouseButton(e)
+                && !SwingUtilities.isRightMouseButton(e)) {
+            return;
+        }
+
         if (data.getComponent().getCardContainer() instanceof CardEventProducer) {
             ClientEventType clickType = doubleClick ? ClientEventType.CARD_DOUBLE_CLICK : ClientEventType.CARD_CLICK;
             CardEventProducer cardContainer = (CardEventProducer) data.getComponent().getCardContainer();

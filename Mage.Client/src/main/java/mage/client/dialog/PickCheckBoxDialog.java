@@ -162,6 +162,9 @@ public class PickCheckBoxDialog extends MageDialog {
         listChoices.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 if (e.getClickCount() == 2) {
                     doChoose();
                 }

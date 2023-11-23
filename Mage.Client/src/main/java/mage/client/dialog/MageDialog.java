@@ -37,6 +37,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     // double clicks and repeated double clicks
+                    // minimize window to title bar
+                    if (!SwingUtilities.isLeftMouseButton(e)) {
+                        return;
+                    }
                     if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) {
                         e.consume();
                         try {
