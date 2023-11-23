@@ -41,7 +41,6 @@ import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
  */
 public class DownloadPicturesService extends DefaultBoundedRangeModel implements DownloadServiceInfo, Runnable {
 
-    // don't forget to remove new sets from ignore.urls to download (properties file in resources)
     private static DownloadPicturesService instance;
     private static final Logger logger = Logger.getLogger(DownloadPicturesService.class);
 
@@ -689,7 +688,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             this.urls = urls;
             this.count = count;
             this.actualFilename = "";
-            useSpecifiedPaths = false;
+            this.useSpecifiedPaths = false;
         }
 
         DownloadTask(CardDownloadData card, String baseUrl, String actualFilename, int count) {
@@ -697,7 +696,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             this.urls = new CardImageUrls(baseUrl, null);
             this.count = count;
             this.actualFilename = actualFilename;
-            useSpecifiedPaths = true;
+            this.useSpecifiedPaths = true;
         }
 
         @Override

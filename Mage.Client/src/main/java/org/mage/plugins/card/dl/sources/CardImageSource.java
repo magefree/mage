@@ -47,6 +47,11 @@ public interface CardImageSource {
         return CardLanguage.ENGLISH;
     }
 
+    /**
+     * Pause before each http request (must use for services with rate limits)
+     *
+     * @param httpImageUrl
+     */
     void doPause(String httpImageUrl);
 
     default List<String> getSupportedSets() {
@@ -58,5 +63,9 @@ public interface CardImageSource {
 
     default boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         return false;
+    }
+
+    default int getDownloadTimeoutMs() {
+        return 0;
     }
 }
