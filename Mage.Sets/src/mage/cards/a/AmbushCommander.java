@@ -40,7 +40,7 @@ public final class AmbushCommander extends CardImpl {
 
         // Forests you control are 1/1 green Elf creatures that are still lands.
         ContinuousEffect effect = new BecomesCreatureAllEffect(
-                new CreatureToken(1, 1, "1/1 green Elf creature").withColor("G").withSubType(SubType.ELF),
+                new CreatureToken(1, 1, "1/1 green Elf creatures").withColor("G").withSubType(SubType.ELF),
                 "lands", filter2, Duration.WhileOnBattlefield, true);
         effect.getDependencyTypes().add(DependencyType.BecomeForest);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

@@ -58,7 +58,7 @@ class KudzuEffect extends OneShotEffect {
 
     public KudzuEffect() {
         super(Outcome.Detriment);
-        staticText = "destroy it. That land's controller attaches {this} to a land of their choice";
+        staticText = "destroy it. That land's controller may attach {this} to a land of their choice";
     }
 
     private KudzuEffect(final KudzuEffect effect) {
