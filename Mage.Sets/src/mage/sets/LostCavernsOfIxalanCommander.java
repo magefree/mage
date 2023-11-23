@@ -223,6 +223,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of Fables", 169, Rarity.UNCOMMON, mage.cards.s.SageOfFables.class));
         cards.add(new SetCardInfo("Sanctum Seeker", 209, Rarity.RARE, mage.cards.s.SanctumSeeker.class));
         cards.add(new SetCardInfo("Savage Stomp", 257, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
+        cards.add(new SetCardInfo("Scion of Calamity", 93, Rarity.RARE, mage.cards.s.ScionOfCalamity.class));
         cards.add(new SetCardInfo("Seafloor Oracle", 170, Rarity.RARE, mage.cards.s.SeafloorOracle.class));
         cards.add(new SetCardInfo("Secluded Courtyard", 350, Rarity.UNCOMMON, mage.cards.s.SecludedCourtyard.class));
         cards.add(new SetCardInfo("Shared Animosity", 231, Rarity.RARE, mage.cards.s.SharedAnimosity.class));

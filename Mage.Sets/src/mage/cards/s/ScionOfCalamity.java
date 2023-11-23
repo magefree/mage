@@ -3,9 +3,8 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
+import mage.abilities.keyword.MyriadAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,48 +20,47 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
- * @author TheElk801
+ * @author
  */
-public final class SunderShaman extends CardImpl {
+public final class ScionOfCalamity extends CardImpl {
 
-    public SunderShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}{G}{G}");
+    public ScionOfCalamity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.subtype.add(SubType.GIANT);
-        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Sunder Shaman can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
+        // Myriad
+        this.addAbility(new MyriadAbility(true));
 
-        // Whenever Sunder Shaman deals combat damage to a player, destroy target artifact or enchantment that player controls.
-        this.addAbility(new SunderShamanTriggeredAbility());
+        // Whenever Scion of Calamity deals combat damage to a player, destroy target artifact or enchantment that player controls.
+        this.addAbility(new ScionOfCalamityTriggeredAbility());
     }
 
-    private SunderShaman(final SunderShaman card) {
+    private ScionOfCalamity(final ScionOfCalamity card) {
         super(card);
     }
 
     @Override
-    public SunderShaman copy() {
-        return new SunderShaman(this);
+    public ScionOfCalamity copy() {
+        return new ScionOfCalamity(this);
     }
 }
 
-class SunderShamanTriggeredAbility extends TriggeredAbilityImpl {
+class ScionOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
 
-    SunderShamanTriggeredAbility() {
+    ScionOfCalamityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
 
-    private SunderShamanTriggeredAbility(final SunderShamanTriggeredAbility ability) {
+    private ScionOfCalamityTriggeredAbility(final ScionOfCalamityTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public SunderShamanTriggeredAbility copy() {
-        return new SunderShamanTriggeredAbility(this);
+    public ScionOfCalamityTriggeredAbility copy() {
+        return new ScionOfCalamityTriggeredAbility(this);
     }
 
     @Override
