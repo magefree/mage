@@ -1,7 +1,8 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -14,7 +15,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -28,8 +28,9 @@ public final class CatharsShield extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +0/+3 and has vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 3));
+        ability.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has vigilance"));
+        this.addAbility(ability);
         
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetControlledCreaturePermanent()));

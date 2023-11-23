@@ -226,7 +226,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
             }
             if (replaceRuleText && triggerPhrase != null) {
-                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |put an? [^ ]+ counter on |return |transform )?\\{this\\}", "$1it");
+                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |put an? [^ ]+ counter on |return |transform |untap )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
             if (triggersOnceEachTurn) {

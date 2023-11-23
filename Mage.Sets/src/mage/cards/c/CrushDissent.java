@@ -24,7 +24,7 @@ public final class CrushDissent extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // Amass 2.
-        this.getSpellAbility().addEffect(new AmassEffect(2, SubType.ZOMBIE));
+        this.getSpellAbility().addEffect(new AmassEffect(2, SubType.ZOMBIE).concatBy("<br>"));
     }
 
     private CrushDissent(final CrushDissent card) {

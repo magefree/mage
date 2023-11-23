@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class TransgressTheMind extends CardImpl {
 
         // Target player reveals their hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
         Effect effect = new ExileCardYouChooseTargetOpponentEffect(filter);
-        effect.setText("Target player reveals their hand. You may choose a card from it with mana value 3 or greater and exile that card");
+        effect.setText("Target player reveals their hand. You choose a card from it with mana value 3 or greater and exile that card");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

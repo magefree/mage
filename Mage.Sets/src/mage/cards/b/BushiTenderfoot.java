@@ -37,7 +37,7 @@ public final class BushiTenderfoot extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Kenzo the Hardhearted";
 
-        // When that creature is put into a graveyard this turn, flip Initiate of Blood.
+        // When a creature dealt damage by Bushi Tenderfoot this turn dies, flip Bushi Tenderfoot.
         Effect effect = new FlipSourceEffect(new KenzoTheHardhearted());
         effect.setText("flip {this}");
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(effect));

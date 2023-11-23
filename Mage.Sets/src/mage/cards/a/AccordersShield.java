@@ -22,6 +22,7 @@ public final class AccordersShield extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.subtype.add(SubType.EQUIPMENT);
 
+        // Equipped creature gets +0/+3 and has vigilance.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 3));
         ability.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has vigilance"));
         this.addAbility(ability);

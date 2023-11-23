@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class ObeliskOfUndoing extends CardImpl {
     
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("permanent you both own and control");
         
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());

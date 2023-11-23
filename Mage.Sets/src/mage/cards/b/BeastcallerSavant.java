@@ -27,8 +27,8 @@ public final class BeastcallerSavant extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // {T}: Add one mana of any color. Spend this mana only to cast creature spells.
-        this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(new FilterCreatureSpell("creature spells"))));
+        // {T}: Add one mana of any color. Spend this mana only to cast a creature spell.
+        this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(new FilterCreatureSpell("a creature spell"))));
     }
 
     private BeastcallerSavant(final BeastcallerSavant card) {

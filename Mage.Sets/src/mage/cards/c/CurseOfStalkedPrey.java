@@ -92,7 +92,7 @@ class CurseOfStalkedPreyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature";
+        return "Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature.";
     }
 
 }

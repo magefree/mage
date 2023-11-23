@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -14,9 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -39,8 +36,10 @@ public final class PrimalVisitation extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3 and has haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        Ability staticAbility = new SimpleStaticAbility(new BoostEnchantedEffect(3, 3));
+        staticAbility.addEffect(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)
+                .setText("and has haste"));
+        this.addAbility(staticAbility);
     }
 
     private PrimalVisitation(final PrimalVisitation card) {

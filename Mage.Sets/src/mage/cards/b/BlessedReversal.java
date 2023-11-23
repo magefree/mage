@@ -17,9 +17,9 @@ public final class BlessedReversal extends CardImpl {
     public BlessedReversal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
-
         // You gain 3 life for each creature attacking you.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(CreaturesAttackingYouCount.instance, 3)));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(CreaturesAttackingYouCount.instance, 3))
+                .setText("you gain 3 life for each creature attacking you"));
         this.getSpellAbility().addHint(CreaturesAttackingYouCount.getHint());
     }
 
