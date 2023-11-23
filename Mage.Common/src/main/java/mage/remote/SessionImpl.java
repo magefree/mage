@@ -257,7 +257,10 @@ public class SessionImpl implements Session {
                 }
 
                 if (result) {
-                    serverState = server.serverGetState();
+                    serverState = server.getServerState();
+                    if (serverState == null) {
+                        throw new MageVersionException(client.getVersion(), null);
+                    }
 
                     // client side check for incompatible versions
                     if (client.getVersion().compareTo(serverState.getVersion()) != 0) {

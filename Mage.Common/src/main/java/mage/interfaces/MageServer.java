@@ -49,8 +49,7 @@ public interface MageServer {
     List<ExpansionInfo> syncGetMissingExpansionData(List<String> codes);
     List<CardInfo> syncGetMissingCardsData(List<String> classNames);
 
-    // server state methods
-    ServerState serverGetState() throws MageException;
+    ServerState getServerState() throws MageException; // TODO: need stable update process, so rename it after few releases
 
     UUID serverGetMainRoomId() throws MageException;
 

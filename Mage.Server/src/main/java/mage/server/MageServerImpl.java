@@ -954,7 +954,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     //TODO: check how often it is used
-    public ServerState serverGetState() throws MageException {
+    public ServerState getServerState() throws MageException {
         try {
             return new ServerState(
                     GameFactory.instance.getGameTypes(),
