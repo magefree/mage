@@ -11,9 +11,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -69,14 +70,19 @@ class ScionOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player opponent = game.getPlayer(event.getPlayerId());
-        if (opponent != null && event.getSourceId().equals(this.sourceId)) {
-            FilterPermanent filter = StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.copy();
-            filter.setMessage("artifact or enchantment controlled by" + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponent.getId()));
-            this.getTargets().clear();
-            this.addTarget(new TargetPermanent(filter));
-            return true;
+        if (event.getSourceId().equals(this.sourceId) && ((DamagedPlayerEvent) event).isCombatDamage()) {
+            Player player = game.getPlayer(event.getTargetId());
+            if (player != null) {
+                FilterPermanent filter = new FilterPermanent("an artifact or enchantment controlled by " + player.getLogName());
+                filter.add(Predicates.or(
+                        CardType.ARTIFACT.getPredicate(),
+                        CardType.ENCHANTMENT.getPredicate()));
+                filter.add(new ControllerIdPredicate(event.getTargetId()));
+
+                this.getTargets().clear();
+                this.addTarget(new TargetPermanent(filter));
+                return true;
+            }
         }
         return false;
     }
