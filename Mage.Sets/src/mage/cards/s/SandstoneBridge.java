@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -30,9 +29,9 @@ public final class SandstoneBridge extends CardImpl {
 
         // When Sandstone Bridge enters the battlefield, target creature gets +1/+1 and gains vigilance until end of turn.
         Effect effect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains vigilance");
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
-        ability.addEffect(effect);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+                .setText("target creature gets +1/+1"), false);
+        ability.addEffect(effect.setText("and gains vigilance until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

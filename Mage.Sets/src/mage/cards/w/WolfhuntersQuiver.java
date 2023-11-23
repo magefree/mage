@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -45,7 +44,7 @@ public final class WolfhuntersQuiver extends CardImpl {
         abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
         abilityToGain.addTarget(new TargetCreaturePermanent(filter));
         effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
-        effect.setText("and \"{T}: This creature deals 3 damage to target Werewolf creature");
+        effect.setText("and \"{T}: This creature deals 3 damage to target Werewolf creature.\"");
         ability.addEffect(effect);
         this.addAbility(ability);
         

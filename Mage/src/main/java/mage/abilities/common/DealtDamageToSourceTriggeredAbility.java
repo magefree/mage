@@ -23,6 +23,7 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
             this.setAbilityWord(AbilityWord.ENRAGE);
         }
         setTriggerPhrase("Whenever {this} is dealt damage, ");
+        this.replaceRuleText = true;
     }
 
     protected DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {

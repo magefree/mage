@@ -106,7 +106,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
             } else {
                 sb.append("that card");
             }
-            sb.append(" into their graveyard");
+            sb.append(" into that player's graveyard");
         }
         if (mayShuffleAfter) {
             sb.append(". You may then have that player shuffle that library");
