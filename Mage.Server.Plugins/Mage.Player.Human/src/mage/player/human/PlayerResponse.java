@@ -1,23 +1,40 @@
-
 package mage.player.human;
+
+import mage.constants.ManaType;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.UUID;
-import mage.constants.ManaType;
 
 /**
+ * Network: server side data for waiting a user's response like new choice
+ * <p>
+ * Details:
+ * - one response object per user;
+ * - support multiple data types;
+ * - waiting and writing response on diff threads;
+ * - start by response.wait (game thread) and end by response.notifyAll (network/call thread)
+ * - user's request can income in diff order, so only one latest response allowed (except async commands like concede and cheat)
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class PlayerResponse implements Serializable {
+public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
+
+    private String activeAction; // for debug information
 
     private String responseString;
     private UUID responseUUID;
     private Boolean responseBoolean;
     private Integer responseInteger;
     private ManaType responseManaType;
-    private UUID responseManaTypePlayerId;
-    private Boolean responseConcedeCheck;
+    private UUID responseManaPlayerId;
+
+    // async commands can income any time from network thread as signal,
+    // must process it in game thread on any priority
+    // TODO: is concede/hand view confirmation can broken waiting cycle for other choosing/priority player
+    //  (with same response type, with diff response type)???
+    private Boolean asyncWantConcede;
+    private Boolean asyncWantCheat;
 
     public PlayerResponse() {
         clear();
@@ -25,96 +42,122 @@ public class PlayerResponse implements Serializable {
 
     @Override
     public String toString() {
-        return ((responseString == null) ? "null" : responseString)
-                + ',' + responseUUID
-                + ',' + responseBoolean
-                + ',' + responseInteger
-                + ',' + responseManaType
-                + ',' + responseManaTypePlayerId
-                + ',' + responseConcedeCheck;
+        return ((this.responseString == null) ? "null" : this.responseString)
+                + "," + this.responseUUID
+                + "," + this.responseBoolean
+                + "," + this.responseInteger
+                + "," + this.responseManaType
+                + "," + this.responseManaPlayerId
+                + "," + this.asyncWantConcede
+                + "," + this.asyncWantCheat
+                + " (" + (this.activeAction == null ? "sleep" : this.activeAction) + ")";
     }
 
-    public PlayerResponse(PlayerResponse other) {
-        copy(other);
+    protected PlayerResponse(final PlayerResponse response) {
+        this.copyFrom(response);
     }
 
-    public void copy(PlayerResponse other) {
-        responseString = other.responseString;
-        responseUUID = other.responseUUID;
-        responseBoolean = other.responseBoolean;
-        responseInteger = other.responseInteger;
-        responseManaType = other.responseManaType;
-        responseManaTypePlayerId = other.responseManaTypePlayerId;
-        responseConcedeCheck = other.responseConcedeCheck;
+    @Override
+    public PlayerResponse copy() {
+        return new PlayerResponse(this);
+    }
+
+    public void copyFrom(final PlayerResponse response) {
+        this.activeAction = response.activeAction;
+        this.responseString = response.responseString;
+        this.responseUUID = response.responseUUID;
+        this.responseBoolean = response.responseBoolean;
+        this.responseInteger = response.responseInteger;
+        this.responseManaType = response.responseManaType;
+        this.responseManaPlayerId = response.responseManaPlayerId;
+        this.asyncWantConcede = response.asyncWantConcede;
+        this.asyncWantCheat = response.asyncWantCheat;
     }
 
     public void clear() {
-        responseString = null;
-        responseUUID = null;
-        responseBoolean = null;
-        responseInteger = null;
-        responseManaType = null;
-        responseManaTypePlayerId = null;
-        responseConcedeCheck = null;
+        this.activeAction = null;
+        this.responseString = null;
+        this.responseUUID = null;
+        this.responseBoolean = null;
+        this.responseInteger = null;
+        this.responseManaType = null;
+        this.responseManaPlayerId = null;
+        this.asyncWantConcede = null;
+        this.asyncWantCheat = null;
+    }
+
+    public String getActiveAction() {
+        return this.activeAction;
+    }
+
+    public void setActiveAction(String activeAction) {
+        this.activeAction = activeAction;
     }
 
     public String getString() {
-        return responseString;
+        return this.responseString;
     }
 
-    public void setString(String responseString) {
-        this.responseString = responseString;
+    public void setString(String newString) {
+        this.responseString = newString;
     }
 
     public UUID getUUID() {
-        return responseUUID;
+        return this.responseUUID;
     }
 
-    public void setUUID(UUID responseUUID) {
-        this.responseUUID = responseUUID;
+    public void setUUID(UUID newUUID) {
+        this.responseUUID = newUUID;
     }
 
     public Boolean getBoolean() {
-        return responseBoolean;
+        return this.responseBoolean;
     }
 
-    public void setBoolean(Boolean responseBoolean) {
-        this.responseBoolean = responseBoolean;
-    }
-
-    public Boolean getResponseConcedeCheck() {
-        if (responseConcedeCheck == null) {
-            return false;
-        }
-        return responseConcedeCheck;
-    }
-
-    public void setResponseConcedeCheck() {
-        this.responseConcedeCheck = true;
+    public void setBoolean(Boolean newBoolean) {
+        this.responseBoolean = newBoolean;
     }
 
     public Integer getInteger() {
         return responseInteger;
     }
 
-    public void setInteger(Integer responseInteger) {
-        this.responseInteger = responseInteger;
+    public void setInteger(Integer newInteger) {
+        this.responseInteger = newInteger;
     }
 
     public ManaType getManaType() {
-        return responseManaType;
+        return this.responseManaType;
     }
 
-    public void setManaType(ManaType responseManaType) {
-        this.responseManaType = responseManaType;
+    public void setManaType(ManaType newManaType) {
+        this.responseManaType = newManaType;
     }
 
-    public UUID getResponseManaTypePlayerId() {
-        return responseManaTypePlayerId;
+    public UUID getManaPlayerId() {
+        return this.responseManaPlayerId;
     }
 
-    public void setResponseManaTypePlayerId(UUID responseManaTypePlayerId) {
-        this.responseManaTypePlayerId = responseManaTypePlayerId;
+    public void setResponseManaPlayerId(UUID newManaPlayerId) {
+        this.responseManaPlayerId = newManaPlayerId;
     }
 
+    public Boolean getAsyncWantConcede() {
+        return this.asyncWantConcede != null && this.asyncWantConcede;
+    }
+
+    public void setAsyncWantConcede() {
+        this.asyncWantConcede = true;
+    }
+
+    public Boolean getAsyncWantCheat() {
+        return this.asyncWantCheat != null && this.asyncWantCheat;
+    }
+
+    /**
+     * Start cheat dialog on next player's priority
+     */
+    public void setAsyncWantCheat() {
+        this.asyncWantCheat = true;
+    }
 }

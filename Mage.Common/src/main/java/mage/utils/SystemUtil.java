@@ -1,4 +1,4 @@
-package mage.server.util;
+package mage.utils;
 
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -248,23 +248,15 @@ public final class SystemUtil {
     }
 
     /**
-     * Replaces cards in player's hands by specified in config/init.txt.<br/>
-     * <br/>
-     * <b>Implementation note:</b><br/>
-     * 1. Read init.txt line by line<br/>
-     * 2. Parse line using for searching groups like: [group 1] 3. Parse line
-     * using the following format: line ::=
-     * <zone>:<nickname>:<card name>:<amount><br/>
-     * 4. If zone equals to 'hand', add card to player's library<br/>
-     * 5a. Then swap added card with any card in player's hand<br/>
-     * 5b. Parse next line (go to 2.), If EOF go to 4.<br/>
-     * 6. Log message to all players that cards were added (to prevent unfair
-     * play).<br/>
-     * 7. Exit<br/>
+     * Execute cheat commands from an init.txt file, for more details see
+     * <a href="https://github.com/magefree/mage/wiki/Development-Testing-Tools">wiki page</a>
+     * about testing tools
      *
      * @param game
+     * @param commandsFilePath file path with commands in init.txt format
+     * @param feedbackPlayer player to execute that cheats (will see choose dialogs)
      */
-    public static void addCardsForTesting(Game game, String fileSource, Player feedbackPlayer) {
+    public static void executeCheatCommands(Game game, String commandsFilePath, Player feedbackPlayer) {
 
         // fake test ability for triggers and events
         Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
@@ -272,7 +264,7 @@ public final class SystemUtil {
 
         List<String> errorsList = new ArrayList<>();
         try {
-            String fileName = fileSource;
+            String fileName = commandsFilePath;
             if (fileName == null) {
                 fileName = INIT_FILE_PATH;
             }
@@ -755,11 +747,12 @@ public final class SystemUtil {
                 }
             }
         } catch (Exception e) {
-            String mes = String.format("Catch critical error: %s", e.getMessage());
+            String mes = String.format("Catch critical error on cheating: %s", e.getMessage());
             errorsList.add(mes);
             logger.error(mes, e);
+        } finally {
+            sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
         }
-        sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
     }
 
     private static void sendCheatCommandsFeedback(Game game, Player feedbackPlayer, List<String> errorsList) {
@@ -906,5 +899,22 @@ public final class SystemUtil {
             cardName = matchInfo.group(2);
         }
         return Arrays.asList(cardSet, cardName);
+    }
+
+    public static void ensureRunInGameThread() {
+        String name = Thread.currentThread().getName();
+        if (!name.startsWith("GAME")) {
+            // how-to fix: use signal logic to inform a game about new command to execute instead direct execute (see example with WantConcede)
+            // reason: user responses/commands are received by network/call thread, but must be processed by game thread
+            throw new IllegalArgumentException("Wrong code usage: game related code must run in GAME thread, but it used in " + name, new Throwable());
+        }
+    }
+
+    public static void ensureRunInCallThread() {
+        String name = Thread.currentThread().getName();
+        if (!name.startsWith("CALL")) {
+            // how-to fix: something wrong in your code logic
+            throw new IllegalArgumentException("Wrong code usage: client commands code must run in CALL threads, but used in " + name, new Throwable());
+        }
     }
 }

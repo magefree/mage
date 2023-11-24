@@ -5088,7 +5088,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void signalPlayerConcede() {
+    }
 
+    @Override
+    public void signalPlayerCheat() {
     }
 
     @Override

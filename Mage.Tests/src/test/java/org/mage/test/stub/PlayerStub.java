@@ -725,6 +725,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void signalPlayerCheat() {
+
+    }
+
+    @Override
     public void abortReset() {
 
     }

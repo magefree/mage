@@ -155,9 +155,7 @@ public interface MageServer {
 
     void replaySkipForward(UUID gameId, String sessionId, int moves) throws MageException;
 
-    void cheatMultiple(UUID gameId, String sessionId, UUID playerId, DeckCardLists deckList) throws MageException;
-
-    boolean cheatOne(UUID gameId, String sessionId, UUID playerId, String cardName) throws MageException;
+    void cheatShow(UUID gameId, String sessionId, UUID playerId) throws MageException;
 
     List<UserView> adminGetUsers(String sessionId) throws MageException;
 

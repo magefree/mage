@@ -30,7 +30,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
@@ -974,32 +974,13 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void cheatMultiple(final UUID gameId, final String sessionId, final UUID playerId, final DeckCardLists deckList) throws MageException {
-        execute("cheat", sessionId, () -> {
+    public void cheatShow(final UUID gameId, final String sessionId, final UUID playerId) throws MageException {
+        execute("cheatShow", sessionId, () -> {
             if (testMode) {
                 managerFactory.sessionManager().getSession(sessionId).ifPresent(session -> {
                     UUID userId = session.getUserId();
-                    managerFactory.gameManager().cheat(gameId, userId, playerId, deckList);
+                    managerFactory.gameManager().cheatShow(gameId, userId, playerId);
                 });
-            }
-        });
-    }
-
-    @Override
-    public boolean cheatOne(final UUID gameId, final String sessionId, final UUID playerId, final String cardName) throws MageException {
-        return executeWithResult("cheatOne", sessionId, new ActionWithBooleanResult() {
-            @Override
-            public Boolean execute() {
-                if (testMode) {
-                    Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
-                    if (!session.isPresent()) {
-                        logger.error("Session not found : " + sessionId);
-                    } else {
-                        UUID userId = session.get().getUserId();
-                        return managerFactory.gameManager().cheat(gameId, userId, playerId, cardName);
-                    }
-                }
-                return false;
             }
         });
     }

@@ -64,8 +64,4 @@ public interface CardImageSource {
     default boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         return false;
     }
-
-    default int getDownloadTimeoutMs() {
-        return 0;
-    }
 }

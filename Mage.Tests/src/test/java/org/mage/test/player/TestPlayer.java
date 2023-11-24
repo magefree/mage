@@ -2932,6 +2932,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void signalPlayerCheat() {
+        computerPlayer.signalPlayerCheat();
+    }
+
+    @Override
     public void abortReset() {
         computerPlayer.abortReset();
     }

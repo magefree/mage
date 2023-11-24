@@ -794,7 +794,7 @@ public abstract class GameImpl implements Game {
                 if (!concedingPlayers.contains(playerId)) {
                     logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
                     concedingPlayers.add(playerId);
-                    player.signalPlayerConcede();
+                    player.signalPlayerConcede(); // will be executed on next priority
                 }
             } else {
                 // no asynchronous action so check directly
@@ -3799,8 +3799,9 @@ public abstract class GameImpl implements Game {
                 for (Player playerObject : getPlayers().values()) {
                     if (playerObject.isHuman() && playerObject.canRespond()) {
                         playerObject.resetStoredBookmark(this);
-                        playerObject.abort();
                         playerObject.resetPlayerPassedActions();
+                        playerObject.abort();
+
                     }
                 }
                 fireUpdatePlayersEvent();

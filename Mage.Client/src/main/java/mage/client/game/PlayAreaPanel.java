@@ -588,7 +588,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
-        SessionHandler.cheat(gameId, playerId, DeckImporter.importDeckFromFile("cheat.dck", false));
+        SessionHandler.cheatShow(gameId, playerId);
     }
 
     public boolean isSmallMode() {
