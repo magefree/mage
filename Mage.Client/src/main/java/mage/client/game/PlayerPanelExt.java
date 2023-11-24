@@ -970,8 +970,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
-        DckDeckImporter deckImporter = new DckDeckImporter();
-        SessionHandler.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck", false));
+        SessionHandler.cheatShow(gameId, playerId);
     }
 
     private void btnToolHintsHelperActionPerformed(java.awt.event.ActionEvent evt) {

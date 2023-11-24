@@ -27,7 +27,6 @@ import mage.server.Main;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
-import mage.server.util.SystemUtil;
 import mage.util.MultiAmountMessage;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
@@ -502,6 +501,10 @@ public class GameController implements GameCallback {
     }
 
     public void sendPlayerAction(PlayerAction playerAction, UUID userId, Object data) {
+        // TODO: critical bug, must be enabled and research/rework due:
+        // * game change commands must be executed by game thread (example: undo)
+        // * user change commands can be executed by network thread??? (example: change skip settings)
+        //SystemUtil.ensureRunInGameThread();
         switch (playerAction) {
             case UNDO:
                 game.undo(getPlayerId(userId));
@@ -705,31 +708,10 @@ public class GameController implements GameCallback {
         }
     }
 
-    public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
-        try {
-            Deck deck = Deck.load(deckList, false, false);
-            game.loadCards(deck.getCards(), playerId);
-            for (Card card : deck.getCards()) {
-                card.putOntoBattlefield(game, Zone.OUTSIDE, null, playerId);
-            }
-        } catch (GameException ex) {
-            logger.warn(ex.getMessage());
-        }
-        addCardsForTesting(game, playerId);
-        updateGame();
-    }
-
-    public boolean cheat(UUID userId, UUID playerId, String cardName) {
-        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-        Card card = cardInfo != null ? cardInfo.getCard() : null;
-        if (card != null) {
-            Set<Card> cards = new HashSet<>();
-            cards.add(card);
-            game.loadCards(cards, playerId);
-            card.moveToZone(Zone.HAND, null, game, false);
-            return true;
-        } else {
-            return false;
+    public void cheatShow(UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            player.signalPlayerCheat();
         }
     }
 
@@ -983,13 +965,6 @@ public class GameController implements GameCallback {
             StreamUtils.closeQuietly(buffer);
         }
         return false;
-    }
-
-    /**
-     * Adds cards in player's hands that are specified in config/init.txt.
-     */
-    private void addCardsForTesting(Game game, UUID playerId) {
-        SystemUtil.addCardsForTesting(game, null, game.getPlayer(playerId));
     }
 
     /**

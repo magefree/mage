@@ -225,8 +225,8 @@ public final class SessionHandler {
         return session.isTestMode();
     }
 
-    public static void cheat(UUID gameId, UUID playerId, DeckCardLists deckCardLists) {
-        session.cheat(gameId, playerId, deckCardLists);
+    public static void cheatShow(UUID gameId, UUID playerId) {
+        session.cheatShow(gameId, playerId);
     }
 
     public static String getSessionId() {

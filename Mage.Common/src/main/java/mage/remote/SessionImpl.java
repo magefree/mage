@@ -1499,10 +1499,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList) {
+    public boolean cheatShow(UUID gameId, UUID playerId) {
         try {
             if (isConnected()) {
-                server.cheatMultiple(gameId, sessionId, playerId, deckList);
+                server.cheatShow(gameId, sessionId, playerId);
                 return true;
             }
         } catch (MageException ex) {

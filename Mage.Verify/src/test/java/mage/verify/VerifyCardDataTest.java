@@ -35,7 +35,7 @@ import mage.game.draft.DraftCube;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import mage.sets.TherosBeyondDeath;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
