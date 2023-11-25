@@ -54,6 +54,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Another Chance", 90, Rarity.COMMON, mage.cards.a.AnotherChance.class));
         cards.add(new SetCardInfo("Armored Kincaller", 174, Rarity.COMMON, mage.cards.a.ArmoredKincaller.class));
         cards.add(new SetCardInfo("Attentive Sunscribe", 4, Rarity.COMMON, mage.cards.a.AttentiveSunscribe.class));
+        cards.add(new SetCardInfo("Barracks of the Thousand", 39, Rarity.RARE, mage.cards.b.BarracksOfTheThousand.class));
         cards.add(new SetCardInfo("Bartolome del Presidio", 224, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class));
         cards.add(new SetCardInfo("Basking Capybara", 175, Rarity.COMMON, mage.cards.b.BaskingCapybara.class));
         cards.add(new SetCardInfo("Bat Colony", 5, Rarity.UNCOMMON, mage.cards.b.BatColony.class));
@@ -67,6 +68,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Brackish Blunder", 46, Rarity.COMMON, mage.cards.b.BrackishBlunder.class));
         cards.add(new SetCardInfo("Braided Net", 47, Rarity.RARE, mage.cards.b.BraidedNet.class));
         cards.add(new SetCardInfo("Braided Quipu", 47, Rarity.RARE, mage.cards.b.BraidedQuipu.class));
+        cards.add(new SetCardInfo("Brass's Tunnel-Grinder", 135, Rarity.RARE, mage.cards.b.BrasssTunnelGrinder.class));
         cards.add(new SetCardInfo("Brazen Blademaster", 136, Rarity.COMMON, mage.cards.b.BrazenBlademaster.class));
         cards.add(new SetCardInfo("Breeches, Eager Pillager", 137, Rarity.RARE, mage.cards.b.BreechesEagerPillager.class));
         cards.add(new SetCardInfo("Bringer of the Last Gift", 94, Rarity.RARE, mage.cards.b.BringerOfTheLastGift.class));
@@ -310,6 +312,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Synapse Necromage", 125, Rarity.UNCOMMON, mage.cards.s.SynapseNecromage.class));
         cards.add(new SetCardInfo("Tarrian's Soulcleaver", 264, Rarity.RARE, mage.cards.t.TarriansSoulcleaver.class));
         cards.add(new SetCardInfo("Tectonic Hazard", 169, Rarity.COMMON, mage.cards.t.TectonicHazard.class));
+        cards.add(new SetCardInfo("Tecutlan, the Searing Rift", 135, Rarity.RARE, mage.cards.t.TecutlanTheSearingRift.class));
         cards.add(new SetCardInfo("Temple of Civilization", 26, Rarity.MYTHIC, mage.cards.t.TempleOfCivilization.class));
         cards.add(new SetCardInfo("Temple of Cultivation", 204, Rarity.MYTHIC, mage.cards.t.TempleOfCultivation.class));
         cards.add(new SetCardInfo("Temple of Cyclical Time", 67, Rarity.MYTHIC, mage.cards.t.TempleOfCyclicalTime.class));
@@ -327,6 +330,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Skullspore Nexus", 212, Rarity.MYTHIC, mage.cards.t.TheSkullsporeNexus.class));
         cards.add(new SetCardInfo("Thousand Moons Crackshot", 37, Rarity.COMMON, mage.cards.t.ThousandMoonsCrackshot.class));
         cards.add(new SetCardInfo("Thousand Moons Infantry", 38, Rarity.COMMON, mage.cards.t.ThousandMoonsInfantry.class));
+        cards.add(new SetCardInfo("Thousand Moons Smithy", 39, Rarity.RARE, mage.cards.t.ThousandMoonsSmithy.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 216, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
         cards.add(new SetCardInfo("Threefold Thunderhulk", 265, Rarity.RARE, mage.cards.t.ThreefoldThunderhulk.class));
         cards.add(new SetCardInfo("Throne of the Grim Captain", 266, Rarity.RARE, mage.cards.t.ThroneOfTheGrimCaptain.class));
