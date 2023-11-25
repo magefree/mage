@@ -43,6 +43,7 @@ import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.util.DebugUtil;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
@@ -417,6 +418,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupContainer.setLayout(null);
         popupContainer.add(cardInfoPane);
         popupContainer.setVisible(false);
+        if (DebugUtil.GUI_POPUP_CONTAINER_DRAW_DEBUG_BORDER) {
+            popupContainer.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
         desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
         UI.addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
 

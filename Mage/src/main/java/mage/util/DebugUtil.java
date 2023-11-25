@@ -22,6 +22,9 @@ public class DebugUtil {
     public static boolean GUI_RENDER_IMAGE_DRAW_IMAGE_BORDER = false;
     public static boolean GUI_RENDER_CENTERED_TEXT_DRAW_DEBUG_LINES = false;
 
+    // popup container (example: popup with card info)
+    public static boolean GUI_POPUP_CONTAINER_DRAW_DEBUG_BORDER = false;
+
     // deck editor
     public static boolean GUI_DECK_EDITOR_DRAW_DRAGGING_PANE_BORDER = false;
     public static boolean GUI_DECK_EDITOR_DRAW_COUNT_LABEL_BORDER = false;

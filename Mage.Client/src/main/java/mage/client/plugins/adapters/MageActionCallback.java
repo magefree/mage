@@ -21,6 +21,7 @@ import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
 import mage.constants.EnlargeMode;
 import mage.constants.Zone;
+import mage.util.DebugUtil;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -48,7 +49,7 @@ import java.util.concurrent.TimeUnit;
  * Only ONE action callback possible for the app
  * <p>
  * If you want to process card events in your component then use CardEventProducer, see example with mouseClicked here
- *
+ * <p>
  * If you want virtual popup hint (without real card) then use VirtualCardInfo
  *
  * @author Nantuko, noxx, JayDi85
@@ -167,13 +168,17 @@ public class MageActionCallback implements ActionCallback {
             if (data.getLocationOnScreen() == null) {
                 data.setLocationOnScreen(cardPanel.getCardLocationOnScreen().getCardPoint());
             }
+
+            int newLocationX = (int) data.getLocationOnScreen().getX() + data.getPopupOffsetX();
+            int newLocationY = (int) data.getLocationOnScreen().getY() + data.getPopupOffsetY() + 40;
+
             PopupFactory factory = PopupFactory.getSharedInstance();
             data.getPopupText().updateText();
-            tooltipPopup = factory.getPopup(cardPanel, data.getPopupText(), (int) data.getLocationOnScreen().getX() + data.getPopupOffsetX(), (int) data.getLocationOnScreen().getY() + data.getPopupOffsetY() + 40);
+            tooltipPopup = factory.getPopup(cardPanel, data.getPopupText(), newLocationX, newLocationY);
             tooltipPopup.show();
-            // hack to get popup to resize to fit text
+            // hack to get popup to resize to fit text  TODO: wtf?! Can be removed?
             tooltipPopup.hide();
-            tooltipPopup = factory.getPopup(cardPanel, data.getPopupText(), (int) data.getLocationOnScreen().getX() + data.getPopupOffsetX(), (int) data.getLocationOnScreen().getY() + data.getPopupOffsetY() + 40);
+            tooltipPopup = factory.getPopup(cardPanel, data.getPopupText(), newLocationX, newLocationY);
             tooltipPopup.show();
         } else {
             showCardHintPopup(data, parentComponent, parentPoint);
@@ -218,9 +223,11 @@ public class MageActionCallback implements ActionCallback {
                                 data.setLocationOnScreen(cardPanel.getCardLocationOnScreen().getCardPoint());
                             }
 
-                            Point location = new Point((int) data.getLocationOnScreen().getX() + data.getPopupOffsetX() - 40, (int) data.getLocationOnScreen().getY() + data.getPopupOffsetY() - 40);
-                            location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, infoPane, parentComponent);
-                            location.translate(-parentPoint.x, -parentPoint.y);
+                            if (DebugUtil.GUI_POPUP_CONTAINER_DRAW_DEBUG_BORDER) {
+                                ((JComponent) infoPane).setBorder(BorderFactory.createLineBorder(Color.green));
+                            }
+
+                            Point location = preparePopupContainerLocation(popupContainer, infoPane, data, parentPoint, parentComponent);
                             popupContainer.setLocation(location);
                             popupContainer.setVisible(true);
                             c.repaint();
@@ -672,10 +679,12 @@ public class MageActionCallback implements ActionCallback {
                 Component parentComponent = SwingUtilities.getRoot(cardPanel);
                 if (cardPreviewPane != null && parentComponent != null) {
                     Point parentPoint = parentComponent.getLocationOnScreen();
+                    if (DebugUtil.GUI_POPUP_CONTAINER_DRAW_DEBUG_BORDER) {
+                        ((JComponent) cardPreviewPane).setBorder(BorderFactory.createLineBorder(Color.green));
+                    }
                     data.setLocationOnScreen(cardPanel.getCardLocationOnScreen().getCardPoint());
-                    Point location = new Point((int) data.getLocationOnScreen().getX() + data.getPopupOffsetX() - 40, (int) data.getLocationOnScreen().getY() + data.getPopupOffsetY() - 40);
-                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, cardPreviewPane, parentComponent);
-                    location.translate(-parentPoint.x, -parentPoint.y);
+
+                    Point location = preparePopupContainerLocation(popupContainer, cardPreviewPane, data, parentPoint, parentComponent);
                     popupContainer.setLocation(location);
                     popupContainer.setVisible(true);
 
@@ -715,6 +724,37 @@ public class MageActionCallback implements ActionCallback {
                 logger.warn("Problem dring display of enlarged card", e);
             }
         });
+    }
+
+    private Point preparePopupContainerLocation(Component popupContainer, Component popupComponent, TransferData data, Point parentPoint, Component parentComponent) {
+        Point location;
+        switch (data.getPopupAutoLocationMode()) {
+
+            case PUT_INSIDE_PARENT: {
+                location = new Point((int) data.getLocationOnScreen().getX() + data.getPopupOffsetX() - 40, (int) data.getLocationOnScreen().getY() + data.getPopupOffsetY() - 40);
+                location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popupComponent, parentComponent);
+                location.translate(-parentPoint.x, -parentPoint.y);
+                break;
+            }
+
+            case PUT_NEAR_MOUSE_POSITION: {
+                location = MouseInfo.getPointerInfo().getLocation();
+                boolean hasRightSpace = location.x + popupContainer.getWidth() < parentComponent.getX() + parentComponent.getWidth();
+                boolean hasBottomSpace = location.y + popupContainer.getHeight() < parentComponent.getY() + parentComponent.getHeight();
+                if (!hasRightSpace) {
+                    location.setLocation(location.x - popupContainer.getWidth(), location.y);
+                }
+                if (!hasBottomSpace) {
+                    location.setLocation(location.x, location.y - popupContainer.getHeight());
+                }
+                break;
+            }
+
+            default:
+                throw new IllegalArgumentException("Unsupport auto-location " + data.getPopupAutoLocationMode());
+        }
+        location.translate(-parentPoint.x, -parentPoint.y);
+        return location;
     }
 
     private void displayCardInfo(CardView card, Image image, BigCard bigCard) {

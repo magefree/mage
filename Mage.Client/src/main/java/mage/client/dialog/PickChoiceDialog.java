@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import mage.cards.action.TransferData;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
 import mage.client.MageFrame;
@@ -238,6 +239,7 @@ public class PickChoiceDialog extends MageDialog {
                         CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(cardName)));
                         cardInfo.init(cardView, this.bigCard, this.gameId);
                     }
+                    cardInfo.setPopupAutoLocationMode(TransferData.PopupAutoLocationMode.PUT_NEAR_MOUSE_POSITION);
 
                     cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
                 } else {

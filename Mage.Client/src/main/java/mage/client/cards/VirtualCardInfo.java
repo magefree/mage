@@ -29,6 +29,10 @@ import java.util.UUID;
  * - for game GUI: you must init with gameId (otherwise you can't see it)
  * - for non-game GUI: no needs in gameId or bigCard (bigCard is a panel with card image)
  * - if you want to show card immediately then use init + onMouseEntered + onMouseMoved
+ * <p>
+ * Auto-location modes:
+ * - default: popup container will be put inside parent container
+ * - near mouse: popup container will be put near mouse position (example: popup over chat messages)
  *
  * @author JayDi85
  */
@@ -90,6 +94,10 @@ public class VirtualCardInfo {
         data.setTooltipDelay(tooltipDelay);
     }
 
+    public void setPopupAutoLocationMode(TransferData.PopupAutoLocationMode mode) {
+        data.setPopupAutoLocationMode(mode);
+    }
+
     public CardView getCardView() {
         return this.cardView;
     }
@@ -125,10 +133,6 @@ public class VirtualCardInfo {
         this.actionCallback.mouseEntered(null, this.data);
     }
 
-    public void onMouseMoved() {
-        onMouseMoved(null);
-    }
-
     public void onMouseMoved(Point newLocation) {
         if (!prepared()) {
             return;
@@ -145,6 +149,7 @@ public class VirtualCardInfo {
         if (!prepared()) {
             return;
         }
+
         this.actionCallback.mouseExited(null, this.data);
     }
 }

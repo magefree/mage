@@ -1,5 +1,6 @@
 package mage.client.components;
 
+import mage.cards.action.TransferData;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
@@ -109,6 +110,7 @@ public class ColorPane extends JEditorPane {
                 if (cardView != null) {
                     cardInfo.init(cardView, this.bigCard, this.gameId);
                     cardInfo.setTooltipDelay(CHAT_TOOLTIP_DELAY_MS);
+                    cardInfo.setPopupAutoLocationMode(TransferData.PopupAutoLocationMode.PUT_NEAR_MOUSE_POSITION);
                     cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
                     cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
                 }
