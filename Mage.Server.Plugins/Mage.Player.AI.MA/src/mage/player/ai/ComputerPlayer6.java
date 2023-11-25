@@ -424,12 +424,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
      * @return
      */
     protected Integer addActionsTimed() {
-        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            }
-        });
+        // run new game simulation in parallel thread
+        FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE));
         pool.execute(task);
         try {
             int maxSeconds = maxThink;
@@ -437,18 +433,19 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 maxSeconds = 3600;
             }
             logger.debug("maxThink: " + maxSeconds + " seconds ");
-            if (task.get(maxSeconds, TimeUnit.SECONDS) != null) {
-                return task.get(maxSeconds, TimeUnit.SECONDS);
+            Integer res = task.get(maxSeconds, TimeUnit.SECONDS);
+            if (res != null) {
+                return res;
             }
         } catch (TimeoutException e) {
             logger.info("simulating - timed out");
             task.cancel(true);
         } catch (ExecutionException e) {
             // exception error in simulated game
-            e.printStackTrace();
             task.cancel(true);
-            // real games: must catch
+            // real games: must catch and log
             // unit tests: must raise again for test fail
+            logger.error("AI simulation game catch error: " + e.getCause(), e);
             if (this.isTestsMode()) {
                 throw new IllegalStateException("One of the simulated games raise the error: " + e.getCause());
             }

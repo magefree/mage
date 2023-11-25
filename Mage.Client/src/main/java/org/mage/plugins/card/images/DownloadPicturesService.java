@@ -647,7 +647,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 while (!executor.isTerminated()) {
                     try {
                         TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException ie) {
+                    } catch (InterruptedException ignore) {
                     }
                 }
             }

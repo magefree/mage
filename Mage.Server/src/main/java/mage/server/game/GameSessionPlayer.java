@@ -37,7 +37,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
     public GameSessionPlayer(ManagerFactory managerFactory, Game game, UUID userId, UUID playerId) {
         super(managerFactory.userManager(), userId, game, true);
         this.userManager = managerFactory.userManager();
-        callExecutor = managerFactory.threadExecutor().getCallExecutor();
+        this.callExecutor = managerFactory.threadExecutor().getCallExecutor();
         this.playerId = playerId;
     }
 

@@ -7,6 +7,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.constants.Constants;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.constants.TableState;
@@ -488,7 +489,13 @@ public class MageServerImpl implements MageServer {
     @Override
     //FIXME: why no sessionId here???
     public void chatSendMessage(final UUID chatId, final String userName, final String message) throws MageException {
+        if (message.length() > Constants.MAX_CHAT_MESSAGE_SIZE) {
+            logger.error("Chat message too big: " + message.length() + ", from user " + userName);
+            return;
+        }
+
         try {
+            // TODO: check and replace all usage of callExecutor.execute() by execute("actionName")
             callExecutor.execute(
                     () -> managerFactory.chatManager().broadcast(chatId, userName, HtmlEscape.escapeHtml4(message), MessageColor.BLUE, true, null, ChatMessage.MessageType.TALK, null)
             );
@@ -953,8 +960,14 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    //TODO: check how often it is used
     public ServerState getServerState() throws MageException {
+        // called one time per login, must work without auth and with diff versions
+        try {
+            // some ddos protection
+            Thread.sleep(1000);
+        } catch (InterruptedException ignore) {
+        }
+
         try {
             return new ServerState(
                     GameFactory.instance.getGameTypes(),

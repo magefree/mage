@@ -87,12 +87,12 @@ public class MageActionCallback implements ActionCallback {
 
     private Date enlargeredViewOpened;
     private volatile EnlargedWindowState enlargedWindowState = EnlargedWindowState.CLOSED;
-    //private volatile boolean enlargedImageWindowOpen = false;
     // shows the alternative card the normal card or the alternative card (copy source, other flip side, other transformed side)
     private volatile EnlargeMode enlargeMode;
 
-    private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(1);
-    private ScheduledFuture<?> hideTimeout;
+    private static final ScheduledExecutorService hideEnlargedCardWorker = Executors.newScheduledThreadPool(1);
+    private ScheduledFuture<?> hideEnlagedCardTask;
+    private static final int HIDE_ENLARGED_CARD_TIMEOUT_MS = 700;
 
     private MageCard prevCardPanel;
     private boolean startedDragging;
@@ -472,7 +472,7 @@ public class MageActionCallback implements ActionCallback {
         }
 
         hideTooltipPopup();
-        cancelTimeout();
+        cancelHidingEnlagedCard();
         Component parentComponent = SwingUtilities.getRoot(cardPanel);
         if (parentComponent == null) {
             // virtual card (example: show card popup in non cards panel like PickChoiceDialog)
@@ -514,7 +514,7 @@ public class MageActionCallback implements ActionCallback {
                 popupTextWindowOpen = true;
             }
             if (enlargedWindowState != EnlargedWindowState.CLOSED) {
-                cancelTimeout();
+                cancelHidingEnlagedCard();
                 displayEnlargedCard(cardPanel.getOriginal(), data);
             }
         }
@@ -552,7 +552,7 @@ public class MageActionCallback implements ActionCallback {
 
     public void hideAll(UUID gameId) {
         hideTooltipPopup();
-        startHideTimeout();
+        startHidingEnlagedCard();
         this.popupTextWindowOpen = false;
         if (gameId != null) {
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
@@ -740,14 +740,16 @@ public class MageActionCallback implements ActionCallback {
         return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_ABILITY_TEXT_OVERLAY, "true").equals("true");
     }
 
-    private synchronized void startHideTimeout() {
-        cancelTimeout();
-        hideTimeout = timeoutExecutor.schedule(this::hideEnlargedCard, 700, TimeUnit.MILLISECONDS);
+    private synchronized void startHidingEnlagedCard() {
+        cancelHidingEnlagedCard();
+        hideEnlagedCardTask = hideEnlargedCardWorker.schedule(
+                () -> SwingUtilities.invokeLater(this::hideEnlargedCard), HIDE_ENLARGED_CARD_TIMEOUT_MS, TimeUnit.MILLISECONDS
+        );
     }
 
-    private synchronized void cancelTimeout() {
-        if (hideTimeout != null) {
-            hideTimeout.cancel(false);
+    private synchronized void cancelHidingEnlagedCard() {
+        if (hideEnlagedCardTask != null) {
+            hideEnlagedCardTask.cancel(false);
         }
     }
 

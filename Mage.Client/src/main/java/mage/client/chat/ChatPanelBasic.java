@@ -5,6 +5,7 @@ import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
+import mage.constants.Constants;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import org.mage.card.arcane.ManaSymbols;
@@ -103,7 +104,6 @@ public class ChatPanelBasic extends javax.swing.JPanel {
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPaneTxt.setViewportBorder(null);
         }
-
     }
 
     public void cleanUp() {
@@ -398,6 +398,12 @@ public class ChatPanelBasic extends javax.swing.JPanel {
 
     public void handleKeyTyped(java.awt.event.KeyEvent evt) {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+
+            if (this.txtMessage.getText().length() > Constants.MAX_CHAT_MESSAGE_SIZE) {
+                JOptionPane.showMessageDialog(null, "Can't send too long message", "Chat", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             if (parentChatRef != null) {
                 SessionHandler.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
             } else {

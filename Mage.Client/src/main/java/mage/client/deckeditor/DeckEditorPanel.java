@@ -1497,13 +1497,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         timeToSubmit = 60;
         this.btnSubmitTimer.setEnabled(false);
 
-        ScheduledFuture scheduledFuture = scheduledExecutorService.schedule((Callable) () -> {
+        scheduledExecutorService.schedule(() -> {
             if (updateDeckTask != null) {
                 updateDeckTask.cancel(true);
             }
 
             if (SessionHandler.submitDeck(mode, tableId, deck.getDeckCardLists())) {
-                removeDeckEditor();
+                SwingUtilities.invokeLater(this::removeDeckEditor);
             }
             return null;
         }, 60, TimeUnit.SECONDS);

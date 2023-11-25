@@ -36,7 +36,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class TableManagerImpl implements TableManager {
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    // protected static ScheduledExecutorService expireExecutor = ThreadExecutorImpl.getInstance().getExpireExecutor();
     private final ManagerFactory managerFactory;
     private final Logger logger = Logger.getLogger(TableManagerImpl.class);
     private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");

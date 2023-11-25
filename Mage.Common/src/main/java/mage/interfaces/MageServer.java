@@ -45,16 +45,20 @@ public interface MageServer {
     Object serverGetPromotionMessages(String sessionId) throws MageException;
 
     // sync cards send sets db
-    // TODO: outdated, no more client/server sync, can be removed?
+    @Deprecated // TODO: outdated, no more client/server sync, can be removed?
     List<ExpansionInfo> syncGetMissingExpansionData(List<String> codes);
+    @Deprecated // TODO: outdated, no more client/server sync, can be removed?
     List<CardInfo> syncGetMissingCardsData(List<String> classNames);
 
     ServerState getServerState() throws MageException; // TODO: need stable update process, so rename it after few releases
 
+    // TODO: miss session
     UUID serverGetMainRoomId() throws MageException;
 
+    // TODO: miss session
     List<RoomUsersView> roomGetUsers(UUID roomId) throws MageException;
 
+    // TODO: miss session
     List<MatchView> roomGetFinishedMatches(UUID roomId) throws MageException;
 
     TableView roomCreateTable(String sessionId, UUID roomId, MatchOptions matchOptions) throws MageException;
@@ -81,22 +85,29 @@ public interface MageServer {
 
     boolean tableIsOwner(String sessionId, UUID roomId, UUID tableId) throws MageException;
 
+    // TODO: miss session
     TableView roomGetTableById(UUID roomId, UUID tableId) throws MageException;
 
+    // TODO: miss session
     List<TableView> roomGetAllTables(UUID roomId) throws MageException;
 
+    // TODO: miss session
     void chatSendMessage(UUID chatId, String userName, String message) throws MageException;
 
     void chatJoin(UUID chatId, String sessionId, String userName) throws MageException;
 
     void chatLeave(UUID chatId, String sessionId) throws MageException;
 
+    // TODO: miss session
     UUID chatFindByGame(UUID gameId) throws MageException;
 
+    // TODO: miss session
     UUID chatFindByTable(UUID tableId) throws MageException;
 
+    // TODO: miss session
     UUID chatFindByTournament(UUID tournamentId) throws MageException;
 
+    // TODO: miss session
     UUID chatFindByRoom(UUID roomId) throws MageException;
 
     boolean matchStart(String sessionId, UUID roomId, UUID tableId) throws MageException;
@@ -135,6 +146,7 @@ public interface MageServer {
 
     void tournamentQuit(UUID tournamentId, String sessionId) throws MageException;
 
+    // TODO: miss session
     TournamentView tournamentFindById(UUID tournamentId) throws MageException;
 
     void draftJoin(UUID draftId, String sessionId) throws MageException;

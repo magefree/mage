@@ -261,6 +261,7 @@ public class Connection {
         return userData;
     }
 
+    @Deprecated // TODO: server side cards do not supports now, so remove outdated code (db sync with server)
     public boolean isForceDBComparison() {
         return forceDBComparison;
     }

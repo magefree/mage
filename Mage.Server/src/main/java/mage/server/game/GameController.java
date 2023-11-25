@@ -335,7 +335,7 @@ public class GameController implements GameCallback {
             gameFuture = gameExecutor.submit(worker);
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException ignore) {
             }
             if (game.getState().getChoosingPlayerId() != null) {
                 // start timer to force player to choose starting player otherwise loosing by being idle
