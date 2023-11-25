@@ -97,6 +97,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
      */
     public ChatPanelBasic() {
         initComponents();
+        txtConversation.enableHyperlinksAndCardPopups();
         setBackground(new Color(0, 0, 0, CHAT_ALPHA));
         changeGUISize(GUISizeHelper.chatFont);
         if (jScrollPaneTxt != null) {

@@ -533,6 +533,7 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/>").append("<b>/w username message</b> - send private message to player (whisper)")
                                 .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
                                 .append("<br/>").append("<b>/fix</b> - fix frozen game")
+                                .append("<br/>").append("<b>[[card name]]</b> - insert card with popup info")
                                 .toString(),
                         null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
