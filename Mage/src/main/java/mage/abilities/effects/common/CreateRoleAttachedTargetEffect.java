@@ -9,6 +9,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -33,13 +35,16 @@ public class CreateRoleAttachedTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            return false;
+        boolean result = false;
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null) {
+                Token token = roleType.createToken(permanent, game, source);
+                // The token may not be created, for instance if the creature has protection from enchantments.
+                result |= !token.getLastAddedTokenIds().isEmpty();
+            }
         }
-        Token token = roleType.createToken(permanent, game, source);
-        // The token may not be created, for instance if the creature has protection from enchantments.
-        return !token.getLastAddedTokenIds().isEmpty();
+        return result;
     }
 
     @Override

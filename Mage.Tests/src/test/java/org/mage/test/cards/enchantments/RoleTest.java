@@ -150,4 +150,29 @@ public class RoleTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
     }
 
+    @Test
+    public void testBecomeBrutes() {
+        String bear = "Runeclaw Bear"; // 2/2
+        String become = "Become Brutes";
+        // One or two target creatures each gain haste until end of turn.
+        // For each of those creatures, create a Monster Role token attached to it.
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.BATTLEFIELD, playerA, wardens);
+        addCard(Zone.HAND, playerA, become);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        addTarget(playerA, bear + "^" + wardens);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, become);
+        setChoice(playerA, ""); // order triggers
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, become, 1);
+        assertPowerToughness(playerA, bear, 3, 3);
+        assertPowerToughness(playerA, wardens, 2, 5);
+        assertLife(playerA, 20 + 2 + 2);
+    }
+
 }
