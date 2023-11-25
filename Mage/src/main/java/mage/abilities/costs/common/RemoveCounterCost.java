@@ -10,15 +10,12 @@ import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
-import mage.target.TargetObject;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -32,16 +29,25 @@ public class RemoveCounterCost extends CostImpl {
     private final CounterType counterTypeToRemove;
     protected final int countersToRemove;
 
+    /**
+     * Remove one counter of any type from the target
+     */
     public RemoveCounterCost(Target target) {
         this(target, null);
     }
 
+    /**
+     * Remove one counter of the specified type from the target
+     */
     public RemoveCounterCost(Target target, CounterType counterTypeToRemove) {
         this(target, counterTypeToRemove, 1);
     }
 
+    /**
+     * Remove a number of counters of the specified type from the target
+     */
     public RemoveCounterCost(Target target, CounterType counterTypeToRemove, int countersToRemove) {
-        this.target = target;
+        this.target = target.withNotTarget(true); // cost is never targeted
         this.counterTypeToRemove = counterTypeToRemove;
         this.countersToRemove = countersToRemove;
 
@@ -76,7 +82,7 @@ public class RemoveCounterCost extends CostImpl {
         } else if (target instanceof TargetCard) {  // For Mari, the Killing Quill
             outcome = Outcome.Neutral;
         } else {
-            throw new RuntimeException(
+            throw new IllegalArgumentException(
                     "Wrong target type provided for RemoveCounterCost. Provided " + target.getClass() + ". " +
                             "From ability " + ability);
         }
