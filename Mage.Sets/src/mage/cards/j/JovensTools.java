@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class JovensTools extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by walls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
     static {
         filter.add(Predicates.not(SubType.WALL.getPredicate()));
     }

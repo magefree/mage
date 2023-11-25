@@ -22,8 +22,10 @@ public final class UncannySpeed extends CardImpl {
 
 
         // Target creature gets +3/+0 and gains haste until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn)
+                .setText("target creature gets +3/+0"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains haste until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

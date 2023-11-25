@@ -33,7 +33,8 @@ public final class MortisDogs extends CardImpl {
         // Whenever Mortis Dogs attacks, it gets +2/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
         // When Mortis Dogs dies, target player loses life equal to its power.
-        Ability ability = new DiesSourceTriggeredAbility(new LoseLifeTargetEffect(new SourcePermanentPowerCount(false)));
+        Ability ability = new DiesSourceTriggeredAbility(new LoseLifeTargetEffect(new SourcePermanentPowerCount(false))
+                .setText("target player loses life equal to its power"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

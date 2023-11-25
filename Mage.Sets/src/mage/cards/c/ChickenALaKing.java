@@ -97,6 +97,6 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird";
+        return "Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird.";
     }
 }
