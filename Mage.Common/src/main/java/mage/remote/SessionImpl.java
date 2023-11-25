@@ -269,7 +269,6 @@ public class SessionImpl implements Session {
 
                     if (!connection.getUsername().equals("Admin")) {
                         server.connectSetUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
-                        updateDatabase(connection.isForceDBComparison(), serverState);
                     }
 
                     logger.info("Logging: DONE");
@@ -466,29 +465,6 @@ public class SessionImpl implements Session {
         } else {
             connectStop(false);
             return false;
-        }
-    }
-
-    private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
-        // download NEW cards/sets, but do not download data fixes (it's an old and rare feature from old clients, e.g. one client for different servers with different cards)
-        // use case: server gets new minor version with new cards, old client can get that cards too without donwload new version
-
-        // sets
-        long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
-        if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
-            List<String> setCodes = ExpansionRepository.instance.getSetCodes();
-            List<ExpansionInfo> expansions = server.syncGetMissingExpansionData(setCodes);
-            logger.info("DB: updating sets... Found new: " + expansions.size());
-            ExpansionRepository.instance.saveSets(expansions, null, serverState.getExpansionsContentVersion());
-        }
-
-        // cards
-        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
-        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
-            List<String> classNames = CardRepository.instance.getClassNames();
-            List<CardInfo> cards = server.syncGetMissingCardsData(classNames);
-            logger.info("DB: updating cards... Found new: " + cards.size());
-            CardRepository.instance.saveCards(cards, serverState.getCardsContentVersion());
         }
     }
 

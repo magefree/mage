@@ -44,12 +44,6 @@ public interface MageServer {
 
     Object serverGetPromotionMessages(String sessionId) throws MageException;
 
-    // sync cards send sets db
-    @Deprecated // TODO: outdated, no more client/server sync, can be removed?
-    List<ExpansionInfo> syncGetMissingExpansionData(List<String> codes);
-    @Deprecated // TODO: outdated, no more client/server sync, can be removed?
-    List<CardInfo> syncGetMissingCardsData(List<String> classNames);
-
     ServerState getServerState() throws MageException; // TODO: need stable update process, so rename it after few releases
 
     // TODO: miss session

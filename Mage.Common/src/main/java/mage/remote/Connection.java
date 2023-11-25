@@ -28,7 +28,6 @@ public class Connection {
     private String proxyUsername;
     private String proxyPassword;
     private int clientCardDatabaseVersion;
-    private boolean forceDBComparison;
     private String userIdStr;
     private int socketWriteTimeout;
 
@@ -259,15 +258,6 @@ public class Connection {
 
     public UserData getUserData() {
         return userData;
-    }
-
-    @Deprecated // TODO: server side cards do not supports now, so remove outdated code (db sync with server)
-    public boolean isForceDBComparison() {
-        return forceDBComparison;
-    }
-
-    public void setForceDBComparison(boolean forceDBComparison) {
-        this.forceDBComparison = forceDBComparison;
     }
 
     public int getSocketWriteTimeout() {

@@ -1188,25 +1188,6 @@ public class MageServerImpl implements MageServer {
         return action.negativeResult();
     }
 
-    @Override
-    public List<ExpansionInfo> syncGetMissingExpansionData(List<String> codes) {
-        List<ExpansionInfo> result = new ArrayList<>();
-        for (ExpansionInfo expansionInfo : ExpansionRepository.instance.getAll()) {
-            if (!codes.contains(expansionInfo.getCode())) {
-                result.add(expansionInfo);
-            }
-        }
-        logger.info("Missing exp downloaded: " + result.size());
-        return result;
-    }
-
-    @Override
-    public List<CardInfo> syncGetMissingCardsData(List<String> classNames) {
-        List<CardInfo> res = CardRepository.instance.getMissingCards(classNames);
-        logger.info("Missing cards downloaded: " + res.size());
-        return res;
-    }
-
     private static class GetPromotionMessagesAction extends ActionWithNullNegativeResult<Object> {
         @Override
         public Object execute() throws MageException {

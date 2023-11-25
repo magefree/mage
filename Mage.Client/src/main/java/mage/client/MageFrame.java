@@ -818,9 +818,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             currentConnection.setPassword(password);
             currentConnection.setHost(server);
             currentConnection.setPort(port);
-            // force to redownload db on updates
-            boolean redownloadDatabase = (ExpansionRepository.instance.getSetByCode("GRN") == null || CardRepository.instance.findCard("Island") == null);
-            currentConnection.setForceDBComparison(redownloadDatabase);
             String allMAC = "";
             try {
                 allMAC = Connection.getMAC();
