@@ -48,6 +48,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Clockwork Droid", 172, Rarity.UNCOMMON, mage.cards.c.ClockworkDroid.class));
         cards.add(new SetCardInfo("Command Tower", 263, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 240, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Coward // Killer", 77, Rarity.RARE, mage.cards.c.CowardKiller.class));
         cards.add(new SetCardInfo("Crack in Time", 16, Rarity.RARE, mage.cards.c.CrackInTime.class));
         cards.add(new SetCardInfo("Creeping Tar Pit", 267, Rarity.RARE, mage.cards.c.CreepingTarPit.class));
         cards.add(new SetCardInfo("Crisis of Conscience", 17, Rarity.RARE, mage.cards.c.CrisisOfConscience.class));
@@ -230,6 +231,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Tenth Doctor", 446, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 561, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Twelfth Doctor", 164, Rarity.RARE, mage.cards.t.TheTwelfthDoctor.class));
+        cards.add(new SetCardInfo("Thijarian Witness", 111, Rarity.UNCOMMON, mage.cards.t.ThijarianWitness.class));
         cards.add(new SetCardInfo("Think Twice", 220, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thought Vessel", 255, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Three Visits", 235, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));

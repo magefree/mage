@@ -312,7 +312,7 @@
 
      private void btnDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectActionPerformed
          int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-         ConsoleFrame.getSession().disconnectUser((String) tableUserModel.getValueAt(row, TableUserModel.POS_SESSION_ID));
+         ConsoleFrame.getSession().sendAdminDisconnectUser((String) tableUserModel.getValueAt(row, TableUserModel.POS_SESSION_ID));
      }//GEN-LAST:event_btnDisconnectActionPerformed
 
      private void btnEndSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndSessionActionPerformed
@@ -321,7 +321,7 @@
 
          if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to end userSessionId " + userSessionId + '?', "WARNING",
                  JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-             ConsoleFrame.getSession().endUserSession(userSessionId);
+             ConsoleFrame.getSession().sendAdminEndUserSession(userSessionId);
          }
      }//GEN-LAST:event_btnEndSessionActionPerformed
 
@@ -331,7 +331,7 @@
          long durationMinute = ((Number) spinnerMuteDurationMinutes.getValue()).longValue();
          if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
                  JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-             ConsoleFrame.getSession().muteUserChat(userName, durationMinute);
+             ConsoleFrame.getSession().sendAdminMuteUserChat(userName, durationMinute);
          }
      }//GEN-LAST:event_btnMuteUserActionPerformed
 
@@ -346,17 +346,17 @@
 
          if (JOptionPane.showConfirmDialog(null, "Did you want to set user: " + userName + " to active?", "WARNING",
                  JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-             ConsoleFrame.getSession().setActivation(userName, true);
+             ConsoleFrame.getSession().sendAdminActivateUser(userName, true);
              return;
          }
          if (JOptionPane.showConfirmDialog(null, "Did you want to set user: " + userName + " to inactive?", "WARNING",
                  JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-             ConsoleFrame.getSession().setActivation(userName, false);
+             ConsoleFrame.getSession().sendAdminActivateUser(userName, false);
              return;
          }
          if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to toggle activation for user: " + userName + '?', "WARNING",
                  JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-             ConsoleFrame.getSession().toggleActivation(userName);
+             ConsoleFrame.getSession().sendAdminToggleActivateUser(userName);
              return;
          }
      }//GEN-LAST:event_btnDeActivateActionPerformed
@@ -367,7 +367,7 @@
          long durationMinute = ((Number) spinnerMuteDurationMinutes.getValue()).longValue();
          if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to lock user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
                  JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-             ConsoleFrame.getSession().lockUser(userName, durationMinute);
+             ConsoleFrame.getSession().sendAdminLockUser(userName, durationMinute);
          }
      }//GEN-LAST:event_btnLockUserActionPerformed
 

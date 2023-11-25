@@ -2,6 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -107,12 +108,13 @@ class CosmiumConfluenceEffect extends OneShotEffect {
         new AddCountersTargetEffect(CounterType.P1P1.createInstance(3))
                 .setTargetPointer(fixedTarget)
                 .apply(game, source);
-        new BecomesCreatureTargetEffect(
+        ContinuousEffect effect = new BecomesCreatureTargetEffect(
                 new CreatureToken(0, 0, "0/0 Elemental creature with haste", SubType.ELEMENTAL)
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
-        ).setTargetPointer(fixedTarget)
-                .apply(game, source);
+        );
+        effect.setTargetPointer(fixedTarget);
+        game.addEffect(effect, source);
         return true;
     }
 

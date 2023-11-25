@@ -30,7 +30,8 @@ public class TableView implements Serializable {
     private final String deckType;
     private String tableName;
     private String controllerName;
-    private final String additionalInfo;
+    private final String additionalInfoShort;
+    private final String additionalInfoFull;
     private Date createTime;
     private TableState tableState;
     private final SkillLevel skillLevel;
@@ -133,7 +134,8 @@ public class TableView implements Serializable {
             if (table.getNumberOfSeats() > 3) {
                 addInfo.append(" Rng: ").append(table.getMatch().getOptions().getRange().toString());
             }
-            this.additionalInfo = addInfo.toString();
+            this.additionalInfoShort = addInfo.toString();
+            this.additionalInfoFull = addInfo.toString(); // TODO: add tooltip details here
             this.skillLevel = table.getMatch().getOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getMatch().getOptions().getQuitRatio());
             this.minimumRating = Integer.toString(table.getMatch().getOptions().getMinimumRating());
@@ -213,7 +215,8 @@ public class TableView implements Serializable {
                     break;
                 default:
             }
-            this.additionalInfo = infoText.toString();
+            this.additionalInfoShort = infoText.toString();
+            this.additionalInfoFull = infoText.toString(); // TODO: add tooltip details here
             this.tableStateText = stateText.toString();
             this.deckType = table.getDeckType() + ' ' + table.getTournament().getBoosterInfo();
             this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
@@ -275,8 +278,12 @@ public class TableView implements Serializable {
         return this.isTournament;
     }
 
-    public String getAdditionalInfo() {
-        return this.additionalInfo;
+    public String getAdditionalInfoShort() {
+        return this.additionalInfoShort;
+    }
+
+    public String getAdditionalInfoFull() {
+        return this.additionalInfoFull;
     }
 
     public String getTableStateText() {

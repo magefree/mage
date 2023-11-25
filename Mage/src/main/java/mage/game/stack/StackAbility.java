@@ -408,10 +408,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
         ability.setCostsTag(tag, value);
     }
     @Override
-    public Object getCostsTagOrDefault(String tag, Object defaultValue){
-        return ability.getCostsTagOrDefault(tag, defaultValue);
-    }
-    @Override
     public AbilityType getAbilityType() {
         return ability.getAbilityType();
     }

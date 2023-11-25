@@ -3,7 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -34,7 +34,7 @@ public final class ArchangelOfStrife extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As Archangel of Strife enters the battlefield, each player chooses war or peace.
-        this.addAbility(new EntersBattlefieldAbility(new ArchangelOfStrifeChooseEffect(), "As Archangel of Strife enters the battlefield, each player chooses war or peace."));
+        this.addAbility(new AsEntersBattlefieldAbility(new ArchangelOfStrifeChooseEffect()));
 
         // Creatures controlled by players who chose war get +3/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchangelOfStrifeWarEffect()));

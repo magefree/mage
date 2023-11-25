@@ -116,7 +116,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (hand.size() < 6
                 || isTestsMode() // ignore mulligan in tests
                 || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
-        ) {
+                ) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
@@ -135,7 +135,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (log.isDebugEnabled()) {
             log.debug("choose: " + outcome.toString() + ':' + target.toString());
         }
-
         // controller hints:
         // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
         // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
@@ -395,7 +394,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return false;
         }
-        
+
         if (target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
             List<Card> cards = new ArrayList<>();
             for (Player player : game.getPlayers().values()) {
@@ -520,6 +519,26 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
                     possibleCards.remove(pick);
+                }
+            }
+            return target.isChosen();
+        }
+
+        if (target.getOriginalTarget() instanceof TargetCard
+                && (target.getZone() == Zone.COMMAND)) { // Hellkite Courser
+            List<Card> cardsInCommandZone = new ArrayList<>();
+            for (Player player : game.getPlayers().values()) {
+                for (Card card : game.getCommanderCardsFromCommandZone(player, CommanderCardType.COMMANDER_OR_OATHBREAKER)) {
+                    if (target.canTarget(abilityControllerId, card.getId(), null, game)) {
+                        cardsInCommandZone.add(card);
+                    }
+                }
+            }
+            while (!target.isChosen() && !cardsInCommandZone.isEmpty()) {
+                Card pick = pickTarget(abilityControllerId, cardsInCommandZone, outcome, target, null, game);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), null, game);
+                    cardsInCommandZone.remove(pick);
                 }
             }
             return target.isChosen();
@@ -2746,7 +2765,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     protected void findBestPermanentTargets(Outcome outcome, UUID abilityControllerId, UUID sourceId, Ability source, FilterPermanent filter, Game game, Target target,
-                                            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
+            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
         // searching for most valuable/powerfull permanents
         goodList.clear();
         badList.clear();

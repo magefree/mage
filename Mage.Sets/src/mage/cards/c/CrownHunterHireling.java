@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +32,7 @@ public final class CrownHunterHireling extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Crown-Hunter Hireling enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Crown-Hunter Hireling can't attack unless defending player is the monarch.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrownHunterHirelingCantAttackEffect()));

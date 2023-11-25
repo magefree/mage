@@ -90,6 +90,10 @@ public class VirtualCardInfo {
         data.setTooltipDelay(tooltipDelay);
     }
 
+    public CardView getCardView() {
+        return this.cardView;
+    }
+
     public boolean prepared() {
         return this.cardView != null
                 && this.cardComponent != null

@@ -32,7 +32,6 @@ public abstract class VillainousChoice {
         }
         String controllerName = Optional
                 .ofNullable(game.getPlayer(source.getControllerId()))
-                .filter(Objects::nonNull)
                 .map(Player::getName)
                 .orElse("Opponent");
         return message.replace("{controller}", controllerName);

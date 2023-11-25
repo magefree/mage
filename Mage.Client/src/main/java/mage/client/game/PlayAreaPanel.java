@@ -33,6 +33,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private final JPopupMenu popupMenu;
     private UUID playerId;
     private UUID gameId;
+    private boolean isMe = false;
     private boolean smallMode = false;
     private boolean playingMode = true;
     private final GamePanel gamePanel;
@@ -46,6 +47,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     public static final int PANEL_HEIGHT = 263;
     public static final int PANEL_HEIGHT_SMALL = 210;
+    private static final int PANEL_HEIGHT_EXTRA_FOR_ME = 25;
 
     /**
      * Creates new form PlayAreaPanel
@@ -515,6 +517,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.battlefieldPanel.init(gameId, bigCard);
         this.gameId = gameId;
         this.playerId = player.getPlayerId();
+        this.isMe = player.getControlled();
         this.btnCheat.setVisible(SessionHandler.isTestMode());
     }
 
@@ -559,22 +562,33 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.setLayout(layout);
     }
 
-    public void sizePlayer(boolean smallMode) {
-        this.playerPanel.sizePlayerPanel(smallMode);
+    public void setSizeMode(boolean smallMode) {
         this.smallMode = smallMode;
+        sizePlayerPanel(this.playerPanel, this.isMe, this.smallMode);
+        sizeBattlefieldPanel(this.battlefieldPanel, this.isMe, this.smallMode);
+    }
+
+    public static void sizePlayerPanel(PlayerPanelExt playerPanel, boolean isMe, boolean smallMode) {
+        playerPanel.sizePlayerPanel(smallMode);
+        int extraForMe = isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
         if (smallMode) {
-            this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT_SMALL));
-            //this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
-            this.battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT_SMALL));
+            playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT_SMALL + extraForMe));
         } else {
-            this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT));
-            //this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
-            this.battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT));
+            playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT + extraForMe));
+        }
+    }
+
+    public static void sizeBattlefieldPanel(BattlefieldPanel battlefieldPanel, boolean isMe, boolean smallMode) {
+        int extraForMe = isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
+        if (smallMode) {
+            battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT_SMALL + extraForMe));
+        } else {
+            battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT + extraForMe));
         }
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
-        SessionHandler.cheat(gameId, playerId, DeckImporter.importDeckFromFile("cheat.dck", false));
+        SessionHandler.cheatShow(gameId, playerId);
     }
 
     public boolean isSmallMode() {

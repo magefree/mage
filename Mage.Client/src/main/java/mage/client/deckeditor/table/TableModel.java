@@ -345,6 +345,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     showImage(row);
@@ -356,6 +359,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         MouseListener mouse = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 TableColumnModel columnModel = table.getColumnModel();
                 int viewColumn = columnModel.getColumnIndexAtX(e.getX());
                 int column = table.convertColumnIndexToModel(viewColumn);

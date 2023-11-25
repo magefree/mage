@@ -68,6 +68,48 @@ public class BlitzTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testBlitzCopy() {
+        //Copying the spell on the stack must include the Blitz ability activation
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
+        addCard(Zone.HAND, playerA, decoy);
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major",decoy);
+
+        setChoice(playerA, ""); //stack triggers
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, decoy, 0);
+        assertGraveyardCount(playerA, decoy, 1);
+        assertGraveyardCount(playerA, "Double Major", 1);
+        assertHandCount(playerA, 2);
+    }
+    @Test
+    public void testBlitzClone() {
+        //Copying the creature permanent must not include Blitz activation
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 8);
+        addCard(Zone.HAND, playerA, decoy);
+        addCard(Zone.HAND, playerA, "Clone");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA,true);
+        setChoice(playerA,decoy);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, decoy, 1);
+        assertGraveyardCount(playerA, decoy, 1);
+        assertHandCount(playerA, 1);
+    }
+    @Test
     public void testNoBlitz() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.HAND, playerA, decoy);

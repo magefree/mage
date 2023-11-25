@@ -7,7 +7,7 @@ import mage.server.exceptions.UserNotFoundException;
 import mage.server.game.GameController;
 import mage.server.managers.ChatManager;
 import mage.server.managers.ManagerFactory;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;

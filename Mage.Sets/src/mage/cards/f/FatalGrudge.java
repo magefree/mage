@@ -53,9 +53,9 @@ public final class FatalGrudge extends CardImpl {
 
 class FatalGrudgeEffect extends OneShotEffect {
 
-    public FatalGrudgeEffect() {
+    FatalGrudgeEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "each opponent chooses a permanent they control that shares a type with the sacrificed permanent and sacrifices it";
+        this.staticText = "each opponent chooses a permanent they control that shares a card type with the sacrificed permanent and sacrifices it";
     }
 
     private FatalGrudgeEffect(final FatalGrudgeEffect effect) {

@@ -92,7 +92,7 @@ class OwlbearCubEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "look at the top eight cards of your library. You may put a creature card " +
                 "from among them onto the battlefield tapped and attacking that player. " +
-                "Put the rest on the bottom of your library in random order";
+                "Put the rest on the bottom of your library in a random order";
     }
 
     private OwlbearCubEffect(final OwlbearCubEffect effect) {

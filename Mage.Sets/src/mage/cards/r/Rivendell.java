@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -40,7 +41,7 @@ public final class Rivendell extends CardImpl {
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
     private static final Condition condition2
             = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control a legendary creature");
+    private static final Hint hint = new ConditionHint( new InvertCondition(condition), "You control a legendary creature");
 
     public Rivendell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

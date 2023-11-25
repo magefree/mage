@@ -103,7 +103,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private void makeTriggerPhrase() {
-        String text = "Whenever you cast " + filter.getMessage();
+        String text = getWhen() + "you cast " + filter.getMessage();
 
         switch (fromZone) {
             case ALL:

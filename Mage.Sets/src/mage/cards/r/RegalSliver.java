@@ -10,6 +10,7 @@ import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,23 +34,27 @@ public final class RegalSliver extends CardImpl {
 
         // Sliver creatures you control have "When this creature enters the battlefield, Slivers you control get +1/+1 until end of turn if you're the monarch. Otherwise, you become the monarch."
         TriggeredAbility trigger =
-            new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(
-                    new AddContinuousEffectToGame(
-                        new BoostControlledEffect(1, 1, Duration.EndOfTurn,
-                            StaticFilters.FILTER_PERMANENT_SLIVERS
-                        )),
-                    new BecomesMonarchSourceEffect(),
-                    MonarchIsSourceControllerCondition.instance,
-                    "Slivers you control get +1/+1 until end of turn if you're the monarch. Otherwise, you become the monarch."
-                )
-            );
+                new EntersBattlefieldTriggeredAbility(
+                        new ConditionalOneShotEffect(
+                                new AddContinuousEffectToGame(
+                                        new BoostControlledEffect(1, 1, Duration.EndOfTurn,
+                                                StaticFilters.FILTER_PERMANENT_SLIVERS
+                                        )),
+                                new BecomesMonarchSourceEffect(),
+                                MonarchIsSourceControllerCondition.instance,
+                                "Slivers you control get +1/+1 until end of turn if you're the monarch. Otherwise, you become the monarch."
+                        )
+                );
 
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-            trigger, Duration.WhileOnBattlefield,
-            StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
-        ).setText("Sliver creatures you control have \"When this creature enters the battlefield, "
-            + "Slivers you control get +1/+1 until end of turn if you're the monarch. Otherwise, you become the monarch.\"")));
+        this.addAbility(
+                new SimpleStaticAbility(
+                        new GainAbilityControlledEffect(
+                                trigger, Duration.WhileOnBattlefield,
+                                StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
+                        ).setText("Sliver creatures you control have \"When this creature enters the battlefield, "
+                                + "Slivers you control get +1/+1 until end of turn if you're the monarch. Otherwise, you become the monarch.\"")
+                ).addHint(MonarchHint.instance)
+        );
     }
 
     private RegalSliver(final RegalSliver card) {

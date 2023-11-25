@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -37,7 +36,7 @@ public final class ElderDeepFiend extends CardImpl {
 
         // When you cast Elder Deep-Fiend, tap up to four target permanents.
         Ability ability = new CastSourceTriggeredAbility(new TapTargetEffect());
-        ability.addTarget(new TargetPermanent(0, 4, new FilterPermanent("permanent"), false));
+        ability.addTarget(new TargetPermanent(0, 4, StaticFilters.FILTER_PERMANENTS, false));
         this.addAbility(ability);
     }
 

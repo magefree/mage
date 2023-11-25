@@ -10,6 +10,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessControlledEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,7 +46,7 @@ public final class RasaadYnBashir extends CardImpl {
                 new AttacksTriggeredAbility(new RasaadYnBashirEffect()),
                 HaveInitiativeCondition.instance, "Whenever {this} attacks, if you have the initiative, " +
                 "double the toughness of each creature you control until end of turn."
-        ));
+        ).addHint(InitiativeHint.instance));
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());

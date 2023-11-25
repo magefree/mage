@@ -9,7 +9,7 @@ import mage.players.net.UserGroup;
 import mage.server.game.GamesRoom;
 import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;

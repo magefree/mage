@@ -28,7 +28,7 @@ import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.server.game.GameSessionPlayer;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import mage.util.CardUtil;
 import mage.view.GameView;
 import org.junit.Assert;

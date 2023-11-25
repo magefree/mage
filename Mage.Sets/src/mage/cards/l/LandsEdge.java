@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.List;
@@ -54,7 +53,7 @@ class LandsEdgeEffect extends OneShotEffect {
 
     public LandsEdgeEffect() {
         super(Outcome.Neutral);
-        staticText = "If the discarded card was a land card, {this} deals 2 damage to target player";
+        staticText = "If the discarded card was a land card, {this} deals 2 damage to target player or planeswalker";
     }
 
     private LandsEdgeEffect(final LandsEdgeEffect effect) {

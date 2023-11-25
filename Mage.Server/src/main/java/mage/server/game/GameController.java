@@ -27,7 +27,6 @@ import mage.server.Main;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
-import mage.server.util.SystemUtil;
 import mage.util.MultiAmountMessage;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
@@ -229,6 +228,12 @@ public class GameController implements GameCallback {
                             case PERSONAL_MESSAGE:
                                 informPersonal(event.getPlayerId(), event.getMessage());
                                 break;
+                            case TOURNAMENT_CONSTRUCT:
+                            case DRAFT_PICK_CARD:
+                                // tournament and draft events, impossible to catch it here
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unknown game event: " + event.getQueryType());
                         }
                     } catch (MageException ex) {
                         logger.fatal("Player event listener error ", ex);
@@ -496,6 +501,10 @@ public class GameController implements GameCallback {
     }
 
     public void sendPlayerAction(PlayerAction playerAction, UUID userId, Object data) {
+        // TODO: critical bug, must be enabled and research/rework due:
+        // * game change commands must be executed by game thread (example: undo)
+        // * user change commands can be executed by network thread??? (example: change skip settings)
+        //SystemUtil.ensureRunInGameThread();
         switch (playerAction) {
             case UNDO:
                 game.undo(getPlayerId(userId));
@@ -699,31 +708,10 @@ public class GameController implements GameCallback {
         }
     }
 
-    public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
-        try {
-            Deck deck = Deck.load(deckList, false, false);
-            game.loadCards(deck.getCards(), playerId);
-            for (Card card : deck.getCards()) {
-                card.putOntoBattlefield(game, Zone.OUTSIDE, null, playerId);
-            }
-        } catch (GameException ex) {
-            logger.warn(ex.getMessage());
-        }
-        addCardsForTesting(game, playerId);
-        updateGame();
-    }
-
-    public boolean cheat(UUID userId, UUID playerId, String cardName) {
-        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-        Card card = cardInfo != null ? cardInfo.getCard() : null;
-        if (card != null) {
-            Set<Card> cards = new HashSet<>();
-            cards.add(card);
-            game.loadCards(cards, playerId);
-            card.moveToZone(Zone.HAND, null, game, false);
-            return true;
-        } else {
-            return false;
+    public void cheatShow(UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            player.signalPlayerCheat();
         }
     }
 
@@ -771,15 +759,14 @@ public class GameController implements GameCallback {
 
     public void sendPlayerBoolean(UUID userId, final Boolean data) {
         sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerBoolean(data));
-
     }
 
     public void sendPlayerInteger(UUID userId, final Integer data) {
         sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerInteger(data));
-
     }
 
-    private synchronized void updateGame() {
+    private void updatePriorityTimers() {
+        // update player timers to actual values
         if (!timers.isEmpty()) {
             for (Player player : game.getState().getPlayers().values()) {
                 PriorityTimer timer = timers.get(player.getId());
@@ -788,6 +775,10 @@ public class GameController implements GameCallback {
                 }
             }
         }
+    }
+
+    private synchronized void updateGame() {
+        updatePriorityTimers();
         for (final GameSessionPlayer gameSession : getGameSessions()) {
             gameSession.update();
         }
@@ -941,7 +932,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    public GameView getGameView(UUID playerId) {
+    public synchronized GameView getGameView(UUID playerId) {
         return getGameSession(playerId).getGameView();
     }
 
@@ -974,13 +965,6 @@ public class GameController implements GameCallback {
             StreamUtils.closeQuietly(buffer);
         }
         return false;
-    }
-
-    /**
-     * Adds cards in player's hands that are specified in config/init.txt.
-     */
-    private void addCardsForTesting(Game game, UUID playerId) {
-        SystemUtil.addCardsForTesting(game, null, game.getPlayer(playerId));
     }
 
     /**
@@ -1116,14 +1100,13 @@ public class GameController implements GameCallback {
     }
 
     private GameSessionPlayer getGameSession(UUID playerId) {
-        if (!timers.isEmpty()) {
-            Player player = game.getState().getPlayer(playerId);
-            PriorityTimer timer = timers.get(playerId);
-            if (timer != null) {
-                //logger.warn("Timer Player " + player.getName()+ " " + player.getPriorityTimeLeft() + " Timer: " + timer.getCount());
-                player.setPriorityTimeLeft(timer.getCount());
-            }
-        }
+        // TODO: check parent callers - there are possible problems with sync, can be related to broken "fix" logs too
+        //  It modify players data, but:
+        //  * some sendXXX methods calls without synchronized (getGameSession can be in read mode?)
+        //  * some informXXX methods calls with synchronized (users must get actual data, so keep write mode and add synchronized?)
+        // find actual timers before send data
+        updatePriorityTimers();
+
         return gameSessions.get(playerId);
     }
 

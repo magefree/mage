@@ -39,4 +39,8 @@ public class EvokeAbility extends AlternativeSourceCostsImpl {
     public EvokeAbility copy() {
         return new EvokeAbility(this);
     }
+
+    public static String getActivationKey(){
+        return getActivationKey(EVOKE_KEYWORD);
+    }
 }

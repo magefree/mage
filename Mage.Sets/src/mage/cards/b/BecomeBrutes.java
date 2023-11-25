@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.RoleType;
-import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public final class BecomeBrutes extends CardImpl {
                 .setText("one or two target creatures each gain haste until end of turn"));
         this.getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.MONSTER)
                 .setText("for each of those creatures, create a Monster Role token attached to it"));
-        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(1, 2));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 2));
     }
 
     private BecomeBrutes(final BecomeBrutes card) {

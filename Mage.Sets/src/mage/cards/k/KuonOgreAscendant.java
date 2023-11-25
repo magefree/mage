@@ -43,7 +43,7 @@ public final class KuonOgreAscendant extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new FlipSourceEffect(new KuonsEssenceToken()),
-                TargetController.ANY,
+                TargetController.NEXT,
                 KuonOgreAscendantCondition.instance, false));
     }
 

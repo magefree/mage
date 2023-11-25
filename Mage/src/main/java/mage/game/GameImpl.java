@@ -794,7 +794,7 @@ public abstract class GameImpl implements Game {
                 if (!concedingPlayers.contains(playerId)) {
                     logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
                     concedingPlayers.add(playerId);
-                    player.signalPlayerConcede();
+                    player.signalPlayerConcede(); // will be executed on next priority
                 }
             } else {
                 // no asynchronous action so check directly
@@ -3799,8 +3799,9 @@ public abstract class GameImpl implements Game {
                 for (Player playerObject : getPlayers().values()) {
                     if (playerObject.isHuman() && playerObject.canRespond()) {
                         playerObject.resetStoredBookmark(this);
-                        playerObject.abort();
                         playerObject.resetPlayerPassedActions();
+                        playerObject.abort();
+
                     }
                 }
                 fireUpdatePlayersEvent();
@@ -3963,6 +3964,7 @@ public abstract class GameImpl implements Game {
     public String toString() {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
         StringBuilder sb = new StringBuilder()
+                .append(this.isSimulation() ? "!!!SIMULATION!!! " : "")
                 .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))

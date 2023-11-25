@@ -8,6 +8,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -65,6 +66,7 @@ public final class EomerKingOfRohan extends CardImpl {
         );
         trigger.addTarget(new TargetPlayer());
         trigger.addTarget(new TargetAnyTarget());
+        trigger.addHint(MonarchHint.instance);
 
         this.addAbility(trigger);
     }

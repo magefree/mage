@@ -1677,8 +1677,17 @@ public final class CardUtil {
         return new MageObjectReference(ability.getSourceId(), zcc, game);
     }
 
-    //Use the two other functions below to access the tags, this is just the shared logic for them
-    private static Map<String, Object> getCostsTags(Game game, Ability source) {
+    /**
+     * Returns the entire cost tags map of either the source ability, or the permanent source of the ability. May be null.
+     * Works in any moment (even before source ability activated)
+     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists()
+     * Use this function with caution, as it directly exposes the backing data structure.
+     *
+     * @param game
+     * @param source
+     * @return the tag map (or null)
+     */
+    public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
         costTags = source.getCostsTagMap();
         if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
@@ -1696,12 +1705,13 @@ public final class CardUtil {
      * @return if the tag was found
      */
     public static boolean checkSourceCostsTagExists(Game game, Ability source, String tag) {
-        Map<String, Object> costTags = getCostsTags(game, source);
+        Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
         return costTags != null && costTags.containsKey(tag);
     }
     /**
      * Find a specific tag in the cost tags of either the source ability, or the permanent source of the ability.
      * Works in any moment (even before source ability activated)
+     * Do not use with null values, use checkSourceCostsTagExists instead
      *
      * @param game
      * @param source
@@ -1709,10 +1719,17 @@ public final class CardUtil {
      * @param defaultValue A default value to return if the tag is not found
      * @return The object stored by the tag if found, the default if not
      */
-    public static Object getSourceCostsTag(Game game, Ability source, String tag, Object defaultValue){
-        Map<String, Object> costTags = getCostsTags(game, source);
+    public static <T> T getSourceCostsTag(Game game, Ability source, String tag, T defaultValue){
+        Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
         if (costTags != null) {
-            return costTags.getOrDefault(tag, defaultValue);
+            Object value = costTags.getOrDefault(tag, defaultValue);
+            if (value == null) {
+                throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type null but is trying to be read. Use checkSourceCostsTagExists");
+            }
+            if (value.getClass() != defaultValue.getClass()) {
+                throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type " + value.getClass().getName() + " different from default of type " + defaultValue.getClass().getName());
+            }
+            return (T) value;
         }
         return defaultValue;
     }

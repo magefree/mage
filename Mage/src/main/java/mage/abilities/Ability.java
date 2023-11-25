@@ -159,24 +159,21 @@ public interface Ability extends Controllable, Serializable {
     void addManaCostsToPay(ManaCost manaCost);
 
     /**
-     * Gets a map of the cost tags (set while casting/activating) of this ability, can be null if no tags have been set yet
-     * does NOT return the source permanent's tags
+     * Gets a map of the cost tags (set while casting/activating) of this ability, can be null if no tags have been set yet.
+     * Does NOT return the source permanent's tags.
+     * You should not be using this function in implementation of cards,
+     * this is a backing data structure used for internal storage.
+     * Use CardUtil {@link mage.util.CardUtil#getSourceCostsTag getSourceCostsTag} or {@link mage.util.CardUtil#checkSourceCostsTagExists checkSourceCostsTagExists} instead
      *
      * @return The map of tags and corresponding objects
      */
     Map<String, Object> getCostsTagMap();
 
     /**
-     * Set tag to the value, initializes this ability's tags map if it is null
+     * Set tag for this ability to the value, initializes this ability's tags map if needed.
+     * Should only be used from an {@link ActivatedAbility} (including {@link SpellAbility})
      */
     void setCostsTag(String tag, Object value);
-    /**
-     * Returns the value of the tag or defaultValue if the tag is not found in this ability's tag map
-     * does NOT check the source permanent's tags, use CardUtil.getSourceCostsTag for that
-     *
-     * @return The given tag value (or the default if not found)
-     */
-    Object getCostsTagOrDefault(String tag, Object defaultValue);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of

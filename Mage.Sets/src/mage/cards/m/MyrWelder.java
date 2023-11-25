@@ -24,6 +24,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public final class MyrWelder extends CardImpl {
 
+    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card from a graveyard");
+
     public MyrWelder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add(SubType.MYR);
@@ -32,7 +34,7 @@ public final class MyrWelder extends CardImpl {
 
         // Imprint - {tap}: Exile target artifact card from a graveyard
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrWelderEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card from a graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
 
         // Myr Welder has all activated abilities of all cards exiled with it
@@ -53,7 +55,7 @@ public final class MyrWelder extends CardImpl {
 
 class MyrWelderEffect extends OneShotEffect {
 
-    public MyrWelderEffect() {
+    MyrWelderEffect() {
         super(Outcome.Exile);
         staticText = "Exile target artifact card from a graveyard";
     }

@@ -35,7 +35,7 @@ public final class ArcaneSpyglass extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()).concatBy("and"));
         this.addAbility(ability);
 
         // Remove three charge counters from Arcane Spyglass: Draw a card.

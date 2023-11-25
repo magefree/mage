@@ -8,6 +8,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.effects.common.combat.CantAttackControllerAttachedEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +37,7 @@ public final class FealtyToTheRealm extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Fealty to the Realm enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // The monarch controls enchanted creature.
         this.addAbility(new SimpleStaticAbility(new FealtyToTheRealmEffect()));

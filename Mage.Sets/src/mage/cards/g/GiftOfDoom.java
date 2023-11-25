@@ -85,7 +85,7 @@ class GiftOfDoomEffect extends OneShotEffect {
 
     GiftOfDoomEffect() {
         super(Outcome.Benefit);
-        staticText = "attach it to a creature";
+        staticText = "you may attach it to a creature";
     }
 
     private GiftOfDoomEffect(final GiftOfDoomEffect effect) {

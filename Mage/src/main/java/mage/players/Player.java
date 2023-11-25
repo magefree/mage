@@ -550,6 +550,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void signalPlayerConcede();
 
+    void signalPlayerCheat();
+
     void skip();
 
     // priority, undo, ...

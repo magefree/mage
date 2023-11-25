@@ -11,6 +11,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +49,7 @@ public final class CrownOfGondor extends CardImpl {
                 ),
                 MonarchIsNotSetCondition.instance,
                 "When a legendary creature enters the battlefield under your control, if there is no monarch, you become the monarch."
-        ));
+        ).addHint(MonarchHint.instance));
 
         // Equip {4}. This ability costs {3} less to activate if you're the monarch.
         EquipAbility equip = new EquipAbility(4, false);

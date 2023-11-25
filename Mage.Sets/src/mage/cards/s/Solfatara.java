@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -32,7 +31,8 @@ public final class Solfatara extends CardImpl {
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false)
+                .concatBy("<br>"));
     }
 
     private Solfatara(final Solfatara card) {
@@ -47,9 +47,9 @@ public final class Solfatara extends CardImpl {
 
 class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SolfataraEffect() {
+    SolfataraEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't play land cards this turn";
+        staticText = "Target player can't play lands this turn";
     }
 
     private SolfataraEffect(final SolfataraEffect effect) {

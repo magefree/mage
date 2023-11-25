@@ -1386,4 +1386,8 @@ public class CardView extends SimpleCardView {
     public boolean showPT() {
         return this.isCreature() || this.getSubTypes().contains(SubType.VEHICLE);
     }
+
+    public String getIdName() {
+        return getName() + " [" + getId().toString().substring(0, 3) + ']';
+    }
 }

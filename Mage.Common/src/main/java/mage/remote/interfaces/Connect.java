@@ -5,43 +5,45 @@ import mage.remote.Connection;
 import java.util.Optional;
 
 /**
+ * Network: client side commands for a server
+ *
  * @author noxx
  */
 public interface Connect {
 
-    boolean register(Connection connection);
+    String getSessionId();
 
-    boolean emailAuthToken(Connection connection);
+    String getLastError();
 
-    boolean resetPassword(Connection connection);
+    Optional<String> getServerHostname();
 
-    boolean connect(Connection connection);
+    boolean sendAuthRegister(Connection connection);
 
-    boolean stopConnecting();
+    boolean sendAuthSendTokenToEmail(Connection connection);
 
-    void disconnect(boolean showMessage);
+    boolean sendAuthResetPassword(Connection connection);
 
-    void reconnect(Throwable throwable);
+    boolean connectStart(Connection connection);
+
+    boolean connectAbort();
+
+    void connectStop(boolean showMessage);
+
+    void connectReconnect(Throwable throwable);
 
     boolean ping();
 
     boolean isConnected();
 
-    Optional<String> getServerHostname();
+    boolean sendAdminDisconnectUser(String userSessionId);
 
-    boolean disconnectUser(String userSessionId);
+    boolean sendAdminEndUserSession(String userSessionId);
 
-    boolean endUserSession(String userSessionId);
+    boolean sendAdminMuteUserChat(String userName, long durationMinute);
 
-    boolean muteUserChat(String userName, long durationMinute);
+    boolean sendAdminActivateUser(String userName, boolean active);
 
-    boolean setActivation(String userName, boolean active);
+    boolean sendAdminToggleActivateUser(String userName);
 
-    boolean toggleActivation(String userName);
-
-    boolean lockUser(String userName, long durationMinute);
-
-    String getSessionId();
-
-    String getLastError();
+    boolean sendAdminLockUser(String userName, long durationMinute);
 }

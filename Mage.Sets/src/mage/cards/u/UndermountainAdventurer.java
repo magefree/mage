@@ -8,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalManaEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -36,7 +37,7 @@ public final class UndermountainAdventurer extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Undermountain Adventurer enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // {T}: Add {G}{G}. If you've completed a dungeon, add six {G} instead.
         this.addAbility(new SimpleManaAbility(

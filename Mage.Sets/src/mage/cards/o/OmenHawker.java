@@ -73,7 +73,7 @@ class OmenHawkerManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source != null) {
+        if (source != null && !source.isActivated()) {
             return source.getAbilityType() == AbilityType.MANA
                     || source.getAbilityType() == AbilityType.ACTIVATED;
         }

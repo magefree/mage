@@ -1,11 +1,10 @@
 package mage.abilities.condition.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.keyword.BargainAbility;
-import mage.cards.Card;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * Checks if the spell was cast with the alternate Bargain cost
@@ -18,16 +17,7 @@ public enum BargainedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: replace by Tag Cost Tracking.
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject instanceof Card) {
-            for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
-                if (ability instanceof BargainAbility) {
-                    return ((BargainAbility) ability).wasBargained(game, source);
-                }
-            }
-        }
-        return false;
+        return CardUtil.checkSourceCostsTagExists(game, source, BargainAbility.BARGAIN_ACTIVATION_VALUE_KEY);
     }
 
     @Override

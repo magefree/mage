@@ -1,4 +1,3 @@
-
 package mage.cards.q;
 
 import java.util.UUID;
@@ -27,7 +26,8 @@ public final class QuicksilverGargantuan extends CardImpl {
         this.toughness = new MageInt(7);
 
         Ability ability = new EntersBattlefieldAbility(new CopyPermanentEffect(new QuicksilverGargantuanCopyApplier()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's 7/7");
+                true, null, null,
+                "as a copy of any creature on the battlefield, except it's 7/7");
         this.addAbility(ability);
     }
 

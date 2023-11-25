@@ -280,9 +280,7 @@ public class SquadTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, flagellant, 3); // One original + its squad buddy + the squad buddy from the additional trigger
     }
 
-    @Ignore
     @Test
-    //TODO: Enable after fixing clones activating it if they have the same zcc. Also affects Kicker
     public void test_CloneMustNotCopySquad() {
         addCard(Zone.BATTLEFIELD, playerA, swamp, 8); // 3 + 2 + 3
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);

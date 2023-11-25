@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -25,7 +24,8 @@ public final class GloriousEnd extends CardImpl {
 
         // At the beginning of your next end step, you lose the game.
         getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new LoseGameSourceControllerEffect(), TargetController.YOU)));
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new LoseGameSourceControllerEffect(), TargetController.YOU))
+                .concatBy("<br>"));
     }
 
     private GloriousEnd(final GloriousEnd card) {

@@ -580,6 +580,9 @@ public class TablesPanel extends javax.swing.JPanel {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 int modelRow = TablesUtil.getSelectedModelRow(table);
                 if (e.getClickCount() == 2 && modelRow != -1) {
                     action.actionPerformed(new ActionEvent(table, ActionEvent.ACTION_PERFORMED, TablesUtil.getSearchIdFromTable(table, modelRow)));

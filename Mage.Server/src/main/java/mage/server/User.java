@@ -19,7 +19,7 @@ import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentSession;
 import mage.server.util.ServerMessagesUtil;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
 
@@ -271,9 +271,9 @@ public class User {
         fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_TOURNAMENT, tournamentId));
     }
 
-    public void showUserMessage(final String titel, String message) {
+    public void showUserMessage(final String title, String message) {
         List<String> messageData = new LinkedList<>();
-        messageData.add(titel);
+        messageData.add(title);
         messageData.add(message);
         fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }

@@ -80,7 +80,7 @@ class ArtifactAbilityManaCondition extends ManaCondition implements Condition {
                 return false;
         }
         MageObject object = game.getObject(source);
-        return object != null && object.isArtifact(game);
+        return object != null && object.isArtifact(game) && !source.isActivated();
     }
 
     @Override

@@ -84,8 +84,8 @@ enum SorinVengefulBloodlordAdjuster implements TargetAdjuster {
                 xValue = ((PayVariableLoyaltyCost) cost).getAmount();
             }
         }
-        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less");
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.getTargets().clear();
         ability.addTarget(new TargetCardInYourGraveyard(filter));
     }

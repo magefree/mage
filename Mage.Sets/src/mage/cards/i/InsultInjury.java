@@ -56,9 +56,9 @@ public final class InsultInjury extends SplitCard {
 
 class InsultDoubleDamageEffect extends ReplacementEffectImpl {
 
-    public InsultDoubleDamageEffect() {
+    InsultDoubleDamageEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
-        staticText = "If a source you control would deal damage this turn, it deals double that damage to that permanent or player instead.";
+        staticText = "If a source you control would deal damage this turn, it deals double that damage instead.";
     }
 
     private InsultDoubleDamageEffect(final InsultDoubleDamageEffect effect) {

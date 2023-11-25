@@ -706,11 +706,6 @@ public abstract class AbilityImpl implements Ability {
         return manaCostsToPay;
     }
 
-    /**
-     * Accessed to see what was optional/variable costs were paid
-     *
-     * @return
-     */
     @Override
     public Map<String, Object> getCostsTagMap() {
         return costsTagMap;
@@ -720,12 +715,6 @@ public abstract class AbilityImpl implements Ability {
             costsTagMap = new HashMap<>();
         }
         costsTagMap.put(tag, value);
-    }
-    public Object getCostsTagOrDefault(String tag, Object defaultValue){
-        if (costsTagMap != null && costsTagMap.containsKey(tag)){
-            return costsTagMap.get(tag);
-        }
-        return defaultValue;
     }
 
     @Override

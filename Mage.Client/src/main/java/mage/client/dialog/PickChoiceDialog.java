@@ -136,6 +136,9 @@ public class PickChoiceDialog extends MageDialog {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 if (e.getClickCount() == 2) {
                     doChoose();
                 }
