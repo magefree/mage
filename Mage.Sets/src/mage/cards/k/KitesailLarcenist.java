@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -81,6 +82,10 @@ enum KitesailLarcenistAdjuster implements TargetAdjuster {
             );
             filter.add(new ControllerIdPredicate(playerId));
             filter.add(AnotherPredicate.instance);
+            filter.add(Predicates.or(
+                    CardType.ARTIFACT.getPredicate(),
+                    CardType.CREATURE.getPredicate()
+            ));
             ability.addTarget(new TargetPermanent(0, 1, filter));
         }
     }
