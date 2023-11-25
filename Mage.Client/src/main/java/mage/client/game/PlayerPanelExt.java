@@ -91,6 +91,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         cheat.setVisible(SessionHandler.isTestMode() && this.isMe);
         cheat.setFocusable(false);
         toolHintsHelper.setVisible(this.isMe);
+        toolHintsHelper.setFocusable(false);
         flagName = null;
         if (priorityTime > 0) {
             long delay = 1000L;
@@ -578,8 +579,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         cheat.setToolTipText("Cheat button");
         cheat.addActionListener(e -> btnCheatActionPerformed(e));
 
-        // Tools button
-        r = new Rectangle(75, 21);
+        // tools button like hints
         toolHintsHelper = new JButton();
         toolHintsHelper.setText("hints");
         toolHintsHelper.setToolTipText("Open new card hints helper window");
@@ -608,7 +608,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         cheat.setBounds(40, 2, 25, 21);
         zonesPanel.add(cheat);
 
-        toolHintsHelper.setBounds(3, 2 + 21 + 2, 75, 21);
+        toolHintsHelper.setBounds(3, 2 + 21 + 2, 73, 21);
         zonesPanel.add(toolHintsHelper);
 
         energyExperiencePanel = new JPanel();
