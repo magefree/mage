@@ -208,6 +208,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rapid Hybridization", 166, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Ravenform", 167, Rarity.COMMON, mage.cards.r.Ravenform.class));
         cards.add(new SetCardInfo("Realmwalker", 250, Rarity.RARE, mage.cards.r.Realmwalker.class));
+        cards.add(new SetCardInfo("Redemption Choir", 74, Rarity.RARE, mage.cards.r.RedemptionChoir.class));
         cards.add(new SetCardInfo("Reflections of Littjara", 168, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class));
         cards.add(new SetCardInfo("Regal Behemoth", 251, Rarity.RARE, mage.cards.r.RegalBehemoth.class));
         cards.add(new SetCardInfo("Regisaur Alpha", 286, Rarity.RARE, mage.cards.r.RegisaurAlpha.class));
