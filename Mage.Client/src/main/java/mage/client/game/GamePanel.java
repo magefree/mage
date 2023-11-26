@@ -125,16 +125,63 @@ public final class GamePanel extends javax.swing.JPanel {
     private JPopupMenu popupMenuTriggerOrder;
 
     // keep game data for updates/re-draws
-    static class LastGameData {
+    public static class LastGameData {
         int messageId;
         GameView game;
         boolean showPlayable;
         Map<String, Serializable> options;
         Set<UUID> targets;
+        Map<UUID, CardView> allCardsIndex = new HashMap<>(); // fast access to all game objects (for cards hints, etc)
+
+        private void setNewGame(GameView game) {
+            this.game = game;
+            prepareAllCardsIndex();
+        }
+
+        private void prepareAllCardsIndex() {
+            this.allCardsIndex.clear();
+            if (this.game == null) {
+                return;
+            }
+
+            this.game.getHand().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getStack().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getExile()
+                    .stream()
+                    .flatMap(s -> s.values().stream())
+                    .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getLookedAt()
+                    .stream()
+                    .flatMap(s -> s.getCards().values().stream())
+                    .filter(c -> c instanceof CardView)
+                    .map(c -> (CardView) c)
+                    .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getRevealed().stream()
+                    .flatMap(s -> s.getCards().values().stream())
+                    .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getPlayers().forEach(player -> {
+                player.getBattlefield().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+                player.getGraveyard().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+                Optional.ofNullable(player.getTopCard()).ifPresent(c -> this.allCardsIndex.put(c.getId(), c));
+                // TODO: add support of dungeon, emblem all another non-card objects
+                player.getCommandObjectList()
+                        .stream()
+                        .filter(c -> c instanceof CardView)
+                        .map(c -> (CardView) c)
+                        .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            });
+        }
+
+        public CardView findCard(UUID id) {
+            return this.allCardsIndex.getOrDefault(id, null);
+        }
     }
 
     private final LastGameData lastGameData = new LastGameData();
 
+    public LastGameData getLastGameData() {
+        return this.lastGameData;
+    }
 
     public GamePanel() {
         initComponents = true;
@@ -1416,7 +1463,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void keepLastGameData(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
         lastGameData.messageId = messageId;
-        lastGameData.game = game;
+        lastGameData.setNewGame(game);
         lastGameData.showPlayable = showPlayable;
         lastGameData.options = options;
         lastGameData.targets = targets;
@@ -2928,14 +2975,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public String getGameLog() {
         return gameChatPanel.getText();
-    }
-
-    public Map<String, Card> getLoadedCards() {
-        return loadedCards;
-    }
-
-    public void setLoadedCards(Map<String, Card> loadedCards) {
-        this.loadedCards = loadedCards;
     }
 
     public FeedbackPanel getFeedbackPanel() {

@@ -3,9 +3,11 @@ package mage.client.components;
 import mage.cards.action.TransferData;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.VirtualCardInfo;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.game.GamePanel;
 import mage.game.command.Plane;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -80,6 +82,14 @@ public class ColorPane extends JEditorPane {
                 }
             }
 
+            // try object first
+            CardView needCard = null;
+            GamePanel gamePanel = MageFrame.getGame(this.gameId);
+            if (gamePanel != null) {
+                UUID needObjectId = UUID.fromString(extraData.getOrDefault("object_id", ""));
+                needCard = gamePanel.getLastGameData().findCard(needObjectId);
+            }
+
             String cardName = e.getDescription().substring(1);
             String alternativeName = CardUtil.urlDecode(extraData.getOrDefault("alternative_name", ""));
             if (!alternativeName.isEmpty()) {
@@ -87,14 +97,15 @@ public class ColorPane extends JEditorPane {
             }
 
             if (e.getEventType() == EventType.ENTERED) {
-                CardView cardView = null;
+                // show real object by priority (workable card hints and actual info)
+                CardView cardView = needCard;
 
-                // TODO: add real game object first
-
-                // card
-                CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
-                if (card != null) {
-                    cardView = new CardView(card.getMockCard());
+                // if no game object found then show default card
+                if (cardView == null) {
+                    CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
+                    if (card != null) {
+                        cardView = new CardView(card.getMockCard());
+                    }
                 }
 
                 // plane
