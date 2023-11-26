@@ -46,7 +46,20 @@ import java.util.stream.Collectors;
 public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer6.class);
-    private static final ExecutorService pool = Executors.newFixedThreadPool(1);
+
+    // same params as Executors.newFixedThreadPool
+    // no needs erorrs check in afterExecute here cause that pool used for FutureTask with result check already
+    private static final ExecutorService threadPoolSimulations = new ThreadPoolExecutor(
+            COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
+            COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
+            0L,
+            TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<>(),
+            r -> {
+                Thread thread = new Thread(r);
+                thread.setName("AI-SIM-" + thread.getId());
+                return thread;
+            });
     protected int maxDepth;
     protected int maxNodes;
     protected int maxThink;
@@ -426,7 +439,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected Integer addActionsTimed() {
         // run new game simulation in parallel thread
         FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE));
-        pool.execute(task);
+        threadPoolSimulations.execute(task);
         try {
             int maxSeconds = maxThink;
             if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS) {
