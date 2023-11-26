@@ -32,7 +32,6 @@ import org.mage.plugins.card.images.ImageCache;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.*;
@@ -188,7 +187,7 @@ public class MageActionCallback implements ActionCallback {
     private void showCardHintPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
         MageCard cardPanel = data.getComponent().getTopPanelRef();
 
-        ThreadUtils.threadPool2.submit(new Runnable() {
+        ThreadUtils.threadPoolPopups.submit(new Runnable() {
             @Override
             public void run() {
                 ThreadUtils.sleep(tooltipDelay);
@@ -482,7 +481,7 @@ public class MageActionCallback implements ActionCallback {
         cancelHidingEnlagedCard();
         Component parentComponent = SwingUtilities.getRoot(cardPanel);
         if (parentComponent == null) {
-            // virtual card (example: show card popup in non cards panel like PickChoiceDialog)
+            // virtual card (example: show card popup in non cards panel like PickChoiceDialog or chat )
             parentComponent = MageFrame.getDesktop();
         }
         Point parentPoint = parentComponent.getLocationOnScreen();
@@ -571,8 +570,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     @Override
-    public void mouseWheelMoved(MouseWheelEvent e, TransferData data) {
-        int notches = e.getWheelRotation();
+    public void mouseWheelMoved(int mouseWheelRotation, TransferData data) {
         if (enlargedWindowState != EnlargedWindowState.CLOSED) {
             // same move direction will be ignored, opposite direction closes the enlarged window
             if (enlargeredViewOpened != null && new Date().getTime() - enlargeredViewOpened.getTime() > 1000) {
@@ -580,17 +578,18 @@ public class MageActionCallback implements ActionCallback {
                 hideEnlargedCard();
                 handleMouseMoveOverNewCard(data);
             } else if (enlargeMode == EnlargeMode.NORMAL) {
-                if (notches > 0) {
+                if (mouseWheelRotation > 0) {
                     hideEnlargedCard();
                     handleMouseMoveOverNewCard(data);
                 }
-            } else if (notches < 0) {
+            } else if (mouseWheelRotation < 0) {
                 hideEnlargedCard();
                 handleMouseMoveOverNewCard(data);
             }
             return;
         }
-        if (notches < 0) {
+
+        if (mouseWheelRotation < 0) {
             // move up - show normal image
             enlargeCard(EnlargeMode.NORMAL);
         } else {
@@ -648,7 +647,7 @@ public class MageActionCallback implements ActionCallback {
     private void displayEnlargedCard(final CardView cardView, final TransferData data) {
         MageCard cardPanel = data.getComponent().getTopPanelRef();
 
-        ThreadUtils.threadPool3.submit(() -> {
+        ThreadUtils.threadPoolPopups.submit(() -> {
             if (cardView == null) {
                 return;
             }
@@ -677,12 +676,19 @@ public class MageActionCallback implements ActionCallback {
                 final Component popupContainer = MageFrame.getUI().getComponent(mageComponentCardPreviewContainer);
                 Component cardPreviewPane = MageFrame.getUI().getComponent(mageComponentCardPreviewPane);
                 Component parentComponent = SwingUtilities.getRoot(cardPanel);
+                if (parentComponent == null) {
+                    // virtual card (example: show card popup in non cards panel like PickChoiceDialog or chat )
+                    parentComponent = MageFrame.getDesktop();
+                }
                 if (cardPreviewPane != null && parentComponent != null) {
                     Point parentPoint = parentComponent.getLocationOnScreen();
                     if (DebugUtil.GUI_POPUP_CONTAINER_DRAW_DEBUG_BORDER) {
                         ((JComponent) cardPreviewPane).setBorder(BorderFactory.createLineBorder(Color.green));
                     }
-                    data.setLocationOnScreen(cardPanel.getCardLocationOnScreen().getCardPoint());
+                    if (data.getLocationOnScreen() == null) {
+                        // in virtual mode you can't get here cause cardPanel hidden
+                        data.setLocationOnScreen(cardPanel.getCardLocationOnScreen().getCardPoint());
+                    }
 
                     Point location = preparePopupContainerLocation(popupContainer, cardPreviewPane, data, parentPoint, parentComponent);
                     popupContainer.setLocation(location);

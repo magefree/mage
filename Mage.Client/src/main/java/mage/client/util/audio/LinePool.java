@@ -106,7 +106,7 @@ public class LinePool {
             }
             logLineStats();
         }
-        ThreadUtils.threadPool.submit(() -> {
+        ThreadUtils.threadPoolSounds.submit(() -> {
             synchronized (LinePool.this) {
                 try {
                     if (!line.isOpen()) {

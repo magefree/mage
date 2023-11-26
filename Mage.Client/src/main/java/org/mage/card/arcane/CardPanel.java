@@ -744,7 +744,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         data.setComponent(this);
         data.setCard(this.getGameCard());
         data.setGameId(this.gameId);
-        callback.mouseWheelMoved(e, data);
+        callback.mouseWheelMoved(e.getWheelRotation(), data);
     }
 
     /**

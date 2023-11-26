@@ -28,6 +28,7 @@ import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 
+import javax.swing.*;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
@@ -915,6 +916,13 @@ public final class SystemUtil {
         if (!name.startsWith("CALL")) {
             // how-to fix: something wrong in your code logic
             throw new IllegalArgumentException("Wrong code usage: client commands code must run in CALL threads, but used in " + name, new Throwable());
+        }
+    }
+
+    public static void ensureRunInGUISwingThread() {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            // hot-to fix: run GUI changeable code by SwingUtilities.invokeLater(() -> {xxx})
+            throw new IllegalArgumentException("Wrong code usage: GUI related code must run in SWING thread by SwingUtilities.invokeLater", new Throwable());
         }
     }
 }

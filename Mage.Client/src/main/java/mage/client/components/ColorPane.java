@@ -21,10 +21,7 @@ import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * GUI: chats with html and hints popup support for objects
@@ -51,7 +48,10 @@ public class ColorPane extends JEditorPane {
     }
 
     private void addHyperlinkHandlers() {
-        addHyperlinkListener(e -> ThreadUtils.threadPool2.submit(() -> {
+        if (Arrays.stream(getHyperlinkListeners()).findAny().isPresent()) {
+            throw new IllegalStateException("Wrong code usage: popup links support enabled already");
+        }
+        addHyperlinkListener(e -> ThreadUtils.threadPoolPopups.submit(() -> {
             if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300) == 0) {
                 // if disabled
                 return;
@@ -111,13 +111,23 @@ public class ColorPane extends JEditorPane {
                     cardInfo.init(cardView, this.bigCard, this.gameId);
                     cardInfo.setTooltipDelay(CHAT_TOOLTIP_DELAY_MS);
                     cardInfo.setPopupAutoLocationMode(TransferData.PopupAutoLocationMode.PUT_NEAR_MOUSE_POSITION);
-                    cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
-                    cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
+                    SwingUtilities.invokeLater(() -> {
+                        cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
+                        cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
+                    });
                 }
             }
 
+            if (e.getEventType() == EventType.ACTIVATED) {
+                SwingUtilities.invokeLater(() -> {
+                    cardInfo.onMouseWheel(MouseInfo.getPointerInfo().getLocation());
+                });
+            }
+
             if (e.getEventType() == EventType.EXITED) {
-                cardInfo.onMouseExited();
+                SwingUtilities.invokeLater(() -> {
+                    cardInfo.onMouseExited();
+                });
             }
         }));
 
