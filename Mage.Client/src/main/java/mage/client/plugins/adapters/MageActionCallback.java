@@ -651,84 +651,86 @@ public class MageActionCallback implements ActionCallback {
             if (cardView == null) {
                 return;
             }
-            try {
-                if (enlargedWindowState == EnlargedWindowState.CLOSED) {
-                    return;
-                }
-
-                MageComponents mageComponentCardPreviewContainer;
-                MageComponents mageComponentCardPreviewPane;
-                if (cardView.isToRotate()) {
-                    if (enlargedWindowState == EnlargedWindowState.NORMAL) {
-                        hideEnlargedCard();
-                        enlargedWindowState = EnlargedWindowState.ROTATED;
-                    }
-                    mageComponentCardPreviewContainer = MageComponents.CARD_PREVIEW_CONTAINER_ROTATED;
-                    mageComponentCardPreviewPane = MageComponents.CARD_PREVIEW_PANE_ROTATED;
-                } else {
-                    if (enlargedWindowState == EnlargedWindowState.ROTATED) {
-                        hideEnlargedCard();
-                        enlargedWindowState = EnlargedWindowState.NORMAL;
-                    }
-                    mageComponentCardPreviewContainer = MageComponents.CARD_PREVIEW_CONTAINER;
-                    mageComponentCardPreviewPane = MageComponents.CARD_PREVIEW_PANE;
-                }
-                final Component popupContainer = MageFrame.getUI().getComponent(mageComponentCardPreviewContainer);
-                Component cardPreviewPane = MageFrame.getUI().getComponent(mageComponentCardPreviewPane);
-                Component parentComponent = SwingUtilities.getRoot(cardPanel);
-                if (parentComponent == null) {
-                    // virtual card (example: show card popup in non cards panel like PickChoiceDialog or chat )
-                    parentComponent = MageFrame.getDesktop();
-                }
-                if (cardPreviewPane != null && parentComponent != null) {
-                    Point parentPoint = parentComponent.getLocationOnScreen();
-                    if (DebugUtil.GUI_POPUP_CONTAINER_DRAW_DEBUG_BORDER) {
-                        ((JComponent) cardPreviewPane).setBorder(BorderFactory.createLineBorder(Color.green));
-                    }
-                    if (data.getLocationOnScreen() == null) {
-                        // in virtual mode you can't get here cause cardPanel hidden
-                        data.setLocationOnScreen(cardPanel.getCardLocationOnScreen().getCardPoint());
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    if (enlargedWindowState == EnlargedWindowState.CLOSED) {
+                        return;
                     }
 
-                    Point location = preparePopupContainerLocation(popupContainer, cardPreviewPane, data, parentPoint, parentComponent);
-                    popupContainer.setLocation(location);
-                    popupContainer.setVisible(true);
+                    MageComponents mageComponentCardPreviewContainer;
+                    MageComponents mageComponentCardPreviewPane;
+                    if (cardView.isToRotate()) {
+                        if (enlargedWindowState == EnlargedWindowState.NORMAL) {
+                            hideEnlargedCard();
+                            enlargedWindowState = EnlargedWindowState.ROTATED;
+                        }
+                        mageComponentCardPreviewContainer = MageComponents.CARD_PREVIEW_CONTAINER_ROTATED;
+                        mageComponentCardPreviewPane = MageComponents.CARD_PREVIEW_PANE_ROTATED;
+                    } else {
+                        if (enlargedWindowState == EnlargedWindowState.ROTATED) {
+                            hideEnlargedCard();
+                            enlargedWindowState = EnlargedWindowState.NORMAL;
+                        }
+                        mageComponentCardPreviewContainer = MageComponents.CARD_PREVIEW_CONTAINER;
+                        mageComponentCardPreviewPane = MageComponents.CARD_PREVIEW_PANE;
+                    }
+                    final Component popupContainer = MageFrame.getUI().getComponent(mageComponentCardPreviewContainer);
+                    Component cardPreviewPane = MageFrame.getUI().getComponent(mageComponentCardPreviewPane);
+                    Component parentComponent = SwingUtilities.getRoot(cardPanel);
+                    if (parentComponent == null) {
+                        // virtual card (example: show card popup in non cards panel like PickChoiceDialog or chat )
+                        parentComponent = MageFrame.getDesktop();
+                    }
+                    if (cardPreviewPane != null && parentComponent != null) {
+                        Point parentPoint = parentComponent.getLocationOnScreen();
+                        if (DebugUtil.GUI_POPUP_CONTAINER_DRAW_DEBUG_BORDER) {
+                            ((JComponent) cardPreviewPane).setBorder(BorderFactory.createLineBorder(Color.green));
+                        }
+                        if (data.getLocationOnScreen() == null) {
+                            // in virtual mode you can't get here cause cardPanel hidden
+                            data.setLocationOnScreen(cardPanel.getCardLocationOnScreen().getCardPoint());
+                        }
 
-                    // popup hint mode
-                    Image image = cardPanel.getImage();
-                    CardView displayCard = cardPanel.getOriginal();
-                    switch (enlargeMode) {
-                        case COPY:
-                            if (cardView instanceof PermanentView) {
-                                image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
-                            }
-                            break;
-                        case ALTERNATE:
-                            if (cardView.getAlternateName() != null) {
-                                if (cardView instanceof PermanentView
-                                        && !cardView.isFlipCard()
-                                        && !cardView.canTransform()
-                                        && ((PermanentView) cardView).isCopy()) {
+                        Point location = preparePopupContainerLocation(popupContainer, cardPreviewPane, data, parentPoint, parentComponent);
+                        popupContainer.setLocation(location);
+                        popupContainer.setVisible(true);
+
+                        // popup hint mode
+                        Image image = cardPanel.getImage();
+                        CardView displayCard = cardPanel.getOriginal();
+                        switch (enlargeMode) {
+                            case COPY:
+                                if (cardView instanceof PermanentView) {
                                     image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
-                                } else {
-                                    image = ImageCache.getImageOriginalAlternateName(cardView).getImage();
-                                    displayCard = displayCard.getSecondCardFace();
                                 }
-                            }
-                            break;
-                        default:
-                            break;
+                                break;
+                            case ALTERNATE:
+                                if (cardView.getAlternateName() != null) {
+                                    if (cardView instanceof PermanentView
+                                            && !cardView.isFlipCard()
+                                            && !cardView.canTransform()
+                                            && ((PermanentView) cardView).isCopy()) {
+                                        image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
+                                    } else {
+                                        image = ImageCache.getImageOriginalAlternateName(cardView).getImage();
+                                        displayCard = displayCard.getSecondCardFace();
+                                    }
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+
+                        // shows the card in the popup Container
+                        displayCardInfo(displayCard, image, (BigCard) cardPreviewPane);
+                    } else {
+                        logger.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
                     }
 
-                    // shows the card in the popup Container
-                    displayCardInfo(displayCard, image, (BigCard) cardPreviewPane);
-                } else {
-                    logger.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
+                } catch (Exception e) {
+                    logger.warn("Problem dring display of enlarged card", e);
                 }
-
-            } catch (Exception e) {
-                logger.warn("Problem dring display of enlarged card", e);
-            }
+            });
         });
     }
 
