@@ -62,7 +62,6 @@ public class MageTextArea extends MageEditorPane {
 
         SwingUtilities.invokeLater(() -> {
             String promptText = buffer.toString();
-            System.out.println(promptText);
             MageTextArea.super.setText(promptText);
             // in case the text don't fit in the panel a tooltip with the text is added
             if (panelWidth > 0 && MageTextArea.this.getPreferredSize().getWidth() > panelWidth) {

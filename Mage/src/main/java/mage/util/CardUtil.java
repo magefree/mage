@@ -1377,10 +1377,9 @@ public final class CardUtil {
         List<Card> partsToCast = cardMap.get(cardToCast.getId());
         String partsInfo = partsToCast
                 .stream()
-                .map(MageObject::getIdName)
+                .map(MageObject::getLogName)
                 .collect(Collectors.joining(" or "));
-        if (cardToCast == null
-                || partsToCast.size() < 1
+        if (partsToCast.size() < 1
                 || !player.chooseUse(
                 Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
         )) {

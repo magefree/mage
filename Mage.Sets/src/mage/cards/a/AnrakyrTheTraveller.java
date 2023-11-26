@@ -101,10 +101,9 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
         List<Card> partsToCast = cardMap.get(cardToCast.getId());
         String partsInfo = partsToCast
                 .stream()
-                .map(MageObject::getIdName)
+                .map(MageObject::getLogName)
                 .collect(Collectors.joining(" or "));
-        if (cardToCast == null
-                || partsToCast.size() < 1
+        if (partsToCast.size() < 1
                 || !player.chooseUse(
                 Outcome.PlayForFree, "Cast spell by paying life equal to its mana value rather than paying its mana cost (" + partsInfo + ")?", source, game
         )) {
