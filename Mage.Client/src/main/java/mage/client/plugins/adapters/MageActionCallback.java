@@ -733,7 +733,6 @@ public class MageActionCallback implements ActionCallback {
             case PUT_INSIDE_PARENT: {
                 location = new Point((int) data.getLocationOnScreen().getX() + data.getPopupOffsetX() - 40, (int) data.getLocationOnScreen().getY() + data.getPopupOffsetY() - 40);
                 location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popupComponent, parentComponent);
-                location.translate(-parentPoint.x, -parentPoint.y);
                 break;
             }
 
