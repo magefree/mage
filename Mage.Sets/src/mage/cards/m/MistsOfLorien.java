@@ -51,7 +51,7 @@ public final class MistsOfLorien extends CardImpl {
 
 class MistsOfLorienEffect extends OneShotEffect {
 
-    public MistsOfLorienEffect() {
+    MistsOfLorienEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target nonland permanent and each other nonland permanent with the same mana value as that permanent to their owners' hands.";
     }
@@ -79,6 +79,6 @@ class MistsOfLorienEffect extends OneShotEffect {
             controller.moveCards(cardsToHand, Zone.HAND, source, game);
             return true;
         }
-        return true;
+        return false;
     }
 }
