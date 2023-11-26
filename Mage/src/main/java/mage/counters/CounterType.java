@@ -177,6 +177,7 @@ public enum CounterType {
     QUEST("quest"),
     SILVER("silver"),
     SCREAM("scream"),
+    SHADOW("shadow"),
     SHELL("shell"),
     SHIELD("shield"),
     SHRED("shred"),
@@ -312,6 +313,8 @@ public enum CounterType {
                 return new AbilityCounter(new MenaceAbility(), amount);
             case REACH:
                 return new AbilityCounter(ReachAbility.getInstance(), amount);
+            case SHADOW:
+                return new AbilityCounter(ShadowAbility.getInstance(), amount);
             case TRAMPLE:
                 return new AbilityCounter(TrampleAbility.getInstance(), amount);
             case VIGILANCE:
