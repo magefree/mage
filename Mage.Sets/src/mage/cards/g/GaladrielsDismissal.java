@@ -77,7 +77,7 @@ class GaladrielsDismissalPhaseOutTargetPlayerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             List<UUID> permIds = new ArrayList<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT, player.getId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURES, player.getId(), game)) {
                 permIds.add(permanent.getId());
             }
             return new PhaseOutAllEffect(permIds).apply(game, source);
