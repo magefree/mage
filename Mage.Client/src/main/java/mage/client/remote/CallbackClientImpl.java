@@ -520,6 +520,8 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
                                 .append("</b> - Switch in/out to chat text field")
+                                .append("<br/><b>ALT + D</b> - show/hide panel with big card from the right side")
+                                .append("<br/><b>Hold ALT + E</b> - force to show card popup in image mode")
                                 /*
                                         .append("<br/><b>")
                                         .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))
