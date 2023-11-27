@@ -157,7 +157,7 @@ public final class DeckGenerator {
         nonBasicLandCriteria.notSupertypes(SuperType.BASIC);
 
         // Generate basic land cards
-        Map<String, List<CardInfo>> basicLands = generateBasicLands(setsToUse);
+        Map<String, List<CardInfo>> basicLands = DeckGeneratorPool.generateBasicLands(setsToUse);
 
         DeckGeneratorPool.generateSpells(creatureCriteria, genPool.getCreatureCount());
         DeckGeneratorPool.generateSpells(nonCreatureCriteria, genPool.getNonCreatureCount());
@@ -165,37 +165,6 @@ public final class DeckGenerator {
 
         // Reconstructs the final deck and adjusts for Math rounding and/or missing cards
         return genPool.getDeck();
-    }
-
-    /**
-     * Returns a map of colored mana symbol to basic land cards of that color.
-     *
-     * @param setsToUse which sets to retrieve basic lands from.
-     * @return a map of color to basic lands.
-     */
-    private static Map<String, List<CardInfo>> generateBasicLands(List<String> setsToUse) {
-
-        Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(setsToUse);
-
-        CardCriteria criteria = new CardCriteria();
-        if (!landSets.isEmpty()) {
-            criteria.setCodes(landSets.toArray(new String[landSets.size()]));
-        }
-        criteria.ignoreSetsWithSnowLands();
-
-        Map<String, List<CardInfo>> basicLandMap = new HashMap<>();
-
-        for (ColoredManaSymbol c : ColoredManaSymbol.values()) {
-            String landName = DeckGeneratorPool.getBasicLandName(c.toString());
-            criteria.rarities(Rarity.LAND).name(landName);
-            List<CardInfo> cards = CardRepository.instance.findCards(criteria);
-            if (cards.isEmpty()) { // Workaround to get basic lands if lands are not available for the given sets
-                criteria.setCodes("M15");
-                cards = CardRepository.instance.findCards(criteria);
-            }
-            basicLandMap.put(landName, cards);
-        }
-        return basicLandMap;
     }
 
     /**
