@@ -28,7 +28,10 @@ import mage.choices.Choice;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.Filter;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
@@ -2063,6 +2066,25 @@ public class VerifyCardDataTest {
                 }
             }
         }
+
+        // special check: equip abilities must have controlled predicate due rules
+        List<EquipAbility> equipAbilities = card.getAbilities()
+                .stream()
+                .filter(a -> a instanceof EquipAbility)
+                .map(a -> (EquipAbility) a)
+                .collect(Collectors.toList());
+        equipAbilities.forEach(a -> {
+            List<Predicate> allPredicates = new ArrayList<>();
+            a.getTargets().forEach(t -> Predicates.collectAllComponents(t.getFilter().getPredicates(), t.getFilter().getExtraPredicates(), allPredicates));
+            boolean hasControlledFilter = allPredicates
+                    .stream()
+                    .filter(p -> p instanceof TargetController.ControllerPredicate)
+                    .map(p -> ((TargetController.ControllerPredicate) p).getController())
+                    .anyMatch(tc -> tc.equals(TargetController.YOU));
+            if (!hasControlledFilter) {
+                fail(card, "abilities", "card has equip ability, but it doesn't use controllered filter - " + a.getRule());
+            }
+        });
 
         // spells have only 1 ability
         if (card.isInstantOrSorcery()) {

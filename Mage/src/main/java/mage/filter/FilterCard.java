@@ -91,12 +91,17 @@ public class FilterCard extends FilterObject<Card> {
         return new FilterCard(this);
     }
 
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
+    }
+
     public static void checkPredicateIsSuitableForCardFilter(Predicate predicate) {
         // card filter can't contain controller predicate (only permanents on battlefield have controller)
         List<Predicate> list = new ArrayList<>();
         Predicates.collectAllComponents(predicate, list);
         if (list.stream().anyMatch(TargetController.ControllerPredicate.class::isInstance)) {
-            throw new IllegalArgumentException("Card filter doesn't support controller predicate");
+            throw new IllegalArgumentException("Wrong code usage: card filter doesn't support controller predicate");
         }
     }
 

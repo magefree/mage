@@ -5,6 +5,7 @@ import mage.game.Game;
 import mage.util.Copyable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,4 +36,8 @@ public interface Filter<E> extends Serializable, Copyable<Filter<E>> {
     public void setLockedFilter(boolean lockedFilter);
 
     List<Predicate<? super E>> getPredicates();
+
+    default List<Predicate> getExtraPredicates() {
+        return new ArrayList<>();
+    }
 }
