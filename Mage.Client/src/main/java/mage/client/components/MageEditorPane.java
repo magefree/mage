@@ -58,7 +58,7 @@ public class MageEditorPane extends JEditorPane {
         if (Arrays.stream(getHyperlinkListeners()).findAny().isPresent()) {
             throw new IllegalStateException("Wrong code usage: popup links support enabled already");
         }
-        addHyperlinkListener(e -> ThreadUtils.threadPoolPopups.submit(() -> {
+        addHyperlinkListener(e -> MageUI.threadPoolPopups.submit(() -> {
             if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300) == 0) {
                 // if disabled
                 return;

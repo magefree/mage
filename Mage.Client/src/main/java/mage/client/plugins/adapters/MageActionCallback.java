@@ -10,6 +10,7 @@ import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventProducer;
 import mage.client.components.MageComponents;
+import mage.client.components.MageUI;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.game.GamePane;
 import mage.client.plugins.impl.Plugins;
@@ -187,7 +188,7 @@ public class MageActionCallback implements ActionCallback {
     private void showCardHintPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
         MageCard cardPanel = data.getComponent().getTopPanelRef();
 
-        ThreadUtils.threadPoolPopups.submit(new Runnable() {
+        MageUI.threadPoolPopups.submit(new Runnable() {
             @Override
             public void run() {
                 ThreadUtils.sleep(tooltipDelay);
@@ -647,7 +648,7 @@ public class MageActionCallback implements ActionCallback {
     private void displayEnlargedCard(final CardView cardView, final TransferData data) {
         MageCard cardPanel = data.getComponent().getTopPanelRef();
 
-        ThreadUtils.threadPoolPopups.submit(() -> {
+        MageUI.threadPoolPopups.submit(() -> {
             if (cardView == null) {
                 return;
             }
