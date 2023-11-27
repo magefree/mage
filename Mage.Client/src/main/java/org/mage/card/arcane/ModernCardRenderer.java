@@ -63,9 +63,6 @@ public class ModernCardRenderer extends CardRenderer {
     private static final GlowText glowTextRenderer = new GlowText();
     public static final Color MANA_ICONS_TEXT_COLOR = Color.DARK_GRAY; // text color of missing mana icons in IMAGE render mode
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Textures for modern frame cards
-
     // public static final Font BASE_BELEREN_FONT = loadFont("beleren-bold");
 
     public static final Paint BG_TEXTURE_WHITE = loadBackgroundTexture("white");

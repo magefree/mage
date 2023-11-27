@@ -11,6 +11,9 @@ import java.net.URL;
 
 public class ModernCardResourceLoader {
     private static final Logger LOGGER = Logger.getLogger(ModernCardResourceLoader.class);
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Textures for modern frame cards
     protected static TexturePaint loadBackgroundTexture(String name) {
         URL url = ModernCardResourceLoader.class.getResource("/cardrender/background_texture_" + name + ".png");
         ImageIcon icon = new ImageIcon(url);
