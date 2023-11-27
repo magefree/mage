@@ -13,6 +13,7 @@ import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
 import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
+import static org.mage.card.arcane.ModernCardResourceLoader.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,40 +62,6 @@ public class ModernCardRenderer extends CardRenderer {
     private static final Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
     private static final GlowText glowTextRenderer = new GlowText();
     public static final Color MANA_ICONS_TEXT_COLOR = Color.DARK_GRAY; // text color of missing mana icons in IMAGE render mode
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Textures for modern frame cards
-    private static TexturePaint loadBackgroundTexture(String name) {
-        URL url = ModernCardRenderer.class.getResource("/cardrender/background_texture_" + name + ".png");
-        ImageIcon icon = new ImageIcon(url);
-        BufferedImage img = CardRendererUtils.toBufferedImage(icon.getImage());
-        return new TexturePaint(img, new Rectangle(0, 0, img.getWidth(), img.getHeight()));
-    }
-
-    private static BufferedImage loadBackgroundImage(String name) {
-        URL url = ModernCardRenderer.class.getResource("/cardrender/background_texture_" + name + ".png");
-        ImageIcon icon = new ImageIcon(url);
-        BufferedImage img = CardRendererUtils.toBufferedImage(icon.getImage());
-        return img;
-    }
-
-    private static BufferedImage loadFramePart(String name) {
-        URL url = ModernCardRenderer.class.getResource("/cardrender/" + name + ".png");
-        ImageIcon icon = new ImageIcon(url);
-        return CardRendererUtils.toBufferedImage(icon.getImage());
-    }
-
-    private static Font loadFont(String name) {
-        try (InputStream in = ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf")) {
-            return Font.createFont(
-                    Font.TRUETYPE_FONT, in);
-        } catch (IOException e) {
-            LOGGER.info("Failed to load font `" + name + "`, couldn't find resource.");
-        } catch (FontFormatException e) {
-            LOGGER.info("Failed to load font `" + name + "`, bad format.");
-        }
-        return new Font("Arial", Font.PLAIN, 1);
-    }
 
     // public static final Font BASE_BELEREN_FONT = loadFont("beleren-bold");
 
