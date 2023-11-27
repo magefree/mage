@@ -118,7 +118,7 @@ class SnowfallManaEffect extends ManaEffect {
             choiceImpl.setMessage("Add additional blue mana? This mana can only be spent to pay cumulative upkeep costs.");
             choiceImpl.setChoices(choice);
 
-            if (player.choose(Outcome.Benefit, choiceImpl, game)) {
+            if (player.choose(outcome, choiceImpl, game)) {
                 switch (choiceImpl.getChoice()) {
                     case "Add one additional blue mana.":
                         return new SnowfallConditionalMana(Mana.BlueMana(1));
