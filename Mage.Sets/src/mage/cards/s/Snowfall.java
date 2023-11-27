@@ -27,11 +27,7 @@ import mage.players.Player;
  */
 public final class Snowfall extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
-
-    static {
-        filter.add(SubType.ISLAND.getPredicate());
-    }
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.ISLAND, "an Island is tapped");
 
     public Snowfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
