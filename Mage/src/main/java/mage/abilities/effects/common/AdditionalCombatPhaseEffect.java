@@ -11,12 +11,7 @@ public class AdditionalCombatPhaseEffect extends OneShotEffect {
 
     public AdditionalCombatPhaseEffect() {
         super(Outcome.Benefit);
-        staticText = "After this phase, there is an additional combat phase";
-    }
-
-    public AdditionalCombatPhaseEffect(String staticText) {
-        this();
-        this.staticText = staticText;
+        staticText = "after this phase, there is an additional combat phase";
     }
 
     protected AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
