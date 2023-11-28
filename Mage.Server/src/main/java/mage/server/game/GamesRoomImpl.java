@@ -45,11 +45,11 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         UPDATE_EXECUTOR.scheduleAtFixedRate(() -> {
             try {
                 update();
-            } catch (Exception ex) {
-                LOGGER.fatal("Games room update exception! " + ex.toString(), ex);
+            } catch (Exception e) {
+                LOGGER.fatal("Games room update error: " + e.getMessage(), e);
             }
 
-        }, 2, 2, TimeUnit.SECONDS);
+        }, 2, 2, TimeUnit.SECONDS); // TODO: is it ok for performance?
     }
 
     @Override

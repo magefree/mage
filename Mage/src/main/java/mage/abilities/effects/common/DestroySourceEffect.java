@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -21,7 +20,7 @@ public class DestroySourceEffect extends OneShotEffect {
     public DestroySourceEffect(boolean noRegen) {
         super(Outcome.DestroyPermanent);
         this.noRegen = noRegen;
-        staticText = "destroy {this}";
+        staticText = "destroy {this}" + (noRegen ? ". It can't be regenerated" : "");
     }
 
     protected DestroySourceEffect(final DestroySourceEffect effect) {

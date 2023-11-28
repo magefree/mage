@@ -10,6 +10,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,7 +37,7 @@ public final class CourtOfArdenvale extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         
         // When Court of Ardenvale enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of your upkeep, return target permanent card with mana value 3 or less from your graveyard to your hand. If you're the monarch, return that permanent card to the battlefield instead.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
@@ -47,6 +48,7 @@ public final class CourtOfArdenvale extends CardImpl {
             ), TargetController.YOU, false
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addHint(MonarchHint.instance);
         this.addAbility(ability);
     }
 

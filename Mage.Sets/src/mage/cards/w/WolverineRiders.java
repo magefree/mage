@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class WolverineRiders extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "another Elf");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -47,8 +47,7 @@ public final class WolverineRiders extends CardImpl {
 
         // Whenever another Elf enters the battlefield under your control, you gain life equal to its toughness.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new GainLifeEffect(WolverineRidersValue.instance), filter, "Whenever another Elf " +
-                "enters the battlefield under your control, you gain life equal to its toughness."
+                new GainLifeEffect(WolverineRidersValue.instance, "you gain life equal to its toughness"), filter
         ));
     }
 

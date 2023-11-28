@@ -1,27 +1,26 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.keyword.ConvokeAbility;
 import mage.game.Game;
-import mage.watchers.common.ConvokeWatcher;
+import mage.util.CardUtil;
+
+import java.util.HashSet;
 
 /**
- * @author TheElk801
+ * @author notgreat
  */
 public enum ConvokedSourceCount implements DynamicValue {
-    PERMANENT(-1),
-    SPELL(0);
-    private final int offset;
+    instance;
 
-    ConvokedSourceCount(int offset) {
-        this.offset = offset;
+    ConvokedSourceCount() {
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return ConvokeWatcher.getConvokingCreatures(new MageObjectReference(game.getObject(sourceAbility), game, offset), game).size();
+        return CardUtil.getSourceCostsTag(game, sourceAbility, ConvokeAbility.convokingCreaturesKey, new HashSet<>(0)).size();
     }
 
     @Override

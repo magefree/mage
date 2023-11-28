@@ -103,11 +103,10 @@ public class GameSessionWatcher {
     }
 
     protected static void processWatchedHands(Game game, UUID userId, GameView gameView) {
-        Map<String, SimpleCardsView> handCards = new HashMap<>();
+        gameView.getWatchedHands().clear();
         for (Player player : game.getPlayers().values()) {
             if (player.hasUserPermissionToSeeHand(userId)) {
-                handCards.put(player.getName(), new SimpleCardsView(player.getHand().getCards(game), true));
-                gameView.setWatchedHands(handCards);
+                gameView.getWatchedHands().put(player.getName(), new SimpleCardsView(player.getHand().getCards(game), true));
             }
         }
     }

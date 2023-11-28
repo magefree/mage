@@ -68,6 +68,9 @@ Mage.Verify/*.zip
 Mage.Verify/*.json
 Mage.Verify/db
 
+# Mage.Reports
+Mage.Reports/target
+
 # Logs rotation
 *.log.*
 
@@ -126,3 +129,7 @@ build-output.log
 
 # Visual Studio Code
 .history
+
+# Makefile
+.env
+deploy/

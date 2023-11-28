@@ -22,6 +22,7 @@ import mage.server.util.*;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
+import mage.utils.SystemUtil;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
 import org.jboss.remoting.callback.InvokerCallbackHandler;

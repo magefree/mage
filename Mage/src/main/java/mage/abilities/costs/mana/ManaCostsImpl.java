@@ -45,6 +45,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     private ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
         this.text = costs.text;
+        this.ensureCapacity(costs.size());
         for (T cost : costs) {
             this.add(cost.copy());
         }
@@ -600,11 +601,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public Targets getTargets() {
-        Targets targets = new Targets();
+        Targets res = new Targets();
         for (T cost : this) {
-            targets.addAll(cost.getTargets());
+            res.addAll(cost.getTargets());
         }
-        return targets;
+        return res.withReadOnly();
     }
 
     @Override

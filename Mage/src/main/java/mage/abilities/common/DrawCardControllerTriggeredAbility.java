@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -18,7 +17,7 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     public DrawCardControllerTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
-        setTriggerPhrase("Whenever you draw a card, ");
+        setTriggerPhrase(getWhen() + "you draw a card, ");
     }
 
     protected DrawCardControllerTriggeredAbility(final DrawCardControllerTriggeredAbility ability) {

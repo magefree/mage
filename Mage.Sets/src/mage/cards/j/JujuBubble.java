@@ -28,10 +28,10 @@ public final class JujuBubble extends CardImpl {
 
         // When you play a card, sacrifice Juju Bubble.
         this.addAbility(new PlayCardTriggeredAbility(TargetController.YOU, Zone.BATTLEFIELD,
-                new SacrificeSourceEffect(), false));
+                new SacrificeSourceEffect(), false).setTriggerPhrase("When you play a card, "));
 
         // {2}: You gain 1 life.
-        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(2)));
     }
 
     private JujuBubble(final JujuBubble card) {

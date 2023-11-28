@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class StitchersApprenticeHomunculusToken extends TokenImpl {
 
     public StitchersApprenticeHomunculusToken() {
-        super("Homunculus Token", "2/2 blue Homunculus creature");
+        super("Homunculus Token", "2/2 blue Homunculus creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.HOMUNCULUS);

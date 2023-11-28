@@ -8,6 +8,7 @@ import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.util.Copyable;
 
 /**
  * Game's step
@@ -17,7 +18,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Step implements Serializable {
+public abstract class Step implements Serializable, Copyable<Step> {
 
     private final PhaseStep type;
     private final boolean hasPriority;

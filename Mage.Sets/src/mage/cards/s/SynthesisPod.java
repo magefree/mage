@@ -2,13 +2,11 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -33,7 +31,6 @@ public final class SynthesisPod extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{U/P}");
 
         // ({U/P} can be paid with either {U} or 2 life.)
-        this.addAbility(new SimpleStaticAbility(new InfoEffect("<i>({U/P} can be paid with either {U} or 2 life.)</i>")));
 
         // {1}{U/P}, {T}, Exile a spell you control: Target opponent reveals cards from the top of their library until they reveal a card with mana value equal to 1 plus the exiled spell's mana value. Exile that card, then that player shuffles. You may cast that exiled card without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(new SynthesisPodEffect(), new ManaCostsImpl<>("{1}{U/P}"));
@@ -81,8 +78,8 @@ class SynthesisPodCost extends CostImpl {
         if (player == null) {
             return false;
         }
-        player.chooseTarget(Outcome.Exile, targets.get(0), source, game);
-        Spell spell = game.getSpell(targets.getFirstTarget());
+        player.chooseTarget(Outcome.Exile, this.getTargets().get(0), source, game);
+        Spell spell = game.getSpell(this.getTargets().getFirstTarget());
         if (spell == null) {
             return false;
         }
@@ -96,7 +93,7 @@ class SynthesisPodCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

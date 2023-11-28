@@ -141,7 +141,7 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
                     if (ability instanceof ActivatedAbility) {
                         ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                         copyAbility.setMaxActivationsPerTurn(1);
-                        perm.addAbility(copyAbility, source.getSourceId(), game);
+                        perm.addAbility(copyAbility, source.getSourceId(), game, true);
                     }
                 }
             }

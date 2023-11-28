@@ -271,10 +271,11 @@ public class HoverButton extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (SwingUtilities.isLeftMouseButton(e)) {
-            if (isEnabled() && observer != null) {
-                observer.execute();
-            }
+        if (!SwingUtilities.isLeftMouseButton(e)) {
+            return;
+        }
+        if (isEnabled() && observer != null) {
+            observer.execute();
         }
     }
 

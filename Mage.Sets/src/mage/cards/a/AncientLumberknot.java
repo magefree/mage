@@ -8,9 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.mageobject.ToughnessGreaterThanPowerPredicate;
 
 import java.util.UUID;
 
@@ -23,7 +21,7 @@ public final class AncientLumberknot extends CardImpl {
             = new FilterCreaturePermanent("creature you control with toughness greater than its power");
 
     static {
-        filter.add(AncientLumberknotPredicate.instance);
+        filter.add(ToughnessGreaterThanPowerPredicate.instance);
     }
 
     public AncientLumberknot(UUID ownerId, CardSetInfo setInfo) {
@@ -44,14 +42,5 @@ public final class AncientLumberknot extends CardImpl {
     @Override
     public AncientLumberknot copy() {
         return new AncientLumberknot(this);
-    }
-}
-
-enum AncientLumberknotPredicate implements Predicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.getToughness().getValue() > input.getPower().getValue();
     }
 }

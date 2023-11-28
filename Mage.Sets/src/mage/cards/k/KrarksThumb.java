@@ -71,9 +71,4 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
 }

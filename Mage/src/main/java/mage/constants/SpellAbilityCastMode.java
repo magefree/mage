@@ -1,9 +1,10 @@
 package mage.constants;
 
+import mage.abilities.SpellAbility;
 import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.Card;
-import mage.game.Game;
+import mage.abilities.keyword.MorphAbility;
 import mage.game.stack.Spell;
 
 /**
@@ -14,6 +15,7 @@ public enum SpellAbilityCastMode {
     MADNESS("Madness"),
     FLASHBACK("Flashback"),
     BESTOW("Bestow"),
+    PROTOTYPE("Prototype"),
     MORPH("Morph"),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
@@ -42,7 +44,7 @@ public enum SpellAbilityCastMode {
         return text;
     }
 
-    public Card getTypeModifiedCardObjectCopy(Card card, Game game) {
+    public Card getTypeModifiedCardObjectCopy(Card card, SpellAbility spellAbility) {
         Card cardCopy = card.copy();
         if (this.equals(BESTOW)) {
             BestowAbility.becomeAura(cardCopy);
@@ -52,6 +54,9 @@ public enum SpellAbilityCastMode {
             if (tmp != null) {
                 cardCopy = tmp.copy();
             }
+        }
+        if (this.equals(PROTOTYPE)) {
+            cardCopy = ((PrototypeAbility) spellAbility).prototypeCardSpell(cardCopy);
         }
         if (this.equals(MORPH)) {
             if (cardCopy instanceof Spell) {

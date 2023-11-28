@@ -17,7 +17,7 @@ public class CantAttackBlockUnlessPaysSourceEffect extends PayCostToAttackBlockE
     public CantAttackBlockUnlessPaysSourceEffect(Cost cost, RestrictType restrictType) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, restrictType, cost);
         staticText = "{this} can't " + restrictType.toString() + " unless you " + (cost == null ? "" : cost.getText())
-                + (restrictType == RestrictType.ATTACK ? " <i>(This cost is paid as attackers are declared.)</i>" : "");
+                + (restrictType == RestrictType.ATTACK ? ". <i>(This cost is paid as attackers are declared.)</i>" : "");
     }
 
     public CantAttackBlockUnlessPaysSourceEffect(ManaCosts manaCosts, RestrictType restrictType) {

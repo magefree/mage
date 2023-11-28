@@ -35,7 +35,7 @@ public final class BattleCry extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllEffect(filter));
 
         // Whenever a creature blocks this turn, it gets +0/+1 until end of turn.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BattleCryTriggeredAbility()));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BattleCryTriggeredAbility()).concatBy("<br>"));
     }
 
     private BattleCry(final BattleCry card) {

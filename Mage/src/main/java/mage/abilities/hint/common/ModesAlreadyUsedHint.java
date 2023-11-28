@@ -23,7 +23,7 @@ public enum ModesAlreadyUsedHint implements Hint {
     public String getText(Game game, Ability ability) {
         List<String> used = ability
                 .getModes()
-                .streamAlreadySelected(ability, game)
+                .streamAlreadySelectedModes(ability, game)
                 .map(Mode::getModeTag)
                 .filter(tag -> tag != null && !tag.isEmpty())
                 .collect(Collectors.toList());
@@ -33,7 +33,7 @@ public enum ModesAlreadyUsedHint implements Hint {
         }
 
         return "Already used"
-                + (ability.getModes().isResetEachTurn() ? " this turn" : "")
+                + (ability.getModes().isLimitUsageResetOnNewTurn() ? " this turn" : "")
                 + ": [" + String.join(", ", used) + "]";
     }
 

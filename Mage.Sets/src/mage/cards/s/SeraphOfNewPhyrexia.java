@@ -11,9 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -21,17 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SeraphOfNewPhyrexia extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent("another creature or artifact");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.ARTIFACT.getPredicate()
-        ));
-    }
 
     public SeraphOfNewPhyrexia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -49,7 +36,8 @@ public final class SeraphOfNewPhyrexia extends CardImpl {
 
         // Whenever Seraph of New Phyrexia attacks, you may sacrifice another creature or artifact. If you do, Seraph of New Phyrexia gets +2/+1 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
-                new BoostSourceEffect(2, 1, Duration.EndOfTurn), new SacrificeTargetCost(filter)
+                new BoostSourceEffect(2, 1, Duration.EndOfTurn),
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT)
         )));
     }
 

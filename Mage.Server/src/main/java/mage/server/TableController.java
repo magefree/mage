@@ -607,7 +607,7 @@ public class TableController {
                     logger.info("Tourn. match started id:" + match.getId() + " tournId: " + table.getTournament().getId());
                 } else {
                     managerFactory.userManager().getUser(userId).ifPresent(user -> {
-                        logger.info("MATCH started [" + match.getName() + "] " + match.getId() + '(' + user.getName() + ')');
+                        logger.info("MATCH started [" + match.getName() + "] " + match.getId() + " (" + user.getName() + ')');
                         logger.debug("- " + match.getOptions().getGameType() + " - " + match.getOptions().getDeckType());
                     });
                 }
@@ -862,9 +862,9 @@ public class TableController {
                         });
                     }
                 }
-                // free resources no longer needed
-                match.cleanUpOnMatchEnd(managerFactory.configSettings().isSaveGameActivated(), table.isTournament());
             }
+            // free resources no longer needed
+            match.cleanUpOnMatchEnd(managerFactory.configSettings().isSaveGameActivated(), table.isTournament());
         }
     }
 

@@ -30,7 +30,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 public final class TaigamOjutaiMaster extends CardImpl {
 
     private static final String effectText = "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, that spell gains rebound.";
-    private static final FilterSpell filter = new FilterSpell("Instant, Sorcery, and Dragon spells you control");
+    private static final FilterSpell filter = new FilterSpell("Instant, sorcery, and Dragon spells you control");
 
     static {
         filter.add(

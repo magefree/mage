@@ -49,7 +49,7 @@ class BoosterTutorEffect extends OneShotEffect {
 
     public BoosterTutorEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Open a sealed Magic booster pack, reveal the cards, and put one of those cards into your hand";
+        this.staticText = "Open a sealed Magic booster pack, reveal the cards, and put one of them into your hand";
     }
 
     private BoosterTutorEffect(final BoosterTutorEffect effect) {

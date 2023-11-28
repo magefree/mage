@@ -3,31 +3,33 @@ package mage.client.components;
 import java.awt.BorderLayout;
 import javax.swing.*;
 
+import mage.client.dialog.CardHintsHelperDialog;
 import mage.client.dialog.CardInfoWindowDialog;
 
 /**
+ * GUI: helper class to improve work with desktop frames
  *
  * @author LevelX2
  */
 public class MageDesktopManager extends DefaultDesktopManager {
 
-    static final int DESKTOP_ICON_WIDTH = 250;
-
     @Override
     public void iconifyFrame(JInternalFrame f) {
         super.iconifyFrame(f);
-        if (f instanceof CardInfoWindowDialog) {
+        if (f instanceof MageDesktopIconifySupport) {
+            int needIconWidth = ((MageDesktopIconifySupport) f).getDesktopIconWidth();
             JInternalFrame.JDesktopIcon icon = f.getDesktopIcon();
-            icon.setBounds(f.getX() + (f.getWidth() - DESKTOP_ICON_WIDTH), f.getY(), DESKTOP_ICON_WIDTH, icon.getHeight());
+            icon.setBounds(f.getX() + (f.getWidth() - needIconWidth), f.getY(), needIconWidth, icon.getHeight());
         }
     }
 
     @Override
     public void deiconifyFrame(JInternalFrame f) {
         super.deiconifyFrame(f);
-        if (f instanceof CardInfoWindowDialog) {
+        if (f instanceof MageDesktopIconifySupport) {
+            int needIconWidth = ((MageDesktopIconifySupport) f).getDesktopIconWidth();
             JInternalFrame.JDesktopIcon icon = f.getDesktopIcon();
-            f.setBounds(icon.getX() + (DESKTOP_ICON_WIDTH - f.getWidth()), icon.getY(), f.getWidth(), f.getHeight());
+            f.setBounds(icon.getX() + (needIconWidth - f.getWidth()), icon.getY(), f.getWidth(), f.getHeight());
         }
     }
 

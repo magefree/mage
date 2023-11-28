@@ -9,8 +9,10 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ClientDefaultSettings;
+import mage.utils.SystemUtil;
 import mage.view.CardView;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
@@ -24,22 +26,28 @@ import java.util.UUID;
  * - call "onMouseEntered" to prepare;
  * - call "onMouseMoved" to draw;
  * - call "onMouseExited" to hide;
+ * - call "onMouseWheel" to switch between text and image modes;
  * <p>
  * Hints:
  * - for game GUI: you must init with gameId (otherwise you can't see it)
  * - for non-game GUI: no needs in gameId or bigCard (bigCard is a panel with card image)
  * - if you want to show card immediately then use init + onMouseEntered + onMouseMoved
+ * - if you want to switch text/image mode then use onMouseWheel
+ * <p>
+ * Auto-location modes:
+ * - default: popup container will be put inside parent container (example: popup over cards in game or deck editor)
+ * - near mouse: popup container will be put near mouse position (example: popup over chat messages or game logs)
  *
  * @author JayDi85
  */
 public class VirtualCardInfo {
-
     CardView cardView;
     MageCard cardComponent;
     BigCard bigCard;
     MageActionCallback actionCallback;
     TransferData data = new TransferData();
     Dimension cardDimension = null;
+    int viewMode = 1; // workaround to simulate mouse wheel for switch card view mode (text/image styles)
 
     public VirtualCardInfo() {
         super();
@@ -90,7 +98,17 @@ public class VirtualCardInfo {
         data.setTooltipDelay(tooltipDelay);
     }
 
+    public void setPopupAutoLocationMode(TransferData.PopupAutoLocationMode mode) {
+        data.setPopupAutoLocationMode(mode);
+    }
+
+    public CardView getCardView() {
+        return this.cardView;
+    }
+
     public boolean prepared() {
+        SystemUtil.ensureRunInGUISwingThread();
+
         return this.cardView != null
                 && this.cardComponent != null
                 && this.actionCallback != null;
@@ -105,10 +123,6 @@ public class VirtualCardInfo {
         data.setLocationOnScreen(newPoint);
     }
 
-    public void onMouseEntered() {
-        onMouseMoved(null);
-    }
-
     public void onMouseEntered(Point newLocation) {
         if (!prepared()) {
             return;
@@ -119,10 +133,6 @@ public class VirtualCardInfo {
         }
 
         this.actionCallback.mouseEntered(null, this.data);
-    }
-
-    public void onMouseMoved() {
-        onMouseMoved(null);
     }
 
     public void onMouseMoved(Point newLocation) {
@@ -137,10 +147,24 @@ public class VirtualCardInfo {
         this.actionCallback.mouseMoved(null, this.data);
     }
 
+    public void onMouseWheel(Point newLocation) {
+        if (!prepared()) {
+            return;
+        }
+
+        if (newLocation != null) {
+            updateLocation(newLocation);
+        }
+
+        this.viewMode = -this.viewMode; // simulate diff mouse wheel moves
+        this.actionCallback.mouseWheelMoved(this.viewMode, this.data);
+    }
+
     public void onMouseExited() {
         if (!prepared()) {
             return;
         }
+
         this.actionCallback.mouseExited(null, this.data);
     }
 }

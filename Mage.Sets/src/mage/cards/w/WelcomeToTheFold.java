@@ -52,7 +52,7 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
 
     public WelcomeToTheFoldEffect(Duration duration, boolean fixedControl) {
         super(duration, fixedControl);
-        staticText = "Gain control of target creature if its toughness is 2 or less. If Welcome to the Fold's madness cost was paid, instead gain control of that creature if its toughness is X or less";
+        staticText = "Gain control of target creature if its toughness is 2 or less. If this spell's madness cost was paid, instead gain control of that creature if its toughness is X or less";
     }
 
     private WelcomeToTheFoldEffect(final WelcomeToTheFoldEffect effect) {

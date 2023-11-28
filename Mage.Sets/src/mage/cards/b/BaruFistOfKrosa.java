@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -29,12 +28,10 @@ import mage.game.permanent.token.Token;
  */
 public final class BaruFistOfKrosa extends CardImpl {
 
-    private static final FilterLandPermanent forestFilter = new FilterLandPermanent("Forest");
-    private static final FilterCreaturePermanent greenCreatureFilter = new FilterCreaturePermanent("green creatures you control");
+    private static final FilterLandPermanent forestFilter = new FilterLandPermanent(SubType.FOREST, "a Forest");
+    private static final FilterCreaturePermanent greenCreatureFilter = new FilterCreaturePermanent("green creatures");
 
     static {
-        forestFilter.add(SubType.FOREST.getPredicate());
-        greenCreatureFilter.add(TargetController.YOU.getControllerPredicate());
         greenCreatureFilter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
@@ -47,8 +44,10 @@ public final class BaruFistOfKrosa extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, greenCreatureFilter), forestFilter, "Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.");
-        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, greenCreatureFilter));
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, greenCreatureFilter)
+                .setText("green creatures you control get +1/+1"), forestFilter);
+        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, greenCreatureFilter)
+                .setText("and gain trample until end of turn"));
         this.addAbility(ability);
 
         // Grandeur - Discard another card named Baru, Fist of Krosa: Create an X/X green Wurm creature token, where X is the number of lands you control.

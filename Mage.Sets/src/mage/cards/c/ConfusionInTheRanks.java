@@ -49,7 +49,7 @@ public final class ConfusionInTheRanks extends CardImpl {
                                 + "another player controls that shares a card type with it. "
                                 + "Exchange control of those permanents"
                 ),
-                filter, false, SetTargetPointer.PERMANENT, null
+                filter, false, SetTargetPointer.PERMANENT
         );
         ability.addTarget(new TargetPermanent());
         ability.setTargetAdjuster(ConfusionInTheRanksAdjuster.instance);

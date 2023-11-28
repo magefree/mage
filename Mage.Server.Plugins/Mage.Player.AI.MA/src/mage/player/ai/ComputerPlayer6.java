@@ -24,10 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
-import mage.player.ai.ma.optimizers.impl.DiscardCardOptimizer;
-import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
-import mage.player.ai.ma.optimizers.impl.LevelUpOptimizer;
-import mage.player.ai.ma.optimizers.impl.OutcomeOptimizer;
+import mage.player.ai.ma.optimizers.impl.*;
 import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
@@ -49,7 +46,20 @@ import java.util.stream.Collectors;
 public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer6.class);
-    private static final ExecutorService pool = Executors.newFixedThreadPool(1);
+
+    // same params as Executors.newFixedThreadPool
+    // no needs erorrs check in afterExecute here cause that pool used for FutureTask with result check already
+    private static final ExecutorService threadPoolSimulations = new ThreadPoolExecutor(
+            COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
+            COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
+            0L,
+            TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<>(),
+            r -> {
+                Thread thread = new Thread(r);
+                thread.setName("AI-SIM-" + thread.getId());
+                return thread;
+            });
     protected int maxDepth;
     protected int maxNodes;
     protected int maxThink;
@@ -72,6 +82,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected static final String BLANKS = "...............................................";
 
     static {
+        optimizers.add(new WrongCodeUsageOptimizer());
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
         optimizers.add(new DiscardCardOptimizer());
@@ -426,31 +437,28 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
      * @return
      */
     protected Integer addActionsTimed() {
-        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            }
-        });
-        pool.execute(task);
+        // run new game simulation in parallel thread
+        FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE));
+        threadPoolSimulations.execute(task);
         try {
             int maxSeconds = maxThink;
             if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS) {
                 maxSeconds = 3600;
             }
             logger.debug("maxThink: " + maxSeconds + " seconds ");
-            if (task.get(maxSeconds, TimeUnit.SECONDS) != null) {
-                return task.get(maxSeconds, TimeUnit.SECONDS);
+            Integer res = task.get(maxSeconds, TimeUnit.SECONDS);
+            if (res != null) {
+                return res;
             }
         } catch (TimeoutException e) {
             logger.info("simulating - timed out");
             task.cancel(true);
         } catch (ExecutionException e) {
             // exception error in simulated game
-            e.printStackTrace();
             task.cancel(true);
-            // real games: must catch
+            // real games: must catch and log
             // unit tests: must raise again for test fail
+            logger.error("AI simulation game catch error: " + e.getCause(), e);
             if (this.isTestsMode()) {
                 throw new IllegalStateException("One of the simulated games raise the error: " + e.getCause());
             }

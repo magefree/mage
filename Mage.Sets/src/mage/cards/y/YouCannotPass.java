@@ -55,7 +55,8 @@ enum YouCannotPassPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return YouCannotPassWatcher.checkCreature(input, game);
+        YouCannotPassWatcher watcher = game.getState().getWatcher(YouCannotPassWatcher.class);
+        return watcher != null && watcher.checkCreature(input, game);
     }
 }
 
@@ -69,16 +70,19 @@ class YouCannotPassWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.CREATURE_BLOCKED) {
+        if (event.getType() != GameEvent.EventType.BLOCKER_DECLARED) {
             return;
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLegendary(game)) {
-            set.add(new MageObjectReference(event.getSourceId(), game));
+        Permanent attacker = game.getPermanent(event.getTargetId());
+        Permanent blocker = game.getPermanent(event.getSourceId());
+        if (attacker == null || blocker == null) {
+            return;
         }
-        permanent = game.getPermanent(event.getSourceId());
-        if (permanent != null && permanent.isLegendary(game)) {
-            set.add(new MageObjectReference(event.getTargetId(), game));
+        if (attacker.isLegendary(game)) {
+            set.add(new MageObjectReference(blocker, game));
+        }
+        if (blocker.isLegendary(game)) {
+            set.add(new MageObjectReference(attacker, game));
         }
     }
 
@@ -88,11 +92,7 @@ class YouCannotPassWatcher extends Watcher {
         set.clear();
     }
 
-    static boolean checkCreature(Permanent permanent, Game game) {
-        return game
-                .getState()
-                .getWatcher(YouCannotPassWatcher.class)
-                .set
-                .contains(new MageObjectReference(permanent, game));
+    boolean checkCreature(Permanent permanent, Game game) {
+        return set.contains(new MageObjectReference(permanent, game));
     }
 }

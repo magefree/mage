@@ -10,6 +10,7 @@ import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -44,7 +45,7 @@ public final class AragornKingOfGondor extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Aragorn, King of Gondor enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Whenever Aragorn attacks, up to one target creature can't block this turn. If you're the monarch, creatures can't block this turn.
         Ability ability = new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));

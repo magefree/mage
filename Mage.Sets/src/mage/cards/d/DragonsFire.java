@@ -90,7 +90,7 @@ class DragonsFireCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.targets.clear();
+        this.getTargets().clear();
         dragonZone = DragonZone.NONE;
         selectedCardId = null;
         Player controller = game.getPlayer(controllerId);
@@ -132,23 +132,23 @@ class DragonsFireCost extends CostImpl {
             }
             switch (chosenZone) {
                 case HAND:
-                    targets.add(new TargetCardInHand(handFilter));
-                    if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
-                        Card card = game.getCard(targets.getFirstTarget());
+                    this.getTargets().add(new TargetCardInHand(handFilter));
+                    if (this.getTargets().choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
+                        Card card = game.getCard(this.getTargets().getFirstTarget());
                         if (card != null) {
                             dragonZone = DragonZone.HAND;
-                            selectedCardId = targets.getFirstTarget();
+                            selectedCardId = this.getTargets().getFirstTarget();
                             controller.revealCards(source, new CardsImpl(card), game);
                         }
                     }
                     break;
                 case BATTLEFIELD:
-                    targets.add(new TargetControlledPermanent(battlefieldFilter));
-                    if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
-                        Permanent permanent = game.getPermanent(targets.getFirstTarget());
+                    this.getTargets().add(new TargetControlledPermanent(battlefieldFilter));
+                    if (this.getTargets().choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
+                        Permanent permanent = game.getPermanent(this.getTargets().getFirstTarget());
                         if (permanent != null) {
                             dragonZone = DragonZone.BATTLEFIELD;
-                            selectedCardId = targets.getFirstTarget();
+                            selectedCardId = this.getTargets().getFirstTarget();
                             game.informPlayers(controller.getLogName() + " chooses " + permanent.getLogName());
                         }
                     }

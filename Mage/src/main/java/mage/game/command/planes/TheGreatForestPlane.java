@@ -27,8 +27,6 @@ import java.util.List;
  */
 public class TheGreatForestPlane extends Plane {
 
-    private static final String rule = "Each creature assigns combat damage equal to its toughness rather than its power";
-
     public TheGreatForestPlane() {
         this.setPlaneType(Planes.PLANE_THE_GREAT_FOREST);
 
@@ -39,13 +37,13 @@ public class TheGreatForestPlane extends Plane {
         // Active player can roll the planar die: Whenever you roll {CHAOS}, creatures you control get +0/+2 and gain trample until end of turn
         Effect chaosEffect = new BoostControlledEffect(0, 2, Duration.EndOfTurn);
         Target chaosTarget = null;
-        Effect chaosEffect2 = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        Effect chaosEffect2 = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         Target chaosTarget2 = null;
 
-        List<Effect> chaosEffects = new ArrayList<Effect>();
+        List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);
         chaosEffects.add(chaosEffect2);
-        List<Target> chaosTargets = new ArrayList<Target>();
+        List<Target> chaosTargets = new ArrayList<>();
         chaosTargets.add(chaosTarget);
         chaosTargets.add(chaosTarget2);
 

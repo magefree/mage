@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
@@ -23,11 +23,6 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
 
 /**
  *
@@ -50,7 +45,7 @@ public final class BlightwingBandit extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         //  Whenever you cast your first spell during each opponent's turn, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it.
-        this.addAbility(new FirstSpellOpponentsTurnTriggeredAbility(new BlightwingBanditEffect(), false));
+        this.addAbility(new FirstSpellOpponentsTurnTriggeredAbility(new BlightwingBanditEffect(), false, SetTargetPointer.PLAYER));
     }
 
     private BlightwingBandit(final BlightwingBandit card) {

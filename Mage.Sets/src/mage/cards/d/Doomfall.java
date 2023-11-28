@@ -56,7 +56,7 @@ class DoomfallEffect extends OneShotEffect {
 
     public DoomfallEffect() {
         super(Outcome.Exile);
-        this.staticText = "target player exiles a creature they control";
+        this.staticText = "target opponent exiles a creature they control";
     }
 
     private DoomfallEffect(final DoomfallEffect effect) {

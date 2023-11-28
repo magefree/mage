@@ -232,17 +232,18 @@ public final class Predicates {
         if (predicate instanceof NotPredicate) {
             collectAllComponents(((NotPredicate) predicate).predicate, res);
         } else if (predicate instanceof AndPredicate) {
-            collectAllComponents(((AndPredicate) predicate).components, res);
+            collectAllComponents(((AndPredicate) predicate).components, null, res);
         } else if (predicate instanceof OrPredicate) {
-            collectAllComponents(((OrPredicate) predicate).components, res);
+            collectAllComponents(((OrPredicate) predicate).components, null, res);
         } else {
             res.add(predicate);
         }
     }
 
-    public static void collectAllComponents(List<Predicate> predicates, List<Predicate> res) {
-        predicates.forEach(p -> {
-            collectAllComponents(p, res);
-        });
+    public static void collectAllComponents(List<Predicate> predicates, List<Predicate> extraPredicates, List<Predicate> res) {
+        predicates.forEach(p -> collectAllComponents(p, res));
+        if (extraPredicates != null) {
+            extraPredicates.forEach(p -> collectAllComponents(p, res));
+        }
     }
 }

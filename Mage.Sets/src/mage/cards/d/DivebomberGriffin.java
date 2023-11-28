@@ -32,7 +32,7 @@ public final class DivebomberGriffin extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // {tap}, Sacrifice Divebomber Griffin: Divebomber Griffin deals 3 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3, "it"), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);

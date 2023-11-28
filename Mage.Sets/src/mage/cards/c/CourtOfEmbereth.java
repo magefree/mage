@@ -10,6 +10,7 @@ import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,7 +29,7 @@ public final class CourtOfEmbereth extends CardImpl {
 
 
         // When Court of Embereth enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         //  At the beginning of your upkeep, create a 3/1 red Knight creature token. Then if you're the monarch, Court of Embereth deals X damage to each opponent, where X is the number of creatures you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
@@ -41,6 +42,7 @@ public final class CourtOfEmbereth extends CardImpl {
                 MonarchIsSourceControllerCondition.instance
         ).concatBy("Then"));
         ability.addHint(CreaturesYouControlHint.instance);
+        ability.addHint(MonarchHint.instance);
         this.addAbility(ability);
     }
 

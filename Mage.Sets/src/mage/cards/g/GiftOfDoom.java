@@ -24,7 +24,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
@@ -51,7 +50,7 @@ public final class GiftOfDoom extends CardImpl {
         ));
         ability2.addEffect(new GainAbilityAttachedEffect(
                 IndestructibleAbility.getInstance(), AttachmentType.AURA
-        ));
+        ).setText("and indestructible"));
         this.addAbility(ability2);
 
         // Morph—Sacrifice another creature.
@@ -86,7 +85,7 @@ class GiftOfDoomEffect extends OneShotEffect {
 
     GiftOfDoomEffect() {
         super(Outcome.Benefit);
-        staticText = "attach it to a creature";
+        staticText = "you may attach it to a creature";
     }
 
     private GiftOfDoomEffect(final GiftOfDoomEffect effect) {

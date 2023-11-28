@@ -7,6 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +25,7 @@ public final class UndercellarSweep extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // When Undercellar Sweep enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // Whenever you attack, if you or a player you're attacking has the initiative, you create two 1/1 white Soldier creature token that are tapped and attacking.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

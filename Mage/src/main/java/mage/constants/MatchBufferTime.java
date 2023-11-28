@@ -21,16 +21,16 @@ public enum MatchBufferTime {
     SEC__25(25, "25 Seconds"),
     SEC__30(30, "30 Seconds");
 
-    private final int matchSeconds;
+    private final int bufferSecs;
     private final String name;
 
-    MatchBufferTime(int matchSeconds, String name) {
-        this.matchSeconds = matchSeconds;
+    MatchBufferTime(int bufferSecs, String name) {
+        this.bufferSecs = bufferSecs;
         this.name = name;
     }
 
-    public int getBufferTime() {
-        return matchSeconds;
+    public int getBufferSecs() {
+        return bufferSecs;
     }
 
     public String getName() {

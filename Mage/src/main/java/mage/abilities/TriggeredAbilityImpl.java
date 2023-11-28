@@ -2,7 +2,7 @@ package mage.abilities;
 
 import mage.MageObject;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.*;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.Zone;
@@ -124,6 +124,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public boolean getTriggersOnceEachTurn() {
+        return this.triggersOnceEachTurn;
+    }
+
+    @Override
     public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
         this.optional = true;
         this.doOnlyOnceEachTurn = doOnlyOnce;
@@ -221,7 +226,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
             }
             if (replaceRuleText && triggerPhrase != null) {
-                superRule = superRule.replaceFirst("^(sacrifice )?\\{this\\}", "$1it");
+                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |(put|remove) an? [^ ]+ counter (on|from) |return |transform |untap |regenerate )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
             if (triggersOnceEachTurn) {
@@ -255,6 +260,21 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 || ruleLow.startsWith("turn")
                 || ruleLow.startsWith("tap")
                 || ruleLow.startsWith("untap");
+    }
+
+    /**
+     * For use in generating trigger phrases with correct text
+     * @return "When " for an effect that always removes the source from the battlefield, otherwise "Whenever "
+     */
+    protected final String getWhen() {
+        return (!optional && getAllEffects().stream().anyMatch(
+                effect -> effect instanceof SacrificeSourceEffect
+                        || effect instanceof ReturnToHandSourceEffect
+                        || effect instanceof ShuffleIntoLibrarySourceEffect
+                        || effect instanceof ExileSourceEffect
+                        || effect instanceof FlipSourceEffect
+                        || effect instanceof DestroySourceEffect
+        ) ? "When " : "Whenever ");
     }
 
     @Override
@@ -315,7 +335,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
                 }
                 break;
-            case PHASED_OUT:
             case PHASED_IN:
                 if (isLeavesTheBattlefieldTrigger()) {
                     source = game.getLastKnownInformation(getSourceId(), event.getZone());

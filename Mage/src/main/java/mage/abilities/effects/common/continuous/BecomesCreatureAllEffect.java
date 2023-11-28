@@ -21,18 +21,13 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     protected Token token;
     protected String theyAreStillType;
     private final FilterPermanent filter;
-    private boolean loseColor = true;
-    private boolean loseTypes = false;
-    protected boolean loseName = false;
+    private final boolean loseColor;
+    private final boolean loseTypes;
+    private final boolean loseName;
 
     public BecomesCreatureAllEffect(Token token, String theyAreStillType,
                                     FilterPermanent filter, Duration duration, boolean loseColor) {
         this(token, theyAreStillType, filter, duration, loseColor, false, false);
-    }
-
-    public BecomesCreatureAllEffect(Token token, String theyAreStillType,
-                                    FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName) {
-        this(token, theyAreStillType, filter, duration, loseColor, loseName, false);
     }
 
     public BecomesCreatureAllEffect(Token token, String theyAreStillType,
@@ -128,7 +123,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                 case AbilityAddingRemovingEffects_6:
                     if (!token.getAbilities().isEmpty()) {
                         for (Ability ability : token.getAbilities()) {
-                            permanent.addAbility(ability, source.getSourceId(), game);
+                            permanent.addAbility(ability, source.getSourceId(), game, true);
                         }
                     }
                     break;
@@ -179,7 +174,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         }
         sb.append(token.getDescription());
         if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
-            sb.append(". They're still ").append(theyAreStillType);
+            sb.append(" that are still ").append(theyAreStillType);
         }
         return sb.toString();
     }

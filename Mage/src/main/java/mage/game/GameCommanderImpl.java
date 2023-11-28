@@ -33,8 +33,8 @@ public abstract class GameCommanderImpl extends GameImpl {
     // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize) {
-        super(attackOption, range, mulligan, startingLife, minimumDeckSize, 7);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, minimumDeckSize, startLife, startHandSize);
     }
 
     protected GameCommanderImpl(final GameCommanderImpl game) {
@@ -80,11 +80,14 @@ public abstract class GameCommanderImpl extends GameImpl {
                         true, "Choose a color for " + commander.getName()
                 );
                 player.choose(Outcome.Neutral, choiceColor, this);
-                color = choiceColor.getColor();
+                color = choiceColor.getColor(); // can be null on disconnect
             } else {
                 color = iterator.next();
             }
-            commander.getColor().addColor(color);
+
+            if (color != null) {
+                commander.getColor().addColor(color);
+            }
         }
     }
 

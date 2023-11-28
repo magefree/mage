@@ -30,7 +30,7 @@ public final class FatalLore extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // An opponent chooses one —
-        this.getSpellAbility().getModes().setModeChooser(TargetController.OPPONENT);
+        this.getSpellAbility().getModes().setChooseController(TargetController.OPPONENT);
 
         // • You draw three cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("you draw three cards"));

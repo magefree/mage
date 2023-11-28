@@ -7,6 +7,10 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
@@ -24,6 +28,31 @@ public class LinePool {
 
     private final org.apache.log4j.Logger logger = Logger.getLogger(LinePool.class);
     private static final int LINE_CLEANUP_INTERVAL = 30000;
+
+    private static final ThreadPoolExecutor threadPoolSounds;
+    private static int threadCount = 0;
+    static {
+        threadPoolSounds = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable runnable) {
+                threadCount++;
+                Thread thread = new Thread(runnable, "SOUND-" + threadCount);
+                thread.setDaemon(true);
+                return thread;
+            }
+        }) {
+            @Override
+            protected void afterExecute(Runnable r, Throwable t) {
+                super.afterExecute(r, t);
+                t = ThreadUtils.findRealException(r, t);
+                if (t != null) {
+                    // TODO: show sound errors in client logs?
+                    //logger.error("Catch unhandled error in SOUND thread: " + t.getMessage(), t);
+                }
+            }
+        };
+        threadPoolSounds.prestartAllCoreThreads();
+    }
 
     private final Queue<SourceDataLine> freeLines = new ArrayDeque<>();
     private final Queue<SourceDataLine> activeLines = new ArrayDeque<>();
@@ -106,7 +135,7 @@ public class LinePool {
             }
             logLineStats();
         }
-        ThreadUtils.threadPool.submit(() -> {
+        threadPoolSounds.submit(() -> {
             synchronized (LinePool.this) {
                 try {
                     if (!line.isOpen()) {

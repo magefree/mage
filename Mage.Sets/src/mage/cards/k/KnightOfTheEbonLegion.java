@@ -10,6 +10,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,7 +53,7 @@ public final class KnightOfTheEbonLegion extends CardImpl {
                         TargetController.YOU, false
                 ), KnightOfTheEbonLegionCondition.instance, "At the beginning of your end step, " +
                 "if a player lost 4 or more life this turn, put a +1/+1 counter on {this}."
-        ));
+        ).addHint(new ConditionHint(KnightOfTheEbonLegionCondition.instance, "A player lost 4 or more life this turn")));
     }
 
     private KnightOfTheEbonLegion(final KnightOfTheEbonLegion card) {

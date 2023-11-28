@@ -182,7 +182,14 @@ public enum TargetController {
 
         @Override
         public String toString() {
-            return "TargetController(" + controller.toString() + ')';
+            return "TargetController (" + controller.toString() + ')';
+        }
+
+        /**
+         * For tests
+         */
+        public TargetController getController() {
+            return this.controller;
         }
     }
 }

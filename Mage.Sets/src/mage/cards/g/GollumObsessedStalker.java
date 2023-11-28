@@ -88,7 +88,7 @@ class GollumObsessedStalkerWatcher extends Watcher {
             return;
         }
 
-        playersPerName.computeIfAbsent(name, k -> new HashSet());
+        playersPerName.computeIfAbsent(name, k -> new HashSet<>());
         playersPerName.get(name).add(playerId);
     }
 
@@ -171,7 +171,7 @@ enum GollumObsessedStalkerHint implements Hint {
                 name = gollumObj.getName();
             }
         }
-        if (name.isEmpty()) {
+        if (name == null || name.isEmpty()) {
             return "";
         }
 

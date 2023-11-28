@@ -112,16 +112,17 @@ class DuplicityExileHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        if (controller != null
-                && sourceObject != null) {
-            if (!controller.getHand().isEmpty()) {
-                UUID exileId = source.getSourceId();
+        if (controller != null && sourceObject != null) {
+            UUID exileId = source.getSourceId();
+            Set<Card> cardsInExile = game.getExile().getExileZone(exileId).getCards(game);
+            if (controller.getHand().isEmpty()) {
+                controller.moveCards(cardsInExile, Zone.HAND, source, game);
+            } else {
                 Set<Card> cardsFromHandToExile = controller.getHand().getCards(game);
                 for (Card card : cardsFromHandToExile) {
                     controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getName());
                     card.setFaceDown(true, game);
                 }
-                Set<Card> cardsInExile = game.getExile().getExileZone(exileId).getCards(game);
                 Set<Card> cardsToReturnToHandFromExile = new HashSet<>();
                 for (Card card : cardsInExile) {
                     if (!cardsFromHandToExile.contains(card)) {

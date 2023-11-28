@@ -11,8 +11,8 @@ import java.util.UUID;
 
 public abstract class GameCanadianHighlanderImpl extends GameImpl {
 
-    public GameCanadianHighlanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 100, 7);
+    public GameCanadianHighlanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 100, startLife, startHandSize);
     }
 
     protected GameCanadianHighlanderImpl(final GameCanadianHighlanderImpl game) {

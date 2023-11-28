@@ -520,6 +520,8 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
                                 .append("</b> - Switch in/out to chat text field")
+                                .append("<br/><b>ALT + D</b> - show/hide panel with big card from the right side")
+                                .append("<br/><b>Hold ALT + E</b> - force to show card popup in image mode")
                                 /*
                                         .append("<br/><b>")
                                         .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))
@@ -533,6 +535,7 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/>").append("<b>/w username message</b> - send private message to player (whisper)")
                                 .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
                                 .append("<br/>").append("<b>/fix</b> - fix frozen game")
+                                .append("<br/>").append("<b>[[card name]]</b> - insert card with popup info")
                                 .toString(),
                         null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;

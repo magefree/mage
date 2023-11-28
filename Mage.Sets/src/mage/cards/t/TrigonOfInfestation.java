@@ -1,13 +1,9 @@
-
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -26,23 +22,23 @@ import mage.game.permanent.token.InsectInfectToken;
  */
 public final class TrigonOfInfestation extends CardImpl {
 
-    private static InsectInfectToken insectToken = new InsectInfectToken();
-
     public TrigonOfInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)), ""));
+        // Trigon of Infestation enters the battlefield with three charge counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)), "with three charge counters on it"));
 
-        Costs costs = new CostsImpl();
-        costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
-        costs.add(new TapSourceCost());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), costs);
-        ability.addManaCost(new GenericManaCost(2));
+        // {G}{G}, {T}: Put a charge counter on Trigon of Infestation.
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
+        ability2.addCost(new ManaCostsImpl<>("{G}{G}"));
+        this.addAbility(ability2);
+
+        // {2}, {T}, Remove a charge counter from Trigon of Infestation: Create a 1/1 green Phyrexian Insect creature token with infect.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectInfectToken()), new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);
 
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl<>("{G}{G}"));
-        this.addAbility(ability2);
     }
 
     private TrigonOfInfestation(final TrigonOfInfestation card) {

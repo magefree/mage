@@ -27,7 +27,6 @@ import mage.server.Main;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
-import mage.server.util.SystemUtil;
 import mage.util.MultiAmountMessage;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
@@ -229,6 +228,12 @@ public class GameController implements GameCallback {
                             case PERSONAL_MESSAGE:
                                 informPersonal(event.getPlayerId(), event.getMessage());
                                 break;
+                            case TOURNAMENT_CONSTRUCT:
+                            case DRAFT_PICK_CARD:
+                                // tournament and draft events, impossible to catch it here
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unknown game event: " + event.getQueryType());
                         }
                     } catch (MageException ex) {
                         logger.fatal("Player event listener error ", ex);
@@ -262,6 +267,7 @@ public class GameController implements GameCallback {
         long delayMs = 250L; // run each 250 ms
 
         Action executeOnNoTimeLeft = () -> {
+            // TODO: buggy, must run in game thread, not in timer thread
             game.timerTimeout(initPlayerId);
             logger.debug("Player has no time left to end the match: " + initPlayerId + ". Conceding.");
         };
@@ -330,7 +336,7 @@ public class GameController implements GameCallback {
             gameFuture = gameExecutor.submit(worker);
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException ignore) {
             }
             if (game.getState().getChoosingPlayerId() != null) {
                 // start timer to force player to choose starting player otherwise loosing by being idle
@@ -496,6 +502,10 @@ public class GameController implements GameCallback {
     }
 
     public void sendPlayerAction(PlayerAction playerAction, UUID userId, Object data) {
+        // TODO: critical bug, must be enabled and research/rework due:
+        // * game change commands must be executed by game thread (example: undo)
+        // * user change commands can be executed by network thread??? (example: change skip settings)
+        //SystemUtil.ensureRunInGameThread();
         switch (playerAction) {
             case UNDO:
                 game.undo(getPlayerId(userId));
@@ -699,31 +709,10 @@ public class GameController implements GameCallback {
         }
     }
 
-    public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
-        try {
-            Deck deck = Deck.load(deckList, false, false);
-            game.loadCards(deck.getCards(), playerId);
-            for (Card card : deck.getCards()) {
-                card.putOntoBattlefield(game, Zone.OUTSIDE, null, playerId);
-            }
-        } catch (GameException ex) {
-            logger.warn(ex.getMessage());
-        }
-        addCardsForTesting(game, playerId);
-        updateGame();
-    }
-
-    public boolean cheat(UUID userId, UUID playerId, String cardName) {
-        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-        Card card = cardInfo != null ? cardInfo.getCard() : null;
-        if (card != null) {
-            Set<Card> cards = new HashSet<>();
-            cards.add(card);
-            game.loadCards(cards, playerId);
-            card.moveToZone(Zone.HAND, null, game, false);
-            return true;
-        } else {
-            return false;
+    public void cheatShow(UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            player.signalPlayerCheat();
         }
     }
 
@@ -771,15 +760,14 @@ public class GameController implements GameCallback {
 
     public void sendPlayerBoolean(UUID userId, final Boolean data) {
         sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerBoolean(data));
-
     }
 
     public void sendPlayerInteger(UUID userId, final Integer data) {
         sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerInteger(data));
-
     }
 
-    private synchronized void updateGame() {
+    private void updatePriorityTimers() {
+        // update player timers to actual values
         if (!timers.isEmpty()) {
             for (Player player : game.getState().getPlayers().values()) {
                 PriorityTimer timer = timers.get(player.getId());
@@ -788,6 +776,10 @@ public class GameController implements GameCallback {
                 }
             }
         }
+    }
+
+    private synchronized void updateGame() {
+        updatePriorityTimers();
         for (final GameSessionPlayer gameSession : getGameSessions()) {
             gameSession.update();
         }
@@ -941,7 +933,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    public GameView getGameView(UUID playerId) {
+    public synchronized GameView getGameView(UUID playerId) {
         return getGameSession(playerId).getGameView();
     }
 
@@ -974,13 +966,6 @@ public class GameController implements GameCallback {
             StreamUtils.closeQuietly(buffer);
         }
         return false;
-    }
-
-    /**
-     * Adds cards in player's hands that are specified in config/init.txt.
-     */
-    private void addCardsForTesting(Game game, UUID playerId) {
-        SystemUtil.addCardsForTesting(game, null, game.getPlayer(playerId));
     }
 
     /**
@@ -1116,14 +1101,13 @@ public class GameController implements GameCallback {
     }
 
     private GameSessionPlayer getGameSession(UUID playerId) {
-        if (!timers.isEmpty()) {
-            Player player = game.getState().getPlayer(playerId);
-            PriorityTimer timer = timers.get(playerId);
-            if (timer != null) {
-                //logger.warn("Timer Player " + player.getName()+ " " + player.getPriorityTimeLeft() + " Timer: " + timer.getCount());
-                player.setPriorityTimeLeft(timer.getCount());
-            }
-        }
+        // TODO: check parent callers - there are possible problems with sync, can be related to broken "fix" logs too
+        //  It modify players data, but:
+        //  * some sendXXX methods calls without synchronized (getGameSession can be in read mode?)
+        //  * some informXXX methods calls with synchronized (users must get actual data, so keep write mode and add synchronized?)
+        // find actual timers before send data
+        updatePriorityTimers();
+
         return gameSessions.get(playerId);
     }
 
@@ -1322,87 +1306,13 @@ public class GameController implements GameCallback {
         List<String> fixActions = new ArrayList<>(); // for logs info
 
         // fix active
-        Player playerActive = game.getPlayer(state.getActivePlayerId());
-        sb.append("<br>Fixing active player: ").append(getName(playerActive));
-        if (playerActive != null && !playerActive.canRespond()) {
-            fixActions.add("active player fix");
-
-            sb.append("<br><font color='red'>WARNING, active player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            playerActive.concede(game);
-            playerActive.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            Phase currentPhase = game.getPhase();
-            if (currentPhase != null) {
-                currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                fixedAlready = true;
-                sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-            } else {
-                sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-            }
-        } else {
-            sb.append(playerActive != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getActivePlayerId()), state, "active", sb, fixActions, fixedAlready);
 
         // fix lost choosing dialog
-        Player choosingPlayer = game.getPlayer(state.getChoosingPlayerId());
-        sb.append("<br>Fixing choosing player: ").append(getName(choosingPlayer));
-        if (choosingPlayer != null && !choosingPlayer.canRespond()) {
-            fixActions.add("choosing player fix");
-
-            sb.append("<br><font color='red'>WARNING, choosing player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            choosingPlayer.concede(game);
-            choosingPlayer.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            if (fixedAlready) {
-                sb.append(" (OK, already skipped before)");
-            } else {
-                Phase currentPhase = game.getPhase();
-                if (currentPhase != null) {
-                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                    fixedAlready = true;
-                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-                } else {
-                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-                }
-            }
-        } else {
-            sb.append(choosingPlayer != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getChoosingPlayerId()), state, "choosing", sb, fixActions, fixedAlready);
 
         // fix lost priority
-        Player priorityPlayer = game.getPlayer(state.getPriorityPlayerId());
-        sb.append("<br>Fixing priority player: ").append(getName(priorityPlayer));
-        if (priorityPlayer != null && !priorityPlayer.canRespond()) {
-            fixActions.add("priority player fix");
-
-            sb.append("<br><font color='red'>WARNING, priority player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            priorityPlayer.concede(game);
-            priorityPlayer.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            if (fixedAlready) {
-                sb.append(" (").append(asWarning("OK")).append(", already skipped before)");
-            } else {
-                Phase currentPhase = game.getPhase();
-                if (currentPhase != null) {
-                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                    fixedAlready = true;
-                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-                } else {
-                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-                }
-            }
-        } else {
-            sb.append(priorityPlayer != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getPriorityPlayerId()), state, "priority", sb, fixActions, fixedAlready);
 
         // fix timeout
         sb.append("<br>Fixing future timeout: ");
@@ -1440,5 +1350,36 @@ public class GameController implements GameCallback {
         logger.warn("FIX command result for game " + game.getId() + ": " + appliedFixes);
 
         return sb.toString();
+    }
+
+    private boolean fixPlayer(Player player, GameState state, String fixType, StringBuilder sb, List<String> fixActions, boolean fixedAlready) {
+        sb.append("<br>Fixing ").append(fixType).append(" player: ").append(getName(player));
+        if (player != null && !player.canRespond()) {
+            fixActions.add(fixType + " fix");
+
+            sb.append("<br><font color='red'>WARNING, ").append(fixType).append(" player can't respond.</font>");
+            sb.append("<br>Try to concede...");
+            player.concede(game);
+            player.leave(); // abort any wait response actions
+            sb.append(" (").append(asWarning("OK")).append(", concede done)");
+
+            sb.append("<br>Try to skip step...");
+            if (!fixedAlready) {
+                Phase currentPhase = game.getPhase();
+                if (currentPhase != null) {
+                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
+                    fixedAlready = true;
+                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
+                } else {
+                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
+                }
+            } else {
+                sb.append(" (OK, already skipped before)");
+            }
+        } else {
+            sb.append(player != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
+        }
+
+        return fixedAlready;
     }
 }

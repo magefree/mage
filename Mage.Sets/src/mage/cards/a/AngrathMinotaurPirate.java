@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -39,12 +38,9 @@ public final class AngrathMinotaurPirate extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +2: Angrath, Minotaur Pirate deals 1 damage to target opponent and each creature that player controls.
-        Effects effects1 = new Effects();
-        effects1.add(new DamageTargetEffect(1));
-        effects1.add(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent())
-                .setText("and each creature that player or that planeswalker's controller controls")
-        );
-        LoyaltyAbility ability1 = new LoyaltyAbility(effects1, +2);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), +2);
+        ability1.addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent())
+                .setText("and each creature that player or that planeswalker's controller controls"));
         ability1.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability1);
 

@@ -4,10 +4,11 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
-import mage.watchers.common.ManaSpentToCastWatcher;
+import mage.util.CardUtil;
 
 public enum ManacostVariableValue implements DynamicValue {
-
+    //TODO: all three of these variants plus GetXValue, GetKickerXValue, and GetXLoyaltyValue use the same logic
+    // and should be consolidated into a single instance
     REGULAR, // if you need X on cast/activate (in stack) - reset each turn
     ETB, // if you need X after ETB (in battlefield) - reset each turn
     END_GAME; // if you need X until end game - keep data forever
@@ -15,18 +16,7 @@ public enum ManacostVariableValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (this == REGULAR) {
-            return sourceAbility.getManaCostsToPay().getX();
-        }
-        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
-        if (watcher != null) {
-            if (this == END_GAME) {
-                return watcher.getLastXValue(sourceAbility, true);
-            } else {
-                return watcher.getLastXValue(sourceAbility, false);
-            }
-        }
-        return 0;
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override

@@ -16,7 +16,6 @@ import org.mage.plugins.card.images.ImageCacheData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -53,43 +52,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     private CardRenderer cardRenderer;
 
     private int updateArtImageStamp;
-
-    private static boolean cardViewEquals(CardView a, CardView b) { // TODO: This belongs in CardView
-        if (a == b) {
-            return true;
-        }
-        if (a == null || b == null || a.getClass() != b.getClass()) {
-            return false;
-        }
-
-        if (!(a.getDisplayName().equals(b.getDisplayName()) // TODO: Original code not checking everything. Why is it only checking these values?
-                && a.getPower().equals(b.getPower())
-                && a.getToughness().equals(b.getToughness())
-                && a.getLoyalty().equals(b.getLoyalty())
-                && a.getDefense().equals(b.getDefense())
-                && 0 == a.getColor().compareTo(b.getColor())
-                && a.getCardTypes().equals(b.getCardTypes())
-                && a.getSubTypes().equals(b.getSubTypes())
-                && a.getSuperTypes().equals(b.getSuperTypes())
-                && a.getManaCostStr().equals(b.getManaCostStr())
-                && a.getRules().equals(b.getRules())
-                && Objects.equals(a.getRarity(), b.getRarity())
-                && Objects.equals(a.getCardNumber(), b.getCardNumber())
-                && Objects.equals(a.getExpansionSetCode(), b.getExpansionSetCode())
-                && a.getFrameStyle() == b.getFrameStyle()
-                && Objects.equals(a.getCounters(), b.getCounters())
-                && a.isFaceDown() == b.isFaceDown())) {
-            return false;
-        }
-
-        if (!(a instanceof PermanentView)) {
-            return true;
-        }
-        PermanentView aa = (PermanentView) a;
-        PermanentView bb = (PermanentView) b;
-        return aa.hasSummoningSickness() == bb.hasSummoningSickness()
-                && aa.getDamage() == bb.getDamage();
-    }
 
     private static class ImageKey {
         final BufferedImage artImage;
@@ -178,7 +140,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
                     && this.height == that.height
                     && this.isChoosable == that.isChoosable
                     && this.isSelected == that.isSelected
-                    && cardViewEquals(this.view, that.view);
+                    && CardView.cardViewEquals(this.view, that.view);
         }
     }
 

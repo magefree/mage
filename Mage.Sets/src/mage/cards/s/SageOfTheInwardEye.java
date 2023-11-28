@@ -31,7 +31,7 @@ public final class SageOfTheInwardEye extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a noncreature spell, creatures you control gain lifelink until end of turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false),
+                new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
 
     }

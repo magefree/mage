@@ -25,7 +25,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -188,7 +187,7 @@ class HavengulLichEffect extends ContinuousEffectImpl {
         Card card = game.getCard(cardId);
         if (permanent != null && card != null) {
             for (ActivatedAbility ability : card.getAbilities(game).getActivatedAbilities(Zone.BATTLEFIELD)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, true);
             }
         }
         return false;

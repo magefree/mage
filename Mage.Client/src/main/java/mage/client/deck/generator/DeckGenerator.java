@@ -33,9 +33,9 @@ public final class DeckGenerator {
 
     }
 
-    private static final int MAX_TRIES = 8196;
+    protected static final int MAX_TRIES = 8196;
     private static DeckGeneratorDialog genDialog;
-    private static DeckGeneratorPool genPool;
+    protected static DeckGeneratorPool genPool;
 
     /**
      * Builds a deck out of the selected block/set/format.
@@ -157,149 +157,14 @@ public final class DeckGenerator {
         nonBasicLandCriteria.notSupertypes(SuperType.BASIC);
 
         // Generate basic land cards
-        Map<String, List<CardInfo>> basicLands = generateBasicLands(setsToUse);
+        Map<String, List<CardInfo>> basicLands = DeckGeneratorPool.generateBasicLands(setsToUse);
 
-        generateSpells(creatureCriteria, genPool.getCreatureCount());
-        generateSpells(nonCreatureCriteria, genPool.getNonCreatureCount());
-        generateLands(nonBasicLandCriteria, genPool.getLandCount(), basicLands);
+        DeckGeneratorPool.generateSpells(creatureCriteria, genPool.getCreatureCount());
+        DeckGeneratorPool.generateSpells(nonCreatureCriteria, genPool.getNonCreatureCount());
+        DeckGeneratorPool.generateLands(genDialog.useNonBasicLand(), nonBasicLandCriteria, basicLands);
 
         // Reconstructs the final deck and adjusts for Math rounding and/or missing cards
         return genPool.getDeck();
-    }
-
-    /**
-     * Generates all spells for the deck. Each card is retrieved from the
-     * database and checked against the converted mana cost (CMC) needed for the
-     * current card pool. If a card's CMC matches the CMC range required by the
-     * pool, it is added to the deck. This ensures that the majority of cards
-     * fit a fixed mana curve for the deck, and it is playable. Creatures and
-     * non-creatures are retrieved separately to ensure the deck contains a
-     * reasonable mix of both.
-     *
-     * @param criteria   the criteria to search for in the database.
-     * @param spellCount the number of spells that match the criteria needed in
-     *                   the deck.
-     */
-    private static void generateSpells(CardCriteria criteria, int spellCount) {
-        List<CardInfo> cardPool = CardRepository.instance.findCards(criteria);
-        int retrievedCount = cardPool.size();
-        List<DeckGeneratorCMC.CMC> deckCMCs = genPool.getCMCsForSpellCount(spellCount);
-        int count = 0;
-        int reservesAdded = 0;
-        boolean added;
-        if (retrievedCount > 0 && retrievedCount >= spellCount) {
-            int tries = 0;
-            while (count < spellCount) {
-                Card card = cardPool.get(RandomUtil.nextInt(retrievedCount)).getMockCard();
-                if (genPool.isValidSpellCard(card)) {
-                    int cardCMC = card.getManaValue();
-                    for (DeckGeneratorCMC.CMC deckCMC : deckCMCs) {
-                        if (cardCMC >= deckCMC.min && cardCMC <= deckCMC.max) {
-                            int currentAmount = deckCMC.getAmount();
-                            if (currentAmount > 0) {
-                                deckCMC.setAmount(currentAmount - 1);
-                                genPool.addCard(card.copy());
-                                count++;
-                            }
-                        } else if (reservesAdded < (genPool.getDeckSize() / 2)) {
-                            added = genPool.tryAddReserve(card, cardCMC);
-                            if (added) {
-                                reservesAdded++;
-                            }
-                        }
-                    }
-                }
-                tries++;
-                if (tries > MAX_TRIES) {
-                    // Break here, we'll fill in random missing ones later
-                    break;
-                }
-            }
-        } else {
-            throw new IllegalStateException("Not enough cards to generate deck.");
-        }
-
-    }
-
-    /**
-     * Generates all the lands for the deck. Generates non-basic if selected by
-     * the user and if the deck isn't monocolored. Will fetch non-basic lands if
-     * required and then fill up the remaining space with basic lands. Basic
-     * lands are adjusted according to the mana symbols seen in the cards used
-     * in this deck. Usually the lands will be well balanced relative to the
-     * color of cards.
-     *
-     * @param criteria   the criteria of the lands to search for in the database.
-     * @param landsCount the amount of lands required for this deck.
-     * @param basicLands information about the basic lands from the sets used.
-     */
-    private static void generateLands(CardCriteria criteria, int landsCount, Map<String, List<CardInfo>> basicLands) {
-
-        int tries = 0;
-        int countNonBasic = 0;
-        // Store the nonbasic lands (if any) we'll add
-        List<Card> deckLands = new ArrayList<>();
-
-        // Calculates the percentage of colored mana symbols over all spells in the deck
-        Map<String, Double> percentage = genPool.calculateSpellColorPercentages();
-
-        // Only dual/tri color lands are generated for now, and not non-basic lands that only produce colorless mana.
-        if (!genPool.isMonoColoredDeck() && genDialog.useNonBasicLand()) {
-            List<Card> landCards = genPool.filterLands(CardRepository.instance.findCards(criteria));
-            int allCount = landCards.size();
-            if (allCount > 0) {
-                while (countNonBasic < landsCount / 2) {
-                    Card card = landCards.get(RandomUtil.nextInt(allCount));
-                    if (genPool.isValidLandCard(card)) {
-                        Card addedCard = card.copy();
-                        deckLands.add(addedCard);
-                        genPool.addCard(addedCard);
-                        countNonBasic++;
-                    }
-                    tries++;
-                    // to avoid infinite loop
-                    if (tries > MAX_TRIES) {
-                        // Not a problem, just use what we have
-                        break;
-                    }
-                }
-            }
-        }
-        // Calculate the amount of colored mana already can be produced by the non-basic lands
-        Map<String, Integer> count = genPool.countManaProduced(deckLands);
-        // Fill up the rest of the land quota with basic lands adjusted to fit the deck's mana costs
-        addBasicLands(landsCount - countNonBasic, percentage, count, basicLands);
-    }
-
-    /**
-     * Returns a map of colored mana symbol to basic land cards of that color.
-     *
-     * @param setsToUse which sets to retrieve basic lands from.
-     * @return a map of color to basic lands.
-     */
-    private static Map<String, List<CardInfo>> generateBasicLands(List<String> setsToUse) {
-
-        Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(setsToUse);
-
-        CardCriteria criteria = new CardCriteria();
-        if (!landSets.isEmpty()) {
-            criteria.setCodes(landSets.toArray(new String[landSets.size()]));
-        }
-        criteria.ignoreSetsWithSnowLands();
-
-        Map<String, List<CardInfo>> basicLandMap = new HashMap<>();
-
-        for (ColoredManaSymbol c : ColoredManaSymbol.values()) {
-            String landName = DeckGeneratorPool.getBasicLandName(c.toString());
-            criteria.rarities(Rarity.LAND).name(landName);
-            List<CardInfo> cards = CardRepository.instance.findCards(criteria);
-            if (cards.isEmpty()) { // Workaround to get basic lands if lands are not available for the given sets
-                criteria.setCodes("M15");
-                cards = CardRepository.instance.findCards(criteria);
-            }
-            basicLandMap.put(landName, cards);
-        }
-        return basicLandMap;
     }
 
     /**
@@ -312,7 +177,7 @@ public final class DeckGenerator {
      * @param basicLands  list of information about basic lands from the
      *                    database.
      */
-    private static void addBasicLands(int landsNeeded, Map<String, Double> percentage, Map<String, Integer> count, Map<String, List<CardInfo>> basicLands) {
+    static void addBasicLands(int landsNeeded, Map<String, Double> percentage, Map<String, Integer> count, Map<String, List<CardInfo>> basicLands) {
 
         int colorTotal = 0;
         ColoredManaSymbol colorToAdd = ColoredManaSymbol.U;

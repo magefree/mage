@@ -43,6 +43,7 @@ import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.util.DebugUtil;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
@@ -417,6 +418,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupContainer.setLayout(null);
         popupContainer.add(cardInfoPane);
         popupContainer.setVisible(false);
+        if (DebugUtil.GUI_POPUP_CONTAINER_DRAW_DEBUG_BORDER) {
+            popupContainer.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
         desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
         UI.addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
 
@@ -814,9 +818,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             currentConnection.setPassword(password);
             currentConnection.setHost(server);
             currentConnection.setPort(port);
-            // force to redownload db on updates
-            boolean redownloadDatabase = (ExpansionRepository.instance.getSetByCode("GRN") == null || CardRepository.instance.findCard("Island") == null);
-            currentConnection.setForceDBComparison(redownloadDatabase);
             String allMAC = "";
             try {
                 allMAC = Connection.getMAC();
@@ -1022,8 +1023,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnDebug.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDebug.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDebugMouseClicked(evt);
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
+                btnDebugMouseClicked(e);
             }
         });
         mageToolbar.add(btnDebug);

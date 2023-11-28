@@ -109,6 +109,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, String> info = new LinkedHashMap<>(); // additional info for permanent's rules
     protected int createOrder;
     protected boolean legendRuleApplies = true;
+    protected boolean prototyped;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<>());
 
@@ -143,13 +144,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
         this.markedLifelink = permanent.markedLifelink;
-
-        for (Map.Entry<String, List<UUID>> entry : permanent.connectedCards.entrySet()) {
-            this.connectedCards.put(entry.getKey(), new ArrayList<>(entry.getValue()));
-        }
-        if (permanent.dealtDamageByThisTurn != null) {
-            dealtDamageByThisTurn = new HashSet<>(permanent.dealtDamageByThisTurn);
-        }
+        this.connectedCards = CardUtil.deepCopyObject(permanent.connectedCards);
+        this.dealtDamageByThisTurn = CardUtil.deepCopyObject(permanent.dealtDamageByThisTurn);
         if (permanent.markedDamage != null) {
             markedDamage = new ArrayList<>();
             for (MarkedDamageInfo mdi : permanent.markedDamage) {
@@ -179,6 +175,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
+        this.prototyped = permanent.prototyped;
     }
 
     @Override
@@ -386,8 +383,29 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return super.getAbilities(game);
     }
 
+    /**
+     * Add an ability to the permanent. When copying from an existing source
+     * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
+     * @param ability The ability to be added
+     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     * @param game
+     * @return The newly added ability copy
+     */
     @Override
     public Ability addAbility(Ability ability, UUID sourceId, Game game) {
+        return addAbility(ability, sourceId, game, false);
+    }
+
+    /**
+     * @param ability The ability to be added
+     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     * @param game
+     * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
+     *                         Otherwise sub-abilities will be added twice to the resulting object
+     * @return The newly added ability copy
+     */
+    @Override
+    public Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
@@ -402,7 +420,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.getState().addAbility(copyAbility, sourceId, this);
             }
             abilities.add(copyAbility);
-            abilities.addAll(ability.getSubAbilities());
+            if (!fromExistingObject) {
+                abilities.addAll(copyAbility.getSubAbilities());
+            }
             return copyAbility;
         }
         return null;
@@ -543,7 +563,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         //20091005 - 701.15b
         if (tapped && !replaceEvent(EventType.UNTAP, game)) {
             this.tapped = false;
-            fireEvent(EventType.UNTAPPED, game);
+            UntappedEvent event = new UntappedEvent(
+                    objectId, this.controllerId,
+                    // Since triggers are not checked until the next step,
+                    // we use the event flag to know if untapping was done during the untap step
+                    game.getTurnStepType() == PhaseStep.UNTAP
+            );
+            game.fireEvent(event);
+            game.getState().addSimultaneousUntapped(event, game);
             return true;
         }
         return false;
@@ -559,7 +586,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         //20091005 - 701.15a
         if (!tapped && !replaceEvent(EventType.TAP, game)) {
             this.tapped = true;
-            game.fireEvent(new GameEvent(GameEvent.EventType.TAPPED, objectId, source, source == null ? null : source.getControllerId(), 0, forCombat));
+            TappedEvent event = new TappedEvent(objectId, source, source == null ? null : source.getControllerId(), forCombat);
+            game.fireEvent(event);
+            game.getState().addSimultaneousTapped(event, game);
             return true;
         }
         return false;
@@ -1617,6 +1646,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean isPrototyped() {
+        return this.prototyped;
+    }
+
+    @Override
     public void setMonstrous(boolean value) {
         this.monstrous = value;
     }
@@ -1829,6 +1863,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.secondSideCard = card;
     }
 
+    public void setPrototyped(boolean prototyped) {
+        this.prototyped = prototyped;
+    }
+
     @Override
     public boolean isRingBearer() {
         return ringBearerFlag;
@@ -1911,7 +1949,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
             boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
             //20180810 - 701.3d
-            detachAllAttachments(game);
+            if (successfullyMoved) {
+                detachAllAttachments(game);
+            }
             return successfullyMoved;
         }
         return false;
@@ -1925,7 +1965,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
         //20180810 - 701.3d
-        detachAllAttachments(game);
+        if (successfullyMoved) {
+            detachAllAttachments(game);
+        }
         return successfullyMoved;
     }
 }

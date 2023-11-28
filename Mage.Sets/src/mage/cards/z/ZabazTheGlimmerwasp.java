@@ -106,11 +106,6 @@ class ZabazTheGlimmerwaspEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ZabazTheGlimmerwaspEffect copy() {
         return new ZabazTheGlimmerwaspEffect(this);
     }

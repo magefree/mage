@@ -63,7 +63,7 @@ public class DraftController {
                 (Listener<PlayerQueryEvent>) event -> {
                     try {
                         switch (event.getQueryType()) {
-                            case PICK_CARD:
+                            case DRAFT_PICK_CARD:
                                 pickCard(event.getPlayerId(), event.getMax());
                                 break;
                         }

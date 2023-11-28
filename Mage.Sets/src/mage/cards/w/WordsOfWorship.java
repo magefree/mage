@@ -55,12 +55,7 @@ class WordsOfWorshipEffect extends ReplacementEffectImpl {
     public WordsOfWorshipEffect copy() {
         return new WordsOfWorshipEffect(this);
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
+        
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());

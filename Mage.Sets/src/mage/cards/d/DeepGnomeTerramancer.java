@@ -35,7 +35,7 @@ public final class DeepGnomeTerramancer extends CardImpl {
         // Whenever one or more lands enter the battlefield under an opponent's control
         // without being played, you may search your library for a Plains card, put it
         // onto the battlefield tapped, then shuffle. Do this only once each turn.
-        this.addAbility(new DeepGnomeTerramancerTriggeredAbility().setDoOnlyOnceEachTurn(true), new PlayLandWatcher());
+        this.addAbility(new DeepGnomeTerramancerTriggeredAbility().setDoOnlyOnceEachTurn(true).withFlavorWord("Mold Earth"), new PlayLandWatcher());
     }
 
     private DeepGnomeTerramancer(final DeepGnomeTerramancer card) {

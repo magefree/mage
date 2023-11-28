@@ -56,11 +56,6 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         /*
         If damage is dealt to multiple permanents you control, or is dealt to you and at least

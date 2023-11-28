@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -30,12 +31,9 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.common.ConvokeWatcher;
+import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 502.46. Convoke
@@ -71,6 +69,7 @@ import java.util.UUID;
  */
 public class ConvokeAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
+    public static String convokingCreaturesKey = "convokingCreatures";
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent();
 
     static {
@@ -80,7 +79,6 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
     public ConvokeAbility() {
         super(Zone.ALL, null); // all AlternateManaPaymentAbility must use ALL zone to calculate playable abilities
         this.setRuleAtTheTop(true);
-        this.addWatcher(new ConvokeWatcher());
         this.addHint(new ValueHint("Untapped creatures you control", new PermanentsOnBattlefieldCount(filterUntapped)));
     }
 
@@ -265,7 +263,9 @@ class ConvokeEffect extends OneShotEffect {
                         manaPool.unlockManaType(ManaType.COLORLESS);
                         manaName = "colorless";
                     }
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CONVOKED, perm.getId(), source, source.getControllerId()));
+                    HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, spell.getSpellAbility(), ConvokeAbility.convokingCreaturesKey, new HashSet<>());
+                    set.add(new MageObjectReference(perm, game));
+                    spell.getSpellAbility().setCostsTag(ConvokeAbility.convokingCreaturesKey, set);
                     game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
 
                     // can't use mana abilities after that (convoke cost must be payed after mana abilities only)

@@ -64,11 +64,6 @@ class DampingSphereReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ManaEvent manaEvent = (ManaEvent) event;
         Mana mana = manaEvent.getMana();

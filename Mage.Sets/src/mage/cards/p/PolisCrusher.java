@@ -108,6 +108,6 @@ class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player,"
-                + " if {this} is monstrous, destroy target enchantment that player controls";
+                + " if {this} is monstrous, destroy target enchantment that player controls.";
     }
 }

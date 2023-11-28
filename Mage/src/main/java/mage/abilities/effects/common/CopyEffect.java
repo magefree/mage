@@ -119,11 +119,11 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.removeAllAbilities(source.getSourceId(), game);
         if (copyFromObject instanceof Permanent) {
             for (Ability ability : ((Permanent) copyFromObject).getAbilities(game)) {
-                permanent.addAbility(ability, getSourceId(), game);
+                permanent.addAbility(ability, getSourceId(), game, true);
             }
         } else {
             for (Ability ability : copyFromObject.getAbilities()) {
-                permanent.addAbility(ability, getSourceId(), game);
+                permanent.addAbility(ability, getSourceId(), game, true);
             }
         }
 
@@ -146,6 +146,7 @@ public class CopyEffect extends ContinuousEffectImpl {
             //permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
             permanent.setFlipCard(targetPermanent.isFlipCard());
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
+            permanent.setPrototyped(targetPermanent.isPrototyped());
         }
 
         CardUtil.copySetAndCardNumber(permanent, copyFromObject);

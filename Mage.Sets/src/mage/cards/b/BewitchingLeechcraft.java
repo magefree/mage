@@ -94,11 +94,6 @@ class BewitchingLeechcraftReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return game.getTurnStepType() == PhaseStep.UNTAP
             && event.getTargetId().equals(source.getSourceId());

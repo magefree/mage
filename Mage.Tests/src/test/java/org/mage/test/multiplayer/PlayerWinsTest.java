@@ -1,6 +1,5 @@
 package org.mage.test.multiplayer;
 
-import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -13,6 +12,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
+import java.io.FileNotFoundException;
+
 
 /**
  * @author LevelX2
@@ -21,7 +22,7 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 40);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 40, 7);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");
         playerB = createPlayer(game, "PlayerB");
@@ -33,9 +34,9 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
     /**
      * Tests multiplayer effects Player order: A -> D -> C -> B
      */
-    
+
     /**
-     * Test that players out of range do not lose the game if effect from Approach of the Seconnd Sun takes effect.     
+     * Test that players out of range do not lose the game if effect from Approach of the Seconnd Sun takes effect.
      */
     @Test
     public void ApproachOfTheSecondSunTest() {
@@ -59,20 +60,20 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
         Assert.assertTrue("Player A is in the game", playerA.isInGame());
 
     }
-    
+
     /**
-     * Test that players out of range do not lose the game if effect from Laboratory Maniac takes effect.     
+     * Test that players out of range do not lose the game if effect from Laboratory Maniac takes effect.
      */
     @Test
-    public void LaboratoryManiacWinsTest() {       
+    public void LaboratoryManiacWinsTest() {
         // If you would draw a card while your library has no cards in it, you win the game instead.        
         addCard(Zone.HAND, playerA, "Laboratory Maniac", 1); // Creature {2}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Laboratory Maniac");        
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Laboratory Maniac");
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Mountain");
-        
+
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -84,25 +85,25 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
         Assert.assertTrue("Player C should be in the game but has lost", playerC.isInGame());
         Assert.assertTrue("Player A should be in the game but has lost", playerA.isInGame());
     }
-    
+
     /**
-     * Test that player can't win while Platinium Angel ist in range.     
+     * Test that player can't win while Platinium Angel ist in range.
      */
     @Test
-    public void LaboratoryManiacAndPlatinumAngelInRangeTest() {       
+    public void LaboratoryManiacAndPlatinumAngelInRangeTest() {
         // If you would draw a card while your library has no cards in it, you win the game instead.        
         addCard(Zone.HAND, playerA, "Laboratory Maniac", 1); // Creature {2}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         removeAllCardsFromLibrary(playerA);
-        
+
         // You can't lose the game and your opponents can't win the game.
         addCard(Zone.HAND, playerD, "Platinum Angel", 1); // Creature {2}{U}
         addCard(Zone.BATTLEFIELD, playerD, "Island", 7);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Laboratory Maniac");        
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Laboratory Maniac");
         addCard(Zone.LIBRARY, playerA, "Mountain");
-        
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Platinum Angel");        
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Platinum Angel");
 
         setStopAt(9, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -110,33 +111,33 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerA, "Laboratory Maniac", 1);
         assertHandCount(playerA, "Mountain", 1);
         assertLibraryCount(playerA, 0);
-        
+
         assertPermanentCount(playerD, "Platinum Angel", 1);
-        
+
         Assert.assertTrue("Player D should be in the game but has lost", playerD.isInGame());
         Assert.assertTrue("Player B should be in the game but has lost", playerB.isInGame());
         Assert.assertTrue("Player C should be in the game but has lost", playerC.isInGame());
         Assert.assertTrue("Player A should be in the game but has lost", playerA.isInGame());
     }
-    
-        /**
-     * Test that player can't win while Platinium Angel ist in range.     
+
+    /**
+     * Test that player can't win while Platinium Angel ist in range.
      */
     @Test
-    public void LaboratoryManiacAndPlatinumAngelFirstOutOfRangeTest() {       
+    public void LaboratoryManiacAndPlatinumAngelFirstOutOfRangeTest() {
         // If you would draw a card while your library has no cards in it, you win the game instead.        
         addCard(Zone.HAND, playerA, "Laboratory Maniac", 1); // Creature {2}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         removeAllCardsFromLibrary(playerA);
-        
+
         // You can't lose the game and your opponents can't win the game.
         addCard(Zone.HAND, playerC, "Platinum Angel", 1); // Creature {2}{U}
         addCard(Zone.BATTLEFIELD, playerC, "Island", 7);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Laboratory Maniac");        
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Laboratory Maniac");
         addCard(Zone.LIBRARY, playerA, "Mountain");
-        
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerC, "Platinum Angel");        
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerC, "Platinum Angel");
 
         setStopAt(9, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -144,9 +145,9 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerA, "Laboratory Maniac", 1);
         assertHandCount(playerA, "Mountain", 1);
         assertLibraryCount(playerA, 0);
-        
+
         assertPermanentCount(playerC, "Platinum Angel", 1);
- 
+
         Assert.assertTrue("Player D still alive but should have lost the gamet", !playerD.isInGame());
         Assert.assertTrue("Player B still alive but should have lost the game", !playerB.isInGame());
         Assert.assertTrue("Player C should be in the game but has lost", playerC.isInGame());

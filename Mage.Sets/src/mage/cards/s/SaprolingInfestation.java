@@ -60,7 +60,7 @@ public final class SaprolingInfestation extends CardImpl {
 
         @Override
         public String getRule() {
-            return "Whenever a player kicks a spell, you creat a 1/1 green Saproling creature token.";
+            return "Whenever a player kicks a spell, you create a 1/1 green Saproling creature token.";
         }
     }
 }

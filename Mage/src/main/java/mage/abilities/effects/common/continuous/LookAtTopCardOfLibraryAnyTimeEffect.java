@@ -47,7 +47,7 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
         String durationString = duration.toString();
         if (durationString != null && !durationString.isEmpty()) {
             sb.append(durationString);
-            sb.append(' ');
+            sb.append(", ");
         }
         sb.append("you may look at the top card of ");
         sb.append(libInfo);

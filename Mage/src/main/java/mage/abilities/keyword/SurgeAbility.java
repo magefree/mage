@@ -10,8 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -21,7 +19,7 @@ public class SurgeAbility extends SpellAbility {
 
     public static final String SURGE_ACTIVATION_VALUE_KEY = "surgeActivation";
 
-    private String rule;
+    private final String rule;
 
     public SurgeAbility(Card card, String surgeCosts) {
         super(card.getSpellAbility());
@@ -32,7 +30,7 @@ public class SurgeAbility extends SpellAbility {
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(new ManaCostsImpl<>(surgeCosts));
+        this.addCost(new ManaCostsImpl<>(surgeCosts));
 
         this.setRuleAtTheTop(true);
         this.rule = "Surge " + surgeCosts
@@ -65,15 +63,9 @@ public class SurgeAbility extends SpellAbility {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            List<Integer> surgeActivations = (ArrayList) game.getState().getValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId());
-            if (surgeActivations == null) {
-                surgeActivations = new ArrayList<>(); // zoneChangeCounter
-                game.getState().setValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId(), surgeActivations);
-            }
-            surgeActivations.add(game.getState().getZoneChangeCounter(getSourceId()));
+            this.setCostsTag(SURGE_ACTIVATION_VALUE_KEY, null);
             return true;
         }
         return false;

@@ -86,15 +86,16 @@ class GoldberryRiverDaughterFromEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent fromPermanent = game.getPermanent(source.getFirstTarget());
         Permanent toPermanent = game.getPermanent(source.getSourceId());
+        if (controller == null
+                || fromPermanent == null
+                || toPermanent == null) {
+            return false;
+        }
 
         // Create a set of all of the unique counter types on the target permanent that aren't on Goldberry
         Set<Counter> fromCounters = new HashSet<Counter>(fromPermanent.getCounters(game).values());
         fromCounters.removeAll(toPermanent.getCounters(game).values());
-
-        if (fromPermanent == null
-                || toPermanent == null
-                || controller == null
-                || fromCounters.size() == 0) {
+        if (fromCounters.size() == 0) {
             return false;
         }
 

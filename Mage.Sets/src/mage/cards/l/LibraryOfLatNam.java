@@ -22,7 +22,7 @@ public final class LibraryOfLatNam extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");
 
         // An opponent chooses one
-        this.getSpellAbility().getModes().setModeChooser(TargetController.OPPONENT);
+        this.getSpellAbility().getModes().setChooseController(TargetController.OPPONENT);
 
         // You draw three cards at the beginning of the next turn's upkeep;
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(3).setText("you draw three cards")), false));

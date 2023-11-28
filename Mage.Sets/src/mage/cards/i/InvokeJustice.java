@@ -7,25 +7,22 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetPermanentAmount;
 import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.TargetAmount;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  * @author TheElk801
@@ -79,22 +76,22 @@ class InvokeJusticeEffect extends OneShotEffect {
         if (controller == null || player == null) {
             return false;
         }
-        FilterCreaturePermanent filter = new FilterCreaturePermanent(
-                "creatures and/or Vehicles controlled by " + player.getName()
-        );
+        FilterPermanent filter = new FilterPermanent("creatures and/or Vehicles " + player.getName() + " controls");
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                SubType.VEHICLE.getPredicate()
+        ));
         filter.add(new ControllerIdPredicate(player.getId()));
         if (!game.getBattlefield().contains(filter, source, game, 1)) {
             return false;
         }
-        // todo: the pop-up window for assigning the amount of counters uses the damage GUI.  it should have its own GUI for assigning counters
-        TargetAmount target = new TargetCreaturePermanentAmount(4, filter);
+        TargetPermanentAmount target = new TargetPermanentAmount(4, filter);
         target.withNotTarget(true);
-        // note, when using TargetAmount, the target must be used to embed the chosen creatures in this case
         target.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(target.getTargetAmount(targetId)), source.getControllerId(), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(target.getTargetAmount(targetId)), source, game);
             }
         }
         return true;

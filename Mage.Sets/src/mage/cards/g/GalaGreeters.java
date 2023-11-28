@@ -34,8 +34,7 @@ public final class GalaGreeters extends CardImpl {
         // • Put a +1/+1 counter on Gala Greeters.
         Ability ability = new AllianceAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         ability.setModeTag("put +1/+1 counter");
-        ability.getModes().setEachModeOnlyOnce(true);
-        ability.getModes().setResetEachTurn(true);
+        ability.getModes().setLimitUsageByOnce(true);
 
         // • Create a tapped Treasure token.
         ability.addMode(

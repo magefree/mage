@@ -124,11 +124,6 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SwansOfBrynArgollEffect copy() {
         return new SwansOfBrynArgollEffect(this);
     }

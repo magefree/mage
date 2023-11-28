@@ -121,6 +121,7 @@ public class BattleDuelTest extends BattleBaseTest {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impact, belenon);
+        setChoice(playerA, true); // yes to cast it transformed
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -165,6 +166,7 @@ public class BattleDuelTest extends BattleBaseTest {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invasion of Dominaria");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impact, "Invasion of Dominaria");
+        setChoice(playerA, true); // yes to cast it transformed
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

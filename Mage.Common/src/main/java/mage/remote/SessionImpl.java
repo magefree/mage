@@ -37,6 +37,8 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Network: client side session
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class SessionImpl implements Session {
@@ -176,7 +178,7 @@ public class SessionImpl implements Session {
             showMessageToUser(addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (MageVersionException ex) {
             logger.warn("Connect: wrong versions");
-            disconnect(false);
+            connectStop(false);
             if (!canceled) {
                 showMessageToUser(ex.getMessage());
             }
@@ -186,26 +188,26 @@ public class SessionImpl implements Session {
             }
         } catch (Throwable t) {
             logger.fatal("Connect: FAIL", t);
-            disconnect(false);
+            connectStop(false);
             if (!canceled) {
                 showMessageToUser(t.getMessage());
             }
         } finally {
             lastRemotingTask = null;
             if (closeConnectionOnFinish) {
-                disconnect(false); // it's ok on mutiple calls
+                connectStop(false); // it's ok on mutiple calls
             }
         }
         return false;
     }
 
     @Override
-    public synchronized boolean register(final Connection connection) {
+    public synchronized boolean sendAuthRegister(final Connection connection) {
         return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(true, true, new RemotingTask() {
             @Override
             public boolean work() throws Throwable {
                 logger.info("Registration: username " + getUserName() + " for email " + getEmail());
-                boolean result = server.registerUser(sessionId, connection.getUsername(), connection.getPassword(), connection.getEmail());
+                boolean result = server.authRegister(sessionId, connection.getUsername(), connection.getPassword(), connection.getEmail());
                 logger.info("Registration: " + (result ? "DONE, check your email for new password" : "FAIL"));
                 return result;
             }
@@ -213,12 +215,12 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public synchronized boolean emailAuthToken(final Connection connection) {
+    public synchronized boolean sendAuthSendTokenToEmail(final Connection connection) {
         return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(true, true, new RemotingTask() {
             @Override
             public boolean work() throws Throwable {
                 logger.info("Auth request: requesting auth token for username " + getUserName() + " to email " + getEmail());
-                boolean result = server.emailAuthToken(sessionId, connection.getEmail());
+                boolean result = server.authSendTokenToEmail(sessionId, connection.getEmail());
                 logger.info("Auth request: " + (result ? "DONE, check your email for auth token" : "FAIL"));
                 return result;
             }
@@ -226,12 +228,12 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public synchronized boolean resetPassword(final Connection connection) {
+    public synchronized boolean sendAuthResetPassword(final Connection connection) {
         return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(true, true, new RemotingTask() {
             @Override
             public boolean work() throws Throwable {
                 logger.info("Password reset: reseting password for username " + getUserName());
-                boolean result = server.resetPassword(sessionId, connection.getEmail(), connection.getAuthToken(), connection.getPassword());
+                boolean result = server.authResetPassword(sessionId, connection.getEmail(), connection.getAuthToken(), connection.getPassword());
                 logger.info("Password reset: " + (result ? "DONE, now you can login with new password" : "FAIL"));
                 return result;
             }
@@ -239,7 +241,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public synchronized boolean connect(final Connection connection) {
+    public synchronized boolean connectStart(final Connection connection) {
         return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(false, true, new RemotingTask() {
             @Override
             public boolean work() throws Throwable {
@@ -256,6 +258,9 @@ public class SessionImpl implements Session {
 
                 if (result) {
                     serverState = server.getServerState();
+                    if (serverState == null) {
+                        throw new MageVersionException(client.getVersion(), null);
+                    }
 
                     // client side check for incompatible versions
                     if (client.getVersion().compareTo(serverState.getVersion()) != 0) {
@@ -263,8 +268,7 @@ public class SessionImpl implements Session {
                     }
 
                     if (!connection.getUsername().equals("Admin")) {
-                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
-                        updateDatabase(connection.isForceDBComparison(), serverState);
+                        server.connectSetUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
                     }
 
                     logger.info("Logging: DONE");
@@ -284,7 +288,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean stopConnecting() {
+    public boolean connectAbort() {
         canceled = true;
         if (lastRemotingTask != null) {
             lastRemotingTask.cancel();
@@ -295,7 +299,7 @@ public class SessionImpl implements Session {
     private boolean doRemoteConnection(final Connection connection) {
         // connect to server and setup all data, can be canceled
         if (isConnected()) {
-            disconnect(true);
+            connectStop(true);
         }
         this.connection = connection;
         this.canceled = false;
@@ -459,31 +463,8 @@ public class SessionImpl implements Session {
         if (result) {
             return true;
         } else {
-            disconnect(false);
+            connectStop(false);
             return false;
-        }
-    }
-
-    private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
-        // download NEW cards/sets, but do not download data fixes (it's an old and rare feature from old clients, e.g. one client for different servers with different cards)
-        // use case: server gets new minor version with new cards, old client can get that cards too without donwload new version
-
-        // sets
-        long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
-        if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
-            List<String> setCodes = ExpansionRepository.instance.getSetCodes();
-            List<ExpansionInfo> expansions = server.getMissingExpansionData(setCodes);
-            logger.info("DB: updating sets... Found new: " + expansions.size());
-            ExpansionRepository.instance.saveSets(expansions, null, serverState.getExpansionsContentVersion());
-        }
-
-        // cards
-        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
-        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
-            List<String> classNames = CardRepository.instance.getClassNames();
-            List<CardInfo> cards = server.getMissingCardsData(classNames);
-            logger.info("DB: updating cards... Found new: " + cards.size());
-            CardRepository.instance.saveCards(cards, serverState.getCardsContentVersion());
         }
     }
 
@@ -522,7 +503,7 @@ public class SessionImpl implements Session {
      *                        ask the user if they want to try to reconnect
      */
     @Override
-    public synchronized void disconnect(boolean askForReconnect) {
+    public synchronized void connectStop(boolean askForReconnect) {
         if (isConnected()) {
             logger.info("Disconnecting...");
             sessionState = SessionState.DISCONNECTING;
@@ -554,7 +535,7 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public synchronized void reconnect(Throwable throwable) {
+    public synchronized void connectReconnect(Throwable throwable) {
         client.disconnected(true);
     }
 
@@ -562,7 +543,7 @@ public class SessionImpl implements Session {
     public synchronized boolean sendFeedback(String title, String type, String message, String email) {
         if (isConnected()) {
             try {
-                server.sendFeedbackMessage(sessionId, connection.getUsername(), title, type, message, email);
+                server.serverAddFeedbackMessage(sessionId, connection.getUsername(), title, type, message, email);
                 return true;
             } catch (MageException e) {
                 logger.error(e);
@@ -590,7 +571,7 @@ public class SessionImpl implements Session {
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
             logger.info("Connect: lost connection to server.", throwable);
-            reconnect(throwable);
+            connectReconnect(throwable);
         }
     }
 
@@ -652,7 +633,7 @@ public class SessionImpl implements Session {
     public UUID getMainRoomId() {
         try {
             if (isConnected()) {
-                return server.getMainRoomId();
+                return server.serverGetMainRoomId();
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -664,7 +645,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getRoomChatId(UUID roomId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.getRoomChatId(roomId));
+                return Optional.of(server.chatFindByRoom(roomId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -676,7 +657,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getTableChatId(UUID tableId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.getTableChatId(tableId));
+                return Optional.of(server.chatFindByTable(tableId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -688,7 +669,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getGameChatId(UUID gameId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.getGameChatId(gameId));
+                return Optional.of(server.chatFindByGame(gameId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -702,7 +683,7 @@ public class SessionImpl implements Session {
     public Optional<TableView> getTable(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.getTable(roomId, tableId));
+                return Optional.of(server.roomGetTableById(roomId, tableId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -714,7 +695,7 @@ public class SessionImpl implements Session {
     public boolean watchTable(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
-                server.watchTable(sessionId, roomId, tableId);
+                server.roomWatchTable(sessionId, roomId, tableId);
                 return true;
             }
         } catch (MageException ex) {
@@ -729,7 +710,7 @@ public class SessionImpl implements Session {
     public boolean watchTournamentTable(UUID tableId) {
         try {
             if (isConnected()) {
-                server.watchTournamentTable(sessionId, tableId);
+                server.roomWatchTournament(sessionId, tableId);
                 return true;
             }
         } catch (MageException ex) {
@@ -749,7 +730,7 @@ public class SessionImpl implements Session {
                     deckList.setCardLayout(null);
                     deckList.setSideboardLayout(null);
                 }
-                return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
+                return server.roomJoinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (GameException ex) {
             handleGameException(ex);
@@ -770,7 +751,7 @@ public class SessionImpl implements Session {
                     deckList.setCardLayout(null);
                     deckList.setSideboardLayout(null);
                 }
-                return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
+                return server.roomJoinTournament(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (GameException ex) {
             handleGameException(ex);
@@ -786,7 +767,7 @@ public class SessionImpl implements Session {
     public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
         try {
             if (isConnected()) {
-                return server.getTables(roomId);
+                return server.roomGetAllTables(roomId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -801,7 +782,7 @@ public class SessionImpl implements Session {
     public Collection<MatchView> getFinishedMatches(UUID roomId) throws MageRemoteException {
         try {
             if (isConnected()) {
-                return server.getFinishedMatches(roomId);
+                return server.roomGetFinishedMatches(roomId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -816,7 +797,7 @@ public class SessionImpl implements Session {
     public Collection<RoomUsersView> getRoomUsers(UUID roomId) throws MageRemoteException {
         try {
             if (isConnected()) {
-                return server.getRoomUsers(roomId);
+                return server.roomGetUsers(roomId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -831,7 +812,7 @@ public class SessionImpl implements Session {
     public TournamentView getTournament(UUID tournamentId) throws MageRemoteException {
         try {
             if (isConnected()) {
-                return server.getTournament(tournamentId);
+                return server.tournamentFindById(tournamentId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -846,7 +827,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getTournamentChatId(UUID tournamentId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.getTournamentChatId(tournamentId));
+                return Optional.of(server.chatFindByTournament(tournamentId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -972,7 +953,7 @@ public class SessionImpl implements Session {
     public DraftPickView sendCardPick(UUID draftId, UUID cardId, Set<UUID> hiddenCards) {
         try {
             if (isConnected()) {
-                return server.sendCardPick(draftId, sessionId, cardId, hiddenCards);
+                return server.sendDraftCardPick(draftId, sessionId, cardId, hiddenCards);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -986,7 +967,7 @@ public class SessionImpl implements Session {
     public DraftPickView sendCardMark(UUID draftId, UUID cardId) {
         try {
             if (isConnected()) {
-                server.sendCardMark(draftId, sessionId, cardId);
+                server.sendDraftCardMark(draftId, sessionId, cardId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1000,7 +981,7 @@ public class SessionImpl implements Session {
     public boolean setBoosterLoaded(UUID draftId) {
         try {
             if (isConnected()) {
-                server.setBoosterLoaded(draftId, sessionId);
+                server.draftSetBoosterLoaded(draftId, sessionId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1014,7 +995,7 @@ public class SessionImpl implements Session {
     public boolean joinChat(UUID chatId) {
         try {
             if (isConnected()) {
-                server.joinChat(chatId, sessionId, connection.getUsername());
+                server.chatJoin(chatId, sessionId, connection.getUsername());
                 return true;
             }
         } catch (MageException ex) {
@@ -1030,7 +1011,7 @@ public class SessionImpl implements Session {
 //        lock.readLock().lock();
         try {
             if (isConnected() && chatId != null) {
-                server.leaveChat(chatId, sessionId);
+                server.chatLeave(chatId, sessionId);
             }
             return true;
         } catch (MageException ex) {
@@ -1048,7 +1029,7 @@ public class SessionImpl implements Session {
 //        lock.readLock().lock();
         try {
             if (isConnected()) {
-                server.sendChatMessage(chatId, connection.getUsername(), message);
+                server.chatSendMessage(chatId, connection.getUsername(), message);
                 return true;
             }
         } catch (MageException ex) {
@@ -1065,7 +1046,7 @@ public class SessionImpl implements Session {
     public boolean sendBroadcastMessage(String message) {
         try {
             if (isConnected()) {
-                server.sendBroadcastMessage(sessionId, message);
+                server.adminSendBroadcastMessage(sessionId, message);
                 return true;
             }
         } catch (MageException ex) {
@@ -1080,7 +1061,7 @@ public class SessionImpl implements Session {
     public boolean joinGame(UUID gameId) {
         try {
             if (isConnected()) {
-                server.joinGame(gameId, sessionId);
+                server.gameJoin(gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1095,7 +1076,7 @@ public class SessionImpl implements Session {
     public boolean joinDraft(UUID draftId) {
         try {
             if (isConnected()) {
-                server.joinDraft(draftId, sessionId);
+                server.draftJoin(draftId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1110,7 +1091,7 @@ public class SessionImpl implements Session {
     public boolean joinTournament(UUID tournamentId) {
         try {
             if (isConnected()) {
-                server.joinTournament(tournamentId, sessionId);
+                server.tournamentJoin(tournamentId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1125,7 +1106,7 @@ public class SessionImpl implements Session {
     public boolean watchGame(UUID gameId) {
         try {
             if (isConnected()) {
-                return server.watchGame(gameId, sessionId);
+                return server.gameWatchStart(gameId, sessionId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1139,7 +1120,7 @@ public class SessionImpl implements Session {
     public boolean replayGame(UUID gameId) {
         try {
             if (isConnected()) {
-                server.replayGame(gameId, sessionId);
+                server.replayInit(gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1154,7 +1135,7 @@ public class SessionImpl implements Session {
     public TableView createTable(UUID roomId, MatchOptions matchOptions) {
         try {
             if (isConnected()) {
-                return server.createTable(sessionId, roomId, matchOptions);
+                return server.roomCreateTable(sessionId, roomId, matchOptions);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1168,7 +1149,7 @@ public class SessionImpl implements Session {
     public TableView createTournamentTable(UUID roomId, TournamentOptions tournamentOptions) {
         try {
             if (isConnected()) {
-                return server.createTournamentTable(sessionId, roomId, tournamentOptions);
+                return server.roomCreateTournament(sessionId, roomId, tournamentOptions);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1182,7 +1163,7 @@ public class SessionImpl implements Session {
     public boolean isTableOwner(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
-                return server.isTableOwner(sessionId, roomId, tableId);
+                return server.tableIsOwner(sessionId, roomId, tableId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1196,7 +1177,7 @@ public class SessionImpl implements Session {
     public boolean removeTable(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
-                server.removeTable(sessionId, roomId, tableId);
+                server.tableRemove(sessionId, roomId, tableId);
 
                 return true;
             }
@@ -1218,7 +1199,7 @@ public class SessionImpl implements Session {
     public boolean removeTable(UUID tableId) {
         try {
             if (isConnected()) {
-                server.removeTable(sessionId, tableId);
+                server.adminTableRemove(sessionId, tableId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1233,7 +1214,7 @@ public class SessionImpl implements Session {
     public boolean swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) {
         try {
             if (isConnected()) {
-                server.swapSeats(sessionId, roomId, tableId, seatNum1, seatNum2);
+                server.tableSwapSeats(sessionId, roomId, tableId, seatNum1, seatNum2);
                 return true;
             }
         } catch (MageException ex) {
@@ -1247,7 +1228,7 @@ public class SessionImpl implements Session {
     @Override
     public boolean leaveTable(UUID roomId, UUID tableId) {
         try {
-            if (isConnected() && server.leaveTable(sessionId, roomId, tableId)) {
+            if (isConnected() && server.roomLeaveTableOrTournament(sessionId, roomId, tableId)) {
                 return true;
             }
         } catch (MageException ex) {
@@ -1262,7 +1243,7 @@ public class SessionImpl implements Session {
     public boolean startMatch(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
-                return (server.startMatch(sessionId, roomId, tableId));
+                return (server.matchStart(sessionId, roomId, tableId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1273,7 +1254,7 @@ public class SessionImpl implements Session {
     @Override
     public boolean startTournament(UUID roomId, UUID tableId) {
         try {
-            if (isConnected() && server.startTournament(sessionId, roomId, tableId)) {
+            if (isConnected() && server.tournamentStart(sessionId, roomId, tableId)) {
                 return true;
             }
         } catch (MageException ex) {
@@ -1307,7 +1288,7 @@ public class SessionImpl implements Session {
                     deck.setCardLayout(null);
                     deck.setSideboardLayout(null);
                 }
-                return server.submitDeck(sessionId, tableId, deck);
+                return server.deckSubmit(sessionId, tableId, deck);
             }
         } catch (GameException ex) {
             handleGameException(ex);
@@ -1327,7 +1308,7 @@ public class SessionImpl implements Session {
                     deck.setCardLayout(null);
                     deck.setSideboardLayout(null);
                 }
-                server.updateDeck(sessionId, tableId, deck);
+                server.deckSave(sessionId, tableId, deck);
                 return true;
             }
         } catch (GameException ex) {
@@ -1344,7 +1325,7 @@ public class SessionImpl implements Session {
     public boolean quitMatch(UUID gameId) {
         try {
             if (isConnected()) {
-                server.quitMatch(gameId, sessionId);
+                server.matchQuit(gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1359,7 +1340,7 @@ public class SessionImpl implements Session {
     public boolean quitTournament(UUID tournamentId) {
         try {
             if (isConnected()) {
-                server.quitTournament(tournamentId, sessionId);
+                server.tournamentQuit(tournamentId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1374,7 +1355,7 @@ public class SessionImpl implements Session {
     public boolean quitDraft(UUID draftId) {
         try {
             if (isConnected()) {
-                server.quitDraft(draftId, sessionId);
+                server.draftQuit(draftId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1407,7 +1388,7 @@ public class SessionImpl implements Session {
     public boolean stopWatching(UUID gameId) {
         try {
             if (isConnected()) {
-                server.stopWatching(gameId, sessionId);
+                server.gameWatchStop(gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1422,7 +1403,7 @@ public class SessionImpl implements Session {
     public boolean startReplay(UUID gameId) {
         try {
             if (isConnected()) {
-                server.startReplay(gameId, sessionId);
+                server.replayStart(gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1437,7 +1418,7 @@ public class SessionImpl implements Session {
     public boolean stopReplay(UUID gameId) {
         try {
             if (isConnected()) {
-                server.stopReplay(gameId, sessionId);
+                server.replayStop(gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1452,7 +1433,7 @@ public class SessionImpl implements Session {
     public boolean nextPlay(UUID gameId) {
         try {
             if (isConnected()) {
-                server.nextPlay(gameId, sessionId);
+                server.replayNext(gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1467,7 +1448,7 @@ public class SessionImpl implements Session {
     public boolean previousPlay(UUID gameId) {
         try {
             if (isConnected()) {
-                server.previousPlay(gameId, sessionId);
+                server.replayPrevious(gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1482,7 +1463,7 @@ public class SessionImpl implements Session {
     public boolean skipForward(UUID gameId, int moves) {
         try {
             if (isConnected()) {
-                server.skipForward(gameId, sessionId, moves);
+                server.replaySkipForward(gameId, sessionId, moves);
                 return true;
             }
         } catch (MageException ex) {
@@ -1494,10 +1475,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList) {
+    public boolean cheatShow(UUID gameId, UUID playerId) {
         try {
             if (isConnected()) {
-                server.cheat(gameId, sessionId, playerId, deckList);
+                server.cheatShow(gameId, sessionId, playerId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1512,7 +1493,7 @@ public class SessionImpl implements Session {
     public List<UserView> getUsers() {
         try {
             if (isConnected()) {
-                return server.getUsers(sessionId);
+                return server.adminGetUsers(sessionId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1526,7 +1507,7 @@ public class SessionImpl implements Session {
     public List<String> getServerMessages() {
         try {
             if (isConnected()) {
-                return (List<String>) CompressUtil.decompress(server.getServerMessagesCompressed(sessionId));
+                return (List<String>) CompressUtil.decompress(server.serverGetPromotionMessages(sessionId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1537,10 +1518,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean disconnectUser(String userSessionId) {
+    public boolean sendAdminDisconnectUser(String userSessionId) {
         try {
             if (isConnected()) {
-                server.disconnectUser(sessionId, userSessionId);
+                server.adminDisconnectUser(sessionId, userSessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1552,10 +1533,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean endUserSession(String userSessionId) {
+    public boolean sendAdminEndUserSession(String userSessionId) {
         try {
             if (isConnected()) {
-                server.endUserSession(sessionId, userSessionId);
+                server.adminEndUserSession(sessionId, userSessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1567,10 +1548,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean muteUserChat(String userName, long durationMinutes) {
+    public boolean sendAdminMuteUserChat(String userName, long durationMinutes) {
         try {
             if (isConnected()) {
-                server.muteUser(sessionId, userName, durationMinutes);
+                server.adminMuteUser(sessionId, userName, durationMinutes);
                 return true;
             }
         } catch (MageException ex) {
@@ -1582,10 +1563,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean setActivation(String userName, boolean active) {
+    public boolean sendAdminActivateUser(String userName, boolean active) {
         try {
             if (isConnected()) {
-                server.setActivation(sessionId, userName, active);
+                server.adminActivateUser(sessionId, userName, active);
                 return true;
             }
         } catch (MageException ex) {
@@ -1597,10 +1578,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean toggleActivation(String userName) {
+    public boolean sendAdminToggleActivateUser(String userName) {
         try {
             if (isConnected()) {
-                server.toggleActivation(sessionId, userName);
+                server.adminToggleActivateUser(sessionId, userName);
                 return true;
             }
         } catch (MageException ex) {
@@ -1612,10 +1593,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean lockUser(String userName, long durationMinute) {
+    public boolean sendAdminLockUser(String userName, long durationMinute) {
         try {
             if (isConnected()) {
-                server.lockUser(sessionId, userName, durationMinute);
+                server.adminLockUser(sessionId, userName, durationMinute);
                 return true;
             }
         } catch (MageException ex) {
@@ -1677,7 +1658,7 @@ public class SessionImpl implements Session {
     public boolean updatePreferencesForServer(UserData userData) {
         try {
             if (isConnected()) {
-                server.setUserData(connection.getUsername(), sessionId, userData, null, null);
+                server.connectSetUserData(connection.getUsername(), sessionId, userData, null, null);
             }
             return true;
         } catch (MageException ex) {
@@ -1716,7 +1697,7 @@ public class SessionImpl implements Session {
             return true;
         } catch (MageException ex) {
             handleMageException(ex);
-            disconnect(true);
+            connectStop(true);
         } catch (Throwable t) {
             handleThrowable(t);
         }
@@ -1750,7 +1731,6 @@ public class SessionImpl implements Session {
     public String getLastError() {
         return lastError;
     }
-
 }
 
 class MageAuthenticator extends Authenticator {

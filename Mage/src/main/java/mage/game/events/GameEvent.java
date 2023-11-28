@@ -75,7 +75,7 @@ public class GameEvent implements Serializable {
         ZONE_CHANGE_GROUP,
         DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
-        EXPLORED,
+        EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
         ECHO_PAID,
         MIRACLE_CARD_REVEALED,
         /* MADNESS_CARD_EXILED,
@@ -84,14 +84,8 @@ public class GameEvent implements Serializable {
          playerId    controller of the card
          */
         MADNESS_CARD_EXILED,
-        INVESTIGATED,
+        INVESTIGATED, // playerId is the player who investigated
         KICKED,
-        /* CONVOKED
-         targetId    id of the creature that was taped to convoke the sourceId
-         sourceId    sourceId of the convoked spell
-         playerId    controller of the convoked spell
-         */
-        CONVOKED,
         /* DISCARD_CARD
          flag        event is result of effect (1) or result of cost (0)
          */
@@ -307,13 +301,40 @@ public class GameEvent implements Serializable {
         DECLARING_BLOCKERS,
         DECLARED_BLOCKERS,
         DECLARE_BLOCKER,
+
         /* BLOCKER_DECLARED
+         raise one time for each declared blocker (e.g. multiple events per attacker allows)
+
+         warning, must use for rules: becomes blocked by a creature
+
+         rules ref:
+         Acolyte of the Inferno’s last ability will trigger once for each creature that blocks it.
+         Each of those creatures will be dealt 2 damage.
+         (2015-06-22)
+
          targetId    attacker id
          sourceId    blocker id
          playerId    blocker controller id
          */
         BLOCKER_DECLARED,
+
+        /* CREATURE_BLOCKED
+         raise one time per attacker (e.g. only one event per attacker allows)
+
+         warning, must use for rules: xxx becomes blocked,
+
+         rules ref:
+         Rakdos Roustabout
+         An ability that triggers when a creature becomes blocked triggers only once
+         if two or more creatures block it.
+         (2019-01-25)
+
+         targetId    attacker id
+         sourceId    not used for this event
+         playerId    not used for this event
+         */
         CREATURE_BLOCKED,
+
         CREATURE_BLOCKS,
         BATCH_BLOCK_NONCOMBAT,
         UNBLOCKED_ATTACKER,
@@ -350,13 +371,29 @@ public class GameEvent implements Serializable {
          flag        is it tapped for combat
          */
         TAPPED,
-        TAPPED_FOR_MANA,
         /* TAPPED_FOR_MANA
          During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
          By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana.
          IMPORTANT: Triggered non mana abilities have to ignore the event if game.inCheckPlayableState is true.
          */
-        UNTAP, UNTAPPED,
+        TAPPED_FOR_MANA,
+        /*  TAPPED_BATCH
+         combine all TAPPED events occuring at the same time in a single event
+         */
+        TAPPED_BATCH,
+        UNTAP,
+        /* UNTAPPED,
+         targetId    untapped permanent
+         sourceId    not used for this event // TODO: add source for untap?
+         playerId    controller of permanent // TODO: replace by source controller of untap? need to check every usage if so.
+         amount      not used for this event
+         flag        true if untapped during untap step (event is checked at upkeep so can't trust the current Phase)
+         */
+        UNTAPPED,
+        /*  UNTAPPED_BATCH
+         combine all UNTAPPED events occuring at the same time in a single event
+         */
+        UNTAPPED_BATCH,
         FLIP, FLIPPED,
         TRANSFORMING, TRANSFORMED,
         ADAPT,
@@ -508,6 +545,28 @@ public class GameEvent implements Serializable {
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         FORETOLD, // targetId   id of card foretold
         FORETELL, // targetId   id of card foretell  playerId   id of the controller
+        /* villainous choice
+         targetId    player making the choice
+         sourceId    sourceId of the ability forcing the choice
+         playerId    controller of the ability forcing the choice
+         amount      number of times choice is repeated
+         flag        not used for this event
+         */
+        FACE_VILLAINOUS_CHOICE,
+        /* DISCOVER
+         targetId    not used for this event
+         sourceId    sourceId of the ability discovering
+         playerId    controller of the ability
+         amount      discover value
+         flag        not used for this event
+         */
+        DISCOVERED,
+        /* Exiled while crafting (see Market Gnome)
+         targetId   the permanent exiled
+         sourceId   of the craft ability
+         playerId   the player crafting
+         */
+        EXILED_WHILE_CRAFTING,
         //custom events
         CUSTOM_EVENT
     }

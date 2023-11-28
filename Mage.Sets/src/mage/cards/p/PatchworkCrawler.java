@@ -77,7 +77,7 @@ class PatchworkCrawlerEffect extends ContinuousEffectImpl {
         for (Card card : exileZone.getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
             for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof ActivatedAbility) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
             }
         }

@@ -31,8 +31,8 @@ public final class AbundantMaw extends CardImpl {
         this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{6}{B}")));
 
         // When you cast Abundant Maw, target opponent loses 3 life and you gain 3 life.
-        Ability ability = new CastSourceTriggeredAbility(new GainLifeEffect(3));
-        ability.addEffect(new LoseLifeTargetEffect(3).concatBy("and"));
+        Ability ability = new CastSourceTriggeredAbility(new LoseLifeTargetEffect(3));
+        ability.addEffect(new GainLifeEffect(3).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

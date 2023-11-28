@@ -3,6 +3,7 @@ package mage.filter;
 import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -55,5 +56,10 @@ public class FilterPlayer extends FilterImpl<Player> {
     @Override
     public FilterPlayer copy() {
         return new FilterPlayer(this);
+    }
+
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
     }
 }

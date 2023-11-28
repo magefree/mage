@@ -48,7 +48,7 @@ public final class AyaraWidowOfTheRealm extends CardImpl {
         // {T}, Sacrifice another creature or artifact: Ayara, Widow of the Realm deals X damage to target opponent or battle and you gain X life, where X is the sacrificed permanent's mana value.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(xValue)
                 .setText("{this} deals X damage to target opponent or battle"), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT));
         ability.addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the sacrificed permanent's mana value"));
         ability.addTarget(new TargetPermanentOrPlayer(filter));
         this.addAbility(ability);

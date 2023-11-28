@@ -7,22 +7,22 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -90,40 +90,9 @@ class HaloForagerPayEffect extends OneShotEffect {
                 "instant or sorcery card with mana value " + costX + " from a graveyard"
         );
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, costX));
-        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new HaloForagerCastEffect(costX), false);
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new MayCastTargetThenExileEffect(true), false);
         ability.addTarget(new TargetCardInGraveyard(filter));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
-    }
-}
-
-class HaloForagerCastEffect extends OneShotEffect {
-
-    HaloForagerCastEffect(int costX) {
-        super(Outcome.Benefit);
-        staticText = "You may cast target instant or sorcery card with mana value " + costX + " from a graveyard " +
-                "without paying its mana cost. " + ThatSpellGraveyardExileReplacementEffect.RULE_A;
-    }
-
-    private HaloForagerCastEffect(final HaloForagerCastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HaloForagerCastEffect copy() {
-        return new HaloForagerCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (player == null || card == null) {
-            return false;
-        }
-        ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(false);
-        effect.setTargetPointer(new FixedTarget(card, game));
-        game.addEffect(effect, source);
-        return CardUtil.castSpellWithAttributesForFree(player, source, game, card);
     }
 }

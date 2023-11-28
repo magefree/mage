@@ -9,8 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -18,54 +17,29 @@ import java.util.UUID;
 public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterPermanent filter;
-    protected String rule;
-    protected boolean controlledText;
     protected SetTargetPointer setTargetPointer;
 
     /**
      * zone = BATTLEFIELD optional = false
-     *
-     * @param effect
-     * @param filter
      */
     public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter) {
         this(Zone.BATTLEFIELD, effect, filter, false);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter, String rule) {
-        this(Zone.BATTLEFIELD, effect, filter, false, rule);
-    }
-
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
-        this(zone, effect, filter, optional, SetTargetPointer.NONE, null, false);
+        this(zone, effect, filter, optional, SetTargetPointer.NONE);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
-        this(zone, effect, filter, optional, rule, false);
-    }
-
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule, boolean controlledText) {
-        this(zone, effect, filter, optional, SetTargetPointer.NONE, rule, controlledText);
-    }
-
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule) {
-        this(zone, effect, filter, optional, setTargetPointer, rule, false);
-    }
-
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlledText) {
+    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.filter = filter;
-        this.rule = rule;
-        this.controlledText = controlledText;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase(generateTriggerPhrase());
+        setTriggerPhrase(getTriggerPhraseFromFilter() + ", ");
     }
 
     protected EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.rule = ability.rule;
-        this.controlledText = ability.controlledText;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
@@ -76,8 +50,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID targetId = event.getTargetId();
-        Permanent permanent = game.getPermanent(targetId);
+        Permanent permanent = game.getPermanent(event.getTargetId());
         if (!filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
@@ -95,28 +68,12 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getRule() {
-        if (rule != null && !rule.isEmpty()) {
-            return rule;
+    protected final String getTriggerPhraseFromFilter() {
+        String filterMessage = filter.getMessage();
+        if (filterMessage.startsWith("one or more")) {
+            return getWhen() + filterMessage + " enter the battlefield";
         }
-        return super.getRule();
-    }
-
-    protected String generateTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever ");
-        sb.append(filter.getMessage());
-        if (filter.getMessage().startsWith("one or more")) {
-            sb.append(" enter the battlefield");
-        } else {
-            sb.append(" enters the battlefield");
-        }
-        if (controlledText) {
-            sb.append(" under your control, ");
-        } else {
-            sb.append(", ");
-        }
-        return sb.toString();
+        return getWhen() + CardUtil.addArticle(filterMessage) + " enters the battlefield";
     }
 
     @Override

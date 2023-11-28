@@ -27,6 +27,7 @@ public enum CounterType {
     BLOOD("blood"),
     BLOODLINE("bloodline"),
     BOOK("book"),
+    BORE("bore"),
     BOUNTY("bounty"),
     BRIBERY("bribery"),
     BRICK("brick"),
@@ -35,6 +36,7 @@ public enum CounterType {
     CARRION("carrion"),
     CHARGE("charge"),
     CHIP("chip"),
+    CHORUS("chorus"),
     COIN("coin"),
     COLLECTION("collection"),
     COMPONENT("component"),
@@ -57,6 +59,7 @@ public enum CounterType {
     DIVINITY("divinity"),
     DOOM("doom"),
     DOUBLE_STRIKE("double strike"),
+    DREAD("dread"),
     DREAM("dream"),
     ECHO("echo"),
     EGG("egg"),
@@ -72,6 +75,7 @@ public enum CounterType {
     FEATHER("feather"),
     FETCH("fetch"),
     FILIBUSTER("filibuster"),
+    FINALITY("finality"),
     FIRST_STRIKE("first strike"),
     FLAME("flame"),
     FLOOD("flood"),
@@ -173,6 +177,7 @@ public enum CounterType {
     QUEST("quest"),
     SILVER("silver"),
     SCREAM("scream"),
+    SHADOW("shadow"),
     SHELL("shell"),
     SHIELD("shield"),
     SHRED("shred"),
@@ -228,7 +233,7 @@ public enum CounterType {
     }
 
     CounterType(String name) {
-        this(name, "aeiou".contains( String.valueOf( name.charAt( 0 ) ) ) ? "an" : "a");
+        this(name, "aeiou".contains(String.valueOf(name.charAt(0))) ? "an" : "a");
     }
 
     CounterType(String name, String article) {
@@ -308,6 +313,8 @@ public enum CounterType {
                 return new AbilityCounter(new MenaceAbility(), amount);
             case REACH:
                 return new AbilityCounter(ReachAbility.getInstance(), amount);
+            case SHADOW:
+                return new AbilityCounter(ShadowAbility.getInstance(), amount);
             case TRAMPLE:
                 return new AbilityCounter(TrampleAbility.getInstance(), amount);
             case VIGILANCE:

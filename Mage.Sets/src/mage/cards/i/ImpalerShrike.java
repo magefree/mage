@@ -1,12 +1,12 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,8 +28,11 @@ public final class ImpalerShrike extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeSourceEffect(), true);
-        ability.addEffect(new DrawCardSourceControllerEffect(3));
+
+        // Whenever Impaler Shrike deals combat damage to a player, you may sacrifice it. If you do, draw three cards.
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
+                new DrawCardSourceControllerEffect(3), new SacrificeSourceCost()
+        ), false);
         this.addAbility(ability);
     }
 

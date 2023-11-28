@@ -80,6 +80,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Griffin Canyon", 163, Rarity.RARE, mage.cards.g.GriffinCanyon.class));
         cards.add(new SetCardInfo("Guiding Spirit", 131, Rarity.RARE, mage.cards.g.GuidingSpirit.class));
         cards.add(new SetCardInfo("Hearth Charm", 82, Rarity.COMMON, mage.cards.h.HearthCharm.class));
+        cards.add(new SetCardInfo("Heat Wave", 83, Rarity.UNCOMMON, mage.cards.h.HeatWave.class));
         cards.add(new SetCardInfo("Helm of Awakening", 145, Rarity.UNCOMMON, mage.cards.h.HelmOfAwakening.class));
         cards.add(new SetCardInfo("Honorable Passage", 7, Rarity.UNCOMMON, mage.cards.h.HonorablePassage.class));
         cards.add(new SetCardInfo("Hope Charm", 8, Rarity.COMMON, mage.cards.h.HopeCharm.class));
@@ -107,6 +108,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Longbow Archer", 12, Rarity.UNCOMMON, mage.cards.l.LongbowArcher.class));
         cards.add(new SetCardInfo("Magma Mine", 149, Rarity.UNCOMMON, mage.cards.m.MagmaMine.class));
         cards.add(new SetCardInfo("Man-o'-War", 37, Rarity.COMMON, mage.cards.m.ManOWar.class));
+        cards.add(new SetCardInfo("Matopi Golem", 150, Rarity.UNCOMMON, mage.cards.m.MatopiGolem.class));
         cards.add(new SetCardInfo("Miraculous Recovery", 13, Rarity.UNCOMMON, mage.cards.m.MiraculousRecovery.class));
         cards.add(new SetCardInfo("Mob Mentality", 88, Rarity.UNCOMMON, mage.cards.m.MobMentality.class));
         cards.add(new SetCardInfo("Mortal Wound", 113, Rarity.COMMON, mage.cards.m.MortalWound.class));

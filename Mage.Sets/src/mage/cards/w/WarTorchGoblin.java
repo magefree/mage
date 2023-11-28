@@ -32,7 +32,7 @@ public final class WarTorchGoblin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Sacrifice War-Torch Goblin: War-Torch Goblin deals 2 damage to target blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, "it"), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
         this.addAbility(ability);

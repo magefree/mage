@@ -32,7 +32,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class TheFirstEruption extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

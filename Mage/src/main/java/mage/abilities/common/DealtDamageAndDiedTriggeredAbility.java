@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -33,7 +34,7 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.ALL, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, ");
+        setTriggerPhrase(getWhen() + CardUtil.addArticle(filter.getMessage()) + " dealt damage by {this} this turn dies, ");
     }
 
     protected DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {

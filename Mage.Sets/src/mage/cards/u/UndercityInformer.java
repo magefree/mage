@@ -20,7 +20,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -58,7 +57,7 @@ class UndercityInformerEffect extends OneShotEffect {
 
     public UndercityInformerEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Target player reveals the top card of their library until they reveal a land card, then puts those cards into their graveyard";
+        this.staticText = "Target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard";
     }
 
     private UndercityInformerEffect(final UndercityInformerEffect effect) {

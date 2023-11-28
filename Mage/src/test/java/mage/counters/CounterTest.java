@@ -85,4 +85,27 @@ public class CounterTest {
         assertEquals(1, defaultCounter.getCount());
         assertEquals("default", defaultCounter.getName());
     }
+
+    @Test
+    public void testHashCodeConsistency() {
+        // given
+
+        // when
+        Counter copy = new Counter(counter);
+
+        //then
+        assertEquals(counter.hashCode(), copy.hashCode());
+    }
+
+    @Test
+    public void testEqualsReturnsFalse() {
+        // given
+        Counter testCounter = new Counter("default", 1);
+
+        // when
+
+        //then
+        assertFalse(counter.equals(testCounter));
+        assertFalse(counter.equals(null));
+    }
 }

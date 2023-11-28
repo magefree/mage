@@ -11,6 +11,7 @@ import mage.constants.PlayerAction;
 import mage.constants.TurnPhase;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
@@ -40,6 +41,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private ChatPanelBasic connectedChatPanel;
     private Map<String, Serializable> lastOptions = new HashMap<>();
 
+    private static final int AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS = 8;
     private static final ScheduledExecutorService WORKER = Executors.newSingleThreadScheduledExecutor();
 
     /**
@@ -153,16 +155,18 @@ public class FeedbackPanel extends javax.swing.JPanel {
      */
     private void endWithTimeout() {
         Runnable task = () -> {
-            LOGGER.info("Ending game...");
-            Component c = MageFrame.getGame(gameId);
-            while (c != null && !(c instanceof GamePane)) {
-                c = c.getParent();
-            }
-            if (c != null && c.isVisible()) { // check if GamePanel still visible
-                FeedbackPanel.this.btnRight.doClick();
-            }
+            SwingUtilities.invokeLater(() -> {
+                LOGGER.info("Ending game...");
+                Component c = MageFrame.getGame(gameId);
+                while (c != null && !(c instanceof GamePane)) {
+                    c = c.getParent();
+                }
+                if (c != null && c.isVisible()) { // check if GamePanel still visible
+                    FeedbackPanel.this.btnRight.doClick();
+                }
+            });
         };
-        WORKER.schedule(task, 8, TimeUnit.SECONDS);
+        WORKER.schedule(task, AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS, TimeUnit.SECONDS);
     }
 
     public void updateOptions(Map<String, Serializable> options) {

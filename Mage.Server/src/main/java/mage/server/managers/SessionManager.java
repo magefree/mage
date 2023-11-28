@@ -11,6 +11,7 @@ import javax.annotation.Nonnull;
 import java.util.Optional;
 
 public interface SessionManager {
+
     Optional<Session> getSession(@Nonnull String sessionId);
 
     void createSession(String sessionId, InvokerCallbackHandler callbackHandler);
@@ -31,7 +32,7 @@ public interface SessionManager {
 
     void endUserSession(String sessionId, String userSessionId);
 
-    boolean isAdmin(String sessionId);
+    boolean checkAdminAccess(String sessionId);
 
     boolean isValidSession(@Nonnull String sessionId);
 

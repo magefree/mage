@@ -1,9 +1,6 @@
 package mage.game.permanent.token;
 
-import mage.MageInt;
-import mage.MageObject;
-import mage.MageObjectImpl;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
@@ -77,15 +74,33 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return new ArrayList<>(lastAddedTokenIds);
     }
 
+    /**
+     * Add an ability to the token. When copying from an existing source
+     * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
+     * @param ability The ability to be added
+     */
     @Override
     public void addAbility(Ability ability) {
+        addAbility(ability, false);
+    }
+
+    /**
+     * @param ability The ability to be added
+     * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
+     *                         Otherwise sub-abilities will be added twice to the resulting object
+     */
+    @Override
+    public void addAbility(Ability ability, boolean fromExistingObject) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        abilities.addAll(ability.getSubAbilities());
+        if (!fromExistingObject) {
+            abilities.addAll(ability.getSubAbilities());
+        }
 
         // TODO: remove all override and backFace changes (bug example: active transform ability in back face)
         if (backFace != null) {
             backFace.addAbility(ability);
+            // Maybe supposed to add subabilities here too?
         }
     }
 
@@ -298,6 +313,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 // tokens zcc must simulate card's zcc to keep copied card/spell settings
                 // (example: etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
+
+                if (source != null) {
+                    MageObjectReference mor = new MageObjectReference(newPermanent.getId(),newPermanent.getZoneChangeCounter(game)-1,game);
+                    game.storePermanentCostsTags(mor, source);
+                }
             }
 
             // check ETB effects
@@ -331,6 +351,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     allAddedTokens.add((PermanentToken) permanent);
                 }
 
+                // prototyped spell tokens make prototyped permanent tokens on resolution.
+                if (source instanceof SpellAbility && ((SpellAbility) source).getSpellAbilityCastMode() == SpellAbilityCastMode.PROTOTYPE) {
+                    permanent.setPrototyped(true);
+                }
+
                 // if token was created (not a spell copy) handle auras coming into the battlefield
                 // that must determine what to enchant
                 // see #9583 for the root cause issue of why this convoluted searching is necessary
@@ -345,6 +370,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                         if (!(ability instanceof SpellAbility)) {
                             continue;
                         }
+
                         auraOutcome = ability.getEffects().getOutcome(ability);
                         for (Effect effect : ability.getEffects()) {
                             if (!(effect instanceof AttachEffect)) {

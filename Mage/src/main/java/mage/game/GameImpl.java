@@ -2,6 +2,7 @@ package mage.game;
 
 import mage.MageException;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
@@ -14,6 +15,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.keyword.FinalityCounterEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.effects.keyword.StunCounterEffect;
 import mage.abilities.keyword.*;
@@ -118,7 +120,7 @@ public abstract class GameImpl implements Game {
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
     protected GameState state;
-    private transient Stack<Integer> savedStates = new Stack<>();
+    private transient Stack<Integer> savedStates = new Stack<>(); // bookmarks - 0-base refs to gameStates
     protected transient GameStates gameStates = new GameStates();
 
     // game states to allow player rollback
@@ -157,7 +159,7 @@ public abstract class GameImpl implements Game {
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize, int startingHandSize) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startingLife, int startingHandSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
@@ -183,48 +185,16 @@ public abstract class GameImpl implements Game {
         //this.tableEventSource = game.tableEventSource; // client-server part, not need on copy/simulations
         //this.playerQueryEventSource = game.playerQueryEventSource; // client-server part, not need on copy/simulations
 
-        for (Entry<UUID, Card> entry : game.gameCards.entrySet()) {
-            this.gameCards.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Entry<UUID, MeldCard> entry : game.meldCards.entrySet()) {
-            this.meldCards.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.gameCards = CardUtil.deepCopyObject(game.gameCards);
+        this.meldCards = CardUtil.deepCopyObject(game.meldCards);
 
-        // lki
-        for (Entry<Zone, Map<UUID, MageObject>> entry : game.lki.entrySet()) {
-            Map<UUID, MageObject> lkiMap = new HashMap<>();
-            for (Entry<UUID, MageObject> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lki.put(entry.getKey(), lkiMap);
-        }
-        // lkiCardState
-        for (Entry<Zone, Map<UUID, CardState>> entry : game.lkiCardState.entrySet()) {
-            Map<UUID, CardState> lkiMap = new HashMap<>();
-            for (Entry<UUID, CardState> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lkiCardState.put(entry.getKey(), lkiMap);
-        }
-        // lkiExtended
-        for (Entry<UUID, Map<Integer, MageObject>> entry : game.lkiExtended.entrySet()) {
-            Map<Integer, MageObject> lkiMap = new HashMap<>();
-            for (Entry<Integer, MageObject> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lkiExtended.put(entry.getKey(), lkiMap);
-        }
-        // lkiShortLiving
-        for (Entry<Zone, Set<UUID>> entry : game.lkiShortLiving.entrySet()) {
-            this.lkiShortLiving.put(entry.getKey(), new HashSet<>(entry.getValue()));
-        }
+        this.lki = CardUtil.deepCopyObject(game.lki);
+        this.lkiCardState = CardUtil.deepCopyObject(game.lkiCardState);
+        this.lkiExtended = CardUtil.deepCopyObject(game.lkiExtended);
+        this.lkiShortLiving = CardUtil.deepCopyObject(game.lkiShortLiving);
 
-        for (Entry<UUID, Permanent> entry : game.permanentsEntering.entrySet()) {
-            this.permanentsEntering.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Entry<UUID, Counters> entry : game.enterWithCounters.entrySet()) {
-            this.enterWithCounters.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.permanentsEntering = CardUtil.deepCopyObject(game.permanentsEntering);
+        this.enterWithCounters = CardUtil.deepCopyObject(game.enterWithCounters);
 
         this.state = game.state.copy();
         // client-server part, not need on copy/simulations:
@@ -317,8 +287,11 @@ public abstract class GameImpl implements Game {
                 card = ((PermanentCard) card).getCard();
             }
 
-            // init each card by parts... if you add new type here then getInitAbilities must be
-            // implemented too (it allows to split abilities between card and parts)
+            // usage hints:
+            // - each card and parts must be initialized here before usage
+            // - it add card/part to starting zone, assign abilities and init watchers
+            // - warning, if you add new type here then getInitAbilities must be
+            //   implemented too (it allows to split abilities between card and parts)
 
             // main card
             card.setOwnerId(ownerId);
@@ -347,6 +320,14 @@ public abstract class GameImpl implements Game {
                 Card spellCard = ((AdventureCard) card).getSpellCard();
                 spellCard.setOwnerId(ownerId);
                 addCardToState(spellCard);
+            } else if (card.isTransformable() && card.getSecondCardFace() != null) {
+                Card nightCard = card.getSecondCardFace();
+                nightCard.setOwnerId(ownerId);
+                addCardToState(nightCard);
+            } else if (card.getMeldsToClazz() != null) {
+                // meld card will be added and init on meld effect resolve, so ignore it here
+                // TODO: rework meld logic cause card with watchers must be added on game init
+                //  (possible bugs: miss watcher related data in meld cards/rules/hints)
             }
         }
     }
@@ -813,7 +794,7 @@ public abstract class GameImpl implements Game {
                 if (!concedingPlayers.contains(playerId)) {
                     logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
                     concedingPlayers.add(playerId);
-                    player.signalPlayerConcede();
+                    player.signalPlayerConcede(); // will be executed on next priority
                 }
             } else {
                 // no asynchronous action so check directly
@@ -934,14 +915,27 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void removeBookmark(int bookmark
-    ) {
+    public void removeBookmark(int bookmark) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {
                     savedStates.pop();
                 }
                 gameStates.remove(bookmark);
+            }
+        }
+    }
+
+    @Override
+    public void removeBookmark_v2(int bookmark) {
+        if (!simulation) {
+            if (bookmark != 0) {
+                while (savedStates.size() >= bookmark) {
+                    int outdatedIndex = savedStates.pop();
+                    while (gameStates.getSize() - 1 >= outdatedIndex) {
+                        gameStates.remove(gameStates.getSize() - 1);
+                    }
+                }
             }
         }
     }
@@ -1168,6 +1162,9 @@ public abstract class GameImpl implements Game {
 
         // Apply stun counter mechanic
         state.addAbility(new SimpleStaticAbility(Zone.ALL, new StunCounterEffect()), null);
+
+        // Apply finality counter mechanic
+        state.addAbility(new SimpleStaticAbility(Zone.ALL, new FinalityCounterEffect()), null);
 
         // Handle companions
         Map<Player, Card> playerCompanionMap = new HashMap<>();
@@ -1423,6 +1420,10 @@ public abstract class GameImpl implements Game {
             player.endOfTurn(this);
         }
         state.resetWatchers();
+        // Could be done any time as long as the stack is empty
+        // Tags are stored in the game state as a spell resolves into a permanent
+        // and must be kept while any abilities with that permanent as a source could resolve
+        state.cleanupPermanentCostsTags(this);
     }
 
     protected UUID pickChoosingPlayer() {
@@ -1977,6 +1978,14 @@ public abstract class GameImpl implements Game {
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
                 TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
+            }
+            if (copyFromPermanent.isPrototyped()) {
+                Abilities<Ability> abilities = copyFromPermanent.getAbilities();
+                for (Ability ability : abilities) {
+                    if (ability instanceof PrototypeAbility) {
+                        ((PrototypeAbility) ability).prototypePermanent(newBluePrint, this);
+                    }
+                }
             }
         }
         if (applier != null) {
@@ -3525,6 +3534,15 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
+        return state.getPermanentCostsTags();
+    }
+    @Override
+    public void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
+        state.storePermanentCostsTags(permanentMOR, source);
+    }
+
+    @Override
     public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
         // fake test ability for triggers and events
         Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
@@ -3781,8 +3799,9 @@ public abstract class GameImpl implements Game {
                 for (Player playerObject : getPlayers().values()) {
                     if (playerObject.isHuman() && playerObject.canRespond()) {
                         playerObject.resetStoredBookmark(this);
-                        playerObject.abort();
                         playerObject.resetPlayerPassedActions();
+                        playerObject.abort();
+
                     }
                 }
                 fireUpdatePlayersEvent();
@@ -3945,6 +3964,7 @@ public abstract class GameImpl implements Game {
     public String toString() {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
         StringBuilder sb = new StringBuilder()
+                .append(this.isSimulation() ? "!!!SIMULATION!!! " : "")
                 .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))

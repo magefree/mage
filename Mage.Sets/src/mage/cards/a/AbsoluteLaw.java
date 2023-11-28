@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -11,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 /**
@@ -24,7 +22,8 @@ public final class AbsoluteLaw extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         Ability ability = ProtectionAbility.from(ObjectColor.RED);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false)));
     }
 
     private AbsoluteLaw(final AbsoluteLaw card) {

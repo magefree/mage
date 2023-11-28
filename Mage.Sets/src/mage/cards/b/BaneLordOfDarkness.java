@@ -81,7 +81,6 @@ enum BaneLordOfDarknessCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(game.getPlayer(source.getControllerId()))
-                .filter(Objects::nonNull)
                 .map(Player::getLife)
                 .map(x -> 2 * x <= game.getStartingLife())
                 .orElse(false);

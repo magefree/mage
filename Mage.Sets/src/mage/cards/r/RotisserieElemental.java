@@ -39,7 +39,7 @@ public final class RotisserieElemental extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.SKEWER.createInstance()),
                 false
-        );
+        ).withRuleTextReplacement(false);
         ability.addEffect(new DoIfCostPaid(
                 new ExileTopXMayPlayUntilEndOfTurnEffect(xValue)
                         .setText("exile the top X cards of your library, where X is the number of skewer counters "

@@ -93,7 +93,7 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
                 continue;
             }
             for (Ability ability : loyaltyAbilities) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, true);
             }
         }
         return true;

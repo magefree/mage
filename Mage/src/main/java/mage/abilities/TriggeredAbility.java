@@ -33,6 +33,8 @@ public interface TriggeredAbility extends Ability {
 
     TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce);
 
+    boolean getTriggersOnceEachTurn();
+
     TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce);
 
     /**

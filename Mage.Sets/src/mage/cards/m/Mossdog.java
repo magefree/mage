@@ -26,7 +26,7 @@ public final class Mossdog extends CardImpl {
 
         // Whenever Mossdog becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on Mossdog.
         this.addAbility(new BecomesTargetSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS));
+                StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS).withRuleTextReplacement(false));
     }
 
     private Mossdog(final Mossdog card) {

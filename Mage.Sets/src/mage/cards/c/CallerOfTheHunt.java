@@ -38,7 +38,7 @@ public final class CallerOfTheHunt extends CardImpl {
 
         // As an additional cost to cast Caller of the Hunt, choose a creature type.
         // Caller of the Hunt's power and toughness are each equal to the number of creatures of the chosen type on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("as an additional cost to cast this spell, choose a creature type. \r"
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("as an additional cost to cast this spell, choose a creature type.<br>"
                 + "{this}'s power and toughness are each equal to the number of creatures of the chosen type on the battlefield")));
 
         this.getSpellAbility().setCostAdjuster(CallerOfTheHuntAdjuster.instance);

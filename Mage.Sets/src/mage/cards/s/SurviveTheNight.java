@@ -32,7 +32,7 @@ public final class SurviveTheNight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Investigate.
-        this.getSpellAbility().addEffect(new InvestigateEffect());
+        this.getSpellAbility().addEffect(new InvestigateEffect().concatBy("<br>"));
     }
 
     private SurviveTheNight(final SurviveTheNight card) {

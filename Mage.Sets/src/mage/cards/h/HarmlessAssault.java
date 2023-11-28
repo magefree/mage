@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -15,13 +14,13 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public final class HarmlessAssault extends CardImpl {
 
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures");
+
     public HarmlessAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");
 
-
-        // Prevent all combat damage that would be dealt this turn by attacking
-        // creatures.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(new FilterAttackingCreature(), Duration.EndOfTurn, true));
+        // Prevent all combat damage that would be dealt this turn by attacking creatures.
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
     private HarmlessAssault(final HarmlessAssault card) {

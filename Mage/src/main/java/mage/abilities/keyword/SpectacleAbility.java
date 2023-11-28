@@ -10,8 +10,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -32,7 +30,7 @@ public class SpectacleAbility extends SpellAbility {
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
-        this.addManaCost(spectacleCosts.copy());
+        this.addCost(spectacleCosts.copy());
 
         this.setRuleAtTheTop(true);
         this.rule = "Spectacle " + spectacleCosts.getText()
@@ -55,15 +53,9 @@ public class SpectacleAbility extends SpellAbility {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            List<Integer> spectacleActivations = (ArrayList) game.getState().getValue(SPECTACLE_ACTIVATION_VALUE_KEY + getSourceId());
-            if (spectacleActivations == null) {
-                spectacleActivations = new ArrayList<>(); // zoneChangeCounter
-                game.getState().setValue(SPECTACLE_ACTIVATION_VALUE_KEY + getSourceId(), spectacleActivations);
-            }
-            spectacleActivations.add(game.getState().getZoneChangeCounter(getSourceId()));
+                this.setCostsTag(SPECTACLE_ACTIVATION_VALUE_KEY,null);
             return true;
         }
         return false;

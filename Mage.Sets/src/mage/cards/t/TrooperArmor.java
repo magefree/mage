@@ -34,8 +34,8 @@ public final class TrooperArmor extends CardImpl {
                 new AttachEffect(Outcome.BoostCreature, "attach {this} to it"),
                 new FilterPermanent(SubType.TROOPER, "Trooper"),
                 true,
-                SetTargetPointer.PERMANENT,
-                null));
+                SetTargetPointer.PERMANENT
+        ));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }

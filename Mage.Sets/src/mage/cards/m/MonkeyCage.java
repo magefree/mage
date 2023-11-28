@@ -28,7 +28,7 @@ public final class MonkeyCage extends CardImpl {
         // When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Monkey creature tokens, where X is that creature's converted mana cost.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new SacrificeSourceEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE,
-                false, SetTargetPointer.PERMANENT, null
+                false, SetTargetPointer.PERMANENT
         ).setTriggerPhrase("When a creature enters the battlefield, ");
         ability.addEffect(new MonkeyCageEffect());
         this.addAbility(ability);

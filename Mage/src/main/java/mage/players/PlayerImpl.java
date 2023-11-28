@@ -282,27 +282,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.bufferTimeLeft = player.getBufferTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
-        for (Entry<UUID, Set<MageIdentifier>> entry : player.getCastSourceIdWithAlternateMana().entrySet()) {
-            this.castSourceIdWithAlternateMana.put(entry.getKey(), (entry.getValue() == null ? null : new HashSet<>(entry.getValue())));
-        }
-        for (Entry<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> entry : player.getCastSourceIdManaCosts().entrySet()) {
-            this.castSourceIdManaCosts.put(entry.getKey(), new HashMap<>());
-            for(Entry<MageIdentifier, ManaCosts<ManaCost>> subEntry : entry.getValue().entrySet()) {
-                this.castSourceIdManaCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
-            }
-        }
-        for (Entry<UUID, Map<MageIdentifier, Costs<Cost>>> entry : player.getCastSourceIdCosts().entrySet()) {
-            this.castSourceIdCosts.put(entry.getKey(), new HashMap<>());
-            for(Entry<MageIdentifier, Costs<Cost>> subEntry : entry.getValue().entrySet()) {
-                this.castSourceIdCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
-            }
-        }
+        this.castSourceIdWithAlternateMana = CardUtil.deepCopyObject(player.castSourceIdWithAlternateMana);
+        this.castSourceIdManaCosts = CardUtil.deepCopyObject(player.castSourceIdManaCosts);
+        this.castSourceIdCosts = CardUtil.deepCopyObject(player.castSourceIdCosts);
 
         this.payManaMode = player.payManaMode;
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.phyrexianColors.copy() : null;
-        for (Designation object : player.designations) {
-            this.designations.add(object.copy());
-        }
+        this.designations = CardUtil.deepCopyObject(player.designations);
     }
 
     @Override
@@ -381,13 +367,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         for (Entry<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> entry : player.getCastSourceIdManaCosts().entrySet()) {
             this.castSourceIdManaCosts.put(entry.getKey(), new HashMap<>());
-            for(Entry<MageIdentifier, ManaCosts<ManaCost>> subEntry : entry.getValue().entrySet()) {
+            for (Entry<MageIdentifier, ManaCosts<ManaCost>> subEntry : entry.getValue().entrySet()) {
                 this.castSourceIdManaCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
             }
         }
         for (Entry<UUID, Map<MageIdentifier, Costs<Cost>>> entry : player.getCastSourceIdCosts().entrySet()) {
             this.castSourceIdCosts.put(entry.getKey(), new HashMap<>());
-            for(Entry<MageIdentifier, Costs<Cost>> subEntry : entry.getValue().entrySet()) {
+            for (Entry<MageIdentifier, Costs<Cost>> subEntry : entry.getValue().entrySet()) {
                 this.castSourceIdCosts.get(entry.getKey()).put(subEntry.getKey(), subEntry.getValue() == null ? null : subEntry.getValue().copy());
             }
         }
@@ -1113,9 +1099,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 .computeIfAbsent(sourceId, k -> new HashMap<>())
                 .put(identifier, costs != null ? costs.copy() : null);
 
-        if (identifier == null) {
-            boolean a = true;
-        }
     }
 
     @Override
@@ -1236,7 +1219,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     } else {
                         spellAbility.clearManaCosts();
                         spellAbility.clearManaCostsToPay();
-                        spellAbility.addManaCost(alternateCosts.copy());
+                        spellAbility.addCost(alternateCosts.copy());
                     }
                     spellAbility.clearCosts();
                     spellAbility.addCost(costs);
@@ -1616,7 +1599,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             ability.getId(), ability, ability.getControllerId()
                     ));
                 }
-                game.removeBookmark(bookmark);
+                game.removeBookmark_v2(bookmark);
                 return true;
             }
         }
@@ -3554,7 +3537,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // ALTERNATIVE COST FROM dynamic effects
-            for(MageIdentifier identifier : getCastSourceIdWithAlternateMana().getOrDefault(copy.getSourceId(), new HashSet<>())) {
+            for (MageIdentifier identifier : getCastSourceIdWithAlternateMana().getOrDefault(copy.getSourceId(), new HashSet<>())) {
                 ManaCosts alternateCosts = getCastSourceIdManaCosts().get(copy.getSourceId()).get(identifier);
                 Costs<Cost> costs = getCastSourceIdCosts().get(copy.getSourceId()).get(identifier);
 
@@ -4303,9 +4286,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     private void addModeOptions(List<Ability> options, Ability option, Game game) {
-        // TODO: Support modal spells with more than one selectable mode
+        // TODO: support modal spells with more than one selectable mode (also must use max modes filter)
         for (Mode mode : option.getModes().values()) {
             Ability newOption = option.copy();
+            // TODO: bugged? Research option.getModes().isMayChooseSameModeMoreThanOnce() - is it affected here
             newOption.getModes().clearSelectedModes();
             newOption.getModes().addSelectedMode(mode.getId());
             newOption.getModes().setActiveMode(mode);
@@ -4551,8 +4535,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setPriorityTimeLeft(int timeLeft
-    ) {
+    public void setPriorityTimeLeft(int timeLeft) {
         priorityTimeLeft = timeLeft;
     }
 
@@ -5105,7 +5088,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void signalPlayerConcede() {
+    }
 
+    @Override
+    public void signalPlayerCheat() {
     }
 
     @Override
@@ -5137,14 +5123,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean surveil(int value, Ability source, Game game) {
+    public SurveilResult doSurveil(int value, Ability source, Game game) {
         GameEvent event = new GameEvent(GameEvent.EventType.SURVEIL, getId(), source, getId(), value, true);
         if (game.replaceEvent(event)) {
-            return false;
+            return SurveilResult.noSurveil();
         }
         game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
+        int totalCount = cards.size();
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                     new FilterCard("card" + (cards.size() == 1 ? "" : "s")
@@ -5155,7 +5142,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             putCardsOnTopOfLibrary(cards, game, source, true);
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
-        return true;
+        return SurveilResult.surveil(totalCount - cards.size(), cards.size());
     }
 
     @Override

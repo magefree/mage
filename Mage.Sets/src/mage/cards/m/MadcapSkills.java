@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,7 +27,6 @@ public final class MadcapSkills extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
         this.subtype.add(SubType.AURA);
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -38,8 +35,10 @@ public final class MadcapSkills extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +3/+0 and and has menace. (It can't be blocked except by two or more creatures.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MenaceAbility(false), AttachmentType.AURA)));
+        Ability staticAbility = new SimpleStaticAbility(new BoostEnchantedEffect(3, 0));
+        staticAbility.addEffect(new GainAbilityAttachedEffect(new MenaceAbility(false), AttachmentType.AURA)
+                .setText("and has menace"));
+        this.addAbility(staticAbility);
     }
 
     private MadcapSkills(final MadcapSkills card) {

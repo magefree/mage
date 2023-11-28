@@ -74,6 +74,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     // debug only: set TRUE to debug simulation's code/games (on false sim thread will be stopped after few secs by timeout)
     protected boolean COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = false;
 
+    final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 1; // TODO: rework simulations logic to use multiple calcs instead one by one
+
     private transient Map<Mana, Card> unplayable = new TreeMap<>();
     private transient List<Card> playableNonInstant = new ArrayList<>();
     private transient List<Card> playableInstant = new ArrayList<>();
@@ -116,7 +118,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (hand.size() < 6
                 || isTestsMode() // ignore mulligan in tests
                 || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
-        ) {
+                ) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
@@ -135,7 +137,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (log.isDebugEnabled()) {
             log.debug("choose: " + outcome.toString() + ':' + target.toString());
         }
-
         // controller hints:
         // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
         // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
@@ -396,6 +397,32 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
 
+        if (target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
+            List<Card> cards = new ArrayList<>();
+            for (Player player : game.getPlayers().values()) {
+                for (Card card : player.getGraveyard().getCards(game)) {
+                    if (target.canTarget(card.getId(), source, game)) {
+                        cards.add(card);
+                    }
+                }
+            }
+
+            // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
+            boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
+            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
+                    && !cards.isEmpty()) {
+                Card pick = pickTarget(abilityControllerId, cards, outcome, target, null, game);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), null, game);
+                    cards.remove(pick);
+                } else {
+                    break;
+                }
+            }
+
+            return target.isChosen();
+        }
+
         if (target.getOriginalTarget() instanceof TargetCardInGraveyard
                 || (target.getZone() == Zone.GRAVEYARD && (target.getOriginalTarget() instanceof TargetCard))) {
             List<Card> cards = new ArrayList<>();
@@ -494,6 +521,26 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
                     possibleCards.remove(pick);
+                }
+            }
+            return target.isChosen();
+        }
+
+        if (target.getOriginalTarget() instanceof TargetCard
+                && (target.getZone() == Zone.COMMAND)) { // Hellkite Courser
+            List<Card> cardsInCommandZone = new ArrayList<>();
+            for (Player player : game.getPlayers().values()) {
+                for (Card card : game.getCommanderCardsFromCommandZone(player, CommanderCardType.COMMANDER_OR_OATHBREAKER)) {
+                    if (target.canTarget(abilityControllerId, card.getId(), null, game)) {
+                        cardsInCommandZone.add(card);
+                    }
+                }
+            }
+            while (!target.isChosen() && !cardsInCommandZone.isEmpty()) {
+                Card pick = pickTarget(abilityControllerId, cardsInCommandZone, outcome, target, null, game);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), null, game);
+                    cardsInCommandZone.remove(pick);
                 }
             }
             return target.isChosen();
@@ -2720,7 +2767,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     protected void findBestPermanentTargets(Outcome outcome, UUID abilityControllerId, UUID sourceId, Ability source, FilterPermanent filter, Game game, Target target,
-                                            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
+            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
         // searching for most valuable/powerfull permanents
         goodList.clear();
         badList.clear();

@@ -1,8 +1,7 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
@@ -31,9 +30,9 @@ public final class StormriderRig extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
 
         // Whenever a creature enters the battlefield under your control, you may attach Stormrider Rig to it.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true, SetTargetPointer.PERMANENT, null, true));
+                StaticFilters.FILTER_PERMANENT_CREATURE, true, SetTargetPointer.PERMANENT));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));

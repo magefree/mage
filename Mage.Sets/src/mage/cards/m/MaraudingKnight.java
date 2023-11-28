@@ -19,7 +19,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public final class MaraudingKnight extends CardImpl {
 
-    private static final FilterLandPermanent plainsFilter = new FilterLandPermanent("Plains your opponent controls");
+    private static final FilterLandPermanent plainsFilter = new FilterLandPermanent("Plains your opponents control");
     static {
       plainsFilter.add(SubType.PLAINS.getPredicate());
       plainsFilter.add(TargetController.OPPONENT.getControllerPredicate());

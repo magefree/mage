@@ -43,7 +43,8 @@ public final class ClaimFame extends SplitCard {
         // Aftermath
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Target creature gets +2/+0 and gains haste until end of turn.
-        getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn)
+                .setText("target creature gets +2/+0"));
         getRightHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains haste until end of turn"));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());

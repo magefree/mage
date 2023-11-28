@@ -143,6 +143,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         mainTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) { // double clicks and repeated double clicks
                     e.consume();
                     if (e.isAltDown()) {
@@ -167,6 +170,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_RULES, Boolean.toString(chkRules.isSelected()));
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_TYPES, Boolean.toString(chkTypes.isSelected()));
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_UNIQUE, Boolean.toString(chkUnique.isSelected()));
+        ExpansionRepository.instance.unsubscribe(setsDbListener);
     }
 
     public void changeGUISize() {

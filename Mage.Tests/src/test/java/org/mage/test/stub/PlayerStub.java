@@ -725,6 +725,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void signalPlayerCheat() {
+
+    }
+
+    @Override
     public void abortReset() {
 
     }
@@ -986,7 +991,7 @@ public class PlayerStub implements Player {
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-            int min, int max, MultiAmountType type, Game game) {
+                                                                 int min, int max, MultiAmountType type, Game game) {
         return null;
     }
 
@@ -1281,7 +1286,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Map<UUID, Map<MageIdentifier,Costs<Cost>>> getCastSourceIdCosts() {
+    public Map<UUID, Map<MageIdentifier, Costs<Cost>>> getCastSourceIdCosts() {
         return null;
     }
 
@@ -1346,8 +1351,8 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean surveil(int value, Ability source, Game game) {
-        return false;
+    public SurveilResult doSurveil(int value, Ability source, Game game) {
+        return SurveilResult.noSurveil();
     }
 
     @Override

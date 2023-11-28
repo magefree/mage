@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -36,8 +35,10 @@ public final class GiftOfOrzhova extends CardImpl {
 
         // Enchanted creature gets +1/+1 and has flying and lifelink.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)
+                .setText("and has flying"));
+        ability.addEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)
+                .setText("and lifelink"));
         this.addAbility(ability);
     }
 

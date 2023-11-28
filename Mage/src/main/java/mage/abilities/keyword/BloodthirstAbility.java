@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public class BloodthirstAbility extends EntersBattlefieldAbility {
 
-    private int amount;
+    private final int amount;
 
     public BloodthirstAbility(int amount) {
         super(new BloodthirstEffect(amount), "");
@@ -44,7 +44,7 @@ public class BloodthirstAbility extends EntersBattlefieldAbility {
         if (amount == 1) {
             sb.append("a +1/+1 counter");
         } else {
-            sb.append(CardUtil.numberToText(amount)).append(" counters");
+            sb.append(CardUtil.numberToText(amount)).append(" +1/+1 counters");
         }
         sb.append(" on it.)</i>");
         return sb.toString();

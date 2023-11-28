@@ -3,6 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +29,7 @@ public final class GoliathPaladin extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Goliath Paladin enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
     }
 
     private GoliathPaladin(final GoliathPaladin card) {

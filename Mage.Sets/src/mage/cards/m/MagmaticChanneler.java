@@ -138,6 +138,12 @@ class MagmaticChannelerCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
+            return false;
+        }
+        objectId = theCard.getMainCard().getId(); // for split cards/MDFC/Adventure cards
+
         return source.isControlledBy(affectedControllerId)
                 && mor.refersTo(objectId, game);
     }

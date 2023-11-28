@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 /**
  *
@@ -44,6 +44,9 @@ public class URLHandler {
         currentMouseAdapter = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 if (e.getClickCount() > 0) {
                     if (Desktop.isDesktopSupported()) {
                         Desktop desktop = Desktop.getDesktop();

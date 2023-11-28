@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
@@ -69,7 +70,7 @@ class RadiantEpicureEffect extends OneShotEffect {
         if (player == null || watcher == null) {
             return false;
         }
-        Mana payment = watcher.getLastManaPayment(source.getSourceId());
+        Mana payment = watcher.getManaPayment(CardUtil.getSourceStackMomentReference(game, source));
         if (payment == null) {
             return false;
         }

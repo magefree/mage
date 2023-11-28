@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -39,7 +40,7 @@ public final class FaramirStewardOfGondor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a legendary creature with mana value 4 or greater enters the battlefield under your control, you become the monarch.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BecomesMonarchSourceEffect(), filter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BecomesMonarchSourceEffect(), filter).addHint(MonarchHint.instance));
 
         // At the beginning of your end step, if you're the monarch, create two 1/1 white Human Soldier creature tokens.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

@@ -72,7 +72,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (event instanceof CreateTokenEvent) {
-            ((CreateTokenEvent) event).doubleTokens();
+            ((CreateTokenEvent) event).multiplyTokens(2);
         }
         return false;
     }
@@ -116,11 +116,6 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
                 && event.getAmount() > 0;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

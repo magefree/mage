@@ -2,7 +2,7 @@ package org.mage.test.testapi;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;

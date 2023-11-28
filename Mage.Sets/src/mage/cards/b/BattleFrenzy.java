@@ -33,7 +33,7 @@ public final class BattleFrenzy extends CardImpl {
         // Green creatures you control get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter1));
         // Nongreen creatures you control get +1/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter2));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter2).concatBy("<br>"));
     }
 
     private BattleFrenzy(final BattleFrenzy card) {

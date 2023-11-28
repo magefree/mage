@@ -205,4 +205,41 @@ public class SagaTest extends CardTestPlayerBase {
         assertHandCount(playerA, boomerang, 1);
         assertPermanentCount(playerA, moon, 1);
     }
+
+    private static final String triumph = "The Triumph of Anax";
+    private static final String memnite = "Memnite";
+    private static final String kraken = "Kraken Hatchling";
+
+    @Test
+    public void testLoreCounterCount() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, triumph);
+        addCard(Zone.BATTLEFIELD, playerA, memnite);
+        addCard(Zone.BATTLEFIELD, playerB, kraken);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, triumph);
+
+        addTarget(playerA, memnite);
+        checkPT("+1/+0", 1, PhaseStep.BEGIN_COMBAT, playerA, memnite, 2, 1);
+        checkPT("next turn", 2, PhaseStep.BEGIN_COMBAT, playerA, memnite, 1, 1);
+
+        addTarget(playerA, memnite);
+        checkPT("+2/+0", 3, PhaseStep.BEGIN_COMBAT, playerA, memnite, 3, 1);
+
+        addTarget(playerA, memnite);
+        checkPT("+3/+0", 5, PhaseStep.BEGIN_COMBAT, playerA, memnite, 4, 1);
+
+        addTarget(playerA, memnite);
+        addTarget(playerA, kraken);
+
+        setStrictChooseMode(true);
+        setStopAt(7, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, triumph, 1);
+        assertDamageReceived(playerB, kraken, 1);
+        assertDamageReceived(playerA, memnite, 0);
+
+    }
+
 }

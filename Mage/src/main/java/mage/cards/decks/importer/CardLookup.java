@@ -20,6 +20,10 @@ public class CardLookup {
     }
 
     public Optional<CardInfo> lookupCardInfo(String name, String set) {
+        if (set == null) {
+            return lookupCardInfo(name);
+        }
+
         Optional<CardInfo> result = lookupCardInfo(new CardCriteria().name(name).setCodes(set))
                 .stream()
                 .findAny();

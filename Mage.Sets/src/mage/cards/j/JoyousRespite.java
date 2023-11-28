@@ -1,5 +1,3 @@
-
-
 package mage.cards.j;
 
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -27,7 +25,8 @@ public final class JoyousRespite extends CardImpl {
 
 
         // You gain 1 life for each land you control.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter))
+                .setText("you gain 1 life for each land you control"));
     }
 
     private JoyousRespite(final JoyousRespite card) {

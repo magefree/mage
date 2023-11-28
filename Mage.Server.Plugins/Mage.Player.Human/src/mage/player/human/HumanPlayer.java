@@ -8,6 +8,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -15,10 +16,9 @@ import mage.abilities.mana.ManaAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.choices.ChoiceColor;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -44,7 +44,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.*;
+import mage.utils.SystemUtil;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
@@ -54,8 +56,11 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
+
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class HumanPlayer extends PlayerImpl {
 
@@ -63,8 +68,36 @@ public class HumanPlayer extends PlayerImpl {
 
     // TODO: all user feedback actions executed and waited in diff threads and can't catch exeptions, e.g. on wrong code usage
     //  must catch and log such errors
-    private transient Boolean responseOpenedForAnswer = false; // can't get response until prepared target (e.g. until send all fire events to all players)
+
+    // Network and threads logic:
+    // * starting point: ThreadExecutorImpl.java
+    // * server executing a game's code by single game thread (named: "GAME xxx", one thread per game)
+    // * data transfering goes by inner jboss threads (named: "WorkerThread xxx", one thread per client connection)
+    //   - from server to client: sync mode, a single game thread uses jboss networking to send data to each player and viewer/watcher one by one
+    //   - from client to server: async mode, each income command executes by shared call thread
+    //
+    // Client commands logic:
+    // * commands can do anything in server, user, table and game contexts
+    // * it's income in async mode at any time and in any order by "CALL xxx" threads
+    // * there are two types of client commands:
+    //   - feedback commands - must be executed and synced by GAME thread (example: answer for choose dialog, priority, etc)
+    //   - other commands - can be executed at any time and don't require sync with a game and a GAME thread (example: user/skip settings, concede/cheat, chat messages)
+    //
+    // Feedback commands logic:
+    // * income by CALL thread
+    // * must be synced and executed by GAME thread
+    // * keep only latest income feedback (if user sends multiple clicks/choices)
+    // * HumanPlayer contains "response" object for threads sync and data exchange
+    // * so sync logic:
+    // * - GAME thread: open response for income command and wait (go to sleep by response.wait)
+    // * - CALL thread: on closed response - waiting open status of player's response object (if it's too long then cancel the answer)
+    // * - CALL thread: on opened response - save answer to player's response object and notify GAME thread about it by response.notifyAll
+    // * - GAME thread: on nofify from response - check new answer value and process it (if it bad then repeat and wait the next one);
+    private transient Boolean responseOpenedForAnswer = false; // GAME thread waiting new answer
+    private transient long responseLastWaitingThreadId = 0;
     private final transient PlayerResponse response = new PlayerResponse();
+    private final int RESPONSE_WAITING_TIME_SECS = 30; // waiting time before cancel current response
+    private final int RESPONSE_WAITING_CHECK_MS = 100; // timeout for open status check
 
     protected static FilterCreatureForCombatBlock filterCreatureForCombatBlock = new FilterCreatureForCombatBlock();
     protected static FilterCreatureForCombat filterCreatureForCombat = new FilterCreatureForCombat();
@@ -138,24 +171,68 @@ public class HumanPlayer extends PlayerImpl {
                 || (actionIterations > 0 && !actionQueueSaved.isEmpty()));
     }
 
-    protected void waitResponseOpen() {
-        // wait response open for answer process
-        int numTimesWaiting = 0;
+    /**
+     * Waiting for opened response and save new value in it
+     * Use it in CALL threads only, e.g. for client commands
+     *
+     * @return on true result game can use response value, on false result - it's outdated response
+     */
+    protected boolean waitResponseOpen() {
+        // client send commands in async mode and can come too early
+        // so if next command come too fast then wait here until game ready
+        //
+        // example with too early response:
+        // * game must send new update to 3 users and ask user 2 for feedback answer, but user 3 is too slow
+        // +0 secs: start sending data to 3 players
+        // +0 secs: user 1 getting data
+        // +1 secs: user 1 done
+        // +1 secs: user 2 getting data
+        // +3 secs: user 2 done
+        // +3 secs: user 3 getting data (it's slow)
+        // +4 secs: user 2 sent answer 1 (but game closed for it, so waiting)
+        // +5 secs: user 2 sent answer 2 (he can't see changes after answer 1, so trying again - server must keep only latest answer)
+        // +8 secs: user 3 done
+        // +8 secs: game start wating a new answer from user 2
+        // +8 secs: game find answer
+
+        int currentTimesWaiting = 0;
+        int maxTimesWaiting = RESPONSE_WAITING_TIME_SECS * 1000 / RESPONSE_WAITING_CHECK_MS;
+        long currentThreadId = Thread.currentThread().getId();
+        // it's a latest response
+        responseLastWaitingThreadId = currentThreadId;
         while (!responseOpenedForAnswer && canRespond()) {
-            numTimesWaiting++;
-            if (numTimesWaiting >= 300) {
-                // game frozen -- need to report about error and continue to execute
-                String s = "Game frozen in waitResponseOpen for user " + getName() + " (connection problem)";
-                logger.warn(s);
-                break;
+            if (responseLastWaitingThreadId != currentThreadId) {
+                // there is another latest response, so cancel current
+                return false;
+            }
+
+            // keep waiting
+            currentTimesWaiting++;
+            if (currentTimesWaiting > maxTimesWaiting) {
+                // game frozen, possible reasons:
+                // * ANOTHER player lost connection and GAME thread trying to send data to him
+                // * current player send answer, but lost connect after it
+                String possibleReason;
+                if (response.getActiveAction() == null) {
+                    possibleReason = "maybe connection problem with another player/watcher";
+                } else {
+                    possibleReason = "something wrong with your priority on " + response.getActiveAction();
+                }
+                logger.warn(String.format("Game frozen in waitResponseOpen for %d secs: current user %s, %s",
+                        RESPONSE_WAITING_CHECK_MS * currentTimesWaiting / 1000,
+                        this.getName(),
+                        possibleReason
+                ));
+                return false;
             }
 
             try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                logger.warn("Response waiting interrupted for " + getId());
+                Thread.sleep(RESPONSE_WAITING_CHECK_MS);
+            } catch (InterruptedException ignore) {
             }
         }
+
+        return true; // can use new value
     }
 
     protected boolean pullResponseFromQueue(Game game) {
@@ -176,7 +253,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             //waitResponseOpen(); // it's a macro action, no need it here?
             synchronized (response) {
-                response.copy(action);
+                response.copyFrom(action);
                 response.notifyAll();
                 macroTriggeredSelectionFlag = false;
                 return true;
@@ -185,12 +262,39 @@ public class HumanPlayer extends PlayerImpl {
         return false;
     }
 
+    /**
+     * Prepare priority player for new feedback, call it for every choose cycle before waitForResponse
+     */
     protected void prepareForResponse(Game game) {
-        //logger.info("Prepare waiting " + getId());
+        SystemUtil.ensureRunInGameThread();
+
+        // prepare priority player
+        // on null - it's a discard in cleanaup and other non-user code, so don't change it here at that moment
+        // TODO: must research null use case
+        if (game.getState().getPriorityPlayerId() != null) {
+            if (getId() == null) {
+                logger.fatal("Player with no ID: " + name);
+                this.quit(game);
+                return;
+            }
+            if (logger.isDebugEnabled()) {
+                logger.debug("Setting game priority for " + getId() + " [" + DebugUtil.getMethodNameWithSource(2) + ']');
+            }
+            game.getState().setPriorityPlayerId(getId());
+        }
+
         responseOpenedForAnswer = false;
     }
 
+    /**
+     * Waiting feedback from priority player
+     *
+     * @param game
+     */
     protected void waitForResponse(Game game) {
+        SystemUtil.ensureRunInGameThread();
+        ;
+
         if (isExecutingMacro()) {
             pullResponseFromQueue(game);
 //            logger.info("MACRO pull from queue: " + response.toString());
@@ -201,36 +305,46 @@ public class HumanPlayer extends PlayerImpl {
             return;
         }
 
-        // wait player's answer loop
         boolean loop = true;
         while (loop) {
             // start waiting for next answer
             response.clear();
+            response.setActiveAction(DebugUtil.getMethodNameWithSource(2));
             game.resumeTimer(getTurnControlledBy());
             responseOpenedForAnswer = true;
 
             loop = false;
-
-            synchronized (response) {
+            synchronized (response) { // TODO: synchronized response smells bad here, possible deadlocks? Need research
                 try {
-                    response.wait();
-                } catch (InterruptedException ex) {
-                    logger.error("Response error for player " + getName() + " gameId: " + game.getId(), ex);
+                    response.wait(); // start waiting a response.notifyAll command from CALL thread (client answer)
+                } catch (InterruptedException ignore) {
                 } finally {
                     responseOpenedForAnswer = false;
                     game.pauseTimer(getTurnControlledBy());
                 }
             }
 
+            // async command: concede by any player
             // game recived immediately response on OTHER player concede -- need to process end game and continue to wait
-            if (response.getResponseConcedeCheck()) {
+            // TODO: is it possible to break choose dialog of current player (check it in multiplayer)?
+            if (response.getAsyncWantConcede()) {
                 ((GameImpl) game).checkConcede();
                 if (game.hasEnded()) {
                     return;
                 }
-
+                // wait another answer
                 if (canRespond()) {
-                    // wait another answer
+                    loop = true;
+                }
+            }
+
+            // async command: cheat by current player
+            if (response.getAsyncWantCheat()) {
+                // execute cheats and continue
+                SystemUtil.executeCheatCommands(game, null, this);
+                game.fireUpdatePlayersEvent(); // need force to game update for new possible data
+                // wait another answer
+                if (canRespond()) {
                     loop = true;
                 }
             }
@@ -262,7 +376,6 @@ public class HumanPlayer extends PlayerImpl {
             options.put("UI.left.btn.text", "Mulligan");
             options.put("UI.right.btn.text", "Keep");
 
-            updateGameStatePriority("chooseMulligan", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireAskPlayerEvent(playerId, new MessageToClient(message), null, options);
@@ -320,7 +433,6 @@ public class HumanPlayer extends PlayerImpl {
                 messageToClient.setSecondMessage(getRelatedObjectName(source, game));
             }
 
-            updateGameStatePriority("chooseUse", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireAskPlayerEvent(playerId, messageToClient, source, options);
@@ -412,7 +524,6 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            updateGameStatePriority("chooseEffect", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
@@ -472,7 +583,7 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // Try to autopay for mana
-        if (Outcome.PutManaInPool == outcome && currentlyUnpaidMana != null) {
+        if (Outcome.PutManaInPool == outcome && choice instanceof ChoiceColor && currentlyUnpaidMana != null) {
             // Check check if the spell being paid for cares about the color of mana being paid
             // See: https://github.com/magefree/mage/issues/9070
             boolean caresAboutManaColor = false;
@@ -490,7 +601,6 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            updateGameStatePriority("choose(3)", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireChooseChoiceEvent(playerId, choice);
@@ -553,7 +663,6 @@ public class HumanPlayer extends PlayerImpl {
                 List<UUID> chosenTargets = target.getTargets();
                 options.put("chosenTargets", (Serializable) chosenTargets);
 
-                updateGameStatePriority("choose(5)", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
                     game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargetIds, required, getOptions(target, options));
@@ -655,7 +764,6 @@ public class HumanPlayer extends PlayerImpl {
                 List<UUID> chosenTargets = target.getTargets();
                 options.put("chosenTargets", (Serializable) chosenTargets);
 
-                updateGameStatePriority("chooseTarget", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
                     game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)),
@@ -754,7 +862,6 @@ public class HumanPlayer extends PlayerImpl {
                     options.put("possibleTargets", (Serializable) possibleTargets);
                 }
 
-                updateGameStatePriority("choose(4)", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
                     game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()), cards, required, options);
@@ -838,7 +945,6 @@ public class HumanPlayer extends PlayerImpl {
                     options.put("possibleTargets", (Serializable) possibleTargets);
                 }
 
-                updateGameStatePriority("chooseTarget(5)", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
                     game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
@@ -888,6 +994,14 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         int amountTotal = target.getAmountTotal(game, source);
+        if (amountTotal == 0) {
+            return false; // nothing to distribute
+        }
+        MultiAmountType multiAmountType = source.getRule().contains("damage") ? MultiAmountType.DAMAGE : MultiAmountType.P1P1;
+
+        // 601.2d. If the spell requires the player to divide or distribute an effect (such as damage or counters)
+        // among one or more targets, the player announces the division.
+        // Each of these targets must receive at least one of whatever is being divided.
 
         // Two steps logic:
         // 1. Select targets
@@ -896,7 +1010,7 @@ public class HumanPlayer extends PlayerImpl {
         // 1. Select targets
         while (canRespond()) {
             Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
-            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+            boolean required = target.isRequired(source.getSourceId(), game);
             if (possibleTargetIds.isEmpty()
                     || target.getSize() >= target.getNumberOfTargets()) {
                 required = false;
@@ -925,12 +1039,11 @@ public class HumanPlayer extends PlayerImpl {
                     options.put("possibleTargets", (Serializable) possibleTargets);
                 }
 
-                updateGameStatePriority("chooseTargetAmount", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    // target amount uses for damage only, if you see another use case then message must be changed here and on getMultiAmount call
-
-                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargetIds, required, options);
+                    String multiType = multiAmountType == MultiAmountType.DAMAGE ? " to divide %d damage" : " to distribute %d counters";
+                    String message = target.getMessage() + String.format(multiType, amountTotal);
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), possibleTargetIds, required, options);
                 }
                 waitForResponse(game);
 
@@ -941,7 +1054,9 @@ public class HumanPlayer extends PlayerImpl {
                 if (target.contains(responseId)) {
                     // unselect
                     target.remove(responseId);
-                } else if (possibleTargetIds.contains(responseId) && target.canTarget(abilityControllerId, responseId, source, game)) {
+                } else if (possibleTargetIds.contains(responseId)
+                        && target.canTarget(abilityControllerId, responseId, source, game)
+                        && target.getSize() < amountTotal) {
                     // select
                     target.addTarget(responseId, source, game);
                 }
@@ -957,6 +1072,26 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // 2. Distribute amount between selected targets
+
+        // if only one target, it gets full amount, no possible choice
+        if (targets.size() == 1) {
+            target.setTargetAmount(targets.get(0), amountTotal, source, game);
+            return true;
+        }
+
+        // if number of targets equal to amount, each get 1, no possible choice
+        if (targets.size() == amountTotal) {
+            for (UUID targetId : targets) {
+                target.setTargetAmount(targetId, 1, source, game);
+            }
+            return true;
+        }
+
+        // should not be able to have more targets than amount, but in such case it's illegal
+        if (targets.size() > amountTotal) {
+            target.clearChosen();
+            return false;
+        }
 
         // prepare targets list with p/t or life stats (cause that's dialog used for damage distribute)
         List<String> targetNames = new ArrayList<>();
@@ -978,7 +1113,6 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
-        MultiAmountType multiAmountType = source.toString().contains("counters") ? MultiAmountType.P1P1 : MultiAmountType.DAMAGE;
         // ask and assign new amount
         List<Integer> targetValues = getMultiAmount(outcome, targetNames, 1, amountTotal, multiAmountType, game);
         for (int i = 0; i < targetValues.size(); i++) {
@@ -1172,7 +1306,6 @@ public class HumanPlayer extends PlayerImpl {
             while (canRespond()) {
                 holdingPriority = false;
 
-                updateGameStatePriority("priority", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
                     game.firePriorityEvent(playerId);
@@ -1312,12 +1445,14 @@ public class HumanPlayer extends PlayerImpl {
             return null;
         }
 
+        // automatically order triggers with same ability, rules text, and targets
         String autoOrderRuleText = null;
+        Ability autoOrderAbility = null;
         boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (canRespond()) {
             // try to set trigger auto order
-            java.util.List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
-            java.util.List<TriggeredAbility> abilitiesOrderLast = new ArrayList<>();
+            List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
+            List<TriggeredAbility> abilitiesOrderLast = new ArrayList<>();
             for (TriggeredAbility ability : abilities) {
                 if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
                     return ability;
@@ -1337,12 +1472,33 @@ public class HumanPlayer extends PlayerImpl {
                     continue;
                 }
                 if (autoOrderUse) {
-                    // multiple triggers with same rule text will be auto-ordered
+                    // multiple triggers with same rule text will be auto-ordered if possible
+                    // if different, must use choose dialog
                     if (autoOrderRuleText == null) {
+                        // first trigger, store rule text and ability to compare subsequent triggers
                         autoOrderRuleText = rule;
+                        autoOrderAbility = ability;
                     } else if (!rule.equals(autoOrderRuleText)) {
-                        // diff triggers, so must use choose dialog
+                        // disable auto order if rule text is different
                         autoOrderUse = false;
+                    } else {
+                        // disable auto order if targets are different
+                        Effects effects1 = autoOrderAbility.getEffects();
+                        Effects effects2 = ability.getEffects();
+                        if (effects1.size() != effects2.size()) {
+                            autoOrderUse = false;
+                        } else {
+                            for (int i = 0; i < effects1.size(); i++) {
+                                TargetPointer targetPointer1 = effects1.get(i).getTargetPointer();
+                                TargetPointer targetPointer2 = effects2.get(i).getTargetPointer();
+                                List<UUID> targets1 = (targetPointer1 == null) ? new ArrayList<>() : targetPointer1.getTargets(game, autoOrderAbility);
+                                List<UUID> targets2 = (targetPointer2 == null) ? new ArrayList<>() : targetPointer2.getTargets(game, ability);
+                                if (!targets1.equals(targets2)) {
+                                    autoOrderUse = false;
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
                 abilitiesWithNoOrderSet.add(ability);
@@ -1353,8 +1509,7 @@ public class HumanPlayer extends PlayerImpl {
                 return abilitiesOrderLast.stream().findFirst().orElse(null);
             }
 
-            if (abilitiesWithNoOrderSet.size() == 1
-                    || autoOrderUse) {
+            if (abilitiesWithNoOrderSet.size() == 1 || autoOrderUse) {
                 return abilitiesWithNoOrderSet.iterator().next();
             }
 
@@ -1374,7 +1529,6 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             macroTriggeredSelectionFlag = true;
-            updateGameStatePriority("chooseTriggeredAbility", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireSelectTargetTriggeredAbilityEvent(playerId, "Pick triggered ability (goes to the stack first)", abilitiesWithNoOrderSet);
@@ -1423,7 +1577,6 @@ public class HumanPlayer extends PlayerImpl {
         // TODO: make canRespond cycle?
         if (canRespond()) {
             Map<String, Serializable> options = new HashMap<>();
-            updateGameStatePriority("playMana", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.firePlayManaEvent(playerId, "Pay " + promptText, options);
@@ -1432,17 +1585,19 @@ public class HumanPlayer extends PlayerImpl {
 
             UUID responseId = getFixedResponseUUID(game);
             if (response.getBoolean() != null) {
+                // cancel
                 return false;
             } else if (responseId != null) {
+                // pay from mana object
                 playManaAbilities(responseId, abilityToCast, unpaid, game);
-            } else if (response.getString() != null
-                    && response.getString().equals("special")) {
+            } else if (response.getString() != null && response.getString().equals("special")) {
+                // pay from special action
                 if (unpaid instanceof ManaCostsImpl) {
                     activateSpecialAction(game, unpaid);
                 }
             } else if (response.getManaType() != null) {
-                // this mana type can be paid once from pool
-                if (response.getResponseManaTypePlayerId().equals(this.getId())) {
+                // pay from own mana pool
+                if (response.getManaPlayerId().equals(this.getId())) {
                     this.getManaPool().unlockManaType(response.getManaType());
                 }
                 // TODO: Handle if mana pool
@@ -1467,7 +1622,6 @@ public class HumanPlayer extends PlayerImpl {
 
         int xValue = 0;
         while (canRespond()) {
-            updateGameStatePriority("announceRepetitions", game);
             prepareForResponse(game);
             game.fireGetAmountEvent(playerId, "How many times do you want to repeat your shortcut?", 0, 999);
             waitForResponse(game);
@@ -1503,7 +1657,6 @@ public class HumanPlayer extends PlayerImpl {
         int xValue = 0;
         String extraMessage = (multiplier == 1 ? "" : ", X will be increased by " + multiplier + " times");
         while (canRespond()) {
-            updateGameStatePriority("announceXMana", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireGetAmountEvent(playerId, message + extraMessage, min, max);
@@ -1529,7 +1682,6 @@ public class HumanPlayer extends PlayerImpl {
 
         int xValue = 0;
         while (canRespond()) {
-            updateGameStatePriority("announceXCost", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireGetAmountEvent(playerId, message, min, max);
@@ -1548,7 +1700,6 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void playManaAbilities(UUID objectId, Ability abilityToCast, ManaCost unpaid, Game game) {
-        updateGameStatePriority("playManaAbilities", game);
         MageObject object = game.getObject(objectId);
         if (object == null) {
             return;
@@ -1649,7 +1800,6 @@ public class HumanPlayer extends PlayerImpl {
                 options.put(Constants.Option.SPECIAL_BUTTON, "All attack");
             }
 
-            updateGameStatePriority("selectAttackers", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireSelectEvent(playerId, "Select attackers", options);
@@ -1876,7 +2026,6 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            updateGameStatePriority("selectBlockers", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 Map<String, Serializable> options = new HashMap<>();
@@ -1920,7 +2069,6 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            updateGameStatePriority("chooseAttackerOrder", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireSelectTargetEvent(playerId, "Pick attacker", attackers, true);
@@ -1946,7 +2094,6 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            updateGameStatePriority("chooseBlockerOrder", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
@@ -1978,7 +2125,6 @@ public class HumanPlayer extends PlayerImpl {
 
         UUID responseId = null;
 
-        updateGameStatePriority("selectCombatGroup", game);
         prepareForResponse(game);
         if (!isExecutingMacro()) {
             // possible attackers to block
@@ -2021,7 +2167,6 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void assignDamage(int damage, java.util.List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
-        updateGameStatePriority("assignDamage", game);
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
             Target target = new TargetAnyTarget();
@@ -2029,9 +2174,9 @@ public class HumanPlayer extends PlayerImpl {
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
             }
-            choose(Outcome.Damage, target, source, game);
+            this.choose(Outcome.Damage, target, source, game);
             if (targets.isEmpty() || targets.contains(target.getFirstTarget())) {
-                int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
+                int damageAmount = this.getAmount(0, remainingDamage, "Select amount", game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.damage(damageAmount, attackerId, source, game, false, true);
@@ -2054,7 +2199,6 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            updateGameStatePriority("getAmount", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireGetAmountEvent(playerId, message, min, max);
@@ -2095,12 +2239,14 @@ public class HumanPlayer extends PlayerImpl {
 
         List<Integer> answer = null;
         while (canRespond()) {
-            updateGameStatePriority("getMultiAmount", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 Map<String, Serializable> options = new HashMap<>(2);
                 options.put("title", type.getTitle());
                 options.put("header", type.getHeader());
+                if (type.isCanCancel()) {
+                    options.put("canCancel", true);
+                }
                 game.fireGetMultiAmountEvent(playerId, messages, min, max, options);
             }
             waitForResponse(game);
@@ -2116,11 +2262,17 @@ public class HumanPlayer extends PlayerImpl {
                     logger.error(String.format("GUI return wrong MultiAmountType values: %d %d %d - %s", needCount, min, max, response.getString()));
                     game.informPlayer(this, "Error, you must enter correct values.");
                 }
+            } else if (type.isCanCancel() && response.getBoolean() != null) {
+                answer = null;
+                break;
             }
         }
 
         if (answer != null) {
             return answer;
+        } else if (type.isCanCancel()) {
+            // cancel
+            return null;
         } else {
             // something wrong, e.g. player disconnected
             return defaultList;
@@ -2159,8 +2311,6 @@ public class HumanPlayer extends PlayerImpl {
 
         Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, unpaidForManaAction != null);
         if (!specialActions.isEmpty()) {
-
-            updateGameStatePriority("specialAction", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
@@ -2190,8 +2340,6 @@ public class HumanPlayer extends PlayerImpl {
             return;
         }
 
-        updateGameStatePriority("activateAbility", game);
-
         if (abilities.size() == 1
                 && suppressAbilityPicker(abilities.values().iterator().next(), game)) {
             ActivatedAbility ability = abilities.values().iterator().next();
@@ -2218,7 +2366,8 @@ public class HumanPlayer extends PlayerImpl {
             message = message + "<br>" + object.getLogName();
         }
 
-        // TODO: add canRespond cycle?
+        // it's inner method, parent code already uses while and canRespond cycle,
+        // so can request one time here
         prepareForResponse(game);
         if (!isExecutingMacro()) {
             game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(abilities.values()));
@@ -2242,6 +2391,8 @@ public class HumanPlayer extends PlayerImpl {
      */
     private boolean suppressAbilityPicker(ActivatedAbility ability, Game game) {
         if (getControllingPlayersUserData(game).isShowAbilityPickerForced()) {
+            // TODO: is it bugged on mana payment + under control?
+            //  (if player under control then priority player must use own settings, not controlling)
             // user activated an ability picker in preferences
 
             // force to show ability picker for double faces cards in hand/commander/exile and other zones
@@ -2292,7 +2443,6 @@ public class HumanPlayer extends PlayerImpl {
             } else if (useableAbilities != null
                     && !useableAbilities.isEmpty()) {
 
-                updateGameStatePriority("chooseAbilityForCast", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
                     game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(useableAbilities.values()));
@@ -2341,7 +2491,6 @@ public class HumanPlayer extends PlayerImpl {
                 case 1:
                     return useableAbilities.values().iterator().next();
                 default:
-                    updateGameStatePriority("chooseLandOrSpellAbility", game);
                     prepareForResponse(game);
                     if (!isExecutingMacro()) {
                         String message = "Choose spell or ability to play" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
@@ -2366,9 +2515,17 @@ public class HumanPlayer extends PlayerImpl {
             return null;
         }
 
-        if (modes.size() > 1) {
-            // done option for up to choices
-            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
+        if (modes.size() == 0) {
+            return null;
+        }
+
+        if (modes.size() == 1) {
+            return modes.getMode();
+        }
+
+        boolean done = false;
+        while (!done && canRespond()) {
+            // prepare modes list
             MageObject obj = game.getObject(source);
             Map<UUID, String> modeMap = new LinkedHashMap<>();
             int modeIndex = 0;
@@ -2380,7 +2537,7 @@ public class HumanPlayer extends PlayerImpl {
                     Mode selectedMode = modes.get(selectedModeId);
                     if (mode.getId().equals(selectedMode.getId())) {
                         // mode selected
-                        if (modes.isEachModeMoreThanOnce()) {
+                        if (modes.isMayChooseSameModeMoreThanOnce()) {
                             // can select again
                         } else {
                             // hide mode from dialog
@@ -2394,7 +2551,7 @@ public class HumanPlayer extends PlayerImpl {
                     if (obj != null) {
                         modeText = modeText.replace("{this}", obj.getName());
                     }
-                    if (modes.isEachModeMoreThanOnce()) {
+                    if (modes.isMayChooseSameModeMoreThanOnce()) {
                         if (timesSelected > 0) {
                             modeText = "(selected " + timesSelected + "x) " + modeText;
                         }
@@ -2406,65 +2563,60 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
-            if (!modeMap.isEmpty()) {
-
-                // can done for up to
-                if (canEndChoice) {
-                    modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
-                }
-                modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
-
-                boolean done = false;
-                while (!done && canRespond()) {
-
-                    String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
-                            + ", min " + modes.getMinModes() + ")";
-                    if (obj != null) {
-                        message = message + "<br>" + obj.getLogName();
-                    }
-
-                    updateGameStatePriority("chooseMode", game);
-                    prepareForResponse(game);
-                    if (!isExecutingMacro()) {
-                        game.fireGetModeEvent(playerId, message, modeMap);
-                    }
-                    waitForResponse(game);
-
-                    UUID responseId = getFixedResponseUUID(game);
-                    if (responseId != null) {
-                        for (Mode mode : modes.getAvailableModes(source, game)) {
-                            if (mode.getId().equals(responseId)) {
-                                // TODO: add checks on 2x selects (cheaters can rewrite client side code and select same mode multiple times)
-                                // reason: wrong setup eachModeMoreThanOnce and eachModeOnlyOnce in many cards
-                                return mode;
-                            }
-                        }
-
-                        // end choice by done option in ability pickup dialog
-                        if (canEndChoice && Modes.CHOOSE_OPTION_DONE_ID.equals(responseId)) {
-                            done = true;
-                        }
-
-                        // cancel choice (remove all selections)
-                        if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(responseId)) {
-                            modes.clearSelectedModes();
-                        }
-                    } else if (canEndChoice) {
-                        // end choice by done button in feedback panel
-                        // disable after done option implemented
-                        // done = true;
-                    }
-
-                    // triggered abilities can't be skipped by cancel or wrong answer
-                    if (source.getAbilityType() != AbilityType.TRIGGERED) {
-                        done = true;
-                    }
-                }
+            // done button for "for up" choices only
+            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
+            if (canEndChoice) {
+                modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
             }
-            return null;
+            modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
+
+            // prepare dialog
+            String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
+                    + ", min " + modes.getMinModes() + ")";
+            if (obj != null) {
+                message = message + "<br>" + obj.getLogName();
+            }
+
+            prepareForResponse(game);
+            if (!isExecutingMacro()) {
+                game.fireGetModeEvent(playerId, message, modeMap);
+            }
+            waitForResponse(game);
+
+            // process choice
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
+                for (Mode mode : modes.getAvailableModes(source, game)) {
+                    if (mode.getId().equals(responseId)) {
+                        // TODO: add checks on 2x selects (cheaters can rewrite client side code and select same mode multiple times)
+                        // reason: wrong setup eachModeMoreThanOnce and eachModeOnlyOnce in many cards
+                        return mode;
+                    }
+                }
+
+                // end choice by done option in ability pickup dialog
+                if (canEndChoice && Modes.CHOOSE_OPTION_DONE_ID.equals(responseId)) {
+                    done = true;
+                }
+
+                // cancel choice (remove all selections)
+                if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(responseId)) {
+                    modes.clearSelectedModes();
+                }
+            } else if (canEndChoice) {
+                // end choice by done button in feedback panel
+                // disable after done option implemented
+                // done = true;
+            }
+
+            // triggered abilities can't be skipped by cancel or wrong answer
+            if (source.getAbilityType() != AbilityType.TRIGGERED) {
+                done = true;
+            }
         }
 
-        return modes.getMode();
+        // user disconnected, press cancel, press done or something else
+        return null;
     }
 
     @Override
@@ -2474,7 +2626,6 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            updateGameStatePriority("choosePile", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireChoosePileEvent(playerId, message, pile1, pile2);
@@ -2495,7 +2646,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void setResponseString(String responseString) {
-        waitResponseOpen();
+        if (!waitResponseOpen()) {
+            return;
+        }
         synchronized (response) {
             response.setString(responseString);
             response.notifyAll();
@@ -2505,10 +2658,12 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void setResponseManaType(UUID manaTypePlayerId, ManaType manaType) {
-        waitResponseOpen();
+        if (!waitResponseOpen()) {
+            return;
+        }
         synchronized (response) {
             response.setManaType(manaType);
-            response.setResponseManaTypePlayerId(manaTypePlayerId);
+            response.setResponseManaPlayerId(manaTypePlayerId);
             response.notifyAll();
             logger.debug("Got response mana type from player: " + getId());
         }
@@ -2516,7 +2671,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void setResponseUUID(UUID responseUUID) {
-        waitResponseOpen();
+        if (!waitResponseOpen()) {
+            return;
+        }
         synchronized (response) {
             response.setUUID(responseUUID);
             response.notifyAll();
@@ -2526,7 +2683,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void setResponseBoolean(Boolean responseBoolean) {
-        waitResponseOpen();
+        if (!waitResponseOpen()) {
+            return;
+        }
         synchronized (response) {
             response.setBoolean(responseBoolean);
             response.notifyAll();
@@ -2536,7 +2695,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void setResponseInteger(Integer responseInteger) {
-        waitResponseOpen();
+        if (!waitResponseOpen()) {
+            return;
+        }
         synchronized (response) {
             response.setInteger(responseInteger);
             response.notifyAll();
@@ -2546,8 +2707,8 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void abort() {
+        // abort must cancel any response and stop waiting immediately
         abort = true;
-        waitResponseOpen();
         synchronized (response) {
             response.notifyAll();
             logger.debug("Got cancel action from player: " + getId());
@@ -2556,17 +2717,28 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void signalPlayerConcede() {
-        //waitResponseOpen(); //concede is direct event, no need to wait it
+        // waitResponseOpen(); // concede is async event, will be processed on first priority
         synchronized (response) {
-            response.setResponseConcedeCheck();
+            response.setAsyncWantConcede();
             response.notifyAll();
             logger.debug("Set check concede for waiting player: " + getId());
         }
     }
 
     @Override
+    public void signalPlayerCheat() {
+        // waitResponseOpen(); // cheat is async event, will be processed on first player's priority
+        synchronized (response) {
+            response.setAsyncWantCheat();
+            response.notifyAll();
+            logger.debug("Set cheat for waiting player: " + getId());
+        }
+    }
+
+    @Override
     public void skip() {
         // waitResponseOpen(); //skip is direct event, no need to wait it
+        // TODO: can be bugged and must be reworked, see wantConcede as example?!
         synchronized (response) {
             response.setInteger(0);
             response.notifyAll();
@@ -2577,20 +2749,6 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public HumanPlayer copy() {
         return new HumanPlayer(this);
-    }
-
-    protected void updateGameStatePriority(String methodName, Game game) {
-        // call that for every choose cycle before prepareForResponse
-        // (some choose logic can asks another question with different game state priority)
-        if (game.getState().getPriorityPlayerId() != null) { // don't do it if priority was set to null before (e.g. discard in cleanaup)
-            if (getId() == null) {
-                logger.fatal("Player with no ID: " + name);
-                this.quit(game);
-                return;
-            }
-            logger.debug("Setting game priority to " + getId() + " [" + methodName + ']');
-            game.getState().setPriorityPlayerId(getId());
-        }
     }
 
     @Override

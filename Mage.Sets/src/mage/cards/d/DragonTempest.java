@@ -37,7 +37,7 @@ public final class DragonTempest extends CardImpl {
         // Whenever a creature with flying enters the battlefield under your control, it gains haste until the end of turn.
         Effect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("it gains haste until end of turn");
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterFlying, false, SetTargetPointer.PERMANENT, ""));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterFlying, false, SetTargetPointer.PERMANENT));
 
         // Whenever a Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
@@ -45,8 +45,7 @@ public final class DragonTempest extends CardImpl {
                 new DragonTempestDamageEffect(),
                 new FilterCreaturePermanent(SubType.DRAGON, "a Dragon"),
                 false,
-                SetTargetPointer.NONE,
-                ""
+                SetTargetPointer.NONE
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

@@ -40,7 +40,7 @@ public final class FaerieNoble extends CardImpl {
         // Other Faerie creatures you control get +0/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
         // {tap}: Other Faerie creatures you control get +1/+0 until end of turn.
-        Effect effect = new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true);
+        Effect effect = new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter, true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         this.addAbility(ability);
     }

@@ -26,12 +26,15 @@ public class UserManagerImpl implements UserManager {
     private static final int SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS = 3 * 60; // removes from all games and chats too (can be seen in users list with disconnected status)
     private static final int SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS = 8 * 60; // removes from users list
 
+    private static final int SERVER_TIMEOUTS_USER_EXPIRE_CHECK_SECS = 60;
+    private static final int SERVER_TIMEOUTS_USERS_LIST_UPDATE_SECS = 4; // server side updates (client use own timeouts to request users list)
+
     private static final Logger logger = Logger.getLogger(UserManagerImpl.class);
 
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
     protected final ScheduledExecutorService userListExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    private List<UserView> userInfoList = new ArrayList<>();
+    private List<UserView> userInfoList = new ArrayList<>(); // all users list for main room/chat
     private final ManagerFactory managerFactory;
 
 
@@ -46,9 +49,8 @@ public class UserManagerImpl implements UserManager {
 
     public void init() {
         USER_EXECUTOR = managerFactory.threadExecutor().getCallExecutor();
-        expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
-
-        userListExecutor.scheduleAtFixedRate(this::updateUserInfoList, 4, 4, TimeUnit.SECONDS);
+        expireExecutor.scheduleAtFixedRate(this::checkExpired, SERVER_TIMEOUTS_USER_EXPIRE_CHECK_SECS, SERVER_TIMEOUTS_USER_EXPIRE_CHECK_SECS, TimeUnit.SECONDS);
+        userListExecutor.scheduleAtFixedRate(this::updateUserInfoList, SERVER_TIMEOUTS_USERS_LIST_UPDATE_SECS, SERVER_TIMEOUTS_USERS_LIST_UPDATE_SECS, TimeUnit.SECONDS);
     }
 
     @Override
@@ -254,7 +256,7 @@ public class UserManagerImpl implements UserManager {
     }
 
     /**
-     * This method recreated the user list that will be send to all clients
+     * This method recreated the user list that will be sent to all clients
      */
     private void updateUserInfoList() {
         try {

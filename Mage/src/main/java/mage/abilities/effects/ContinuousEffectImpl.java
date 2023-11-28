@@ -452,7 +452,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         // wait dependency
         // extraPredicates from some filters is player related, you don't need it here
         List<Predicate> list = new ArrayList<>();
-        Predicates.collectAllComponents(filter.getPredicates(), list);
+        Predicates.collectAllComponents(filter.getPredicates(), filter.getExtraPredicates(), list);
         if (list.stream().anyMatch(SubType.SubTypePredicate.class::isInstance)) {
             this.addDependedToType(DependencyType.AddingCreatureType);
         }

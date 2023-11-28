@@ -10,10 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -29,11 +26,8 @@ public final class MirrorMarch extends CardImpl {
 
         // Whenever a nontoken creature enters the battlefield under your control, flip a coin until you lose a flip. For each flip you won, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new MirrorMarchEffect(), StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature enters the battlefield under your control, " +
-                        "flip a coin until you lose a flip. For each flip you won, " +
-                        "create a token that's a copy of that creature. Those tokens gain haste. " +
-                        "Exile them at the beginning of the next end step."
+                Zone.BATTLEFIELD, new MirrorMarchEffect(), StaticFilters.FILTER_CREATURE_NON_TOKEN,
+                false, SetTargetPointer.PERMANENT
         ));
     }
 
@@ -51,6 +45,9 @@ class MirrorMarchEffect extends OneShotEffect {
 
     MirrorMarchEffect() {
         super(Outcome.Benefit);
+        staticText = "flip a coin until you lose a flip. For each flip you won, " +
+                "create a token that's a copy of that creature. Those tokens gain haste. " +
+                "Exile them at the beginning of the next end step.";
     }
 
     private MirrorMarchEffect(final MirrorMarchEffect effect) {

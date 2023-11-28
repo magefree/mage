@@ -91,6 +91,7 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
             return false;
         }
         makeToken(player, game, source);
+        game.getState().processAction(game);
         distributeCounters(player, game, source);
         return true;
     }
@@ -113,10 +114,12 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
         if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game) < 1) {
             return;
         }
-        TargetPermanentAmount target = new TargetCreaturePermanentAmount(3);
+        TargetPermanentAmount target = new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURE);
+        target.setMinNumberOfTargets(1);
+        target.setMaxNumberOfTargets(3);
         target.withNotTarget(true);
         target.withChooseHint("to distribute counters");
-        player.choose(outcome, target, source, game);
+        target.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {

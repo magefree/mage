@@ -11,7 +11,7 @@ import mage.view.CardView;
 import org.mage.card.arcane.UI;
 
 /**
- * Card info pane for displaying card rules. Supports drawing mana symbols.
+ * GUI: card info pane for displaying card rules (example: text mode for popup card). Supports drawing mana symbols.
  *
  * @author nantuko
  */

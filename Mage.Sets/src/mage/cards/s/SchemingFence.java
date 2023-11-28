@@ -184,7 +184,7 @@ class SchemingFenceGainEffect extends ContinuousEffectImpl {
             if (!(ability instanceof LoyaltyAbility)) {
                 Ability copied = ability.copy();
                 ability.getEffects().setValue("schemingFence", source.getSourceId());
-                permanent.addAbility(copied, source.getSourceId(), game);
+                permanent.addAbility(copied, source.getSourceId(), game, true);
             }
         }
         return true;

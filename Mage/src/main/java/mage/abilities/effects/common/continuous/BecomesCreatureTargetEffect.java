@@ -133,7 +133,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     if (sublayer == SubLayer.NA) {
                         if (!token.getAbilities().isEmpty()) {
                             for (Ability ability : token.getAbilities()) {
-                                permanent.addAbility(ability, source.getSourceId(), game);
+                                permanent.addAbility(ability, source.getSourceId(), game, true);
                             }
                         }
                     }

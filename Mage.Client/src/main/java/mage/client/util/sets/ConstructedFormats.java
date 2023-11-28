@@ -7,6 +7,7 @@ import mage.constants.SetType;
 import mage.deck.Standard;
 import mage.game.events.Listener;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -54,6 +55,7 @@ public final class ConstructedFormats {
                 }
             }
         };
+        // it's a static, so no needs to unsubscribe later
         ExpansionRepository.instance.subscribe(setsDbListener);
     }
 

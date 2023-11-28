@@ -51,11 +51,6 @@ class EerieInterferenceEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!super.applies(event, source, game)) {
             return false;

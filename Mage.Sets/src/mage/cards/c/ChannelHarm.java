@@ -59,11 +59,6 @@ class ChannelHarmEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player sourceController = game.getPlayer(source.getControllerId());
         PreventionEffectData preventionData = preventDamageAction(event, source, game);

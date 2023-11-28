@@ -1,12 +1,14 @@
 package org.mage.test.player;
 
 import mage.abilities.Ability;
+import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.player.ai.ComputerPlayer7;
 import mage.target.Target;
+import mage.target.TargetCard;
 
 /**
  * Copied-pasted methods from TestComputerPlayer, see docs in there
@@ -41,6 +43,33 @@ public class TestComputerPlayer7 extends ComputerPlayer7 {
             return super.choose(outcome, choice, game);
         } else {
             return testPlayerLink.choose(outcome, choice, game);
+        }
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.choose(outcome, cards, target, source, game);
+        } else {
+            return testPlayerLink.choose(outcome, cards, target, source, game);
+        }
+    }
+
+    @Override
+    public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.chooseTarget(outcome, target, source, game);
+        } else {
+            return testPlayerLink.chooseTarget(outcome, target, source, game);
+        }
+    }
+
+    @Override
+    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.chooseTarget(outcome, cards, target, source, game);
+        } else {
+            return testPlayerLink.chooseTarget(outcome, cards, target, source, game);
         }
     }
 

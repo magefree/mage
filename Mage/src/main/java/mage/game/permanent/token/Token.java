@@ -22,6 +22,7 @@ public interface Token extends MageObject {
     List<UUID> getLastAddedTokenIds();
 
     void addAbility(Ability ability);
+    void addAbility(Ability ability, boolean fromExistingObject);
 
     void removeAbility(Ability abilityToRemove);
 

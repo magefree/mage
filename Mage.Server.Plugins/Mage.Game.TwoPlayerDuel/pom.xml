@@ -45,6 +45,8 @@
         <finalName>mage-game-twoplayerduel</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/../..</root.dir>
+    </properties>
 
 </project>

@@ -6,6 +6,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.stack.Spell;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -236,6 +237,27 @@ public class DisturbTest extends CardTestPlayerBase {
         execute();
         assertPermanentCount(playerA, "Sinner's Judgment", 1);
         assertTappedCount("Plains", true, 5);
+    }
+
+    //Currently failing: Transform SpellAbilityCastMode.getTypeModifiedCardObjectCopy destroys existing modifications
+    @Ignore
+    @Test
+    public void test_SpellAttributesIndirectCostModifications() {
+        // Disturb {1}{U}
+        // Hook-Haunt Drifter
+        addCard(Zone.GRAVEYARD, playerA, "Baithook Angler", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus", 1);
+        //Dragonlord's Servant : Dragon spells you cast cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Dragonlord's Servant", 1);
+        // Transform's copy effect must not override other spell modifications
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Hook-Haunt Drifter", 1);
+        assertTappedCount("Island", true, 1);
     }
 
     /**

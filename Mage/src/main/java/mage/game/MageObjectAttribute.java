@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.SuperType;
+import mage.util.Copyable;
 import mage.util.SubTypes;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author LevelX2
  */
-public class MageObjectAttribute implements Serializable {
+public class MageObjectAttribute implements Serializable, Copyable<MageObjectAttribute> {
 
     protected final ObjectColor color;
     protected final SubTypes subtype;

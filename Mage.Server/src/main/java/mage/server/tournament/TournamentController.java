@@ -109,7 +109,7 @@ public class TournamentController {
                 (Listener<PlayerQueryEvent>) event -> {
                     try {
                         switch (event.getQueryType()) {
-                            case CONSTRUCT:
+                            case TOURNAMENT_CONSTRUCT:
                                 construct(event.getPlayerId(), event.getMax());
                                 break;
                         }

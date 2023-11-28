@@ -1,10 +1,7 @@
 package mage.util;
 
 import com.google.common.collect.ImmutableList;
-import mage.ApprovingObject;
-import mage.MageIdentifier;
-import mage.MageObject;
-import mage.Mana;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -12,6 +9,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -41,9 +39,11 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
@@ -909,6 +909,8 @@ public final class CardUtil {
         boolean xValue = amount.toString().equals("X");
         if (xValue) {
             sb.append("X ").append(counter.getName()).append(" counters");
+        } else if (amount == SavedDamageValue.MANY) {
+            sb.append("that many ").append(counter.getName()).append(" counters");
         } else {
             sb.append(counter.getDescription());
         }
@@ -1013,8 +1015,9 @@ public final class CardUtil {
 
     /**
      * For finding the spell or ability on the stack for "becomes the target" triggers.
+     *
      * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game the Game from checkTrigger() or watch()
+     * @param game  the Game from checkTrigger() or watch()
      * @return the StackObject which targeted the source, or null if not found
      */
     public static StackObject getTargetingStackObject(GameEvent event, Game game) {
@@ -1039,10 +1042,11 @@ public final class CardUtil {
      * For ensuring that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
      * If this is the first attempt at triggering for a given ability targeting a given object,
      * this method records that in the game state for later checks by this same method.
+     *
      * @param checkingReference must be unique for each usage (this.id.toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param targetingObject from getTargetingStackObject
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game the Game from checkTrigger() or watch()
+     * @param targetingObject   from getTargetingStackObject
+     * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game              the Game from checkTrigger() or watch()
      * @return true if already triggered/watched, false if this is the first/only trigger/watch
      */
     public static boolean checkTargetedEventAlreadyUsed(String checkingReference, StackObject targetingObject, GameEvent event, Game game) {
@@ -1289,7 +1293,22 @@ public final class CardUtil {
         void addCard(Card card, Ability source, Game game);
     }
 
-    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
+    /**
+     * Retrieves a list of all castable components from a given card based on certain conditions.
+     * <p>
+     * Castable components are parts of a card that can be played or cast,
+     * such as the adventure and main side of adventure spells or both sides of a fuse card.
+     *
+     * @param cardToCast
+     * @param filter           A filter to determine if a card is eligible for casting.
+     * @param source           The ability or source responsible for the casting.
+     * @param player
+     * @param game
+     * @param spellCastTracker An optional tracker for spell casting.
+     * @param playLand         A boolean flag indicating whether playing lands is allowed.
+     * @return A list of castable components from the input card, considering the provided conditions.
+     */
+    public static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
         UUID playerId = player.getId();
         List<Card> cards = new ArrayList<>();
         if (cardToCast instanceof CardWithHalves) {
@@ -1358,10 +1377,9 @@ public final class CardUtil {
         List<Card> partsToCast = cardMap.get(cardToCast.getId());
         String partsInfo = partsToCast
                 .stream()
-                .map(MageObject::getIdName)
+                .map(MageObject::getLogName)
                 .collect(Collectors.joining(" or "));
-        if (cardToCast == null
-                || partsToCast.size() < 1
+        if (partsToCast.size() < 1
                 || !player.chooseUse(
                 Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
         )) {
@@ -1574,6 +1592,11 @@ public final class CardUtil {
         return sourceObject != null ? sourceObject.getName() : "";
     }
 
+    public static String getSourceIdName(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        return sourceObject != null ? sourceObject.getIdName() : "";
+    }
+
     /**
      * Generates source log name to insert into log messages
      *
@@ -1623,12 +1646,209 @@ public final class CardUtil {
         }
         return zcc;
     }
+    /**
+     * Create a MageObjectReference of the ability's source
+     * Subtract 1 zcc if not on the stack, referencing when it was on the stack if it's a resolved permanent.
+     * works in any moment (even before source ability activated)
+     *
+     * @param game
+     * @param ability
+     * @return MageObjectReference to the ability's source stack moment
+     */
+    public static MageObjectReference getSourceStackMomentReference(Game game, Ability ability) {
+        // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
+        // Use cases:
+        // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
+        // * copied spell have same zcc as source spell (see Spell.copySpell and zcc sync);
+        // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
+
+        // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
+        MageObject sourceObject = ability.getSourceObject(game);
+        Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
+        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, ability);
+        // find "stack moment" zcc:
+        // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
+        // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
+        // * spells and copied spells resolves on STACK (zcc not changes)
+        if (sourceObjectZone != Zone.STACK) {
+            --zcc;
+        }
+        return new MageObjectReference(ability.getSourceId(), zcc, game);
+    }
+
+    /**
+     * Returns the entire cost tags map of either the source ability, or the permanent source of the ability. May be null.
+     * Works in any moment (even before source ability activated)
+     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists()
+     * Use this function with caution, as it directly exposes the backing data structure.
+     *
+     * @param game
+     * @param source
+     * @return the tag map (or null)
+     */
+    public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
+        Map<String, Object> costTags;
+        costTags = source.getCostsTagMap();
+        if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
+            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+        }
+        return costTags;
+    }
+    /**
+     * Check if a specific tag exists in the cost tags of either the source ability, or the permanent source of the ability.
+     * Works in any moment (even before source ability activated)
+     *
+     * @param game
+     * @param source
+     * @param tag The tag's string identifier to look up
+     * @return if the tag was found
+     */
+    public static boolean checkSourceCostsTagExists(Game game, Ability source, String tag) {
+        Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
+        return costTags != null && costTags.containsKey(tag);
+    }
+    /**
+     * Find a specific tag in the cost tags of either the source ability, or the permanent source of the ability.
+     * Works in any moment (even before source ability activated)
+     * Do not use with null values, use checkSourceCostsTagExists instead
+     *
+     * @param game
+     * @param source
+     * @param tag The tag's string identifier to look up
+     * @param defaultValue A default value to return if the tag is not found
+     * @return The object stored by the tag if found, the default if not
+     */
+    public static <T> T getSourceCostsTag(Game game, Ability source, String tag, T defaultValue){
+        Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
+        if (costTags != null) {
+            Object value = costTags.getOrDefault(tag, defaultValue);
+            if (value == null) {
+                throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type null but is trying to be read. Use checkSourceCostsTagExists");
+            }
+            if (value.getClass() != defaultValue.getClass()) {
+                throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type " + value.getClass().getName() + " different from default of type " + defaultValue.getClass().getName());
+            }
+            return (T) value;
+        }
+        return defaultValue;
+    }
 
     public static String addCostVerb(String text) {
         if (costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith)) {
             return text;
         }
         return "pay " + text;
+    }
+
+    private static boolean isImmutableObject(Object o){
+        return o == null
+                || o instanceof Number || o instanceof Boolean || o instanceof String
+                || o instanceof MageObjectReference || o instanceof UUID
+                || o instanceof Enum;
+    }
+    public static <T> T deepCopyObject(T value){
+        if (isImmutableObject(value)) {
+            return value;
+        } else if (value instanceof Copyable) {
+            return (T) ((Copyable<T>) value).copy();
+        } else if (value instanceof Watcher) {
+            return (T) ((Watcher) value).copy();
+        } else if (value instanceof Ability) {
+            return (T) ((Ability) value).copy();
+        } else if (value instanceof PlayerList) {
+            return (T) ((PlayerList) value).copy();
+        } else if (value instanceof EnumSet) {
+            return (T) ((EnumSet) value).clone();
+        } else if (value instanceof EnumMap) {
+            return (T) deepCopyEnumMap((EnumMap) value);
+        } else if (value instanceof LinkedHashSet) {
+            return (T) deepCopyLinkedHashSet((LinkedHashSet) value);
+        } else if (value instanceof LinkedHashMap) {
+            return (T) deepCopyLinkedHashMap((LinkedHashMap) value);
+        } else if (value instanceof TreeSet) {
+            return (T) deepCopyTreeSet((TreeSet) value);
+        } else if (value instanceof HashSet) {
+            return (T) deepCopyHashSet((HashSet) value);
+        } else if (value instanceof HashMap) {
+            return (T) deepCopyHashMap((HashMap) value);
+        } else if (value instanceof List) {
+            return (T) deepCopyList((List) value);
+        } else if (value instanceof AbstractMap.SimpleImmutableEntry){ //Used by Leonin Arbiter, Vessel Of The All Consuming Wanderer as a generic Pair class
+            AbstractMap.SimpleImmutableEntry entryValue = (AbstractMap.SimpleImmutableEntry) value;
+            return (T) new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()),deepCopyObject(entryValue.getValue()));
+        } else {
+            throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " during deep copy, must add explicit handling of all Object types");
+        }
+    }
+    private static <T extends Comparable<T>> TreeSet<T> deepCopyTreeSet(TreeSet<T> original) {
+        if (original.getClass() != TreeSet.class) {
+            throw new IllegalStateException("Unhandled TreeSet type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        TreeSet<T> newSet = new TreeSet<>();
+        for (T value : original){
+            newSet.add((T) deepCopyObject(value));
+        }
+        return newSet;
+    }
+    private static <T> HashSet<T> deepCopyHashSet(Set<T> original) {
+        if (original.getClass() != HashSet.class) {
+            throw new IllegalStateException("Unhandled HashSet type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        HashSet<T> newSet = new HashSet<>(original.size());
+        for (T value : original){
+            newSet.add((T) deepCopyObject(value));
+        }
+        return newSet;
+    }
+    private static <T> LinkedHashSet<T> deepCopyLinkedHashSet(LinkedHashSet<T> original) {
+        if (original.getClass() != LinkedHashSet.class) {
+            throw new IllegalStateException("Unhandled LinkedHashSet type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        LinkedHashSet<T> newSet = new LinkedHashSet<>(original.size());
+        for (T value : original){
+            newSet.add((T) deepCopyObject(value));
+        }
+        return newSet;
+    }
+    private static <T> List<T> deepCopyList(List<T> original) { //always returns an ArrayList
+        if (original.getClass() != ArrayList.class) {
+            throw new IllegalStateException("Unhandled List type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        ArrayList<T> newList = new ArrayList<>(original.size());
+        for (T value : original){
+            newList.add((T) deepCopyObject(value));
+        }
+        return newList;
+    }
+    private static <K, V> HashMap<K, V> deepCopyHashMap(Map<K, V> original) {
+        if (original.getClass() != HashMap.class) {
+            throw new IllegalStateException("Unhandled HashMap type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        HashMap<K, V> newMap = new HashMap<>(original.size());
+        for (Map.Entry<K, V> entry : original.entrySet()) {
+            newMap.put((K) deepCopyObject(entry.getKey()), (V) deepCopyObject(entry.getValue()));
+        }
+        return newMap;
+    }
+    private static <K, V> LinkedHashMap<K, V> deepCopyLinkedHashMap(Map<K, V> original) {
+        if (original.getClass() != LinkedHashMap.class) {
+            throw new IllegalStateException("Unhandled LinkedHashMap type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        LinkedHashMap<K, V> newMap = new LinkedHashMap<>(original.size());
+        for (Map.Entry<K, V> entry : original.entrySet()) {
+            newMap.put((K) deepCopyObject(entry.getKey()), (V) deepCopyObject(entry.getValue()));
+        }
+        return newMap;
+    }
+    private static <K extends Enum<K>, V> EnumMap<K, V> deepCopyEnumMap(Map<K, V> original) {
+        if (original.getClass() != EnumMap.class) {
+            throw new IllegalStateException("Unhandled EnumMap type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        EnumMap<K, V> newMap = new EnumMap<>(original);
+        for (Map.Entry<K, V> entry : newMap.entrySet()) {
+            entry.setValue((V) deepCopyObject(entry.getValue()));
+        }
+        return newMap;
     }
 
     /**

@@ -2,15 +2,17 @@ package org.mage.card.arcane;
 
 import mage.utils.StreamUtils;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Toolkit;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import javax.swing.text.Element;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.View;
+import javax.swing.text.ViewFactory;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,46 +26,25 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JEditorPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JToggleButton;
-import javax.swing.JViewport;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
-import javax.swing.ViewportLayout;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import javax.swing.text.Element;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.View;
-import javax.swing.text.ViewFactory;
-import javax.swing.text.html.HTML;
-import javax.swing.text.html.HTMLEditorKit;
-import javax.swing.text.html.ImageView;
-
 /**
  * UI utility functions.
  */
 public final class UI {
     private static final ConcurrentMap<URI, Image> imageCache = new ConcurrentHashMap<>();
 
-    public static JToggleButton getToggleButton () {
+    public static JToggleButton getToggleButton() {
         JToggleButton button = new JToggleButton();
         button.setMargin(new Insets(2, 4, 2, 4));
         return button;
     }
 
-    public static JButton getButton () {
+    public static JButton getButton() {
         JButton button = new JButton();
         button.setMargin(new Insets(2, 4, 2, 4));
         return button;
     }
 
-    public static void setTitle (JPanel panel, String title) {
+    public static void setTitle(JPanel panel, String title) {
         Border border = panel.getBorder();
         if (border instanceof TitledBorder) {
             ((TitledBorder) panel.getBorder()).setTitle(title);
@@ -73,7 +54,7 @@ public final class UI {
         }
     }
 
-    public static ImageIcon getImageIcon (String path) {
+    public static ImageIcon getImageIcon(String path) {
         InputStream stream = null;
         try {
             stream = UI.class.getResourceAsStream(path);
@@ -93,14 +74,17 @@ public final class UI {
         }
     }
 
-    public static void setHTMLEditorKit (JEditorPane editorPane) {
-        editorPane.getDocument().putProperty("imageCache", imageCache); // Read internally by ImageView, but never written.
+    public static void setHTMLEditorKit(JEditorPane editorPane) {
+        editorPane.setEditorKit(new HTMLEditorKit());
+        if (true) return;
 
+        // TODO: wtf, is it used to display images by url?! Remove that code after few releases if no bug reports, 27.11.2023
+        editorPane.getDocument().putProperty("imageCache", imageCache); // Read internally by ImageView, but never written.
         editorPane.setEditorKit(new HTMLEditorKit() {
             private static final long serialVersionUID = -54602188235105448L;
 
             @Override
-            public ViewFactory getViewFactory () {
+            public ViewFactory getViewFactory() {
                 return new HTMLFactory() {
                     @Override
                     public View create(Element elem) {
@@ -133,12 +117,13 @@ public final class UI {
         });
     }
 
-    public static void setVerticalScrollingView (JScrollPane scrollPane, final Component view) {
+    public static void setVerticalScrollingView(JScrollPane scrollPane, final Component view) {
         final JViewport viewport = new JViewport();
         viewport.setLayout(new ViewportLayout() {
             private static final long serialVersionUID = 7701568740313788935L;
+
             @Override
-            public void layoutContainer (Container parent) {
+            public void layoutContainer(Container parent) {
                 viewport.setViewPosition(new Point(0, 0));
                 Dimension viewportSize = viewport.getSize();
                 int width = viewportSize.width;
@@ -151,7 +136,7 @@ public final class UI {
         scrollPane.setViewport(viewport);
     }
 
-    public static String getDisplayManaCost (String manaCost) {
+    public static String getDisplayManaCost(String manaCost) {
         // A pipe in the cost means "process left of the pipe as the card color, but display right of the pipe as the cost".
         int pipePosition = manaCost.indexOf("{|}");
         if (pipePosition != -1) {
@@ -160,11 +145,11 @@ public final class UI {
         return manaCost;
     }
 
-    public static void invokeLater (Runnable runnable) {
+    public static void invokeLater(Runnable runnable) {
         EventQueue.invokeLater(runnable);
     }
 
-    public static void invokeAndWait (Runnable runnable) {
+    public static void invokeAndWait(Runnable runnable) {
         if (EventQueue.isDispatchThread()) {
             runnable.run();
             return;
@@ -177,7 +162,7 @@ public final class UI {
         }
     }
 
-    public static void setSystemLookAndFeel () {
+    public static void setSystemLookAndFeel() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {
@@ -186,7 +171,7 @@ public final class UI {
         }
     }
 
-    public static void setDefaultFont (Font font) {
+    public static void setDefaultFont(Font font) {
         for (Object key : Collections.list(UIManager.getDefaults().keys())) {
             Object value = UIManager.get(key);
             if (value instanceof javax.swing.plaf.FontUIResource) {

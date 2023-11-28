@@ -2,15 +2,20 @@ package mage.server.util;
 
 import mage.server.managers.ConfigSettings;
 import mage.server.managers.ThreadExecutor;
+import mage.utils.ThreadUtils;
+import org.apache.log4j.Logger;
 
 import java.util.concurrent.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ThreadExecutorImpl implements ThreadExecutor {
-    private final ExecutorService callExecutor;
-    private final ExecutorService gameExecutor;
+
+    private static final Logger logger = Logger.getLogger(ThreadExecutorImpl.class);
+
+    private final ExecutorService callExecutor; // shareable threads to run single task (example: save new game settings from a user, send chat message, etc)
+    private final ExecutorService gameExecutor; // game threads to run long tasks, one per game (example: run game and wait user's feedback)
     private final ScheduledExecutorService timeoutExecutor;
     private final ScheduledExecutorService timeoutIdleExecutor;
 
@@ -26,8 +31,10 @@ public class ThreadExecutorImpl implements ThreadExecutor {
      */
 
     public ThreadExecutorImpl(ConfigSettings config) {
-        callExecutor = Executors.newCachedThreadPool();
-        gameExecutor = Executors.newFixedThreadPool(config.getMaxGameThreads());
+        //callExecutor = Executors.newCachedThreadPool();
+        callExecutor = new CachedThreadPoolWithException();
+        //gameExecutor = Executors.newFixedThreadPool(config.getMaxGameThreads());
+        gameExecutor = new FixedThreadPoolWithException(config.getMaxGameThreads());
         timeoutExecutor = Executors.newScheduledThreadPool(4);
         timeoutIdleExecutor = Executors.newScheduledThreadPool(4);
 
@@ -45,6 +52,44 @@ public class ThreadExecutorImpl implements ThreadExecutor {
         ((ThreadPoolExecutor) timeoutIdleExecutor).setThreadFactory(new XMageThreadFactory("TIMEOUT_IDLE"));
     }
 
+    static class CachedThreadPoolWithException extends ThreadPoolExecutor {
+
+        CachedThreadPoolWithException() {
+            // use same params as Executors.newCachedThreadPool()
+            super(0, Integer.MAX_VALUE,60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+        }
+
+        @Override
+        protected void afterExecute(Runnable r, Throwable t) {
+            super.afterExecute(r, t);
+
+            // catch errors in CALL threads (from client commands)
+            t = ThreadUtils.findRealException(r, t);
+            if (t != null) {
+                logger.error("Catch unhandled error in CALL thread: " + t.getMessage(), t);
+            }
+        }
+    }
+
+    static class FixedThreadPoolWithException extends ThreadPoolExecutor {
+
+        FixedThreadPoolWithException(int nThreads) {
+            // use same params as Executors.newFixedThreadPool()
+            super(nThreads, nThreads,0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+        }
+
+        @Override
+        protected void afterExecute(Runnable r, Throwable t) {
+            super.afterExecute(r, t);
+
+            // catch errors in GAME threads (from game processing)
+            t = ThreadUtils.findRealException(r, t);
+            if (t != null) {
+                // it's impossible to brake game thread in normal use case, so each bad use case must be researched
+                logger.error("Catch unhandled error in GAME thread: " + t.getMessage(), t);
+            }
+        }
+    }
 
     @Override
     public int getActiveThreads(ExecutorService executerService) {
@@ -90,5 +135,4 @@ class XMageThreadFactory implements ThreadFactory {
         thread.setName(prefix + ' ' + thread.getThreadGroup().getName() + '-' + thread.getId());
         return thread;
     }
-
 }

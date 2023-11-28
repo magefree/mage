@@ -1,19 +1,18 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.ruleModifying.CantCastDuringYourTurnEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +35,7 @@ public final class DragonlordDromoka extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Your opponents can't cast spells during your turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DragonlordDromokaEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantCastDuringYourTurnEffect()));
         
     }
 
@@ -47,36 +46,5 @@ public final class DragonlordDromoka extends CardImpl {
     @Override
     public DragonlordDromoka copy() {
         return new DragonlordDromoka(this);
-    }
-}
-
-class DragonlordDromokaEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public DragonlordDromokaEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Your opponents can't cast spells during your turn";
-    }
-
-    private DragonlordDromokaEffect(final DragonlordDromokaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DragonlordDromokaEffect copy() {
-        return new DragonlordDromokaEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.isActivePlayer(source.getControllerId()) &&
-                game.getPlayer(source.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-            return true;
-        }
-        return false;
     }
 }

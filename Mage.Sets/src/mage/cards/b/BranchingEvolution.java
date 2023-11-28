@@ -43,7 +43,7 @@ class BranchingEvolutionEffect extends ReplacementEffectImpl {
     BranchingEvolutionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If one or more +1/+1 counters would be put on a creature you control, " +
-                "twice that many +1/+1 counters are put on it instead";
+                "twice that many +1/+1 counters are put on that creature instead";
     }
 
     private BranchingEvolutionEffect(final BranchingEvolutionEffect effect) {
@@ -72,11 +72,6 @@ class BranchingEvolutionEffect extends ReplacementEffectImpl {
                     && permanent.isCreature(game);
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

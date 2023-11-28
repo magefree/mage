@@ -454,7 +454,7 @@ public class TestPlayer implements Player {
             Mode selectedMode;
             if (targetName.startsWith("mode=")) {
                 int modeNr = Integer.parseInt(targetName.substring(5, 6));
-                if (modeNr == 0 || modeNr > (ability.getModes().isEachModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
+                if (modeNr == 0 || modeNr > (ability.getModes().isMayChooseSameModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
                     throw new UnsupportedOperationException("Given mode number (" + modeNr + ") not available for " + ability.toString());
                 }
                 UUID modeId = ability.getModes().getModeId(modeNr);
@@ -1145,7 +1145,7 @@ public class TestPlayer implements Player {
         Assert.fail(action.getActionName() + " - can't find permanent to check: " + cardName);
         return null;
     }
-    
+
     private void printStart(Game game, String name) {
         System.out.println("\n" + game.toString());
         System.out.println(name + ":");
@@ -2005,7 +2005,7 @@ public class TestPlayer implements Player {
     private String getInfo(Ability o, Game game) {
         if (o != null) {
             MageObject object = o.getSourceObject(game);
-            return "Ability: " + (object == null ? "" : object.getName() + " - " + o.getClass().getSimpleName() + ": " + o.getRule());
+            return "Ability: " + (object == null ? "" : object.getIdName() + " - " + o.getClass().getSimpleName() + ": " + o.getRule());
         }
         return "Ability: null";
     }
@@ -2867,7 +2867,7 @@ public class TestPlayer implements Player {
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-            int min, int max, MultiAmountType type, Game game) {
+                                                                 int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
@@ -2929,6 +2929,11 @@ public class TestPlayer implements Player {
     @Override
     public void signalPlayerConcede() {
         computerPlayer.signalPlayerConcede();
+    }
+
+    @Override
+    public void signalPlayerCheat() {
+        computerPlayer.signalPlayerCheat();
     }
 
     @Override
@@ -3171,12 +3176,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Map<UUID, Map<MageIdentifier,ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
+    public Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> getCastSourceIdManaCosts() {
         return computerPlayer.getCastSourceIdManaCosts();
     }
 
     @Override
-    public Map<UUID, Map<MageIdentifier,Costs<Cost>>> getCastSourceIdCosts() {
+    public Map<UUID, Map<MageIdentifier, Costs<Cost>>> getCastSourceIdCosts() {
         return computerPlayer.getCastSourceIdCosts();
     }
 
@@ -4372,10 +4377,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean surveil(int value, Ability source,
-                           Game game
-    ) {
-        return computerPlayer.surveil(value, source, game);
+    public SurveilResult doSurveil(int value, Ability source, Game game) {
+        return computerPlayer.doSurveil(value, source, game);
     }
 
     @Override

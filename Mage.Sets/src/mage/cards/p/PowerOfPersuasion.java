@@ -32,7 +32,7 @@ public final class PowerOfPersuasion extends CardImpl {
 
         // 10-19 | Its owner puts it on the top of bottom of their library.
         effect.addTableEntry(10, 19, new PutOnTopOrBottomLibraryTargetEffect(
-                "its owner puts it on the top of bottom of their library"
+                "its owner puts it on the top or bottom of their library"
         ));
 
         // 20 | Gain control of it until the end of your next turn.

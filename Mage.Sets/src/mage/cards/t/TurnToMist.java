@@ -2,7 +2,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.effects.common.MistmeadowWitchEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class TurnToMist extends CardImpl {
 
 
         // Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-        this.getSpellAbility().addEffect(new MistmeadowWitchEffect());
+        this.getSpellAbility().addEffect(new ExileReturnBattlefieldNextEndStepTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

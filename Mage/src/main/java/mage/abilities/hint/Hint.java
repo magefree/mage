@@ -2,13 +2,14 @@ package mage.abilities.hint;
 
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 
 /**
  * @author JayDi85
  */
-public interface Hint extends Serializable {
+public interface Hint extends Serializable, Copyable<Hint> {
 
     // It's a constant hint for cards/permanents (e.g. visible all the time)
     //

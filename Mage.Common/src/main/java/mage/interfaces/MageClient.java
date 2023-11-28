@@ -4,6 +4,8 @@ import mage.interfaces.callback.CallbackClient;
 import mage.utils.MageVersion;
 
 /**
+ * Network: client side commands to process from a server
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public interface MageClient extends CallbackClient {

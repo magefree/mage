@@ -46,6 +46,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private UUID playerId;
     private UUID gameId;
     private PlayerView player;
+    private boolean isMe;
 
     private BigCard bigCard;
 
@@ -53,15 +54,14 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private static final int PANEL_WIDTH = 94;
     private static final int PANEL_HEIGHT = 262;
-    private static final int PANEL_HEIGHT_SMALL = 242;
+    private static final int PANEL_HEIGHT_SMALL = 210;
+    private static final int PANEL_HEIGHT_EXTRA_FOR_ME = 25;
     private static final int MANA_LABEL_SIZE_HORIZONTAL = 20;
 
     private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
+    private static final Border YELLOW_BORDER = new LineBorder(Color.yellow, 3);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
-    private final Color inactiveBackgroundColor;
-    private final Color activeBackgroundColor;
-    private final Color deadBackgroundColor;
 
     private final Color activeValueColor = new Color(244, 9, 47);
     private final Font fontValuesZero = this.getFont().deriveFont(Font.PLAIN);
@@ -81,19 +81,17 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         initComponents();
         setGUISize();
-
-        ThemeType currentTheme = PreferencesDialog.getCurrentTheme();
-        inactiveBackgroundColor = currentTheme.getPlayerPanel_inactiveBackgroundColor();
-        activeBackgroundColor = currentTheme.getPlayerPanel_activeBackgroundColor();
-        deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();
     }
 
     public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime) {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
-        cheat.setVisible(SessionHandler.isTestMode() && controlled);
+        this.isMe = controlled;
+        cheat.setVisible(SessionHandler.isTestMode() && this.isMe);
         cheat.setFocusable(false);
+        toolHintsHelper.setVisible(this.isMe);
+        toolHintsHelper.setFocusable(false);
         flagName = null;
         if (priorityTime > 0) {
             long delay = 1000L;
@@ -106,20 +104,26 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 int priorityTimeValue = pt.getCount() + pt.getBufferCount();
                 String text = getPriorityTimeLeftString(priorityTimeValue);
                 // Set timer text colors (note, if you change it here, change it in update() as well)
-                Color textColor = null;  // use default in HoverButton
-                Color foregroundColor = Color.BLACK;
+                final Color textColor;  // use default in HoverButton
+                final Color foregroundColor;
                 if (pt.getBufferCount() > 0) {
                     textColor = Color.GREEN;
                     foregroundColor = Color.GREEN.darker().darker();
                 } else if (pt.getCount() < 300) { // visual indication for under 5 minutes
                     textColor = Color.RED;
                     foregroundColor = Color.RED.darker().darker();
+                } else {
+                    textColor = null;
+                    foregroundColor = Color.BLACK;
                 }
-                PlayerPanelExt.this.avatar.setTopText(text);
-                PlayerPanelExt.this.avatar.setTopTextColor(textColor);
-                PlayerPanelExt.this.timerLabel.setText(text);
-                PlayerPanelExt.this.timerLabel.setForeground(foregroundColor);
-                PlayerPanelExt.this.avatar.repaint();
+
+                SwingUtilities.invokeLater(() -> {
+                    PlayerPanelExt.this.avatar.setTopText(text);
+                    PlayerPanelExt.this.avatar.setTopTextColor(textColor);
+                    PlayerPanelExt.this.timerLabel.setText(text);
+                    PlayerPanelExt.this.timerLabel.setForeground(foregroundColor);
+                    PlayerPanelExt.this.avatar.repaint();
+                });
             });
             timer.init(gameId);
         }
@@ -320,14 +324,17 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 this.avatar.setTopText(priorityTimeValue);
                 this.timerLabel.setText(priorityTimeValue);
                 // Set timer text colors (note, if you change it here, change it in init()::timer.setTaskOnTick() as well)
-                Color textColor = null; // use default in HoverButton
-                Color foregroundColor = Color.BLACK;
+                final Color textColor; // use default in HoverButton
+                final Color foregroundColor;
                 if (player.getBufferTimeLeft() > 0) {
                     textColor = Color.GREEN;
                     foregroundColor = Color.GREEN.darker().darker();
                 } else if (player.getPriorityTimeLeft() < 300) { // visual indication for under 5 minutes
                     textColor = Color.RED;
                     foregroundColor = Color.RED.darker().darker();
+                } else {
+                    textColor = null;
+                    foregroundColor = Color.BLACK;
                 }
                 this.avatar.setTopTextColor(textColor);
                 this.timerLabel.setForeground(foregroundColor);
@@ -355,19 +362,25 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
 
+        // possible targeting
+        if (possibleTargets != null && possibleTargets.contains(this.playerId)) {
+            this.avatar.setBorder(YELLOW_BORDER);
+            this.btnPlayer.setBorder(YELLOW_BORDER);
+        }
+
         update(player.getManaPool());
     }
 
     private void resetBackgroundColor() {
-        panelBackground.setBackgroundColor(inactiveBackgroundColor);
+        panelBackground.setBackgroundColor(PreferencesDialog.getCurrentTheme().getPlayerPanel_inactiveBackgroundColor());
     }
 
     private void setGreenBackgroundColor() {
-        panelBackground.setBackgroundColor(activeBackgroundColor);
+        panelBackground.setBackgroundColor(PreferencesDialog.getCurrentTheme().getPlayerPanel_activeBackgroundColor());
     }
 
     private void setDeadBackgroundColor() {
-        panelBackground.setBackgroundColor(deadBackgroundColor);
+        panelBackground.setBackgroundColor(PreferencesDialog.getCurrentTheme().getPlayerPanel_deadBackgroundColor());
     }
 
     /**
@@ -384,9 +397,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                     + "<br/>Deck hash code: " + player.getDeckHashCode()
                     + "<br/>This match wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)";
         }
-        // Extend tooltip
+
+        // extend tooltip
         StringBuilder tooltipText = new StringBuilder(basicTooltipText);
         tooltipText.append("<br/>Match time remaining: ").append(getPriorityTimeLeftString(player));
+
+        // designations
         this.avatar.setTopTextImageRight(null);
         for (String name : player.getDesignationNames()) {
             tooltipText.append("<br/>").append(name);
@@ -395,11 +411,15 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
         if (player.isMonarch()) {
+            tooltipText.append("<br/>").append("The Monarch");
             this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
         }
         if (player.isInitiative()) {
+            tooltipText.append("<br/>").append("Have the Initiative");
             this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/initiative.png"));
         }
+
+        // counters
         for (Counter counter : player.getCounters().values()) {
             tooltipText.append("<br/>").append(counter.getName()).append(" counters: ").append(counter.getCount());
         }
@@ -568,6 +588,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         cheat.setToolTipText("Cheat button");
         cheat.addActionListener(e -> btnCheatActionPerformed(e));
 
+        // tools button like hints
+        toolHintsHelper = new JButton();
+        toolHintsHelper.setText("hints");
+        toolHintsHelper.setToolTipText("Open new card hints helper window");
+        toolHintsHelper.addActionListener(e -> btnToolHintsHelperActionPerformed(e));
+
         zonesPanel = new JPanel();
         zonesPanel.setPreferredSize(new Dimension(100, 60));
         zonesPanel.setSize(100, 60);
@@ -590,6 +616,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         cheat.setBounds(40, 2, 25, 21);
         zonesPanel.add(cheat);
+
+        toolHintsHelper.setBounds(3, 2 + 21 + 2, 73, 21);
+        zonesPanel.add(toolHintsHelper);
 
         energyExperiencePanel = new JPanel();
         energyExperiencePanel.setPreferredSize(new Dimension(100, 20));
@@ -619,6 +648,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         btnPlayer.setText("Player");
         btnPlayer.setVisible(false);
         btnPlayer.setToolTipText("Player");
+        btnPlayer.setPreferredSize(new Dimension(20, 40));
         btnPlayer.addActionListener(e -> SessionHandler.sendPlayerUUID(gameId, playerId));
 
         // Add mana symbols
@@ -808,7 +838,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                 .addGap(6)
                                 .addComponent(avatar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(btnPlayer)
+                                .addComponent(btnPlayer, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(timerLabel)
                                 .addGap(2)
                                 // Life & Hand
@@ -912,18 +942,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     protected void sizePlayerPanel(boolean smallMode) {
+        int extraForMe = this.isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
         if (smallMode) {
             avatar.setVisible(false);
             btnPlayer.setVisible(true);
             timerLabel.setVisible(true);
-            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL));
-            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL);
+            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL + extraForMe));
+            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL + extraForMe);
         } else {
             avatar.setVisible(true);
             btnPlayer.setVisible(false);
             timerLabel.setVisible(false);
-            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT));
-            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT);
+            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT + extraForMe));
+            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT + extraForMe);
         }
     }
 
@@ -948,8 +979,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
-        DckDeckImporter deckImporter = new DckDeckImporter();
-        SessionHandler.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck", false));
+        SessionHandler.cheatShow(gameId, playerId);
+    }
+
+    private void btnToolHintsHelperActionPerformed(java.awt.event.ActionEvent evt) {
+        MageFrame.getGame(gameId).openCardHintsWindow("main");
     }
 
     public PlayerView getPlayer() {
@@ -984,6 +1018,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private HoverButton grave;
     private HoverButton library;
     private JButton cheat;
+    private JButton toolHintsHelper;
     private MageRoundPane panelBackground;
 
     private JLabel timerLabel;

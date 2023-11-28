@@ -49,10 +49,7 @@ public class PermanentView extends CardView {
         this.morphed = permanent.isMorphed();
         this.manifested = permanent.isManifested();
         this.damage = permanent.getDamage();
-        if (!permanent.getAttachments().isEmpty()) {
-            attachments = new ArrayList<>();
-            attachments.addAll(permanent.getAttachments());
-        }
+        this.attachments = new ArrayList<>(permanent.getAttachments());
         this.attachedTo = permanent.getAttachedTo();
 
         // show face down cards to all players at the game end
@@ -150,7 +147,7 @@ public class PermanentView extends CardView {
         this.phasedIn = permanentView.isPhasedIn();
         this.summoningSickness = permanentView.summoningSickness;
         this.damage = permanentView.damage;
-        this.attachments = permanentView.attachments.stream().collect(Collectors.toList());
+        this.attachments = new ArrayList<>(permanentView.attachments);
 
         boolean showFaceDownInfo = controlled || (game != null && game.hasEnded());
 

@@ -56,7 +56,7 @@ public final class RikuOfTwoReflections extends CardImpl {
         effect = new DoIfCostPaid(new CreateTokenCopyTargetEffect(true),
                 new ManaCostsImpl<>("{G}{U}"), "Create a token that's a copy of that creature?");
         effect.setText("you may pay {G}{U}. If you do, create a token that's a copy of that creature");
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT));
     }
 
     private RikuOfTwoReflections(final RikuOfTwoReflections card) {

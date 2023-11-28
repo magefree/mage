@@ -65,7 +65,7 @@ class CliffsideRescuerEffect extends OneShotEffect {
 
     CliffsideRescuerEffect() {
         super(Outcome.Benefit);
-        staticText = "Target permanent you control gets protection from each opponent until end of turn.";
+        staticText = "Target permanent you control gains protection from each of your opponents until end of turn.";
     }
 
     private CliffsideRescuerEffect(final CliffsideRescuerEffect effect) {

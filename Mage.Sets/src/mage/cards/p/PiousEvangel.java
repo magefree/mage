@@ -1,11 +1,8 @@
-
 package mage.cards.p;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,18 +15,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
  */
 public final class PiousEvangel extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("{this} or another creature");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("another permanent");
 
     static {
@@ -46,7 +43,8 @@ public final class PiousEvangel extends CardImpl {
         this.secondSideCardClazz = mage.cards.w.WaywardDisciple.class;
 
         // Whenever Pious Evangel or another creature enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GainLifeEffect(1),
+                StaticFilters.FILTER_PERMANENT_CREATURE, false, true));
 
         // {2}, {T}, Sacrifice another permanent: Transform Pious Evangel.
         this.addAbility(new TransformAbility());

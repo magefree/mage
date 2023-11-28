@@ -70,14 +70,9 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (event instanceof CreateTokenEvent) {
-            ((CreateTokenEvent) event).doubleTokens();
+            ((CreateTokenEvent) event).multiplyTokens(2);
         }
         return false;
     }
@@ -114,11 +109,6 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
         }
         return permanent != null && event.getAmount() > 0 && permanent.isCreature(game)
                 && event.getData() != null && event.getData().equals(CounterType.P1P1.getName());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

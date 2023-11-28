@@ -52,10 +52,10 @@ public class ExileFromHandCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
+        if (this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             Player player = game.getPlayer(controllerId);
             int cmc = 0;
-            for (UUID targetId : targets.get(0).getTargets()) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null) {
                     return false;
@@ -82,7 +82,7 @@ public class ExileFromHandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

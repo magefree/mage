@@ -56,8 +56,12 @@ public abstract class RoleAssignment<T> implements Serializable {
     }
 
     public int getRoleCount(Cards cards, Game game) {
+        return getRoleCount(cards.getCards(game), game);
+    }
+
+    public int getRoleCount(Set<? extends Card> cards, Game game) {
         Map<UUID, Set<T>> attributeMap = new HashMap<>();
-        cards.getCards(game).forEach(card -> attributeMap.put(card.getId(), this.makeSet(card, game)));
+        cards.forEach(card -> attributeMap.put(card.getId(), this.makeSet(card, game)));
         if (attributeMap.size() < 2) {
             return attributeMap.size();
         }

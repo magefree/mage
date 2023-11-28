@@ -12,5 +12,5 @@ public interface Testable {
 
     boolean isTestMode();
 
-    boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList);
+    boolean cheatShow(UUID gameId, UUID playerId);
 }

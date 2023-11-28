@@ -27,7 +27,7 @@ public final class StunningReversal extends CardImpl {
         this.getSpellAbility().addEffect(new StunningReversalEffect());
 
         // Exile Stunning Reversal.
-        this.getSpellAbility().addEffect(new ExileSpellEffect());
+        this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));
     }
 
     private StunningReversal(final StunningReversal card) {
@@ -57,11 +57,6 @@ class StunningReversalEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
@@ -79,10 +74,7 @@ class StunningReversalEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(source.getControllerId());
     }
 
 }

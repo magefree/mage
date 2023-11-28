@@ -45,7 +45,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.cardName = cardName;
         this.spellAbilityType = spellAbilityType;
         this.spellAbilityCastMode = spellAbilityCastMode;
-        this.addManaCost(cost);
+        this.addCost(cost);
         this.setIdentifier(MageIdentifier.Default);
         setSpellName();
     }
@@ -322,7 +322,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
         if (spellCharacteristics != null) {
             if (getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, game);
+                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, this);
             }
         }
         return spellCharacteristics;
