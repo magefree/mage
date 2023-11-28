@@ -29,7 +29,7 @@ public final class LashweedLurker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Emerge {5}{G}{U}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{5}{G}{U}")));
+        this.addAbility(new EmergeAbility(this, "{5}{G}{U}"));
 
         // When you cast Lashweed Lurker, you may put target nonland permanent on top of its owner's library.
         Ability ability = new CastSourceTriggeredAbility(new PutOnLibraryTargetEffect(true), true);

@@ -39,7 +39,7 @@ public final class VexingScuttler extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Emerge {6}{U}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{6}{U}")));
+        this.addAbility(new EmergeAbility(this, "{6}{U}"));
 
         // When you cast Vexing Scuttler, you may return target instant or sorcery card from your graveyard to your hand.
         Effect effect = new ReturnToHandTargetEffect();

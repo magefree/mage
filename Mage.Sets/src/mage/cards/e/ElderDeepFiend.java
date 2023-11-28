@@ -32,7 +32,7 @@ public final class ElderDeepFiend extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Emerge {5}{U}{U}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{5}{U}{U}")));
+        this.addAbility(new EmergeAbility(this, "{5}{U}{U}"));
 
         // When you cast Elder Deep-Fiend, tap up to four target permanents.
         Ability ability = new CastSourceTriggeredAbility(new TapTargetEffect());

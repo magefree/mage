@@ -33,7 +33,7 @@ public final class DrownyardBehemoth extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Emerge {7}{U}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{7}{U}")));
+        this.addAbility(new EmergeAbility(this, "{7}{U}"));
         
         // Drownyard Behemoth has hexproof as long as it entered the battlefield this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

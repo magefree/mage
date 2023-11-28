@@ -33,7 +33,7 @@ public final class DecimatorOfTheProvinces extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Emerge {6}{G}{G}{G}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{6}{G}{G}{G}")));
+        this.addAbility(new EmergeAbility(this, "{6}{G}{G}{G}"));
 
         // When you cast Decimator of the Provinces, creatures you control get +2/+2 and gain trample until end of turn.
         Effect effect = new BoostControlledEffect(2, 2, Duration.EndOfTurn);

@@ -38,7 +38,7 @@ public final class DistendedMindbender extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Emerge {5}{B}{B}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{5}{B}{B}")));
+        this.addAbility(new EmergeAbility(this, "{5}{B}{B}"));
 
         // When controller cast Distended Mindbender, target opponent reveals their hand. You choose from it a nonland card with converted mana cost 3 or less
         // and a card with converted mana cost 4 or greater. That player discards those cards.

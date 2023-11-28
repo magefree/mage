@@ -5,6 +5,7 @@ import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -27,9 +28,9 @@ public class EmergeAbility extends SpellAbility {
 
     private final ManaCosts<ManaCost> emergeCost;
 
-    public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
+    public EmergeAbility(Card card, String emergeString) {
         super(card.getSpellAbility());
-        this.emergeCost = emergeCost.copy();
+        this.emergeCost = new ManaCostsImpl<>(emergeString);
         this.newId(); // Set newId because cards spell ability is copied and needs own id
         this.setCardName(card.getName() + " with emerge");
         zone = Zone.HAND;

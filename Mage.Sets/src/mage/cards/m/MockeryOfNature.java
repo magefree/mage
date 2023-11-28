@@ -30,7 +30,7 @@ public final class MockeryOfNature extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Emerge {7}{G}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{7}{G}")));
+        this.addAbility(new EmergeAbility(this, "{7}{G}"));
         
         // When you cast Mockery of Nature, you may destroy target artifact or enchantment.
         Ability ability = new CastSourceTriggeredAbility(new DestroyTargetEffect(), true);
