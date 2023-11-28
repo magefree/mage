@@ -632,7 +632,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public synchronized void init(int messageId, GameView game) {
+    public synchronized void init(int messageId, GameView game, boolean callGameUpdateAfterInit) {
         addPlayers(game);
         // default menu states
         setMenuStates(
@@ -642,7 +642,9 @@ public final class GamePanel extends javax.swing.JPanel {
                 holdingPriority
         );
 
-        updateGame(messageId, game);
+        if (callGameUpdateAfterInit) {
+            updateGame(messageId, game);
+        }
     }
 
     private void addPlayers(GameView game) {
@@ -773,6 +775,12 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public synchronized void updateGame(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
         keepLastGameData(messageId, game, showPlayable, options, targets);
+
+        if (this.players.isEmpty() && !game.getPlayers().isEmpty()) {
+            logger.warn("Found empty players list, trying to init game again (possible reason: reconnection)");
+            init(messageId, game, false);
+        }
+
         prepareSelectableView();
         updateGame();
     }
