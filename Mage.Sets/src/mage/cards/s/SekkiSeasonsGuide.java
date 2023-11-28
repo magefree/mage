@@ -83,11 +83,6 @@ class SekkiSeasonsGuideEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int damage = event.getAmount();
         preventDamageAction(event, source, game);
