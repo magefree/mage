@@ -28,7 +28,7 @@ public final class IsengardUnleashed extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}{R}");
 
         // Damage can't be prevented this turn. If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead.
-        this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn"));
+        this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new IsengardUnleashedTripleDamageEffect());
         // Flashback {4}{R}{R}{R}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}{R}{R}")));
