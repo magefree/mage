@@ -27,10 +27,7 @@ import mage.players.Player;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -46,8 +43,8 @@ public class GameView implements Serializable {
     private UUID myPlayerId = null; // null for watcher
     private final CardsView myHand = new CardsView();
     private PlayableObjectsList canPlayObjects;
-    private Map<String, SimpleCardsView> opponentHands;
-    private Map<String, SimpleCardsView> watchedHands;
+    private Map<String, SimpleCardsView> opponentHands = new HashMap<>();
+    private Map<String, SimpleCardsView> watchedHands = new HashMap<>();
     private final CardsView stack = new CardsView();
     private final List<ExileView> exiles = new ArrayList<>();
     private final List<RevealedView> revealed = new ArrayList<>();
@@ -250,16 +247,8 @@ public class GameView implements Serializable {
         return opponentHands;
     }
 
-    public void setOpponentHands(Map<String, SimpleCardsView> opponentHands) {
-        this.opponentHands = opponentHands;
-    }
-
     public Map<String, SimpleCardsView> getWatchedHands() {
         return watchedHands;
-    }
-
-    public void setWatchedHands(Map<String, SimpleCardsView> watchedHands) {
-        this.watchedHands = watchedHands;
     }
 
     public TurnPhase getPhase() {

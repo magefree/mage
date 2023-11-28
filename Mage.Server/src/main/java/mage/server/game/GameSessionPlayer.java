@@ -229,13 +229,12 @@ public class GameSessionPlayer extends GameSessionWatcher {
             // ignore watcher
             return;
         }
+        gameView.getOpponentHands().clear();
         if (!player.getPlayersUnderYourControl().isEmpty()) {
-            Map<String, SimpleCardsView> handCards = new HashMap<>();
             for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
                 Player opponent = game.getPlayer(controlledPlayerId);
-                handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game), true));
+                gameView.getOpponentHands().put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game), true));
             }
-            gameView.setOpponentHands(handCards);
         }
     }
 
