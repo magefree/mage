@@ -268,7 +268,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scattered Groves", 328, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scoured Barrens", 329, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Scourge of the Throne", 225, Rarity.MYTHIC, mage.cards.s.ScourgeOfTheThrone.class));
-        cards.add(new SetCardInfo("Seasons Past", 529, Rarity.MYTHIC, mage.cards.s.SeasonsPast.class));
+        cards.add(new SetCardInfo("Seasons Past", 529, Rarity.RARE, mage.cards.s.SeasonsPast.class));
         cards.add(new SetCardInfo("Secluded Courtyard", 330, Rarity.UNCOMMON, mage.cards.s.SecludedCourtyard.class));
         cards.add(new SetCardInfo("Second Harvest", 530, Rarity.RARE, mage.cards.s.SecondHarvest.class));
         cards.add(new SetCardInfo("Seeds of Renewal", 260, Rarity.RARE, mage.cards.s.SeedsOfRenewal.class));
