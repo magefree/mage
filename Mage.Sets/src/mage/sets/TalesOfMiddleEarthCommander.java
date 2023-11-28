@@ -22,6 +22,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Anduril, Narsil Reforged", 491, Rarity.RARE, mage.cards.a.AndurilNarsilReforged.class));
         cards.add(new SetCardInfo("Anger", 210, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 265, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
+        cards.add(new SetCardInfo("Aragorn, Hornburg Hero", 492, Rarity.MYTHIC, mage.cards.a.AragornHornburgHero.class));
         cards.add(new SetCardInfo("Aragorn, King of Gondor", 5, Rarity.MYTHIC, mage.cards.a.AragornKingOfGondor.class));
         cards.add(new SetCardInfo("Arbor Elf", 232, Rarity.COMMON, mage.cards.a.ArborElf.class));
         cards.add(new SetCardInfo("Arboreal Alliance", 497, Rarity.RARE, mage.cards.a.ArborealAlliance.class));
@@ -194,6 +195,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Merciless Executioner", 204, Rarity.UNCOMMON, mage.cards.m.MercilessExecutioner.class));
         cards.add(new SetCardInfo("Merry, Warden of Isengard", 61, Rarity.RARE, mage.cards.m.MerryWardenOfIsengard.class));
         cards.add(new SetCardInfo("Minamo, School at Water's Edge", 369, Rarity.MYTHIC, mage.cards.m.MinamoSchoolAtWatersEdge.class));
+        cards.add(new SetCardInfo("Minas Morgul, Dark Fortress", 514, Rarity.RARE, mage.cards.m.MinasMorgulDarkFortress.class));
         cards.add(new SetCardInfo("Mind Stone", 282, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mirkwood Elk", 41, Rarity.RARE, mage.cards.m.MirkwoodElk.class));
         cards.add(new SetCardInfo("Mirkwood Trapper", 62, Rarity.RARE, mage.cards.m.MirkwoodTrapper.class));
@@ -249,6 +251,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rings of Brighthearth", 352, Rarity.MYTHIC, mage.cards.r.RingsOfBrighthearth.class));
         cards.add(new SetCardInfo("River Kelpie", 524, Rarity.RARE, mage.cards.r.RiverKelpie.class));
         cards.add(new SetCardInfo("Rogue's Passage", 326, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Rohirrim Chargers", 496, Rarity.RARE, mage.cards.r.RohirrimChargers.class));
         cards.add(new SetCardInfo("Sail into the West", 68, Rarity.RARE, mage.cards.s.SailIntoTheWest.class));
         cards.add(new SetCardInfo("Sam, Loyal Attendant", 7, Rarity.MYTHIC, mage.cards.s.SamLoyalAttendant.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 327, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
