@@ -16,9 +16,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  *
@@ -85,12 +83,17 @@ class OlorinsSearingLightEffect extends OneShotEffect {
                     }
                 }
             }
+            List<Map.Entry<Player, Integer>> damageList = new ArrayList<>();
             for (Permanent permanent : toExile) {
                 Player opponent = game.getPlayer(permanent.getControllerId());
-                if (SpellMasteryCondition.instance.apply(game, source)){
-                    opponent.damage(permanent.getPower().getValue(),source, game);
-                }
+                damageList.add(new AbstractMap.SimpleImmutableEntry<>(opponent, permanent.getPower().getValue()));
                 opponent.moveCards(permanent, Zone.EXILED, source, game);
+            }
+            if (SpellMasteryCondition.instance.apply(game, source)){
+                game.getState().processAction(game);
+                for (Map.Entry<Player, Integer> entry : damageList) {
+                    entry.getKey().damage(entry.getValue(), source, game);
+                }
             }
             return true;
         }
