@@ -86,8 +86,10 @@ class OlorinsSearingLightEffect extends OneShotEffect {
             List<Map.Entry<Player, Integer>> damageList = new ArrayList<>();
             for (Permanent permanent : toExile) {
                 Player opponent = game.getPlayer(permanent.getControllerId());
-                damageList.add(new AbstractMap.SimpleImmutableEntry<>(opponent, permanent.getPower().getValue()));
-                opponent.moveCards(permanent, Zone.EXILED, source, game);
+                if (opponent != null) {
+                    damageList.add(new AbstractMap.SimpleImmutableEntry<>(opponent, permanent.getPower().getValue()));
+                    opponent.moveCards(permanent, Zone.EXILED, source, game);
+                }
             }
             if (SpellMasteryCondition.instance.apply(game, source)){
                 game.getState().processAction(game);
