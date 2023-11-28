@@ -27,8 +27,8 @@ public class CardIconsTest extends CardTestPlayerBase {
         // hand (not visible)
         runCode("card icons in hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             GameView gameView = getGameView(player);
-            Assert.assertEquals("must have 1 card in hand", 1, gameView.getHand().values().size());
-            CardView cardView = gameView.getHand().values().stream().findFirst().get();
+            Assert.assertEquals("must have 1 card in hand", 1, gameView.getMyHand().values().size());
+            CardView cardView = gameView.getMyHand().values().stream().findFirst().get();
             Assert.assertEquals("must have non x cost card icons in hand", 0, cardView.getCardIcons().size());
         });
 
@@ -224,8 +224,8 @@ public class CardIconsTest extends CardTestPlayerBase {
         // hand (not visible)
         runCode("card icons in hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             GameView gameView = getGameView(player);
-            Assert.assertEquals("must have 1 card in hand", 1, gameView.getHand().values().size());
-            CardView cardView = gameView.getHand().values().stream().findFirst().get();
+            Assert.assertEquals("must have 1 card in hand", 1, gameView.getMyHand().values().size());
+            CardView cardView = gameView.getMyHand().values().stream().findFirst().get();
             Assert.assertEquals("must have non x cost card icons in hand", 0, cardView.getCardIcons().size());
         });
 
@@ -296,7 +296,7 @@ public class CardIconsTest extends CardTestPlayerBase {
         // hand (not visible)
         runCode("card icons in hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             GameView gameView = getGameView(player);
-            CardView cardView = gameView.getHand().values().stream()
+            CardView cardView = gameView.getMyHand().values().stream()
                     .filter(c -> c.getName().equals("Agadeem's Awakening"))
                     .findFirst()
                     .orElse(null);

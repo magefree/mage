@@ -144,7 +144,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 return;
             }
 
-            this.game.getHand().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getMyHand().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
             this.game.getStack().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
             this.game.getExile()
                     .stream()
@@ -789,7 +789,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 }
             }
             if (playerId != null) {
-                handCards.put(YOUR_HAND, lastGameData.game.getHand());
+                handCards.put(YOUR_HAND, lastGameData.game.getMyHand());
                 // Get opponents hand cards if available (only possible for players)
                 if (lastGameData.game.getOpponentHands() != null) {
                     for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getOpponentHands().entrySet()) {
@@ -811,7 +811,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (playerId != null) {
                 // set visible only if we have any other hand visible than ours
                 btnSwitchHands.setVisible(handCards.size() > 1);
-                boolean change = (handCardsOfOpponentAvailable != (lastGameData.game.getOpponentHands() != null));
+                boolean change = (handCardsOfOpponentAvailable == (lastGameData.game.getOpponentHands() == null));
                 if (change) {
                     handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
                     if (handCardsOfOpponentAvailable) {
@@ -1507,7 +1507,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // hand
         if (needZone == Zone.HAND || needZone == Zone.ALL) {
-            for (CardView card : lastGameData.game.getHand().values()) {
+            for (CardView card : lastGameData.game.getMyHand().values()) {
                 if (needSelectable.contains(card.getId())) {
                     card.setChoosable(true);
                 }

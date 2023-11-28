@@ -24,7 +24,6 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.PlayableObjectsList;
 import mage.players.Player;
-import mage.watchers.common.CastSpellLastTurnWatcher;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -44,14 +43,15 @@ public class GameView implements Serializable {
     private final int priorityTime;
     private final int bufferTime;
     private final List<PlayerView> players = new ArrayList<>();
-    private CardsView hand;
+    private UUID myPlayerId = null; // null for watcher
+    private final CardsView myHand = new CardsView();
     private PlayableObjectsList canPlayObjects;
     private Map<String, SimpleCardsView> opponentHands;
     private Map<String, SimpleCardsView> watchedHands;
     private final CardsView stack = new CardsView();
     private final List<ExileView> exiles = new ArrayList<>();
     private final List<RevealedView> revealed = new ArrayList<>();
-    private List<LookedAtView> lookedAt = new ArrayList<>();
+    private final List<LookedAtView> lookedAt = new ArrayList<>();
     private final List<RevealedView> companion = new ArrayList<>();
     private final List<CombatGroupView> combat = new ArrayList<>();
     private final TurnPhase phase;
@@ -61,18 +61,20 @@ public class GameView implements Serializable {
     private final String priorityPlayerName;
     private final int turn;
     private boolean special = false;
-    private final boolean isPlayer; // false = watching user
     private final boolean rollbackTurnsAllowed;
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         Player createdForPlayer = null;
-        this.isPlayer = createdForPlayerId != null;
         this.priorityTime = game.getPriorityTime();
         this.bufferTime = game.getBufferTime();
+
         for (Player player : state.getPlayers().values()) {
-            players.add(new PlayerView(player, state, game, createdForPlayerId, watcherUserId));
+            PlayerView playerView = new PlayerView(player, state, game, createdForPlayerId, watcherUserId);
+            players.add(playerView);
             if (player.getId().equals(createdForPlayerId)) {
                 createdForPlayer = player;
+                this.myPlayerId = player.getId();
+                this.myHand.putAll(new CardsView(game, player.getHand().getCards(game)));
             }
         }
         for (StackObject stackObject : state.getStack()) {
@@ -159,6 +161,11 @@ public class GameView implements Serializable {
         for (String name : state.getRevealed().keySet()) {
             revealed.add(new RevealedView(name, state.getRevealed().get(name), game));
         }
+        if (this.myPlayerId != null) {
+            for (String name : state.getLookedAt(this.myPlayerId).keySet()){
+                lookedAt.add(new LookedAtView(name, state.getLookedAt(this.myPlayerId).get(name), game));
+            }
+        }
         for (String name : state.getCompanion().keySet()) {
             // Only show the companion window when the companion is still outside the game.
             if (state.getCompanion().get(name).stream().anyMatch(cardId -> state.getZone(cardId) == Zone.OUTSIDE)) {
@@ -184,9 +191,9 @@ public class GameView implements Serializable {
         for (CombatGroup combatGroup : state.getCombat().getGroups()) {
             combat.add(new CombatGroupView(combatGroup, game));
         }
-        if (isPlayer) { // no watcher
+        if (this.myPlayerId != null) { // no watcher
             // has only to be set for active player with priority (e.g. pay mana by delve or Quenchable Fire special action)
-            if (priorityPlayer != null && createdForPlayer != null && createdForPlayerId != null && createdForPlayer.isGameUnderControl()
+            if (priorityPlayer != null && createdForPlayer != null && createdForPlayer.isGameUnderControl()
                     && (createdForPlayerId.equals(priorityPlayer.getId()) // player controls the turn
                     || createdForPlayer.getPlayersUnderYourControl().contains(priorityPlayer.getId()))) { // player controls active players turn
                 this.special = !state.getSpecialActions().getControlledBy(priorityPlayer.getId(), priorityPlayer.isInPayManaMode()).isEmpty();
@@ -227,12 +234,16 @@ public class GameView implements Serializable {
         return players;
     }
 
-    public CardsView getHand() {
-        return hand;
+    public CardsView getMyHand() {
+        return myHand;
     }
 
-    public void setHand(CardsView hand) {
-        this.hand = hand;
+    public PlayerView getMyPlayer() {
+        if (this.myPlayerId == null) {
+            return null;
+        } else {
+            return players.stream().filter(p -> p.getPlayerId().equals(this.myPlayerId)).findFirst().orElse(null);
+        }
     }
 
     public Map<String, SimpleCardsView> getOpponentHands() {
@@ -279,10 +290,6 @@ public class GameView implements Serializable {
         return companion;
     }
 
-    public void setLookedAt(List<LookedAtView> list) {
-        this.lookedAt = list;
-    }
-
     public List<CombatGroupView> getCombat() {
         return combat;
     }
@@ -316,7 +323,7 @@ public class GameView implements Serializable {
     }
 
     public boolean isPlayer() {
-        return isPlayer;
+        return this.myPlayerId != null;
     }
 
     public PlayableObjectsList getCanPlayObjects() {

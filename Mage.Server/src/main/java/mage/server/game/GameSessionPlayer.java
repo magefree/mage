@@ -209,27 +209,26 @@ public class GameSessionPlayer extends GameSessionWatcher {
      * @return
      */
     public static GameView prepareGameView(Game game, UUID playerId, UUID userId) {
-        Player player = game.getPlayer(playerId);
+        Player player = game.getPlayer(playerId); // null for watcher
         GameView gameView = new GameView(game.getState(), game, playerId, null);
-        gameView.setHand(new CardsView(game, player.getHand().getCards(game)));
-        if (gameView.getPriorityPlayerName().equals(player.getName())) {
-            gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL));
+        if (player != null) {
+            if (gameView.getPriorityPlayerName().equals(player.getName())) {
+                gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL));
+            }
         }
 
         processControlledPlayers(game, player, gameView);
         processWatchedHands(game, userId, gameView);
         //TODO: should player who controls another player's turn be able to look at all these cards?
 
-        List<LookedAtView> list = new ArrayList<>();
-        for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {
-            list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
-        }
-        gameView.setLookedAt(list);
-
         return gameView;
     }
 
     private static void processControlledPlayers(Game game, Player player, GameView gameView) {
+        if (player == null) {
+            // ignore watcher
+            return;
+        }
         if (!player.getPlayersUnderYourControl().isEmpty()) {
             Map<String, SimpleCardsView> handCards = new HashMap<>();
             for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {

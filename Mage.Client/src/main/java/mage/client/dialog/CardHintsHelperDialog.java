@@ -10,7 +10,6 @@ import javax.swing.event.DocumentListener;
 
 import mage.abilities.hint.HintUtils;
 import mage.client.cards.BigCard;
-import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageDesktopIconifySupport;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.SettingsManager;
@@ -232,7 +231,7 @@ public class CardHintsHelperDialog extends MageDialog implements MageDesktopIcon
                 .orElse(null);
 
         // hand
-        this.lastGameView.getHand().values().forEach(card -> {
+        this.lastGameView.getMyHand().values().forEach(card -> {
             this.lastHints.add(new CardHintInfo(currentPlayer, "hand", card));
         });
 

@@ -104,8 +104,8 @@ public class LoadCallbackClient implements CallbackClient {
                         session.sendPlayerUUID(gameId, playerId);
                         return;
                     case "Select a card to discard":
-                        log.info(getLogStartInfo() + "hand size: " + gameView.getHand().size());
-                        SimpleCardView card = gameView.getHand().values().iterator().next();
+                        log.info(getLogStartInfo() + "hand size: " + gameView.getMyHand().size());
+                        SimpleCardView card = gameView.getMyHand().values().iterator().next();
                         session.sendPlayerUUID(gameId, card.getId());
                         return;
                     default:

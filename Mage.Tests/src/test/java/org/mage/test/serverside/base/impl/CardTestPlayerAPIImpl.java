@@ -2222,9 +2222,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertFalse(player.getName() + " has lost the game.", player.hasLost());
     }
 
+    /**
+     * Prepare GameView from current game (for client side code tests)
+     *
+     * @param player null for watcher mode
+     */
     public GameView getGameView(Player player) {
         // prepare client-server data for tests
-        return GameSessionPlayer.prepareGameView(currentGame, player.getId(), null);
+        UUID playerId = player == null ? null : player.getId();
+        return GameSessionPlayer.prepareGameView(currentGame, playerId, playerId);
+    }
+
+    public GameView getGameView(Player player, UUID userId) {
+        // prepare client-server data for tests
+        return GameSessionPlayer.prepareGameView(currentGame, player == null ? null : player.getId(), userId);
     }
 
     protected enum ExpectedType {
