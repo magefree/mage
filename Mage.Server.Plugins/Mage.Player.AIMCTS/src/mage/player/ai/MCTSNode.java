@@ -17,9 +17,9 @@ import mage.abilities.common.PassAbility;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.combat.Combat;
-import mage.game.combat.CombatGroup;
 import mage.game.turn.Step.StepPart;
 import mage.players.Player;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -113,7 +113,7 @@ public class MCTSNode {
                     uct = ((node.visits - node.wins) / (node.visits)) + (selectionCoefficient * Math.sqrt(Math.log(visits) / (node.visits)));
             else
                 // ensure that a random unvisited node is played first
-                uct = 10000 + 1000 * Math.random();
+                uct = 10000 + 1000 * RandomUtil.nextDouble();
             if (uct > bestValue) {
                 bestChild = node;
                 bestValue = uct;
