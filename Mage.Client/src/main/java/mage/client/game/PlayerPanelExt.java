@@ -104,20 +104,26 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 int priorityTimeValue = pt.getCount() + pt.getBufferCount();
                 String text = getPriorityTimeLeftString(priorityTimeValue);
                 // Set timer text colors (note, if you change it here, change it in update() as well)
-                Color textColor = null;  // use default in HoverButton
-                Color foregroundColor = Color.BLACK;
+                final Color textColor;  // use default in HoverButton
+                final Color foregroundColor;
                 if (pt.getBufferCount() > 0) {
                     textColor = Color.GREEN;
                     foregroundColor = Color.GREEN.darker().darker();
                 } else if (pt.getCount() < 300) { // visual indication for under 5 minutes
                     textColor = Color.RED;
                     foregroundColor = Color.RED.darker().darker();
+                } else {
+                    textColor = null;
+                    foregroundColor = Color.BLACK;
                 }
-                PlayerPanelExt.this.avatar.setTopText(text);
-                PlayerPanelExt.this.avatar.setTopTextColor(textColor);
-                PlayerPanelExt.this.timerLabel.setText(text);
-                PlayerPanelExt.this.timerLabel.setForeground(foregroundColor);
-                PlayerPanelExt.this.avatar.repaint();
+
+                SwingUtilities.invokeLater(() -> {
+                    PlayerPanelExt.this.avatar.setTopText(text);
+                    PlayerPanelExt.this.avatar.setTopTextColor(textColor);
+                    PlayerPanelExt.this.timerLabel.setText(text);
+                    PlayerPanelExt.this.timerLabel.setForeground(foregroundColor);
+                    PlayerPanelExt.this.avatar.repaint();
+                });
             });
             timer.init(gameId);
         }
@@ -318,14 +324,17 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 this.avatar.setTopText(priorityTimeValue);
                 this.timerLabel.setText(priorityTimeValue);
                 // Set timer text colors (note, if you change it here, change it in init()::timer.setTaskOnTick() as well)
-                Color textColor = null; // use default in HoverButton
-                Color foregroundColor = Color.BLACK;
+                final Color textColor; // use default in HoverButton
+                final Color foregroundColor;
                 if (player.getBufferTimeLeft() > 0) {
                     textColor = Color.GREEN;
                     foregroundColor = Color.GREEN.darker().darker();
                 } else if (player.getPriorityTimeLeft() < 300) { // visual indication for under 5 minutes
                     textColor = Color.RED;
                     foregroundColor = Color.RED.darker().darker();
+                } else {
+                    textColor = null;
+                    foregroundColor = Color.BLACK;
                 }
                 this.avatar.setTopTextColor(textColor);
                 this.timerLabel.setForeground(foregroundColor);

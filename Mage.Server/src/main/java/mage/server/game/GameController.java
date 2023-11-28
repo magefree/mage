@@ -267,6 +267,7 @@ public class GameController implements GameCallback {
         long delayMs = 250L; // run each 250 ms
 
         Action executeOnNoTimeLeft = () -> {
+            // TODO: buggy, must run in game thread, not in timer thread
             game.timerTimeout(initPlayerId);
             logger.debug("Player has no time left to end the match: " + initPlayerId + ". Conceding.");
         };

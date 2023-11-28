@@ -43,8 +43,8 @@ public class GameView implements Serializable {
     private UUID myPlayerId = null; // null for watcher
     private final CardsView myHand = new CardsView();
     private PlayableObjectsList canPlayObjects;
-    private Map<String, SimpleCardsView> opponentHands = new HashMap<>();
-    private Map<String, SimpleCardsView> watchedHands = new HashMap<>();
+    private final Map<String, SimpleCardsView> opponentHands = new HashMap<>();
+    private final Map<String, SimpleCardsView> watchedHands = new HashMap<>();
     private final CardsView stack = new CardsView();
     private final List<ExileView> exiles = new ArrayList<>();
     private final List<RevealedView> revealed = new ArrayList<>();
