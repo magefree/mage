@@ -176,11 +176,6 @@ class StormHeraldReplacementEffect extends ReplacementEffectImpl {
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED
                 && getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
 }
 
 class StormHeraldAttachablePredicate implements mage.filter.predicate.Predicate<Card> {

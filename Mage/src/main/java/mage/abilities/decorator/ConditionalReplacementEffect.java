@@ -88,11 +88,6 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return effect.checksEventType(event, game)
                 || (otherwiseEffect != null && otherwiseEffect.checksEventType(event, game));

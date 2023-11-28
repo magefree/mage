@@ -64,11 +64,6 @@ class ClamIAmEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public ClamIAmEffect copy() {
         return new ClamIAmEffect(this);
     }

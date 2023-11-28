@@ -106,11 +106,6 @@ class BarbarianClassEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public BarbarianClassEffect copy() {
         return new BarbarianClassEffect(this);
     }

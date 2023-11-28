@@ -74,11 +74,6 @@ class PixieGuideEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public PixieGuideEffect copy() {
         return new PixieGuideEffect(this);
     }
