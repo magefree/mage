@@ -71,11 +71,6 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int amount = (int) Math.ceil(event.getAmount() / 2.0);
         GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), amount, ((DamageEvent) event).isCombatDamage());

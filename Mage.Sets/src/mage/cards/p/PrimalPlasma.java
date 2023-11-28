@@ -78,11 +78,6 @@ public final class PrimalPlasma extends CardImpl {
         }
 
         @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        @Override
         public boolean replaceEvent(GameEvent event, Ability source, Game game) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
             Player controller = game.getPlayer(source.getControllerId());

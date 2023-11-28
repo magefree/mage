@@ -167,11 +167,6 @@ class GideonsSacrificeEffectReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GideonsSacrificeEffectReplacementEffect copy() {
         return new GideonsSacrificeEffectReplacementEffect(this);
     }

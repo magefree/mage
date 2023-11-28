@@ -71,11 +71,6 @@ class EnergyFieldEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
             if (event.getTargetId().equals(source.getControllerId()) && !Objects.equals(game.getControllerId(event.getSourceId()), source.getControllerId())) {

@@ -109,11 +109,6 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         EventType type = event.getType();
         return ((phase.equals("Draw step") && type == EventType.DRAW_STEP)

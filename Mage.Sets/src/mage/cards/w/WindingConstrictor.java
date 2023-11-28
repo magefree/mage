@@ -79,11 +79,6 @@ class WindingConstrictorPlayerEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public WindingConstrictorPlayerEffect copy() {
         return new WindingConstrictorPlayerEffect(this);
     }

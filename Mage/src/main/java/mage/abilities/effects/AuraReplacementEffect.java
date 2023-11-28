@@ -49,11 +49,6 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Zone fromZone = ((ZoneChangeEvent) event).getFromZone();
         Card card = game.getCard(event.getTargetId());

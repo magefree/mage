@@ -85,11 +85,6 @@ class KioraPreventionEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {

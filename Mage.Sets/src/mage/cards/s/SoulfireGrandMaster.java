@@ -87,11 +87,6 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
     public SoulfireGrandMasterCastFromHandReplacementEffect copy() {
         return new SoulfireGrandMasterCastFromHandReplacementEffect(this);
     }
