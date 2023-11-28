@@ -27,7 +27,7 @@ public final class GnomeSoldierStarStarToken extends TokenImpl {
 
     public GnomeSoldierStarStarToken() {
         super("Gnome Soldier Token", "white Gnome Soldier artifact creature token with "
-                + "\"this creature's power and toughness are each equal to the number of artifacts and/or creatures you control.\"");
+                + "\"This creature's power and toughness are each equal to the number of artifacts and/or creatures you control.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GNOME);
