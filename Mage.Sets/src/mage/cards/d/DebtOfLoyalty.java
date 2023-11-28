@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -10,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,32 +35,33 @@ public final class DebtOfLoyalty extends CardImpl {
     public DebtOfLoyalty copy() {
         return new DebtOfLoyalty(this);
     }
-    
-    static class DebtOfLoyaltyEffect extends RegenerateTargetEffect {
-        public DebtOfLoyaltyEffect ( ) {
-            super();
-            this.staticText = "Regenerate target creature. You gain control of that creature if it regenerates this way.";
-        }
 
-        private DebtOfLoyaltyEffect(final DebtOfLoyaltyEffect effect) {
-            super(effect);
+}
+
+class DebtOfLoyaltyEffect extends RegenerateTargetEffect {
+    DebtOfLoyaltyEffect() {
+        super();
+        this.staticText = "Regenerate target creature. You gain control of that creature if it regenerates this way.";
+    }
+
+    private DebtOfLoyaltyEffect(final DebtOfLoyaltyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DebtOfLoyaltyEffect copy() {
+        return new DebtOfLoyaltyEffect(this);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (super.replaceEvent(event, source, game) && permanent != null) {
+            GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
+            effect.setTargetPointer(targetPointer);
+            game.addEffect(effect, source);
+            return true;
         }
-        
-        @Override
-        public DebtOfLoyaltyEffect copy() {
-            return new DebtOfLoyaltyEffect(this);
-        }
-        
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-            if (super.apply(game, source) && permanent != null) {
-                GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
-                effect.setTargetPointer(targetPointer);
-                game.addEffect(effect, source);
-                return true;
-            }
-            return false;
-        }
+        return false;
     }
 }

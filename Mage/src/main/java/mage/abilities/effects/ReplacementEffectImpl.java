@@ -49,9 +49,8 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
         return selfScope;
     }
 
-    // TODO: Change to final; refactor Regenerate effect to use replaceEvent rather than calling an overridden apply method
     @Override
-    public boolean apply(Game game, Ability source) {
+    public final boolean apply(Game game, Ability source) {
         throw new UnsupportedOperationException("Wrong code usage: apply() not used for replacement effect.");
     }
 

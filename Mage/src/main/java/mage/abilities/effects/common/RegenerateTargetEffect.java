@@ -24,17 +24,6 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        //20110204 - 701.11
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null && permanent.regenerate(source, game)) {
-            this.used = true;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         RegenerateSourceEffect.initRegenerationShieldInfo(game, source, targetPointer.getFirst(game, source));
@@ -47,7 +36,13 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        //20110204 - 701.11
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent != null && permanent.regenerate(source, game)) {
+            this.used = true;
+            return true;
+        }
+        return false;
     }
 
     @Override
