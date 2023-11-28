@@ -17,9 +17,8 @@ import mage.view.PlaneView;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.html.HTMLDocument;
-import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.*;
+import javax.swing.text.html.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,14 +32,20 @@ import java.util.*;
 public class MageEditorPane extends JEditorPane {
 
     private static final int CHAT_TOOLTIP_DELAY_MS = 50; // cards popup from chat must be fast all time
+    private static Element lastUrlElementEntered = null; // for cursor changes
+
     final HTMLEditorKit kit = new HTMLEditorKit();
     final HTMLDocument doc;
+
 
     MageEditorPane() {
         super();
         // merge with UI.setHTMLEditorKit
         this.setEditorKit(kit);
-        this.doc = (HTMLDocument) this.getDocument(); // HTMLEditorKit must creates HTMLDocument, os use it here
+        this.doc = (HTMLDocument) this.getDocument(); // HTMLEditorKit must create HTMLDocument, os use it here
+
+        // improved style: browser's url style with underline on mouse over and hand cursor
+        kit.getStyleSheet().addRule(" a { text-decoration: none; } ");
     }
 
     // cards popup info
@@ -52,6 +57,10 @@ public class MageEditorPane extends JEditorPane {
     public void setGameData(UUID gameId, BigCard bigCard) {
         this.gameId = gameId;
         this.bigCard = bigCard;
+    }
+
+    public void cleanUp() {
+        resetCursor();
     }
 
     private void addHyperlinkHandlers() {
@@ -91,8 +100,11 @@ public class MageEditorPane extends JEditorPane {
             CardView needCard = null;
             GamePanel gamePanel = MageFrame.getGame(this.gameId);
             if (gamePanel != null) {
-                UUID needObjectId = UUID.fromString(extraData.getOrDefault("object_id", ""));
-                needCard = gamePanel.getLastGameData().findCard(needObjectId);
+                try {
+                    UUID needObjectId = UUID.fromString(extraData.getOrDefault("object_id", ""));
+                    needCard = gamePanel.getLastGameData().findCard(needObjectId);
+                } catch (IllegalArgumentException ignore) {
+                }
             }
 
             String cardName = e.getDescription().substring(1);
@@ -102,6 +114,12 @@ public class MageEditorPane extends JEditorPane {
             }
 
             if (e.getEventType() == HyperlinkEvent.EventType.ENTERED) {
+                AttributeSet as = e.getSourceElement().getAttributes();
+                AttributeSet asAnchor = (AttributeSet) as.getAttribute(HTML.Tag.A);
+                if (asAnchor != null) {
+                    urlHighlightEnable(e.getSourceElement());
+                }
+
                 // show real object by priority (workable card hints and actual info)
                 CardView cardView = needCard;
 
@@ -141,6 +159,8 @@ public class MageEditorPane extends JEditorPane {
             }
 
             if (e.getEventType() == HyperlinkEvent.EventType.EXITED) {
+                urlHighlightDisable();
+
                 SwingUtilities.invokeLater(() -> {
                     cardInfo.onMouseExited();
                 });
@@ -152,8 +172,45 @@ public class MageEditorPane extends JEditorPane {
             @Override
             public void mouseExited(MouseEvent e) {
                 cardInfo.onMouseExited();
+                resetCursor();
             }
         });
+    }
+
+    private void resetCursor() {
+        SwingUtilities.windowForComponent(this).setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void setCursorToHand() {
+        SwingUtilities.windowForComponent(this).setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+
+    private void urlHighlightEnable(Element hyperlinkElement) {
+        if (hyperlinkElement != lastUrlElementEntered) {
+            lastUrlElementEntered = hyperlinkElement;
+            changeUrlTextDecoration(hyperlinkElement, "underline");
+        }
+        setCursorToHand();
+    }
+
+    private void urlHighlightDisable() {
+        if (lastUrlElementEntered != null) {
+            changeUrlTextDecoration(lastUrlElementEntered, "none");
+            lastUrlElementEntered = null;
+        }
+        resetCursor();
+    }
+
+    private void changeUrlTextDecoration(Element el, String decoration) {
+        if (lastUrlElementEntered != null) {
+            HTMLDocument doc = (HTMLDocument) this.getDocument();
+            int start = el.getStartOffset();
+            int end = el.getEndOffset();
+            StyleContext ss = doc.getStyleSheet();
+            Style style = ss.addStyle("HighlightedUrl", null);
+            style.addAttribute(CSS.Attribute.TEXT_DECORATION, decoration);
+            doc.setCharacterAttributes(start, end - start, style, false);
+        }
     }
 
     @Override
@@ -177,7 +234,13 @@ public class MageEditorPane extends JEditorPane {
     }
 
     public void enableHyperlinksAndCardPopups() {
+        if (this.isEditable()) {
+            throw new IllegalStateException("Wrong code usage: hyper links works with non-editable components");
+        }
+
         hyperlinkEnabled = true;
         addHyperlinkHandlers();
     }
+
+
 }

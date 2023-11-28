@@ -93,7 +93,6 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPanePlayers.setViewportBorder(null);
         }
-
     }
 
     public ChatPanelBasic getUserChatPanel() {

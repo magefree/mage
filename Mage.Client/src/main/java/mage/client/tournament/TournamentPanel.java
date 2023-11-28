@@ -108,9 +108,8 @@ public class TournamentPanel extends javax.swing.JPanel {
     public void cleanUp() {
         this.stopTasks();
         if (this.chatPanel1 != null) {
-            this.chatPanel1.disconnect();
+            this.chatPanel1.cleanUp();
         }
-
     }
 
     public void changeGUISize() {
@@ -185,7 +184,9 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     public void hideTournament() {
         stopTasks();
-        this.chatPanel1.disconnect();
+        if (this.chatPanel1 != null) {
+            this.chatPanel1.cleanUp();
+        }
         this.saveDividerLocations();
         TableUtil.saveColumnWidthAndOrderToPrefs(tablePlayers, KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH, KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER);
         TableUtil.saveColumnWidthAndOrderToPrefs(tableMatches, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);

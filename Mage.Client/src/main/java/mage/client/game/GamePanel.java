@@ -274,8 +274,8 @@ public final class GamePanel extends javax.swing.JPanel {
     public void cleanUp() {
         MageFrame.removeGame(gameId);
         saveDividerLocations();
-        this.gameChatPanel.disconnect();
-        this.userChatPanel.disconnect();
+        this.gameChatPanel.cleanUp();;
+        this.userChatPanel.cleanUp();
 
         this.removeListener();
 
@@ -531,7 +531,7 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
-        this.abilityPicker.init(gameId);
+        this.abilityPicker.init(gameId, bigCard);
         this.btnConcede.setVisible(true);
         this.btnStopWatching.setVisible(false);
         this.btnSwitchHands.setVisible(false);

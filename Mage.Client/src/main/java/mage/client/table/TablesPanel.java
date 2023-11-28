@@ -827,7 +827,7 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         }
         stopTasks();
-        this.chatPanelMain.getUserChatPanel().disconnect();
+        this.chatPanelMain.cleanUp();;
 
         Component c = this.getParent();
         while (c != null && !(c instanceof TablesPane)) {

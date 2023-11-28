@@ -187,7 +187,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case REPLAY_INIT: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.init(callback.getMessageId(), (GameView) callback.getData());
+                            panel.init(callback.getMessageId(), (GameView) callback.getData(), true);
                         }
                         break;
                     }
@@ -212,7 +212,7 @@ public class CallbackClientImpl implements CallbackClient {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_INIT", callback.getObjectId(), callback.getData());
-                            panel.init(callback.getMessageId(), (GameView) callback.getData());
+                            panel.init(callback.getMessageId(), (GameView) callback.getData(), true);
                         }
                         break;
                     }

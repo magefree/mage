@@ -753,7 +753,8 @@ public class MageActionCallback implements ActionCallback {
                     location.setLocation(location.x - popupContainer.getWidth(), location.y);
                 }
                 if (!hasBottomSpace) {
-                    location.setLocation(location.x, location.y - popupContainer.getHeight());
+                    // if no upper space, then put at the top by Math.max
+                    location.setLocation(location.x, Math.max(parentComponent.getY(), location.y - popupContainer.getHeight()));
                 }
                 break;
             }

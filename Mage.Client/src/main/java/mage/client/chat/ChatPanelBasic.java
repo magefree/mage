@@ -108,6 +108,8 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
+        this.disconnect();
+        this.txtConversation.cleanUp();
     }
 
     public void setGameData(UUID gameId, BigCard bigCard) {
@@ -158,7 +160,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         }
     }
 
-    public void disconnect() {
+    private void disconnect() {
         if (SessionHandler.getSession() != null) {
             SessionHandler.leaveChat(chatId);
             MageFrame.removeChat(chatId);
