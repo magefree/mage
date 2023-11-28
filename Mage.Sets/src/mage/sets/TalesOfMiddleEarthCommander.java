@@ -114,6 +114,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Feasting Hobbit", 37, Rarity.RARE, mage.cards.f.FeastingHobbit.class));
         cards.add(new SetCardInfo("Feed the Swarm", 200, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fell Beast of Mordor", 513, Rarity.RARE, mage.cards.f.FellBeastOfMordor.class));
+        cards.add(new SetCardInfo("Fell Beast's Shriek", 508, Rarity.RARE, mage.cards.f.FellBeastsShriek.class));
         cards.add(new SetCardInfo("Fell the Mighty", 167, Rarity.RARE, mage.cards.f.FellTheMighty.class));
         cards.add(new SetCardInfo("Field of Ruin", 308, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
         cards.add(new SetCardInfo("Field-Tested Frying Pan", 11, Rarity.RARE, mage.cards.f.FieldTestedFryingPan.class));
@@ -204,6 +205,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mists of Lorien", 501, Rarity.RARE, mage.cards.m.MistsOfLorien.class));
         cards.add(new SetCardInfo("Model of Unity", 78, Rarity.RARE, mage.cards.m.ModelOfUnity.class));
         cards.add(new SetCardInfo("Monstrosity of the Lake", 22, Rarity.RARE, mage.cards.m.MonstrosityOfTheLake.class));
+        cards.add(new SetCardInfo("Mordor on the March", 512, Rarity.RARE, mage.cards.m.MordorOnTheMarch.class));
         cards.add(new SetCardInfo("Moria Scavenger", 63, Rarity.RARE, mage.cards.m.MoriaScavenger.class));
         cards.add(new SetCardInfo("Mortify", 269, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Motivated Pony", 42, Rarity.RARE, mage.cards.m.MotivatedPony.class));
@@ -218,6 +220,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Oath of Eorl", 64, Rarity.RARE, mage.cards.o.OathOfEorl.class));
         cards.add(new SetCardInfo("Oboro, Palace in the Clouds", 371, Rarity.MYTHIC, mage.cards.o.OboroPalaceInTheClouds.class));
         cards.add(new SetCardInfo("Of Herbs and Stewed Rabbit", 17, Rarity.RARE, mage.cards.o.OfHerbsAndStewedRabbit.class));
+        cards.add(new SetCardInfo("Olorin's Searing Light", 503, Rarity.RARE, mage.cards.o.OlorinsSearingLight.class));
         cards.add(new SetCardInfo("Opt", 194, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Orchard Strider", 253, Rarity.COMMON, mage.cards.o.OrchardStrider.class));
         cards.add(new SetCardInfo("Orcish Siegemaster", 33, Rarity.RARE, mage.cards.o.OrcishSiegemaster.class));
@@ -280,6 +283,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Smoldering Marsh", 332, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 284, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Song of Earendil", 69, Rarity.RARE, mage.cards.s.SongOfEarendil.class));
+        cards.add(new SetCardInfo("Sorcerous Squall", 504, Rarity.RARE, mage.cards.s.SorcerousSquall.class));
         cards.add(new SetCardInfo("Soul's Attendant", 520, Rarity.UNCOMMON, mage.cards.s.SoulsAttendant.class));
         cards.add(new SetCardInfo("Stonehewer Giant", 521, Rarity.RARE, mage.cards.s.StonehewerGiant.class));
         cards.add(new SetCardInfo("Subjugate the Hobbits", 24, Rarity.RARE, mage.cards.s.SubjugateTheHobbits.class));
