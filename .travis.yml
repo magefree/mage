@@ -1,7 +1,7 @@
 language: java
 jdk:
-  - openjdk11
-dist: focal
+  - openjdk17
+dist: jammy
 git:
   depth: 3
   submodules: false
