@@ -778,12 +778,12 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public synchronized void updateGame() {
-        if (playerId == null && lastGameData.game.getWatchedHands() == null) {
+        if (playerId == null && lastGameData.game.getWatchedHands().isEmpty()) {
             this.handContainer.setVisible(false);
         } else {
             this.handContainer.setVisible(true);
             handCards.clear();
-            if (lastGameData.game.getWatchedHands() != null) {
+            if (!lastGameData.game.getWatchedHands().isEmpty()) {
                 for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getWatchedHands().entrySet()) {
                     handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                 }
@@ -791,7 +791,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (playerId != null) {
                 handCards.put(YOUR_HAND, lastGameData.game.getMyHand());
                 // Get opponents hand cards if available (only possible for players)
-                if (lastGameData.game.getOpponentHands() != null) {
+                if (!lastGameData.game.getOpponentHands().isEmpty()) {
                     for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getOpponentHands().entrySet()) {
                         handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                     }
@@ -811,7 +811,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (playerId != null) {
                 // set visible only if we have any other hand visible than ours
                 btnSwitchHands.setVisible(handCards.size() > 1);
-                boolean change = (handCardsOfOpponentAvailable == (lastGameData.game.getOpponentHands() == null));
+                boolean change = (handCardsOfOpponentAvailable == lastGameData.game.getOpponentHands().isEmpty());
                 if (change) {
                     handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
                     if (handCardsOfOpponentAvailable) {
