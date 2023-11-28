@@ -49,9 +49,4 @@ public class FinalityCounterEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && permanent.getCounters(game).getCount(CounterType.FINALITY) > 0;
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 }

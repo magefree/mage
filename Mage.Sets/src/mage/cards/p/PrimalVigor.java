@@ -112,11 +112,6 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PrimalVigorCounterEffect copy() {
         return new PrimalVigorCounterEffect(this);
     }
