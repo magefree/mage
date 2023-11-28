@@ -32,7 +32,7 @@ public final class ReturnToDust extends CardImpl {
                 new ConditionalOneShotEffect(new ReturnToDustConditionalExileEffect(), ControllerMainPhaseCondition.instance);
         returnToDustConditionalExileEffect.setText("If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment");
         this.getSpellAbility().addEffect(returnToDustConditionalExileEffect);
-        this.getSpellAbility().addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(1, 2, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // Two effects are needed to handle cards like Ranar the Ever-Watchful.  Rule 608.2e
     }
