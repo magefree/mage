@@ -97,12 +97,12 @@ class HeatWaveEffect2 extends ReplacementEffectImpl {
         }
 
         Permanent blocker = game.getPermanent(event.getSourceId());
-        if (blocker.getColor(game).isBlue()) {
+        if (blocker == null || blocker.getColor(game).isBlue()) {
             return false;
         }
 
         Permanent attacker = game.getPermanent(event.getTargetId());
-        if (!attacker.isControlledBy(source.getControllerId())) {
+        if (attacker == null || !attacker.isControlledBy(source.getControllerId())) {
             return false;
         }
 
