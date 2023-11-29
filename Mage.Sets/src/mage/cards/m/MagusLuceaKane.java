@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -17,10 +16,13 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.game.stack.Spell;
+import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 
 /**
  * @author TheElk801
@@ -84,19 +86,37 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-        if (stackObject != null
-                && stackObject.isControlledBy(getControllerId())
-                && stackObject.getManaCost().stream().anyMatch(VariableManaCost.class::isInstance)) {
-            this.getEffects().setValue("stackObject", stackObject);
-            return true;
+        if (!event.getPlayerId().equals(getControllerId())) {
+            return false;
+        }
+
+        // activated ability
+        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+                if (stackAbility.getManaCostsToPay().containsX()) {
+                    this.getEffects().setValue("stackObject", (StackObject) stackAbility);
+                    return true;
+                }
+            }
+        }
+
+        // spell
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.isInstantOrSorcery(game)) {
+                if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
+                    this.getEffects().setValue("stackObject", (StackObject) spell);
+                    return true;
+                }
+            }
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "When you next cast a spell with {X} in its mana cost or activate an ability with {X} in its " +
-                "activation cost this turn, copy that spell or ability. You may choose new targets for the copy.";
+        return "When you next cast a spell with {X} in its mana cost or activate an ability with {X} in its "
+                + "activation cost this turn, copy that spell or ability. You may choose new targets for the copy.";
     }
 }
