@@ -114,6 +114,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
 
+    Permanent getPermanentOrLKIBattlefield(MageObjectReference permanentRef);
+
     Permanent getPermanentEntering(UUID permanentId);
 
     Map<UUID, Permanent> getPermanentsEntering();
