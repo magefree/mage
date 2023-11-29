@@ -1374,7 +1374,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      */
     public void cleanupPermanentCostsTags(Game game){
         getPermanentCostsTags().entrySet().removeIf(entry ->
-                !(entry.getKey().zoneCounterIsCurrent(game))
+                !(entry.getKey().getZoneChangeCounter() == game.getState().getZoneChangeCounter(entry.getKey().getSourceId())-1)
         );
     }
 
