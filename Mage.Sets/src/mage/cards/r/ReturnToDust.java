@@ -14,8 +14,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
-import mage.abilities.condition.common.ControllerMainPhaseCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.game.stack.Spell;
 
 /**
  * @author emerald000
@@ -28,8 +29,8 @@ public final class ReturnToDust extends CardImpl {
         // Exile target artifact or enchantment
         this.getSpellAbility().addEffect(new ReturnToDustExileEffect());
         // If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment
-        ConditionalOneShotEffect returnToDustConditionalExileEffect = 
-                new ConditionalOneShotEffect(new ReturnToDustConditionalExileEffect(), ControllerMainPhaseCondition.instance);
+        ConditionalOneShotEffect returnToDustConditionalExileEffect
+                = new ConditionalOneShotEffect(new ReturnToDustConditionalExileEffect(), ReturnToDustCondition.instance);
         returnToDustConditionalExileEffect.setText("If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment");
         this.getSpellAbility().addEffect(returnToDustConditionalExileEffect);
         this.getSpellAbility().addTarget(new TargetPermanent(1, 2, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
@@ -110,5 +111,23 @@ class ReturnToDustConditionalExileEffect extends OneShotEffect {
             }
         }
         return false;
+    }
+}
+
+enum ReturnToDustCondition implements Condition {
+
+    /*If a spell or ability copies Return to Dust, the copy exiles 
+    only the first target artifact or enchantment. 
+    This is because the copy wasn't cast at all. (2021-03-19)
+     */
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getSpell(source.getSourceId());
+        return (game.isActivePlayer(source.getControllerId())
+                && game.getTurnPhaseType().isMain())
+                && spell != null
+                && !spell.isCopy();
     }
 }
