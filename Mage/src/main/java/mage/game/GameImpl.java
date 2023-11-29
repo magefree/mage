@@ -716,6 +716,15 @@ public abstract class GameImpl implements Game {
         }
         return permanent;
     }
+    @Override
+    public Permanent getPermanentOrLKIBattlefield(MageObjectReference permanentRef) {
+        UUID id = permanentRef.getSourceId();
+        Permanent permanent = state.getPermanent(id);
+        if (permanent == null || state.getZoneChangeCounter(id) != permanentRef.getZoneChangeCounter()) {
+            permanent = (Permanent) this.getLastKnownInformation(id, Zone.BATTLEFIELD, permanentRef.getZoneChangeCounter());
+        }
+        return permanent;
+    }
 
     @Override
     public Permanent getPermanentEntering(UUID permanentId) {
