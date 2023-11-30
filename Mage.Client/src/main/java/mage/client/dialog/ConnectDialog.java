@@ -85,7 +85,6 @@ public class ConnectDialog extends MageDialog {
     }
 
     private void saveSettings() {
-        ThreadUtils.sleep(3000);
         String serverAddress = txtServer.getText().trim();
         MagePreferences.setServerAddress(serverAddress);
         MagePreferences.setServerPort(Integer.parseInt(txtPort.getText().trim()));
