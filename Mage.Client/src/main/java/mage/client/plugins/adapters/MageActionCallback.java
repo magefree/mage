@@ -36,7 +36,10 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class that handles the callbacks from the card panels to mage to display big
@@ -262,22 +265,27 @@ public class MageActionCallback implements ActionCallback {
             hideTooltipPopup();
         } else if (cardPanel.getZone() == Zone.HAND) {
             // drag end
-            int maxXOffset = 0;
+            boolean needClick = false;
             if (isDragging) {
-                Point mouse = new Point(e.getX(), e.getY());
-                SwingUtilities.convertPointToScreen(mouse, data.getComponent());
-                maxXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x));
-            }
-
-            clearDragging(cardPanel);
-
-            this.startedDragging = false;
-            if (isDragging && maxXOffset < HAND_CARDS_MIN_DISTANCE_TO_START_DRAGGING) {
                 // if user returned card to original place
                 // outdated code, HAND_CARDS_MIN_DISTANCE_TO_START_DRAGGING already used for wrong drag protection,
                 // so no needs in additional clicks here
                 //logger.info("User drag card to original place");
-                //simulateCardClick(data);
+                /*
+                Point mouse = new Point(e.getX(), e.getY());
+                SwingUtilities.convertPointToScreen(mouse, data.getComponent());
+                int dragXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x));
+                if (dragXOffset < HAND_CARDS_MIN_DISTANCE_TO_START_DRAGGING) {
+                    needClick = true;
+                }*/
+            } else {
+                needClick = true;
+            }
+            clearDragging(cardPanel);
+            this.startedDragging = false;
+
+            if (needClick) {
+                simulateCardClick(data);
             }
             e.consume();
         } else {
