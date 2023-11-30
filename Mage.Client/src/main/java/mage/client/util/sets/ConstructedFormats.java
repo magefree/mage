@@ -78,12 +78,14 @@ public final class ConstructedFormats {
     }
 
     public static void ensureLists() {
-        if (underlyingSetCodesPerFormat.isEmpty()) {
+        if (underlyingSetCodesPerFormat.isEmpty()
+                || underlyingSetCodesPerFormat.values().stream().findFirst().get().isEmpty()) {
             buildLists();
         }
     }
 
     public static void buildLists() {
+        underlyingSetCodesPerFormat.clear();
         underlyingSetCodesPerFormat.put(STANDARD, new ArrayList<>());
         underlyingSetCodesPerFormat.put(EXTENDED, new ArrayList<>());
         underlyingSetCodesPerFormat.put(FRONTIER, new ArrayList<>());

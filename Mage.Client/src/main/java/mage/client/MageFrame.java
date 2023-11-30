@@ -5,7 +5,6 @@ import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import mage.cards.repository.ExpansionRepository;
 import mage.cards.repository.RepositoryUtil;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
@@ -33,6 +32,7 @@ import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
+import mage.client.util.sets.ConstructedFormats;
 import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
@@ -269,6 +269,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         LOGGER.info("Images: search broken files...");
         CardImageUtils.checkAndFixImageFiles();
 
+        bootstrapSetsAndFormats();
+
         if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
             RateCard.bootstrapCardsAndRatings();
         }
@@ -372,6 +374,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 MacFullscreenUtil.toggleMacOSFullScreenMode(this);
             }
         }
+    }
+
+    private void bootstrapSetsAndFormats() {
+        logger.info("Loading sets and formats...");
+        ConstructedFormats.ensureLists();
     }
 
     private void setWindowTitle() {
