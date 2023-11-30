@@ -317,6 +317,7 @@ public class GameController implements GameCallback {
         }
         user.get().addGame(playerId, gameSession);
         logger.debug("Player " + player.getName() + ' ' + playerId + " has " + joinType + " gameId: " + game.getId());
+        // TODO: force user update?!
         managerFactory.chatManager().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, game, MessageType.GAME, null);
         checkStart();
     }

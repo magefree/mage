@@ -36,10 +36,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Class that handles the callbacks from the card panels to mage to display big
@@ -68,10 +65,10 @@ public class MageActionCallback implements ActionCallback {
     // higher value -> the effect will appear earlier (depends on the card size)
     public static final int HAND_CARDS_COMPARE_GAP_X = 30;
 
+    public static final int HAND_CARDS_MIN_DISTANCE_TO_START_DRAGGING = 20; // do not drag on small distance (click instead)
+
     public static final int GO_DOWN_ON_DRAG_Y_OFFSET = 0;
     public static final int GO_UP_ON_DRAG_Y_OFFSET = 0;
-
-    public static final int MIN_X_OFFSET_REQUIRED = 20;
 
     private Popup tooltipPopup;
     private BigCard bigCard;
@@ -275,22 +272,27 @@ public class MageActionCallback implements ActionCallback {
             clearDragging(cardPanel);
 
             this.startedDragging = false;
-            if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
-                // default click simulation // TODO: replace to normal clicked events (change dialogs)
-                cardPanel.requestFocusInWindow();
-                DefaultActionCallback.instance.mouseClicked(data.getGameId(), data.getCard());
-                // Closes popup & enlarged view if a card/Permanent is selected
-                hideTooltipPopup();
+            if (isDragging && maxXOffset < HAND_CARDS_MIN_DISTANCE_TO_START_DRAGGING) {
+                // if user returned card to original place
+                // outdated code, HAND_CARDS_MIN_DISTANCE_TO_START_DRAGGING already used for wrong drag protection,
+                // so no needs in additional clicks here
+                //logger.info("User drag card to original place");
+                //simulateCardClick(data);
             }
             e.consume();
         } else {
             // default click simulation
-            cardPanel.requestFocusInWindow();
-            DefaultActionCallback.instance.mouseClicked(data.getGameId(), data.getCard());
-            // Closes popup & enlarged view if a card/Permanent is selected
-            hideTooltipPopup();
+            simulateCardClick(data);
             e.consume();
         }
+    }
+
+    private void simulateCardClick(TransferData data) {
+        MageCard cardPanel = data.getComponent().getTopPanelRef();
+        cardPanel.requestFocusInWindow();
+        DefaultActionCallback.instance.mouseClicked(data.getGameId(), data.getCard());
+        // closes popup & enlarged view if a card/permanent is selected
+        hideTooltipPopup();
     }
 
     private void clearDragging(MageCard clearCard) {
@@ -314,7 +316,6 @@ public class MageActionCallback implements ActionCallback {
     @Override
     public void mouseMoved(MouseEvent e, TransferData data) {
         // MouseEvent can be null for custom hints calls, e.g. from choose dialog
-
         if (!Plugins.instance.isCardPluginLoaded()) {
             return;
         }
@@ -341,14 +342,22 @@ public class MageActionCallback implements ActionCallback {
             // only allow draging with the left mouse button
             return;
         }
+
+        Point mouse = new Point(e.getX(), e.getY());
+        SwingUtilities.convertPointToScreen(mouse, data.getComponent());
+        if (!isDragging
+                && Math.abs(mouse.x - initialMousePos.x) < HAND_CARDS_MIN_DISTANCE_TO_START_DRAGGING
+                && Math.abs(mouse.y - initialMousePos.y) < HAND_CARDS_MIN_DISTANCE_TO_START_DRAGGING) {
+            // users do clicks while mouse moving, so it's not a drag and must be ignored
+            return;
+        }
+
         isDragging = true;
         prevCardPanel = cardPanel;
 
         Point cardPanelLocationOld = cardPanel.getCardLocation().getCardPoint();
-        Point mouse = new Point(e.getX(), e.getY());
-        SwingUtilities.convertPointToScreen(mouse, data.getComponent());
         int xOffset = 0; // starting position
-        int newX = Math.max(initialCardPos.x + (int) (mouse.getX() - initialMousePos.x) - xOffset, 0); // TODO: fix
+        int newX = Math.max(initialCardPos.x + (int) (mouse.getX() - initialMousePos.x) - xOffset, 0);
         cardPanel.setCardBounds(
                 newX,
                 cardPanelLocationOld.y,
@@ -432,7 +441,8 @@ public class MageActionCallback implements ActionCallback {
 
     private void sortAndAnimateDraggingHandCards(List<MageCard> cards, MageCard source, boolean includeSource) {
         // special offset, allows to switch with first card
-        source.setCardLocation(source.getCardLocation().getCardX() - HAND_CARDS_COMPARE_GAP_X, source.getCardLocation().getCardY());
+        int draggingOffsetX = 0; // if you need side effect while moving then use HAND_CARDS_COMPARE_GAP_X (but it looks bad)
+        source.setCardLocation(source.getCardLocation().getCardX() - draggingOffsetX, source.getCardLocation().getCardY());
 
         // sorting card components, so the effect above will be applied too
         cards.sort(Comparator.comparingInt(cp -> cp.getCardLocation().getCardX()));

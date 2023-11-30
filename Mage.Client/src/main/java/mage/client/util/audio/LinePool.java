@@ -7,10 +7,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
@@ -45,7 +42,7 @@ public class LinePool {
             protected void afterExecute(Runnable r, Throwable t) {
                 super.afterExecute(r, t);
                 t = ThreadUtils.findRealException(r, t);
-                if (t != null) {
+                if (t != null && !(t instanceof CancellationException)) {
                     // TODO: show sound errors in client logs?
                     //logger.error("Catch unhandled error in SOUND thread: " + t.getMessage(), t);
                 }

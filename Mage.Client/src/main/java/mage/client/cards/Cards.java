@@ -20,7 +20,7 @@
  import java.util.*;
 
  /**
-  * Panel for stack and hand zones, component for lookAt and reveal windows (CardInfoWindowDialog)
+  * GUI: panel for stack and hand zones, component for lookAt and reveal windows (CardInfoWindowDialog)
   *
   * @author BetaSteward_at_googlemail.com, JayDi85
   */
