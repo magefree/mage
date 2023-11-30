@@ -34,7 +34,6 @@ public final class InciteWar extends CardImpl {
         // Choose one - Creatures target player controls attack this turn if able;
         this.getSpellAbility().addEffect(new InciteWarMustAttackEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
 
         // or creatures you control gain first strike until end of turn.
         Mode mode = new Mode(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));

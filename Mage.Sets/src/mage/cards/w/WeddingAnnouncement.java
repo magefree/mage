@@ -48,7 +48,7 @@ public final class WeddingAnnouncement extends CardImpl {
                 new SourceHasCounterCondition(CounterType.INVITATION, 3),
                 "Then if {this} has three or more invitation counters on it, transform it"
         ));
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     private WeddingAnnouncement(final WeddingAnnouncement card) {

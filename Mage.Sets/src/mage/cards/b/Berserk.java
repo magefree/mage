@@ -47,7 +47,6 @@ public final class Berserk extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new BerserkDestroyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
 
     }
 

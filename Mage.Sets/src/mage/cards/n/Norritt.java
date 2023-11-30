@@ -69,7 +69,7 @@ public final class Norritt extends CardImpl {
                 + "Activate only before attackers are declared.");
         ability2.addEffect(new NorrittDelayedDestroyEffect());
         ability2.addTarget(new TargetCreaturePermanent(filterCreature));
-        this.addAbility(ability2, new AttackedThisTurnWatcher());
+        this.addAbility(ability2);
 
     }
 
