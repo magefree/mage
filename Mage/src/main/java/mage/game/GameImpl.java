@@ -1338,7 +1338,6 @@ public abstract class GameImpl implements Game {
         List<Watcher> newWatchers = new ArrayList<>();
         newWatchers.add(new MorbidWatcher());
         newWatchers.add(new CastSpellLastTurnWatcher());
-        newWatchers.add(new CastSpellYourLastTurnWatcher());
         newWatchers.add(new PlayerLostLifeWatcher());
         newWatchers.add(new PlayerLostLifeNonCombatWatcher());
         newWatchers.add(new BlockedAttackerWatcher());
