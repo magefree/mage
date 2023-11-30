@@ -19,6 +19,9 @@ public class CreaturesDiedWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCreaturesThatDiedByController = new HashMap<>();
     private final Map<UUID, Integer> amountOfCreaturesThatDiedByOwner = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public CreaturesDiedWatcher() {
         super(WatcherScope.GAME);
     }
@@ -34,6 +37,7 @@ public class CreaturesDiedWatcher extends Watcher {
                 || !zEvent.getTarget().isCreature(game)) {
             return;
         }
+        condition = true;
         amountOfCreaturesThatDiedByController.compute(zEvent.getTarget().getControllerId(), CardUtil::setOrIncrementValue);
         amountOfCreaturesThatDiedByOwner.compute(zEvent.getTarget().getOwnerId(), CardUtil::setOrIncrementValue);
     }

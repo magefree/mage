@@ -1336,7 +1336,6 @@ public abstract class GameImpl implements Game {
 
     public void initGameDefaultWatchers() {
         List<Watcher> newWatchers = new ArrayList<>();
-        newWatchers.add(new MorbidWatcher());
         newWatchers.add(new CastSpellLastTurnWatcher());
         newWatchers.add(new PlayerLostLifeWatcher());
         newWatchers.add(new BlockedAttackerWatcher());
