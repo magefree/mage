@@ -18,6 +18,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.utils.CompressUtil;
+import mage.utils.ThreadUtils;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
@@ -118,10 +119,13 @@ public class SessionImpl implements Session {
     }
 
     private void showMessageToUser(String message) {
+        if (message == null) {
+            message = "Unknown error, look at logs for details";
+        }
         if (message.contains("free port for use")) {
             message += " (try to close and restart a client app)";
         }
-        client.showMessage("Remote task error. " + message);
+        client.showMessage("Remote task error: " + message);
     }
 
     private boolean doRemoteWorkAndHandleErrors(boolean closeConnectionOnFinish, boolean mustWaitServerMessageOnFail,
@@ -180,17 +184,18 @@ public class SessionImpl implements Session {
             logger.warn("Connect: wrong versions");
             connectStop(false);
             if (!canceled) {
-                showMessageToUser(ex.getMessage());
+                showMessageToUser(ex.toString());
             }
         } catch (CannotConnectException ex) {
             if (!canceled) {
                 handleCannotConnectException(ex);
             }
         } catch (Throwable t) {
+            Throwable ex = ThreadUtils.findRootException(t);
             logger.fatal("Connect: FAIL", t);
             connectStop(false);
             if (!canceled) {
-                showMessageToUser(t.getMessage());
+                showMessageToUser(ex.toString());
             }
         } finally {
             lastRemotingTask = null;
@@ -470,6 +475,8 @@ public class SessionImpl implements Session {
 
     private void handleCannotConnectException(CannotConnectException ex) {
         logger.warn("Cannot connect", ex);
+
+        // try to find a known error
         Throwable t = ex.getCause();
         String message = "";
         while (t != null) {
@@ -493,6 +500,7 @@ public class SessionImpl implements Session {
             t = t.getCause();
         }
         client.showMessage("Unable connect to server. " + message);
+        setLastError(message);
         if (logger.isTraceEnabled()) {
             logger.trace("StackTrace", t);
         }

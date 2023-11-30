@@ -64,7 +64,7 @@ public class ThreadExecutorImpl implements ThreadExecutor {
             super.afterExecute(r, t);
 
             // catch errors in CALL threads (from client commands)
-            t = ThreadUtils.findRealException(r, t);
+            t = ThreadUtils.findRunnableException(r, t);
             if (t != null && !(t instanceof CancellationException)) {
                 logger.error("Catch unhandled error in CALL thread: " + t.getMessage(), t);
             }
@@ -83,7 +83,7 @@ public class ThreadExecutorImpl implements ThreadExecutor {
             super.afterExecute(r, t);
 
             // catch errors in GAME threads (from game processing)
-            t = ThreadUtils.findRealException(r, t);
+            t = ThreadUtils.findRunnableException(r, t);
             if (t != null && !(t instanceof CancellationException)) {
                 // it's impossible to brake game thread in normal use case, so each bad use case must be researched
                 logger.error("Catch unhandled error in GAME thread: " + t.getMessage(), t);

@@ -34,7 +34,7 @@ public class MageUI {
                 super.afterExecute(r, t);
 
                 // catch errors in popup threads (example: card popup over cards or chat/log messages)
-                t = ThreadUtils.findRealException(r, t);
+                t = ThreadUtils.findRunnableException(r, t);
                 if (t != null && !(t instanceof CancellationException)) {
                     logger.error("Catch unhandled error in POPUP thread: " + t.getMessage(), t);
                 }

@@ -1,5 +1,7 @@
 package mage.utils;
 
+import com.google.common.base.Throwables;
+
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -31,7 +33,7 @@ public final class ThreadUtils {
      * Find real exception object after thread task completed. Can be used in afterExecute
      *
      */
-    public static Throwable findRealException(Runnable r, Throwable t) {
+    public static Throwable findRunnableException(Runnable r, Throwable t) {
         // executer.submit - return exception in result
         // executer.execute - return exception in t
         if (t == null && r instanceof Future<?>) {
@@ -46,5 +48,9 @@ public final class ThreadUtils {
             }
         }
         return t;
+    }
+
+    public static Throwable findRootException(Throwable t) {
+        return Throwables.getRootCause(t);
     }
 }

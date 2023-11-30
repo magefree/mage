@@ -41,7 +41,7 @@ public class LinePool {
             @Override
             protected void afterExecute(Runnable r, Throwable t) {
                 super.afterExecute(r, t);
-                t = ThreadUtils.findRealException(r, t);
+                t = ThreadUtils.findRunnableException(r, t);
                 if (t != null && !(t instanceof CancellationException)) {
                     // TODO: show sound errors in client logs?
                     //logger.error("Catch unhandled error in SOUND thread: " + t.getMessage(), t);
