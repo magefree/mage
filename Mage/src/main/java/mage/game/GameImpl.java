@@ -1342,7 +1342,6 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new DamageDoneWatcher()); // TODO: no need to be default watcher
         newWatchers.add(new PlanarRollWatcher()); // TODO: no need to be default watcher
         newWatchers.add(new AttackedThisTurnWatcher());
-        newWatchers.add(new PlayersAttackedThisTurnWatcher()); // TODO: no need to be default watcher
         newWatchers.add(new CardsDrawnThisTurnWatcher());
         newWatchers.add(new ManaSpentToCastWatcher());
         newWatchers.add(new ManaPaidSourceWatcher());
