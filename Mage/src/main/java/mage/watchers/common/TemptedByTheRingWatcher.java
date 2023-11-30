@@ -17,6 +17,9 @@ public class TemptedByTheRingWatcher extends Watcher {
 
     private final Map<UUID, Integer> map = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public TemptedByTheRingWatcher() {
         super(WatcherScope.GAME);
     }

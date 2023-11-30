@@ -24,6 +24,9 @@ public class ManaSpentToCastWatcher extends Watcher {
 
     private final Map<MageObjectReference, Mana> manaMap = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public ManaSpentToCastWatcher() {
         super(WatcherScope.GAME);
     }

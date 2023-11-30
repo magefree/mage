@@ -15,6 +15,7 @@ public class MorbidWatcher extends Watcher {
 
     /**
      * Game default watcher
+     * TODO: Merge with CreaturesDiedWatcher
      */
     public MorbidWatcher() {
         super(WatcherScope.GAME);
