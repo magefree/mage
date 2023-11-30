@@ -41,7 +41,6 @@ public final class GlyphOfDoom extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new InfoEffect("Choose target Wall creature"));
         this.getSpellAbility().addEffect(new GlyphOfDoomCreateDelayedTriggeredAbilityEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private GlyphOfDoom(final GlyphOfDoom card) {

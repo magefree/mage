@@ -1,4 +1,3 @@
-
 package mage.watchers.common;
 
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
@@ -21,6 +19,9 @@ public class BlockedAttackerWatcher extends Watcher {
 
     private final Map<MageObjectReference, Set<MageObjectReference>> blockData = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public BlockedAttackerWatcher() {
         super(WatcherScope.GAME);
     }
