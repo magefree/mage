@@ -29,7 +29,7 @@ public final class FracturedPowerstone extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new FracturedPowerstoneEffect(), new TapSourceCost()
         );
-        this.addAbility(ability);
+        this.addAbility(ability, new PlanarRollWatcher());
     }
 
     private FracturedPowerstone(final FracturedPowerstone card) {
