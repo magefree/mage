@@ -21,6 +21,9 @@ public class PlayerLostLifeWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfLifeLostThisTurn = new HashMap<>();
     private final Map<UUID, Integer> amountOfLifeLostLastTurn = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public PlayerLostLifeWatcher() {
         super(WatcherScope.GAME);
     }

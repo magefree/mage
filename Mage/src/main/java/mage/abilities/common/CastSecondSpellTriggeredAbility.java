@@ -46,7 +46,6 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
     public CastSecondSpellTriggeredAbility(Zone zone, Effect effect, TargetController targetController,
             boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
-        this.addWatcher(new CastSpellLastTurnWatcher());
         if (targetController == TargetController.YOU) {
             this.addHint(hint);
         }

@@ -13,6 +13,9 @@ import mage.watchers.Watcher;
  */
 public class MorbidWatcher extends Watcher {
 
+    /**
+     * Game default watcher
+     */
     public MorbidWatcher() {
         super(WatcherScope.GAME);
     }

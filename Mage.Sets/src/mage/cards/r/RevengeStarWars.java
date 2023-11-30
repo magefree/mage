@@ -40,8 +40,6 @@ public final class RevengeStarWars extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
 
-        this.getSpellAbility().addWatcher(new PlayerLostLifeWatcher());
-
     }
 
     private RevengeStarWars(final RevengeStarWars card) {
