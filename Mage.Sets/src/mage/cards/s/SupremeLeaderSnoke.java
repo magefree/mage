@@ -24,11 +24,15 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
-import mage.watchers.common.PlayerLostLifeNonCombatWatcher;
+import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -91,7 +95,8 @@ enum SupremeLeaderSnokeAdjuster implements TargetAdjuster {
     }
 }
 
-class OpponentNoncombatLostLifeCount implements DynamicValue {
+enum OpponentNoncombatLostLifeCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -104,7 +109,7 @@ class OpponentNoncombatLostLifeCount implements DynamicValue {
 
     @Override
     public OpponentNoncombatLostLifeCount copy() {
-        return new OpponentNoncombatLostLifeCount();
+        return this;
     }
 
     @Override
@@ -132,7 +137,7 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            int amount = new OpponentNoncombatLostLifeCount().calculate(game, source, this);
+            int amount = OpponentNoncombatLostLifeCount.instance.calculate(game, source, this);
             if (amount > 0) {
                 Counter counterToAdd = counter.copy();
                 counterToAdd.add(amount - counter.getCount());
@@ -145,5 +150,48 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
     @Override
     public SupremeLeaderSnokeCounterEffect copy() {
         return new SupremeLeaderSnokeCounterEffect(this);
+    }
+}
+
+class PlayerLostLifeNonCombatWatcher extends Watcher {
+
+    private final Map<UUID, Integer> amountOfLifeLostThisTurn = new HashMap<>();
+
+    PlayerLostLifeNonCombatWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        // non combat lose life
+        if (event.getType() == GameEvent.EventType.LOST_LIFE && !event.getFlag()) {
+            UUID playerId = event.getPlayerId();
+            if (playerId != null) {
+                Integer amount = amountOfLifeLostThisTurn.get(playerId);
+                if (amount == null) {
+                    amount = event.getAmount();
+                } else {
+                    amount = amount + event.getAmount();
+                }
+                amountOfLifeLostThisTurn.put(playerId, amount);
+            }
+        }
+    }
+
+    public int getAllOppLifeLost(UUID playerId, Game game) {
+        int amount = 0;
+        for (UUID opponentId : this.amountOfLifeLostThisTurn.keySet()) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && opponent.hasOpponent(playerId, game)) {
+                amount += this.amountOfLifeLostThisTurn.getOrDefault(opponentId, 0);
+            }
+        }
+        return amount;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        amountOfLifeLostThisTurn.clear();
     }
 }
