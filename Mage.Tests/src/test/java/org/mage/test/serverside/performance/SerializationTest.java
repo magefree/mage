@@ -218,8 +218,8 @@ public class SerializationTest extends CardTestPlayerBase {
         Assert.assertEquals("Grizzly Bears", gameView.getMyHand().values().stream().findFirst().get().getName());
 
         // write
-        byte[] compressedGameView = null;
-        GameView uncompressedGameView = null;
+        byte[] compressedGameView;
+        GameView uncompressedGameView;
         try {
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             JBossObjectOutputStream outJBoss = new JBossObjectOutputStream(outStream);
@@ -230,7 +230,7 @@ public class SerializationTest extends CardTestPlayerBase {
             Assert.assertNotNull(compressedGameView);
             Assert.assertNotEquals(0, compressedGameView.length);
         } catch (Throwable t) {
-            Assert.fail(t.getMessage());
+            throw new IllegalStateException("Can't use jboss serialization on write: " + t.getMessage(), t);
         }
 
         try {
@@ -242,7 +242,7 @@ public class SerializationTest extends CardTestPlayerBase {
             Assert.assertEquals(1, uncompressedGameView.getMyHand().size());
             Assert.assertEquals("Grizzly Bears", uncompressedGameView.getMyHand().values().stream().findFirst().get().getName());
         } catch (Throwable t) {
-            Assert.fail(t.getMessage());
+            throw new IllegalStateException("Can't use jboss serialization on read: " + t.getMessage(), t);
         }
     }
 }
