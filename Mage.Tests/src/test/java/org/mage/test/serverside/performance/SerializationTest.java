@@ -19,11 +19,15 @@ import mage.remote.traffic.ZippedObjectImpl;
 import mage.util.CardUtil;
 import mage.utils.CompressUtil;
 import mage.view.GameView;
+import org.jboss.serial.io.JBossObjectInputStream;
+import org.jboss.serial.io.JBossObjectOutputStream;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -198,5 +202,47 @@ public class SerializationTest extends CardTestPlayerBase {
         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
         Choice uncompressed = (Choice) CompressUtil.decompress(compressed);
         Assert.assertEquals("Must be same", choice.getChoices().size(), uncompressed.getChoices().size());
+    }
+
+    @Test
+    public void test_JBossAndJava17Compatible() {
+        // compatibility testing with new java, see https://github.com/magefree/mage/issues/5862
+        // must be run under java 9+ with --illegal-access=deny or under java 17+
+        addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        GameView gameView = getGameView(playerA);
+        Assert.assertEquals(1, gameView.getMyHand().size());
+        Assert.assertEquals("Grizzly Bears", gameView.getMyHand().values().stream().findFirst().get().getName());
+
+        // write
+        byte[] compressedGameView = null;
+        GameView uncompressedGameView = null;
+        try {
+            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+            JBossObjectOutputStream outJBoss = new JBossObjectOutputStream(outStream);
+            outJBoss.writeObject(gameView);
+            outJBoss.close();
+            outStream.close();
+            compressedGameView = outStream.toByteArray();
+            Assert.assertNotNull(compressedGameView);
+            Assert.assertNotEquals(0, compressedGameView.length);
+        } catch (Throwable t) {
+            Assert.fail(t.getMessage());
+        }
+
+        try {
+            // read
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(compressedGameView);
+            JBossObjectInputStream inputJBoss = new JBossObjectInputStream(inputStream);
+            uncompressedGameView = (GameView) inputJBoss.readObject();
+            Assert.assertNotNull(uncompressedGameView);
+            Assert.assertEquals(1, uncompressedGameView.getMyHand().size());
+            Assert.assertEquals("Grizzly Bears", uncompressedGameView.getMyHand().values().stream().findFirst().get().getName());
+        } catch (Throwable t) {
+            Assert.fail(t.getMessage());
+        }
     }
 }
