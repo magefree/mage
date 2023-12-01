@@ -41,6 +41,10 @@ public interface Choice extends Serializable, Copyable<Choice> {
 
     ChoiceHintType getHintType();
 
+    boolean isManaColorChoice();
+
+    Choice setManaColorChoice(boolean manaColorChoice);
+
     // string choice
     void setChoices(Set<String> choices);
 

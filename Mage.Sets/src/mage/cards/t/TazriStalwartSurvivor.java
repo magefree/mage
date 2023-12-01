@@ -195,7 +195,7 @@ class TazriStalwartSurvivorManaEffect extends ManaEffect {
         if (controller == null || permanent == null) {
             return new Mana();
         }
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl().setManaColorChoice(true);
         choice.setMessage("Pick a mana color");
         ObjectColor color = permanent.getColor(game);
         if (color.isWhite()) {

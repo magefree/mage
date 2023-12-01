@@ -16,7 +16,6 @@ import mage.abilities.mana.ManaAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.choices.ChoiceColor;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -583,7 +582,7 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // Try to autopay for mana
-        if (Outcome.PutManaInPool == outcome && choice instanceof ChoiceColor && currentlyUnpaidMana != null) {
+        if (Outcome.PutManaInPool == outcome && choice.isManaColorChoice() && currentlyUnpaidMana != null) {
             // Check check if the spell being paid for cares about the color of mana being paid
             // See: https://github.com/magefree/mage/issues/9070
             boolean caresAboutManaColor = false;
