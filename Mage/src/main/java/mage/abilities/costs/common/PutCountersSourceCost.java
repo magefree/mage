@@ -24,10 +24,8 @@ public class PutCountersSourceCost extends CostImpl {
         this.counter = counter.copy();
         this.amount = counter.getCount();
         this.name = counter.getName();
-        this.text = new StringBuilder("Put ").append((amount == 1 ? "a" : CardUtil.numberToText(amount)))
-                .append(' ').append(name).append(" counter").append((amount != 1 ? "s" : ""))
-                .append(" on {this}").toString();
-
+        this.text = "Put " + CardUtil.numberToText(amount, "a") +
+                " " + name + " counter" + (amount != 1 ? "s" : "") + " on {this}";
     }
 
     public PutCountersSourceCost(PutCountersSourceCost cost) {
