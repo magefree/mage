@@ -2777,6 +2777,7 @@ public class HumanPlayer extends PlayerImpl {
                 holdingPriority = false;
                 break;
             case TOGGLE_RECORD_MACRO:
+                if (true) return; // TODO: macro unsupported in current version
                 if (recordingMacro) {
                     logger.debug("Finished Recording Macro");
                     activatingMacro = true;
