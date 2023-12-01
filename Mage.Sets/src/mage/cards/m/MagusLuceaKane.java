@@ -104,11 +104,9 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
         // spell
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery(game)) {
-                if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                    this.getEffects().setValue("stackObject", (StackObject) spell);
-                    return true;
-                }
+            if (spell != null && spell.getSpellAbility().getManaCostsToPay().containsX()) {
+                this.getEffects().setValue("stackObject", (StackObject) spell);
+                return true;
             }
         }
         return false;
