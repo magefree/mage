@@ -106,7 +106,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Choice choice = new ChoiceImpl();
+            Choice choice = new ChoiceImpl().setManaColorChoice(true);
             choice.setMessage("Pick a mana color");
             for (UUID commanderId : game.getCommandersIds(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)) {
                 Card commander = game.getCard(commanderId);
