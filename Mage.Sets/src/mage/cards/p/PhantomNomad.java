@@ -30,7 +30,7 @@ public final class PhantomNomad extends CardImpl {
 
         // Phantom Nomad enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                "two +1/+1 counters on it"));
+                "with two +1/+1 counters on it"));
 
         // If damage would be dealt to Phantom Nomad, prevent that damage. Remove a +1/+1 counter from Phantom Nomad.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomPreventionEffect()));

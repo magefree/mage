@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class ThaliasLieutenant extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Human");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Human you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -35,7 +35,7 @@ public final class ThaliasLieutenant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Thalia's Lieutenant enters the battlefield, put +1/+1 counter on each other Human you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter).setText("put +1/+1 counter on each other Human you control"), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
 
         // Whenever another Human enters the battlefield under you control, put a +1/+1 counter on Thalia's Lieutenant.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
