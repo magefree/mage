@@ -6,7 +6,7 @@ git:
   depth: 3
   submodules: false
 before_install:
-  - echo "MAVEN_OPTS='-Xmx2g --illegal-access=deny'" > ~/.mavenrc
+  - echo "MAVEN_OPTS='-Xmx2g'" > ~/.mavenrc
 script:
   - mvn test -B -Dlog4j.configuration=file:${TRAVIS_BUILD_DIR}/.travis/log4j.properties
 cache:
