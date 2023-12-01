@@ -265,7 +265,7 @@ public class SerializationTest extends CardTestPlayerBase {
     }
 
     @Test
-    //@Ignore // TODO: enable to test migration to new java
+    @Ignore // TODO: enable to test migration to new java
     public void test_SerializationEngines_Java17Support() {
         // compatibility testing with new java version, see details at https://github.com/magefree/mage/issues/5862
         // original problem: jboss's inner stream classes (static code) used outdated access to private fields
