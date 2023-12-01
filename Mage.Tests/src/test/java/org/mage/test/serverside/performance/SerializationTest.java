@@ -18,12 +18,18 @@ import mage.game.permanent.PermanentImpl;
 import mage.remote.traffic.ZippedObjectImpl;
 import mage.util.CardUtil;
 import mage.utils.CompressUtil;
+import mage.utils.ThreadUtils;
 import mage.view.GameView;
+import org.jboss.remoting.serialization.impl.java.ClearableObjectOutputStream;
+import org.jboss.serial.io.JBossObjectInputStream;
+import org.jboss.serial.io.JBossObjectOutputStream;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.io.*;
+import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -198,5 +204,94 @@ public class SerializationTest extends CardTestPlayerBase {
         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
         Choice uncompressed = (Choice) CompressUtil.decompress(compressed);
         Assert.assertEquals("Must be same", choice.getChoices().size(), uncompressed.getChoices().size());
+    }
+
+    static class SerializationTestData {
+
+        String name;
+        GameView gameView;
+        Class<? extends ObjectOutputStream> writerClass;
+        Class<? extends ObjectInputStream> readerClass;
+
+        void SerializationTest(
+                String name,
+                GameView gameView,
+                Class<? extends ObjectOutputStream> writerClass,
+                Class<? extends ObjectInputStream> readerClass
+        ) {
+            this.name = name;
+            this.gameView = gameView;
+            this.writerClass = writerClass;
+            this.readerClass = readerClass;
+        }
+    }
+
+    private void assertSerializationClass(
+            String name,
+            GameView gameView,
+            Class<? extends ObjectOutputStream> writerClass,
+            Class<? extends ObjectInputStream> readerClass
+    ) {
+        byte[] compressedGameView;
+        GameView uncompressedGameView;
+
+        // write
+        try {
+            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+            Constructor<?> writerCon = writerClass.getConstructor(OutputStream.class);
+            ObjectOutputStream writerStream = (ObjectOutputStream) writerCon.newInstance(outStream);
+            writerStream.writeObject(gameView);
+            compressedGameView = outStream.toByteArray();
+            Assert.assertNotNull(compressedGameView);
+            Assert.assertNotEquals(0, compressedGameView.length);
+        } catch (Throwable t) {
+            ThreadUtils.findRootException(t).printStackTrace(); // write full stack
+            throw new IllegalStateException("Can't use [" + name + "] serialization on write: " + t.getMessage(), t);
+        }
+
+        // read
+        try {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(compressedGameView);
+            Constructor<?> readCon = readerClass.getConstructor(InputStream.class);
+            ObjectInputStream readerStream = (ObjectInputStream) readCon.newInstance(inputStream);
+            uncompressedGameView = (GameView) readerStream.readObject();
+            Assert.assertNotNull(uncompressedGameView);
+            Assert.assertEquals(1, uncompressedGameView.getMyHand().size());
+            Assert.assertEquals("Grizzly Bears", uncompressedGameView.getMyHand().values().stream().findFirst().get().getName());
+        } catch (Throwable t) {
+            ThreadUtils.findRootException(t).printStackTrace(); // write full stack
+            throw new IllegalStateException("Can't use [" + name + "] serialization on read: " + t.getMessage(), t);
+        }
+    }
+
+    @Test
+    @Ignore // TODO: enable to test migration to new java
+    public void test_SerializationEngines_Java17Support() {
+        // compatibility testing with new java version, see details at https://github.com/magefree/mage/issues/5862
+        // original problem: jboss's inner stream classes (static code) used outdated access to private fields
+        // must be run under java 9+ with --illegal-access=deny or under java 17+ without additional commands
+
+        // WORKAROUND for migration (InaccessibleObjectException): if it's impossible to update library then use
+        // additional java commands to open access to java modules: add-opens - https://stackoverflow.com/a/69160452/1276632
+
+        addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        GameView gameView = getGameView(playerA);
+        Assert.assertEquals(1, gameView.getMyHand().size());
+        Assert.assertEquals("Grizzly Bears", gameView.getMyHand().values().stream().findFirst().get().getName());
+
+        // test diff serialization engines
+
+        // java - current default serialization
+        assertSerializationClass("java", gameView, ObjectOutputStream.class, ObjectInputStream.class);
+
+        // jboss client/server - jboss inner code for real client/server app (original error from #5862)
+        assertSerializationClass("jboss client/server", gameView, ClearableObjectOutputStream.class, ObjectInputStream.class);
+
+        // jboss serial - jboss serilization (no longer used in the project)
+        assertSerializationClass("jboss serial", gameView, JBossObjectOutputStream.class, JBossObjectInputStream.class);
     }
 }
