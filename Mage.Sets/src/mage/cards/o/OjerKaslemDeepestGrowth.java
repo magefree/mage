@@ -13,7 +13,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardAndOrCardTypeInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.UUID;
 
@@ -115,7 +115,7 @@ class OjerKaslemDeepestGrowthEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(source, cards, game);
-            TargetCard target = new TargetCardAndOrCardTypeInLibrary(CardType.CREATURE, CardType.LAND);
+            TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);
             controller.choose(Outcome.PutCardInPlay, cards, target, source, game);
             Cards toBattlefield = new CardsImpl(target.getTargets());
             cards.removeAll(toBattlefield);

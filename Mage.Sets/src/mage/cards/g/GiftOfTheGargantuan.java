@@ -9,7 +9,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardAndOrCardTypeInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.UUID;
 
@@ -60,7 +60,7 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
-        TargetCard target = new TargetCardAndOrCardTypeInLibrary(CardType.CREATURE, CardType.LAND);
+        TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);
         player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl();
         toHand.addAll(target.getTargets());

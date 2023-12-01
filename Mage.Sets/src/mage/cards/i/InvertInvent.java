@@ -12,7 +12,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
-import mage.target.common.TargetCardAndOrCardTypeInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -34,7 +34,7 @@ public final class InvertInvent extends SplitCard {
         // Invent
         // Search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle your library.
         this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
-                new TargetCardAndOrCardTypeInLibrary(CardType.INSTANT, CardType.SORCERY), true));
+                new TargetCardAndOrCardInLibrary(CardType.INSTANT, CardType.SORCERY), true));
     }
 
     private InvertInvent(final InvertInvent card) {

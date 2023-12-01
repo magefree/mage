@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCardAndOrSubTypeInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class AxgardArmory extends CardImpl {
 
         // {1}{R}{R}{W}, {T}: Sacrifice Axgard Armory: Search your library for an Aura card and/or Equipment card, reveal them, put them into your hand, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardAndOrSubTypeInLibrary(SubType.AURA, SubType.EQUIPMENT), true),
+                new SearchLibraryPutInHandEffect(new TargetCardAndOrCardInLibrary(SubType.AURA, SubType.EQUIPMENT), true),
                 new ManaCostsImpl<>("{1}{R}{R}{W}")
         );
         ability.addCost(new TapSourceCost());

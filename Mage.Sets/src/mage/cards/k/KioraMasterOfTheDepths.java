@@ -15,7 +15,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardAndOrCardTypeInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -114,7 +114,7 @@ class KioraRevealEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
         player.revealCards(source, cards, game);
-        TargetCard target = new TargetCardAndOrCardTypeInLibrary(CardType.CREATURE, CardType.LAND);
+        TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);
         player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl();
         toHand.addAll(target.getTargets());
