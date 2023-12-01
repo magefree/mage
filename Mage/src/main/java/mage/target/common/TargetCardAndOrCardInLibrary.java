@@ -22,20 +22,18 @@ import java.util.UUID;
  */
 public class TargetCardAndOrCardInLibrary extends TargetCardInLibrary {
 
-    private static FilterCard makeFilter(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate) {
-        FilterCard filter = new FilterCard(makeFilterText(firstPredicate.toString()) + " card and/or "
-                        + makeFilterText(secondPredicate.toString()) + " card");
+    private static FilterCard makeFilter(Predicate<? super Card> firstPredicate,
+                                         Predicate<? super Card> secondPredicate,
+                                         String filterText) {
+        FilterCard filter = new FilterCard(filterText);
         filter.add(Predicates.or(
                 firstPredicate, secondPredicate
         ));
         return filter;
     }
 
-    private static String makeFilterText(String toStringText) {
-        if (toStringText.startsWith("CardType(")) {
-            toStringText = CardUtil.getTextWithFirstCharLowerCase(toStringText.substring(9, toStringText.length() - 1));
-        }
-        return CardUtil.addArticle(toStringText);
+    private static String makeFilterText(String first, String second) {
+        return CardUtil.addArticle(first) + " card and/or " + CardUtil.addArticle(second) + " card";
     }
 
     private final PredicateCardAssignment assignment;
@@ -43,17 +41,19 @@ public class TargetCardAndOrCardInLibrary extends TargetCardInLibrary {
     /**
      * a [firstType] card and/or a [secondType] card
      */
-    protected TargetCardAndOrCardInLibrary(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate) {
-        super(0, 2, makeFilter(firstPredicate, secondPredicate));
+    protected TargetCardAndOrCardInLibrary(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate, String filterText) {
+        super(0, 2, makeFilter(firstPredicate, secondPredicate, filterText));
         this.assignment = new PredicateCardAssignment(firstPredicate, secondPredicate);
     }
 
     public TargetCardAndOrCardInLibrary(CardType firstType, CardType secondType) {
-        this(firstType.getPredicate(), secondType.getPredicate());
+        this(firstType.getPredicate(), secondType.getPredicate(), makeFilterText(
+                CardUtil.getTextWithFirstCharLowerCase(firstType.toString()),
+                CardUtil.getTextWithFirstCharLowerCase(secondType.toString())));
     }
 
     public TargetCardAndOrCardInLibrary(SubType firstType, SubType secondType) {
-        this(firstType.getPredicate(), secondType.getPredicate());
+        this(firstType.getPredicate(), secondType.getPredicate(), makeFilterText(firstType.getDescription(), secondType.getDescription()));
     }
 
     protected TargetCardAndOrCardInLibrary(final TargetCardAndOrCardInLibrary target) {
