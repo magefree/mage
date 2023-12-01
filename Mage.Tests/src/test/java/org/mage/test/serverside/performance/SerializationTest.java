@@ -18,6 +18,7 @@ import mage.game.permanent.PermanentImpl;
 import mage.remote.traffic.ZippedObjectImpl;
 import mage.util.CardUtil;
 import mage.utils.CompressUtil;
+import mage.utils.ThreadUtils;
 import mage.view.GameView;
 import org.jboss.serial.io.JBossObjectInputStream;
 import org.jboss.serial.io.JBossObjectOutputStream;
@@ -205,6 +206,7 @@ public class SerializationTest extends CardTestPlayerBase {
     }
 
     @Test
+    //@Ignore // TODO: enable for migration on new java
     public void test_JBossAndJava17Compatible() {
         // compatibility testing with new java, see https://github.com/magefree/mage/issues/5862
         // must be run under java 9+ with --illegal-access=deny or under java 17+
@@ -221,6 +223,7 @@ public class SerializationTest extends CardTestPlayerBase {
         byte[] compressedGameView;
         GameView uncompressedGameView;
         try {
+            //if (true) throw new IllegalArgumentException("test");
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             JBossObjectOutputStream outJBoss = new JBossObjectOutputStream(outStream);
             outJBoss.writeObject(gameView);
@@ -230,6 +233,7 @@ public class SerializationTest extends CardTestPlayerBase {
             Assert.assertNotNull(compressedGameView);
             Assert.assertNotEquals(0, compressedGameView.length);
         } catch (Throwable t) {
+            ThreadUtils.findRootException(t).printStackTrace();
             throw new IllegalStateException("Can't use jboss serialization on write: " + t.getMessage(), t);
         }
 
@@ -242,6 +246,7 @@ public class SerializationTest extends CardTestPlayerBase {
             Assert.assertEquals(1, uncompressedGameView.getMyHand().size());
             Assert.assertEquals("Grizzly Bears", uncompressedGameView.getMyHand().values().stream().findFirst().get().getName());
         } catch (Throwable t) {
+            ThreadUtils.findRootException(t).printStackTrace();
             throw new IllegalStateException("Can't use jboss serialization on read: " + t.getMessage(), t);
         }
     }
