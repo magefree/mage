@@ -716,6 +716,7 @@ public abstract class GameImpl implements Game {
         }
         return permanent;
     }
+
     @Override
     public Permanent getPermanentOrLKIBattlefield(MageObjectReference permanentRef) {
         UUID id = permanentRef.getSourceId();
