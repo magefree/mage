@@ -19,6 +19,9 @@ public class CastSpellLastTurnWatcher extends Watcher {
     private int activePlayerPrevTurnCount = 0;
     private int activePlayerThisTurnCount = 0;
 
+    /**
+     * Game default watcher
+     */
     public CastSpellLastTurnWatcher() {
         super(WatcherScope.GAME);
     }

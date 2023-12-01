@@ -8,8 +8,6 @@ import mage.game.Game;
 import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 /**
- * Don't forget to add CardsDrawnThisTurnWatcher in card's definition
- *
  * @author TheElk801
  */
 public enum CardsDrawnThisTurnDynamicValue implements DynamicValue {
@@ -45,4 +43,3 @@ public enum CardsDrawnThisTurnDynamicValue implements DynamicValue {
         return hint;
     }
 }
-

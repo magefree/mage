@@ -24,7 +24,7 @@ public final class GrandMelee extends CardImpl {
 
         // All creatures attack each turn if able.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
 
         // All creatures block each turn if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES)));

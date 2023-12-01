@@ -54,7 +54,7 @@ public final class NettlingImp extends CardImpl {
                 + "Activate only during an opponent's turn, before attackers are declared.");
         ability.addEffect(new NettlingImpDelayedDestroyEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
 
     }
 

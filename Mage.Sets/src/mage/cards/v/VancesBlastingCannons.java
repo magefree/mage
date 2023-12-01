@@ -44,7 +44,7 @@ public final class VancesBlastingCannons extends CardImpl {
 
         // Whenever you cast your third spell in a turn, transform Vance's Blasting Cannons.
         this.addAbility(new TransformAbility());
-        this.addAbility(new VancesBlastingCannonsFlipTrigger(), new CastSpellLastTurnWatcher());
+        this.addAbility(new VancesBlastingCannonsFlipTrigger());
     }
 
     private VancesBlastingCannons(final VancesBlastingCannons card) {

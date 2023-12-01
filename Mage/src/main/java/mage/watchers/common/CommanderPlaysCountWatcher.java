@@ -24,6 +24,9 @@ public class CommanderPlaysCountWatcher extends Watcher {
     private final Map<UUID, Integer> playsCount = new HashMap<>();
     private final Map<UUID, Integer> playerCount = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public CommanderPlaysCountWatcher() {
         super(WatcherScope.GAME);
     }

@@ -46,7 +46,6 @@ public final class GlyphOfDelusion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addTarget(new GlyphOfDelusionSecondTarget());
         this.getSpellAbility().addEffect(new GlyphOfDelusionEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private GlyphOfDelusion(final GlyphOfDelusion card) {

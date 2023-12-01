@@ -1336,16 +1336,11 @@ public abstract class GameImpl implements Game {
 
     public void initGameDefaultWatchers() {
         List<Watcher> newWatchers = new ArrayList<>();
-        newWatchers.add(new MorbidWatcher());
         newWatchers.add(new CastSpellLastTurnWatcher());
-        newWatchers.add(new CastSpellYourLastTurnWatcher());
         newWatchers.add(new PlayerLostLifeWatcher());
-        newWatchers.add(new PlayerLostLifeNonCombatWatcher());
         newWatchers.add(new BlockedAttackerWatcher());
-        newWatchers.add(new DamageDoneWatcher());
-        newWatchers.add(new PlanarRollWatcher());
+        newWatchers.add(new PlanarRollWatcher()); // needed for RollDiceTest (planechase code needs improves)
         newWatchers.add(new AttackedThisTurnWatcher());
-        newWatchers.add(new PlayersAttackedThisTurnWatcher());
         newWatchers.add(new CardsDrawnThisTurnWatcher());
         newWatchers.add(new ManaSpentToCastWatcher());
         newWatchers.add(new ManaPaidSourceWatcher());

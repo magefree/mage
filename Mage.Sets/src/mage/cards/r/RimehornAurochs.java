@@ -55,7 +55,7 @@ public final class RimehornAurochs extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new RimehornAurochsEffect(), new ManaCostsImpl<>("{2}{S}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that must block")));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that is to be blocked")));
-        this.addAbility(ability, new BlockedAttackerWatcher());
+        this.addAbility(ability);
     }
 
     private RimehornAurochs(final RimehornAurochs card) {

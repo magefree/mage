@@ -43,7 +43,6 @@ public final class ErgRaiders extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(effect, TargetController.YOU, false),
                 new InvertCondition(AttackedThisTurnSourceCondition.instance),
                 "At the beginning of your end step, if {this} didn't attack this turn, {this} deals 2 damage to you unless it came under your control this turn.");
-        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
     }
 

@@ -34,7 +34,7 @@ public final class DampingSphere extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DampingSphereReplacementEffect()));
 
         // Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
-        this.addAbility(new SimpleStaticAbility(new DampingSphereIncreasementAllEffect()), new CastSpellLastTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new DampingSphereIncreasementAllEffect()));
     }
 
     private DampingSphere(final DampingSphere card) {

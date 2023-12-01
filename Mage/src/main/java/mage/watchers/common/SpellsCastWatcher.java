@@ -24,6 +24,9 @@ public class SpellsCastWatcher extends Watcher {
     private final Map<UUID, List<Spell>> spellsCastFromGraveyard = new HashMap<>();
     private int nonCreatureSpells;
 
+    /**
+     * Game default watcher
+     */
     public SpellsCastWatcher() {
         super(WatcherScope.GAME);
     }

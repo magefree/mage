@@ -37,7 +37,8 @@ public class WaveOfRats extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new ReturnToBattlefieldUnderOwnerControlSourceEffect()),
                 WaveOfRatsDealtDamageToPlayerCondition.instance,
-                "When Wave of Rats dies, if it dealt combat damage to a player this turn, return it to the battlefield under its owner's control.")
+                "When Wave of Rats dies, if it dealt combat damage to a player this turn, return it to the battlefield under its owner's control."),
+                new DamageDoneWatcher()
         );
 
         // Blitz {4}{B} (If you cast this spell for its blitz cost, it gains haste and “When this creature dies, draw a card.” Sacrifice it at the beginning of the next end step.)

@@ -45,7 +45,6 @@ public final class JovensFerrets extends CardImpl {
 
         // At end of combat, tap all creatures that blocked Joven's Ferrets this turn. They don't untap during their controller's next untap step.
         Ability eocAbility = new EndOfCombatTriggeredAbility(new JovensFerretsEffect(), false);
-        eocAbility.addWatcher(new BlockedAttackerWatcher());
         this.addAbility(eocAbility);
     }
 

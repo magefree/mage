@@ -38,6 +38,8 @@ public final class NeedleDrop extends CardImpl {
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
+
+        this.getSpellAbility().addWatcher(new DamageDoneWatcher());
     }
 
     private NeedleDrop(final NeedleDrop card) {

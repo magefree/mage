@@ -57,7 +57,7 @@ public final class TaigamOjutaiMaster extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new TaigamOjutaiMasterTriggeredAbility(),
                 AttackedThisTurnSourceCondition.instance,
                 effectText);
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     private TaigamOjutaiMaster(final TaigamOjutaiMaster card) {
