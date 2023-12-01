@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -8,10 +7,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.*;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.command.emblems.KioraMasterOfTheDepthsEmblem;
 import mage.game.permanent.token.OctopusToken;
@@ -19,7 +15,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -94,11 +90,6 @@ class KioraUntapEffect extends OneShotEffect {
 
 class KioraRevealEffect extends OneShotEffect {
 
-    private static final FilterCard creatureFilter
-            = new FilterCreatureCard("creature card to put into your hand");
-    private static final FilterCard landFilter
-            = new FilterLandCard("land card to put into your hand");
-
     KioraRevealEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top four cards of your library. " +
@@ -117,46 +108,19 @@ class KioraRevealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller == null || sourceObject == null) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
-        if (cards.isEmpty()) {
-            return false;
-        }
-
-        controller.revealCards(sourceObject.getName(), cards, game);
-
-        boolean creatureCardFound = cards.getCards(game).stream().anyMatch(card -> card.isCreature(game));
-        boolean landCardFound = cards.getCards(game).stream().anyMatch(card -> card.isLand(game));
-
-        if (!creatureCardFound && !landCardFound) {
-            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            return true;
-        }
-
-        Cards cardsToHand = new CardsImpl();
-
-        if (creatureCardFound) {
-            TargetCard target = new TargetCardInLibrary(0, 1, creatureFilter);
-            controller.chooseTarget(Outcome.DrawCard, cards, target, source, game);
-            if (target.getFirstTarget() != null) {
-                cards.remove(target.getFirstTarget());
-                cardsToHand.add(target.getFirstTarget());
-            }
-        }
-        if (landCardFound) {
-            TargetCard target = new TargetCardInLibrary(0, 1, landFilter);
-            controller.chooseTarget(Outcome.DrawCard, cards, target, source, game);
-            if (target.getFirstTarget() != null) {
-                cards.remove(target.getFirstTarget());
-                cardsToHand.add(target.getFirstTarget());
-            }
-        }
-        controller.moveCards(cardsToHand, Zone.HAND, source, game);
-        controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
+        player.revealCards(source, cards, game);
+        TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);
+        player.choose(outcome, cards, target, source, game);
+        Cards toHand = new CardsImpl();
+        toHand.addAll(target.getTargets());
+        player.moveCards(toHand, Zone.HAND, source, game);
+        cards.removeAll(toHand);
+        player.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;
     }
 }

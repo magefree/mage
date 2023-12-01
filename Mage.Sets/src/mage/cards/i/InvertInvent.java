@@ -1,20 +1,18 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CardTypeAssignment;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SwitchPowerToughnessTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.*;
+import mage.cards.CardSetInfo;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -35,7 +33,8 @@ public final class InvertInvent extends SplitCard {
 
         // Invent
         // Search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle your library.
-        this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new InventTarget(), true).setText("search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle"));
+        this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
+                new TargetCardAndOrCardInLibrary(CardType.INSTANT, CardType.SORCERY), true));
     }
 
     private InvertInvent(final InvertInvent card) {
@@ -73,43 +72,5 @@ class InvertEffect extends OneShotEffect {
             game.addEffect(effect, source);
         }
         return true;
-    }
-}
-
-class InventTarget extends TargetCardInLibrary {
-
-    private static final FilterCard filter
-            = new FilterInstantOrSorceryCard("an instant card and/or a sorcery card");
-    private static final CardTypeAssignment cardTypeAssigner
-            = new CardTypeAssignment(CardType.INSTANT, CardType.SORCERY);
-
-    InventTarget() {
-        super(0, 2, filter);
-    }
-
-    private InventTarget(final InventTarget target) {
-        super(target);
-    }
-
-    @Override
-    public InventTarget copy() {
-        return new InventTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(card);
-        return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }

@@ -1,18 +1,15 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CardTypeAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.UUID;
 
@@ -66,7 +63,7 @@ class GreenSunsTwilightEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX();
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, xValue + 1));
         player.revealCards(source, cards, game);
-        TargetCard target = new GreenSunsTwilightTarget();
+        TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);
         player.choose(outcome, cards, target, source, game);
         Cards toMove = new CardsImpl(target.getTargets());
         if (!toMove.isEmpty()) {
@@ -79,51 +76,5 @@ class GreenSunsTwilightEffect extends OneShotEffect {
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
-    }
-}
-
-class GreenSunsTwilightTarget extends TargetCardInLibrary {
-
-    private static final FilterCard filter
-            = new FilterCard("a creature card and/or a land card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
-
-    private static final CardTypeAssignment cardTypeAssigner
-            = new CardTypeAssignment(CardType.CREATURE, CardType.LAND);
-
-    GreenSunsTwilightTarget() {
-        super(0, 2, filter);
-    }
-
-    private GreenSunsTwilightTarget(final GreenSunsTwilightTarget target) {
-        super(target);
-    }
-
-    @Override
-    public GreenSunsTwilightTarget copy() {
-        return new GreenSunsTwilightTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(card);
-        return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }
