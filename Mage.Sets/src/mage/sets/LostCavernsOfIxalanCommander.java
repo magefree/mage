@@ -233,6 +233,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Ascendancy", 288, Rarity.RARE, mage.cards.s.SimicAscendancy.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 352, Rarity.COMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Signet", 312, Rarity.UNCOMMON, mage.cards.s.SimicSignet.class));
+        cards.add(new SetCardInfo("Singer of Swift Rivers", 98, Rarity.RARE, mage.cards.s.SingerOfSwiftRivers.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 171, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 353, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 313, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
