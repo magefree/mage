@@ -87,12 +87,10 @@ public class GraftAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Graft");
-        sb.append(' ').append(amount).append(" <i>(This ").append(cardtype).append(" enters the battlefield with ")
-                .append(amount == 1 ? "a" : CardUtil.numberToText(amount))
-                .append(" +1/+1 counter on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this ")
-                .append(cardtype).append(" onto it.)</i>");
-        return sb.toString();
+        return "Graft" + ' ' + amount
+                + " <i>(This " + cardtype + " enters the battlefield with " + CardUtil.getOneOneCountersText(amount)
+                +" on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this "
+                + cardtype + " onto it.)</i>";
     }
 
 }

@@ -28,7 +28,7 @@ public class ToxicAbility extends StaticAbility {
     @Override
     public String getRule() {
         return "toxic " + amount + " <i>(Players dealt combat damage by this creature also get " +
-                CardUtil.numberToText(amount, "a") + " poison counter" + (amount > 1 ? "s" : "") + ".)</i>";
+                CardUtil.getSimpleCountersText(amount, "a", "poison") + ".)</i>";
     }
 
     @Override
