@@ -112,7 +112,26 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     Permanent getPermanent(UUID permanentId);
 
+    /**
+     * Given the UUID of a permanent, this method returns the permanent. If the current game state does not contain
+     * a permanent with the given UUID, this method checks the last known information on the battlefield to look for it.
+     * <br>
+     * Warning: if the permanent has left the battlefield and then returned, this information might be wrong.
+     * Prefer usage of a MageObjectReference instead of only the UUID.
+     *
+     * @param permanentId - The UUID of the permanent
+     * @return permanent or permanent's LKI
+     */
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
+
+    /**
+     * Given a MageObjectReference to a permanent, this method returns the permanent. If the current game state does not
+     * contain that permanent, this method checks the last known information on the battlefield.
+     *
+     * @param permanentRef - A MOR to the permanent
+     * @return permanent or permanent's LKI
+     */
+    Permanent getPermanentOrLKIBattlefield(MageObjectReference permanentRef);
 
     Permanent getPermanentEntering(UUID permanentId);
 
