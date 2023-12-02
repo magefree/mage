@@ -2,29 +2,47 @@ package mage.game.events;
 
 import mage.abilities.Ability;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 /**
  * @author Grath
  */
 public class ExploreEvent extends GameEvent {
 
-    private int jump = 1;
+    private Queue<EventType> eventQueue = new ArrayDeque<EventType>();
 
-    public ExploreEvent(Permanent permanent, Ability source, int amount, boolean scryFirst) {
-        super(EventType.EXPLORE, permanent.getId(), source, permanent.getControllerId(), amount, scryFirst);
+    public ExploreEvent(Permanent permanent, Ability source, int amount) {
+        super(EventType.EXPLORE, permanent.getId(), source, permanent.getControllerId(), amount, false);
+        for (int i = 0; i < amount; ++i) {
+            eventQueue.add(EventType.EXPLORE);
+        }
     }
 
     public void DoubleExplores() {
-        if (flag) {
-            jump = CardUtil.overflowMultiply(jump, 2);
+        Queue<EventType> newQueue = new ArrayDeque<EventType>();
+        for (EventType eventType : eventQueue) {
+            if (eventType == EventType.EXPLORE) {
+                newQueue.add(EventType.EXPLORE);
+            }
+            newQueue.add(eventType);
         }
-        else {
-            setAmount(CardUtil.overflowMultiply(amount, 2));
-        }
+        eventQueue = newQueue;
     }
 
-    public int getJump() {
-        return jump;
+    public void AddScry() {
+        Queue<EventType> newQueue = new ArrayDeque<EventType>();
+        for (EventType eventType : eventQueue) {
+            if (eventType == EventType.EXPLORE) {
+                newQueue.add(EventType.SCRY);
+            }
+            newQueue.add(eventType);
+        }
+        eventQueue = newQueue;
+    }
+
+    public Queue<EventType> getEventQueue() {
+        return eventQueue;
     }
 }

@@ -18,6 +18,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.ExploreEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -88,7 +89,8 @@ class TwistsAndTurnsReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setFlag(true);
+        ExploreEvent exploreEvent = (ExploreEvent)event;
+        exploreEvent.AddScry();
         return false;
     }
 }
