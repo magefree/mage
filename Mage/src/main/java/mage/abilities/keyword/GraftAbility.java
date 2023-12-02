@@ -87,10 +87,9 @@ public class GraftAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Graft" + ' ' + amount
-                + " <i>(This " + cardtype + " enters the battlefield with " + CardUtil.getOneOneCountersText(amount)
-                +" on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this "
-                + cardtype + " onto it.)</i>";
+        return "Graft" + ' ' + amount + " <i>(This " + cardtype + " enters the battlefield with "
+                + CardUtil.getOneOneCountersText(amount) + " on it. Whenever " + (cardtype.contains("creature") ? "another" : "a")
+                + " creature enters the battlefield, you may move a +1/+1 counter from this " + cardtype + " onto it.)</i>";
     }
 
 }
@@ -101,7 +100,7 @@ class GraftStaticAbility extends StaticAbility {
 
     public GraftStaticAbility(int amount) {
         super(Zone.ALL, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
-        ruleText = new StringBuilder("This enters the battlefield with ").append(amount).append(" +1/+1 counter on it.").toString();
+        ruleText = "This enters the battlefield with " + CardUtil.getOneOneCountersText(amount) + " on it.";
         this.setRuleVisible(false);
     }
 
