@@ -516,9 +516,6 @@ public class CardView extends SimpleCardView {
                 }
                 this.cardIcons.add(CardIconImpl.variableCost(costX));
             }
-
-            // restrictions
-            //card.getRules()
         }
 
         this.power = Integer.toString(card.getPower().getValue());
