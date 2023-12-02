@@ -7,9 +7,9 @@ import java.io.Serializable;
  */
 public class CardIconImpl implements CardIcon, Serializable {
 
-    private final CardIconType cardIconType;
-    private final String text;
-    private final String hint;
+    private final CardIconType cardIconType; // icon image
+    private final String text; // drawing text instead over icon (example: x value or level)
+    private final String hint; // popup text hint on mouse move over icon
 
     // Utility Icons
     public static final CardIconImpl FACE_DOWN = new CardIconImpl(CardIconType.OTHER_FACEDOWN, "Card is face down");

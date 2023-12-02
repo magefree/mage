@@ -199,7 +199,6 @@ public class CardIconsPanel extends JPanel {
                 } else {
                     this.icons.addAll(entry.getValue());
                 }
-
             }
         }
 

@@ -11,8 +11,10 @@ import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
@@ -441,24 +443,45 @@ public class CardView extends SimpleCardView {
             }
 
             // card icons for permanents on battlefield
-            // abilities
+
+            // icon - all from abilities
             permanent.getAbilities(game).forEach(ability -> {
                 this.cardIcons.addAll(ability.getIcons(game));
             });
-            // face down
+
+            // icon - face down
             if (permanent.isFaceDown(game)) {
                 this.cardIcons.add(CardIconImpl.FACE_DOWN);
             }
+
+            // icon - commander
             if (game != null) {
                 Player owner = game.getPlayer(game.getOwnerId(permanent));
-                // commander
                 if (owner != null && game.isCommanderObject(owner, permanent)) {
                     this.cardIcons.add(CardIconImpl.COMMANDER);
                 }
             }
-            // Ring-bearer
+
+            // icon - ring-bearer
             if (permanent.isRingBearer()) {
                 this.cardIcons.add(CardIconImpl.RINGBEARER);
+            }
+
+            // icon - restrictions (search it in card hints)
+            List<String> restricts = new ArrayList<>();
+            this.rules.forEach(r -> {
+                if (r.startsWith(HintUtils.HINT_ICON_RESTRICT)
+                        || r.startsWith(HintUtils.HINT_ICON_REQUIRE)) {
+                    restricts.add(r
+                            .replace(HintUtils.HINT_ICON_RESTRICT, "")
+                            .replace(HintUtils.HINT_ICON_REQUIRE, "")
+                            .trim()
+                    );
+                }
+            });
+            if (!restricts.isEmpty()) {
+                restricts.sort(String::compareTo);
+                this.cardIcons.add(new CardIconImpl(CardIconType.OTHER_HAS_RESTRICTIONS, String.join("<br>", restricts)));
             }
         } else {
             if (card.isCopy()) {
@@ -493,6 +516,9 @@ public class CardView extends SimpleCardView {
                 }
                 this.cardIcons.add(CardIconImpl.variableCost(costX));
             }
+
+            // restrictions
+            //card.getRules()
         }
 
         this.power = Integer.toString(card.getPower().getValue());
