@@ -506,12 +506,13 @@ public final class SystemUtil {
                     case COMMAND_LANDS_ADD_TO_BATTLEFIELD: {
                         // select lands
                         List<MultiAmountMessage> lands = new ArrayList<>();
-                        lands.add(new MultiAmountMessage("{W} Plains", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{U} Island", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{B} Swamp", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{R} Mountain", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{G} Forest", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{C} Ash Barrens", 0, 10, 0));
+                        String spaceSymbol = "&nbsp;"; // workaround for space near icons
+                        lands.add(new MultiAmountMessage("{W}" + spaceSymbol + "Plains", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{U}" + spaceSymbol + "Island", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{B}" + spaceSymbol + "Swamp", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{R}" + spaceSymbol + "Mountain", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{G}" + spaceSymbol + "Forest", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{C}" + spaceSymbol + "Ash Barrens", 0, 10, 0));
                         List<Integer> landsAmount = feedbackPlayer.getMultiAmountWithIndividualConstraints(
                                 Outcome.Neutral, lands, 0, 100, MultiAmountType.CHEAT_LANDS, game
                         );
@@ -523,7 +524,7 @@ public final class SystemUtil {
                         Set<Card> newCards = new LinkedHashSet<>();
                         for (int i = 0; i < landsAmount.size(); i++) {
                             int cardAmount = landsAmount.get(i);
-                            String cardName = lands.get(i).message.substring("{W}".length() + 1);
+                            String cardName = lands.get(i).message.substring("{W}".length()).replace(spaceSymbol, " ").trim();
                             if (cardAmount > 0) {
                                 Set<Card> addedCards = addNewCardsToGame(game, cardName, null, cardAmount, feedbackPlayer);
                                 if (addedCards != null) {
