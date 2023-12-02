@@ -16,19 +16,16 @@ import mage.util.CardUtil;
  */
 public class PutCountersSourceCost extends CostImpl {
 
-    private final String name;
     private final Counter counter;
 
     public PutCountersSourceCost(Counter counter) {
         this.counter = counter.copy();
-        this.name = counter.getName();
         this.text = "Put " + counter.getDescription() + " on {this}";
     }
 
     public PutCountersSourceCost(PutCountersSourceCost cost) {
         super(cost);
         this.counter = cost.counter;
-        this.name = cost.name;
     }
 
     @Override
