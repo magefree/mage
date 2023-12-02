@@ -17,7 +17,7 @@ public class ExploreEvent extends GameEvent {
 
     public void DoubleExplores() {
         if (flag) {
-            jump = jump * 2;
+            jump = CardUtil.overflowMultiply(jump, 2);
         }
         else {
             setAmount(CardUtil.overflowMultiply(amount, 2));
