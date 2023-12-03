@@ -72,9 +72,9 @@ public class BackupAbility extends EntersBattlefieldTriggeredAbility {
     @Override
     public String getRule() {
         return "Backup " + amount + " <i>(When this creature enters the battlefield," +
-                " put " + CardUtil.getOneOneCountersText(amount)
-                +" on target creature. If that's another creature, it gains the following"
-                +" abilit" + (abilitiesToAdd.size() > 1 ? "ies" : "y") + " until end of turn.)</i>";
+                " put " + CardUtil.getOneOneCountersText(amount) +
+                " on target creature. If that's another creature, it gains the following" +
+                " abilit" + (abilitiesToAdd.size() > 1 ? "ies" : "y") + " until end of turn.)</i>";
     }
 
     public void addAbility(Ability ability) {
