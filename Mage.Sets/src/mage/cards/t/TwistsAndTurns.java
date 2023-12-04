@@ -18,8 +18,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.ExploreEvent;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -89,8 +89,8 @@ class TwistsAndTurnsReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        controller.scry(1, source, game);
+        ExploreEvent exploreEvent = (ExploreEvent)event;
+        exploreEvent.addScry();
         return false;
     }
 }

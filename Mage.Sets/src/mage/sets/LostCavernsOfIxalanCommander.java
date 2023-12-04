@@ -270,6 +270,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Timothar, Baron of Bats", 210, Rarity.MYTHIC, mage.cards.t.TimotharBaronOfBats.class));
         cards.add(new SetCardInfo("Tishana, Voice of Thunder", 291, Rarity.MYTHIC, mage.cards.t.TishanaVoiceOfThunder.class));
         cards.add(new SetCardInfo("Topiary Stomper", 261, Rarity.RARE, mage.cards.t.TopiaryStomper.class));
+        cards.add(new SetCardInfo("Topography Tracker", 95, Rarity.RARE, mage.cards.t.TopographyTracker.class));
         cards.add(new SetCardInfo("Tributary Instructor", 96, Rarity.RARE, mage.cards.t.TributaryInstructor.class));
         cards.add(new SetCardInfo("Twilight Prophet", 211, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 366, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
