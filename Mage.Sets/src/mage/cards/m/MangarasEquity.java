@@ -134,7 +134,8 @@ class MangarasEquityTriggeredAbility extends TriggeredAbilityImpl {
 
         Permanent damageSource = game.getPermanent(event.getSourceId());
         ObjectColor chosenColor = (ObjectColor) game.getState().getValue(mangarasEquity.getId() + "_color");
-        if (damageSource != null && damageSource.isCreature() && damageSource.getColor().shares(chosenColor)) {
+        if (damageSource != null && chosenColor != null
+                && damageSource.isCreature() && damageSource.getColor().shares(chosenColor)) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     effect.setTargetPointer(new FixedTarget(damageSource.getId(), game));
