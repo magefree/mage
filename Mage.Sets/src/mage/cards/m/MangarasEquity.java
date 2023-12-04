@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -100,7 +100,7 @@ class MangarasEquityColorChoiceEffect extends OneShotEffect {
 class MangarasEquityTriggeredAbility extends TriggeredAbilityImpl {
 
     MangarasEquityTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
     }
 
     private MangarasEquityTriggeredAbility(final MangarasEquityTriggeredAbility ability) {
@@ -139,9 +139,10 @@ class MangarasEquityTriggeredAbility extends TriggeredAbilityImpl {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     effect.setTargetPointer(new FixedTarget(damageSource.getId(), game));
-                    ((DamageTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
                 }
             }
+            this.getEffects().setValue("damage", event.getAmount());
+
             return true;
         }
 
