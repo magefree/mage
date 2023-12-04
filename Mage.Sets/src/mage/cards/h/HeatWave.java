@@ -4,8 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -63,7 +61,7 @@ class HeatWaveEffect1 extends RestrictionEffect {
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public HeatWaveEffect1 copy() {
         return new HeatWaveEffect1(this);
     }
 
@@ -125,7 +123,7 @@ class HeatWaveEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public ReplacementEffect copy() {
+    public HeatWaveEffect2 copy() {
         return new HeatWaveEffect2(this);
     }
 }

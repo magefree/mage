@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -91,7 +90,7 @@ class HipparionEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public ReplacementEffect copy() {
+    public HipparionEffect copy() {
         return new HipparionEffect(this);
     }
 }
