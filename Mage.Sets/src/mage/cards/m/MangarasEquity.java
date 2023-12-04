@@ -155,6 +155,6 @@ class MangarasEquityTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature of the chosen color deals damage to you or a white creature you control, "
-                + "Mangara's Equity deals that much damage to that creature.";
+                + "{this} deals that much damage to that creature.";
     }
 }
