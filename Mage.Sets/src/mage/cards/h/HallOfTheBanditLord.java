@@ -2,7 +2,6 @@ package mage.cards.h;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
@@ -46,7 +45,7 @@ public final class HallOfTheBanditLord extends CardImpl {
         effect.setText("Add {C}. If that mana is spent on a creature spell, it gains haste");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addCost(new PayLifeCost(3));
-        this.addAbility(ability, new HallOfTheBanditLordWatcher(ability.getId()));
+        this.addAbility(ability, new HallOfTheBanditLordWatcher());
     }
 
     private HallOfTheBanditLord(final HallOfTheBanditLord card) {
@@ -61,12 +60,10 @@ public final class HallOfTheBanditLord extends CardImpl {
 
 class HallOfTheBanditLordWatcher extends Watcher {
 
-    private final UUID sourceAbilityID;
     private final List<UUID> creatures = new ArrayList<>();
 
-    HallOfTheBanditLordWatcher(UUID sourceAbilityID) {
+    HallOfTheBanditLordWatcher() {
         super(WatcherScope.CARD);
-        this.sourceAbilityID = sourceAbilityID;
     }
 
     @Override
@@ -100,7 +97,8 @@ class HallOfTheBanditLordWatcher extends Watcher {
             if (creatures.contains(event.getSourceId())) {
                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                 effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
-                game.addEffect(effect, game.getAbility(sourceAbilityID, this.getSourceId()).orElse(null)); //null will cause an immediate crash
+                Ability source = game.getPermanent(event.getSourceId()).getSpellAbility();
+                game.addEffect(effect, source);
                 creatures.remove(event.getSourceId());
             }
         }

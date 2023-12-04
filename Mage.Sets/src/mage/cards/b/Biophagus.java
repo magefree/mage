@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -36,7 +35,7 @@ public final class Biophagus extends CardImpl {
         Ability ability = new AnyColorManaAbility(new TapSourceCost(), true).withFlavorWord("Genomic Enhancement");
         ability.getEffects().get(0).setText("Add one mana of any color. If this mana is spent to cast a creature spell, " +
                 "that creature enters the battlefield with an additional +1/+1 counter on it.");
-        this.addAbility(ability, new BiophagusWatcher(ability.getId()));
+        this.addAbility(ability, new BiophagusWatcher());
     }
 
     private Biophagus(final Biophagus card) {
@@ -50,27 +49,18 @@ public final class Biophagus extends CardImpl {
 }
 
 class BiophagusWatcher extends Watcher {
-
-    private final UUID sourceAbilityID;
-
-    BiophagusWatcher(UUID sourceAbilityID) {
+    BiophagusWatcher() {
         super(WatcherScope.CARD);
-        this.sourceAbilityID = sourceAbilityID;
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            MageObject target = game.getObject(event.getTargetId());
-            if (event.getSourceId() != null
-                    && event.getSourceId().equals(this.getSourceId())
-                    && target != null && target.isCreature(game)
-                    && event.getFlag()) {
-                if (target instanceof Spell) {
-                    game.getState().addEffect(new BiophagusEntersBattlefieldEffect(
-                            new MageObjectReference(((Spell) target).getSourceId(), target.getZoneChangeCounter(game), game)),
-                        game.getAbility(sourceAbilityID, this.getSourceId()).orElse(null)); //null will cause an immediate crash
-                }
+            Spell target = game.getSpell(event.getTargetId());
+            if (event.getSourceId() != null && event.getSourceId().equals(this.getSourceId())
+                    && target != null && target.isCreature(game) && event.getFlag()) {
+                game.getState().addEffect(new BiophagusEntersBattlefieldEffect(new MageObjectReference(target.getCard(), game)),
+                        target.getSpellAbility());
             }
         }
     }

@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,7 +38,7 @@ public final class GuildmagesForum extends CardImpl {
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1), true);
         ability.getEffects().get(0).setText("Add one mana of any color. If that mana is spent on a multicolored creature spell, that creature enters the battlefield with an additional +1/+1 counter on it");
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability, new GuildmagesForumWatcher(ability.getId()));
+        this.addAbility(ability, new GuildmagesForumWatcher());
     }
 
     private GuildmagesForum(final GuildmagesForum card) {
@@ -54,26 +53,21 @@ public final class GuildmagesForum extends CardImpl {
 
 class GuildmagesForumWatcher extends Watcher {
 
-    private final UUID sourceAbilityID;
 
-    GuildmagesForumWatcher(UUID sourceAbilityID) {
+    GuildmagesForumWatcher() {
         super(WatcherScope.CARD);
-        this.sourceAbilityID = sourceAbilityID;
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            MageObject target = game.getObject(event.getTargetId());
+            Spell target = game.getSpell(event.getTargetId());
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())
                     && target != null && target.isCreature(game) && target.getColor(game).isMulticolored()
                     && event.getFlag()) {
-                if (target instanceof Spell) {
-                    game.getState().addEffect(new GuildmagesForumEntersBattlefieldEffect(
-                            new MageObjectReference(((Spell) target).getSourceId(), target.getZoneChangeCounter(game), game)),
-                        game.getAbility(sourceAbilityID, this.getSourceId()).orElse(null)); //null will cause an immediate crash
-                }
+                    game.getState().addEffect(new GuildmagesForumEntersBattlefieldEffect(new MageObjectReference(target.getCard(), game)),
+                        target.getSpellAbility()); //null will cause an immediate crash
             }
         }
     }
