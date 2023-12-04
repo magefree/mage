@@ -4,16 +4,15 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.counter.AddCounterEnteringMOR;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.counters.CounterType;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
@@ -59,50 +58,9 @@ class BiophagusWatcher extends Watcher {
             Spell target = game.getSpell(event.getTargetId());
             if (event.getSourceId() != null && event.getSourceId().equals(this.getSourceId())
                     && target != null && target.isCreature(game) && event.getFlag()) {
-                game.getState().addEffect(new BiophagusEntersBattlefieldEffect(new MageObjectReference(target.getCard(), game)),
+                game.getState().addEffect(new AddCounterEnteringMOR(new MageObjectReference(target.getCard(), game)),
                         target.getSpellAbility());
             }
         }
-    }
-}
-
-class BiophagusEntersBattlefieldEffect extends ReplacementEffectImpl {
-
-    private final MageObjectReference mor;
-
-    public BiophagusEntersBattlefieldEffect(MageObjectReference mor) {
-        super(Duration.EndOfTurn, Outcome.BoostCreature);
-        this.staticText = "If that mana is spent on a multicolored creature spell, that creature enters the battlefield with an additional +1/+1 counter on it";
-        this.mor = mor;
-    }
-
-    private BiophagusEntersBattlefieldEffect(final BiophagusEntersBattlefieldEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && mor.refersTo(permanent, game);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-        }
-        return false;
-    }
-
-    @Override
-    public BiophagusEntersBattlefieldEffect copy() {
-        return new BiophagusEntersBattlefieldEffect(this);
     }
 }

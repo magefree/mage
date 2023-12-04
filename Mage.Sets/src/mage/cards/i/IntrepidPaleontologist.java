@@ -10,8 +10,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.counter.AddCounterEnteringMOR;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -20,9 +20,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
@@ -124,52 +122,10 @@ class IntrepidPaleontologistWatcher extends Watcher {
                 && event.hasApprovingIdentifier(MageIdentifier.IntrepidPaleontologistWatcher)) {
             Spell target = game.getSpell(event.getTargetId());
             if (target != null) {
-                game.getState().addEffect(new IntrepidPaleontologistCountersEffect(new MageObjectReference(target.getCard(), game)),
+                game.getState().addEffect(new AddCounterEnteringMOR(new MageObjectReference(target.getCard(), game),
+                                CounterType.FINALITY.createInstance(), Outcome.UnboostCreature),
                         target.getSpellAbility());
             }
         }
-    }
-}
-
-class IntrepidPaleontologistCountersEffect extends ReplacementEffectImpl {
-
-    private final MageObjectReference mor;
-
-    public IntrepidPaleontologistCountersEffect(MageObjectReference mor) {
-        super(Duration.EndOfTurn, Outcome.UnboostCreature);
-        this.staticText = "If you cast a spell this way, that creature enters the battlefield with a finality counter on it.";
-        this.mor = mor;
-    }
-
-    private IntrepidPaleontologistCountersEffect(final IntrepidPaleontologistCountersEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        game.debugMessage("check "+mor+" applies to new "+new MageObjectReference(permanent, game));
-        return permanent != null && mor.refersTo(permanent, game);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        game.debugMessage("adding counter");
-        if (target != null) {
-            target.addCounters(CounterType.FINALITY.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-        }
-        return false;
-    }
-
-    @Override
-    public IntrepidPaleontologistCountersEffect copy() {
-        return new IntrepidPaleontologistCountersEffect(this);
     }
 }
