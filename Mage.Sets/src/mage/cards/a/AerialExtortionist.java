@@ -45,7 +45,7 @@ public class AerialExtortionist extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new DealsCombatDamageToAPlayerTriggeredAbility(null, false)
         );
-        exileAbility.addTarget(new TargetNonlandPermanent());
+        exileAbility.addTarget(new TargetNonlandPermanent(0, 1));
         this.addAbility(exileAbility);
 
         // Whenever another player casts a spell from anywhere other than their hand, draw a card.
