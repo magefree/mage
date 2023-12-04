@@ -22,6 +22,7 @@ public class ExploreEvent extends GameEvent {
     }
 
     public void doubleExplores() {
+        // Process through the Queue, when we find an EXPLORE add another EXPLORE.
         Queue<EventType> newQueue = new ArrayDeque<>();
         for (EventType eventType : eventQueue) {
             if (eventType == EventType.EXPLORE) {
@@ -33,6 +34,7 @@ public class ExploreEvent extends GameEvent {
     }
 
     public void addScry() {
+        // Process through the Queue, when we find an EXPLORE add a SCRY before it.
         Queue<EventType> newQueue = new ArrayDeque<>();
         for (EventType eventType : eventQueue) {
             if (eventType == EventType.EXPLORE) {
