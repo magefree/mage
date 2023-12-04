@@ -53,6 +53,6 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "it") +
                 (getTargetPointer().isPlural(mode.getTargets()) ? " get " : " gets ") +
-                CardUtil.numberToText(amount, "a") + " poison counter" + (amount > 1 ? "s" : "");
+                CardUtil.getSimpleCountersText(amount, "a",  "poison");
     }
 }

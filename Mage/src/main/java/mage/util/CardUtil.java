@@ -904,6 +904,14 @@ public final class CardUtil {
         return Outcome.BoostCreature;
     }
 
+    public static String getSimpleCountersText(int amount, String forOne, String counterType) {
+        return numberToText(amount, forOne)+" "+counterType+" counter"+ (amount==1 ? "" : "s");
+    }
+
+    public static String getOneOneCountersText(int amount) {
+        return getSimpleCountersText(amount, "a", "+1/+1");
+    }
+
     public static String getAddRemoveCountersText(DynamicValue amount, Counter counter, String description, boolean add) {
         StringBuilder sb = new StringBuilder(add ? "put " : "remove ");
         boolean xValue = amount.toString().equals("X");
