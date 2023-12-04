@@ -90,7 +90,7 @@ class TwistsAndTurnsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ExploreEvent exploreEvent = (ExploreEvent)event;
-        exploreEvent.AddScry();
+        exploreEvent.addScry();
         return false;
     }
 }

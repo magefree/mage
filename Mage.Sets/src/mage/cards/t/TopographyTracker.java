@@ -78,7 +78,7 @@ class TopographyTrackerEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ExploreEvent exploreEvent = (ExploreEvent)event;
-        exploreEvent.DoubleExplores();
+        exploreEvent.doubleExplores();
         return false;
     }
 }

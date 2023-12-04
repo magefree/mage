@@ -11,17 +11,18 @@ import java.util.Queue;
  */
 public class ExploreEvent extends GameEvent {
 
-    private Queue<EventType> eventQueue = new ArrayDeque<EventType>();
+    private Queue<EventType> eventQueue = new ArrayDeque<>();
 
     public ExploreEvent(Permanent permanent, Ability source, int amount) {
         super(EventType.EXPLORE, permanent.getId(), source, permanent.getControllerId(), amount, false);
+        // Populate the queue with a number of EXPLOREs equal to the initial number of EXPLOREs.
         for (int i = 0; i < amount; ++i) {
             eventQueue.add(EventType.EXPLORE);
         }
     }
 
-    public void DoubleExplores() {
-        Queue<EventType> newQueue = new ArrayDeque<EventType>();
+    public void doubleExplores() {
+        Queue<EventType> newQueue = new ArrayDeque<>();
         for (EventType eventType : eventQueue) {
             if (eventType == EventType.EXPLORE) {
                 newQueue.add(EventType.EXPLORE);
@@ -31,8 +32,8 @@ public class ExploreEvent extends GameEvent {
         eventQueue = newQueue;
     }
 
-    public void AddScry() {
-        Queue<EventType> newQueue = new ArrayDeque<EventType>();
+    public void addScry() {
+        Queue<EventType> newQueue = new ArrayDeque<>();
         for (EventType eventType : eventQueue) {
             if (eventType == EventType.EXPLORE) {
                 newQueue.add(EventType.SCRY);
