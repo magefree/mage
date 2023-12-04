@@ -95,7 +95,7 @@ class IntrepidPaleontologistPlayEffect extends AsThoughEffectImpl {
             MageObject sourceObject = game.getObject(source);
             if (card != null && sourceObject != null && affectedAbility instanceof SpellAbility) {
                 Card characteristics = ((SpellAbility)affectedAbility).getCharacteristics(game);
-                if (characteristics.isCreature(game) && characteristics.hasSubtype(SubType.DINOSAUR, game)) {
+                if (card.getOwnerId() == playerId && characteristics.isCreature(game) && characteristics.hasSubtype(SubType.DINOSAUR, game)) {
                     UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
                     ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                     return exileZone != null && exileZone.contains(objectId);
