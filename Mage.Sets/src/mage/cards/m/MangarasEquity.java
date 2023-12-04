@@ -2,7 +2,6 @@ package mage.cards.m;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -93,7 +92,7 @@ class MangarasEquityColorChoiceEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public MangarasEquityColorChoiceEffect copy() {
         return new MangarasEquityColorChoiceEffect(this);
     }
 }
@@ -149,7 +148,7 @@ class MangarasEquityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public MangarasEquityTriggeredAbility copy() {
         return new MangarasEquityTriggeredAbility(this);
     }
 
