@@ -4,7 +4,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.counter.AddCounterEnteringMOR;
+import mage.abilities.effects.common.counter.AddCounterEnteringCreature;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ class GuildmagesForumWatcher extends Watcher {
                     && event.getSourceId().equals(this.getSourceId())
                     && target != null && target.isCreature(game) && target.getColor(game).isMulticolored()
                     && event.getFlag()) {
-                    game.getState().addEffect(new AddCounterEnteringMOR(new MageObjectReference(target.getCard(), game)),
+                    game.getState().addEffect(new AddCounterEnteringCreature(new MageObjectReference(target.getCard(), game)),
                         target.getSpellAbility());
             }
         }

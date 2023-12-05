@@ -11,7 +11,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.counter.AddCounterEnteringMOR;
+import mage.abilities.effects.common.counter.AddCounterEnteringCreature;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -122,7 +122,7 @@ class IntrepidPaleontologistWatcher extends Watcher {
                 && event.hasApprovingIdentifier(MageIdentifier.IntrepidPaleontologistWatcher)) {
             Spell target = game.getSpell(event.getTargetId());
             if (target != null) {
-                game.getState().addEffect(new AddCounterEnteringMOR(new MageObjectReference(target.getCard(), game),
+                game.getState().addEffect(new AddCounterEnteringCreature(new MageObjectReference(target.getCard(), game),
                                 CounterType.FINALITY.createInstance(), Outcome.UnboostCreature),
                         target.getSpellAbility());
             }

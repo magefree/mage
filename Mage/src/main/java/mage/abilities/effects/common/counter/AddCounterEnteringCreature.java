@@ -15,29 +15,29 @@ import mage.game.permanent.Permanent;
 /**
  * @author notgreat
  */
-public class AddCounterEnteringMOR extends ReplacementEffectImpl {
+public class AddCounterEnteringCreature extends ReplacementEffectImpl {
 
     private final MageObjectReference mor;
     private final Counter counters;
 
-    public AddCounterEnteringMOR(MageObjectReference mor, Counter counters, Outcome outcome, String text) {
+    public AddCounterEnteringCreature(MageObjectReference mor, Counter counters, Outcome outcome, String text) {
         super(Duration.EndOfTurn, outcome);
         this.staticText = "That creature enters the battlefield with "+text+" on it";
         this.mor = mor;
         this.counters = counters;
     }
-    public AddCounterEnteringMOR(MageObjectReference mor, Counter counters, Outcome outcome){
+    public AddCounterEnteringCreature(MageObjectReference mor, Counter counters, Outcome outcome){
         this(mor, counters, outcome, counters.getDescription());
     }
 
     /**
      * defaults to a single +1/+1 counter
      */
-    public AddCounterEnteringMOR(MageObjectReference mor){
+    public AddCounterEnteringCreature(MageObjectReference mor){
         this(mor, CounterType.P1P1.createInstance(), Outcome.BoostCreature, "an additional +1/+1 counter");
     }
 
-    private AddCounterEnteringMOR(final AddCounterEnteringMOR effect) {
+    private AddCounterEnteringCreature(final AddCounterEnteringCreature effect) {
         super(effect);
         this.mor = effect.mor;
         this.counters = effect.counters;
@@ -64,7 +64,7 @@ public class AddCounterEnteringMOR extends ReplacementEffectImpl {
     }
 
     @Override
-    public AddCounterEnteringMOR copy() {
-        return new AddCounterEnteringMOR(this);
+    public AddCounterEnteringCreature copy() {
+        return new AddCounterEnteringCreature(this);
     }
 }
