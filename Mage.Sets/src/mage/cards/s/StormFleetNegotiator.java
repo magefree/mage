@@ -18,9 +18,9 @@ import mage.game.permanent.token.MapToken;
 /**
  * @author
  */
-public final class StormFleetNavigator extends CardImpl {
+public final class StormFleetNegotiator extends CardImpl {
 
-    public StormFleetNavigator(UUID ownerId, CardSetInfo setInfo) {
+    public StormFleetNegotiator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
         this.subtype.add(SubType.SIREN);
@@ -40,12 +40,12 @@ public final class StormFleetNavigator extends CardImpl {
         this.addAbility(ability.setAbilityWord(AbilityWord.PARLEY));
     }
 
-    private StormFleetNavigator(final StormFleetNavigator card) {
+    private StormFleetNegotiator(final StormFleetNegotiator card) {
         super(card);
     }
 
     @Override
-    public StormFleetNavigator copy() {
-        return new StormFleetNavigator(this);
+    public StormFleetNegotiator copy() {
+        return new StormFleetNegotiator(this);
     }
 }
