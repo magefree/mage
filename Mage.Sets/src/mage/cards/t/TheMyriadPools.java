@@ -20,14 +20,14 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
@@ -164,7 +164,7 @@ class TheMyriadPoolsCopyEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledPermanent(), false);
+        TargetPermanent target = new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_PERMANENT, false);
         if (controller.choose(Outcome.Neutral, target, source, game)) {
             targetPermanentToCopyTo = game.getPermanent(target.getFirstTarget());
         }
