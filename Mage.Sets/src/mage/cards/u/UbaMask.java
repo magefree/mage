@@ -10,6 +10,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -69,7 +70,8 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
                 UUID exileId = CardUtil.getExileZoneId(
                         player.getId().toString()
                                 + "-" + game.getState().getTurnNum()
-                                + "-" + sourceObject.getIdName(), game
+                                + "-" + sourceObject.getIdName()
+                                + "-" + sourceObject.getZoneChangeCounter(game), game
                 );
                 String exileName = sourceObject.getIdName() + " play on turn " + game.getState().getTurnNum()
                         + " for " + player.getName();
@@ -128,8 +130,17 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
             UbaMaskExiledCardsWatcher watcher = game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
             if (watcher != null) {
                 List<MageObjectReference> exiledThisTurn = watcher.getUbaMaskExiledCardsThisTurn(affectedControllerId);
+                UUID exileId = CardUtil.getExileZoneId(
+                            affectedControllerId
+                                + "-" + game.getState().getTurnNum()
+                                + "-" + source.getSourceObject(game).getIdName()
+                                + "-" + source.getSourceObject(game).getZoneChangeCounter(game), game
+                );
+                ExileZone exileZone = game.getExile().getExileZone(exileId);
                 return exiledThisTurn != null
-                        && exiledThisTurn.contains(new MageObjectReference(card, game));
+                        && exiledThisTurn.contains(new MageObjectReference(card, game))
+                        && exileZone != null
+                        && exileZone.contains(objectId);
             }
         }
         return false;
