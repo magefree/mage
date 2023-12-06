@@ -268,6 +268,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Roots of Life", 237, Rarity.UNCOMMON, mage.cards.r.RootsOfLife.class));
         cards.add(new SetCardInfo("Sabertooth Cobra", 238, Rarity.COMMON, mage.cards.s.SabertoothCobra.class));
         cards.add(new SetCardInfo("Sacred Mesa", 37, Rarity.RARE, mage.cards.s.SacredMesa.class));
+        cards.add(new SetCardInfo("Sand Golem", 318, Rarity.UNCOMMON, mage.cards.s.SandGolem.class));
         cards.add(new SetCardInfo("Sandbar Crocodile", 88, Rarity.COMMON, mage.cards.s.SandbarCrocodile.class));
         cards.add(new SetCardInfo("Sandstorm", 239, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Sapphire Charm", 89, Rarity.COMMON, mage.cards.s.SapphireCharm.class));
