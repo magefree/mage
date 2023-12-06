@@ -21,6 +21,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Alquist Proft, Master Sleuth", 185, Rarity.MYTHIC, mage.cards.a.AlquistProftMasterSleuth.class));
         cards.add(new SetCardInfo("Benthic Criminologists", 40, Rarity.COMMON, mage.cards.b.BenthicCriminologists.class));
         cards.add(new SetCardInfo("Curious Cadaver", 194, Rarity.UNCOMMON, mage.cards.c.CuriousCadaver.class));
         cards.add(new SetCardInfo("Deduce", 52, Rarity.COMMON, mage.cards.d.Deduce.class));
