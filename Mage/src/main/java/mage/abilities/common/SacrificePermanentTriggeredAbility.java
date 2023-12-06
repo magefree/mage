@@ -32,8 +32,14 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        setLeavesTheBattlefieldTrigger(true);
+        this(Zone.BATTLEFIELD, effect, filter, setTargetPointer, optional);
+    }
+
+    public SacrificePermanentTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
+        super(zone, effect, optional);
+        if (Zone.BATTLEFIELD.match(zone)) {
+            setLeavesTheBattlefieldTrigger(true);
+        }
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever you sacrifice " + CardUtil.addArticle(filter.getMessage()) + ", ");
