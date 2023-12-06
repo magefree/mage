@@ -181,6 +181,7 @@ Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
 Morningtide|Morningtide|
+Murders at Karlov Manor|MurdersAtKarlovManor|
 Nemesis|Nemesis|
 New Phyrexia|NewPhyrexia|
 Ninth Edition|NinthEdition|

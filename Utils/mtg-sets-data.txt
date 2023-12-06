@@ -184,6 +184,7 @@ Morningtide|MOR|
 Magic Player Rewards|MPRP|
 Masterpiece Series|MPS|
 Mirrodin|MRD|
+Murders at Karlov Manor|MKM|
 Nemesis|NEM|
 New Phyrexia|NPH|
 Odyssey|ODY|
