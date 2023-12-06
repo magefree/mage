@@ -30,8 +30,7 @@ public final class MangarasBlessing extends CardImpl {
 
         Effect graveyardReturnNextEndEffect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToHandEffect()));
-        graveyardReturnNextEndEffect.concatBy(", and");
-        graveyardReturnNextEndEffect.setText(" you return {this} from your graveyard to your hand at the beginning of the next end step");
+        graveyardReturnNextEndEffect.setText(", and you return {this} from your graveyard to your hand at the beginning of the next end step");
 
         ability.addEffect(graveyardReturnNextEndEffect);
         this.addAbility(ability);

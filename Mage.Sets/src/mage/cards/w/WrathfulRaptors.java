@@ -22,7 +22,7 @@ import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
 
 /**
- * @author
+ * @author arcox
  */
 public final class WrathfulRaptors extends CardImpl {
 

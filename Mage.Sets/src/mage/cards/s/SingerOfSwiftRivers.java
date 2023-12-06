@@ -20,7 +20,7 @@ import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
- * @author
+ * @author arcox
  */
 public final class SingerOfSwiftRivers extends CardImpl {
 

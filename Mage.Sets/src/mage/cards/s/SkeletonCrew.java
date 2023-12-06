@@ -21,11 +21,11 @@ import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.SkeletonPirateToken;
 
 /**
- * @author
+ * @author arcox
  */
 public final class SkeletonCrew extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Skeleton or Pirate creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature you control that's a Skeleton or Pirate");
 
     static {
         filter.add(Predicates.or(SubType.SKELETON.getPredicate(), SubType.PIRATE.getPredicate()));

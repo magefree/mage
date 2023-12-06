@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.game.permanent.token.MapToken;
 
 /**
- * @author
+ * @author arcox
  */
 public final class StormFleetNegotiator extends CardImpl {
 
@@ -33,7 +33,7 @@ public final class StormFleetNegotiator extends CardImpl {
 
         // Parley — Whenever Storm Fleet Negotiator attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a Map token. Then each player draws a card.
         Ability ability = new AttacksTriggeredAbility(new CreateTokenEffect(
-                new MapToken(), ParleyCount.getInstance(), true, false
+                new MapToken(), ParleyCount.getInstance()
         ).setText("each player reveals the top card of their library. " +
                 "For each nonland card revealed this way, you create a Map token"));
         ability.addEffect(new DrawCardAllEffect(1).concatBy("Then"));

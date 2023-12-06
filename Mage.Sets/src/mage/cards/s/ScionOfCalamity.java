@@ -20,7 +20,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
- * @author
+ * @author arcox
  */
 public final class ScionOfCalamity extends CardImpl {
 
