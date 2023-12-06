@@ -539,6 +539,7 @@ public class ScryfallImageSupportCards {
             add("SPG"); // Special Guests
             add("PIP"); // Fallout
             add("MKM"); // Murders at Karlov Manor
+            add("CLU"); // Ravnica: Clue Edition
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
