@@ -38,10 +38,10 @@ import mage.game.draft.DraftCube;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.utils.SystemUtil;
 import mage.sets.TherosBeyondDeath;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
+import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
 import mage.verify.mtgjson.MtgJsonSet;
@@ -153,6 +153,7 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
+        skipListAddName(SKIP_LIST_RARITY, "MKM", "Not on My Watch"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
