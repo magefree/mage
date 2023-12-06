@@ -2,6 +2,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.s.StormFleetNegotiator;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -240,6 +241,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sorin, Lord of Innistrad", 289, Rarity.MYTHIC, mage.cards.s.SorinLordOfInnistrad.class));
         cards.add(new SetCardInfo("Spectral Sailor", 172, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Stonybrook Banneret", 173, Rarity.COMMON, mage.cards.s.StonybrookBanneret.class));
+        cards.add(new SetCardInfo("Storm Fleet Negotiator", 78, Rarity.RARE, StormFleetNegotiator.class));
         cards.add(new SetCardInfo("Strionic Resonator", 116, Rarity.RARE, mage.cards.s.StrionicResonator.class));
         cards.add(new SetCardInfo("Sulfur Falls", 354, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Sunken Hollow", 355, Rarity.RARE, mage.cards.s.SunkenHollow.class));
