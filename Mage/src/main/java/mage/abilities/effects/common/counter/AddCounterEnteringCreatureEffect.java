@@ -15,29 +15,29 @@ import mage.game.permanent.Permanent;
 /**
  * @author notgreat
  */
-public class AddCounterEnteringCreature extends ReplacementEffectImpl {
+public class AddCounterEnteringCreatureEffect extends ReplacementEffectImpl {
 
     private final MageObjectReference mor;
     private final Counter counters;
 
-    public AddCounterEnteringCreature(MageObjectReference mor, Counter counters, Outcome outcome, String text) {
+    public AddCounterEnteringCreatureEffect(MageObjectReference mor, Counter counters, Outcome outcome, String text) {
         super(Duration.EndOfTurn, outcome);
-        this.staticText = "That creature enters the battlefield with "+text+" on it";
+        this.staticText = "That creature enters the battlefield with " + text + " on it";
         this.mor = mor;
         this.counters = counters;
     }
-    public AddCounterEnteringCreature(MageObjectReference mor, Counter counters, Outcome outcome){
+    public AddCounterEnteringCreatureEffect(MageObjectReference mor, Counter counters, Outcome outcome){
         this(mor, counters, outcome, counters.getDescription());
     }
 
     /**
      * defaults to a single +1/+1 counter
      */
-    public AddCounterEnteringCreature(MageObjectReference mor){
+    public AddCounterEnteringCreatureEffect(MageObjectReference mor){
         this(mor, CounterType.P1P1.createInstance(), Outcome.BoostCreature, "an additional +1/+1 counter");
     }
 
-    private AddCounterEnteringCreature(final AddCounterEnteringCreature effect) {
+    private AddCounterEnteringCreatureEffect(final AddCounterEnteringCreatureEffect effect) {
         super(effect);
         this.mor = effect.mor;
         this.counters = effect.counters;
@@ -64,7 +64,7 @@ public class AddCounterEnteringCreature extends ReplacementEffectImpl {
     }
 
     @Override
-    public AddCounterEnteringCreature copy() {
-        return new AddCounterEnteringCreature(this);
+    public AddCounterEnteringCreatureEffect copy() {
+        return new AddCounterEnteringCreatureEffect(this);
     }
 }

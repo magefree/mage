@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.counter.AddCounterEnteringCreature;
+import mage.abilities.effects.common.counter.AddCounterEnteringCreatureEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -58,7 +58,7 @@ class BiophagusWatcher extends Watcher {
             Spell target = game.getSpell(event.getTargetId());
             if (event.getSourceId() != null && event.getSourceId().equals(this.getSourceId())
                     && target != null && target.isCreature(game) && event.getFlag()) {
-                game.getState().addEffect(new AddCounterEnteringCreature(new MageObjectReference(target.getCard(), game)),
+                game.getState().addEffect(new AddCounterEnteringCreatureEffect(new MageObjectReference(target.getCard(), game)),
                         target.getSpellAbility());
             }
         }

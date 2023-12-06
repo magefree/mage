@@ -11,7 +11,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.counter.AddCounterEnteringCreature;
+import mage.abilities.effects.common.counter.AddCounterEnteringCreatureEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -95,7 +95,7 @@ class IntrepidPaleontologistPlayEffect extends AsThoughEffectImpl {
             MageObject sourceObject = game.getObject(source);
             if (card != null && sourceObject != null && affectedAbility instanceof SpellAbility) {
                 Card characteristics = ((SpellAbility)affectedAbility).getCharacteristics(game);
-                if (card.getOwnerId() == playerId && characteristics.isCreature(game) && characteristics.hasSubtype(SubType.DINOSAUR, game)) {
+                if (card.getOwnerId().equals(playerId) && characteristics.isCreature(game) && characteristics.hasSubtype(SubType.DINOSAUR, game)) {
                     UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
                     ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                     return exileZone != null && exileZone.contains(objectId);
@@ -122,7 +122,7 @@ class IntrepidPaleontologistWatcher extends Watcher {
                 && event.hasApprovingIdentifier(MageIdentifier.IntrepidPaleontologistWatcher)) {
             Spell target = game.getSpell(event.getTargetId());
             if (target != null) {
-                game.getState().addEffect(new AddCounterEnteringCreature(new MageObjectReference(target.getCard(), game),
+                game.getState().addEffect(new AddCounterEnteringCreatureEffect(new MageObjectReference(target.getCard(), game),
                                 CounterType.FINALITY.createInstance(), Outcome.UnboostCreature),
                         target.getSpellAbility());
             }
