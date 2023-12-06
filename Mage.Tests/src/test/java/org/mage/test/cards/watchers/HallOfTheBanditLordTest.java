@@ -50,4 +50,30 @@ public class HallOfTheBanditLordTest extends CardTestPlayerBase {
 
         this.assertAbility(playerA, "Ember Hauler", HasteAbility.getInstance(), false);
     }
+    //Test that a copied Hall of the Bandit Lord works properly
+    @Test
+    public void testGainsHasteCopied() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Hall of the Bandit Lord");
+        addCard(Zone.BATTLEFIELD, playerA, "Mirror Gallery");
+        addCard(Zone.HAND, playerA, "Vesuva");
+        addCard(Zone.HAND, playerA, "Goblin Piker"); // Creature 2/1 - {1}{R}
+        addCard(Zone.HAND, playerA, "Feral Maaka"); // Creature 2/2 - {1}{R}
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vesuva");
+        setChoice(playerA, true);
+        setChoice(playerA, "Hall of the Bandit Lord");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Piker");
+        playLand(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mountain");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Feral Maaka");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        this.assertAbility(playerA, "Goblin Piker", HasteAbility.getInstance(), true);
+        this.assertAbility(playerA, "Feral Maaka", HasteAbility.getInstance(), true);
+    }
 }
