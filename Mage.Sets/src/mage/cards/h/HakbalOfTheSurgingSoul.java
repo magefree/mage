@@ -104,7 +104,7 @@ class HakbalOfTheSurgingSoulEffect extends OneShotEffect {
 
     public HakbalOfTheSurgingSoulEffect() {
         super(Outcome.DrawCard);
-        staticText = "you may put a land card from your hand onto the battlefield. If you don’t, draw a card";
+        staticText = "you may put a land card from your hand onto the battlefield. If you don't, draw a card";
     }
 
     private HakbalOfTheSurgingSoulEffect(final HakbalOfTheSurgingSoulEffect effect) {
