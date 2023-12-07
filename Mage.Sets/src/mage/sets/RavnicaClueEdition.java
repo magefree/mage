@@ -20,6 +20,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Commander Mustard", 6, Rarity.RARE, mage.cards.c.CommanderMustard.class));
         cards.add(new SetCardInfo("Dining Room", 15, Rarity.UNCOMMON, mage.cards.d.DiningRoom.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 277, Rarity.RARE, mage.cards.h.HallowedFountain.class));
         cards.add(new SetCardInfo("Lead Pipe", 9, Rarity.UNCOMMON, mage.cards.l.LeadPipe.class));
