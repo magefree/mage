@@ -309,6 +309,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tainted Specter", 148, Rarity.RARE, mage.cards.t.TaintedSpecter.class));
         cards.add(new SetCardInfo("Talruum Minotaur", 196, Rarity.COMMON, mage.cards.t.TalruumMinotaur.class));
         cards.add(new SetCardInfo("Taniwha", 95, Rarity.RARE, mage.cards.t.Taniwha.class));
         cards.add(new SetCardInfo("Teeka's Dragon", 320, Rarity.RARE, mage.cards.t.TeekasDragon.class));
