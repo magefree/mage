@@ -129,6 +129,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 157, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Glass-Cast Heart", 199, Rarity.RARE, mage.cards.g.GlassCastHeart.class));
         cards.add(new SetCardInfo("Growth Spiral", 270, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
+        cards.add(new SetCardInfo("Hakbal of the Surging Soul", 3, Rarity.MYTHIC, mage.cards.h.HakbalOfTheSurgingSoul.class));
         cards.add(new SetCardInfo("Hardened Scales", 243, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Heirloom Blade", 303, Rarity.UNCOMMON, mage.cards.h.HeirloomBlade.class));
         cards.add(new SetCardInfo("Herald of Secret Streams", 158, Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class));
