@@ -2,12 +2,14 @@ package mage.interfaces.callback;
 
 import mage.remote.traffic.ZippedObject;
 import mage.utils.CompressUtil;
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 /**
+ * Network: server's event to proccess on client side
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class ClientCallback implements Serializable {

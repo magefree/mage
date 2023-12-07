@@ -18,19 +18,22 @@ public interface SessionManager {
 
     boolean registerUser(String sessionId, String userName, String password, String email) throws MageException;
 
-    boolean connectUser(String sessionId, String userName, String password, String userIdStr) throws MageException;
+    boolean connectUser(String sessionId, String restoreSessionId, String userName, String password, String userInfo, boolean detailsMode) throws MageException;
 
     boolean connectAdmin(String sessionId);
 
     boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
 
-    void disconnect(String sessionId, DisconnectReason reason);
+    /**
+     * Disconnect from a session side, e.g. on connection error
+     *
+     * @param sessionId
+     * @param reason
+     * @param checkUserDisconnection check and remove user's tables too, use it by default
+     */
+    void disconnect(String sessionId, DisconnectReason reason, boolean checkUserDisconnection);
 
-    void disconnect(String sessionId, DisconnectReason reason, Session directSession);
-
-    void disconnectUser(String sessionId, String userSessionId);
-
-    void endUserSession(String sessionId, String userSessionId);
+    void disconnectAnother(String sessionId, String userSessionId);
 
     boolean checkAdminAccess(String sessionId);
 
@@ -41,4 +44,6 @@ public interface SessionManager {
     boolean extendUserSession(String sessionId, String pingInfo);
 
     void sendErrorMessageToClient(String sessionId, String message);
+
+    void checkHealth();
 }

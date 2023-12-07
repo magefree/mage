@@ -602,7 +602,7 @@ public class NewTableDialog extends MageDialog {
         options.setQuitRatio((Integer) this.spnQuitRatio.getValue());
         options.setMinimumRating((Integer) this.spnMinimumRating.getValue());
         options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+        String serverAddress = SessionHandler.getSession().getServerHost();
         options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
         options.setLimited(options.getDeckType().startsWith("Limited"));
         if (options.getDeckType().startsWith("Variant Magic - Freeform Unlimited Commander")) {

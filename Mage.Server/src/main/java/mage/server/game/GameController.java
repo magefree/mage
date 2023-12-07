@@ -5,15 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.PassAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.decks.Deck;
-import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
-import mage.constants.Zone;
-import mage.game.*;
+import mage.game.Game;
+import mage.game.GameOptions;
+import mage.game.GameState;
+import mage.game.Table;
 import mage.game.command.Plane;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -46,7 +44,7 @@ import java.util.stream.Collectors;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class GameController implements GameCallback {
 
@@ -317,7 +315,6 @@ public class GameController implements GameCallback {
         }
         user.get().addGame(playerId, gameSession);
         logger.debug("Player " + player.getName() + ' ' + playerId + " has " + joinType + " gameId: " + game.getId());
-        // TODO: force user update?!
         managerFactory.chatManager().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, game, MessageType.GAME, null);
         checkStart();
     }
@@ -347,7 +344,7 @@ public class GameController implements GameCallback {
     }
 
     private void sendInfoAboutPlayersNotJoinedYetAndTryToFixIt() {
-        // runs every 5 secs untill all players join
+        // runs every 10 secs untill all players join
         for (Player player : game.getPlayers().values()) {
             if (player.canRespond() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
@@ -358,7 +355,7 @@ public class GameController implements GameCallback {
                         // join the game because player has not joined or was removed because of disconnect
                         String problemPlayerFixes;
                         user.removeConstructing(player.getId());
-                        managerFactory.gameManager().joinGame(game.getId(), user.getId());
+                        managerFactory.gameManager().joinGame(game.getId(), user.getId()); // will generate new session on empty
                         logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState() + ") to gameId: " + game.getId());
                         if (user.isConnected()) {
                             // init game session, see reconnect()
@@ -370,9 +367,8 @@ public class GameController implements GameCallback {
                                 session.init();
                                 managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
                             } else {
-                                problemPlayerFixes = "leave on broken game session";
-                                logger.error("Can't find game session for forced join, leave it: player " + player.getName() + " in gameId: " + game.getId());
-                                player.leave();
+                                throw new IllegalStateException("Wrong code usage: session can't be null cause it created in forced joinGame already");
+                                //player.leave();
                             }
                         } else {
                             problemPlayerFixes = "leave on disconnected";
@@ -868,12 +864,12 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void multiAmount(UUID playerId, final List<MultiAmountMessage> messages,
-            final int min, final int max, final Map<String, Serializable> options)
+                                          final int min, final int max, final Map<String, Serializable> options)
             throws MageException {
         perform(playerId, playerId1 -> getGameSession(playerId1).getMultiAmount(messages, min, max, options));
     }
 
-    private void informOthers(UUID playerId) throws MageException {
+    private void informOthers(UUID playerId) {
         StringBuilder message = new StringBuilder();
         if (game.getStep() != null) {
             message.append(game.getTurnStepType().toString()).append(" - ");
@@ -889,7 +885,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    private void informOthers(List<UUID> players) throws MageException {
+    private void informOthers(List<UUID> players) {
         // first player is always original controller
         Player controller = null;
         if (players != null && !players.isEmpty()) {
@@ -974,18 +970,19 @@ public class GameController implements GameCallback {
      *
      * @param playerId
      * @param command
-     * @throws MageException
      */
-    private void perform(UUID playerId, Command command) throws MageException {
+    private void perform(UUID playerId, Command command) {
         perform(playerId, command, true);
     }
 
-    private void perform(UUID playerId, Command command, boolean informOthers) throws MageException {
+    private void perform(UUID playerId, Command command, boolean informOthers) {
         if (game.getPlayer(playerId).isGameUnderControl()) { // is the player controlling it's own turn
             if (gameSessions.containsKey(playerId)) {
                 setupTimeout(playerId);
                 command.execute(playerId);
             }
+            // TODO: if watcher disconnects then game freezes with active timer, must be fix for such use case
+            //  same for another player (can be fixed by super-duper connection)
             if (informOthers) {
                 informOthers(playerId);
             }
@@ -997,6 +994,8 @@ public class GameController implements GameCallback {
                     command.execute(uuid);
                 }
             }
+            // TODO: if watcher disconnects then game freeze with active timer, must be fix for such use case
+            //  same for another player (can be fixed by super-duper connection)
             if (informOthers) {
                 informOthers(players);
             }

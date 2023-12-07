@@ -1469,6 +1469,10 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, true, gameView.getPhase());
     }
 
+    public boolean isMissGameData() {
+        return lastGameData.game == null || lastGameData.game.getPlayers().isEmpty();
+    }
+
     private void keepLastGameData(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
         lastGameData.messageId = messageId;
         lastGameData.setNewGame(game);

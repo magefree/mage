@@ -8,6 +8,8 @@ import mage.players.Player;
 import mage.players.PlayerType;
 import mage.util.DeckBuildUtils;
 import mage.util.TournamentUtil;
+import org.apache.log4j.Logger;
+
 import java.util.Set;
 
 /**
@@ -15,13 +17,15 @@ import java.util.Set;
  */
 public class TournamentPlayer {
 
+    private static final Logger logger = Logger.getLogger(TournamentPlayer.class);
+
     protected int points;
     protected PlayerType playerType;
     protected TournamentPlayerState state;
     protected String stateInfo;
     protected String disconnectInfo;
     protected Player player;
-    protected Deck deck;
+    protected Deck deck = null;
     protected String results;
     protected boolean eliminated = false;
     protected boolean quit = false;
@@ -93,6 +97,9 @@ public class TournamentPlayer {
         boolean validDeck = (getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
         if (!validDeck) {
             // Clear the deck so the player cheating looses the game
+            // TODO: inform other players about cheating?!
+            logger.error("Found cheating player " + getPlayer().getName()
+                    + " with changed deck, main " + deck.getCards().size() + ", side " + deck.getSideboard().size());
             deck.getCards().clear();
             deck.getSideboard().clear();
         }
@@ -100,11 +107,11 @@ public class TournamentPlayer {
         return validDeck;
     }
 
+    /**
+     * If user fails to submit deck on time, submit deck as is if meets minimum size,
+     * else add basic lands per suggested land counts
+     */
     public Deck generateDeck(int minDeckSize) {
-        /*
-        If user fails to submit deck on time, submit deck as is if meets minimum size,
-        else add basic lands per suggested land counts
-         */
         if (deck.getMaindeckCards().size() < minDeckSize) {
             int[] lands = DeckBuildUtils.landCountSuggestion(minDeckSize, deck.getMaindeckCards());
             Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());

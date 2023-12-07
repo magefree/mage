@@ -92,7 +92,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
          gameUpdateTimer = new Timer(GAME_REDRAW_TIMEOUT_MS, evt -> SwingUtilities.invokeLater(() -> {
             gameUpdateTimer.stop();
              ClientCallback updateMessage = new ClientCallback(ClientCallbackMethod.GAME_REDRAW_GUI, gameId);
-             MageFrame.getInstance().processCallback(updateMessage);
+             MageFrame.getInstance().onCallback(updateMessage);
         }));
     }
 

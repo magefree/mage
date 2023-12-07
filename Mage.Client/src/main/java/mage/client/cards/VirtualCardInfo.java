@@ -9,10 +9,9 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ClientDefaultSettings;
-import mage.utils.SystemUtil;
+import mage.util.ThreadUtils;
 import mage.view.CardView;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
@@ -107,7 +106,7 @@ public class VirtualCardInfo {
     }
 
     public boolean prepared() {
-        SystemUtil.ensureRunInGUISwingThread();
+        ThreadUtils.ensureRunInGUISwingThread();
 
         return this.cardView != null
                 && this.cardComponent != null

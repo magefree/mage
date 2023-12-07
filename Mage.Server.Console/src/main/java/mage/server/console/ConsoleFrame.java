@@ -154,10 +154,11 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
+
         if (session.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 this.consolePanel1.stop();
-                session.connectStop(false);
+                session.connectStop(false, false);
             }
         } else {
             connectDialog.showDialog(this);
@@ -243,7 +244,13 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void processCallback(ClientCallback callback) {
+    public void onNewConnection() {
+        // ignore
+    }
+
+    @Override
+    public void onCallback(ClientCallback callback) {
+        // ignore
     }
 
     public void exitApp() {
@@ -251,7 +258,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
             }
-            session.connectStop(false);
+            session.connectStop(false, false);
         } else {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm exit", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;

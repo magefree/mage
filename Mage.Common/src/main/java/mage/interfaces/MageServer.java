@@ -32,7 +32,7 @@ public interface MageServer {
 
     boolean authResetPassword(String sessionId, String email, String authToken, String password) throws MageException;
 
-    boolean connectUser(String userName, String password, String sessionId, MageVersion version, String userIdStr) throws MageException;
+    boolean connectUser(String userName, String password, String sessionId, String restoreSessionId, MageVersion version, String userIdStr) throws MageException;
 
     boolean connectAdmin(String password, String sessionId, MageVersion version) throws MageException;
 

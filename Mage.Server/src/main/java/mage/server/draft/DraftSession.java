@@ -52,11 +52,16 @@ public class DraftSession {
         if (!killed) {
             Optional<User> user = managerFactory.userManager().getUser(userId);
             if (user.isPresent()) {
+                int remaining;
                 if (futureTimeout != null && !futureTimeout.isDone()) {
-                    int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
-                            new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
+                    // picking already runs
+                    remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
+                } else {
+                    // picking not started yet
+                    remaining = draft.getPickTimeout();
                 }
+                user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
+                        new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
                 return true;
             }
         }

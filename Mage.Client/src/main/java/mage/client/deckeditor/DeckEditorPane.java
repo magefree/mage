@@ -12,13 +12,14 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
+ * GUI: deck editor, used all around the app
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class DeckEditorPane extends MagePane {
 
-    /**
-     * Creates new form TablesPane
-     */
+    private UUID tableId = null;
+
     public DeckEditorPane() {
         boolean initialized = false;
         if (Plugins.instance.isThemePluginLoaded()) {
@@ -45,6 +46,7 @@ public class DeckEditorPane extends MagePane {
     }
 
     public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
+        this.tableId = tableId;
         if (mode == DeckEditorMode.SIDEBOARDING
                 || mode == DeckEditorMode.LIMITED_BUILDING
                 || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING) {
@@ -58,6 +60,11 @@ public class DeckEditorPane extends MagePane {
         }
         this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
         this.repaint();
+    }
+
+    @Override
+    public boolean isActiveTable() {
+        return this.tableId != null;
     }
 
     public DeckEditorMode getDeckEditorMode() {

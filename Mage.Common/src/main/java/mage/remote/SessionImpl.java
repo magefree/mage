@@ -2,10 +2,6 @@ package mage.remote;
 
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionInfo;
-import mage.cards.repository.ExpansionRepository;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.GameException;
@@ -18,7 +14,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.utils.CompressUtil;
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
@@ -44,25 +40,31 @@ import java.util.concurrent.TimeUnit;
  */
 public class SessionImpl implements Session {
 
+    private static final Logger logger = Logger.getLogger(SessionImpl.class);
+
+    public static final String ADMIN_NAME = "Admin"; // if you change here then change in User too
+    public static final String KEEP_MY_OLD_SESSION = "keep_my_old_session"; // for disconnects without active session lose (keep tables/games)
+
     private enum SessionState {
         DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_STARTING
     }
 
-    private static final Logger logger = Logger.getLogger(SessionImpl.class);
-
     private final MageClient client;
 
-    private String sessionId;
+    private String sessionId = "";
+    private String restoreSessionId = "";
     private MageServer server;
-    private Client callbackClient;
-    private CallbackHandler callbackHandler;
+
+    private Client callbackClient; // real connection with a server
+    private CallbackHandler callbackHandler; // processing commands from a server
+
     private ServerState serverState;
     private SessionState sessionState = SessionState.DISCONNECTED;
     private Connection connection;
-    private RemotingTask lastRemotingTask = null;
+    private RemotingTask lastRemotingTask = null; // single task for a server like connect, register, etc
     private static final int PING_CYCLES = 10;
     private final LinkedList<Long> pingTime = new LinkedList<>();
-    private String pingInfo = "";
+    private String lastPingInfo = "";
     private static boolean debugMode = false;
 
     private boolean canceled = false;
@@ -80,6 +82,11 @@ public class SessionImpl implements Session {
     @Override
     public String getSessionId() {
         return sessionId;
+    }
+
+    @Override
+    public void setRestoreSessionId(String restoreSessionId) {
+        this.restoreSessionId = restoreSessionId;
     }
 
     // RemotingTask - do server side works in background and return result, can be canceled at any time
@@ -140,7 +147,7 @@ public class SessionImpl implements Session {
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
-                    logger.fatal("waiting of error message had failed", e);
+                    logger.fatal("Server not responding, can't get error message from it", e);
                     Thread.currentThread().interrupt();
                 }
             }
@@ -182,7 +189,7 @@ public class SessionImpl implements Session {
             showMessageToUser(addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (MageVersionException ex) {
             logger.warn("Connect: wrong versions");
-            connectStop(false);
+            connectStop(false, false);
             if (!canceled) {
                 showMessageToUser(ex.toString());
             }
@@ -193,14 +200,14 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             Throwable ex = ThreadUtils.findRootException(t);
             logger.fatal("Connect: FAIL", t);
-            connectStop(false);
+            connectStop(false, false);
             if (!canceled) {
                 showMessageToUser(ex.toString());
             }
         } finally {
             lastRemotingTask = null;
             if (closeConnectionOnFinish) {
-                connectStop(false); // it's ok on mutiple calls
+                connectStop(false, false); // it's ok on mutiple calls
             }
         }
         return false;
@@ -256,7 +263,7 @@ public class SessionImpl implements Session {
 
                 if (connection.getAdminPassword() == null) {
                     // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                    result = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
+                    result = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, restoreSessionId, client.getVersion(), connection.getUserIdStr());
                 } else {
                     result = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
                 }
@@ -272,7 +279,7 @@ public class SessionImpl implements Session {
                         throw new MageVersionException(client.getVersion(), serverState.getVersion());
                     }
 
-                    if (!connection.getUsername().equals("Admin")) {
+                    if (!connection.getUsername().equals(ADMIN_NAME)) {
                         server.connectSetUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
                     }
 
@@ -288,8 +295,8 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public Optional<String> getServerHostname() {
-        return isConnected() ? Optional.of(connection.getHost()) : Optional.empty();
+    public String getServerHost() {
+        return isConnected() ? connection.getHost() : "";
     }
 
     @Override
@@ -303,9 +310,13 @@ public class SessionImpl implements Session {
 
     private boolean doRemoteConnection(final Connection connection) {
         // connect to server and setup all data, can be canceled
+        // it's anon connect without any user data (only version check)
+
+        // close current connection
         if (isConnected()) {
-            connectStop(true);
+            connectStop(true, false);
         }
+
         this.connection = connection;
         this.canceled = false;
         sessionState = SessionState.CONNECTING;
@@ -435,7 +446,7 @@ public class SessionImpl implements Session {
                     listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "15000");
                     listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "13000");
                 }
-                callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
+                callbackClient.connect(new MageClientConnectionListener(), listenerMetadata);
 
                 Map<String, String> callbackMetadata = new HashMap<>();
                 callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
@@ -448,11 +459,11 @@ public class SessionImpl implements Session {
                 if (callbackConnectors.size() != 1) {
                     logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ')');
                 }
-
                 callbackClient.invoke(null);
 
                 sessionId = callbackClient.getSessionId();
                 sessionState = SessionState.CONNECTED;
+                client.onNewConnection();
                 logger.info("Connect: DONE");
                 return true;
             }
@@ -468,7 +479,7 @@ public class SessionImpl implements Session {
         if (result) {
             return true;
         } else {
-            connectStop(false);
+            connectStop(false, false);
             return false;
         }
     }
@@ -507,11 +518,11 @@ public class SessionImpl implements Session {
     }
 
     /**
-     * @param askForReconnect - true = connection was lost because of error and
-     *                        ask the user if they want to try to reconnect
+     * @param askForReconnect     - ask user to reconnect to server (e.g. on connection error)
+     * @param keepMySessionActive - keep session active for app reconnect/restart, server will close it after few minutes timeout
      */
     @Override
-    public synchronized void connectStop(boolean askForReconnect) {
+    public synchronized void connectStop(boolean askForReconnect, boolean keepMySessionActive) {
         if (isConnected()) {
             logger.info("Disconnecting...");
             sessionState = SessionState.DISCONNECTING;
@@ -522,24 +533,37 @@ public class SessionImpl implements Session {
 
         try {
             if (callbackClient != null && callbackClient.isConnected()) {
+                if (keepMySessionActive) {
+                    // hide real session from a server, so it will be active until timeout
+                    callbackClient.setSessionId(KEEP_MY_OLD_SESSION);
+                }
                 callbackClient.removeListener(callbackHandler);
                 callbackClient.disconnect();
             }
-            TransporterClient.destroyTransporterClient(server);
         } catch (Throwable ex) {
             logger.fatal("Disconnecting FAIL", ex);
         }
 
         if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
+            // client side only, so no needs in server disconnection
             sessionState = SessionState.DISCONNECTED;
             serverState = null;
             logger.info("Disconnecting DONE");
             if (askForReconnect) {
-                client.showError("Network error. You have been disconnected from " + connection.getHost());
+                client.showError("Network error. Can't connect to  " + connection.getHost());
             }
             client.disconnected(askForReconnect); // MageFrame with check to reconnect
             pingTime.clear();
         }
+
+        // clean resources
+        if (server != null) {
+            TransporterClient.destroyTransporterClient(server);
+            server = null;
+        }
+        callbackClient = null;
+        callbackHandler = null;
+        serverState = null;
     }
 
     @Override
@@ -565,7 +589,7 @@ public class SessionImpl implements Session {
         @Override
         public void handleCallback(Callback callback) throws HandleCallbackException {
             try {
-                client.processCallback((ClientCallback) callback.getCallbackObject());
+                client.onCallback((ClientCallback) callback.getCallbackObject());
             } catch (Exception ex) {
                 logger.error("handleCallback error", ex);
             }
@@ -573,7 +597,10 @@ public class SessionImpl implements Session {
         }
     }
 
-    class ClientConnectionListener implements ConnectionListener {
+    /**
+     * Network, client side: connection monitoring and error processing
+     */
+    class MageClientConnectionListener implements ConnectionListener {
         // http://docs.jboss.org/jbossremoting/2.5.3.SP1/html/chapter-connection-failure.html
 
         @Override
@@ -984,7 +1011,7 @@ public class SessionImpl implements Session {
         }
         return null;
     }
-    
+
     @Override
     public boolean setBoosterLoaded(UUID draftId) {
         try {
@@ -1016,7 +1043,6 @@ public class SessionImpl implements Session {
 
     @Override
     public boolean leaveChat(UUID chatId) {
-//        lock.readLock().lock();
         try {
             if (isConnected() && chatId != null) {
                 server.chatLeave(chatId, sessionId);
@@ -1026,8 +1052,6 @@ public class SessionImpl implements Session {
             handleMageException(ex);
         } catch (Throwable t) {
             handleThrowable(t);
-//        } finally {
-//            lock.readLock().unlock();
         }
         return false;
     }
@@ -1678,38 +1702,40 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean ping() {
+    public void ping() {
         try {
+            // jboss uses lease mechanic for connection check but xmage needs additional data like pings stats
             // ping must work after login only, all other actions are single call (example: register new user)
             // sessionId fills on connection
             // serverState fills on good login
-            if (isConnected() && sessionId != null && serverState != null) {
-                long startTime = System.nanoTime();
-                if (!server.ping(sessionId, pingInfo)) {
-                    logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
-                    throw new MageException("Ping failed");
-                }
-                pingTime.add(System.nanoTime() - startTime);
-                long milliSeconds = TimeUnit.MILLISECONDS.convert(pingTime.getLast(), TimeUnit.NANOSECONDS);
-                String lastPing = milliSeconds > 0 ? milliSeconds + "ms" : "<1ms";
-                if (pingTime.size() > PING_CYCLES) {
-                    pingTime.poll();
-                }
-                long sum = 0;
-                for (Long time : pingTime) {
-                    sum += time;
-                }
-                milliSeconds = TimeUnit.MILLISECONDS.convert(sum / pingTime.size(), TimeUnit.NANOSECONDS);
-                pingInfo = lastPing + " (avg: " + (milliSeconds > 0 ? milliSeconds + "ms" : "<1ms") + ')';
+            if (!isConnected() || sessionId == null || serverState == null) {
+                return;
             }
-            return true;
+
+            long startTime = System.nanoTime();
+            if (!server.ping(sessionId, lastPingInfo)) {
+                logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
+                throw new MageException("Ping failed");
+            }
+            pingTime.add(System.nanoTime() - startTime);
+            long milliSeconds = TimeUnit.MILLISECONDS.convert(pingTime.getLast(), TimeUnit.NANOSECONDS);
+            String lastPing = milliSeconds > 0 ? milliSeconds + "ms" : "<1ms";
+            if (pingTime.size() > PING_CYCLES) {
+                pingTime.poll();
+            }
+            long sum = 0;
+            for (Long time : pingTime) {
+                sum += time;
+            }
+            milliSeconds = TimeUnit.MILLISECONDS.convert(sum / pingTime.size(), TimeUnit.NANOSECONDS);
+            lastPingInfo = lastPing + " (avg: " + (milliSeconds > 0 ? milliSeconds + "ms" : "<1ms") + ')';
         } catch (MageException ex) {
             handleMageException(ex);
-            connectStop(true);
+            connectStop(true, true);
         } catch (Throwable t) {
             handleThrowable(t);
+            connectStop(true, true);
         }
-        return false;
     }
 
     @Override

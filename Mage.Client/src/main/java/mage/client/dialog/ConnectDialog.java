@@ -1,6 +1,5 @@
 package mage.client.dialog;
 
-import mage.cards.repository.RepositoryUtil;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
@@ -8,10 +7,8 @@ import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.gui.countryBox.CountryItemEditor;
-import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
 import mage.utils.StreamUtils;
-import mage.utils.ThreadUtils;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -702,7 +699,7 @@ public class ConnectDialog extends MageDialog {
                         // so the connection dialog will be visible all that time
                         SwingUtilities.invokeLater(() -> {
                             doAfterConnected();
-                            MageFrame.getInstance().prepareAndShowTablesPane();
+                            MageFrame.getInstance().prepareAndShowServerLobby();
                             btnConnect.setEnabled(true);
                         });
                     } else {

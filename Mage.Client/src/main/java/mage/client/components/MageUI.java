@@ -1,6 +1,6 @@
 package mage.client.components;
 
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 
 import java.awt.Component;

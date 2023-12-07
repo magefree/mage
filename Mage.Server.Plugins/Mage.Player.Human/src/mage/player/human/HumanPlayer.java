@@ -265,7 +265,7 @@ public class HumanPlayer extends PlayerImpl {
      * Prepare priority player for new feedback, call it for every choose cycle before waitForResponse
      */
     protected void prepareForResponse(Game game) {
-        SystemUtil.ensureRunInGameThread();
+        ThreadUtils.ensureRunInGameThread();
 
         // prepare priority player
         // on null - it's a discard in cleanaup and other non-user code, so don't change it here at that moment
@@ -291,7 +291,7 @@ public class HumanPlayer extends PlayerImpl {
      * @param game
      */
     protected void waitForResponse(Game game) {
-        SystemUtil.ensureRunInGameThread();
+        ThreadUtils.ensureRunInGameThread();
         ;
 
         if (isExecutingMacro()) {

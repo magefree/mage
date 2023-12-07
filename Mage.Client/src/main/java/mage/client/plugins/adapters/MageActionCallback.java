@@ -23,7 +23,7 @@ import mage.components.CardInfoPane;
 import mage.constants.EnlargeMode;
 import mage.constants.Zone;
 import mage.util.DebugUtil;
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;

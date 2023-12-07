@@ -38,7 +38,7 @@ public enum ServerMessagesUtil {
     private static final AtomicInteger gamesEnded = new AtomicInteger(0);
     private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
     private static final AtomicInteger tournamentsEnded = new AtomicInteger(0);
-    private static final AtomicInteger lostConnection = new AtomicInteger(0);
+    private static final AtomicInteger lostConnection = new AtomicInteger(0); // bad connections only
     private static final AtomicInteger reconnects = new AtomicInteger(0);
 
     ServerMessagesUtil() {

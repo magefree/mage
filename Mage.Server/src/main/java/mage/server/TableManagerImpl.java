@@ -14,8 +14,8 @@ import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentPlayer;
 import mage.players.PlayerType;
 import mage.server.game.GameController;
-import mage.server.managers.TableManager;
 import mage.server.managers.ManagerFactory;
+import mage.server.managers.TableManager;
 import org.apache.log4j.Logger;
 
 import java.text.DateFormat;
@@ -23,9 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -34,7 +31,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author BetaSteward_at_googlemail.com
  */
 public class TableManagerImpl implements TableManager {
-    protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private final ManagerFactory managerFactory;
     private final Logger logger = Logger.getLogger(TableManagerImpl.class);
@@ -46,22 +42,11 @@ public class TableManagerImpl implements TableManager {
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
     private final ReadWriteLock tablesLock = new ReentrantReadWriteLock();
 
-    // defines how often checking process should be run on server (in minutes)
-    private static final int TABLE_HEALTH_CHECK_TIMEOUT_MINS = 10;
-
     public TableManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 
     public void init() {
-        expireExecutor.scheduleAtFixedRate(() -> {
-            try {
-                managerFactory.chatManager().clearUserMessageStorage();
-                checkTableHealthState();
-            } catch (Exception ex) {
-                logger.fatal("Check table health state job error:", ex);
-            }
-        }, TABLE_HEALTH_CHECK_TIMEOUT_MINS, TABLE_HEALTH_CHECK_TIMEOUT_MINS, TimeUnit.MINUTES);
     }
 
     @Override
@@ -426,7 +411,7 @@ public class TableManagerImpl implements TableManager {
         List<ChatSession> chatSessions = managerFactory.chatManager().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
         for (ChatSession chatSession : chatSessions) {
-            logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + ' ' + chatSession.getInfo() + ' ' + chatSession.getClients().values().toString());
+            logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + ' ' + chatSession.getInfo() + ' ' + chatSession.getUsers().values().toString());
         }
         logger.debug("------- Games: " + managerFactory.gameManager().getNumberActiveGames() + " --------------------------------------------");
         logger.debug(" Active Game Worker: " + managerFactory.threadExecutor().getActiveThreads(managerFactory.threadExecutor().getGameExecutor()));
@@ -436,7 +421,8 @@ public class TableManagerImpl implements TableManager {
         logger.debug("--- Server state END ------------------------------------------");
     }
 
-    private void checkTableHealthState() {
+    private void removeOutdatedTables() {
+        // TODO: need research and check - is it actual code or not, 2023-12-06
         if (logger.isDebugEnabled()) {
             debugServerState();
         }
@@ -465,6 +451,13 @@ public class TableManagerImpl implements TableManager {
             }
         }
         logger.debug("TABLE HEALTH CHECK - END");
+    }
 
+    @Override
+    public void checkHealth() {
+        //logger.info("Checking tables...");
+        // TODO: add memory reports
+        // TODO: add broken tables check and report (without seats, without gamecontroller, without active players, too long playing, etc)
+        removeOutdatedTables();
     }
 }

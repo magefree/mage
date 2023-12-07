@@ -28,31 +28,52 @@ import java.awt.event.KeyEvent;
 import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class CallbackClientImpl implements CallbackClient {
 
     private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
+
+    private static final boolean DEBUG_CALLBACK_MESSAGES_LOG = false; // show all callback messages (server commands)
+
     private final MageFrame frame;
     private final Map<ClientCallbackType, Integer> lastMessages;
+    private final Map<UUID, GameClientMessage> firstGameData;
 
     public CallbackClientImpl(MageFrame frame) {
         this.frame = frame;
         this.lastMessages = new HashMap<>();
+        this.firstGameData = new HashMap<>();
         Arrays.stream(ClientCallbackType.values()).forEach(t -> this.lastMessages.put(t, 0));
     }
 
     @Override
-    public synchronized void processCallback(final ClientCallback callback) {
+    public void onNewConnection() {
+        // must clean temp data for each new connection
+        this.lastMessages.clear();
+        this.firstGameData.clear();
+    }
+
+    @Override
+    public synchronized void onCallback(final ClientCallback callback) {
         callback.decompressData();
 
         // put replay related code here
         SaveObjectUtil.saveObject(callback.getData(), callback.getMethod().toString());
 
+        // reconnect fix with miss data, part 1 of 2
+        // on reconnect many events can come in diff order, so init GameView data with first available info
+        // game_start event can come after game view - must save it here (part 1) before real use in swing thread (part 2)
+        if (callback.getData() instanceof GameClientMessage) {
+            firstGameData.putIfAbsent(callback.getObjectId(), (GameClientMessage) callback.getData());
+        }
+
         // all GUI related code must be executed in swing thread
         SwingUtilities.invokeLater(() -> {
             try {
-                logger.debug("message " + callback.getMessageId() + " - " + callback.getMethod().getType() + " - " + callback.getMethod());
+                if (DEBUG_CALLBACK_MESSAGES_LOG) {
+                    logger.info("message " + callback.getMessageId() + " - " + callback.getMethod().getType() + " - " + callback.getMethod());
+                }
 
                 // process bad connection (events can income in wrong order, so outdated data must be ignored)
                 // - table/dialog events like game start, game end, choose dialog - must be processed anyway
@@ -92,18 +113,30 @@ public class CallbackClientImpl implements CallbackClient {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         GameManager.instance.setCurrentPlayerUUID(message.getPlayerId());
                         gameStarted(callback.getMessageId(), message.getGameId(), message.getPlayerId());
+
+                        // reconnect fix with miss data, part 2 of 2
+                        // START_GAME event can come after GAME_INIT or any other, so must force update with first info
+                        // START_GAME even raises before a real game start, so it hasn't GameView in payload
+                        GamePanel gamePanel = MageFrame.getGame(callback.getObjectId());
+                        if (gamePanel != null && gamePanel.isMissGameData()) {
+                            GameClientMessage mes = firstGameData.getOrDefault(callback.getObjectId(), null);
+                            if (mes != null) {
+                                logger.warn("Found miss game data, requesting latest info... (possible reason: reconnect)");
+                                gamePanel.init(callback.getMessageId(), mes.getGameView(), true);
+                                // ask server to resent latest data
+                                // TODO: replace by special async request like requestGameUpdate
+                                SessionHandler.sendPlayerUUID(callback.getObjectId(), UUID.randomUUID());
+                            } else {
+                                // it's ok, new game come here
+                                // logger.error("Found miss game data, but can't find any usefull info (report to developers)");
+                            }
+                        }
                         break;
                     }
 
                     case START_TOURNAMENT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         tournamentStarted(callback.getMessageId(), message.getGameId(), message.getPlayerId());
-                        break;
-                    }
-
-                    case START_DRAFT: {
-                        TableClientMessage message = (TableClientMessage) callback.getData();
-                        draftStarted(callback.getMessageId(), message.getGameId(), message.getPlayerId());
                         break;
                     }
 
@@ -126,7 +159,7 @@ public class CallbackClientImpl implements CallbackClient {
                         ChatMessage message = (ChatMessage) callback.getData();
                         // Drop messages from ignored users
                         if (message.getUsername() != null && IgnoreList.IGNORED_MESSAGE_TYPES.contains(message.getMessageType())) {
-                            final String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+                            final String serverAddress = SessionHandler.getSession().getServerHost();
                             if (IgnoreList.userIsIgnored(serverAddress, message.getUsername())) {
                                 break;
                             }
@@ -426,6 +459,12 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
 
+                    case START_DRAFT: {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        draftStarted(callback.getMessageId(), message.getGameId(), message.getPlayerId());
+                        break;
+                    }
+
                     case DRAFT_OVER: {
                         MageFrame.removeDraft(callback.getObjectId());
                         break;
@@ -544,7 +583,7 @@ public class CallbackClientImpl implements CallbackClient {
                         null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TABLES:
-                String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+                String serverAddress = SessionHandler.getSession().getServerHost();
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" main menu.")
                                 .append("<br/>Download icons and symbols by using the \"Symbols\" main menu.")
                                 .append("<br/>\\list - show a list of available chat commands.")

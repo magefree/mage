@@ -1,7 +1,8 @@
-package mage.utils;
+package mage.util;
 
 import com.google.common.base.Throwables;
 
+import javax.swing.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -9,7 +10,7 @@ import java.util.concurrent.Future;
 /**
  * Util method to work with threads.
  *
- * @author ayrat
+ * @author ayrat, JayDi85
  */
 public final class ThreadUtils {
 
@@ -31,7 +32,6 @@ public final class ThreadUtils {
 
     /**
      * Find real exception object after thread task completed. Can be used in afterExecute
-     *
      */
     public static Throwable findRunnableException(Runnable r, Throwable t) {
         // executer.submit - return exception in result
@@ -52,5 +52,29 @@ public final class ThreadUtils {
 
     public static Throwable findRootException(Throwable t) {
         return Throwables.getRootCause(t);
+    }
+
+    public static void ensureRunInGameThread() {
+        String name = Thread.currentThread().getName();
+        if (!name.startsWith("GAME")) {
+            // how-to fix: use signal logic to inform a game about new command to execute instead direct execute (see example with WantConcede)
+            // reason: user responses/commands are received by network/call thread, but must be processed by game thread
+            throw new IllegalArgumentException("Wrong code usage: game related code must run in GAME thread, but it used in " + name, new Throwable());
+        }
+    }
+
+    public static void ensureRunInCallThread() {
+        String name = Thread.currentThread().getName();
+        if (!name.startsWith("CALL")) {
+            // how-to fix: something wrong in your code logic
+            throw new IllegalArgumentException("Wrong code usage: client commands code must run in CALL threads, but used in " + name, new Throwable());
+        }
+    }
+
+    public static void ensureRunInGUISwingThread() {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            // hot-to fix: run GUI changeable code by SwingUtilities.invokeLater(() -> {xxx})
+            throw new IllegalArgumentException("Wrong code usage: GUI related code must run in SWING thread by SwingUtilities.invokeLater", new Throwable());
+        }
     }
 }

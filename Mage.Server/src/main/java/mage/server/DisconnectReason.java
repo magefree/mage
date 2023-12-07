@@ -1,26 +1,24 @@
 package mage.server;
 
 /**
+ * Server: possible reasons for disconnection
  *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public enum DisconnectReason {
-    LostConnection(" has lost connection"),
-    BecameInactive(" has become inactive"),
-    Disconnected(" has left XMage"),
-    CleaningUp(" [cleaning up]"),
-    ConnectingOtherInstance(" reconnected and replaced still active old session"),
-    AdminDisconnect(" was disconnected by the admin"),
-    SessionExpired(" session expired"),
-    Undefined("");
+    LostConnection(false, " has lost connection"),
+    DisconnectedByUser(true, " has left XMage"),
+    DisconnectedByUserButKeepTables(false, " has left XMage for app restart/reconnect"),
+    DisconnectedByAdmin(true, " was disconnected by admin"),
+    AnotherUserInstance(false, " disconnected by another user intance"),
+    AnotherUserInstanceSilent(false, ""), // same user, no need inform in chats
+    SessionExpired(true, " session expired");
 
-    String message;
+    final boolean isRemoveUserTables;
+    final String messageForUser;
 
-    DisconnectReason(String message) {
-        this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
+    DisconnectReason(boolean isRemoveUserTables, String messageForUser) {
+        this.isRemoveUserTables = isRemoveUserTables;
+        this.messageForUser = messageForUser;
     }
 }

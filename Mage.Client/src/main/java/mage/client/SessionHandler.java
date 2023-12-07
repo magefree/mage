@@ -5,6 +5,7 @@ import static mage.cards.decks.DeckFormats.XMAGE;
 import mage.client.chat.LocalCommands;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.preference.MagePreferences;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
@@ -41,7 +42,6 @@ public final class SessionHandler {
     }
 
     public static void startSession(MageFrame mageFrame) {
-
         session = new SessionImpl(mageFrame);
         session.setJsonLogActive("true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_JSON_GAME_LOG_AUTO_SAVE, "true")));
     }
@@ -64,10 +64,22 @@ public final class SessionHandler {
 
     public static boolean connect(Connection connection) {
         lastConnectError = "";
+
+        // restore last used session
+        String restoreSessionId = MagePreferences.findRestoreSession(connection.getHost(), connection.getUsername());
+        if (!restoreSessionId.isEmpty()) {
+            logger.info("Connect: trying to restore old session for user " + connection.getUsername());
+            session.setRestoreSessionId(restoreSessionId);
+        }
+
+        // connect
         if (session.connectStart(connection)) {
+            // save current session for restore
+            MagePreferences.saveRestoreSession(connection.getHost(), connection.getUsername(), getSessionId());
             return true;
         } else {
             lastConnectError = session.getLastError();
+            disconnect(false, true);
             return false;
         }
     }
@@ -80,8 +92,16 @@ public final class SessionHandler {
         return session.connectAbort();
     }
 
-    public static void disconnect(boolean showmessage) {
-        session.connectStop(showmessage);
+    public static void disconnect(boolean askForReconnect, boolean keepMySessionActive) {
+        if (!keepMySessionActive) {
+            String serverName = session.getServerHost();
+            String userName = session.getUserName();
+            if (!serverName.isEmpty() && !userName.isEmpty()) {
+                MagePreferences.saveRestoreSession(serverName, userName, "");
+            }
+        }
+
+        session.connectStop(askForReconnect, keepMySessionActive);
     }
 
     public static void sendPlayerAction(PlayerAction playerAction, UUID gameId, Object relatedUserId) {

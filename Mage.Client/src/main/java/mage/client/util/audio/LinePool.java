@@ -19,7 +19,7 @@ import javax.sound.sampled.SourceDataLine;
 
 import org.apache.log4j.Logger;
 
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 
 public class LinePool {
 

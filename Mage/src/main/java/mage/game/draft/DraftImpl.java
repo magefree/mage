@@ -313,6 +313,11 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
+        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), getPickTimeout());
+    }
+
+    @Override
+    public int getPickTimeout() {
         int cardNum = Math.min(15, this.cardNum);
         int time = timing.getPickTimeout(cardNum);
         // if the pack is re-sent to a player because they haven't been able to successfully load it, the pick time is reduced appropriately because of the elapsed time
@@ -320,7 +325,7 @@ public abstract class DraftImpl implements Draft {
         if (time > 0) {
             time = Math.max(1, time - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL);
         }
-        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
+        return time;
     }
 
     @Override
