@@ -1322,7 +1322,7 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
 
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+        String serverAddress = SessionHandler.getSession().getServerHost();
         tOptions.getMatchOptions().setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());

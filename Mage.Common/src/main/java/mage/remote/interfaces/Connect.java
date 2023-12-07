@@ -2,20 +2,20 @@ package mage.remote.interfaces;
 
 import mage.remote.Connection;
 
-import java.util.Optional;
-
 /**
  * Network: client side commands for a server
  *
- * @author noxx
+ * @author noxx, JayDi85
  */
 public interface Connect {
 
     String getSessionId();
 
+    void setRestoreSessionId(String restoreSessionId);
+
     String getLastError();
 
-    Optional<String> getServerHostname();
+    String getServerHost();
 
     boolean sendAuthRegister(Connection connection);
 
@@ -27,11 +27,11 @@ public interface Connect {
 
     boolean connectAbort();
 
-    void connectStop(boolean showMessage);
+    void connectStop(boolean askForReconnect, boolean keepMySessionActive);
 
     void connectReconnect(Throwable throwable);
 
-    boolean ping();
+    void ping();
 
     boolean isConnected();
 

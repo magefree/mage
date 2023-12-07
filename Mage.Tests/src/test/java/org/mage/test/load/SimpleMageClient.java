@@ -54,9 +54,14 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void processCallback(ClientCallback callback) {
+    public void onNewConnection() {
+        callbackClient.onNewConnection();
+    }
+
+    @Override
+    public void onCallback(ClientCallback callback) {
         try {
-            callbackClient.processCallback(callback);
+            callbackClient.onCallback(callback);
         } catch (Throwable e) {
             log.error(e.getMessage(), e);
         }

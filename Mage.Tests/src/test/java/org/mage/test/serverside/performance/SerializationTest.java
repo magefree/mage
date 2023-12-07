@@ -18,7 +18,7 @@ import mage.game.permanent.PermanentImpl;
 import mage.remote.traffic.ZippedObjectImpl;
 import mage.util.CardUtil;
 import mage.utils.CompressUtil;
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 import mage.view.GameView;
 import org.jboss.remoting.serialization.impl.java.ClearableObjectOutputStream;
 import org.jboss.serial.io.JBossObjectInputStream;

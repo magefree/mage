@@ -1,7 +1,7 @@
 package mage.interfaces.callback;
 
 /**
- * Server's commands to process on client side. Commands can come in un-synced state due bad/slow network
+ * Network: server's commands to process on client side. Commands can come in un-synced state due bad/slow network
  * <p>
  * Can be:
  * - critical events (messages, game events, choose dialogs, etc)

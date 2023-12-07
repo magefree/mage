@@ -1,7 +1,7 @@
 package mage.interfaces.callback;
 
 /**
- * Server event type for processing on the client
+ * Network: server event type for processing on the client
  *
  * @author JayDi85
  */

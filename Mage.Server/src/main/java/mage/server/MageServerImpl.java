@@ -3,9 +3,7 @@ package mage.server;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.DeckValidatorFactory;
-import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.constants.Constants;
 import mage.constants.ManaType;
@@ -55,6 +53,7 @@ public class MageServerImpl implements MageServer {
     private final ManagerFactory managerFactory;
     private final String adminPassword;
     private final boolean testMode;
+    private final boolean detailsMode;
     private final LinkedHashMap<String, String> activeAuthTokens = new LinkedHashMap<String, String>() {
         @Override
         protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
@@ -63,10 +62,11 @@ public class MageServerImpl implements MageServer {
         }
     };
 
-    public MageServerImpl(ManagerFactory managerFactory, String adminPassword, boolean testMode) {
+    public MageServerImpl(ManagerFactory managerFactory, String adminPassword, boolean testMode, boolean detailsMode) {
         this.managerFactory = managerFactory;
         this.adminPassword = adminPassword;
         this.testMode = testMode;
+        this.detailsMode = detailsMode;
         this.callExecutor = managerFactory.threadExecutor().getCallExecutor();
         ServerMessagesUtil.instance.getMessages();
     }
@@ -146,18 +146,21 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean connectUser(String userName, String password, String sessionId, MageVersion version, String userIdStr) throws MageException {
+    public boolean connectUser(String userName, String password, String sessionId, String restoreSessionId, MageVersion version, String userIdStr) throws MageException {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
-                logger.info("MageVersionException: userName=" + userName + ", version=" + version + " sessionId=" + sessionId);
+                logger.debug("MageVersionException: userName=" + userName + ", version=" + version + " sessionId=" + sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
-            return managerFactory.sessionManager().connectUser(sessionId, userName, password, userIdStr);
-        } catch (MageException ex) {
-            if (ex instanceof MageVersionException) {
-                throw ex;
+            return managerFactory.sessionManager().connectUser(sessionId, restoreSessionId, userName, password, userIdStr, this.detailsMode);
+        } catch (MageException e) {
+            if (e instanceof MageVersionException) {
+                // return wrong version error as is
+                throw e;
+            } else {
+                // all other errors must be logged and hidden under a server error
+                handleException(e);
             }
-            handleException(ex);
         }
         return false;
     }
@@ -508,7 +511,6 @@ public class MageServerImpl implements MageServer {
     public void chatJoin(final UUID chatId, final String sessionId, final String userName) throws MageException {
         execute("joinChat", sessionId, () -> {
             managerFactory.sessionManager().getSession(sessionId).ifPresent(session -> {
-
                 UUID userId = session.getUserId();
                 managerFactory.chatManager().joinChat(chatId, userId);
             });
@@ -1025,7 +1027,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void adminDisconnectUser(final String sessionId, final String userSessionId) throws MageException {
         execute("adminDisconnectUser", sessionId,
-                () -> managerFactory.sessionManager().disconnectUser(sessionId, userSessionId),
+                () -> managerFactory.sessionManager().disconnectAnother(sessionId, userSessionId),
                 true
         );
     }
@@ -1049,7 +1051,7 @@ public class MageServerImpl implements MageServer {
                 user.showUserMessage("Admin info", "Your user profile was locked until " + SystemUtil.dateFormat.format(lockUntil) + '.');
                 user.setLockedUntil(lockUntil);
                 if (user.isConnected()) {
-                    managerFactory.sessionManager().disconnectUser(sessionId, user.getSessionId());
+                    managerFactory.sessionManager().disconnectAnother(sessionId, user.getSessionId());
                 }
             });
         }, true);
@@ -1064,7 +1066,7 @@ public class MageServerImpl implements MageServer {
                 User user = u.get();
                 user.setActive(active);
                 if (!user.isActive() && user.isConnected()) {
-                    managerFactory.sessionManager().disconnectUser(sessionId, user.getSessionId());
+                    managerFactory.sessionManager().disconnectAnother(sessionId, user.getSessionId());
                 }
             } else if (authorizedUser != null) {
                 User theUser = new User(managerFactory, userName, "localhost", authorizedUser);
@@ -1078,7 +1080,7 @@ public class MageServerImpl implements MageServer {
         execute("adminToggleActivateUser", sessionId, () -> managerFactory.userManager().getUserByName(userName).ifPresent(user -> {
             user.setActive(!user.isActive());
             if (!user.isActive() && user.isConnected()) {
-                managerFactory.sessionManager().disconnectUser(sessionId, user.getSessionId());
+                managerFactory.sessionManager().disconnectAnother(sessionId, user.getSessionId());
             }
         }), true);
     }
@@ -1086,7 +1088,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void adminEndUserSession(final String sessionId, final String userSessionId) throws MageException {
         execute("adminEndUserSession", sessionId,
-                () -> managerFactory.sessionManager().endUserSession(sessionId, userSessionId),
+                () -> managerFactory.sessionManager().disconnectAnother(sessionId, userSessionId),
                 true
         );
     }

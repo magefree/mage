@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.*;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.remote.SessionImpl;
 import org.apache.log4j.Logger;
 
 /**
@@ -20,6 +21,7 @@ import org.apache.log4j.Logger;
 public class ConnectDialog extends JDialog {
 
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
+
     private ConsoleFrame console;
     private Connection connection;
     private ConnectTask task;
@@ -352,7 +354,7 @@ public class ConnectDialog extends JDialog {
         connection.setHost(this.txtServer.getText());
         connection.setPort(Integer.parseInt(this.txtPort.getText()));
         connection.setAdminPassword(new String(txtPassword.getPassword()));
-        connection.setUsername("Admin");
+        connection.setUsername(SessionImpl.ADMIN_NAME);
         connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
         if (!this.cbProxyType.getSelectedItem().equals(ProxyType.NONE)) {
             connection.setProxyHost(this.txtProxyServer.getText());

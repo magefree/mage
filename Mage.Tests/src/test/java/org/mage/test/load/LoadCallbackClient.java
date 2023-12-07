@@ -41,7 +41,12 @@ public class LoadCallbackClient implements CallbackClient {
     }
 
     @Override
-    public void processCallback(ClientCallback callback) {
+    public void onNewConnection() {
+        // nothing to do, only one time connection for LoadClient
+    }
+
+    @Override
+    public void onCallback(ClientCallback callback) {
         callback.decompressData();
         controlCount = 0;
 

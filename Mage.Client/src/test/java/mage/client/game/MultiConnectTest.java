@@ -86,8 +86,13 @@ public class MultiConnectTest {
         }
 
         @Override
-        public void processCallback(ClientCallback callback) {
-            logger.info("processCallback");
+        public void onNewConnection() {
+            logger.info("onNewConnection");
+        }
+
+        @Override
+        public void onCallback(ClientCallback callback) {
+            logger.info("onCallback");
         }
     }
 

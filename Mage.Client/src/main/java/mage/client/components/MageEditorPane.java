@@ -11,7 +11,6 @@ import mage.client.game.GamePanel;
 import mage.game.command.Plane;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PlaneView;
 

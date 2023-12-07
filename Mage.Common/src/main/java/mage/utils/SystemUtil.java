@@ -28,7 +28,6 @@ import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 
-import javax.swing.*;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
@@ -901,29 +900,5 @@ public final class SystemUtil {
             cardName = matchInfo.group(2);
         }
         return Arrays.asList(cardSet, cardName);
-    }
-
-    public static void ensureRunInGameThread() {
-        String name = Thread.currentThread().getName();
-        if (!name.startsWith("GAME")) {
-            // how-to fix: use signal logic to inform a game about new command to execute instead direct execute (see example with WantConcede)
-            // reason: user responses/commands are received by network/call thread, but must be processed by game thread
-            throw new IllegalArgumentException("Wrong code usage: game related code must run in GAME thread, but it used in " + name, new Throwable());
-        }
-    }
-
-    public static void ensureRunInCallThread() {
-        String name = Thread.currentThread().getName();
-        if (!name.startsWith("CALL")) {
-            // how-to fix: something wrong in your code logic
-            throw new IllegalArgumentException("Wrong code usage: client commands code must run in CALL threads, but used in " + name, new Throwable());
-        }
-    }
-
-    public static void ensureRunInGUISwingThread() {
-        if (!SwingUtilities.isEventDispatchThread()) {
-            // hot-to fix: run GUI changeable code by SwingUtilities.invokeLater(() -> {xxx})
-            throw new IllegalArgumentException("Wrong code usage: GUI related code must run in SWING thread by SwingUtilities.invokeLater", new Throwable());
-        }
     }
 }

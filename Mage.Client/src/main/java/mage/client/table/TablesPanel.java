@@ -940,7 +940,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
         // Hide games of ignored players
         java.util.List<RowFilter<Object, Object>> ignoreListFilterList = new ArrayList<>();
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+        String serverAddress = SessionHandler.getSession().getServerHost();
         final Set<String> ignoreListCopy = IgnoreList.getIgnoredUsers(serverAddress);
         if (!ignoreListCopy.isEmpty()) {
             ignoreListFilterList.add(new RowFilter<Object, Object>() {
@@ -1718,7 +1718,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setRollbackTurnsAllowed(true);
             options.setQuitRatio(100);
             options.setMinimumRating(0);
-            String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+            String serverAddress = SessionHandler.getSession().getServerHost();
             options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 

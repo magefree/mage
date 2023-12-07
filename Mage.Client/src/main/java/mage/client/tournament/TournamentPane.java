@@ -4,22 +4,28 @@ import java.util.UUID;
 import mage.client.MagePane;
 
 /**
+ * Game GUI: tournament frame
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentPane extends MagePane {
 
-    /**
-     * Creates new form TournamentPane
-     */
+    UUID tournamentId = null;
+
     public TournamentPane() {
         initComponents();
     }
 
     public void showTournament(UUID tournamentId) {
+        this.tournamentId = tournamentId;
         this.setTitle("Tournament " + tournamentId);
         this.tournamentPanel.showTournament(tournamentId);
         this.repaint();
+    }
+
+    @Override
+    public boolean isActiveTable() {
+        return this.tournamentId != null;
     }
 
     public void removeTournament() {

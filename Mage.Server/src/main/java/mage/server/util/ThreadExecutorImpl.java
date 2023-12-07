@@ -2,7 +2,7 @@ package mage.server.util;
 
 import mage.server.managers.ConfigSettings;
 import mage.server.managers.ThreadExecutor;
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 
 import java.util.concurrent.*;
@@ -18,6 +18,7 @@ public class ThreadExecutorImpl implements ThreadExecutor {
     private final ExecutorService gameExecutor; // game threads to run long tasks, one per game (example: run game and wait user's feedback)
     private final ScheduledExecutorService timeoutExecutor;
     private final ScheduledExecutorService timeoutIdleExecutor;
+    private final ScheduledExecutorService serverHealthExecutor;
 
     /**
      * noxx: what the settings below do is setting the ability to keep OS
@@ -33,23 +34,27 @@ public class ThreadExecutorImpl implements ThreadExecutor {
     public ThreadExecutorImpl(ConfigSettings config) {
         //callExecutor = Executors.newCachedThreadPool();
         callExecutor = new CachedThreadPoolWithException();
-        //gameExecutor = Executors.newFixedThreadPool(config.getMaxGameThreads());
-        gameExecutor = new FixedThreadPoolWithException(config.getMaxGameThreads());
-        timeoutExecutor = Executors.newScheduledThreadPool(4);
-        timeoutIdleExecutor = Executors.newScheduledThreadPool(4);
-
         ((ThreadPoolExecutor) callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) callExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) callExecutor).setThreadFactory(new XMageThreadFactory("CALL"));
+
+        //gameExecutor = Executors.newFixedThreadPool(config.getMaxGameThreads());
+        gameExecutor = new FixedThreadPoolWithException(config.getMaxGameThreads());
         ((ThreadPoolExecutor) gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) gameExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) gameExecutor).setThreadFactory(new XMageThreadFactory("GAME"));
+
+        timeoutExecutor = Executors.newScheduledThreadPool(4);
         ((ThreadPoolExecutor) timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) timeoutExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) timeoutExecutor).setThreadFactory(new XMageThreadFactory("TIMEOUT"));
+
+        timeoutIdleExecutor = Executors.newScheduledThreadPool(4);
         ((ThreadPoolExecutor) timeoutIdleExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) timeoutIdleExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) timeoutIdleExecutor).setThreadFactory(new XMageThreadFactory("TIMEOUT_IDLE"));
+
+        serverHealthExecutor = Executors.newSingleThreadScheduledExecutor(new XMageThreadFactory("HEALTH"));
     }
 
     static class CachedThreadPoolWithException extends ThreadPoolExecutor {
@@ -119,6 +124,10 @@ public class ThreadExecutorImpl implements ThreadExecutor {
         return timeoutIdleExecutor;
     }
 
+    @Override
+    public ScheduledExecutorService getServerHealthExecutor() {
+        return serverHealthExecutor;
+    }
 }
 
 class XMageThreadFactory implements ThreadFactory {

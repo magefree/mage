@@ -31,6 +31,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(GamesRoomImpl.class);
 
+    private static final int MAX_FINISHED_TABLES = 50;
+
     private static final ScheduledExecutorService UPDATE_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<>();
     private static List<MatchView> matchView = new ArrayList<>();
@@ -65,7 +67,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         for (Table table : allTables) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
-            } else if (matchList.size() < 50) {
+            } else if (matchList.size() < MAX_FINISHED_TABLES) {
                 matchList.add(new MatchView(table));
             } else {
                 // more since 50 matches finished since this match so removeUserFromAllTablesAndChat it
@@ -79,7 +81,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         matchView = matchList;
         List<UsersView> users = new ArrayList<>();
         for (User user : managerFactory.userManager().getUsers()) {
-            if (user.getUserState() != User.UserState.Offline && !user.getName().equals("Admin")) {
+            if (user.getUserState() != User.UserState.Offline
+                    && !user.getName().equals(User.ADMIN_NAME)) {
                 try {
                     users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
                             user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),
@@ -243,13 +246,5 @@ class TableListSorter implements Comparator<Table> {
             return -1;
         }
         return 0;
-    }
-}
-
-class UserNameSorter implements Comparator<UsersView> {
-
-    @Override
-    public int compare(UsersView one, UsersView two) {
-        return one.getUserName().compareToIgnoreCase(two.getUserName());
     }
 }

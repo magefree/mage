@@ -9,8 +9,9 @@ import mage.players.net.UserGroup;
 import mage.server.game.GamesRoom;
 import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
-import mage.utils.SystemUtil;
 import mage.util.RandomUtil;
+import mage.util.ThreadUtils;
+import mage.utils.SystemUtil;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
@@ -27,15 +28,40 @@ import java.util.regex.Pattern;
 import static mage.server.DisconnectReason.LostConnection;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class Session {
 
     private static final Logger logger = Logger.getLogger(Session.class);
+
     private static final Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
     private static final Pattern digitsPattern = Pattern.compile("[0-9]");
 
     public static final String REGISTRATION_DISABLED_MESSAGE = "Registration has been disabled on the server. You can use any name and empty password to login.";
+
+    // Connection and reconnection logic:
+    // - server allows only one user intance (user name for search, userId for memory/db store)
+    // - if same user connected then all other user's intances must be removed (disconnected)
+    // - for auth mode: identify intance by userId (must disconnect all other clients with same user name)
+    // - for anon mode: identify intance by unique mark like IP/host (must disconnect all other clients with same user name + IP)
+    // - for any mode: optional identify by restore session (must disconnect all other clients with same user name)
+    // - TODO: implement client id mark instead host like md5(mac, os, somefolders)
+    // - if server can't remove another user intance then restrict to connect (example: anon user connected, but there is another anon with diff IP)
+    private static final boolean ANON_IDENTIFY_BY_HOST = true; // for anon mode only: true - kick all other users with same IP; false - keep first connected user
+
+    // async data transfer for all callbacks (transfer of game updates from server to client):
+    // - pros:
+    //   * SIGNIFICANT performance boost and pings (yep, that's true);
+    //   * no freeze with disconnected/slow watchers/players;
+    // - cons:
+    //   * data re-sync? TODO: need research, possible problem: outdated battlefield, need click on avatar
+    //   * what about slow connection or big pings? TODO: need research, possible problem: too many re-sync messages in client logs, outdated battlefield, wrong answers
+    //   * what about disconnected players? TODO: need research, possible problem: server can't detect disconnected players too fast
+    //   * what about too many requests to freezed players (too much threads)?
+    //     TODO: need research, possible problem: if something bad with server connection then it can generates
+    //      too many requests to a client and can cause threads overflow/limit (example: watch AI only games?);
+    //      visualvm can help with threads monitor
+    private static final boolean SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION = false; // TODO: enable after full research
 
     private final ManagerFactory managerFactory;
     private final String sessionId;
@@ -60,7 +86,7 @@ public class Session {
         this.callBackLock = new ReentrantLock();
     }
 
-    public String registerUser(String userName, String password, String email) throws MageException {
+    public String registerUser(String userName, String password, String email) {
         if (!managerFactory.configSettings().isAuthenticationActivated()) {
             String returnMessage = REGISTRATION_DISABLED_MESSAGE;
             sendErrorMessageToClient(returnMessage);
@@ -119,7 +145,7 @@ public class Session {
             return null;
         }
     }
-    
+
     private String validateUserNameLength(String userName) {
         ConfigSettings config = managerFactory.configSettings();
         if (userName.length() < config.getMinUserNameLength()) {
@@ -138,12 +164,10 @@ public class Session {
     }
 
     private String validateUserName(String userName) {
-        // return error message or null on good name
-        if (userName.equals("Admin")) {
-            // virtual user for admin console
-            return "User name Admin already in use";
+        if (userName.equals(User.ADMIN_NAME)) {
+            return "User name already in use";
         }
-        
+
         String returnMessage = validateUserNameLength(userName);
         if (returnMessage != null) {
             return returnMessage;
@@ -195,31 +219,30 @@ public class Session {
         return null;
     }
 
-    public String connectUser(String userName, String password) throws MageException {
-        String returnMessage = validateUserNameLength(userName);
-        if (returnMessage != null) {
-            sendErrorMessageToClient(returnMessage);
-            return returnMessage;
+    public String connectUser(String userName, String password, String restoreSessionId) throws MageException {
+        // check username
+        String errorMessage = validateUserNameLength(userName);
+        if (errorMessage != null) {
+            return errorMessage;
         }
-        returnMessage = connectUserHandling(userName, password);
-        if (returnMessage != null) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                logger.fatal("waiting of error message had failed", e);
-                Thread.currentThread().interrupt();
-            }
-            sendErrorMessageToClient(returnMessage);
-        }
-        return returnMessage;
+
+        // check auth/anon
+        errorMessage = connectUserHandling(userName, password, restoreSessionId);
+        return errorMessage;
     }
 
     public boolean isLocked() {
         return lock.isLocked();
     }
 
-    public String connectUserHandling(String userName, String password) throws MageException {
+    /**
+     * Auth user on server (link current session with server's user)
+     * Return null on good or error message on bad
+     */
+    public String connectUserHandling(String userName, String password, String restoreSessionId) {
         this.isAdmin = false;
+
+        // find auth user
         AuthorizedUser authorizedUser = null;
         if (managerFactory.configSettings().isAuthenticationActivated()) {
             authorizedUser = AuthorizedUserRepository.getInstance().getByName(userName);
@@ -247,46 +270,95 @@ public class Session {
             }
         }
 
-        Optional<User> selectUser = managerFactory.userManager().createUser(userName, host, authorizedUser);
-        boolean reconnect = false;
-        if (!selectUser.isPresent()) {
-            // user already connected
-            selectUser = managerFactory.userManager().getUserByName(userName);
-            if (selectUser.isPresent()) {
-                User user = selectUser.get();
-                // If authentication is not activated, check the identity using IP address.
-                if (managerFactory.configSettings().isAuthenticationActivated() || user.getHost().equals(host)) {
-                    user.updateLastActivity(null);  // minimizes possible expiration
-                    this.userId = user.getId();
-                    if (user.getSessionId().isEmpty()) {
-                        logger.info("Reconnecting session for " + userName);
-                        reconnect = true;
-                    } else {
-                        //disconnect previous session
-                        logger.info("Disconnecting another user instance: " + userName);
-                        managerFactory.sessionManager().disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
+        // create new user instance (auth or anon)
+        boolean isReconnection = false;
+        User newUser = managerFactory.userManager().createUser(userName, host, authorizedUser).orElse(null);
+
+        // if user instance already exists then keep only one instance
+        if (newUser == null) {
+            User anotherUser = managerFactory.userManager().getUserByName(userName).orElse(null);
+            if (anotherUser != null) {
+                boolean canDisconnectAuthDueAnotherInstance = managerFactory.configSettings().isAuthenticationActivated();
+                boolean canDisconnectAnonDueSameHost = !managerFactory.configSettings().isAuthenticationActivated()
+                        && ANON_IDENTIFY_BY_HOST
+                        && Objects.equals(anotherUser.getHost(), host);
+                boolean canDisconnectAnyDueSessionRestore = Objects.equals(restoreSessionId, anotherUser.getRestoreSessionId());
+                if (canDisconnectAuthDueAnotherInstance
+                        || canDisconnectAnonDueSameHost
+                        || canDisconnectAnyDueSessionRestore) {
+                    anotherUser.updateLastActivity(null);  // minimizes possible expiration
+
+                    // disconnect another user instance, but keep all active tables
+                    if (!anotherUser.getSessionId().isEmpty()) {
+                        // do not use DisconnectReason.Disconnected here - it will remove user from all tables,
+                        // but it must remove only session without any tables
+                        String instanceReason = canDisconnectAnyDueSessionRestore ? " (session reconnect)"
+                                : canDisconnectAnonDueSameHost ? " (same host)"
+                                : canDisconnectAuthDueAnotherInstance ? " (same user)" : "";
+                        String mes = "";
+                        mes += String.format("Disconnecting another user instance for %s (reason: %s)", userName, instanceReason);
+                        if (logger.isDebugEnabled()) {
+                            mes += String.format("\n - reason: auth (%s), anon host (%s), any session (%s)",
+                                    (canDisconnectAuthDueAnotherInstance ? "yes" : "no"),
+                                    (canDisconnectAnonDueSameHost ? "yes" : "no"),
+                                    (canDisconnectAnyDueSessionRestore ? "yes" : "no")
+                            );
+                            mes += String.format("\n - sessionId: %s => %s", anotherUser.getSessionId(), sessionId);
+                            mes += String.format("\n - name: %s => %s", anotherUser.getName(), userName);
+                            mes += String.format("\n - host: %s => %s", anotherUser.getHost(), host);
+                        }
+                        logger.info(mes);
+
+                        // kill another instance
+                        DisconnectReason reason = DisconnectReason.AnotherUserInstance;
+                        if (ANON_IDENTIFY_BY_HOST && Objects.equals(anotherUser.getHost(), host)) {
+                            // if user reconnects by itself then must hide another instance message
+                            reason = DisconnectReason.AnotherUserInstanceSilent;
+                        }
+
+                        managerFactory.userManager().disconnect(anotherUser.getId(), reason);
                     }
+                    isReconnection = true;
+                    newUser = anotherUser;
                 } else {
-                    return "User name " + userName + " already in use (or your IP address changed)";
+                    return "User " + userName + " already connected or your IP address changed - try another user";
                 }
             } else {
                 // code never goes here
                 return "Can't find connected user name " + userName;
             }
         }
-        User user = selectUser.get();
-        if (!managerFactory.userManager().connectToSession(sessionId, user.getId())) {
-            return "Error connecting " + userName;
+
+        // link user with current session
+        newUser.setRestoreSessionId("");
+        this.userId = newUser.getId();
+        if (!managerFactory.userManager().connectToSession(sessionId, this.userId)) {
+            return "Error link user " + userName + " with session " + sessionId;
         }
-        this.userId = user.getId();
-        if (reconnect) { // must be connected to receive the message
-            Optional<GamesRoom> room = managerFactory.gamesRoomManager().getRoom(managerFactory.gamesRoomManager().getMainRoomId());
-            if (!room.isPresent()) {
-                logger.warn("main room not found"); // after server restart users try to use old rooms on reconnect
-                return null;
-            }
-            managerFactory.chatManager().joinChat(room.get().getChatId(), userId);
-            managerFactory.chatManager().sendReconnectMessage(userId);
+
+        // connect to lobby (other chats must be joined from a client side on table panel creating process)
+        GamesRoom lobby = managerFactory.gamesRoomManager().getRoom(managerFactory.gamesRoomManager().getMainRoomId()).orElse(null);
+        if (lobby != null) {
+            managerFactory.chatManager().joinChat(lobby.getChatId(), this.userId);
+        } else {
+            // TODO: outdated code? Need research server logs and fix or delete it, 2023-12-04
+            logger.warn("main room not found"); // after server restart users try to use old rooms on reconnect for some reason
+        }
+
+        // all fine
+        newUser.setUserState(User.UserState.Connected);
+        newUser.setRestoreSessionId(newUser.getSessionId());
+
+        // restore all active tables
+        // run in diff thread, so user will be connected anyway (e.g. on some errors in onReconnect)
+        final User reconnectUser = newUser;
+        if (isReconnection) {
+            managerFactory.threadExecutor().getCallExecutor().execute(reconnectUser::onReconnect);
+        }
+
+        // inform about reconnection
+        if (isReconnection) {
+            managerFactory.chatManager().sendReconnectMessage(this.userId);
         }
 
         return null;
@@ -294,13 +366,13 @@ public class Session {
 
     public void connectAdmin() {
         this.isAdmin = true;
-        User user = managerFactory.userManager().createUser("Admin", host, null).orElse(
-                managerFactory.userManager().getUserByName("Admin").get());
+        User user = managerFactory.userManager().createUser(User.ADMIN_NAME, host, null)
+                .orElse(managerFactory.userManager().getUserByName(User.ADMIN_NAME).get());
         UserData adminUserData = UserData.getDefaultUserDataView();
         adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
         user.setUserData(adminUserData);
         if (!managerFactory.userManager().connectToSession(sessionId, user.getId())) {
-            logger.info("Error connecting Admin!");
+            logger.info("Error connecting as admin");
         } else {
             user.setUserState(User.UserState.Connected);
         }
@@ -354,67 +426,39 @@ public class Session {
         return sessionId;
     }
 
-    // because different threads can activate this
-    public void userLostConnection() {
-        Optional<User> _user = managerFactory.userManager().getUser(userId);
-        if (!_user.isPresent()) {
-            return; //user was already disconnected by other thread
-        }
-        User user = _user.get();
-        if (!user.isConnected()) {
-            return;
-        }
-        if (!user.getSessionId().equals(sessionId)) {
-            // user already reconnected with another instance
-            logger.info("OLD SESSION IGNORED - " + user.getName());
-        } else {
-            // logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
-        }
-    }
-
-    public void kill(DisconnectReason reason) {
-        boolean lockSet = false;
-        try {
-            if (lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
-                lockSet = true;
-                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
-            } else {
-                logger.error("SESSION LOCK - kill: userId " + userId);
-            }
-            managerFactory.userManager().removeUserFromAllTablesAndChat(userId, reason);
-        } catch (InterruptedException ex) {
-            logger.error("SESSION LOCK - kill: userId " + userId, ex);
-        } finally {
-            if (lockSet) {
-                lock.unlock();
-                logger.debug("SESSION LOCK UNLOCK sessionId: " + sessionId);
-
-            }
-        }
-
-    }
-
+    /**
+     * Send event/command to the client
+     */
     public void fireCallback(final ClientCallback call) {
-        boolean lockSet = false;
+        boolean lockSet = false; // TODO: research about locks, why it here? 2023-12-06
         try {
             if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
                 call.setMessageId(messageId.incrementAndGet());
                 lockSet = true;
                 Callback callback = new Callback(call);
-                callbackHandler.handleCallbackOneway(callback);
+                callbackHandler.handleCallbackOneway(callback, SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION);
             }
         } catch (InterruptedException ex) {
-            logger.warn("SESSION LOCK - fireCallback - userId: " + userId + " messageId: " + call.getMessageId(), ex);
+            // already sending another command (connection problem?)
+            if (call.getMethod().equals(ClientCallbackMethod.GAME_INIT)
+                    || call.getMethod().equals(ClientCallbackMethod.START_GAME)) {
+                // it's ok use case, user has connection problem so can't send game init (see sendInfoAboutPlayersNotJoinedYetAndTryToFixIt)
+            } else {
+                logger.warn("SESSION LOCK, possible connection problem - fireCallback - userId: " + userId + " messageId: " + call.getMessageId(), ex);
+            }
         } catch (HandleCallbackException ex) {
+            // something wrong, maybe connection problem
+            logger.warn("SESSION CALLBACK EXCEPTION - " + ThreadUtils.findRootException(ex) + ", userId " + userId + ", messageId: " + call.getMessageId(), ex);
+
+            // do not send data anymore (user must reconnect)
             this.valid = false;
-            managerFactory.userManager().getUser(userId).ifPresent(user -> {
-                user.setUserState(User.UserState.Disconnected);
-                logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId + " messageId: " + call.getMessageId() + " - cause: " + getBasicCause(ex).toString());
-                logger.trace("Stack trace:", ex);
-                managerFactory.sessionManager().disconnect(sessionId, LostConnection);
-            });
-        } catch (Exception ex) {
-            logger.warn("Unspecific exception:", ex);
+            managerFactory.sessionManager().disconnect(sessionId, LostConnection, true);
+        } catch (Throwable ex) {
+            logger.error("SESSION CALLBACK UNKNOWN EXCEPTION - " + ThreadUtils.findRootException(ex) + ", userId " + userId + ", messageId: " + call.getMessageId(), ex);
+
+            // do not send data anymore (user must reconnect)
+            this.valid = false;
+            managerFactory.sessionManager().disconnect(sessionId, LostConnection, true);
         } finally {
             if (lockSet) {
                 callBackLock.unlock();

@@ -3,21 +3,19 @@
  import java.awt.*;
 
  /**
+  * GUI: basic class for all full screen frames/tabs (example: game pane, deck editor pane, card viewer, etc)
+  *
   * @author BetaSteward_at_googlemail.com
   */
  public abstract class MagePane extends javax.swing.JLayeredPane {
 
      private String title = "no title set";
 
-     /**
-      * Creates new form MagePane
-      */
      public MagePane() {
          initComponents();
      }
 
      public void changeGUISize() {
-
      }
 
      public void setTitle(String title) {
@@ -52,6 +50,12 @@
      public Container getContentPane() {
          return this;
      }
+
+     /**
+      * Active table: game pane, deck editor in sideboarding mode, etc
+      * Non active table: client side panes like card viewer, deck viewer, etc
+      */
+     abstract public boolean isActiveTable();
 
      /**
       * This method is called from within the constructor to initialize the form.

@@ -585,7 +585,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         cheat = new JButton();
         cheat.setIcon(new ImageIcon(resized));
-        cheat.setToolTipText("Cheat button");
+        cheat.setToolTipText("Cheat button (activate it on your priority only)");
         cheat.addActionListener(e -> btnCheatActionPerformed(e));
 
         // tools button like hints

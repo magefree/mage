@@ -11,8 +11,10 @@ import mage.game.events.TableEventSource;
 import mage.game.result.ResultProtos.MatchProto;
 import mage.game.result.ResultProtos.MatchQuitStatus;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.DateFormat;
 import mage.util.RandomUtil;
+import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -318,6 +320,8 @@ public abstract class MatchImpl implements Match {
 
     @Override
     public void sideboard() {
+        ThreadUtils.ensureRunInGameThread();
+
         for (MatchPlayer player : this.players) {
             if (!player.hasQuit()) {
                 if (player.getDeck() != null) {
