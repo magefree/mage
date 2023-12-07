@@ -50,8 +50,8 @@ public final class Homarid extends CardImpl {
         // As long as there are exactly three tide counters on Homarid, it gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new SourceHasCounterCondition(CounterType.TIDE, 3, 3),
-            "As long as there are exactly three tide counter on {this}, it gets +1/+1.")));
-        // Whenever there are four tide counters on Homarid, remove all tide counters from it.
+            "As long as there are exactly three tide counters on {this}, it gets +1/+1.")));
+        // Whenever there are four or more tide counters on Homarid, remove all tide counters from it.
         this.addAbility(new HomaridTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.TIDE)));
     }
 
@@ -67,9 +67,9 @@ public final class Homarid extends CardImpl {
 
 class HomaridTriggeredAbility extends StateTriggeredAbility {
 
-    public HomaridTriggeredAbility(Effect effect) {
+    HomaridTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
-        setTriggerPhrase("Whenever there are four tide counters on {this}, ");
+        setTriggerPhrase("Whenever there are four or more tide counters on {this}, ");
     }
 
     private HomaridTriggeredAbility(final HomaridTriggeredAbility ability) {
@@ -83,6 +83,6 @@ class HomaridTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return new CountersSourceCount(CounterType.TIDE).calculate(game, this, null) == 4;
+        return new CountersSourceCount(CounterType.TIDE).calculate(game, this, null) >= 4;
     }
 }

@@ -102,7 +102,7 @@ class AddGlobeCountersAbility extends TriggeredAbilityImpl {
 class SnowMercyCost extends CostImpl {
 
     SnowMercyCost() {
-        this.text = "{t}, {q}, {t}, {q}, {t}";
+        this.text = "{T}, {Q}, {T}, {Q}, {T}";
     }
 
     private SnowMercyCost(final SnowMercyCost cost) {

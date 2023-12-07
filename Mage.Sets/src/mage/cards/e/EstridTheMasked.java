@@ -115,8 +115,7 @@ class EstridTheMaskedGraveyardEffect extends OneShotEffect {
 
     public EstridTheMaskedGraveyardEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "put the top seven cards of your library "
-                + "into your graveyard. Return all non-Aura enchantment cards "
+        this.staticText = "mill seven cards. Return all non-Aura enchantment cards "
                 + "from your graveyard to the battlefield, "
                 + "then do the same for Aura cards";
     }

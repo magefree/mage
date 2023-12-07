@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -31,8 +30,10 @@ public final class BattleflightEagle extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Battleflight Eagle enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn)
+                .setText("target creature gets +2/+2"));
+        ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains flying until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
