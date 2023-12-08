@@ -1098,7 +1098,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Pack Rat", 1448, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fynn, the Fangbearer", 1449, Rarity.RARE, mage.cards.f.FynnTheFangbearer.class));
         cards.add(new SetCardInfo("Brion Stoutarm", 1450, Rarity.RARE, mage.cards.b.BrionStoutarm.class));
-        cards.add(new SetCardInfo("Samut, Voice of Dissent", 1451, Rarity.RARE, mage.cards.s.SamutVoiceOfDissent.class));
+        cards.add(new SetCardInfo("Samut, Voice of Dissent", 1451, Rarity.MYTHIC, mage.cards.s.SamutVoiceOfDissent.class));
         cards.add(new SetCardInfo("Marchesa, the Black Rose", 1452, Rarity.RARE, mage.cards.m.MarchesaTheBlackRose.class));
         cards.add(new SetCardInfo("Ajani Goldmane", 1453, Rarity.MYTHIC, mage.cards.a.AjaniGoldmane.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Goldmane", "1453b", Rarity.MYTHIC, mage.cards.a.AjaniGoldmane.class, NON_FULL_USE_VARIOUS));
