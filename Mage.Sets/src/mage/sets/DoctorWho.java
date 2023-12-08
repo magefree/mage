@@ -97,6 +97,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Frostboil Snarl", 282, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 283, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Gallifrey Council Chamber", 188, Rarity.RARE, mage.cards.g.GallifreyCouncilChamber.class));
+        cards.add(new SetCardInfo("Gallifrey Falls // No More", 131, Rarity.RARE, mage.cards.g.GallifreyFallsNoMore.class));
         cards.add(new SetCardInfo("Gallifrey Stands", 132, Rarity.RARE, mage.cards.g.GallifreyStands.class));
         cards.add(new SetCardInfo("Game Trail", 284, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Glacial Fortress", 285, Rarity.RARE, mage.cards.g.GlacialFortress.class));
