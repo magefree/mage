@@ -71,7 +71,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Visions", 32, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 33, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class));
         cards.add(new SetCardInfo("Marrow-Gnawer", 34, Rarity.RARE, mage.cards.m.MarrowGnawer.class));
-        cards.add(new SetCardInfo("Pack Rat", 35, Rarity.RARE, mage.cards.p.PackRat.class));
+        cards.add(new SetCardInfo("Pack Rat", 35, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rat Colony", 36, Rarity.RARE, mage.cards.r.RatColony.class));
         cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 37, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 38, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class, NON_FULL_USE_VARIOUS));
@@ -892,7 +892,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 1158, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 1159, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ormendahl, Profane Prince", 1159, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Baral, Chief of Compliance", 1164, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class));
+        cards.add(new SetCardInfo("Baral, Chief of Compliance", 1164, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spellseeker", 1165, Rarity.RARE, mage.cards.s.Spellseeker.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 1166, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
         cards.add(new SetCardInfo("Kess, Dissident Mage", 1167, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
@@ -1091,6 +1091,15 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Abrade", 1425, Rarity.RARE, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Mass Hysteria", 1426, Rarity.RARE, mage.cards.m.MassHysteria.class));
         cards.add(new SetCardInfo("Terminate", 1427, Rarity.RARE, mage.cards.t.Terminate.class));
+        cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 1444, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Silence", 1445, Rarity.RARE, mage.cards.s.Silence.class));
+        cards.add(new SetCardInfo("Battle of Wits", 1446, Rarity.RARE, mage.cards.b.BattleOfWits.class));
+        cards.add(new SetCardInfo("Baral, Chief of Compliance", 1447, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pack Rat", 1448, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fynn, the Fangbearer", 1449, Rarity.RARE, mage.cards.f.FynnTheFangbearer.class));
+        cards.add(new SetCardInfo("Brion Stoutarm", 1450, Rarity.RARE, mage.cards.b.BrionStoutarm.class));
+        cards.add(new SetCardInfo("Samut, Voice of Dissent", 1451, Rarity.RARE, mage.cards.s.SamutVoiceOfDissent.class));
+        cards.add(new SetCardInfo("Marchesa, the Black Rose", 1452, Rarity.RARE, mage.cards.m.MarchesaTheBlackRose.class));
         cards.add(new SetCardInfo("Ajani Goldmane", 1453, Rarity.MYTHIC, mage.cards.a.AjaniGoldmane.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Goldmane", "1453b", Rarity.MYTHIC, mage.cards.a.AjaniGoldmane.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace Beleren", 1454, Rarity.MYTHIC, mage.cards.j.JaceBeleren.class, NON_FULL_USE_VARIOUS));
@@ -1106,6 +1115,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 9996, Rarity.RARE, mage.cards.r.RograkhSonOfRohgahh.class));
         cards.add(new SetCardInfo("Geralf's Messenger", 9997, Rarity.RARE, mage.cards.g.GeralfsMessenger.class));
         cards.add(new SetCardInfo("Empress Galina", 9998, Rarity.RARE, mage.cards.e.EmpressGalina.class));
-        cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 9999, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class));
+        cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 9999, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class, NON_FULL_USE_VARIOUS));
     }
 }
