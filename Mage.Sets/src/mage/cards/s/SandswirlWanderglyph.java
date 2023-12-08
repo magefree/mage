@@ -34,6 +34,8 @@ public final class SandswirlWanderglyph extends CardImpl {
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
+        this.nightCard = true;
+        this.color.setWhite(true);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
