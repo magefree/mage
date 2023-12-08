@@ -108,11 +108,12 @@ public class TableView implements Serializable {
                 buildMatchOptionsTextShared(table.getMatch().getOptions(),infoTextShort,infoTextLong);
             } else {
                 infoTextShort.append("Wins: ").append(table.getMatch().getWinsNeeded()).append(sbScore);
-                infoTextLong.append("Wins: ").append(table.getMatch().getWinsNeeded()).append(sbScore);
+                infoTextLong.append("Wins required: ").append(table.getMatch().getWinsNeeded()).append(sbScore);
             }
+            infoTextLong.append("<br>Seats: ").append(this.seatsInfo);
             if (table.getMatch().getOptions().isSpectatorsAllowed()) {
                 infoTextShort.append(", SP");
-                infoTextLong.append("<br>Spectators Allowed (SP)");
+                infoTextLong.append("<br>Spectators allowed (SP)");
             }
             infoTextLong.append("<br>Game type: ").append(table.getGameType());
             infoTextLong.append("<br>Deck type: ").append(table.getDeckType());
@@ -148,7 +149,6 @@ public class TableView implements Serializable {
             infoTextShort.append("Wins: ").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded());
             infoTextLong.append("Wins required: ").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded())
                     .append(" (Best of ").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded()*2-1).append(")");
-            infoTextShort.append(", Seats: ").append(this.seatsInfo);
             infoTextLong.append("<br>Seats: ").append(this.seatsInfo);
             switch (table.getState()) {
                 case WAITING:
@@ -169,7 +169,7 @@ public class TableView implements Serializable {
                     }
                     if (table.getTournament().getOptions().isWatchingAllowed()) {
                         infoTextShort.append(", SP");
-                        infoTextLong.append("<br>Spectators Allowed (SP)");
+                        infoTextLong.append("<br>Spectators allowed (SP)");
                     }
                     infoTextLong.append("<br>Game type: ").append(table.getGameType());
                     infoTextLong.append("<br>Deck type: ").append(table.getDeckType());
@@ -209,11 +209,11 @@ public class TableView implements Serializable {
         } else {
             shortBuilder.append(", Time: ").append(options.getMatchTimeLimit().toString())
                     .append("(+").append(options.getMatchBufferTime().toString()).append(")");
-            longBuilder.append("<br>Buffer time: ").append(options.getMatchTimeLimit().toString());
+            longBuilder.append("<br>Buffer time: ").append(options.getMatchBufferTime().toString());
         }
         int customOptions = 0;
         if (options.getMulliganType() != MulliganType.GAME_DEFAULT) {
-            longBuilder.append("<br>Mulligan:\"").append(options.getMulliganType().toString()).append("\"");
+            longBuilder.append("<br>Mulligan: \"").append(options.getMulliganType().toString()).append("\"");
             customOptions += 1;
         }
         if (options.getFreeMulligans() > 0) {

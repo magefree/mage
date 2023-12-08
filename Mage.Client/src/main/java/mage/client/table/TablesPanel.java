@@ -94,15 +94,13 @@ public class TablesPanel extends javax.swing.JPanel {
             .addColumn(5, 180, String.class, "Game Type",null)
             .addColumn(6, 80, String.class, "Info",
                     "<b>Match / Tournament settings</b>"
-                            + "<br>Wins = Number of games you need to wins to win a match"  
-                            + "<br>Time = Time limit per player"  
-                            + "<br>FM: = Numbers of freee mulligans"
-                            + "<br>Constr.: = Construction time for limited tournament formats"                              
-                            + "<br>RB = Rollback allowed"                            
-                            + "<br>PC = Planechase active"
-                            + "<br>EC = One or more emblem cards in use"
+                            + "<br>Wins = Number of games you need to wins to win a match"
+                            + "<br>Time = Time limit per player"
+                            + "<br>Constr.: = Construction time for limited tournament formats"
+                            + "<br>RB = Rollbacks allowed"
                             + "<br>SP = Spectators allowed"
                             + "<br>Rng: Range of visibility for multiplayer matches"
+                            + "<br>Custom options: Nonstandard options, hover for details"
             )
             .addColumn(7, 120, String.class, "Status",
                     "<b>Table status</b><br>"
