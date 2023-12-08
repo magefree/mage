@@ -159,7 +159,7 @@ public class TableView implements Serializable {
                     }
                     buildMatchOptionsTextShared(table.getTournament().getOptions().getMatchOptions(), infoTextShort, infoTextLong);
                     if (table.getTournament().getTournamentType().isLimited()) {
-                        infoTextShort.append(", Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
+                        infoTextShort.append(", Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append("m");
                         infoTextLong.append("<br>Construction time: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Minutes");
                     }
                     if (table.getTournament().getOptions().getLimitedOptions() instanceof DraftOptions) {
@@ -204,11 +204,9 @@ public class TableView implements Serializable {
 
     private void buildMatchOptionsTextShared(MatchOptions options, StringBuilder shortBuilder, StringBuilder longBuilder){
         longBuilder.append("<br>Time: ").append(options.getMatchTimeLimit().toString());
-        if (options.getMatchBufferTime() == MatchBufferTime.NONE){
-            shortBuilder.append(", Time: ").append(options.getMatchTimeLimit().toString());
-        } else {
-            shortBuilder.append(", Time: ").append(options.getMatchTimeLimit().toString())
-                    .append("(+").append(options.getMatchBufferTime().toString()).append(")");
+        shortBuilder.append(", Time: ").append(options.getMatchTimeLimit().getShortName());
+        if (options.getMatchBufferTime() != MatchBufferTime.NONE){
+            shortBuilder.append("(+").append(options.getMatchBufferTime().getShortName()).append(")");
             longBuilder.append("<br>Buffer time: ").append(options.getMatchBufferTime().toString());
         }
         int customOptions = 0;
