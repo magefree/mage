@@ -62,7 +62,7 @@ public final class TaintedSpecter extends CardImpl {
 
 class TaintedSpecterEffect extends OneShotEffect {
 
-    public TaintedSpecterEffect() {
+    TaintedSpecterEffect() {
         super(Outcome.Detriment);
         staticText = "Target player discards a card unless they put a card from their hand on top of their library. "
                 + "If that player discards a card this way, {this} deals 1 damage to each creature and each player";
@@ -78,11 +78,9 @@ class TaintedSpecterEffect extends OneShotEffect {
         if (targetPlayer == null) {
             return false;
         }
-
         if (targetPlayer.getHand().isEmpty()) {
             return true;
         }
-
         final String message = "Discard a card, or put a card from your hand on top of your library?";
         if (targetPlayer.chooseUse(outcome, message, null, "Discard a card", "Put a card from your hand on top", source, game)) {
             // Discard a card
@@ -95,7 +93,6 @@ class TaintedSpecterEffect extends OneShotEffect {
         } else {
             // Put a card from your hand on top of your library
             TargetCardInHand target = new TargetCardInHand();
-            target.withNotTarget(true);
             target.setTargetName("a card from your hand to put on top of your library");
             targetPlayer.choose(Outcome.Detriment, target, source, game);
             Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);

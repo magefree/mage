@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.keyword.ExploreSourceEffect;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -19,8 +20,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import static mage.abilities.effects.keyword.ExploreSourceEffect.explorePermanent;
 
 /**
  *
@@ -57,7 +56,8 @@ public final class HakbalOfTheSurgingSoul extends CardImpl {
 class HakbalOfTheSurgingSoulExploreEffect extends OneShotEffect {
 
     HakbalOfTheSurgingSoulExploreEffect( ) {
-        super(Outcome.Untap);
+        super(Outcome.Benefit);
+        staticText = "each Merfolk creature you control explores";
     }
 
     HakbalOfTheSurgingSoulExploreEffect(HakbalOfTheSurgingSoulExploreEffect effect ) {
@@ -76,11 +76,11 @@ class HakbalOfTheSurgingSoulExploreEffect extends OneShotEffect {
             target.withChooseHint("the order in which to explore (first selected will explore first)");
             player.choose(outcome, target, source, game);
             for (UUID targetId : target.getTargets()) {
-                explorePermanent(game, targetId, source, 1);
+                ExploreSourceEffect.explorePermanent(game, targetId, source, 1);
             }
         } else {
             for (Permanent creature : creatures) {
-                explorePermanent(game, creature.getId(), source, 1);
+                ExploreSourceEffect.explorePermanent(game, creature.getId(), source, 1);
             }
         }
 

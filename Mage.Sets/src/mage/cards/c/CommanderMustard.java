@@ -53,7 +53,7 @@ public final class CommanderMustard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new GainAbilityControlledEffect(new AttacksTriggeredAbility(
                 new DamageTargetEffect(1), false, "Whenever this creature attacks, " +
                 "it deals 1 damage to defending player.", SetTargetPointer.PLAYER
-        ), Duration.WhileOnBattlefield, filter, true), new ManaCostsImpl<>("{2}{R}{W}")));
+        ), Duration.EndOfTurn, filter, true).withDurationRuleAtStart(true), new ManaCostsImpl<>("{2}{R}{W}")));
     }
 
     private CommanderMustard(final CommanderMustard card) {
