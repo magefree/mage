@@ -2,11 +2,14 @@ package org.mage.test.serverside;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.Game;
 import mage.view.GameView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.UUID;
 
 /**
@@ -25,6 +28,16 @@ public class GameViewTest extends CardTestPlayerBase {
         UUID userA = UUID.randomUUID();
         UUID userB = UUID.randomUUID();
         UUID userWatcher = UUID.randomUUID();
+
+        // game copy test
+        Assert.assertEquals(0, currentGame.getOptions().bannedUsers.size());
+        Game copiedGame = currentGame.copy();
+        Assert.assertEquals(0, copiedGame.getOptions().bannedUsers.size());
+        //
+        currentGame.getOptions().bannedUsers.add("123");
+        Assert.assertEquals(1, currentGame.getOptions().bannedUsers.size());
+        copiedGame = currentGame.copy();
+        Assert.assertEquals(1, copiedGame.getOptions().bannedUsers.size());
 
         // normal hand
         GameView gameView = getGameView(playerA, userA);

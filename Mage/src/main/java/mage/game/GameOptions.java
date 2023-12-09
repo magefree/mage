@@ -53,16 +53,16 @@ public class GameOptions implements Serializable, Copyable<GameOptions> {
     /**
      * Names of users banned from participating in the game
      */
-    public Set<String> bannedUsers = Collections.emptySet();
+    public Set<String> bannedUsers = new HashSet<>();
 
     /**
      * Cards to be given to each player as emblems
      */
-    public Collection<DeckCardInfo> perPlayerEmblemCards = Collections.emptySet();
+    public Collection<DeckCardInfo> perPlayerEmblemCards = new HashSet<>();
     /**
      * Cards to be given to the starting player as emblems
      */
-    public Collection<DeckCardInfo> globalEmblemCards = Collections.emptySet();
+    public Collection<DeckCardInfo> globalEmblemCards = new HashSet<>();
 
 
     // PLANECHASE game mode
