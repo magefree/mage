@@ -97,8 +97,11 @@ public class GameSessionWatcher {
     }
 
     public GameView getGameView() {
-        GameView gameView = new GameView(game.getState(), game, null, userId);
-        processWatchedHands(game, userId, gameView);
+        // game view calculation can take some time, so use copy for thread save (protection from ConcurrentModificationException)
+        Game sourceGame = game.copy();
+
+        GameView gameView = new GameView(sourceGame.getState(), sourceGame, null, userId);
+        processWatchedHands(sourceGame, userId, gameView);
         return gameView;
     }
 
