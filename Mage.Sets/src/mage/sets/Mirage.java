@@ -75,6 +75,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Chariot of the Sun", 297, Rarity.UNCOMMON, mage.cards.c.ChariotOfTheSun.class));
         cards.add(new SetCardInfo("Choking Sands", 113, Rarity.COMMON, mage.cards.c.ChokingSands.class));
         cards.add(new SetCardInfo("Cinder Cloud", 165, Rarity.UNCOMMON, mage.cards.c.CinderCloud.class));
+        cards.add(new SetCardInfo("Circle of Despair", 259, Rarity.RARE, mage.cards.c.CircleOfDespair.class));
         cards.add(new SetCardInfo("Civic Guildmage", 7, Rarity.COMMON, mage.cards.c.CivicGuildmage.class));
         cards.add(new SetCardInfo("Cloak of Invisibility", 58, Rarity.COMMON, mage.cards.c.CloakOfInvisibility.class));
         cards.add(new SetCardInfo("Consuming Ferocity", 166, Rarity.UNCOMMON, mage.cards.c.ConsumingFerocity.class));
