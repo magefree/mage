@@ -612,12 +612,15 @@ public class GameController implements GameCallback {
                 }
                 break;
             case VIEW_LIMITED_DECK:
-                viewLimitedDeck(getPlayerId(userId), userId);
+                if (data instanceof UUID) {
+                    UUID targetPlayerId = (UUID) data;
+                    viewDeckOrSideboard(getPlayerId(userId), userId, targetPlayerId, false);
+                }
                 break;
             case VIEW_SIDEBOARD:
                 if (data instanceof UUID) {
                     UUID targetPlayerId = (UUID) data;
-                    viewSideboard(getPlayerId(userId), userId, targetPlayerId);
+                    viewDeckOrSideboard(getPlayerId(userId), userId, targetPlayerId, true);
                 }
                 break;
             default:
@@ -678,31 +681,37 @@ public class GameController implements GameCallback {
         }
     }
 
-    private void viewLimitedDeck(UUID playerId, UUID userId) {
-        Player viewLimitedDeckPlayer = game.getPlayer(playerId);
-        if (viewLimitedDeckPlayer != null) {
-            if (viewLimitedDeckPlayer.isHuman()) {
-                for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
-                    if (p.getPlayer().getId().equals(playerId)) {
-                        Optional<User> u = managerFactory.userManager().getUser(userId);
-                        if (u.isPresent() && p.getDeck() != null) {
-                            u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
-                        }
-                    }
-                }
-            }
+    private void viewDeckOrSideboard(UUID playerId, UUID userId, UUID targetPlayerId, boolean isSideboardOnly) {
+        Player requestPlayer = game.getPlayer(playerId);
+        Player targetPlayer = game.getPlayer(targetPlayerId);
+        if (requestPlayer == null || targetPlayer == null) {
+            return;
         }
-    }
 
-    private void viewSideboard(UUID playerId, UUID userId, UUID targetPlayerId) {
-        Player needPlayer = game.getPlayer(playerId);
-        if (needPlayer != null && needPlayer.isHuman()) {
-            for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
-                if (p.getPlayer().getId().equals(playerId)) {
-                    Optional<User> u = managerFactory.userManager().getUser(userId);
-                    u.ifPresent(user -> user.ccViewSideboard(tableId, game.getId(), targetPlayerId));
-                }
-            }
+        // allows for itself or computers only
+        // TODO: implement allow deck view for all (same as allow hand view for all)
+        if (!requestPlayer.getId().equals(targetPlayer.getId()) && !targetPlayer.isComputer()) {
+            logger.error("Player " + requestPlayer.getName() + " trying to cheat with deck/sideboard view");
+            // TODO: inform other players about cheating?
+            return;
+        }
+
+        User user = managerFactory.userManager().getUser(userId).orElse(null);
+        Table table = managerFactory.tableManager().getTable(tableId);
+        if (user == null || table == null) {
+            return;
+        }
+
+        MatchPlayer deckSource = table.getMatch().getPlayer(targetPlayerId);
+        if (deckSource == null) {
+            return;
+        }
+
+        if (isSideboardOnly) {
+            // sideboard data already sent in PlayerView, so no need to re-sent it TODO: re-sent deck instead?
+            user.ccViewSideboard(tableId, game.getId(), targetPlayerId);
+        } else {
+            user.ccViewLimitedDeck(deckSource.getDeckForViewer(), tableId, requestsOpen, true);
         }
     }
 

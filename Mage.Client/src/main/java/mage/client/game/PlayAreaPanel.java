@@ -1,6 +1,5 @@
 package mage.client.game;
 
-import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
@@ -32,6 +31,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     private final JPopupMenu popupMenu;
     private UUID playerId;
+    private String playerName;
     private UUID gameId;
     private boolean isMe = false;
     private boolean smallMode = false;
@@ -67,6 +67,11 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         setOpaque(false);
         battlefieldPanel.setOpaque(false);
 
+        // data init
+        init(player, bigCard, gameId, priorityTime);
+        update(null, player, null);
+
+        // init popup menu (must run after data init)
         popupMenu = new JPopupMenu();
         if (options.isPlayer) {
             addPopupMenuPlayer(player.getUserData().isAllowRequestHandToAll());
@@ -74,10 +79,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             addPopupMenuWatcher();
         }
         this.add(popupMenu);
-        setGUISize();
 
-        init(player, bigCard, gameId, priorityTime);
-        update(null, player, null);
+        setGUISize();
     }
 
     public void CleanUp() {
@@ -311,49 +314,16 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         // Reset the replacement and yes/no dialogs that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL, gameId, null));
 
-        JMenu handCardsMenu = new JMenu("Cards on hand");
-        handCardsMenu.setMnemonic(KeyEvent.VK_H);
-        popupMenu.add(handCardsMenu);
-
-        if (!options.playerItself) {
-            menuItem = new JMenuItem("Request permission to see the hand cards");
-            menuItem.setMnemonic(KeyEvent.VK_P);
-            handCardsMenu.add(menuItem);
-
-            // Request to see hand cards
-            menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId));
-        } else {
-            allowViewHandCardsMenuItem = new JCheckBoxMenuItem("Allow hand requests from other users", allowRequestToShowHandCards);
-            allowViewHandCardsMenuItem.setMnemonic(KeyEvent.VK_A);
-            allowViewHandCardsMenuItem.setToolTipText("Watchers or other players can request your hand cards once per game. Re-activate it to allow new requests.");
-            handCardsMenu.add(allowViewHandCardsMenuItem);
-
-            // requests allowed (disable -> enable to reset requested list)
-            allowViewHandCardsMenuItem.addActionListener(e -> {
-                boolean requestsAllowed = ((JCheckBoxMenuItem) e.getSource()).getState();
-                PreferencesDialog.setPrefValue(KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, requestsAllowed);
-                SessionHandler.sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON : PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
-            });
-
-            menuItem = new JMenuItem("Revoke all permission(s) to see your hand cards");
-            menuItem.setMnemonic(KeyEvent.VK_R);
-            menuItem.setToolTipText("Revoke already granted permission for all spectators to see your hand cards.");
-            handCardsMenu.add(menuItem);
-
-            // revoke permissions to see hand cards
-            menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS, gameId, null));
-        }
-
+        JMenu rollbackMainItem = new JMenu("Rollback");
+        rollbackMainItem.setToolTipText("The game will be rolled back to the start of the requested turn if all players agree");
+        popupMenu.add(rollbackMainItem);
         if (options.rollbackTurnsAllowed) {
             ActionListener rollBackActionListener = e -> {
                 int turnsToRollBack = Integer.parseInt(e.getActionCommand());
                 SessionHandler.sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
             };
 
-            JMenu rollbackMainItem = new JMenu("Rollback");
             rollbackMainItem.setMnemonic(KeyEvent.VK_R);
-            rollbackMainItem.setToolTipText("The game will be rolled back to the start of the requested turn if all players agree.");
-            popupMenu.add(rollbackMainItem);
 
             menuItem = new JMenuItem("To the start of the current turn");
             menuItem.setMnemonic(KeyEvent.VK_C);
@@ -378,7 +348,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             menuItem.setActionCommand("3");
             menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
-
+        } else {
+            rollbackMainItem.setText(rollbackMainItem.getText() + ", restricted");
         }
 
         JMenu concedeMenu = new JMenu("Concede");
@@ -443,30 +414,65 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-
         popupMenu.addSeparator();
 
-        // view deck
-        menuItem = new JMenuItem("<html>View player's deck");
-        menuItem.setMnemonic(KeyEvent.VK_D);
+        // view hands
+        JMenu handCardsMenu = new JMenu(String.format("Cards on hand (%s)", (options.playerItself ? "me" : playerName)));
+        handCardsMenu.setMnemonic(KeyEvent.VK_H);
+        popupMenu.add(handCardsMenu);
+        if (!options.playerItself) {
+            menuItem = new JMenuItem("Request permission to see the hand cards");
+            menuItem.setMnemonic(KeyEvent.VK_P);
+            handCardsMenu.add(menuItem);
+
+            // Request to see hand cards
+            menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId));
+        } else {
+            allowViewHandCardsMenuItem = new JCheckBoxMenuItem("Allow hand requests from other users", allowRequestToShowHandCards);
+            allowViewHandCardsMenuItem.setMnemonic(KeyEvent.VK_A);
+            allowViewHandCardsMenuItem.setToolTipText("Watchers or other players can request your hand cards once per game. Re-activate it to allow new requests.");
+            handCardsMenu.add(allowViewHandCardsMenuItem);
+
+            // requests allowed (disable -> enable to reset requested list)
+            allowViewHandCardsMenuItem.addActionListener(e -> {
+                boolean requestsAllowed = ((JCheckBoxMenuItem) e.getSource()).getState();
+                PreferencesDialog.setPrefValue(KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, requestsAllowed);
+                SessionHandler.sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON : PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
+            });
+
+            menuItem = new JMenuItem("Revoke all permission(s) to see your hand cards");
+            menuItem.setMnemonic(KeyEvent.VK_R);
+            menuItem.setToolTipText("Revoke already granted permission for all spectators to see your hand cards.");
+            handCardsMenu.add(menuItem);
+
+            // revoke permissions to see hand cards
+            menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS, gameId, null));
+        }
+
+        // view deck (allows to view only own deck or computer)
+        // it's a client side checks... same checks must be on server side too (see PlayerView)
+        menuItem = new JMenuItem(String.format("<html>View deck (%s)", (options.playerItself ? "me" : playerName)));
         popupMenu.add(menuItem);
-        menuItem.addActionListener(e -> {
-            SessionHandler.sendPlayerAction(PlayerAction.VIEW_LIMITED_DECK, gameId, null);
-        });
+        if (options.playerItself || !options.isHuman) {
+            menuItem.setMnemonic(KeyEvent.VK_D);
+            menuItem.addActionListener(e -> {
+                SessionHandler.sendPlayerAction(PlayerAction.VIEW_LIMITED_DECK, gameId, playerId);
+            });
+        } else {
+            menuItem.setText(menuItem.getText() + ", restricted");
+        }
 
         // view sideboard (allows to view only own sideboard or computer)
         // it's a client side checks... same checks must be on server side too (see PlayerView)
+        menuItem = new JMenuItem(String.format("<html>View sideboard (%s)", (options.playerItself ? "me" : playerName)));
+        popupMenu.add(menuItem);
         if (options.playerItself || !options.isHuman) {
-            String menuCaption = "<html>View my sideboard";
-            if (!options.isHuman) {
-                menuCaption = "<html>View computer's sideboard";
-            }
-            menuItem = new JMenuItem(menuCaption);
             menuItem.setMnemonic(KeyEvent.VK_S);
-            popupMenu.add(menuItem);
             menuItem.addActionListener(e -> {
                 SessionHandler.sendPlayerAction(PlayerAction.VIEW_SIDEBOARD, gameId, playerId);
             });
+        } else {
+            menuItem.setText(menuItem.getText() + ", restricted");
         }
     }
 
@@ -485,10 +491,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             MageFrame.getInstance().showUserRequestDialog(message);
         });
 
-        menuItem = new JMenuItem("Request permission to see hand cards");
-        popupMenu.add(menuItem);
-
         // Request to see hand cards
+        menuItem = new JMenuItem(String.format("Request permission to see hand cards (%s)", playerName));
+        popupMenu.add(menuItem);
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId));
 
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
@@ -517,6 +522,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.battlefieldPanel.init(gameId, bigCard);
         this.gameId = gameId;
         this.playerId = player.getPlayerId();
+        this.playerName = player.getName();
         this.isMe = player.getControlled();
         this.btnCheat.setVisible(SessionHandler.isTestMode());
     }

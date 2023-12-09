@@ -436,7 +436,9 @@ public class Session {
                 call.setMessageId(messageId.incrementAndGet());
                 lockSet = true;
                 Callback callback = new Callback(call);
-                callbackHandler.handleCallbackOneway(callback, SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION);
+                boolean sendAsync = SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION
+                        && call.getMethod().getType().canComeInAnyOrder();
+                callbackHandler.handleCallbackOneway(callback, sendAsync);
             }
         } catch (InterruptedException ex) {
             // already sending another command (connection problem?)

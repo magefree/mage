@@ -614,6 +614,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         Component[] windows = desktopPane.getComponentsInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
         MagePaneMenuItem menuItem;
 
+        // TODO: sort menu by games, not current component order
+        //  lobby -> table 1 tourny, table 1 draft, table 1 game, table 2...
         for (int i = 0; i < windows.length; i++) {
             if (windows[i] instanceof MagePane) {
                 MagePane window = (MagePane) windows[i];
@@ -1284,34 +1286,59 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
+    private String prepareDeckEditorName(DeckEditorMode mode, Deck deck, UUID tableId) {
+        // GUI searching frame name for duplicates, so:
+        // - online editors must be unique;
+        // - offline editor must be single;
         String name;
-        if (mode == DeckEditorMode.SIDEBOARDING
-                || mode == DeckEditorMode.LIMITED_BUILDING
-                || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING
-                || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
-            name = "Deck Editor - " + tableId.toString();
-        } else {
-            if (deck != null) {
-                name = "Deck Editor - " + deck.getName();
-            } else {
+        switch (mode) {
+            case FREE_BUILDING:
+                // offline
                 name = "Deck Editor";
-            }
-            // use already open editor
-            Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-            for (Component window : windows) {
-                if (window instanceof DeckEditorPane && ((MagePane) window).getTitle().equals(name)) {
-                    setActive((MagePane) window);
-                    return;
-                }
+                break;
+            case LIMITED_BUILDING:
+            case LIMITED_SIDEBOARD_BUILDING:
+            case SIDEBOARDING:
+            case VIEW_LIMITED_DECK:
+                // online
+                name = "Deck Editor - " + mode.getTitle();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown deck editor mode: " + mode);
+        }
+
+        // additional info about deck/player
+        if (deck != null && deck.getName() != null && !deck.getName().isEmpty()) {
+            name += " - " + deck.getName();
+        }
+
+        // additional info about game
+        if (tableId != null) {
+            name += " - table " + tableId;
+        }
+
+        return name;
+    }
+
+    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int visibleTimer) {
+        // create or open new editor
+        String name = prepareDeckEditorName(mode, deck, tableId);
+
+        // already exists
+        Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+        for (Component window : windows) {
+            if (window instanceof DeckEditorPane && ((MagePane) window).getTitle().equals(name)) {
+                setActive((MagePane) window);
+                return;
             }
         }
 
-        DeckEditorPane deckEditorPane = new DeckEditorPane();
-        desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
-        deckEditorPane.setVisible(false);
-        deckEditorPane.show(mode, deck, name, tableId, time);
-        setActive(deckEditorPane);
+        // new editor
+        DeckEditorPane deckEditor = new DeckEditorPane();
+        desktopPane.add(deckEditor, JLayeredPane.DEFAULT_LAYER);
+        deckEditor.setVisible(false);
+        deckEditor.show(mode, deck, name, tableId, visibleTimer);
+        setActive(deckEditor);
     }
 
     public void showUserRequestDialog(final UserRequestMessage userRequestMessage) {

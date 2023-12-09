@@ -200,7 +200,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckArea.changeGUISize();
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
+    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int visibleTimer) {
         if (deck != null) {
             this.deck = deck;
         }
@@ -236,7 +236,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
                 this.deckArea.showSideboard(true);
                 countdown.stop();
-                this.timeout = time;
+                this.timeout = visibleTimer;
                 setTimeout(timeout);
                 if (timeout != 0) {
                     countdown.start();
@@ -278,8 +278,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.cardSelector.setVisible(false);
                 this.deckArea.setOrientation(/*limitedBuildingOrientation = */true);
                 this.deckArea.showSideboard(true);
-                this.lblDeckName.setVisible(false);
-                this.txtDeckName.setVisible(false);
+                this.lblDeckName.setVisible(true);
+                this.txtDeckName.setVisible(true);
                 this.txtTimeRemaining.setVisible(false);
                 break;
         }

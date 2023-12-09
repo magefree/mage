@@ -104,8 +104,8 @@ public final class SessionHandler {
         session.connectStop(askForReconnect, keepMySessionActive);
     }
 
-    public static void sendPlayerAction(PlayerAction playerAction, UUID gameId, Object relatedUserId) {
-        session.sendPlayerAction(playerAction, gameId, relatedUserId);
+    public static void sendPlayerAction(PlayerAction playerAction, UUID gameId, Object data) {
+        session.sendPlayerAction(playerAction, gameId, data);
     }
 
     public static void quitTournament(UUID tournamentId) {

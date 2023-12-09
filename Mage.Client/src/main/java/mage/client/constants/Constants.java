@@ -101,12 +101,21 @@ public final class Constants {
     }
 
     public enum DeckEditorMode {
+        FREE_BUILDING(""),
+        LIMITED_BUILDING("building"),
+        LIMITED_SIDEBOARD_BUILDING("sideboard building"),
+        SIDEBOARDING("sideboarding"),
+        VIEW_LIMITED_DECK("view");
 
-        FREE_BUILDING,
-        LIMITED_BUILDING,
-        LIMITED_SIDEBOARD_BUILDING,
-        SIDEBOARDING,
-        VIEW_LIMITED_DECK
+        private String title;
+
+        DeckEditorMode(String title) {
+            this.title = title;
+        }
+
+        public String getTitle() {
+            return title;
+        }
     }
 
     public enum SortBy {
