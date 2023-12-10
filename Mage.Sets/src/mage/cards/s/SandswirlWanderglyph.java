@@ -107,11 +107,11 @@ class CantAttackSourcePlayerOrPlaneswalkerThisTurnEffect extends RestrictionEffe
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         if (game.getPlayer(defenderId) != null){
-            return source.getControllerId() != defenderId;
+            return !(source.getControllerId().equals(defenderId));
         }
         Permanent defender = game.getPermanent(defenderId);
         if (defender != null && defender.isPlaneswalker()){
-            return source.getControllerId() != defender.getControllerId();
+            return !(source.getControllerId().equals(defender.getControllerId()));
         }
         return true;
     }
