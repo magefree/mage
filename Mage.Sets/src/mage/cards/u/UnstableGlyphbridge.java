@@ -2,6 +2,8 @@ package mage.cards.u;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CraftAbility;
 import mage.cards.CardImpl;
@@ -33,7 +35,12 @@ public final class UnstableGlyphbridge extends CardImpl {
         this.secondSideCardClazz = mage.cards.s.SandswirlWanderglyph.class;
 
         // When Unstable Glyphbridge enters the battlefield, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new UnstableGlyphbridgeEffect()));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+                new UnstableGlyphbridgeEffect()), CastFromEverywhereSourceCondition.instance,
+                "When {this} enters the battlefield, if you cast it, " +
+                    "for each player, choose a creature with power 2 or less that player controls. " +
+                    "Then destroy all creatures except creatures chosen this way."
+        ));
 
         // Craft with artifact {3}{W}{W}
         this.addAbility(new CraftAbility("{3}{W}{W}"));
@@ -53,7 +60,7 @@ public final class UnstableGlyphbridge extends CardImpl {
 class UnstableGlyphbridgeEffect extends OneShotEffect {
     UnstableGlyphbridgeEffect() {
         super(Outcome.Benefit);
-        staticText = "if you cast it, for each player, choose a creature with power 2 or less that player controls. " +
+        staticText = "for each player, choose a creature with power 2 or less that player controls. " +
                 "Then destroy all creatures except creatures chosen this way.";
     }
 
@@ -68,7 +75,6 @@ class UnstableGlyphbridgeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
