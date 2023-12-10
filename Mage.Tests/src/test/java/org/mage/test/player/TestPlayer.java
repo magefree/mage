@@ -1026,10 +1026,10 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
-                        // show available abilities
-                        if (params[0].equals(SHOW_COMMAND_AVAILABLE_ABILITIES) && params.length == 1) {
+                        // show available abilities: show only unique list
+                        if (params[0].equals(SHOW_COMMAND_AVAILABLE_ABILITIES) && params.length == 2) {
                             printStart(game, action.getActionName());
-                            printAbilities(game, computerPlayer.getPlayable(game, true));
+                            printAbilities(game, computerPlayer.getPlayable(game, true, Zone.ALL, Boolean.parseBoolean(params[1])));
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -1247,13 +1247,12 @@ public class TestPlayer implements Player {
         if (abilities == null) {
             return;
         }
-
         List<String> data = abilities.stream()
                 .map(a -> (a.getZone() + " -> "
                         + a.getSourceObject(game).getIdName() + " -> "
                         + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
                         + (a.toString().length() > 0
-                        ? a.toString().substring(0, Math.min(40, a.toString().length())) + "..."
+                        ? CardUtil.substring(a.toString(), 40, "...")
                         : a.getClass().getSimpleName())
                 ))
                 .sorted()

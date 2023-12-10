@@ -540,7 +540,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void showAvailableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
-        show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES);
+        showAvailableAbilities(showName, turnNum, step, player, true);
+    }
+
+    /**
+     * @param showOnlyUniqueAbilities return full list or unique only (duplicated abilities with same name will be combined in one)
+     */
+    public void showAvailableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player, Boolean showOnlyUniqueAbilities) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES, showOnlyUniqueAbilities.toString());
     }
 
     public void showAvailableMana(String showName, int turnNum, PhaseStep step, TestPlayer player) {

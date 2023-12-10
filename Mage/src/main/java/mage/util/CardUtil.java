@@ -905,7 +905,7 @@ public final class CardUtil {
     }
 
     public static String getSimpleCountersText(int amount, String forOne, String counterType) {
-        return numberToText(amount, forOne)+" "+counterType+" counter"+ (amount==1 ? "" : "s");
+        return numberToText(amount, forOne) + " " + counterType + " counter" + (amount == 1 ? "" : "s");
     }
 
     public static String getOneOneCountersText(int amount) {
@@ -1654,6 +1654,7 @@ public final class CardUtil {
         }
         return zcc;
     }
+
     /**
      * Create a MageObjectReference of the ability's source
      * Subtract 1 zcc if not on the stack, referencing when it was on the stack if it's a resolved permanent.
@@ -1702,19 +1703,21 @@ public final class CardUtil {
         }
         return costTags;
     }
+
     /**
      * Check if a specific tag exists in the cost tags of either the source ability, or the permanent source of the ability.
      * Works in any moment (even before source ability activated)
      *
      * @param game
      * @param source
-     * @param tag The tag's string identifier to look up
+     * @param tag    The tag's string identifier to look up
      * @return if the tag was found
      */
     public static boolean checkSourceCostsTagExists(Game game, Ability source, String tag) {
         Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
         return costTags != null && costTags.containsKey(tag);
     }
+
     /**
      * Find a specific tag in the cost tags of either the source ability, or the permanent source of the ability.
      * Works in any moment (even before source ability activated)
@@ -1722,11 +1725,11 @@ public final class CardUtil {
      *
      * @param game
      * @param source
-     * @param tag The tag's string identifier to look up
+     * @param tag          The tag's string identifier to look up
      * @param defaultValue A default value to return if the tag is not found
      * @return The object stored by the tag if found, the default if not
      */
-    public static <T> T getSourceCostsTag(Game game, Ability source, String tag, T defaultValue){
+    public static <T> T getSourceCostsTag(Game game, Ability source, String tag, T defaultValue) {
         Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
         if (costTags != null) {
             Object value = costTags.getOrDefault(tag, defaultValue);
@@ -1748,13 +1751,14 @@ public final class CardUtil {
         return "pay " + text;
     }
 
-    private static boolean isImmutableObject(Object o){
+    private static boolean isImmutableObject(Object o) {
         return o == null
                 || o instanceof Number || o instanceof Boolean || o instanceof String
                 || o instanceof MageObjectReference || o instanceof UUID
                 || o instanceof Enum;
     }
-    public static <T> T deepCopyObject(T value){
+
+    public static <T> T deepCopyObject(T value) {
         if (isImmutableObject(value)) {
             return value;
         } else if (value instanceof Copyable) {
@@ -1781,53 +1785,58 @@ public final class CardUtil {
             return (T) deepCopyHashMap((HashMap) value);
         } else if (value instanceof List) {
             return (T) deepCopyList((List) value);
-        } else if (value instanceof AbstractMap.SimpleImmutableEntry){ //Used by Leonin Arbiter, Vessel Of The All Consuming Wanderer as a generic Pair class
+        } else if (value instanceof AbstractMap.SimpleImmutableEntry) { //Used by Leonin Arbiter, Vessel Of The All Consuming Wanderer as a generic Pair class
             AbstractMap.SimpleImmutableEntry entryValue = (AbstractMap.SimpleImmutableEntry) value;
-            return (T) new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()),deepCopyObject(entryValue.getValue()));
+            return (T) new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()), deepCopyObject(entryValue.getValue()));
         } else {
             throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " during deep copy, must add explicit handling of all Object types");
         }
     }
+
     private static <T extends Comparable<T>> TreeSet<T> deepCopyTreeSet(TreeSet<T> original) {
         if (original.getClass() != TreeSet.class) {
             throw new IllegalStateException("Unhandled TreeSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
         TreeSet<T> newSet = new TreeSet<>();
-        for (T value : original){
+        for (T value : original) {
             newSet.add((T) deepCopyObject(value));
         }
         return newSet;
     }
+
     private static <T> HashSet<T> deepCopyHashSet(Set<T> original) {
         if (original.getClass() != HashSet.class) {
             throw new IllegalStateException("Unhandled HashSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
         HashSet<T> newSet = new HashSet<>(original.size());
-        for (T value : original){
+        for (T value : original) {
             newSet.add((T) deepCopyObject(value));
         }
         return newSet;
     }
+
     private static <T> LinkedHashSet<T> deepCopyLinkedHashSet(LinkedHashSet<T> original) {
         if (original.getClass() != LinkedHashSet.class) {
             throw new IllegalStateException("Unhandled LinkedHashSet type " + original.getClass().getSimpleName() + " in deep copy");
         }
         LinkedHashSet<T> newSet = new LinkedHashSet<>(original.size());
-        for (T value : original){
+        for (T value : original) {
             newSet.add((T) deepCopyObject(value));
         }
         return newSet;
     }
+
     private static <T> List<T> deepCopyList(List<T> original) { //always returns an ArrayList
         if (original.getClass() != ArrayList.class) {
             throw new IllegalStateException("Unhandled List type " + original.getClass().getSimpleName() + " in deep copy");
         }
         ArrayList<T> newList = new ArrayList<>(original.size());
-        for (T value : original){
+        for (T value : original) {
             newList.add((T) deepCopyObject(value));
         }
         return newList;
     }
+
     private static <K, V> HashMap<K, V> deepCopyHashMap(Map<K, V> original) {
         if (original.getClass() != HashMap.class) {
             throw new IllegalStateException("Unhandled HashMap type " + original.getClass().getSimpleName() + " in deep copy");
@@ -1838,6 +1847,7 @@ public final class CardUtil {
         }
         return newMap;
     }
+
     private static <K, V> LinkedHashMap<K, V> deepCopyLinkedHashMap(Map<K, V> original) {
         if (original.getClass() != LinkedHashMap.class) {
             throw new IllegalStateException("Unhandled LinkedHashMap type " + original.getClass().getSimpleName() + " in deep copy");
@@ -1848,6 +1858,7 @@ public final class CardUtil {
         }
         return newMap;
     }
+
     private static <K extends Enum<K>, V> EnumMap<K, V> deepCopyEnumMap(Map<K, V> original) {
         if (original.getClass() != EnumMap.class) {
             throw new IllegalStateException("Unhandled EnumMap type " + original.getClass().getSimpleName() + " in deep copy");
@@ -2076,18 +2087,34 @@ public final class CardUtil {
         }
     }
 
+    public static String substring(String str, int maxLength) {
+        return substring(str, maxLength, "");
+    }
+
     /**
      * Don't raise exception, so must be used instead standard substring calls all the time
      *
      * @param str
      * @param maxLength
+     * @param overflowEnding can add ... at the end
      * @return
      */
-    public static String substring(String str, int maxLength) {
+    public static String substring(String str, int maxLength, String overflowEnding) {
         if (str == null || str.isEmpty()) {
             return str;
         }
-        return str.substring(0, Math.min(str.length(), maxLength));
+
+        // full
+        if (str.length() <= maxLength) {
+            return str;
+        }
+
+        // short
+        if (maxLength <= overflowEnding.length()) {
+            return overflowEnding.substring(0, maxLength);
+        } else {
+            return (str + overflowEnding).substring(0, maxLength - overflowEnding.length()) + overflowEnding;
+        }
     }
 
 
