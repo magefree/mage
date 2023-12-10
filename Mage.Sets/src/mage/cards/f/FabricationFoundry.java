@@ -11,6 +11,7 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.*;
@@ -27,6 +28,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.awt.*;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -93,7 +96,7 @@ enum ArtifactSpellOrActivatedAbilityCondition implements Condition {
         return object != null && object.isArtifact(game) && !source.isActivated();
     }
 }
-//Cost based on Kozilek, The Great Distortion
+//Cost based on Kozilek, The Great Distortion and CrewAbility
 class ExileTargetsTotalManaValueCost extends CostImpl {
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent("one or more other artifacts you control with total mana value X");
 
@@ -101,7 +104,6 @@ class ExileTargetsTotalManaValueCost extends CostImpl {
         filter.add(AnotherPredicate.instance);
     }
     public ExileTargetsTotalManaValueCost() {
-        this.addTarget(new TargetPermanent(1, Integer.MAX_VALUE, filter, true));
         this.text = "Exile one or more other artifacts you control with total mana value X";
     }
 
@@ -115,22 +117,42 @@ class ExileTargetsTotalManaValueCost extends CostImpl {
         if (abilityTarget == null) {
             return paid;
         }
+        Player player = game.getPlayer(ability.getControllerId());
+        if (player == null) {
+            return paid;
+        }
         int minX = abilityTarget.getManaValue();
         int sum = 0;
-        Player player = game.getPlayer(ability.getControllerId());
-        if (player == null || !this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
+        Target target = new TargetPermanent(1, Integer.MAX_VALUE, filter, true){
+            @Override
+            public String getMessage() {
+                // shows selected mana value
+                int selectedPower = this.targets.keySet().stream()
+                        .map(game::getPermanent)
+                        .filter(Objects::nonNull)
+                        .mapToInt(Permanent::getManaValue)
+                        .sum();
+                String extraInfo = "(selected mana value " + selectedPower + " of " + minX + ")";
+                if (selectedPower >= minX) {
+                    extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
+                }
+                return super.getMessage() + " " + extraInfo;
+            }
+        };
+        if (!target.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)){
             return paid;
         }
         Cards cards = new CardsImpl();
-        cards.addAll(this.getTargets().get(0).getTargets());
-        for (UUID targetId : this.getTargets().get(0).getTargets()) {
+        cards.addAll(target.getTargets());
+        for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 sum += permanent.getManaValue();
             }
         }
-        if (sum >= minX && player.moveCardsToExile(cards.getCards(game), source, game, false,null,null)) {
-            paid = true;
+        paid = (sum >= minX);
+        if (paid) {
+            player.moveCardsToExile(cards.getCards(game), source, game, false,null,null);
         }
         return paid;
     }
