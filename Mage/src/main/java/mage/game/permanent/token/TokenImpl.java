@@ -96,20 +96,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         if (!fromExistingObject) {
             abilities.addAll(ability.getSubAbilities());
         }
-
-        // TODO: remove all override and backFace changes (bug example: active transform ability in back face)
-        if (backFace != null) {
-            backFace.addAbility(ability);
-            // Maybe supposed to add subabilities here too?
-        }
     }
 
     // Directly from PermanentImpl
     @Override
     public void removeAbility(Ability abilityToRemove) {
-        if (backFace != null) {
-            backFace.removeAbility(abilityToRemove);
-        }
         if (abilityToRemove == null) {
             return;
         }
@@ -134,9 +125,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
 
         abilitiesToRemove.forEach(a -> removeAbility(a));
-        if (backFace != null) {
-            backFace.removeAbilities(abilitiesToRemove);
-        }
     }
 
     @Override
@@ -450,34 +438,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void setPower(int power) {
-        if (this.backFace != null) {
-            this.backFace.setPower(power);
-        }
         this.power = new MageInt(power);
     }
 
     @Override
     public void setToughness(int toughness) {
-        if (this.backFace != null) {
-            this.backFace.setToughness(toughness);
-        }
         this.toughness = new MageInt(toughness);
-    }
-
-    @Override
-    public void setStartingLoyalty(int startingLoyalty) {
-        if (backFace != null) {
-            backFace.setStartingLoyalty(startingLoyalty);
-        }
-        super.setStartingLoyalty(startingLoyalty);
-    }
-
-    @Override
-    public void setStartingDefense(int intArg) {
-        if (backFace != null) {
-            backFace.setStartingDefense(intArg);
-        }
-        super.setStartingDefense(intArg);
     }
 
     @Override
@@ -497,169 +463,20 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return backFace;
     }
 
-    @Override
-    public void retainAllArtifactSubTypes(Game game) {
-        if (backFace != null) {
-            backFace.retainAllArtifactSubTypes(game);
-        }
-        super.retainAllArtifactSubTypes(game);
-    }
 
     @Override
-    public void retainAllEnchantmentSubTypes(Game game) {
-        if (backFace != null) {
-            backFace.retainAllEnchantmentSubTypes(game);
-        }
-        super.retainAllEnchantmentSubTypes(game);
-    }
-
-    @Override
-    public void addSuperType(SuperType superType) {
-        if (backFace != null) {
-            backFace.addSuperType(superType);
-        }
-        super.addSuperType(superType);
-    }
-
-    @Override
-    public void removeSuperType(SuperType superType) {
-        if (backFace != null) {
-            backFace.removeSuperType(superType);
-        }
-        super.removeSuperType(superType);
-    }
-
-    @Override
-    public void addCardType(CardType... cardTypes) {
-        if (backFace != null) {
-            backFace.addCardType(cardTypes);
-        }
-        super.addCardType(cardTypes);
-    }
-
-    @Override
-    public void removeCardType(CardType... cardTypes) {
-        if (backFace != null) {
-            backFace.removeCardType(cardTypes);
-        }
-        super.removeCardType(cardTypes);
-    }
-
-    @Override
-    public void removeAllCardTypes() {
-        if (backFace != null) {
-            backFace.removeAllCardTypes();
-        }
-        super.removeAllCardTypes();
-    }
-
-    @Override
-    public void removeAllCardTypes(Game game) {
-        if (backFace != null) {
-            backFace.removeAllCardTypes(game);
-        }
-        super.removeAllCardTypes(game);
-    }
-
-    @Override
-    public void addSubType(SubType... subTypes) {
-        if (backFace != null) {
-            backFace.addSubType(subTypes);
-        }
-        super.addSubType(subTypes);
-    }
-
-    @Override
-    public void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
-        if (backFace != null) {
-            backFace.removeAllSubTypes(game, subTypeSet);
-        }
-        super.removeAllSubTypes(game, subTypeSet);
-    }
-
-    @Override
-    public void removeAllSubTypes(Game game) {
-        if (backFace != null) {
-            backFace.removeAllSubTypes(game);
-        }
-        super.removeAllSubTypes(game);
-    }
-
-    @Override
-    public void retainAllLandSubTypes(Game game) {
-        if (backFace != null) {
-            backFace.retainAllLandSubTypes(game);
-        }
-        super.retainAllLandSubTypes(game);
-    }
-
-    @Override
-    public void removeAllCreatureTypes(Game game) {
-        if (backFace != null) {
-            backFace.removeAllCreatureTypes(game);
-        }
-        super.removeAllCreatureTypes(game);
-    }
-
-    @Override
-    public void removeAllCreatureTypes() {
-        if (backFace != null) {
-            backFace.removeAllCreatureTypes();
-        }
-        super.removeAllCreatureTypes();
-    }
-
-    @Override
-    public void removeSubType(Game game, SubType subType) {
-        if (backFace != null) {
-            backFace.removeSubType(game, subType);
-        }
-        super.removeSubType(game, subType);
-    }
-
-    @Override
-    public void setIsAllCreatureTypes(boolean value) {
-        if (backFace != null) {
-            backFace.setIsAllCreatureTypes(value);
-        }
-        super.setIsAllCreatureTypes(value);
-    }
-
-    @Override
-    public void removePTCDA() {
-        if (backFace != null) {
-            backFace.removePTCDA();
-        }
-        super.removePTCDA();
-    }
-
-    @Override
-    public void setName(String name) {
-        if (backFace != null) {
-            backFace.setName(name);
-        }
-        super.setName(name);
+    public void setEntersTransformed(boolean entersTransformed) {
+        this.entersTransformed = entersTransformed;
     }
 
     @Override
     public void setColor(ObjectColor color) {
-        if (backFace != null) {
-            backFace.setColor(color);
-        }
         this.getColor().setColor(color);
     }
 
     @Override
     public void clearManaCost() {
-        if (backFace != null) {
-            backFace.clearManaCost();
-        }
         this.getManaCost().clear();
-    }
-
-    @Override
-    public void setEntersTransformed(boolean entersTransformed) {
-        this.entersTransformed = entersTransformed;
     }
 
     @Override

@@ -222,4 +222,40 @@ public class IncubateTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void test_Abilities_BackFaceOfIncubatorTokenMustNotHaveTransform() {
+        // bug: https://github.com/magefree/mage/issues/10351
+
+        // When Sculpted Perfection enters the battlefield, incubate 2. (Create an Incubator token with two +1/+1
+        // counters on it and “{2}: Transform this artifact.” It transforms into a 0/0 Phyrexian artifact creature.)
+        addCard(Zone.HAND, playerA, "Sculpted Perfection", 1); // {2}{W}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 10); // for transform and another possible (wrongly) transform
+
+        // before
+        checkPermanentCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Incubator Token", 0);
+        checkPermanentCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Token", 0);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: Transform", false);
+
+        // prepare incubator
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sculpted Perfection");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Incubator Token", 1);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Token", 0);
+        checkPlayableAbility("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: Transform", true);
+
+        // transform
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: Transform");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Incubator Token", 0);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Token", 1);
+        checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: Transform", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
 }
