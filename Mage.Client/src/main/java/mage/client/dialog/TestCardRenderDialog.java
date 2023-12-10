@@ -149,7 +149,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         if (transform) {
             // need direct transform call to keep other side info (original)
-            TransformAbility.transformPermanent(permanent, permCard.getSecondCardFace(), game, null);
+            TransformAbility.transformPermanent(permanent, game, null);
         }
 
         if (damage > 0) permanent.damage(damage, controllerId, null, game);

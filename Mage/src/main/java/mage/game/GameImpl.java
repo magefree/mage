@@ -1972,9 +1972,12 @@ public abstract class GameImpl implements Game {
         // if it was no copy of copy take the target itself
         if (newBluePrint == null) {
             newBluePrint = copyFromPermanent.copy();
+
+            // reset to original characteristics
             newBluePrint.reset(this);
 
-            //getState().addCard(permanent);
+            // workaround to find real copyable characteristics of transformed/facedown/etc permanents
+
             if (copyFromPermanent.isMorphed()
                     || copyFromPermanent.isManifested()
                     || copyFromPermanent.isFaceDown(this)) {
@@ -1982,7 +1985,7 @@ public abstract class GameImpl implements Game {
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
+                TransformAbility.transformPermanent(newBluePrint,this, source);
             }
             if (copyFromPermanent.isPrototyped()) {
                 Abilities<Ability> abilities = copyFromPermanent.getAbilities();

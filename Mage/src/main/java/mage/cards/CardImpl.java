@@ -602,6 +602,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // mtg rules method: here
         // GUI related method: search "transformable = true" in CardView
         // TODO: check and fix method usage in game engine, it's must be mtg rules logic, not GUI
+
+        // 701.28c
+        // If a spell or ability instructs a player to transform a permanent that
+        // isn’t represented by a transforming token or a transforming double-faced
+        // card, nothing happens.
         return this.secondSideCardClazz != null || this.nightCard;
     }
 
