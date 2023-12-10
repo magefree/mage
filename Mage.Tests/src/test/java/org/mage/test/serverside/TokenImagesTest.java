@@ -1,6 +1,7 @@
 package org.mage.test.serverside;
 
 import mage.MageObject;
+import mage.MageObjectImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -267,7 +268,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 .filter(card -> card instanceof PermanentToken)
                 .sorted(Comparator.comparing(Card::getExpansionSetCode))
                 .map(card -> (PermanentToken) card)
-                .map(perm -> perm.getToken().getImageNumber())
+                .map(MageObjectImpl::getImageNumber)
                 .collect(Collectors.toSet());
 
         GameView gameView = new GameView(currentGame.getState(), currentGame, playerA.getId(), null);
@@ -609,5 +610,44 @@ public class TokenImagesTest extends CardTestPlayerBase {
         execute();
 
         assert_SacredCat(3 + 5 + 1, "AKH=3", "AKR=5", "MB1=1");
+    }
+
+    @Test
+    public void test_Abilities_Incubator_MustTransformWithSameSettings() {
+        // bug with miss image data in tranformed incubator token: https://github.com/magefree/mage/issues/11535
+
+        // make sure random images take all 3 diff images
+        int needIncubatorTokens = 30;
+        int needPhyrexianTokens = 30 / 2;
+
+        // When Sculpted Perfection enters the battlefield, incubate 2. (Create an Incubator token with two +1/+1
+        // counters on it and “{2}: Transform this artifact.” It transforms into a 0/0 Phyrexian artifact creature.)
+        prepareCards_Inner(Zone.HAND, "Sculpted Perfection", 0, "MOM=" + needIncubatorTokens); // {2}{W}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3 * needIncubatorTokens);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1 * needIncubatorTokens);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2 * needIncubatorTokens); // for transform
+
+        // prepare incubator tokens
+        activate_Inner(needIncubatorTokens, "Cast Sculpted Perfection");
+
+        // transform tokens to Phyrexian
+        activate_Inner(needPhyrexianTokens, "{2}: Transform");
+
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // same set
+        assert_Inner("Sculpted Perfection", 0, 0, needIncubatorTokens,
+                "Incubator Token", needPhyrexianTokens, false, "MOM=" + needPhyrexianTokens);
+        assert_Inner("Sculpted Perfection", 0, 0, needIncubatorTokens,
+                "Phyrexian Token", needPhyrexianTokens, false, "MOM=" + needPhyrexianTokens);
+
+        // MOM-Incubator has 1 image (number is 0)
+        assert_TokenImageNumber("Incubator Token", Arrays.asList(0));
+        // MOM-Phyrexian has 3 images
+        assert_TokenImageNumber("Phyrexian Token", Arrays.asList(1, 2, 3));
     }
 }

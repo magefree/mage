@@ -279,10 +279,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             }
 
             // choose token's set code due source
+            // front side
             TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
             token.setExpansionSetCode(tokenInfo.getSetCode());
             //token.setCardNumber(""); // if token from a card then don't change a card number
             token.setImageNumber(tokenInfo.getImageNumber());
+            if (token.getBackFace() != null) {
+                // back side
+                tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token.getBackFace(), game, source == null ? null : source.getSourceId());
+                token.getBackFace().setExpansionSetCode(tokenInfo.getSetCode());
+                token.getBackFace().setImageNumber(tokenInfo.getImageNumber());
+            }
 
             List<Permanent> needTokens = new ArrayList<>();
             List<Permanent> allowedTokens = new ArrayList<>();
@@ -482,6 +489,22 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     @Override
     public boolean isEntersTransformed() {
         return this.entersTransformed && this.backFace != null;
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        super.setExpansionSetCode(expansionSetCode);
+
+        // backface can have diff images (example: Incubator/Phyrexian in MOM set)
+        // so it must be setup/copied manually
+    }
+
+    @Override
+    public void setImageNumber(Integer imageNumber) {
+        super.setImageNumber(imageNumber);
+
+        // backface can have diff images (example: Incubator/Phyrexian in MOM set)
+        // so it must be setup/copied manually
     }
 
     public static TokenImpl createTokenByClassName(String fullClassName) {
