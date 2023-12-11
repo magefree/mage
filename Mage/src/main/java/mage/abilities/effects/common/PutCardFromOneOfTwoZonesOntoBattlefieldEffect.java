@@ -11,6 +11,7 @@ import mage.constants.CommanderCardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -23,7 +24,6 @@ import mage.util.CardUtil;
 
 /**
  * "Put a {filter} card from {zone 1} or {zone 2} onto the battlefield.
- * TODO: Refactor, see #11213
  *
  * @author TheElk801, Alex-Vasile
  */
@@ -63,6 +63,10 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffect extends OneShotEffect
 
     public PutCardFromOneOfTwoZonesOntoBattlefieldEffect(FilterCard filterCard, boolean tapped, Effect effectToApplyOnPermanent) {
         this(filterCard, tapped, effectToApplyOnPermanent, Zone.HAND, Zone.GRAVEYARD);
+    }
+
+    public PutCardFromOneOfTwoZonesOntoBattlefieldEffect(FilterCard filterCard, Zone zone1, Zone zone2) {
+        this(filterCard, false, null, zone1, zone2);
     }
 
     private PutCardFromOneOfTwoZonesOntoBattlefieldEffect(final PutCardFromOneOfTwoZonesOntoBattlefieldEffect effect) {
@@ -152,9 +156,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffect extends OneShotEffect
 
     @Override
     public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
         return "you may put " + CardUtil.addArticle(this.filterCard.getMessage()) +
                 " from your hand or graveyard onto the battlefield" +
                 (this.tapped ? " tapped" : "") +

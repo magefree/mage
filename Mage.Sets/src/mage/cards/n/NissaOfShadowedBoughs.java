@@ -16,8 +16,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.card.CardManaCostLessThanControlledLandCountPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class NissaOfShadowedBoughs extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with mana value less than or equal to the number of lands you control");
+    private static final FilterCard filter = new FilterCard("card with mana value less than or equal to the number of lands you control");
     static {
         filter.add(CardManaCostLessThanControlledLandCountPredicate.getInstance());
     }
