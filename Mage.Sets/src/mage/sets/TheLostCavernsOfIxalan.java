@@ -134,6 +134,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Envoy of Okinec Ahau", 11, Rarity.COMMON, mage.cards.e.EnvoyOfOkinecAhau.class));
         cards.add(new SetCardInfo("Etali's Favor", 149, Rarity.COMMON, mage.cards.e.EtalisFavor.class));
         cards.add(new SetCardInfo("Explorer's Cache", 184, Rarity.UNCOMMON, mage.cards.e.ExplorersCache.class));
+        cards.add(new SetCardInfo("Fabrication Foundry", 12, Rarity.RARE, mage.cards.f.FabricationFoundry.class));
         cards.add(new SetCardInfo("Family Reunion", 13, Rarity.COMMON, mage.cards.f.FamilyReunion.class));
         cards.add(new SetCardInfo("Fanatical Offering", 105, Rarity.COMMON, mage.cards.f.FanaticalOffering.class));
         cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_UST_VARIOUS));
@@ -273,6 +274,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of Days", 73, Rarity.COMMON, mage.cards.s.SageOfDays.class));
         cards.add(new SetCardInfo("Saheeli's Lattice", 164, Rarity.UNCOMMON, mage.cards.s.SaheelisLattice.class));
         cards.add(new SetCardInfo("Saheeli, the Sun's Brilliance", 239, Rarity.MYTHIC, mage.cards.s.SaheeliTheSunsBrilliance.class));
+        cards.add(new SetCardInfo("Sandswirl Wanderglyph", 41, Rarity.RARE, mage.cards.s.SandswirlWanderglyph.class));
         cards.add(new SetCardInfo("Sanguine Evangelist", 34, Rarity.RARE, mage.cards.s.SanguineEvangelist.class));
         cards.add(new SetCardInfo("Scampering Surveyor", 260, Rarity.UNCOMMON, mage.cards.s.ScamperingSurveyor.class));
         cards.add(new SetCardInfo("Screaming Phantom", 118, Rarity.COMMON, mage.cards.s.ScreamingPhantom.class));
@@ -347,6 +349,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Twists and Turns", 217, Rarity.UNCOMMON, mage.cards.t.TwistsAndTurns.class));
         cards.add(new SetCardInfo("Uchbenbak, the Great Mistake", 242, Rarity.UNCOMMON, mage.cards.u.UchbenbakTheGreatMistake.class));
         cards.add(new SetCardInfo("Unlucky Drop", 82, Rarity.COMMON, mage.cards.u.UnluckyDrop.class));
+        cards.add(new SetCardInfo("Unstable Glyphbridge", 41, Rarity.RARE, mage.cards.u.UnstableGlyphbridge.class));
         cards.add(new SetCardInfo("Vanguard of the Rose", 42, Rarity.UNCOMMON, mage.cards.v.VanguardOfTheRose.class));
         cards.add(new SetCardInfo("Visage of Dread", 129, Rarity.UNCOMMON, mage.cards.v.VisageOfDread.class));
         cards.add(new SetCardInfo("Vito's Inquisitor", 130, Rarity.COMMON, mage.cards.v.VitosInquisitor.class));
