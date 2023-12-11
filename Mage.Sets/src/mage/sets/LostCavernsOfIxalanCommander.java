@@ -86,6 +86,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Daring Saboteur", 151, Rarity.UNCOMMON, mage.cards.d.DaringSaboteur.class));
         cards.add(new SetCardInfo("Deathgorge Scavenger", 236, Rarity.RARE, mage.cards.d.DeathgorgeScavenger.class));
         cards.add(new SetCardInfo("Deeproot Elite", 237, Rarity.RARE, mage.cards.d.DeeprootElite.class));
+        cards.add(new SetCardInfo("Deeproot Historian", 91, Rarity.RARE, mage.cards.d.DeeprootHistorian.class));
         cards.add(new SetCardInfo("Deeproot Waters", 152, Rarity.UNCOMMON, mage.cards.d.DeeprootWaters.class));
         cards.add(new SetCardInfo("Departed Deckhand", 153, Rarity.UNCOMMON, mage.cards.d.DepartedDeckhand.class));
         cards.add(new SetCardInfo("Descendants' Path", 238, Rarity.RARE, mage.cards.d.DescendantsPath.class));
