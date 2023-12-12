@@ -165,6 +165,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Malcolm, Keen-Eyed Navigator", 161, Rarity.UNCOMMON, mage.cards.m.MalcolmKeenEyedNavigator.class));
         cards.add(new SetCardInfo("Marauding Raptor", 228, Rarity.RARE, mage.cards.m.MaraudingRaptor.class));
         cards.add(new SetCardInfo("Martyr of Dusk", 132, Rarity.COMMON, mage.cards.m.MartyrOfDusk.class));
+        cards.add(new SetCardInfo("Master of Dark Rites", 83, Rarity.RARE, mage.cards.m.MasterOfDarkRites.class));
         cards.add(new SetCardInfo("Master of the Pearl Trident", 162, Rarity.RARE, mage.cards.m.MasterOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", 133, Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class));
         cards.add(new SetCardInfo("Merchant Raiders", 163, Rarity.UNCOMMON, mage.cards.m.MerchantRaiders.class));
