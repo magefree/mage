@@ -537,6 +537,7 @@ public class ScryfallImageSupportCards {
             add("LCC"); // Lost Caverns of Ixalan Commander
             add("REX"); // Jurassic World Collection
             add("SPG"); // Special Guests
+            add("RVR"); // Ravnica Remastered
             add("PIP"); // Fallout
             add("MKM"); // Murders at Karlov Manor
             add("CLU"); // Ravnica: Clue Edition
