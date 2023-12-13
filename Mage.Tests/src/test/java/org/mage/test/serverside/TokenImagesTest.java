@@ -612,7 +612,9 @@ public class TokenImagesTest extends CardTestPlayerBase {
         assert_SacredCat(3 + 5 + 1, "AKH=3", "AKR=5", "MB1=1");
     }
 
-    @Test
+    @Test // it's ok for fail in 1 of 50
+    // TODO: implement mock or test command to setup "random" images in TokenImpl.generateTokenInfo
+    //  (see setFlipCoinResult and setDieRollResult), so no needs in big amout
     public void test_Abilities_Incubator_MustTransformWithSameSettings() {
         // bug with miss image data in tranformed incubator token: https://github.com/magefree/mage/issues/11535
 
@@ -629,11 +631,19 @@ public class TokenImagesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2 * needIncubatorTokens); // for transform
 
         // prepare incubator tokens
-        activate_Inner(needIncubatorTokens, "Cast Sculpted Perfection");
+        IntStream.range(0, needIncubatorTokens).forEach(x -> {
+            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 3);
+            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 1);
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sculpted Perfection");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        });
 
         // transform tokens to Phyrexian
-        activate_Inner(needPhyrexianTokens, "{2}: Transform");
-
+        IntStream.range(0, needPhyrexianTokens).forEach(x -> {
+            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 2);
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: Transform");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        });
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
