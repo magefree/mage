@@ -66,6 +66,9 @@ public class SmoothedLondonMulligan extends LondonMulligan {
         } else { //not enough cards in library or hand, just do a normal draw instead
             player.drawCards(numCards, null, game);
         }
+
+        // default hand sorting
+        player.getHand().sortCards(game, new MulliganDefaultHandSorter());
     }
 
     @Override

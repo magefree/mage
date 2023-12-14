@@ -1,14 +1,11 @@
 package mage.client.dialog;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import mage.cards.MageCard;
 import mage.client.cards.BigCard;
@@ -117,7 +114,7 @@ public class CardInfoWindowDialog extends MageDialog implements MageDesktopIconi
         cards.changeGUISize();
     }
 
-    public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
+    public void loadCardsAndShow(ExileView exile, BigCard bigCard, UUID gameId) {
         boolean changed = cards.loadCards(exile, bigCard, gameId, true);
         String titel = name + " (" + exile.size() + ')';
         setTitle(titel);
@@ -136,16 +133,8 @@ public class CardInfoWindowDialog extends MageDialog implements MageDesktopIconi
         }
     }
 
-    public void loadCards(SimpleCardsView showCards, BigCard bigCard, UUID gameId) {
-        cards.loadCards(showCards, bigCard, gameId);
-        showAndPositionWindow();
-    }
-
-    public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
-        loadCards(showCards, bigCard, gameId, true);
-    }
-
-    public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
+    // TODO: remove oudated code with revertOrder (wait new release and delete if no bug reports for diff windows with cards, 2023-12-14)
+    public void loadCardsAndShow(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
         cards.loadCards(showCards, bigCard, gameId, revertOrder);
 
         // additional info for grave windows

@@ -7,10 +7,7 @@ import mage.game.Game;
 import mage.util.Copyable;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
 
@@ -47,7 +44,7 @@ public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
 
     Set<Card> getCards(FilterCard filter, UUID playerId, Ability source, Game game);
 
-    String getValue(Game game);
+    String getValue(Game game); // AI related code to find changes in game state
 
     /**
      * Get a collection view of the unique non-null cards in this set.
@@ -82,4 +79,6 @@ public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
      * @param game The ongoing game.
      */
     void removeZone(Zone zone, Game game);
+
+    void sortCards(Game game, Comparator<? super Card> comparator);
 }

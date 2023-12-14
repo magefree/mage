@@ -72,8 +72,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final String CMD_AUTO_ORDER_NAME_LAST = "cmdAutoOrderNameLast";
     private static final String CMD_AUTO_ORDER_RESET_ALL = "cmdAutoOrderResetAll";
 
-    private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
-    private final Map<UUID, Boolean> playersWhoLeft = new HashMap<>();
+    private final Map<UUID, PlayAreaPanel> players = new LinkedHashMap<>();
+    private final Map<UUID, Boolean> playersWhoLeft = new LinkedHashMap<>();
 
     // non modal frames
     private final Map<UUID, CardInfoWindowDialog> exiles = new HashMap<>();
@@ -103,7 +103,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private boolean menuNameSet = false;
     private boolean handCardsOfOpponentAvailable = false;
 
-    private Map<String, Card> loadedCards = new HashMap<>();
+    private final Map<String, Card> loadedCards = new HashMap<>();
 
     private int storedHeight;
     private Map<String, HoverButton> hoverButtons;
@@ -893,7 +893,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (windowDialog.isClosed()) {
                         graveyardWindows.remove(player.getName());
                     } else {
-                        windowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
+                        windowDialog.loadCardsAndShow(player.getGraveyard(), bigCard, gameId, false);
                     }
                 }
 
@@ -904,7 +904,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (windowDialog.isClosed()) {
                         sideboardWindows.remove(player.getName());
                     } else {
-                        windowDialog.loadCards(player.getSideboard(), bigCard, gameId, false);
+                        windowDialog.loadCardsAndShow(player.getSideboard(), bigCard, gameId, false);
                     }
                 }
 
@@ -959,7 +959,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 MageFrame.getDesktop().add(exileWindow, JLayeredPane.PALETTE_LAYER);
                 exileWindow.show();
             }
-            exileWindow.loadCards(exile, bigCard, gameId);
+            exileWindow.loadCardsAndShow(exile, bigCard, gameId);
         }
 
         // update open or remove closed card hints windows
@@ -1334,7 +1334,7 @@ public final class GamePanel extends javax.swing.JPanel {
         graveyardWindows.put(playerName, newGraveyard);
         MageFrame.getDesktop().add(newGraveyard, JLayeredPane.PALETTE_LAYER);
         // use graveyards to sync selection (don't use player data here)
-        newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
+        newGraveyard.loadCardsAndShow(graveyards.get(playerName), bigCard, gameId, false);
     }
 
     private void clearClosedCardHintsWindows() {
@@ -1387,7 +1387,7 @@ public final class GamePanel extends javax.swing.JPanel {
         sideboardWindows.put(playerView.getName(), windowDialog);
         MageFrame.getDesktop().add(windowDialog, JLayeredPane.PALETTE_LAYER);
         // use sideboards to sync selection (don't use player data here)
-        windowDialog.loadCards(sideboards.get(playerView.getName()), bigCard, gameId, false);
+        windowDialog.loadCardsAndShow(sideboards.get(playerView.getName()), bigCard, gameId, false);
     }
 
     public void openTopLibraryWindow(String playerName) {
@@ -1448,10 +1448,10 @@ public final class GamePanel extends javax.swing.JPanel {
                 case REVEAL:
                 case REVEAL_TOP_LIBRARY:
                 case COMPANION:
-                    cardInfoWindowDialog.loadCards((CardsView) cardsView, bigCard, gameId);
+                    cardInfoWindowDialog.loadCardsAndShow((CardsView) cardsView, bigCard, gameId, false);
                     break;
                 case LOOKED_AT:
-                    cardInfoWindowDialog.loadCards((SimpleCardsView) cardsView, bigCard, gameId);
+                    cardInfoWindowDialog.loadCardsAndShow(CardsViewUtil.convertSimple((SimpleCardsView) cardsView), bigCard, gameId, false);
                     break;
                 default:
                     break;

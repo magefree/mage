@@ -209,4 +209,20 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     public void removeZone(Zone zone, Game game) {
         removeIf(uuid -> game.getState().getZone(uuid) == zone);
     }
+
+    @Override
+    public void sortCards(Game game, Comparator<? super Card> comparator) {
+        // workaround to sort linked list - re-create it, it must be safe for game
+        List<Card> newList = this
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .sorted(comparator)
+                .collect(Collectors.toList());
+        if (newList.size() != this.size()) {
+            throw new IllegalStateException("Wrong code usage: found unknown card id in hand while sorting, game is broken");
+        }
+        this.clear();
+        this.addAll(newList.stream().map(Card::getId).collect(Collectors.toList()));
+    }
 }

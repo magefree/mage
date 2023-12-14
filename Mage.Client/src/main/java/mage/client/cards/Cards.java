@@ -127,10 +127,6 @@
          }
      }
 
-     public boolean loadCards(SimpleCardsView cardsView, BigCard bigCard, UUID gameId) {
-         return loadCards(CardsViewUtil.convertSimple(cardsView), bigCard, gameId, true);
-     }
-
      public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, boolean revertOrder) {
          boolean changed = false;
 
