@@ -1,10 +1,9 @@
-package mage.client.cards;
+package mage.client.draft;
 
 import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.draft.DraftPanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ClientEventType;
 import mage.client.util.Event;
@@ -19,6 +18,9 @@ import org.apache.log4j.Logger;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import mage.client.cards.BigCard;
+import mage.client.cards.CardEventProducer;
+import mage.client.cards.CardEventSource;
 
 /**
  * Drafting: panel with the picks
@@ -29,24 +31,24 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
 
     private static final Logger logger = Logger.getLogger(DraftGrid.class);
 
-    private final DraftPanel parentPanel;
+    private DraftPanel parentPanel;
 
     protected final CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected MageCard markedCard;
     protected boolean emptyGrid;
 
-    /**
-     * Creates new form DraftGrid
-     */
-    public DraftGrid(DraftPanel panel) {
+    public DraftGrid() {
         initComponents();
-        parentPanel = panel;
         markedCard = null;
         emptyGrid = true;
 
         // ENABLE picks and other actions
         cardEventSource.addListener(event -> {
+            if (this.parentPanel == null) {
+                this.parentPanel = (DraftPanel) this.getParent();
+            }
+            
             if (event.getEventType() == ClientEventType.CARD_DOUBLE_CLICK
                     || event.getEventType() == ClientEventType.CARD_CLICK) {
                 // There is a protection against picking too early in DraftPanel logic.
@@ -94,6 +96,10 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
         }
         this.bigCard = bigCard;
         this.removeAll();
+        
+        if (booster == null) {
+            return;
+        }
 
         int maxRows = 4;
 
@@ -167,12 +173,12 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 300, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

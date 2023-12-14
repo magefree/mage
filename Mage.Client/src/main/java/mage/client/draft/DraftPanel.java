@@ -559,7 +559,7 @@
          lblPlayer15 = new javax.swing.JLabel();
          lblPlayer16 = new javax.swing.JLabel();
          draftPicks = new mage.client.cards.CardsList();
-         draftBooster = new mage.client.cards.DraftGrid(this);
+         draftBooster = new mage.client.draft.DraftGrid();
 
          draftLeftPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
          draftLeftPane.setFocusable(false);
@@ -879,7 +879,7 @@
      private javax.swing.JCheckBox chkPack1;
      private javax.swing.JCheckBox chkPack2;
      private javax.swing.JCheckBox chkPack3;
-     private mage.client.cards.DraftGrid draftBooster;
+     private mage.client.draft.DraftGrid draftBooster;
      private javax.swing.JPanel draftLeftPane;
      private mage.client.cards.CardsList draftPicks;
      private javax.swing.JPanel jPanel1;
