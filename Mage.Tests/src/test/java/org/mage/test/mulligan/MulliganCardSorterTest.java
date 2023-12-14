@@ -84,27 +84,27 @@ public class MulliganCardSorterTest extends CardTestPlayerBase {
 
         // creatures by mana
         assertHandSort(Arrays.asList(
-                "Grizzly Bears", // 2
-                "Yellow Scarves Troops", // 2
+                "Aspiring Champion", // 4
                 "Marchesa's Infiltrator", // 3
-                "Aspiring Champion" // 4
+                "Grizzly Bears", // 2
+                "Yellow Scarves Troops" // 2
         ));
 
         // other by mana
         assertHandSort(Arrays.asList(
-                "Lightning Bolt", // 1
-                "Samite Blessing", // 1
+                "From Beyond", // 4
                 "Druid's Call", // 2
-                "From Beyond" // 4
+                "Lightning Bolt", // 1
+                "Samite Blessing" // 1
         ));
 
         // lands > others > creatures
         assertHandSort(Arrays.asList(
                 "Forest", // land
                 "Island", // land
+                "Druid's Call", // other, 2
                 "Lightning Bolt", // other, 1
                 "Samite Blessing", // other, 1
-                "Druid's Call", // other, 2
                 "Grizzly Bears", // creature, 2
                 "Yellow Scarves Troops" // creature, 2
         ));
