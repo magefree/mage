@@ -21,7 +21,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="draftLeftPane" min="-2" max="-2" attributes="0"/>
+              <Component id="panelInfo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="draftPicks" pref="740" max="32767" attributes="0"/>
@@ -32,7 +32,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="draftLeftPane" alignment="1" max="32767" attributes="0"/>
+          <Component id="panelInfo" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <Component id="draftPicks" pref="0" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -42,7 +42,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="draftLeftPane">
+    <Container class="javax.swing.JPanel" name="panelInfo">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -62,43 +62,43 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblCardNo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelCardNumber" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="1">
-                                          <Component id="lblPack2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelPack2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtPack2" max="32767" attributes="0"/>
+                                          <Component id="editPack2" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblPack1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelPack1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtPack1" min="-2" pref="165" max="-2" attributes="0"/>
+                                          <Component id="editPack1" min="-2" pref="165" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblPack3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelPack3" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtCardNo" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="txtPack3" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="editCardNumber" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="editPack3" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="chkPack3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkPack2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkPack1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkPack3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkPack2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkPack1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnQuitTournament" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buttonQuitTournament" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtTimeRemaining" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <Component id="editTimeRemaining" min="-2" pref="94" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblMessage" alignment="0" pref="231" max="32767" attributes="0"/>
+                                  <Component id="panelPlayers" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="labelMessage" alignment="0" pref="231" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -112,38 +112,38 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnQuitTournament" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTimeRemaining" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="buttonQuitTournament" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="editTimeRemaining" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="chkPack1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkPack1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPack1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPack1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelPack1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="editPack1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblPack2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPack2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkPack2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelPack2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="editPack2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkPack2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblPack3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPack3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkPack3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelPack3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="editPack3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkPack3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblCardNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCardNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelCardNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="editCardNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblMessage" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="labelMessage" min="-2" pref="20" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel1" min="-2" pref="148" max="-2" attributes="0"/>
+                  <Component id="panelPlayers" min="-2" pref="148" max="-2" attributes="0"/>
                   <EmptySpace pref="55" max="32767" attributes="0"/>
                   <Component id="bigCard" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -151,20 +151,21 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnQuitTournament">
+        <Component class="javax.swing.JButton" name="buttonQuitTournament">
           <Properties>
             <Property name="text" type="java.lang.String" value="Quit Tournament"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuitTournamentActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonQuitTournamentActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPack1">
+        <Component class="javax.swing.JLabel" name="labelPack1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pack 1:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPack1">
+        <Component class="javax.swing.JTextField" name="editPack1">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -173,14 +174,14 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="chkPack1">
+        <Component class="javax.swing.JCheckBox" name="checkPack1">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPack2">
+        <Component class="javax.swing.JLabel" name="labelPack2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pack 2:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPack2">
+        <Component class="javax.swing.JTextField" name="editPack2">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -189,14 +190,14 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="chkPack2">
+        <Component class="javax.swing.JCheckBox" name="checkPack2">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPack3">
+        <Component class="javax.swing.JLabel" name="labelPack3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pack 3:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPack3">
+        <Component class="javax.swing.JTextField" name="editPack3">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -205,20 +206,20 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="chkPack3">
+        <Component class="javax.swing.JCheckBox" name="checkPack3">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblCardNo">
+        <Component class="javax.swing.JLabel" name="labelCardNumber">
           <Properties>
             <Property name="text" type="java.lang.String" value="Card #:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCardNo">
+        <Component class="javax.swing.JTextField" name="editCardNumber">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTimeRemaining">
+        <Component class="javax.swing.JTextField" name="editTimeRemaining">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -232,7 +233,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblMessage">
+        <Component class="javax.swing.JLabel" name="labelMessage">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -252,7 +253,7 @@
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="panelPlayers">
           <Properties>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
@@ -261,7 +262,7 @@
             <Property name="useNullLayout" type="boolean" value="true"/>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="pnlLeft">
+            <Container class="javax.swing.JPanel" name="panelPlayersLeft">
               <Properties>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -288,7 +289,7 @@
                 <Property name="rows" type="int" value="8"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblPlayer01">
+                <Component class="javax.swing.JLabel" name="labelPlayer01">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -299,7 +300,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer02">
+                <Component class="javax.swing.JLabel" name="labelPlayer02">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -310,7 +311,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer03">
+                <Component class="javax.swing.JLabel" name="labelPlayer03">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -321,7 +322,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer04">
+                <Component class="javax.swing.JLabel" name="labelPlayer04">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -332,7 +333,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer05">
+                <Component class="javax.swing.JLabel" name="labelPlayer05">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -343,7 +344,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer06">
+                <Component class="javax.swing.JLabel" name="labelPlayer06">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -354,7 +355,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer07">
+                <Component class="javax.swing.JLabel" name="labelPlayer07">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -365,7 +366,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer08">
+                <Component class="javax.swing.JLabel" name="labelPlayer08">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -378,7 +379,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="lblTableImage">
+            <Component class="javax.swing.JLabel" name="labelTableImage">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="66" red="33" type="rgb"/>
@@ -401,7 +402,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JPanel" name="pnlRight">
+            <Container class="javax.swing.JPanel" name="panelPlayersRight">
               <Properties>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -431,7 +432,7 @@
                 <Property name="rows" type="int" value="8"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblPlayer09">
+                <Component class="javax.swing.JLabel" name="labelPlayer09">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -442,7 +443,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer10">
+                <Component class="javax.swing.JLabel" name="labelPlayer10">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -453,7 +454,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer11">
+                <Component class="javax.swing.JLabel" name="labelPlayer11">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -464,7 +465,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer12">
+                <Component class="javax.swing.JLabel" name="labelPlayer12">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -475,7 +476,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer13">
+                <Component class="javax.swing.JLabel" name="labelPlayer13">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -486,7 +487,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer14">
+                <Component class="javax.swing.JLabel" name="labelPlayer14">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -497,7 +498,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer15">
+                <Component class="javax.swing.JLabel" name="labelPlayer15">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
@@ -508,7 +509,7 @@
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPlayer16">
+                <Component class="javax.swing.JLabel" name="labelPlayer16">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="0"/>
