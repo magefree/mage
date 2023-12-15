@@ -112,6 +112,7 @@
                  .map(c -> (JLabel) c)
                  .collect(Collectors.toList())
          );
+         hideUnusedPlayerNames(true); // hide default list
 
          draftBooster.setOpaque(false);
          draftPicks.setSortSetting(SortSettingDraft.getInstance());
@@ -190,14 +191,20 @@
              this.editPack2.setText("Random Boosters");
              this.editPack3.setText("Random Boosters");
          } else {
-             this.editPack1.setText(draftView.getSets().get(0));
-             this.editPack2.setText(draftView.getSets().get(1));
-             this.editPack3.setText(draftView.getSets().get(2));
+             this.editPack1.setText(String.format("%s - %s", draftView.getSetCodes().get(0), draftView.getSets().get(0)));
+             this.editPack2.setText(String.format("%s - %s", draftView.getSetCodes().get(1), draftView.getSets().get(1)));
+             this.editPack3.setText(String.format("%s - %s", draftView.getSetCodes().get(2), draftView.getSets().get(2)));
          }
+
+         // scroll too long text to the start
+         this.editPack1.setCaretPosition(0);
+         this.editPack2.setCaretPosition(0);
+         this.editPack3.setCaretPosition(0);
+
          this.checkPack1.setSelected(draftView.getBoosterNum() > 1);
          this.checkPack2.setSelected(draftView.getBoosterNum() > 2);
          this.checkPack3.setSelected(draftView.getBoosterNum() > 3);
-         this.labelCardNumber.setText("Card #" + Integer.toString(draftView.getCardNum()));
+         this.labelCardNumber.setText("Card #" + draftView.getCardNum());
 
          packNo = draftView.getBoosterNum();
          pickNo = draftView.getCardNum();
@@ -215,7 +222,8 @@
              count++;
              setPlayerNameToLabel(playerName, count, draftView.getPlayers().size());
          }
-         hideUnusedPlayerNames();
+         hideUnusedPlayerNames(false);
+         this.revalidate();
 
          // TODO: auto-resize for players list doesn't work with layouts, wtf
          int rightAmount = draftView.getPlayers().size() / 2;
@@ -233,12 +241,12 @@
          });
      }
 
-     private void hideUnusedPlayerNames() {
+     private void hideUnusedPlayerNames(boolean hideAll) {
          int maxPlayersPerPanel = 8;
          playerLabels.forEach((panel, labels) -> {
              AtomicInteger hiddenCount = new AtomicInteger(0);
              labels.forEach(label -> {
-                 if (label.getText().isEmpty()) {
+                 if (hideAll || label.getText().isEmpty()) {
                      hiddenCount.incrementAndGet();
                      panel.remove(label);
                  } else {
@@ -674,9 +682,11 @@
         panelPack1.add(labelPack1);
 
         editPack1.setEditable(false);
-        editPack1.setEnabled(false);
+        editPack1.setFocusable(false);
         editPack1.setPreferredSize(new java.awt.Dimension(130, 22));
         panelPack1.add(editPack1);
+
+        checkPack1.setEnabled(false);
         panelPack1.add(checkPack1);
 
         panelPack2.setLayout(new javax.swing.BoxLayout(panelPack2, javax.swing.BoxLayout.LINE_AXIS));
@@ -685,9 +695,11 @@
         panelPack2.add(labelPack2);
 
         editPack2.setEditable(false);
-        editPack2.setEnabled(false);
+        editPack2.setFocusable(false);
         editPack2.setPreferredSize(new java.awt.Dimension(130, 22));
         panelPack2.add(editPack2);
+
+        checkPack2.setEnabled(false);
         panelPack2.add(checkPack2);
 
         panelPack3.setLayout(new javax.swing.BoxLayout(panelPack3, javax.swing.BoxLayout.LINE_AXIS));
@@ -696,9 +708,11 @@
         panelPack3.add(labelPack3);
 
         editPack3.setEditable(false);
-        editPack3.setEnabled(false);
+        editPack3.setFocusable(false);
         editPack3.setPreferredSize(new java.awt.Dimension(130, 22));
         panelPack3.add(editPack3);
+
+        checkPack3.setEnabled(false);
         panelPack3.add(checkPack3);
 
         panelPackCard.setLayout(new java.awt.BorderLayout());
