@@ -113,6 +113,7 @@
                  .collect(Collectors.toList())
          );
          hideUnusedPlayerNames(true); // hide default list
+         editTimeRemaining.setForeground(Color.BLACK); // default color
 
          draftBooster.setOpaque(false);
          draftPicks.setSortSetting(SortSettingDraft.getInstance());
