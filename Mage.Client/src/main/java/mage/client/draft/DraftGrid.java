@@ -46,7 +46,18 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
         // ENABLE picks and other actions
         cardEventSource.addListener(event -> {
             if (this.parentPanel == null) {
-                this.parentPanel = (DraftPanel) this.getParent();
+                // find draft panel
+                DraftPanel found = null;
+                for(Component p = this; p != null; p = p.getParent()) {
+                    if (p instanceof DraftPanel) {
+                        found = (DraftPanel) p;
+                    }
+                }
+                if (found != null) {
+                    this.parentPanel = found;
+                } else {
+                    throw new IllegalArgumentException("Wrong code usage: can't find DraftPanel from a DraftGrid - check form structure.");
+                }
             }
             
             if (event.getEventType() == ClientEventType.CARD_DOUBLE_CLICK

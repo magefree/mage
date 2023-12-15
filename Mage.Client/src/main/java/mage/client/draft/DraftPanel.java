@@ -27,6 +27,8 @@
  import java.text.SimpleDateFormat;
  import java.util.List;
  import java.util.*;
+ import java.util.concurrent.atomic.AtomicInteger;
+ import java.util.stream.Collectors;
 
  /**
   * Game GUI: draft panel for drafting game mode only
@@ -91,11 +93,25 @@
      private Listener<Event> selectedCardsListener = null;
      private Listener<Event> pickingCardsListener = null;
 
+     private Map<JPanel, List<JLabel>> playerLabels = new LinkedHashMap<>();
+
      /**
       * Creates new form DraftPanel
       */
      public DraftPanel() {
          initComponents();
+
+         // keep player labels for auto-sizing
+         playerLabels.put(panelPlayersLeft, Arrays.stream(panelPlayersLeft.getComponents())
+                 .filter(c -> c instanceof JLabel)
+                 .map(c -> (JLabel) c)
+                 .collect(Collectors.toList())
+         );
+         playerLabels.put(panelPlayersRight, Arrays.stream(panelPlayersRight.getComponents())
+                 .filter(c -> c instanceof JLabel)
+                 .map(c -> (JLabel) c)
+                 .collect(Collectors.toList())
+         );
 
          draftBooster.setOpaque(false);
          draftPicks.setSortSetting(SortSettingDraft.getInstance());
@@ -108,8 +124,6 @@
          popupMenuCardPanel = new JPopupMenu();
          addPopupMenuCardPanel();
          this.add(popupMenuCardPanel);
-
-         panelInfo.setOpaque(false);
 
          countdown = new Timer(1000,
                  e -> {
@@ -183,40 +197,80 @@
          this.checkPack1.setSelected(draftView.getBoosterNum() > 1);
          this.checkPack2.setSelected(draftView.getBoosterNum() > 2);
          this.checkPack3.setSelected(draftView.getBoosterNum() > 3);
-         this.editCardNumber.setText(Integer.toString(draftView.getCardNum()));
+         this.labelCardNumber.setText("Card #" + Integer.toString(draftView.getCardNum()));
 
          packNo = draftView.getBoosterNum();
          pickNo = draftView.getCardNum();
          setCodes = draftView.getSetCodes();
          draftLogger.updateDraft(draftId, draftView);
 
-         int right = draftView.getPlayers().size() / 2;
-         int left = draftView.getPlayers().size() - right;
-         int height = left * 18;
-         labelTableImage.setSize(new Dimension(labelTableImage.getWidth(), height));
          // TODO: Can we fix this for Rich Draft where there is no direction?
          Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() % 2 == 1 ? "/draft/table_left.png" : "/draft/table_right.png");
          BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), labelTableImage.getWidth(), labelTableImage.getHeight());
          labelTableImage.setIcon(new ImageIcon(resizedTable));
 
+         clearPlayerNames();
          int count = 0;
-         int numberPlayers = draftView.getPlayers().size();
          for (String playerName : draftView.getPlayers()) {
              count++;
-             setPlayerNameToLabel(playerName, count, numberPlayers);
+             setPlayerNameToLabel(playerName, count, draftView.getPlayers().size());
          }
+         hideUnusedPlayerNames();
+
+         // TODO: auto-resize for players list doesn't work with layouts, wtf
+         int rightAmount = draftView.getPlayers().size() / 2;
+         int leftAmount = draftView.getPlayers().size() - rightAmount;
+         int height = leftAmount * 18;
+         //labelTableImage.setSize(new Dimension(labelTableImage.getWidth(), height));
+         //panelPlayers.setSize(new Dimension(panelPlayers.getSize().width, height));
      }
 
-     private void setPlayerNameToLabel(String name, int index, int players) {
+     private void clearPlayerNames() {
+         playerLabels.forEach((panel, labels) -> {
+             labels.forEach(label -> {
+                 label.setText("");
+             });
+         });
+     }
+
+     private void hideUnusedPlayerNames() {
+         int maxPlayersPerPanel = 8;
+         playerLabels.forEach((panel, labels) -> {
+             AtomicInteger hiddenCount = new AtomicInteger(0);
+             labels.forEach(label -> {
+                 if (label.getText().isEmpty()) {
+                     hiddenCount.incrementAndGet();
+                     panel.remove(label);
+                 } else {
+                     panel.add(label);
+                 }
+             });
+             // update grid layout
+             GridLayout gridLayout = (GridLayout) panel.getLayout();
+             gridLayout.setRows(maxPlayersPerPanel - hiddenCount.get());
+         });
+
+         // fix same grid sizes for good names position
+         int maxRows = playerLabels.keySet()
+                 .stream()
+                 .mapToInt(panel -> ((GridLayout) panel.getLayout()).getRows())
+                 .max()
+                 .orElse(1);
+         playerLabels.keySet().forEach(panel -> {
+             ((GridLayout) panel.getLayout()).setRows(maxRows);
+         });
+     }
+
+     private void setPlayerNameToLabel(String name, int playerNumber, int totalPlayers) {
          int tablePosition;
-         int right = players / 2;
-         int left = players - right;
-         if (index <= left) {
+         int rightAmount = totalPlayers / 2;
+         int leftAmount = totalPlayers - rightAmount;
+         if (playerNumber <= leftAmount) {
              // left side down (1 - 8)
-             tablePosition = index;
+             tablePosition = playerNumber;
          } else {
              // right side up (16 - 9)
-             tablePosition = 9 + right - (index - left);
+             tablePosition = 9 + rightAmount - (playerNumber - leftAmount);
          }
          switch (tablePosition) {
              case 1:
@@ -368,6 +422,19 @@
              text = text + Integer.toString(second);
          }
          this.editTimeRemaining.setText(text);
+         
+         // red color for small time
+         Color timerColor;
+         if (s <= 10) {
+             timerColor = Color.RED;
+         } else if (s <= 30) {
+             timerColor = new Color(255, 160, 60); // orange
+         } else {
+             timerColor = Color.BLACK;
+         }
+         this.editTimeRemaining.setForeground(timerColor);
+         
+         // warning sound at the end
          if (s == 6 && !draftBooster.isEmptyGrid()) {
              AudioManager.playOnCountdown1();
          }
@@ -522,22 +589,27 @@
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        panelInfo = new javax.swing.JPanel();
+        panelLeft = new javax.swing.JPanel();
+        panelCommands = new javax.swing.JPanel();
         buttonQuitTournament = new javax.swing.JButton();
+        panelInfo = new javax.swing.JPanel();
+        editTimeRemaining = new javax.swing.JTextField();
+        labelMessage = new javax.swing.JLabel();
+        panelPacks = new javax.swing.JPanel();
+        panelPack1 = new javax.swing.JPanel();
         labelPack1 = new javax.swing.JLabel();
         editPack1 = new javax.swing.JTextField();
         checkPack1 = new javax.swing.JCheckBox();
+        panelPack2 = new javax.swing.JPanel();
         labelPack2 = new javax.swing.JLabel();
         editPack2 = new javax.swing.JTextField();
         checkPack2 = new javax.swing.JCheckBox();
+        panelPack3 = new javax.swing.JPanel();
         labelPack3 = new javax.swing.JLabel();
         editPack3 = new javax.swing.JTextField();
         checkPack3 = new javax.swing.JCheckBox();
+        panelPackCard = new javax.swing.JPanel();
         labelCardNumber = new javax.swing.JLabel();
-        editCardNumber = new javax.swing.JTextField();
-        editTimeRemaining = new javax.swing.JTextField();
-        labelMessage = new javax.swing.JLabel();
-        bigCard = new mage.client.cards.BigCard();
         panelPlayers = new javax.swing.JPanel();
         panelPlayersLeft = new javax.swing.JPanel();
         labelPlayer01 = new javax.swing.JLabel();
@@ -558,13 +630,17 @@
         labelPlayer14 = new javax.swing.JLabel();
         labelPlayer15 = new javax.swing.JLabel();
         labelPlayer16 = new javax.swing.JLabel();
+        panelBigCard = new javax.swing.JPanel();
+        bigCard = new mage.client.cards.BigCard();
+        panelRight = new javax.swing.JPanel();
         draftPicks = new mage.client.cards.CardsList();
         draftBooster = new mage.client.draft.DraftGrid();
 
-        panelInfo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panelInfo.setFocusable(false);
-        panelInfo.setRequestFocusEnabled(false);
-        panelInfo.setVerifyInputWhenFocusTarget(false);
+        panelLeft.setFocusable(false);
+        panelLeft.setRequestFocusEnabled(false);
+        panelLeft.setVerifyInputWhenFocusTarget(false);
+
+        panelCommands.setOpaque(false);
 
         buttonQuitTournament.setText("Quit Tournament");
         buttonQuitTournament.setFocusable(false);
@@ -573,43 +649,92 @@
                 buttonQuitTournamentActionPerformed(evt);
             }
         });
+        panelCommands.add(buttonQuitTournament);
+
+        panelInfo.setOpaque(false);
+        panelInfo.setLayout(new java.awt.BorderLayout());
+
+        editTimeRemaining.setEditable(false);
+        editTimeRemaining.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        editTimeRemaining.setForeground(java.awt.Color.red);
+        editTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        editTimeRemaining.setText("WAITING");
+        editTimeRemaining.setBorder(null);
+        editTimeRemaining.setFocusable(false);
+        editTimeRemaining.setOpaque(false);
+        panelInfo.add(editTimeRemaining, java.awt.BorderLayout.CENTER);
+
+        labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelMessage.setText("Waiting start of the draft...");
+        panelInfo.add(labelMessage, java.awt.BorderLayout.SOUTH);
+
+        panelPack1.setLayout(new javax.swing.BoxLayout(panelPack1, javax.swing.BoxLayout.LINE_AXIS));
 
         labelPack1.setText("Pack 1:");
+        panelPack1.add(labelPack1);
 
         editPack1.setEditable(false);
         editPack1.setEnabled(false);
         editPack1.setPreferredSize(new java.awt.Dimension(130, 22));
+        panelPack1.add(editPack1);
+        panelPack1.add(checkPack1);
+
+        panelPack2.setLayout(new javax.swing.BoxLayout(panelPack2, javax.swing.BoxLayout.LINE_AXIS));
 
         labelPack2.setText("Pack 2:");
+        panelPack2.add(labelPack2);
 
         editPack2.setEditable(false);
         editPack2.setEnabled(false);
         editPack2.setPreferredSize(new java.awt.Dimension(130, 22));
+        panelPack2.add(editPack2);
+        panelPack2.add(checkPack2);
+
+        panelPack3.setLayout(new javax.swing.BoxLayout(panelPack3, javax.swing.BoxLayout.LINE_AXIS));
 
         labelPack3.setText("Pack 3:");
+        panelPack3.add(labelPack3);
 
         editPack3.setEditable(false);
         editPack3.setEnabled(false);
         editPack3.setPreferredSize(new java.awt.Dimension(130, 22));
+        panelPack3.add(editPack3);
+        panelPack3.add(checkPack3);
 
-        labelCardNumber.setText("Card #:");
+        panelPackCard.setLayout(new java.awt.BorderLayout());
 
-        editCardNumber.setEditable(false);
-        editCardNumber.setEnabled(false);
+        labelCardNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardNumber.setText("Card #123");
+        panelPackCard.add(labelCardNumber, java.awt.BorderLayout.CENTER);
 
-        editTimeRemaining.setEditable(false);
-        editTimeRemaining.setForeground(java.awt.Color.red);
-        editTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        editTimeRemaining.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMessage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        labelMessage.setOpaque(true);
-
-        bigCard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        javax.swing.GroupLayout panelPacksLayout = new javax.swing.GroupLayout(panelPacks);
+        panelPacks.setLayout(panelPacksLayout);
+        panelPacksLayout.setHorizontalGroup(
+            panelPacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPacksLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelPack3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelPack1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelPack2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelPackCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelPacksLayout.setVerticalGroup(
+            panelPacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPacksLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelPack2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelPack3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelPackCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         panelPlayers.setOpaque(false);
-        panelPlayers.setLayout(null);
 
         panelPlayersLeft.setFocusable(false);
         panelPlayersLeft.setMaximumSize(new java.awt.Dimension(80, 132));
@@ -622,6 +747,9 @@
 
         labelPlayer01.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer01.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayer01.setText("player 1");
+        labelPlayer01.setAlignmentX(1.0F);
+        labelPlayer01.setAlignmentY(0.0F);
         labelPlayer01.setFocusable(false);
         labelPlayer01.setRequestFocusEnabled(false);
         labelPlayer01.setVerifyInputWhenFocusTarget(false);
@@ -629,6 +757,10 @@
 
         labelPlayer02.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer02.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayer02.setText("player 2");
+        labelPlayer02.setToolTipText("");
+        labelPlayer02.setAlignmentX(1.0F);
+        labelPlayer02.setAlignmentY(0.0F);
         labelPlayer02.setFocusable(false);
         labelPlayer02.setRequestFocusEnabled(false);
         labelPlayer02.setVerifyInputWhenFocusTarget(false);
@@ -636,6 +768,9 @@
 
         labelPlayer03.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer03.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayer03.setText("player 3");
+        labelPlayer03.setAlignmentX(1.0F);
+        labelPlayer03.setAlignmentY(0.0F);
         labelPlayer03.setFocusable(false);
         labelPlayer03.setRequestFocusEnabled(false);
         labelPlayer03.setVerifyInputWhenFocusTarget(false);
@@ -643,6 +778,9 @@
 
         labelPlayer04.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer04.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayer04.setText("player 4");
+        labelPlayer04.setAlignmentX(1.0F);
+        labelPlayer04.setAlignmentY(0.0F);
         labelPlayer04.setFocusable(false);
         labelPlayer04.setRequestFocusEnabled(false);
         labelPlayer04.setVerifyInputWhenFocusTarget(false);
@@ -650,6 +788,9 @@
 
         labelPlayer05.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer05.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayer05.setText("player 5");
+        labelPlayer05.setAlignmentX(1.0F);
+        labelPlayer05.setAlignmentY(0.0F);
         labelPlayer05.setFocusable(false);
         labelPlayer05.setRequestFocusEnabled(false);
         labelPlayer05.setVerifyInputWhenFocusTarget(false);
@@ -657,6 +798,9 @@
 
         labelPlayer06.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer06.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayer06.setText("player 6");
+        labelPlayer06.setAlignmentX(1.0F);
+        labelPlayer06.setAlignmentY(0.0F);
         labelPlayer06.setFocusable(false);
         labelPlayer06.setRequestFocusEnabled(false);
         labelPlayer06.setVerifyInputWhenFocusTarget(false);
@@ -664,6 +808,9 @@
 
         labelPlayer07.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer07.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayer07.setText("player 7");
+        labelPlayer07.setAlignmentX(1.0F);
+        labelPlayer07.setAlignmentY(0.0F);
         labelPlayer07.setFocusable(false);
         labelPlayer07.setRequestFocusEnabled(false);
         labelPlayer07.setVerifyInputWhenFocusTarget(false);
@@ -671,13 +818,13 @@
 
         labelPlayer08.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer08.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayer08.setText("player 8");
+        labelPlayer08.setAlignmentX(1.0F);
+        labelPlayer08.setAlignmentY(0.0F);
         labelPlayer08.setFocusable(false);
         labelPlayer08.setRequestFocusEnabled(false);
         labelPlayer08.setVerifyInputWhenFocusTarget(false);
         panelPlayersLeft.add(labelPlayer08);
-
-        panelPlayers.add(panelPlayersLeft);
-        panelPlayersLeft.setBounds(0, 5, 90, 136);
 
         labelTableImage.setBackground(new java.awt.Color(51, 102, 255));
         labelTableImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -687,8 +834,6 @@
         labelTableImage.setOpaque(true);
         labelTableImage.setRequestFocusEnabled(false);
         labelTableImage.setVerifyInputWhenFocusTarget(false);
-        panelPlayers.add(labelTableImage);
-        labelTableImage.setBounds(95, 5, 40, 136);
 
         panelPlayersRight.setFocusable(false);
         panelPlayersRight.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
@@ -702,6 +847,7 @@
 
         labelPlayer09.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer09.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPlayer09.setText("player 9");
         labelPlayer09.setFocusable(false);
         labelPlayer09.setRequestFocusEnabled(false);
         labelPlayer09.setVerifyInputWhenFocusTarget(false);
@@ -709,6 +855,7 @@
 
         labelPlayer10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPlayer10.setText("player 10");
         labelPlayer10.setFocusable(false);
         labelPlayer10.setRequestFocusEnabled(false);
         labelPlayer10.setVerifyInputWhenFocusTarget(false);
@@ -716,6 +863,7 @@
 
         labelPlayer11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPlayer11.setText("player 11");
         labelPlayer11.setFocusable(false);
         labelPlayer11.setRequestFocusEnabled(false);
         labelPlayer11.setVerifyInputWhenFocusTarget(false);
@@ -723,6 +871,8 @@
 
         labelPlayer12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPlayer12.setText("player 12");
+        labelPlayer12.setToolTipText("");
         labelPlayer12.setFocusable(false);
         labelPlayer12.setRequestFocusEnabled(false);
         labelPlayer12.setVerifyInputWhenFocusTarget(false);
@@ -730,6 +880,7 @@
 
         labelPlayer13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPlayer13.setText("player 13");
         labelPlayer13.setFocusable(false);
         labelPlayer13.setRequestFocusEnabled(false);
         labelPlayer13.setVerifyInputWhenFocusTarget(false);
@@ -737,6 +888,7 @@
 
         labelPlayer14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPlayer14.setText("player 14");
         labelPlayer14.setFocusable(false);
         labelPlayer14.setRequestFocusEnabled(false);
         labelPlayer14.setVerifyInputWhenFocusTarget(false);
@@ -744,6 +896,7 @@
 
         labelPlayer15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPlayer15.setText("player 15");
         labelPlayer15.setFocusable(false);
         labelPlayer15.setRequestFocusEnabled(false);
         labelPlayer15.setVerifyInputWhenFocusTarget(false);
@@ -751,87 +904,66 @@
 
         labelPlayer16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPlayer16.setText("player 16");
         labelPlayer16.setFocusable(false);
         labelPlayer16.setRequestFocusEnabled(false);
         labelPlayer16.setVerifyInputWhenFocusTarget(false);
         panelPlayersRight.add(labelPlayer16);
 
-        panelPlayers.add(panelPlayersRight);
-        panelPlayersRight.setBounds(140, 5, 90, 136);
-
-        javax.swing.GroupLayout panelInfoLayout = new javax.swing.GroupLayout(panelInfo);
-        panelInfo.setLayout(panelInfoLayout);
-        panelInfoLayout.setHorizontalGroup(
-            panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInfoLayout.createSequentialGroup()
-                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelInfoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelCardNumber)
-                            .addGroup(panelInfoLayout.createSequentialGroup()
-                                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInfoLayout.createSequentialGroup()
-                                        .addComponent(labelPack2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(editPack2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInfoLayout.createSequentialGroup()
-                                        .addComponent(labelPack1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(editPack1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInfoLayout.createSequentialGroup()
-                                        .addComponent(labelPack3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(editCardNumber)
-                                            .addComponent(editPack3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkPack3)
-                                    .addComponent(checkPack2)
-                                    .addComponent(checkPack1)))
-                            .addGroup(panelInfoLayout.createSequentialGroup()
-                                .addComponent(buttonQuitTournament)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(editTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(panelPlayers, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelMessage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))))
-                    .addComponent(bigCard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelPlayersLayout = new javax.swing.GroupLayout(panelPlayers);
+        panelPlayers.setLayout(panelPlayersLayout);
+        panelPlayersLayout.setHorizontalGroup(
+            panelPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPlayersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPlayersLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelTableImage, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelPlayersRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        panelInfoLayout.setVerticalGroup(
-            panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInfoLayout.createSequentialGroup()
-                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonQuitTournament)
-                    .addComponent(editTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panelPlayersLayout.setVerticalGroup(
+            panelPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPlayersLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(panelPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelPlayersLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelTableImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelPlayersRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        panelBigCard.setLayout(new java.awt.BorderLayout());
+        panelBigCard.add(bigCard, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout panelLeftLayout = new javax.swing.GroupLayout(panelLeft);
+        panelLeft.setLayout(panelLeftLayout);
+        panelLeftLayout.setHorizontalGroup(
+            panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLeftLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelCommands, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelPacks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelBigCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panelPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelLeftLayout.setVerticalGroup(
+            panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLeftLayout.createSequentialGroup()
+                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkPack1)
-                    .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(labelPack1)
-                        .addComponent(editPack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(panelPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPack2)
-                    .addComponent(editPack2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkPack2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPack3)
-                    .addComponent(editPack3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkPack3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCardNumber)
-                    .addComponent(editCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addComponent(panelBigCard, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         draftBooster.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -840,11 +972,32 @@
         draftBooster.setLayout(draftBoosterLayout);
         draftBoosterLayout.setHorizontalGroup(
             draftBoosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 738, Short.MAX_VALUE)
+            .addGap(0, 624, Short.MAX_VALUE)
         );
         draftBoosterLayout.setVerticalGroup(
             draftBoosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 439, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelRightLayout = new javax.swing.GroupLayout(panelRight);
+        panelRight.setLayout(panelRightLayout);
+        panelRightLayout.setHorizontalGroup(
+            panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRightLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+                    .addComponent(draftBooster, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelRightLayout.setVerticalGroup(
+            panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRightLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(draftPicks, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(draftBooster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -852,29 +1005,25 @@
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
-                    .addComponent(draftBooster, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(panelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(draftPicks, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(draftBooster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(panelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-     private void buttonQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQuitTournamentActionPerformed
-         UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the draft tournament?");
-         message.setButton1("No", null);
-         message.setButton2("Yes", PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
-         message.setTournamentId(draftId);
-         MageFrame.getInstance().showUserRequestDialog(message);
-     }//GEN-LAST:event_buttonQuitTournamentActionPerformed
+    private void buttonQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQuitTournamentActionPerformed
+        UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the draft tournament?");
+        message.setButton1("No", null);
+        message.setButton2("Yes", PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
+        message.setTournamentId(draftId);
+        MageFrame.getInstance().showUserRequestDialog(message);
+    }//GEN-LAST:event_buttonQuitTournamentActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
@@ -884,7 +1033,6 @@
     private javax.swing.JCheckBox checkPack3;
     private mage.client.draft.DraftGrid draftBooster;
     private mage.client.cards.CardsList draftPicks;
-    private javax.swing.JTextField editCardNumber;
     private javax.swing.JTextField editPack1;
     private javax.swing.JTextField editPack2;
     private javax.swing.JTextField editPack3;
@@ -912,10 +1060,19 @@
     private javax.swing.JLabel labelPlayer15;
     private javax.swing.JLabel labelPlayer16;
     private javax.swing.JLabel labelTableImage;
+    private javax.swing.JPanel panelBigCard;
+    private javax.swing.JPanel panelCommands;
     private javax.swing.JPanel panelInfo;
+    private javax.swing.JPanel panelLeft;
+    private javax.swing.JPanel panelPack1;
+    private javax.swing.JPanel panelPack2;
+    private javax.swing.JPanel panelPack3;
+    private javax.swing.JPanel panelPackCard;
+    private javax.swing.JPanel panelPacks;
     private javax.swing.JPanel panelPlayers;
     private javax.swing.JPanel panelPlayersLeft;
     private javax.swing.JPanel panelPlayersRight;
+    private javax.swing.JPanel panelRight;
     // End of variables declaration//GEN-END:variables
 
  }
