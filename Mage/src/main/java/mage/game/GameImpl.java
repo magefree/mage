@@ -1870,7 +1870,7 @@ public abstract class GameImpl implements Game {
 
     /**
      * @param emblem
-     * @param sourceObject
+     * @param sourceObject can be null
      * @param toPlayerId   controller and owner of the emblem
      */
     @Override

@@ -764,7 +764,7 @@ public final class SystemUtil {
                     feedbackPlayer.getName(), errorsList.size());
             mes += String.join("\n", errorsList);
             mes += "\n";
-            game.fireErrorEvent("Cheat command errors", new IllegalArgumentException(mes));
+            game.fireErrorEvent("Cheat command errors, see server logs for details", new IllegalArgumentException(mes));
         }
         game.informPlayers(String.format("%s: tried to apply cheat commands", feedbackPlayer.getLogName()));
     }
