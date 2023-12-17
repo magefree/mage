@@ -37,7 +37,7 @@ public class MageEditorPane extends JEditorPane {
     final HTMLDocument doc;
 
 
-    MageEditorPane() {
+    public MageEditorPane() {
         super();
         // merge with UI.setHTMLEditorKit
         this.setEditorKit(kit);

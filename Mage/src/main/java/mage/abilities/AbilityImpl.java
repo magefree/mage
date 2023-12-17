@@ -401,7 +401,8 @@ public abstract class AbilityImpl implements Ability {
         }
         if (variableManaCost != null) {
             int xValue = getManaCostsToPay().getX();
-            game.informPlayers(controller.getLogName() + " announces a value of " + xValue + " for " + variableManaCost.getText());
+            game.informPlayers(controller.getLogName() + " announces a value of " + xValue + " for " + variableManaCost.getText()
+                    + CardUtil.getSourceLogName(game, this));
         }
         activated = true;
         return true;
@@ -516,7 +517,8 @@ public abstract class AbilityImpl implements Ability {
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 variableCost.setAmount(xValue, xValue, false);
                 ((Cost) variableCost).setPaid();
-                String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
+                String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')'
+                        + CardUtil.getSourceLogName(game, this);
                 announceString.append(message);
                 setCostsTag("X",xValue);
             }

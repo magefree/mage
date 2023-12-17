@@ -1658,7 +1658,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireGetAmountEvent(playerId, message + extraMessage, min, max);
+                game.fireGetAmountEvent(playerId, message + extraMessage + CardUtil.getSourceLogName(game, ability), min, max);
             }
             waitForResponse(game);
 
