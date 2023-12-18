@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
@@ -43,8 +42,7 @@ public final class HauntingApparition extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
 
         // Haunting Apparition's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.
-        Effect effect = new SetBasePowerSourceEffect(
-                new IntPlusDynamicValue(1, new greenCreatureCardsInChosenOpponentsGraveyardCount()));
+        Effect effect = new SetBasePowerSourceEffect(OnePlusGreenCreatureCardsInChosenOpponentsGraveyardCount.instance);
         effect.setText("{this}'s power is equal to 1 plus the number of green creature cards in the chosen player's graveyard");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
@@ -59,7 +57,8 @@ public final class HauntingApparition extends CardImpl {
     }
 }
 
-class greenCreatureCardsInChosenOpponentsGraveyardCount implements DynamicValue {
+enum OnePlusGreenCreatureCardsInChosenOpponentsGraveyardCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -70,19 +69,19 @@ class greenCreatureCardsInChosenOpponentsGraveyardCount implements DynamicValue 
                 FilterCreatureCard filter = new FilterCreatureCard();
                 filter.add(new ColorPredicate(ObjectColor.GREEN));
 
-                return chosenOpponent.getGraveyard().count(filter, game);
+                return 1 + chosenOpponent.getGraveyard().count(filter, game);
             }
         }
-        return 0;
+        return 1;
     }
 
     @Override
-    public greenCreatureCardsInChosenOpponentsGraveyardCount copy() {
-        return new greenCreatureCardsInChosenOpponentsGraveyardCount();
+    public OnePlusGreenCreatureCardsInChosenOpponentsGraveyardCount copy() {
+        return instance;
     }
 
     @Override
     public String getMessage() {
-        return "green creature cards in the chosen player's graveyard";
+        return "1 plus the number of green creature cards in the chosen player's graveyard";
     }
 }
