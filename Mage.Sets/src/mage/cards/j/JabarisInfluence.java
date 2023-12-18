@@ -23,9 +23,7 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author Cguy7777
@@ -78,7 +76,7 @@ enum JabarisInfluencePredicate implements ObjectSourcePlayerPredicate<Permanent>
 
 class JabarisInfluenceWatcher extends Watcher {
 
-    private final Map<MageObjectReference, UUID> attackedThisTurnCreatures = new HashMap<>();
+    private final Map<MageObjectReference, Set<UUID>> attackedThisTurnCreatures = new HashMap<>();
 
     public JabarisInfluenceWatcher() {
         super(WatcherScope.GAME);
@@ -89,14 +87,16 @@ class JabarisInfluenceWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null) {
-                attackedThisTurnCreatures.put(new MageObjectReference(event.getSourceId(), game), event.getTargetId());
+                attackedThisTurnCreatures.computeIfAbsent(
+                        new MageObjectReference(event.getSourceId(), game), u -> new HashSet<>()
+                ).add(event.getTargetId());
             }
         }
     }
 
     boolean checkIfCreatureAttackedYouThisTurn(Permanent permanent, UUID playerId, Game game) {
         MageObjectReference mor = new MageObjectReference(permanent, game);
-        return attackedThisTurnCreatures.containsKey(mor) && attackedThisTurnCreatures.get(mor).equals(playerId);
+        return attackedThisTurnCreatures.containsKey(mor) && attackedThisTurnCreatures.get(mor).contains(playerId);
     }
 
     @Override
