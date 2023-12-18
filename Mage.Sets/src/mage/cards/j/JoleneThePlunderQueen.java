@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class JoleneThePlunderQueen extends CardImpl {
 
-    private static final FilterControlledPermanent filterTreasures = new FilterControlledPermanent(SubType.TREASURE, "treasures");
+    private static final FilterControlledPermanent filterTreasures = new FilterControlledPermanent(SubType.TREASURE, "Treasures");
 
     public JoleneThePlunderQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
