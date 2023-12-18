@@ -101,6 +101,7 @@ class JabarisInfluenceWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         attackedThisTurnCreatures.clear();
     }
 }
