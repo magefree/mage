@@ -79,7 +79,7 @@ class TheIndomitableCastEffect extends AsThoughEffectImpl {
 
     TheIndomitableCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may cast The Indomitable from your graveyard as long as you control three or more tapped Pirates and/or Vehicles.";
+        staticText = "You may cast {this} from your graveyard as long as you control three or more tapped Pirates and/or Vehicles.";
     }
 
     private TheIndomitableCastEffect(final TheIndomitableCastEffect effect) {
