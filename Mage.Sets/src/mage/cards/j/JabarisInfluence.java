@@ -15,6 +15,8 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,6 +35,8 @@ public final class JabarisInfluence extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature that attacked you this turn");
 
     static {
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
         filter.add(JabarisInfluencePredicate.instance);
     }
 
@@ -68,13 +72,13 @@ enum JabarisInfluencePredicate implements ObjectSourcePlayerPredicate<Permanent>
         Permanent permanent = input.getObject();
 
         JabarisInfluenceWatcher watcher = game.getState().getWatcher(JabarisInfluenceWatcher.class);
-        return watcher.checkIfEligibleCreatureAttackedYouThisTurn(permanent, input.getPlayerId(), game);
+        return watcher.checkIfCreatureAttackedYouThisTurn(permanent, input.getPlayerId(), game);
     }
 }
 
 class JabarisInfluenceWatcher extends Watcher {
 
-    private final Map<MageObjectReference, UUID> eligibleAttackedThisTurnCreatures = new HashMap<>();
+    private final Map<MageObjectReference, UUID> attackedThisTurnCreatures = new HashMap<>();
 
     public JabarisInfluenceWatcher() {
         super(WatcherScope.GAME);
@@ -84,19 +88,19 @@ class JabarisInfluenceWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && !permanent.isArtifact(game) && !permanent.getColor(game).equals(ObjectColor.BLACK)) {
-                eligibleAttackedThisTurnCreatures.put(new MageObjectReference(event.getSourceId(), game), event.getTargetId());
+            if (permanent != null) {
+                attackedThisTurnCreatures.put(new MageObjectReference(event.getSourceId(), game), event.getTargetId());
             }
         }
     }
 
-    boolean checkIfEligibleCreatureAttackedYouThisTurn(Permanent permanent, UUID playerId, Game game) {
+    boolean checkIfCreatureAttackedYouThisTurn(Permanent permanent, UUID playerId, Game game) {
         MageObjectReference mor = new MageObjectReference(permanent, game);
-        return eligibleAttackedThisTurnCreatures.containsKey(mor) && eligibleAttackedThisTurnCreatures.get(mor).equals(playerId);
+        return attackedThisTurnCreatures.containsKey(mor) && attackedThisTurnCreatures.get(mor).equals(playerId);
     }
 
     @Override
     public void reset() {
-        eligibleAttackedThisTurnCreatures.clear();
+        attackedThisTurnCreatures.clear();
     }
 }
