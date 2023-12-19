@@ -177,6 +177,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivory Charm", 23, Rarity.COMMON, mage.cards.i.IvoryCharm.class));
+        cards.add(new SetCardInfo("Jabari's Influence", 24, Rarity.RARE, mage.cards.j.JabarisInfluence.class));
         cards.add(new SetCardInfo("Jolrael's Centaur", 222, Rarity.COMMON, mage.cards.j.JolraelsCentaur.class));
         cards.add(new SetCardInfo("Jolt", 70, Rarity.COMMON, mage.cards.j.Jolt.class));
         cards.add(new SetCardInfo("Jungle Patrol", 223, Rarity.RARE, mage.cards.j.JunglePatrol.class));
