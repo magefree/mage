@@ -59,6 +59,11 @@ public final class HauntingApparition extends CardImpl {
 
 enum OnePlusGreenCreatureCardsInChosenOpponentsGraveyardCount implements DynamicValue {
     instance;
+    private static final FilterCreatureCard filter = new FilterCreatureCard();
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -66,9 +71,6 @@ enum OnePlusGreenCreatureCardsInChosenOpponentsGraveyardCount implements Dynamic
             UUID playerId = (UUID) game.getState().getValue(sourceAbility.getSourceId() + ChooseOpponentEffect.VALUE_KEY);
             Player chosenOpponent = game.getPlayer(playerId);
             if (chosenOpponent != null) {
-                FilterCreatureCard filter = new FilterCreatureCard();
-                filter.add(new ColorPredicate(ObjectColor.GREEN));
-
                 return 1 + chosenOpponent.getGraveyard().count(filter, game);
             }
         }
