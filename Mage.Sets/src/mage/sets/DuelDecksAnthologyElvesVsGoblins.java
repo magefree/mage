@@ -20,6 +20,7 @@ public final class DuelDecksAnthologyElvesVsGoblins extends ExpansionSet {
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 62;
 
         cards.add(new SetCardInfo("Akki Coalflinger", 33, Rarity.UNCOMMON, mage.cards.a.AkkiCoalflinger.class));
         cards.add(new SetCardInfo("Allosaurus Rider", 2, Rarity.RARE, mage.cards.a.AllosaurusRider.class));

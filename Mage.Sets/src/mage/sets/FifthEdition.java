@@ -15,6 +15,7 @@ public final class FifthEdition extends ExpansionSet {
     private FifthEdition() {
         super("Fifth Edition", "5ED", ExpansionSet.buildDate(1997, 3, 1), SetType.CORE);
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 449;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

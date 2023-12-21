@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Lorwyn extends ExpansionSet {
@@ -21,11 +20,13 @@ public final class Lorwyn extends ExpansionSet {
         super("Lorwyn", "LRW", ExpansionSet.buildDate(2007, 10, 12), SetType.EXPANSION);
         this.blockName = "Lorwyn";
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 301;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Adder-Staff Boggart", 148, Rarity.COMMON, mage.cards.a.AdderStaffBoggart.class));
         cards.add(new SetCardInfo("Aethersnipe", 50, Rarity.COMMON, mage.cards.a.Aethersnipe.class));
         cards.add(new SetCardInfo("Ajani Goldmane", 1, Rarity.RARE, mage.cards.a.AjaniGoldmane.class));

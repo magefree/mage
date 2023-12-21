@@ -20,6 +20,7 @@ public final class DuelDecksMerfolkVsGoblins extends ExpansionSet {
         super("Duel Decks: Merfolk vs. Goblins", "DDT", ExpansionSet.buildDate(2017, 11, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 63;
 
         cards.add(new SetCardInfo("Aquitect's Will", 2, Rarity.COMMON, mage.cards.a.AquitectsWill.class));
         cards.add(new SetCardInfo("Battle Squadron", 33, Rarity.UNCOMMON, mage.cards.b.BattleSquadron.class));

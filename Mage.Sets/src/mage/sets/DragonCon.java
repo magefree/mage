@@ -20,6 +20,7 @@ public class DragonCon extends ExpansionSet {
         super("Dragon Con", "PDRC", ExpansionSet.buildDate(1995, 7, 15), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 1;
 
         cards.add(new SetCardInfo("Nalathni Dragon", 1, Rarity.RARE, mage.cards.n.NalathniDragon.class));
     }

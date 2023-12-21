@@ -21,6 +21,7 @@ public final class DuelDecksPhyrexiaVsTheCoalition extends ExpansionSet {
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 71;
 
         cards.add(new SetCardInfo("Allied Strategies", 63, Rarity.UNCOMMON, mage.cards.a.AlliedStrategies.class));
         cards.add(new SetCardInfo("Armadillo Cloak", 58, Rarity.COMMON, mage.cards.a.ArmadilloCloak.class));

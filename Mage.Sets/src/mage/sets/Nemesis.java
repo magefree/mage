@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Nemesis extends ExpansionSet {
@@ -23,11 +22,13 @@ public final class Nemesis extends ExpansionSet {
         this.parentSet = MercadianMasques.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 143;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Accumulated Knowledge", 26, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));
         cards.add(new SetCardInfo("Aether Barrier", 27, Rarity.RARE, mage.cards.a.AetherBarrier.class));
         cards.add(new SetCardInfo("Air Bladder", 28, Rarity.COMMON, mage.cards.a.AirBladder.class));

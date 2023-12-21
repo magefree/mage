@@ -19,6 +19,7 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         super("Innistrad: Double Feature", "DBL", ExpansionSet.buildDate(2021, 1, 28), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         // TODO: add booster generation
+        this.expectedMaxCardNumber = 535;
 
         cards.add(new SetCardInfo("Abandon the Post", 127, Rarity.COMMON, mage.cards.a.AbandonThePost.class));
         cards.add(new SetCardInfo("Abrade", 406, Rarity.COMMON, mage.cards.a.Abrade.class));

@@ -19,11 +19,13 @@ public final class MercadianMasques extends ExpansionSet {
         super("Mercadian Masques", "MMQ", ExpansionSet.buildDate(1999, 8, 25), SetType.EXPANSION);
         this.blockName = "Masques";
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 350;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Aerial Caravan", 58, Rarity.RARE, mage.cards.a.AerialCaravan.class));
         cards.add(new SetCardInfo("Afterlife", 1, Rarity.UNCOMMON, mage.cards.a.Afterlife.class));
         cards.add(new SetCardInfo("Alabaster Wall", 2, Rarity.COMMON, mage.cards.a.AlabasterWall.class));

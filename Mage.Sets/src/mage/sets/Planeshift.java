@@ -22,6 +22,7 @@ public final class Planeshift extends ExpansionSet {
         this.parentSet = Invasion.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 143;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

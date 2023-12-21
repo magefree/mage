@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class AlaraReborn extends ExpansionSet {
@@ -23,6 +22,7 @@ public final class AlaraReborn extends ExpansionSet {
         this.parentSet = ShardsOfAlara.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 145;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

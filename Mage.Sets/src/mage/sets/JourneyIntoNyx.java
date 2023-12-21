@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
 public final class JourneyIntoNyx extends ExpansionSet {
@@ -29,6 +28,7 @@ public final class JourneyIntoNyx extends ExpansionSet {
         this.parentSet = Theros.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 165;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

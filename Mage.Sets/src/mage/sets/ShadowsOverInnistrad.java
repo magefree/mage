@@ -29,6 +29,7 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         this.blockName = "Shadows over Innistrad";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 297;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;

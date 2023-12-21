@@ -19,6 +19,7 @@ public class RavnicaRemastered extends ExpansionSet {
         super("Ravnica Remastered", "RVR", ExpansionSet.buildDate(2024, 1, 12), SetType.SUPPLEMENTAL);
         this.hasBoosters = false; // needs booster gen info
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 467;
 
         cards.add(new SetCardInfo("Act of Treason", 99, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Aetherize", 448, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));

@@ -18,11 +18,13 @@ public final class Onslaught extends ExpansionSet {
         super("Onslaught", "ONS", ExpansionSet.buildDate(2002, 10, 7), SetType.EXPANSION);
         this.blockName = "Onslaught";
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 350;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Accursed Centaur", 123, Rarity.COMMON, mage.cards.a.AccursedCentaur.class));
         cards.add(new SetCardInfo("Aether Charge", 184, Rarity.UNCOMMON, mage.cards.a.AetherCharge.class));
         cards.add(new SetCardInfo("Aggravated Assault", 185, Rarity.RARE, mage.cards.a.AggravatedAssault.class));

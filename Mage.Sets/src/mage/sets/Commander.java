@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
 public final class Commander extends ExpansionSet {
@@ -20,6 +19,8 @@ public final class Commander extends ExpansionSet {
     private Commander() {
         super("Commander", "CMD", ExpansionSet.buildDate(2011, 6, 17), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 318;
+
         cards.add(new SetCardInfo("Acidic Slime", 140, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Acorn Catapult", 241, Rarity.RARE, mage.cards.a.AcornCatapult.class));
         cards.add(new SetCardInfo("Aethersnipe", 39, Rarity.COMMON, mage.cards.a.Aethersnipe.class));

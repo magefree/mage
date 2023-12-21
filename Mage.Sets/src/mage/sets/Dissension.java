@@ -20,6 +20,7 @@ public final class Dissension extends ExpansionSet {
         super("Dissension", "DIS", ExpansionSet.buildDate(2006, 4, 5), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.parentSet = RavnicaCityOfGuilds.getInstance();
+        this.expectedMaxCardNumber = 180;
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

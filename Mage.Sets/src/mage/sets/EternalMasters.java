@@ -27,6 +27,7 @@ public final class EternalMasters extends ExpansionSet {
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 249;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

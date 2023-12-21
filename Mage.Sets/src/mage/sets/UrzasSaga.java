@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author Backfir3
  */
 public final class UrzasSaga extends ExpansionSet {
@@ -20,11 +19,13 @@ public final class UrzasSaga extends ExpansionSet {
         super("Urza's Saga", "USG", ExpansionSet.buildDate(1998, 10, 12), SetType.EXPANSION);
         this.blockName = "Urza";
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 350;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Absolute Grace", 1, Rarity.UNCOMMON, mage.cards.a.AbsoluteGrace.class));
         cards.add(new SetCardInfo("Absolute Law", 2, Rarity.UNCOMMON, mage.cards.a.AbsoluteLaw.class));
         cards.add(new SetCardInfo("Abundance", 229, Rarity.RARE, mage.cards.a.Abundance.class));

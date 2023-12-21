@@ -28,6 +28,7 @@ public final class Commander2020Edition extends ExpansionSet {
     private Commander2020Edition() {
         super("Commander 2020 Edition", "C20", ExpansionSet.buildDate(2020, 4, 24), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 322;
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abandoned Sarcophagus", 236, Rarity.RARE, mage.cards.a.AbandonedSarcophagus.class));

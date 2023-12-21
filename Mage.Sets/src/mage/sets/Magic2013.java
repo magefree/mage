@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author North
  */
 public final class Magic2013 extends ExpansionSet {
@@ -26,11 +25,13 @@ public final class Magic2013 extends ExpansionSet {
     private Magic2013() {
         super("Magic 2013", "M13", ExpansionSet.buildDate(2012, 7, 13), SetType.CORE);
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 249;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Acidic Slime", 159, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Ajani, Caller of the Pride", 1, Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
         cards.add(new SetCardInfo("Ajani's Sunstriker", 2, Rarity.COMMON, mage.cards.a.AjanisSunstriker.class));

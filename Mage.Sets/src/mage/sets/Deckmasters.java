@@ -18,6 +18,7 @@ public class Deckmasters extends ExpansionSet {
     private Deckmasters() {
         super("Deckmasters", "DKM", ExpansionSet.buildDate(2001, 12, 1), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 50;
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abyssal Specter", 1, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));

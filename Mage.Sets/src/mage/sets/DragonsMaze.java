@@ -32,6 +32,7 @@ public final class DragonsMaze extends ExpansionSet {
         super("Dragon's Maze", "DGM", ExpansionSet.buildDate(2013, 5, 3), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 156;
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
@@ -227,7 +228,7 @@ public final class DragonsMaze extends ExpansionSet {
         }
         List<CardInfo> cardInfos = CardRepository.instance.findCards(criteria);
         cardInfos.removeIf(cardInfo -> (cardInfo.getName().equals("Grove of the Guardian")
-                                    || cardInfo.getName().equals("Thespian's Stage")));
+                || cardInfo.getName().equals("Thespian's Stage")));
         return cardInfos;
     }
 
@@ -258,7 +259,7 @@ class DragonsMazeCollator implements BoosterCollator {
     private final CardRun rare = new CardRun(false, "5", "7", "11", /*"18",*/ "22", "27", "34", "36", "47", "49", "51", "58", "66", "68", "69", "72", "80", "84", "85", "88", "89", "91", "96", "99", "104", "107", "108", "112", "115", "119", "123", "124", "125", "128", "132");
     private final CardRun mythic = new CardRun(false, "57", "62", "63", "81", "82", "92", "94", "95", "100", "114");
     private final CardRun landCommon = new CardRun(false, "146", "147", "148", "149", "150", "151", "153", "154", "155", "156");
-    private final CardRun landRare = new CardRun(false, "152", "RTR_238", "RTR_241", "RTR_243", "RTR_247", "RTR_248", "152",  "GTC_240", "GTC_242", "GTC_245", "GTC_247", "GTC_249");
+    private final CardRun landRare = new CardRun(false, "152", "RTR_238", "RTR_241", "RTR_243", "RTR_247", "RTR_248", "152", "GTC_240", "GTC_242", "GTC_245", "GTC_247", "GTC_249");
 
     private final BoosterStructure AAAAABBBBB = new BoosterStructure(
             commonA, commonA, commonA, commonA, commonA,
@@ -286,8 +287,8 @@ class DragonsMazeCollator implements BoosterCollator {
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(R1, R1, R1, R1, R1, R1, R1, M1);
     private final RarityConfiguration landRuns = new RarityConfiguration(
-        L1, L1, L1, L1, L1, L1, L1, L1, L1, L1,
-        L1, L1, L1, L1, L1, L1, L1, L1, L1, L2
+            L1, L1, L1, L1, L1, L1, L1, L1, L1, L1,
+            L1, L1, L1, L1, L1, L1, L1, L1, L1, L2
     );
 
     @Override

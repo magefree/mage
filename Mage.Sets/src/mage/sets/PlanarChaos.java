@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class PlanarChaos extends ExpansionSet {
@@ -23,11 +22,13 @@ public final class PlanarChaos extends ExpansionSet {
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 165;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Aeon Chronicler", 32, Rarity.RARE, mage.cards.a.AeonChronicler.class));
         cards.add(new SetCardInfo("Aether Membrane", 93, Rarity.UNCOMMON, mage.cards.a.AetherMembrane.class));
         cards.add(new SetCardInfo("Akroma, Angel of Fury", 94, Rarity.RARE, mage.cards.a.AkromaAngelOfFury.class));

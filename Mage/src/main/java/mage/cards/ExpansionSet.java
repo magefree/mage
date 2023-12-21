@@ -143,6 +143,7 @@ public abstract class ExpansionSet implements Serializable {
     protected boolean hasOnlyMulticolorCards = false;
     protected boolean hasAlternateBoosterPrintings = true; // not counting basic lands; e.g. Fallen Empires true, but Tenth Edition false
 
+    protected int expectedMaxCardNumber; // used by Verify check to find unimplemented cards. Does not drive any decision on the set.
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards = new EnumMap<>(Rarity.class);
@@ -156,6 +157,7 @@ public abstract class ExpansionSet implements Serializable {
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
+        this.expectedMaxCardNumber = Integer.MAX_VALUE;
     }
 
     public String getName() {
@@ -669,6 +671,10 @@ public abstract class ExpansionSet implements Serializable {
 
     public int getMaxCardNumberInBooster() {
         return maxCardNumberInBooster;
+    }
+
+    public int getExpectedMaxCardNumber() {
+        return expectedMaxCardNumber;
     }
 
     public int getNumBoosterDoubleFaced() {

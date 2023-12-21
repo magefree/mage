@@ -19,6 +19,7 @@ public final class Commander2021Edition extends ExpansionSet {
         super("Commander 2021 Edition", "C21", ExpansionSet.buildDate(2021, 4, 23), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 409;
 
         cards.add(new SetCardInfo("Adrix and Nev, Twincasters", 336, Rarity.MYTHIC, mage.cards.a.AdrixAndNevTwincasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adrix and Nev, Twincasters", 9, Rarity.MYTHIC, mage.cards.a.AdrixAndNevTwincasters.class, NON_FULL_USE_VARIOUS));

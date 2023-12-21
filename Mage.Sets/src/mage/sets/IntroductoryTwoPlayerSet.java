@@ -18,6 +18,7 @@ public class IntroductoryTwoPlayerSet extends ExpansionSet {
     private IntroductoryTwoPlayerSet() {
         super("Introductory Two-Player Set", "ITP", ExpansionSet.buildDate(1996, 12, 31), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 67;
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Alabaster Potion", 1, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
@@ -87,5 +88,5 @@ public class IntroductoryTwoPlayerSet extends ExpansionSet {
         cards.add(new SetCardInfo("Whirling Dervish", 46, Rarity.UNCOMMON, mage.cards.w.WhirlingDervish.class));
         cards.add(new SetCardInfo("Winter Blast", 47, Rarity.UNCOMMON, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Zephyr Falcon", 15, Rarity.COMMON, mage.cards.z.ZephyrFalcon.class));
-     }
+    }
 }

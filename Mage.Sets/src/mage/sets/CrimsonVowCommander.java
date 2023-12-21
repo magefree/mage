@@ -18,6 +18,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
     private CrimsonVowCommander() {
         super("Crimson Vow Commander", "VOC", ExpansionSet.buildDate(2021, 11, 19), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 188;
 
         cards.add(new SetCardInfo("Ancient Craving", 117, Rarity.UNCOMMON, mage.cards.a.AncientCraving.class));
         cards.add(new SetCardInfo("Angel of Flight Alabaster", 77, Rarity.RARE, mage.cards.a.AngelOfFlightAlabaster.class));

@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author noxx
  */
 public final class UrzasLegacy extends ExpansionSet {
@@ -23,11 +22,13 @@ public final class UrzasLegacy extends ExpansionSet {
         this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 143;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("About Face", 73, Rarity.COMMON, mage.cards.a.AboutFace.class));
         cards.add(new SetCardInfo("Angel's Trumpet", 121, Rarity.UNCOMMON, mage.cards.a.AngelsTrumpet.class));
         cards.add(new SetCardInfo("Angelic Curator", 1, Rarity.COMMON, mage.cards.a.AngelicCurator.class));

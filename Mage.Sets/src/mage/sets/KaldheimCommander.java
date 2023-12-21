@@ -18,6 +18,7 @@ public final class KaldheimCommander extends ExpansionSet {
     private KaldheimCommander() {
         super("Kaldheim Commander", "KHC", ExpansionSet.buildDate(2021, 2, 5), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 119;
 
         cards.add(new SetCardInfo("Abomination of Llanowar", 81, Rarity.UNCOMMON, mage.cards.a.AbominationOfLlanowar.class));
         cards.add(new SetCardInfo("Ambition's Cost", 47, Rarity.UNCOMMON, mage.cards.a.AmbitionsCost.class));

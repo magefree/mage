@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Prophecy extends ExpansionSet {
@@ -23,11 +22,13 @@ public final class Prophecy extends ExpansionSet {
         this.parentSet = MercadianMasques.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 143;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Abolish", 1, Rarity.UNCOMMON, mage.cards.a.Abolish.class));
         cards.add(new SetCardInfo("Agent of Shauku", 55, Rarity.COMMON, mage.cards.a.AgentOfShauku.class));
         cards.add(new SetCardInfo("Alexi's Cloak", 29, Rarity.COMMON, mage.cards.a.AlexisCloak.class));

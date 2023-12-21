@@ -18,6 +18,7 @@ public class BattleRoyaleBoxSet extends ExpansionSet {
     private BattleRoyaleBoxSet() {
         super("Battle Royale Box Set", "BRB", ExpansionSet.buildDate(1999, 11, 12), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 136;
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abyssal Specter", 1, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));
@@ -156,5 +157,5 @@ public class BattleRoyaleBoxSet extends ExpansionSet {
         cards.add(new SetCardInfo("Wind Drake", 98, Rarity.COMMON, mage.cards.w.WindDrake.class));
         cards.add(new SetCardInfo("Windfall", 99, Rarity.UNCOMMON, mage.cards.w.Windfall.class));
         cards.add(new SetCardInfo("Wrath of God", 100, Rarity.RARE, mage.cards.w.WrathOfGod.class));
-     }
+    }
 }

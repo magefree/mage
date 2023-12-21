@@ -18,6 +18,7 @@ public class RivalsQuickStartSet extends ExpansionSet {
     private RivalsQuickStartSet() {
         super("Rivals Quick Start Set", "RQS", ExpansionSet.buildDate(1996, 7, 1), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 65;
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Alabaster Potion", 1, Rarity.COMMON, mage.cards.a.AlabasterPotion.class));
@@ -85,5 +86,5 @@ public class RivalsQuickStartSet extends ExpansionSet {
         cards.add(new SetCardInfo("Whirling Dervish", 45, Rarity.UNCOMMON, mage.cards.w.WhirlingDervish.class));
         cards.add(new SetCardInfo("Winter Blast", 46, Rarity.UNCOMMON, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Zephyr Falcon", 14, Rarity.COMMON, mage.cards.z.ZephyrFalcon.class));
-     }
+    }
 }

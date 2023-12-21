@@ -18,6 +18,7 @@ public class HachetteUK extends ExpansionSet {
     private HachetteUK() {
         super("Hachette UK", "PHUK", ExpansionSet.buildDate(2006, 1, 1), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 60;
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Betrayal of Flesh", 52, Rarity.UNCOMMON, mage.cards.b.BetrayalOfFlesh.class));
@@ -80,5 +81,5 @@ public class HachetteUK extends ExpansionSet {
         cards.add(new SetCardInfo("Swarm of Rats", 2, Rarity.UNCOMMON, mage.cards.s.SwarmOfRats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm of Rats", 14, Rarity.UNCOMMON, mage.cards.s.SwarmOfRats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm of Rats", 27, Rarity.UNCOMMON, mage.cards.s.SwarmOfRats.class, NON_FULL_USE_VARIOUS));
-     }
+    }
 }

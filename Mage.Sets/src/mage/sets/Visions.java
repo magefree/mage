@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Visions extends ExpansionSet {
@@ -22,11 +21,13 @@ public final class Visions extends ExpansionSet {
         this.parentSet = Mirage.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 167;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Aku Djinn", 51, Rarity.RARE, mage.cards.a.AkuDjinn.class));
         cards.add(new SetCardInfo("Anvil of Bogardan", 141, Rarity.RARE, mage.cards.a.AnvilOfBogardan.class));
         cards.add(new SetCardInfo("Archangel", 1, Rarity.RARE, mage.cards.a.Archangel.class));

@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author loki
  */
 public final class RavnicaCityOfGuilds extends ExpansionSet {
@@ -21,11 +20,13 @@ public final class RavnicaCityOfGuilds extends ExpansionSet {
         super("Ravnica: City of Guilds", "RAV", ExpansionSet.buildDate(2005, 9, 24), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 306;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Agrus Kos, Wojek Veteran", 190, Rarity.RARE, mage.cards.a.AgrusKosWojekVeteran.class));
         cards.add(new SetCardInfo("Auratouched Mage", 1, Rarity.UNCOMMON, mage.cards.a.AuratouchedMage.class));
         cards.add(new SetCardInfo("Autochthon Wurm", 191, Rarity.RARE, mage.cards.a.AutochthonWurm.class));

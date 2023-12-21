@@ -6,6 +6,7 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/gn2
+ *
  * @author TheElk801
  */
 public class GameNight2019 extends ExpansionSet {
@@ -20,6 +21,7 @@ public class GameNight2019 extends ExpansionSet {
         super("Game Night 2019", "GN2", ExpansionSet.buildDate(2019, 11, 15), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 64;
 
         cards.add(new SetCardInfo("Accursed Horde", 26, Rarity.UNCOMMON, mage.cards.a.AccursedHorde.class));
         cards.add(new SetCardInfo("Akoum Hellkite", 36, Rarity.RARE, mage.cards.a.AkoumHellkite.class));
@@ -85,5 +87,5 @@ public class GameNight2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Duelist", 44, Rarity.COMMON, mage.cards.v.VoldarenDuelist.class));
         cards.add(new SetCardInfo("Zealot of the God-Pharaoh", 45, Rarity.COMMON, mage.cards.z.ZealotOfTheGodPharaoh.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 15, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
-     }
+    }
 }

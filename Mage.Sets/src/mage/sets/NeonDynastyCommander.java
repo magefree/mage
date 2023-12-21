@@ -18,8 +18,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
     private NeonDynastyCommander() {
         super("Neon Dynasty Commander", "NEC", ExpansionSet.buildDate(2022, 2, 18), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
-
-        // 122, Nissa, Voice of Zendikar - omitted from set due scryfall support
+        this.expectedMaxCardNumber = 180; // #122 is missing, there is a hole in the set (a Nissa, Voice of Zendikar that got removed before print)
 
         cards.add(new SetCardInfo("Access Denied", 11, Rarity.RARE, mage.cards.a.AccessDenied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Access Denied", 47, Rarity.RARE, mage.cards.a.AccessDenied.class, NON_FULL_USE_VARIOUS));

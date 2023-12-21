@@ -20,6 +20,7 @@ public final class TheBrothersWarRetroArtifacts extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
         this.maxCardNumberInBooster = 63;
+        this.expectedMaxCardNumber = 126;
 
         cards.add(new SetCardInfo("Adaptive Automaton", 1, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adaptive Automaton", 64, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class, NON_FULL_USE_VARIOUS));

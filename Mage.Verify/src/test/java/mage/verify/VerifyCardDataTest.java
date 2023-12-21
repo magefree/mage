@@ -27,6 +27,7 @@ import mage.cards.repository.*;
 import mage.choices.Choice;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.Filter;
@@ -61,6 +62,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author JayDi85
@@ -2212,6 +2214,405 @@ public class VerifyCardDataTest {
                 System.out.println("WARNING, can't find mtgjson ref for " + card.getName());
             }
         });
+    }
+
+    /**
+     * This map does contain card references (only set::number) of cards
+     * that are out of scope, and should not be in a to-be-implemented list.
+     */
+    private static final Map<String, Set<Integer>> intentionalUnimplemented = new HashMap<>();
+
+    static {
+        intentionalUnimplemented.put(
+                "LEA", new HashSet<>(Arrays.asList(
+                        63, 78,             // Text change
+                        96, 99, 102         // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "LEB", new HashSet<>(Arrays.asList(
+                        64, 79,             // Text change
+                        97, 100, 103        // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "2ED", new HashSet<>(Arrays.asList(
+                        64, 79,             // Text change
+                        97, 100, 103        // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "ARN", new HashSet<>(Arrays.asList(
+                        10,                 // Sub game
+                        66                  // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "ATQ", new HashSet<>(Arrays.asList(
+                        42                  // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "3ED", new HashSet<>(Arrays.asList(
+                        65, 81,             // Text change
+                        97, 100, 103        // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "LEG", new HashSet<>(Arrays.asList(
+                        145,                // Dexterity, might make an errata version of it similar to Chaos Orb
+                        166, 200            // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "SUM", new HashSet<>(Arrays.asList(
+                        65, 81,             // Text change
+                        97, 100, 103        // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "4ED", new HashSet<>(Arrays.asList(
+                        83, 102,            // Text change
+                        225, 267, 303       // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "ICE", new HashSet<>(Arrays.asList(
+                        59, 99,             // Text change
+                        308                 // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "CHR", new HashSet<>(Arrays.asList(
+                        102                 // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "HML", new HashSet<>(Arrays.asList(
+                        58                 // Ante
+                ))
+        );
+        intentionalUnimplemented.put(
+                "MIR", new HashSet<>(Arrays.asList(
+                        77                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "5ED", new HashSet<>(Arrays.asList(
+                        101, 124           // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "TMP", new HashSet<>(Arrays.asList(
+                        102                // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "INV", new HashSet<>(Arrays.asList(
+                        50                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "TOR", new HashSet<>(Arrays.asList(
+                        22                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "ONS", new HashSet<>(Arrays.asList(
+                        67                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "8ED", new HashSet<>(Arrays.asList(
+                        92                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "5DN", new HashSet<>(Arrays.asList(
+                        37                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "CHK", new HashSet<>(Arrays.asList(
+                        94                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "9ED", new HashSet<>(Arrays.asList(
+                        87                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "10E", new HashSet<>(Arrays.asList(
+                        93                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "EVE", new HashSet<>(Arrays.asList(
+                        21                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "DGM", new HashSet<>(Arrays.asList(
+                        18                 // Text change
+                ))
+        );
+        intentionalUnimplemented.put(
+                "NEC", new HashSet<>(Arrays.asList(
+                        122                // Card did not make it to print. Supposedly Nissa, Voice of Zendikar
+                ))
+        );
+        intentionalUnimplemented.put(
+                "GN3", new HashSet<>(Arrays.asList(
+                        66                // Card did not make it to print. Supposedly Zombify
+                ))
+        );
+        intentionalUnimplemented.put(
+                "BRC", new HashSet<>(Arrays.asList(
+                        37, 38            // Two holes in the Scryfall card numbers.
+                ))
+        );
+
+        // --------------------
+        // Temporary skipped
+        // --------------------
+
+        // NCC: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "NCC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(447)
+                        .filter(i -> i > 93 && i < 191 && i != 105 && i != 137 && i != 121 && i != 173)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // 40K: variants and reprints. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "40K", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(321)
+                        .filter(i -> (i > 168 && i < 181)
+                                || i == 228 || i == 229 || i == 234 || i == 235 || i == 245 || i == 250
+                                || i == 251 || i == 252 || i == 255 || i == 262 || i == 271 || i == 272
+                                || (i > 307 && i != 310 && i != 315 && i != 317))
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // CLB: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "CLB", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(936)
+                        .filter(i -> i > 361 && i != 430 && i != 451 && i != 455 && i != 459 && i != 463
+                                && i != 467 && i != 541 && i != 556 && i != 564 && i != 575 && i != 576
+                                && i != 607 && i != 615 && (i < 646 || i > 930))
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // BOT: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "BOT", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(29)
+                        .filter(i -> i > 15 && i != 27)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // MOC: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "MOC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(450)
+                        .filter(i -> (i >= 47 && i <= 71) // Those are the new planes
+                                || (i > 79 && i < 164 && i != 90 && i != 97 && i != 107 && i != 128 && i != 131 && i != 138)
+                                || i == 448 || i == 449 || i == 450)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // MAT: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "MAT", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(220)
+                        .filter(i -> i == 52 || i == 91 || i == 102 || i == 141 || i == 151
+                                || i == 176 || i == 187 || i == 220)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // LTC: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "LTC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(558)
+                        .filter(i -> (i > 80 && i < 161) || i == 362 || i == 378
+                                || (i > 378 && i < 491 && i != 392)
+                                || i > 534)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // WOC: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "WOC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(58)
+                        .filter(i -> i > 28)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // WHO: reprint & variant. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "WHO", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(1165)
+                        .filter(i -> i == 185 || i == 186 || i == 191 || i == 192 || i == 193 || i == 195 || i == 197
+                                || i == 199 || i == 201 || i == 203 || i == 205 || i == 264
+                                || i == 265 || i == 266
+                                || (i > 331 && i != 429 && i != 432 && i != 446 && i != 461 && i != 545 && i != 560 & i != 561 && i != 565))
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // LCI: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "LCI", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(415)
+                        .filter(i -> i == 56 || (i >= 292 && i != 363 && i != 393 && i != 395 && i != 397 && i != 399 && i != 401))
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // LCC: reprints & variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "LCC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(370)
+                        .filter(i -> (i >= 17 && i <= 68 && i != 43 && i != 49) || (i >= 121 && i <= 124) && i == 299)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // REX: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "REX", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(45)
+                        .filter(i -> i >= 27)
+                        .collect(Collectors.toList())
+                )
+        );
+    }
+
+    @Ignore
+    @Test
+    /**
+     * Manual test to generate up to date to-do lists of cards to implement.
+     */
+    public void test_find_unimplemented() {
+        boolean withSkips = true; // Some cards are intentionally not implemented and will not be written out there.
+
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for (ExpansionSet set : sets.stream()
+                .sorted(Comparator.comparingLong(set -> set.getReleaseDate().getTime()))
+                .collect(Collectors.toList())
+        ) {
+            switch (set.getSetType()) {
+                case CUSTOM_SET:
+                case JOKESET:
+                case MAGIC_ARENA:
+                case MAGIC_ONLINE:
+                    continue;
+            }
+
+            int checkUpTo = set.getExpectedMaxCardNumber();
+            if (checkUpTo == Integer.MAX_VALUE && set.hasBoosters()) {
+                checkUpTo = set.getMaxCardNumberInBooster();
+            }
+
+            if (checkUpTo == Integer.MAX_VALUE) {
+                // do not check those non-booster sets.
+                if (set.getName().startsWith("From the Vault:")
+                        || set.getName().startsWith("Premium Deck Series:")
+                        || set.getName().startsWith("Welcome Deck")
+                        || set.getName().startsWith("Signature Spellbook:")
+                        || set.getName().startsWith("Commander Collection:")
+                        || set.getName().startsWith("Starter 2000") // 20 cards on Scryfall, up to 45 cn
+                        || set.getName().startsWith("Coldsnap Theme Decks") // cn all over the place
+                        || set.getName().startsWith("Mythic Edition") // cn not really numbers
+                        || set.getName().startsWith("M19 Gift Pack") // cn not really numbers
+                        || set.getName().startsWith("Unfinity") // half the set is funny, half is legacy legal. What a mess.
+                        || set.getName().startsWith("Pro Tour Collector Set") // cn not really numbers
+                        || set.getName().startsWith("World Championship Decks") // cn not really numbers
+                        || set.getSetType() == SetType.PROMOTIONAL // too many, did not bother checking them here for now.
+                ) {
+                    continue;
+                }
+                System.out.println(set.getCode() + " Missing maxCardNumber set " + set.getName());
+                continue;
+            }
+
+            Set<Integer> implemented = new HashSet<>();
+            int unexpectedMax = 0;
+            for (ExpansionSet.SetCardInfo sci : set.getSetCardInfo()) {
+                int num = sci.getCardNumberAsInt();
+                implemented.add(num);
+                if (num > set.getExpectedMaxCardNumber()) {
+                    unexpectedMax = Math.max(num, unexpectedMax);
+                }
+            }
+            if (unexpectedMax > 0) {
+                System.out.println(set.getCode() + " unexpected max not correct set to " + set.getExpectedMaxCardNumber() + " but found " + unexpectedMax);
+            }
+
+            if (withSkips) {
+                // Some cards we know won't be implemented any time soon (ante, text change, etc..)
+                Set<Integer> skipped = intentionalUnimplemented.getOrDefault(set.getCode(), Collections.emptySet());
+                skipped.forEach(i -> {
+                    if (implemented.contains(i)) {
+                        System.out.println(set.getCode() + " has #" + i + " implemented altough it is in the skipped set.");
+                    } else {
+                        implemented.add(i);
+                    }
+                });
+            }
+
+            List<Integer> notImplemented = new ArrayList<>();
+            for (int i = 1; i <= checkUpTo; ++i) {
+                if (!implemented.contains(i)) {
+                    notImplemented.add(i);
+                }
+            }
+
+            if (!notImplemented.isEmpty()) {
+                String search = "https://scryfall.com/search?q=set%3A" + set.getCode() + "+%28";
+                String sep = "cn%3D";
+                int count = notImplemented.size();
+                int j = 0;
+                for (int i : notImplemented) {
+                    if (j == 60) {
+                        // Print searchs 60 per 60
+                        search += "%29&order=set&dir=asc&unique=prints";
+                        System.out.println(set.getCode() + " " + count + " " + search);
+                        search = "https://scryfall.com/search?q=set%3A" + set.getCode() + "+%28";
+                        sep = "cn%3D";
+                        j = 0;
+                    }
+                    j++;
+                    search += sep + i;
+                    sep = "+or+cn%3D";
+                }
+                search += "%29&order=set&dir=asc&unique=prints";
+                System.out.println(set.getCode() + " " + count + " " + search);
+            }
+        }
     }
 
     private void printAbilityText(String text) {

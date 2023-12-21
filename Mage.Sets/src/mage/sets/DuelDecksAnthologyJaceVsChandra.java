@@ -21,6 +21,7 @@ public final class DuelDecksAnthologyJaceVsChandra extends ExpansionSet {
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 62;
 
         cards.add(new SetCardInfo("Aethersnipe", 17, Rarity.COMMON, mage.cards.a.Aethersnipe.class));
         cards.add(new SetCardInfo("Air Elemental", 13, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));

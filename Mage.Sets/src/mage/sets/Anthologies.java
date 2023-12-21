@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author JayDi85
  */
 public final class Anthologies extends ExpansionSet {
@@ -19,6 +18,7 @@ public final class Anthologies extends ExpansionSet {
     private Anthologies() {
         super("Anthologies", "ATH", ExpansionSet.buildDate(1998, 11, 1), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 85;
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Aesthir Glider", 67, Rarity.COMMON, mage.cards.a.AesthirGlider.class));

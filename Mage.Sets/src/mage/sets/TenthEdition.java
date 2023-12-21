@@ -18,6 +18,7 @@ public final class TenthEdition extends ExpansionSet {
     private TenthEdition() {
         super("Tenth Edition", "10E", ExpansionSet.buildDate(2007, 6, 14), SetType.CORE);
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 383;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

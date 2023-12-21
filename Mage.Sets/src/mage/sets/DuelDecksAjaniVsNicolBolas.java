@@ -20,6 +20,7 @@ public final class DuelDecksAjaniVsNicolBolas extends ExpansionSet {
         super("Duel Decks: Ajani vs. Nicol Bolas", "DDH", ExpansionSet.buildDate(2011, 9, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 80;
 
         cards.add(new SetCardInfo("Ageless Entity", 18, Rarity.RARE, mage.cards.a.AgelessEntity.class));
         cards.add(new SetCardInfo("Agonizing Demise", 66, Rarity.COMMON, mage.cards.a.AgonizingDemise.class));

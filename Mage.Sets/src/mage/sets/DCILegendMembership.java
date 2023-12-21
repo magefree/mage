@@ -19,6 +19,7 @@ public class DCILegendMembership extends ExpansionSet {
         super("DCI Legend Membership", "PLGM", ExpansionSet.buildDate(1995, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 2;
 
         cards.add(new SetCardInfo("Counterspell", 1, Rarity.RARE, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Incinerate", 2, Rarity.RARE, mage.cards.i.Incinerate.class));

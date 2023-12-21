@@ -19,6 +19,7 @@ public class ArenaLeague1996 extends ExpansionSet {
         super("Arena League 1996", "PARL", ExpansionSet.buildDate(1996, 8, 2), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 7;
 
         cards.add(new SetCardInfo("Disenchant", 6, Rarity.RARE, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Fireball", 7, Rarity.RARE, mage.cards.f.Fireball.class));
@@ -27,5 +28,5 @@ public class ArenaLeague1996 extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 4, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Plains", 1, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Swamp", 3, Rarity.LAND, mage.cards.basiclands.Swamp.class));
-     }
+    }
 }

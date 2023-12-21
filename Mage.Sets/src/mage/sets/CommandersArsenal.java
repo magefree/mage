@@ -20,6 +20,7 @@ public final class CommandersArsenal extends ExpansionSet {
         super("Commander's Arsenal", "CM1", ExpansionSet.buildDate(2012, 11, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 18;
 
         cards.add(new SetCardInfo("Chaos Warp", 1, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Command Tower", 2, Rarity.COMMON, mage.cards.c.CommandTower.class));

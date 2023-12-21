@@ -20,6 +20,7 @@ public final class DuelDecksIzzetVsGolgari extends ExpansionSet {
         super("Duel Decks: Izzet vs. Golgari", "DDJ", ExpansionSet.buildDate(2012, 9, 7), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 90;
 
         cards.add(new SetCardInfo("Barren Moor", 78, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Boneyard Wurm", 51, Rarity.UNCOMMON, mage.cards.b.BoneyardWurm.class));

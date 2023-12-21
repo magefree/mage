@@ -18,6 +18,7 @@ public class BeatdownBoxSet extends ExpansionSet {
     private BeatdownBoxSet() {
         super("Beatdown Box Set", "BTD", ExpansionSet.buildDate(2000, 10, 1), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 90;
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Air Elemental", 1, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
@@ -110,5 +111,5 @@ public class BeatdownBoxSet extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Growth", 64, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Woolly Spider", 65, Rarity.COMMON, mage.cards.w.WoollySpider.class));
         cards.add(new SetCardInfo("Yavimaya Wurm", 66, Rarity.COMMON, mage.cards.y.YavimayaWurm.class));
-     }
+    }
 }

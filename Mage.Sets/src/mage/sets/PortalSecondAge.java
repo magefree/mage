@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author Plopman
  */
 public final class PortalSecondAge extends ExpansionSet {
@@ -22,11 +21,13 @@ public final class PortalSecondAge extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 165;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Abyssal Nightstalker", 61, Rarity.UNCOMMON, mage.cards.a.AbyssalNightstalker.class));
         cards.add(new SetCardInfo("Air Elemental", 31, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Alaborn Cavalier", 1, Rarity.UNCOMMON, mage.cards.a.AlabornCavalier.class));

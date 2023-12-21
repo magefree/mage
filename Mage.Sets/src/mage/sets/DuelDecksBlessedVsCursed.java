@@ -20,6 +20,7 @@ public final class DuelDecksBlessedVsCursed extends ExpansionSet {
         super("Duel Decks: Blessed vs. Cursed", "DDQ", ExpansionSet.buildDate(2016, 2, 26), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 76;
 
         cards.add(new SetCardInfo("Abattoir Ghoul", 50, Rarity.UNCOMMON, mage.cards.a.AbattoirGhoul.class));
         cards.add(new SetCardInfo("Appetite for Brains", 51, Rarity.UNCOMMON, mage.cards.a.AppetiteForBrains.class));

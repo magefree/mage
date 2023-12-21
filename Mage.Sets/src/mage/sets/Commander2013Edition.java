@@ -18,6 +18,7 @@ public final class Commander2013Edition extends ExpansionSet {
     private Commander2013Edition() {
         super("Commander 2013 Edition", "C13", ExpansionSet.buildDate(2013, 11, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 356;
 
         cards.add(new SetCardInfo("Acidic Slime", 134, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Act of Authority", 1, Rarity.RARE, mage.cards.a.ActOfAuthority.class));

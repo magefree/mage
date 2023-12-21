@@ -18,6 +18,7 @@ public final class Planechase2012Edition extends ExpansionSet {
     private Planechase2012Edition() {
         super("Planechase 2012 Edition", "PC2", ExpansionSet.buildDate(2012, 6, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 156;
 
         cards.add(new SetCardInfo("Arc Trail", 39, Rarity.UNCOMMON, mage.cards.a.ArcTrail.class));
         cards.add(new SetCardInfo("Armillary Sphere", 108, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));

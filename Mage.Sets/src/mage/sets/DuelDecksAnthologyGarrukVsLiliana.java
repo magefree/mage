@@ -21,6 +21,7 @@ public final class DuelDecksAnthologyGarrukVsLiliana extends ExpansionSet {
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 63;
 
         cards.add(new SetCardInfo("Albino Troll", 3, Rarity.UNCOMMON, mage.cards.a.AlbinoTroll.class));
         cards.add(new SetCardInfo("Bad Moon", 48, Rarity.RARE, mage.cards.b.BadMoon.class));

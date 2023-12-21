@@ -20,6 +20,7 @@ public class GameNightFreeForAll extends ExpansionSet {
     private GameNightFreeForAll() {
         super("Game Night: Free-for-All", "GN3", ExpansionSet.buildDate(2022, 10, 14), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 136; // #66 is missing, there is a hole in the set (a Zombify that got removed before print)
 
         cards.add(new SetCardInfo("Abrade", 67, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Ancestral Blade", 6, Rarity.COMMON, mage.cards.a.AncestralBlade.class));

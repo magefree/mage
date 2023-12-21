@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Worldwake extends ExpansionSet {
@@ -29,11 +28,13 @@ public final class Worldwake extends ExpansionSet {
         this.parentSet = Zendikar.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 145;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        
         cards.add(new SetCardInfo("Abyssal Persecutor", 47, Rarity.MYTHIC, mage.cards.a.AbyssalPersecutor.class));
         cards.add(new SetCardInfo("Admonition Angel", 1, Rarity.MYTHIC, mage.cards.a.AdmonitionAngel.class));
         cards.add(new SetCardInfo("Aether Tradewinds", 24, Rarity.COMMON, mage.cards.a.AetherTradewinds.class));

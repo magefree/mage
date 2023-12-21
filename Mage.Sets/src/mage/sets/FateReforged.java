@@ -34,6 +34,7 @@ public final class FateReforged extends ExpansionSet {
         this.parentSet = KhansOfTarkir.getInstance();
         this.hasBasicLands = true;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 185;
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
@@ -299,13 +300,13 @@ class FateReforgedCollator implements BoosterCollator {
     private final RarityConfiguration commonRuns = new RarityConfiguration(AAAAABBBBB, AAAAAABBBB);
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(U1);
     private final RarityConfiguration rareRuns = new RarityConfiguration(
-        R1, R1, R1, R1, R1, R1, R1, R1, R1, R1,
-        R1, R1, R1, R1, R1, R1, R1, R2, R2, R2
+            R1, R1, R1, R1, R1, R1, R1, R1, R1, R1,
+            R1, R1, R1, R1, R1, R1, R1, R2, R2, R2
     );
     private final RarityConfiguration landRuns = new RarityConfiguration(
-        L1, L1, L1, L1, L1, L1, L1, L1,
-        L1, L1, L1, L1, L1, L1, L1, L1,
-        L1, L1, L1, L1, L1, L1, L1, L2
+            L1, L1, L1, L1, L1, L1, L1, L1,
+            L1, L1, L1, L1, L1, L1, L1, L1,
+            L1, L1, L1, L1, L1, L1, L1, L2
     );
 
     @Override

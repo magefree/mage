@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Morningtide extends ExpansionSet {
@@ -23,11 +22,13 @@ public final class Morningtide extends ExpansionSet {
         this.parentSet = Morningtide.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 150;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Ambassador Oak", 113, Rarity.COMMON, mage.cards.a.AmbassadorOak.class));
         cards.add(new SetCardInfo("Auntie's Snitch", 57, Rarity.RARE, mage.cards.a.AuntiesSnitch.class));
         cards.add(new SetCardInfo("Ballyrush Banneret", 1, Rarity.COMMON, mage.cards.b.BallyrushBanneret.class));

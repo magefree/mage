@@ -18,6 +18,7 @@ public final class Commander2018Edition extends ExpansionSet {
     private Commander2018Edition() {
         super("Commander 2018 Edition", "C18", ExpansionSet.buildDate(2018, 8, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 307;
 
         cards.add(new SetCardInfo("Acidic Slime", 127, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Adarkar Valkyrie", 60, Rarity.RARE, mage.cards.a.AdarkarValkyrie.class));

@@ -18,6 +18,7 @@ public final class Commander2017Edition extends ExpansionSet {
     private Commander2017Edition() {
         super("Commander 2017 Edition", "C17", ExpansionSet.buildDate(2017, 8, 25), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.expectedMaxCardNumber = 309;
 
         cards.add(new SetCardInfo("Abundance", 145, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Akoum Refuge", 233, Rarity.UNCOMMON, mage.cards.a.AkoumRefuge.class));

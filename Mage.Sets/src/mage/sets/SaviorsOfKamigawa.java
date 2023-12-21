@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class SaviorsOfKamigawa extends ExpansionSet {
@@ -23,11 +22,13 @@ public final class SaviorsOfKamigawa extends ExpansionSet {
         this.parentSet = ChampionsOfKamigawa.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 165;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Adamaro, First to Desire", 91, Rarity.RARE, mage.cards.a.AdamaroFirstToDesire.class));
         cards.add(new SetCardInfo("Aether Shockwave", 1, Rarity.UNCOMMON, mage.cards.a.AetherShockwave.class));
         cards.add(new SetCardInfo("Akki Drillmaster", 92, Rarity.COMMON, mage.cards.a.AkkiDrillmaster.class));

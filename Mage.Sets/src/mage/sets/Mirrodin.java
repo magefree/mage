@@ -16,11 +16,13 @@ public final class Mirrodin extends ExpansionSet {
         super("Mirrodin", "MRD", ExpansionSet.buildDate(2003, 9, 2), SetType.EXPANSION);
         this.blockName = "Mirrodin";
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 306;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        
         cards.add(new SetCardInfo("Aether Spellbomb", 141, Rarity.COMMON, mage.cards.a.AetherSpellbomb.class));
         cards.add(new SetCardInfo("Alpha Myr", 142, Rarity.COMMON, mage.cards.a.AlphaMyr.class));
         cards.add(new SetCardInfo("Altar of Shadows", 143, Rarity.RARE, mage.cards.a.AltarOfShadows.class));
