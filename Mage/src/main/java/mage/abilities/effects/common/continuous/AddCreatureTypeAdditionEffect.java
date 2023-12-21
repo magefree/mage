@@ -14,6 +14,10 @@ public class AddCreatureTypeAdditionEffect extends ContinuousEffectImpl {
     private final SubType subType;
     private final boolean giveBlackColor;
 
+    public AddCreatureTypeAdditionEffect(SubType subType) {
+        this(subType, false);
+    }
+
     public AddCreatureTypeAdditionEffect(SubType subType, boolean giveBlackColor) {
         super(Duration.Custom, Outcome.Neutral);
         this.subType = subType;
