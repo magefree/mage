@@ -19,7 +19,7 @@ public class CombatDamageStep extends Step {
      * @param first if true, then it is the FirstCombatDamageStep
      */
     public CombatDamageStep(boolean first) {
-        super(PhaseStep.COMBAT_DAMAGE, true);
+        super(first ? PhaseStep.FIRST_COMBAT_DAMAGE : PhaseStep.COMBAT_DAMAGE, true);
         this.stepEvent = EventType.COMBAT_DAMAGE_STEP;
         this.preStepEvent = EventType.COMBAT_DAMAGE_STEP_PRE;
         this.postStepEvent = EventType.COMBAT_DAMAGE_STEP_POST;
