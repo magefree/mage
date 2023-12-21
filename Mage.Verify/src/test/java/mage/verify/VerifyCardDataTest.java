@@ -2216,6 +2216,10 @@ public class VerifyCardDataTest {
         });
     }
 
+    /**
+     * This map does contain card references (only set::number) of cards
+     * that are out of scope, and should not be in a to-be-implemented list.
+     */
     private static final Map<String, Set<Integer>> intentionalUnimplemented = new HashMap<>();
 
     static {
@@ -2471,7 +2475,37 @@ public class VerifyCardDataTest {
                         .filter(i -> i == 185 || i == 186 || i == 191 || i == 192 || i == 193 || i == 195 || i == 197
                                 || i == 199 || i == 201 || i == 203 || i == 205 || i == 264
                                 || i == 265 || i == 266
-                                || (i > 331 && i != 432 && i != 446 && i != 461 && i != 560 & i != 561 && i != 565))
+                                || (i > 331 && i != 429 && i != 432 && i != 446 && i != 461 && i != 545 && i != 560 & i != 561 && i != 565))
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // LCI: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "LCI", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(415)
+                        .filter(i -> i == 56 || (i >= 292 && i != 363 && i != 393 && i != 395 && i != 397 && i != 399 && i != 401))
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // LCC: reprints & variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "LCC", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(370)
+                        .filter(i -> (i >= 17 && i <= 68 && i != 43 && i != 49) || (i >= 121 && i <= 124) && i == 299)
+                        .collect(Collectors.toList())
+                )
+        );
+
+        // REX: variants. Clean when those have been added.
+        intentionalUnimplemented.put(
+                "REX", new HashSet<>(Stream
+                        .iterate(1, n -> n + 1)
+                        .limit(45)
+                        .filter(i -> i >= 27)
                         .collect(Collectors.toList())
                 )
         );
@@ -2479,6 +2513,9 @@ public class VerifyCardDataTest {
 
     @Ignore
     @Test
+    /**
+     * Manual test to generate up to date to-do lists of cards to implement.
+     */
     public void test_find_unimplemented() {
         boolean withSkips = true; // Some cards are intentionally not implemented and will not be written out there.
 

@@ -20,6 +20,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         super("Lost Caverns of Ixalan Commander", "LCC", ExpansionSet.buildDate(2023, 11, 17), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 370;
 
         cards.add(new SetCardInfo("Admiral Beckett Brass", 264, Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class));
         cards.add(new SetCardInfo("Aetherize", 142, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
