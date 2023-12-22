@@ -103,7 +103,7 @@ class LongListOfTheEntsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Set<String> chosenTypes = this
+        Set<String> chosenTypes = LongListOfTheEntsEffect
                 .getSubTypes(game, source)
                 .stream()
                 .map(SubType::toString)
@@ -111,7 +111,7 @@ class LongListOfTheEntsEffect extends OneShotEffect {
         ChoiceCreatureType choice = new ChoiceCreatureType(source.getSourceObject(game));
         choice.getChoices().removeIf(chosenTypes::contains);
         player.choose(Outcome.BoostCreature, choice, game);
-        SubType subType = SubType.fromString(choice.getChoice());
+        SubType subType = SubType.byDescription(choice.getChoice());
         if (subType == null) {
             return false;
         }
