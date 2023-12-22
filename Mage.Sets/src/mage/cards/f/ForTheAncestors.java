@@ -15,7 +15,7 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -80,7 +80,7 @@ class ForTheAncestorsEffect extends OneShotEffect {
             filter.add((Predicate<Card>) (input, game1) -> false);
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
-        TargetCard target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
+        TargetCard target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
         player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
         player.revealCards(source, toHand, game);
