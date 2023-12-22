@@ -1,4 +1,3 @@
-
 package mage.game.turn;
 
 import java.util.UUID;
@@ -14,15 +13,22 @@ import mage.game.events.GameEvent.EventType;
  */
 public class CombatDamageStep extends Step {
 
-    public CombatDamageStep() {
-        super(PhaseStep.COMBAT_DAMAGE, true);
+    private final boolean first;
+
+    /**
+     * @param first if true, then it is the FirstCombatDamageStep
+     */
+    public CombatDamageStep(boolean first) {
+        super(first ? PhaseStep.FIRST_COMBAT_DAMAGE : PhaseStep.COMBAT_DAMAGE, true);
         this.stepEvent = EventType.COMBAT_DAMAGE_STEP;
         this.preStepEvent = EventType.COMBAT_DAMAGE_STEP_PRE;
         this.postStepEvent = EventType.COMBAT_DAMAGE_STEP_POST;
+        this.first = first;
     }
 
     protected CombatDamageStep(final CombatDamageStep step) {
         super(step);
+        this.first = step.first;
     }
 
     @Override
@@ -33,7 +39,12 @@ public class CombatDamageStep extends Step {
 
     @Override
     public boolean skipStep(Game game, UUID activePlayerId) {
+        // 508.8
         if (game.getCombat().noAttackers()) {
+            return true;
+        }
+        // 510.4
+        if (first && !game.getCombat().hasFirstOrDoubleStrike(game)) {
             return true;
         }
         return super.skipStep(game, activePlayerId);
@@ -43,25 +54,19 @@ public class CombatDamageStep extends Step {
     public void beginStep(Game game, UUID activePlayerId) {
         super.beginStep(game, activePlayerId);
         for (CombatGroup group : game.getCombat().getGroups()) {
-            group.assignDamageToBlockers(false, game);
+            group.assignDamageToBlockers(first, game);
         }
         for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-            group.assignDamageToAttackers(false, game);
+            group.assignDamageToAttackers(first, game);
         }
-
         for (CombatGroup group : game.getCombat().getGroups()) {
             group.applyDamage(game);
         }
-
         for (CombatGroup group : game.getCombat().getBlockingGroups()) {
             group.applyDamage(game);
         }
         // Must fire damage batch events now, before SBA (https://github.com/magefree/mage/issues/9129)
         game.getState().handleSimultaneousEvent(game);
-    }
-
-    public boolean getFirst() {
-        return false;
     }
 
     @Override
