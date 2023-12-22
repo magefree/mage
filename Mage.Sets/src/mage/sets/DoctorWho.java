@@ -210,6 +210,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Triumph", 321, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 320, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 322, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("The Beast, Deathless Prince", 114, Rarity.RARE, mage.cards.t.TheBeastDeathlessPrince.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Beast, Deathless Prince", 403, Rarity.RARE, mage.cards.t.TheBeastDeathlessPrince.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Beast, Deathless Prince", 719, Rarity.RARE, mage.cards.t.TheBeastDeathlessPrince.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Beast, Deathless Prince", 994, Rarity.RARE, mage.cards.t.TheBeastDeathlessPrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Dalek Emperor", 120, Rarity.RARE, mage.cards.t.TheDalekEmperor.class));
         cards.add(new SetCardInfo("The Eleventh Hour", 41, Rarity.RARE, mage.cards.t.TheEleventhHour.class));
         cards.add(new SetCardInfo("The Fifth Doctor", 127, Rarity.RARE, mage.cards.t.TheFifthDoctor.class));
