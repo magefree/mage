@@ -44,7 +44,7 @@ import mage.watchers.Watcher;
 public class TheTombOfAclazotz extends CardImpl {
 
     public TheTombOfAclazotz(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAVE);
 
