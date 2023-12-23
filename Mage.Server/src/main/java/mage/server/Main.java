@@ -309,7 +309,7 @@ public final class Main {
         try {
             MageServer testServer = (MageServer) TransporterClient.createTransporterClient(serverLocator.getLocatorURI(), MageServer.class, metadata);
             if (testServer != null) {
-                testServer.getServerState();
+                testServer.getServerState(); // check connection
                 return true;
             }
         } catch (Throwable t) {

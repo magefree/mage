@@ -45,7 +45,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class CardView extends SimpleCardView {
 
@@ -441,48 +441,6 @@ public class CardView extends SimpleCardView {
                     controlledByOwner = false;
                 }
             }
-
-            // card icons for permanents on battlefield
-
-            // icon - all from abilities
-            permanent.getAbilities(game).forEach(ability -> {
-                this.cardIcons.addAll(ability.getIcons(game));
-            });
-
-            // icon - face down
-            if (permanent.isFaceDown(game)) {
-                this.cardIcons.add(CardIconImpl.FACE_DOWN);
-            }
-
-            // icon - commander
-            if (game != null) {
-                Player owner = game.getPlayer(game.getOwnerId(permanent));
-                if (owner != null && game.isCommanderObject(owner, permanent)) {
-                    this.cardIcons.add(CardIconImpl.COMMANDER);
-                }
-            }
-
-            // icon - ring-bearer
-            if (permanent.isRingBearer()) {
-                this.cardIcons.add(CardIconImpl.RINGBEARER);
-            }
-
-            // icon - restrictions (search it in card hints)
-            List<String> restricts = new ArrayList<>();
-            this.rules.forEach(r -> {
-                if (r.startsWith(HintUtils.HINT_ICON_RESTRICT)
-                        || r.startsWith(HintUtils.HINT_ICON_REQUIRE)) {
-                    restricts.add(r
-                            .replace(HintUtils.HINT_ICON_RESTRICT, "")
-                            .replace(HintUtils.HINT_ICON_REQUIRE, "")
-                            .trim()
-                    );
-                }
-            });
-            if (!restricts.isEmpty()) {
-                restricts.sort(String::compareTo);
-                this.cardIcons.add(new CardIconImpl(CardIconType.OTHER_HAS_RESTRICTIONS, String.join("<br>", restricts)));
-            }
         } else {
             if (card.isCopy()) {
                 this.mageObjectType = MageObjectType.COPY_CARD;
@@ -496,25 +454,6 @@ public class CardView extends SimpleCardView {
                 for (Counter counter : card.getCounters(game).values()) {
                     counters.add(new CounterView(counter));
                 }
-            }
-        }
-
-        // card icons for any permanents and cards
-        if (game != null) {
-            // x cost
-            Zone cardZone = game.getState().getZone(card.getId());
-            if (card.getManaCost().containsX()
-                    && card.getSpellAbility() != null
-                    && (cardZone.match(Zone.BATTLEFIELD) || cardZone.match(Zone.STACK))) {
-                int costX;
-                if (card instanceof Permanent) {
-                    // permanent on battlefield (can show x icon multiple turns, so use end_game source)
-                    costX = ManacostVariableValue.END_GAME.calculate(game, card.getSpellAbility(), null);
-                } else {
-                    // other like Stack (can show x icon on stack only, so use normal source)
-                    costX = ManacostVariableValue.REGULAR.calculate(game, card.getSpellAbility(), null);
-                }
-                this.cardIcons.add(CardIconImpl.variableCost(costX));
             }
         }
 
@@ -647,6 +586,141 @@ public class CardView extends SimpleCardView {
 
         // Get starting defense
         this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
+
+        // add card icons at the end, so it will have full card view data
+        this.generateCardIcons(null, card, game);
+    }
+
+    /**
+     * Generate card icons for current object (support card, permanent or stack ability)
+     *
+     * @param ability only for stack ability, all other must use null
+     * @param object  original card/permanent/source
+     */
+    final protected void generateCardIcons(Ability ability, MageObject object, Game game) {
+        if (object instanceof Permanent) {
+            this.generateCardIconsForPermanent((Permanent) object, game);
+        }
+        this.generateCardIconsForAny(object, ability, game);
+    }
+
+    private void generateCardIconsForPermanent(Permanent permanent, Game game) {
+        // card icons for permanents on battlefield
+        if (game == null) {
+            return;
+        }
+
+        // icon - all from abilities
+        permanent.getAbilities(game).forEach(ability -> {
+            this.cardIcons.addAll(ability.getIcons(game));
+        });
+
+        // icon - face down
+        if (permanent.isFaceDown(game)) {
+            this.cardIcons.add(CardIconImpl.FACE_DOWN);
+        }
+
+        // icon - commander
+        Player owner = game.getPlayer(game.getOwnerId(permanent));
+        if (owner != null && game.isCommanderObject(owner, permanent)) {
+            this.cardIcons.add(CardIconImpl.COMMANDER);
+        }
+
+        // icon - ring-bearer
+        if (permanent.isRingBearer()) {
+            this.cardIcons.add(CardIconImpl.RINGBEARER);
+        }
+
+        // icon - restrictions (search it in card hints)
+        List<String> restricts = new ArrayList<>();
+        this.rules.forEach(r -> {
+            if (r.startsWith(HintUtils.HINT_ICON_RESTRICT)
+                    || r.startsWith(HintUtils.HINT_ICON_REQUIRE)) {
+                restricts.add(r
+                        .replace(HintUtils.HINT_ICON_RESTRICT, "")
+                        .replace(HintUtils.HINT_ICON_REQUIRE, "")
+                        .trim()
+                );
+            }
+        });
+        if (!restricts.isEmpty()) {
+            restricts.sort(String::compareTo);
+            this.cardIcons.add(new CardIconImpl(CardIconType.OTHER_HAS_RESTRICTIONS, String.join("<br>", restricts)));
+        }
+    }
+
+    private void generateCardIconsForAny(MageObject object, Ability ability, Game game) {
+        if (game == null) {
+            return;
+        }
+
+        Card showCard = (object instanceof Card) ? (Card) object : null;
+
+        Zone showZone;
+        if (ability instanceof StackAbility) {
+            showZone = Zone.STACK;
+        } else {
+            showZone = game.getState().getZone(object.getId());
+        }
+        if (showZone == null) {
+            return;
+        }
+
+        Ability showAbility;
+        if (ability != null) {
+            showAbility = ability;
+        } else if (showCard != null) {
+            showAbility = showCard.getSpellAbility();
+        } else {
+            showAbility = null;
+        }
+
+        // icon - x cost
+        if (showCard != null
+                && showCard.getManaCost().containsX()
+                && showAbility != null
+                && (showZone.match(Zone.BATTLEFIELD) || showZone.match(Zone.STACK))) {
+            int costX;
+            if (showCard instanceof Permanent) {
+                // permanent on battlefield (can show x icon multiple turns, so use end_game source)
+                costX = ManacostVariableValue.END_GAME.calculate(game, showAbility, null);
+            } else {
+                // other like Stack (can show x icon on stack only, so use normal source)
+                costX = ManacostVariableValue.REGULAR.calculate(game, showAbility, null);
+            }
+            this.cardIcons.add(CardIconImpl.variableCost(costX));
+        }
+
+        // icon - targets in stack
+        if (showZone.match(Zone.STACK) && this.getTargets() != null && !this.getTargets().isEmpty()) {
+            List<String> targets = new ArrayList<>();
+            this.getTargets()
+                    .stream()
+                    .map(t -> {
+                        String info;
+                        MageObject targetObject = game.getObject(t);
+                        if (targetObject != null) {
+                            info = targetObject.getIdName();
+                        } else {
+                            Player targetPlayer = game.getPlayer(t);
+                            if (targetPlayer != null) {
+                                info = targetPlayer.getName();
+                            } else {
+                                info = "Unknown";
+                            }
+                        }
+                        return info;
+                    })
+                    .sorted()
+                    .forEach(targets::add);
+
+            this.cardIcons.add(new CardIconImpl(
+                    CardIconType.OTHER_HAS_TARGETS,
+                    String.format("Has %d target(s). Move mouse over card to see target arrows:", this.getTargets().size())
+                            + "<br><br>" + String.join("<br>", targets),
+                    "T-" + this.getTargets().size()
+            ));
+        }
     }
 
     public CardView(MageObject object, Game game) {
@@ -1350,6 +1424,7 @@ public class CardView extends SimpleCardView {
     public boolean isExtraDeckCard() {
         return this.extraDeckCard;
     }
+
     public boolean isLand() {
         return cardTypes.contains(CardType.LAND);
     }

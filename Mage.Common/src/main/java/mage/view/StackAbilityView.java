@@ -35,11 +35,11 @@ public class StackAbilityView extends CardView {
     // selectable, chooseable, card icons etc. Search by getSourceCard
     private final CardView sourceCard;
 
-    public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {
+    public StackAbilityView(Game game, StackAbility ability, String sourceName, MageObject sourceObject, CardView sourceView) {
         this.id = ability.getId();
         this.mageObjectType = MageObjectType.ABILITY_STACK;
         this.abilityType = ability.getStackAbility().getAbilityType();
-        this.sourceCard = sourceCard;
+        this.sourceCard = sourceView;
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
         this.loyalty = "";
@@ -79,12 +79,7 @@ public class StackAbilityView extends CardView {
 
         updateTargets(game, ability);
 
-        // card icons (warning, it must be synced in gui dialogs with replaced card, see comments at the start of the file)
-        // cost x
-        if (ability.getManaCostsToPay().containsX()) {
-            int costX = ManacostVariableValue.END_GAME.calculate(game, ability, null);
-            this.cardIcons.add(CardIconImpl.variableCost(costX));
-        }
+        this.generateCardIcons(ability, sourceObject, game);
     }
 
     private void updateTargets(Game game, StackAbility ability) {
