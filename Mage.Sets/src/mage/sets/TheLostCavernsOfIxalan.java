@@ -313,6 +313,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 397, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swashbuckler's Whip", 263, Rarity.UNCOMMON, mage.cards.s.SwashbucklersWhip.class));
         cards.add(new SetCardInfo("Synapse Necromage", 125, Rarity.UNCOMMON, mage.cards.s.SynapseNecromage.class));
+        cards.add(new SetCardInfo("Tarrian's Journal", 126, Rarity.RARE, mage.cards.t.TarriansJournal.class));
         cards.add(new SetCardInfo("Tarrian's Soulcleaver", 264, Rarity.RARE, mage.cards.t.TarriansSoulcleaver.class));
         cards.add(new SetCardInfo("Tectonic Hazard", 169, Rarity.COMMON, mage.cards.t.TectonicHazard.class));
         cards.add(new SetCardInfo("Tecutlan, the Searing Rift", 135, Rarity.RARE, mage.cards.t.TecutlanTheSearingRift.class));
@@ -333,6 +334,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Mycotyrant", 235, Rarity.MYTHIC, mage.cards.t.TheMycotyrant.class));
 	cards.add(new SetCardInfo("The Myriad Pools", 363, Rarity.RARE, mage.cards.t.TheMyriadPools.class));
         cards.add(new SetCardInfo("The Skullspore Nexus", 212, Rarity.MYTHIC, mage.cards.t.TheSkullsporeNexus.class));
+        cards.add(new SetCardInfo("The Tomb of Aclazotz", 126, Rarity.RARE, mage.cards.t.TheTombOfAclazotz.class));
         cards.add(new SetCardInfo("Thousand Moons Crackshot", 37, Rarity.COMMON, mage.cards.t.ThousandMoonsCrackshot.class));
         cards.add(new SetCardInfo("Thousand Moons Infantry", 38, Rarity.COMMON, mage.cards.t.ThousandMoonsInfantry.class));
         cards.add(new SetCardInfo("Thousand Moons Smithy", 39, Rarity.RARE, mage.cards.t.ThousandMoonsSmithy.class));
