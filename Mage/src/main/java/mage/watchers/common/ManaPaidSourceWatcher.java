@@ -110,6 +110,9 @@ public class ManaPaidSourceWatcher extends Watcher {
     private static final ManaPaidTracker emptyTracker = new ManaPaidTracker();
     private final Map<UUID, ManaPaidTracker> manaMap = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public ManaPaidSourceWatcher() {
         super(WatcherScope.GAME);
     }

@@ -75,11 +75,6 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
         return false;

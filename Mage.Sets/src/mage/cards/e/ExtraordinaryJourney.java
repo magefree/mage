@@ -103,6 +103,7 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
         if(!effect.apply(game, source)) {
             return false;
         }
+        game.getState().applyEffects(game);
 
         Set<Card> cards = permanents
                 .stream()
@@ -118,7 +119,6 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
 
-        // For each of those cards, its owner may play it for as long as it remains exiled.
         for (Player owner : owners) {
             String exileZoneName = "Exile — Can be played by " + owner.getName();
             UUID exileZoneId = CardUtil.getExileZoneId(
@@ -127,7 +127,6 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
             );
 
             ExileZone zone = game.getState().getExile().createZone(exileZoneId, exileZoneName);
-
             for(Card card : cards) {
                 if (card.getOwnerId().equals(owner.getId())) {
                     game.getExile().moveToAnotherZone(card, game, zone);

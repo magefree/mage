@@ -5,7 +5,6 @@ import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import mage.cards.repository.ExpansionRepository;
 import mage.cards.repository.RepositoryUtil;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
@@ -33,6 +32,7 @@ import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
+import mage.client.util.sets.ConstructedFormats;
 import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
@@ -124,6 +124,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static int startPort = -1;
     private static boolean debugMode = false;
 
+    private JToggleButton switchPanelsButton = null; // from main menu
+    private static String SWITCH_PANELS_BUTTON_NAME = "Switch panels";
+
     private static final Map<UUID, ChatPanelBasic> CHATS = new HashMap<>();
     private static final Map<UUID, GamePanel> GAMES = new HashMap<>();
     private static final Map<UUID, DraftPanel> DRAFTS = new HashMap<>();
@@ -189,9 +192,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    /**
-     * Creates new form MageFrame
-     */
     public MageFrame() throws MageException {
         File cacertsFile = new File(System.getProperty("user.dir") + "/release/cacerts").getAbsoluteFile();
         if (!cacertsFile.exists()) { // When running from the jar file the contents of the /release folder will have been expanded into the home folder as part of packaging
@@ -269,6 +269,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         LOGGER.info("Images: search broken files...");
         CardImageUtils.checkAndFixImageFiles();
 
+        bootstrapSetsAndFormats();
+
         if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
             RateCard.bootstrapCardsAndRatings();
         }
@@ -280,6 +282,23 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         initComponents();
+
+        // auto-update switch panels button with actual stats
+        desktopPane.addContainerListener(new ContainerAdapter() {
+            @Override
+            public void componentAdded(ContainerEvent e) {
+                if (desktopPane.getLayer(e.getComponent()) == JLayeredPane.DEFAULT_LAYER) {
+                    updateSwitchPanelsButton();
+                }
+            }
+
+            @Override
+            public void componentRemoved(ContainerEvent e) {
+                if (desktopPane.getLayer(e.getComponent()) == JLayeredPane.DEFAULT_LAYER) {
+                    updateSwitchPanelsButton();
+                }
+            }
+        });
 
         desktopPane.setDesktopManager(new MageDesktopManager());
 
@@ -301,8 +320,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 
+        // create default server lobby and hide it until connect
         tablesPane = new TablesPane();
         desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        SwingUtilities.invokeLater(() -> {
+            this.hideServerLobby();
+        });
 
         addTooltipContainer();
         setBackground();
@@ -372,6 +395,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 MacFullscreenUtil.toggleMacOSFullScreenMode(this);
             }
         }
+    }
+
+    private void bootstrapSetsAndFormats() {
+        logger.info("Loading sets and formats...");
+        ConstructedFormats.ensureLists();
     }
 
     private void setWindowTitle() {
@@ -558,15 +586,27 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private AbstractButton createSwitchPanelsButton() {
-        final JToggleButton switchPanelsButton = new JToggleButton("Switch panels");
-        switchPanelsButton.addItemListener(e -> {
+        this.switchPanelsButton = new JToggleButton(SWITCH_PANELS_BUTTON_NAME);
+        this.switchPanelsButton.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                createAndShowSwitchPanelsMenu((JComponent) e.getSource(), switchPanelsButton);
+                createAndShowSwitchPanelsMenu((JComponent) e.getSource(), this.switchPanelsButton);
             }
         });
-        switchPanelsButton.setFocusable(false);
-        switchPanelsButton.setHorizontalTextPosition(SwingConstants.LEADING);
-        return switchPanelsButton;
+        this.switchPanelsButton.setFocusable(false);
+        this.switchPanelsButton.setHorizontalTextPosition(SwingConstants.LEADING);
+        return this.switchPanelsButton;
+    }
+
+    private void updateSwitchPanelsButton() {
+        if (this.switchPanelsButton != null) {
+            int totalCount = getPanelsCount(false);
+            int activeCount = getPanelsCount(true);
+            this.switchPanelsButton.setText(SWITCH_PANELS_BUTTON_NAME + String.format(" (%d)", totalCount));
+            this.switchPanelsButton.setToolTipText(String.format("Click to switch between panels (active panels: %d of %d)",
+                    activeCount,
+                    totalCount
+            ));
+        }
     }
 
     private void createAndShowSwitchPanelsMenu(final JComponent component, final AbstractButton windowButton) {
@@ -574,6 +614,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         Component[] windows = desktopPane.getComponentsInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
         MagePaneMenuItem menuItem;
 
+        // TODO: sort menu by games, not current component order
+        //  lobby -> table 1 tourny, table 1 draft, table 1 game, table 2...
         for (int i = 0; i < windows.length; i++) {
             if (windows[i] instanceof MagePane) {
                 MagePane window = (MagePane) windows[i];
@@ -755,17 +797,27 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void showTournament(UUID tournamentId) {
+        // existing tourney
+        TournamentPane tournamentPane = null;
         for (Component component : desktopPane.getComponents()) {
             if (component instanceof TournamentPane
                     && ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
-                setActive((TournamentPane) component);
-                return;
+                tournamentPane = (TournamentPane) component;
             }
         }
-        TournamentPane tournamentPane = new TournamentPane();
-        desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
-        tournamentPane.setVisible(true);
-        tournamentPane.showTournament(tournamentId);
+
+        // new tourney
+        if (tournamentPane == null) {
+            tournamentPane = new TournamentPane();
+            desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
+            tournamentPane.setVisible(true);
+            tournamentPane.showTournament(tournamentId);
+        }
+
+        // if user connects on startup then there are possible multiple tables open, so keep only actual
+        // priority: game > constructing > draft > tourney
+        // TODO: activate panel by priority
+
         setActive(tournamentPane);
     }
 
@@ -836,7 +888,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             LOGGER.debug("connecting (auto): " + currentConnection.getProxyType().toString()
                     + ' ' + currentConnection.getProxyHost() + ' ' + currentConnection.getProxyPort() + ' ' + currentConnection.getProxyUsername());
             if (MageFrame.connect(currentConnection)) {
-                prepareAndShowTablesPane();
+                prepareAndShowServerLobby();
                 return true;
             } else {
                 showMessage("Unable connect to server: " + SessionHandler.getLastConnectError());
@@ -1068,10 +1120,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         if (SessionHandler.isConnected()) {
-            UserRequestMessage message = new UserRequestMessage("Confirm disconnect", "Are you sure you want to disconnect?");
-            message.setButton1("No", null);
-            message.setButton2("Yes", PlayerAction.CLIENT_DISCONNECT);
-            showUserRequestDialog(message);
+            tryDisconnectOrExit(false);
         } else {
             connectDialog.showDialog();
             setWindowTitle();
@@ -1141,15 +1190,34 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void exitApp() {
+        tryDisconnectOrExit(true);
+    }
+
+    private void tryDisconnectOrExit(Boolean needExit) {
+        String actionName = needExit ? "exit" : "disconnect";
+        PlayerAction actionFull = needExit ? PlayerAction.CLIENT_EXIT_FULL : PlayerAction.CLIENT_DISCONNECT_FULL;
+        PlayerAction actionKeepTables = needExit ? PlayerAction.CLIENT_EXIT_KEEP_GAMES : PlayerAction.CLIENT_DISCONNECT_KEEP_GAMES;
+        double windowSizeRatio = 1.3;
         if (SessionHandler.isConnected()) {
-            UserRequestMessage message = new UserRequestMessage("Confirm disconnect", "You are currently connected.  Are you sure you want to disconnect?");
-            message.setButton1("No", null);
-            message.setButton2("Yes", PlayerAction.CLIENT_EXIT);
+            int activeTables = MageFrame.getInstance().getPanelsCount(true);
+            UserRequestMessage message = new UserRequestMessage(
+                    "Confirm " + actionName,
+                    "You are connected and has " + activeTables + " active table(s). You can quit from all your tables (concede) or ask server to wait a few minutes for reconnect. What to do?"
+            );
+            String totalInfo = (activeTables == 0 ? "" : String.format(" from %d table%s", activeTables, (activeTables > 1 ? "s" : "")));
+            message.setButton1("Cancel", null);
+            message.setButton2("Wait for me", actionKeepTables);
+            message.setButton3("Quit" + totalInfo, actionFull);
+            message.setWindowSizeRatio(windowSizeRatio);
             MageFrame.getInstance().showUserRequestDialog(message);
         } else {
-            UserRequestMessage message = new UserRequestMessage("Confirm exit", "Are you sure you want to exit?");
-            message.setButton1("No", null);
-            message.setButton2("Yes", PlayerAction.CLIENT_EXIT);
+            UserRequestMessage message = new UserRequestMessage(
+                    "Confirm " + actionName,
+                    "Are you sure you want to " + actionName + "?"
+            );
+            message.setButton1("Cancel", null);
+            message.setButton2("Yes", actionFull);
+            message.setWindowSizeRatio(windowSizeRatio);
             MageFrame.getInstance().showUserRequestDialog(message);
         }
     }
@@ -1164,17 +1232,18 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnDeckEditor.setEnabled(true);
     }
 
-    public void hideTables() {
+    public void hideServerLobby() {
         this.tablesPane.hideTables();
+        updateSwitchPanelsButton();
     }
 
-    public void setTableFilter() {
+    public void setServerLobbyTablesFilter() {
         if (this.tablesPane != null) {
             this.tablesPane.setTableFilter();
         }
     }
 
-    public void prepareAndShowTablesPane() {
+    public void prepareAndShowServerLobby() {
         // Update the tables pane with the new session
         this.tablesPane.showTables();
 
@@ -1184,6 +1253,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (topPanebefore != null && topPanebefore != tablesPane) {
             setActive(topPanebefore);
         }
+
+        updateSwitchPanelsButton();
     }
 
     public void hideGames() {
@@ -1215,45 +1286,74 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
+    private String prepareDeckEditorName(DeckEditorMode mode, Deck deck, UUID tableId) {
+        // GUI searching frame name for duplicates, so:
+        // - online editors must be unique;
+        // - offline editor must be single;
         String name;
-        if (mode == DeckEditorMode.SIDEBOARDING
-                || mode == DeckEditorMode.LIMITED_BUILDING
-                || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING
-                || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
-            name = "Deck Editor - " + tableId.toString();
-        } else {
-            if (deck != null) {
-                name = "Deck Editor - " + deck.getName();
-            } else {
+        switch (mode) {
+            case FREE_BUILDING:
+                // offline
                 name = "Deck Editor";
-            }
-            // use already open editor
-            Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-            for (Component window : windows) {
-                if (window instanceof DeckEditorPane && ((MagePane) window).getTitle().equals(name)) {
-                    setActive((MagePane) window);
-                    return;
-                }
+                break;
+            case LIMITED_BUILDING:
+            case LIMITED_SIDEBOARD_BUILDING:
+            case SIDEBOARDING:
+            case VIEW_LIMITED_DECK:
+                // online
+                name = "Deck Editor - " + mode.getTitle();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown deck editor mode: " + mode);
+        }
+
+        // additional info about deck/player
+        if (deck != null && deck.getName() != null && !deck.getName().isEmpty()) {
+            name += " - " + deck.getName();
+        }
+
+        // additional info about game
+        if (tableId != null) {
+            name += " - table " + tableId;
+        }
+
+        return name;
+    }
+
+    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int visibleTimer) {
+        // create or open new editor
+        String name = prepareDeckEditorName(mode, deck, tableId);
+
+        // already exists
+        Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+        for (Component window : windows) {
+            if (window instanceof DeckEditorPane && ((MagePane) window).getTitle().equals(name)) {
+                setActive((MagePane) window);
+                return;
             }
         }
 
-        DeckEditorPane deckEditorPane = new DeckEditorPane();
-        desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
-        deckEditorPane.setVisible(false);
-        deckEditorPane.show(mode, deck, name, tableId, time);
-        setActive(deckEditorPane);
+        // new editor
+        DeckEditorPane deckEditor = new DeckEditorPane();
+        desktopPane.add(deckEditor, JLayeredPane.DEFAULT_LAYER);
+        deckEditor.setVisible(false);
+        deckEditor.show(mode, deck, name, tableId, visibleTimer);
+        setActive(deckEditor);
     }
 
     public void showUserRequestDialog(final UserRequestMessage userRequestMessage) {
-        final UserRequestDialog userRequestDialog = new UserRequestDialog();
+        if (SwingUtilities.isEventDispatchThread()) {
+            innerShowUserRequestDialog(userRequestMessage);
+        } else {
+            SwingUtilities.invokeLater(() -> innerShowUserRequestDialog(userRequestMessage));
+        }
+    }
+
+    private void innerShowUserRequestDialog(final UserRequestMessage userRequestMessage) {
+        UserRequestDialog userRequestDialog = new UserRequestDialog();
         userRequestDialog.setLocation(100, 100);
         desktopPane.add(userRequestDialog, JLayeredPane.MODAL_LAYER);
-        if (SwingUtilities.isEventDispatchThread()) {
-            userRequestDialog.showDialog(userRequestMessage);
-        } else {
-            SwingUtilities.invokeLater(() -> userRequestDialog.showDialog(userRequestMessage));
-        }
+        userRequestDialog.showDialog(userRequestMessage);
     }
 
     public void showErrorDialog(final String title, final String message) {
@@ -1471,50 +1571,55 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         DRAFTS.put(draftId, draftPanel);
     }
 
-    public BalloonTip getBalloonTip() {
-        return balloonTip;
+    /**
+     * Return total number of panels/frames (game panel, deck editor panel, etc)
+     *
+     * @param onlyActive return only active panels (related to online like game panel, but not game viewer)
+     * @return
+     */
+    public int getPanelsCount(boolean onlyActive) {
+        return (int) Arrays.stream(this.desktopPane.getComponentsInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER))
+                .filter(Component::isVisible)
+                .filter(p -> p instanceof MagePane)
+                .map(p -> (MagePane) p)
+                .filter(p-> !onlyActive || p.isActiveTable())
+                .count();
     }
 
     @Override
     public void connected(final String message) {
-        if (SwingUtilities.isEventDispatchThread()) {
+        SwingUtilities.invokeLater(() -> {
             setConnectButtonText(message);
             enableButtons();
-        } else {
-            SwingUtilities.invokeLater(() -> {
-                setConnectButtonText(message);
-                enableButtons();
-            });
-        }
+        });
     }
 
     @Override
     public void disconnected(final boolean askToReconnect) {
-        if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
+        if (SwingUtilities.isEventDispatchThread()) {
             // REMOTE task, e.g. connecting
-            LOGGER.info("Disconnected from remote task");
+            LOGGER.info("Disconnected from server side");
+        } else {
+            // USER mode, e.g. user plays and got disconnect
+            LOGGER.info("Disconnected from client side");
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            // user already disconnected, can't do any online actions like quite chat
+            // but try to keep session
+            // TODO: why it ignore askToReconnect here, but use custom reconnect dialog later?! Need research
+            SessionHandler.disconnect(false, true);
             setConnectButtonText(NOT_CONNECTED_BUTTON);
             disableButtons();
             hideGames();
-            hideTables();
-        } else {
-            // USER mode, e.g. user plays and got disconnect
-            LOGGER.info("Disconnected from user mode");
-            SwingUtilities.invokeLater(() -> {
-                        SessionHandler.disconnect(false); // user already disconnected, can't do any online actions like quite chat
-                        setConnectButtonText(NOT_CONNECTED_BUTTON);
-                        disableButtons();
-                        hideGames();
-                        hideTables();
-                        if (askToReconnect) {
-                            UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect to " + MagePreferences.getLastServerAddress() + "?");
-                            message.setButton1("No", null);
-                            message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
-                            showUserRequestDialog(message);
-                        }
-                    }
-            );
-        }
+            hideServerLobby();
+            if (askToReconnect) {
+                UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect to " + MagePreferences.getLastServerAddress() + "?");
+                message.setButton1("No", null);
+                message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
+                showUserRequestDialog(message);
+            }
+        });
     }
 
     @Override
@@ -1532,8 +1637,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void processCallback(ClientCallback callback) {
-        callbackClient.processCallback(callback);
+    public void onCallback(ClientCallback callback) {
+        callbackClient.onCallback(callback);
+    }
+
+    @Override
+    public void onNewConnection() {
+        callbackClient.onNewConnection();
     }
 
     public void sendUserReplay(PlayerAction playerAction, UserRequestMessage userRequestMessage) {
@@ -1544,13 +1654,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             case CLIENT_DOWNLOAD_CARD_IMAGES:
                 DownloadPicturesService.startDownload();
                 break;
-            case CLIENT_DISCONNECT:
-                if (SessionHandler.isConnected()) {
-                    SessionHandler.disconnect(false);
-                }
-                tablesPane.clearChat();
-                showMessage("You have disconnected");
-                setWindowTitle();
+            case CLIENT_DISCONNECT_FULL:
+                doClientDisconnect(false, "You have disconnected");
+                break;
+            case CLIENT_DISCONNECT_KEEP_GAMES:
+                doClientDisconnect(true, "You have disconnected and have few minutes to reconnect");
                 break;
             case CLIENT_QUIT_TOURNAMENT:
                 SessionHandler.quitTournament(userRequestMessage.getTournamentId());
@@ -1573,15 +1681,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
                 removeGame(userRequestMessage.getGameId());
                 break;
-            case CLIENT_EXIT:
-                if (SessionHandler.isConnected()) {
-                    SessionHandler.disconnect(false);
-                }
-                CardRepository.instance.closeDB();
-                tablesPane.cleanUp();
-                Plugins.instance.shutdown();
-                dispose();
-                System.exit(0);
+            case CLIENT_EXIT_FULL:
+                doClientDisconnect(false, "");
+                doClientShutdownAndExit();
+                break;
+            case CLIENT_EXIT_KEEP_GAMES:
+                doClientDisconnect(true, "");
+                doClientShutdownAndExit();
                 break;
             case CLIENT_REMOVE_TABLE:
                 SessionHandler.removeTable(userRequestMessage.getRoomId(), userRequestMessage.getTableId());
@@ -1600,6 +1706,26 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
 
         }
+    }
+
+    private void doClientDisconnect(boolean keepMySessionActive, String afterMessage) {
+        if (SessionHandler.isConnected()) {
+            SessionHandler.disconnect(false, keepMySessionActive);
+        }
+        tablesPane.clearChat();
+        setWindowTitle();
+
+        if (!afterMessage.isEmpty()) {
+            showMessage(afterMessage);
+        }
+    }
+
+    private void doClientShutdownAndExit() {
+        tablesPane.cleanUp();
+        CardRepository.instance.closeDB();
+        Plugins.instance.shutdown();
+        dispose();
+        System.exit(0);
     }
 
     private void endTables() {

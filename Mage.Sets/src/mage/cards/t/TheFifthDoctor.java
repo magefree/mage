@@ -52,7 +52,7 @@ public final class TheFifthDoctor extends CardImpl {
                 TargetController.YOU, false
         );
         ability.addEffect(new UntapAllEffect(filter).setText("Untap those creatures"));
-        this.addAbility(ability.withFlavorWord("Peaceful Coexistence"), new AttackedThisTurnWatcher());
+        this.addAbility(ability.withFlavorWord("Peaceful Coexistence"));
     }
 
     private TheFifthDoctor(final TheFifthDoctor card) {

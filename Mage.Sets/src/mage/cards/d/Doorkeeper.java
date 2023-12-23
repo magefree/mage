@@ -25,7 +25,7 @@ import mage.target.TargetPlayer;
  */
 public final class Doorkeeper extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with defender");
 
     static{
         filter.add(new AbilityPredicate(DefenderAbility.class));

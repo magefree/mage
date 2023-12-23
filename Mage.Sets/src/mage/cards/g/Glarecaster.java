@@ -102,10 +102,4 @@ class GlarecasterEffect extends RedirectionEffect {
         return false;
     }
 
-    @Override
-    public boolean apply(Game game, Ability source
-    ) {
-        return true;
-    }
-
 }

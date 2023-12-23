@@ -67,11 +67,6 @@ class ForethoughtAmuletEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getAmount() >= 3) {
             MageObject object = game.getObject(event.getSourceId());

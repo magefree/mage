@@ -114,11 +114,6 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ShamanEnKorRedirectFromTargetEffect copy() {
         return new ShamanEnKorRedirectFromTargetEffect(this);
     }

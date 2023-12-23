@@ -90,11 +90,6 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && event.getFlag()) {
 

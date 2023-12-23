@@ -25,7 +25,7 @@ public class MilitantAngelTest extends CardTestCommander4Players {
         // it's testing counter only (no need to test card -- it's same)
         // When Militant Angel enters the battlefield, create a number of 2/2 white Knight creature tokens
         // with vigilance equal to the number of opponents you attacked this turn.
-        //addCard(Zone.BATTLEFIELD, playerA, "Militant Angel", 2);
+        addCard(Zone.HAND, playerA, "Militant Angel", 1); // to add watcher
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Kitesail Corsair", 1);
 

@@ -43,7 +43,6 @@ public final class SeasonOfTheWitch extends CardImpl {
 
         // At the beginning of the end step, destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new SeasonOfTheWitchEffect(), TargetController.ANY, false);
-        ability.addWatcher(new AttackedThisTurnWatcher());
         ability.addWatcher(new CouldAttackThisTurnWatcher());
         this.addAbility(ability);
     }

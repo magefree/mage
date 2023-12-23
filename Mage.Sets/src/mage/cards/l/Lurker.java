@@ -39,7 +39,6 @@ public final class Lurker extends CardImpl {
                 new CantBeTargetedSourceEffect(new FilterSpell(), Duration.WhileOnBattlefield),
                 new InvertCondition(new OrCondition(AttackedThisTurnSourceCondition.instance, BlockedThisTurnSourceCondition.instance)));
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect.setText("{this} can't be the target of spells unless it attacked or blocked this turn"));
-        ability.addWatcher(new AttackedThisTurnWatcher());
         ability.addWatcher(new BlockedThisTurnWatcher());
         this.addAbility(ability);
     }

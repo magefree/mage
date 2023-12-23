@@ -265,7 +265,7 @@ public class HumanPlayer extends PlayerImpl {
      * Prepare priority player for new feedback, call it for every choose cycle before waitForResponse
      */
     protected void prepareForResponse(Game game) {
-        SystemUtil.ensureRunInGameThread();
+        ThreadUtils.ensureRunInGameThread();
 
         // prepare priority player
         // on null - it's a discard in cleanaup and other non-user code, so don't change it here at that moment
@@ -291,7 +291,7 @@ public class HumanPlayer extends PlayerImpl {
      * @param game
      */
     protected void waitForResponse(Game game) {
-        SystemUtil.ensureRunInGameThread();
+        ThreadUtils.ensureRunInGameThread();
         ;
 
         if (isExecutingMacro()) {
@@ -582,7 +582,7 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // Try to autopay for mana
-        if (Outcome.PutManaInPool == outcome && currentlyUnpaidMana != null) {
+        if (Outcome.PutManaInPool == outcome && choice.isManaColorChoice() && currentlyUnpaidMana != null) {
             // Check check if the spell being paid for cares about the color of mana being paid
             // See: https://github.com/magefree/mage/issues/9070
             boolean caresAboutManaColor = false;
@@ -1658,7 +1658,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireGetAmountEvent(playerId, message + extraMessage, min, max);
+                game.fireGetAmountEvent(playerId, message + extraMessage + CardUtil.getSourceLogName(game, ability), min, max);
             }
             waitForResponse(game);
 
@@ -2777,6 +2777,7 @@ public class HumanPlayer extends PlayerImpl {
                 holdingPriority = false;
                 break;
             case TOGGLE_RECORD_MACRO:
+                if (true) return; // TODO: macro unsupported in current version
                 if (recordingMacro) {
                     logger.debug("Finished Recording Macro");
                     activatingMacro = true;

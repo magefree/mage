@@ -36,7 +36,7 @@ public final class BonecrusherGiant extends AdventureCard {
 
         // Stomp
         // Damage can’t be prevented this turn. Stomp deals 2 damage to any target.
-        this.getSpellCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn"));
+        this.getSpellCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn));
         this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget());
 

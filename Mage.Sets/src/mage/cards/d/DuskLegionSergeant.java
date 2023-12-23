@@ -40,7 +40,7 @@ public final class DuskLegionSergeant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // {1}{B}, Sacrifice Dusk Legion Sergeant: Each nontoken Vampire creature you control gains persist until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityControlledEffect(

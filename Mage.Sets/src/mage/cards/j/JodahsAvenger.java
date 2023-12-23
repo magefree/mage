@@ -1,16 +1,13 @@
 
 package mage.cards.j;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
@@ -22,8 +19,11 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -52,10 +52,9 @@ public final class JodahsAvenger extends CardImpl {
     }
 }
 
-class JodahsAvengerEffect extends ContinuousEffectImpl {
+class JodahsAvengerEffect extends OneShotEffect {
 
     private static final Set<String> choices = new LinkedHashSet<>();
-    private Ability gainedAbility;
 
     static {
         choices.add("Double strike");
@@ -65,7 +64,7 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
     }
 
     public JodahsAvengerEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.AddAbility);
+        super(Outcome.AddAbility);
         this.staticText = "Until end of turn, {this} gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow";
     }
 
@@ -77,16 +76,15 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
     public JodahsAvengerEffect copy() {
         return new JodahsAvengerEffect(this);
     }
-
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
+    public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose one");
             choice.setChoices(choices);
             if (controller.choose(outcome, choice, game)) {
+                Ability gainedAbility;
                 switch (choice.getChoice()) {
                     case "Double strike":
                         gainedAbility = DoubleStrikeAbility.getInstance();
@@ -101,20 +99,10 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
                         gainedAbility = ProtectionAbility.from(ObjectColor.RED);
                         break;
                 }
-            } else {
-                discard();
+                game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn), source);
+                game.addEffect(new BoostSourceEffect(-1, -1, Duration.EndOfTurn), source);
+                return true;
             }
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (sourceObject != null) {
-            sourceObject.addPower(-1);
-            sourceObject.addToughness(-1);
-            game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn), source);
-            return true;
         }
         return false;
     }

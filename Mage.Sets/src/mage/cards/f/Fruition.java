@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -8,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -16,17 +15,14 @@ import mage.filter.FilterPermanent;
  */
 public final class Fruition extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("for each Forest on the battlefield");
-
-    static {
-        filter.add(SubType.FOREST.getPredicate());
-    }
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "Forest");
 
     public Fruition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // You gain 1 life for each Forest on the battlefield.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter))
+                .setText("you gain 1 life for each Forest on the battlefield"));
     }
 
     private Fruition(final Fruition card) {

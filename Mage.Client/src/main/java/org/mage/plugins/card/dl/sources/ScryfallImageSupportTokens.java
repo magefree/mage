@@ -1935,9 +1935,13 @@ public class ScryfallImageSupportTokens {
             put("MOM/Dinosaur", "https://api.scryfall.com/cards/tmom/7/en?format=image");
             put("MOM/Elemental", "https://api.scryfall.com/cards/tmom/9/en?format=image");
             put("MOM/First Mate Ragavan", "https://api.scryfall.com/cards/tmom/6/en?format=image");
+            put("MOM/Incubator", "https://api.scryfall.com/cards/tmom/16/en?format=image&face=front");
             put("MOM/Knight", "https://api.scryfall.com/cards/tmom/10/en?format=image");
             put("MOM/Kraken", "https://api.scryfall.com/cards/tmom/4/en?format=image");
             put("MOM/Monk", "https://api.scryfall.com/cards/tmom/1/en?format=image");
+            put("MOM/Phyrexian/1", "https://api.scryfall.com/cards/tmom/16/en?format=image&face=back");
+            put("MOM/Phyrexian/2", "https://api.scryfall.com/cards/tmom/17/en?format=image&face=back");
+            put("MOM/Phyrexian/3", "https://api.scryfall.com/cards/tmom/18/en?format=image&face=back");
             put("MOM/Phyrexian Hydra/1", "https://api.scryfall.com/cards/tmom/12/en?format=image");
             put("MOM/Phyrexian Hydra/2", "https://api.scryfall.com/cards/tmom/11/en?format=image");
             put("MOM/Phyrexian Saproling", "https://api.scryfall.com/cards/tmom/8/en?format=image");

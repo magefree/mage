@@ -38,7 +38,7 @@ public class FabricateAbility extends EntersBattlefieldTriggeredAbility {
     @Override
     public String getRule() {
         return "Fabricate " + value + " <i>(When this creature enters the battlefield, put "
-                + CardUtil.numberToText(value, "a") + " +1/+1 counter" + (value > 1 ? "s" : "")
+                + CardUtil.getOneOneCountersText(value)
                 + " on it or create " + CardUtil.numberToText(value, "a")
                 + " 1/1 colorless Servo artifact creature token" + (value > 1 ? "s" : "") + ".)</i>";
     }
@@ -72,7 +72,7 @@ class FabricateEffect extends OneShotEffect {
                     Outcome.BoostCreature,
                     "Fabricate " + value,
                     null,
-                    "Put " + CardUtil.numberToText(value, "a") + " +1/+1 counter" + (value > 1 ? "s" : ""),
+                    "Put " + CardUtil.getOneOneCountersText(value),
                     "Create " + CardUtil.numberToText(value, "a") + " 1/1 token" + (value > 1 ? "s" : ""),
                     source,
                     game)) {

@@ -71,7 +71,6 @@ public final class RidersOfTheMark extends CardImpl {
                         + "1/1 white Human Soldier creature tokens equal to its toughness."
         ));
 
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
     }
 
     private RidersOfTheMark(final RidersOfTheMark card) {

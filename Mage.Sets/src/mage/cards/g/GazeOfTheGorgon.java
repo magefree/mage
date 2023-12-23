@@ -34,7 +34,6 @@ public final class GazeOfTheGorgon extends CardImpl {
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private GazeOfTheGorgon(final GazeOfTheGorgon card) {

@@ -37,7 +37,7 @@ public final class MoraugFuryOfAkoum extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Each creature you control gets +1/+0 for each time it has attacked this turn.
-        this.addAbility(new SimpleStaticAbility(new MoraugFuryOfAkoumBoostEffect()), new AttackedThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new MoraugFuryOfAkoumBoostEffect()));
 
         // Landfall — Whenever a land enters the battlefield under your control, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

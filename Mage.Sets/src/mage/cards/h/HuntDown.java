@@ -33,7 +33,6 @@ public final class HuntDown extends CardImpl {
         this.getSpellAbility().addEffect(new HuntDownEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterMustBlock));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterToBeBlocked));
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
         
     }
 

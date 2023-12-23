@@ -87,11 +87,6 @@ class MowuLoyalCompanionEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public MowuLoyalCompanionEffect copy() {
         return new MowuLoyalCompanionEffect(this);
     }

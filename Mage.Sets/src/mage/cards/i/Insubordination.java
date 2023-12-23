@@ -42,8 +42,7 @@ public final class Insubordination extends CardImpl {
                         new DamageAttachedControllerEffect(2),
                         TargetController.CONTROLLER_ATTACHED_TO),
                 DidNotAttackThisTurnEnchantedCondition.instance,
-                "At the beginning of the end step of enchanted creature's controller, {this} deals 2 damage to that player unless that creature attacked this turn."),
-                new AttackedThisTurnWatcher());
+                "At the beginning of the end step of enchanted creature's controller, {this} deals 2 damage to that player unless that creature attacked this turn."));
     }
 
     private Insubordination(final Insubordination card) {

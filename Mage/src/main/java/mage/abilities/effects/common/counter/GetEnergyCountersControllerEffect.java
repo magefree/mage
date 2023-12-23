@@ -57,9 +57,7 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
             sb.append("{E}");
         }
         sb.append(" <i>(");
-        sb.append(CardUtil.numberToText(val, "an"));
-        sb.append(" energy counter");
-        sb.append(val > 1 ? "s" : "");
+        sb.append(CardUtil.getSimpleCountersText(val, "an",  "energy"));
         sb.append(")</i>");
         if ((value instanceof StaticValue)) {
             sb.append('.');

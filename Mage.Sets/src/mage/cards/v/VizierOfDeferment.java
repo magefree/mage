@@ -40,7 +40,6 @@ public final class VizierOfDeferment extends CardImpl {
         // When Vizier of Deferment enters the battlefield, you may exile target creature if it attacked or blocked this turn. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new VizierOfDefermentEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addWatcher(new AttackedThisTurnWatcher());
         ability.addWatcher(new BlockedThisTurnWatcher());
         this.addAbility(ability);
     }

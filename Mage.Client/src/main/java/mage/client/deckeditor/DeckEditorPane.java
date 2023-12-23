@@ -12,13 +12,14 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
+ * GUI: deck editor, used all around the app
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class DeckEditorPane extends MagePane {
 
-    /**
-     * Creates new form TablesPane
-     */
+    private UUID tableId = null;
+
     public DeckEditorPane() {
         boolean initialized = false;
         if (Plugins.instance.isThemePluginLoaded()) {
@@ -44,20 +45,16 @@ public class DeckEditorPane extends MagePane {
         deckEditorPanel1.changeGUISize();
     }
 
-    public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
-        if (mode == DeckEditorMode.SIDEBOARDING
-                || mode == DeckEditorMode.LIMITED_BUILDING
-                || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING) {
-            this.setTitle("Deck Editor - " + tableId.toString());
-        } else if (mode == DeckEditorMode.VIEW_LIMITED_DECK) {
-            this.setTitle("Deck Editor - Current Deck");
-        } else if (deck != null) {
-            this.setTitle("Deck Editor - " + deck.getName());
-        } else {
-            this.setTitle("Deck Editor");
-        }
-        this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
+    public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int visibleTimer) {
+        this.tableId = tableId;
+        this.setTitle(name);
+        this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, visibleTimer);
         this.repaint();
+    }
+
+    @Override
+    public boolean isActiveTable() {
+        return this.tableId != null;
     }
 
     public DeckEditorMode getDeckEditorMode() {

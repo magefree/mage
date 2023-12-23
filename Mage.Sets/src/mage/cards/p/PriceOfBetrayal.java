@@ -56,7 +56,7 @@ class PriceOfBetrayalEffect extends OneShotEffect {
 
     PriceOfBetrayalEffect() {
         super(Outcome.AIDontUseIt);
-        staticText = "Remove up to five counters from target artifact, creature, planeswalker or opponent.";
+        staticText = "Remove up to five counters from target artifact, creature, planeswalker, or opponent.";
     }
 
     private PriceOfBetrayalEffect(final PriceOfBetrayalEffect effect) {

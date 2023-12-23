@@ -152,8 +152,8 @@ class CrewCost extends CostImpl {
             @Override
             public String getMessage() {
                 // shows selected power
-                int selectedPower = this.targets.entrySet().stream()
-                        .map(entry -> (game.getPermanent(entry.getKey())))
+                int selectedPower = this.targets.keySet().stream()
+                        .map(game::getPermanent)
                         .filter(Objects::nonNull)
                         .mapToInt(p -> (getCrewPower(p, game)))
                         .sum();

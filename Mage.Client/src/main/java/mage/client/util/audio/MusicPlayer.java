@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.*;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -127,7 +128,7 @@ public class MusicPlayer {
             } catch (Exception e) {
             }
             while (!stopped) {
-                int it = (int) Math.abs(Math.random() * (filelist.getItemCount()));
+                int it = (int) Math.abs(RandomUtil.nextDouble() * (filelist.getItemCount()));
                 File file = new File(filepath + filelist.getItem(it));
                 load(file);
                 Thread PlayThread = new Thread(new PlayThread());

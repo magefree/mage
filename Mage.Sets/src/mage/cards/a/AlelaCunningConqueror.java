@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.FirstSpellOpponentsTurnTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
@@ -12,21 +12,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FaerieRogueToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Susucr
@@ -65,11 +59,12 @@ public final class AlelaCunningConqueror extends CardImpl {
     }
 }
 
+class AlelaCunningConquerorTriggeredAbility extends DealCombatDamageControlledTriggeredAbility {
 
-class AlelaCunningConquerorTriggeredAbility extends TriggeredAbilityImpl {
+    private static final FilterCreaturePermanent faerieFilter = new FilterCreaturePermanent(SubType.FAERIE, "Faeries");
 
     AlelaCunningConquerorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GoadTargetEffect(), false);
+        super(new GoadTargetEffect().setText("goad target creature that player controls"), faerieFilter);
     }
 
     private AlelaCunningConquerorTriggeredAbility(final AlelaCunningConquerorTriggeredAbility ability) {
@@ -82,36 +77,14 @@ class AlelaCunningConquerorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchEvent dEvent = (DamagedBatchEvent) event;
-        if (!dEvent.isCombatDamage()) {
+        if (!super.checkTrigger(event, game)) {
             return false;
         }
-        List<DamagedEvent> events = dEvent
-                .getEvents()
-                .stream()
-                .filter(e -> {
-                    Permanent permanent = game.getPermanentOrLKIBattlefield(e.getSourceId());
-                    return permanent != null
-                            && permanent.hasSubtype(SubType.FAERIE, game)
-                            && permanent.isControlledBy(this.getControllerId());
-                })
-                .collect(Collectors.toList());
-
-        if (events.isEmpty()) {
-            return false;
-        }
-
-        Player opponent = game.getPlayer(dEvent.getPlayerId());
+        Player opponent = game.getPlayer(event.getPlayerId());
         if (opponent == null) {
             return false;
         }
-
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
         filter.add(new ControllerIdPredicate(opponent.getId()));
         this.getTargets().clear();
@@ -119,9 +92,4 @@ class AlelaCunningConquerorTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever one or more Faeries you control " +
-                "deal combat damage to a player, goad target creature that player controls.";
-    }
 }

@@ -2,6 +2,8 @@ package mage.client.components.ability;
 
 import mage.abilities.Modes;
 import mage.client.SessionHandler;
+import mage.client.cards.BigCard;
+import mage.client.components.ColorPane;
 import mage.client.dialog.MageDialog;
 import mage.client.game.GamePanel;
 import mage.client.util.ImageHelper;
@@ -38,12 +40,11 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private List<Object> choices;
     private String message = DEFAULT_MESSAGE;
 
-    private Session session;
     private UUID gameId;
 
     private BackgroundPainter mwPanelPainter;
     private JScrollPane jScrollPane2;
-    private JLabel title;
+    private ColorPane title;
 
     private Image rightImage;
     private Image rightImageHovered;
@@ -79,8 +80,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
     }
 
-    public void init(UUID gameId) {
+    public void init(UUID gameId, BigCard bigCard) {
         this.gameId = gameId;
+        this.title.setGameData(gameId, bigCard);
     }
 
     public void cleanUp() {
@@ -129,9 +131,15 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         setBackground(textColor);
         setBackgroundPainter(mwPanelPainter);
 
-        title = new JLabel();
+        title = new ColorPane();
         title.setFont(new Font("Times New Roman", 1, 15));
+        title.setEditable(false);
+        title.setFocusCycleRoot(false);
+        title.setOpaque(false);
         title.setForeground(textColor);
+        title.setExtBackgroundColor(mwPanelPainter);
+        title.setBorder(BorderFactory.createEmptyBorder());
+        title.enableHyperlinksAndCardPopups();
         title.setText(message);
 
         jScrollPane2.setBorder(null);
@@ -179,7 +187,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                 GroupLayout.TRAILING,
                 layout.createSequentialGroup().addContainerGap().add(
                         layout.createParallelGroup(GroupLayout.TRAILING).add(GroupLayout.LEADING, jScrollPane2, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE).add(GroupLayout.LEADING,
-                                layout.createSequentialGroup().add(title).addPreferredGap(LayoutStyle.RELATED, 175, Short.MAX_VALUE).add(1, 1, 1)).add(
+                                layout.createSequentialGroup().add(title).addPreferredGap(LayoutStyle.RELATED, 5, Short.MAX_VALUE).add(1, 1, 1)).add(
                                 GroupLayout.LEADING,
                                 layout.createSequentialGroup().add(layout.createParallelGroup(GroupLayout.LEADING)
                                 )

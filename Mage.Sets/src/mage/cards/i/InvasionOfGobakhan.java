@@ -40,7 +40,7 @@ public final class InvasionOfGobakhan extends CardImpl {
         // When Invasion of Gobakhan enters the battlefield, look at target opponent's hand. You may exile a nonland card from it. For as long as that card remains exiled, its owner may play it. A spell cast this way costs {2} more to cast.
         Ability ability = new EntersBattlefieldTriggeredAbility(new InvasionOfGobakhanEffect());
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     private InvasionOfGobakhan(final InvasionOfGobakhan card) {

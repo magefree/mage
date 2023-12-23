@@ -2,8 +2,8 @@ package mage.server;
 
 import mage.MageException;
 import mage.players.net.UserData;
-import mage.server.managers.SessionManager;
 import mage.server.managers.ManagerFactory;
+import mage.server.managers.SessionManager;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
@@ -12,7 +12,9 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * Server: manage all connections (first connection, after auth, after anon)
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class SessionManagerImpl implements SessionManager {
 
@@ -27,18 +29,7 @@ public class SessionManagerImpl implements SessionManager {
 
     @Override
     public Optional<Session> getSession(@Nonnull String sessionId) {
-        Session session = sessions.get(sessionId);
-        if (session == null) {
-            logger.trace("Session with sessionId " + sessionId + " is not found");
-            return Optional.empty();
-        }
-        if (session.getUserId() != null && !managerFactory.userManager().getUser(session.getUserId()).isPresent()) {
-            logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
-            // can happen if user from same host signs in multiple time with multiple clients, after they disconnect with one client
-            disconnect(sessionId, DisconnectReason.ConnectingOtherInstance, session); // direct disconnect
-            return Optional.empty();
-        }
-        return Optional.of(session);
+        return Optional.ofNullable(sessions.getOrDefault(sessionId, null));
     }
 
     @Override
@@ -67,18 +58,33 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public boolean connectUser(String sessionId, String userName, String password, String userIdStr) throws MageException {
+    public boolean connectUser(String sessionId, String restoreSessionId, String userName, String password, String userInfo, boolean detailsMode) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            String returnMessage = session.connectUser(userName, password);
-            if (returnMessage == null) {
-                logger.info(userName + " connected to server");
+            String errorMessage = session.connectUser(userName, password, restoreSessionId);
+            if (errorMessage == null) {
+                logger.info(userName + " connected to server by sessionId " + sessionId
+                        + (restoreSessionId.isEmpty() ? "" : ", restoreSessionId " + restoreSessionId));
+                if (detailsMode) {
+                    logger.info("- details: " + userInfo);
+                }
                 logger.debug("- userId:    " + session.getUserId());
                 logger.debug("- sessionId: " + sessionId);
+                logger.debug("- restoreSessionId: " + restoreSessionId);
                 logger.debug("- host:      " + session.getHost());
                 return true;
             } else {
-                logger.debug(userName + " not connected: " + returnMessage);
+                logger.debug(userName + " not connected: " + errorMessage);
+
+                // send error to client side
+                try {
+                    // ddos/bruteforce protection
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    logger.fatal("waiting of error message had failed", e);
+                    Thread.currentThread().interrupt();
+                }
+                session.sendErrorMessageToClient(errorMessage);
             }
         } else {
             logger.error(userName + " tried to connect with no sessionId");
@@ -106,46 +112,27 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public void disconnect(String sessionId, DisconnectReason reason) {
-        disconnect(sessionId, reason, null);
-    }
-
-    @Override
-    public void disconnect(String sessionId, DisconnectReason reason, Session directSession) {
-        if (directSession == null) {
-            // find real session to disconnects
-            getSession(sessionId).ifPresent(session -> {
-                if (!isValidSession(sessionId)) {
-                    // session was removed meanwhile by another thread so we can return
-                    return;
-                }
-                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
-                sessions.remove(sessionId);
-                switch (reason) {
-                    case AdminDisconnect:
-                        session.kill(reason);
-                        break;
-                    case ConnectingOtherInstance:
-                    case Disconnected: // regular session end or wrong client version
-                        managerFactory.userManager().disconnect(session.getUserId(), reason);
-                        break;
-                    case SessionExpired: // session ends after no reconnect happens in the defined time span
-                        break;
-                    case LostConnection: // user lost connection - session expires countdown starts
-                        session.userLostConnection();
-                        managerFactory.userManager().disconnect(session.getUserId(), reason);
-                        break;
-                    default:
-                        logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
-                }
-            });
-        } else {
-            // direct session to disconnects
-            sessions.remove(sessionId);
-            directSession.kill(reason);
+    public void disconnect(String sessionId, DisconnectReason reason, boolean checkUserDisconnection) {
+        Session session = getSession(sessionId).orElse(null);
+        if (session == null) {
+            return;
         }
-    }
 
+        if (!isValidSession(sessionId)) {
+            logger.info("DISCONNECT session, already invalid: " + reason + " - sessionId: " + sessionId);
+            // session was removed meanwhile by another thread
+            // TODO: otudated code? If no logs on server then remove that code, 2023-12-06
+            return;
+        }
+
+        if (checkUserDisconnection) {
+            managerFactory.userManager().getUser(session.getUserId()).ifPresent(user -> {
+                user.onLostConnection(reason);
+            });
+        }
+
+        sessions.remove(sessionId);
+    }
 
     /**
      * Admin requested the disconnect of a user
@@ -154,36 +141,24 @@ public class SessionManagerImpl implements SessionManager {
      * @param userSessionId
      */
     @Override
-    public void disconnectUser(String sessionId, String userSessionId) {
+    public void disconnectAnother(String sessionId, String userSessionId) {
         if (!checkAdminAccess(sessionId)) {
             return;
         }
-        getUserFromSession(sessionId).ifPresent(admin -> {
-            Optional<User> u = getUserFromSession(userSessionId);
-            if (u.isPresent()) {
-                User user = u.get();
-                user.showUserMessage("Admin action", "Your session was disconnected by admin");
-                admin.showUserMessage("Admin result", "User " + user.getName() + " was disconnected");
-                disconnect(userSessionId, DisconnectReason.AdminDisconnect);
-            } else {
-                admin.showUserMessage("Admin result", "User with sessionId " + userSessionId + " could not be found");
-            }
-        });
+
+        User admin = getUserFromSession(sessionId).orElse(null);
+        User user = getUserFromSession(userSessionId).orElse(null);
+        if (admin == null || user == null) {
+            return;
+        }
+
+        user.showUserMessage("Admin action", "Your session was disconnected by admin");
+        disconnect(userSessionId, DisconnectReason.DisconnectedByAdmin, true);
+        admin.showUserMessage("Admin result", "User " + user.getName() + " was disconnected");
     }
 
     private Optional<User> getUserFromSession(String sessionId) {
-        return getSession(sessionId)
-                .flatMap(s -> managerFactory.userManager().getUser(s.getUserId()));
-
-    }
-
-    @Override
-    public void endUserSession(String sessionId, String userSessionId) {
-        if (!checkAdminAccess(sessionId)) {
-            return;
-        }
-
-        disconnect(userSessionId, DisconnectReason.AdminDisconnect);
+        return getSession(sessionId).flatMap(s -> managerFactory.userManager().getUser(s.getUserId()));
     }
 
     @Override
@@ -232,5 +207,11 @@ public class SessionManagerImpl implements SessionManager {
             return;
         }
         session.sendErrorMessageToClient(message);
+    }
+
+    @Override
+    public void checkHealth() {
+        //logger.info("Checking sessions...");
+        // TODO: add lone sessions check and report (with lost user)
     }
 }

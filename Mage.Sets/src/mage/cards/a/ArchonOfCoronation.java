@@ -80,11 +80,6 @@ class ArchonOfCoronationEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(0);
         return false;

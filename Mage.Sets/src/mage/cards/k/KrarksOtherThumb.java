@@ -69,11 +69,6 @@ class KrarksOtherThumbEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public KrarksOtherThumbEffect copy() {
         return new KrarksOtherThumbEffect(this);
     }

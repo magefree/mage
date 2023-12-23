@@ -39,15 +39,9 @@ public class BloodthirstAbility extends EntersBattlefieldAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Bloodthirst ").append(amount)
-                .append(" <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with ");
-        if (amount == 1) {
-            sb.append("a +1/+1 counter");
-        } else {
-            sb.append(CardUtil.numberToText(amount)).append(" +1/+1 counters");
-        }
-        sb.append(" on it.)</i>");
-        return sb.toString();
+        return "Bloodthirst " + amount +
+                " <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with " +
+                CardUtil.getOneOneCountersText(amount) + " on it.)</i>";
     }
 }
 

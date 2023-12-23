@@ -52,8 +52,8 @@ public class AwakenAbility extends SpellAbility {
         this.awakenValue = awakenValue;
         rule = "Awaken " + awakenValue + "&mdash;" + awakenCosts
                 + " <i>(If you cast this spell for " + awakenCosts + ", also put "
-                + CardUtil.numberToText(awakenValue, "a")
-                + " +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)</i>";
+                + CardUtil.getOneOneCountersText(awakenValue)
+                + " on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)</i>";
     }
 
     protected AwakenAbility(final AwakenAbility ability) {
@@ -81,7 +81,7 @@ public class AwakenAbility extends SpellAbility {
 
         private AwakenEffect() {
             super(Outcome.BoostCreature);
-            this.staticText = "put " + CardUtil.numberToText(awakenValue, "a") + " +1/+1 counters on target land you control";
+            this.staticText = "put " + CardUtil.getOneOneCountersText(awakenValue) +" on target land you control";
         }
 
         protected AwakenEffect(final AwakenEffect effect) {

@@ -33,7 +33,6 @@ public final class VenomousBreath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new InfoEffect("Choose target creature"));
         this.getSpellAbility().addEffect(new VenomousBreathCreateDelayedTriggeredAbilityEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private VenomousBreath(final VenomousBreath card) {

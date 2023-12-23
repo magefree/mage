@@ -27,7 +27,8 @@ public final class TouchOfDeath extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
 
         // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
     }
 
     private TouchOfDeath(final TouchOfDeath card) {

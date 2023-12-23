@@ -540,7 +540,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void showAvailableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
-        show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES);
+        showAvailableAbilities(showName, turnNum, step, player, true);
+    }
+
+    /**
+     * @param showOnlyUniqueAbilities return full list or unique only (duplicated abilities with same name will be combined in one)
+     */
+    public void showAvailableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player, Boolean showOnlyUniqueAbilities) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES, showOnlyUniqueAbilities.toString());
     }
 
     public void showAvailableMana(String showName, int turnNum, PhaseStep step, TestPlayer player) {
@@ -2222,9 +2229,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertFalse(player.getName() + " has lost the game.", player.hasLost());
     }
 
+    /**
+     * Prepare GameView from current game (for client side code tests)
+     *
+     * @param player null for watcher mode
+     */
     public GameView getGameView(Player player) {
         // prepare client-server data for tests
-        return GameSessionPlayer.prepareGameView(currentGame, player.getId(), null);
+        UUID playerId = player == null ? null : player.getId();
+        return GameSessionPlayer.prepareGameView(currentGame, playerId, playerId);
+    }
+
+    public GameView getGameView(Player player, UUID userId) {
+        // prepare client-server data for tests
+        return GameSessionPlayer.prepareGameView(currentGame, player == null ? null : player.getId(), userId);
     }
 
     protected enum ExpectedType {

@@ -64,8 +64,7 @@ public final class Aggression extends CardImpl {
                         new DestroyAttachedToEffect("enchanted"),
                         TargetController.CONTROLLER_ATTACHED_TO),
                 DidNotAttackThisTurnEnchantedCondition.instance,
-                "At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn."),
-                new AttackedThisTurnWatcher());
+                "At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn."));
 
     }
 

@@ -50,7 +50,6 @@ public final class MetzaliTowerOfTriumph extends CardImpl {
         // {2}{W}, {T}: Choose a creature at random that attacked this turn. Destroy that creature.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MetzaliTowerOfTriumphEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
 
     }

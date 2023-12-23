@@ -85,11 +85,6 @@ class LichenthropeEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public LichenthropeEffect copy() {
         return new LichenthropeEffect(this);
     }

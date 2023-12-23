@@ -1,21 +1,21 @@
 package mage.cards.m;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.GoblinToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -48,7 +48,7 @@ public final class MoggInfestation extends CardImpl {
 class MoggInfestationEffect extends OneShotEffect {
 
     public MoggInfestationEffect() {
-        super(Outcome.DestroyPermanent);
+        super(Outcome.Detriment);
         this.staticText = "Destroy all creatures target player controls. For each creature that died this way, create two 1/1 red Goblin creature tokens under that player's control";
     }
 
@@ -64,13 +64,15 @@ class MoggInfestationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Cards creaturesDied = new CardsImpl();
+        Set<UUID> creaturesDied = new HashSet<>();  // note, permanent and token creatures are counted
         if (controller != null
                 && getTargetPointer().getFirst(game, source) != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.destroy(source, game, false)) {
-                    if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) { // If a commander is replaced to command zone, the creature does not die
-                        creaturesDied.add(permanent);
+                    if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD
+                            || (permanent instanceof PermanentToken
+                            && !game.getState().getBattlefield().containsPermanent(permanent.getId()))) { // If a commander is replaced to command zone, the creature does not die
+                        creaturesDied.add(permanent.getId());
                     }
                 }
             }
@@ -78,8 +80,10 @@ class MoggInfestationEffect extends OneShotEffect {
                 return true;
             }
             game.getState().processAction(game);  // Bug #8548
-            for (Card c : creaturesDied.getCards(game)) {
-                if (game.getState().getZone(c.getId()) == Zone.GRAVEYARD) {
+            for (UUID uuid : creaturesDied) {
+                if (game.getState().getZone(uuid) == Zone.GRAVEYARD
+                        || (game.getLastKnownInformation(uuid, Zone.BATTLEFIELD) instanceof PermanentToken
+                        && !game.getBattlefield().containsPermanent(uuid))) {
                     Effect effect = new CreateTokenTargetEffect(new GoblinToken(), 2);
                     effect.setTargetPointer(getTargetPointer());
                     effect.apply(game, source);

@@ -24,7 +24,6 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
-import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -1956,7 +1955,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         // choose the correct color to pay a spell
-        if (outcome == Outcome.PutManaInPool && choice instanceof ChoiceColor && currentUnpaidMana != null) {
+        if (outcome == Outcome.PutManaInPool && choice.isManaColorChoice() && currentUnpaidMana != null) {
             if (currentUnpaidMana.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
                 choice.setChoice("White");
                 return true;

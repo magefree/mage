@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -11,23 +11,20 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class RamirezDePietroPillager extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.PIRATE, "Pirates");
 
     public RamirezDePietroPillager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
@@ -44,7 +41,8 @@ public final class RamirezDePietroPillager extends CardImpl {
         this.addAbility(ability);
 
         // Whenever one or more Pirates you control deal combat damage to a player, exile the top card of that player's library. You may cast that card for as long as it remains exiled.
-        this.addAbility(new RamirezDePietroPillagerTriggeredAbility());
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new RamirezDePietroPillagerEffect(),
+                filter, SetTargetPointer.PLAYER, false));
     }
 
     private RamirezDePietroPillager(final RamirezDePietroPillager card) {
@@ -57,66 +55,11 @@ public final class RamirezDePietroPillager extends CardImpl {
     }
 }
 
-class RamirezDePietroPillagerTriggeredAbility extends TriggeredAbilityImpl {
-
-    private final List<UUID> damagedPlayerIds = new ArrayList<>();
-
-    RamirezDePietroPillagerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RamirezDePietroPillagerEffect());
-    }
-
-    private RamirezDePietroPillagerTriggeredAbility(final RamirezDePietroPillagerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RamirezDePietroPillagerTriggeredAbility copy() {
-        return new RamirezDePietroPillagerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case COMBAT_DAMAGE_STEP_POST:
-                damagedPlayerIds.clear();
-                return false;
-            case DAMAGED_PLAYER:
-                break;
-            default:
-                return false;
-        }
-        if (!((DamagedPlayerEvent) event).isCombatDamage()) {
-            return false;
-        }
-        Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature != null
-                && creature.isControlledBy(getControllerId())
-                && creature.hasSubtype(SubType.PIRATE, game)
-                && !damagedPlayerIds.contains(event.getTargetId())) {
-            damagedPlayerIds.add(event.getTargetId());
-            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more Pirates you control deal combat damage to a player, " +
-                "exile the top card of that player's library. You may cast that card for as long as it remains exiled.";
-    }
-}
-
 class RamirezDePietroPillagerEffect extends OneShotEffect {
 
     RamirezDePietroPillagerEffect() {
         super(Outcome.Benefit);
+        staticText = "exile the top card of that player's library. You may cast that card for as long as it remains exiled.";
     }
 
     private RamirezDePietroPillagerEffect(final RamirezDePietroPillagerEffect effect) {

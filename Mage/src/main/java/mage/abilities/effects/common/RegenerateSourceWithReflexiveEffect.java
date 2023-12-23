@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -34,8 +35,8 @@ public class RegenerateSourceWithReflexiveEffect extends RegenerateSourceEffect 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        if (super.apply(game, source)) {
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if (super.replaceEvent(event, source, game)) {
             if (this.setReflexiveTarget) {
                 reflexive.getEffects().setTargetPointer(
                         new FixedTarget(targetPointer.getFirst(game, source), game)

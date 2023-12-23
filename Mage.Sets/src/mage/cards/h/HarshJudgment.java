@@ -95,9 +95,4 @@ class HarshJudgmentEffect extends RedirectionEffect {
     public HarshJudgmentEffect copy() {
         return new HarshJudgmentEffect(this);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 }

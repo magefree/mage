@@ -37,8 +37,12 @@ public final class KrarkClanGrunt extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+
+        // Sacrifice an artifact: Krark-Clan Grunt gets +1/+0 and gains first strike until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn)
+                .setText("{this} gets +1/+0"), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains first strike until end of turn"));
         this.addAbility(ability);
     }
 

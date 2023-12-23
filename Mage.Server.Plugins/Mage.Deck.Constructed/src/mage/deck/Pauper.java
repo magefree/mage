@@ -40,6 +40,7 @@ public class Pauper extends Constructed {
         banned.add("High Tide");
         banned.add("Hymn to Tourach");
         banned.add("Invigorate");
+        banned.add("Monastery Swiftspear");
         banned.add("Mystic Sanctuary");
         banned.add("Peregrine Drake");
         banned.add("Prophetic Prism");

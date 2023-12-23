@@ -134,11 +134,6 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public UndeadAlchemistEffect copy() {
         return new UndeadAlchemistEffect(this);
     }

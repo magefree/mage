@@ -12,7 +12,7 @@ public abstract class Mulligan implements Serializable {
     protected final int freeMulligans;
     protected final Map<UUID, Integer> usedFreeMulligans = new HashMap<>();
 
-    public Mulligan(int freeMulligans) {
+    Mulligan(int freeMulligans) {
         this.freeMulligans = freeMulligans;
     }
 
@@ -93,5 +93,8 @@ public abstract class Mulligan implements Serializable {
 
     public void drawHand(int numCards, Player player, Game game){
         player.drawCards(numCards, null, game);
+
+        // default hand sorting
+        player.getHand().sortCards(game, new MulliganDefaultHandSorter());
     }
 }

@@ -727,6 +727,16 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public Permanent getPermanentOrLKIBattlefield(MageObjectReference permanentRef) {
+        UUID id = permanentRef.getSourceId();
+        Permanent permanent = state.getPermanent(id);
+        if (permanent == null || state.getZoneChangeCounter(id) != permanentRef.getZoneChangeCounter()) {
+            permanent = (Permanent) this.getLastKnownInformation(id, Zone.BATTLEFIELD, permanentRef.getZoneChangeCounter());
+        }
+        return permanent;
+    }
+
+    @Override
     public Permanent getPermanentEntering(UUID permanentId) {
         return permanentsEntering.get(permanentId);
     }
@@ -1345,16 +1355,11 @@ public abstract class GameImpl implements Game {
 
     public void initGameDefaultWatchers() {
         List<Watcher> newWatchers = new ArrayList<>();
-        newWatchers.add(new MorbidWatcher());
         newWatchers.add(new CastSpellLastTurnWatcher());
-        newWatchers.add(new CastSpellYourLastTurnWatcher());
         newWatchers.add(new PlayerLostLifeWatcher());
-        newWatchers.add(new PlayerLostLifeNonCombatWatcher());
         newWatchers.add(new BlockedAttackerWatcher());
-        newWatchers.add(new DamageDoneWatcher());
-        newWatchers.add(new PlanarRollWatcher());
+        newWatchers.add(new PlanarRollWatcher()); // needed for RollDiceTest (planechase code needs improves)
         newWatchers.add(new AttackedThisTurnWatcher());
-        newWatchers.add(new PlayersAttackedThisTurnWatcher());
         newWatchers.add(new CardsDrawnThisTurnWatcher());
         newWatchers.add(new ManaSpentToCastWatcher());
         newWatchers.add(new ManaPaidSourceWatcher());
@@ -1874,7 +1879,7 @@ public abstract class GameImpl implements Game {
 
     /**
      * @param emblem
-     * @param sourceObject
+     * @param sourceObject can be null
      * @param toPlayerId   controller and owner of the emblem
      */
     @Override
@@ -1976,9 +1981,12 @@ public abstract class GameImpl implements Game {
         // if it was no copy of copy take the target itself
         if (newBluePrint == null) {
             newBluePrint = copyFromPermanent.copy();
+
+            // reset to original characteristics
             newBluePrint.reset(this);
 
-            //getState().addCard(permanent);
+            // workaround to find real copyable characteristics of transformed/facedown/etc permanents
+
             if (copyFromPermanent.isMorphed()
                     || copyFromPermanent.isManifested()
                     || copyFromPermanent.isFaceDown(this)) {
@@ -1986,7 +1994,7 @@ public abstract class GameImpl implements Game {
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
+                TransformAbility.transformPermanent(newBluePrint,this, source);
             }
             if (copyFromPermanent.isPrototyped()) {
                 Abilities<Ability> abilities = copyFromPermanent.getAbilities();

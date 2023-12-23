@@ -87,11 +87,6 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CorpsejackMenaceReplacementEffect copy() {
         return new CorpsejackMenaceReplacementEffect(this);
     }

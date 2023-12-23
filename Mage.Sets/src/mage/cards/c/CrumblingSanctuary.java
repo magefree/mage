@@ -55,11 +55,6 @@ class CrumblingSanctuaryEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int amount = event.getAmount();
         Player player = game.getPlayer(event.getTargetId());

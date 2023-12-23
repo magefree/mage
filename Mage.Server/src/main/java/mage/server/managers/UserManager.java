@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserManager {
+
     Optional<User> createUser(String userName, String host, AuthorizedUser authorizedUser);
 
     Optional<User> getUser(UUID userId);
@@ -25,11 +26,11 @@ public interface UserManager {
 
     boolean isAdmin(UUID userId);
 
-    void removeUserFromAllTablesAndChat(UUID userId, DisconnectReason reason);
-
     void informUserOpponents(UUID userId, String message);
 
     boolean extendUserSession(UUID userId, String pingInfo);
+
+    void removeUser(UUID userId);
 
     List<UserView> getUserInfoList();
 
@@ -38,4 +39,6 @@ public interface UserManager {
     String getUserHistory(String userName);
 
     void updateUserHistory();
+
+    void checkHealth();
 }

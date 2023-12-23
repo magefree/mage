@@ -43,7 +43,6 @@ public final class Instigator extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPlayer());
-        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
     }
 

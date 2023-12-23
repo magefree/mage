@@ -85,11 +85,6 @@ class SnickeringSquirrelEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public SnickeringSquirrelEffect copy() {
         return new SnickeringSquirrelEffect(this);
     }

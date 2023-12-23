@@ -137,11 +137,6 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SavingGraceReplacementEffect copy() {
         return new SavingGraceReplacementEffect(this);
     }

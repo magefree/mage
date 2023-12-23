@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -17,13 +17,9 @@ import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 public final class FelineSovereign extends CardImpl {
@@ -69,19 +65,12 @@ public final class FelineSovereign extends CardImpl {
     }
 }
 
-class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
+class FelineSovereignTriggeredAbility extends DealCombatDamageControlledTriggeredAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cat you control");
+    private static final FilterCreaturePermanent catFilter = new FilterCreaturePermanent(SubType.CAT, "Cats");
 
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(SubType.CAT.getPredicate());
-    }
-
-    private final Set<UUID> damagedPlayerIds = new HashSet<>();
-
-    public FelineSovereignTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
+    FelineSovereignTriggeredAbility() {
+        super(new DestroyTargetEffect().setText("destroy up to one target artifact or enchantment that player controls"), catFilter);
     }
 
     private FelineSovereignTriggeredAbility(final FelineSovereignTriggeredAbility ability) {
@@ -94,37 +83,15 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY
-                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.isControlledBy(this.getControllerId()) &&
-                    filter.match(p, getControllerId(), this, game) &&
-                    !damagedPlayerIds.contains(event.getPlayerId())) {
-                damagedPlayerIds.add(event.getPlayerId());
-                this.getTargets().clear();
-                FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent();
-                filter.add(new ControllerIdPredicate(event.getPlayerId()));
-                this.addTarget(new TargetPermanent(0, 1, filter, false));
-                return true;
-            }
+        if (!super.checkTrigger(event, game)) {
+            return false;
         }
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY ||
-                (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId()))) {
-            damagedPlayerIds.clear();
-        }
-        return false;
+        this.getTargets().clear();
+        FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent();
+        filter.add(new ControllerIdPredicate(event.getPlayerId()));
+        this.addTarget(new TargetPermanent(0, 1, filter, false));
+        return true;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls.";
-    }
 }

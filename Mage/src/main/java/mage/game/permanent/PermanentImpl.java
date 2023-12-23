@@ -259,7 +259,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      * @return
      */
     @Override
-    public List<String> getRules(Game game) {
+    final public List<String> getRules(Game game) {
         try {
             List<String> rules = super.getRules(game);
 
@@ -276,6 +276,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
 
             // ability hints already collected in super call
+
+            // warning, if you add new icon type for restriction or requirement then don't forget
+            // to add it for card icon too (search CardIconType.OTHER_HAS_RESTRICTIONS)
 
             // restrict hints
             List<String> restrictHints = new ArrayList<>();
@@ -301,7 +304,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
 
-                // requirement
+                // requirement hints
                 for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(this, false, game).entrySet()) {
                     for (Ability ability : entry.getValue()) {
                         if (entry.getKey().mustAttack(game)) {
@@ -338,11 +341,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
 
-                // Goaded hints.
+                // goaded hints
                 for (UUID playerId : getGoadingPlayers()) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        restrictHints.add(HintUtils.prepareText("Goaded by " + player.getLogName(), null, HintUtils.HINT_ICON_REQUIRE));
+                        restrictHints.add(HintUtils.prepareText("Goaded by " + player.getLogName() + " (must attack)", null, HintUtils.HINT_ICON_REQUIRE));
                     }
                 }
 

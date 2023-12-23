@@ -63,11 +63,6 @@ class SquirrelPoweredSchemeEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public SquirrelPoweredSchemeEffect copy() {
         return new SquirrelPoweredSchemeEffect(this);
     }

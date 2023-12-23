@@ -1,15 +1,12 @@
 package mage.client.components;
 
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 
 import java.awt.Component;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import javax.swing.JButton;
 
 public class MageUI {
@@ -37,8 +34,8 @@ public class MageUI {
                 super.afterExecute(r, t);
 
                 // catch errors in popup threads (example: card popup over cards or chat/log messages)
-                t = ThreadUtils.findRealException(r, t);
-                if (t != null) {
+                t = ThreadUtils.findRunnableException(r, t);
+                if (t != null && !(t instanceof CancellationException)) {
                     logger.error("Catch unhandled error in POPUP thread: " + t.getMessage(), t);
                 }
             }

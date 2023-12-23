@@ -34,6 +34,8 @@ public class ChoiceImpl implements Choice {
     protected String specialText = "";
     protected String specialHint = "";
 
+    protected boolean manaColorChoice = false; // set true to allow automatic choosing with Outcome.PutManaInPool
+
     public ChoiceImpl() {
         this(false);
     }
@@ -65,6 +67,7 @@ public class ChoiceImpl implements Choice {
         this.specialCanBeEmpty = choice.specialCanBeEmpty;
         this.specialText = choice.specialText;
         this.specialHint = choice.specialHint;
+        this.manaColorChoice = choice.manaColorChoice;
     }
 
     @Override
@@ -326,6 +329,17 @@ public class ChoiceImpl implements Choice {
     @Override
     public ChoiceHintType getHintType() {
         return this.hintType;
+    }
+
+    @Override
+    public boolean isManaColorChoice() {
+        return manaColorChoice;
+    }
+
+    @Override
+    public ChoiceImpl setManaColorChoice(boolean manaColorChoice) {
+        this.manaColorChoice = manaColorChoice;
+        return this;
     }
 
     private void protectFromEmptyChoices() {

@@ -60,11 +60,6 @@ class ComeuppanceEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         if (preventionData.getPreventedDamage() > 0) {

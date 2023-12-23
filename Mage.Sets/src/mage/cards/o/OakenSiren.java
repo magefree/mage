@@ -78,6 +78,6 @@ enum OakenSirenCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        return object != null && object.isArtifact(game);
+        return object != null && object.isArtifact(game) && !source.isActivated();
     }
 }

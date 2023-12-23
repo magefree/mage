@@ -4,7 +4,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Constants;
 import mage.game.Game;
-import mage.server.exceptions.UserNotFoundException;
 import mage.server.game.GameController;
 import mage.server.managers.ChatManager;
 import mage.server.managers.ManagerFactory;
@@ -56,19 +55,13 @@ public class ChatManagerImpl implements ChatManager {
         } else {
             logger.trace("Chat to join not found - chatId: " + chatId + " userId: " + userId);
         }
-
-    }
-
-    @Override
-    public void clearUserMessageStorage() {
-        lastUserMessages.clear();
     }
 
     @Override
     public void leaveChat(UUID chatId, UUID userId) {
         ChatSession chatSession = chatSessions.get(chatId);
-        if (chatSession != null && chatSession.hasUser(userId)) {
-            chatSession.kill(userId, DisconnectReason.CleaningUp);
+        if (chatSession != null && chatSession.hasUser(userId, false)) {
+            chatSession.disconnectUser(userId, DisconnectReason.DisconnectedByUser);
         }
     }
 
@@ -321,39 +314,14 @@ public class ChatManagerImpl implements ChatManager {
         return false;
     }
 
-    /**
-     * use mainly for announcing that a user connection was lost or that a user
-     * has reconnected
-     *
-     * @param userId
-     * @param message
-     * @param color
-     * @throws mage.server.exceptions.UserNotFoundException
-     */
-    @Override
-    public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
-        managerFactory.userManager().getUser(userId).ifPresent(user -> {
-            getChatSessions()
-                    .stream()
-                    .filter(chat -> chat.hasUser(userId))
-                    .forEach(session -> session.broadcast(user.getName(), message, color, true, null, MessageType.TALK, null));
-
-        });
-    }
-
     @Override
     public void sendReconnectMessage(UUID userId) {
         managerFactory.userManager().getUser(userId).ifPresent(user
                 -> getChatSessions()
                 .stream()
-                .filter(chat -> chat.hasUser(userId))
+                .filter(chat -> chat.hasUser(userId, true))
                 .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, null, MessageType.STATUS, null)));
 
-    }
-
-    @Override
-    public void sendLostConnectionMessage(UUID userId, DisconnectReason reason) {
-        managerFactory.userManager().getUser(userId).ifPresent(user -> sendMessageToUserChats(userId, user.getName() + " " + reason.getMessage()));
     }
 
     /**
@@ -367,11 +335,11 @@ public class ChatManagerImpl implements ChatManager {
         managerFactory.userManager().getUser(userId).ifPresent(user -> {
             List<ChatSession> chatSessions = getChatSessions().stream()
                     .filter(chat -> !chat.getChatId().equals(managerFactory.gamesRoomManager().getMainChatId())) // ignore main lobby
-                    .filter(chat -> chat.hasUser(userId))
+                    .filter(chat -> chat.hasUser(userId, true))
                     .collect(Collectors.toList());
 
             if (chatSessions.size() > 0) {
-                logger.info("INFORM OPPONENTS by " + user.getName() + ": " + message);
+                logger.debug("INFORM OPPONENTS by " + user.getName() + ": " + message);
                 chatSessions.forEach(chatSession -> chatSession.broadcast(null, message, MessageColor.BLUE, true, null, MessageType.STATUS, null));
             }
         });
@@ -380,8 +348,8 @@ public class ChatManagerImpl implements ChatManager {
     @Override
     public void removeUser(UUID userId, DisconnectReason reason) {
         for (ChatSession chatSession : getChatSessions()) {
-            if (chatSession.hasUser(userId)) {
-                chatSession.kill(userId, reason);
+            if (chatSession.hasUser(userId, false)) {
+                chatSession.disconnectUser(userId, reason);
             }
         }
     }
@@ -397,4 +365,25 @@ public class ChatManagerImpl implements ChatManager {
         }
     }
 
+    private void clearUserMessageStorage() {
+        lastUserMessages.clear();
+    }
+
+    @Override
+    public void checkHealth() {
+        //logger.info("cheching chats...");
+        // TODO: add broken chats check and report (with non existing userId)
+
+        /*
+        logger.info("total chats: " + chatSessions.size());
+        chatSessions.values().forEach(c -> {
+            logger.info("chat " + c.getInfo() + ", " + c.getChatId());
+            c.getClients().forEach((userId, userName) -> {
+                logger.info(" - " + userName + ", " + userId);
+            });
+        });
+         */
+
+        clearUserMessageStorage();
+    }
 }

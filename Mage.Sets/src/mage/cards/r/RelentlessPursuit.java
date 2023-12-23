@@ -1,19 +1,18 @@
 package mage.cards.r;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.UUID;
 
@@ -41,10 +40,6 @@ public final class RelentlessPursuit extends CardImpl {
 
 class RelentlessPursuitEffect extends OneShotEffect {
 
-    private static final FilterCard creatureFilter
-            = new FilterCreatureCard("creature card to put into your hand");
-    private static final FilterCard landFilter
-            = new FilterLandCard("land card to put into your hand");
 
     RelentlessPursuitEffect() {
         super(Outcome.DrawCard);
@@ -64,46 +59,19 @@ class RelentlessPursuitEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller == null || sourceObject == null) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
-        if (cards.isEmpty()) {
-            return false;
-        }
-
-        controller.revealCards(sourceObject.getName(), cards, game);
-
-        boolean creatureCardFound = cards.getCards(game).stream().anyMatch(card -> card.isCreature(game));
-        boolean landCardFound = cards.getCards(game).stream().anyMatch(card -> card.isLand(game));
-
-        if (!creatureCardFound && !landCardFound) {
-            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            return true;
-        }
-
-        Cards cardsToHand = new CardsImpl();
-
-        if (creatureCardFound) {
-            TargetCard target = new TargetCardInLibrary(0, 1, creatureFilter);
-            controller.chooseTarget(Outcome.DrawCard, cards, target, source, game);
-            if (target.getFirstTarget() != null) {
-                cards.remove(target.getFirstTarget());
-                cardsToHand.add(target.getFirstTarget());
-            }
-        }
-        if (landCardFound) {
-            TargetCard target = new TargetCardInLibrary(0, 1, landFilter);
-            controller.chooseTarget(Outcome.DrawCard, cards, target, source, game);
-            if (target.getFirstTarget() != null) {
-                cards.remove(target.getFirstTarget());
-                cardsToHand.add(target.getFirstTarget());
-            }
-        }
-        controller.moveCards(cardsToHand, Zone.HAND, source, game);
-        controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
+        player.revealCards(source, cards, game);
+        TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);
+        player.choose(outcome, cards, target, source, game);
+        Cards toHand = new CardsImpl();
+        toHand.addAll(target.getTargets());
+        player.moveCards(toHand, Zone.HAND, source, game);
+        cards.removeAll(toHand);
+        player.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;
     }
 }

@@ -95,11 +95,6 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SzadekLordOfSecretsEffect copy() {
         return new SzadekLordOfSecretsEffect(this);
     }

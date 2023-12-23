@@ -40,9 +40,13 @@ public class TransformAbility extends SimpleStaticAbility {
         return "";
     }
 
-    public static void transformPermanent(Permanent permanent, MageObject sourceCard, Game game, Ability source) {
+    /**
+     * Apply transform effect to permanent (copy characteristic and other things)
+     */
+    public static boolean transformPermanent(Permanent permanent, Game game, Ability source) {
+        MageObject sourceCard = findSourceObjectForTransform(permanent);
         if (sourceCard == null) {
-            return;
+            return false;
         }
 
         permanent.setTransformed(true);
@@ -73,6 +77,25 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getToughness().setModifiedBaseValue(sourceCard.getToughness().getValue());
         permanent.setStartingLoyalty(sourceCard.getStartingLoyalty());
         permanent.setStartingDefense(sourceCard.getStartingDefense());
+
+        return true;
+    }
+
+    private static MageObject findSourceObjectForTransform(Permanent permanent) {
+        if (permanent == null) {
+            return null;
+        }
+
+        // copies can't transform
+        if (permanent.isCopy()) {
+            return null;
+        }
+
+        if (permanent instanceof PermanentToken) {
+            return ((PermanentToken) permanent).getToken().getBackFace();
+        } else {
+            return permanent.getSecondCardFace();
+        }
     }
 
     public static Card transformCardSpellStatic(Card mainSide, Card otherSide, Game game) {
@@ -130,35 +153,16 @@ class TransformEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-
         if (permanent == null) {
             return false;
         }
 
-        if (permanent.isCopy()) { // copies can't transform
-            return true;
-        }
-
+        // only for transformed permanents
         if (!permanent.isTransformed()) {
-            // keep original card
-            return true;
-        }
-
-        MageObject card;
-        if (permanent instanceof PermanentToken) {
-            card = ((PermanentToken) permanent).getToken().getBackFace();
-        } else {
-            card = permanent.getSecondCardFace();
-        }
-
-        if (card == null) {
             return false;
         }
 
-        TransformAbility.transformPermanent(permanent, card, game, source);
-
-        return true;
-
+        return TransformAbility.transformPermanent(permanent, game, source);
     }
 
     @Override

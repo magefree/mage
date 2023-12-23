@@ -72,8 +72,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final String CMD_AUTO_ORDER_NAME_LAST = "cmdAutoOrderNameLast";
     private static final String CMD_AUTO_ORDER_RESET_ALL = "cmdAutoOrderResetAll";
 
-    private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
-    private final Map<UUID, Boolean> playersWhoLeft = new HashMap<>();
+    private final Map<UUID, PlayAreaPanel> players = new LinkedHashMap<>();
+    private final Map<UUID, Boolean> playersWhoLeft = new LinkedHashMap<>();
 
     // non modal frames
     private final Map<UUID, CardInfoWindowDialog> exiles = new HashMap<>();
@@ -103,7 +103,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private boolean menuNameSet = false;
     private boolean handCardsOfOpponentAvailable = false;
 
-    private Map<String, Card> loadedCards = new HashMap<>();
+    private final Map<String, Card> loadedCards = new HashMap<>();
 
     private int storedHeight;
     private Map<String, HoverButton> hoverButtons;
@@ -144,7 +144,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 return;
             }
 
-            this.game.getHand().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getMyHand().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
             this.game.getStack().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
             this.game.getExile()
                     .stream()
@@ -274,8 +274,8 @@ public final class GamePanel extends javax.swing.JPanel {
     public void cleanUp() {
         MageFrame.removeGame(gameId);
         saveDividerLocations();
-        this.gameChatPanel.disconnect();
-        this.userChatPanel.disconnect();
+        this.gameChatPanel.cleanUp();;
+        this.userChatPanel.cleanUp();
 
         this.removeListener();
 
@@ -531,7 +531,7 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
-        this.abilityPicker.init(gameId);
+        this.abilityPicker.init(gameId, bigCard);
         this.btnConcede.setVisible(true);
         this.btnStopWatching.setVisible(false);
         this.btnSwitchHands.setVisible(false);
@@ -632,7 +632,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public synchronized void init(int messageId, GameView game) {
+    public synchronized void init(int messageId, GameView game, boolean callGameUpdateAfterInit) {
         addPlayers(game);
         // default menu states
         setMenuStates(
@@ -642,7 +642,9 @@ public final class GamePanel extends javax.swing.JPanel {
                 holdingPriority
         );
 
-        updateGame(messageId, game);
+        if (callGameUpdateAfterInit) {
+            updateGame(messageId, game);
+        }
     }
 
     private void addPlayers(GameView game) {
@@ -773,25 +775,31 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public synchronized void updateGame(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
         keepLastGameData(messageId, game, showPlayable, options, targets);
+
+        if (this.players.isEmpty() && !game.getPlayers().isEmpty()) {
+            logger.warn("Found empty players list, trying to init game again (possible reason: reconnection)");
+            init(messageId, game, false);
+        }
+
         prepareSelectableView();
         updateGame();
     }
 
     public synchronized void updateGame() {
-        if (playerId == null && lastGameData.game.getWatchedHands() == null) {
+        if (playerId == null && lastGameData.game.getWatchedHands().isEmpty()) {
             this.handContainer.setVisible(false);
         } else {
             this.handContainer.setVisible(true);
             handCards.clear();
-            if (lastGameData.game.getWatchedHands() != null) {
+            if (!lastGameData.game.getWatchedHands().isEmpty()) {
                 for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getWatchedHands().entrySet()) {
                     handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                 }
             }
             if (playerId != null) {
-                handCards.put(YOUR_HAND, lastGameData.game.getHand());
+                handCards.put(YOUR_HAND, lastGameData.game.getMyHand());
                 // Get opponents hand cards if available (only possible for players)
-                if (lastGameData.game.getOpponentHands() != null) {
+                if (!lastGameData.game.getOpponentHands().isEmpty()) {
                     for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getOpponentHands().entrySet()) {
                         handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                     }
@@ -811,7 +819,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (playerId != null) {
                 // set visible only if we have any other hand visible than ours
                 btnSwitchHands.setVisible(handCards.size() > 1);
-                boolean change = (handCardsOfOpponentAvailable != (lastGameData.game.getOpponentHands() != null));
+                boolean change = (handCardsOfOpponentAvailable == lastGameData.game.getOpponentHands().isEmpty());
                 if (change) {
                     handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
                     if (handCardsOfOpponentAvailable) {
@@ -885,7 +893,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (windowDialog.isClosed()) {
                         graveyardWindows.remove(player.getName());
                     } else {
-                        windowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
+                        windowDialog.loadCardsAndShow(player.getGraveyard(), bigCard, gameId, false);
                     }
                 }
 
@@ -896,7 +904,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (windowDialog.isClosed()) {
                         sideboardWindows.remove(player.getName());
                     } else {
-                        windowDialog.loadCards(player.getSideboard(), bigCard, gameId, false);
+                        windowDialog.loadCardsAndShow(player.getSideboard(), bigCard, gameId, false);
                     }
                 }
 
@@ -951,7 +959,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 MageFrame.getDesktop().add(exileWindow, JLayeredPane.PALETTE_LAYER);
                 exileWindow.show();
             }
-            exileWindow.loadCards(exile, bigCard, gameId);
+            exileWindow.loadCardsAndShow(exile, bigCard, gameId);
         }
 
         // update open or remove closed card hints windows
@@ -1326,7 +1334,7 @@ public final class GamePanel extends javax.swing.JPanel {
         graveyardWindows.put(playerName, newGraveyard);
         MageFrame.getDesktop().add(newGraveyard, JLayeredPane.PALETTE_LAYER);
         // use graveyards to sync selection (don't use player data here)
-        newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
+        newGraveyard.loadCardsAndShow(graveyards.get(playerName), bigCard, gameId, false);
     }
 
     private void clearClosedCardHintsWindows() {
@@ -1379,7 +1387,7 @@ public final class GamePanel extends javax.swing.JPanel {
         sideboardWindows.put(playerView.getName(), windowDialog);
         MageFrame.getDesktop().add(windowDialog, JLayeredPane.PALETTE_LAYER);
         // use sideboards to sync selection (don't use player data here)
-        windowDialog.loadCards(sideboards.get(playerView.getName()), bigCard, gameId, false);
+        windowDialog.loadCardsAndShow(sideboards.get(playerView.getName()), bigCard, gameId, false);
     }
 
     public void openTopLibraryWindow(String playerName) {
@@ -1440,10 +1448,10 @@ public final class GamePanel extends javax.swing.JPanel {
                 case REVEAL:
                 case REVEAL_TOP_LIBRARY:
                 case COMPANION:
-                    cardInfoWindowDialog.loadCards((CardsView) cardsView, bigCard, gameId);
+                    cardInfoWindowDialog.loadCardsAndShow((CardsView) cardsView, bigCard, gameId, false);
                     break;
                 case LOOKED_AT:
-                    cardInfoWindowDialog.loadCards((SimpleCardsView) cardsView, bigCard, gameId);
+                    cardInfoWindowDialog.loadCardsAndShow(CardsViewUtil.convertSimple((SimpleCardsView) cardsView), bigCard, gameId, false);
                     break;
                 default:
                     break;
@@ -1459,6 +1467,10 @@ public final class GamePanel extends javax.swing.JPanel {
     public void ask(int messageId, GameView gameView, String question, Map<String, Serializable> options) {
         updateGame(messageId, gameView, false, options, null);
         this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, true, gameView.getPhase());
+    }
+
+    public boolean isMissGameData() {
+        return lastGameData.game == null || lastGameData.game.getPlayers().isEmpty();
     }
 
     private void keepLastGameData(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
@@ -1507,7 +1519,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // hand
         if (needZone == Zone.HAND || needZone == Zone.ALL) {
-            for (CardView card : lastGameData.game.getHand().values()) {
+            for (CardView card : lastGameData.game.getMyHand().values()) {
                 if (needSelectable.contains(card.getId())) {
                     card.setChoosable(true);
                 }

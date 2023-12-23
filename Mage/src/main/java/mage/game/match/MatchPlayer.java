@@ -78,6 +78,17 @@ public class MatchPlayer implements Serializable {
         return deck;
     }
 
+    public Deck getDeckForViewer() {
+        if (this.deck == null) {
+            return null;
+        }
+
+        // Tiny Leaders uses deck name for game, also must hide real deck name from other players
+        Deck viewerDeck = this.deck.copy();
+        viewerDeck.setName(this.getName());
+        return viewerDeck;
+    }
+
     public void submitDeck(Deck deck) {
         this.deck = deck;
         this.doneSideboarding = true;

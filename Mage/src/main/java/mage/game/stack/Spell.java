@@ -72,6 +72,10 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     private Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game, boolean isCopy) {
+        if (card == null) {
+            throw new IllegalArgumentException("Wrong code usage: can't create spell without card: " + ability, new Throwable());
+        }
+
         Card affectedCard = card;
 
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)

@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class RisingPopulace extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another creature or planeswalker you control dies, put a +1/+1 counter on Rising Populace.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
+        this.addAbility(new DiesCreatureTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 false, filter, false
         ));

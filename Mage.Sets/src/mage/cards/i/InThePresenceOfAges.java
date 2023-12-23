@@ -1,18 +1,15 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CardTypeAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.UUID;
 
@@ -25,7 +22,7 @@ public final class InThePresenceOfAges extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard.
-        this.getSpellAbility().addEffect(new InThePresenceOfAgeEffect());
+        this.getSpellAbility().addEffect(new InThePresenceOfAgesEffect());
     }
 
     private InThePresenceOfAges(final InThePresenceOfAges card) {
@@ -38,22 +35,22 @@ public final class InThePresenceOfAges extends CardImpl {
     }
 }
 
-class InThePresenceOfAgeEffect extends OneShotEffect {
+class InThePresenceOfAgesEffect extends OneShotEffect {
 
-    InThePresenceOfAgeEffect() {
+    InThePresenceOfAgesEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top four cards of your library. "
                 + "You may put a creature card and/or a land card from among them into your hand. "
                 + "Put the rest into your graveyard";
     }
 
-    private InThePresenceOfAgeEffect(final InThePresenceOfAgeEffect effect) {
+    private InThePresenceOfAgesEffect(final InThePresenceOfAgesEffect effect) {
         super(effect);
     }
 
     @Override
-    public InThePresenceOfAgeEffect copy() {
-        return new InThePresenceOfAgeEffect(this);
+    public InThePresenceOfAgesEffect copy() {
+        return new InThePresenceOfAgesEffect(this);
     }
 
     @Override
@@ -64,7 +61,7 @@ class InThePresenceOfAgeEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
         player.revealCards(source, cards, game);
-        TargetCard target = new InThePresenceOfAgesTarget();
+        TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);
         player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl();
         toHand.addAll(target.getTargets());
@@ -72,51 +69,5 @@ class InThePresenceOfAgeEffect extends OneShotEffect {
         cards.removeAll(toHand);
         player.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;
-    }
-}
-
-class InThePresenceOfAgesTarget extends TargetCardInLibrary {
-
-    private static final FilterCard filter
-            = new FilterCard("a creature card and/or a land card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
-
-    private static final CardTypeAssignment cardTypeAssigner
-            = new CardTypeAssignment(CardType.CREATURE, CardType.LAND);
-
-    InThePresenceOfAgesTarget() {
-        super(0, 2, filter);
-    }
-
-    private InThePresenceOfAgesTarget(final InThePresenceOfAgesTarget target) {
-        super(target);
-    }
-
-    @Override
-    public InThePresenceOfAgesTarget copy() {
-        return new InThePresenceOfAgesTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(card);
-        return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }

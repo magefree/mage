@@ -38,7 +38,6 @@ public final class MadDog extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                 new SacrificeSourceEffect(), TargetController.YOU, false), condition,
                 "At the beginning of your end step, if {this} didn't attack or come under your control this turn, sacrifice it");
-        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
 
     }

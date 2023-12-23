@@ -130,11 +130,6 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PalisadeGiantReplacementEffect copy() {
         return new PalisadeGiantReplacementEffect(this);
     }

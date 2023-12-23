@@ -100,7 +100,7 @@ public class Counter implements Serializable, Copyable<Counter> {
      * @return a full description of this {@link Counter}
      */
     public String getDescription() {
-        return CardUtil.numberToText(Math.max(count, 1), CounterType.findArticle(name)) + ' ' + name + (count > 1 ? " counters" : " counter");
+        return CardUtil.getSimpleCountersText(Math.max(count, 1), CounterType.findArticle(name), name);
     }
 
     /**

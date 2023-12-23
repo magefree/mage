@@ -1,5 +1,8 @@
 package mage.client.components;
 
+import mage.client.components.ability.BackgroundPainter;
+import org.jdesktop.swingx.JXPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -24,6 +27,14 @@ public class ColorPane extends MageEditorPane {
         setBackground(new Color(0, 0, 0, 0));
         JPanel jPanel = new JPanel();
         jPanel.setBackground(color);
+        setLayout(new BorderLayout());
+        add(jPanel);
+    }
+
+    public void setExtBackgroundColor(BackgroundPainter backgroundPainter) {
+        setBackground(new Color(0, 0, 0, 0));
+        JXPanel jPanel = new JXPanel();
+        jPanel.setBackgroundPainter(backgroundPainter);
         setLayout(new BorderLayout());
         add(jPanel);
     }

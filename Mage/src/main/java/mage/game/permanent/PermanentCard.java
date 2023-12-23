@@ -72,11 +72,13 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
+
+        // if transformed on ETB
         if (card.isTransformable()) {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
                     || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
-                TransformAbility.transformPermanent(this, getSecondCardFace(), game, null);
+                TransformAbility.transformPermanent(this, game, null);
             }
         }
     }

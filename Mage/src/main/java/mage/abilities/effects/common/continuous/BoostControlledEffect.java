@@ -120,7 +120,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
             sb.append("other ");
         }
         sb.append(filter.getMessage());
-        if (!filter.getMessage().endsWith("you control")) {
+        if (!filter.getMessage().endsWith("you control") && !filter.getMessage().contains("you control that's")) {
             sb.append(" you control");
         }
         sb.append(each ? " gets " : " get ");

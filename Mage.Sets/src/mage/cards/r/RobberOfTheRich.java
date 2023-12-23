@@ -52,7 +52,7 @@ public final class RobberOfTheRich extends CardImpl {
                 "if defending player has more cards in hand than you, exile the top card of their library. " +
                 "During any turn you attacked with a Rogue, you may cast that card and " +
                 "you may spend mana as though it were mana of any color to cast that spell."
-        ).addHint(new ConditionHint(new RogueAttackedThisTurnCondition(null))), new AttackedThisTurnWatcher());
+        ).addHint(new ConditionHint(new RogueAttackedThisTurnCondition(null))));
     }
 
     private RobberOfTheRich(final RobberOfTheRich card) {
@@ -163,4 +163,3 @@ class RobberOfTheRichEffect extends OneShotEffect {
         return false;
     }
 }
-

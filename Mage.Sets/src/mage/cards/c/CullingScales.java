@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class CullingScales extends CardImpl {
 
     private static final FilterPermanent filterNonlandPermanentWithLowestCmc = new FilterNonlandPermanent(
-            "nonland permanent with the lowest mana value (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"
+            "target nonland permanent with the lowest mana value (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"
     );
 
     static {

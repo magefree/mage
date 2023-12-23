@@ -42,7 +42,7 @@ public final class Bloodthirster extends CardImpl {
 
         // Whenever Bloodthirster deals combat damage to a player, untap it. After this combat phase, there is an additional combat phase.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new UntapSourceEffect().setText("untap it"), false, true);
-        ability.addEffect(new AdditionalCombatPhaseEffect("After this combat phase, there is an additional combat phase"));
+        ability.addEffect(new AdditionalCombatPhaseEffect().setText("After this combat phase, there is an additional combat phase"));
         this.addAbility(ability);
 
         // Bloodthirster can't attack a player it has already attacked this turn.

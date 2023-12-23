@@ -134,6 +134,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Envoy of Okinec Ahau", 11, Rarity.COMMON, mage.cards.e.EnvoyOfOkinecAhau.class));
         cards.add(new SetCardInfo("Etali's Favor", 149, Rarity.COMMON, mage.cards.e.EtalisFavor.class));
         cards.add(new SetCardInfo("Explorer's Cache", 184, Rarity.UNCOMMON, mage.cards.e.ExplorersCache.class));
+        cards.add(new SetCardInfo("Fabrication Foundry", 12, Rarity.RARE, mage.cards.f.FabricationFoundry.class));
         cards.add(new SetCardInfo("Family Reunion", 13, Rarity.COMMON, mage.cards.f.FamilyReunion.class));
         cards.add(new SetCardInfo("Fanatical Offering", 105, Rarity.COMMON, mage.cards.f.FanaticalOffering.class));
         cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_UST_VARIOUS));
@@ -176,6 +177,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Idol of the Deep King", 155, Rarity.COMMON, mage.cards.i.IdolOfTheDeepKing.class));
         cards.add(new SetCardInfo("In the Presence of Ages", 192, Rarity.COMMON, mage.cards.i.InThePresenceOfAges.class));
         cards.add(new SetCardInfo("Inti, Seneschal of the Sun", 156, Rarity.RARE, mage.cards.i.IntiSeneschalOfTheSun.class));
+        cards.add(new SetCardInfo("Intrepid Paleontologist", 193, Rarity.RARE, mage.cards.i.IntrepidPaleontologist.class));
         cards.add(new SetCardInfo("Inverted Iceberg", 60, Rarity.COMMON, mage.cards.i.InvertedIceberg.class));
         cards.add(new SetCardInfo("Ironpaw Aspirant", 18, Rarity.COMMON, mage.cards.i.IronpawAspirant.class));
         cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_UST_VARIOUS));
@@ -272,6 +274,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of Days", 73, Rarity.COMMON, mage.cards.s.SageOfDays.class));
         cards.add(new SetCardInfo("Saheeli's Lattice", 164, Rarity.UNCOMMON, mage.cards.s.SaheelisLattice.class));
         cards.add(new SetCardInfo("Saheeli, the Sun's Brilliance", 239, Rarity.MYTHIC, mage.cards.s.SaheeliTheSunsBrilliance.class));
+        cards.add(new SetCardInfo("Sandswirl Wanderglyph", 41, Rarity.RARE, mage.cards.s.SandswirlWanderglyph.class));
         cards.add(new SetCardInfo("Sanguine Evangelist", 34, Rarity.RARE, mage.cards.s.SanguineEvangelist.class));
         cards.add(new SetCardInfo("Scampering Surveyor", 260, Rarity.UNCOMMON, mage.cards.s.ScamperingSurveyor.class));
         cards.add(new SetCardInfo("Screaming Phantom", 118, Rarity.COMMON, mage.cards.s.ScreamingPhantom.class));
@@ -324,9 +327,11 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Belligerent", 225, Rarity.RARE, mage.cards.t.TheBelligerent.class));
         cards.add(new SetCardInfo("The Core", 256, Rarity.RARE, mage.cards.t.TheCore.class));
         cards.add(new SetCardInfo("The Enigma Jewel", 55, Rarity.MYTHIC, mage.cards.t.TheEnigmaJewel.class));
+	cards.add(new SetCardInfo("The Everflowing Well", 363, Rarity.RARE, mage.cards.t.TheEverflowingWell.class));
         cards.add(new SetCardInfo("The Grim Captain", 266, Rarity.RARE, mage.cards.t.TheGrimCaptain.class));
         cards.add(new SetCardInfo("The Millennium Calendar", 257, Rarity.MYTHIC, mage.cards.t.TheMillenniumCalendar.class));
         cards.add(new SetCardInfo("The Mycotyrant", 235, Rarity.MYTHIC, mage.cards.t.TheMycotyrant.class));
+	cards.add(new SetCardInfo("The Myriad Pools", 363, Rarity.RARE, mage.cards.t.TheMyriadPools.class));
         cards.add(new SetCardInfo("The Skullspore Nexus", 212, Rarity.MYTHIC, mage.cards.t.TheSkullsporeNexus.class));
         cards.add(new SetCardInfo("Thousand Moons Crackshot", 37, Rarity.COMMON, mage.cards.t.ThousandMoonsCrackshot.class));
         cards.add(new SetCardInfo("Thousand Moons Infantry", 38, Rarity.COMMON, mage.cards.t.ThousandMoonsInfantry.class));
@@ -344,6 +349,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Twists and Turns", 217, Rarity.UNCOMMON, mage.cards.t.TwistsAndTurns.class));
         cards.add(new SetCardInfo("Uchbenbak, the Great Mistake", 242, Rarity.UNCOMMON, mage.cards.u.UchbenbakTheGreatMistake.class));
         cards.add(new SetCardInfo("Unlucky Drop", 82, Rarity.COMMON, mage.cards.u.UnluckyDrop.class));
+        cards.add(new SetCardInfo("Unstable Glyphbridge", 41, Rarity.RARE, mage.cards.u.UnstableGlyphbridge.class));
         cards.add(new SetCardInfo("Vanguard of the Rose", 42, Rarity.UNCOMMON, mage.cards.v.VanguardOfTheRose.class));
         cards.add(new SetCardInfo("Visage of Dread", 129, Rarity.UNCOMMON, mage.cards.v.VisageOfDread.class));
         cards.add(new SetCardInfo("Vito's Inquisitor", 130, Rarity.COMMON, mage.cards.v.VitosInquisitor.class));

@@ -56,7 +56,7 @@ public final class MaddeningImp extends CardImpl {
                 + "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. "
                 + "Activate only during an opponent's turn and only before combat.");
         ability.addEffect(new MaddeningImpCreateDelayedTriggeredAbilityEffect());
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
 
     }
 

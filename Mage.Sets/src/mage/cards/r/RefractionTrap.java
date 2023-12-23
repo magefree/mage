@@ -111,11 +111,6 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         this.used = true;

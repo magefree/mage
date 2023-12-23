@@ -90,7 +90,7 @@ class ChandraAwakenedInfernoEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            game.addEmblem(new ChandraAwakenedInfernoEmblem(), source.getSourceObjectIfItStillExists(game), playerId);
+            game.addEmblem(new ChandraAwakenedInfernoEmblem(), source.getSourceObject(game), playerId);
         }
         return true;
     }

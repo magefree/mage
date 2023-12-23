@@ -33,6 +33,8 @@ public class ExploreTest extends CardTestPlayerBase {
     private static final String enter = "Enter the Unknown"; // G Sorcery - Target creature you control explores.
     private static final String quicksand = "Quicksand"; // Land
     private static final String gg = "Giant Growth"; // Nonland
+    private static final String twists = "Twists and Turns"; // Replace Explore with Scry 1, Explore
+    private static final String topography = "Topography Tracker"; // Replace Explore with Explore, Explore
 
 
     @Test
@@ -242,10 +244,8 @@ public class ExploreTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void exploreReplacement() {
-        String twists = "Twists and Turns";
+    public void exploreReplacementScry() {
         // If a creature you control would explore, instead you scry 1, then that creature explores.
-
         addCard(Zone.BATTLEFIELD, playerA, ww);
         addCard(Zone.BATTLEFIELD, playerA, twists);
         addCard(Zone.HAND, playerA, mb);
@@ -268,5 +268,104 @@ public class ExploreTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 0);
         assertLibraryCount(playerA, 0);
     }
-    
+
+    @Test
+    public void exploreReplacementTwice() {
+        // If a creature you control would explore, instead it explores, then it explores again.
+        addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.BATTLEFIELD, playerA, topography);
+        addCard(Zone.HAND, playerA, mb);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, quicksand, 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mb);
+        setChoice(playerA, "Whenever a creature you control explores"); // order trigger
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(mb, CounterType.P1P1, 0);
+        assertCounterCount(ww, CounterType.P1P1, 2);
+        assertLife(playerA, 26);
+        assertHandCount(playerA, quicksand, 2);
+        assertGraveyardCount(playerA, 0);
+        assertLibraryCount(playerA, 0);
+    }
+
+
+    @Test
+    public void exploreReplacementScryOnce() {
+        String flamespeaker = "Flamespeaker Adept";
+        // If a creature you control would explore, instead you scry 1, then that creature explores.
+        // If a creature you control would explore, instead it explores, then it explores again.
+        addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.BATTLEFIELD, playerA, twists);
+        addCard(Zone.BATTLEFIELD, playerA, topography);
+        addCard(Zone.BATTLEFIELD, playerA, flamespeaker);
+        addCard(Zone.HAND, playerA, mb);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, quicksand, 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mb);
+        // Order Twists and Turns replacement effect first
+        setChoice(playerA, twists);
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // scry to top (no targets to bottom)
+        setChoice(playerA, "Whenever a creature you control explores"); // order trigger
+        setChoice(playerA, "Whenever a creature you control explores"); // order trigger
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(mb, CounterType.P1P1, 0);
+        assertCounterCount(ww, CounterType.P1P1, 2);
+        assertPowerToughness(playerA, flamespeaker, 4,3);
+        assertLife(playerA, 26);
+        assertHandCount(playerA, quicksand, 2);
+        assertGraveyardCount(playerA, 0);
+        assertLibraryCount(playerA, 0);
+    }
+
+
+    @Test
+    public void exploreReplacementScryTwice() {
+        String flamespeaker = "Flamespeaker Adept";
+        // If a creature you control would explore, instead it explores, then it explores again.
+        // If a creature you control would explore, instead you scry 1, then that creature explores.
+        addCard(Zone.BATTLEFIELD, playerA, ww);
+        addCard(Zone.BATTLEFIELD, playerA, twists);
+        addCard(Zone.BATTLEFIELD, playerA, topography);
+        addCard(Zone.BATTLEFIELD, playerA, flamespeaker);
+        addCard(Zone.HAND, playerA, mb);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, quicksand, 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mb);
+        // Order Topography Tracker replacement effect first
+        setChoice(playerA, topography);
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // scry to top (no targets to bottom)
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // scry to top again (no targets to bottom)
+        setChoice(playerA, "Whenever a creature you control explores"); // order trigger
+        setChoice(playerA, "Whenever a creature you control explores"); // order trigger
+        setChoice(playerA, "Whenever you scry"); // order trigger
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(mb, CounterType.P1P1, 0);
+        assertCounterCount(ww, CounterType.P1P1, 2);
+        assertPowerToughness(playerA, flamespeaker, 6,3);
+        assertLife(playerA, 26);
+        assertHandCount(playerA, quicksand, 2);
+        assertGraveyardCount(playerA, 0);
+        assertLibraryCount(playerA, 0);
+    }
 }

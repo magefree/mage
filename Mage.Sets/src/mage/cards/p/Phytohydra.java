@@ -74,11 +74,6 @@ class PhytohydraEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PhytohydraEffect copy() {
         return new PhytohydraEffect(this);
     }

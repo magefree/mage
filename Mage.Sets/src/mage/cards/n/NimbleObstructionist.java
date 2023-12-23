@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 /**
@@ -24,7 +23,9 @@ import mage.target.common.TargetActivatedOrTriggeredAbility;
  */
 public final class NimbleObstructionist extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("activated or triggered ability you don't control");
+    private static final FilterActivatedOrTriggeredAbility filter = 
+            new FilterActivatedOrTriggeredAbility("activated or triggered ability you don't control");
+
     static {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }

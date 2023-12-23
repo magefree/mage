@@ -37,7 +37,7 @@ public final class MagusOfTheMind extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusOfTheMindEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability, new CastSpellLastTurnWatcher());
+        this.addAbility(ability);
     }
 
     private MagusOfTheMind(final MagusOfTheMind card) {

@@ -9,9 +9,9 @@ import mage.game.events.GameEvent;
 
 public class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DamageCantBePreventedEffect(Duration duration, String staticText) {
+    public DamageCantBePreventedEffect(Duration duration) {
         super(duration, Outcome.Benefit);
-        this.staticText = staticText;
+        this.staticText = "damage can't be prevented" + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 
     protected DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {

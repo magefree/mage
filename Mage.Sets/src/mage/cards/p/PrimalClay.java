@@ -77,11 +77,6 @@ public final class PrimalClay extends CardImpl {
         }
 
         @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        @Override
         public boolean replaceEvent(GameEvent event, Ability source, Game game) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (permanent == null) {

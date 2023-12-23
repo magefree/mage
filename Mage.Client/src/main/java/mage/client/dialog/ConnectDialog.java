@@ -1,6 +1,5 @@
 package mage.client.dialog;
 
-import mage.cards.repository.RepositoryUtil;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
@@ -8,7 +7,6 @@ import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.gui.countryBox.CountryItemEditor;
-import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
 import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
@@ -61,6 +59,7 @@ public class ConnectDialog extends MageDialog {
     }
 
     public void showDialog() {
+        this.lblStatus.setText("");
         String serverAddress = MagePreferences.getServerAddressWithDefault(ClientDefaultSettings.serverName);
         this.txtServer.setText(serverAddress);
         this.txtPort.setText(Integer.toString(MagePreferences.getServerPortWithDefault(ClientDefaultSettings.port)));
@@ -678,8 +677,10 @@ public class ConnectDialog extends MageDialog {
 
         @Override
         protected Boolean doInBackground() throws Exception {
-            lblStatus.setText("Connecting...");
-            setConnectButtonsState(false);
+            SwingUtilities.invokeLater(() -> {
+                lblStatus.setText("Connecting...");
+                setConnectButtonsState(false);
+            });
             result = MageFrame.connect(connection);
             lastConnectError = SessionHandler.getLastConnectError();
             return result;
@@ -688,32 +689,44 @@ public class ConnectDialog extends MageDialog {
         @Override
         protected void done() {
             try {
-                get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
-                if (result) {
-                    lblStatus.setText("");
-                    connected();
-                    MageFrame.getInstance().prepareAndShowTablesPane();
-                } else {
-                    lblStatus.setText("Could not connect: " + lastConnectError);
-                }
+                get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS); // catch exceptions
+
+                SwingUtilities.invokeLater(() -> {
+                    if (result) {
+                        lblStatus.setText("Connected");
+
+                        // for ux: after connection client can load additional resources and data,
+                        // so the connection dialog will be visible all that time
+                        SwingUtilities.invokeLater(() -> {
+                            doAfterConnected();
+                            MageFrame.getInstance().prepareAndShowServerLobby();
+                            btnConnect.setEnabled(true);
+                        });
+                    } else {
+                        lblStatus.setText("Could not connect: " + lastConnectError);
+                    }
+                });
             } catch (InterruptedException | ExecutionException ex) {
-                logger.fatal("Update Players Task error", ex);
+                logger.fatal("Connection: can't load data from server", ex);
             } catch (CancellationException ex) {
                 logger.info("Connect: canceled");
                 lblStatus.setText("Connect was canceled");
             } catch (TimeoutException ex) {
-                logger.fatal("Connection timeout: ", ex);
+                logger.fatal("Connection: timeout", ex);
             } finally {
-                MageFrame.stopConnecting();
-                setConnectButtonsState(true);
+                if (!result) {
+                    MageFrame.stopConnecting();
+                    SwingUtilities.invokeLater(() -> {
+                        setConnectButtonsState(true);
+                    });
+                }
             }
         }
     }
 
-    private void connected() {
+    private void doAfterConnected() {
         this.saveSettings();
         this.hideDialog();
-        ConstructedFormats.ensureLists();
     }
 
     private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped

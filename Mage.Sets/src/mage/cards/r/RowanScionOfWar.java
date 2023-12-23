@@ -40,8 +40,7 @@ public final class RowanScionOfWar extends CardImpl {
                 new ActivateAsSorceryActivatedAbility(
                         new RowanScionOfWarEffect(),
                         new TapSourceCost()
-                ).addHint(ControllerLostLifeCount.getHint()),
-                new PlayerLostLifeWatcher()
+                ).addHint(ControllerLostLifeCount.getHint())
         );
 
     }

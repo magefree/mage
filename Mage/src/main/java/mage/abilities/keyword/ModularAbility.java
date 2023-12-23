@@ -89,16 +89,14 @@ public class ModularAbility extends DiesSourceTriggeredAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Modular");
         if (sunburst) {
-            sb.append("&mdash;Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>");
+            return "Modular&mdash;Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each"
+            + " color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>";
         } else {
-            sb.append(' ').append(amount).append(" <i>(This creature enters the battlefield with ")
-                    .append(CardUtil.numberToText(amount, "a"))
-                    .append(" +1/+1 counter").append(amount != 1 ? "s" : "")
-                    .append(" on it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>");
+            return "Modular " + amount + " <i>(This creature enters the battlefield with " +
+                    CardUtil.getOneOneCountersText(amount) +
+                    " on it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>";
         }
-        return sb.toString();
     }
 
     @Override
@@ -113,7 +111,7 @@ class ModularStaticAbility extends StaticAbility {
 
     ModularStaticAbility(int amount) {
         super(Zone.ALL, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
-        ruleText = "This enters the battlefield with " + CardUtil.numberToText(amount, "a") + " +1/+1 counter" + (amount != 1 ? "s" : "") + " on it.";
+        ruleText = "This enters the battlefield with " + CardUtil.getOneOneCountersText(amount) + " on it.";
         this.setRuleVisible(false);
     }
 

@@ -50,6 +50,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bojuka Bog", 320, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Branching Evolution", 234, Rarity.RARE, mage.cards.b.BranchingEvolution.class));
         cards.add(new SetCardInfo("Breeches, Brazen Plunderer", 217, Rarity.UNCOMMON, mage.cards.b.BreechesBrazenPlunderer.class));
+        cards.add(new SetCardInfo("Broadside Bombardiers", 86, Rarity.RARE, mage.cards.b.BroadsideBombardiers.class));
         cards.add(new SetCardInfo("Butcher of Malakir", 187, Rarity.RARE, mage.cards.b.ButcherOfMalakir.class));
         cards.add(new SetCardInfo("Bygone Marvels", 89, Rarity.RARE, mage.cards.b.BygoneMarvels.class));
         cards.add(new SetCardInfo("Canopy Vista", 321, Rarity.RARE, mage.cards.c.CanopyVista.class));
@@ -85,6 +86,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Daring Saboteur", 151, Rarity.UNCOMMON, mage.cards.d.DaringSaboteur.class));
         cards.add(new SetCardInfo("Deathgorge Scavenger", 236, Rarity.RARE, mage.cards.d.DeathgorgeScavenger.class));
         cards.add(new SetCardInfo("Deeproot Elite", 237, Rarity.RARE, mage.cards.d.DeeprootElite.class));
+        cards.add(new SetCardInfo("Deeproot Historian", 91, Rarity.RARE, mage.cards.d.DeeprootHistorian.class));
         cards.add(new SetCardInfo("Deeproot Waters", 152, Rarity.UNCOMMON, mage.cards.d.DeeprootWaters.class));
         cards.add(new SetCardInfo("Departed Deckhand", 153, Rarity.UNCOMMON, mage.cards.d.DepartedDeckhand.class));
         cards.add(new SetCardInfo("Descendants' Path", 238, Rarity.RARE, mage.cards.d.DescendantsPath.class));
@@ -129,6 +131,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 157, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Glass-Cast Heart", 199, Rarity.RARE, mage.cards.g.GlassCastHeart.class));
         cards.add(new SetCardInfo("Growth Spiral", 270, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
+        cards.add(new SetCardInfo("Hakbal of the Surging Soul", 3, Rarity.MYTHIC, mage.cards.h.HakbalOfTheSurgingSoul.class));
         cards.add(new SetCardInfo("Hardened Scales", 243, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Heirloom Blade", 303, Rarity.UNCOMMON, mage.cards.h.HeirloomBlade.class));
         cards.add(new SetCardInfo("Herald of Secret Streams", 158, Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class));
@@ -161,7 +164,9 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Majestic Heliopterus", 131, Rarity.UNCOMMON, mage.cards.m.MajesticHeliopterus.class));
         cards.add(new SetCardInfo("Malcolm, Keen-Eyed Navigator", 161, Rarity.UNCOMMON, mage.cards.m.MalcolmKeenEyedNavigator.class));
         cards.add(new SetCardInfo("Marauding Raptor", 228, Rarity.RARE, mage.cards.m.MaraudingRaptor.class));
+        cards.add(new SetCardInfo("March of the Canonized", 73, Rarity.RARE, mage.cards.m.MarchOfTheCanonized.class));
         cards.add(new SetCardInfo("Martyr of Dusk", 132, Rarity.COMMON, mage.cards.m.MartyrOfDusk.class));
+        cards.add(new SetCardInfo("Master of Dark Rites", 83, Rarity.RARE, mage.cards.m.MasterOfDarkRites.class));
         cards.add(new SetCardInfo("Master of the Pearl Trident", 162, Rarity.RARE, mage.cards.m.MasterOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", 133, Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class));
         cards.add(new SetCardInfo("Merchant Raiders", 163, Rarity.UNCOMMON, mage.cards.m.MerchantRaiders.class));
@@ -233,12 +238,15 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Ascendancy", 288, Rarity.RARE, mage.cards.s.SimicAscendancy.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 352, Rarity.COMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Signet", 312, Rarity.UNCOMMON, mage.cards.s.SimicSignet.class));
+        cards.add(new SetCardInfo("Singer of Swift Rivers", 98, Rarity.RARE, mage.cards.s.SingerOfSwiftRivers.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 171, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
+        cards.add(new SetCardInfo("Skeleton Crew", 85, Rarity.RARE, mage.cards.s.SkeletonCrew.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 353, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 313, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Sorin, Lord of Innistrad", 289, Rarity.MYTHIC, mage.cards.s.SorinLordOfInnistrad.class));
         cards.add(new SetCardInfo("Spectral Sailor", 172, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Stonybrook Banneret", 173, Rarity.COMMON, mage.cards.s.StonybrookBanneret.class));
+        cards.add(new SetCardInfo("Storm Fleet Negotiator", 78, Rarity.RARE, mage.cards.s.StormFleetNegotiator.class));
         cards.add(new SetCardInfo("Strionic Resonator", 116, Rarity.RARE, mage.cards.s.StrionicResonator.class));
         cards.add(new SetCardInfo("Sulfur Falls", 354, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Sunken Hollow", 355, Rarity.RARE, mage.cards.s.SunkenHollow.class));
@@ -256,6 +264,8 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of the False God", 359, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 360, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Thassa, God of the Sea", 176, Rarity.MYTHIC, mage.cards.t.ThassaGodOfTheSea.class));
+        cards.add(new SetCardInfo("The Indomitable", 43, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Indomitable", 75, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thieving Skydiver", 177, Rarity.RARE, mage.cards.t.ThievingSkydiver.class));
         cards.add(new SetCardInfo("Thought Vessel", 118, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thriving Bluff", 361, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
@@ -269,6 +279,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Timothar, Baron of Bats", 210, Rarity.MYTHIC, mage.cards.t.TimotharBaronOfBats.class));
         cards.add(new SetCardInfo("Tishana, Voice of Thunder", 291, Rarity.MYTHIC, mage.cards.t.TishanaVoiceOfThunder.class));
         cards.add(new SetCardInfo("Topiary Stomper", 261, Rarity.RARE, mage.cards.t.TopiaryStomper.class));
+        cards.add(new SetCardInfo("Topography Tracker", 95, Rarity.RARE, mage.cards.t.TopographyTracker.class));
         cards.add(new SetCardInfo("Tributary Instructor", 96, Rarity.RARE, mage.cards.t.TributaryInstructor.class));
         cards.add(new SetCardInfo("Twilight Prophet", 211, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 366, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));

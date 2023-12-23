@@ -11,6 +11,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.interfaces.plugin.ThemePlugin;
+import mage.util.RandomUtil;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
@@ -111,7 +112,7 @@ public class ThemePluginImpl implements ThemePlugin {
     private BufferedImage loadbuffer_random() throws IOException {
         BufferedImage res;
         if (loadimages()) {
-            int it = (int) Math.abs(Math.random() * (flist.getItemCount()));
+            int it = (int) Math.abs(RandomUtil.nextDouble() * (flist.getItemCount()));
             String filename = BackgroundDir + flist.getItem(it);
             res = ImageIO.read(new File(filename));
             return res;

@@ -48,7 +48,6 @@ public final class GlyphOfReincarnation extends CardImpl {
         // Destroy all creatures that were blocked by target Wall this turn. They can’t be regenerated. For each creature that died this way, put a creature card from the graveyard of the player who controlled that creature the last time it became blocked by that Wall onto the battlefield under its owner’s control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GlyphOfReincarnationEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private GlyphOfReincarnation(final GlyphOfReincarnation card) {

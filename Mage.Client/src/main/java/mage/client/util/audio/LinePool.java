@@ -7,10 +7,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
@@ -22,7 +19,7 @@ import javax.sound.sampled.SourceDataLine;
 
 import org.apache.log4j.Logger;
 
-import mage.utils.ThreadUtils;
+import mage.util.ThreadUtils;
 
 public class LinePool {
 
@@ -44,8 +41,8 @@ public class LinePool {
             @Override
             protected void afterExecute(Runnable r, Throwable t) {
                 super.afterExecute(r, t);
-                t = ThreadUtils.findRealException(r, t);
-                if (t != null) {
+                t = ThreadUtils.findRunnableException(r, t);
+                if (t != null && !(t instanceof CancellationException)) {
                     // TODO: show sound errors in client logs?
                     //logger.error("Catch unhandled error in SOUND thread: " + t.getMessage(), t);
                 }

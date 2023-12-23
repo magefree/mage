@@ -47,7 +47,7 @@ public class LoadTest {
     private static final Boolean TEST_SHOW_GAME_LOGS_AS_HTML = false; // html is original format with full data, but can be too bloated
     private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
     private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
-    private static final String TEST_AI_RANDOM_DECK_SETS = "NEO"; // set for random generated decks (empty for all sets usage)
+    private static final String TEST_AI_RANDOM_DECK_SETS = "NEO"; // set for random generated decks (empty for all sets usage, PELP for lands only - communication test)
     private static final String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
     private static final String TEST_AI_CUSTOM_DECK_PATH_2 = ""; // custom deck file instead random for player 2 (empty for random)
 
@@ -223,8 +223,8 @@ public class LoadTest {
         UUID tableId = game.getTableId();
 
         // deck load
-        DeckCardLists deckList1 = loadGameDeck(1, deckColors, false, deckAllowedSets);
-        DeckCardLists deckList2 = loadGameDeck(2, deckColors, false, deckAllowedSets);
+        DeckCardLists deckList1 = loadGameDeck(1, deckColors, deckAllowedSets.equals("PELP"), deckAllowedSets);
+        DeckCardLists deckList2 = loadGameDeck(2, deckColors, deckAllowedSets.equals("PELP"), deckAllowedSets);
 
         // join AI
         Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_1", PlayerType.COMPUTER_MAD, 5, deckList1, ""));
@@ -607,7 +607,7 @@ public class LoadTest {
         }
 
         public void disconnect() {
-            this.session.connectStop(false);
+            this.session.connectStop(false, false);
         }
 
         public void concede() {
@@ -819,7 +819,7 @@ public class LoadTest {
             List<String> data = Arrays.asList(
                     "TOTAL/AVG", //"index",
                     String.valueOf(this.size()), //"name",
-                    "", // "random sid",
+                    "total, secs: " + String.format("%.3f", (float) this.getTotalDurationMs() / 1000), // "random sid",
                     String.valueOf(this.getAvgTurn()), // turn
                     String.valueOf(this.getAvgLife1()), // player 1
                     String.valueOf(this.getAvgLife2()), // player 2
@@ -839,6 +839,10 @@ public class LoadTest {
 
         private int getAvgLife2() {
             return this.values().stream().mapToInt(LoadTestGameResult::getLife2).sum() / this.size();
+        }
+
+        private int getTotalDurationMs() {
+            return this.values().stream().mapToInt(LoadTestGameResult::getDurationMs).sum();
         }
 
         private int getAvgDurationMs() {

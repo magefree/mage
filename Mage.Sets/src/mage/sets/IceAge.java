@@ -161,6 +161,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Heal", 30, Rarity.COMMON, mage.cards.h.Heal.class));
         cards.add(new SetCardInfo("Hecatomb", 130, Rarity.RARE, mage.cards.h.Hecatomb.class));
         cards.add(new SetCardInfo("Hematite Talisman", 320, Rarity.UNCOMMON, mage.cards.h.HematiteTalisman.class));
+        cards.add(new SetCardInfo("Hipparion", 31, Rarity.UNCOMMON, mage.cards.h.Hipparion.class));
         cards.add(new SetCardInfo("Hoar Shade", 131, Rarity.COMMON, mage.cards.h.HoarShade.class));
         cards.add(new SetCardInfo("Hot Springs", 248, Rarity.RARE, mage.cards.h.HotSprings.class));
         cards.add(new SetCardInfo("Howl from Beyond", 132, Rarity.COMMON, mage.cards.h.HowlFromBeyond.class));
@@ -319,6 +320,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Plains", 367, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 372, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Snowblind", 264, Rarity.RARE, mage.cards.s.Snowblind.class));
+        cards.add(new SetCardInfo("Snowfall", 101, Rarity.COMMON, mage.cards.s.Snowfall.class));
         cards.add(new SetCardInfo("Soldevi Golem", 338, Rarity.RARE, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soldevi Machinist", 102, Rarity.UNCOMMON, mage.cards.s.SoldeviMachinist.class));
         cards.add(new SetCardInfo("Soldevi Simulacrum", 339, Rarity.UNCOMMON, mage.cards.s.SoldeviSimulacrum.class));

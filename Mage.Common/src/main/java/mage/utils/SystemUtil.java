@@ -28,7 +28,6 @@ import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 
-import javax.swing.*;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
@@ -506,12 +505,13 @@ public final class SystemUtil {
                     case COMMAND_LANDS_ADD_TO_BATTLEFIELD: {
                         // select lands
                         List<MultiAmountMessage> lands = new ArrayList<>();
-                        lands.add(new MultiAmountMessage("{W} Plains", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{U} Island", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{B} Swamp", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{R} Mountain", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{G} Forest", 0, 10, 5));
-                        lands.add(new MultiAmountMessage("{C} Ash Barrens", 0, 10, 0));
+                        String spaceSymbol = "&nbsp;"; // workaround for space near icons
+                        lands.add(new MultiAmountMessage("{W}" + spaceSymbol + "Plains", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{U}" + spaceSymbol + "Island", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{B}" + spaceSymbol + "Swamp", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{R}" + spaceSymbol + "Mountain", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{G}" + spaceSymbol + "Forest", 0, 10, 5));
+                        lands.add(new MultiAmountMessage("{C}" + spaceSymbol + "Ash Barrens", 0, 10, 0));
                         List<Integer> landsAmount = feedbackPlayer.getMultiAmountWithIndividualConstraints(
                                 Outcome.Neutral, lands, 0, 100, MultiAmountType.CHEAT_LANDS, game
                         );
@@ -523,7 +523,7 @@ public final class SystemUtil {
                         Set<Card> newCards = new LinkedHashSet<>();
                         for (int i = 0; i < landsAmount.size(); i++) {
                             int cardAmount = landsAmount.get(i);
-                            String cardName = lands.get(i).message.substring("{W}".length() + 1);
+                            String cardName = lands.get(i).message.substring("{W}".length()).replace(spaceSymbol, " ").trim();
                             if (cardAmount > 0) {
                                 Set<Card> addedCards = addNewCardsToGame(game, cardName, null, cardAmount, feedbackPlayer);
                                 if (addedCards != null) {
@@ -764,7 +764,7 @@ public final class SystemUtil {
                     feedbackPlayer.getName(), errorsList.size());
             mes += String.join("\n", errorsList);
             mes += "\n";
-            game.fireErrorEvent("Cheat command errors", new IllegalArgumentException(mes));
+            game.fireErrorEvent("Cheat command errors, see server logs for details", new IllegalArgumentException(mes));
         }
         game.informPlayers(String.format("%s: tried to apply cheat commands", feedbackPlayer.getLogName()));
     }
@@ -900,29 +900,5 @@ public final class SystemUtil {
             cardName = matchInfo.group(2);
         }
         return Arrays.asList(cardSet, cardName);
-    }
-
-    public static void ensureRunInGameThread() {
-        String name = Thread.currentThread().getName();
-        if (!name.startsWith("GAME")) {
-            // how-to fix: use signal logic to inform a game about new command to execute instead direct execute (see example with WantConcede)
-            // reason: user responses/commands are received by network/call thread, but must be processed by game thread
-            throw new IllegalArgumentException("Wrong code usage: game related code must run in GAME thread, but it used in " + name, new Throwable());
-        }
-    }
-
-    public static void ensureRunInCallThread() {
-        String name = Thread.currentThread().getName();
-        if (!name.startsWith("CALL")) {
-            // how-to fix: something wrong in your code logic
-            throw new IllegalArgumentException("Wrong code usage: client commands code must run in CALL threads, but used in " + name, new Throwable());
-        }
-    }
-
-    public static void ensureRunInGUISwingThread() {
-        if (!SwingUtilities.isEventDispatchThread()) {
-            // hot-to fix: run GUI changeable code by SwingUtilities.invokeLater(() -> {xxx})
-            throw new IllegalArgumentException("Wrong code usage: GUI related code must run in SWING thread by SwingUtilities.invokeLater", new Throwable());
-        }
     }
 }

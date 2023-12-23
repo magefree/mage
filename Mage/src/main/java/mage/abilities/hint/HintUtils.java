@@ -16,8 +16,8 @@ public class HintUtils {
     // icons changes to real files on client side (see mana icons replacement)
     public static final String HINT_ICON_GOOD = "ICON_GOOD";
     public static final String HINT_ICON_BAD = "ICON_BAD";
-    public static final String HINT_ICON_RESTRICT = "ICON_RESTRICT";
-    public static final String HINT_ICON_REQUIRE = "ICON_REQUIRE";
+    public static final String HINT_ICON_RESTRICT = "ICON_RESTRICT"; // used for restrict card icon too
+    public static final String HINT_ICON_REQUIRE = "ICON_REQUIRE"; // used for restrict card icon too
     public static final String HINT_ICON_DUNGEON_ROOM_CURRENT = "ICON_DUNGEON_ROOM_CURRENT";
     public static final String HINT_ICON_DUNGEON_ROOM_NEXT = "ICON_DUNGEON_ROOM_NEXT";
 
