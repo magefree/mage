@@ -17,8 +17,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -52,6 +53,11 @@ public final class LongListOfTheEnts extends CardImpl {
     public LongListOfTheEnts copy() {
         return new LongListOfTheEnts(this);
     }
+
+    static String getKey(Game game, Ability source, int offset) {
+        return "EntList_" + source.getSourceId() + "_" + (offset + CardUtil.getActualSourceObjectZoneChangeCounter(game, source));
+    }
+
 }
 
 enum LongListOfTheEntsHint implements Hint {
@@ -62,20 +68,20 @@ enum LongListOfTheEntsHint implements Hint {
         if (ability.getSourcePermanentIfItStillExists(game) == null) {
             return null;
         }
-        Set<SubType> subTypes = LongListOfTheEntsEffect.getSubTypes(game, ability);
-        if (subTypes.isEmpty()) {
+        Set<SubType> subTypes = (Set<SubType>) game.getState().getValue(LongListOfTheEnts.getKey(game, ability, 0));
+        if (subTypes == null || subTypes.isEmpty()) {
             return "No creature types have been noted yet.";
         }
         return subTypes
                 .stream()
                 .map(SubType::toString)
                 .collect(Collectors.joining(
-                        ", ", "Noted creature types: " + subTypes.size() + '(', ")"
+                        ", ", "Noted creature types: " + subTypes.size() + " (", ")"
                 ));
     }
 
     @Override
-    public Hint copy() {
+    public LongListOfTheEntsHint copy() {
         return this;
     }
 }
@@ -103,30 +109,34 @@ class LongListOfTheEntsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Set<String> chosenTypes = LongListOfTheEntsEffect
-                .getSubTypes(game, source)
+        ChoiceCreatureType choice = new ChoiceCreatureType(source.getSourceObject(game));
+        Object existingEntList = game.getState().getValue(LongListOfTheEnts.getKey(game, source, 0));
+        int offset;
+        Set<SubType> newEntList;
+        if (existingEntList == null) {
+            offset = 1; // zcc is off-by-one due to still entering battlefield
+            newEntList = new LinkedHashSet<>();
+        } else {
+            offset = 0;
+            newEntList = new LinkedHashSet<>((Set<SubType>) existingEntList);
+        }
+        Set<String> chosenTypes = newEntList
                 .stream()
                 .map(SubType::toString)
                 .collect(Collectors.toSet());
-        ChoiceCreatureType choice = new ChoiceCreatureType(source.getSourceObject(game));
         choice.getChoices().removeIf(chosenTypes::contains);
         player.choose(Outcome.BoostCreature, choice, game);
         SubType subType = SubType.byDescription(choice.getChoice());
         if (subType == null) {
             return false;
         }
+        game.informPlayers(player.getLogName() + " notes the creature type " + subType);
+        newEntList.add(subType);
+        game.getState().setValue(LongListOfTheEnts.getKey(game, source, offset), newEntList);
         game.addDelayedTriggeredAbility(new LongListOfTheEntsTriggeredAbility(subType), source);
         return true;
     }
 
-    static Set<SubType> getSubTypes(Game game, Ability source) {
-        return (Set<SubType>) game.getState().computeValueIfAbsent(
-                "EntList"
-                        + source.getSourceId()
-                        + source.getSourceObjectZoneChangeCounter(),
-                x -> new HashSet<SubType>()
-        );
-    }
 }
 
 class LongListOfTheEntsTriggeredAbility extends DelayedTriggeredAbility {
