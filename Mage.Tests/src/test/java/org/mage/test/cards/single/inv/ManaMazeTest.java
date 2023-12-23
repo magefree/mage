@@ -13,7 +13,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ManaMazeTest extends CardTestPlayerBase {
 
     @Test
-    @Ignore // TODO: enable after deep copy fix
     public void test_DeepCopyWithWatcherAndSelfReference() {
         // stack overflow bug: https://github.com/magefree/mage/issues/11572
         // card's watcher can have spell's ref to itself, so deep copy must be able to process it
