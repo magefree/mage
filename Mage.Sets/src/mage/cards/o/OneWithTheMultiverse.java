@@ -109,6 +109,7 @@ class OneWithTheMultiverseEffect extends AsThoughEffectImpl {
                 || card == null
                 || watcher == null
                 || sourceObject == null
+                || controller.getLibrary().getFromTop(game) == null
                 || watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
             return false;
         }
