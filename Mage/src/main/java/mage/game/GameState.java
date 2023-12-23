@@ -1074,9 +1074,10 @@ public class GameState implements Serializable, Copyable<GameState> {
             } else if (attachedTo instanceof Controllable) {
                 controllerId = ((Controllable) attachedTo).getControllerId();
             }
-            watcher.setControllerId(controllerId);
-            watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
-            watchers.add(watcher);
+            Watcher clone = watcher.copy();
+            clone.setControllerId(controllerId);
+            clone.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
+            watchers.add(clone);
         }
 
         for (Ability sub : ability.getSubAbilities()) {
