@@ -13,7 +13,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,7 +32,7 @@ public final class VolosJournalToken extends TokenImpl {
         ).addHint(VolosJournalTokenHint.instance));
     }
 
-    protected VolosJournalToken(final VolosJournalToken token) {
+    private VolosJournalToken(final VolosJournalToken token) {
         super(token);
     }
 
@@ -42,13 +42,13 @@ public final class VolosJournalToken extends TokenImpl {
 
     public static Set<String> getNotedTypes(Game game, Permanent permanent) {
         if (permanent == null) {
-            return new HashSet<>();
+            return new LinkedHashSet<>();
         }
 
         String key = "notedTypes_" + permanent.getId() + '_' + permanent.getZoneChangeCounter(game);
         Object value = game.getState().getValue(key);
         if (value == null) {
-            Set<String> types = new HashSet<>();
+            Set<String> types = new LinkedHashSet<>();
             game.getState().setValue(key, types);
             return types;
         }

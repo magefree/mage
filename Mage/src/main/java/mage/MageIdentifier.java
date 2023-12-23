@@ -67,7 +67,8 @@ public enum MageIdentifier {
     ScourgeOfNelTothAlternateCast,
     SqueeDubiousMonarchAlternateCast,
     WorldheartPhoenixAlternateCast,
-    XandersPactAlternateCast;
+    XandersPactAlternateCast,
+    TheTombOfAclazotzWatcher;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

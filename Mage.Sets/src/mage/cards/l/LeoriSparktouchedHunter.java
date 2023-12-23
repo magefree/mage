@@ -90,7 +90,7 @@ class LeoriSparktouchedHunterEffect extends OneShotEffect {
             return false;
         }
 
-        SubType subType = SubType.fromString(choice.getChoice());
+        SubType subType = SubType.byDescription(choice.getChoice());
         if (subType == null) {
             return false;
         }

@@ -706,9 +706,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Huntmaster of the Fells", 700, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ravager of the Fells", 700, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elspeth, Knight-Errant", 701, Rarity.MYTHIC, mage.cards.e.ElspethKnightErrant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", 704, Rarity.RARE, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", 705, Rarity.RARE, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", 706, Rarity.RARE, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 704, Rarity.RARE, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 705, Rarity.RARE, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 706, Rarity.RARE, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Knight Exemplar", 707, Rarity.RARE, mage.cards.k.KnightExemplar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fellwar Stone", 708, Rarity.RARE, mage.cards.f.FellwarStone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragon's Hoard", 709, Rarity.RARE, mage.cards.d.DragonsHoard.class));

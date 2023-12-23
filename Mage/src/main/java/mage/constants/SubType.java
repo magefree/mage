@@ -600,6 +600,9 @@ public enum SubType {
         return customSet;
     }
 
+    /**
+     * Use in test framework only, use SubType.byDescription instead for card logic
+     */
     public static SubType fromString(String value) {
         for (SubType st : SubType.values()) {
             if (st.toString().equals(value)) {

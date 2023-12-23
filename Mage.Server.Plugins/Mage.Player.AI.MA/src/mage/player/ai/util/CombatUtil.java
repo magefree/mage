@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.turn.CombatDamageStep;
 import mage.game.turn.EndOfCombatStep;
-import mage.game.turn.FirstCombatDamageStep;
 import mage.game.turn.Step;
 import mage.players.Player;
 import org.apache.log4j.Logger;
@@ -220,8 +219,8 @@ public final class CombatUtil {
         }
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
 
-        simulateStep(sim, new FirstCombatDamageStep());
-        simulateStep(sim, new CombatDamageStep());
+        simulateStep(sim, new CombatDamageStep(true));
+        simulateStep(sim, new CombatDamageStep(false));
         simulateStep(sim, new EndOfCombatStep());
         // The following commented out call produces random freezes.
         //sim.checkStateAndTriggered();
@@ -253,8 +252,8 @@ public final class CombatUtil {
         }
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
 
-        simulateStep(sim, new FirstCombatDamageStep());
-        simulateStep(sim, new CombatDamageStep());
+        simulateStep(sim, new CombatDamageStep(true));
+        simulateStep(sim, new CombatDamageStep(false));
         simulateStep(sim, new EndOfCombatStep());
         // The following commented out call produces random freezes.
         //sim.checkStateAndTriggered();

@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class UserManagerImpl implements UserManager {
 
     // timeouts on user's activity (on connection problems)
-    private static final int USER_CONNECTION_TIMEOUTS_CHECK_SECS = 30; // TODO: replace to 60 before merge
+    private static final int USER_CONNECTION_TIMEOUTS_CHECK_SECS = 30;
     private static final int USER_CONNECTION_TIMEOUT_INFORM_AFTER_SECS = 30; // inform user's opponents about problem
     private static final int USER_CONNECTION_TIMEOUT_SESSION_EXPIRE_AFTER_SECS = 3 * 60; // session expire - remove from all tables and chats (can't reconnect after it)
     private static final int USER_CONNECTION_TIMEOUT_REMOVE_FROM_SERVER_SECS = 8 * 60; // removes from users list
