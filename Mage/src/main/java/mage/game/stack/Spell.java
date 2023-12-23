@@ -1129,15 +1129,17 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public boolean isAllCreatureTypes(Game game) {
-        return false;
+        return card.isAllCreatureTypes(game);
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+        card.setIsAllCreatureTypes(value);
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+        card.setIsAllCreatureTypes(game, value);
     }
 
     @Override
