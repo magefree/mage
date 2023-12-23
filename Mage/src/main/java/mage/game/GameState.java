@@ -1137,9 +1137,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
         for (Watcher watcher : watcherList) {
-            watcher.setControllerId(ability.getControllerId());
-            watcher.setSourceId(ability.getSourceId());
-            this.watchers.add(watcher);
+            Watcher clone = watcher.copy();
+            clone.setControllerId(ability.getControllerId());
+            clone.setSourceId(ability.getSourceId());
+            watchers.add(clone);
         }
     }
 
@@ -1380,7 +1381,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addWatcher(Watcher watcher) {
-        this.watchers.add(watcher);
+        this.watchers.add(watcher.copy());
     }
 
     public void resetWatchers() {
