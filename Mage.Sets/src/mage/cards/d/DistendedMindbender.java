@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.keyword.EmergeAbility;
@@ -10,10 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -23,7 +19,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
-import mage.constants.Zone;
 
 /**
  * @author fireshoes

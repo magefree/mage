@@ -1,9 +1,7 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EmergeAbility;
@@ -12,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *

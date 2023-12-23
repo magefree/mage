@@ -1,9 +1,7 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.EmergeAbility;
@@ -14,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
