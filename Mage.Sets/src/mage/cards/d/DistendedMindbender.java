@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.keyword.EmergeAbility;
@@ -10,10 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -23,7 +19,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
-import mage.constants.Zone;
 
 /**
  * @author fireshoes
@@ -38,7 +33,7 @@ public final class DistendedMindbender extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Emerge {5}{B}{B}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{5}{B}{B}")));
+        this.addAbility(new EmergeAbility(this, "{5}{B}{B}"));
 
         // When controller cast Distended Mindbender, target opponent reveals their hand. You choose from it a nonland card with converted mana cost 3 or less
         // and a card with converted mana cost 4 or greater. That player discards those cards.

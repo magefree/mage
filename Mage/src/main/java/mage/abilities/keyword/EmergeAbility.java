@@ -1,10 +1,12 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -26,10 +28,11 @@ import java.util.UUID;
 public class EmergeAbility extends SpellAbility {
 
     private final ManaCosts<ManaCost> emergeCost;
+    public static final String EMERGE_ACTIVATION_CREATURE_REFERENCE = "emergeActivationMOR";
 
-    public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
+    public EmergeAbility(Card card, String emergeString) {
         super(card.getSpellAbility());
-        this.emergeCost = emergeCost.copy();
+        this.emergeCost = new ManaCostsImpl<>(emergeString);
         this.newId(); // Set newId because cards spell ability is copied and needs own id
         this.setCardName(card.getName() + " with emerge");
         zone = Zone.HAND;
@@ -94,7 +97,9 @@ public class EmergeAbility extends SpellAbility {
                 if (creature != null) {
                     CardUtil.reduceCost(this, creature.getManaValue());
                     if (super.activate(game, false)) {
+                        MageObjectReference mor = new MageObjectReference(creature, game);
                         if (creature.sacrifice(this, game)) {
+                            this.setCostsTag(EMERGE_ACTIVATION_CREATURE_REFERENCE, mor); //Can access with LKI afterwards
                             return true;
                         } else {
                             activated = false;

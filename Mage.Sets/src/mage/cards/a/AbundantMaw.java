@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -28,7 +27,7 @@ public final class AbundantMaw extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Emerge {6}{B}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{6}{B}")));
+        this.addAbility(new EmergeAbility(this, "{6}{B}"));
 
         // When you cast Abundant Maw, target opponent loses 3 life and you gain 3 life.
         Ability ability = new CastSourceTriggeredAbility(new LoseLifeTargetEffect(3));
