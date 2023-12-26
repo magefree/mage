@@ -12,7 +12,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -22,6 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -48,6 +48,7 @@ public final class PlagueReaver extends CardImpl {
                 new PlagueReaverTriggerEffect(), new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))
         );
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
@@ -127,7 +128,7 @@ class PlagueReaverDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     PlagueReaverDelayedTriggeredAbility(UUID playerId, Ability source) {
         super(new PlagueReaverReturnEffect(playerId).setTargetPointer(
-                new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter())
+                new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter() + 1)
         ), Duration.Custom, true, false);
         this.playerId = playerId;
     }
