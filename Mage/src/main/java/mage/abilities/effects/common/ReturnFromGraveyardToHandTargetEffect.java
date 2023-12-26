@@ -9,8 +9,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 /**
  * @author jeff

@@ -5,18 +5,13 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardAtRandomEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -32,7 +27,8 @@ public final class HauntedFengraf extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {3}, {tap}, Sacrifice Haunted Fengraf: Return a creature card at random from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(new HauntedFengrafEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardAtRandomEffect(
+                StaticFilters.FILTER_CARD_CREATURE, Zone.HAND), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -45,35 +41,5 @@ public final class HauntedFengraf extends CardImpl {
     @Override
     public HauntedFengraf copy() {
         return new HauntedFengraf(this);
-    }
-}
-
-class HauntedFengrafEffect extends OneShotEffect {
-
-    HauntedFengrafEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "Return a creature card at random from your graveyard to your hand";
-    }
-
-    private HauntedFengrafEffect(final HauntedFengrafEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HauntedFengrafEffect copy() {
-        return new HauntedFengrafEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) < 1) {
-            return false;
-        }
-        TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        target.withNotTarget(true);
-        target.setRandom(true);
-        target.chooseTarget(outcome, player.getId(), source, game);
-        return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }

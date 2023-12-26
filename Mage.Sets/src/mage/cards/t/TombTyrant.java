@@ -12,12 +12,11 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardAtRandomEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.hint.common.MyTurnHint;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -25,9 +24,6 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.RandomUtil;
 
 import java.util.UUID;
 
@@ -37,7 +33,7 @@ import java.util.UUID;
 public final class TombTyrant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombies");
-    private static final FilterCard filter2 = new FilterCreatureCard();
+    private static final FilterCard filter2 = new FilterCreatureCard("a Zombie creature card");
 
     static {
         filter2.add(SubType.ZOMBIE.getPredicate());
@@ -66,7 +62,7 @@ public final class TombTyrant extends CardImpl {
 
         // {2}{B}, {T}, Sacrifice a creature: Return a Zombie creature card at random from your graveyard to the battlefield. Activate only during your turn and only if there are at least three Zombie creature cards in your graveyard.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TombTyrantEffect(),
+                Zone.BATTLEFIELD, new ReturnFromGraveyardAtRandomEffect(filter2, Zone.BATTLEFIELD),
                 new ManaCostsImpl<>("{2}{B}"), condition
         );
         ability.addCost(new TapSourceCost());
@@ -81,38 +77,5 @@ public final class TombTyrant extends CardImpl {
     @Override
     public TombTyrant copy() {
         return new TombTyrant(this);
-    }
-}
-
-class TombTyrantEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCreatureCard();
-
-    static {
-        filter.add(SubType.ZOMBIE.getPredicate());
-    }
-
-    TombTyrantEffect() {
-        super(Outcome.Benefit);
-        staticText = "return a Zombie creature card at random from your graveyard to the battlefield";
-    }
-
-    private TombTyrantEffect(final TombTyrantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TombTyrantEffect copy() {
-        return new TombTyrantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Card card = RandomUtil.randomFromCollection(player.getGraveyard().getCards(filter, game));
-        return card != null && player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }
