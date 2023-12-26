@@ -236,6 +236,13 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Tenth Doctor", 194, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 446, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 561, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Third Doctor", 162, Rarity.RARE, mage.cards.t.TheThirdDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Third Doctor", 447, Rarity.RARE, mage.cards.t.TheThirdDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Third Doctor", 554, Rarity.RARE, mage.cards.t.TheThirdDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Third Doctor", "554z", Rarity.RARE, mage.cards.t.TheThirdDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Third Doctor", 767, Rarity.RARE, mage.cards.t.TheThirdDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Third Doctor", 1038, Rarity.RARE, mage.cards.t.TheThirdDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Third Doctor", 1145, Rarity.RARE, mage.cards.t.TheThirdDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Twelfth Doctor", 164, Rarity.RARE, mage.cards.t.TheTwelfthDoctor.class));
         cards.add(new SetCardInfo("Thijarian Witness", 111, Rarity.UNCOMMON, mage.cards.t.ThijarianWitness.class));
         cards.add(new SetCardInfo("Think Twice", 220, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
