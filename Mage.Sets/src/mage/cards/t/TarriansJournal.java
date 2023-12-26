@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardHandCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -49,10 +46,12 @@ public class TarriansJournal extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
-        
+
+        // {2}, {T}, Discard your hand: Transform Tarrian's Journal.
         this.addAbility(new TransformAbility());
-        Ability transformAbility = new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl("{2}"));
+        Ability transformAbility = new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{2}"));
         transformAbility.addCost(new TapSourceCost());
+        transformAbility.addCost(new DiscardHandCost());
         this.addAbility(transformAbility);
 
     }
