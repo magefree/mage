@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -34,10 +34,11 @@ public final class AdiposeOffspring extends CardImpl {
 
         // Emerge {5}{W}
         this.addAbility(new EmergeAbility(this, "{5}{W}"));
+
         // When Adipose Offspring enters the battlefield, create a 2/2 white Alien creature token. If Adipose Offspring's emerge cost was paid, instead create X of those tokens, where X is the sacrificed creature's toughness.
-        this.addAbility(new EntersBattlefieldAbility(new CreateTokenEffect(new AlienToken(), AdiposeOffspringValue.instance)
-                .setText("create a 2/2 white Alien creature token. If Adipose Offspring's emerge cost was paid, "
-                        +"instead create X of those tokens, where X is the sacrificed creature's toughness.")));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new AlienToken(), AdiposeOffspringValue.instance)
+                .setText("create a 2/2 white Alien creature token. If {this}'s emerge cost was paid, "
+                        + "instead create X of those tokens, where X is the sacrificed creature's toughness.")));
     }
 
     private AdiposeOffspring(final AdiposeOffspring card) {
