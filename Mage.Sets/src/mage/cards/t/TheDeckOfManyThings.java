@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardAtRandomEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -20,9 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -60,7 +59,7 @@ class TheDeckOfManyThingsEffect extends RollDieWithResultTableEffect {
 
     TheDeckOfManyThingsEffect() {
         super(20, "roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand");
-        this.addTableEntry(1, 9, new TheDeckOfManyThingsRandomEffect());
+        this.addTableEntry(1, 9, new ReturnFromGraveyardAtRandomEffect(StaticFilters.FILTER_CARD, Zone.HAND));
         this.addTableEntry(10, 19, new DrawCardSourceControllerEffect(2));
         this.addTableEntry(20, 20, new TheDeckOfManyThingsReturnEffect());
     }
@@ -86,38 +85,6 @@ class TheDeckOfManyThingsEffect extends RollDieWithResultTableEffect {
         }
         this.applyResult(result, game, source);
         return true;
-    }
-}
-
-class TheDeckOfManyThingsRandomEffect extends OneShotEffect {
-
-    TheDeckOfManyThingsRandomEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "return a card at random from your graveyard to your hand";
-    }
-
-    private TheDeckOfManyThingsRandomEffect(final TheDeckOfManyThingsRandomEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheDeckOfManyThingsRandomEffect copy() {
-        return new TheDeckOfManyThingsRandomEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getGraveyard().count(StaticFilters.FILTER_CARD, game) < 1) {
-            return false;
-        }
-        TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD);
-        target.setRandom(true);
-        target.withNotTarget(true);
-        target.chooseTarget(outcome, player.getId(), source, game);
-
-        Card card = game.getCard(target.getFirstTarget());
-        return card != null && player.moveCards(card, Zone.HAND, source, game);
     }
 }
 
