@@ -328,11 +328,11 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Belligerent", 225, Rarity.RARE, mage.cards.t.TheBelligerent.class));
         cards.add(new SetCardInfo("The Core", 256, Rarity.RARE, mage.cards.t.TheCore.class));
         cards.add(new SetCardInfo("The Enigma Jewel", 55, Rarity.MYTHIC, mage.cards.t.TheEnigmaJewel.class));
-	cards.add(new SetCardInfo("The Everflowing Well", 363, Rarity.RARE, mage.cards.t.TheEverflowingWell.class));
+        cards.add(new SetCardInfo("The Everflowing Well", 363, Rarity.RARE, mage.cards.t.TheEverflowingWell.class));
         cards.add(new SetCardInfo("The Grim Captain", 266, Rarity.RARE, mage.cards.t.TheGrimCaptain.class));
         cards.add(new SetCardInfo("The Millennium Calendar", 257, Rarity.MYTHIC, mage.cards.t.TheMillenniumCalendar.class));
         cards.add(new SetCardInfo("The Mycotyrant", 235, Rarity.MYTHIC, mage.cards.t.TheMycotyrant.class));
-	cards.add(new SetCardInfo("The Myriad Pools", 363, Rarity.RARE, mage.cards.t.TheMyriadPools.class));
+        cards.add(new SetCardInfo("The Myriad Pools", 363, Rarity.RARE, mage.cards.t.TheMyriadPools.class));
         cards.add(new SetCardInfo("The Skullspore Nexus", 212, Rarity.MYTHIC, mage.cards.t.TheSkullsporeNexus.class));
         cards.add(new SetCardInfo("The Tomb of Aclazotz", 126, Rarity.RARE, mage.cards.t.TheTombOfAclazotz.class));
         cards.add(new SetCardInfo("Thousand Moons Crackshot", 37, Rarity.COMMON, mage.cards.t.ThousandMoonsCrackshot.class));

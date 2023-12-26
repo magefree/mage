@@ -1,8 +1,17 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -17,8 +26,15 @@ public class RavnicaRemastered extends ExpansionSet {
 
     private RavnicaRemastered() {
         super("Ravnica Remastered", "RVR", ExpansionSet.buildDate(2024, 1, 12), SetType.SUPPLEMENTAL);
-        this.hasBoosters = false; // needs booster gen info
+        this.hasBoosters = true;
         this.hasBasicLands = false;
+        this.maxCardNumberInBooster = 291;
+        this.numBoosterCommon = 10; // Retro frame variants not yet implemented for booster generation
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 7; // 60 rares not including the mana-fixing slot, and 20 mythics
+        this.numBoosterSpecial = 1; // mana-fixing slot
+        // reference: https://magic.wizards.com/en/news/feature/collecting-ravnica-remastered
 
         cards.add(new SetCardInfo("Act of Treason", 99, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Aetherize", 448, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
@@ -487,6 +503,44 @@ public class RavnicaRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Wojek Bodyguard", 130, Rarity.COMMON, mage.cards.w.WojekBodyguard.class));
         cards.add(new SetCardInfo("Wurmweaver Coil", 161, Rarity.UNCOMMON, mage.cards.w.WurmweaverCoil.class));
         cards.add(new SetCardInfo("Yeva, Nature's Herald", 162, Rarity.RARE, mage.cards.y.YevaNaturesHerald.class));
+    }
+
+    @Override
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        // Guildgates, shocklands, signets, chromatic lantern
+        List<CardInfo> cardInfos = new ArrayList<>();
+
+        cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .types(CardType.LAND) // guildgates + shocklands
+                .maxCardNumber(maxCardNumberInBooster)));
+        cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .nameContains("Signet")
+                .maxCardNumber(maxCardNumberInBooster)));
+        cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .name("Chromatic Lantern")
+                .maxCardNumber(maxCardNumberInBooster)));
+
+        return cardInfos;
+    }
+
+    @Override
+    protected void addSpecialCards(List<Card> booster, int number) {
+        Rarity rarity;
+        int rarityKey = RandomUtil.nextInt(121);
+        if (rarityKey <= 11) {
+            rarity = Rarity.RARE; // shocklands or chromatic lantern each 1/121
+        } else if (rarityKey <= 11+40) {
+            rarity = Rarity.UNCOMMON; // signets 40/121
+        } else {
+            rarity = Rarity.COMMON; // guildgates 70/121
+        }
+        addToBooster(booster, getSpecialCardsByRarity(rarity));
     }
 
 //    @Override
