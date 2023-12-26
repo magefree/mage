@@ -52,7 +52,7 @@ public final class KutzilsFlanker extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), KutzilsFlankerValue.instance, true)
                         .setText("put a +1/+1 counter on {this} for each creature that left the battlefield under your control this turn")
         );
-        ability.addHint(new ValueHint("number of creatures that left", KutzilsFlankerValue.instance));
+        ability.addHint(new ValueHint("Number of creatures that left", KutzilsFlankerValue.instance));
         ability.addWatcher(new KutzilsFlankerWatcher());
 
         // * You gain 2 life and scry 2.
