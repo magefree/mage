@@ -20,8 +20,6 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
-    private UUID ownerId;
-
     public CardsImpl() {
     }
 
@@ -47,7 +45,6 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     protected CardsImpl(final CardsImpl cards) {
         this.addAll(cards);
-        this.ownerId = cards.ownerId;
     }
 
     @Override
@@ -85,11 +82,11 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             return null;
         }
 
-        // neccessary if permanent tokens are in the collection
+        // necessary if permanent tokens are in the collection
         Set<MageObject> cardsForRandomPick = this
-                .stream().map(uuid -> game.getObject(uuid))
+                .stream().map(game::getObject)
                 .filter(Objects::nonNull)
-                .filter(mageObject -> mageObject instanceof Card)
+                .filter(Card.class::isInstance)
                 .collect(Collectors.toSet());
 
         return (Card) RandomUtil.randomFromCollection(cardsForRandomPick);
@@ -117,46 +114,37 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Set<Card> getCards(FilterCard filter, UUID playerId, Ability source, Game game) {
-        Set<Card> cards = new LinkedHashSet<>();
-        for (UUID cardId : this) {
-            Card card = game.getCard(cardId);
-            if (card != null) {
-                boolean match = filter.match(card, playerId, source, game);
-                if (match) {
-                    cards.add(game.getCard(cardId));
-                }
-            }
-        }
-        return cards;
+        return stream()
+                .map(cardId -> getPermanentOrCard(cardId, game))
+                .filter(Objects::nonNull)
+                .filter(card -> filter.match(card, playerId, source, game))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    // TODO: Why is this used a completely different implementation than the version without the filter?
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
         return stream()
-                .map(game::getCard)
+                .map(cardId -> getPermanentOrCard(cardId, game))
                 .filter(Objects::nonNull)
                 .filter(card -> filter.match(card, game))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     @Override
     public Set<Card> getCards(Game game) {
-        Set<Card> cards = new LinkedHashSet<>();
-        for (Iterator<UUID> it = this.iterator(); it.hasNext(); ) { // Changed to iterator because of ConcurrentModificationException
-            UUID cardId = it.next();
+        return stream()
+                .map(cardId -> getPermanentOrCard(cardId, game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
 
-            // cards from battlefield must be as permanent, not card (moveCards uses instanceOf Permanent)
-            Card card = game.getPermanent(cardId);
-            if (card == null) {
-                card = game.getCard(cardId);
-            }
-
-            if (card != null) { // this can happen during the cancelation (player concedes) of a game
-                cards.add(card);
-            }
+    // cards from battlefield must be as permanent, not card (moveCards uses instanceOf Permanent)
+    private static Card getPermanentOrCard(UUID cardId, Game game) {
+        Card card = game.getPermanent(cardId);
+        if (card == null) {
+            card = game.getCard(cardId);
         }
-        return cards;
+        return card;
     }
 
     @Override

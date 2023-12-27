@@ -40,6 +40,9 @@ public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
 
     Set<Card> getCards(Game game);
 
+    /**
+     * Warning: this method ignores ObjectSourcePlayer predicates in the filter
+     */
     Set<Card> getCards(FilterCard filter, Game game);
 
     Set<Card> getCards(FilterCard filter, UUID playerId, Ability source, Game game);
@@ -56,6 +59,9 @@ public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
 
     Card getRandom(Game game);
 
+    /**
+     * Warning: this method ignores ObjectSourcePlayer predicates in the filter
+     */
     int count(FilterCard filter, Game game);
 
     int count(FilterCard filter, UUID playerId, Game game);
