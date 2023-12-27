@@ -462,7 +462,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     break;
                 case EXILED:
                     if (game.getExile().getCard(getId(), game) != null) {
-                        removed = game.getExile().removeCard(this, game);
+                        removed = game.getExile().removeCard(this);
                     }
                     break;
                 case STACK:

@@ -45,11 +45,7 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     public ExileZone createZone(UUID id, String name) {
-        return createZone(id, name + " - Exile", false);
-    }
-
-    private ExileZone createZone(UUID id, String name, boolean hidden) {
-        return exileZones.computeIfAbsent(id, x -> new ExileZone(id, name, hidden));
+        return exileZones.computeIfAbsent(id, x -> new ExileZone(id, name + " - Exile"));
     }
 
     public ExileZone getExileZone(UUID id) {
@@ -77,10 +73,6 @@ public class Exile implements Serializable, Copyable<Exile> {
 
     /**
      * Return exiled cards owned by a specific player. Use it in effects to find all cards in range.
-     *
-     * @param game
-     * @param fromPlayerId
-     * @return
      */
     public List<Card> getAllCards(Game game, UUID fromPlayerId) {
         List<Card> res = new ArrayList<>();
@@ -102,7 +94,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         return res;
     }
 
-    public boolean removeCard(Card card, Game game) {
+    public boolean removeCard(Card card) {
         for (ExileZone exile : exileZones.values()) {
             if (exile.contains(card.getId())) {
                 return exile.remove(card.getId());
@@ -113,10 +105,6 @@ public class Exile implements Serializable, Copyable<Exile> {
 
     /**
      * Move card from one exile zone to another. Use case example: create special zone for exiled and castable card.
-     *
-     * @param card
-     * @param game
-     * @param toZoneId
      */
     public void moveToAnotherZone(Card card, Game game, ExileZone exileZone) {
         if (getCard(card.getId(), game) == null) {
@@ -125,8 +113,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         if (exileZone == null) {
             throw new IllegalArgumentException("Exile zone must exists: " + card.getIdName());
         }
-
-        removeCard(card, game);
+        removeCard(card);
         exileZone.add(card);
     }
 
