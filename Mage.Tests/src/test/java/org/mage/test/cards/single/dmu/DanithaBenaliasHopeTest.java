@@ -5,7 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
-import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -45,7 +44,7 @@ public class DanithaBenaliasHopeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, danitha);
         setChoice(playerA, true); // attempt to use ability
-        setChoice(playerA, TestPlayer.CHOICE_SKIP);
+        // choice skip not needed
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -105,7 +104,7 @@ public class DanithaBenaliasHopeTest extends CardTestPlayerBase {
         setChoice(playerA, true); // use ability
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, swords, danitha);
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no longer can attach Aura
+        // no longer can attach Aura
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
