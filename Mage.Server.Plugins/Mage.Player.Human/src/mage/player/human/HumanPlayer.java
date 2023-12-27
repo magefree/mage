@@ -211,16 +211,18 @@ public class HumanPlayer extends PlayerImpl {
                 // game frozen, possible reasons:
                 // * ANOTHER player lost connection and GAME thread trying to send data to him
                 // * current player send answer, but lost connect after it
+                // * game thread stops and lost
                 String possibleReason;
                 if (response.getActiveAction() == null) {
                     possibleReason = "maybe connection problem with another player/watcher";
                 } else {
                     possibleReason = "something wrong with your priority on " + response.getActiveAction();
                 }
-                logger.warn(String.format("Game frozen in waitResponseOpen for %d secs: current user %s, %s",
+                logger.warn(String.format("Game frozen in waitResponseOpen for %d secs. User: %s; reason: %s; game: %s",
                         RESPONSE_WAITING_CHECK_MS * currentTimesWaiting / 1000,
                         this.getName(),
-                        possibleReason
+                        possibleReason,
+                        response.getActiveGameInfo()
                 ));
                 return false;
             }
@@ -308,7 +310,7 @@ public class HumanPlayer extends PlayerImpl {
         while (loop) {
             // start waiting for next answer
             response.clear();
-            response.setActiveAction(DebugUtil.getMethodNameWithSource(2));
+            response.setActiveAction(game, DebugUtil.getMethodNameWithSource(2));
             game.resumeTimer(getTurnControlledBy());
             responseOpenedForAnswer = true;
 
