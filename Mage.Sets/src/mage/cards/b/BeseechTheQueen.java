@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.card.CardManaCostLessThanControlledLandCountPredicate;
+import mage.filter.predicate.card.ManaValueLessThanControlledLandCountPredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -18,7 +18,7 @@ public final class BeseechTheQueen extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card with mana value less than or equal to the number of lands you control");
     static {
-        filter.add(CardManaCostLessThanControlledLandCountPredicate.getInstance());
+        filter.add(ManaValueLessThanControlledLandCountPredicate.instance);
     }
 
     public BeseechTheQueen(UUID ownerId, CardSetInfo setInfo) {

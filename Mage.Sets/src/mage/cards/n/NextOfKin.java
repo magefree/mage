@@ -1,23 +1,16 @@
 package mage.cards.n;
 
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.card.CastFromZonePredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -25,9 +18,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Alex-Vasile
@@ -62,7 +55,7 @@ public class NextOfKin extends CardImpl {
 class NextOfKinDiesEffect extends OneShotEffect {
 
     NextOfKinDiesEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PutCardInPlay);
         this.staticText = "you may put a creature card you own with lesser mana value from your hand or from the command zone onto the battlefield. " +
                 "If you do, return {this} to the battlefield attached to that creature at the beginning of the next end step.";
     }
@@ -81,21 +74,28 @@ class NextOfKinDiesEffect extends OneShotEffect {
         }
         int manaValue = ((Permanent) object).getManaValue();
 
-        FilterCreatureCard filterCreatureCard = new FilterCreatureCard("a creature card you own with lesser mana value from your hand or from the command zone");
-        filterCreatureCard.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, manaValue));
-
-        // This effect is used only to get the info about which card was added.
-        Effect hackTargetEffect = new InfoEffect("");
-
-        Effect putCardEffect = new PutCardFromOneOfTwoZonesOntoBattlefieldEffect(filterCreatureCard, false, hackTargetEffect, Zone.HAND, Zone.COMMAND);
-        boolean cardPut = putCardEffect.apply(game, source);
-        if (!cardPut) {
-            return false;
+        FilterCreatureCard filter = new FilterCreatureCard("a creature card you own with lesser mana value");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, manaValue));
+        Cards cards = new CardsImpl();
+        cards.addAllCards(controller.getHand().getCards(filter, source.getControllerId(), source, game));
+        for (Card possibleCard : game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY)) {
+            if (filter.match(possibleCard, source.getControllerId(), source, game)) {
+                cards.add(possibleCard);
+            }
         }
-
-        Effect returnToBattlefieldAttachedEffect = new ReturnToBattlefieldAttachedEffect();
-        returnToBattlefieldAttachedEffect.setTargetPointer(hackTargetEffect.getTargetPointer());
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToBattlefieldAttachedEffect), source);
+        if (cards.isEmpty()) {
+            return true;
+        }
+        TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
+        target.withNotTarget(true);
+        controller.choose(outcome, cards, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card != null) {
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+            Effect returnToBattlefieldAttachedEffect = new ReturnToBattlefieldAttachedEffect();
+            returnToBattlefieldAttachedEffect.setTargetPointer(new FixedTarget(card, game));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToBattlefieldAttachedEffect), source);
+        }
         return true;
     }
 
