@@ -43,7 +43,7 @@ public final class CabalArchon extends CardImpl {
         Effect effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
         ability.addEffect(effect);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

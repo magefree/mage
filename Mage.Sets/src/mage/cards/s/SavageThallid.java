@@ -55,7 +55,7 @@ public final class SavageThallid extends CardImpl {
         // Sacrifice a Saproling: Regenerate target Fungus.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
             new RegenerateTargetEffect(),
-            new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter2, false)));
+            new SacrificeTargetCost(filter2));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

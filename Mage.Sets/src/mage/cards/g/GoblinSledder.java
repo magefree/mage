@@ -38,7 +38,7 @@ public final class GoblinSledder extends CardImpl {
 
         // Sacrifice a Goblin: Target creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1,1,Duration.EndOfTurn), 
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, true)));
+                new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
