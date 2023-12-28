@@ -46,10 +46,6 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
-    public SacrificeTargetCost(TargetControlledPermanent target, boolean noText) {
-        this.addTarget(target);
-    }
-
     public SacrificeTargetCost(SacrificeTargetCost cost) {
         super(cost);
         for (Permanent permanent : cost.permanents) {
