@@ -22,7 +22,7 @@ public class TargetSacrifice extends TargetPermanent {
         super(minNumTargets, maxNumTargets, makeFilter(filter), true);
     }
 
-    private TargetSacrifice(final TargetSacrifice target) {
+    protected TargetSacrifice(final TargetSacrifice target) {
         super(target);
     }
 

@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public class TargetControlledCreatureEachColor extends TargetControlledPermanent {
+public class TargetSacrificeCreatureEachColor extends TargetSacrifice {
 
     private final ColorAssignment colorAssigner;
 
-    private static final FilterControlledPermanent makeFilter(String colors) {
+    private static FilterControlledPermanent makeFilter(String colors) {
         List<ObjectColor> objectColors
                 = Arrays.stream(colors.split(""))
                 .map(ObjectColor::new)
@@ -42,12 +42,12 @@ public class TargetControlledCreatureEachColor extends TargetControlledPermanent
         return filter;
     }
 
-    public TargetControlledCreatureEachColor(String colors) {
+    public TargetSacrificeCreatureEachColor(String colors) {
         super(colors.length(), makeFilter(colors));
         colorAssigner = new ColorAssignment(colors.split(""));
     }
 
-    private TargetControlledCreatureEachColor(final TargetControlledCreatureEachColor target) {
+    private TargetSacrificeCreatureEachColor(final TargetSacrificeCreatureEachColor target) {
         super(target);
         this.colorAssigner = target.colorAssigner;
     }
@@ -70,7 +70,7 @@ public class TargetControlledCreatureEachColor extends TargetControlledPermanent
     }
 
     @Override
-    public TargetControlledCreatureEachColor copy() {
-        return new TargetControlledCreatureEachColor(this);
+    public TargetSacrificeCreatureEachColor copy() {
+        return new TargetSacrificeCreatureEachColor(this);
     }
 }
