@@ -48,7 +48,7 @@ public final class SpiritBonds extends CardImpl {
         // {1}{W}, Sacrifice a Spirit: Target non-Spirit creature gains indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filterSpirit, true)));
+        ability.addCost(new SacrificeTargetCost(filterSpirit));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

@@ -45,7 +45,7 @@ public final class EaterOfHope extends CardImpl {
 
         // {B}, Sacrifice another creature: Regenerate Eater of Hope.
         Ability regenAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
-        regenAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true)));
+        regenAbility.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(regenAbility);
 
         // {2}{B}, Sacrifice two other creatures: Destroy target creature.
