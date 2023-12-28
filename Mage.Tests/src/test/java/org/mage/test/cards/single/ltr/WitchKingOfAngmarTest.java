@@ -31,7 +31,7 @@ public class WitchKingOfAngmarTest extends CardTestPlayerBase {
         attack(2, playerB, watchwolf);
         attack(2, playerB, swallower);
         checkStackObject("Sacrifice trigger check", 2, PhaseStep.COMBAT_DAMAGE, playerB, "Whenever one or more creatures deal combat damage to you", 1);
-        addTarget(playerB, watchwolf); // choose which creature to sacrifice
+        setChoice(playerB, watchwolf); // choose which creature to sacrifice
 
         runCode("check ring bear", 2, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertNotNull(playerA.getRingBearer(game));
