@@ -49,7 +49,7 @@ public final class LochmereSerpent extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{U}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter1)));
+        ability.addCost(new SacrificeTargetCost(filter1));
         this.addAbility(ability);
 
         // {B}, Sacrifice a Swamp: You gain 1 life and draw a card.

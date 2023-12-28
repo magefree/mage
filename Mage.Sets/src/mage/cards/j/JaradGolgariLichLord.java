@@ -56,8 +56,8 @@ public final class JaradGolgariLichLord extends CardImpl {
 
         // Sacrifice a Swamp and a Forest: Return Jarad from your graveyard to your hand.
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(filterSwamp)));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterForest)));
+                new SacrificeTargetCost(filterSwamp));
+        ability.addCost(new SacrificeTargetCost(filterForest));
         this.addAbility(ability);
 
     }

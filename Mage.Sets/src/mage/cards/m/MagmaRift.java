@@ -21,7 +21,7 @@ public final class MagmaRift extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // As an additional cost to cast Magma Rift, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
 
         // Magma Rift deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
