@@ -28,7 +28,7 @@ public final class BogDown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Kicker-Sacrifice two lands.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetSacrifice(2, filter))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(2, filter)));
 
         // Target player discards two cards. If Bog Down was kicked, that player discards three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DiscardTargetEffect(3),

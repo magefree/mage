@@ -55,7 +55,7 @@ public final class ZopandrelHungerDominus extends CardImpl {
 
         // {G/P}{G/P}, Sacrifice two other creatures: Put an indestructible counter on Zopandrel, Hunger Dominus.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()), new ManaCostsImpl<>("{G/P}{G/P}"));
-        ability.addCost(new SacrificeTargetCost(new TargetSacrifice(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 

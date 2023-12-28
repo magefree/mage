@@ -40,7 +40,7 @@ public final class DeathlessBehemoth extends CardImpl {
         // Sacrifice two Eldrazi Scions: Return Deathless Behemoth from your graveyard to your hand. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                new SacrificeTargetCost(new TargetSacrifice(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

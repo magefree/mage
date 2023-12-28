@@ -55,7 +55,7 @@ public final class RestlessBloodseeker extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 new TransformSourceEffect(),
-                new SacrificeTargetCost(new TargetSacrifice(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

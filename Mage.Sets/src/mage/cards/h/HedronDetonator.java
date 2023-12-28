@@ -45,7 +45,7 @@ public final class HedronDetonator extends CardImpl {
 
         // {T}, Sacrifice two artifacts: Exile the top card of your library. You may play that card this turn.
         ability = new SimpleActivatedAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetSacrifice(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 

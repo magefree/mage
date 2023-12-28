@@ -53,7 +53,7 @@ public final class FalkenrathForebear extends CardImpl {
 
         // {B}, Sacrifice two Blood tokens: Return Falkenrath Forebear from your graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetSacrifice(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 

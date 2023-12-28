@@ -35,7 +35,7 @@ public final class BiolumeSerpent extends CardImpl {
         // Sacrifice two Islands: Biolume Serpent can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetSacrifice(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

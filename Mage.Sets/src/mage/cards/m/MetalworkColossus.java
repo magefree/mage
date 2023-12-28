@@ -50,7 +50,7 @@ public final class MetalworkColossus extends CardImpl {
         );
 
         // Sacrifice two artifacts: Return Metalwork Colossus from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new SacrificeTargetCost(new TargetSacrifice(2, filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new SacrificeTargetCost(2, filter)));
     }
 
     private MetalworkColossus(final MetalworkColossus card) {

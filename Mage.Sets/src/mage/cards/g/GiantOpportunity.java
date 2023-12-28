@@ -29,7 +29,7 @@ public final class GiantOpportunity extends CardImpl {
         this.getSpellAbility().addEffect(new DoIfCostPaid(
                 new CreateTokenEffect(new GiantOpportunityToken()),
                 new CreateTokenEffect(new FoodToken(), 3),
-                new SacrificeTargetCost(new TargetSacrifice(2, filter))
+                new SacrificeTargetCost(2, filter)
         ).setText("You may sacrifice two Foods. If you do, create a 7/7 green Giant creature token. " +
                 "Otherwise, create three Food tokens."));
     }

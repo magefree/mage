@@ -27,7 +27,11 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
     private final List<Permanent> permanents = new ArrayList<>();
 
     public SacrificeTargetCost(FilterPermanent filter) {
-        this(new TargetSacrifice(filter));
+        this(1, filter);
+    }
+
+    public SacrificeTargetCost(int numToSac, FilterPermanent filter) {
+        this(new TargetSacrifice(numToSac, filter));
     }
 
     @Deprecated

@@ -40,7 +40,7 @@ public final class DutifulGriffin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{W}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetSacrifice(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 
