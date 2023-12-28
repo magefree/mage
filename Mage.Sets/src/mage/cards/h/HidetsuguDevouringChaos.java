@@ -39,9 +39,7 @@ public final class HidetsuguDevouringChaos extends CardImpl {
 
         // {B}, Sacrifice a creature: Scry 2.
         Ability ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl<>("{B}"));
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
 
         // {2}{R}, {T}: Exile the top card of your library. You may play that card this turn. When you exile a nonland card this way, Hidetsugu, Devouring Chaos deals damage equal to the exiled card's mana value to any target.
