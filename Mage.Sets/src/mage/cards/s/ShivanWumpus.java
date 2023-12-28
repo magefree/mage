@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -70,7 +71,7 @@ class ShivanWumpusEffect extends PutOnLibrarySourceEffect {
         if (controller != null) {
             boolean costPaid = false;
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()));
+                Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_LAND);
                 Player player = game.getPlayer(playerId);
                 if (player != null
                         && cost.canPay(source, source, playerId, game)
