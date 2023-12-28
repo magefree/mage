@@ -13,7 +13,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 import java.util.*;
@@ -50,10 +50,10 @@ public final class BabaLysagaNightWitch extends CardImpl {
 
 class BabaLysagaNightWitchSacrificeCost extends SacrificeTargetCost {
 
-    private Set<CardType> sacrificeTypes = new HashSet<>();
+    private final Set<CardType> sacrificeTypes = new HashSet<>();
 
     BabaLysagaNightWitchSacrificeCost() {
-        super(new TargetControlledPermanent(0, 3, StaticFilters.FILTER_CONTROLLED_PERMANENTS, true));
+        super(new TargetSacrifice(0, 3, StaticFilters.FILTER_CONTROLLED_PERMANENTS));
         setText("Sacrifice up to three permanents");
     }
 

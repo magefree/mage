@@ -35,6 +35,9 @@ public class TargetSacrifice extends TargetPermanent {
         FilterPermanent newFilter = filter.copy();
         newFilter.add(TargetController.YOU.getControllerPredicate());
         newFilter.add(CanBeSacrificedPredicate.instance);
+        if (filter.getMessage().contains(" you control")) {
+            newFilter.setMessage(filter.getMessage().replace(" you control", ""));
+        }
         return newFilter;
     }
 }
