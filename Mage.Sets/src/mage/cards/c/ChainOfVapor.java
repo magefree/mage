@@ -17,6 +17,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -70,8 +71,8 @@ class ChainOfVaporEffect extends OneShotEffect {
         if (permanent != null) {
             controller.moveCards(permanent, Zone.HAND, source, game);
             Player player = game.getPlayer(permanent.getControllerId());
-            TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'), true);
-            if (player != null && player.chooseTarget(Outcome.Sacrifice, target, source, game)) {
+            TargetSacrifice target = new TargetSacrifice(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'));
+            if (player != null && player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent land = game.getPermanent(target.getFirstTarget());
                 if (land != null && land.sacrifice(source, game)) {
                     if (player.chooseUse(outcome, "Copy the spell?", source, game)) {

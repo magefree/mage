@@ -105,7 +105,7 @@ class DarkIntimationsEffect extends OneShotEffect {
             if (player != null) {
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
                 if (target.canChoose(player.getId(), source, game)) {
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    player.choose(Outcome.Sacrifice, target, source, game);
                     perms.addAll(target.getTargets());
                 }
             }

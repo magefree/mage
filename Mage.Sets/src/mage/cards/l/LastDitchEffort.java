@@ -6,6 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -13,6 +14,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -59,27 +61,24 @@ class LastDitchEffortEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), true);
-            player.chooseTarget(Outcome.Sacrifice, target, source, game);
+            Target target = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURES);
+            player.choose(Outcome.Sacrifice, target, source, game);
             int numSacrificed = 0;
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    if (permanent.sacrifice(source, game)) {
-                        numSacrificed++;
-                    }
+                if (permanent != null && permanent.sacrifice(source, game)) {
+                    numSacrificed++;
                 }
             }
             if (numSacrificed > 0) {
-                int damage = numSacrificed;
                 UUID uuid = this.getTargetPointer().getFirst(game, source);
                 Permanent permanent = game.getPermanent(uuid);
                 Player opponent = game.getPlayer(uuid);
                 if (permanent != null) {
-                    permanent.damage(damage, source.getSourceId(), source, game, false, true);
+                    permanent.damage(numSacrificed, source.getSourceId(), source, game, false, true);
                 }
                 if (opponent != null) {
-                    opponent.damage(damage, source.getSourceId(), source, game);
+                    opponent.damage(numSacrificed, source.getSourceId(), source, game);
                 }
             }
             return true;

@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,9 +82,9 @@ class VonasHungerEffect extends OneShotEffect {
             if (player != null) {
                 int numTargets = (game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), game) + 1) / 2;
                 if (numTargets > 0) {
-                    TargetPermanent target = new TargetPermanent(numTargets, numTargets, StaticFilters.FILTER_CONTROLLED_CREATURE, true);
+                    TargetSacrifice target = new TargetSacrifice(numTargets, StaticFilters.FILTER_CONTROLLED_CREATURE);
                     if (target.canChoose(player.getId(), source, game)) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
                 }

@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -65,21 +66,19 @@ class PerilousPredicamentSacrificeOpponentsEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 FilterArtifactCreaturePermanent filterArtifact = new FilterArtifactCreaturePermanent("an artifact creature");
-                filterArtifact.add(new ControllerIdPredicate(player.getId()));
                 FilterCreaturePermanent filterNonArtifact = new FilterCreaturePermanent("a nonartifact creature");
                 filterNonArtifact.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
-                filterNonArtifact.add(new ControllerIdPredicate(player.getId()));
                 if (game.getBattlefield().countAll(filterArtifact, player.getId(), game) > 0) {
-                    TargetPermanent target = new TargetPermanent(1, 1, filterArtifact, true);
+                    TargetSacrifice target = new TargetSacrifice(filterArtifact);
                     if (target.canChoose(player.getId(), source, game)) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
                 }
                 if (game.getBattlefield().countAll(filterNonArtifact, player.getId(), game) > 0) {
-                    TargetPermanent target = new TargetPermanent(1, 1, filterNonArtifact, true);
+                    TargetSacrifice target = new TargetSacrifice(filterNonArtifact);
                     if (target.canChoose(player.getId(), source, game)) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
 
