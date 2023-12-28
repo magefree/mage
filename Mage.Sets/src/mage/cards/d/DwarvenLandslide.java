@@ -13,6 +13,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
@@ -31,7 +32,7 @@ public final class DwarvenLandslide extends CardImpl {
         // Kicker-{2}{R}, Sacrifice a land.
         Costs<Cost> kickerCosts = new CostsImpl<>();
         kickerCosts.add(new ManaCostsImpl<>("{2}{R}"));
-        kickerCosts.add(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        kickerCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         this.addAbility(new KickerAbility(kickerCosts));
 
         // Destroy target land. If Dwarven Landslide was kicked, destroy another target land.

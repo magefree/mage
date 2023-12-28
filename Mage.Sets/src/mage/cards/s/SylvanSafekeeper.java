@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -35,7 +36,7 @@ public final class SylvanSafekeeper extends CardImpl {
         // Sacrifice a land: Target creature you control gains shroud until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
