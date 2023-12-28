@@ -53,7 +53,7 @@ public final class JoleneThePlunderQueen extends CardImpl {
         // Sacrifice five Treasures: Put five +1/+1 counters on Jolene.
         this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-                new SacrificeTargetCost(new TargetControlledPermanent(5, filterTreasures))
+                new SacrificeTargetCost(5, filterTreasures)
         ));
     }
 
