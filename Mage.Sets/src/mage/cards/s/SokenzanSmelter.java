@@ -36,9 +36,7 @@ public final class SokenzanSmelter extends CardImpl {
                 new CreateTokenEffect(new ConstructRedToken()),
                 new CompositeCost(
                         new GenericManaCost(1),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
-                        )), "pay {1} and sacrifice an artifact"
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN), "pay {1} and sacrifice an artifact"
                 )
         ), TargetController.YOU, false));
     }

@@ -50,9 +50,7 @@ public final class ElvishReclaimer extends CardImpl {
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND_A), true
         ), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
         this.addAbility(ability);
     }
 

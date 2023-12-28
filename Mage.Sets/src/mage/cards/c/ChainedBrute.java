@@ -39,9 +39,7 @@ public final class ChainedBrute extends CardImpl {
                 Zone.BATTLEFIELD, new UntapSourceEffect(),
                 new GenericManaCost(1), MyTurnCondition.instance
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

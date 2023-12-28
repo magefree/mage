@@ -30,8 +30,9 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         this(new TargetSacrifice(filter));
     }
 
+    @Deprecated
     public SacrificeTargetCost(TargetControlledPermanent target) {
-        // TODO: replace all with TargetSacrifice
+        // TODO: replace all with TargetSacrifice, 245 usages remaining
         this.addTarget(target);
         target.withNotTarget(true); // sacrifice is never targeted
         target.setRequired(false); // can be canceled

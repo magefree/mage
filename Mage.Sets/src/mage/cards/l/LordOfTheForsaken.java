@@ -51,9 +51,7 @@ public final class LordOfTheForsaken extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new MillCardsTargetEffect(3), new ManaCostsImpl<>("{B}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

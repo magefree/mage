@@ -42,9 +42,7 @@ public final class ExcavatingAnurid extends CardImpl {
         // When Excavating Anurid enters the battlefield, you may sacrifice a land. If you do, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT
-                ))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)
         )));
 
         // Threshold — As long as seven or more cards are in your graveyard, Excavating Anurid gets +1/+1 and has vigilance.
