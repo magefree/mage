@@ -5,11 +5,11 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
@@ -22,18 +22,18 @@ import java.util.UUID;
  */
 public class SacrificeAllEffect extends OneShotEffect {
 
-    protected DynamicValue amount;
-    protected FilterControlledPermanent filter;
+    private final DynamicValue amount;
+    private final FilterPermanent filter;
 
-    public SacrificeAllEffect(FilterControlledPermanent filter) {
+    public SacrificeAllEffect(FilterPermanent filter) {
         this(1, filter);
     }
 
-    public SacrificeAllEffect(int amount, FilterControlledPermanent filter) {
+    public SacrificeAllEffect(int amount, FilterPermanent filter) {
         this(StaticValue.get(amount), filter);
     }
 
-    public SacrificeAllEffect(DynamicValue amount, FilterControlledPermanent filter) {
+    public SacrificeAllEffect(DynamicValue amount, FilterPermanent filter) {
         super(Outcome.Sacrifice);
         this.amount = amount;
         this.filter = filter;
@@ -53,8 +53,8 @@ public class SacrificeAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = this.amount.calculate(game, source, this);
-        if (amount < 1) {
+        int num = amount.calculate(game, source, this);
+        if (num < 1) {
             return false;
         }
         Set<UUID> perms = new HashSet<>();
@@ -63,15 +63,17 @@ public class SacrificeAllEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
+            FilterPermanent checkFilter = filter.copy();
+            checkFilter.add(CanBeSacrificedPredicate.instance);
+            int numTargets = Math.min(num, game.getBattlefield().countAll(checkFilter, player.getId(), game));
             if (numTargets < 1) {
                 continue;
             }
-            TargetPermanent target = new TargetSacrifice(numTargets, filter);
-            if (target.canChoose(player.getId(), source, game)) {
+            TargetSacrifice target = new TargetSacrifice(numTargets, filter);
+            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                 player.choose(Outcome.Sacrifice, target, source, game);
-                perms.addAll(target.getTargets());
             }
+            perms.addAll(target.getTargets());
         }
         for (UUID permID : perms) {
             Permanent permanent = game.getPermanent(permID);
@@ -85,16 +87,19 @@ public class SacrificeAllEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("each player sacrifices ");
-        if (amount.toString().equals("X")) {
-            sb.append(amount.toString());
-            sb.append(' ');
-            sb.append(filter.getMessage());
-        } else if (amount.toString().equals("1")) {
-            sb.append(CardUtil.addArticle(filter.getMessage()));
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString(), "a"));
-            sb.append(' ');
-            sb.append(filter.getMessage());
+        switch (amount.toString()) {
+            case "X":
+                sb.append(amount.toString());
+                sb.append(' ');
+                sb.append(filter.getMessage());
+                break;
+            case "1":
+                sb.append(CardUtil.addArticle(filter.getMessage()));
+                break;
+            default:
+                sb.append(CardUtil.numberToText(amount.toString(), "a"));
+                sb.append(' ');
+                sb.append(filter.getMessage());
         }
         staticText = sb.toString();
     }

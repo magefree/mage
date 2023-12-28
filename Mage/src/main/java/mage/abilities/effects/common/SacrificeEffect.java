@@ -6,10 +6,10 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
@@ -51,18 +51,18 @@ public class SacrificeEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
+            FilterPermanent checkFilter = filter.copy();
+            checkFilter.add(CanBeSacrificedPredicate.instance);
             int amount = Math.min(
                     count.calculate(game, source, this),
-                    game.getBattlefield().countAll(filter, player.getId(), game)
+                    game.getBattlefield().countAll(checkFilter, player.getId(), game)
             );
-            Target target = new TargetSacrifice(amount, filter);
-            if (amount < 1 || !target.canChoose(player.getId(), source, game)) {
+            if (amount < 1) {
                 continue;
             }
-            while (!target.isChosen()
-                    && target.canChoose(player.getId(), source, game)
-                    && player.canRespond()) {
-                player.chooseTarget(Outcome.Sacrifice, target, source, game);
+            TargetSacrifice target = new TargetSacrifice(amount, filter);
+            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+                player.choose(Outcome.Sacrifice, target, source, game);
             }
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
