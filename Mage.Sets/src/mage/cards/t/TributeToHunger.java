@@ -8,12 +8,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -60,9 +62,9 @@ class TributeToHungerEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getTargets().getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && opponent != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (target.canChoose(opponent.getId(), source, game)) {
-                opponent.chooseTarget(Outcome.Sacrifice, target, source, game);
+                opponent.choose(Outcome.Sacrifice, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.sacrifice(source, game);

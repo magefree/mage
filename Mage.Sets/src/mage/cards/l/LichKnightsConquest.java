@@ -20,6 +20,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
@@ -84,7 +85,7 @@ class LichKnightsConquestEffect extends OneShotEffect {
             return false;
         }
 
-        Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+        Target target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
