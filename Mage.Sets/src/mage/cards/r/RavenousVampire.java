@@ -45,7 +45,7 @@ public final class RavenousVampire extends CardImpl {
                 new DoIfCostPaid(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                         new TapSourceEffect(),
-                        new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter))
+                        new SacrificeTargetCost(filter)
                 ),
                 TargetController.YOU, false
         ));

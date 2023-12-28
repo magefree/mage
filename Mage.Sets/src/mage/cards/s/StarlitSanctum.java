@@ -37,13 +37,13 @@ public final class StarlitSanctum extends CardImpl {
         // {W}, {T}, Sacrifice a Cleric creature: You gain life equal to the sacrificed creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StarlitSanctumWhiteEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
         // {B}, {T}, Sacrifice a Cleric creature: Target player loses life equal to the sacrificed creature's power.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StarlitSanctumBlackEffect(), new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 
