@@ -46,7 +46,7 @@ public final class BreyaEtheriumShaper extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(3),
                 new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_ARTIFACT));
+        ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_ARTIFACTS));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
 
         // Target creature gets -4/-4 until end of turn.

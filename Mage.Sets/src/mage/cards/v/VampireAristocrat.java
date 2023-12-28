@@ -26,11 +26,11 @@ public final class VampireAristocrat extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Sacrifice another creature: Vampire Aristocrat gets +2/+2 until end of turn.
+        // Sacrifice a creature: Vampire Aristocrat gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private VampireAristocrat(final VampireAristocrat card) {
