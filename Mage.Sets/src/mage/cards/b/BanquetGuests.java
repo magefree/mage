@@ -63,7 +63,7 @@ public final class BanquetGuests extends CardImpl {
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
                 new GenericManaCost(2)
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD));
         this.addAbility(ability);
     }
 

@@ -46,7 +46,7 @@ public final class GretaSweettoothScourge extends CardImpl {
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)),
                 new ManaCostsImpl<>("{G}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
@@ -55,7 +55,7 @@ public final class GretaSweettoothScourge extends CardImpl {
                 new DrawCardSourceControllerEffect(1, "you"),
                 new ManaCostsImpl<>("{1}{B}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD));
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
