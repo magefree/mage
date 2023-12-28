@@ -48,7 +48,7 @@ public final class TurntimberSower extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{G}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
+        ability.addCost(new SacrificeTargetCost(3, filter));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_LAND));
         this.addAbility(ability);
     }

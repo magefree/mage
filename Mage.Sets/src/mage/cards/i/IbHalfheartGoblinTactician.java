@@ -55,7 +55,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new GoblinToken(), 2),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
+                new SacrificeTargetCost(2, filter)));
 
     }
 

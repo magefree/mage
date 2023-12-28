@@ -65,7 +65,7 @@ public final class GeneralKudroOfDrannith extends CardImpl {
 
         // {2}, Sacrifice two Humans: Destroy target creature with power 4 or greater.
         ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter4)));
+        ability.addCost(new SacrificeTargetCost(2, filter4));
         ability.addTarget(new TargetPermanent(filter5));
         this.addAbility(ability);
     }

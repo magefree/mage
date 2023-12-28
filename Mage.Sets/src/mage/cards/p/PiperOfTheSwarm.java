@@ -58,7 +58,7 @@ public final class PiperOfTheSwarm extends CardImpl {
                 new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl<>("{2}{B}{B}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter2)));
+        ability.addCost(new SacrificeTargetCost(3, filter2));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
