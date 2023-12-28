@@ -51,7 +51,7 @@ public final class VisceridDrone extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new TapSourceCost());
         ability.addCost(new CompositeCost(
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter2)),
+                new SacrificeTargetCost(filter2),
                 "Sacrifice a creature and a Swamp"
         ));
         ability.addTarget(new TargetCreaturePermanent(filter1));

@@ -65,7 +65,7 @@ public final class RetrofitterFoundry extends CardImpl {
                 new CreateTokenEffect(new Construct4Token()),
                 new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
     }
 

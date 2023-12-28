@@ -64,7 +64,7 @@ public final class BagOfDevouring extends CardImpl {
         // {2}, {T}, Sacrifice another artifact or creature: Draw a card.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
 
         // {3}, {T}, Sacrifice Bag of Devouring: Roll a d10. Return up to X cards from among cards exiled with Bag of Devouring to their owners' hands, where X is the result.
