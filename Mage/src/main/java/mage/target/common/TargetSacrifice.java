@@ -26,6 +26,11 @@ public class TargetSacrifice extends TargetPermanent {
         super(target);
     }
 
+    @Override
+    public TargetSacrifice copy() {
+        return new TargetSacrifice(this);
+    }
+
     private static FilterPermanent makeFilter(FilterPermanent filter) {
         FilterPermanent newFilter = filter.copy();
         newFilter.add(TargetController.YOU.getControllerPredicate());

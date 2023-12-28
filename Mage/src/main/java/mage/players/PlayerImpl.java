@@ -4437,7 +4437,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
-        return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game);
+        return permanent.canBeSacrificed() &&
+                (sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game));
     }
 
     @Override

@@ -177,6 +177,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
         this.prototyped = permanent.prototyped;
+        this.canBeSacrificed = permanent.canBeSacrificed;
     }
 
     @Override
@@ -216,7 +217,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
-        this.canBeSacrificed = false;
+        this.canBeSacrificed = true;
     }
 
     @Override
