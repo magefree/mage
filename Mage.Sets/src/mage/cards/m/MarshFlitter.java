@@ -46,7 +46,7 @@ public final class MarshFlitter extends CardImpl {
         // Sacrifice a Goblin: Marsh Flitter has base power and toughness 3/3 until end of turn.
         Effect effect = new SetBasePowerToughnessSourceEffect(3, 3, Duration.EndOfTurn);
         effect.setText("{this} has base power and toughness 3/3 until end of turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

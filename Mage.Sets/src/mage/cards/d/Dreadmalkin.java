@@ -50,7 +50,7 @@ public final class Dreadmalkin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{2}{B}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

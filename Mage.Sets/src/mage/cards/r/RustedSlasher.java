@@ -32,7 +32,7 @@ public final class RustedSlasher extends CardImpl {
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private RustedSlasher(final RustedSlasher card) {

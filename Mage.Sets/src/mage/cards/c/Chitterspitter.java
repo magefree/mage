@@ -47,7 +47,7 @@ public final class Chitterspitter extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(
                         new AddCountersSourceEffect(CounterType.ACORN.createInstance()),
-                        new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                        new SacrificeTargetCost(filter)
                 ),
                 TargetController.YOU,
                 false

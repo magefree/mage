@@ -36,7 +36,7 @@ public final class HeartOfYavimaya extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If Heart of Yavimaya would enter the battlefield, sacrifice a Forest instead. If you do, put Heart of Yavimaya onto the battlefield. If you don't, put it into its owner's graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(filter))));
 
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());

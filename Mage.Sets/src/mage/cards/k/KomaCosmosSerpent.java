@@ -56,7 +56,7 @@ public final class KomaCosmosSerpent extends CardImpl {
         // Sacrifice another Serpent: Choose one —
         // • Tap target permanent. Its activated abilities can't be activated this turn.
         Ability ability = new SimpleActivatedAbility(
-                new TapTargetEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new TapTargetEffect(), new SacrificeTargetCost(filter)
         );
         ability.addEffect(new KomaCosmosSerpentEffect());
         ability.addTarget(new TargetPermanent());

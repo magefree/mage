@@ -38,7 +38,7 @@ public final class Megatog extends CardImpl {
 
         // Sacrifice an artifact: Megatog gets +3/+3 and gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn)
-                .setText("{this} gets +3/+3"), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+                .setText("{this} gets +3/+3"), new SacrificeTargetCost(filter));
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains trample until end of turn"));
         this.addAbility(ability);

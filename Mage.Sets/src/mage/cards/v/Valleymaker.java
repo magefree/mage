@@ -43,7 +43,7 @@ public final class Valleymaker extends CardImpl {
 
         // {tap}, Sacrifice a Mountain: Valleymaker deals 3 damage to target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         

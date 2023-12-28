@@ -27,7 +27,7 @@ public final class MercilessResolve extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // As an additional cost to cast Merciless Resolve, sacrifice a creature or land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

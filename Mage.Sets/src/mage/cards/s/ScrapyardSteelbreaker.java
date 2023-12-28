@@ -42,7 +42,7 @@ public final class ScrapyardSteelbreaker extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 1, Duration.EndOfTurn), new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

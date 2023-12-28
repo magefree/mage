@@ -36,7 +36,7 @@ public final class SquanderedResources extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
 
         // Sacrifice a land: Add one mana of any type the sacrificed land could produce.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(filter)));
     }
 
     private SquanderedResources(final SquanderedResources card) {
