@@ -62,7 +62,7 @@ public final class NemataPrimevalWarden extends CardImpl {
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{1}{B}"));
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, filter2, false)));
+        ability2.addCost(new SacrificeTargetCost(2, filter2));
         this.addAbility(ability2);
     }
 

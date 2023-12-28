@@ -39,7 +39,7 @@ public final class Thaumatog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledEnchantmentPermanent("enchantment")))));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ENCHANTMENT)));
     }
 
     private Thaumatog(final Thaumatog card) {
