@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -20,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -52,8 +54,6 @@ public final class KeldonFirebombers extends CardImpl {
 
 class KeldonFirebombersEffect extends OneShotEffect {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-
     public KeldonFirebombersEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "each player sacrifices all lands they control except for three";
@@ -74,11 +74,9 @@ class KeldonFirebombersEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                int amount = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size() - 3;
+                int amount = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LANDS, playerId, game).size() - 3;
                 if (amount > 0) {
-                    FilterLandPermanent playerFilter = filter.copy();
-                    playerFilter.add(new ControllerIdPredicate(playerId));
-                    Target target = new TargetLandPermanent(amount, amount, playerFilter, true);
+                    Target target = new TargetSacrifice(amount, StaticFilters.FILTER_LANDS);
                     player.choose(outcome.Sacrifice, target, source, game);
                     for (UUID landId : target.getTargets()) {
                         Permanent land = game.getPermanent(landId);

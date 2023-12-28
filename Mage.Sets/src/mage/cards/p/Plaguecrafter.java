@@ -11,12 +11,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
@@ -84,12 +86,7 @@ class PlaguecrafterEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            FilterControlledPermanent filter = new FilterControlledPermanent("creature or planeswalker");
-            filter.add(Predicates.or(
-                    CardType.CREATURE.getPredicate(),
-                    CardType.PLANESWALKER.getPredicate()
-            ));
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER);
             if (target.canChoose(player.getId(), source, game)) {
                 while (!target.isChosen() && player.canRespond()) {
                     player.choose(Outcome.Sacrifice, target, source, game);

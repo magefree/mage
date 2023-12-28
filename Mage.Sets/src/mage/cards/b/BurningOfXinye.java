@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -81,7 +82,7 @@ class BurningOfXinyeEffect extends OneShotEffect{
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         int amount = Math.min(4, realCount);
 
-        Target target = new TargetControlledPermanent(amount, amount, filter, true);
+        Target target = new TargetSacrifice(amount, filter);
         if (amount > 0 && target.canChoose(player.getId(), source, game)) {
             while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                 player.choose(Outcome.Sacrifice, target, source, game);

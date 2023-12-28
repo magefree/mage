@@ -22,6 +22,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDiscard;
+import mage.target.common.TargetSacrifice;
 
 import java.util.*;
 
@@ -162,7 +163,7 @@ class OublietteEffect extends OneShotEffect {
     }
 }
 
-class OublietteTarget extends TargetControlledPermanent {
+class OublietteTarget extends TargetSacrifice {
 
     private static final CardTypeAssignment cardTypeAssigner = new CardTypeAssignment(
             CardType.ARTIFACT,
@@ -176,7 +177,7 @@ class OublietteTarget extends TargetControlledPermanent {
     }
 
     OublietteTarget(int numTargets) {
-        super(numTargets, numTargets, filter, true);
+        super(numTargets, filter);
     }
 
     private OublietteTarget(final OublietteTarget target) {
@@ -263,4 +264,3 @@ class SandfallCellEffect extends OneShotEffect {
         return true;
     }
 }
-

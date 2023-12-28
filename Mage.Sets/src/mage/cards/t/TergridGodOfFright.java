@@ -22,6 +22,7 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.HashSet;
@@ -219,8 +220,7 @@ class TergridsLaternEffect extends OneShotEffect {
         }
         switch (chosen) {
             case SACRIFICE_CHOICE:
-                TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-                target.withNotTarget(true);
+                TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
                 targetedPlayer.choose(Outcome.Sacrifice, target, source, game);
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 return chosenLand != null && chosenLand.sacrifice(source, game);

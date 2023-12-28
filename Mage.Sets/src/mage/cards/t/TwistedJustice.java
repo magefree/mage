@@ -9,12 +9,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -56,10 +58,7 @@ class TwistedJusticeEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getTargets().getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
 
-        FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.
