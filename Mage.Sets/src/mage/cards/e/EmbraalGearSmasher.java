@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -33,7 +34,7 @@ public final class EmbraalGearSmasher extends CardImpl {
 
         // {T}, Sacrifice an artifact: Embraal Gear-Smasher deals 2 damage to each opponent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.addAbility(ability);
 
     }

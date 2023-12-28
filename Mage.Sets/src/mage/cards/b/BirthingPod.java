@@ -40,9 +40,7 @@ public final class BirthingPod extends CardImpl {
                 Zone.BATTLEFIELD, new BirthingPodEffect(), new ManaCostsImpl<>("{1}{G/P}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

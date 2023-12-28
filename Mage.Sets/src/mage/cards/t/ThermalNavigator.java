@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,7 +31,7 @@ public final class ThermalNavigator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice an artifact: Thermal Navigator gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact")))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT)));
     }
 
     private ThermalNavigator(final ThermalNavigator card) {
