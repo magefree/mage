@@ -34,14 +34,10 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         this(new TargetSacrifice(numToSac, filter));
     }
 
+    // remove once merge complete
     @Deprecated
     public SacrificeTargetCost(TargetControlledPermanent target) {
-        // TODO: replace all with TargetSacrifice, 110 usages remaining
-        this.addTarget(target);
-        target.withNotTarget(true); // sacrifice is never targeted
-        target.setRequired(false); // can be canceled
-        this.text = "sacrifice " + makeText(target);
-        target.setTargetName(target.getTargetName() + " (to sacrifice)");
+        throw new UnsupportedOperationException("Wrong code usage, refactor to TargetSacrifice");
     }
 
     public SacrificeTargetCost(TargetSacrifice target) {
@@ -118,18 +114,6 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     public List<Permanent> getPermanents() {
         return permanents;
-    }
-
-    private static String makeText(TargetControlledPermanent target) {
-        if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
-            return target.getTargetName();
-        }
-        if (target.getNumberOfTargets() == 1
-                || target.getTargetName().startsWith("a ")
-                || target.getTargetName().startsWith("an ")) {
-            return CardUtil.addArticle(target.getTargetName());
-        }
-        return CardUtil.numberToText(target.getNumberOfTargets()) + ' ' + target.getTargetName();
     }
 
     private static String makeText(TargetSacrifice target) {

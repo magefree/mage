@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -29,7 +30,7 @@ public final class SalvageSquad extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When you Salvage Squad enters the battlefied, you may sacrifice an artifact. If you do, you gain 2 life and draw two cards.
-        DoIfCostPaid effect = new DoIfCostPaid(new GainLifeEffect(2), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent())));
+        DoIfCostPaid effect = new DoIfCostPaid(new GainLifeEffect(2), new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         effect.addEffect(new DrawCardSourceControllerEffect(2));
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }

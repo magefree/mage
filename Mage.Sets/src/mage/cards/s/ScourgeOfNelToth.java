@@ -15,6 +15,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -79,7 +80,7 @@ class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
                     Costs<Cost> costs = new CostsImpl<>();
-                    costs.add(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));
+                    costs.add(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_CREATURES));
                     player.setCastSourceIdWithAlternateMana(
                             sourceId, new ManaCostsImpl<>("{B}{B}"), costs,
                             MageIdentifier.ScourgeOfNelTothAlternateCast

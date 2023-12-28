@@ -31,7 +31,7 @@ public final class TorrentOfStone extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("4 damage"));
         // Splice onto Arcane-Sacrifice two Mountains.
-        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new SacrificeTargetCost(new TargetControlledPermanent(2,2, filterSacrifice, false))));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new SacrificeTargetCost(2, filterSacrifice)));
     }
 
     private TorrentOfStone(final TorrentOfStone card) {
