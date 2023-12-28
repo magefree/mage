@@ -138,7 +138,7 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
     public boolean apply(Game game, Ability source) {
         UUID activePlayerId = game.getActivePlayerId();
         Player target = game.getPlayer(activePlayerId);
-        Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent()));
+        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT);
         if (target == null) {
             return false;
         }
