@@ -19,7 +19,7 @@ import mage.util.functions.CopyApplier;
 
 /**
  *
- * @author anonymous
+ * @author jimga150
  */
 public final class SunfrillImitator extends CardImpl {
 
