@@ -70,7 +70,6 @@ public class CantBeSacrificedTest extends CardTestPlayerBase {
         assertAttachedTo(playerA, assaultSuit, urchin, true);
     }
 
-    @Ignore // needs investigation
     @Test
     public void testAssaultSuitWithSacAnotherCost() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);

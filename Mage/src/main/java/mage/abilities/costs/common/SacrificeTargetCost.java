@@ -92,7 +92,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
         int validTargets = 0;
         int neededTargets = this.getTargets().get(0).getNumberOfTargets();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(((TargetPermanent) this.getTargets().get(0)).getFilter(), controllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(((TargetPermanent) this.getTargets().get(0)).getFilter(), controllerId, source, game)) {
             if (game.getPlayer(activator).canPaySacrificeCost(permanent, source, controllerId, game)) {
                 validTargets++;
                 if (validTargets >= neededTargets) {
