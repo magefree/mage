@@ -31,7 +31,12 @@ public class TargetSacrifice extends TargetPermanent {
         return new TargetSacrifice(this);
     }
 
-    private static FilterPermanent makeFilter(FilterPermanent filter) {
+    /**
+     * Creates a new filter with necessary constraints for sacrificing
+     * @param filter input generic filter
+     * @return new filter with "you control" and CanBeSacrificedPredicate added
+     */
+    public static FilterPermanent makeFilter(FilterPermanent filter) {
         FilterPermanent newFilter = filter.copy();
         newFilter.add(TargetController.YOU.getControllerPredicate());
         newFilter.add(CanBeSacrificedPredicate.instance);

@@ -7,8 +7,7 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
-
-import java.util.Optional;
+import mage.game.permanent.Permanent;
 
 /**
  * @author xenohedron
@@ -31,8 +30,12 @@ public class CantBeSacrificedSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .ifPresent(permanent -> permanent.setCanBeSacrificed(false));
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            discard();
+            return false;
+        }
+        permanent.setCanBeSacrificed(false);
         return true;
     }
 

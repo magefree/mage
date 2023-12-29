@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -9,19 +8,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,9 +65,7 @@ class EntrapmentManeuverSacrificeEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        FilterPermanent checkFilter = StaticFilters.FILTER_ATTACKING_CREATURE.copy();
-        checkFilter.add(CanBeSacrificedPredicate.instance);
-        if (game.getBattlefield().countAll(checkFilter, player.getId(), game) > 0) {
+        if (game.getBattlefield().count(TargetSacrifice.makeFilter(StaticFilters.FILTER_ATTACKING_CREATURE), player.getId(), source, game) > 0) {
             Target target = new TargetSacrifice(StaticFilters.FILTER_ATTACKING_CREATURE);
             while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), source, game)) {
                 player.choose(Outcome.Sacrifice, target, source, game);

@@ -5,9 +5,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,12 +56,9 @@ public class SacrificeEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            FilterPermanent checkFilter = filter.copy();
-            checkFilter.add(TargetController.YOU.getControllerPredicate());
-            checkFilter.add(CanBeSacrificedPredicate.instance);
             int amount = Math.min(
                     count.calculate(game, source, this),
-                    game.getBattlefield().count(checkFilter, player.getId(), source, game)
+                    game.getBattlefield().count(TargetSacrifice.makeFilter(filter), player.getId(), source, game)
             );
             if (amount < 1) {
                 continue;

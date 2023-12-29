@@ -1,24 +1,21 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,9 +63,7 @@ class DevourFleshSacrificeEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        FilterPermanent checkFilter = StaticFilters.FILTER_PERMANENT_CREATURE.copy();
-        checkFilter.add(CanBeSacrificedPredicate.instance);
-        if (game.getBattlefield().countAll(checkFilter, player.getId(), game) > 0) {
+        if (game.getBattlefield().count(TargetSacrifice.makeFilter(StaticFilters.FILTER_PERMANENT_CREATURE), player.getId(), source, game) > 0) {
             Target target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
             while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), source, game)) {
                 player.choose(Outcome.Sacrifice, target, source, game);
