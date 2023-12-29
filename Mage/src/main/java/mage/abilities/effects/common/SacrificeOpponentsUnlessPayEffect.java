@@ -6,6 +6,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
@@ -74,8 +75,9 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
                 game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the sacrifice effect");
 
                 FilterPermanent checkFilter = filter.copy();
+                checkFilter.add(TargetController.YOU.getControllerPredicate());
                 checkFilter.add(CanBeSacrificedPredicate.instance);
-                if (game.getBattlefield().countAll(checkFilter, player.getId(), game) > 0) {
+                if (game.getBattlefield().count(checkFilter, player.getId(), source, game) > 0) {
                     TargetSacrifice target = new TargetSacrifice(1, filter);
                     if (target.canChoose(player.getId(), source, game)) {
                         player.choose(Outcome.Sacrifice, target, source, game);

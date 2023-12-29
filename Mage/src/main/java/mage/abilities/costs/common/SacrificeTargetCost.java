@@ -26,10 +26,18 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     private final List<Permanent> permanents = new ArrayList<>();
 
+    /**
+     * Sacrifice a permanent matching the filter:
+     * @param filter can be generic, will automatically add article and sacrifice predicates
+     */
     public SacrificeTargetCost(FilterPermanent filter) {
         this(1, filter);
     }
 
+    /**
+     * Sacrifice N permanents matching the filter:
+     * @param filter can be generic, will automatically add sacrifice predicates
+     */
     public SacrificeTargetCost(int numToSac, FilterPermanent filter) {
         this(new TargetSacrifice(numToSac, filter));
     }
@@ -44,7 +52,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         this.addTarget(target);
         target.setRequired(false); // can be canceled
         this.text = "sacrifice " + makeText(target);
-        target.setTargetName(target.getTargetName() + " (to sacrifice)");
+        target.withChooseHint("to sacrifice");
     }
 
     public SacrificeTargetCost(SacrificeTargetCost cost) {
@@ -77,6 +85,9 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         return paid;
     }
 
+    /**
+     * For storing additional info upon selecting permanents to sacrifice
+     */
     protected void addSacrificeTarget(Game game, Permanent permanent) {
         permanents.add(permanent.copy());
     }
