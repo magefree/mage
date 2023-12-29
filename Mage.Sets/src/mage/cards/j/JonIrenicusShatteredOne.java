@@ -4,10 +4,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
+import mage.abilities.effects.common.continuous.CantBeSacrificedSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +27,7 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- * @author PurpleCrowbar
+ * @author PurpleCrowbar, xenohedron
  */
 public final class JonIrenicusShatteredOne extends CardImpl {
 
@@ -65,13 +68,13 @@ public final class JonIrenicusShatteredOne extends CardImpl {
 
 class JonIrenicusShatteredOneEffect extends OneShotEffect {
 
-    public JonIrenicusShatteredOneEffect() {
+    JonIrenicusShatteredOneEffect() {
         super(Outcome.Detriment);
         this.staticText = "target opponent gains control of up to one target creature you control. Put two +1/+1 counters on it and tap it. " +
                 "It's goaded for the rest of the game and it gains “This creature can't be sacrificed.\"";
     }
 
-    public JonIrenicusShatteredOneEffect(final JonIrenicusShatteredOneEffect effect) {
+    private JonIrenicusShatteredOneEffect(final JonIrenicusShatteredOneEffect effect) {
         super(effect);
     }
 
@@ -82,15 +85,15 @@ class JonIrenicusShatteredOneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID opponentID = source.getTargets().get(0).getFirstTarget();
-        Player opponent = game.getPlayer(opponentID);
+        Player opponent = game.getPlayer(source.getTargets().get(0).getFirstTarget());
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature == null || opponent == null) {
             return false;
         }
-        ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, opponentID);
+        ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, opponent.getId());
         effect.setTargetPointer(new FixedTarget(creature, game));
         game.addEffect(effect, source);
+        game.getState().processAction(game);
         creature.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
         creature.tap(source, game);
         game.addEffect(new GoadTargetEffect()
@@ -98,7 +101,9 @@ class JonIrenicusShatteredOneEffect extends OneShotEffect {
                 .setTargetPointer(new FixedTarget(creature, game)),
                 source
         );
-        // TODO: Grant creature "This creature can't be sacrificed" ability here.
+        game.addEffect(new GainAbilityTargetEffect(
+                new SimpleStaticAbility(new CantBeSacrificedSourceEffect().setText("This creature can't be sacrificed"))
+        ).setTargetPointer(new FixedTarget(creature, game)), source);
         return true;
     }
 }
