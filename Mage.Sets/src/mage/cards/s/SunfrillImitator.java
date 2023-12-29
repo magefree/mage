@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -23,13 +24,6 @@ import mage.util.functions.CopyApplier;
  */
 public final class SunfrillImitator extends CardImpl {
 
-    private static final FilterCreaturePermanent dino_filter =
-            new FilterCreaturePermanent(SubType.DINOSAUR, "dinosaur");
-
-    static {
-        dino_filter.add(AnotherPredicate.instance);
-    }
-
     public SunfrillImitator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         
@@ -39,9 +33,7 @@ public final class SunfrillImitator extends CardImpl {
 
         // Whenever Sunfrill Imitator attacks, you may have it become a copy of another target Dinosaur you control, 
         // except its name is Sunfrill Imitator and it has this ability.
-        Ability ability = new SunfrillImitatorAbility();
-        ability.addTarget(new TargetCreaturePermanent(dino_filter));
-        this.addAbility(ability);
+        this.addAbility(new SunfrillImitatorAbility());
     }
 
     private SunfrillImitator(final SunfrillImitator card) {
@@ -54,12 +46,18 @@ public final class SunfrillImitator extends CardImpl {
     }
 }
 
-class SunfrillImitatorAbility extends TriggeredAbilityImpl {
+class SunfrillImitatorAbility extends AttacksTriggeredAbility {
 
     public SunfrillImitatorAbility() {
-        super(Zone.BATTLEFIELD, null, true);
-        this.addEffect(new SunfrillImitatorEffect());
-        setTriggerPhrase("Whenever {this} attacks, ");
+        super(
+            new SunfrillImitatorEffect(),
+            true,
+            "Whenever Sunfrill Imitator attacks, you may have it become a copy of another target Dinosaur " +
+                    "you control, except its name is Sunfrill Imitator and it has this ability."
+        );
+        FilterCreaturePermanent dino_filter = new FilterCreaturePermanent(SubType.DINOSAUR, "dinosaur");
+        dino_filter.add(AnotherPredicate.instance);
+        this.addTarget(new TargetCreaturePermanent(dino_filter));
     }
 
     private SunfrillImitatorAbility(final SunfrillImitatorAbility ability) {
