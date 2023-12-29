@@ -71,7 +71,7 @@ class JonIrenicusShatteredOneEffect extends OneShotEffect {
     JonIrenicusShatteredOneEffect() {
         super(Outcome.Detriment);
         this.staticText = "target opponent gains control of up to one target creature you control. Put two +1/+1 counters on it and tap it. " +
-                "It's goaded for the rest of the game and it gains “This creature can't be sacrificed.\"";
+                "It's goaded for the rest of the game and it gains \"This creature can't be sacrificed.\"";
     }
 
     private JonIrenicusShatteredOneEffect(final JonIrenicusShatteredOneEffect effect) {
