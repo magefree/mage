@@ -49,8 +49,8 @@ class PantlazaSunFavoredTriggeredAbility extends EntersBattlefieldThisOrAnotherT
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.DINOSAUR, "Dinosaur");
 
     PantlazaSunFavoredTriggeredAbility() {
-        setTriggersOnceEachTurn(true);
         super(new PantlazaSunFavoredEffect(), filter, true, SetTargetPointer.PERMANENT, true);
+        setDoOnlyOnceEachTurn(true);
     }
 
 }
