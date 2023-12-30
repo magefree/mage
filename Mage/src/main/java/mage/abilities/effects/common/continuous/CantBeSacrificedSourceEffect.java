@@ -30,7 +30,10 @@ public class CantBeSacrificedSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        if (permanent == null) {
+            permanent = source.getSourcePermanentIfItStillExists(game);
+        }
         if (permanent == null) {
             discard();
             return false;
