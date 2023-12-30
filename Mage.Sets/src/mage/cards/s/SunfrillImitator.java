@@ -9,12 +9,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -47,6 +47,12 @@ public final class SunfrillImitator extends CardImpl {
 
 class SunfrillImitatorAbility extends AttacksTriggeredAbility {
 
+    private static final FilterControlledPermanent dino_filter = new FilterControlledPermanent(SubType.DINOSAUR, "Dinosaur");
+
+    static {
+        dino_filter.add(AnotherPredicate.instance);
+    }
+
     public SunfrillImitatorAbility() {
         super(
             new SunfrillImitatorEffect(),
@@ -54,9 +60,7 @@ class SunfrillImitatorAbility extends AttacksTriggeredAbility {
             "Whenever Sunfrill Imitator attacks, you may have it become a copy of another target Dinosaur " +
                     "you control, except its name is Sunfrill Imitator and it has this ability."
         );
-        FilterCreaturePermanent dino_filter = new FilterCreaturePermanent(SubType.DINOSAUR, "dinosaur");
-        dino_filter.add(AnotherPredicate.instance);
-        this.addTarget(new TargetCreaturePermanent(dino_filter));
+        this.addTarget(new TargetControlledPermanent(dino_filter));
     }
 
     private SunfrillImitatorAbility(final SunfrillImitatorAbility ability) {
