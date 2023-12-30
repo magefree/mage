@@ -2,7 +2,7 @@ package org.mage.test.cards.rules;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -32,6 +32,9 @@ public class CantBeSacrificedTest extends CardTestPlayerBase {
 
     private static final String bairn = "Blood Bairn"; // Sacrifice another creature: ~ gets +2/+2 until EOT
 
+    private static final String jonIren = "Jon Irenicus, Shattered One";
+    // At the beginning of your end step, target opponent gains control of up to one target creature you control.
+    // Put two +1/+1 counters on it and tap it. It’s goaded for the rest of the game and it gains “This creature can’t be sacrificed.”
 
     @Test
     public void testAssaultSuitWithSacEffect() {
@@ -87,6 +90,28 @@ public class CantBeSacrificedTest extends CardTestPlayerBase {
 
         assertAttachedTo(playerA, assaultSuit, zombie, true);
         assertPowerToughness(playerA, bairn, 2, 2);
+    }
+
+    @Test
+    public void testJonIrenicusWithSacSourceCost() {
+        addCard(Zone.BATTLEFIELD, playerA, urchin);
+        addCard(Zone.BATTLEFIELD, playerA, jonIren);
+
+        checkPlayableAbility("Can sacrifice", 1, PhaseStep.UPKEEP, playerA, "Sacrifice ", true);
+        checkPlayableAbility("Can't sacrifice", 1, PhaseStep.UPKEEP, playerB, "Sacrifice ", false);
+
+        addTarget(playerA, playerB); // target opponent gains control
+        addTarget(playerA, urchin); // of up to one target creature you control
+
+        checkPlayableAbility("Can't sacrifice", 2, PhaseStep.UPKEEP, playerA, "Sacrifice ", false);
+        checkPlayableAbility("Can't sacrifice", 2, PhaseStep.UPKEEP, playerB, "Sacrifice ", false);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, urchin, 1);
+        assertCounterCount(urchin, CounterType.P1P1, 2);
     }
 
 }
