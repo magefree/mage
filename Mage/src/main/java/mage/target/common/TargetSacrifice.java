@@ -20,6 +20,7 @@ public class TargetSacrifice extends TargetPermanent {
 
     public TargetSacrifice(int minNumTargets, int maxNumTargets, FilterPermanent filter) {
         super(minNumTargets, maxNumTargets, makeFilter(filter), true);
+        this.withChooseHint("to sacrifice");
     }
 
     protected TargetSacrifice(final TargetSacrifice target) {

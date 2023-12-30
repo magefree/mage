@@ -52,7 +52,6 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         this.addTarget(target);
         target.setRequired(false); // can be canceled
         this.text = "sacrifice " + makeText(target);
-        target.withChooseHint("to sacrifice");
     }
 
     public SacrificeTargetCost(SacrificeTargetCost cost) {
