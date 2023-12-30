@@ -63,16 +63,6 @@ class SunfrillImitatorAbility extends AttacksTriggeredAbility {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
     public SunfrillImitatorAbility copy() {
         return new SunfrillImitatorAbility(this);
     }
