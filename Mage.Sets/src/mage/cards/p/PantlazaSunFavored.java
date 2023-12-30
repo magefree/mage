@@ -2,18 +2,18 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.DiscoverEffect;
-import mage.abilities.hint.StaticHint;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -44,51 +44,42 @@ public final class PantlazaSunFavored extends CardImpl {
     }
 }
 
-class PantlazaSunFavoredTriggeredAbility extends TriggeredAbilityImpl {
+class PantlazaSunFavoredTriggeredAbility extends EntersBattlefieldThisOrAnotherTriggeredAbility {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.DINOSAUR, "Dinosaur");
 
     PantlazaSunFavoredTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
         setTriggersOnceEachTurn(true);
+        super(new PantlazaSunFavoredEffect(), filter, true, SetTargetPointer.PERMANENT, true);
     }
 
-    private PantlazaSunFavoredTriggeredAbility(final PantlazaSunFavoredTriggeredAbility ability) {
-        super(ability);
+}
+
+// Based on Dinosaur Egg
+class PantlazaSunFavoredEffect extends OneShotEffect {
+
+    PantlazaSunFavoredEffect() {
+        super(Outcome.PlayForFree);
+        staticText = "discover X, where X is that creature's toughness";
+    }
+
+    private PantlazaSunFavoredEffect(final PantlazaSunFavoredEffect effect) {
+        super(effect);
     }
 
     @Override
-    public PantlazaSunFavoredTriggeredAbility copy() {
-        return new PantlazaSunFavoredTriggeredAbility(this);
+    public PantlazaSunFavoredEffect copy() {
+        return new PantlazaSunFavoredEffect(this);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(getControllerId())) {
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (player == null || permanent == null) {
             return false;
         }
-
-        Permanent permanent = game.getPermanent(event.getTargetId());
-
-        if (!permanent.hasSubtype(SubType.DINOSAUR, game)){
-            return false;
-        }
-
-        int toughness = permanent.getToughness().getModifiedBaseValue();
-
-        this.getEffects().clear();
-        this.getEffects().add(new DiscoverEffect(toughness));
-        this.getHints().clear();
-        this.getHints().add(new StaticHint("Discover amount: " + toughness));
+        DiscoverEffect.doDiscover(player, Math.max(0, permanent.getToughness().getValue()), game, source);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever Pantlaza, Sun-Favored or another Dinosaur enters the battlefield under your control, " +
-                "you may discover X, where X is that creature's toughness. Do this only once each turn.";
     }
 }
