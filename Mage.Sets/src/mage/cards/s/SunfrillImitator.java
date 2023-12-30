@@ -54,12 +54,7 @@ class SunfrillImitatorAbility extends AttacksTriggeredAbility {
     }
 
     public SunfrillImitatorAbility() {
-        super(
-            new SunfrillImitatorEffect(),
-            true,
-            "Whenever Sunfrill Imitator attacks, you may have it become a copy of another target Dinosaur " +
-                    "you control, except its name is Sunfrill Imitator and it has this ability."
-        );
+        super(new SunfrillImitatorEffect(), true);
         this.addTarget(new TargetControlledPermanent(dino_filter));
     }
 
@@ -88,8 +83,15 @@ class SunfrillImitatorEffect extends OneShotEffect {
     private static final CopyApplier copyApplier = new CopyApplier() {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-            blueprint.setName("Sunfrill Imitator");
+
+            // Get permanent with this ability to fetch its name so we can preserve it after copying another permanent
+            Permanent triggering_permanent = source.getSourcePermanentIfItStillExists(game);
+            if (triggering_permanent == null) return false;
+            blueprint.setName(triggering_permanent.getName());
+
+            // Permanent also keeps this copy ability
             blueprint.getAbilities().add(new SunfrillImitatorAbility());
+
             return true;
         }
     };
@@ -97,7 +99,7 @@ class SunfrillImitatorEffect extends OneShotEffect {
     public SunfrillImitatorEffect() {
         super(Outcome.Benefit);
         staticText = "you may have it become a copy of another target Dinosaur you control, " +
-                "except its name is Sunfrill Imitator and it has this ability.";
+                "except its name is {this} and it has this ability.";
     }
 
     private SunfrillImitatorEffect(final SunfrillImitatorEffect effect) {
