@@ -2338,7 +2338,7 @@ public abstract class GameImpl implements Game {
                 }
 
                 case EXILED: {
-                    getExile().removeCard(copiedCard, this);
+                    getExile().removeCard(copiedCard);
                     break;
                 }
 
