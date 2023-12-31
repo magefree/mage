@@ -53,6 +53,15 @@ class PantlazaSunFavoredTriggeredAbility extends EntersBattlefieldThisOrAnotherT
         setDoOnlyOnceEachTurn(true);
     }
 
+    private PantlazaSunFavoredTriggeredAbility(final PantlazaSunFavoredTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public PantlazaSunFavoredTriggeredAbility copy(){
+        return new PantlazaSunFavoredTriggeredAbility(this);
+    }
+
 }
 
 // Based on Dinosaur Egg
