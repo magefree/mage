@@ -51,7 +51,7 @@ public final class ConsecratedByBlood extends CardImpl {
         effect.setText("and has flying");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-           new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true))), AttachmentType.AURA);
+           new SacrificeTargetCost(2, filter)), AttachmentType.AURA);
         effect.setText("and \"Sacrifice two other creatures: Regenerate this creature.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

@@ -54,7 +54,7 @@ public final class MagusOfTheOrder extends CardImpl {
         ), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new CompositeCost(
-                new SacrificeSourceCost(), new SacrificeTargetCost(new TargetControlledPermanent(filter2)),
+                new SacrificeSourceCost(), new SacrificeTargetCost(filter2),
                 "sacrifice Magus of the Order and another green creature"
         ));
         this.addAbility(ability);

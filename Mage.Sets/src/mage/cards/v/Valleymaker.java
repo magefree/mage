@@ -43,14 +43,14 @@ public final class Valleymaker extends CardImpl {
 
         // {tap}, Sacrifice a Mountain: Valleymaker deals 3 damage to target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // {tap}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G}.
         Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(3), "chosen player")
                 .setText("choose a player. That player adds {G}{G}{G}"), new TapSourceCost());
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability2.addCost(new SacrificeTargetCost(filter2));
         ability2.addTarget(new TargetPlayer(1, 1, true));
         this.addAbility(ability2);
     }

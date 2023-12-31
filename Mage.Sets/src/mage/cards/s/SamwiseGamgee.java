@@ -54,7 +54,7 @@ public final class SamwiseGamgee extends CardImpl {
         // Sacrifice three Foods: Return target historic card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(
                 new ReturnFromGraveyardToHandTargetEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(3, filter2))
+                new SacrificeTargetCost(3, filter2)
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter3));
         this.addAbility(ability);

@@ -15,6 +15,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -88,7 +89,7 @@ class PoxEffect extends OneShotEffect {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                     int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, player.getId(), source, game) / 3.0);
                     if (creaturesToSacrifice > 0) {
-                        Target target = new TargetControlledCreaturePermanent(creaturesToSacrifice, creaturesToSacrifice, filter, true);
+                        Target target = new TargetSacrifice(creaturesToSacrifice, filter);
                         target.chooseTarget(Outcome.Sacrifice, playerId, source, game);
                         for (UUID permanentId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(permanentId);
@@ -106,7 +107,7 @@ class PoxEffect extends OneShotEffect {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
                     int landsToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, player.getId(), source, game) / 3.0);
                     if (landsToSacrifice > 0) {
-                        Target target = new TargetControlledPermanent(landsToSacrifice, landsToSacrifice, filter, true);
+                        Target target = new TargetSacrifice(landsToSacrifice, filter);
                         target.chooseTarget(Outcome.Sacrifice, playerId, source, game);
                         for (UUID permanentId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(permanentId);

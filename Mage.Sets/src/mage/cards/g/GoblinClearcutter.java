@@ -42,7 +42,7 @@ public final class GoblinClearcutter extends CardImpl {
 
         // {T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new GoblinClearCutterManaEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

@@ -25,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -97,11 +98,11 @@ class TheFirstEruptionEffect extends OneShotEffect {
             return false;
         }
 
-        Target target = new TargetControlledPermanent(1, 1, filter, false);
+        Target target = new TargetSacrifice(filter);
         boolean sacrificed = false;
         if (target.canChoose(controller.getId(), source, game)) {
             while (controller.canRespond() && !target.isChosen() && target.canChoose(controller.getId(), source, game)) {
-                controller.chooseTarget(Outcome.Sacrifice, target, source, game);
+                controller.choose(Outcome.Sacrifice, target, source, game);
             }
 
             for (int idx = 0; idx < target.getTargets().size(); idx++) {

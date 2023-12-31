@@ -46,10 +46,10 @@ public final class SkeletalVampire extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BatToken(), 2)));
         // {3}{B}{B}, Sacrifice a Bat: Create two 1/1 black Bat creature tokens with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BatToken(), 2), new ManaCostsImpl<>("{3}{B}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
         // Sacrifice a Bat: Regenerate Skeletal Vampire.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private SkeletalVampire(final SkeletalVampire card) {
@@ -61,4 +61,3 @@ public final class SkeletalVampire extends CardImpl {
         return new SkeletalVampire(this);
     }
 }
-

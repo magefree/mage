@@ -21,7 +21,7 @@ public final class DeathBomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         // As an additional cost to cast Death Bomb, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         // Destroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));

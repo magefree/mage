@@ -24,6 +24,7 @@ import mage.game.permanent.token.EldraziHorrorToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -81,14 +82,12 @@ class EmrakulsEvangelCost extends CostImpl {
         Player player = game.getPlayer(controllerId);
         if (selfPermanent != null && player != null) {
             paid = selfPermanent.sacrifice(source, game); // sacrifice self
-            Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-            player.chooseTarget(Outcome.Sacrifice, target, ability, game);
+            Target target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
+            player.choose(Outcome.Sacrifice, target, ability, game);
             for (UUID permanentId : target.getTargets()) {
                 Permanent otherPermanent = game.getPermanent(permanentId);
-                if (otherPermanent != null) {
-                    if (otherPermanent.sacrifice(source, game)) {
-                        numSacrificed++;
-                    }
+                if (otherPermanent != null && otherPermanent.sacrifice(source, game)) {
+                    numSacrificed++;
                 }
             }
         }

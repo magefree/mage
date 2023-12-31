@@ -17,6 +17,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public final class HedronDetonator extends CardImpl {
 
         // {T}, Sacrifice two artifacts: Exile the top card of your library. You may play that card this turn.
         ability = new SimpleActivatedAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 

@@ -21,7 +21,7 @@ public class DealsCombatDamageTriggerTest extends CardTestPlayerBase {
 
         attack(1, playerA, drinker, playerB);
 
-        addTarget(playerA, memnite); // to sacrifice
+        setChoice(playerA, memnite); // to sacrifice
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -56,8 +56,8 @@ public class DealsCombatDamageTriggerTest extends CardTestPlayerBase {
         attack(1, playerA, drinker, playerB);
 
         setChoice(playerA, "Whenever"); // order identical triggers
-        addTarget(playerA, drinker); // to sacrifice
-        addTarget(playerA, drinker); // to sacrifice
+        setChoice(playerA, drinker); // to sacrifice
+        setChoice(playerA, drinker); // to sacrifice
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

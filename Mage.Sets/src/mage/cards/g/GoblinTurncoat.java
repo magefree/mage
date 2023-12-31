@@ -37,7 +37,7 @@ public final class GoblinTurncoat extends CardImpl {
 
 		// Sacrifice a Goblin: Regenerate Goblin Turncoat.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-			new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+			new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

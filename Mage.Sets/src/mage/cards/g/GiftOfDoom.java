@@ -54,9 +54,7 @@ public final class GiftOfDoom extends CardImpl {
         this.addAbility(ability2);
 
         // Morph—Sacrifice another creature.
-        this.addAbility(new MorphAbility(this, new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
-        )));
+        this.addAbility(new MorphAbility(this, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
 
         // As Gift of Doom is turned face up, you may attach it to a creature.
         Effect effect = new AsTurnedFaceUpEffect(new GiftOfDoomEffect(), true);

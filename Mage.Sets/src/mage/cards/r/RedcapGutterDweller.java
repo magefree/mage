@@ -44,7 +44,7 @@ public final class RedcapGutterDweller extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)),
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE),
                         "Sacrifice another creature? If you do, put a +1/+1 counter on {this} "
                                 + "and exile the top card of your library. You may play that card this turn."
                 ).addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(1, false)

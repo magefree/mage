@@ -55,7 +55,7 @@ public final class SlaughterPriestOfMogis extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
                 new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

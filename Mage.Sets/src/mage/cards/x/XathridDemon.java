@@ -23,6 +23,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -83,7 +84,7 @@ class XathridDemonEffect extends OneShotEffect {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than " + sourcePermanent.getName());
         filter.add(AnotherPredicate.instance);
 
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(filter);
         if (target.canChoose(controller.getId(), source, game)) {
             controller.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

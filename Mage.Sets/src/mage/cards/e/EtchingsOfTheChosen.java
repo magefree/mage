@@ -56,7 +56,7 @@ public final class EtchingsOfTheChosen extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

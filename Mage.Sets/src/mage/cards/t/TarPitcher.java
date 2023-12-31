@@ -38,7 +38,7 @@ public final class TarPitcher extends CardImpl {
         this.toughness = new MageInt(2);
         // {tap}, Sacrifice a Goblin: Tar Pitcher deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

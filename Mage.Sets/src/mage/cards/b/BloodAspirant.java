@@ -56,7 +56,7 @@ public final class BloodAspirant extends CardImpl {
                 new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
                 .setText("That creature can't block this turn."));
         ability.addTarget(new TargetCreaturePermanent());

@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.*;
@@ -76,9 +77,8 @@ class AJedisFervorEffect extends OneShotEffect {
         }
         //get that opponents to pick a creature or planeswalker
         for (UUID opponentId : opponentsBlack) {
-            TargetPermanent target = new TargetPermanent(1, 1,
-                    StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER, false);
-            game.getPlayer(opponentId).chooseTarget(Outcome.Sacrifice, target, source, game);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER);
+            game.getPlayer(opponentId).choose(Outcome.Sacrifice, target, source, game);
             perms.addAll(target.getTargets());
         }
         //sacrifices the picked cards

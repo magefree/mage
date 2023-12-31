@@ -17,6 +17,7 @@ import mage.constants.SuperType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
@@ -26,6 +27,7 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -116,8 +118,8 @@ class TransmuteArtifactEffect extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             boolean sacrifice = false;
-            TargetControlledPermanent targetArtifact = new TargetControlledPermanent(new FilterControlledArtifactPermanent());
-            if (controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)) {
+            TargetSacrifice targetArtifact = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_ARTIFACT);
+            if (controller.choose(Outcome.Sacrifice, targetArtifact, source, game)) {
                 Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
                 if (permanent != null) {
                     sacrifice = permanent.sacrifice(source, game);

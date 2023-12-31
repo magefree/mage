@@ -72,6 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean manifested = false;
     protected boolean morphed = false;
     protected boolean ringBearerFlag = false;
+    protected boolean canBeSacrificed = true;
     protected int classLevel = 1;
     protected final Set<UUID> goadingPlayers = new HashSet<>();
     protected UUID originalControllerId;
@@ -176,6 +177,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
         this.prototyped = permanent.prototyped;
+        this.canBeSacrificed = permanent.canBeSacrificed;
     }
 
     @Override
@@ -215,6 +217,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
+        this.canBeSacrificed = true;
     }
 
     @Override
@@ -1361,7 +1364,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean sacrifice(Ability source, Game game) {
         //20091005 - 701.13
-        if (isPhasedIn() && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SACRIFICE_PERMANENT, objectId, source, controllerId))) {
+        if (isPhasedIn() && canBeSacrificed && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SACRIFICE_PERMANENT, objectId, source, controllerId))) {
             // Commander replacement effect or Rest in Peace (exile instead of graveyard) in play does not prevent successful sacrifice
             // so the return value of the moveToZone is not taken into account here
             moveToZone(Zone.GRAVEYARD, source, game, false);
@@ -1771,6 +1774,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean isProtectedBy(UUID playerId) {
         return protectorId != null && protectorId.equals(playerId);
+    }
+
+    @Override
+    public void setCanBeSacrificed(boolean canBeSacrificed) {
+        this.canBeSacrificed = canBeSacrificed;
+    }
+
+    @Override
+    public boolean canBeSacrificed() {
+        return canBeSacrificed;
     }
 
     @Override

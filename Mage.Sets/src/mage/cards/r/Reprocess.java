@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -69,8 +70,8 @@ class ReprocessEffect extends OneShotEffect {
             return false;
         }
         int amount = 0;
-        TargetControlledPermanent toSacrifice = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
-        if(player.chooseTarget(Outcome.Sacrifice, toSacrifice, source, game)) {
+        TargetSacrifice toSacrifice = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
+        if(player.choose(Outcome.Sacrifice, toSacrifice, source, game)) {
             for(UUID uuid : toSacrifice.getTargets()){
                 Permanent permanent = game.getPermanent(uuid);
                 if(permanent != null){

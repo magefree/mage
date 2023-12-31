@@ -7,10 +7,12 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.SacrificeCost;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
@@ -24,20 +26,32 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     private final List<Permanent> permanents = new ArrayList<>();
 
-    public SacrificeTargetCost(FilterControlledPermanent filter) {
-        this(new TargetControlledPermanent(filter));
+    /**
+     * Sacrifice a permanent matching the filter:
+     * @param filter can be generic, will automatically add article and sacrifice predicates
+     */
+    public SacrificeTargetCost(FilterPermanent filter) {
+        this(1, filter);
     }
 
+    /**
+     * Sacrifice N permanents matching the filter:
+     * @param filter can be generic, will automatically add sacrifice predicates
+     */
+    public SacrificeTargetCost(int numToSac, FilterPermanent filter) {
+        this(new TargetSacrifice(numToSac, filter));
+    }
+
+    // remove once merge complete
+    @Deprecated
     public SacrificeTargetCost(TargetControlledPermanent target) {
+        throw new UnsupportedOperationException("Wrong code usage, refactor to TargetSacrifice");
+    }
+
+    public SacrificeTargetCost(TargetSacrifice target) {
         this.addTarget(target);
-        target.withNotTarget(true); // sacrifice is never targeted
         target.setRequired(false); // can be canceled
         this.text = "sacrifice " + makeText(target);
-        target.setTargetName(target.getTargetName() + " (to sacrifice)");
-    }
-
-    public SacrificeTargetCost(TargetControlledPermanent target, boolean noText) {
-        this.addTarget(target);
     }
 
     public SacrificeTargetCost(SacrificeTargetCost cost) {
@@ -70,6 +84,9 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         return paid;
     }
 
+    /**
+     * For storing additional info upon selecting permanents to sacrifice
+     */
     protected void addSacrificeTarget(Game game, Permanent permanent) {
         permanents.add(permanent.copy());
     }
@@ -80,18 +97,15 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
-            } else {
-                // Activator not filled?
-                activator = controllerId;
-            }
+            }  // else, Activator not filled?
         }
 
         int validTargets = 0;
-        int neededtargets = this.getTargets().get(0).getNumberOfTargets();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(((TargetControlledPermanent) this.getTargets().get(0)).getFilter(), controllerId, game)) {
+        int neededTargets = this.getTargets().get(0).getNumberOfTargets();
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(((TargetPermanent) this.getTargets().get(0)).getFilter(), controllerId, source, game)) {
             if (game.getPlayer(activator).canPaySacrificeCost(permanent, source, controllerId, game)) {
                 validTargets++;
-                if (validTargets >= neededtargets) {
+                if (validTargets >= neededTargets) {
                     return true;
                 }
             }
@@ -112,7 +126,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         return permanents;
     }
 
-    private static String makeText(TargetControlledPermanent target) {
+    private static String makeText(TargetSacrifice target) {
         if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
             return target.getTargetName();
         }

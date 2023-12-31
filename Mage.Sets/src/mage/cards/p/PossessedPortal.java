@@ -17,6 +17,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -106,7 +107,7 @@ class PossessedPortalEffect extends OneShotEffect {
                 discardCost.pay(source, game, source, playerId, true, null);
             }
             else {
-                Cost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent());
+                Cost sacrificeCost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT);
                 sacrificeCost.pay(source, game, source, playerId, true, null);
             }
         }

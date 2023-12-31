@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -39,7 +40,7 @@ public final class DevouringRage extends CardImpl {
 
 
         // As an additional cost to cast Devouring Rage, you may sacrifice any number of Spirits.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetSacrifice(0, Integer.MAX_VALUE, filter)));
 
         // Target creature gets +3/+0 until end of turn. For each Spirit sacrificed this way, that creature gets an additional +3/+0 until end of turn
         this.getSpellAbility().addEffect(new DevouringRageEffect());

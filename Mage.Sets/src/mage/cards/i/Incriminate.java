@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -17,6 +18,7 @@ import java.util.UUID;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  * @author TheElk801
@@ -71,10 +73,9 @@ class IncriminateEffect extends OneShotEffect {
                 || player == null) {
             return false;
         }
-        filter.add(mage.filter.predicate.Predicates.or(permanentIdPredicates));
-        TargetPermanent target = new TargetPermanent(filter);
-        target.withNotTarget(true);
-        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+        filter.add(Predicates.or(permanentIdPredicates));
+        TargetSacrifice target = new TargetSacrifice(filter);
+        player.choose(Outcome.Sacrifice, target, source, game);
         Permanent sacrificeCreature = game.getPermanent(target.getFirstTarget());
         return sacrificeCreature != null
                 && sacrificeCreature.sacrifice(source, game);

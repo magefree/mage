@@ -37,7 +37,7 @@ public final class KuldothaForgemaster extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard())),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
+        ability.addCost(new SacrificeTargetCost(3, filter));
         this.addAbility(ability);
     }
 

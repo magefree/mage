@@ -69,9 +69,7 @@ class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-        target.setRequired(false);
-        abilityToModify.addCost(new SacrificeTargetCost(target));
+        abilityToModify.addCost(new SacrificeTargetCost(filter));
         return true;
     }
 

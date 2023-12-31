@@ -35,7 +35,7 @@ public final class EdgeOfAutumn extends CardImpl {
                 "If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle."));
 
         // Cycling-Sacrifice a land.
-        this.addAbility(new CyclingAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new CyclingAbility(new SacrificeTargetCost(filter)));
     }
 
     private EdgeOfAutumn(final EdgeOfAutumn card) {

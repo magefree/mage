@@ -44,9 +44,7 @@ public final class FainTheBroker extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
@@ -57,9 +55,7 @@ public final class FainTheBroker extends CardImpl {
 
         // {T}, Sacrifice an artifact: Create a 2/1 white and black Inkling creature token with flying.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new InklingToken()), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability);
 
         // {3}{B}: Untap Fain, the Broker.

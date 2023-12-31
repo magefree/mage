@@ -16,12 +16,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.common.CompletedDungeonWatcher;
 
 import java.util.UUID;
@@ -101,8 +103,7 @@ class AcererakTheArchlichEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            TargetPermanent target = new TargetControlledCreaturePermanent(0, 1);
-            target.withNotTarget(true);
+            TargetSacrifice target = new TargetSacrifice(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE);
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null && permanent.sacrifice(source, game)) {

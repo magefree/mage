@@ -37,7 +37,7 @@ public final class SoulsOfTheLost extends CardImpl {
         // As an additional cost to cast this spell, discard a card or sacrifice a permanent.
         this.getSpellAbility().addCost(new OrCost("discard a card or sacrifice a permanent",
                 new DiscardCardCost(),
-                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT)
         ));
 
         // Fathomless descent -- Souls of the Lost's power is equal to the number of permanent cards in your graveyard and its toughness is equal to that number plus 1.

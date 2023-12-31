@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -84,7 +85,7 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
             if (amount < 1) {
                 return true;
             }
-            Target target = new TargetControlledPermanent(amount, amount, StaticFilters.FILTER_CONTROLLED_PERMANENT, true);
+            Target target = new TargetSacrifice(amount, StaticFilters.FILTER_CONTROLLED_PERMANENT);
             if (target.canChoose(targetPlayer.getId(), source, game)) {
                 while (!target.isChosen() 
                         && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
@@ -138,7 +139,7 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
     public boolean apply(Game game, Ability source) {
         UUID activePlayerId = game.getActivePlayerId();
         Player target = game.getPlayer(activePlayerId);
-        Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent()));
+        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT);
         if (target == null) {
             return false;
         }

@@ -43,7 +43,7 @@ public final class PeregrinTook extends CardImpl {
         // Sacrifice three Foods: Draw a card.
         this.addAbility(new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(3, filter))
+                new SacrificeTargetCost(3, filter)
         ));
     }
 

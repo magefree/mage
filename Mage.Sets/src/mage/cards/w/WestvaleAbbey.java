@@ -18,6 +18,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.HumanClericToken;
 import mage.target.common.TargetControlledPermanent;
@@ -45,7 +46,7 @@ public final class WestvaleAbbey extends CardImpl {
         this.addAbility(new TransformAbility());
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterControlledCreaturePermanent("creatures"), true)));
+        ability.addCost(new SacrificeTargetCost(5, StaticFilters.FILTER_PERMANENT_CREATURES));
         ability.addEffect(new UntapSourceEffect().setText("untap it").concatBy(", then"));
         this.addAbility(ability);
     }

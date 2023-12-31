@@ -338,6 +338,9 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Javelin of Lightning", 185, Rarity.COMMON, mage.cards.j.JavelinOfLightning.class));
         cards.add(new SetCardInfo("Jazal Goldmane", 697, Rarity.MYTHIC, mage.cards.j.JazalGoldmane.class));
         cards.add(new SetCardInfo("Jeska's Will", 799, Rarity.RARE, mage.cards.j.JeskasWill.class));
+        cards.add(new SetCardInfo("Jon Irenicus, Shattered One", 278, Rarity.RARE, mage.cards.j.JonIrenicusShatteredOne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jon Irenicus, Shattered One", 425, Rarity.RARE, mage.cards.j.JonIrenicusShatteredOne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jon Irenicus, Shattered One", 536, Rarity.RARE, mage.cards.j.JonIrenicusShatteredOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Journey to the Lost City", 681, Rarity.RARE, mage.cards.j.JourneyToTheLostCity.class));
         cards.add(new SetCardInfo("Juvenile Mist Dragon", 79, Rarity.UNCOMMON, mage.cards.j.JuvenileMistDragon.class));
         cards.add(new SetCardInfo("Kagha, Shadow Archdruid", 279, Rarity.UNCOMMON, mage.cards.k.KaghaShadowArchdruid.class));

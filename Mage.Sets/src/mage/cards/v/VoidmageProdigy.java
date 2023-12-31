@@ -41,7 +41,7 @@ public final class VoidmageProdigy extends CardImpl {
 
         // {U}{U}, Sacrifice a Wizard: Counter target spell.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(filter));
         Target target = new TargetSpell();
         ability.addTarget(target);
         this.addAbility(ability);

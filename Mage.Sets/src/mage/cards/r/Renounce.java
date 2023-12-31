@@ -8,11 +8,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -56,15 +58,15 @@ class RenounceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null){
+        if (player == null) {
             return false;
         }
         int amount = 0;
-        TargetControlledPermanent toSacrifice = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledPermanent(), true);
-        if(player.chooseTarget(Outcome.Sacrifice, toSacrifice, source, game)) {
-            for(UUID uuid : toSacrifice.getTargets()){
+        TargetSacrifice toSacrifice = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT);
+        if (player.choose(Outcome.Sacrifice, toSacrifice, source, game)) {
+            for (UUID uuid : toSacrifice.getTargets()) {
                 Permanent permanent = game.getPermanent(uuid);
-                if(permanent != null){
+                if (permanent != null) {
                     permanent.sacrifice(source, game);
                     amount++;
                 }

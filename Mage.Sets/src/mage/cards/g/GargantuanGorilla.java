@@ -86,8 +86,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-            SacrificeTargetCost cost = new SacrificeTargetCost(target);
+            SacrificeTargetCost cost = new SacrificeTargetCost(1, filter);
             if (!controller.chooseUse(Outcome.Benefit, "Sacrifice a Forest?", source, game)
                     || !cost.canPay(source, source, source.getControllerId(), game)
                     || !cost.pay(source, game, source, source.getControllerId(), true)) {

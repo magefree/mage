@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -18,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -71,11 +73,7 @@ class HitEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getTargets().getFirstTarget());
         if (targetPlayer != null) {
-            FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature");
-            filter.add(Predicates.or(
-                    CardType.ARTIFACT.getPredicate(),
-                    CardType.CREATURE.getPredicate()));
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);
 
             if (target.canChoose(targetPlayer.getId(), source, game)) {
                 targetPlayer.choose(Outcome.Sacrifice, target, source, game);

@@ -10,6 +10,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -17,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -64,8 +66,8 @@ class ScapeshiftEffect extends OneShotEffect {
             return false;
         }
         int amount = 0;
-        TargetControlledPermanent sacrificeLand = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledLandPermanent("lands you control"), true);
-        if (controller.chooseTarget(Outcome.Sacrifice, sacrificeLand, source, game)) {
+        TargetSacrifice sacrificeLand = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_LANDS);
+        if (controller.choose(Outcome.Sacrifice, sacrificeLand, source, game)) {
             for (UUID uuid : sacrificeLand.getTargets()) {
                 Permanent land = game.getPermanent(uuid);
                 if (land != null) {

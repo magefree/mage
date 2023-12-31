@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -20,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KnightToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -53,6 +55,7 @@ class DoomForetoldEffect extends OneShotEffect {
 
     static {
         filter.add(TokenPredicate.FALSE);
+        filter.add(CanBeSacrificedPredicate.instance);
     }
 
     private static final Effect effect1 = new CreateTokenEffect(new KnightToken());
@@ -81,11 +84,8 @@ class DoomForetoldEffect extends OneShotEffect {
         if (controller == null || player == null) {
             return false;
         }
-        FilterPermanent filter2 = filter.copy();
-        filter2.add(new ControllerIdPredicate(player.getId()));
-        if (game.getBattlefield().contains(filter2, source, game, 1)) {
-            TargetPermanent target = new TargetPermanent(filter2);
-            target.withNotTarget(true);
+        if (game.getBattlefield().countAll(filter, player.getId(), game) > 0) {
+            TargetSacrifice target = new TargetSacrifice(filter);
             if (player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null && permanent.sacrifice(source, game)) {

@@ -48,7 +48,7 @@ public final class BoundByMoonsilver extends CardImpl {
 
         // Sacrifice another permanent: Attach Bound by Moonsilver to target creature. Activate this ability only any time you could cast a sorcery and only once each turn.
         LimitedTimesPerTurnActivatedAbility limitedAbility = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "Attach {this} to target creature"),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter)), 1);
+                new SacrificeTargetCost(filter), 1);
         limitedAbility.setTiming(TimingRule.SORCERY);
         limitedAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(limitedAbility);

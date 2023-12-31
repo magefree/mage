@@ -20,6 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
@@ -92,12 +93,12 @@ class MalevolentWitchkiteEffect extends OneShotEffect {
             return false;
         }
 
-        Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+        Target target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
 
-        controller.chooseTarget(Outcome.Sacrifice, target, source, game);
+        controller.choose(Outcome.Sacrifice, target, source, game);
         List<Permanent> toSacrifice = target
                 .getTargets()
                 .stream()

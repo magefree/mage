@@ -16,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,7 +45,7 @@ public final class Jokulmorder extends CardImpl {
 
         // When Jokulmorder enters the battlefield, sacrifice it unless you sacrifice five lands.
         Effect effect = new SacrificeSourceUnlessPaysEffect(
-                new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterControlledLandPermanent("five lands"), true)));
+                new SacrificeTargetCost(5, StaticFilters.FILTER_LANDS));
         effect.setText("sacrifice it unless you sacrifice five lands");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 

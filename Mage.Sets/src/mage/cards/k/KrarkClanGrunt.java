@@ -40,7 +40,7 @@ public final class KrarkClanGrunt extends CardImpl {
 
         // Sacrifice an artifact: Krark-Clan Grunt gets +1/+0 and gains first strike until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn)
-                .setText("{this} gets +1/+0"), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+                .setText("{this} gets +1/+0"), new SacrificeTargetCost(filter));
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains first strike until end of turn"));
         this.addAbility(ability);

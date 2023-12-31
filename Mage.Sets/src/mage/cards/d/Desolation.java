@@ -14,6 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -67,8 +68,7 @@ class DesolationEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            TargetPermanent target = new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
-            target.withNotTarget(true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
             if (!target.canChoose(player.getId(), source, game)) {
                 continue;
             }
@@ -80,10 +80,7 @@ class DesolationEffect extends OneShotEffect {
         }
         for (Permanent permanent : permanents) {
             Player player = game.getPlayer(permanent.getControllerId());
-            if (permanent != null
-                    && permanent.sacrifice(source, game)
-                    && permanent.hasSubtype(SubType.PLAINS, game)
-                    && player != null) {
+            if (permanent.sacrifice(source, game) && permanent.hasSubtype(SubType.PLAINS, game) && player != null) {
                 player.damage(2, source.getSourceId(), source, game);
             }
         }

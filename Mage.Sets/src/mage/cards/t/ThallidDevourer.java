@@ -44,7 +44,7 @@ public final class ThallidDevourer extends CardImpl {
         // Sacrifice a Saproling: Thallid Devourer gets +1/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new BoostSourceEffect(1, 2, Duration.EndOfTurn), 
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false))));
+                new SacrificeTargetCost(filter)));
     }
 
     private ThallidDevourer(final ThallidDevourer card) {

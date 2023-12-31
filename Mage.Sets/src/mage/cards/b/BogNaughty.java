@@ -37,7 +37,7 @@ public final class BogNaughty extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

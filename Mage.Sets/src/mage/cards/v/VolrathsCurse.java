@@ -16,11 +16,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -145,7 +145,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
 
     public VolrathsCurseSpecialAction() {
         super(Zone.BATTLEFIELD);
-        this.addCost(new SacrificeTargetCost(new TargetControlledPermanent(), true));
+        this.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
         this.addEffect(new VolrathsCurseIgnoreEffect(keyString));
         this.setMayActivate(TargetController.CONTROLLER_ATTACHED_TO);
     }

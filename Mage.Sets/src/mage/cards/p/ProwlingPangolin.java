@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -66,7 +67,7 @@ class ProwlingPangolinEffect extends OneShotEffect {
         if (controller != null) {
             boolean costPaid = false;
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledCreaturePermanent("creatures"), true));
+                Cost cost = new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_CREATURES);
                 Player player = game.getPlayer(playerId);
                 if (player != null
                         && cost.canPay(source, source, playerId, game)

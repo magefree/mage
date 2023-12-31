@@ -50,10 +50,7 @@ public class SacrificeAllCost extends CostImpl implements SacrificeCost {
         if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
-            } else {
-                // Aktivator not filled?
-                activator = controllerId;
-            }
+            }  // else, Activator not filled?
         }
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {

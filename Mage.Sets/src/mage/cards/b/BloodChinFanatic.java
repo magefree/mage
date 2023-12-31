@@ -47,7 +47,7 @@ public final class BloodChinFanatic extends CardImpl {
         effect2.setText("and you gain X life, where X is the sacrificed creature's power");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addEffect(effect2);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         

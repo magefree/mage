@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -20,6 +21,7 @@ import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -79,15 +81,13 @@ class GrabTheReinsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
-        Target target = new TargetControlledCreaturePermanent();
-        target.withNotTarget(true);
-        target.setTargetName("a creature to sacrifice");
+        Target target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_A_CREATURE);
         if (!target.canChoose(controllerId, source, game)) {
             return false;
         }
         Player player = game.getPlayer(controllerId);
         if (player != null) {
-            player.chooseTarget(Outcome.Sacrifice, target, source, game);
+            player.choose(Outcome.Sacrifice, target, source, game);
             Permanent creatureToSacrifice = game.getPermanent(target.getTargets().get(0));
             int amount = creatureToSacrifice.getPower().getValue();
             if (!creatureToSacrifice.sacrifice(source, game)) {

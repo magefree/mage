@@ -39,7 +39,7 @@ public final class DemonOfDeathsGate extends CardImpl {
         
         // You may pay 6 life and sacrifice three black creatures rather than pay Demon of Death's Gate's mana cost
         AlternativeCostSourceAbility alternateCosts = new AlternativeCostSourceAbility(new PayLifeCost(6));
-        alternateCosts.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
+        alternateCosts.addCost(new SacrificeTargetCost(3, filter));
         this.addAbility(alternateCosts);
 
         this.addAbility(FlyingAbility.getInstance());

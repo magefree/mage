@@ -36,7 +36,7 @@ public final class BillThePony extends CardImpl {
         // Sacrifice a Food: Until end of turn, target creature you control assigns combat damage equal to its toughness rather than its power.
         Ability ability = new SimpleActivatedAbility(
             new CombatDamageByToughnessTargetEffect(Duration.EndOfTurn),
-            new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD))
+            new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD)
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE));
 

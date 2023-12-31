@@ -45,7 +45,7 @@ public final class PsychicAllergy extends CardImpl {
         // At the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new DoUnlessControllerPaysEffect(new DestroySourceEffect(),
-                        new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false))).setText("destroy {this} unless you sacrifice two Islands"),
+                        new SacrificeTargetCost(2, filter)).setText("destroy {this} unless you sacrifice two Islands"),
                 TargetController.YOU,
                 false));
     }

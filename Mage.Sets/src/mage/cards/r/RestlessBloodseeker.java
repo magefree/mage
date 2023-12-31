@@ -18,6 +18,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.BloodToken;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
@@ -54,7 +55,7 @@ public final class RestlessBloodseeker extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 new TransformSourceEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

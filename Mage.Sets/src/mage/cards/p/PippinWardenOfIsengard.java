@@ -53,7 +53,7 @@ public final class PippinWardenOfIsengard extends CardImpl {
         ability = new ActivateAsSorceryActivatedAbility(new BoostControlledEffect(
                 3, 3, Duration.EndOfTurn, true
         ).setText("other creatures you control get +3/+3"), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(4, filter)));
+        ability.addCost(new SacrificeTargetCost(4, filter));
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, true
         ).setText("and gain haste until end of turn"));

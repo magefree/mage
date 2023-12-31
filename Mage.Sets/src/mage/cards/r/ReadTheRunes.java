@@ -8,12 +8,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -60,8 +62,8 @@ class ReadTheRunesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int drawnCards = controller.drawCards(source.getManaCostsToPay().getX(), source, game);
-            Target target = new TargetControlledPermanent(0, drawnCards, new FilterControlledPermanent(), true);
-            controller.chooseTarget(Outcome.Sacrifice, target, source, game);
+            Target target = new TargetSacrifice(0, drawnCards, StaticFilters.FILTER_PERMANENT);
+            controller.choose(Outcome.Sacrifice, target, source, game);
             int sacrificedPermanents = 0;
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);

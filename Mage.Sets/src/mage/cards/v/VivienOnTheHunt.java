@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -75,9 +76,7 @@ class VivienOnTheHuntSacrificeEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
-        );
+        TargetSacrifice target = new TargetSacrifice(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
         player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {

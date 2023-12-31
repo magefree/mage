@@ -324,7 +324,7 @@ public class KickerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
         setChoice(playerA, true);  // use kicker
         addTarget(playerA, playerB); // trigger's target
-        addTarget(playerB, "Birds of Paradise"); // sacrifice
+        setChoice(playerB, "Birds of Paradise"); // sacrifice
 
         // return to hand
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Boomerang", "Gatekeeper of Malakir");

@@ -17,7 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -175,8 +175,8 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null
                         && player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + '?', source, game)) {
-                    Target target = new TargetPermanent(1, 1, filter, true);
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    Target target = new TargetSacrifice(filter);
+                    player.choose(Outcome.Sacrifice, target, source, game);
                     if (!target.isChosen()) {
                         return false;
                     }

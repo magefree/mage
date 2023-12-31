@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledPermanent;
@@ -42,7 +43,7 @@ public final class BoshIronGolem extends CardImpl {
         Effect effect = new DamageTargetEffect(SacrificeCostManaValue.ARTIFACT);
         effect.setText("{this} deals damage equal to the sacrificed artifact's mana value to any target");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

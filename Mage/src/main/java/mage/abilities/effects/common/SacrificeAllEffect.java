@@ -5,15 +5,15 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -21,21 +21,42 @@ import java.util.UUID;
  */
 public class SacrificeAllEffect extends OneShotEffect {
 
-    protected DynamicValue amount;
-    protected FilterControlledPermanent filter;
+    private final DynamicValue amount;
+    private final FilterPermanent filter;
+    private final boolean onlyOpponents;
 
-    public SacrificeAllEffect(FilterControlledPermanent filter) {
+    /**
+     * Each player sacrifices a permanent
+     * @param filter can be generic, will automatically add article and necessary sacrifice predicates
+     */
+    public SacrificeAllEffect(FilterPermanent filter) {
         this(1, filter);
     }
 
-    public SacrificeAllEffect(int amount, FilterControlledPermanent filter) {
+    /**
+     * Each player sacrifices N permanents
+     * @param filter can be generic, will automatically add necessary sacrifice predicates
+     */
+    public SacrificeAllEffect(int amount, FilterPermanent filter) {
         this(StaticValue.get(amount), filter);
     }
 
-    public SacrificeAllEffect(DynamicValue amount, FilterControlledPermanent filter) {
+    /**
+     * Each player sacrifices X permanents
+     * @param filter can be generic, will automatically add necessary sacrifice predicates
+     */
+    public SacrificeAllEffect(DynamicValue amount, FilterPermanent filter) {
+        this(amount, filter, false);
+    }
+
+    /**
+     * Internal use for this and SacrificeOpponentsEffect
+     */
+    protected SacrificeAllEffect(DynamicValue amount, FilterPermanent filter, boolean onlyOpponents) {
         super(Outcome.Sacrifice);
         this.amount = amount;
         this.filter = filter;
+        this.onlyOpponents = onlyOpponents;
         setText();
     }
 
@@ -43,6 +64,7 @@ public class SacrificeAllEffect extends OneShotEffect {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter.copy();
+        this.onlyOpponents = effect.onlyOpponents;
     }
 
     @Override
@@ -52,24 +74,27 @@ public class SacrificeAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        int num = amount.calculate(game, source, this);
+        if (num < 1) {
             return false;
         }
-
-        List<UUID> perms = new ArrayList<>();
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+        Set<UUID> perms = new HashSet<>();
+        for (UUID playerId : onlyOpponents ?
+                game.getOpponents(source.getControllerId()) :
+                game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int numTargets = Math.min(amount.calculate(game, source, this), game.getBattlefield().countAll(filter, player.getId(), game));
-                TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, true);
-                if (target.canChoose(player.getId(), source, game)) {
-                    while (!target.isChosen() && player.canRespond()) {
-                        player.choose(Outcome.Sacrifice, target, source, game);
-                    }
-                    perms.addAll(target.getTargets());
-                }
+            if (player == null) {
+                continue;
             }
+            int numTargets = Math.min(num, game.getBattlefield().count(TargetSacrifice.makeFilter(filter), player.getId(), source, game));
+            if (numTargets < 1) {
+                continue;
+            }
+            TargetSacrifice target = new TargetSacrifice(numTargets, filter);
+            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+                player.choose(Outcome.Sacrifice, target, source, game);
+            }
+            perms.addAll(target.getTargets());
         }
         for (UUID permID : perms) {
             Permanent permanent = game.getPermanent(permID);
@@ -82,17 +107,20 @@ public class SacrificeAllEffect extends OneShotEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("each player sacrifices ");
-        if (amount.toString().equals("X")) {
-            sb.append(amount.toString());
-            sb.append(' ');
-            sb.append(filter.getMessage());
-        } else if (amount.toString().equals("1")) {
-            sb.append(CardUtil.addArticle(filter.getMessage()));
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString(), "a"));
-            sb.append(' ');
-            sb.append(filter.getMessage());
+        sb.append(onlyOpponents ? "each opponent sacrifices " : "each player sacrifices ");
+        switch (amount.toString()) {
+            case "X":
+                sb.append(amount.toString());
+                sb.append(' ');
+                sb.append(filter.getMessage());
+                break;
+            case "1":
+                sb.append(CardUtil.addArticle(filter.getMessage()));
+                break;
+            default:
+                sb.append(CardUtil.numberToText(amount.toString(), "a"));
+                sb.append(' ');
+                sb.append(filter.getMessage());
         }
         staticText = sb.toString();
     }
