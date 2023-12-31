@@ -21,6 +21,8 @@ import mage.players.Player;
  */
 public final class PantlazaSunFavored extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent(SubType.DINOSAUR, "Dinosaur");
+
     public PantlazaSunFavored(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
         
@@ -31,7 +33,9 @@ public final class PantlazaSunFavored extends CardImpl {
 
         // Whenever Pantlaza, Sun-Favored or another Dinosaur enters the battlefield under your control,
         // you may discover X, where X is that creature's toughness. Do this only once each turn.
-        this.addAbility(new PantlazaSunFavoredTriggeredAbility());
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new PantlazaSunFavoredEffect(), filter, true, SetTargetPointer.PERMANENT, true
+        ).setDoOnlyOnceEachTurn(true));
     }
 
     private PantlazaSunFavored(final PantlazaSunFavored card) {
@@ -42,26 +46,6 @@ public final class PantlazaSunFavored extends CardImpl {
     public PantlazaSunFavored copy() {
         return new PantlazaSunFavored(this);
     }
-}
-
-class PantlazaSunFavoredTriggeredAbility extends EntersBattlefieldThisOrAnotherTriggeredAbility {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.DINOSAUR, "Dinosaur");
-
-    PantlazaSunFavoredTriggeredAbility() {
-        super(new PantlazaSunFavoredEffect(), filter, true, SetTargetPointer.PERMANENT, true);
-        setDoOnlyOnceEachTurn(true);
-    }
-
-    private PantlazaSunFavoredTriggeredAbility(final PantlazaSunFavoredTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PantlazaSunFavoredTriggeredAbility copy(){
-        return new PantlazaSunFavoredTriggeredAbility(this);
-    }
-
 }
 
 // Based on Dinosaur Egg
