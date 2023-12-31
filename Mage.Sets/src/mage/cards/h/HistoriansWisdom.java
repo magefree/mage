@@ -75,7 +75,7 @@ enum HistoriansWisdomCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.applyEffects(); // Make sure +2/+1 buff gets applied first
+        game.applyEffects(); // Make sure +2/+1 buff gets applied first - TODO: change to game.getState().processAction(game); ? Is it safe here?
         Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment == null) {
             return false;

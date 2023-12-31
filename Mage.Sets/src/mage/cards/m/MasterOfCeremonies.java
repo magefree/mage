@@ -114,7 +114,7 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
             Token treasureOpponent = new TreasureToken();
             treasureOpponent.putOntoBattlefield(1, game, source, opponentId);
         }
-        game.applyEffects();
+        game.applyEffects(); // TODO - Are these calls really needed? What do they accomplish?
 
         // Friends - You and that player each create a 1/1 green and white Citizen creature token.
         for (UUID opponentId : friendChoosers) {
