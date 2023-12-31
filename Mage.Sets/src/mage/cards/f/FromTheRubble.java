@@ -27,15 +27,20 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class FromTheRubble extends CardImpl {
 
+    private static final FilterCreatureCard filter = new FilterCreatureCard(
+            "a creature card of the chosen type from your graveyard"
+    );
+
+    static {
+        filter.add(ChosenSubtypePredicate.TRUE);
+    }
+
     public FromTheRubble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
         
 
         // As From the Rubble enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.PutCreatureInPlay)));
-
-        FilterCreatureCard filter = new FilterCreatureCard("a creature card of the chosen type");
-        filter.add(ChosenSubtypePredicate.TRUE);
 
         // At the beginning of your end step, return target creature card of the chosen type from your graveyard to
         // the battlefield with a finality counter on it.
