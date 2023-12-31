@@ -4,7 +4,6 @@ import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -74,8 +73,8 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
             return false;
         }
         
-        Set<Card> cards = player.getHand().getCards(filter, game);
-        cards.addAll(player.getGraveyard().getCards(filter, game));
+        Set<Card> cards = player.getHand().getCards(filter, source.getControllerId(), source, game);
+        cards.addAll(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
         
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards) {
@@ -103,11 +102,11 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
                 .stream()
                 .map(MageObject::getLogName)
                 .collect(Collectors.joining(" or "));
-        if (partsToCast.size() < 1
+        if (partsToCast.isEmpty()
                 || !player.chooseUse(
                 Outcome.PlayForFree, "Cast spell by paying life equal to its mana value rather than paying its mana cost (" + partsInfo + ")?", source, game
         )) {
-            return false;
+            return true;
         }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
         
@@ -119,12 +118,12 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
         newCosts.addAll(cardToCast.getSpellAbility().getCosts());
         player.setCastSourceIdWithAlternateMana(cardToCast.getId(), null, newCosts);
 
-        ActivatedAbility chosenAbility;
+        SpellAbility chosenAbility;
         chosenAbility = player.chooseAbilityForCast(cardToCast, game, true);
         boolean result = false;
-        if (chosenAbility instanceof SpellAbility) {
+        if (chosenAbility != null) {
             result = player.cast(
-                    (SpellAbility) chosenAbility,
+                    chosenAbility,
                     game, true, new ApprovingObject(source, game)
             );
         }
