@@ -20,7 +20,7 @@ public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattle
         setTriggerPhrase("Whenever " + this.filter.getMessage() + " enters the battlefield" + (onlyControlled ? " under your control, " : ", "));
     }
 
-    private EntersBattlefieldThisOrAnotherTriggeredAbility(final EntersBattlefieldThisOrAnotherTriggeredAbility ability) {
+    protected EntersBattlefieldThisOrAnotherTriggeredAbility(final EntersBattlefieldThisOrAnotherTriggeredAbility ability) {
         super(ability);
     }
 
