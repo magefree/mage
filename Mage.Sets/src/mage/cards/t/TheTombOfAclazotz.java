@@ -1,9 +1,11 @@
 package mage.cards.t;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 import mage.MageIdentifier;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -29,12 +31,12 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import mage.util.SubTypes;
 import mage.watchers.Watcher;
 
 /**
@@ -139,7 +141,7 @@ class TheTombOfAclazotzWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (GameEvent.EventType.SPELL_CAST.equals(event.getType())
+        if (GameEvent.EventType.CAST_SPELL.equals(event.getType())
                 && event.hasApprovingIdentifier(MageIdentifier.TheTombOfAclazotzWatcher)) {
             Spell target = game.getSpell(event.getTargetId());
             Card card = target.getCard();
@@ -149,7 +151,7 @@ class TheTombOfAclazotzWatcher extends Watcher {
                     game.getState().addEffect(new AddCounterEnteringCreatureEffect(new MageObjectReference(target.getCard(), game),
                             CounterType.FINALITY.createInstance(), Outcome.Neutral),
                             target.getSpellAbility());
-                    game.getState().addEffect(new AddSubtypeEnteringCreatureEffect(new MageObjectReference(target.getCard(), game), SubType.VAMPIRE, Outcome.Benefit), target.getSpellAbility());
+                    game.getState().addEffect(new AddSubtypeEnteringCreatureEffect(new MageObjectReference(target.getCard(), game), SubType.VAMPIRE, Outcome.Benefit), card.getSpellAbility());
                     // Rule 728.2 we must insure the effect is used (creature is cast successfully) before discarding the play effect
                     UUID playEffectId = this.getPlayFromAnywhereEffect();
                     if (playEffectId != null
@@ -215,21 +217,24 @@ class AddSubtypeEnteringCreatureEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.CAST_SPELL_LATE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null
-                && mor.refersTo(permanent, game);
+        MageObject spell = game.getObject(event.getSourceId());
+        if (spell != null
+                && mor.refersTo(spell, game)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
+        Spell target = game.getSpell(event.getSourceId());
         if (target != null) {
-            AddCardSubTypeEnteringTargetEffect effect = new AddCardSubTypeEnteringTargetEffect(subType, Duration.WhileOnBattlefield);
+            AddCardSubTypeEnteringTargetEffect effect = new AddCardSubTypeEnteringTargetEffect(mor, subType, Duration.WhileOnBattlefield);
             effect.setTargetPointer(new FixedTarget(target, game));
             game.addEffect(effect, source);
 
@@ -246,27 +251,51 @@ class AddSubtypeEnteringCreatureEffect extends ReplacementEffectImpl {
 class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
 
     private final SubType addedSubType;
+    private MageObjectReference mor;
+    private Card card;
 
-    public AddCardSubTypeEnteringTargetEffect(SubType addedSubType, Duration duration) {
+    public AddCardSubTypeEnteringTargetEffect(MageObjectReference mor, SubType addedSubType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSubType = addedSubType;
+        this.mor = mor;
     }
 
     protected AddCardSubTypeEnteringTargetEffect(final AddCardSubTypeEnteringTargetEffect effect) {
         super(effect);
         this.addedSubType = effect.addedSubType;
+        this.mor = effect.mor;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(game.getObject(targetPointer.getFixedTarget(game, source).getTarget()).getId());
-        if (target != null) {
-            target.addSubType(game, addedSubType);
+        Spell spell = game.getSpell(targetPointer.getFixedTarget(game, source).getTarget());
+        MageObject target = game.getObject(targetPointer.getFixedTarget(game, source).getTarget());
+        if (spell != null) {
+            card = spell.getCard();
         }
-        if (target == null) {
-            discard();
+        for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
+            StackObject stackObject = iterator.next();
+            if (stackObject instanceof Spell
+                    && target != null
+                    && target.equals(stackObject)
+                    && mor.refersTo(target, game)) {
+                setCreatureSubtype(stackObject, addedSubType, game);
+                setCreatureSubtype(((Spell) stackObject).getCard(), addedSubType, game);
+            }
         }
-        return false;
+        if (card != null
+                && game.getState().getBattlefield().getPermanent(card.getId()) != null
+                && game.getState().getZoneChangeCounter(card.getId()) == mor.getZoneChangeCounter() + 1) { // blinking, etc
+            game.getState().getBattlefield().getPermanent(card.getId()).addSubType(game, addedSubType);
+        }
+        return true;
+    }
+
+    private void setCreatureSubtype(MageObject object, SubType subtype, Game game) {
+        SubTypes subTypes = game.getState().getCreateMageObjectAttribute(object, game).getSubtype();
+        if (!subTypes.contains(subtype)) {
+            subTypes.add(subtype);
+        }
     }
 
     @Override
