@@ -3,12 +3,13 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -19,9 +20,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInExile;
@@ -55,12 +54,13 @@ public final class BronzebeakForagers extends CardImpl {
         // {X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner's graveyard.
         // You gain X life.
         // Based on Gelatinous Cube's "Dissolve" ability
-        Ability dissolve_ability = new SimpleActivatedAbility(
+        Ability dissolveAbility = new SimpleActivatedAbility(
                 new BronzebeakForagerDissolveEffect(),
                 new ManaCostsImpl<>("{X}{W}")
         );
-        dissolve_ability.setTargetAdjuster(BronzebeakForagerDissolveAdjuster.instance);
-        this.addAbility(dissolve_ability);
+        dissolveAbility.setTargetAdjuster(BronzebeakForagerDissolveAdjuster.instance);
+        dissolveAbility.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        this.addAbility(dissolveAbility);
     }
 
     private BronzebeakForagers(final BronzebeakForagers card) {
@@ -127,14 +127,11 @@ class BronzebeakForagerDissolveEffect extends OneShotEffect {
     // Lifegain based on Asmodeus the Archfiend
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && player != null && card != null){
-            if (!player.moveCards(card, Zone.GRAVEYARD, source, game)) return false;
-            controller.gainLife(xValue, game, source);
-            return true;
+            return player.moveCards(card, Zone.GRAVEYARD, source, game);
         }
         return false;
     }
