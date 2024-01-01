@@ -373,7 +373,7 @@
                 <!-- scraping lib to download and parse html/symbols/images/svg -->
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>1.14.3</version>
+                <version>1.17.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
