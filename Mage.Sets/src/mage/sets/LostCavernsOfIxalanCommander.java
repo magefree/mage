@@ -22,6 +22,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Admiral Beckett Brass", 264, Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class));
+        cards.add(new SetCardInfo("Admiral Brass, Unsinkable", 1, Rarity.MYTHIC, mage.cards.a.AdmiralBrassUnsinkable.class));
         cards.add(new SetCardInfo("Aetherize", 142, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
         cards.add(new SetCardInfo("Akroma's Will", 125, Rarity.RARE, mage.cards.a.AkromasWill.class));
         cards.add(new SetCardInfo("Alchemist's Refuge", 318, Rarity.RARE, mage.cards.a.AlchemistsRefuge.class));
