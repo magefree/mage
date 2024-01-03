@@ -11,7 +11,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
@@ -40,12 +39,6 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
      */
     public SacrificeTargetCost(int numToSac, FilterPermanent filter) {
         this(new TargetSacrifice(numToSac, filter));
-    }
-
-    // remove once merge complete
-    @Deprecated
-    public SacrificeTargetCost(TargetControlledPermanent target) {
-        throw new UnsupportedOperationException("Wrong code usage, refactor to TargetSacrifice");
     }
 
     public SacrificeTargetCost(TargetSacrifice target) {
