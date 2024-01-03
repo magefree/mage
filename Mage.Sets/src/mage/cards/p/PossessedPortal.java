@@ -1,27 +1,21 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -101,14 +95,22 @@ class PossessedPortalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            Cost discardCost = new DiscardCardCost();
-            if (player != null && discardCost.canPay(source, source, playerId, game)
-                    && player.chooseUse(Outcome.Discard, "Discard a card? (Otherwise sacrifice a permanent)", source, game)) {
-                discardCost.pay(source, game, source, playerId, true, null);
+            if (player == null) {
+                continue;
             }
-            else {
-                Cost sacrificeCost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT);
-                sacrificeCost.pay(source, game, source, playerId, true, null);
+            if (player.getHand().isEmpty() || !player.chooseUse(
+                    Outcome.Discard, "Discard a card or sacrifice a permanent?",
+                    null, "Discard a card", "Sacrifice a permanent", source, game)
+                    || player.discard(1, false, false, source, game).isEmpty()) {
+                // no discard, so try to sacrifice
+                TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT);
+                if (target.canChoose(player.getId(), source, game)) {
+                    player.choose(Outcome.Sacrifice, target, source, game);
+                    Permanent permanent = game.getPermanent(target.getFirstTarget());
+                    if (permanent != null) {
+                        permanent.sacrifice(source, game);
+                    }
+                }
             }
         }
         return true;
