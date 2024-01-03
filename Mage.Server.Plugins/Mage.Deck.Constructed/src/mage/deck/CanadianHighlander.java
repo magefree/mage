@@ -17,14 +17,14 @@ public class CanadianHighlander extends Constructed {
     private static final Map<String, Integer> pointMap = new HashMap<>();
 
     static {
-        pointMap.put("Ancestral Recall", 7);
-        pointMap.put("Birthing Pod", 1);
+        pointMap.put("Ancestral Recall", 8);
         pointMap.put("Black Lotus", 7);
         pointMap.put("Crop Rotation", 1);
-        pointMap.put("Demonic Tutor", 4);
+        pointMap.put("Demonic Tutor", 3);
         pointMap.put("Dig Through Time", 1);
         pointMap.put("Flash", 5);
-        pointMap.put("Gifts Ungiven", 2);
+        pointMap.put("Forth Eorlingas!", 1);
+        pointMap.put("Gifts Ungiven", 1);
         pointMap.put("Imperial Seal", 1);
         pointMap.put("Intuition", 1);
         pointMap.put("Mana Crypt", 5);
@@ -37,11 +37,11 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Mox Ruby", 3);
         pointMap.put("Mox Sapphire", 3);
         pointMap.put("Mystical Tutor", 1);
-        pointMap.put("Natural Order", 3);
+        pointMap.put("Natural Order", 2);
         pointMap.put("Price of Progress", 1);
         pointMap.put("Sol Ring", 4);
-        pointMap.put("Spellseeker", 3);
-        pointMap.put("Strip Mine", 3);
+        pointMap.put("Spellseeker", 2);
+        pointMap.put("Strip Mine", 2);
         pointMap.put("Survival of the Fittest", 1);
         pointMap.put("Tainted Pact", 1);
         pointMap.put("Thassa's Oracle", 7);
@@ -52,7 +52,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Transmute Artifact", 1);
         pointMap.put("Treasure Cruise", 1);
         pointMap.put("True-Name Nemesis", 1);
-        pointMap.put("Umezawa's Jitte", 2);
+        pointMap.put("Umezawa's Jitte", 1);
         pointMap.put("Underworld Breach", 3);
         pointMap.put("Vampiric Tutor", 2);
         pointMap.put("Wishclaw Talisman", 1);
