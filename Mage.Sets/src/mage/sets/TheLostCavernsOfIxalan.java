@@ -176,7 +176,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Fabrication Foundry", 354, Rarity.RARE, mage.cards.f.FabricationFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Family Reunion", 13, Rarity.COMMON, mage.cards.f.FamilyReunion.class));
         cards.add(new SetCardInfo("Fanatical Offering", 105, Rarity.COMMON, mage.cards.f.FanaticalOffering.class));
-        cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Forest", 401, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 402, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Monument", 272, Rarity.UNCOMMON, mage.cards.f.ForgottenMonument.class));
@@ -232,7 +232,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Intrepid Paleontologist", 381, Rarity.RARE, mage.cards.i.IntrepidPaleontologist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inverted Iceberg", 60, Rarity.COMMON, mage.cards.i.InvertedIceberg.class));
         cards.add(new SetCardInfo("Ironpaw Aspirant", 18, Rarity.COMMON, mage.cards.i.IronpawAspirant.class));
-        cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Island", 395, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 396, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", 188, Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class, NON_FULL_USE_VARIOUS));
@@ -285,7 +285,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mischievous Pup", 25, Rarity.UNCOMMON, mage.cards.m.MischievousPup.class));
         cards.add(new SetCardInfo("Molten Collapse", 234, Rarity.RARE, mage.cards.m.MoltenCollapse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Molten Collapse", 342, Rarity.RARE, mage.cards.m.MoltenCollapse.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 399, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 400, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mycoid Maze", 217, Rarity.UNCOMMON, mage.cards.m.MycoidMaze.class));
@@ -315,7 +315,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Petrify", 30, Rarity.COMMON, mage.cards.p.Petrify.class));
         cards.add(new SetCardInfo("Pirate Hat", 70, Rarity.COMMON, mage.cards.p.PirateHat.class));
         cards.add(new SetCardInfo("Pit of Offerings", 278, Rarity.UNCOMMON, mage.cards.p.PitOfOfferings.class));
-        cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Plains", 393, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 394, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plundering Pirate", 160, Rarity.COMMON, mage.cards.p.PlunderingPirate.class));
@@ -412,7 +412,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Sunken Citadel", 285, Rarity.RARE, mage.cards.s.SunkenCitadel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunken Citadel", 392, Rarity.RARE, mage.cards.s.SunkenCitadel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunshot Militia", 168, Rarity.COMMON, mage.cards.s.SunshotMilitia.class));
-        cards.add(new SetCardInfo("Swamp", 289, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 289, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 397, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 398, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swashbuckler's Whip", 263, Rarity.UNCOMMON, mage.cards.s.SwashbucklersWhip.class));
