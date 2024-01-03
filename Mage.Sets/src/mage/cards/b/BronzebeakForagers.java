@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -44,12 +43,12 @@ public final class BronzebeakForagers extends CardImpl {
         // When Bronzebeak Foragers enters the battlefield, for each opponent, exile up to one target nonland permanent
         // that player controls until Bronzebeak Foragers leaves the battlefield.
         // The next few lines are taken from Grasp of Fate
-        Ability etbability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect()
+        Ability etbAbility = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect()
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );
-        etbability.setTargetAdjuster(BronzebeakForagerExileAdjuster.instance);
-        this.addAbility(etbability);
+        etbAbility.setTargetAdjuster(BronzebeakForagerExileAdjuster.instance);
+        this.addAbility(etbAbility);
 
         // {X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner's graveyard.
         // You gain X life.
@@ -84,7 +83,7 @@ enum BronzebeakForagerExileAdjuster implements TargetAdjuster {
             if (opponent == null) {
                 continue;
             }
-            FilterPermanent filter = new FilterPermanent("nonland permanent from opponent " + opponent.getLogName());
+            FilterPermanent filter = new FilterPermanent("nonland permanent controlled by " + opponent.getLogName());
             filter.add(new ControllerIdPredicate(opponentId));
             filter.add(Predicates.not(CardType.LAND.getPredicate()));
             TargetPermanent target = new TargetPermanent(0, 1, filter, false);
@@ -101,7 +100,7 @@ enum BronzebeakForagerDissolveAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int xValue = ability.getManaCostsToPay().getX();
-        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue);
+        FilterCard filter = new FilterCard("card with mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetCardInExile(filter, CardUtil.getExileZoneId(game, ability)));
     }
@@ -112,7 +111,7 @@ class BronzebeakForagerDissolveEffect extends OneShotEffect {
 
     BronzebeakForagerDissolveEffect() {
         super(Outcome.Benefit);
-        staticText = "put target creature card with mana value X exiled with {this} into its owner's graveyard";
+        staticText = "put target card with mana value X exiled with {this} into its owner's graveyard";
     }
 
     private BronzebeakForagerDissolveEffect(final BronzebeakForagerDissolveEffect effect) {
@@ -124,13 +123,11 @@ class BronzebeakForagerDissolveEffect extends OneShotEffect {
         return new BronzebeakForagerDissolveEffect(this);
     }
 
-    // Lifegain based on Asmodeus the Archfiend
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (controller != null && player != null && card != null){
+        if (player != null && card != null){
             return player.moveCards(card, Zone.GRAVEYARD, source, game);
         }
         return false;

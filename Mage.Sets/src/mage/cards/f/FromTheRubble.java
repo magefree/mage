@@ -1,25 +1,20 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldWithCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +23,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public final class FromTheRubble extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard(
-            "a creature card of the chosen type from your graveyard"
+            "creature card of the chosen type from your graveyard"
     );
 
     static {

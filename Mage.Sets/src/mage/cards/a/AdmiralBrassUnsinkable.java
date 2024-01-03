@@ -27,7 +27,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class AdmiralBrassUnsinkable extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("pirate creature card from your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Pirate creature card from your graveyard");
 
     static {
         filter.add(SubType.PIRATE.getPredicate());
@@ -57,7 +57,7 @@ public final class AdmiralBrassUnsinkable extends CardImpl {
                 true
         );
         ability.addEffect(new SetBasePowerToughnessTargetEffect(4, 4, Duration.WhileOnBattlefield).setText("It has base power and toughness 4/4."));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn. (If a creature with a finality counter on it would die, exile it instead.)"));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn. <i>(If a creature with a finality counter on it would die, exile it instead.)</i>"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
