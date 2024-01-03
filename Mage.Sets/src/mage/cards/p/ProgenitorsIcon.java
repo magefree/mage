@@ -2,7 +2,6 @@ package mage.cards.p;
 
 import java.util.*;
 
-import javafx.util.Pair;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -85,7 +84,9 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
         if (!source.isControlledBy(affectedControllerId)) {
             return false;
         }
-        if (!ProgenitorsIconWatcher.checkPlayer(affectedControllerId, game)) {
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
+
+        if (!ProgenitorsIconWatcher.checkPlayerCast(affectedControllerId, subType, game)) {
             discard();
             return false;
         }
@@ -94,7 +95,6 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
             return false;
         }
 
-        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         return card.getSubtype().contains(subType);
     }
 }
@@ -102,7 +102,7 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
 class ProgenitorsIconWatcher extends Watcher {
 
     // Handles multiple instances of this same card choosing the same or different subtypes for the same player
-    private final ArrayList<Pair<UUID, SubType>> playerSubTypesChosen = new ArrayList<>();
+    private final Map<UUID, ArrayList<SubType>> playerSubTypesChosen = new HashMap<>();
 
     public ProgenitorsIconWatcher() {
         super(WatcherScope.GAME);
@@ -113,28 +113,31 @@ class ProgenitorsIconWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST){
             UUID playerID = event.getPlayerId();
             Spell spell = game.getSpellOrLKIStack(event.getSourceId());
+            ArrayList<SubType> chosenSubTypes = playerSubTypesChosen.get(playerID);
+            // Remove all matching subtypes. If you tap two Progenitor's Icons for flash applying to Human and Goblin
+            // subtypes, then cast a Human Goblin with flash, both instances of Progenitor's Icon abilities get used.
             for (SubType subType : spell.getSubtype()){
-                Pair<UUID, SubType> pair = new Pair<>(playerID, subType);
-                if (playerSubTypesChosen.remove(pair)){
-                    break;
-                }
+                chosenSubTypes.remove(subType);
             }
         }
     }
 
     public static void addPlayer(UUID playerId, SubType subtype, Game game) {
-        game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen.add(
-                new Pair<>(playerId, subtype)
-        );
+        Map<UUID, ArrayList<SubType>> playerSubTypesChosen =
+                game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen;
+        if (!playerSubTypesChosen.containsKey(playerId)){
+            playerSubTypesChosen.put(playerId, new ArrayList<>());
+        }
+        playerSubTypesChosen.get(playerId).add(subtype);
     }
 
-    public static boolean checkPlayer(UUID playerId, Game game) {
-        for (Pair<UUID, SubType> pair : game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen){
-            if (pair.getKey() == playerId){
-                return true;
-            }
+    public static boolean checkPlayerCast(UUID playerId, SubType subtype, Game game) {
+        Map<UUID, ArrayList<SubType>> playerSubTypesChosen =
+                game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen;
+        if (!playerSubTypesChosen.containsKey(playerId)){
+            return false;
         }
-        return false;
+        return playerSubTypesChosen.get(playerId).contains(subtype);
     }
 
     @Override
