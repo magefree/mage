@@ -31,7 +31,7 @@ public final class NotoriousThrong extends CardImpl {
         this.subtype.add(SubType.ROGUE);
 
         // Prowl {5}{U}
-        this.addAbility(new ProwlAbility(this, "{5}{U}"));
+        this.addAbility(new ProwlAbility("{5}{U}"));
 
         // create X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn.
         this.getSpellAbility().addEffect(new NotoriousThrongEffect());

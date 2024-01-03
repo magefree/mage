@@ -4,8 +4,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.ProwlAbility;
 import mage.constants.SubType;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -14,9 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
@@ -45,7 +41,7 @@ public final class HuntingVelociraptor extends CardImpl {
         // Based on Chief Engineer
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilityControlledSpellsEffect(new ProwlAbility(null, "{2}{R}"), filter)
+                new GainAbilityControlledSpellsEffect(new ProwlAbility("{2}{R}"), filter)
         ));
     }
 

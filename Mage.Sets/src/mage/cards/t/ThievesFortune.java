@@ -20,7 +20,7 @@ public final class ThievesFortune extends CardImpl {
         this.subtype.add(SubType.ROGUE);
 
         // Prowl {U}
-        this.addAbility(new ProwlAbility(this, "{U}"));
+        this.addAbility(new ProwlAbility("{U}"));
 
         // Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(4, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
