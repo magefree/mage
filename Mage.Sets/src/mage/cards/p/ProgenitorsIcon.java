@@ -1,9 +1,8 @@
 package mage.cards.p;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
+import javafx.util.Pair;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 /**
@@ -66,7 +66,8 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        ProgenitorsIconWatcher.addPlayer(source.getControllerId(), game);
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
+        ProgenitorsIconWatcher.addPlayer(source.getControllerId(), subType, game);
     }
 
     @Override
@@ -89,7 +90,9 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
             return false;
         }
         Card card = game.getCard(sourceId);
-        if (card == null) return false;
+        if (card == null){
+            return false;
+        }
 
         SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         return card.getSubtype().contains(subType);
@@ -98,7 +101,8 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
 
 class ProgenitorsIconWatcher extends Watcher {
 
-    private final Set<UUID> playerSet = new HashSet<>();
+    // Handles multiple instances of this same card choosing the same or different subtypes for the same player
+    private final ArrayList<Pair<UUID, SubType>> playerSubTypesChosen = new ArrayList<>();
 
     public ProgenitorsIconWatcher() {
         super(WatcherScope.GAME);
@@ -106,22 +110,36 @@ class ProgenitorsIconWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            playerSet.remove(event.getPlayerId());
+        if (event.getType() == GameEvent.EventType.SPELL_CAST){
+            UUID playerID = event.getPlayerId();
+            Spell spell = game.getSpellOrLKIStack(event.getSourceId());
+            for (SubType subType : spell.getSubtype()){
+                Pair<UUID, SubType> pair = new Pair<>(playerID, subType);
+                if (playerSubTypesChosen.remove(pair)){
+                    break;
+                }
+            }
         }
     }
 
-    public static void addPlayer(UUID playerId, Game game) {
-        game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSet.add(playerId);
+    public static void addPlayer(UUID playerId, SubType subtype, Game game) {
+        game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen.add(
+                new Pair<>(playerId, subtype)
+        );
     }
 
     public static boolean checkPlayer(UUID playerId, Game game) {
-        return game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSet.contains(playerId);
+        for (Pair<UUID, SubType> pair : game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen){
+            if (pair.getKey() == playerId){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void reset() {
         super.reset();
-        playerSet.clear();
+        playerSubTypesChosen.clear();
     }
 }
