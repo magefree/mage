@@ -1,6 +1,7 @@
 package mage.util;
 
 import com.google.common.collect.ImmutableList;
+import javafx.util.Pair;
 import mage.*;
 import mage.abilities.*;
 import mage.abilities.condition.Condition;
@@ -1788,6 +1789,8 @@ public final class CardUtil {
         } else if (value instanceof AbstractMap.SimpleImmutableEntry) { //Used by Leonin Arbiter, Vessel Of The All Consuming Wanderer as a generic Pair class
             AbstractMap.SimpleImmutableEntry entryValue = (AbstractMap.SimpleImmutableEntry) value;
             return (T) new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()), deepCopyObject(entryValue.getValue()));
+        } else if (value instanceof Pair) {
+            return (T) deepCopyPair((Pair) value);
         } else {
             throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " during deep copy, must add explicit handling of all Object types");
         }
@@ -1857,6 +1860,14 @@ public final class CardUtil {
             newMap.put((K) deepCopyObject(entry.getKey()), (V) deepCopyObject(entry.getValue()));
         }
         return newMap;
+    }
+
+    private static <K, V> Pair<K, V> deepCopyPair(Pair<K, V> original) {
+        if (original.getClass() != Pair.class) {
+            throw new IllegalStateException("Unhandled Pair type " + original.getClass().getSimpleName() + " in deep copy");
+        }
+        Pair<K, V> newPair = new Pair<>(deepCopyObject(original.getKey()), deepCopyObject(original.getValue()));
+        return newPair;
     }
 
     private static <K extends Enum<K>, V> EnumMap<K, V> deepCopyEnumMap(Map<K, V> original) {
