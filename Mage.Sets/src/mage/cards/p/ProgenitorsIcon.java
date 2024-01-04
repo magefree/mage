@@ -111,9 +111,15 @@ class ProgenitorsIconWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST){
+
             UUID playerID = event.getPlayerId();
             Spell spell = game.getSpellOrLKIStack(event.getSourceId());
             ArrayList<SubType> chosenSubTypes = playerSubTypesChosen.get(playerID);
+
+            if (spell == null || chosenSubTypes == null){
+                return;
+            }
+
             // Remove all matching subtypes. If you tap two Progenitor's Icons for flash applying to Human and Goblin
             // subtypes, then cast a Human Goblin with flash, both instances of Progenitor's Icon abilities get used.
             for (SubType subType : spell.getSubtype()){
