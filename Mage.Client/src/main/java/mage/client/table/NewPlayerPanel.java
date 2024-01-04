@@ -2,12 +2,15 @@ package mage.client.table;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Random;
 import javax.swing.*;
 
 import mage.cards.decks.DeckFileFilter;
 import mage.client.MageFrame;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.ClientDefaultSettings;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -24,6 +27,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         initComponents();
         fcSelectDeck = new JFileChooser();
         fcSelectDeck.setAcceptAllFileFilterUsed(false);
+        fcSelectDeck.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         String deckPath = MageFrame.getPreferences().get("defaultDeckPath", "");
         if (deckPath.isEmpty()) {
@@ -44,16 +48,43 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
-        int ret = fcSelectDeck.showDialog(this, "Select Deck");
+        int ret = fcSelectDeck.showDialog(this, "Select deck or folder (random deck)");
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
-            this.txtPlayerDeck.setText(file.getPath());
             try {
-                MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
+                if (file.isFile()) {
+                    this.txtPlayerDeck.setText(file.getPath());
+                    MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
+                } else if (file.isDirectory()) {
+                    loadRandomDeck(file);
+                }
             } catch (IOException ex) {
+                handleIOException(ex);
             }
         }
         fcSelectDeck.setSelectedFile(null);
+    }
+
+    private void loadRandomDeck(File dir) {
+        Collection<File> files = FileUtils.listFiles(dir, new String[]{"dck"}, true);
+        if (!files.isEmpty()) {
+            File randomFile = files.stream().skip(new Random().nextInt(files.size())).findFirst().orElse(null);
+            if (randomFile != null) {
+                try {
+                    this.txtPlayerDeck.setText(randomFile.getPath());
+                    MageFrame.getPreferences().put("lastDeckFolder", dir.getParentFile().getCanonicalPath());
+                } catch (IOException e) {
+                    handleIOException(e);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Folder does not contain deck files");
+        }
+    }
+
+    private void handleIOException(IOException e) {
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), e.getMessage(), "Invalid path",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     protected void generateDeck() {
@@ -112,7 +143,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
         lblPlayerName.setText("Name:");
 
-        lblPlayerDeck.setText("Deck:");
+        lblPlayerDeck.setText("Path:");
 
         btnPlayerDeck.setText("...");
         btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
