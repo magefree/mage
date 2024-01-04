@@ -102,7 +102,7 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
 class ProgenitorsIconWatcher extends Watcher {
 
     // Handles multiple instances of this same card choosing the same or different subtypes for the same player
-    private final Map<UUID, ArrayList<SubType>> playerSubTypesChosen = new HashMap<>();
+    private final Map<UUID, Set<SubType>> playerSubTypesChosen = new HashMap<>();
 
     public ProgenitorsIconWatcher() {
         super(WatcherScope.GAME);
@@ -113,7 +113,7 @@ class ProgenitorsIconWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST){
 
             Spell spell = game.getSpellOrLKIStack(event.getSourceId());
-            ArrayList<SubType> chosenSubTypes = playerSubTypesChosen.get(event.getPlayerId());
+            Set<SubType> chosenSubTypes = playerSubTypesChosen.get(event.getPlayerId());
 
             if (spell == null || chosenSubTypes == null){
                 return;
@@ -128,19 +128,20 @@ class ProgenitorsIconWatcher extends Watcher {
     }
 
     public static void addPlayer(UUID playerId, SubType subtype, Game game) {
-        Map<UUID, ArrayList<SubType>> playerSubTypesChosen =
+        Map<UUID, Set<SubType>> playerSubTypesChosen =
                 game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen;
         // Add playerId to map linked to empty list if not already there
-        playerSubTypesChosen.computeIfAbsent(playerId, x -> new ArrayList<>());
+        playerSubTypesChosen.computeIfAbsent(playerId, x -> new HashSet<>());
+        // Will not add a subtype twice
         playerSubTypesChosen.get(playerId).add(subtype);
     }
 
     public static boolean checkPlayerCast(UUID playerId, SubType subtype, Game game) {
-        Map<UUID, ArrayList<SubType>> playerSubTypesChosen =
+        Map<UUID, Set<SubType>> playerSubTypesChosen =
                 game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen;
         // If a player has tapped this for its effect,
         // and at least one of those tapped Progenitor's Icons has this subtype selected
-        return playerSubTypesChosen.getOrDefault(playerId, new ArrayList<>()).contains(subtype);
+        return playerSubTypesChosen.getOrDefault(playerId, new HashSet<>()).contains(subtype);
     }
 
     @Override
