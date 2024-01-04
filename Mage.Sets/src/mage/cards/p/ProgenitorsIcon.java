@@ -138,10 +138,9 @@ class ProgenitorsIconWatcher extends Watcher {
     public static boolean checkPlayerCast(UUID playerId, SubType subtype, Game game) {
         Map<UUID, ArrayList<SubType>> playerSubTypesChosen =
                 game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen;
-        if (!playerSubTypesChosen.containsKey(playerId)){
-            return false;
-        }
-        return playerSubTypesChosen.get(playerId).contains(subtype);
+        // If a player has tapped this for its effect,
+        // and at least one of those tapped Progenitor's Icons has this subtype selected
+        return playerSubTypesChosen.getOrDefault(playerId, new ArrayList<>()).contains(subtype);
     }
 
     @Override
