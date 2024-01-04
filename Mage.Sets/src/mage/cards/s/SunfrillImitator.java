@@ -73,15 +73,9 @@ class SunfrillImitatorEffect extends OneShotEffect {
     private static final CopyApplier copyApplier = new CopyApplier() {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-
-            // Get permanent with this ability to fetch its name so we can preserve it after copying another permanent
-            Permanent triggering_permanent = source.getSourcePermanentIfItStillExists(game);
-            if (triggering_permanent == null) return false;
-            blueprint.setName(triggering_permanent.getName());
-
+            blueprint.setName("Sunfrill Imitator");
             // Permanent also keeps this copy ability
             blueprint.getAbilities().add(new SunfrillImitatorAbility());
-
             return true;
         }
     };
