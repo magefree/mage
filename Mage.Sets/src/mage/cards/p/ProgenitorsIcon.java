@@ -125,9 +125,7 @@ class ProgenitorsIconWatcher extends Watcher {
     public static void addPlayer(UUID playerId, SubType subtype, Game game) {
         Map<UUID, ArrayList<SubType>> playerSubTypesChosen =
                 game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen;
-        if (!playerSubTypesChosen.containsKey(playerId)){
-            playerSubTypesChosen.put(playerId, new ArrayList<>());
-        }
+        playerSubTypesChosen.computeIfAbsent(playerId, x -> new ArrayList<>());
         playerSubTypesChosen.get(playerId).add(subtype);
     }
 
