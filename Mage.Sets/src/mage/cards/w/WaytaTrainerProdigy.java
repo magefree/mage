@@ -3,16 +3,28 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.CostAdjuster;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.FightTargetsEffect;
 import mage.constants.*;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -33,8 +45,24 @@ public final class WaytaTrainerProdigy extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {2}{G}, {T}: Target creature you control fights another target creature. This ability costs {2} less to activate if it targets two creatures you control.
+        // Based on Ulvenwald Tracker
+        // Using SimpleActivatedAbility instead of Ability in declaration in order to use appendToRule later
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new FightTargetsEffect(false), new ManaCostsImpl<>("{2}{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.appendToRule(" This ability costs {2} less to activate if it targets two creatures you control.");
+        ability.setCostAdjuster(WaytaTrainerProdigyAdjuster.instance);
+
+        Target controlledTarget = new TargetControlledCreaturePermanent();
+        controlledTarget.setTargetTag(1);
+        ability.addTarget(controlledTarget);
+
+        Target secondTarget = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2);
+        secondTarget.setTargetTag(2);
+        ability.addTarget(secondTarget);
+
+        this.addAbility(ability);
         
-        //  If a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+        // If a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
         // Based on Isshin, Two Heavens as One
         this.addAbility(new SimpleStaticAbility(new WaytaTrainerProdigyEffect()));
     }
@@ -46,6 +74,35 @@ public final class WaytaTrainerProdigy extends CardImpl {
     @Override
     public WaytaTrainerProdigy copy() {
         return new WaytaTrainerProdigy(this);
+    }
+}
+
+// Based on Crown of Gondor and SourceTargetsPermanentCondition
+enum WaytaTrainerProdigyAdjuster implements CostAdjuster {
+    instance;
+
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("a creature you control");
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Target secondTarget = null;
+        for (Target target : ability.getTargets()){
+            if (target.getTargetTag() == 2){
+                secondTarget = target;
+                break;
+            }
+        }
+        if (secondTarget == null){
+            return;
+        }
+        // Having to call getFirstTarget() on a Target object called secondTarget
+        // (because it's the second target of a two-target ability)
+        // seems like an insult, but this is just getting the UUID of that target
+        Permanent permanent = game.getPermanentOrLKIBattlefield(secondTarget.getFirstTarget());
+        if (permanent != null && filter.match(permanent, ability.getControllerId(), ability, game)) {
+            CardUtil.reduceCost(ability, 2);
+        }
     }
 }
 
