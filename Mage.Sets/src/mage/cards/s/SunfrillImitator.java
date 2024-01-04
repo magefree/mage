@@ -83,7 +83,7 @@ class SunfrillImitatorEffect extends OneShotEffect {
     public SunfrillImitatorEffect() {
         super(Outcome.Benefit);
         staticText = "you may have it become a copy of another target Dinosaur you control, " +
-                "except its name is {this} and it has this ability.";
+                "except its name is Sunfrill Imitator and it has this ability.";
     }
 
     private SunfrillImitatorEffect(final SunfrillImitatorEffect effect) {
