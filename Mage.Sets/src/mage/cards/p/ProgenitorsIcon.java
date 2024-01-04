@@ -112,9 +112,8 @@ class ProgenitorsIconWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST){
 
-            UUID playerID = event.getPlayerId();
             Spell spell = game.getSpellOrLKIStack(event.getSourceId());
-            ArrayList<SubType> chosenSubTypes = playerSubTypesChosen.get(playerID);
+            ArrayList<SubType> chosenSubTypes = playerSubTypesChosen.get(event.getPlayerId());
 
             if (spell == null || chosenSubTypes == null){
                 return;
