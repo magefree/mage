@@ -10,9 +10,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class RobotToken extends TokenImpl {
+public final class RobotCantBlockToken extends TokenImpl {
 
-    public RobotToken() {
+    public RobotCantBlockToken() {
         super("Robot Token", "4/4 colorless Robot artifact creature token with \"This creature can't block.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
@@ -25,11 +25,11 @@ public final class RobotToken extends TokenImpl {
         ));
     }
 
-    protected RobotToken(final RobotToken token) {
+    protected RobotCantBlockToken(final RobotCantBlockToken token) {
         super(token);
     }
 
-    public RobotToken copy() {
-        return new RobotToken(this);
+    public RobotCantBlockToken copy() {
+        return new RobotCantBlockToken(this);
     }
 }
