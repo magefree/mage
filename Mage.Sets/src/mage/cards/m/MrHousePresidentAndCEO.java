@@ -4,6 +4,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -14,6 +17,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.RobotToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TreasureToken;
+import mage.players.Player;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 /**
  *
@@ -33,6 +38,9 @@ public final class MrHousePresidentAndCEO extends CardImpl {
         this.addAbility(new MrHousePresidentAndCEOTriggeredAbility());
 
         // {4}, {T}: Roll a six-sided die plus an additional six-sided die for each mana from Treasures spent to activate this ability.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MrHousePresidentAndCEODieRollEffect(), new ManaCostsImpl<>("{4}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
     private MrHousePresidentAndCEO(final MrHousePresidentAndCEO card) {
@@ -49,7 +57,7 @@ public final class MrHousePresidentAndCEO extends CardImpl {
 class MrHousePresidentAndCEOTriggeredAbility extends TriggeredAbilityImpl {
 
     public MrHousePresidentAndCEOTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MrHousePresidentAndCEOEffect(), false);
+        super(Zone.BATTLEFIELD, new MrHousePresidentAndCEOTokenEffect(), false);
     }
 
     private MrHousePresidentAndCEOTriggeredAbility(final MrHousePresidentAndCEOTriggeredAbility ability) {
@@ -85,19 +93,19 @@ class MrHousePresidentAndCEOTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class MrHousePresidentAndCEOEffect extends OneShotEffect {
+class MrHousePresidentAndCEOTokenEffect extends OneShotEffect {
 
-    public MrHousePresidentAndCEOEffect() {
+    public MrHousePresidentAndCEOTokenEffect() {
         super(Outcome.Benefit);
     }
 
-    private MrHousePresidentAndCEOEffect(final MrHousePresidentAndCEOEffect effect) {
+    private MrHousePresidentAndCEOTokenEffect(final MrHousePresidentAndCEOTokenEffect effect) {
         super(effect);
     }
 
     @Override
-    public MrHousePresidentAndCEOEffect copy() {
-        return new MrHousePresidentAndCEOEffect(this);
+    public MrHousePresidentAndCEOTokenEffect copy() {
+        return new MrHousePresidentAndCEOTokenEffect(this);
     }
 
     @Override
@@ -107,13 +115,43 @@ class MrHousePresidentAndCEOEffect extends OneShotEffect {
         }
         int amount = (Integer) getValue("rolled");
 
-        if (amount >= 6){
+        if (amount >= 6) {
             Token treasureToken = new TreasureToken();
             treasureToken.putOntoBattlefield(1, game, source);
         }
-        if (amount >= 4){
+        if (amount >= 4) {
             Token robotToken = new RobotToken();
             robotToken.putOntoBattlefield(1, game, source);
+            return true;
+        }
+        return false;
+    }
+}
+
+// Based on Berg Strider and Ancient Brass Dragon
+class MrHousePresidentAndCEODieRollEffect extends OneShotEffect {
+
+    public MrHousePresidentAndCEODieRollEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "Roll a six-sided die plus an additional six-sided die for each mana from Treasures spent " +
+                "to activate this ability.";
+    }
+
+    private MrHousePresidentAndCEODieRollEffect(final MrHousePresidentAndCEODieRollEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MrHousePresidentAndCEODieRollEffect copy() {
+        return new MrHousePresidentAndCEODieRollEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.rollDice(outcome, source, game, 6,
+                    1 + ManaPaidSourceWatcher.getTreasurePaid(source.getSourceId(), game), 0);
             return true;
         }
         return false;
