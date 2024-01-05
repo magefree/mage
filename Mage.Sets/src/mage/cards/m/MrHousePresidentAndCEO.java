@@ -115,16 +115,15 @@ class MrHousePresidentAndCEOTokenEffect extends OneShotEffect {
         }
         int amount = (Integer) getValue("rolled");
 
+        if (amount >= 4) {
+            Token robotToken = new RobotToken();
+            robotToken.putOntoBattlefield(1, game, source);
+        }
         if (amount >= 6) {
             Token treasureToken = new TreasureToken();
             treasureToken.putOntoBattlefield(1, game, source);
         }
-        if (amount >= 4) {
-            Token robotToken = new RobotToken();
-            robotToken.putOntoBattlefield(1, game, source);
-            return true;
-        }
-        return false;
+        return amount >= 4;
     }
 }
 
