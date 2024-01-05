@@ -80,9 +80,6 @@ public final class WaytaTrainerProdigy extends CardImpl {
 enum WaytaTrainerProdigyAdjuster implements CostAdjuster {
     instance;
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("a creature you control");
-
     @Override
     public void adjustCosts(Ability ability, Game game) {
         Target secondTarget = null;
@@ -99,7 +96,7 @@ enum WaytaTrainerProdigyAdjuster implements CostAdjuster {
         // (because it's the second target of a two-target ability)
         // seems like an insult, but this is just getting the UUID of that target
         Permanent permanent = game.getPermanentOrLKIBattlefield(secondTarget.getFirstTarget());
-        if (permanent != null && filter.match(permanent, ability.getControllerId(), ability, game)) {
+        if (permanent != null && permanent.isControlledBy(ability.getControllerId())) {
             CardUtil.reduceCost(ability, 2);
         }
     }
