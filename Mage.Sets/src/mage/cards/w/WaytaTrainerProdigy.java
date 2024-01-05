@@ -64,6 +64,22 @@ public final class WaytaTrainerProdigy extends CardImpl {
         // If a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
         // Based on Isshin, Two Heavens as One
         this.addAbility(new SimpleStaticAbility(new WaytaTrainerProdigyEffect()));
+
+        // Rulings:
+        
+        // Wayta, Trainer Prodigy's last ability affects only triggered abilities whose trigger conditions refer
+        // specifically to damage being dealt, such as the ability granted by Mephidross Vampire or the last ability
+        // of Wrathful Raptors. It does not affect triggered abilities that would trigger because of the results of
+        // that damage. For example, if you control an Ajani's Pridemate ("Whenever you gain life, put a +1/+1 counter
+        // on Ajani's Pridemate") and you activate Wayta, Trainer Prodigy's second ability targeting a creature you
+        // control with lifelink and another creature you control, the triggered ability of Ajani's Pridemate will
+        // still trigger only once.
+        // (2023-11-10)
+
+        // If you somehow control two copies of Wayta, Trainer Prodigy, a creature you control being dealt damage
+        // causes abilities to trigger three times, not four. A third Wayta, Trainer Prodigy causes abilities to
+        // trigger four times, a fourth causes abilities to trigger five times, and so on.
+        // (2023-11-10)
     }
 
     private WaytaTrainerProdigy(final WaytaTrainerProdigy card) {
