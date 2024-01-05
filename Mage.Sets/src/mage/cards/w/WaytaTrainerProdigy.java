@@ -10,6 +10,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.constants.*;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -46,10 +47,9 @@ public final class WaytaTrainerProdigy extends CardImpl {
 
         // {2}{G}, {T}: Target creature you control fights another target creature. This ability costs {2} less to activate if it targets two creatures you control.
         // Based on Ulvenwald Tracker
-        // Using SimpleActivatedAbility instead of Ability in declaration in order to use appendToRule later
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(new FightTargetsEffect(false), new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new FightTargetsEffect(false), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.appendToRule(" This ability costs {2} less to activate if it targets two creatures you control.");
+        ability.addEffect(new InfoEffect("This ability costs {2} less to activate if it targets two creatures you control."));
         ability.setCostAdjuster(WaytaTrainerProdigyAdjuster.instance);
 
         Target controlledTarget = new TargetControlledCreaturePermanent().setTargetTag(1);
