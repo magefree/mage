@@ -52,12 +52,11 @@ public final class WaytaTrainerProdigy extends CardImpl {
         ability.appendToRule(" This ability costs {2} less to activate if it targets two creatures you control.");
         ability.setCostAdjuster(WaytaTrainerProdigyAdjuster.instance);
 
-        Target controlledTarget = new TargetControlledCreaturePermanent();
-        controlledTarget.setTargetTag(1);
+        Target controlledTarget = new TargetControlledCreaturePermanent().setTargetTag(1);
         ability.addTarget(controlledTarget);
 
-        Target secondTarget = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2);
-        secondTarget.setTargetTag(2);
+        Target secondTarget =
+                new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2);
         ability.addTarget(secondTarget);
 
         this.addAbility(ability);
