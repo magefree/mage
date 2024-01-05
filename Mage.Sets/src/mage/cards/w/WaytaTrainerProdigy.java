@@ -1,6 +1,9 @@
 package mage.cards.w;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.Objects;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,10 +18,9 @@ import mage.constants.*;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
+import mage.game.events.BatchGameEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
@@ -26,6 +28,9 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import static mage.game.events.GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
+import static mage.game.events.GameEvent.EventType.DAMAGED_PERMANENT;
 
 /**
  *
@@ -66,7 +71,7 @@ public final class WaytaTrainerProdigy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new WaytaTrainerProdigyEffect()));
 
         // Rulings:
-        
+
         // Wayta, Trainer Prodigy's last ability affects only triggered abilities whose trigger conditions refer
         // specifically to damage being dealt, such as the ability granted by Mephidross Vampire or the last ability
         // of Wrathful Raptors. It does not affect triggered abilities that would trigger because of the results of
@@ -142,9 +147,12 @@ class WaytaTrainerProdigyEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+
         NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-        Permanent sourcePermanent = game.getPermanent(numberOfTriggersEvent.getSourceId());
-        if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
+
+        // Permanent whose ability is being triggered (and will be retriggered)
+        Permanent triggeredPermanent = game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId());
+        if (triggeredPermanent == null || !triggeredPermanent.isControlledBy(source.getControllerId())) {
             return false;
         }
 
@@ -153,17 +161,25 @@ class WaytaTrainerProdigyEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        switch (sourceEvent.getType()) {
-            case DAMAGED_BATCH_FOR_PERMANENTS:
-            case DAMAGE_PERMANENT:
-            case DAMAGED_PERMANENT:
-            case COMBAT_DAMAGE_STEP:
-            case COMBAT_DAMAGE_STEP_PRE:
-            case COMBAT_DAMAGE_STEP_PRIORITY:
-            case COMBAT_DAMAGE_STEP_POST:
-                return true;
+        if (!(sourceEvent.getType() == DAMAGED_BATCH_FOR_PERMANENTS
+                || sourceEvent.getType() == DAMAGED_PERMANENT)){
+            return false;
         }
-        return false;
+
+        // Get the one or more permanents damaged in this event
+        List<UUID> damagedPermanents = new ArrayList<>();
+        if (sourceEvent instanceof BatchGameEvent) {
+            damagedPermanents.addAll(((BatchGameEvent<?>) sourceEvent).getTargets());
+        } else {
+            damagedPermanents.add(sourceEvent.getTargetId());
+        }
+
+        // If none of them are controlled by you, this ability doesn't apply.
+        return damagedPermanents
+                .stream()
+                .map(game::getPermanentOrLKIBattlefield)
+                .filter(Objects::nonNull)
+                .anyMatch(p -> p.isControlledBy(source.getControllerId()));
     }
 
     @Override
