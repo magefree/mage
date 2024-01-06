@@ -70,18 +70,19 @@ XMageLauncher in `Settings > Java > Server java options`.
 ## Troubleshooting / FAQ
 
 Github issues page contain [popular problems and fixes](https://github.com/magefree/mage/issues?q=is%3Aissue+label%3AFAQ+):
-* [Program freezes on startup (white/blue/black screen)](https://github.com/magefree/mage/issues/4461#issuecomment-361108597);
-* [Can't download images or it stops after some time](https://www.reddit.com/r/XMage/comments/agmcjf/new_xmage_release_with_ravnica_allegiance_rna/); 
-* [MacOS can't open launcher](https://www.reddit.com/r/XMage/comments/kf8l34/updated_java_on_osx_xmage_not_working/ggej8cq/)
-* [MacOS client freezes in GUI (on connect dialog, on new match)](https://github.com/magefree/mage/issues/4920#issuecomment-517944308);
-* [Ugly cards and GUI drawing in games](https://github.com/magefree/mage/issues/4626#issuecomment-374640070);
-* [No texts or small buttons in launcher](https://github.com/magefree/mage/issues/4126);
-* [Can't run client, could not open ...jvm.cfg](https://github.com/magefree/mage/issues/1272#issuecomment-529789018).
-
+* [Any: program freezes on startup (white/blue/black screen)](https://github.com/magefree/mage/issues/4461#issuecomment-361108597);
+* [Any: can't download images or it stops after some time](https://www.reddit.com/r/XMage/comments/agmcjf/new_xmage_release_with_ravnica_allegiance_rna/); 
+* [Any: can't run client, could not open ...jvm.cfg](https://github.com/magefree/mage/issues/1272#issuecomment-529789018);
+* [Any: no texts or small buttons in launcher](https://github.com/magefree/mage/issues/4126);
+* [Windows: ugly cards, buttons or other GUI drawing artifacts](https://github.com/magefree/mage/issues/4626#issuecomment-374640070);
+* [MacOS: can't open launcher](https://www.reddit.com/r/XMage/comments/kf8l34/updated_java_on_osx_xmage_not_working/ggej8cq/)
+* [MacOS: client freezes in GUI (on connect dialog, on new match)](https://github.com/magefree/mage/issues/4920#issuecomment-517944308);
+* [Linux: run on non-standard OS or hardware like Raspberry Pi](https://github.com/magefree/mage/issues/11611#issuecomment-1879385151);
+* [Linux: ugly GUI and drawing artifacts](https://github.com/magefree/mage/issues/11611#issuecomment-1879396921);
 
 ## Performance tweaks
 
-If you have a good GPU, it's very likely you'll be able increase performance by **a lot** through extra Java flags.
+If you have a good GPU, it's very likely you'll be able to increase performance by **a lot** through extra Java flags.
 
 XMage runs on JRE 8, so [this link](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html) should give you the available flags.
 
