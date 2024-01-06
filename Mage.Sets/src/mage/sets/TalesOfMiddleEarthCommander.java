@@ -178,7 +178,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ishkanah, Grafwidow", 516, Rarity.MYTHIC, mage.cards.i.IshkanahGrafwidow.class));
         cards.add(new SetCardInfo("Isolated Chapel", 318, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Karakas", 367, Rarity.MYTHIC, mage.cards.k.Karakas.class));
-        cards.add(new SetCardInfo("Kenrith, the Returned King", 515, Rarity.RARE, mage.cards.k.KenrithTheReturnedKing.class));
+        cards.add(new SetCardInfo("Kenrith, the Returned King", 515, Rarity.MYTHIC, mage.cards.k.KenrithTheReturnedKing.class));
         cards.add(new SetCardInfo("Knollspine Dragon", 224, Rarity.RARE, mage.cards.k.KnollspineDragon.class));
         cards.add(new SetCardInfo("Kor Haven", 368, Rarity.MYTHIC, mage.cards.k.KorHaven.class));
         cards.add(new SetCardInfo("Languish", 202, Rarity.RARE, mage.cards.l.Languish.class));
