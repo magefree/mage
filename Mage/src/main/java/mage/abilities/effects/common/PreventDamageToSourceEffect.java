@@ -39,6 +39,9 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        if (source.getSourcePermanentIfItStillExists(game) == null) {
+            return false;
+        }
         return super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId());
     }
 
