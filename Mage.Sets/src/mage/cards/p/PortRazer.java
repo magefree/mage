@@ -38,7 +38,7 @@ public final class PortRazer extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new UntapAllControllerEffect(
                         StaticFilters.FILTER_CONTROLLED_CREATURES,
-                        "untap all creatures you control"
+                        "untap each creature you control"
                 ), false
         );
         ability.addEffect(new AdditionalCombatPhaseEffect()
