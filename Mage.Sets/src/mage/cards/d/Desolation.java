@@ -12,8 +12,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.watchers.Watcher;
 
@@ -107,7 +105,7 @@ class DesolationWatcher extends Watcher {
             return;
         }
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
-        if (permanent != null) {
+        if (permanent != null && permanent.isLand(game)) {
             tappedForManaThisTurnPlayers.add(permanent.getControllerId());
         }
     }
