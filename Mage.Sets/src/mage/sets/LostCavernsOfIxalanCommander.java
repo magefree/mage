@@ -253,6 +253,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Storm Fleet Negotiator", 78, Rarity.RARE, mage.cards.s.StormFleetNegotiator.class));
         cards.add(new SetCardInfo("Strionic Resonator", 116, Rarity.RARE, mage.cards.s.StrionicResonator.class));
         cards.add(new SetCardInfo("Sulfur Falls", 354, Rarity.RARE, mage.cards.s.SulfurFalls.class));
+        cards.add(new SetCardInfo("Sunfrill Imitator", 94, Rarity.RARE, mage.cards.s.SunfrillImitator.class));
         cards.add(new SetCardInfo("Sunken Hollow", 355, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Surgespanner", 174, Rarity.RARE, mage.cards.s.Surgespanner.class));
         cards.add(new SetCardInfo("Svyelun of Sea and Sky", 175, Rarity.MYTHIC, mage.cards.s.SvyelunOfSeaAndSky.class));
