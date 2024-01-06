@@ -26,7 +26,6 @@ public final class ProgenitorsIcon extends CardImpl {
 
     public ProgenitorsIcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        
 
         // As Progenitor's Icon enters the battlefield, choose a creature type.
         // Based on Circle of Solace
@@ -54,7 +53,7 @@ public final class ProgenitorsIcon extends CardImpl {
 
 class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
 
-    public ProgenitorsIconAsThoughEffect() {
+    ProgenitorsIconAsThoughEffect() {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "The next spell of the chosen type you cast this turn can be cast as though it had flash";
     }
@@ -128,20 +127,23 @@ class ProgenitorsIconWatcher extends Watcher {
     }
 
     public static void addPlayer(UUID playerId, SubType subtype, Game game) {
-        Map<UUID, Set<SubType>> playerSubTypesChosen =
-                game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen;
         // Add playerId to map linked to empty list if not already there
-        playerSubTypesChosen.computeIfAbsent(playerId, x -> new HashSet<>());
         // Will not add a subtype twice
-        playerSubTypesChosen.get(playerId).add(subtype);
+        game.getState()
+                .getWatcher(ProgenitorsIconWatcher.class)
+                .playerSubTypesChosen
+                .computeIfAbsent(playerId, x -> new HashSet<>())
+                .add(subtype);
     }
 
     public static boolean checkPlayerCast(UUID playerId, SubType subtype, Game game) {
-        Map<UUID, Set<SubType>> playerSubTypesChosen =
-                game.getState().getWatcher(ProgenitorsIconWatcher.class).playerSubTypesChosen;
         // If a player has tapped this for its effect,
         // and at least one of those tapped Progenitor's Icons has this subtype selected
-        return playerSubTypesChosen.getOrDefault(playerId, new HashSet<>()).contains(subtype);
+        return game.getState()
+                .getWatcher(ProgenitorsIconWatcher.class)
+                .playerSubTypesChosen
+                .getOrDefault(playerId, Collections.emptySet())
+                .contains(subtype);
     }
 
     @Override
