@@ -303,6 +303,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Warkite Marauder", 179, Rarity.RARE, mage.cards.w.WarkiteMarauder.class));
         cards.add(new SetCardInfo("Wave Goodbye", 79, Rarity.RARE, mage.cards.w.WaveGoodbye.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 317, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
+        cards.add(new SetCardInfo("Wayta, Trainer Prodigy", 7, Rarity.MYTHIC, mage.cards.w.WaytaTrainerProdigy.class));
         cards.add(new SetCardInfo("Wayward Swordtooth", 263, Rarity.RARE, mage.cards.w.WaywardSwordtooth.class));
         cards.add(new SetCardInfo("Wedding Ring", 102, Rarity.MYTHIC, mage.cards.w.WeddingRing.class));
         cards.add(new SetCardInfo("Welcoming Vampire", 140, Rarity.RARE, mage.cards.w.WelcomingVampire.class));
