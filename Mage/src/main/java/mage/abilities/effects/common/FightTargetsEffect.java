@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -47,9 +46,6 @@ public class FightTargetsEffect extends OneShotEffect {
         } else if (source.getTargets().get(0).isLegal(source, game) && source.getTargets().get(1).isLegal(source, game)) {
             target1Id = source.getTargets().get(0).getFirstTarget();
             target2Id = source.getTargets().get(1).getFirstTarget();
-        }
-        if (Objects.equals(target1Id, target2Id)) {
-            return false;
         }
         Permanent creature1 = game.getPermanent(target1Id);
         Permanent creature2 = game.getPermanent(target2Id);
