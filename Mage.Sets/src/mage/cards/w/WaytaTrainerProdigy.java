@@ -29,8 +29,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
-import static mage.game.events.GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
-import static mage.game.events.GameEvent.EventType.DAMAGED_PERMANENT;
 
 /**
  *
@@ -161,8 +159,8 @@ class WaytaTrainerProdigyEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        if (!(sourceEvent.getType() == DAMAGED_BATCH_FOR_PERMANENTS
-                || sourceEvent.getType() == DAMAGED_PERMANENT)){
+        if (!(sourceEvent.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS
+                || sourceEvent.getType() == GameEvent.EventType.DAMAGED_PERMANENT)){
             return false;
         }
 
