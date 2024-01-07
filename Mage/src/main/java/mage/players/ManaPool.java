@@ -6,6 +6,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.TurnPhase;
@@ -138,13 +139,19 @@ public class ManaPool implements Serializable {
         }
 
         for (ManaPoolItem mana : manaItems) {
-            if (filter != null) {
-                if (!filter.match(mana.getSourceObject(), game)) {
-                    // Prevent that cost reduction by convoke is filtered out
-                    if (!(mana.getSourceObject() instanceof Spell)
-                            || ability.getSourceId().equals(mana.getSourceId())) {
-                        continue;
-                    }
+            if (filter != null && !filter.match(mana.getSourceObject(), game)) {
+                // If here, then mana source does not match the filter
+                // However, alternate mana payment abilities such as convoke won't match the filter but are valid
+                // So we need to do some ugly checks to allow them
+                // For convoke, mana apparently comes from a spell without a mana effect, that doesn't match the ability source
+                if (ability.getSourceId().equals(mana.getSourceId())
+                        || !(mana.getSourceObject() instanceof Spell)
+                        || ((Spell) mana.getSourceObject())
+                                .getAbilities(game)
+                                .stream()
+                                .flatMap(a -> a.getAllEffects().stream())
+                                .anyMatch(ManaEffect.class::isInstance)) {
+                    continue; // if any of the above cases, not an alt mana payment ability, thus excluded by filter
                 }
             }
             if (possibleAsThoughPoolManaType == null
