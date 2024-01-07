@@ -33,6 +33,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 104, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arch of Orazca", 319, Rarity.RARE, mage.cards.a.ArchOfOrazca.class));
         cards.add(new SetCardInfo("Archaeomancer's Map", 101, Rarity.RARE, mage.cards.a.ArchaeomancersMap.class));
+        cards.add(new SetCardInfo("Arm-Mounted Anchor", 67, Rarity.RARE, mage.cards.a.ArmMountedAnchor.class));
         cards.add(new SetCardInfo("Atzocan Seer", 265, Rarity.UNCOMMON, mage.cards.a.AtzocanSeer.class));
         cards.add(new SetCardInfo("Austere Command", 126, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Azure Fleet Admiral", 144, Rarity.COMMON, mage.cards.a.AzureFleetAdmiral.class));
