@@ -196,8 +196,7 @@ public class ManaPool implements Serializable {
                     }
                 }
                 if (manaTypeToUse != null && mana.getConditionalMana().apply(ability, game, mana.getSourceId(), costToPay)) {
-                    if (filter == null
-                            || filter.match(mana.getSourceObject(), game)) {
+                    if (filter == null || filter.match(mana.getSourceObject(), game)) {
                         return new ConditionalManaInfo(manaTypeToUse, mana.getSourceObject());
                     }
                 }
@@ -239,16 +238,8 @@ public class ManaPool implements Serializable {
         this.manaBecomesBlack = manaBecomesBlack;
     }
 
-    public boolean isManaBecomesBlack() {
-        return manaBecomesBlack;
-    }
-
     public void setManaBecomesColorless(boolean manaBecomesColorless) {
         this.manaBecomesColorless = manaBecomesColorless;
-    }
-
-    public boolean isManaBecomesColorless() {
-        return manaBecomesColorless;
     }
 
     public void init() {
@@ -393,7 +384,7 @@ public class ManaPool implements Serializable {
         return conditionalMana;
     }
 
-    public boolean ConditionalManaHasManaType(ManaType manaType) {
+    public boolean conditionalManaHasManaType(ManaType manaType) {
         for (ManaPoolItem item : manaItems) {
             if (item.isConditional()) {
                 if (item.getConditionalMana().get(manaType) > 0) {
