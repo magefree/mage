@@ -2093,7 +2093,7 @@
 |Generate|TOK:WOC|Monster|||MonsterRoleToken|
 |Generate|TOK:WOC|Ox|||OxToken|
 |Generate|TOK:WOC|Pegasus|||PegasusToken2|
-// TODO: add Nettling Nuisance pirate token when merged (#11076)
+|Generate|TOK:WOC|Pirate|||NettlingNuisancePirateToken|
 |Generate|TOK:WOC|Royal|||RoyalRoleToken|
 |Generate|TOK:WOC|Saproling|||SaprolingToken|
 |Generate|TOK:WOC|Sorcerer|||SorcererRoleToken|
@@ -2102,3 +2102,22 @@
 
 # PIP
 |Generate|TOK:PIP|Robot|||RobotToken|
+
+# LCI
+|Generate|TOK:LCI|Angel|||AngelVigilanceToken|
+|Generate|TOK:LCI|Bat|||BatToken|
+|Generate|TOK:LCI|Dinosaur|1||DinosaurVanillaToken|
+|Generate|TOK:LCI|Dinosaur|2||Dinosaur31Token|
+|Generate|TOK:LCI|Dinosaur Egg|||DinosaurEggToken|
+|Generate|TOK:LCI|Fungus|||FungusCantBlockToken|
+|Generate|TOK:LCI|Fungus Dinosaur|||FungusDinosaurToken|
+|Generate|TOK:LCI|Gnome|||GnomeToken|
+|Generate|TOK:LCI|Gnome Soldier|||GnomeSoldierStarStarToken|
+|Generate|TOK:LCI|Golem|||GolemWhiteBlueToken|
+|Generate|TOK:LCI|Map|||MapToken|
+|Generate|TOK:LCI|Merfolk|||MerfolkHexproofToken|
+|Generate|TOK:LCI|Skeleton Pirate|||SkeletonPirateToken|
+|Generate|TOK:LCI|Spirit|||Spirit32Token|
+|Generate|TOK:LCI|Treasure|||TreasureToken|
+|Generate|TOK:LCI|Vampire|||IxalanVampireToken|
+|Generate|TOK:LCI|Vampire Demon|||VampireDemonToken|
