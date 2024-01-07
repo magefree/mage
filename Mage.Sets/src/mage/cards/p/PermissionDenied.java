@@ -1,22 +1,22 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.Ability;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.constants.*;
-import mage.target.TargetSpell;
-import mage.constants.Outcome;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.MageObject;
+import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +47,7 @@ public final class PermissionDenied extends CardImpl {
 
 class PermissionDeniedOpponentEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public PermissionDeniedOpponentEffect() {
+    PermissionDeniedOpponentEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Your opponents can't cast noncreature spells this turn.";
     }
