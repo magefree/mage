@@ -59,6 +59,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Canopy Vista", 321, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Captain Lannery Storm", 218, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Captivating Crew", 219, Rarity.RARE, mage.cards.c.CaptivatingCrew.class));
+        cards.add(new SetCardInfo("Carmen, Cruel Skymarcher", 5, Rarity.MYTHIC, mage.cards.c.CarmenCruelSkymarcher.class));
         cards.add(new SetCardInfo("Chalice of the Void", 105, Rarity.MYTHIC, mage.cards.c.ChaliceOfTheVoid.class));
         cards.add(new SetCardInfo("Champion of Dusk", 188, Rarity.RARE, mage.cards.c.ChampionOfDusk.class));
         cards.add(new SetCardInfo("Chandra's Ignition", 220, Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
