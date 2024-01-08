@@ -2067,6 +2067,7 @@ public abstract class GameImpl implements Game {
                     // then add 1 zcc so that it triggers as if the permanent was already on the battlefield
                     // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc
                     // Particularly relevant for Sagas, which always involve both
+                    // Note that this does NOT apply to "As ~ ETB" effects, those still use the stack zcc
                     zcc += 1;
                 }
                 newAbility.setSourceObjectZoneChangeCounter(zcc);
