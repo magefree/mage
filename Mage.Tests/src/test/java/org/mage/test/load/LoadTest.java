@@ -200,7 +200,7 @@ public class LoadTest {
         // playing until game over
         while (!player1.client.isGameOver() && !player2.client.isGameOver()) {
             checkGame = monitor.getTable(tableId);
-            logger.warn(checkGame.get().getTableState());
+            logger.info(checkGame.get().getTableState());
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -236,6 +236,7 @@ public class LoadTest {
         // playing until game over
         gameResult.start();
         boolean startToWatching = false;
+        Date lastActivity = new Date();
         while (true) {
             GameView gameView = monitor.client.getLastGameView();
 
@@ -243,8 +244,8 @@ public class LoadTest {
             TableState state = (checkGame == null ? null : checkGame.getTableState());
 
             if (gameView != null && checkGame != null) {
-                logger.warn(checkGame.getTableName() + ": ---");
-                logger.warn(String.format("%s: turn %d, step %s, state %s",
+                logger.info(checkGame.getTableName() + ": ---");
+                logger.info(String.format("%s: turn %d, step %s, state %s",
                         checkGame.getTableName(),
                         gameView.getTurn(),
                         gameView.getStep().toString(),
@@ -279,6 +280,13 @@ public class LoadTest {
                                     activeInfo
                             ));
                         });
+                logger.info(checkGame.getTableName() + ": ---");
+            }
+
+            // ping to keep active session
+            if ((new Date().getTime() - lastActivity.getTime()) / 1000 > 10) {
+                monitor.session.ping();
+                lastActivity = new Date();
             }
 
             try {
@@ -287,6 +295,9 @@ public class LoadTest {
                 logger.error(e.getMessage(), e);
             }
         }
+
+        // all done, can disconnect now
+        monitor.session.connectStop(false, false);
     }
 
     @Test

@@ -3973,10 +3973,11 @@ public abstract class GameImpl implements Game {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
         StringBuilder sb = new StringBuilder()
                 .append(this.isSimulation() ? "!!!SIMULATION!!! " : "")
-                .append(this.getGameType().toString())
+                .append("; ").append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))
-                .append("; stack: ").append(this.getStack().toString());
+                .append("; stack: ").append(this.getStack().toString())
+                .append(this.getState().isGameOver() ? "; FINISHED: " + this.getWinner() : "");
         return sb.toString();
     }
 }

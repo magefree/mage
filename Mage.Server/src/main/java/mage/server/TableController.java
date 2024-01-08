@@ -59,20 +59,20 @@ public class TableController {
 
     public TableController(ManagerFactory managerFactory, UUID roomId, UUID userId, MatchOptions options) {
         this.managerFactory = managerFactory;
-        timeoutExecutor = managerFactory.threadExecutor().getTimeoutExecutor();
+        this.timeoutExecutor = managerFactory.threadExecutor().getTimeoutExecutor();
         this.userId = userId;
         this.options = options;
-        match = GameFactory.instance.createMatch(options.getGameType(), options);
+        this.match = GameFactory.instance.createMatch(options.getGameType(), options);
         if (userId != null) {
             Optional<User> user = managerFactory.userManager().getUser(userId);
             // TODO: Handle if user == null
-            controllerName = user.map(User::getName).orElse("undefined");
+            this.controllerName = user.map(User::getName).orElse("undefined");
         } else {
-            controllerName = "System";
+            this.controllerName = "System";
         }
-        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
+        this.table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
                 options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), match, options.getBannedUsers(), options.isPlaneChase());
-        chatId = managerFactory.chatManager().createChatSession("Match Table " + table.getId());
+        this.chatId = managerFactory.chatManager().createChatSession("Match Table " + table.getId());
         init();
     }
 

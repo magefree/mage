@@ -245,7 +245,7 @@ public class GameController implements GameCallback {
                 logger.fatal("Send info about player not joined yet:", ex);
             }
         }, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, TimeUnit.SECONDS);
-        checkStart();
+        checkJoinAndStart();
     }
 
     /**
@@ -316,7 +316,7 @@ public class GameController implements GameCallback {
         user.get().addGame(playerId, gameSession);
         logger.debug("Player " + player.getName() + ' ' + playerId + " has " + joinType + " gameId: " + game.getId());
         managerFactory.chatManager().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, game, MessageType.GAME, null);
-        checkStart();
+        checkJoinAndStart();
     }
 
     private synchronized void startGame() {
@@ -326,16 +326,19 @@ public class GameController implements GameCallback {
                 player.updateRange(game);
             }
 
+            // send first info to users
             for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
                 gameSessionPlayer.init();
             }
 
+            // real game start
             GameWorker worker = new GameWorker(game, choosingPlayerId, this);
             gameFuture = gameExecutor.submit(worker);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ignore) {
             }
+
             if (game.getState().getChoosingPlayerId() != null) {
                 // start timer to force player to choose starting player otherwise loosing by being idle
                 setupTimeout(game.getState().getChoosingPlayerId());
@@ -395,7 +398,7 @@ public class GameController implements GameCallback {
                 }
             }
         }
-        checkStart();
+        checkJoinAndStart();
     }
 
     private Optional<User> getUserByPlayerId(UUID playerId) {
@@ -407,14 +410,14 @@ public class GameController implements GameCallback {
         return Optional.empty();
     }
 
-    private void checkStart() {
-        if (allJoined()) {
+    private void checkJoinAndStart() {
+        if (isAllJoined()) {
             joinWaitingExecutor.shutdownNow();
             managerFactory.threadExecutor().getCallExecutor().execute(this::startGame);
         }
     }
 
-    private boolean allJoined() {
+    private boolean isAllJoined() {
         for (Player player : game.getPlayers().values()) {
             if (!player.hasLeft()) {
                 Optional<User> user = getUserByPlayerId(player.getId());
@@ -480,7 +483,7 @@ public class GameController implements GameCallback {
     public void quitMatch(UUID userId) {
         UUID playerId = getPlayerId(userId);
         if (playerId != null) {
-            if (allJoined()) {
+            if (isAllJoined()) {
                 GameSessionPlayer gameSessionPlayer = gameSessions.get(playerId);
                 if (gameSessionPlayer != null) {
                     gameSessionPlayer.quitGame();
@@ -492,7 +495,7 @@ public class GameController implements GameCallback {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.leave();
-                    checkStart(); // => So the game starts and gets an result or multiplayer game starts with active players
+                    checkJoinAndStart(); // => So the game starts and gets an result or multiplayer game starts with active players
                 }
             }
         }
@@ -734,6 +737,7 @@ public class GameController implements GameCallback {
     }
 
     public void endGame(final String message) throws MageException {
+        // send end game message/dialog
         for (final GameSessionPlayer gameSession : getGameSessions()) {
             gameSession.gameOver(message);
             gameSession.removeGame();
@@ -741,6 +745,8 @@ public class GameController implements GameCallback {
         for (final GameSessionWatcher gameWatcher : getGameSessionWatchers()) {
             gameWatcher.gameOver(message);
         }
+
+        // start next game or close finished table
         managerFactory.tableManager().endGame(tableId);
     }
 
@@ -944,7 +950,7 @@ public class GameController implements GameCallback {
     }
 
     @Override
-    public void gameResult(String result) {
+    public void endGameWithResult(String result) {
         try {
             endGame(result);
         } catch (MageException ex) {
