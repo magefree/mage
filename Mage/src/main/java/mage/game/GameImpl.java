@@ -1594,7 +1594,7 @@ public abstract class GameImpl implements Game {
     public void playPriority(UUID activePlayerId, boolean resuming) {
         int priorityErrorsCount = 0;
         infiniteLoopCounter = 0;
-        int rollbackBookmark = 0;
+        int rollbackBookmarkOnPriorityStart = 0;
         clearAllBookmarks();
         try {
             applyEffects();
