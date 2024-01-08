@@ -544,6 +544,7 @@ public interface Ability extends Controllable, Serializable {
     MageObject getSourceObject(Game game);
 
     void setSourceObjectZoneChangeCounter(int zoneChangeCounter);
+    void updateSourceObjectZoneChangeCounter(Game game, boolean force);
 
     int getSourceObjectZoneChangeCounter();
 

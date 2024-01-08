@@ -1171,7 +1171,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // Use ability copy to avoid problems with targets and costs on recast (issue https://github.com/magefree/mage/issues/5189).
         SpellAbility ability = originalAbility.copy();
         ability.setControllerId(getId());
-        ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
+        ability.updateSourceObjectZoneChangeCounter(game, true);
 
         //20091005 - 601.2a
         if (ability.getSourceId() == null) {
@@ -1197,7 +1197,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     spell.setCopy(true, null);
                 }
                 // Update the zcc to the stack
-                ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
+                ability.updateSourceObjectZoneChangeCounter(game, true);
 
                 // ALTERNATIVE COST from dynamic effects
                 // some effects set sourceId to cast without paying mana costs or other costs

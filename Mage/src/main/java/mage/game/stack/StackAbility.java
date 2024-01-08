@@ -595,6 +595,10 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void updateSourceObjectZoneChangeCounter(Game game, boolean force) {
+        ability.updateSourceObjectZoneChangeCounter(game, force);
+    }
+    @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
     }
