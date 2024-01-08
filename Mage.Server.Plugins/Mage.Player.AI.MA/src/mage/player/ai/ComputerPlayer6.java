@@ -450,23 +450,22 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             if (res != null) {
                 return res;
             }
-        } catch (TimeoutException e) {
-            logger.info("simulating - timed out");
+        } catch (TimeoutException | InterruptedException e) {
+            // AI thinks too long
+            logger.info("ai simulating - timed out");
             task.cancel(true);
         } catch (ExecutionException e) {
-            // exception error in simulated game
+            // game error
+            logger.error("AI simulation catch game error: " + e, e);
             task.cancel(true);
             // real games: must catch and log
-            // unit tests: must raise again for test fail
-            logger.error("AI simulation game catch error: " + e.getCause(), e);
+            // unit tests: must raise again for fast fail
             if (this.isTestsMode()) {
-                throw new IllegalStateException("One of the simulated games raise the error: " + e.getCause());
+                throw new IllegalStateException("One of the simulated games raise the error: " + e, e);
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            task.cancel(true);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Throwable e) {
+            // ?
+            logger.error("AI simulation catch unknown error: " + e, e);
             task.cancel(true);
         }
         //TODO: timeout handling

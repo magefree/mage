@@ -778,12 +778,16 @@ public class LoadTest {
         public int getDurationMs() {
             return (int) ((this.timeEnded.getTime() - this.timeStarted.getTime()));
         }
+
+        public int getTotalErrorsCount() {
+            return this.finalGameView.getTotalErrorsCount();
+        }
     }
 
     private static class LoadTestGameResultsList extends HashMap<Integer, LoadTestGameResult> {
 
-        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-15s|%-15s|%-10s|%-20s|%n";
-        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%15s|%15s|%10s|%20s|%n";
+        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-15s|%-15s|%-10s|%-20s|%n";
+        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%15s|%15s|%10s|%20s|%n";
 
         public LoadTestGameResult createGame(int index, String name, long randomSeed) {
             if (this.containsKey(index)) {
@@ -799,6 +803,7 @@ public class LoadTest {
                     "index",
                     "name",
                     "random sid",
+                    "errors",
                     "turn",
                     "player 1",
                     "player 2",
@@ -817,6 +822,7 @@ public class LoadTest {
                     String.valueOf(gameResult.index), //"index",
                     gameResult.name, //"name",
                     String.valueOf(gameResult.randomSeed), // "random sid",
+                    String.valueOf(gameResult.getTotalErrorsCount()), // "errors",
                     String.valueOf(gameResult.getTurn()), //"turn",
                     String.valueOf(gameResult.getLife1()), //"player 1",
                     String.valueOf(gameResult.getLife2()), //"player 2",
@@ -831,6 +837,7 @@ public class LoadTest {
                     "TOTAL/AVG", //"index",
                     String.valueOf(this.size()), //"name",
                     "total, secs: " + String.format("%.3f", (float) this.getTotalDurationMs() / 1000), // "random sid",
+                    String.valueOf(this.getTotalErrorsCount()), // errors
                     String.valueOf(this.getAvgTurn()), // turn
                     String.valueOf(this.getAvgLife1()), // player 1
                     String.valueOf(this.getAvgLife2()), // player 2
@@ -838,6 +845,10 @@ public class LoadTest {
                     String.valueOf(String.format("%.3f", (float) this.getAvgDurationPerTurnMs() / 1000)) // time per turn, sec
             );
             System.out.printf(tableFormatData, data.toArray());
+        }
+
+        private int getTotalErrorsCount() {
+            return this.values().stream().mapToInt(LoadTestGameResult::getTotalErrorsCount).sum();
         }
 
         private int getAvgTurn() {

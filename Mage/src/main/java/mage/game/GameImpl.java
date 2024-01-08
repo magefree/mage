@@ -77,6 +77,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -98,6 +99,8 @@ public abstract class GameImpl implements Game {
     private transient Player losingPlayer; // temporary data, used in AI simulations
     protected boolean simulation = false;
     protected boolean checkPlayableState = false;
+
+    protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
     protected final UUID id;
 
@@ -180,6 +183,7 @@ public abstract class GameImpl implements Game {
         this.checkPlayableState = game.checkPlayableState;
 
         this.id = game.id;
+        this.totalErrorsCount.set(game.totalErrorsCount.get());
 
         this.ready = game.ready;
         //this.tableEventSource = game.tableEventSource; // client-server part, not need on copy/simulations
@@ -1588,7 +1592,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
-        int errorContinueCounter = 0;
+        int priorityErrorsCount = 0;
         infiniteLoopCounter = 0;
         int rollbackBookmark = 0;
         clearAllBookmarks();
@@ -1605,8 +1609,8 @@ public abstract class GameImpl implements Game {
                 Player player;
                 while (!isPaused() && !checkIfGameIsOver()) {
                     try {
-                        if (rollbackBookmark == 0) {
-                            rollbackBookmark = bookmarkState();
+                        if (rollbackBookmarkOnPriorityStart == 0) {
+                            rollbackBookmarkOnPriorityStart = bookmarkState();
                         }
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
@@ -1656,39 +1660,44 @@ public abstract class GameImpl implements Game {
                                 return;
                             }
                         }
-                    } catch (Exception ex) {
-                        logger.fatal("Game exception gameId: " + getId(), ex);
-                        if ((ex instanceof NullPointerException)
-                                && errorContinueCounter == 0 && ex.getStackTrace() != null) {
-                            logger.fatal(ex.getStackTrace());
-                        }
-                        this.fireErrorEvent("Game exception occurred: ", ex);
+                    } catch (Exception e) {
+                        // INNER error - can continue to execute
+                        this.totalErrorsCount.incrementAndGet();
+                        logger.fatal("Game error: " + getId() + " - " + this, e);
+                        this.fireErrorEvent("Game error occurred: ", e);
 
-                        // stack info
-                        String info = this.getStack().stream().map(MageObject::toString).collect(Collectors.joining("\n"));
-                        logger.info(String.format("\nStack before error %d: \n%s\n", this.getStack().size(), info));
+                        // additional info
+                        logger.info("---");
+                        logger.info("Game state on error: " + this);
+                        String info = this.getStack()
+                                .stream()
+                                .map(o -> "* " + o.toString())
+                                .collect(Collectors.joining("\n"));
+                        logger.info(String.format("Stack on error %d: \n%s\n", this.getStack().size(), info));
+                        logger.info("---");
 
                         // too many errors - end game
-                        if (errorContinueCounter > 15) {
-                            throw new MageException("Iterated player priority after game exception too often, game ends! Last error:\n "
-                                    + ex.getMessage());
+                        if (priorityErrorsCount > 15) {
+                            throw new MageException("Too many errors, game will be end. Last error: " + e);
                         }
 
-                        // rollback game to prev state
-                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
-                        rollbackBookmark = 0;
-
+                        // rollback to prev state
+                        GameState restoredState = restoreState(rollbackBookmarkOnPriorityStart, "Game error: " + e);
+                        rollbackBookmarkOnPriorityStart = 0;
                         if (restoredState != null) {
-                            this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, ex.getMessage()));
+                            this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, e));
                         } else {
-                            logger.error("Can't auto-restore to prev state.");
+                            logger.error("Can't auto-restore to prev state");
                         }
 
+                        // count total errors
                         Player activePlayer = this.getPlayer(getActivePlayerId());
                         if (activePlayer != null && !activePlayer.isTestsMode()) {
-                            errorContinueCounter++;
+                            // real game - try to continue
+                            priorityErrorsCount++;
                             continue;
                         } else {
+                            // tests - try to fail fast
                             throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
                     } finally {
@@ -1697,14 +1706,15 @@ public abstract class GameImpl implements Game {
                     state.getPlayerList().getNext();
                 }
             }
-        } catch (Exception ex) {
-            logger.fatal("Game exception " + ex.getMessage(), ex);
-            this.fireErrorEvent("Game exception occurred: ", ex);
+        } catch (Exception e) {
+            // OUTER error - game must end (too many errors also come here)
+            this.totalErrorsCount.incrementAndGet();
+            logger.fatal("Game end on critical error: " + e, e);
+            this.fireErrorEvent("Game end on critical error: " + e, e);
             this.end();
 
-            // don't catch game errors in unit tests, so test framework can process it (example: errors in AI simulations)
-            if (ex.getMessage() != null && ex.getMessage().equals(UNIT_TESTS_ERROR_TEXT)) {
-                //this.getContinuousEffects().traceContinuousEffects(this);
+            // re-raise error in unit tests, so framework can catch it (example: errors in AI simulations)
+            if (UNIT_TESTS_ERROR_TEXT.equals(e.getMessage())) {
                 throw new IllegalStateException(UNIT_TESTS_ERROR_TEXT);
             }
         } finally {
@@ -1714,7 +1724,6 @@ public abstract class GameImpl implements Game {
         }
     }
 
-    //resolve top StackObject
     protected void resolve() {
         StackObject top = null;
         try {
@@ -3499,6 +3508,11 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public int getTotalErrorsCount() {
+        return this.totalErrorsCount.get();
+    }
+
+    @Override
     public void cheat(UUID ownerId, Map<Zone, String> commands) {
         if (commands != null) {
             Player player = getPlayer(ownerId);
@@ -3519,15 +3533,9 @@ public abstract class GameImpl implements Game {
                             if (command.getValue().contains("life:")) {
                                 String[] s = command.getValue().split(":");
                                 if (s.length == 2) {
-                                    try {
-                                        int amount = Integer.parseInt(s[1]);
-                                        player.setLife(amount, this, null);
-                                        logger.debug("Setting player's life: ");
-                                    } catch (NumberFormatException e) {
-                                        logger.fatal("error setting life", e);
-                                    }
+                                    int amount = Integer.parseInt(s[1]);
+                                    player.setLife(amount, this, null);
                                 }
-
                             }
                             break;
                     }
@@ -3973,7 +3981,7 @@ public abstract class GameImpl implements Game {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
         StringBuilder sb = new StringBuilder()
                 .append(this.isSimulation() ? "!!!SIMULATION!!! " : "")
-                .append("; ").append(this.getGameType().toString())
+                .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))
                 .append("; stack: ").append(this.getStack().toString())
