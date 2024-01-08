@@ -2063,6 +2063,10 @@ public abstract class GameImpl implements Game {
             if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
                 int zcc = getState().getZoneChangeCounter(ability.getSourceId());
                 if (getPermanentEntering(ability.getSourceId()) != null){
+                    // If the triggered ability triggered while the permanent is entering the battlefield
+                    // then add 1 zcc so that it triggers as if the permanent was already on the battlefield
+                    // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc
+                    // Particularly relevant for Sagas, which always involve both
                     zcc += 1;
                 }
                 newAbility.setSourceObjectZoneChangeCounter(zcc);
