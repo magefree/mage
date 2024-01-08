@@ -76,7 +76,6 @@ public enum SubType {
     ARCHON("Archon", SubTypeSet.CreatureType),
     ARTIFICER("Artificer", SubTypeSet.CreatureType),
     ARMY("Army", SubTypeSet.CreatureType),
-    ARTIFICIER("Artificier", SubTypeSet.CreatureType, true),
     ASSASSIN("Assassin", SubTypeSet.CreatureType),
     ASSEMBLY_WORKER("Assembly-Worker", SubTypeSet.CreatureType),
     ASTARTES("Astartes", SubTypeSet.CreatureType),
