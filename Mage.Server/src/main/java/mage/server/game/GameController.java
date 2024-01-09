@@ -481,13 +481,19 @@ public class GameController implements GameCallback {
         });
     }
 
-    public void quitMatch(UUID userId) {
+    public void quitMatch(UUID userId, boolean endMatchIfOnlyComputers) {
         UUID playerId = getPlayerId(userId);
         if (playerId != null) {
             if (isAllJoined()) {
-                GameSessionPlayer gameSessionPlayer = gameSessions.get(playerId);
-                if (gameSessionPlayer != null) {
-                    gameSessionPlayer.quitGame();
+                if (endMatchIfOnlyComputers) {
+                    if (game.drawIfOnlyComputerOpponents(playerId, game.getState().getPlayers().values())) {
+                        managerFactory.tableManager().removeTable(tableId);
+                    }
+                } else {
+                    GameSessionPlayer gameSessionPlayer = gameSessions.get(playerId);
+                    if (gameSessionPlayer != null) {
+                        gameSessionPlayer.quitGame();
+                    }
                 }
             } else {
                 // The player did never join the game but the game controller was started because the player was still connected as the
@@ -571,6 +577,9 @@ public class GameController implements GameCallback {
             break;
             case CONCEDE:
                 game.concede(getPlayerId(userId));
+                break;
+            case DRAW_GAME:
+                game.drawGame(getPlayerId(userId));
                 break;
             case MANA_AUTO_PAYMENT_OFF:
                 game.setManaPaymentMode(getPlayerId(userId), false);

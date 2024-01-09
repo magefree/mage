@@ -1354,10 +1354,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean quitMatch(UUID gameId) {
+    public boolean quitMatch(UUID gameId, boolean endMatchIfOnlyComputers) {
         try {
             if (isConnected()) {
-                server.matchQuit(gameId, sessionId);
+                server.matchQuit(gameId, sessionId, endMatchIfOnlyComputers);
                 return true;
             }
         } catch (MageException ex) {

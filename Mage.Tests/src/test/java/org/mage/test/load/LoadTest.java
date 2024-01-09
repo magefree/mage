@@ -458,6 +458,31 @@ public class LoadTest {
 
     @Test
     @Ignore
+    public void test_GameThreadWithDrawGame() {
+        // simple game thread with draw game
+
+        LoadGame game = new LoadGame(
+                "game",
+                "u",
+                loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
+        );
+        game.gameStart();
+
+        try {
+            Thread.sleep(3000);
+        } catch (Throwable e) {
+            //
+        }
+        game.drawGame(1);
+        game.gameWaitToStop();
+        Assert.assertEquals("finished", game.gameResult);
+        Assert.assertEquals("draw", game.player1.lastGameResult);
+        Assert.assertEquals("draw", game.player2.lastGameResult);
+    }
+
+    @Test
+    @Ignore
     public void test_MultipleGames() {
         // for load testing only (example: memory usage, max games limit, network usage)
         // play multiple EMPTY games with SERVER side only (without AI),
@@ -656,6 +681,10 @@ public class LoadTest {
         public void concede() {
             this.client.setConcede(true);
         }
+
+        public void drawGame() {
+            this.client.setDrawGame(true);
+        }
     }
 
     private class LoadGame {
@@ -753,6 +782,17 @@ public class LoadTest {
                     break;
                 case 2:
                     this.player2.concede();
+                    break;
+            }
+        }
+
+        public void drawGame(int playerNumber) {
+            switch (playerNumber) {
+                case 1:
+                    this.player1.drawGame();
+                    break;
+                case 2:
+                    this.player2.drawGame();
                     break;
             }
         }

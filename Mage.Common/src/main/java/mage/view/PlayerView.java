@@ -35,6 +35,7 @@ public class PlayerView implements Serializable {
     private final boolean isActive;
     private final boolean hasPriority;
     private final boolean timerActive;
+    private final boolean hasLost;
     private final boolean hasLeft;
     private final ManaPoolView manaPool;
     private final CardsView graveyard = new CardsView();
@@ -80,6 +81,7 @@ public class PlayerView implements Serializable {
                 || (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()))
                 || player.getId().equals(game.getState().getChoosingPlayerId());
 
+        this.hasLost = player.hasLost();
         this.hasLeft = player.hasLeft();
         for (Card card : player.getGraveyard().getCards(game)) {
             graveyard.put(card.getId(), new CardView(card, game, false));
@@ -243,6 +245,10 @@ public class PlayerView implements Serializable {
 
     public boolean isActive() {
         return this.isActive;
+    }
+
+    public boolean hasLost() {
+        return this.hasLost;
     }
 
     public boolean hasLeft() {

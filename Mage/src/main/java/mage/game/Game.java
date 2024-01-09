@@ -53,6 +53,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     int getNumPlayers();
 
+    boolean drawIfOnlyComputerOpponents(UUID playerId,  Collection<Player> players);
+
     int getStartingLife();
 
     RangeOfInfluence getRangeOfInfluence();
@@ -405,6 +407,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void idleTimeout(UUID playerId);
 
     void concede(UUID playerId);
+
+    void drawGame(UUID playerId);
 
     void setConcedingPlayer(UUID playerId);
 

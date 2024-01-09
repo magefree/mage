@@ -91,6 +91,7 @@ import java.util.stream.Collectors;
  */
 public abstract class GameImpl implements Game {
 
+    private static boolean shouldDraw = false;
     private static final int ROLLBACK_TURNS_MAX = 4;
     private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
     private static final Logger logger = Logger.getLogger(GameImpl.class);
@@ -1408,7 +1409,7 @@ public abstract class GameImpl implements Game {
                 winnerIdFound = player.getId();
                 break;
             }
-            if (!player.hasLost() && !player.hasLeft()) {
+            if (!player.hasLost() && !player.hasLeft() && !shouldDraw) {
                 logger.debug(player.getName() + " has not lost so they won gameId: " + this.getId());
                 player.won(this);
                 winnerIdFound = player.getId();
@@ -1539,6 +1540,19 @@ public abstract class GameImpl implements Game {
             logger.debug("Player " + player.getName() + " concedes game " + this.getId());
             fireInformEvent(player.getLogName() + " has conceded.");
             player.concede(this);
+        }
+    }
+
+    @Override
+    public synchronized void drawGame(UUID playerId) {
+        if (drawIfOnlyComputerOpponents(playerId, state.getPlayers().values())) {
+            Player player = state.getPlayer(playerId);
+            if (player != null) {
+                String playerDrawsGame = "Player " + player.getName() + " draws the game " + playerId;
+                logger.debug(playerDrawsGame);
+                fireInformEvent(playerDrawsGame);
+                end();
+            }
         }
     }
 
@@ -3744,6 +3758,20 @@ public abstract class GameImpl implements Game {
     @Override
     public void setStartingPlayerId(UUID startingPlayerId) {
         this.startingPlayerId = startingPlayerId;
+    }
+
+    @Override
+    public boolean drawIfOnlyComputerOpponents(UUID playerId, Collection<Player> players) {
+        for (Player remainingPlayer : players) {
+            if (remainingPlayer.isHuman() && !remainingPlayer.hasLost() && !remainingPlayer.getId().equals(playerId)) {
+                String humanPlayer = "Cannot end game since human opponents remain.";
+                logger.info(humanPlayer);
+                fireInformEvent(humanPlayer);
+                return false;
+            }
+        }
+        shouldDraw = true;
+        return true;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package mage.server.game;
 
-import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.Game;
@@ -113,10 +112,10 @@ public class GameManagerImpl implements GameManager {
     }
 
     @Override
-    public void quitMatch(UUID gameId, UUID userId) {
+    public void quitMatch(UUID gameId, UUID userId, boolean endMatchIfOnlyComputers) {
         GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
-            gameController.quitMatch(userId);
+            gameController.quitMatch(userId, endMatchIfOnlyComputers);
         }
     }
 

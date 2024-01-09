@@ -25,6 +25,7 @@ public class LoadCallbackClient implements CallbackClient {
     private boolean gameOver;
     private String gameResult = "unknown";
     private boolean needToConcede = false; // will concede on first priority
+    private boolean needToDrawGame = false; // will draw game on first priority
     private boolean joinGameChat = false; // process CHATMESSAGE
 
     private volatile int controlCount;
@@ -144,6 +145,14 @@ public class LoadCallbackClient implements CallbackClient {
                     return;
                 }
 
+                // draw game
+                if (needToDrawGame) {
+                    log.info(getLogStartInfo() + "draw game");
+                    needToDrawGame = false;
+                    session.sendPlayerAction(PlayerAction.DRAW_GAME, gameId, null);
+                    return;
+                }
+
                 // end priority step
                 session.sendPlayerBoolean(gameId, false);
                 return;
@@ -237,6 +246,10 @@ public class LoadCallbackClient implements CallbackClient {
 
     public void setConcede(boolean needToConcede) {
         this.needToConcede = needToConcede;
+    }
+
+    public void setDrawGame(boolean needToDrawGame) {
+        this.needToDrawGame = needToDrawGame;
     }
 
     public String getLastGameResult() {

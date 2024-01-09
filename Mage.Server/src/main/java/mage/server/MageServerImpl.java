@@ -758,14 +758,14 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void matchQuit(final UUID gameId, final String sessionId) throws MageException {
+    public void matchQuit(final UUID gameId, final String sessionId, boolean endMatchIfOnlyComputers) throws MageException {
         execute("quitMatch", sessionId, () -> {
             try {
                 callExecutor.execute(
                         () -> {
                             managerFactory.sessionManager().getSession(sessionId).ifPresent(session -> {
                                 UUID userId = session.getUserId();
-                                managerFactory.gameManager().quitMatch(gameId, userId);
+                                managerFactory.gameManager().quitMatch(gameId, userId, endMatchIfOnlyComputers);
                             });
                         }
                 );

@@ -480,7 +480,7 @@ public class User {
         logger.trace("REMOVE " + userName + " Game sessions: " + gameSessions.size());
         for (GameSessionPlayer gameSessionPlayer : gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId());
-            managerFactory.gameManager().quitMatch(gameSessionPlayer.getGameId(), userId);
+            managerFactory.gameManager().quitMatch(gameSessionPlayer.getGameId(), userId, false);
             gameSessionPlayer.quitGame();
         }
         gameSessions.clear();

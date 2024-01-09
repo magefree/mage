@@ -116,8 +116,8 @@ public final class SessionHandler {
         session.quitDraft(tournamentId);
     }
 
-    public static void quitMatch(UUID gameId) {
-        session.quitMatch(gameId);
+    public static void quitMatch(UUID gameId, boolean endMatchIfOnlyComputers) {
+        session.quitMatch(gameId, endMatchIfOnlyComputers);
     }
 
     public static void stopWatching(UUID gameId) {
