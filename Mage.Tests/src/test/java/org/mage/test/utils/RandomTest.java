@@ -125,7 +125,7 @@ public class RandomTest {
         for (int x = 0; x < weight; x++) {
             for (int y = 0; y < height; y++) {
                 // roll planar dice
-                PlanarDieRollResult res = player.rollPlanarDie(Outcome.Neutral, null, game);
+                PlanarDieRollResult res = player.rollPlanarDieResult(Outcome.Neutral, null, game);
                 image.setRGB(x, y, new Color(
                         res.equals(PlanarDieRollResult.CHAOS_ROLL) ? 255 : 0,
                         res.equals(PlanarDieRollResult.PLANAR_ROLL) ? 255 : 0,

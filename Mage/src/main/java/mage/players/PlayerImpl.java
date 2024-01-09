@@ -3284,7 +3284,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * or BlankRoll
      */
     @Override
-    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int chaosSidesAmount, int planarSidesAmount) {
+    public PlanarDieRollResult rollPlanarDieResult(Outcome outcome, Ability source, Game game, int chaosSidesAmount, int planarSidesAmount) {
         return rollDiceInner(outcome, source, game, RollDieType.PLANAR, GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES, chaosSidesAmount, planarSidesAmount, 1, 0)
                 .stream()
                 .map(o -> (PlanarDieRollResult) o)

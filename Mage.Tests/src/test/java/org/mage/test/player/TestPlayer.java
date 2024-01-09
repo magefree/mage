@@ -4447,8 +4447,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
-        return computerPlayer.rollPlanarDie(outcome, source, game, numberChaosSides, numberPlanarSides);
+    public PlanarDieRollResult rollPlanarDieResult(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
+        return computerPlayer.rollPlanarDieResult(outcome, source, game, numberChaosSides, numberPlanarSides);
     }
 
     @Override

@@ -58,7 +58,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source);
         if (controller != null && mageObject != null) {
-            PlanarDieRollResult planarRoll = controller.rollPlanarDie(outcome, source, game);
+            PlanarDieRollResult planarRoll = controller.rollPlanarDieResult(outcome, source, game);
             if (planarRoll == PlanarDieRollResult.CHAOS_ROLL && chaosEffects != null && chaosTargets != null) {
                 for (int i = 0; i < chaosTargets.size(); i++) {
                     Target target = chaosTargets.get(i);

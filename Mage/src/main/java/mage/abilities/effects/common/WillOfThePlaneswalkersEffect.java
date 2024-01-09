@@ -6,6 +6,7 @@ import mage.choices.TwoChoiceVote;
 import mage.constants.AbilityWord;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  * @author TheElk801
@@ -37,9 +38,15 @@ public class WillOfThePlaneswalkersEffect extends OneShotEffect {
         int chaosCount = vote.getVoteCount(false);
         // TODO: Implement when planes have been refactored
         if (planeswalkCount > chaosCount) {
-            // planeswalk to next plane
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.ROLLED_PLANESWALK,
+                    source.getControllerId(), source, source.getControllerId()
+            ));
         } else {
-            // chaos ensues
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.CHAOS_ENSUES,
+                    source.getControllerId(), source, source.getControllerId()
+            ));
         }
         return true;
     }

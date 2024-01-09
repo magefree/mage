@@ -14,6 +14,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -147,8 +149,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         if (approvingObjects.isEmpty()) {
             return ActivationStatus.withoutApprovingObject(true);
-        }
-        else {
+        } else {
             return new ActivationStatus(approvingObjects);
         }
     }
@@ -247,6 +248,14 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             return null;
         }
         return new ActivationInfo(turnNum, activationCount, totalActivations);
+    }
+
+    public int getActivatedThisTurnCount(Game game) {
+        return Optional
+                .ofNullable(getActivationInfo(game))
+                .filter(Objects::nonNull)
+                .map(a -> a.activationCounter)
+                .orElse(0);
     }
 
     protected void setActivationInfo(ActivationInfo activationInfo, Game game) {

@@ -4,10 +4,7 @@ import mage.MageException;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
-import mage.abilities.common.AttachableToRestrictedAbility;
-import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
-import mage.abilities.common.SagaAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.*;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -1329,6 +1326,9 @@ public abstract class GameImpl implements Game {
             plane.setControllerId(startingPlayerId);
             addPlane(plane, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
+            for (UUID playerId : state.getPlayerList()) {
+                state.getSpecialActions().add(new RollPlanarDieSpecialAction(playerId));
+            }
         }
 
         if (!gameOptions.perPlayerEmblemCards.isEmpty()) {
