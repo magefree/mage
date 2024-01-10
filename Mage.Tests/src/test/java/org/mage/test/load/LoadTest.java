@@ -24,6 +24,7 @@ import org.mage.test.utils.DeckTestUtils;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -47,7 +48,9 @@ public class LoadTest {
     private static final Boolean TEST_SHOW_GAME_LOGS_AS_HTML = false; // html is original format with full data, but can be too bloated
     private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
     private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
-    private static final String TEST_AI_RANDOM_DECK_SETS = "NEO"; // set for random generated decks (empty for all sets usage, PELP for lands only - communication test)
+    private static final String TEST_AI_RANDOM_DECK_SETS = "LCI,LCC,WHO"; // set for random generated decks (empty for all sets usage, PELP for lands only - communication test)
+    private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME = "GR";  // colors list for deck generation, empty for all colors
+    private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME = "WUBRG";
     private static final String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
     private static final String TEST_AI_CUSTOM_DECK_PATH_2 = ""; // custom deck file instead random for player 2 (empty for random)
 
@@ -164,7 +167,7 @@ public class LoadTest {
         UUID tableId = game.getTableId();
         Assert.assertEquals(player1.userName, game.getControllerName());
 
-        DeckCardLists deckList = loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS);
+        DeckCardLists deckList = loadGameDeck(1, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS);
         Optional<TableView> checkGame;
 
         /*
@@ -209,7 +212,7 @@ public class LoadTest {
         }
     }
 
-    public void playTwoAIGame(String gameName, String deckColors, String deckAllowedSets, LoadTestGameResult gameResult) {
+    public void playTwoAIGame(String gameName, long randomSeed, String deckColors, String deckAllowedSets, LoadTestGameResult gameResult) {
         Assert.assertFalse("need deck colors", deckColors.isEmpty());
         Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
 
@@ -223,6 +226,7 @@ public class LoadTest {
         UUID tableId = game.getTableId();
 
         // deck load
+        RandomUtil.setSeed(randomSeed);
         DeckCardLists deckList1 = loadGameDeck(1, deckColors, deckAllowedSets.equals("PELP"), deckAllowedSets);
         DeckCardLists deckList2 = loadGameDeck(2, deckColors, deckAllowedSets.equals("PELP"), deckAllowedSets);
 
@@ -304,8 +308,9 @@ public class LoadTest {
     @Ignore
     public void test_TwoAIPlayGame_One() {
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
-        LoadTestGameResult gameResult = gameResults.createGame(0, "test game", 0);
-        playTwoAIGame("Single AI game", "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
+        long randomSeed = RandomUtil.nextInt();
+        LoadTestGameResult gameResult = gameResults.createGame(0, "test game", randomSeed);
+        playTwoAIGame("Single AI game", randomSeed, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
 
         printGameResults(gameResults);
     }
@@ -313,10 +318,18 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_TwoAIPlayGame_Multiple() {
-        // play multiple games with CLIENT side code (catch every GameView changes from the server)
+        // play multiple AI games with CLIENT side code (catch every GameView changes from the server)
 
         int singleGameSID = 0; // set sid for same deck games, set 0 for random decks
-        int gamesAmount = 5; // games per run
+        int gamesAmount = 10; // games per run
+        boolean isRunParallel = true; // can generate too much logs in test run, so search server logs for possible errors
+
+        ExecutorService executerService;
+        if (isRunParallel) {
+            executerService = Executors.newFixedThreadPool(gamesAmount);
+        } else {
+            executerService = Executors.newSingleThreadExecutor();
+        }
 
         // save random seeds for repeated results (in decks generating)
         List<Integer> seedsList = new ArrayList<>();
@@ -331,13 +344,31 @@ public class LoadTest {
         }
 
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
-        for (int i = 0; i < seedsList.size(); i++) {
-            long randomSeed = seedsList.get(i);
-            logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
-            RandomUtil.setSeed(randomSeed);
-            String gameName = "AI game #" + (i + 1);
-            LoadTestGameResult gameResult = gameResults.createGame(i + 1, gameName, randomSeed);
-            playTwoAIGame(gameName, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
+        try {
+            for (int i = 0; i < seedsList.size(); i++) {
+                int gameIndex = i;
+                long randomSeed = seedsList.get(i);
+                logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
+
+                Future gameTask = executerService.submit(() -> {
+                    String gameName = "AI game #" + (gameIndex + 1);
+                    LoadTestGameResult gameResult = gameResults.createGame(gameIndex + 1, gameName, randomSeed);
+                    playTwoAIGame(gameName, randomSeed, TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME, TEST_AI_RANDOM_DECK_SETS, gameResult);
+                });
+
+                if (!isRunParallel) {
+                    // run one by one
+                    gameTask.get();
+                }
+            }
+            if (isRunParallel) {
+                // run parallel
+                executerService.shutdown();
+                Assert.assertTrue(executerService.awaitTermination(1, TimeUnit.HOURS));
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            logger.error(e, e);
+            Assert.fail("Game stops too early: " + e);
         }
 
         printGameResults(gameResults);
@@ -351,8 +382,8 @@ public class LoadTest {
         LoadGame game = new LoadGame(
                 "game",
                 "u",
-                loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
-                loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
+                loadGameDeck(1, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS)
         );
         game.gameStart();
 
@@ -375,8 +406,8 @@ public class LoadTest {
         LoadGame game = new LoadGame(
                 "game",
                 "u",
-                loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
-                loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
+                loadGameDeck(1, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS)
         );
         game.gameStart();
         game.gameEnd(true); // abort -- close client thread
@@ -391,8 +422,8 @@ public class LoadTest {
         LoadGame game = new LoadGame(
                 "game",
                 "u",
-                loadGameDeck(1, "GR", false, TEST_AI_RANDOM_DECK_SETS),
-                loadGameDeck(2, "GR", false, TEST_AI_RANDOM_DECK_SETS)
+                loadGameDeck(1, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, false, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, false, TEST_AI_RANDOM_DECK_SETS)
         );
 
         game.gameStart();
@@ -408,8 +439,8 @@ public class LoadTest {
         LoadGame game = new LoadGame(
                 "game",
                 "u",
-                loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
-                loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
+                loadGameDeck(1, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS)
         );
         game.gameStart();
 
@@ -428,8 +459,9 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_MultipleGames() {
-        // play multiple games with SERVER side only,
-        // all players on the server side, you don't get any GameView changes here
+        // for load testing only (example: memory usage, max games limit, network usage)
+        // play multiple EMPTY games with SERVER side only (without AI),
+        // all players on the server side, you don't get any GameView updates here
 
         final int MAX_GAMES = 10; // games to run
         final boolean START_GAMES_AT_ONCE = true; // set true to run ALL games parallel (e.g. test max parallel limit)
@@ -443,8 +475,8 @@ public class LoadTest {
             LoadGame game = new LoadGame(
                     "game" + i,
                     "u" + i,
-                    loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
-                    loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
+                    loadGameDeck(1, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS),
+                    loadGameDeck(2, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS)
             );
             gamesList.add(game);
 
@@ -638,8 +670,8 @@ public class LoadTest {
 
         public LoadGame(String gameName, String playerPrefix) {
             this(gameName, playerPrefix,
-                    loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
-                    loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
+                    loadGameDeck(1, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS),
+                    loadGameDeck(2, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS)
             );
         }
 
