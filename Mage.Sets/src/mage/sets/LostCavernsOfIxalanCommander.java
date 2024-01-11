@@ -76,6 +76,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 325, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 301, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Commit // Memory", 147, Rarity.RARE, mage.cards.c.CommitMemory.class));
+        cards.add(new SetCardInfo("Contest of Claws", 12, Rarity.RARE, mage.cards.c.ContestOfClaws.class));
         cards.add(new SetCardInfo("Coralhelm Commander", 148, Rarity.RARE, mage.cards.c.CoralhelmCommander.class));
         cards.add(new SetCardInfo("Cordial Vampire", 189, Rarity.RARE, mage.cards.c.CordialVampire.class));
         cards.add(new SetCardInfo("Corsair Captain", 149, Rarity.RARE, mage.cards.c.CorsairCaptain.class));
