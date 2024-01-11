@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.keyword.DiscoverEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -11,6 +12,7 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -44,12 +46,13 @@ public final class ContestOfClaws extends CardImpl {
     }
 }
 
-// Based on Fall of the Hammer
+// Based on Fall of the Hammer and Lacerate Flesh
 class ContestOfClawsDamageEffect extends OneShotEffect {
 
     public ContestOfClawsDamageEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Target creature you control deals damage equal to its power to another target creature";
+        super(Outcome.PlayForFree);
+        this.staticText = "Target creature you control deals damage equal to its power to another target creature. " +
+                "If excess damage was dealt this way, discover X, where X is that excess damage.";
     }
 
     private ContestOfClawsDamageEffect(final ContestOfClawsDamageEffect effect) {
@@ -64,14 +67,26 @@ class ContestOfClawsDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent ownCreature = game.getPermanent(source.getFirstTarget());
-        if (ownCreature != null) {
-            int damage = ownCreature.getPower().getValue();
-            Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-            if (targetCreature != null) {
-                targetCreature.damage(damage, ownCreature.getId(), source, game, false, true);
-                return true;
-            }
+        Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (ownCreature == null || targetCreature == null) {
+            return false;
         }
-        return false;
+        int damage = ownCreature.getPower().getValue();
+        int lethalDamage = targetCreature.getLethalDamage(source.getSourceId(), game);
+        targetCreature.damage(damage, ownCreature.getId(), source, game, false, true);
+
+        if (damage < lethalDamage){
+            return true;
+        }
+        int discoverValue = damage - lethalDamage;
+        Player player = game.getPlayer(source.getControllerId());
+
+        if (player == null){
+            // If somehow this case is hit, the damage still technically happened, so i guess it applied?
+            return true;
+        }
+        DiscoverEffect.doDiscover(player, discoverValue, game, source);
+
+        return true;
     }
 }
