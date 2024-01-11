@@ -39,7 +39,7 @@ public final class DugganPrivateDetective extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.instance)));
 
         // Whenever Duggan enters the battlefield or attacks, investigate.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new InvestigateEffect()));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new InvestigateEffect().setText("investigate")));
 
         // The Most Important Punch in History -- {1}{G}, {T}: Duggan deals damage equal to twice its power to another target creature. Activate only once.
         Ability ability = new ActivateOncePerGameActivatedAbility(

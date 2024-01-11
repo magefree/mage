@@ -30,7 +30,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public final class CarmenCruelSkymarcher extends CardImpl {
 
     private static final FilterCard filter = new FilterPermanentCard(
-            " a permanent from your graveyard with mana value less than or equal to {this}'s power");
+            "permanent card with mana value less than or equal to {this}'s power from your graveyard");
     static {
         filter.add(CarmenPredicate.instance);
     }
