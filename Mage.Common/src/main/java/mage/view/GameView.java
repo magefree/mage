@@ -37,6 +37,7 @@ public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private static final Logger LOGGER = Logger.getLogger(GameView.class);
+
     private final int priorityTime;
     private final int bufferTime;
     private final List<PlayerView> players = new ArrayList<>();
@@ -59,6 +60,7 @@ public class GameView implements Serializable {
     private final int turn;
     private boolean special = false;
     private final boolean rollbackTurnsAllowed;
+    private int totalErrorsCount;
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         Player createdForPlayer = null;
@@ -198,7 +200,8 @@ public class GameView implements Serializable {
         } else {
             this.special = false;
         }
-        rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
+        this.rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
+        this.totalErrorsCount = game.getTotalErrorsCount();
     }
 
     private void checkPaid(UUID uuid, StackAbility stackAbility) {
@@ -330,5 +333,9 @@ public class GameView implements Serializable {
     public String toJson() {
         Gson gson = new GsonBuilder().create();
         return gson.toJson(this);
+    }
+
+    public int getTotalErrorsCount() {
+        return this.totalErrorsCount;
     }
 }
