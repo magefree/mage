@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -8,20 +7,22 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
-import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourcePowerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class CarmenCruelSkymarcher extends CardImpl {
     private static final FilterCard filter = new FilterPermanentCard(
             "permanent card with mana value less than or equal to {this}'s power from your graveyard");
     static {
-        filter.add(CarmenPredicate.instance);
+        filter.add(ManaValueLessThanOrEqualToSourcePowerPredicate.instance);
     }
     public CarmenCruelSkymarcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
@@ -94,15 +95,5 @@ class CarmenTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a player sacrifices a permanent, put a +1/+1 counter on {this} and you gain 1 life.";
-    }
-}
-enum CarmenPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
-        return sourcePermanent != null
-                && input.getObject().getManaValue() <= sourcePermanent.getPower().getValue();
     }
 }

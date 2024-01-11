@@ -1,27 +1,21 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.keyword.PrototypeAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
+import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourcePowerPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -34,7 +28,7 @@ public final class ArcaneProxy extends CardImpl {
     );
 
     static {
-        filter.add(ArcaneProxyPredicate.instance);
+        filter.add(ManaValueLessThanOrEqualToSourcePowerPredicate.instance);
     }
 
     public ArcaneProxy(UUID ownerId, CardSetInfo setInfo) {
@@ -65,20 +59,5 @@ public final class ArcaneProxy extends CardImpl {
     @Override
     public ArcaneProxy copy() {
         return new ArcaneProxy(this);
-    }
-}
-
-enum ArcaneProxyPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return Optional
-                .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
-                .map(MageObject::getPower)
-                .map(MageInt::getValue)
-                .map(p -> input.getObject().getManaValue() <= p)
-                .orElse(false);
     }
 }
