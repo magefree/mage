@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class RunadiBehemothCaller extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures with three or more +1/+1 counters on them");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures you control with three or more +1/+1 counters on them");
 
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with mana value 5 or greater");
 
@@ -54,10 +54,9 @@ public final class RunadiBehemothCaller extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new RunadiBehemothCallerCounterEffect(), filterSpell,
                 false, SetTargetPointer.SPELL));
 
-        // Creature you control with three or more +1/+1 counters on them have haste.
+        // Creatures you control with three or more +1/+1 counters on them have haste.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter
-        ).setText("creatures you control with three or more +1/+1 counters on them have haste")));
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
         
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
@@ -78,6 +77,7 @@ class RunadiBehemothCallerCounterEffect extends ReplacementEffectImpl {
 
     RunadiBehemothCallerCounterEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
+        this.staticText = "that creature enters the battlefield with X additional +1/+1 counters on it, where X is its mana value minus 4";
     }
 
     private RunadiBehemothCallerCounterEffect(final RunadiBehemothCallerCounterEffect effect) {
