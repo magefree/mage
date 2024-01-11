@@ -75,6 +75,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonskull Summit", 272, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 273, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 274, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
+        cards.add(new SetCardInfo("Duggan, Private Detective", 123, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Duggan, Private Detective", 409, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Duggan, Private Detective", 728, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Duggan, Private Detective", 1000, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ecstatic Beauty", 83, Rarity.RARE, mage.cards.e.EcstaticBeauty.class));
         cards.add(new SetCardInfo("Evolving Wilds", 275, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 276, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
