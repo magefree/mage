@@ -133,6 +133,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Kate Stewart", 139, Rarity.RARE, mage.cards.k.KateStewart.class));
         cards.add(new SetCardInfo("Laser Screwdriver", 178, Rarity.UNCOMMON, mage.cards.l.LaserScrewdriver.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 289, Rarity.RARE, mage.cards.l.LavaclawReaches.class));
+        cards.add(new SetCardInfo("Leela, Sevateem Warrior", 107, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leela, Sevateem Warrior", 398, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leela, Sevateem Warrior", 712, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leela, Sevateem Warrior", 989, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Greaves", 243, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lunar Hatchling", 141, Rarity.RARE, mage.cards.l.LunarHatchling.class));
         cards.add(new SetCardInfo("Madame Vastra", 142, Rarity.RARE, mage.cards.m.MadameVastra.class));
