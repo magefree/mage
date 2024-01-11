@@ -1,5 +1,9 @@
 package mage.cards.t;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -15,7 +19,16 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -25,10 +38,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.SubTypes;
 import mage.watchers.Watcher;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *
@@ -69,7 +78,7 @@ class TheTombOfAclazotzEffect extends AsThoughEffectImpl {
 
     TheTombOfAclazotzEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast a creature spell from your graveyard this turn. If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types. <i>(If a creature with a finality counter on it would die, exile it instead.)</i>";
+        staticText = "You may cast a creature spell from your graveyard this turn. If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types. (If a creature with a finality counter on it would die, exile it instead.)";
     }
 
     private TheTombOfAclazotzEffect(final TheTombOfAclazotzEffect effect) {
@@ -110,16 +119,20 @@ class TheTombOfAclazotzEffect extends AsThoughEffectImpl {
             return false;
         }
         Card card = game.getCard(objectId);
-        return card != null
+        if (card != null
                 && affectedAbility instanceof SpellAbility
                 && card.getOwnerId().equals(playerId)
-                && card.isCreature(game);
+                && card.isCreature(game)) {
+            return true;
+        }
+        return false;
     }
 }
 
 class TheTombOfAclazotzWatcher extends Watcher {
 
     private final Map<MageObjectReference, Map<UUID, Integer>> morMap = new HashMap<>();
+    private MageObjectReference mor;
     private UUID playFromAnywhereEffectId;
 
     TheTombOfAclazotzWatcher() {
@@ -133,16 +146,19 @@ class TheTombOfAclazotzWatcher extends Watcher {
             Spell target = game.getSpell(event.getTargetId());
             Card card = target.getCard();
             if (card != null) {
-                game.getState().addEffect(new AddCounterEnteringCreatureEffect(new MageObjectReference(target.getCard(), game),
-                        CounterType.FINALITY.createInstance(), Outcome.Neutral),
-                        target.getSpellAbility());
-                game.getState().addEffect(new AddSubtypeEnteringCreatureEffect(new MageObjectReference(target.getCard(), game), SubType.VAMPIRE, Outcome.Benefit), card.getSpellAbility());
-                // Rule 728.2 we must insure the effect is used (creature is cast successfully) before discarding the play effect
-                UUID playEffectId = this.getPlayFromAnywhereEffect();
-                if (playEffectId != null
-                        && game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, game).listIterator().next().getId().equals(playEffectId)) {
-                    // discard the play effect
-                    game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, game).listIterator().next().discard();
+                mor = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game), game);
+                if (mor != null) {
+                    game.getState().addEffect(new AddCounterEnteringCreatureEffect(new MageObjectReference(target.getCard(), game),
+                            CounterType.FINALITY.createInstance(), Outcome.Neutral),
+                            target.getSpellAbility());
+                    game.getState().addEffect(new AddSubtypeEnteringCreatureEffect(new MageObjectReference(target.getCard(), game), SubType.VAMPIRE, Outcome.Benefit), card.getSpellAbility());
+                    // Rule 728.2 we must insure the effect is used (creature is cast successfully) before discarding the play effect
+                    UUID playEffectId = this.getPlayFromAnywhereEffect();
+                    if (playEffectId != null
+                            && game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, game).listIterator().next().getId().equals(playEffectId)) {
+                        // discard the play effect
+                        game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, game).listIterator().next().discard();
+                    }
                 }
             }
         }
@@ -187,7 +203,7 @@ class AddSubtypeEnteringCreatureEffect extends ReplacementEffectImpl {
     private final MageObjectReference mor;
     private final SubType subType;
 
-    AddSubtypeEnteringCreatureEffect(MageObjectReference mor, SubType subType, Outcome outcome) {
+    public AddSubtypeEnteringCreatureEffect(MageObjectReference mor, SubType subType, Outcome outcome) {
         super(Duration.WhileOnBattlefield, outcome);
         this.mor = mor;
         this.subType = subType;
@@ -207,7 +223,11 @@ class AddSubtypeEnteringCreatureEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject spell = game.getObject(event.getSourceId());
-        return spell != null && mor.refersTo(spell, game);
+        if (spell != null
+                && mor.refersTo(spell, game)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -231,15 +251,16 @@ class AddSubtypeEnteringCreatureEffect extends ReplacementEffectImpl {
 class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
 
     private final SubType addedSubType;
-    private final MageObjectReference mor;
+    private MageObjectReference mor;
+    private Card card;
 
-    AddCardSubTypeEnteringTargetEffect(MageObjectReference mor, SubType addedSubType, Duration duration) {
+    public AddCardSubTypeEnteringTargetEffect(MageObjectReference mor, SubType addedSubType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSubType = addedSubType;
         this.mor = mor;
     }
 
-    private AddCardSubTypeEnteringTargetEffect(final AddCardSubTypeEnteringTargetEffect effect) {
+    protected AddCardSubTypeEnteringTargetEffect(final AddCardSubTypeEnteringTargetEffect effect) {
         super(effect);
         this.addedSubType = effect.addedSubType;
         this.mor = effect.mor;
@@ -249,12 +270,15 @@ class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpell(targetPointer.getFixedTarget(game, source).getTarget());
         MageObject target = game.getObject(targetPointer.getFixedTarget(game, source).getTarget());
-        if (spell == null) {
-            return false;
+        if (spell != null) {
+            card = spell.getCard();
         }
-        Card card = spell.getCard();
-        for (StackObject stackObject : game.getStack()) {
-            if (stackObject instanceof Spell && stackObject.equals(target) && mor.refersTo(target, game)) {
+        for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
+            StackObject stackObject = iterator.next();
+            if (stackObject instanceof Spell
+                    && target != null
+                    && target.equals(stackObject)
+                    && mor.refersTo(target, game)) {
                 setCreatureSubtype(stackObject, addedSubType, game);
                 setCreatureSubtype(((Spell) stackObject).getCard(), addedSubType, game);
             }
