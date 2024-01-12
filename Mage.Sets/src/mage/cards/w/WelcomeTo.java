@@ -1,0 +1,147 @@
+package mage.cards.w;
+
+import java.util.UUID;
+
+import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.SagaAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TransformAbility;
+import mage.cards.Card;
+import mage.constants.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterNoncreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.Game;
+import mage.game.permanent.token.DinosaurToken;
+import mage.game.permanent.token.custom.CreatureToken;
+import mage.players.Player;
+import mage.target.TargetCard;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
+import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
+
+/**
+ *
+ * @author jimga150
+ */
+public final class WelcomeTo extends CardImpl {
+
+    private static FilterPermanent filter = new FilterPermanent("walls");
+
+    static {
+        filter.add(SubType.WALL.getPredicate());
+    }
+
+    // Based on Azusa's Many Journeys // Likeness of the Seeker, Vronos Masked Inquisitor, In the Darkness Bind Then, 
+    public WelcomeTo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
+        
+        this.subtype.add(SubType.SAGA);
+        this.secondSideCardClazz = mage.cards.j.JurassicPark.class;
+
+        // (As this Saga enters and after your draw step, add a lore counter.)
+        SagaAbility sagaAbility = new SagaAbility(this);
+
+        // I -- For each opponent, up to one target noncreature artifact they control becomes a 0/4 Wall artifact creature with defender for as long as you control this Saga.
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
+            ability.addEffect(
+                    new BecomesCreatureTargetEffect(new CreatureToken(0, 4).withSubType(SubType.WALL),
+                            false, false, Duration.WhileControlled)
+                            .setText("For each opponent, up to one target noncreature artifact they control becomes " +
+                                    "a 0/4 Wall artifact creature with defender for as long as you control this Saga."));
+            ability.addEffect(new GainAbilityTargetEffect(DefenderAbility.getInstance(), Duration.WhileControlled, ""));
+            ability.getEffects().setTargetPointer(new EachTargetPointer());
+            ability.setTargetAdjuster(WelcomeToAdjuster.instance);
+        });
+
+        // II -- Create a 3/3 green Dinosaur creature token with trample. It gains haste until end of turn.
+        // Based on Mordor on the March
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new WelcomeToEffect());
+
+        // III -- Destroy all Walls. Exile this Saga, then return it to the battlefield transformed under your control.
+        this.addAbility(new TransformAbility());
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, ability -> {
+            ability.addEffect(new DestroyAllEffect(filter));
+            ability.addEffect(new ExileSagaAndReturnTransformedEffect());
+        });
+
+        this.addAbility(sagaAbility);
+    }
+
+    private WelcomeTo(final WelcomeTo card) {
+        super(card);
+    }
+
+    @Override
+    public WelcomeTo copy() {
+        return new WelcomeTo(this);
+    }
+}
+
+// Based on Vronos, Masked Inquisitor
+enum WelcomeToAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent == null) {
+                continue;
+            }
+            FilterPermanent filter = new FilterNoncreaturePermanent(
+                    "noncreature artifact controlled by " + opponent.getLogName());
+            filter.add(Predicates.and(CardType.ARTIFACT.getPredicate(), new ControllerIdPredicate(opponentId)));
+            ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        }
+    }
+}
+
+// Based on Mordor on the March
+class WelcomeToEffect extends OneShotEffect {
+
+    public WelcomeToEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "Create a 3/3 green Dinosaur creature token with trample. It gains haste until end of turn.";
+    }
+
+    private WelcomeToEffect(final WelcomeToEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public WelcomeToEffect copy() {
+        return new WelcomeToEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        CreateTokenEffect effect = new CreateTokenEffect(new DinosaurToken());
+        effect.apply(game, source);
+        effect.getLastAddedTokenIds().forEach(permanentID -> {
+            ContinuousEffect continuousEffect = new GainAbilityTargetEffect(
+                    HasteAbility.getInstance(), Duration.EndOfTurn
+            );
+            continuousEffect.setTargetPointer(new FixedTarget(permanentID));
+            game.addEffect(continuousEffect, source);
+        });
+        return true;
+    }
+
+}
