@@ -4,21 +4,14 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BecomesTappedTriggeredAbility;
-import mage.abilities.common.delayed.ManaSpentDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -80,19 +73,28 @@ class DontMoveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.addDelayedTriggeredAbility(new DontMoveAbility(), source);
+        game.addDelayedTriggeredAbility(new DontMoveAbility(game.getTurnNum()), source);
         return true;
     }
 }
 
+// Instead of using Duration.UntilYourNextTurn, since currently DelayedTriggeredAbility does not support checking for
+// this, instead this subclass will manually check for the end of this trigger's life by tracking the turn number
+// and ending when next the game circles back to the casting player, after the turn number has changed.
+// This workaround was taken directly from the diff helpfully provided by michaelstephendavies in issue #2078:
+// https://github.com/magefree/mage/issues/2078
 class DontMoveAbility extends DelayedTriggeredAbility {
 
-    public DontMoveAbility() {
-        super(new DestroyTargetEffect(), Duration.UntilYourNextTurn, false);
+    private final int startingTurn;
+
+    public DontMoveAbility(int startingTurn) {
+        super(new DestroyTargetEffect(), Duration.Custom, false);
+        this.startingTurn = startingTurn;
     }
 
     private DontMoveAbility(final DontMoveAbility ability) {
         super(ability);
+        this.startingTurn = ability.startingTurn;
     }
 
     @Override
@@ -113,5 +115,10 @@ class DontMoveAbility extends DelayedTriggeredAbility {
         }
         this.getAllEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
         return true;
+    }
+
+    @Override
+    public boolean isInactive(Game game) {
+        return game.getActivePlayerId().equals(getControllerId()) && game.getTurnNum() != startingTurn;
     }
 }
