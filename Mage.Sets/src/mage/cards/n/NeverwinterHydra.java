@@ -2,10 +2,8 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.WardAbility;
@@ -18,6 +16,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,25 +74,15 @@ class NeverwinterHydraEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
-        if (permanent == null || player == null) {
+        if (permanent != null && player != null) {
+            int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
+            if (xValue > 0) {
+                int amount = player.rollDice(outcome, source, game, 6, xValue, 0).stream().mapToInt(x -> x).sum();
+                List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
+            }
             return true;
         }
-        SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-        if (spellAbility == null
-                || !spellAbility.getSourceId().equals(source.getSourceId())
-                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()) {
-            return true;
-        }
-        if (!spellAbility.getSourceId().equals(source.getSourceId())) {
-            return true;
-        } // put into play by normal cast
-        int xValue = spellAbility.getManaCostsToPay().getX();
-        if (xValue < 1) {
-            return false;
-        }
-        int amount = player.rollDice(outcome, source, game, 6, xValue, 0).stream().mapToInt(x -> x).sum();
-        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-        permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
-        return true;
+        return false;
     }
 }
