@@ -43,9 +43,11 @@ public final class JurassicPark extends CardImpl {
 
         // (Transforms from Welcome to ....)
         // Each Dinosaur card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard.
+        // Based on Underworld Breach
         this.addAbility(new SimpleStaticAbility(new JurassicParkEffect()));
 
         // {T}: Add {G} for each Dinosaur you control.
+        // Based on Gaea's Cradle
         DynamicManaAbility ability = new DynamicManaAbility(
                 Mana.GreenMana(1),
                 new PermanentsOnBattlefieldCount(filter)
