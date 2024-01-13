@@ -84,4 +84,37 @@ public class ProliferateTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Sporeback Troll", 3, 3);
 
     }
+
+    @Test
+    public void test_RipplesOfPotential() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 4 + 4 + 3 + 2);
+
+        addCard(Zone.HAND, playerA, "Walking Ballista");
+        addCard(Zone.HAND, playerA, "Chandra, Pyromaster");
+        addCard(Zone.HAND, playerA, "Atraxa's Skitterfang");
+        addCard(Zone.HAND, playerA, "Ripples of Potential");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
+        setChoice(playerA, "X=2");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chandra, Pyromaster");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Atraxa's Skitterfang");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ripples of Potential");
+        // Proliferate choice
+        setChoice(playerA, "Walking Ballista^Chandra, Pyromaster^Atraxa's Skitterfang");
+        // Phase out choice
+        setChoice(playerA, "Walking Ballista^Chandra, Pyromaster");
+
+        setStrictChooseMode(true);
+        setChoice(playerA, false);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Walking Ballista", 0);
+        assertPermanentCount(playerA, "Chandra, Pyromaster", 0);
+        assertPermanentCount(playerA, "Atraxa's Skitterfang", 1);
+    }
 }

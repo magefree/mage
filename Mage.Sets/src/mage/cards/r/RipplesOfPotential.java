@@ -85,7 +85,6 @@ class RipplesOfPotentialEffect extends OneShotEffect {
         RipplesOfPotentialWatcher watcher = game.getState().getWatcher(RipplesOfPotentialWatcher.class, source.getSourceId());
         if (watcher != null) {
             FilterPermanent filter = new FilterControlledPermanent();
-            filter.add(new PermanentIdPredicate());
             TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.BATTLEFIELD, new FilterCard("permanents to phase out"));
             target.withNotTarget(true);
             controller.choose(outcome, watcher.getProliferatedPermanents(), target, source, game);
