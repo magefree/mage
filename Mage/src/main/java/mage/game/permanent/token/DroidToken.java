@@ -20,7 +20,7 @@ public final class DroidToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected DroidToken(final DroidToken token) {
+    private DroidToken(final DroidToken token) {
         super(token);
     }
 

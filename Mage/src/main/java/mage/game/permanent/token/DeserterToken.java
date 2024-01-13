@@ -19,7 +19,7 @@ public final class DeserterToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected DeserterToken(final DeserterToken token) {
+    private DeserterToken(final DeserterToken token) {
         super(token);
     }
 

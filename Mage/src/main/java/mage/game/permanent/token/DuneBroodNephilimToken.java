@@ -19,7 +19,7 @@ public final class DuneBroodNephilimToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected DuneBroodNephilimToken(final DuneBroodNephilimToken token) {
+    private DuneBroodNephilimToken(final DuneBroodNephilimToken token) {
         super(token);
     }
 

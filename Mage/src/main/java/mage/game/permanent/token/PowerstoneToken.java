@@ -30,7 +30,7 @@ public final class PowerstoneToken extends TokenImpl {
         this.addAbility(new ConditionalColorlessManaAbility(1, makeBuilder()));
     }
 
-    protected PowerstoneToken(final PowerstoneToken token) {
+    private PowerstoneToken(final PowerstoneToken token) {
         super(token);
     }
 

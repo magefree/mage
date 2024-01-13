@@ -19,7 +19,7 @@ public final class IllusionToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected IllusionToken(final IllusionToken token) {
+    private IllusionToken(final IllusionToken token) {
         super(token);
     }
 

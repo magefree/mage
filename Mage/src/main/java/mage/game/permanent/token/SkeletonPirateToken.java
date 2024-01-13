@@ -19,7 +19,7 @@ public final class SkeletonPirateToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected SkeletonPirateToken(final SkeletonPirateToken token) {
+    private SkeletonPirateToken(final SkeletonPirateToken token) {
         super(token);
     }
 

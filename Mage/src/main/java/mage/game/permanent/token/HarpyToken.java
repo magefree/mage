@@ -21,7 +21,7 @@ public final class HarpyToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected HarpyToken(final HarpyToken token) {
+    private HarpyToken(final HarpyToken token) {
         super(token);
     }
 

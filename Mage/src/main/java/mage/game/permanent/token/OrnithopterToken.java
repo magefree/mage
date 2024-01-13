@@ -21,7 +21,7 @@ public final class OrnithopterToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected OrnithopterToken(final OrnithopterToken token) {
+    private OrnithopterToken(final OrnithopterToken token) {
         super(token);
     }
 

@@ -24,7 +24,7 @@ public final class VrondissRageOfAncientsToken extends TokenImpl {
         this.addAbility(new VrondissRageOfAncientsTokenTriggeredAbility());
     }
 
-    protected VrondissRageOfAncientsToken(final VrondissRageOfAncientsToken token) {
+    private VrondissRageOfAncientsToken(final VrondissRageOfAncientsToken token) {
         super(token);
     }
 

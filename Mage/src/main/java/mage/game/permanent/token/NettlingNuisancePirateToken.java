@@ -23,7 +23,7 @@ public final class NettlingNuisancePirateToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(new CantBlockSourceEffect(Duration.EndOfGame)));
     }
 
-    protected NettlingNuisancePirateToken(final NettlingNuisancePirateToken token) {
+    private NettlingNuisancePirateToken(final NettlingNuisancePirateToken token) {
         super(token);
     }
 

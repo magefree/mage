@@ -21,7 +21,7 @@ public final class PenumbraWurmToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    protected PenumbraWurmToken(final PenumbraWurmToken token) {
+    private PenumbraWurmToken(final PenumbraWurmToken token) {
         super(token);
     }
 

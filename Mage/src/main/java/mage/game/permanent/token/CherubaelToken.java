@@ -22,7 +22,7 @@ public final class CherubaelToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected CherubaelToken(final CherubaelToken token) {
+    private CherubaelToken(final CherubaelToken token) {
         super(token);
     }
 

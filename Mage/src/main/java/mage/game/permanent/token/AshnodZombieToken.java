@@ -18,7 +18,7 @@ public final class AshnodZombieToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected AshnodZombieToken(final AshnodZombieToken token) {
+    private AshnodZombieToken(final AshnodZombieToken token) {
         super(token);
     }
 

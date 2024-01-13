@@ -33,7 +33,7 @@ public final class GoldmeadowHarrierToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    protected GoldmeadowHarrierToken(final GoldmeadowHarrierToken token) {
+    private GoldmeadowHarrierToken(final GoldmeadowHarrierToken token) {
         super(token);
     }
 

@@ -18,7 +18,7 @@ public final class ZendikarsRoilElementalToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected ZendikarsRoilElementalToken(final ZendikarsRoilElementalToken token) {
+    private ZendikarsRoilElementalToken(final ZendikarsRoilElementalToken token) {
         super(token);
     }
 

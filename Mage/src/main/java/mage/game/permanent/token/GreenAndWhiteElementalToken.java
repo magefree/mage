@@ -21,7 +21,7 @@ public final class GreenAndWhiteElementalToken extends TokenImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    protected GreenAndWhiteElementalToken(final GreenAndWhiteElementalToken token) {
+    private GreenAndWhiteElementalToken(final GreenAndWhiteElementalToken token) {
         super(token);
     }
 

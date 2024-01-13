@@ -21,7 +21,7 @@ public final class FaerieRogueToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected FaerieRogueToken(final FaerieRogueToken token) {
+    private FaerieRogueToken(final FaerieRogueToken token) {
         super(token);
     }
 

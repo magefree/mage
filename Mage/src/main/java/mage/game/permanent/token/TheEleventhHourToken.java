@@ -29,7 +29,7 @@ public final class TheEleventhHourToken extends TokenImpl {
         addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    protected TheEleventhHourToken(final TheEleventhHourToken token) {
+    private TheEleventhHourToken(final TheEleventhHourToken token) {
         super(token);
     }
 

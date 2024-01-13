@@ -22,7 +22,7 @@ public final class SpoilsOfBloodHorrorToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    protected SpoilsOfBloodHorrorToken(final SpoilsOfBloodHorrorToken token) {
+    private SpoilsOfBloodHorrorToken(final SpoilsOfBloodHorrorToken token) {
         super(token);
     }
 

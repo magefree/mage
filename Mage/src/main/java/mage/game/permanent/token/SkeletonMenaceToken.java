@@ -21,7 +21,7 @@ public final class SkeletonMenaceToken extends TokenImpl {
         addAbility(new MenaceAbility());
     }
 
-    protected SkeletonMenaceToken(final SkeletonMenaceToken token) {
+    private SkeletonMenaceToken(final SkeletonMenaceToken token) {
         super(token);
     }
 

@@ -23,7 +23,7 @@ public final class RiptideReplicatorToken extends TokenImpl {
         toughness = new MageInt(x);
     }
 
-    protected RiptideReplicatorToken(final RiptideReplicatorToken token) {
+    private RiptideReplicatorToken(final RiptideReplicatorToken token) {
         super(token);
     }
 

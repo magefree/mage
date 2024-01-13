@@ -34,7 +34,7 @@ public final class SaprolingBurstToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new SaprolingBurstTokenDynamicValue(saprolingBurstMOR))));
     }
 
-    protected SaprolingBurstToken(final SaprolingBurstToken token) {
+    private SaprolingBurstToken(final SaprolingBurstToken token) {
         super(token);
     }
 
