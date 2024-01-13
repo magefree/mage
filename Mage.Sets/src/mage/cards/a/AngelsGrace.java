@@ -79,7 +79,7 @@ class AngelsGraceEffect extends ContinuousRuleModifyingEffectImpl {
 
 class AngelsGraceReplacementEffect extends ReplacementEffectImpl {
 
-    public AngelsGraceReplacementEffect() {
+    AngelsGraceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, damage that would reduce your "
                 + "life total to less than 1 reduces it to 1 instead";

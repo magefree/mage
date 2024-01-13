@@ -83,7 +83,7 @@ class RecommissionEffect extends OneShotEffect {
 
 class RecommissionCounterEffect extends ReplacementEffectImpl {
 
-    public RecommissionCounterEffect() {
+    RecommissionCounterEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 

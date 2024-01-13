@@ -97,7 +97,7 @@ class MuseVesselExileEffect extends OneShotEffect {
 
 class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public MuseVesselMayPlayExiledEffect() {
+    MuseVesselMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.staticText = "Choose a card exiled with {this}. You may play that card this turn";
     }

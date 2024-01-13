@@ -159,7 +159,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
 
 class SharedFateLookEffect extends AsThoughEffectImpl {
 
-    public SharedFateLookEffect() {
+    SharedFateLookEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each player may look at the cards exiled with {this}";
     }

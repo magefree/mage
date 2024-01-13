@@ -91,7 +91,7 @@ class CemeteryProwlerExileEffect extends OneShotEffect {
 
 class CemeteryProwlerCostReductionEffect extends CostModificationEffectImpl {
 
-    public CemeteryProwlerCostReductionEffect() {
+    CemeteryProwlerCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Spells you cast cost {1} less to cast for each card type they share with cards exiled with {this}";
     }

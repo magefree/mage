@@ -41,7 +41,7 @@ public final class FurnaceOfRath extends CardImpl {
 
 class FurnaceOfRathEffect extends ReplacementEffectImpl {
 
-    public FurnaceOfRathEffect() {
+    FurnaceOfRathEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead";
     }

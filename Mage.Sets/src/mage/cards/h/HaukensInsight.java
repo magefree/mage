@@ -135,7 +135,7 @@ class HaukensInsightLookEffect extends AsThoughEffectImpl {
 
 class HaukensInsightPlayEffect extends AsThoughEffectImpl {
 
-    public HaukensInsightPlayEffect() {
+    HaukensInsightPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
         staticText = "Once during each of your turns, you may play a land or cast a spell from among the cards exiled with this permanent without paying its mana cost";
     }

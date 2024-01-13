@@ -39,7 +39,7 @@ public final class BoonReflection extends CardImpl {
 
 class BoonReflectionEffect extends ReplacementEffectImpl {
 
-    public BoonReflectionEffect() {
+    BoonReflectionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would gain life, you gain twice that much life instead";
     }

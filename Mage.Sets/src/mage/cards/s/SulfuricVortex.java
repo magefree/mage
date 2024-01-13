@@ -47,7 +47,7 @@ public final class SulfuricVortex extends CardImpl {
 
 class SulfuricVortexReplacementEffect extends ReplacementEffectImpl {
 
-    public SulfuricVortexReplacementEffect() {
+    SulfuricVortexReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a player would gain life, that player gains no life instead";
     }

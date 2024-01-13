@@ -49,7 +49,7 @@ public final class OutOfTheTombs extends CardImpl {
 
 class OutOfTheTombsReplacementEffect extends ReplacementEffectImpl {
 
-    public OutOfTheTombsReplacementEffect() {
+    OutOfTheTombsReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card while your library has no cards in it, instead return a creature card " +
                 "from your graveyard to the battlefield. If you can't, you lose the game.";

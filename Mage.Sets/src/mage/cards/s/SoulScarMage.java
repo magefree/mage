@@ -51,7 +51,7 @@ public final class SoulScarMage extends CardImpl {
 
 class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
 
-    public SoulScarMageDamageReplacementEffect() {
+    SoulScarMageDamageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a source you control would deal noncombat damage to a creature an opponent controls, put that many -1/-1 counters on that creature instead.";
     }

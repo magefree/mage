@@ -69,7 +69,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
 
 class SekkiSeasonsGuideEffect extends PreventionEffectImpl {
 
-    public SekkiSeasonsGuideEffect() {
+    SekkiSeasonsGuideEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         staticText = "If damage would be dealt to {this}, prevent that damage, remove that many +1/+1 counters from {this}, and create that many 1/1 colorless Spirit creature tokens";
     }

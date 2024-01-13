@@ -45,7 +45,7 @@ public final class DragonHunter extends CardImpl {
 }
 class CanBlockDragonsAsThoughtIthadReachEffect extends AsThoughEffectImpl {
 
-    public CanBlockDragonsAsThoughtIthadReachEffect(Duration duration) {
+    CanBlockDragonsAsThoughtIthadReachEffect(Duration duration) {
         super(AsThoughEffectType.BLOCK_DRAGON, duration, Outcome.Benefit);
         staticText = "{this} can block Dragons as though it had reach";
     }

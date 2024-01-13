@@ -54,7 +54,7 @@ public final class TreacherousLink extends CardImpl {
 
 class TreacherousLinkEffect extends ReplacementEffectImpl {
 
-    public TreacherousLinkEffect() {
+    TreacherousLinkEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt to enchanted creature is dealt to its controller instead";
     }

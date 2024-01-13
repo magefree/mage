@@ -49,7 +49,7 @@ public final class FireServant extends CardImpl {
 
 class FireServantEffect extends ReplacementEffectImpl {
 
-    public FireServantEffect() {
+    FireServantEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a red instant or sorcery spell you control would deal damage, it deals double that damage instead";
     }

@@ -94,7 +94,7 @@ class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
 
 class MagusOfTheWillReplacementEffect extends ReplacementEffectImpl {
 
-    public MagusOfTheWillReplacementEffect() {
+    MagusOfTheWillReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         this.staticText = "If a card would be put into your graveyard from anywhere else this turn, exile that card instead";
     }

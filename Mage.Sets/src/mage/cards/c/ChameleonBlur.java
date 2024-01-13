@@ -37,7 +37,7 @@ public final class ChameleonBlur extends CardImpl {
 
 class ChameleonBlurEffect extends PreventionEffectImpl {
 
-    public ChameleonBlurEffect() {
+    ChameleonBlurEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
         staticText = "prevent all damage that creatures would deal to players this turn";
     }

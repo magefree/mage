@@ -49,7 +49,7 @@ public final class CurseOfBloodletting extends CardImpl {
 
 class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
 
-    public CurseOfBloodlettingEffect() {
+    CurseOfBloodlettingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to enchanted player, it deals double that damage to that player instead";
     }

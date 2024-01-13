@@ -57,7 +57,7 @@ public final class EnergyStorm extends CardImpl {
 
 class EnergyStormPreventionEffect extends PreventionEffectImpl {
 
-    public EnergyStormPreventionEffect() {
+    EnergyStormPreventionEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
         staticText = "prevent all damage that would be dealt by instant and sorcery spells";
     }

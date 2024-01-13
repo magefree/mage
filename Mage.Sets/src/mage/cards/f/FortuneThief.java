@@ -52,7 +52,7 @@ public final class FortuneThief extends CardImpl {
 
 class FortuneThiefReplacementEffect extends ReplacementEffectImpl {
 
-    public FortuneThiefReplacementEffect() {
+    FortuneThiefReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }

@@ -56,7 +56,7 @@ public final class KillSuitCultist extends CardImpl {
 
 class KillSuitCultistEffect extends ReplacementEffectImpl {
 
-    public KillSuitCultistEffect() {
+    KillSuitCultistEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "The next time damage would be dealt to target creature this turn, destroy that creature instead";
     }

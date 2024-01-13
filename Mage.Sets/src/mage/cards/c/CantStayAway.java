@@ -93,7 +93,7 @@ class CantStayAwayEffect extends OneShotEffect {
 
 class CantStayAwayReplacementEffect extends ReplacementEffectImpl {
 
-    public CantStayAwayReplacementEffect() {
+    CantStayAwayReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If {this} would die, exile it instead";
     }

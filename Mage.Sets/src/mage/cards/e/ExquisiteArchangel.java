@@ -53,7 +53,7 @@ public final class ExquisiteArchangel extends CardImpl {
 
 class ExquisiteArchangelEffect extends ReplacementEffectImpl {
 
-    public ExquisiteArchangelEffect() {
+    ExquisiteArchangelEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would lose the game, instead exile {this} and your life total becomes equal to your starting life total";
     }

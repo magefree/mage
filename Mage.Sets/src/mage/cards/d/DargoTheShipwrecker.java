@@ -66,7 +66,7 @@ public final class DargoTheShipwrecker extends CardImpl {
 
 class DargoTheShipwreckerEffect extends CostModificationEffectImpl {
 
-    public DargoTheShipwreckerEffect() {
+    DargoTheShipwreckerEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
     }
 

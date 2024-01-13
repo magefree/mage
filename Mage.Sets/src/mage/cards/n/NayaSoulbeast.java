@@ -101,7 +101,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
 
 class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
 
-    public NayaSoulbeastReplacementEffect() {
+    NayaSoulbeastReplacementEffect() {
         super(Duration.OneUse, Outcome.BoostCreature);
         staticText = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way";
     }

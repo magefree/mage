@@ -98,7 +98,7 @@ class KheruMindEaterExileEffect extends OneShotEffect {
 
 class KheruMindEaterEffect extends AsThoughEffectImpl {
 
-    public KheruMindEaterEffect() {
+    KheruMindEaterEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may play cards exiled with {this}";
     }
@@ -130,7 +130,7 @@ class KheruMindEaterEffect extends AsThoughEffectImpl {
 
 class KheruMindEaterLookAtCardEffect extends AsThoughEffectImpl {
 
-    public KheruMindEaterLookAtCardEffect() {
+    KheruMindEaterLookAtCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }

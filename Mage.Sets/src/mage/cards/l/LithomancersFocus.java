@@ -43,7 +43,7 @@ public final class LithomancersFocus extends CardImpl {
 
 class LithomancersFocusPreventDamageToTargetEffect extends PreventionEffectImpl {
 
-    public LithomancersFocusPreventDamageToTargetEffect() {
+    LithomancersFocusPreventDamageToTargetEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage that would be dealt to that creature this turn by colorless sources";
     }

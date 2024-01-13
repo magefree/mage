@@ -122,7 +122,7 @@ class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
 
 class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
 
-    public SenTripletsPlayFromOpponentsHandEffect() {
+    SenTripletsPlayFromOpponentsHandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play lands and cast spells from that player's hand this turn";
     }

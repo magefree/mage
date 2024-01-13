@@ -84,7 +84,7 @@ class InterventionPactEffect extends OneShotEffect {
 
 class InterventionPactPreventDamageEffect extends PreventionEffectImpl {
 
-    public InterventionPactPreventDamageEffect() {
+    InterventionPactPreventDamageEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         staticText = "The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way";
     }

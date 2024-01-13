@@ -54,7 +54,7 @@ public final class ScourgeOfNelToth extends CardImpl {
 
 class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
 
-    public ScourgeOfNelTothPlayEffect() {
+    ScourgeOfNelTothPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost";
     }

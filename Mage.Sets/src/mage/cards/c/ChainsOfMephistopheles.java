@@ -41,7 +41,7 @@ public final class ChainsOfMephistopheles extends CardImpl {
 
 class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
 
-    public ChainsOfMephistophelesReplacementEffect() {
+    ChainsOfMephistophelesReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a player would draw a card except the first one they draw in each of their draw steps, that player discards a card instead. If the player discards a card this way, they draw a card. If the player doesn't discard a card this way, they mill a card";
     }

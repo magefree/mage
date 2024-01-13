@@ -101,7 +101,7 @@ class FuriousRiseEffect extends OneShotEffect {
 
 class FuriousRisePlayEffect extends AsThoughEffectImpl {
 
-    public FuriousRisePlayEffect() {
+    FuriousRisePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
     }
 

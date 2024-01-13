@@ -156,7 +156,7 @@ class TogglodyteRestrictionEffect extends RestrictionEffect {
 
 class TogglodytePreventionEffect extends PreventionEffectImpl {
 
-    public TogglodytePreventionEffect() {
+    TogglodytePreventionEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
         staticText = "As long as {this} is turned off, it can't attack or block, and prevent all damage it would deal";
     }

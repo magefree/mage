@@ -76,7 +76,7 @@ class DazzlingReflectionEffect extends OneShotEffect {
 
 class DazzlingReflectionPreventEffect extends PreventionEffectImpl {
 
-    public DazzlingReflectionPreventEffect() {
+    DazzlingReflectionPreventEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         staticText = "The next time that creature would deal damage this turn, prevent that damage";
     }

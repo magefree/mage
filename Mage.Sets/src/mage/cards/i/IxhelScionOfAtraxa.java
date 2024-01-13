@@ -117,7 +117,7 @@ class IxhelScionOfAtraxaEffect extends OneShotEffect {
 
 class IxhelScionOfAtraxaPlayFromExileEffect extends AsThoughEffectImpl {
 
-    public IxhelScionOfAtraxaPlayFromExileEffect() {
+    IxhelScionOfAtraxaPlayFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
     }
 

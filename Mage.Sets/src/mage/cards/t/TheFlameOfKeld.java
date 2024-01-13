@@ -54,7 +54,7 @@ public final class TheFlameOfKeld extends CardImpl {
 
 class TheFlameOfKeldDamageEffect extends ReplacementEffectImpl {
 
-    public TheFlameOfKeldDamageEffect() {
+    TheFlameOfKeldDamageEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
         this.staticText = "If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 to that permanent or player instead";
     }

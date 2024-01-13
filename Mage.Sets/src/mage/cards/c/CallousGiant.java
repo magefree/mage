@@ -44,7 +44,7 @@ public final class CallousGiant extends CardImpl {
 
 class CallousGiantEffect extends PreventionEffectImpl {
 
-    public CallousGiantEffect() {
+    CallousGiantEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "If a source would deal 3 or less damage to {this}, prevent that damage.";
     }

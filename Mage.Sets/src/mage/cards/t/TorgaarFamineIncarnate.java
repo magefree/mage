@@ -86,7 +86,7 @@ class TorgaarFamineIncarnateEffect extends OneShotEffect {
 
 class TorgaarFamineIncarnateEffectCostReductionEffect extends CostModificationEffectImpl {
 
-    public TorgaarFamineIncarnateEffectCostReductionEffect() {
+    TorgaarFamineIncarnateEffectCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "This spell costs {2} less to cast for each creature sacrificed this way";
     }

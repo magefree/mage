@@ -44,7 +44,7 @@ public final class Overblaze extends CardImpl {
 
 class OverblazeEffect extends ReplacementEffectImpl {
 
-    public OverblazeEffect() {
+    OverblazeEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
         staticText = "Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.";
     }

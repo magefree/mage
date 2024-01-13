@@ -69,7 +69,7 @@ public final class IntrepidPaleontologist extends CardImpl {
 
 class IntrepidPaleontologistPlayEffect extends AsThoughEffectImpl {
 
-    public IntrepidPaleontologistPlayEffect() {
+    IntrepidPaleontologistPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast Dinosaur creature spells from among cards you own exiled with {this}. If you cast a spell this way, that creature enters the battlefield with a finality counter on it.";
     }

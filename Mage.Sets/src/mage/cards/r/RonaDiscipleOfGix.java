@@ -76,7 +76,7 @@ public final class RonaDiscipleOfGix extends CardImpl {
 
 class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
 
-    public RonaDiscipleOfGixPlayNonLandEffect() {
+    RonaDiscipleOfGixPlayNonLandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast nonland cards exiled with {this}";
     }

@@ -84,7 +84,7 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
 class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl {
 
-    public AngelOfJubilationSacrificeFilterEffect() {
+    AngelOfJubilationSacrificeFilterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.SET_COST);
         staticText = "or activate abilities";
     }

@@ -42,7 +42,7 @@ public final class GatherSpecimens extends CardImpl {
 
 class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
 
-    public GatherSpecimensReplacementEffect() {
+    GatherSpecimensReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.GainControl);
         staticText = "If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead";
     }

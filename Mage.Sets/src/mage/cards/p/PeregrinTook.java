@@ -59,7 +59,7 @@ public final class PeregrinTook extends CardImpl {
 
 class PeregrinTookReplacementEffect extends ReplacementEffectImpl {
 
-    public PeregrinTookReplacementEffect() {
+    PeregrinTookReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "If one or more tokens would be created under your control, those tokens plus an additional Food token are created instead";
     }

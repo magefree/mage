@@ -46,7 +46,7 @@ public final class FlayingTendrils extends CardImpl {
 
 class FlayingTendrilsReplacementEffect extends ReplacementEffectImpl {
 
-    public FlayingTendrilsReplacementEffect() {
+    FlayingTendrilsReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
         staticText = "If a creature would die this turn, exile it instead";
     }

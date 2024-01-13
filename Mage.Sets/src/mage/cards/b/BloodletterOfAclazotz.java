@@ -49,7 +49,7 @@ public final class BloodletterOfAclazotz extends CardImpl {
 
 class BloodletterOfAclazotzEffect extends ReplacementEffectImpl {
 
-    public BloodletterOfAclazotzEffect() {
+    BloodletterOfAclazotzEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If an opponent would lose life during your turn, they lose twice that much life instead";
     }

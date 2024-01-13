@@ -55,7 +55,7 @@ public final class ChorusOfTheConclave extends CardImpl {
 
 class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
 
-    public ChorusOfTheConclaveReplacementEffect() {
+    ChorusOfTheConclaveReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As an additional cost to cast creature spells, you may pay any amount of mana";
     }

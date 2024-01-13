@@ -37,7 +37,7 @@ public final class RepelTheAbominable extends CardImpl {
 
 class RepelTheAbominablePreventionEffect extends PreventionEffectImpl {
 
-    public RepelTheAbominablePreventionEffect() {
+    RepelTheAbominablePreventionEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
         staticText = "prevent all damage that would be dealt this turn by non-Human sources";
     }

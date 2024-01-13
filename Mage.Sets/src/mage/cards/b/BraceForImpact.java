@@ -50,7 +50,7 @@ public final class BraceForImpact extends CardImpl {
 
 class BraceForImpactPreventDamageTargetEffect extends PreventionEffectImpl {
 
-    public BraceForImpactPreventDamageTargetEffect(Duration duration) {
+    BraceForImpactPreventDamageTargetEffect(Duration duration) {
         super(duration);
         staticText = "Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature";
     }

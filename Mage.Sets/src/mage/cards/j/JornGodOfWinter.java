@@ -108,7 +108,7 @@ class KaldringTheRimestaffEffect extends OneShotEffect {
 
 class KaldringTheRimestaffGraveyardEffect extends AsThoughEffectImpl {
 
-    public KaldringTheRimestaffGraveyardEffect() {
+    KaldringTheRimestaffGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 

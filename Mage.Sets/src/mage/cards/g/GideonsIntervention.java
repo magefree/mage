@@ -105,7 +105,7 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
 
 class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
 
-    public GideonsInterventionPreventAllDamageEffect() {
+    GideonsInterventionPreventAllDamageEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.";
     }

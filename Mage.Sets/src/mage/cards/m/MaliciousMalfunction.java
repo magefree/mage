@@ -43,7 +43,7 @@ public final class MaliciousMalfunction extends CardImpl {
 
 class MaliciousMalfunctionReplacementEffect extends ReplacementEffectImpl {
 
-    public MaliciousMalfunctionReplacementEffect() {
+    MaliciousMalfunctionReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
         this.staticText = "If a creature would die this turn, exile it instead";
     }

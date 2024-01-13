@@ -39,7 +39,7 @@ public final class Crevasse extends CardImpl {
 
 class CrevasseEffect extends AsThoughEffectImpl {
 
-    public CrevasseEffect() {
+    CrevasseEffect() {
         super(AsThoughEffectType.BLOCK_MOUNTAINWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with mountainwalk can be blocked as though they didn't have mountainwalk";
     }

@@ -121,7 +121,7 @@ class ThreeWishesPutIntoGraveyardEffect extends OneShotEffect {
 
 class ThreeWishesLookAtCardEffect extends AsThoughEffectImpl {
 
-    public ThreeWishesLookAtCardEffect() {
+    ThreeWishesLookAtCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.Custom, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this} as long as they remain exiled";
     }

@@ -218,7 +218,7 @@ class WordOfCommandCantActivateEffect extends RestrictionEffect {
 
 class WordOfCommandTestFlashEffect extends AsThoughEffectImpl {
 
-    public WordOfCommandTestFlashEffect() {
+    WordOfCommandTestFlashEffect() {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
     }
 

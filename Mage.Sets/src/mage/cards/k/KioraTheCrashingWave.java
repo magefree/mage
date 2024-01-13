@@ -70,7 +70,7 @@ public final class KioraTheCrashingWave extends CardImpl {
 
 class KioraPreventionEffect extends PreventionEffectImpl {
 
-    public KioraPreventionEffect() {
+    KioraPreventionEffect() {
         super(Duration.UntilYourNextTurn, Integer.MAX_VALUE, false, false);
         staticText = "Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls";
     }

@@ -128,7 +128,7 @@ class VanishIntoMemoryReturnFromExileEffect extends OneShotEffect {
 
 class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public VanishIntoMemoryEntersBattlefieldEffect() {
+    VanishIntoMemoryEntersBattlefieldEffect() {
         super(Duration.EndOfTurn, Outcome.Discard);
         staticText = "discard cards equal to that creature's toughness.";
     }

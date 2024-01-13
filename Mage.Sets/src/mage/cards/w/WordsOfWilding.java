@@ -43,7 +43,7 @@ public final class WordsOfWilding extends CardImpl {
 
 class WordsOfWildingEffect extends ReplacementEffectImpl {
 
-    public WordsOfWildingEffect() {
+    WordsOfWildingEffect() {
         super(Duration.EndOfTurn, Outcome.PutCreatureInPlay);
         staticText = "The next time you would draw a card this turn, create a 2/2 green Bear creature token instead";
     }

@@ -94,7 +94,7 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
 
 class CarthTheLionLoyaltyCostEffect extends CostModificationEffectImpl {
 
-    public CarthTheLionLoyaltyCostEffect() {
+    CarthTheLionLoyaltyCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.staticText = "Planeswalkers' loyalty abilities you activate cost an additional +1 to activate";
     }

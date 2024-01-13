@@ -96,7 +96,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
 
 class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl {
 
-    public CouncilOfTheAbsoluteCostReductionEffect() {
+    CouncilOfTheAbsoluteCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Spells with the chosen name you cast cost 2 less to cast";
     }

@@ -118,7 +118,7 @@ class GrimoireThiefExileEffect extends OneShotEffect {
 
 class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
-    public GrimoireThiefLookEffect() {
+    GrimoireThiefLookEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }

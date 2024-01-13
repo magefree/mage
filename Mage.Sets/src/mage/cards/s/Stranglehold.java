@@ -83,7 +83,7 @@ class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectI
 
 class StrangleholdSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
-    public StrangleholdSkipExtraTurnsEffect() {
+    StrangleholdSkipExtraTurnsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If an opponent would begin an extra turn, that player skips that turn instead";
     }

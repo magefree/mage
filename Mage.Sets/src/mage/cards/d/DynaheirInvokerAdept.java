@@ -65,7 +65,7 @@ public final class DynaheirInvokerAdept extends CardImpl {
 
 class DynaheirInvokerAdeptHasteEffect extends AsThoughEffectImpl {
 
-    public DynaheirInvokerAdeptHasteEffect() {
+    DynaheirInvokerAdeptHasteEffect() {
         super(AsThoughEffectType.ACTIVATE_HASTE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "you may activate abilities of other creatures you control as though those creatures had haste";
     }
