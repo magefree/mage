@@ -34,7 +34,6 @@ public final class DontMove extends CardImpl {
 
     public DontMove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
-        
 
         // Destroy all tapped creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
@@ -57,7 +56,7 @@ public final class DontMove extends CardImpl {
 
 class DontMoveEffect extends OneShotEffect {
 
-    public DontMoveEffect() {
+    DontMoveEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Until your next turn, whenever a creature becomes tapped, destroy it.";
     }

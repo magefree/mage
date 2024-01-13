@@ -1,25 +1,21 @@
 package mage.cards.w;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.effects.common.ExileSagaAndReturnTransformedEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterNoncreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -27,13 +23,12 @@ import mage.game.Game;
 import mage.game.permanent.token.DinosaurToken;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTarget;
-import mage.target.targetpointer.FixedTargets;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +36,7 @@ import mage.target.targetpointer.FixedTargets;
  */
 public final class WelcomeTo extends CardImpl {
 
-    private static FilterPermanent filter = new FilterPermanent("walls");
+    private static final FilterPermanent filter = new FilterPermanent("Walls");
 
     static {
         filter.add(SubType.WALL.getPredicate());
@@ -60,11 +55,13 @@ public final class WelcomeTo extends CardImpl {
         // I -- For each opponent, up to one target noncreature artifact they control becomes a 0/4 Wall artifact creature with defender for as long as you control this Saga.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
             ability.addEffect(
-                    new BecomesCreatureTargetEffect(new CreatureToken(0, 4).withSubType(SubType.WALL),
-                            false, false, Duration.WhileControlled)
-                            .setText("For each opponent, up to one target noncreature artifact they control becomes " +
-                                    "a 0/4 Wall artifact creature with defender for as long as you control this Saga."));
-            ability.addEffect(new GainAbilityTargetEffect(DefenderAbility.getInstance(), Duration.WhileControlled, ""));
+                    new BecomesCreatureTargetEffect(
+                            new CreatureToken(0, 4)
+                            .withSubType(SubType.WALL)
+                            .withAbility(DefenderAbility.getInstance()),
+                            false, false, Duration.WhileControlled
+                    ).setText("For each opponent, up to one target noncreature artifact they control becomes " +
+                              "a 0/4 Wall artifact creature with defender for as long as you control this Saga."));
             ability.getEffects().setTargetPointer(new EachTargetPointer());
             ability.setTargetAdjuster(WelcomeToAdjuster.instance);
         });
@@ -116,7 +113,7 @@ enum WelcomeToAdjuster implements TargetAdjuster {
 // Based on Mordor on the March
 class WelcomeToEffect extends OneShotEffect {
 
-    public WelcomeToEffect() {
+    WelcomeToEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 3/3 green Dinosaur creature token with trample. It gains haste until end of turn.";
     }

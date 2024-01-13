@@ -26,7 +26,7 @@ import mage.players.Player;
  */
 public final class JurassicPark extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("Dinosaurs you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("Dinosaur you control");
 
     static {
         filter.add(SubType.DINOSAUR.getPredicate());
