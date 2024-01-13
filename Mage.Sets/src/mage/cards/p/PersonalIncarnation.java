@@ -56,7 +56,7 @@ public final class PersonalIncarnation extends CardImpl {
 
 class PersonalIncarnationRedirectEffect extends RedirectionEffect {
 
-    public PersonalIncarnationRedirectEffect() {
+    PersonalIncarnationRedirectEffect() {
         super(Duration.EndOfTurn, 1, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next 1 damage that would be dealt to {this} this turn is dealt to its owner instead.";
     }

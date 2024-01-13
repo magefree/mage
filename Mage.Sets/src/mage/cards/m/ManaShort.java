@@ -37,7 +37,7 @@ public final class ManaShort extends CardImpl {
 
 class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
 
-    public ManaShortEffect() {
+    ManaShortEffect() {
         super(StaticFilters.FILTER_LANDS);
         staticText = "Tap all lands target player controls and that player loses all unspent mana";
     }

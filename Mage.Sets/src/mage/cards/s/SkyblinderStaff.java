@@ -46,7 +46,7 @@ public final class SkyblinderStaff extends CardImpl {
 
 class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends RestrictionEffect {
 
-    public CantBeBlockedByCreaturesWithFlyingAttachedEffect() {
+    CantBeBlockedByCreaturesWithFlyingAttachedEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Equipped creature can't be blocked by creatures with flying";
     }

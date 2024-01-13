@@ -46,7 +46,7 @@ public final class SpitfireHandler extends CardImpl {
 
 class SpitfireHandlerCantBlockEffect extends RestrictionEffect {
 
-    public SpitfireHandlerCantBlockEffect() {
+    SpitfireHandlerCantBlockEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't block creatures with power greater than {this}'s power";
     }

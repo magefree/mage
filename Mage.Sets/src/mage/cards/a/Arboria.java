@@ -43,7 +43,7 @@ public final class Arboria extends CardImpl {
 
 class ArboriaEffect extends RestrictionEffect {
 
-    public ArboriaEffect() {
+    ArboriaEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn";
     }

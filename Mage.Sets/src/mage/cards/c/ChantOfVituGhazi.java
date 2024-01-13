@@ -44,7 +44,7 @@ public final class ChantOfVituGhazi extends CardImpl {
 
 class ChantOfVituGhaziPreventEffect extends PreventAllDamageByAllPermanentsEffect {
 
-    public ChantOfVituGhaziPreventEffect(FilterCreaturePermanent filter, Duration duration, boolean onlyCombat) {
+    ChantOfVituGhaziPreventEffect(FilterCreaturePermanent filter, Duration duration, boolean onlyCombat) {
         super(filter, duration, onlyCombat);
         staticText = "Prevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way";
     }

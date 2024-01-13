@@ -51,7 +51,7 @@ public final class PrismaticCircle extends CardImpl {
 
 class PrismaticCircleEffect extends PreventNextDamageFromChosenSourceToYouEffect {
 
-    public PrismaticCircleEffect() {
+    PrismaticCircleEffect() {
         super(Duration.EndOfTurn);
         staticText = "The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.";
     }

@@ -109,7 +109,7 @@ class InterdictCounterEffect extends OneShotEffect {
 
 class InterdictCantActivateEffect extends RestrictionEffect {
 
-    public InterdictCantActivateEffect() {
+    InterdictCantActivateEffect() {
         super(Duration.EndOfTurn);
         staticText = "That permanent's activated abilities can't be activated this turn";
     }

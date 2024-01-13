@@ -111,7 +111,7 @@ class PutCardOnLibraryEffect extends OneShotEffect {
 
 class MaximumHandSizeEffect extends MaximumHandSizeControllerEffect {
 
-    public MaximumHandSizeEffect() {
+    MaximumHandSizeEffect() {
         super(Integer.MAX_VALUE, Duration.Custom, MaximumHandSizeControllerEffect.HandSizeModification.SET);
         staticText = "You have no maximum hand size until your next turn";
     }

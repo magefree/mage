@@ -74,7 +74,7 @@ enum OpenSeasonAdjuster implements TargetAdjuster {
 
 class OpenSeasonRestrictionEffect extends RestrictionEffect {
 
-    public OpenSeasonRestrictionEffect() {
+    OpenSeasonRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Creatures your opponent control with bounty counters on them can't activate abilities";
     }

@@ -90,7 +90,7 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class VoidWinnowerCantBlockEffect extends RestrictionEffect {
 
-    public VoidWinnowerCantBlockEffect() {
+    VoidWinnowerCantBlockEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Your opponents can't block with creatures with even mana values";
     }

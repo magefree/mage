@@ -37,7 +37,7 @@ public final class NullRod extends CardImpl {
 
 class NullRodCantActivateEffect extends RestrictionEffect {
 
-    public NullRodCantActivateEffect() {
+    NullRodCantActivateEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Activated abilities of artifacts can't be activated";
     }

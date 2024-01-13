@@ -68,7 +68,7 @@ public final class VolrathsCurse extends CardImpl {
 
 class VolrathsCurseRestrictionEffect extends RestrictionEffect {
 
-    public VolrathsCurseRestrictionEffect() {
+    VolrathsCurseRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Enchanted creature can't attack or block";
     }

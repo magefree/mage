@@ -56,7 +56,7 @@ public final class LegionLoyalist extends CardImpl {
 
 class CantBeBlockedByTokenEffect extends RestrictionEffect {
 
-    public CantBeBlockedByTokenEffect() {
+    CantBeBlockedByTokenEffect() {
         super(Duration.EndOfTurn);
         staticText = "Creatures you control can't be blocked by tokens this turn";
     }

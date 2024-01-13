@@ -45,7 +45,7 @@ public final class DesperateCastaways extends CardImpl {
 
 class DesperateCastawaysEffect extends RestrictionEffect {
 
-    public DesperateCastawaysEffect() {
+    DesperateCastawaysEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless you control an artifact";
     }

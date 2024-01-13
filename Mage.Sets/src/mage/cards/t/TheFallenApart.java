@@ -142,7 +142,7 @@ class TheFallenApartToggleEffect extends OneShotEffect {
 
 class TheFallenApartRestrictionEffect extends RestrictionEffect {
 
-    public TheFallenApartRestrictionEffect() {
+    TheFallenApartRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack if it has no legs and can't block if it has no arms";
     }

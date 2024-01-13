@@ -192,7 +192,7 @@ class WordOfCommandEffect extends OneShotEffect {
 
 class WordOfCommandCantActivateEffect extends RestrictionEffect {
 
-    public WordOfCommandCantActivateEffect() {
+    WordOfCommandCantActivateEffect() {
         super(Duration.EndOfTurn);
     }
 

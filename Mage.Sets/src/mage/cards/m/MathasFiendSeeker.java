@@ -68,7 +68,7 @@ public final class MathasFiendSeeker extends CardImpl {
 
 class MathasFiendSeekerGainAbilityEffect extends GainAbilityTargetEffect {
 
-    public MathasFiendSeekerGainAbilityEffect(Ability ability, Duration duration, String rule) {
+    MathasFiendSeekerGainAbilityEffect(Ability ability, Duration duration, String rule) {
         super(ability, duration, rule);
     }
 

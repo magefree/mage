@@ -56,7 +56,7 @@ public final class HoldForRansom extends CardImpl {
 
 class HoldForRansomGainEffect extends GainAbilityAttachedEffect {
 
-    public HoldForRansomGainEffect() {
+    HoldForRansomGainEffect() {
         super(new ActivateAsSorceryActivatedAbility(new HoldForRansomSacrificeEffect(), new GenericManaCost(7)), AttachmentType.AURA);
         this.staticText = "and has \"" + ability.getRule() + '"';
     }

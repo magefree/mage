@@ -151,7 +151,7 @@ class ChandraDressedToKillExile5Effect extends OneShotEffect {
 // Only used for the -7 ability (see comment at top)
 class ChandraDressedToKillPlayEffect extends PlayFromNotOwnHandZoneTargetEffect {
 
-    public ChandraDressedToKillPlayEffect() {
+    ChandraDressedToKillPlayEffect() {
         super(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, false, true);
     }
 

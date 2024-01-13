@@ -99,7 +99,7 @@ class DarthTyranusEffect extends OneShotEffect {
 
 class TransmuteArtifactEffect extends SearchEffect {
 
-    public TransmuteArtifactEffect() {
+    TransmuteArtifactEffect() {
         super(new TargetCardInLibrary(new FilterArtifactCard()), Outcome.PutCardInPlay);
         staticText = "Sacrifice an artifact. If you do, search your library for an artifact card and put that card onto the battlefield. Shuffle your library";
     }

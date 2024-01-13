@@ -46,7 +46,7 @@ public final class TransmuteArtifact extends CardImpl {
 
 class TransmuteArtifactEffect extends SearchEffect {
 
-    public TransmuteArtifactEffect() {
+    TransmuteArtifactEffect() {
         super(new TargetCardInLibrary(new FilterArtifactCard()), Outcome.PutCardInPlay);
         staticText = "Sacrifice an artifact. If you do, search your library for an artifact card. If that card's mana value is less than or equal to the sacrificed artifact's mana value, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle";
     }

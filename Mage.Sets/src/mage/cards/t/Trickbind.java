@@ -76,7 +76,7 @@ class TrickbindCounterEffect extends OneShotEffect {
 
 class TrickbindCantActivateEffect extends RestrictionEffect {
 
-    public TrickbindCantActivateEffect() {
+    TrickbindCantActivateEffect() {
         super(Duration.EndOfTurn);
         staticText = "Activated abilities of that permanent can't be activated this turn";
     }

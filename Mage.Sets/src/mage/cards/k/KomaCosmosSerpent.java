@@ -78,7 +78,7 @@ public final class KomaCosmosSerpent extends CardImpl {
 
 class KomaCosmosSerpentEffect extends RestrictionEffect {
 
-    public KomaCosmosSerpentEffect() {
+    KomaCosmosSerpentEffect() {
         super(Duration.EndOfTurn);
         staticText = "Its activated abilities can't be activated this turn";
     }

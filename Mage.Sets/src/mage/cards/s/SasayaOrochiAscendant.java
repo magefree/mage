@@ -120,7 +120,7 @@ class SasayasEssence extends TokenImpl {
 
 class SasayasEssenceManaEffect extends ManaEffect {
 
-    public SasayasEssenceManaEffect() {
+    SasayasEssenceManaEffect() {
         super();
         this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }

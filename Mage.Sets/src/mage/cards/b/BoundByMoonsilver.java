@@ -66,7 +66,7 @@ public final class BoundByMoonsilver extends CardImpl {
 
 class BoundByMoonsilverEffect extends RestrictionEffect {
 
-    public BoundByMoonsilverEffect() {
+    BoundByMoonsilverEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "enchanted creature can't attack, block, or transform";
     }

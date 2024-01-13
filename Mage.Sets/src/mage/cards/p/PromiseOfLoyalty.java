@@ -99,7 +99,7 @@ class PromiseOfLoyaltyEffect extends OneShotEffect {
 
 class PromiseOfLoyaltyAttackEffect extends RestrictionEffect {
 
-    public PromiseOfLoyaltyAttackEffect() {
+    PromiseOfLoyaltyAttackEffect() {
         super(Duration.Custom);
     }
 

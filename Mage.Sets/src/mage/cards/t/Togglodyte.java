@@ -124,7 +124,7 @@ class TogglodyteToggleEffect extends OneShotEffect {
 
 class TogglodyteRestrictionEffect extends RestrictionEffect {
 
-    public TogglodyteRestrictionEffect() {
+    TogglodyteRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "";
     }

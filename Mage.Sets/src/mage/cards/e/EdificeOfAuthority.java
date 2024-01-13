@@ -88,7 +88,7 @@ class EdificeOfAuthorityEffect extends OneShotEffect {
 
 class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
 
-    public EdificeOfAuthorityRestrictionEffect() {
+    EdificeOfAuthorityRestrictionEffect() {
         super(Duration.Custom);
         staticText = "";
     }

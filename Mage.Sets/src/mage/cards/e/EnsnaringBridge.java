@@ -38,7 +38,7 @@ public final class EnsnaringBridge extends CardImpl {
 
 class EnsnaringBridgeRestrictionEffect extends RestrictionEffect {
 
-    public EnsnaringBridgeRestrictionEffect() {
+    EnsnaringBridgeRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Creatures with power greater than the number of cards in your hand can't attack";
     }

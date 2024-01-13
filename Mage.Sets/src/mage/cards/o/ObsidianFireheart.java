@@ -124,7 +124,7 @@ class ObsidianFireheartOneShotEffect extends OneShotEffect {
 
 class ObsidianFireheartGainAbilityEffect extends GainAbilityTargetEffect {
 
-    public ObsidianFireheartGainAbilityEffect(Ability ability, Duration duration, String rule) {
+    ObsidianFireheartGainAbilityEffect(Ability ability, Duration duration, String rule) {
         super(ability, duration, rule);
     }
 

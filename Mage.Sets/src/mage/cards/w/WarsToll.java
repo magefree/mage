@@ -76,7 +76,7 @@ class WarsTollTapEffect extends OneShotEffect {
 
 class WarsTollAttackRestrictionEffect extends RestrictionEffect {
 
-    public WarsTollAttackRestrictionEffect() {
+    WarsTollAttackRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "If a creature an opponent controls attacks, all creatures that opponent controls attack if able";
     }
