@@ -40,6 +40,7 @@ public final class JurassicPark extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         
         this.supertype.add(SuperType.LEGENDARY);
+        this.nightCard = true;
 
         // (Transforms from Welcome to ....)
         // Each Dinosaur card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard.
