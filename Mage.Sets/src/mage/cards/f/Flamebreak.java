@@ -54,7 +54,7 @@ public final class Flamebreak extends CardImpl {
 
 class FlamebreakCantRegenerateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public FlamebreakCantRegenerateEffect() {
+    FlamebreakCantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Creatures dealt damage this way can't be regenerated this turn";
     }

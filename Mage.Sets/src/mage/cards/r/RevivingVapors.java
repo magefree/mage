@@ -38,7 +38,7 @@ public final class RevivingVapors extends CardImpl {
 
 class RevivingVaporsEffect extends OneShotEffect {
 
-    public RevivingVaporsEffect() {
+    RevivingVaporsEffect() {
         super(Outcome.Benefit);
         staticText = "Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's mana value. Put all other cards revealed this way into your graveyard";
     }

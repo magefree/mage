@@ -23,7 +23,7 @@ public final class LlanowarElvesToken extends TokenImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    protected LlanowarElvesToken(final LlanowarElvesToken token) {
+    private LlanowarElvesToken(final LlanowarElvesToken token) {
         super(token);
     }
 

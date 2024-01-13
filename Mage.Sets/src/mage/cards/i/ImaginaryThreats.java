@@ -52,7 +52,7 @@ public final class ImaginaryThreats extends CardImpl {
 
 class ImaginaryThreatsEffect extends OneShotEffect {
 
-    public ImaginaryThreatsEffect() {
+    ImaginaryThreatsEffect() {
         super(Outcome.Detriment);
         staticText = "Creatures target opponent controls attack this turn if able";
     }

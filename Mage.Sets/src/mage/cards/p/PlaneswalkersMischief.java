@@ -50,7 +50,7 @@ public final class PlaneswalkersMischief extends CardImpl {
 
 class PlaneswalkersMischiefEffect extends OneShotEffect {
 
-    public PlaneswalkersMischiefEffect() {
+    PlaneswalkersMischiefEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent reveals a card at random from their hand. If it's an instant or sorcery card, exile it. You may cast it without paying its mana cost for as long as it remains exiled. At the beginning of the next end step, if you haven't cast it, return it to its owner's hand.";
     }

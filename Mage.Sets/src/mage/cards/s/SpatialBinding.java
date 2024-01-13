@@ -45,7 +45,7 @@ public final class SpatialBinding extends CardImpl {
 
 class SpatialBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SpatialBindingReplacementEffect() {
+    SpatialBindingReplacementEffect() {
         super(Duration.UntilYourNextUpkeepStep, Outcome.Neutral);
         staticText = "until your next upkeep, target permanent can't phase out";
     }

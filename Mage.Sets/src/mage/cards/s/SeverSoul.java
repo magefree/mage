@@ -42,7 +42,7 @@ public final class SeverSoul extends CardImpl {
 
 class GainLifeEqualToToughnessEffect extends OneShotEffect {
 
-    public GainLifeEqualToToughnessEffect() {
+    GainLifeEqualToToughnessEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to its toughness.";
     }

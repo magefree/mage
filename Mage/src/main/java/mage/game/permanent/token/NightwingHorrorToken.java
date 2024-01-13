@@ -23,7 +23,7 @@ public final class NightwingHorrorToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected NightwingHorrorToken(final NightwingHorrorToken token) {
+    private NightwingHorrorToken(final NightwingHorrorToken token) {
         super(token);
     }
 

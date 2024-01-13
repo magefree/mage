@@ -48,7 +48,7 @@ public final class SunderingTitan extends CardImpl {
 
 class SunderingTitanDestroyLandEffect extends OneShotEffect {
 
-    public SunderingTitanDestroyLandEffect() {
+    SunderingTitanDestroyLandEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "choose a land of each basic land type, then destroy those lands";
     }

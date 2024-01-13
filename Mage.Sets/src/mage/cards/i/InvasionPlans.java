@@ -41,7 +41,7 @@ public final class InvasionPlans extends CardImpl {
 
 class InvasionPlansEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public InvasionPlansEffect() {
+    InvasionPlansEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
         staticText = "The attacking player chooses how each creature blocks each combat";
     }

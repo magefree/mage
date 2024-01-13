@@ -42,7 +42,7 @@ public final class VeilstoneAmulet extends CardImpl {
 // the rules of the game until end of turn.
 class VeilstoneAmuletEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public VeilstoneAmuletEffect() {
+    VeilstoneAmuletEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "creatures you control can't be the targets of spells or abilities your opponents control this turn";
     }

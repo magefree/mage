@@ -55,7 +55,7 @@ public final class NecromanticSelection extends CardImpl {
 
 class NecromanticSelectionEffect extends OneShotEffect {
 
-    public NecromanticSelectionEffect() {
+    NecromanticSelectionEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types";
     }

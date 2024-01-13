@@ -52,7 +52,7 @@ public final class GamorreanPrisonGuard extends CardImpl {
 
 class GamorreanPrisonGuardEffect extends OneShotEffect {
 
-    public GamorreanPrisonGuardEffect() {
+    GamorreanPrisonGuardEffect() {
         super(Outcome.Detriment);
     }
 

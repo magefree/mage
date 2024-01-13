@@ -82,7 +82,7 @@ class EtherswornCanonistWatcher extends Watcher {
 
 class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public EtherswornCanonistReplacementEffect() {
+    EtherswornCanonistReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells";
     }

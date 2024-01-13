@@ -40,7 +40,7 @@ public final class GeistSnatch extends CardImpl {
 
 class GeistSnatchCounterTargetEffect extends OneShotEffect {
 
-    public GeistSnatchCounterTargetEffect() {
+    GeistSnatchCounterTargetEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target creature spell. Create a 1/1 blue Spirit creature token with flying";
     }

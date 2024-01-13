@@ -62,7 +62,7 @@ public final class KumanoFacesKakkazan extends CardImpl {
 
 class KumanoFacesKakkazanDamageEffect extends OneShotEffect {
 
-    public KumanoFacesKakkazanDamageEffect() {
+    KumanoFacesKakkazanDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to each opponent and each planeswalker they control";
     }

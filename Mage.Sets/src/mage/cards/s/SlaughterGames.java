@@ -41,7 +41,7 @@ public final class SlaughterGames extends CardImpl {
 
 class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public SlaughterGamesEffect() {
+    SlaughterGamesEffect() {
         super(true, "target opponent's", "any number of cards with that name");
     }
 

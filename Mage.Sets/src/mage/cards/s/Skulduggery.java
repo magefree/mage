@@ -45,7 +45,7 @@ public final class Skulduggery extends CardImpl {
 
 class SkulduggeryEffect extends OneShotEffect {
 
-    public SkulduggeryEffect() {
+    SkulduggeryEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1";
     }

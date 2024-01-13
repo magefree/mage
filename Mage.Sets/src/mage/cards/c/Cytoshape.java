@@ -58,7 +58,7 @@ public final class Cytoshape extends CardImpl {
 
 class CytoshapeEffect extends OneShotEffect {
 
-    public CytoshapeEffect() {
+    CytoshapeEffect() {
         super(Outcome.Copy);
         this.staticText = "Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.";
     }

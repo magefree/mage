@@ -39,7 +39,7 @@ public final class Hellfire extends CardImpl {
 
 class HellfireEffect extends OneShotEffect {
 
-    public HellfireEffect() {
+    HellfireEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all nonblack creatures. {this} deals X plus 3 damage to you, where X is the number of creatures that died this way";
     }

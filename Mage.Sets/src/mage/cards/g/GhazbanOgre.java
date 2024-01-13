@@ -50,7 +50,7 @@ public final class GhazbanOgre extends CardImpl {
 
 class GhazbanOgreEffect extends OneShotEffect {
 
-    public GhazbanOgreEffect() {
+    GhazbanOgreEffect() {
         super(Outcome.GainControl);
         this.staticText = "the player with the most life gains control of {this}";
     }

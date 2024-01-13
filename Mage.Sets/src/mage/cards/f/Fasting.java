@@ -57,7 +57,7 @@ public final class Fasting extends CardImpl {
 
 class FastingReplacementEffect extends ReplacementEffectImpl {
 
-    public FastingReplacementEffect() {
+    FastingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "If you would begin your draw step, you may skip that step instead. If you do, you gain 2 life";
     }

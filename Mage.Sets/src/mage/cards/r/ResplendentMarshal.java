@@ -73,7 +73,7 @@ public final class ResplendentMarshal extends CardImpl {
 
 class ResplendentMarshalEffect extends OneShotEffect {
 
-    public ResplendentMarshalEffect() {
+    ResplendentMarshalEffect() {
         super(Outcome.Benefit);
     }
 

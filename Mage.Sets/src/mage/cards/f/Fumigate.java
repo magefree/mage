@@ -38,7 +38,7 @@ public final class Fumigate extends CardImpl {
 
 class FumigateEffect extends OneShotEffect {
 
-    public FumigateEffect() {
+    FumigateEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures. You gain 1 life for each creature destroyed this way";
     }

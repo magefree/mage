@@ -31,7 +31,7 @@ public final class MapToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    protected MapToken(final MapToken token) {
+    private MapToken(final MapToken token) {
         super(token);
     }
 

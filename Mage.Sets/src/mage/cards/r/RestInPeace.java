@@ -64,7 +64,7 @@ public final class RestInPeace extends CardImpl {
 
 class RestInPeaceReplacementEffect extends ReplacementEffectImpl {
 
-    public RestInPeaceReplacementEffect() {
+    RestInPeaceReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a card or token would be put into a graveyard from anywhere, exile it instead";
     }

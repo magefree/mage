@@ -18,7 +18,7 @@ public final class WaylayToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected WaylayToken(final WaylayToken token) {
+    private WaylayToken(final WaylayToken token) {
         super(token);
     }
 

@@ -48,7 +48,7 @@ public final class TwoHeadedGiant extends CardImpl {
 
 class TwoHeadedGiantEffect extends OneShotEffect {
 
-    public TwoHeadedGiantEffect() {
+    TwoHeadedGiantEffect() {
         super(Outcome.Benefit);
         this.staticText = "flip two coins. If both coins come up heads, {this} gains double strike until end of turn."
                 + " If both coins come up tails, {this} gains menace until end of turn";

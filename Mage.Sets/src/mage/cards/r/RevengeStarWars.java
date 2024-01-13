@@ -70,7 +70,7 @@ enum LostLifeCondition implements Condition {
 
 class RevengeEffect extends OneShotEffect {
 
-    public RevengeEffect() {
+    RevengeEffect() {
         super(Outcome.BoostCreature);
     }
 

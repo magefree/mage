@@ -44,7 +44,7 @@ public final class PlagueDrone extends CardImpl {
 
 class PlagueDroneReplacementEffect extends ReplacementEffectImpl {
 
-    public PlagueDroneReplacementEffect() {
+    PlagueDroneReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If an opponent would gain life, that player loses that much life instead";
     }

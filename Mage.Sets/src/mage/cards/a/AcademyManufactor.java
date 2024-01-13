@@ -50,7 +50,7 @@ public final class AcademyManufactor extends CardImpl {
 
 class AcademyManufactorEffect extends ReplacementEffectImpl {
 
-    public AcademyManufactorEffect() {
+    AcademyManufactorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "If you would create a Clue, Food, or Treasure token, instead create one of each";
     }

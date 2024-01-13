@@ -64,7 +64,7 @@ public final class GryffsBoon extends CardImpl {
 
 class GryffsBoonEffect extends OneShotEffect {
 
-    public GryffsBoonEffect() {
+    GryffsBoonEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Return {this} from your graveyard to the battlefield attached to target creature";
     }

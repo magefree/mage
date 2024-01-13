@@ -36,7 +36,7 @@ public final class DebtToTheDeathless extends CardImpl {
 
 class DebtToTheDeathlessEffect extends OneShotEffect {
 
-    public DebtToTheDeathlessEffect() {
+    DebtToTheDeathlessEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each opponent loses two times X life. You gain life equal to the life lost this way";
     }

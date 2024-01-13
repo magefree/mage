@@ -66,7 +66,7 @@ public final class AnointedPeacekeeper extends CardImpl {
 
 class AnointedPeacekeeperEffect extends CostModificationEffectImpl {
 
-    public AnointedPeacekeeperEffect() {
+    AnointedPeacekeeperEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.INCREASE_COST);
         this.staticText = "Activated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.";
     }

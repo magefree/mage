@@ -67,7 +67,7 @@ public final class HedronFieldPurists extends LevelerCard {
 
 class HedronFieldPuristsEffect extends PreventionEffectImpl {
 
-    public HedronFieldPuristsEffect(int amount) {
+    HedronFieldPuristsEffect(int amount) {
         super(Duration.WhileOnBattlefield, amount, false, false);
         this.staticText = "If a source would deal damage to you or a creature you control, prevent " + amount + " of that damage";
     }

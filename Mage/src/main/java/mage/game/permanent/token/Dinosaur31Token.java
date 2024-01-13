@@ -18,7 +18,7 @@ public final class Dinosaur31Token extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected Dinosaur31Token(final Dinosaur31Token token) {
+    private Dinosaur31Token(final Dinosaur31Token token) {
         super(token);
     }
 

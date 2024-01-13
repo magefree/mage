@@ -50,7 +50,7 @@ public final class ElvishSoultiller extends CardImpl {
 
 class ElvishSoultillerEffect extends OneShotEffect {
 
-    public ElvishSoultillerEffect() {
+    ElvishSoultillerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a creature type. Shuffle all creature cards of that type from your graveyard into your library";
     }

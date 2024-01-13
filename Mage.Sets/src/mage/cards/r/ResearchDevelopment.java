@@ -45,7 +45,7 @@ public final class ResearchDevelopment extends SplitCard {
 
 class ResearchEffect extends OneShotEffect {
 
-    public ResearchEffect() {
+    ResearchEffect() {
         super(Outcome.Benefit);
         this.staticText = "Shuffle up to four cards you own from outside the game into your library";
     }
@@ -84,7 +84,7 @@ class ResearchEffect extends OneShotEffect {
 
 class DevelopmentEffect extends OneShotEffect {
 
-    public DevelopmentEffect() {
+    DevelopmentEffect() {
         super(Outcome.Benefit);
         staticText = "Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.";
     }

@@ -59,7 +59,7 @@ public final class Cunning extends CardImpl {
 
 class SacrificeSourceBeginningCleanupStepEffect extends OneShotEffect {
 
-    public SacrificeSourceBeginningCleanupStepEffect() {
+    SacrificeSourceBeginningCleanupStepEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "sacrifice {this} at the beginning of the next cleanup step";
     }

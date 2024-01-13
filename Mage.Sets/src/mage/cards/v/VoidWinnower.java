@@ -47,7 +47,7 @@ public final class VoidWinnower extends CardImpl {
 
 class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public VoidWinnowerCantCastEffect() {
+    VoidWinnowerCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Your opponents can't cast spells with even mana values. <i>(Zero is even.)</i>";
     }
@@ -90,7 +90,7 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class VoidWinnowerCantBlockEffect extends RestrictionEffect {
 
-    public VoidWinnowerCantBlockEffect() {
+    VoidWinnowerCantBlockEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Your opponents can't block with creatures with even mana values";
     }

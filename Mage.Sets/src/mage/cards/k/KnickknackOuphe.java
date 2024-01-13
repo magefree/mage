@@ -61,7 +61,7 @@ public final class KnickknackOuphe extends CardImpl {
 
 class KnickknackOuphePutOntoBattlefieldEffect extends OneShotEffect {
 
-    public KnickknackOuphePutOntoBattlefieldEffect() {
+    KnickknackOuphePutOntoBattlefieldEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "reveal the top X cards of your library. " + 
         "You may put any number of Aura cards with mana value X or less from among them onto the battlefield. " + 

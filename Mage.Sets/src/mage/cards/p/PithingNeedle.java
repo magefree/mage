@@ -47,7 +47,7 @@ public final class PithingNeedle extends CardImpl {
 
 class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public PithingNeedleEffect() {
+    PithingNeedleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Activated abilities of sources with the chosen name can't be activated unless they're mana abilities";
     }

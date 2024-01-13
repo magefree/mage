@@ -54,7 +54,7 @@ public final class CorpseCobble extends CardImpl {
 
 class CorpseCobbleEffect extends OneShotEffect {
 
-    public CorpseCobbleEffect() {
+    CorpseCobbleEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X blue and black Zombie creature token with menace, where X is the total power of the sacrificed creatures";
     }

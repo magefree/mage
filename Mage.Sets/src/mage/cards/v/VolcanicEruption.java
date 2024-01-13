@@ -57,7 +57,7 @@ enum VolcanicEruptionAdjuster implements TargetAdjuster {
 
 class VolcanicEruptionEffect extends OneShotEffect {
 
-    public VolcanicEruptionEffect() {
+    VolcanicEruptionEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy X target Mountains. {this} deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way.";
     }

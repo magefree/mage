@@ -48,7 +48,7 @@ public final class BanthaHerd extends CardImpl {
 
 class BathaHerdEffect extends OneShotEffect {
 
-    public BathaHerdEffect() {
+    BathaHerdEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create X 1/1 white Tusken Raider tokens";
     }

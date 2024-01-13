@@ -49,7 +49,7 @@ public final class BellowingMauler extends CardImpl {
 
 class BellowingMaulerEffect extends OneShotEffect {
 
-    public BellowingMaulerEffect() {
+    BellowingMaulerEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each player loses 4 life unless they sacrifice a nontoken creature";
     }

@@ -44,7 +44,7 @@ public final class MoggConscripts extends CardImpl {
 
 class MoggConscriptsEffect extends RestrictionEffect {
 
-    public MoggConscriptsEffect() {
+    MoggConscriptsEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless you've cast a creature spell this turn";
     }

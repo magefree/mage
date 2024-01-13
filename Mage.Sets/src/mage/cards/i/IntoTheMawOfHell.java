@@ -43,7 +43,7 @@ public final class IntoTheMawOfHell extends CardImpl {
 
 class IntoTheMawOfHellEffect extends OneShotEffect {
 
-    public IntoTheMawOfHellEffect() {
+    IntoTheMawOfHellEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 13 damage to target creature";
     }

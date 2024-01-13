@@ -36,7 +36,7 @@ public final class NahiriTheLithomancerEquipmentToken extends TokenImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(0)));
     }
 
-    protected NahiriTheLithomancerEquipmentToken(final NahiriTheLithomancerEquipmentToken token) {
+    private NahiriTheLithomancerEquipmentToken(final NahiriTheLithomancerEquipmentToken token) {
         super(token);
     }
 

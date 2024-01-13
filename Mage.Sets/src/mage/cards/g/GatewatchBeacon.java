@@ -81,7 +81,7 @@ enum GatewatchBeaconCondition implements Condition {
 
 class GatewatchBeaconMoveCounterEffect extends OneShotEffect {
 
-    public GatewatchBeaconMoveCounterEffect() {
+    GatewatchBeaconMoveCounterEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may move a loyalty counter from {this} onto that planeswalker";
     }

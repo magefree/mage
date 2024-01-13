@@ -63,7 +63,7 @@ public final class JestersScepter extends CardImpl {
 
 class JestersScepterEffect extends OneShotEffect {
 
-    public JestersScepterEffect() {
+    JestersScepterEffect() {
         super(Outcome.DrawCard);
         staticText = "exile the top five cards of target player's library face down";
     }
@@ -101,7 +101,7 @@ class JestersScepterEffect extends OneShotEffect {
 
 class JestersScepterLookAtCardEffect extends AsThoughEffectImpl {
 
-    public JestersScepterLookAtCardEffect() {
+    JestersScepterLookAtCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }

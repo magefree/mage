@@ -44,7 +44,7 @@ public final class FlourishingHunter extends CardImpl {
 
 class FlourishingHunterEffect extends OneShotEffect {
 
-    public FlourishingHunterEffect() {
+    FlourishingHunterEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to the greatest toughness among other creatures you control";
     }

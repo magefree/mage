@@ -101,7 +101,7 @@ class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class VizkopaGuildmageEffect extends OneShotEffect {
 
-    public VizkopaGuildmageEffect() {
+    VizkopaGuildmageEffect() {
         super(Outcome.Damage);
     }
 

@@ -49,7 +49,7 @@ public final class MarchOfTheDroids extends CardImpl {
 
 class MarchOfTheDroidsEffect extends OneShotEffect {
 
-    public MarchOfTheDroidsEffect() {
+    MarchOfTheDroidsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Remove all repair counters from all cards in your graveyard. Return each card with a repair counter removed this way from graveyard to the battlefield";
     }

@@ -90,7 +90,7 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
 
 class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
 
-    public InvokePrejudiceEffect() {
+    InvokePrejudiceEffect() {
         super(new GenericManaCost(1));
         this.staticText = "counter that spell unless that player pays {X}, where X is its mana value";
     }

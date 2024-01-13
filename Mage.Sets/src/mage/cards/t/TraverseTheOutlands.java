@@ -44,7 +44,7 @@ public final class TraverseTheOutlands extends CardImpl {
 
 class TraverseTheOutlandsEffect extends OneShotEffect {
 
-    public TraverseTheOutlandsEffect() {
+    TraverseTheOutlandsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for up to X basic land cards, where X is the greatest power among creatures you control. Put those cards onto the battlefield tapped, then shuffle.";
     }

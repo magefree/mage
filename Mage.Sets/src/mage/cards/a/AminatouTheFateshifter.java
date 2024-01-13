@@ -76,7 +76,7 @@ public class AminatouTheFateshifter extends CardImpl {
 
 class AminatouPlusEffect extends OneShotEffect {
 
-    public AminatouPlusEffect() {
+    AminatouPlusEffect() {
         super(Outcome.DrawCard);
         staticText = "draw a card, then put a card from your hand on top of your library";
     }
@@ -116,7 +116,7 @@ class AminatouPlusEffect extends OneShotEffect {
 
 class AminatouUltimateEffect extends OneShotEffect {
 
-    public AminatouUltimateEffect() {
+    AminatouUltimateEffect() {
         super(Outcome.Benefit);
         staticText = "Choose left or right. Each player gains control of all nonland permanents other than Aminatou,"
                 + " the Fateshifter controlled by the next player in the chosen direction.";

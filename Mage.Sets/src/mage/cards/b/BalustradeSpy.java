@@ -53,7 +53,7 @@ public final class BalustradeSpy extends CardImpl {
 
 class BalustradeSpyEffect extends OneShotEffect {
 
-    public BalustradeSpyEffect() {
+    BalustradeSpyEffect() {
         super(Outcome.Discard);
         this.staticText = "target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard";
     }

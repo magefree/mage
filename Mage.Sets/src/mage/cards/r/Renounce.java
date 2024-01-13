@@ -41,7 +41,7 @@ public final class Renounce extends CardImpl {
 
 class RenounceEffect extends OneShotEffect {
 
-    public RenounceEffect() {
+    RenounceEffect() {
         super(Outcome.Neutral);
         staticText  = "Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way";
     }

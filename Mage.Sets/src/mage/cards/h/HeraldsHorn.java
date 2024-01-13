@@ -52,7 +52,7 @@ public final class HeraldsHorn extends CardImpl {
 
 class HeraldsHornEffect extends OneShotEffect {
 
-    public HeraldsHornEffect() {
+    HeraldsHornEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand";
     }

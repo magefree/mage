@@ -45,7 +45,7 @@ public final class PrimalVigor extends CardImpl {
 
 class PrimalVigorTokenEffect extends ReplacementEffectImpl {
 
-    public PrimalVigorTokenEffect() {
+    PrimalVigorTokenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
         staticText = "If one or more tokens would be created, twice that many of those tokens are created instead";
     }

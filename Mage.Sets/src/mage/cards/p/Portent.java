@@ -46,7 +46,7 @@ public final class Portent extends CardImpl {
 
 class PortentEffect extends OneShotEffect {
 
-    public PortentEffect() {
+    PortentEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle";
     }

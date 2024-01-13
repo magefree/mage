@@ -51,7 +51,7 @@ public final class Meglonoth extends CardImpl {
 
 class MeglonothEffect extends OneShotEffect {
 
-    public MeglonothEffect() {
+    MeglonothEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage to that creature's controller equal to {this}'s power";
     }

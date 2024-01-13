@@ -69,7 +69,7 @@ public final class Endurance extends CardImpl {
 
 class EnduranceEffect extends OneShotEffect {
 
-    public EnduranceEffect() {
+    EnduranceEffect() {
         super(Outcome.Detriment);
         this.staticText = "up to one target player puts all the cards from their graveyard on the bottom of their library in a random order";
     }

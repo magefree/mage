@@ -143,7 +143,7 @@ class TheMyriadPoolsTriggeredAbility extends TriggeredAbilityImpl {
 
 class TheMyriadPoolsCopyEffect extends OneShotEffect {
 
-    public TheMyriadPoolsCopyEffect() {
+    TheMyriadPoolsCopyEffect() {
         super(Outcome.Neutral);
         this.staticText = "copy of card on stack";
     }

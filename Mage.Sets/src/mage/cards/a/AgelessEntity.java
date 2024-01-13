@@ -44,7 +44,7 @@ public final class AgelessEntity extends CardImpl {
 
 class AgelessEntityEffect extends OneShotEffect {
 
-    public AgelessEntityEffect() {
+    AgelessEntityEffect() {
         super(Outcome.Benefit);
         this.staticText = "put that many +1/+1 counters on {this}";
     }

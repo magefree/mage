@@ -57,7 +57,7 @@ public final class GerrardCapashen extends CardImpl {
 
 class GerrardCapashenEffect extends OneShotEffect {
 
-    public GerrardCapashenEffect() {
+    GerrardCapashenEffect() {
         super(Outcome.GainLife);
         staticText = "you gain 1 life for each card in target opponent's hand.";
     }

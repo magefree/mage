@@ -63,7 +63,7 @@ public final class CurseOfTheCabal extends CardImpl {
 
 class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
 
-    public CurseOfTheCabalSacrificeEffect() {
+    CurseOfTheCabalSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Target player sacrifices half the permanents they control, rounded down.";
     }

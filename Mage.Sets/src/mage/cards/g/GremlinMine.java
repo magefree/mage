@@ -67,7 +67,7 @@ public final class GremlinMine extends CardImpl {
 
 class GremlinMineEffect extends OneShotEffect {
 
-    public GremlinMineEffect() {
+    GremlinMineEffect() {
         super(Outcome.Detriment);
         this.staticText = "Remove up to four charge counters from target noncreature artifact";
     }

@@ -103,7 +103,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
 
 class KahoMinamoHistorianCastEffect extends OneShotEffect {
 
-    public KahoMinamoHistorianCastEffect() {
+    KahoMinamoHistorianCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast a spell with mana value X " +
                 "from among cards exiled with {this} without paying its mana cost";

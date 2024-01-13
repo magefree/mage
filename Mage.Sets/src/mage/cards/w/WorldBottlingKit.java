@@ -47,7 +47,7 @@ public final class WorldBottlingKit extends CardImpl {
 
 class WorldBottlingKitEffect extends OneShotEffect {
 
-    public WorldBottlingKitEffect() {
+    WorldBottlingKitEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Choose a Magic set. Exile all permanents with that set's expansion symbol except for basic lands";
     }

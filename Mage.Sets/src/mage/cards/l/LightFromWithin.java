@@ -37,7 +37,7 @@ public final class LightFromWithin extends CardImpl {
 
 class LightFromWithinEffect extends ContinuousEffectImpl {
 
-    public LightFromWithinEffect() {
+    LightFromWithinEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Each creature you control gets +1/+1 for each white mana symbol in its mana cost";
     }

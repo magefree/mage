@@ -44,7 +44,7 @@ public final class DeadbridgeChant extends CardImpl {
 
 class DeadbridgeChantEffect extends OneShotEffect {
 
-    public DeadbridgeChantEffect() {
+    DeadbridgeChantEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand";
     }

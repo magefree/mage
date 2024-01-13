@@ -71,7 +71,7 @@ public final class NissaStewardOfElements extends CardImpl {
 
 class NissaStewardOfElementsEffect extends OneShotEffect {
 
-    public NissaStewardOfElementsEffect() {
+    NissaStewardOfElementsEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "look at the top card of your library. If it's a land card or a creature card with mana value less than or equal "
                 + "to the number of loyalty counters on {this}, you may put that card onto the battlefield";

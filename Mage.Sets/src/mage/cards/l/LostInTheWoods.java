@@ -39,7 +39,7 @@ public final class LostInTheWoods extends CardImpl {
 
 class LostInTheWoodsEffect extends OneShotEffect {
 
-    public LostInTheWoodsEffect() {
+    LostInTheWoodsEffect() {
         super(Outcome.PreventDamage);
         staticText = "reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library";
     }

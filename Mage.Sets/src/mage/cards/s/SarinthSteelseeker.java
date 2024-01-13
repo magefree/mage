@@ -48,7 +48,7 @@ public final class SarinthSteelseeker extends CardImpl {
 
 class SarinthSteelseekerEffect extends OneShotEffect {
 
-    public SarinthSteelseekerEffect() {
+    SarinthSteelseekerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top card of your library. If it's a land card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.";
     }

@@ -57,7 +57,7 @@ public final class RagingRiver extends CardImpl {
 
 class RagingRiverEffect extends OneShotEffect {
 
-    public RagingRiverEffect() {
+    RagingRiverEffect() {
         super(Outcome.Detriment);
         staticText = "each defending player divides all creatures without flying they control into a \"left\" pile and a \"right\" pile. Then, for each attacking creature you control, choose \"left\" or \"right.\" That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label";
     }

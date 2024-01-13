@@ -61,7 +61,7 @@ public final class PrismaticWard extends CardImpl {
 
 class PrismaticWardPreventDamageEffect extends PreventionEffectImpl {
 
-    public PrismaticWardPreventDamageEffect() {
+    PrismaticWardPreventDamageEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.";
     }

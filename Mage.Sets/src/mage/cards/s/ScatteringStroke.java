@@ -45,7 +45,7 @@ public final class ScatteringStroke extends CardImpl {
 
 class ScatteringStrokeEffect extends OneShotEffect {
 
-    public ScatteringStrokeEffect() {
+    ScatteringStrokeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add an amount of {C} equal to that spell's mana value";
     }

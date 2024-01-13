@@ -96,7 +96,7 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
 
 class FleshCarverEffect extends OneShotEffect {
 
-    public FleshCarverEffect() {
+    FleshCarverEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "create an X/X black Horror creature token, where X is {this}'s power";
     }

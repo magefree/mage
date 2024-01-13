@@ -52,7 +52,7 @@ public final class StartledAwake extends CardImpl {
 
 class StartledAwakeReturnTransformedEffect extends OneShotEffect {
 
-    public StartledAwakeReturnTransformedEffect() {
+    StartledAwakeReturnTransformedEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Put {this} from your graveyard onto the battlefield transformed";
     }

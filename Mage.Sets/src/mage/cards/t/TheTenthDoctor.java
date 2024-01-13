@@ -56,7 +56,7 @@ public final class TheTenthDoctor extends CardImpl {
 
 class TheTenthDoctorEffect extends OneShotEffect {
 
-    public TheTenthDoctorEffect() {
+    TheTenthDoctorEffect() {
         super(Outcome.Benefit);
         staticText = "exile cards from the top of your library until you exile a nonland card. " +
                 "Put three time counters on it. If it doesn't have suspend, it gains suspend";

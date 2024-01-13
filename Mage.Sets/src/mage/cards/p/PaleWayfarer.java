@@ -64,7 +64,7 @@ public final class PaleWayfarer extends CardImpl {
 
 class PaleWayfarerEffect extends OneShotEffect {
 
-    public PaleWayfarerEffect() {
+    PaleWayfarerEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target creature gains protection from the color of its controller's choice until end of turn";
     }

@@ -55,7 +55,7 @@ public final class SoulReap extends CardImpl {
 
 class SoulReapEffect extends OneShotEffect {
 
-    public SoulReapEffect() {
+    SoulReapEffect() {
         super(Outcome.Detriment);
         this.staticText = "destroy target nongreen creature. Its controller " +
                 "loses 3 life if you've cast another black spell this turn";

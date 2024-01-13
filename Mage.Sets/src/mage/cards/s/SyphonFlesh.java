@@ -43,7 +43,7 @@ public final class SyphonFlesh extends CardImpl {
 
 class SyphonFleshEffect extends OneShotEffect {
 
-    public SyphonFleshEffect() {
+    SyphonFleshEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.";
     }

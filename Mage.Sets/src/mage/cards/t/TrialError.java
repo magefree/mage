@@ -62,7 +62,7 @@ public final class TrialError extends SplitCard {
 
 class TrialEffect extends OneShotEffect {
 
-    public TrialEffect() {
+    TrialEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return all creatures blocking or blocked by target creature to their owner's hand";
     }

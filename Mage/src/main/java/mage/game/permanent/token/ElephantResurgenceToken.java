@@ -31,7 +31,7 @@ public final class ElephantResurgenceToken extends TokenImpl {
         ));
     }
 
-    protected ElephantResurgenceToken(final ElephantResurgenceToken token) {
+    private ElephantResurgenceToken(final ElephantResurgenceToken token) {
         super(token);
     }
 

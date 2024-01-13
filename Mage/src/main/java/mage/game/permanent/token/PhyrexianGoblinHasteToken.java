@@ -22,7 +22,7 @@ public final class PhyrexianGoblinHasteToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    protected PhyrexianGoblinHasteToken(final PhyrexianGoblinHasteToken token) {
+    private PhyrexianGoblinHasteToken(final PhyrexianGoblinHasteToken token) {
         super(token);
     }
 

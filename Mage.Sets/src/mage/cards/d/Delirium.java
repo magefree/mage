@@ -58,7 +58,7 @@ public final class Delirium extends CardImpl {
 
 class DeliriumEffect extends OneShotEffect {
 
-    public DeliriumEffect() {
+    DeliriumEffect() {
         super(Outcome.Damage);
         this.staticText = "that creature deals damage equal to its power to the player";
     }

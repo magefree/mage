@@ -50,7 +50,7 @@ public final class BrineElemental extends CardImpl {
 
 class BrineElementalEffect extends OneShotEffect {
 
-    public BrineElementalEffect() {
+    BrineElementalEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent skips their next untap step";
     }

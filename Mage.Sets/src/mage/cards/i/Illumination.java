@@ -53,7 +53,7 @@ public final class Illumination extends CardImpl {
 
 class IlluminationEffect extends OneShotEffect {
 
-    public IlluminationEffect() {
+    IlluminationEffect() {
         super(Outcome.GainLife);
         staticText = "Its controller gains life equal to its mana value";
     }

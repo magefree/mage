@@ -57,7 +57,7 @@ public final class LimitedResources extends CardImpl {
 
 class LimitedResourcesEffect extends OneShotEffect {
 
-    public LimitedResourcesEffect() {
+    LimitedResourcesEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player chooses five lands they control and sacrifices the rest";
     }
@@ -92,7 +92,7 @@ class LimitedResourcesEffect extends OneShotEffect {
 
 class CantPlayLandEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantPlayLandEffect() {
+    CantPlayLandEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Players can't play lands as long as ten or more lands are on the battlefield";
     }

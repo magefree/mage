@@ -46,7 +46,7 @@ public final class ConchHorn extends CardImpl {
 
 class ConchHornEffect extends OneShotEffect {
 
-    public ConchHornEffect() {
+    ConchHornEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw two cards, then put a card from your hand on top of your library";
     }

@@ -23,7 +23,7 @@ public final class ThatcherHumanToken extends TokenImpl {
         this.toughness = new MageInt(1);
     }
 
-    protected ThatcherHumanToken(final ThatcherHumanToken token) {
+    private ThatcherHumanToken(final ThatcherHumanToken token) {
         super(token);
     }
 

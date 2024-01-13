@@ -62,7 +62,7 @@ public final class HungeringHydra extends CardImpl {
 
 class HungeringHydraEffect extends OneShotEffect {
 
-    public HungeringHydraEffect() {
+    HungeringHydraEffect() {
         super(Outcome.Benefit);
         this.staticText = "put that many +1/+1 counters on it";
     }

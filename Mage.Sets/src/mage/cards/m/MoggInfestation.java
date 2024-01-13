@@ -47,7 +47,7 @@ public final class MoggInfestation extends CardImpl {
 
 class MoggInfestationEffect extends OneShotEffect {
 
-    public MoggInfestationEffect() {
+    MoggInfestationEffect() {
         super(Outcome.Detriment);
         this.staticText = "Destroy all creatures target player controls. For each creature that died this way, create two 1/1 red Goblin creature tokens under that player's control";
     }

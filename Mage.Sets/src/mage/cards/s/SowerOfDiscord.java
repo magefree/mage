@@ -59,7 +59,7 @@ public final class SowerOfDiscord extends CardImpl {
 
 class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
 
-    public SowerOfDiscordEntersBattlefieldEffect() {
+    SowerOfDiscordEntersBattlefieldEffect() {
         super(Outcome.Damage);
         staticText = "choose two players";
     }

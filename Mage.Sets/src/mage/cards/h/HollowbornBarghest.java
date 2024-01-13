@@ -68,7 +68,7 @@ public final class HollowbornBarghest extends CardImpl {
 
 class HollowbornBarghestEffect extends OneShotEffect {
 
-    public HollowbornBarghestEffect() {
+    HollowbornBarghestEffect() {
         super(Outcome.Benefit);
         staticText = "Each opponent loses 2 life";
     }

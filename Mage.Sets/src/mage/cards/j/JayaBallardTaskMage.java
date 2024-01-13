@@ -81,7 +81,7 @@ public final class JayaBallardTaskMage extends CardImpl {
 
 class CantRegenerateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantRegenerateEffect() {
+    CantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "A creature dealt damage this way can't be regenerated this turn";
     }

@@ -28,7 +28,7 @@ public final class PhyrexianHorrorRedToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    protected PhyrexianHorrorRedToken(final PhyrexianHorrorRedToken token) {
+    private PhyrexianHorrorRedToken(final PhyrexianHorrorRedToken token) {
         super(token);
     }
 

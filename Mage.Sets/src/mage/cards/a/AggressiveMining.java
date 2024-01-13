@@ -52,7 +52,7 @@ public final class AggressiveMining extends CardImpl {
 
 class AggressiveMiningEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AggressiveMiningEffect() {
+    AggressiveMiningEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "You can't play lands";
     }

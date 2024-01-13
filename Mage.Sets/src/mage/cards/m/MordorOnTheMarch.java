@@ -56,7 +56,7 @@ public final class MordorOnTheMarch extends CardImpl {
 
 class MordorOnTheMarchEffect extends OneShotEffect {
 
-    public MordorOnTheMarchEffect() {
+    MordorOnTheMarchEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "exile a creature card from your graveyard. Create a token that's a copy of it. It gains haste until end of turn. Exile it at the beginning of the next end step";
     }

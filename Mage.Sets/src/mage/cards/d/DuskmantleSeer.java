@@ -49,7 +49,7 @@ public final class DuskmantleSeer extends CardImpl {
 
 class DuskmantleSeerEffect extends OneShotEffect {
 
-    public DuskmantleSeerEffect() {
+    DuskmantleSeerEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player reveals the top card of their library, " +
                 "loses life equal to that card's mana value, then puts it into their hand";

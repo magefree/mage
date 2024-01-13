@@ -47,7 +47,7 @@ public final class InquisitorsFlail extends CardImpl {
 
 class InquisitorsFlailEffect extends ReplacementEffectImpl {
 
-    public InquisitorsFlailEffect() {
+    InquisitorsFlailEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If equipped creature would deal combat damage, it deals double that damage instead. \n"
                 + "If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead";

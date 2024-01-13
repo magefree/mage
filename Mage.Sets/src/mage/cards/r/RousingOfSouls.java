@@ -45,7 +45,7 @@ public final class RousingOfSouls extends CardImpl {
 
 class RousingOfSoulsEffect extends OneShotEffect {
 
-    public RousingOfSoulsEffect() {
+    RousingOfSoulsEffect() {
         super(Outcome.Benefit);
         this.staticText = "<i>Parley</i> &mdash; Each player reveals the top card of their library. For each nonland card revealed this way, you create a 1/1 white Spirit creature token with flying";
     }

@@ -51,7 +51,7 @@ public final class RealmRazer extends CardImpl {
 
 class ExileAllEffect extends OneShotEffect {
 
-    public ExileAllEffect() {
+    ExileAllEffect() {
         super(Outcome.Exile);
         staticText = "exile all lands";
     }
@@ -78,7 +78,7 @@ class ExileAllEffect extends OneShotEffect {
 
 class RealmRazerEffect extends OneShotEffect {
 
-    public RealmRazerEffect() {
+    RealmRazerEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "return the exiled cards to the battlefield tapped under their owners' control";
     }

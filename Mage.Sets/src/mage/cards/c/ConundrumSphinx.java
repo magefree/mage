@@ -51,7 +51,7 @@ public final class ConundrumSphinx extends CardImpl {
 
 class ConundrumSphinxEffect extends OneShotEffect {
 
-    public ConundrumSphinxEffect() {
+    ConundrumSphinxEffect() {
         super(Outcome.DrawCard);
         staticText = "each player chooses a card name. Then each player reveals the top card of their library. " +
                 "If the card a player revealed has the name they chose, that player puts it into their hand. " +

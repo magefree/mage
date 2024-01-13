@@ -60,7 +60,7 @@ public final class MuseVessel extends CardImpl {
 
 class MuseVesselExileEffect extends OneShotEffect {
 
-    public MuseVesselExileEffect() {
+    MuseVesselExileEffect() {
         super(Outcome.Exile);
         staticText = "target player exiles a card from their hand";
     }
@@ -97,7 +97,7 @@ class MuseVesselExileEffect extends OneShotEffect {
 
 class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public MuseVesselMayPlayExiledEffect() {
+    MuseVesselMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.staticText = "Choose a card exiled with {this}. You may play that card this turn";
     }

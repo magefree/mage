@@ -55,7 +55,7 @@ public final class FelhideSpiritbinder extends CardImpl {
 
 class FelhideSpiritbinderEffect extends OneShotEffect {
 
-    public FelhideSpiritbinderEffect() {
+    FelhideSpiritbinderEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of another target creature except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step";
     }

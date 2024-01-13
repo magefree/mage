@@ -41,7 +41,7 @@ public final class ScepterOfEmpires extends CardImpl {
 
 class ScepterOfEmpiresEffect extends OneShotEffect {
 
-    public ScepterOfEmpiresEffect() {
+    ScepterOfEmpiresEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Scepter of Empires deals 1 damage to target player or planeswalker. It deals 3 damage instead if you control artifacts named Crown of Empires and Throne of Empires";
     }

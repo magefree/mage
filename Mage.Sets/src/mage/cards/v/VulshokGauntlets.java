@@ -56,7 +56,7 @@ public final class VulshokGauntlets extends CardImpl {
 
 class VulshokGauntletsEffect extends ReplacementEffectImpl {
 
-    public VulshokGauntletsEffect() {
+    VulshokGauntletsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Equipped creature doesn't untap during its controller's untap step";
     }

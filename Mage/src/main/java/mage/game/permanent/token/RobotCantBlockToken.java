@@ -25,7 +25,7 @@ public final class RobotCantBlockToken extends TokenImpl {
         ));
     }
 
-    protected RobotCantBlockToken(final RobotCantBlockToken token) {
+    private RobotCantBlockToken(final RobotCantBlockToken token) {
         super(token);
     }
 

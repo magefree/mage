@@ -47,7 +47,7 @@ public final class GaeasHerald extends CardImpl {
 
 class CantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantCounterEffect() {
+    CantCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creature spells can't be countered";
     }

@@ -18,7 +18,7 @@ public final class FoodToken extends TokenImpl {
         this.addAbility(new FoodAbility(false));
     }
 
-    protected FoodToken(final FoodToken token) {
+    private FoodToken(final FoodToken token) {
         super(token);
     }
 

@@ -223,7 +223,7 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
 
 class KarnPlayerExileEffect extends OneShotEffect {
 
-    public KarnPlayerExileEffect() {
+    KarnPlayerExileEffect() {
         super(Outcome.Exile);
         staticText = "target player exiles a card from their hand.";
     }

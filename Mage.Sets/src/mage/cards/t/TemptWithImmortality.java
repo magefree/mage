@@ -44,7 +44,7 @@ public final class TemptWithImmortality extends CardImpl {
 
 class TemptWithImmortalityEffect extends OneShotEffect {
 
-    public TemptWithImmortalityEffect() {
+    TemptWithImmortalityEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "<i>Tempting offer</i> &mdash; Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from their graveyard to the battlefield. For each opponent who does, return a creature card from your graveyard to the battlefield";
 

@@ -46,7 +46,7 @@ public final class Dodecapod extends CardImpl {
 
 class DodecapodEffect extends DiscardOntoBattlefieldEffect {
 
-    public DodecapodEffect() {
+    DodecapodEffect() {
         super();
         staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard";
     }

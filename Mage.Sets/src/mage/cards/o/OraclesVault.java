@@ -57,7 +57,7 @@ public final class OraclesVault extends CardImpl {
 
 class OraclesVaultFreeEffect extends OneShotEffect {
 
-    public OraclesVaultFreeEffect() {
+    OraclesVaultFreeEffect() {
         super(Outcome.Benefit);
     }
 

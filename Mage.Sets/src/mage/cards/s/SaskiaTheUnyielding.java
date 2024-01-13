@@ -57,7 +57,7 @@ public final class SaskiaTheUnyielding extends CardImpl {
 
 class SaskiaTheUnyieldingEffect extends OneShotEffect {
 
-    public SaskiaTheUnyieldingEffect() {
+    SaskiaTheUnyieldingEffect() {
         super(Outcome.Detriment);
         this.staticText = "it deals that much damage to the chosen player";
     }

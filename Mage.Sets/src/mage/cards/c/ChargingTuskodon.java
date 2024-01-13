@@ -51,7 +51,7 @@ public final class ChargingTuskodon extends CardImpl {
 
 class ChargingTuskodonEffect extends ReplacementEffectImpl {
 
-    public ChargingTuskodonEffect() {
+    ChargingTuskodonEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If {this} would deal combat damage to a player, it deals double that damage to that player instead";
     }

@@ -21,7 +21,7 @@ public final class FishToken extends TokenImpl {
         addAbility(new CantBeBlockedSourceAbility("this creature can't be blocked"));
     }
 
-    protected FishToken(final FishToken token) {
+    private FishToken(final FishToken token) {
         super(token);
     }
 

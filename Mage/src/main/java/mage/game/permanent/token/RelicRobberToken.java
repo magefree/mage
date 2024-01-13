@@ -29,7 +29,7 @@ public final class RelicRobberToken extends TokenImpl {
         ), TargetController.YOU, false));
     }
 
-    protected RelicRobberToken(final RelicRobberToken token) {
+    private RelicRobberToken(final RelicRobberToken token) {
         super(token);
     }
 

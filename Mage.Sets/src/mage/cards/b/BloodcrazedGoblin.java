@@ -45,7 +45,7 @@ public final class BloodcrazedGoblin extends CardImpl {
 
 class BloodcrazedGoblinEffect extends RestrictionEffect {
 
-    public BloodcrazedGoblinEffect() {
+    BloodcrazedGoblinEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless an opponent has been dealt damage this turn";
     }

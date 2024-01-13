@@ -59,7 +59,7 @@ public final class KumanosBlessing extends CardImpl {
 
 class KumanosBlessingEffect extends ReplacementEffectImpl {
 
-    public KumanosBlessingEffect() {
+    KumanosBlessingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a creature dealt damage by enchanted creature this turn would die, exile it instead";
     }

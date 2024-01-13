@@ -58,7 +58,7 @@ public final class Hostility extends CardImpl {
 
 class HostilityEffect extends PreventionEffectImpl {
 
-    public HostilityEffect() {
+    HostilityEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         staticText = "If a spell you control would deal damage to an opponent, prevent that damage. Create a 3/1 red Elemental Shaman creature token with haste for each 1 damage prevented this way.";
     }

@@ -51,7 +51,7 @@ public final class ArchitectsOfWill extends CardImpl {
 
 class ArchitectsOfWillEffect extends OneShotEffect {
 
-    public ArchitectsOfWillEffect() {
+    ArchitectsOfWillEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order";
     }

@@ -116,7 +116,7 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
 
 class DefiantVanguardEffect extends OneShotEffect {
 
-    public DefiantVanguardEffect() {
+    DefiantVanguardEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy it and all creatures it blocked this turn";
     }

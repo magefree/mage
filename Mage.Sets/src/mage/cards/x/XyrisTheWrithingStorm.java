@@ -53,7 +53,7 @@ public final class XyrisTheWrithingStorm extends CardImpl {
 
 class XyrisTheWrithingStormCombatDamageEffect extends OneShotEffect {
 
-    public XyrisTheWrithingStormCombatDamageEffect() {
+    XyrisTheWrithingStormCombatDamageEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you and that player each draw that many cards.";
     }

@@ -58,7 +58,7 @@ public final class KaronaFalseGod extends CardImpl {
 
 class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
 
-    public KaronaFalseGodUntapGetControlEffect() {
+    KaronaFalseGodUntapGetControlEffect() {
         super(Outcome.GainControl);
         this.staticText = "that player untaps {this} and gains control of it";
     }
@@ -105,7 +105,7 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
 
 class KaronaFalseGodEffect extends OneShotEffect {
 
-    public KaronaFalseGodEffect() {
+    KaronaFalseGodEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "creatures of the creature type of your choice get +3/+3 until end of turn";
     }

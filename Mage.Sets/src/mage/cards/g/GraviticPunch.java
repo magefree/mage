@@ -45,7 +45,7 @@ public final class GraviticPunch extends CardImpl {
 
 class GraviticPunchEffect extends OneShotEffect {
 
-    public GraviticPunchEffect() {
+    GraviticPunchEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target creature you control deals damage "
                 + "equal to its power to target player.";

@@ -40,7 +40,7 @@ public final class RighteousFury extends CardImpl {
 
 class RighteousFuryEffect extends OneShotEffect {
 
-    public RighteousFuryEffect() {
+    RighteousFuryEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all tapped creatures. You gain 2 life for each creature destroyed this way";
     }

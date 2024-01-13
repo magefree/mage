@@ -44,7 +44,7 @@ public final class IceCave extends CardImpl {
 
 class IceCaveEffect extends OneShotEffect {
 
-    public IceCaveEffect() {
+    IceCaveEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "any other player may pay that spell's mana cost. If a player does, counter the spell";
     }

@@ -50,7 +50,7 @@ public final class CragganwickCremator extends CardImpl {
 
 class CragganwickCrematorEffect extends OneShotEffect {
 
-    public CragganwickCrematorEffect() {
+    CragganwickCrematorEffect() {
         super(Outcome.Neutral);
         this.staticText = "discard a card at random. If you discard a creature card this way, {this} deals damage equal to that card's power to target player or planeswalker";
     }

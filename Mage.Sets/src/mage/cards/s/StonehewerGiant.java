@@ -63,7 +63,7 @@ public final class StonehewerGiant extends CardImpl {
 
 class StonehewerGiantEffect extends OneShotEffect {
 
-    public StonehewerGiantEffect() {
+    StonehewerGiantEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle";
     }

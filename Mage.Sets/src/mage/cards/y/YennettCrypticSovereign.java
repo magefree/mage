@@ -62,7 +62,7 @@ public final class YennettCrypticSovereign extends CardImpl {
 
 class YennettCrypticSovereignEffect extends OneShotEffect {
 
-    public YennettCrypticSovereignEffect() {
+    YennettCrypticSovereignEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal the top card of your library. " +
                 "You may cast it without paying its mana cost " +

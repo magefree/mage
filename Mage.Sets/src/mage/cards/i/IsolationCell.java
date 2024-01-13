@@ -81,7 +81,7 @@ class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
 
 class IsolationCellEffect extends OneShotEffect {
 
-    public IsolationCellEffect() {
+    IsolationCellEffect() {
         super(Outcome.Neutral);
         this.staticText = "that player loses 2 life unless they pay {2}";
     }

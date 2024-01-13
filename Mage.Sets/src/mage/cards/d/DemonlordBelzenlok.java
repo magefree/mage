@@ -52,7 +52,7 @@ public final class DemonlordBelzenlok extends CardImpl {
 
 class DemonlordBelzenlokEffect extends OneShotEffect {
 
-    public DemonlordBelzenlokEffect() {
+    DemonlordBelzenlokEffect() {
         super(Outcome.Benefit);
         staticText = "exile cards from the top of your library until you exile a nonland card, then put that card into your hand. "
                 + "If the card's mana value is 4 or greater, repeat this process. "

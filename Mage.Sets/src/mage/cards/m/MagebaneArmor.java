@@ -72,7 +72,7 @@ class MagebaneArmorAbility extends StaticAbility {
 
 class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
 
-    public MagebaneArmorPreventionEffect() {
+    MagebaneArmorPreventionEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Prevent all noncombat damage that would be dealt to equipped creature";
     }

@@ -43,7 +43,7 @@ public final class ExplosiveRevelation extends CardImpl {
 
 class ExplosiveRevelationEffect extends OneShotEffect {
 
-    public ExplosiveRevelationEffect() {
+    ExplosiveRevelationEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. {this} deals damage equal to that card's mana value to that permanent or player. Put the nonland card into your hand and the rest on the bottom of your library in any order";
     }

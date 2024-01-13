@@ -67,7 +67,7 @@ public final class PhantasmalSphere extends CardImpl {
 
 class PhantasmalSphereEffect extends OneShotEffect {
 
-    public PhantasmalSphereEffect() {
+    PhantasmalSphereEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "target opponent creates an X/X blue Orb creature token "
                 + "with flying, where X is the number "

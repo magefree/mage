@@ -40,7 +40,7 @@ public final class CruelEntertainment extends CardImpl {
 
 class CruelEntertainmentEffect extends OneShotEffect {
 
-    public CruelEntertainmentEffect() {
+    CruelEntertainmentEffect() {
         super(Outcome.Detriment);
         this.staticText = "Choose target player and another target player. The first player controls the second player"
                 + " during the second player's next turn, and the second player controls the first player during the first player's next turn";

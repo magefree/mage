@@ -127,7 +127,7 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
 
 class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
 
-    public GontiLordOfLuxuryCastFromExileEffect() {
+    GontiLordOfLuxuryCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }

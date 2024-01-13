@@ -49,7 +49,7 @@ public final class ContestOfClaws extends CardImpl {
 // Based on Fall of the Hammer and Lacerate Flesh
 class ContestOfClawsDamageEffect extends OneShotEffect {
 
-    public ContestOfClawsDamageEffect() {
+    ContestOfClawsDamageEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Target creature you control deals damage equal to its power to another target creature. " +
                 "If excess damage was dealt this way, discover X, where X is that excess damage.";

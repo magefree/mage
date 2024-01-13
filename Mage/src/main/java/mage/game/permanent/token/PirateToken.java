@@ -21,7 +21,7 @@ public final class PirateToken extends TokenImpl {
         addAbility(new MenaceAbility());
     }
 
-    protected PirateToken(final PirateToken token) {
+    private PirateToken(final PirateToken token) {
         super(token);
     }
 

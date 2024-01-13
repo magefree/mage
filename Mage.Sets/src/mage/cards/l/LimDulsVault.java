@@ -37,7 +37,7 @@ public final class LimDulsVault extends CardImpl {
 
 class LimDulsVaultEffect extends OneShotEffect {
 
-    public LimDulsVaultEffect() {
+    LimDulsVaultEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at the top five cards of your library. As many times as you choose, "
                 + "you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. "

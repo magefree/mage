@@ -59,7 +59,7 @@ public final class MaintenanceHangar extends CardImpl {
 
 class RemoveCounterMaintenanceHangarEffect extends OneShotEffect {
 
-    public RemoveCounterMaintenanceHangarEffect() {
+    RemoveCounterMaintenanceHangarEffect() {
         super(Outcome.Detriment);
         staticText = "remove an additional repair counter from each card in your graveyard";
     }

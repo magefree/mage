@@ -48,7 +48,7 @@ public final class TyrantOfDiscord extends CardImpl {
 
 class TyrantOfDiscordEffect extends OneShotEffect {
 
-    public TyrantOfDiscordEffect() {
+    TyrantOfDiscordEffect() {
         super(Outcome.Benefit);
         this.staticText = "target opponent chooses a permanent they control at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process";
     }

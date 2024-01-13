@@ -46,7 +46,7 @@ public final class DeathsCaress extends CardImpl {
 
 class DeathsCaressEffect extends OneShotEffect {
 
-    public DeathsCaressEffect() {
+    DeathsCaressEffect() {
         super(Outcome.GainLife);
         this.staticText = "If that creature was a Human, you gain life equal to its toughness";
     }

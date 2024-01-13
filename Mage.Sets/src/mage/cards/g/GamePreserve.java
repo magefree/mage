@@ -43,7 +43,7 @@ public final class GamePreserve extends CardImpl {
 
 class GamePreserveEffect extends OneShotEffect {
 
-    public GamePreserveEffect() {
+    GamePreserveEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control";
     }

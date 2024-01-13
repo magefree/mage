@@ -53,7 +53,7 @@ public final class FlashFoliage extends CardImpl {
 
 class FlashFoliageEffect extends OneShotEffect {
 
-    public FlashFoliageEffect() {
+    FlashFoliageEffect() {
         super(Outcome.Benefit);
         this.staticText = "create a 1/1 green Saproling creature token that's blocking target creature attacking you";
     }

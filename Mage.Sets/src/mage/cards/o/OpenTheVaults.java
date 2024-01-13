@@ -40,7 +40,7 @@ public final class OpenTheVaults extends CardImpl {
 
 class OpenTheVaultsEffect extends OneShotEffect {
 
-    public OpenTheVaultsEffect() {
+    OpenTheVaultsEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control";
     }

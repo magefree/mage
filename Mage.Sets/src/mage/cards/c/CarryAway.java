@@ -57,7 +57,7 @@ public final class CarryAway extends CardImpl {
 
 class CarryAwayEffect extends OneShotEffect {
 
-    public CarryAwayEffect() {
+    CarryAwayEffect() {
         super(Outcome.Detriment);
         this.staticText = "unattach enchanted Equipment.";
     }

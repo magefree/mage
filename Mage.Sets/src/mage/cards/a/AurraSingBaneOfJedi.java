@@ -69,7 +69,7 @@ public final class AurraSingBaneOfJedi extends CardImpl {
 
 class AurraSingBaneOfJediEffect extends OneShotEffect {
 
-    public AurraSingBaneOfJediEffect() {
+    AurraSingBaneOfJediEffect() {
         super(Outcome.Damage);
         staticText = "You may have {this} deal 2 damage to target creature. If you don't, {this} deals 1 damage to you";
     }

@@ -18,7 +18,7 @@ public final class RobotToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected RobotToken(final RobotToken token) {
+    private RobotToken(final RobotToken token) {
         super(token);
     }
 

@@ -41,7 +41,7 @@ public final class TimelyReinforcements extends CardImpl {
 
 class TimelyReinforcementsEffect extends OneShotEffect {
 
-    public TimelyReinforcementsEffect() {
+    TimelyReinforcementsEffect() {
         super(Outcome.Benefit);
         staticText = "If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, create three 1/1 white Soldier creature tokens";
     }

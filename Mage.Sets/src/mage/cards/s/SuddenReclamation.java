@@ -46,7 +46,7 @@ public final class SuddenReclamation extends CardImpl {
 
 class SuddenReclamationEffect extends OneShotEffect {
 
-    public SuddenReclamationEffect() {
+    SuddenReclamationEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = ", then return a creature card and a land card from your graveyard to your hand";
     }

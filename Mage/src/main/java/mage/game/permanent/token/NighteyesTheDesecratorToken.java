@@ -34,7 +34,7 @@ public final class NighteyesTheDesecratorToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    protected NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
+    private NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
         super(token);
     }
 

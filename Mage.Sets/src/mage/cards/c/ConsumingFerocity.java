@@ -68,7 +68,7 @@ public final class ConsumingFerocity extends CardImpl {
 
 class ConsumingFerocityEffect extends OneShotEffect {
 
-    public ConsumingFerocityEffect() {
+    ConsumingFerocityEffect() {
         super(Outcome.Benefit);
         staticText = "If that creature has three or more +1/+0 counters on it, it deals damage equal to its power to its controller, then destroy that creature and it can't be regenerated";
     }

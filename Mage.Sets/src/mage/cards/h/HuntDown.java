@@ -48,7 +48,7 @@ public final class HuntDown extends CardImpl {
 
 class HuntDownEffect extends RequirementEffect {
 
-    public HuntDownEffect() {
+    HuntDownEffect() {
         this(Duration.EndOfTurn);
     }
 

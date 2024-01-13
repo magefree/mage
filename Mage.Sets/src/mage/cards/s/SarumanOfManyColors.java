@@ -70,7 +70,7 @@ public final class SarumanOfManyColors extends CardImpl {
 
 class SarumanOfManyColorsEffect extends OneShotEffect {
 
-    public SarumanOfManyColorsEffect() {
+    SarumanOfManyColorsEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "each opponent mills two cards. When one or more cards are milled this way, exile target enchantment, instant, or sorcery card with equal or lesser mana value than that spell from an opponent's graveyard. Copy the exiled card. You may cast the copy without paying its mana cost.";
     }

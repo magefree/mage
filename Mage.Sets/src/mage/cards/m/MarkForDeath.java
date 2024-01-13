@@ -47,7 +47,7 @@ public final class MarkForDeath extends CardImpl {
 
 class MarkForDeathEffect extends OneShotEffect {
 
-    public MarkForDeathEffect() {
+    MarkForDeathEffect() {
         super(Outcome.Damage);
         staticText = "Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn";
     }

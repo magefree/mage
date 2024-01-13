@@ -86,7 +86,7 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
 
 class SteelSquirrelEffect extends OneShotEffect {
 
-    public SteelSquirrelEffect() {
+    SteelSquirrelEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} gets +X/+X until end of turn, where X is the result";
     }

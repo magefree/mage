@@ -18,7 +18,7 @@ public final class StitchersApprenticeHomunculusToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected StitchersApprenticeHomunculusToken(final StitchersApprenticeHomunculusToken token) {
+    private StitchersApprenticeHomunculusToken(final StitchersApprenticeHomunculusToken token) {
         super(token);
     }
 

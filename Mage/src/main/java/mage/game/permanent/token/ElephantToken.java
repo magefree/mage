@@ -18,7 +18,7 @@ public final class ElephantToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected ElephantToken(final ElephantToken token) {
+    private ElephantToken(final ElephantToken token) {
         super(token);
     }
 

@@ -51,7 +51,7 @@ public final class VassalsDuty extends CardImpl {
 
 class VassalsDutyPreventDamageTargetEffect extends RedirectionEffect {
 
-    public VassalsDutyPreventDamageTargetEffect(Duration duration, int amount) {
+    VassalsDutyPreventDamageTargetEffect(Duration duration, int amount) {
         super(duration, amount, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next " + amount + " damage that would be dealt to target legendary creature you control this turn is dealt to you instead";
     }

@@ -21,7 +21,7 @@ public final class Ooze2Token extends TokenImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new OozeToken(1, 1), 2), false));
     }
 
-    protected Ooze2Token(final Ooze2Token token) {
+    private Ooze2Token(final Ooze2Token token) {
         super(token);
     }
 

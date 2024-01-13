@@ -46,7 +46,7 @@ public final class ChainOfVapor extends CardImpl {
 
 class ChainOfVaporEffect extends OneShotEffect {
 
-    public ChainOfVaporEffect() {
+    ChainOfVaporEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
     }

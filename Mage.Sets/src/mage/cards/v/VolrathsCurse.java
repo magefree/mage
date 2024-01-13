@@ -68,7 +68,7 @@ public final class VolrathsCurse extends CardImpl {
 
 class VolrathsCurseRestrictionEffect extends RestrictionEffect {
 
-    public VolrathsCurseRestrictionEffect() {
+    VolrathsCurseRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Enchanted creature can't attack or block";
     }
@@ -106,7 +106,7 @@ class VolrathsCurseRestrictionEffect extends RestrictionEffect {
 
 class VolrathsCurseCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public VolrathsCurseCantActivateAbilitiesEffect() {
+    VolrathsCurseCantActivateAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
         staticText = ", and its activated abilities can't be activated";
     }
@@ -162,7 +162,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
 
 class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
-    public VolrathsCurseIgnoreEffect(final String keyString) {
+    VolrathsCurseIgnoreEffect(final String keyString) {
         super(Outcome.Benefit);
         this.staticText = "That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn";
     }

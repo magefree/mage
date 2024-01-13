@@ -52,7 +52,7 @@ public final class StonewiseFortifier extends CardImpl {
 
 class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
 
-    public StonewiseFortifierPreventAllDamageToEffect() {
+    StonewiseFortifierPreventAllDamageToEffect() {
         super(Duration.EndOfTurn);
         staticText = "Prevent all damage that would be dealt to {this} by target creature this turn";
     }

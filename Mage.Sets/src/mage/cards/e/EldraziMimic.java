@@ -57,7 +57,7 @@ public final class EldraziMimic extends CardImpl {
 
 class EldraziMimicEffect extends OneShotEffect {
 
-    public EldraziMimicEffect() {
+    EldraziMimicEffect() {
         super(Outcome.BoostCreature);
         staticText = "you may have the base power and toughness of {this} become that creature's power and toughness until end of turn";
     }

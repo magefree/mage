@@ -56,7 +56,7 @@ public final class TheImmortalSun extends CardImpl {
 
 class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TheImmortalSunCantActivateEffect() {
+    TheImmortalSunCantActivateEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't activate planeswalkers' loyalty abilities";
     }

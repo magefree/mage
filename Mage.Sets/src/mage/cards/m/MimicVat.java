@@ -109,7 +109,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
 class MimicVatEffect extends OneShotEffect {
 
-    public MimicVatEffect() {
+    MimicVatEffect() {
         super(Outcome.Benefit);
         staticText = "exile that card";
     }
@@ -155,7 +155,7 @@ class MimicVatEffect extends OneShotEffect {
 
 class MimicVatCreateTokenEffect extends OneShotEffect {
 
-    public MimicVatCreateTokenEffect() {
+    MimicVatCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of a card exiled with {this}. It gains haste. Exile it at the beginning of the next end step";
     }

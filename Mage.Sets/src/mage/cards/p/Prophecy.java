@@ -48,7 +48,7 @@ public final class Prophecy extends CardImpl {
 
 class ProphecyEffect extends OneShotEffect {
 
-    public ProphecyEffect() {
+    ProphecyEffect() {
         super(Outcome.GainLife);
         this.staticText = "Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles";
     }

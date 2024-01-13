@@ -86,7 +86,7 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
 
 class VerdantSunsAvatarEffect extends OneShotEffect {
 
-    public VerdantSunsAvatarEffect() {
+    VerdantSunsAvatarEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to that creature's toughness";
     }

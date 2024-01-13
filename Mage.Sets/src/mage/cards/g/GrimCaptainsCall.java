@@ -41,7 +41,7 @@ public final class GrimCaptainsCall extends CardImpl {
 
 class GrimCaptainsCallEffect extends OneShotEffect {
 
-    public GrimCaptainsCallEffect() {
+    GrimCaptainsCallEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return a Pirate card from your graveyard to your hand, then do the same for Vampire, Dinosaur, and Merfolk";
     }

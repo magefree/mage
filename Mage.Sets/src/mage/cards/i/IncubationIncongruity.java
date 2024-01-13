@@ -51,7 +51,7 @@ public final class IncubationIncongruity extends SplitCard {
 
 class IncongruityEffect extends OneShotEffect {
 
-    public IncongruityEffect() {
+    IncongruityEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "That creature's controller creates a 3/3 green Frog Lizard creature token";
     }

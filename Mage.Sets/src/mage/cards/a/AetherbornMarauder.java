@@ -55,7 +55,7 @@ public final class AetherbornMarauder extends CardImpl {
 
 class AetherbornMarauderEffect extends OneShotEffect {
 
-    public AetherbornMarauderEffect() {
+    AetherbornMarauderEffect() {
         super(Outcome.Benefit);
         this.staticText = "move any number of +1/+1 counters from other permanents you control onto {this}";
     }

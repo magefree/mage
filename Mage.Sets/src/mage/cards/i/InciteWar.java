@@ -55,7 +55,7 @@ public final class InciteWar extends CardImpl {
 
 class InciteWarMustAttackEffect extends OneShotEffect {
 
-    public InciteWarMustAttackEffect() {
+    InciteWarMustAttackEffect() {
         super(Outcome.Detriment);
         staticText = "Creatures target player controls attack this turn if able";
     }

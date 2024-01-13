@@ -145,7 +145,7 @@ class TawnossCoffinEffect extends OneShotEffect {
 
 class TawnossCoffinReturnEffect extends OneShotEffect {
 
-    public TawnossCoffinReturnEffect() {
+    TawnossCoffinReturnEffect() {
         super(Outcome.Benefit);
         this.staticText = "return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. " +
                           "If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent";

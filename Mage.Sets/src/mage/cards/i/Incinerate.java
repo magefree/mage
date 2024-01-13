@@ -44,7 +44,7 @@ public final class Incinerate extends CardImpl {
 
 class IncinerateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public IncinerateEffect() {
+    IncinerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment, true, false);
         staticText = "A creature dealt damage this way can't be regenerated this turn";
     }

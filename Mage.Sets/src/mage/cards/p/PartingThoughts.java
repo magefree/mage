@@ -40,7 +40,7 @@ public final class PartingThoughts extends CardImpl {
 
 class PartingThoughtsEffect extends OneShotEffect {
 
-    public PartingThoughtsEffect() {
+    PartingThoughtsEffect() {
         super(Outcome.Detriment);
         this.staticText = "Destroy target creature. You draw X cards and you lose X life, where X is the number of counters on that creature";
     }

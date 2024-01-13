@@ -37,7 +37,7 @@ public final class GelatinousGenesis extends CardImpl {
 
 class GelatinousGenesisEffect extends OneShotEffect {
 
-    public GelatinousGenesisEffect() {
+    GelatinousGenesisEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create X X/X green Ooze creature tokens";
     }
@@ -62,4 +62,3 @@ class GelatinousGenesisEffect extends OneShotEffect {
         return new GelatinousGenesisEffect(this);
     }
 }
-

@@ -60,7 +60,7 @@ public final class LilianaVess extends CardImpl {
 
 class LilianaVessEffect extends OneShotEffect {
 
-    public LilianaVessEffect() {
+    LilianaVessEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put all creature cards from all graveyards onto the battlefield under your control";
     }

@@ -48,7 +48,7 @@ public final class ColossalGrowth extends CardImpl {
 
 class ColossalGrowthEffect extends OneShotEffect {
 
-    public ColossalGrowthEffect() {
+    ColossalGrowthEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Target creature gets +3/+3 until end of turn. If this spell was kicked, instead that creature gets +4/+4 and gains trample and haste until end of turn.";
     }

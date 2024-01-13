@@ -39,7 +39,7 @@ public final class Undertow extends CardImpl {
 
 class UndertowEffect extends AsThoughEffectImpl {
 
-    public UndertowEffect() {
+    UndertowEffect() {
         super(AsThoughEffectType.BLOCK_ISLANDWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with islandwalk can be blocked as though they didn't have islandwalk";
     }

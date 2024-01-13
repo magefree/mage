@@ -50,7 +50,7 @@ public final class VhatiIlDal extends CardImpl {
 
 class VhatiIlDalEffect extends OneShotEffect {
 
-    public VhatiIlDalEffect() {
+    VhatiIlDalEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Until end of turn, target creature has base power 1 or base toughness 1";
     }

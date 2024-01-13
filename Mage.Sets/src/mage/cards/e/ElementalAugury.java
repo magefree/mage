@@ -41,7 +41,7 @@ public final class ElementalAugury extends CardImpl {
 
 class ElementalAuguryEffect extends OneShotEffect {
 
-    public ElementalAuguryEffect() {
+    ElementalAuguryEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order";
     }

@@ -43,7 +43,7 @@ public final class ThoughtReflection extends CardImpl {
 
 class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl {
 
-    public ThoughtReflectionReplacementEffect() {
+    ThoughtReflectionReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "If you would draw a card, draw two cards instead";
     }

@@ -39,7 +39,7 @@ public final class SeedsOfInnocence extends CardImpl {
 
 class SeedsOfInnocenceEffect extends OneShotEffect {
 
-    public SeedsOfInnocenceEffect() {
+    SeedsOfInnocenceEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its mana value";
     }

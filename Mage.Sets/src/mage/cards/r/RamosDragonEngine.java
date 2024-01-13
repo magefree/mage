@@ -64,7 +64,7 @@ public final class RamosDragonEngine extends CardImpl {
 
 class RamosDragonEngineAddCountersEffect extends OneShotEffect {
 
-    public RamosDragonEngineAddCountersEffect() {
+    RamosDragonEngineAddCountersEffect() {
         super(Outcome.Benefit);
         staticText = "put a +1/+1 counter on {this} for each of that spell's colors";
     }

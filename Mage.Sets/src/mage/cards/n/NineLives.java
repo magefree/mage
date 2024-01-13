@@ -58,7 +58,7 @@ public final class NineLives extends CardImpl {
 
 class NineLivesPreventionEffect extends PreventionEffectImpl {
 
-    public NineLivesPreventionEffect() {
+    NineLivesPreventionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "If a source would deal damage to you, prevent that damage and put an incarnation counter on {this}";
     }

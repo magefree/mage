@@ -43,7 +43,7 @@ public final class MiraculousRecovery extends CardImpl {
 
 class MiraculousRecoveryEffect extends OneShotEffect {
 
-    public MiraculousRecoveryEffect() {
+    MiraculousRecoveryEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Put a +1/+1 counter on it";
     }

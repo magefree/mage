@@ -50,7 +50,7 @@ public final class SagesOfTheAnima extends CardImpl {
 
 class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
 
-    public SagesOfTheAnimaReplacementEffect() {
+    SagesOfTheAnimaReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, instead "
                 + "reveal the top three cards of your library. "

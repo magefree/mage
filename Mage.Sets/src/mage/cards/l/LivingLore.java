@@ -68,7 +68,7 @@ public final class LivingLore extends CardImpl {
 
 class LivingLoreExileEffect extends OneShotEffect {
 
-    public LivingLoreExileEffect() {
+    LivingLoreExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile an instant or sorcery card from your graveyard";
     }

@@ -90,7 +90,7 @@ class KatabaticWindsRestrictionEffect extends RestrictionEffect {
 
 class KatabaticWindsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public KatabaticWindsRuleModifyingEffect() {
+    KatabaticWindsRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", and their activated abilities with {T} in their costs can't be activated";
     }

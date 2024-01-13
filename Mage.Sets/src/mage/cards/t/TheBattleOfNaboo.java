@@ -54,7 +54,7 @@ enum TheBattleOfNabooAdjuster implements TargetAdjuster {
 
 class TheBattleOfNabooEffect extends OneShotEffect {
 
-    public TheBattleOfNabooEffect() {
+    TheBattleOfNabooEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw twice that many cards";
     }

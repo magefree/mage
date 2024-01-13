@@ -57,7 +57,7 @@ public final class InquisitorEisenhorn extends CardImpl {
 
 class InquisitorEisenhornReplacementEffect extends ReplacementEffectImpl {
 
-    public InquisitorEisenhornReplacementEffect() {
+    InquisitorEisenhornReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or " +
                 "sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying";

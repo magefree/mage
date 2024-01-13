@@ -60,7 +60,7 @@ public final class JovensFerrets extends CardImpl {
 
 class JovensFerretsEffect extends OneShotEffect {
 
-    public JovensFerretsEffect() {
+    JovensFerretsEffect() {
         super(Outcome.Benefit);
         this.staticText = "tap all creatures that blocked {this} this turn. They don't untap during their controller's next untap step.";
     }

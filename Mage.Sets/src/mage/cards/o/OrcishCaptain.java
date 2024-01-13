@@ -54,7 +54,7 @@ public final class OrcishCaptain extends CardImpl {
 
 class OrcishCaptainEffect extends OneShotEffect {
 
-    public OrcishCaptainEffect() {
+    OrcishCaptainEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn";
     }

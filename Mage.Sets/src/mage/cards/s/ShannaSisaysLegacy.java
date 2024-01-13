@@ -63,7 +63,7 @@ public final class ShannaSisaysLegacy extends CardImpl {
 
 class ShannaSisaysLegacyEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ShannaSisaysLegacyEffect() {
+    ShannaSisaysLegacyEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of abilities your opponents control";
     }

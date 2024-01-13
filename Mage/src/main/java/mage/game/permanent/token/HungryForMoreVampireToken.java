@@ -25,7 +25,7 @@ public final class HungryForMoreVampireToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    protected HungryForMoreVampireToken(final HungryForMoreVampireToken token) {
+    private HungryForMoreVampireToken(final HungryForMoreVampireToken token) {
         super(token);
     }
 

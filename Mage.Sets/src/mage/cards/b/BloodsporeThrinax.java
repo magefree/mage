@@ -48,7 +48,7 @@ public final class BloodsporeThrinax extends CardImpl {
 
 class BloodsporeThrinaxEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public BloodsporeThrinaxEntersBattlefieldEffect() {
+    BloodsporeThrinaxEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "Each other creature you control enters the battlefield with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on {this}";
     }

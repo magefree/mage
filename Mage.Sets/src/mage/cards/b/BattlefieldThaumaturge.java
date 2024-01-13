@@ -55,7 +55,7 @@ public final class BattlefieldThaumaturge extends CardImpl {
 
 class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEffectImpl {
 
-    public BattlefieldThaumaturgeSpellsCostReductionEffect() {
+    BattlefieldThaumaturgeSpellsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets";
     }

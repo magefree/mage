@@ -129,7 +129,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
 
 class EliteArcanistCopyEffect extends OneShotEffect {
 
-    public EliteArcanistCopyEffect() {
+    EliteArcanistCopyEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Copy the exiled card. You may cast the copy "
                 + "without paying its mana cost. X is the mana value of the exiled card";

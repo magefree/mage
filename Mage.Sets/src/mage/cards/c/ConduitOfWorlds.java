@@ -107,7 +107,7 @@ class ConduitOfWorldsEffect extends OneShotEffect {
 
 class ConduitOfWorldsCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ConduitOfWorldsCantCastEffect() {
+    ConduitOfWorldsCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 

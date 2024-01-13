@@ -40,7 +40,7 @@ public final class PullingTeeth extends CardImpl {
 
 class PullingTeethEffect extends OneShotEffect {
 
-    public PullingTeethEffect() {
+    PullingTeethEffect() {
         super(Outcome.Discard);
         this.staticText = "Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card";
     }

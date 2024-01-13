@@ -43,7 +43,7 @@ public final class GenesisStorm extends CardImpl {
 
 class GenesisStormEffect extends OneShotEffect {
 
-    public GenesisStormEffect() {
+    GenesisStormEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "reveal cards from the top of your library "
                 + "until you reveal a nonland permanent card. "

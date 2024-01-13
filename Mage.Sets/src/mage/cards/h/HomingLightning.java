@@ -42,7 +42,7 @@ public final class HomingLightning extends CardImpl {
 
 class HomingLightningEffect extends OneShotEffect {
 
-    public HomingLightningEffect() {
+    HomingLightningEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 4 damage to target creature and each other creature with the same name as that creature";
     }

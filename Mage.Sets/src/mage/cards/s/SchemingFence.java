@@ -60,7 +60,7 @@ public final class SchemingFence extends CardImpl {
 
 class SchemingFenceChooseEffect extends OneShotEffect {
 
-    public SchemingFenceChooseEffect() {
+    SchemingFenceChooseEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "you may choose a nonland permanent";
     }
@@ -104,7 +104,7 @@ class SchemingFenceChooseEffect extends OneShotEffect {
 
 class SchemingFenceDisableEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SchemingFenceDisableEffect() {
+    SchemingFenceDisableEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "activated abilities of the chosen permanent can't be activated";
     }

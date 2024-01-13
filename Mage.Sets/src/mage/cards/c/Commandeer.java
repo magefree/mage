@@ -56,7 +56,7 @@ public final class Commandeer extends CardImpl {
 
 class CommandeerEffect extends OneShotEffect {
 
-    public CommandeerEffect() {
+    CommandeerEffect() {
         super(Outcome.Benefit);
         this.staticText = "Gain control of target noncreature spell. " +
                 "You may choose new targets for it. " +

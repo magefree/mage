@@ -93,7 +93,7 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
 
 class GuardianOfTazeemEffect extends OneShotEffect {
 
-    public GuardianOfTazeemEffect() {
+    GuardianOfTazeemEffect() {
         super(Outcome.Benefit);
         this.staticText = "If that land is an Island, that creature doesn't untap during its controller's next untap step";
     }

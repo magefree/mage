@@ -63,7 +63,7 @@ public final class Suncleanser extends CardImpl {
 
 class SuncleanserRemoveCountersEffect extends OneShotEffect {
 
-    public SuncleanserRemoveCountersEffect(boolean player) {
+    SuncleanserRemoveCountersEffect(boolean player) {
         super(Outcome.Benefit);
         if (player) {
             staticText = "Target opponent loses all counters";
@@ -104,7 +104,7 @@ class SuncleanserRemoveCountersEffect extends OneShotEffect {
 
 class SuncleanserPreventCountersEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SuncleanserPreventCountersEffect(boolean player) {
+    SuncleanserPreventCountersEffect(boolean player) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         if (player) {
             staticText = "That player can't get counters for as long as {this} remains on the battlefield.";

@@ -77,7 +77,7 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
 
 class WidespreadPanicEffect extends OneShotEffect {
 
-    public WidespreadPanicEffect() {
+    WidespreadPanicEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player puts a card from their hand on top of their library";
     }

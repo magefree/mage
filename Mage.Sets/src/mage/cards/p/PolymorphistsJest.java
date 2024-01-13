@@ -41,7 +41,7 @@ public final class PolymorphistsJest extends CardImpl {
 
 class PolymorphistsJestEffect extends ContinuousEffectImpl {
 
-    public PolymorphistsJestEffect() {
+    PolymorphistsJestEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Until end of turn, each creature target player controls loses all abilities and becomes a blue Frog with base power and toughness 1/1";
     }

@@ -65,7 +65,7 @@ public final class AngelicFavor extends CardImpl {
 
 class AngelicFavorEffect extends OneShotEffect {
 
-    public AngelicFavorEffect() {
+    AngelicFavorEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 4/4 white Angel creature token with flying. Exile it at the beginning of the next end step";
     }

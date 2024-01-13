@@ -73,7 +73,7 @@ class MoreThanXCreaturesOnBFCondition implements Condition {
 
 class PortcullisExileEffect extends OneShotEffect {
 
-    public PortcullisExileEffect() {
+    PortcullisExileEffect() {
         super(Outcome.Exile);
         this.staticText = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature";
     }

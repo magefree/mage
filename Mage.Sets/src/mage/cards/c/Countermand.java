@@ -41,7 +41,7 @@ public final class Countermand extends CardImpl {
 
 class CountermandEffect extends OneShotEffect {
 
-    public CountermandEffect() {
+    CountermandEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Its controller mills four cards.";
     }

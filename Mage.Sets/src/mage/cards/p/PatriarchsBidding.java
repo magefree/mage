@@ -43,7 +43,7 @@ public final class PatriarchsBidding extends CardImpl {
 
 class PatriarchsBiddingEffect extends OneShotEffect {
 
-    public PatriarchsBiddingEffect() {
+    PatriarchsBiddingEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "each player chooses a creature type. Each player returns all creature cards of a type chosen this way from their graveyard to the battlefield";
     }

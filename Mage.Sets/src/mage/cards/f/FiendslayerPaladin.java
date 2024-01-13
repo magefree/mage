@@ -58,7 +58,7 @@ public final class FiendslayerPaladin extends CardImpl {
 
 class FiendslayerPaladinEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public FiendslayerPaladinEffect() {
+    FiendslayerPaladinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of black or red spells your opponents control";
     }

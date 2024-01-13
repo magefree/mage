@@ -38,7 +38,7 @@ public final class Oust extends CardImpl {
 
 class OustEffect extends OneShotEffect {
 
-    public OustEffect() {
+    OustEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put target creature into its owner's library second from the top. Its controller gains 3 life";
     }

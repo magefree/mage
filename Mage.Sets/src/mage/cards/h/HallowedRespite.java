@@ -55,7 +55,7 @@ public final class HallowedRespite extends CardImpl {
 
 class HallowedRespiteEffect extends OneShotEffect {
 
-    public HallowedRespiteEffect() {
+    HallowedRespiteEffect() {
         super(Outcome.Benefit);
         staticText = "If it entered under your control, put a +1/+1 counter on it. Otherwise, tap it";
     }

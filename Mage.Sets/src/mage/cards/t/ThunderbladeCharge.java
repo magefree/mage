@@ -56,7 +56,7 @@ public final class ThunderbladeCharge extends CardImpl {
 
 class ThunderbladeChargeCastEffect extends OneShotEffect {
 
-    public ThunderbladeChargeCastEffect() {
+    ThunderbladeChargeCastEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "you may cast {this} without paying its mana cost";
     }

@@ -61,7 +61,7 @@ public final class CatchRelease extends SplitCard {
 
 class ReleaseSacrificeEffect extends OneShotEffect {
 
-    public ReleaseSacrificeEffect() {
+    ReleaseSacrificeEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker";
     }

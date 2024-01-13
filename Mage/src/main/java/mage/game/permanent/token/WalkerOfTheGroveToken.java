@@ -19,7 +19,7 @@ public final class WalkerOfTheGroveToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    protected WalkerOfTheGroveToken(final WalkerOfTheGroveToken token) {
+    private WalkerOfTheGroveToken(final WalkerOfTheGroveToken token) {
         super(token);
     }
 

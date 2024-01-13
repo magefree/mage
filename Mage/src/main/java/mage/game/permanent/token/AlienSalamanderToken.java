@@ -22,7 +22,7 @@ public final class AlienSalamanderToken extends TokenImpl {
         addAbility(new IslandwalkAbility());
     }
 
-    protected AlienSalamanderToken(final AlienSalamanderToken token) {
+    private AlienSalamanderToken(final AlienSalamanderToken token) {
         super(token);
     }
 

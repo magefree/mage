@@ -93,7 +93,7 @@ enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<Player> {
 
 class CrownOfDoomEffect extends OneShotEffect {
 
-    public CrownOfDoomEffect() {
+    CrownOfDoomEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target player other than {this}'s owner gains control of it";
     }

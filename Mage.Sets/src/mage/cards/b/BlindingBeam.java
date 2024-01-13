@@ -61,7 +61,7 @@ public final class BlindingBeam extends CardImpl {
 
 class BlindingBeamEffect extends OneShotEffect {
 
-    public BlindingBeamEffect() {
+    BlindingBeamEffect() {
         super(Outcome.Tap);
         staticText = "creatures don't untap during target player's next untap step";
     }

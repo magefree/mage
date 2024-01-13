@@ -52,7 +52,7 @@ public final class MagmaPummeler extends CardImpl {
 
 class MagmaPummelerEffect extends PreventDamageAndRemoveCountersEffect {
 
-    public MagmaPummelerEffect() {
+    MagmaPummelerEffect() {
         super(true, true, true);
         staticText += ". When one or more counters are removed from {this} this way, it deals that much damage to any target";
     }

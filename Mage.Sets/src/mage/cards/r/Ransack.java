@@ -48,7 +48,7 @@ public final class Ransack extends CardImpl {
 
 class RansackEffect extends OneShotEffect {
 
-    public RansackEffect() {
+    RansackEffect() {
         super(Outcome.Detriment);
         this.staticText = "Look at the top five cards of target player's library. "
                 + "Put any number of them on the bottom of that library in any order "

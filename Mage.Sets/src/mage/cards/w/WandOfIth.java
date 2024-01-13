@@ -47,7 +47,7 @@ public final class WandOfIth extends CardImpl {
 
 class WandOfIthEffect extends OneShotEffect {
 
-    public WandOfIthEffect() {
+    WandOfIthEffect() {
         super(Outcome.Discard);
         staticText = "Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its mana value";
     }

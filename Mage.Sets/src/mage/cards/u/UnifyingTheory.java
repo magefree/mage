@@ -44,7 +44,7 @@ public final class UnifyingTheory extends CardImpl {
 
 class UnifyingTheoryEffect extends OneShotEffect {
 
-    public UnifyingTheoryEffect() {
+    UnifyingTheoryEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player may pay {2}. If the player does, they draw a card";
     }

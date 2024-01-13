@@ -48,7 +48,7 @@ public final class TsabosWeb extends CardImpl {
 
 class TsabosWebPreventUntapEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TsabosWebPreventUntapEffect() {
+    TsabosWebPreventUntapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step";
     }

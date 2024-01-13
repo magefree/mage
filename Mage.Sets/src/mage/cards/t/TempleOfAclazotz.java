@@ -53,7 +53,7 @@ public final class TempleOfAclazotz extends CardImpl {
 
 class TempleOfAclazotzEffect extends OneShotEffect {
 
-    public TempleOfAclazotzEffect() {
+    TempleOfAclazotzEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }

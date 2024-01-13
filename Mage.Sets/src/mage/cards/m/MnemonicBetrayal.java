@@ -51,7 +51,7 @@ public final class MnemonicBetrayal extends CardImpl {
 
 class MnemonicBetrayalExileEffect extends OneShotEffect {
 
-    public MnemonicBetrayalExileEffect() {
+    MnemonicBetrayalExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile all opponents' graveyards. " +
                 "You may cast spells from among those cards this turn, " +

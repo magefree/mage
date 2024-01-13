@@ -61,7 +61,7 @@ public final class SoulEcho extends CardImpl {
 
 class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
 
-    public SoulEchoOpponentsChoiceEffect() {
+    SoulEchoOpponentsChoiceEffect() {
         super(Outcome.PreventDamage);
         staticText = "target opponent may choose that for each 1 damage that would be dealt to you " +
             "until your next upkeep, you remove an echo counter from {this} instead";

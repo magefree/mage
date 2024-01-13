@@ -91,7 +91,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
 
 class OccupationOneShotEffect extends OneShotEffect {
 
-    public OccupationOneShotEffect() {
+    OccupationOneShotEffect() {
         super(Outcome.LoseAbility);
     }
 
@@ -119,7 +119,7 @@ class OccupationOneShotEffect extends OneShotEffect {
 
 class OccupationRestrictionEffect extends RestrictionEffect {
 
-    public OccupationRestrictionEffect() {
+    OccupationRestrictionEffect() {
         super(Duration.Custom);
         staticText = "";
     }

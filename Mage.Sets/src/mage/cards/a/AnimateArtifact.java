@@ -57,7 +57,7 @@ public final class AnimateArtifact extends CardImpl {
 
 class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
 
-    public AnimateArtifactContinuousEffect(Duration duration) {
+    AnimateArtifactContinuousEffect(Duration duration) {
         super(duration, Outcome.Benefit);
         staticText = "As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value";
     }

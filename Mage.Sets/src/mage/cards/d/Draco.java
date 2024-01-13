@@ -54,7 +54,7 @@ public final class Draco extends CardImpl {
 
 class DracoCostReductionEffect extends CostModificationEffectImpl {
 
-    public DracoCostReductionEffect() {
+    DracoCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "<i>Domain</i> &mdash; This spell costs {2} less to cast for each basic land type among lands you control.";
     }
@@ -118,5 +118,3 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
     }
 
 }
-
-

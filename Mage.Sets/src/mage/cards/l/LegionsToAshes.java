@@ -46,7 +46,7 @@ public final class LegionsToAshes extends CardImpl {
 
 class LegionsToAshesEffect extends OneShotEffect {
 
-    public LegionsToAshesEffect() {
+    LegionsToAshesEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.";
     }

@@ -18,7 +18,7 @@ public final class ExpansionSymbolToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected ExpansionSymbolToken(final ExpansionSymbolToken token) {
+    private ExpansionSymbolToken(final ExpansionSymbolToken token) {
         super(token);
     }
 

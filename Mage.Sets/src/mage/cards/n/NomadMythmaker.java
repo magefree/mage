@@ -63,7 +63,7 @@ public final class NomadMythmaker extends CardImpl {
 
 class NomadMythmakerEffect extends OneShotEffect {
 
-    public NomadMythmakerEffect() {
+    NomadMythmakerEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.";
     }

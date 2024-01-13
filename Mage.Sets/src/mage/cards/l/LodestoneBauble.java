@@ -119,7 +119,7 @@ class LodestoneBaubleEffect extends OneShotEffect {
 
 class LodestoneBaubleDrawEffect extends OneShotEffect {
 
-    public LodestoneBaubleDrawEffect() {
+    LodestoneBaubleDrawEffect() {
         super(Outcome.DrawCard);
         staticText = "That player draws a card at the beginning of the next turn's upkeep";
     }

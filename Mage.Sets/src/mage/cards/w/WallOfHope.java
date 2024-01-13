@@ -80,7 +80,7 @@ class WallOfHopeTriggeredAbility extends TriggeredAbilityImpl {
 
 class WallOfHopeGainLifeEffect extends OneShotEffect {
 
-    public WallOfHopeGainLifeEffect() {
+    WallOfHopeGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "you gain that much life";
     }

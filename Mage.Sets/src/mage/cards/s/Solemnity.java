@@ -47,7 +47,7 @@ public final class Solemnity extends CardImpl {
 
 class SolemnityEffect extends ReplacementEffectImpl {
 
-    public SolemnityEffect() {
+    SolemnityEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Players can't get counters";
     }

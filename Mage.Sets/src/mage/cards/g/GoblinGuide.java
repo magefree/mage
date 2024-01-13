@@ -103,7 +103,7 @@ class GoblinGuideTriggeredAbility extends TriggeredAbilityImpl {
 
 class GoblinGuideEffect extends OneShotEffect {
 
-    public GoblinGuideEffect() {
+    GoblinGuideEffect() {
         super(Outcome.DrawCard);
     }
 

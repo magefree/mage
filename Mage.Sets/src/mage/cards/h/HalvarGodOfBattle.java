@@ -104,7 +104,7 @@ public final class HalvarGodOfBattle extends ModalDoubleFacedCard {
 
 class HalvarGodOfBattleEffect extends OneShotEffect {
 
-    public HalvarGodOfBattleEffect() {
+    HalvarGodOfBattleEffect() {
         super(Outcome.BoostCreature);
         staticText = "you may attach target Aura or Equipment attached to a creature you control to target creature you control";
     }
@@ -152,7 +152,7 @@ class HalvarGodOfBattleEffect extends OneShotEffect {
 
 class SwordOfTheRealmsEffect extends OneShotEffect {
 
-    public SwordOfTheRealmsEffect() {
+    SwordOfTheRealmsEffect() {
         super(Outcome.ReturnToHand);
         staticText = "return it to its owner's hand";
     }

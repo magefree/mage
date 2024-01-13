@@ -104,7 +104,7 @@ class KithkinArmorCost extends CostImpl {
 
 class KithkinArmorRestrictionEffect extends RestrictionEffect {
 
-    public KithkinArmorRestrictionEffect() {
+    KithkinArmorRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't be blocked by creatures with power 3 or greater";
     }

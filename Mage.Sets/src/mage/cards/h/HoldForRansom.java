@@ -56,7 +56,7 @@ public final class HoldForRansom extends CardImpl {
 
 class HoldForRansomGainEffect extends GainAbilityAttachedEffect {
 
-    public HoldForRansomGainEffect() {
+    HoldForRansomGainEffect() {
         super(new ActivateAsSorceryActivatedAbility(new HoldForRansomSacrificeEffect(), new GenericManaCost(7)), AttachmentType.AURA);
         this.staticText = "and has \"" + ability.getRule() + '"';
     }
@@ -79,7 +79,7 @@ class HoldForRansomGainEffect extends GainAbilityAttachedEffect {
 
 class HoldForRansomSacrificeEffect extends OneShotEffect {
 
-    public HoldForRansomSacrificeEffect() {
+    HoldForRansomSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Hold for Ransom's controller sacrifices it and draws a card";
     }

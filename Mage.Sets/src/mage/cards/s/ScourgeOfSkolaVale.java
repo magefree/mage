@@ -62,7 +62,7 @@ public final class ScourgeOfSkolaVale extends CardImpl {
 
 class ScourgeOfSkolaValeEffect extends OneShotEffect {
 
-    public ScourgeOfSkolaValeEffect() {
+    ScourgeOfSkolaValeEffect() {
         super(Outcome.GainLife);
         this.staticText = "Put a number of +1/+1 counters on {this} equal to the sacrificed creature's toughness";
     }

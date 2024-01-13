@@ -45,7 +45,7 @@ public final class LonghornFirebeast extends CardImpl {
 
 class LonghornFirebeastEffect extends OneShotEffect {
 
-    public LonghornFirebeastEffect() {
+    LonghornFirebeastEffect() {
         super(Outcome.Neutral);
         staticText = "any opponent may have it deal 5 damage to them. If a player does, sacrifice {this}";
     }

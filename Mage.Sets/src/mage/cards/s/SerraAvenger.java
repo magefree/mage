@@ -56,7 +56,7 @@ public final class SerraAvenger extends CardImpl {
 
 class CantCastSerraAvengerEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantCastSerraAvengerEffect() {
+    CantCastSerraAvengerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast this spell during your first, second, or third turns of the game";
     }

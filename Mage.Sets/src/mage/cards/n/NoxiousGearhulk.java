@@ -51,7 +51,7 @@ public final class NoxiousGearhulk extends CardImpl {
 
 class NoxiousGearhulkEffect extends OneShotEffect {
 
-    public NoxiousGearhulkEffect() {
+    NoxiousGearhulkEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "you may destroy another target creature. If a creature is destroyed this way, you gain life equal to its toughness";
     }

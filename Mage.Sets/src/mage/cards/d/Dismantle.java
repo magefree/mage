@@ -46,7 +46,7 @@ public final class Dismantle extends CardImpl {
 
 class DismantleEffect extends OneShotEffect {
 
-    public DismantleEffect() {
+    DismantleEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target artifact. If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control";
 

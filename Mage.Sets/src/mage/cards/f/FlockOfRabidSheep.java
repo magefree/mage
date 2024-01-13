@@ -38,7 +38,7 @@ public class FlockOfRabidSheep extends CardImpl {
 
 class FlockOfRabidSheepEffect extends OneShotEffect {
 
-    public FlockOfRabidSheepEffect() {
+    FlockOfRabidSheepEffect() {
         super(Outcome.LoseLife);
         this.staticText = "Flip X coins. For each flip you win, create a 2/2 green Sheep creature token named Rabid Sheep";
     }

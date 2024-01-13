@@ -47,7 +47,7 @@ public final class VolrathsShapeshifter extends CardImpl {
 
 class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
 
-    public VolrathsShapeshifterEffect() {
+    VolrathsShapeshifterEffect() {
         super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "As long as the top card of your graveyard is a creature card, "
                 + "{this} has the full text of that card and has the text \"2: Discard a card.\" "

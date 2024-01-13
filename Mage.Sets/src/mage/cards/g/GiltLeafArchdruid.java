@@ -76,7 +76,7 @@ public final class GiltLeafArchdruid extends CardImpl {
 
 class GiltLeafArchdruidEffect extends OneShotEffect {
 
-    public GiltLeafArchdruidEffect() {
+    GiltLeafArchdruidEffect() {
         super(Outcome.GainControl);
         this.staticText = "gain control of all lands target player controls";
     }

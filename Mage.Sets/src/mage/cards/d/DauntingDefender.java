@@ -47,7 +47,7 @@ public final class DauntingDefender extends CardImpl {
 
 class DauntingDefenderEffect extends PreventionEffectImpl {
 
-    public DauntingDefenderEffect(int amount) {
+    DauntingDefenderEffect(int amount) {
         super(Duration.WhileOnBattlefield, amount, false, false);
         this.staticText = "If a source would deal damage to a Cleric creature you control, prevent " + amount + " of that damage";
     }

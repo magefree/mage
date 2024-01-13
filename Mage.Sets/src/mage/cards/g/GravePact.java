@@ -78,7 +78,7 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
 
 class GravePactEffect extends OneShotEffect {
 
-    public GravePactEffect() {
+    GravePactEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each other player sacrifices a creature";
     }

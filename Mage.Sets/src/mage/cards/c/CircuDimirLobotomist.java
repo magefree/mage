@@ -70,7 +70,7 @@ public final class CircuDimirLobotomist extends CardImpl {
 
 class CircuDimirLobotomistEffect extends OneShotEffect {
 
-    public CircuDimirLobotomistEffect() {
+    CircuDimirLobotomistEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile the top card of target player's library";
     }
@@ -101,7 +101,7 @@ class CircuDimirLobotomistEffect extends OneShotEffect {
 
 class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CircuDimirLobotomistRuleModifyingEffect() {
+    CircuDimirLobotomistRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }

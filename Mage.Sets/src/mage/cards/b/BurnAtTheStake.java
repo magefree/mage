@@ -51,7 +51,7 @@ public final class BurnAtTheStake extends CardImpl {
 
 class BurnAtTheStakeEffect extends OneShotEffect {
 
-    public BurnAtTheStakeEffect() {
+    BurnAtTheStakeEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage to any target equal to three times the number of creatures tapped this way";
     }

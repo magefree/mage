@@ -39,7 +39,7 @@ public final class WrackWithMadness extends CardImpl {
 
 class WrackWithMadnessEffect extends OneShotEffect {
 
-    public WrackWithMadnessEffect() {
+    WrackWithMadnessEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature deals damage to itself equal to its power";
     }

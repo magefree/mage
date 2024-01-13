@@ -67,7 +67,7 @@ public final class DecimatorBeetle extends CardImpl {
 
 class DecimatorBeetleEffect extends OneShotEffect {
 
-    public DecimatorBeetleEffect() {
+    DecimatorBeetleEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "remove a -1/-1 counter from target creature you control and put a -1/-1 counter on up to one target creature defending player controls";
     }

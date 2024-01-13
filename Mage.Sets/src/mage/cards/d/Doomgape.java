@@ -56,7 +56,7 @@ public final class Doomgape extends CardImpl {
 
 class DoomgapeEffect extends OneShotEffect {
 
-    public DoomgapeEffect() {
+    DoomgapeEffect() {
         super(Outcome.GainLife);
         this.staticText = "sacrifice a creature. You gain life equal to that creature's toughness";
     }

@@ -43,7 +43,7 @@ public final class HasranOgress extends CardImpl {
 
 class HasranOgressEffect extends OneShotEffect {
 
-    public HasranOgressEffect() {
+    HasranOgressEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 3 damage to you unless you pay {2}";
     }
@@ -71,4 +71,3 @@ class HasranOgressEffect extends OneShotEffect {
         return false;
     }
 }
-

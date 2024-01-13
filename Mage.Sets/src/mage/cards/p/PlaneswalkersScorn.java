@@ -54,7 +54,7 @@ public final class PlaneswalkersScorn extends CardImpl {
 
 class PlaneswalkersScornEffect extends OneShotEffect {
 
-    public PlaneswalkersScornEffect() {
+    PlaneswalkersScornEffect() {
         super(Outcome.Damage);
         staticText = "Target opponent reveals a card at random from their hand. Target creature gets -X/-X until end of turn, where X is the revealed card's mana value";
     }

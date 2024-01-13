@@ -49,7 +49,7 @@ public final class KaervekTheMerciless extends CardImpl {
 
 class KaervekTheMercilessEffect extends OneShotEffect {
 
-    public KaervekTheMercilessEffect() {
+    KaervekTheMercilessEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals damage equal to that spell's mana value to any target";
     }

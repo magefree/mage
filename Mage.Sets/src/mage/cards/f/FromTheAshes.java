@@ -43,7 +43,7 @@ public final class FromTheAshes extends CardImpl {
 
 class FromTheAshesEffect extends OneShotEffect {
 
-    public FromTheAshesEffect() {
+    FromTheAshesEffect() {
         super(Outcome.Benefit);
         this.staticText = "Destroy all nonbasic lands. For each land destroyed this way, its controller may search their library for a basic land card and put it onto the battlefield. Then each player who searched their library this way shuffles";
     }

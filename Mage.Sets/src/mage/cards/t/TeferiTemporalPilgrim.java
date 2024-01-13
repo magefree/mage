@@ -62,7 +62,7 @@ public final class TeferiTemporalPilgrim extends CardImpl {
 
 class TeferiTemporalPilgrimEffect extends OneShotEffect {
 
-    public TeferiTemporalPilgrimEffect() {
+    TeferiTemporalPilgrimEffect() {
         super(Outcome.Removal);
         this.staticText = "Target opponent chooses a permanent they control and returns it to its owner's hand. Then they shuffle each nonland permanent they control into its owner's library.";
     }

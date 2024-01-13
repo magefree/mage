@@ -44,7 +44,7 @@ public final class EchoingDecay extends CardImpl {
 
 class EchoingDecayEffect extends OneShotEffect {
 
-    public EchoingDecayEffect() {
+    EchoingDecayEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn";
     }

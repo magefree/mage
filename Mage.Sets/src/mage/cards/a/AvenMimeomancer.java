@@ -54,7 +54,7 @@ public final class AvenMimeomancer extends CardImpl {
 
 class AvenEffect extends ContinuousEffectImpl {
 
-    public AvenEffect() {
+    AvenEffect() {
         super(Duration.Custom, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.staticText = "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
     }

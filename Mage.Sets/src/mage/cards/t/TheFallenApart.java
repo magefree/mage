@@ -52,7 +52,7 @@ public final class TheFallenApart extends CardImpl {
 
 class TheFallenApartEntersEffect extends OneShotEffect {
 
-    public TheFallenApartEntersEffect() {
+    TheFallenApartEntersEffect() {
         super(Outcome.Neutral);
         staticText = "with two arms and two legs";
     }
@@ -86,7 +86,7 @@ class TheFallenApartEntersEffect extends OneShotEffect {
 
 class TheFallenApartToggleEffect extends OneShotEffect {
 
-    public TheFallenApartToggleEffect() {
+    TheFallenApartToggleEffect() {
         super(Outcome.Neutral);
         staticText = "remove an arm or a leg from it";
     }
@@ -142,7 +142,7 @@ class TheFallenApartToggleEffect extends OneShotEffect {
 
 class TheFallenApartRestrictionEffect extends RestrictionEffect {
 
-    public TheFallenApartRestrictionEffect() {
+    TheFallenApartRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack if it has no legs and can't block if it has no arms";
     }

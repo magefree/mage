@@ -37,7 +37,7 @@ public final class UginsInsight extends CardImpl {
 
 class UginsInsightEffect extends OneShotEffect {
 
-    public UginsInsightEffect() {
+    UginsInsightEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Scry X, where X is the highest mana value among permanents you control, then draw three cards";
     }

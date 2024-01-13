@@ -69,7 +69,7 @@ public final class GrabTheReins extends CardImpl {
 
 class GrabTheReinsEffect extends OneShotEffect {
 
-    public GrabTheReinsEffect() {
+    GrabTheReinsEffect() {
         super(Outcome.Damage);
         staticText = "sacrifice a creature. {this} deals damage equal to that creature's power to any target";
     }

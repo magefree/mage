@@ -56,7 +56,7 @@ public final class GildedDrake extends CardImpl {
 
 class GildedDrakeEffect extends OneShotEffect {
 
-    public GildedDrakeEffect() {
+    GildedDrakeEffect() {
         super(Outcome.GainControl);
         this.staticText = "exchange control of {this} and up to one target creature an opponent controls. If you don't or can't make an exchange, sacrifice {this}. This ability still resolves if its target becomes illegal";
     }

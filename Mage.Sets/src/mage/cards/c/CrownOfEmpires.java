@@ -46,7 +46,7 @@ public final class CrownOfEmpires extends CardImpl {
 
 class CrownOfEmpiresEffect extends OneShotEffect {
 
-    public CrownOfEmpiresEffect() {
+    CrownOfEmpiresEffect() {
         super(Outcome.Tap);
         staticText = "Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires";
     }
@@ -87,7 +87,7 @@ class CrownOfEmpiresEffect extends OneShotEffect {
 
 class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
 
-    public CrownOfEmpiresControlEffect() {
+    CrownOfEmpiresControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = "Gain control of {this}";
     }

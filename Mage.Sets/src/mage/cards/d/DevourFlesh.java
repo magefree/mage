@@ -43,7 +43,7 @@ public final class DevourFlesh extends CardImpl {
 
 class DevourFleshSacrificeEffect extends OneShotEffect {
 
-    public DevourFleshSacrificeEffect() {
+    DevourFleshSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Target player sacrifices a creature, then gains life equal to that creature's toughness";
     }

@@ -58,7 +58,7 @@ public final class GeneralJarkeld extends CardImpl {
 
 class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
 
-    public GeneralJarkeldSwitchBlockersEffect() {
+    GeneralJarkeldSwitchBlockersEffect() {
         super(Outcome.Benefit);
         this.staticText = "Switch the blocking creatures of two target attacking creatures";
     }

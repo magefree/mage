@@ -92,7 +92,7 @@ class JumboImpEffect extends EntersBattlefieldWithXCountersEffect {
 
 class JumboImpAddCountersEffect extends OneShotEffect {
 
-    public JumboImpAddCountersEffect() {
+    JumboImpAddCountersEffect() {
         super(Outcome.Benefit);
         this.staticText = "roll a six-sided die and put a number of +1/+1 counters on {this} equal to the result";
     }
@@ -121,7 +121,7 @@ class JumboImpAddCountersEffect extends OneShotEffect {
 
 class JumboImpRemoveCountersEffect extends OneShotEffect {
 
-    public JumboImpRemoveCountersEffect() {
+    JumboImpRemoveCountersEffect() {
         super(Outcome.Detriment);
         this.staticText = "roll a six-sided die and remove a number of +1/+1 counters on {this} equal to the result";
     }

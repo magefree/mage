@@ -42,7 +42,7 @@ public final class BeaconOfTomorrows extends CardImpl {
 
 class BeaconOfTomorrowsEffect extends OneShotEffect {
 
-    public BeaconOfTomorrowsEffect() {
+    BeaconOfTomorrowsEffect() {
         super(Outcome.ExtraTurn);
         staticText = "Target player takes an extra turn after this one";
     }

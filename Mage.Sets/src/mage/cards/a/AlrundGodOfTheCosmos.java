@@ -84,7 +84,7 @@ public final class AlrundGodOfTheCosmos extends ModalDoubleFacedCard {
 
 class AlrundGodOfTheCosmosEffect extends OneShotEffect {
 
-    public AlrundGodOfTheCosmosEffect() {
+    AlrundGodOfTheCosmosEffect() {
         super(Outcome.Neutral);
         staticText = ", then reveal the top two cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order";
     }

@@ -46,7 +46,7 @@ public final class RideTheAvalanche extends CardImpl {
 
 class RideTheAvalancheAsThoughEffect extends AsThoughEffectImpl {
 
-    public RideTheAvalancheAsThoughEffect() {
+    RideTheAvalancheAsThoughEffect() {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "The next spell you cast this turn can be cast as though it had flash";
     }

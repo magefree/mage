@@ -57,7 +57,7 @@ public final class ColfenorsPlans extends CardImpl {
 
 class ColfenorsPlansExileEffect extends OneShotEffect {
 
-    public ColfenorsPlansExileEffect() {
+    ColfenorsPlansExileEffect() {
         super(Outcome.DrawCard);
         staticText = "exile the top seven cards of your library face down";
     }
@@ -95,7 +95,7 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
 
 class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
 
-    public ColfenorsPlansPlayCardEffect() {
+    ColfenorsPlansPlayCardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may play cards exiled with {this}";
     }
@@ -126,7 +126,7 @@ class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
 
 class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
 
-    public ColfenorsPlansLookAtCardEffect() {
+    ColfenorsPlansLookAtCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }

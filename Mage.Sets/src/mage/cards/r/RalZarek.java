@@ -79,7 +79,7 @@ public final class RalZarek extends CardImpl {
 
 class RalZarekExtraTurnsEffect extends OneShotEffect {
 
-    public RalZarekExtraTurnsEffect() {
+    RalZarekExtraTurnsEffect() {
         super(Outcome.ExtraTurn);
         this.staticText = "Flip five coins. Take an extra turn after this one for each coin that comes up heads";
     }

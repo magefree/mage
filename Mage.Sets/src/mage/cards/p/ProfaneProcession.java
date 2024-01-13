@@ -54,7 +54,7 @@ public final class ProfaneProcession extends CardImpl {
 
 class ProfaneProcessionEffect extends OneShotEffect {
 
-    public ProfaneProcessionEffect() {
+    ProfaneProcessionEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target creature. Then if there are three or more cards exiled with {this}, transform it.";
     }

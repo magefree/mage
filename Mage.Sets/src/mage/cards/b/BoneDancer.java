@@ -44,7 +44,7 @@ public final class BoneDancer extends CardImpl {
 
 class BoneDancerEffect extends OneShotEffect {
 
-    public BoneDancerEffect() {
+    BoneDancerEffect() {
         super(Outcome.Benefit);
         this.staticText = "put the top creature card of defending player's graveyard onto the battlefield under your control";
     }

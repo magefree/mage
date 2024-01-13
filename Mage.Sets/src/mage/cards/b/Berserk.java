@@ -109,7 +109,7 @@ class CombatDamageStepStartedWatcher extends Watcher {
 
 class BerserkDestroyEffect extends OneShotEffect {
 
-    public BerserkDestroyEffect() {
+    BerserkDestroyEffect() {
         super(Outcome.Benefit);
         this.staticText = "At the beginning of the next end step, destroy that creature if it attacked this turn";
     }
@@ -142,7 +142,7 @@ class BerserkDestroyEffect extends OneShotEffect {
 
 class BerserkDelayedDestroyEffect extends OneShotEffect {
 
-    public BerserkDelayedDestroyEffect() {
+    BerserkDelayedDestroyEffect() {
         super(Outcome.Benefit);
         this.staticText = "destroy that creature if it attacked this turn";
     }

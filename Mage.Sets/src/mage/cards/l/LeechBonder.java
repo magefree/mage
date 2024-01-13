@@ -76,7 +76,7 @@ public final class LeechBonder extends CardImpl {
 
 class LeechBonderEffect extends OneShotEffect {
 
-    public LeechBonderEffect() {
+    LeechBonderEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "Move a counter from target creature onto a second target creature";
     }

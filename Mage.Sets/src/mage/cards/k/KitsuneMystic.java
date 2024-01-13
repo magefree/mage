@@ -91,7 +91,7 @@ class AutumnTailKitsuneSage extends TokenImpl {
 
 class AutumnTailEffect extends OneShotEffect {
 
-    public AutumnTailEffect() {
+    AutumnTailEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attach target Aura attached to a creature to another creature";
     }

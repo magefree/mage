@@ -33,7 +33,7 @@ public class DragonMenaceAndStealArtifactToken extends TokenImpl {
         addAbility(new DragonTokenTriggeredAbility());
     }
 
-    protected DragonMenaceAndStealArtifactToken(final DragonMenaceAndStealArtifactToken token) {
+    private DragonMenaceAndStealArtifactToken(final DragonMenaceAndStealArtifactToken token) {
         super(token);
     }
 

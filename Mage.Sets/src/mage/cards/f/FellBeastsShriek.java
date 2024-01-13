@@ -49,7 +49,7 @@ public final class FellBeastsShriek extends CardImpl {
 
 class FellBeastsShriekEffect extends OneShotEffect {
 
-    public FellBeastsShriekEffect() {
+    FellBeastsShriekEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each opponent chooses a creature they control. Tap and goad the chosen creatures.";
     }

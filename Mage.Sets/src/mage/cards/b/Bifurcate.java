@@ -51,7 +51,7 @@ public final class Bifurcate extends CardImpl {
 
 class BifurcateEffect extends OneShotEffect {
 
-    public BifurcateEffect() {
+    BifurcateEffect() {
         super(Outcome.Benefit);
         this.staticText = "search your library for a permanent card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle";
     }

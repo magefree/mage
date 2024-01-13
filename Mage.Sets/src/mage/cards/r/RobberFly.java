@@ -47,7 +47,7 @@ public final class RobberFly extends CardImpl {
 
 class DrawCardsDefendingPlayerEffect extends OneShotEffect {
 
-    public DrawCardsDefendingPlayerEffect() {
+    DrawCardsDefendingPlayerEffect() {
         super(Outcome.Benefit);
         this.staticText = "defending player discards all the cards in their hand, "
                 + "then draws that many cards";

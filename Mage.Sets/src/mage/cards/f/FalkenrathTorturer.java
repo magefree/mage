@@ -53,7 +53,7 @@ public final class FalkenrathTorturer extends CardImpl {
 
 class FalkenrathTorturerEffect extends OneShotEffect {
 
-    public FalkenrathTorturerEffect() {
+    FalkenrathTorturerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "If the sacrificed creature was a Human, put a +1/+1 counter on {this}";
     }

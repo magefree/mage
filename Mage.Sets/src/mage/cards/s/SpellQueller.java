@@ -75,7 +75,7 @@ public final class SpellQueller extends CardImpl {
 
 class SpellQuellerEntersEffect extends OneShotEffect {
 
-    public SpellQuellerEntersEffect() {
+    SpellQuellerEntersEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target spell with mana value 4 or less";
     }
@@ -107,7 +107,7 @@ class SpellQuellerEntersEffect extends OneShotEffect {
 
 class SpellQuellerLeavesEffect extends OneShotEffect {
 
-    public SpellQuellerLeavesEffect() {
+    SpellQuellerLeavesEffect() {
         super(Outcome.Benefit);
         this.staticText = "the exiled card's owner may cast that card without paying its mana cost";
     }

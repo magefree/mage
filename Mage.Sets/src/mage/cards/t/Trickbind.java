@@ -46,7 +46,7 @@ public final class Trickbind extends CardImpl {
 
 class TrickbindCounterEffect extends OneShotEffect {
 
-    public TrickbindCounterEffect() {
+    TrickbindCounterEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target activated or triggered ability. If a permanent's ability is countered this way, activated abilities of that permanent can't be activated this turn";
     }
@@ -76,7 +76,7 @@ class TrickbindCounterEffect extends OneShotEffect {
 
 class TrickbindCantActivateEffect extends RestrictionEffect {
 
-    public TrickbindCantActivateEffect() {
+    TrickbindCantActivateEffect() {
         super(Duration.EndOfTurn);
         staticText = "Activated abilities of that permanent can't be activated this turn";
     }

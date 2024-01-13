@@ -62,7 +62,7 @@ public final class HuntingWilds extends CardImpl {
 
 class HuntingWildsEffect extends OneShotEffect {
 
-    public HuntingWildsEffect() {
+    HuntingWildsEffect() {
         super(Outcome.BecomeCreature);
         this.staticText = "Untap all Forests put onto the battlefield this way. They become 3/3 green creatures with haste that are still lands";
     }

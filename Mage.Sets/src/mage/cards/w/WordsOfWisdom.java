@@ -40,7 +40,7 @@ public final class WordsOfWisdom extends CardImpl {
 
 class WordsOfWisdomEffect extends OneShotEffect {
 
-    public WordsOfWisdomEffect() {
+    WordsOfWisdomEffect() {
         super(Outcome.Detriment);
         this.staticText = ", then each other player draws a card";
     }

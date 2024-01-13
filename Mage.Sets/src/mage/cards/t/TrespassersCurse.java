@@ -92,7 +92,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
 class TrespassersCurseEffect extends OneShotEffect {
 
-    public TrespassersCurseEffect() {
+    TrespassersCurseEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player loses 1 life and you gain 1 life.";
     }

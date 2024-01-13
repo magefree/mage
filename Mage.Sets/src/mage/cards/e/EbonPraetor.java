@@ -64,7 +64,7 @@ public final class EbonPraetor extends CardImpl {
 
 class EbonPraetorEffect extends OneShotEffect {
 
-    public EbonPraetorEffect() {
+    EbonPraetorEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "If the sacrificed creature was a Thrull, put a +1/+0 counter on {this}";
     }

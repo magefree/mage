@@ -58,7 +58,7 @@ public final class JolraelEmpressOfBeasts extends CardImpl {
 
 class JolraelEmpressOfBeastsEffect extends OneShotEffect {
 
-    public JolraelEmpressOfBeastsEffect() {
+    JolraelEmpressOfBeastsEffect() {
         super(Outcome.Benefit);
         this.staticText = "All lands target player controls become 3/3 creatures until end of turn. They're still lands.";
     }

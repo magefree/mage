@@ -36,7 +36,7 @@ public final class BloodTithe extends CardImpl {
 
 class BloodTitheEffect extends OneShotEffect {
 
-    public BloodTitheEffect() {
+    BloodTitheEffect() {
         super(Outcome.GainLife);
         staticText = "Each opponent loses 3 life. You gain life equal to the life lost this way";
     }

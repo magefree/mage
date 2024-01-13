@@ -77,7 +77,7 @@ class BenthicExplorersManaAbility extends ActivatedManaAbilityImpl {
 
 class BenthicExplorersManaEffect extends ManaEffect {
 
-    public BenthicExplorersManaEffect() {
+    BenthicExplorersManaEffect() {
         staticText = "Add one mana of any type that land could produce";
     }
 

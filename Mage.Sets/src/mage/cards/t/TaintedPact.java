@@ -40,7 +40,7 @@ public final class TaintedPact extends CardImpl {
 
 class TaintedPactEffect extends OneShotEffect {
 
-    public TaintedPactEffect() {
+    TaintedPactEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first";
     }

@@ -49,7 +49,7 @@ public class AminatousAugury extends CardImpl {
 
 class AminatousAuguryEffect extends OneShotEffect {
 
-    public AminatousAuguryEffect() {
+    AminatousAuguryEffect() {
         super(Outcome.PlayForFree);
         staticText = "Exile the top eight cards of your library. "
                 + "You may put a land card from among them onto the battlefield. "
@@ -128,7 +128,7 @@ class AminatousAuguryEffect extends OneShotEffect {
 
 class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 
-    public AminatousAuguryCastFromExileEffect() {
+    AminatousAuguryCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.PlayForFree);
         staticText = "Cast this card without paying its mana cost";
     }

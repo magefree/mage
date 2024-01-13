@@ -44,7 +44,7 @@ public final class UndiscoveredParadise extends CardImpl {
 
 class UndiscoveredParadiseEffect extends OneShotEffect {
 
-    public UndiscoveredParadiseEffect() {
+    UndiscoveredParadiseEffect() {
         super(Outcome.Neutral);
         staticText = "During your next untap step, as you untap your permanents, return {this} to its owner's hand";
     }

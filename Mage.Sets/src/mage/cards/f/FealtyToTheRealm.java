@@ -62,7 +62,7 @@ public final class FealtyToTheRealm extends CardImpl {
 
 class FealtyToTheRealmEffect extends ContinuousEffectImpl {
 
-    public FealtyToTheRealmEffect() {
+    FealtyToTheRealmEffect() {
         super(Duration.WhileOnBattlefield, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "the monarch controls enchanted creature";
     }

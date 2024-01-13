@@ -128,7 +128,7 @@ class BlightwingBanditEffect extends OneShotEffect {
 
 class BlightwingBanditPlayFromExileEffect extends AsThoughEffectImpl {
 
-    public BlightwingBanditPlayFromExileEffect() {
+    BlightwingBanditPlayFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may look at and play that card for as long as it remains exiled, " +
                 "and you may spend mana as though it were mana of any color to cast that spell.";

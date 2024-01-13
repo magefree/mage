@@ -49,7 +49,7 @@ public final class GoblinBangchuckers extends CardImpl {
 
 class GoblinBangchuckersEffect extends OneShotEffect {
 
-    public GoblinBangchuckersEffect() {
+    GoblinBangchuckersEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, {this} deals 2 damage to any target. If you lose the flip, {this} deals 2 damage to itself";
     }

@@ -43,7 +43,7 @@ public final class ChandrasRevolution extends CardImpl {
 
 class ChandrasRevolutionEffect extends OneShotEffect {
 
-    public ChandrasRevolutionEffect() {
+    ChandrasRevolutionEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 4 damage to target creature. Tap target land. That land doesn't untap during its controller's next untap step";
     }

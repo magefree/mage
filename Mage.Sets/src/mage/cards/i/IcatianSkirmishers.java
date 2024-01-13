@@ -54,7 +54,7 @@ public final class IcatianSkirmishers extends CardImpl {
 
 class IcatianSkirmishersEffect extends OneShotEffect {
 
-    public IcatianSkirmishersEffect() {
+    IcatianSkirmishersEffect() {
         super(Outcome.AddAbility);
         this.staticText = "all creatures banded with it gain first strike until end of turn";
     }

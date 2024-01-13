@@ -108,7 +108,7 @@ class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
 
 class AkoumHellkiteDamageEffect extends OneShotEffect {
 
-    public AkoumHellkiteDamageEffect() {
+    AkoumHellkiteDamageEffect() {
         super(Outcome.Damage);
     }
 

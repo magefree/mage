@@ -73,7 +73,7 @@ public final class KrrikSonOfYawgmoth extends CardImpl {
 
 class KrrikSonOfYawgmothPhyrexianEffect extends ContinuousEffectImpl {
 
-    public KrrikSonOfYawgmothPhyrexianEffect() {
+    KrrikSonOfYawgmothPhyrexianEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         this.staticText = "for each {B} in a cost, you may pay 2 life rather than pay that mana";
     }

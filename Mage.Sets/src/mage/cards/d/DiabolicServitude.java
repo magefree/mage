@@ -57,7 +57,7 @@ public final class DiabolicServitude extends CardImpl {
 
 class DiabolicServitudeReturnCreatureEffect extends OneShotEffect {
 
-    public DiabolicServitudeReturnCreatureEffect() {
+    DiabolicServitudeReturnCreatureEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return target creature card from your graveyard to the battlefield";
     }
@@ -127,7 +127,7 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
 
 class DiabolicServitudeExileCreatureEffect extends OneShotEffect {
 
-    public DiabolicServitudeExileCreatureEffect() {
+    DiabolicServitudeExileCreatureEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile it and return {this} to its owner's hand";
     }
@@ -156,7 +156,7 @@ class DiabolicServitudeExileCreatureEffect extends OneShotEffect {
 
 class DiabolicServitudeSourceLeftBattlefieldEffect extends OneShotEffect {
 
-    public DiabolicServitudeSourceLeftBattlefieldEffect() {
+    DiabolicServitudeSourceLeftBattlefieldEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile the creature put onto the battlefield with {this}";
     }

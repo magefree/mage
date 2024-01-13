@@ -86,7 +86,7 @@ class HarnessTheStormTriggeredAbility extends SpellCastControllerTriggeredAbilit
 
 class HarnessTheStormEffect extends OneShotEffect {
 
-    public HarnessTheStormEffect() {
+    HarnessTheStormEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may cast target card with the same name as that "
                 + "spell from your graveyard. <i>(you still pay its costs.)</i>";

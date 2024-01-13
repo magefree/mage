@@ -49,7 +49,7 @@ public final class MirkoVoskMindDrinker extends CardImpl {
 
 class MirkoVoskMindDrinkerEffect extends OneShotEffect {
 
-    public MirkoVoskMindDrinkerEffect() {
+    MirkoVoskMindDrinkerEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player reveals cards from the top of their library until they reveal four land cards, then puts those cards into their graveyard";
     }

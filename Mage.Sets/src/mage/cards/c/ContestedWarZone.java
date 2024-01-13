@@ -92,7 +92,7 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl {
 
 class ContestedWarZoneEffect extends ContinuousEffectImpl {
 
-    public ContestedWarZoneEffect() {
+    ContestedWarZoneEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = "Gain control of {this}";
     }

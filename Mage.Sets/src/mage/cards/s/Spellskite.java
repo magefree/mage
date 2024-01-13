@@ -55,7 +55,7 @@ public final class Spellskite extends CardImpl {
 
 class SpellskiteEffect extends OneShotEffect {
 
-    public SpellskiteEffect() {
+    SpellskiteEffect() {
         super(Outcome.Neutral);
         staticText = "Change a target of target spell or ability to {this}";
     }

@@ -37,7 +37,7 @@ public final class WarReport extends CardImpl {
 
 class WarReportEffect extends OneShotEffect {
 
-    public WarReportEffect() {
+    WarReportEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield";
     }

@@ -60,7 +60,7 @@ public final class EbondeathDracolich extends CardImpl {
 
 class EbondeathDracolichEffect extends AsThoughEffectImpl {
 
-    public EbondeathDracolichEffect() {
+    EbondeathDracolichEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = "You may cast {this} from your graveyard if a creature not named Ebondeath, Dracolich died this turn";
     }

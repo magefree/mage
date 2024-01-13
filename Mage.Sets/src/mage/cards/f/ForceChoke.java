@@ -47,7 +47,7 @@ public final class ForceChoke extends CardImpl {
 
 class ForceChokeEffect extends OneShotEffect {
 
-    public ForceChokeEffect() {
+    ForceChokeEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Counter target spell. Its controller may pay life "
                 + "equal to that spell's mana value to return it to its owner's hand";

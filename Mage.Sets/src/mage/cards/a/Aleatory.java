@@ -54,7 +54,7 @@ public final class Aleatory extends CardImpl {
 
 class AleatoryEffect extends OneShotEffect {
 
-    public AleatoryEffect() {
+    AleatoryEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, target creature gets +1/+1 until end of turn";
     }

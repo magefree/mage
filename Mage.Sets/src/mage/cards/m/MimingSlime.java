@@ -40,7 +40,7 @@ public final class MimingSlime extends CardImpl {
 
 class MimingSlimeEffect extends OneShotEffect {
 
-    public MimingSlimeEffect() {
+    MimingSlimeEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X green Ooze creature token, where X is the greatest power among creatures you control";
     }

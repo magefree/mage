@@ -58,7 +58,7 @@ public final class ErrantMinion extends CardImpl {
 
 class ErrantMinionEffect extends OneShotEffect {
 
-    public ErrantMinionEffect() {
+    ErrantMinionEffect() {
         super(Outcome.Damage);
         this.staticText = "that player may pay any amount of mana. Errant Minion deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way";
     }

@@ -50,7 +50,7 @@ public final class BodyDouble extends CardImpl {
 
 class BodyDoubleCopyEffect extends OneShotEffect {
 
-    public BodyDoubleCopyEffect() {
+    BodyDoubleCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "as a copy of any creature card in a graveyard";
     }

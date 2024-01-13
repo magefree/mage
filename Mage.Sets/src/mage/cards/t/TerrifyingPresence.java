@@ -39,7 +39,7 @@ public final class TerrifyingPresence extends CardImpl {
 
 class TerrifyingPresenceEffect extends PreventionEffectImpl {
 
-    public TerrifyingPresenceEffect() {
+    TerrifyingPresenceEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
         this.staticText = "Prevent all combat damage that would be dealt by creatures other than target creature this turn";
     }

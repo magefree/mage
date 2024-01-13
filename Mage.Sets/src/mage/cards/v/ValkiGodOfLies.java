@@ -145,7 +145,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
 
 class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
 
-    public ValkiGodOfLiesCopyExiledEffect() {
+    ValkiGodOfLiesCopyExiledEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose a creature card exiled with Valki with mana value X. Valki becomes a copy of that card.";
     }
@@ -229,7 +229,7 @@ class ExileTopCardEachPlayersLibrary extends OneShotEffect {
 
 class ExileTargetArtifactOrCreatureEffect extends OneShotEffect {
 
-    public ExileTargetArtifactOrCreatureEffect() {
+    ExileTargetArtifactOrCreatureEffect() {
         super(Outcome.Detriment);
         this.staticText = "Exile target artifact or creature";
     }

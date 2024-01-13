@@ -19,7 +19,7 @@ public final class TuskenRaiderToken extends TokenImpl {
         subtype.add(SubType.RAIDER);
     }
 
-    protected TuskenRaiderToken(final TuskenRaiderToken token) {
+    private TuskenRaiderToken(final TuskenRaiderToken token) {
         super(token);
     }
 

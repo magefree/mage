@@ -55,7 +55,7 @@ public final class BalduvianDead extends CardImpl {
 
 class BalduvianDeadEffect extends OneShotEffect {
 
-    public BalduvianDeadEffect() {
+    BalduvianDeadEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step";
     }

@@ -54,7 +54,7 @@ public final class TsabosAssassin extends CardImpl {
 }
 class TsabosAssasinEffect extends OneShotEffect {
 
-    public TsabosAssasinEffect() {
+    TsabosAssasinEffect() {
         super(Outcome.Detriment);
         this.staticText = "Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.";
     }

@@ -21,7 +21,7 @@ public final class WoodToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    protected WoodToken(final WoodToken token) {
+    private WoodToken(final WoodToken token) {
         super(token);
     }
 

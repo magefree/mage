@@ -53,7 +53,7 @@ public final class MirenTheMoaningWell extends CardImpl {
 
 class MirenTheMoaningWellEffect extends OneShotEffect {
 
-    public MirenTheMoaningWellEffect() {
+    MirenTheMoaningWellEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }

@@ -83,7 +83,7 @@ class WorldslayerTriggeredAbility extends TriggeredAbilityImpl {
 
 class WorldslayerEffect extends OneShotEffect {
 
-    public WorldslayerEffect() {
+    WorldslayerEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy all permanents other than {this}";
     }

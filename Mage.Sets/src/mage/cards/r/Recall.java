@@ -44,7 +44,7 @@ public final class Recall extends CardImpl {
 
 class RecallEffect extends OneShotEffect {
 
-    public RecallEffect() {
+    RecallEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Discard X cards, then return a card from your graveyard to your hand for each card discarded this way";
     }

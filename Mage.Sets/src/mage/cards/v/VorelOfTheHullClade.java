@@ -66,7 +66,7 @@ public final class VorelOfTheHullClade extends CardImpl {
 
 class VorelOfTheHullCladeEffect extends OneShotEffect {
 
-    public VorelOfTheHullCladeEffect() {
+    VorelOfTheHullCladeEffect() {
         super(Outcome.Benefit);
         staticText = "double the number of each kind of counter on target artifact, creature, or land";
     }

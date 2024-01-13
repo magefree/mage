@@ -46,7 +46,7 @@ public final class ChoiceOfDamnations extends CardImpl {
 
 class ChoiceOfDamnationsEffect extends OneShotEffect {
 
-    public ChoiceOfDamnationsEffect() {
+    ChoiceOfDamnationsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents";
     }

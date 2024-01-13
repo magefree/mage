@@ -60,7 +60,7 @@ public final class FeldonOfTheThirdPath extends CardImpl {
 
 class FeldonOfTheThirdPathEffect extends OneShotEffect {
 
-    public FeldonOfTheThirdPathEffect() {
+    FeldonOfTheThirdPathEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step";
     }

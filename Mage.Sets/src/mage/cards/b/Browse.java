@@ -41,7 +41,7 @@ public final class Browse extends CardImpl {
 
 class BrowseEffect extends OneShotEffect {
 
-    public BrowseEffect() {
+    BrowseEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Look at the top five cards of your library, put one of them into your hand, and exile the rest";
     }

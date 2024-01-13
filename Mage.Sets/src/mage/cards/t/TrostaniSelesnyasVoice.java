@@ -99,7 +99,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
 class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
 
-    public TrostaniSelesnyasVoiceEffect() {
+    TrostaniSelesnyasVoiceEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to that creature's toughness";
     }

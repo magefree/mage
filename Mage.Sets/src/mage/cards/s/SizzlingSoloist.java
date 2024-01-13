@@ -50,7 +50,7 @@ public final class SizzlingSoloist extends CardImpl {
 
 class SizzlingSoloistEffect extends RequirementEffect {
 
-    public SizzlingSoloistEffect() {
+    SizzlingSoloistEffect() {
         super(Duration.Custom);
         staticText = "that creature attacks during its controller's next combat phase if able";
     }

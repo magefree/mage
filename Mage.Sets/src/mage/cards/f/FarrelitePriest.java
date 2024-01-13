@@ -51,7 +51,7 @@ public final class FarrelitePriest extends CardImpl {
 
 class FarrelitePriestEffect extends OneShotEffect {
 
-    public FarrelitePriestEffect() {
+    FarrelitePriestEffect() {
         super(Outcome.Damage);
         this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
     }

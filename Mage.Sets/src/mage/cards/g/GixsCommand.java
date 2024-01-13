@@ -77,7 +77,7 @@ public final class GixsCommand extends CardImpl {
 
 class GixsCommandCounterEffect extends OneShotEffect {
 
-    public GixsCommandCounterEffect() {
+    GixsCommandCounterEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Put two +1/+1 counters on up to one creature. It gains lifelink until end of turn.";
     }
@@ -114,7 +114,7 @@ class GixsCommandCounterEffect extends OneShotEffect {
 
 class GixsCommandReturnEffect extends OneShotEffect {
 
-    public GixsCommandReturnEffect() {
+    GixsCommandReturnEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return up to two creature cards from your graveyard to your hand";
     }

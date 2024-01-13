@@ -88,7 +88,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
 
 class AngelheartVialEffect extends OneShotEffect {
 
-    public AngelheartVialEffect() {
+    AngelheartVialEffect() {
         super(Outcome.Benefit);
     }
 
@@ -110,4 +110,3 @@ class AngelheartVialEffect extends OneShotEffect {
         return true;
     }
 }
-

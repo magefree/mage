@@ -56,7 +56,7 @@ enum CometStormAdjuster implements TargetAdjuster {
 
 class CometStormEffect extends OneShotEffect {
 
-    public CometStormEffect() {
+    CometStormEffect() {
         super(Outcome.Damage);
         staticText = "Choose any target, then choose another target for each time this spell was kicked. {this} deals X damage to each of them";
     }

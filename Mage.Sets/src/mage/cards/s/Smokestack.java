@@ -49,7 +49,7 @@ public final class Smokestack extends CardImpl {
 
 class SmokestackEffect extends OneShotEffect {
 
-    public SmokestackEffect() {
+    SmokestackEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "that player sacrifices a permanent for each soot counter on Smokestack";
     }

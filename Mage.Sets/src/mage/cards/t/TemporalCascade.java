@@ -46,7 +46,7 @@ public final class TemporalCascade extends CardImpl {
 
 class TemporalCascadeDrawEffect extends OneShotEffect {
 
-    public TemporalCascadeDrawEffect() {
+    TemporalCascadeDrawEffect() {
         super(Outcome.Neutral);
         staticText = "Each player draws seven cards";
     }

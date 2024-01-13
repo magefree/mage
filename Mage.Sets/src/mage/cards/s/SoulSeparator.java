@@ -63,7 +63,7 @@ public final class SoulSeparator extends CardImpl {
 
 class SoulSeparatorEffect extends OneShotEffect {
 
-    public SoulSeparatorEffect() {
+    SoulSeparatorEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a black Zombie creature token with power equal to that card's power and toughness equal to that card's toughness";
     }

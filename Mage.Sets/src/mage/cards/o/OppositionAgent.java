@@ -57,7 +57,7 @@ public final class OppositionAgent extends CardImpl {
 
 class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
 
-    public OppositionAgentReplacementEffect() {
+    OppositionAgentReplacementEffect() {
         // Duration.WhileOnBattlefield won't work correctly here, so we check in applies
         super(Duration.EndOfGame, Outcome.Benefit);
         staticText = "While an opponent is searching their library, they exile each card they find. You may play "

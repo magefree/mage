@@ -48,7 +48,7 @@ public final class SigardaHostOfHerons extends CardImpl {
 
 class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SigardaHostOfHeronsEffect() {
+    SigardaHostOfHeronsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Spells and abilities your opponents control can't cause you to sacrifice permanents";
     }

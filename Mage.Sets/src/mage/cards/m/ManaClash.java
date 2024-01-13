@@ -37,7 +37,7 @@ public final class ManaClash extends CardImpl {
 
 class ManaClashEffect extends OneShotEffect {
 
-    public ManaClashEffect() {
+    ManaClashEffect() {
         super(Outcome.Detriment);
         this.staticText = "You and target opponent each flip a coin. {this} deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip";
     }

@@ -40,7 +40,7 @@ public final class CrumblingSanctuary extends CardImpl {
 
 class CrumblingSanctuaryEffect extends PreventionEffectImpl {
 
-    public CrumblingSanctuaryEffect() {
+    CrumblingSanctuaryEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         staticText = "If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.";
     }

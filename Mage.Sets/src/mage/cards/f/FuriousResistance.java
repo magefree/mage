@@ -47,7 +47,7 @@ public final class FuriousResistance extends CardImpl {
 
 class FuriousResistanceEffect extends OneShotEffect {
 
-    public FuriousResistanceEffect() {
+    FuriousResistanceEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target blocking creature gets +3/+0 and gains first strike until end of turn";
     }

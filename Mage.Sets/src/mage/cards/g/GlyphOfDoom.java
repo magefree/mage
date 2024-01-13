@@ -55,7 +55,7 @@ public final class GlyphOfDoom extends CardImpl {
 
 class GlyphOfDoomCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public GlyphOfDoomCreateDelayedTriggeredAbilityEffect() {
+    GlyphOfDoomCreateDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
         this.staticText = "At this turn's next end of combat, destroy all creatures that were blocked by that creature this turn";
     }

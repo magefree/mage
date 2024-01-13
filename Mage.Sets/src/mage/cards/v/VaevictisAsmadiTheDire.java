@@ -109,7 +109,7 @@ class VaevictisAsmadiTheDireTriggeredAbility extends TriggeredAbilityImpl {
 
 class VaevictisAsmadiTheDireEffect extends OneShotEffect {
 
-    public VaevictisAsmadiTheDireEffect() {
+    VaevictisAsmadiTheDireEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "for each player, choose target permanent that player controls. "
                 + "Those players sacrifice those permanents. "

@@ -46,7 +46,7 @@ public final class SlaughterTheStrong extends CardImpl {
 
 class SlaughterTheStrongEffect extends OneShotEffect {
 
-    public SlaughterTheStrongEffect() {
+    SlaughterTheStrongEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control";
     }

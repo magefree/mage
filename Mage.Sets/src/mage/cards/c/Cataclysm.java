@@ -46,7 +46,7 @@ public final class Cataclysm extends CardImpl {
 
 class CataclysmEffect extends OneShotEffect {
 
-    public CataclysmEffect() {
+    CataclysmEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest";
     }

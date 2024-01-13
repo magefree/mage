@@ -50,7 +50,7 @@ public final class CrownHunterHireling extends CardImpl {
 
 class CrownHunterHirelingCantAttackEffect extends RestrictionEffect {
 
-    public CrownHunterHirelingCantAttackEffect() {
+    CrownHunterHirelingCantAttackEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless defending player is the monarch";
     }

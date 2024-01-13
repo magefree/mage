@@ -49,7 +49,7 @@ public final class EnergyField extends CardImpl {
 
 class EnergyFieldEffect extends PreventionEffectImpl {
 
-    public EnergyFieldEffect() {
+    EnergyFieldEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt to you by sources you don't control";
     }

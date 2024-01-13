@@ -50,7 +50,7 @@ public final class ThranTurbine extends CardImpl {
 
 class ThranTurbineEffect extends OneShotEffect {
 
-    public ThranTurbineEffect() {
+    ThranTurbineEffect() {
         super(Outcome.Benefit);
         staticText = "add {C}{C}. You can't spend this mana to cast spells";
     }

@@ -35,7 +35,7 @@ public class RejectImperfection extends CardImpl {
 
 class RejectImperfectionEffect extends OneShotEffect {
 
-    public RejectImperfectionEffect() {
+    RejectImperfectionEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target spell. If that spell's mana value was 3 or less, proliferate. " +
                 "<i>(Choose any number of permanents and/or players, then give each another counter of each kind already there.)</i>";

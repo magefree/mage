@@ -63,7 +63,7 @@ public final class TangleKelp extends CardImpl {
 
 class DontUntapIfAttackedLastTurnEnchantedEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DontUntapIfAttackedLastTurnEnchantedEffect() {
+    DontUntapIfAttackedLastTurnEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "Enchanted creature doesn't untap during its controller's untap step if it attacked during its controller's last turn";
     }

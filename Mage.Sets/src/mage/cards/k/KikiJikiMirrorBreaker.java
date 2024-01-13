@@ -67,7 +67,7 @@ public final class KikiJikiMirrorBreaker extends CardImpl {
 
 class KikiJikiMirrorBreakerEffect extends OneShotEffect {
 
-    public KikiJikiMirrorBreakerEffect() {
+    KikiJikiMirrorBreakerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step";
     }

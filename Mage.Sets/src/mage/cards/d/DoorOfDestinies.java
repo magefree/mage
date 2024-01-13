@@ -91,7 +91,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
 
 class BoostCreatureEffectEffect extends ContinuousEffectImpl {
 
-    public BoostCreatureEffectEffect() {
+    BoostCreatureEffectEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Creatures you control of the chosen type get +1/+1 for each charge counter on {this}";
     }

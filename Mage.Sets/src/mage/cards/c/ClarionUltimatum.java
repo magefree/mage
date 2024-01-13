@@ -45,7 +45,7 @@ public final class ClarionUltimatum extends CardImpl {
 
 class ClarionUltimatumEffect extends OneShotEffect {
 
-    public ClarionUltimatumEffect() {
+    ClarionUltimatumEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose five permanents you control. For each of those permanents, " +
                 "you may search your library for a card with the same name as that permanent. " +

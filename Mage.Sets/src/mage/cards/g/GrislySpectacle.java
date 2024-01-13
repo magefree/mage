@@ -52,7 +52,7 @@ public final class GrislySpectacle extends CardImpl {
 
 class GrislySpectacleEffect extends OneShotEffect {
 
-    public GrislySpectacleEffect() {
+    GrislySpectacleEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Its controller mills cards equal to that creature's power";
     }

@@ -55,7 +55,7 @@ public final class OrnateKanzashi extends CardImpl {
 
 class OrnateKanzashiEffect extends OneShotEffect {
 
-    public OrnateKanzashiEffect() {
+    OrnateKanzashiEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target opponent exiles the top card of their library. You may play that card this turn";
     }
@@ -92,7 +92,7 @@ class OrnateKanzashiEffect extends OneShotEffect {
 
 class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
 
-    public OrnateKanzashiCastFromExileEffect() {
+    OrnateKanzashiCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play that card from exile this turn";
     }

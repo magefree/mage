@@ -52,7 +52,7 @@ public final class SummonersEgg extends CardImpl {
 
 class SummonersEggImprintEffect extends OneShotEffect {
 
-    public SummonersEggImprintEffect() {
+    SummonersEggImprintEffect() {
         super(Outcome.Benefit);
         staticText = "exile a card from your hand face down";
     }
@@ -95,7 +95,7 @@ class SummonersEggImprintEffect extends OneShotEffect {
 
 class SummonersEggPutOntoBattlefieldEffect extends OneShotEffect {
 
-    public SummonersEggPutOntoBattlefieldEffect() {
+    SummonersEggPutOntoBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control";
     }

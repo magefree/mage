@@ -53,7 +53,7 @@ public final class FieryBombardment extends CardImpl {
 
 class FieryBombardmentEffect extends OneShotEffect {
 
-    public FieryBombardmentEffect() {
+    FieryBombardmentEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.";
     }

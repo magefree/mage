@@ -60,7 +60,7 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
 
 class OathkeeperExileEquippedEffect extends OneShotEffect {
 
-    public OathkeeperExileEquippedEffect() {
+    OathkeeperExileEquippedEffect() {
         super(Outcome.Exile);
         staticText = "exile equipped creature";
     }

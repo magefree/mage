@@ -68,7 +68,7 @@ public final class RiseOfTheHobgoblins extends CardImpl {
 
 class RiseOfTheHobgoblinsEffect extends OneShotEffect {
 
-    public RiseOfTheHobgoblinsEffect() {
+    RiseOfTheHobgoblinsEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens";
     }

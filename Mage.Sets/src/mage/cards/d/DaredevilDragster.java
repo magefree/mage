@@ -57,7 +57,7 @@ public final class DaredevilDragster extends CardImpl {
 
 class DaredevilDragsterEffect extends OneShotEffect {
 
-    public DaredevilDragsterEffect() {
+    DaredevilDragsterEffect() {
         super(Outcome.Damage);
         this.staticText = "put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards";
     }

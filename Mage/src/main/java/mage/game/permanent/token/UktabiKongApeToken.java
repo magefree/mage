@@ -19,7 +19,7 @@ public final class UktabiKongApeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected UktabiKongApeToken(final UktabiKongApeToken token) {
+    private UktabiKongApeToken(final UktabiKongApeToken token) {
         super(token);
     }
 

@@ -59,7 +59,7 @@ public final class DeadMansChest extends CardImpl {
 
 class DeadMansChestEffect extends OneShotEffect {
 
-    public DeadMansChestEffect() {
+    DeadMansChestEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile cards equal to its power from the top of its owner's library. "
                 + "You may cast spells from among those cards for as long as they remain exiled, "
@@ -107,7 +107,7 @@ class DeadMansChestEffect extends OneShotEffect {
 
 class DeadMansChestCastFromExileEffect extends AsThoughEffectImpl {
 
-    public DeadMansChestCastFromExileEffect() {
+    DeadMansChestCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast nonland cards from among them as long as they remain exiled";
     }

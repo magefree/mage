@@ -45,7 +45,7 @@ public final class GrafdiggersCage extends CardImpl {
 
 class GrafdiggersCageEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GrafdiggersCageEffect() {
+    GrafdiggersCageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creature cards in graveyards and libraries can't enter the battlefield";
     }

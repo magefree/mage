@@ -32,7 +32,7 @@ public final class KalonianTwingroveTreefolkWarriorToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands))));
     }
 
-    protected KalonianTwingroveTreefolkWarriorToken(final KalonianTwingroveTreefolkWarriorToken token) {
+    private KalonianTwingroveTreefolkWarriorToken(final KalonianTwingroveTreefolkWarriorToken token) {
         super(token);
     }
 

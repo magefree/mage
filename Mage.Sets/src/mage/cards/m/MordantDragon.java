@@ -105,7 +105,7 @@ class MordantDragonTriggeredAbility extends TriggeredAbilityImpl {
 
 class MordantDragonEffect extends OneShotEffect {
 
-    public MordantDragonEffect() {
+    MordantDragonEffect() {
         super(Outcome.Damage);
         staticText = "it deals that much damage to target creature that player controls";
     }

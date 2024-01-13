@@ -52,7 +52,7 @@ public final class RapidFire extends CardImpl {
 
 class RapidFireEffect extends OneShotEffect {
 
-    public RapidFireEffect() {
+    RapidFireEffect() {
         super(Outcome.AddAbility);
         this.staticText = "If it doesn't have rampage, that creature gains rampage 2 until end of turn";
     }

@@ -44,7 +44,7 @@ public final class ScrapMastery extends CardImpl {
 
 class ScrapMasteryEffect extends OneShotEffect {
 
-    public ScrapMasteryEffect() {
+    ScrapMasteryEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Each player exiles all artifact cards from their graveyard, then sacrifices all artifacts they control, then puts all cards they exiled this way onto the battlefield";
     }

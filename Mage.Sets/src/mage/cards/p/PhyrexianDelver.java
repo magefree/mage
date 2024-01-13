@@ -52,7 +52,7 @@ public final class PhyrexianDelver extends CardImpl {
 
 class PhyrexianDelverEffect extends OneShotEffect {
 
-    public PhyrexianDelverEffect() {
+    PhyrexianDelverEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return target creature card from your graveyard to the battlefield. You lose life equal to that card's mana value";
     }

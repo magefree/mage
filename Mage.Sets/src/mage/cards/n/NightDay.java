@@ -55,7 +55,7 @@ public final class NightDay extends SplitCard {
 
 class DayEffect extends ContinuousEffectImpl {
 
-    public DayEffect() {
+    DayEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Creatures target player controls get +1/+1 until end of turn";
     }

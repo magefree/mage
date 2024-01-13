@@ -47,7 +47,7 @@ public final class BroodSliver extends CardImpl {
 
 class BroodSliverEffect extends OneShotEffect {
 
-    public BroodSliverEffect() {
+    BroodSliverEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "its controller may create a 1/1 colorless Sliver creature token";
     }

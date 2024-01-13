@@ -95,7 +95,7 @@ class MrHousePresidentAndCEOTriggeredAbility extends TriggeredAbilityImpl {
 
 class MrHousePresidentAndCEOTokenEffect extends OneShotEffect {
 
-    public MrHousePresidentAndCEOTokenEffect() {
+    MrHousePresidentAndCEOTokenEffect() {
         super(Outcome.Benefit);
     }
 
@@ -130,7 +130,7 @@ class MrHousePresidentAndCEOTokenEffect extends OneShotEffect {
 // Based on Berg Strider and Ancient Brass Dragon
 class MrHousePresidentAndCEODieRollEffect extends OneShotEffect {
 
-    public MrHousePresidentAndCEODieRollEffect() {
+    MrHousePresidentAndCEODieRollEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Roll a six-sided die plus an additional six-sided die for each mana from Treasures spent " +
                 "to activate this ability.";

@@ -57,7 +57,7 @@ public final class SwordOfTheMeek extends CardImpl {
 
 class SwordOfTheMeekEffect extends OneShotEffect {
 
-    public SwordOfTheMeekEffect() {
+    SwordOfTheMeekEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may return {this} from your graveyard to the battlefield, then attach it to that creature";
     }

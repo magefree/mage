@@ -61,7 +61,7 @@ public final class BelligerentYearling extends CardImpl {
  */
 class BelligerentYearlingEffect extends OneShotEffect {
 
-    public BelligerentYearlingEffect() {
+    BelligerentYearlingEffect() {
         super(Outcome.Detriment);
         staticText = "have {this}'s base power become equal to that creature's power until end of turn";
     }

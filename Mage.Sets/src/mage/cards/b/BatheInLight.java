@@ -53,7 +53,7 @@ public final class BatheInLight extends CardImpl {
 
 class BatheInLightEffect extends OneShotEffect {
 
-    public BatheInLightEffect() {
+    BatheInLightEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn";
     }

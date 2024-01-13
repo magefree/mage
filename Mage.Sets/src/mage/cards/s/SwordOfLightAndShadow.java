@@ -64,7 +64,7 @@ public final class SwordOfLightAndShadow extends CardImpl {
 
 class SwordOfLightAndShadowEffect extends OneShotEffect {
 
-    public SwordOfLightAndShadowEffect() {
+    SwordOfLightAndShadowEffect() {
         super(Outcome.ReturnToHand);
         staticText = "and you may return up to one target creature card from your graveyard to your hand";
     }

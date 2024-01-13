@@ -59,7 +59,7 @@ public final class BloodOnTheSnow extends CardImpl {
 
 class BloodOnTheSnowEffect extends OneShotEffect {
 
-    public BloodOnTheSnowEffect() {
+    BloodOnTheSnowEffect() {
         super(Outcome.PutCardInPlay);
     }
 

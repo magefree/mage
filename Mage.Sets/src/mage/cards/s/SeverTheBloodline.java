@@ -48,7 +48,7 @@ public final class SeverTheBloodline extends CardImpl {
 
 class SeverTheBloodlineEffect extends OneShotEffect {
 
-    public SeverTheBloodlineEffect() {
+    SeverTheBloodlineEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target creature and all other creatures with the same name as that creature";
     }

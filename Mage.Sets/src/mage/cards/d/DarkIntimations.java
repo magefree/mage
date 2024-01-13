@@ -138,7 +138,7 @@ class DarkIntimationsEffect extends OneShotEffect {
 
 class DarkIntimationsGraveyardEffect extends OneShotEffect {
 
-    public DarkIntimationsGraveyardEffect() {
+    DarkIntimationsGraveyardEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile {this} from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it";
     }

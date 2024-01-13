@@ -50,7 +50,7 @@ public final class DeepfathomEcho extends CardImpl {
 
 class DeepfathomEchoEffect extends OneShotEffect {
 
-    public DeepfathomEchoEffect() {
+    DeepfathomEchoEffect() {
         super(Outcome.Copy);
         this.staticText = "Then you may have it become a copy of another creature you control until end of turn";
     }

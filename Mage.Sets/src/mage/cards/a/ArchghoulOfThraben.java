@@ -51,7 +51,7 @@ public final class ArchghoulOfThraben extends CardImpl {
 
 class ArchghoulOfThrabenEffect extends OneShotEffect {
 
-    public ArchghoulOfThrabenEffect() {
+    ArchghoulOfThrabenEffect() {
         super(Outcome.Benefit);
         staticText = "look at the top card of your library. " +
                 "If it's a Zombie card, you may reveal it and put it into your hand. " +

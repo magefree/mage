@@ -51,7 +51,7 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
 
 class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public LeovoldEmissaryOfTrestEffect() {
+    LeovoldEmissaryOfTrestEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
         staticText = "Each opponent can't draw more than one card each turn";
     }

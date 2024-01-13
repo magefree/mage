@@ -42,7 +42,7 @@ public final class DralnusCrusade extends CardImpl {
 
 class DralnusCrusadeEffect extends ContinuousEffectImpl {
 
-    public DralnusCrusadeEffect() {
+    DralnusCrusadeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "All Goblins are black and are Zombies in addition to their other creature types";
     }

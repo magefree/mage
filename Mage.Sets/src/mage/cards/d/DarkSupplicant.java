@@ -59,7 +59,7 @@ public final class DarkSupplicant extends CardImpl {
 
 class DarkSupplicantEffect extends OneShotEffect {
 
-    public DarkSupplicantEffect() {
+    DarkSupplicantEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle";
     }

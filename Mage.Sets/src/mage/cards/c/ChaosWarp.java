@@ -46,7 +46,7 @@ public final class ChaosWarp extends CardImpl {
 
 class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
 
-    public ChaosWarpShuffleIntoLibraryEffect() {
+    ChaosWarpShuffleIntoLibraryEffect() {
         super(Outcome.Detriment);
         this.staticText = "The owner of target permanent shuffles it into their library";
     }
@@ -77,7 +77,7 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
 
 class ChaosWarpRevealEffect extends OneShotEffect {
 
-    public ChaosWarpRevealEffect() {
+    ChaosWarpRevealEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = ", then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield";
     }
