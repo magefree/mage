@@ -98,7 +98,7 @@ class GixYawgmothPraetorTriggeredAbility extends TriggeredAbilityImpl {
 
 class GixYawgmothPraetorDrawEffect extends DoIfCostPaid {
 
-    public GixYawgmothPraetorDrawEffect() {
+    GixYawgmothPraetorDrawEffect() {
         super(new DrawCardTargetEffect(1), new PayLifeCost(1), "Pay 1 life and draw a card?");
         this.staticText = "its controller may pay 1 life. If they do, they draw a card";
     }
