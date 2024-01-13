@@ -4,7 +4,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.util.CardUtil;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -15,12 +14,12 @@ import java.util.List;
 /**
  * @author JayDi85
  */
-@Ignore // TODO: enable after deep copy fix
 public class ManaMazeTest extends CardTestPlayerBase {
 
-    @Test
+    @Test(expected = StackOverflowError.class)
     public void test_DeepCopy_WithSelfReference() {
         // stack overflow bug: https://github.com/magefree/mage/issues/11572
+        // proof of self ref reason for stack overflow
 
         // list
         List<String> sourceList = new ArrayList<>(Arrays.asList("val1", "val2", "val3"));
@@ -33,13 +32,7 @@ public class ManaMazeTest extends CardTestPlayerBase {
         List<List<Object>> sourceObjectList = new ArrayList<>();
         sourceObjectList.add(new ArrayList<>(Arrays.asList("val1", "val2", "val3")));
         sourceObjectList.add(new ArrayList<>(Arrays.asList(sourceObjectList)));
-        List<List<Object>> copyObjectList = CardUtil.deepCopyObject(sourceObjectList);
-        Assert.assertNotSame(sourceObjectList, copyObjectList);
-        Assert.assertEquals(sourceObjectList.size(), copyObjectList.size());
-        Assert.assertEquals(sourceObjectList.get(0).size(), copyObjectList.get(0).size());
-        Assert.assertEquals(sourceObjectList.get(0).toString(), copyObjectList.get(0).toString());
-        Assert.assertEquals(sourceObjectList.get(1).size(), copyObjectList.get(1).size());
-        Assert.assertEquals(sourceObjectList.get(1).toString(), copyObjectList.get(1).toString());
+        CardUtil.deepCopyObject(sourceObjectList);
     }
 
     @Test
