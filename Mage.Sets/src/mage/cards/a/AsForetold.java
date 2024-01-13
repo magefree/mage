@@ -3,6 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -71,8 +72,8 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
         return object != null
-                && !object.isLand(game)
-                && object.getManaValue() <= counters;
+                && object.getManaValue() <= counters
+                && source instanceof SpellAbility;
     }
 }
 
