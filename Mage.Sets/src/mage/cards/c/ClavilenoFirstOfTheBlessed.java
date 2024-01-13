@@ -47,7 +47,7 @@ public class ClavilenoFirstOfTheBlessed extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever you attack, target attacking Vampire that isn’t a Demon becomes a Demon in addition to its other types. It gains “When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.”
+        // Whenever you attack, target attacking Vampire that isn't a Demon becomes a Demon in addition to its other types. It gains “When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.”
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
                 new ClavilenoFirstOfTheBlessedEffect(), 1);
         ability.addTarget(new TargetPermanent(filter));
@@ -71,7 +71,7 @@ class ClavilenoFirstOfTheBlessedEffect extends OneShotEffect {
 
     ClavilenoFirstOfTheBlessedEffect() {
         super(Outcome.AddAbility);
-        staticText = "target attacking Vampire that isn’t a Demon becomes a Demon in addition to its other types. It gains \"When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.\"";
+        staticText = "target attacking Vampire that isn't a Demon becomes a Demon in addition to its other types. It gains \"When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.\"";
     }
 
     private ClavilenoFirstOfTheBlessedEffect(final ClavilenoFirstOfTheBlessedEffect effect) {
