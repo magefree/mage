@@ -411,6 +411,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         init(game, false);
     }
 
+    // TODO: New Player object would be better than resetting everything.
+    //  See https://github.com/magefree/mage/pull/11628#issuecomment-1890435356
     @Override
     public void init(Game game, boolean testMode) {
         this.abort = false;
@@ -461,6 +463,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.phyrexianColors = null;
 
         this.designations.clear();
+
+        this.commandersIds.clear();
     }
 
     /**
