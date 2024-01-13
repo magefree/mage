@@ -49,7 +49,7 @@ public final class Recoup extends CardImpl {
 
 class RecoupEffect extends ContinuousEffectImpl {
 
-    public RecoupEffect() {
+    RecoupEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Target sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }

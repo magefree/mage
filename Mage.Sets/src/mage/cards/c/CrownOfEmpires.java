@@ -87,7 +87,7 @@ class CrownOfEmpiresEffect extends OneShotEffect {
 
 class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
 
-    public CrownOfEmpiresControlEffect() {
+    CrownOfEmpiresControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = "Gain control of {this}";
     }

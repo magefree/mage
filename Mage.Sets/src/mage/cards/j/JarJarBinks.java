@@ -91,7 +91,7 @@ class JarJarBinksEffect extends OneShotEffect {
 
 class JarJarBinksGainControlSourceEffect extends ContinuousEffectImpl {
 
-    public JarJarBinksGainControlSourceEffect() {
+    JarJarBinksGainControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 

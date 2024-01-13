@@ -53,7 +53,7 @@ public final class ConvincingMirage extends CardImpl {
 
 class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
 
-    public ConvincingMirageContinousEffect() {
+    ConvincingMirageContinousEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "Enchanted land is the chosen type";
     }

@@ -58,7 +58,7 @@ public final class GreatOakGuardian extends CardImpl {
 
 class GreatOakGuardianEffect extends ContinuousEffectImpl {
 
-    public GreatOakGuardianEffect() {
+    GreatOakGuardianEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "creatures target player controls get +2/+2 until end of turn";
     }

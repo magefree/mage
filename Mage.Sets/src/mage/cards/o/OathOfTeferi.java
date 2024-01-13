@@ -46,7 +46,7 @@ public final class OathOfTeferi extends CardImpl {
 
 class OathOfTeferiLoyaltyEffect extends ContinuousEffectImpl {
 
-    public OathOfTeferiLoyaltyEffect() {
+    OathOfTeferiLoyaltyEffect() {
         super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once";
     }

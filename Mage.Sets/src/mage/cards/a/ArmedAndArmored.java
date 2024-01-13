@@ -43,7 +43,7 @@ public final class ArmedAndArmored extends CardImpl {
 
 class ArmedAndArmoredEffect extends ContinuousEffectImpl {
 
-    public ArmedAndArmoredEffect() {
+    ArmedAndArmoredEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "Vehicles you control become artifact creatures until end of turn";
     }

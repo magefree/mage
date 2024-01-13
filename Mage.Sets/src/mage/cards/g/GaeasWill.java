@@ -51,7 +51,7 @@ public final class GaeasWill extends CardImpl {
 
 class GaeasWillGraveyardEffect extends ContinuousEffectImpl {
 
-    public GaeasWillGraveyardEffect() {
+    GaeasWillGraveyardEffect() {
         this(Duration.EndOfTurn);
     }
 

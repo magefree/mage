@@ -44,7 +44,7 @@ public final class AnHavvaConstable extends CardImpl {
 
 class AnHavvaConstableEffect extends ContinuousEffectImpl {
 
-    public AnHavvaConstableEffect() {
+    AnHavvaConstableEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
         staticText = "{this}'s toughness is equal to 1 plus the number of green creatures on the battlefield";
     }

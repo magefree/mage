@@ -126,7 +126,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
  */
 class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
 
-    public AsForetoldAddAltCostEffect() {
+    AsForetoldAddAltCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on {this}.";
     }

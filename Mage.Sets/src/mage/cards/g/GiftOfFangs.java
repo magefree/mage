@@ -50,7 +50,7 @@ public final class GiftOfFangs extends CardImpl {
 
 class GiftOfFangsEffect extends ContinuousEffectImpl {
 
-    public GiftOfFangsEffect() {
+    GiftOfFangsEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.Neutral);
         staticText = "Enchanted creature gets +2/+2 as long as it's a Vampire. Otherwise, it gets -2/-2";
     }

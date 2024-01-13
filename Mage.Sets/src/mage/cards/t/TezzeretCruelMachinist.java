@@ -109,7 +109,7 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
 
 class TezzeretCruelMachinistCardTypeEffect extends ContinuousEffectImpl {
 
-    public TezzeretCruelMachinistCardTypeEffect() {
+    TezzeretCruelMachinistCardTypeEffect() {
         super(Duration.Custom, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.Neutral);
     }
 

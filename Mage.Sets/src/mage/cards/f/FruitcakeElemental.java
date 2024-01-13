@@ -94,7 +94,7 @@ class FruitcakeElementalEffect extends OneShotEffect {
 
 class FruitcakeElementalControlSourceEffect extends ContinuousEffectImpl {
 
-    public FruitcakeElementalControlSourceEffect() {
+    FruitcakeElementalControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 

@@ -85,7 +85,7 @@ class HumbleDefectorEffect extends OneShotEffect {
 
 class HumbleDefectorControlSourceEffect extends ContinuousEffectImpl {
 
-    public HumbleDefectorControlSourceEffect() {
+    HumbleDefectorControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 

@@ -126,7 +126,7 @@ class ManaScrewEffect extends ManaEffect {
 
 class ChimericStaffEffect extends ContinuousEffectImpl {
 
-    public ChimericStaffEffect() {
+    ChimericStaffEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
     }

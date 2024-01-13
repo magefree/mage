@@ -53,7 +53,7 @@ public final class YawgmothsAgenda extends CardImpl {
 
 class YawgmothsAgendaCanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
 
-    public YawgmothsAgendaCanPlayCardsFromGraveyardEffect() {
+    YawgmothsAgendaCanPlayCardsFromGraveyardEffect() {
         this(Duration.WhileOnBattlefield);
     }
 

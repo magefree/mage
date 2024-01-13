@@ -46,7 +46,7 @@ public final class YixlidJailer extends CardImpl {
 
 class YixlidJailerEffect extends ContinuousEffectImpl {
 
-    public YixlidJailerEffect() {
+    YixlidJailerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
         staticText = "Cards in graveyards lose all abilities.";
 

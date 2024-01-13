@@ -93,7 +93,7 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
 
 class PhyrexianIngesterBoostEffect extends ContinuousEffectImpl {
 
-    public PhyrexianIngesterBoostEffect() {
+    PhyrexianIngesterBoostEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.staticText = "{this} gets +X/+Y, where X is the exiled creature card's power and Y is its toughness";
     }

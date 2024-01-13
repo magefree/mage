@@ -96,7 +96,7 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
 class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
 
-    public SenTripletsOpponentRevealsHandEffect() {
+    SenTripletsOpponentRevealsHandEffect() {
         super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "and plays with their hand revealed";
     }

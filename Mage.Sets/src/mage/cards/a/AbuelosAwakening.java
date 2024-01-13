@@ -90,7 +90,7 @@ class AbuelosAwakeningEffect extends ReturnFromGraveyardToBattlefieldTargetEffec
 
 class AbuelosAwakeningContinuousEffect extends ContinuousEffectImpl {
 
-    public AbuelosAwakeningContinuousEffect() {
+    AbuelosAwakeningContinuousEffect() {
         super(Duration.Custom, Outcome.Neutral);
         staticText = "It's a 1/1 Spirit creature with flying in addition to its other types";
     }

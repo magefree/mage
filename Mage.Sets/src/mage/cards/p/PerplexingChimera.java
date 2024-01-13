@@ -169,7 +169,7 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
 class PerplexingChimeraControlEffect extends ContinuousEffectImpl {
 
-    public PerplexingChimeraControlEffect() {
+    PerplexingChimeraControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "PerplexingChimeraControlEffect";
     }

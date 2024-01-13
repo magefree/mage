@@ -62,7 +62,7 @@ public final class MagusOfTheWill extends CardImpl {
 
 class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
 
-    public CanPlayCardsFromGraveyardEffect() {
+    CanPlayCardsFromGraveyardEffect() {
         this(Duration.EndOfTurn);
     }
 

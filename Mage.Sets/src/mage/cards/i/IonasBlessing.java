@@ -64,7 +64,7 @@ public final class IonasBlessing extends CardImpl {
 
 class IonasBlessingEffect extends ContinuousEffectImpl {
 
-    public IonasBlessingEffect() {
+    IonasBlessingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = ", and can block an additional creature each combat";
     }

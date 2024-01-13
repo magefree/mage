@@ -62,7 +62,7 @@ public final class JinxedRing extends CardImpl {
 
 class JinxedRingEffect extends ContinuousEffectImpl {
 
-    public JinxedRingEffect() {
+    JinxedRingEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "Target opponent gains control of {this}";
     }

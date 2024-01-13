@@ -107,7 +107,7 @@ class GhoulsNightOutEffect extends OneShotEffect {
 
 class GhoulsNightOutTypeChangingEffect extends ContinuousEffectImpl {
 
-    public GhoulsNightOutTypeChangingEffect() {
+    GhoulsNightOutTypeChangingEffect() {
         super(Duration.Custom, Outcome.Neutral);
     }
 

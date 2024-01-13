@@ -50,7 +50,7 @@ public final class YawgmothsWill extends CardImpl {
 
 class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
 
-    public CanPlayCardsFromGraveyardEffect() {
+    CanPlayCardsFromGraveyardEffect() {
         this(Duration.EndOfTurn);
     }
 

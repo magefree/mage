@@ -85,7 +85,7 @@ class MyrWelderEffect extends OneShotEffect {
 
 class MyrWelderContinuousEffect extends ContinuousEffectImpl {
 
-    public MyrWelderContinuousEffect() {
+    MyrWelderContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "{this} has all activated abilities of all cards exiled with it";
     }

@@ -57,7 +57,7 @@ public final class AngelOfJubilation extends CardImpl {
 
 class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
-    public AngelOfJubilationEffect() {
+    AngelOfJubilationEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Players can't pay life or sacrifice creatures to cast spells";
     }

@@ -95,7 +95,7 @@ class UrzaAssemblesTheTitansScryEffect extends OneShotEffect {
 
 class UrzaAssemblesTheTitansLoyaltyEffect extends ContinuousEffectImpl {
 
-    public UrzaAssemblesTheTitansLoyaltyEffect() {
+    UrzaAssemblesTheTitansLoyaltyEffect() {
         super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.staticText = "You may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once.";
     }

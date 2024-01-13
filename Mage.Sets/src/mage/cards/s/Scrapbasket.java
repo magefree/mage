@@ -48,7 +48,7 @@ public final class Scrapbasket extends CardImpl {
 
 class BecomesAllColorsEffect extends ContinuousEffectImpl {
 
-    public BecomesAllColorsEffect() {
+    BecomesAllColorsEffect() {
         super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);
         staticText = "{this} becomes all colors until end of turn";
     }

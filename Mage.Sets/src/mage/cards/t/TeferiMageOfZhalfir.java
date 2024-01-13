@@ -54,7 +54,7 @@ public final class TeferiMageOfZhalfir extends CardImpl {
 
 class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
 
-    public TeferiMageOfZhalfirAddFlashEffect() {
+    TeferiMageOfZhalfirAddFlashEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Creature cards you own that aren't on the battlefield have flash";
     }

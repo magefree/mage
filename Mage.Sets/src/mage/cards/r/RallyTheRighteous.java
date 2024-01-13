@@ -78,7 +78,7 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
 
 class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
 
-    public RallyTheRighteousBoostEffect() {
+    RallyTheRighteousBoostEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Those creatures get +2/+0 until end of turn";
     }

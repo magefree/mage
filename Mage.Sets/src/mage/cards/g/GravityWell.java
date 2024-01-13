@@ -75,7 +75,7 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
 
 class GravityWellEffect extends ContinuousEffectImpl {
 
-    public GravityWellEffect() {
+    GravityWellEffect() {
         super(Duration.EndOfTurn, Outcome.LoseAbility);
         staticText = "it loses flying until end of turn";
     }

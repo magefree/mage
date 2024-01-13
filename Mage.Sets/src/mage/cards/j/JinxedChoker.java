@@ -60,7 +60,7 @@ public final class JinxedChoker extends CardImpl {
 
 class JinxedChokerChangeControllerEffect extends ContinuousEffectImpl {
 
-    public JinxedChokerChangeControllerEffect() {
+    JinxedChokerChangeControllerEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "target opponent gains control of {this}";
     }
