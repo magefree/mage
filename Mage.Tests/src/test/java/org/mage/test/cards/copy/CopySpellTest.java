@@ -798,6 +798,19 @@ public class CopySpellTest extends CardTestPlayerBase {
         setChoice(playerA, "X=2");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Neverwinter Hydra");
 
+        // Although the value of X should be the same, the actual dice rolls can be different
+        setDieRollResult(playerA, 3);
+        setDieRollResult(playerA, 4);
+
+        setDieRollResult(playerA, 6);
+        setDieRollResult(playerA, 6);
+
+        setDieRollResult(playerA, 1);
+        setDieRollResult(playerA, 1);
+
+        setStrictChooseMode(true);
+        // Target for Lucea Kane's Spiritual Leader ability
+        addTarget(playerA, "Magus Lucea Kane");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -821,6 +834,11 @@ public class CopySpellTest extends CardTestPlayerBase {
         setChoice(playerA, "X=1");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", hydradoodle);
 
+        setDieRollResult(playerA, 5);
+
+        setDieRollResult(playerA, 1);
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -845,6 +863,9 @@ public class CopySpellTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, apocalypseHydra);
         setChoice(playerA, "X=5");
 
+        setStrictChooseMode(true);
+        // Target for Lucea Kane's Spiritual Leader ability
+        addTarget(playerA, "Magus Lucea Kane");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
