@@ -74,7 +74,7 @@ public final class LichsMastery extends CardImpl {
 
 class LichsMasteryCantLoseEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public LichsMasteryCantLoseEffect() {
+    LichsMasteryCantLoseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
         staticText = "You can't lose the game";
     }

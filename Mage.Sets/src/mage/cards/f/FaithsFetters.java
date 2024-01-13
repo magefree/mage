@@ -59,7 +59,7 @@ public final class FaithsFetters extends CardImpl {
 
 class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public FaithsFettersEffect() {
+    FaithsFettersEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "and its activated abilities can't be activated unless they're mana abilities";
     }

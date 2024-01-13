@@ -165,7 +165,7 @@ class GodsendExileEffect extends OneShotEffect {
 
 class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GodsendRuleModifyingEffect() {
+    GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast cards with the same name as cards exiled with {this}";
     }

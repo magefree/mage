@@ -55,7 +55,7 @@ public final class CouncilOfTheAbsolute extends CardImpl {
 
 class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CouncilOfTheAbsoluteReplacementEffect() {
+    CouncilOfTheAbsoluteReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast spells with the chosen name";
     }

@@ -52,7 +52,7 @@ public final class TerritorialDispute extends CardImpl {
 
 class TerritorialDisputeEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TerritorialDisputeEffect() {
+    TerritorialDisputeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "Players can't play lands";
     }

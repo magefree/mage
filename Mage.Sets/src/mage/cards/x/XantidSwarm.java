@@ -85,7 +85,7 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
 
 class XantidSwarmReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public XantidSwarmReplacementEffect() {
+    XantidSwarmReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "defending player can't cast spells this turn";
     }

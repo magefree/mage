@@ -57,7 +57,7 @@ public final class Moonhold extends CardImpl {
 
 class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MoonholdEffect() {
+    MoonholdEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 

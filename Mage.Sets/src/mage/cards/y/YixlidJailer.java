@@ -96,7 +96,7 @@ class YixlidJailerEffect extends ContinuousEffectImpl {
 
 class YixlidJailerRulesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public YixlidJailerRulesEffect() {
+    YixlidJailerRulesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
     }
 

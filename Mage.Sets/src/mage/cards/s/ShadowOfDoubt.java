@@ -42,7 +42,7 @@ public final class ShadowOfDoubt extends CardImpl {
 
 class LibrariesCantBeSearchedEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public LibrariesCantBeSearchedEffect() {
+    LibrariesCantBeSearchedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, true, false);
         staticText = "Players can't search libraries this turn";
     }

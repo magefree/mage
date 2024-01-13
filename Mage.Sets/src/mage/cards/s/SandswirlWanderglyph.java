@@ -60,7 +60,7 @@ public final class SandswirlWanderglyph extends CardImpl {
 
 class SandswirlWanderglyphCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SandswirlWanderglyphCantCastEffect() {
+    SandswirlWanderglyphCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each opponent who attacked you or a planeswalker you control this turn can't cast spells";
     }

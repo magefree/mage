@@ -57,7 +57,7 @@ public final class SenTriplets extends CardImpl {
 
 class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SenTripletsRuleModifyingEffect() {
+    SenTripletsRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "choose target opponent. This turn, that player can't cast spells or activate abilities";
     }

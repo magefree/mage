@@ -104,7 +104,7 @@ class SchemingFenceChooseEffect extends OneShotEffect {
 
 class SchemingFenceDisableEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SchemingFenceDisableEffect() {
+    SchemingFenceDisableEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "activated abilities of the chosen permanent can't be activated";
     }

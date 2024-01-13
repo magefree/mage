@@ -59,7 +59,7 @@ public final class GideonsIntervention extends CardImpl {
 
 class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GideonsInterventionCantCastEffect() {
+    GideonsInterventionCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Your opponents can't cast spells with the chosen name";
     }

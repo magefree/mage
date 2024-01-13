@@ -127,7 +127,7 @@ class MasterOfCrueltiesEffect extends OneShotEffect {
 
 class MasterOfCrueltiesNoDamageEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MasterOfCrueltiesNoDamageEffect() {
+    MasterOfCrueltiesNoDamageEffect() {
         super(Duration.EndOfCombat, Outcome.PreventDamage);
         staticText = "{this} assigns no combat damage this combat";
     }

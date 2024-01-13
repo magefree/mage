@@ -90,7 +90,7 @@ class HighestLifeTotalAmongOpponentsCount implements DynamicValue {
 
 class MalignusEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MalignusEffect() {
+    MalignusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would be dealt by {this} can't be prevented";
     }

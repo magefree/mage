@@ -67,7 +67,7 @@ public final class TetsuoUmezawa extends CardImpl {
 
 class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TetsuoUmezawaEffect() {
+    TetsuoUmezawaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of Aura spells";
     }

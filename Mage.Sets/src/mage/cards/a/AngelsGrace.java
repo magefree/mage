@@ -47,7 +47,7 @@ public final class AngelsGrace extends CardImpl {
 
 class AngelsGraceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AngelsGraceEffect() {
+    AngelsGraceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
         staticText = "You can't lose the game this turn "
                 + "and your opponents can't win the game this turn";

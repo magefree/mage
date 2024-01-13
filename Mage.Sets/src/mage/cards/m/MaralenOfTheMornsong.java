@@ -51,7 +51,7 @@ public final class MaralenOfTheMornsong extends CardImpl {
 
 class MaralenOfTheMornsongEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MaralenOfTheMornsongEffect() {
+    MaralenOfTheMornsongEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
         staticText = "Players can't draw cards";
     }

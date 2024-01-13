@@ -103,7 +103,7 @@ class LostInThoughtRestrictionEffect extends RestrictionEffect {
 
 class LostInThoughtCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public LostInThoughtCantActivateAbilitiesEffect() {
+    LostInThoughtCantActivateAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
         staticText = ", and its activated abilities can't be activated";
     }

@@ -66,7 +66,7 @@ public final class DisplayOfDominance extends CardImpl {
 
 class DisplayOfDominanceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DisplayOfDominanceEffect() {
+    DisplayOfDominanceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "permanents you control can't be the targets of blue or black spells your opponents control this turn";
     }

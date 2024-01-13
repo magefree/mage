@@ -163,7 +163,7 @@ class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
 // Stops creatures from phasing back in on their controller's next turn
 class OutOfTimeReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OutOfTimeReplacementEffect() {
+    OutOfTimeReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
     }
 

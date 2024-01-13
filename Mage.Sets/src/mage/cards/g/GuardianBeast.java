@@ -68,7 +68,7 @@ public final class GuardianBeast extends CardImpl {
 
 class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GuardianBeastConditionalEffect() {
+    GuardianBeastConditionalEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = ", and other players can't gain control of them. This effect doesn't remove Auras already attached to those artifacts";
     }

@@ -65,7 +65,7 @@ public final class GoblinRockSled extends CardImpl {
 
 class DontUntapIfAttackedLastTurnSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DontUntapIfAttackedLastTurnSourceEffect() {
+    DontUntapIfAttackedLastTurnSourceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "{this} doesn't untap during your untap step if it attacked during your last turn";
     }

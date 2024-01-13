@@ -77,7 +77,7 @@ class RenderSilentCounterEffect extends OneShotEffect {
 
 class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RenderSilentEffect() {
+    RenderSilentEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Its controller can't cast spells this turn";
     }

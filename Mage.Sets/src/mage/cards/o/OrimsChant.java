@@ -52,7 +52,7 @@ public final class OrimsChant extends CardImpl {
 
 class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OrimsChantCantCastEffect() {
+    OrimsChantCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Target player can't cast spells this turn";
     }

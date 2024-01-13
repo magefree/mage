@@ -46,7 +46,7 @@ public final class BartelRuneaxe extends CardImpl {
 
 class BartelRuneaxeEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BartelRuneaxeEffect() {
+    BartelRuneaxeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of Aura spells";
     }

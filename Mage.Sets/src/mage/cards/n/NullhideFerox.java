@@ -72,7 +72,7 @@ public final class NullhideFerox extends CardImpl {
 
 class NullhideFeroxCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public NullhideFeroxCantCastEffect() {
+    NullhideFeroxCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast noncreature spells";
     }

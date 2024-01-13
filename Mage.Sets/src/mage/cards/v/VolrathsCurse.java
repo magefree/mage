@@ -106,7 +106,7 @@ class VolrathsCurseRestrictionEffect extends RestrictionEffect {
 
 class VolrathsCurseCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public VolrathsCurseCantActivateAbilitiesEffect() {
+    VolrathsCurseCantActivateAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
         staticText = ", and its activated abilities can't be activated";
     }
