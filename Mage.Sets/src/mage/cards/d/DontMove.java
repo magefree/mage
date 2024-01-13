@@ -110,7 +110,7 @@ class DontMoveAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature()){
+        if (permanent == null || !permanent.isCreature(game)){
             return false;
         }
         this.getAllEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
